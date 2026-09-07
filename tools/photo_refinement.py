@@ -321,4 +321,7 @@ def refine(m,cols):
     refine_site(m,cols)
     from lift_refinement import refine_lift
     refine_lift(m,cols)
+    from wc_placement_refinement import refine_wc_placement
+    bpy.context.view_layer.update()
+    refine_wc_placement()
     return m

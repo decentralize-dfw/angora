@@ -109,7 +109,7 @@ def bake_all():
     # Assign physically scaled planar UVs per surface, retaining source-photo UVs.
     seen=set();uv_count=0
     for o in original_scene.objects:
-        if o.type!='MESH' or o.data.as_pointer() in seen:continue
+        if o.type!='MESH' or o.get('preserve_authored_uv') or o.data.as_pointer() in seen:continue
         seen.add(o.data.as_pointer());mesh=o.data
         if any(mat and mat.get('pbr_photo_uv') for mat in mesh.materials):continue
         layer=mesh.uv_layers.active or mesh.uv_layers.new(name='UVMap')

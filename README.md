@@ -17,11 +17,13 @@ DWG'den katmanlı Blender sahnesi yeniden kuruldu. **Çalışma / kontrol sürü
 
 ## Çıktılar
 
-- `build/blender/angora21-source.blend`: kaynak katmanları ve yeniden oluşturulan mimari yüzeyler.
-- `build/blender/angora21-working.blend`: mimari, PBR malzemeler, ayrı mobilya koleksiyonu, sabit donatılar, bahçe, havuz ve komşu kütleleri.
+- `build/blender/angora21-working.blend`: bütün sahneyi açan ana Blender dosyası. **Yanındaki `layers/` klasörüyle birlikte indirilmelidir.**
+- `build/blender/layers/`: kaynak CAD katmanları, mimari, sabit donatılar, ayrı mobilyalar, bahçe ve mahalle için düzenlenebilir Blender dosyaları. Malzemeler ve tekrar kullanılan meshler ortak dosyalardan bağlanır.
+- `build/blender/layer-manifest.json`: ana sahne ve bütün bağlı dosyaların boyutları, SHA-256 değerleri ve geometri sayımları. `layer-qa.json` dosyasında eksik bağlantı / doku denetimi bulunur.
 - `build/renders/`: Blender Cycles kontrol görüntüleri.
 - `build/renders/render-manifest.json`: güncel görüntülerin hangi native sahne SHA-256 değerinden üretildiğini kaydeder; listede bulunmayan görseller önceki kontrol aşamalarından kalmış olabilir.
-- `build/glb/`: varsa ayrı villa ve mahalle kontrol modelleri. Prosedürel Blender malzemeleri henüz dokulara bake edilmedi; GLB, Blender renderıyla aynı görsel kaliteyi temsil etmez.
+- `build/glb/scene-manifest.json`: ortak başlangıç noktasını koruyan 20 GLB; dört kat, dış ayrıntılar, bahçe, zemin ve komşu binalar. Her malzemede normal ve roughness/metallic haritası vardır. Web aydınlatması ve mobil performans henüz doğrulanmadı.
+- `assets/pbr/pbr-maps.zip`: 77 malzeme için 385 PNG; base color, OpenGL normal, roughness, metallic ve ORM. Haritalar fotoğraf yorumuyla kurulan malzemelerden bake edildi; renk kalibreli tarama değildir. ORM'nin AO kanalı nötrdür.
 - `build/cad/`: kaynak özeti, master plan yerleşimi, açıklık kontrolü ve eşleştirilmemiş ölçü verileri.
 
 Kaynak DWG'nin SHA-256 değeri `db8a25b05cd9f572f1de5825b62f38133678607f5dbc6cf4cf7bb621acdde229`.
@@ -29,7 +31,7 @@ Kaynak DWG'nin SHA-256 değeri `db8a25b05cd9f572f1de5825b62f38133678607f5dbc6cf4
 
 Blender'da metre birimi kullanılır. Detay modeline uygulanan ölçek `0.01`; kaynak Z başlangıcı `54.37355489974468`. Ham DWG `INSUNITS` bilgisiyle fiziksel model ölçeği doğrudan eşitlenmemelidir. Master plan ayrı bir dönüşümle, `22E1A` handle'ına sahip 21 numaralı bina üzerinden kaydedildi; hedef oturum alanı yaklaşık 153,32 m². Bu, ilan net/gross alanı değildir.
 
-Komşu planlarında bazı açık polylinelerin son kenarı kapatılarak kütle izi oluşturuldu; `closing_edge_inferred` bayrağı bunları gösterir. Komşu yükseklikleri, görünmeyen cepheleri ve havuzun 8 × 4 m kontrol boyutu tahminidir. Bunlar ölçü etiketine açılmamıştır.
+Komşu planlarında bazı açık polylinelerin son kenarı kapatılarak kütle izi oluşturuldu; `closing_edge_inferred` bayrağı bunları gösterir. Bina 21'in bahçe döşemesi BK 1026,40 datumudur. Bina 22'nin BK kotu +2,50 m, bina 20'nin BK kotu −3,00 m olarak master plan yazılarından okunur. Ön TK +3,30 m ile bina 20'nin arka TK −3,10 m kotu arasında 6,40 m fark vardır. Yazıların yerleri ölçülmüş topoğrafya noktası sayılmaz; aradaki arazi ve komşuların görünmeyen cepheleri yorumlanmıştır. Havuzun 8 × 4 m kontrol boyutu da tahminidir. Doğrulanmamış değerler ölçü etiketine açılmaz.
 
 ## Yeniden üretim
 
@@ -43,11 +45,18 @@ python tools/prepare_ironwork.py
 python tools/repair_openings.py
 python tools/repair_floor_levels.py
 python tools/prepare_site.py
+python tools/prepare_site_refinement.py
+python tools/prepare_terrain_mesh.py
 export ANGORA_BLENDER_DIR=/absolute/path/to/blender-4.5.13-linux-x64
 bash tools/run_blender.sh --python tools/build_blender.py -- --dress --detail --render
+bash tools/run_blender.sh build/blender/angora21-working.blend --python tools/bake_pbr.py
+bash tools/run_blender.sh build/blender/angora21-working.blend --python tools/apply_photo_review_patch.py
 bash tools/run_blender.sh build/blender/angora21-working.blend --python tools/check_scene.py
-bash tools/run_blender.sh build/blender/angora21-working.blend --python tools/export_glb.py
+bash tools/run_blender.sh build/blender/angora21-working.blend --python tools/check_lift_fixture_clearance.py
+bash tools/run_blender.sh build/blender/angora21-working.blend --python tools/export_streams.py
 bash tools/run_blender.sh --python tools/verify_glb_roundtrip.py
+bash tools/run_blender.sh build/blender/angora21-working.blend --python tools/package_blender_layers.py
+bash tools/run_blender.sh build/blender/angora21-working.blend --python tools/verify_layer_delivery.py
 ```
 
 Kaynak çıkarımı normal Python ortamında, sahne betikleri Blender Python ortamında çalışır. `build/intermediate/` önce oluşturulmalıdır.
@@ -74,7 +83,7 @@ Bulut ortamında uzun tek-process render dizisinde gözlenen Cycles beklemesini 
 
 `docs/demo4-handoff.md`, sonraki web aşaması için okunan DOMVS demo4 kaynaklarını ve uygulanması gereken eşlemeleri kaydeder.
 
-GLB dışa aktarımı doğrudan fotoğraf dokularını ve UV'lerini korur; desteklenmeyen prosedürel yüzeylerde temel PBR rengi kullanılır. Kiremit ve bitki ayrıntıları, mobil için LOD/bake gerektirir. Native sahnenin ayrıntı sayısı web performansının kanıtı değildir.
+GLB dışa aktarımı fotoğraf dokularını, fiziksel tekrarlı UV'leri, normal ve ORM haritalarını korur. Native Cycles ışığı GLB'ye bake edilmedi. Kiremit ve bitki ayrıntıları mobil için LOD ve draw-call azaltımı gerektirir. Native sahnenin ayrıntı sayısı web performansının kanıtı değildir. `scene-manifest.json` dışındaki eski GLB'ler güncel teslimin parçası değildir.
 
 Salonun yaklaşık 2,80 m ve girişin 3,10 m kotları ayrı korunur; ikisi de kaynak `KAT 1` giriş katı grubundadır. Kat grubu bulunan CAD katmanlarında yalnız yüksekliğe göre yeniden sınıflandırma yapılmaz. Kontroller salon döşemesinin üst bir kapak yüzeyiyle kapanmadığını, garaj kapısının görünürlüğünü ve CAD kat aidiyetini denetler. GLB geri aktarım kontrolü, sınır kutusundaki değişimin 2 cm altında kaldığını kontrol eder; bu, bütün mimari ölçülerin doğrulandığı anlamına gelmez.
 
@@ -84,9 +93,13 @@ Salonun yaklaşık 2,80 m ve girişin 3,10 m kotları ayrı korunur; ikisi de ka
 - Her odanın fotoğraf/plan eşleşmesi, sabit donatı ve mobilya konumlarının kontrolü.
 - Bahçe kotları, garaj kapısı/yaklaşımı, havuz ve bitki yerleşiminin fotoğrafla son karşılaştırması.
 - Ölçü varlıklarının ilgili odalara bağlanması; doğrulanmış ölçüler için etiket listesi.
-- Doku bake, LOD, draw-call azaltma, mobil/masaüstü performans ölçümü.
+- Fotoğrafa göre renk / yüzey ayarı, LOD, draw-call azaltma, mobil/masaüstü performans ölçümü.
 - Mahalle → bina → kat → oda satış arayüzü; model doğrulaması tamamlandıktan sonra.
 
-GitHub erişimi açıldı. İlk kod, CAD raporu ve referans paketi `3731b8730b8d3f09a6cfffc99c1ce332098f645d` commit'iyle `main` dalına gönderildi. Yerel commit ile uzaktaki gönderim ayrı ayrı doğrulanır.
+GitHub erişimi açıldı. İlk kod / CAD paketi `3731b873`, PBR haritaları ve kot / asansör / mutfak güncellemesi `b9a1a9d`, ilk tam Blender teslimi `1264289` ile `main` dalına gönderildi. Blender teslimi 27 bağlı kütüphaneyle yeniden açılıp render edilerek kontrol edilir. Kaynak ve bağlı sahnenin nokta sayıları ile düzenlenen nesnelerin konumları `layer-qa.json` içinde karşılaştırılır.
 
-Büyük tek parça Blender dosyası bağlantının 16 MiB istek sınırını aşıyor. Ana sahneye bağlı daha küçük Blender katman dosyaları hazırlanıyor. Otomatik yazma yetkili bir GitHub Actions iş akışı etkinleştirilmedi.
+Üretim betikleri tek parça sahnede çalışır; en son `package_blender_layers.py` taşınabilir teslimi üretir. Paketleme öncesi kopya `build/intermediate/angora21-monolithic.blend` altında yerel çalışma ara dosyası olarak tutulur. Bağlı teslimden elle düzenleme için ilgili katman dosyasını açın; ana dosya geometriyi yeniden bağlar.
+
+Son fotoğraf kontrolünde havuz döşemesinin suya taşması ve köşe açıklıkları düzeltildi. Bodrum mutfağına küçük kare karolar ve üç kollu siyah avize eklendi. Eski WC placeholderları asansörle çakıştığı için bodrum WC'si CAD B03 hacmine, giriş WC'si CAD Z03 hacmine alındı. Bodrumdaki sabit donatılar beş fotoğrafa göre yeniden kuruldu. `check_lift_fixture_clearance.py`, dört durakta kabin hacmine taşan başka donatı / mobilya bulunmadığını denetler.
+
+`build/room-review-register.json`, 202 fotoğrafın 17 kaynak grubu üzerinden kontrol sırasını ve açık işleri kaydeder. Bazı gruplar birden fazla oda içerir; grup sayısı tamamlanmış oda sayısı değildir. Henüz hiçbir hacim fotoğraf eşleşmesi açısından nihai onaylı sayılmaz.

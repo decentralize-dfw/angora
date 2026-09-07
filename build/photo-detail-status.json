@@ -1,101 +1,35 @@
 {
-  "date": "2026-09-07",
-  "stage": "photo_detail_review",
+  "stage": "CAD_grades_PBR_kitchen_lift_WC_review",
   "status": "work_in_progress",
-  "native_sha256": "bb5df11d369e346ab26e00c05874219a8bdaa765d583c72da1447412ead22e74",
+  "native_sha256": "91f551b19371e09296ab03279f2280a134a7c39e355b0c32fb1db6fa5ca1a55d",
   "phase_1_complete": false,
   "web_release_ready": false,
-  "github_push_status": "access_restored_first_pipeline_commit_published",
+  "github_push_status": "main_delivery_published_and_incrementally_updated",
   "completed_this_pass": [
-    "Photo-directed main lounge and master bedroom furnishing geometry",
-    "Corrected kitchen runs and functional sink cutouts",
-    "Curved shower enclosures, bathroom cabinetry, checker tile arrangement",
-    "Room light fixtures and packed generic daylight HDRI",
-    "Source-surface roof tile instances and revised plant geometry",
-    "Five selected room-boundary clearance checks",
-    "Current native-to-GLB export with original photo image textures"
+    "27-library Blender delivery",
+    "77 packed PBR materials and 385 downloadable PNG maps",
+    "20 common-origin GLB streams",
+    "CAD BK/TK levels for site grading",
+    "Basement kitchen access, tilework and three-arm candle fixture",
+    "Lift shaft cut through all landing slabs",
+    "WC fixtures moved into B03 and Z03, clear of lift cabins",
+    "Continuous pool coping/deck interfaces",
+    "White CAD entry-door faces"
   ],
-  "geometry": {
-    "evaluated_triangles": 2921104,
-    "visible_geometry_objects": 3435,
-    "furniture_objects": 452
-  },
+  "current_reports": [
+    "build/qa-report.json",
+    "build/blender/layer-qa.json",
+    "build/glb/stream-qa-report.json",
+    "build/lift-fixture-qa.json",
+    "build/room-review-register.json"
+  ],
   "pending": [
-    "Full room-by-room photo and CAD agreement, especially attic rooms, halls, entry/WC and garage interior",
-    "Precise window hardware, door leaves/frames, ceiling details and unresolved CAD surfaces",
-    "Calibrated finish textures; photo projections still contain photographed lighting",
-    "Plant species, detailed landscape grades and complete source alignment",
-    "Neighbor facades/heights and pool dimensions remain inferred",
-    "Room dimension-to-CAD annotation mapping",
-    "Baked web textures, LOD, draw-call optimization, mobile profiling",
+    "Photo agreement for every room and elevation",
+    "Glazing, shutter states, hardware and material calibration",
+    "Garden detail, planting and neighboring facades",
+    "Complete road/terrain junctions",
+    "Verified dimension associations",
+    "Initial neighborhood LOD and measured mobile performance",
     "MERGVS sales interface after model verification"
-  ],
-  "roundtrip_checks": [
-    {
-      "file": "angora21-villa-review.glb",
-      "imported_mesh_objects": 1583,
-      "max_bounds_delta_m": 0.000240325927734375,
-      "bounds_check": "passed",
-      "source_references_retained": 989,
-      "expected_bounds_m": [
-        [
-          -12.0,
-          -15.350000381469727,
-          -1.5799999982118607
-        ],
-        [
-          11.433195114135742,
-          24.899999141693115,
-          14.420000076293945
-        ]
-      ],
-      "imported_bounds_m": [
-        [
-          -12.0,
-          -15.350069046020508,
-          -1.5799999982118607
-        ],
-        [
-          11.433435440063477,
-          24.899999141693115,
-          14.419999122619629
-        ]
-      ]
-    },
-    {
-      "file": "angora21-neighborhood-review.glb",
-      "imported_mesh_objects": 1852,
-      "max_bounds_delta_m": 1.9073486328125e-05,
-      "bounds_check": "passed",
-      "source_references_retained": 908,
-      "expected_bounds_m": [
-        [
-          -136.26348876953125,
-          -164.48959350585938,
-          -11.800000190734863
-        ],
-        [
-          173.7607421875,
-          147.650634765625,
-          25.200000762939453
-        ]
-      ],
-      "imported_bounds_m": [
-        [
-          -136.26348876953125,
-          -164.48959350585938,
-          -11.800000190734863
-        ],
-        [
-          173.7607421875,
-          147.650634765625,
-          25.20001983642578
-        ]
-      ]
-    }
-  ],
-  "pbr_maps": "77 materials / basecolor, OpenGL normal, roughness, metallic, ORM baked and assigned",
-  "site_grade_report": "build/site-grade-report.json",
-  "lift_report": "build/lift-report.json",
-  "web_ready": false
+  ]
 }

@@ -1,6 +1,6 @@
 {
-  "mesh_vertices": 9313511,
-  "expected_vertices": 9313511,
+  "mesh_vertices": 9316752,
+  "expected_vertices": 9316752,
   "missing_linked_data": [],
   "materials": 77,
   "image_count": 232,
@@ -141,5 +141,6 @@
       "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/shared-meshes.blend",
       "exists": true
     }
-  ]
+  ],
+  "placement_errors": []
 }

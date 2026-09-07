@@ -1,7 +1,7 @@
 {
-  "objects": 3517,
-  "collections": 120,
-  "mesh_triangles_unique": 1091776,
+  "objects": 4947,
+  "collections": 142,
+  "mesh_triangles_unique": 2143153,
   "cad_layers": [
     {
       "source_layer": "KAPI İÇ$ÇERÇEVE",
@@ -198,9 +198,12 @@
     "10_main_kitchen",
     "11_southwest_bedroom",
     "12_garden_lounge",
+    "16_basement_kitchen",
     "13_master_bathroom",
     "14_shared_bathroom",
-    "09_main_panorama"
+    "09_main_panorama",
+    "15_pool_grade_review",
+    "17_lift_garden"
   ],
   "web_ready": false,
   "remaining": [

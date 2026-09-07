@@ -1,6 +1,6 @@
 {
-  "visible_geometry_objects": 4853,
-  "evaluated_triangles": 6179301,
+  "visible_geometry_objects": 4876,
+  "evaluated_triangles": 6184523,
   "furniture_objects": 452,
   "camera_furniture_bbox_intersections": [],
   "dimension_labels_enabled": false,
@@ -44,7 +44,7 @@
         -6,
         13.5
       ],
-      "first_hit": "Pool terrace",
+      "first_hit": "Pool terrace.002",
       "passed": true
     },
     {

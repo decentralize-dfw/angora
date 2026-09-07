@@ -1,0 +1,342 @@
+{
+  "source_native_sha256": "d7433ad90b14d316150be52d4ea581c9036493d436c98ce1b22aa946614a75e7",
+  "integrity": [
+    {
+      "file": "villa-f2.glb",
+      "sha256": "e5b58c901781e714f71d7027d593017f53c7fb1cc431f9191fc88735904d6d09",
+      "materials": 37,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "villa-f3.glb",
+      "sha256": "9730b9687492bada9f6117b78b0e9cb663e47e4d48bd3ba4ccf40d2c1f173ff4",
+      "materials": 23,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "villa-exterior.glb",
+      "sha256": "07b6dda823de286ac29940bf6d6998bc4efd83fbb5a03efe6bdafaab9e579d00",
+      "materials": 14,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "context-far.glb",
+      "sha256": "0d3712647620780d6c70b1a0732b153ce46f0a14e1c0d327d6b326bae4452066",
+      "materials": 9,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "context-ground.glb",
+      "sha256": "493789c5f1e986d2b7e633e1491010e5d5f243dacfa3737c94054946058224a5",
+      "materials": 4,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "villa-garden-plants-west.glb",
+      "sha256": "2a5b77f074fce43fd001fb6469274bfbe6fc2ba32babd83f0fc709bebc028e5f",
+      "materials": 10,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "villa-garden-plants-east.glb",
+      "sha256": "2c086d046baca5c9d1fa7649dcbda68e87e863af296be9d5bfc6995558aa9382",
+      "materials": 9,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "context-detail-b23.glb",
+      "sha256": "5211f117ed2bfc6d1ef0026b0756c5398c0e0994c4d4dd393b843e564dbd0d14",
+      "materials": 12,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "context-detail-b22.glb",
+      "sha256": "fe271713e1db08cd93c971c0f1ab08423595bc23a84da2e22e1f6fe4e806d799",
+      "materials": 12,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "context-detail-b20.glb",
+      "sha256": "4d19723c3883a880b438347de50a5999a27d5f962c32dbe0cc4d83a5cec63b02",
+      "materials": 12,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "context-detail-b19.glb",
+      "sha256": "99404c0dfa96d5cd82684995c921b5594afbef22e2ced013e8b4822558b493e9",
+      "materials": 12,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "context-detail-b18.glb",
+      "sha256": "70a0a3b6c2422ab3de33990d35256b92993e18697c1da030fed6953895a3230f",
+      "materials": 12,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "context-detail-b16.glb",
+      "sha256": "d84b8427f93ea0625c63a097e24157d77aa4e50a2d59be550bcbb2c3b92979bb",
+      "materials": 12,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "context-detail-b30.glb",
+      "sha256": "e6b3f47a0c00a777c6113856a398aa6526587de1b36e80334ffdb2af8fff459e",
+      "materials": 12,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "context-detail-b29.glb",
+      "sha256": "934e8a34b69a000187faa4b7c3d6653652114cd62531c71a6438e34454a3774e",
+      "materials": 12,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "context-detail-b31.glb",
+      "sha256": "116c228e523b9a8ae34568547984953053c9dc7513f43e60af90534488cb1a2a",
+      "materials": 12,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "context-detail-b17.glb",
+      "sha256": "7b02a463ccd1b02e11f0037a147c664c3fef9002938d98f9606805b9398f0457",
+      "materials": 12,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "villa-f0.glb",
+      "sha256": "fe41ec03177dd9c5aadaaa988f699bb5a2755311de9ec1caab17568aca209dee",
+      "materials": 31,
+      "normal_and_orm": "passed"
+    },
+    {
+      "file": "villa-f1.glb",
+      "sha256": "aa417695f018d9cab51f6178be114a75352d5b47ee0ef5647120948f3e819eb3",
+      "materials": 30,
+      "normal_and_orm": "passed"
+    }
+  ],
+  "roundtrip": [
+    {
+      "file": "villa-f2.glb",
+      "imported_mesh_objects": 387,
+      "max_bounds_delta_m": 0.0001316070556640625,
+      "bounds_check": "passed",
+      "source_references_retained": 243,
+      "expected_bounds_m": [
+        [
+          -6.382711887359619,
+          -6.4730000495910645,
+          5.890999794006348
+        ],
+        [
+          5.811314105987549,
+          10.894000053405762,
+          10.453055381774902
+        ]
+      ],
+      "imported_bounds_m": [
+        [
+          -6.382711887359619,
+          -6.473000526428223,
+          5.890999794006348
+        ],
+        [
+          5.811182498931885,
+          10.894000053405762,
+          10.45304012298584
+        ]
+      ]
+    },
+    {
+      "file": "villa-f3.glb",
+      "imported_mesh_objects": 156,
+      "max_bounds_delta_m": 7.295608520507812e-05,
+      "bounds_check": "passed",
+      "source_references_retained": 46,
+      "expected_bounds_m": [
+        [
+          -6.700300216674805,
+          -5.567999839782715,
+          8.511427879333496
+        ],
+        [
+          4.858465671539307,
+          10.894000053405762,
+          13.508399963378906
+        ]
+      ],
+      "imported_bounds_m": [
+        [
+          -6.700300216674805,
+          -5.567999839782715,
+          8.511427879333496
+        ],
+        [
+          4.858392715454102,
+          10.894000053405762,
+          13.50847053527832
+        ]
+      ]
+    },
+    {
+      "file": "context-ground.glb",
+      "imported_mesh_objects": 10,
+      "max_bounds_delta_m": 0.001117706298828125,
+      "bounds_check": "passed",
+      "source_references_retained": 10,
+      "expected_bounds_m": [
+        [
+          -139.26348876953125,
+          -167.48959350585938,
+          -16.052898406982422
+        ],
+        [
+          173.75607299804688,
+          147.64918518066406,
+          17.039138793945312
+        ]
+      ],
+      "imported_bounds_m": [
+        [
+          -139.26348876953125,
+          -167.48959350585938,
+          -16.052898406982422
+        ],
+        [
+          173.75607299804688,
+          147.64918518066406,
+          17.04025650024414
+        ]
+      ]
+    },
+    {
+      "file": "villa-garden-plants-west.glb",
+      "imported_mesh_objects": 101,
+      "max_bounds_delta_m": 0.00010442733764648438,
+      "bounds_check": "passed",
+      "source_references_retained": 8,
+      "expected_bounds_m": [
+        [
+          -10.246445655822754,
+          -8.642135620117188,
+          -0.3083333969116211
+        ],
+        [
+          7.545386791229248,
+          23.292850494384766,
+          10.332208633422852
+        ]
+      ],
+      "imported_bounds_m": [
+        [
+          -10.246445655822754,
+          -8.642135620117188,
+          -0.3083333969116211
+        ],
+        [
+          7.5454912185668945,
+          23.292850494384766,
+          10.332208633422852
+        ]
+      ]
+    },
+    {
+      "file": "context-detail-b20.glb",
+      "imported_mesh_objects": 110,
+      "max_bounds_delta_m": 7.05718994140625e-05,
+      "bounds_check": "passed",
+      "source_references_retained": 59,
+      "expected_bounds_m": [
+        [
+          -28.672096252441406,
+          -6.383441132935872,
+          -4.199999809265137
+        ],
+        [
+          -9.725164413452148,
+          20.341251373291016,
+          10.508400492487775
+        ]
+      ],
+      "imported_bounds_m": [
+        [
+          -28.672096252441406,
+          -6.383440013814513,
+          -4.199999809265137
+        ],
+        [
+          -9.725144386291504,
+          20.341251373291016,
+          10.508471064387189
+        ]
+      ]
+    },
+    {
+      "file": "villa-f0.glb",
+      "imported_mesh_objects": 905,
+      "max_bounds_delta_m": 8.7738037109375e-05,
+      "bounds_check": "passed",
+      "source_references_retained": 328,
+      "expected_bounds_m": [
+        [
+          -7.142899990081787,
+          -6.4730000495910645,
+          -0.4999999850988388
+        ],
+        [
+          8.833200454711914,
+          10.392999649047852,
+          6.1996002197265625
+        ]
+      ],
+      "imported_bounds_m": [
+        [
+          -7.142899990081787,
+          -6.472999572753906,
+          -0.4999999850988388
+        ],
+        [
+          8.833200454711914,
+          10.392999649047852,
+          6.199512481689453
+        ]
+      ],
+      "sha256": "fe41ec03177dd9c5aadaaa988f699bb5a2755311de9ec1caab17568aca209dee"
+    },
+    {
+      "file": "villa-f1.glb",
+      "imported_mesh_objects": 418,
+      "max_bounds_delta_m": 4.5299530029296875e-05,
+      "bounds_check": "passed",
+      "source_references_retained": 406,
+      "expected_bounds_m": [
+        [
+          -6.322000026702881,
+          -6.4730000495910645,
+          -0.2703999876976013
+        ],
+        [
+          7.668399810791016,
+          10.392999649047852,
+          7.099999904632568
+        ]
+      ],
+      "imported_bounds_m": [
+        [
+          -6.322000026702881,
+          -6.472999572753906,
+          -0.2703999876976013
+        ],
+        [
+          7.668400287628174,
+          10.392999649047852,
+          7.099954605102539
+        ]
+      ],
+      "sha256": "aa417695f018d9cab51f6178be114a75352d5b47ee0ef5647120948f3e819eb3"
+    }
+  ],
+  "tolerance_m": 0.02,
+  "mobile_performance_validated": false
+}

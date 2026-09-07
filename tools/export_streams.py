@@ -23,17 +23,30 @@ indoor=set()
 for name in ['10_ARCHITECTURE','20_FIXED_FITTINGS','30_FURNITURE_PLACEHOLDERS']:indoor|=geometry(bpy.data.collections[name].all_objects)
 targets={f'villa-f{i}.glb':{o for o in indoor if floor_of(o)==i} for i in range(4)}
 targets['villa-exterior.glb']=geometry(bpy.data.collections['15_EXTERIOR_DETAILS'].all_objects)
-targets['villa-garden.glb']=geometry(bpy.data.collections['40_LANDSCAPE'].all_objects)
+land=bpy.data.collections['40_LANDSCAPE'];plants=set()
+for col in land.children:
+    if any(word in col.name.lower() for word in ['planting','tree']):plants|=geometry(col.all_objects)
+def center_x(o):return sum((o.matrix_world@Vector(p)).x for p in o.bound_box)/8
+targets['villa-garden-ground.glb']=geometry(land.all_objects)-plants
+targets['villa-garden-plants-west.glb']={o for o in plants if center_x(o)<0}
+targets['villa-garden-plants-east.glb']={o for o in plants if center_x(o)>=0}
 hood=bpy.data.collections['50_NEIGHBORHOOD'];near=set();far=set()
 site=json.loads((ROOT/'build/cad/site-elevations.json').read_text())
 near_numbers={b['number'] for b in site['buildings'] if math.hypot(*b['typology_transform']['translation_xy'])<53}
 for col in hood.children:
     if not col.name.startswith('Building '):continue
-    number=int(col.name.split()[1]);(near if number in near_numbers else far).update(geometry(col.all_objects))
-targets['context-near.glb']=near;targets['context-far.glb']=far
+    number=int(col.name.split()[1]);items=geometry(col.all_objects);(near if number in near_numbers else far).update(items)
+    if number in near_numbers:targets['context-detail-b'+str(number)+'.glb']=items
+# Near houses are separate streams so no single transport asset contains every
+# detailed tree and facade. A lighter initial neighborhood LOD is still pending.
+targets['context-far.glb']=far
 targets['context-ground.glb']=geometry(hood.all_objects)-near-far
-records=[]
+selected=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
+selected=set(selected or targets)
+previous=json.loads((OUT/'scene-manifest.json').read_text()).get('assets',[]) if (OUT/'scene-manifest.json').exists() else []
+records=[r for r in previous if r['file'] in targets and r['file'] not in selected]
 for filename,objects in targets.items():
+    if filename not in selected:continue
     for o in scene.objects:o.select_set(False)
     for o in objects:o.select_set(True)
     deps=bpy.context.evaluated_depsgraph_get();bounds=geometry_bounds(objects,deps)
@@ -47,7 +60,8 @@ for filename,objects in targets.items():
     mapped=sum('normalTexture' in m and 'metallicRoughnessTexture' in m.get('pbrMetallicRoughness',{}) for m in materials)
     record={'file':filename,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'objects':len(objects),
             'blender_bounds_m':bounds,'materials':len(materials),'materials_with_normal_and_orm':mapped,
-            'images':len(header.get('images',[])),'common_origin':True,'native_sha256':digest}
+            'images':len(header.get('images',[])),'common_origin':True,'native_sha256':digest,
+            'scope':'neighbor_building' if filename.startswith('context-detail-') else 'villa_or_ground'}
     records.append(record);print('STREAM_EXPORTED',json.dumps(record),flush=True)
     (OUT/'scene-manifest.json').write_text(json.dumps({'source_native_sha256':digest,'units':'metres',
         'coordinate_system':'glTF_Y_up','assets':records,'stage':'model_review',

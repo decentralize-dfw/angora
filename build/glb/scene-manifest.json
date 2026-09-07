@@ -1,0 +1,461 @@
+{
+  "source_native_sha256": "d7433ad90b14d316150be52d4ea581c9036493d436c98ce1b22aa946614a75e7",
+  "units": "metres",
+  "coordinate_system": "glTF_Y_up",
+  "assets": [
+    {
+      "file": "villa-f2.glb",
+      "bytes": 8574972,
+      "sha256": "e5b58c901781e714f71d7027d593017f53c7fb1cc431f9191fc88735904d6d09",
+      "objects": 387,
+      "blender_bounds_m": [
+        [
+          -6.382711887359619,
+          -6.4730000495910645,
+          5.890999794006348
+        ],
+        [
+          5.811314105987549,
+          10.894000053405762,
+          10.453055381774902
+        ]
+      ],
+      "materials": 37,
+      "materials_with_normal_and_orm": 37,
+      "images": 111,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906"
+    },
+    {
+      "file": "villa-f3.glb",
+      "bytes": 4389060,
+      "sha256": "9730b9687492bada9f6117b78b0e9cb663e47e4d48bd3ba4ccf40d2c1f173ff4",
+      "objects": 156,
+      "blender_bounds_m": [
+        [
+          -6.700300216674805,
+          -5.567999839782715,
+          8.511427879333496
+        ],
+        [
+          4.858465671539307,
+          10.894000053405762,
+          13.508399963378906
+        ]
+      ],
+      "materials": 23,
+      "materials_with_normal_and_orm": 23,
+      "images": 69,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906"
+    },
+    {
+      "file": "villa-exterior.glb",
+      "bytes": 4177740,
+      "sha256": "07b6dda823de286ac29940bf6d6998bc4efd83fbb5a03efe6bdafaab9e579d00",
+      "objects": 89,
+      "blender_bounds_m": [
+        [
+          -6.35830020904541,
+          -6.428299903869629,
+          0.0
+        ],
+        [
+          7.300000190734863,
+          11.55000022346387,
+          14.420000076293945
+        ]
+      ],
+      "materials": 14,
+      "materials_with_normal_and_orm": 14,
+      "images": 42,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906"
+    },
+    {
+      "file": "context-far.glb",
+      "bytes": 2018472,
+      "sha256": "0d3712647620780d6c70b1a0732b153ce46f0a14e1c0d327d6b326bae4452066",
+      "objects": 1426,
+      "blender_bounds_m": [
+        [
+          -116.22456191189117,
+          -144.3584934943732,
+          -12.5
+        ],
+        [
+          119.46943610864164,
+          114.49539911889745,
+          27.40839958190918
+        ]
+      ],
+      "materials": 9,
+      "materials_with_normal_and_orm": 9,
+      "images": 27,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906"
+    },
+    {
+      "file": "context-ground.glb",
+      "bytes": 804664,
+      "sha256": "493789c5f1e986d2b7e633e1491010e5d5f243dacfa3737c94054946058224a5",
+      "objects": 10,
+      "blender_bounds_m": [
+        [
+          -139.26348876953125,
+          -167.48959350585938,
+          -16.052898406982422
+        ],
+        [
+          173.75607299804688,
+          147.64918518066406,
+          17.039138793945312
+        ]
+      ],
+      "materials": 4,
+      "materials_with_normal_and_orm": 4,
+      "images": 12,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906"
+    },
+    {
+      "file": "villa-garden-plants-west.glb",
+      "bytes": 7829028,
+      "sha256": "2a5b77f074fce43fd001fb6469274bfbe6fc2ba32babd83f0fc709bebc028e5f",
+      "objects": 101,
+      "blender_bounds_m": [
+        [
+          -10.246445655822754,
+          -8.642135620117188,
+          -0.3083333969116211
+        ],
+        [
+          7.545386791229248,
+          23.292850494384766,
+          10.332208633422852
+        ]
+      ],
+      "materials": 10,
+      "materials_with_normal_and_orm": 10,
+      "images": 30,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906",
+      "optional_detail_lod": false
+    },
+    {
+      "file": "villa-garden-plants-east.glb",
+      "bytes": 7900984,
+      "sha256": "2c086d046baca5c9d1fa7649dcbda68e87e863af296be9d5bfc6995558aa9382",
+      "objects": 98,
+      "blender_bounds_m": [
+        [
+          -9.160446166992188,
+          -9.703900337219238,
+          -0.4888191819190979
+        ],
+        [
+          23.22882843017578,
+          24.46315574645996,
+          6.980448246002197
+        ]
+      ],
+      "materials": 9,
+      "materials_with_normal_and_orm": 9,
+      "images": 27,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906",
+      "optional_detail_lod": false
+    },
+    {
+      "file": "context-detail-b23.glb",
+      "bytes": 5808768,
+      "sha256": "5211f117ed2bfc6d1ef0026b0756c5398c0e0994c4d4dd393b843e564dbd0d14",
+      "objects": 106,
+      "blender_bounds_m": [
+        [
+          26.35862690571583,
+          -19.507829320763644,
+          1.2999999523162842
+        ],
+        [
+          52.599796295166016,
+          8.89199161529541,
+          16.008400492487773
+        ]
+      ],
+      "materials": 12,
+      "materials_with_normal_and_orm": 12,
+      "images": 36,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906",
+      "optional_detail_lod": true
+    },
+    {
+      "file": "context-detail-b22.glb",
+      "bytes": 5846524,
+      "sha256": "fe271713e1db08cd93c971c0f1ab08423595bc23a84da2e22e1f6fe4e806d799",
+      "objects": 106,
+      "blender_bounds_m": [
+        [
+          13.780578941253992,
+          -10.237585585046105,
+          1.2999999523162842
+        ],
+        [
+          42.57548522949219,
+          15.632887840270996,
+          16.008399963378906
+        ]
+      ],
+      "materials": 12,
+      "materials_with_normal_and_orm": 12,
+      "images": 36,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906",
+      "optional_detail_lod": true
+    },
+    {
+      "file": "context-detail-b20.glb",
+      "bytes": 5839952,
+      "sha256": "4d19723c3883a880b438347de50a5999a27d5f962c32dbe0cc4d83a5cec63b02",
+      "objects": 110,
+      "blender_bounds_m": [
+        [
+          -28.672096252441406,
+          -6.383441132935872,
+          -4.199999809265137
+        ],
+        [
+          -9.725164413452148,
+          20.341251373291016,
+          10.508400492487775
+        ]
+      ],
+      "materials": 12,
+      "materials_with_normal_and_orm": 12,
+      "images": 36,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906",
+      "optional_detail_lod": true
+    },
+    {
+      "file": "context-detail-b19.glb",
+      "bytes": 5805404,
+      "sha256": "99404c0dfa96d5cd82684995c921b5594afbef22e2ced013e8b4822558b493e9",
+      "objects": 106,
+      "blender_bounds_m": [
+        [
+          -42.50892639160156,
+          -6.383436903357522,
+          -4.199999809265137
+        ],
+        [
+          -23.561994552612305,
+          20.341257095336914,
+          10.508399963378906
+        ]
+      ],
+      "materials": 12,
+      "materials_with_normal_and_orm": 12,
+      "images": 36,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906",
+      "optional_detail_lod": true
+    },
+    {
+      "file": "context-detail-b18.glb",
+      "bytes": 5843912,
+      "sha256": "70a0a3b6c2422ab3de33990d35256b92993e18697c1da030fed6953895a3230f",
+      "objects": 106,
+      "blender_bounds_m": [
+        [
+          -6.664139270782471,
+          20.12786293029785,
+          -8.25
+        ],
+        [
+          14.59962483495073,
+          49.16996748188726,
+          6.458400106459164
+        ]
+      ],
+      "materials": 12,
+      "materials_with_normal_and_orm": 12,
+      "images": 36,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906",
+      "optional_detail_lod": true
+    },
+    {
+      "file": "context-detail-b16.glb",
+      "bytes": 5858876,
+      "sha256": "d84b8427f93ea0625c63a097e24157d77aa4e50a2d59be550bcbb2c3b92979bb",
+      "objects": 106,
+      "blender_bounds_m": [
+        [
+          26.452306747436523,
+          13.338268280029297,
+          -4.650000095367432
+        ],
+        [
+          47.71607276051836,
+          42.380370924270075,
+          10.058400249510312
+        ]
+      ],
+      "materials": 12,
+      "materials_with_normal_and_orm": 12,
+      "images": 36,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906",
+      "optional_detail_lod": true
+    },
+    {
+      "file": "context-detail-b30.glb",
+      "bytes": 5810692,
+      "sha256": "e6b3f47a0c00a777c6113856a398aa6526587de1b36e80334ffdb2af8fff459e",
+      "objects": 106,
+      "blender_bounds_m": [
+        [
+          -33.680747985839844,
+          -47.50642013549805,
+          -1.600000023841858
+        ],
+        [
+          -14.733814239501953,
+          -20.615622970851476,
+          13.108400291233563
+        ]
+      ],
+      "materials": 12,
+      "materials_with_normal_and_orm": 12,
+      "images": 36,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906",
+      "optional_detail_lod": true
+    },
+    {
+      "file": "context-detail-b29.glb",
+      "bytes": 5808048,
+      "sha256": "934e8a34b69a000187faa4b7c3d6653652114cd62531c71a6438e34454a3774e",
+      "objects": 106,
+      "blender_bounds_m": [
+        [
+          -19.943912506103516,
+          -47.50642013549805,
+          -1.100000023841858
+        ],
+        [
+          -0.9969816207885742,
+          -20.61562258341578,
+          13.608399964869022
+        ]
+      ],
+      "materials": 12,
+      "materials_with_normal_and_orm": 12,
+      "images": 36,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906",
+      "optional_detail_lod": true
+    },
+    {
+      "file": "context-detail-b31.glb",
+      "bytes": 5823916,
+      "sha256": "116c228e523b9a8ae34568547984953053c9dc7513f43e60af90534488cb1a2a",
+      "objects": 106,
+      "blender_bounds_m": [
+        [
+          -63.284690856933594,
+          -38.75672149658203,
+          -3.200000047683716
+        ],
+        [
+          -36.31702339670527,
+          -19.58723258972168,
+          11.508399963378906
+        ]
+      ],
+      "materials": 12,
+      "materials_with_normal_and_orm": 12,
+      "images": 36,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906",
+      "optional_detail_lod": true
+    },
+    {
+      "file": "context-detail-b17.glb",
+      "bytes": 5848644,
+      "sha256": "7b02a463ccd1b02e11f0037a147c664c3fef9002938d98f9606805b9398f0457",
+      "objects": 106,
+      "blender_bounds_m": [
+        [
+          6.371204853057861,
+          19.27007484436035,
+          -7.75
+        ],
+        [
+          27.46709604419279,
+          46.027227044025594,
+          6.958399772644043
+        ]
+      ],
+      "materials": 12,
+      "materials_with_normal_and_orm": 12,
+      "images": 36,
+      "common_origin": true,
+      "native_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906",
+      "optional_detail_lod": true
+    },
+    {
+      "file": "villa-f0.glb",
+      "bytes": 4305728,
+      "sha256": "fe41ec03177dd9c5aadaaa988f699bb5a2755311de9ec1caab17568aca209dee",
+      "objects": 905,
+      "blender_bounds_m": [
+        [
+          -7.142899990081787,
+          -6.4730000495910645,
+          -0.4999999850988388
+        ],
+        [
+          8.833200454711914,
+          10.392999649047852,
+          6.1996002197265625
+        ]
+      ],
+      "materials": 31,
+      "materials_with_normal_and_orm": 31,
+      "images": 93,
+      "common_origin": true,
+      "native_sha256": "d7433ad90b14d316150be52d4ea581c9036493d436c98ce1b22aa946614a75e7",
+      "scope": "villa_or_ground"
+    },
+    {
+      "file": "villa-f1.glb",
+      "bytes": 7537580,
+      "sha256": "aa417695f018d9cab51f6178be114a75352d5b47ee0ef5647120948f3e819eb3",
+      "objects": 418,
+      "blender_bounds_m": [
+        [
+          -6.322000026702881,
+          -6.4730000495910645,
+          -0.2703999876976013
+        ],
+        [
+          7.668399810791016,
+          10.392999649047852,
+          7.099999904632568
+        ]
+      ],
+      "materials": 30,
+      "materials_with_normal_and_orm": 30,
+      "images": 90,
+      "common_origin": true,
+      "native_sha256": "d7433ad90b14d316150be52d4ea581c9036493d436c98ce1b22aa946614a75e7",
+      "scope": "villa_or_ground"
+    }
+  ],
+  "stage": "model_review",
+  "mobile_performance_validated": false,
+  "photo_alignment_complete": false
+}
