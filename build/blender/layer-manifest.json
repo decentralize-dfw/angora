@@ -1,6 +1,6 @@
 {
   "master": "build/blender/angora21-working.blend",
-  "master_sha256": "91f551b19371e09296ab03279f2280a134a7c39e355b0c32fb1db6fa5ca1a55d",
+  "master_sha256": "ed0dc217981c049e079b009eade5d9633295983834592664bad30b52b6e6edcf",
   "source_monolithic_sha256": "d7433ad90b14d316150be52d4ea581c9036493d436c98ce1b22aa946614a75e7",
   "source_objects": 4920,
   "linked_scene_objects": 4920,
@@ -607,5 +607,6 @@
         0.019999995827674866
       ]
     ]
-  }
+  },
+  "camera_only_revision": true
 }

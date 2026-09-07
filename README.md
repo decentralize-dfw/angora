@@ -21,7 +21,7 @@ DWG'den katmanlı Blender sahnesi yeniden kuruldu. **Çalışma / kontrol sürü
 - `build/blender/layers/`: kaynak CAD katmanları, mimari, sabit donatılar, ayrı mobilyalar, bahçe ve mahalle için düzenlenebilir Blender dosyaları. Malzemeler ve tekrar kullanılan meshler ortak dosyalardan bağlanır.
 - `build/blender/layer-manifest.json`: ana sahne ve bütün bağlı dosyaların boyutları, SHA-256 değerleri ve geometri sayımları. `layer-qa.json` dosyasında eksik bağlantı / doku denetimi bulunur.
 - `build/renders/`: Blender Cycles kontrol görüntüleri.
-- `build/renders/render-manifest.json`: güncel görüntülerin hangi native sahne SHA-256 değerinden üretildiğini kaydeder; listede bulunmayan görseller önceki kontrol aşamalarından kalmış olabilir.
+- `build/renders/render-manifest.json`: her görüntünün üretildiği native sahne SHA-256 değerini ayrı kaydeder; listede bulunmayan görseller önceki kontrol aşamalarından kalmış olabilir. WC görüntüsü, kapı geçici gizlenerek alınan ve `mode` alanıyla açıkça belirtilen bir inceleme kesitidir.
 - `build/glb/scene-manifest.json`: ortak başlangıç noktasını koruyan 20 GLB; dört kat, dış ayrıntılar, bahçe, zemin ve komşu binalar. Her malzemede normal ve roughness/metallic haritası vardır. Web aydınlatması ve mobil performans henüz doğrulanmadı.
 - `assets/pbr/pbr-maps.zip`: 77 malzeme için 385 PNG; base color, OpenGL normal, roughness, metallic ve ORM. Haritalar fotoğraf yorumuyla kurulan malzemelerden bake edildi; renk kalibreli tarama değildir. ORM'nin AO kanalı nötrdür.
 - `build/cad/`: kaynak özeti, master plan yerleşimi, açıklık kontrolü ve eşleştirilmemiş ölçü verileri.

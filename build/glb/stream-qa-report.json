@@ -114,6 +114,12 @@
       "sha256": "aa417695f018d9cab51f6178be114a75352d5b47ee0ef5647120948f3e819eb3",
       "materials": 30,
       "normal_and_orm": "passed"
+    },
+    {
+      "file": "villa-garden-ground.glb",
+      "sha256": "7927d58333275d04746938a412516dd9d1ecffe530378156c696867203b02fa1",
+      "materials": 8,
+      "normal_and_orm": "passed"
     }
   ],
   "roundtrip": [
@@ -335,6 +341,38 @@
         ]
       ],
       "sha256": "aa417695f018d9cab51f6178be114a75352d5b47ee0ef5647120948f3e819eb3"
+    },
+    {
+      "file": "villa-garden-ground.glb",
+      "imported_mesh_objects": 222,
+      "max_bounds_delta_m": 0.00011444091796875,
+      "bounds_check": "passed",
+      "source_references_retained": 213,
+      "expected_bounds_m": [
+        [
+          -9.480960845947266,
+          -10.90999984741211,
+          -4.0
+        ],
+        [
+          26.54096031188965,
+          29.055761337280273,
+          5.579601287841797
+        ]
+      ],
+      "imported_bounds_m": [
+        [
+          -9.480960845947266,
+          -10.90999984741211,
+          -4.0
+        ],
+        [
+          26.540958404541016,
+          29.055761337280273,
+          5.579715728759766
+        ]
+      ],
+      "sha256": "7927d58333275d04746938a412516dd9d1ecffe530378156c696867203b02fa1"
     }
   ],
   "tolerance_m": 0.02,

@@ -1,76 +1,58 @@
 {
-  "native_sha256": "bb5df11d369e346ab26e00c05874219a8bdaa765d583c72da1447412ead22e74",
+  "native_sha256": "ed0dc217981c049e079b009eade5d9633295983834592664bad30b52b6e6edcf",
   "stage": "work_in_progress",
+  "per_image_native_sha256_is_authoritative": true,
   "images": {
-    "14_shared_bathroom": {
-      "file": "build/renders/14_shared_bathroom.png",
-      "sha256": "b02586b67bf0d9a641817843195f5184c8f4e870f7371dcfb1fc8d1b66286d24",
+    "16_basement_kitchen": {
+      "file": "build/renders/16_basement_kitchen.png",
+      "sha256": "2d9fb59025145866f9ac6c51a6106cc451cbcf90b2624417f06f98c68959b1a3",
       "width": 1000,
       "samples": 24,
-      "seconds": 99.02
+      "seconds": 86.36,
+      "native_sha256": "91f551b19371e09296ab03279f2280a134a7c39e355b0c32fb1db6fa5ca1a55d"
     },
-    "10_main_kitchen": {
-      "file": "build/renders/10_main_kitchen.png",
-      "sha256": "6cf426f1dbbc514a178741b1d462f9b83d1a14802e54d71a7ae88535996d5cba",
+    "17_lift_garden": {
+      "file": "build/renders/17_lift_garden.png",
+      "sha256": "71194b4100eac91aae4108c3861b14dbcf8b95ef22ed67a4e5d93e2c225817c0",
       "width": 1000,
       "samples": 24,
-      "seconds": 97.02
-    },
-    "06_master_bedroom": {
-      "file": "build/renders/06_master_bedroom.png",
-      "sha256": "654ad3015cbcc6fe449a4ecd62d3b7c8473fc1f340556d30ed2c43a44c683247",
-      "width": 1000,
-      "samples": 24,
-      "seconds": 97.29
-    },
-    "05_main_lounge": {
-      "file": "build/renders/05_main_lounge.png",
-      "sha256": "628f734d040498e0b6ec10cb3b6ed7ffb5652e8d0254148f9cde88a4ec5b46cc",
-      "width": 1000,
-      "samples": 24,
-      "seconds": 82.15
+      "seconds": 87.85,
+      "native_sha256": "91f551b19371e09296ab03279f2280a134a7c39e355b0c32fb1db6fa5ca1a55d"
     },
     "01_front": {
       "file": "build/renders/01_front.png",
-      "sha256": "3071e80cd6a7f799ca557d438750e38f9c9a96d348768a148546dd21fb85b8d3",
-      "width": 1000,
+      "sha256": "18eec62d74f1baf79313c982495269aafb7ce606468bdd3f6e81b94fe28f5a92",
+      "native_sha256": "67ad5dac3739c88435f28f5db4050424f25832d7cbb4fa81a624ee22d0bc72a2",
       "samples": 24,
-      "seconds": 43.72
+      "width": 1000,
+      "review_stage": "pool_kitchen_before_WC_relocation"
     },
-    "02_pool": {
-      "file": "build/renders/02_pool.png",
-      "sha256": "81e2e983e968a8569a00c4cff28ccfb80568050a8b4466ddef174530dd23ec76",
-      "width": 1000,
+    "15_pool_grade_review": {
+      "file": "build/renders/15_pool_grade_review.png",
+      "sha256": "34d583f0f00b26ce01257e83f48d360dd86b7899e00cc4431d41720d272ee37a",
+      "native_sha256": "67ad5dac3739c88435f28f5db4050424f25832d7cbb4fa81a624ee22d0bc72a2",
       "samples": 24,
-      "seconds": 55.35
+      "width": 1000,
+      "review_stage": "pool_kitchen_before_WC_relocation"
     },
-    "11_southwest_bedroom": {
-      "file": "build/renders/11_southwest_bedroom.png",
-      "sha256": "c7bb521fc3befb8e3fa7c93b8524bf6af293266a041a3e8dab91b0da1f1ede38",
+    "18_garden_wc": {
+      "file": "build/renders/18_garden_wc.png",
+      "sha256": "629c2b933664b5f097708fe42801d76768074dfc919a2c8fdfdef83da466a465",
+      "native_sha256": "ed0dc217981c049e079b009eade5d9633295983834592664bad30b52b6e6edcf",
       "width": 1000,
+      "height": 650,
       "samples": 24,
-      "seconds": 105.9
-    },
-    "12_garden_lounge": {
-      "file": "build/renders/12_garden_lounge.png",
-      "sha256": "c370d64cb06f1cede44975f74ac7446d4fa9d76ed3d184902c6619a210f10fa9",
-      "width": 1000,
-      "samples": 24,
-      "seconds": 90.02
-    },
-    "03_neighborhood": {
-      "file": "build/renders/03_neighborhood.png",
-      "sha256": "0cb526bba9f81c27f0802950d419e2c038accd013cdd72b94d1aafbf4b923c17",
-      "width": 1000,
-      "samples": 24,
-      "seconds": 37.05
-    },
-    "13_master_bathroom": {
-      "file": "build/renders/13_master_bathroom.png",
-      "sha256": "f9837d1e6a4c6b67c41488fff60e17247189e1c943a1c03c51bece53484b26b2",
-      "width": 1000,
-      "samples": 24,
-      "seconds": 118.86
+      "seconds": 82.36,
+      "mode": "door_cutaway_inspection_panorama",
+      "hidden_source_objects": [
+        "F0 | KAPI İÇ$KAPI"
+      ],
+      "camera_location": [
+        -0.12999999523162842,
+        1.899999976158142,
+        1.5199999809265137
+      ],
+      "native_geometry_unchanged": true
     }
   }
 }

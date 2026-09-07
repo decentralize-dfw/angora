@@ -44,7 +44,10 @@ targets['context-ground.glb']=geometry(hood.all_objects)-near-far
 selected=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
 selected=set(selected or targets)
 previous=json.loads((OUT/'scene-manifest.json').read_text()).get('assets',[]) if (OUT/'scene-manifest.json').exists() else []
-records=[r for r in previous if r['file'] in targets and r['file'] not in selected]
+records={r['file']:r for r in previous if r['file'] in targets}
+completed=set()
+unknown=selected-set(targets)
+assert not unknown,'Unknown export targets: '+str(sorted(unknown))
 for filename,objects in targets.items():
     if filename not in selected:continue
     for o in scene.objects:o.select_set(False)
@@ -62,7 +65,9 @@ for filename,objects in targets.items():
             'blender_bounds_m':bounds,'materials':len(materials),'materials_with_normal_and_orm':mapped,
             'images':len(header.get('images',[])),'common_origin':True,'native_sha256':digest,
             'scope':'neighbor_building' if filename.startswith('context-detail-') else 'villa_or_ground'}
-    records.append(record);print('STREAM_EXPORTED',json.dumps(record),flush=True)
-    (OUT/'scene-manifest.json').write_text(json.dumps({'source_native_sha256':digest,'units':'metres',
-        'coordinate_system':'glTF_Y_up','assets':records,'stage':'model_review',
-        'mobile_performance_validated':False,'photo_alignment_complete':False},indent=2))
+    records[filename]=record;completed.add(filename);print('STREAM_EXPORTED',json.dumps(record),flush=True)
+assert completed==selected,'Some requested GLB streams were not exported'
+manifest={'source_native_sha256':digest,'units':'metres','coordinate_system':'glTF_Y_up',
+    'assets':list(records.values()),'stage':'model_review','initial_neighborhood_LOD_optimized':False,
+    'mobile_performance_validated':False,'photo_alignment_complete':False}
+temporary=OUT/'scene-manifest.json.tmp';temporary.write_text(json.dumps(manifest,indent=2));temporary.replace(OUT/'scene-manifest.json')

@@ -453,9 +453,34 @@
       "common_origin": true,
       "native_sha256": "d7433ad90b14d316150be52d4ea581c9036493d436c98ce1b22aa946614a75e7",
       "scope": "villa_or_ground"
+    },
+    {
+      "file": "villa-garden-ground.glb",
+      "bytes": 409512,
+      "sha256": "7927d58333275d04746938a412516dd9d1ecffe530378156c696867203b02fa1",
+      "objects": 222,
+      "blender_bounds_m": [
+        [
+          -9.480960845947266,
+          -10.90999984741211,
+          -4.0
+        ],
+        [
+          26.54096031188965,
+          29.055761337280273,
+          5.579601287841797
+        ]
+      ],
+      "materials": 8,
+      "materials_with_normal_and_orm": 8,
+      "images": 24,
+      "common_origin": true,
+      "native_sha256": "d7433ad90b14d316150be52d4ea581c9036493d436c98ce1b22aa946614a75e7",
+      "scope": "villa_or_ground"
     }
   ],
   "stage": "model_review",
+  "initial_neighborhood_LOD_optimized": false,
   "mobile_performance_validated": false,
   "photo_alignment_complete": false
 }

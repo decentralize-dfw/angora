@@ -55,6 +55,8 @@ def refine_wc_placement():
             if abs(p.x-old[0])<.04 and abs(p.y-old[1])<.04:
                 o.location.x+=new[0]-old[0];o.location.y+=new[1]-old[1]
     cams=bpy.data.collections.get('90_CAMERAS')
-    if cams and cams.library is None and not bpy.data.objects.get('18_garden_wc'):
-        camera('18_garden_wc',(-.30,2.78,1.58),(-.05,1.42,1.13),20,cams)
+    if cams and cams.library is None:
+        cam=bpy.data.objects.get('18_garden_wc') or camera('18_garden_wc',(-.13,1.83,1.53),(.08,1.25,1.15),12.5,cams)
+        cam.location=(-.13,1.83,1.53)
+        cam.rotation_euler=(Vector((.08,1.25,1.15))-cam.location).to_track_quat('-Z','Y').to_euler();cam.data.lens=12.5
     return changes
