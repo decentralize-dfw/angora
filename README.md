@@ -2,6 +2,29 @@
 
 Kaynak: `ANGORA-.dwg` ve bu depodaki oda / drone fotoğrafları. Hedef, master plandaki **21 numaralı bina**; bu numara tapu ada/parsel numarası değildir.
 
+## 3D inceleme arayüzü
+
+[Angora 21 — çevre, bina ve kat görünümü](https://angora-21-viewer.x-8d31.chatgpt.site)
+
+Çevre, bina/bahçe, bodrum, giriş, birinci ve çatı katı seçilebilir. Katlar kendi
+döşeme kotundan **+1,60 m** kesilir. Sabit yükseklikte döndürme, yatay kaydırma,
+yakınlaştırma ve ortalama vardır. Tek parmak döndürür; iki parmak kaydırır ve
+yakınlaştırır. `Kaydır` düğmesi tek parmakla kaydırmayı da açar.
+
+Kaynak kod `viewer/`, türetilmiş modeller `build/web/` altındadır. Uygulama
+başlangıçta GitHub main model listesini kontrol eder; bağlantı kesilirse
+paketlenmiş modelleri kullanır. Model dosyaları ve kesit yükseklikleri, gerçek
+OrbitControls üzerinde dokunma olayları ve sabit kamera yüksekliği kontrol
+edildi. Bu oturumda tarayıcı önizleme hizmeti açılamadığı için gerçek cihaz
+görsel/performance testi henüz tamamlanmadı.
+
+Giriş mutfağındaki son model düzeltmesini uygulayıp bağlı dosyaları ve kat
+görünümünü yenilemek için: `python tools/apply_kitchen_review_to_delivery.py`.
+Cloud Blender dizini `ANGORA_BLENDER_DIR` ile seçilir. Yalnızca web modellerini
+yenilemek için Blender içinde `tools/export_web_viewer.py` çalıştırılır;
+`--views floor-1` yalnız giriş katını günceller. Ardından
+`python tools/sync_web_viewer.py` ile uygulamadaki model kopyaları eşitlenir.
+
 ## Çalışma durumu
 
 DWG'den katmanlı Blender sahnesi yeniden kuruldu. **Çalışma / kontrol sürümüdür; bitmiş satış demosu veya birebir doğrulanmış nihai model değildir.** Kaynak çizgileri ve üretilen yüzeyler ayrı tutulur. Fotoğrafa göre eklenen parçalar kendi kanıt durumlarını taşır.

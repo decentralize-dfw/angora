@@ -1,0 +1,20 @@
+{
+  "image": "/workspace/scratch/3317f828a850/angora/build/renders/kitchen-vitrine-review.png",
+  "source_file": "/workspace/scratch/3317f828a850/angora/build/intermediate/angora21-monolithic.blend",
+  "source_sha256": "d86c7863c79ee265012376a68509d96f11f9175bb0acf923800ab4f9f30b2548",
+  "camera_position": [
+    -2.18,
+    -2.45,
+    4.66
+  ],
+  "camera_target": [
+    0.85,
+    -2.66,
+    4.48
+  ],
+  "lens_mm": 24,
+  "samples": 20,
+  "seconds": 103.01,
+  "inspection_only": true,
+  "photo_matching_complete": false
+}

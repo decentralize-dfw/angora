@@ -122,12 +122,15 @@ def export_view(name,objects,cut=None,lower=None):
         data=o.data;bpy.data.objects.remove(o,do_unlink=True);bpy.data.meshes.remove(data)
 
 args=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
-if '--context-only' in args:
-    records.extend(r for r in json.loads((OUT/'manifest.json').read_text())['assets'] if r['id'].startswith('floor-'))
-else:
-    for i,z in enumerate(floors):export_view('floor-'+str(i),{o for o in indoor if floor_of(o)==i},z+1.6,z-.6)
-export_view('building',building)
-export_view('neighborhood',hood)
+order=['floor-0','floor-1','floor-2','floor-3','building','neighborhood']
+wanted=set(args[args.index('--views')+1:]) if '--views' in args else ({'building','neighborhood'} if '--context-only' in args else set(order))
+assert wanted<=set(order),wanted
+if wanted!=set(order):records.extend(r for r in json.loads((OUT/'manifest.json').read_text())['assets'] if r['id'] not in wanted)
+for i,z in enumerate(floors):
+    if 'floor-'+str(i) in wanted:export_view('floor-'+str(i),{o for o in indoor if floor_of(o)==i},z+1.6,z-.6)
+if 'building' in wanted:export_view('building',building)
+if 'neighborhood' in wanted:export_view('neighborhood',hood)
+records.sort(key=lambda r:order.index(r['id']))
 manifest={'version':1,'source_native_sha256':source_hash,'units':'metres','coordinate_system':'glTF_Y_up',
           'floor_labels':['Bodrum','Giriş','1. kat','Çatı'],'floor_datums_m':floors,'cut_height_m':1.6,
           'assets':records,'mobile_lod':True,'photo_matching_complete':False,

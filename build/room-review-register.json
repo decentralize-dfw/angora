@@ -1,5 +1,5 @@
 {
-  "native_master_sha256": "cc0d32e5aec10964a7381a2f2bba5e28b74650e5a5e26bbd1e9d107d5b736130",
+  "native_master_sha256": "672fc7d062adaebd1cf0b41db29c4e15994ff2897232d2724d835cc9608d3082",
   "phase_1_complete": false,
   "source_photo_files": 202,
   "unique_source_photos": 184,
@@ -519,13 +519,12 @@
       "cameras": [
         "10_main_kitchen"
       ],
-      "review_state": "reference_geometry_compared_current_material_review_pending",
+      "review_state": "photo_joinery_revision_15_applied_open_items_remain",
       "open_items": [
-        "Dolap taçları, camlı kapak çerçeveleri ve kulp oranları",
-        "Karo taşındaki renk/damar çeşitliliği, derz eni ve ölçü eşlemesi",
-        "Bulaşık makinesi, tezgâh cihazları ve buzdolabı oranları",
-        "Karşı duvar vitrini, perde ve radyatörün ayrı kadrajda kontrolü",
-        "Düzeltilmiş renk haritalarıyla güncel iç mekân ışığı karşılaştırması"
+        "Fotoğraftaki seramik deseninin, ahşap damar yönünün ve renginin eşleştirilmesi",
+        "Cam matlığı, pencere panjuru ve stor perdenin ayrıntıları",
+        "Tavan profili, avize ve fotoğraf ışığının eşleştirilmesi",
+        "Vitrin içi eşyalar ve kapı vitrayı; fotoğrafla son yerleşim kontrolü"
       ],
       "photo_match_approved": false,
       "dimension_labels_enabled": false,
@@ -535,7 +534,13 @@
         "render_stage": "earlier_geometry_review_before_constant_color_correction",
         "source_contact_sheet": "build/reference/kat_2_ust_mutfak_1.jpg",
         "source_contact_sheet_sha256": "a614f6c614ac7c6e82cf19d06989a8989442037a20289c933ec1920535c01f3d"
-      }
+      },
+      "completed_in_revision_15": [
+        "Five-module sink cabinet layout, dishwasher and drainboard",
+        "Oven opening cleared and raised panel fronts",
+        "Cupboard mouldings and square backsplash joints",
+        "Vitrine positioned against measured native CAD wall face"
+      ]
     },
     {
       "photo_group": "kat_2_ust_salon",

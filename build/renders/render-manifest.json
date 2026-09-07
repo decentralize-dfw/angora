@@ -1,5 +1,5 @@
 {
-  "native_sha256": "cc0d32e5aec10964a7381a2f2bba5e28b74650e5a5e26bbd1e9d107d5b736130",
+  "native_sha256": "672fc7d062adaebd1cf0b41db29c4e15994ff2897232d2724d835cc9608d3082",
   "stage": "work_in_progress",
   "per_image_native_sha256_is_authoritative": true,
   "images": {
@@ -58,6 +58,15 @@
       ],
       "native_geometry_unchanged": true,
       "model_snapshot_sha256": "cb855283e3f8ebdee86afb0dfa71037a81330fe15f4d8dd566a7d26b3d1c3bdb"
+    },
+    "10_main_kitchen": {
+      "file": "build/renders/10_main_kitchen.png",
+      "sha256": "f505d82443a0d7f22dafa1fc53517371e0dfd8b5440a6d15b4e76532dcc711e1",
+      "width": 1000,
+      "samples": 20,
+      "seconds": 91.07,
+      "native_sha256": "672fc7d062adaebd1cf0b41db29c4e15994ff2897232d2724d835cc9608d3082",
+      "model_snapshot_sha256": "37ef2a7a27d5f0647c85f70c64615cbdc138bed5e952e0ee9a9cea10e7f62708"
     }
   },
   "model_snapshots": {
@@ -83,6 +92,123 @@
         {
           "path": "build/blender/layers/20-fixed-fittings.blend",
           "sha256": "c8dd0704adddf2bcf0ee13e20659a658db227539a55469977725188aa7de3859"
+        },
+        {
+          "path": "build/blender/layers/30-furniture-placeholders.blend",
+          "sha256": "7f60a0a7a37b4163b2ef5729f5ffe353c7a681e87697902f1e48247f4d1fa2c0"
+        },
+        {
+          "path": "build/blender/layers/40-landscape-01.blend",
+          "sha256": "f6da2f6baefd4879d84d455eb229218539fd257bef93df665bcffcaaeab197f1"
+        },
+        {
+          "path": "build/blender/layers/40-landscape-02.blend",
+          "sha256": "1785851e2dc4995d503ead85c750e9daa87c50765029065089885aa77a7969f3"
+        },
+        {
+          "path": "build/blender/layers/40-landscape-03.blend",
+          "sha256": "8ddc5a245732e35cb23403899e021355e38b20beff25a17130d9e72c0f020357"
+        },
+        {
+          "path": "build/blender/layers/40-landscape-04.blend",
+          "sha256": "25078694cc3a5638dcc240d9afd759445e9a07de7ad99866fbd2654bc1d84280"
+        },
+        {
+          "path": "build/blender/layers/40-landscape-05.blend",
+          "sha256": "bc00e374c5d7b8fa26b6ddde8ce3e7faec68619497acfa6a2bfe3a0ae02f917c"
+        },
+        {
+          "path": "build/blender/layers/40-landscape-06.blend",
+          "sha256": "70dcb9b31c526b97492c61bf56412a6155c9a73b9bda8249105bc58bf79da710"
+        },
+        {
+          "path": "build/blender/layers/40-landscape-07.blend",
+          "sha256": "f0fb82fa815d4418c32620870611b79dbe41f42af26a0c4661a5222af298016d"
+        },
+        {
+          "path": "build/blender/layers/40-landscape-08.blend",
+          "sha256": "e0981c0090490ead5eb307c04a2831f4822ab89502c10bd374232d2ded2cdf06"
+        },
+        {
+          "path": "build/blender/layers/40-landscape-09.blend",
+          "sha256": "2b6b57f321023003b1e786f3ce3ab3aff067b9114870222a5a78dd2549f4b9a9"
+        },
+        {
+          "path": "build/blender/layers/40-landscape-10.blend",
+          "sha256": "f1b4db1699e3dd4930010ee7af4fa8d612f91993874a673acf17509c4c54109e"
+        },
+        {
+          "path": "build/blender/layers/50-neighborhood-01.blend",
+          "sha256": "625b24dc7bd7fe60965ef677282bc8fb14dabd42cf03ed2a3f76f516bdbedddd"
+        },
+        {
+          "path": "build/blender/layers/50-neighborhood-02.blend",
+          "sha256": "d7d5015f07741a2cafc0b6c21107741656be7309d78facb76418099f18f00b74"
+        },
+        {
+          "path": "build/blender/layers/50-neighborhood-03.blend",
+          "sha256": "053c11e64d6dc9004ff600b05bd2d015015fa854e4db0c14c48c5b12f11bf15c"
+        },
+        {
+          "path": "build/blender/layers/50-neighborhood-04.blend",
+          "sha256": "d34ee96285df4480d13b234137d7207e0b150c6ed50c0e9b73d96fa9c202b33f"
+        },
+        {
+          "path": "build/blender/layers/50-neighborhood-05.blend",
+          "sha256": "68dbbd7f815455d70500c82bbd2eb25e975bbd2fda52321f70c0054076b7fdb5"
+        },
+        {
+          "path": "build/blender/layers/50-neighborhood-06.blend",
+          "sha256": "2a083025cf98bc42162603748d4556ab76b895c55ec354d0b969ddb1147dccea"
+        },
+        {
+          "path": "build/blender/layers/50-neighborhood-07.blend",
+          "sha256": "0c323c5c7db043d9a923b213f6bd29999e2978ca6899473090691fca632e2b21"
+        },
+        {
+          "path": "build/blender/layers/50-neighborhood-08.blend",
+          "sha256": "5af327eca78fdff0cd8f691a637663702c950a6c421e06f833e59cf31317a866"
+        },
+        {
+          "path": "build/blender/layers/50-neighborhood-09.blend",
+          "sha256": "98451a35c44f60c8d8bd49adcfdf3acd7df2e25c86d012e649aee58ccc520beb"
+        },
+        {
+          "path": "build/blender/layers/50-neighborhood-10.blend",
+          "sha256": "8e6ebf0a1a0d59107a7b0406039a21b6ace598fb7f38b335204817663aabc6a0"
+        },
+        {
+          "path": "build/blender/layers/shared-materials.blend",
+          "sha256": "3281715b6a21ca15a555fa17761a624241a745ca4ada9a81028755e16fce35a9"
+        },
+        {
+          "path": "build/blender/layers/shared-meshes.blend",
+          "sha256": "94962351d8cf659c1ba407edccb19aeb2d3dc38882329f61bdd9693d96930bf3"
+        }
+      ]
+    },
+    "37ef2a7a27d5f0647c85f70c64615cbdc138bed5e952e0ee9a9cea10e7f62708": {
+      "sha256": "37ef2a7a27d5f0647c85f70c64615cbdc138bed5e952e0ee9a9cea10e7f62708",
+      "files": [
+        {
+          "path": "build/blender/angora21-working.blend",
+          "sha256": "672fc7d062adaebd1cf0b41db29c4e15994ff2897232d2724d835cc9608d3082"
+        },
+        {
+          "path": "build/blender/layers/00-source-reference.blend",
+          "sha256": "7bd80a29902b1b6b9906ad8f06d205df1781dec75f7c11abe2383facc1d8ef7c"
+        },
+        {
+          "path": "build/blender/layers/10-architecture.blend",
+          "sha256": "922d073901a9747253e637bc1637e26c7874dff6b8a3babe2292f56ea1a6c65a"
+        },
+        {
+          "path": "build/blender/layers/15-exterior-details.blend",
+          "sha256": "6db6aa01da0f5540c63ac58825a414b6eaa6c1883d538e72e7a965a00d3df1e4"
+        },
+        {
+          "path": "build/blender/layers/20-fixed-fittings.blend",
+          "sha256": "af7a0e732b38168548346960e4cf3ee3599526e0bd61d916528c80ddf396f727"
         },
         {
           "path": "build/blender/layers/30-furniture-placeholders.blend",

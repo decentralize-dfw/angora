@@ -1,11 +1,11 @@
 {
   "master": "build/blender/angora21-working.blend",
-  "master_sha256": "cc0d32e5aec10964a7381a2f2bba5e28b74650e5a5e26bbd1e9d107d5b736130",
-  "source_monolithic_sha256": "1a44152fbe3e521aabd9d62ad426e41f342f3b8bb0be612c40fe0c6863d72cfd",
-  "source_objects": 4920,
-  "linked_scene_objects": 4920,
-  "source_vertices": 9316752,
-  "linked_vertices": 9316752,
+  "master_sha256": "672fc7d062adaebd1cf0b41db29c4e15994ff2897232d2724d835cc9608d3082",
+  "source_monolithic_sha256": "d86c7863c79ee265012376a68509d96f11f9175bb0acf923800ab4f9f30b2548",
+  "source_objects": 5118,
+  "linked_scene_objects": 5118,
+  "source_vertices": 9320144,
+  "linked_vertices": 9320144,
   "files": [
     {
       "path": "build/blender/layers/shared-materials.blend",
@@ -39,8 +39,8 @@
     },
     {
       "path": "build/blender/layers/20-fixed-fittings.blend",
-      "bytes": 494137,
-      "sha256": "c8dd0704adddf2bcf0ee13e20659a658db227539a55469977725188aa7de3859",
+      "bytes": 578724,
+      "sha256": "af7a0e732b38168548346960e4cf3ee3599526e0bd61d916528c80ddf396f727",
       "collection": "20_FIXED_FITTINGS"
     },
     {
@@ -173,7 +173,7 @@
   "maximum_library_bytes": 8695675,
   "usage": "Open the master with the layers folder alongside it. Geometry libraries are individually editable.",
   "automation_required": false,
-  "review_revision": "14-color-encoding-WC-placement",
+  "review_revision": "15-entrance-kitchen-joinery",
   "review_geometry_bounds_m": {
     "B0 WC navy vanity": [
       [
@@ -608,6 +608,5 @@
       ]
     ]
   },
-  "camera_only_revision": false,
-  "delivery_snapshot_sha256": "cb855283e3f8ebdee86afb0dfa71037a81330fe15f4d8dd566a7d26b3d1c3bdb"
+  "camera_only_revision": false
 }

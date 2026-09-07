@@ -1,0 +1,9 @@
+{
+  "source_asset": "build/web/floor-1.glb",
+  "source_asset_sha256": "d1a329a6997b31b4d841bfaf7b9393256ee8e5e2417cfe02485b4b9414365ce0",
+  "section_height_above_floor_m": 1.6,
+  "image": "build/renders/web-floor-1.png",
+  "image_sha256": "035f7c489229dc19f4556c8604de38b942a6d5876d16a5a874a547a52cf05420",
+  "renderer": "Blender Cycles",
+  "browser_screenshot": false
+}

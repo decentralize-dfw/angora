@@ -298,6 +298,9 @@ def refine(m,cols):
     for obj in master.all_objects:obj['floor_index']=2
     from rooms_refinement import refine_rooms
     refine_rooms(m,cols)
+    from refine_entrance_kitchen import apply as refine_entrance_joinery
+    bpy.context.view_layer.update()
+    refine_entrance_joinery()
     from bathrooms_refinement import refine_bathrooms
     refine_bathrooms(m,cols)
     from lighting_refinement import refine_lighting

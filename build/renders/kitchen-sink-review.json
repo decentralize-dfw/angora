@@ -1,0 +1,20 @@
+{
+  "image": "/workspace/scratch/3317f828a850/angora/build/renders/kitchen-sink-review.png",
+  "source_file": "/workspace/scratch/3317f828a850/angora/build/intermediate/angora21-monolithic.blend",
+  "source_sha256": "d86c7863c79ee265012376a68509d96f11f9175bb0acf923800ab4f9f30b2548",
+  "camera_position": [
+    -3.03,
+    -1.97,
+    4.69
+  ],
+  "camera_target": [
+    -5.2,
+    -1.8,
+    4.4
+  ],
+  "lens_mm": 22,
+  "samples": 20,
+  "seconds": 89.34,
+  "inspection_only": true,
+  "photo_matching_complete": false
+}
