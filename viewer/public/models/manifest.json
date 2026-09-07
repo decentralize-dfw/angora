@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "source_native_sha256": "1a44152fbe3e521aabd9d62ad426e41f342f3b8bb0be612c40fe0c6863d72cfd",
+  "units": "metres",
+  "coordinate_system": "glTF_Y_up",
+  "floor_labels": [
+    "Bodrum",
+    "Giriş",
+    "1. kat",
+    "Çatı"
+  ],
+  "floor_datums_m": [
+    0.0,
+    3.0996,
+    6.3714,
+    9.4705
+  ],
+  "cut_height_m": 1.6,
+  "assets": [
+    {
+      "id": "floor-0",
+      "file": "floor-0.glb",
+      "bytes": 2971644,
+      "sha256": "41c3af7da800377ea50b3f1c6277f58e53c9b068df3bb6a8b6f68569822a8691",
+      "source_objects": 905,
+      "draw_groups": 28,
+      "bounds_native_m": [
+        [
+          -7.142899990081787,
+          -6.4730000495910645,
+          -0.5
+        ],
+        [
+          8.833200454711914,
+          10.392999649047852,
+          1.600000262260437
+        ]
+      ],
+      "triangles": 82603,
+      "source_native_sha256": "1a44152fbe3e521aabd9d62ad426e41f342f3b8bb0be612c40fe0c6863d72cfd",
+      "section_elevation_m": 1.6,
+      "section_caps": false,
+      "floor_elevation_m": 0.0,
+      "cut_height_m": 1.6
+    },
+    {
+      "id": "floor-1",
+      "file": "floor-1.glb",
+      "bytes": 4564468,
+      "sha256": "11c8cf3359a172d8a274cbef75c2e2a273335c08c07284b092b65ea8302d9bb5",
+      "source_objects": 418,
+      "draw_groups": 30,
+      "bounds_native_m": [
+        [
+          -6.154238224029541,
+          -6.4730000495910645,
+          2.4995999336242676
+        ],
+        [
+          7.518400192260742,
+          10.392999649047852,
+          4.6996002197265625
+        ]
+      ],
+      "triangles": 145190,
+      "source_native_sha256": "1a44152fbe3e521aabd9d62ad426e41f342f3b8bb0be612c40fe0c6863d72cfd",
+      "section_elevation_m": 4.6996,
+      "section_caps": false,
+      "floor_elevation_m": 3.0996,
+      "cut_height_m": 1.6
+    },
+    {
+      "id": "floor-2",
+      "file": "floor-2.glb",
+      "bytes": 5680608,
+      "sha256": "d12adb6dbf16f3f1ca8e49df2bd460755610ae6cf760f3980a2f7b05faeefb13",
+      "source_objects": 387,
+      "draw_groups": 39,
+      "bounds_native_m": [
+        [
+          -6.382711887359619,
+          -6.4730000495910645,
+          5.890999794006348
+        ],
+        [
+          5.811314105987549,
+          10.392999649047852,
+          7.971399784088135
+        ]
+      ],
+      "triangles": 106099,
+      "source_native_sha256": "1a44152fbe3e521aabd9d62ad426e41f342f3b8bb0be612c40fe0c6863d72cfd",
+      "section_elevation_m": 7.971400000000001,
+      "section_caps": false,
+      "floor_elevation_m": 6.371400000000001,
+      "cut_height_m": 1.6
+    },
+    {
+      "id": "floor-3",
+      "file": "floor-3.glb",
+      "bytes": 3628372,
+      "sha256": "d4904c2c9d823a6ca5f9a1f07144f37691c26ab1ef70a2f8eb95964edbe61fd9",
+      "source_objects": 156,
+      "draw_groups": 27,
+      "bounds_native_m": [
+        [
+          -6.700300216674805,
+          -5.567999839782715,
+          8.870499610900879
+        ],
+        [
+          4.858465671539307,
+          10.894000053405762,
+          11.070508003234863
+        ]
+      ],
+      "triangles": 29354,
+      "source_native_sha256": "1a44152fbe3e521aabd9d62ad426e41f342f3b8bb0be612c40fe0c6863d72cfd",
+      "section_elevation_m": 11.0705,
+      "section_caps": false,
+      "floor_elevation_m": 9.4705,
+      "cut_height_m": 1.6
+    },
+    {
+      "id": "building",
+      "file": "building.glb",
+      "bytes": 7289156,
+      "sha256": "47ea006f56f37bc6a93a7fcb821ca848b09068fd5fa0cf2451423d557eecae63",
+      "source_objects": 379,
+      "draw_groups": 25,
+      "bounds_native_m": [
+        [
+          -9.480960845947266,
+          -10.90999984741211,
+          -4.0
+        ],
+        [
+          26.54096031188965,
+          29.055761337280273,
+          14.420000076293945
+        ]
+      ],
+      "triangles": 816544,
+      "source_native_sha256": "1a44152fbe3e521aabd9d62ad426e41f342f3b8bb0be612c40fe0c6863d72cfd",
+      "section_elevation_m": null,
+      "section_caps": false
+    },
+    {
+      "id": "neighborhood",
+      "file": "neighborhood.glb",
+      "bytes": 11575060,
+      "sha256": "3ffba627ae415bac6b3b33f49d5765d982ffd3946b8b692e506a16a8079b1f5f",
+      "source_objects": 1736,
+      "draw_groups": 13,
+      "bounds_native_m": [
+        [
+          -139.26348876953125,
+          -167.48959350585938,
+          -16.052898406982422
+        ],
+        [
+          173.75607299804688,
+          147.64918518066406,
+          27.40839958190918
+        ]
+      ],
+      "triangles": 1139445,
+      "source_native_sha256": "1a44152fbe3e521aabd9d62ad426e41f342f3b8bb0be612c40fe0c6863d72cfd",
+      "section_elevation_m": null,
+      "section_caps": false
+    }
+  ],
+  "mobile_lod": true,
+  "photo_matching_complete": false,
+  "source_repository": "https://github.com/decentralize-dfw/angora",
+  "geometry_source": "build/intermediate/angora21-monolithic.blend",
+  "linked_master_sha256": "cc0d32e5aec10964a7381a2f2bba5e28b74650e5a5e26bbd1e9d107d5b736130",
+  "native_source": "build/blender/angora21-working.blend"
+}

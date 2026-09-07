@@ -1,0 +1,140 @@
+"""Derive mobile review meshes from the native model; never edit the source.
+
+Each floor is cut at its registered floor datum + 1.6 m and merged by material
+and furniture category. The full-detail native files remain authoritative.
+"""
+import bpy, bmesh, json, hashlib, sys, math
+from pathlib import Path
+from mathutils import Vector
+ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'build/web';OUT.mkdir(parents=True,exist_ok=True)
+source=Path(bpy.data.filepath);source_hash=hashlib.sha256(source.read_bytes()).hexdigest()
+scene=bpy.context.scene;deps=bpy.context.evaluated_depsgraph_get()
+floors=[0.,3.0996,6.3714,9.4705]
+furniture=set(bpy.data.collections['30_FURNITURE_PLACEHOLDERS'].all_objects)
+
+def geometry(items):return {o for o in items if o.type in {'MESH','CURVE'} and not o.hide_render}
+def floor_of(o):
+    if o.get('floor_index') is not None:return int(o['floor_index'])
+    z=min((o.matrix_world@Vector(p)).z for p in o.bound_box)
+    return max(0,min(3,sum(z>=f-.1 for f in floors)-1))
+
+indoor=set()
+for name in ['10_ARCHITECTURE','20_FIXED_FITTINGS','30_FURNITURE_PLACEHOLDERS']:
+    indoor|=geometry(bpy.data.collections[name].all_objects)
+architect=geometry(bpy.data.collections['10_ARCHITECTURE'].all_objects)
+exterior=geometry(bpy.data.collections['15_EXTERIOR_DETAILS'].all_objects)
+garden=geometry(bpy.data.collections['40_LANDSCAPE'].all_objects)
+hood=geometry(bpy.data.collections['50_NEIGHBORHOOD'].all_objects)
+
+def plant(o):
+    words=' '.join([o.name]+[c.name for c in o.users_collection]).lower()
+    return any(s in words for s in ['foliage','leaves','grass blades','broadleaf','leaf cluster','planting','tree crown'])
+
+# Retain the CAD family geometry and graded ground. Dense leaves are omitted
+# from this initial neighborhood LOD; they remain in the native review model.
+hood={o for o in hood if not plant(o) and not any(s in o.name for s in ['SHUTTER AİM','TAVAN','DUVAR KAPLAMA','ZEMİN KAPLAMA'])}
+building={o for o in architect|exterior|garden if not plant(o)}
+
+for image in bpy.data.images:
+    if image.type=='IMAGE' and max(image.size)>512:
+        ratio=512/max(image.size);image.scale(max(1,round(image.size[0]*ratio)),max(1,round(image.size[1]*ratio)));image.pack()
+for material in bpy.data.materials:
+    if not material.use_nodes:continue
+    nt=material.node_tree;bs=next((n for n in nt.nodes if n.type=='BSDF_PRINCIPLED'),None)
+    out=next((n for n in nt.nodes if n.type=='OUTPUT_MATERIAL'),None)
+    if bs and out:nt.links.new(bs.outputs['BSDF'],out.inputs['Surface'])
+
+preview=bpy.data.collections.new('Temporary web delivery');scene.collection.children.link(preview)
+for o in building|hood:
+    if o.type=='CURVE':o.data.resolution_u=1;o.data.bevel_resolution=0
+bpy.context.view_layer.update()
+deps=bpy.context.evaluated_depsgraph_get()
+records=[]
+
+def export_view(name,objects,cut=None,lower=None):
+    print('WEB_VIEW_START',name,len(objects),flush=True)
+    buckets={};source_count=0;max_z=-math.inf
+    for o in sorted(objects,key=lambda x:x.name):
+        ev=o.evaluated_get(deps)
+        try:me=ev.to_mesh(preserve_all_data_layers=True,depsgraph=deps)
+        except RuntimeError:continue
+        if not me or not me.polygons:
+            ev.to_mesh_clear();continue
+        bm=bmesh.new();bm.from_mesh(me);bm.transform(o.matrix_world)
+        mats=list(me.materials);uv=bm.loops.layers.uv.active
+        if cut is not None:
+            bmesh.ops.bisect_plane(bm,geom=list(bm.verts)+list(bm.edges)+list(bm.faces),dist=.00001,plane_co=(0,0,cut),plane_no=(0,0,1),clear_outer=True,clear_inner=False)
+            bmesh.ops.bisect_plane(bm,geom=list(bm.verts)+list(bm.edges)+list(bm.faces),dist=.00001,plane_co=(0,0,lower),plane_no=(0,0,1),clear_outer=False,clear_inner=True)
+        # Dissolve coplanar CAD triangulation without changing silhouettes.
+        if len(bm.faces)>1000:
+            if name in {'neighborhood','building'}:
+                bmesh.ops.remove_doubles(bm,verts=list(bm.verts),dist=.00005)
+            bmesh.ops.dissolve_limit(bm,angle_limit=.035 if name=='neighborhood' else .004,verts=list(bm.verts),edges=list(bm.edges),delimit={'MATERIAL'} if name=='neighborhood' else {'MATERIAL','UV','NORMAL'})
+        bm.verts.ensure_lookup_table();bm.verts.index_update()
+        local={};category='furniture' if o in furniture else 'fixed'
+        for face in bm.faces:
+            if len(face.verts)<3:continue
+            mat=mats[min(face.material_index,len(mats)-1)] if mats else None
+            if mat is None:continue
+            key=(mat.name,category);bucket=buckets.setdefault(key,{'mat':mat,'v':[],'f':[],'uv':[],'smooth':[]})
+            indices=[]
+            for loop in face.loops:
+                vk=(key,loop.vert.index)
+                if vk not in local:
+                    local[vk]=len(bucket['v']);bucket['v'].append(tuple(loop.vert.co));max_z=max(max_z,loop.vert.co.z)
+                indices.append(local[vk]);bucket['uv'].append(tuple(loop[uv].uv) if uv else (0.,0.))
+            bucket['f'].append(indices);bucket['smooth'].append(face.smooth)
+        bm.free();ev.to_mesh_clear();source_count+=1
+    produced=[];bounds_min=[math.inf]*3;bounds_max=[-math.inf]*3
+    for (mat_name,category),b in buckets.items():
+        if not b['f']:continue
+        me=bpy.data.meshes.new(name+' '+mat_name);me.from_pydata(b['v'],[],b['f']);me.materials.append(b['mat']);me.update()
+        uv=me.uv_layers.new(name='UVMap')
+        uv.data.foreach_set('uv',[v for p in b['uv'] for v in p])
+        for p,smooth in zip(me.polygons,b['smooth']):p.use_smooth=smooth
+        obj=bpy.data.objects.new(category+' | '+mat_name,me);preview.objects.link(obj)
+        obj['category']=category;obj['source_native_sha256']=source_hash
+        if cut is not None:obj['section_elevation_m']=cut
+        produced.append(obj)
+        for v in b['v']:
+            for axis in range(3):bounds_min[axis]=min(bounds_min[axis],v[axis]);bounds_max[axis]=max(bounds_max[axis],v[axis])
+    bpy.context.view_layer.update()
+    for o in scene.objects:o.select_set(False)
+    for o in produced:o.select_set(True)
+    path=OUT/(name+'.glb')
+    bpy.ops.export_scene.gltf(filepath=str(path),export_format='GLB',use_selection=True,export_apply=False,
+        export_extras=True,export_cameras=False,export_lights=False,export_yup=True,export_materials='EXPORT',
+        export_draco_mesh_compression_enable=True,export_draco_mesh_compression_level=10 if name=='neighborhood' else 6,
+        export_draco_position_quantization=14 if name=='neighborhood' else 16,
+        export_draco_normal_quantization=8 if name=='neighborhood' else 10,
+        export_draco_texcoord_quantization=10 if name=='neighborhood' else 12)
+    raw=path.read_bytes();header=json.loads(raw[20:20+int.from_bytes(raw[12:16],'little')].decode().rstrip('\0 '))
+    record={'id':name,'file':path.name,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),
+        'source_objects':source_count,'draw_groups':len(produced),'bounds_native_m':[bounds_min,bounds_max],
+        'triangles':sum(sum(p.loop_total-2 for p in o.data.polygons) for o in produced),
+        'source_native_sha256':source_hash,'section_elevation_m':cut,'section_caps':False}
+    if cut is not None:
+        assert max_z<=cut+.001,(name,max_z,cut)
+        record['floor_elevation_m']=cut-1.6;record['cut_height_m']=1.6
+    records.append(record)
+    print('WEB_VIEW_EXPORTED',json.dumps(record),flush=True)
+    for o in produced:
+        data=o.data;bpy.data.objects.remove(o,do_unlink=True);bpy.data.meshes.remove(data)
+
+args=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
+if '--context-only' in args:
+    records.extend(r for r in json.loads((OUT/'manifest.json').read_text())['assets'] if r['id'].startswith('floor-'))
+else:
+    for i,z in enumerate(floors):export_view('floor-'+str(i),{o for o in indoor if floor_of(o)==i},z+1.6,z-.6)
+export_view('building',building)
+export_view('neighborhood',hood)
+manifest={'version':1,'source_native_sha256':source_hash,'units':'metres','coordinate_system':'glTF_Y_up',
+          'floor_labels':['Bodrum','Giriş','1. kat','Çatı'],'floor_datums_m':floors,'cut_height_m':1.6,
+          'assets':records,'mobile_lod':True,'photo_matching_complete':False,
+          'source_repository':'https://github.com/decentralize-dfw/angora',
+          'geometry_source':'build/intermediate/angora21-monolithic.blend',
+          'linked_master_sha256':hashlib.sha256((ROOT/'build/blender/angora21-working.blend').read_bytes()).hexdigest(),
+          'native_source':'build/blender/angora21-working.blend'}
+path=OUT/'manifest.json';tmp=path.with_suffix('.tmp');tmp.write_text(json.dumps(manifest,ensure_ascii=False,indent=2));tmp.replace(path)
+assert hashlib.sha256(source.read_bytes()).hexdigest()==source_hash,'Native source changed during web export'
+print('WEB_DELIVERY_COMPLETE',sum(r['bytes'] for r in records),flush=True)
