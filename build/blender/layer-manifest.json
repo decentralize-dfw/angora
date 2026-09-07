@@ -1,0 +1,176 @@
+{
+  "master": "build/blender/angora21-working.blend",
+  "master_sha256": "53d6c3f4227fd7be193dc6225795244090989eb311d817a7ec3ba860213e094c",
+  "source_monolithic_sha256": "6ad91019713d3c0ae70b5b8eb8c56f47b2ca1236aaa77bc73dd4aa961758f906",
+  "source_objects": 4897,
+  "linked_scene_objects": 4897,
+  "source_vertices": 9313511,
+  "linked_vertices": 9313511,
+  "files": [
+    {
+      "path": "build/blender/layers/shared-materials.blend",
+      "bytes": 8701692,
+      "sha256": "54d207c1594e948ef338a81cdb106169e4378d64dd71fca71a25274ff704647f",
+      "kind": "materials"
+    },
+    {
+      "path": "build/blender/layers/shared-meshes.blend",
+      "bytes": 7065488,
+      "sha256": "94962351d8cf659c1ba407edccb19aeb2d3dc38882329f61bdd9693d96930bf3",
+      "kind": "shared_meshes"
+    },
+    {
+      "path": "build/blender/layers/00-source-reference.blend",
+      "bytes": 6081769,
+      "sha256": "7bd80a29902b1b6b9906ad8f06d205df1781dec75f7c11abe2383facc1d8ef7c",
+      "collection": "00_SOURCE_REFERENCE"
+    },
+    {
+      "path": "build/blender/layers/10-architecture.blend",
+      "bytes": 7413801,
+      "sha256": "95f50f7eaac0e9daa9addb6d6fd16c08750171efd1b8b73aa46af9def652f34a",
+      "collection": "10_ARCHITECTURE"
+    },
+    {
+      "path": "build/blender/layers/15-exterior-details.blend",
+      "bytes": 1104557,
+      "sha256": "6db6aa01da0f5540c63ac58825a414b6eaa6c1883d538e72e7a965a00d3df1e4",
+      "collection": "15_EXTERIOR_DETAILS"
+    },
+    {
+      "path": "build/blender/layers/20-fixed-fittings.blend",
+      "bytes": 425430,
+      "sha256": "f02db33eee7f7c9ac3a37baa0366fff396747a703d400de6e133ee618cf4ced5",
+      "collection": "20_FIXED_FITTINGS"
+    },
+    {
+      "path": "build/blender/layers/30-furniture-placeholders.blend",
+      "bytes": 487757,
+      "sha256": "7f60a0a7a37b4163b2ef5729f5ffe353c7a681e87697902f1e48247f4d1fa2c0",
+      "collection": "30_FURNITURE_PLACEHOLDERS"
+    },
+    {
+      "path": "build/blender/layers/40-landscape-01.blend",
+      "bytes": 3213851,
+      "sha256": "f6da2f6baefd4879d84d455eb229218539fd257bef93df665bcffcaaeab197f1",
+      "collection": "40_LANDSCAPE / part 01"
+    },
+    {
+      "path": "build/blender/layers/40-landscape-02.blend",
+      "bytes": 6962391,
+      "sha256": "1785851e2dc4995d503ead85c750e9daa87c50765029065089885aa77a7969f3",
+      "collection": "40_LANDSCAPE / part 02"
+    },
+    {
+      "path": "build/blender/layers/40-landscape-03.blend",
+      "bytes": 4891417,
+      "sha256": "bf366c4b66655925dad5f43ce2b66ccad3e409efeec85ffeb1f19a267e1c7759",
+      "collection": "40_LANDSCAPE / part 03"
+    },
+    {
+      "path": "build/blender/layers/40-landscape-04.blend",
+      "bytes": 1192970,
+      "sha256": "25078694cc3a5638dcc240d9afd759445e9a07de7ad99866fbd2654bc1d84280",
+      "collection": "40_LANDSCAPE / part 04"
+    },
+    {
+      "path": "build/blender/layers/40-landscape-05.blend",
+      "bytes": 4730154,
+      "sha256": "bc00e374c5d7b8fa26b6ddde8ce3e7faec68619497acfa6a2bfe3a0ae02f917c",
+      "collection": "40_LANDSCAPE / part 05"
+    },
+    {
+      "path": "build/blender/layers/40-landscape-06.blend",
+      "bytes": 4713593,
+      "sha256": "70dcb9b31c526b97492c61bf56412a6155c9a73b9bda8249105bc58bf79da710",
+      "collection": "40_LANDSCAPE / part 06"
+    },
+    {
+      "path": "build/blender/layers/40-landscape-07.blend",
+      "bytes": 4690888,
+      "sha256": "f0fb82fa815d4418c32620870611b79dbe41f42af26a0c4661a5222af298016d",
+      "collection": "40_LANDSCAPE / part 07"
+    },
+    {
+      "path": "build/blender/layers/40-landscape-08.blend",
+      "bytes": 4680624,
+      "sha256": "e0981c0090490ead5eb307c04a2831f4822ab89502c10bd374232d2ded2cdf06",
+      "collection": "40_LANDSCAPE / part 08"
+    },
+    {
+      "path": "build/blender/layers/40-landscape-09.blend",
+      "bytes": 4600282,
+      "sha256": "2b6b57f321023003b1e786f3ce3ab3aff067b9114870222a5a78dd2549f4b9a9",
+      "collection": "40_LANDSCAPE / part 09"
+    },
+    {
+      "path": "build/blender/layers/40-landscape-10.blend",
+      "bytes": 94218,
+      "sha256": "f1b4db1699e3dd4930010ee7af4fa8d612f91993874a673acf17509c4c54109e",
+      "collection": "40_LANDSCAPE / part 10"
+    },
+    {
+      "path": "build/blender/layers/50-neighborhood-01.blend",
+      "bytes": 2050456,
+      "sha256": "625b24dc7bd7fe60965ef677282bc8fb14dabd42cf03ed2a3f76f516bdbedddd",
+      "collection": "50_NEIGHBORHOOD / part 01"
+    },
+    {
+      "path": "build/blender/layers/50-neighborhood-02.blend",
+      "bytes": 4373307,
+      "sha256": "d7d5015f07741a2cafc0b6c21107741656be7309d78facb76418099f18f00b74",
+      "collection": "50_NEIGHBORHOOD / part 02"
+    },
+    {
+      "path": "build/blender/layers/50-neighborhood-03.blend",
+      "bytes": 4372628,
+      "sha256": "053c11e64d6dc9004ff600b05bd2d015015fa854e4db0c14c48c5b12f11bf15c",
+      "collection": "50_NEIGHBORHOOD / part 03"
+    },
+    {
+      "path": "build/blender/layers/50-neighborhood-04.blend",
+      "bytes": 4881387,
+      "sha256": "d34ee96285df4480d13b234137d7207e0b150c6ed50c0e9b73d96fa9c202b33f",
+      "collection": "50_NEIGHBORHOOD / part 04"
+    },
+    {
+      "path": "build/blender/layers/50-neighborhood-05.blend",
+      "bytes": 4922683,
+      "sha256": "68dbbd7f815455d70500c82bbd2eb25e975bbd2fda52321f70c0054076b7fdb5",
+      "collection": "50_NEIGHBORHOOD / part 05"
+    },
+    {
+      "path": "build/blender/layers/50-neighborhood-06.blend",
+      "bytes": 4862091,
+      "sha256": "2a083025cf98bc42162603748d4556ab76b895c55ec354d0b969ddb1147dccea",
+      "collection": "50_NEIGHBORHOOD / part 06"
+    },
+    {
+      "path": "build/blender/layers/50-neighborhood-07.blend",
+      "bytes": 4887124,
+      "sha256": "0c323c5c7db043d9a923b213f6bd29999e2978ca6899473090691fca632e2b21",
+      "collection": "50_NEIGHBORHOOD / part 07"
+    },
+    {
+      "path": "build/blender/layers/50-neighborhood-08.blend",
+      "bytes": 4858999,
+      "sha256": "5af327eca78fdff0cd8f691a637663702c950a6c421e06f833e59cf31317a866",
+      "collection": "50_NEIGHBORHOOD / part 08"
+    },
+    {
+      "path": "build/blender/layers/50-neighborhood-09.blend",
+      "bytes": 4870125,
+      "sha256": "98451a35c44f60c8d8bd49adcfdf3acd7df2e25c86d012e649aee58ccc520beb",
+      "collection": "50_NEIGHBORHOOD / part 09"
+    },
+    {
+      "path": "build/blender/layers/50-neighborhood-10.blend",
+      "bytes": 989678,
+      "sha256": "8e6ebf0a1a0d59107a7b0406039a21b6ace598fb7f38b335204817663aabc6a0",
+      "collection": "50_NEIGHBORHOOD / part 10"
+    }
+  ],
+  "maximum_library_bytes": 8701692,
+  "usage": "Open the master with the layers folder alongside it. Geometry libraries are individually editable.",
+  "automation_required": false
+}
