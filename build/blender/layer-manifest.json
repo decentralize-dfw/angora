@@ -1,7 +1,7 @@
 {
   "master": "build/blender/angora21-working.blend",
-  "master_sha256": "ed0dc217981c049e079b009eade5d9633295983834592664bad30b52b6e6edcf",
-  "source_monolithic_sha256": "d7433ad90b14d316150be52d4ea581c9036493d436c98ce1b22aa946614a75e7",
+  "master_sha256": "cc0d32e5aec10964a7381a2f2bba5e28b74650e5a5e26bbd1e9d107d5b736130",
+  "source_monolithic_sha256": "1a44152fbe3e521aabd9d62ad426e41f342f3b8bb0be612c40fe0c6863d72cfd",
   "source_objects": 4920,
   "linked_scene_objects": 4920,
   "source_vertices": 9316752,
@@ -9,8 +9,8 @@
   "files": [
     {
       "path": "build/blender/layers/shared-materials.blend",
-      "bytes": 8698377,
-      "sha256": "70dc133daff83273acc779c4152d20f930d65a9ac457707a28a813fd0db2a4f0",
+      "bytes": 8695675,
+      "sha256": "3281715b6a21ca15a555fa17761a624241a745ca4ada9a81028755e16fce35a9",
       "kind": "materials"
     },
     {
@@ -170,10 +170,10 @@
       "collection": "50_NEIGHBORHOOD / part 10"
     }
   ],
-  "maximum_library_bytes": 8698377,
+  "maximum_library_bytes": 8695675,
   "usage": "Open the master with the layers folder alongside it. Geometry libraries are individually editable.",
   "automation_required": false,
-  "review_revision": "12-pool-kitchen-photo-review",
+  "review_revision": "14-color-encoding-WC-placement",
   "review_geometry_bounds_m": {
     "B0 WC navy vanity": [
       [
@@ -608,5 +608,6 @@
       ]
     ]
   },
-  "camera_only_revision": true
+  "camera_only_revision": false,
+  "delivery_snapshot_sha256": "cb855283e3f8ebdee86afb0dfa71037a81330fe15f4d8dd566a7d26b3d1c3bdb"
 }

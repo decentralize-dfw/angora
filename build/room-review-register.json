@@ -1,5 +1,5 @@
 {
-  "native_master_sha256": "ed0dc217981c049e079b009eade5d9633295983834592664bad30b52b6e6edcf",
+  "native_master_sha256": "cc0d32e5aec10964a7381a2f2bba5e28b74650e5a5e26bbd1e9d107d5b736130",
   "phase_1_complete": false,
   "source_photo_files": 202,
   "unique_source_photos": 184,
@@ -519,12 +519,23 @@
       "cameras": [
         "10_main_kitchen"
       ],
-      "review_state": "current_revision_photo_review_pending",
+      "review_state": "reference_geometry_compared_current_material_review_pending",
       "open_items": [
-        "Güncel sahnede fotoğrafla oda karşılaştırması"
+        "Dolap taçları, camlı kapak çerçeveleri ve kulp oranları",
+        "Karo taşındaki renk/damar çeşitliliği, derz eni ve ölçü eşlemesi",
+        "Bulaşık makinesi, tezgâh cihazları ve buzdolabı oranları",
+        "Karşı duvar vitrini, perde ve radyatörün ayrı kadrajda kontrolü",
+        "Düzeltilmiş renk haritalarıyla güncel iç mekân ışığı karşılaştırması"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": false,
+      "comparison_evidence": {
+        "render": "build/renders/10_main_kitchen.png",
+        "render_sha256": "6cf426f1dbbc514a178741b1d462f9b83d1a14802e54d71a7ae88535996d5cba",
+        "render_stage": "earlier_geometry_review_before_constant_color_correction",
+        "source_contact_sheet": "build/reference/kat_2_ust_mutfak_1.jpg",
+        "source_contact_sheet_sha256": "a614f6c614ac7c6e82cf19d06989a8989442037a20289c933ec1920535c01f3d"
+      }
     },
     {
       "photo_group": "kat_2_ust_salon",
@@ -551,12 +562,23 @@
         "05_main_lounge",
         "09_main_panorama"
       ],
-      "review_state": "current_revision_photo_review_pending",
+      "review_state": "reference_geometry_compared_current_material_review_pending",
       "open_items": [
-        "Güncel sahnede fotoğrafla oda karşılaştırması"
+        "Avize kolları, uç biçimleri, tepe bağlantısı ve ışık şiddeti",
+        "Perde çizgileri ve kumaş, parke renk çeşitliliği ve parlaklığı",
+        "Duvar dekorasyonu, vitrin içeriği ve mobilya gruplarının fotoğraf eşlemesi",
+        "Salon geçişleri ve kot basamağının ayrı kadrajda kontrolü",
+        "Düzeltilmiş renk haritalarıyla güncel iç mekân ışığı karşılaştırması"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": false,
+      "comparison_evidence": {
+        "render": "build/renders/05_main_lounge.png",
+        "render_sha256": "628f734d040498e0b6ec10cb3b6ed7ffb5652e8d0254148f9cde88a4ec5b46cc",
+        "render_stage": "earlier_geometry_review_before_constant_color_correction",
+        "source_contact_sheet": "build/reference/kat_2_ust_salon_1.jpg",
+        "source_contact_sheet_sha256": "523bded31c54208d445a59ac62dbbce30600cf8fc42761387e1f1947f50337e9"
+      }
     },
     {
       "photo_group": "kat_3_banyok",

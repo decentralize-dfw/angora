@@ -11,3 +11,9 @@ ORM uses R = neutral AO, G = roughness, B = metalness. No geometric AO bake is
 claimed. Material repeat sizes are recorded in metres.
 
 Regenerate after the geometry build with Blender running `tools/bake_pbr.py`.
+
+Revision 14 corrects linear-to-sRGB encoding in 62 constant base-color maps.
+The source colors are preserved; this fixes an export darkening error, not a
+new photo-calibration pass. `color-encoding-report.json` records the authored
+linear values and the expected PNG bytes. Normal, roughness, and metalness maps
+are unchanged by this correction.

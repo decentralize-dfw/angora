@@ -1,0 +1,1000 @@
+{
+  "revision": "14-linear-to-srgb-constant-maps",
+  "cause": "Linear RGB values were written directly into byte sRGB base-color images.",
+  "changed": [
+    {
+      "material": "asphalt",
+      "map": "assets/pbr/asphalt-484ed0-basecolor.png",
+      "authored_linear_rgba": [
+        0.0802198201417923,
+        0.08650045841932297,
+        0.09989872574806213,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        80,
+        83,
+        89
+      ],
+      "sha256": "3835a14c456ffea70e6a86e13b64d52fe5291a3b5611c42e97e3ec31ee264400"
+    },
+    {
+      "material": "bark",
+      "map": "assets/pbr/bark-cc86fb-basecolor.png",
+      "authored_linear_rgba": [
+        0.109461709856987,
+        0.09084171056747437,
+        0.05951123684644699,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        93,
+        85,
+        69
+      ],
+      "sha256": "04615f82bd20cb28dad423b67c2d9eb921025cb2a1e8d1cc1d30bae4a80616c2"
+    },
+    {
+      "material": "bath_tile",
+      "map": "assets/pbr/bath-tile-a2f9cd-basecolor.png",
+      "authored_linear_rgba": [
+        0.7011018991470337,
+        0.6583748459815979,
+        0.5711248517036438,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        218,
+        212,
+        199
+      ],
+      "sha256": "4b1671adac0767f22a89138db3ca42948955b3d1218440a6b3fa73279444e20c"
+    },
+    {
+      "material": "Bathroom cream marble",
+      "map": "assets/pbr/bathroom-cream-marble-beab3f-basecolor.png",
+      "authored_linear_rgba": [
+        0.7758222222328186,
+        0.7230551242828369,
+        0.5840784311294556,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        228,
+        221,
+        201
+      ],
+      "sha256": "a8c6c3440d7caa789c917d5bf4883bbb8bcf031f995ff73c7d5864e93082a70a"
+    },
+    {
+      "material": "Bathroom dark walnut",
+      "map": "assets/pbr/bathroom-dark-walnut-025b86-basecolor.png",
+      "authored_linear_rgba": [
+        0.09530746936798096,
+        0.03560131415724754,
+        0.013702083379030228,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        87,
+        53,
+        31
+      ],
+      "sha256": "871eb3244e34c9601bb2f337fadc361d634540c50a263d29f6bd2b389d733bdc"
+    },
+    {
+      "material": "Bathroom lower terracotta",
+      "map": "assets/pbr/bathroom-lower-terracotta-c9b56a-basecolor.png",
+      "authored_linear_rgba": [
+        0.30054378509521484,
+        0.08228270709514618,
+        0.04666508734226227,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        149,
+        81,
+        61
+      ],
+      "sha256": "7d145d912acd65f2145de2e9344b17773f9efe25265b301d3df8a1e27eadf268"
+    },
+    {
+      "material": "Bathroom silver mirror",
+      "map": "assets/pbr/bathroom-silver-mirror-8b7446-basecolor.png",
+      "authored_linear_rgba": [
+        0.838798999786377,
+        0.838798999786377,
+        0.838798999786377,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        236,
+        236,
+        236
+      ],
+      "sha256": "62ff26f2ae8ce5e0d7913159147e49f4f5cd9682c50b6e5abd49dc8ec63b15fb"
+    },
+    {
+      "material": "bed_base",
+      "map": "assets/pbr/bed-base-3e7277-basecolor.png",
+      "authored_linear_rgba": [
+        0.1946178376674652,
+        0.17464740574359894,
+        0.13563333451747894,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        122,
+        116,
+        103
+      ],
+      "sha256": "939d8ee7ef26211511b4861f61d69c7a07337e558527a9a7feb20d0fa84cc2c4"
+    },
+    {
+      "material": "black",
+      "map": "assets/pbr/black-466bc8-basecolor.png",
+      "authored_linear_rgba": [
+        0.007499032188206911,
+        0.008568125776946545,
+        0.009721217676997185,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        21,
+        23,
+        25
+      ],
+      "sha256": "981f501abbbfaaa926388ac238d2d9131c565936b6ff0e49205c132df6ebf71f"
+    },
+    {
+      "material": "blue_fabric",
+      "map": "assets/pbr/blue-fabric-4a358c-basecolor.png",
+      "authored_linear_rgba": [
+        0.21223075687885284,
+        0.2462013214826584,
+        0.28744083642959595,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        127,
+        136,
+        146
+      ],
+      "sha256": "e6feed3c4d422794c0554d6b59bd1b8a5225dd1ee6a92dce55ec8f5d2a545aa0"
+    },
+    {
+      "material": "brass",
+      "map": "assets/pbr/brass-80c48f-basecolor.png",
+      "authored_linear_rgba": [
+        0.3324515223503113,
+        0.19120168685913086,
+        0.05448027700185776,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        156,
+        121,
+        66
+      ],
+      "sha256": "81e412984989c4f6df0c34a2502afcbfad77a86e61fdd64ac4598c72a0cccd50"
+    },
+    {
+      "material": "bulb_warm",
+      "map": "assets/pbr/bulb-warm-c616e4-basecolor.png",
+      "authored_linear_rgba": [
+        1.0,
+        0.8713670969009399,
+        0.5840784311294556,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        255,
+        240,
+        201
+      ],
+      "sha256": "2b2bdb6a1480ae1544475709701d5e3fe5f3a98823596878f04cc7bbb7fbf1dd"
+    },
+    {
+      "material": "burgundy_velvet",
+      "map": "assets/pbr/burgundy-velvet-c5a1f4-basecolor.png",
+      "authored_linear_rgba": [
+        0.07421357184648514,
+        0.009134058840572834,
+        0.016807375475764275,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        77,
+        24,
+        35
+      ],
+      "sha256": "8330338f81237c985e71245454d7afdb659ab13b0585308e9a734320d4075f6d"
+    },
+    {
+      "material": "cabinet_glass",
+      "map": "assets/pbr/cabinet-glass-6142e2-basecolor.png",
+      "authored_linear_rgba": [
+        0.8631572127342224,
+        0.8879231214523315,
+        0.8796223998069763,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        239,
+        242,
+        241
+      ],
+      "sha256": "51f1d5fcd9c44a52369266ffdd65e76b6b896828809058a92950dbfb68f8359e"
+    },
+    {
+      "material": "canopy",
+      "map": "assets/pbr/canopy-2cbc97-basecolor.png",
+      "authored_linear_rgba": [
+        0.13013647496700287,
+        0.18447498977184296,
+        0.1384316086769104,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        101,
+        119,
+        104
+      ],
+      "sha256": "d06a48804943715438ecb4f757dbb37cfaded57cecb526bee94c1b9047e92475"
+    },
+    {
+      "material": "ceiling",
+      "map": "assets/pbr/ceiling-baacee-basecolor.png",
+      "authored_linear_rgba": [
+        0.8879231214523315,
+        0.8549926280975342,
+        0.7912979125976562,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        242,
+        238,
+        230
+      ],
+      "sha256": "9993a0ad7e04299111fea31ac5268258cfb90f8349d70ce2ae5a6bc0060b8fba"
+    },
+    {
+      "material": "ceramic",
+      "map": "assets/pbr/ceramic-70e885-basecolor.png",
+      "authored_linear_rgba": [
+        0.9046611785888672,
+        0.8713670969009399,
+        0.7758222222328186,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        244,
+        240,
+        228
+      ],
+      "sha256": "4f03020ac10647b3c51e6bfbd0bb2082633fe8edd4d704d2b93ef9619dfbccd4"
+    },
+    {
+      "material": "chair_tapestry",
+      "map": "assets/pbr/chair-tapestry-9942d4-basecolor.png",
+      "authored_linear_rgba": [
+        0.18782077729701996,
+        0.15292614698410034,
+        0.09989872574806213,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        120,
+        109,
+        89
+      ],
+      "sha256": "4ae30ad8d9742e00e1a54d74248723dcf942aebe8cc60f941a42007bb518a262"
+    },
+    {
+      "material": "china",
+      "map": "assets/pbr/china-3ab938-basecolor.png",
+      "authored_linear_rgba": [
+        0.8962693810462952,
+        0.8307698965072632,
+        0.7011018991470337,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        243,
+        235,
+        218
+      ],
+      "sha256": "e4ded9fee61872cbd92da7a84a6d93bab0cb20362e37c77f81cab46d2160e51c"
+    },
+    {
+      "material": "chrome",
+      "map": "assets/pbr/chrome-b90d94-basecolor.png",
+      "authored_linear_rgba": [
+        0.423267662525177,
+        0.4564110338687897,
+        0.4677838087081909,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        174,
+        180,
+        182
+      ],
+      "sha256": "da81faeab53248987be919e84e119b79bf1b144733f6bfd4b5a3d9646ba6e4bf"
+    },
+    {
+      "material": "Clay tile 0",
+      "map": "assets/pbr/clay-tile-0-a7d64a-basecolor.png",
+      "authored_linear_rgba": [
+        0.4677838087081909,
+        0.11697066575288773,
+        0.027320891618728638,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        182,
+        96,
+        46
+      ],
+      "sha256": "8c136602db2d1d951f81d93e781ec37ca549dcf62738d52bbf124613d5328513"
+    },
+    {
+      "material": "Clay tile 1",
+      "map": "assets/pbr/clay-tile-1-51c2b9-basecolor.png",
+      "authored_linear_rgba": [
+        0.48514994978904724,
+        0.12477181851863861,
+        0.02955683507025242,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        185,
+        99,
+        48
+      ],
+      "sha256": "4f9141c5bfbc578eb60afb5265f6fb291547c1ca516c186ccf1a5bf33c06b7ad"
+    },
+    {
+      "material": "Clay tile 2",
+      "map": "assets/pbr/clay-tile-2-bdae39-basecolor.png",
+      "authored_linear_rgba": [
+        0.4969329833984375,
+        0.13286831974983215,
+        0.03433980792760849,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        187,
+        102,
+        52
+      ],
+      "sha256": "847ed40645ed06eb513441f1395ac21e5d67ce326a91b3707c16c88cb1051b63"
+    },
+    {
+      "material": "Clay tile 3",
+      "map": "assets/pbr/clay-tile-3-a8b5ba-basecolor.png",
+      "authored_linear_rgba": [
+        0.5028864741325378,
+        0.14126329123973846,
+        0.03688944876194,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        188,
+        105,
+        54
+      ],
+      "sha256": "d2526069bfd0c805f14bcaea0b4051b90e67f1e02bea8dd958a2fdb08e5e3776"
+    },
+    {
+      "material": "Clay tile 4",
+      "map": "assets/pbr/clay-tile-4-140bcd-basecolor.png",
+      "authored_linear_rgba": [
+        0.41788506507873535,
+        0.109461709856987,
+        0.026241222396492958,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        173,
+        93,
+        45
+      ],
+      "sha256": "8b67ab67c7eddd4ce01a7499a2e8e9082fbd62eb0d18bb99cdae1bffee1be1c8"
+    },
+    {
+      "material": "Clay tile 5",
+      "map": "assets/pbr/clay-tile-5-b2ca59-basecolor.png",
+      "authored_linear_rgba": [
+        0.4793201684951782,
+        0.13563333451747894,
+        0.03433980792760849,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        184,
+        103,
+        52
+      ],
+      "sha256": "0d443abe634516b050aec969881e3753d9dd567a94f48bfe5141ebfe12cb8d3e"
+    },
+    {
+      "material": "Clay tile 6",
+      "map": "assets/pbr/clay-tile-6-3b80cd-basecolor.png",
+      "authored_linear_rgba": [
+        0.4507857859134674,
+        0.11953842639923096,
+        0.02955683507025242,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        179,
+        97,
+        48
+      ],
+      "sha256": "6b4c96d5bc777924b95d00d43a4591d238bb2cc6ed5fb671ca34ac469c66bd1b"
+    },
+    {
+      "material": "Context glazing",
+      "map": "assets/pbr/context-glazing-e207fd-basecolor.png",
+      "authored_linear_rgba": [
+        0.022173885256052017,
+        0.0423114113509655,
+        0.04817182570695877,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        41,
+        58,
+        62
+      ],
+      "sha256": "dd161d39acf33e98fb5660f833bdd13b751942cdeb087a9b3e06bdeae497cc11"
+    },
+    {
+      "material": "curtain_sheer",
+      "map": "assets/pbr/curtain-sheer-b416f0-basecolor.png",
+      "authored_linear_rgba": [
+        0.8549926280975342,
+        0.8148465752601624,
+        0.6938717365264893,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        238,
+        233,
+        217
+      ],
+      "sha256": "c49a26d9b3b8054e667e139d918dcf746966a2f6af87e30c458349e7bb2575c7"
+    },
+    {
+      "material": "fabric",
+      "map": "assets/pbr/fabric-19d3ce-basecolor.png",
+      "authored_linear_rgba": [
+        0.577580451965332,
+        0.47353148460388184,
+        0.3277781009674072,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        200,
+        183,
+        155
+      ],
+      "sha256": "c0a192839324878a5d9ab0efb14b18fb7d80b03220c7f14c977d9dd678761254"
+    },
+    {
+      "material": "flower",
+      "map": "assets/pbr/flower-5a46b8-basecolor.png",
+      "authored_linear_rgba": [
+        0.4507857859134674,
+        0.2788942754268646,
+        0.44520118832588196,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        179,
+        144,
+        178
+      ],
+      "sha256": "c378c318b6c86b04a81262682265d1ef7a3b5d9bdfb9772aac554c1cc0b1cd14"
+    },
+    {
+      "material": "foliage",
+      "map": "assets/pbr/foliage-6e0847-basecolor.png",
+      "authored_linear_rgba": [
+        0.04666508734226227,
+        0.09989872574806213,
+        0.02955683507025242,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        61,
+        89,
+        48
+      ],
+      "sha256": "cfced70189f89691e684b9a6503eb92d4243a760e60facaf3f589a3d5d7cf67a"
+    },
+    {
+      "material": "foliage_light",
+      "map": "assets/pbr/foliage-light-643ef8-basecolor.png",
+      "authored_linear_rgba": [
+        0.17144110798835754,
+        0.22322796285152435,
+        0.0802198201417923,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        115,
+        130,
+        80
+      ],
+      "sha256": "b385f1e4124702493feb11dda55b6f9a3385fd41c36ba990e14516a79fe049e6"
+    },
+    {
+      "material": "Frosted green cabinet inset",
+      "map": "assets/pbr/frosted-green-cabinet-inset-e2566c-basecolor.png",
+      "authored_linear_rgba": [
+        0.18782077729701996,
+        0.32314321398735046,
+        0.2541520893573761,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        120,
+        154,
+        138
+      ],
+      "sha256": "fb17ee91a56cf82ea9694c8ff09783698a62f57f361b0d19eac3043e34cffc63"
+    },
+    {
+      "material": "Garden charcoal furniture",
+      "map": "assets/pbr/garden-charcoal-furniture-5bc29f-basecolor.png",
+      "authored_linear_rgba": [
+        0.040915198624134064,
+        0.0666259378194809,
+        0.0802198201417923,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        57,
+        73,
+        80
+      ],
+      "sha256": "45121ace8ffdfbd2b9e2e0c646f93add3973f1b690b6c310d705010a6e7e1051"
+    },
+    {
+      "material": "Garden grey upholstery",
+      "map": "assets/pbr/garden-grey-upholstery-efb96d-basecolor.png",
+      "authored_linear_rgba": [
+        0.37123769521713257,
+        0.38642942905426025,
+        0.35153260827064514,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        164,
+        167,
+        160
+      ],
+      "sha256": "65e1784a90c73d0f85c130136cdc7a6b0c5311e5d28c86d26271d905095ecd15"
+    },
+    {
+      "material": "glass",
+      "map": "assets/pbr/glass-170fd7-basecolor.png",
+      "authored_linear_rgba": [
+        0.6172065734863281,
+        0.7230551242828369,
+        0.7304607629776001,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        206,
+        221,
+        222
+      ],
+      "sha256": "0f8d8fac80ac021a216366e5a62c588c0ac3545274bec962e0795b1b95a44594"
+    },
+    {
+      "material": "grass",
+      "map": "assets/pbr/grass-bbc29b-basecolor.png",
+      "authored_linear_rgba": [
+        0.14126329123973846,
+        0.18116424977779388,
+        0.0802198201417923,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        105,
+        118,
+        80
+      ],
+      "sha256": "c907a1a076d307f02268c2899483236abe63f28ed78e7741bbbbdc42e6054102"
+    },
+    {
+      "material": "gravel",
+      "map": "assets/pbr/gravel-4a0e93-basecolor.png",
+      "authored_linear_rgba": [
+        0.4019777774810791,
+        0.3762621283531189,
+        0.28314873576164246,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        170,
+        165,
+        145
+      ],
+      "sha256": "a902cf531153e2da44f22d6a65b0e099bff47dd5cfdd6f32e6fdd07d00b978eb"
+    },
+    {
+      "material": "hedge",
+      "map": "assets/pbr/hedge-1bbe6d-basecolor.png",
+      "authored_linear_rgba": [
+        0.03560131415724754,
+        0.08228270709514618,
+        0.0382043719291687,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        53,
+        81,
+        55
+      ],
+      "sha256": "17149d0fd332fbecbebc860b71f8fd513ab46bb9de6c831c66dd879318d3d019"
+    },
+    {
+      "material": "interior",
+      "map": "assets/pbr/interior-cfa582-basecolor.png",
+      "authored_linear_rgba": [
+        0.838798999786377,
+        0.7835378050804138,
+        0.68668532371521,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        236,
+        229,
+        216
+      ],
+      "sha256": "d193dc7e6597801764c7e548d9567bcfa8e0ff2dcaf5b21bb8fa4d565ed92c9f"
+    },
+    {
+      "material": "Ivory kitchen countertop",
+      "map": "assets/pbr/ivory-kitchen-countertop-c36a6f-basecolor.png",
+      "authored_linear_rgba": [
+        0.7912979125976562,
+        0.7529422044754028,
+        0.6038273572921753,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        230,
+        225,
+        204
+      ],
+      "sha256": "334643b400ff138ec8a555223f177ddf574c71627a8b3f9a9a6cf03b93da9e7f"
+    },
+    {
+      "material": "lamp_shade",
+      "map": "assets/pbr/lamp-shade-b26f3a-basecolor.png",
+      "authored_linear_rgba": [
+        0.37123769521713257,
+        0.32314321398735046,
+        0.19120168685913086,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        164,
+        154,
+        121
+      ],
+      "sha256": "668a18d4a18bf16583dbae68d42de6bb17dcfec8bc23e84f45d282ceda95eb60"
+    },
+    {
+      "material": "leaf_yellow",
+      "map": "assets/pbr/leaf-yellow-df8149-basecolor.png",
+      "authored_linear_rgba": [
+        0.2015562504529953,
+        0.2581828534603119,
+        0.040915198624134064,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        124,
+        139,
+        57
+      ],
+      "sha256": "3fadb1649414d4f4b0c9853db0263bdee225da97186fa29ec2ba22202e098159"
+    },
+    {
+      "material": "leather_brown",
+      "map": "assets/pbr/leather-brown-771cec-basecolor.png",
+      "authored_linear_rgba": [
+        0.08228270709514618,
+        0.05126945674419403,
+        0.03310476616024971,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        81,
+        64,
+        51
+      ],
+      "sha256": "66cad7d34b28ea2791bc0f2e1c2dd503c0f4800906439fe84f4126dc1ee1b3aa"
+    },
+    {
+      "material": "Lift brushed patterned stainless",
+      "map": "assets/pbr/lift-brushed-patterned-stainless-922e32-basecolor.png",
+      "authored_linear_rgba": [
+        0.48514994978904724,
+        0.5088813304901123,
+        0.5271151065826416,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        185,
+        189,
+        192
+      ],
+      "sha256": "d391cbe110f16e51b316693c323ee4e51344141912aa12e9b99af2ce9b500159"
+    },
+    {
+      "material": "Lift glass amber",
+      "map": "assets/pbr/lift-glass-amber-9315a5-basecolor.png",
+      "authored_linear_rgba": [
+        0.4125426113605499,
+        0.2541520893573761,
+        0.05780543014407158,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        172,
+        138,
+        68
+      ],
+      "sha256": "e6bc47856ef3a8d3e3d8105900ed8e4370c2e7d82a7e1d891eacdfaa05bde84b"
+    },
+    {
+      "material": "Lift glass leaf",
+      "map": "assets/pbr/lift-glass-leaf-ee0eab-basecolor.png",
+      "authored_linear_rgba": [
+        0.08650045841932297,
+        0.17144110798835754,
+        0.07036009430885315,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        83,
+        115,
+        75
+      ],
+      "sha256": "e0c26a7744d95861828db0c8f45d07c56d71762d98af0611dfa68814cb6040ab"
+    },
+    {
+      "material": "Lift glass rose",
+      "map": "assets/pbr/lift-glass-rose-1174fe-basecolor.png",
+      "authored_linear_rgba": [
+        0.19120168685913086,
+        0.04817182570695877,
+        0.0666259378194809,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        121,
+        62,
+        73
+      ],
+      "sha256": "b5a2b730e1ca6fd1b5376cae32307df7a01883f9a99bb3f5b29f59d2a9fa3a82"
+    },
+    {
+      "material": "Lift mirror",
+      "map": "assets/pbr/lift-mirror-51da8f-basecolor.png",
+      "authored_linear_rgba": [
+        0.8962693810462952,
+        0.9046611785888672,
+        0.8879231214523315,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        243,
+        244,
+        242
+      ],
+      "sha256": "5b55c86a7fb0488c783be482476e276c1f1cfdf8c7cf3d831be00e95df26447f"
+    },
+    {
+      "material": "Lift speckled granite floor",
+      "map": "assets/pbr/lift-speckled-granite-floor-513f1f-basecolor.png",
+      "authored_linear_rgba": [
+        0.47353148460388184,
+        0.47353148460388184,
+        0.4019777774810791,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        183,
+        183,
+        170
+      ],
+      "sha256": "95a29f53022f7d0a6084af6f9f82e103a402a06a95fb0bfb2551cc4f38b0b808"
+    },
+    {
+      "material": "linen",
+      "map": "assets/pbr/linen-30bda0-basecolor.png",
+      "authored_linear_rgba": [
+        0.7758222222328186,
+        0.7011018991470337,
+        0.5520114302635193,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        228,
+        218,
+        196
+      ],
+      "sha256": "6e57509c2b1fc00f42427927f2cab6bc39c4518da6aa6486e10a96d35bdf5ab3"
+    },
+    {
+      "material": "metal",
+      "map": "assets/pbr/metal-4963bb-basecolor.png",
+      "authored_linear_rgba": [
+        0.020288562402129173,
+        0.024157632142305374,
+        0.026241222396492958,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        39,
+        43,
+        45
+      ],
+      "sha256": "9ba5a07cc5a6f278f69077aba89280c1e4627e8c66abb608a50980acc13bf8c6"
+    },
+    {
+      "material": "needle_dark",
+      "map": "assets/pbr/needle-dark-751578-basecolor.png",
+      "authored_linear_rgba": [
+        0.026241222396492958,
+        0.05780543014407158,
+        0.01599629409611225,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        45,
+        68,
+        34
+      ],
+      "sha256": "f8b08ef87832e02e56a2fab2252ebafe85825ceb57c88116ea36480878f830c2"
+    },
+    {
+      "material": "needle_light",
+      "map": "assets/pbr/needle-light-d41f8b-basecolor.png",
+      "authored_linear_rgba": [
+        0.08437620848417282,
+        0.15292614698410034,
+        0.03071344457566738,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        82,
+        109,
+        49
+      ],
+      "sha256": "66b65ae5c2585f481f62af43b1991247d6b4dd94b8ac72947a478a4ab26fab2b"
+    },
+    {
+      "material": "neighbor_wall",
+      "map": "assets/pbr/neighbor-wall-1bf3b2-basecolor.png",
+      "authored_linear_rgba": [
+        0.6444796919822693,
+        0.5972017645835876,
+        0.5271151065826416,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        210,
+        203,
+        192
+      ],
+      "sha256": "6a05a7682d7d28a90f3281feb081988773d117415cf16547088b619e8a63246b"
+    },
+    {
+      "material": "pillow_grey",
+      "map": "assets/pbr/pillow-grey-e7837a-basecolor.png",
+      "authored_linear_rgba": [
+        0.16826939582824707,
+        0.16826939582824707,
+        0.14702726900577545,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        114,
+        114,
+        107
+      ],
+      "sha256": "5618f5d84bda30ce96d368d9d33bcb9231c45b442dbcc6ac862bafbc4f815bc4"
+    },
+    {
+      "material": "pool_tile",
+      "map": "assets/pbr/pool-tile-5eae43-basecolor.png",
+      "authored_linear_rgba": [
+        0.13013647496700287,
+        0.41788506507873535,
+        0.4793201684951782,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        101,
+        173,
+        184
+      ],
+      "sha256": "48fc9d68203ac5046a9cc6d512198880420e062324612acb1a034bd06be033a5"
+    },
+    {
+      "material": "soil",
+      "map": "assets/pbr/soil-118e80-basecolor.png",
+      "authored_linear_rgba": [
+        0.12213877588510513,
+        0.10224173218011856,
+        0.05126945674419403,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        98,
+        90,
+        64
+      ],
+      "sha256": "071157cc66199226cd3cfa34735790ccaf3c73e451fb88186828eb2c4a229a68"
+    },
+    {
+      "material": "stucco",
+      "map": "assets/pbr/stucco-6876a4-basecolor.png",
+      "authored_linear_rgba": [
+        0.3277781009674072,
+        0.366252601146698,
+        0.4125426113605499,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        155,
+        163,
+        172
+      ],
+      "sha256": "17dad9b312f55f409532232f92a0ebd8f8e165ed026030682ad903bc52cda7d9"
+    },
+    {
+      "material": "water",
+      "map": "assets/pbr/water-6d5a45-basecolor.png",
+      "authored_linear_rgba": [
+        0.12743768095970154,
+        0.4677838087081909,
+        0.5647115111351013,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        100,
+        182,
+        198
+      ],
+      "sha256": "8c5ec1c26615b56dc86268e88d895fefb8a76156dc474b46f2157b6cdef60fde"
+    },
+    {
+      "material": "white_trim",
+      "map": "assets/pbr/white-trim-a9ddf0-basecolor.png",
+      "authored_linear_rgba": [
+        0.8713670969009399,
+        0.8549926280975342,
+        0.7991027235984802,
+        1.0
+      ],
+      "expected_srgb_rgb8": [
+        240,
+        238,
+        231
+      ],
+      "sha256": "a15d306946cdd159a38e38b09451e455c82ef422869a3493ec69e735997cbd78"
+    }
+  ],
+  "normal_roughness_metallic_changed": false,
+  "color_calibration_against_photos": false
+}

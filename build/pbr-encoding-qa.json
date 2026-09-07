@@ -1,0 +1,872 @@
+{
+  "status": "passed",
+  "constant_basecolor_maps_verified": 62,
+  "unchanged_normal_and_response_maps": 308,
+  "assets": [
+    {
+      "file": "villa-f2.glb",
+      "constant_materials_checked": [
+        {
+          "material": "interior",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "stucco",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceiling",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "glass",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Bathroom dark walnut",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "brass",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Bathroom cream marble",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceramic",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "chrome",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Bathroom silver mirror",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "bulb_warm",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "blue_fabric",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "black",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Bathroom lower terracotta",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "curtain_sheer",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "metal",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "lamp_shade",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "china",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift brushed patterned stainless",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "bed_base",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "linen",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "pillow_grey",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "fabric",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift glass amber",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "cabinet_glass",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift glass rose",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift glass leaf",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "villa-f3.glb",
+      "constant_materials_checked": [
+        {
+          "material": "interior",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "stucco",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceiling",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "glass",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceramic",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "chrome",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift brushed patterned stainless",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "black",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "blue_fabric",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "metal",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "linen",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "pillow_grey",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "brass",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift glass amber",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "cabinet_glass",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift glass rose",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift glass leaf",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "villa-exterior.glb",
+      "constant_materials_checked": [
+        {
+          "material": "metal",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "canopy",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "interior",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "chrome",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "gravel",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Clay tile 0",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Clay tile 1",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Clay tile 2",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Clay tile 3",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Clay tile 4",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Clay tile 5",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Clay tile 6",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "context-far.glb",
+      "constant_materials_checked": [
+        {
+          "material": "neighbor_wall",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Context glazing",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "context-ground.glb",
+      "constant_materials_checked": [
+        {
+          "material": "grass",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "asphalt",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "villa-garden-plants-west.glb",
+      "constant_materials_checked": [
+        {
+          "material": "foliage_light",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "flower",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "bark",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "needle_dark",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "hedge",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "needle_light",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "grass",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "leaf_yellow",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "villa-garden-plants-east.glb",
+      "constant_materials_checked": [
+        {
+          "material": "foliage_light",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "flower",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "hedge",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "leaf_yellow",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "needle_dark",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "bark",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "needle_light",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "context-detail-b23.glb",
+      "constant_materials_checked": [
+        {
+          "material": "neighbor_wall",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceiling",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Context glazing",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage_light",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "context-detail-b22.glb",
+      "constant_materials_checked": [
+        {
+          "material": "neighbor_wall",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceiling",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Context glazing",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage_light",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "context-detail-b20.glb",
+      "constant_materials_checked": [
+        {
+          "material": "neighbor_wall",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceiling",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Context glazing",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage_light",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "context-detail-b19.glb",
+      "constant_materials_checked": [
+        {
+          "material": "neighbor_wall",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceiling",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Context glazing",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage_light",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "context-detail-b18.glb",
+      "constant_materials_checked": [
+        {
+          "material": "neighbor_wall",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceiling",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Context glazing",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage_light",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "context-detail-b16.glb",
+      "constant_materials_checked": [
+        {
+          "material": "neighbor_wall",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceiling",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Context glazing",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage_light",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "context-detail-b30.glb",
+      "constant_materials_checked": [
+        {
+          "material": "neighbor_wall",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceiling",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Context glazing",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage_light",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "context-detail-b29.glb",
+      "constant_materials_checked": [
+        {
+          "material": "neighbor_wall",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceiling",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Context glazing",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage_light",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "context-detail-b31.glb",
+      "constant_materials_checked": [
+        {
+          "material": "neighbor_wall",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceiling",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Context glazing",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage_light",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "context-detail-b17.glb",
+      "constant_materials_checked": [
+        {
+          "material": "neighbor_wall",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceiling",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Context glazing",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "foliage_light",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "villa-f0.glb",
+      "constant_materials_checked": [
+        {
+          "material": "interior",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "stucco",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceiling",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "glass",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "brass",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "bath_tile",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "chrome",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "black",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Garden charcoal furniture",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "metal",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceramic",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift mirror",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Frosted green cabinet inset",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Ivory kitchen countertop",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "bulb_warm",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "china",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift brushed patterned stainless",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift speckled granite floor",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Garden grey upholstery",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift glass amber",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "cabinet_glass",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift glass rose",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift glass leaf",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "villa-f1.glb",
+      "constant_materials_checked": [
+        {
+          "material": "interior",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "stucco",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceiling",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "glass",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "ceramic",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "chrome",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "burgundy_velvet",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "brass",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "china",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "bulb_warm",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "cabinet_glass",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Ivory kitchen countertop",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "black",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "metal",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift brushed patterned stainless",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "leather_brown",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "chair_tapestry",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift glass amber",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift glass rose",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "Lift glass leaf",
+          "maximum_byte_error": 0
+        }
+      ]
+    },
+    {
+      "file": "villa-garden-ground.glb",
+      "constant_materials_checked": [
+        {
+          "material": "pool_tile",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "white_trim",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "water",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "chrome",
+          "maximum_byte_error": 0
+        },
+        {
+          "material": "metal",
+          "maximum_byte_error": 0
+        }
+      ]
+    }
+  ],
+  "photo_color_calibration": false
+}

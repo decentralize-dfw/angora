@@ -1,11 +1,11 @@
 {
   "file": "build/renders/18_garden_wc.png",
-  "sha256": "629c2b933664b5f097708fe42801d76768074dfc919a2c8fdfdef83da466a465",
-  "native_sha256": "ed0dc217981c049e079b009eade5d9633295983834592664bad30b52b6e6edcf",
+  "sha256": "4fc25198204da2f9eddd593989c1d603c7f0e22385cf79ff648b8af176fe65a1",
+  "native_sha256": "cc0d32e5aec10964a7381a2f2bba5e28b74650e5a5e26bbd1e9d107d5b736130",
   "width": 1000,
   "height": 650,
   "samples": 24,
-  "seconds": 82.36,
+  "seconds": 85.37,
   "mode": "door_cutaway_inspection_panorama",
   "hidden_source_objects": [
     "F0 | KAPI İÇ$KAPI"
@@ -15,5 +15,6 @@
     1.899999976158142,
     1.5199999809265137
   ],
-  "native_geometry_unchanged": true
+  "native_geometry_unchanged": true,
+  "model_snapshot_sha256": "cb855283e3f8ebdee86afb0dfa71037a81330fe15f4d8dd566a7d26b3d1c3bdb"
 }

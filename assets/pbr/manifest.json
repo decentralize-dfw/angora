@@ -1629,5 +1629,7 @@
     "master-bathroom-cream-tile-d0daa6-basecolor.png": "f7f482985c9c283b01a53e92df06c027afb7e31bcc4b45f2bd1e0176fb5ecf83",
     "stone-tile-c5ede5-orm.png": "ffb607c2c3098c6627dffc67a39f9dbc68f3ea9ba4e95457a14dbbb3ae95cec7",
     "clay-tile-4-140bcd-metallic.png": "3e40ba25278acca92225b983e97d3efd868e24f1b7f0376471079b8a113e7023"
-  }
+  },
+  "basecolor_encoding": "sRGB; linear source values encoded before writing constant byte textures",
+  "constant_color_correction_report": "assets/pbr/color-encoding-report.json"
 }

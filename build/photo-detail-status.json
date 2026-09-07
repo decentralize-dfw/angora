@@ -1,7 +1,7 @@
 {
   "stage": "CAD_grades_PBR_kitchen_lift_WC_review",
   "status": "work_in_progress",
-  "native_sha256": "ed0dc217981c049e079b009eade5d9633295983834592664bad30b52b6e6edcf",
+  "native_sha256": "cc0d32e5aec10964a7381a2f2bba5e28b74650e5a5e26bbd1e9d107d5b736130",
   "phase_1_complete": false,
   "web_release_ready": false,
   "github_push_status": "main_delivery_published_and_incrementally_updated",
@@ -14,14 +14,16 @@
     "Lift shaft cut through all landing slabs",
     "WC fixtures moved into B03 and Z03, clear of lift cabins",
     "Continuous pool coping/deck interfaces",
-    "White CAD entry-door faces"
+    "White CAD entry-door faces",
+    "62 constant base-color maps corrected to sRGB encoding"
   ],
   "current_reports": [
     "build/qa-report.json",
     "build/blender/layer-qa.json",
     "build/glb/stream-qa-report.json",
     "build/lift-fixture-qa.json",
-    "build/room-review-register.json"
+    "build/room-review-register.json",
+    "build/pbr-encoding-qa.json"
   ],
   "pending": [
     "Photo agreement for every room and elevation",

@@ -7,6 +7,8 @@ import bpy,sys,json,math,re,hashlib
 import numpy as np
 from pathlib import Path
 from mathutils import Vector
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+from repair_pbr_color_encoding import linear_to_srgb
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'assets/pbr';OUT.mkdir(parents=True,exist_ok=True)
 
 def bake_all():
@@ -27,7 +29,11 @@ def bake_all():
     def constant_image(name,values,noncolor=True):
         im=bpy.data.images.new(name,4,4,alpha=True,float_buffer=False)
         im.colorspace_settings.name='Non-Color' if noncolor else 'sRGB'
-        rgba=list(values)+[1]*(4-len(values));im.pixels=rgba*16;return im
+        rgba=list(values)+[1]*(4-len(values))
+        # Byte image buffers store encoded values. Convert authored linear RGB
+        # before saving a constant sRGB texture; data maps stay linear.
+        if not noncolor:rgba[:3]=[linear_to_srgb(v) for v in rgba[:3]]
+        im.pixels=rgba*16;return im
     def save(im,filename):
         im.filepath_raw=str(OUT/filename);im.file_format='PNG';im.save();im.filepath='//../../assets/pbr/'+filename
         im.pack();new_images.append(im);return 'assets/pbr/'+filename

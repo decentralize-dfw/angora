@@ -24,6 +24,8 @@ DWG'den katmanlı Blender sahnesi yeniden kuruldu. **Çalışma / kontrol sürü
 - `build/renders/render-manifest.json`: her görüntünün üretildiği native sahne SHA-256 değerini ayrı kaydeder; listede bulunmayan görseller önceki kontrol aşamalarından kalmış olabilir. WC görüntüsü, kapı geçici gizlenerek alınan ve `mode` alanıyla açıkça belirtilen bir inceleme kesitidir.
 - `build/glb/scene-manifest.json`: ortak başlangıç noktasını koruyan 20 GLB; dört kat, dış ayrıntılar, bahçe, zemin ve komşu binalar. Her malzemede normal ve roughness/metallic haritası vardır. Web aydınlatması ve mobil performans henüz doğrulanmadı.
 - `assets/pbr/pbr-maps.zip`: 77 malzeme için 385 PNG; base color, OpenGL normal, roughness, metallic ve ORM. Haritalar fotoğraf yorumuyla kurulan malzemelerden bake edildi; renk kalibreli tarama değildir. ORM'nin AO kanalı nötrdür.
+
+Malzeme kontrolünün 14. adımında 62 sabit renk haritasındaki linear → sRGB yazım hatası düzeltildi. Böylece sıva, çim, ahşap ve iç duvar renkleri dışa aktarımda gereksiz koyulaşmıyor. `assets/pbr/color-encoding-report.json` beklenen renk değerlerini kaydeder. Işık denemelerinin ardından mevcut HDRI düzeni korundu; fotoğraflara göre güneş, pozlama ve kadraj eşlemesi hâlâ açık bir iştir. Yeni render kayıtları, ana dosyayla birlikte 27 bağlı dosyanın tamamını `model_snapshot_sha256` ile tanımlar. Bu düzeltmeler fotoğrafa birebir eşleme onayı anlamına gelmez.
 - `build/cad/`: kaynak özeti, master plan yerleşimi, açıklık kontrolü ve eşleştirilmemiş ölçü verileri.
 
 Kaynak DWG'nin SHA-256 değeri `db8a25b05cd9f572f1de5825b62f38133678607f5dbc6cf4cf7bb621acdde229`.
