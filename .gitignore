@@ -4,3 +4,4 @@ __pycache__/
 build/intermediate/
 build/cad/source-curves.json.gz
 build/cad/surfaces.json.gz
+assets/pbr/*.png

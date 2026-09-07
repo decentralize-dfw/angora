@@ -22,6 +22,7 @@ for material in bpy.data.materials:
     # falls back to PBR parameters; the native file keeps every shader connection.
     for socket in ('Base Color','Normal'):
         for link in list(bs.inputs[socket].links):
+            if material.get('pbr_maps_json'):continue
             if socket=='Base Color' and link.from_node.type=='TEX_IMAGE':continue
             saved_links.append((nt,link.from_socket,link.to_socket));nt.links.remove(link)
 targets={
@@ -47,7 +48,8 @@ for filename,collections in targets.items():
                    'purpose':'model_review','compression':'KHR_draco_mesh_compression',
                    'blender_bounds_m':bounds,
                    'bounds_method':'evaluated_rendered_mesh_vertices',
-                   'texture_bake_complete':False,'mobile_performance_validated':False})
+                   'texture_bake_complete':all(mat.get('pbr_maps_json') for o in scene.objects if o.select_get() for mat in o.data.materials if mat),
+                   'mobile_performance_validated':False})
 for nt,from_socket,to_socket in saved_links:nt.links.new(from_socket,to_socket)
 (out/'export-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
 print(json.dumps(report),flush=True)

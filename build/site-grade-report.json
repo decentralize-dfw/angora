@@ -1,0 +1,269 @@
+{
+  "datum": {
+    "absolute_garden_BK_m": 1026.4,
+    "native_garden_floor_z": 0,
+    "source_handle": "32213",
+    "native_entrance_threshold_z": 3.0996,
+    "adjacent_front_TK_z": 3.3,
+    "note": "Do not treat text insertion points as surveyed grading coordinates."
+  },
+  "buildings": [
+    {
+      "number": 25,
+      "garden_base_z": 3.0,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 0.897
+    },
+    {
+      "number": 39,
+      "garden_base_z": 13.9,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 1.0
+    },
+    {
+      "number": 4,
+      "garden_base_z": -10.5,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 0.9502
+    },
+    {
+      "number": 2,
+      "garden_base_z": -8.5,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.6
+    },
+    {
+      "number": 3,
+      "garden_base_z": -9.0,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.8082
+    },
+    {
+      "number": 23,
+      "garden_base_z": 2.5,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 0.7
+    },
+    {
+      "number": 42,
+      "garden_base_z": 10.6,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 5.2029
+    },
+    {
+      "number": 34,
+      "garden_base_z": 6.2,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 0.8017
+    },
+    {
+      "number": 33,
+      "garden_base_z": 6.2,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 0.6
+    },
+    {
+      "number": 27,
+      "garden_base_z": 5.05,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.895
+    },
+    {
+      "number": 38,
+      "garden_base_z": 9.4,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 2.3922
+    },
+    {
+      "number": 37,
+      "garden_base_z": 8.9,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.8962
+    },
+    {
+      "number": 22,
+      "garden_base_z": 2.5,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 0.6
+    },
+    {
+      "number": 20,
+      "garden_base_z": -3.0,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 2.275
+    },
+    {
+      "number": 19,
+      "garden_base_z": -3.0,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 0.6
+    },
+    {
+      "number": 18,
+      "garden_base_z": -7.05,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.6
+    },
+    {
+      "number": 16,
+      "garden_base_z": -3.45,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.6
+    },
+    {
+      "number": 15,
+      "garden_base_z": -4.5,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.6
+    },
+    {
+      "number": 14,
+      "garden_base_z": -5.0,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.8
+    },
+    {
+      "number": 13,
+      "garden_base_z": -7.25,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.6
+    },
+    {
+      "number": 10,
+      "garden_base_z": -9.05,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 0.7
+    },
+    {
+      "number": 9,
+      "garden_base_z": -10.3,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 2.3922
+    },
+    {
+      "number": 8,
+      "garden_base_z": -10.8,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 3.0642
+    },
+    {
+      "number": 7,
+      "garden_base_z": -11.3,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 0.6
+    },
+    {
+      "number": 43,
+      "garden_base_z": 7.1,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.6
+    },
+    {
+      "number": 30,
+      "garden_base_z": -0.4,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.9503
+    },
+    {
+      "number": 29,
+      "garden_base_z": 0.1,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.6
+    },
+    {
+      "number": 24,
+      "garden_base_z": 3.0,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 0.4449
+    },
+    {
+      "number": 12,
+      "garden_base_z": -7.25,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 1.0
+    },
+    {
+      "number": 6,
+      "garden_base_z": -10.8,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 2.8977
+    },
+    {
+      "number": 41,
+      "garden_base_z": 10.6,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.6
+    },
+    {
+      "number": 26,
+      "garden_base_z": 5.55,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 1.0
+    },
+    {
+      "number": 32,
+      "garden_base_z": -2.0,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.6
+    },
+    {
+      "number": 31,
+      "garden_base_z": -2.0,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 2.3922
+    },
+    {
+      "number": 36,
+      "garden_base_z": 8.2,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 0.6
+    },
+    {
+      "number": 35,
+      "garden_base_z": 7.7,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 0.6
+    },
+    {
+      "number": 5,
+      "garden_base_z": -10.0,
+      "status": "CAD_BK_annotation",
+      "family_fit_error_m": 0.6
+    },
+    {
+      "number": 44,
+      "garden_base_z": 7.1,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 8.457
+    },
+    {
+      "number": 45,
+      "garden_base_z": 7.2,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.85
+    },
+    {
+      "number": 17,
+      "garden_base_z": -6.55,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.75
+    },
+    {
+      "number": 40,
+      "garden_base_z": 12.9,
+      "status": "inferred_SBK_minus_3_1_common_typology",
+      "family_fit_error_m": 0.7
+    }
+  ],
+  "villa_front_TK_z": 3.3,
+  "villa_rear_TK_z": -0.1,
+  "left_neighbor_BK_z": 2.5,
+  "right_neighbor_BK_z": -3.0,
+  "right_neighbor_TK_z": -3.1,
+  "phase_complete": false,
+  "limitations": [
+    "Text insertion XY is approximate",
+    "Neighbor facades are source-family interpretations",
+    "Plot pad interpolation and unseen retaining-wall heights require photo review"
+  ]
+}

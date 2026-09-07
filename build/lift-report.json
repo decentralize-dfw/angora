@@ -1,0 +1,61 @@
+{
+  "core_center_xy": [
+    -2.02,
+    0.86
+  ],
+  "clear_shaft_xy": [
+    1.36,
+    1.34
+  ],
+  "shaft_pit_z": -0.5,
+  "shaft_top_z": 11.92,
+  "landing_z": [
+    0,
+    3.0996,
+    6.3714,
+    9.4705
+  ],
+  "slab_objects_cut": [
+    "F0 | KAT 0$TAVAN",
+    "F0 | KAT 0$ZEM\u0130N KAPLAMA",
+    "F0 | KAT 0$ZEM\u0130N",
+    "F1 | KAT 1$TAVAN",
+    "F1 | KAT 1$ZEM\u0130N KAPLAMA",
+    "F1 | KAT 1$ZEM\u0130N",
+    "F2 | KAT 2$TAVAN",
+    "F2 | KAT 2$ZEM\u0130N",
+    "F2 | KAT 2$ZEM\u0130N KAPLAMA",
+    "F3 | KAT 3$ZEM\u0130N KAPLAMA",
+    "F3 | KAT 3$\u00dcSTKATTAVAN - Copy - Copy",
+    "F3 | KAT 3$ZEM\u0130N"
+  ],
+  "position_status": "repeated_CAD_U_core_with_photo_relation_to_kitchen",
+  "dimensions_status": "interpreted_not_shop_drawing",
+  "dimension_label_allowed": false,
+  "horizontal_cladding_caps_cut": [
+    {
+      "object": "F1 | KAT 1$DUVAR",
+      "horizontal_faces_cut": 4
+    },
+    {
+      "object": "F1 | KAT 1$DUVAR KAPLAMA",
+      "horizontal_faces_cut": 8
+    },
+    {
+      "object": "F2 | KAT 2$DUVAR",
+      "horizontal_faces_cut": 4
+    },
+    {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "horizontal_faces_cut": 10
+    },
+    {
+      "object": "F3 | KAT 3$DUVAR KAPLAMA",
+      "horizontal_faces_cut": 15
+    },
+    {
+      "object": "F3 | KAT 3$DUVAR",
+      "horizontal_faces_cut": 12
+    }
+  ]
+}

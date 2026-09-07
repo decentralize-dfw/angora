@@ -315,4 +315,10 @@ def refine(m,cols):
     bpy.context.view_layer.update()
     from exterior_refinement import refine_exterior
     refine_exterior(m,cols)
+    from site_refinement import refine_site
+    from facade_refinement import refine_facade
+    refine_facade(m,cols)
+    refine_site(m,cols)
+    from lift_refinement import refine_lift
+    refine_lift(m,cols)
     return m

@@ -12,14 +12,14 @@ def refine_rooms(m,cols):
     m['countertop']=material('Ivory kitchen countertop','E6E1CC',.30)
     m['cabinet_frosted']=material('Frosted green cabinet inset','789A8A',.42)
 
-    def run(ctx,length,panel,upper=True,sink=False,cooker=False,green=False):
+    def run(ctx,length,panel,upper=True,sink=False,cooker=False,green=False,counter=True):
         n=max(2,round(length/.6));w=length/n
         for i in range(n):
             x=(i-(n-1)/2)*w
             ctx.box('Kitchen base carcass',(x,0,.43),(w-.008,.59,.84),m['wood_honey'])
             ctx.box('Kitchen door inset',(x,-.307,.44),(w-.10,.022,.63),panel,.005)
             ctx.box('Kitchen handle',(x+w*.31,-.343,.65),(.015,.029,.17),m['chrome'],.004)
-            if upper and (not sink or abs(x)>.60) and (not cooker or abs(x-length*.15)>.48):
+            if upper and (green or not sink or abs(x)>.60) and (green or not cooker or abs(x-length*.15)>.48):
                 ctx.box('Upper cupboard back',(x,.280,1.97),(w-.01,.025,.82),m['wood_honey'])
                 for xx in [x-w/2+.016,x+w/2-.016]:ctx.box('Upper cupboard side',(xx,.105,1.97),(.028,.37,.82),m['wood_honey'])
                 for z in [1.573,2.367]:ctx.box('Upper cupboard horizontal',(x,.105,z),(w-.01,.37,.026),m['wood_honey'])
@@ -41,7 +41,7 @@ def refine_rooms(m,cols):
             ctx.path('Sink rolled rim',[[vv[i] for i in [0,1,2,3,0]]],.009,m['chrome'])
             tap=[(0,.22,.925),(0,.22,1.15),(0,.19,1.25),(0,.10,1.28),(0,.015,1.23),(0,.015,1.16)]
             ctx.path('Gooseneck kitchen tap',[tap],.014,m['chrome'])
-        else:ctx.box('Countertop',(0,-.02,.895),(length+.035,.65,.045),m['countertop'])
+        elif counter:ctx.box('Countertop',(0,-.02,.895),(length+.035,.65,.045),m['countertop'])
         if cooker:
             x=length*.15
             ctx.box('Cooktop',(x,-.03,.931),(.58,.48,.028),m['black'])
@@ -50,8 +50,10 @@ def refine_rooms(m,cols):
             ctx.box('Oven glass',(x,-.32,.46),(.53,.025,.54),m['black'],.015)
             ctx.path('Oven handle',[[(x-.20,-.368,.68),(x+.20,-.368,.68)]],.015,m['chrome'])
             vv=[(x-.33,-.25,1.63),(x+.33,-.25,1.63),(x+.33,.29,1.63),(x-.33,.29,1.63),(x-.16,-.01,1.85),(x+.16,-.01,1.85),(x+.16,.29,1.85),(x-.16,.29,1.85)]
-            ctx.mesh('Extractor canopy',vv,[(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7),(0,3,2,1)],m['chrome'])
-            ctx.box('Extractor chimney',(x,.14,2.22),(.31,.29,.76),m['chrome'])
+            if not green:
+                ctx.mesh('Extractor canopy',vv,[(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7),(0,3,2,1)],m['chrome'])
+                ctx.box('Extractor chimney',(x,.14,2.22),(.31,.29,.76),m['chrome'])
+            else:ctx.box('Integrated under-cabinet extractor',(x,.04,1.535),(.57,.38,.06),m['chrome'])
 
     clear_room('Main kitchen');main=reset_collection('Photo kitchen — entrance',fixed1)
     run(Local(main,(-5.24,-1.86,3.0996),90),2.64,m['wood_honey'],sink=True)
@@ -63,10 +65,17 @@ def refine_rooms(m,cols):
     # The basement photos show green glazed inserts and a peninsula toward the lounge.
     clear_room('Garden kitchen');garden_kitchen=reset_collection('Photo kitchen — garden',fixed0)
     run(Local(garden_kitchen,(-5.24,2.0,0),90),2.24,m['cabinet_frosted'],sink=True,green=True)
-    run(Local(garden_kitchen,(-3.13,-.04,0),180),3.20,m['cabinet_frosted'],cooker=True,green=True)
-    c=Local(garden_kitchen,(-3.18,2.60,0),180)
-    run(c,2.68,m['cabinet_frosted'],upper=False)
-    c.box('Breakfast bar surface',(0,.06,1.025),(2.82,.72,.055),m['countertop'])
+    run(Local(garden_kitchen,(-4.22,-.04,0),180),1.82,m['cabinet_frosted'],cooker=True,green=True)
+    c=Local(garden_kitchen,(-3.76,2.60,0),180)
+    run(c,2.40,m['cabinet_frosted'],upper=False,counter=False)
+    c.box('Breakfast bar surface',(0,.06,.92),(2.54,.72,.055),m['countertop'],.025)
+    c=Local(garden_kitchen)
+    c.box('Garden refrigerator beside elevator',(-3.23,.12,.925),(.61,.59,1.85),m['chrome'],.025)
+    c.box('Garden fridge freezer seam',(-3.23,.423,1.27),(.60,.012,.016),m['metal'])
+    for z in [.88,1.40]:c.path('Garden fridge handle',[[(-3.46,.448,z),(-3.06,.448,z)]],.012,m['chrome'])
+    # Warm square ceramic backsplash behind the photographed L-shaped worktop.
+    c.box('Garden south backsplash',(-4.22,-.305,1.27),(1.83,.025,.73),m['terra_floor'],0)
+    c.box('Garden west backsplash',(-5.54,1.60,1.27),(.025,3.1,.73),m['terra_floor'],0)
     # Main garden room has a grey seating group and a dark dining set beside the fireplace.
     clear_room('Garden lounge');clear_room('Garden dining')
     garden=reset_collection('Photo furniture — garden lounge',f0)
@@ -120,3 +129,4 @@ def refine_rooms(m,cols):
     camera('10_main_kitchen',(-3.75,-3.37,4.58),(-3.55,-.40,4.05),17,cols['cameras'])
     camera('11_southwest_bedroom',(-2.46,-.73,7.98),(-3.82,-2.45,7.20),18,cols['cameras'])
     camera('12_garden_lounge',(-.40,3.43,1.58),(0,6.70,1.15),14,cols['cameras'])
+    camera('16_basement_kitchen',(-2.85,4.6,1.63),(-3.90,.65,1.12),19,cols['cameras'])

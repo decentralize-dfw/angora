@@ -1,12 +1,12 @@
 {
-  "visible_geometry_objects": 3435,
-  "evaluated_triangles": 2921104,
+  "visible_geometry_objects": 4853,
+  "evaluated_triangles": 6179301,
   "furniture_objects": 452,
   "camera_furniture_bbox_intersections": [],
   "dimension_labels_enabled": false,
   "photo_alignment_complete": false,
   "publication_ready": false,
-  "web_texture_baking_complete": false,
+  "web_texture_baking_complete": true,
   "living_split_level_probe": {
     "hit": "F1 | KAT 1$ZEMİN KAPLAMA",
     "z_m": 2.799999952316284,
@@ -44,7 +44,7 @@
         -6,
         13.5
       ],
-      "first_hit": "Pool terrace.002",
+      "first_hit": "Pool terrace",
       "passed": true
     },
     {
@@ -55,5 +55,15 @@
       "first_hit": "Pool terrace.003",
       "passed": true
     }
-  ]
+  ],
+  "basement_kitchen_ground_clearance": {
+    "first_hit": "F0 | KAT 0$ZEMİN KAPLAMA",
+    "z_m": 1.1920928955078125e-07,
+    "passed": true
+  },
+  "lift_vertical_void": {
+    "first_hit": null,
+    "z_m": null,
+    "passed": true
+  }
 }

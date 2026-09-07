@@ -87,6 +87,6 @@ Salonun yaklaşık 2,80 m ve girişin 3,10 m kotları ayrı korunur; ikisi de ka
 - Doku bake, LOD, draw-call azaltma, mobil/masaüstü performans ölçümü.
 - Mahalle → bina → kat → oda satış arayüzü; model doğrulaması tamamlandıktan sonra.
 
-Bu çalışma sırasında GitHub entegrasyonu yazma denemesini 403 `Resource not accessible by integration` ile reddetti. Yerel commit, remote `main`'e gönderilmiş commit anlamına gelmez.
+GitHub erişimi açıldı. İlk kod, CAD raporu ve referans paketi `3731b8730b8d3f09a6cfffc99c1ce332098f645d` commit'iyle `main` dalına gönderildi. Yerel commit ile uzaktaki gönderim ayrı ayrı doğrulanır.
 
-Erişim teşhisi: bağlı hesap bu depoda `admin` ve `push` yetkisine sahip; ancak 81708016 numaralı GitHub uygulama kurulumu yalnız seçili depolara açık ve erişilebilir depo listesinde `angora` bulunmuyor. Kurulumun `Repository access` bölümüne `angora` eklenmeli: https://github.com/settings/installations/81708016 . Bu değişiklik yapılmadan başka bir kimlik doğrulama yoluyla erişim kısıtı aşılmaz.
+Büyük tek parça Blender dosyası bağlantının 16 MiB istek sınırını aşıyor. Ana sahneye bağlı daha küçük Blender katman dosyaları hazırlanıyor. Otomatik yazma yetkili bir GitHub Actions iş akışı etkinleştirilmedi.

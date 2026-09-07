@@ -1,0 +1,39 @@
+{
+  "method": "CAD wall exposure rays",
+  "source_reference": "WhatsApp Image 2026-08-27 at 20.32.54.jpeg",
+  "color_status": "photo_interpreted_not_color_calibrated",
+  "objects": [
+    {
+      "object": "F0 | KAT 0$DUVAR KAPLAMA",
+      "painted_faces": 1
+    },
+    {
+      "object": "F0 | KAT 0$DUVAR",
+      "painted_faces": 6
+    },
+    {
+      "object": "F1 | KAT 1$DUVAR",
+      "painted_faces": 44
+    },
+    {
+      "object": "F1 | KAT 1$DUVAR KAPLAMA",
+      "painted_faces": 9
+    },
+    {
+      "object": "F2 | KAT 2$DUVAR",
+      "painted_faces": 45
+    },
+    {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "painted_faces": 7
+    },
+    {
+      "object": "F3 | KAT 3$DUVAR KAPLAMA",
+      "painted_faces": 132
+    },
+    {
+      "object": "F3 | KAT 3$DUVAR",
+      "painted_faces": 147
+    }
+  ]
+}

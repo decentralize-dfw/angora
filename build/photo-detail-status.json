@@ -5,7 +5,7 @@
   "native_sha256": "bb5df11d369e346ab26e00c05874219a8bdaa765d583c72da1447412ead22e74",
   "phase_1_complete": false,
   "web_release_ready": false,
-  "github_push_status": "blocked_app_repository_selection",
+  "github_push_status": "access_restored_first_pipeline_commit_published",
   "completed_this_pass": [
     "Photo-directed main lounge and master bedroom furnishing geometry",
     "Corrected kitchen runs and functional sink cutouts",
@@ -93,5 +93,9 @@
         ]
       ]
     }
-  ]
+  ],
+  "pbr_maps": "77 materials / basecolor, OpenGL normal, roughness, metallic, ORM baked and assigned",
+  "site_grade_report": "build/site-grade-report.json",
+  "lift_report": "build/lift-report.json",
+  "web_ready": false
 }
