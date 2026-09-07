@@ -1,0 +1,57 @@
+[
+  {
+    "room": "Master bedroom",
+    "room_bounds_xy": [
+      -5.03,
+      4.03,
+      0.12,
+      8.077
+    ],
+    "objects_outside": [],
+    "passed": true
+  },
+  {
+    "room": "Walk-in closet",
+    "room_bounds_xy": [
+      0.32,
+      3.32,
+      3.118,
+      5.98
+    ],
+    "objects_outside": [],
+    "passed": true
+  },
+  {
+    "room": "Southwest bedroom",
+    "room_bounds_xy": [
+      -5.03,
+      -4.03,
+      -2.03,
+      0.13
+    ],
+    "objects_outside": [],
+    "passed": true
+  },
+  {
+    "room": "Master bathroom",
+    "room_bounds_xy": [
+      0.32,
+      6.15,
+      3.118,
+      9.04
+    ],
+    "objects_outside": [],
+    "passed": true
+  },
+  {
+    "room": "Shared bathroom",
+    "room_bounds_xy": [
+      1.94,
+      -4.03,
+      3.94,
+      -0.57
+    ],
+    "objects_outside": [],
+    "passed": true
+  }
+]

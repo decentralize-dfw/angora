@@ -1,0 +1,76 @@
+{
+  "native_sha256": "bb5df11d369e346ab26e00c05874219a8bdaa765d583c72da1447412ead22e74",
+  "stage": "work_in_progress",
+  "images": {
+    "14_shared_bathroom": {
+      "file": "build/renders/14_shared_bathroom.png",
+      "sha256": "b02586b67bf0d9a641817843195f5184c8f4e870f7371dcfb1fc8d1b66286d24",
+      "width": 1000,
+      "samples": 24,
+      "seconds": 99.02
+    },
+    "10_main_kitchen": {
+      "file": "build/renders/10_main_kitchen.png",
+      "sha256": "6cf426f1dbbc514a178741b1d462f9b83d1a14802e54d71a7ae88535996d5cba",
+      "width": 1000,
+      "samples": 24,
+      "seconds": 97.02
+    },
+    "06_master_bedroom": {
+      "file": "build/renders/06_master_bedroom.png",
+      "sha256": "654ad3015cbcc6fe449a4ecd62d3b7c8473fc1f340556d30ed2c43a44c683247",
+      "width": 1000,
+      "samples": 24,
+      "seconds": 97.29
+    },
+    "05_main_lounge": {
+      "file": "build/renders/05_main_lounge.png",
+      "sha256": "628f734d040498e0b6ec10cb3b6ed7ffb5652e8d0254148f9cde88a4ec5b46cc",
+      "width": 1000,
+      "samples": 24,
+      "seconds": 82.15
+    },
+    "01_front": {
+      "file": "build/renders/01_front.png",
+      "sha256": "3071e80cd6a7f799ca557d438750e38f9c9a96d348768a148546dd21fb85b8d3",
+      "width": 1000,
+      "samples": 24,
+      "seconds": 43.72
+    },
+    "02_pool": {
+      "file": "build/renders/02_pool.png",
+      "sha256": "81e2e983e968a8569a00c4cff28ccfb80568050a8b4466ddef174530dd23ec76",
+      "width": 1000,
+      "samples": 24,
+      "seconds": 55.35
+    },
+    "11_southwest_bedroom": {
+      "file": "build/renders/11_southwest_bedroom.png",
+      "sha256": "c7bb521fc3befb8e3fa7c93b8524bf6af293266a041a3e8dab91b0da1f1ede38",
+      "width": 1000,
+      "samples": 24,
+      "seconds": 105.9
+    },
+    "12_garden_lounge": {
+      "file": "build/renders/12_garden_lounge.png",
+      "sha256": "c370d64cb06f1cede44975f74ac7446d4fa9d76ed3d184902c6619a210f10fa9",
+      "width": 1000,
+      "samples": 24,
+      "seconds": 90.02
+    },
+    "03_neighborhood": {
+      "file": "build/renders/03_neighborhood.png",
+      "sha256": "0cb526bba9f81c27f0802950d419e2c038accd013cdd72b94d1aafbf4b923c17",
+      "width": 1000,
+      "samples": 24,
+      "seconds": 37.05
+    },
+    "13_master_bathroom": {
+      "file": "build/renders/13_master_bathroom.png",
+      "sha256": "f9837d1e6a4c6b67c41488fff60e17247189e1c943a1c03c51bece53484b26b2",
+      "width": 1000,
+      "samples": 24,
+      "seconds": 118.86
+    }
+  }
+}

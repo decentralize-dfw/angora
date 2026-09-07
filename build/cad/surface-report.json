@@ -1,0 +1,261 @@
+[
+  {
+    "layer": "KAPI İÇ$ÇERÇEVE",
+    "source_curves": 828,
+    "triangles": 1535,
+    "unresolved_edges": 632,
+    "polygons": 261
+  },
+  {
+    "layer": "KAT 3$DUVAR KAPLAMA",
+    "source_curves": 1100,
+    "triangles": 2280,
+    "unresolved_edges": 531,
+    "polygons": 429
+  },
+  {
+    "layer": "KAT 3$DUVAR",
+    "source_curves": 865,
+    "triangles": 1870,
+    "unresolved_edges": 412,
+    "polygons": 354
+  },
+  {
+    "layer": "KAPI İÇ$KAPI",
+    "source_curves": 288,
+    "triangles": 2163,
+    "unresolved_edges": 642,
+    "polygons": 184
+  },
+  {
+    "layer": "KAT 2$DUVAR",
+    "source_curves": 888,
+    "triangles": 1770,
+    "unresolved_edges": 258,
+    "polygons": 278
+  },
+  {
+    "layer": "KAT 2$DUVAR KAPLAMA",
+    "source_curves": 1031,
+    "triangles": 1661,
+    "unresolved_edges": 324,
+    "polygons": 309
+  },
+  {
+    "layer": "KAT 1$DUVAR",
+    "source_curves": 908,
+    "triangles": 1166,
+    "unresolved_edges": 243,
+    "polygons": 211
+  },
+  {
+    "layer": "KAT 1$DUVAR KAPLAMA",
+    "source_curves": 1238,
+    "triangles": 1435,
+    "unresolved_edges": 820,
+    "polygons": 293
+  },
+  {
+    "layer": "KAT 0$DUVAR KAPLAMA",
+    "source_curves": 475,
+    "triangles": 428,
+    "unresolved_edges": 90,
+    "polygons": 109
+  },
+  {
+    "layer": "KAT 0$DUVAR",
+    "source_curves": 568,
+    "triangles": 662,
+    "unresolved_edges": 95,
+    "polygons": 146
+  },
+  {
+    "layer": "KAT 2$TAVAN",
+    "source_curves": 325,
+    "triangles": 254,
+    "unresolved_edges": 69,
+    "polygons": 88
+  },
+  {
+    "layer": "KAT 2$ZEMİN",
+    "source_curves": 137,
+    "triangles": 106,
+    "unresolved_edges": 21,
+    "polygons": 35
+  },
+  {
+    "layer": "KAT 1$TAVAN",
+    "source_curves": 451,
+    "triangles": 403,
+    "unresolved_edges": 87,
+    "polygons": 131
+  },
+  {
+    "layer": "KAT 0$TAVAN",
+    "source_curves": 144,
+    "triangles": 148,
+    "unresolved_edges": 44,
+    "polygons": 42
+  },
+  {
+    "layer": "ÇATII",
+    "source_curves": 769,
+    "triangles": 18505,
+    "unresolved_edges": 807,
+    "polygons": 4305
+  },
+  {
+    "layer": "KAT 3$ZEMİN KAPLAMA",
+    "source_curves": 328,
+    "triangles": 270,
+    "unresolved_edges": 73,
+    "polygons": 97
+  },
+  {
+    "layer": "KAT 3$ÜSTKATTAVAN - Copy - Copy",
+    "source_curves": 736,
+    "triangles": 21063,
+    "unresolved_edges": 2418,
+    "polygons": 1781
+  },
+  {
+    "layer": "KAT 2$ZEMİN KAPLAMA",
+    "source_curves": 324,
+    "triangles": 244,
+    "unresolved_edges": 63,
+    "polygons": 92
+  },
+  {
+    "layer": "ek dalgalar",
+    "source_curves": 935,
+    "triangles": 521,
+    "unresolved_edges": 352,
+    "polygons": 238
+  },
+  {
+    "layer": "KORKULUK",
+    "source_curves": 52394,
+    "triangles": 0,
+    "unresolved_edges": 980025,
+    "polygons": 0
+  },
+  {
+    "layer": "ÇATI ALIN",
+    "source_curves": 1253,
+    "triangles": 1658,
+    "unresolved_edges": 370,
+    "polygons": 360
+  },
+  {
+    "layer": "PENCERE_KAPI$SHUTTER AİM",
+    "source_curves": 23088,
+    "triangles": 125013,
+    "unresolved_edges": 245902,
+    "polygons": 7170
+  },
+  {
+    "layer": "PENCERE_KAPI$SHUTTER",
+    "source_curves": 1536,
+    "triangles": 5552,
+    "unresolved_edges": 84,
+    "polygons": 547
+  },
+  {
+    "layer": "PENCERE_KAPI$CAM",
+    "source_curves": 2552,
+    "triangles": 1984,
+    "unresolved_edges": 244,
+    "polygons": 891
+  },
+  {
+    "layer": "PENCERE_KAPI$ÇERÇEVE",
+    "source_curves": 3158,
+    "triangles": 2890,
+    "unresolved_edges": 511,
+    "polygons": 767
+  },
+  {
+    "layer": "PENCERE_KAPI$ÇEPHE ÇERÇECE",
+    "source_curves": 1564,
+    "triangles": 1916,
+    "unresolved_edges": 220,
+    "polygons": 423
+  },
+  {
+    "layer": "PENCERE_KAPI$CEPHE FRAME",
+    "source_curves": 996,
+    "triangles": 936,
+    "unresolved_edges": 60,
+    "polygons": 297
+  },
+  {
+    "layer": "PENCERE_KAPI$PENCERE KAPI",
+    "source_curves": 144,
+    "triangles": 118,
+    "unresolved_edges": 20,
+    "polygons": 33
+  },
+  {
+    "layer": "KAT 0$ZEMİN KAPLAMA",
+    "source_curves": 146,
+    "triangles": 156,
+    "unresolved_edges": 43,
+    "polygons": 45
+  },
+  {
+    "layer": "KAT 2$MERDİVEN",
+    "source_curves": 432,
+    "triangles": 364,
+    "unresolved_edges": 0,
+    "polygons": 182
+  },
+  {
+    "layer": "KAT 0$MERDİVEN",
+    "source_curves": 408,
+    "triangles": 342,
+    "unresolved_edges": 0,
+    "polygons": 169
+  },
+  {
+    "layer": "KAT 1$MERDİVEN",
+    "source_curves": 442,
+    "triangles": 366,
+    "unresolved_edges": 6,
+    "polygons": 179
+  },
+  {
+    "layer": "KAT 3$ZEMİN",
+    "source_curves": 141,
+    "triangles": 130,
+    "unresolved_edges": 53,
+    "polygons": 31
+  },
+  {
+    "layer": "KAT 1$ZEMİN KAPLAMA",
+    "source_curves": 596,
+    "triangles": 542,
+    "unresolved_edges": 113,
+    "polygons": 188
+  },
+  {
+    "layer": "KAT 1$ZEMİN",
+    "source_curves": 162,
+    "triangles": 136,
+    "unresolved_edges": 62,
+    "polygons": 39
+  },
+  {
+    "layer": "KAT 0$ZEMİN",
+    "source_curves": 84,
+    "triangles": 74,
+    "unresolved_edges": 20,
+    "polygons": 19
+  },
+  {
+    "layer": "DORBAK",
+    "source_curves": 24,
+    "triangles": 18,
+    "unresolved_edges": 0,
+    "polygons": 9
+  }
+]

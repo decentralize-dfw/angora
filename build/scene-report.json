@@ -1,0 +1,212 @@
+{
+  "objects": 3517,
+  "collections": 120,
+  "mesh_triangles_unique": 1091776,
+  "cad_layers": [
+    {
+      "source_layer": "KAPI İÇ$ÇERÇEVE",
+      "triangles": 1535,
+      "unresolved_edges": 632
+    },
+    {
+      "source_layer": "KAT 3$DUVAR KAPLAMA",
+      "triangles": 2302,
+      "unresolved_edges": 531
+    },
+    {
+      "source_layer": "KAT 3$DUVAR",
+      "triangles": 1894,
+      "unresolved_edges": 412
+    },
+    {
+      "source_layer": "KAPI İÇ$KAPI",
+      "triangles": 2163,
+      "unresolved_edges": 642
+    },
+    {
+      "source_layer": "KAT 2$DUVAR",
+      "triangles": 1770,
+      "unresolved_edges": 258
+    },
+    {
+      "source_layer": "KAT 2$DUVAR KAPLAMA",
+      "triangles": 1661,
+      "unresolved_edges": 324
+    },
+    {
+      "source_layer": "KAT 1$DUVAR",
+      "triangles": 1179,
+      "unresolved_edges": 243
+    },
+    {
+      "source_layer": "KAT 1$DUVAR KAPLAMA",
+      "triangles": 1447,
+      "unresolved_edges": 820
+    },
+    {
+      "source_layer": "KAT 0$DUVAR KAPLAMA",
+      "triangles": 428,
+      "unresolved_edges": 90
+    },
+    {
+      "source_layer": "KAT 0$DUVAR",
+      "triangles": 662,
+      "unresolved_edges": 95
+    },
+    {
+      "source_layer": "KAT 2$TAVAN",
+      "triangles": 254,
+      "unresolved_edges": 69
+    },
+    {
+      "source_layer": "KAT 2$ZEMİN",
+      "triangles": 106,
+      "unresolved_edges": 21
+    },
+    {
+      "source_layer": "KAT 1$TAVAN",
+      "triangles": 403,
+      "unresolved_edges": 87
+    },
+    {
+      "source_layer": "KAT 0$TAVAN",
+      "triangles": 148,
+      "unresolved_edges": 44
+    },
+    {
+      "source_layer": "ÇATII",
+      "triangles": 18505,
+      "unresolved_edges": 807
+    },
+    {
+      "source_layer": "KAT 3$ZEMİN KAPLAMA",
+      "triangles": 270,
+      "unresolved_edges": 73
+    },
+    {
+      "source_layer": "KAT 3$ÜSTKATTAVAN - Copy - Copy",
+      "triangles": 21063,
+      "unresolved_edges": 2418
+    },
+    {
+      "source_layer": "KAT 2$ZEMİN KAPLAMA",
+      "triangles": 244,
+      "unresolved_edges": 63
+    },
+    {
+      "source_layer": "ek dalgalar",
+      "triangles": 521,
+      "unresolved_edges": 352
+    },
+    {
+      "source_layer": "ÇATI ALIN",
+      "triangles": 1658,
+      "unresolved_edges": 370
+    },
+    {
+      "source_layer": "PENCERE_KAPI$SHUTTER AİM",
+      "triangles": 125013,
+      "unresolved_edges": 245902
+    },
+    {
+      "source_layer": "PENCERE_KAPI$SHUTTER",
+      "triangles": 5552,
+      "unresolved_edges": 84
+    },
+    {
+      "source_layer": "PENCERE_KAPI$CAM",
+      "triangles": 1984,
+      "unresolved_edges": 244
+    },
+    {
+      "source_layer": "PENCERE_KAPI$ÇERÇEVE",
+      "triangles": 2890,
+      "unresolved_edges": 511
+    },
+    {
+      "source_layer": "PENCERE_KAPI$ÇEPHE ÇERÇECE",
+      "triangles": 1916,
+      "unresolved_edges": 220
+    },
+    {
+      "source_layer": "PENCERE_KAPI$CEPHE FRAME",
+      "triangles": 936,
+      "unresolved_edges": 60
+    },
+    {
+      "source_layer": "PENCERE_KAPI$PENCERE KAPI",
+      "triangles": 118,
+      "unresolved_edges": 20
+    },
+    {
+      "source_layer": "KAT 0$ZEMİN KAPLAMA",
+      "triangles": 156,
+      "unresolved_edges": 43
+    },
+    {
+      "source_layer": "KAT 2$MERDİVEN",
+      "triangles": 364,
+      "unresolved_edges": 0
+    },
+    {
+      "source_layer": "KAT 0$MERDİVEN",
+      "triangles": 342,
+      "unresolved_edges": 0
+    },
+    {
+      "source_layer": "KAT 1$MERDİVEN",
+      "triangles": 366,
+      "unresolved_edges": 6
+    },
+    {
+      "source_layer": "KAT 3$ZEMİN",
+      "triangles": 130,
+      "unresolved_edges": 53
+    },
+    {
+      "source_layer": "KAT 1$ZEMİN KAPLAMA",
+      "triangles": 502,
+      "unresolved_edges": 113
+    },
+    {
+      "source_layer": "KAT 1$ZEMİN",
+      "triangles": 136,
+      "unresolved_edges": 62
+    },
+    {
+      "source_layer": "KAT 0$ZEMİN",
+      "triangles": 74,
+      "unresolved_edges": 20
+    },
+    {
+      "source_layer": "DORBAK",
+      "triangles": 18,
+      "unresolved_edges": 0
+    }
+  ],
+  "stage": "Photo-directed architecture and furnishings WIP",
+  "completion_status": "work_in_progress",
+  "camera_names": [
+    "01_front",
+    "02_pool",
+    "03_neighborhood",
+    "04_garden_lounge",
+    "05_main_lounge",
+    "06_master_bedroom",
+    "07_attic",
+    "08_plan",
+    "10_main_kitchen",
+    "11_southwest_bedroom",
+    "12_garden_lounge",
+    "13_master_bathroom",
+    "14_shared_bathroom",
+    "09_main_panorama"
+  ],
+  "web_ready": false,
+  "remaining": [
+    "Source openings and surface normals QA",
+    "Complete room-by-room dimensions and furniture placement QA",
+    "Photo color/texture match and web texture baking",
+    "Mobile performance validation"
+  ]
+}

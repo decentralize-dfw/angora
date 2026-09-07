@@ -1,0 +1,17 @@
+{
+  "lower_finish_z_m": 2.7996,
+  "upper_finish_z_m": 3.0996,
+  "source_footprint_area_m2": 38.71249999999999,
+  "repairs": [
+    {
+      "layer": "KAT 1$ZEM\u0130N KAPLAMA",
+      "clipped_faces": 40,
+      "removed_overlapping_surface_area_m2": 48.0743
+    },
+    {
+      "layer": "KAT 1$ZEM\u0130N",
+      "clipped_faces": 0,
+      "removed_overlapping_surface_area_m2": 0
+    }
+  ]
+}

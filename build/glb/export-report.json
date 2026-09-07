@@ -1,0 +1,50 @@
+[
+  {
+    "file": "angora21-villa-review.glb",
+    "bytes": 18071044,
+    "selected_objects": 1583,
+    "native_sha256": "bb5df11d369e346ab26e00c05874219a8bdaa765d583c72da1447412ead22e74",
+    "sha256": "65b65053a933e77d7c87bec317b2f0b73d4c76c867f76b88cb9dfa247933e017",
+    "purpose": "model_review",
+    "compression": "KHR_draco_mesh_compression",
+    "blender_bounds_m": [
+      [
+        -12.0,
+        -15.350000381469727,
+        -1.5799999982118607
+      ],
+      [
+        11.433195114135742,
+        24.899999141693115,
+        14.420000076293945
+      ]
+    ],
+    "bounds_method": "evaluated_rendered_mesh_vertices",
+    "texture_bake_complete": false,
+    "mobile_performance_validated": false
+  },
+  {
+    "file": "angora21-neighborhood-review.glb",
+    "bytes": 4079444,
+    "selected_objects": 1852,
+    "native_sha256": "bb5df11d369e346ab26e00c05874219a8bdaa765d583c72da1447412ead22e74",
+    "sha256": "aa252ad3cf319c3a8cf214ae5e5c7c751dd9d3b206ae41ec57f88d50a071db54",
+    "purpose": "model_review",
+    "compression": "KHR_draco_mesh_compression",
+    "blender_bounds_m": [
+      [
+        -136.26348876953125,
+        -164.48959350585938,
+        -11.800000190734863
+      ],
+      [
+        173.7607421875,
+        147.650634765625,
+        25.200000762939453
+      ]
+    ],
+    "bounds_method": "evaluated_rendered_mesh_vertices",
+    "texture_bake_complete": false,
+    "mobile_performance_validated": false
+  }
+]

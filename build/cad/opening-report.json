@@ -1,0 +1,47 @@
+{
+  "glazing_planes": 44,
+  "photo_plan_garage_openings": 1,
+  "garage_dimension_label_allowed": false,
+  "layers": [
+    {
+      "layer": "KAT 3$DUVAR KAPLAMA",
+      "cut_triangles": 160,
+      "removed_surface_area_m2": 6.692102384395215e-16
+    },
+    {
+      "layer": "KAT 3$DUVAR",
+      "cut_triangles": 155,
+      "removed_surface_area_m2": 5.594686497932544e-16
+    },
+    {
+      "layer": "KAT 2$DUVAR",
+      "cut_triangles": 536,
+      "removed_surface_area_m2": 6.37781927964598e-17
+    },
+    {
+      "layer": "KAT 2$DUVAR KAPLAMA",
+      "cut_triangles": 0,
+      "removed_surface_area_m2": 0
+    },
+    {
+      "layer": "KAT 1$DUVAR",
+      "cut_triangles": 311,
+      "removed_surface_area_m2": 14.261672000000006
+    },
+    {
+      "layer": "KAT 1$DUVAR KAPLAMA",
+      "cut_triangles": 4,
+      "removed_surface_area_m2": 14.103672000000003
+    },
+    {
+      "layer": "KAT 0$DUVAR KAPLAMA",
+      "cut_triangles": 0,
+      "removed_surface_area_m2": 0
+    },
+    {
+      "layer": "KAT 0$DUVAR",
+      "cut_triangles": 181,
+      "removed_surface_area_m2": 1.6710265983432837e-17
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+Bu klasör önceki ayrıntı ve ışık denemelerini korur. Buradaki görüntüler güncel Blender dosyasının renderları olarak kullanılmamalıdır. Güncel görseller `../render-manifest.json` içinde kaynak sahne ve görüntü SHA-256 değerleriyle listelenir.

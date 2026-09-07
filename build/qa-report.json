@@ -1,0 +1,59 @@
+{
+  "visible_geometry_objects": 3435,
+  "evaluated_triangles": 2921104,
+  "furniture_objects": 452,
+  "camera_furniture_bbox_intersections": [],
+  "dimension_labels_enabled": false,
+  "photo_alignment_complete": false,
+  "publication_ready": false,
+  "web_texture_baking_complete": false,
+  "living_split_level_probe": {
+    "hit": "F1 | KAT 1$ZEMİN KAPLAMA",
+    "z_m": 2.799999952316284,
+    "passed": true
+  },
+  "garage_visibility_probe": {
+    "first_hit": "Garage sectional panel.002",
+    "passed": true
+  },
+  "cad_floor_ownership_errors": [],
+  "pool_basin_probe": {
+    "first_hit": "Pool basin floor",
+    "z_m": -1.4199999570846558,
+    "passed": true
+  },
+  "pool_terrace_coverage": [
+    {
+      "xy_m": [
+        -0.5,
+        13.12
+      ],
+      "first_hit": "Pool terrace",
+      "passed": true
+    },
+    {
+      "xy_m": [
+        -0.5,
+        17.74
+      ],
+      "first_hit": "Pool terrace.001",
+      "passed": true
+    },
+    {
+      "xy_m": [
+        -6,
+        13.5
+      ],
+      "first_hit": "Pool terrace.002",
+      "passed": true
+    },
+    {
+      "xy_m": [
+        5,
+        17.5
+      ],
+      "first_hit": "Pool terrace.003",
+      "passed": true
+    }
+  ]
+}
