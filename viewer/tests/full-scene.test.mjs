@@ -47,19 +47,27 @@ test('The shipped full scene retains lower stairs and full-height floors in ever
   assert.ok(total < 45000000, 'whole-scene transfer budget');
 });
 
-test('Wall caps share one moving plane and only use supplied wall volumes', () => {
-  const plane = new THREE.Plane(new THREE.Vector3(0, -1, 0), 4.6996);
-  const wall = new THREE.Mesh(new THREE.BoxGeometry(0.2, 3, 4), new THREE.MeshBasicMaterial());
-  wall.position.set(2, 3, -1);
-  const caps = createWallCaps([wall], plane);
-  const [back, front, cap] = caps.group.children;
-  assert.equal(caps.group.children.length, 3);
-  assert.equal(back.geometry, wall.geometry); assert.equal(front.geometry, wall.geometry);
-  assert.equal(back.material.clippingPlanes[0], plane);
-  assert.equal(front.material.clippingPlanes[0], plane);
-  assert.deepEqual(back.matrix.elements, wall.matrixWorld.elements);
-  assert.equal(cap.material.stencilFunc, THREE.NotEqualStencilFunc);
-  caps.update(7.9714, true);
-  assert.equal(cap.position.y, 7.9714);
+test('Real section geometry fills the wall and keeps gallery, stair and bedroom clear', () => {
+  const dir = new URL('../public/models/full/', import.meta.url);
+  const manifest = JSON.parse(fs.readFileSync(new URL('manifest.json', dir)));
+  const bytes = fs.readFileSync(new URL(manifest.section_atlas.file, dir));
+  assert.equal(createHash('sha256').update(bytes).digest('hex'), manifest.section_atlas.sha256);
+  const atlas = JSON.parse(bytes);
+  assert.equal(atlas.source_architecture_sha256, manifest.library_hashes['build/blender/layers/10-architecture.blend']);
+  assert.equal(atlas.source_fittings_sha256, manifest.library_hashes['build/blender/layers/20-fixed-fittings.blend']);
+  for (let floor = 0; floor < 4; floor++) {
+    const height = sectionHeight('f' + floor, 30);
+    assert.ok(atlas.slices.some(s => Math.abs(s.height - height) < 1e-7), 'exact requested floor cut');
+  }
+  const caps = createWallCaps(atlas), cap = caps.group.children[0];
+  caps.update(7.9714, true); caps.group.updateMatrixWorld(true);
+  assert.equal(cap.position.y, 7.9714); assert.equal(cap.material.stencilWrite, false);
+  function hits(x, nativeY) {
+    return new THREE.Raycaster(new THREE.Vector3(x, 9, -nativeY), new THREE.Vector3(0, -1, 0)).intersectObject(cap).length;
+  }
+  assert.ok(hits(-5.132, 5) > 0, 'solid cross section between source faces -5.232 and -5.032');
+  for (const [x, y] of [[1, .4], [2, 1.2], [-3.35, 6.9]]) assert.equal(hits(x, y), 0, 'occupied space must remain open');
+  // Intermediate cap follows the continuously moving plane, independent of camera orientation.
+  caps.update(7.95, true); assert.equal(cap.position.y, 7.95);
   caps.update(30, false); assert.equal(caps.group.visible, false);
 });

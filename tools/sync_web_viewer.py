@@ -21,4 +21,8 @@ for asset in full['assets']:
     target=destination/'full'/asset['file'];target.parent.mkdir(parents=True,exist_ok=True)
     shutil.copy2(path,target)
 shutil.copy2(source/'full/manifest.json',destination/'full/manifest.json')
+if full.get('section_atlas'):
+    atlas=full['section_atlas'];path=source/'full'/atlas['file']
+    assert hashlib.sha256(path.read_bytes()).hexdigest()==atlas['sha256']
+    shutil.copy2(path,destination/'full'/atlas['file'])
 print('Viewer models synchronized:',len(full['assets']), 'uncut assets + legacy snapshots')

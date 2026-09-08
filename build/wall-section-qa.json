@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "coordinate_system": "glTF_XZ",
+  "method": "paired_source_wall_faces_and_closed_thin_contours",
+  "source_architecture_sha256": "4105de07c4dae4752294724135bbf067afb2c2ce64d31f1fff2d09139fe35776",
+  "source_fittings_sha256": "c13133610ab546e18821fbc8e00a6dae2e155237c9d3ccee5f3676d338ba6027",
+  "exact_floor_heights_m": [
+    1.6,
+    4.6996,
+    7.9714,
+    11.0705
+  ],
+  "transition_sample_step_m": 0.08,
+  "coordinate_snap_m": 0.004,
+  "maximum_paired_face_distance_m": 0.501,
+  "dimension_label_allowed": false,
+  "status": "passed",
+  "slice_count": 192,
+  "file": {
+    "file": "sections.json",
+    "bytes": 1085535,
+    "sha256": "1ef6fb771beebd5532d1070acbeeb81b01a13c7be1b2603d6afa2188376c6600"
+  },
+  "exact_floor_sections": [
+    {
+      "height": 1.6,
+      "area_m2": 14.20789,
+      "triangles": 131
+    },
+    {
+      "height": 4.6996,
+      "area_m2": 12.79272,
+      "triangles": 301
+    },
+    {
+      "height": 7.9714,
+      "area_m2": 12.26718,
+      "triangles": 252
+    },
+    {
+      "height": 11.0705,
+      "area_m2": 4.65267,
+      "triangles": 250
+    }
+  ],
+  "room_and_gallery_test_points_clear": true,
+  "known_external_wall_filled": true,
+  "note": "Deterministic geometry caps; original open CAD mesh winding is not used for screen-space filling."
+}

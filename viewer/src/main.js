@@ -84,7 +84,7 @@ function frame() {
 function setup() {
   scene = new THREE.Scene(); scene.background = new THREE.Color('#e9eeed');
   camera = new THREE.OrthographicCamera(-30, 30, 30, -30, 0.1, 2500);
-  renderer = new THREE.WebGLRenderer({antialias:true, stencil:true, alpha:false, powerPreference:'high-performance'});
+  renderer = new THREE.WebGLRenderer({antialias:true, alpha:false, powerPreference:'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.25;
@@ -144,9 +144,15 @@ async function loadModel() {
       }
     }
     // Bound decode concurrency on phones, and settle both workers before cleanup.
-    const results = await Promise.allSettled([worker(), worker()]);
+    async function loadSections() {
+      const url = new URL(manifest.section_atlas?.file ?? 'sections.json', modelRoot);
+      if (manifest.section_atlas?.sha256) url.searchParams.set('v', manifest.section_atlas.sha256.slice(0, 12));
+      const response = await fetch(url);
+      if (!response.ok) throw Error(`Section atlas HTTP ${response.status}`);
+      return response.json();
+    }
+    const results = await Promise.allSettled([worker(), worker(), loadSections()]);
     const failure = results.find(r => r.status === 'rejected'); if (failure) throw failure.reason;
-    const walls = [];
     for (const [id, group] of staged) {
       groups.set(id, group); scene.add(group);
       group.traverse(o => {
@@ -155,7 +161,6 @@ async function loadModel() {
         if (id !== 'context') for (const m of Array.isArray(o.material) ? o.material : [o.material]) {
           m.clippingPlanes = [clip]; m.side = THREE.DoubleSide;
         }
-        if (o.userData.section_cap_eligible === true) walls.push(o);
       });
     }
     buildingBox = new THREE.Box3();
@@ -163,7 +168,7 @@ async function loadModel() {
     // Keep the entrance, pool terrace and basement garden in the building frame.
     gardenBox = new THREE.Box3(new THREE.Vector3(-10.2, -4, -29.1), new THREE.Vector3(12.5, 3.4, 11));
     fullHeight = buildingBox.max.y + 2;
-    caps = createWallCaps(walls, clip); scene.add(caps.group);
+    caps = createWallCaps(results[2].value); scene.add(caps.group);
     ready = true; status.hidden = true;
     selectView(selected, true);
   } catch (error) {

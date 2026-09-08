@@ -22,15 +22,20 @@ Dört kat, dış ayrıntılar, bahçe ve mahalle bir kez yüklenir. Kat değişt
 yeniden model indirmez; tek üst kesit düzlemi 1,05 saniyede hareket eder.
 Alt kesit düzlemi yoktur: alt katlar, merdiven ve mevcut galeri boşluğu korunur.
 Bina ve bodrum kadrajları bahçeyi içerir. Katlar arasında kamera konumu korunur;
-`Ortala` seçilen kata yeniden kadraj yapar. Duvar hacimlerine stencil ile dolu,
-taramalı kesit yüzeyi uygulanır; oda ve galeri boşlukları doldurulmaz.
+`Ortala` seçilen kata yeniden kadraj yapar. Karşılıklı kaynak duvar yüzeylerinden
+dolu ve taramalı kesit geometrisi üretilir; oda ve galeri boşlukları doldurulmaz.
+Dört katın +1,60 m kesiti tam kotundadır. Geçiş sırasında düzlem sürekli hareket
+eder; kesit profili 8 cm aralıklı ön hesaplanmış dilimlerden seçilir. Dolgu,
+kaynak CAD yüzeylerinin tutarsız yönlerine veya kameranın bakışına bağlı değildir.
+`build/wall-section-qa.json` geometri ve boşluk kontrollerini kaydeder.
 
 Sayfa kendi yayımlandığı repo sürümünün model listesini kullanır. Yedi parça
-toplam yaklaşık 42,8 MB; aynı anda en fazla iki dosya çözülür ve durgun sahne
+toplam yaklaşık 43 MB, kesit geometrisi ayrıca 1,1 MB; aynı anda en fazla iki dosya çözülür ve durgun sahne
 sürekli yeniden çizilmez. Gerçek OrbitControls ile dokunma olayları ve sabit
 kamera yüksekliği, gerçek GLB dosyalarının hash ve tam yükseklik sınırları
-kontrol edildi. Bulut tarayıcısında WebGL kapalı olduğu için yeni kesit
-shader'ının görsel testi ve gerçek telefon performansı henüz doğrulanmadı.
+kontrol edildi. Gerçek kesit geometrisi ışın testleri ve Blender görüntüsüyle
+denetlendi. Bulut tarayıcısında WebGL kapalı olduğu için web shader'ının görsel
+testi ve gerçek telefon performansı henüz doğrulanmadı.
 
 8 Eylül düzeltmesi: kullanıcı teyidiyle asansör yalnız bodrum, giriş ve birinci
 katı hizmet eder. Çatıdaki 31 asansör parçası kaldırıldı; yalnız eski asansör
@@ -67,6 +72,17 @@ yenilemek için Blender içinde `tools/export_web_viewer.py` çalıştırılır;
 katını günceller. Eski `--views floor-1` modu statik kontrol kesitleri içindir.
 Bağlı dosyalar değiştiğinde önce `layer-manifest.json` hashleri yenilenir. Ardından
 `python tools/sync_web_viewer.py` ile uygulamadaki model kopyaları eşitlenir.
+Mimari veya asansör duvarları değiştiğinde, eşitlemeden önce kesitler yenilenir:
+
+```bash
+bash tools/run_blender.sh build/blender/angora21-working.blend --python tools/export_wall_sections.py
+python tools/build_section_atlas.py
+python tools/sync_web_viewer.py
+npm --prefix viewer test
+npm --prefix viewer run build:pages
+```
+
+Kesit üretimi normal Python ortamında NumPy, Shapely ve mapbox-earcut kullanır.
 
 ## Çalışma durumu
 

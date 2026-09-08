@@ -1,7 +1,7 @@
 """Blender geometry QA of the real uncut GLBs, with an upper cut only.
 
-This is not a browser/shader screenshot. Native wall caps are filled only at
-the cut, for a readable geometry review. No lower plane or floor isolation.
+This is not a browser/shader screenshot. It uses the same prepared wall-section
+geometry as the web viewer. No lower plane or floor isolation.
 """
 import bpy,bmesh,sys,json,hashlib
 from pathlib import Path
@@ -17,19 +17,32 @@ for asset in manifest['assets']:
     bpy.ops.import_scene.gltf(filepath=str(ROOT/'build/web/full'/asset['file']))
     if asset['id']=='context':
         for o in set(bpy.context.scene.objects)-before:o['review_context']=True
-caps=bpy.data.materials.new('Neutral solid wall section — geometry QA');caps.diffuse_color=(.15,.12,.085,1)
 for o in list(bpy.context.scene.objects):
     if o.type!='MESH' or o.get('review_context'):continue
     bm=bmesh.new();bm.from_mesh(o.data);bm.transform(o.matrix_world)
     result=bmesh.ops.bisect_plane(bm,geom=list(bm.verts)+list(bm.edges)+list(bm.faces),
       dist=.00001,plane_co=(0,0,cut),plane_no=(0,0,1),clear_outer=True,clear_inner=False)
-    if o.get('section_cap_eligible'):
-        edges=[e for e in bm.edges if e.is_boundary and all(abs(v.co.z-cut)<.0001 for v in e.verts)]
-        if edges:
-            fill=bmesh.ops.holes_fill(bm,edges=edges,sides=0)
-            idx=len(o.data.materials);o.data.materials.append(caps)
-            for f in fill['faces']:f.material_index=idx
     bm.to_mesh(o.data);bm.free();o.matrix_world.identity()
+if floor is not None:
+    atlas_path=ROOT/'build/web/full'/manifest['section_atlas']['file']
+    assert hashlib.sha256(atlas_path.read_bytes()).hexdigest()==manifest['section_atlas']['sha256']
+    atlas=json.loads(atlas_path.read_text())
+    section=min(atlas['slices'],key=lambda s:abs(s['height']-cut))
+    assert abs(section['height']-cut)<1e-6,'Floor review requires exact section elevation'
+    vertices=[(section['p'][i],-section['p'][i+1],cut) for i in range(0,len(section['p']),2)]
+    faces=[section['i'][i:i+3] for i in range(0,len(section['i']),3)]
+    mesh=bpy.data.meshes.new('Published wall-section contours');mesh.from_pydata(vertices,[],faces);mesh.update()
+    cap=bpy.data.objects.new('Solid hatched wall cross section',mesh);bpy.context.scene.collection.objects.link(cap)
+    mat=bpy.data.materials.new('World-scale diagonal section hatch');mat.use_nodes=True
+    n=mat.node_tree.nodes;l=mat.node_tree.links;n.clear()
+    out=n.new('ShaderNodeOutputMaterial');emission=n.new('ShaderNodeEmission');l.new(emission.outputs[0],out.inputs['Surface'])
+    position=n.new('ShaderNodeNewGeometry');xyz=n.new('ShaderNodeSeparateXYZ');l.new(position.outputs['Position'],xyz.inputs[0])
+    diff=n.new('ShaderNodeMath');diff.operation='SUBTRACT';l.new(xyz.outputs['X'],diff.inputs[0]);l.new(xyz.outputs['Y'],diff.inputs[1])
+    previous=diff.outputs[0]
+    for operation,value in [('DIVIDE',.14),('FRACT',0),('SUBTRACT',.5),('ABSOLUTE',0),('LESS_THAN',.065),('MULTIPLY',.62)]:
+        math=n.new('ShaderNodeMath');math.operation=operation;l.new(previous,math.inputs[0]);math.inputs[1].default_value=value;previous=math.outputs[0]
+    mix=n.new('ShaderNodeMixRGB');mix.inputs[1].default_value=(.70,.64,.53,1);mix.inputs[2].default_value=(.19,.17,.13,1)
+    l.new(previous,mix.inputs[0]);l.new(mix.outputs[0],emission.inputs['Color']);mesh.materials.append(mat)
 scene=bpy.context.scene
 center=Vector((.4,4,cut-2.5)) if floor else Vector((1,7,-.6))
 if floor is None:center=Vector((0,3,3))
@@ -50,6 +63,7 @@ path=ROOT/'build/renders'/(f'full-scene-floor-{floor}.png' if floor is not None 
 bpy.ops.render.render(write_still=True)
 report={'render':str(path.relative_to(ROOT)),'kind':'Blender GLB geometry review; not a web shader screenshot',
  'floor_index':floor,'upper_cut_m':cut,'lower_cut':None,'context_omitted_for_close_inspection':False,
+ 'section_atlas_sha256':manifest.get('section_atlas',{}).get('sha256') if floor is not None else None,
  'model_manifest_sha256':hashlib.sha256((ROOT/'build/web/full/manifest.json').read_bytes()).hexdigest(),
  'render_sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
 path.with_suffix('.json').write_text(json.dumps(report,indent=2))

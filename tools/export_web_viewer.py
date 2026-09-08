@@ -156,9 +156,16 @@ manifest={'version':2 if FULL else 1,'source_native_sha256':source_hash,'units':
           'native_source':'build/blender/angora21-working.blend'}
 if FULL:
     manifest.update(full_scene=True,geometry_preclipped=False,clip_lower_plane=False,stairs_preserved=True,
-                    lift_served_floor_indices=[0,1,2],section_caps='runtime_stencil_hatch_on_wall_volumes',
+                    lift_served_floor_indices=[0,1,2],section_caps='requires_section_atlas_rebuild',
                     view_assets={'neighborhood':order,'building':order,'floors':order},
                     library_hashes={r['path']:r['sha256'] for r in json.loads((ROOT/'build/blender/layer-manifest.json').read_text())['files']})
+    atlas=OUT/'sections.json'
+    if atlas.exists():
+        data=json.loads(atlas.read_text())
+        architecture=hashlib.sha256((ROOT/'build/blender/layers/10-architecture.blend').read_bytes()).hexdigest()
+        fittings=hashlib.sha256((ROOT/'build/blender/layers/20-fixed-fittings.blend').read_bytes()).hexdigest()
+        if data['source_architecture_sha256']==architecture and data['source_fittings_sha256']==fittings:
+            manifest.update(section_caps='prepared_geometric_wall_contours',section_atlas={'file':atlas.name,'bytes':atlas.stat().st_size,'sha256':hashlib.sha256(atlas.read_bytes()).hexdigest()})
 path=OUT/'manifest.json';tmp=path.with_suffix('.tmp');tmp.write_text(json.dumps(manifest,ensure_ascii=False,indent=2));tmp.replace(path)
 assert hashlib.sha256(source.read_bytes()).hexdigest()==source_hash,'Native source changed during web export'
 print('WEB_DELIVERY_COMPLETE',sum(r['bytes'] for r in records),flush=True)

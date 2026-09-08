@@ -201,7 +201,7 @@
     1,
     2
   ],
-  "section_caps": "runtime_stencil_hatch_on_wall_volumes",
+  "section_caps": "prepared_geometric_wall_contours",
   "view_assets": {
     "neighborhood": [
       "level-0",
@@ -259,5 +259,10 @@
     "build/blender/layers/50-neighborhood-08.blend": "5af327eca78fdff0cd8f691a637663702c950a6c421e06f833e59cf31317a866",
     "build/blender/layers/50-neighborhood-09.blend": "98451a35c44f60c8d8bd49adcfdf3acd7df2e25c86d012e649aee58ccc520beb",
     "build/blender/layers/50-neighborhood-10.blend": "974bacff4023107f18e767e082ef898dfa5ba495700e3519fc1e35f9f9504db9"
+  },
+  "section_atlas": {
+    "file": "sections.json",
+    "bytes": 1085535,
+    "sha256": "1ef6fb771beebd5532d1070acbeeb81b01a13c7be1b2603d6afa2188376c6600"
   }
 }

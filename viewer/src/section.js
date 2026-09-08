@@ -9,41 +9,13 @@ export function smoothStep(t) {
   return t * t * (3 - 2 * t);
 }
 
-// The same upper plane clips every villa layer. The stencil is generated only
-// by structural wall volumes: it cannot paint across rooms or the gallery void.
-// Based on Three.js r180 examples/webgl_clipping_stencil.html.
-export function createWallCaps(walls, plane) {
-  const group = new THREE.Group();
-  group.name = 'Moving wall section hatch';
-  const base = new THREE.MeshBasicMaterial({
-    depthWrite: false, depthTest: false, colorWrite: false,
-    stencilWrite: true, stencilFunc: THREE.AlwaysStencilFunc,
-    clippingPlanes: [plane]
-  });
-  const back = base.clone(), front = base.clone();
-  // Material.clone clones Plane objects too; explicitly share the animated one.
-  back.clippingPlanes = front.clippingPlanes = [plane];
-  back.side = THREE.BackSide; front.side = THREE.FrontSide;
-  for (const key of ['stencilFail', 'stencilZFail', 'stencilZPass']) {
-    back[key] = THREE.IncrementWrapStencilOp;
-    front[key] = THREE.DecrementWrapStencilOp;
-  }
-  base.dispose();
-  for (const source of walls) {
-    source.updateWorldMatrix(true, false);
-    for (const material of [back, front]) {
-      const mesh = new THREE.Mesh(source.geometry, material);
-      mesh.matrix.copy(source.matrixWorld); mesh.matrixAutoUpdate = false;
-      mesh.renderOrder = 1; mesh.frustumCulled = false;
-      group.add(mesh);
-    }
-  }
-  const material = new THREE.ShaderMaterial({
-    side: THREE.DoubleSide, stencilWrite: true, stencilRef: 0,
-    stencilFunc: THREE.NotEqualStencilFunc,
-    stencilFail: THREE.ReplaceStencilOp,
-    stencilZFail: THREE.ReplaceStencilOp,
-    stencilZPass: THREE.ReplaceStencilOp,
+// These contours come from opposite source wall faces. They are independent of
+// camera direction and of the inconsistent winding of the recovered CAD skin.
+export function createWallCaps(atlas) {
+  const group = new THREE.Group(); group.name = 'Geometric wall sections';
+  const slices = atlas.slices;
+  if (!slices?.length || atlas.coordinate_system !== 'glTF_XZ') throw Error('Invalid section atlas');
+  const material = new THREE.ShaderMaterial({side:THREE.DoubleSide,
     vertexShader: `varying vec3 worldPosition;
       void main() {
         vec4 world = modelMatrix * vec4(position, 1.0);
@@ -60,10 +32,29 @@ export function createWallCaps(walls, plane) {
         #include <colorspace_fragment>
       }`
   });
-  const cap = new THREE.Mesh(new THREE.PlaneGeometry(80, 80), material);
-  cap.name = 'Solid hatched wall cross section';
-  cap.rotation.x = -Math.PI / 2; cap.renderOrder = 2;
-  cap.onAfterRender = renderer => renderer.clearStencil();
+  const cap = new THREE.Mesh(new THREE.BufferGeometry(), material);
+  cap.name = 'Solid hatched wall cross section'; cap.renderOrder = 2;
   group.add(cap);
-  return {group, update(height, visible) {cap.position.y = height; group.visible = visible;}};
+  let current = -1;
+  return {group, update(height, visible) {
+    group.visible = visible && height <= slices.at(-1).height;
+    if (!group.visible) return;
+    let low = 0, high = slices.length - 1;
+    while (low < high) {
+      const mid = (low + high) >>> 1;
+      if (slices[mid].height < height) low = mid + 1; else high = mid;
+    }
+    if (low > 0 && height - slices[low - 1].height < slices[low].height - height) low--;
+    if (low !== current) {
+      current = low; const data = slices[low], positions = new Float32Array(data.p.length / 2 * 3);
+      for (let i = 0; i < data.p.length / 2; i++) {
+        positions[i * 3] = data.p[i * 2]; positions[i * 3 + 2] = data.p[i * 2 + 1];
+      }
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setIndex(data.i); geometry.computeBoundingSphere();
+      cap.geometry.dispose(); cap.geometry = geometry;
+    }
+    cap.position.y = height;
+  }};
 }
