@@ -1,0 +1,11 @@
+{
+  "render": "build/renders/full-scene-gallery.png",
+  "kind": "Blender GLB geometry review; not a web shader screenshot",
+  "floor_index": 2,
+  "upper_cut_m": 7.971400000000001,
+  "lower_cut": null,
+  "context_omitted_for_close_inspection": false,
+  "section_atlas_sha256": "2430f93c443c87157a62ade761c4296bc3ff5017c3810d6d7efa3c259767f9b7",
+  "model_manifest_sha256": "a7c3f5f285cd307050a301b14157e6865efa2e5d74be9fff72561b5f5c762492",
+  "render_sha256": "fa1934bbaaec798521bd0e173cd1932cc40101561b7d6a43936202ffc7109d18"
+}

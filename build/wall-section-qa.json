@@ -3,7 +3,7 @@
   "coordinate_system": "glTF_XZ",
   "method": "paired_source_wall_faces_and_closed_thin_contours",
   "source_architecture_sha256": "4105de07c4dae4752294724135bbf067afb2c2ce64d31f1fff2d09139fe35776",
-  "source_fittings_sha256": "c13133610ab546e18821fbc8e00a6dae2e155237c9d3ccee5f3676d338ba6027",
+  "source_fittings_sha256": "69c471749b8a5073c239af60d186a19309ea4a4d726d6929ecdffba87b4059ce",
   "exact_floor_heights_m": [
     1.6,
     4.6996,
@@ -19,7 +19,7 @@
   "file": {
     "file": "sections.json",
     "bytes": 1085535,
-    "sha256": "1ef6fb771beebd5532d1070acbeeb81b01a13c7be1b2603d6afa2188376c6600"
+    "sha256": "2430f93c443c87157a62ade761c4296bc3ff5017c3810d6d7efa3c259767f9b7"
   },
   "exact_floor_sections": [
     {

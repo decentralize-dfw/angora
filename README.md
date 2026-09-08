@@ -16,6 +16,8 @@ yüklenir. Model güncellemelerinde HTML'yi yeniden üretmek gerekmez.
 döşeme kotundan **+1,60 m** kesilir. Sabit yükseklikte döndürme, yatay kaydırma,
 yakınlaştırma ve ortalama vardır. Tek parmak döndürür; iki parmak kaydırır ve
 yakınlaştırır. `Kaydır` düğmesi tek parmakla kaydırmayı da açar.
+`Mobilya` düğmesi ayrı mobilya katmanını bütün görünüm ve katlarda açıp kapatır;
+kat değiştirmek bu tercihi sıfırlamaz.
 
 Kaynak kod `viewer/`, güncel kesilmemiş web modelleri `build/web/full/` altındadır.
 Dört kat, dış ayrıntılar, bahçe ve mahalle bir kez yüklenir. Kat değiştirmek
@@ -46,8 +48,18 @@ Galeri kontrolünde, `KAT 2$DUVAR KAPLAMA` yüzeyinin 6,291 m kotunda kaynak
 açıklığın üzerini yanlışlıkla kapattığı görüldü. Yalnız bu yatay kaplama
 kaynak döşeme sınırlarından temizlendi; döşemeler ve merdivenler değiştirilmedi.
 `build/gallery-visibility-qa.json`, galeriden giriş döşemesine ve aşağı inen
-merdivene dört ayrı görüş ışınının ulaştığını doğrular. Fotoğraftaki galeri
-korkuluğu ve hol ayrıntılarının eşlenmesi henüz tamamlanmadı.
+merdivene dört ayrı görüş ışınının ulaştığını doğrular.
+
+R20'de galeriye fotoğraftaki siyah ferforje, pirinç renkli küçük bağlantılar
+ve profilli ahşap küpeşte eklendi. Döşeme kenarındaki iki yatay kol, kısa dönüş
+ve aşağı inen merdivene paralel eğimli kol gerçek döşeme/basamak temaslarına
+yerleşir. Demir, ahşap ve metal ayrıntılar üç ayrı mesh olarak sabit donatı
+katmanındadır; açıklığa döşeme veya duvar eklenmedi. Korkuluk dahil edilerek
+tekrarlanan görüş testleri, galeri ve alt merdivenin açık kaldığını doğrular.
+Motif oranları ve yükseklik fotoğraftan yorumdur. Diğer merdiven kolları,
+galeri sarkıtı, hol mobilyaları ve ahşap tavan hâlâ ayrı kontrol gerektirir.
+`build/gallery-railing-report.json` kaynakları ve yerleşimi;
+`build/renders/full-scene-gallery.png` web geometrisinin yakın görünümünü kaydeder.
 
 Yol/arazi kontrolünde iki binanın oturumundan geçen tahmini güzergâh kaldırıldı.
 Kuzeybatı, güneydoğu ve doğu dış yolları CAD bordürlerinden; bağlantı yolları

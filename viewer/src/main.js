@@ -18,6 +18,7 @@ const groups = new Map();
 const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
 let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox;
 let selected = 'neighborhood', ready = false, loading = false;
+let furnitureVisible = true;
 let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;
 
 function message(text, error = false) {
@@ -36,6 +37,16 @@ function dispose(group) {
   });
   geometries.forEach(v => v.dispose()); materials.forEach(v => v.dispose());
   textures.forEach(v => {v.source?.data?.close?.(); v.dispose();});
+}
+function setFurnitureVisible(visible) {
+  furnitureVisible = visible;
+  for (const group of groups.values()) group.traverse(object => {
+    if (object.isMesh && object.userData.category === 'furniture') object.visible = visible;
+  });
+  $('#toggle-furniture').setAttribute('aria-pressed', String(visible));
+  $('#toggle-furniture').textContent = visible ? 'Mobilya: Açık' : 'Mobilya: Kapalı';
+  if (renderer) renderer.shadowMap.needsUpdate = true;
+  invalidate();
 }
 function invalidate() {
   if (framePending || !renderer) return;
@@ -170,6 +181,7 @@ async function loadModel() {
     fullHeight = buildingBox.max.y + 2;
     caps = createWallCaps(results[2].value); scene.add(caps.group);
     ready = true; status.hidden = true;
+    $('#toggle-furniture').disabled = false; setFurnitureVisible(furnitureVisible);
     selectView(selected, true);
   } catch (error) {
     for (const group of staged.values()) {scene.remove(group); dispose(group);}
@@ -191,6 +203,7 @@ try {
   $('#zoom-in').onclick = () => {camera.zoom = Math.min(controls.maxZoom, camera.zoom * 1.3); camera.updateProjectionMatrix(); invalidate();};
   $('#zoom-out').onclick = () => {camera.zoom = Math.max(controls.minZoom, camera.zoom / 1.3); camera.updateProjectionMatrix(); invalidate();};
   $('#reset-view').onclick = frame; $('#retry').onclick = loadModel;
+  $('#toggle-furniture').onclick = () => setFurnitureVisible(!furnitureVisible);
   loadModel();
 } catch (error) {
   message('3D görünüm başlatılamadı. Güncel Safari veya Chrome ile tekrar açabilirsin.', true);

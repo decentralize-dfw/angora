@@ -1,10 +1,10 @@
 {
   "master": "build/blender/angora21-working.blend",
-  "master_sha256": "becc2d856e49d46d3e9660d88598ad9802fffc7bdfe39f8483e33cc0c1643701",
-  "source_objects": 5084,
-  "linked_scene_objects": 5084,
-  "source_vertices": 9324535,
-  "linked_vertices": 9324535,
+  "master_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
+  "source_objects": 5087,
+  "linked_scene_objects": 5087,
+  "source_vertices": 9338679,
+  "linked_vertices": 9338679,
   "files": [
     {
       "path": "build/blender/layers/shared-materials.blend",
@@ -38,8 +38,8 @@
     },
     {
       "path": "build/blender/layers/20-fixed-fittings.blend",
-      "bytes": 565013,
-      "sha256": "c13133610ab546e18821fbc8e00a6dae2e155237c9d3ccee5f3676d338ba6027",
+      "bytes": 954886,
+      "sha256": "69c471749b8a5073c239af60d186a19309ea4a4d726d6929ecdffba87b4059ce",
       "collection": "20_FIXED_FITTINGS"
     },
     {
@@ -172,7 +172,7 @@
   "maximum_library_bytes": 8695675,
   "usage": "Open the master with the layers folder alongside it. Geometry libraries are individually editable.",
   "automation_required": false,
-  "review_revision": "18-CAD-roads-and-terrain",
+  "review_revision": "20-gallery-photo-railing",
   "review_geometry_bounds_m": {
     "B0 WC navy vanity": [
       [

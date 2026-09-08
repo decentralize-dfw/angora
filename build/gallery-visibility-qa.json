@@ -35,5 +35,7 @@
       "z_m": 5.510000228881836
     }
   ],
+  "gallery_railing_included_in_raycast": true,
+  "fixed_fittings_sha256": "69c471749b8a5073c239af60d186a19309ea4a4d726d6929ecdffba87b4059ce",
   "architecture_sha256": "4105de07c4dae4752294724135bbf067afb2c2ce64d31f1fff2d09139fe35776"
 }

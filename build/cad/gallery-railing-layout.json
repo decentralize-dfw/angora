@@ -1,0 +1,72 @@
+{
+  "revision": 20,
+  "nodes": [
+    {
+      "xy": [
+        2.8984,
+        -0.4277
+      ],
+      "support_z_m": 6.290999889373779,
+      "rail_base_z_m": 6.3714,
+      "support_object": "F2 | KAT 2$ZEMİN"
+    },
+    {
+      "xy": [
+        0.1834,
+        -0.4277
+      ],
+      "support_z_m": 6.370999813079834,
+      "rail_base_z_m": 6.3714,
+      "support_object": "F2 | KAT 2$ZEMİN KAPLAMA"
+    },
+    {
+      "xy": [
+        0.1834,
+        0.9623
+      ],
+      "support_z_m": 6.370999813079834,
+      "rail_base_z_m": 6.3714,
+      "support_object": "F2 | KAT 2$ZEMİN KAPLAMA"
+    },
+    {
+      "xy": [
+        0.8984,
+        0.9623
+      ],
+      "support_z_m": 6.198999881744385,
+      "rail_base_z_m": 6.198999881744385,
+      "support_object": "F1 | KAT 1$MERDİVEN"
+    },
+    {
+      "xy": [
+        3.0284,
+        0.9623
+      ],
+      "support_z_m": 4.822000026702881,
+      "rail_base_z_m": 4.822000026702881,
+      "support_object": "F1 | KAT 1$MERDİVEN"
+    }
+  ],
+  "height_m": 1.0,
+  "height_status": "photo_proportions_inferred",
+  "source_architecture_sha256": "4105de07c4dae4752294724135bbf067afb2c2ce64d31f1fff2d09139fe35776",
+  "source_photos": [
+    {
+      "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (6).jpeg",
+      "sha256": "099166b75b02d6c050c6b84cbef8e285c9e888c61925bd0b48b95572e4a91ae3"
+    },
+    {
+      "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (11).jpeg",
+      "sha256": "4713a27d1305e66213520b1b39460ddb63dccb6e3b96c1ea3776e9de41efdb74"
+    },
+    {
+      "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (15).jpeg",
+      "sha256": "1a2857d495994021e55160803fdea712486e3e9e0f7f43902345f14a1b6733ae"
+    }
+  ],
+  "layout_evidence": "CAD gallery rim and raycast stair treads; two horizontal gallery sides and the adjacent descending flight",
+  "motif_evidence": "black flat-bar scrolls, leaf accents, brass-colored fixings, profiled wood handrail",
+  "dimension_label_allowed": false,
+  "photo_match_approved": false,
+  "remaining": "Other stair flights, gallery pendant, ceiling and hall furnishings require separate review."
+}

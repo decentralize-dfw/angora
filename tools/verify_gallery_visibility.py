@@ -5,7 +5,10 @@ from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 ROOT=Path(__file__).resolve().parents[1]
 items=[]
-for o in bpy.data.collections['10_ARCHITECTURE'].all_objects:
+objects=set(bpy.data.collections['10_ARCHITECTURE'].all_objects)
+railing=bpy.data.collections.get('Gallery guard | photo review R20')
+if railing:objects.update(railing.all_objects)
+for o in objects:
     if o.type!='MESH' or o.hide_render:continue
     p=[o.matrix_world@Vector(v) for v in o.bound_box]
     if min(v.x for v in p)>4.2 or max(v.x for v in p)<.2 or min(v.y for v in p)>3.2 or max(v.y for v in p)<-.4:continue
@@ -22,6 +25,8 @@ for xy,expected,z in [((.4,-.2),'F1 | KAT 1$ZEMİN KAPLAMA',3.1),((1,.4),'F1 | K
     checks.append({'xy_m':xy,'visible_surface':hit[1],'z_m':hit[2]})
 assert bpy.data.collections.get('Lift F3') is None,'Attic lift regression'
 report={'status':'passed','scope':'first-floor gallery and lower stair sightlines; attic lift remains absent','checks':checks,
+ 'gallery_railing_included_in_raycast':railing is not None,
+ 'fixed_fittings_sha256':hashlib.sha256((ROOT/'build/blender/layers/20-fixed-fittings.blend').read_bytes()).hexdigest(),
  'architecture_sha256':hashlib.sha256((ROOT/'build/blender/layers/10-architecture.blend').read_bytes()).hexdigest()}
 (ROOT/'build/gallery-visibility-qa.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
 print('GALLERY_VISIBILITY_QA',json.dumps(report),flush=True)

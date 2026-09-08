@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "source_native_sha256": "becc2d856e49d46d3e9660d88598ad9802fffc7bdfe39f8483e33cc0c1643701",
+  "source_native_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
   "units": "metres",
   "coordinate_system": "glTF_Y_up",
   "floor_labels": [
@@ -68,15 +68,15 @@
     {
       "id": "level-2",
       "file": "level-2.glb",
-      "bytes": 6375556,
-      "sha256": "bf81191906d8f6b2e170060bcdaa9b22bd66e12783f9a232b6b8852c442c866d",
-      "source_objects": 388,
-      "draw_groups": 46,
+      "bytes": 6547928,
+      "sha256": "3c43e1acc0eb5465f97ddf5e52ae0021d9ea0f09ddabf793bf4b6faa3e576661",
+      "source_objects": 391,
+      "draw_groups": 47,
       "bounds_native_m": [
         [
           -6.382711887359619,
           -6.4730000495910645,
-          5.890999794006348
+          4.822000026702881
         ],
         [
           5.811314105987549,
@@ -84,8 +84,8 @@
           10.453055381774902
         ]
       ],
-      "triangles": 126528,
-      "source_native_sha256": "3a390227c159ffe1df26fdcde1cb403b5f08d5f1f566dc37518c86af5d83441b",
+      "triangles": 153360,
+      "source_native_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
       "section_elevation_m": null,
       "section_caps": false
     },
@@ -190,7 +190,7 @@
   "photo_matching_complete": false,
   "source_repository": "https://github.com/decentralize-dfw/angora",
   "geometry_source": "build/blender/angora21-working.blend",
-  "linked_master_sha256": "becc2d856e49d46d3e9660d88598ad9802fffc7bdfe39f8483e33cc0c1643701",
+  "linked_master_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
   "native_source": "build/blender/angora21-working.blend",
   "full_scene": true,
   "geometry_preclipped": false,
@@ -237,7 +237,7 @@
     "build/blender/layers/00-source-reference.blend": "7bd80a29902b1b6b9906ad8f06d205df1781dec75f7c11abe2383facc1d8ef7c",
     "build/blender/layers/10-architecture.blend": "4105de07c4dae4752294724135bbf067afb2c2ce64d31f1fff2d09139fe35776",
     "build/blender/layers/15-exterior-details.blend": "6db6aa01da0f5540c63ac58825a414b6eaa6c1883d538e72e7a965a00d3df1e4",
-    "build/blender/layers/20-fixed-fittings.blend": "c13133610ab546e18821fbc8e00a6dae2e155237c9d3ccee5f3676d338ba6027",
+    "build/blender/layers/20-fixed-fittings.blend": "69c471749b8a5073c239af60d186a19309ea4a4d726d6929ecdffba87b4059ce",
     "build/blender/layers/30-furniture-placeholders.blend": "7f60a0a7a37b4163b2ef5729f5ffe353c7a681e87697902f1e48247f4d1fa2c0",
     "build/blender/layers/40-landscape-01.blend": "f6da2f6baefd4879d84d455eb229218539fd257bef93df665bcffcaaeab197f1",
     "build/blender/layers/40-landscape-02.blend": "1785851e2dc4995d503ead85c750e9daa87c50765029065089885aa77a7969f3",
@@ -263,6 +263,6 @@
   "section_atlas": {
     "file": "sections.json",
     "bytes": 1085535,
-    "sha256": "1ef6fb771beebd5532d1070acbeeb81b01a13c7be1b2603d6afa2188376c6600"
+    "sha256": "2430f93c443c87157a62ade761c4296bc3ff5017c3810d6d7efa3c259767f9b7"
   }
 }
