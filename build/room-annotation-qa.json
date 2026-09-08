@@ -1,0 +1,143 @@
+{
+  "rooms": [
+    {
+      "room": "f0-B06",
+      "source_floor_z": 0.0,
+      "verified_dimensions": 1
+    },
+    {
+      "room": "f0-B05",
+      "source_floor_z": 0.0,
+      "verified_dimensions": 2
+    },
+    {
+      "room": "f0-B01",
+      "source_floor_z": 0.0,
+      "verified_dimensions": 0
+    },
+    {
+      "room": "f0-B04",
+      "source_floor_z": 0.0,
+      "verified_dimensions": 0
+    },
+    {
+      "room": "f0-B10",
+      "source_floor_z": 0.0,
+      "verified_dimensions": 0
+    },
+    {
+      "room": "f0-B02",
+      "source_floor_z": 0.0,
+      "verified_dimensions": 2
+    },
+    {
+      "room": "f1-Z06",
+      "source_floor_z": 2.799999952316284,
+      "verified_dimensions": 1
+    },
+    {
+      "room": "f1-Z05",
+      "source_floor_z": 3.0999999046325684,
+      "verified_dimensions": 0
+    },
+    {
+      "room": "f1-Z04",
+      "source_floor_z": 3.0999999046325684,
+      "verified_dimensions": 2
+    },
+    {
+      "room": "f1-Z02",
+      "source_floor_z": 3.0999999046325684,
+      "verified_dimensions": 1
+    },
+    {
+      "room": "f1-Z01",
+      "source_floor_z": 3.0999999046325684,
+      "verified_dimensions": 2
+    },
+    {
+      "room": "f1-Z03",
+      "source_floor_z": 3.0999999046325684,
+      "verified_dimensions": 1
+    },
+    {
+      "room": "f1-Z07",
+      "source_floor_z": 3.0999999046325684,
+      "verified_dimensions": 2
+    },
+    {
+      "room": "f1-Z08",
+      "source_floor_z": 3.0999999046325684,
+      "verified_dimensions": 1
+    },
+    {
+      "room": "f2-102",
+      "source_floor_z": 6.370999957212636,
+      "verified_dimensions": 2
+    },
+    {
+      "room": "f2-103",
+      "source_floor_z": 6.370999813079834,
+      "verified_dimensions": 2
+    },
+    {
+      "room": "f2-104",
+      "source_floor_z": 6.370999813079834,
+      "verified_dimensions": 2
+    },
+    {
+      "room": "f2-105",
+      "source_floor_z": 6.370999813079834,
+      "verified_dimensions": 2
+    },
+    {
+      "room": "f2-101",
+      "source_floor_z": 6.370999813079834,
+      "verified_dimensions": 0
+    },
+    {
+      "room": "f2-106",
+      "source_floor_z": 6.370999813079834,
+      "verified_dimensions": 2
+    },
+    {
+      "room": "f2-107",
+      "source_floor_z": 6.370999813079834,
+      "verified_dimensions": 1
+    },
+    {
+      "room": "f2-108",
+      "source_floor_z": 6.370999813079834,
+      "verified_dimensions": 2
+    },
+    {
+      "room": "f3-C01",
+      "source_floor_z": 9.470000267028809,
+      "verified_dimensions": 1
+    },
+    {
+      "room": "f3-C05",
+      "source_floor_z": 9.470000267028809,
+      "verified_dimensions": 1
+    },
+    {
+      "room": "f3-C02",
+      "source_floor_z": 9.470000267028809,
+      "verified_dimensions": 2
+    },
+    {
+      "room": "f3-C03",
+      "source_floor_z": 9.470000267028809,
+      "verified_dimensions": 2
+    },
+    {
+      "room": "f3-C04",
+      "source_floor_z": 9.470000267028809,
+      "verified_dimensions": 1
+    }
+  ],
+  "rooms_count": 27,
+  "verified_dimensions_count": 35,
+  "source_dimensions_remain_unchanged": true,
+  "plan_registration": "build/cad/plan-registration.json"
+}

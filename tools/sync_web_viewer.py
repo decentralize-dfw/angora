@@ -25,4 +25,9 @@ if full.get('section_atlas'):
     atlas=full['section_atlas'];path=source/'full'/atlas['file']
     assert hashlib.sha256(path.read_bytes()).hexdigest()==atlas['sha256']
     shutil.copy2(path,destination/'full'/atlas['file'])
+for key in ['room_annotations','navigation']:
+    if full.get(key):
+        data=full[key];path=source/'full'/data['file']
+        assert hashlib.sha256(path.read_bytes()).hexdigest()==data['sha256']
+        shutil.copy2(path,destination/'full'/data['file'])
 print('Viewer models synchronized:',len(full['assets']), 'uncut assets + legacy snapshots')

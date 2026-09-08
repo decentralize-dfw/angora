@@ -62,6 +62,32 @@ def export_view(name,objects,cut=None,lower=None):
         except RuntimeError:continue
         if not me or not me.polygons:
             ev.to_mesh_clear();continue
+        if FULL:
+            # Preserve evaluated bevel/weighted split normals. BMesh conversion
+            # discards these and makes the mobile version visibly faceted.
+            normal_matrix=o.matrix_world.to_3x3().inverted_safe().transposed()
+            world=[o.matrix_world@v.co for v in me.vertices]
+            uv=me.uv_layers.active
+            normals=me.corner_normals
+            wall=o.get('source_layer','').endswith('$DUVAR') or o.name.startswith(('Lift shaft','Lift landing jamb wall','Lift lintel wall'))
+            category='furniture' if o in furniture else 'wall' if wall else 'fixed'
+            local={}
+            for face in me.polygons:
+                mat=me.materials[face.material_index] if len(me.materials)>face.material_index else None
+                if mat is None:continue
+                key=(mat.name,category)
+                bucket=buckets.setdefault(key,{'mat':mat,'v':[],'f':[],'uv':[],'smooth':[],'normals':[]})
+                indices=[]
+                for li in face.loop_indices:
+                    vi=me.loops[li].vertex_index;vk=(key,vi)
+                    if vk not in local:
+                        local[vk]=len(bucket['v']);bucket['v'].append(tuple(world[vi]));max_z=max(max_z,world[vi].z)
+                    indices.append(local[vk])
+                    bucket['uv'].append(tuple(uv.data[li].uv) if uv else (0.,0.))
+                    bucket['normals'].append(tuple((normal_matrix@normals[li].vector).normalized()))
+                bucket['f'].append(indices);bucket['smooth'].append(face.use_smooth)
+            ev.to_mesh_clear();source_count+=1
+            continue
         bm=bmesh.new();bm.from_mesh(me);bm.transform(o.matrix_world)
         mats=list(me.materials);uv=bm.loops.layers.uv.active
         if cut is not None:
@@ -95,6 +121,9 @@ def export_view(name,objects,cut=None,lower=None):
         uv=me.uv_layers.new(name='UVMap')
         uv.data.foreach_set('uv',[v for p in b['uv'] for v in p])
         for p,smooth in zip(me.polygons,b['smooth']):p.use_smooth=smooth
+        if FULL:
+            assert len(b['normals'])==len(me.loops), 'Split normal/loop mismatch'
+            me.normals_split_custom_set(b['normals'])
         obj=bpy.data.objects.new(category+' | '+mat_name,me);preview.objects.link(obj)
         obj['category']=category;obj['source_native_sha256']=source_hash
         if FULL:obj['section_cap_eligible']=category=='wall'
@@ -120,6 +149,7 @@ def export_view(name,objects,cut=None,lower=None):
     if cut is not None:
         assert max_z<=cut+.001,(name,max_z,cut)
         record['floor_elevation_m']=cut-1.6;record['cut_height_m']=1.6
+    if FULL:record['evaluated_split_normals_preserved']=True
     records.append(record)
     print('WEB_VIEW_EXPORTED',json.dumps(record),flush=True)
     for o in produced:
@@ -166,6 +196,11 @@ if FULL:
         fittings=hashlib.sha256((ROOT/'build/blender/layers/20-fixed-fittings.blend').read_bytes()).hexdigest()
         if data['source_architecture_sha256']==architecture and data['source_fittings_sha256']==fittings:
             manifest.update(section_caps='prepared_geometric_wall_contours',section_atlas={'file':atlas.name,'bytes':atlas.stat().st_size,'sha256':hashlib.sha256(atlas.read_bytes()).hexdigest()})
+    annotations=OUT/'rooms.json'
+    if annotations.exists():
+        data=json.loads(annotations.read_text())
+        if data['source_architecture_sha256']==hashlib.sha256((ROOT/'build/blender/layers/10-architecture.blend').read_bytes()).hexdigest():
+            manifest['room_annotations']={'file':annotations.name,'bytes':annotations.stat().st_size,'sha256':hashlib.sha256(annotations.read_bytes()).hexdigest()}
 path=OUT/'manifest.json';tmp=path.with_suffix('.tmp');tmp.write_text(json.dumps(manifest,ensure_ascii=False,indent=2));tmp.replace(path)
 assert hashlib.sha256(source.read_bytes()).hexdigest()==source_hash,'Native source changed during web export'
 print('WEB_DELIVERY_COMPLETE',sum(r['bytes'] for r in records),flush=True)

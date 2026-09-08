@@ -52,7 +52,7 @@ export function createWallCaps(atlas) {
       }
       const geometry = new THREE.BufferGeometry();
       geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      geometry.setIndex(data.i); geometry.computeBoundingSphere();
+      geometry.setIndex(data.i); geometry.computeVertexNormals(); geometry.computeBoundingSphere();
       cap.geometry.dispose(); cap.geometry = geometry;
     }
     cap.position.y = height;

@@ -20,8 +20,8 @@
     {
       "id": "level-0",
       "file": "level-0.glb",
-      "bytes": 3629164,
-      "sha256": "c27869f0d306d9f595ff7843cbd19edac349bc0c312fa400cec95dd8b754c713",
+      "bytes": 3793548,
+      "sha256": "c4b2127a5c3b9b65874dbab54da11190eb20ce5605cb004dc60950204dcd3217",
       "source_objects": 905,
       "draw_groups": 33,
       "bounds_native_m": [
@@ -36,16 +36,17 @@
           6.1996002197265625
         ]
       ],
-      "triangles": 97394,
-      "source_native_sha256": "df9ee5335b5fa1db5a6faeff67d0671cd5fc5b28c7b46acbf34a4da1d893b241",
+      "triangles": 100737,
+      "source_native_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
       "section_elevation_m": null,
-      "section_caps": false
+      "section_caps": false,
+      "evaluated_split_normals_preserved": true
     },
     {
       "id": "level-1",
       "file": "level-1.glb",
-      "bytes": 5516300,
-      "sha256": "9ce74bbbdc342bb99c2088ee3ad536fd344600843cde554ec8a143a75a325b5a",
+      "bytes": 5972424,
+      "sha256": "cc40d5f72ddd6ac459dcdde2b33ff146f8b16a85a7b413c46c6372ab8f0f5e29",
       "source_objects": 589,
       "draw_groups": 36,
       "bounds_native_m": [
@@ -60,16 +61,17 @@
           7.099999904632568
         ]
       ],
-      "triangles": 198192,
-      "source_native_sha256": "df9ee5335b5fa1db5a6faeff67d0671cd5fc5b28c7b46acbf34a4da1d893b241",
+      "triangles": 217576,
+      "source_native_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
       "section_elevation_m": null,
-      "section_caps": false
+      "section_caps": false,
+      "evaluated_split_normals_preserved": true
     },
     {
       "id": "level-2",
       "file": "level-2.glb",
-      "bytes": 6547928,
-      "sha256": "3c43e1acc0eb5465f97ddf5e52ae0021d9ea0f09ddabf793bf4b6faa3e576661",
+      "bytes": 6900648,
+      "sha256": "18544df40bf77137dd516eea69ea2168b2eb41feb66a56b055bd1d02e5cb87ef",
       "source_objects": 391,
       "draw_groups": 47,
       "bounds_native_m": [
@@ -84,16 +86,17 @@
           10.453055381774902
         ]
       ],
-      "triangles": 153360,
+      "triangles": 168505,
       "source_native_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
       "section_elevation_m": null,
-      "section_caps": false
+      "section_caps": false,
+      "evaluated_split_normals_preserved": true
     },
     {
       "id": "level-3",
       "file": "level-3.glb",
-      "bytes": 3831520,
-      "sha256": "de6e44961e2996e5199f146b2f8472c903993587732159da588aace47ca890d1",
+      "bytes": 4179768,
+      "sha256": "1e194090b75e4a749297e6a7795cd32b1740905ed405041b920a1457b41ba6c0",
       "source_objects": 128,
       "draw_groups": 22,
       "bounds_native_m": [
@@ -108,16 +111,17 @@
           13.508399963378906
         ]
       ],
-      "triangles": 42716,
-      "source_native_sha256": "df9ee5335b5fa1db5a6faeff67d0671cd5fc5b28c7b46acbf34a4da1d893b241",
+      "triangles": 59841,
+      "source_native_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
       "section_elevation_m": null,
-      "section_caps": false
+      "section_caps": false,
+      "evaluated_split_normals_preserved": true
     },
     {
       "id": "envelope",
       "file": "envelope.glb",
-      "bytes": 3997468,
-      "sha256": "b3aa6b93a2e566eeb0eae8ca0bc9881e34aa36bbe9e466cc2ca60aa856a8cf7f",
+      "bytes": 4055224,
+      "sha256": "b6b5506871dd0c84df08026c387e4c830c181efc8398bfb686366acc677e6dff",
       "source_objects": 89,
       "draw_groups": 14,
       "bounds_native_m": [
@@ -132,16 +136,17 @@
           14.420000076293945
         ]
       ],
-      "triangles": 648506,
-      "source_native_sha256": "df9ee5335b5fa1db5a6faeff67d0671cd5fc5b28c7b46acbf34a4da1d893b241",
+      "triangles": 698186,
+      "source_native_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
       "section_elevation_m": null,
-      "section_caps": false
+      "section_caps": false,
+      "evaluated_split_normals_preserved": true
     },
     {
       "id": "garden",
       "file": "garden.glb",
-      "bytes": 7865304,
-      "sha256": "7393a3a9ad94baa803e50ddf061e19af65cb879cd14b1f53d99220f9a549723c",
+      "bytes": 7875200,
+      "sha256": "a2648bbfa777a4ca189d6774ba213144b5c0fc0a718b974ad5c4c664538897e8",
       "source_objects": 417,
       "draw_groups": 15,
       "bounds_native_m": [
@@ -157,9 +162,10 @@
         ]
       ],
       "triangles": 510072,
-      "source_native_sha256": "df9ee5335b5fa1db5a6faeff67d0671cd5fc5b28c7b46acbf34a4da1d893b241",
+      "source_native_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
       "section_elevation_m": null,
-      "section_caps": false
+      "section_caps": false,
+      "evaluated_split_normals_preserved": true
     },
     {
       "id": "context",
@@ -264,5 +270,10 @@
     "file": "sections.json",
     "bytes": 1085535,
     "sha256": "2430f93c443c87157a62ade761c4296bc3ff5017c3810d6d7efa3c259767f9b7"
+  },
+  "room_annotations": {
+    "file": "rooms.json",
+    "bytes": 28082,
+    "sha256": "35b81b9bedd128bfaa4b8346db859602c9468f0d3d290ee33b9723a0cc28a8a3"
   }
 }

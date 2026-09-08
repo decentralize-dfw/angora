@@ -19,6 +19,23 @@ yakınlaştırır. `Kaydır` düğmesi tek parmakla kaydırmayı da açar.
 `Mobilya` düğmesi ayrı mobilya katmanını bütün görünüm ve katlarda açıp kapatır;
 kat değiştirmek bu tercihi sıfırlamaz.
 
+R21: `Oda adları` ve `Ölçüler` düğmeleri seçilen katın bilgilerini zemine
+yerleştirir. 27 mahal etiketi vardır. Ölçüler, orijinal DWG DIMENSION kaydı,
+eşleşen karşılıklı duvar yüzeyleri ve kesintisiz kaynak döşemesi birlikte
+doğrulanarak seçilir. Havuz ve komşu bina tahminleri ölçüye dahil edilmez.
+`build/web/full/rooms.json` her ölçünün kaynak handle'ını ve uç noktalarını,
+`build/room-annotation-qa.json` oda başına kontrolü içerir. Açık plan alanındaki
+çizgi, gösterilen duvarlar arasındaki mesafedir; mahal alanı veya bağımsız oda
+boyutu iddiası değildir.
+
+Web ışığında stüdyo ortamı yerine atmosferik günışığı, gerçek yumuşak güneş
+gölgeleri, GTAO temas gölgelenmesi ve anizotropik doku süzme kullanılır.
+Gölge haritası yalnız sahne/kesit değişiminde güncellenir. GTAO telefonda yarım
+çözünürlüktedir ve mahalle görünümünde kapalıdır; komşulara villa kesiti uygulanmaz.
+Tam model dışa aktarımı bevel ve weighted normal sonuçlarını korur. Bu düzeltme
+webdeki gereksiz yüzey kırıklığını giderir; fotoğraf eşlemesinin tamamlandığı
+anlamına gelmez. Gerçek telefon ve tarayıcı GPU görsel doğrulaması hâlâ açıktır.
+
 Kaynak kod `viewer/`, güncel kesilmemiş web modelleri `build/web/full/` altındadır.
 Dört kat, dış ayrıntılar, bahçe ve mahalle bir kez yüklenir. Kat değiştirmek
 yeniden model indirmez; tek üst kesit düzlemi 1,05 saniyede hareket eder.
@@ -32,7 +49,7 @@ kaynak CAD yüzeylerinin tutarsız yönlerine veya kameranın bakışına bağl�
 `build/wall-section-qa.json` geometri ve boşluk kontrollerini kaydeder.
 
 Sayfa kendi yayımlandığı repo sürümünün model listesini kullanır. Yedi parça
-toplam yaklaşık 43 MB, kesit geometrisi ayrıca 1,1 MB; aynı anda en fazla iki dosya çözülür ve durgun sahne
+toplam yaklaşık 44,5 MB, kesit geometrisi ayrıca 1,1 MB; aynı anda en fazla iki dosya çözülür ve durgun sahne
 sürekli yeniden çizilmez. Gerçek OrbitControls ile dokunma olayları ve sabit
 kamera yüksekliği, gerçek GLB dosyalarının hash ve tam yükseklik sınırları
 kontrol edildi. Gerçek kesit geometrisi ışın testleri ve Blender görüntüsüyle

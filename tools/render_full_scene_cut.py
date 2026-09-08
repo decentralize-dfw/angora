@@ -18,6 +18,7 @@ for asset in manifest['assets']:
     if asset['id']=='context':
         for o in set(bpy.context.scene.objects)-before:o['review_context']=True
 for o in list(bpy.context.scene.objects):
+    if '--hide-furniture' in args and o.get('category')=='furniture':o.hide_render=True
     if o.type!='MESH' or o.get('review_context'):continue
     bm=bmesh.new();bm.from_mesh(o.data);bm.transform(o.matrix_world)
     result=bmesh.ops.bisect_plane(bm,geom=list(bm.verts)+list(bm.edges)+list(bm.faces),
@@ -44,6 +45,40 @@ if floor is not None:
     mix=n.new('ShaderNodeMixRGB');mix.inputs[1].default_value=(.70,.64,.53,1);mix.inputs[2].default_value=(.19,.17,.13,1)
     l.new(previous,mix.inputs[0]);l.new(mix.outputs[0],emission.inputs['Color']);mesh.materials.append(mat)
 scene=bpy.context.scene
+if '--annotations' in args:
+    assert floor is not None
+    data=json.loads((ROOT/'build/web/full/rooms.json').read_text())
+    font=bpy.data.fonts.load('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf')
+    ink=bpy.data.materials.new('Annotation ink');ink.diffuse_color=(.015,.055,.075,1)
+    paper=bpy.data.materials.new('Annotation paper');paper.diffuse_color=(.96,.97,.98,1)
+    deps=bpy.context.evaluated_depsgraph_get();scene.view_layers[0].update()
+    floors=[o for o in scene.objects if o.type=='MESH' and not o.hide_render and not o.get('review_context')]
+    def native(p):return Vector((p[0],-p[2],p[1]))
+    def finish_z(p):
+        heights=[p.z]
+        for obj in floors:
+            hit,loc,normal,index=obj.ray_cast(Vector((p.x,p.y,p.z+.25)),Vector((0,0,-1)),distance=.5)
+            if hit and normal.z>.7:heights.append(loc.z+.03)
+        return max(heights)
+    def text_label(text,p,size):
+        p=p.copy();p.z=finish_z(p)+.014
+        curve=bpy.data.curves.new(text,'FONT');curve.body=text;curve.font=font;curve.size=size;curve.align_x='CENTER';curve.align_y='CENTER'
+        o=bpy.data.objects.new(text,curve);scene.collection.objects.link(o);o.location=p;curve.materials.append(ink)
+        scene.view_layers[0].update();w=max(.45,o.dimensions.x+.16);h=size*.95
+        mesh=bpy.data.meshes.new('Label ground plate');mesh.from_pydata([(-w/2,-h/2,0),(w/2,-h/2,0),(w/2,h/2,0),(-w/2,h/2,0)],[],[(0,1,2,3)])
+        bg=bpy.data.objects.new('Label ground plate',mesh);scene.collection.objects.link(bg);bg.location=p-Vector((0,0,.005));mesh.materials.append(paper)
+    for r in data['rooms']:
+        if r['floor_index']==floor:text_label(r['name'],native(r['position']),.34 if len(r['name'])<18 else .27)
+    for d in data['dimensions']:
+        if d['floor_index']!=floor:continue
+        a=native(d['a']);b=native(d['b']);a.z=b.z=finish_z((a+b)*.5);direction=(b-a).normalized();cross=Vector((-direction.y,direction.x,0))*.11
+        paths=[[a,b],[a-cross,a+cross],[b-cross,b+cross]]
+        curve=bpy.data.curves.new(d['id'],'CURVE');curve.dimensions='3D';curve.bevel_depth=.008
+        for line in paths:
+            s=curve.splines.new('POLY');s.points.add(1)
+            for p,co in zip(s.points,line):p.co=(*co,1)
+        o=bpy.data.objects.new(d['id'],curve);scene.collection.objects.link(o);curve.materials.append(ink)
+        text_label(d['display'],(a+b)*.5+cross*1.6,.25)
 center=Vector((.4,4,cut-2.5)) if floor else Vector((1,7,-.6))
 if floor is None:center=Vector((0,3,3))
 camera=bpy.data.cameras.new('Full scene geometry review');obj=bpy.data.objects.new(camera.name,camera)
@@ -63,11 +98,13 @@ scene.render.engine='CYCLES';scene.cycles.samples=16;scene.cycles.use_denoising=
 scene.render.resolution_x=1000;scene.render.resolution_y=1000;scene.render.resolution_percentage=100
 scene.view_settings.view_transform='AgX';scene.view_settings.exposure=.4
 path=ROOT/'build/renders'/(f'full-scene-floor-{floor}.png' if floor is not None and mode!='gallery' else f'full-scene-{mode}.png');scene.render.filepath=str(path)
+if '--annotations' in args:path=path.with_stem(path.stem+'-plan');scene.render.filepath=str(path)
 bpy.ops.render.render(write_still=True)
 report={'render':str(path.relative_to(ROOT)),'kind':'Blender GLB geometry review; not a web shader screenshot',
  'floor_index':floor,'upper_cut_m':cut,'lower_cut':None,'context_omitted_for_close_inspection':False,
  'section_atlas_sha256':manifest.get('section_atlas',{}).get('sha256') if floor is not None else None,
  'model_manifest_sha256':hashlib.sha256((ROOT/'build/web/full/manifest.json').read_bytes()).hexdigest(),
  'render_sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
+report.update(annotations='--annotations' in args,furniture_visible='--hide-furniture' not in args)
 path.with_suffix('.json').write_text(json.dumps(report,indent=2))
 print('FULL_SCENE_REVIEW',json.dumps(report),flush=True)

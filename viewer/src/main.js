@@ -3,7 +3,8 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { createLighting } from './lighting.js';
+import { createAnnotations } from './annotations.js';
 import { configureCameraControls } from './camera.js';
 import { sectionHeight, smoothStep, createWallCaps } from './section.js';
 
@@ -16,9 +17,9 @@ const decoderRoot = new URL(pages ? 'viewer/public/draco/' : 'draco/', publicRoo
 const titles = {neighborhood:'Çevre', building:'Villa 21', f0:'Bodrum', f1:'Giriş katı', f2:'1. kat', f3:'Çatı katı'};
 const groups = new Map();
 const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
-let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox;
+let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox, lighting;
 let selected = 'neighborhood', ready = false, loading = false;
-let furnitureVisible = true;
+let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations;
 let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;
 
 function message(text, error = false) {
@@ -56,11 +57,13 @@ function invalidate() {
     if (transition) {
       const t = Math.min(1, (time - transition.start) / 1050);
       clip.constant = THREE.MathUtils.lerp(transition.from, transition.to, smoothStep(t));
+      renderer.shadowMap.needsUpdate = true;
       if (t >= 1) transition = null;
     }
     caps?.update(clip.constant, clip.constant < fullHeight - 0.001);
+    annotations?.update(selected, roomNamesVisible, measurementsVisible, Boolean(transition));
     const changing = controls.update();
-    renderer.render(scene, camera);
+    lighting.render(camera);
     if (changing || transition) invalidate();
   });
 }
@@ -69,7 +72,7 @@ function resize() {
   const w = host.clientWidth, h = Math.max(1, host.clientHeight), aspect = w / h;
   camera.left = -frameSpan * aspect / 2; camera.right = frameSpan * aspect / 2;
   camera.top = frameSpan / 2; camera.bottom = -frameSpan / 2;
-  camera.updateProjectionMatrix(); renderer.setSize(w, h); invalidate();
+  camera.updateProjectionMatrix(); renderer.setSize(w, h); lighting?.resize(w, h); invalidate();
 }
 function frame() {
   if (!buildingBox) return;
@@ -105,10 +108,7 @@ function setup() {
   controls = new OrbitControls(camera, renderer.domElement);
   configureCameraControls(controls, THREE);
   controls.addEventListener('change', invalidate);
-  scene.add(new THREE.HemisphereLight(0xe8f1ff, 0x706954, 2));
-  const sun = new THREE.DirectionalLight(0xfff4df, 3); sun.position.set(-30, 60, 20); scene.add(sun);
-  const pmrem = new THREE.PMREMGenerator(renderer), room = new RoomEnvironment();
-  scene.environment = pmrem.fromScene(room, 0.04).texture; room.dispose(); pmrem.dispose();
+  lighting = createLighting(renderer, scene, camera, clip);
   const draco = new DRACOLoader(); draco.setDecoderPath(decoderRoot.href); draco.setWorkerLimit(2);
   loader = new GLTFLoader(); loader.setDRACOLoader(draco);
   window.addEventListener('resize', resize);
@@ -127,6 +127,7 @@ function selectView(id, initial = false) {
     : 'Mahalle ve 21 numaralı villa · Sabit yükseklik';
   if (!ready) return;
   const target = sectionHeight(id, fullHeight);
+  lighting.frame(id);
   if (initial || matchMedia('(prefers-reduced-motion: reduce)').matches) {
     clip.constant = target; transition = null;
   } else transition = {from:clip.constant, to:target, start:performance.now()};
@@ -162,13 +163,21 @@ async function loadModel() {
       if (!response.ok) throw Error(`Section atlas HTTP ${response.status}`);
       return response.json();
     }
-    const results = await Promise.allSettled([worker(), worker(), loadSections()]);
+    async function loadRooms() {
+      const url = new URL(manifest.room_annotations?.file ?? 'rooms.json', modelRoot);
+      if (manifest.room_annotations?.sha256) url.searchParams.set('v', manifest.room_annotations.sha256.slice(0, 12));
+      const response = await fetch(url);
+      if (!response.ok) throw Error(`Room annotations HTTP ${response.status}`);
+      return response.json();
+    }
+    const results = await Promise.allSettled([worker(), worker(), loadSections(), loadRooms()]);
     const failure = results.find(r => r.status === 'rejected'); if (failure) throw failure.reason;
     for (const [id, group] of staged) {
       groups.set(id, group); scene.add(group);
       group.traverse(o => {
         if (!o.isMesh) return;
         o.renderOrder = 5;
+        lighting.prepareMesh(o, id !== 'context');
         if (id !== 'context') for (const m of Array.isArray(o.material) ? o.material : [o.material]) {
           m.clippingPlanes = [clip]; m.side = THREE.DoubleSide;
         }
@@ -180,8 +189,10 @@ async function loadModel() {
     gardenBox = new THREE.Box3(new THREE.Vector3(-10.2, -4, -29.1), new THREE.Vector3(12.5, 3.4, 11));
     fullHeight = buildingBox.max.y + 2;
     caps = createWallCaps(results[2].value); scene.add(caps.group);
+    annotations = createAnnotations(results[3].value); scene.add(annotations.group);
     ready = true; status.hidden = true;
     $('#toggle-furniture').disabled = false; setFurnitureVisible(furnitureVisible);
+    $('#toggle-rooms').disabled = false; $('#toggle-measurements').disabled = false;
     selectView(selected, true);
   } catch (error) {
     for (const group of staged.values()) {scene.remove(group); dispose(group);}
@@ -204,6 +215,12 @@ try {
   $('#zoom-out').onclick = () => {camera.zoom = Math.max(controls.minZoom, camera.zoom / 1.3); camera.updateProjectionMatrix(); invalidate();};
   $('#reset-view').onclick = frame; $('#retry').onclick = loadModel;
   $('#toggle-furniture').onclick = () => setFurnitureVisible(!furnitureVisible);
+  $('#toggle-rooms').onclick = () => {
+    roomNamesVisible = !roomNamesVisible; $('#toggle-rooms').setAttribute('aria-pressed', roomNamesVisible); invalidate();
+  };
+  $('#toggle-measurements').onclick = () => {
+    measurementsVisible = !measurementsVisible; $('#toggle-measurements').setAttribute('aria-pressed', measurementsVisible); invalidate();
+  };
   loadModel();
 } catch (error) {
   message('3D görünüm başlatılamadı. Güncel Safari veya Chrome ile tekrar açabilirsin.', true);
