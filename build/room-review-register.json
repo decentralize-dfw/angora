@@ -1,5 +1,5 @@
 {
-  "native_master_sha256": "672fc7d062adaebd1cf0b41db29c4e15994ff2897232d2724d835cc9608d3082",
+  "native_master_sha256": "3a390227c159ffe1df26fdcde1cb403b5f08d5f1f566dc37518c86af5d83441b",
   "phase_1_complete": false,
   "source_photo_files": 202,
   "unique_source_photos": 184,
@@ -706,13 +706,21 @@
         }
       ],
       "cameras": [],
-      "review_state": "current_revision_photo_review_pending",
+      "review_state": "gallery_sightline_verified_photo_details_pending",
       "open_items": [
-        "Hol için özel inceleme kamerası",
-        "Açıklık, merdiven, korkuluk ve dolap yerleşimi"
+        "Fotoğraftaki galeri ve merdiven korkulukları",
+        "Hol dolabı, koltukları, aydınlatma ve ahşap tavan",
+        "Oda kapıları ve fotoğrafa göre malzeme kontrolü"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": false,
+      "completed_corrections": [
+        {
+          "revision": 17,
+          "change": "Removed spurious horizontal wall-finish cap across CAD gallery and staircase; lower floor and stair raycasts pass",
+          "evidence": "build/gallery-visibility-qa.json"
+        }
+      ]
     },
     {
       "photo_group": "kat_3_master_bedroom",
@@ -1104,13 +1112,21 @@
       "cameras": [
         "07_attic"
       ],
-      "review_state": "current_revision_photo_review_pending",
+      "review_state": "attic_lift_removed_other_room_checks_pending",
       "open_items": [
         "Fotoğrafların ayrı hacimlere eşlenmesi",
         "Her oda ve banyo için ayrı kamera ve kontrol"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": false,
+      "completed_corrections": [
+        {
+          "revision": 16,
+          "change": "User confirmed no attic lift; removed F3 fittings and restored only former shaft floor opening",
+          "evidence": "build/attic-lift-correction.json"
+        }
+      ]
     }
-  ]
+  ],
+  "review_revision": "17-gallery-void"
 }

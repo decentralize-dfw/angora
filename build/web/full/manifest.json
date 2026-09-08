@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "source_native_sha256": "df9ee5335b5fa1db5a6faeff67d0671cd5fc5b28c7b46acbf34a4da1d893b241",
+  "source_native_sha256": "3a390227c159ffe1df26fdcde1cb403b5f08d5f1f566dc37518c86af5d83441b",
   "units": "metres",
   "coordinate_system": "glTF_Y_up",
   "floor_labels": [
@@ -68,8 +68,8 @@
     {
       "id": "level-2",
       "file": "level-2.glb",
-      "bytes": 6375028,
-      "sha256": "fef6343e517a603d329784b46ad86e42d95d8d4c9dc129d270f2ca1ac673e742",
+      "bytes": 6375556,
+      "sha256": "bf81191906d8f6b2e170060bcdaa9b22bd66e12783f9a232b6b8852c442c866d",
       "source_objects": 388,
       "draw_groups": 46,
       "bounds_native_m": [
@@ -84,8 +84,8 @@
           10.453055381774902
         ]
       ],
-      "triangles": 126482,
-      "source_native_sha256": "df9ee5335b5fa1db5a6faeff67d0671cd5fc5b28c7b46acbf34a4da1d893b241",
+      "triangles": 126528,
+      "source_native_sha256": "3a390227c159ffe1df26fdcde1cb403b5f08d5f1f566dc37518c86af5d83441b",
       "section_elevation_m": null,
       "section_caps": false
     },
@@ -190,7 +190,7 @@
   "photo_matching_complete": false,
   "source_repository": "https://github.com/decentralize-dfw/angora",
   "geometry_source": "build/blender/angora21-working.blend",
-  "linked_master_sha256": "df9ee5335b5fa1db5a6faeff67d0671cd5fc5b28c7b46acbf34a4da1d893b241",
+  "linked_master_sha256": "3a390227c159ffe1df26fdcde1cb403b5f08d5f1f566dc37518c86af5d83441b",
   "native_source": "build/blender/angora21-working.blend",
   "full_scene": true,
   "geometry_preclipped": false,
@@ -235,7 +235,7 @@
     "build/blender/layers/shared-materials.blend": "3281715b6a21ca15a555fa17761a624241a745ca4ada9a81028755e16fce35a9",
     "build/blender/layers/shared-meshes.blend": "94962351d8cf659c1ba407edccb19aeb2d3dc38882329f61bdd9693d96930bf3",
     "build/blender/layers/00-source-reference.blend": "7bd80a29902b1b6b9906ad8f06d205df1781dec75f7c11abe2383facc1d8ef7c",
-    "build/blender/layers/10-architecture.blend": "617f73b0300a80dc622840ce8f9709f702ccf1d533ad9c0e55b6943808b56a75",
+    "build/blender/layers/10-architecture.blend": "4105de07c4dae4752294724135bbf067afb2c2ce64d31f1fff2d09139fe35776",
     "build/blender/layers/15-exterior-details.blend": "6db6aa01da0f5540c63ac58825a414b6eaa6c1883d538e72e7a965a00d3df1e4",
     "build/blender/layers/20-fixed-fittings.blend": "c13133610ab546e18821fbc8e00a6dae2e155237c9d3ccee5f3676d338ba6027",
     "build/blender/layers/30-furniture-placeholders.blend": "7f60a0a7a37b4163b2ef5729f5ffe353c7a681e87697902f1e48247f4d1fa2c0",

@@ -42,9 +42,13 @@ for col in hood.children:
 targets['context-far.glb']=far
 targets['context-ground.glb']=geometry(hood.all_objects)-near-far
 selected=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
-selected=set(selected or targets)
-previous=json.loads((OUT/'scene-manifest.json').read_text()).get('assets',[]) if (OUT/'scene-manifest.json').exists() else []
-records={r['file']:r for r in previous if r['file'] in targets}
+partial=bool(selected);selected=set(selected or targets)
+previous_manifest=json.loads((OUT/'scene-manifest.json').read_text()) if (OUT/'scene-manifest.json').exists() else {}
+previous=previous_manifest.get('assets',[])
+# Linked delivery collections can be split across files. A partial floor export
+# must not discard unchanged neighborhood records just because those groups are
+# not direct children in this representation.
+records={r['file']:r for r in previous if partial or r['file'] in targets}
 completed=set()
 unknown=selected-set(targets)
 assert not unknown,'Unknown export targets: '+str(sorted(unknown))
@@ -67,7 +71,7 @@ for filename,objects in targets.items():
             'scope':'neighbor_building' if filename.startswith('context-detail-') else 'villa_or_ground'}
     records[filename]=record;completed.add(filename);print('STREAM_EXPORTED',json.dumps(record),flush=True)
 assert completed==selected,'Some requested GLB streams were not exported'
-manifest={'source_native_sha256':digest,'units':'metres','coordinate_system':'glTF_Y_up',
+manifest={**previous_manifest,'source_native_sha256':digest,'units':'metres','coordinate_system':'glTF_Y_up',
     'assets':list(records.values()),'stage':'model_review','initial_neighborhood_LOD_optimized':False,
     'mobile_performance_validated':False,'photo_alignment_complete':False}
 temporary=OUT/'scene-manifest.json.tmp';temporary.write_text(json.dumps(manifest,indent=2));temporary.replace(OUT/'scene-manifest.json')

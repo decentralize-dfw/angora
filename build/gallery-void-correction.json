@@ -1,0 +1,24 @@
+{
+  "revision": 17,
+  "scope": "horizontal wall-finish cap at 6.291 m only",
+  "source_layer": "KAT 2$ZEM\u0130N",
+  "opening_rectangles_xy_m": [
+    [
+      0.2184,
+      -0.3927,
+      2.9684,
+      0.9273
+    ],
+    [
+      0.8684,
+      0.9273,
+      4.1184,
+      3.1273
+    ]
+  ],
+  "changed_faces": 29,
+  "removed_cap_area_m2": 10.780001711258162,
+  "stair_geometry_changed": false,
+  "floor_slabs_changed": false,
+  "native_file": "build/blender/layers/10-architecture.blend"
+}

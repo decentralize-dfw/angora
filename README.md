@@ -37,6 +37,13 @@ katı hizmet eder. Çatıdaki 31 asansör parçası kaldırıldı; yalnız eski 
 açıklığı döşeme ve parke ile kapatıldı. Merdiven açıklığı değiştirilmedi.
 `build/attic-lift-correction.json` ve `build/renders/web-floor-3.png` kontrol kaydıdır.
 
+Galeri kontrolünde, `KAT 2$DUVAR KAPLAMA` yüzeyinin 6,291 m kotunda kaynak
+açıklığın üzerini yanlışlıkla kapattığı görüldü. Yalnız bu yatay kaplama
+kaynak döşeme sınırlarından temizlendi; döşemeler ve merdivenler değiştirilmedi.
+`build/gallery-visibility-qa.json`, galeriden giriş döşemesine ve aşağı inen
+merdivene dört ayrı görüş ışınının ulaştığını doğrular. Fotoğraftaki galeri
+korkuluğu ve hol ayrıntılarının eşlenmesi henüz tamamlanmadı.
+
 Cloud Blender dizini `ANGORA_BLENDER_DIR` ile seçilir. Yalnızca web modellerini
 yenilemek için Blender içinde `tools/export_web_viewer.py` çalıştırılır;
 `--full-scene` güncel tam modeli, `--full-scene --views level-1` yalnız giriş

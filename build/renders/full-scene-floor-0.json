@@ -1,0 +1,10 @@
+{
+  "render": "build/renders/full-scene-floor-0.png",
+  "kind": "Blender GLB geometry review; not a web shader screenshot",
+  "floor_index": 0,
+  "upper_cut_m": 1.6,
+  "lower_cut": null,
+  "context_omitted_for_close_inspection": false,
+  "model_manifest_sha256": "46a3662027c4f3e78933068fd91e670fd3cabb3e0f46d790e77b34a91e159d86",
+  "render_sha256": "fd007ee9628a2f522c0a4639c2af684b05e3f7a2bd557983256e012eeefa14a4"
+}

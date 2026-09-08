@@ -1,10 +1,10 @@
 {
   "master": "build/blender/angora21-working.blend",
-  "master_sha256": "df9ee5335b5fa1db5a6faeff67d0671cd5fc5b28c7b46acbf34a4da1d893b241",
+  "master_sha256": "3a390227c159ffe1df26fdcde1cb403b5f08d5f1f566dc37518c86af5d83441b",
   "source_objects": 5090,
   "linked_scene_objects": 5090,
-  "source_vertices": 9320000,
-  "linked_vertices": 9320000,
+  "source_vertices": 9320076,
+  "linked_vertices": 9320076,
   "files": [
     {
       "path": "build/blender/layers/shared-materials.blend",
@@ -26,8 +26,8 @@
     },
     {
       "path": "build/blender/layers/10-architecture.blend",
-      "bytes": 7426680,
-      "sha256": "617f73b0300a80dc622840ce8f9709f702ccf1d533ad9c0e55b6943808b56a75",
+      "bytes": 7427056,
+      "sha256": "4105de07c4dae4752294724135bbf067afb2c2ce64d31f1fff2d09139fe35776",
       "collection": "10_ARCHITECTURE"
     },
     {
@@ -172,7 +172,7 @@
   "maximum_library_bytes": 8695675,
   "usage": "Open the master with the layers folder alongside it. Geometry libraries are individually editable.",
   "automation_required": false,
-  "review_revision": "16-lift-stops-below-attic",
+  "review_revision": "17-gallery-void",
   "review_geometry_bounds_m": {
     "B0 WC navy vanity": [
       [
