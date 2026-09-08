@@ -31,6 +31,22 @@
         <button id="toggle-furniture" type="button" aria-pressed="true" disabled>Mobilya: Açık</button>
         <button id="toggle-rooms" type="button" aria-pressed="true" disabled>Oda adları</button>
         <button id="toggle-measurements" type="button" aria-pressed="false" disabled>Ölçüler</button>
+        <button id="enter-walk" class="walk-launch" type="button" disabled>İçeride gez</button>
+        <button id="enter-vr" class="walk-launch" type="button" hidden>VR’a gir</button>
+      </section>
+      <section id="walk-tools" class="walk-tools" aria-label="İçeride gezinme" hidden>
+        <div class="walk-pad" aria-label="Yürüme yönü">
+          <button type="button" data-walk-direction="KeyW" class="walk-forward" aria-label="İleri yürü">↑</button>
+          <button type="button" data-walk-direction="KeyA" class="walk-left" aria-label="Sola yürü">←</button>
+          <span class="walk-pad-label" aria-hidden="true">Yürü</span>
+          <button type="button" data-walk-direction="KeyD" class="walk-right" aria-label="Sağa yürü">→</button>
+          <button type="button" data-walk-direction="KeyS" class="walk-back" aria-label="Geri yürü">↓</button>
+        </div>
+        <div class="walk-room-panel">
+          <label for="walk-room">Odaya git</label>
+          <select id="walk-room" aria-label="Gezilecek oda"></select>
+          <button id="exit-walk" type="button">Kat planına dön</button>
+        </div>
       </section>
       <section class="camera-tools" aria-label="Kamera araçları">
         <button id="rotate-mode" type="button" aria-pressed="true">Döndür</button>

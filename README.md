@@ -19,6 +19,21 @@ yakınlaştırır. `Kaydır` düğmesi tek parmakla kaydırmayı da açar.
 `Mobilya` düğmesi ayrı mobilya katmanını bütün görünüm ve katlarda açıp kapatır;
 kat değiştirmek bu tercihi sıfırlamaz.
 
+R22: `İçeride gez` tam modeli göz hizasında açar. Masaüstünde W/A/S/D veya ok
+tuşlarıyla yürünür, sürükleyerek etrafa bakılır. Telefonda aynı hareket için
+ekrandaki yön düğmeleri vardır. `Odaya git` dört katta 27 başlangıç noktasına
+ulaşır; `Kat planına dön` kesit görünümünü geri getirir. Başlangıç noktaları
+kaynak döşeme, mobilya ve baş mesafesine göre seçilir. 12 cm yürüyüş ızgarası
+gerçek merdiven basamaklarını korur; duvar, kapalı kapı/cam ve galeri boşluğu
+geçilemez. Gizlenen mobilya yalnız kendi hareket engelini kaldırır. Referansta
+kapalı duran kapılar bu sürümde açılmaz; ilgili odaya oda seçicisinden girilir.
+`build/web/full/navigation.json` kaynak hashlerini, yüzeyleri ve ışıkları taşır.
+
+HTTPS üzerinde `immersive-vr` destekleyen cihazlarda `VR’a gir` görünür.
+Sol kumanda çubuğu yürütür; tetik, desteklenen döşemeye ışınlanır. VR normal
+PBR/gölge yolunu kullanır; ekran uzayı GTAO iki göze uygulanmaz. Gerçek başlık
+ve telefon testi tamamlanmadı; bu destek cihaz üzerinde doğrulama bekler.
+
 R21: `Oda adları` ve `Ölçüler` düğmeleri seçilen katın bilgilerini zemine
 yerleştirir. 27 mahal etiketi vardır. Ölçüler, orijinal DWG DIMENSION kaydı,
 eşleşen karşılıklı duvar yüzeyleri ve kesintisiz kaynak döşemesi birlikte
@@ -28,8 +43,11 @@ doğrulanarak seçilir. Havuz ve komşu bina tahminleri ölçüye dahil edilmez.
 çizgi, gösterilen duvarlar arasındaki mesafedir; mahal alanı veya bağımsız oda
 boyutu iddiası değildir.
 
-Web ışığında stüdyo ortamı yerine atmosferik günışığı, gerçek yumuşak güneş
-gölgeleri, GTAO temas gölgelenmesi ve anizotropik doku süzme kullanılır.
+Web ışığında depodaki lisanslı HDR günışığı, gerçek yumuşak güneş gölgeleri,
+GTAO temas gölgelenmesi ve anizotropik doku süzme kullanılır. HDR yüklenemezse
+atmosferik günışığı kalır. İçeride seçilen odanın yakınındaki iki kaynak armatür
+gölge üretir. HDR ve armatür güçleri fotoğraf çekim anının ölçülmüş ışığı değildir;
+renk/pozlama eşlemesi ve nihai iç mekân ışık bake'i hâlâ açık iştir.
 Gölge haritası yalnız sahne/kesit değişiminde güncellenir. GTAO telefonda yarım
 çözünürlüktedir ve mahalle görünümünde kapalıdır; komşulara villa kesiti uygulanmaz.
 Tam model dışa aktarımı bevel ve weighted normal sonuçlarını korur. Bu düzeltme
@@ -49,7 +67,7 @@ kaynak CAD yüzeylerinin tutarsız yönlerine veya kameranın bakışına bağl�
 `build/wall-section-qa.json` geometri ve boşluk kontrollerini kaydeder.
 
 Sayfa kendi yayımlandığı repo sürümünün model listesini kullanır. Yedi parça
-toplam yaklaşık 44,5 MB, kesit geometrisi ayrıca 1,1 MB; aynı anda en fazla iki dosya çözülür ve durgun sahne
+toplam yaklaşık 44,7 MB, kesit geometrisi ayrıca 1,1 MB; aynı anda en fazla iki dosya çözülür ve durgun sahne
 sürekli yeniden çizilmez. Gerçek OrbitControls ile dokunma olayları ve sabit
 kamera yüksekliği, gerçek GLB dosyalarının hash ve tam yükseklik sınırları
 kontrol edildi. Gerçek kesit geometrisi ışın testleri ve Blender görüntüsüyle
@@ -74,9 +92,35 @@ yerleşir. Demir, ahşap ve metal ayrıntılar üç ayrı mesh olarak sabit dona
 katmanındadır; açıklığa döşeme veya duvar eklenmedi. Korkuluk dahil edilerek
 tekrarlanan görüş testleri, galeri ve alt merdivenin açık kaldığını doğrular.
 Motif oranları ve yükseklik fotoğraftan yorumdur. Diğer merdiven kolları,
-galeri sarkıtı, hol mobilyaları ve ahşap tavan hâlâ ayrı kontrol gerektirir.
+galeri sarkıtı ve ahşap tavan hâlâ ayrı kontrol gerektirir.
 `build/gallery-railing-report.json` kaynakları ve yerleşimi;
 `build/renders/full-scene-gallery.png` web geometrisinin yakın görünümünü kaydeder.
+
+R22 mobilya kontrolü: 467 ayrı mesh parçası, 50 eşya grubu halinde duvar ve
+bağımsız eşyalara karşı tarandı. Giyinme dolabı ve güneybatı gardırop geri
+çekildi; yatak örtüsünün komodine girmesi giderildi. Genel hol kanepesi,
+fotoğraflardaki iki berjer, sehpa ve aynalı dolapla değiştirildi. Çatı koltuğu
+ve TV konsolu yeniden yerleştirildi; fotoğrafta bulunmayan komodinler kaldırılıp
+ayaklı fan ve ayna eklendi. Eğimli tavana giren başlık alçaltıldı ve koyu gövde/
+açık çerçeve düzenine getirildi. Bunlar fotoğraftan yorumlanan modellerdir.
+
+`build/furniture-collision-report.json` her parçayı ve grubunu listeler; mevcut
+denetim toleranslarında duvar/eşya kesişmesi kalmadı. `build/furniture-headroom-report.json`
+kaynak tavan/çatı üçgenleriyle ayrı BVH denetiminin temiz olduğunu kaydeder.
+`build/furniture-opening-report.json` mevcut kapalı kapı ve cam düzlemlerine
+karşı ek kontrolü içerir.
+Duvar denetimi 8 cm yükseklik dilimleri, 8 mm pay ve 1,5 cm² alan eşiği kullanır;
+aynı eşyanın kasıtlı birleşen parçaları kendi grubunda tutulur. Bu denetim
+dinamik kapı açılımı veya bütün yüzeylerin fotoğraf eşleme onayı değildir.
+Gerçek güncel GLB'lerden alınan `build/renders/full-scene-walk-hall-r22.png`
+ve `full-scene-walk-attic-r22.png` Cycles iç mekân kontrolleridir; web ekran
+görüntüsü veya nihai kalite onayı olarak sunulmaz.
+
+Mobilya değişiminden sonra ana sahnede `tools/inspect_review_geometry.py` ve
+`tools/check_furniture_headroom.py`, normal Python'da
+`tools/audit_furniture_geometry.py` çalıştırılır. Tam web modelini dışa aktardıktan
+sonra `tools/build_walk_navigation.py`, ardından `tools/sync_web_viewer.py`
+çalıştırılır. Hareket verisi son mobilya hash'iyle eşleşmek zorundadır.
 
 Yol/arazi kontrolünde iki binanın oturumundan geçen tahmini güzergâh kaldırıldı.
 Kuzeybatı, güneydoğu ve doğu dış yolları CAD bordürlerinden; bağlantı yolları

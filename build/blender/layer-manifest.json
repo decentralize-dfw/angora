@@ -1,10 +1,10 @@
 {
   "master": "build/blender/angora21-working.blend",
-  "master_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
-  "source_objects": 5087,
-  "linked_scene_objects": 5087,
-  "source_vertices": 9338679,
-  "linked_vertices": 9338679,
+  "master_sha256": "112c349583e84cd44e27d6d052e8340f43d56954f95a9fd98a6e0acec1a407ea",
+  "source_objects": 5102,
+  "linked_scene_objects": 5102,
+  "source_vertices": 9339063,
+  "linked_vertices": 9339063,
   "files": [
     {
       "path": "build/blender/layers/shared-materials.blend",
@@ -44,8 +44,8 @@
     },
     {
       "path": "build/blender/layers/30-furniture-placeholders.blend",
-      "bytes": 487757,
-      "sha256": "7f60a0a7a37b4163b2ef5729f5ffe353c7a681e87697902f1e48247f4d1fa2c0",
+      "bytes": 526886,
+      "sha256": "32f1bc22c415945994bb10c513e2b7995d799d7d7ed3925e4a65502b8bffab2b",
       "collection": "30_FURNITURE_PLACEHOLDERS"
     },
     {
@@ -172,7 +172,7 @@
   "maximum_library_bytes": 8695675,
   "usage": "Open the master with the layers folder alongside it. Geometry libraries are individually editable.",
   "automation_required": false,
-  "review_revision": "20-gallery-photo-railing",
+  "review_revision": "R22",
   "review_geometry_bounds_m": {
     "B0 WC navy vanity": [
       [

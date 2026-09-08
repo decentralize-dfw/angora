@@ -31,3 +31,6 @@ for key in ['room_annotations','navigation']:
         assert hashlib.sha256(path.read_bytes()).hexdigest()==data['sha256']
         shutil.copy2(path,destination/'full'/data['file'])
 print('Viewer models synchronized:',len(full['assets']), 'uncut assets + legacy snapshots')
+lighting=args.viewer/'public/lighting';lighting.mkdir(exist_ok=True)
+for path in (root/'assets/lighting').glob('*'):
+    if path.is_file():shutil.copy2(path,lighting/path.name)

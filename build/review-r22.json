@@ -1,0 +1,46 @@
+{
+  "revision": 22,
+  "native_master_sha256": "112c349583e84cd44e27d6d052e8340f43d56954f95a9fd98a6e0acec1a407ea",
+  "furniture_library_sha256": "32f1bc22c415945994bb10c513e2b7995d799d7d7ed3925e4a65502b8bffab2b",
+  "full_model_manifest_sha256": "575d578684c3ebec8db714811ad2551fbf2296972a09486e2a8ffcd2370426fd",
+  "geometry_audits": {
+    "walls_and_furniture": {
+      "file": "build/furniture-collision-report.json",
+      "sha256": "bd218c5bfd2f19930e7e24915d35e7d335d530d474d75cb47c768ab48ccec6d3",
+      "parts_checked": 467,
+      "passed": true
+    },
+    "ceilings_and_roof": {
+      "file": "build/furniture-headroom-report.json",
+      "sha256": "09e4c3ded98a7b68e5b11ec17334b4a74befa1f625c87b839decaca3e8a9f304",
+      "parts_checked": 467,
+      "passed": true
+    },
+    "closed_doors_and_glazing": {
+      "file": "build/furniture-opening-report.json",
+      "sha256": "d97ed0b013f3687f3c949ad1067f989d47140fa43c3981b63a227f96f6e84b44",
+      "parts_checked": 467,
+      "passed": true
+    }
+  },
+  "furniture_assemblies": 50,
+  "web_model_assets": 7,
+  "web_model_bytes": 44671476,
+  "room_stations": 27,
+  "automated_viewer_tests": {
+    "command": "npm --prefix viewer test",
+    "passed": 10,
+    "failed": 0
+  },
+  "production_build": "npm --prefix viewer run build:pages passed",
+  "real_mobile_gpu_verified": false,
+  "physical_webxr_headset_verified": false,
+  "photo_matching_complete": false,
+  "remaining": [
+    "Exact room materials, furniture profiles and fixture/photo lighting matching",
+    "Other stair railings and gallery pendant/wood ceiling",
+    "Neighbor garden, retaining-wall and landscape photo matching",
+    "Dynamic door opening clearances",
+    "Phone GPU visual and performance checks; physical VR device QA"
+  ]
+}

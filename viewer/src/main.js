@@ -5,6 +5,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { createLighting } from './lighting.js';
 import { createAnnotations } from './annotations.js';
+import { InteriorWalk, enableImmersiveWalk } from './walk.js';
 import { configureCameraControls } from './camera.js';
 import { sectionHeight, smoothStep, createWallCaps } from './section.js';
 
@@ -14,12 +15,13 @@ const publicRoot = new URL(import.meta.env.BASE_URL, document.baseURI);
 const pages = import.meta.env.MODE === 'pages';
 const modelRoot = new URL(pages ? 'build/web/full/' : 'models/full/', publicRoot);
 const decoderRoot = new URL(pages ? 'viewer/public/draco/' : 'draco/', publicRoot);
+const daylightURL = new URL((pages ? 'assets/lighting/' : 'lighting/')+'kloofendal_48d_partly_cloudy_puresky_1k.hdr',publicRoot);
 const titles = {neighborhood:'Çevre', building:'Villa 21', f0:'Bodrum', f1:'Giriş katı', f2:'1. kat', f3:'Çatı katı'};
 const groups = new Map();
 const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
 let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox, lighting;
 let selected = 'neighborhood', ready = false, loading = false;
-let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations;
+let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations, walk;
 let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;
 
 function message(text, error = false) {
@@ -47,12 +49,18 @@ function setFurnitureVisible(visible) {
   $('#toggle-furniture').setAttribute('aria-pressed', String(visible));
   $('#toggle-furniture').textContent = visible ? 'Mobilya: Açık' : 'Mobilya: Kapalı';
   if (renderer) renderer.shadowMap.needsUpdate = true;
+  if (walk) {
+    walk.furniture = visible;
+    if (walk.active && visible && !walk.xrActive && !walk.surface.sample(walk.camera.position.x, walk.camera.position.z, walk.camera.position.y-1.62)) enterWalk(walk.room);
+  }
   invalidate();
 }
 function invalidate() {
-  if (framePending || !renderer) return;
+  if (framePending || !renderer || renderer.xr.isPresenting) return;
   framePending = true;
-  requestAnimationFrame(time => {
+  requestAnimationFrame(time => {if (!renderer.xr.isPresenting) renderFrame(time); else framePending = false;});
+}
+function renderFrame(time) {
     framePending = false;
     if (transition) {
       const t = Math.min(1, (time - transition.start) / 1050);
@@ -61,11 +69,10 @@ function invalidate() {
       if (t >= 1) transition = null;
     }
     caps?.update(clip.constant, clip.constant < fullHeight - 0.001);
-    annotations?.update(selected, roomNamesVisible, measurementsVisible, Boolean(transition));
-    const changing = controls.update();
-    lighting.render(camera);
+    annotations?.update(selected, roomNamesVisible, measurementsVisible, Boolean(transition), walk?.active);
+    const changing = walk?.active ? walk.update(time, renderer.xr.getSession()) : controls.update();
+    lighting.render(walk?.active ? walk.camera : camera);
     if (changing || transition) invalidate();
-  });
 }
 function resize() {
   if (!renderer) return;
@@ -73,6 +80,7 @@ function resize() {
   camera.left = -frameSpan * aspect / 2; camera.right = frameSpan * aspect / 2;
   camera.top = frameSpan / 2; camera.bottom = -frameSpan / 2;
   camera.updateProjectionMatrix(); renderer.setSize(w, h); lighting?.resize(w, h); invalidate();
+  walk?.resize(w,h);
 }
 function frame() {
   if (!buildingBox) return;
@@ -112,12 +120,18 @@ function setup() {
   const draco = new DRACOLoader(); draco.setDecoderPath(decoderRoot.href); draco.setWorkerLimit(2);
   loader = new GLTFLoader(); loader.setDRACOLoader(draco);
   window.addEventListener('resize', resize);
+  renderer.xr.addEventListener('sessionstart', () => renderer.setAnimationLoop(renderFrame));
+  renderer.xr.addEventListener('sessionend', () => {renderer.setAnimationLoop(null);resize();invalidate();});
   renderer.domElement.addEventListener('webglcontextlost', event => {
     event.preventDefault(); message('3D görüntü durakladı. Sayfayı yenileyerek devam edebilirsin.', true);
     $('#retry').onclick = () => location.reload();
   });
 }
 function selectView(id, initial = false) {
+  if (walk?.active && id.startsWith('f')) {
+    const station=walk.surface.data.stations.find(s=>s.floor_index===Number(id[1]));enterWalk(station.room_id);return;
+  }
+  if (walk?.active) exitWalk(false);
   const previous = selected; selected = id;
   document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === id));
   $('#view-title').textContent = titles[id];
@@ -134,6 +148,27 @@ function selectView(id, initial = false) {
   // All assets stay loaded and visible; floor changes preserve orbit, pan and zoom.
   if (initial || !previous.startsWith('f') || !id.startsWith('f')) frame();
   host.dataset.view = id; host.dataset.loaded = 'true'; invalidate();
+}
+function enterWalk(roomId) {
+  if (!walk || !ready) return;
+  const floor=selected.startsWith('f')?Number(selected[1]):1;
+  roomId ||= walk.surface.data.stations.find(s=>s.floor_index===floor).room_id;
+  const station=walk.enter(roomId);selected='f'+station.floor_index;
+  lighting.interior(station.floor_index,station.position);
+  controls.enabled=false;clip.constant=fullHeight;transition=null;lighting.frame('building');
+  $('#app').dataset.walk='true';$('.camera-tools').hidden=true;$('#walk-tools').hidden=false;$('#enter-walk').hidden=true;
+  $('#walk-room').value=station.room_id;
+  document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===selected));
+  $('#view-title').textContent=titles[selected]+' · '+station.name;
+  $('#section-label').textContent='Sürükle: etrafa bak · Oklar veya W A S D: yürü';
+  resize();invalidate();
+}
+function exitWalk(reselect = true) {
+  if(!walk?.active)return;
+  walk.leave();controls.enabled=true;$('#app').dataset.walk='false';
+  lighting.interior(null,null);
+  $('.camera-tools').hidden=false;$('#walk-tools').hidden=true;$('#enter-walk').hidden=false;
+  if(reselect)selectView(selected,true);
 }
 async function loadModel() {
   if (loading || ready) return;
@@ -170,7 +205,16 @@ async function loadModel() {
       if (!response.ok) throw Error(`Room annotations HTTP ${response.status}`);
       return response.json();
     }
-    const results = await Promise.allSettled([worker(), worker(), loadSections(), loadRooms()]);
+    async function loadNavigation() {
+      const url=new URL(manifest.navigation?.file ?? 'navigation.json',modelRoot);
+      if(manifest.navigation?.sha256)url.searchParams.set('v',manifest.navigation.sha256.slice(0,12));
+      const response=await fetch(url);if(!response.ok)throw Error(`Navigation HTTP ${response.status}`);
+      const data=await response.json();
+      if(data.source_furniture_sha256!==manifest.library_hashes['build/blender/layers/30-furniture-placeholders.blend'])throw Error('Navigation/furniture revision mismatch');
+      return data;
+    }
+    const results = await Promise.allSettled([worker(), worker(), loadSections(), loadRooms(), loadNavigation(),
+      lighting.loadEnvironment(daylightURL.href).catch(error=>console.warn('HDR unavailable; atmospheric daylight retained',error))]);
     const failure = results.find(r => r.status === 'rejected'); if (failure) throw failure.reason;
     for (const [id, group] of staged) {
       groups.set(id, group); scene.add(group);
@@ -190,9 +234,21 @@ async function loadModel() {
     fullHeight = buildingBox.max.y + 2;
     caps = createWallCaps(results[2].value); scene.add(caps.group);
     annotations = createAnnotations(results[3].value); scene.add(annotations.group);
+    walk = new InteriorWalk(results[4].value,renderer.domElement,invalidate);scene.add(walk.rig);
+    lighting.setFixtures(results[4].value.lights);
+    for(let f=0;f<4;f++) {
+      const group=document.createElement('optgroup');group.label=titles['f'+f];
+      for(const station of results[4].value.stations.filter(s=>s.floor_index===f)) {
+        const room=results[3].value.rooms.find(r=>r.id===station.room_id);
+        group.append(new Option(station.name+' · '+room.code,station.room_id));
+      }
+      $('#walk-room').append(group);
+    }
     ready = true; status.hidden = true;
     $('#toggle-furniture').disabled = false; setFurnitureVisible(furnitureVisible);
     $('#toggle-rooms').disabled = false; $('#toggle-measurements').disabled = false;
+    $('#enter-walk').disabled=false;
+    enableImmersiveWalk(renderer,scene,walk,groups,()=>{if(!walk.active)enterWalk();},()=>{resize();invalidate();});
     selectView(selected, true);
   } catch (error) {
     for (const group of staged.values()) {scene.remove(group); dispose(group);}
@@ -221,6 +277,9 @@ try {
   $('#toggle-measurements').onclick = () => {
     measurementsVisible = !measurementsVisible; $('#toggle-measurements').setAttribute('aria-pressed', measurementsVisible); invalidate();
   };
+  $('#enter-walk').onclick=()=>enterWalk();$('#exit-walk').onclick=()=>exitWalk();
+  $('#walk-room').onchange=event=>enterWalk(event.target.value);
+  window.addEventListener('keydown',event=>{if(event.code==='Escape'&&walk?.active&&!renderer.xr.isPresenting)exitWalk();});
   loadModel();
 } catch (error) {
   message('3D görünüm başlatılamadı. Güncel Safari veya Chrome ile tekrar açabilirsin.', true);

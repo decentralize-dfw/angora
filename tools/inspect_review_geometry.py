@@ -18,7 +18,8 @@ for cname in ['10_ARCHITECTURE','20_FIXED_FITTINGS','30_FURNITURE_PLACEHOLDERS']
                 'bounds':bounds,'props':props,'materials':[m.name for m in me.materials if m]}
         records.append(record)
         layer=o.get('source_layer','')
-        if cname=='30_FURNITURE_PLACEHOLDERS' or layer.endswith(('$ZEMİN','$ZEMİN KAPLAMA','$MERDİVEN')) or o.name.startswith(('Lift cabin','Lift landing')):
+        navigation_surface=layer.endswith(('$ZEMİN','$ZEMİN KAPLAMA','$MERDİVEN')) or 'TAVAN' in layer or layer in ['ÇATII','ÇATI ALIN','KAPI İÇ$KAPI','PENCERE_KAPI$CAM']
+        if cname=='30_FURNITURE_PLACEHOLDERS' or navigation_surface or o.name.startswith(('Lift cabin','Lift landing')):
             me.calc_loop_triangles()
             floors.append({**record,'vertices':verts,'triangles':[list(t.vertices) for t in me.loop_triangles]})
         ev.to_mesh_clear()
@@ -26,4 +27,13 @@ for cname in ['10_ARCHITECTURE','20_FIXED_FITTINGS','30_FURNITURE_PLACEHOLDERS']
 out=ROOT/'build/intermediate';out.mkdir(exist_ok=True,parents=True)
 (out/'review-inventory.json').write_text(json.dumps(records,ensure_ascii=False))
 with gzip.open(out/'review-geometry.json.gz','wt') as f:json.dump(floors,f,ensure_ascii=False,separators=(',',':'))
+lights=[]
+for o in bpy.context.scene.objects:
+    if o.type!='LIGHT' or not o.name.startswith(('Photographed','Warm chandelier','Master pendant','Attic ceiling')):continue
+    p=o.matrix_world.translation;d=o.matrix_world.to_quaternion()@Vector((0,0,-1))
+    floor=max(0,min(3,sum(p.z>=z for z in [0,3.0996,6.3714,9.4705])-1))
+    lights.append({'name':o.name,'position':[p.x,p.z,-p.y],'direction':[d.x,d.z,-d.y],
+       'floor_index':floor,'color':list(o.data.color),'intensity_cd':round(o.data.energy*1.25,3),
+       'intensity_status':'render_assumption_not_measured_electrical_power','source':'native_photo_interpreted_fixture'})
+(out/'review-lights.json').write_text(json.dumps(lights,ensure_ascii=False))
 print('INVENTORY_COMPLETE',len(records),len(floors),flush=True)

@@ -1,5 +1,5 @@
 {
-  "native_master_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
+  "native_master_sha256": "112c349583e84cd44e27d6d052e8340f43d56954f95a9fd98a6e0acec1a407ea",
   "phase_1_complete": false,
   "source_photo_files": 202,
   "unique_source_photos": 184,
@@ -48,7 +48,8 @@
           "change": "Removed roads crossing buildings 37/26, added CAD curb arterials, cut terrain beneath road surfaces and faired unmeasured grade transitions",
           "evidence": "build/road-terrain-native-qa.json"
         }
-      ]
+      ],
+      "web_room_ids": []
     },
     {
       "photo_group": "asansor",
@@ -76,7 +77,8 @@
         "Bodrum, giriş ve birinci kattaki üç durakta kapı hareketi ve hol bağlantısı"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": false,
+      "web_room_ids": []
     },
     {
       "photo_group": "kat_1_bahce",
@@ -140,7 +142,8 @@
         "Havuz suyu ve döşeme renk eşlemesi"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": false,
+      "web_room_ids": []
     },
     {
       "photo_group": "kat_1_bodrum_mutfak",
@@ -169,7 +172,10 @@
         "Fotoğrafa göre aydınlatma ve yüzey tonu"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": true,
+      "web_room_ids": [
+        "f0-B05"
+      ]
     },
     {
       "photo_group": "kat_1_bodrum_salon",
@@ -224,7 +230,10 @@
         "Güncel sahnede fotoğrafla oda karşılaştırması"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": true,
+      "web_room_ids": [
+        "f0-B06"
+      ]
     },
     {
       "photo_group": "kat_1_bodrum_wc",
@@ -260,7 +269,8 @@
         "Kapı açılımının fotoğrafla son kontrolü"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": false,
+      "web_room_ids": []
     },
     {
       "photo_group": "kat_2_garaj",
@@ -306,7 +316,10 @@
         "İç donatı, tesisat, zemin ve kapı mekanizması"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": true,
+      "web_room_ids": [
+        "f1-Z07"
+      ]
     },
     {
       "photo_group": "kat_2_giris",
@@ -388,7 +401,11 @@
         "Kapılar, merdiven ve oda geçişleri"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": true,
+      "web_room_ids": [
+        "f1-Z01",
+        "f1-Z02"
+      ]
     },
     {
       "photo_group": "kat_2_giris_wc",
@@ -429,7 +446,10 @@
         "Fotoğrafa özgü lavabo, ayna, klozet ve malzemeler"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": true,
+      "web_room_ids": [
+        "f1-Z03"
+      ]
     },
     {
       "photo_group": "kat_2_on_giris",
@@ -480,7 +500,8 @@
         "Taş kaplama deseni, bahçe kapıları ve bitki yerleşimi"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": false,
+      "web_room_ids": []
     },
     {
       "photo_group": "kat_2_ust_mutfak",
@@ -534,7 +555,7 @@
         "Vitrin içi eşyalar ve kapı vitrayı; fotoğrafla son yerleşim kontrolü"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false,
+      "dimension_labels_enabled": true,
       "comparison_evidence": {
         "render": "build/renders/10_main_kitchen.png",
         "render_sha256": "6cf426f1dbbc514a178741b1d462f9b83d1a14802e54d71a7ae88535996d5cba",
@@ -547,6 +568,9 @@
         "Oven opening cleared and raised panel fronts",
         "Cupboard mouldings and square backsplash joints",
         "Vitrine positioned against measured native CAD wall face"
+      ],
+      "web_room_ids": [
+        "f1-Z04"
       ]
     },
     {
@@ -583,14 +607,18 @@
         "Düzeltilmiş renk haritalarıyla güncel iç mekân ışığı karşılaştırması"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false,
+      "dimension_labels_enabled": true,
       "comparison_evidence": {
         "render": "build/renders/05_main_lounge.png",
         "render_sha256": "628f734d040498e0b6ec10cb3b6ed7ffb5652e8d0254148f9cde88a4ec5b46cc",
         "render_stage": "earlier_geometry_review_before_constant_color_correction",
         "source_contact_sheet": "build/reference/kat_2_ust_salon_1.jpg",
         "source_contact_sheet_sha256": "523bded31c54208d445a59ac62dbbce30600cf8fc42761387e1f1947f50337e9"
-      }
+      },
+      "web_room_ids": [
+        "f1-Z05",
+        "f1-Z06"
+      ]
     },
     {
       "photo_group": "kat_3_banyok",
@@ -641,7 +669,10 @@
         "Güncel sahnede fotoğrafla oda karşılaştırması"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": true,
+      "web_room_ids": [
+        "f2-108"
+      ]
     },
     {
       "photo_group": "kat_3_hol",
@@ -715,14 +746,14 @@
       "cameras": [
         "full-scene-gallery"
       ],
-      "review_state": "gallery_guard_added_remaining_hall_details_pending",
+      "review_state": "compared_corrections_applied_open_items_remain",
       "open_items": [
         "Diğer merdiven kollarının korkulukları ve galeri sarkıtı; motif oranlarının daha yakın fotoğraf eşlemesi",
-        "Hol dolabı, koltukları, aydınlatma ve ahşap tavan",
+        "Berjer ve dolap profillerinin daha yakın fotoğraf eşlemesi, aydınlatma ve ahşap tavan",
         "Oda kapıları ve fotoğrafa göre malzeme kontrolü"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false,
+      "dimension_labels_enabled": true,
       "completed_corrections": [
         {
           "revision": 17,
@@ -733,7 +764,16 @@
           "revision": 20,
           "change": "Added photo-guided iron scrolls, brass fixings and profiled wood handrail on CAD-supported gallery rim and descending stair; lower sightlines remain open",
           "evidence": "build/gallery-railing-report.json"
+        },
+        {
+          "revision": 22,
+          "change": "Replaced generic hall sofa/table with photo-interpreted twin wingchairs, coffee table and mirror cabinet; corrected wall-return clearance",
+          "evidence": "build/furniture-refinement-r22.json"
         }
+      ],
+      "web_room_ids": [
+        "f2-101",
+        "f2-105"
       ]
     },
     {
@@ -826,13 +866,25 @@
         "12_dressing",
         "13_master_bathroom"
       ],
-      "review_state": "current_revision_photo_review_pending",
+      "review_state": "compared_corrections_applied_open_items_remain",
       "open_items": [
         "Her fotoğrafın yatak odası / banyo / giyinme hacmine ayrılması",
         "Üç hacmin güncel sahnede ayrı kontrolü"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": true,
+      "completed_corrections": [
+        {
+          "revision": 22,
+          "change": "Moved dressing furniture clear of partition; reduced quilt drape clear of bedside tables",
+          "evidence": "build/furniture-refinement-r22.json"
+        }
+      ],
+      "web_room_ids": [
+        "f2-102",
+        "f2-103",
+        "f2-104"
+      ]
     },
     {
       "photo_group": "kat_3_yatak_odalari",
@@ -938,13 +990,24 @@
       "cameras": [
         "11_southwest_bedroom"
       ],
-      "review_state": "current_revision_photo_review_pending",
+      "review_state": "compared_corrections_applied_open_items_remain",
       "open_items": [
         "Fotoğrafların ayrı yatak odalarına eşlenmesi",
         "Her oda için kamera ve oda kontrolü"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": true,
+      "completed_corrections": [
+        {
+          "revision": 22,
+          "change": "Moved southwest wardrobe clear of the door-jamb wall return",
+          "evidence": "build/furniture-refinement-r22.json"
+        }
+      ],
+      "web_room_ids": [
+        "f2-106",
+        "f2-107"
+      ]
     },
     {
       "photo_group": "kat_4",
@@ -1126,21 +1189,39 @@
       "cameras": [
         "07_attic"
       ],
-      "review_state": "attic_lift_removed_other_room_checks_pending",
+      "review_state": "compared_corrections_applied_open_items_remain",
       "open_items": [
-        "Fotoğrafların ayrı hacimlere eşlenmesi",
-        "Her oda ve banyo için ayrı kamera ve kontrol"
+        "Oturma alanı kumaşı, koltuk ve dolap profillerinin fotoğraf eşlemesi",
+        "Banyo, güney yatak odası ve çatı yüzeylerinin ayrı yakın kontrolü"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false,
+      "dimension_labels_enabled": true,
       "completed_corrections": [
         {
           "revision": 16,
           "change": "User confirmed no attic lift; removed F3 fittings and restored only former shaft floor opening",
           "evidence": "build/attic-lift-correction.json"
+        },
+        {
+          "revision": 22,
+          "change": "Corrected lounge/TV layout, removed unsupported bedside sets, added photo-interpreted fan/mirror and lowered headboard clear of sloping ceiling",
+          "evidence": "build/furniture-refinement-r22.json"
         }
+      ],
+      "web_room_ids": [
+        "f3-C01",
+        "f3-C02",
+        "f3-C03",
+        "f3-C04",
+        "f3-C05"
       ]
     }
   ],
-  "review_revision": "20-gallery-photo-railing"
+  "review_revision": "22-furniture-clearances-and-interior-walk",
+  "furniture_clearance_evidence": [
+    "build/furniture-collision-report.json",
+    "build/furniture-headroom-report.json",
+    "build/furniture-opening-report.json"
+  ],
+  "room_annotation_evidence": "build/room-annotation-qa.json"
 }

@@ -1,13 +1,13 @@
 {
-  "source_native_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
+  "source_native_sha256": "112c349583e84cd44e27d6d052e8340f43d56954f95a9fd98a6e0acec1a407ea",
   "units": "metres",
   "coordinate_system": "glTF_Y_up",
   "assets": [
     {
       "file": "villa-f2.glb",
-      "bytes": 8745828,
-      "sha256": "16b7fad3e7c21fd23213cd75102ace9d8f84b61e6f95403080e6fc79669612aa",
-      "objects": 391,
+      "bytes": 8902768,
+      "sha256": "83db037fa25f681daaf3f9c41777947d6fcbc97ec015716564cd114282373afa",
+      "objects": 412,
       "blender_bounds_m": [
         [
           -6.382711887359619,
@@ -24,14 +24,14 @@
       "materials_with_normal_and_orm": 37,
       "images": 111,
       "common_origin": true,
-      "native_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
+      "native_sha256": "2b06f88e23f9d8d92668dc1c9a52afc6e77bcf3471d7880d1afeee05ecbb64ca",
       "scope": "villa_or_ground"
     },
     {
       "file": "villa-f3.glb",
-      "bytes": 4320024,
-      "sha256": "bf6611df1fafacd6d8b9b0cb0c99d1e54a6aab08d1e0903624b0157457a9e650",
-      "objects": 128,
+      "bytes": 4335792,
+      "sha256": "256c8c326bce651ca117247f7a92a5cca3875aafad53fd384f09d3e70a90859a",
+      "objects": 122,
       "blender_bounds_m": [
         [
           -6.700300216674805,
@@ -44,11 +44,11 @@
           13.508399963378906
         ]
       ],
-      "materials": 18,
-      "materials_with_normal_and_orm": 18,
-      "images": 54,
+      "materials": 19,
+      "materials_with_normal_and_orm": 19,
+      "images": 57,
       "common_origin": true,
-      "native_sha256": "3a390227c159ffe1df26fdcde1cb403b5f08d5f1f566dc37518c86af5d83441b",
+      "native_sha256": "112c349583e84cd44e27d6d052e8340f43d56954f95a9fd98a6e0acec1a407ea",
       "scope": "villa_or_ground"
     },
     {

@@ -1,0 +1,25 @@
+{
+  "render": "build/renders/full-scene-walk-hall-r22.png",
+  "kind": "Blender GLB geometry review; not a web shader screenshot",
+  "floor_index": null,
+  "upper_cut_m": 40,
+  "lower_cut": null,
+  "context_omitted_for_close_inspection": false,
+  "section_atlas_sha256": null,
+  "model_manifest_sha256": "908bcb36bade8633cfbb55f9adbed69357dc70da82c385424ce58828e859f578",
+  "render_sha256": "7badd360dcf5421478bfc80c7fbaa47aa01d259263b40433958f94380a7e8310",
+  "annotations": false,
+  "furniture_visible": true,
+  "camera_native_m": [
+    -1.7999999523162842,
+    2.0,
+    7.991000175476074
+  ],
+  "camera_rotation_rad": [
+    1.199832558631897,
+    -4.759690241940007e-08,
+    1.2555818557739258
+  ],
+  "projection": "PERSP",
+  "geometry_clipped": false
+}

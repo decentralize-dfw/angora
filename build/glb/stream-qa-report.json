@@ -1,16 +1,16 @@
 {
-  "source_native_sha256": "1a44152fbe3e521aabd9d62ad426e41f342f3b8bb0be612c40fe0c6863d72cfd",
+  "source_native_sha256": "112c349583e84cd44e27d6d052e8340f43d56954f95a9fd98a6e0acec1a407ea",
   "integrity": [
     {
       "file": "villa-f2.glb",
-      "sha256": "72c8b11cc7c0ac879125cbf4f9df382df200debd9f904ebf2cbabc650ef10cc6",
+      "sha256": "83db037fa25f681daaf3f9c41777947d6fcbc97ec015716564cd114282373afa",
       "materials": 37,
       "normal_and_orm": "passed"
     },
     {
       "file": "villa-f3.glb",
-      "sha256": "92f10b569e055eb1a4764f654ee01ec1e84c7178d259fb08412b3f4ff6c9048b",
-      "materials": 23,
+      "sha256": "256c8c326bce651ca117247f7a92a5cca3875aafad53fd384f09d3e70a90859a",
+      "materials": 19,
       "normal_and_orm": "passed"
     },
     {
@@ -27,7 +27,7 @@
     },
     {
       "file": "context-ground.glb",
-      "sha256": "63ca1639640f690cc83b81ab68d7f2f9e7c8f18e62adbbb5d620278fd9fceff9",
+      "sha256": "a7955ec9d9c19c2eddca99ba71b64b6919b7314e5fa0f238f386157614802564",
       "materials": 4,
       "normal_and_orm": "passed"
     },
@@ -111,7 +111,7 @@
     },
     {
       "file": "villa-f1.glb",
-      "sha256": "735486af1ecd62093f5db3f093279039dab33d42fffaacf737071e32d528ffc8",
+      "sha256": "42981710e5e35e8fde1eee1bf93e64ad1a5a1bd086eea9b562e8f1bbd9ebd9f3",
       "materials": 30,
       "normal_and_orm": "passed"
     },
@@ -123,38 +123,6 @@
     }
   ],
   "roundtrip": [
-    {
-      "file": "context-ground.glb",
-      "imported_mesh_objects": 10,
-      "max_bounds_delta_m": 0.001117706298828125,
-      "bounds_check": "passed",
-      "source_references_retained": 10,
-      "expected_bounds_m": [
-        [
-          -139.26348876953125,
-          -167.48959350585938,
-          -16.052898406982422
-        ],
-        [
-          173.75607299804688,
-          147.64918518066406,
-          17.039138793945312
-        ]
-      ],
-      "imported_bounds_m": [
-        [
-          -139.26348876953125,
-          -167.48959350585938,
-          -16.052898406982422
-        ],
-        [
-          173.75607299804688,
-          147.64918518066406,
-          17.04025650024414
-        ]
-      ],
-      "sha256": "63ca1639640f690cc83b81ab68d7f2f9e7c8f18e62adbbb5d620278fd9fceff9"
-    },
     {
       "file": "villa-f0.glb",
       "imported_mesh_objects": 905,
@@ -186,6 +154,70 @@
         ]
       ],
       "sha256": "255312f7a3c44f6f372134758a9764ce15ad5b24f6920c0119572281d86d3718"
+    },
+    {
+      "file": "villa-f2.glb",
+      "imported_mesh_objects": 412,
+      "max_bounds_delta_m": 0.0001316070556640625,
+      "bounds_check": "passed",
+      "source_references_retained": 285,
+      "expected_bounds_m": [
+        [
+          -6.382711887359619,
+          -6.4730000495910645,
+          4.822000026702881
+        ],
+        [
+          5.811314105987549,
+          10.894000053405762,
+          10.453055381774902
+        ]
+      ],
+      "imported_bounds_m": [
+        [
+          -6.382711887359619,
+          -6.473000526428223,
+          4.822000026702881
+        ],
+        [
+          5.811182498931885,
+          10.894000053405762,
+          10.45304012298584
+        ]
+      ],
+      "sha256": "83db037fa25f681daaf3f9c41777947d6fcbc97ec015716564cd114282373afa"
+    },
+    {
+      "file": "villa-f3.glb",
+      "imported_mesh_objects": 122,
+      "max_bounds_delta_m": 7.295608520507812e-05,
+      "bounds_check": "passed",
+      "source_references_retained": 39,
+      "expected_bounds_m": [
+        [
+          -6.700300216674805,
+          -5.567999839782715,
+          8.511427879333496
+        ],
+        [
+          4.858465671539307,
+          10.894000053405762,
+          13.508399963378906
+        ]
+      ],
+      "imported_bounds_m": [
+        [
+          -6.700300216674805,
+          -5.567999839782715,
+          8.511427879333496
+        ],
+        [
+          4.858392715454102,
+          10.894000053405762,
+          13.50847053527832
+        ]
+      ],
+      "sha256": "256c8c326bce651ca117247f7a92a5cca3875aafad53fd384f09d3e70a90859a"
     }
   ],
   "tolerance_m": 0.02,

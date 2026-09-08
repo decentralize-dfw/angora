@@ -1,0 +1,3408 @@
+{
+  "method": "world-space_evaluated_triangle_BVH_against_source_ceiling_and_roof_surfaces",
+  "source_furniture_sha256": "32f1bc22c415945994bb10c513e2b7995d799d7d7ed3925e4a65502b8bffab2b",
+  "parts_checked": 467,
+  "source_ceiling_roof_objects": 11,
+  "items": [
+    {
+      "object": "Attic floor fan base",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic floor fan blade",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic floor fan blade.001",
+      "ceiling_candidates": [
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic floor fan blade.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic floor fan metal guard",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic floor fan motor",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic floor fan stem",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic headboard ivory horizontal border",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic headboard ivory horizontal border.001",
+      "ceiling_candidates": [
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic headboard ivory upright border",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic headboard ivory upright border.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic leaning mirror face",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic leaning mirror frame",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic television bezel",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic television console",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic television console drawer",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic television console drawer.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic television screen",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic television stand",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Attic television stem",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Back cushion.012",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Back cushion.013",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Back cushion.014",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Bed base",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Bed base.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Bed base.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Bed base.004",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Bell lampshade",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Bell lampshade.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Blue chest",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Bowed table top",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Bowed table top.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Cabinet foot",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Cabinet foot.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Cabinet lower inset",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Cabinet lower inset.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Cabinet lower inset.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Carved chair frame",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Carved chair frame.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Carved chair frame.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Carved chair frame.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Carved chair frame.004",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Carved chair frame.005",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Chair seat frame",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Chair seat frame.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Chair seat frame.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Chair seat frame.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Chair seat frame.004",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Chair seat frame.005",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Coffee table central divider",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Coffee table inset glass",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Coffee table leg.008",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Coffee table leg.009",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Coffee table leg.010",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Coffee table leg.011",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Coffee table top.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Coverlet.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Coverlet.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Coverlet.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Coverlet.004",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Cushion piping",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Cushion piping.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Cushion piping.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Cushion piping.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Cushion piping.004",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Cushion piping.005",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Cushion piping.006",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Cushion piping.007",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Display porcelain",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Display porcelain.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Display porcelain.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Display porcelain.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Display porcelain.004",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Display porcelain.005",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Display porcelain.006",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Display porcelain.007",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Display porcelain.008",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Display porcelain.009",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Display porcelain.010",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Display porcelain.011",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Display porcelain.012",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Display porcelain.013",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Display porcelain.014",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Display porcelain.015",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Draped master quilt",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.004",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.005",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.006",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.007",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.008",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.009",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.010",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.011",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.012",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.013",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.014",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.015",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.016",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.017",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.018",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.019",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.020",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.021",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.022",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.023",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.024",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.025",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.026",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.027",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.028",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.029",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.030",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.031",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.040",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.041",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.042",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.043",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.044",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.045",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.046",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer face.047",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.004",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.005",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.006",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.007",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.008",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.009",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.010",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.011",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.012",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.013",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.014",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.015",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.016",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.017",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.018",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.019",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.020",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.021",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.022",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.023",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.024",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.025",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.026",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.027",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.028",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.029",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.030",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.031",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.040",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.041",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.042",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.043",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.044",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.045",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.046",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Drawer pull.047",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Dresser carcass",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Dresser carcass.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Dresser carcass.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Dresser carcass.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Dresser carcass.004",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Dresser carcass.005",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Dresser carcass.006",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Dresser carcass.007",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Dresser carcass.010",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Dresser carcass.011",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.004",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.005",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.006",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.007",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.008",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.009",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.010",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.011",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.012",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.013",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.014",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.015",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.016",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.017",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.018",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.019",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.020",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.021",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.022",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.023",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.024",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.025",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.026",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.027",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.028",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair back slat.029",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.004",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.005",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.006",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.007",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.008",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.009",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.010",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.011",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.012",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.013",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.014",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.015",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.016",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.017",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.018",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.019",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.020",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.021",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.022",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair leg.023",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair seat",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair seat.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair seat.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair seat.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair seat.004",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden chair seat.005",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden dining table leg",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden dining table leg.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden dining table leg.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden dining table leg.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Garden dining table top",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Glass shelf",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Glass shelf.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Glass shelf.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Glass shelf.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Hall cabinet brass pull",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall cabinet brass pull.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall cabinet carcass",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall cabinet cornice",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall cabinet drawer",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall cabinet drawer.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall cabinet mirror",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall cabinet side panel",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall cabinet side panel.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall photo coffee table tapered foot",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall photo coffee table tapered foot.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall photo coffee table tapered foot.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall photo coffee table tapered foot.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall photo coffee table top",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair base",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair base.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair foot",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair foot.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair foot.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair foot.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair foot.004",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair foot.005",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair foot.006",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair foot.007",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair high back",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair high back.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair piping",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair piping.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair rolled arm",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair rolled arm.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair rolled arm.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair rolled arm.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair seat",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair seat.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair wing",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair wing.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair wing.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Hall wing chair wing.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Headboard.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Headboard.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Headboard.004",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Iron bed finial",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Iron bed finial.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Iron bed finial.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Iron bed finial.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Iron bed rails",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp base.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp base.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp base.004",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp base.005",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp base.008",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp base.009",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp finial",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp finial.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp shade.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp shade.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp shade.004",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp shade.005",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp shade.008",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp shade.009",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp stem.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp stem.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp stem.004",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp stem.005",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp stem.008",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Lamp stem.009",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Leather seat cushion",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Leather seat cushion.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Leather seat cushion.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Leather seat cushion.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Leather seat cushion.004",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Leather seat cushion.005",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Leather seat cushion.006",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Leather seat cushion.007",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Leather sofa back",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Leather sofa back.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Leather sofa back.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Leather sofa back.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Leather sofa base",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Leather sofa base.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Leather sofa base.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Leather sofa base.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Loose leather back cushion",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Loose leather back cushion.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Loose leather back cushion.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Loose leather back cushion.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Loose leather back cushion.004",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Loose leather back cushion.005",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Loose leather back cushion.006",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Loose leather back cushion.007",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Master upholstered chair back",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Master upholstered chair leg",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Master upholstered chair leg.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Master upholstered chair leg.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Master upholstered chair leg.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Master upholstered chair seat",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Mattress",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Mattress.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Mattress.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Mattress.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Mattress.004",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Mirror frame",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Mirror glass",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Ornate bedside lamp",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Ornate bedside lamp.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Pillow.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Pillow.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Pillow.004",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Pillow.005",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Pillow.006",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Pillow.007",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Pillow.008",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Rolled leather arm",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Rolled leather arm.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Rolled leather arm.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Rolled leather arm.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Rolled leather arm.004",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Rolled leather arm.005",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Rolled leather arm.006",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Rolled leather arm.007",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Seat cushion.012",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Seat cushion.013",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Seat cushion.014",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Sofa arm.010",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Sofa arm.011",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Sofa back.005",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Sofa base.005",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.008",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.009",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.010",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.011",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.012",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.013",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.014",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.015",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.020",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.021",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.022",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.023",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.024",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.025",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.026",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Sofa foot.027",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Soft grey pillow",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Soft grey pillow.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "TV stand.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Table top inlay",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Table top inlay.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Television.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Turned table leg",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Turned table leg.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Turned table leg.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Turned table leg.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Turned table leg.004",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Turned table leg.005",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Turned table leg.006",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Turned table leg.007",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upholstered chair back",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upholstered chair back.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upholstered chair back.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upholstered chair back.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upholstered chair back.004",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upholstered chair back.005",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upholstered chair seat",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upholstered chair seat.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upholstered chair seat.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upholstered chair seat.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upholstered chair seat.004",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upholstered chair seat.005",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Vitrine back",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Vitrine bottom cornice",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Vitrine glass side",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Vitrine glass side.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Vitrine glazed door",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Vitrine glazed door.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Vitrine glazed door.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Vitrine lower cabinet",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Vitrine pediment",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Vitrine top cornice",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Vitrine vertical stile",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Vitrine vertical stile.001",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Vitrine vertical stile.002",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Vitrine vertical stile.003",
+      "ceiling_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe carcass.001",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe carcass.002",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe carcass.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe carcass.004",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe door.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe door.004",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe door.005",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe door.006",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe door.007",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe door.008",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe door.009",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe door.010",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe door.011",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe door.012",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe door.013",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe door.014",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe door.015",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe door.016",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe door.017",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe door.018",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe handle.003",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe handle.004",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe handle.005",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe handle.006",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe handle.007",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe handle.008",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe handle.009",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe handle.010",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe handle.011",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe handle.012",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe handle.013",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe handle.014",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe handle.015",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe handle.016",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe handle.017",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Wardrobe handle.018",
+      "ceiling_candidates": [
+        "F2 | ÇATII",
+        "F2 | ÇATI ALIN",
+        "F3 | ÇATII",
+        "F3 | KAT 3$ÜSTKATTAVAN - Copy - Copy",
+        "F3 | ÇATI ALIN"
+      ],
+      "intersections": []
+    }
+  ],
+  "intersections": [],
+  "passed": true
+}

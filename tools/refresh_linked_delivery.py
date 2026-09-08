@@ -10,7 +10,10 @@ master=ROOT/'build/blender/angora21-working.blend';assert Path(bpy.data.filepath
 scene=bpy.context.scene;scene['review_revision']=revision
 for name in ['repair_gallery_finish.py','verify_gallery_visibility.py','refresh_linked_delivery.py',
              'export_ground_source.py','prepare_road_correction.py','prepare_ground_correction.py','apply_ground_correction.py',
-             'prepare_gallery_railing.py','add_gallery_railing.py','export_wall_sections.py','build_section_atlas.py']:
+             'prepare_gallery_railing.py','add_gallery_railing.py','export_wall_sections.py','build_section_atlas.py',
+             'inspect_review_geometry.py','audit_furniture_geometry.py','refine_furniture_clearances.py',
+             'adjust_hall_chair_clearance.py','correct_attic_headboard.py','correct_attic_tv.py','check_furniture_openings.py','check_furniture_headroom.py','register_plan_dimensions.py','build_room_annotations.py',
+             'build_walk_navigation.py','export_web_viewer.py']:
     text=bpy.data.texts.get('pipeline/'+name) or bpy.data.texts.new('pipeline/'+name)
     text.clear();text.write((ROOT/'tools'/name).read_text())
 bpy.context.view_layer.update()

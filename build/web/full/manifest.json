@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "source_native_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
+  "source_native_sha256": "112c349583e84cd44e27d6d052e8340f43d56954f95a9fd98a6e0acec1a407ea",
   "units": "metres",
   "coordinate_system": "glTF_Y_up",
   "floor_labels": [
@@ -70,10 +70,10 @@
     {
       "id": "level-2",
       "file": "level-2.glb",
-      "bytes": 6900648,
-      "sha256": "18544df40bf77137dd516eea69ea2168b2eb41feb66a56b055bd1d02e5cb87ef",
-      "source_objects": 391,
-      "draw_groups": 47,
+      "bytes": 7031068,
+      "sha256": "17dcd7c3f9828223486905f6555a61c9521a774cf95ef67c3d1fe15927007c50",
+      "source_objects": 412,
+      "draw_groups": 48,
       "bounds_native_m": [
         [
           -6.382711887359619,
@@ -86,8 +86,8 @@
           10.453055381774902
         ]
       ],
-      "triangles": 168505,
-      "source_native_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
+      "triangles": 177501,
+      "source_native_sha256": "2b06f88e23f9d8d92668dc1c9a52afc6e77bcf3471d7880d1afeee05ecbb64ca",
       "section_elevation_m": null,
       "section_caps": false,
       "evaluated_split_normals_preserved": true
@@ -95,10 +95,10 @@
     {
       "id": "level-3",
       "file": "level-3.glb",
-      "bytes": 4179768,
-      "sha256": "1e194090b75e4a749297e6a7795cd32b1740905ed405041b920a1457b41ba6c0",
-      "source_objects": 128,
-      "draw_groups": 22,
+      "bytes": 4210580,
+      "sha256": "7336a22e1107205032c3c63215bb50dddaff3ec1a1139de8c1a88d56b856286c",
+      "source_objects": 122,
+      "draw_groups": 25,
       "bounds_native_m": [
         [
           -6.700300216674805,
@@ -111,8 +111,8 @@
           13.508399963378906
         ]
       ],
-      "triangles": 59841,
-      "source_native_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
+      "triangles": 62753,
+      "source_native_sha256": "112c349583e84cd44e27d6d052e8340f43d56954f95a9fd98a6e0acec1a407ea",
       "section_elevation_m": null,
       "section_caps": false,
       "evaluated_split_normals_preserved": true
@@ -196,7 +196,7 @@
   "photo_matching_complete": false,
   "source_repository": "https://github.com/decentralize-dfw/angora",
   "geometry_source": "build/blender/angora21-working.blend",
-  "linked_master_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
+  "linked_master_sha256": "112c349583e84cd44e27d6d052e8340f43d56954f95a9fd98a6e0acec1a407ea",
   "native_source": "build/blender/angora21-working.blend",
   "full_scene": true,
   "geometry_preclipped": false,
@@ -244,7 +244,7 @@
     "build/blender/layers/10-architecture.blend": "4105de07c4dae4752294724135bbf067afb2c2ce64d31f1fff2d09139fe35776",
     "build/blender/layers/15-exterior-details.blend": "6db6aa01da0f5540c63ac58825a414b6eaa6c1883d538e72e7a965a00d3df1e4",
     "build/blender/layers/20-fixed-fittings.blend": "69c471749b8a5073c239af60d186a19309ea4a4d726d6929ecdffba87b4059ce",
-    "build/blender/layers/30-furniture-placeholders.blend": "7f60a0a7a37b4163b2ef5729f5ffe353c7a681e87697902f1e48247f4d1fa2c0",
+    "build/blender/layers/30-furniture-placeholders.blend": "32f1bc22c415945994bb10c513e2b7995d799d7d7ed3925e4a65502b8bffab2b",
     "build/blender/layers/40-landscape-01.blend": "f6da2f6baefd4879d84d455eb229218539fd257bef93df665bcffcaaeab197f1",
     "build/blender/layers/40-landscape-02.blend": "1785851e2dc4995d503ead85c750e9daa87c50765029065089885aa77a7969f3",
     "build/blender/layers/40-landscape-03.blend": "8ddc5a245732e35cb23403899e021355e38b20beff25a17130d9e72c0f020357",
@@ -275,5 +275,10 @@
     "file": "rooms.json",
     "bytes": 28082,
     "sha256": "35b81b9bedd128bfaa4b8346db859602c9468f0d3d290ee33b9723a0cc28a8a3"
+  },
+  "navigation": {
+    "file": "navigation.json",
+    "bytes": 62923,
+    "sha256": "c161d0cfce15b85af2d74545782a8a81420999abb4d2d72a3adb732277388416"
   }
 }

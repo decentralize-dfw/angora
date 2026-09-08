@@ -1,0 +1,14 @@
+{
+  "asset": "kloofendal_48d_partly_cloudy_puresky_1k.hdr",
+  "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/kloofendal_48d_partly_cloudy_puresky_1k.hdr",
+  "source_page": "https://polyhaven.com/a/kloofendal_48d_partly_cloudy_puresky",
+  "license": "CC0",
+  "license_page": "https://polyhaven.com/license",
+  "authors": [
+    "Greg Zaal",
+    "Jarod Guest"
+  ],
+  "bytes": 1435119,
+  "sha256": "fd94c84997b8a3c353b62c2125a9b44e19509956986a126e472684432a02d798",
+  "use": "generic daytime illumination; not a site photograph or measured sun position"
+}
