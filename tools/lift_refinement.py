@@ -17,7 +17,8 @@ def refine_lift(m,cols):
             bpy.data.collections.remove(c)
     lift=collection('Lift — shaft cabin and landing doors',cols['fixed'])
     x=-2.02;y=.86;ix0=x-.68;ix1=x+.68;iy0=.19;iy1=1.53
-    floorz=[0,3.0996,6.3714,9.4705];tops=floorz[1:]+[11.92]
+    # User confirmed 2026-09-08: the installed lift does not serve the attic.
+    floorz=[0,3.0996,6.3714];tops=floorz[1:]+[8.991]
     m['lift_steel']=material('Lift brushed patterned stainless','B9BDC0',.22,1)
     noise_bump(m['lift_steel'],170,.09,.0004)
     m['lift_mirror']=material('Lift mirror','F3F4F2',.025,1)
@@ -97,7 +98,7 @@ def refine_lift(m,cols):
         for face in o.data.polygons:
             poly=[o.data.vertices[i].co.copy() for i in face.vertices]
             pieces=[]
-            if abs(face.normal.z)>.99 and -.15<face.center.z<11.92:
+            if abs(face.normal.z)>.99 and -.15<face.center.z<8.991-1e-4:
                 inside=poly
                 for axis,value,sign in [(0,ix0,1),(0,ix1,-1),(1,iy0,1),(1,iy1,-1)]:
                     if len(inside)<3:break
@@ -117,7 +118,7 @@ def refine_lift(m,cols):
     # A separate cutaway is assembled by the review renderer, not by hiding
     # walls in the authored scene permanently.
     (ROOT/'build/lift-report.json').write_text(json.dumps(dict(core_center_xy=[x,y],clear_shaft_xy=[1.36,1.34],
-        shaft_pit_z=-.5,shaft_top_z=11.92,landing_z=floorz,slab_objects_cut=cut,
+        shaft_pit_z=-.5,shaft_top_z=8.991,landing_z=floorz,slab_objects_cut=cut,
         position_status='repeated_CAD_U_core_with_photo_relation_to_kitchen',
         dimensions_status='interpreted_not_shop_drawing',dimension_label_allowed=False),indent=2))
     print('LIFT_SHAFT_CUT',len(cut),flush=True)

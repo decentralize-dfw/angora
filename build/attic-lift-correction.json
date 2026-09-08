@@ -1,0 +1,13 @@
+{
+  "revision": 16,
+  "lift_stops": [
+    0,
+    1,
+    2
+  ],
+  "attic_lift_present": false,
+  "attic_floor_patch_top_m": 9.4705,
+  "restored_aperture_only": true,
+  "source_confirmation": "User, 2026-09-08",
+  "master_sha256": "df9ee5335b5fa1db5a6faeff67d0671cd5fc5b28c7b46acbf34a4da1d893b241"
+}

@@ -1,0 +1,14 @@
+{
+  "revision": 16,
+  "before": {
+    "file": "build/renders/stages/16-attic/before.png",
+    "source_glb_sha256": "d4904c2c9d823a6ca5f9a1f07144f37691c26ab1ef70a2f8eb95964edbe61fd9",
+    "image_sha256": "6f97eaebcf4c039e3be5dab362cce74aca82b4278f1bbbf181c7ec1fb111a402"
+  },
+  "after": {
+    "file": "build/renders/web-floor-3.png",
+    "source_glb_sha256": "d14a8fc8a19c12a5b1ee0376a70f7e6637177aff7c8148057e37378783349f0a",
+    "image_sha256": "c168fbab55940d2835e913cc262fc9860085268a29b81d25883d76ed1c671580"
+  },
+  "kind": "Blender Cycles render of web GLB; attic lift removed; lower-floor visibility is reviewed separately"
+}

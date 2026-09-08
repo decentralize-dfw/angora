@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "source_native_sha256": "d86c7863c79ee265012376a68509d96f11f9175bb0acf923800ab4f9f30b2548",
+  "source_native_sha256": "df9ee5335b5fa1db5a6faeff67d0671cd5fc5b28c7b46acbf34a4da1d893b241",
   "units": "metres",
   "coordinate_system": "glTF_Y_up",
   "floor_labels": [
@@ -98,10 +98,10 @@
     {
       "id": "floor-3",
       "file": "floor-3.glb",
-      "bytes": 3628372,
-      "sha256": "d4904c2c9d823a6ca5f9a1f07144f37691c26ab1ef70a2f8eb95964edbe61fd9",
-      "source_objects": 156,
-      "draw_groups": 27,
+      "bytes": 3587400,
+      "sha256": "d14a8fc8a19c12a5b1ee0376a70f7e6637177aff7c8148057e37378783349f0a",
+      "source_objects": 128,
+      "draw_groups": 20,
       "bounds_native_m": [
         [
           -6.700300216674805,
@@ -114,8 +114,8 @@
           11.070508003234863
         ]
       ],
-      "triangles": 29354,
-      "source_native_sha256": "1a44152fbe3e521aabd9d62ad426e41f342f3b8bb0be612c40fe0c6863d72cfd",
+      "triangles": 26598,
+      "source_native_sha256": "df9ee5335b5fa1db5a6faeff67d0671cd5fc5b28c7b46acbf34a4da1d893b241",
       "section_elevation_m": 11.0705,
       "section_caps": false,
       "floor_elevation_m": 9.4705,
@@ -173,7 +173,7 @@
   "mobile_lod": true,
   "photo_matching_complete": false,
   "source_repository": "https://github.com/decentralize-dfw/angora",
-  "geometry_source": "build/intermediate/angora21-monolithic.blend",
-  "linked_master_sha256": "672fc7d062adaebd1cf0b41db29c4e15994ff2897232d2724d835cc9608d3082",
+  "geometry_source": "build/blender/angora21-working.blend",
+  "linked_master_sha256": "df9ee5335b5fa1db5a6faeff67d0671cd5fc5b28c7b46acbf34a4da1d893b241",
   "native_source": "build/blender/angora21-working.blend"
 }

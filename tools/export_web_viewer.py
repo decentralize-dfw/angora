@@ -6,7 +6,9 @@ and furniture category. The full-detail native files remain authoritative.
 import bpy, bmesh, json, hashlib, sys, math
 from pathlib import Path
 from mathutils import Vector
-ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'build/web';OUT.mkdir(parents=True,exist_ok=True)
+ROOT=Path(__file__).resolve().parents[1]
+FULL='--full-scene' in sys.argv
+OUT=ROOT/('build/web/full' if FULL else 'build/web');OUT.mkdir(parents=True,exist_ok=True)
 source=Path(bpy.data.filepath);source_hash=hashlib.sha256(source.read_bytes()).hexdigest()
 scene=bpy.context.scene;deps=bpy.context.evaluated_depsgraph_get()
 floors=[0.,3.0996,6.3714,9.4705]
@@ -71,7 +73,8 @@ def export_view(name,objects,cut=None,lower=None):
                 bmesh.ops.remove_doubles(bm,verts=list(bm.verts),dist=.00005)
             bmesh.ops.dissolve_limit(bm,angle_limit=.035 if name=='neighborhood' else .004,verts=list(bm.verts),edges=list(bm.edges),delimit={'MATERIAL'} if name=='neighborhood' else {'MATERIAL','UV','NORMAL'})
         bm.verts.ensure_lookup_table();bm.verts.index_update()
-        local={};category='furniture' if o in furniture else 'fixed'
+        wall=o.get('source_layer','').endswith('$DUVAR') or o.name.startswith(('Lift shaft','Lift landing jamb wall','Lift lintel wall'))
+        local={};category='furniture' if o in furniture else 'wall' if FULL and wall else 'fixed'
         for face in bm.faces:
             if len(face.verts)<3:continue
             mat=mats[min(face.material_index,len(mats)-1)] if mats else None
@@ -94,6 +97,7 @@ def export_view(name,objects,cut=None,lower=None):
         for p,smooth in zip(me.polygons,b['smooth']):p.use_smooth=smooth
         obj=bpy.data.objects.new(category+' | '+mat_name,me);preview.objects.link(obj)
         obj['category']=category;obj['source_native_sha256']=source_hash
+        if FULL:obj['section_cap_eligible']=category=='wall'
         if cut is not None:obj['section_elevation_m']=cut
         produced.append(obj)
         for v in b['v']:
@@ -122,22 +126,39 @@ def export_view(name,objects,cut=None,lower=None):
         data=o.data;bpy.data.objects.remove(o,do_unlink=True);bpy.data.meshes.remove(data)
 
 args=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
-order=['floor-0','floor-1','floor-2','floor-3','building','neighborhood']
+order=['level-0','level-1','level-2','level-3','envelope','garden','context'] if FULL else ['floor-0','floor-1','floor-2','floor-3','building','neighborhood']
 wanted=set(args[args.index('--views')+1:]) if '--views' in args else ({'building','neighborhood'} if '--context-only' in args else set(order))
 assert wanted<=set(order),wanted
 if wanted!=set(order):records.extend(r for r in json.loads((OUT/'manifest.json').read_text())['assets'] if r['id'] not in wanted)
 for i,z in enumerate(floors):
-    if 'floor-'+str(i) in wanted:export_view('floor-'+str(i),{o for o in indoor if floor_of(o)==i},z+1.6,z-.6)
+    if FULL:
+        if 'level-'+str(i) in wanted:export_view('level-'+str(i),{o for o in indoor if floor_of(o)==i})
+    elif 'floor-'+str(i) in wanted:export_view('floor-'+str(i),{o for o in indoor if floor_of(o)==i},z+1.6,z-.6)
+if FULL:
+    if 'envelope' in wanted:export_view('envelope',exterior)
+    if 'garden' in wanted:
+        # Retain the authored foliage volumes and tree crowns. Omit only the
+        # separate dense leaf/needle/grass detail meshes in the mobile model.
+        mobile_garden={o for o in garden if not any(s in o.name.lower() for s in ['leaves','needles','grass blades','folded leaves'])}
+        export_view('garden',mobile_garden)
+    if 'context' in wanted:
+        context=dict(next(a for a in json.loads((ROOT/'build/web/manifest.json').read_text())['assets'] if a['id']=='neighborhood'))
+        context.update(id='context',file='../neighborhood.glb');records.append(context)
 if 'building' in wanted:export_view('building',building)
 if 'neighborhood' in wanted:export_view('neighborhood',hood)
 records.sort(key=lambda r:order.index(r['id']))
-manifest={'version':1,'source_native_sha256':source_hash,'units':'metres','coordinate_system':'glTF_Y_up',
+manifest={'version':2 if FULL else 1,'source_native_sha256':source_hash,'units':'metres','coordinate_system':'glTF_Y_up',
           'floor_labels':['Bodrum','Giriş','1. kat','Çatı'],'floor_datums_m':floors,'cut_height_m':1.6,
           'assets':records,'mobile_lod':True,'photo_matching_complete':False,
           'source_repository':'https://github.com/decentralize-dfw/angora',
-          'geometry_source':'build/intermediate/angora21-monolithic.blend',
+          'geometry_source':source.relative_to(ROOT).as_posix(),
           'linked_master_sha256':hashlib.sha256((ROOT/'build/blender/angora21-working.blend').read_bytes()).hexdigest(),
           'native_source':'build/blender/angora21-working.blend'}
+if FULL:
+    manifest.update(full_scene=True,geometry_preclipped=False,clip_lower_plane=False,stairs_preserved=True,
+                    lift_served_floor_indices=[0,1,2],section_caps='runtime_stencil_hatch_on_wall_volumes',
+                    view_assets={'neighborhood':order,'building':order,'floors':order},
+                    library_hashes={r['path']:r['sha256'] for r in json.loads((ROOT/'build/blender/layer-manifest.json').read_text())['files']})
 path=OUT/'manifest.json';tmp=path.with_suffix('.tmp');tmp.write_text(json.dumps(manifest,ensure_ascii=False,indent=2));tmp.replace(path)
 assert hashlib.sha256(source.read_bytes()).hexdigest()==source_hash,'Native source changed during web export'
 print('WEB_DELIVERY_COMPLETE',sum(r['bytes'] for r in records),flush=True)

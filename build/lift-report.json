@@ -12,8 +12,7 @@
   "landing_z": [
     0,
     3.0996,
-    6.3714,
-    9.4705
+    6.3714
   ],
   "slab_objects_cut": [
     "F0 | KAT 0$TAVAN",
@@ -57,5 +56,7 @@
       "object": "F3 | KAT 3$DUVAR",
       "horizontal_faces_cut": 12
     }
-  ]
+  ],
+  "attic_served": false,
+  "correction": "Attic shaft and landing removed; former opening restored at adjacent CAD slab levels"
 }

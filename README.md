@@ -17,18 +17,31 @@ döşeme kotundan **+1,60 m** kesilir. Sabit yükseklikte döndürme, yatay kayd
 yakınlaştırma ve ortalama vardır. Tek parmak döndürür; iki parmak kaydırır ve
 yakınlaştırır. `Kaydır` düğmesi tek parmakla kaydırmayı da açar.
 
-Kaynak kod `viewer/`, türetilmiş modeller `build/web/` altındadır. Uygulama
-başlangıçta GitHub main model listesini kontrol eder; bağlantı kesilirse
-paketlenmiş modelleri kullanır. Model dosyaları ve kesit yükseklikleri, gerçek
-OrbitControls üzerinde dokunma olayları ve sabit kamera yüksekliği kontrol
-edildi. Bu oturumda tarayıcı önizleme hizmeti açılamadığı için gerçek cihaz
-görsel/performance testi henüz tamamlanmadı.
+Kaynak kod `viewer/`, güncel kesilmemiş web modelleri `build/web/full/` altındadır.
+Dört kat, dış ayrıntılar, bahçe ve mahalle bir kez yüklenir. Kat değiştirmek
+yeniden model indirmez; tek üst kesit düzlemi 1,05 saniyede hareket eder.
+Alt kesit düzlemi yoktur: alt katlar, merdiven ve mevcut galeri boşluğu korunur.
+Bina ve bodrum kadrajları bahçeyi içerir. Katlar arasında kamera konumu korunur;
+`Ortala` seçilen kata yeniden kadraj yapar. Duvar hacimlerine stencil ile dolu,
+taramalı kesit yüzeyi uygulanır; oda ve galeri boşlukları doldurulmaz.
 
-Giriş mutfağındaki son model düzeltmesini uygulayıp bağlı dosyaları ve kat
-görünümünü yenilemek için: `python tools/apply_kitchen_review_to_delivery.py`.
+Sayfa kendi yayımlandığı repo sürümünün model listesini kullanır. Yedi parça
+toplam yaklaşık 42,8 MB; aynı anda en fazla iki dosya çözülür ve durgun sahne
+sürekli yeniden çizilmez. Gerçek OrbitControls ile dokunma olayları ve sabit
+kamera yüksekliği, gerçek GLB dosyalarının hash ve tam yükseklik sınırları
+kontrol edildi. Bulut tarayıcısında WebGL kapalı olduğu için yeni kesit
+shader'ının görsel testi ve gerçek telefon performansı henüz doğrulanmadı.
+
+8 Eylül düzeltmesi: kullanıcı teyidiyle asansör yalnız bodrum, giriş ve birinci
+katı hizmet eder. Çatıdaki 31 asansör parçası kaldırıldı; yalnız eski asansör
+açıklığı döşeme ve parke ile kapatıldı. Merdiven açıklığı değiştirilmedi.
+`build/attic-lift-correction.json` ve `build/renders/web-floor-3.png` kontrol kaydıdır.
+
 Cloud Blender dizini `ANGORA_BLENDER_DIR` ile seçilir. Yalnızca web modellerini
 yenilemek için Blender içinde `tools/export_web_viewer.py` çalıştırılır;
-`--views floor-1` yalnız giriş katını günceller. Ardından
+`--full-scene` güncel tam modeli, `--full-scene --views level-1` yalnız giriş
+katını günceller. Eski `--views floor-1` modu statik kontrol kesitleri içindir.
+Bağlı dosyalar değiştiğinde önce `layer-manifest.json` hashleri yenilenir. Ardından
 `python tools/sync_web_viewer.py` ile uygulamadaki model kopyaları eşitlenir.
 
 ## Çalışma durumu
@@ -131,6 +144,6 @@ GitHub erişimi açıldı. İlk kod / CAD paketi `3731b873`, PBR haritaları ve 
 
 Üretim betikleri tek parça sahnede çalışır; en son `package_blender_layers.py` taşınabilir teslimi üretir. Paketleme öncesi kopya `build/intermediate/angora21-monolithic.blend` altında yerel çalışma ara dosyası olarak tutulur. Bağlı teslimden elle düzenleme için ilgili katman dosyasını açın; ana dosya geometriyi yeniden bağlar.
 
-Son fotoğraf kontrolünde havuz döşemesinin suya taşması ve köşe açıklıkları düzeltildi. Bodrum mutfağına küçük kare karolar ve üç kollu siyah avize eklendi. Eski WC placeholderları asansörle çakıştığı için bodrum WC'si CAD B03 hacmine, giriş WC'si CAD Z03 hacmine alındı. Bodrumdaki sabit donatılar beş fotoğrafa göre yeniden kuruldu. `check_lift_fixture_clearance.py`, dört durakta kabin hacmine taşan başka donatı / mobilya bulunmadığını denetler.
+Son fotoğraf kontrolünde havuz döşemesinin suya taşması ve köşe açıklıkları düzeltildi. Bodrum mutfağına küçük kare karolar ve üç kollu siyah avize eklendi. Eski WC placeholderları asansörle çakıştığı için bodrum WC'si CAD B03 hacmine, giriş WC'si CAD Z03 hacmine alındı. Bodrumdaki sabit donatılar beş fotoğrafa göre yeniden kuruldu. `check_lift_fixture_clearance.py`, üç durakta kabin hacmine taşan başka donatı / mobilya bulunmadığını denetler.
 
 `build/room-review-register.json`, 202 fotoğrafın 17 kaynak grubu üzerinden kontrol sırasını ve açık işleri kaydeder. Bazı gruplar birden fazla oda içerir; grup sayısı tamamlanmış oda sayısı değildir. Henüz hiçbir hacim fotoğraf eşleşmesi açısından nihai onaylı sayılmaz.
