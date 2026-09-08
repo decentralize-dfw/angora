@@ -3,10 +3,13 @@
 Read-only Blender BVH check using the current evaluated geometry inventory.
 Existing door poses are tested; this does not claim door-swing certification.
 """
-import gzip,json,hashlib
+import gzip,json,hashlib,sys
 from pathlib import Path
 from mathutils.bvhtree import BVHTree
 ROOT=Path(__file__).resolve().parents[1]
+args=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
+revision=int(args[0]) if args else 23
+assert revision in [23,24]
 rows=json.load(gzip.open(ROOT/'build/intermediate/review-geometry.json.gz','rt'))
 fixtures=[o for o in rows if 'Photo kitchen — entrance' in o['collections']]
 source=[o for o in rows if o['category']=='10_ARCHITECTURE' and
@@ -30,6 +33,6 @@ report={'method':'evaluated_triangle_BVH_against_native_door_glass_ceiling_and_r
         'source_architecture_sha256':sha('10-architecture.blend'),'source_fittings_sha256':sha('20-fixed-fittings.blend'),
         'parts_checked':len(fixtures),'source_surfaces':len(source),'items':items,'intersections':hits,'passed':not hits,
         'limitations':['Source leaves in their existing pose; future door swings are not certified.']}
-(ROOT/'build/kitchen-surfaces-r23-qa.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
-print('KITCHEN_SURFACES_R23',len(fixtures),len(source),len(hits),json.dumps(hits),flush=True)
+(ROOT/f'build/kitchen-surfaces-r{revision}-qa.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+print('KITCHEN_SURFACES',revision,len(fixtures),len(source),len(hits),json.dumps(hits),flush=True)
 assert not hits,'Kitchen fittings intersect source surfaces; see QA report'

@@ -3,15 +3,17 @@
 Uses evaluated triangle sections. Deliberate cabinet joinery is not treated as
 a collision between independent furniture; walls and movable objects are.
 """
-import json,gzip,hashlib
+import json,gzip,hashlib,sys
 from pathlib import Path
 from functools import lru_cache
 import numpy as np
 from shapely.geometry import Polygon,LineString
 from shapely.ops import unary_union,polygonize
 ROOT=Path(__file__).resolve().parents[1]
+revision=int(sys.argv[1]) if len(sys.argv)>1 else 23
+assert revision in [23,24]
 all_rows=json.load(gzip.open(ROOT/'build/intermediate/review-geometry.json.gz','rt'))
-report=json.loads((ROOT/'build/kitchen-photo-r23.json').read_text())
+report=json.loads((ROOT/f'build/kitchen-photo-r{revision}.json').read_text())
 names=set(report['new_parts']+report['changed_panels'])
 fixtures=[o for o in all_rows if 'Photo kitchen — entrance' in o['collections']]
 furniture=[o for o in all_rows if o['category']=='30_FURNITURE_PLACEHOLDERS']
@@ -66,5 +68,6 @@ result={'source_fittings_sha256':atlas['source_fittings_sha256'],
  'passed':not hits,'wall_inset_tolerance_m':.008,'overlap_review_threshold_m2':.00015,
  'limitations':['Horizontal evaluated triangle sections; the internal joints of a single cabinet are intentional.',
                 'Photo fabrication proportions remain interpreted.']}
-(ROOT/'build/kitchen-photo-r23-qa.json').write_text(json.dumps(result,ensure_ascii=False,indent=2))
-print('KITCHEN_R23_QA',len(fixtures),len(hits),json.dumps(hits),flush=True)
+(ROOT/f'build/kitchen-photo-r{revision}-qa.json').write_text(json.dumps(result,ensure_ascii=False,indent=2))
+print('KITCHEN_QA',revision,len(fixtures),len(hits),json.dumps(hits),flush=True)
+assert not hits,'Kitchen fittings intersect source walls or movable furniture'

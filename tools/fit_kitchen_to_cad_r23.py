@@ -19,7 +19,8 @@ root=bpy.data.collections['20_FIXED_FITTINGS']
 col=bpy.data.collections['Photo kitchen — entrance']
 assert root.get('kitchen_photo_revision_23') and not root.get('kitchen_cad_fit_23')
 before=hashlib.sha256(FILE.read_bytes()).hexdigest()
-assert before=='f8b83bf03d06310c681ad805952cd37f8bba8c182c8e92f7751781acf23e5a10'
+previous=json.loads((ROOT/'build/kitchen-photo-r23.json').read_text())
+assert before==previous['source_fittings_sha256_after'],'R23 photo-joinery output changed before fitting'
 backup=ROOT/'build/intermediate/fixed-fittings-before-r23-fit.blend'
 backup.write_bytes(FILE.read_bytes())
 wall_cache=ROOT/'build/intermediate/wall-triangles.json'

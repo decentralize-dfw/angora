@@ -1,0 +1,49 @@
+{
+  "revision": 24,
+  "source_fittings_sha256_before": "2cd9deedcf00f6ff6bf6267f4b8ab0bc246cbe07fbf17b725f23b417a460e1d5",
+  "source_fittings_sha256_after": "80c055a2500fa2021c768a6058511d79cdb516aeed80c2a2ca7d0a4012b56b3c",
+  "source_photos": [
+    {
+      "file": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.33 (1).jpeg",
+      "sha256": "9314cc06186993b28f91869362106fa004951e9374bbc6005f25fff70edcdea2"
+    },
+    {
+      "file": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.33 (2).jpeg",
+      "sha256": "a82e43e018af9fda15d16b51a7a225f2a542bb03d98ef8258b0618ca4031bfff"
+    }
+  ],
+  "new_parts": [
+    "Kitchen R24 | oven control fascia",
+    "Kitchen R24 | oven display",
+    "Kitchen R24 | oven selector",
+    "Kitchen R24 | oven selector index",
+    "Kitchen R24 | oven selector.001",
+    "Kitchen R24 | oven selector index.001",
+    "Kitchen R24 | oven fascia lower reveal",
+    "Kitchen R24 | pantry drawer front",
+    "Kitchen R24 | pantry door stile",
+    "Kitchen R24 | pantry door stile.001",
+    "Kitchen R24 | pantry door rail",
+    "Kitchen R24 | pantry door rail.001",
+    "Kitchen R24 | pantry door stile.002",
+    "Kitchen R24 | pantry door stile.003",
+    "Kitchen R24 | pantry door rail.002",
+    "Kitchen R24 | pantry door rail.003",
+    "Kitchen R24 | pantry drawer pull",
+    "Kitchen R24 | painted central display back",
+    "Kitchen R24 | painted side display back"
+  ],
+  "changed_panels": [
+    "Kitchen review 15 | vitrine pantry door",
+    "Kitchen review 15 | vitrine pantry door.001",
+    "Kitchen review 15 | vitrine pantry handle.001"
+  ],
+  "removed_parts": [
+    "Kitchen review 15 | vitrine pantry handle"
+  ],
+  "native_CAD_modified": false,
+  "movable_furniture_modified": false,
+  "photo_match_approved": false,
+  "fabrication_dimensions_verified": false,
+  "appliance_brand_or_model_identified": false
+}

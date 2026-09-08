@@ -6,4 +6,4 @@ Depoyu indirip `angora21-working.blend` dosyasını Blender 4.5 ile açın. Yan�
 
 Katman dosyaları tek tek düzenlenebilir. Mobilyalar `30_FURNITURE_PLACEHOLDERS` grubunda bulunur. Ölçüsü yorumlanmış nesnelerde `dimension_label_allowed=false` bilgisi korunur.
 
-`layer-manifest.json` dosya bütünlüğünü, `layer-qa.json` yeniden açılma kontrolünü kaydeder. Bu sürüm fotoğraf karşılaştırması içindir; nihai satış modeli değildir. Oda incelemeleri `build/room-review-register.json`, son mutfak kontrolü `build/review-r23.json` ile takip edilir. Her yeni GLB renderının yanında kaynak dosya hashlerini taşıyan bir JSON kaydı bulunur.
+`layer-manifest.json` dosya bütünlüğünü, `layer-qa.json` yeniden açılma kontrolünü kaydeder. Bu sürüm fotoğraf karşılaştırması içindir; nihai satış modeli değildir. Oda incelemeleri `build/room-review-register.json`, son mutfak kontrolü `build/review-r24.json` ile takip edilir. Her yeni GLB renderının yanında kaynak dosya hashlerini taşıyan bir JSON kaydı bulunur.

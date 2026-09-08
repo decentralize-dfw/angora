@@ -1,0 +1,58 @@
+{
+  "revision": 24,
+  "native_master_sha256": "8110ce3a2cadc77d2170f4a01e0a595f530c95f6eae55a512d2d9bf72c6693a8",
+  "fixed_fittings_library_sha256": "80c055a2500fa2021c768a6058511d79cdb516aeed80c2a2ca7d0a4012b56b3c",
+  "furniture_library_sha256": "32f1bc22c415945994bb10c513e2b7995d799d7d7ed3925e4a65502b8bffab2b",
+  "architecture_modified": false,
+  "movable_furniture_modified": false,
+  "full_model_manifest_sha256": "75cfff2277981d7f5de78b0f3ff29b8b0c86b4de7d6ead9f674140c5e8eff276",
+  "kitchen_fixture_parts_checked": 367,
+  "movable_furniture_parts_checked": 467,
+  "geometry_audits": [
+    {
+      "file": "build/kitchen-photo-r24-qa.json",
+      "sha256": "19888986630a8bbc60e13480ae4d48143d814d5894efbdc4c0e2e3ae01c3b340",
+      "passed": true
+    },
+    {
+      "file": "build/kitchen-surfaces-r24-qa.json",
+      "sha256": "f2c1d3a985b2df5f751834c9aba69d007a2cd90ddaa9754a344bd1c63bf5fea2",
+      "passed": true
+    }
+  ],
+  "web_model_assets": 7,
+  "web_model_bytes": 44795576,
+  "stream_integrity_assets": 20,
+  "newly_reimported_stream": "villa-f1.glb",
+  "room_stations": 27,
+  "verified_dimension_spans": 35,
+  "automated_viewer_tests": {
+    "passed": 10,
+    "failed": 0
+  },
+  "web_bundle": "Unchanged production bundle from R23; canonical model files and viewer copies synchronized",
+  "renders": [
+    {
+      "file": "build/renders/full-scene-walk-kitchen-hob-r24.png",
+      "sha256": "5d434e92de06095dc0e364a6296545d18494a4ca52c5f5ec537094fbba7cc2ad",
+      "provenance": "build/renders/full-scene-walk-kitchen-hob-r24.json",
+      "kind": "Blender GLB geometry review; not a web shader screenshot"
+    },
+    {
+      "file": "build/renders/full-scene-walk-kitchen-vitrine-r24.png",
+      "sha256": "9a26356a50519a45f097fd491bf5fb0ce8805d0c7ae690f0e8e1d4fe4bb6fb94",
+      "provenance": "build/renders/full-scene-walk-kitchen-vitrine-r24.json",
+      "kind": "Blender GLB geometry review; not a web shader screenshot"
+    }
+  ],
+  "real_mobile_gpu_verified": false,
+  "physical_webxr_headset_verified": false,
+  "photo_matching_complete": false,
+  "remaining": [
+    "Kitchen tile pattern and timber color matching",
+    "Window shutter pose and frame details",
+    "Appliance identification and fine control markings",
+    "Vitrine contents, ceiling profiles and fixture/photo lighting",
+    "Other rooms, neighboring gardens and inferred topography remain in the room review register"
+  ]
+}

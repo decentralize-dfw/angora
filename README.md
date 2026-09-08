@@ -150,6 +150,13 @@ duvar üçgenleri aynı kaldığı kanıtlanarak mevcut 192 kesit profili koruna
 aktarımla karşılaştırır; duvar geometrisi değişirse durur ve atlasın yeniden
 üretilmesini ister. Hareket ızgarası her durumda güncel donatıdan yeniden kurulur.
 
+R24, fırın camı ile tezgâh arasındaki eksik kumanda panelini tamamlar.
+Vitrinin kiler bölümü fotoğraftaki üst kapak, küçük çekmece ve alt kapak
+düzenine getirildi; kulplar ve çerçeveler bu düzene göre yerleşti. Açık orta
+bölmelerin arkası fotoğraftaki gibi boyalı yüzeydir. `build/kitchen-photo-r24.json`
+bu yorumların kaynaklarını, `build/review-r24.json` güncel kontrolleri ve GLB
+görüntülerini kaydeder. Cihaz marka/modeli ve imalat ölçüleri doğrulanmış değildir.
+
 Yol/arazi kontrolünde iki binanın oturumundan geçen tahmini güzergâh kaldırıldı.
 Kuzeybatı, güneydoğu ve doğu dış yolları CAD bordürlerinden; bağlantı yolları
 plana göre yorumlanan merkez hatlarından üretildi. Sekiz yol bölgesinin bina

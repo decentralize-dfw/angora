@@ -1,0 +1,55 @@
+{
+  "render": "build/renders/full-scene-walk-kitchen-hob-r24.png",
+  "kind": "Blender GLB geometry review; not a web shader screenshot",
+  "floor_index": null,
+  "upper_cut_m": 40,
+  "lower_cut": null,
+  "context_omitted_for_close_inspection": false,
+  "section_atlas_sha256": null,
+  "model_manifest_sha256": "75cfff2277981d7f5de78b0f3ff29b8b0c86b4de7d6ead9f674140c5e8eff276",
+  "render_sha256": "5d434e92de06095dc0e364a6296545d18494a4ca52c5f5ec537094fbba7cc2ad",
+  "assets": [
+    {
+      "id": "level-0",
+      "sha256": "c4b2127a5c3b9b65874dbab54da11190eb20ce5605cb004dc60950204dcd3217"
+    },
+    {
+      "id": "level-1",
+      "sha256": "bb3ca10777a521edb3c0667388b10032de4a7904f2e5d87d202871af4fb1af8a"
+    },
+    {
+      "id": "level-2",
+      "sha256": "17dcd7c3f9828223486905f6555a61c9521a774cf95ef67c3d1fe15927007c50"
+    },
+    {
+      "id": "level-3",
+      "sha256": "7336a22e1107205032c3c63215bb50dddaff3ec1a1139de8c1a88d56b856286c"
+    },
+    {
+      "id": "envelope",
+      "sha256": "b6b5506871dd0c84df08026c387e4c830c181efc8398bfb686366acc677e6dff"
+    },
+    {
+      "id": "garden",
+      "sha256": "a2648bbfa777a4ca189d6774ba213144b5c0fc0a718b974ad5c4c664538897e8"
+    },
+    {
+      "id": "context",
+      "sha256": "35086aa61f3252599681a6880c3fb170cb72752339ac7b8a6d6756564e66cefe"
+    }
+  ],
+  "annotations": false,
+  "furniture_visible": true,
+  "camera_native_m": [
+    -2.75,
+    -2.2799999713897705,
+    4.739999771118164
+  ],
+  "camera_rotation_rad": [
+    1.4948021173477173,
+    2.9570749404683738e-08,
+    0.5479795336723328
+  ],
+  "projection": "PERSP",
+  "geometry_clipped": false
+}
