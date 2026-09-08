@@ -15,7 +15,7 @@ from shapely.ops import unary_union,snap
 ROOT=Path(__file__).resolve().parents[1]
 DATA=json.loads((ROOT/'build/intermediate/wall-triangles.json').read_text())
 TRIS=np.array(DATA['triangles']);MIN=TRIS[:,:,2].min(1);MAX=TRIS[:,:,2].max(1)
-FLOORS=[1.6,4.6996,7.9714,11.0705]
+FLOORS=[1.6,4.6996,7.9714,10.7705]
 
 def section(height):
     z=height+.000001;active=TRIS[(MIN<z)&(MAX>z)];segments=[];edges=[]

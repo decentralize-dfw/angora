@@ -41,15 +41,37 @@ export class InteriorWalk {
   resize(w,h) {this.camera.aspect=w/h;this.camera.updateProjectionMatrix();}
   enter(room) {
     const station=this.surface.station(room);if(!station)throw Error('Unknown room');
-    this.active=true;this.keys.clear();this.lastTime=null;
+    this.active=true;this.keys.clear();this.lastTime=null;this.route=null;
     this.rig.position.set(0,0,0);this.rig.rotation.set(0,0,0);
     this.camera.position.fromArray(station.position);this.yaw=station.view_yaw_rad??.85;this.pitch=station.view_pitch_rad??-.04;this.pose();
     this.room=station.room_id;this.floor=station.floor_index;this.invalidate();return station;
   }
-  leave() {this.active=false;this.keys.clear();this.pointer=null;this.lastTime=null;}
+  leave() {this.active=false;this.keys.clear();this.pointer=null;this.lastTime=null;this.route=null;}
+  travel(room,onArrive) {
+    const station=this.surface.station(room);if(!station)return false;
+    const path=this.surface.path(this.camera.position.toArray(),station.position,this.furniture);
+    if(!path)return false;
+    this.route={points:path,index:0,room,onArrive};this.keys.clear();this.invalidate();return true;
+  }
   update(time, xrSession) {
     const dt=this.lastTime===null?0:Math.min(.05,(time-this.lastTime)/1000);this.lastTime=time;
     if(!this.active)return false;
+    if(this.route&&!this.xrActive) {
+      if(this.keys.size){this.route=null;}
+      else {
+        const route=this.route;let budget=dt*2.1;
+        while(budget>0&&route.index<route.points.length) {
+          const target=new THREE.Vector3(...route.points[route.index]);
+          const distance=this.camera.position.distanceTo(target);
+          if(distance<=budget){this.camera.position.copy(target);route.index++;budget-=distance;}
+          else {this.camera.position.lerp(target,budget/distance);budget=0;}
+        }
+        const sample=this.surface.sample(this.camera.position.x,this.camera.position.z,this.camera.position.y-this.surface.data.eye_height_m,this.furniture,.3);
+        if(sample)this.floor=sample.floor;
+        if(route.index>=route.points.length){this.room=route.room;this.route=null;route.onArrive?.(this.surface.station(route.room));}
+        return true;
+      }
+    }
     let forward=(this.keys.has('KeyW')||this.keys.has('ArrowUp')?1:0)-(this.keys.has('KeyS')||this.keys.has('ArrowDown')?1:0);
     let side=(this.keys.has('KeyD')||this.keys.has('ArrowRight')?1:0)-(this.keys.has('KeyA')||this.keys.has('ArrowLeft')?1:0);
     let yaw=this.yaw;

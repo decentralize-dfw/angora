@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 export const floorDatums = [0, 3.0996, 6.3714, 9.4705];
 export function sectionHeight(view, top) {
-  return /^f[0-3]$/.test(view) ? floorDatums[Number(view[1])] + 1.6 : top;
+  return /^f[0-3]$/.test(view) ? floorDatums[Number(view[1])] + (view==='f3'?1.3:1.6) : top;
 }
 export function smoothStep(t) {
   t = Math.max(0, Math.min(1, t));

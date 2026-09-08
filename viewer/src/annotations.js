@@ -1,55 +1,70 @@
 import * as THREE from 'three';
 
-function floorText(text, width, accent = false) {
-  const canvas = document.createElement('canvas'); canvas.width = 1024; canvas.height = 192;
-  const ctx = canvas.getContext('2d');
-  ctx.fillStyle = accent ? '#142c3bef' : '#fffffff2';
-  ctx.beginPath(); ctx.roundRect(8, 8, 1008, 176, 28); ctx.fill();
-  ctx.font = `600 ${text.length > 22 ? 56 : 66}px system-ui, sans-serif`;
-  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.fillStyle = accent ? '#ffffff' : '#142c3b'; ctx.fillText(text, 512, 96, 970);
-  const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace;
-  const material = new THREE.MeshBasicMaterial({map:texture, transparent:true,
-    depthWrite:false, depthTest:false, toneMapped:false, side:THREE.DoubleSide});
-  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(width, width * 192 / 1024), material);
-  mesh.rotation.x = -Math.PI / 2; mesh.renderOrder = 110;
-  mesh.userData.aoExcluded = true;
-  return mesh;
+export function labelFontSize(pixelsPerMetre) {
+  return THREE.MathUtils.clamp(12+Math.log2(Math.max(1,pixelsPerMetre)/18)*1.6,12,19);
 }
-
-export function createAnnotations(data) {
-  if (data.coordinate_system !== 'glTF_Y_up' || !data.rooms?.length) throw Error('Invalid room data');
-  const group = new THREE.Group(); group.name = 'Floor plan annotations';
-  group.userData.aoExcluded = true;
-  const levels = Array.from({length:4}, () => ({names:new THREE.Group(), measures:new THREE.Group()}));
-  for (const level of levels) group.add(level.names, level.measures);
-  for (const room of data.rooms) {
-    const text = floorText(room.name, Math.min(3.3, Math.max(1.45, room.name.length * .105)));
-    text.name = room.id; text.position.fromArray(room.position);
-    levels[room.floor_index].names.add(text);
+export function areaLabel(room) {
+  return Number.isFinite(room.area_m2)?`${room.area_m2.toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1})} m²`:'Alan doğrulanıyor';
+}
+export function createAnnotations(data,host,onRoom) {
+  if(data.coordinate_system!=='glTF_Y_up')throw Error('Invalid room annotations');
+  const group=new THREE.Group();group.name='Source dimensions';group.userData.aoExcluded=true;
+  const overlay=document.createElement('div');overlay.className='annotation-overlay';host.append(overlay);
+  const names=[],dimensions=[],point=new THREE.Vector3();
+  const material=new THREE.LineBasicMaterial({color:0x315e5c,depthTest:false,depthWrite:false,toneMapped:false});
+  for(const room of data.rooms) {
+    const el=document.createElement('button');el.type='button';el.className='room-label';
+    const name=document.createElement('strong');name.textContent=room.name;
+    const area=document.createElement('span');area.textContent=areaLabel(room);
+    const tour=document.createElement('small');tour.textContent='360°';tour.setAttribute('aria-hidden','true');
+    el.append(name,area,tour);el.setAttribute('aria-label',`${room.name}, ${area.textContent}, 360 derece gez`);
+    el.title=room.area_method_label??'Kaynak kat planı';
+    el.onclick=e=>{e.stopPropagation();onRoom(room.id);};overlay.append(el);
+    names.push({el,position:new THREE.Vector3(...room.position),floor:room.floor_index});
   }
-  const lineMaterial = new THREE.LineBasicMaterial({color:0x126080, depthTest:false,
-    depthWrite:false, transparent:true, opacity:0.9, toneMapped:false});
-  for (const measurement of data.dimensions) {
-    if (!measurement.dimension_label_allowed) continue;
-    const a = new THREE.Vector3().fromArray(measurement.a), b = new THREE.Vector3().fromArray(measurement.b);
-    const direction = b.clone().sub(a).normalize(), cross = new THREE.Vector3(-direction.z, 0, direction.x);
-    const points = [a, b];
-    for (const end of [a, b]) points.push(end.clone().addScaledVector(cross, -.12), end.clone().addScaledVector(cross, .12));
-    const line = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(points), lineMaterial);
-    line.renderOrder = 105; line.userData.aoExcluded = true;
-    const label = floorText(measurement.display, .85, true);
-    label.position.copy(a).add(b).multiplyScalar(.5); label.position.y += .008;
-    levels[measurement.floor_index].measures.add(line, label);
+  for(const dim of data.dimensions) {
+    if(!dim.dimension_label_allowed)continue;
+    const a=new THREE.Vector3(...dim.a),b=new THREE.Vector3(...dim.b);
+    const side=b.clone().sub(a).normalize().cross(new THREE.Vector3(0,1,0)).multiplyScalar(.12);
+    const line=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints([
+      a,b,a.clone().add(side),a.clone().sub(side),b.clone().add(side),b.clone().sub(side)]),material);
+    line.renderOrder=105;line.userData.aoExcluded=true;group.add(line);
+    const el=document.createElement('span');el.className='dimension-label';el.textContent=dim.display;
+    overlay.append(el);dimensions.push({el,line,position:a.clone().add(b).multiplyScalar(.5),floor:dim.floor_index,roomId:dim.room_id});
   }
-  return {group, data,
-    update(view, names, measures, transitioning = false, walking = false) {
-      const floor = /^f[0-3]$/.test(view) ? Number(view[1]) : -1;
-      group.visible = floor >= 0 && !transitioning && !walking;
-      levels.forEach((level, index) => {
-        level.names.visible = index === floor && names;
-        level.measures.visible = index === floor && measures;
-      });
+  function project(entry,camera,w,h,size) {
+    point.copy(entry.position).project(camera);
+    const visible=point.z>-1&&point.z<1&&Math.abs(point.x)<1.1&&Math.abs(point.y)<1.1;
+    entry.el.hidden=!visible;if(!visible)return null;
+    const x=(point.x+1)*w/2,y=(1-point.y)*h/2;
+    entry.el.style.left=`${x}px`;entry.el.style.top=`${y}px`;entry.el.style.fontSize=`${size}px`;
+    return {x,y};
+  }
+  return {group,data,update(view,showNames,showDimensions,transitioning,walking,camera,walkRoom) {
+    const floor=/^f[0-3]$/.test(view)?Number(view[1]):-1;
+    const w=host.clientWidth,h=host.clientHeight;
+    camera.updateMatrixWorld();
+    const occupied=[];
+    for(const entry of names) {
+      entry.el.hidden=!(entry.floor===floor&&showNames&&!transitioning&&!walking);
+      if(entry.el.hidden)continue;
+      const distance=Math.max(1,entry.position.distanceTo(camera.position));
+      const ppm=camera.isPerspectiveCamera?h*camera.zoom/(2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*distance):h*camera.zoom/(camera.top-camera.bottom);
+      const p=project(entry,camera,w,h,labelFontSize(ppm));if(!p)continue;
+      const rw=entry.el.offsetWidth,rh=entry.el.offsetHeight;
+      let y=p.y;
+      for(let i=0;i<8;i++) {
+        const hit=occupied.find(r=>Math.abs(p.x-r.x)<(rw+r.w)/2+4&&Math.abs(y-r.y)<(rh+r.h)/2+3);
+        if(!hit)break;y=hit.y+(rh+hit.h)/2+4;
+      }
+      y=THREE.MathUtils.clamp(y,Math.max(rh/2,95),h-rh/2-105);
+      entry.el.style.top=`${y}px`;entry.el.style.left=`${THREE.MathUtils.clamp(p.x,rw/2+5,w-rw/2-5)}px`;
+      occupied.push({x:p.x,y,w:rw,h:rh});
     }
-  };
+    for(const entry of dimensions) {
+      const visible=entry.floor===floor&&showDimensions&&!transitioning&&(!walking||entry.roomId===walkRoom);
+      entry.line.visible=visible;entry.el.hidden=!visible;
+      if(visible)project(entry,camera,w,h,walking?15:13);
+    }
+  },dispose(){overlay.remove();group.traverse(o=>o.geometry?.dispose());material.dispose();}};
 }

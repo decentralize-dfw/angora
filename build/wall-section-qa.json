@@ -8,18 +8,18 @@
     1.6,
     4.6996,
     7.9714,
-    11.0705
+    10.7705
   ],
   "transition_sample_step_m": 0.08,
   "coordinate_snap_m": 0.004,
   "maximum_paired_face_distance_m": 0.501,
   "dimension_label_allowed": false,
   "status": "passed",
-  "slice_count": 192,
+  "slice_count": 193,
   "file": {
     "file": "sections.json",
-    "bytes": 1085859,
-    "sha256": "1eb1fa7faa9f93b4988942f4c49a68dfce8dfc51e7878abbfea511245ceec390"
+    "bytes": 1093938,
+    "sha256": "99d045b12866e2e7b76bfc376b65b8cd71f50d0e168b192c38a5c7904340ab87"
   },
   "exact_floor_sections": [
     {
@@ -38,9 +38,9 @@
       "triangles": 252
     },
     {
-      "height": 11.0705,
-      "area_m2": 4.65267,
-      "triangles": 250
+      "height": 10.7705,
+      "area_m2": 8.53164,
+      "triangles": 315
     }
   ],
   "room_and_gallery_test_points_clear": true,

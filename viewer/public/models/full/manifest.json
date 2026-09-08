@@ -273,8 +273,8 @@
   },
   "section_atlas": {
     "file": "sections.json",
-    "bytes": 1085859,
-    "sha256": "1eb1fa7faa9f93b4988942f4c49a68dfce8dfc51e7878abbfea511245ceec390"
+    "bytes": 1093938,
+    "sha256": "99d045b12866e2e7b76bfc376b65b8cd71f50d0e168b192c38a5c7904340ab87"
   },
   "navigation": {
     "file": "navigation.json",

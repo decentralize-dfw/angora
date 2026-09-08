@@ -1,0 +1,26 @@
+{
+  "revision": 25,
+  "changes": [
+    "Compact mobile controls with collapsible settings and property information",
+    "Readable camera-facing room labels and verified span labels",
+    "Single-camera animated perspective plan and isometric views",
+    "Closer neighborhood preset and broader regional preset",
+    "Local-time daylight and seasonal slider; transparent glazing excluded from shadows",
+    "Four source ceiling fixtures active on selected floor",
+    "360 degree model viewpoints with source-walkable routes and room transitions",
+    "Attic upper cut lowered to 1.30 m and new exact solid wall cap"
+  ],
+  "validation": {
+    "automated_tests": 13,
+    "build": "passed",
+    "mobile_gpu": "not_verified",
+    "physical_xr": "not_verified"
+  },
+  "remaining": [
+    "Room-specific area source partition and garden areas",
+    "Garden terraces, neighboring grades and stairs opening inspection",
+    "Georeferenced regional amenities",
+    "Final per-room and exterior photograph approval"
+  ],
+  "phase_1_complete": false
+}
