@@ -1,5 +1,5 @@
 {
-  "native_master_sha256": "112c349583e84cd44e27d6d052e8340f43d56954f95a9fd98a6e0acec1a407ea",
+  "native_master_sha256": "b78522256781047af87f58289dcde84c906441087dfd91942fc0a8521ac05f0c",
   "phase_1_complete": false,
   "source_photo_files": 202,
   "unique_source_photos": 184,
@@ -545,14 +545,18 @@
         }
       ],
       "cameras": [
-        "10_main_kitchen"
+        "10_main_kitchen",
+        "walk-kitchen",
+        "walk-kitchen-hob",
+        "walk-kitchen-vitrine"
       ],
-      "review_state": "photo_joinery_revision_15_applied_open_items_remain",
+      "review_state": "photo_joinery_revision_23_applied_open_items_remain",
       "open_items": [
-        "Fotoğraftaki seramik deseninin, ahşap damar yönünün ve renginin eşleştirilmesi",
-        "Cam matlığı, pencere panjuru ve stor perdenin ayrıntıları",
-        "Tavan profili, avize ve fotoğraf ışığının eşleştirilmesi",
-        "Vitrin içi eşyalar ve kapı vitrayı; fotoğrafla son yerleşim kontrolü"
+        "Seramik deseni ve ahşap renginin fotoğrafla eşleştirilmesi",
+        "Pencere çerçevesi ve panjurun fotoğraftaki konumu",
+        "Tavan profili, avize ve fotoğraf ışığı",
+        "Vitrin içi eşyalar ve kapı vitrayı; fotoğrafla son yerleşim kontrolü",
+        "Fırın paneli/tezgâh aralığı, vitrin kapak derzleri ve cihaz ayrıntılarının sonraki fotoğraf karşılaştırması"
       ],
       "photo_match_approved": false,
       "dimension_labels_enabled": true,
@@ -561,7 +565,28 @@
         "render_sha256": "6cf426f1dbbc514a178741b1d462f9b83d1a14802e54d71a7ae88535996d5cba",
         "render_stage": "earlier_geometry_review_before_constant_color_correction",
         "source_contact_sheet": "build/reference/kat_2_ust_mutfak_1.jpg",
-        "source_contact_sheet_sha256": "a614f6c614ac7c6e82cf19d06989a8989442037a20289c933ec1920535c01f3d"
+        "source_contact_sheet_sha256": "a614f6c614ac7c6e82cf19d06989a8989442037a20289c933ec1920535c01f3d",
+        "current_revision": 23,
+        "current_renders": [
+          {
+            "file": "build/renders/full-scene-walk-kitchen-r23.png",
+            "sha256": "ab497c40886692c108f5de965521a959bd1263f7d5b1aa87115b8b73451532df",
+            "provenance": "build/renders/full-scene-walk-kitchen-r23.json",
+            "kind": "Blender GLB geometry review; not a web shader screenshot"
+          },
+          {
+            "file": "build/renders/full-scene-walk-kitchen-hob-r23.png",
+            "sha256": "493e7f0ef6cfd9b91e7bf3b1aa6dab17c975d69a3134f7e7d56be7d5b3068f4b",
+            "provenance": "build/renders/full-scene-walk-kitchen-hob-r23.json",
+            "kind": "Blender GLB geometry review; not a web shader screenshot"
+          },
+          {
+            "file": "build/renders/full-scene-walk-kitchen-vitrine-r23.png",
+            "sha256": "292d2e6e56ef1fadde5294b716c0d33ff0e3a4b6f0fe20f68fa1241bdc0f1221",
+            "provenance": "build/renders/full-scene-walk-kitchen-vitrine-r23.json",
+            "kind": "Blender GLB geometry review; not a web shader screenshot"
+          }
+        ]
       },
       "completed_in_revision_15": [
         "Five-module sink cabinet layout, dishwasher and drainboard",
@@ -571,6 +596,17 @@
       ],
       "web_room_ids": [
         "f1-Z04"
+      ],
+      "completed_corrections": [
+        {
+          "revision": 23,
+          "change": "Solid hob doors, paired satin sink doors, outer display shelves, blind, timber grain axes, closed frame joints, whole-cabinet fit and notched counters at unchanged CAD wall returns",
+          "evidence": [
+            "build/kitchen-photo-r23.json",
+            "build/kitchen-photo-r23-qa.json",
+            "build/kitchen-surfaces-r23-qa.json"
+          ]
+        }
       ]
     },
     {
@@ -1217,7 +1253,7 @@
       ]
     }
   ],
-  "review_revision": "22-furniture-clearances-and-interior-walk",
+  "review_revision": 23,
   "furniture_clearance_evidence": [
     "build/furniture-collision-report.json",
     "build/furniture-headroom-report.json",

@@ -1,0 +1,2362 @@
+{
+  "method": "evaluated_triangle_BVH_against_native_door_glass_ceiling_and_roof_surfaces",
+  "source_architecture_sha256": "4105de07c4dae4752294724135bbf067afb2c2ce64d31f1fff2d09139fe35776",
+  "source_fittings_sha256": "2cd9deedcf00f6ff6bf6267f4b8ab0bc246cbe07fbf17b725f23b417a460e1d5",
+  "parts_checked": 349,
+  "source_surfaces": 19,
+  "items": [
+    {
+      "object": "Burner ring",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Burner ring.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Burner ring.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Burner ring.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Cooktop",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Countertop",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Countertop sink border",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Countertop sink border.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Countertop.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Countertop.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Extractor canopy",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Extractor chimney",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM",
+        "F1 | ÇATI ALIN"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Fridge door split",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Fridge handles",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Gooseneck kitchen tap",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | blind bottom rail",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | blind headrail",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | blind ladder cord",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | blind ladder cord.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay divider",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay divider.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.004",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.005",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.007",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.008",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.009",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink concealed shelf",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink concealed shelf.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink concealed shelf.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink concealed shelf.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed rail",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed rail.001",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed rail.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed rail.003",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed rail.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed rail.005",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed rail.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed rail.007",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed stile",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed stile.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed stile.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed stile.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed stile.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed stile.005",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed stile.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed stile.007",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink satin inset",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink satin inset.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink satin inset.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink satin inset.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper back",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper back.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper bowed pull",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper bowed pull.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper bowed pull.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper bowed pull.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper crown",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper crown.001",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper crown.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper crown.003",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper crown.004",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper crown.005",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper horizontal",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper horizontal.001",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper horizontal.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper horizontal.003",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper outer side",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper outer side.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper outer side.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper outer side.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.001",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.002",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.003",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.004",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.005",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.006",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.007",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.008",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.009",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.010",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.011",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.012",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.013",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.014",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.015",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.016",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.017",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.018",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.019",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.020",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.021",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.022",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.023",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.024",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.025",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.026",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.027",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.028",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.029",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.030",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.031",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.032",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.033",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.034",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.035",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen R23 | window registered tile faces",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.006",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.007",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.008",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.009",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.010",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.011",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.012",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.013",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.014",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | dishwasher brushed door",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | dishwasher control strip",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | dishwasher program button",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | dishwasher program button.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | dishwasher program button.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | dishwasher program button.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | dishwasher program button.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | dishwasher recessed pull",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.005",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.007",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.008",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.009",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.010",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.011",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | drawer pull",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | drawer pull.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | drawer pull.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | glazing bead.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | glazing bead.005",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | glazing bead.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | glazing bead.007",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | glazing bead.008",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | glazing bead.009",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run carcass side",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run carcass side.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run carcass side.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run carcass side.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run carcass side.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run carcass side.005",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run carcass side.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run carcass side.007",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run door",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run door.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run door.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run door.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run plinth",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run plinth.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run plinth.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run plinth.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run pull",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run pull.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run pull.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run pull.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run rail",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run rail.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run rail.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run rail.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run rail.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run rail.005",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run rail.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run rail.007",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run stile",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run stile.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run stile.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run stile.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run stile.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run stile.005",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run stile.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run stile.007",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run top stretcher",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run top stretcher.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run top stretcher.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run top stretcher.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | north square tile faces",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink draining board",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run carcass side",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run carcass side.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run carcass side.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run carcass side.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run carcass side.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run carcass side.005",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run carcass side.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run carcass side.007",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run panel",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run panel.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run panel.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run panel.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run panel.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run panel.005",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run panel.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run plinth",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run plinth.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run plinth.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run plinth.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run pull",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run pull.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run pull.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run pull.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.005",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.007",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.008",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.009",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.010",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.011",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.012",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.013",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.005",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.007",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.008",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.009",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.010",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.011",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.012",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.013",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run top stretcher",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run top stretcher.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run top stretcher.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run top stretcher.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge pull",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge pull.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge pull.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge rail",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge rail.001",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge rail.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge rail.003",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge rail.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge rail.005",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge stile",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge stile.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge stile.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge stile.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge stile.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge stile.005",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine crown",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine display counter",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glass lower door",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glass lower door.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glazed rail",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glazed rail.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glazed rail.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glazed rail.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glazed stile",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glazed stile.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glazed stile.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glazed stile.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine low counter",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine low side cabinet",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine lower side door",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine lower side door.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine pantry door",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine pantry door.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine pantry handle",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine pantry handle.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine plinth",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine pull",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine pull.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine recessed back",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine shelf",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine shelf.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine shelf.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine shelf.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine side handle",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine side handle.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine upper glass",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine upper glass.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine upper glass.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine upright",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine upright.001",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine upright.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine upright.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Main refrigerator",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Oven glass",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Oven handle",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Sink rolled rim",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Stainless sink bowl",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard back.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard back.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard back.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard door rail.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard door rail.005",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard door rail.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard door rail.007",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard door rail.008",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard door rail.009",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard door stile.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard door stile.005",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard door stile.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard door stile.007",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard door stile.008",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard door stile.009",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard handle.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard handle.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard handle.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard horizontal.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard horizontal.005",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard horizontal.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard horizontal.007",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard horizontal.008",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard horizontal.009",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard inner recess.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard inner recess.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard inner recess.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard inset.002",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard inset.003",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard inset.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard side.004",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard side.005",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard side.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard side.007",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard side.008",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard side.009",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.006",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.007",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.008",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.009",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.010",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.011",
+      "source_candidates": [],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.012",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.013",
+      "source_candidates": [
+        "F1 | PENCERE_KAPI$CAM"
+      ],
+      "intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.014",
+      "source_candidates": [],
+      "intersections": []
+    }
+  ],
+  "intersections": [],
+  "passed": true,
+  "limitations": [
+    "Source leaves in their existing pose; future door swings are not certified."
+  ]
+}

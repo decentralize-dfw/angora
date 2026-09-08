@@ -123,6 +123,7 @@ data={'version':1,'coordinate_system':'glTF_Y_up','grid':{'x':x0,'z':z0,'step':s
       'body_radius_m':.19,'eye_height_m':1.62,'minimum_headroom_m':1.65,'maximum_step_m':.24,
       'mask_bits':{'static_obstacle':1,'furniture':2},'layers':layers,'stations':stations,
       'source_architecture_sha256':atlas['source_architecture_sha256'],
+      'source_fittings_sha256':hashlib.sha256((ROOT/'build/blender/layers/20-fixed-fittings.blend').read_bytes()).hexdigest(),
       'source_furniture_sha256':hashlib.sha256((ROOT/'build/blender/layers/30-furniture-placeholders.blend').read_bytes()).hexdigest()}
 data['lights']=json.loads((ROOT/'build/intermediate/review-lights.json').read_text())
 path=ROOT/'build/web/full/navigation.json';path.write_text(json.dumps(data,ensure_ascii=False,separators=(',',':')))

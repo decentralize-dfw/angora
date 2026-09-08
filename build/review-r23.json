@@ -1,0 +1,69 @@
+{
+  "revision": 23,
+  "native_master_sha256": "b78522256781047af87f58289dcde84c906441087dfd91942fc0a8521ac05f0c",
+  "fixed_fittings_library_sha256": "2cd9deedcf00f6ff6bf6267f4b8ab0bc246cbe07fbf17b725f23b417a460e1d5",
+  "furniture_library_sha256": "32f1bc22c415945994bb10c513e2b7995d799d7d7ed3925e4a65502b8bffab2b",
+  "architecture_modified": false,
+  "movable_furniture_modified": false,
+  "full_model_manifest_sha256": "189698a268d1b19ceef2a4a4c66ac8e71ec1edbca333609176ad939cc4c1118f",
+  "kitchen_fixture_parts_checked": 349,
+  "movable_furniture_parts_checked": 467,
+  "geometry_audits": [
+    {
+      "file": "build/kitchen-photo-r23-qa.json",
+      "sha256": "a250ce0809092ce6575c9855597f9facf18725ceebc7126c5ed9552d74794eea",
+      "passed": true
+    },
+    {
+      "file": "build/kitchen-surfaces-r23-qa.json",
+      "sha256": "3281d1c90b9f982c3fde4974f60e3a49427b7e3f677d1facf58aeb22942071f9",
+      "passed": true
+    },
+    {
+      "file": "build/pbr-archive-qa-r23.json",
+      "sha256": "7880fb55c5e5815e5bd45375d52a8ab27d8575f09d5ecb14d5212a7e0c4e7e45",
+      "passed": true
+    }
+  ],
+  "web_model_assets": 7,
+  "web_model_bytes": 44762108,
+  "stream_integrity_assets": 20,
+  "newly_reimported_stream": "villa-f1.glb",
+  "room_stations": 27,
+  "verified_dimension_spans": 35,
+  "automated_viewer_tests": {
+    "passed": 10,
+    "failed": 0
+  },
+  "production_build": "npm run build:pages passed",
+  "renders": [
+    {
+      "file": "build/renders/full-scene-walk-kitchen-r23.png",
+      "sha256": "ab497c40886692c108f5de965521a959bd1263f7d5b1aa87115b8b73451532df",
+      "provenance": "build/renders/full-scene-walk-kitchen-r23.json",
+      "kind": "Blender GLB geometry review; not a web shader screenshot"
+    },
+    {
+      "file": "build/renders/full-scene-walk-kitchen-hob-r23.png",
+      "sha256": "493e7f0ef6cfd9b91e7bf3b1aa6dab17c975d69a3134f7e7d56be7d5b3068f4b",
+      "provenance": "build/renders/full-scene-walk-kitchen-hob-r23.json",
+      "kind": "Blender GLB geometry review; not a web shader screenshot"
+    },
+    {
+      "file": "build/renders/full-scene-walk-kitchen-vitrine-r23.png",
+      "sha256": "292d2e6e56ef1fadde5294b716c0d33ff0e3a4b6f0fe20f68fa1241bdc0f1221",
+      "provenance": "build/renders/full-scene-walk-kitchen-vitrine-r23.json",
+      "kind": "Blender GLB geometry review; not a web shader screenshot"
+    }
+  ],
+  "real_mobile_gpu_verified": false,
+  "physical_webxr_headset_verified": false,
+  "photo_matching_complete": false,
+  "remaining": [
+    "Kitchen tile pattern and timber color matching",
+    "Window shutter pose and frame details",
+    "Oven face, cabinet joints and appliances",
+    "Vitrine contents, ceiling profiles and fixture/photo lighting",
+    "Other rooms, neighboring gardens and inferred topography remain in the room review register"
+  ]
+}

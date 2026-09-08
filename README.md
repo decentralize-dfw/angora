@@ -67,7 +67,7 @@ kaynak CAD yüzeylerinin tutarsız yönlerine veya kameranın bakışına bağl�
 `build/wall-section-qa.json` geometri ve boşluk kontrollerini kaydeder.
 
 Sayfa kendi yayımlandığı repo sürümünün model listesini kullanır. Yedi parça
-toplam yaklaşık 44,7 MB, kesit geometrisi ayrıca 1,1 MB; aynı anda en fazla iki dosya çözülür ve durgun sahne
+toplam yaklaşık 44,8 MB, kesit geometrisi ayrıca 1,1 MB; aynı anda en fazla iki dosya çözülür ve durgun sahne
 sürekli yeniden çizilmez. Gerçek OrbitControls ile dokunma olayları ve sabit
 kamera yüksekliği, gerçek GLB dosyalarının hash ve tam yükseklik sınırları
 kontrol edildi. Gerçek kesit geometrisi ışın testleri ve Blender görüntüsüyle
@@ -120,7 +120,35 @@ Mobilya değişiminden sonra ana sahnede `tools/inspect_review_geometry.py` ve
 `tools/check_furniture_headroom.py`, normal Python'da
 `tools/audit_furniture_geometry.py` çalıştırılır. Tam web modelini dışa aktardıktan
 sonra `tools/build_walk_navigation.py`, ardından `tools/sync_web_viewer.py`
-çalıştırılır. Hareket verisi son mobilya hash'iyle eşleşmek zorundadır.
+çalıştırılır. Hareket verisi güncel mimari, sabit donatı ve mobilya hashleriyle
+eşleşmek zorundadır; eski dolap yerleşimine ait hareket verisi kabul edilmez.
+
+R23 mutfak kontrolü: giriş mutfağındaki ocak üstü kapaklar ahşap yapıldı;
+pencere yanlarında dar mat camlı çift kapaklar, dış açık raflar, yuvarlak
+kesitli kulplar ve ahşap jaluzi eklendi. 261 ahşap parçanın UV damar yönü
+kapak/çerçeve doğrultusuna göre düzeltildi. Kapak birleşimlerinde aynı düzlemde
+üst üste duran yüzeyler ayrıldı. Dolaplar kaynak duvar çıkıntılarına göre
+yerleştirildi; tezgâhların arkası bu çıkıntılara göre oyuldu. Vitrin, mutfağın
+kendi nişine sığacak şekilde düzeltildi. CAD mimarisi ve ayrı mobilya katmanı
+bu revizyonda değişmedi; dolap imalat ölçüleri fotoğraftan yorumdur.
+
+`build/kitchen-photo-r23-qa.json`, görünür 349 mutfak parçasının kaynak duvar
+kesitleri ve 467 hareketli mobilya parçasıyla kontrolünü içerir; mevcut
+toleranslarda kesişme yoktur. `build/kitchen-surfaces-r23-qa.json`, kaynak
+kapı/cam/tavan yüzeyleriyle ayrı üçgen BVH kontrolüdür. PBR paketinde artık
+78 malzemenin 390 PNG haritası bulunur; mat cam ayrı bir malzemedir.
+`build/renders/full-scene-walk-kitchen-r23.png`, `full-scene-walk-kitchen-hob-r23.png`
+ve `full-scene-walk-kitchen-vitrine-r23.png` güncel tam GLB'lerden alınan Cycles
+kontrolleridir. Fayans deseni, ahşap rengi, pencere/panjur, tavan ve ışık eşlemesi
+açık iştir; bu görüntüler nihai kalite veya web GPU doğrulaması sayılmaz.
+
+R23, `20-fixed-fittings.blend` üzerinde `tools/refine_kitchen_joinery_r23.py`
+ve ardından `tools/fit_kitchen_to_cad_r23.py` ile uygulanmıştır. Betikler
+tekrarlı uygulamayı engeller. Yalnız sabit donatı değiştiğinde, tüm kaynak
+duvar üçgenleri aynı kaldığı kanıtlanarak mevcut 192 kesit profili korunabilir:
+`tools/refresh_unchanged_sections.py` eski üçgen önbelleğini güncel dışa
+aktarımla karşılaştırır; duvar geometrisi değişirse durur ve atlasın yeniden
+üretilmesini ister. Hareket ızgarası her durumda güncel donatıdan yeniden kurulur.
 
 Yol/arazi kontrolünde iki binanın oturumundan geçen tahmini güzergâh kaldırıldı.
 Kuzeybatı, güneydoğu ve doğu dış yolları CAD bordürlerinden; bağlantı yolları

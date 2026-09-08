@@ -94,6 +94,9 @@ if interior:
       'walk-hall':((-1.80,2.0,7.991),(-4.10,2.75,7.05),2),
       'walk-attic':((-2.0,1.60,11.09),(-4.0,2.6,10.45),3),
       'walk-master':((-1.38,5.14,7.991),(-3.5,6.35,7.05),2),
+      'walk-kitchen':((-3.03,-1.97,4.69),(-5.20,-1.80,4.40),1),
+      'walk-kitchen-hob':((-2.75,-2.28,4.74),(-4.05,-.15,4.55),1),
+      'walk-kitchen-vitrine':((-2.18,-2.45,4.66),(.85,-2.66,4.48),1),
     }
     origin,focus,review_floor=views[mode]
     obj.location=origin;center=Vector(focus)
@@ -126,6 +129,7 @@ scene.view_settings.view_transform='AgX';scene.view_settings.exposure=.4
 path=ROOT/'build/renders'/(f'full-scene-floor-{floor}.png' if floor is not None and mode!='gallery' else f'full-scene-{mode}.png');scene.render.filepath=str(path)
 if '--annotations' in args:path=path.with_stem(path.stem+'-plan');scene.render.filepath=str(path)
 if '--r22' in args:path=path.with_stem(path.stem+'-r22');scene.render.filepath=str(path)
+if '--suffix' in args:path=path.with_stem(path.stem+'-'+args[args.index('--suffix')+1]);scene.render.filepath=str(path)
 bpy.ops.render.render(write_still=True)
 report={'render':str(path.relative_to(ROOT)),'kind':'Blender GLB geometry review; not a web shader screenshot',
  'floor_index':floor,'upper_cut_m':cut,'lower_cut':None,'context_omitted_for_close_inspection':False,

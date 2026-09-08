@@ -1,0 +1,1351 @@
+{
+  "revision": 23,
+  "source_fittings_sha256_before": "69c471749b8a5073c239af60d186a19309ea4a4d726d6929ecdffba87b4059ce",
+  "source_fittings_sha256_after": "2cd9deedcf00f6ff6bf6267f4b8ab0bc246cbe07fbf17b725f23b417a460e1d5",
+  "source_photos": [
+    {
+      "file": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.33.jpeg",
+      "sha256": "4bae0448be063cfdb8e0397a0f2e82422c6984030bde86b458eca661e00bec74"
+    },
+    {
+      "file": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.33 (1).jpeg",
+      "sha256": "9314cc06186993b28f91869362106fa004951e9374bbc6005f25fff70edcdea2"
+    },
+    {
+      "file": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.33 (2).jpeg",
+      "sha256": "a82e43e018af9fda15d16b51a7a225f2a542bb03d98ef8258b0618ca4031bfff"
+    }
+  ],
+  "removed_provisional_parts": [
+    "Upper cupboard back",
+    "Upper cupboard side",
+    "Upper cupboard side.001",
+    "Upper cupboard horizontal",
+    "Upper cupboard horizontal.001",
+    "Upper cupboard door stile",
+    "Upper cupboard door stile.001",
+    "Upper cupboard door rail",
+    "Upper cupboard door rail.001",
+    "Upper cupboard inner recess",
+    "Upper cupboard inset",
+    "Upper cupboard visible shelf",
+    "Upper cupboard visible shelf.001",
+    "Upper cupboard visible shelf.002",
+    "Upper cupboard handle",
+    "Kitchen review 15 | cupboard moulding",
+    "Kitchen review 15 | cupboard moulding.001",
+    "Kitchen review 15 | cupboard moulding.002",
+    "Kitchen review 15 | glazing bead",
+    "Kitchen review 15 | glazing bead.001",
+    "Upper cupboard back.001",
+    "Upper cupboard side.002",
+    "Upper cupboard side.003",
+    "Upper cupboard horizontal.002",
+    "Upper cupboard horizontal.003",
+    "Upper cupboard door stile.002",
+    "Upper cupboard door stile.003",
+    "Upper cupboard door rail.002",
+    "Upper cupboard door rail.003",
+    "Upper cupboard inner recess.001",
+    "Upper cupboard inset.001",
+    "Upper cupboard visible shelf.003",
+    "Upper cupboard visible shelf.004",
+    "Upper cupboard visible shelf.005",
+    "Upper cupboard handle.001",
+    "Kitchen review 15 | cupboard moulding.003",
+    "Kitchen review 15 | cupboard moulding.004",
+    "Kitchen review 15 | cupboard moulding.005",
+    "Kitchen review 15 | glazing bead.002",
+    "Kitchen review 15 | glazing bead.003",
+    "Kitchen review 15 | west square tile faces"
+  ],
+  "new_parts": [
+    "Kitchen R23 | sink upper back",
+    "Kitchen R23 | sink upper outer side",
+    "Kitchen R23 | sink upper outer side.001",
+    "Kitchen R23 | sink upper horizontal",
+    "Kitchen R23 | sink upper horizontal.001",
+    "Kitchen R23 | sink upper crown",
+    "Kitchen R23 | sink upper crown.001",
+    "Kitchen R23 | sink upper crown.002",
+    "Kitchen R23 | open bay divider",
+    "Kitchen R23 | open bay shelf",
+    "Kitchen R23 | open bay shelf.001",
+    "Kitchen R23 | open bay shelf.002",
+    "Kitchen R23 | open bay shelf.003",
+    "Kitchen R23 | open bay shelf.004",
+    "Kitchen R23 | sink satin inset",
+    "Kitchen R23 | sink glazed stile",
+    "Kitchen R23 | sink glazed stile.001",
+    "Kitchen R23 | sink glazed rail",
+    "Kitchen R23 | sink glazed rail.001",
+    "Kitchen R23 | sink upper bowed pull",
+    "Kitchen R23 | sink satin inset.001",
+    "Kitchen R23 | sink glazed stile.002",
+    "Kitchen R23 | sink glazed stile.003",
+    "Kitchen R23 | sink glazed rail.002",
+    "Kitchen R23 | sink glazed rail.003",
+    "Kitchen R23 | sink upper bowed pull.001",
+    "Kitchen R23 | sink concealed shelf",
+    "Kitchen R23 | sink concealed shelf.001",
+    "Kitchen R23 | sink upper back.001",
+    "Kitchen R23 | sink upper outer side.002",
+    "Kitchen R23 | sink upper outer side.003",
+    "Kitchen R23 | sink upper horizontal.002",
+    "Kitchen R23 | sink upper horizontal.003",
+    "Kitchen R23 | sink upper crown.003",
+    "Kitchen R23 | sink upper crown.004",
+    "Kitchen R23 | sink upper crown.005",
+    "Kitchen R23 | open bay divider.001",
+    "Kitchen R23 | open bay shelf.005",
+    "Kitchen R23 | open bay shelf.006",
+    "Kitchen R23 | open bay shelf.007",
+    "Kitchen R23 | open bay shelf.008",
+    "Kitchen R23 | open bay shelf.009",
+    "Kitchen R23 | sink satin inset.002",
+    "Kitchen R23 | sink glazed stile.004",
+    "Kitchen R23 | sink glazed stile.005",
+    "Kitchen R23 | sink glazed rail.004",
+    "Kitchen R23 | sink glazed rail.005",
+    "Kitchen R23 | sink upper bowed pull.002",
+    "Kitchen R23 | sink satin inset.003",
+    "Kitchen R23 | sink glazed stile.006",
+    "Kitchen R23 | sink glazed stile.007",
+    "Kitchen R23 | sink glazed rail.006",
+    "Kitchen R23 | sink glazed rail.007",
+    "Kitchen R23 | sink upper bowed pull.003",
+    "Kitchen R23 | sink concealed shelf.002",
+    "Kitchen R23 | sink concealed shelf.003",
+    "Kitchen R23 | blind headrail",
+    "Kitchen R23 | timber blind slat",
+    "Kitchen R23 | timber blind slat.001",
+    "Kitchen R23 | timber blind slat.002",
+    "Kitchen R23 | timber blind slat.003",
+    "Kitchen R23 | timber blind slat.004",
+    "Kitchen R23 | timber blind slat.005",
+    "Kitchen R23 | timber blind slat.006",
+    "Kitchen R23 | timber blind slat.007",
+    "Kitchen R23 | timber blind slat.008",
+    "Kitchen R23 | timber blind slat.009",
+    "Kitchen R23 | timber blind slat.010",
+    "Kitchen R23 | timber blind slat.011",
+    "Kitchen R23 | timber blind slat.012",
+    "Kitchen R23 | timber blind slat.013",
+    "Kitchen R23 | timber blind slat.014",
+    "Kitchen R23 | timber blind slat.015",
+    "Kitchen R23 | timber blind slat.016",
+    "Kitchen R23 | timber blind slat.017",
+    "Kitchen R23 | timber blind slat.018",
+    "Kitchen R23 | timber blind slat.019",
+    "Kitchen R23 | timber blind slat.020",
+    "Kitchen R23 | timber blind slat.021",
+    "Kitchen R23 | timber blind slat.022",
+    "Kitchen R23 | timber blind slat.023",
+    "Kitchen R23 | timber blind slat.024",
+    "Kitchen R23 | timber blind slat.025",
+    "Kitchen R23 | timber blind slat.026",
+    "Kitchen R23 | timber blind slat.027",
+    "Kitchen R23 | timber blind slat.028",
+    "Kitchen R23 | timber blind slat.029",
+    "Kitchen R23 | timber blind slat.030",
+    "Kitchen R23 | timber blind slat.031",
+    "Kitchen R23 | timber blind slat.032",
+    "Kitchen R23 | timber blind slat.033",
+    "Kitchen R23 | timber blind slat.034",
+    "Kitchen R23 | timber blind slat.035",
+    "Kitchen R23 | blind bottom rail",
+    "Kitchen R23 | blind ladder cord",
+    "Kitchen R23 | blind ladder cord.001",
+    "Kitchen R23 | window registered tile faces"
+  ],
+  "changed_panels": [
+    "Upper cupboard inset.002",
+    "Upper cupboard inset.003",
+    "Upper cupboard inset.004",
+    "Kitchen review 15 | vitrine glass lower door",
+    "Kitchen review 15 | vitrine glass lower door.001",
+    "Kitchen review 15 | vitrine upper glass",
+    "Kitchen review 15 | vitrine upper glass.001"
+  ],
+  "wood_uv_parts": [
+    "Upper cupboard back.002",
+    "Upper cupboard side.004",
+    "Upper cupboard side.005",
+    "Upper cupboard horizontal.004",
+    "Upper cupboard horizontal.005",
+    "Upper cupboard door stile.004",
+    "Upper cupboard door stile.005",
+    "Upper cupboard door rail.004",
+    "Upper cupboard door rail.005",
+    "Upper cupboard inset.002",
+    "Upper cupboard visible shelf.006",
+    "Upper cupboard visible shelf.007",
+    "Upper cupboard visible shelf.008",
+    "Upper cupboard back.003",
+    "Upper cupboard side.006",
+    "Upper cupboard side.007",
+    "Upper cupboard horizontal.006",
+    "Upper cupboard horizontal.007",
+    "Upper cupboard door stile.006",
+    "Upper cupboard door stile.007",
+    "Upper cupboard door rail.006",
+    "Upper cupboard door rail.007",
+    "Upper cupboard inset.003",
+    "Upper cupboard visible shelf.009",
+    "Upper cupboard visible shelf.010",
+    "Upper cupboard visible shelf.011",
+    "Upper cupboard back.004",
+    "Upper cupboard side.008",
+    "Upper cupboard side.009",
+    "Upper cupboard horizontal.008",
+    "Upper cupboard horizontal.009",
+    "Upper cupboard door stile.008",
+    "Upper cupboard door stile.009",
+    "Upper cupboard door rail.008",
+    "Upper cupboard door rail.009",
+    "Upper cupboard inset.004",
+    "Upper cupboard visible shelf.012",
+    "Upper cupboard visible shelf.013",
+    "Upper cupboard visible shelf.014",
+    "Kitchen review 15 | cupboard moulding.006",
+    "Kitchen review 15 | cupboard moulding.007",
+    "Kitchen review 15 | cupboard moulding.008",
+    "Kitchen review 15 | glazing bead.004",
+    "Kitchen review 15 | glazing bead.005",
+    "Kitchen review 15 | cupboard moulding.009",
+    "Kitchen review 15 | cupboard moulding.010",
+    "Kitchen review 15 | cupboard moulding.011",
+    "Kitchen review 15 | glazing bead.006",
+    "Kitchen review 15 | glazing bead.007",
+    "Kitchen review 15 | cupboard moulding.012",
+    "Kitchen review 15 | cupboard moulding.013",
+    "Kitchen review 15 | cupboard moulding.014",
+    "Kitchen review 15 | glazing bead.008",
+    "Kitchen review 15 | glazing bead.009",
+    "Kitchen review 15 | hob run carcass side",
+    "Kitchen review 15 | hob run carcass side.001",
+    "Kitchen review 15 | hob run plinth",
+    "Kitchen review 15 | hob run door",
+    "Kitchen review 15 | hob run stile",
+    "Kitchen review 15 | hob run stile.001",
+    "Kitchen review 15 | hob run rail",
+    "Kitchen review 15 | hob run rail.001",
+    "Kitchen review 15 | hob run top stretcher",
+    "Kitchen review 15 | hob run carcass side.002",
+    "Kitchen review 15 | hob run carcass side.003",
+    "Kitchen review 15 | hob run plinth.001",
+    "Kitchen review 15 | hob run door.001",
+    "Kitchen review 15 | hob run stile.002",
+    "Kitchen review 15 | hob run stile.003",
+    "Kitchen review 15 | hob run rail.002",
+    "Kitchen review 15 | hob run rail.003",
+    "Kitchen review 15 | hob run top stretcher.001",
+    "Kitchen review 15 | hob run carcass side.004",
+    "Kitchen review 15 | hob run carcass side.005",
+    "Kitchen review 15 | hob run plinth.002",
+    "Kitchen review 15 | hob run door.002",
+    "Kitchen review 15 | hob run stile.004",
+    "Kitchen review 15 | hob run stile.005",
+    "Kitchen review 15 | hob run rail.004",
+    "Kitchen review 15 | hob run rail.005",
+    "Kitchen review 15 | hob run top stretcher.002",
+    "Kitchen review 15 | hob run carcass side.006",
+    "Kitchen review 15 | hob run carcass side.007",
+    "Kitchen review 15 | hob run plinth.003",
+    "Kitchen review 15 | hob run door.003",
+    "Kitchen review 15 | hob run stile.006",
+    "Kitchen review 15 | hob run stile.007",
+    "Kitchen review 15 | hob run rail.006",
+    "Kitchen review 15 | hob run rail.007",
+    "Kitchen review 15 | hob run top stretcher.003",
+    "Kitchen review 15 | sink run carcass side",
+    "Kitchen review 15 | sink run carcass side.001",
+    "Kitchen review 15 | sink run plinth",
+    "Kitchen review 15 | sink run top stretcher",
+    "Kitchen review 15 | sink run panel",
+    "Kitchen review 15 | sink run stile",
+    "Kitchen review 15 | sink run stile.001",
+    "Kitchen review 15 | sink run rail",
+    "Kitchen review 15 | sink run rail.001",
+    "Kitchen review 15 | sink run carcass side.002",
+    "Kitchen review 15 | sink run carcass side.003",
+    "Kitchen review 15 | sink run plinth.001",
+    "Kitchen review 15 | sink run top stretcher.001",
+    "Kitchen review 15 | sink run panel.001",
+    "Kitchen review 15 | sink run stile.002",
+    "Kitchen review 15 | sink run stile.003",
+    "Kitchen review 15 | sink run rail.002",
+    "Kitchen review 15 | sink run rail.003",
+    "Kitchen review 15 | sink run panel.002",
+    "Kitchen review 15 | sink run stile.004",
+    "Kitchen review 15 | sink run stile.005",
+    "Kitchen review 15 | sink run rail.004",
+    "Kitchen review 15 | sink run rail.005",
+    "Kitchen review 15 | sink run carcass side.004",
+    "Kitchen review 15 | sink run carcass side.005",
+    "Kitchen review 15 | sink run plinth.002",
+    "Kitchen review 15 | sink run top stretcher.002",
+    "Kitchen review 15 | sink run panel.003",
+    "Kitchen review 15 | sink run stile.006",
+    "Kitchen review 15 | sink run stile.007",
+    "Kitchen review 15 | sink run rail.006",
+    "Kitchen review 15 | sink run rail.007",
+    "Kitchen review 15 | sink run panel.004",
+    "Kitchen review 15 | sink run stile.008",
+    "Kitchen review 15 | sink run stile.009",
+    "Kitchen review 15 | sink run rail.008",
+    "Kitchen review 15 | sink run rail.009",
+    "Kitchen review 15 | sink run panel.005",
+    "Kitchen review 15 | sink run stile.010",
+    "Kitchen review 15 | sink run stile.011",
+    "Kitchen review 15 | sink run rail.010",
+    "Kitchen review 15 | sink run rail.011",
+    "Kitchen review 15 | sink run carcass side.006",
+    "Kitchen review 15 | sink run carcass side.007",
+    "Kitchen review 15 | sink run plinth.003",
+    "Kitchen review 15 | sink run top stretcher.003",
+    "Kitchen review 15 | sink run panel.006",
+    "Kitchen review 15 | sink run stile.012",
+    "Kitchen review 15 | sink run stile.013",
+    "Kitchen review 15 | sink run rail.012",
+    "Kitchen review 15 | sink run rail.013",
+    "Kitchen review 15 | vitrine upright",
+    "Kitchen review 15 | vitrine upright.001",
+    "Kitchen review 15 | vitrine upright.002",
+    "Kitchen review 15 | vitrine upright.003",
+    "Kitchen review 15 | vitrine plinth",
+    "Kitchen review 15 | vitrine pantry door",
+    "Kitchen review 15 | vitrine pantry door.001",
+    "Kitchen review 15 | vitrine glazed stile",
+    "Kitchen review 15 | vitrine glazed stile.001",
+    "Kitchen review 15 | vitrine glazed rail",
+    "Kitchen review 15 | vitrine glazed rail.001",
+    "Kitchen review 15 | vitrine glazed stile.002",
+    "Kitchen review 15 | vitrine glazed stile.003",
+    "Kitchen review 15 | vitrine glazed rail.002",
+    "Kitchen review 15 | vitrine glazed rail.003",
+    "Kitchen review 15 | vitrine shelf",
+    "Kitchen review 15 | vitrine shelf.001",
+    "Kitchen review 15 | vitrine shelf.002",
+    "Kitchen review 15 | vitrine shelf.003",
+    "Kitchen review 15 | vitrine low side cabinet",
+    "Kitchen review 15 | vitrine lower side door",
+    "Kitchen review 15 | vitrine lower side door.001",
+    "Kitchen review 15 | vitrine bridge stile",
+    "Kitchen review 15 | vitrine bridge stile.001",
+    "Kitchen review 15 | vitrine bridge rail",
+    "Kitchen review 15 | vitrine bridge rail.001",
+    "Kitchen review 15 | vitrine bridge stile.002",
+    "Kitchen review 15 | vitrine bridge stile.003",
+    "Kitchen review 15 | vitrine bridge rail.002",
+    "Kitchen review 15 | vitrine bridge rail.003",
+    "Kitchen review 15 | vitrine bridge stile.004",
+    "Kitchen review 15 | vitrine bridge stile.005",
+    "Kitchen review 15 | vitrine bridge rail.004",
+    "Kitchen review 15 | vitrine bridge rail.005",
+    "Kitchen review 15 | vitrine crown",
+    "Kitchen R23 | sink upper back",
+    "Kitchen R23 | sink upper outer side",
+    "Kitchen R23 | sink upper outer side.001",
+    "Kitchen R23 | sink upper horizontal",
+    "Kitchen R23 | sink upper horizontal.001",
+    "Kitchen R23 | sink upper crown",
+    "Kitchen R23 | sink upper crown.001",
+    "Kitchen R23 | sink upper crown.002",
+    "Kitchen R23 | open bay divider",
+    "Kitchen R23 | open bay shelf",
+    "Kitchen R23 | open bay shelf.001",
+    "Kitchen R23 | open bay shelf.002",
+    "Kitchen R23 | open bay shelf.003",
+    "Kitchen R23 | open bay shelf.004",
+    "Kitchen R23 | sink glazed stile",
+    "Kitchen R23 | sink glazed stile.001",
+    "Kitchen R23 | sink glazed rail",
+    "Kitchen R23 | sink glazed rail.001",
+    "Kitchen R23 | sink glazed stile.002",
+    "Kitchen R23 | sink glazed stile.003",
+    "Kitchen R23 | sink glazed rail.002",
+    "Kitchen R23 | sink glazed rail.003",
+    "Kitchen R23 | sink concealed shelf",
+    "Kitchen R23 | sink concealed shelf.001",
+    "Kitchen R23 | sink upper back.001",
+    "Kitchen R23 | sink upper outer side.002",
+    "Kitchen R23 | sink upper outer side.003",
+    "Kitchen R23 | sink upper horizontal.002",
+    "Kitchen R23 | sink upper horizontal.003",
+    "Kitchen R23 | sink upper crown.003",
+    "Kitchen R23 | sink upper crown.004",
+    "Kitchen R23 | sink upper crown.005",
+    "Kitchen R23 | open bay divider.001",
+    "Kitchen R23 | open bay shelf.005",
+    "Kitchen R23 | open bay shelf.006",
+    "Kitchen R23 | open bay shelf.007",
+    "Kitchen R23 | open bay shelf.008",
+    "Kitchen R23 | open bay shelf.009",
+    "Kitchen R23 | sink glazed stile.004",
+    "Kitchen R23 | sink glazed stile.005",
+    "Kitchen R23 | sink glazed rail.004",
+    "Kitchen R23 | sink glazed rail.005",
+    "Kitchen R23 | sink glazed stile.006",
+    "Kitchen R23 | sink glazed stile.007",
+    "Kitchen R23 | sink glazed rail.006",
+    "Kitchen R23 | sink glazed rail.007",
+    "Kitchen R23 | sink concealed shelf.002",
+    "Kitchen R23 | sink concealed shelf.003",
+    "Kitchen R23 | timber blind slat",
+    "Kitchen R23 | timber blind slat.001",
+    "Kitchen R23 | timber blind slat.002",
+    "Kitchen R23 | timber blind slat.003",
+    "Kitchen R23 | timber blind slat.004",
+    "Kitchen R23 | timber blind slat.005",
+    "Kitchen R23 | timber blind slat.006",
+    "Kitchen R23 | timber blind slat.007",
+    "Kitchen R23 | timber blind slat.008",
+    "Kitchen R23 | timber blind slat.009",
+    "Kitchen R23 | timber blind slat.010",
+    "Kitchen R23 | timber blind slat.011",
+    "Kitchen R23 | timber blind slat.012",
+    "Kitchen R23 | timber blind slat.013",
+    "Kitchen R23 | timber blind slat.014",
+    "Kitchen R23 | timber blind slat.015",
+    "Kitchen R23 | timber blind slat.016",
+    "Kitchen R23 | timber blind slat.017",
+    "Kitchen R23 | timber blind slat.018",
+    "Kitchen R23 | timber blind slat.019",
+    "Kitchen R23 | timber blind slat.020",
+    "Kitchen R23 | timber blind slat.021",
+    "Kitchen R23 | timber blind slat.022",
+    "Kitchen R23 | timber blind slat.023",
+    "Kitchen R23 | timber blind slat.024",
+    "Kitchen R23 | timber blind slat.025",
+    "Kitchen R23 | timber blind slat.026",
+    "Kitchen R23 | timber blind slat.027",
+    "Kitchen R23 | timber blind slat.028",
+    "Kitchen R23 | timber blind slat.029",
+    "Kitchen R23 | timber blind slat.030",
+    "Kitchen R23 | timber blind slat.031",
+    "Kitchen R23 | timber blind slat.032",
+    "Kitchen R23 | timber blind slat.033",
+    "Kitchen R23 | timber blind slat.034",
+    "Kitchen R23 | timber blind slat.035",
+    "Kitchen R23 | blind bottom rail"
+  ],
+  "new_material": {
+    "name": "Kitchen satin glazing",
+    "roughness": 0.36,
+    "metallic": 0,
+    "transmission": 1,
+    "maps": {
+      "basecolor": "assets/pbr/kitchen-satin-glazing-015a8f-basecolor.png",
+      "normal": "assets/pbr/kitchen-satin-glazing-015a8f-normal.png",
+      "roughness": "assets/pbr/kitchen-satin-glazing-015a8f-roughness.png",
+      "metallic": "assets/pbr/kitchen-satin-glazing-015a8f-metallic.png",
+      "orm": "assets/pbr/kitchen-satin-glazing-015a8f-orm.png"
+    }
+  },
+  "native_CAD_modified": false,
+  "movable_furniture_modified": false,
+  "fabrication_dimensions_verified": false,
+  "photo_match_approved": false,
+  "remaining": [
+    "Countertop and tile photo pattern/color matching",
+    "Window shutter pose and frame/photo comparison",
+    "Vitrine display contents, ceiling profile and room lighting"
+  ],
+  "cad_fit": {
+    "before_sha256": "f8b83bf03d06310c681ad805952cd37f8bba8c182c8e92f7751781acf23e5a10",
+    "changes": [
+      {
+        "object": "Upper cupboard door rail.004",
+        "reason": "Hob door rail meets the inner stile edges"
+      },
+      {
+        "object": "Upper cupboard door rail.005",
+        "reason": "Hob door rail meets the inner stile edges"
+      },
+      {
+        "object": "Upper cupboard inset.002",
+        "reason": "Recess solid timber insert behind the face frame"
+      },
+      {
+        "object": "Upper cupboard door rail.006",
+        "reason": "Hob door rail meets the inner stile edges"
+      },
+      {
+        "object": "Upper cupboard door rail.007",
+        "reason": "Hob door rail meets the inner stile edges"
+      },
+      {
+        "object": "Upper cupboard inset.003",
+        "reason": "Recess solid timber insert behind the face frame"
+      },
+      {
+        "object": "Upper cupboard door rail.008",
+        "reason": "Hob door rail meets the inner stile edges"
+      },
+      {
+        "object": "Upper cupboard door rail.009",
+        "reason": "Hob door rail meets the inner stile edges"
+      },
+      {
+        "object": "Upper cupboard inset.004",
+        "reason": "Recess solid timber insert behind the face frame"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed stile",
+        "reason": "Vitrine stile meets the full-width rails without coplanar faces"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed stile.001",
+        "reason": "Vitrine stile meets the full-width rails without coplanar faces"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed stile.002",
+        "reason": "Vitrine stile meets the full-width rails without coplanar faces"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed stile.003",
+        "reason": "Vitrine stile meets the full-width rails without coplanar faces"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile",
+        "reason": "Vitrine upper stile meets the full-width rails"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile.001",
+        "reason": "Vitrine upper stile meets the full-width rails"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile.002",
+        "reason": "Vitrine upper stile meets the full-width rails"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile.003",
+        "reason": "Vitrine upper stile meets the full-width rails"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile.004",
+        "reason": "Vitrine upper stile meets the full-width rails"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile.005",
+        "reason": "Vitrine upper stile meets the full-width rails"
+      },
+      {
+        "object": "Kitchen R23 | sink satin inset",
+        "reason": "Seat satin pane behind the timber rebate"
+      },
+      {
+        "object": "Kitchen R23 | sink satin inset",
+        "reason": "Seat satin pane behind the timber rebate"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail",
+        "reason": "Remove coplanar rail/stile overlap"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail",
+        "reason": "Close glazed-frame corner"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.001",
+        "reason": "Remove coplanar rail/stile overlap"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.001",
+        "reason": "Close glazed-frame corner"
+      },
+      {
+        "object": "Kitchen R23 | sink satin inset.001",
+        "reason": "Seat satin pane behind the timber rebate"
+      },
+      {
+        "object": "Kitchen R23 | sink satin inset.001",
+        "reason": "Seat satin pane behind the timber rebate"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.002",
+        "reason": "Remove coplanar rail/stile overlap"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.002",
+        "reason": "Close glazed-frame corner"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.003",
+        "reason": "Remove coplanar rail/stile overlap"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.003",
+        "reason": "Close glazed-frame corner"
+      },
+      {
+        "object": "Kitchen R23 | sink satin inset.002",
+        "reason": "Seat satin pane behind the timber rebate"
+      },
+      {
+        "object": "Kitchen R23 | sink satin inset.002",
+        "reason": "Seat satin pane behind the timber rebate"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.004",
+        "reason": "Remove coplanar rail/stile overlap"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.004",
+        "reason": "Close glazed-frame corner"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.005",
+        "reason": "Remove coplanar rail/stile overlap"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.005",
+        "reason": "Close glazed-frame corner"
+      },
+      {
+        "object": "Kitchen R23 | sink satin inset.003",
+        "reason": "Seat satin pane behind the timber rebate"
+      },
+      {
+        "object": "Kitchen R23 | sink satin inset.003",
+        "reason": "Seat satin pane behind the timber rebate"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.006",
+        "reason": "Remove coplanar rail/stile overlap"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.006",
+        "reason": "Close glazed-frame corner"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.007",
+        "reason": "Remove coplanar rail/stile overlap"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.007",
+        "reason": "Close glazed-frame corner"
+      },
+      {
+        "object": "Kitchen R23 | sink upper back",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink upper outer side",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink upper outer side.001",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink upper horizontal",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink upper horizontal.001",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink upper crown",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink upper crown.001",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink upper crown.002",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | open bay divider",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | open bay shelf",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | open bay shelf.001",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | open bay shelf.002",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | open bay shelf.003",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | open bay shelf.004",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink satin inset",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed stile",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed stile.001",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.001",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink upper bowed pull",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink satin inset.001",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed stile.002",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed stile.003",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.002",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink glazed rail.003",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink upper bowed pull.001",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink concealed shelf",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Kitchen R23 | sink concealed shelf.001",
+        "reason": "Fit complete left sink cupboard beside native SW wall return"
+      },
+      {
+        "object": "Upper cupboard back.002",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard side.004",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard side.005",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard horizontal.004",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard horizontal.005",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard door stile.004",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard door stile.005",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard door rail.004",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard door rail.005",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard inner recess.002",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard inset.002",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard visible shelf.006",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard visible shelf.007",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard visible shelf.008",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard handle.002",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Kitchen review 15 | cupboard moulding.006",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Kitchen review 15 | cupboard moulding.007",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Kitchen review 15 | cupboard moulding.008",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Kitchen review 15 | glazing bead.004",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Kitchen review 15 | glazing bead.005",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard back.003",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard side.006",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard side.007",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard horizontal.006",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard horizontal.007",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard door stile.006",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard door stile.007",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard door rail.006",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard door rail.007",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard inner recess.003",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard inset.003",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard visible shelf.009",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard visible shelf.010",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard visible shelf.011",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Upper cupboard handle.003",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Kitchen review 15 | cupboard moulding.009",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Kitchen review 15 | cupboard moulding.010",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Kitchen review 15 | cupboard moulding.011",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Kitchen review 15 | glazing bead.006",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Kitchen review 15 | glazing bead.007",
+        "reason": "Fit complete hob upper cupboard between CAD column and extractor"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine recessed back",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine upright",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine upright.001",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine upright.002",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine upright.003",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine plinth",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine pantry door",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine pantry handle",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine pantry door.001",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine pantry handle.001",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glass lower door",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed stile",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed stile.001",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed rail",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed rail.001",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine pull",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glass lower door.001",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed stile.002",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed stile.003",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed rail.002",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed rail.003",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine pull.001",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine shelf",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine shelf.001",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine shelf.002",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine shelf.003",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine display counter",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine low side cabinet",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine lower side door",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine side handle",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine lower side door.001",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine side handle.001",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine low counter",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine upper glass",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile.001",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge rail",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge rail.001",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge pull",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine upper glass.001",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile.002",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile.003",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge rail.002",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge rail.003",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge pull.001",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine upper glass.002",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile.004",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile.005",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge rail.004",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge rail.005",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge pull.002",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine crown",
+        "reason": "Fit full display cabinet within source kitchen recess"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine recessed back",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine upright",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine upright.001",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine upright.002",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine upright.003",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine plinth",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine pantry door",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine pantry handle",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine pantry door.001",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine pantry handle.001",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glass lower door",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed stile",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed stile.001",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed rail",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed rail.001",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine pull",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glass lower door.001",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed stile.002",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed stile.003",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed rail.002",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine glazed rail.003",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine pull.001",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine shelf",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine shelf.001",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine shelf.002",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine shelf.003",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine display counter",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine low side cabinet",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine lower side door",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine side handle",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine lower side door.001",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine side handle.001",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine low counter",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine upper glass",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile.001",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge rail",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge rail.001",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge pull",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine upper glass.001",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile.002",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile.003",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge rail.002",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge rail.003",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge pull.001",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine upper glass.002",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile.004",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge stile.005",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge rail.004",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge rail.005",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine bridge pull.002",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Kitchen review 15 | vitrine crown",
+        "reason": "Keep display crown clear of the native back wall"
+      },
+      {
+        "object": "Countertop",
+        "reason": "Notch rear geometry around source wall return, leaving the front run intact"
+      },
+      {
+        "object": "Kitchen review 15 | sink run carcass side",
+        "reason": "Notch rear geometry around source wall return, leaving the front run intact"
+      },
+      {
+        "object": "Countertop.002",
+        "reason": "Notch rear geometry around source wall return, leaving the front run intact"
+      },
+      {
+        "object": "Kitchen review 15 | hob run carcass side",
+        "reason": "Notch rear geometry around source wall return, leaving the front run intact"
+      },
+      {
+        "object": "Countertop.002",
+        "reason": "Notch rear geometry around source wall return, leaving the front run intact"
+      },
+      {
+        "object": "Kitchen review 15 | north square tile faces",
+        "reason": "Stop north backsplash at source corner column"
+      }
+    ],
+    "architecture_modified": false,
+    "fabrication_dimensions_verified": false,
+    "awaiting_evaluated_geometry_QA": false,
+    "evidence": [
+      "build/kitchen-photo-r23-qa.json",
+      "build/kitchen-surfaces-r23-qa.json"
+    ]
+  }
+}

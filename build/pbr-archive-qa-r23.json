@@ -1,0 +1,321 @@
+{
+  "revision": 23,
+  "material_count": 78,
+  "verified_png_count": 390,
+  "map_archive_sha256": "beafe4dbe58215ee93479c3922697a4c8bb966fb880d50dc67f604e54b03554b",
+  "manifest_sha256": "dce25d66cc568de565fc511dcdfad8d457d6f18eb0756a3ac4b08bfed9024ea9",
+  "recorded_color_repair_index_corrections": [
+    {
+      "file": "fabric-19d3ce-basecolor.png",
+      "stale_sha256": "b9cd5771300f07a632b7ffed20b4b2eb8b87eca830f7205a3ff91a98d4031d40",
+      "recorded_repair_sha256": "c0a192839324878a5d9ab0efb14b18fb7d80b03220c7f14c977d9dd678761254"
+    },
+    {
+      "file": "garden-grey-upholstery-efb96d-basecolor.png",
+      "stale_sha256": "e7257f8b79725d3e1267174fbffa3cfd7c207ef6a7224e3167b95f94a2a7cd81",
+      "recorded_repair_sha256": "65e1784a90c73d0f85c130136cdc7a6b0c5311e5d28c86d26271d905095ecd15"
+    },
+    {
+      "file": "water-6d5a45-basecolor.png",
+      "stale_sha256": "3e3779d2ecaed4531ac73b3b570eebf4beebba95e4e1a1a67d6d1c9b9281a2a2",
+      "recorded_repair_sha256": "8c5ec1c26615b56dc86268e88d895fefb8a76156dc474b46f2157b6cdef60fde"
+    },
+    {
+      "file": "flower-5a46b8-basecolor.png",
+      "stale_sha256": "13da93307a3dcfe7b2378dcc26fcf49adc54d43f602fb3c8d94d1d0773a8669c",
+      "recorded_repair_sha256": "c378c318b6c86b04a81262682265d1ef7a3b5d9bdfb9772aac554c1cc0b1cd14"
+    },
+    {
+      "file": "bathroom-cream-marble-beab3f-basecolor.png",
+      "stale_sha256": "24b33e34eb4fa693be8c4bb739bf07a65fd2af8837514e40e8430dfca150450e",
+      "recorded_repair_sha256": "a8c6c3440d7caa789c917d5bf4883bbb8bcf031f995ff73c7d5864e93082a70a"
+    },
+    {
+      "file": "lift-brushed-patterned-stainless-922e32-basecolor.png",
+      "stale_sha256": "1ce45902fa1fd5402f77d6c560543167f74961f8eb061d42fbac7a053c629bca",
+      "recorded_repair_sha256": "d391cbe110f16e51b316693c323ee4e51344141912aa12e9b99af2ce9b500159"
+    },
+    {
+      "file": "canopy-2cbc97-basecolor.png",
+      "stale_sha256": "ea1532032e061bea8c14f2a73dbd24ebe866f096a22fbddba92f5b036a95f144",
+      "recorded_repair_sha256": "d06a48804943715438ecb4f757dbb37cfaded57cecb526bee94c1b9047e92475"
+    },
+    {
+      "file": "clay-tile-4-140bcd-basecolor.png",
+      "stale_sha256": "4462089db9ad2622dec58b2afe8490e54e297ca3c9a158a7b0f64297eb145608",
+      "recorded_repair_sha256": "8b67ab67c7eddd4ce01a7499a2e8e9082fbd62eb0d18bb99cdae1bffee1be1c8"
+    },
+    {
+      "file": "context-glazing-e207fd-basecolor.png",
+      "stale_sha256": "4f047ccd6869a0ba173e72288bcf71a3ac4a3f157e9a126c5d55185d44e0ffd6",
+      "recorded_repair_sha256": "dd161d39acf33e98fb5660f833bdd13b751942cdeb087a9b3e06bdeae497cc11"
+    },
+    {
+      "file": "chair-tapestry-9942d4-basecolor.png",
+      "stale_sha256": "0a76c713479d5aa46e4fa33632e9e4a57dde822db002575ea39cfbdf2cf84c12",
+      "recorded_repair_sha256": "4ae30ad8d9742e00e1a54d74248723dcf942aebe8cc60f941a42007bb518a262"
+    },
+    {
+      "file": "gravel-4a0e93-basecolor.png",
+      "stale_sha256": "f1e9c62a27c39af16d713e7206954d719e045079d65a92e46da3f6990f9616ed",
+      "recorded_repair_sha256": "a902cf531153e2da44f22d6a65b0e099bff47dd5cfdd6f32e6fdd07d00b978eb"
+    },
+    {
+      "file": "white-trim-a9ddf0-basecolor.png",
+      "stale_sha256": "0f3c74583a9ba8450007d0e81cea270205d5e8b2a858cce9f724cf03b82c2d57",
+      "recorded_repair_sha256": "a15d306946cdd159a38e38b09451e455c82ef422869a3493ec69e735997cbd78"
+    },
+    {
+      "file": "linen-30bda0-basecolor.png",
+      "stale_sha256": "c809a8996ffb90d81c8862313a1cf203b0b7fd2234237bb28fd6187811c2bcf2",
+      "recorded_repair_sha256": "6e57509c2b1fc00f42427927f2cab6bc39c4518da6aa6486e10a96d35bdf5ab3"
+    },
+    {
+      "file": "lift-glass-rose-1174fe-basecolor.png",
+      "stale_sha256": "5f9ad4e86dc6fbf7b35d294a0ae16922e74d5028120e5d01074db34f654752c5",
+      "recorded_repair_sha256": "b5a2b730e1ca6fd1b5376cae32307df7a01883f9a99bb3f5b29f59d2a9fa3a82"
+    },
+    {
+      "file": "cabinet-glass-6142e2-basecolor.png",
+      "stale_sha256": "ee3d4580bd2a27cf86d72c59c069670a45527e0a9c645907d1cf1d5f68c87dfa",
+      "recorded_repair_sha256": "51f1d5fcd9c44a52369266ffdd65e76b6b896828809058a92950dbfb68f8359e"
+    },
+    {
+      "file": "bathroom-dark-walnut-025b86-basecolor.png",
+      "stale_sha256": "701a756a674edb9ec2181260d8458651cbde96b4c0feacc727363a04b5cc837e",
+      "recorded_repair_sha256": "871eb3244e34c9601bb2f337fadc361d634540c50a263d29f6bd2b389d733bdc"
+    },
+    {
+      "file": "bed-base-3e7277-basecolor.png",
+      "stale_sha256": "b421c4bc50588568972fa0cd8a75e5a0c1917eef42f881d3944771515fcfcacd",
+      "recorded_repair_sha256": "939d8ee7ef26211511b4861f61d69c7a07337e558527a9a7feb20d0fa84cc2c4"
+    },
+    {
+      "file": "soil-118e80-basecolor.png",
+      "stale_sha256": "2872600d52c73b00c56b01ced224fca351a02ffd791e6b54c10b6188561da5d3",
+      "recorded_repair_sha256": "071157cc66199226cd3cfa34735790ccaf3c73e451fb88186828eb2c4a229a68"
+    },
+    {
+      "file": "stucco-6876a4-basecolor.png",
+      "stale_sha256": "7538e4f1db098045838bbfe94da3f9cf9442bc4a803eb903e7fc052cdb837e69",
+      "recorded_repair_sha256": "17dad9b312f55f409532232f92a0ebd8f8e165ed026030682ad903bc52cda7d9"
+    },
+    {
+      "file": "lamp-shade-b26f3a-basecolor.png",
+      "stale_sha256": "643e6772e000f3d1e8a41dbad9d60a9ba33be4618ac7980da33ed091b5779161",
+      "recorded_repair_sha256": "668a18d4a18bf16583dbae68d42de6bb17dcfec8bc23e84f45d282ceda95eb60"
+    },
+    {
+      "file": "china-3ab938-basecolor.png",
+      "stale_sha256": "b2ec1fa30cb77b7f322f5dc46018d20cff175c684a72b32f24a021ac3c36442d",
+      "recorded_repair_sha256": "e4ded9fee61872cbd92da7a84a6d93bab0cb20362e37c77f81cab46d2160e51c"
+    },
+    {
+      "file": "lift-mirror-51da8f-basecolor.png",
+      "stale_sha256": "ffe238fe49f8b72164e06a5acd2eedb87cbee12f02b3dd38d0fc1d2c063a78ea",
+      "recorded_repair_sha256": "5b55c86a7fb0488c783be482476e276c1f1cfdf8c7cf3d831be00e95df26447f"
+    },
+    {
+      "file": "clay-tile-5-b2ca59-basecolor.png",
+      "stale_sha256": "41b3d861d09d209c5f0e442f12d29ee13b477a6cccc8fe941babfac6865a1567",
+      "recorded_repair_sha256": "0d443abe634516b050aec969881e3753d9dd567a94f48bfe5141ebfe12cb8d3e"
+    },
+    {
+      "file": "clay-tile-2-bdae39-basecolor.png",
+      "stale_sha256": "6b636989dff43e1fc6d04fc8a856c0d161eb237a9f29418c15a36e567f84a7e5",
+      "recorded_repair_sha256": "847ed40645ed06eb513441f1395ac21e5d67ce326a91b3707c16c88cb1051b63"
+    },
+    {
+      "file": "pillow-grey-e7837a-basecolor.png",
+      "stale_sha256": "85291134b8e8a4c3ee3349e75c5f744f828cbb245f2732de91ff0683271fe67b",
+      "recorded_repair_sha256": "5618f5d84bda30ce96d368d9d33bcb9231c45b442dbcc6ac862bafbc4f815bc4"
+    },
+    {
+      "file": "garden-charcoal-furniture-5bc29f-basecolor.png",
+      "stale_sha256": "046e80c9449195ea6c1d2f414b4030fa688225b30b5824c17d7e2f99d1461485",
+      "recorded_repair_sha256": "45121ace8ffdfbd2b9e2e0c646f93add3973f1b690b6c310d705010a6e7e1051"
+    },
+    {
+      "file": "bath-tile-a2f9cd-basecolor.png",
+      "stale_sha256": "7a4d14f5d980d4c5be6d80fbb5ff2ea4e420ea7dbfe0e4b2a44092806b817c1a",
+      "recorded_repair_sha256": "4b1671adac0767f22a89138db3ca42948955b3d1218440a6b3fa73279444e20c"
+    },
+    {
+      "file": "curtain-sheer-b416f0-basecolor.png",
+      "stale_sha256": "1eeb38872e3f460d41d6b73f22b0cdcadc753b946616d7bf1692e51c12e7c6be",
+      "recorded_repair_sha256": "c49a26d9b3b8054e667e139d918dcf746966a2f6af87e30c458349e7bb2575c7"
+    },
+    {
+      "file": "ceiling-baacee-basecolor.png",
+      "stale_sha256": "390cc381fb2f8c45a467d1dbcb86e9bc5a0383ac138bb24b7e5496171b4e9e1c",
+      "recorded_repair_sha256": "9993a0ad7e04299111fea31ac5268258cfb90f8349d70ce2ae5a6bc0060b8fba"
+    },
+    {
+      "file": "lift-glass-amber-9315a5-basecolor.png",
+      "stale_sha256": "e7f5e05ff62be22205cd772737c6186ca188cf614a680c58acd90868d3505fdd",
+      "recorded_repair_sha256": "e6bc47856ef3a8d3e3d8105900ed8e4370c2e7d82a7e1d891eacdfaa05bde84b"
+    },
+    {
+      "file": "hedge-1bbe6d-basecolor.png",
+      "stale_sha256": "3d776980bbdaec0ef0c71ccbd10f4c2298c01e8b166ccacd955449324f7462b9",
+      "recorded_repair_sha256": "17149d0fd332fbecbebc860b71f8fd513ab46bb9de6c831c66dd879318d3d019"
+    },
+    {
+      "file": "leather-brown-771cec-basecolor.png",
+      "stale_sha256": "887385fbdee5f0a8f20aefdbee0a66d567ec5dd24905e388a3ba26cc1cffc837",
+      "recorded_repair_sha256": "66cad7d34b28ea2791bc0f2e1c2dd503c0f4800906439fe84f4126dc1ee1b3aa"
+    },
+    {
+      "file": "bulb-warm-c616e4-basecolor.png",
+      "stale_sha256": "97280e837953d52dbf7a50a7c2b07ce0ee80065c386efb5d681ad19207bd235f",
+      "recorded_repair_sha256": "2b2bdb6a1480ae1544475709701d5e3fe5f3a98823596878f04cc7bbb7fbf1dd"
+    },
+    {
+      "file": "brass-80c48f-basecolor.png",
+      "stale_sha256": "2c7d406e428a32c058ea35247da67afdca6a1b3fce92ed2dd5a842391228ae50",
+      "recorded_repair_sha256": "81e412984989c4f6df0c34a2502afcbfad77a86e61fdd64ac4598c72a0cccd50"
+    },
+    {
+      "file": "clay-tile-0-a7d64a-basecolor.png",
+      "stale_sha256": "fae2d40174326030700290c0bea26ca7e2e035f5355cabce487d439ccc7d7e64",
+      "recorded_repair_sha256": "8c136602db2d1d951f81d93e781ec37ca549dcf62738d52bbf124613d5328513"
+    },
+    {
+      "file": "pool-tile-5eae43-basecolor.png",
+      "stale_sha256": "fbb502f7852c9de5da11844d5b1a7f131c6791063dd9405e4bf66041d5315e27",
+      "recorded_repair_sha256": "48fc9d68203ac5046a9cc6d512198880420e062324612acb1a034bd06be033a5"
+    },
+    {
+      "file": "foliage-6e0847-basecolor.png",
+      "stale_sha256": "c4c901505276e20408569b74607ed7c92c6416dd0d81fdaf77288349a340c817",
+      "recorded_repair_sha256": "cfced70189f89691e684b9a6503eb92d4243a760e60facaf3f589a3d5d7cf67a"
+    },
+    {
+      "file": "bathroom-silver-mirror-8b7446-basecolor.png",
+      "stale_sha256": "01e367979b57210fc991d8464f112950c1305d5680246fdd4ad23757d0b6a2e8",
+      "recorded_repair_sha256": "62ff26f2ae8ce5e0d7913159147e49f4f5cd9682c50b6e5abd49dc8ec63b15fb"
+    },
+    {
+      "file": "neighbor-wall-1bf3b2-basecolor.png",
+      "stale_sha256": "31b9ba006835d15cb64e6fdfafa8e5a863c7e4ca796d30ffafbf521a4ef07cde",
+      "recorded_repair_sha256": "6a05a7682d7d28a90f3281feb081988773d117415cf16547088b619e8a63246b"
+    },
+    {
+      "file": "black-466bc8-basecolor.png",
+      "stale_sha256": "a540bacc83f24d5b6ad62ee1a55b63b263ba8625b3729fb4fe332983ce6063f4",
+      "recorded_repair_sha256": "981f501abbbfaaa926388ac238d2d9131c565936b6ff0e49205c132df6ebf71f"
+    },
+    {
+      "file": "burgundy-velvet-c5a1f4-basecolor.png",
+      "stale_sha256": "74ece05daffeb94f85cc9a0be0cd589a8abfc745cf5c566328a70d686859e537",
+      "recorded_repair_sha256": "8330338f81237c985e71245454d7afdb659ab13b0585308e9a734320d4075f6d"
+    },
+    {
+      "file": "blue-fabric-4a358c-basecolor.png",
+      "stale_sha256": "043e7492abf9cd5171bb5e90d34ec3036376f1b4d6f336e2c50f8fe64f5f6845",
+      "recorded_repair_sha256": "e6feed3c4d422794c0554d6b59bd1b8a5225dd1ee6a92dce55ec8f5d2a545aa0"
+    },
+    {
+      "file": "grass-bbc29b-basecolor.png",
+      "stale_sha256": "46a86a961a5255d57487d4dda45eb12e89a81a74a0e7bb97da82a06e2a6903f0",
+      "recorded_repair_sha256": "c907a1a076d307f02268c2899483236abe63f28ed78e7741bbbbdc42e6054102"
+    },
+    {
+      "file": "lift-speckled-granite-floor-513f1f-basecolor.png",
+      "stale_sha256": "167f047577aa26681cfc7a1fe7fabb715dd447586aaf99d293d835c3d72d1ff6",
+      "recorded_repair_sha256": "95a29f53022f7d0a6084af6f9f82e103a402a06a95fb0bfb2551cc4f38b0b808"
+    },
+    {
+      "file": "interior-cfa582-basecolor.png",
+      "stale_sha256": "15861b3b6ab0bebdae928656a6a7c117b122e5f08824f8b95bba657035e8e675",
+      "recorded_repair_sha256": "d193dc7e6597801764c7e548d9567bcfa8e0ff2dcaf5b21bb8fa4d565ed92c9f"
+    },
+    {
+      "file": "lift-glass-leaf-ee0eab-basecolor.png",
+      "stale_sha256": "0c476f8779309694f46e42245ea6adf1a51cbc79025f7d915309ea4a5f35733d",
+      "recorded_repair_sha256": "e0c26a7744d95861828db0c8f45d07c56d71762d98af0611dfa68814cb6040ab"
+    },
+    {
+      "file": "chrome-b90d94-basecolor.png",
+      "stale_sha256": "d10949a5b96493686207760e85a8705ce62918fa576ee644584f2a8cc4a98fd5",
+      "recorded_repair_sha256": "da81faeab53248987be919e84e119b79bf1b144733f6bfd4b5a3d9646ba6e4bf"
+    },
+    {
+      "file": "clay-tile-6-3b80cd-basecolor.png",
+      "stale_sha256": "97a962e82eaa4c5406d58b187a81787870f7d9ac0896089cd0e71c3e79ec69bc",
+      "recorded_repair_sha256": "6b4c96d5bc777924b95d00d43a4591d238bb2cc6ed5fb671ca34ac469c66bd1b"
+    },
+    {
+      "file": "asphalt-484ed0-basecolor.png",
+      "stale_sha256": "c957d3215a584e520f11e6ad63a574fe54f93bb961b13caeb212616b34e65eab",
+      "recorded_repair_sha256": "3835a14c456ffea70e6a86e13b64d52fe5291a3b5611c42e97e3ec31ee264400"
+    },
+    {
+      "file": "needle-light-d41f8b-basecolor.png",
+      "stale_sha256": "a9a47cded7c554abaca8c06ac887d5dac8127cbfef41628f042c16fcdf703ac8",
+      "recorded_repair_sha256": "66b65ae5c2585f481f62af43b1991247d6b4dd94b8ac72947a478a4ab26fab2b"
+    },
+    {
+      "file": "clay-tile-1-51c2b9-basecolor.png",
+      "stale_sha256": "5152424c5732f9f411ae6cafb342447ef926cd1c9e73e0cefdf1140136f6d6a5",
+      "recorded_repair_sha256": "4f9141c5bfbc578eb60afb5265f6fb291547c1ca516c186ccf1a5bf33c06b7ad"
+    },
+    {
+      "file": "frosted-green-cabinet-inset-e2566c-basecolor.png",
+      "stale_sha256": "21eb6d4ee43cb71f9290a6042037df8899956c9b791a7d3d62c0b3166ae7c4a6",
+      "recorded_repair_sha256": "fb17ee91a56cf82ea9694c8ff09783698a62f57f361b0d19eac3043e34cffc63"
+    },
+    {
+      "file": "ceramic-70e885-basecolor.png",
+      "stale_sha256": "67de16f95140ae21aefd0c3c139f70b60e8a7ef8315cab540c56b715eb3fb58a",
+      "recorded_repair_sha256": "4f03020ac10647b3c51e6bfbd0bb2082633fe8edd4d704d2b93ef9619dfbccd4"
+    },
+    {
+      "file": "bathroom-lower-terracotta-c9b56a-basecolor.png",
+      "stale_sha256": "8bd4ef18cc36f04a94e4196734765a327d14a6160b0703c67f3ecfa5a5ba27c7",
+      "recorded_repair_sha256": "7d145d912acd65f2145de2e9344b17773f9efe25265b301d3df8a1e27eadf268"
+    },
+    {
+      "file": "leaf-yellow-df8149-basecolor.png",
+      "stale_sha256": "85e0ed9ac479b38c4bde3f96ee5aab326491995b681e9c3145d9547e3fc9f7cc",
+      "recorded_repair_sha256": "3fadb1649414d4f4b0c9853db0263bdee225da97186fa29ec2ba22202e098159"
+    },
+    {
+      "file": "foliage-light-643ef8-basecolor.png",
+      "stale_sha256": "e0ef0fd6f99bb24eeae0b0348192dcc0d7786bdaf199d731e7f42560a390f620",
+      "recorded_repair_sha256": "b385f1e4124702493feb11dda55b6f9a3385fd41c36ba990e14516a79fe049e6"
+    },
+    {
+      "file": "bark-cc86fb-basecolor.png",
+      "stale_sha256": "60f381a314de6d60c9b8e7c034c50cfae8d2736059d995f3963dd3d89c6e7cb3",
+      "recorded_repair_sha256": "04615f82bd20cb28dad423b67c2d9eb921025cb2a1e8d1cc1d30bae4a80616c2"
+    },
+    {
+      "file": "clay-tile-3-a8b5ba-basecolor.png",
+      "stale_sha256": "5be1693be1039b908bc827dc85559188903d2854695ef9be977576dc72a1bfb1",
+      "recorded_repair_sha256": "d2526069bfd0c805f14bcaea0b4051b90e67f1e02bea8dd958a2fdb08e5e3776"
+    },
+    {
+      "file": "glass-170fd7-basecolor.png",
+      "stale_sha256": "e76c02c2a7873bb59ee6cc1b0bf1fb7cc09333d1d200d8e34723c6e272b1162b",
+      "recorded_repair_sha256": "0f8d8fac80ac021a216366e5a62c588c0ac3545274bec962e0795b1b95a44594"
+    },
+    {
+      "file": "needle-dark-751578-basecolor.png",
+      "stale_sha256": "ff37b56cee4ea6967ad33571d6acdf844dc5de7a03b37163a19cc16f1cbae6dd",
+      "recorded_repair_sha256": "f8b08ef87832e02e56a2fab2252ebafe85825ceb57c88116ea36480878f830c2"
+    },
+    {
+      "file": "metal-4963bb-basecolor.png",
+      "stale_sha256": "6fb57325fdde261d4df311a39adff4cec2d5e280b675824a929791d3b94229bf",
+      "recorded_repair_sha256": "9ba5a07cc5a6f278f69077aba89280c1e4627e8c66abb608a50980acc13bf8c6"
+    },
+    {
+      "file": "ivory-kitchen-countertop-c36a6f-basecolor.png",
+      "stale_sha256": "a3118d71857c18868713be074b71b647dc51d7e2c681b24f7a6341c43eafd617",
+      "recorded_repair_sha256": "334643b400ff138ec8a555223f177ddf574c71627a8b3f9a9a6cf03b93da9e7f"
+    }
+  ],
+  "texture_pixels_modified": false,
+  "passed": true
+}

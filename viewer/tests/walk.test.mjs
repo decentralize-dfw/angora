@@ -13,6 +13,7 @@ test('Every room opens at a supported position clear of walls, furniture and low
   const manifest=JSON.parse(fs.readFileSync(new URL('../../build/web/full/manifest.json',import.meta.url)));
   assert.equal(data.source_furniture_sha256,digest('build/blender/layers/30-furniture-placeholders.blend'),'stale furniture collision grid');
   assert.equal(data.source_architecture_sha256,digest('build/blender/layers/10-architecture.blend'),'stale architectural walking surface');
+  assert.equal(data.source_fittings_sha256,digest('build/blender/layers/20-fixed-fittings.blend'),'stale fitted-cabinet collision grid');
   assert.equal(manifest.navigation.sha256,digest('build/web/full/navigation.json'),'navigation manifest checksum');
   assert.equal(data.stations.length,27);
   for(const station of data.stations) {

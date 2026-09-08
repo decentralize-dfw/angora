@@ -19,7 +19,7 @@ for cname in ['10_ARCHITECTURE','20_FIXED_FITTINGS','30_FURNITURE_PLACEHOLDERS']
         records.append(record)
         layer=o.get('source_layer','')
         navigation_surface=layer.endswith(('$ZEMİN','$ZEMİN KAPLAMA','$MERDİVEN')) or 'TAVAN' in layer or layer in ['ÇATII','ÇATI ALIN','KAPI İÇ$KAPI','PENCERE_KAPI$CAM']
-        if cname=='30_FURNITURE_PLACEHOLDERS' or navigation_surface or o.name.startswith(('Lift cabin','Lift landing')):
+        if cname=='30_FURNITURE_PLACEHOLDERS' or navigation_surface or 'Photo kitchen — entrance' in record['collections'] or o.name.startswith(('Lift cabin','Lift landing')):
             me.calc_loop_triangles()
             floors.append({**record,'vertices':verts,'triangles':[list(t.vertices) for t in me.loop_triangles]})
         ev.to_mesh_clear()

@@ -210,7 +210,9 @@ async function loadModel() {
       if(manifest.navigation?.sha256)url.searchParams.set('v',manifest.navigation.sha256.slice(0,12));
       const response=await fetch(url);if(!response.ok)throw Error(`Navigation HTTP ${response.status}`);
       const data=await response.json();
+      if(data.source_architecture_sha256!==manifest.library_hashes['build/blender/layers/10-architecture.blend'])throw Error('Navigation/architecture revision mismatch');
       if(data.source_furniture_sha256!==manifest.library_hashes['build/blender/layers/30-furniture-placeholders.blend'])throw Error('Navigation/furniture revision mismatch');
+      if(data.source_fittings_sha256!==manifest.library_hashes['build/blender/layers/20-fixed-fittings.blend'])throw Error('Navigation/fittings revision mismatch');
       return data;
     }
     const results = await Promise.allSettled([worker(), worker(), loadSections(), loadRooms(), loadNavigation(),

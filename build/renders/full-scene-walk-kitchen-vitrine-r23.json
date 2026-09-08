@@ -1,0 +1,55 @@
+{
+  "render": "build/renders/full-scene-walk-kitchen-vitrine-r23.png",
+  "kind": "Blender GLB geometry review; not a web shader screenshot",
+  "floor_index": null,
+  "upper_cut_m": 40,
+  "lower_cut": null,
+  "context_omitted_for_close_inspection": false,
+  "section_atlas_sha256": null,
+  "model_manifest_sha256": "189698a268d1b19ceef2a4a4c66ac8e71ec1edbca333609176ad939cc4c1118f",
+  "render_sha256": "292d2e6e56ef1fadde5294b716c0d33ff0e3a4b6f0fe20f68fa1241bdc0f1221",
+  "assets": [
+    {
+      "id": "level-0",
+      "sha256": "c4b2127a5c3b9b65874dbab54da11190eb20ce5605cb004dc60950204dcd3217"
+    },
+    {
+      "id": "level-1",
+      "sha256": "31b0f8a65d30af713781474cd423282f52cea8505927799c0609030416fff67b"
+    },
+    {
+      "id": "level-2",
+      "sha256": "17dcd7c3f9828223486905f6555a61c9521a774cf95ef67c3d1fe15927007c50"
+    },
+    {
+      "id": "level-3",
+      "sha256": "7336a22e1107205032c3c63215bb50dddaff3ec1a1139de8c1a88d56b856286c"
+    },
+    {
+      "id": "envelope",
+      "sha256": "b6b5506871dd0c84df08026c387e4c830c181efc8398bfb686366acc677e6dff"
+    },
+    {
+      "id": "garden",
+      "sha256": "a2648bbfa777a4ca189d6774ba213144b5c0fc0a718b974ad5c4c664538897e8"
+    },
+    {
+      "id": "context",
+      "sha256": "35086aa61f3252599681a6880c3fb170cb72752339ac7b8a6d6756564e66cefe"
+    }
+  ],
+  "annotations": false,
+  "furniture_visible": true,
+  "camera_native_m": [
+    -2.180000066757202,
+    -2.450000047683716,
+    4.659999847412109
+  ],
+  "camera_rotation_rad": [
+    1.5116018056869507,
+    2.1039095798869312e-08,
+    -1.6399924755096436
+  ],
+  "projection": "PERSP",
+  "geometry_clipped": false
+}

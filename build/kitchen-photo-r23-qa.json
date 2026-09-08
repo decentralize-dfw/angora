@@ -1,0 +1,1764 @@
+{
+  "source_fittings_sha256": "2cd9deedcf00f6ff6bf6267f4b8ab0bc246cbe07fbf17b725f23b417a460e1d5",
+  "source_furniture_sha256": "32f1bc22c415945994bb10c513e2b7995d799d7d7ed3925e4a65502b8bffab2b",
+  "kitchen_fixture_parts_checked": 349,
+  "new_or_modified_parts": 104,
+  "movable_furniture_parts_checked": 467,
+  "solid_hob_doors": 3,
+  "satin_glass_panes": 8,
+  "items": [
+    {
+      "object": "Burner ring",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Burner ring.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Burner ring.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Burner ring.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Cooktop",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Countertop",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Countertop sink border",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Countertop sink border.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Countertop.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Countertop.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Extractor canopy",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Extractor chimney",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Fridge door split",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Fridge handles",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Gooseneck kitchen tap",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | blind bottom rail",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | blind headrail",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | blind ladder cord",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | blind ladder cord.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay divider",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay divider.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.008",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | open bay shelf.009",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink concealed shelf",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink concealed shelf.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink concealed shelf.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink concealed shelf.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed rail",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed rail.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed rail.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed rail.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed rail.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed rail.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed rail.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed rail.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed stile",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed stile.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed stile.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed stile.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed stile.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed stile.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed stile.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink glazed stile.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink satin inset",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink satin inset.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink satin inset.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink satin inset.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper back",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper back.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper bowed pull",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper bowed pull.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper bowed pull.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper bowed pull.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper crown",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper crown.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper crown.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper crown.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper crown.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper crown.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper horizontal",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper horizontal.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper horizontal.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper horizontal.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper outer side",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper outer side.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper outer side.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | sink upper outer side.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.008",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.009",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.010",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.011",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.012",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.013",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.014",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.015",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.016",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.017",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.018",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.019",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.020",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.021",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.022",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.023",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.024",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.025",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.026",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.027",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.028",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.029",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.030",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.031",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.032",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.033",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.034",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | timber blind slat.035",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen R23 | window registered tile faces",
+      "wall_overlap_m2": 6.8e-05,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.008",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.009",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.010",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.011",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.012",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.013",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | cupboard moulding.014",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | dishwasher brushed door",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | dishwasher control strip",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | dishwasher program button",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | dishwasher program button.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | dishwasher program button.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | dishwasher program button.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | dishwasher program button.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | dishwasher recessed pull",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.008",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.009",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.010",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | draining channel.011",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | drawer pull",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | drawer pull.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | drawer pull.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | glazing bead.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | glazing bead.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | glazing bead.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | glazing bead.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | glazing bead.008",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | glazing bead.009",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run carcass side",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run carcass side.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run carcass side.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run carcass side.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run carcass side.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run carcass side.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run carcass side.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run carcass side.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run door",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run door.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run door.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run door.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run plinth",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run plinth.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run plinth.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run plinth.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run pull",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run pull.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run pull.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run pull.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run rail",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run rail.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run rail.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run rail.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run rail.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run rail.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run rail.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run rail.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run stile",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run stile.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run stile.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run stile.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run stile.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run stile.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run stile.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run stile.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run top stretcher",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run top stretcher.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run top stretcher.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | hob run top stretcher.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | north square tile faces",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink draining board",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run carcass side",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run carcass side.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run carcass side.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run carcass side.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run carcass side.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run carcass side.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run carcass side.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run carcass side.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run panel",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run panel.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run panel.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run panel.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run panel.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run panel.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run panel.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run plinth",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run plinth.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run plinth.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run plinth.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run pull",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run pull.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run pull.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run pull.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.008",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.009",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.010",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.011",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.012",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run rail.013",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.008",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.009",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.010",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.011",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.012",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run stile.013",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run top stretcher",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run top stretcher.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run top stretcher.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | sink run top stretcher.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge pull",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge pull.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge pull.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge rail",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge rail.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge rail.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge rail.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge rail.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge rail.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge stile",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge stile.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge stile.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge stile.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge stile.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine bridge stile.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine crown",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine display counter",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glass lower door",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glass lower door.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glazed rail",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glazed rail.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glazed rail.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glazed rail.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glazed stile",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glazed stile.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glazed stile.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine glazed stile.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine low counter",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine low side cabinet",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine lower side door",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine lower side door.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine pantry door",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine pantry door.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine pantry handle",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine pantry handle.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine plinth",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine pull",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine pull.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine recessed back",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine shelf",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine shelf.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine shelf.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine shelf.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine side handle",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine side handle.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine upper glass",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine upper glass.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine upper glass.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine upright",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine upright.001",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine upright.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Kitchen review 15 | vitrine upright.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Main refrigerator",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Oven glass",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Oven handle",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Sink rolled rim",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Stainless sink bowl",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard back.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard back.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard back.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard door rail.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard door rail.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard door rail.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard door rail.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard door rail.008",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard door rail.009",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard door stile.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard door stile.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard door stile.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard door stile.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard door stile.008",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard door stile.009",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard handle.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard handle.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard handle.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard horizontal.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard horizontal.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard horizontal.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard horizontal.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard horizontal.008",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard horizontal.009",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard inner recess.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard inner recess.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard inner recess.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard inset.002",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard inset.003",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard inset.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard side.004",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard side.005",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard side.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard side.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard side.008",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard side.009",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.006",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.007",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.008",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.009",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.010",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.011",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.012",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.013",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    },
+    {
+      "object": "Upper cupboard visible shelf.014",
+      "wall_overlap_m2": 0.0,
+      "furniture_intersections": []
+    }
+  ],
+  "intersections": [],
+  "passed": true,
+  "wall_inset_tolerance_m": 0.008,
+  "overlap_review_threshold_m2": 0.00015,
+  "limitations": [
+    "Horizontal evaluated triangle sections; the internal joints of a single cabinet are intentional.",
+    "Photo fabrication proportions remain interpreted."
+  ]
+}

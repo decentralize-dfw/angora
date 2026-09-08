@@ -1,0 +1,55 @@
+{
+  "render": "build/renders/full-scene-walk-kitchen-before-r23.png",
+  "kind": "Blender GLB geometry review; not a web shader screenshot",
+  "floor_index": null,
+  "upper_cut_m": 40,
+  "lower_cut": null,
+  "context_omitted_for_close_inspection": false,
+  "section_atlas_sha256": null,
+  "model_manifest_sha256": "575d578684c3ebec8db714811ad2551fbf2296972a09486e2a8ffcd2370426fd",
+  "render_sha256": "f036aa6d50a89372d9d412e83f24b324d976aa3f3055de14dd236c14ae4e28eb",
+  "assets": [
+    {
+      "id": "level-0",
+      "sha256": "c4b2127a5c3b9b65874dbab54da11190eb20ce5605cb004dc60950204dcd3217"
+    },
+    {
+      "id": "level-1",
+      "sha256": "cc40d5f72ddd6ac459dcdde2b33ff146f8b16a85a7b413c46c6372ab8f0f5e29"
+    },
+    {
+      "id": "level-2",
+      "sha256": "17dcd7c3f9828223486905f6555a61c9521a774cf95ef67c3d1fe15927007c50"
+    },
+    {
+      "id": "level-3",
+      "sha256": "7336a22e1107205032c3c63215bb50dddaff3ec1a1139de8c1a88d56b856286c"
+    },
+    {
+      "id": "envelope",
+      "sha256": "b6b5506871dd0c84df08026c387e4c830c181efc8398bfb686366acc677e6dff"
+    },
+    {
+      "id": "garden",
+      "sha256": "a2648bbfa777a4ca189d6774ba213144b5c0fc0a718b974ad5c4c664538897e8"
+    },
+    {
+      "id": "context",
+      "sha256": "35086aa61f3252599681a6880c3fb170cb72752339ac7b8a6d6756564e66cefe"
+    }
+  ],
+  "annotations": false,
+  "furniture_visible": true,
+  "camera_native_m": [
+    -3.0299999713897705,
+    -1.9700000286102295,
+    4.690000057220459
+  ],
+  "camera_rotation_rad": [
+    1.438344120979309,
+    -1.1620981865689828e-07,
+    1.4926151037216187
+  ],
+  "projection": "PERSP",
+  "geometry_clipped": false
+}

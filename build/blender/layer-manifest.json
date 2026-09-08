@@ -1,10 +1,10 @@
 {
   "master": "build/blender/angora21-working.blend",
-  "master_sha256": "112c349583e84cd44e27d6d052e8340f43d56954f95a9fd98a6e0acec1a407ea",
-  "source_objects": 5102,
-  "linked_scene_objects": 5102,
-  "source_vertices": 9339063,
-  "linked_vertices": 9339063,
+  "master_sha256": "b78522256781047af87f58289dcde84c906441087dfd91942fc0a8521ac05f0c",
+  "source_objects": 5158,
+  "linked_scene_objects": 5158,
+  "source_vertices": 9339475,
+  "linked_vertices": 9339475,
   "files": [
     {
       "path": "build/blender/layers/shared-materials.blend",
@@ -38,8 +38,8 @@
     },
     {
       "path": "build/blender/layers/20-fixed-fittings.blend",
-      "bytes": 954886,
-      "sha256": "69c471749b8a5073c239af60d186a19309ea4a4d726d6929ecdffba87b4059ce",
+      "bytes": 996922,
+      "sha256": "2cd9deedcf00f6ff6bf6267f4b8ab0bc246cbe07fbf17b725f23b417a460e1d5",
       "collection": "20_FIXED_FITTINGS"
     },
     {
@@ -172,7 +172,7 @@
   "maximum_library_bytes": 8695675,
   "usage": "Open the master with the layers folder alongside it. Geometry libraries are individually editable.",
   "automation_required": false,
-  "review_revision": "R22",
+  "review_revision": "R23",
   "review_geometry_bounds_m": {
     "B0 WC navy vanity": [
       [
