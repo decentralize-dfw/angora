@@ -8,7 +8,8 @@ ROOT=Path(__file__).resolve().parents[1]
 revision=sys.argv[sys.argv.index('--')+1]
 master=ROOT/'build/blender/angora21-working.blend';assert Path(bpy.data.filepath).resolve()==master
 scene=bpy.context.scene;scene['review_revision']=revision
-for name in ['repair_gallery_finish.py','verify_gallery_visibility.py','refresh_linked_delivery.py']:
+for name in ['repair_gallery_finish.py','verify_gallery_visibility.py','refresh_linked_delivery.py',
+             'export_ground_source.py','prepare_road_correction.py','prepare_ground_correction.py','apply_ground_correction.py']:
     text=bpy.data.texts.get('pipeline/'+name) or bpy.data.texts.new('pipeline/'+name)
     text.clear();text.write((ROOT/'tools'/name).read_text())
 bpy.context.view_layer.update()

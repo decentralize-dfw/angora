@@ -41,6 +41,11 @@ for col in hood.children:
 # detailed tree and facade. A lighter initial neighborhood LOD is still pending.
 targets['context-far.glb']=far
 targets['context-ground.glb']=geometry(hood.all_objects)-near-far
+if not near and not far:
+    # Transport shards flatten the original per-building collections. Ground
+    # has explicit authored names; never misclassify every house as terrain.
+    targets['context-ground.glb']=geometry(o for o in hood.all_objects if o.name.startswith(
+        ('Terrain','CAD curb edges','CAD roads — corrected','Context road','Front road','Front pedestrian sidewalk')))
 selected=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
 partial=bool(selected);selected=set(selected or targets)
 previous_manifest=json.loads((OUT/'scene-manifest.json').read_text()) if (OUT/'scene-manifest.json').exists() else {}
@@ -54,6 +59,7 @@ unknown=selected-set(targets)
 assert not unknown,'Unknown export targets: '+str(sorted(unknown))
 for filename,objects in targets.items():
     if filename not in selected:continue
+    assert objects,'Empty stream scope in this scene representation: '+filename
     for o in scene.objects:o.select_set(False)
     for o in objects:o.select_set(True)
     deps=bpy.context.evaluated_depsgraph_get();bounds=geometry_bounds(objects,deps)

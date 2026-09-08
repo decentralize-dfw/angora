@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "revision": 18,
+  "geometry_objects": 5084,
+  "checks": [
+    {
+      "object": "CAD roads — corrected block loops and arterials",
+      "vertices": 4450,
+      "triangles": 6680,
+      "prepared_mesh_max_delta_m": 7.607421878219611e-06
+    },
+    {
+      "object": "Terrain — CAD TK and road levels with terraced pads",
+      "vertices": 19533,
+      "triangles": 33005,
+      "prepared_mesh_max_delta_m": 7.607421878219611e-06
+    }
+  ],
+  "prepared_plan_building_intersections": [],
+  "source_archive_sha256": "4359de48fabf38e475e7beab090446514aa0ef9c818d4082f190b0f6717fc67f",
+  "photo_alignment_complete": false
+}

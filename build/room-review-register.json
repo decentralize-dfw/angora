@@ -1,5 +1,5 @@
 {
-  "native_master_sha256": "3a390227c159ffe1df26fdcde1cb403b5f08d5f1f566dc37518c86af5d83441b",
+  "native_master_sha256": "becc2d856e49d46d3e9660d88598ad9802fffc7bdfe39f8483e33cc0c1643701",
   "phase_1_complete": false,
   "source_photo_files": 202,
   "unique_source_photos": 184,
@@ -37,11 +37,18 @@
       "review_state": "compared_corrections_applied_open_items_remain",
       "open_items": [
         "Panjur konumları, kiremit tonu ve cephe ışığı",
-        "Komşu cepheleri ve bitki çeşitleri",
-        "Yol ve arazi birleşimlerinin bütün mahallede kontrolü"
+        "Komşu bahçelerinin çit, istinat duvarı ve bitki ayrıntıları",
+        "Yol genişliklerinin ve tüm topografyanın fotoğraf/ek kot verisiyle doğrulanması"
       ],
       "photo_match_approved": false,
-      "dimension_labels_enabled": false
+      "dimension_labels_enabled": false,
+      "completed_corrections": [
+        {
+          "revision": 18,
+          "change": "Removed roads crossing buildings 37/26, added CAD curb arterials, cut terrain beneath road surfaces and faired unmeasured grade transitions",
+          "evidence": "build/road-terrain-native-qa.json"
+        }
+      ]
     },
     {
       "photo_group": "asansor",
@@ -1128,5 +1135,5 @@
       ]
     }
   ],
-  "review_revision": "17-gallery-void"
+  "review_revision": "18-CAD-roads-and-terrain"
 }

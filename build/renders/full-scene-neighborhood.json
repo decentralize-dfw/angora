@@ -1,0 +1,10 @@
+{
+  "render": "build/renders/full-scene-neighborhood.png",
+  "kind": "Blender GLB geometry review; not a web shader screenshot",
+  "floor_index": null,
+  "upper_cut_m": 40,
+  "lower_cut": null,
+  "context_omitted_for_close_inspection": false,
+  "model_manifest_sha256": "97af075d7183508dd54df7847c374b727d1ba8c80665725d4e9788acc5626f80",
+  "render_sha256": "ac36557ac6627d7d9fc7bc027d7d8733f242c6f2cd3f3f83e2cf42933a3a1172"
+}

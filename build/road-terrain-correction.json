@@ -1,0 +1,21 @@
+{
+  "revision": 18,
+  "road_count": 8,
+  "building_intersections": [],
+  "removed_assumptions": [
+    "Unsupported straight road at Y -49",
+    "Straight crossing through buildings 37 and 26"
+  ],
+  "vertical_status": "road label heights interpolated; not a survey",
+  "photo_alignment_complete": false,
+  "source_geometry_sha256": "bffd9bae8c803d05f893bf04c65e7db8e9f15e8ed1fbfe2418be1d2bda011e36",
+  "terrain_triangles_before": 33208,
+  "terrain_triangles_after": 33014,
+  "road_triangles": 6680,
+  "terrain_removed_above_asphalt_m2": 7636.78499386417,
+  "protected_building_and_villa_garden_vertex_z_change_m": 0,
+  "terrain_fairing_iterations": 16,
+  "bank_blend_m": 4,
+  "dimension_labels_enabled": false,
+  "note": "Road edge XY uses CAD; intermediate grades and widths away from the villa front are interpreted, not survey measurements."
+}

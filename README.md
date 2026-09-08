@@ -44,6 +44,23 @@ kaynak döşeme sınırlarından temizlendi; döşemeler ve merdivenler değişt
 merdivene dört ayrı görüş ışınının ulaştığını doğrular. Fotoğraftaki galeri
 korkuluğu ve hol ayrıntılarının eşlenmesi henüz tamamlanmadı.
 
+Yol/arazi kontrolünde iki binanın oturumundan geçen tahmini güzergâh kaldırıldı.
+Kuzeybatı, güneydoğu ve doğu dış yolları CAD bordürlerinden; bağlantı yolları
+plana göre yorumlanan merkez hatlarından üretildi. Sekiz yol bölgesinin bina
+oturumlarıyla alan çakışması yok. Asfaltın altındaki arazi yüzeyleri temizlendi;
+ara kot geçişleri yumuşatıldı. Bina çevresindeki sabit kotlar ve villanın bahçe
+kotları korunur. Yol genişliklerinin bir bölümü ve arazi interpolasyonu hâlâ
+yorumdur; ölçü etiketine açılmaz. `build/road-terrain-correction.json` ve
+`build/road-terrain-native-qa.json` bunu kaydeder. Komşu bahçe ve istinat duvarı
+ayrıntılarının fotoğraf eşlemesi devam eden işler arasındadır.
+
+R18 yol/arazi geometrisi `build/cad/road-ground-r18.json.gz` içinde saklanır.
+`tools/apply_ground_correction.py`, `50-neighborhood-03.blend` ve
+`50-neighborhood-10.blend` dosyaları açılarak ayrı ayrı uygulanabilir.
+Plan/kot üretiminin başlangıç sahnesi `259aab5` commitidir; güncel araziye
+tekrar yumuşatma uygulanmaz. Kütüphane değişikliğinden sonra
+`tools/refresh_linked_delivery.py -- REVISION` ana sahne ve bağlantıları denetler.
+
 Cloud Blender dizini `ANGORA_BLENDER_DIR` ile seçilir. Yalnızca web modellerini
 yenilemek için Blender içinde `tools/export_web_viewer.py` çalıştırılır;
 `--full-scene` güncel tam modeli, `--full-scene --views level-1` yalnız giriş
