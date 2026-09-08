@@ -29,6 +29,16 @@ fine shutter hardware. Native geometry is unchanged by export.
 Node 22.12 or newer. `npm ci`, `npm run dev`, `npm test`, `npm run build`.
 Build output is `dist`. Draco decoder is bundled for same-origin delivery.
 
+## GitHub Pages
+
+Live URL: https://xrweb.studio/angora/
+
+Run `npm run build:pages` to stage the compiled `index.html` and `web-assets/`
+in the Angora repository root, then commit those files on `main`. This build
+uses relative paths and loads the canonical `build/web/` models and existing
+`viewer/public/draco/` decoder files directly from the same repository.
+The default build remains portable with its bundled `models/` and `draco/`.
+
 The source model is still under photo review; this interface is not a claim
 that all materials, rooms or neighboring facades match the photography.
 

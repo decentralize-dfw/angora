@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#14232f" />
+    <meta name="description" content="Angora 21 villasını, çevresini ve katlarını 1,6 metre kesit yüksekliğiyle üç boyutlu inceleyin." />
+    <title>Angora 21 · 3D İnceleme</title>
+    <script type="module" crossorigin src="./web-assets/index-ClPicJK9.js"></script>
+    <link rel="stylesheet" crossorigin href="./web-assets/index-D_jErnEE.css">
+  </head>
+  <body>
+    <main id="app">
+      <div id="viewport" aria-label="Angora villasının etkileşimli 3D modeli"></div>
+      <header class="topbar">
+        <div class="identity"><span class="brand">MERGVS</span><h1>Angora <strong>21</strong></h1></div>
+        <span class="review-label">Model inceleme</span>
+      </header>
+      <section class="view-picker" aria-label="Görünüm seçimi">
+        <div class="mode-row">
+          <button type="button" data-view="neighborhood" aria-pressed="true">Çevre</button>
+          <button type="button" data-view="building" aria-pressed="false">Bina</button>
+        </div>
+        <div class="floor-row" aria-label="Kat seçimi">
+          <button type="button" data-view="f0" aria-pressed="false">Bodrum</button>
+          <button type="button" data-view="f1" aria-pressed="false">Giriş</button>
+          <button type="button" data-view="f2" aria-pressed="false">1. kat</button>
+          <button type="button" data-view="f3" aria-pressed="false">Çatı</button>
+        </div>
+      </section>
+      <div class="view-description"><h2 id="view-title">Çevre</h2><p id="section-label">Mahalle ve 21 numaralı villa</p></div>
+      <section class="camera-tools" aria-label="Kamera araçları">
+        <button id="rotate-mode" type="button" aria-pressed="true">Döndür</button>
+        <button id="pan-mode" type="button" aria-pressed="false">Kaydır</button>
+        <span class="tool-divider"></span>
+        <button id="zoom-in" type="button" aria-label="Yakınlaştır">+</button>
+        <button id="zoom-out" type="button" aria-label="Uzaklaştır">−</button>
+        <button id="reset-view" type="button">Ortala</button>
+      </section>
+      <p class="gesture-help" id="gesture-help">Sürükle: döndür · İki parmak: kaydır ve yakınlaştır</p>
+      <div class="load-status" id="load-status" role="status" aria-live="polite">
+        <span class="spinner" aria-hidden="true"></span><span id="load-message">Model yükleniyor…</span>
+        <button id="retry" type="button" hidden>Tekrar dene</button>
+      </div>
+      <noscript>3D modeli görüntülemek için tarayıcınızda JavaScript açık olmalıdır.</noscript>
+    </main>
+  </body>
+</html>

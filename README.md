@@ -4,7 +4,13 @@ Kaynak: `ANGORA-.dwg` ve bu depodaki oda / drone fotoğrafları. Hedef, master p
 
 ## 3D inceleme arayüzü
 
-[Angora 21 — çevre, bina ve kat görünümü](https://angora-21-viewer.x-8d31.chatgpt.site)
+[Angora 21 — çevre, bina ve kat görünümü](https://xrweb.studio/angora/)
+
+GitHub Pages doğrudan `main` dalındaki kök `index.html` dosyasını yayınlar.
+Arayüz kaynağını değiştirdikten sonra `viewer/` içinde `npm ci` ve
+`npm run build:pages` çalıştırılır; kök `index.html` ve `web-assets/` çıktıları
+aynı commit ile kaydedilir. Model ve Draco dosyaları mevcut repo yollarından
+yüklenir. Model güncellemelerinde HTML'yi yeniden üretmek gerekmez.
 
 Çevre, bina/bahçe, bodrum, giriş, birinci ve çatı katı seçilebilir. Katlar kendi
 döşeme kotundan **+1,60 m** kesilir. Sabit yükseklikte döndürme, yatay kaydırma,

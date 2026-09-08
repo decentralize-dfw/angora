@@ -9,6 +9,10 @@ import { configureCameraControls } from './camera.js';
 const $ = s => document.querySelector(s);
 const host = $('#viewport'), status = $('#load-status');
 const remoteRoot = 'https://raw.githubusercontent.com/decentralize-dfw/angora/main/build/web/';
+const publicRoot = new URL(import.meta.env.BASE_URL, document.baseURI);
+const pages = import.meta.env.MODE === 'pages';
+const modelRoot = new URL(pages ? 'build/web/' : 'models/', publicRoot);
+const decoderRoot = new URL(pages ? 'viewer/public/draco/' : 'draco/', publicRoot);
 let manifest, localManifest, selected = 'neighborhood', generation = 0;
 let scene, camera, renderer, controls, activeGroup, frameSpan = 40, framePending = false;
 let draco, loader, lastBox, frameHeight = 70;
@@ -78,7 +82,7 @@ function setup() {
   const sun=new THREE.DirectionalLight(0xfff4df,3);sun.position.set(-30,60,20);scene.add(sun);
   const pmrem=new THREE.PMREMGenerator(renderer);const room=new RoomEnvironment();
   scene.environment=pmrem.fromScene(room,.04).texture;room.dispose();pmrem.dispose();
-  draco=new DRACOLoader();draco.setDecoderPath('/draco/');draco.setWorkerLimit(2);
+  draco=new DRACOLoader();draco.setDecoderPath(decoderRoot.href);draco.setWorkerLimit(2);
   loader=new GLTFLoader();loader.setDRACOLoader(draco);
   window.addEventListener('resize',resize);
   renderer.domElement.addEventListener('webglcontextlost',event=>{
@@ -87,7 +91,7 @@ function setup() {
 }
 async function loadAsset(asset) {
   const bundled=localManifest.assets.find(a=>a.id===asset.id)?.sha256===asset.sha256;
-  const url=bundled?`/models/${asset.file}`:`${remoteRoot}${asset.file}?v=${asset.sha256.slice(0,12)}`;
+  const url=bundled?new URL(asset.file,modelRoot).href:`${remoteRoot}${asset.file}?v=${asset.sha256.slice(0,12)}`;
   const gltf=await loader.loadAsync(url);
   return gltf.scene;
 }
@@ -135,7 +139,7 @@ function mode(pan) {
 }
 async function boot() {
   try {
-    setup();localManifest=await fetch('/models/manifest.json').then(r=>{if(!r.ok)throw Error(r.status);return r.json();});
+    setup();localManifest=await fetch(new URL('manifest.json',modelRoot)).then(r=>{if(!r.ok)throw Error(r.status);return r.json();});
     manifest=localManifest;
     // Update source on the next visit without interrupting the active model.
     try {

@@ -1,4 +1,7 @@
 __pycache__/
+viewer/node_modules/
+viewer/dist/
+.runtime/
 *.blend1
 .cache/
 build/intermediate/
