@@ -1,6 +1,6 @@
 {
-  "mesh_vertices": 9339755,
-  "expected_vertices": 9339755,
+  "mesh_vertices": 9340756,
+  "expected_vertices": 9340756,
   "missing_linked_data": [],
   "materials": 78,
   "image_count": 235,
@@ -8,137 +8,137 @@
   "libraries": [
     {
       "path": "//layers/00-source-reference.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/00-source-reference.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/00-source-reference.blend",
       "exists": true
     },
     {
       "path": "//layers/10-architecture.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/10-architecture.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/10-architecture.blend",
       "exists": true
     },
     {
       "path": "//layers/15-exterior-details.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/15-exterior-details.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/15-exterior-details.blend",
       "exists": true
     },
     {
       "path": "//layers/20-fixed-fittings.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/20-fixed-fittings.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/20-fixed-fittings.blend",
       "exists": true
     },
     {
       "path": "//layers/30-furniture-placeholders.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/30-furniture-placeholders.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/30-furniture-placeholders.blend",
       "exists": true
     },
     {
       "path": "//layers/40-landscape-01.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/40-landscape-01.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/40-landscape-01.blend",
       "exists": true
     },
     {
       "path": "//layers/40-landscape-02.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/40-landscape-02.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/40-landscape-02.blend",
       "exists": true
     },
     {
       "path": "//layers/40-landscape-03.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/40-landscape-03.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/40-landscape-03.blend",
       "exists": true
     },
     {
       "path": "//layers/40-landscape-04.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/40-landscape-04.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/40-landscape-04.blend",
       "exists": true
     },
     {
       "path": "//layers/40-landscape-05.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/40-landscape-05.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/40-landscape-05.blend",
       "exists": true
     },
     {
       "path": "//layers/40-landscape-06.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/40-landscape-06.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/40-landscape-06.blend",
       "exists": true
     },
     {
       "path": "//layers/40-landscape-07.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/40-landscape-07.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/40-landscape-07.blend",
       "exists": true
     },
     {
       "path": "//layers/40-landscape-08.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/40-landscape-08.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/40-landscape-08.blend",
       "exists": true
     },
     {
       "path": "//layers/40-landscape-09.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/40-landscape-09.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/40-landscape-09.blend",
       "exists": true
     },
     {
       "path": "//layers/40-landscape-10.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/40-landscape-10.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/40-landscape-10.blend",
       "exists": true
     },
     {
       "path": "//layers/50-neighborhood-01.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/50-neighborhood-01.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/50-neighborhood-01.blend",
       "exists": true
     },
     {
       "path": "//layers/50-neighborhood-02.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/50-neighborhood-02.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/50-neighborhood-02.blend",
       "exists": true
     },
     {
       "path": "//layers/50-neighborhood-03.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/50-neighborhood-03.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/50-neighborhood-03.blend",
       "exists": true
     },
     {
       "path": "//layers/50-neighborhood-04.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/50-neighborhood-04.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/50-neighborhood-04.blend",
       "exists": true
     },
     {
       "path": "//layers/50-neighborhood-05.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/50-neighborhood-05.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/50-neighborhood-05.blend",
       "exists": true
     },
     {
       "path": "//layers/50-neighborhood-06.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/50-neighborhood-06.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/50-neighborhood-06.blend",
       "exists": true
     },
     {
       "path": "//layers/50-neighborhood-07.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/50-neighborhood-07.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/50-neighborhood-07.blend",
       "exists": true
     },
     {
       "path": "//layers/50-neighborhood-08.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/50-neighborhood-08.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/50-neighborhood-08.blend",
       "exists": true
     },
     {
       "path": "//layers/50-neighborhood-09.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/50-neighborhood-09.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/50-neighborhood-09.blend",
       "exists": true
     },
     {
       "path": "//layers/50-neighborhood-10.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/50-neighborhood-10.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/50-neighborhood-10.blend",
       "exists": true
     },
     {
       "path": "//layers/shared-materials.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/shared-materials.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/shared-materials.blend",
       "exists": true
     },
     {
       "path": "//layers/shared-meshes.blend",
-      "resolved": "/workspace/scratch/3317f828a850/angora/build/blender/layers/shared-meshes.blend",
+      "resolved": "/workspace/scratch/9f2d0a56d06d/angora/build/blender/layers/shared-meshes.blend",
       "exists": true
     }
   ],

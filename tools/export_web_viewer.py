@@ -201,6 +201,12 @@ if FULL:
         data=json.loads(annotations.read_text())
         if data['source_architecture_sha256']==hashlib.sha256((ROOT/'build/blender/layers/10-architecture.blend').read_bytes()).hexdigest():
             manifest['room_annotations']={'file':annotations.name,'bytes':annotations.stat().st_size,'sha256':hashlib.sha256(annotations.read_bytes()).hexdigest()}
+    navigation=OUT/'navigation.json'
+    if navigation.exists():
+        data=json.loads(navigation.read_text())
+        sources={'source_architecture_sha256':'10-architecture.blend','source_furniture_sha256':'30-furniture-placeholders.blend','source_fittings_sha256':'20-fixed-fittings.blend'}
+        if all(data.get(key)==hashlib.sha256((ROOT/'build/blender/layers'/name).read_bytes()).hexdigest() for key,name in sources.items()):
+            manifest['navigation']={'file':navigation.name,'bytes':navigation.stat().st_size,'sha256':hashlib.sha256(navigation.read_bytes()).hexdigest()}
 path=OUT/'manifest.json';tmp=path.with_suffix('.tmp');tmp.write_text(json.dumps(manifest,ensure_ascii=False,indent=2));tmp.replace(path)
 assert hashlib.sha256(source.read_bytes()).hexdigest()==source_hash,'Native source changed during web export'
 print('WEB_DELIVERY_COMPLETE',sum(r['bytes'] for r in records),flush=True)

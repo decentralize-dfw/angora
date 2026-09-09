@@ -1,5 +1,9 @@
 # R26 checkpoint — model export pending
 
+> Historical checkpoint. The resumed implementation and its current validation
+> are documented in `docs/r26-resumed-delivery.md`. Do not interpret the original
+> interrupted-workspace statements below as the status of the resumed delivery.
+
 Published viewer: commit `b939de9a8fa255c829a37228a799cd37daa23776`.
 GitHub Pages run `34265382486` completed successfully. The deployed index was checked against the commit.
 

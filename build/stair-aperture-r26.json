@@ -1,0 +1,19 @@
+{
+  "revision": 26,
+  "source_before_sha256": "4105de07c4dae4752294724135bbf067afb2c2ce64d31f1fff2d09139fe35776",
+  "source_after_sha256": "78a7dcc3476d1b2e68eaf76fc98888116069c386ebac65d789c2832dcfc7618d",
+  "object": "F1 | KAT 1$ZEM\u0130N",
+  "aperture_xy_m": [
+    0.8684,
+    0.9273,
+    4.1184,
+    3.1273
+  ],
+  "aperture_area_m2": 7.150000000000001,
+  "removed_top_and_bottom_skin_area_m2": 14.300001128807466,
+  "changed_faces": 29,
+  "inner_reveal_depth_m": 0.32,
+  "stairs_changed": false,
+  "basement_slab_changed": false,
+  "attic_elevator_void_reopened": false
+}

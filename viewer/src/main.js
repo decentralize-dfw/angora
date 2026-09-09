@@ -12,6 +12,7 @@ import {createHotspots} from './hotspots.js';
 import {renderPropertyInfo} from './property-info.js';
 import {areaLabel} from './annotations.js';
 import { configureCameraControls } from './camera.js';
+import { PendingAction } from './pending-action.js';
 import { sectionHeight, smoothStep, createWallCaps } from './section.js';
 
 const $ = s => document.querySelector(s);
@@ -23,6 +24,7 @@ const decoderRoot = new URL(pages ? 'viewer/public/draco/' : 'draco/', publicRoo
 const daylightURL = new URL((pages ? 'assets/lighting/' : 'lighting/')+'kloofendal_48d_partly_cloudy_puresky_1k.hdr',publicRoot);
 const titles = {region:'Bölge', neighborhood:'Yakın çevre', building:'Villa 21', f0:'Bodrum', f1:'Giriş katı', f2:'1. kat', f3:'Çatı katı'};
 const groups = new Map();
+const pendingRoomJump = new PendingAction();
 const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
 let flight, hotspots, planMode=false, roomData, interiorLights=true;
 let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox, lighting;
@@ -125,12 +127,13 @@ function updateRoomUI(station){
   renderPropertyInfo($('#property-info'),roomData,selected);
 }
 function travelRoom(roomId){
+  pendingRoomJump.cancel();
   if(!walk?.active)return enterWalk(roomId);
   panel('',false);
   if(matchMedia('(prefers-reduced-motion: reduce)').matches){enterWalk(roomId);return;}
   if(walk.travel(roomId,updateRoomUI))return;
   // Closed source doors are not removed to create a fictitious walkable route.
-  clouds();setTimeout(()=>enterWalk(roomId),480);
+  clouds();pendingRoomJump.run(()=>enterWalk(roomId),480);
 }
 
 function setup() {
@@ -159,6 +162,7 @@ function setup() {
   });
 }
 function selectView(id, initial = false) {
+  pendingRoomJump.cancel();
   if (walk?.active && id.startsWith('f')) {
     const station=walk.surface.data.stations.find(s=>s.floor_index===Number(id[1]));travelRoom(station.room_id);return;
   }
@@ -184,6 +188,7 @@ function selectView(id, initial = false) {
   host.dataset.view = id; host.dataset.loaded = 'true'; invalidate();
 }
 function enterWalk(roomId) {
+  pendingRoomJump.cancel();
   if (!walk || !ready) return;
   const floor=selected.startsWith('f')?Number(selected[1]):1;
   roomId ||= walk.surface.data.stations.find(s=>s.floor_index===floor).room_id;
@@ -197,6 +202,7 @@ function enterWalk(roomId) {
   resize();invalidate();
 }
 function exitWalk(reselect = true) {
+  pendingRoomJump.cancel();
   if(!walk?.active)return;
   walk.leave();controls.enabled=true;$('#app').dataset.walk='false';
   lighting.interior(null,null);

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "source_native_sha256": "8110ce3a2cadc77d2170f4a01e0a595f530c95f6eae55a512d2d9bf72c6693a8",
+  "source_native_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
   "units": "metres",
   "coordinate_system": "glTF_Y_up",
   "floor_labels": [
@@ -46,8 +46,8 @@
     {
       "id": "floor-1",
       "file": "floor-1.glb",
-      "bytes": 4738024,
-      "sha256": "013dbe5c6fa53bd8fca1eb050a5b839d0ce7c47ac376b55e29fe6473bf9d34cf",
+      "bytes": 4738640,
+      "sha256": "a09999f060d544f36bf343604dc6391e5d764228e75873c81e953f6c6ea5d0ab",
       "source_objects": 663,
       "draw_groups": 31,
       "bounds_native_m": [
@@ -62,8 +62,8 @@
           4.6996002197265625
         ]
       ],
-      "triangles": 164682,
-      "source_native_sha256": "8110ce3a2cadc77d2170f4a01e0a595f530c95f6eae55a512d2d9bf72c6693a8",
+      "triangles": 164724,
+      "source_native_sha256": "648c4c276e972b20fe20b231c6da4d54995e1375aae8508c17a1d7ff866af725",
       "section_elevation_m": 4.6996,
       "section_caps": false,
       "floor_elevation_m": 3.0996,
@@ -148,8 +148,8 @@
     {
       "id": "neighborhood",
       "file": "neighborhood.glb",
-      "bytes": 11733432,
-      "sha256": "35086aa61f3252599681a6880c3fb170cb72752339ac7b8a6d6756564e66cefe",
+      "bytes": 11737016,
+      "sha256": "eda3fd691c68bdc42a934d3d2a3597414e6871419ab86d2a108b69944e5a5ca1",
       "source_objects": 2190,
       "draw_groups": 13,
       "bounds_native_m": [
@@ -164,8 +164,8 @@
           27.40839958190918
         ]
       ],
-      "triangles": 1153708,
-      "source_native_sha256": "becc2d856e49d46d3e9660d88598ad9802fffc7bdfe39f8483e33cc0c1643701",
+      "triangles": 1154176,
+      "source_native_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
       "section_elevation_m": null,
       "section_caps": false
     }
@@ -174,6 +174,6 @@
   "photo_matching_complete": false,
   "source_repository": "https://github.com/decentralize-dfw/angora",
   "geometry_source": "build/blender/angora21-working.blend",
-  "linked_master_sha256": "8110ce3a2cadc77d2170f4a01e0a595f530c95f6eae55a512d2d9bf72c6693a8",
+  "linked_master_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
   "native_source": "build/blender/angora21-working.blend"
 }

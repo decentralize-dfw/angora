@@ -1,0 +1,55 @@
+{
+  "render": "build/renders/full-scene-building-r26.png",
+  "kind": "Blender GLB geometry review; not a web shader screenshot",
+  "floor_index": null,
+  "upper_cut_m": 40,
+  "lower_cut": null,
+  "context_omitted_for_close_inspection": false,
+  "section_atlas_sha256": null,
+  "model_manifest_sha256": "464eca6cf3ff9096cdd4a2fd443ac077bd3a9c131e1339bcfc2a93d59828dfae",
+  "render_sha256": "90171af25bbb3e69d2cd944ac59df5391779b2ffb5e0aa3450f836a2a32a361b",
+  "assets": [
+    {
+      "id": "level-0",
+      "sha256": "c4b2127a5c3b9b65874dbab54da11190eb20ce5605cb004dc60950204dcd3217"
+    },
+    {
+      "id": "level-1",
+      "sha256": "eb2f9a585835a0e42dc5d317d4d508bfa1e0f7e7e19bcd1e042fc71212ce4988"
+    },
+    {
+      "id": "level-2",
+      "sha256": "17dcd7c3f9828223486905f6555a61c9521a774cf95ef67c3d1fe15927007c50"
+    },
+    {
+      "id": "level-3",
+      "sha256": "7336a22e1107205032c3c63215bb50dddaff3ec1a1139de8c1a88d56b856286c"
+    },
+    {
+      "id": "envelope",
+      "sha256": "b6b5506871dd0c84df08026c387e4c830c181efc8398bfb686366acc677e6dff"
+    },
+    {
+      "id": "garden",
+      "sha256": "a2648bbfa777a4ca189d6774ba213144b5c0fc0a718b974ad5c4c664538897e8"
+    },
+    {
+      "id": "context",
+      "sha256": "eda3fd691c68bdc42a934d3d2a3597414e6871419ab86d2a108b69944e5a5ca1"
+    }
+  ],
+  "annotations": false,
+  "furniture_visible": true,
+  "camera_native_m": [
+    75.0,
+    103.0,
+    163.0
+  ],
+  "camera_rotation_rad": [
+    0.6632030606269836,
+    -7.80107214382042e-08,
+    2.498091697692871
+  ],
+  "projection": "ORTHO",
+  "geometry_clipped": false
+}

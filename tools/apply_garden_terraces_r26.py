@@ -5,7 +5,10 @@ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'tools'))
 from apply_photo_review_patch import physical_uv
 assert Path(bpy.data.filepath).name=='50-neighborhood-10.blend'
 obj=next(o for o in bpy.data.objects if o.library is None and o.name.startswith('Terrain'))
-assert obj.get('garden_terrace_revision')!=26,'Already applied'
+if obj.get('garden_terrace_revision')==26:
+ assert '--replace-current-sha' in sys.argv,'Already applied; explicit current file hash required for a revised generated mesh'
+ expected=sys.argv[sys.argv.index('--replace-current-sha')+1]
+ assert hashlib.sha256(Path(bpy.data.filepath).read_bytes()).hexdigest()==expected,'Unexpected current terrain revision'
 data=json.load(gzip.open(ROOT/'build/cad/garden-terraces-r26.json.gz','rt'))
 before=hashlib.sha256(Path(bpy.data.filepath).read_bytes()).hexdigest()
 vertices=[];lookup={};remap=[]

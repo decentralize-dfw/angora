@@ -1,0 +1,50 @@
+{
+  "revision": 26,
+  "datum_absolute_BK_m": 1026.4,
+  "front_DORBAK_top_z_m": 2.7996,
+  "rear_TK_z_m": -0.1,
+  "pads": [
+    {
+      "name": "Ön bahçe",
+      "z_m": 2.7996,
+      "terrain_surface_area_m2": 131.29,
+      "evidence": "source_DORBAK_top"
+    },
+    {
+      "name": "Yan bahçe üst teras",
+      "z_m": 2.0664,
+      "terrain_surface_area_m2": 12.776,
+      "evidence": "intermediate_stair_landing_interpretation"
+    },
+    {
+      "name": "Yan bahçe alt teras",
+      "z_m": 1.0332,
+      "terrain_surface_area_m2": 13.314,
+      "evidence": "intermediate_stair_landing_interpretation"
+    },
+    {
+      "name": "Havuz bahçesi",
+      "z_m": -0.1,
+      "terrain_surface_area_m2": 486.734,
+      "evidence": "CAD_TK_annotation_minus_0_10"
+    }
+  ],
+  "horizontal_coverage_error_m2": 7.275957614183426e-11,
+  "source_terrain_triangles": 33005,
+  "output_triangles": 34528,
+  "roads_changed": false,
+  "neighbor_BK_levels_changed": false,
+  "pool_dimensions_changed": false,
+  "photo_match_approved": false,
+  "millimetric_survey_certified": false,
+  "perimeter_reveal_segments": 362,
+  "limitations": [
+    "Side terrace breaklines inferred from modeled stair landings",
+    "Plot limits registered from CAD; source registration still needs survey control",
+    "Unseen neighbor garden terraces remain under review"
+  ],
+  "native_library": "build/blender/layers/50-neighborhood-10.blend",
+  "before_sha256": "e7ebd939d8e77388187cb989fa419c9367cbbc005c549cdd9e8bab3050e5a2e2",
+  "after_sha256": "f58eb9546985ac714fd7d532cace69b8217b0ee03fe87ffebe4677ccb29122c8",
+  "welded_vertices": 20470
+}

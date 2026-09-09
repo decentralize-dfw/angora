@@ -24,7 +24,7 @@ for name,y0,y1,z,status in [
  p=own.intersection(box(-40,y0,40,y1)).difference(footprints).difference(stairs)
  pads.append({'name':name,'geometry':p,'z':z,'status':status})
 mask=unary_union([p['geometry'] for p in pads])
-vertices=[];faces=[];matids=[];areas={p['name']:0 for p in pads};original_area=0;remaining_area=0
+vertices=[];faces=[];matids=[];areas={p['name']:0 for p in pads};original_area=0;remaining_area=0;perimeter_reveals=0
 
 def pieces(g):
  if g.is_empty:return []
@@ -54,6 +54,20 @@ for face in terrain['faces']:
  append(rest,lambda xy:np.c_[xy,np.ones(len(xy))]@coeff);remaining_area+=rest.area
  for pad in pads:
   part=poly.intersection(pad['geometry']);append(part,pad['z']);areas[pad['name']]+=part.area
+  # Close the terrace perimeter down/up to the untouched surrounding terrain.
+  # Internal terrace risers are added separately below. This also closes edges
+  # alongside retained stair strips without changing the stair geometry.
+  polygon_part=unary_union(pieces(part))
+  edge=polygon_part.boundary.intersection(mask.boundary) if not polygon_part.is_empty and polygon_part.area>1e-8 else None
+  lines=[edge] if edge is not None and edge.geom_type=='LineString' else [g for g in getattr(edge,'geoms',[]) if g.geom_type=='LineString']
+  for line in lines:
+   coords=list(line.coords)
+   for a,b in zip(coords,coords[1:]):
+    if np.linalg.norm(np.array(a)-b)<1e-6:continue
+    za=float(np.dot([*a,1],coeff));zb=float(np.dot([*b,1],coeff));z=pad['z']
+    if max(abs(za-z),abs(zb-z))<1e-5:continue
+    first=len(vertices);vertices.extend([[*a,z],[*b,z],[*b,zb],[*a,za]])
+    faces.extend([np.array([first,first+1,first+2]),np.array([first,first+2,first+3])]);matids.extend([1,1]);perimeter_reveals+=1
 for left,right in zip(pads,pads[1:]):
  common=left['geometry'].boundary.intersection(right['geometry'].boundary)
  lines=[common] if common.geom_type=='LineString' else [g for g in getattr(common,'geoms',[]) if g.geom_type=='LineString']
@@ -68,7 +82,7 @@ report={'revision':26,'datum_absolute_BK_m':1026.4,'front_DORBAK_top_z_m':2.7996
  'pads':[{'name':p['name'],'z_m':p['z'],'terrain_surface_area_m2':round(areas[p['name']],3),'evidence':p['status']} for p in pads],
  'horizontal_coverage_error_m2':original_area-remaining_area-sum(areas.values()),'source_terrain_triangles':len(terrain['faces']),
  'output_triangles':len(faces),'roads_changed':False,'neighbor_BK_levels_changed':False,'pool_dimensions_changed':False,
- 'photo_match_approved':False,'millimetric_survey_certified':False,
+ 'photo_match_approved':False,'millimetric_survey_certified':False,'perimeter_reveal_segments':perimeter_reveals,
  'limitations':['Side terrace breaklines inferred from modeled stair landings','Plot limits registered from CAD; source registration still needs survey control','Unseen neighbor garden terraces remain under review']}
 data={'vertices':vertices,'faces':[f.tolist() for f in faces],'material_ids':matids,'report':report}
 with gzip.open(ROOT/'build/cad/garden-terraces-r26.json.gz','wt') as f:json.dump(data,f,separators=(',',':'))

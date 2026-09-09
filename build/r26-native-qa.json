@@ -1,0 +1,93 @@
+{
+  "revision": 26,
+  "status": "passed",
+  "stair_opening_sightlines": [
+    {
+      "xy_m": [
+        1.2,
+        1.4
+      ],
+      "first_visible_surface": "F0 | KAT 0$MERDİVEN",
+      "z_m": 2.755000114440918
+    },
+    {
+      "xy_m": [
+        1.2,
+        2.6
+      ],
+      "first_visible_surface": "F0 | KAT 0$MERDİVEN",
+      "z_m": 0.34400010108947754
+    },
+    {
+      "xy_m": [
+        2.0,
+        1.4
+      ],
+      "first_visible_surface": "F0 | KAT 0$MERDİVEN",
+      "z_m": 2.239000082015991
+    },
+    {
+      "xy_m": [
+        2.0,
+        2.6
+      ],
+      "first_visible_surface": "F0 | KAT 0$MERDİVEN",
+      "z_m": 0.8610002994537354
+    },
+    {
+      "xy_m": [
+        3.0,
+        1.4
+      ],
+      "first_visible_surface": "F0 | KAT 0$MERDİVEN",
+      "z_m": 1.5500000715255737
+    },
+    {
+      "xy_m": [
+        3.0,
+        2.6
+      ],
+      "first_visible_surface": "F0 | KAT 0$MERDİVEN",
+      "z_m": 1.5499999523162842
+    }
+  ],
+  "garden_terrace_probes": [
+    {
+      "xy_m": [
+        -8,
+        -5
+      ],
+      "z_m": 2.7995996475219727,
+      "expected_z_m": 2.7996
+    },
+    {
+      "xy_m": [
+        -8,
+        0
+      ],
+      "z_m": 2.0664005279541016,
+      "expected_z_m": 2.0664
+    },
+    {
+      "xy_m": [
+        -8,
+        4
+      ],
+      "z_m": 1.0332002639770508,
+      "expected_z_m": 1.0332
+    },
+    {
+      "xy_m": [
+        -8,
+        10
+      ],
+      "z_m": -0.09999942779541016,
+      "expected_z_m": -0.1
+    }
+  ],
+  "architecture_sha256": "78a7dcc3476d1b2e68eaf76fc98888116069c386ebac65d789c2832dcfc7618d",
+  "terrain_sha256": "f58eb9546985ac714fd7d532cace69b8217b0ee03fe87ffebe4677ccb29122c8",
+  "limitations": [
+    "Geometric checks do not certify survey accuracy or photo matching."
+  ]
+}

@@ -1,10 +1,10 @@
 {
   "master": "build/blender/angora21-working.blend",
-  "master_sha256": "8110ce3a2cadc77d2170f4a01e0a595f530c95f6eae55a512d2d9bf72c6693a8",
+  "master_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
   "source_objects": 5176,
   "linked_scene_objects": 5176,
-  "source_vertices": 9339755,
-  "linked_vertices": 9339755,
+  "source_vertices": 9340756,
+  "linked_vertices": 9340756,
   "files": [
     {
       "path": "build/blender/layers/shared-materials.blend",
@@ -26,8 +26,8 @@
     },
     {
       "path": "build/blender/layers/10-architecture.blend",
-      "bytes": 7427056,
-      "sha256": "4105de07c4dae4752294724135bbf067afb2c2ce64d31f1fff2d09139fe35776",
+      "bytes": 7426568,
+      "sha256": "78a7dcc3476d1b2e68eaf76fc98888116069c386ebac65d789c2832dcfc7618d",
       "collection": "10_ARCHITECTURE"
     },
     {
@@ -164,15 +164,15 @@
     },
     {
       "path": "build/blender/layers/50-neighborhood-10.blend",
-      "bytes": 1075455,
-      "sha256": "974bacff4023107f18e767e082ef898dfa5ba495700e3519fc1e35f9f9504db9",
+      "bytes": 1127670,
+      "sha256": "f58eb9546985ac714fd7d532cace69b8217b0ee03fe87ffebe4677ccb29122c8",
       "collection": "50_NEIGHBORHOOD / part 10"
     }
   ],
   "maximum_library_bytes": 8695675,
   "usage": "Open the master with the layers folder alongside it. Geometry libraries are individually editable.",
   "automation_required": false,
-  "review_revision": "R24",
+  "review_revision": "26",
   "review_geometry_bounds_m": {
     "B0 WC navy vanity": [
       [

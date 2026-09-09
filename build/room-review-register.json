@@ -1,5 +1,5 @@
 {
-  "native_master_sha256": "8110ce3a2cadc77d2170f4a01e0a595f530c95f6eae55a512d2d9bf72c6693a8",
+  "native_master_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
   "phase_1_complete": false,
   "source_photo_files": 202,
   "unique_source_photos": 184,
@@ -47,6 +47,11 @@
           "revision": 18,
           "change": "Removed roads crossing buildings 37/26, added CAD curb arterials, cut terrain beneath road surfaces and faired unmeasured grade transitions",
           "evidence": "build/road-terrain-native-qa.json"
+        },
+        {
+          "revision": 26,
+          "change": "Applied source stair aperture and terraced garden geometry; completed geometry checks, photographic acceptance remains open",
+          "evidence": "build/r26-native-qa.json"
         }
       ],
       "web_room_ids": []
@@ -143,7 +148,14 @@
       ],
       "photo_match_approved": false,
       "dimension_labels_enabled": false,
-      "web_room_ids": []
+      "web_room_ids": [],
+      "completed_corrections": [
+        {
+          "revision": 26,
+          "change": "Applied source stair aperture and terraced garden geometry; completed geometry checks, photographic acceptance remains open",
+          "evidence": "build/r26-native-qa.json"
+        }
+      ]
     },
     {
       "photo_group": "kat_1_bodrum_mutfak",
@@ -405,6 +417,13 @@
       "web_room_ids": [
         "f1-Z01",
         "f1-Z02"
+      ],
+      "completed_corrections": [
+        {
+          "revision": 26,
+          "change": "Applied source stair aperture and terraced garden geometry; completed geometry checks, photographic acceptance remains open",
+          "evidence": "build/r26-native-qa.json"
+        }
       ]
     },
     {

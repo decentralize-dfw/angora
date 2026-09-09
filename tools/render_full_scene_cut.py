@@ -10,7 +10,7 @@ ROOT=Path(__file__).resolve().parents[1]
 args=sys.argv[sys.argv.index('--')+1:];mode=args[0]
 interior=mode.startswith('walk-')
 floor=2 if mode=='gallery' else int(mode) if mode.isdigit() else None
-cut=[0,3.0996,6.3714,9.4705][floor]+1.6 if floor is not None else 40
+cut=[0,3.0996,6.3714,9.4705][floor]+(1.3 if floor==3 else 1.6) if floor is not None else 40
 bpy.ops.wm.read_factory_settings(use_empty=True)
 manifest=json.loads((ROOT/'build/web/full/manifest.json').read_text())
 for asset in manifest['assets']:

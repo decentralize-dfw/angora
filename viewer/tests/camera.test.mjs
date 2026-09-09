@@ -9,8 +9,8 @@ class Surface extends EventTarget {
   getRootNode(){return this;} setPointerCapture(){} releasePointerCapture(){}
   getBoundingClientRect(){return {left:0,top:0,width:this.clientWidth,height:this.clientHeight};}
 }
-function fixture(){
-  const surface=new Surface(),camera=new THREE.OrthographicCamera(-15,15,30,-30,.1,2500);
+function fixture(perspective=false){
+  const surface=new Surface(),camera=perspective?new THREE.PerspectiveCamera(16,390/844,.1,2500):new THREE.OrthographicCamera(-15,15,30,-30,.1,2500);
   camera.position.set(22,40,22);
   const c=new OrbitControls(camera,surface);configureCameraControls(c,THREE);
   c.target.set(0,4,0);c.minPolarAngle=c.maxPolarAngle=.53;c.update();
@@ -34,6 +34,14 @@ test('One-finger orbit locks elevation; two-finger pinch/pan also retains it',()
   assert.ok(Math.abs(camera.position.y-y)<1e-8,'pinch/pan elevation drift');
   assert.ok(c.target.distanceTo(beforePan)>0.1,'two-finger pan has effect');
   assert.notEqual(camera.zoom,zoom,'pinch changes zoom');c.dispose();
+});
+test('Perspective pinch changes optical zoom without changing altitude or target elevation',()=>{
+  const {c,camera,surface}=fixture(true),height=camera.position.y,targetY=c.target.y,zoom=camera.zoom;
+  pointer(surface,'pointerdown',1,100,350);pointer(surface,'pointerdown',2,200,450);
+  pointer(surface,'pointermove',1,70,370);pointer(surface,'pointermove',2,260,530);
+  pointer(surface,'pointerup',1,70,370);pointer(surface,'pointerup',2,260,530);settle(c);
+  assert.ok(Math.abs(camera.position.y-height)<1e-8);
+  assert.ok(Math.abs(c.target.y-targetY)<1e-8);assert.notEqual(camera.zoom,zoom);c.dispose();
 });
 test('Explicit single-finger pan stays on the horizontal plane',()=>{
   const {c,camera,surface}=fixture();c.touches.ONE=THREE.TOUCH.PAN;

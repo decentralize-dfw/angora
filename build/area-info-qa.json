@@ -1,0 +1,99 @@
+{
+  "floor_areas": [
+    {
+      "floor_index": 0,
+      "area_m2": 92.563,
+      "method": "horizontal_union_of_source_floor_finish_faces_including_split_levels",
+      "method_label": "Modeldeki kaplama izdüşümü",
+      "source_objects": [
+        "F0 | KAT 0$ZEMİN KAPLAMA"
+      ],
+      "survey_verified": false,
+      "legal_net_area": false,
+      "includes_wall_footprints_or_unpartitioned_faces": "source-dependent",
+      "source_architecture_sha256": "78a7dcc3476d1b2e68eaf76fc98888116069c386ebac65d789c2832dcfc7618d"
+    },
+    {
+      "floor_index": 1,
+      "area_m2": 124.828,
+      "method": "horizontal_union_of_source_floor_finish_faces_including_split_levels",
+      "method_label": "Modeldeki kaplama izdüşümü",
+      "source_objects": [
+        "F1 | KAT 1$ZEMİN KAPLAMA"
+      ],
+      "survey_verified": false,
+      "legal_net_area": false,
+      "includes_wall_footprints_or_unpartitioned_faces": "source-dependent",
+      "source_architecture_sha256": "78a7dcc3476d1b2e68eaf76fc98888116069c386ebac65d789c2832dcfc7618d"
+    },
+    {
+      "floor_index": 2,
+      "area_m2": 95.304,
+      "method": "horizontal_union_of_source_floor_finish_faces_including_split_levels",
+      "method_label": "Modeldeki kaplama izdüşümü",
+      "source_objects": [
+        "F2 | KAT 2$ZEMİN KAPLAMA"
+      ],
+      "survey_verified": false,
+      "legal_net_area": false,
+      "includes_wall_footprints_or_unpartitioned_faces": "source-dependent",
+      "source_architecture_sha256": "78a7dcc3476d1b2e68eaf76fc98888116069c386ebac65d789c2832dcfc7618d"
+    },
+    {
+      "floor_index": 3,
+      "area_m2": 64.013,
+      "method": "horizontal_union_of_source_floor_finish_faces_including_split_levels",
+      "method_label": "Modeldeki kaplama izdüşümü",
+      "source_objects": [
+        "F3 | KAT 3$ZEMİN KAPLAMA"
+      ],
+      "survey_verified": false,
+      "legal_net_area": false,
+      "includes_wall_footprints_or_unpartitioned_faces": "source-dependent",
+      "source_architecture_sha256": "78a7dcc3476d1b2e68eaf76fc98888116069c386ebac65d789c2832dcfc7618d"
+    }
+  ],
+  "site_areas": [
+    {
+      "name": "Ön bahçe · arazi yüzeyi",
+      "area_m2": 131.29,
+      "estimated": true,
+      "evidence": "source_DORBAK_top",
+      "method": "retained_terrain_triangle_horizontal_coverage; excludes existing source holes",
+      "survey_verified": false
+    },
+    {
+      "name": "Yan bahçe üst teras · arazi yüzeyi",
+      "area_m2": 12.776,
+      "estimated": true,
+      "evidence": "intermediate_stair_landing_interpretation",
+      "method": "retained_terrain_triangle_horizontal_coverage; excludes existing source holes",
+      "survey_verified": false
+    },
+    {
+      "name": "Yan bahçe alt teras · arazi yüzeyi",
+      "area_m2": 13.314,
+      "estimated": true,
+      "evidence": "intermediate_stair_landing_interpretation",
+      "method": "retained_terrain_triangle_horizontal_coverage; excludes existing source holes",
+      "survey_verified": false
+    },
+    {
+      "name": "Havuz bahçesi · arazi yüzeyi",
+      "area_m2": 486.734,
+      "estimated": true,
+      "evidence": "CAD_TK_annotation_minus_0_10",
+      "method": "retained_terrain_triangle_horizontal_coverage; excludes existing source holes",
+      "survey_verified": false
+    },
+    {
+      "name": "Havuz · tahmini su yüzeyi",
+      "area_m2": 32,
+      "estimated": true,
+      "evidence": "8 x 4 m photo-based modelling assumption, not a measured dimension",
+      "survey_verified": false
+    }
+  ],
+  "individual_room_areas_published": 0,
+  "unverified_room_partitions_excluded": true
+}

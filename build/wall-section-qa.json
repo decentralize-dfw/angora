@@ -2,7 +2,7 @@
   "version": 1,
   "coordinate_system": "glTF_XZ",
   "method": "paired_source_wall_faces_and_closed_thin_contours",
-  "source_architecture_sha256": "4105de07c4dae4752294724135bbf067afb2c2ce64d31f1fff2d09139fe35776",
+  "source_architecture_sha256": "78a7dcc3476d1b2e68eaf76fc98888116069c386ebac65d789c2832dcfc7618d",
   "source_fittings_sha256": "80c055a2500fa2021c768a6058511d79cdb516aeed80c2a2ca7d0a4012b56b3c",
   "exact_floor_heights_m": [
     1.6,
@@ -19,7 +19,7 @@
   "file": {
     "file": "sections.json",
     "bytes": 1093938,
-    "sha256": "99d045b12866e2e7b76bfc376b65b8cd71f50d0e168b192c38a5c7904340ab87"
+    "sha256": "fabf1ccead6aecde141ef0e041bdd3060a0a3f0ca909432bbad114ac0fb77901"
   },
   "exact_floor_sections": [
     {
@@ -51,6 +51,6 @@
     "wall_objects": 26,
     "wall_triangles": 5974,
     "wall_geometry_sha256": "a547366918f59ef7f229e926e3eea744cee95950b41836d169259383b1bc518d",
-    "prior_section_file_sha256": "54c6973c047c5692df53f971905a55bd289da5f256149259af60688ad0455892"
+    "prior_section_file_sha256": "99d045b12866e2e7b76bfc376b65b8cd71f50d0e168b192c38a5c7904340ab87"
   }
 }
