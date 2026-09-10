@@ -258,6 +258,112 @@ o I56'dır, model tarafındadır ve ayrıca yürütülmektedir.
   bilerek eklenmiş davranış; I05 tersini istiyor ve uygulamadan önce karar
   gerekiyor (kenara taşıma + kılavuz çizgi mi, gizleme mi).
 
+## R39 · Çevre binaları, garaj aracı ve teslim boyutu
+
+### Çevre binalarında iki okuma — tek geometri, tek indirme
+
+İstenen: yakın çevrede binalar bugünkü gibi kalsın, yakın Villa görünümünde
+bembeyaz olsun, aradaki geçiş yumuşak olsun.
+
+İki ayrı GLB yerine **tek geometri, iki gölgelendirme** yapıldı. Sebebi ölçüm:
+`context.glb` 14,3 MB'dir; ikinci bir kütle modeli indirmeyi büyütür, iki model
+arasında geçiş de kaçınılmaz olarak bir sıçrama üretir. Bunun yerine komşu
+bloklara ait malzemelere tek bir paylaşılan `massingBlend` uniform'u bağlandı:
+
+- `0` — bugünkü fotoğrafik okuma (yakın çevre ve bölge).
+- `1` — beyaz kütle modeli (Villa ve kat kesitleri).
+
+Karışım gölgelendiricide, **ışıktan önce** albedo üzerinde yapılıyor
+(`color_fragment`); pürüzlülük 0,86'ya, metallik 0'a, normal haritası da
+geometrik normale doğru aynı uniform'la yumuşatılıyor. Böylece beyaz kütle düz
+bir siluet değil, güneşin, gökyüzü probunun ve AO geçişinin okumaya devam ettiği
+bir hacim olarak kalıyor. Geçiş 900 ms, `smoothstep`; tek uniform olduğu için
+bütün bloklar bantlar hâlinde değil birlikte dönüyor. `prefers-reduced-motion`
+açıkken anında geçiyor.
+
+**Kaldırım tuzağı.** `stone_tile` hem komşu blokların kat döşemesi hem de yol
+kaldırımlarıdır (`CAD curb edges`). Malzeme adına göre beyazlatmak kaldırımları
+da beyaza çevirirdi. Bu yüzden geometri, batch'lemeden **önce**, düğüm adına göre
+ikiye ayrılıyor (`B10 | KAT 0$ZEMİN` bina, `CAD curb edges` saha) ve yalnızca iki
+tarafın da kullandığı malzemeler kopyalanıyor. `context.glb` için bu, 19 malzeme
+kümesine tek bir kopya ekliyor.
+
+**Yükleyicinin düğüm adlarını değiştirmesi.** İlk uygulama hiçbir binayı
+yakalamadı ve Villa görünümü olduğu gibi kaldı: `GLTFLoader` düğüm adlarını
+içeri alırken boşlukları `_` yapıyor, `[].:/`'yi atıyor ve tekrar eden adlara
+`_2` ekliyor. Yani sahnede ad `B10 | KAT 0$DUVAR` değil `B10_|_KAT_0$DUVAR`
+oluyor. Eşleşme artık adı geri çevirerek yapılıyor; teslim edilen dosyalara
+karşı doğrulandı: `context.glb` içinde **2010 bina düğümü** (11 malzeme, 497
+saha düğümü dışarıda), `level-1.glb` içinde **97 araç düğümü** (23 malzeme).
+Testi `PropertyBinding.sanitizeNodeName` ile yazıldı, yoksa aynı hata sessizce
+geri gelir.
+
+### Eş malzemelerin birleştirilmesi — ölçülen sayı
+
+"Aynı olanlar tek malzeme olsun" isteği, adı değil **değeri** karşılaştıran bir
+imza ile motora alındı: renk, pürüzlülük, metallik, opaklık, taraf, normal
+ölçeği ve sekiz doku yuvasının kimliği. Teslim edilen dosyalarda ölçülen sonuç:
+
+| Dosya | Malzeme | Değer olarak eş grup |
+|---|---|---|
+| context.glb | 19 | yok |
+| garden.glb | 27 | 3 (`cut limestone edge` ×2, `garden cream limestone` ×2, `black forged garden iron` ×3) |
+| level-1.glb | 74 | 1 (`Paint 1 Carmine` = `Paint 2 Carmine`) |
+| diğerleri | 47/68/33/15 | yok |
+
+Yani `context.glb` içindeki 19 çevre malzemesi bugün zaten teklidir; çoğaltma
+garden ve level-1 tarafındadır ve orada 4 grup birleşiyor. Birleştirme motorda
+durduğu için, modelin bir sonraki dışa aktarımı kaç kopya getirirse getirsin
+aynı geçiş onları da toplayacak — elle tekrar yapılacak bir iş kalmıyor.
+
+### Garaj aracı — tek soyut baz
+
+`R35 | Garage vehicle` 17 ayrı yüzeyle geliyordu (iki boya, jantlar, frenler,
+lastikler, cam, iç döşeme). Sahnede bir sahne aracı olduğu için hepsi tek bir
+nötr baz malzemeye indirildi (`#9ea3a8`, pürüzlülük 0,45, metallik 0,12).
+Çevresindeki garaj kendi yüzeylerini koruyor.
+
+### R39 yüzey adı değişikliğinin sessizce kapattığı ufuk geçişi
+
+R39 saha yüzeylerini yeniden adlandırmış: `grass` → `R31 | R39 continuous grass
+ground`, `asphalt` → `R31 | R37 fine asphalt aggregate`. `prepareContextSurfaces`
+adları tam eşitlikle arıyordu, dolayısıyla zemin normali yumuşatması ve ufuk
+karartması **tamamen devre dışı kalmıştı**. Eşleşme aileye göre yapıldı; testle
+sabitlendi.
+
+### "45 MB hâlâ çok" — ölçüm
+
+Araba değil. Ölçülen dağılım:
+
+| | Üçgen | Boyut |
+|---|---|---|
+| Garaj aracı (level-1 içinde) | 213 341 | ~0,9 MB (%2) |
+| `context.glb` | 1 541 556 | 14,3 MB |
+| `garden.glb` | 1 123 286 | 12,6 MB |
+| Kalan altı dosya | 2 762 210 | 13,3 MB |
+
+Teslimin **41 MB'ı geometri, 1,2 MB'ı doku**. Dokular WebP/1K'ya inmiş durumda;
+mobil için 256 px'e indirmek toplamı yalnızca %2,4 küçültüyor, çünkü ağırlık
+dokuda değil. Ağırlığın çoğu bitki örtüsü geometrisidir: `stone_tile` 536 842,
+`foliage` 516 880, `needle_dark` 307 042, `grass deep blade` 221 905 üçgen.
+
+Bu pakette **modele dokunmadan** yapılan iki ölçüm ve bir kazanç:
+
+- Draco nicemlemesi sıkılaştırıldı: konum 14 bit korunarak normal 10→8 bit,
+  UV 12 bit. **44,2 MB → 40,2 MB (%9)**, görüntüde fark yok, düğüm/malzeme/
+  üçgen sayıları birebir aynı (parite testiyle doğrulandı). UV'yi 10 bite
+  indirmek 1,6 MB daha kazandırıyor ama döşenmiş dokularda kayma riski taşıdığı
+  için alınmadı.
+- `weld` + `dedup`: kazanç %0,3. Geometri zaten kaynaşmış ve tekil.
+- Komşu blokların iç döşemeleri (244 düğüm, görünmeyen) silinseydi kazanç
+  yalnızca 0,42 MB olurdu; bu döşemeler örneklenmiş (12 mesh, 244 düğüm), yani
+  dosyada yer kaplamıyorlar. Karşılığında camdan bakışta boşluk riski var,
+  yapılmadı.
+
+**Karar bekleyen tek gerçek kaldıraç:** bitki geometrisinin sadeleştirilmesi.
+`garden.glb` + `context.glb` için %50 sadeleştirme teslimi ~40 MB'dan ~27 MB'a
+indirir; bu modelin görünümünü değiştirir, o yüzden istenmeden yapılmadı.
+
 ## Ek: DWG doğrudan okundu — metrekare orada yok
 
 `ANGORA-.dwg` (AC1021, AutoCAD 2007 binary) bu oturumda **doğrudan okundu**.

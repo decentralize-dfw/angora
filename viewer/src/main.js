@@ -19,6 +19,7 @@ import {createSiteContext} from './site-context.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
 import {prepareContextSurfaces} from './context-surfaces.js';
 import {batchContext} from './context-batch.js';
+import {mergeEqualMaterials,abstractVehicle,splitContextBuildings,createContextMassing} from './context-massing.js';
 import {handleEscape} from './interface-actions.js';
 import {createDeviceQA} from './device-qa.js';
 import {readShareState,shareSearch} from './share-state.js';
@@ -41,7 +42,7 @@ let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox, con
 let selected = 'neighborhood', ready = false, loading = false;
 let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations, walk;
 let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;
-let deviceQA,assetRevision=null,pendingCapture=null,contextLost=false;
+let deviceQA,assetRevision=null,pendingCapture=null,contextLost=false,massing=null;
 
 function message(text, error = false) {
   status.hidden = false; $('#load-message').textContent = text;
@@ -124,6 +125,7 @@ function renderFrame(time) {
       lighting.interior(walk.floor,walk.camera.position.toArray(),time);
     }
     const lightChanging=lighting.update(time);
+    const massingChanging=massing?.update(time);
     annotations?.update(selected,roomNamesVisible,measurementsVisible,Boolean(transition||flight?.active),walk?.active,activeCamera,walk?.room);
     hotspots?.update(activeCamera,walk?.active&&!walk.xrActive&&!walk.route);
     siteContext?.update(selected,activeCamera,controls.target,Boolean(transition||flight?.active),walk?.active);
@@ -135,7 +137,7 @@ function renderFrame(time) {
     }
     deviceQA?.sample(time,{draw_calls:renderer.info.render.calls,triangles:renderer.info.render.triangles,
       drawing_buffer:`${renderer.domElement.width}×${renderer.domElement.height}`,view:walk?.active?`${selected}:walk`:selected});
-    if(changing||transition||flying||lightChanging||deviceQA?.active)invalidate();
+    if(changing||transition||flying||lightChanging||massingChanging||deviceQA?.active)invalidate();
 }
 
 function resize() {
@@ -266,7 +268,7 @@ function selectView(id, initial = false) {
   panel('',false);
   if (!ready) return;
   const target = sectionHeight(id, fullHeight);
-  lighting.frame(id,contextBox);
+  lighting.frame(id,contextBox);massing?.set(id);
   lighting.interior(id.startsWith('f')?Number(id[1]):null,null);
   if(roomData)renderPropertyInfo($('#property-info'),roomData,id);
   if(!initial&&(id==='region'||previous==='region'))clouds();
@@ -286,7 +288,7 @@ function enterWalk(roomId) {
   roomId ||= walk.surface.data.stations.find(s=>s.floor_index===floor).room_id;
   flight.cancel();panel('',false);const station=walk.enter(roomId);selected='f'+station.floor_index;updateRoomUI(station);
   lighting.interior(station.floor_index,station.position);
-  controls.enabled=false;clip.constant=fullHeight;transition=null;lighting.frame('building');
+  controls.enabled=false;clip.constant=fullHeight;transition=null;lighting.frame('building');massing?.set('building');
   $('#app').dataset.walk='true';$('.camera-tools').hidden=true;$('#walk-tools').hidden=false;$('#enter-walk').hidden=true;
   $('#walk-room').value=station.room_id;
   document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===selected));
@@ -335,7 +337,8 @@ async function loadModel() {
           reportProgress();
         });
         received.set(asset.id, asset.bytes || 0);
-        staged.set(asset.id, asset.id==='context'?batchContext(gltf.scene):gltf.scene);
+        mergeEqualMaterials(gltf.scene); abstractVehicle(gltf.scene);
+        staged.set(asset.id, asset.id==='context'?batchContext(splitContextBuildings(gltf.scene)):gltf.scene);
         reportProgress();
         message(`Bütün model yükleniyor… ${++completed}/${manifest.assets.length}`);
       }
@@ -388,6 +391,7 @@ async function loadModel() {
     // The background is the sky itself now, so the edge fade takes the horizon
     // colour it used to read off it.
     prepareContextSurfaces(groups.get('context'),lighting.horizonColour);
+    massing=createContextMassing(groups.get('context'));massing.set(selected,true);
     try {
       // Every other model file carries ?v= from its manifest hash, but the site
       // context has no manifest entry, so it is revalidated instead. Without

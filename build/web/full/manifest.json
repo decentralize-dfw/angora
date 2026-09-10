@@ -20,8 +20,8 @@
     {
       "id": "level-0",
       "file": "level-0.glb",
-      "bytes": 7923936,
-      "sha256": "5d662bbac4c7b3db8c1930117d1222ed920928261e941d4896f90f280c9ba98a",
+      "bytes": 2130584,
+      "sha256": "b5faf309c3a26701ea4c9561ba4f84b342ac514e030dceb6c4cfd80432231616",
       "source_objects": 1170,
       "exported_mesh_nodes": 1170,
       "shared_meshes": 405,
@@ -49,8 +49,8 @@
     {
       "id": "level-1",
       "file": "level-1.glb",
-      "bytes": 21787712,
-      "sha256": "572ab0a2eb36abe6d8d1c2d4bfb27929cf6c5a657d4476ad279fade6b0ea0563",
+      "bytes": 5310344,
+      "sha256": "57c19b112b714693fcf80506b16ecad1568322927d27bbfafd586936e6395fde",
       "source_objects": 1023,
       "exported_mesh_nodes": 1023,
       "shared_meshes": 835,
@@ -78,8 +78,8 @@
     {
       "id": "level-2",
       "file": "level-2.glb",
-      "bytes": 18604028,
-      "sha256": "181584cb4d5751208835da895faac1688c73fd45134c92458d2536c6b4cbd31d",
+      "bytes": 2958676,
+      "sha256": "aa3c779940efbbd90a97f122edd10dbbe1e44e1373feb3d50d29def1efdcea53",
       "source_objects": 639,
       "exported_mesh_nodes": 639,
       "shared_meshes": 426,
@@ -107,8 +107,8 @@
     {
       "id": "level-3",
       "file": "level-3.glb",
-      "bytes": 7470624,
-      "sha256": "5901cabc845d2157798afea9cbb57c51176460f44cb376ba657f74afce4f6a28",
+      "bytes": 1130800,
+      "sha256": "ed6d512c109cbd3a1e4a61a2ae17a6a9e8a8783723ea2732cf587adba3ad2e25",
       "source_objects": 232,
       "exported_mesh_nodes": 232,
       "shared_meshes": 157,
@@ -136,8 +136,8 @@
     {
       "id": "envelope",
       "file": "envelope.glb",
-      "bytes": 4564252,
-      "sha256": "ec11944720c740813f1405f53a233a1a51139cb2c036ff77779fbb4c263b46fe",
+      "bytes": 2405832,
+      "sha256": "702dc82959ae9aeaf3e3c0bb70bdf8c42899e0aa2223514b08e979105a6ed389",
       "source_objects": 107,
       "exported_mesh_nodes": 107,
       "shared_meshes": 88,
@@ -165,8 +165,8 @@
     {
       "id": "garden",
       "file": "garden.glb",
-      "bytes": 23460484,
-      "sha256": "7eec1064335490ed27be1ea03ae1e5664e8c85ac22231702afd87dbaf9fa3aee",
+      "bytes": 13164576,
+      "sha256": "62f6f7a232c5fc4906c187be2c6c411de78ab617c281dee62e57f079a399df9b",
       "source_objects": 379,
       "exported_mesh_nodes": 379,
       "shared_meshes": 362,
@@ -194,8 +194,8 @@
     {
       "id": "context",
       "file": "context.glb",
-      "bytes": 25510176,
-      "sha256": "cf92858acd8144aa54e19037dc6988859fedaf3d1ce7114cd5c02e85ff49856a",
+      "bytes": 15030068,
+      "sha256": "e3e1ce4787451b8c261d4cdea03b46b25474fa279518a5cf625cf6d073ad1bda",
       "source_objects": 2507,
       "exported_mesh_nodes": 2507,
       "shared_meshes": 404,
@@ -246,8 +246,8 @@
   "section_cap_asset": {
     "id": "section-caps",
     "file": "section-caps.glb",
-    "bytes": 192260,
-    "sha256": "5f2dfa515d8c1fe841417c2b1450a32cb2e37927f71b2f1ce9f3234b321c3ffa",
+    "bytes": 86644,
+    "sha256": "eb432e733a69c078038d335078d746ecc393d1e8694d57b8b1bbf0226b2999b2",
     "source_objects": 7,
     "exported_mesh_nodes": 7,
     "shared_meshes": 7,
@@ -350,6 +350,19 @@
     "all_files_under_25_MiB": true,
     "full_detail_geometry": true,
     "procedural_materials_baked_to_repeatable_pbr_maps": 33,
-    "roundtrip_bounds_tolerance_m": 0.006
+    "roundtrip_bounds_tolerance_m": 0.006,
+    "texture_format": "webp",
+    "texture_max_px": 1024,
+    "geometry_codec": "draco",
+    "node_and_material_structure_preserved": true,
+    "geometry_simplified": false,
+    "delivery_bytes_before": 109513472,
+    "delivery_bytes_after": 42130880,
+    "geometry_quantization": {
+      "position": 14,
+      "normal": 8,
+      "texcoord": 12,
+      "colour": 8
+    }
   }
 }

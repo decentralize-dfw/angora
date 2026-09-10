@@ -20,9 +20,16 @@ export function smoothSurfaceNormals(geometry,upward=false) {
 
 export function smoothGroundNormals(geometry){smoothSurfaceNormals(geometry,true);}
 
+// R39 renamed the site surfaces (`grass` became `R31 | R39 continuous grass
+// ground`, and so on), which silently switched both the ground smoothing and the
+// horizon fade off. Match the family rather than one authored name so the next
+// rename cannot do it again.
+const GROUND_SURFACE=/(^|\b)grass( ground)?$|continuous grass/i;
+const FADED_SURFACE=/grass|asphalt|stone_tile|retaining|boundary limestone|soil body/i;
+
 export function prepareContextSurfaces(context,background) {
   let ground;
-  context.traverse(o=>{if(o.isMesh&&o.material.name==='grass')ground=o;});
+  context.traverse(o=>{if(o.isMesh&&!Array.isArray(o.material)&&GROUND_SURFACE.test(o.material.name))ground=o;});
   if(!ground)return;
   smoothGroundNormals(ground.geometry);ground.castShadow=false;
   const bounds=new THREE.Box3().setFromObject(ground);
@@ -30,7 +37,9 @@ export function prepareContextSurfaces(context,background) {
   context.traverse(o=>{
     if(!o.isMesh)return;
     for(const m of Array.isArray(o.material)?o.material:[o.material]){
-      if(seen.has(m)||!['grass','asphalt','stone_tile','Retaining wall rough limestone'].includes(m.name))continue;
+      // Building clones carry the same surface names as the site copies they
+      // were split from; only the site copies meet the horizon.
+      if(seen.has(m)||m.userData.contextBuilding||!FADED_SURFACE.test(m.name))continue;
       seen.add(m);const previous=m.onBeforeCompile,previousKey=m.customProgramCacheKey();
       m.onBeforeCompile=(shader,renderer)=>{
         previous.call(m,shader,renderer);

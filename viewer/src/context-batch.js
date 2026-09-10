@@ -37,7 +37,7 @@ export function batchContext(root) {
     }
     const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(positions,3));
     g.setAttribute('normal',new THREE.BufferAttribute(normals,3));g.setAttribute('uv',new THREE.BufferAttribute(uvs,2));g.setIndex(new THREE.BufferAttribute(indices,1));
-    g.computeBoundingBox();g.computeBoundingSphere();const mesh=new THREE.Mesh(g,material);mesh.name='Context | '+material.name;result.add(mesh);
+    g.computeBoundingBox();g.computeBoundingSphere();const mesh=new THREE.Mesh(g,material);mesh.name='Context | '+material.name+(material.userData.contextBuilding?' · massing':'');result.add(mesh);
   }
   for(const g of originals)g.dispose();for(const mesh of instances)mesh.dispose();
   return result;
