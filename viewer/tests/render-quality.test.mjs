@@ -7,7 +7,14 @@ import {smoothGroundNormals} from '../src/context-surfaces.js';
 import {batchContext} from '../src/context-batch.js';
 
 test('Phone resolution and depth precision remain stable across orbit scales',()=>{
-  assert.equal(renderPixelRatio(390,700,3,true),3);
+  // A phone must not be asked to draw its whole native panel. 390x700 at dpr 3
+  // is 2.46 M drawing-buffer pixels, which is what made this scene stutter and
+  // run out of memory on a handset. The budget is 1.5 M and never above 2x.
+  const phone=renderPixelRatio(390,700,3,true);
+  assert.ok(phone<=2,`phone ratio ${phone}`);
+  assert.ok(390*700*phone*phone<=1_500_000,'phone must stay inside its budget');
+  // A desktop keeps its own, and neither ever drops below native.
+  assert.ok(renderPixelRatio(1600,900,2,false)>=1);
   const bounds=new THREE.Box3(new THREE.Vector3(-140,-16,-150),new THREE.Vector3(175,30,170));
   const camera=new THREE.PerspectiveCamera(16,390/700),target=new THREE.Vector3();
   for(const radius of [60,160,1200]){

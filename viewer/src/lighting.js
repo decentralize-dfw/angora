@@ -98,7 +98,7 @@ export function createLighting(renderer, scene, camera, clip) {
   const horizon=new THREE.Color('#e4e9ed');
   const hemisphere=new THREE.HemisphereLight(0xebf2ff,0xb8b2a8,.5);scene.add(hemisphere);
   const sun=new THREE.DirectionalLight(0xfff2df,1.55),direction=new THREE.Vector3(-.45,.85,-.3).normalize();
-  sun.castShadow=true;sun.shadow.mapSize.setScalar(compact?2048:4096);
+  sun.castShadow=true;sun.shadow.mapSize.setScalar(compact?1024:4096);
   sun.shadow.bias=-.000025;sun.shadow.normalBias=.018;sun.shadow.radius=2.5;
   sun.shadow.camera.near=.5;sun.shadow.camera.far=700;scene.add(sun,sun.target);
   const sky=new Sky();sky.scale.setScalar(10000);sky.material.uniforms.turbidity.value=3;
@@ -119,25 +119,35 @@ export function createLighting(renderer, scene, camera, clip) {
   // exposes for, so unscaled it reaches the curve already saturated and lands
   // as flat white with no blue left in it. This holds it where a sky belongs.
   scene.backgroundIntensity=.55;
-  // Aerial perspective. Every distant building arrived as saturated and as
-  // contrasty as the ones in front of it, which is what makes a settlement read
-  // as a model rather than a place. Presentation, not measurement: real air
-  // takes almost nothing out over 300 m, and the density is set per view so the
-  // region frame does not simply dissolve.
-  scene.fog=new THREE.FogExp2(horizon.getHex(),.0014);
-  const target=new THREE.WebGLRenderTarget(1,1,{type:THREE.HalfFloatType,samples:referenceProfile.msaaSamples});
-  const composer=new EffectComposer(renderer,target),beauty=new RenderPass(scene,camera);
-  const ao=new SectionGTAOPass(scene,camera,clip,compact?.5:.85);
-  const smaa=new SMAAPass(),bloom=new LinearBloomPass();
-  ao.enabled=referenceProfile.aoEnabled;
-  configurePostprocessing(composer,{beauty,ao,smaa,bloom,output:new ShaderPass(GradeShader),
-    dither:new ShaderPass(DisplayDitherShader)});
+  // No haze. Distance fog was tried here for depth and it read as a grey cast
+  // over the whole settlement rather than as air, which is worse than the flat
+  // look it was meant to fix.
+  scene.fog=null;
+  // A phone draws the scene straight to the canvas. The desktop chain is six
+  // full-screen passes over a half-float target - occlusion, antialiasing,
+  // bloom, grade, dither - and on a handset that is the whole frame budget
+  // spent before a single wall is drawn, which is what made it stutter, run hot
+  // and eventually lose the context. Three applies the same ACES curve and sRGB
+  // conversion itself when it draws to the canvas, so the image keeps its
+  // exposure and its colour; it loses the crevice shading and the glare.
+  let composer=null,beauty=null,ao=null;
+  if(!compact){
+    const target=new THREE.WebGLRenderTarget(1,1,{type:THREE.HalfFloatType,samples:referenceProfile.msaaSamples});
+    composer=new EffectComposer(renderer,target);beauty=new RenderPass(scene,camera);
+    ao=new SectionGTAOPass(scene,camera,clip,.85);
+    const smaa=new SMAAPass(),bloom=new LinearBloomPass();
+    ao.enabled=referenceProfile.aoEnabled;
+    configurePostprocessing(composer,{beauty,ao,smaa,bloom,output:new ShaderPass(GradeShader),
+      dither:new ShaderPass(DisplayDitherShader)});
+  }
   let day=172,hour=12.5,environmentMode='procedural-sky';
   let soft=true,shadowDistance=110;
   const preparedMaterials=new Set();
   const interior=Array.from({length:4},()=>{
     const light=new THREE.SpotLight(0xffead5,0,6,Math.PI*.37,.72,2);
-    light.castShadow=true;light.shadow.mapSize.setScalar(compact?512:1024);
+    // Four shadow-casting spots is four extra scene passes every time a fixture
+    // changes. Indoors on a phone the fixtures light, they do not cast.
+    light.castShadow=!compact;light.shadow.mapSize.setScalar(512);
     light.shadow.bias=-.0001;light.shadow.normalBias=.01;light.shadow.camera.near=.06;
     light.visible=false;scene.add(light,light.target);return light;
   });
@@ -150,7 +160,6 @@ export function createLighting(renderer, scene, camera, clip) {
     hemisphere.intensity=.08+.42*daylight;scene.environmentIntensity=.08+(soft?.85:.65)*daylight;
     sun.shadow.radius=soft?2.5:1;sun.shadow.intensity=soft?.82:1;
     horizon.set(0x182734).lerp(new THREE.Color(0xe4e9ed),daylight);
-    scene.fog.color.copy(horizon);
     sky.material.uniforms.sunPosition.value.copy(direction);
     skyCamera.update(renderer,skyScene);
     sun.position.copy(sun.target.position).addScaledVector(direction,shadowDistance);
@@ -207,14 +216,17 @@ export function createLighting(renderer, scene, camera, clip) {
       sun.position.copy(sun.target.position).addScaledVector(direction,shadowDistance);
       Object.assign(sun.shadow.camera,{left:-extent,right:extent,top:extent,bottom:-extent});
       sun.shadow.camera.updateProjectionMatrix();renderer.shadowMap.needsUpdate=true;
-      scene.fog.density=view==='region'?.00045:view==='neighborhood'?.0014:.001;
       // Region frames the whole settlement, where a crevice-scale radius has
       // nothing left to describe and only costs, so occlusion stops there.
-      ao.enabled=referenceProfile.aoEnabled&&view!=='region';setTime();
+      if(ao)ao.enabled=referenceProfile.aoEnabled&&view!=='region';
+      setTime();
       for(const material of preparedMaterials)setMaterialScale(material,view);
     },
-    pixelRatio(ratio){composer.setPixelRatio(ratio);},
-    resize(w,h){composer.setSize(w,h);},
-    render(currentCamera){beauty.camera=currentCamera;ao.setCamera(currentCamera);if(renderer.xr.isPresenting)renderer.render(scene,currentCamera);else composer.render();}
+    pixelRatio(ratio){composer?.setPixelRatio(ratio);},
+    resize(w,h){composer?.setSize(w,h);},
+    render(currentCamera){
+      if(!composer||renderer.xr.isPresenting){renderer.render(scene,currentCamera);return;}
+      beauty.camera=currentCamera;ao.setCamera(currentCamera);composer.render();
+    }
   };
 }

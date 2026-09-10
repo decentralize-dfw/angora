@@ -8,7 +8,7 @@ import {ROOM_AREAS} from './room-areas.js';
 // range held a 12 px floor, which is what kept them large over a small plan and
 // what made the layout drop them rather than let them shrink.
 export function labelFontSize(pixelsPerMetre) {
-  return THREE.MathUtils.clamp(7+Math.log2(Math.max(1,pixelsPerMetre)/12)*2.2,7,13);
+  return THREE.MathUtils.clamp(7+Math.log2(Math.max(1,pixelsPerMetre)/12)*1.9,7,11);
 }
 // The owner's schedule comes first. Failing that the per-room area is not in
 // the source and cannot be derived here: rooms.json

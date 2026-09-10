@@ -106,10 +106,12 @@ function renderFrame(time) {
     framePending = false;
     if(contextLost)return;
     if (transition) {
-      const t = Math.min(1, (time - transition.start) / 1050);
+      const t = Math.min(1, (time - transition.start) / transition.span);
       clip.constant = THREE.MathUtils.lerp(transition.from, transition.to, smoothStep(t));
-      renderer.shadowMap.needsUpdate = true;
-      if (t >= 1) transition = null;
+      // Re-rendering every shadow map on every frame of the cut was why changing
+      // floor crawled: a 4096 sun map plus the fixtures, sixty times a second,
+      // for a whole second. They only have to be right once the cut settles.
+      if (t >= 1) {transition = null; renderer.shadowMap.needsUpdate = true;}
     }
     const flying=flight?.update(time);
     caps?.update(clip.constant, clip.constant < fullHeight - 0.001);
@@ -192,8 +194,12 @@ function travelRoom(roomId){
 function setup() {
   scene = new THREE.Scene(); scene.background = new THREE.Color('#e9eeed');
   camera = new THREE.PerspectiveCamera(16,1,1,2000);camera.position.set(60,100,60);
-  renderer = new THREE.WebGLRenderer({antialias:false, alpha:false, powerPreference:'high-performance'});
-  renderer.setPixelRatio(renderPixelRatio(host.clientWidth,host.clientHeight,devicePixelRatio,matchMedia('(pointer: coarse)').matches));
+  // A phone draws straight to the canvas, so the canvas has to do the
+  // antialiasing: the chain that used to do it is not in that path. On desktop
+  // the composer's SMAA owns it and canvas MSAA would be paying twice.
+  const coarse=matchMedia('(pointer: coarse)').matches;
+  renderer = new THREE.WebGLRenderer({antialias:coarse, alpha:false, powerPreference:'high-performance'});
+  renderer.setPixelRatio(renderPixelRatio(host.clientWidth,host.clientHeight,devicePixelRatio,coarse));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.localClippingEnabled = true;
   renderer.info.autoReset=false;
@@ -232,7 +238,12 @@ function setup() {
     message('3D grafik bağlantısı kesildi. Sayfayı yeniden açarak devam edebilirsin.',true);
     $('#retry').onclick=()=>location.reload();
   });
-  const draco = new DRACOLoader(); draco.setDecoderPath(decoderRoot.href); draco.setWorkerLimit(2);
+  // Seven compressed meshes were being unpacked two at a time on hardware that
+  // has six or eight cores, which is dead time in the middle of the wait. One
+  // core is left for the page, and a phone keeps one fewer decoder in flight so
+  // the peak memory of the decode does not stack up on top of the scene.
+  const draco = new DRACOLoader(); draco.setDecoderPath(decoderRoot.href);
+  draco.setWorkerLimit(Math.max(2,Math.min(coarse?3:4,(navigator.hardwareConcurrency||4)-1)));
   loader = new GLTFLoader(); loader.setDRACOLoader(draco);
   window.addEventListener('resize', resize);
   renderer.xr.addEventListener('sessionstart', () => renderer.setAnimationLoop(renderFrame));
@@ -261,7 +272,8 @@ function selectView(id, initial = false) {
   if(!initial&&(id==='region'||previous==='region'))clouds();
   if (initial || matchMedia('(prefers-reduced-motion: reduce)').matches) {
     clip.constant = target; transition = null;
-  } else transition = {from:clip.constant, to:target, start:performance.now()};
+  } else transition = {from:clip.constant, to:target, start:performance.now(),
+    span:matchMedia('(pointer: coarse)').matches?520:820};
   // All assets stay loaded and visible; floor changes preserve orbit, pan and zoom.
   if(initial||!previous.startsWith('f')||!id.startsWith('f'))frame(initial);
   else if(previous!==id)frame(false,true);
@@ -417,9 +429,13 @@ async function loadModel() {
     console.error('Model load failed', error);
   } finally {loading = false;}
 }
+// Zoom must not move the camera. This used to fly to controls.minPolarAngle, so
+// every tap on + or - also tilted the view back to its flattest angle and the
+// building appeared to shift under you. Only the zoom changes now.
 function zoom(factor){
   if(!ready)return;
-  flight.go({target:controls.target,polar:controls.minPolarAngle,span:camera.position.distanceTo(controls.target)*2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2)),zoom:THREE.MathUtils.clamp(camera.zoom*factor,controls.minZoom,controls.maxZoom)});
+  camera.zoom=THREE.MathUtils.clamp(camera.zoom*factor,controls.minZoom,controls.maxZoom);
+  camera.updateProjectionMatrix();invalidate();
 }
 function mode(pan) {
   controls.touches.ONE = pan ? THREE.TOUCH.PAN : THREE.TOUCH.ROTATE;
