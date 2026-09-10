@@ -8,6 +8,15 @@ const makeMaterial=(uniforms,fragmentShader)=>new ShaderMaterial({uniforms,verte
   depthTest:false,depthWrite:false,toneMapped:false});
 const makeTarget=()=>new WebGLRenderTarget(1,1,{type:HalfFloatType,minFilter:LinearFilter,magFilter:LinearFilter,depthBuffer:false});
 
+// A highlight that overflows the half-float scene buffer arrives here as Inf,
+// and the Inf/Inf in the soft-knee weight below turns it into NaN. The blur is
+// separable, so one such sample spreads along a row and then down a column and
+// reaches the screen as a solid axis-aligned block. Both shaders that sample a
+// buffer drop non-finite values first: equal(c,c) is false only for NaN, and
+// the clamp holds a single hot sample to a level ordinary highlights never
+// reach, so one bad pixel can no longer be smeared across the frame.
+export const FINITE_RGB='vec3 finiteRgb(vec3 c,float limit){return min(mix(vec3(0.0),c,vec3(equal(c,c))),vec3(limit));}';
+
 export function softKneeWeight(luminance,threshold,knee) {
   const soft=Math.max(0,Math.min(2*knee,luminance-threshold+knee));
   return Math.max(luminance-threshold,soft*soft/(4*knee+1e-5))/Math.max(luminance,1e-5);
@@ -18,10 +27,11 @@ export function softKneeWeight(luminance,threshold,knee) {
 export class LinearBloomPass extends Pass {
   constructor(profile=referenceProfile) {
     super();this.bright=makeTarget();this.blurA=makeTarget();this.blurB=makeTarget();
-    this.extract=makeMaterial({source:{value:null},threshold:{value:profile.bloomThreshold},knee:{value:profile.bloomKnee}},`
-      varying vec2 vUv;uniform sampler2D source;uniform float threshold,knee;
+    this.extract=makeMaterial({source:{value:null},threshold:{value:profile.bloomThreshold},knee:{value:profile.bloomKnee},clampMax:{value:profile.bloomClamp}},`
+      varying vec2 vUv;uniform sampler2D source;uniform float threshold,knee,clampMax;
+      ${FINITE_RGB}
       void main(){
-        vec3 c=texture2D(source,vUv).rgb;
+        vec3 c=finiteRgb(texture2D(source,vUv).rgb,clampMax);
         float l=dot(c,vec3(.2126,.7152,.0722));
         float s=clamp(l-threshold+knee,0.0,2.0*knee);
         float contribution=max(l-threshold,s*s/(4.0*knee+1e-5))/max(l,1e-5);
@@ -35,9 +45,12 @@ export class LinearBloomPass extends Pass {
         sum+=(texture2D(source,vUv+direction*3.230769).rgb+texture2D(source,vUv-direction*3.230769).rgb)*.070270;
         gl_FragColor=vec4(sum,1.0);
       }`);
-    this.combine=makeMaterial({source:{value:null},glare:{value:this.blurB.texture},strength:{value:profile.bloomStrength}},`
-      varying vec2 vUv;uniform sampler2D source,glare;uniform float strength;
-      void main(){vec4 c=texture2D(source,vUv);gl_FragColor=vec4(c.rgb+texture2D(glare,vUv).rgb*strength,c.a);}`);
+    this.combine=makeMaterial({source:{value:null},glare:{value:this.blurB.texture},strength:{value:profile.bloomStrength},clampMax:{value:profile.bloomClamp}},`
+      varying vec2 vUv;uniform sampler2D source,glare;uniform float strength,clampMax;
+      ${FINITE_RGB}
+      void main(){
+        vec4 c=texture2D(source,vUv);
+        gl_FragColor=vec4(finiteRgb(c.rgb,clampMax)+finiteRgb(texture2D(glare,vUv).rgb,clampMax)*strength,c.a);}`);
     this.quad=new FullScreenQuad(null);
   }
   setSize(width,height) {
