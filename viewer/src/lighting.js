@@ -5,6 +5,8 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import {DisplayDitherShader} from './display-dither.js';
 import { HDRLoader } from 'three/addons/loaders/HDRLoader.js';
 import {solarPosition} from './daylight.js';
 import {prepareMaterialResponse,setMaterialScale} from './material-response.js';
@@ -58,6 +60,31 @@ export class SectionGTAOPass extends GTAOPass {
   }
 }
 
+// The environment a surface reflects has to have a GROUND. A sky-only probe -
+// the procedural sky, and the puresky HDR that replaces it - leaves the whole
+// lower hemisphere empty, so every eave, soffit, balcony underside and window
+// reveal is lit from above and by nothing from below, and glazing reflects a
+// void under the horizon. A studio probe carries a bright floor underfoot for
+// exactly this reason: it is what fills the underside of everything standing
+// on it.
+//
+// The level is not picked to look right. For a sky of radiance L the irradiance
+// reaching flat ground is PI*L and it leaves again as albedo*L, so the panel is
+// the site's own albedo rendered unlit at the sky's own level.
+const GROUND_ALBEDO='#6f7a60'; // the settlement's grass, paving and roads, averaged
+export function buildEnvironment(renderer,{sky=null,background=null}) {
+  const probe=new THREE.Scene();
+  if(sky)probe.add(sky);
+  if(background){background.mapping=THREE.EquirectangularReflectionMapping;probe.background=background;}
+  const ground=new THREE.Mesh(new THREE.PlaneGeometry(8000,8000),
+    new THREE.MeshBasicMaterial({color:new THREE.Color(GROUND_ALBEDO)}));
+  ground.rotation.x=-Math.PI/2;ground.position.y=-1;probe.add(ground);
+  const generator=new THREE.PMREMGenerator(renderer);
+  const target=generator.fromScene(probe,.06,.1,20000);
+  probe.remove(ground);ground.geometry.dispose();ground.material.dispose();generator.dispose();
+  return target;
+}
+
 export function isGlazing(material) {
   return material.transmission>0 || (material.transparent && material.opacity<.98) || /glass|glazing|cam yüzey/i.test(material.name);
 }
@@ -74,16 +101,16 @@ export function createLighting(renderer, scene, camera, clip) {
   const sky=new Sky();sky.scale.setScalar(10000);sky.material.uniforms.turbidity.value=3;
   sky.material.uniforms.rayleigh.value=2;sky.material.uniforms.mieCoefficient.value=.003;
   sky.material.uniforms.sunPosition.value.copy(direction);
-  const skyScene=new THREE.Scene();skyScene.add(sky);
-  const pmrem=new THREE.PMREMGenerator(renderer);let environment=pmrem.fromScene(skyScene,.06,.1,20000);
+  let environment=buildEnvironment(renderer,{sky});
   scene.environment=environment.texture;scene.environmentIntensity=1.0;
-  sky.geometry.dispose();sky.material.dispose();pmrem.dispose();
+  sky.geometry.dispose();sky.material.dispose();
   const target=new THREE.WebGLRenderTarget(1,1,{type:THREE.HalfFloatType,samples:referenceProfile.msaaSamples});
   const composer=new EffectComposer(renderer,target),beauty=new RenderPass(scene,camera);
   const ao=new SectionGTAOPass(scene,camera,clip,compact?.5:.85);
   const smaa=new SMAAPass(),bloom=new LinearBloomPass();
   ao.enabled=referenceProfile.aoEnabled;
-  configurePostprocessing(composer,{beauty,ao,smaa,bloom,output:new OutputPass()});
+  configurePostprocessing(composer,{beauty,ao,smaa,bloom,output:new OutputPass(),
+    dither:new ShaderPass(DisplayDitherShader)});
   let day=172,hour=12.5,environmentMode='procedural-sky';
   let soft=true,shadowDistance=110;
   const preparedMaterials=new Set();
@@ -116,8 +143,11 @@ export function createLighting(renderer, scene, camera, clip) {
         if(luminance>8){const scale=8/luminance;pixels[i]*=scale;pixels[i+1]*=scale;pixels[i+2]*=scale;}
       }
       hdr.needsUpdate=true;
-      const generator=new THREE.PMREMGenerator(renderer),next=generator.fromEquirectangular(hdr);
-      scene.environment=next.texture;environment.dispose();environment=next;generator.dispose();hdr.dispose();environmentMode='hdr';setTime();
+      // The HDR is a pure sky, so it goes through the same probe as the
+      // procedural one rather than straight into the scene: it supplies the
+      // dome, the probe supplies the ground under it.
+      const next=buildEnvironment(renderer,{background:hdr});
+      scene.environment=next.texture;environment.dispose();environment=next;hdr.dispose();environmentMode='hdr';setTime();
     },
     setFixtures(data){fixtures.setFixtures(data);},
     interior(floor,position,time){fixtures.select(floor,position,time);},

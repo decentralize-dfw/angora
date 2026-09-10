@@ -10,10 +10,13 @@ import {LinearBloomPass,softKneeWeight} from '../src/linear-bloom.js';
 import {applyRenderProfile,referenceProfile} from '../src/render-profile.js';
 
 test('r180 AA runs in linear-sRGB before the single final display conversion',()=>{
-  const passes={beauty:{name:'beauty'},ao:{name:'AO'},smaa:{name:'SMAA'},bloom:{name:'linear bloom'},output:{name:'Output'}};
+  const passes={beauty:{name:'beauty'},ao:{name:'AO'},smaa:{name:'SMAA'},bloom:{name:'linear bloom'},
+    output:{name:'Output'},dither:{name:'display dither'}};
   const composer={passes:[],addPass(pass){this.passes.push(pass);}};
   configurePostprocessing(composer,passes);
-  assert.deepEqual(composer.passes,[passes.beauty,passes.ao,passes.smaa,passes.bloom,passes.output]);
+  // The dither is last on purpose: it works in display space, so applying it
+  // before the curve would let the curve reshape it back into a step.
+  assert.deepEqual(composer.passes,[passes.beauty,passes.ao,passes.smaa,passes.bloom,passes.output,passes.dither]);
 });
 
 test('Reference production baseline has ACES, restrained linear bloom and no idle render switch',()=>{
