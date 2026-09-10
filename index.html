@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#edf0eb" />
+  <meta name="description" content="Angora 21. Villayı kat kat keşfedin; plan, gün ışığı ve 360° oda turu." />
+  <title>Angora 21 · MERGVS</title>
+  <script type="module" crossorigin src="./web-assets/index-BC1ohemL.js"></script>
+  <link rel="stylesheet" crossorigin href="./web-assets/index-BJ1og1jW.css">
+</head>
+<body>
+<main id="app" data-scale="neighborhood">
+  <div id="viewport" aria-label="Angora villasının etkileşimli 3D modeli"></div>
+  <div id="cloud-transition" aria-hidden="true"></div>
+  <header class="topbar">
+    <div class="identity"><span class="brand">MERGVS</span><span class="brand-divider"></span><h1>Angora <strong>21</strong></h1></div>
+    <button id="open-info" class="quiet-button" aria-expanded="false" aria-controls="info-panel">Bilgi <span aria-hidden="true">↗</span></button>
+  </header>
+  <nav class="scale-picker" aria-label="Görünüm ölçeği">
+    <button data-view="region" aria-pressed="false">Bölge</button>
+    <button data-view="neighborhood" aria-pressed="true">Yakın çevre</button>
+    <button data-view="building" aria-pressed="false">Villa</button>
+  </nav>
+  <div class="view-description"><h2 id="view-title">Yakın çevre</h2><p id="section-label">Angora Evleri · Ankara</p></div>
+  <div class="side-tools">
+    <button id="toggle-plan" aria-pressed="false" title="Plan ve izometrik görünüm">Plan</button>
+    <button id="open-options" aria-expanded="false" aria-controls="options-panel" title="Mobilya, ölçüler ve ışık">Ayar</button>
+    <button id="reset-view" aria-label="Görünümü ortala" title="Ortala">⌖</button>
+  </div>
+  <section id="options-panel" class="panel options-panel" aria-label="Görünüm ayarları" hidden>
+    <div class="panel-heading"><h2>Görünüm</h2><button data-close-panel="options-panel" aria-label="Ayarları kapat">×</button></div>
+    <div class="scene-options">
+      <button id="toggle-furniture" aria-pressed="true" disabled>Mobilya</button>
+      <button id="toggle-rooms" aria-pressed="true" disabled>Oda adları</button>
+      <button id="toggle-measurements" aria-pressed="false" disabled>Ölçüler</button>
+    </div>
+    <div class="daylight-heading"><label for="daylight-hour">Gün ışığı</label><output id="daylight-time" for="daylight-hour">12:30</output></div>
+    <label class="lighting-choice" for="lighting-style">Işık <select id="lighting-style"><option value="soft">Yumuşak gün ışığı</option><option value="sun">Doğrudan güneş</option></select></label>
+    <input id="daylight-hour" type="range" min="6" max="21" step="0.0833333333" value="12.5" aria-label="Gün ışığı saati" />
+    <div class="range-endpoints"><span>06:00</span><span>21:00</span></div>
+    <div class="daylight-footer"><select id="daylight-season" aria-label="Gün ışığı tarihi"><option value="172">21 Haziran</option><option value="80">21 Mart</option><option value="355">21 Aralık</option></select><button id="toggle-lights" aria-pressed="true">İç ışıklar</button></div>
+    <p class="small-note" id="solar-note">Yerel saat · Görsel gün ışığı çalışması</p>
+    <details class="device-qa">
+      <summary>Cihaz ve görüntü kontrolü</summary>
+      <p>15 saniye boyunca sahneyi hareket ettir. Ölçüm ve görüntüler yalnızca cihazına indirilir; otomatik gönderilmez.</p>
+      <label for="qa-device">Cihaz modeli / sistem sürümü (isteğe bağlı)</label>
+      <input id="qa-device" type="text" maxlength="100" placeholder="Örn. iPhone modeli, iOS sürümü" autocomplete="off" />
+      <div class="qa-actions"><button id="qa-start" data-needs-model disabled>15 sn ölç</button><button id="qa-save" disabled>Raporu indir</button><button id="qa-screenshot" data-needs-model disabled>Sahneyi indir</button></div>
+      <p id="qa-result" role="status">Henüz ölçüm yok. Ölçüm, gerçek cihaz veya görsel kalite onayı değildir.</p>
+    </details>
+  </section>
+  <section id="info-panel" class="panel info-panel" aria-label="Villa bilgileri" hidden>
+    <div class="panel-heading"><h2>Angora 21</h2><button data-close-panel="info-panel" aria-label="Bilgileri kapat">×</button></div>
+    <div id="property-info"></div>
+    <a class="listing-link" href="https://remax.com.tr/tr/portfoy/P56131836" target="_blank" rel="noopener noreferrer">İlanı incele ↗</a>
+  </section>
+  <section id="region-panel" class="region-panel" aria-label="Bölge yerleşimi" hidden><span id="context-count">Vaziyet planı</span><button id="return-villa" data-needs-model disabled>Villa 21’e yaklaş ↗</button></section>
+  <div id="model-scale" class="model-scale" aria-label="Model ölçeği" hidden><i></i><span></span></div>
+  <footer class="explore-dock">
+    <nav class="floor-row" aria-label="Kat seçimi">
+      <button data-view="f0" aria-pressed="false">Bodrum</button>
+      <button data-view="f1" aria-pressed="false">Giriş</button>
+      <button data-view="f2" aria-pressed="false">1. kat</button>
+      <button data-view="f3" aria-pressed="false">Çatı</button>
+    </nav>
+    <div class="dock-actions">
+      <div class="camera-tools" aria-label="Kamera araçları">
+        <button id="rotate-mode" aria-pressed="true" aria-label="Sürükleyerek döndür" title="Döndür">↻</button>
+        <button id="pan-mode" aria-pressed="false" aria-label="Sürükleyerek kaydır" title="Kaydır">✥</button>
+        <button id="zoom-out" aria-label="Uzaklaştır">−</button><button id="zoom-in" aria-label="Yakınlaştır">+</button>
+      </div>
+      <button id="enter-walk" class="walk-launch" disabled>360° Keşfet <span aria-hidden="true">↗</span></button>
+      <button id="enter-vr" class="walk-launch" hidden>VR’a gir</button>
+    </div>
+  </footer>
+  <section id="walk-tools" class="walk-tools" aria-label="Oda turu" hidden>
+    <button id="exit-walk" class="walk-close" aria-label="360 derece turdan çık ve izometrik görünüme dön">×</button>
+    <div class="walk-room-panel"><label for="walk-room" id="walk-room-label">Oda turu</label><select id="walk-room" aria-label="Gezilecek oda"></select><span id="walk-room-area"></span></div>
+    <div class="walk-pad" aria-label="Yürüme yönü">
+      <button data-walk-direction="KeyW" class="walk-forward" aria-label="İleri yürü">↑</button>
+      <button data-walk-direction="KeyA" class="walk-left" aria-label="Sola yürü">←</button>
+      <button data-walk-direction="KeyD" class="walk-right" aria-label="Sağa yürü">→</button>
+      <button data-walk-direction="KeyS" class="walk-back" aria-label="Geri yürü">↓</button>
+    </div>
+  </section>
+  <p class="gesture-help" id="gesture-help">Sürükle: döndür · İki parmak: kaydır / yakınlaştır</p>
+  <div id="qa-status" class="device-qa-status" role="status" hidden></div>
+  <div class="load-status" id="load-status" role="status" aria-live="polite"><span class="spinner" aria-hidden="true"></span><span id="load-message">Model yükleniyor…</span><button id="retry" hidden>Tekrar dene</button></div>
+  <noscript>3D modeli görüntülemek için JavaScript açık olmalıdır.</noscript>
+</main>
+</body>
+</html>
