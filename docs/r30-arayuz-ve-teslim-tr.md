@@ -257,3 +257,64 @@ o I56'dır, model tarafındadır ve ayrıca yürütülmektedir.
 - I05: sığmayan etiketin gizlenmesi hâlâ geçerli. Bu bir hata değil, R28'de
   bilerek eklenmiş davranış; I05 tersini istiyor ve uygulamadan önce karar
   gerekiyor (kenara taşıma + kılavuz çizgi mi, gizleme mi).
+
+## Ek: DWG doğrudan okundu — metrekare orada yok
+
+`ANGORA-.dwg` (AC1021, AutoCAD 2007 binary) bu oturumda **doğrudan okundu**.
+Ortamda dönüştürücü yoktu (apt depoları proxy tarafından engelli, PyPI'da DWG
+okuyucu yok, metin bölümleri sıkıştırılmış olduğundan ham tarama da sonuç
+vermiyor), bu yüzden LibreDWG 0.13.3 kaynaktan derlenip `dwgread` ile çizim
+JSON'a çevrildi: 159.409 model-uzayı varlığı, 10.117 metin, 125 katman.
+
+**Oda metrekaresi çizimde yok.** Arandı ve bulunamadı:
+
+- `2D$M2` katmanında **hiç metin yok** (yalnızca 19 eğri).
+- Mahal listesi / alan tablosu yok: "MAHAL", "METRAJ", "BRÜT", "NET" aramaları
+  oda alanına ait hiçbir kayıt döndürmüyor.
+- Alan biçiminde tek metin vaziyet planına ait ve yerleşim ölçeğinde:
+  *"TOPLAM İLAVE İNŞAAT ALANI: 48.74 M2"* ve buna bağlı "… NOLU KONUTTA GİRİŞİN
+  ÖNE ALINMASINDAN DOLAYI İLAVE İNŞAAT ALANI …" satırları.
+- Çıplak ondalık metinlerin tamamı (948 adet) `2D$ROL_CEPHE` / `2D$ROL_DIK`
+  katmanlarında, yani cephe/düşey rölöve kotları — alan değil.
+
+Dolayısıyla mal sahibinin verdiği oda cetveli DWG metninden **üretilemez** ve
+DWG'ye karşı doğrulanamaz. `viewer/src/room-areas.js` bu yüzden tek kaynak
+olarak kalıyor.
+
+**Ekrandaki 35 ölçünün tamamı DWG'de var.** Değer ve konum eşleşmesiyle 30'u
+doğrudan bulundu; kalan 5'i (8,40 / 8,40 / 7,60 / 8,15 / 6,70 m) uzun açıklıklar
+olduğu için konum eşiğini aşamadı ama değer olarak çizimde mevcut.
+
+**Ancak `source_dimension_handle` çizime karşı çözülemiyor.** `rooms.json` her
+ölçü için bir tutamak yazıyor (ör. `2C304` = 180.996), fakat DWG'nin ölçü
+tutamakları ~14.000–54.000 aralığında. Bu numaralar DWG'nin değil, boru hattının
+okuduğu **DXF dönüşümünün** tutamaklarıdır; dönüşüm yeniden numaralandırmış.
+İzlenebilirlik iddiası göründüğünden zayıf: doğrulama değer ve konumla yapılabilir,
+tutamakla yapılamaz.
+
+**Etiket çapaları zaten kaynakla uyumlu.** `plan-registration.json` dönüşümü
+(ölçek 0,01, kat başına öteleme) uygulandığında CAD'deki oda adı konumları ile
+modeldeki konumlar 0,17–1,0 m içinde örtüşüyor (Z01 0,17 m, 103 ve 104 0,22 m).
+Yani çapa tarafında çizimden alınacak bir kazanç yok; etiketlerin merkeze
+oturtulması için yapılan değişiklik yeterli.
+
+**Çizimdeki oda adları modelden farklı.** Karar gerektirir, bu pakette
+değiştirilmedi:
+
+| Kod | DWG | Modelde / ekranda |
+|---|---|---|
+| B02 | DEPO (ve ODA) | Oda |
+| B05 | HOBİ ODASI | Mutfak |
+| B06 | HOBİ ODASI | Bahçe salonu |
+| B03 | BANYO | modelde bu kod yok (model B10 kullanıyor) |
+| Z01 | RÜZGARLIK | Giriş |
+| Z05 | YEMEK ODASI | Yemek alanı |
+| 103 | SOYUNMA | Giyinme odası |
+| C04 | ÇATI ARASI KULLANIMI | Yatak odası |
+| B07, Z09 | TERAS | modelde yok |
+| Z10, 109, 110 | BALKON | modelde yok |
+
+Bu, mal sahibinin cetvelindeki iki belirsizliği de aydınlatıyor: çizimde **DEPO
+bodrumdadır (B02)**, zemin kattaki Z08 ise gerçekten TESİSAT ODASI'dır; ve
+bodrumda "müştemilat/misafir evi" diye adlandırılmış bir mahal yoktur — çizim
+orada iki HOBİ ODASI ve bir ODA gösterir.
