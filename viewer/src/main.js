@@ -373,7 +373,9 @@ async function loadModel() {
     // Keep the entrance, pool terrace and basement garden in the building frame.
     gardenBox = new THREE.Box3(new THREE.Vector3(-10.2, -4, -29.1), new THREE.Vector3(12.5, 3.4, 11));
     contextBox=new THREE.Box3().setFromObject(groups.get('context')).union(buildingBox);
-    prepareContextSurfaces(groups.get('context'),scene.background);
+    // The background is the sky itself now, so the edge fade takes the horizon
+    // colour it used to read off it.
+    prepareContextSurfaces(groups.get('context'),lighting.horizonColour);
     try {
       // Every other model file carries ?v= from its manifest hash, but the site
       // context has no manifest entry, so it is revalidated instead. Without

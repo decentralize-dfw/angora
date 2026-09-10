@@ -92,7 +92,10 @@ export function createLighting(renderer, scene, camera, clip) {
   const compact=matchMedia('(pointer: coarse)').matches;
   renderer.shadowMap.enabled=true;renderer.shadowMap.autoUpdate=false;
   applyRenderProfile(renderer);
-  scene.background=new THREE.Color('#e4e9ed');
+  // The horizon colour is no longer the background - the sky is. It stays as
+  // the colour the terrain fades into at its edge and the colour distance
+  // fades toward, and it still tracks the hour.
+  const horizon=new THREE.Color('#e4e9ed');
   const hemisphere=new THREE.HemisphereLight(0xebf2ff,0xb8b2a8,.5);scene.add(hemisphere);
   const sun=new THREE.DirectionalLight(0xfff2df,1.55),direction=new THREE.Vector3(-.45,.85,-.3).normalize();
   sun.castShadow=true;sun.shadow.mapSize.setScalar(compact?2048:4096);
@@ -103,7 +106,25 @@ export function createLighting(renderer, scene, camera, clip) {
   sky.material.uniforms.sunPosition.value.copy(direction);
   let environment=buildEnvironment(renderer,{sky});
   scene.environment=environment.texture;scene.environmentIntensity=1.0;
-  sky.geometry.dispose();sky.material.dispose();
+  // The sky was built, handed to the probe and thrown away, leaving a flat fill
+  // behind every window and over the whole settlement. It is kept now and
+  // re-rendered into a small cube whenever the sun moves, so what the viewer
+  // looks at is the same sky the study is lit by. Cheap: six 256 px faces of a
+  // shader with no geometry behind it.
+  const skyScene=new THREE.Scene();skyScene.add(sky);
+  const skyTarget=new THREE.WebGLCubeRenderTarget(256,{type:THREE.HalfFloatType});
+  const skyCamera=new THREE.CubeCamera(1,20000,skyTarget);
+  scene.background=skyTarget.texture;
+  // The sky shader's own radiance sits well above the range this pipeline
+  // exposes for, so unscaled it reaches the curve already saturated and lands
+  // as flat white with no blue left in it. This holds it where a sky belongs.
+  scene.backgroundIntensity=.55;
+  // Aerial perspective. Every distant building arrived as saturated and as
+  // contrasty as the ones in front of it, which is what makes a settlement read
+  // as a model rather than a place. Presentation, not measurement: real air
+  // takes almost nothing out over 300 m, and the density is set per view so the
+  // region frame does not simply dissolve.
+  scene.fog=new THREE.FogExp2(horizon.getHex(),.0014);
   const target=new THREE.WebGLRenderTarget(1,1,{type:THREE.HalfFloatType,samples:referenceProfile.msaaSamples});
   const composer=new EffectComposer(renderer,target),beauty=new RenderPass(scene,camera);
   const ao=new SectionGTAOPass(scene,camera,clip,compact?.5:.85);
@@ -128,7 +149,10 @@ export function createLighting(renderer, scene, camera, clip) {
     sun.color.set(0xffbc7b).lerp(new THREE.Color(0xfff5e9),warmth);
     hemisphere.intensity=.08+.42*daylight;scene.environmentIntensity=.08+(soft?.85:.65)*daylight;
     sun.shadow.radius=soft?2.5:1;sun.shadow.intensity=soft?.82:1;
-    scene.background.set(0x182734).lerp(new THREE.Color(0xe4e9ed),daylight);
+    horizon.set(0x182734).lerp(new THREE.Color(0xe4e9ed),daylight);
+    scene.fog.color.copy(horizon);
+    sky.material.uniforms.sunPosition.value.copy(direction);
+    skyCamera.update(renderer,skyScene);
     sun.position.copy(sun.target.position).addScaledVector(direction,shadowDistance);
     renderer.shadowMap.needsUpdate=true;return solar;
   }
@@ -149,6 +173,7 @@ export function createLighting(renderer, scene, camera, clip) {
       const next=buildEnvironment(renderer,{background:hdr});
       scene.environment=next.texture;environment.dispose();environment=next;hdr.dispose();environmentMode='hdr';setTime();
     },
+    horizonColour:horizon,
     setFixtures(data){fixtures.setFixtures(data);},
     interior(floor,position,time){fixtures.select(floor,position,time);},
     setLights(enabled){fixtures.setEnabled(enabled);},setTime,
@@ -182,6 +207,7 @@ export function createLighting(renderer, scene, camera, clip) {
       sun.position.copy(sun.target.position).addScaledVector(direction,shadowDistance);
       Object.assign(sun.shadow.camera,{left:-extent,right:extent,top:extent,bottom:-extent});
       sun.shadow.camera.updateProjectionMatrix();renderer.shadowMap.needsUpdate=true;
+      scene.fog.density=view==='region'?.00045:view==='neighborhood'?.0014:.001;
       // Region frames the whole settlement, where a crevice-scale radius has
       // nothing left to describe and only costs, so occlusion stops there.
       ao.enabled=referenceProfile.aoEnabled&&view!=='region';setTime();
