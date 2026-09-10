@@ -1,0 +1,5 @@
+// Three r180 SMAAPass explicitly operates in linear-sRGB. OutputPass must be
+// last: it performs tone mapping and the display color-space conversion once.
+export function configurePostprocessing(composer,{beauty,ao,smaa,bloom,output}) {
+  for(const pass of [beauty,ao,smaa,bloom,output])composer.addPass(pass);
+}
