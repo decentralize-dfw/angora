@@ -14,8 +14,9 @@ mkdirSync(new URL('web-assets/',root),{recursive:true});
 copyFileSync(new URL('index.html',dist),new URL('index.html',root));
 cpSync(new URL('web-assets/',dist),new URL('web-assets/',root),{recursive:true});
 // The pages build skips the public directory, so the icons a browser asks for
-// at the site root are staged from the same source the dev server uses.
-for(const icon of ['favicon.svg','apple-touch-icon.png'])
+// at the site root - and the card image a link preview fetches - are staged
+// from the same source the dev server uses.
+for(const icon of ['favicon.svg','apple-touch-icon.png','og-cover.jpg'])
   copyFileSync(new URL('../public/'+icon,import.meta.url),new URL(icon,root));
 writeFileSync(new URL('.nojekyll',root),'');
 console.log('Staged '+fileURLToPath(new URL('index.html',root)));

@@ -18,7 +18,10 @@ edilmiş` ayrı durumlardır. Aşağıda hangisinin geçerli olduğu ayrıca yaz
 | 5 | Görünümün bağlantı olarak paylaşılması | `share-state.js` (yeni), `main.js` |
 | 6 | Sekme simgesi ve bağlantı önizlemesi | `public/favicon.svg`, `public/apple-touch-icon.png`, `index.html`, `scripts/stage-pages.mjs` |
 | 7 | Işık motorunun EDETRI referansıyla eşitlenmesi | `lighting.js`, `render-profile.js`, `display-dither.js` (yeni), `postprocessing.js` |
-| 8 | Oda etiketlerinin boyutu ve gösterdiği ölçü | `annotations.js`, `style.css`, `property-info.js`, `main.js` |
+| 8 | Oda etiketlerinin boyutu, konumu ve gösterdiği ölçü | `annotations.js`, `room-areas.js` (yeni), `style.css`, `property-info.js`, `main.js` |
+| 9 | Gökyüzünün arka plan olarak gösterilmesi | `lighting.js`, `main.js` |
+| 10 | Atmosferik derinlik | `lighting.js` |
+| 11 | Grade aşaması | `grade-pass.js` (yeni), `lighting.js` |
 
 **Model tarafına dokunulmadı.** Bu paketin tamamı `viewer/src` içindedir; hiçbir
 GLB, manifest, `build/` çıktısı, `.blend` veya `.dwg` değişmemiştir. Model ayrıca
@@ -94,8 +97,12 @@ Sayfanın simgesi yoktu; her ziyaret `/favicon.ico` için 404 ile bitiyordu.
 hâli. İkisi de `viewer/public` altında tek kaynak; pages derlemesi public
 dizinini atladığı için `stage-pages` bunları site köküne taşıyor.
 
-`og:image` bilerek eklenmedi: mutlak URL gerektiriyor ve bu dağıtımın kanonik
-alan adı depoda tanımlı değil.
+Bağlantı kartı için 1200×630'luk kapak görüntüleyicinin kendisinden alınıyor
+(arayüz gizli, villa kadrajı, 132 KB JPEG) ve ikonlarla aynı yerden köke
+taşınıyor. `og:image` **göreli** verildi: kartın mutlak URL istediği doğru, ama
+bu dağıtımın kanonik alan adı depoda tanımlı değil ve yanlış bir mutlak adres
+göreliden kötüdür. Başlıca tarayıcı/uygulama önizlemeleri göreliyi çözer; alan
+adı netleştiğinde tek satırlık değişiklik.
 
 ### 7. Işık motoru (I54–I59)
 
@@ -184,36 +191,61 @@ genişliği kullanıyor. Yazı 14–19 px yerine 12–14 px.
 | Paylaşım bağlantısı | `?view=f3&hour=9&season=355&light=sun` çatı katını 09:00'da kış mevsimi ve doğrudan güneşle açıyor; kat değişince adres güncelleniyor; varsayılana dönünce sorgu siliniyor |
 | Örtüşme | Villa görünümünde saçak altlarında, duvar-çatı birleşimlerinde, havuz kenarında ve çit/ağaç diplerinde temas gölgesi belirdi; aynı kare önceden düzdü |
 | Dither | Ölçülen çim satırı 3 sert basamaktan 60 küçük geçişe çıktı; ortalama parlaklık 0,48/255 kaydı — tek yönlü yarım seviye, yani ikinci bir renk dönüşümü de olmadı |
-| Oda etiketi | Kart 44 px yuva içinde 39 px; "Ebeveyn yatak odası" kırpılmıyor; her etiket gerçek açıklık gösteriyor; "Kat holü" durum metni yerine boş; 5 yerine 7 etiket sığıyor |
+| Oda etiketi | 1. katta sekiz odanın hepsi kendi odasının üstünde, cetveldeki m² ile, 10 px yazı ve 33 px kartla — 19 px'e kadar çıkan beş kartın planı kapattığı yerde |
+| Gökyüzü | Bölge fonu (240,240,240) düz beyazdan (226,227,227)'ye indi; bölge, yakın çevre, villa ve iç mekân oda turu konsol hatasız |
+| Grade | Villa karesi genelde 2 seviye kayıyor, renk bozulmuyor (ikinci bir kodlama yok); merkez +2,2 alırken köşeler tutuyor ya da 0,6 veriyor — vinyet tam da yapması gerekeni yapıyor |
 
 Bu kontroller **yazılımsal WebGL (SwiftShader)** üzerinde yapılmıştır. Gerçek
 GPU görünümü, fiziksel telefon performansı ve XR kabulü bu pakette **alınmadı**;
 I60, I62 ve I63 açık kalmaya devam ediyor.
 
-## Çiğliğin motor tarafında kalan sebepleri
+### 9–11. Çiğliğin motor tarafında kalan üç sebebi
 
-Bunlar ihtiyaç raporunda ayrı madde olarak yoktu; motorun kendi katmanındadır ve
-model çalışmasından bağımsızdır.
+Bunlar ihtiyaç raporunda ayrı madde değildi; motorun kendi katmanındadır.
 
-- **Gökyüzü arka plan olarak kullanılmıyor.** Prosedürel `Sky` kuruluyor, probe
-  için kullanılıyor ve **atılıyor**; `scene.background` düz bir renk. Odanın
-  içinden pencereden bakınca ve bölge görünümünde gökyüzü tek düze bir dolgudur.
-  Not: bu renk aynı zamanda zeminin kenarını arka plana karıştırıp dikişi gizleyen
-  shader'ın uniform'udur, dolayısıyla dokusal bir arka plana geçmek o yolun da
-  ayrıca çözülmesini gerektirir.
-- **Atmosferik derinlik yok.** Uzaktaki binalar yakındakiler kadar doygun ve
-  kontrastlı. Zemindeki kenar soldurması bir dikiş önlemidir, derinlik değildir.
-  Referansta da yok — orası bir ürün stüdyosu — dolayısıyla bu, birebir aktarımın
-  değil ayrı bir kararın konusudur.
-- **Grade aşaması yok.** Referans görünümünü eğriden önce, lineerde lift/gain/
-  doygunluk ile şekillendirir; Angora'nın zinciri çıplak bir `OutputPass` ile
-  biter, yani bir görünüm şekillendirecek kanca yoktur. Referansın kendi
-  varsayılanları nötrdür, bu yüzden aktarılacak bir "bakış" değil, eksik olan
-  **mekanizmadır**.
-- **Bloom bloğunu doğuran ~2 px'lik sıcak örnek** hâlâ sahnede (bkz. bölüm 1).
+**Gökyüzü gösterilmiyordu.** Prosedürel `Sky` kuruluyor, probe'a veriliyor ve
+**atılıyordu**; arkasındaki arka plan düz bir dolguydu. Yani saatle birlikte
+değişen tek şey — gökyüzü — hiç gösterilmeyen şeydi. Artık korunuyor ve güneş
+her hareket ettiğinde küçük bir küpe yeniden çiziliyor (arkasında geometri
+olmayan bir shader'ın 6 × 256 px yüzü), arka plan da o küp.
 
-Malzemelerin dokusuz ve düz durması bu listeye dahil değildir: o I56'dır, model
-tarafındadır ve ayrıca yürütülmektedir.
+Ölçeklenmesi gerekti: Sky shader'ının ışıması bu hattın pozladığı aralığın çok
+üstünde, dolayısıyla ölçeksiz hâlde eğriye zaten doymuş geliyor ve içinde mavi
+kalmamış düz beyaz olarak iniyordu — bütün fon boyunca ölçülen değer
+(240,240,240). `backgroundIntensity` 0,55'te fon (226,227,227) oluyor; elle
+seçilmiş eski düz rengin bulunduğu yer. Üst gökyüzü kendi aralığını koruyor.
+
+Ufuk rengi duruyor, çünkü zaten yalnızca arka plan değildi: zemin kenarında
+dikişi gizlemek için o renge karışıyor ve o shader onu uniform olarak okuyor.
+Artık mesafeyi de o besliyor.
+
+**Mesafe yoktu.** Uzaktaki her bina, önündekiler kadar doygun ve kontrastlı
+geliyordu; bir yerleşimi yer değil maket gibi gösteren şey budur. Aynı ufuk
+rengine doğru üstel pus artık derinliği taşıyor. Bu bir sunum aracıdır ve kod
+bunu yazar — gerçek hava 300 m'de neredeyse hiçbir şey almaz — bu yüzden
+yoğunluk görüne göre ayarlanır: yakın çevrede yakını uzaktan ayıracak kadar,
+bölgede yerleşim erimesin diye geri çekilmiş, iç mekânda ihmal edilebilir
+(10 m'de %0,03).
+
+**Şekillendirecek yer yoktu.** Zincir çıplak bir çıkış pass'i ile bitiyordu:
+pozlama ve eğri, başka hiçbir şey. Referans bunun yerini açıkça söylüyor: grade
+ve vinyet **eğriden önce ve hâlâ lineerde** olur. Referansın kendi eski derlemesi
+bunları çıkış pass'inden sonra, ekran uzayında çalıştırmış ve sonuç kırpılmasın
+diye arkasına ikinci bir yumuşak omuz eklemek zorunda kalmış. Eğrinin önünde
+buna gerek yok — bu üçü değeri ne yaparsa yapsın, eğrinin hâlâ tepesi yoktur.
+Sıra artık doğrudan shader gövdesine karşı test ediliyor.
+
+Gönderilen değerler ölçülü ve referansın kendi altı ışık rig'inin kullandığı
+aralığın içinde (doygunluk 0,94–1,06, gain 0,90–1,05, lift 0,014'e kadar):
+gölgelerde açık gökyüzünün doldurduğu yere biraz serin, parlaklarda güneşin
+olduğu yere biraz sıcak, ve render'ın yıkanmış görünmesini kesecek kadar
+doygunluk. Grain kapalı. Vinyet referansın kendi geometrisiyle, aralığının onda
+biri güçte ve yalnızca aşağı çarpabilir. Tek dosya, her değer ayrı: bu bir
+kadran, hatta pişirilmiş bir bakış değil.
+
+**Açık kalan:** bloom bloğunu doğuran ~2 px'lik sıcak örnek hâlâ sahnede
+(bkz. bölüm 1). Malzemelerin dokusuz ve düz durması bu listeye dahil değildir:
+o I56'dır, model tarafındadır ve ayrıca yürütülmektedir.
 
 ## Bu pakette kapanmayanlar
 
