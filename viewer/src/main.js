@@ -176,7 +176,7 @@ function updateRoomUI(station){
   selected='f'+station.floor_index;$('#walk-room').value=station.room_id;
   $('#view-title').textContent=station.name;
   $('#section-label').textContent=titles[selected]+' · 360° oda turu';
-  $('#walk-room-area').textContent=areaLabel(roomData.rooms.find(r=>r.id===station.room_id));
+  $('#walk-room-area').textContent=areaLabel(roomData.rooms.find(r=>r.id===station.room_id),roomData);
   renderPropertyInfo($('#property-info'),roomData,selected);
 }
 function travelRoom(roomId){

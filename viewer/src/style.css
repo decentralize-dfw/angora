@@ -6,3 +6,17 @@
 
 .load-copy{display:grid;gap:7px;min-width:172px}.load-line{display:flex;justify-content:space-between;align-items:baseline;gap:14px}#load-percent{font-variant-numeric:tabular-nums;font-size:12px;color:var(--muted)}.load-bar{display:block;height:3px;border-radius:2px;background:#315c5022;overflow:hidden}.load-bar i{display:block;height:100%;width:0;border-radius:2px;background:var(--accent);transition:width .3s ease}.error .load-bar,.error #load-percent{display:none}
 @media(max-width:600px){.load-copy{min-width:148px}}
+
+/* Room tags sit on top of the model and were reading first: a two-line card at
+   up to 19 px, a 38 px floor, a gutter reserved for the 360 badge, and the
+   filler "Alan doğrulanıyor" on every one of them.
+   The 44 px rectangle stays - the label layout reserves the real on-screen box,
+   so shrinking it would let two tap targets overlap and send a tap to the wrong
+   room. What shrinks is the ink: the button itself is now an empty 44 px slot
+   and the painted card sits centred inside it, sized to its own text. */
+.room-label{padding:0;min-width:44px;background:none;border:0;box-shadow:none;display:grid;place-items:center;line-height:1.22}
+.room-label i{padding:3px 8px;border-radius:9px;max-width:100%;min-width:0;overflow:hidden;background:rgba(252,253,250,.9);border:1px solid #ffffffcc;box-shadow:0 1px 6px #162a341c;font-style:normal;text-align:left}
+.room-label strong{display:block;font-weight:550;padding-right:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.room-label em{display:flex;align-items:baseline;gap:10px;margin-top:1px;font-style:normal}
+.room-label span{font-size:.76em;color:#5c7269;font-variant-numeric:tabular-nums}
+.room-label small{position:static;margin-left:auto;font-size:.62em;font-weight:400;color:#8a9c93}

@@ -1,11 +1,25 @@
 import * as THREE from 'three';
 import {collectUIObstacles,layoutAnchoredLabels} from './screen-layout.js';
 
+// Room tags sit on top of the model, so they are sized to be read past rather
+// than read first. The old range topped out at 19 px on a two-line card and
+// covered the thing it was labelling.
 export function labelFontSize(pixelsPerMetre) {
-  return THREE.MathUtils.clamp(14+Math.log2(Math.max(1,pixelsPerMetre)/18)*1.6,14,19);
+  return THREE.MathUtils.clamp(12+Math.log2(Math.max(1,pixelsPerMetre)/18)*1.1,12,14);
 }
-export function areaLabel(room) {
-  return Number.isFinite(room.area_m2)?`${room.area_m2.toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1})} m²`:'Alan doğrulanıyor';
+// The per-room area is not in the source and cannot be derived here: rooms.json
+// states outright that the individual partitions are unverified and that no
+// component-to-room area assignment is made, and its floor areas are a finish
+// projection, not net usable area. Printing a bounding box as m² would be
+// inventing a measurement. So the tag carries what IS registered - the room's
+// own DWG span, with its handle and witness points behind it - and carries
+// nothing at all where a room has none. The m² branch stays: the moment real
+// room boundaries land, every one of these switches over untouched.
+export function areaLabel(room,data) {
+  if(Number.isFinite(room?.area_m2))
+    return `${room.area_m2.toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1})} m²`;
+  const first=room?.dimensions?.[0];
+  return data?.dimensions?.find(entry=>entry.id===first)?.display??'';
 }
 export function createAnnotations(data,host,onRoom) {
   if(data.coordinate_system!=='glTF_Y_up')throw Error('Invalid room annotations');
@@ -16,9 +30,17 @@ export function createAnnotations(data,host,onRoom) {
   for(const room of data.rooms) {
     const el=document.createElement('button');el.type='button';el.className='room-label';
     const name=document.createElement('strong');name.textContent=room.name;
-    const area=document.createElement('span');area.textContent=areaLabel(room);
+    const area=document.createElement('span');area.textContent=areaLabel(room,data);
+    // Inline after the name rather than pinned to the corner, so the name no
+    // longer reserves a gutter for it and the card can close up around them.
     const tour=document.createElement('small');tour.textContent='360°';tour.setAttribute('aria-hidden','true');
-    el.append(name,area,tour);el.setAttribute('aria-label',`${room.name}, ${area.textContent}, 360 derece gez`);
+    // The badge shares the measure's line instead of sitting after the name, so
+    // a long room name gets the card's full width before it has to truncate.
+    const card=document.createElement('i'),meta=document.createElement('em');
+    meta.append(area,tour);card.append(name,meta);el.append(card);
+    el.setAttribute('aria-label',area.textContent
+      ?`${room.name}, kayıtlı açıklık ${area.textContent}, 360 derece gez`
+      :`${room.name}, 360 derece gez`);
     el.title=room.area_method_label??'Kaynak kat planı';
     el.onclick=e=>{e.stopPropagation();onRoom(room.id);};overlay.append(el);
     names.push({el,position:new THREE.Vector3(...room.position),floor:room.floor_index});

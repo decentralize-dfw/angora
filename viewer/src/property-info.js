@@ -10,7 +10,7 @@ export function renderPropertyInfo(container,data,view) {
     stat(String(data.rooms.filter(r=>r.floor_index===floor).length),'Plan üzerinde alan');
     const list=document.createElement('ul');list.className='property-room-list';
     for(const room of data.rooms.filter(r=>r.floor_index===floor)){
-      const li=document.createElement('li'),name=document.createElement('div'),area=document.createElement('span');name.textContent=room.name;area.textContent=areaLabel(room);li.append(name,area);list.append(li);
+      const li=document.createElement('li'),name=document.createElement('div'),area=document.createElement('span');name.textContent=room.name;area.textContent=areaLabel(room,data);li.append(name,area);list.append(li);
     }container.append(list);
   } else {
     stat('500 m²','Brüt alan · RE/MAX ilanı');stat('400 m²','Net alan · RE/MAX ilanı');stat('4','Kat');stat('5 + 4','Oda · RE/MAX ilanı');
