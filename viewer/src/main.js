@@ -21,6 +21,7 @@ import {prepareContextSurfaces} from './context-surfaces.js';
 import {batchContext} from './context-batch.js';
 import {handleEscape} from './interface-actions.js';
 import {createDeviceQA} from './device-qa.js';
+import {readShareState,shareSearch} from './share-state.js';
 import {referenceProfile} from './render-profile.js';
 import { sectionHeight, smoothStep, createWallCaps } from './section.js';
 
@@ -55,6 +56,19 @@ function progress(share) {
   const whole = Math.max(0, Math.min(100, Math.round(share * 100)));
   bar.hidden = false; bar.firstElementChild.style.width = `${whole}%`;
   percent.textContent = `%${whole}`;
+}
+// Dragging the daylight slider fires continuously, and Safari rate-limits
+// history writes, so the address is rewritten once the controls settle.
+let shareTimer = null;
+function rememberState() {
+  clearTimeout(shareTimer);
+  shareTimer = setTimeout(() => {
+    const search = shareSearch({view:selected, hour:Number($('#daylight-hour').value),
+      season:$('#daylight-season').value, style:$('#lighting-style').value});
+    // An empty search would leave the current query in place, so back at the
+    // opening view the path replaces it outright.
+    history.replaceState(null, '', (search || location.pathname) + location.hash);
+  }, 400);
 }
 function dispose(group) {
   const geometries = new Set(), materials = new Set(), textures = new Set();
@@ -190,6 +204,10 @@ function setup() {
   flight=new CameraFlight(camera,controls,resize,invalidate);
   controls.addEventListener('change', invalidate);
   lighting = createLighting(renderer, scene, camera, clip);
+  // bindInterface() ran before this, so the controls may already carry values
+  // from a shared link. Push them in before the first frame is drawn.
+  lighting.setStyle($('#lighting-style').value);
+  $('#daylight-hour').oninput();
   deviceQA=createDeviceQA({invalidate,closePanel:()=>panel('',false),
     capture:callback=>{pendingCapture=callback;invalidate();},
     getState:()=>{
@@ -247,7 +265,7 @@ function selectView(id, initial = false) {
   // All assets stay loaded and visible; floor changes preserve orbit, pan and zoom.
   if(initial||!previous.startsWith('f')||!id.startsWith('f'))frame(initial);
   else if(previous!==id)frame(false,true);
-  host.dataset.view = id; host.dataset.loaded = 'true'; invalidate();
+  host.dataset.view = id; host.dataset.loaded = 'true'; rememberState(); invalidate();
 }
 function enterWalk(roomId) {
   pendingRoomJump.cancel();
@@ -410,6 +428,14 @@ function mode(pan) {
 // Panels remain usable if WebGL is unavailable. Model actions are disabled
 // until loading succeeds; do not strand every control in the renderer catch.
 function bindInterface() {
+  // The controls hold the shared state; lighting is built later in setup() and
+  // reads its opening values back off them, so a link lands on the right hour
+  // rather than easing into it after the first frame.
+  const shared = readShareState(location.search);
+  if (shared.view) selected = shared.view;
+  if (shared.hour !== undefined) $('#daylight-hour').value = shared.hour;
+  if (shared.season) $('#daylight-season').value = shared.season;
+  if (shared.style) $('#lighting-style').value = shared.style;
   for(const id of ['toggle-plan','reset-view','rotate-mode','pan-mode','zoom-in','zoom-out']){
     const button=$('#'+id);button.dataset.needsModel='';button.disabled=true;
   }
@@ -433,10 +459,10 @@ function bindInterface() {
   $('#open-options').onclick=()=>panel('options-panel',$('#options-panel').hidden);
   $('#open-info').onclick=()=>panel('info-panel',$('#info-panel').hidden);
   document.querySelectorAll('[data-close-panel]').forEach(button=>button.onclick=()=>panel('',false));
-  $('#daylight-hour').oninput=()=>{const hour=Number($('#daylight-hour').value);$('#daylight-time').textContent=clockLabel(hour);$('#daylight-hour').setAttribute('aria-valuetext',clockLabel(hour));lighting?.setTime(hour,Number($('#daylight-season').value));invalidate();};
+  $('#daylight-hour').oninput=()=>{const hour=Number($('#daylight-hour').value);$('#daylight-time').textContent=clockLabel(hour);$('#daylight-hour').setAttribute('aria-valuetext',clockLabel(hour));lighting?.setTime(hour,Number($('#daylight-season').value));rememberState();invalidate();};
   $('#daylight-season').onchange=()=>$('#daylight-hour').oninput();
   $('#toggle-lights').onclick=()=>{interiorLights=!interiorLights;$('#toggle-lights').setAttribute('aria-pressed',interiorLights);lighting?.setLights(interiorLights);invalidate();};
-  $('#lighting-style').onchange=e=>{lighting?.setStyle(e.target.value);invalidate();};
+  $('#lighting-style').onchange=e=>{lighting?.setStyle(e.target.value);rememberState();invalidate();};
   $('#return-villa').onclick=()=>selectView('building');
   window.addEventListener('keydown',event=>handleEscape(event,{
     panelOpen:Boolean(document.querySelector('.panel:not([hidden])')),closePanel:()=>panel('',false),
