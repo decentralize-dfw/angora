@@ -1,13 +1,17 @@
 import * as THREE from 'three';
 import {collectUIObstacles,layoutAnchoredLabels} from './screen-layout.js';
+import {ROOM_AREAS} from './room-areas.js';
 
 // Room tags sit on top of the model, so they are sized to be read past rather
-// than read first. The old range topped out at 19 px on a two-line card and
-// covered the thing it was labelling.
+// than read first, and they track the model instead of holding a size of their
+// own: pulled back, a tag gets small along with the room it names. The old
+// range held a 12 px floor, which is what kept them large over a small plan and
+// what made the layout drop them rather than let them shrink.
 export function labelFontSize(pixelsPerMetre) {
-  return THREE.MathUtils.clamp(12+Math.log2(Math.max(1,pixelsPerMetre)/18)*1.1,12,14);
+  return THREE.MathUtils.clamp(7+Math.log2(Math.max(1,pixelsPerMetre)/12)*2.2,7,13);
 }
-// The per-room area is not in the source and cannot be derived here: rooms.json
+// The owner's schedule comes first. Failing that the per-room area is not in
+// the source and cannot be derived here: rooms.json
 // states outright that the individual partitions are unverified and that no
 // component-to-room area assignment is made, and its floor areas are a finish
 // projection, not net usable area. Printing a bounding box as m² would be
@@ -16,8 +20,8 @@ export function labelFontSize(pixelsPerMetre) {
 // nothing at all where a room has none. The m² branch stays: the moment real
 // room boundaries land, every one of these switches over untouched.
 export function areaLabel(room,data) {
-  if(Number.isFinite(room?.area_m2))
-    return `${room.area_m2.toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1})} m²`;
+  const area=ROOM_AREAS[room?.id]??(Number.isFinite(room?.area_m2)?room.area_m2:null);
+  if(area!==null)return `${area.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2})} m²`;
   const first=room?.dimensions?.[0];
   return data?.dimensions?.find(entry=>entry.id===first)?.display??'';
 }
@@ -68,13 +72,17 @@ export function createAnnotations(data,host,onRoom) {
     const w=host.clientWidth,h=host.clientHeight;
     camera.updateMatrixWorld();
     const obstacles=collectUIObstacles(host),candidates=[];
+    // A room name stays on its room. It used to go through the same solver as
+    // the dimensions, which pushed it aside to clear its neighbours and the
+    // panels and dropped it outright when there was no room left - so a name
+    // sat beside its room, or vanished as the view pulled back. project()
+    // leaves it on the projected centre and it is not moved again.
     for(const entry of names) {
       entry.el.hidden=!(entry.floor===floor&&showNames&&!transitioning&&!walking);
       if(entry.el.hidden)continue;
       const distance=Math.max(1,entry.position.distanceTo(camera.position));
       const ppm=camera.isPerspectiveCamera?h*camera.zoom/(2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*distance):h*camera.zoom/(camera.top-camera.bottom);
-      const p=project(entry,camera,w,h,labelFontSize(ppm));if(!p)continue;
-      candidates.push({...p,entry,width:entry.el.offsetWidth,height:entry.el.offsetHeight});
+      project(entry,camera,w,h,labelFontSize(ppm));
     }
     for(const entry of dimensions) {
       const visible=entry.floor===floor&&showDimensions&&!transitioning&&(!walking||entry.roomId===walkRoom);

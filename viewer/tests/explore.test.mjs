@@ -14,7 +14,10 @@ test('Solar study follows the sun and transparent window panes do not cast opaqu
  for(const h of [6,9,12,15,18,21])assert.ok(Math.abs(new THREE.Vector3(...solarPosition(h).direction).length()-1)<1e-10);
  assert.equal(clockLabel(12.5),'12:30');assert.equal(isGlazing(new THREE.MeshPhysicalMaterial({transmission:1})),true);
  assert.equal(isGlazing(new THREE.MeshStandardMaterial({name:'Painted window frame'})),false);
- assert.ok(labelFontSize(80)>labelFontSize(15));assert.ok(labelFontSize(.1)>=12);
+ assert.ok(labelFontSize(80)>labelFontSize(15));// No floor any more: the owner asked for tags that keep shrinking as the view
+  // pulls back rather than holding a readable size and covering the plan. They
+  // still stop short of vanishing, and they track the model on the way up.
+  assert.ok(labelFontSize(.1)>=7);
 });
 
 test('Plan camera follows a continuous arc, keeps zoom and finishes at the requested inclination',()=>{
