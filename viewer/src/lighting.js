@@ -3,10 +3,10 @@ import { Sky } from 'three/addons/objects/Sky.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
-import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import {DisplayDitherShader} from './display-dither.js';
+import {GradeShader} from './grade-pass.js';
 import { HDRLoader } from 'three/addons/loaders/HDRLoader.js';
 import {solarPosition} from './daylight.js';
 import {prepareMaterialResponse,setMaterialScale} from './material-response.js';
@@ -130,7 +130,7 @@ export function createLighting(renderer, scene, camera, clip) {
   const ao=new SectionGTAOPass(scene,camera,clip,compact?.5:.85);
   const smaa=new SMAAPass(),bloom=new LinearBloomPass();
   ao.enabled=referenceProfile.aoEnabled;
-  configurePostprocessing(composer,{beauty,ao,smaa,bloom,output:new OutputPass(),
+  configurePostprocessing(composer,{beauty,ao,smaa,bloom,output:new ShaderPass(GradeShader),
     dither:new ShaderPass(DisplayDitherShader)});
   let day=172,hour=12.5,environmentMode='procedural-sky';
   let soft=true,shadowDistance=110;
