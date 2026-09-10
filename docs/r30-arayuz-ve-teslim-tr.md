@@ -17,6 +17,12 @@ edilmiş` ayrı durumlardır. Aşağıda hangisinin geçerli olduğu ayrıca yaz
 | 4 | Gerçek indirme ilerlemesi | `main.js`, `index.html`, `style.css` |
 | 5 | Görünümün bağlantı olarak paylaşılması | `share-state.js` (yeni), `main.js` |
 | 6 | Sekme simgesi ve bağlantı önizlemesi | `public/favicon.svg`, `public/apple-touch-icon.png`, `index.html`, `scripts/stage-pages.mjs` |
+| 7 | Işık motorunun EDETRI referansıyla eşitlenmesi | `lighting.js`, `render-profile.js`, `display-dither.js` (yeni), `postprocessing.js` |
+| 8 | Oda etiketlerinin boyutu ve gösterdiği ölçü | `annotations.js`, `style.css`, `property-info.js`, `main.js` |
+
+**Model tarafına dokunulmadı.** Bu paketin tamamı `viewer/src` içindedir; hiçbir
+GLB, manifest, `build/` çıktısı, `.blend` veya `.dwg` değişmemiştir. Model ayrıca
+geliştirildiğinde bu işlerin hiçbiri tekrarlanmaz.
 
 ### 1. Bloom bloğu (I55 / I60)
 
@@ -91,6 +97,82 @@ dizinini atladığı için `stage-pages` bunları site köküne taşıyor.
 `og:image` bilerek eklenmedi: mutlak URL gerektiriyor ve bu dağıtımın kanonik
 alan adı depoda tanımlı değil.
 
+### 7. Işık motoru (I54–I59)
+
+Referans: `decentralize-dfw/virtuallyeverafter`, `edetri/web`. Sahnenin çiğ
+durmasının motor tarafındaki üç sebebi bulundu ve üçü de referansın kendi
+gerekçesiyle giderildi.
+
+**Örtüşme (occlusion).** Referansın `post.js` başlığı bunu doğrudan yazıyor:
+görüntü tabanlı ışık her yönden aynı anda geldiği için, örtüşme olmadan her
+kırışık, iki yüzeyin birleştiği her yer ve her çıkıntının altı, yanındaki açık
+zeminle **tam olarak aynı** ışığı alır; hiçbir şeyin çukuru olmaz. Dosya bunu
+"ucuz 3B"nin en büyük ele vereni sayıyor ve hiçbir yeniden ışıklandırmanın
+düzeltmeyeceğini söylüyor.
+
+Angora `aoEnabled:false` değerini bu referanstan almış, ama **gerekçesini
+almamış**. EDETRI GTAO'yu kapatıyor çünkü kendi beyaz siklorama odasında
+ekran-uzayı örtüşmesi kir gibi okunuyordu — hiç çukuru olmayan bir oda. Villa
+ise baştan aşağı çukur: saçaklar, pencere nişleri, balkonlar, merdiven basamağı,
+her duvar-döşeme birleşimi. Referansın kapatma gerekçesi burada geçerli değil;
+"en büyük ele veren" demesinin gerekçesi geçerli.
+
+Pass zaten yazılmıştı (kesit düzlemi, cam ve sprite hariç tutma, mobil çözünürlük
+ölçeği) — yalnızca kapalıydı ve şiddeti 0,2'ye kısılmıştı. Artık referansın kendi
+sayılarıyla çalışıyor: yarıçap 0,28 m, distanceExponent 1, thickness 1,
+scale 1,05, 12 örnek, distanceFallOff 1, karışım 0,8. Yarıçap dünya metresidir ve
+referans önemine dikkat çekiyor: fazla büyük olursa örtüşme çukurları
+tanımlamayı bırakıp bütün nesneyi gölgeler ve kir gibi görünür. Önceki 0,55 m bir
+pencere nişinin ölçeği değildi. Bölge görünümünde kapalı kalır.
+
+**Ortamın zemini.** Probe'un zemini yoktu. Hem prosedürel gökyüzü hem onun
+yerine geçen puresky HDR yalnızca gökyüzüdür, dolayısıyla ortamın **alt
+yarıküresi de gökyüzüydü**: her saçak altı, balkon altı ve pencere nişi üstten
+ve alttan ikinci bir gökyüzüyle aydınlanıyordu, cam da onu yansıtıyordu. Stüdyo
+probe'una tam bu yüzden bir zemin konur — üstünde duran her şeyin altını dolduran
+şey odur. Probe artık bir zemin taşıyor ve HDR de doğrudan sahneye değil aynı
+probe'dan geçiyor: kubbeyi HDR, altındaki zemini probe veriyor.
+
+Seviye göze göre seçilmedi: L ışıması olan bir gökyüzü için düz zemine ulaşan
+ışınım PI·L'dir ve zeminden albedo·L olarak ayrılır, dolayısıyla panel sahanın
+kendi albedosunun gökyüzünün kendi seviyesinde ışıksız çizilmiş hâlidir. Alt
+yüzeyler bir miktar **koyulaşır** ve gökyüzünün değil zeminin renginde olur; bu
+doğru yöndür — %20 albedolu bir yüzey ikinci bir gökyüzü değildir.
+
+**Dither.** Çıkış dither'sızdı. Zemin ve gökyüzü, karenin neredeyse tamamına
+yayılan ve yalnızca birkaç 8-bit seviyeye sığan birer gradyandır; bantlanan durum
+tam olarak budur. Ölçüldü: bir çim satırı 140 pikselde **dört düz basamağa**
+düşüyordu. Referans zincirini bunun için bir seviye düzenli gürültüyle bitiriyor
+ve bu gürültü **yalnızca çıkarır**, çünkü simetrik bir dither o noktada bir kanalı
+255'e itebilecek tek şeydir ve önündeki eğri bilerek sınırlıdır. Aynı shader artık
+son pass olarak, referansın koyduğu yerde — eğriden sonra, görüntü uzayında —
+çalışıyor.
+
+### 8. Oda etiketleri (I05 / I07 / I09)
+
+Etiketler tanıttıkları şeyin üzerini örtüyordu: 19 px'e kadar çıkan iki satırlık
+kart, 38 px taban, 360 rozetine ayrılmış oluk ve her oda adının altında
+**"Alan doğrulanıyor"**.
+
+O metin bir ölçü değil, bir durumdu ve 27 odanın hepsinde görünüyordu çünkü
+**hiçbirinin alanı yok**. `rooms.json` sebebini kendi notunda yazıyor: oda
+bölmeleri doğrulanmamıştır ve bileşenden odaya otomatik alan ataması yapılmaz;
+kat değerleri de net kullanım alanı değil, kaplama izdüşümüdür. Sınırlayıcı
+kutudan alan türetip m² diye yazmak ölçü uydurmak olurdu — kaynağın özellikle
+kaçındığı tek şey budur.
+
+Etiket artık **kayıtlı olanı** taşıyor: odanın DWG açıklığı, ölçü tutamağı,
+tanık noktaları ve çizimdeki ölçülmüş uzunluğuyla izlenebilir hâlde. 27 odanın
+22'sinde var; kalanlar dolgu metin yerine hiçbir şey göstermiyor. m² dalı yerinde
+duruyor: gerçek oda sınırları geldiği anda her etiket kendiliğinden ona geçer.
+
+Boyutta 44 px'lik dikdörtgen **korundu**. Etiket yerleşimi çakışmayı önlemek için
+gerçek ekran kutusunu ayırır; küçültmek iki dokunma hedefinin üst üste binmesine
+ve dokunuşun yanlış odaya gitmesine yol açardı. Küçülen şey mürekkep: düğme artık
+boş bir 44 px yuva, boyalı kart onun ortasında ve kendi metni kadar. Rozet adın
+peşi yerine ölçünün satırını paylaşıyor, böylece uzun ad kırpılmadan önce tam
+genişliği kullanıyor. Yazı 14–19 px yerine 12–14 px.
+
 ## Kontroller
 
 | Kontrol | Sonuç |
@@ -100,10 +182,38 @@ alan adı depoda tanımlı değil.
 | Yayın yerleşimi | Kök dizin sunulduğunda **0 başarısız istek, 0 konsol hatası**; her GLB ve manifest dosyası `?v=` taşıyor; `web-assets` tam olarak `index.html`'in çağırdığı 2 dosyayı içeriyor |
 | Yükleme çubuğu | 20 Mbit kısıtlamada %1 → %11 → %26 → %41 → %56 → %70 → %85 → %100; canlı bölge yedi adımda kalıyor |
 | Paylaşım bağlantısı | `?view=f3&hour=9&season=355&light=sun` çatı katını 09:00'da kış mevsimi ve doğrudan güneşle açıyor; kat değişince adres güncelleniyor; varsayılana dönünce sorgu siliniyor |
+| Örtüşme | Villa görünümünde saçak altlarında, duvar-çatı birleşimlerinde, havuz kenarında ve çit/ağaç diplerinde temas gölgesi belirdi; aynı kare önceden düzdü |
+| Dither | Ölçülen çim satırı 3 sert basamaktan 60 küçük geçişe çıktı; ortalama parlaklık 0,48/255 kaydı — tek yönlü yarım seviye, yani ikinci bir renk dönüşümü de olmadı |
+| Oda etiketi | Kart 44 px yuva içinde 39 px; "Ebeveyn yatak odası" kırpılmıyor; her etiket gerçek açıklık gösteriyor; "Kat holü" durum metni yerine boş; 5 yerine 7 etiket sığıyor |
 
 Bu kontroller **yazılımsal WebGL (SwiftShader)** üzerinde yapılmıştır. Gerçek
 GPU görünümü, fiziksel telefon performansı ve XR kabulü bu pakette **alınmadı**;
 I60, I62 ve I63 açık kalmaya devam ediyor.
+
+## Çiğliğin motor tarafında kalan sebepleri
+
+Bunlar ihtiyaç raporunda ayrı madde olarak yoktu; motorun kendi katmanındadır ve
+model çalışmasından bağımsızdır.
+
+- **Gökyüzü arka plan olarak kullanılmıyor.** Prosedürel `Sky` kuruluyor, probe
+  için kullanılıyor ve **atılıyor**; `scene.background` düz bir renk. Odanın
+  içinden pencereden bakınca ve bölge görünümünde gökyüzü tek düze bir dolgudur.
+  Not: bu renk aynı zamanda zeminin kenarını arka plana karıştırıp dikişi gizleyen
+  shader'ın uniform'udur, dolayısıyla dokusal bir arka plana geçmek o yolun da
+  ayrıca çözülmesini gerektirir.
+- **Atmosferik derinlik yok.** Uzaktaki binalar yakındakiler kadar doygun ve
+  kontrastlı. Zemindeki kenar soldurması bir dikiş önlemidir, derinlik değildir.
+  Referansta da yok — orası bir ürün stüdyosu — dolayısıyla bu, birebir aktarımın
+  değil ayrı bir kararın konusudur.
+- **Grade aşaması yok.** Referans görünümünü eğriden önce, lineerde lift/gain/
+  doygunluk ile şekillendirir; Angora'nın zinciri çıplak bir `OutputPass` ile
+  biter, yani bir görünüm şekillendirecek kanca yoktur. Referansın kendi
+  varsayılanları nötrdür, bu yüzden aktarılacak bir "bakış" değil, eksik olan
+  **mekanizmadır**.
+- **Bloom bloğunu doğuran ~2 px'lik sıcak örnek** hâlâ sahnede (bkz. bölüm 1).
+
+Malzemelerin dokusuz ve düz durması bu listeye dahil değildir: o I56'dır, model
+tarafındadır ve ayrıca yürütülmektedir.
 
 ## Bu pakette kapanmayanlar
 
