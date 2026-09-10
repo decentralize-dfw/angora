@@ -95,8 +95,9 @@ function renderFrame(time) {
     if(walk?.active){
       const sample=walk.surface.sample(walk.camera.position.x,walk.camera.position.z,walk.camera.position.y-1.62,walk.furniture,.3);
       if(sample){walk.floor=sample.floor;selected='f'+sample.floor;}
-      lighting.interior(walk.floor,walk.camera.position.toArray());
+      lighting.interior(walk.floor,walk.camera.position.toArray(),time);
     }
+    const lightChanging=lighting.update(time);
     annotations?.update(selected,roomNamesVisible,measurementsVisible,Boolean(transition||flight?.active),walk?.active,activeCamera,walk?.room);
     hotspots?.update(activeCamera,walk?.active&&!walk.xrActive&&!walk.route);
     siteContext?.update(selected,activeCamera,controls.target,Boolean(transition||flight?.active),walk?.active);
@@ -108,7 +109,7 @@ function renderFrame(time) {
     }
     deviceQA?.sample(time,{draw_calls:renderer.info.render.calls,triangles:renderer.info.render.triangles,
       drawing_buffer:`${renderer.domElement.width}×${renderer.domElement.height}`,view:walk?.active?`${selected}:walk`:selected});
-    if(changing||transition||flying||deviceQA?.active)invalidate();
+    if(changing||transition||flying||lightChanging||deviceQA?.active)invalidate();
 }
 
 function resize() {
@@ -183,17 +184,19 @@ function setup() {
     capture:callback=>{pendingCapture=callback;invalidate();},
     getState:()=>{
       const c=walk?.active?walk.camera:camera;
-      return {revision:'R28',bundle:import.meta.url,models:assetRevision,view:selected,walking:Boolean(walk?.active),
+      return {revision:'R29',bundle:import.meta.url,models:assetRevision,view:selected,walking:Boolean(walk?.active),
         css_viewport:{width:host.clientWidth,height:host.clientHeight},
         drawing_buffer:{width:renderer.domElement.width,height:renderer.domElement.height},
         camera:{position:c.position.toArray(),quaternion:c.quaternion.toArray(),target:controls.target.toArray(),fov:c.fov,zoom:c.zoom,near:c.near,far:c.far},
         settings:{section_height:clip.constant,plan:planMode,furniture:furnitureVisible,room_names:roomNamesVisible,dimensions:measurementsVisible,
           hour:Number($('#daylight-hour').value),day:Number($('#daylight-season').value),light_style:$('#lighting-style').value,interior_lights:interiorLights},
+        lighting:lighting.snapshot(),
         renderer:{profile:referenceProfile,three:THREE.REVISION,exposure:renderer.toneMappingExposure,tone_mapping:renderer.toneMapping,output_color_space:renderer.outputColorSpace,
           max_samples:renderer.capabilities.maxSamples,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures},
         elapsed_since_navigation_ms:performance.now()};
     }});
-  renderer.domElement.addEventListener('webglcontextlost',()=>{
+  renderer.domElement.addEventListener('webglcontextlost',event=>{
+    event.preventDefault();
     contextLost=true;
     deviceQA.interrupt();
     document.querySelectorAll('[data-needs-model]').forEach(b=>b.disabled=true);
@@ -206,10 +209,6 @@ function setup() {
   window.addEventListener('resize', resize);
   renderer.xr.addEventListener('sessionstart', () => renderer.setAnimationLoop(renderFrame));
   renderer.xr.addEventListener('sessionend', () => {renderer.setAnimationLoop(null);resize();invalidate();});
-  renderer.domElement.addEventListener('webglcontextlost', event => {
-    event.preventDefault(); message('3D görüntü durakladı. Sayfayı yenileyerek devam edebilirsin.', true);
-    $('#retry').onclick = () => location.reload();
-  });
 }
 function selectView(id, initial = false) {
   pendingRoomJump.cancel();

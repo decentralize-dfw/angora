@@ -12,6 +12,7 @@ import {smoothSurfaceNormals} from './context-surfaces.js';
 import {configurePostprocessing} from './postprocessing.js';
 import {applyRenderProfile,referenceProfile} from './render-profile.js';
 import {LinearBloomPass} from './linear-bloom.js';
+import {InteriorLightController} from './interior-lighting.js';
 
 // The normal/depth pass must see the same section and furniture visibility as
 // the beauty pass. A shared, unconditional plane would cut the neighborhood.
@@ -79,7 +80,7 @@ export function createLighting(renderer, scene, camera, clip) {
   const smaa=new SMAAPass(),bloom=new LinearBloomPass();
   ao.enabled=referenceProfile.aoEnabled;
   configurePostprocessing(composer,{beauty,ao,smaa,bloom,output:new OutputPass()});
-  let fixtures=[],lightsEnabled=true,activeFloor=null,activePosition=null,lightKey='',day=172,hour=12.5;
+  let day=172,hour=12.5,environmentMode='procedural-sky';
   let soft=true,shadowDistance=110;
   const preparedMaterials=new Set();
   const interior=Array.from({length:4},()=>{
@@ -88,17 +89,7 @@ export function createLighting(renderer, scene, camera, clip) {
     light.shadow.bias=-.0001;light.shadow.normalBias=.01;light.shadow.camera.near=.06;
     light.visible=false;scene.add(light,light.target);return light;
   });
-  function updateFixtures() {
-    const p=activePosition?new THREE.Vector3(...activePosition):new THREE.Vector3(0,0,0);
-    const nearest=lightsEnabled?fixtures.filter(f=>f.floor_index===activeFloor)
-      .sort((a,b)=>new THREE.Vector3(...a.position).distanceToSquared(p)-new THREE.Vector3(...b.position).distanceToSquared(p)).slice(0,4):[];
-    const key=nearest.map(f=>f.object??f.position.join(',')).join('|');if(key===lightKey)return;lightKey=key;
-    interior.forEach((light,i)=>{
-      const source=nearest[i];light.visible=Boolean(source);if(!source)return;
-      light.position.fromArray(source.position);light.target.position.copy(light.position).add(new THREE.Vector3(...source.direction));
-      light.color.fromArray(source.color);light.intensity=source.intensity_cd;light.distance=6;
-    });renderer.shadowMap.needsUpdate=true;
-  }
+  const fixtures=new InteriorLightController(interior);
   function setTime(nextHour=hour,nextDay=day) {
     hour=nextHour;day=nextDay;const solar=solarPosition(hour,{day});direction.fromArray(solar.direction);
     const daylight=THREE.MathUtils.smoothstep(solar.altitude,-6,28),warmth=THREE.MathUtils.smoothstep(solar.altitude,0,35);
@@ -122,11 +113,17 @@ export function createLighting(renderer, scene, camera, clip) {
       }
       hdr.needsUpdate=true;
       const generator=new THREE.PMREMGenerator(renderer),next=generator.fromEquirectangular(hdr);
-      scene.environment=next.texture;environment.dispose();environment=next;generator.dispose();hdr.dispose();setTime();
+      scene.environment=next.texture;environment.dispose();environment=next;generator.dispose();hdr.dispose();environmentMode='hdr';setTime();
     },
-    setFixtures(data){fixtures=data??[];lightKey='';updateFixtures();},
-    interior(floor,position){activeFloor=floor;activePosition=position;updateFixtures();},
-    setLights(enabled){lightsEnabled=enabled;updateFixtures();},setTime,
+    setFixtures(data){fixtures.setFixtures(data);},
+    interior(floor,position,time){fixtures.select(floor,position,time);},
+    setLights(enabled){fixtures.setEnabled(enabled);},setTime,
+    update(time){
+      const state=fixtures.update(time);
+      if(state.shadowChanged)renderer.shadowMap.needsUpdate=true;
+      return state.active;
+    },
+    snapshot(){return {environment:environmentMode,interior:fixtures.snapshot()};},
     setStyle(style){soft=style!=='sun';setTime();},
     prepareMesh(object,sectionClipped) {
       object.userData.sectionClipped=sectionClipped;
