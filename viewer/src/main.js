@@ -46,6 +46,16 @@ function message(text, error = false) {
   status.hidden = false; $('#load-message').textContent = text;
   $('#retry').hidden = !error; status.classList.toggle('error', error);
 }
+// The scene is about 38 MB in seven files, so a chunk count alone leaves long
+// silences mid-download. The share is shown visually and is deliberately kept
+// out of the live region, which would otherwise read out every update.
+function progress(share) {
+  const bar = $('#load-bar'), percent = $('#load-percent');
+  if (share === null) { bar.hidden = true; percent.textContent = ''; return; }
+  const whole = Math.max(0, Math.min(100, Math.round(share * 100)));
+  bar.hidden = false; bar.firstElementChild.style.width = `${whole}%`;
+  percent.textContent = `%${whole}`;
+}
 function dispose(group) {
   const geometries = new Set(), materials = new Set(), textures = new Set();
   group?.traverse(o => {
@@ -266,6 +276,8 @@ function exitWalk(reselect = true) {
 async function loadModel() {
   if (loading || ready) return;
   loading = true; host.dataset.loaded = 'false';
+  // Clear any bar left by a failed attempt before the manifest is back.
+  progress(null);
   message('Bütün model yükleniyor…');
   const staged = new Map();
   try {
@@ -275,12 +287,26 @@ async function loadModel() {
     assetRevision=manifest.assets?.map(({file,sha256})=>({file,sha256}));
     if (!manifest.full_scene || manifest.geometry_preclipped || manifest.assets?.length !== 7) throw Error('Whole-scene manifest required');
     let next = 0, completed = 0;
+    const totalBytes = manifest.assets.reduce((sum, asset) => sum + (asset.bytes || 0), 0);
+    const received = new Map();
+    const reportProgress = () => {
+      let done = 0; for (const value of received.values()) done += value;
+      progress(totalBytes ? done / totalBytes : 0);
+    };
+    progress(0);
     async function worker() {
       while (next < manifest.assets.length) {
         const asset = manifest.assets[next++];
         const url = new URL(asset.file, modelRoot); url.searchParams.set('v', asset.sha256.slice(0, 12));
-        const gltf = await loader.loadAsync(url.href);
+        // A compressed response reports fewer bytes than the manifest records,
+        // so the manifest size stays the denominator and caps each part.
+        const gltf = await loader.loadAsync(url.href, event => {
+          received.set(asset.id, Math.min(event.loaded, asset.bytes || event.loaded));
+          reportProgress();
+        });
+        received.set(asset.id, asset.bytes || 0);
         staged.set(asset.id, asset.id==='context'?batchContext(gltf.scene):gltf.scene);
+        reportProgress();
         message(`Bütün model yükleniyor… ${++completed}/${manifest.assets.length}`);
       }
     }
