@@ -27,6 +27,7 @@ export function createWallCaps(atlas) {
         float v = (worldPosition.x + worldPosition.z) / 0.14;
         float edge = max(fwidth(v) * 1.2, 0.002);
         float hatch = 1.0 - smoothstep(0.065, 0.065 + edge, abs(fract(v) - 0.5));
+        hatch = mix(0.13, hatch, 1.0 - smoothstep(0.25, 0.8, fwidth(v)));
         gl_FragColor = vec4(mix(vec3(0.70, 0.64, 0.53), vec3(0.19, 0.17, 0.13), hatch * 0.62), 1.0);
         #include <tonemapping_fragment>
         #include <colorspace_fragment>

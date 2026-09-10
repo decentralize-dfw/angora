@@ -9,11 +9,11 @@ export class InteriorWalk {
     this.active = false; this.xrActive = false; this.keys = new Set(); this.furniture = true;
     this.yaw = .85; this.pitch = -.04; this.pointer = null; this.lastTime = null;
     canvas.addEventListener('pointerdown',e=>{
-      if (!this.active || this.xrActive || this.pointer) return;
+      if (!this.active || this.inputSuspended || this.xrActive || this.pointer) return;
       this.pointer = {id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);
     });
     canvas.addEventListener('pointermove',e=>{
-      if (!this.pointer || this.pointer.id!==e.pointerId) return;
+      if (this.inputSuspended || !this.pointer || this.pointer.id!==e.pointerId) return;
       this.yaw -= (e.clientX-this.pointer.x)*.004;
       this.pitch = THREE.MathUtils.clamp(this.pitch-(e.clientY-this.pointer.y)*.004,-1.25,1.25);
       Object.assign(this.pointer,{x:e.clientX,y:e.clientY});this.pose();invalidate();
@@ -22,7 +22,7 @@ export class InteriorWalk {
     canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);
     const movement = ['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'];
     window.addEventListener('keydown',e=>{
-      if (!this.active || /INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+      if (!this.active || this.inputSuspended || /INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
       if (movement.includes(e.code)) {e.preventDefault();this.keys.add(e.code);invalidate();}
     });
     window.addEventListener('keyup',e=>{this.keys.delete(e.code);if(this.active)invalidate();});
@@ -55,7 +55,7 @@ export class InteriorWalk {
   }
   update(time, xrSession) {
     const dt=this.lastTime===null?0:Math.min(.05,(time-this.lastTime)/1000);this.lastTime=time;
-    if(!this.active)return false;
+    if(!this.active||this.inputSuspended)return false;
     if(this.route&&!this.xrActive) {
       if(this.keys.size){this.route=null;}
       else {

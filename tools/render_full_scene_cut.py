@@ -16,7 +16,7 @@ manifest=json.loads((ROOT/'build/web/full/manifest.json').read_text())
 for asset in manifest['assets']:
     before=set(bpy.context.scene.objects)
     bpy.ops.import_scene.gltf(filepath=str(ROOT/'build/web/full'/asset['file']))
-    if asset['id']=='context':
+    if asset['id'] in {'context','garden'}:
         for o in set(bpy.context.scene.objects)-before:o['review_context']=True
 for o in list(bpy.context.scene.objects):
     if '--hide-furniture' in args and o.get('category')=='furniture':o.hide_render=True

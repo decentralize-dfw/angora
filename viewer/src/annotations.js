@@ -1,7 +1,8 @@
 import * as THREE from 'three';
+import {collectUIObstacles,layoutAnchoredLabels} from './screen-layout.js';
 
 export function labelFontSize(pixelsPerMetre) {
-  return THREE.MathUtils.clamp(12+Math.log2(Math.max(1,pixelsPerMetre)/18)*1.6,12,19);
+  return THREE.MathUtils.clamp(14+Math.log2(Math.max(1,pixelsPerMetre)/18)*1.6,14,19);
 }
 export function areaLabel(room) {
   return Number.isFinite(room.area_m2)?`${room.area_m2.toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1})} m²`:'Alan doğrulanıyor';
@@ -44,27 +45,25 @@ export function createAnnotations(data,host,onRoom) {
     const floor=/^f[0-3]$/.test(view)?Number(view[1]):-1;
     const w=host.clientWidth,h=host.clientHeight;
     camera.updateMatrixWorld();
-    const occupied=[];
+    const obstacles=collectUIObstacles(host),candidates=[];
     for(const entry of names) {
       entry.el.hidden=!(entry.floor===floor&&showNames&&!transitioning&&!walking);
       if(entry.el.hidden)continue;
       const distance=Math.max(1,entry.position.distanceTo(camera.position));
       const ppm=camera.isPerspectiveCamera?h*camera.zoom/(2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*distance):h*camera.zoom/(camera.top-camera.bottom);
       const p=project(entry,camera,w,h,labelFontSize(ppm));if(!p)continue;
-      const rw=entry.el.offsetWidth,rh=entry.el.offsetHeight;
-      let y=p.y;
-      for(let i=0;i<8;i++) {
-        const hit=occupied.find(r=>Math.abs(p.x-r.x)<(rw+r.w)/2+4&&Math.abs(y-r.y)<(rh+r.h)/2+3);
-        if(!hit)break;y=hit.y+(rh+hit.h)/2+4;
-      }
-      y=THREE.MathUtils.clamp(y,Math.max(rh/2,95),h-rh/2-105);
-      entry.el.style.top=`${y}px`;entry.el.style.left=`${THREE.MathUtils.clamp(p.x,rw/2+5,w-rw/2-5)}px`;
-      occupied.push({x:p.x,y,w:rw,h:rh});
+      candidates.push({...p,entry,width:entry.el.offsetWidth,height:entry.el.offsetHeight});
     }
     for(const entry of dimensions) {
       const visible=entry.floor===floor&&showDimensions&&!transitioning&&(!walking||entry.roomId===walkRoom);
       entry.line.visible=visible;entry.el.hidden=!visible;
-      if(visible)project(entry,camera,w,h,walking?15:13);
+      if(visible){
+        const p=project(entry,camera,w,h,walking?15:14);
+        if(p)candidates.push({...p,entry,width:entry.el.offsetWidth,height:entry.el.offsetHeight});
+      }
     }
+    const placed=layoutAnchoredLabels(candidates,{width:w,height:h,obstacles});
+    for(const item of candidates)item.entry.el.hidden=true;
+    for(const {entry,x,y} of placed){entry.el.hidden=false;entry.el.style.left=`${x}px`;entry.el.style.top=`${y}px`;}
   },dispose(){overlay.remove();group.traverse(o=>o.geometry?.dispose());material.dispose();}};
 }

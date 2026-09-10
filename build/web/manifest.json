@@ -148,10 +148,10 @@
     {
       "id": "neighborhood",
       "file": "neighborhood.glb",
-      "bytes": 11737016,
-      "sha256": "eda3fd691c68bdc42a934d3d2a3597414e6871419ab86d2a108b69944e5a5ca1",
-      "source_objects": 2190,
-      "draw_groups": 13,
+      "bytes": 3023500,
+      "sha256": "364f268de31857ce2f338d6745c2b2dfb70696e9ebe403d7b56747fa1b6891c7",
+      "source_objects": 2210,
+      "draw_groups": 401,
       "bounds_native_m": [
         [
           -139.26348876953125,
@@ -164,10 +164,16 @@
           27.40839958190918
         ]
       ],
-      "triangles": 1154176,
+      "triangles": 1237874,
       "source_native_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
       "section_elevation_m": null,
-      "section_caps": false
+      "section_caps": false,
+      "surface_partition_revision": 27,
+      "gpu_instancing": {
+        "shared_meshes": 401,
+        "authored_component_instances": 2436,
+        "exported_component_instances": 2436
+      }
     }
   ],
   "mobile_lod": true,
@@ -175,5 +181,18 @@
   "source_repository": "https://github.com/decentralize-dfw/angora",
   "geometry_source": "build/blender/angora21-working.blend",
   "linked_master_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
-  "native_source": "build/blender/angora21-working.blend"
+  "native_source": "build/blender/angora21-working.blend",
+  "surface_partition": {
+    "revision": 27,
+    "patch_sha256": "3495268c65a0feeeb330717b3d6c0e91e4f9a9397d1f548bfad6a7139f87be02",
+    "position_quantization_bits": 18,
+    "asset_ids": [
+      "neighborhood"
+    ]
+  },
+  "authored_foliage_lod": {
+    "context_crowns": 20,
+    "garden_crowns": 2,
+    "new_tree_locations": false
+  }
 }

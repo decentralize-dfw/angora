@@ -71,3 +71,41 @@ test('Real section geometry fills the wall and keeps gallery, stair and bedroom 
   caps.update(7.95, true); assert.equal(cap.position.y, 7.95);
   caps.update(30, false); assert.equal(caps.group.visible, false);
 });
+
+test('Context GPU instances retain every authored component and world bounds',()=>{
+  const dir=new URL('../public/models/full/',import.meta.url);
+  const manifest=JSON.parse(fs.readFileSync(new URL('manifest.json',dir)));
+  const asset=manifest.assets.find(a=>a.id==='context'),data=fs.readFileSync(new URL(asset.file,dir));
+  const jsonLength=data.readUInt32LE(12),gltf=JSON.parse(data.subarray(20,20+jsonLength).toString().trim());
+  const binary=20+jsonLength+8,worldBounds=new THREE.Box3();let components=0;
+  function values(id,i,defaults){
+    if(id===undefined)return defaults;
+    const a=gltf.accessors[id],v=gltf.bufferViews[a.bufferView];assert.equal(a.componentType,5126);
+    const width={VEC3:3,VEC4:4}[a.type],offset=binary+v.byteOffset+(a.byteOffset??0)+i*(v.byteStride??width*4);
+    return Array.from({length:width},(_,j)=>data.readFloatLE(offset+j*4));
+  }
+  function transform(t=[0,0,0],r=[0,0,0,1],s=[1,1,1]){
+    return new THREE.Matrix4().compose(new THREE.Vector3(...t),new THREE.Quaternion(...r),new THREE.Vector3(...s));
+  }
+  function visit(id,parent){
+    const n=gltf.nodes[id],world=parent.clone().multiply(n.matrix?new THREE.Matrix4().fromArray(n.matrix):transform(n.translation,n.rotation,n.scale));
+    if(n.mesh!==undefined){
+      const attrs=n.extensions?.EXT_mesh_gpu_instancing?.attributes;
+      const count=attrs?gltf.accessors[attrs.TRANSLATION].count:1;components+=count;
+      for(let i=0;i<count;i++){
+        const matrix=attrs?world.clone().multiply(transform(values(attrs.TRANSLATION,i,[0,0,0]),values(attrs.ROTATION,i,[0,0,0,1]),values(attrs.SCALE,i,[1,1,1]))):world;
+        for(const p of gltf.meshes[n.mesh].primitives){
+          const a=gltf.accessors[p.attributes.POSITION];
+          worldBounds.union(new THREE.Box3(new THREE.Vector3(...a.min),new THREE.Vector3(...a.max)).applyMatrix4(matrix));
+        }
+      }
+    }
+    for(const child of n.children??[])visit(child,world);
+  }
+  for(const id of gltf.scenes[gltf.scene??0].nodes)visit(id,new THREE.Matrix4());
+  assert.equal(components,asset.gpu_instancing.authored_component_instances);
+  assert.ok(asset.gpu_instancing.shared_meshes<components/2,'repeated geometry is shared');
+  const [a,b]=asset.bounds_native_m,expected=new THREE.Box3(new THREE.Vector3(a[0],a[2],-b[1]),new THREE.Vector3(b[0],b[2],-a[1]));
+  assert.ok(worldBounds.min.distanceTo(expected.min)<.02,'minimum world bounds survive instance transforms');
+  assert.ok(worldBounds.max.distanceTo(expected.max)<.02,'maximum world bounds survive instance transforms');
+});

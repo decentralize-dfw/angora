@@ -1,0 +1,83 @@
+{
+  "villa": {
+    "passes": [
+      {
+        "changed_source_triangles": 25768,
+        "removed_duplicate_area_m2": 2945.635387960327,
+        "remainder_triangulation_error_m2": 2.3334912296428777e-08
+      },
+      {
+        "changed_source_triangles": 2335,
+        "removed_duplicate_area_m2": 2.2566841237441317,
+        "remainder_triangulation_error_m2": 3.608045461714699e-10
+      },
+      {
+        "changed_source_triangles": 735,
+        "removed_duplicate_area_m2": 0.0001766248634215456,
+        "remainder_triangulation_error_m2": 8.789714313507755e-11
+      },
+      {
+        "changed_source_triangles": 306,
+        "removed_duplicate_area_m2": 4.001059965377445e-06,
+        "remainder_triangulation_error_m2": 1.1344570078230165e-15
+      }
+    ],
+    "changed_source_triangles": 25798,
+    "removed_duplicate_area_m2": 2947.8922527099944,
+    "remainder_triangulation_error_m2": 2.3783615120192334e-08,
+    "final_interface_refinement": {
+      "passes": [
+        {
+          "changed_source_triangles": 166,
+          "removed_duplicate_area_m2": 0.5081170271535085,
+          "remainder_triangulation_error_m2": 2.027660449512666e-10
+        },
+        {
+          "changed_source_triangles": 33,
+          "removed_duplicate_area_m2": 0.00023160625523484775,
+          "remainder_triangulation_error_m2": 2.401033971288063e-13
+        },
+        {
+          "changed_source_triangles": 15,
+          "removed_duplicate_area_m2": 1.7241884877228712e-07,
+          "remainder_triangulation_error_m2": 4.746772636413099e-18
+        },
+        {
+          "changed_source_triangles": 8,
+          "removed_duplicate_area_m2": 8.483653497000933e-08,
+          "remainder_triangulation_error_m2": 0.0
+        }
+      ],
+      "changed_source_triangles": 5351,
+      "removed_duplicate_area_m2": 0.5083488906641271,
+      "remainder_triangulation_error_m2": 2.0300615309516804e-10
+    }
+  },
+  "context": {
+    "passes": [
+      {
+        "changed_source_triangles": 7328,
+        "removed_duplicate_area_m2": 962.233775590535,
+        "remainder_triangulation_error_m2": 5.720672580837669e-09
+      },
+      {
+        "changed_source_triangles": 993,
+        "removed_duplicate_area_m2": 1.2627555214566768,
+        "remainder_triangulation_error_m2": 1.5676648502343328e-10
+      },
+      {
+        "changed_source_triangles": 299,
+        "removed_duplicate_area_m2": 0.0001720618918982318,
+        "remainder_triangulation_error_m2": 8.789631134388599e-11
+      },
+      {
+        "changed_source_triangles": 107,
+        "removed_duplicate_area_m2": 1.7107962683078698e-06,
+        "remainder_triangulation_error_m2": 3.050110585921164e-16
+      }
+    ],
+    "changed_source_triangles": 7340,
+    "removed_duplicate_area_m2": 963.4967048846798,
+    "remainder_triangulation_error_m2": 5.965335682216047e-09
+  }
+}

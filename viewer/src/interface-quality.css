@@ -1,0 +1,80 @@
+/* R28: readable, measurable UI; scene labels reserve these actual rectangles. */
+#app,#viewport {overflow:clip;}
+.quiet-button,.scale-picker button,.floor-row button,.camera-tools button,
+.panel-heading button,.scene-options button,.daylight-footer button,
+.daylight-footer select,.lighting-choice select,.walk-launch,
+.walk-room-panel select,.region-panel button,.site-label-villa {
+  min-height:44px;min-width:44px;
+}
+.camera-tools button {width:44px;height:44px;}
+.side-tools button {font-size:14px;}
+.load-status {width:min(420px,calc(100% - 24px));}
+.load-status button {min-height:44px;min-width:44px;font-size:14px;flex-shrink:0;}
+#load-message {min-width:0;}
+.panel-heading button {width:44px;height:44px;flex-shrink:0;}
+.walk-pad {grid-template-columns:repeat(3,44px);grid-template-rows:repeat(2,44px);gap:4px;}
+.room-label {min-height:44px;max-width:150px;}
+.scene-options button,.quiet-button,.scale-picker button,.floor-row button,
+.daylight-footer select,.daylight-footer button,.walk-launch {font-size:14px;}
+.walk-room-panel select {font-size:16px;}
+.small-note,.property-stat span,.property-room-list li,.listing-link {font-size:13px;line-height:1.5;}
+.view-description {padding:8px 10px;border-radius:12px;background:var(--paper);text-shadow:none;}
+.identity {padding:8px 10px;border-radius:12px;background:var(--paper);}
+.gesture-help {left:50%;right:auto;transform:translateX(-50%);width:max-content;max-width:calc(100% - 24px);padding:2px 8px;background:var(--paper);border-radius:8px;font-size:11px;}
+.dock-actions {flex-wrap:wrap;}
+.walk-room-panel {max-width:calc(100% - 206px);}
+#daylight-hour {height:44px;}
+.panel {z-index:50;}
+.device-qa {border-top:1px solid var(--line);margin-top:16px;padding-top:6px;font-size:13px;line-height:1.5;}
+.device-qa summary {cursor:pointer;min-height:44px;padding:11px 0;font-size:14px;}
+.device-qa input {display:block;width:100%;min-height:44px;margin:6px 0 10px;border:1px solid var(--line);border-radius:8px;padding:8px;font-size:16px;background:white;color:var(--ink);}
+.qa-actions {display:flex;flex-wrap:wrap;gap:6px;}
+.qa-actions button {min-height:44px;padding:8px 12px;background:#e6ece6;border-radius:10px;font-size:14px;}
+.device-qa-status {position:absolute;z-index:35;left:50%;top:50%;transform:translate(-50%,-50%);padding:6px 10px;border-radius:10px;background:var(--paper);font-size:12px;pointer-events:none;max-width:80%;}
+summary:focus-visible {outline:2px solid #92733d;outline-offset:3px;}
+@media(max-width:600px) {
+  .topbar {top:calc(env(safe-area-inset-top) + 10px);left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));}
+  .identity {gap:8px;padding:8px;}
+  .brand {font-size:10px;letter-spacing:.15em;}
+  .quiet-button {padding:0 12px;}
+  .quiet-button span {margin-left:5px;}
+  .scale-picker {top:calc(env(safe-area-inset-top) + 68px);left:12px;right:68px;gap:2px;}
+  .scale-picker button {flex:1 1 auto;white-space:nowrap;padding:0 6px;}
+  .side-tools {top:calc(env(safe-area-inset-top) + 68px);right:12px;gap:8px;}
+  .side-tools button {width:44px;height:44px;font-size:14px;}
+  .view-description {top:calc(env(safe-area-inset-top) + 128px);left:12px;max-width:calc(100% - 84px);}
+  .view-description h2 {font-size:15px;}
+  .view-description p {font-size:13px;}
+  .explore-dock {bottom:calc(env(safe-area-inset-bottom) + 28px);width:380px;}
+  .floor-row button {min-height:44px;}
+  .dock-actions {margin:2px 2px 0;gap:4px;}
+  .camera-tools button {width:44px;height:44px;}
+  .walk-launch {padding:0 10px;}
+  .gesture-help {bottom:calc(env(safe-area-inset-bottom) + 4px);font-size:11px;}
+  .panel {top:auto;bottom:calc(env(safe-area-inset-bottom) + 138px);max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 202px);}
+  .room-label {min-height:44px;max-width:132px;}
+  .region-panel,.model-scale {bottom:calc(env(safe-area-inset-bottom) + 146px);}
+  .walk-room-panel {left:12px;bottom:calc(env(safe-area-inset-bottom) + 28px);max-width:calc(100% - 178px);padding:8px;}
+  .walk-pad {right:12px;bottom:calc(env(safe-area-inset-bottom) + 28px);}
+  .walk-close {right:12px;top:calc(env(safe-area-inset-top) + 68px);}
+  #app[data-walk=true] .view-description {top:calc(env(safe-area-inset-top) + 68px);max-width:calc(100% - 84px);}
+  #app[data-walk=true] .side-tools {top:calc(env(safe-area-inset-top) + 128px);}
+  .load-status {bottom:calc(env(safe-area-inset-bottom) + 145px);}
+}
+@media(max-width:359px) {
+  .walk-launch {font-size:13px;padding:0 7px;}
+  .walk-launch span {margin-left:2px;}
+  .brand-divider {display:none;}
+  .identity {gap:7px;}
+  .gesture-help {font-size:10px;}
+}
+@media(orientation:landscape) and (max-height:520px) {
+  .topbar {top:max(8px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));}
+  .scale-picker {top:62px;left:max(12px,env(safe-area-inset-left));right:auto;}
+  .side-tools {top:62px;right:max(12px,env(safe-area-inset-right));}
+  .view-description {top:116px;left:max(12px,env(safe-area-inset-left));}
+  .explore-dock {left:50%;bottom:calc(env(safe-area-inset-bottom) + 8px);}
+  .gesture-help {display:none;}
+  .panel {top:58px;bottom:calc(env(safe-area-inset-bottom) + 8px);right:68px;width:320px;max-height:none;}
+  .region-panel,.model-scale {bottom:calc(env(safe-area-inset-bottom) + 122px);}
+}

@@ -1,0 +1,9 @@
+{
+  "tolerance_m": 0.0006,
+  "minimum_overlap_m2": 0.0004,
+  "source_objects": 158,
+  "patch_sha256": "3495268c65a0feeeb330717b3d6c0e91e4f9a9397d1f548bfad6a7139f87be02",
+  "tested_triangles": 263528,
+  "pairs": [],
+  "scope": "Native architecture, exterior details, roads and terrain; no claim of complete photo or GPU acceptance."
+}

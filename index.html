@@ -6,11 +6,11 @@
   <meta name="theme-color" content="#edf0eb" />
   <meta name="description" content="Angora 21. Villayı kat kat keşfedin; plan, gün ışığı ve 360° oda turu." />
   <title>Angora 21 · MERGVS</title>
-  <script type="module" crossorigin src="./web-assets/index-fYsVPLsO.js"></script>
-  <link rel="stylesheet" crossorigin href="./web-assets/index-CJxxktlO.css">
+  <script type="module" crossorigin src="./web-assets/index-BC1ohemL.js"></script>
+  <link rel="stylesheet" crossorigin href="./web-assets/index-BJ1og1jW.css">
 </head>
 <body>
-<main id="app">
+<main id="app" data-scale="neighborhood">
   <div id="viewport" aria-label="Angora villasının etkileşimli 3D modeli"></div>
   <div id="cloud-transition" aria-hidden="true"></div>
   <header class="topbar">
@@ -36,17 +36,27 @@
       <button id="toggle-measurements" aria-pressed="false" disabled>Ölçüler</button>
     </div>
     <div class="daylight-heading"><label for="daylight-hour">Gün ışığı</label><output id="daylight-time" for="daylight-hour">12:30</output></div>
+    <label class="lighting-choice" for="lighting-style">Işık <select id="lighting-style"><option value="soft">Yumuşak gün ışığı</option><option value="sun">Doğrudan güneş</option></select></label>
     <input id="daylight-hour" type="range" min="6" max="21" step="0.0833333333" value="12.5" aria-label="Gün ışığı saati" />
     <div class="range-endpoints"><span>06:00</span><span>21:00</span></div>
     <div class="daylight-footer"><select id="daylight-season" aria-label="Gün ışığı tarihi"><option value="172">21 Haziran</option><option value="80">21 Mart</option><option value="355">21 Aralık</option></select><button id="toggle-lights" aria-pressed="true">İç ışıklar</button></div>
     <p class="small-note" id="solar-note">Yerel saat · Görsel gün ışığı çalışması</p>
+    <details class="device-qa">
+      <summary>Cihaz ve görüntü kontrolü</summary>
+      <p>15 saniye boyunca sahneyi hareket ettir. Ölçüm ve görüntüler yalnızca cihazına indirilir; otomatik gönderilmez.</p>
+      <label for="qa-device">Cihaz modeli / sistem sürümü (isteğe bağlı)</label>
+      <input id="qa-device" type="text" maxlength="100" placeholder="Örn. iPhone modeli, iOS sürümü" autocomplete="off" />
+      <div class="qa-actions"><button id="qa-start" data-needs-model disabled>15 sn ölç</button><button id="qa-save" disabled>Raporu indir</button><button id="qa-screenshot" data-needs-model disabled>Sahneyi indir</button></div>
+      <p id="qa-result" role="status">Henüz ölçüm yok. Ölçüm, gerçek cihaz veya görsel kalite onayı değildir.</p>
+    </details>
   </section>
   <section id="info-panel" class="panel info-panel" aria-label="Villa bilgileri" hidden>
     <div class="panel-heading"><h2>Angora 21</h2><button data-close-panel="info-panel" aria-label="Bilgileri kapat">×</button></div>
     <div id="property-info"></div>
     <a class="listing-link" href="https://remax.com.tr/tr/portfoy/P56131836" target="_blank" rel="noopener noreferrer">İlanı incele ↗</a>
   </section>
-  <section id="region-panel" class="region-panel" aria-label="Yakındaki hizmetler" hidden></section>
+  <section id="region-panel" class="region-panel" aria-label="Bölge yerleşimi" hidden><span id="context-count">Vaziyet planı</span><button id="return-villa" data-needs-model disabled>Villa 21’e yaklaş ↗</button></section>
+  <div id="model-scale" class="model-scale" aria-label="Model ölçeği" hidden><i></i><span></span></div>
   <footer class="explore-dock">
     <nav class="floor-row" aria-label="Kat seçimi">
       <button data-view="f0" aria-pressed="false">Bodrum</button>
@@ -75,6 +85,7 @@
     </div>
   </section>
   <p class="gesture-help" id="gesture-help">Sürükle: döndür · İki parmak: kaydır / yakınlaştır</p>
+  <div id="qa-status" class="device-qa-status" role="status" hidden></div>
   <div class="load-status" id="load-status" role="status" aria-live="polite"><span class="spinner" aria-hidden="true"></span><span id="load-message">Model yükleniyor…</span><button id="retry" hidden>Tekrar dene</button></div>
   <noscript>3D modeli görüntülemek için JavaScript açık olmalıdır.</noscript>
 </main>

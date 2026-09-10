@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="tr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Angora — UI yerleşim kontrolü (cihaz emülasyonu değildir)</title>
+<style>
+  body{font:16px system-ui;margin:20px;background:#dfe5df;color:#233c38}
+  header{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+  select{min-height:44px;font:inherit}p{max-width:70ch}iframe{display:block;border:1px solid #65736d;background:white}
+</style>
+<header><label for="viewport-size">UI boyutu</label><select id="viewport-size">
+  <option value="320,568">320 × 568 — dar telefon</option>
+  <option value="390,700" selected>390 × 700 — dikey</option>
+  <option value="430,850">430 × 850 — büyük dikey</option>
+  <option value="844,390">844 × 390 — yatay</option>
+</select></header>
+<p>Bu sayfa yalnızca CSS yerleşimini sınar. Gerçek iPhone, Safari, dokunma,
+  safe-area, GPU veya render kalitesi testi değildir. İçerik normal uygulamadır;
+  WebGL yoksa gerçek hata arayüzünü gösterir.</p>
+<iframe id="viewer-frame" title="Angora arayüzü" src="./" width="390" height="700"></iframe>
+<script type="module">
+  const select=document.querySelector('#viewport-size'),frame=document.querySelector('#viewer-frame');
+  select.onchange=()=>{const [w,h]=select.value.split(',');frame.width=w;frame.height=h;};
+</script>
+</html>

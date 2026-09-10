@@ -7,6 +7,10 @@ import bpy, bmesh, json, hashlib, sys, math
 from pathlib import Path
 from mathutils import Vector
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'tools'))
+from web_surface_patches import patched_mesh,COUNTS,PATCHES
+from web_tree_lod import crown_lod
+from web_context_instances import export_context
 FULL='--full-scene' in sys.argv
 OUT=ROOT/('build/web/full' if FULL else 'build/web');OUT.mkdir(parents=True,exist_ok=True)
 source=Path(bpy.data.filepath);source_hash=hashlib.sha256(source.read_bytes()).hexdigest()
@@ -27,14 +31,20 @@ architect=geometry(bpy.data.collections['10_ARCHITECTURE'].all_objects)
 exterior=geometry(bpy.data.collections['15_EXTERIOR_DETAILS'].all_objects)
 garden=geometry(bpy.data.collections['40_LANDSCAPE'].all_objects)
 hood=geometry(bpy.data.collections['50_NEIGHBORHOOD'].all_objects)
+lod_collection=bpy.data.collections.new('Temporary web foliage LOD');scene.collection.children.link(lod_collection)
+hood_crowns={crown_lod(o,lod_collection) for o in hood if o.name.startswith('Individual folded leaves')}
+hood_crowns.discard(None)
+garden_crowns={crown_lod(o,lod_collection) for o in garden if o.name.startswith('Individual folded leaves')}
+garden_crowns.discard(None)
 
 def plant(o):
     words=' '.join([o.name]+[c.name for c in o.users_collection]).lower()
     return any(s in words for s in ['foliage','leaves','grass blades','broadleaf','leaf cluster','planting','tree crown'])
 
-# Retain the CAD family geometry and graded ground. Dense leaves are omitted
-# from this initial neighborhood LOD; they remain in the native review model.
+# Retain CAD family geometry and graded ground. Dense leaves become compact
+# crowns at the authored positions; full foliage remains in the native model.
 hood={o for o in hood if not plant(o) and not any(s in o.name for s in ['SHUTTER AİM','TAVAN','DUVAR KAPLAMA','ZEMİN KAPLAMA'])}
+hood|=hood_crowns
 building={o for o in architect|exterior|garden if not plant(o)}
 
 for image in bpy.data.images:
@@ -55,6 +65,9 @@ records=[]
 
 def export_view(name,objects,cut=None,lower=None):
     print('WEB_VIEW_START',name,len(objects),flush=True)
+    if name=='neighborhood':
+        record=export_context(objects,preview,deps,OUT/(name+'.glb'),source_hash)
+        records.append(record);print('WEB_VIEW_EXPORTED',json.dumps(record),flush=True);return
     buckets={};source_count=0;max_z=-math.inf
     for o in sorted(objects,key=lambda x:x.name):
         ev=o.evaluated_get(deps)
@@ -62,6 +75,8 @@ def export_view(name,objects,cut=None,lower=None):
         except RuntimeError:continue
         if not me or not me.polygons:
             ev.to_mesh_clear();continue
+        repair=patched_mesh(o,me,context=o in hood)
+        if repair is not None:me=repair
         if FULL:
             # Preserve evaluated bevel/weighted split normals. BMesh conversion
             # discards these and makes the mobile version visibly faceted.
@@ -86,7 +101,9 @@ def export_view(name,objects,cut=None,lower=None):
                     bucket['uv'].append(tuple(uv.data[li].uv) if uv else (0.,0.))
                     bucket['normals'].append(tuple((normal_matrix@normals[li].vector).normalized()))
                 bucket['f'].append(indices);bucket['smooth'].append(face.use_smooth)
-            ev.to_mesh_clear();source_count+=1
+            ev.to_mesh_clear()
+            if repair is not None:bpy.data.meshes.remove(repair)
+            source_count+=1
             continue
         bm=bmesh.new();bm.from_mesh(me);bm.transform(o.matrix_world)
         mats=list(me.materials);uv=bm.loops.layers.uv.active
@@ -96,7 +113,7 @@ def export_view(name,objects,cut=None,lower=None):
         # Dissolve coplanar CAD triangulation without changing silhouettes.
         if len(bm.faces)>1000:
             if name in {'neighborhood','building'}:
-                bmesh.ops.remove_doubles(bm,verts=list(bm.verts),dist=.00005)
+                bmesh.ops.remove_doubles(bm,verts=list(bm.verts),dist=.0015 if name=='neighborhood' else .00005)
             bmesh.ops.dissolve_limit(bm,angle_limit=.035 if name=='neighborhood' else .004,verts=list(bm.verts),edges=list(bm.edges),delimit={'MATERIAL'} if name=='neighborhood' else {'MATERIAL','UV','NORMAL'})
         bm.verts.ensure_lookup_table();bm.verts.index_update()
         wall=o.get('source_layer','').endswith('$DUVAR') or o.name.startswith(('Lift shaft','Lift landing jamb wall','Lift lintel wall'))
@@ -113,7 +130,9 @@ def export_view(name,objects,cut=None,lower=None):
                     local[vk]=len(bucket['v']);bucket['v'].append(tuple(loop.vert.co));max_z=max(max_z,loop.vert.co.z)
                 indices.append(local[vk]);bucket['uv'].append(tuple(loop[uv].uv) if uv else (0.,0.))
             bucket['f'].append(indices);bucket['smooth'].append(face.smooth)
-        bm.free();ev.to_mesh_clear();source_count+=1
+        bm.free();ev.to_mesh_clear()
+        if repair is not None:bpy.data.meshes.remove(repair)
+        source_count+=1
     produced=[];bounds_min=[math.inf]*3;bounds_max=[-math.inf]*3
     for (mat_name,category),b in buckets.items():
         if not b['f']:continue
@@ -138,9 +157,9 @@ def export_view(name,objects,cut=None,lower=None):
     bpy.ops.export_scene.gltf(filepath=str(path),export_format='GLB',use_selection=True,export_apply=False,
         export_extras=True,export_cameras=False,export_lights=False,export_yup=True,export_materials='EXPORT',
         export_draco_mesh_compression_enable=True,export_draco_mesh_compression_level=10 if name=='neighborhood' else 6,
-        export_draco_position_quantization=14 if name=='neighborhood' else 16,
-        export_draco_normal_quantization=8 if name=='neighborhood' else 10,
-        export_draco_texcoord_quantization=10 if name=='neighborhood' else 12)
+        export_draco_position_quantization=18,
+        export_draco_normal_quantization=10,
+        export_draco_texcoord_quantization=12)
     raw=path.read_bytes();header=json.loads(raw[20:20+int.from_bytes(raw[12:16],'little')].decode().rstrip('\0 '))
     record={'id':name,'file':path.name,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),
         'source_objects':source_count,'draw_groups':len(produced),'bounds_native_m':[bounds_min,bounds_max],
@@ -150,6 +169,7 @@ def export_view(name,objects,cut=None,lower=None):
         assert max_z<=cut+.001,(name,max_z,cut)
         record['floor_elevation_m']=cut-1.6;record['cut_height_m']=1.6
     if FULL:record['evaluated_split_normals_preserved']=True
+    if PATCHES:record['surface_partition_revision']=27
     records.append(record)
     print('WEB_VIEW_EXPORTED',json.dumps(record),flush=True)
     for o in produced:
@@ -169,7 +189,7 @@ if FULL:
     if 'garden' in wanted:
         # Retain the authored foliage volumes and tree crowns. Omit only the
         # separate dense leaf/needle/grass detail meshes in the mobile model.
-        mobile_garden={o for o in garden if not any(s in o.name.lower() for s in ['leaves','needles','grass blades','folded leaves'])}
+        mobile_garden={o for o in garden if not any(s in o.name.lower() for s in ['leaves','needles','grass blades','folded leaves'])}|garden_crowns
         export_view('garden',mobile_garden)
     if 'context' in wanted:
         context=dict(next(a for a in json.loads((ROOT/'build/web/manifest.json').read_text())['assets'] if a['id']=='neighborhood'))
@@ -184,6 +204,8 @@ manifest={'version':2 if FULL else 1,'source_native_sha256':source_hash,'units':
           'geometry_source':source.relative_to(ROOT).as_posix(),
           'linked_master_sha256':hashlib.sha256((ROOT/'build/blender/angora21-working.blend').read_bytes()).hexdigest(),
           'native_source':'build/blender/angora21-working.blend'}
+if PATCHES:manifest['surface_partition']={'revision':27,'patch_sha256':hashlib.sha256((ROOT/'build/cad/web-surface-patches-r27.json.gz').read_bytes()).hexdigest(),'position_quantization_bits':18,'asset_ids':[r['id'] for r in records if r.get('surface_partition_revision')==27]}
+manifest['authored_foliage_lod']={'context_crowns':len(hood_crowns),'garden_crowns':len(garden_crowns),'new_tree_locations':False}
 if FULL:
     manifest.update(full_scene=True,geometry_preclipped=False,clip_lower_plane=False,stairs_preserved=True,
                     lift_served_floor_indices=[0,1,2],section_caps='requires_section_atlas_rebuild',

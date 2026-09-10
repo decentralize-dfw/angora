@@ -20,8 +20,8 @@
     {
       "id": "level-0",
       "file": "level-0.glb",
-      "bytes": 3793548,
-      "sha256": "c4b2127a5c3b9b65874dbab54da11190eb20ce5605cb004dc60950204dcd3217",
+      "bytes": 3896780,
+      "sha256": "32aa7b0978e2400440f71facb29a1f6f78921de2a7a73fd821849c4733c19f8a",
       "source_objects": 905,
       "draw_groups": 33,
       "bounds_native_m": [
@@ -36,17 +36,18 @@
           6.1996002197265625
         ]
       ],
-      "triangles": 100737,
-      "source_native_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
+      "triangles": 102717,
+      "source_native_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
       "section_elevation_m": null,
       "section_caps": false,
-      "evaluated_split_normals_preserved": true
+      "evaluated_split_normals_preserved": true,
+      "surface_partition_revision": 27
     },
     {
       "id": "level-1",
       "file": "level-1.glb",
-      "bytes": 6096736,
-      "sha256": "eb2f9a585835a0e42dc5d317d4d508bfa1e0f7e7e19bcd1e042fc71212ce4988",
+      "bytes": 6313676,
+      "sha256": "6f16c9c00353648e0a2b67bfa9e5e4b04727f045e8af09160da24016abc6783b",
       "source_objects": 663,
       "draw_groups": 37,
       "bounds_native_m": [
@@ -58,20 +59,21 @@
         [
           7.668399810791016,
           10.392999649047852,
-          7.099999904632568
+          7.099599838256836
         ]
       ],
-      "triangles": 228968,
-      "source_native_sha256": "648c4c276e972b20fe20b231c6da4d54995e1375aae8508c17a1d7ff866af725",
+      "triangles": 229969,
+      "source_native_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
       "section_elevation_m": null,
       "section_caps": false,
-      "evaluated_split_normals_preserved": true
+      "evaluated_split_normals_preserved": true,
+      "surface_partition_revision": 27
     },
     {
       "id": "level-2",
       "file": "level-2.glb",
-      "bytes": 7031068,
-      "sha256": "17dcd7c3f9828223486905f6555a61c9521a774cf95ef67c3d1fe15927007c50",
+      "bytes": 7236664,
+      "sha256": "f825973627a2180577226e3db9ffb74ecf63aec908d37c87f351de129b90a095",
       "source_objects": 412,
       "draw_groups": 48,
       "bounds_native_m": [
@@ -86,17 +88,18 @@
           10.453055381774902
         ]
       ],
-      "triangles": 177501,
-      "source_native_sha256": "2b06f88e23f9d8d92668dc1c9a52afc6e77bcf3471d7880d1afeee05ecbb64ca",
+      "triangles": 179362,
+      "source_native_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
       "section_elevation_m": null,
       "section_caps": false,
-      "evaluated_split_normals_preserved": true
+      "evaluated_split_normals_preserved": true,
+      "surface_partition_revision": 27
     },
     {
       "id": "level-3",
       "file": "level-3.glb",
-      "bytes": 4210580,
-      "sha256": "7336a22e1107205032c3c63215bb50dddaff3ec1a1139de8c1a88d56b856286c",
+      "bytes": 4362724,
+      "sha256": "9265f85c38d3f4469295ca807621befa58ee4c085288a97e86008dbae6a364dc",
       "source_objects": 122,
       "draw_groups": 25,
       "bounds_native_m": [
@@ -111,17 +114,18 @@
           13.508399963378906
         ]
       ],
-      "triangles": 62753,
-      "source_native_sha256": "112c349583e84cd44e27d6d052e8340f43d56954f95a9fd98a6e0acec1a407ea",
+      "triangles": 70939,
+      "source_native_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
       "section_elevation_m": null,
       "section_caps": false,
-      "evaluated_split_normals_preserved": true
+      "evaluated_split_normals_preserved": true,
+      "surface_partition_revision": 27
     },
     {
       "id": "envelope",
       "file": "envelope.glb",
-      "bytes": 4055224,
-      "sha256": "b6b5506871dd0c84df08026c387e4c830c181efc8398bfb686366acc677e6dff",
+      "bytes": 4313596,
+      "sha256": "5d9ff54a439ae7b30f21a13766a1fa9e5cabf494909109481d560cad94a3c163",
       "source_objects": 89,
       "draw_groups": 14,
       "bounds_native_m": [
@@ -136,22 +140,23 @@
           14.420000076293945
         ]
       ],
-      "triangles": 698186,
-      "source_native_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
+      "triangles": 698383,
+      "source_native_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
       "section_elevation_m": null,
       "section_caps": false,
-      "evaluated_split_normals_preserved": true
+      "evaluated_split_normals_preserved": true,
+      "surface_partition_revision": 27
     },
     {
       "id": "garden",
       "file": "garden.glb",
-      "bytes": 7875200,
-      "sha256": "a2648bbfa777a4ca189d6774ba213144b5c0fc0a718b974ad5c4c664538897e8",
-      "source_objects": 417,
-      "draw_groups": 15,
+      "bytes": 8992468,
+      "sha256": "1eb7d78eb6357447af639029d17b2fdb424bfdbab7e79244adfdcf75f3571352",
+      "source_objects": 419,
+      "draw_groups": 16,
       "bounds_native_m": [
         [
-          -10.108560562133789,
+          -10.180142402648926,
           -10.90999984741211,
           -4.0
         ],
@@ -161,19 +166,20 @@
           10.332208633422852
         ]
       ],
-      "triangles": 510072,
-      "source_native_sha256": "9f601a7d41ddfc16f10c70fd313c142683b32b5f34ac7bd3d24efe0c61e2d532",
+      "triangles": 511134,
+      "source_native_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
       "section_elevation_m": null,
       "section_caps": false,
-      "evaluated_split_normals_preserved": true
+      "evaluated_split_normals_preserved": true,
+      "surface_partition_revision": 27
     },
     {
       "id": "context",
       "file": "../neighborhood.glb",
-      "bytes": 11737016,
-      "sha256": "eda3fd691c68bdc42a934d3d2a3597414e6871419ab86d2a108b69944e5a5ca1",
-      "source_objects": 2190,
-      "draw_groups": 13,
+      "bytes": 3023500,
+      "sha256": "364f268de31857ce2f338d6745c2b2dfb70696e9ebe403d7b56747fa1b6891c7",
+      "source_objects": 2210,
+      "draw_groups": 401,
       "bounds_native_m": [
         [
           -139.26348876953125,
@@ -186,10 +192,16 @@
           27.40839958190918
         ]
       ],
-      "triangles": 1154176,
+      "triangles": 1237874,
       "source_native_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
       "section_elevation_m": null,
-      "section_caps": false
+      "section_caps": false,
+      "surface_partition_revision": 27,
+      "gpu_instancing": {
+        "shared_meshes": 401,
+        "authored_component_instances": 2436,
+        "exported_component_instances": 2436
+      }
     }
   ],
   "mobile_lod": true,
@@ -198,6 +210,25 @@
   "geometry_source": "build/blender/angora21-working.blend",
   "linked_master_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
   "native_source": "build/blender/angora21-working.blend",
+  "surface_partition": {
+    "revision": 27,
+    "patch_sha256": "3495268c65a0feeeb330717b3d6c0e91e4f9a9397d1f548bfad6a7139f87be02",
+    "position_quantization_bits": 18,
+    "asset_ids": [
+      "level-0",
+      "level-1",
+      "level-2",
+      "level-3",
+      "envelope",
+      "garden",
+      "context"
+    ]
+  },
+  "authored_foliage_lod": {
+    "context_crowns": 20,
+    "garden_crowns": 2,
+    "new_tree_locations": false
+  },
   "full_scene": true,
   "geometry_preclipped": false,
   "clip_lower_plane": false,
