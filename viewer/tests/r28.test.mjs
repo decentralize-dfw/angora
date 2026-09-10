@@ -20,7 +20,10 @@ test('Reference production baseline has ACES, restrained linear bloom and no idl
   const renderer={shadowMap:{}};applyRenderProfile(renderer);
   assert.equal(renderer.toneMapping,THREE.ACESFilmicToneMapping);assert.equal(renderer.toneMappingExposure,.75);
   assert.equal(renderer.outputColorSpace,THREE.SRGBColorSpace);assert.equal(renderer.transmissionResolutionScale,1);
-  assert.equal(referenceProfile.refinement,false);assert.equal(referenceProfile.pathTracing,false);assert.equal(referenceProfile.aoEnabled,false);
+  assert.equal(referenceProfile.refinement,false);assert.equal(referenceProfile.pathTracing,false);
+  // Occlusion is on here even though the reference ships it off: see the note
+  // in render-profile.js. Its white studio had no crevices; a villa is crevices.
+  assert.equal(referenceProfile.aoEnabled,true);
   const pass=new LinearBloomPass();pass.setSize(1170,2100);
   assert.equal(pass.bright.width,585);assert.equal(pass.blurA.width,292);assert.equal(pass.blurA.height,525);
   assert.equal(pass.combine.uniforms.strength.value,.1);assert.equal(pass.extract.uniforms.threshold.value,.06);

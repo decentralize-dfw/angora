@@ -26,10 +26,14 @@ export class SectionGTAOPass extends GTAOPass {
       if ((this.normalMaterial.clippingPlanes?.length ?? 0) !== planes.length) this.normalMaterial.needsUpdate = true;
       this.normalMaterial.clippingPlanes = planes;
     };
-    this.updateGtaoMaterial({radius:0.55, thickness:0.7, distanceExponent:2,
-      distanceFallOff:0.8, samples:12, screenSpaceRadius:false});
+    // The reference's own numbers. Radius is in world metres and it matters:
+    // too large and the occlusion stops describing crevices and starts shading
+    // whole objects, which reads as dirt rather than as contact. 0.28 m is the
+    // scale of a window reveal, an eave underside, a wall meeting a floor.
+    this.updateGtaoMaterial({radius:0.28, distanceExponent:1, thickness:1,
+      scale:1.05, samples:12, distanceFallOff:1, screenSpaceRadius:false});
     this.updatePdMaterial({radius:5, samples:8, depthPhi:3, normalPhi:4});
-    this.blendIntensity = 0.55;
+    this.blendIntensity = 0.8;
   }
   setSize(w, h) {
     const scale = this.resolutionScale ?? 1;
@@ -76,7 +80,7 @@ export function createLighting(renderer, scene, camera, clip) {
   sky.geometry.dispose();sky.material.dispose();pmrem.dispose();
   const target=new THREE.WebGLRenderTarget(1,1,{type:THREE.HalfFloatType,samples:referenceProfile.msaaSamples});
   const composer=new EffectComposer(renderer,target),beauty=new RenderPass(scene,camera);
-  const ao=new SectionGTAOPass(scene,camera,clip,compact?.5:.85);ao.blendIntensity=.2;
+  const ao=new SectionGTAOPass(scene,camera,clip,compact?.5:.85);
   const smaa=new SMAAPass(),bloom=new LinearBloomPass();
   ao.enabled=referenceProfile.aoEnabled;
   configurePostprocessing(composer,{beauty,ao,smaa,bloom,output:new OutputPass()});
@@ -148,7 +152,9 @@ export function createLighting(renderer, scene, camera, clip) {
       sun.position.copy(sun.target.position).addScaledVector(direction,shadowDistance);
       Object.assign(sun.shadow.camera,{left:-extent,right:extent,top:extent,bottom:-extent});
       sun.shadow.camera.updateProjectionMatrix();renderer.shadowMap.needsUpdate=true;
-      ao.enabled=referenceProfile.aoEnabled&&!['neighborhood','region'].includes(view);setTime();
+      // Region frames the whole settlement, where a crevice-scale radius has
+      // nothing left to describe and only costs, so occlusion stops there.
+      ao.enabled=referenceProfile.aoEnabled&&view!=='region';setTime();
       for(const material of preparedMaterials)setMaterialScale(material,view);
     },
     pixelRatio(ratio){composer.setPixelRatio(ratio);},
