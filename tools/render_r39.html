@@ -1,0 +1,101 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Angora R39 offscreen render</title>
+<!-- Serve the REPOSITORY ROOT and open /tools/render_r39.html. Needs viewer/node_modules
+     (cd viewer && npm ci). Query: w,h,fov,pos,target,exposure,sun,sunpos,sky,env,bg,
+     assets,clip,lift,hdr. Example:
+     /tools/render_r39.html?assets=level-2,envelope&pos=-2,8.4,6&target=-2,7.3,-1&fov=62&clip=7.97 -->
+<style>html,body{margin:0;background:#000}canvas{display:block}</style>
+<script type="importmap">
+{"imports":{"three":"../viewer/node_modules/three/build/three.module.js",
+ "three/addons/":"../viewer/node_modules/three/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {DRACOLoader} from 'three/addons/loaders/DRACOLoader.js';
+import {RGBELoader} from 'three/addons/loaders/RGBELoader.js';
+
+// Standalone photo-match harness. It renders the DELIVERED GLBs from an
+// arbitrary camera so a model view can be put beside an owner photograph.
+// Deliberately separate from viewer/: no post chain, no section clipping, no
+// UI - only the model, a sun and the same HDR the viewer uses, so what it
+// shows is the geometry and the materials rather than the presentation grade.
+const params = new URLSearchParams(location.search);
+const num = (k, d) => params.has(k) ? Number(params.get(k)) : d;
+const vec = (k, d) => params.has(k) ? params.get(k).split(',').map(Number) : d;
+
+const renderer = new THREE.WebGLRenderer({antialias:true, preserveDrawingBuffer:true});
+renderer.setPixelRatio(1);
+renderer.setSize(num('w',1280), num('h',860));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = num('exposure',.9);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.append(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(params.get('bg') || '#c9d6e4');
+const camera = new THREE.PerspectiveCamera(num('fov',45), num('w',1280)/num('h',860), .05, 2000);
+camera.position.fromArray(vec('pos',[12,6,14]));
+camera.lookAt(new THREE.Vector3().fromArray(vec('target',[0,2,0])));
+
+const sun = new THREE.DirectionalLight(0xfff2e0, num('sun',2.6));
+sun.position.fromArray(vec('sunpos',[28,40,18]));
+sun.castShadow = true;
+sun.shadow.mapSize.setScalar(2048);
+Object.assign(sun.shadow.camera,{left:-40,right:40,top:40,bottom:-40,near:1,far:160});
+scene.add(sun, sun.target, new THREE.HemisphereLight(0xdfe9f5, 0x6f7a60, num('sky',.7)));
+
+const draco = new DRACOLoader().setDecoderPath('../viewer/public/draco/');
+const loader = new GLTFLoader().setDRACOLoader(draco);
+
+// Only the files a shot needs; the neighbourhood is 14 MB and an interior
+// never sees it.
+const want = (params.get('assets') || 'level-0,level-1,level-2,level-3,envelope').split(',').filter(Boolean);
+const manifest = await (await fetch('../build/web/full/manifest.json')).json();
+const loaded = {};
+for (const asset of manifest.assets) {
+  if (!want.includes(asset.id)) continue;
+  const gltf = await loader.loadAsync(`../build/web/full/${asset.file}?v=${asset.sha256.slice(0,12)}`);
+  gltf.scene.traverse(o => {if (o.isMesh) {o.castShadow = true; o.receiveShadow = true;}});
+  scene.add(gltf.scene);
+  loaded[asset.id] = gltf;
+}
+
+// A section cut, so an interior can be photographed from outside its own roof.
+const clipY = params.has('clip') ? num('clip',0) : null;
+if (clipY !== null) {
+  const plane = new THREE.Plane(new THREE.Vector3(0,-1,0), clipY);
+  renderer.clippingPlanes = [plane];
+  renderer.localClippingEnabled = true;
+  scene.traverse(o => {if (o.isMesh) for (const m of [].concat(o.material)) {m.clippingPlanes=[plane]; m.side=THREE.DoubleSide;}});
+}
+
+if (params.get('hdr') !== 'off') {
+  try {
+    const hdr = await new RGBELoader().loadAsync('../assets/lighting/kloofendal_48d_partly_cloudy_puresky_1k.hdr');
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromEquirectangular(hdr).texture;
+    scene.environmentIntensity = num('env',.85);
+    hdr.dispose(); pmrem.dispose();
+  } catch (error) { console.warn('HDR unavailable', error); }
+}
+
+// Play the lift to a named stop so the cabin can be photographed where it belongs.
+const liftTime = params.has('lift') ? num('lift',0) : null;
+if (liftTime !== null && loaded['level-0']?.animations?.length) {
+  const mixer = new THREE.AnimationMixer(loaded['level-0'].scene);
+  mixer.clipAction(loaded['level-0'].animations[0]).play();
+  mixer.setTime(liftTime);
+}
+
+scene.updateMatrixWorld(true);
+renderer.render(scene, camera);
+const box = new THREE.Box3().setFromObject(scene);
+window.__shot = {ready:true, assets:Object.keys(loaded),
+  bounds:[box.min.toArray().map(v=>+v.toFixed(3)), box.max.toArray().map(v=>+v.toFixed(3))],
+  triangles: renderer.info.render.triangles, calls: renderer.info.render.calls};
+document.title = 'ready';
+</script>
