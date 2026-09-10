@@ -24,7 +24,20 @@ export function layoutAnchoredLabels(items,{width,height,obstacles=[],gap=6,padd
 
 // Actual visible controls, including open sheets and safe-area positioning,
 // replace guessed top/bottom reservations for different phone orientations.
-export function collectUIObstacles(host) {
+// Measuring the interface forces the browser to lay the page out, and this ran
+// twice a frame over fourteen selectors - about sixty forced layouts a second,
+// which on a phone is felt as stutter rather than seen. The rectangles only
+// move when the window resizes or a panel opens, so a reading is reused for a
+// moment; a panel that opens is avoided within a frame or two, which is not
+// visible. Passing force skips the cache.
+let cached=null,cachedAt=0,cachedHost=null;
+export function collectUIObstacles(host,force=false) {
+  const now=typeof performance==='object'?performance.now():Date.now();
+  if(!force&&cached&&cachedHost===host&&now-cachedAt<250)return cached;
+  cachedHost=host;cachedAt=now;
+  return cached=measureUIObstacles(host);
+}
+function measureUIObstacles(host) {
   const origin=host.getBoundingClientRect();
   return [...document.querySelectorAll('.topbar,.scale-picker,.view-description,.side-tools,.explore-dock,.panel,.region-panel,.model-scale,.walk-close,.walk-room-panel,.walk-pad,.load-status,.gesture-help,.device-qa-status')]
     .filter(el=>el.getClientRects().length>0)
