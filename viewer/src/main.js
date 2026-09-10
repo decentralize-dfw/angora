@@ -331,7 +331,11 @@ async function loadModel() {
     contextBox=new THREE.Box3().setFromObject(groups.get('context')).union(buildingBox);
     prepareContextSurfaces(groups.get('context'),scene.background);
     try {
-      const contextResponse=await fetch(new URL('../site-context.json',modelRoot));
+      // Every other model file carries ?v= from its manifest hash, but the site
+      // context has no manifest entry, so it is revalidated instead. Without
+      // this a returning visitor can pair a new bundle with the layout cached
+      // before the surface repair changed it.
+      const contextResponse=await fetch(new URL('../site-context.json',modelRoot),{cache:'no-cache'});
       if(!contextResponse.ok)throw Error('Context labels unavailable');
       const contextData=await contextResponse.json();
       const settlementBox=new THREE.Box3();
@@ -430,6 +434,8 @@ try {
   message('3D görünüm başlatılamadı. Güncel Safari veya Chrome ile tekrar açabilirsin.', true);
   $('#retry').onclick = () => location.reload(); console.error(error);
   $('#app').dataset.renderError='true';
-  fetch(new URL('rooms.json',modelRoot)).then(r=>{if(!r.ok)throw Error('Property info unavailable');return r.json();})
+  // The renderer never started, so no manifest hash is available to version
+  // this with; revalidate so the panel cannot fall back to stale room data.
+  fetch(new URL('rooms.json',modelRoot),{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('Property info unavailable');return r.json();})
     .then(data=>{roomData=data;renderPropertyInfo($('#property-info'),data,'building');}).catch(console.warn);
 }
