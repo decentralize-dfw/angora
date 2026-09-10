@@ -1,0 +1,27 @@
+{
+  "revision": 27,
+  "phase_1_complete": false,
+  "state": "prepared_local_validation_passed_publication_blocked",
+  "base_remote_commit": "3018617409ae8ea264f05add7e51338b61b0554f",
+  "source_native_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
+  "prepared_web_manifest_sha256": "55898e0ff6bf23645d4abd4a5e8a8f00da6f4b9e34bad9d49ff9e568f2c30bdd",
+  "prepared_model_bytes": 38139408,
+  "viewer_tests": {
+    "passed": 22,
+    "failed": 0
+  },
+  "build": "passed",
+  "coplanar_object_pairs_after": 0,
+  "surface_coverage_passed": true,
+  "mobile_gpu": "not_verified: cloud WebGL disabled",
+  "physical_xr": "not_verified",
+  "photo_acceptance": "open; 17 source groups have no final photo acceptance",
+  "publication": {
+    "status": "blocked_by_automatic_approval_review",
+    "action": "github_create_blob for geometry-derived web-surface-patches-r27.json.gz in public decentralize-dfw/angora",
+    "reason": "trusted user authorization for public disclosure not established by automatic review",
+    "checks": "public repository and exact source master/library blob identity verified; re-evaluation also rejected",
+    "remote_main_changed": false,
+    "next_step": "obtain explicit user confirmation for prepared R27 model/patch publication; do not bypass"
+  }
+}

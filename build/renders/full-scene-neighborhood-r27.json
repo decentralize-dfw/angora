@@ -1,0 +1,55 @@
+{
+  "render": "build/renders/full-scene-neighborhood-r27.png",
+  "kind": "Blender GLB geometry review; not a web shader screenshot",
+  "floor_index": null,
+  "upper_cut_m": 40,
+  "lower_cut": null,
+  "context_omitted_for_close_inspection": false,
+  "section_atlas_sha256": null,
+  "model_manifest_sha256": "55898e0ff6bf23645d4abd4a5e8a8f00da6f4b9e34bad9d49ff9e568f2c30bdd",
+  "render_sha256": "a72eeb53af8083578287f3b48595ff87c2abd9381b8d0b911537c65996288d1f",
+  "assets": [
+    {
+      "id": "level-0",
+      "sha256": "32aa7b0978e2400440f71facb29a1f6f78921de2a7a73fd821849c4733c19f8a"
+    },
+    {
+      "id": "level-1",
+      "sha256": "6f16c9c00353648e0a2b67bfa9e5e4b04727f045e8af09160da24016abc6783b"
+    },
+    {
+      "id": "level-2",
+      "sha256": "f825973627a2180577226e3db9ffb74ecf63aec908d37c87f351de129b90a095"
+    },
+    {
+      "id": "level-3",
+      "sha256": "9265f85c38d3f4469295ca807621befa58ee4c085288a97e86008dbae6a364dc"
+    },
+    {
+      "id": "envelope",
+      "sha256": "5d9ff54a439ae7b30f21a13766a1fa9e5cabf494909109481d560cad94a3c163"
+    },
+    {
+      "id": "garden",
+      "sha256": "1eb7d78eb6357447af639029d17b2fdb424bfdbab7e79244adfdcf75f3571352"
+    },
+    {
+      "id": "context",
+      "sha256": "364f268de31857ce2f338d6745c2b2dfb70696e9ebe403d7b56747fa1b6891c7"
+    }
+  ],
+  "annotations": false,
+  "furniture_visible": true,
+  "camera_native_m": [
+    75.0,
+    103.0,
+    163.0
+  ],
+  "camera_rotation_rad": [
+    0.6632030606269836,
+    -7.80107214382042e-08,
+    2.498091697692871
+  ],
+  "projection": "ORTHO",
+  "geometry_clipped": false
+}

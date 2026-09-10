@@ -1,0 +1,14 @@
+{
+  "before_triangles": 250261,
+  "after_triangles": 263528,
+  "source_surface_probes": 1751827,
+  "patch_sha256": "3495268c65a0feeeb330717b3d6c0e91e4f9a9397d1f548bfad6a7139f87be02",
+  "max_source_to_repaired_distance_m": 0.001289509586058557,
+  "raw_BVH_max_source_to_repaired_m": 0.004141515586525202,
+  "max_repaired_to_source_distance_m": 0.001289509586058557,
+  "tolerance_m": 0.0013,
+  "double_precision_rechecks": 54,
+  "missing_surface_examples": [],
+  "passed": true,
+  "scope": "Architecture/exterior/terrain surface coverage, independent BVH proximity; not browser pixel QA."
+}
