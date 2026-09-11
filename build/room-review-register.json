@@ -1324,6 +1324,11 @@
     "verdict": "contradiction",
     "notes": "Fotoğraflarda her iki odada siyah metal karyola; modelde ahşap başlıklı yatak — malzeme/mobilya çelişkisi. 20b karesi ayrıca boş duvara bakmış.",
     "render_record": "build/renders/r39-photo-acceptance.json"
+   },
+   "r40_reassessment": {
+    "verdict": "composition_match",
+    "supersedes": "r39_render_review.verdict",
+    "notes": "R39 notu fotoğraf setini yanlış okumuş: karyolalar iki odada aynı değil. Fotoğraflarda balkonlu odada (106; plan BALKON 109 bu odanın altında) siyah metal karyola, diğer odada (107) ahşap başlıklı karyola var — 09/10 numaralı kareler ahşap başlığı net gösterir. Model aynı dağılımı taşır: f2-106 içinde Iron bed (siyah şase, pirinç topuzlar), f2-107 içinde wood_honey başlıklı karyola; R39-21a karesi ikisini tek karede doğrular. Çelişki yok; kompozisyon eşleşmesi. 20b karesinin boş duvara bakması ayrı bir çekim hatası olarak kayıtlı kalır."
    }
   },
   {
