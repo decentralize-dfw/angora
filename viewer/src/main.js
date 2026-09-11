@@ -490,8 +490,18 @@ async function loadModel() {
     // one after it fine. Compiling first costs the load a beat and gives the
     // interface back a press that opens immediately.
     message('Görünüm hazırlanıyor…');
-    if (renderer.compileAsync) await renderer.compileAsync(scene, camera).catch(() => renderer.compile(scene, camera));
-    else renderer.compile(scene, camera);
+    // Never fatal: a driver that cannot pre-compile still draws, it just pays
+    // at the first press the way it used to.
+    try {
+      // Bounded. A driver with parallel shader compile finishes this in well
+      // under a second; one without it compiles serially, and nobody should
+      // wait behind a progress bar that has nothing left to download. The
+      // compile is not cancelled, only stopped being waited on.
+      if (renderer.compileAsync) {
+        await Promise.race([renderer.compileAsync(scene, camera),
+          new Promise(resolve => setTimeout(resolve, 8000))]);
+      } else renderer.compile(scene, camera);
+    } catch (error) {console.warn('Shader pre-compile unavailable; first view will compile on demand', error);}
     ready = true;
     $('#toggle-furniture').disabled = false; setFurnitureVisible(furnitureVisible);
     $('#toggle-rooms').disabled = false; $('#toggle-measurements').disabled = false;
