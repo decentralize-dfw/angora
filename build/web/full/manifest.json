@@ -20,8 +20,8 @@
     {
       "id": "level-0",
       "file": "level-0.glb",
-      "bytes": 2107016,
-      "sha256": "acc010860571915d1e101e1c76b1d5fa6265400cc3ffb2cca2d7161e37635a4d",
+      "bytes": 2102616,
+      "sha256": "ea8883aa77eafb3006ac7e4177886aac2c2f76db10cfd5eba6ded435f6a45558",
       "source_objects": 1170,
       "exported_mesh_nodes": 1170,
       "shared_meshes": 405,
@@ -136,8 +136,8 @@
     {
       "id": "envelope",
       "file": "envelope.glb",
-      "bytes": 2405832,
-      "sha256": "702dc82959ae9aeaf3e3c0bb70bdf8c42899e0aa2223514b08e979105a6ed389",
+      "bytes": 2386584,
+      "sha256": "9cc94a7f56c0558aa0dabc6b02caba8aaa76502cab1a9727576244a3e54d20da",
       "source_objects": 107,
       "exported_mesh_nodes": 107,
       "shared_meshes": 88,
