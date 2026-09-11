@@ -59,6 +59,16 @@
     "envelope.glb": "702dc82959ae9aeaf3e3c0bb70bdf8c42899e0aa2223514b08e979105a6ed389",
     "garden.glb": "62f6f7a232c5fc4906c187be2c6c411de78ab617c281dee62e57f079a399df9b",
     "context.glb": "e3e1ce4787451b8c261d4cdea03b46b25474fa279518a5cf625cf6d073ad1bda"
+   },
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-27",
+     "R39-28"
+    ],
+    "verdict": "composition_match",
+    "notes": "Bina kütlesi, çatı düzeni, balkonlar, kapalı garaj kapısı ve havuz fotoğraflarla örtüşüyor. Fark: duvar tonu modelde mavi-gri okunuyor (fotoğraf sıcak beyaz), çatı fotoğrafta daha koyu.",
+    "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },
   {
@@ -97,6 +107,15 @@
     "level-0.glb": "acc010860571915d1e101e1c76b1d5fa6265400cc3ffb2cca2d7161e37635a4d",
     "level-1.glb": "57c19b112b714693fcf80506b16ecad1568322927d27bbfafd586936e6395fde",
     "level-2.glb": "aa3c779940efbbd90a97f122edd10dbbe1e44e1373feb3d50d29def1efdcea53"
+   },
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-06"
+    ],
+    "verdict": "composition_match",
+    "notes": "Noktalı paslanmaz kabin, kumanda şeridi (2/1/0 + alarm) ve sahanlık çerçevesi fotoğraflarla birebir. Fark: kapı camındaki gül vitray motifi fotoğraflarda yok (R33 süslemesi).",
+    "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },
   {
@@ -172,6 +191,15 @@
    ],
    "evidence_asset_sha256": {
     "garden.glb": "62f6f7a232c5fc4906c187be2c6c411de78ab617c281dee62e57f079a399df9b"
+   },
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-28"
+    ],
+    "verdict": "composition_match",
+    "notes": "Havuz, sahanlık ve çevre duvarı okunuyor; bitki tür/mevsim kabulü planting-register üzerinden açık.",
+    "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },
   {
@@ -208,7 +236,16 @@
    "evidence_asset_sha256": {
     "level-0.glb": "acc010860571915d1e101e1c76b1d5fa6265400cc3ffb2cca2d7161e37635a4d"
    },
-   "note": " R39: all three photos and the salon panorama locate this kitchen; the CAD wall layer carries a purpose-built 2.600 x 0.600 m full-height niche at the sink-run position and the DWG dimension 2C3B2 (4.45 m) measures the room. Approved at inventory level; colour/detail acceptance follows the render set."
+   "note": " R39: all three photos and the salon panorama locate this kitchen; the CAD wall layer carries a purpose-built 2.600 x 0.600 m full-height niche at the sink-run position and the DWG dimension 2C3B2 (4.45 m) measures the room. Approved at inventory level; colour/detail acceptance follows the render set.",
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-03"
+    ],
+    "verdict": "strong_match",
+    "notes": "Yeşil camlı ceviz kapaklar, yarımada tezgâh, kahve fayans sırt, terracotta zemin ve asansör kapısı üç fotoğrafla da örtüşüyor. photo_match_approved bu kanıtla korunuyor.",
+    "render_record": "build/renders/r39-photo-acceptance.json"
+   }
   },
   {
    "photo_group": "kat_1_bodrum_salon",
@@ -270,6 +307,18 @@
    ],
    "evidence_asset_sha256": {
     "level-0.glb": "acc010860571915d1e101e1c76b1d5fa6265400cc3ffb2cca2d7161e37635a4d"
+   },
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-01a",
+     "R39-01b",
+     "R39-01c",
+     "R39-02"
+    ],
+    "verdict": "composition_match",
+    "notes": "Şömine+TV, yemek masası, avize, bordürlü zemin ve merdiven yerli yerinde. Fark: sandalyeler fotoğrafta ince siyah metal, şömine kaplaması taş tonlu (modelde beyaz), merdiven korkuluğu bu açıda okunmuyor.",
+    "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },
   {
@@ -313,7 +362,16 @@
    "evidence_asset_sha256": {
     "level-0.glb": "acc010860571915d1e101e1c76b1d5fa6265400cc3ffb2cca2d7161e37635a4d"
    },
-   "note": "The modelled WC assembly (27 nodes) stands in f0-B01 Hol at x -0.838..0.620 z -1.790..-1.075, while the source plan puts BANYO B03 at the room rooms.json labels f0-B10 (code corrected to B03). Whether the fixtures should be relocated into B03 is an authoring decision recorded here, not taken."
+   "note": "The modelled WC assembly (27 nodes) stands in f0-B01 Hol at x -0.838..0.620 z -1.790..-1.075, while the source plan puts BANYO B03 at the room rooms.json labels f0-B10 (code corrected to B03). Whether the fixtures should be relocated into B03 is an authoring decision recorded here, not taken.",
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-04"
+    ],
+    "verdict": "render_misaimed",
+    "notes": "Kare kapı boşluğuna bakıyor, lavabo/ayna kadrajda değil; yeniden çekilecek. WC gövdesinin planın B03 dediği odada değil holde durması ayrıca açık karar.",
+    "render_record": "build/renders/r39-photo-acceptance.json"
+   }
   },
   {
    "photo_group": "kat_2_garaj",
@@ -365,6 +423,18 @@
    ],
    "evidence_asset_sha256": {
     "level-1.glb": "57c19b112b714693fcf80506b16ecad1568322927d27bbfafd586936e6395fde"
+   },
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-14a",
+     "R39-14b",
+     "R39-14c",
+     "R39-14d"
+    ],
+    "verdict": "authored_difference",
+    "notes": "Raflar ve sandık dondurucu fotoğraflardaki gibi mevcut; fotoğraflarda olmayan araç, kullanıcı talebiyle konmuş görselleştirme aracıdır (arayüzde tek soyut baz malzemeyle çizilir). Fotoğraf kabulüne kapatılamaz, fark yazarlıdır.",
+    "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },
   {
@@ -461,6 +531,15 @@
    ],
    "evidence_asset_sha256": {
     "level-1.glb": "57c19b112b714693fcf80506b16ecad1568322927d27bbfafd586936e6395fde"
+   },
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-07"
+    ],
+    "verdict": "render_misaimed",
+    "notes": "Kadraj holü değil duvar köşesini almış; yeniden çekilecek.",
+    "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },
   {
@@ -508,6 +587,15 @@
    ],
    "evidence_asset_sha256": {
     "level-1.glb": "57c19b112b714693fcf80506b16ecad1568322927d27bbfafd586936e6395fde"
+   },
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-08"
+    ],
+    "verdict": "render_misaimed",
+    "notes": "Kadraj boş duvara bakmış; yeniden çekilecek.",
+    "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },
   {
@@ -563,6 +651,15 @@
    "web_room_ids": [],
    "evidence_asset_sha256": {
     "envelope.glb": "702dc82959ae9aeaf3e3c0bb70bdf8c42899e0aa2223514b08e979105a6ed389"
+   },
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-29"
+    ],
+    "verdict": "composition_match",
+    "notes": "Saçaklı alınlar, ahşap furuşlar, siyah ferforje çit, kaplama çevre duvarı ve giriş sundurması fotoğraflarla güçlü örtüşüyor. Fark: cephe tonu.",
+    "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },
   {
@@ -695,6 +792,20 @@
    ],
    "evidence_asset_sha256": {
     "level-1.glb": "57c19b112b714693fcf80506b16ecad1568322927d27bbfafd586936e6395fde"
+   },
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-09",
+     "R39-10a",
+     "R39-10b",
+     "R39-10c",
+     "R39-10d",
+     "R39-11"
+    ],
+    "verdict": "strong_match",
+    "notes": "Bal rengi dolap ailesi, camlı üst dolaplar, evye önü jaluzili pencere, bulaşık makinesi, siyah fırın+ocak, davlumbaz ve buzdolabı fotoğraflardaki düzenle birebir. Fark: cihazlar modelde mavi-gri okunuyor (fotoğraf paslanmaz), sırt fayansı beyaz (fotoğraf açık yeşil). Onay mal sahibinde.",
+    "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },
   {
@@ -745,6 +856,18 @@
    ],
    "evidence_asset_sha256": {
     "level-1.glb": "57c19b112b714693fcf80506b16ecad1568322927d27bbfafd586936e6395fde"
+   },
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-12a",
+     "R39-12b",
+     "R39-12c",
+     "R39-13"
+    ],
+    "verdict": "render_misaimed",
+    "notes": "Panorama grubu; kareler salonun ana gövdesini değil kapı/nış köşelerini almış. Yeniden çekilecek.",
+    "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },
   {
@@ -802,6 +925,17 @@
    ],
    "evidence_asset_sha256": {
     "level-2.glb": "aa3c779940efbbd90a97f122edd10dbbe1e44e1373feb3d50d29def1efdcea53"
+   },
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-22a",
+     "R39-22b",
+     "R39-22c"
+    ],
+    "verdict": "composition_match",
+    "notes": "Çamaşır makinesi, ceviz vanite, oval ayna, lacivert kilim ve duş kabini fotoğraflardaki envanterle örtüşüyor. Fark: zemin karosu deseni/tonu.",
+    "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },
   {
@@ -907,6 +1041,20 @@
    ],
    "evidence_asset_sha256": {
     "level-2.glb": "aa3c779940efbbd90a97f122edd10dbbe1e44e1373feb3d50d29def1efdcea53"
+   },
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-15a",
+     "R39-15b",
+     "R39-15c",
+     "R39-16a",
+     "R39-16b",
+     "R39-16c"
+    ],
+    "verdict": "composition_match",
+    "notes": "Merdiven, vitraylı asansör kapısı, çizgili berjer ve sehpa yerinde. Fark: fotoğraflardaki tablo duvarı ve kilimler modelde yok (dekor kalemi).",
+    "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },
   {
@@ -1020,6 +1168,22 @@
    ],
    "evidence_asset_sha256": {
     "level-2.glb": "aa3c779940efbbd90a97f122edd10dbbe1e44e1373feb3d50d29def1efdcea53"
+   },
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-17a",
+     "R39-17b",
+     "R39-17c",
+     "R39-18a",
+     "R39-18b",
+     "R39-19a",
+     "R39-19b",
+     "R39-19c"
+    ],
+    "verdict": "composition_match",
+    "notes": "Yatak+örtü, TV şifonyeri, giyinme aynalı dolaplar ve banyo vanitesi/duşu envanter olarak tam. Fark: yatak arkası perde duvarı fotoğrafta düz duvar+pencere; banyo duvarı modelde koyu kahve (fotoğraf bej fayans+bordür).",
+    "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },
   {
@@ -1146,6 +1310,20 @@
    ],
    "evidence_asset_sha256": {
     "level-2.glb": "aa3c779940efbbd90a97f122edd10dbbe1e44e1373feb3d50d29def1efdcea53"
+   },
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-20a",
+     "R39-20b",
+     "R39-20c",
+     "R39-21a",
+     "R39-21b",
+     "R39-21c"
+    ],
+    "verdict": "contradiction",
+    "notes": "Fotoğraflarda her iki odada siyah metal karyola; modelde ahşap başlıklı yatak — malzeme/mobilya çelişkisi. 20b karesi ayrıca boş duvara bakmış.",
+    "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },
   {
@@ -1356,6 +1534,23 @@
    ],
    "evidence_asset_sha256": {
     "level-3.glb": "ed6d512c109cbd3a1e4a61a2ae17a6a9e8a8783723ea2732cf587adba3ad2e25"
+   },
+   "r39_render_review": {
+    "revision": "R39",
+    "frames": [
+     "R39-23a",
+     "R39-23b",
+     "R39-24",
+     "R39-25a",
+     "R39-25b",
+     "R39-26a",
+     "R39-26b",
+     "R39-26c",
+     "R39-26d"
+    ],
+    "verdict": "composition_match",
+    "notes": "Gri kanepe, TV ünitesi, sehpa, tavan arası WC ve siyah etajer fotoğraflarla örtüşüyor. Eğik tavan altı yatak odaları makul; dekor yoğunluğu fotoğraftan az.",
+    "render_record": "build/renders/r39-photo-acceptance.json"
    }
   }
  ],

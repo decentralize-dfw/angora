@@ -1583,5 +1583,36 @@
    "triangles": 9465496,
    "ms": 41897
   }
- ]
+ ],
+ "review": {
+  "reviewed_groups": 17,
+  "strong_match": [
+   "kat_1_bodrum_mutfak",
+   "kat_2_ust_mutfak"
+  ],
+  "composition_match": [
+   "exterior",
+   "asansor",
+   "kat_1_bahce",
+   "kat_1_bodrum_salon",
+   "kat_2_on_giris",
+   "kat_3_banyok",
+   "kat_3_hol",
+   "kat_3_master_bedroom",
+   "kat_4"
+  ],
+  "render_misaimed": [
+   "kat_1_bodrum_wc",
+   "kat_2_giris",
+   "kat_2_giris_wc",
+   "kat_2_ust_salon"
+  ],
+  "contradiction": [
+   "kat_3_yatak_odalari"
+  ],
+  "authored_difference": [
+   "kat_2_garaj"
+  ],
+  "note": "strong_match = envanter+kompozisyon+palet ailesi örtüşüyor; nihai renk/kumaş onayı mal sahibinindir. misaimed kareler yeniden çekilecek."
+ }
 }
