@@ -4,7 +4,7 @@
  "model_revision": "R39",
  "source": {
   "sections.json": "R40",
-  "atlas_sha256": "ca6997dcd567698bef76f46799c3ad132bbbcca0e3a9c63bcce7f60109bdb259"
+  "atlas_sha256": "f989f66c1e4f56e631fa7c2e8ddcbd7c91a34d3db1a938db873daf15bd7003dd"
  },
  "spaces": [
   {
@@ -481,11 +481,11 @@
      3.9927
     ],
     [
-     1.299,
+     1.3,
      3.9927
     ],
     [
-     1.299,
+     1.3,
      1.953
     ],
     [
@@ -498,8 +498,8 @@
     ]
    ],
    "holes_xz": [],
-   "area_m2": 4.758,
-   "area_to_substrate_m2": 5.04,
+   "area_m2": 4.756,
+   "area_to_substrate_m2": 5.038,
    "max_snap_residual_m": 0.0084,
    "excluded_appendages": [],
    "derivation": "R39 delivery: sections.json slice h=4.08 m (datum+0.98) for the face planes, union of slices 3.20-5.84 m to close door and window heads, lift-shaft footprint from level-<n>.glb; 0.01 m raster flood fill, boundary snapped to the slice vertices (max residual 0.008 m); area_m2 is to the finished wall face, area_to_substrate_m2 offsets every face outward by the measured 0.030 m finish lining."

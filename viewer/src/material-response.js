@@ -33,6 +33,11 @@ export function prepareMaterialResponse(material, {context=false}={}) {
   if (family==='roof') {
     material.normalScale?.multiplyScalar(context?.18:.3);
     material.envMapIntensity=.65;
+    // The eaves trim and the roof plane cross at a very shallow angle where the
+    // roof meets a gable, and the trim wins by a hair over a long run - which
+    // draws as white shards lying on the tiles. A small depth bias toward the
+    // camera lets the roof cover its own trim without moving any geometry.
+    if(!context){material.polygonOffset=true;material.polygonOffsetFactor=-1;material.polygonOffsetUnits=-2;}
   } else if (family==='masonry') {
     material.normalScale?.multiplyScalar(context?.3:.55);
     material.envMapIntensity=.8;

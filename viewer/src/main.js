@@ -94,6 +94,7 @@ function setFurnitureVisible(visible) {
   for (const group of groups.values()) group.traverse(object => {
     if (object.isMesh && object.userData.category === 'furniture') object.visible = visible;
   });
+  caps?.setFurnitureVisible(visible);
   $('#toggle-furniture').setAttribute('aria-pressed', String(visible));
   $('#toggle-furniture').textContent = 'Mobilya';
   if (renderer) renderer.shadowMap.needsUpdate = true;
@@ -481,13 +482,31 @@ async function loadModel() {
       }
       $('#walk-room').append(group);
     }
-    ready = true; status.hidden = true;
+    // Everything the first tap used to pay for is paid for here, behind the
+    // progress bar. A storey button used to hand the driver a few hundred
+    // programs to build at the moment it was pressed - the villa is only ever
+    // drawn whole until then - and the cut animation ran on top of the
+    // compile, which is what made the first Bodrum or Çatı crawl and every
+    // one after it fine. Compiling first costs the load a beat and gives the
+    // interface back a press that opens immediately.
+    message('Görünüm hazırlanıyor…');
+    if (renderer.compileAsync) await renderer.compileAsync(scene, camera).catch(() => renderer.compile(scene, camera));
+    else renderer.compile(scene, camera);
+    ready = true;
     $('#toggle-furniture').disabled = false; setFurnitureVisible(furnitureVisible);
     $('#toggle-rooms').disabled = false; $('#toggle-measurements').disabled = false;
     $('#enter-walk').disabled=false;
     document.querySelectorAll('[data-needs-model]').forEach(b=>b.disabled=false);
     enableImmersiveWalk(renderer,scene,walk,groups,()=>{if(!walk.active)enterWalk();},()=>{resize();invalidate();});
+    // Build each storey's cut geometry once, here, rather than on the frame
+    // that first shows it: four heights, four slices, and the allocation and
+    // the triangulation upload are behind us.
+    for (const view of ['f0','f1','f2','f3']) caps.update(sectionHeight(view, fullHeight), true);
     selectView(selected, true);
+    // One composed frame before the bar goes: the occlusion, antialias, bloom,
+    // grade and dither passes compile on their first use like anything else.
+    lighting.render(camera);
+    status.hidden = true;
     // The garden and the neighbourhood stream in behind the first frame - the
     // villa is interactive at a third of the download. Their group setup runs
     // as each arrives, and the massing fade attaches once the context exists.

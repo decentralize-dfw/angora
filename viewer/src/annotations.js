@@ -35,34 +35,54 @@ export function createAnnotations(data,host,onRoom) {
   const overlay=document.createElement('div');overlay.className='annotation-overlay';host.append(overlay);
   const names=[],dimensions=[],point=new THREE.Vector3();
   const material=new THREE.LineBasicMaterial({color:0x315e5c,depthTest:false,depthWrite:false,toneMapped:false});
+  const measuredMaterial=new THREE.LineDashedMaterial({color:0x6d8a82,dashSize:.16,gapSize:.12,
+    depthTest:false,depthWrite:false,toneMapped:false});
   for(const room of data.rooms) {
     const el=document.createElement('button');el.type='button';el.className='room-label';
     const name=document.createElement('strong');name.textContent=room.name;
     const area=document.createElement('span');area.textContent=areaLabel(room,data);
     // Inline after the name rather than pinned to the corner, so the name no
     // longer reserves a gutter for it and the card can close up around them.
-    const tour=document.createElement('small');tour.textContent='360°';tour.setAttribute('aria-hidden','true');
+    // A balcony is named, not entered: it is an open platform with no walk
+    // station behind it, so its tag drops the 360° badge and the click rather
+    // than offering a tour that cannot start.
+    const tour=document.createElement('small');
+    if(!room.label_only){tour.textContent='360°';tour.setAttribute('aria-hidden','true');}
     // The badge shares the measure's line instead of sitting after the name, so
     // a long room name gets the card's full width before it has to truncate.
     const card=document.createElement('i'),meta=document.createElement('em');
     meta.append(area,tour);card.append(name,meta);el.append(card);
-    el.setAttribute('aria-label',area.textContent
-      ?`${room.name}, kayıtlı açıklık ${area.textContent}, 360 derece gez`
+    el.setAttribute('aria-label',room.label_only?room.name
+      :area.textContent?`${room.name}, kayıtlı açıklık ${area.textContent}, 360 derece gez`
       :`${room.name}, 360 derece gez`);
-    el.title=room.area_method_label??'Kaynak kat planı';
-    el.onclick=e=>{e.stopPropagation();onRoom(room.id);};overlay.append(el);
+    el.title=room.area_note??room.area_method_label??'Kaynak kat planı';
+    if(room.label_only)el.disabled=true;
+    else el.onclick=e=>{e.stopPropagation();onRoom(room.id);};
+    overlay.append(el);
     names.push({el,position:new THREE.Vector3(...room.position),floor:room.floor_index});
   }
+  // Both axes, on every room that has them. Only 24 of the 53 spans are project
+  // dimensions, so for a long time only those were drawn - and since the rooms
+  // that lack one are almost all open-plan, the plan came out dimensioned
+  // across and not down, which reads as an omission rather than as a statement
+  // about the source. The rest are drawn too, told apart rather than hidden:
+  // a dashed witness line, a pale tag, and the '≈' the data already carries.
+  // The tooltip says which it is; areaLabel() is untouched, so a measured span
+  // still cannot stand in for an area.
   for(const dim of data.dimensions) {
-    if(!dim.dimension_label_allowed)continue;
+    const measured=!dim.dimension_label_allowed;
+    if(measured&&dim.basis!=='model_measured')continue;
     const a=new THREE.Vector3(...dim.a),b=new THREE.Vector3(...dim.b);
     const side=b.clone().sub(a).normalize().cross(new THREE.Vector3(0,1,0)).multiplyScalar(.12);
     const line=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints([
-      a,b,a.clone().add(side),a.clone().sub(side),b.clone().add(side),b.clone().sub(side)]),material);
+      a,b,a.clone().add(side),a.clone().sub(side),b.clone().add(side),b.clone().sub(side)]),
+      measured?measuredMaterial:material);
+    if(measured)line.computeLineDistances();
     line.renderOrder=105;line.userData.aoExcluded=true;group.add(line);
-    const el=document.createElement('span');el.className='dimension-label';el.textContent=dim.display;
+    const el=document.createElement('span');
+    el.className=measured?'dimension-label measured':'dimension-label';el.textContent=dim.display;
     if(dim.provenance)el.title=dim.provenance;
-    overlay.append(el);dimensions.push({el,line,position:a.clone().add(b).multiplyScalar(.5),floor:dim.floor_index,roomId:dim.room_id});
+    overlay.append(el);dimensions.push({el,line,position:a.clone().add(b).multiplyScalar(.5),floor:dim.floor_index,roomId:dim.room_id,measured});
   }
   function project(entry,camera,w,h,size) {
     point.copy(entry.position).project(camera);
@@ -97,8 +117,12 @@ export function createAnnotations(data,host,onRoom) {
         if(p)candidates.push({...p,entry,width:entry.el.offsetWidth,height:entry.el.offsetHeight});
       }
     }
+    // The solver places in input order and drops what no longer fits, so the
+    // project dimensions are offered first: a crowded plan gives up a measured
+    // span before it gives up a registered one.
+    candidates.sort((a,b)=>Number(a.entry.measured)-Number(b.entry.measured));
     const placed=layoutAnchoredLabels(candidates,{width:w,height:h,obstacles});
     for(const item of candidates)item.entry.el.hidden=true;
     for(const {entry,x,y} of placed){entry.el.hidden=false;entry.el.style.left=`${x}px`;entry.el.style.top=`${y}px`;}
-  },dispose(){overlay.remove();group.traverse(o=>o.geometry?.dispose());material.dispose();}};
+  },dispose(){overlay.remove();group.traverse(o=>o.geometry?.dispose());material.dispose();measuredMaterial.dispose();}};
 }

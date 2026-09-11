@@ -174,6 +174,9 @@ for f in range(4):
     seen={}; idx=0
     for r in ROOMS['rooms']:
         if r['floor_index']!=f: continue
+        # Balconies are label-only: open platforms with no enclosing walls, so
+        # a flood from one runs out to the site rather than finding a boundary.
+        if r.get('label_only'): continue
         reg,ok=flood(~band,ij(r['position'][0],r['position'][2]))
         assert ok, r['id']
         key=int(reg.sum())
@@ -222,7 +225,7 @@ for f in range(4):
                 'every face outward by the measured %.3f m finish lining.')%(
                 MEAS[f],MEAS[f]-DAT[f],BAND[f][0],BAND[f][1],resid,LINING)}
 json.dump({'version':1,'coordinate_system':'glTF_XZ_metres','model_revision':'R39',
-    'source':{'sections.json':ATL.get('revision'),'atlas_sha256':'ca6997dcd567698bef76f46799c3ad132bbbcca0e3a9c63bcce7f60109bdb259'},
+    'source':{'sections.json':ATL.get('revision'),'atlas_sha256':'f989f66c1e4f56e631fa7c2e8ddcbd7c91a34d3db1a938db873daf15bd7003dd'},
     'spaces':list(spaces.values()),'room_to_space':assign},open(ROOT+'/build/web/full/room-spaces.json','w'),indent=1)
 print('spaces',len(spaces))
 for s in spaces.values():

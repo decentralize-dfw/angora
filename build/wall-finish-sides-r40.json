@@ -1,0 +1,37 @@
+{
+ "revision": "R40",
+ "boundary_tolerance_m": 0.1,
+ "vertical_normal_limit": 0.5,
+ "rule": "a near-vertical wall face is interior when its centroid lies within 0.10 m of an enclosed room boundary of its storey - room-spaces.json boundaries are the finished wall faces, so a lining sits at 0 m and the wall behind it at 0.030 m - and exterior stucco otherwise, the far face of the same wall being about 0.23 m away",
+ "room_polygons": "build/web/full/room-spaces.json",
+ "levels": [
+  {
+   "level": "level-0",
+   "toInterior": 113,
+   "toStucco": 97,
+   "kept": 639,
+   "skipped": 435
+  },
+  {
+   "level": "level-1",
+   "toInterior": 244,
+   "toStucco": 30,
+   "kept": 1709,
+   "skipped": 1252
+  },
+  {
+   "level": "level-2",
+   "toInterior": 200,
+   "toStucco": 128,
+   "kept": 2783,
+   "skipped": 1490
+  },
+  {
+   "level": "level-3",
+   "toInterior": 104,
+   "toStucco": 779,
+   "kept": 2200,
+   "skipped": 1400
+  }
+ ]
+}

@@ -1,0 +1,106 @@
+{
+ "version": 1,
+ "revision": "R40",
+ "method": "each storey plan panel registered by its own x offset; a dimension is accepted only for a room that is a closed space in room-spaces.json, when both registered witness points land on that room's own opposing faces - finished or substrate - within 0.006 m and the drawing text agrees with the separation enclosed",
+ "registration": {
+  "x_offset_per_floor": {
+   "0": 9.6381,
+   "1": -11.468,
+   "2": -34.4339
+  },
+  "z_offset": 73.3634,
+  "scale": 0.01,
+  "floor_3_x": "attic plan panel not registered on x: the storey has no verified x dimension to read its offset from, and at datum+1.0 its rooms are bounded by the roof slope rather than by wall pairs, so there is nothing to solve the offset against"
+ },
+ "acceptance_residual_m": 0.006,
+ "wall_finish_lining_m": 0.03,
+ "source_dimension_file_sha256": "2e494d54b6c6b86a6fe1199cdd6ae0a5bd7ada21c045aa8449c84059f9e6147d",
+ "accepted": {},
+ "not_dimensioned": [
+  {
+   "room_id": "f0-B06",
+   "axis": "x",
+   "reason": "shares an open volume; no partition to measure to"
+  },
+  {
+   "room_id": "f0-B01",
+   "axis": "x",
+   "reason": "shares an open volume; no partition to measure to"
+  },
+  {
+   "room_id": "f0-B01",
+   "axis": "z",
+   "reason": "shares an open volume; no partition to measure to"
+  },
+  {
+   "room_id": "f0-B04",
+   "axis": "x",
+   "reason": "shares an open volume; no partition to measure to"
+  },
+  {
+   "room_id": "f0-B04",
+   "axis": "z",
+   "reason": "shares an open volume; no partition to measure to"
+  },
+  {
+   "room_id": "f1-Z06",
+   "axis": "z",
+   "reason": "shares an open volume; no partition to measure to"
+  },
+  {
+   "room_id": "f1-Z05",
+   "axis": "x",
+   "reason": "shares an open volume; no partition to measure to"
+  },
+  {
+   "room_id": "f1-Z05",
+   "axis": "z",
+   "reason": "shares an open volume; no partition to measure to"
+  },
+  {
+   "room_id": "f1-Z02",
+   "axis": "z",
+   "reason": "shares an open volume; no partition to measure to"
+  },
+  {
+   "room_id": "f1-Z07",
+   "axis": "z",
+   "reason": "no drawing dimension lands on this room's faces"
+  },
+  {
+   "room_id": "f2-101",
+   "axis": "x",
+   "reason": "shares an open volume; no partition to measure to"
+  },
+  {
+   "room_id": "f2-107",
+   "axis": "x",
+   "reason": "no drawing dimension lands on this room's faces"
+  },
+  {
+   "room_id": "f3-C01",
+   "axis": "x",
+   "reason": "attic plan panel not registered on x: the storey has no verified x dimension to read its offset from, and at datum+1.0 its rooms are bounded by the roof slope rather than by wall pairs, so there is nothing to solve the offset against"
+  },
+  {
+   "room_id": "f3-C05",
+   "axis": "x",
+   "reason": "attic plan panel not registered on x: the storey has no verified x dimension to read its offset from, and at datum+1.0 its rooms are bounded by the roof slope rather than by wall pairs, so there is nothing to solve the offset against"
+  },
+  {
+   "room_id": "f3-C02",
+   "axis": "x",
+   "reason": "attic plan panel not registered on x: the storey has no verified x dimension to read its offset from, and at datum+1.0 its rooms are bounded by the roof slope rather than by wall pairs, so there is nothing to solve the offset against"
+  },
+  {
+   "room_id": "f3-C03",
+   "axis": "x",
+   "reason": "attic plan panel not registered on x: the storey has no verified x dimension to read its offset from, and at datum+1.0 its rooms are bounded by the roof slope rather than by wall pairs, so there is nothing to solve the offset against"
+  },
+  {
+   "room_id": "f3-C04",
+   "axis": "x",
+   "reason": "attic plan panel not registered on x: the storey has no verified x dimension to read its offset from, and at datum+1.0 its rooms are bounded by the roof slope rather than by wall pairs, so there is nothing to solve the offset against"
+  }
+ ]
+}

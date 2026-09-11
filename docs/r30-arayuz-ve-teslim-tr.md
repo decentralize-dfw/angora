@@ -482,3 +482,82 @@ fotoğrafı yok); mal sahibi cetvelindeki 1,73 m² "Tuvalet" bu oda değil —
 plandaki 1,25 × 1,38 m'lik komşu küçük WC'nin alanıdır (%0,3 içinde), bu
 yüzden cetvel eşlemesi `viewer/src/room-areas.js`'te bilerek boş bırakıldı ve
 etiket odanın kendi türetilmiş değerini gösterir.
+
+## R40 — geri bildirim turu: kesit, ölçü, yerleşim ve açılış hızı
+
+**Üst katların hayalet AO'su (ss5) ve "kare çim" aynı hatanın iki yüzüymüş.**
+Occlusion geçişi sahneyi `scene.overrideMaterial` ile çizer; three bir
+materyalin kesme düzlemlerini yalnız materyal değiştiğinde yeniden projekte
+eder (`WebGLClipping.setState`, `useCache = aynı kamera && aynı materyal id`).
+Tek materyalle çizilen geçişte ilk nesneden sonrası önbellek isabeti olduğu
+için, düzlem ataması sessizce ilk nesnenin taşıdığına çöküyordu — yani kesitin
+üstündeki katlar AO'ya girmeye devam ediyor, plan siluetleri çimin üzerine
+büyük gri bir dikdörtgen olarak düşüyordu. Geçiş artık sahne çizimi boyunca
+renderer-global bir düzlem kullanıyor (4 mm yukarı kaydırılmış, yazarlı kesit
+yüzleri tamponda kalsın diye) ve çizim biter bitmez düzlemi geri veriyor.
+Çimdeki "kare" bu düzeltmeyle kayboldu: bahçe artık tek parça çim okunuyor.
+
+**Kesilen her şey siyah poche + hatch (ss1, ss2).** Duvar ve toprak kapakları
+siyah zemine geçti; uzaklaşınca shader'ın kendi kenar yumuşatması hatch'i düz
+tona indirdiği için kesit katı siyah okunuyor, yaklaşınca tarama geri geliyor.
+Duvar dışında kalan her gövde de artık kapaklanıyor: `tools/export_cap_triangles_r40.mjs`
+teslim GLB'lerinden duvar/döşeme/cam dışındaki üçgenleri çıkarıyor,
+`tools/build_object_caps_r40.py` bunları atlasın 192 diliminde kesip kapalı
+ilmekleri dolduruyor (açık yüzeyler ilmek vermediği için kendiliğinden eleniyor).
+Sabit gövdeler ve mobilya ayrı dizilerde tutuluyor, çünkü mobilya düğmesi
+mobilyayı kaldırırken kesitini de kaldırmalı.
+
+**Ölçüler iki yönde birden.** 53 açıklıktan yalnız 24'ü proje ölçüsüydü ve
+eksik olanların neredeyse tamamı açık planlı odalar olduğu için plan yatayda
+ölçülü, düşeyde ölçüsüz çıkıyordu. `tools/mine_missing_dimensions_r40.py`
+kaynak ölçü dosyasını kat kat tescil edip taradı ve sonucu dürüstçe yazdı:
+bu odaların ikinci ekseninde çizimde de ölçü yok — bölmesiz hacimlerde
+ölçülecek karşılıklı yüz bulunmuyor, çatı katı paneli ise x'te tescil
+edilemiyor (datum+1,0'da odalar duvar çiftiyle değil çatı eğimiyle sınırlı).
+Bu yüzden çözüm veriyi uydurmak değil, sunumu düzeltmek oldu: her odada iki
+eksen de çiziliyor, proje ölçüsü dolu etiketle ve düz çizgiyle, modelden
+ölçülen açıklık ise kesikli çizgi, açık renk etiket ve zaten verideki "≈" ile.
+Kalabalıkta çözücü önce ölçülen açıklığı bırakıyor. Alan etiketi kuralı
+değişmedi: m² hâlâ yalnız doğrulanmış proje ölçüsünden gelir.
+
+**Giriş ile Antre arasındaki kapı açıldı (ss2).** Plan rasterini zemin kat
+dönüşümüyle tescil edince, çizimde RÜZGARLIK'ın kuzey duvarının x=1,30'da
+bitip x=2,55'teki kanada kadar boş olduğu görülüyor; teslimde ise aynı açıklık
+3,15–5,70 m arasında her kotta dolu duvardı. `tools/open_entrance_doorway_r40.mjs`
+boşluğu duvarda ve kaplamasında gerçek çıkarmayla açıyor (üçgenler kutunun
+altı yüzüne karşı bölünüyor, dışarıda kalan parçalar korunuyor), iki söve ve
+bir lento alnı ekliyor; `tools/apply_entrance_doorway_r40.py` aynı boşluğu
+kesit atlasına ve yürüme ızgarasına işliyor. Lento 5,20'nin üstünde duvar
+sürdüğü için Giriş kendi kapalı hacmi olarak kalıyor.
+
+**Çatı katı banyosunda duş kapının önündeydi.** C03'ün kapısı güney duvarında
+(x 0,45–0,80) ve kanat batı duvarına açılıyor; duş tam o köşedeydi. Fotoğraflar
+(kat_3_banyok) çeyrek daire kabini bir köşede, lavaboyu yanında, klozeti duşun
+yanında gösteriyor — lavabo ve klozet zaten yerindeydi, yalnız duş yanlış
+köşedeydi. Çeyrek daire düşey eksende simetrik olmadığı için kaydırılmadı,
+x'te aynalandı; havlulukta batı duvarına, kapı kanadının kuzeyine taşındı.
+
+**İç ve dış duvar yüzü karışması (ss3) ve beyaz kalan arka balkonlar (ss4)
+tek nedendi.** Duvar ağlarında iki bitiş iki ayrı primitive olarak duruyor ama
+ayrım, yüzün cephenin hangi tarafında olduğunu izlemiyordu: yalnız F3'ün iç
+kaplamasında 125 üçgen dış sıvaydı, balkon nişlerinde ise iç krem. Sarım
+güvenilmez olduğu için karar konumdan veriliyor: oda poligonları bitmiş duvar
+yüzü olduğundan, bir yüz o katın bir oda sınırına 0,10 m içindeyse iç, değilse
+dış. Bu sınama yükseklikten bağımsız olduğu için çatı katında da doğru çalışır
+— alan sınaması orada odaları mavi boyardı, çünkü poligonlar datum+1,0'da
+kesiliyor.
+
+**Diğerleri.** Gezinti merceği 62° düşey (yaklaşık 18 mm) yerine 75° yatayda
+sabitlendi, düşey en-boya göre 38–70 arasında kırpılıyor: odalar artık
+oldukları büyüklükte okunuyor. Garaj aracı 4,45×2,03 m'den 0,88 ölçekle
+3,92×1,79 m'ye indi ve gözün dört duvara eşit mesafede park etti (her yönde
+≈1,0 m). Üç balkon (Z10, 109, 110) plandaki adlarıyla etiketlendi; açık
+platform oldukları için m², ölçü ve 360° turu taşımıyorlar. Çatı ile alın
+tahtası sığ açıyla kesiştiği yerde beyaz kıymıklar çıkaran derinlik yarışı
+için çatı ailesine küçük bir polygon offset verildi.
+
+**Açılış hızı.** İlk kat tuşuna basıldığında yüzlerce program o anda
+derleniyordu; derleme artık yükleme çubuğunun arkasında (`compileAsync`),
+dört katın kesit geometrisi önceden kuruluyor ve ilk kompozit kare çubuk
+kalkmadan çiziliyor. Ayrıca gökyüzü küpü her kat değişiminde yeniden
+çiziliyordu; artık yalnız güneş gerçekten hareket ettiğinde çiziliyor.

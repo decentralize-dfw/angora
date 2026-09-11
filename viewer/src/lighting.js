@@ -16,21 +16,34 @@ import {applyRenderProfile,referenceProfile} from './render-profile.js';
 import {LinearBloomPass} from './linear-bloom.js';
 import {InteriorLightController} from './interior-lighting.js';
 
-// The normal/depth pass must see the same section and furniture visibility as
-// the beauty pass. A shared, unconditional plane would cut the neighborhood.
+// The normal/depth pass must be cut exactly where the beauty pass is cut, or
+// the storeys above the section still occlude and their plan outlines appear
+// as grey smudges over the lawn and the floor below.
+//
+// Per-object planes cannot do it. This pass draws the scene through
+// scene.overrideMaterial, so every object is rendered with one material, and
+// three projects a material's clipping planes only when the material changes:
+// WebGLClipping.setState is called with useCache = (same camera && same
+// material id), and a cache hit skips the projection entirely. With one
+// material for the whole pass every object after the first is a cache hit, so
+// the plane the first object happened to carry - none, for the neighbourhood -
+// is the plane the entire pass gets.
+//
+// A renderer-global plane is projected once per render, before any object is
+// drawn, and applies to all of them. It costs the neighbourhood its contact
+// occlusion above the cut while a storey is selected, which is white massing
+// there anyway.
 export class SectionGTAOPass extends GTAOPass {
   constructor(scene, camera, clip, scale) {
     super(scene, camera, 1, 1);
     this.resolutionScale = scale;
     this.normalMaterial.side = THREE.DoubleSide;
-    this.normalMaterial.onBeforeRender = (_renderer, _scene, _camera, _geometry, object) => {
-      // Each object carries the exact plane set its beauty materials use - the
-      // building cut, the soil's own snap plane, or none - so occlusion is
-      // never computed against earth or garden that is not drawn.
-      const planes = object.userData.clipPlanes ?? (object.userData.sectionClipped ? [clip] : []);
-      if ((this.normalMaterial.clippingPlanes?.length ?? 0) !== planes.length) this.normalMaterial.needsUpdate = true;
-      this.normalMaterial.clippingPlanes = planes;
-    };
+    this.clip = clip;
+    // The authored cut faces sit exactly on the plane. Carrying the pass's own
+    // copy a few millimetres higher keeps them in the depth buffer - without
+    // it they fall out and the occlusion sampled at the wall tops belongs to
+    // the floor far below them.
+    this.sectionPlanes = [new THREE.Plane(clip.normal.clone(), clip.constant)];
     // The reference's own numbers. Radius is in world metres and it matters:
     // too large and the occlusion stops describing crevices and starts shading
     // whole objects, which reads as dirt rather than as contact. 0.28 m is the
@@ -60,6 +73,17 @@ export class SectionGTAOPass extends GTAOPass {
         material.defines.PERSPECTIVE_CAMERA = value; material.needsUpdate = true;
       }
     }
+  }
+  // Only the scene draw is cut. The occlusion, denoise and blend quads that
+  // follow are raw shaders with no clipping chunk in them, but the planes are
+  // put back the moment the scene is down regardless, so the beauty pass and
+  // the shadow map keep their own per-material clipping untouched.
+  _renderOverride(renderer, overrideMaterial, renderTarget, clearColor, clearAlpha) {
+    const previous = renderer.clippingPlanes;
+    this.sectionPlanes[0].copy(this.clip); this.sectionPlanes[0].constant += 0.004;
+    renderer.clippingPlanes = this.sectionPlanes;
+    try { super._renderOverride(renderer, overrideMaterial, renderTarget, clearColor, clearAlpha); }
+    finally { renderer.clippingPlanes = previous; }
   }
 }
 
@@ -144,6 +168,7 @@ export function createLighting(renderer, scene, camera, clip) {
       dither:new ShaderPass(DisplayDitherShader)});
   }
   let day=172,hour=12.5,environmentMode='procedural-sky';
+  const skyDirection=new THREE.Vector3();let skyDrawn=false;
   let soft=true,shadowDistance=110;
   const preparedMaterials=new Set();
   const interior=Array.from({length:4},()=>{
@@ -164,7 +189,11 @@ export function createLighting(renderer, scene, camera, clip) {
     sun.shadow.radius=soft?2.5:1;sun.shadow.intensity=soft?.82:1;
     horizon.set(0x182734).lerp(new THREE.Color(0xe4e9ed),daylight);
     sky.material.uniforms.sunPosition.value.copy(direction);
-    skyCamera.update(renderer,skyScene);
+    // Six cube faces of sky, re-rendered only when the sun has actually moved.
+    // setTime() is also how a storey change re-frames the shadow camera, and
+    // that happens with the hour untouched, so this was redrawing the sky on
+    // every press of Bodrum, Giriş, 1. kat and Çatı for no change at all.
+    if(!skyDrawn||skyDirection.dot(direction)<.9999){skyDirection.copy(direction);skyDrawn=true;skyCamera.update(renderer,skyScene);}
     sun.position.copy(sun.target.position).addScaledVector(direction,shadowDistance);
     renderer.shadowMap.needsUpdate=true;return solar;
   }

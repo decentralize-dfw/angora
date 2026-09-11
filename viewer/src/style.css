@@ -28,3 +28,8 @@
 .lift-call .lift-call-label{font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
 .lift-call .lift-call-target{font-size:13px}
 .lift-call:disabled{opacity:.5;cursor:default}
+
+/* A measured span is not a project dimension and must not be read as one: the
+   tag keeps the same shape so the plan stays legible, and gives up the solid
+   ink for a lighter, outlined one. Its witness line is dashed to match. */
+.dimension-label.measured{background:#f3f6f2e8;color:#3d5a51;border:1px solid #8ba79d;font-weight:500;box-shadow:0 1px 4px #ffffffcc}

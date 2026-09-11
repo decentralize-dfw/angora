@@ -20,8 +20,8 @@
     {
       "id": "level-0",
       "file": "level-0.glb",
-      "bytes": 1825776,
-      "sha256": "7bc9355ddb31d6e5fc1fee4c2d8af31dfa2dbc3d811c6d1226fb3e3cb5e76982",
+      "bytes": 1897632,
+      "sha256": "9b81da94fe49dba19667a8b585de46de8f94abc5be03e94d343678f57e4d7833",
       "source_objects": 1171,
       "exported_mesh_nodes": 1171,
       "shared_meshes": 405,
@@ -49,8 +49,8 @@
     {
       "id": "level-1",
       "file": "level-1.glb",
-      "bytes": 5209388,
-      "sha256": "e872256f68670af23cc7c40240b81732a2fe144bac02dd089cefddc88090a953",
+      "bytes": 5653972,
+      "sha256": "7ab69d1abbc6204200515861a14977a90e82bba926193dc2e70671abf862a8d1",
       "source_objects": 1023,
       "exported_mesh_nodes": 1023,
       "shared_meshes": 835,
@@ -78,8 +78,8 @@
     {
       "id": "level-2",
       "file": "level-2.glb",
-      "bytes": 2846756,
-      "sha256": "a4fa80afe66fa15ac03edc6e5c888bad34f7108f42255519794447cc514f55af",
+      "bytes": 3070676,
+      "sha256": "c88920a1d7c5e7192fb70a46b413515c425a867c512f32fbc162d72ae418a195",
       "source_objects": 639,
       "exported_mesh_nodes": 639,
       "shared_meshes": 426,
@@ -107,8 +107,8 @@
     {
       "id": "level-3",
       "file": "level-3.glb",
-      "bytes": 1038980,
-      "sha256": "611d217abd99f76df883029043e31d58dbc8134c2a8457da42372fe8c2860e54",
+      "bytes": 1291860,
+      "sha256": "20ae198af5bba581091dcb7b083e2bbbb0d086c86215ce34747d6feb63ff5911",
       "source_objects": 232,
       "exported_mesh_nodes": 232,
       "shared_meshes": 157,
@@ -311,18 +311,18 @@
   },
   "section_atlas": {
     "file": "sections.json",
-    "bytes": 1957410,
-    "sha256": "ca6997dcd567698bef76f46799c3ad132bbbcca0e3a9c63bcce7f60109bdb259"
+    "bytes": 2871601,
+    "sha256": "f989f66c1e4f56e631fa7c2e8ddcbd7c91a34d3db1a938db873daf15bd7003dd"
   },
   "room_annotations": {
     "file": "rooms.json",
-    "bytes": 127910,
-    "sha256": "20e7ff8af80377f198bf3610eb73b48fbfec7f31acbe045b43113c2ca8c131a6"
+    "bytes": 130226,
+    "sha256": "9cf755b6fc42aeed1f8ef6d2a11fdf93937736c32052e1498223c1ecb3fe4fb5"
   },
   "navigation": {
     "file": "navigation.json",
-    "bytes": 64012,
-    "sha256": "d9b71cd9420d7f77e3b42a78f92f8aee537779f6231846f8931e62beaaa3470d"
+    "bytes": 64122,
+    "sha256": "e4bfd05db73110efb0d98758e891660b14a527c7c770326d0360c564fb7dfecc"
   },
   "view_assets": {
     "neighborhood": [

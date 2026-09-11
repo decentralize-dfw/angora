@@ -91,6 +91,9 @@ for f,datum in enumerate(datums):
     print('WALK_LAYER',f,layers[-1]['supported_cells'],layers[-1]['walkable_furnished_cells'],flush=True)
 stations=[]
 for room in rooms['rooms']:
+    # Label-only rooms (the three balconies) are open platforms with no walk
+    # surface of their own; they are named on the plan and not entered.
+    if room.get('label_only'):continue
     f=room['floor_index'];x,y,z=room['position'];distance=np.linalg.norm(xy-[x,-z],axis=1)
     valid=(masks[f]==0)&np.isfinite(surfaces[f])&(abs(surfaces[f]-(y-.026))<.15)
     ids=np.flatnonzero(valid)

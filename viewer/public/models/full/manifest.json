@@ -304,8 +304,8 @@
   },
   "room_annotations": {
     "file": "rooms.json",
-    "bytes": 127910,
-    "sha256": "20e7ff8af80377f198bf3610eb73b48fbfec7f31acbe045b43113c2ca8c131a6"
+    "bytes": 130226,
+    "sha256": "9cf755b6fc42aeed1f8ef6d2a11fdf93937736c32052e1498223c1ecb3fe4fb5"
   },
   "navigation": {
     "file": "navigation.json",
