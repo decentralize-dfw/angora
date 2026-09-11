@@ -1,0 +1,30 @@
+{
+ "revision": "R39",
+ "source": "T07a room polygon derivation (tools/derive_room_polygons.py)",
+ "defects": [
+  {
+   "defect": "attic east wall/roof open slot",
+   "asset": "build/web/full/level-3.glb + sections.json",
+   "bbox_xz": [
+    1.94,
+    4.08,
+    -2.11,
+    -1.88
+   ],
+   "width_m": 0.23,
+   "length_m": 2.14,
+   "area_m2": 0.491,
+   "effect": "space f3-S1 escapes the building envelope at datum+1.0; excluded by the 0.24 m appendage rule"
+  },
+  {
+   "discrepancy": "attic bedrooms",
+   "rooms": [
+    "f3-C02",
+    "f3-C04"
+   ],
+   "model_minus_schedule_m2": 1.225,
+   "equivalent_strip_m": 0.289,
+   "note": "the datum+1.0 slice overstates rooms under a sloped roof against the owner schedule"
+  }
+ ]
+}

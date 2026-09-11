@@ -4,7 +4,12 @@ import * as THREE from 'three';
 // untouched. Keep the baked maps, but avoid amplifying their micro-relief.
 export function materialFamily(name='') {
   if (/clay tile|^roof$|green tiles/i.test(name)) return 'roof';
-  if (/stucco|neighbor_wall|white_trim|limestone|stone_tile/i.test(name)) return 'masonry';
+  // Glass and mirrors must never reach a roughness floor: 'Lift glass leaf'
+  // would otherwise match the landscape family through 'leaf' and pick up a
+  // 0.88 floor, and the mirrors read as masonry through nothing at all - the
+  // floor is what matters, so they are named out before any family test.
+  if (/glass|mirror/i.test(name)) return 'other';
+  if (/stucco|neighbor_wall|white_trim|limestone|stone_tile|retaining stone|asphalt/i.test(name)) return 'masonry';
   if (/grass|foliage|hedge|needle|leaf/i.test(name)) return 'landscape';
   if (/wood_floor|terra_floor/i.test(name)) return 'floor';
   return 'other';

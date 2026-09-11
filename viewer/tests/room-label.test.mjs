@@ -18,14 +18,19 @@ test('Every scheduled area lands on a real room, and none is claimed twice',()=>
   assert.equal(new Set(Object.keys(ROOM_AREAS)).size,Object.keys(ROOM_AREAS).length);
 });
 
-test('The bedroom pairing is corroborated by the rooms\' own registered spans',()=>{
-  // f2-106 measures 2,95 x 4,10 = 12,10 m², which is the schedule's smaller
-  // bedroom to within 5 cm², so the larger figure belongs to f2-107 and not the
-  // other way round. Same shape of check on the second floor.
-  const spans=id=>byId.get(id).dimensions.map(d=>dimensionById.get(d).metres);
-  const [a,b]=spans('f2-106');
-  assert.ok(Math.abs(a*b-ROOM_AREAS['f2-106'])<0.1,`${a}x${b} should match ${ROOM_AREAS['f2-106']}`);
-  assert.ok(ROOM_AREAS['f2-107']>ROOM_AREAS['f2-106']);
+test('The bedroom pairing is corroborated by the substrate areas derived from the R39 solids',()=>{
+  // The earlier check paired the first-floor bedrooms by span product
+  // (2,95 x 4,10 = 12,10 "= Oda 2"), which understates an L-shaped room and
+  // paired them backwards. The R39-derived substrate areas identify both to
+  // under 0,8%: f2-106 13,510 vs the schedule's 13,41 and f2-107 12,040 vs
+  // 12,05 - so the larger figure belongs to f2-106.
+  const substrate=id=>byId.get(id).area_to_substrate_m2;
+  assert.ok(Math.abs(substrate('f2-106')-ROOM_AREAS['f2-106'])<0.15,`${substrate('f2-106')} vs ${ROOM_AREAS['f2-106']}`);
+  assert.ok(Math.abs(substrate('f2-107')-ROOM_AREAS['f2-107'])<0.15,`${substrate('f2-107')} vs ${ROOM_AREAS['f2-107']}`);
+  assert.ok(ROOM_AREAS['f2-106']>ROOM_AREAS['f2-107']);
+  // The attic slice overstates rooms under a sloped roof, so the f3 pair keeps
+  // its span-based ordering check only.
+  const spans=id=>byId.get(id).dimensions.map(d=>dimensionById.get(d)).filter(e=>e.basis==='dwg_verified').map(e=>e.metres);
   assert.ok(Math.max(...spans('f3-C04'))>=Math.max(...spans('f3-C02')));
   assert.ok(ROOM_AREAS['f3-C04']>ROOM_AREAS['f3-C02']);
 });
@@ -38,8 +43,10 @@ test('A tag shows the scheduled area, otherwise a registered span, otherwise not
     if(ROOM_AREAS[room.id]){
       assert.match(text,/^\d+,\d{2} m²$/,`${room.name}: ${text}`);areas++;
     } else if(text){
-      // Falls back to this room's own dimension, never another room's.
-      const source=dimensionById.get(room.dimensions[0]);
+      // Falls back to this room's own verified project dimension, never
+      // another room's and never a model-measured span.
+      const source=room.dimensions.map(d=>dimensionById.get(d))
+        .find(e=>e.basis==='dwg_verified'&&e.dimension_label_allowed);
       assert.equal(text,source.display);
       assert.equal(source.room_id,room.id);
       assert.ok(source.source_dimension_handle,'a span must trace to the drawing');
@@ -51,11 +58,25 @@ test('A tag shows the scheduled area, otherwise a registered span, otherwise not
   assert.equal(areas+spans+blank,rooms.rooms.length);
 });
 
-test('Nothing invents a measurement the sources do not carry',()=>{
-  // The model itself still assigns no room area; every m² shown comes from the
-  // schedule, and a room in neither source shows nothing at all.
-  assert.equal(rooms.rooms.filter(room=>Number.isFinite(room.area_m2)).length,0);
-  assert.match(rooms.area_notes.rooms,/unverified/);
+test('Every derived area names its method, and the schedule still outranks it on the tag',()=>{
+  // R39 derives a polygon and area for the 15 rooms that are their own
+  // enclosed space; the 12 labels inside shared volumes carry the shared
+  // space's figure as a note instead of pretending to their own.
+  const derived=rooms.rooms.filter(room=>Number.isFinite(room.area_m2));
+  assert.equal(derived.length,15);
+  const spaceById=new Map(rooms.spaces.map(space=>[space.space_id,space]));
+  for(const room of derived){
+    assert.ok(room.area_method_label,room.id+' derived area must name its method');
+    assert.deepEqual(spaceById.get(room.space_id).members,[room.id],room.id+' must be alone in its space');
+    // the owner's schedule covers all fifteen, so the derived figure is
+    // provenance and the tag never silently switches source
+    assert.ok(ROOM_AREAS[room.id],room.id+' derived area without a schedule entry would surface unreviewed');
+    assert.ok(Math.abs(room.area_to_substrate_m2-ROOM_AREAS[room.id])/ROOM_AREAS[room.id]<0.12,
+      `${room.id}: derived ${room.area_to_substrate_m2} vs schedule ${ROOM_AREAS[room.id]}`);
+  }
+  for(const room of rooms.rooms.filter(r=>r.shared_space_note))
+    assert.ok(!Number.isFinite(room.area_m2),room.id+' shared rooms carry no own area');
+  assert.match(rooms.area_notes.rooms,/19 kapali hacim/);
   assert.equal(areaLabel({id:'nope'},{}),'');
   assert.equal(areaLabel(null,null),'');
 });

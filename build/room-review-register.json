@@ -1,1305 +1,1369 @@
 {
-  "native_master_sha256": "a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6",
-  "phase_1_complete": false,
-  "source_photo_files": 202,
-  "unique_source_photos": 184,
-  "note": "Photo folders can contain several spaces. A group is not an automatically approved room.",
-  "acceptance": [
-    "CAD room boundary and openings",
-    "Photo-specific fixed fittings",
-    "Separate furniture layer",
-    "Material and light comparison",
-    "Clearances and navigation",
-    "Verified dimension-to-room association"
-  ],
-  "groups": [
+ "native_master_sha256": "4cf14255f50130cb4605c92762e686d3ef0ae4e284b34af8e431acef1d1e8874",
+ "phase_1_complete": false,
+ "source_photo_files": 202,
+ "unique_source_photos": 184,
+ "note": "Photo folders can contain several spaces. A group is not an automatically approved room. R39: verdicts are pinned to the delivered GLB hashes in evidence_asset_sha256; a re-export invalidates them instead of silently inheriting them.",
+ "acceptance": [
+  "CAD room boundary and openings",
+  "Photo-specific fixed fittings",
+  "Separate furniture layer",
+  "Material and light comparison",
+  "Clearances and navigation",
+  "Verified dimension-to-room association"
+ ],
+ "groups": [
+  {
+   "photo_group": "exterior",
+   "space": "Cepheler ve mahalle",
+   "photos": [
     {
-      "photo_group": "exterior",
-      "space": "Cepheler ve mahalle",
-      "photos": [
-        {
-          "path": "WhatsApp Image 2026-08-27 at 20.31.29.jpeg",
-          "sha256": "20d19dddac2aea78b5ebcad017a756b9b82a1b194f10880612ae17ef4d841bfb"
-        },
-        {
-          "path": "WhatsApp Image 2026-08-27 at 20.32.54.jpeg",
-          "sha256": "3e8b66f91e4e10979bee39e9e956e559010cbb53604655a7e3713daf4ff8022c"
-        },
-        {
-          "path": "asdf.jpeg",
-          "sha256": "622558b7161ada912d03302efd0a142cd0cdbd40b9dcff1c8bf9163089574356"
-        }
-      ],
-      "cameras": [
-        "01_front",
-        "15_pool_grade_review"
-      ],
-      "review_state": "compared_corrections_applied_open_items_remain",
-      "open_items": [
-        "Panjur konumları, kiremit tonu ve cephe ışığı",
-        "Komşu bahçelerinin çit, istinat duvarı ve bitki ayrıntıları",
-        "Yol genişliklerinin ve tüm topografyanın fotoğraf/ek kot verisiyle doğrulanması"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": false,
-      "completed_corrections": [
-        {
-          "revision": 18,
-          "change": "Removed roads crossing buildings 37/26, added CAD curb arterials, cut terrain beneath road surfaces and faired unmeasured grade transitions",
-          "evidence": "build/road-terrain-native-qa.json"
-        },
-        {
-          "revision": 26,
-          "change": "Applied source stair aperture and terraced garden geometry; completed geometry checks, photographic acceptance remains open",
-          "evidence": "build/r26-native-qa.json"
-        }
-      ],
-      "web_room_ids": []
+     "path": "WhatsApp Image 2026-08-27 at 20.31.29.jpeg",
+     "sha256": "20d19dddac2aea78b5ebcad017a756b9b82a1b194f10880612ae17ef4d841bfb"
     },
     {
-      "photo_group": "asansor",
-      "space": "Asansör",
-      "photos": [
-        {
-          "path": "asansor/WhatsApp Image 2026-08-26 at 11.54.10 (10).jpeg",
-          "sha256": "04a68bb5818dc97fd6737fa821b71fdfae26e09a7218bbd9d4842796c4400252"
-        },
-        {
-          "path": "asansor/WhatsApp Image 2026-08-26 at 11.54.10 (13).jpeg",
-          "sha256": "6b2d3a94616f7cd65e2ed7c18f4a8c66f29327d4a1ea3846cf4fdfe013f8462f"
-        },
-        {
-          "path": "asansor/WhatsApp Image 2026-08-26 at 11.54.10 (14).jpeg",
-          "sha256": "8f06a72cf55873d3c5f58fc946565d5a775015f85b052e9f72672c0462d0babc"
-        }
-      ],
-      "cameras": [
-        "17_lift_garden"
-      ],
-      "review_state": "compared_corrections_applied_open_items_remain",
-      "open_items": [
-        "Kapı ve kabin ayrıntılarının fotoğraf oranları",
-        "Bodrum, giriş ve birinci kattaki üç durakta kapı hareketi ve hol bağlantısı"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": false,
-      "web_room_ids": []
+     "path": "WhatsApp Image 2026-08-27 at 20.32.54.jpeg",
+     "sha256": "3e8b66f91e4e10979bee39e9e956e559010cbb53604655a7e3713daf4ff8022c"
     },
     {
-      "photo_group": "kat_1_bahce",
-      "space": "Bahçe ve havuz",
-      "photos": [
-        {
-          "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (1).jpeg",
-          "sha256": "700ebbc4a132c471c6f3690c4a0164f5f6ba19653904414d7faf707a9c7f473e"
-        },
-        {
-          "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (10).jpeg",
-          "sha256": "434babdd2c9b110a4033a4e6dd3f76282664212dc5de613e363382b3d21fe108"
-        },
-        {
-          "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (15).jpeg",
-          "sha256": "b70760f50e8a6d305d491fcf0a6e4904e5acc2ca5a1f430f71772e35424cff6d"
-        },
-        {
-          "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (2).jpeg",
-          "sha256": "009a8eafb09f1938a3873f0c6629ee08c9894978bbc3d4db566d380ab566aa19"
-        },
-        {
-          "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (3).jpeg",
-          "sha256": "e3f938cbb91213d21bebf35bf91e18e394fbdcf91bdb5339e2c37e780ed80d3c"
-        },
-        {
-          "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (4).jpeg",
-          "sha256": "9f953c6466bbfddbd87e9a9519809ca23044a1208ce1e5f54e68842047fd741e"
-        },
-        {
-          "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (5).jpeg",
-          "sha256": "8dfc4a398a39e97c09fe0f6af1a5f874c6c636931f5af80607340451f6f7b0f3"
-        },
-        {
-          "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (6).jpeg",
-          "sha256": "f3ac48359d175c453ba144d074ad9bc32c43fe4f43b2ed9bc820ce056a6fdf14"
-        },
-        {
-          "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (7).jpeg",
-          "sha256": "e0da7dfb5b8cb4cd0885c0f767ae372d98103f452c13a8f7fc0566740dc1f640"
-        },
-        {
-          "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (8).jpeg",
-          "sha256": "385d66ce186117e39bf592a2dbcd39b0d548f5949d22e1217ce3f48642c471f7"
-        },
-        {
-          "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (9).jpeg",
-          "sha256": "bf53513a786ee44de6cc9dd9cf6a6646b143ccb23ff1ea9ccc6351ef5ac65569"
-        },
-        {
-          "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41.jpeg",
-          "sha256": "e02b60617618316de21464a4cb9bdb211ff14808eec1d6a38360f1b04ef5550c"
-        }
-      ],
-      "cameras": [
-        "15_pool_grade_review"
-      ],
-      "review_state": "compared_corrections_applied_open_items_remain",
-      "open_items": [
-        "Bitkiler, çitler, taş derzleri ve bahçe ayrıntıları",
-        "Havuz suyu ve döşeme renk eşlemesi"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": false,
-      "web_room_ids": [],
-      "completed_corrections": [
-        {
-          "revision": 26,
-          "change": "Applied source stair aperture and terraced garden geometry; completed geometry checks, photographic acceptance remains open",
-          "evidence": "build/r26-native-qa.json"
-        }
-      ]
-    },
-    {
-      "photo_group": "kat_1_bodrum_mutfak",
-      "space": "Bodrum mutfak",
-      "photos": [
-        {
-          "path": "kat_1_bodrum_mutfak/WhatsApp Image 2026-08-26 at 11.54.10 (4).jpeg",
-          "sha256": "4cb83a600f6f894ca0284bab6b244b46ad89f7bd50f890bf4f4ba517132428a0"
-        },
-        {
-          "path": "kat_1_bodrum_mutfak/WhatsApp Image 2026-08-26 at 11.54.10 (9).jpeg",
-          "sha256": "8203f01d9c4c472a3b08ad7ae7f46d88d0c7edfc485fc649cf938d29950d70d1"
-        },
-        {
-          "path": "kat_1_bodrum_mutfak/WhatsApp Image 2026-08-26 at 11.54.10.jpeg",
-          "sha256": "bf2932dbbebaf7fa5786d7ed8d5d2eb11b12e76b7e54e0121fed3e57b5642a3a"
-        }
-      ],
-      "cameras": [
-        "16_basement_kitchen"
-      ],
-      "review_state": "compared_corrections_applied_open_items_remain",
-      "open_items": [
-        "Yeşil camların geçirgenliği ve dolap iç rafları",
-        "Ahşap çerçeve oranları, buzdolabı boyası ve kulplar",
-        "Fotoğrafa göre aydınlatma ve yüzey tonu"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": true,
-      "web_room_ids": [
-        "f0-B05"
-      ]
-    },
-    {
-      "photo_group": "kat_1_bodrum_salon",
-      "space": "Bodrum salon",
-      "photos": [
-        {
-          "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (1).jpeg",
-          "sha256": "00d1ef14789353d956eac5ff18c4be30cbe170c7887b02a057a969b2f9246a6b"
-        },
-        {
-          "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (11).jpeg",
-          "sha256": "bb0699a5a9ac3977a33c635dd947fd7ece970b13fe4e8f77659df417f29d51ee"
-        },
-        {
-          "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (12).jpeg",
-          "sha256": "00789c9e2f7534a5cef77258763c6a30f84c900653899acb885080e63e96fce5"
-        },
-        {
-          "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (15).jpeg",
-          "sha256": "558bad96657323bf6f8e9b7693b92e48d51f68fb39eb03357eb0ae058a040556"
-        },
-        {
-          "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (5).jpeg",
-          "sha256": "705ce15d660d753fe60e7b169fd26a5cf6807756569cc1aefe5caf51796110c7"
-        },
-        {
-          "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (6).jpeg",
-          "sha256": "2218a9e2e51db6529d1fb93a850519ec5f7a25ec61f6265c0fc4c1ae72c7935f"
-        },
-        {
-          "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (7).jpeg",
-          "sha256": "a557723109bdb31ae2894a164b61d8c3c3194604681c4247fb74e13fb1baed19"
-        },
-        {
-          "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.11 (2).jpeg",
-          "sha256": "4702277cd748453120aee658e7e89c1cf0cb48cdede2eea6e26b7c5374e23965"
-        },
-        {
-          "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.40 (1).jpeg",
-          "sha256": "c7528b9b4501851763fff498bd1bc495e7cd9c7cd076c1ddf68353d14afa7038"
-        },
-        {
-          "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.40 (2).jpeg",
-          "sha256": "3d037b09e81d64a7a2bacc2125d55be4cce7d8a462ebc4558ea9a970d69f5b5d"
-        }
-      ],
-      "cameras": [
-        "04_garden_lounge"
-      ],
-      "review_state": "current_revision_photo_review_pending",
-      "open_items": [
-        "Güncel sahnede fotoğrafla oda karşılaştırması"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": true,
-      "web_room_ids": [
-        "f0-B06"
-      ]
-    },
-    {
-      "photo_group": "kat_1_bodrum_wc",
-      "space": "Bodrum WC / B03",
-      "photos": [
-        {
-          "path": "kat_1_bodrum_wc/WhatsApp Image 2026-08-26 at 11.54.11 (1).jpeg",
-          "sha256": "eb90b189394c9d67744950e4054d1789258687f687f06a01070328e24d85f31e"
-        },
-        {
-          "path": "kat_1_bodrum_wc/WhatsApp Image 2026-08-26 at 11.54.11 (3).jpeg",
-          "sha256": "a71d533ddbd8ccdb6c7b003be6cd3b19a80d21b8014b0df3f8ae014b42ee16c3"
-        },
-        {
-          "path": "kat_1_bodrum_wc/WhatsApp Image 2026-08-26 at 11.54.11 (4).jpeg",
-          "sha256": "a349a74eb59d17aea56ea8f35284fdb616f6c3b0cf4d3ed0e4dda660656e8837"
-        },
-        {
-          "path": "kat_1_bodrum_wc/WhatsApp Image 2026-08-26 at 11.54.11 (5).jpeg",
-          "sha256": "f367c9c26d94d22d8b1a37cf63aa54e34d44ca1168b8713cfac1d8d7298cd98b"
-        },
-        {
-          "path": "kat_1_bodrum_wc/WhatsApp Image 2026-08-26 at 11.54.11.jpeg",
-          "sha256": "1a005e1eb9e142b49f8fb260ad9d8a53163eb7e55009a2991be1a1dd5ea2a124"
-        }
-      ],
-      "cameras": [
-        "18_garden_wc"
-      ],
-      "review_state": "compared_corrections_applied_open_items_remain",
-      "open_items": [
-        "Dekorasyon, raf içeriği ve armatür ayrıntıları",
-        "Kapı açılımının fotoğrafla son kontrolü"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": false,
-      "web_room_ids": []
-    },
-    {
-      "photo_group": "kat_2_garaj",
-      "space": "Garaj",
-      "photos": [
-        {
-          "path": "kat_2_garaj/WhatsApp Image 2026-08-26 at 11.54.40.jpeg",
-          "sha256": "0a7b92bd5fafab58dd59364930fe1dd8dee53784684ff9c33b06e122ee6e401b"
-        },
-        {
-          "path": "kat_2_garaj/WhatsApp Image 2026-08-26 at 11.54.41 (11).jpeg",
-          "sha256": "ecfb4fb11af4237e00a01a0fceb0abc6cfe7d0b1fbe957de2b2ba3de128f2c0f"
-        },
-        {
-          "path": "kat_2_garaj/WhatsApp Image 2026-08-26 at 11.54.41 (12).jpeg",
-          "sha256": "e14e957d80959dbfafb4599e0df4fcf30b93f79f4ac137eab022a9b419cbc3c5"
-        },
-        {
-          "path": "kat_2_garaj/WhatsApp Image 2026-08-26 at 11.54.41 (13).jpeg",
-          "sha256": "be8cf2a38d59eb08e4d1288fb7aeda94d0017bda67c88a1ddf3d8a6329f8a8f7"
-        },
-        {
-          "path": "kat_2_garaj/WhatsApp Image 2026-08-26 at 11.54.41 (14).jpeg",
-          "sha256": "0952eb19fac9a46a0751917aae2bd28b56ab56453112ec90c9fb00e6eba05ec2"
-        },
-        {
-          "path": "kat_2_garaj/WhatsApp Image 2026-08-26 at 11.54.41 (16).jpeg",
-          "sha256": "cdc382867eb6e7621171edeba9739c7523637f9874d623a491ceaba340865bf9"
-        },
-        {
-          "path": "kat_2_garaj/WhatsApp Image 2026-08-26 at 11.54.54 (1).jpeg",
-          "sha256": "f1d3e4bba16f242853c44ec3da98889d891e0f8205ddbed965a3c22a3ef9c56f"
-        },
-        {
-          "path": "kat_2_garaj/WhatsApp Image 2026-08-26 at 11.54.54.jpeg",
-          "sha256": "f1a9d24eadd11aae382055f99a7ee073beb4697326f248bf5fa741d3e18286a6"
-        }
-      ],
-      "cameras": [],
-      "review_state": "current_revision_photo_review_pending",
-      "open_items": [
-        "Garaj içi için özel inceleme kamerası",
-        "İç donatı, tesisat, zemin ve kapı mekanizması"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": true,
-      "web_room_ids": [
-        "f1-Z07"
-      ]
-    },
-    {
-      "photo_group": "kat_2_giris",
-      "space": "Giriş ve hol",
-      "photos": [
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (10).jpeg",
-          "sha256": "c6a595ff313e6789e37f04da49dbd2b733389908f6100bf99cfb7ddb79d7b33a"
-        },
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (11).jpeg",
-          "sha256": "2ca199b324338dc939389295918935a0f226e68d8f04fbd8a29608511bca6947"
-        },
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (12).jpeg",
-          "sha256": "8ab518a3ba36e99db1f4dd54c592f887c287b7f44c0f50248bb7e2e5af0d5e18"
-        },
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (13).jpeg",
-          "sha256": "8ab518a3ba36e99db1f4dd54c592f887c287b7f44c0f50248bb7e2e5af0d5e18"
-        },
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (3).jpeg",
-          "sha256": "c041e4df5ee1017cb3a70462b93ca7eb6b3252f65396932227ebf37e0cbf618d"
-        },
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (4).jpeg",
-          "sha256": "e26aaaf205ef2f27cf4a924fd6351681ab39e2da73001a213c6c8c1fa3f721a3"
-        },
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (5).jpeg",
-          "sha256": "099ed2981c7678273f60de42449dd71872f3179e9fc10184632f926c76ea3c97"
-        },
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (6).jpeg",
-          "sha256": "9d10a33ef5e4f802efd7cc13f32f88a88454405267d33bd62a9e8bb1d6fcbba5"
-        },
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (7).jpeg",
-          "sha256": "780aba90c2fae29896b21db6c1aeacc095f6c3e856ed7fdcaf47333c00412fe3"
-        },
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (8).jpeg",
-          "sha256": "dba0fc048f996e474210fbd93f3117fb3ebf99df4446ad0aa3991df6941a96cd"
-        },
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (9).jpeg",
-          "sha256": "5666e08d18a4fffbf4cf8caf87d84fbf0211da0c18fbca436e1b689442cd14be"
-        },
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.54 (4).jpeg",
-          "sha256": "4ecbede7f9442a5c567d471e642053eeb6672b81365fdafb85efb7c8fef11cff"
-        },
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.54 (5).jpeg",
-          "sha256": "15413aa665506345591fbab5e9ad4795948a17c97b1f89a7b423e0ea75c5208c"
-        },
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.54 (6).jpeg",
-          "sha256": "ef4f2e3ac0e067304907e9ca98debf628b056877b0bb38a15f08640c0521eb41"
-        },
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.54.10 (2).jpeg",
-          "sha256": "35f14b563e39ea1e682b1fa68c2824d94ec650516563f53150c276ee1094b737"
-        },
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.54.10 (3).jpeg",
-          "sha256": "34de172d580e548780e83146cdeb24d77b90bad9b46e5022a754458cf1e5b2c7"
-        },
-        {
-          "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.54.10 (8).jpeg",
-          "sha256": "3f2ef3691226326f9241d15ff93a116c90d7d6c67afc7029b5ac67d06017ac31"
-        }
-      ],
-      "cameras": [],
-      "review_state": "current_revision_photo_review_pending",
-      "open_items": [
-        "Giriş mobilyaları ve hol ayrıntıları",
-        "Kapılar, merdiven ve oda geçişleri"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": true,
-      "web_room_ids": [
-        "f1-Z01",
-        "f1-Z02"
-      ],
-      "completed_corrections": [
-        {
-          "revision": 26,
-          "change": "Applied source stair aperture and terraced garden geometry; completed geometry checks, photographic acceptance remains open",
-          "evidence": "build/r26-native-qa.json"
-        }
-      ]
-    },
-    {
-      "photo_group": "kat_2_giris_wc",
-      "space": "Giriş WC / Z03",
-      "photos": [
-        {
-          "path": "kat_2_giris_wc/WhatsApp Image 2026-08-26 at 11.53.53 (14).jpeg",
-          "sha256": "815c7eddbd332eefdcc5f2a448fc1d85e743397f3faf572e28f600052d4e3ff1"
-        },
-        {
-          "path": "kat_2_giris_wc/WhatsApp Image 2026-08-26 at 11.53.53 (15).jpeg",
-          "sha256": "aaadfddee3e56fcb953d4735c30350b140686a7146935ddae56853980d4dafa2"
-        },
-        {
-          "path": "kat_2_giris_wc/WhatsApp Image 2026-08-26 at 11.53.53 (16).jpeg",
-          "sha256": "1e89c03cd1ec2aca72e90ec59bae6cfdb0d143439d766e91e3c0b014d4240b77"
-        },
-        {
-          "path": "kat_2_giris_wc/WhatsApp Image 2026-08-26 at 11.53.54 (1).jpeg",
-          "sha256": "4d7f179a22fcfaf5abe2cc21cad68dc3a70aeb6d142d2fc2efcd0e1798f42c87"
-        },
-        {
-          "path": "kat_2_giris_wc/WhatsApp Image 2026-08-26 at 11.53.54 (2).jpeg",
-          "sha256": "3763d4308531c329c7df290c56fcac400f3fd8e03a535244443f71538494ca9e"
-        },
-        {
-          "path": "kat_2_giris_wc/WhatsApp Image 2026-08-26 at 11.53.54 (3).jpeg",
-          "sha256": "d927c0d7790348899bf556534b938b171232f4ec80d8e91c536eb158e154067c"
-        },
-        {
-          "path": "kat_2_giris_wc/WhatsApp Image 2026-08-26 at 11.53.54.jpeg",
-          "sha256": "155b3ddd642b4bf161f6d93647ed82eb61e247ab6f6311eddb8d7c338e1b52e6"
-        }
-      ],
-      "cameras": [],
-      "review_state": "current_revision_photo_review_pending",
-      "open_items": [
-        "Fotoğrafa özgü lavabo, ayna, klozet ve malzemeler"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": true,
-      "web_room_ids": [
-        "f1-Z03"
-      ]
-    },
-    {
-      "photo_group": "kat_2_on_giris",
-      "space": "Ön giriş ve yaklaşım",
-      "photos": [
-        {
-          "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56 (1).jpeg",
-          "sha256": "879d2d71bfab852a3867cf4df1121e47fe16b4028b322471a7716ad09b9b0a2b"
-        },
-        {
-          "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56 (2).jpeg",
-          "sha256": "cea6779dd16d4fd7c6b260a50106a79347ef9dd7d8127c2676a23ca0aaeeac2e"
-        },
-        {
-          "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56 (3).jpeg",
-          "sha256": "879d2d71bfab852a3867cf4df1121e47fe16b4028b322471a7716ad09b9b0a2b"
-        },
-        {
-          "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56 (4).jpeg",
-          "sha256": "c91824b9b8dd72fc882b9bd1a63ef5076fc60824324005d6f39c5068155beccf"
-        },
-        {
-          "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56 (5).jpeg",
-          "sha256": "fbcca968fd06cdb457f7d121a54a9d476cdacc58cac1989609a1bb1bc5f50d8d"
-        },
-        {
-          "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56 (6).jpeg",
-          "sha256": "b9e59ccac350c98ba185da4ab0f23187434ad78d3e0532b89fb832ce9ba6db4e"
-        },
-        {
-          "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56 (7).jpeg",
-          "sha256": "76f8e05fed5e3912b946e64b2ab434f8b71509728a520fb61f5eea29ac346681"
-        },
-        {
-          "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56 (8).jpeg",
-          "sha256": "ade612999e679dc2e086a15fa3302660010c0df1d4a8c242f85e1193266d40ef"
-        },
-        {
-          "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56.jpeg",
-          "sha256": "cea6779dd16d4fd7c6b260a50106a79347ef9dd7d8127c2676a23ca0aaeeac2e"
-        }
-      ],
-      "cameras": [
-        "01_front"
-      ],
-      "review_state": "current_revision_photo_review_pending",
-      "open_items": [
-        "Taş kaplama deseni, bahçe kapıları ve bitki yerleşimi"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": false,
-      "web_room_ids": []
-    },
-    {
-      "photo_group": "kat_2_ust_mutfak",
-      "space": "Giriş katı mutfak",
-      "photos": [
-        {
-          "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.51.15 (1).jpeg",
-          "sha256": "25ee0d82c1aa98164b96e445ef4cf090ff21bd2a9918377ef0b41f57dd9f4906"
-        },
-        {
-          "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.51.15 (2).jpeg",
-          "sha256": "e22aec05f614cf2e76990a8033e846068a13c8b9e662cbe5504b68fc0f58ee7c"
-        },
-        {
-          "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.51.15.jpeg",
-          "sha256": "fa723d5eea19dbcad4e6830b8f912d83dc0fbf30ac356254f24b426bacbc2c6a"
-        },
-        {
-          "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.32 (18).jpeg",
-          "sha256": "ca03645212f0ac56295f4775024e3e00ae6c0ea6ca40279631ea45543f81a075"
-        },
-        {
-          "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.33 (1).jpeg",
-          "sha256": "9314cc06186993b28f91869362106fa004951e9374bbc6005f25fff70edcdea2"
-        },
-        {
-          "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.33 (2).jpeg",
-          "sha256": "a82e43e018af9fda15d16b51a7a225f2a542bb03d98ef8258b0618ca4031bfff"
-        },
-        {
-          "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.33.jpeg",
-          "sha256": "4bae0448be063cfdb8e0397a0f2e82422c6984030bde86b458eca661e00bec74"
-        },
-        {
-          "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.53 (1).jpeg",
-          "sha256": "cb9e61f1c9349be15a47f53b54e0e643514cd9ed9bb37ae44bf6de20d30988cc"
-        },
-        {
-          "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.53 (2).jpeg",
-          "sha256": "c438e2cef2487e5e5456a3965b4abc91a685a142b2ea84b2f36bb33ab960c4b4"
-        }
-      ],
-      "cameras": [
-        "10_main_kitchen",
-        "walk-kitchen",
-        "walk-kitchen-hob",
-        "walk-kitchen-vitrine"
-      ],
-      "review_state": "photo_joinery_revision_24_applied_open_items_remain",
-      "open_items": [
-        "Seramik deseni ve ahşap renginin fotoğrafla eşleştirilmesi",
-        "Pencere çerçevesi ve panjurun fotoğraftaki konumu",
-        "Tavan profili, avize ve fotoğraf ışığı",
-        "Vitrin içi eşyalar ve kapı vitrayı; fotoğrafla son yerleşim kontrolü",
-        "Cihaz marka/modeli ve küçük kumanda işaretlerinin kaynaklarda daha yakından doğrulanması"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": true,
-      "comparison_evidence": {
-        "render": "build/renders/10_main_kitchen.png",
-        "render_sha256": "6cf426f1dbbc514a178741b1d462f9b83d1a14802e54d71a7ae88535996d5cba",
-        "render_stage": "earlier_geometry_review_before_constant_color_correction",
-        "source_contact_sheet": "build/reference/kat_2_ust_mutfak_1.jpg",
-        "source_contact_sheet_sha256": "a614f6c614ac7c6e82cf19d06989a8989442037a20289c933ec1920535c01f3d",
-        "current_revision": 24,
-        "current_renders": [
-          {
-            "file": "build/renders/full-scene-walk-kitchen-hob-r24.png",
-            "sha256": "5d434e92de06095dc0e364a6296545d18494a4ca52c5f5ec537094fbba7cc2ad",
-            "provenance": "build/renders/full-scene-walk-kitchen-hob-r24.json",
-            "kind": "Blender GLB geometry review; not a web shader screenshot"
-          },
-          {
-            "file": "build/renders/full-scene-walk-kitchen-vitrine-r24.png",
-            "sha256": "9a26356a50519a45f097fd491bf5fb0ce8805d0c7ae690f0e8e1d4fe4bb6fb94",
-            "provenance": "build/renders/full-scene-walk-kitchen-vitrine-r24.json",
-            "kind": "Blender GLB geometry review; not a web shader screenshot"
-          }
-        ],
-        "previous_renders_r23": [
-          {
-            "file": "build/renders/full-scene-walk-kitchen-r23.png",
-            "sha256": "ab497c40886692c108f5de965521a959bd1263f7d5b1aa87115b8b73451532df",
-            "provenance": "build/renders/full-scene-walk-kitchen-r23.json",
-            "kind": "Blender GLB geometry review; not a web shader screenshot"
-          },
-          {
-            "file": "build/renders/full-scene-walk-kitchen-hob-r23.png",
-            "sha256": "493e7f0ef6cfd9b91e7bf3b1aa6dab17c975d69a3134f7e7d56be7d5b3068f4b",
-            "provenance": "build/renders/full-scene-walk-kitchen-hob-r23.json",
-            "kind": "Blender GLB geometry review; not a web shader screenshot"
-          },
-          {
-            "file": "build/renders/full-scene-walk-kitchen-vitrine-r23.png",
-            "sha256": "292d2e6e56ef1fadde5294b716c0d33ff0e3a4b6f0fe20f68fa1241bdc0f1221",
-            "provenance": "build/renders/full-scene-walk-kitchen-vitrine-r23.json",
-            "kind": "Blender GLB geometry review; not a web shader screenshot"
-          }
-        ]
-      },
-      "completed_in_revision_15": [
-        "Five-module sink cabinet layout, dishwasher and drainboard",
-        "Oven opening cleared and raised panel fronts",
-        "Cupboard mouldings and square backsplash joints",
-        "Vitrine positioned against measured native CAD wall face"
-      ],
-      "web_room_ids": [
-        "f1-Z04"
-      ],
-      "completed_corrections": [
-        {
-          "revision": 23,
-          "change": "Solid hob doors, paired satin sink doors, outer display shelves, blind, timber grain axes, closed frame joints, whole-cabinet fit and notched counters at unchanged CAD wall returns",
-          "evidence": [
-            "build/kitchen-photo-r23.json",
-            "build/kitchen-photo-r23-qa.json",
-            "build/kitchen-surfaces-r23-qa.json"
-          ]
-        },
-        {
-          "revision": 24,
-          "change": "Added oven control fascia; aligned pantry door/drawer joints and hardware; painted open display-bay backs following the source photograph",
-          "evidence": [
-            "build/kitchen-photo-r24.json",
-            "build/kitchen-photo-r24-qa.json",
-            "build/kitchen-surfaces-r24-qa.json"
-          ]
-        }
-      ]
-    },
-    {
-      "photo_group": "kat_2_ust_salon",
-      "space": "Giriş katı salon",
-      "photos": [
-        {
-          "path": "kat_2_ust_salon/WhatsApp Image 2026-08-26 at 11.51.15 (3).jpeg",
-          "sha256": "6bd2af46824f7049973e28389c42d275cbdb10e9b0f70986369df99d9a08dd3e"
-        },
-        {
-          "path": "kat_2_ust_salon/WhatsApp Image 2026-08-26 at 11.51.15 (4).jpeg",
-          "sha256": "dc8a7eadf133c3511a07eb4731343012d6baa982cf2f4d9905d6257bdfb410ff"
-        },
-        {
-          "path": "kat_2_ust_salon/WhatsApp Image 2026-08-26 at 11.51.15 (6).jpeg",
-          "sha256": "21ad5db74c0ca65739f0310b8ceece92c7680a422a3a2ac80a28c2389d4c07a3"
-        },
-        {
-          "path": "kat_2_ust_salon/WhatsApp Image 2026-08-26 at 11.51.15 (8).jpeg",
-          "sha256": "942dbcbac3b1f005db2919c8cd0c1eddf99e683c71fb7e41aba5488dc4e983ea"
-        }
-      ],
-      "cameras": [
-        "05_main_lounge",
-        "09_main_panorama"
-      ],
-      "review_state": "reference_geometry_compared_current_material_review_pending",
-      "open_items": [
-        "Avize kolları, uç biçimleri, tepe bağlantısı ve ışık şiddeti",
-        "Perde çizgileri ve kumaş, parke renk çeşitliliği ve parlaklığı",
-        "Duvar dekorasyonu, vitrin içeriği ve mobilya gruplarının fotoğraf eşlemesi",
-        "Salon geçişleri ve kot basamağının ayrı kadrajda kontrolü",
-        "Düzeltilmiş renk haritalarıyla güncel iç mekân ışığı karşılaştırması"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": true,
-      "comparison_evidence": {
-        "render": "build/renders/05_main_lounge.png",
-        "render_sha256": "628f734d040498e0b6ec10cb3b6ed7ffb5652e8d0254148f9cde88a4ec5b46cc",
-        "render_stage": "earlier_geometry_review_before_constant_color_correction",
-        "source_contact_sheet": "build/reference/kat_2_ust_salon_1.jpg",
-        "source_contact_sheet_sha256": "523bded31c54208d445a59ac62dbbce30600cf8fc42761387e1f1947f50337e9"
-      },
-      "web_room_ids": [
-        "f1-Z05",
-        "f1-Z06"
-      ]
-    },
-    {
-      "photo_group": "kat_3_banyok",
-      "space": "Ortak banyo",
-      "photos": [
-        {
-          "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.51.30 (1).jpeg",
-          "sha256": "0c6c44ce7f64415961def766dcfd91fa7bf93e768d6424a03e674f0ec55a2736"
-        },
-        {
-          "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.51.30 (3).jpeg",
-          "sha256": "a419dc607f2f2ed506f6355b6bf650daa2142478db2615157de58d8e41ed65ac"
-        },
-        {
-          "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.51.30 (4).jpeg",
-          "sha256": "e9176317284be73cb29fc713e2800662828988b1eec2c30a007a16288b4579af"
-        },
-        {
-          "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.51.30 (6).jpeg",
-          "sha256": "0c6c44ce7f64415961def766dcfd91fa7bf93e768d6424a03e674f0ec55a2736"
-        },
-        {
-          "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.51.31 (4).jpeg",
-          "sha256": "28d174a618c336fca2889f4b0c43276f838ad883ce9d53061a8f05424981cbab"
-        },
-        {
-          "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.51.31 (5).jpeg",
-          "sha256": "9b45e446837430f2d5c2b002dff93479b6937c11dd15a23614f8e59b1636ba27"
-        },
-        {
-          "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.51.31 (6).jpeg",
-          "sha256": "fea2790ce7092e398e83c52dfa94a79b09ee6d685fa9e77b0a99936d32a9c72d"
-        },
-        {
-          "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.51.31.jpeg",
-          "sha256": "6e155ea6c61ec32d46d135d9a34e6fc19b8e6b27b5c5d9fa5b0b309ec4e75329"
-        },
-        {
-          "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.52.44.jpeg",
-          "sha256": "b85ed40ac403af2f858932668d5ac3d2bf45ff5bde52ab6aa3b846722dfa0c9f"
-        }
-      ],
-      "cameras": [
-        "14_shared_bathroom"
-      ],
-      "review_state": "current_revision_photo_review_pending",
-      "open_items": [
-        "Güncel sahnede fotoğrafla oda karşılaştırması"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": true,
-      "web_room_ids": [
-        "f2-108"
-      ]
-    },
-    {
-      "photo_group": "kat_3_hol",
-      "space": "Yatak katı holü",
-      "photos": [
-        {
-          "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.07 (10).jpeg",
-          "sha256": "f61e90418bb790a6f855a889a655917702a38aa5d712b5756ad692aae0376820"
-        },
-        {
-          "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.07 (9).jpeg",
-          "sha256": "08758eb02c94ddda24497a9c1c2587cf92226b9cefb0bc8ec376f5e1ed1e1f16"
-        },
-        {
-          "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08 (1).jpeg",
-          "sha256": "7583bddcadf1ff7c19980a5c2ba08186e18ed2c5bdd1bb4f5949284ee29e1d97"
-        },
-        {
-          "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08 (2).jpeg",
-          "sha256": "78cf9563214998c8d46a5815cc959d2d930b15bd83f0fda3e52f7e928307b51b"
-        },
-        {
-          "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08 (3).jpeg",
-          "sha256": "3ac81cb8119f45b561d07a3f3a3627f4d30317f72298b535e6d855ca4dcea47b"
-        },
-        {
-          "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08 (4).jpeg",
-          "sha256": "c5ffa34c5253969ac417c21af0a91e9af6a49f16aefbe0601492c92418490023"
-        },
-        {
-          "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08 (5).jpeg",
-          "sha256": "0b44de1a20c695c62d774720c975f2f9da468f77a3c516c3159a45404b4adaa3"
-        },
-        {
-          "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08.jpeg",
-          "sha256": "fea2008403edd63927ca42856c1f9fd2c97df01cbbde67f62bc0d57517ba2b29"
-        },
-        {
-          "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (10).jpeg",
-          "sha256": "b1129c247bf0df069931b63d8c9ea65b63b4fc32a94a8473d38822872cbe9fc1"
-        },
-        {
-          "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (11).jpeg",
-          "sha256": "4713a27d1305e66213520b1b39460ddb63dccb6e3b96c1ea3776e9de41efdb74"
-        },
-        {
-          "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (12).jpeg",
-          "sha256": "404e43bf5e4bbb2d6ee2a5cb75d4dc20fec961452281a9410313813613ad6ecc"
-        },
-        {
-          "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (15).jpeg",
-          "sha256": "1a2857d495994021e55160803fdea712486e3e9e0f7f43902345f14a1b6733ae"
-        },
-        {
-          "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (6).jpeg",
-          "sha256": "099166b75b02d6c050c6b84cbef8e285c9e888c61925bd0b48b95572e4a91ae3"
-        },
-        {
-          "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (7).jpeg",
-          "sha256": "6b31274acb2a09b87ac2cc892773ad4bca01e7fcdc72033db7f359c4ad88dcbf"
-        },
-        {
-          "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (8).jpeg",
-          "sha256": "7d2026512c0f9b94bd9264fa8262c3ff9ba06e0b363f7ffe19ed0f4009ab02ea"
-        },
-        {
-          "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (9).jpeg",
-          "sha256": "9f585238938aa78bbaa62f27eff3f295477bbc86f97fd118e86870abbf8cae57"
-        }
-      ],
-      "cameras": [
-        "full-scene-gallery"
-      ],
-      "review_state": "compared_corrections_applied_open_items_remain",
-      "open_items": [
-        "Diğer merdiven kollarının korkulukları ve galeri sarkıtı; motif oranlarının daha yakın fotoğraf eşlemesi",
-        "Berjer ve dolap profillerinin daha yakın fotoğraf eşlemesi, aydınlatma ve ahşap tavan",
-        "Oda kapıları ve fotoğrafa göre malzeme kontrolü"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": true,
-      "completed_corrections": [
-        {
-          "revision": 17,
-          "change": "Removed spurious horizontal wall-finish cap across CAD gallery and staircase; lower floor and stair raycasts pass",
-          "evidence": "build/gallery-visibility-qa.json"
-        },
-        {
-          "revision": 20,
-          "change": "Added photo-guided iron scrolls, brass fixings and profiled wood handrail on CAD-supported gallery rim and descending stair; lower sightlines remain open",
-          "evidence": "build/gallery-railing-report.json"
-        },
-        {
-          "revision": 22,
-          "change": "Replaced generic hall sofa/table with photo-interpreted twin wingchairs, coffee table and mirror cabinet; corrected wall-return clearance",
-          "evidence": "build/furniture-refinement-r22.json"
-        }
-      ],
-      "web_room_ids": [
-        "f2-101",
-        "f2-105"
-      ]
-    },
-    {
-      "photo_group": "kat_3_master_bedroom",
-      "space": "Ebeveyn odası, banyo ve giyinme",
-      "photos": [
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (1).jpeg",
-          "sha256": "90e796a7f39147037dfaeb9cadebead0162d07319fa48ae0e7d273b59be6bde9"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (2).jpeg",
-          "sha256": "4ab62f66e1532784cd0686feabbd9d844a87477d64d0ff34c7f7301d7c7b2f5f"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (3).jpeg",
-          "sha256": "ed44746880b7f76cf214fc895f5523a35cbddb933941234d75e54c654631152c"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (4).jpeg",
-          "sha256": "a735399b60ff32196da8666a7702dc0a3907f88ec92ac7eccfe78e4b20752e40"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (5).jpeg",
-          "sha256": "7030222d03e0ff08bd755d28ee5c44ab46831ad795cdbb574da4a04077b15359"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (6).jpeg",
-          "sha256": "6dba4c6e2eb6aff7412c8a724d917b007e2fa59a3dd0733e27dc273d120ba057"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (7).jpeg",
-          "sha256": "d8f3f2fc4f6e6627de134270562a8695f48438437084e84e4621d55dda48c059"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (8).jpeg",
-          "sha256": "3b0a529f4431055b580d0dadc28b9841eba8ad8e7aa0d932be69f6ec9b6ce02b"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07.jpeg",
-          "sha256": "f0252081bbf6ba07fbb576aaa643ccecec39dbb0fc27a3c84fecdcf985f3a8a7"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.08 (10).jpeg",
-          "sha256": "f15057d068f7932d5680e4dd715b847c6b70ca2173afab51646b04e8f2145d28"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.08 (11).jpeg",
-          "sha256": "c79b726724ff5205a3669f423d20b162e884430faee762a7d63d775f5c772b4c"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.08 (6).jpeg",
-          "sha256": "adb631b30adb363f715cd72eb6e14e38bd38255b1195592a490dcfc2bb565688"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.08 (8).jpeg",
-          "sha256": "a60d24e5439bd03ede02f18afe96d24e3e348bda56978c4d954daba064167079"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.08 (9).jpeg",
-          "sha256": "381d9c141eab1cfb42282c21c1c257a8ae52e4dd09ecc620851a4b12112de3b7"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.43.jpeg",
-          "sha256": "c51ee92fed1bc7425a438806aa26d78c1e2b85f14c0546b0746d11a0f39f5c45"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.44 (1).jpeg",
-          "sha256": "6ddd063b58bd03a5db672d7c81a1cbe6e5e247973990c518b5302443d6897cf7"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.44 (2).jpeg",
-          "sha256": "570acf352ea87420d0d492907d35dd5f7afa212d22fa055dfadd26ab2343e679"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.44 (3).jpeg",
-          "sha256": "d1d5778af0d40d556ac3e8c2f13a9676286ac09e6e7c4fd3fa34e492dfa147b0"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.44 (4).jpeg",
-          "sha256": "4bc38d7ce8a573896904a076a0fb1f9fcde5cc53baf54ef81814b5ed18fd69cc"
-        },
-        {
-          "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.44 (5).jpeg",
-          "sha256": "df2dd71fde3d2cc7ef93019328f59cf7bb1737da77f3ecdeb80b3812d7697817"
-        }
-      ],
-      "cameras": [
-        "06_master_bedroom",
-        "12_dressing",
-        "13_master_bathroom"
-      ],
-      "review_state": "compared_corrections_applied_open_items_remain",
-      "open_items": [
-        "Her fotoğrafın yatak odası / banyo / giyinme hacmine ayrılması",
-        "Üç hacmin güncel sahnede ayrı kontrolü"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": true,
-      "completed_corrections": [
-        {
-          "revision": 22,
-          "change": "Moved dressing furniture clear of partition; reduced quilt drape clear of bedside tables",
-          "evidence": "build/furniture-refinement-r22.json"
-        }
-      ],
-      "web_room_ids": [
-        "f2-102",
-        "f2-103",
-        "f2-104"
-      ]
-    },
-    {
-      "photo_group": "kat_3_yatak_odalari",
-      "space": "Diğer yatak odaları",
-      "photos": [
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.30.jpeg",
-          "sha256": "1052d452dd8d879ac4cc99827f6eaff8ed67cb2ffe7555904031edc105ceabbc"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.31 (7).jpeg",
-          "sha256": "229c80bfb3c26de7a55431b35d3c97399b6aa88bb1fa7714c2c0506a73044b67"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.31 (8).jpeg",
-          "sha256": "73a2794fd2a3ba2a3d4cb40eeb8ff349f4c0fc97e5a46dedeb143bd486ad6016"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.45 (1).jpeg",
-          "sha256": "56a41d3a083ec3672f1f5c41c58c7aeccf895875be7c2ae7f1b62122facd45f9"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.45 (2).jpeg",
-          "sha256": "9331d7a9841491e3f40c204eaff22d67a183a56324b70cef56a84f957dfb65cf"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.45.jpeg",
-          "sha256": "b4734dc5a8ea183b93098715ac5bdb90ce4e52e6eb48dcc35f06add1b9e73d04"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (1).jpeg",
-          "sha256": "7f65253783006ade266e91b09d42c818b0bcdb166d8eae2e629afe9544d22a74"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (10).jpeg",
-          "sha256": "3f02406ef803d0d825c196b3b16e14ecc9bb252b498b7f12c653d060e6b32b53"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (11).jpeg",
-          "sha256": "a677f764fe9e5e3beaa3335d052a9c2e13942699870d18220f73feb1a0915041"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (12).jpeg",
-          "sha256": "35a85b6ae5084c2ca959531111be8a9ae3745387d846f3c7d23a07200b23a1fa"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (13).jpeg",
-          "sha256": "07ac95e5b6cecc7c60b9ae9e2394ae8c82e87582145df254ae5ae995b7646d65"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (14).jpeg",
-          "sha256": "21181b9b47bcf30958ae24f34458b5e51d853326fcda94f6f06431631a7c0a17"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (15).jpeg",
-          "sha256": "07ac95e5b6cecc7c60b9ae9e2394ae8c82e87582145df254ae5ae995b7646d65"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (16).jpeg",
-          "sha256": "ac3ae556acf46251ed6837e0487fdc0605c682af29e7df3ba9287a08da30d32b"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (2).jpeg",
-          "sha256": "96edbbaf20c03afdbb9db512d60eb873d6806cad6d4dee34fe95cb8e05757a86"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (3).jpeg",
-          "sha256": "c3fda2f2ecf8795c6441ba7225222d7e39d2f71181c73d1c6f761eb728dbb359"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (4).jpeg",
-          "sha256": "c87b5fa68c55e1d1081debd9751d1f3a39105a2e2093ac6a35f1935a16b9d06e"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (5).jpeg",
-          "sha256": "f753a6af0dd29d043ef9c67f9c0b1ae41d715d0fc4f9cf749ca108def51136c0"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (6).jpeg",
-          "sha256": "64686e6c1e21e200ebf5f8192a9bd33234ebee33428fbc152afb00753e55cb19"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (7).jpeg",
-          "sha256": "cf651fde61e078204de1fa462fed05928d7aea86e351c563a55450de961fbd76"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (8).jpeg",
-          "sha256": "6de684420501e04f4da975660568b5a0d5255249a2520a995330009c5110b82d"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (9).jpeg",
-          "sha256": "bc4ddd8a9832a8e7e5c9536cd08dd399e79972f168d4e857a71fafad36bbf9d2"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46.jpeg",
-          "sha256": "3b8e3e51be2bdaf20b75396573247d89181bbd47a2c6cce9d19318e513fd37e5"
-        },
-        {
-          "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.52.06.jpeg",
-          "sha256": "ac3ae556acf46251ed6837e0487fdc0605c682af29e7df3ba9287a08da30d32b"
-        }
-      ],
-      "cameras": [
-        "11_southwest_bedroom"
-      ],
-      "review_state": "compared_corrections_applied_open_items_remain",
-      "open_items": [
-        "Fotoğrafların ayrı yatak odalarına eşlenmesi",
-        "Her oda için kamera ve oda kontrolü"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": true,
-      "completed_corrections": [
-        {
-          "revision": 22,
-          "change": "Moved southwest wardrobe clear of the door-jamb wall return",
-          "evidence": "build/furniture-refinement-r22.json"
-        }
-      ],
-      "web_room_ids": [
-        "f2-106",
-        "f2-107"
-      ]
-    },
-    {
-      "photo_group": "kat_4",
-      "space": "Çatı katındaki hacimler",
-      "photos": [
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.52.44 (13).jpeg",
-          "sha256": "de7d91e1bd0aef1fbb4c63fafbd845b2525132ae86f5dc6cecc356b95f997585"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.52.44 (14).jpeg",
-          "sha256": "bb0e007ca24e903984cfcef7782f08708d7187206c6c52e7df3cf9e4aea28718"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.52.44 (16).jpeg",
-          "sha256": "3273a01f6e0b8ed788ff824ccc164310c68903083be4c075eb0eb155c8a33254"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.52.44 (17).jpeg",
-          "sha256": "7d2cf87136546b247faf73fc58a0cab47aa0fce43320938f7b540d95981e7fc8"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (1).jpeg",
-          "sha256": "2bcbe37df0da296ac588d3003f7a8e69207547fc9607994ad19fa7df496617e2"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (10).jpeg",
-          "sha256": "d17aa542887b45f3e8afc18e78ce24120cba551b82e64556fbda47311fb5775d"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (11).jpeg",
-          "sha256": "2f48ccd62cf4242234ab4f366d35dd13a4c9d05d0bbaedb39bf3abb12fc754f9"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (12).jpeg",
-          "sha256": "e82a5fbd6ef51cdf861dce07f90c6166f81b08d53bb7f12a20399c4dd8836448"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (13).jpeg",
-          "sha256": "754177a1ac2e5acbf66a03e8e459cd58d8108cde6e767661e10fbd78b66eff76"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (14).jpeg",
-          "sha256": "e04e32e297ac5c010a17de09d8d8f380b747480b6ed0af0ba1337f38b5f20fcb"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (15).jpeg",
-          "sha256": "20c65b22a3cf486a252548d029f17f9f242af29470689935343d0ad76fd9d9a5"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (16).jpeg",
-          "sha256": "8bab8c7246e53c8df0792e47ce67e9e2fd509f64b71bb6c58044280a2cf06e3b"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (17).jpeg",
-          "sha256": "ff36ffba1842a069a35248ec4a65ba447969fae9fb43ee6b728fd6d5a3f3b26b"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (18).jpeg",
-          "sha256": "1c26c0329048e5036980384d018fb614caca4c636579aaf27813b01e4eb03ec8"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg",
-          "sha256": "cadd65098581125d23c39e6ab75f15099c3830dae1f5e72250e31e6223cec19b"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (3).jpeg",
-          "sha256": "4ac106d52affdeb1c203f52bc3eb028925bae6c4002f591407722a0d0a5b484a"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (4).jpeg",
-          "sha256": "ec395b998ad8241996f2121cfd99a743df99a02924884ba914fba448eafbb872"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (5).jpeg",
-          "sha256": "16b0d83630b52d5e3efd40353ab100a24578bd8a5c17b1e2571a8109af26ea08"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (6).jpeg",
-          "sha256": "4580acc6ed64a76010415e8fe8aab4a7073219610fec13b57e10f7fb3d5dcade"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (7).jpeg",
-          "sha256": "2e3c1915d3b4ff7722898af10388967fc23c5e460812c369afa715a193384362"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (8).jpeg",
-          "sha256": "f64fb1e1c4db0447e9190c09f7a33430dbf888863c4c856b736fc3ccb920a2a6"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (9).jpeg",
-          "sha256": "876982e149157fb4fe2a4e139f44227327d46e1c783cd2d2718c27066ffed659"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10.jpeg",
-          "sha256": "0df102d7244130bd343624a1e3c5932c2293dd55d7027589de78863eccda5af9"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.11.jpeg",
-          "sha256": "37980a46846713d55157e6668575a9dda64c7757ca72d138191164518c8688c4"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.31.jpeg",
-          "sha256": "9bd1790de681d0573e7f38cdc557c46d60f602d49089edeefcb26e50c41bd4fc"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (1).jpeg",
-          "sha256": "68d95f5cecb7ab217a349afbd4e9b49303ee16264426fc9db388eb46f7eca56c"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (10).jpeg",
-          "sha256": "37980a46846713d55157e6668575a9dda64c7757ca72d138191164518c8688c4"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (11).jpeg",
-          "sha256": "1c26c0329048e5036980384d018fb614caca4c636579aaf27813b01e4eb03ec8"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (12).jpeg",
-          "sha256": "68d95f5cecb7ab217a349afbd4e9b49303ee16264426fc9db388eb46f7eca56c"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (13).jpeg",
-          "sha256": "30aa3205137ffbab778bc9d42e0bf4623d2b396b62a1745ebbd8b67f557754f2"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (14).jpeg",
-          "sha256": "2257c9c2b0882257072ba1420bc500651b920262b09771f7041c153f06665258"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (15).jpeg",
-          "sha256": "4a8c708096cdc2c308035676af4dd881c396209b6aae5ed60b169e7123b4b3d8"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (16).jpeg",
-          "sha256": "bc5ff5f666d0be335f06f8f1cfa54ca6cf2c2d6036d2f5bb351043a3ce881ea2"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (17).jpeg",
-          "sha256": "ebc5995695e8dc4a4846d645cb161c1cf980d291551dbb3ebfc6ffa0f6cc07bf"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (2).jpeg",
-          "sha256": "2257c9c2b0882257072ba1420bc500651b920262b09771f7041c153f06665258"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (3).jpeg",
-          "sha256": "754177a1ac2e5acbf66a03e8e459cd58d8108cde6e767661e10fbd78b66eff76"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (4).jpeg",
-          "sha256": "bc5ff5f666d0be335f06f8f1cfa54ca6cf2c2d6036d2f5bb351043a3ce881ea2"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (5).jpeg",
-          "sha256": "ebc5995695e8dc4a4846d645cb161c1cf980d291551dbb3ebfc6ffa0f6cc07bf"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (6).jpeg",
-          "sha256": "e04e32e297ac5c010a17de09d8d8f380b747480b6ed0af0ba1337f38b5f20fcb"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (7).jpeg",
-          "sha256": "ff36ffba1842a069a35248ec4a65ba447969fae9fb43ee6b728fd6d5a3f3b26b"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (8).jpeg",
-          "sha256": "8bab8c7246e53c8df0792e47ce67e9e2fd509f64b71bb6c58044280a2cf06e3b"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (9).jpeg",
-          "sha256": "9bd1790de681d0573e7f38cdc557c46d60f602d49089edeefcb26e50c41bd4fc"
-        },
-        {
-          "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32.jpeg",
-          "sha256": "30aa3205137ffbab778bc9d42e0bf4623d2b396b62a1745ebbd8b67f557754f2"
-        }
-      ],
-      "cameras": [
-        "07_attic"
-      ],
-      "review_state": "compared_corrections_applied_open_items_remain",
-      "open_items": [
-        "Oturma alanı kumaşı, koltuk ve dolap profillerinin fotoğraf eşlemesi",
-        "Banyo, güney yatak odası ve çatı yüzeylerinin ayrı yakın kontrolü"
-      ],
-      "photo_match_approved": false,
-      "dimension_labels_enabled": true,
-      "completed_corrections": [
-        {
-          "revision": 16,
-          "change": "User confirmed no attic lift; removed F3 fittings and restored only former shaft floor opening",
-          "evidence": "build/attic-lift-correction.json"
-        },
-        {
-          "revision": 22,
-          "change": "Corrected lounge/TV layout, removed unsupported bedside sets, added photo-interpreted fan/mirror and lowered headboard clear of sloping ceiling",
-          "evidence": "build/furniture-refinement-r22.json"
-        }
-      ],
-      "web_room_ids": [
-        "f3-C01",
-        "f3-C02",
-        "f3-C03",
-        "f3-C04",
-        "f3-C05"
-      ]
+     "path": "asdf.jpeg",
+     "sha256": "622558b7161ada912d03302efd0a142cd0cdbd40b9dcff1c8bf9163089574356"
     }
-  ],
-  "review_revision": 24,
-  "furniture_clearance_evidence": [
-    "build/furniture-collision-report.json",
-    "build/furniture-headroom-report.json",
-    "build/furniture-opening-report.json"
-  ],
-  "room_annotation_evidence": "build/room-annotation-qa.json"
+   ],
+   "cameras": [
+    "01_front",
+    "15_pool_grade_review"
+   ],
+   "review_state": "compared_corrections_applied_open_items_remain",
+   "open_items": [
+    "Panjur konumları, kiremit tonu ve cephe ışığı",
+    "Komşu bahçelerinin çit, istinat duvarı ve bitki ayrıntıları",
+    "Yol genişliklerinin ve tüm topografyanın fotoğraf/ek kot verisiyle doğrulanması"
+   ],
+   "photo_match_approved": false,
+   "dimension_labels_enabled": false,
+   "completed_corrections": [
+    {
+     "revision": 18,
+     "change": "Removed roads crossing buildings 37/26, added CAD curb arterials, cut terrain beneath road surfaces and faired unmeasured grade transitions",
+     "evidence": "build/road-terrain-native-qa.json"
+    },
+    {
+     "revision": 26,
+     "change": "Applied source stair aperture and terraced garden geometry; completed geometry checks, photographic acceptance remains open",
+     "evidence": "build/r26-native-qa.json"
+    }
+   ],
+   "web_room_ids": [],
+   "evidence_asset_sha256": {
+    "envelope.glb": "702dc82959ae9aeaf3e3c0bb70bdf8c42899e0aa2223514b08e979105a6ed389",
+    "garden.glb": "62f6f7a232c5fc4906c187be2c6c411de78ab617c281dee62e57f079a399df9b",
+    "context.glb": "e3e1ce4787451b8c261d4cdea03b46b25474fa279518a5cf625cf6d073ad1bda"
+   }
+  },
+  {
+   "photo_group": "asansor",
+   "space": "Asansör",
+   "photos": [
+    {
+     "path": "asansor/WhatsApp Image 2026-08-26 at 11.54.10 (10).jpeg",
+     "sha256": "04a68bb5818dc97fd6737fa821b71fdfae26e09a7218bbd9d4842796c4400252"
+    },
+    {
+     "path": "asansor/WhatsApp Image 2026-08-26 at 11.54.10 (13).jpeg",
+     "sha256": "6b2d3a94616f7cd65e2ed7c18f4a8c66f29327d4a1ea3846cf4fdfe013f8462f"
+    },
+    {
+     "path": "asansor/WhatsApp Image 2026-08-26 at 11.54.10 (14).jpeg",
+     "sha256": "8f06a72cf55873d3c5f58fc946565d5a775015f85b052e9f72672c0462d0babc"
+    }
+   ],
+   "cameras": [
+    "17_lift_garden"
+   ],
+   "review_state": "compared_corrections_applied_open_items_remain",
+   "open_items": [
+    "Kapı ve kabin ayrıntılarının fotoğraf oranları",
+    "Bodrum, giriş ve birinci kattaki üç durakta kapı hareketi ve hol bağlantısı"
+   ],
+   "photo_match_approved": false,
+   "dimension_labels_enabled": false,
+   "web_room_ids": [
+    "f0-B01",
+    "f1-Z05",
+    "f2-101"
+   ],
+   "evidence_asset_sha256": {
+    "level-0.glb": "acc010860571915d1e101e1c76b1d5fa6265400cc3ffb2cca2d7161e37635a4d",
+    "level-1.glb": "57c19b112b714693fcf80506b16ecad1568322927d27bbfafd586936e6395fde",
+    "level-2.glb": "aa3c779940efbbd90a97f122edd10dbbe1e44e1373feb3d50d29def1efdcea53"
+   }
+  },
+  {
+   "photo_group": "kat_1_bahce",
+   "space": "Bahçe ve havuz",
+   "photos": [
+    {
+     "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (1).jpeg",
+     "sha256": "700ebbc4a132c471c6f3690c4a0164f5f6ba19653904414d7faf707a9c7f473e"
+    },
+    {
+     "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (10).jpeg",
+     "sha256": "434babdd2c9b110a4033a4e6dd3f76282664212dc5de613e363382b3d21fe108"
+    },
+    {
+     "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (15).jpeg",
+     "sha256": "b70760f50e8a6d305d491fcf0a6e4904e5acc2ca5a1f430f71772e35424cff6d"
+    },
+    {
+     "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (2).jpeg",
+     "sha256": "009a8eafb09f1938a3873f0c6629ee08c9894978bbc3d4db566d380ab566aa19"
+    },
+    {
+     "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (3).jpeg",
+     "sha256": "e3f938cbb91213d21bebf35bf91e18e394fbdcf91bdb5339e2c37e780ed80d3c"
+    },
+    {
+     "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (4).jpeg",
+     "sha256": "9f953c6466bbfddbd87e9a9519809ca23044a1208ce1e5f54e68842047fd741e"
+    },
+    {
+     "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (5).jpeg",
+     "sha256": "8dfc4a398a39e97c09fe0f6af1a5f874c6c636931f5af80607340451f6f7b0f3"
+    },
+    {
+     "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (6).jpeg",
+     "sha256": "f3ac48359d175c453ba144d074ad9bc32c43fe4f43b2ed9bc820ce056a6fdf14"
+    },
+    {
+     "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (7).jpeg",
+     "sha256": "e0da7dfb5b8cb4cd0885c0f767ae372d98103f452c13a8f7fc0566740dc1f640"
+    },
+    {
+     "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (8).jpeg",
+     "sha256": "385d66ce186117e39bf592a2dbcd39b0d548f5949d22e1217ce3f48642c471f7"
+    },
+    {
+     "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41 (9).jpeg",
+     "sha256": "bf53513a786ee44de6cc9dd9cf6a6646b143ccb23ff1ea9ccc6351ef5ac65569"
+    },
+    {
+     "path": "kat_1_bahce/WhatsApp Image 2026-08-26 at 11.54.41.jpeg",
+     "sha256": "e02b60617618316de21464a4cb9bdb211ff14808eec1d6a38360f1b04ef5550c"
+    }
+   ],
+   "cameras": [
+    "15_pool_grade_review"
+   ],
+   "review_state": "compared_corrections_applied_open_items_remain",
+   "open_items": [
+    "Bitkiler, çitler, taş derzleri ve bahçe ayrıntıları",
+    "Havuz suyu ve döşeme renk eşlemesi"
+   ],
+   "photo_match_approved": false,
+   "dimension_labels_enabled": false,
+   "web_room_ids": [],
+   "completed_corrections": [
+    {
+     "revision": 26,
+     "change": "Applied source stair aperture and terraced garden geometry; completed geometry checks, photographic acceptance remains open",
+     "evidence": "build/r26-native-qa.json"
+    }
+   ],
+   "evidence_asset_sha256": {
+    "garden.glb": "62f6f7a232c5fc4906c187be2c6c411de78ab617c281dee62e57f079a399df9b"
+   }
+  },
+  {
+   "photo_group": "kat_1_bodrum_mutfak",
+   "space": "Bodrum mutfak",
+   "photos": [
+    {
+     "path": "kat_1_bodrum_mutfak/WhatsApp Image 2026-08-26 at 11.54.10 (4).jpeg",
+     "sha256": "4cb83a600f6f894ca0284bab6b244b46ad89f7bd50f890bf4f4ba517132428a0"
+    },
+    {
+     "path": "kat_1_bodrum_mutfak/WhatsApp Image 2026-08-26 at 11.54.10 (9).jpeg",
+     "sha256": "8203f01d9c4c472a3b08ad7ae7f46d88d0c7edfc485fc649cf938d29950d70d1"
+    },
+    {
+     "path": "kat_1_bodrum_mutfak/WhatsApp Image 2026-08-26 at 11.54.10.jpeg",
+     "sha256": "bf2932dbbebaf7fa5786d7ed8d5d2eb11b12e76b7e54e0121fed3e57b5642a3a"
+    }
+   ],
+   "cameras": [
+    "16_basement_kitchen"
+   ],
+   "review_state": "compared_corrections_applied_open_items_remain",
+   "open_items": [
+    "Yeşil camların geçirgenliği ve dolap iç rafları",
+    "Ahşap çerçeve oranları, buzdolabı boyası ve kulplar",
+    "Fotoğrafa göre aydınlatma ve yüzey tonu"
+   ],
+   "photo_match_approved": true,
+   "dimension_labels_enabled": true,
+   "web_room_ids": [
+    "f0-B05"
+   ],
+   "evidence_asset_sha256": {
+    "level-0.glb": "acc010860571915d1e101e1c76b1d5fa6265400cc3ffb2cca2d7161e37635a4d"
+   },
+   "note": " R39: all three photos and the salon panorama locate this kitchen; the CAD wall layer carries a purpose-built 2.600 x 0.600 m full-height niche at the sink-run position and the DWG dimension 2C3B2 (4.45 m) measures the room. Approved at inventory level; colour/detail acceptance follows the render set."
+  },
+  {
+   "photo_group": "kat_1_bodrum_salon",
+   "space": "Bodrum salon",
+   "photos": [
+    {
+     "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (1).jpeg",
+     "sha256": "00d1ef14789353d956eac5ff18c4be30cbe170c7887b02a057a969b2f9246a6b"
+    },
+    {
+     "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (11).jpeg",
+     "sha256": "bb0699a5a9ac3977a33c635dd947fd7ece970b13fe4e8f77659df417f29d51ee"
+    },
+    {
+     "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (12).jpeg",
+     "sha256": "00789c9e2f7534a5cef77258763c6a30f84c900653899acb885080e63e96fce5"
+    },
+    {
+     "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (15).jpeg",
+     "sha256": "558bad96657323bf6f8e9b7693b92e48d51f68fb39eb03357eb0ae058a040556"
+    },
+    {
+     "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (5).jpeg",
+     "sha256": "705ce15d660d753fe60e7b169fd26a5cf6807756569cc1aefe5caf51796110c7"
+    },
+    {
+     "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (6).jpeg",
+     "sha256": "2218a9e2e51db6529d1fb93a850519ec5f7a25ec61f6265c0fc4c1ae72c7935f"
+    },
+    {
+     "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (7).jpeg",
+     "sha256": "a557723109bdb31ae2894a164b61d8c3c3194604681c4247fb74e13fb1baed19"
+    },
+    {
+     "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.11 (2).jpeg",
+     "sha256": "4702277cd748453120aee658e7e89c1cf0cb48cdede2eea6e26b7c5374e23965"
+    },
+    {
+     "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.40 (1).jpeg",
+     "sha256": "c7528b9b4501851763fff498bd1bc495e7cd9c7cd076c1ddf68353d14afa7038"
+    },
+    {
+     "path": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.40 (2).jpeg",
+     "sha256": "3d037b09e81d64a7a2bacc2125d55be4cce7d8a462ebc4558ea9a970d69f5b5d"
+    }
+   ],
+   "cameras": [
+    "04_garden_lounge"
+   ],
+   "review_state": "current_revision_photo_review_pending",
+   "open_items": [
+    "Güncel sahnede fotoğrafla oda karşılaştırması"
+   ],
+   "photo_match_approved": false,
+   "dimension_labels_enabled": true,
+   "web_room_ids": [
+    "f0-B06",
+    "f0-B04"
+   ],
+   "evidence_asset_sha256": {
+    "level-0.glb": "acc010860571915d1e101e1c76b1d5fa6265400cc3ffb2cca2d7161e37635a4d"
+   }
+  },
+  {
+   "photo_group": "kat_1_bodrum_wc",
+   "space": "Bodrum WC / B03",
+   "photos": [
+    {
+     "path": "kat_1_bodrum_wc/WhatsApp Image 2026-08-26 at 11.54.11 (1).jpeg",
+     "sha256": "eb90b189394c9d67744950e4054d1789258687f687f06a01070328e24d85f31e"
+    },
+    {
+     "path": "kat_1_bodrum_wc/WhatsApp Image 2026-08-26 at 11.54.11 (3).jpeg",
+     "sha256": "a71d533ddbd8ccdb6c7b003be6cd3b19a80d21b8014b0df3f8ae014b42ee16c3"
+    },
+    {
+     "path": "kat_1_bodrum_wc/WhatsApp Image 2026-08-26 at 11.54.11 (4).jpeg",
+     "sha256": "a349a74eb59d17aea56ea8f35284fdb616f6c3b0cf4d3ed0e4dda660656e8837"
+    },
+    {
+     "path": "kat_1_bodrum_wc/WhatsApp Image 2026-08-26 at 11.54.11 (5).jpeg",
+     "sha256": "f367c9c26d94d22d8b1a37cf63aa54e34d44ca1168b8713cfac1d8d7298cd98b"
+    },
+    {
+     "path": "kat_1_bodrum_wc/WhatsApp Image 2026-08-26 at 11.54.11.jpeg",
+     "sha256": "1a005e1eb9e142b49f8fb260ad9d8a53163eb7e55009a2991be1a1dd5ea2a124"
+    }
+   ],
+   "cameras": [
+    "18_garden_wc"
+   ],
+   "review_state": "compared_corrections_applied_open_items_remain",
+   "open_items": [
+    "Dekorasyon, raf içeriği ve armatür ayrıntıları",
+    "Kapı açılımının fotoğrafla son kontrolü"
+   ],
+   "photo_match_approved": false,
+   "dimension_labels_enabled": false,
+   "web_room_ids": [
+    "f0-B01"
+   ],
+   "evidence_asset_sha256": {
+    "level-0.glb": "acc010860571915d1e101e1c76b1d5fa6265400cc3ffb2cca2d7161e37635a4d"
+   },
+   "note": "The modelled WC assembly (27 nodes) stands in f0-B01 Hol at x -0.838..0.620 z -1.790..-1.075, while the source plan puts BANYO B03 at the room rooms.json labels f0-B10 (code corrected to B03). Whether the fixtures should be relocated into B03 is an authoring decision recorded here, not taken."
+  },
+  {
+   "photo_group": "kat_2_garaj",
+   "space": "Garaj",
+   "photos": [
+    {
+     "path": "kat_2_garaj/WhatsApp Image 2026-08-26 at 11.54.40.jpeg",
+     "sha256": "0a7b92bd5fafab58dd59364930fe1dd8dee53784684ff9c33b06e122ee6e401b"
+    },
+    {
+     "path": "kat_2_garaj/WhatsApp Image 2026-08-26 at 11.54.41 (11).jpeg",
+     "sha256": "ecfb4fb11af4237e00a01a0fceb0abc6cfe7d0b1fbe957de2b2ba3de128f2c0f"
+    },
+    {
+     "path": "kat_2_garaj/WhatsApp Image 2026-08-26 at 11.54.41 (12).jpeg",
+     "sha256": "e14e957d80959dbfafb4599e0df4fcf30b93f79f4ac137eab022a9b419cbc3c5"
+    },
+    {
+     "path": "kat_2_garaj/WhatsApp Image 2026-08-26 at 11.54.41 (13).jpeg",
+     "sha256": "be8cf2a38d59eb08e4d1288fb7aeda94d0017bda67c88a1ddf3d8a6329f8a8f7"
+    },
+    {
+     "path": "kat_2_garaj/WhatsApp Image 2026-08-26 at 11.54.41 (14).jpeg",
+     "sha256": "0952eb19fac9a46a0751917aae2bd28b56ab56453112ec90c9fb00e6eba05ec2"
+    },
+    {
+     "path": "kat_2_garaj/WhatsApp Image 2026-08-26 at 11.54.41 (16).jpeg",
+     "sha256": "cdc382867eb6e7621171edeba9739c7523637f9874d623a491ceaba340865bf9"
+    },
+    {
+     "path": "kat_2_garaj/WhatsApp Image 2026-08-26 at 11.54.54 (1).jpeg",
+     "sha256": "f1d3e4bba16f242853c44ec3da98889d891e0f8205ddbed965a3c22a3ef9c56f"
+    },
+    {
+     "path": "kat_2_garaj/WhatsApp Image 2026-08-26 at 11.54.54.jpeg",
+     "sha256": "f1a9d24eadd11aae382055f99a7ee073beb4697326f248bf5fa741d3e18286a6"
+    }
+   ],
+   "cameras": [],
+   "review_state": "current_revision_photo_review_pending",
+   "open_items": [
+    "Garaj içi için özel inceleme kamerası",
+    "İç donatı, tesisat, zemin ve kapı mekanizması"
+   ],
+   "photo_match_approved": false,
+   "dimension_labels_enabled": true,
+   "web_room_ids": [
+    "f1-Z07"
+   ],
+   "evidence_asset_sha256": {
+    "level-1.glb": "57c19b112b714693fcf80506b16ecad1568322927d27bbfafd586936e6395fde"
+   }
+  },
+  {
+   "photo_group": "kat_2_giris",
+   "space": "Giriş ve hol",
+   "photos": [
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (10).jpeg",
+     "sha256": "c6a595ff313e6789e37f04da49dbd2b733389908f6100bf99cfb7ddb79d7b33a"
+    },
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (11).jpeg",
+     "sha256": "2ca199b324338dc939389295918935a0f226e68d8f04fbd8a29608511bca6947"
+    },
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (12).jpeg",
+     "sha256": "8ab518a3ba36e99db1f4dd54c592f887c287b7f44c0f50248bb7e2e5af0d5e18"
+    },
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (13).jpeg",
+     "sha256": "8ab518a3ba36e99db1f4dd54c592f887c287b7f44c0f50248bb7e2e5af0d5e18"
+    },
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (3).jpeg",
+     "sha256": "c041e4df5ee1017cb3a70462b93ca7eb6b3252f65396932227ebf37e0cbf618d"
+    },
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (4).jpeg",
+     "sha256": "e26aaaf205ef2f27cf4a924fd6351681ab39e2da73001a213c6c8c1fa3f721a3"
+    },
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (5).jpeg",
+     "sha256": "099ed2981c7678273f60de42449dd71872f3179e9fc10184632f926c76ea3c97"
+    },
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (6).jpeg",
+     "sha256": "9d10a33ef5e4f802efd7cc13f32f88a88454405267d33bd62a9e8bb1d6fcbba5"
+    },
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (7).jpeg",
+     "sha256": "780aba90c2fae29896b21db6c1aeacc095f6c3e856ed7fdcaf47333c00412fe3"
+    },
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (8).jpeg",
+     "sha256": "dba0fc048f996e474210fbd93f3117fb3ebf99df4446ad0aa3991df6941a96cd"
+    },
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (9).jpeg",
+     "sha256": "5666e08d18a4fffbf4cf8caf87d84fbf0211da0c18fbca436e1b689442cd14be"
+    },
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.54 (4).jpeg",
+     "sha256": "4ecbede7f9442a5c567d471e642053eeb6672b81365fdafb85efb7c8fef11cff"
+    },
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.54 (5).jpeg",
+     "sha256": "15413aa665506345591fbab5e9ad4795948a17c97b1f89a7b423e0ea75c5208c"
+    },
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.54 (6).jpeg",
+     "sha256": "ef4f2e3ac0e067304907e9ca98debf628b056877b0bb38a15f08640c0521eb41"
+    },
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.54.10 (2).jpeg",
+     "sha256": "35f14b563e39ea1e682b1fa68c2824d94ec650516563f53150c276ee1094b737"
+    },
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.54.10 (3).jpeg",
+     "sha256": "34de172d580e548780e83146cdeb24d77b90bad9b46e5022a754458cf1e5b2c7"
+    },
+    {
+     "path": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.54.10 (8).jpeg",
+     "sha256": "3f2ef3691226326f9241d15ff93a116c90d7d6c67afc7029b5ac67d06017ac31"
+    }
+   ],
+   "cameras": [],
+   "review_state": "current_revision_photo_review_pending",
+   "open_items": [
+    "Giriş mobilyaları ve hol ayrıntıları",
+    "Kapılar, merdiven ve oda geçişleri"
+   ],
+   "photo_match_approved": false,
+   "dimension_labels_enabled": true,
+   "web_room_ids": [
+    "f1-Z01",
+    "f1-Z02"
+   ],
+   "completed_corrections": [
+    {
+     "revision": 26,
+     "change": "Applied source stair aperture and terraced garden geometry; completed geometry checks, photographic acceptance remains open",
+     "evidence": "build/r26-native-qa.json"
+    }
+   ],
+   "evidence_asset_sha256": {
+    "level-1.glb": "57c19b112b714693fcf80506b16ecad1568322927d27bbfafd586936e6395fde"
+   }
+  },
+  {
+   "photo_group": "kat_2_giris_wc",
+   "space": "Giriş WC / Z03",
+   "photos": [
+    {
+     "path": "kat_2_giris_wc/WhatsApp Image 2026-08-26 at 11.53.53 (14).jpeg",
+     "sha256": "815c7eddbd332eefdcc5f2a448fc1d85e743397f3faf572e28f600052d4e3ff1"
+    },
+    {
+     "path": "kat_2_giris_wc/WhatsApp Image 2026-08-26 at 11.53.53 (15).jpeg",
+     "sha256": "aaadfddee3e56fcb953d4735c30350b140686a7146935ddae56853980d4dafa2"
+    },
+    {
+     "path": "kat_2_giris_wc/WhatsApp Image 2026-08-26 at 11.53.53 (16).jpeg",
+     "sha256": "1e89c03cd1ec2aca72e90ec59bae6cfdb0d143439d766e91e3c0b014d4240b77"
+    },
+    {
+     "path": "kat_2_giris_wc/WhatsApp Image 2026-08-26 at 11.53.54 (1).jpeg",
+     "sha256": "4d7f179a22fcfaf5abe2cc21cad68dc3a70aeb6d142d2fc2efcd0e1798f42c87"
+    },
+    {
+     "path": "kat_2_giris_wc/WhatsApp Image 2026-08-26 at 11.53.54 (2).jpeg",
+     "sha256": "3763d4308531c329c7df290c56fcac400f3fd8e03a535244443f71538494ca9e"
+    },
+    {
+     "path": "kat_2_giris_wc/WhatsApp Image 2026-08-26 at 11.53.54 (3).jpeg",
+     "sha256": "d927c0d7790348899bf556534b938b171232f4ec80d8e91c536eb158e154067c"
+    },
+    {
+     "path": "kat_2_giris_wc/WhatsApp Image 2026-08-26 at 11.53.54.jpeg",
+     "sha256": "155b3ddd642b4bf161f6d93647ed82eb61e247ab6f6311eddb8d7c338e1b52e6"
+    }
+   ],
+   "cameras": [],
+   "review_state": "current_revision_photo_review_pending",
+   "open_items": [
+    "Fotoğrafa özgü lavabo, ayna, klozet ve malzemeler"
+   ],
+   "photo_match_approved": false,
+   "dimension_labels_enabled": true,
+   "web_room_ids": [
+    "f1-Z03"
+   ],
+   "evidence_asset_sha256": {
+    "level-1.glb": "57c19b112b714693fcf80506b16ecad1568322927d27bbfafd586936e6395fde"
+   }
+  },
+  {
+   "photo_group": "kat_2_on_giris",
+   "space": "Ön giriş ve yaklaşım",
+   "photos": [
+    {
+     "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56 (1).jpeg",
+     "sha256": "879d2d71bfab852a3867cf4df1121e47fe16b4028b322471a7716ad09b9b0a2b"
+    },
+    {
+     "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56 (2).jpeg",
+     "sha256": "cea6779dd16d4fd7c6b260a50106a79347ef9dd7d8127c2676a23ca0aaeeac2e"
+    },
+    {
+     "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56 (3).jpeg",
+     "sha256": "879d2d71bfab852a3867cf4df1121e47fe16b4028b322471a7716ad09b9b0a2b"
+    },
+    {
+     "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56 (4).jpeg",
+     "sha256": "c91824b9b8dd72fc882b9bd1a63ef5076fc60824324005d6f39c5068155beccf"
+    },
+    {
+     "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56 (5).jpeg",
+     "sha256": "fbcca968fd06cdb457f7d121a54a9d476cdacc58cac1989609a1bb1bc5f50d8d"
+    },
+    {
+     "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56 (6).jpeg",
+     "sha256": "b9e59ccac350c98ba185da4ab0f23187434ad78d3e0532b89fb832ce9ba6db4e"
+    },
+    {
+     "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56 (7).jpeg",
+     "sha256": "76f8e05fed5e3912b946e64b2ab434f8b71509728a520fb61f5eea29ac346681"
+    },
+    {
+     "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56 (8).jpeg",
+     "sha256": "ade612999e679dc2e086a15fa3302660010c0df1d4a8c242f85e1193266d40ef"
+    },
+    {
+     "path": "kat_2_on_giris/WhatsApp Image 2026-08-26 at 11.54.56.jpeg",
+     "sha256": "cea6779dd16d4fd7c6b260a50106a79347ef9dd7d8127c2676a23ca0aaeeac2e"
+    }
+   ],
+   "cameras": [
+    "01_front"
+   ],
+   "review_state": "current_revision_photo_review_pending",
+   "open_items": [
+    "Taş kaplama deseni, bahçe kapıları ve bitki yerleşimi"
+   ],
+   "photo_match_approved": false,
+   "dimension_labels_enabled": false,
+   "web_room_ids": [],
+   "evidence_asset_sha256": {
+    "envelope.glb": "702dc82959ae9aeaf3e3c0bb70bdf8c42899e0aa2223514b08e979105a6ed389"
+   }
+  },
+  {
+   "photo_group": "kat_2_ust_mutfak",
+   "space": "Giriş katı mutfak",
+   "photos": [
+    {
+     "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.51.15 (1).jpeg",
+     "sha256": "25ee0d82c1aa98164b96e445ef4cf090ff21bd2a9918377ef0b41f57dd9f4906"
+    },
+    {
+     "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.51.15 (2).jpeg",
+     "sha256": "e22aec05f614cf2e76990a8033e846068a13c8b9e662cbe5504b68fc0f58ee7c"
+    },
+    {
+     "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.51.15.jpeg",
+     "sha256": "fa723d5eea19dbcad4e6830b8f912d83dc0fbf30ac356254f24b426bacbc2c6a"
+    },
+    {
+     "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.32 (18).jpeg",
+     "sha256": "ca03645212f0ac56295f4775024e3e00ae6c0ea6ca40279631ea45543f81a075"
+    },
+    {
+     "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.33 (1).jpeg",
+     "sha256": "9314cc06186993b28f91869362106fa004951e9374bbc6005f25fff70edcdea2"
+    },
+    {
+     "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.33 (2).jpeg",
+     "sha256": "a82e43e018af9fda15d16b51a7a225f2a542bb03d98ef8258b0618ca4031bfff"
+    },
+    {
+     "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.33.jpeg",
+     "sha256": "4bae0448be063cfdb8e0397a0f2e82422c6984030bde86b458eca661e00bec74"
+    },
+    {
+     "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.53 (1).jpeg",
+     "sha256": "cb9e61f1c9349be15a47f53b54e0e643514cd9ed9bb37ae44bf6de20d30988cc"
+    },
+    {
+     "path": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.53 (2).jpeg",
+     "sha256": "c438e2cef2487e5e5456a3965b4abc91a685a142b2ea84b2f36bb33ab960c4b4"
+    }
+   ],
+   "cameras": [
+    "10_main_kitchen",
+    "walk-kitchen",
+    "walk-kitchen-hob",
+    "walk-kitchen-vitrine"
+   ],
+   "review_state": "photo_joinery_revision_24_applied_open_items_remain",
+   "open_items": [
+    "Seramik deseni ve ahşap renginin fotoğrafla eşleştirilmesi",
+    "Pencere çerçevesi ve panjurun fotoğraftaki konumu",
+    "Tavan profili, avize ve fotoğraf ışığı",
+    "Vitrin içi eşyalar ve kapı vitrayı; fotoğrafla son yerleşim kontrolü",
+    "Cihaz marka/modeli ve küçük kumanda işaretlerinin kaynaklarda daha yakından doğrulanması"
+   ],
+   "photo_match_approved": false,
+   "dimension_labels_enabled": true,
+   "comparison_evidence": {
+    "render": "build/renders/10_main_kitchen.png",
+    "render_sha256": "6cf426f1dbbc514a178741b1d462f9b83d1a14802e54d71a7ae88535996d5cba",
+    "render_stage": "earlier_geometry_review_before_constant_color_correction",
+    "source_contact_sheet": "build/reference/kat_2_ust_mutfak_1.jpg",
+    "source_contact_sheet_sha256": "a614f6c614ac7c6e82cf19d06989a8989442037a20289c933ec1920535c01f3d",
+    "current_revision": 24,
+    "current_renders": [
+     {
+      "file": "build/renders/full-scene-walk-kitchen-hob-r24.png",
+      "sha256": "5d434e92de06095dc0e364a6296545d18494a4ca52c5f5ec537094fbba7cc2ad",
+      "provenance": "build/renders/full-scene-walk-kitchen-hob-r24.json",
+      "kind": "Blender GLB geometry review; not a web shader screenshot"
+     },
+     {
+      "file": "build/renders/full-scene-walk-kitchen-vitrine-r24.png",
+      "sha256": "9a26356a50519a45f097fd491bf5fb0ce8805d0c7ae690f0e8e1d4fe4bb6fb94",
+      "provenance": "build/renders/full-scene-walk-kitchen-vitrine-r24.json",
+      "kind": "Blender GLB geometry review; not a web shader screenshot"
+     }
+    ],
+    "previous_renders_r23": [
+     {
+      "file": "build/renders/full-scene-walk-kitchen-r23.png",
+      "sha256": "ab497c40886692c108f5de965521a959bd1263f7d5b1aa87115b8b73451532df",
+      "provenance": "build/renders/full-scene-walk-kitchen-r23.json",
+      "kind": "Blender GLB geometry review; not a web shader screenshot"
+     },
+     {
+      "file": "build/renders/full-scene-walk-kitchen-hob-r23.png",
+      "sha256": "493e7f0ef6cfd9b91e7bf3b1aa6dab17c975d69a3134f7e7d56be7d5b3068f4b",
+      "provenance": "build/renders/full-scene-walk-kitchen-hob-r23.json",
+      "kind": "Blender GLB geometry review; not a web shader screenshot"
+     },
+     {
+      "file": "build/renders/full-scene-walk-kitchen-vitrine-r23.png",
+      "sha256": "292d2e6e56ef1fadde5294b716c0d33ff0e3a4b6f0fe20f68fa1241bdc0f1221",
+      "provenance": "build/renders/full-scene-walk-kitchen-vitrine-r23.json",
+      "kind": "Blender GLB geometry review; not a web shader screenshot"
+     }
+    ]
+   },
+   "completed_in_revision_15": [
+    "Five-module sink cabinet layout, dishwasher and drainboard",
+    "Oven opening cleared and raised panel fronts",
+    "Cupboard mouldings and square backsplash joints",
+    "Vitrine positioned against measured native CAD wall face"
+   ],
+   "web_room_ids": [
+    "f1-Z04"
+   ],
+   "completed_corrections": [
+    {
+     "revision": 23,
+     "change": "Solid hob doors, paired satin sink doors, outer display shelves, blind, timber grain axes, closed frame joints, whole-cabinet fit and notched counters at unchanged CAD wall returns",
+     "evidence": [
+      "build/kitchen-photo-r23.json",
+      "build/kitchen-photo-r23-qa.json",
+      "build/kitchen-surfaces-r23-qa.json"
+     ]
+    },
+    {
+     "revision": 24,
+     "change": "Added oven control fascia; aligned pantry door/drawer joints and hardware; painted open display-bay backs following the source photograph",
+     "evidence": [
+      "build/kitchen-photo-r24.json",
+      "build/kitchen-photo-r24-qa.json",
+      "build/kitchen-surfaces-r24-qa.json"
+     ]
+    }
+   ],
+   "evidence_asset_sha256": {
+    "level-1.glb": "57c19b112b714693fcf80506b16ecad1568322927d27bbfafd586936e6395fde"
+   }
+  },
+  {
+   "photo_group": "kat_2_ust_salon",
+   "space": "Giriş katı salon",
+   "photos": [
+    {
+     "path": "kat_2_ust_salon/WhatsApp Image 2026-08-26 at 11.51.15 (3).jpeg",
+     "sha256": "6bd2af46824f7049973e28389c42d275cbdb10e9b0f70986369df99d9a08dd3e"
+    },
+    {
+     "path": "kat_2_ust_salon/WhatsApp Image 2026-08-26 at 11.51.15 (4).jpeg",
+     "sha256": "dc8a7eadf133c3511a07eb4731343012d6baa982cf2f4d9905d6257bdfb410ff"
+    },
+    {
+     "path": "kat_2_ust_salon/WhatsApp Image 2026-08-26 at 11.51.15 (6).jpeg",
+     "sha256": "21ad5db74c0ca65739f0310b8ceece92c7680a422a3a2ac80a28c2389d4c07a3"
+    },
+    {
+     "path": "kat_2_ust_salon/WhatsApp Image 2026-08-26 at 11.51.15 (8).jpeg",
+     "sha256": "942dbcbac3b1f005db2919c8cd0c1eddf99e683c71fb7e41aba5488dc4e983ea"
+    }
+   ],
+   "cameras": [
+    "05_main_lounge",
+    "09_main_panorama"
+   ],
+   "review_state": "reference_geometry_compared_current_material_review_pending",
+   "open_items": [
+    "Avize kolları, uç biçimleri, tepe bağlantısı ve ışık şiddeti",
+    "Perde çizgileri ve kumaş, parke renk çeşitliliği ve parlaklığı",
+    "Duvar dekorasyonu, vitrin içeriği ve mobilya gruplarının fotoğraf eşlemesi",
+    "Salon geçişleri ve kot basamağının ayrı kadrajda kontrolü",
+    "Düzeltilmiş renk haritalarıyla güncel iç mekân ışığı karşılaştırması"
+   ],
+   "photo_match_approved": false,
+   "dimension_labels_enabled": true,
+   "comparison_evidence": {
+    "render": "build/renders/05_main_lounge.png",
+    "render_sha256": "628f734d040498e0b6ec10cb3b6ed7ffb5652e8d0254148f9cde88a4ec5b46cc",
+    "render_stage": "earlier_geometry_review_before_constant_color_correction",
+    "source_contact_sheet": "build/reference/kat_2_ust_salon_1.jpg",
+    "source_contact_sheet_sha256": "523bded31c54208d445a59ac62dbbce30600cf8fc42761387e1f1947f50337e9"
+   },
+   "web_room_ids": [
+    "f1-Z05",
+    "f1-Z06"
+   ],
+   "evidence_asset_sha256": {
+    "level-1.glb": "57c19b112b714693fcf80506b16ecad1568322927d27bbfafd586936e6395fde"
+   }
+  },
+  {
+   "photo_group": "kat_3_banyok",
+   "space": "Ortak banyo",
+   "photos": [
+    {
+     "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.51.30 (1).jpeg",
+     "sha256": "0c6c44ce7f64415961def766dcfd91fa7bf93e768d6424a03e674f0ec55a2736"
+    },
+    {
+     "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.51.30 (3).jpeg",
+     "sha256": "a419dc607f2f2ed506f6355b6bf650daa2142478db2615157de58d8e41ed65ac"
+    },
+    {
+     "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.51.30 (4).jpeg",
+     "sha256": "e9176317284be73cb29fc713e2800662828988b1eec2c30a007a16288b4579af"
+    },
+    {
+     "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.51.30 (6).jpeg",
+     "sha256": "0c6c44ce7f64415961def766dcfd91fa7bf93e768d6424a03e674f0ec55a2736"
+    },
+    {
+     "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.51.31 (4).jpeg",
+     "sha256": "28d174a618c336fca2889f4b0c43276f838ad883ce9d53061a8f05424981cbab"
+    },
+    {
+     "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.51.31 (5).jpeg",
+     "sha256": "9b45e446837430f2d5c2b002dff93479b6937c11dd15a23614f8e59b1636ba27"
+    },
+    {
+     "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.51.31 (6).jpeg",
+     "sha256": "fea2790ce7092e398e83c52dfa94a79b09ee6d685fa9e77b0a99936d32a9c72d"
+    },
+    {
+     "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.51.31.jpeg",
+     "sha256": "6e155ea6c61ec32d46d135d9a34e6fc19b8e6b27b5c5d9fa5b0b309ec4e75329"
+    },
+    {
+     "path": "kat_3_banyok/WhatsApp Image 2026-08-26 at 11.52.44.jpeg",
+     "sha256": "b85ed40ac403af2f858932668d5ac3d2bf45ff5bde52ab6aa3b846722dfa0c9f"
+    }
+   ],
+   "cameras": [
+    "14_shared_bathroom"
+   ],
+   "review_state": "current_revision_photo_review_pending",
+   "open_items": [
+    "Güncel sahnede fotoğrafla oda karşılaştırması"
+   ],
+   "photo_match_approved": false,
+   "dimension_labels_enabled": true,
+   "web_room_ids": [
+    "f2-108"
+   ],
+   "evidence_asset_sha256": {
+    "level-2.glb": "aa3c779940efbbd90a97f122edd10dbbe1e44e1373feb3d50d29def1efdcea53"
+   }
+  },
+  {
+   "photo_group": "kat_3_hol",
+   "space": "Yatak katı holü",
+   "photos": [
+    {
+     "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.07 (10).jpeg",
+     "sha256": "f61e90418bb790a6f855a889a655917702a38aa5d712b5756ad692aae0376820"
+    },
+    {
+     "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.07 (9).jpeg",
+     "sha256": "08758eb02c94ddda24497a9c1c2587cf92226b9cefb0bc8ec376f5e1ed1e1f16"
+    },
+    {
+     "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08 (1).jpeg",
+     "sha256": "7583bddcadf1ff7c19980a5c2ba08186e18ed2c5bdd1bb4f5949284ee29e1d97"
+    },
+    {
+     "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08 (2).jpeg",
+     "sha256": "78cf9563214998c8d46a5815cc959d2d930b15bd83f0fda3e52f7e928307b51b"
+    },
+    {
+     "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08 (3).jpeg",
+     "sha256": "3ac81cb8119f45b561d07a3f3a3627f4d30317f72298b535e6d855ca4dcea47b"
+    },
+    {
+     "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08 (4).jpeg",
+     "sha256": "c5ffa34c5253969ac417c21af0a91e9af6a49f16aefbe0601492c92418490023"
+    },
+    {
+     "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08 (5).jpeg",
+     "sha256": "0b44de1a20c695c62d774720c975f2f9da468f77a3c516c3159a45404b4adaa3"
+    },
+    {
+     "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08.jpeg",
+     "sha256": "fea2008403edd63927ca42856c1f9fd2c97df01cbbde67f62bc0d57517ba2b29"
+    },
+    {
+     "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (10).jpeg",
+     "sha256": "b1129c247bf0df069931b63d8c9ea65b63b4fc32a94a8473d38822872cbe9fc1"
+    },
+    {
+     "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (11).jpeg",
+     "sha256": "4713a27d1305e66213520b1b39460ddb63dccb6e3b96c1ea3776e9de41efdb74"
+    },
+    {
+     "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (12).jpeg",
+     "sha256": "404e43bf5e4bbb2d6ee2a5cb75d4dc20fec961452281a9410313813613ad6ecc"
+    },
+    {
+     "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (15).jpeg",
+     "sha256": "1a2857d495994021e55160803fdea712486e3e9e0f7f43902345f14a1b6733ae"
+    },
+    {
+     "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (6).jpeg",
+     "sha256": "099166b75b02d6c050c6b84cbef8e285c9e888c61925bd0b48b95572e4a91ae3"
+    },
+    {
+     "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (7).jpeg",
+     "sha256": "6b31274acb2a09b87ac2cc892773ad4bca01e7fcdc72033db7f359c4ad88dcbf"
+    },
+    {
+     "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (8).jpeg",
+     "sha256": "7d2026512c0f9b94bd9264fa8262c3ff9ba06e0b363f7ffe19ed0f4009ab02ea"
+    },
+    {
+     "path": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (9).jpeg",
+     "sha256": "9f585238938aa78bbaa62f27eff3f295477bbc86f97fd118e86870abbf8cae57"
+    }
+   ],
+   "cameras": [
+    "full-scene-gallery"
+   ],
+   "review_state": "compared_corrections_applied_open_items_remain",
+   "open_items": [
+    "Diğer merdiven kollarının korkulukları ve galeri sarkıtı; motif oranlarının daha yakın fotoğraf eşlemesi",
+    "Berjer ve dolap profillerinin daha yakın fotoğraf eşlemesi, aydınlatma ve ahşap tavan",
+    "Oda kapıları ve fotoğrafa göre malzeme kontrolü"
+   ],
+   "photo_match_approved": false,
+   "dimension_labels_enabled": true,
+   "completed_corrections": [
+    {
+     "revision": 17,
+     "change": "Removed spurious horizontal wall-finish cap across CAD gallery and staircase; lower floor and stair raycasts pass",
+     "evidence": "build/gallery-visibility-qa.json"
+    },
+    {
+     "revision": 20,
+     "change": "Added photo-guided iron scrolls, brass fixings and profiled wood handrail on CAD-supported gallery rim and descending stair; lower sightlines remain open",
+     "evidence": "build/gallery-railing-report.json"
+    },
+    {
+     "revision": 22,
+     "change": "Replaced generic hall sofa/table with photo-interpreted twin wingchairs, coffee table and mirror cabinet; corrected wall-return clearance",
+     "evidence": "build/furniture-refinement-r22.json"
+    }
+   ],
+   "web_room_ids": [
+    "f2-101",
+    "f2-105"
+   ],
+   "evidence_asset_sha256": {
+    "level-2.glb": "aa3c779940efbbd90a97f122edd10dbbe1e44e1373feb3d50d29def1efdcea53"
+   }
+  },
+  {
+   "photo_group": "kat_3_master_bedroom",
+   "space": "Ebeveyn odası, banyo ve giyinme",
+   "photos": [
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (1).jpeg",
+     "sha256": "90e796a7f39147037dfaeb9cadebead0162d07319fa48ae0e7d273b59be6bde9"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (2).jpeg",
+     "sha256": "4ab62f66e1532784cd0686feabbd9d844a87477d64d0ff34c7f7301d7c7b2f5f"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (3).jpeg",
+     "sha256": "ed44746880b7f76cf214fc895f5523a35cbddb933941234d75e54c654631152c"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (4).jpeg",
+     "sha256": "a735399b60ff32196da8666a7702dc0a3907f88ec92ac7eccfe78e4b20752e40"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (5).jpeg",
+     "sha256": "7030222d03e0ff08bd755d28ee5c44ab46831ad795cdbb574da4a04077b15359"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (6).jpeg",
+     "sha256": "6dba4c6e2eb6aff7412c8a724d917b007e2fa59a3dd0733e27dc273d120ba057"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (7).jpeg",
+     "sha256": "d8f3f2fc4f6e6627de134270562a8695f48438437084e84e4621d55dda48c059"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (8).jpeg",
+     "sha256": "3b0a529f4431055b580d0dadc28b9841eba8ad8e7aa0d932be69f6ec9b6ce02b"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07.jpeg",
+     "sha256": "f0252081bbf6ba07fbb576aaa643ccecec39dbb0fc27a3c84fecdcf985f3a8a7"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.08 (10).jpeg",
+     "sha256": "f15057d068f7932d5680e4dd715b847c6b70ca2173afab51646b04e8f2145d28"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.08 (11).jpeg",
+     "sha256": "c79b726724ff5205a3669f423d20b162e884430faee762a7d63d775f5c772b4c"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.08 (6).jpeg",
+     "sha256": "adb631b30adb363f715cd72eb6e14e38bd38255b1195592a490dcfc2bb565688"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.08 (8).jpeg",
+     "sha256": "a60d24e5439bd03ede02f18afe96d24e3e348bda56978c4d954daba064167079"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.08 (9).jpeg",
+     "sha256": "381d9c141eab1cfb42282c21c1c257a8ae52e4dd09ecc620851a4b12112de3b7"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.43.jpeg",
+     "sha256": "c51ee92fed1bc7425a438806aa26d78c1e2b85f14c0546b0746d11a0f39f5c45"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.44 (1).jpeg",
+     "sha256": "6ddd063b58bd03a5db672d7c81a1cbe6e5e247973990c518b5302443d6897cf7"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.44 (2).jpeg",
+     "sha256": "570acf352ea87420d0d492907d35dd5f7afa212d22fa055dfadd26ab2343e679"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.44 (3).jpeg",
+     "sha256": "d1d5778af0d40d556ac3e8c2f13a9676286ac09e6e7c4fd3fa34e492dfa147b0"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.44 (4).jpeg",
+     "sha256": "4bc38d7ce8a573896904a076a0fb1f9fcde5cc53baf54ef81814b5ed18fd69cc"
+    },
+    {
+     "path": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.44 (5).jpeg",
+     "sha256": "df2dd71fde3d2cc7ef93019328f59cf7bb1737da77f3ecdeb80b3812d7697817"
+    }
+   ],
+   "cameras": [
+    "06_master_bedroom",
+    "12_dressing",
+    "13_master_bathroom"
+   ],
+   "review_state": "compared_corrections_applied_open_items_remain",
+   "open_items": [
+    "Her fotoğrafın yatak odası / banyo / giyinme hacmine ayrılması",
+    "Üç hacmin güncel sahnede ayrı kontrolü"
+   ],
+   "photo_match_approved": false,
+   "dimension_labels_enabled": true,
+   "completed_corrections": [
+    {
+     "revision": 22,
+     "change": "Moved dressing furniture clear of partition; reduced quilt drape clear of bedside tables",
+     "evidence": "build/furniture-refinement-r22.json"
+    }
+   ],
+   "web_room_ids": [
+    "f2-102",
+    "f2-103",
+    "f2-104"
+   ],
+   "evidence_asset_sha256": {
+    "level-2.glb": "aa3c779940efbbd90a97f122edd10dbbe1e44e1373feb3d50d29def1efdcea53"
+   }
+  },
+  {
+   "photo_group": "kat_3_yatak_odalari",
+   "space": "Diğer yatak odaları",
+   "photos": [
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.30.jpeg",
+     "sha256": "1052d452dd8d879ac4cc99827f6eaff8ed67cb2ffe7555904031edc105ceabbc"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.31 (7).jpeg",
+     "sha256": "229c80bfb3c26de7a55431b35d3c97399b6aa88bb1fa7714c2c0506a73044b67"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.31 (8).jpeg",
+     "sha256": "73a2794fd2a3ba2a3d4cb40eeb8ff349f4c0fc97e5a46dedeb143bd486ad6016"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.45 (1).jpeg",
+     "sha256": "56a41d3a083ec3672f1f5c41c58c7aeccf895875be7c2ae7f1b62122facd45f9"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.45 (2).jpeg",
+     "sha256": "9331d7a9841491e3f40c204eaff22d67a183a56324b70cef56a84f957dfb65cf"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.45.jpeg",
+     "sha256": "b4734dc5a8ea183b93098715ac5bdb90ce4e52e6eb48dcc35f06add1b9e73d04"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (1).jpeg",
+     "sha256": "7f65253783006ade266e91b09d42c818b0bcdb166d8eae2e629afe9544d22a74"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (10).jpeg",
+     "sha256": "3f02406ef803d0d825c196b3b16e14ecc9bb252b498b7f12c653d060e6b32b53"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (11).jpeg",
+     "sha256": "a677f764fe9e5e3beaa3335d052a9c2e13942699870d18220f73feb1a0915041"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (12).jpeg",
+     "sha256": "35a85b6ae5084c2ca959531111be8a9ae3745387d846f3c7d23a07200b23a1fa"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (13).jpeg",
+     "sha256": "07ac95e5b6cecc7c60b9ae9e2394ae8c82e87582145df254ae5ae995b7646d65"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (14).jpeg",
+     "sha256": "21181b9b47bcf30958ae24f34458b5e51d853326fcda94f6f06431631a7c0a17"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (15).jpeg",
+     "sha256": "07ac95e5b6cecc7c60b9ae9e2394ae8c82e87582145df254ae5ae995b7646d65"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (16).jpeg",
+     "sha256": "ac3ae556acf46251ed6837e0487fdc0605c682af29e7df3ba9287a08da30d32b"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (2).jpeg",
+     "sha256": "96edbbaf20c03afdbb9db512d60eb873d6806cad6d4dee34fe95cb8e05757a86"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (3).jpeg",
+     "sha256": "c3fda2f2ecf8795c6441ba7225222d7e39d2f71181c73d1c6f761eb728dbb359"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (4).jpeg",
+     "sha256": "c87b5fa68c55e1d1081debd9751d1f3a39105a2e2093ac6a35f1935a16b9d06e"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (5).jpeg",
+     "sha256": "f753a6af0dd29d043ef9c67f9c0b1ae41d715d0fc4f9cf749ca108def51136c0"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (6).jpeg",
+     "sha256": "64686e6c1e21e200ebf5f8192a9bd33234ebee33428fbc152afb00753e55cb19"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (7).jpeg",
+     "sha256": "cf651fde61e078204de1fa462fed05928d7aea86e351c563a55450de961fbd76"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (8).jpeg",
+     "sha256": "6de684420501e04f4da975660568b5a0d5255249a2520a995330009c5110b82d"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (9).jpeg",
+     "sha256": "bc4ddd8a9832a8e7e5c9536cd08dd399e79972f168d4e857a71fafad36bbf9d2"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46.jpeg",
+     "sha256": "3b8e3e51be2bdaf20b75396573247d89181bbd47a2c6cce9d19318e513fd37e5"
+    },
+    {
+     "path": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.52.06.jpeg",
+     "sha256": "ac3ae556acf46251ed6837e0487fdc0605c682af29e7df3ba9287a08da30d32b"
+    }
+   ],
+   "cameras": [
+    "11_southwest_bedroom"
+   ],
+   "review_state": "compared_corrections_applied_open_items_remain",
+   "open_items": [
+    "Fotoğrafların ayrı yatak odalarına eşlenmesi",
+    "Her oda için kamera ve oda kontrolü"
+   ],
+   "photo_match_approved": false,
+   "dimension_labels_enabled": true,
+   "completed_corrections": [
+    {
+     "revision": 22,
+     "change": "Moved southwest wardrobe clear of the door-jamb wall return",
+     "evidence": "build/furniture-refinement-r22.json"
+    }
+   ],
+   "web_room_ids": [
+    "f2-106",
+    "f2-107"
+   ],
+   "evidence_asset_sha256": {
+    "level-2.glb": "aa3c779940efbbd90a97f122edd10dbbe1e44e1373feb3d50d29def1efdcea53"
+   }
+  },
+  {
+   "photo_group": "kat_4",
+   "space": "Çatı katındaki hacimler",
+   "photos": [
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.52.44 (13).jpeg",
+     "sha256": "de7d91e1bd0aef1fbb4c63fafbd845b2525132ae86f5dc6cecc356b95f997585"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.52.44 (14).jpeg",
+     "sha256": "bb0e007ca24e903984cfcef7782f08708d7187206c6c52e7df3cf9e4aea28718"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.52.44 (16).jpeg",
+     "sha256": "3273a01f6e0b8ed788ff824ccc164310c68903083be4c075eb0eb155c8a33254"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.52.44 (17).jpeg",
+     "sha256": "7d2cf87136546b247faf73fc58a0cab47aa0fce43320938f7b540d95981e7fc8"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (1).jpeg",
+     "sha256": "2bcbe37df0da296ac588d3003f7a8e69207547fc9607994ad19fa7df496617e2"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (10).jpeg",
+     "sha256": "d17aa542887b45f3e8afc18e78ce24120cba551b82e64556fbda47311fb5775d"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (11).jpeg",
+     "sha256": "2f48ccd62cf4242234ab4f366d35dd13a4c9d05d0bbaedb39bf3abb12fc754f9"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (12).jpeg",
+     "sha256": "e82a5fbd6ef51cdf861dce07f90c6166f81b08d53bb7f12a20399c4dd8836448"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (13).jpeg",
+     "sha256": "754177a1ac2e5acbf66a03e8e459cd58d8108cde6e767661e10fbd78b66eff76"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (14).jpeg",
+     "sha256": "e04e32e297ac5c010a17de09d8d8f380b747480b6ed0af0ba1337f38b5f20fcb"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (15).jpeg",
+     "sha256": "20c65b22a3cf486a252548d029f17f9f242af29470689935343d0ad76fd9d9a5"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (16).jpeg",
+     "sha256": "8bab8c7246e53c8df0792e47ce67e9e2fd509f64b71bb6c58044280a2cf06e3b"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (17).jpeg",
+     "sha256": "ff36ffba1842a069a35248ec4a65ba447969fae9fb43ee6b728fd6d5a3f3b26b"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (18).jpeg",
+     "sha256": "1c26c0329048e5036980384d018fb614caca4c636579aaf27813b01e4eb03ec8"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg",
+     "sha256": "cadd65098581125d23c39e6ab75f15099c3830dae1f5e72250e31e6223cec19b"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (3).jpeg",
+     "sha256": "4ac106d52affdeb1c203f52bc3eb028925bae6c4002f591407722a0d0a5b484a"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (4).jpeg",
+     "sha256": "ec395b998ad8241996f2121cfd99a743df99a02924884ba914fba448eafbb872"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (5).jpeg",
+     "sha256": "16b0d83630b52d5e3efd40353ab100a24578bd8a5c17b1e2571a8109af26ea08"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (6).jpeg",
+     "sha256": "4580acc6ed64a76010415e8fe8aab4a7073219610fec13b57e10f7fb3d5dcade"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (7).jpeg",
+     "sha256": "2e3c1915d3b4ff7722898af10388967fc23c5e460812c369afa715a193384362"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (8).jpeg",
+     "sha256": "f64fb1e1c4db0447e9190c09f7a33430dbf888863c4c856b736fc3ccb920a2a6"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (9).jpeg",
+     "sha256": "876982e149157fb4fe2a4e139f44227327d46e1c783cd2d2718c27066ffed659"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10.jpeg",
+     "sha256": "0df102d7244130bd343624a1e3c5932c2293dd55d7027589de78863eccda5af9"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.11.jpeg",
+     "sha256": "37980a46846713d55157e6668575a9dda64c7757ca72d138191164518c8688c4"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.31.jpeg",
+     "sha256": "9bd1790de681d0573e7f38cdc557c46d60f602d49089edeefcb26e50c41bd4fc"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (1).jpeg",
+     "sha256": "68d95f5cecb7ab217a349afbd4e9b49303ee16264426fc9db388eb46f7eca56c"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (10).jpeg",
+     "sha256": "37980a46846713d55157e6668575a9dda64c7757ca72d138191164518c8688c4"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (11).jpeg",
+     "sha256": "1c26c0329048e5036980384d018fb614caca4c636579aaf27813b01e4eb03ec8"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (12).jpeg",
+     "sha256": "68d95f5cecb7ab217a349afbd4e9b49303ee16264426fc9db388eb46f7eca56c"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (13).jpeg",
+     "sha256": "30aa3205137ffbab778bc9d42e0bf4623d2b396b62a1745ebbd8b67f557754f2"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (14).jpeg",
+     "sha256": "2257c9c2b0882257072ba1420bc500651b920262b09771f7041c153f06665258"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (15).jpeg",
+     "sha256": "4a8c708096cdc2c308035676af4dd881c396209b6aae5ed60b169e7123b4b3d8"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (16).jpeg",
+     "sha256": "bc5ff5f666d0be335f06f8f1cfa54ca6cf2c2d6036d2f5bb351043a3ce881ea2"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (17).jpeg",
+     "sha256": "ebc5995695e8dc4a4846d645cb161c1cf980d291551dbb3ebfc6ffa0f6cc07bf"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (2).jpeg",
+     "sha256": "2257c9c2b0882257072ba1420bc500651b920262b09771f7041c153f06665258"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (3).jpeg",
+     "sha256": "754177a1ac2e5acbf66a03e8e459cd58d8108cde6e767661e10fbd78b66eff76"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (4).jpeg",
+     "sha256": "bc5ff5f666d0be335f06f8f1cfa54ca6cf2c2d6036d2f5bb351043a3ce881ea2"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (5).jpeg",
+     "sha256": "ebc5995695e8dc4a4846d645cb161c1cf980d291551dbb3ebfc6ffa0f6cc07bf"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (6).jpeg",
+     "sha256": "e04e32e297ac5c010a17de09d8d8f380b747480b6ed0af0ba1337f38b5f20fcb"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (7).jpeg",
+     "sha256": "ff36ffba1842a069a35248ec4a65ba447969fae9fb43ee6b728fd6d5a3f3b26b"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (8).jpeg",
+     "sha256": "8bab8c7246e53c8df0792e47ce67e9e2fd509f64b71bb6c58044280a2cf06e3b"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (9).jpeg",
+     "sha256": "9bd1790de681d0573e7f38cdc557c46d60f602d49089edeefcb26e50c41bd4fc"
+    },
+    {
+     "path": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32.jpeg",
+     "sha256": "30aa3205137ffbab778bc9d42e0bf4623d2b396b62a1745ebbd8b67f557754f2"
+    }
+   ],
+   "cameras": [
+    "07_attic"
+   ],
+   "review_state": "compared_corrections_applied_open_items_remain",
+   "open_items": [
+    "Oturma alanı kumaşı, koltuk ve dolap profillerinin fotoğraf eşlemesi",
+    "Banyo, güney yatak odası ve çatı yüzeylerinin ayrı yakın kontrolü"
+   ],
+   "photo_match_approved": false,
+   "dimension_labels_enabled": true,
+   "completed_corrections": [
+    {
+     "revision": 16,
+     "change": "User confirmed no attic lift; removed F3 fittings and restored only former shaft floor opening",
+     "evidence": "build/attic-lift-correction.json"
+    },
+    {
+     "revision": 22,
+     "change": "Corrected lounge/TV layout, removed unsupported bedside sets, added photo-interpreted fan/mirror and lowered headboard clear of sloping ceiling",
+     "evidence": "build/furniture-refinement-r22.json"
+    }
+   ],
+   "web_room_ids": [
+    "f3-C01",
+    "f3-C02",
+    "f3-C03",
+    "f3-C04",
+    "f3-C05"
+   ],
+   "evidence_asset_sha256": {
+    "level-3.glb": "ed6d512c109cbd3a1e4a61a2ae17a6a9e8a8783723ea2732cf587adba3ad2e25"
+   }
+  }
+ ],
+ "review_revision": 39,
+ "furniture_clearance_evidence": [
+  "build/furniture-collision-report.json",
+  "build/furniture-headroom-report.json",
+  "build/furniture-opening-report.json"
+ ],
+ "room_annotation_evidence": "build/room-annotation-qa.json"
 }

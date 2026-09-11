@@ -22,8 +22,12 @@ export function labelFontSize(pixelsPerMetre) {
 export function areaLabel(room,data) {
   const area=ROOM_AREAS[room?.id]??(Number.isFinite(room?.area_m2)?room.area_m2:null);
   if(area!==null)return `${area.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2})} m²`;
-  const first=room?.dimensions?.[0];
-  return data?.dimensions?.find(entry=>entry.id===first)?.display??'';
+  // Only a verified project dimension may stand in for an area. The R39 set
+  // also carries model-measured spans and face-residual records with the label
+  // switched off; those are provenance, never a tag.
+  const rows=(room?.dimensions??[]).map(id=>data?.dimensions?.find(entry=>entry.id===id))
+    .filter(entry=>entry?.basis==='dwg_verified'&&entry.dimension_label_allowed);
+  return rows[0]?.display??'';
 }
 export function createAnnotations(data,host,onRoom) {
   if(data.coordinate_system!=='glTF_Y_up')throw Error('Invalid room annotations');
@@ -57,6 +61,7 @@ export function createAnnotations(data,host,onRoom) {
       a,b,a.clone().add(side),a.clone().sub(side),b.clone().add(side),b.clone().sub(side)]),material);
     line.renderOrder=105;line.userData.aoExcluded=true;group.add(line);
     const el=document.createElement('span');el.className='dimension-label';el.textContent=dim.display;
+    if(dim.provenance)el.title=dim.provenance;
     overlay.append(el);dimensions.push({el,line,position:a.clone().add(b).multiplyScalar(.5),floor:dim.floor_index,roomId:dim.room_id});
   }
   function project(entry,camera,w,h,size) {

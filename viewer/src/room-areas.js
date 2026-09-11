@@ -23,13 +23,16 @@ export const ROOM_AREAS = {
   'f1-Z01': 5.04,   // Giriş
   'f1-Z03': 2.04,   // Tuvalet - WC
 
-  // 1. kat. Every room maps, and the pairing of the two bedrooms is not a
-  // guess: f2-106's own registered spans are 2,95 x 4,10 = 12,10 m2, which is
-  // the schedule's Oda 2 at 12,05 to within 5 cm2, leaving Oda 1 for f2-107.
+  // 1. kat. Every room maps. The bedroom pairing follows the R39 solids, not
+  // the span product: the substrate areas derived from the delivered walls are
+  // f2-106 13,51 m2 and f2-107 12,04 m2, which land on the schedule's 13,41
+  // (0,7%) and 12,05 (0,08%). The earlier span argument (2,95 x 4,10 = 12,10
+  // "= Oda 2") had paired them the other way round - a span product understates
+  // an L-shaped room, and f2-106 is one.
   'f2-102': 22.07,  // Master Bedroom - Ebeveyn yatak odası
   'f2-105': 14.59,  // Salon - Oturma alanı
-  'f2-107': 13.41,  // Oda 1
-  'f2-106': 12.05,  // Oda 2
+  'f2-106': 13.41,  // Oda 1
+  'f2-107': 12.05,  // Oda 2
   'f2-101': 8.72,   // Hol - Kat holü
   'f2-104': 8.55,   // Master Bedroom Tuvalet - Ebeveyn banyosu
   'f2-108': 7.88,   // Tuvalet - Banyo
@@ -43,14 +46,20 @@ export const ROOM_AREAS = {
   'f3-C03': 5.74,   // Tuvalet - Banyo
 };
 
+// Placed by the R39 solids after being left out of earlier packages: the
+// derived substrate areas identify both rooms to under 0,3%.
+export const ROOM_AREAS_DERIVED_PLACED = {
+  'f0-B02': 26.56,  // Müştemilat - derived substrate 26,539 (0,08%); the
+                    // detached basement annex is the guest quarter.
+  'f1-Z08': 5.56,   // Depo - derived substrate 5,549 (0,2%); the schedule's
+                    // store is the room the model labels Tesisat odası.
+};
+Object.assign(ROOM_AREAS, ROOM_AREAS_DERIVED_PLACED);
+
 // Left out on purpose, pending a decision from the owner:
 //   f0 Salon 54,18      - Bahçe salonu and the basement Mutfak share the same
 //                         8,40 m registered span, so they read as one space and
 //                         it is not clear whether the figure covers both.
-//   f0 Müştemilat 26,56 - closest is f0-B02 (3,00 x 7,60), but neither of the
-//                         two rooms named "Oda" is identified as the guest house.
-//   f1 Depo 5,56        - the only unplaced room is f1-Z08 "Tesisat odası",
-//                         which is a plant room, not a store.
 //   f3 Mutfak 2,87      - the second floor carries no kitchen in the model.
 // Unlisted in the schedule and so left as they are: f0 Hol, f0 Oda (B04),
 // f0 Mutfak, f1 Yemek alanı, f3 Kat holü.

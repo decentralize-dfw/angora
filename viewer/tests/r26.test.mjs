@@ -12,5 +12,7 @@ test('Model-only areas are labelled and unapproved individual room partitions st
   const data=read('rooms.json');assert.equal(data.floor_areas.length,4);
   for(const a of data.floor_areas){assert.ok(a.area_m2>30);assert.equal(a.legal_net_area,false);assert.equal(a.survey_verified,false);}
   for(const a of data.site_areas){assert.equal(a.estimated,true);assert.equal(a.survey_verified,false);}
-  assert.equal(data.rooms.some(r=>Number.isFinite(r.area_m2)),false);
+  // R39 publishes a derived area only for a room that is its own enclosed
+  // space, and always beside the method that produced it.
+  for(const r of data.rooms.filter(r=>Number.isFinite(r.area_m2)))assert.ok(r.area_method_label,r.id);
 });
