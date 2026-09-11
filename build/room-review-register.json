@@ -366,10 +366,11 @@
    "r39_render_review": {
     "revision": "R39",
     "frames": [
-     "R39-04"
+     "R39-04",
+     "R39-04r"
     ],
-    "verdict": "render_misaimed",
-    "notes": "Kare kapı boşluğuna bakıyor, lavabo/ayna kadrajda değil; yeniden çekilecek. WC gövdesinin planın B03 dediği odada değil holde durması ayrıca açık karar.",
+    "verdict": "composition_match",
+    "notes": "Yeniden çekim R39-04r: lacivert vanite, beyaz lavabo ve oval ayna fotoğraflardaki takımla örtüşüyor. Açık kalan: gövde planın B03 dediği odada değil holde (yazarlık kararı).",
     "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },
@@ -535,10 +536,11 @@
    "r39_render_review": {
     "revision": "R39",
     "frames": [
-     "R39-07"
+     "R39-07",
+     "R39-07r"
     ],
-    "verdict": "render_misaimed",
-    "notes": "Kadraj holü değil duvar köşesini almış; yeniden çekilecek.",
+    "verdict": "composition_match",
+    "notes": "Yeniden çekim R39-07r: antre kolonu, avize, parke ve yemek alanına geçiş okunuyor. Kapı/ayna duvarı için ek kare önerilir.",
     "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },
@@ -860,13 +862,11 @@
    "r39_render_review": {
     "revision": "R39",
     "frames": [
-     "R39-12a",
-     "R39-12b",
-     "R39-12c",
+     "R39-12s",
      "R39-13"
     ],
-    "verdict": "render_misaimed",
-    "notes": "Panorama grubu; kareler salonun ana gövdesini değil kapı/nış köşelerini almış. Yeniden çekilecek.",
+    "verdict": "composition_match",
+    "notes": "Yeniden çekim R39-12s salon gövdesini alıyor: yemek masası+sandalyeler, koltuk takımı, sehpa, avizeler, perdeler ve tablo fotoğraf panoramalarındaki envanterle örtüşüyor. Fark: vitrin dolabı kadraj dışı.",
     "render_record": "build/renders/r39-photo-acceptance.json"
    }
   },

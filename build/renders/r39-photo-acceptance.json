@@ -1599,13 +1599,13 @@
    "kat_3_banyok",
    "kat_3_hol",
    "kat_3_master_bedroom",
-   "kat_4"
-  ],
-  "render_misaimed": [
+   "kat_4",
    "kat_1_bodrum_wc",
    "kat_2_giris",
-   "kat_2_giris_wc",
    "kat_2_ust_salon"
+  ],
+  "render_misaimed": [
+   "kat_2_giris_wc"
   ],
   "contradiction": [
    "kat_3_yatak_odalari"
@@ -1613,6 +1613,11 @@
   "authored_difference": [
    "kat_2_garaj"
   ],
-  "note": "strong_match = envanter+kompozisyon+palet ailesi örtüşüyor; nihai renk/kumaş onayı mal sahibinindir. misaimed kareler yeniden çekilecek."
+  "note": "strong_match = envanter+kompozisyon+palet ailesi örtüşüyor; nihai renk/kumaş onayı mal sahibinindir. misaimed kareler yeniden çekilecek.",
+  "reshoot_frames": [
+   "R39-04r",
+   "R39-07r",
+   "R39-12s"
+  ]
  }
 }
