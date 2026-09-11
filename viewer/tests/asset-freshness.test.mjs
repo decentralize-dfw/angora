@@ -21,7 +21,8 @@ test('No model file is requested without a version or a revalidation',()=>{
 test('Manifest-listed files are requested with their content hash',()=>{
   // Every asset, plus the section atlas, room annotations and navigation.
   const versioned=[...source.matchAll(/searchParams\.set\(\s*'v'\s*,\s*([^)]+)\)/g)].map(m=>m[1]);
-  assert.equal(versioned.length,4);
+  // four data files plus the optional section-caps fetch all carry ?v=<hash>
+  assert.equal(versioned.length,5);
   for(const argument of versioned)assert.match(argument,/sha256/);
   // A hash prefix long enough that two builds cannot collide in practice.
   for(const argument of versioned)assert.match(argument,/slice\(0,\s*12/);

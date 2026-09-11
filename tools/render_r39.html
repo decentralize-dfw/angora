@@ -56,7 +56,10 @@ const loader = new GLTFLoader().setDRACOLoader(draco);
 const want = (params.get('assets') || 'level-0,level-1,level-2,level-3,envelope').split(',').filter(Boolean);
 const manifest = await (await fetch('../build/web/full/manifest.json')).json();
 const loaded = {};
-for (const asset of manifest.assets) {
+// section-caps is not one of the seven assets; it hangs off its own manifest key
+const assetList = manifest.section_cap_asset
+  ? [...manifest.assets, {id: 'section-caps', ...manifest.section_cap_asset}] : manifest.assets;
+for (const asset of assetList) {
   if (!want.includes(asset.id)) continue;
   const gltf = await loader.loadAsync(`../build/web/full/${asset.file}?v=${asset.sha256.slice(0,12)}`);
   gltf.scene.traverse(o => {if (o.isMesh) {o.castShadow = true; o.receiveShadow = true;}});

@@ -19,12 +19,13 @@ import {createSiteContext} from './site-context.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
 import {prepareContextSurfaces} from './context-surfaces.js';
 import {batchContext} from './context-batch.js';
-import {mergeEqualMaterials,abstractVehicle,splitContextBuildings,createContextMassing} from './context-massing.js';
+import {mergeEqualMaterials,abstractVehicle,splitContextSoil,splitContextBuildings,createContextMassing} from './context-massing.js';
+import {createLift,FLOOR_SEND_LABEL} from './lift.js';
 import {handleEscape} from './interface-actions.js';
 import {createDeviceQA} from './device-qa.js';
 import {readShareState,shareSearch} from './share-state.js';
 import {referenceProfile} from './render-profile.js';
-import { sectionHeight, smoothStep, createWallCaps } from './section.js';
+import { sectionHeight, smoothStep, createWallCaps, createSoilCap, SOIL_CUT_HEIGHT } from './section.js';
 
 const $ = s => document.querySelector(s);
 const host = $('#viewport'), status = $('#load-status');
@@ -37,12 +38,16 @@ const titles = {region:'Bölge', neighborhood:'Yakın çevre', building:'Villa 2
 const groups = new Map();
 const pendingRoomJump = new PendingAction();
 const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
-let flight, hotspots, planMode=false, roomData, interiorLights=true;
+// The earth cannot follow the sweeping building cut: its authored cap exists
+// at exactly one height, so this plane snaps between "whole" and "basement
+// cut open" instead of lerping and leaving the excavation uncapped mid-flight.
+const earthClip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
+let flight, hotspots, planMode=false, roomData, interiorLights=true, soilCap=null;
 let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox, contextBox, lighting, siteContext;
 let selected = 'neighborhood', ready = false, loading = false;
 let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations, walk;
 let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;
-let deviceQA,assetRevision=null,pendingCapture=null,contextLost=false,massing=null;
+let deviceQA,assetRevision=null,pendingCapture=null,contextLost=false,massing=null,lift=null;
 
 function message(text, error = false) {
   status.hidden = false; $('#load-message').textContent = text;
@@ -116,16 +121,19 @@ function renderFrame(time) {
     }
     const flying=flight?.update(time);
     caps?.update(clip.constant, clip.constant < fullHeight - 0.001);
+    soilCap?.update(earthClip.constant, earthClip.constant < fullHeight - 0.001);
     const changing=walk?.active?walk.update(time,renderer.xr.getSession()):flying?false:controls.update();
     const activeCamera=walk?.active?walk.camera:camera;
     if(!walk?.active)fitDepthRange(camera,controls.target,contextBox);
     if(walk?.active){
       const sample=walk.surface.sample(walk.camera.position.x,walk.camera.position.z,walk.camera.position.y-1.62,walk.furniture,.3);
-      if(sample){walk.floor=sample.floor;selected='f'+sample.floor;}
+      if(sample&&walk.floor!==sample.floor){walk.floor=sample.floor;selected='f'+sample.floor;lift?.setWalkFloor(sample.floor);refreshLiftControl();}
+      else if(sample){walk.floor=sample.floor;selected='f'+sample.floor;}
       lighting.interior(walk.floor,walk.camera.position.toArray(),time);
     }
     const lightChanging=lighting.update(time);
     const massingChanging=massing?.update(time);
+    const liftChanging=lift?.update(time);
     annotations?.update(selected,roomNamesVisible,measurementsVisible,Boolean(transition||flight?.active),walk?.active,activeCamera,walk?.room);
     hotspots?.update(activeCamera,walk?.active&&!walk.xrActive&&!walk.route);
     siteContext?.update(selected,activeCamera,controls.target,Boolean(transition||flight?.active),walk?.active);
@@ -137,7 +145,7 @@ function renderFrame(time) {
     }
     deviceQA?.sample(time,{draw_calls:renderer.info.render.calls,triangles:renderer.info.render.triangles,
       drawing_buffer:`${renderer.domElement.width}×${renderer.domElement.height}`,view:walk?.active?`${selected}:walk`:selected});
-    if(changing||transition||flying||lightChanging||massingChanging||deviceQA?.active)invalidate();
+    if(changing||transition||flying||lightChanging||massingChanging||liftChanging||deviceQA?.active)invalidate();
 }
 
 function resize() {
@@ -176,8 +184,22 @@ function panel(id,open) {
   invalidate();
 }
 function clouds(){const el=$('#cloud-transition');el.classList.remove('travel');void el.offsetWidth;el.classList.add('travel');}
+// One label that always names exactly what the press will do: call the cabin
+// to the floor being walked, or send it away when it is already here.
+function refreshLiftControl(){
+  const button=$('#lift-call'),target=$('#lift-call-target');
+  if(!button)return;
+  if(lift?.travelling){button.disabled=true;target.textContent='hareket ediyor…';button.setAttribute('aria-label','Asansör hareket ediyor');return;}
+  const can=Boolean(lift)&&ready&&!contextLost&&lift.canRun();
+  button.disabled=!can;
+  if(!can){target.textContent='bu katta';button.setAttribute('aria-label','Asansör bu katta');return;}
+  const to=lift.target();
+  target.textContent=to===lift.walkFloor?'bu kata çağır':FLOOR_SEND_LABEL[to];
+  button.setAttribute('aria-label','Asansörü '+target.textContent);
+}
 function updateRoomUI(station){
   selected='f'+station.floor_index;$('#walk-room').value=station.room_id;
+  lift?.setWalkFloor(station.floor_index);refreshLiftControl();
   $('#view-title').textContent=station.name;
   $('#section-label').textContent=titles[selected]+' · 360° oda turu';
   $('#walk-room-area').textContent=areaLabel(roomData.rooms.find(r=>r.id===station.room_id),roomData);
@@ -225,7 +247,7 @@ function setup() {
         drawing_buffer:{width:renderer.domElement.width,height:renderer.domElement.height},
         camera:{position:c.position.toArray(),quaternion:c.quaternion.toArray(),target:controls.target.toArray(),fov:c.fov,zoom:c.zoom,near:c.near,far:c.far},
         settings:{section_height:clip.constant,plan:planMode,furniture:furnitureVisible,room_names:roomNamesVisible,dimensions:measurementsVisible,
-          hour:Number($('#daylight-hour').value),day:Number($('#daylight-season').value),light_style:$('#lighting-style').value,interior_lights:interiorLights},
+          hour:Number($('#daylight-hour').value),day:Number($('#daylight-season').value),light_style:$('#lighting-style').value,interior_lights:interiorLights,lift:lift?.snapshot()??null},
         lighting:lighting.snapshot(),
         renderer:{profile:referenceProfile,three:THREE.REVISION,exposure:renderer.toneMappingExposure,tone_mapping:renderer.toneMapping,output_color_space:renderer.outputColorSpace,
           max_samples:renderer.capabilities.maxSamples,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures},
@@ -268,7 +290,9 @@ function selectView(id, initial = false) {
   panel('',false);
   if (!ready) return;
   const target = sectionHeight(id, fullHeight);
-  lighting.frame(id,contextBox);massing?.set(id);
+  const earthTarget = id==='f0' ? SOIL_CUT_HEIGHT : fullHeight;
+  if (earthClip.constant !== earthTarget) {earthClip.constant = earthTarget; renderer.shadowMap.needsUpdate = true;}
+  lighting.frame(id,contextBox);massing?.set(id);lift?.park(id);
   lighting.interior(id.startsWith('f')?Number(id[1]):null,null);
   if(roomData)renderPropertyInfo($('#property-info'),roomData,id);
   if(!initial&&(id==='region'||previous==='region'))clouds();
@@ -288,7 +312,9 @@ function enterWalk(roomId) {
   roomId ||= walk.surface.data.stations.find(s=>s.floor_index===floor).room_id;
   flight.cancel();panel('',false);const station=walk.enter(roomId);selected='f'+station.floor_index;updateRoomUI(station);
   lighting.interior(station.floor_index,station.position);
-  controls.enabled=false;clip.constant=fullHeight;transition=null;lighting.frame('building');massing?.set('building');
+  controls.enabled=false;clip.constant=fullHeight;earthClip.constant=fullHeight;transition=null;lighting.frame('building');massing?.set('building');
+  // after the section plane is raised, or canRun() reads the previous cut
+  lift?.setWalkActive(true);lift?.setWalkFloor(station.floor_index);refreshLiftControl();
   $('#app').dataset.walk='true';$('.camera-tools').hidden=true;$('#walk-tools').hidden=false;$('#enter-walk').hidden=true;
   $('#walk-room').value=station.room_id;
   document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===selected));
@@ -300,6 +326,7 @@ function exitWalk(reselect = true) {
   if(!walk?.active)return;
   walk.leave();controls.enabled=true;$('#app').dataset.walk='false';
   lighting.interior(null,null);
+  lift?.setWalkActive(false);lift?.cancel();refreshLiftControl();
   $('.camera-tools').hidden=false;$('#walk-tools').hidden=true;$('#enter-walk').hidden=false;
   planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);
   if(reselect){selectView(selected);frame(false);}
@@ -311,7 +338,7 @@ async function loadModel() {
   // Clear any bar left by a failed attempt before the manifest is back.
   progress(null);
   message('Bütün model yükleniyor…');
-  const staged = new Map();
+  const staged = new Map(), stagedClips = new Map();
   try {
     const response = await fetch(new URL('manifest.json', modelRoot), {cache:'no-cache'});
     if (!response.ok) throw Error(`Manifest HTTP ${response.status}`);
@@ -319,7 +346,7 @@ async function loadModel() {
     assetRevision=manifest.assets?.map(({file,sha256})=>({file,sha256}));
     if (!manifest.full_scene || manifest.geometry_preclipped || manifest.assets?.length !== 7) throw Error('Whole-scene manifest required');
     let next = 0, completed = 0;
-    const totalBytes = manifest.assets.reduce((sum, asset) => sum + (asset.bytes || 0), 0);
+    const totalBytes = manifest.assets.reduce((sum, asset) => sum + (asset.bytes || 0), 0) + (manifest.section_cap_asset?.bytes || 0);
     const received = new Map();
     const reportProgress = () => {
       let done = 0; for (const value of received.values()) done += value;
@@ -338,7 +365,8 @@ async function loadModel() {
         });
         received.set(asset.id, asset.bytes || 0);
         mergeEqualMaterials(gltf.scene); abstractVehicle(gltf.scene);
-        staged.set(asset.id, asset.id==='context'?batchContext(splitContextBuildings(gltf.scene)):gltf.scene);
+        staged.set(asset.id, asset.id==='context'?batchContext(splitContextBuildings(splitContextSoil(gltf.scene))):gltf.scene);
+        if (gltf.animations?.length) stagedClips.set(asset.id, gltf.animations);
         reportProgress();
         message(`Bütün model yükleniyor… ${++completed}/${manifest.assets.length}`);
       }
@@ -358,6 +386,22 @@ async function loadModel() {
       if (!response.ok) throw Error(`Room annotations HTTP ${response.status}`);
       return response.json();
     }
+    async function loadCaps() {
+      // Optional by design: the dev-server copy under viewer/public is a
+      // version-2 manifest with no section_cap_asset, and a missing cap only
+      // costs the authored soil face, never the load.
+      if (!manifest.section_cap_asset) return null;
+      const url = new URL(manifest.section_cap_asset.file, modelRoot);
+      url.searchParams.set('v', manifest.section_cap_asset.sha256.slice(0, 12));
+      try {
+        const gltf = await loader.loadAsync(url.href, event => {
+          received.set('section-caps', Math.min(event.loaded, manifest.section_cap_asset.bytes || event.loaded));
+          reportProgress();
+        });
+        received.set('section-caps', manifest.section_cap_asset.bytes || 0); reportProgress();
+        return gltf.scene;
+      } catch (error) {console.warn('Section caps unavailable', error); return null;}
+    }
     async function loadNavigation() {
       const url=new URL(manifest.navigation?.file ?? 'navigation.json',modelRoot);
       if(manifest.navigation?.sha256)url.searchParams.set('v',manifest.navigation.sha256.slice(0,12));
@@ -369,17 +413,24 @@ async function loadModel() {
       return data;
     }
     const results = await Promise.allSettled([worker(), worker(), loadSections(), loadRooms(), loadNavigation(),
-      lighting.loadEnvironment(daylightURL.href).catch(error=>console.warn('HDR unavailable; atmospheric daylight retained',error))]);
+      lighting.loadEnvironment(daylightURL.href).catch(error=>console.warn('HDR unavailable; atmospheric daylight retained',error)), loadCaps()]);
     const failure = results.find(r => r.status === 'rejected'); if (failure) throw failure.reason;
     for (const [id, group] of staged) {
       groups.set(id, group); scene.add(group);
       group.traverse(o => {
         if (!o.isMesh) return;
         o.renderOrder = 5;
-        const sectionClipped=!['context','garden'].includes(id);
-        lighting.prepareMesh(o,sectionClipped);
-        if (sectionClipped) for (const m of Array.isArray(o.material) ? o.material : [o.material]) {
-          m.clippingPlanes = [clip]; m.side = THREE.DoubleSide;
+        const building=id!=='context'&&id!=='garden';
+        // A 1.60 m section that leaves a 10 m spruce standing on the plan is
+        // not a section, so the garden sweeps with the building cut. Of the
+        // context only the plot's own soil is cut, by the snap plane, so the
+        // neighbourhood and roads stay whole and the authored cap always fits.
+        const planes=building||id==='garden'?[clip]
+          :(Array.isArray(o.material)?o.material:[o.material]).some(m=>m?.userData.plotSoil)?[earthClip]:[];
+        lighting.prepareMesh(o,{clipped:planes[0]===clip,context:!building});
+        o.userData.clipPlanes=planes;
+        if (planes.length) for (const m of Array.isArray(o.material) ? o.material : [o.material]) {
+          m.clippingPlanes = planes; m.side = THREE.DoubleSide;
         }
       });
     }
@@ -408,9 +459,14 @@ async function loadModel() {
     } catch(error){console.warn(error);$('#context-count').textContent='Kaynak vaziyet planı';}
     fullHeight = buildingBox.max.y + 2;
     caps = createWallCaps(results[2].value); scene.add(caps.group);
+    const capScene=results[6].status==='fulfilled'?results[6].value:null;
+    if (capScene) {soilCap = createSoilCap(capScene); if (soilCap) scene.add(soilCap.group);}
     roomData=results[3].value;annotations=createAnnotations(roomData,host,enterWalk);scene.add(annotations.group);
     walk = new InteriorWalk(results[4].value,renderer.domElement,invalidate);scene.add(walk.rig);
     lighting.setFixtures(results[4].value.lights);hotspots=createHotspots(host,walk,travelRoom);
+    lift=createLift({groups,clips:stagedClips.get('level-0')??[],clipPlane:clip,fullHeight,
+      shadowsDirty:()=>{renderer.shadowMap.needsUpdate=true;},onSettled:()=>refreshLiftControl()});
+    refreshLiftControl();
     for(let f=0;f<4;f++) {
       const group=document.createElement('optgroup');group.label=titles['f'+f];
       for(const station of results[4].value.stations.filter(s=>s.floor_index===f)) {
@@ -468,6 +524,7 @@ function bindInterface() {
   $('#zoom-in').onclick=()=>zoom(1.3);
   $('#zoom-out').onclick=()=>zoom(1/1.3);
   $('#reset-view').onclick=()=>{planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);frame(false);}; $('#retry').onclick = loadModel;
+  $('#lift-call').onclick=()=>{if(lift?.run(performance.now())){refreshLiftControl();invalidate();}};
   $('#toggle-furniture').onclick = () => setFurnitureVisible(!furnitureVisible);
   $('#toggle-rooms').onclick = () => {
     roomNamesVisible = !roomNamesVisible; $('#toggle-rooms').setAttribute('aria-pressed', roomNamesVisible); invalidate();

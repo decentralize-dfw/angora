@@ -24,7 +24,10 @@ export class SectionGTAOPass extends GTAOPass {
     this.resolutionScale = scale;
     this.normalMaterial.side = THREE.DoubleSide;
     this.normalMaterial.onBeforeRender = (_renderer, _scene, _camera, _geometry, object) => {
-      const planes = object.userData.sectionClipped ? [clip] : [];
+      // Each object carries the exact plane set its beauty materials use - the
+      // building cut, the soil's own snap plane, or none - so occlusion is
+      // never computed against earth or garden that is not drawn.
+      const planes = object.userData.clipPlanes ?? (object.userData.sectionClipped ? [clip] : []);
       if ((this.normalMaterial.clippingPlanes?.length ?? 0) !== planes.length) this.normalMaterial.needsUpdate = true;
       this.normalMaterial.clippingPlanes = planes;
     };
@@ -193,14 +196,14 @@ export function createLighting(renderer, scene, camera, clip) {
     },
     snapshot(){return {environment:environmentMode,interior:fixtures.snapshot()};},
     setStyle(style){soft=style!=='sun';setTime();},
-    prepareMesh(object,sectionClipped) {
-      object.userData.sectionClipped=sectionClipped;
+    prepareMesh(object,{clipped,context}) {
+      object.userData.sectionClipped=clipped;
       const materials=Array.isArray(object.material)?object.material:[object.material];
       if(materials.every(m=>/^(foliage(?:_light)?|hedge)$/.test(m.name)))smoothSurfaceNormals(object.geometry);
       const glass=materials.every(isGlazing);object.userData.aoExcluded=glass;
       object.castShadow=!glass;object.receiveShadow=!glass;
       for(const material of materials) {
-        prepareMaterialResponse(material,{context:!sectionClipped});preparedMaterials.add(material);
+        prepareMaterialResponse(material,{context});preparedMaterials.add(material);
         material.clipShadows=true;
         if(isGlazing(material)){material.depthWrite=false;material.metalness=0;}
         for(const value of Object.values(material))if(value?.isTexture)value.anisotropy=Math.min(compact?8:16,renderer.capabilities.getMaxAnisotropy());

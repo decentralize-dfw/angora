@@ -29,7 +29,7 @@ const FADED_SURFACE=/grass|asphalt|stone_tile|retaining|boundary limestone|soil 
 
 export function prepareContextSurfaces(context,background) {
   let ground;
-  context.traverse(o=>{if(o.isMesh&&!Array.isArray(o.material)&&GROUND_SURFACE.test(o.material.name))ground=o;});
+  context.traverse(o=>{if(o.isMesh&&!Array.isArray(o.material)&&GROUND_SURFACE.test(o.material.name)&&!o.material.userData.plotSoil)ground=o;});
   if(!ground)return;
   smoothGroundNormals(ground.geometry);ground.castShadow=false;
   const bounds=new THREE.Box3().setFromObject(ground);
@@ -39,7 +39,7 @@ export function prepareContextSurfaces(context,background) {
     for(const m of Array.isArray(o.material)?o.material:[o.material]){
       // Building clones carry the same surface names as the site copies they
       // were split from; only the site copies meet the horizon.
-      if(seen.has(m)||m.userData.contextBuilding||!FADED_SURFACE.test(m.name))continue;
+      if(seen.has(m)||m.userData.contextBuilding||m.userData.plotSoil||!FADED_SURFACE.test(m.name))continue;
       seen.add(m);const previous=m.onBeforeCompile,previousKey=m.customProgramCacheKey();
       m.onBeforeCompile=(shader,renderer)=>{
         previous.call(m,shader,renderer);

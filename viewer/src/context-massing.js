@@ -82,6 +82,33 @@ export function abstractVehicle(root) {
   return count;
 }
 
+// The plot's own earth is one node that shares two of its three surfaces with
+// geometry that must never be cut - the neighbourhood terrain and 42 block
+// foundations - so cutting the excavation open at the basement view needs the
+// soil to hold private material instances first. Runs before the building
+// split, which then still sees the original site materials.
+export const PLOT_SOIL_NODE = /^R32 \| Continuous local soil volume\b/;
+
+export function splitContextSoil(root) {
+  const clones = new Map();
+  root.traverse(object => {
+    if (!object.isMesh || !PLOT_SOIL_NODE.test(authoredNodeName(object.name))) return;
+    const swap = material => {
+      if (!material) return material;
+      let clone = clones.get(material);
+      if (!clone) {
+        clone = material.clone();
+        clone.name = material.name + ' · plot section';
+        clone.userData = {...material.userData, plotSoil: true};
+        clones.set(material, clone);
+      }
+      return clone;
+    };
+    object.material = Array.isArray(object.material) ? object.material.map(swap) : swap(object.material);
+  });
+  return root;
+}
+
 // Give the neighbour blocks their own material instances wherever they share one
 // with the site, so whitening the buildings cannot reach the curbs that happen to
 // use the same paving surface.

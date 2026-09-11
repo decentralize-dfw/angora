@@ -21,3 +21,10 @@
 /* Touch already rotates with one finger and pans with two, so the pair of mode
    buttons only adds a decision on a phone. */
 @media(pointer:coarse){#rotate-mode,#pan-mode{display:none}}
+
+/* The lift control lives in the walk panel: it only means something while
+   standing at a landing, and the panel is already hidden outside the tour. */
+.lift-call{display:grid;gap:2px;text-align:left;min-height:44px;margin-top:6px;padding:7px 9px;border-radius:12px;background:#e6ece6;color:var(--ink)}
+.lift-call .lift-call-label{font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.lift-call .lift-call-target{font-size:13px}
+.lift-call:disabled{opacity:.5;cursor:default}

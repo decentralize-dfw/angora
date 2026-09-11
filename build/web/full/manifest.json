@@ -20,8 +20,8 @@
     {
       "id": "level-0",
       "file": "level-0.glb",
-      "bytes": 2130584,
-      "sha256": "b5faf309c3a26701ea4c9561ba4f84b342ac514e030dceb6c4cfd80432231616",
+      "bytes": 2107016,
+      "sha256": "acc010860571915d1e101e1c76b1d5fa6265400cc3ffb2cca2d7161e37635a4d",
       "source_objects": 1170,
       "exported_mesh_nodes": 1170,
       "shared_meshes": 405,
@@ -240,18 +240,55 @@
   "native_lift_animation": {
     "asset": "level-0.glb",
     "animations": 1,
-    "viewer_playback_integrated": false
+    "viewer_playback_integrated": true,
+    "clip_name": "Animation",
+    "target_node": "R39 lift cabin travel",
+    "duration_s": 46.0,
+    "interpolation": "LINEAR",
+    "stop_windows_s": [
+      [
+        0.0416666679084301,
+        2.0
+      ],
+      [
+        12.0,
+        14.0
+      ],
+      [
+        24.0,
+        26.0
+      ]
+    ],
+    "stop_heights_m": [
+      0.0,
+      3.099600076675415,
+      6.371399879455566
+    ],
+    "cabin_speed_mps": [
+      0.30996,
+      0.32718,
+      0.31857
+    ],
+    "playback": "parked_to_selected_floor; native_clip_on_user_control_in_interior_walk_only",
+    "landing_door_leaf_nodes_per_floor": 17,
+    "landing_door_hinge_xz_m": [
+      -1.53,
+      -1.33
+    ],
+    "landing_door_delivered_angle_deg": -90,
+    "landing_door_closed_angle_deg": 0,
+    "car_panel": "reconstructed on the cabin west wall by tools/fit_lift_panel_r39.mjs; delivered at the world origin"
   },
   "section_caps": "R39 wall and roof atlas; separate soil/wall/roof GLB included for model integration",
   "section_cap_asset": {
     "id": "section-caps",
     "file": "section-caps.glb",
-    "bytes": 86644,
-    "sha256": "eb432e733a69c078038d335078d746ecc393d1e8694d57b8b1bbf0226b2999b2",
+    "bytes": 86464,
+    "sha256": "bcc8abe64ffdafef1cfa43845dc5a0d2e9653cbe214d08478b5c1f2d5674d178",
     "source_objects": 7,
     "exported_mesh_nodes": 7,
     "shared_meshes": 7,
-    "triangles": 3428,
+    "triangles": 3366,
     "bounds_native_m": [
       [
         -11.199999809265137,
