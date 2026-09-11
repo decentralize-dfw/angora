@@ -364,6 +364,37 @@ Bu pakette **modele dokunmadan** yapılan iki ölçüm ve bir kazanç:
 `garden.glb` + `context.glb` için %50 sadeleştirme teslimi ~40 MB'dan ~27 MB'a
 indirir; bu modelin görünümünü değiştirir, o yüzden istenmeden yapılmadı.
 
+## R39 · Kalan 3D işlerin uygulanması — madde madde durum
+
+Kaynak: `KALAN-3D-TASKLER.md` (R39 yüklemesinin SHA256SUMS'ta listeleyip depoya
+koymadığı dosya; bayt-birebir geri kondu). Kritik ön bulgu: **depodaki Blender
+kaynakları R26'da kalmış** — 27 katman dosyasının 12'sinin sha256'sı R39
+manifestosunun kaydettiğinden farklı, `layer-manifest.json` kendini
+`review_revision: 26` ilan ediyor ve son dört commit yalnız `build/web/full`
+taşımış. Bu yüzden bütün model düzeltmeleri teslim GLB'leri üzerinde,
+`tools/` altındaki tekrar çalıştırılabilir adımlarla yapıldı; `.blend`
+düzenlenip yeniden dışa aktarılsaydı R27–R39 sessizce geri alınırdı.
+
+| # | Madde | Durum |
+|---|---|---|
+| 1 | 17 fotoğraf grubunun son kabulü | **Kısmen.** 17 grup ↔ 27 oda eşlemesi ölçüldü; kayıt defteri R39'a taşındı ve kararlar teslim hash'lerine sabitlendi. Envanterden 11 somut çelişki çıktı ve giderildi (aşağıda). f0-B05 mutfağı fotoğraf+plan destekli olarak onaylanan ilk oda. 58 karelik R39 kabul render seti `tools/render_r39.html` ile üretiliyor; renk/kumaş/dekor onayı o karelerle kapanacak. |
+| 2 | 42 çevre yapının doğrulanması | **Kayıt çıkarıldı.** 41 modellenmiş blok ölçüldü (taban, mahya, ayna simetrisi, CAD oturma kalitesi); `site-context.json` ölçülmüş sınırlar + köken alanlarıyla yeniden üretiliyor (`tools/build_site_context.py`). Fotoğraf destekli tek düzeltme uygulandı: B19'un çatısı, ikizi B20'nin yeşil kiremit ailesine geçti. Kalan 39 blokta cephe/çatı/renk yorumu için kaynak yok — kayıtta açıkça öyle yazıyor. |
+| 3 | 10.966 bordür örneği eski kotta | **Yapıldı.** Bordür örgüsü altındaki zemine yeniden projeksiyonlandı (en kötü sapma 2,93 m); yol ve arazi köşeleri bayt-donduruldu, yol içi örneklere dokunulmadı, 0,02 m ölü bant = bir Draco kuantalama adımı. |
+| 4 | Havuz ve arazi ölçüleri | **Kısmen.** DWG havuz geometrisi taşımıyor — 8,00 × 4,00 × 1,42 m fotoğraf yorumu olarak kalıyor ve ölçü etiketi yasak. DWG'nin desteklediği düzeltmeler uygulandı: teras kaplaması sınır duvarının iç yüzünde bitiyor (0,30 m taşma kalktı), doğu istinat duvarının açık kuzey köşesi diyagonal duvarın başlangıç düzlemine kapandı, dört harpuşta fotoğraflardaki gibi döşemeyle hemyüz. Kesin derinlik/parsel kotu saha ölçüsü bekliyor. |
+| 5 | Bitki eşlemesi | **Kısmen.** Envanter çıktı (`build/planting-register.json` — 6 aile, konum/boy/üçgen maliyeti): 3 mükerrer ağaç (ikizinden 0,7 m mesafede) ve yola oturan 1 ağaç silindi; 13 ağaç zemine oturtuldu (en kötüsü 4,06 m havadaydı); bahçedeki ladin+yaprak ağaç zemine indi; cepheden geçen ladin tacı gövdesi etrafında %21 daraltıldı. 20 tepe taşı ölçülen 0,3 mm sapmayla 2 şeklin kopyası çıktı ve paylaştırıldı (~648 bin üçgen). Tür/mevsim kabulü fotoğraf çalışması olarak açık. |
+| 6 | Ek bodrum mutfağı | **Kapandı.** Öncül yanlıştı: mutfak üç fotoğrafla + salon panoramasıyla doğrudan görülüyor ve CAD duvar katmanında tam yerinde 2,600 × 0,600 m niş var (DWG 4,45 m ölçüsü odayı ölçüyor). Mobilya nişe oturtuldu (batı bandı −80 mm; kuzey bandı duvar-buzdolabı arasına; ocak ailesi rijit +327 mm; fırın önündeki kapak çıtaları kaldırıldı; buzdolabı asansör perdesinden 10 mm açığa). 0,650 m modül aralığına açma denendi ve **geri alındı** — eviyeyi tezgâh deliğinden koparıyor; nişin son 0,18 m'si modelde yeniden yazılacak iş olarak açık. |
+| 7 | Oda poligonları, m², ölçüler | **Yapıldı (dürüst sınırlarıyla).** rooms.json 1 ölçüden 53'e: 35 etiketli proje ölçüsü R39 duvar katılarına karşı yeniden doğrulandı (en kötü yüzey artığı 4 mm); R26 reddinin sebebi çözüldü (kesit atlası 30 mm kaplamayı sahiplenmişti). 19 kapalı hacim poligon+alanla yayınlandı: 15 oda kendi m²'sini taşıyor, 12 etiket bölmesiz paylaşılan hacimde olduğunu söylüyor. Türetilmiş alanlar iki açık kimliği %0,3 içinde kapattı (Müştemilat=f0-B02, Depo=f1-Z08) ve yatak odası eşleşmesini ters çevirdi (f2-106↔13,41). f0-B10 kodu plandaki gerçek koduna (B03) düzeltildi. |
+| 8 | Web malzeme kabulü | **Kısmen.** 186 malzeme/165 doku sayısal olarak denetlendi. Cam/ayna aileleri pürüzlülük tabanlarından çıkarıldı; sabit 4×4 haritalar faktörlere katlandı (WebP kayması kökten gitti), tam-düz normal haritalar çözüldü, bayt-özdeş dokular paylaştırıldı — hepsi **birebir-eşdeğer** dönüşümler, piksel-özdeş doğrulandı. T08'in ACES→AgX önerisi **reddedildi**: EDETRI görünümü açık kullanıcı talimatı. Blender yan yana kabulü Blender'sız yapılamaz. |
+| 9 | Kesitlerin web bağlantısı | **Yapıldı** (önceki commit): bodrum kesiti plot zeminini 1,60'ta kesip yazarlı toprak yüzüyle kapatıyor; bahçe bina kesitiyle süpürülüyor; altı duvar/çatı kapağı ölçümle gereksiz çıktı (atlas 0,004 m² içinde aynısını üretiyor) ve bilerek çizilmiyor. |
+| 10 | Asansör animasyonu | **Yapıldı** (önceki commit): 46 sn'lik klip çalıyor — kat görünümünde kabin o kata park ediyor (tek kapı açık), turda çağır/gönder kontrolü gerçek 0,31 m/sn seyri oynatıyor. Orijinde bırakılmış 15 parçalık kabin paneli kabinin batı duvarında yeniden kuruldu. |
+| 11 | Bütün sahne kesişme kapanışı | **Yapıldı.** 6.057 düğüm örneği üzerinde 690 milyon kesin üçgen-üçgen testi koşuldu. 11.097 kesişen çift kural bazlı elemeden sonra 95 gerçek yerleşim hatasına (10 olay) indi; hepsi kapatıldı: radyatörler, sifon kapağı, paspas, duş kabini (çatıya 9 mm giriyordu, tepsisi etrafında %2 ölçeklendi), aralık bodrum kapısı grubu döşeme kotuna kaldırıldı, tavan arası kapı kanadı menteşesi etrafında 1,5° kapalıya döndürüldü. Sıfır-kesişme iddiası hâlâ yok; kalan çakışmalar tasarım gereği çakışık yüzeyler. |
+| 12 | Gerçek cihaz bütçesi | **Kısmen.** Teslim 109,5 → 40,2 → **30,7 MB** (geometri sadeleştirmeden). Yazılım WebGL ölçümleri gerçek telefonu bağlamaz; gerçek cihaz FPS/ısınma ölçümü içerideki QA paneliyle sahada yapılacak iş olarak açık. |
+
+**Ayrıca kapatılan, listede olmayan iki teslim hatası:** garaj seksiyonel kapısı
+bütün fotoğraflara rağmen açık teslim edilmişti — 3,05 m ölçülü boşluğa
+kapatıldı (paneller 0,500 m adımda birleşiyor, 26 mm açık derz kalmıyor); ve
+`section-caps.glb`'nin manifest kaydı diskteki dosyayı tarif etmiyordu.
+
 ## Ek: DWG doğrudan okundu — metrekare orada yok
 
 `ANGORA-.dwg` (AC1021, AutoCAD 2007 binary) bu oturumda **doğrudan okundu**.
