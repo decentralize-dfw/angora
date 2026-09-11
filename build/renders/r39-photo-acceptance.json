@@ -1603,11 +1603,10 @@
    "kat_1_bodrum_wc",
    "kat_2_giris",
    "kat_2_ust_salon",
-   "kat_3_yatak_odalari"
-  ],
-  "render_misaimed": [
+   "kat_3_yatak_odalari",
    "kat_2_giris_wc"
   ],
+  "render_misaimed": [],
   "contradiction": [],
   "authored_difference": [
    "kat_2_garaj"
@@ -1616,8 +1615,9 @@
   "reshoot_frames": [
    "R39-04r",
    "R39-07r",
-   "R39-12s"
+   "R39-12s",
+   "R39-08r"
   ],
-  "r40_note": "kat_3_yatak_odalari R40 yeniden değerlendirmesiyle contradiction -> composition_match: fotoğraflar iki odada farklı karyola gösterir (106 siyah metal, 107 ahşap başlık) ve model aynı dağılımı taşır; ayrıntı build/room-review-register.json içindeki r40_reassessment alanında."
+  "r40_note": "kat_3_yatak_odalari R40 yeniden değerlendirmesiyle contradiction -> composition_match: fotoğraflar iki odada farklı karyola gösterir (106 siyah metal, 107 ahşap başlık) ve model aynı dağılımı taşır; ayrıntı build/room-review-register.json içindeki r40_reassessment alanında. kat_2_giris_wc R40 yeniden çekimiyle (R39-08r, kamera oda poligonu içinden) composition_match; render_misaimed kalmadı."
  }
 }

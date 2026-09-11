@@ -598,6 +598,12 @@
     "verdict": "render_misaimed",
     "notes": "Kadraj boş duvara bakmış; yeniden çekilecek.",
     "render_record": "build/renders/r39-photo-acceptance.json"
+   },
+   "r40_reassessment": {
+    "verdict": "composition_match",
+    "supersedes": "r39_render_review.verdict",
+    "frame": "R39-08r",
+    "notes": "İki R39 denemesi duvara bakmıştı; yürüme istasyonu 1,86 m² odanın dışında kaldığı için kamera bu kez f1-S4 poligonunun içinden (kapı köşesi, 3,25/2,20) konumlandı. Lavabo+ayak, klozet, ayna, havlu halkası ve iki tonlu fayans + mavi mozaik bordür fotoğraflarla örtüşüyor; kompozisyon eşleşmesi."
    }
   },
   {
