@@ -121,7 +121,7 @@ function renderFrame(time) {
     }
     const flying=flight?.update(time);
     caps?.update(clip.constant, clip.constant < fullHeight - 0.001);
-    soilCap?.update(earthClip.constant, earthClip.constant < fullHeight - 0.001);
+    soilCap?.update(earthClip.constant, earthClip.constant < fullHeight - 0.001 && groups.has('context'));
     const changing=walk?.active?walk.update(time,renderer.xr.getSession()):flying?false:controls.update();
     const activeCamera=walk?.active?walk.camera:camera;
     if(!walk?.active)fitDepthRange(camera,controls.target,contextBox);
@@ -345,7 +345,14 @@ async function loadModel() {
     const manifest = await response.json();
     assetRevision=manifest.assets?.map(({file,sha256})=>({file,sha256}));
     if (!manifest.full_scene || manifest.geometry_preclipped || manifest.assets?.length !== 7) throw Error('Whole-scene manifest required');
-    let next = 0, completed = 0;
+    // The villa is complete at a third of the bytes, so it loads and appears
+    // first; the garden and the neighbourhood stream in behind it. The order
+    // inside the first phase reveals the building outside-in.
+    const PHASE_ORDER=['envelope','level-1','level-0','level-2','level-3','garden','context'];
+    const queue=manifest.assets.slice().sort((a,b)=>PHASE_ORDER.indexOf(a.id)-PHASE_ORDER.indexOf(b.id));
+    const villaAssets=queue.filter(a=>!['garden','context'].includes(a.id));
+    const lateAssets=queue.filter(a=>['garden','context'].includes(a.id));
+    let completed = 0;
     const totalBytes = manifest.assets.reduce((sum, asset) => sum + (asset.bytes || 0), 0) + (manifest.section_cap_asset?.bytes || 0);
     const received = new Map();
     const reportProgress = () => {
@@ -353,9 +360,9 @@ async function loadModel() {
       progress(totalBytes ? done / totalBytes : 0);
     };
     progress(0);
-    async function worker() {
-      while (next < manifest.assets.length) {
-        const asset = manifest.assets[next++];
+    async function worker(assets) {
+      while (assets.length) {
+        const asset = assets.shift();
         const url = new URL(asset.file, modelRoot); url.searchParams.set('v', asset.sha256.slice(0, 12));
         // A compressed response reports fewer bytes than the manifest records,
         // so the manifest size stays the denominator and caps each part.
@@ -368,7 +375,7 @@ async function loadModel() {
         staged.set(asset.id, asset.id==='context'?batchContext(splitContextBuildings(splitContextSoil(gltf.scene))):gltf.scene);
         if (gltf.animations?.length) stagedClips.set(asset.id, gltf.animations);
         reportProgress();
-        message(`Bütün model yükleniyor… ${++completed}/${manifest.assets.length}`);
+        if(!ready)message(`Model yükleniyor… ${++completed}/${manifest.assets.length}`);else ++completed;
       }
     }
     // Bound decode concurrency on phones, and settle both workers before cleanup.
@@ -412,10 +419,8 @@ async function loadModel() {
       if(data.source_fittings_sha256!==manifest.library_hashes['build/blender/layers/20-fixed-fittings.blend'])throw Error('Navigation/fittings revision mismatch');
       return data;
     }
-    const results = await Promise.allSettled([worker(), worker(), loadSections(), loadRooms(), loadNavigation(),
-      lighting.loadEnvironment(daylightURL.href).catch(error=>console.warn('HDR unavailable; atmospheric daylight retained',error)), loadCaps()]);
-    const failure = results.find(r => r.status === 'rejected'); if (failure) throw failure.reason;
-    for (const [id, group] of staged) {
+    function stageGroup(id) {
+      const group=staged.get(id);
       groups.set(id, group); scene.add(group);
       group.traverse(o => {
         if (!o.isMesh) return;
@@ -434,20 +439,21 @@ async function loadModel() {
         }
       });
     }
+    const results = await Promise.allSettled([worker(villaAssets), worker(villaAssets), loadSections(), loadRooms(), loadNavigation(),
+      lighting.loadEnvironment(daylightURL.href).catch(error=>console.warn('HDR unavailable; atmospheric daylight retained',error)), loadCaps()]);
+    const failure = results.find(r => r.status === 'rejected'); if (failure) throw failure.reason;
+    for (const id of staged.keys()) stageGroup(id);
     buildingBox = new THREE.Box3();
     for (const id of ['level-0', 'level-1', 'level-2', 'level-3', 'envelope']) buildingBox.union(new THREE.Box3().setFromObject(groups.get(id)));
     // Keep the entrance, pool terrace and basement garden in the building frame.
     gardenBox = new THREE.Box3(new THREE.Vector3(-10.2, -4, -29.1), new THREE.Vector3(12.5, 3.4, 11));
-    contextBox=new THREE.Box3().setFromObject(groups.get('context')).union(buildingBox);
-    // The background is the sky itself now, so the edge fade takes the horizon
-    // colour it used to read off it.
-    prepareContextSurfaces(groups.get('context'),lighting.horizonColour);
-    massing=createContextMassing(groups.get('context'));massing.set(selected,true);
+    contextBox=buildingBox.clone();
     try {
       // Every other model file carries ?v= from its manifest hash, but the site
       // context has no manifest entry, so it is revalidated instead. Without
       // this a returning visitor can pair a new bundle with the layout cached
-      // before the surface repair changed it.
+      // before the surface repair changed it. It also frames the region view
+      // correctly before the context geometry itself has arrived.
       const contextResponse=await fetch(new URL('../site-context.json',modelRoot),{cache:'no-cache'});
       if(!contextResponse.ok)throw Error('Context labels unavailable');
       const contextData=await contextResponse.json();
@@ -482,6 +488,27 @@ async function loadModel() {
     document.querySelectorAll('[data-needs-model]').forEach(b=>b.disabled=false);
     enableImmersiveWalk(renderer,scene,walk,groups,()=>{if(!walk.active)enterWalk();},()=>{resize();invalidate();});
     selectView(selected, true);
+    // The garden and the neighbourhood stream in behind the first frame - the
+    // villa is interactive at a third of the download. Their group setup runs
+    // as each arrives, and the massing fade attaches once the context exists.
+    (async()=>{
+      try {
+        await Promise.all([worker(lateAssets), worker(lateAssets)]);
+        for (const id of ['garden','context']) if (staged.has(id)&&!groups.has(id)) {
+          stageGroup(id);
+          if(id==='context'){
+            contextBox.union(new THREE.Box3().setFromObject(groups.get('context')));
+            prepareContextSurfaces(groups.get('context'),lighting.horizonColour);
+            massing=createContextMassing(groups.get('context'));massing.set(selected,true);
+            lighting.frame(selected,contextBox);
+          }
+          renderer.shadowMap.needsUpdate=true;invalidate();
+        }
+      } catch(error){
+        console.warn('Surroundings failed to load',error);
+        message('Çevre yüklenemedi. Bağlantını kontrol edip tekrar deneyebilirsin.', true);
+      }
+    })();
   } catch (error) {
     for (const group of staged.values()) {scene.remove(group); dispose(group);}
     groups.clear();

@@ -32,10 +32,20 @@ test('Shared context components batch without changing mirrored geometry or UVs'
   mesh.setMatrixAt(0,new THREE.Matrix4().makeTranslation(2,0,0));
   mesh.setMatrixAt(1,new THREE.Matrix4().compose(new THREE.Vector3(-2,0,0),new THREE.Quaternion(),new THREE.Vector3(-1,1,1)));
   const expected=new THREE.Box3().setFromObject(root),batched=batchContext(root),actual=new THREE.Box3().setFromObject(batched);
-  assert.ok(actual.min.equals(expected.min)&&actual.max.equals(expected.max));assert.equal(batched.children.length,1);
-  const out=batched.children[0].geometry;assert.deepEqual([...out.index.array],[0,1,2,3,5,4]);
-  assert.deepEqual([...out.attributes.uv.array],[0,0,1,0,0,1,0,0,1,0,0,1]);
+  assert.ok(actual.min.equals(expected.min)&&actual.max.equals(expected.max));
+  // The two instances straddle the 48 m culling-grid boundary at x=0, so they
+  // batch into one chunk per cell - each with its own bounds for the frustum
+  // culler - rather than one neighbourhood-wide mesh.
+  assert.equal(batched.children.length,2);
+  const flat=batched.children.flatMap(child=>[...child.geometry.index.array]);
+  assert.deepEqual(flat.sort().join(','),'0,0,1,1,2,2','both triangles survive with three vertices each');
+  for(const child of batched.children)
+    assert.deepEqual([...child.geometry.attributes.uv.array],[0,0,1,0,0,1],'UVs pass through unchanged');
+  // the mirrored instance must still render front-facing: both rays hit
   for(const x of [2.2,-2.2])assert.equal(new THREE.Raycaster(new THREE.Vector3(x,3.2,2),new THREE.Vector3(0,0,-1)).intersectObject(batched,true).length,1);
+  // and the mirrored child's winding was actually flipped, not just accepted
+  const mirrored=batched.children.find(child=>new THREE.Box3().setFromObject(child).min.x<-1);
+  assert.deepEqual([...mirrored.geometry.index.array],[0,2,1]);
 });
 
 test('Region framing contains the settlement in portrait and landscape',()=>{

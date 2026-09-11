@@ -1,0 +1,1587 @@
+{
+ "rendered_at": "2026-09-11T13:03:13.384Z",
+ "harness": "tools/render_r39.html",
+ "glb_sha256": {
+  "context.glb": "3f0980a056646daab54c8079cc46fa6f48261827d71dec256bfd7ed78878c842",
+  "envelope.glb": "a9d5d9ff244907e740169f2c641ddcfd34e2edc28955dd609065b3068ba671be",
+  "garden.glb": "223ca0ad6d97882e28f35f955d25ce15322fa9d15bc10f9eae95a036bc72afdb",
+  "level-0.glb": "bbc4d51883427c9b48378850448c1488160502513f2125539cd896ca15561fa5",
+  "level-1.glb": "e872256f68670af23cc7c40240b81732a2fe144bac02dd089cefddc88090a953",
+  "level-2.glb": "a4fa80afe66fa15ac03edc6e5c888bad34f7108f42255519794447cc514f55af",
+  "level-3.glb": "611d217abd99f76df883029043e31d58dbc8134c2a8457da42372fe8c2860e54",
+  "section-caps.glb": "bcc8abe64ffdafef1cfa43845dc5a0d2e9653cbe214d08478b5c1f2d5674d178"
+ },
+ "frames": [
+  {
+   "frame": "R39-01a",
+   "shot": "R39-01 bodrum-salon-fireplace",
+   "rooms": [
+    "f0-B04"
+   ],
+   "pos": [
+    -0.78,
+    1.55,
+    -8.02
+   ],
+   "target": [
+    0.5008937633405084,
+    1.3,
+    -5.113849424576319
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2914266,
+   "ms": 30710
+  },
+  {
+   "frame": "R39-01b",
+   "shot": "R39-01 bodrum-salon-fireplace",
+   "rooms": [
+    "f0-B04"
+   ],
+   "pos": [
+    -0.78,
+    1.55,
+    -8.02
+   ],
+   "target": [
+    1.6200000000000003,
+    1.3,
+    -5.94
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2770834,
+   "ms": 28459
+  },
+  {
+   "frame": "R39-01c",
+   "shot": "R39-01 bodrum-salon-fireplace",
+   "rooms": [
+    "f0-B04"
+   ],
+   "pos": [
+    -0.78,
+    1.55,
+    -8.02
+   ],
+   "target": [
+    2.2787024750312286,
+    1.3,
+    -7.165167168834843
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2467206,
+   "ms": 24694
+  },
+  {
+   "frame": "R39-02",
+   "shot": "R39-02 bodrum-salon-sofa",
+   "rooms": [
+    "f0-B06"
+   ],
+   "pos": [
+    -0.9,
+    1.55,
+    -8.02
+   ],
+   "target": [
+    -4.529,
+    0.546,
+    -5.55
+   ],
+   "vfov_deg": 30,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 1995878,
+   "ms": 17997
+  },
+  {
+   "frame": "R39-03",
+   "shot": "R39-03 bodrum-mutfak",
+   "rooms": [
+    "f0-B05",
+    "f0-B06"
+   ],
+   "pos": [
+    -0.9,
+    1.55,
+    -8.02
+   ],
+   "target": [
+    -4.018,
+    1.302,
+    -1.4340000000000002
+   ],
+   "vfov_deg": 31.7,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2544688,
+   "ms": 26001
+  },
+  {
+   "frame": "R39-04",
+   "shot": "R39-04 bodrum-wc",
+   "rooms": [
+    "f0-B01"
+   ],
+   "pos": [
+    -0.42,
+    1.55,
+    -5.38
+   ],
+   "target": [
+    -0.10899999999999999,
+    0.927,
+    -1.4619999999999997
+   ],
+   "vfov_deg": 31.3,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 1933848,
+   "ms": 17508
+  },
+  {
+   "frame": "R39-06",
+   "shot": "R39-06 lift-landing-f1",
+   "rooms": [
+    "f1-Z05"
+   ],
+   "pos": [
+    -5.34,
+    4.65,
+    -3.1
+   ],
+   "target": [
+    -2.075,
+    4.202,
+    -1.725
+   ],
+   "vfov_deg": 47.4,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2959962,
+   "ms": 39921
+  },
+  {
+   "frame": "R39-07",
+   "shot": "R39-07 giris-antre",
+   "rooms": [
+    "f1-Z02",
+    "f1-Z01"
+   ],
+   "pos": [
+    0.06,
+    4.65,
+    -3.22
+   ],
+   "target": [
+    2.812,
+    4.505,
+    2.7150000000000003
+   ],
+   "vfov_deg": 34.8,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 1991136,
+   "ms": 24032
+  },
+  {
+   "frame": "R39-08",
+   "shot": "R39-08 giris-wc",
+   "rooms": [
+    "f1-Z03"
+   ],
+   "pos": [
+    1.02,
+    4.65,
+    1.58
+   ],
+   "target": [
+    3.708,
+    3.986,
+    1.282
+   ],
+   "vfov_deg": 42.2,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2068718,
+   "ms": 27390
+  },
+  {
+   "frame": "R39-09",
+   "shot": "R39-09 ust-mutfak-sink",
+   "rooms": [
+    "f1-Z04"
+   ],
+   "pos": [
+    0.78,
+    4.65,
+    4.7
+   ],
+   "target": [
+    -5.199,
+    4.317,
+    1.8600000000000003
+   ],
+   "vfov_deg": 30,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 1925184,
+   "ms": 22588
+  },
+  {
+   "frame": "R39-10a",
+   "shot": "R39-10 ust-mutfak-vitrine",
+   "rooms": [
+    "f1-Z04"
+   ],
+   "pos": [
+    0.78,
+    4.65,
+    4.7
+   ],
+   "target": [
+    0.6350207293724579,
+    4.333,
+    0.8380396155464895
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 4905536,
+   "ms": 54704
+  },
+  {
+   "frame": "R39-10b",
+   "shot": "R39-10 ust-mutfak-vitrine",
+   "rooms": [
+    "f1-Z04"
+   ],
+   "pos": [
+    0.78,
+    4.65,
+    4.7
+   ],
+   "target": [
+    -1.4283883351608158,
+    4.333,
+    1.5284423446631714
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 4294442,
+   "ms": 45735
+  },
+  {
+   "frame": "R39-10c",
+   "shot": "R39-10 ust-mutfak-vitrine",
+   "rooms": [
+    "f1-Z04"
+   ],
+   "pos": [
+    0.78,
+    4.65,
+    4.7
+   ],
+   "target": [
+    -2.7943563033666514,
+    4.333,
+    3.230396646512031
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2567936,
+   "ms": 26437
+  },
+  {
+   "frame": "R39-10d",
+   "shot": "R39-10 ust-mutfak-vitrine",
+   "rooms": [
+    "f1-Z04"
+   ],
+   "pos": [
+    0.78,
+    4.65,
+    4.7
+   ],
+   "target": [
+    -3.021798354460582,
+    4.333,
+    5.394324327689021
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 1783500,
+   "ms": 17079
+  },
+  {
+   "frame": "R39-11",
+   "shot": "R39-11 ust-mutfak-hob",
+   "rooms": [
+    "f1-Z04"
+   ],
+   "pos": [
+    0.78,
+    4.65,
+    4.7
+   ],
+   "target": [
+    -3.9269999999999996,
+    4.351,
+    1.2199999999999998
+   ],
+   "vfov_deg": 40.4,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 3460946,
+   "ms": 31362
+  },
+  {
+   "frame": "R39-12a",
+   "shot": "R39-12 ust-salon-west",
+   "rooms": [
+    "f1-Z06"
+   ],
+   "pos": [
+    3.66,
+    4.57,
+    -5.02
+   ],
+   "target": [
+    1.175293299213088,
+    4.315,
+    -9.031185935738286
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2103102,
+   "ms": 23600
+  },
+  {
+   "frame": "R39-12b",
+   "shot": "R39-12 ust-salon-west",
+   "rooms": [
+    "f1-Z06"
+   ],
+   "pos": [
+    3.66,
+    4.57,
+    -5.02
+   ],
+   "target": [
+    -0.976,
+    4.315,
+    -5.898
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 3945616,
+   "ms": 19994
+  },
+  {
+   "frame": "R39-12c",
+   "shot": "R39-12 ust-salon-west",
+   "rooms": [
+    "f1-Z06"
+   ],
+   "pos": [
+    3.66,
+    4.57,
+    -5.02
+   ],
+   "target": [
+    -0.11936570422548964,
+    4.315,
+    -2.195150468834814
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 3643890,
+   "ms": 24559
+  },
+  {
+   "frame": "R39-13",
+   "shot": "R39-13 ust-salon-nook",
+   "rooms": [
+    "f1-Z05"
+   ],
+   "pos": [
+    -0.06,
+    4.65,
+    -3.22
+   ],
+   "target": [
+    -4.016,
+    4.303,
+    -1.692
+   ],
+   "vfov_deg": 48.5,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2159964,
+   "ms": 14661
+  },
+  {
+   "frame": "R39-14a",
+   "shot": "R39-14 garaj",
+   "rooms": [
+    "f1-Z07"
+   ],
+   "pos": [
+    7.02,
+    4.65,
+    1.1
+   ],
+   "target": [
+    8.60330661489999,
+    4.389,
+    -1.5598122420979137
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 753504,
+   "ms": 9343
+  },
+  {
+   "frame": "R39-14b",
+   "shot": "R39-14 garaj",
+   "rooms": [
+    "f1-Z07"
+   ],
+   "pos": [
+    7.02,
+    4.65,
+    1.1
+   ],
+   "target": [
+    6.872248187750635,
+    4.389,
+    -1.9918651978986772
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2762410,
+   "ms": 18389
+  },
+  {
+   "frame": "R39-14c",
+   "shot": "R39-14 garaj",
+   "rooms": [
+    "f1-Z07"
+   ],
+   "pos": [
+    7.02,
+    4.65,
+    1.1
+   ],
+   "target": [
+    5.194637472868017,
+    4.389,
+    -1.3999025270082712
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 4832180,
+   "ms": 29633
+  },
+  {
+   "frame": "R39-14d",
+   "shot": "R39-14 garaj",
+   "rooms": [
+    "f1-Z07"
+   ],
+   "pos": [
+    7.02,
+    4.65,
+    1.1
+   ],
+   "target": [
+    4.1180674041610015,
+    4.389,
+    0.02285181650474377
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 5540696,
+   "ms": 32579
+  },
+  {
+   "frame": "R39-15a",
+   "shot": "R39-15 hol-gallery",
+   "rooms": [
+    "f2-101"
+   ],
+   "pos": [
+    -2.46,
+    7.921,
+    -3.58
+   ],
+   "target": [
+    -1.7049267388665583,
+    6.701,
+    0.1132626998795132
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2459104,
+   "ms": 20879
+  },
+  {
+   "frame": "R39-15b",
+   "shot": "R39-15 hol-gallery",
+   "rooms": [
+    "f2-101"
+   ],
+   "pos": [
+    -2.46,
+    7.921,
+    -3.58
+   ],
+   "target": [
+    0.22199999999999998,
+    6.701,
+    -0.931
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2584034,
+   "ms": 20722
+  },
+  {
+   "frame": "R39-15c",
+   "shot": "R39-15 hol-gallery",
+   "rooms": [
+    "f2-101"
+   ],
+   "pos": [
+    -2.46,
+    7.921,
+    -3.58
+   ],
+   "target": [
+    1.242327432054056,
+    6.701,
+    -2.8707069816641217
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2755740,
+   "ms": 22569
+  },
+  {
+   "frame": "R39-16a",
+   "shot": "R39-16 hol-sitting",
+   "rooms": [
+    "f2-105"
+   ],
+   "pos": [
+    -5.7,
+    7.921,
+    -3.1
+   ],
+   "target": [
+    -4.883010674308929,
+    7.451,
+    -0.9333485647878543
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2463628,
+   "ms": 21002
+  },
+  {
+   "frame": "R39-16b",
+   "shot": "R39-16 hol-sitting",
+   "rooms": [
+    "f2-105"
+   ],
+   "pos": [
+    -5.7,
+    7.921,
+    -3.1
+   ],
+   "target": [
+    -3.735,
+    7.451,
+    -1.875
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 3304634,
+   "ms": 26897
+  },
+  {
+   "frame": "R39-16c",
+   "shot": "R39-16 hol-sitting",
+   "rooms": [
+    "f2-105"
+   ],
+   "pos": [
+    -5.7,
+    7.921,
+    -3.1
+   ],
+   "target": [
+    -3.394939866986877,
+    7.451,
+    -3.3203356149003715
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 3753260,
+   "ms": 27688
+  },
+  {
+   "frame": "R39-17a",
+   "shot": "R39-17 master-bedroom",
+   "rooms": [
+    "f2-102"
+   ],
+   "pos": [
+    -4.74,
+    7.921,
+    -4.3
+   ],
+   "target": [
+    -1.7539989317533302,
+    7.651,
+    -4.859134706872814
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 3045004,
+   "ms": 21966
+  },
+  {
+   "frame": "R39-17b",
+   "shot": "R39-17 master-bedroom",
+   "rooms": [
+    "f2-102"
+   ],
+   "pos": [
+    -4.74,
+    7.921,
+    -4.3
+   ],
+   "target": [
+    -2.295,
+    7.651,
+    -6.103
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2510704,
+   "ms": 18336
+  },
+  {
+   "frame": "R39-17c",
+   "shot": "R39-17 master-bedroom",
+   "rooms": [
+    "f2-102"
+   ],
+   "pos": [
+    -4.74,
+    7.921,
+    -4.3
+   ],
+   "target": [
+    -3.3234422760899434,
+    7.651,
+    -6.987414782803496
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2253240,
+   "ms": 15385
+  },
+  {
+   "frame": "R39-18a",
+   "shot": "R39-18 master-dressing",
+   "rooms": [
+    "f2-103"
+   ],
+   "pos": [
+    0.66,
+    7.921,
+    -6.34
+   ],
+   "target": [
+    2.2523907782642767,
+    7.546,
+    -4.212326949623394
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2532700,
+   "ms": 23813
+  },
+  {
+   "frame": "R39-18b",
+   "shot": "R39-18 master-dressing",
+   "rooms": [
+    "f2-103"
+   ],
+   "pos": [
+    0.66,
+    7.921,
+    -6.34
+   ],
+   "target": [
+    3.0529037119660676,
+    7.546,
+    -5.183837024784562
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2227098,
+   "ms": 18657
+  },
+  {
+   "frame": "R39-19a",
+   "shot": "R39-19 master-bathroom",
+   "rooms": [
+    "f2-104"
+   ],
+   "pos": [
+    2.82,
+    7.921,
+    -6.34
+   ],
+   "target": [
+    3.059792211794596,
+    7.527,
+    -8.126895546796918
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 1724030,
+   "ms": 8094
+  },
+  {
+   "frame": "R39-19b",
+   "shot": "R39-19 master-bathroom",
+   "rooms": [
+    "f2-104"
+   ],
+   "pos": [
+    2.82,
+    7.921,
+    -6.34
+   ],
+   "target": [
+    1.684,
+    7.527,
+    -7.74
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 1884028,
+   "ms": 13057
+  },
+  {
+   "frame": "R39-19c",
+   "shot": "R39-19 master-bathroom",
+   "rooms": [
+    "f2-104"
+   ],
+   "pos": [
+    2.82,
+    7.921,
+    -6.34
+   ],
+   "target": [
+    1.0220284903544055,
+    7.527,
+    -6.473395841399736
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 3302586,
+   "ms": 20266
+  },
+  {
+   "frame": "R39-20a",
+   "shot": "R39-20 bedroom-106",
+   "rooms": [
+    "f2-106"
+   ],
+   "pos": [
+    -4.5,
+    7.921,
+    0.26
+   ],
+   "target": [
+    -3.2168468645346615,
+    7.673,
+    2.9194826622757795
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2147882,
+   "ms": 16952
+  },
+  {
+   "frame": "R39-20b",
+   "shot": "R39-20 bedroom-106",
+   "rooms": [
+    "f2-106"
+   ],
+   "pos": [
+    -4.5,
+    7.921,
+    0.26
+   ],
+   "target": [
+    -2.349,
+    7.673,
+    2.2829999999999995
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2333560,
+   "ms": 19287
+  },
+  {
+   "frame": "R39-20c",
+   "shot": "R39-20 bedroom-106",
+   "rooms": [
+    "f2-106"
+   ],
+   "pos": [
+    -4.5,
+    7.921,
+    0.26
+   ],
+   "target": [
+    -1.7668901406743767,
+    7.673,
+    1.377783743331898
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2635858,
+   "ms": 23487
+  },
+  {
+   "frame": "R39-21a",
+   "shot": "R39-21 bedroom-107",
+   "rooms": [
+    "f2-107"
+   ],
+   "pos": [
+    1.26,
+    7.921,
+    0.74
+   ],
+   "target": [
+    -1.3670181975043707,
+    7.546,
+    2.0052890539243933
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2130046,
+   "ms": 16349
+  },
+  {
+   "frame": "R39-21b",
+   "shot": "R39-21 bedroom-107",
+   "rooms": [
+    "f2-107"
+   ],
+   "pos": [
+    1.26,
+    7.921,
+    0.74
+   ],
+   "target": [
+    -0.3739999999999999,
+    7.546,
+    3.1550000000000002
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 1962760,
+   "ms": 16202
+  },
+  {
+   "frame": "R39-21c",
+   "shot": "R39-21 bedroom-107",
+   "rooms": [
+    "f2-107"
+   ],
+   "pos": [
+    1.26,
+    7.921,
+    0.74
+   ],
+   "target": [
+    1.062568144719664,
+    7.546,
+    3.6491582395120012
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 1838036,
+   "ms": 14124
+  },
+  {
+   "frame": "R39-22a",
+   "shot": "R39-22 shared-bathroom",
+   "rooms": [
+    "f2-108"
+   ],
+   "pos": [
+    1.38,
+    7.921,
+    0.74
+   ],
+   "target": [
+    1.3055428745845667,
+    7.481,
+    2.9785068989116095
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 1838500,
+   "ms": 15969
+  },
+  {
+   "frame": "R39-22b",
+   "shot": "R39-22 shared-bathroom",
+   "rooms": [
+    "f2-108"
+   ],
+   "pos": [
+    1.38,
+    7.921,
+    0.74
+   ],
+   "target": [
+    2.991,
+    7.481,
+    2.296
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 1861688,
+   "ms": 15686
+  },
+  {
+   "frame": "R39-22c",
+   "shot": "R39-22 shared-bathroom",
+   "rooms": [
+    "f2-108"
+   ],
+   "pos": [
+    1.38,
+    7.921,
+    0.74
+   ],
+   "target": [
+    3.614571691700684,
+    7.481,
+    0.5878607392881734
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2143846,
+   "ms": 14727
+  },
+  {
+   "frame": "R39-23a",
+   "shot": "R39-23 attic-lounge",
+   "rooms": [
+    "f3-C05"
+   ],
+   "pos": [
+    -5.94,
+    11.02,
+    -1.66
+   ],
+   "target": [
+    -3.801654738844679,
+    10.117,
+    -1.5143821985656263
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 3957556,
+   "ms": 29847
+  },
+  {
+   "frame": "R39-23b",
+   "shot": "R39-23 attic-lounge",
+   "rooms": [
+    "f3-C05"
+   ],
+   "pos": [
+    -5.94,
+    11.02,
+    -1.66
+   ],
+   "target": [
+    -4.074647232701905,
+    10.117,
+    -2.7155491715374227
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 4168752,
+   "ms": 33341
+  },
+  {
+   "frame": "R39-24",
+   "shot": "R39-24 attic-bedroom-C02",
+   "rooms": [
+    "f3-C02"
+   ],
+   "pos": [
+    1.38,
+    11.02,
+    -4.06
+   ],
+   "target": [
+    -2.163,
+    10.459,
+    -6.714
+   ],
+   "vfov_deg": 49,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2121438,
+   "ms": 15794
+  },
+  {
+   "frame": "R39-25a",
+   "shot": "R39-25 attic-bedroom-C04",
+   "rooms": [
+    "f3-C04"
+   ],
+   "pos": [
+    1.38,
+    11.02,
+    -0.7
+   ],
+   "target": [
+    -1.3536925107151045,
+    10.215,
+    1.4892713986301807
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2122800,
+   "ms": 16603
+  },
+  {
+   "frame": "R39-25b",
+   "shot": "R39-25 attic-bedroom-C04",
+   "rooms": [
+    "f3-C04"
+   ],
+   "pos": [
+    1.38,
+    11.02,
+    -0.7
+   ],
+   "target": [
+    0.5736709636712625,
+    10.215,
+    2.7081985689177754
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 1969900,
+   "ms": 14683
+  },
+  {
+   "frame": "R39-26a",
+   "shot": "R39-26 attic-bathroom",
+   "rooms": [
+    "f3-C03"
+   ],
+   "pos": [
+    1.38,
+    11.02,
+    -5.62
+   ],
+   "target": [
+    1.8027054293456886,
+    10.458,
+    -6.761545058244166
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 1757918,
+   "ms": 9819
+  },
+  {
+   "frame": "R39-26b",
+   "shot": "R39-26 attic-bathroom",
+   "rooms": [
+    "f3-C03"
+   ],
+   "pos": [
+    1.38,
+    11.02,
+    -5.62
+   ],
+   "target": [
+    1.1273094823144523,
+    10.458,
+    -6.8107781079075185
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 1853188,
+   "ms": 13283
+  },
+  {
+   "frame": "R39-26c",
+   "shot": "R39-26 attic-bathroom",
+   "rooms": [
+    "f3-C03"
+   ],
+   "pos": [
+    1.38,
+    11.02,
+    -5.62
+   ],
+   "target": [
+    0.531637607020945,
+    10.458,
+    -6.4929755152229935
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2222208,
+   "ms": 18278
+  },
+  {
+   "frame": "R39-26d",
+   "shot": "R39-26 attic-bathroom",
+   "rooms": [
+    "f3-C03"
+   ],
+   "pos": [
+    1.38,
+    11.02,
+    -5.62
+   ],
+   "target": [
+    0.19643513095484244,
+    10.458,
+    -5.904568446532849
+   ],
+   "vfov_deg": 49.6,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "triangles": 2994326,
+   "ms": 22852
+  },
+  {
+   "frame": "R39-27",
+   "shot": "R39-27 exterior-front",
+   "rooms": [
+    "exterior"
+   ],
+   "pos": [
+    2,
+    5.2,
+    21
+   ],
+   "target": [
+    0.8,
+    4.6,
+    0
+   ],
+   "vfov_deg": 34,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope",
+    "garden"
+   ],
+   "triangles": 9476232,
+   "ms": 42900
+  },
+  {
+   "frame": "R39-28",
+   "shot": "R39-28 exterior-pool",
+   "rooms": [
+    "exterior"
+   ],
+   "pos": [
+    14,
+    6.5,
+    -24
+   ],
+   "target": [
+    0,
+    3.2,
+    -11
+   ],
+   "vfov_deg": 40,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope",
+    "garden"
+   ],
+   "triangles": 9415752,
+   "ms": 39474
+  },
+  {
+   "frame": "R39-29",
+   "shot": "R39-29 exterior-entry",
+   "rooms": [
+    "exterior"
+   ],
+   "pos": [
+    13,
+    6,
+    13
+   ],
+   "target": [
+    3.5,
+    4.2,
+    1.5
+   ],
+   "vfov_deg": 44,
+   "assets": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope",
+    "garden"
+   ],
+   "triangles": 9465496,
+   "ms": 41897
+  }
+ ]
+}
