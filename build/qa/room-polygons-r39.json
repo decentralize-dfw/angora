@@ -3,18 +3,19 @@
  "source": "T07a room polygon derivation (tools/derive_room_polygons.py)",
  "defects": [
   {
-   "defect": "attic east wall/roof open slot",
+   "defect": "attic dormer ridge air channel (was: east wall/roof open slot)",
    "asset": "build/web/full/level-3.glb + sections.json",
    "bbox_xz": [
     1.94,
-    4.08,
+    4.05,
     -2.11,
     -1.88
    ],
    "width_m": 0.23,
    "length_m": 2.14,
-   "area_m2": 0.491,
-   "effect": "space f3-S1 escapes the building envelope at datum+1.0; excluded by the 0.24 m appendage rule"
+   "area_m2": 0.485,
+   "effect": "sub-0.24 m interior air channel under the dormer ridge; excluded by the 0.24 m appendage rule",
+   "status_r40": "repaired in sections.json: the east gable wall and roof-edge cross-sections the atlas pairing had dropped (tools/export_attic_window_tris_r40.mjs + tools/repair_attic_atlas_r40.py, 1.83 m2 over 14 band slices from the delivered level-3.glb) now close the envelope, so the space no longer escapes; level-3.glb itself was verified closed all along (roof underside 10.85 m over the channel, gable wall complete at datum+1.0). What remains is the true air channel under the dormer ridge, narrower than 0.24 m, still excluded from the room polygon by the appendage rule."
   },
   {
    "discrepancy": "attic bedrooms",

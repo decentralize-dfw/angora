@@ -311,8 +311,8 @@
   },
   "section_atlas": {
     "file": "sections.json",
-    "bytes": 1949020,
-    "sha256": "6992047ab513f280ae5cd4c825a60dcf10668fa1b675ead034de5f28245c93d0"
+    "bytes": 1957410,
+    "sha256": "ca6997dcd567698bef76f46799c3ad132bbbcca0e3a9c63bcce7f60109bdb259"
   },
   "room_annotations": {
     "file": "rooms.json",

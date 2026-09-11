@@ -4,7 +4,7 @@
  "model_revision": "R39",
  "source": {
   "sections.json": "R40",
-  "atlas_sha256": "6992047ab513f280ae5cd4c825a60dcf10668fa1b675ead034de5f28245c93d0"
+  "atlas_sha256": "ca6997dcd567698bef76f46799c3ad132bbbcca0e3a9c63bcce7f60109bdb259"
  },
  "spaces": [
   {
@@ -1082,10 +1082,10 @@
    "max_snap_residual_m": 0.012,
    "excluded_appendages": [
     {
-     "area_m2": 0.491,
+     "area_m2": 0.485,
      "bbox_xz": [
       1.94,
-      4.08,
+      4.05,
       -2.11,
       -1.88
      ]
