@@ -110,5 +110,15 @@ atlas['object_caps'] = {
     'excluded': 'walls (already in p/i), floor and ceiling slabs, glazing and mirrors',
 }
 (FULL/'sections.json').write_text(json.dumps(atlas, separators=(',', ':')))
+# The atlas is fingerprinted in the manifest, and the viewer cache-busts on
+# that fingerprint. Rewriting the file without the manifest left the two
+# disagreeing, which the delivery sync catches and a browser would not.
+import hashlib
+manifest_path = FULL/'manifest.json'
+manifest = json.loads(manifest_path.read_text())
+manifest['section_atlas'] = {'file': 'sections.json',
+                             'bytes': (FULL/'sections.json').stat().st_size,
+                             'sha256': hashlib.sha256((FULL/'sections.json').read_bytes()).hexdigest()}
+manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2))
 print('fixed caps', totals['fixed'], 'furniture caps', totals['furniture'])
 print('sections.json now', (FULL/'sections.json').stat().st_size, 'bytes')

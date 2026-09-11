@@ -1,0 +1,391 @@
+{
+  "generated_for": "R41",
+  "default_swing_deg": 78,
+  "doors": [
+    {
+      "id": "f0-D01",
+      "level": 0,
+      "floor_y": 0,
+      "sill_y": 0,
+      "frame_centre": [
+        -0.2071,
+        -2.0395
+      ],
+      "frame_yaw_deg": 0,
+      "frame_width": 0.7001,
+      "wall_depth": 0.24,
+      "frame_height": 2.1,
+      "hinge": [
+        0.143,
+        -2.0395
+      ],
+      "latch": [
+        -0.5571,
+        -2.0395
+      ],
+      "clear_width": 0.705,
+      "swing_deg": 83.5,
+      "swing_source": "delivered leaf",
+      "open_normal": [
+        0,
+        1
+      ],
+      "open_normal_source": "delivered leaf",
+      "leaf_width": 0.8194,
+      "leaf_height": 2
+    },
+    {
+      "id": "f1-D02",
+      "level": 1,
+      "floor_y": 3.0996,
+      "sill_y": 3.0997,
+      "frame_centre": [
+        4.8684,
+        -4.8522
+      ],
+      "frame_yaw_deg": 0,
+      "frame_width": 0.9003,
+      "wall_depth": 0.1601,
+      "frame_height": 2.1,
+      "hinge": [
+        4.4182,
+        -4.8522
+      ],
+      "latch": [
+        5.3185,
+        -4.8522
+      ],
+      "clear_width": 0.905,
+      "swing_deg": 67.5,
+      "swing_source": "delivered leaf",
+      "open_normal": [
+        0,
+        -1
+      ],
+      "open_normal_source": "delivered leaf",
+      "leaf_width": 0.8204,
+      "leaf_height": 2
+    },
+    {
+      "id": "f1-D03",
+      "level": 1,
+      "floor_y": 3.0996,
+      "sill_y": 3.0997,
+      "frame_centre": [
+        3.0034,
+        -0.1272
+      ],
+      "frame_yaw_deg": 90,
+      "frame_width": 0.8998,
+      "wall_depth": 0.1298,
+      "frame_height": 2.1,
+      "hinge": [
+        3.0034,
+        -0.5771
+      ],
+      "latch": [
+        3.0034,
+        0.3227
+      ],
+      "clear_width": 0.9,
+      "swing_deg": 82,
+      "swing_source": "delivered leaf",
+      "open_normal": [
+        1,
+        0
+      ],
+      "open_normal_source": "delivered leaf",
+      "leaf_width": 0.8205,
+      "leaf_height": 2
+    },
+    {
+      "id": "f1-D04",
+      "level": 1,
+      "floor_y": 3.0996,
+      "sill_y": 3.0997,
+      "frame_centre": [
+        3.0215,
+        2.1753
+      ],
+      "frame_yaw_deg": 45,
+      "frame_width": 0.7002,
+      "wall_depth": 0.1603,
+      "frame_height": 2.1,
+      "hinge": [
+        2.7739,
+        1.9277
+      ],
+      "latch": [
+        3.269,
+        2.4229
+      ],
+      "clear_width": 0.605,
+      "swing_deg": 83.5,
+      "swing_source": "delivered leaf",
+      "open_normal": [
+        0.707107,
+        -0.707107
+      ],
+      "open_normal_source": "delivered leaf",
+      "leaf_width": 0.8193,
+      "leaf_height": 2
+    },
+    {
+      "id": "f2-D05",
+      "level": 2,
+      "floor_y": 6.3714,
+      "sill_y": 6.3716,
+      "frame_centre": [
+        -0.3819,
+        -3.2305
+      ],
+      "frame_yaw_deg": 0,
+      "frame_width": 0.9007,
+      "wall_depth": 0.2062,
+      "frame_height": 2.1001,
+      "hinge": [
+        -0.8322,
+        -3.2305
+      ],
+      "latch": [
+        0.0685,
+        -3.2305
+      ],
+      "clear_width": 0.905,
+      "swing_deg": 67.5,
+      "swing_source": "delivered leaf",
+      "open_normal": [
+        0,
+        -1
+      ],
+      "open_normal_source": "delivered leaf",
+      "leaf_width": 0.8208,
+      "leaf_height": 1.9999
+    },
+    {
+      "id": "f2-D06",
+      "level": 2,
+      "floor_y": 6.3714,
+      "sill_y": 6.3716,
+      "frame_centre": [
+        -1.0816,
+        0.9733
+      ],
+      "frame_yaw_deg": 90,
+      "frame_width": 0.9003,
+      "wall_depth": 0.26,
+      "frame_height": 2.1001,
+      "hinge": [
+        -1.0816,
+        0.5231
+      ],
+      "latch": [
+        -1.0816,
+        1.4234
+      ],
+      "clear_width": 0.905,
+      "swing_deg": 78,
+      "swing_source": "house default",
+      "open_normal": [
+        -1,
+        0
+      ],
+      "open_normal_source": "clearer side of the opening",
+      "leaf_width": null,
+      "leaf_height": null
+    },
+    {
+      "id": "f2-D07",
+      "level": 2,
+      "floor_y": 6.3714,
+      "sill_y": 6.3716,
+      "frame_centre": [
+        0.5186,
+        1.5727
+      ],
+      "frame_yaw_deg": 0,
+      "frame_width": 0.9003,
+      "wall_depth": 0.16,
+      "frame_height": 2.1001,
+      "hinge": [
+        0.0685,
+        1.5727
+      ],
+      "latch": [
+        0.9687,
+        1.5727
+      ],
+      "clear_width": 0.905,
+      "swing_deg": 78,
+      "swing_source": "house default",
+      "open_normal": [
+        0,
+        1
+      ],
+      "open_normal_source": "clearer side of the opening",
+      "leaf_width": null,
+      "leaf_height": null
+    },
+    {
+      "id": "f2-D08",
+      "level": 2,
+      "floor_y": 6.3714,
+      "sill_y": 6.3716,
+      "frame_centre": [
+        1.822,
+        1.0233
+      ],
+      "frame_yaw_deg": 90,
+      "frame_width": 0.9003,
+      "wall_depth": 0.1524,
+      "frame_height": 2.1001,
+      "hinge": [
+        1.822,
+        0.5732
+      ],
+      "latch": [
+        1.822,
+        1.4734
+      ],
+      "clear_width": 0.905,
+      "swing_deg": 86.5,
+      "swing_source": "delivered leaf",
+      "open_normal": [
+        1,
+        0
+      ],
+      "open_normal_source": "delivered leaf",
+      "leaf_width": 0.8207,
+      "leaf_height": 1.9999
+    },
+    {
+      "id": "f2-D09",
+      "level": 2,
+      "floor_y": 6.3714,
+      "sill_y": 6.3716,
+      "frame_centre": [
+        1.7685,
+        -6.0273
+      ],
+      "frame_yaw_deg": 0,
+      "frame_width": 0.8002,
+      "wall_depth": 0.1,
+      "frame_height": 2.1001,
+      "hinge": [
+        1.3684,
+        -6.0273
+      ],
+      "latch": [
+        2.1686,
+        -6.0273
+      ],
+      "clear_width": 0.805,
+      "swing_deg": 70,
+      "swing_source": "delivered leaf",
+      "open_normal": [
+        0,
+        -1
+      ],
+      "open_normal_source": "delivered leaf",
+      "leaf_width": 0.8112,
+      "leaf_height": 1.9999
+    },
+    {
+      "id": "f3-D10",
+      "level": 3,
+      "floor_y": 9.4705,
+      "sill_y": 9.4705,
+      "frame_centre": [
+        0.2433,
+        -0.3773
+      ],
+      "frame_yaw_deg": 0,
+      "frame_width": 0.9006,
+      "wall_depth": 0.2601,
+      "frame_height": 2.1002,
+      "hinge": [
+        0.6936,
+        -0.3773
+      ],
+      "latch": [
+        -0.207,
+        -0.3773
+      ],
+      "clear_width": 0.905,
+      "swing_deg": 67.5,
+      "swing_source": "delivered leaf",
+      "open_normal": [
+        0,
+        1
+      ],
+      "open_normal_source": "delivered leaf",
+      "leaf_width": 0.8206,
+      "leaf_height": 2
+    },
+    {
+      "id": "f3-D11",
+      "level": 3,
+      "floor_y": 9.4705,
+      "sill_y": 9.4705,
+      "frame_centre": [
+        -0.2753,
+        -4.6272
+      ],
+      "frame_yaw_deg": 90,
+      "frame_width": 0.9,
+      "wall_depth": 0.1001,
+      "frame_height": 2.0999,
+      "hinge": [
+        -0.2753,
+        -4.1772
+      ],
+      "latch": [
+        -0.2753,
+        -5.0772
+      ],
+      "clear_width": null,
+      "swing_deg": 67.5,
+      "swing_source": "delivered leaf",
+      "open_normal": [
+        -1,
+        0
+      ],
+      "open_normal_source": "delivered leaf",
+      "leaf_width": 0.8204,
+      "leaf_height": 2
+    },
+    {
+      "id": "f3-D12",
+      "level": 3,
+      "floor_y": 9.4705,
+      "sill_y": 9.4705,
+      "frame_centre": [
+        0.4481,
+        -5.2273
+      ],
+      "frame_yaw_deg": 0,
+      "frame_width": 0.7999,
+      "wall_depth": 0.16,
+      "frame_height": 2.0999,
+      "hinge": [
+        0.0481,
+        -5.2273
+      ],
+      "latch": [
+        0.848,
+        -5.2273
+      ],
+      "clear_width": 0.805,
+      "swing_deg": 80,
+      "swing_source": "delivered leaf",
+      "open_normal": [
+        0,
+        -1
+      ],
+      "open_normal_source": "delivered leaf",
+      "leaf_width": 0.8111,
+      "leaf_height": 2
+    }
+  ],
+  "total": 12
+}

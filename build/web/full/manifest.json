@@ -20,8 +20,8 @@
     {
       "id": "level-0",
       "file": "level-0.glb",
-      "bytes": 1897632,
-      "sha256": "9b81da94fe49dba19667a8b585de46de8f94abc5be03e94d343678f57e4d7833",
+      "bytes": 1951740,
+      "sha256": "954880c6b5afd48bbfcb3add8d5de06c92cba4fa58a742031dd626c3828d13ef",
       "source_objects": 1171,
       "exported_mesh_nodes": 1171,
       "shared_meshes": 405,
@@ -49,8 +49,8 @@
     {
       "id": "level-1",
       "file": "level-1.glb",
-      "bytes": 5666556,
-      "sha256": "b0f13060691c875449839a9f8b203c47e4ca1bfe2fee9b5469dce3d44b7fb93e",
+      "bytes": 5830700,
+      "sha256": "5f9791603d4dfcaafce24764b467195c6fa23238643825d437f9e67bef40d50b",
       "source_objects": 1023,
       "exported_mesh_nodes": 1023,
       "shared_meshes": 835,
@@ -78,8 +78,8 @@
     {
       "id": "level-2",
       "file": "level-2.glb",
-      "bytes": 3070676,
-      "sha256": "c88920a1d7c5e7192fb70a46b413515c425a867c512f32fbc162d72ae418a195",
+      "bytes": 3379924,
+      "sha256": "637d75179483e00860757df1e2dd9ec64be4ab08d68333593d3edddafff6a1ba",
       "source_objects": 639,
       "exported_mesh_nodes": 639,
       "shared_meshes": 426,
@@ -107,8 +107,8 @@
     {
       "id": "level-3",
       "file": "level-3.glb",
-      "bytes": 1291860,
-      "sha256": "20ae198af5bba581091dcb7b083e2bbbb0d086c86215ce34747d6feb63ff5911",
+      "bytes": 1479308,
+      "sha256": "b360dad61a6c48d516be4ddbb09195a081f41af0d90a108ee40f694ac4076cec",
       "source_objects": 232,
       "exported_mesh_nodes": 232,
       "shared_meshes": 157,
@@ -311,8 +311,8 @@
   },
   "section_atlas": {
     "file": "sections.json",
-    "bytes": 2871601,
-    "sha256": "f989f66c1e4f56e631fa7c2e8ddcbd7c91a34d3db1a938db873daf15bd7003dd"
+    "bytes": 2952632,
+    "sha256": "7f3ab04d738f857e0c118653852df61979ac787cc1c6bdfb5d22b54d4c19a2d7"
   },
   "room_annotations": {
     "file": "rooms.json",
@@ -321,8 +321,8 @@
   },
   "navigation": {
     "file": "navigation.json",
-    "bytes": 64107,
-    "sha256": "5a90550d98e63e7adf26a3e56eb9b141c94c64db8b89530a7d5ea0eed9811218"
+    "bytes": 64481,
+    "sha256": "e35c161d008dcadd93cd58b3a33153236a97ac47623d57809a9246d85bc59e34"
   },
   "view_assets": {
     "neighborhood": [

@@ -1,0 +1,76 @@
+{
+  "generated_for": "R41",
+  "cell_m": 0.04,
+  "probes_m": {
+    "shin": 0.3,
+    "waist": 1,
+    "head": 2.25
+  },
+  "floors": {
+    "f0": {
+      "datum_m": 1.6,
+      "openings": [
+        {
+          "centre": [
+            -1.0803,
+            -3.425
+          ],
+          "yaw_deg": 90,
+          "clear_width": 0.72,
+          "wall_depth": 0.28,
+          "floor_y": 1.6,
+          "cells": 50,
+          "near": [
+            "Hol (1.1 m)",
+            "Mutfak (2.9 m)"
+          ]
+        }
+      ]
+    },
+    "f1": {
+      "datum_m": 4.6996,
+      "openings": [
+        {
+          "centre": [
+            1.4197,
+            1.615
+          ],
+          "yaw_deg": 0,
+          "clear_width": 0.96,
+          "wall_depth": 0.32,
+          "floor_y": 4.6996,
+          "cells": 165,
+          "near": [
+            "Giriş (1.6 m)",
+            "Antre (1.8 m)"
+          ]
+        }
+      ]
+    },
+    "f2": {
+      "datum_m": 7.9714,
+      "openings": [
+        {
+          "centre": [
+            -2.0203,
+            -0.385
+          ],
+          "yaw_deg": 0,
+          "clear_width": 1.28,
+          "wall_depth": 0.32,
+          "floor_y": 7.9714,
+          "cells": 297,
+          "near": [
+            "Yatak odası (2.2 m)",
+            "Oturma alanı (2.4 m)"
+          ]
+        }
+      ]
+    },
+    "f3": {
+      "datum_m": 10.7705,
+      "openings": []
+    }
+  },
+  "total": 3
+}
