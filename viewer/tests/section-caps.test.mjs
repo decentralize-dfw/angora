@@ -49,7 +49,9 @@ test('The wall and roof caps are redundant with the atlas, licensing the decisio
   // If a future export changes this, the decision has to be revisited - that
   // is what this test is for, not decoration.
   const slice=h=>atlas.slices.find(s=>Math.abs(s.height-h)<1e-6);
-  assert.ok(Math.abs(slice(1.6).area-15.878)<0.05);
+  // 15.878 before R40; the B03 enclosure adds 0.486 m² of partition
+  // cross-section to the basement cut (walls on the 2C056/2C11F witness lines).
+  assert.ok(Math.abs(slice(1.6).area-16.364)<0.05);
   assert.ok(Math.abs(slice(4.6996).area-14.719)<0.05);
   assert.ok(Math.abs(slice(7.9714).area-17.812)<0.05);
   assert.ok(Math.abs(slice(10.7705).area-24.487)<0.05);

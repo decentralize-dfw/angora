@@ -455,3 +455,30 @@ Bu, mal sahibinin cetvelindeki iki belirsizliği de aydınlatıyor: çizimde **D
 bodrumdadır (B02)**, zemin kattaki Z08 ise gerçekten TESİSAT ODASI'dır; ve
 bodrumda "müştemilat/misafir evi" diye adlandırılmış bir mahal yoktur — çizim
 orada iki HOBİ ODASI ve bir ODA gösterir.
+
+## R40 — B03 banyosunun kapatılması
+
+Kaynak plan bodrumda BANYO B03'ü kapalı bir oda olarak çizer ve ölçü zinciri
+içini birebir taşır: 195 × 170 cm (tutamaklar 2C056/2C11F), 10 cm bölmeler,
+kuzeybatıda 0,80 m kapı boşluğu. Teslim edilen model ise tüm bodrumu tek açık
+hacim bırakmıştı — GLB'de, kesit atlasında ve navigasyonda odanın çevresinde
+hiçbir iç duvar yoktu (20 cm'lik doğu duvarı hariç; o zaten modeldeydi,
+sıva yüzü x 3,087).
+
+`tools/build_b03_enclosure_r40.mjs` üç bölme duvarını ve kapı lentosunu ölçü
+zincirinin tescilli tanık hatlarına (x 1,168/3,118 · z −4,927/−3,227; teslim
+GLB'de sapma 0,1 mm altı) mevcut `interior` duvar malzemesiyle inşa eder;
+bahçe yemek takımı ile avizesini kuzey duvarından kurtulacak şekilde 0,60 m
+güneye taşır; aynı dikdörtgenleri kesit atlasının 33 dilimine ve 0,19 m gövde
+tamponuyla navigasyon ızgarasına işler. `tools/derive_room_polygons.py`
+yeniden koşulduğunda oda kendi kapalı hacmini alır (f0-S2, 3,26 m² bitmiş /
+3,48 m² sıva yüzü); `tools/update_rooms_b03_r40.py` rooms.json'a yeni hacim
+bölünmesini ve iki ölçünün `dwg_verified` kayıtlarını yazar,
+`tools/fix_f0_stations_r40.py` yürüme istasyonlarını yeni maskeye oturtur
+(f0-B04 istasyonu taşınan masanın altında kalmıştı).
+
+Dürüst kalan farklar: plandaki duş teknesi ve klozet modellenmedi (odanın iç
+fotoğrafı yok); mal sahibi cetvelindeki 1,73 m² "Tuvalet" bu oda değil —
+plandaki 1,25 × 1,38 m'lik komşu küçük WC'nin alanıdır (%0,3 içinde), bu
+yüzden cetvel eşlemesi `viewer/src/room-areas.js`'te bilerek boş bırakıldı ve
+etiket odanın kendi türetilmiş değerini gösterir.

@@ -20,12 +20,12 @@
     {
       "id": "level-0",
       "file": "level-0.glb",
-      "bytes": 2049400,
-      "sha256": "bbc4d51883427c9b48378850448c1488160502513f2125539cd896ca15561fa5",
-      "source_objects": 1170,
-      "exported_mesh_nodes": 1170,
+      "bytes": 1825776,
+      "sha256": "7bc9355ddb31d6e5fc1fee4c2d8af31dfa2dbc3d811c6d1226fb3e3cb5e76982",
+      "source_objects": 1171,
+      "exported_mesh_nodes": 1171,
       "shared_meshes": 405,
-      "triangles": 558130,
+      "triangles": 558178,
       "bounds_native_m": [
         [
           -7.142899990081787,
@@ -146,7 +146,7 @@
         [
           -6.35830020904541,
           -6.428299903869629,
-          0.0
+          0
         ],
         [
           7.300000190734863,
@@ -175,7 +175,7 @@
         [
           -10.246445655822754,
           -10.210000038146973,
-          -4.0
+          -4
         ],
         [
           26.54096031188965,
@@ -243,24 +243,24 @@
     "viewer_playback_integrated": true,
     "clip_name": "Animation",
     "target_node": "R39 lift cabin travel",
-    "duration_s": 46.0,
+    "duration_s": 46,
     "interpolation": "LINEAR",
     "stop_windows_s": [
       [
         0.0416666679084301,
-        2.0
+        2
       ],
       [
-        12.0,
-        14.0
+        12,
+        14
       ],
       [
-        24.0,
-        26.0
+        24,
+        26
       ]
     ],
     "stop_heights_m": [
-      0.0,
+      0,
       3.099600076675415,
       6.371399879455566
     ],
@@ -311,18 +311,18 @@
   },
   "section_atlas": {
     "file": "sections.json",
-    "bytes": 1941381,
-    "sha256": "f5fd6da242d739562d1243737f3a5e831e9232d558027b73608a528bd3d79f42"
+    "bytes": 1949020,
+    "sha256": "6992047ab513f280ae5cd4c825a60dcf10668fa1b675ead034de5f28245c93d0"
   },
   "room_annotations": {
     "file": "rooms.json",
-    "bytes": 125991,
-    "sha256": "6257688a7e70d82f841e3bba3d749d96f6ff2f2ad7737f0fd0f1aad338755c01"
+    "bytes": 127910,
+    "sha256": "20e7ff8af80377f198bf3610eb73b48fbfec7f31acbe045b43113c2ca8c131a6"
   },
   "navigation": {
     "file": "navigation.json",
-    "bytes": 64014,
-    "sha256": "698391a1eafa758c91d9a5b3b1868ffe0edb1ad9445e9c162e55a53276809ec6"
+    "bytes": 64012,
+    "sha256": "d9b71cd9420d7f77e3b42a78f92f8aee537779f6231846f8931e62beaaa3470d"
   },
   "view_assets": {
     "neighborhood": [

@@ -222,7 +222,7 @@ for f in range(4):
                 'every face outward by the measured %.3f m finish lining.')%(
                 MEAS[f],MEAS[f]-DAT[f],BAND[f][0],BAND[f][1],resid,LINING)}
 json.dump({'version':1,'coordinate_system':'glTF_XZ_metres','model_revision':'R39',
-    'source':{'sections.json':ATL.get('revision'),'atlas_sha256':'f5fd6da242d739562d1243737f3a5e831e9232d558027b73608a528bd3d79f42'},
+    'source':{'sections.json':ATL.get('revision'),'atlas_sha256':'6992047ab513f280ae5cd4c825a60dcf10668fa1b675ead034de5f28245c93d0'},
     'spaces':list(spaces.values()),'room_to_space':assign},open(ROOT+'/build/web/full/room-spaces.json','w'),indent=1)
 print('spaces',len(spaces))
 for s in spaces.values():

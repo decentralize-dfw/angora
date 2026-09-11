@@ -12,8 +12,13 @@
 // the entry is left out and the tag falls back to the room's registered DWG
 // span; those cases are listed at the bottom.
 export const ROOM_AREAS = {
-  // Bodrum. The schedule lists three entries against six rooms.
-  'f0-B10': 1.73,   // Tuvalet - the only sanitary room on the floor
+  // Bodrum. The schedule lists three entries against six rooms. Its 1,73 m2
+  // "Tuvalet" was keyed to f0-B10 while that was the only sanitary label, but
+  // the R40 enclosure derives B10 (the plan's BANYO B03, dimension chain
+  // 1,95 x 1,70) at 3,48 m2 substrate, and the plan draws a second small wc
+  // west of it whose 1,25 x 1,38 chain IS 1,73 m2 to 0,3% - so the schedule
+  // entry is that unlabelled wc, not this room. Left unmapped on purpose;
+  // f0-B10's tag now carries its own derived figure.
 
   // Zemin kat.
   'f1-Z06': 53.20,  // Salon
