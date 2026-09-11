@@ -92,7 +92,7 @@ test('What the plane cuts is drawn as black poché, ruled, with earth and masonr
   assert.match(wall.fragmentShader,/smoothstep\(0\.0650, 0\.0650 \+ edge/);
   assert.match(wall.fragmentShader,/#include <tonemapping_fragment>/);
   const soil=createHatchMaterial(SOIL_POCHE);
-  assert.match(soil.fragmentShader,/\/ 0\.2500;/);
+  assert.match(soil.fragmentShader,/\/ 0\.8000;/);
   // R40: the ground goes black so that pulling back - where the shader's own
   // anti-alias fade flattens the ruling - leaves solid poché rather than a
   // flat tan panel, and the ruling is the lighter of the two so it reads on it.
@@ -101,6 +101,13 @@ test('What the plane cuts is drawn as black poché, ruled, with earth and masonr
     assert.ok(Math.min(...preset.ink)>Math.max(...preset.ground)*4);
   }
   assert.notEqual(SECTION_POCHE.pitch,SOIL_POCHE.pitch,'earth and masonry share the ink, not the ruling');
+  // R41: the earth ruling has to survive the distance a plan is read at, so it
+  // is coarse and it does not fade; masonry is thin enough to read as solid.
+  assert.equal(SOIL_POCHE.fade,null);
+  assert.ok(SOIL_POCHE.pitch>=0.6&&SOIL_POCHE.duty>=0.12,JSON.stringify(SOIL_POCHE));
+  assert.ok(Array.isArray(SECTION_POCHE.fade));
+  assert.doesNotMatch(soil.fragmentShader,/mix\(0\.13, hatch/);
+  assert.match(wall.fragmentShader,/mix\(0\.13, hatch/);
 });
 
 test('Only the plot soil node receives private, marked material instances',()=>{

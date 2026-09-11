@@ -10,19 +10,22 @@ export function smoothStep(t) {
 }
 
 // One hatch shader, parameterised. What is cut is drawn the way a section
-// drawing draws it: the material that the plane passes through goes black, and
-// the hatch rides on top of the black rather than replacing it. Pulled back,
-// the shader's own anti-alias fade takes the hatch down to a flat tone, which
-// on a black ground is solid poché - the reading a plan wants at that
-// distance - and the ruling comes back as you come in. Wall and earth share
-// the ink so the cut reads as one operation; they keep their own pitch, so
-// masonry and ground are still told apart by their ruling and not by colour.
-// Masonry: the 0.14 m ruling the wall cap has always used, now on black.
-export const SECTION_POCHE = {pitch:0.14, duty:0.065, ground:[0.020,0.020,0.023], ink:[0.32,0.31,0.29]};
-// Earth: the authored 0.25 m soil pitch, coarser, so ground and wall stay
-// distinguishable once you are close enough to see either ruling at all.
-export const SOIL_POCHE = {pitch:0.25, duty:0.055, ground:[0.026,0.025,0.021], ink:[0.29,0.28,0.24]};
-export function createHatchMaterial({pitch, duty, ground, ink}) {
+// drawing draws it: the material the plane passes through goes black, and the
+// ruling rides on top of the black rather than replacing it.
+//
+// A ruling finer than the screen can resolve has to fade or it aliases into
+// noise, and `fade` is where that starts. The number that matters is how wide
+// one period is on screen: a 0.14 m masonry ruling over a whole storey is two
+// or three pixels, so it fades and the wall reads as the solid poché a plan
+// wants at that distance. The earth is not a 0.20 m wall - it is the whole
+// excavation, hundreds of square metres of it - and a flat black field that
+// size does not read as ground, it reads as a hole in the drawing. So it takes
+// a site ruling, coarse enough (0.80 m, and nearly a fifth of it inked) to
+// stay legible from the same distance the plan is read at, and it does not
+// fade.
+export const SECTION_POCHE = {pitch:0.14, duty:0.065, ground:[0.020,0.020,0.023], ink:[0.32,0.31,0.29], fade:[0.25,0.80]};
+export const SOIL_POCHE = {pitch:0.80, duty:0.170, ground:[0.026,0.025,0.021], ink:[0.46,0.44,0.38], fade:null};
+export function createHatchMaterial({pitch, duty, ground, ink, fade=[0.25,0.80]}) {
   return new THREE.ShaderMaterial({side:THREE.DoubleSide,
     vertexShader: `varying vec3 worldPosition;
       void main() {
@@ -35,7 +38,7 @@ export function createHatchMaterial({pitch, duty, ground, ink}) {
         float v = (worldPosition.x + worldPosition.z) / ${pitch.toFixed(4)};
         float edge = max(fwidth(v) * 1.2, 0.002);
         float hatch = 1.0 - smoothstep(${duty.toFixed(4)}, ${duty.toFixed(4)} + edge, abs(fract(v) - 0.5));
-        hatch = mix(0.13, hatch, 1.0 - smoothstep(0.25, 0.8, fwidth(v)));
+        ${fade ? `hatch = mix(0.13, hatch, 1.0 - smoothstep(${fade[0].toFixed(4)}, ${fade[1].toFixed(4)}, fwidth(v)));` : ''}
         gl_FragColor = vec4(mix(vec3(${ground.map(v=>v.toFixed(2)).join(', ')}), vec3(${ink.map(v=>v.toFixed(2)).join(', ')}), hatch * 0.62), 1.0);
         #include <tonemapping_fragment>
         #include <colorspace_fragment>

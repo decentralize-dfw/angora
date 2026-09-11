@@ -100,7 +100,7 @@ function setFurnitureVisible(visible) {
   if (renderer) renderer.shadowMap.needsUpdate = true;
   if (walk) {
     walk.furniture = visible;
-    if (walk.active && visible && !walk.xrActive && !walk.surface.sample(walk.camera.position.x, walk.camera.position.z, walk.camera.position.y-1.62)) enterWalk(walk.room);
+    if (walk.active && visible && !walk.xrActive && !walk.surface.sample(walk.camera.position.x, walk.camera.position.z, walk.camera.position.y-walk.surface.data.eye_height_m)) enterWalk(walk.room);
   }
   invalidate();
 }
@@ -127,7 +127,7 @@ function renderFrame(time) {
     const activeCamera=walk?.active?walk.camera:camera;
     if(!walk?.active)fitDepthRange(camera,controls.target,contextBox);
     if(walk?.active){
-      const sample=walk.surface.sample(walk.camera.position.x,walk.camera.position.z,walk.camera.position.y-1.62,walk.furniture,.3);
+      const sample=walk.surface.sample(walk.camera.position.x,walk.camera.position.z,walk.camera.position.y-walk.surface.data.eye_height_m,walk.furniture,.3);
       if(sample&&walk.floor!==sample.floor){walk.floor=sample.floor;selected='f'+sample.floor;lift?.setWalkFloor(sample.floor);refreshLiftControl();}
       else if(sample){walk.floor=sample.floor;selected='f'+sample.floor;}
       lighting.interior(walk.floor,walk.camera.position.toArray(),time);

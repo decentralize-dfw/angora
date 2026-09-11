@@ -49,8 +49,8 @@
     {
       "id": "level-1",
       "file": "level-1.glb",
-      "bytes": 5653972,
-      "sha256": "7ab69d1abbc6204200515861a14977a90e82bba926193dc2e70671abf862a8d1",
+      "bytes": 5666556,
+      "sha256": "b0f13060691c875449839a9f8b203c47e4ca1bfe2fee9b5469dce3d44b7fb93e",
       "source_objects": 1023,
       "exported_mesh_nodes": 1023,
       "shared_meshes": 835,
@@ -321,8 +321,8 @@
   },
   "navigation": {
     "file": "navigation.json",
-    "bytes": 64122,
-    "sha256": "e4bfd05db73110efb0d98758e891660b14a527c7c770326d0360c564fb7dfecc"
+    "bytes": 64107,
+    "sha256": "5a90550d98e63e7adf26a3e56eb9b141c94c64db8b89530a7d5ea0eed9811218"
   },
   "view_assets": {
     "neighborhood": [

@@ -24,7 +24,11 @@ import draco3d from 'draco3dgltf';
 const ROOT = '/home/user/angora';
 const FULL = ROOT + '/build/web/full';
 const VEHICLE = /^R35 \| Garage vehicle/;
-const SCALE = 0.88;
+// A target length rather than a factor, so running this twice does not shrink
+// the car twice. 3.60 m nose to tail is a city car; in a 5.94 m bay it leaves
+// well over a metre at each end and stops reading as a limousine parked in a
+// garage that is too small for it.
+const TARGET_LENGTH = 3.60;
 const BAY = { x0: 3.348, x1: 7.287, z0: -4.772, z1: 1.167 };   // f1-S5 finished faces
 const FLOOR_Y = 3.104;                                          // delivered wheel contact
 
@@ -63,6 +67,8 @@ console.log('before:', before.size.map((v) => +v.toFixed(3)).join(' x '),
 
 // scale about the car's own footprint centre on the garage floor, then slide
 // the shrunken car to the middle of the bay
+const SCALE = TARGET_LENGTH / Math.max(before.size[0], before.size[2]);
+console.log('scale to reach', TARGET_LENGTH, 'm:', SCALE.toFixed(4));
 const pivot = [(before.mn[0] + before.mx[0]) / 2, FLOOR_Y, (before.mn[2] + before.mx[2]) / 2];
 for (const node of parts) {
   if (node.getParentNode && node.getParentNode()) throw new Error('unexpected parent on ' + node.getName());

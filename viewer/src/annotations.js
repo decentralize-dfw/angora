@@ -19,6 +19,14 @@ export function labelFontSize(pixelsPerMetre) {
 // own DWG span, with its handle and witness points behind it - and carries
 // nothing at all where a room has none. The m² branch stays: the moment real
 // room boundaries land, every one of these switches over untouched.
+// One decimal, and no approximation sign. The '≈' the data carries on a
+// model-measured span was reading as a guess; it is not one - every span in
+// the set is a measurement, the difference is only whether the drawing or the
+// delivered solid was measured, and the dashed witness line already says
+// which. Two decimals on a metre span is false precision at any rate.
+export function spanLabel(metres) {
+  return `${metres.toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1})} m`;
+}
 export function areaLabel(room,data) {
   const area=ROOM_AREAS[room?.id]??(Number.isFinite(room?.area_m2)?room.area_m2:null);
   if(area!==null)return `${area.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2})} m²`;
@@ -27,7 +35,7 @@ export function areaLabel(room,data) {
   // switched off; those are provenance, never a tag.
   const rows=(room?.dimensions??[]).map(id=>data?.dimensions?.find(entry=>entry.id===id))
     .filter(entry=>entry?.basis==='dwg_verified'&&entry.dimension_label_allowed);
-  return rows[0]?.display??'';
+  return rows[0]?spanLabel(rows[0].metres):'';
 }
 export function createAnnotations(data,host,onRoom) {
   if(data.coordinate_system!=='glTF_Y_up')throw Error('Invalid room annotations');
@@ -80,7 +88,7 @@ export function createAnnotations(data,host,onRoom) {
     if(measured)line.computeLineDistances();
     line.renderOrder=105;line.userData.aoExcluded=true;group.add(line);
     const el=document.createElement('span');
-    el.className=measured?'dimension-label measured':'dimension-label';el.textContent=dim.display;
+    el.className=measured?'dimension-label measured':'dimension-label';el.textContent=spanLabel(dim.metres);
     if(dim.provenance)el.title=dim.provenance;
     overlay.append(el);dimensions.push({el,line,position:a.clone().add(b).multiplyScalar(.5),floor:dim.floor_index,roomId:dim.room_id,measured});
   }

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {areaLabel,labelFontSize} from '../src/annotations.js';
+import {areaLabel,labelFontSize,spanLabel} from '../src/annotations.js';
 import {ROOM_AREAS} from '../src/room-areas.js';
 
 const rooms=JSON.parse(readFileSync(new URL('../public/models/full/rooms.json',import.meta.url),'utf8'));
@@ -53,7 +53,11 @@ test('A tag shows the scheduled area, otherwise a registered span, otherwise not
       // another room's and never a model-measured span.
       const source=room.dimensions.map(d=>dimensionById.get(d))
         .find(e=>e.basis==='dwg_verified'&&e.dimension_label_allowed);
-      assert.equal(text,source.display);
+      // R41: the tag is formatted from the measurement, not from the stored
+      // display string - one decimal, and no approximation sign on a span that
+      // was measured rather than guessed.
+      assert.equal(text,spanLabel(source.metres));
+      assert.match(text,/^\d+,\d m$/,text);
       assert.equal(source.room_id,room.id);
       assert.ok(source.source_dimension_handle,'a span must trace to the drawing');
       spans++;

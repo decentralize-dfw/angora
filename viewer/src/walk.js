@@ -1,10 +1,12 @@
 import * as THREE from 'three';
 import {WalkSurface} from './walk-surface.js';
 
-// Across, not up: the number a lens is quoted at. 75° is the 24 mm an estate
-// interior is shot with - wide enough to hold a room, short enough that the
-// far wall stays the distance it actually is.
-export const WALK_HORIZONTAL_FOV_DEG = 75;
+// Across, not up: the number a lens is quoted at. 95° is the 16-18 mm an
+// interior is actually shot with. A narrower lens is the more honest optic and
+// it was tried first, at 75°; walked, it reads as a keyhole and the rooms come
+// out feeling smaller than they are, because you cannot see a room you cannot
+// fit in the frame. The wide lens shows the room.
+export const WALK_HORIZONTAL_FOV_DEG = 95;
 
 export class InteriorWalk {
   constructor(data, canvas, invalidate) {
@@ -15,7 +17,7 @@ export class InteriorWalk {
     // held at the 24 mm that interior photography uses, with the vertical
     // falling out of the viewport - so a phone held upright does not get a
     // 28° keyhole out of the same number.
-    this.camera = new THREE.PerspectiveCamera(48,1,.045,450);
+    this.camera = new THREE.PerspectiveCamera(60,1,.045,450);
     this.camera.rotation.order = 'YXZ'; this.rig = new THREE.Group(); this.rig.add(this.camera);
     this.active = false; this.xrActive = false; this.keys = new Set(); this.furniture = true;
     this.yaw = .85; this.pitch = -.04; this.pointer = null; this.lastTime = null;
@@ -55,7 +57,7 @@ export class InteriorWalk {
     // Clamped so a tall phone cannot turn the held horizontal field into a
     // fisheye, and a wide desktop cannot turn it into a telephoto.
     this.camera.fov=THREE.MathUtils.clamp(
-      THREE.MathUtils.radToDeg(2*Math.atan(Math.tan(horizontal/2)/this.camera.aspect)),38,70);
+      THREE.MathUtils.radToDeg(2*Math.atan(Math.tan(horizontal/2)/this.camera.aspect)),46,82);
     this.camera.updateProjectionMatrix();
   }
   enter(room) {
