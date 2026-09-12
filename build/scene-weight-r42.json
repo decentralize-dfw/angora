@@ -1,0 +1,210 @@
+{
+  "generated_for": "R42",
+  "compared_against": "6688871",
+  "then": {
+    "triangles": 9276473,
+    "draws": 6311,
+    "vertices": 15746225,
+    "materials": 283,
+    "bytes": 32082780,
+    "per": {
+      "level-0": {
+        "triangles": 553771,
+        "draws": 1168,
+        "vertices": 939730,
+        "bytes": 2049400
+      },
+      "level-1": {
+        "triangles": 1156836,
+        "draws": 1046,
+        "vertices": 1497719,
+        "bytes": 5209388
+      },
+      "level-2": {
+        "triangles": 776489,
+        "draws": 650,
+        "vertices": 1060350,
+        "bytes": 2846756
+      },
+      "level-3": {
+        "triangles": 451526,
+        "draws": 241,
+        "vertices": 450764,
+        "bytes": 1038980
+      },
+      "envelope": {
+        "triangles": 701098,
+        "draws": 113,
+        "vertices": 707315,
+        "bytes": 2384528
+      },
+      "garden": {
+        "triangles": 1125880,
+        "draws": 396,
+        "vertices": 2699894,
+        "bytes": 13135548
+      },
+      "context": {
+        "triangles": 4510873,
+        "draws": 2697,
+        "vertices": 8390453,
+        "bytes": 5418180
+      }
+    },
+    "heaviest": [
+      {
+        "asset": "envelope",
+        "node": "Ironwork | KORKULUK",
+        "triangles": 607704
+      },
+      {
+        "asset": "context",
+        "node": "CAD curb edges",
+        "triangles": 510734
+      },
+      {
+        "asset": "garden",
+        "node": "R33 | Natural bent garden grass",
+        "triangles": 221905
+      },
+      {
+        "asset": "garden",
+        "node": "R33 | Natural bent garden grass",
+        "triangles": 102120
+      },
+      {
+        "asset": "garden",
+        "node": "Hedge leaves on CAD grades",
+        "triangles": 63878
+      },
+      {
+        "asset": "context",
+        "node": "B16 | PENCERE_KAPI$SHUTTER AİM.001",
+        "triangles": 56197
+      },
+      {
+        "asset": "context",
+        "node": "B17 | PENCERE_KAPI$SHUTTER AİM.001",
+        "triangles": 56197
+      },
+      {
+        "asset": "context",
+        "node": "B18 | PENCERE_KAPI$SHUTTER AİM.001",
+        "triangles": 56197
+      },
+      {
+        "asset": "context",
+        "node": "B19 | PENCERE_KAPI$SHUTTER AİM.001",
+        "triangles": 56197
+      },
+      {
+        "asset": "context",
+        "node": "B20 | PENCERE_KAPI$SHUTTER AİM.001",
+        "triangles": 56197
+      }
+    ]
+  },
+  "now": {
+    "triangles": 8066396,
+    "draws": 6272,
+    "vertices": 11238161,
+    "materials": 285,
+    "bytes": 27187112,
+    "per": {
+      "level-0": {
+        "triangles": 554243,
+        "draws": 1169,
+        "vertices": 377549,
+        "bytes": 1825840
+      },
+      "level-1": {
+        "triangles": 1158103,
+        "draws": 1046,
+        "vertices": 877009,
+        "bytes": 4872000
+      },
+      "level-2": {
+        "triangles": 786715,
+        "draws": 649,
+        "vertices": 782306,
+        "bytes": 2636660
+      },
+      "level-3": {
+        "triangles": 479614,
+        "draws": 242,
+        "vertices": 437082,
+        "bytes": 1037760
+      },
+      "envelope": {
+        "triangles": 701098,
+        "draws": 113,
+        "vertices": 572042,
+        "bytes": 2046360
+      },
+      "garden": {
+        "triangles": 1125880,
+        "draws": 396,
+        "vertices": 2329916,
+        "bytes": 10126536
+      },
+      "context": {
+        "triangles": 3260743,
+        "draws": 2657,
+        "vertices": 5862257,
+        "bytes": 4641956
+      }
+    },
+    "heaviest": [
+      {
+        "asset": "envelope",
+        "node": "Ironwork | KORKULUK",
+        "triangles": 607704
+      },
+      {
+        "asset": "context",
+        "node": "CAD curb edges",
+        "triangles": 510734
+      },
+      {
+        "asset": "garden",
+        "node": "R33 | Natural bent garden grass",
+        "triangles": 221905
+      },
+      {
+        "asset": "garden",
+        "node": "R33 | Natural bent garden grass",
+        "triangles": 102120
+      },
+      {
+        "asset": "garden",
+        "node": "Hedge leaves on CAD grades",
+        "triangles": 63878
+      },
+      {
+        "asset": "level-1",
+        "node": "F1 | PENCERE_KAPI$SHUTTER AİM",
+        "triangles": 55530
+      },
+      {
+        "asset": "level-2",
+        "node": "F2 | PENCERE_KAPI$SHUTTER AİM",
+        "triangles": 50910
+      },
+      {
+        "asset": "garden",
+        "node": "Spruce needle sprays",
+        "triangles": 48705
+      },
+      {
+        "asset": "garden",
+        "node": "Spruce needle sprays.002",
+        "triangles": 48673
+      },
+      {
+        "asset": "garden",
+        "node": "Spruce needle sprays.001",
+        "triangles": 48650
+      }
+    ]
+  }
+}

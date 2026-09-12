@@ -33,11 +33,14 @@ test('Every authored cap sits exactly on a documented cut height',()=>{
     'R32 F1 wall cut face.001':4.6996,'R32 F2 roof cut face':7.9714,'R32 F2 wall cut face.001':7.9714,
     'R32 F3 roof cut face':10.7705,'R32 F3 wall cut face.001':10.7705,
     // R42: the plan area the basement cut leaves empty, closed in the earth hatch
-    'R42 F0 basement fill cut face':1.6};
+    'R42 F0 site section field':null};
   assert.equal(glb.json.meshes.length,8);
   for(const mesh of glb.json.meshes){
     const expected=heights[mesh.name];
     assert.ok(expected!==undefined,mesh.name);
+    // the site field is draped over the ground, so it is the one face that is
+    // deliberately not flat; its own bounds are checked by the closure test
+    if(expected===null)continue;
     for(const primitive of mesh.primitives){
       const accessor=glb.json.accessors[primitive.attributes.POSITION];
       // Draco geometry still carries accessor min/max, which is enough to pin
@@ -61,15 +64,22 @@ test('The basement cut is closed: nothing the plane passes through is left unhat
   // and closed with a second face in the same hatch.
   const report=JSON.parse(fs.readFileSync(new URL('build/basement-cut-closure-r42.json',new URL('../../',import.meta.url))));
   assert.equal(report.cut_height_m,SOIL_CUT_HEIGHT);
-  assert.ok(report.closed_area_m2>40&&report.closed_area_m2<60,`closed ${report.closed_area_m2} m²`);
-  const face=glb.json.meshes.find(m=>m.name==='R42 F0 basement fill cut face');
+  assert.ok(report.void_area_m2>40&&report.void_area_m2<60,`void ${report.void_area_m2} m²`);
+  // and the plot's own ground, which lies below the cut rather than through it
+  assert.ok(report.ground_area_m2>200,`ground ${report.ground_area_m2} m²`);
+  const face=glb.json.meshes.find(m=>m.name==='R42 F0 site section field');
   assert.ok(face,'the delivery carries the closure face');
   const accessor=glb.json.accessors[face.primitives[0].attributes.POSITION];
+  // draped, so it never floats over the rear lawn, and never above the cut
+  assert.ok(accessor.max[1]<=SOIL_CUT_HEIGHT+1e-3,`tops out at ${accessor.max[1]}`);
+  assert.ok(accessor.min[1]<SOIL_CUT_HEIGHT-0.3,`lies on the ground, lowest ${accessor.min[1]}`);
   // inside the plot's own soil footprint: this closes a hole in the plot, it
   // does not lay hatch over the neighbourhood, which is never cut
-  const [px0,px1]=report.plot_footprint.x,[pz0,pz1]=report.plot_footprint.z;
-  assert.ok(accessor.min[0]>=px0-1e-3&&accessor.max[0]<=px1+1e-3,JSON.stringify([accessor.min[0],accessor.max[0]]));
-  assert.ok(accessor.min[2]>=pz0-1e-3&&accessor.max[2]<=pz1+1e-3,JSON.stringify([accessor.min[2],accessor.max[2]]));
+  // the grid rounds up to a whole cell, so the sheet may reach one cell past
+  // the footprint it was laid over - never further
+  const [px0,px1]=report.plot_footprint.x,[pz0,pz1]=report.plot_footprint.z,edge=report.cell_m+1e-3;
+  assert.ok(accessor.min[0]>=px0-edge&&accessor.max[0]<=px1+edge,JSON.stringify([accessor.min[0],accessor.max[0]]));
+  assert.ok(accessor.min[2]>=pz0-edge&&accessor.max[2]<=pz1+edge,JSON.stringify([accessor.min[2],accessor.max[2]]));
   assert.equal(report.cap_asset_triangles,manifest.section_cap_asset.triangles);
 });
 
@@ -126,7 +136,7 @@ test('What the plane cuts is drawn as black poché, ruled, with earth and masonr
   assert.match(wall.fragmentShader,/smoothstep\(0\.0650, 0\.0650 \+ edge/);
   assert.match(wall.fragmentShader,/#include <tonemapping_fragment>/);
   const soil=createHatchMaterial(SOIL_POCHE);
-  assert.match(soil.fragmentShader,/\/ 0\.8000;/);
+  assert.match(soil.fragmentShader,/\/ 0\.3600;/);
   // R40: the ground goes black so that pulling back - where the shader's own
   // anti-alias fade flattens the ruling - leaves solid poché rather than a
   // flat tan panel, and the ruling is the lighter of the two so it reads on it.
@@ -135,12 +145,17 @@ test('What the plane cuts is drawn as black poché, ruled, with earth and masonr
     assert.ok(Math.min(...preset.ink)>Math.max(...preset.ground)*4);
   }
   assert.notEqual(SECTION_POCHE.pitch,SOIL_POCHE.pitch,'earth and masonry share the ink, not the ruling');
-  // R41: the earth ruling has to survive the distance a plan is read at, so it
-  // is coarse and it does not fade; masonry is thin enough to read as solid.
-  assert.equal(SOIL_POCHE.fade,null);
-  assert.ok(SOIL_POCHE.pitch>=0.6&&SOIL_POCHE.duty>=0.12,JSON.stringify(SOIL_POCHE));
+  // R42 replaces R41's coarse site rule on the client's instruction: the earth
+  // takes the masonry ruling's proportions - a thin line, well under a tenth of
+  // the period - on a pitch wide enough to read at the basement zoom. It still
+  // fades later than masonry does, because the field it rules is far larger.
+  assert.ok(SOIL_POCHE.duty/SOIL_POCHE.pitch<0.20,'the earth line is thin, like the walls\'');
+  assert.ok(Math.abs(SOIL_POCHE.duty/SOIL_POCHE.pitch-SECTION_POCHE.duty/SECTION_POCHE.pitch)<0.30,
+    'and in the same proportion as the walls\'');
+  assert.ok(SOIL_POCHE.pitch>SECTION_POCHE.pitch*2,'on a coarser pitch, because the field is the plot');
+  assert.ok(SOIL_POCHE.fade[0]>SECTION_POCHE.fade[0]*1.2,JSON.stringify(SOIL_POCHE.fade));
   assert.ok(Array.isArray(SECTION_POCHE.fade));
-  assert.doesNotMatch(soil.fragmentShader,/mix\(0\.13, hatch/);
+  assert.match(soil.fragmentShader,/mix\(0\.13, hatch/);
   assert.match(wall.fragmentShader,/mix\(0\.13, hatch/);
 });
 

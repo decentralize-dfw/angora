@@ -346,13 +346,15 @@ async function loadModel() {
     const manifest = await response.json();
     assetRevision=manifest.assets?.map(({file,sha256})=>({file,sha256}));
     if (!manifest.full_scene || manifest.geometry_preclipped || manifest.assets?.length !== 7) throw Error('Whole-scene manifest required');
-    // The villa is complete at a third of the bytes, so it loads and appears
-    // first; the garden and the neighbourhood stream in behind it. The order
-    // inside the first phase reveals the building outside-in.
+    // R42: the whole scene before the first frame. It used to open on the villa
+    // alone and stream the garden and the neighbourhood in behind it, which is
+    // quicker to something but slower to the thing that was asked for - the
+    // house stood on nothing for a moment, the ground arrived under it, then
+    // the street. "hepsini yükle öyle aç." Everything is downloaded and staged
+    // before the bar goes, and the order still reveals the building outside-in
+    // for whoever is watching the count.
     const PHASE_ORDER=['envelope','level-1','level-0','level-2','level-3','garden','context'];
     const queue=manifest.assets.slice().sort((a,b)=>PHASE_ORDER.indexOf(a.id)-PHASE_ORDER.indexOf(b.id));
-    const villaAssets=queue.filter(a=>!['garden','context'].includes(a.id));
-    const lateAssets=queue.filter(a=>['garden','context'].includes(a.id));
     let completed = 0;
     const totalBytes = manifest.assets.reduce((sum, asset) => sum + (asset.bytes || 0), 0) + (manifest.section_cap_asset?.bytes || 0);
     const received = new Map();
@@ -440,7 +442,7 @@ async function loadModel() {
         }
       });
     }
-    const results = await Promise.allSettled([worker(villaAssets), worker(villaAssets), loadSections(), loadRooms(), loadNavigation(),
+    const results = await Promise.allSettled([worker(queue), worker(queue), loadSections(), loadRooms(), loadNavigation(),
       lighting.loadEnvironment(daylightURL.href).catch(error=>console.warn('HDR unavailable; atmospheric daylight retained',error)), loadCaps()]);
     const failure = results.find(r => r.status === 'rejected'); if (failure) throw failure.reason;
     for (const id of staged.keys()) stageGroup(id);
@@ -464,6 +466,14 @@ async function loadModel() {
       siteContext=createSiteContext(contextData,host,()=>selectView('building'));
       $('#context-count').textContent=`${contextData.buildings.length} yapı · Kaynak vaziyet planı`;
     } catch(error){console.warn(error);$('#context-count').textContent='Kaynak vaziyet planı';}
+    // The neighbourhood is in by now, so its bounds, its horizon fade and its
+    // white massing are set up here rather than in a continuation that used to
+    // run after the first frame.
+    if(groups.has('context')){
+      contextBox.union(new THREE.Box3().setFromObject(groups.get('context')));
+      prepareContextSurfaces(groups.get('context'),lighting.horizonColour);
+      massing=createContextMassing(groups.get('context'));
+    }
     fullHeight = buildingBox.max.y + 2;
     caps = createWallCaps(results[2].value); scene.add(caps.group);
     const capScene=results[6].status==='fulfilled'?results[6].value:null;
@@ -517,27 +527,6 @@ async function loadModel() {
     // grade and dither passes compile on their first use like anything else.
     lighting.render(camera);
     status.hidden = true;
-    // The garden and the neighbourhood stream in behind the first frame - the
-    // villa is interactive at a third of the download. Their group setup runs
-    // as each arrives, and the massing fade attaches once the context exists.
-    (async()=>{
-      try {
-        await Promise.all([worker(lateAssets), worker(lateAssets)]);
-        for (const id of ['garden','context']) if (staged.has(id)&&!groups.has(id)) {
-          stageGroup(id);
-          if(id==='context'){
-            contextBox.union(new THREE.Box3().setFromObject(groups.get('context')));
-            prepareContextSurfaces(groups.get('context'),lighting.horizonColour);
-            massing=createContextMassing(groups.get('context'));massing.set(selected,true);
-            lighting.frame(selected,contextBox);
-          }
-          renderer.shadowMap.needsUpdate=true;invalidate();
-        }
-      } catch(error){
-        console.warn('Surroundings failed to load',error);
-        message('Çevre yüklenemedi. Bağlantını kontrol edip tekrar deneyebilirsin.', true);
-      }
-    })();
   } catch (error) {
     for (const group of staged.values()) {scene.remove(group); dispose(group);}
     groups.clear();

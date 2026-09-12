@@ -19,6 +19,14 @@
 // 1.0 m rail height are R20's; the drawing's plan y is the model's -z, which
 // is why the old scrollwork sat on the opposite side of the well from the
 // handrail.
+//
+// R42: and the runs are trimmed to the room. R20's first node sits at x 2.898,
+// 1.16 m inside the wall that stands at x 1.738 from 5.97 m to 9.07 m, so the
+// rail ran into it and kept going - "birinci kat korkuluk neden devam ediyor
+// duvara kadar". A rail is bounded by what it meets: each run is sampled along
+// its length against the storey's own wall geometry and cut back to the last
+// clear point, and the newel that ends a run goes to the cut rather than to
+// the node behind the plaster.
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync, unlinkSync } from 'node:fs';
@@ -30,7 +38,7 @@ import draco3d from 'draco3dgltf';
 const ROOT = '/home/user/angora';
 const FULL = ROOT + '/build/web/full';
 const LEVEL = 2;
-const OLD = /^Gallery R20 \| /;
+const OLD = /^Gallery (R20|R41) \| /;
 const layout = JSON.parse(readFileSync(ROOT + '/build/cad/gallery-railing-layout.json', 'utf8'));
 
 const RAIL = {
@@ -187,17 +195,74 @@ function panelPattern(width, height) {
   return { bars, balls };
 }
 
+// Where the storey's walls stand, in plan, at the height the rail occupies.
+// The section atlas already carries exactly that: `p`/`i` at each 80 mm slice
+// is the filled cross-section of the walls, triangulated. Reading it beats
+// rasterising the wall mesh, whose faces are surfaces - a point between two
+// plaster skins is inside the wall and on none of them.
+function wallSection(atlas) {
+  const slices = atlas.slices;
+  const pick = (height) => slices.reduce((best, s) =>
+    Math.abs(s.height - height) < Math.abs(best.height - height) ? s : best);
+  return { slices: slices.length,
+    inside(x, z, height) {
+      const slice = pick(height);
+      const p = slice.p, index = slice.i;
+      for (let t = 0; t < index.length; t += 3) {
+        const a = index[t] * 2, b = index[t + 1] * 2, c = index[t + 2] * 2;
+        const det = (p[b] - p[a]) * (p[c + 1] - p[a + 1]) - (p[b + 1] - p[a + 1]) * (p[c] - p[a]);
+        if (Math.abs(det) < 1e-12) continue;
+        const u = ((p[b] - p[a]) * (z - p[a + 1]) - (p[b + 1] - p[a + 1]) * (x - p[a])) / det;
+        if (u < 0 || u > 1) continue;
+        const v = ((p[c] - p[b]) * (z - p[b + 1]) - (p[c + 1] - p[b + 1]) * (x - p[b])) / det;
+        if (v < 0 || u + v > 1) continue;
+        return true;
+      }
+      return false;
+    } };
+}
+
+const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({
+  'draco3d.decoder': await draco3d.createDecoderModule(),
+  'draco3d.encoder': await draco3d.createEncoderModule(),
+});
+const file = `${FULL}/level-${LEVEL}.glb`;
+const doc = await io.read(file);
+const root = doc.getRoot();
+// Each run is tested at its own mid-rail height: the flight falls 1.55 m over
+// its length, so one slice cannot bound all four.
+const atlas = JSON.parse(readFileSync(FULL + '/sections.json', 'utf8'));
+const walls = wallSection(atlas);
+console.log(`${walls.slices} atlas slices to bound the runs against`);
+
 const builders = { iron: new Builder(), timber: new Builder(), brass: new Builder() };
 // the drawing's plan y is the model's -z
 const nodes = layout.nodes.map((n) => ({ x: n.xy[0], z: -n.xy[1], y: n.rail_base_z_m }));
-let panels = 0;
+let panels = 0, trimmed = 0;
+const trims = [];
 for (let i = 0; i < nodes.length - 1; i++) {
-  const a = nodes[i], b = nodes[i + 1];
-  const run = Math.hypot(b.x - a.x, b.z - a.z);
-  if (run < 0.05) continue;
-  const dir = [(b.x - a.x) / run, (b.z - a.z) / run];
+  const first = nodes[i], b = nodes[i + 1];
+  const full = Math.hypot(b.x - first.x, b.z - first.z);
+  if (full < 0.05) continue;
+  const dir = [(b.x - first.x) / full, (b.z - first.z) / full];
   const side = [-dir[1], dir[0]];                  // across the rail, in plan
-  const rake = (b.y - a.y) / run;                  // how the run falls
+  const rake = (b.y - first.y) / full;             // how the run falls
+  // Walk in from both ends while the rail is inside a wall, then take what is
+  // left. A run entirely inside one is not a run.
+  const clear = (u) => !walls.inside(first.x + dir[0] * u, first.z + dir[1] * u,
+    first.y + rake * u + RAIL.height * 0.5);
+  const STEP = 0.02;
+  let u0 = 0, u1 = full;
+  while (u0 < u1 && !clear(u0)) u0 += STEP;
+  while (u1 > u0 && !clear(u1)) u1 -= STEP;
+  if (u1 - u0 < RAIL.panel * 0.5) { trims.push({ run: i, dropped: true, full: +full.toFixed(3) }); continue; }
+  if (u0 > 0 || u1 < full - 1e-9) {
+    trimmed++;
+    trims.push({ run: i, full: +full.toFixed(3), kept: +(u1 - u0).toFixed(3),
+      cut_at_start_m: +u0.toFixed(3), cut_at_end_m: +(full - u1).toFixed(3) });
+  }
+  const a = { x: first.x + dir[0] * u0, z: first.z + dir[1] * u0, y: first.y + rake * u0 };
+  const run = u1 - u0;
   // u along the run, v vertical from that point's own base height
   const place = ([u, v, w]) => [
     a.x + dir[0] * u + side[0] * w,
@@ -254,17 +319,9 @@ for (let i = 0; i < nodes.length - 1; i++) {
   for (const key of ['iron', 'timber', 'brass']) emit(builders[key], local[key]);
 }
 
-const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({
-  'draco3d.decoder': await draco3d.createDecoderModule(),
-  'draco3d.encoder': await draco3d.createEncoderModule(),
-});
-const file = `${FULL}/level-${LEVEL}.glb`;
-const doc = await io.read(file);
-const root = doc.getRoot();
-
 let removed = 0;
 for (const node of root.listNodes()) {
-  if (!OLD.test(node.getName()) && !/^Gallery R41 \| /.test(node.getName())) continue;
+  if (!OLD.test(node.getName()) && !/^Gallery R42 \| /.test(node.getName())) continue;
   const mesh = node.getMesh();
   removed += mesh?.listPrimitives().reduce((n, p) => {
     const i = p.getIndices();
@@ -276,9 +333,9 @@ for (const node of root.listNodes()) {
 const buffer = root.listBuffers()[0] ?? doc.createBuffer();
 let authored = 0;
 for (const [name, key, materialName] of [
-  ['Gallery R41 | forged scroll balustrade', 'iron', IRON],
-  ['Gallery R41 | profiled timber handrail', 'timber', TIMBER],
-  ['Gallery R41 | brass scroll fixings', 'brass', BRASS]]) {
+  ['Gallery R42 | forged scroll balustrade', 'iron', IRON],
+  ['Gallery R42 | profiled timber handrail', 'timber', TIMBER],
+  ['Gallery R42 | brass scroll fixings', 'brass', BRASS]]) {
   const builder = builders[key];
   if (!builder.count) continue;
   const material = root.listMaterials().find((m) => m.getName() === materialName);
@@ -293,7 +350,9 @@ for (const [name, key, materialName] of [
   authored += builder.index.length / 3;
   console.log(`${name}: ${builder.index.length / 3} triangles`);
 }
-console.log(`${panels} scroll panels over ${nodes.length - 1} runs; ${removed} R20 triangles removed, ${authored} authored`);
+console.log(`${panels} scroll panels over ${nodes.length - 1} runs (${trimmed} trimmed to a wall); ` +
+  `${removed} superseded triangles removed, ${authored} authored`);
+for (const t of trims) console.log('  ', JSON.stringify(t));
 
 // Disposing a node and its mesh leaves the accessors behind, and their
 
@@ -317,8 +376,9 @@ const raw = readFileSync(file);
 asset.bytes = raw.length;
 asset.sha256 = createHash('sha256').update(raw).digest('hex');
 writeFileSync(FULL + '/manifest.json', JSON.stringify(manifest, null, 2));
-writeFileSync(ROOT + '/build/gallery-balustrade-r41.json', JSON.stringify({
-  generated_for: 'R41', runs: nodes.length - 1, panels, removed_triangles: removed,
+writeFileSync(ROOT + '/build/gallery-balustrade-r42.json', JSON.stringify({
+  generated_for: 'R42', runs: nodes.length - 1, panels, removed_triangles: removed,
   authored_triangles: authored, rail: RAIL, layout_revision: layout.revision,
+  trimmed_runs: trimmed, trims,
 }, null, 2));
 console.log('level-2.glb re-encoded:', asset.bytes, 'bytes');

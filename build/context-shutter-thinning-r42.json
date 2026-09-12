@@ -1,0 +1,28 @@
+{
+  "generated_for": "R42",
+  "nodes_removed": 4,
+  "triangles_before": 4510873,
+  "triangles_after": 3260743,
+  "draws_before": 2697,
+  "draws_after": 2657,
+  "bytes_before": 5368892,
+  "bytes_after": 4641956,
+  "dropped": [
+    {
+      "node": "B16 | PENCERE KAPI$SHUTTER AİM",
+      "triangles": 16985
+    },
+    {
+      "node": "B16 | PENCERE KAPI$SHUTTER AİM.001",
+      "triangles": 56197
+    },
+    {
+      "node": "B16 | PENCERE KAPI$SHUTTER AİM.002",
+      "triangles": 50910
+    },
+    {
+      "node": "B16 | PENCERE KAPI$SHUTTER AİM.003",
+      "triangles": 921
+    }
+  ]
+}

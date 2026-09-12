@@ -17,14 +17,20 @@ export function smoothStep(t) {
 // noise, and `fade` is where that starts. The number that matters is how wide
 // one period is on screen: a 0.14 m masonry ruling over a whole storey is two
 // or three pixels, so it fades and the wall reads as the solid poché a plan
-// wants at that distance. The earth is not a 0.20 m wall - it is the whole
-// excavation, hundreds of square metres of it - and a flat black field that
-// size does not read as ground, it reads as a hole in the drawing. So it takes
-// a site ruling, coarse enough (0.80 m, and nearly a fifth of it inked) to
-// stay legible from the same distance the plan is read at, and it does not
-// fade.
+// wants at that distance.
+//
+// R40 gave the earth a 0.80 m ruling with nearly a fifth of it inked, on the
+// argument that a site field is hundreds of square metres and needs a coarse
+// rule to survive the distance a plan is read at. R42 overrules that on the
+// client's instruction - "daha kibar tara, duvarların taranması gibi" - and it
+// is the better drawing: at the basement zoom a 0.80 m band is a broad stripe
+// and it shouts over the plan it is supposed to sit behind. The earth now
+// takes the masonry ruling's proportions, 6% of the period inked, at a 0.36 m
+// pitch that holds about ten pixels a period at that zoom. It keeps its warmer
+// ink, and it fades only when a period falls under about three pixels, which
+// no basement view reaches.
 export const SECTION_POCHE = {pitch:0.14, duty:0.065, ground:[0.020,0.020,0.023], ink:[0.32,0.31,0.29], fade:[0.25,0.80]};
-export const SOIL_POCHE = {pitch:0.80, duty:0.170, ground:[0.026,0.025,0.021], ink:[0.46,0.44,0.38], fade:null};
+export const SOIL_POCHE = {pitch:0.36, duty:0.060, ground:[0.028,0.027,0.024], ink:[0.42,0.40,0.35], fade:[0.33,1.10]};
 export function createHatchMaterial({pitch, duty, ground, ink, fade=[0.25,0.80]}) {
   return new THREE.ShaderMaterial({side:THREE.DoubleSide,
     vertexShader: `varying vec3 worldPosition;
@@ -108,12 +114,15 @@ export function createWallCaps(atlas) {
 // geometry recovers the right area at 1.6 m but returns nonsense at other
 // heights, which is exactly why the authored face exists.
 //
-// R42 adds a second face in the same material. The authored one covers the
-// earth the plane passes through; it cannot cover the 48 m2 under the entrance
-// wing, where the CAD excavated the footprint and then built no basement, so
-// the plane cuts a void and the view falls through to the back of the
-// excavation. Both faces are earth in plan and both are collected here, so a
-// cap added to the delivery needs no change in the viewer.
+// R42 adds a second face in the same material: the site field. The authored
+// one covers the earth the plane passes through; it cannot cover the 48 m2
+// under the entrance wing, where the CAD excavated the footprint and then
+// built no basement, nor the 283 m2 of plot ground that lies below the cut
+// rather than through it, and the review asks for both. The field is draped
+// over the ground it describes instead of floating on the cut plane, so the
+// basement view can be tilted without a sheet appearing in mid air. Every face
+// in the material is collected here, so a cap added to the delivery needs no
+// change in the viewer.
 export const SOIL_CUT_HEIGHT = 1.6;
 export function createSoilCap(capScene) {
   const group = new THREE.Group(); group.name = 'Authored soil section';

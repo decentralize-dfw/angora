@@ -1,0 +1,11 @@
+{
+  "generated_for": "R42",
+  "cell_m": 0.05,
+  "sample_m": 0.025,
+  "opening_gap_m": 0.1,
+  "floor_y": 9.4755,
+  "cells": 4027,
+  "volume_m3": 15.124,
+  "boxes": 2353,
+  "triangles": 28236
+}

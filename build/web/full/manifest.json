@@ -78,8 +78,8 @@
     {
       "id": "level-2",
       "file": "level-2.glb",
-      "bytes": 2642788,
-      "sha256": "684d76b018f9b046625e73b850475b71da110975de7e78df2e15a7bf8fccc423",
+      "bytes": 2636660,
+      "sha256": "e93c8915b308c1387d26e3a457390f4342f3ce6c5730803f47d6173b8205939c",
       "source_objects": 639,
       "exported_mesh_nodes": 639,
       "shared_meshes": 426,
@@ -107,8 +107,8 @@
     {
       "id": "level-3",
       "file": "level-3.glb",
-      "bytes": 985372,
-      "sha256": "fbf904541ea23b6c87fe593976312729b311e05ae8a1756014abdd503693d9db",
+      "bytes": 1037760,
+      "sha256": "ca6ba91f8115ab3c549761d4d4e76b8925a9c171a2fc2a043c070b25a6aab04f",
       "source_objects": 232,
       "exported_mesh_nodes": 232,
       "shared_meshes": 157,
@@ -194,8 +194,8 @@
     {
       "id": "context",
       "file": "context.glb",
-      "bytes": 5368892,
-      "sha256": "42ec5815fc3a7955554f12be49d98fc9c1d7f8278a5b821da5d1db1d1799f736",
+      "bytes": 4641956,
+      "sha256": "ea3dd6d48eb6d10a2e640e3dc94d2530a622a4abc0f27317fbe904de5ea1fdfa",
       "source_objects": 2507,
       "exported_mesh_nodes": 2507,
       "shared_meshes": 404,
@@ -283,12 +283,12 @@
   "section_cap_asset": {
     "id": "section-caps",
     "file": "section-caps.glb",
-    "bytes": 88024,
-    "sha256": "f2f3bf8d86095d89469e40bbf789771f46115ad0eefeaa6772b12293267964a0",
+    "bytes": 100524,
+    "sha256": "a5ec9369933d39ae63b986451cbc1649ddd53d5c2751126ac1b94e12a780a6d5",
     "source_objects": 7,
     "exported_mesh_nodes": 8,
     "shared_meshes": 8,
-    "triangles": 4429,
+    "triangles": 19853,
     "bounds_native_m": [
       [
         -11.199999809265137,

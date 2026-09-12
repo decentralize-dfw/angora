@@ -1,0 +1,37 @@
+{
+  "generated_for": "R42",
+  "runs": 4,
+  "panels": 8,
+  "removed_triangles": 16404,
+  "authored_triangles": 14604,
+  "rail": {
+    "height": 1,
+    "bottomRail": [
+      0.05,
+      0.09
+    ],
+    "infillTop": 0.865,
+    "handrail": {
+      "width": 0.088,
+      "depth": 0.052
+    },
+    "newel": 0.042,
+    "bar": {
+      "width": 0.015,
+      "depth": 0.008
+    },
+    "panel": 0.78,
+    "ball": 0.017
+  },
+  "layout_revision": 20,
+  "trimmed_runs": 1,
+  "trims": [
+    {
+      "run": 0,
+      "full": 2.715,
+      "kept": 1.535,
+      "cut_at_start_m": 1.18,
+      "cut_at_end_m": 0
+    }
+  ]
+}

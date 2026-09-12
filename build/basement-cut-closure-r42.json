@@ -1,21 +1,24 @@
 {
   "generated_for": "R42",
   "cut_height_m": 1.6,
-  "cell_m": 0.025,
+  "cell_m": 0.2,
+  "drape_m": 0.006,
   "plot_footprint": {
     "x": [
-      -11.175,
-      11.476
+      -11,
+      11.301
     ],
     "z": [
-      -23.975,
-      11.033
+      -23.8,
+      10.858
     ]
   },
-  "empty_cells": 77402,
-  "closed_area_m2": 48.376,
-  "runs": 600,
-  "triangles": 1200,
-  "cap_asset_bytes": 88024,
-  "cap_asset_triangles": 4429
+  "ground_cells": 7081,
+  "void_cells": 1231,
+  "ground_area_m2": 283.24,
+  "void_area_m2": 49.24,
+  "closed_area_m2": 332.48,
+  "triangles": 16624,
+  "cap_asset_bytes": 100524,
+  "cap_asset_triangles": 19853
 }

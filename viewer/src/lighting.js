@@ -113,7 +113,18 @@ export function buildEnvironment(renderer,{sky=null,background=null}) {
 }
 
 export function isGlazing(material) {
-  return material.transmission>0 || (material.transparent && material.opacity<.98) || /glass|glazing|cam yüzey/i.test(material.name);
+  return isSeeThrough(material) || /glass|glazing|cam yüzey/i.test(material.name);
+}
+// Whether anything is actually visible through it, which is a different
+// question from whether it is glass. The lift door's rose, leaves and amber
+// ribbon are glass by name and by material - and they are solid: coloured
+// pieces leaded into the panel, transmission 0, fully opaque. Switching their
+// depth write off with the windows' let the frosted ground, which three draws
+// in its own pass after the opaque queue, paint straight over them, and the
+// leaded pattern went under a milky sheet. Depth belongs to whatever you
+// cannot see through.
+export function isSeeThrough(material) {
+  return material.transmission>0 || (material.transparent && material.opacity<.98);
 }
 export function createLighting(renderer, scene, camera, clip) {
   const compact=matchMedia('(pointer: coarse)').matches;
@@ -234,7 +245,7 @@ export function createLighting(renderer, scene, camera, clip) {
       for(const material of materials) {
         prepareMaterialResponse(material,{context});preparedMaterials.add(material);
         material.clipShadows=true;
-        if(isGlazing(material)){material.depthWrite=false;material.metalness=0;}
+        if(isGlazing(material)){material.metalness=0;if(isSeeThrough(material))material.depthWrite=false;}
         for(const value of Object.values(material))if(value?.isTexture)value.anisotropy=Math.min(compact?8:16,renderer.capabilities.getMaxAnisotropy());
       }
     },
