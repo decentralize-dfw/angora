@@ -4,8 +4,13 @@
   "sample_m": 0.025,
   "opening_gap_m": 0.1,
   "floor_y": 9.4755,
-  "cells": 4027,
-  "volume_m3": 15.124,
-  "boxes": 2353,
-  "triangles": 28236
+  "cells": 4022,
+  "volume_m3": 15.114,
+  "boxes": 2351,
+  "triangles": 28212,
+  "verified": {
+    "doorways": 3,
+    "panes_checked": 6,
+    "rays_blocked": 0
+  }
 }

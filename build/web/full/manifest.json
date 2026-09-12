@@ -107,8 +107,8 @@
     {
       "id": "level-3",
       "file": "level-3.glb",
-      "bytes": 1037760,
-      "sha256": "ca6ba91f8115ab3c549761d4d4e76b8925a9c171a2fc2a043c070b25a6aab04f",
+      "bytes": 1038608,
+      "sha256": "087f481e3efc1d805be729a7044f032d13260bacfd7d0bc3b2de8fe2b37bf242",
       "source_objects": 232,
       "exported_mesh_nodes": 232,
       "shared_meshes": 157,

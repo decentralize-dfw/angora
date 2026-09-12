@@ -40,6 +40,10 @@ const GAP = 0.10;                // a jump wider than this is an opening
 const MIN_FILL = 0.12;           // a stub shorter than this is not worth a box
 const PLASTER = 'interior';
 
+// Re-running this re-quantises the storey, so the wall it reads back is the
+// wall it wrote, to within Draco's 14-bit position grid. The core therefore
+// drifts by a few dozen boxes between runs and settles; what does not drift is
+// the guard below, which is the thing that matters.
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({
   'draco3d.decoder': await draco3d.createDecoderModule(),
   'draco3d.encoder': await draco3d.createEncoderModule(),
@@ -177,6 +181,76 @@ for (const box of boxes) {
 }
 console.log(`${boxes.length} boxes, ${index.length / 3} triangles of partition core`);
 
+// ---------------------------------------------------------------- the guard
+// R41's core closed all three attic doorways and two of the three windows and
+// nothing said so until the review did. So the tool proves its own work before
+// it writes: a ray through every scheduled opening and every pane, against the
+// core it has just built. If one is blocked, nothing is written.
+function rayHits(origin, direction, triangles, limit) {
+  for (const [a, b, c] of triangles) {
+    const e1 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];
+    const e2 = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];
+    const p = [direction[1] * e2[2] - direction[2] * e2[1],
+               direction[2] * e2[0] - direction[0] * e2[2],
+               direction[0] * e2[1] - direction[1] * e2[0]];
+    const det = e1[0] * p[0] + e1[1] * p[1] + e1[2] * p[2];
+    if (Math.abs(det) < 1e-12) continue;
+    const inv = 1 / det, s = [origin[0] - a[0], origin[1] - a[1], origin[2] - a[2]];
+    const u = (s[0] * p[0] + s[1] * p[1] + s[2] * p[2]) * inv;
+    if (u < 0 || u > 1) continue;
+    const q = [s[1] * e1[2] - s[2] * e1[1], s[2] * e1[0] - s[0] * e1[2], s[0] * e1[1] - s[1] * e1[0]];
+    const v = (direction[0] * q[0] + direction[1] * q[1] + direction[2] * q[2]) * inv;
+    if (v < 0 || u + v > 1) continue;
+    const t = (e2[0] * q[0] + e2[1] * q[1] + e2[2] * q[2]) * inv;
+    if (t > 0 && t < limit) return true;
+  }
+  return false;
+}
+const core = [];
+for (let t = 0; t < index.length; t += 3)
+  core.push([0, 1, 2].map((k) => position.slice(index[t + k] * 3, index[t + k] * 3 + 3)));
+
+const schedule = JSON.parse(readFileSync(ROOT + '/build/cad/door-schedule-r41.json', 'utf8'));
+const blocked = [];
+for (const door of schedule.doors.filter((d) => d.level === 3)) {
+  const yaw = door.frame_yaw_deg * Math.PI / 180;
+  const along = [Math.cos(yaw), 0, Math.sin(yaw)], through = [-Math.sin(yaw), 0, Math.cos(yaw)];
+  for (const a of [-0.25, 0, 0.25]) for (const y of [0.4, 1.0, 1.6]) {
+    const origin = [door.frame_centre[0] + along[0] * a - through[0] * 0.9, door.floor_y + y,
+                    door.frame_centre[1] + along[2] * a - through[2] * 0.9];
+    if (rayHits(origin, through, core, 1.8)) blocked.push(`${door.id} at ${a.toFixed(2)}, ${y.toFixed(1)}`);
+  }
+}
+// the attic glazing, clustered into panes
+const glass = [];
+for (const node of root.listNodes())
+  if (node.getMesh() && node.getName() === 'F3 | PENCERE_KAPI$CAM') glass.push(...worldTriangles(node));
+const panes = [];
+for (const tri of glass) {
+  const lo = [0, 1, 2].map((k) => Math.min(...tri.map((p) => p[k])));
+  const hi = [0, 1, 2].map((k) => Math.max(...tri.map((p) => p[k])));
+  const near = panes.find((p) => lo[0] <= p[1][0] + 0.15 && hi[0] >= p[0][0] - 0.15
+    && lo[2] <= p[1][2] + 0.15 && hi[2] >= p[0][2] - 0.15 && lo[1] <= p[1][1] + 0.3 && hi[1] >= p[0][1] - 0.3);
+  if (near) for (let k = 0; k < 3; k++) { near[0][k] = Math.min(near[0][k], lo[k]); near[1][k] = Math.max(near[1][k], hi[k]); }
+  else panes.push([lo, hi]);
+}
+let checkedPanes = 0;
+for (const [lo, hi] of panes) {
+  if (hi[1] - lo[1] < 0.25) continue;                // transoms and slivers
+  checkedPanes++;
+  const spanX = hi[0] - lo[0], spanZ = hi[2] - lo[2];
+  const out = spanX < spanZ ? [1, 0, 0] : [0, 0, 1];
+  for (let a = 0.12; a <= 0.88; a += 0.19) for (let b = 0.15; b <= 0.85; b += 0.175) {
+    const origin = [lo[0] + (spanX < spanZ ? 0 : spanX * a) - out[0] * 0.9,
+                    lo[1] + (hi[1] - lo[1]) * b,
+                    lo[2] + (spanX < spanZ ? spanZ * a : 0) - out[2] * 0.9];
+    if (rayHits(origin, out, core, 1.8)) blocked.push(`pane at y ${origin[1].toFixed(2)}`);
+  }
+}
+if (blocked.length)
+  throw new Error(`the core blocks ${blocked.length} sight lines: ${blocked.slice(0, 6).join('; ')}`);
+console.log(`clear: ${schedule.doors.filter((d) => d.level === 3).length} attic doorways, ${checkedPanes} panes`);
+
 const material = root.listMaterials().find((m) => m.getName() === PLASTER);
 if (!material) throw new Error('no plaster finish to give the fill');
 const buffer = root.listBuffers()[0] ?? doc.createBuffer();
@@ -212,5 +286,7 @@ writeFileSync(ROOT + '/build/attic-partition-core-r42.json', JSON.stringify({
   generated_for: 'R42', cell_m: CELL, sample_m: SAMPLE, opening_gap_m: GAP,
   floor_y: FLOOR, cells: spans.size, volume_m3: +filled.toFixed(3),
   boxes: boxes.length, triangles: index.length / 3,
+  verified: { doorways: schedule.doors.filter((d) => d.level === 3).length,
+    panes_checked: checkedPanes, rays_blocked: 0 },
 }, null, 2));
 console.log('level-3.glb re-encoded:', asset.bytes, 'bytes');

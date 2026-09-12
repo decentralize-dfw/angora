@@ -83,6 +83,22 @@ test('The basement cut is closed: nothing the plane passes through is left unhat
   assert.equal(report.cap_asset_triangles,manifest.section_cap_asset.triangles);
 });
 
+test('The attic core stands clear of every attic doorway and window',()=>{
+  // R41's core filled each plan cell from the floor to the highest wall
+  // triangle over it, which over an opening is the head of the opening's own
+  // wall - so it closed all three attic doorways and two of the three windows,
+  // and nothing said so until the review did. The R42 tool now fires a ray
+  // through every scheduled opening and every pane against the core it has
+  // just built, and writes nothing if one is blocked. This is that record.
+  const core=JSON.parse(fs.readFileSync(new URL('build/attic-partition-core-r42.json',new URL('../../',import.meta.url))));
+  assert.equal(core.verified.rays_blocked,0);
+  assert.equal(core.verified.doorways,3,'all three attic doorways were tested');
+  assert.ok(core.verified.panes_checked>=5,`only ${core.verified.panes_checked} panes tested`);
+  // a gap wider than this in a cell's sorted sample heights is an opening; it
+  // has to stay well under a door head and well over the sampling step
+  assert.ok(core.opening_gap_m>core.sample_m*2&&core.opening_gap_m<0.5,`gap ${core.opening_gap_m}`);
+});
+
 test('The wall and roof caps are redundant with the atlas, licensing the decision not to draw them',()=>{
   // If a future export changes this, the decision has to be revisited - that
   // is what this test is for, not decoration.
