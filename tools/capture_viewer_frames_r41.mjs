@@ -30,7 +30,7 @@ const server = createServer((req, res) => {
     res.end(body);
   } catch { res.statusCode = 404; res.end(); }
 });
-await new Promise((r) => server.listen(8983, r));
+await new Promise((r) => server.listen(9107, r));
 
 const browser = await chromium.launch({
   executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
@@ -56,7 +56,7 @@ async function capture(name) {
 
 // ?view=f3 is part of the viewer's own share state, so the attic is selected
 // before the first frame is drawn rather than through a click and a transition
-await page.goto('http://127.0.0.1:8983/?view=f3', { waitUntil: 'domcontentloaded' });
+await page.goto('http://127.0.0.1:9107/?view=f3', { waitUntil: 'domcontentloaded' });
 await page.waitForFunction(
   () => document.querySelector('#qa-screenshot') && !document.querySelector('#qa-screenshot').disabled,
   null, { timeout: 1200000 });
