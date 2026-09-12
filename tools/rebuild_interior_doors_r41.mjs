@@ -47,8 +47,16 @@ const LEAF = {
   knobHeight: 1.020, knobInset: 0.068,
 };
 const CASING = { face: 0.075, proud: 0.020, lining: 0.020, head: 2.060, outer: 2.100 };
-const WALNUT = 'R31 | R35 door dark walnut';
-const BRASS = 'R31 | R35 door brass';
+// The delivery's own dark-wood and brass finishes. They are the ones the
+// recovered interior doors already carried and the ones the lift's joinery and
+// the roof fascia carry, and - unlike the R33 external-door pair - they exist
+// on all four storeys. An earlier cut cloned the R33 walnut onto the attic
+// instead and the attic's doors came out pale grey with a silver knob: the
+// clone was structurally valid but not the same material, and chasing the
+// difference was worth less than not needing one. Twelve identical doors want
+// one finish, not one finish and a copy of it.
+const WALNUT = 'wood_dark';
+const BRASS = 'brass';
 
 // ---------------------------------------------------------------- geometry --
 // A tiny accumulator. Everything is authored in the door's own frame - x along
@@ -258,32 +266,6 @@ const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies(
   'draco3d.encoder': await draco3d.createEncoderModule(),
 });
 
-// Level 3 never carried the authored door materials, so they are copied over
-// with their maps rather than substituted for something that nearly matches.
-const donor = await io.read(FULL + '/level-0.glb');
-function cloneMaterial(doc, name) {
-  const source = donor.getRoot().listMaterials().find((m) => m.getName() === name);
-  if (!source) throw new Error('donor material missing: ' + name);
-  const material = doc.createMaterial(name)
-    .setBaseColorFactor(source.getBaseColorFactor())
-    .setMetallicFactor(source.getMetallicFactor())
-    .setRoughnessFactor(source.getRoughnessFactor())
-    .setEmissiveFactor(source.getEmissiveFactor())
-    .setDoubleSided(source.getDoubleSided())
-    .setAlphaMode(source.getAlphaMode());
-  for (const [get, set] of [['getBaseColorTexture', 'setBaseColorTexture'],
-    ['getNormalTexture', 'setNormalTexture'],
-    ['getMetallicRoughnessTexture', 'setMetallicRoughnessTexture'],
-    ['getOcclusionTexture', 'setOcclusionTexture']]) {
-    const texture = source[get]();
-    if (!texture) continue;
-    material[set](doc.createTexture(texture.getName())
-      .setImage(texture.getImage()).setMimeType(texture.getMimeType()));
-  }
-  if (source.getNormalScale && source.getNormalTexture()) material.setNormalScale(source.getNormalScale());
-  return material;
-}
-
 let totalDoors = 0, totalTriangles = 0;
 const report = { generated_for: 'R41', leaf: LEAF, casing: CASING, doors: [] };
 for (const level of [0, 1, 2, 3]) {
@@ -346,8 +328,11 @@ for (const level of [0, 1, 2, 3]) {
   }
 
   const materials = new Map();
-  for (const name of [WALNUT, BRASS])
-    materials.set(name, root.listMaterials().find((m) => m.getName() === name) ?? cloneMaterial(doc, name));
+  for (const name of [WALNUT, BRASS]) {
+    const material = root.listMaterials().find((m) => m.getName() === name);
+    if (!material) throw new Error(`level-${level} has no ${name} to finish its doors in`);
+    materials.set(name, material);
+  }
 
   const buffer = root.listBuffers()[0] ?? doc.createBuffer();
   for (const [name, builder, material] of [
