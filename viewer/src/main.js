@@ -422,9 +422,26 @@ async function loadModel() {
       if(data.source_fittings_sha256!==manifest.library_hashes['build/blender/layers/20-fixed-fittings.blend'])throw Error('Navigation/fittings revision mismatch');
       return data;
     }
+    // R42: one plane cuts the whole property. Two of the neighbourhood's trees
+    // are planted inside the boundary and arrive in context.glb, so they used
+    // to stand whole over the Bodrum plan - 212,000 vertices of canopy above
+    // the cut - while the garden's own spruces beside them were sectioned.
+    // "arsa içi, orda kot farklı olmasın, tek bir clipping plane çalışacak."
+    // Anything from the neighbourhood whose body sits inside the plot is cut
+    // with the garden; the roads, the curbs and the neighbours' blocks, which
+    // only clip the boundary, stay whole.
+    const plotBox = new THREE.Box3(new THREE.Vector3(-10.2, -40, -29.1), new THREE.Vector3(12.5, 40, 11));
+    const centre = new THREE.Vector3(), bounds = new THREE.Box3();
+    const onThePlot = (mesh) => {
+      if (!mesh.geometry?.boundingBox) mesh.geometry?.computeBoundingBox();
+      if (!mesh.geometry?.boundingBox) return false;
+      bounds.copy(mesh.geometry.boundingBox).applyMatrix4(mesh.matrixWorld);
+      return plotBox.containsPoint(bounds.getCenter(centre));
+    };
     function stageGroup(id) {
       const group=staged.get(id);
       groups.set(id, group); scene.add(group);
+      group.updateMatrixWorld(true);
       group.traverse(o => {
         if (!o.isMesh) return;
         o.renderOrder = 5;
@@ -434,7 +451,8 @@ async function loadModel() {
         // context only the plot's own soil is cut, by the snap plane, so the
         // neighbourhood and roads stay whole and the authored cap always fits.
         const planes=building||id==='garden'?[clip]
-          :(Array.isArray(o.material)?o.material:[o.material]).some(m=>m?.userData.plotSoil)?[earthClip]:[];
+          :(Array.isArray(o.material)?o.material:[o.material]).some(m=>m?.userData.plotSoil)?[earthClip]
+          :onThePlot(o)?[clip]:[];
         lighting.prepareMesh(o,{clipped:planes[0]===clip,context:!building});
         o.userData.clipPlanes=planes;
         if (planes.length) for (const m of Array.isArray(o.material) ? o.material : [o.material]) {
