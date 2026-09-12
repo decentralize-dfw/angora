@@ -30,7 +30,7 @@ const server = createServer((req, res) => {
     res.end(body);
   } catch { res.statusCode = 404; res.end(); }
 });
-await new Promise((r) => server.listen(8951, r));
+await new Promise((r) => server.listen(8967, r));
 
 const browser = await chromium.launch({
   executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
@@ -54,7 +54,7 @@ async function capture(name) {
   console.log('OK', name);
 }
 
-await page.goto('http://127.0.0.1:8951/', { waitUntil: 'domcontentloaded' });
+await page.goto('http://127.0.0.1:8967/', { waitUntil: 'domcontentloaded' });
 await page.waitForFunction(
   () => document.querySelector('#qa-screenshot') && !document.querySelector('#qa-screenshot').disabled,
   null, { timeout: 1200000 });
@@ -62,7 +62,6 @@ console.log('scene ready');
 
 await click('button[data-view="f3"]');
 await page.waitForTimeout(8000);
-await capture('01 attic-plan');
 
 // start the walk at the attic bedroom's station
 const started = await page.evaluate(() => {
@@ -78,7 +77,7 @@ await capture('02 attic-walk');
 
 // sweep the view so the door comes into frame
 const box = await page.locator('canvas').boundingBox();
-for (let step = 1; step <= 5; step++) {
+for (let step = 1; step <= 3; step++) {
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
   await page.mouse.down();
   await page.mouse.move(box.x + box.width / 2 - 210, box.y + box.height / 2, { steps: 14 });
