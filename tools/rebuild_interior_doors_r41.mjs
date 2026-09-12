@@ -47,16 +47,26 @@ const LEAF = {
   knobHeight: 1.020, knobInset: 0.068,
 };
 const CASING = { face: 0.075, proud: 0.020, lining: 0.020, head: 2.060, outer: 2.100 };
-// The delivery's own dark-wood and brass finishes. They are the ones the
-// recovered interior doors already carried and the ones the lift's joinery and
-// the roof fascia carry, and - unlike the R33 external-door pair - they exist
-// on all four storeys. An earlier cut cloned the R33 walnut onto the attic
-// instead and the attic's doors came out pale grey with a silver knob: the
-// clone was structurally valid but not the same material, and chasing the
-// difference was worth less than not needing one. Twelve identical doors want
-// one finish, not one finish and a copy of it.
+// The timber is the delivery's own dark wood: it is what the recovered
+// interior doors already carried, what the lift's joinery and the roof fascia
+// carry, and - unlike the R33 external-door pair - it exists on all four
+// storeys. An earlier cut cloned the R33 walnut onto the attic instead and
+// those doors came out pale grey; the clone was structurally valid but not the
+// same material, and chasing the difference was worth less than not needing
+// one.
 const WALNUT = 'wood_dark';
-const BRASS = 'brass';
+// The hardware cannot take the same treatment. The house's plain `brass` is
+// fully metallic, so it has no colour of its own - it mirrors whatever is
+// around it, and under a bright sky every knob came out chrome. The authored
+// door brass is 0.85 metallic over a warm base and reads as brass, and it
+// carries no texture at all, so where a storey lacks it the same material can
+// simply be written out again rather than copied: there is nothing in it but
+// four numbers.
+const BRASS = 'R31 | R35 door brass';
+const BRASS_FACTORS = {
+  baseColor: [0.3762621283531189, 0.2541520893573761, 0.09084171056747437, 1],
+  metallic: 0.8500000238418579, roughness: 0.23000000417232513,
+};
 
 // ---------------------------------------------------------------- geometry --
 // A tiny accumulator. Everything is authored in the door's own frame - x along
@@ -328,11 +338,15 @@ for (const level of [0, 1, 2, 3]) {
   }
 
   const materials = new Map();
-  for (const name of [WALNUT, BRASS]) {
-    const material = root.listMaterials().find((m) => m.getName() === name);
-    if (!material) throw new Error(`level-${level} has no ${name} to finish its doors in`);
-    materials.set(name, material);
-  }
+  const timber = root.listMaterials().find((m) => m.getName() === WALNUT);
+  if (!timber) throw new Error(`level-${level} has no ${WALNUT} to finish its doors in`);
+  materials.set(WALNUT, timber);
+  materials.set(BRASS, root.listMaterials().find((m) => m.getName() === BRASS)
+    ?? doc.createMaterial(BRASS)
+      .setBaseColorFactor(BRASS_FACTORS.baseColor)
+      .setMetallicFactor(BRASS_FACTORS.metallic)
+      .setRoughnessFactor(BRASS_FACTORS.roughness)
+      .setDoubleSided(true));
 
   const buffer = root.listBuffers()[0] ?? doc.createBuffer();
   for (const [name, builder, material] of [
