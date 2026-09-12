@@ -1,0 +1,31 @@
+{
+  "generated_for": "R42",
+  "tolerance_m": 0.1,
+  "vertical_threshold": 0.5,
+  "levels": [
+    {
+      "level": "level-0",
+      "moved_to_facade": 171,
+      "kept_indoors": 41,
+      "horizontal": 409
+    },
+    {
+      "level": "level-1",
+      "moved_to_facade": 127,
+      "kept_indoors": 168,
+      "horizontal": 699
+    },
+    {
+      "level": "level-2",
+      "moved_to_facade": 90,
+      "kept_indoors": 121,
+      "horizontal": 505
+    },
+    {
+      "level": "level-3",
+      "moved_to_facade": 16,
+      "kept_indoors": 0,
+      "horizontal": 58
+    }
+  ]
+}
