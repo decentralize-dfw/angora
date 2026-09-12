@@ -1,29 +1,27 @@
-// R42 | Hatch the whole plot at the basement cut, and hatch it finely.
+// R42 | Hatch what the basement plane cuts through, and nothing else.
+//
+// Two corrections in one, both from the review.
 //
 // The first pass closed the 48 m² hole under the entrance wing: six probes
 // inside it return no level-0 geometry and no plot soil, and the first thing a
-// ray meets is the ground-floor slab soffit at 2.70 m, so the plane cut a void
-// and the view fell through to the back of the excavation. That is still done
-// here, and the reasoning still holds - the volume is the fill carrying the
-// entrance slab, and in plan that is earth.
+// ray meets is the ground-floor slab soffit at 2.70 m. The CAD excavated the
+// whole footprint and built a basement under half of it, so the plane cuts a
+// void and the view falls through to the back of the excavation. That is still
+// closed here, and it is still earth in plan.
 //
-// The review then widened it: "sadece basement bina alanı değil, arsa içindeki,
-// bahçe olan ve kesit alanının altında kalan alanlar da taranmalıdır. ve daha
-// kibar tara, duvarların taranması gibi." So the field is the plot, not the
-// hole, and it is drawn thin.
+// The second pass then draped a field over the plot's ground, and that was the
+// error: "tam tersini bahçede taramışsın". A section hatch marks what the plane
+// passes THROUGH. The rear lawn lies below the plane - the plane never touches
+// it - so it is seen, not cut, and it stays lawn. The upslope ground by the
+// garage and the entrance stands above the plane, so the plane is in it, and
+// that is what takes the poché. This hatches exactly that: every cell inside
+// the plot whose ground surface rises above the cut, plus the void, and none
+// of the ground that lies under it.
 //
-// Two things follow. First, scope: every cell inside the plot's own soil
-// footprint whose topmost surface at or below the cut is earth - the soil
-// volume, the lawn, the planting rooted in it - or nothing at all. The pool,
-// its coping and water, the terrace, the garden stairs, the retaining walls
-// and the house itself are constructions standing in that earth and they keep
-// their own reading.
-//
-// Second, height. A flat sheet at 1.60 m over the whole plot would float up to
-// 1.7 m above the rear lawn, and the basement view can be tilted. So the field
-// is draped: where the earth rises through the cut it sits on the cut, and
-// where it falls away it lies 6 mm over the ground it describes. The hatch is
-// keyed to world x+z, so draping changes nothing about the ruling.
+// The field is therefore flat, at the cut, like any section - which also ends
+// the ripple the drape put through the ruling. It sits 4 mm under the plane so
+// the wall poché from the atlas, which is drawn at the plane itself, stays on
+// top of it where the two meet.
 import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { NodeIO } from '@gltf-transform/core';
@@ -38,18 +36,15 @@ const HATCH = 'R32 | soil section hatch';
 const NODE = 'R42 F0 site section field';
 const OLD_NODES = ['R42 F0 basement fill cut face', NODE];
 const CUT = 1.6;                 // SOIL_CUT_HEIGHT in viewer/src/section.js
-const CELL = 0.15;
-const DRAPE = 0.006;             // how far the field sits over the ground it describes
-// The f0 view cuts the building and the garden with the section plane and the
-// plot's own soil with the earth plane; the neighbourhood terrain is never cut.
+const UNDER = 0.004;             // the wall poché is drawn at the plane; this goes under it
+const CELL = 0.10;
+// The plot as the viewer frames it, which is wider than the soil body's own
+// footprint and takes in the driveway, the entry path and the boundary planting.
+const PLOT = { x: [-10.2, 12.5], z: [-29.1, 11.0] };
+// Cut by the section plane at f0: the building, and the garden with it.
 const CLIPPED = ['level-0', 'level-1', 'level-2', 'level-3', 'envelope', 'garden'];
+// Of the neighbourhood only the plot's own earth is cut, by the snap plane.
 const PLOT_SOIL = /^R32 \| Continuous local soil volume/;
-// What is built rather than grown. Everything else on the plot - the soil
-// volume, the lawn, the hedges, the spruces, the beds - is the ground, and
-// listing what to exclude rather than what to include is what keeps the field
-// continuous: a shrub whose name nobody anticipated leaves a hole in the
-// drawing, an unanticipated retaining wall only leaves itself unhatched.
-const CONSTRUCTION = /pool|terrace|stair|merdiven|retaining|coping|wall|paving|kerb|curb|deck|fence|railing/i;
 
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({
   'draco3d.decoder': await draco3d.createDecoderModule(),
@@ -75,30 +70,20 @@ function* worldTriangles(node) {
   }
 }
 
-// ---------------------------------------------------------------- plot extent
-const contextDoc = await io.read(`${FULL}/context.glb`);
-const soilNodes = contextDoc.getRoot().listNodes()
-  .filter((n) => n.getMesh() && PLOT_SOIL.test(n.getName()));
-if (!soilNodes.length) throw new Error('no plot soil volume in context.glb');
+const nx = Math.ceil((PLOT.x[1] - PLOT.x[0]) / CELL), nz = Math.ceil((PLOT.z[1] - PLOT.z[0]) / CELL);
+const [x0, z0] = [PLOT.x[0], PLOT.z[0]];
+console.log(`plot x[${PLOT.x}] z[${PLOT.z}] -> ${nx}x${nz} cells at ${CELL * 1000} mm`);
 
-let x0 = Infinity, x1 = -Infinity, z0 = Infinity, z1 = -Infinity;
-for (const node of soilNodes) for (const tri of worldTriangles(node)) for (const [x, , z] of tri) {
-  x0 = Math.min(x0, x); x1 = Math.max(x1, x); z0 = Math.min(z0, z); z1 = Math.max(z1, z);
-}
-// hold the edge in by a cell so the plot boundary itself is not read as ground
-x0 += CELL; x1 -= CELL; z0 += CELL; z1 -= CELL;
-const nx = Math.ceil((x1 - x0) / CELL), nz = Math.ceil((z1 - z0) / CELL);
-console.log(`plot x[${x0.toFixed(2)},${x1.toFixed(2)}] z[${z0.toFixed(2)},${z1.toFixed(2)}] -> ${nx}x${nz} cells at ${CELL} m`);
-
-// ------------------------------------ the topmost surface at or below the cut
-const top = new Float32Array(nx * nz).fill(-Infinity);
-const owner = new Uint8Array(nx * nz);          // 0 nothing, 1 earth, 2 construction
-function rasterise(node, earth) {
-  const kind = earth ? 1 : 2;
+const groundAbove = new Uint8Array(nx * nz);   // the plane is inside the ground here
+const anyBelow = new Uint8Array(nx * nz);      // something exists at or under the plane
+const underBuilding = new Uint8Array(nx * nz); // the house stands over this cell
+// Rasterise a triangle's plan projection and answer, per cell, which side of
+// the plane the surface is on. A vertical face covers no plan area and says
+// nothing about the ground, so it is skipped.
+function rasterise(node, ground, building = false) {
   for (const [a, b, c] of worldTriangles(node)) {
-    if (Math.min(a[1], b[1], c[1]) > CUT) continue;
     const det = (b[0] - a[0]) * (c[2] - a[2]) - (b[2] - a[2]) * (c[0] - a[0]);
-    if (Math.abs(det) < 1e-12) continue;        // a vertical face covers no plan area
+    if (Math.abs(det) < 1e-12) continue;
     const i0 = Math.max(0, Math.floor((Math.min(a[0], b[0], c[0]) - x0) / CELL));
     const i1 = Math.min(nx - 1, Math.floor((Math.max(a[0], b[0], c[0]) - x0) / CELL));
     const j0 = Math.max(0, Math.floor((Math.min(a[2], b[2], c[2]) - z0) / CELL));
@@ -110,18 +95,21 @@ function rasterise(node, earth) {
       const v = ((c[0] - b[0]) * (pz - b[2]) - (c[2] - b[2]) * (px - b[0])) / det;
       if (u < -1e-6 || v < -1e-6 || 1 - u - v < -1e-6) continue;
       const y = v * a[1] + (1 - u - v) * b[1] + u * c[1];
-      if (y > CUT) continue;
       const k = j * nx + i;
-      if (y > top[k]) { top[k] = y; owner[k] = kind; }
+      if (building) underBuilding[k] = 1;
+      if (y <= CUT) anyBelow[k] = 1;
+      else if (ground) groundAbove[k] = 1;
     }
   }
 }
 for (const id of CLIPPED) {
   const doc = await io.read(`${FULL}/${id}.glb`);
-  for (const node of doc.getRoot().listNodes())
-    if (node.getMesh()) rasterise(node, id === 'garden' && !CONSTRUCTION.test(node.getName()));
+  for (const node of doc.getRoot().listNodes()) if (node.getMesh()) rasterise(node, id === 'garden', id !== 'garden');
   console.log(`  ${id} rasterised`);
 }
+const contextDoc = await io.read(`${FULL}/context.glb`);
+const soilNodes = contextDoc.getRoot().listNodes().filter((n) => n.getMesh() && PLOT_SOIL.test(n.getName()));
+if (!soilNodes.length) throw new Error('no plot soil volume in context.glb');
 for (const node of soilNodes) rasterise(node, true);
 console.log('  plot soil rasterised');
 
@@ -154,66 +142,64 @@ for (const [a, b, c] of authored) {
 }
 
 // ------------------------------------------------------------------ the field
-// A cell's height is sampled at its centre, and a lawn is blades: the blade
-// that would poke through the sheet is the one beside the sample, not on it.
-// Taking the tallest reading in the cell's own neighbourhood puts the field
-// over the grass rather than in it.
-const ridge = new Float32Array(nx * nz);
-for (let j = 0; j < nz; j++) for (let i = 0; i < nx; i++) {
-  let m = -Infinity;
-  for (let dj = -1; dj <= 1; dj++) for (let di = -1; di <= 1; di++) {
-    const a = i + di, b = j + dj;
-    if (a < 0 || b < 0 || a >= nx || b >= nz) continue;
-    if (owner[b * nx + a] === 1 && top[b * nx + a] > m) m = top[b * nx + a];
-  }
-  ridge[j * nx + i] = m;
-}
-const height = new Float32Array(nx * nz);
 const field = new Uint8Array(nx * nz);
-let earthCells = 0, voidCells = 0;
+let cutCells = 0, voidCells = 0;
 for (let k = 0; k < field.length; k++) {
-  if (covered[k]) continue;                     // the authored cut face draws here
-  if (owner[k] === 2) continue;                 // pool, terrace, steps, walls, the house
-  if (owner[k] === 0) { field[k] = 1; height[k] = CUT; voidCells++; continue; }
-  field[k] = 1; height[k] = Math.min(CUT, Math.max(top[k], ridge[k]) + DRAPE); earthCells++;
+  if (covered[k]) continue;
+  if (groundAbove[k]) { field[k] = 1; cutCells++; continue; }
+  // A void only counts under the house. That is where the CAD excavated and
+  // then built no basement; beyond the building an empty cell is just the edge
+  // of the model, and hatching it would lay poché over the neighbours' land.
+  if (!anyBelow[k] && underBuilding[k]) { field[k] = 1; voidCells++; }
 }
-const cells = earthCells + voidCells;
-if (!cells) throw new Error('nothing left to hatch at the basement cut');
-console.log(`${cells} cells (${(cells * CELL * CELL).toFixed(1)} m²): ` +
-  `${(earthCells * CELL * CELL).toFixed(1)} m² of plot ground draped, ` +
-  `${(voidCells * CELL * CELL).toFixed(1)} m² of void closed at the cut`);
-
-// Corner heights from the field's own cells only, so the sheet never climbs
-// onto the terrace it stops at.
-const corner = new Float32Array((nx + 1) * (nz + 1));
-const weight = new Float32Array((nx + 1) * (nz + 1));
+// A single stray cell is the rasteriser's, not the model's: an opening keeps
+// every region that is two cells across and drops the rest.
+const at = (g, i, j) => (i < 0 || j < 0 || i >= nx || j >= nz) ? 0 : g[j * nx + i];
+const eroded = new Uint8Array(nx * nz);
+for (let j = 0; j < nz; j++) for (let i = 0; i < nx; i++)
+  eroded[j * nx + i] = (at(field, i, j) && at(field, i - 1, j) && at(field, i + 1, j)
+    && at(field, i, j - 1) && at(field, i, j + 1)) ? 1 : 0;
+const keep = new Uint8Array(nx * nz);
+let cells = 0;
 for (let j = 0; j < nz; j++) for (let i = 0; i < nx; i++) {
   if (!field[j * nx + i]) continue;
-  const h = height[j * nx + i];
-  for (const [di, dj] of [[0, 0], [1, 0], [0, 1], [1, 1]]) {
-    const c = (j + dj) * (nx + 1) + (i + di);
-    corner[c] += h; weight[c] += 1;
+  if (eroded[j * nx + i] || at(eroded, i - 1, j) || at(eroded, i + 1, j)
+      || at(eroded, i, j - 1) || at(eroded, i, j + 1)) { keep[j * nx + i] = 1; cells++; }
+}
+if (!cells) throw new Error('the basement plane cuts no ground and leaves no void; nothing to hatch');
+console.log(`${cells} cells (${(cells * CELL * CELL).toFixed(1)} m²) of section: ` +
+  `${(cutCells * CELL * CELL).toFixed(1)} m² where the plane is in the ground, ` +
+  `${(voidCells * CELL * CELL).toFixed(1)} m² of void`);
+
+// merge into rectangles: rows first, then rows of equal span stacked
+const rows = [];
+for (let j = 0; j < nz; j++) {
+  let i = 0;
+  while (i < nx) {
+    if (!keep[j * nx + i]) { i++; continue; }
+    let end = i + 1;
+    while (end < nx && keep[j * nx + end]) end++;
+    rows.push({ i, end, j });
+    i = end;
   }
 }
-const cornerY = (i, j) => { const c = j * (nx + 1) + i; return weight[c] ? corner[c] / weight[c] : CUT; };
-
+rows.sort((a, b) => a.i - b.i || a.end - b.end || a.j - b.j);
+const boxes = [];
+for (const row of rows) {
+  const last = boxes.at(-1);
+  if (last && last.i === row.i && last.end === row.end && last.jEnd === row.j) { last.jEnd = row.j + 1; continue; }
+  boxes.push({ i: row.i, end: row.end, j: row.j, jEnd: row.j + 1 });
+}
+const y = CUT - UNDER;
 const position = [], normal = [], index = [];
-const vertex = new Int32Array((nx + 1) * (nz + 1)).fill(-1);
-const need = (i, j) => {
-  const c = j * (nx + 1) + i;
-  if (vertex[c] < 0) {
-    vertex[c] = position.length / 3;
-    position.push(x0 + i * CELL, cornerY(i, j), z0 + j * CELL);
-    normal.push(0, 1, 0);
-  }
-  return vertex[c];
-};
-for (let j = 0; j < nz; j++) for (let i = 0; i < nx; i++) {
-  if (!field[j * nx + i]) continue;
-  const a = need(i, j), b = need(i, j + 1), c = need(i + 1, j + 1), d = need(i + 1, j);
-  index.push(a, b, c, a, c, d);
+for (const box of boxes) {
+  const ax = x0 + box.i * CELL, bx = x0 + box.end * CELL;
+  const az = z0 + box.j * CELL, bz = z0 + box.jEnd * CELL;
+  const base = position.length / 3;
+  for (const p of [[ax, y, az], [ax, y, bz], [bx, y, bz], [bx, y, az]]) { position.push(...p); normal.push(0, 1, 0); }
+  index.push(base, base + 1, base + 2, base, base + 2, base + 3);
 }
-console.log(`${position.length / 3} vertices, ${index.length / 3} triangles`);
+console.log(`${boxes.length} rectangles, ${index.length / 3} triangles`);
 
 const material = capsRoot.listMaterials().find((m) => m.getName() === HATCH);
 if (!material) throw new Error(`section-caps.glb carries no ${HATCH} material`);
@@ -225,8 +211,8 @@ const prim = capsDoc.createPrimitive()
   .setMaterial(material);
 capsRoot.listScenes()[0].addChild(capsDoc.createNode(NODE)
   .setMesh(capsDoc.createMesh(NODE).addPrimitive(prim))
-  .setExtras({ category: 'section_cap', cut_height_m: CUT, cell_m: CELL, drape_m: DRAPE,
-    note: 'R42 site section field: the plot ground and the void the cut leaves' }));
+  .setExtras({ category: 'section_cap', cut_height_m: CUT, cell_m: CELL,
+    note: 'R42 site section: the plot ground the plane passes through, and the void it leaves' }));
 
 await capsDoc.transform(prune());
 writeFileSync(CAPS, await io.writeBinary(capsDoc));
@@ -244,13 +230,13 @@ manifest.section_cap_asset = { ...manifest.section_cap_asset, bytes: raw.length,
   exported_mesh_nodes: nodes, shared_meshes: nodes, triangles };
 writeFileSync(FULL + '/manifest.json', JSON.stringify(manifest, null, 2));
 writeFileSync(ROOT + '/build/basement-cut-closure-r42.json', JSON.stringify({
-  generated_for: 'R42', cut_height_m: CUT, cell_m: CELL, drape_m: DRAPE,
-  plot_footprint: { x: [+x0.toFixed(3), +x1.toFixed(3)], z: [+z0.toFixed(3), +z1.toFixed(3)] },
-  ground_cells: earthCells, void_cells: voidCells,
-  ground_area_m2: +(earthCells * CELL * CELL).toFixed(3),
+  generated_for: 'R42', cut_height_m: CUT, drawn_at_m: y, cell_m: CELL,
+  plot_footprint: PLOT,
+  cut_cells: cutCells, void_cells: voidCells, kept_cells: cells,
+  cut_area_m2: +(cutCells * CELL * CELL).toFixed(3),
   void_area_m2: +(voidCells * CELL * CELL).toFixed(3),
   closed_area_m2: +(cells * CELL * CELL).toFixed(3),
-  triangles: index.length / 3,
+  rectangles: boxes.length, triangles: index.length / 3,
   cap_asset_bytes: raw.length, cap_asset_triangles: triangles,
 }, null, 2));
 console.log(`section-caps.glb: ${nodes} faces, ${triangles} triangles, ${raw.length} bytes`);

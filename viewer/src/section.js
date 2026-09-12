@@ -19,19 +19,18 @@ export function smoothStep(t) {
 // or three pixels, so it fades and the wall reads as the solid poché a plan
 // wants at that distance.
 //
-// R40 gave the earth a 0.80 m ruling with nearly a fifth of it inked, on the
-// argument that a site field is hundreds of square metres and needs a coarse
-// rule to survive the distance a plan is read at. R42 overrules that on the
-// client's instruction - "daha kibar tara, duvarların taranması gibi" - and it
-// is the better drawing: at the basement zoom a 0.80 m band is a broad stripe
-// and it shouts over the plan it is supposed to sit behind. The earth now
-// takes the masonry ruling's proportions, 6% of the period inked, at a 0.36 m
-// pitch that holds about ten pixels a period at that zoom. It keeps its warmer
-// ink, and it fades only when a period falls under about three pixels, which
-// no basement view reaches.
-export const SECTION_POCHE = {pitch:0.14, duty:0.065, ground:[0.020,0.020,0.023], ink:[0.32,0.31,0.29], fade:[0.25,0.80]};
-export const SOIL_POCHE = {pitch:0.36, duty:0.060, ground:[0.028,0.027,0.024], ink:[0.42,0.40,0.35], fade:[0.33,1.10]};
-export function createHatchMaterial({pitch, duty, ground, ink, fade=[0.25,0.80]}) {
+// The earth is drawn the other way up, and R42 is the third attempt at it.
+// R40 ruled it like masonry, dark with a light line, at 0.80 m - which at the
+// basement zoom is a broad black band that shouts over the plan. The review's
+// instruction is plain: "siyah çizgileri incelt arasındaki mesafeyi arttır.
+// daha kibar olmalı." So the cut earth is now a pale ground carrying a thin
+// dark line: 7% of the period inked, on a 0.55 m pitch, which at that zoom is
+// about a pixel of line every fifteen. `strength` is how much of the ink the
+// line actually takes - masonry keeps its 0.62 so its rule stays a highlight
+// rather than a black wire; the earth's line is the ink itself.
+export const SECTION_POCHE = {pitch:0.14, duty:0.065, ground:[0.020,0.020,0.023], ink:[0.32,0.31,0.29], fade:[0.25,0.80], strength:0.62};
+export const SOIL_POCHE = {pitch:0.55, duty:0.035, ground:[0.580,0.568,0.527], ink:[0.015,0.015,0.016], fade:[0.30,1.10], strength:1.0};
+export function createHatchMaterial({pitch, duty, ground, ink, fade=[0.25,0.80], strength=0.62}) {
   return new THREE.ShaderMaterial({side:THREE.DoubleSide,
     vertexShader: `varying vec3 worldPosition;
       void main() {
@@ -45,7 +44,7 @@ export function createHatchMaterial({pitch, duty, ground, ink, fade=[0.25,0.80]}
         float edge = max(fwidth(v) * 1.2, 0.002);
         float hatch = 1.0 - smoothstep(${duty.toFixed(4)}, ${duty.toFixed(4)} + edge, abs(fract(v) - 0.5));
         ${fade ? `hatch = mix(0.13, hatch, 1.0 - smoothstep(${fade[0].toFixed(4)}, ${fade[1].toFixed(4)}, fwidth(v)));` : ''}
-        gl_FragColor = vec4(mix(vec3(${ground.map(v=>v.toFixed(2)).join(', ')}), vec3(${ink.map(v=>v.toFixed(2)).join(', ')}), hatch * 0.62), 1.0);
+        gl_FragColor = vec4(mix(vec3(${ground.map(v=>v.toFixed(3)).join(', ')}), vec3(${ink.map(v=>v.toFixed(3)).join(', ')}), hatch * ${strength.toFixed(2)}), 1.0);
         #include <tonemapping_fragment>
         #include <colorspace_fragment>
       }`

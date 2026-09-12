@@ -1,0 +1,9 @@
+{
+  "generated_for": "R42",
+  "node": "F3 | Attic partition core",
+  "tolerance_m": 0.1,
+  "vertical_threshold": 0.5,
+  "interior_triangles": 18319,
+  "stucco_triangles": 9893,
+  "heads_and_soffits": 9404
+}

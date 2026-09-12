@@ -107,8 +107,8 @@
     {
       "id": "level-3",
       "file": "level-3.glb",
-      "bytes": 1038608,
-      "sha256": "087f481e3efc1d805be729a7044f032d13260bacfd7d0bc3b2de8fe2b37bf242",
+      "bytes": 1044768,
+      "sha256": "2bb9e33b6ef28c31f5c696c897643ec80a85e7fbddc54e629604fe3d542b1c5e",
       "source_objects": 232,
       "exported_mesh_nodes": 232,
       "shared_meshes": 157,
@@ -283,12 +283,12 @@
   "section_cap_asset": {
     "id": "section-caps",
     "file": "section-caps.glb",
-    "bytes": 112660,
-    "sha256": "f21b65be33400d14e7cc057a08946fb140d80ddb60f407b48582b1ae5506db14",
+    "bytes": 89060,
+    "sha256": "374230f1ae8d2bbbff0869579e0aec8c0653fffd41817134ad43793eb92df665",
     "source_objects": 7,
     "exported_mesh_nodes": 8,
     "shared_meshes": 8,
-    "triangles": 33351,
+    "triangles": 4087,
     "bounds_native_m": [
       [
         -11.199999809265137,
