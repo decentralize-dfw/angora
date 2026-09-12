@@ -21,7 +21,8 @@ export function materialFamily(name='') {
   // ceilings were reading sRGB 118,125,97 - the ground's own colour, not their
   // own - because with no occlusion indoors the environment was most of what
   // reached them. The albedo is right; the weight was not.
-  if (/^(interior|ceiling)$/.test(name)) return 'plaster';
+  if (/^ceiling$/.test(name)) return 'soffit';
+  if (/^interior$/.test(name)) return 'plaster';
   return 'other';
 }
 
@@ -29,7 +30,7 @@ export function prepareMaterialResponse(material, {context=false}={}) {
   if (!material?.isMeshStandardMaterial || material.userData.presentationR27) return;
   const family=materialFamily(material.name);
   material.userData.presentationR27={family,context,normal:material.normalScale?.clone()};
-  if (['roof','masonry','landscape','floor','plaster'].includes(family)) material.metalness=0;
+  if (['roof','masonry','landscape','floor','plaster','soffit'].includes(family)) material.metalness=0;
   const roughnessFloor={roof:.8,masonry:.72,landscape:.88,floor:.58}[family];
   if(roughnessFloor){
     const previous=material.onBeforeCompile,previousKey=material.customProgramCacheKey();
@@ -55,6 +56,14 @@ export function prepareMaterialResponse(material, {context=false}={}) {
     material.normalScale?.multiplyScalar(.25);
   } else if (family==='plaster') {
     material.envMapIntensity=.55;
+  } else if (family==='soffit') {
+    // A ceiling's normal points at the floor, so of the probe it sees the
+    // ground hemisphere and nothing else - .55 of the settlement's olive is
+    // still the settlement's olive, which is what a delivered interior frame
+    // still showed. What lights a ceiling indoors is the room: the fixtures,
+    // and the hemisphere fill, whose downward colour is a neutral warm grey.
+    // The environment is the one term that has no business being there.
+    material.envMapIntensity=.2;
   } else if (family==='floor') {
     material.normalScale?.multiplyScalar(.3);
     material.envMapIntensity=.75;
