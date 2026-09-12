@@ -30,7 +30,7 @@ const server = createServer((req, res) => {
     res.end(body);
   } catch { res.statusCode = 404; res.end(); }
 });
-await new Promise((r) => server.listen(8967, r));
+await new Promise((r) => server.listen(8983, r));
 
 const browser = await chromium.launch({
   executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
@@ -54,23 +54,27 @@ async function capture(name) {
   console.log('OK', name);
 }
 
-await page.goto('http://127.0.0.1:8967/', { waitUntil: 'domcontentloaded' });
+// ?view=f3 is part of the viewer's own share state, so the attic is selected
+// before the first frame is drawn rather than through a click and a transition
+await page.goto('http://127.0.0.1:8983/?view=f3', { waitUntil: 'domcontentloaded' });
 await page.waitForFunction(
   () => document.querySelector('#qa-screenshot') && !document.querySelector('#qa-screenshot').disabled,
   null, { timeout: 1200000 });
 console.log('scene ready');
 
-await click('button[data-view="f3"]');
-await page.waitForTimeout(8000);
 
-// start the walk at the attic bedroom's station
-const started = await page.evaluate(() => {
+// Start the walk at the attic bedroom's station. The tags are laid out per
+// frame and are hidden while the view is still moving, so this waits for one
+// to actually be on screen instead of clicking into an empty list - which is
+// what a first attempt did, returning a second copy of the plan view.
+const started = await page.waitForFunction(() => {
   const tags = [...document.querySelectorAll('button.room-label')]
     .filter((b) => !b.disabled && !b.hidden && /Yatak odası/.test(b.textContent));
   if (!tags.length) return null;
-  tags.at(-1).click();
-  return tags.at(-1).textContent.trim();
-});
+  const tag = tags.at(-1);
+  tag.click();
+  return tag.textContent.trim();
+}, null, { timeout: 180000, polling: 2000 }).then((h) => h.jsonValue());
 console.log('walk started at', started);
 await page.waitForTimeout(9000);
 await capture('02 attic-walk');
