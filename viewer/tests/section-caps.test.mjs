@@ -55,28 +55,36 @@ test('Every authored cap sits exactly on a documented cut height',()=>{
     assert.ok(Math.abs(floorDatums[f]+(f===3?1.3:1.6)-expected)<1e-9,'floor '+f);
 });
 
-test('The site section hatches what the plane passes through, and only that',()=>{
-  // R42, third attempt. A section hatch marks what the plane is inside. The
-  // rear lawn lies below the plane, so it is seen rather than cut and it stays
-  // lawn; the upslope ground by the garage and the entrance stands above the
-  // plane, so it takes the poché. The void under the entrance wing is hatched
-  // too: the CAD excavated the whole footprint and built a basement under half
-  // of it, so there the plane cuts fill that carries the slab above.
+test('The whole plot is cut at one height, and the house is the hole in it',()=>{
+  // R42, fourth attempt, and the rule is the review's own: "arsa içindeki,
+  // bahçe olan ve kesit alanının altında kalan alanlar da taranmalıdır",
+  // "arsa içi, orda kot farkı olmasın, tek bir clipping plane çalışacak işte".
+  // The textbook rule - ink only where the plane is inside the ground - reads
+  // wrong on a sloping plot: it inked the bank by the garage and left the pool
+  // terrace and the rear lawn 1.6 m below the plane, which is the "ön kısım"
+  // and the "arka alan" the review keeps pointing at. So inside the property
+  // the site is one body of earth cut at one height, the rooms are its holes,
+  // and what lies below the cut is inside it rather than beside it.
   const report=JSON.parse(fs.readFileSync(new URL('build/basement-cut-closure-r42.json',new URL('../../',import.meta.url))));
   assert.equal(report.cut_height_m,SOIL_CUT_HEIGHT);
-  assert.ok(report.void_area_m2>40&&report.void_area_m2<60,`void ${report.void_area_m2} m²`);
-  // Beyond the authored face, only the site's own fabric counts as ground: a
-  // spruce's canopy and a grass blade both cross 1.60 m without the ground
-  // under them being cut, and counting them is what put poché under the trees.
-  assert.ok(report.cut_area_m2>4,`ground the plane is in: ${report.cut_area_m2} m²`);
+  assert.ok(report.plot_area_m2>550,`the plot's own earth: ${report.plot_area_m2} m²`);
+  // every square metre of the property is either cut ground, the authored
+  // face, or the house - nothing is left uncut inside the boundary
+  const drawn=report.closed_area_m2+report.authored_face_cells*report.cell_m**2;
+  assert.ok(drawn>report.plot_area_m2*0.9,
+    `${drawn.toFixed(0)} m² of section over a ${report.plot_area_m2.toFixed(0)} m² plot`);
   const face=glb.json.meshes.find(m=>m.name==='R42 F0 site section field');
   assert.ok(face,'the delivery carries the site field');
   const accessor=glb.json.accessors[face.primitives[0].attributes.POSITION];
-  // flat, like any section, and just under the plane so the wall poché drawn
-  // at the plane itself stays on top of it where the two meet
-  assert.equal(accessor.min[1],accessor.max[1],'the field is flat');
+  // one level, just under the plane so the wall poché drawn at the plane
+  // itself stays on top of it where the two meet
   assert.ok(accessor.max[1]<SOIL_CUT_HEIGHT&&SOIL_CUT_HEIGHT-accessor.max[1]<0.02,`at ${accessor.max[1]}`);
-  // inside the plot: this hatches the property, never the neighbours' land.
+  // and a skirt down to the earth's own surface, so the basement view can be
+  // tilted without a sheet appearing on stilts over the lawn
+  assert.ok(report.skirt_faces>100,`${report.skirt_faces} skirt faces`);
+  assert.ok(accessor.min[1]<accessor.max[1]-0.3&&accessor.min[1]>accessor.max[1]-3.1,
+    `the body runs from ${accessor.min[1]} to ${accessor.max[1]}`);
+  // inside the plot: this cuts the property, never the neighbours' land.
   // The grid rounds up to a whole cell, so the sheet may reach one cell past
   // the footprint it was laid over - never further.
   const [px0,px1]=report.plot_footprint.x,[pz0,pz1]=report.plot_footprint.z,edge=report.cell_m+1e-3;
@@ -151,10 +159,11 @@ test('createSoilCap keeps every soil face and shows them only at the basement cu
 test('What the plane cuts is drawn as black poché, ruled, with earth and masonry told apart by pitch',()=>{
   const wall=createHatchMaterial(SECTION_POCHE);
   assert.match(wall.fragmentShader,/\/ 0\.1400;/);
-  assert.match(wall.fragmentShader,/smoothstep\(0\.0650, 0\.0650 \+ edge/);
+  assert.match(wall.fragmentShader,/const float INK = 0\.13000;/);
   assert.match(wall.fragmentShader,/#include <tonemapping_fragment>/);
   const soil=createHatchMaterial(SOIL_POCHE);
   assert.match(soil.fragmentShader,/\/ 0\.5500;/);
+  assert.match(soil.fragmentShader,/const float INK = 0\.07000;/);
   // R40 put the earth's ground near black so that pulling back left solid
   // poché rather than a flat tan panel. R42 inverts the earth on the client's
   // instruction: the cut ground is pale and carries a thin dark line, so it is
@@ -170,9 +179,30 @@ test('What the plane cuts is drawn as black poché, ruled, with earth and masonr
   // thin line, wide gap: "siyah çizgileri incelt arasındaki mesafeyi arttır"
   assert.ok(SOIL_POCHE.duty*2<0.10,`${(SOIL_POCHE.duty*2*100).toFixed(0)}% of the period is inked`);
   assert.ok(SOIL_POCHE.pitch>SECTION_POCHE.pitch*3,'on a far coarser pitch than masonry');
-  assert.ok(SOIL_POCHE.fade[0]>SECTION_POCHE.fade[0],JSON.stringify(SOIL_POCHE.fade));
-  assert.match(soil.fragmentShader,/mix\(0\.13, hatch/);
-  assert.match(wall.fragmentShader,/mix\(0\.13, hatch/);
+  assert.ok(!('fade' in SOIL_POCHE)&&!('fade' in SECTION_POCHE),'the hand-tuned far field is retired');
+});
+
+// The complaint the filter answers is that the earth came out a bold barcode
+// however thin the duty was written. That was the shader adding the pixel to
+// the line; this mirrors the shader's own arithmetic and holds it to the duty
+// it was given, at every zoom from a 2 mm pixel to one four periods wide.
+test('The ruling keeps the width it was authored with instead of growing with the pixel',()=>{
+  for (const poche of [SECTION_POCHE,SOIL_POCHE]) {
+    const ink=2*poche.duty;
+    const ruled=x=>Math.floor(x)*ink+Math.min(x-Math.floor(x),ink);
+    const hatch=(v,w)=>Math.min(1,Math.max(0,(ruled(v+0.5*w)-ruled(v-0.5*w))/w));
+    for (const w of [0.002,0.01,0.05,0.2,0.5,1,2,4]) {
+      let sum=0; const N=4096;
+      for (let k=0;k<N;k++) sum+=hatch(17+k/N,w);       // one whole period, off the origin
+      assert.ok(Math.abs(sum/N-ink)<2e-3,
+        `pixel ${w} periods wide inks ${(sum/N*100).toFixed(1)}% of the field, not ${(ink*100).toFixed(0)}%`);
+      // and never more of any one pixel than that pixel can hold
+      // a pixel narrower than the period can never ink more of itself than the
+      // line it straddles; one wider than the period settles on the duty
+      assert.ok(hatch(17.03,w)<=Math.min(1,ink/Math.min(w,1))+1e-6,
+        'a sub-pixel line greys out rather than fattening');
+    }
+  }
 });
 
 test('Only the plot soil node receives private, marked material instances',()=>{

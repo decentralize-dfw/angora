@@ -13,24 +13,31 @@ export function smoothStep(t) {
 // drawing draws it: the material the plane passes through goes black, and the
 // ruling rides on top of the black rather than replacing it.
 //
-// A ruling finer than the screen can resolve has to fade or it aliases into
-// noise, and `fade` is where that starts. The number that matters is how wide
-// one period is on screen: a 0.14 m masonry ruling over a whole storey is two
-// or three pixels, so it fades and the wall reads as the solid poché a plan
-// wants at that distance.
+// The ruling is filtered analytically, which is the whole of R42's fix. Until
+// now the line was drawn `duty + fwidth(v)` wide with a smoothstep, so the
+// pixel footprint was added to the line rather than used to resolve it: at the
+// basement zoom one pixel is about a sixth of the earth's period, so a ruling
+// authored at 7% of the period came out inked over 40% of it, full black at
+// the core - the bold barcode the review calls "çok kaba". Thinning `duty`
+// could not help, because the width the shader drew was the pixel, not the
+// duty.
 //
-// The earth is drawn the other way up, and R42 is the third attempt at it.
-// R40 ruled it like masonry, dark with a light line, at 0.80 m - which at the
-// basement zoom is a broad black band that shouts over the plan. The review's
-// instruction is plain: "siyah çizgileri incelt arasındaki mesafeyi arttır.
-// daha kibar olmalı." So the cut earth is now a pale ground carrying a thin
-// dark line: 7% of the period inked, on a 0.55 m pitch, which at that zoom is
-// about a pixel of line every fifteen. `strength` is how much of the ink the
-// line actually takes - masonry keeps its 0.62 so its rule stays a highlight
-// rather than a black wire; the earth's line is the ink itself.
-export const SECTION_POCHE = {pitch:0.14, duty:0.065, ground:[0.020,0.020,0.023], ink:[0.32,0.31,0.29], fade:[0.25,0.80], strength:0.62};
-export const SOIL_POCHE = {pitch:0.55, duty:0.035, ground:[0.580,0.568,0.527], ink:[0.015,0.015,0.016], fade:[0.30,1.10], strength:1.0};
-export function createHatchMaterial({pitch, duty, ground, ink, fade=[0.25,0.80], strength=0.62}) {
+// So the fragment now integrates the square wave over the pixel instead. I(x)
+// is the wave's antiderivative, and (I(b) - I(a)) / (b - a) is the exact mean
+// ink over the pixel's own footprint. The line keeps the world width it was
+// authored with and, once it is finer than a pixel, greys out instead of
+// fattening - and at any distance the field settles on exactly the `duty` it
+// was given rather than on whatever the zoom made of it. That also retires
+// `fade`, which existed to pull the over-inked far field back down by hand.
+//
+// The earth is drawn the other way up from masonry: a pale ground carrying a
+// thin dark line, 7% of a 0.55 m period, per "siyah çizgileri incelt
+// arasındaki mesafeyi arttır. daha kibar olmalı." `strength` is how much of
+// the ink the line actually takes - masonry keeps its 0.62 so its rule stays a
+// highlight rather than a black wire; the earth's line is the ink itself.
+export const SECTION_POCHE = {pitch:0.14, duty:0.065, ground:[0.020,0.020,0.023], ink:[0.32,0.31,0.29], strength:0.62};
+export const SOIL_POCHE = {pitch:0.55, duty:0.035, ground:[0.580,0.568,0.527], ink:[0.015,0.015,0.016], strength:1.0};
+export function createHatchMaterial({pitch, duty, ground, ink, strength=0.62}) {
   return new THREE.ShaderMaterial({side:THREE.DoubleSide,
     vertexShader: `varying vec3 worldPosition;
       void main() {
@@ -39,11 +46,13 @@ export function createHatchMaterial({pitch, duty, ground, ink, fade=[0.25,0.80],
         gl_Position = projectionMatrix * viewMatrix * world;
       }`,
     fragmentShader: `varying vec3 worldPosition;
+      // how much of one period is inked, and the ruling's antiderivative
+      const float INK = ${(2 * duty).toFixed(5)};
+      float ruled(float x) { return floor(x) * INK + min(fract(x), INK); }
       void main() {
         float v = (worldPosition.x + worldPosition.z) / ${pitch.toFixed(4)};
-        float edge = max(fwidth(v) * 1.2, 0.002);
-        float hatch = 1.0 - smoothstep(${duty.toFixed(4)}, ${duty.toFixed(4)} + edge, abs(fract(v) - 0.5));
-        ${fade ? `hatch = mix(0.13, hatch, 1.0 - smoothstep(${fade[0].toFixed(4)}, ${fade[1].toFixed(4)}, fwidth(v)));` : ''}
+        float w = max(fwidth(v), 1e-5);
+        float hatch = clamp((ruled(v + 0.5 * w) - ruled(v - 0.5 * w)) / w, 0.0, 1.0);
         gl_FragColor = vec4(mix(vec3(${ground.map(v=>v.toFixed(3)).join(', ')}), vec3(${ink.map(v=>v.toFixed(3)).join(', ')}), hatch * ${strength.toFixed(2)}), 1.0);
         #include <tonemapping_fragment>
         #include <colorspace_fragment>

@@ -283,21 +283,21 @@
   "section_cap_asset": {
     "id": "section-caps",
     "file": "section-caps.glb",
-    "bytes": 87216,
-    "sha256": "895254869945382a3ef07f0fb446e8e6eab194990c0a3ffbffb4cad48d366af4",
+    "bytes": 89680,
+    "sha256": "027ed13ba4542b44f6db562eb1cbaad337fd2e0d4accb0aba3cf2f7ed9382d47",
     "source_objects": 7,
     "exported_mesh_nodes": 8,
     "shared_meshes": 8,
-    "triangles": 3343,
+    "triangles": 5583,
     "bounds_native_m": [
       [
         -11.199999809265137,
-        -11.057999610900879,
-        1.600000023841858
+        -11.099998474121094,
+        -0.15964275598526
       ],
       [
-        11.5,
-        9.645000457763672,
+        11.600110054016113,
+        24,
         10.770500183105469
       ]
     ],

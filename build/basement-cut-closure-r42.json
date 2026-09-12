@@ -5,22 +5,22 @@
   "cell_m": 0.1,
   "plot_footprint": {
     "x": [
-      -10.2,
-      12.5
+      -11.200000000000001,
+      11.700000000000001
     ],
     "z": [
-      -29.1,
-      11
+      -24,
+      11.200000000000003
     ]
   },
-  "cut_cells": 803,
-  "void_cells": 4825,
-  "kept_cells": 5248,
-  "cut_area_m2": 8.03,
-  "void_area_m2": 48.25,
-  "closed_area_m2": 52.48,
-  "rectangles": 57,
-  "triangles": 114,
-  "cap_asset_bytes": 87216,
-  "cap_asset_triangles": 3343
+  "plot_area_m2": 609.14,
+  "authored_face_cells": 20117,
+  "void_area_m2": 0,
+  "closed_area_m2": 392.99,
+  "rectangles": 63,
+  "skirt_faces": 1114,
+  "face_triangles": 126,
+  "triangles": 2354,
+  "cap_asset_bytes": 89680,
+  "cap_asset_triangles": 5583
 }
