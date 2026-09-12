@@ -43,6 +43,15 @@ const CELL = 0.10;
 const PLOT = { x: [-10.2, 12.5], z: [-29.1, 11.0] };
 // Cut by the section plane at f0: the building, and the garden with it.
 const CLIPPED = ['level-0', 'level-1', 'level-2', 'level-3', 'envelope', 'garden'];
+// What counts as GROUND for "is the plane inside it". Only the site's own
+// fabric: the earth, the paving, the steps, the terraces, the retaining walls.
+// A tree is not ground - hatching the plan footprint of a spruce because its
+// canopy happens to be above 1.60 m is what put poché under the trees. Nor is
+// a grass blade: the lawn mesh is 344,390 triangles of blades standing up to
+// 0.3 m proud of the soil, so on ground at 1.40 m a blade crosses the plane
+// and the cell reads as cut when the ground under it is not. Nor is a fence
+// spear, a gate handle or a garden light.
+const GROUND = /soil|terrace|stair|step|driveway|path|paving|coping|retaining|apron|deck|kerb|curb|wall cap|slab/i;
 // Of the neighbourhood only the plot's own earth is cut, by the snap plane.
 const PLOT_SOIL = /^R32 \| Continuous local soil volume/;
 
@@ -104,7 +113,8 @@ function rasterise(node, ground, building = false) {
 }
 for (const id of CLIPPED) {
   const doc = await io.read(`${FULL}/${id}.glb`);
-  for (const node of doc.getRoot().listNodes()) if (node.getMesh()) rasterise(node, id === 'garden', id !== 'garden');
+  for (const node of doc.getRoot().listNodes())
+    if (node.getMesh()) rasterise(node, id === 'garden' && GROUND.test(node.getName()), id !== 'garden');
   console.log(`  ${id} rasterised`);
 }
 const contextDoc = await io.read(`${FULL}/context.glb`);

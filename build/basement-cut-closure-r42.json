@@ -13,14 +13,14 @@
       11
     ]
   },
-  "cut_cells": 5754,
-  "void_cells": 4824,
-  "kept_cells": 9687,
-  "cut_area_m2": 57.54,
-  "void_area_m2": 48.24,
-  "closed_area_m2": 96.87,
-  "rectangles": 429,
-  "triangles": 858,
-  "cap_asset_bytes": 89060,
-  "cap_asset_triangles": 4087
+  "cut_cells": 803,
+  "void_cells": 4825,
+  "kept_cells": 5248,
+  "cut_area_m2": 8.03,
+  "void_area_m2": 48.25,
+  "closed_area_m2": 52.48,
+  "rectangles": 57,
+  "triangles": 114,
+  "cap_asset_bytes": 87216,
+  "cap_asset_triangles": 3343
 }

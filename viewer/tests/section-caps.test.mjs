@@ -65,7 +65,10 @@ test('The site section hatches what the plane passes through, and only that',()=
   const report=JSON.parse(fs.readFileSync(new URL('build/basement-cut-closure-r42.json',new URL('../../',import.meta.url))));
   assert.equal(report.cut_height_m,SOIL_CUT_HEIGHT);
   assert.ok(report.void_area_m2>40&&report.void_area_m2<60,`void ${report.void_area_m2} m²`);
-  assert.ok(report.cut_area_m2>40,`ground the plane is in: ${report.cut_area_m2} m²`);
+  // Beyond the authored face, only the site's own fabric counts as ground: a
+  // spruce's canopy and a grass blade both cross 1.60 m without the ground
+  // under them being cut, and counting them is what put poché under the trees.
+  assert.ok(report.cut_area_m2>4,`ground the plane is in: ${report.cut_area_m2} m²`);
   const face=glb.json.meshes.find(m=>m.name==='R42 F0 site section field');
   assert.ok(face,'the delivery carries the site field');
   const accessor=glb.json.accessors[face.primitives[0].attributes.POSITION];
