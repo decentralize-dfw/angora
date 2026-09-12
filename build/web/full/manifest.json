@@ -20,8 +20,8 @@
     {
       "id": "level-0",
       "file": "level-0.glb",
-      "bytes": 1828404,
-      "sha256": "4e4e43687dc6989778626f64c09f565d4a0cf7b447a3825ba590bd78885323b6",
+      "bytes": 1828396,
+      "sha256": "c62c0666697e8ae207d74482a1b6b93a6766883deb72ed8c9f93b3355b56b1ed",
       "source_objects": 1171,
       "exported_mesh_nodes": 1171,
       "shared_meshes": 405,
@@ -49,8 +49,8 @@
     {
       "id": "level-1",
       "file": "level-1.glb",
-      "bytes": 4874580,
-      "sha256": "1963686785b8dca1796604291cefa5a4df8d1eadc4838fef83ffa2ce18e82351",
+      "bytes": 4868828,
+      "sha256": "0a905e42d4152691c0b47bb38dce6d4b469f168337e36a357d8381f4bd675bd9",
       "source_objects": 1023,
       "exported_mesh_nodes": 1023,
       "shared_meshes": 835,
@@ -78,8 +78,8 @@
     {
       "id": "level-2",
       "file": "level-2.glb",
-      "bytes": 2638108,
-      "sha256": "7dd52687db1e40356cbff3a6052b4eebff8e8c29873f52c1a87011299473bdc6",
+      "bytes": 2639756,
+      "sha256": "d14ef4560c7ee6b8c3718204c93fdc2ea8a7e81c24b3f235a6f633fd3734ee3a",
       "source_objects": 639,
       "exported_mesh_nodes": 639,
       "shared_meshes": 426,

@@ -43,9 +43,20 @@ for (const level of [0, 1, 2, 3]) {
   if (!material) { console.log(`level-${level}: no frosted panel`); continue; }
   const transmission = material.getExtension('KHR_materials_transmission');
   const before = transmission?.getTransmissionFactor() ?? 0;
-  if (transmission) { material.setExtension('KHR_materials_transmission', null); transmission.dispose(); }
-  material.setBaseColorFactor(ETCHED.base).setRoughnessFactor(ETCHED.roughness).setAlphaMode('OPAQUE');
-  console.log(`level-${level}: transmission ${before} -> 0`);
+  // Every physical extension goes, not just the transmission factor. While the
+  // material still declares an index of refraction or a specular tint the
+  // loader builds a MeshPhysicalMaterial, and the panel keeps a mirror-sharp
+  // reflection of the stair behind the camera that reads exactly like seeing
+  // through it. A rough dielectric is what etched glass is; a standard
+  // material at roughness 0.58 renders one and cannot be seen through.
+  for (const name of ['KHR_materials_transmission', 'KHR_materials_ior', 'KHR_materials_specular']) {
+    const extension = material.getExtension(name);
+    if (!extension) continue;
+    material.setExtension(name, null); extension.dispose();
+  }
+  material.setBaseColorFactor(ETCHED.base).setRoughnessFactor(ETCHED.roughness)
+    .setMetallicFactor(0).setAlphaMode('OPAQUE');
+  console.log(`level-${level}: transmission ${before} -> 0, physical extensions dropped`);
   touched++;
 
   await doc.transform(prune());
