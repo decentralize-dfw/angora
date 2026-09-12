@@ -98,5 +98,35 @@
     "This frame cannot judge the timber colour. The door face in it sits at sRGB 15 against a wall at 160, a tenfold difference: it is the back of an open door turned into a dark corner, and almost nothing of what it shows is diffuse. A 2.34x lift in albedo moved it two levels.",
     "So the black door in the pre-re-tone frame was shade, not albedo, and the re-tone should not be credited with fixing it. The re-tone stands on the hue measurement in build/timber-colour-r41.json alone - the delivery sat at red/blue 2.09 where both estimates of the photographs put it past 3.3 - and that basis is unaffected by any of this."
   ],
-  "outstanding": "a frame with a lit door face. The turn frames from the same run sweep the view and may catch one; failing that, a walk station in a room whose door faces a window."
+  "outstanding": "a frame with a lit door face. The turn frames from the same run sweep the view and may catch one; failing that, a walk station in a room whose door faces a window.",
+  "lit_frame_attempt": {
+    "frames": [
+      "build/renders/r41-app/01 attic-plan.png (before)",
+      "build/renders/r41-app/01 attic-plan-retoned.png (after)"
+    ],
+    "why": "the attic isometric shows door leaves in lit rooms, which walk mode at that station does not - it looks at the back of an open door in a dark corner",
+    "dark_warm_population": {
+      "before": {
+        "pixels": 11044,
+        "mean_srgb": [
+          72.5,
+          50.5,
+          43.2
+        ],
+        "red_over_blue": 1.68
+      },
+      "after": {
+        "pixels": 19183,
+        "mean_srgb": [
+          71.9,
+          51.1,
+          44.8
+        ],
+        "red_over_blue": 1.6
+      }
+    },
+    "reading": "the population of dark warm pixels nearly doubles, which is what warming the timber should do - surfaces too neutral to qualify before now qualify - while its mean barely moves because the pixels joining it are the marginal ones",
+    "caveat": "this is not a clean A/B. The two frames came from different paths - the first clicked the floor button, the second opened on ?view=f3 - and 43310 pixels differ with peaks of over 100 levels in both directions, which is geometry shifting under a slightly different camera, not albedo.",
+    "conclusion": "the re-tone is live and measurable, and it warms the timber; what a lit interior door face looks like after it is still unverified. The walk sweep that would have shown one did not finish under software rendering."
+  }
 }
