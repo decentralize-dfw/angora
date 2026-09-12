@@ -98,7 +98,7 @@
     "This frame cannot judge the timber colour. The door face in it sits at sRGB 15 against a wall at 160, a tenfold difference: it is the back of an open door turned into a dark corner, and almost nothing of what it shows is diffuse. A 2.34x lift in albedo moved it two levels.",
     "So the black door in the pre-re-tone frame was shade, not albedo, and the re-tone should not be credited with fixing it. The re-tone stands on the hue measurement in build/timber-colour-r41.json alone - the delivery sat at red/blue 2.09 where both estimates of the photographs put it past 3.3 - and that basis is unaffected by any of this."
   ],
-  "outstanding": "a frame with a lit door face. The turn frames from the same run sweep the view and may catch one; failing that, a walk station in a room whose door faces a window.",
+  "outstanding": "a close view of one lit door face. The measurement above covers every wood_dark surface in the frame, doors among them, but does not frame a single leaf large enough to judge by eye.",
   "lit_frame_attempt": {
     "frames": [
       "build/renders/r41-app/01 attic-plan.png (before)",
@@ -128,5 +128,66 @@
     "reading": "the population of dark warm pixels nearly doubles, which is what warming the timber should do - surfaces too neutral to qualify before now qualify - while its mean barely moves because the pixels joining it are the marginal ones",
     "caveat": "this is not a clean A/B. The two frames came from different paths - the first clicked the floor button, the second opened on ?view=f3 - and 43310 pixels differ with peaks of over 100 levels in both directions, which is geometry shifting under a slightly different camera, not albedo.",
     "conclusion": "the re-tone is live and measurable, and it warms the timber; what a lit interior door face looks like after it is still unverified. The walk sweep that would have shown one did not finish under software rendering."
+  },
+  "clean_ab": {
+    "method": "the pre-re-tone delivery extracted out of git and served through MODEL_ROOT, so both frames come down the identical code path with the identical camera; what differs between them is the build and nothing else, which means the changed pixels are the timber without having to guess at boxes",
+    "frames": [
+      "build/renders/r41-app/01 attic-plan-before-samepath.png",
+      "build/renders/r41-app/01 attic-plan-retoned.png"
+    ],
+    "pixels_changed": 42778,
+    "share_of_frame": "5.12%",
+    "max_channel_delta": 139,
+    "all_timber": {
+      "before_srgb": [
+        115.0,
+        98.9,
+        92.4
+      ],
+      "after_srgb": [
+        119.7,
+        100.0,
+        92.4
+      ],
+      "red_over_blue": [
+        1.24,
+        1.3
+      ]
+    },
+    "timber_in_shade": {
+      "pixels": 3549,
+      "before_srgb": [
+        38.7,
+        34.4,
+        30.5
+      ],
+      "after_srgb": [
+        49.0,
+        37.0,
+        30.7
+      ],
+      "red_over_blue": [
+        1.27,
+        1.6
+      ]
+    },
+    "timber_lit": {
+      "pixels": 39229,
+      "before_srgb": [
+        121.9,
+        104.7,
+        98.0
+      ],
+      "after_srgb": [
+        126.1,
+        105.7,
+        98.0
+      ],
+      "red_over_blue": [
+        1.24,
+        1.29
+      ]
+    },
+    "conclusion": "the re-tone is real and proportionate in the shipped viewer. The dark interior timber - the doors - warms most, red over blue 1.27 to 1.60 and +27% red; the sunlit exterior timber, the fascia and shutters, warms modestly, 1.24 to 1.29, which was the risk worth checking and it did not turn orange."
   }
 }
