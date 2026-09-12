@@ -156,15 +156,17 @@ for (let k = 0; k < field.length; k++) {
   field[k] = 1; cells++;
   if (!Number.isFinite(ground[k])) voidCells++;
 }
-// Grow one cell into the house so the earth meets the wall it is cut against
-// rather than leaving a hairline of daylight where the rasters disagree. A
-// wall is two cells thick at worst, so this reaches its outer face and no
-// further, and the atlas poché is drawn 4 mm above it in any case.
+// Grow one cell into the house, and into the authored face, so the earth meets
+// what it is cut against rather than leaving a hairline of daylight where two
+// rasters disagree by a cell. A wall is two cells thick at worst, so this
+// reaches its outer face and no further; and over the authored face the field
+// sits 4 mm lower, so the older, exactly-sliced geometry still wins the depth
+// test wherever they overlap.
 const at = (g, i, j) => (i < 0 || j < 0 || i >= nx || j >= nz) ? 0 : g[j * nx + i];
 const grown = Uint8Array.from(field);
 for (let j = 0; j < nz; j++) for (let i = 0; i < nx; i++) {
   const k = j * nx + i;
-  if (field[k] || !building[k] || !plot[k]) continue;
+  if (field[k] || !plot[k] || !(building[k] || covered[k])) continue;
   if (at(field, i - 1, j) || at(field, i + 1, j) || at(field, i, j - 1) || at(field, i, j + 1)) {
     grown[k] = 1; cells++;
   }

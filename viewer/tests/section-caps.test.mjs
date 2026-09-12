@@ -163,7 +163,7 @@ test('What the plane cuts is drawn as black poché, ruled, with earth and masonr
   assert.match(wall.fragmentShader,/#include <tonemapping_fragment>/);
   const soil=createHatchMaterial(SOIL_POCHE);
   assert.match(soil.fragmentShader,/\/ 0\.5500;/);
-  assert.match(soil.fragmentShader,/const float INK = 0\.07000;/);
+  assert.match(soil.fragmentShader,/const float INK = 0\.15000;/);
   // R40 put the earth's ground near black so that pulling back left solid
   // poché rather than a flat tan panel. R42 inverts the earth on the client's
   // instruction: the cut ground is pale and carries a thin dark line, so it is
@@ -176,8 +176,12 @@ test('What the plane cuts is drawn as black poché, ruled, with earth and masonr
   assert.equal(SOIL_POCHE.strength,1,'the earth line takes all of the ink');
   assert.ok(SECTION_POCHE.strength<0.7,'the masonry rule stays a highlight');
   assert.notEqual(SECTION_POCHE.pitch,SOIL_POCHE.pitch,'earth and masonry are told apart by the ruling');
-  // thin line, wide gap: "siyah çizgileri incelt arasındaki mesafeyi arttır"
-  assert.ok(SOIL_POCHE.duty*2<0.10,`${(SOIL_POCHE.duty*2*100).toFixed(0)}% of the period is inked`);
+  // thin line, wide gap: "siyah çizgileri incelt arasındaki mesafeyi arttır".
+  // The shader was drawing about 40% of the period at the plan zoom whatever
+  // the duty said; now that the duty is what is drawn, it has to be high
+  // enough to read as a ruling there and low enough to stay a line close up.
+  assert.ok(SOIL_POCHE.duty*2>0.12&&SOIL_POCHE.duty*2<0.20,
+    `${(SOIL_POCHE.duty*2*100).toFixed(0)}% of the period is inked`);
   assert.ok(SOIL_POCHE.pitch>SECTION_POCHE.pitch*3,'on a far coarser pitch than masonry');
   assert.ok(!('fade' in SOIL_POCHE)&&!('fade' in SECTION_POCHE),'the hand-tuned far field is retired');
 });

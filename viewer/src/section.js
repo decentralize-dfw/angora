@@ -30,13 +30,25 @@ export function smoothStep(t) {
 // was given rather than on whatever the zoom made of it. That also retires
 // `fade`, which existed to pull the over-inked far field back down by hand.
 //
+// The ruling runs on x + y + z rather than x + z so that it crosses a vertical
+// face at 45° as it does a horizontal one. On the cut plane itself, where y is
+// constant, that is the same ruling shifted by a constant - but the site
+// body's skirt is vertical, and on x + z alone it would have come out striped
+// one way on its east face and the other way on its north.
+//
 // The earth is drawn the other way up from masonry: a pale ground carrying a
-// thin dark line, 7% of a 0.55 m period, per "siyah çizgileri incelt
-// arasındaki mesafeyi arttır. daha kibar olmalı." `strength` is how much of
-// the ink the line actually takes - masonry keeps its 0.62 so its rule stays a
-// highlight rather than a black wire; the earth's line is the ink itself.
+// thin dark line on a 0.55 m period, per "siyah çizgileri incelt arasındaki
+// mesafeyi arttır. daha kibar olmalı." With the filter honest, the duty is the
+// tone the field actually takes at any zoom, and 7% - what the old shader was
+// nominally set to while drawing 40% - turns out to be too little to read as
+// hatching at all in the plan view: 4 cm of line every 55 cm is two thirds of
+// a pixel there. 15% is the setting that reads as a ruled field at the plan
+// zoom and stays a delicate line close up, and it is still a quarter of the
+// ink the review was shown. `strength` is how much of the ink the line
+// actually takes - masonry keeps its 0.62 so its rule stays a highlight rather
+// than a black wire; the earth's line is the ink itself.
 export const SECTION_POCHE = {pitch:0.14, duty:0.065, ground:[0.020,0.020,0.023], ink:[0.32,0.31,0.29], strength:0.62};
-export const SOIL_POCHE = {pitch:0.55, duty:0.035, ground:[0.580,0.568,0.527], ink:[0.015,0.015,0.016], strength:1.0};
+export const SOIL_POCHE = {pitch:0.55, duty:0.075, ground:[0.580,0.568,0.527], ink:[0.015,0.015,0.016], strength:1.0};
 export function createHatchMaterial({pitch, duty, ground, ink, strength=0.62}) {
   return new THREE.ShaderMaterial({side:THREE.DoubleSide,
     vertexShader: `varying vec3 worldPosition;
@@ -50,7 +62,7 @@ export function createHatchMaterial({pitch, duty, ground, ink, strength=0.62}) {
       const float INK = ${(2 * duty).toFixed(5)};
       float ruled(float x) { return floor(x) * INK + min(fract(x), INK); }
       void main() {
-        float v = (worldPosition.x + worldPosition.z) / ${pitch.toFixed(4)};
+        float v = (worldPosition.x + worldPosition.y + worldPosition.z) / ${pitch.toFixed(4)};
         float w = max(fwidth(v), 1e-5);
         float hatch = clamp((ruled(v + 0.5 * w) - ruled(v - 0.5 * w)) / w, 0.0, 1.0);
         gl_FragColor = vec4(mix(vec3(${ground.map(v=>v.toFixed(3)).join(', ')}), vec3(${ink.map(v=>v.toFixed(3)).join(', ')}), hatch * ${strength.toFixed(2)}), 1.0);
