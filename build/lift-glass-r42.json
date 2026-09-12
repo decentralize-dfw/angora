@@ -1,0 +1,14 @@
+{
+  "generated_for": "R42",
+  "material": "R31 | R41 lift door frosted glass",
+  "transmission": 0,
+  "base_color_factor": [
+    0.918,
+    0.903,
+    0.858,
+    1
+  ],
+  "roughness": 0.58,
+  "storeys": 3,
+  "note": "etched glass passes light and no image; transmission is a refraction of the scene behind"
+}

@@ -38,16 +38,18 @@ const HATCH = 'R32 | soil section hatch';
 const NODE = 'R42 F0 site section field';
 const OLD_NODES = ['R42 F0 basement fill cut face', NODE];
 const CUT = 1.6;                 // SOIL_CUT_HEIGHT in viewer/src/section.js
-const CELL = 0.20;
+const CELL = 0.15;
 const DRAPE = 0.006;             // how far the field sits over the ground it describes
 // The f0 view cuts the building and the garden with the section plane and the
 // plot's own soil with the earth plane; the neighbourhood terrain is never cut.
 const CLIPPED = ['level-0', 'level-1', 'level-2', 'level-3', 'envelope', 'garden'];
 const PLOT_SOIL = /^R32 \| Continuous local soil volume/;
-// What counts as the ground itself rather than something standing on it.
-const EARTH = [/^R32 \| Continuous local soil volume/, /Natural bent garden grass/,
-  /Hedge (leaves|foliage)/, /Spruce (needle sprays|foliage)/, /Individual folded leaves/,
-  /^Shrub /, /grass/i];
+// What is built rather than grown. Everything else on the plot - the soil
+// volume, the lawn, the hedges, the spruces, the beds - is the ground, and
+// listing what to exclude rather than what to include is what keeps the field
+// continuous: a shrub whose name nobody anticipated leaves a hole in the
+// drawing, an unanticipated retaining wall only leaves itself unhatched.
+const CONSTRUCTION = /pool|terrace|stair|merdiven|retaining|coping|wall|paving|kerb|curb|deck|fence|railing/i;
 
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({
   'draco3d.decoder': await draco3d.createDecoderModule(),
@@ -114,11 +116,10 @@ function rasterise(node, earth) {
     }
   }
 }
-const isEarth = (name) => EARTH.some((re) => re.test(name));
 for (const id of CLIPPED) {
   const doc = await io.read(`${FULL}/${id}.glb`);
   for (const node of doc.getRoot().listNodes())
-    if (node.getMesh()) rasterise(node, id === 'garden' && isEarth(node.getName()));
+    if (node.getMesh()) rasterise(node, id === 'garden' && !CONSTRUCTION.test(node.getName()));
   console.log(`  ${id} rasterised`);
 }
 for (const node of soilNodes) rasterise(node, true);
