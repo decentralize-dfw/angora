@@ -26,6 +26,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync, statSync, unlinkSync } from 'node:fs';
 import { NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
+import { prune } from '@gltf-transform/functions';
 import draco3d from 'draco3dgltf';
 
 const ROOT = '/home/user/angora';
@@ -354,6 +355,14 @@ for (const level of [0, 1, 2, 3]) {
   }
   console.log(`level-${level}: ${doors.length} doors rebuilt, ${removed} recovered triangles removed, ` +
     `${(walnut.index.length + brass.index.length) / 3} authored`);
+
+  // Disposing a node and its mesh leaves the accessors behind, and their
+
+  // bytes stay in the buffer - re-running this tool grew the storey by a
+
+  // megabyte a time until the orphans were swept.
+
+  await doc.transform(prune());
 
   for (const ext of root.listExtensionsUsed())
     if (ext.extensionName === 'KHR_draco_mesh_compression') ext.dispose();

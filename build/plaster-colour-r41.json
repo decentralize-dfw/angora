@@ -1,0 +1,1323 @@
+{
+  "generated_for": "R41",
+  "method": "median of the per-photograph medians of pixels above the 92th luminance percentile and under 0.10 saturation",
+  "photographs": 143,
+  "median_srgb": [
+    218.0,
+    217.0,
+    208.0
+  ],
+  "median_linear": [
+    0.7011,
+    0.6939,
+    0.6308
+  ],
+  "chromaticity": [
+    1.0,
+    0.9897,
+    0.8997
+  ],
+  "wall_albedo": 0.8,
+  "ceiling_albedo": 0.845,
+  "interior_base_color_factor": [
+    0.8,
+    0.7917,
+    0.7197,
+    1.0
+  ],
+  "ceiling_base_color_factor": [
+    0.845,
+    0.8363,
+    0.7602,
+    1.0
+  ],
+  "samples": [
+    {
+      "photo": "kat_1_bodrum_mutfak/WhatsApp Image 2026-08-26 at 11.54.10 (4).jpeg",
+      "pixels": 103513,
+      "srgb": [
+        225.0,
+        220.0,
+        209.0
+      ]
+    },
+    {
+      "photo": "kat_1_bodrum_mutfak/WhatsApp Image 2026-08-26 at 11.54.10 (9).jpeg",
+      "pixels": 119016,
+      "srgb": [
+        228.0,
+        227.0,
+        231.0
+      ]
+    },
+    {
+      "photo": "kat_1_bodrum_mutfak/WhatsApp Image 2026-08-26 at 11.54.10.jpeg",
+      "pixels": 119974,
+      "srgb": [
+        224.0,
+        226.0,
+        219.0
+      ]
+    },
+    {
+      "photo": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (1).jpeg",
+      "pixels": 105744,
+      "srgb": [
+        207.0,
+        212.0,
+        216.0
+      ]
+    },
+    {
+      "photo": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (11).jpeg",
+      "pixels": 98583,
+      "srgb": [
+        221.0,
+        223.0,
+        221.0
+      ]
+    },
+    {
+      "photo": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (12).jpeg",
+      "pixels": 27530,
+      "srgb": [
+        216.0,
+        213.0,
+        201.0
+      ]
+    },
+    {
+      "photo": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (15).jpeg",
+      "pixels": 15017,
+      "srgb": [
+        229.0,
+        228.0,
+        223.0
+      ]
+    },
+    {
+      "photo": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (5).jpeg",
+      "pixels": 109172,
+      "srgb": [
+        218.0,
+        218.0,
+        214.0
+      ]
+    },
+    {
+      "photo": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (6).jpeg",
+      "pixels": 127376,
+      "srgb": [
+        220.0,
+        220.0,
+        216.0
+      ]
+    },
+    {
+      "photo": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.10 (7).jpeg",
+      "pixels": 51014,
+      "srgb": [
+        226.0,
+        226.0,
+        221.0
+      ]
+    },
+    {
+      "photo": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.11 (2).jpeg",
+      "pixels": 107504,
+      "srgb": [
+        220.0,
+        224.0,
+        222.0
+      ]
+    },
+    {
+      "photo": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.40 (1).jpeg",
+      "pixels": 143623,
+      "srgb": [
+        218.0,
+        220.0,
+        227.0
+      ]
+    },
+    {
+      "photo": "kat_1_bodrum_salon/WhatsApp Image 2026-08-26 at 11.54.40 (2).jpeg",
+      "pixels": 147175,
+      "srgb": [
+        218.0,
+        219.0,
+        221.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (10).jpeg",
+      "pixels": 36737,
+      "srgb": [
+        220.0,
+        214.0,
+        205.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (11).jpeg",
+      "pixels": 13337,
+      "srgb": [
+        221.0,
+        212.0,
+        204.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (12).jpeg",
+      "pixels": 16094,
+      "srgb": [
+        212.0,
+        203.0,
+        194.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (13).jpeg",
+      "pixels": 16094,
+      "srgb": [
+        212.0,
+        203.0,
+        194.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (3).jpeg",
+      "pixels": 42453,
+      "srgb": [
+        225.0,
+        220.0,
+        208.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (4).jpeg",
+      "pixels": 35258,
+      "srgb": [
+        237.0,
+        230.0,
+        218.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (5).jpeg",
+      "pixels": 1393,
+      "srgb": [
+        250.0,
+        245.0,
+        229.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (6).jpeg",
+      "pixels": 32290,
+      "srgb": [
+        205.0,
+        209.0,
+        205.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (7).jpeg",
+      "pixels": 12683,
+      "srgb": [
+        229.0,
+        225.0,
+        213.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (8).jpeg",
+      "pixels": 24266,
+      "srgb": [
+        211.0,
+        208.0,
+        199.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.53 (9).jpeg",
+      "pixels": 39861,
+      "srgb": [
+        212.0,
+        209.0,
+        196.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.54 (4).jpeg",
+      "pixels": 57243,
+      "srgb": [
+        226.0,
+        217.0,
+        205.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.54 (5).jpeg",
+      "pixels": 52496,
+      "srgb": [
+        224.0,
+        215.0,
+        205.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.53.54 (6).jpeg",
+      "pixels": 135668,
+      "srgb": [
+        216.0,
+        209.0,
+        202.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.54.10 (2).jpeg",
+      "pixels": 1789,
+      "srgb": [
+        200.0,
+        195.0,
+        188.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.54.10 (3).jpeg",
+      "pixels": 2342,
+      "srgb": [
+        218.0,
+        213.0,
+        201.0
+      ]
+    },
+    {
+      "photo": "kat_2_giris/WhatsApp Image 2026-08-26 at 11.54.10 (8).jpeg",
+      "pixels": 142012,
+      "srgb": [
+        219.0,
+        214.0,
+        202.0
+      ]
+    },
+    {
+      "photo": "kat_2_ust_salon/WhatsApp Image 2026-08-26 at 11.51.15 (3).jpeg",
+      "pixels": 39863,
+      "srgb": [
+        210.0,
+        212.0,
+        201.0
+      ]
+    },
+    {
+      "photo": "kat_2_ust_salon/WhatsApp Image 2026-08-26 at 11.51.15 (4).jpeg",
+      "pixels": 8251,
+      "srgb": [
+        208.0,
+        213.0,
+        202.0
+      ]
+    },
+    {
+      "photo": "kat_2_ust_salon/WhatsApp Image 2026-08-26 at 11.51.15 (6).jpeg",
+      "pixels": 27472,
+      "srgb": [
+        213.0,
+        207.0,
+        207.0
+      ]
+    },
+    {
+      "photo": "kat_2_ust_salon/WhatsApp Image 2026-08-26 at 11.51.15 (8).jpeg",
+      "pixels": 19322,
+      "srgb": [
+        209.0,
+        203.0,
+        201.0
+      ]
+    },
+    {
+      "photo": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.51.15 (1).jpeg",
+      "pixels": 13169,
+      "srgb": [
+        218.0,
+        215.0,
+        207.0
+      ]
+    },
+    {
+      "photo": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.51.15 (2).jpeg",
+      "pixels": 3264,
+      "srgb": [
+        210.0,
+        226.0,
+        222.0
+      ]
+    },
+    {
+      "photo": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.51.15.jpeg",
+      "pixels": 16647,
+      "srgb": [
+        210.0,
+        212.0,
+        206.0
+      ]
+    },
+    {
+      "photo": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.32 (18).jpeg",
+      "pixels": 115573,
+      "srgb": [
+        217.0,
+        213.0,
+        206.0
+      ]
+    },
+    {
+      "photo": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.33 (1).jpeg",
+      "pixels": 108175,
+      "srgb": [
+        221.0,
+        223.0,
+        219.0
+      ]
+    },
+    {
+      "photo": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.33 (2).jpeg",
+      "pixels": 40692,
+      "srgb": [
+        225.0,
+        218.0,
+        207.0
+      ]
+    },
+    {
+      "photo": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.33.jpeg",
+      "pixels": 135020,
+      "srgb": [
+        225.0,
+        222.0,
+        213.0
+      ]
+    },
+    {
+      "photo": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.53 (1).jpeg",
+      "pixels": 39525,
+      "srgb": [
+        211.0,
+        206.0,
+        200.0
+      ]
+    },
+    {
+      "photo": "kat_2_ust_mutfak/WhatsApp Image 2026-08-26 at 11.53.53 (2).jpeg",
+      "pixels": 67548,
+      "srgb": [
+        224.0,
+        217.0,
+        206.0
+      ]
+    },
+    {
+      "photo": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.07 (10).jpeg",
+      "pixels": 32479,
+      "srgb": [
+        211.0,
+        211.0,
+        203.0
+      ]
+    },
+    {
+      "photo": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.07 (9).jpeg",
+      "pixels": 5746,
+      "srgb": [
+        240.0,
+        253.0,
+        251.0
+      ]
+    },
+    {
+      "photo": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08 (1).jpeg",
+      "pixels": 111339,
+      "srgb": [
+        211.0,
+        212.0,
+        208.0
+      ]
+    },
+    {
+      "photo": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08 (2).jpeg",
+      "pixels": 76734,
+      "srgb": [
+        211.0,
+        215.0,
+        205.0
+      ]
+    },
+    {
+      "photo": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08 (3).jpeg",
+      "pixels": 61753,
+      "srgb": [
+        198.0,
+        203.0,
+        199.0
+      ]
+    },
+    {
+      "photo": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08 (4).jpeg",
+      "pixels": 118737,
+      "srgb": [
+        221.0,
+        222.0,
+        217.0
+      ]
+    },
+    {
+      "photo": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08 (5).jpeg",
+      "pixels": 111603,
+      "srgb": [
+        220.0,
+        220.0,
+        212.0
+      ]
+    },
+    {
+      "photo": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.08.jpeg",
+      "pixels": 31490,
+      "srgb": [
+        207.0,
+        218.0,
+        211.0
+      ]
+    },
+    {
+      "photo": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (10).jpeg",
+      "pixels": 121532,
+      "srgb": [
+        221.0,
+        222.0,
+        216.0
+      ]
+    },
+    {
+      "photo": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (11).jpeg",
+      "pixels": 35745,
+      "srgb": [
+        184.0,
+        185.0,
+        179.0
+      ]
+    },
+    {
+      "photo": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (12).jpeg",
+      "pixels": 148489,
+      "srgb": [
+        221.0,
+        222.0,
+        217.0
+      ]
+    },
+    {
+      "photo": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (15).jpeg",
+      "pixels": 112858,
+      "srgb": [
+        221.0,
+        218.0,
+        212.0
+      ]
+    },
+    {
+      "photo": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (6).jpeg",
+      "pixels": 55660,
+      "srgb": [
+        195.0,
+        199.0,
+        193.0
+      ]
+    },
+    {
+      "photo": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (7).jpeg",
+      "pixels": 33415,
+      "srgb": [
+        199.0,
+        203.0,
+        201.0
+      ]
+    },
+    {
+      "photo": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (8).jpeg",
+      "pixels": 80303,
+      "srgb": [
+        222.0,
+        228.0,
+        227.0
+      ]
+    },
+    {
+      "photo": "kat_3_hol/WhatsApp Image 2026-08-26 at 11.52.44 (9).jpeg",
+      "pixels": 135759,
+      "srgb": [
+        211.0,
+        213.0,
+        209.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (1).jpeg",
+      "pixels": 1340,
+      "srgb": [
+        254.0,
+        254.0,
+        249.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (2).jpeg",
+      "pixels": 2978,
+      "srgb": [
+        254.0,
+        254.0,
+        252.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (3).jpeg",
+      "pixels": 14433,
+      "srgb": [
+        215.0,
+        209.0,
+        204.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (4).jpeg",
+      "pixels": 15706,
+      "srgb": [
+        221.0,
+        229.0,
+        235.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (5).jpeg",
+      "pixels": 19061,
+      "srgb": [
+        213.0,
+        205.0,
+        199.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (6).jpeg",
+      "pixels": 6647,
+      "srgb": [
+        199.0,
+        193.0,
+        184.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (7).jpeg",
+      "pixels": 103558,
+      "srgb": [
+        200.0,
+        197.0,
+        200.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07 (8).jpeg",
+      "pixels": 91822,
+      "srgb": [
+        197.0,
+        201.0,
+        206.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.07.jpeg",
+      "pixels": 2841,
+      "srgb": [
+        255.0,
+        255.0,
+        254.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.08 (10).jpeg",
+      "pixels": 119157,
+      "srgb": [
+        203.0,
+        213.0,
+        210.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.08 (11).jpeg",
+      "pixels": 117655,
+      "srgb": [
+        162.0,
+        160.0,
+        150.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.08 (6).jpeg",
+      "pixels": 1481,
+      "srgb": [
+        191.0,
+        187.0,
+        175.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.08 (8).jpeg",
+      "pixels": 93795,
+      "srgb": [
+        182.0,
+        189.0,
+        187.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.08 (9).jpeg",
+      "pixels": 151364,
+      "srgb": [
+        225.0,
+        224.0,
+        218.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.43.jpeg",
+      "pixels": 137157,
+      "srgb": [
+        221.0,
+        221.0,
+        216.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.44 (1).jpeg",
+      "pixels": 147781,
+      "srgb": [
+        221.0,
+        218.0,
+        209.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.44 (2).jpeg",
+      "pixels": 120849,
+      "srgb": [
+        222.0,
+        220.0,
+        211.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.44 (3).jpeg",
+      "pixels": 130015,
+      "srgb": [
+        211.0,
+        206.0,
+        199.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.44 (4).jpeg",
+      "pixels": 82025,
+      "srgb": [
+        215.0,
+        212.0,
+        205.0
+      ]
+    },
+    {
+      "photo": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.44 (5).jpeg",
+      "pixels": 140386,
+      "srgb": [
+        222.0,
+        219.0,
+        213.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.30.jpeg",
+      "pixels": 64318,
+      "srgb": [
+        222.0,
+        216.0,
+        208.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.31 (7).jpeg",
+      "pixels": 6613,
+      "srgb": [
+        181.0,
+        185.0,
+        173.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.31 (8).jpeg",
+      "pixels": 50750,
+      "srgb": [
+        144.0,
+        145.0,
+        143.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.45 (1).jpeg",
+      "pixels": 124298,
+      "srgb": [
+        210.0,
+        211.0,
+        205.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.45 (2).jpeg",
+      "pixels": 21219,
+      "srgb": [
+        215.0,
+        224.0,
+        222.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.45.jpeg",
+      "pixels": 38088,
+      "srgb": [
+        128.0,
+        131.0,
+        132.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (1).jpeg",
+      "pixels": 710,
+      "srgb": [
+        202.0,
+        200.0,
+        192.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (10).jpeg",
+      "pixels": 44175,
+      "srgb": [
+        255.0,
+        255.0,
+        253.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (11).jpeg",
+      "pixels": 12337,
+      "srgb": [
+        254.0,
+        255.0,
+        255.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (12).jpeg",
+      "pixels": 10341,
+      "srgb": [
+        255.0,
+        255.0,
+        255.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (13).jpeg",
+      "pixels": 42596,
+      "srgb": [
+        255.0,
+        255.0,
+        255.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (14).jpeg",
+      "pixels": 38258,
+      "srgb": [
+        180.0,
+        185.0,
+        187.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (15).jpeg",
+      "pixels": 42596,
+      "srgb": [
+        255.0,
+        255.0,
+        255.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (16).jpeg",
+      "pixels": 3949,
+      "srgb": [
+        213.0,
+        211.0,
+        212.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (2).jpeg",
+      "pixels": 600,
+      "srgb": [
+        219.0,
+        212.0,
+        203.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (3).jpeg",
+      "pixels": 6537,
+      "srgb": [
+        173.0,
+        167.0,
+        161.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (4).jpeg",
+      "pixels": 29295,
+      "srgb": [
+        140.0,
+        142.0,
+        142.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (5).jpeg",
+      "pixels": 51246,
+      "srgb": [
+        206.0,
+        210.0,
+        199.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (7).jpeg",
+      "pixels": 6902,
+      "srgb": [
+        172.0,
+        175.0,
+        171.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (8).jpeg",
+      "pixels": 4478,
+      "srgb": [
+        180.0,
+        176.0,
+        165.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (9).jpeg",
+      "pixels": 22420,
+      "srgb": [
+        236.0,
+        252.0,
+        253.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46.jpeg",
+      "pixels": 72046,
+      "srgb": [
+        197.0,
+        207.0,
+        205.0
+      ]
+    },
+    {
+      "photo": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.52.06.jpeg",
+      "pixels": 3949,
+      "srgb": [
+        213.0,
+        211.0,
+        212.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.52.44 (13).jpeg",
+      "pixels": 113597,
+      "srgb": [
+        215.0,
+        214.0,
+        205.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.52.44 (14).jpeg",
+      "pixels": 114267,
+      "srgb": [
+        196.0,
+        197.0,
+        192.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.52.44 (16).jpeg",
+      "pixels": 46916,
+      "srgb": [
+        203.0,
+        205.0,
+        204.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.52.44 (17).jpeg",
+      "pixels": 90736,
+      "srgb": [
+        214.0,
+        215.0,
+        208.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (1).jpeg",
+      "pixels": 109911,
+      "srgb": [
+        205.0,
+        203.0,
+        205.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (10).jpeg",
+      "pixels": 99992,
+      "srgb": [
+        208.0,
+        213.0,
+        208.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (11).jpeg",
+      "pixels": 111271,
+      "srgb": [
+        198.0,
+        206.0,
+        207.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (12).jpeg",
+      "pixels": 25954,
+      "srgb": [
+        217.0,
+        220.0,
+        215.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (13).jpeg",
+      "pixels": 22569,
+      "srgb": [
+        225.0,
+        223.0,
+        208.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (14).jpeg",
+      "pixels": 83873,
+      "srgb": [
+        252.0,
+        253.0,
+        244.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (15).jpeg",
+      "pixels": 90608,
+      "srgb": [
+        223.0,
+        223.0,
+        215.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (16).jpeg",
+      "pixels": 49933,
+      "srgb": [
+        223.0,
+        230.0,
+        225.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (17).jpeg",
+      "pixels": 100573,
+      "srgb": [
+        221.0,
+        220.0,
+        205.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (18).jpeg",
+      "pixels": 78264,
+      "srgb": [
+        225.0,
+        227.0,
+        214.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg",
+      "pixels": 126991,
+      "srgb": [
+        213.0,
+        212.0,
+        205.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (3).jpeg",
+      "pixels": 148561,
+      "srgb": [
+        228.0,
+        225.0,
+        217.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (4).jpeg",
+      "pixels": 121101,
+      "srgb": [
+        225.0,
+        225.0,
+        221.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (5).jpeg",
+      "pixels": 145806,
+      "srgb": [
+        211.0,
+        210.0,
+        202.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (6).jpeg",
+      "pixels": 135960,
+      "srgb": [
+        222.0,
+        222.0,
+        219.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (7).jpeg",
+      "pixels": 80021,
+      "srgb": [
+        215.0,
+        217.0,
+        212.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (8).jpeg",
+      "pixels": 78754,
+      "srgb": [
+        209.0,
+        215.0,
+        207.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (9).jpeg",
+      "pixels": 77285,
+      "srgb": [
+        212.0,
+        218.0,
+        213.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10.jpeg",
+      "pixels": 108843,
+      "srgb": [
+        208.0,
+        207.0,
+        211.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.11.jpeg",
+      "pixels": 58814,
+      "srgb": [
+        223.0,
+        226.0,
+        216.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.31.jpeg",
+      "pixels": 1478,
+      "srgb": [
+        251.0,
+        248.0,
+        234.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (10).jpeg",
+      "pixels": 58814,
+      "srgb": [
+        223.0,
+        226.0,
+        216.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (11).jpeg",
+      "pixels": 78264,
+      "srgb": [
+        225.0,
+        227.0,
+        214.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (13).jpeg",
+      "pixels": 12324,
+      "srgb": [
+        255.0,
+        254.0,
+        247.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (14).jpeg",
+      "pixels": 111091,
+      "srgb": [
+        232.0,
+        225.0,
+        216.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (15).jpeg",
+      "pixels": 1632,
+      "srgb": [
+        251.0,
+        245.0,
+        228.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (16).jpeg",
+      "pixels": 15468,
+      "srgb": [
+        255.0,
+        255.0,
+        253.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (17).jpeg",
+      "pixels": 15036,
+      "srgb": [
+        217.0,
+        209.0,
+        198.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (2).jpeg",
+      "pixels": 111091,
+      "srgb": [
+        232.0,
+        225.0,
+        216.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (3).jpeg",
+      "pixels": 22569,
+      "srgb": [
+        225.0,
+        223.0,
+        208.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (4).jpeg",
+      "pixels": 15468,
+      "srgb": [
+        255.0,
+        255.0,
+        253.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (5).jpeg",
+      "pixels": 15036,
+      "srgb": [
+        217.0,
+        209.0,
+        198.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (6).jpeg",
+      "pixels": 83873,
+      "srgb": [
+        252.0,
+        253.0,
+        244.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (7).jpeg",
+      "pixels": 100573,
+      "srgb": [
+        221.0,
+        220.0,
+        205.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (8).jpeg",
+      "pixels": 49933,
+      "srgb": [
+        223.0,
+        230.0,
+        225.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32 (9).jpeg",
+      "pixels": 1478,
+      "srgb": [
+        251.0,
+        248.0,
+        234.0
+      ]
+    },
+    {
+      "photo": "kat_4/WhatsApp Image 2026-08-26 at 11.53.32.jpeg",
+      "pixels": 12324,
+      "srgb": [
+        255.0,
+        254.0,
+        247.0
+      ]
+    }
+  ]
+}

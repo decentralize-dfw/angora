@@ -1,0 +1,27 @@
+{
+  "generated_for": "R41",
+  "runs": 4,
+  "panels": 9,
+  "removed_triangles": 6208,
+  "authored_triangles": 16404,
+  "rail": {
+    "height": 1,
+    "bottomRail": [
+      0.05,
+      0.09
+    ],
+    "infillTop": 0.865,
+    "handrail": {
+      "width": 0.088,
+      "depth": 0.052
+    },
+    "newel": 0.042,
+    "bar": {
+      "width": 0.015,
+      "depth": 0.008
+    },
+    "panel": 0.78,
+    "ball": 0.017
+  },
+  "layout_revision": 20
+}

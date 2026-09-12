@@ -1,0 +1,48 @@
+{
+  "generated_for": "R41",
+  "meshes": {
+    "F3 | KAT 3$DUVAR": {
+      "before": 2015,
+      "after": 1839,
+      "dropped": 176,
+      "refinished": 98,
+      "finishes": {
+        "stucco": 889,
+        "interior": 950
+      }
+    },
+    "F3 | KAT 3$DUVAR KAPLAMA": {
+      "before": 2620,
+      "after": 2448,
+      "dropped": 172,
+      "refinished": 182,
+      "finishes": {
+        "interior": 1928,
+        "stucco": 368,
+        "R31 | R33 attic cream tile": 47,
+        "R31 | R33 attic tan mosaic band": 46,
+        "R31 | R33 ivory wall ceramic": 59
+      }
+    },
+    "F3 | ÇATI ALIN": {
+      "before": 1146,
+      "after": 1089,
+      "dropped": 57,
+      "refinished": 0,
+      "finishes": {
+        "wood_dark": 1089
+      }
+    },
+    "F3 | ÇATII": {
+      "before": 11986,
+      "after": 10958,
+      "dropped": 1028,
+      "refinished": 178,
+      "finishes": {
+        "roof": 2021,
+        "ceiling": 8524,
+        "wood_dark": 413
+      }
+    }
+  }
+}
