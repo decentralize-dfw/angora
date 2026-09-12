@@ -19,7 +19,9 @@ import {createSiteContext} from './site-context.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
 import {prepareContextSurfaces} from './context-surfaces.js';
 import {batchContext} from './context-batch.js';
-import {mergeEqualMaterials,abstractVehicle,splitContextSoil,splitContextBuildings,createContextMassing} from './context-massing.js';
+import {mergeEqualMaterials,abstractVehicle,splitContextSoil,splitContextBuildings,createContextMassing,authoredNodeName} from './context-massing.js';
+// Trees, hedges and beds, by the names the delivery gives them.
+const PLANTING=/spruce|needle|foliage|hedge|leaves|leaf|shrub|tree|branch|trunk|canopy|planting/i;
 import {createLift,FLOOR_SEND_LABEL} from './lift.js';
 import {handleEscape} from './interface-actions.js';
 import {createDeviceQA} from './device-qa.js';
@@ -430,11 +432,15 @@ async function loadModel() {
         if (!o.isMesh) return;
         o.renderOrder = 5;
         const building=id!=='context'&&id!=='garden';
-        // A 1.60 m section that leaves a 10 m spruce standing on the plan is
-        // not a section, so the garden sweeps with the building cut. Of the
-        // context only the plot's own soil is cut, by the snap plane, so the
-        // neighbourhood and roads stay whole and the authored cap always fits.
-        const planes=building||id==='garden'?[clip]
+        // The garden's ground, paving, steps and walls sweep with the building
+        // cut - they are the section's own subject. Its PLANTING does not:
+        // "arka bahçedeki ağaçları kesme!!!" A tree is not a wall, and a plan
+        // that beheads the spruces while the neighbours' stand whole a metre
+        // away reads as damage rather than as a drawing. Of the context only
+        // the plot's own soil is cut, by the snap plane, so the neighbourhood
+        // and roads stay whole and the authored cap always fits.
+        const planting=id==='garden'&&PLANTING.test(authoredNodeName(o.name));
+        const planes=planting?[]:building||id==='garden'?[clip]
           :(Array.isArray(o.material)?o.material:[o.material]).some(m=>m?.userData.plotSoil)?[earthClip]:[];
         lighting.prepareMesh(o,{clipped:planes[0]===clip,context:!building});
         o.userData.clipPlanes=planes;
