@@ -12,6 +12,16 @@ export function materialFamily(name='') {
   if (/stucco|neighbor_wall|white_trim|limestone|stone_tile|retaining stone|asphalt/i.test(name)) return 'masonry';
   if (/grass|foliage|hedge|needle|leaf/i.test(name)) return 'landscape';
   if (/wood_floor|terra_floor/i.test(name)) return 'floor';
+  // Indoor plaster. It used to fall through to 'other' and keep the loader's
+  // envMapIntensity of 1 - the only family in the house left at full strength,
+  // while roof sits at .65, floor .75 and masonry .8. A ceiling faces down, so
+  // what it reflects is the lower half of the probe, which is the settlement's
+  // ground: 73.8 k m² of grass against 17.7 k of asphalt and 20.5 k of stone,
+  // averaging linear .180,.209,.112. Measured off a delivered frame the
+  // ceilings were reading sRGB 118,125,97 - the ground's own colour, not their
+  // own - because with no occlusion indoors the environment was most of what
+  // reached them. The albedo is right; the weight was not.
+  if (/^(interior|ceiling)$/.test(name)) return 'plaster';
   return 'other';
 }
 
@@ -19,7 +29,7 @@ export function prepareMaterialResponse(material, {context=false}={}) {
   if (!material?.isMeshStandardMaterial || material.userData.presentationR27) return;
   const family=materialFamily(material.name);
   material.userData.presentationR27={family,context,normal:material.normalScale?.clone()};
-  if (['roof','masonry','landscape','floor'].includes(family)) material.metalness=0;
+  if (['roof','masonry','landscape','floor','plaster'].includes(family)) material.metalness=0;
   const roughnessFloor={roof:.8,masonry:.72,landscape:.88,floor:.58}[family];
   if(roughnessFloor){
     const previous=material.onBeforeCompile,previousKey=material.customProgramCacheKey();
@@ -43,6 +53,8 @@ export function prepareMaterialResponse(material, {context=false}={}) {
     material.envMapIntensity=.8;
   } else if (family==='landscape') {
     material.normalScale?.multiplyScalar(.25);
+  } else if (family==='plaster') {
+    material.envMapIntensity=.55;
   } else if (family==='floor') {
     material.normalScale?.multiplyScalar(.3);
     material.envMapIntensity=.75;
