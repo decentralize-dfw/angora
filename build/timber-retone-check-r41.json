@@ -1,0 +1,102 @@
+{
+  "generated_for": "R41",
+  "question": "did the timber re-tone change what the shipped viewer draws, and can this frame judge it",
+  "method": "same page, same walk station, same camera, before and after the re-tone; the wall and floor act as a control because nothing about them changed",
+  "frames": {
+    "before": "build/renders/r41-app/02 attic-walk.png at commit f96242f",
+    "after": "build/renders/r41-app/02 attic-walk.png at commit 1be04b7"
+  },
+  "patches_srgb": {
+    "door panel field": {
+      "before": [
+        13.4,
+        15.8,
+        15.2
+      ],
+      "after": [
+        15.5,
+        16.2,
+        15.2
+      ],
+      "delta": [
+        2.1,
+        0.5,
+        0.0
+      ]
+    },
+    "door stile": {
+      "before": [
+        20.1,
+        22.8,
+        24.2
+      ],
+      "after": [
+        22.1,
+        23.2,
+        24.2
+      ],
+      "delta": [
+        2.0,
+        0.4,
+        0.0
+      ]
+    },
+    "door edge": {
+      "before": [
+        31.2,
+        34.9,
+        38.4
+      ],
+      "after": [
+        32.7,
+        35.2,
+        38.4
+      ],
+      "delta": [
+        1.5,
+        0.3,
+        0.0
+      ]
+    },
+    "wall (control)": {
+      "before": [
+        157.2,
+        164.2,
+        166.5
+      ],
+      "after": [
+        157.2,
+        164.2,
+        166.5
+      ],
+      "delta": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "floor (control)": {
+      "before": [
+        117.6,
+        117.5,
+        115.9
+      ],
+      "after": [
+        117.6,
+        117.5,
+        115.9
+      ],
+      "delta": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "findings": [
+    "The re-tone is live and behaves as designed: the controls are byte-identical, and the timber moves in exactly the channels the gain touches - red most, green a little, blue not at all (gain 2.34, 1.41, 0.98).",
+    "This frame cannot judge the timber colour. The door face in it sits at sRGB 15 against a wall at 160, a tenfold difference: it is the back of an open door turned into a dark corner, and almost nothing of what it shows is diffuse. A 2.34x lift in albedo moved it two levels.",
+    "So the black door in the pre-re-tone frame was shade, not albedo, and the re-tone should not be credited with fixing it. The re-tone stands on the hue measurement in build/timber-colour-r41.json alone - the delivery sat at red/blue 2.09 where both estimates of the photographs put it past 3.3 - and that basis is unaffected by any of this."
+  ],
+  "outstanding": "a frame with a lit door face. The turn frames from the same run sweep the view and may catch one; failing that, a walk station in a room whose door faces a window."
+}
