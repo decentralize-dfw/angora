@@ -71,8 +71,12 @@ test('The whole plot is cut at one height, and the house is the hole in it',()=>
   // every square metre of the property is either cut ground, the authored
   // face, or the house - nothing is left uncut inside the boundary
   const drawn=report.closed_area_m2+report.authored_face_cells*report.cell_m**2;
-  assert.ok(drawn>report.plot_area_m2*0.9,
-    `${drawn.toFixed(0)} m² of section over a ${report.plot_area_m2.toFixed(0)} m² plot`);
+  assert.ok(drawn+report.house_area_m2>report.plot_area_m2*0.98,
+    `${drawn.toFixed(0)} m² of section and ${report.house_area_m2.toFixed(0)} m² of house `+
+    `over a ${report.plot_area_m2.toFixed(0)} m² plot`);
+  // the pool basin and the excavation are punched out of the modelled earth;
+  // filling them is what keeps the poché from opening onto the pool
+  assert.ok(report.filled_holes_m2>50,`${report.filled_holes_m2} m² of holes closed`);
   const face=glb.json.meshes.find(m=>m.name==='R42 F0 site section field');
   assert.ok(face,'the delivery carries the site field');
   const accessor=glb.json.accessors[face.primitives[0].attributes.POSITION];

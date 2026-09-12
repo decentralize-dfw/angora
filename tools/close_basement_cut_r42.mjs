@@ -124,8 +124,31 @@ function rasterise(triangles, visit) {
 }
 
 rasterise(soilTriangles, (k, y) => { plot[k] = 1; if (y > ground[k]) ground[k] = y; });
+// The soil body is punched out under the pool - the terrain was cut away there
+// so the water would not show a grass plane under it - and the excavation
+// leaves its own gaps. Those are holes in the property, not gaps in it, and
+// left alone they read as openings in the poché with a pool at the bottom of
+// one. So anything the outside cannot reach is filled: the extent still comes
+// from the modelled earth, but the earth is treated as solid.
+const outside = new Uint8Array(nx * nz);
+const stack = [];
+for (let i = 0; i < nx; i++) { stack.push(i, (nz - 1) * nx + i); }
+for (let j = 0; j < nz; j++) { stack.push(j * nx, j * nx + nx - 1); }
+while (stack.length) {
+  const k = stack.pop();
+  if (plot[k] || outside[k]) continue;
+  outside[k] = 1;
+  const i = k % nx, j = (k - i) / nx;
+  if (i > 0) stack.push(k - 1);
+  if (i < nx - 1) stack.push(k + 1);
+  if (j > 0) stack.push(k - nx);
+  if (j < nz - 1) stack.push(k + nx);
+}
+let filled = 0;
+for (let k = 0; k < plot.length; k++) if (!plot[k] && !outside[k]) { plot[k] = 1; filled++; }
 let plotCells = 0; for (const v of plot) plotCells += v;
-console.log(`the plot's own earth covers ${(plotCells * CELL * CELL).toFixed(1)} m²`);
+console.log(`the plot's own earth covers ${(plotCells * CELL * CELL).toFixed(1)} m², ` +
+  `${(filled * CELL * CELL).toFixed(1)} m² of it holes closed back up`);
 
 for (const id of BUILDING) {
   const doc = await io.read(`${FULL}/${id}.glb`);
@@ -133,6 +156,10 @@ for (const id of BUILDING) {
     if (node.getMesh()) rasterise(worldTriangles(node), (k, y) => { if (y <= CUT) building[k] = 1; });
   console.log(`  ${id} rasterised`);
 }
+
+let houseCells = 0;
+for (let k = 0; k < plot.length; k++) if (plot[k] && building[k]) houseCells++;
+console.log(`the house stands on ${(houseCells * CELL * CELL).toFixed(1)} m² of it at or below the cut`);
 
 // ------------------------------------- what the authored cut face already has
 const capsDoc = await io.read(CAPS);
@@ -281,6 +308,8 @@ writeFileSync(ROOT + '/build/basement-cut-closure-r42.json', JSON.stringify({
   generated_for: 'R42', cut_height_m: CUT, drawn_at_m: y, cell_m: CELL,
   plot_footprint: { x: [x0, x0 + nx * CELL], z: [z0, z0 + nz * CELL] },
   plot_area_m2: +(plotCells * CELL * CELL).toFixed(3),
+  filled_holes_m2: +(filled * CELL * CELL).toFixed(3),
+  house_area_m2: +(houseCells * CELL * CELL).toFixed(3),
   authored_face_cells: covered.reduce((n, v) => n + v, 0),
   void_area_m2: +(voidCells * CELL * CELL).toFixed(3),
   closed_area_m2: +(cells * CELL * CELL).toFixed(3),
