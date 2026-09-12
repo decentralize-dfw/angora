@@ -1,0 +1,62 @@
+{
+  "generated_for": "R41",
+  "applied": false,
+  "reason": "the two estimators agree on hue and contradict each other on level; in these photographs a door is never lit as the plaster beside it is",
+  "current_wood_dark": {
+    "texture_mean_srgb": [
+      47.7,
+      37.1,
+      31.4
+    ],
+    "linear": [
+      0.0292,
+      0.0186,
+      0.014
+    ],
+    "red_over_blue": 2.09
+  },
+  "estimators": {
+    "broad": {
+      "timber_over_plaster_linear": [
+        0.1138,
+        0.0345,
+        0.0131
+      ],
+      "implied_albedo_linear": [
+        0.091,
+        0.0273,
+        0.0094
+      ],
+      "implied_srgb": [
+        85.0,
+        46.0,
+        25.0
+      ],
+      "red_over_blue": 9.65,
+      "level_against_current": 1.75,
+      "photographs": 119,
+      "caveat": "contaminated by the parquet, which is warm, dark and covers more of most frames than the doors"
+    },
+    "isolated": {
+      "timber_over_plaster_linear": [
+        0.0129,
+        0.0057,
+        0.0042
+      ],
+      "implied_albedo_linear": [
+        0.0103,
+        0.0045,
+        0.0031
+      ],
+      "implied_srgb": [
+        26.0,
+        14.0,
+        10.0
+      ],
+      "red_over_blue": 3.38,
+      "level_against_current": 0.27,
+      "caveat": "the door leaf is in its own shade while the plaster patch is lit"
+    }
+  },
+  "agreed": "both estimators put the photographed timber redder than the delivery: red/blue 9.65 and 3.38 against 2.09"
+}
