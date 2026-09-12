@@ -55,7 +55,7 @@ const BRASS = 'R31 | R35 door brass';
 // the jamb line from the hinge, y up from the floor, z out the way it opens -
 // and placed into the world by one basis per door.
 class Builder {
-  constructor() { this.position = []; this.normal = []; this.index = []; }
+  constructor() { this.position = []; this.normal = []; this.uv = []; this.index = []; }
   get count() { return this.position.length / 3; }
   // a planar quad, wound a-b-c-d
   quad(a, b, c, d) {
@@ -101,12 +101,22 @@ class Builder {
     for (const p of [a, b, c]) { this.position.push(...p); this.normal.push(...n); }
     this.index.push(base, base + 1, base + 2);
   }
-  // fold this builder into a target, placing every point with `place`
+  // Fold this builder into a target, placing every point with `place`, and
+  // give it the texture coordinates the delivery's own joinery uses: one unit
+  // to the metre, taken off the world axes the face is squarest to. Without
+  // them the walnut map samples a single texel and every door in the house
+  // comes out the flat colour of that one pixel.
   emitInto(target, place, rotate) {
     const base = target.count;
     for (let i = 0; i < this.count; i++) {
-      target.position.push(...place([this.position[i * 3], this.position[i * 3 + 1], this.position[i * 3 + 2]]));
-      target.normal.push(...rotate([this.normal[i * 3], this.normal[i * 3 + 1], this.normal[i * 3 + 2]]));
+      const point = place([this.position[i * 3], this.position[i * 3 + 1], this.position[i * 3 + 2]]);
+      const normal = rotate([this.normal[i * 3], this.normal[i * 3 + 1], this.normal[i * 3 + 2]]);
+      target.position.push(...point);
+      target.normal.push(...normal);
+      const [ax, ay, az] = normal.map(Math.abs);
+      if (ay >= ax && ay >= az) target.uv.push(point[0], point[2]);
+      else if (ax >= az) target.uv.push(point[2], point[1]);
+      else target.uv.push(point[0], point[1]);
     }
     for (const i of this.index) target.index.push(base + i);
   }
@@ -347,6 +357,7 @@ for (const level of [0, 1, 2, 3]) {
     const prim = doc.createPrimitive()
       .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(new Float32Array(builder.position)).setBuffer(buffer))
       .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(new Float32Array(builder.normal)).setBuffer(buffer))
+      .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(new Float32Array(builder.uv)).setBuffer(buffer))
       .setIndices(doc.createAccessor().setType('SCALAR').setArray(new Uint32Array(builder.index)).setBuffer(buffer))
       .setMaterial(material);
     const mesh = doc.createMesh(name).addPrimitive(prim);

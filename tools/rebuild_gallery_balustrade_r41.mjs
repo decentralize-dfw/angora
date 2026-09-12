@@ -46,7 +46,7 @@ const RAIL = {
 const IRON = 'metal', TIMBER = 'antique_wood', BRASS = 'brass';
 
 class Builder {
-  constructor() { this.position = []; this.normal = []; this.index = []; }
+  constructor() { this.position = []; this.normal = []; this.uv = []; this.index = []; }
   get count() { return this.position.length / 3; }
   quad(a, b, c, d) {
     const u = [b[0] - a[0], b[1] - a[1], b[2] - a[2]];
@@ -212,7 +212,15 @@ for (let i = 0; i < nodes.length - 1; i++) {
       const n = source.normal.slice(k * 3, k * 3 + 3);
       // rotate the normal with the run; the rake is shallow enough that the
       // vertical component carries unchanged
-      builder.normal.push(dir[0] * n[0] + side[0] * n[2], n[1], dir[1] * n[0] + side[1] * n[2]);
+      const world = [dir[0] * n[0] + side[0] * n[2], n[1], dir[1] * n[0] + side[1] * n[2]];
+      builder.normal.push(...world);
+      // one texture unit to the metre, off the world axes the face is
+      // squarest to - the convention the delivery's own joinery uses, and
+      // what the handrail's timber map needs to read as grain
+      const [ax, ay, az] = world.map(Math.abs);
+      if (ay >= ax && ay >= az) builder.uv.push(p[0], p[2]);
+      else if (ax >= az) builder.uv.push(p[2], p[1]);
+      else builder.uv.push(p[0], p[1]);
     }
     for (const index of source.index) builder.index.push(base + index);
   };
@@ -278,6 +286,7 @@ for (const [name, key, materialName] of [
   const prim = doc.createPrimitive()
     .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(new Float32Array(builder.position)).setBuffer(buffer))
     .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(new Float32Array(builder.normal)).setBuffer(buffer))
+    .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(new Float32Array(builder.uv)).setBuffer(buffer))
     .setIndices(doc.createAccessor().setType('SCALAR').setArray(new Uint32Array(builder.index)).setBuffer(buffer))
     .setMaterial(material);
   root.listScenes()[0].addChild(doc.createNode(name).setMesh(doc.createMesh(name).addPrimitive(prim)));

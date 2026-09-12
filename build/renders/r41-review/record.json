@@ -1,0 +1,133 @@
+{
+ "rendered_at": "2026-09-12T00:15:23.790Z",
+ "frames": [
+  {
+   "frame": "R41-01 attic-bedroom-door",
+   "pos": [
+    -0.54,
+    10.85,
+    2.4
+   ],
+   "target": [
+    -0.3,
+    10.55,
+    -1.2
+   ],
+   "fov": 52,
+   "triangles": 2944164,
+   "ms": 24762
+  },
+  {
+   "frame": "R41-02 attic-hall",
+   "pos": [
+    -0.66,
+    10.85,
+    -0.6
+   ],
+   "target": [
+    -1.5,
+    10.45,
+    -4.6
+   ],
+   "fov": 52,
+   "triangles": 2557222,
+   "ms": 22491
+  },
+  {
+   "frame": "R41-03 gallery-balustrade",
+   "pos": [
+    2.7,
+    7.8,
+    -2.4
+   ],
+   "target": [
+    0.6,
+    7.05,
+    0.1
+   ],
+   "fov": 48,
+   "triangles": 2420758,
+   "ms": 20237
+  },
+  {
+   "frame": "R41-04 first-floor-landing",
+   "pos": [
+    -0.2,
+    7.75,
+    -0.3
+   ],
+   "target": [
+    -0.5,
+    7.3,
+    -3.8
+   ],
+   "fov": 54,
+   "triangles": 3474580,
+   "ms": 23300
+  },
+  {
+   "frame": "R41-05 lift-landing",
+   "pos": [
+    1.1,
+    4.6,
+    -1.6
+   ],
+   "target": [
+    -1,
+    4.35,
+    -3
+   ],
+   "fov": 50,
+   "triangles": 3104500,
+   "ms": 16284
+  },
+  {
+   "frame": "R41-06 entrance-hall",
+   "pos": [
+    2.1,
+    4.6,
+    3.4
+   ],
+   "target": [
+    0.3,
+    4.3,
+    0
+   ],
+   "fov": 56,
+   "triangles": 4978618,
+   "ms": 30213
+  },
+  {
+   "frame": "R41-07 basement-hall",
+   "pos": [
+    0.6,
+    1.5,
+    -0.6
+   ],
+   "target": [
+    -1.1,
+    1.25,
+    -3.4
+   ],
+   "fov": 54,
+   "triangles": 2843246,
+   "ms": 19404
+  },
+  {
+   "frame": "R41-08 garage",
+   "pos": [
+    6.6,
+    4.5,
+    2.6
+   ],
+   "target": [
+    5.3,
+    3.9,
+    -2
+   ],
+   "fov": 52,
+   "triangles": 4061470,
+   "ms": 27830
+  }
+ ]
+}
