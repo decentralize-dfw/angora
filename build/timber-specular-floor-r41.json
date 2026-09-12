@@ -1,0 +1,79 @@
+{
+  "generated_for": "R41",
+  "frame": "build/renders/r41-app/10 entrance-after.png",
+  "what": "a lit interior door at close range in the shipped viewer - walk mode, the Antre, ground floor, daylight. The first frame this session that can judge the timber: the attic isometric is mostly roof and its leaves are a few pixels wide, and the attic walk station looks at the back of an open door in a dark corner.",
+  "measured_srgb": {
+    "architrave jamb (wood_dark)": [
+      36.7,
+      38.9,
+      38.7
+    ],
+    "architrave head (wood_dark)": [
+      58.3,
+      61.9,
+      65.6
+    ],
+    "door leaf face (wood_dark)": [
+      41.8,
+      45.5,
+      48.1
+    ],
+    "plaster wall in the same frame": [
+      128.3,
+      135.0,
+      133.9
+    ],
+    "stair tread (wood_floor)": [
+      82.4,
+      63.1,
+      59.0
+    ]
+  },
+  "linear_ratio_to_plaster": {
+    "architrave jamb": [
+      0.0841,
+      0.0833,
+      0.084
+    ],
+    "door leaf": [
+      0.1059,
+      0.1106,
+      0.1247
+    ],
+    "expected from albedo": [
+      0.0856,
+      0.0331,
+      0.019
+    ]
+  },
+  "diagnosis": "The red channel lands exactly where the albedo predicts - 0.0841 measured against 0.0856 expected - and green and blue come out 2.5x and 4.4x too bright, which makes the timber render achromatic. That is the signature of an additive achromatic term over the diffuse, and there is only one: the dielectric specular floor, F0 = 0.04. The re-toned map is 0.0685, 0.0262, 0.0137. Red now sits above 0.04 so its diffuse wins and its colour survives; green is below it and blue is a third of it, so both are dominated by an achromatic reflection and the walnut washes out to grey.",
+  "consequence": "Warming the hue was necessary and is not sufficient. What the doors need to read as walnut is for the whole map - green and blue especially - to sit above the specular floor. At the current level the rendered red-over-blue is about 2.0 whatever the map says, against 5.0 in the map itself and 3.3 to 9.7 in the photographs.",
+  "arithmetic": {
+    "current": {
+      "albedo": [
+        0.0685,
+        0.0262,
+        0.0137
+      ],
+      "rendered_red_over_blue_approx": 2.0
+    },
+    "if_scaled_2.5x": {
+      "albedo": [
+        0.171,
+        0.066,
+        0.034
+      ],
+      "rendered_red_over_blue_approx": 2.8
+    },
+    "if_scaled_4x": {
+      "albedo": [
+        0.274,
+        0.105,
+        0.055
+      ],
+      "rendered_red_over_blue_approx": 3.3
+    },
+    "note": "4x would put the map mean near sRGB 145, 90, 68 - a medium brown. The lit door faces in the photographs measure around sRGB 110, 70, 55. Which of these the house's joinery should be is a judgement about the building, not a measurement, so it is left here rather than applied."
+  },
+  "applied": false
+}
