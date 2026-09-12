@@ -88,12 +88,20 @@ test('The whole plot is cut at one height, and the house is the hole in it',()=>
   assert.ok(report.skirt_faces>100,`${report.skirt_faces} skirt faces`);
   assert.ok(accessor.min[1]<accessor.max[1]-0.3&&accessor.min[1]>accessor.max[1]-3.1,
     `the body runs from ${accessor.min[1]} to ${accessor.max[1]}`);
-  // inside the plot: this cuts the property, never the neighbours' land.
+  // inside the property, never the neighbours' land: the soil body is modelled
+  // a metre or two proud of the retaining walls and the fence, and a section
+  // laid over the whole of it runs past the hedge onto the next-door grass.
   // The grid rounds up to a whole cell, so the sheet may reach one cell past
-  // the footprint it was laid over - never further.
-  const [px0,px1]=report.plot_footprint.x,[pz0,pz1]=report.plot_footprint.z,edge=report.cell_m+1e-3;
-  assert.ok(accessor.min[0]>=px0-edge&&accessor.max[0]<=px1+edge,JSON.stringify([accessor.min[0],accessor.max[0]]));
-  assert.ok(accessor.min[2]>=pz0-edge&&accessor.max[2]<=pz1+edge,JSON.stringify([accessor.min[2],accessor.max[2]]));
+  // the boundary it was trimmed to - never further.
+  const edge=report.cell_m+1e-3;
+  for (const face of glb.json.meshes.filter(m=>/soil cut face|site section field/.test(m.name))) {
+    const a=glb.json.accessors[face.primitives[0].attributes.POSITION];
+    assert.ok(a.min[0]>=report.property.x[0]-edge&&a.max[0]<=report.property.x[1]+edge,
+      `${face.name} runs x ${a.min[0]}..${a.max[0]} past ${JSON.stringify(report.property.x)}`);
+    assert.ok(a.max[2]<=report.property.front_z+edge,
+      `${face.name} runs to z ${a.max[2]} past the fence at ${report.property.front_z}`);
+  }
+  assert.equal(report.authored_faces_trimmed,1,'the authored face is the one that overhung');
   assert.equal(report.cap_asset_triangles,manifest.section_cap_asset.triangles);
 });
 

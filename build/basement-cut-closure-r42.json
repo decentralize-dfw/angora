@@ -13,16 +13,24 @@
       11.200000000000003
     ]
   },
-  "plot_area_m2": 800.28,
+  "plot_area_m2": 701.1,
   "filled_holes_m2": 191.14,
   "house_area_m2": 128.69,
-  "authored_face_cells": 20117,
+  "authored_face_cells": 17175,
   "void_area_m2": 83.18,
-  "closed_area_m2": 484.39,
-  "rectangles": 105,
-  "skirt_faces": 847,
-  "face_triangles": 210,
-  "triangles": 1904,
-  "cap_asset_bytes": 89388,
-  "cap_asset_triangles": 5133
+  "closed_area_m2": 413.54,
+  "property": {
+    "x": [
+      -9.489889335632324,
+      10.970000457763671
+    ],
+    "front_z": 10.18600025177002
+  },
+  "authored_faces_trimmed": 1,
+  "rectangles": 78,
+  "skirt_faces": 724,
+  "face_triangles": 156,
+  "triangles": 1604,
+  "cap_asset_bytes": 88656,
+  "cap_asset_triangles": 4858
 }

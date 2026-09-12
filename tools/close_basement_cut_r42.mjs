@@ -28,10 +28,14 @@
 // are not this drawing's subject and are not touched.
 //
 // The extent is the plot's own earth - the plan footprint of `R32 | Continuous
-// local soil volume` - rather than a box typed in here, so the face ends where
-// the modelled property ends. A skirt closes the body down to that earth's own
-// surface, so tilting the basement view shows a cut block of ground and not a
-// sheet floating over the lawn.
+// local soil volume` - trimmed to the property line, which the site marks out
+// for itself: the west and east retaining walls and the front fence. The soil
+// body is modelled a metre or two proud of them on three sides, and a section
+// laid over the whole of it runs past the hedge onto the neighbours' grass,
+// which is exactly what "arsa içi" rules out. The authored face is trimmed to
+// the same line. A skirt closes the body down to the earth's own surface, so
+// tilting the basement view shows a cut block of ground and not a sheet
+// floating over the lawn.
 import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { NodeIO } from '@gltf-transform/core';
@@ -53,6 +57,14 @@ const BUILDING = ['level-0', 'level-1', 'level-2', 'level-3', 'envelope'];
 // The plot's own earth. Its plan footprint is the property, and its surface is
 // where the skirt lands.
 const PLOT_SOIL = /^R32 \| Continuous local soil volume/;
+// What the site uses to mark its own boundary. The rear has no such fabric -
+// the soil body's own edge stops short of the hedge there - so it is left as
+// the earth draws it.
+const BOUNDARY = {
+  west: /^West CAD retaining wall\b/,
+  east: /^East elevated neighbor retaining wall\b/,
+  front: /^R33 \| Front fence spear\b/,
+};
 const SKIRT_UNDER = 0.06;        // the skirt runs this far past the ground it meets
 const SKIRT_MAX = 3.0;           // and no further, where the earth falls away
 
@@ -81,6 +93,26 @@ function worldTriangles(node) {
   }
   return out;
 }
+
+// ------------------------------------------------------ where the property is
+const gardenDoc = await io.read(`${FULL}/garden.glb`);
+const boundary = { west: -Infinity, east: Infinity, front: Infinity };
+for (const node of gardenDoc.getRoot().listNodes()) {
+  if (!node.getMesh()) continue;
+  const authoredName = node.getName().replace(/\.\d+$/, '');
+  for (const tri of BOUNDARY.west.test(authoredName) ? worldTriangles(node) : [])
+    for (const [x] of tri) boundary.west = Math.max(boundary.west, x);
+  for (const tri of BOUNDARY.east.test(authoredName) ? worldTriangles(node) : [])
+    for (const [x] of tri) boundary.east = Math.min(boundary.east, x);
+  for (const tri of BOUNDARY.front.test(authoredName) ? worldTriangles(node) : [])
+    for (const [, , z] of tri) boundary.front = Math.min(boundary.front, z);
+}
+if (!Number.isFinite(boundary.west) || !Number.isFinite(boundary.east) || !Number.isFinite(boundary.front))
+  throw new Error('the site marks no property line to trim the section to');
+// the walls and the fence are the boundary, so the ground goes to their far face
+const PROPERTY = { x: [boundary.west - 0.45, boundary.east + 0.45], z: [-Infinity, boundary.front + 0.15] };
+console.log(`the property runs x ${PROPERTY.x[0].toFixed(2)}..${PROPERTY.x[1].toFixed(2)}, ` +
+  `front z ${PROPERTY.z[1].toFixed(2)}`);
 
 // ------------------------------------------------------- the plot's own earth
 const contextDoc = await io.read(`${FULL}/context.glb`);
@@ -123,7 +155,11 @@ function rasterise(triangles, visit) {
   }
 }
 
-rasterise(soilTriangles, (k, y) => { plot[k] = 1; if (y > ground[k]) ground[k] = y; });
+rasterise(soilTriangles, (k, y) => {
+  const i = k % nx, px = x0 + (i + 0.5) * CELL, pz = z0 + ((k - i) / nx + 0.5) * CELL;
+  if (px < PROPERTY.x[0] || px > PROPERTY.x[1] || pz > PROPERTY.z[1]) return;
+  plot[k] = 1; if (y > ground[k]) ground[k] = y;
+});
 // The soil body is punched out under the pool - the terrain was cut away there
 // so the water would not show a grass plane under it - and the excavation
 // leaves its own gaps. Those are holes in the property, not gaps in it, and
@@ -161,16 +197,48 @@ let houseCells = 0;
 for (let k = 0; k < plot.length; k++) if (plot[k] && building[k]) houseCells++;
 console.log(`the house stands on ${(houseCells * CELL * CELL).toFixed(1)} m² of it at or below the cut`);
 
+// The authored face was cut from the soil body, so it overhangs the property on
+// the three sides the soil does. Each of its triangles is clipped in plan to
+// the boundary and written back, which is why the node is rebuilt rather than
+// read: a section that runs past the hedge is drawing the neighbours' ground.
+function trimToProperty(node) {
+  const kept = [];
+  const inside = (p, axis, limit, sign) => (p[axis] - limit) * sign <= 0;
+  const cross = (a, b, axis, limit) => {
+    const t = (limit - a[axis]) / (b[axis] - a[axis]);
+    return [0, 1, 2].map((i) => a[i] + (b[i] - a[i]) * t);
+  };
+  const planes = [[0, PROPERTY.x[0], -1], [0, PROPERTY.x[1], 1], [2, PROPERTY.z[1], 1]];
+  for (const tri of worldTriangles(node)) {
+    let poly = tri;
+    for (const [axis, limit, sign] of planes) {
+      const next = [];
+      for (let i = 0; i < poly.length && poly.length; i++) {
+        const a = poly[i], b = poly[(i + 1) % poly.length];
+        const ai = inside(a, axis, limit, sign), bi = inside(b, axis, limit, sign);
+        if (ai) next.push(a);
+        if (ai !== bi) next.push(cross(a, b, axis, limit));
+      }
+      poly = next;
+      if (poly.length < 3) break;
+    }
+    for (let i = 1; i + 1 < poly.length; i++) kept.push([poly[0], poly[i], poly[i + 1]]);
+  }
+  return kept;
+}
+
 // ------------------------------------- what the authored cut face already has
 const capsDoc = await io.read(CAPS);
 const capsRoot = capsDoc.getRoot();
-const authored = [];
+const authored = [], trimmed = [];
 for (const node of capsRoot.listNodes()) {
   const mesh = node.getMesh();
   if (!mesh) continue;
   if (OLD_NODES.includes(node.getName())) { node.dispose(); mesh.dispose(); continue; }  // idempotent
-  if (mesh.listPrimitives().some((p) => p.getMaterial()?.getName() === HATCH))
-    authored.push(...worldTriangles(node));
+  if (!mesh.listPrimitives().some((p) => p.getMaterial()?.getName() === HATCH)) continue;
+  const kept = trimToProperty(node);
+  authored.push(...kept);
+  if (kept.length * 3 !== worldTriangles(node).length * 3) trimmed.push({ node, kept });
 }
 const covered = new Uint8Array(nx * nz);
 rasterise(authored, (k) => { covered[k] = 1; });
@@ -279,6 +347,27 @@ capsRoot.listScenes()[0].addChild(capsDoc.createNode(NODE)
   .setExtras({ category: 'section_cap', cut_height_m: CUT, cell_m: CELL,
     note: 'R42 site section: the plot cut at one height, with the rooms as its holes' }));
 
+// and the authored faces that overhung the boundary are written back trimmed,
+// in world space, so the node carries what it draws and nothing outside it
+for (const { node, kept } of trimmed) {
+  const pos = [], nrm = [], idx = [];
+  for (const tri of kept) {
+    const base = pos.length / 3;
+    for (const p of tri) { pos.push(...p); nrm.push(0, 1, 0); }
+    idx.push(base, base + 1, base + 2);
+  }
+  const old = node.getMesh();
+  const rebuilt = capsDoc.createMesh(old.getName());
+  if (kept.length) rebuilt.addPrimitive(capsDoc.createPrimitive()
+    .setAttribute('POSITION', capsDoc.createAccessor().setType('VEC3').setArray(new Float32Array(pos)).setBuffer(buffer))
+    .setAttribute('NORMAL', capsDoc.createAccessor().setType('VEC3').setArray(new Float32Array(nrm)).setBuffer(buffer))
+    .setIndices(capsDoc.createAccessor().setType('SCALAR').setArray(new Uint32Array(idx)).setBuffer(buffer))
+    .setMaterial(material));
+  node.setMesh(rebuilt).setTranslation([0, 0, 0]).setRotation([0, 0, 0, 1]).setScale([1, 1, 1]);
+  old.dispose();
+  console.log(`${node.getName()} trimmed to the property: ${kept.length} triangles`);
+}
+
 await capsDoc.transform(prune());
 writeFileSync(CAPS, await io.writeBinary(capsDoc));
 
@@ -313,6 +402,8 @@ writeFileSync(ROOT + '/build/basement-cut-closure-r42.json', JSON.stringify({
   authored_face_cells: covered.reduce((n, v) => n + v, 0),
   void_area_m2: +(voidCells * CELL * CELL).toFixed(3),
   closed_area_m2: +(cells * CELL * CELL).toFixed(3),
+  property: { x: PROPERTY.x, front_z: PROPERTY.z[1] },
+  authored_faces_trimmed: trimmed.length,
   rectangles: boxes.length, skirt_faces: skirts,
   face_triangles: faceTriangles, triangles: index.length / 3,
   cap_asset_bytes: raw.length, cap_asset_triangles: triangles,
