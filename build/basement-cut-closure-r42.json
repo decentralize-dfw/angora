@@ -1,0 +1,21 @@
+{
+  "generated_for": "R42",
+  "cut_height_m": 1.6,
+  "cell_m": 0.025,
+  "plot_footprint": {
+    "x": [
+      -11.175,
+      11.476
+    ],
+    "z": [
+      -23.975,
+      11.033
+    ]
+  },
+  "empty_cells": 77402,
+  "closed_area_m2": 48.376,
+  "runs": 600,
+  "triangles": 1200,
+  "cap_asset_bytes": 88024,
+  "cap_asset_triangles": 4429
+}

@@ -20,14 +20,21 @@ test('The manifest describes the section-caps file that is actually on disk',()=
   const raw=fs.readFileSync(delivered('section-caps.glb'));
   assert.equal(manifest.section_cap_asset.bytes,raw.length);
   assert.equal(manifest.section_cap_asset.sha256,crypto.createHash('sha256').update(raw).digest('hex'));
-  assert.equal(manifest.section_cap_asset.triangles,3366);
+  // Counted from the file rather than frozen, so adding a cap updates the
+  // record instead of failing here: what is being checked is that they agree.
+  const triangles=glb.json.meshes.reduce((sum,mesh)=>sum+mesh.primitives
+    .reduce((n,primitive)=>n+glb.json.accessors[primitive.indices].count/3,0),0);
+  assert.equal(manifest.section_cap_asset.triangles,triangles);
+  assert.equal(manifest.section_cap_asset.exported_mesh_nodes,glb.json.meshes.length);
 });
 
 test('Every authored cap sits exactly on a documented cut height',()=>{
   const heights={'R32 F0 soil cut face.001':1.6,'R32 F0 wall cut face.001':1.6,
     'R32 F1 wall cut face.001':4.6996,'R32 F2 roof cut face':7.9714,'R32 F2 wall cut face.001':7.9714,
-    'R32 F3 roof cut face':10.7705,'R32 F3 wall cut face.001':10.7705};
-  assert.equal(glb.json.meshes.length,7);
+    'R32 F3 roof cut face':10.7705,'R32 F3 wall cut face.001':10.7705,
+    // R42: the plan area the basement cut leaves empty, closed in the earth hatch
+    'R42 F0 basement fill cut face':1.6};
+  assert.equal(glb.json.meshes.length,8);
   for(const mesh of glb.json.meshes){
     const expected=heights[mesh.name];
     assert.ok(expected!==undefined,mesh.name);
@@ -43,6 +50,27 @@ test('Every authored cap sits exactly on a documented cut height',()=>{
   assert.deepEqual(atlas.exact_floor_heights_m,[1.6,4.6996,7.9714,10.7705]);
   for(const [f,expected] of [[0,1.6],[1,4.6996],[2,7.9714],[3,10.7705]])
     assert.ok(Math.abs(floorDatums[f]+(f===3?1.3:1.6)-expected)<1e-9,'floor '+f);
+});
+
+test('The basement cut is closed: nothing the plane passes through is left unhatched',()=>{
+  // R42. The authored earth face covers the soil the plane cuts; it cannot
+  // cover the footprint the CAD excavated and then left empty, because there
+  // is no geometry there to author a face from. That area is measured by
+  // rasterising everything the f0 view clips and taking the cells where no
+  // surface survives at or below the cut - 48.4 m² under the entrance wing -
+  // and closed with a second face in the same hatch.
+  const report=JSON.parse(fs.readFileSync(new URL('build/basement-cut-closure-r42.json',new URL('../../',import.meta.url))));
+  assert.equal(report.cut_height_m,SOIL_CUT_HEIGHT);
+  assert.ok(report.closed_area_m2>40&&report.closed_area_m2<60,`closed ${report.closed_area_m2} m²`);
+  const face=glb.json.meshes.find(m=>m.name==='R42 F0 basement fill cut face');
+  assert.ok(face,'the delivery carries the closure face');
+  const accessor=glb.json.accessors[face.primitives[0].attributes.POSITION];
+  // inside the plot's own soil footprint: this closes a hole in the plot, it
+  // does not lay hatch over the neighbourhood, which is never cut
+  const [px0,px1]=report.plot_footprint.x,[pz0,pz1]=report.plot_footprint.z;
+  assert.ok(accessor.min[0]>=px0-1e-3&&accessor.max[0]<=px1+1e-3,JSON.stringify([accessor.min[0],accessor.max[0]]));
+  assert.ok(accessor.min[2]>=pz0-1e-3&&accessor.max[2]<=pz1+1e-3,JSON.stringify([accessor.min[2],accessor.max[2]]));
+  assert.equal(report.cap_asset_triangles,manifest.section_cap_asset.triangles);
 });
 
 test('The wall and roof caps are redundant with the atlas, licensing the decision not to draw them',()=>{
@@ -64,21 +92,27 @@ test('The wall and roof caps are redundant with the atlas, licensing the decisio
 
 const capScene=()=>{
   const scene=new THREE.Group();
-  const soil=new THREE.Mesh(new THREE.BufferGeometry(),new THREE.MeshStandardMaterial({name:'R32 | soil section hatch'}));
+  const hatch=new THREE.MeshStandardMaterial({name:'R32 | soil section hatch'});
+  const soil=new THREE.Mesh(new THREE.BufferGeometry(),hatch);
   soil.geometry.setAttribute('position',new THREE.BufferAttribute(new Float32Array([0,1.6,0, 1,1.6,0, 0,1.6,1]),3));
+  const fill=new THREE.Mesh(new THREE.BufferGeometry(),hatch);
+  fill.geometry.setAttribute('position',new THREE.BufferAttribute(new Float32Array([2,1.6,0, 3,1.6,0, 2,1.6,1]),3));
   const wall=new THREE.Mesh(new THREE.BufferGeometry(),new THREE.MeshStandardMaterial({name:'R32 | wall section hatch'}));
   wall.geometry.setAttribute('position',new THREE.BufferAttribute(new Float32Array(9),3));
-  scene.add(soil,wall);
+  scene.add(soil,fill,wall);
   return scene;
 };
 
-test('createSoilCap keeps exactly the soil face and shows it only at the basement cut',()=>{
+test('createSoilCap keeps every soil face and shows them only at the basement cut',()=>{
   const soilCap=createSoilCap(capScene());
   assert.ok(soilCap);
   const meshes=[];soilCap.group.traverse(o=>{if(o.isMesh)meshes.push(o);});
-  assert.equal(meshes.length,1);
-  assert.equal(meshes[0].name,'Solid hatched soil cross section');
-  assert.equal(meshes[0].castShadow,false);
+  // two faces in the delivery - the authored earth and the R42 fill closure -
+  // and the fixture carries both, so a cap added later needs no viewer change
+  assert.equal(meshes.length,2);
+  assert.ok(meshes.every(m=>m.name==='Solid hatched soil cross section'));
+  assert.equal(meshes[0].material,meshes[1].material,'one hatch material for the whole field');
+  assert.ok(meshes.every(m=>m.castShadow===false));
   assert.equal(meshes[0].material.side,THREE.DoubleSide);
   soilCap.update(SOIL_CUT_HEIGHT,true);assert.equal(soilCap.group.visible,true);
   soilCap.update(4.6996,true);assert.equal(soilCap.group.visible,false,'no authored face exists at the upper cuts');

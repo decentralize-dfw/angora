@@ -107,20 +107,33 @@ export function createWallCaps(atlas) {
 // from the delivery rather than synthesised - a welded re-slice of the Draco
 // geometry recovers the right area at 1.6 m but returns nonsense at other
 // heights, which is exactly why the authored face exists.
+//
+// R42 adds a second face in the same material. The authored one covers the
+// earth the plane passes through; it cannot cover the 48 m2 under the entrance
+// wing, where the CAD excavated the footprint and then built no basement, so
+// the plane cuts a void and the view falls through to the back of the
+// excavation. Both faces are earth in plan and both are collected here, so a
+// cap added to the delivery needs no change in the viewer.
 export const SOIL_CUT_HEIGHT = 1.6;
 export function createSoilCap(capScene) {
   const group = new THREE.Group(); group.name = 'Authored soil section';
-  let source = null;
+  const sources = [];
+  capScene.updateMatrixWorld(true);
   capScene.traverse(object => {
     const materials = Array.isArray(object.material) ? object.material : [object.material];
-    if (object.isMesh && materials.some(m => m?.name === 'R32 | soil section hatch')) source = object;
+    if (object.isMesh && materials.some(m => m?.name === 'R32 | soil section hatch')) sources.push(object);
   });
-  if (!source) return null;
-  const mesh = new THREE.Mesh(source.geometry, createHatchMaterial(SOIL_POCHE));
-  mesh.name = 'Solid hatched soil cross section';
-  mesh.renderOrder = 2; mesh.castShadow = mesh.receiveShadow = false;
-  // keep the one geometry, drop the rest of the cap scene and its unused maps
-  source.geometry = null;
+  if (!sources.length) return null;
+  const material = createHatchMaterial(SOIL_POCHE);
+  for (const source of sources) {
+    const mesh = new THREE.Mesh(source.geometry, material);
+    mesh.name = 'Solid hatched soil cross section';
+    mesh.applyMatrix4(source.matrixWorld);
+    mesh.renderOrder = 2; mesh.castShadow = mesh.receiveShadow = false;
+    // keep this geometry, drop the rest of the cap scene and its unused maps
+    source.geometry = null;
+    group.add(mesh);
+  }
   capScene.traverse(object => {
     if (object.isMesh && object.geometry) object.geometry.dispose();
     for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
@@ -129,7 +142,6 @@ export function createSoilCap(capScene) {
       material.dispose();
     }
   });
-  group.add(mesh);
   return {group, update(height, visible) {
     // the authored face exists at exactly one height; it shows when the earth
     // plane sits on it and hides for every other state
