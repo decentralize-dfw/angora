@@ -66,6 +66,15 @@ export function prepareMaterialResponse(material, {context=false}={}) {
     // argument that took the ceilings to 0.
     material.envMapIntensity=0;
     material.normalMap=null;material.bumpMap=null;
+    // and the rest of what makes a ceiling read white, because the review is
+    // about the pair: "iç duvarlar beyaz" against a ceiling that already is.
+    // The albedo is 0.940 either way; the ceiling looks it and the wall does
+    // not, and the difference is here - the forced white, the vertex colours
+    // off, and the small emissive lift that stands in for the bounce an
+    // interior with no occlusion never gets.
+    material.color.setRGB(.94,.94,.94);
+    material.vertexColors=false;
+    material.emissive?.setRGB(.22,.22,.22);material.emissiveIntensity=1;
   } else if (family==='soffit') {
     material.normalMap=null;material.bumpMap=null;
     material.map=null;
