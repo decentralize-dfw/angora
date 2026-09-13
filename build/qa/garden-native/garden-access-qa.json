@@ -1,0 +1,779 @@
+{
+  "route_samples": 113,
+  "missing_floor": [],
+  "body_hits": [
+    {
+      "route": "entry",
+      "y": -6.6499999999999915,
+      "height": 0.3,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.177,
+        "point": [
+          1.08,
+          -6.473,
+          3.61013
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.6499999999999915,
+      "height": 1,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.177,
+        "point": [
+          1.08,
+          -6.473,
+          4.31013
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.6499999999999915,
+      "height": 1.65,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.177,
+        "point": [
+          1.08,
+          -6.473,
+          4.96013
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.499999999999991,
+      "height": 0.3,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.027,
+        "point": [
+          1.08,
+          -6.473,
+          3.58923
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.499999999999991,
+      "height": 1,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.027,
+        "point": [
+          1.08,
+          -6.473,
+          4.28923
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.499999999999991,
+      "height": 1.65,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.027,
+        "point": [
+          1.08,
+          -6.473,
+          4.93923
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.349999999999991,
+      "height": 0.3,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.06295,
+        "point": [
+          1.14295,
+          -6.35,
+          3.56833
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.349999999999991,
+      "height": 0.3,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.0622,
+        "point": [
+          1.0178,
+          -6.35,
+          3.56833
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.349999999999991,
+      "height": 0.3,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.00215,
+        "point": [
+          1.08,
+          -6.34785,
+          3.56833
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.349999999999991,
+      "height": 0.3,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.123,
+        "point": [
+          1.08,
+          -6.473,
+          3.56833
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.349999999999991,
+      "height": 1,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.06295,
+        "point": [
+          1.14295,
+          -6.35,
+          4.26833
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.349999999999991,
+      "height": 1,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.0622,
+        "point": [
+          1.0178,
+          -6.35,
+          4.26833
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.349999999999991,
+      "height": 1,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.00215,
+        "point": [
+          1.08,
+          -6.34785,
+          4.26833
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.349999999999991,
+      "height": 1,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.123,
+        "point": [
+          1.08,
+          -6.473,
+          4.26833
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.349999999999991,
+      "height": 1.65,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.06295,
+        "point": [
+          1.14295,
+          -6.35,
+          4.91833
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.349999999999991,
+      "height": 1.65,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.0622,
+        "point": [
+          1.0178,
+          -6.35,
+          4.91833
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.349999999999991,
+      "height": 1.65,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.00215,
+        "point": [
+          1.08,
+          -6.34785,
+          4.91833
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.349999999999991,
+      "height": 1.65,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.123,
+        "point": [
+          1.08,
+          -6.473,
+          4.91833
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.19999999999999,
+      "height": 0.3,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.02271,
+        "point": [
+          1.08,
+          -6.2227,
+          3.54743
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.19999999999999,
+      "height": 1,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.02271,
+        "point": [
+          1.08,
+          -6.2227,
+          4.24743
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.19999999999999,
+      "height": 1.65,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.02271,
+        "point": [
+          1.08,
+          -6.2227,
+          4.89743
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.04999999999999,
+      "height": 0.3,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.1727,
+        "point": [
+          1.08,
+          -6.2227,
+          3.52652
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.04999999999999,
+      "height": 1,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.1727,
+        "point": [
+          1.08,
+          -6.2227,
+          4.22652
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -6.04999999999999,
+      "height": 1.65,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.1727,
+        "point": [
+          1.08,
+          -6.2227,
+          4.87652
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -5.449999999999989,
+      "height": 0.3,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.22668,
+        "point": [
+          1.08,
+          -5.22332,
+          3.44291
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -5.449999999999989,
+      "height": 1,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.22668,
+        "point": [
+          1.08,
+          -5.22332,
+          4.14291
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -5.449999999999989,
+      "height": 1.65,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.22668,
+        "point": [
+          1.08,
+          -5.22332,
+          4.79291
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -5.299999999999988,
+      "height": 0.3,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.07668,
+        "point": [
+          1.08,
+          -5.22332,
+          3.42201
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -5.299999999999988,
+      "height": 1,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.07668,
+        "point": [
+          1.08,
+          -5.22332,
+          4.12201
+        ]
+      }
+    },
+    {
+      "route": "entry",
+      "y": -5.299999999999988,
+      "height": 1.65,
+      "hit": {
+        "object": "F1 | KAT 1$DUVAR",
+        "material": "stucco.001",
+        "distance": 0.07668,
+        "point": [
+          1.08,
+          -5.22332,
+          4.77201
+        ]
+      }
+    }
+  ],
+  "recess_floor_samples": [
+    {
+      "xy": [
+        3.6,
+        7.1
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          3.6,
+          7.1,
+          0.02031
+        ]
+      }
+    },
+    {
+      "xy": [
+        3.6,
+        7.5
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          3.6,
+          7.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "xy": [
+        3.6,
+        8.0
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          3.6,
+          8.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "xy": [
+        3.6,
+        8.2
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          3.6,
+          8.2,
+          0.02031
+        ]
+      }
+    },
+    {
+      "xy": [
+        4.5,
+        7.1
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          4.5,
+          7.1,
+          0.02031
+        ]
+      }
+    },
+    {
+      "xy": [
+        4.5,
+        7.5
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          4.5,
+          7.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "xy": [
+        4.5,
+        8.0
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          4.5,
+          8.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "xy": [
+        4.5,
+        8.2
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          4.5,
+          8.2,
+          0.02031
+        ]
+      }
+    },
+    {
+      "xy": [
+        5.2,
+        7.1
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          5.2,
+          7.1,
+          0.02031
+        ]
+      }
+    },
+    {
+      "xy": [
+        5.2,
+        7.5
+      ],
+      "support": {
+        "object": "Garden | Patio table trestle foot.001",
+        "material": null,
+        "distance": 0.0097,
+        "point": [
+          5.2,
+          7.5,
+          0.0903
+        ]
+      }
+    },
+    {
+      "xy": [
+        5.2,
+        8.0
+      ],
+      "support": {
+        "object": "Garden | Patio table trestle foot.001",
+        "material": null,
+        "distance": 0.0097,
+        "point": [
+          5.2,
+          8.0,
+          0.0903
+        ]
+      }
+    },
+    {
+      "xy": [
+        5.2,
+        8.2
+      ],
+      "support": {
+        "object": "Garden | Patio table trestle foot.001",
+        "material": null,
+        "distance": 0.0097,
+        "point": [
+          5.2,
+          8.2,
+          0.0903
+        ]
+      }
+    },
+    {
+      "xy": [
+        5.8,
+        7.1
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace.001",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          5.8,
+          7.1,
+          0.02031
+        ]
+      }
+    },
+    {
+      "xy": [
+        5.8,
+        7.5
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace.001",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          5.8,
+          7.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "xy": [
+        5.8,
+        8.0
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace.001",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          5.8,
+          8.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "xy": [
+        5.8,
+        8.2
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace.001",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          5.8,
+          8.2,
+          0.02031
+        ]
+      }
+    },
+    {
+      "xy": [
+        6.2,
+        7.1
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace.001",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          6.2,
+          7.1,
+          0.02031
+        ]
+      }
+    },
+    {
+      "xy": [
+        6.2,
+        7.5
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace.001",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          6.2,
+          7.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "xy": [
+        6.2,
+        8.0
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace.001",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          6.2,
+          8.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "xy": [
+        6.2,
+        8.2
+      ],
+      "support": {
+        "object": "Garden | Kitchen recess continuous terrace.001",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.07969,
+        "point": [
+          6.2,
+          8.2,
+          0.02031
+        ]
+      }
+    }
+  ],
+  "missing_recess_floor": []
+}

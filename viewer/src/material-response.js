@@ -3,6 +3,7 @@ import * as THREE from 'three';
 // Presentation response only: source geometry and calibrated dimensions stay
 // untouched. Keep the baked maps, but avoid amplifying their micro-relief.
 export function materialFamily(name='') {
+  name=name.replace(/\.\d{3}$/,'');
   if (/clay tile|^roof$|green tiles/i.test(name)) return 'roof';
   // Glass and mirrors must never reach a roughness floor: 'Lift glass leaf'
   // would otherwise match the landscape family through 'leaf' and pick up a
@@ -56,14 +57,27 @@ export function prepareMaterialResponse(material, {context=false}={}) {
     material.normalScale?.multiplyScalar(.25);
   } else if (family==='plaster') {
     material.envMapIntensity=.55;
+    material.normalMap=null;material.bumpMap=null;
   } else if (family==='soffit') {
+    material.normalMap=null;material.bumpMap=null;
+    material.map=null;
+    material.color.setRGB(.94,.94,.94);
+    material.vertexColors=false;
     // A ceiling's normal points at the floor, so of the probe it sees the
     // ground hemisphere and nothing else - .55 of the settlement's olive is
     // still the settlement's olive, which is what a delivered interior frame
     // still showed. What lights a ceiling indoors is the room: the fixtures,
     // and the hemisphere fill, whose downward colour is a neutral warm grey.
     // The environment is the one term that has no business being there.
-    material.envMapIntensity=.2;
+    material.envMapIntensity=0;
+    material.emissive?.setRGB(.35,.35,.35);material.emissiveIntensity=1;
+    const previous=material.onBeforeCompile,previousKey=material.customProgramCacheKey();
+    material.onBeforeCompile=(shader,renderer)=>{
+      previous.call(material,shader,renderer);
+      const neutral=THREE.ShaderChunk.envmap_physical_pars_fragment.replaceAll('envMapColor.rgb','vec3(dot(envMapColor.rgb, vec3(0.2126, 0.7152, 0.0722)))');
+      shader.fragmentShader=shader.fragmentShader.replace('#include <envmap_physical_pars_fragment>',neutral);
+    };
+    material.customProgramCacheKey=()=>previousKey+'|neutral-ceiling-probe';
   } else if (family==='floor') {
     material.normalScale?.multiplyScalar(.3);
     material.envMapIntensity=.75;
@@ -72,11 +86,39 @@ export function prepareMaterialResponse(material, {context=false}={}) {
   material.needsUpdate=true;
 }
 
+
 export function setMaterialScale(material, view) {
   const state=material.userData.presentationR27;
   if(state?.family!=='roof'||!state.normal)return;
   const scale=view==='region'?.06:view==='neighborhood'?.14:state.context?.18:.3;
   material.normalScale.copy(state.normal).multiplyScalar(scale);
+}
+
+// The native model supplies a separate plaster lining. Exterior clay tiles
+// retain their material in every camera mode, including through windows.
+export function setInteriorMode(material, active) {
+  const state=material?.userData?.presentationR27;
+  if(state?.family!=='soffit')return;
+  if(!state.walk)state.walk={
+    color:material.color.clone(),map:material.map,normalMap:material.normalMap,
+    bumpMap:material.bumpMap,envMapIntensity:material.envMapIntensity,
+    vertexColors:material.vertexColors,emissive:material.emissive?.clone(),
+    emissiveIntensity:material.emissiveIntensity
+  };
+  if(active){
+    material.color.setRGB(.94,.94,.94);
+    material.map=null;material.normalMap=null;material.bumpMap=null;
+    material.envMapIntensity=0;material.vertexColors=false;
+    material.emissive?.setRGB(.35,.35,.35);material.emissiveIntensity=1;
+  }else{
+    material.color.copy(state.walk.color);
+    material.map=state.walk.map;material.normalMap=state.walk.normalMap;
+    material.bumpMap=state.walk.bumpMap;material.envMapIntensity=state.walk.envMapIntensity;
+    material.vertexColors=state.walk.vertexColors;
+    if(state.walk.emissive)material.emissive.copy(state.walk.emissive);
+    material.emissiveIntensity=state.walk.emissiveIntensity;
+  }
+  material.needsUpdate=true;
 }
 
 export function fitContextBounds(box, aspect, polar=.58, azimuth=0, fov=16) {

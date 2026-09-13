@@ -9,7 +9,7 @@ import {DisplayDitherShader} from './display-dither.js';
 import {GradeShader} from './grade-pass.js';
 import { HDRLoader } from 'three/addons/loaders/HDRLoader.js';
 import {solarPosition} from './daylight.js';
-import {prepareMaterialResponse,setMaterialScale} from './material-response.js';
+import {prepareMaterialResponse,setInteriorMode,setMaterialScale} from './material-response.js';
 import {smoothSurfaceNormals} from './context-surfaces.js';
 import {configurePostprocessing} from './postprocessing.js';
 import {applyRenderProfile,referenceProfile} from './render-profile.js';
@@ -107,7 +107,7 @@ export function buildEnvironment(renderer,{sky=null,background=null}) {
     new THREE.MeshBasicMaterial({color:new THREE.Color(GROUND_ALBEDO)}));
   ground.rotation.x=-Math.PI/2;ground.position.y=-1;probe.add(ground);
   const generator=new THREE.PMREMGenerator(renderer);
-  const target=generator.fromScene(probe,.06,.1,20000);
+  const target=generator.fromScene(probe,.035,.1,20000);
   probe.remove(ground);ground.geometry.dispose();ground.material.dispose();generator.dispose();
   return target;
 }
@@ -178,7 +178,7 @@ export function createLighting(renderer, scene, camera, clip) {
     configurePostprocessing(composer,{beauty,ao,smaa,bloom,output:new ShaderPass(GradeShader),
       dither:new ShaderPass(DisplayDitherShader)});
   }
-  let day=172,hour=12.5,environmentMode='procedural-sky';
+  let day=172,hour=12.5,environmentMode='procedural-sky',walkInterior=false;
   const skyDirection=new THREE.Vector3();let skyDrawn=false;
   let soft=true,shadowDistance=110;
   const preparedMaterials=new Set();
@@ -196,7 +196,8 @@ export function createLighting(renderer, scene, camera, clip) {
     const daylight=THREE.MathUtils.smoothstep(solar.altitude,-6,28),warmth=THREE.MathUtils.smoothstep(solar.altitude,0,35);
     sun.intensity=(soft?1.55:2.25)*THREE.MathUtils.smoothstep(solar.altitude,-.5,20);
     sun.color.set(0xffbc7b).lerp(new THREE.Color(0xfff5e9),warmth);
-    hemisphere.intensity=.08+.42*daylight;scene.environmentIntensity=.08+(soft?.85:.65)*daylight;
+    hemisphere.intensity=.08+.42*daylight;
+    scene.environmentIntensity=.08+(soft?.85:.65)*daylight;
     sun.shadow.radius=soft?2.5:1;sun.shadow.intensity=soft?.82:1;
     horizon.set(0x182734).lerp(new THREE.Color(0xe4e9ed),daylight);
     sky.material.uniforms.sunPosition.value.copy(direction);
@@ -229,6 +230,11 @@ export function createLighting(renderer, scene, camera, clip) {
     setFixtures(data){fixtures.setFixtures(data);},
     interior(floor,position,time){fixtures.select(floor,position,time);},
     setLights(enabled){fixtures.setEnabled(enabled);},setTime,
+    setWalkInterior(active){
+      walkInterior=active;
+      for(const material of preparedMaterials)setInteriorMode(material,active);
+      setTime(hour,day);
+    },
     update(time){
       const state=fixtures.update(time);
       if(state.shadowChanged)renderer.shadowMap.needsUpdate=true;
@@ -244,6 +250,9 @@ export function createLighting(renderer, scene, camera, clip) {
       object.castShadow=!glass;object.receiveShadow=!glass;
       for(const material of materials) {
         prepareMaterialResponse(material,{context});preparedMaterials.add(material);
+        // Three uses scene.environmentIntensity when envMap is null. Bind the
+        // room finishes explicitly so their neutral response is respected.
+        if(['plaster','soffit'].includes(material.userData.presentationR27?.family))material.envMap=environment.texture;
         material.clipShadows=true;
         if(isGlazing(material)){material.metalness=0;if(isSeeThrough(material))material.depthWrite=false;}
         for(const value of Object.values(material))if(value?.isTexture)value.anisotropy=Math.min(compact?8:16,renderer.capabilities.getMaxAnisotropy());

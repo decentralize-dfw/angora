@@ -1,0 +1,182 @@
+{
+  "ceiling": [
+    {
+      "xy": [
+        -3,
+        5.1
+      ],
+      "hit": {
+        "object": "F3 | ÇATII",
+        "material": "ceiling.003",
+        "distance": 0.51637,
+        "point": [
+          -3.0,
+          5.1,
+          11.01637
+        ]
+      }
+    },
+    {
+      "xy": [
+        -2.7,
+        5.1
+      ],
+      "hit": {
+        "object": "F3 | ÇATII",
+        "material": "ceiling.003",
+        "distance": 0.51621,
+        "point": [
+          -2.7,
+          5.1,
+          11.01621
+        ]
+      }
+    },
+    {
+      "xy": [
+        -0.5,
+        -0.1
+      ],
+      "hit": {
+        "object": "C04 | Wardrobe upper interior shelf",
+        "material": null,
+        "distance": 0.6,
+        "point": [
+          -0.5,
+          -0.1,
+          11.1
+        ]
+      }
+    },
+    {
+      "xy": [
+        0.5,
+        -0.1
+      ],
+      "hit": {
+        "object": "F3 | ÇATII",
+        "material": "ceiling.003",
+        "distance": 1.26972,
+        "point": [
+          0.5,
+          -0.1,
+          11.76972
+        ]
+      }
+    },
+    {
+      "xy": [
+        1.5,
+        -1.8
+      ],
+      "hit": {
+        "object": "F3 | ÇATII",
+        "material": "ceiling.003",
+        "distance": 0.57841,
+        "point": [
+          1.5,
+          -1.8,
+          11.07841
+        ]
+      }
+    },
+    {
+      "xy": [
+        0.7,
+        5.65
+      ],
+      "hit": {
+        "object": "F3 | ÇATII",
+        "material": "ceiling.003",
+        "distance": 1.13143,
+        "point": [
+          0.7,
+          5.65,
+          11.63143
+        ]
+      }
+    }
+  ],
+  "round_window": [
+    {
+      "xz": [
+        -5.4,
+        11.22
+      ],
+      "hit": {
+        "object": "C05 | Circular physical glazing",
+        "material": "glass.003",
+        "distance": 0.375,
+        "point": [
+          -5.4,
+          3.525,
+          11.22
+        ]
+      }
+    },
+    {
+      "xz": [
+        -5.5,
+        11.22
+      ],
+      "hit": {
+        "object": "C05 | Circular physical glazing",
+        "material": "glass.003",
+        "distance": 0.375,
+        "point": [
+          -5.5,
+          3.525,
+          11.22
+        ]
+      }
+    },
+    {
+      "xz": [
+        -5.3,
+        11.22
+      ],
+      "hit": {
+        "object": "C05 | Circular physical glazing",
+        "material": "glass.003",
+        "distance": 0.375,
+        "point": [
+          -5.3,
+          3.525,
+          11.22
+        ]
+      }
+    },
+    {
+      "xz": [
+        -5.4,
+        11.1
+      ],
+      "hit": {
+        "object": "C05 | Circular physical glazing",
+        "material": "glass.003",
+        "distance": 0.375,
+        "point": [
+          -5.4,
+          3.525,
+          11.1
+        ]
+      }
+    },
+    {
+      "xz": [
+        -5.4,
+        11.35
+      ],
+      "hit": {
+        "object": "C05 | Circular physical glazing",
+        "material": "glass.003",
+        "distance": 0.375,
+        "point": [
+          -5.4,
+          3.525,
+          11.35
+        ]
+      }
+    }
+  ]
+}

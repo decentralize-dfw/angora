@@ -21,9 +21,10 @@ import {prepareContextSurfaces} from './context-surfaces.js';
 import {batchContext} from './context-batch.js';
 import {mergeEqualMaterials,abstractVehicle,splitContextSoil,splitContextBuildings,createContextMassing,authoredNodeName} from './context-massing.js';
 // Trees, hedges and beds, by the names the delivery gives them.
-const PLANTING=/spruce|needle|foliage|hedge|leaves|leaf|shrub|tree|branch|trunk|canopy|planting/i;
+const PLANTING=/spruce|needle|foliage|hedge|leaves|leaf|shrub|tree|branch|trunk|planting/i;
 import {createLift,FLOOR_SEND_LABEL} from './lift.js';
 import {handleEscape} from './interface-actions.js';
+import {createInterfaceSound} from './interface-sound.js';
 import {createDeviceQA} from './device-qa.js';
 import {readShareState,shareSearch} from './share-state.js';
 import {referenceProfile} from './render-profile.js';
@@ -272,7 +273,10 @@ function setup() {
   const draco = new DRACOLoader(); draco.setDecoderPath(decoderRoot.href);
   draco.setWorkerLimit(Math.max(2,Math.min(coarse?3:4,(navigator.hardwareConcurrency||4)-1)));
   loader = new GLTFLoader(); loader.setDRACOLoader(draco);
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize',()=>{
+    const portrait=camera.aspect<1;resize();
+    if(ready&&!walk?.active&&portrait!==(camera.aspect<1))frame(true);
+  });
   renderer.xr.addEventListener('sessionstart', () => renderer.setAnimationLoop(renderFrame));
   renderer.xr.addEventListener('sessionend', () => {renderer.setAnimationLoop(null);resize();invalidate();});
 }
@@ -316,6 +320,7 @@ function enterWalk(roomId) {
   flight.cancel();panel('',false);const station=walk.enter(roomId);selected='f'+station.floor_index;updateRoomUI(station);
   lighting.interior(station.floor_index,station.position);
   controls.enabled=false;clip.constant=fullHeight;earthClip.constant=fullHeight;transition=null;lighting.frame('building');massing?.set('building');
+  lighting.setWalkInterior(true);
   // after the section plane is raised, or canRun() reads the previous cut
   lift?.setWalkActive(true);lift?.setWalkFloor(station.floor_index);refreshLiftControl();
   $('#app').dataset.walk='true';$('.camera-tools').hidden=true;$('#walk-tools').hidden=false;$('#enter-walk').hidden=true;
@@ -328,6 +333,7 @@ function exitWalk(reselect = true) {
   pendingRoomJump.cancel();
   if(!walk?.active)return;
   walk.leave();controls.enabled=true;$('#app').dataset.walk='false';
+  lighting.setWalkInterior(false);
   lighting.interior(null,null);
   lift?.setWalkActive(false);lift?.cancel();refreshLiftControl();
   $('.camera-tools').hidden=false;$('#walk-tools').hidden=true;$('#enter-walk').hidden=false;
@@ -419,9 +425,13 @@ async function loadModel() {
       if(manifest.navigation?.sha256)url.searchParams.set('v',manifest.navigation.sha256.slice(0,12));
       const response=await fetch(url);if(!response.ok)throw Error(`Navigation HTTP ${response.status}`);
       const data=await response.json();
-      if(data.source_architecture_sha256!==manifest.library_hashes['build/blender/layers/10-architecture.blend'])throw Error('Navigation/architecture revision mismatch');
-      if(data.source_furniture_sha256!==manifest.library_hashes['build/blender/layers/30-furniture-placeholders.blend'])throw Error('Navigation/furniture revision mismatch');
-      if(data.source_fittings_sha256!==manifest.library_hashes['build/blender/layers/20-fixed-fittings.blend'])throw Error('Navigation/fittings revision mismatch');
+      if(manifest.native_delivery){
+        if(data.source_native_sha256!==manifest.source_native_sha256)throw Error('Navigation/native model revision mismatch');
+      }else{
+        if(data.source_architecture_sha256!==manifest.library_hashes['build/blender/layers/10-architecture.blend'])throw Error('Navigation/architecture revision mismatch');
+        if(data.source_furniture_sha256!==manifest.library_hashes['build/blender/layers/30-furniture-placeholders.blend'])throw Error('Navigation/furniture revision mismatch');
+        if(data.source_fittings_sha256!==manifest.library_hashes['build/blender/layers/20-fixed-fittings.blend'])throw Error('Navigation/fittings revision mismatch');
+      }
       return data;
     }
     function stageGroup(id) {
@@ -610,6 +620,7 @@ function bindInterface() {
   }));
 }
 bindInterface();
+createInterfaceSound({button:$('#toggle-sound')});
 try {
   setup();
   loadModel();

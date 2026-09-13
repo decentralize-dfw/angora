@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "model_revision": "R39",
-  "source_native_sha256": "4cf14255f50130cb4605c92762e686d3ef0ae4e284b34af8e431acef1d1e8874",
+  "model_revision": "Native interior and roads",
+  "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
   "units": "metres",
   "coordinate_system": "glTF_Y_up",
   "floor_labels": [
@@ -20,12 +20,12 @@
     {
       "id": "level-0",
       "file": "level-0.glb",
-      "bytes": 1825840,
-      "sha256": "ae3646341582998fae18055ee751c2fff7cc49a49e80b0fd6797b47e7e6511ab",
-      "source_objects": 1171,
-      "exported_mesh_nodes": 1171,
-      "shared_meshes": 405,
-      "triangles": 558178,
+      "bytes": 6179708,
+      "sha256": "7b033427046d137074613a179e7c0474e022757479a9aa4ae8c71b479ee23bee",
+      "source_objects": 1339,
+      "exported_mesh_nodes": 1338,
+      "shared_meshes": 622,
+      "triangles": 297960,
       "bounds_native_m": [
         [
           -7.142899990081787,
@@ -38,23 +38,24 @@
           8.570000171661377
         ]
       ],
-      "source_native_sha256": "4cf14255f50130cb4605c92762e686d3ef0ae4e284b34af8e431acef1d1e8874",
+      "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
       "section_elevation_m": null,
       "geometry_simplified": false,
       "evaluated_split_normals_preserved": true,
       "embedded_images": 94,
       "animations": 1,
-      "browser_upload_under_25_MiB": true
+      "browser_upload_under_25_MiB": true,
+      "vegetation_lod_objects": 0
     },
     {
       "id": "level-1",
       "file": "level-1.glb",
-      "bytes": 4872000,
-      "sha256": "ca9d89c1121f52bcdd18c6e92e9fa0e11d5a13d3cba329a5c61f7d609f182d78",
-      "source_objects": 1023,
-      "exported_mesh_nodes": 1023,
-      "shared_meshes": 835,
-      "triangles": 1160214,
+      "bytes": 8549752,
+      "sha256": "6b667de5ba8c4da0b4ce20611dc31527232da707b2a1ca407472532c90e72af4",
+      "source_objects": 1058,
+      "exported_mesh_nodes": 1058,
+      "shared_meshes": 870,
+      "triangles": 788274,
       "bounds_native_m": [
         [
           -6.322000026702881,
@@ -67,23 +68,24 @@
           7.099599838256836
         ]
       ],
-      "source_native_sha256": "4cf14255f50130cb4605c92762e686d3ef0ae4e284b34af8e431acef1d1e8874",
+      "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
       "section_elevation_m": null,
       "geometry_simplified": false,
       "evaluated_split_normals_preserved": true,
       "embedded_images": 118,
       "animations": 0,
-      "browser_upload_under_25_MiB": true
+      "browser_upload_under_25_MiB": true,
+      "vegetation_lod_objects": 0
     },
     {
       "id": "level-2",
       "file": "level-2.glb",
-      "bytes": 2642788,
-      "sha256": "684d76b018f9b046625e73b850475b71da110975de7e78df2e15a7bf8fccc423",
-      "source_objects": 639,
-      "exported_mesh_nodes": 639,
-      "shared_meshes": 426,
-      "triangles": 778276,
+      "bytes": 8591712,
+      "sha256": "c3cd3bccbb5082adfca785792027736a152e8426b0682a7edcc261df0fce43c7",
+      "source_objects": 694,
+      "exported_mesh_nodes": 694,
+      "shared_meshes": 534,
+      "triangles": 619380,
       "bounds_native_m": [
         [
           -6.382711887359619,
@@ -96,23 +98,24 @@
           10.453055381774902
         ]
       ],
-      "source_native_sha256": "4cf14255f50130cb4605c92762e686d3ef0ae4e284b34af8e431acef1d1e8874",
+      "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
       "section_elevation_m": null,
       "geometry_simplified": false,
       "evaluated_split_normals_preserved": true,
       "embedded_images": 116,
       "animations": 0,
-      "browser_upload_under_25_MiB": true
+      "browser_upload_under_25_MiB": true,
+      "vegetation_lod_objects": 0
     },
     {
       "id": "level-3",
       "file": "level-3.glb",
-      "bytes": 985372,
-      "sha256": "fbf904541ea23b6c87fe593976312729b311e05ae8a1756014abdd503693d9db",
-      "source_objects": 232,
-      "exported_mesh_nodes": 232,
-      "shared_meshes": 157,
-      "triangles": 458457,
+      "bytes": 2809748,
+      "sha256": "006e608420dc11272699b0687ca5cb9a8870ed6b60101de03d36a5f247792c3c",
+      "source_objects": 374,
+      "exported_mesh_nodes": 374,
+      "shared_meshes": 363,
+      "triangles": 263351,
       "bounds_native_m": [
         [
           -6.700300216674805,
@@ -125,23 +128,24 @@
           13.508399963378906
         ]
       ],
-      "source_native_sha256": "4cf14255f50130cb4605c92762e686d3ef0ae4e284b34af8e431acef1d1e8874",
+      "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
       "section_elevation_m": null,
       "geometry_simplified": false,
       "evaluated_split_normals_preserved": true,
       "embedded_images": 63,
       "animations": 0,
-      "browser_upload_under_25_MiB": true
+      "browser_upload_under_25_MiB": true,
+      "vegetation_lod_objects": 0
     },
     {
       "id": "envelope",
       "file": "envelope.glb",
-      "bytes": 2046360,
-      "sha256": "87aaa298363a5dadbb210fb68d8f06cec24e077b762c8fe83a9c2fd8c2fad1b3",
-      "source_objects": 107,
-      "exported_mesh_nodes": 107,
-      "shared_meshes": 88,
-      "triangles": 704198,
+      "bytes": 1963568,
+      "sha256": "67f3e91c315298e44dfedc408bb64747b220b2c651db82f84cbfdaabc1ec05e3",
+      "source_objects": 105,
+      "exported_mesh_nodes": 105,
+      "shared_meshes": 89,
+      "triangles": 697826,
       "bounds_native_m": [
         [
           -6.35830020904541,
@@ -154,23 +158,24 @@
           14.420000076293945
         ]
       ],
-      "source_native_sha256": "4cf14255f50130cb4605c92762e686d3ef0ae4e284b34af8e431acef1d1e8874",
+      "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
       "section_elevation_m": null,
       "geometry_simplified": false,
       "evaluated_split_normals_preserved": true,
       "embedded_images": 39,
       "animations": 0,
-      "browser_upload_under_25_MiB": true
+      "browser_upload_under_25_MiB": true,
+      "vegetation_lod_objects": 0
     },
     {
       "id": "garden",
       "file": "garden.glb",
-      "bytes": 10126536,
-      "sha256": "83205345134112b4492e3f283d9def42402cb7874e8cdbdb4c895ec050ce6c89",
-      "source_objects": 379,
-      "exported_mesh_nodes": 379,
-      "shared_meshes": 362,
-      "triangles": 1128994,
+      "bytes": 11247900,
+      "sha256": "75114dd97786589f2602b481896d43b9642a5b46b2a7f24ace8aafb6ca82b948",
+      "source_objects": 645,
+      "exported_mesh_nodes": 645,
+      "shared_meshes": 554,
+      "triangles": 581878,
       "bounds_native_m": [
         [
           -10.246445655822754,
@@ -183,23 +188,24 @@
           10.332208633422852
         ]
       ],
-      "source_native_sha256": "4cf14255f50130cb4605c92762e686d3ef0ae4e284b34af8e431acef1d1e8874",
+      "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
       "section_elevation_m": null,
-      "geometry_simplified": false,
+      "geometry_simplified": true,
       "evaluated_split_normals_preserved": true,
       "embedded_images": 42,
       "animations": 0,
-      "browser_upload_under_25_MiB": true
+      "browser_upload_under_25_MiB": true,
+      "vegetation_lod_objects": 10
     },
     {
       "id": "context",
       "file": "context.glb",
-      "bytes": 5368892,
-      "sha256": "42ec5815fc3a7955554f12be49d98fc9c1d7f8278a5b821da5d1db1d1799f736",
-      "source_objects": 2507,
-      "exported_mesh_nodes": 2507,
-      "shared_meshes": 404,
-      "triangles": 4715610,
+      "bytes": 6014084,
+      "sha256": "395ab5ac2501a93ccc3abb36a2d8637f3d6a813b24a9c9ab422bb7cb701a8d44",
+      "source_objects": 2371,
+      "exported_mesh_nodes": 2371,
+      "shared_meshes": 346,
+      "triangles": 752638,
       "bounds_native_m": [
         [
           -139.26348876953125,
@@ -212,13 +218,14 @@
           27.40839958190918
         ]
       ],
-      "source_native_sha256": "4cf14255f50130cb4605c92762e686d3ef0ae4e284b34af8e431acef1d1e8874",
+      "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
       "section_elevation_m": null,
       "geometry_simplified": false,
       "evaluated_split_normals_preserved": true,
       "embedded_images": 47,
       "animations": 0,
-      "browser_upload_under_25_MiB": true
+      "browser_upload_under_25_MiB": true,
+      "vegetation_lod_objects": 0
     }
   ],
   "full_scene": true,
@@ -283,21 +290,21 @@
   "section_cap_asset": {
     "id": "section-caps",
     "file": "section-caps.glb",
-    "bytes": 86464,
-    "sha256": "bcc8abe64ffdafef1cfa43845dc5a0d2e9653cbe214d08478b5c1f2d5674d178",
+    "bytes": 88656,
+    "sha256": "13edab41e129959047527dceb06c7394d4b4a24430f7b1ee1479ff9faf6821d8",
     "source_objects": 7,
-    "exported_mesh_nodes": 7,
-    "shared_meshes": 7,
-    "triangles": 3366,
+    "exported_mesh_nodes": 8,
+    "shared_meshes": 8,
+    "triangles": 4858,
     "bounds_native_m": [
       [
-        -11.199999809265137,
-        -11.057999610900879,
-        1.600000023841858
+        -9.5,
+        -10.185918807983398,
+        -1.4040000438690186
       ],
       [
-        11.5,
-        9.645000457763672,
+        10.999492645263672,
+        24,
         10.770500183105469
       ]
     ],
@@ -311,18 +318,18 @@
   },
   "section_atlas": {
     "file": "sections.json",
-    "bytes": 2977359,
-    "sha256": "0be8b74159bfb51f5855b9023b5047e4b3f91cd30be1444006c19423b2bde2cd"
+    "bytes": 3841984,
+    "sha256": "4efc201b546337936332fe9bb7575c934c30bf55d71b1d191e69b7cadf267c02"
   },
   "room_annotations": {
     "file": "rooms.json",
-    "bytes": 130226,
-    "sha256": "9cf755b6fc42aeed1f8ef6d2a11fdf93937736c32052e1498223c1ecb3fe4fb5"
+    "bytes": 147052,
+    "sha256": "378e94fbbcfde72a22a39f420d394d14a8e06494bafe3e0074f790fb2099412f"
   },
   "navigation": {
     "file": "navigation.json",
-    "bytes": 64481,
-    "sha256": "e35c161d008dcadd93cd58b3a33153236a97ac47623d57809a9246d85bc59e34"
+    "bytes": 196073,
+    "sha256": "4bcf4c23e821991a933bca9750da4e06d452f080af48204745a865039a3f0086"
   },
   "view_assets": {
     "neighborhood": [
@@ -408,5 +415,10 @@
       "method": "tools/repack_web_textures.mjs; exact-equivalence transforms only"
     },
     "r39_model_corrections": "see docs/model-r39-results-tr.md and the R39 sections of docs/r30-arayuz-ve-teslim-tr.md"
+  },
+  "native_delivery": {
+    "file": "build/blender/angora-rooms-open-doors.blend",
+    "sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
+    "doors_open": 12
   }
 }

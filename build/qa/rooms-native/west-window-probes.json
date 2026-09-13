@@ -1,0 +1,602 @@
+[
+  {
+    "level": 2,
+    "y": 1.1,
+    "z": 6.85,
+    "hit": {
+      "object": "F2 | Hall photographed radiator",
+      "material": null,
+      "distance": 0.38888,
+      "point": [
+        -5.88888,
+        1.1,
+        6.85
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 1.1,
+    "z": 7,
+    "hit": {
+      "object": "F2 | Hall photographed radiator",
+      "material": null,
+      "distance": 0.38888,
+      "point": [
+        -5.88888,
+        1.1,
+        7.0
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 1.1,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.50188,
+      "point": [
+        -6.00188,
+        1.1,
+        8.5
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 1.1,
+    "z": 8.85,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.50188,
+      "point": [
+        -6.00188,
+        1.1,
+        8.85
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 1.3,
+    "z": 6.85,
+    "hit": {
+      "object": "F2 | Hall photographed radiator",
+      "material": null,
+      "distance": 0.38188,
+      "point": [
+        -5.88188,
+        1.3,
+        6.85
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 1.3,
+    "z": 7,
+    "hit": {
+      "object": "F2 | Hall photographed radiator",
+      "material": null,
+      "distance": 0.38188,
+      "point": [
+        -5.88188,
+        1.3,
+        7.0
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 1.3,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.50188,
+      "point": [
+        -6.00188,
+        1.3,
+        8.5
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 1.3,
+    "z": 8.85,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.50188,
+      "point": [
+        -6.00188,
+        1.3,
+        8.85
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 2,
+    "z": 6.85,
+    "hit": {
+      "object": "F2 | Hall photographed radiator",
+      "material": null,
+      "distance": 0.38312,
+      "point": [
+        -5.88312,
+        2.0,
+        6.85
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 2,
+    "z": 7,
+    "hit": {
+      "object": "F2 | Hall photographed radiator",
+      "material": null,
+      "distance": 0.38312,
+      "point": [
+        -5.88312,
+        2.0,
+        7.0
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 2,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.50188,
+      "point": [
+        -6.00188,
+        2.0,
+        8.5
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 2,
+    "z": 8.85,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.50188,
+      "point": [
+        -6.00188,
+        2.0,
+        8.85
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 2.7,
+    "z": 6.85,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR",
+      "material": "interior.002",
+      "distance": 0.53158,
+      "point": [
+        -6.03158,
+        2.7,
+        6.85
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 2.7,
+    "z": 7,
+    "hit": {
+      "object": "F2 | PENCERE_KAPI$CAM",
+      "material": "glass.002",
+      "distance": 0.66139,
+      "point": [
+        -6.16139,
+        2.7,
+        7.0
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 2.7,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.50188,
+      "point": [
+        -6.00188,
+        2.7,
+        8.5
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 2.7,
+    "z": 8.85,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.50188,
+      "point": [
+        -6.00188,
+        2.7,
+        8.85
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 2.9,
+    "z": 6.85,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR",
+      "material": "interior.002",
+      "distance": 0.53158,
+      "point": [
+        -6.03158,
+        2.9,
+        6.85
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 2.9,
+    "z": 7,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR",
+      "material": "interior.002",
+      "distance": 0.53158,
+      "point": [
+        -6.03158,
+        2.9,
+        7.0
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 2.9,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.50188,
+      "point": [
+        -6.00188,
+        2.9,
+        8.5
+      ]
+    }
+  },
+  {
+    "level": 2,
+    "y": 2.9,
+    "z": 8.85,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.50188,
+      "point": [
+        -6.00188,
+        2.9,
+        8.85
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 1.28,
+    "z": 9.8,
+    "hit": {
+      "object": "C05 | Photographed damask curtain",
+      "material": "Room pass | Original damask curtain photograph",
+      "distance": 0.473,
+      "point": [
+        -5.973,
+        1.28,
+        9.8
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 1.28,
+    "z": 10.8,
+    "hit": {
+      "object": "C05 | Photographed damask curtain",
+      "material": "Room pass | Original damask curtain photograph",
+      "distance": 0.473,
+      "point": [
+        -5.973,
+        1.28,
+        10.8
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 1.28,
+    "z": 11.25,
+    "hit": {
+      "object": "C05 | Photographed damask curtain",
+      "material": null,
+      "distance": 0.473,
+      "point": [
+        -5.973,
+        1.28,
+        11.25
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 1.28,
+    "z": 11.3,
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.48168,
+      "point": [
+        -5.98168,
+        1.28,
+        11.3
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 1.4,
+    "z": 9.8,
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.48168,
+      "point": [
+        -5.98168,
+        1.4,
+        9.8
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 1.4,
+    "z": 10.8,
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.48168,
+      "point": [
+        -5.98168,
+        1.4,
+        10.8
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 1.4,
+    "z": 11.25,
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.48168,
+      "point": [
+        -5.98168,
+        1.4,
+        11.25
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 1.4,
+    "z": 11.3,
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.48168,
+      "point": [
+        -5.98168,
+        1.4,
+        11.3
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 2,
+    "z": 9.8,
+    "hit": {
+      "object": "C05 | Photographed damask curtain",
+      "material": null,
+      "distance": 0.52722,
+      "point": [
+        -6.02722,
+        2.0,
+        9.8
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 2,
+    "z": 10.8,
+    "hit": {
+      "object": "C05 | Photographed damask curtain",
+      "material": null,
+      "distance": 0.52722,
+      "point": [
+        -6.02722,
+        2.0,
+        10.8
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 2,
+    "z": 11.25,
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.48168,
+      "point": [
+        -5.98168,
+        2.0,
+        11.25
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 2,
+    "z": 11.3,
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.48168,
+      "point": [
+        -5.98168,
+        2.0,
+        11.3
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 2.6,
+    "z": 9.8,
+    "hit": {
+      "object": "C05 | Photographed damask curtain",
+      "material": null,
+      "distance": 0.47756,
+      "point": [
+        -5.97756,
+        2.6,
+        9.8
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 2.6,
+    "z": 10.8,
+    "hit": {
+      "object": "C05 | Photographed damask curtain",
+      "material": null,
+      "distance": 0.47756,
+      "point": [
+        -5.97756,
+        2.6,
+        10.8
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 2.6,
+    "z": 11.25,
+    "hit": {
+      "object": "C05 | Photographed damask curtain",
+      "material": null,
+      "distance": 0.47756,
+      "point": [
+        -5.97756,
+        2.6,
+        11.25
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 2.6,
+    "z": 11.3,
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.48168,
+      "point": [
+        -5.98168,
+        2.6,
+        11.3
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 2.75,
+    "z": 9.8,
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.48168,
+      "point": [
+        -5.98168,
+        2.75,
+        9.8
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 2.75,
+    "z": 10.8,
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.48168,
+      "point": [
+        -5.98168,
+        2.75,
+        10.8
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 2.75,
+    "z": 11.25,
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.48168,
+      "point": [
+        -5.98168,
+        2.75,
+        11.25
+      ]
+    }
+  },
+  {
+    "level": 3,
+    "y": 2.75,
+    "z": 11.3,
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.48168,
+      "point": [
+        -5.98168,
+        2.75,
+        11.3
+      ]
+    }
+  }
+]

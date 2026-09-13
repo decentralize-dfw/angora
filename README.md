@@ -1,5 +1,9 @@
 # Angora 21 — MERGVS villa
 
+Güncel düzenlenebilir Blender sahnesi: [`build/blender/angora-rooms-open-doors.blend`](build/blender/angora-rooms-open-doors.blend) (Blender 5.2.1, Git LFS). Klonladıktan sonra `git lfs pull` çalıştırın; GitHub ZIP indirmesindeki LFS işaretçisi modelin kendisi değildir. İç mekân, açık kapılar ve arka bahçe düzeltmeleri bu dosyadadır. Eski `angora21-working.blend` katmanlı sahnesi önceki sürümdür.
+
+Bu native kayıt henüz web GLB ve yürüyüş verilerine aktarılmadı. [Bahçe kontrolü ve kalan işler](build/qa/garden-native/GARDEN-PASS-TR.md), [iç mekân kontrolü](build/qa/rooms-native/INTERIOR-FINAL-QA.json). Ön giriş hattı, çevre yolları ve web doğrulaması sürüyor.
+
 Kaynak: `ANGORA-.dwg` ve bu depodaki oda / drone fotoğrafları. Hedef, master plandaki **21 numaralı bina**; bu numara tapu ada/parsel numarası değildir.
 
 ## 3D inceleme arayüzü

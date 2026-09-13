@@ -1,0 +1,1382 @@
+[
+  {
+    "object": "106 window | Door handle escutcheon.008",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | External doorway frame rail.008",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Door curved lever.008",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Open external door leaf rail.019",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Door hinge barrel.018",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | External doorway frame stile.009",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Open external door leaf stile.016",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Door clear physical glazing.018",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Door curved lever.009",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Open external door leaf stile.017",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Open external door leaf stile.019",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Door clear physical glazing.019",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Door handle escutcheon.009",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | External doorway frame stile.008",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Open external door leaf rail.018",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Door clear physical glazing.017",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Door central glazing bar.008",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | External doorway frame rail.009",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Open external door leaf rail.017",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Door clear physical glazing.016",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Door hinge barrel.017",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Door central glazing bar.009",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Door hinge barrel.019",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Open external door leaf rail.016",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Open external door leaf stile.018",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 window | Door hinge barrel.016",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Visible photographed window parapet",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Window marble sill",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Photographed radiator fin",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Photographed radiator fin.001",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Photographed radiator fin.002",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Photographed radiator fin.003",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Photographed radiator fin.004",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Photographed radiator fin.005",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Photographed radiator fin.006",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Photographed radiator fin.007",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Photographed radiator fin.008",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Photographed radiator fin.009",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Photographed radiator fin.010",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Photographed radiator fin.011",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Photographed radiator fin.012",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Photographed radiator fin.013",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Photographed radiator fin.014",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "106 | Photographed radiator fin.015",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | Left fixed jamb",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | Right fixed jamb",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | Fixed lintel",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | Left plaster reveal",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | Right plaster reveal",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | 1 Hinge stile",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | 1 Latch stile",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | 1 Bottom rail",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | 1 Top rail",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | 1 Mid rail",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | 1 Clear physical glass",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | 1 Clear physical glass.001",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | 1 Brass handle",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | 2 Hinge stile",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | 2 Latch stile",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | 2 Bottom rail",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | 2 Top rail",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | 2 Mid rail",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | 2 Clear physical glass",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | 2 Clear physical glass.001",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | 2 Brass handle",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "107 balcony | Flush marble threshold",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Master | Photographed shallow plaster arch",
+    "room": "f2-102",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Master | Left plaster reveal",
+    "room": "f2-102",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Master | Right plaster reveal",
+    "room": "f2-102",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Radiator fin.029",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Attic headboard ivory upright border.001",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Radiator fin.034",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Headboard.004",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Radiator fin.028",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "R33 | Fitted draped bedcover.002",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Attic leaning mirror face",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Radiator fin.030",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Mattress.003",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "R33 | Soft tailored pillow.007",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Attic headboard ivory horizontal border",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Attic leaning mirror frame",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Attic headboard ivory horizontal border.001",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Attic headboard ivory upright border",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Radiator fin.032",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Radiator fin.025",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "R33 | Soft tailored pillow.006",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Bed base.003",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Radiator fin.031",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Radiator fin.026",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Radiator fin.033",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Radiator fin.027",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "Headboard.003",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Plaster circular reveal",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Round timber window frame",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Round interior trim",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Circular physical glazing",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Painting frame depth 1",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Original framed art 1",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Painting frame depth 2",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Original framed art 2",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Painting frame depth 3",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Original framed art 3",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Painting frame depth 4",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Original framed art 4",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Radiator below circular window",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Radiator below circular window.001",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Radiator below circular window.002",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Radiator below circular window.003",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Radiator below circular window.004",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Radiator below circular window.005",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Radiator below circular window.006",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Radiator below circular window.007",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Radiator below circular window.008",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Ceiling fan canopy",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Ceiling fan motor",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | Ceiling fan downrod",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | White ceiling fan blade",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | White ceiling fan blade.001",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C05 | White ceiling fan blade.002",
+    "room": "f3-C05",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Timber footboard",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Timber top rail",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Timber top rail.001",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Visible timber side rail",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Visible timber side rail.001",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Blue three drawer bedside case",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside drawer",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside pink frame stile",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside pink frame stile.001",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside pink frame rail",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside pink frame rail.001",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside brass pull",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside drawer.001",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside pink frame stile.002",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside pink frame stile.003",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside pink frame rail.002",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside pink frame rail.003",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside brass pull.001",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside drawer.002",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside pink frame stile.004",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside pink frame stile.005",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside pink frame rail.004",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside pink frame rail.005",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Bedside brass pull.002",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Wardrobe left side",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Wardrobe right side",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Wardrobe back",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Wardrobe top",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Wardrobe base",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | White wardrobe door",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Wardrobe long handle",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | White wardrobe door.001",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Wardrobe long handle.001",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Wardrobe upper interior shelf",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Black storage rack upright",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Black storage rack upright.001",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Black storage rack upright.002",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Black storage rack upright.003",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Black storage rack shelf",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Black storage rack shelf.001",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Black storage rack shelf.002",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Black storage rack shelf.003",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Black storage rack shelf.004",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Black storage rack shelf.005",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Window radiator fin",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Window radiator fin.001",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Window radiator fin.002",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Window radiator fin.003",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Window radiator fin.004",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Window radiator fin.005",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Window radiator fin.006",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Window radiator fin.007",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Window radiator fin.008",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Window radiator fin.009",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Window radiator fin.010",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Window radiator fin.011",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Photographed fan metal guard",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Photographed fan blade",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Photographed fan stem",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Photographed fan motor",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Photographed fan base",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Photographed fan blade.002",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C04 | Photographed fan blade.001",
+    "room": "f3-C04",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | White radiator fin",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | White radiator fin.001",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | White radiator fin.002",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | White radiator fin.003",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | White radiator fin.004",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | White radiator fin.005",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | White radiator fin.006",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | White radiator fin.007",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | White radiator fin.008",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | Mirror light backplate",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | Mirror light arm",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | Bathroom lamp globe",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | Shelf toiletry bottle",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | Shelf toiletry bottle.001",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | Shelf toiletry bottle.002",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | Shelf toiletry bottle.003",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | Shelf toiletry bottle.004",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | Shelf toiletry bottle.005",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | Shelf toiletry bottle.006",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | Shelf toiletry bottle.007",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | Shelf toiletry bottle.008",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | Shelf toiletry bottle.009",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | Shelf toiletry bottle.010",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C03 | Shelf toiletry bottle.011",
+    "room": "f3-C03",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing desk top",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing desk square leg",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing desk square leg.001",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing desk square leg.002",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing desk square leg.003",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Ivory writing chair seat",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Ivory writing chair back",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing chair leg",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing chair leg.001",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing chair leg.002",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing chair leg.003",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing desk top.001",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing desk square leg.004",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing desk square leg.005",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing desk square leg.006",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing desk square leg.007",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Ivory writing chair seat.001",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Ivory writing chair back.001",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing chair leg.004",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing chair leg.005",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing chair leg.006",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Writing chair leg.007",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Red picture depth",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  },
+  {
+    "object": "C02 | Original red wall picture",
+    "room": "f3-C02",
+    "open_edges": 0,
+    "zero_area": 0
+  }
+]

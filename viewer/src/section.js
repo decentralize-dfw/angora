@@ -150,7 +150,8 @@ export function createSoilCap(capScene) {
   capScene.updateMatrixWorld(true);
   capScene.traverse(object => {
     const materials = Array.isArray(object.material) ? object.material : [object.material];
-    if (object.isMesh && materials.some(m => m?.name === 'R32 | soil section hatch')) sources.push(object);
+    if (object.isMesh && materials.some(m => m?.name === 'R32 | soil section hatch') &&
+        !/^R42[_ ]F0[_ ]site[_ ]section[_ ]field$/i.test(object.name)) sources.push(object);
   });
   if (!sources.length) return null;
   const material = createHatchMaterial(SOIL_POCHE);

@@ -1,0 +1,37 @@
+{
+  "archived_oversized_cheeks": [
+    "Stair flight white cheek.006",
+    "Stair flight white cheek",
+    "Stair flight white cheek.010",
+    "Stair flight white cheek.011",
+    "Stair flight white cheek.005",
+    "Stair flight white cheek.002",
+    "Stair flight white cheek.007",
+    "Stair flight white cheek.008",
+    "Stair flight white cheek.001",
+    "Stair flight white cheek.003",
+    "Stair flight white cheek.009",
+    "Stair flight white cheek.004"
+  ],
+  "terrace_objects": [
+    "Garden west | Photo terrace riser 1",
+    "Garden west | Terrace coping 1",
+    "Garden west | Photo terrace riser 2",
+    "Garden west | Terrace coping 2",
+    "Garden west | Photo terrace riser 3",
+    "Garden west | Terrace coping 3",
+    "Garden east | Photo terrace riser 1",
+    "Garden east | Terrace coping 1",
+    "Garden east | Photo terrace riser 2",
+    "Garden east | Terrace coping 2",
+    "Garden east | Photo terrace riser 3",
+    "Garden east | Terrace coping 3"
+  ],
+  "grades_retained": [
+    2.79992,
+    2.06594,
+    1.03236,
+    -0.09964
+  ],
+  "note": "Native levels retained; riser render, stone and limestone copings follow photographed west/east treatments."
+}

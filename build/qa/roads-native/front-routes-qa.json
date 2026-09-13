@@ -1,0 +1,4168 @@
+[
+  {
+    "route": "pedestrian",
+    "samples": 120,
+    "missing_floor": 0,
+    "body_hit_samples": [],
+    "max_floor_delta": 0.01167000000000007,
+    "rows": [
+      {
+        "xy": [
+          1.08,
+          -11.5
+        ],
+        "floor": {
+          "object": "CAD roads — corrected block loops and arterials",
+          "material": "R31 | R37 fine asphalt aggregate",
+          "distance": 0.69254,
+          "point": [
+            1.08,
+            -11.5,
+            3.90746
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -11.421296296296298
+        ],
+        "floor": {
+          "object": "CAD roads — corrected block loops and arterials",
+          "material": "R31 | R37 fine asphalt aggregate",
+          "distance": 0.6985,
+          "point": [
+            1.08,
+            -11.4213,
+            3.90149
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -11.342592592592593
+        ],
+        "floor": {
+          "object": "CAD roads — corrected block loops and arterials",
+          "material": "R31 | R37 fine asphalt aggregate",
+          "distance": 0.70468,
+          "point": [
+            1.08,
+            -11.34259,
+            3.89532
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -11.26388888888889
+        ],
+        "floor": {
+          "object": "CAD roads — corrected block loops and arterials",
+          "material": "R31 | R37 fine asphalt aggregate",
+          "distance": 0.71085,
+          "point": [
+            1.08,
+            -11.26389,
+            3.88915
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -11.185185185185185
+        ],
+        "floor": {
+          "object": "Road | Pedestrian continuous dropped kerb",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.70929,
+          "point": [
+            1.08,
+            -11.18519,
+            3.89071
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -11.106481481481481
+        ],
+        "floor": {
+          "object": "Road | Pedestrian continuous dropped kerb",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.71406,
+          "point": [
+            1.08,
+            -11.10648,
+            3.88594
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -11.027777777777777
+        ],
+        "floor": {
+          "object": "Road | Pedestrian continuous dropped kerb",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.71884,
+          "point": [
+            1.08,
+            -11.02778,
+            3.88116
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -10.949074074074074
+        ],
+        "floor": {
+          "object": "Road | Pedestrian continuous dropped kerb",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.72361,
+          "point": [
+            1.08,
+            -10.94907,
+            3.87639
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -10.87037037037037
+        ],
+        "floor": {
+          "object": "Road | Pedestrian continuous dropped kerb",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.72838,
+          "point": [
+            1.08,
+            -10.87037,
+            3.87162
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -10.791666666666668
+        ],
+        "floor": {
+          "object": "Road | Pedestrian continuous dropped kerb",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.73316,
+          "point": [
+            1.08,
+            -10.79167,
+            3.86684
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -10.712962962962962
+        ],
+        "floor": {
+          "object": "Road | Pedestrian continuous dropped kerb",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.73793,
+          "point": [
+            1.08,
+            -10.71296,
+            3.86207
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -10.634259259259258
+        ],
+        "floor": {
+          "object": "Road | Pedestrian continuous dropped kerb",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.74271,
+          "point": [
+            1.08,
+            -10.63426,
+            3.85729
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -10.555555555555555
+        ],
+        "floor": {
+          "object": "Road | Pedestrian continuous dropped kerb",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.74938,
+          "point": [
+            1.08,
+            -10.55556,
+            3.85062
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -10.476851851851853
+        ],
+        "floor": {
+          "object": "Road | Pedestrian continuous dropped kerb",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.75631,
+          "point": [
+            1.08,
+            -10.47685,
+            3.84369
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -10.398148148148147
+        ],
+        "floor": {
+          "object": "Road | Pedestrian continuous dropped kerb",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.76324,
+          "point": [
+            1.08,
+            -10.39815,
+            3.83676
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -10.319444444444445
+        ],
+        "floor": {
+          "object": "Road | Pedestrian continuous dropped kerb",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.77017,
+          "point": [
+            1.08,
+            -10.31944,
+            3.82983
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -10.24074074074074
+        ],
+        "floor": {
+          "object": "Road | Pedestrian continuous dropped kerb",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.7771,
+          "point": [
+            1.08,
+            -10.24074,
+            3.8229
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -10.162037037037036
+        ],
+        "floor": {
+          "object": "Road | Pedestrian continuous dropped kerb",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.78403,
+          "point": [
+            1.08,
+            -10.16204,
+            3.81597
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -10.083333333333334
+        ],
+        "floor": {
+          "object": "Road | Pedestrian continuous dropped kerb",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.79095,
+          "point": [
+            1.08,
+            -10.08333,
+            3.80905
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -10.00462962962963
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.8008,
+          "point": [
+            1.08,
+            -10.00463,
+            3.7992
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -9.925925925925927
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.81247,
+          "point": [
+            1.08,
+            -9.92593,
+            3.78753
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -9.847222222222223
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.82414,
+          "point": [
+            1.08,
+            -9.84722,
+            3.77586
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -9.768518518518519
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.83581,
+          "point": [
+            1.08,
+            -9.76852,
+            3.76419
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -9.689814814814815
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.84748,
+          "point": [
+            1.08,
+            -9.68981,
+            3.75252
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -9.61111111111111
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.85915,
+          "point": [
+            1.08,
+            -9.61111,
+            3.74085
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -9.532407407407407
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.87081,
+          "point": [
+            1.08,
+            -9.53241,
+            3.72919
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -9.453703703703704
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.88248,
+          "point": [
+            1.08,
+            -9.4537,
+            3.71752
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -9.375
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.89415,
+          "point": [
+            1.08,
+            -9.375,
+            3.70585
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -9.296296296296296
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.90582,
+          "point": [
+            1.08,
+            -9.2963,
+            3.69418
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -9.217592592592592
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.91749,
+          "point": [
+            1.08,
+            -9.21759,
+            3.68251
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -9.13888888888889
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.92916,
+          "point": [
+            1.08,
+            -9.13889,
+            3.67084
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -9.060185185185185
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.94083,
+          "point": [
+            1.08,
+            -9.06019,
+            3.65917
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -8.981481481481481
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.9525,
+          "point": [
+            1.08,
+            -8.98148,
+            3.6475
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -8.902777777777779
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.96417,
+          "point": [
+            1.08,
+            -8.90278,
+            3.63583
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -8.824074074074073
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.97583,
+          "point": [
+            1.08,
+            -8.82407,
+            3.62417
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -8.74537037037037
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.9875,
+          "point": [
+            1.08,
+            -8.74537,
+            3.6125
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -8.666666666666668
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 0.99917,
+          "point": [
+            1.08,
+            -8.66667,
+            3.60083
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -8.587962962962962
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.01084,
+          "point": [
+            1.08,
+            -8.58796,
+            3.58916
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -8.50925925925926
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.02251,
+          "point": [
+            1.08,
+            -8.50926,
+            3.57749
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -8.430555555555555
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.03418,
+          "point": [
+            1.08,
+            -8.43056,
+            3.56582
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -8.351851851851851
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.04585,
+          "point": [
+            1.08,
+            -8.35185,
+            3.55415
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -8.273148148148149
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.05752,
+          "point": [
+            1.08,
+            -8.27315,
+            3.54248
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -8.194444444444445
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.06919,
+          "point": [
+            1.08,
+            -8.19444,
+            3.53081
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -8.11574074074074
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.08085,
+          "point": [
+            1.08,
+            -8.11574,
+            3.51915
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -8.037037037037038
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.09252,
+          "point": [
+            1.08,
+            -8.03704,
+            3.50748
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -7.958333333333333
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.10419,
+          "point": [
+            1.08,
+            -7.95833,
+            3.49581
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -7.87962962962963
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.11586,
+          "point": [
+            1.08,
+            -7.87963,
+            3.48414
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -7.800925925925926
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.12753,
+          "point": [
+            1.08,
+            -7.80093,
+            3.47247
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -7.722222222222222
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.1392,
+          "point": [
+            1.08,
+            -7.72222,
+            3.4608
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -7.643518518518519
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.15087,
+          "point": [
+            1.08,
+            -7.64352,
+            3.44913
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -7.564814814814815
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.16238,
+          "point": [
+            1.08,
+            -7.56482,
+            3.43762
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -7.486111111111112
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.17335,
+          "point": [
+            1.08,
+            -7.48611,
+            3.42665
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -7.407407407407407
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.18432,
+          "point": [
+            1.08,
+            -7.40741,
+            3.41568
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -7.328703703703704
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.19529,
+          "point": [
+            1.08,
+            -7.3287,
+            3.40471
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.08,
+          -7.25
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.20625,
+          "point": [
+            1.08,
+            -7.25,
+            3.39375
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.02,
+          -7.2125
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.21148,
+          "point": [
+            1.02,
+            -7.2125,
+            3.38852
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.9600000000000001,
+          -7.175
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.21671,
+          "point": [
+            0.96,
+            -7.175,
+            3.38329
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.9,
+          -7.1375
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.22193,
+          "point": [
+            0.9,
+            -7.1375,
+            3.37807
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.8400000000000001,
+          -7.1
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.22716,
+          "point": [
+            0.84,
+            -7.1,
+            3.37284
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.78,
+          -7.0625
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.23238,
+          "point": [
+            0.78,
+            -7.0625,
+            3.36762
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.72,
+          -7.025
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.23761,
+          "point": [
+            0.72,
+            -7.025,
+            3.36239
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.66,
+          -6.9875
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.24283,
+          "point": [
+            0.66,
+            -6.9875,
+            3.35717
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.6,
+          -6.95
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.24806,
+          "point": [
+            0.6,
+            -6.95,
+            3.35194
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.6,
+          -6.872142857142858
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.25891,
+          "point": [
+            0.6,
+            -6.87214,
+            3.34109
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.6000000000000001,
+          -6.7942857142857145
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.26976,
+          "point": [
+            0.6,
+            -6.79429,
+            3.33024
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.6,
+          -6.716428571428571
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.28061,
+          "point": [
+            0.6,
+            -6.71643,
+            3.31939
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.6,
+          -6.638571428571429
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.29146,
+          "point": [
+            0.6,
+            -6.63857,
+            3.30854
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.6,
+          -6.560714285714285
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.30231,
+          "point": [
+            0.6,
+            -6.56071,
+            3.29769
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.5999999999999999,
+          -6.482857142857143
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.31316,
+          "point": [
+            0.6,
+            -6.48286,
+            3.28684
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.6,
+          -6.405
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.32401,
+          "point": [
+            0.6,
+            -6.405,
+            3.27599
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.6,
+          -6.327142857142857
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.33486,
+          "point": [
+            0.6,
+            -6.32714,
+            3.26514
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.6,
+          -6.2492857142857146
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.34571,
+          "point": [
+            0.6,
+            -6.24929,
+            3.25429
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.6,
+          -6.171428571428572
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.35655,
+          "point": [
+            0.6,
+            -6.17143,
+            3.24344
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.6,
+          -6.093571428571428
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.3674,
+          "point": [
+            0.6,
+            -6.09357,
+            3.2326
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.6,
+          -6.015714285714286
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.37825,
+          "point": [
+            0.6,
+            -6.01571,
+            3.22175
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.6,
+          -5.937857142857143
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.3891,
+          "point": [
+            0.6,
+            -5.93786,
+            3.2109
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.6,
+          -5.86
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39995,
+          "point": [
+            0.6,
+            -5.86,
+            3.20005
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.6778260869565218,
+          -5.860000000000001
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39995,
+          "point": [
+            0.67783,
+            -5.86,
+            3.20005
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.7556521739130435,
+          -5.86
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39995,
+          "point": [
+            0.75565,
+            -5.86,
+            3.20005
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.8334782608695652,
+          -5.859999999999999
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39995,
+          "point": [
+            0.83348,
+            -5.86,
+            3.20005
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.9113043478260869,
+          -5.86
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39995,
+          "point": [
+            0.9113,
+            -5.86,
+            3.20005
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          0.9891304347826086,
+          -5.860000000000001
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39995,
+          "point": [
+            0.98913,
+            -5.86,
+            3.20005
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.0669565217391304,
+          -5.86
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39995,
+          "point": [
+            1.06696,
+            -5.86,
+            3.20005
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.1447826086956523,
+          -5.86
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39995,
+          "point": [
+            1.14478,
+            -5.86,
+            3.20005
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.222608695652174,
+          -5.86
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39995,
+          "point": [
+            1.22261,
+            -5.86,
+            3.20005
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.3004347826086957,
+          -5.860000000000001
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39995,
+          "point": [
+            1.30043,
+            -5.86,
+            3.20005
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.3782608695652174,
+          -5.86
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39995,
+          "point": [
+            1.37826,
+            -5.86,
+            3.20005
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.4560869565217391,
+          -5.86
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39995,
+          "point": [
+            1.45609,
+            -5.86,
+            3.20005
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.533913043478261,
+          -5.86
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39995,
+          "point": [
+            1.53391,
+            -5.86,
+            3.20005
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.6117391304347826,
+          -5.86
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39922,
+          "point": [
+            1.61174,
+            -5.86,
+            3.20078
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.6895652173913045,
+          -5.86
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39687,
+          "point": [
+            1.68957,
+            -5.86,
+            3.20313
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.767391304347826,
+          -5.86
+        ],
+        "floor": {
+          "object": "R33 | Connected coursed entry path",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39452,
+          "point": [
+            1.76739,
+            -5.86,
+            3.20548
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.845217391304348,
+          -5.86
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39361,
+          "point": [
+            1.84522,
+            -5.86,
+            3.20639
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          1.9230434782608696,
+          -5.860000000000001
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39361,
+          "point": [
+            1.92304,
+            -5.86,
+            3.20639
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.0008695652173913,
+          -5.860000000000001
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39361,
+          "point": [
+            2.00087,
+            -5.86,
+            3.20639
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.0786956521739133,
+          -5.86
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39361,
+          "point": [
+            2.0787,
+            -5.86,
+            3.20639
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.1565217391304348,
+          -5.86
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39361,
+          "point": [
+            2.15652,
+            -5.86,
+            3.20639
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.2343478260869567,
+          -5.86
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39361,
+          "point": [
+            2.23435,
+            -5.86,
+            3.20639
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.312173913043478,
+          -5.86
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39361,
+          "point": [
+            2.31217,
+            -5.86,
+            3.20639
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -5.86
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.39361,
+          "point": [
+            2.39,
+            -5.86,
+            3.20639
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.3899999999999997,
+          -5.782380952380952
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.40512,
+          "point": [
+            2.39,
+            -5.78238,
+            3.19488
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -5.704761904761905
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.41663,
+          "point": [
+            2.39,
+            -5.70476,
+            3.18337
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.3900000000000006,
+          -5.627142857142857
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.42814,
+          "point": [
+            2.39,
+            -5.62714,
+            3.17186
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -5.54952380952381
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.43966,
+          "point": [
+            2.39,
+            -5.54952,
+            3.16034
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.3899999999999997,
+          -5.471904761904762
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.45117,
+          "point": [
+            2.39,
+            -5.4719,
+            3.14883
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -5.394285714285715
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.46268,
+          "point": [
+            2.39,
+            -5.39429,
+            3.13732
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -5.316666666666667
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.4742,
+          "point": [
+            2.39,
+            -5.31667,
+            3.1258
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -5.23904761904762
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.48571,
+          "point": [
+            2.39,
+            -5.23905,
+            3.11429
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.3899999999999997,
+          -5.161428571428572
+        ],
+        "floor": {
+          "object": "Road | Porch turning approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.49722,
+          "point": [
+            2.39,
+            -5.16143,
+            3.10278
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -5.083809523809524
+        ],
+        "floor": {
+          "object": "Road | Entrance threshold approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.5004,
+          "point": [
+            2.39,
+            -5.08381,
+            3.0996
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -5.0061904761904765
+        ],
+        "floor": {
+          "object": "Road | Entrance threshold approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.5004,
+          "point": [
+            2.39,
+            -5.00619,
+            3.0996
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -4.928571428571429
+        ],
+        "floor": {
+          "object": "Road | Entrance threshold approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.5004,
+          "point": [
+            2.39,
+            -4.92857,
+            3.0996
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -4.850952380952381
+        ],
+        "floor": {
+          "object": "Road | Entrance threshold approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.5004,
+          "point": [
+            2.39,
+            -4.85095,
+            3.0996
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -4.773333333333333
+        ],
+        "floor": {
+          "object": "Road | Entrance threshold approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.5004,
+          "point": [
+            2.39,
+            -4.77333,
+            3.0996
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -4.695714285714287
+        ],
+        "floor": {
+          "object": "Road | Entrance threshold approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.5004,
+          "point": [
+            2.39,
+            -4.69571,
+            3.0996
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -4.618095238095238
+        ],
+        "floor": {
+          "object": "Road | Entrance threshold approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.5004,
+          "point": [
+            2.39,
+            -4.6181,
+            3.0996
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -4.540476190476191
+        ],
+        "floor": {
+          "object": "Road | Entrance threshold approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.5004,
+          "point": [
+            2.39,
+            -4.54048,
+            3.0996
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -4.4628571428571435
+        ],
+        "floor": {
+          "object": "Road | Entrance threshold approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.5004,
+          "point": [
+            2.39,
+            -4.46286,
+            3.0996
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -4.385238095238096
+        ],
+        "floor": {
+          "object": "Road | Entrance threshold approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.5004,
+          "point": [
+            2.39,
+            -4.38524,
+            3.0996
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          2.39,
+          -4.307619047619048
+        ],
+        "floor": {
+          "object": "Road | Entrance threshold approach",
+          "material": "R31 | R37 entry coursed limestone",
+          "distance": 1.5004,
+          "point": [
+            2.39,
+            -4.30762,
+            3.0996
+          ]
+        },
+        "body_hits": []
+      }
+    ]
+  },
+  {
+    "route": "vehicle",
+    "samples": 124,
+    "missing_floor": 0,
+    "body_hit_samples": [],
+    "max_floor_delta": 0.05461000000000027,
+    "rows": [
+      {
+        "xy": [
+          5.0,
+          -11.5
+        ],
+        "floor": {
+          "object": "CAD roads — corrected block loops and arterials",
+          "material": "R31 | R37 fine asphalt aggregate",
+          "distance": 0.65389,
+          "point": [
+            5.0,
+            -11.5,
+            3.94611
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -11.420161290322582
+        ],
+        "floor": {
+          "object": "CAD roads — corrected block loops and arterials",
+          "material": "R31 | R37 fine asphalt aggregate",
+          "distance": 0.65545,
+          "point": [
+            5.0,
+            -11.42016,
+            3.94455
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.000000000000001,
+          -11.34032258064516
+        ],
+        "floor": {
+          "object": "CAD roads — corrected block loops and arterials",
+          "material": "R31 | R37 fine asphalt aggregate",
+          "distance": 0.65702,
+          "point": [
+            5.0,
+            -11.34032,
+            3.94298
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -11.260483870967743
+        ],
+        "floor": {
+          "object": "CAD roads — corrected block loops and arterials",
+          "material": "R31 | R37 fine asphalt aggregate",
+          "distance": 0.65858,
+          "point": [
+            5.0,
+            -11.26048,
+            3.94142
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -11.180645161290322
+        ],
+        "floor": {
+          "object": "Road | Vehicle continuous dropped kerb",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.60397,
+          "point": [
+            5.0,
+            -11.18064,
+            3.99603
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -11.100806451612904
+        ],
+        "floor": {
+          "object": "Road | Vehicle continuous dropped kerb",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.59783,
+          "point": [
+            5.0,
+            -11.10081,
+            4.00217
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -11.020967741935484
+        ],
+        "floor": {
+          "object": "Road | Vehicle continuous dropped kerb",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.59168,
+          "point": [
+            5.0,
+            -11.02097,
+            4.00832
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -10.941129032258065
+        ],
+        "floor": {
+          "object": "Road | Vehicle continuous dropped kerb",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.58553,
+          "point": [
+            5.0,
+            -10.94113,
+            4.01447
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -10.861290322580645
+        ],
+        "floor": {
+          "object": "Road | Vehicle continuous dropped kerb",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.57939,
+          "point": [
+            5.0,
+            -10.86129,
+            4.02061
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -10.781451612903224
+        ],
+        "floor": {
+          "object": "Road | Vehicle continuous dropped kerb",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.57324,
+          "point": [
+            5.0,
+            -10.78145,
+            4.02676
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -10.701612903225806
+        ],
+        "floor": {
+          "object": "Road | Vehicle continuous dropped kerb",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.56709,
+          "point": [
+            5.0,
+            -10.70161,
+            4.03291
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -10.621774193548386
+        ],
+        "floor": {
+          "object": "Road | Vehicle continuous dropped kerb",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.56276,
+          "point": [
+            5.0,
+            -10.62177,
+            4.03724
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -10.541935483870967
+        ],
+        "floor": {
+          "object": "Road | Vehicle continuous dropped kerb",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.56563,
+          "point": [
+            5.0,
+            -10.54194,
+            4.03437
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -10.462096774193549
+        ],
+        "floor": {
+          "object": "Road | Vehicle continuous dropped kerb",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.56851,
+          "point": [
+            5.0,
+            -10.4621,
+            4.03149
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -10.38225806451613
+        ],
+        "floor": {
+          "object": "Road | Vehicle continuous dropped kerb",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.57138,
+          "point": [
+            5.0,
+            -10.38226,
+            4.02862
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -10.30241935483871
+        ],
+        "floor": {
+          "object": "Road | Vehicle continuous dropped kerb",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.57425,
+          "point": [
+            5.0,
+            -10.30242,
+            4.02575
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -10.22258064516129
+        ],
+        "floor": {
+          "object": "Road | Vehicle continuous dropped kerb",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.57712,
+          "point": [
+            5.0,
+            -10.22258,
+            4.02288
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -10.14274193548387
+        ],
+        "floor": {
+          "object": "Road | Vehicle continuous dropped kerb",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.57999,
+          "point": [
+            5.0,
+            -10.14274,
+            4.02001
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -10.062903225806451
+        ],
+        "floor": {
+          "object": "Road | Vehicle continuous dropped kerb",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.58287,
+          "point": [
+            5.0,
+            -10.0629,
+            4.01713
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -9.983064516129033
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.59207,
+          "point": [
+            5.0,
+            -9.98306,
+            4.00793
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -9.903225806451614
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.60196,
+          "point": [
+            5.0,
+            -9.90323,
+            3.99804
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -9.823387096774194
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.61184,
+          "point": [
+            5.0,
+            -9.82339,
+            3.98816
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -9.743548387096773
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.62172,
+          "point": [
+            5.0,
+            -9.74355,
+            3.97828
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -9.663709677419355
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.6316,
+          "point": [
+            5.0,
+            -9.66371,
+            3.9684
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -9.583870967741936
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.64149,
+          "point": [
+            5.0,
+            -9.58387,
+            3.95851
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -9.504032258064516
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.65137,
+          "point": [
+            5.0,
+            -9.50403,
+            3.94863
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -9.424193548387096
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.66125,
+          "point": [
+            5.0,
+            -9.42419,
+            3.93875
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -9.344354838709677
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.67114,
+          "point": [
+            5.0,
+            -9.34435,
+            3.92886
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -9.264516129032257
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.68102,
+          "point": [
+            5.0,
+            -9.26452,
+            3.91898
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -9.18467741935484
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.6909,
+          "point": [
+            5.0,
+            -9.18468,
+            3.9091
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -9.104838709677418
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.70078,
+          "point": [
+            5.0,
+            -9.10484,
+            3.89922
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -9.025
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.71067,
+          "point": [
+            5.0,
+            -9.025,
+            3.88933
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -8.94516129032258
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.72055,
+          "point": [
+            5.0,
+            -8.94516,
+            3.87945
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -8.865322580645161
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.73043,
+          "point": [
+            5.0,
+            -8.86532,
+            3.86957
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -8.785483870967743
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.74032,
+          "point": [
+            5.0,
+            -8.78548,
+            3.85968
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -8.705645161290322
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.7502,
+          "point": [
+            5.0,
+            -8.70565,
+            3.8498
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -8.625806451612904
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.76008,
+          "point": [
+            5.0,
+            -8.62581,
+            3.83992
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -8.545967741935483
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.76996,
+          "point": [
+            5.0,
+            -8.54597,
+            3.83004
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -8.466129032258065
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.77985,
+          "point": [
+            5.0,
+            -8.46613,
+            3.82015
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -8.386290322580646
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.78973,
+          "point": [
+            5.0,
+            -8.38629,
+            3.81027
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -8.306451612903226
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.79961,
+          "point": [
+            5.0,
+            -8.30645,
+            3.80039
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -8.226612903225806
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.80949,
+          "point": [
+            5.0,
+            -8.22661,
+            3.7905
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -8.146774193548387
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.81938,
+          "point": [
+            5.0,
+            -8.14677,
+            3.78062
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -8.066935483870967
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.82926,
+          "point": [
+            5.0,
+            -8.06694,
+            3.77074
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -7.987096774193548
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.83914,
+          "point": [
+            5.0,
+            -7.9871,
+            3.76086
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -7.907258064516129
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.84903,
+          "point": [
+            5.0,
+            -7.90726,
+            3.75097
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -7.827419354838709
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.85891,
+          "point": [
+            5.0,
+            -7.82742,
+            3.74109
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -7.747580645161291
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.86879,
+          "point": [
+            5.0,
+            -7.74758,
+            3.73121
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -7.667741935483871
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.87867,
+          "point": [
+            5.0,
+            -7.66774,
+            3.72133
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -7.587903225806452
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.88856,
+          "point": [
+            5.0,
+            -7.5879,
+            3.71144
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -7.508064516129033
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.89844,
+          "point": [
+            5.0,
+            -7.50806,
+            3.70156
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -7.4282258064516125
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.90832,
+          "point": [
+            5.0,
+            -7.42823,
+            3.69168
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -7.348387096774193
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.91821,
+          "point": [
+            5.0,
+            -7.34839,
+            3.68179
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -7.268548387096773
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.92809,
+          "point": [
+            5.0,
+            -7.26855,
+            3.67191
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -7.188709677419354
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.93797,
+          "point": [
+            5.0,
+            -7.18871,
+            3.66203
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -7.108870967741935
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.94785,
+          "point": [
+            5.0,
+            -7.10887,
+            3.65215
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -7.0290322580645155
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.95774,
+          "point": [
+            5.0,
+            -7.02903,
+            3.64226
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -6.949193548387096
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.96762,
+          "point": [
+            5.0,
+            -6.94919,
+            3.63238
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -6.869354838709677
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.9775,
+          "point": [
+            5.0,
+            -6.86935,
+            3.6225
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -6.7895161290322585
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.98739,
+          "point": [
+            5.0,
+            -6.78952,
+            3.61261
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -6.709677419354839
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 0.99727,
+          "point": [
+            5.0,
+            -6.70968,
+            3.60273
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -6.629838709677419
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.00715,
+          "point": [
+            5.0,
+            -6.62984,
+            3.59285
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -6.55
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.01703,
+          "point": [
+            5.0,
+            -6.55,
+            3.58297
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -6.470161290322581
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.02692,
+          "point": [
+            5.0,
+            -6.47016,
+            3.57308
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -6.390322580645162
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.0368,
+          "point": [
+            5.0,
+            -6.39032,
+            3.5632
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -6.310483870967742
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.04668,
+          "point": [
+            5.0,
+            -6.31048,
+            3.55332
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -6.230645161290322
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.05657,
+          "point": [
+            5.0,
+            -6.23065,
+            3.54343
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -6.150806451612904
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.06645,
+          "point": [
+            5.0,
+            -6.15081,
+            3.53355
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -6.070967741935485
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.07633,
+          "point": [
+            5.0,
+            -6.07097,
+            3.52367
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -5.9911290322580655
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.08379,
+          "point": [
+            5.0,
+            -5.99113,
+            3.51621
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -5.911290322580645
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.09108,
+          "point": [
+            5.0,
+            -5.91129,
+            3.50892
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -5.8314516129032254
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.09837,
+          "point": [
+            5.0,
+            -5.83145,
+            3.50163
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -5.751612903225807
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.10566,
+          "point": [
+            5.0,
+            -5.75161,
+            3.49434
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -5.671774193548387
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.11295,
+          "point": [
+            5.0,
+            -5.67177,
+            3.48705
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -5.591935483870968
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.12024,
+          "point": [
+            5.0,
+            -5.59194,
+            3.47976
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -5.512096774193548
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.12753,
+          "point": [
+            5.0,
+            -5.5121,
+            3.47247
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -5.4322580645161285
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.13482,
+          "point": [
+            5.0,
+            -5.43226,
+            3.46518
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -5.352419354838709
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.14212,
+          "point": [
+            5.0,
+            -5.35242,
+            3.45788
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -5.272580645161291
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.14941,
+          "point": [
+            5.0,
+            -5.27258,
+            3.45059
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -5.1927419354838715
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.1567,
+          "point": [
+            5.0,
+            -5.19274,
+            3.4433
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -5.112903225806452
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.16399,
+          "point": [
+            5.0,
+            -5.1129,
+            3.43601
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -5.033064516129032
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.17128,
+          "point": [
+            5.0,
+            -5.03306,
+            3.42872
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -4.953225806451613
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.17857,
+          "point": [
+            5.0,
+            -4.95323,
+            3.42143
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -4.873387096774194
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.18586,
+          "point": [
+            5.0,
+            -4.87339,
+            3.41414
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -4.7935483870967746
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.19315,
+          "point": [
+            5.0,
+            -4.79355,
+            3.40685
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -4.713709677419356
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.20044,
+          "point": [
+            5.0,
+            -4.71371,
+            3.39956
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -4.6338709677419345
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.20773,
+          "point": [
+            5.0,
+            -4.63387,
+            3.39227
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -4.554032258064516
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.21502,
+          "point": [
+            5.0,
+            -4.55403,
+            3.38498
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -4.474193548387096
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.22231,
+          "point": [
+            5.0,
+            -4.47419,
+            3.37769
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -4.394354838709678
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.2296,
+          "point": [
+            5.0,
+            -4.39435,
+            3.3704
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -4.314516129032258
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.23689,
+          "point": [
+            5.0,
+            -4.31452,
+            3.36311
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -4.234677419354838
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.24418,
+          "point": [
+            5.0,
+            -4.23468,
+            3.35582
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -4.15483870967742
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.25147,
+          "point": [
+            5.0,
+            -4.15484,
+            3.34853
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -4.075
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.25876,
+          "point": [
+            5.0,
+            -4.075,
+            3.34124
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -3.9951612903225806
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.26605,
+          "point": [
+            5.0,
+            -3.99516,
+            3.33395
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -3.915322580645161
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.27334,
+          "point": [
+            5.0,
+            -3.91532,
+            3.32666
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -3.8354838709677423
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.28063,
+          "point": [
+            5.0,
+            -3.83548,
+            3.31937
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -3.7556451612903228
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.28792,
+          "point": [
+            5.0,
+            -3.75565,
+            3.31208
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -3.6758064516129036
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.29521,
+          "point": [
+            5.0,
+            -3.67581,
+            3.30479
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -3.5959677419354845
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.3025,
+          "point": [
+            5.0,
+            -3.59597,
+            3.2975
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -3.516129032258065
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.30979,
+          "point": [
+            5.0,
+            -3.51613,
+            3.29021
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -3.4362903225806445
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.31709,
+          "point": [
+            5.0,
+            -3.43629,
+            3.28291
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -3.3564516129032254
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.32438,
+          "point": [
+            5.0,
+            -3.35645,
+            3.27562
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -3.2766129032258062
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.33167,
+          "point": [
+            5.0,
+            -3.27661,
+            3.26833
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -3.1967741935483867
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.33896,
+          "point": [
+            5.0,
+            -3.19677,
+            3.26104
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -3.1169354838709675
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.34625,
+          "point": [
+            5.0,
+            -3.11694,
+            3.25375
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -3.0370967741935484
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.35354,
+          "point": [
+            5.0,
+            -3.0371,
+            3.24646
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -2.957258064516129
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.36083,
+          "point": [
+            5.0,
+            -2.95726,
+            3.23917
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -2.8774193548387097
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.36812,
+          "point": [
+            5.0,
+            -2.87742,
+            3.23188
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -2.7975806451612906
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.37541,
+          "point": [
+            5.0,
+            -2.79758,
+            3.22459
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -2.717741935483871
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.3827,
+          "point": [
+            5.0,
+            -2.71774,
+            3.2173
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -2.637903225806452
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.38999,
+          "point": [
+            5.0,
+            -2.6379,
+            3.21001
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -2.5580645161290327
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.39728,
+          "point": [
+            5.0,
+            -2.55806,
+            3.20272
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -2.478225806451613
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.40457,
+          "point": [
+            5.0,
+            -2.47823,
+            3.19543
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -2.398387096774194
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.41186,
+          "point": [
+            5.0,
+            -2.39839,
+            3.18814
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -2.318548387096775
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.41915,
+          "point": [
+            5.0,
+            -2.31855,
+            3.18085
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -2.2387096774193553
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.42644,
+          "point": [
+            5.0,
+            -2.23871,
+            3.17356
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -2.158870967741935
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.43373,
+          "point": [
+            5.0,
+            -2.15887,
+            3.16627
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -2.0790322580645157
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.44102,
+          "point": [
+            5.0,
+            -2.07903,
+            3.15898
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -1.9991935483870966
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.44831,
+          "point": [
+            5.0,
+            -1.99919,
+            3.15169
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -1.9193548387096773
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.4556,
+          "point": [
+            5.0,
+            -1.91935,
+            3.1444
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -1.839516129032258
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.46289,
+          "point": [
+            5.0,
+            -1.83952,
+            3.13711
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -1.7596774193548386
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.47018,
+          "point": [
+            5.0,
+            -1.75968,
+            3.12982
+          ]
+        },
+        "body_hits": []
+      },
+      {
+        "xy": [
+          5.0,
+          -1.6798387096774192
+        ],
+        "floor": {
+          "object": "R33 | Connected garage driveway",
+          "material": "R31 | R37 garden cream limestone",
+          "distance": 1.47747,
+          "point": [
+            5.0,
+            -1.67984,
+            3.12253
+          ]
+        },
+        "body_hits": []
+      }
+    ]
+  }
+]

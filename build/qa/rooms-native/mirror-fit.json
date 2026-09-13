@@ -1,0 +1,24 @@
+{
+  "bounds": [
+    [
+      0.095,
+      8.00802,
+      10.5405
+    ],
+    [
+      0.60499,
+      8.014,
+      11.2305
+    ]
+  ],
+  "front_ray": {
+    "object": "R33 | Mirror physical glass.001",
+    "material": "R31 | R33 bathroom mirror.001",
+    "distance": 0.50802,
+    "point": [
+      0.35,
+      8.00802,
+      10.9
+    ]
+  }
+}

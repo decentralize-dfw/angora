@@ -1,0 +1,274 @@
+[
+  {
+    "object": "F3 | ÇATII",
+    "xy": [
+      -5.5,
+      0.8
+    ],
+    "hits": [
+      {
+        "height": 11.171734809875488,
+        "material": "ceiling.003"
+      },
+      {
+        "height": 11.511473655700684,
+        "material": "roof.003"
+      }
+    ]
+  },
+  {
+    "object": "F3 | ÇATII",
+    "xy": [
+      -5.5,
+      1.8
+    ],
+    "hits": [
+      {
+        "height": 11.862859725952148,
+        "material": "ceiling.003"
+      },
+      {
+        "height": 12.203166007995605,
+        "material": "roof.003"
+      }
+    ]
+  },
+  {
+    "object": "F3 | ÇATII",
+    "xy": [
+      -5.5,
+      2.8
+    ],
+    "hits": [
+      {
+        "height": 11.487253189086914,
+        "material": "ceiling.003"
+      },
+      {
+        "height": 11.82718563079834,
+        "material": "roof.003"
+      }
+    ]
+  },
+  {
+    "object": "F3 | ÇATII",
+    "xy": [
+      -5.5,
+      3.5
+    ],
+    "hits": [
+      {
+        "height": 11.00364875793457,
+        "material": "ceiling.003"
+      },
+      {
+        "height": 11.343387603759766,
+        "material": "roof.003"
+      }
+    ]
+  },
+  {
+    "object": "F3 | ÇATII",
+    "xy": [
+      -4.5,
+      0.8
+    ],
+    "hits": [
+      {
+        "height": 11.171734809875488,
+        "material": "ceiling.003"
+      },
+      {
+        "height": 11.511473655700684,
+        "material": "roof.003"
+      }
+    ]
+  },
+  {
+    "object": "F3 | ÇATII",
+    "xy": [
+      -4.5,
+      1.8
+    ],
+    "hits": [
+      {
+        "height": 11.862859725952148,
+        "material": "ceiling.003"
+      },
+      {
+        "height": 12.202982902526855,
+        "material": "roof.003"
+      }
+    ]
+  },
+  {
+    "object": "F3 | ÇATII",
+    "xy": [
+      -4.5,
+      2.8
+    ],
+    "hits": [
+      {
+        "height": 11.487378120422363,
+        "material": "ceiling.003"
+      },
+      {
+        "height": 11.827116966247559,
+        "material": "roof.003"
+      }
+    ]
+  },
+  {
+    "object": "F3 | ÇATII",
+    "xy": [
+      -4.5,
+      3.5
+    ],
+    "hits": [
+      {
+        "height": 11.00364875793457,
+        "material": "ceiling.003"
+      },
+      {
+        "height": 11.343387603759766,
+        "material": "roof.003"
+      }
+    ]
+  },
+  {
+    "object": "F3 | ÇATII",
+    "xy": [
+      -3.5,
+      0.8
+    ],
+    "hits": [
+      {
+        "height": 11.171734809875488,
+        "material": "ceiling.003"
+      },
+      {
+        "height": 11.511473655700684,
+        "material": "roof.003"
+      }
+    ]
+  },
+  {
+    "object": "F3 | ÇATII",
+    "xy": [
+      -3.5,
+      1.8
+    ],
+    "hits": [
+      {
+        "height": 11.862859725952148,
+        "material": "ceiling.003"
+      },
+      {
+        "height": 12.202800750732422,
+        "material": "roof.003"
+      }
+    ]
+  },
+  {
+    "object": "F3 | ÇATII",
+    "xy": [
+      -3.5,
+      2.8
+    ],
+    "hits": [
+      {
+        "height": 11.487488746643066,
+        "material": "ceiling.003"
+      },
+      {
+        "height": 11.827227592468262,
+        "material": "roof.003"
+      }
+    ]
+  },
+  {
+    "object": "F3 | ÇATII",
+    "xy": [
+      -3.5,
+      3.5
+    ],
+    "hits": [
+      {
+        "height": 11.00364875793457,
+        "material": "ceiling.003"
+      },
+      {
+        "height": 11.343388557434082,
+        "material": "roof.003"
+      }
+    ]
+  },
+  {
+    "object": "F3 | ÇATII",
+    "xy": [
+      -2,
+      0.8
+    ],
+    "hits": [
+      {
+        "height": 11.411940574645996,
+        "material": "ceiling.003"
+      },
+      {
+        "height": 11.7619047164917,
+        "material": "roof.003"
+      }
+    ]
+  },
+  {
+    "object": "F3 | ÇATII",
+    "xy": [
+      -2,
+      1.8
+    ],
+    "hits": [
+      {
+        "height": 11.863557815551758,
+        "material": "ceiling.003"
+      },
+      {
+        "height": 12.203296661376953,
+        "material": "roof.003"
+      }
+    ]
+  },
+  {
+    "object": "F3 | ÇATII",
+    "xy": [
+      -2,
+      2.8
+    ],
+    "hits": [
+      {
+        "height": 11.487653732299805,
+        "material": "ceiling.003"
+      },
+      {
+        "height": 11.827392578125,
+        "material": "roof.003"
+      }
+    ]
+  },
+  {
+    "object": "F3 | ÇATII",
+    "xy": [
+      -2,
+      3.5
+    ],
+    "hits": [
+      {
+        "height": 11.411771774291992,
+        "material": "ceiling.003"
+      },
+      {
+        "height": 11.761785507202148,
+        "material": "roof.003"
+      }
+    ]
+  }
+]

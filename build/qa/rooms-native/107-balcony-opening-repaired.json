@@ -1,0 +1,33 @@
+{
+  "source": "kat_3_yatak_odalari/WhatsApp Image 2026-08-26 at 11.51.46 (14).jpeg",
+  "changes": [
+    {
+      "object": "F2 | PENCERE_KAPI$ÇERÇEVE",
+      "cut_faces": 126
+    },
+    {
+      "object": "F2 | KAT 2$DUVAR",
+      "cut_faces": 98
+    },
+    {
+      "object": "F2 | PENCERE_KAPI$CAM",
+      "cut_faces": 32
+    },
+    {
+      "object": "F2 | PENCERE_KAPI$ÇEPHE ÇERÇECE",
+      "cut_faces": 8
+    },
+    {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "cut_faces": 22
+    },
+    {
+      "object": "F2 | Fitted walnut skirtings combined",
+      "cut_faces": 8
+    }
+  ],
+  "clear_width": 1.09,
+  "sill_z": 6.3711,
+  "leaves_open_degrees": 90,
+  "dimensions": "Existing CAD opening width and lintel retained; floor-height interpretation confirmed in photographs"
+}

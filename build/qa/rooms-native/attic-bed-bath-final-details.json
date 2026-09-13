@@ -1,0 +1,47 @@
+{
+  "removed_generic_parts": [
+    "Drawer face.045",
+    "Drawer pull.046",
+    "Drawer face.046",
+    "Lamp stem.008",
+    "R33 | Hollow case horizontal.025",
+    "R33 | Hollow case horizontal.022",
+    "Drawer pull.043",
+    "Drawer face.043",
+    "R33 | Hollow case back.011",
+    "Lamp base.008",
+    "R33 | Hollow case horizontal.024",
+    "Drawer face.044",
+    "R33 | Hollow case back.012",
+    "R33 | Hollow case side.022",
+    "R33 | Hollow case horizontal.023",
+    "Drawer pull.047",
+    "Lamp shade.009",
+    "Drawer pull.041",
+    "Lamp base.009",
+    "Lamp stem.009",
+    "R33 | Hollow case side.023",
+    "Drawer face.041",
+    "Lamp shade.008",
+    "Drawer face.047",
+    "Drawer pull.042",
+    "R33 | Hollow case side.025",
+    "Drawer pull.044",
+    "Drawer pull.040",
+    "Drawer pull.045",
+    "Drawer face.040",
+    "Drawer face.042",
+    "R33 | Hollow case side.024"
+  ],
+  "balcony_trim_fix": [
+    {
+      "name": "F2 | PENCERE_KAPI$CEPHE FRAME",
+      "cut_faces": 17
+    },
+    {
+      "name": "F2 | PENCERE_KAPI$ÇEPHE ÇERÇECE",
+      "cut_faces": 38
+    }
+  ],
+  "fit_status": "Photo-interpreted visible details; existing CAD room shell retained"
+}

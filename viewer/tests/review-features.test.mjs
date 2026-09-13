@@ -62,7 +62,7 @@ test('Every displayed span agrees with the original DWG dimension and registered
   // switched off are model-measured spans and face-residual records that must
   // never be displayed, so only the allowed rows face the DWG check.
   const allowed=data.dimensions.filter(d=>d.dimension_label_allowed);
-  assert.ok(allowed.length>=35,String(allowed.length));
+  assert.ok(allowed.length>=33,String(allowed.length)); // Two spans belonged to the removed plan-only bathroom.
   for(const dim of allowed)assert.equal(dim.basis,'dwg_verified');
   for(const dim of data.dimensions.filter(d=>!d.dimension_label_allowed&&d.basis==='model_measured'))
     assert.equal(dim.claim,'model_span_measured');

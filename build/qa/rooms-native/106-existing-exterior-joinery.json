@@ -1,0 +1,470 @@
+[
+  {
+    "name": "R33 | Door handle escutcheon.008",
+    "bounds": [
+      [
+        -4.09544,
+        -4.62961,
+        7.2939
+      ],
+      [
+        -4.07853,
+        -4.59908,
+        7.4489
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door brass.002"
+    ]
+  },
+  {
+    "name": "R33 | External doorway frame rail.008",
+    "bounds": [
+      [
+        -4.1246,
+        -4.19961,
+        6.3714
+      ],
+      [
+        -3.0386,
+        -4.1196,
+        6.42337
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door dark walnut.002"
+    ]
+  },
+  {
+    "name": "R33 | Door curved lever.008",
+    "bounds": [
+      [
+        -4.14907,
+        -4.63137,
+        7.3924
+      ],
+      [
+        -4.09662,
+        -4.53944,
+        7.4104
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door brass.002"
+    ]
+  },
+  {
+    "name": "R33 | Open external door leaf rail.019",
+    "bounds": [
+      [
+        -3.12992,
+        -4.63587,
+        8.1906
+      ],
+      [
+        -3.02975,
+        -4.21312,
+        8.2476
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door dark walnut.002"
+    ]
+  },
+  {
+    "name": "R33 | Door hinge barrel.018",
+    "bounds": [
+      [
+        -3.0546,
+        -4.1716,
+        6.5644
+      ],
+      [
+        -3.0306,
+        -4.1476,
+        6.6384
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door brass.002"
+    ]
+  },
+  {
+    "name": "R33 | External doorway frame stile.009",
+    "bounds": [
+      [
+        -3.0386,
+        -4.19956,
+        6.3714
+      ],
+      [
+        -2.98661,
+        -4.1196,
+        8.3296
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door dark walnut.002"
+    ]
+  },
+  {
+    "name": "R33 | Open external door leaf stile.016",
+    "bounds": [
+      [
+        -4.14143,
+        -4.21893,
+        6.3814
+      ],
+      [
+        -4.09188,
+        -4.15668,
+        8.2476
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door dark walnut.002"
+    ]
+  },
+  {
+    "name": "R33 | Door clear physical glazing.018",
+    "bounds": [
+      [
+        -3.11182,
+        -4.63138,
+        6.4549
+      ],
+      [
+        -3.04785,
+        -4.21763,
+        7.301
+      ]
+    ],
+    "materials": [
+      "R31 | R35 clear door glass.002"
+    ]
+  },
+  {
+    "name": "R33 | Door curved lever.009",
+    "bounds": [
+      [
+        -3.06658,
+        -4.63137,
+        7.3924
+      ],
+      [
+        -3.01413,
+        -4.53944,
+        7.4104
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door brass.002"
+    ]
+  },
+  {
+    "name": "R33 | Open external door leaf stile.017",
+    "bounds": [
+      [
+        -4.0749,
+        -4.69228,
+        6.3814
+      ],
+      [
+        -4.02535,
+        -4.63003,
+        8.2476
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door dark walnut.002"
+    ]
+  },
+  {
+    "name": "R33 | Open external door leaf stile.019",
+    "bounds": [
+      [
+        -3.07133,
+        -4.21897,
+        6.3814
+      ],
+      [
+        -3.02178,
+        -4.15672,
+        8.2476
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door dark walnut.002"
+    ]
+  },
+  {
+    "name": "R33 | Door clear physical glazing.019",
+    "bounds": [
+      [
+        -3.11182,
+        -4.63138,
+        7.328
+      ],
+      [
+        -3.04785,
+        -4.21763,
+        8.1741
+      ]
+    ],
+    "materials": [
+      "R31 | R35 clear door glass.002"
+    ]
+  },
+  {
+    "name": "R33 | Door handle escutcheon.009",
+    "bounds": [
+      [
+        -3.08467,
+        -4.62961,
+        7.2939
+      ],
+      [
+        -3.06776,
+        -4.59909,
+        7.4489
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door brass.002"
+    ]
+  },
+  {
+    "name": "R33 | External doorway frame stile.008",
+    "bounds": [
+      [
+        -4.1766,
+        -4.19956,
+        6.3714
+      ],
+      [
+        -4.12461,
+        -4.1196,
+        8.3296
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door dark walnut.002"
+    ]
+  },
+  {
+    "name": "R33 | Open external door leaf rail.018",
+    "bounds": [
+      [
+        -3.12992,
+        -4.63587,
+        6.3814
+      ],
+      [
+        -3.02975,
+        -4.21312,
+        6.4384
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door dark walnut.002"
+    ]
+  },
+  {
+    "name": "R33 | Door clear physical glazing.017",
+    "bounds": [
+      [
+        -4.11535,
+        -4.63137,
+        7.328
+      ],
+      [
+        -4.05139,
+        -4.21761,
+        8.1741
+      ]
+    ],
+    "materials": [
+      "R31 | R35 clear door glass.002"
+    ]
+  },
+  {
+    "name": "R33 | Door central glazing bar.008",
+    "bounds": [
+      [
+        -4.13345,
+        -4.63587,
+        7.291
+      ],
+      [
+        -4.03328,
+        -4.21312,
+        7.338
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door dark walnut.002"
+    ]
+  },
+  {
+    "name": "R33 | External doorway frame rail.009",
+    "bounds": [
+      [
+        -4.1246,
+        -4.19961,
+        8.2776
+      ],
+      [
+        -3.0386,
+        -4.1196,
+        8.32957
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door dark walnut.002"
+    ]
+  },
+  {
+    "name": "R33 | Open external door leaf rail.017",
+    "bounds": [
+      [
+        -4.13345,
+        -4.63587,
+        8.1906
+      ],
+      [
+        -4.03328,
+        -4.21312,
+        8.2476
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door dark walnut.002"
+    ]
+  },
+  {
+    "name": "R33 | Door clear physical glazing.016",
+    "bounds": [
+      [
+        -4.11535,
+        -4.63137,
+        6.4549
+      ],
+      [
+        -4.05139,
+        -4.21761,
+        7.301
+      ]
+    ],
+    "materials": [
+      "R31 | R35 clear door glass.002"
+    ]
+  },
+  {
+    "name": "R33 | Door hinge barrel.017",
+    "bounds": [
+      [
+        -4.1326,
+        -4.1716,
+        7.9906
+      ],
+      [
+        -4.1086,
+        -4.1476,
+        8.0646
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door brass.002"
+    ]
+  },
+  {
+    "name": "R33 | Door central glazing bar.009",
+    "bounds": [
+      [
+        -3.12992,
+        -4.63587,
+        7.291
+      ],
+      [
+        -3.02975,
+        -4.21312,
+        7.338
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door dark walnut.002"
+    ]
+  },
+  {
+    "name": "R33 | Door hinge barrel.019",
+    "bounds": [
+      [
+        -3.0546,
+        -4.1716,
+        7.9906
+      ],
+      [
+        -3.0306,
+        -4.1476,
+        8.0646
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door brass.002"
+    ]
+  },
+  {
+    "name": "R33 | Open external door leaf rail.016",
+    "bounds": [
+      [
+        -4.13345,
+        -4.63587,
+        6.3814
+      ],
+      [
+        -4.03328,
+        -4.21312,
+        6.4384
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door dark walnut.002"
+    ]
+  },
+  {
+    "name": "R33 | Open external door leaf stile.018",
+    "bounds": [
+      [
+        -3.13785,
+        -4.69232,
+        6.3814
+      ],
+      [
+        -3.0883,
+        -4.63007,
+        8.2476
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door dark walnut.002"
+    ]
+  },
+  {
+    "name": "R33 | Door hinge barrel.016",
+    "bounds": [
+      [
+        -4.1326,
+        -4.1716,
+        6.5644
+      ],
+      [
+        -4.1086,
+        -4.1476,
+        6.6384
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door brass.002"
+    ]
+  }
+]

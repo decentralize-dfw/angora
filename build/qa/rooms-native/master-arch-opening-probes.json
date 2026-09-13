@@ -1,0 +1,710 @@
+[
+  {
+    "y": 3.8,
+    "z": 7.0,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        3.8,
+        7.0
+      ]
+    }
+  },
+  {
+    "y": 3.8,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        3.8,
+        8.3
+      ]
+    }
+  },
+  {
+    "y": 3.8,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        3.8,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 3.9,
+    "z": 7.0,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        3.9,
+        7.0
+      ]
+    }
+  },
+  {
+    "y": 3.9,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        3.9,
+        8.3
+      ]
+    }
+  },
+  {
+    "y": 3.9,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        3.9,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 4.0,
+    "z": 7.0,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.0,
+        7.0
+      ]
+    }
+  },
+  {
+    "y": 4.0,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.0,
+        8.3
+      ]
+    }
+  },
+  {
+    "y": 4.0,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.0,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 4.1,
+    "z": 7.0,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.1,
+        7.0
+      ]
+    }
+  },
+  {
+    "y": 4.1,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.1,
+        8.3
+      ]
+    }
+  },
+  {
+    "y": 4.1,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.1,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 4.2,
+    "z": 7.0,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.2,
+        7.0
+      ]
+    }
+  },
+  {
+    "y": 4.2,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.2,
+        8.3
+      ]
+    }
+  },
+  {
+    "y": 4.2,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.2,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 4.3,
+    "z": 7.0,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.3,
+        7.0
+      ]
+    }
+  },
+  {
+    "y": 4.3,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.3,
+        8.3
+      ]
+    }
+  },
+  {
+    "y": 4.3,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.3,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 4.4,
+    "z": 7.0,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.4,
+        7.0
+      ]
+    }
+  },
+  {
+    "y": 4.4,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.4,
+        8.3
+      ]
+    }
+  },
+  {
+    "y": 4.4,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.4,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 4.5,
+    "z": 7.0,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.5,
+        7.0
+      ]
+    }
+  },
+  {
+    "y": 4.5,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.5,
+        8.3
+      ]
+    }
+  },
+  {
+    "y": 4.5,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.5,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 4.6,
+    "z": 7.0,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.6,
+        7.0
+      ]
+    }
+  },
+  {
+    "y": 4.6,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.6,
+        8.3
+      ]
+    }
+  },
+  {
+    "y": 4.6,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.6,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 4.7,
+    "z": 7.0,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.7,
+        7.0
+      ]
+    }
+  },
+  {
+    "y": 4.7,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.7,
+        8.3
+      ]
+    }
+  },
+  {
+    "y": 4.7,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.7,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 4.8,
+    "z": 7.0,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.8,
+        7.0
+      ]
+    }
+  },
+  {
+    "y": 4.8,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.8,
+        8.3
+      ]
+    }
+  },
+  {
+    "y": 4.8,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.8,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 4.9,
+    "z": 7.0,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.9,
+        7.0
+      ]
+    }
+  },
+  {
+    "y": 4.9,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.9,
+        8.3
+      ]
+    }
+  },
+  {
+    "y": 4.9,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        4.9,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 5.0,
+    "z": 7.0,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        5.0,
+        7.0
+      ]
+    }
+  },
+  {
+    "y": 5.0,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        5.0,
+        8.3
+      ]
+    }
+  },
+  {
+    "y": 5.0,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        5.0,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 5.1,
+    "z": 7.0,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR",
+      "material": "interior.002",
+      "distance": 0.33786,
+      "point": [
+        0.21786,
+        5.1,
+        7.0
+      ]
+    }
+  },
+  {
+    "y": 5.1,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR",
+      "material": "interior.002",
+      "distance": 0.33786,
+      "point": [
+        0.21786,
+        5.1,
+        8.3
+      ]
+    }
+  },
+  {
+    "y": 5.1,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        5.1,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 5.2,
+    "z": 7.0,
+    "hit": null
+  },
+  {
+    "y": 5.2,
+    "z": 8.3,
+    "hit": null
+  },
+  {
+    "y": 5.2,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        5.2,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 5.3,
+    "z": 7.0,
+    "hit": null
+  },
+  {
+    "y": 5.3,
+    "z": 8.3,
+    "hit": null
+  },
+  {
+    "y": 5.3,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        5.3,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 5.4,
+    "z": 7.0,
+    "hit": null
+  },
+  {
+    "y": 5.4,
+    "z": 8.3,
+    "hit": null
+  },
+  {
+    "y": 5.4,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        5.4,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 5.5,
+    "z": 7.0,
+    "hit": null
+  },
+  {
+    "y": 5.5,
+    "z": 8.3,
+    "hit": null
+  },
+  {
+    "y": 5.5,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        5.5,
+        8.5
+      ]
+    }
+  },
+  {
+    "y": 5.6,
+    "z": 7.0,
+    "hit": null
+  },
+  {
+    "y": 5.6,
+    "z": 8.3,
+    "hit": null
+  },
+  {
+    "y": 5.6,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.25812,
+      "point": [
+        0.13812,
+        5.6,
+        8.5
+      ]
+    }
+  }
+]

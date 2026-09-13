@@ -1,0 +1,30 @@
+[
+  {
+    "merge_distance": 3e-05,
+    "nonmanifold": 1995,
+    "boundary": 1983,
+    "wire": 0,
+    "faces": 5300
+  },
+  {
+    "merge_distance": 0.0003,
+    "nonmanifold": 1993,
+    "boundary": 1981,
+    "wire": 0,
+    "faces": 5300
+  },
+  {
+    "merge_distance": 0.001,
+    "nonmanifold": 1315,
+    "boundary": 1302,
+    "wire": 0,
+    "faces": 5298
+  },
+  {
+    "merge_distance": 0.002,
+    "nonmanifold": 321,
+    "boundary": 307,
+    "wire": 0,
+    "faces": 5296
+  }
+]

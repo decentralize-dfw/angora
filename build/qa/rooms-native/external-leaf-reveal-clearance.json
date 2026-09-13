@@ -1,0 +1,26 @@
+[
+  {
+    "object": "F0 | KAT 0$DUVAR KAPLAMA",
+    "cut_faces": 22
+  },
+  {
+    "object": "F0 | KAT 0$DUVAR",
+    "cut_faces": 47
+  },
+  {
+    "object": "F2 | KAT 2$DUVAR",
+    "cut_faces": 57
+  },
+  {
+    "object": "F2 | KAT 2$DUVAR KAPLAMA",
+    "cut_faces": 0
+  },
+  {
+    "object": "F0 | KAT 0$DUVAR KAPLAMA",
+    "cut_faces": 6
+  },
+  {
+    "object": "F0 | KAT 0$DUVAR",
+    "cut_faces": 11
+  }
+]

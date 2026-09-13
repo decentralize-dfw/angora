@@ -1,0 +1,23 @@
+[
+  {
+    "id": "f3-D11",
+    "clear_width": 0.8204,
+    "leaf_width": 0.8084,
+    "angle": 90,
+    "bottom_gap": 0.008
+  },
+  {
+    "id": "f3-D12",
+    "clear_width": 0.805,
+    "leaf_width": 0.793,
+    "angle": 90,
+    "bottom_gap": 0.008
+  },
+  {
+    "id": "f0-D13",
+    "clear_width": 0.8,
+    "leaf_width": 0.788,
+    "angle": 90,
+    "bottom_gap": 0.008
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "object": "F3 | KAT 3$DUVAR",
+    "cut_faces": 10
+  },
+  {
+    "object": "F3 | KAT 3$DUVAR KAPLAMA",
+    "cut_faces": 3
+  },
+  {
+    "object": "F3 | Attic partition core",
+    "cut_faces": 52
+  }
+]
