@@ -146,6 +146,7 @@ const capScene=()=>{
   const soil=new THREE.Mesh(new THREE.BufferGeometry(),hatch);
   soil.geometry.setAttribute('position',new THREE.BufferAttribute(new Float32Array([0,1.6,0, 1,1.6,0, 0,1.6,1]),3));
   const fill=new THREE.Mesh(new THREE.BufferGeometry(),hatch);
+  fill.name='R42 F0 site section field';
   fill.geometry.setAttribute('position',new THREE.BufferAttribute(new Float32Array([2,1.6,0, 3,1.6,0, 2,1.6,1]),3));
   const wall=new THREE.Mesh(new THREE.BufferGeometry(),new THREE.MeshStandardMaterial({name:'R32 | wall section hatch'}));
   wall.geometry.setAttribute('position',new THREE.BufferAttribute(new Float32Array(9),3));
@@ -153,15 +154,12 @@ const capScene=()=>{
   return scene;
 };
 
-test('createSoilCap keeps every soil face and shows them only at the basement cut',()=>{
+test('createSoilCap drops the rejected full-site field and keeps the true cut face',()=>{
   const soilCap=createSoilCap(capScene());
   assert.ok(soilCap);
   const meshes=[];soilCap.group.traverse(o=>{if(o.isMesh)meshes.push(o);});
-  // two faces in the delivery - the authored earth and the R42 fill closure -
-  // and the fixture carries both, so a cap added later needs no viewer change
-  assert.equal(meshes.length,2);
+  assert.equal(meshes.length,1);
   assert.ok(meshes.every(m=>m.name==='Solid hatched soil cross section'));
-  assert.equal(meshes[0].material,meshes[1].material,'one hatch material for the whole field');
   assert.ok(meshes.every(m=>m.castShadow===false));
   assert.equal(meshes[0].material.side,THREE.DoubleSide);
   soilCap.update(SOIL_CUT_HEIGHT,true);assert.equal(soilCap.group.visible,true);

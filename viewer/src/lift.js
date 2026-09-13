@@ -18,6 +18,7 @@ export const SERVED_FLOORS = [0, 1, 2];
 export const LEAF_NODE = /^Lift_(door_stile|door_rail|door_pull|floral_textured_glass|floral_lead_stem|glass_rose_lead|stained-glass_leaf)\d*$/;
 export const HINGE_X = -1.53, HINGE_Z = -1.33;
 export const CLOSED_ROTATION_Y = Math.PI / 2; // delivered pose 0 = fully open
+export const OUTWARD_OPEN_ROTATION_Y = Math.PI / 2;
 export const DOOR_SWING_S = 1.0;
 export const FLOOR_SEND_LABEL = ['Bodrum katına gönder', 'Giriş katına gönder', '1. kata gönder'];
 const CLIP_WRAP = t => ((t % 46) + 46) % 46;
@@ -79,13 +80,24 @@ export function createLift({groups, clips, clipPlane, fullHeight, shadowsDirty, 
     for (const leaf of leaves) pivot.attach(leaf);
     pivots.set(f, pivot);
   }
-  const setDoor = (f, open) => {const pivot = pivots.get(f); if (pivot) pivot.rotation.y = CLOSED_ROTATION_Y * ((pivot.userData.closedPose ? 0 : 1) - open);};
-  const doorOpen = f => {const pivot = pivots.get(f); return pivot ? (pivot.userData.closedPose ? 0 : 1) - pivot.rotation.y / CLOSED_ROTATION_Y : 0;};
+  const setDoor = (f, open) => {
+    const pivot = pivots.get(f); if (!pivot) return;
+    pivot.rotation.y = pivot.userData.closedPose
+      ? OUTWARD_OPEN_ROTATION_Y * open
+      : CLOSED_ROTATION_Y * (1 - open);
+  };
+  const doorOpen = f => {
+    const pivot = pivots.get(f); if (!pivot) return 0;
+    return pivot.userData.closedPose
+      ? pivot.rotation.y / OUTWARD_OPEN_ROTATION_Y
+      : 1 - pivot.rotation.y / CLOSED_ROTATION_Y;
+  };
 
-  // Delivered state is floor 0 with every door open; make it coherent now.
+  // Landing doors stay shut until the user calls the lift. Closed-pose leaves
+  // then swing toward the landing, away from the cabin interior.
   let floor = 0, trip = null, walkActive = false, walkFloor = null;
   scrub(stops.get(0));
-  for (const f of SERVED_FLOORS) setDoor(f, f === 0 ? 1 : 0);
+  for (const f of SERVED_FLOORS) setDoor(f, 0);
 
   const served = f => Math.min(f ?? 0, SERVED_FLOORS.at(-1));
 
@@ -101,7 +113,7 @@ export function createLift({groups, clips, clipPlane, fullHeight, shadowsDirty, 
       if (f === null || (f === floor && !trip)) return;
       trip = null; floor = f;
       scrub(stops.get(f));
-      for (const g of SERVED_FLOORS) setDoor(g, g === f ? 1 : 0);
+      for (const g of SERVED_FLOORS) setDoor(g, 0);
       shadowsDirty();
     },
     // The clip may only run when nothing is cut: the walk sets the section
@@ -140,7 +152,7 @@ export function createLift({groups, clips, clipPlane, fullHeight, shadowsDirty, 
       const f = trip.phase === 'open' ? trip.to : trip.from;
       trip = null; floor = f;
       scrub(stops.get(f));
-      for (const g of SERVED_FLOORS) setDoor(g, g === f ? 1 : 0);
+      for (const g of SERVED_FLOORS) setDoor(g, 0);
       shadowsDirty();
     },
     setWalkActive(active) {walkActive = active;},

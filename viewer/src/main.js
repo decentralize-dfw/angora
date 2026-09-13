@@ -320,6 +320,7 @@ function enterWalk(roomId) {
   flight.cancel();panel('',false);const station=walk.enter(roomId);selected='f'+station.floor_index;updateRoomUI(station);
   lighting.interior(station.floor_index,station.position);
   controls.enabled=false;clip.constant=fullHeight;earthClip.constant=fullHeight;transition=null;lighting.frame('building');massing?.set('building');
+  lighting.setWalkInterior(true);
   // after the section plane is raised, or canRun() reads the previous cut
   lift?.setWalkActive(true);lift?.setWalkFloor(station.floor_index);refreshLiftControl();
   $('#app').dataset.walk='true';$('.camera-tools').hidden=true;$('#walk-tools').hidden=false;$('#enter-walk').hidden=true;
@@ -332,6 +333,7 @@ function exitWalk(reselect = true) {
   pendingRoomJump.cancel();
   if(!walk?.active)return;
   walk.leave();controls.enabled=true;$('#app').dataset.walk='false';
+  lighting.setWalkInterior(false);
   lighting.interior(null,null);
   lift?.setWalkActive(false);lift?.cancel();refreshLiftControl();
   $('.camera-tools').hidden=false;$('#walk-tools').hidden=true;$('#enter-walk').hidden=false;

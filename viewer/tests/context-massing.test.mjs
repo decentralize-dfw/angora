@@ -28,6 +28,15 @@ test('Materials that differ only in their export name collapse onto one instance
   assert.notEqual(third.material,first.material,'the surface that really differs is left alone');
 });
 
+test('Equal-colour ceilings and walls keep distinct semantic materials',()=>{
+  const root=new THREE.Group();
+  const ceiling=new THREE.MeshStandardMaterial({name:'ceiling.003',color:0xffffff});
+  const wall=new THREE.MeshStandardMaterial({name:'interior.003',color:0xffffff});
+  const a=mesh('ceiling plane',ceiling),b=mesh('wall plane',wall);root.add(a,b);
+  assert.equal(mergeEqualMaterials(root),0);
+  assert.notEqual(a.material,b.material);
+});
+
 test('Two materials that share a texture slot by value but not by image stay apart',()=>{
   const shared=new THREE.Texture();
   const other=new THREE.Texture();

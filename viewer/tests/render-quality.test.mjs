@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import {renderPixelRatio,fitDepthRange} from '../src/render-quality.js';
-import {fitContextBounds,prepareMaterialResponse,materialFamily} from '../src/material-response.js';
+import {fitContextBounds,prepareMaterialResponse,materialFamily,setInteriorMode} from '../src/material-response.js';
 import {smoothGroundNormals} from '../src/context-surfaces.js';
 import {batchContext} from '../src/context-batch.js';
 
@@ -73,15 +73,51 @@ test('Ground smoothing preserves positions/UVs and joins duplicated seams',()=>{
 });
 
 test('Numbered Blender plaster and ceilings retain neutral smooth finishes',()=>{
-  for(const [name,family,intensity] of [['interior.002','plaster',.55],['ceiling.003','soffit',1]]){
+  for(const [name,family,intensity] of [['interior.002','plaster',.55],['ceiling.003','soffit',0]]){
     const normal=new THREE.Texture(),bump=new THREE.Texture();
-    const material=new THREE.MeshStandardMaterial({name,normalMap:normal,bumpMap:bump});
+    const map=new THREE.Texture();
+    const material=new THREE.MeshStandardMaterial({name,normalMap:normal,bumpMap:bump,map});
     assert.equal(materialFamily(name),family);
     prepareMaterialResponse(material);
     assert.equal(material.normalMap,null);assert.equal(material.bumpMap,null);
     assert.equal(material.envMapIntensity,intensity);
+    if(family==='soffit'){
+      assert.equal(material.map,null);
+      assert.equal(material.vertexColors,false);
+      assert.ok(Math.abs(material.color.r-.94)<1e-8&&Math.abs(material.color.g-.94)<1e-8&&Math.abs(material.color.b-.94)<1e-8);
+    }
   }
   const normal=new THREE.Texture();
   const wood=new THREE.MeshStandardMaterial({name:'wood_honey.003',normalMap:normal});
   prepareMaterialResponse(wood);assert.equal(wood.normalMap,normal);
+});
+
+test('The exterior roof keeps clay tiles while its attic-facing side compiles white',()=>{
+  const roof=new THREE.MeshStandardMaterial({name:'roof.003'});
+  prepareMaterialResponse(roof);
+  const shader={fragmentShader:'#include <roughnessmap_fragment>\n#include <opaque_fragment>'};
+  roof.onBeforeCompile(shader,null);
+  assert.match(shader.fragmentShader,/!gl_FrontFacing/);
+  assert.match(shader.fragmentShader,/vec3\(0\.94\)/);
+});
+
+test('Walk mode gives the roof shell a white ceiling finish and restores exterior tiles',()=>{
+  const map=new THREE.Texture(),normalMap=new THREE.Texture(),bumpMap=new THREE.Texture();
+  const roof=new THREE.MeshStandardMaterial({name:'roof.003',color:0x9b4e2d,map,normalMap,bumpMap,envMapIntensity:.65});
+  prepareMaterialResponse(roof);
+  const exterior=roof.color.clone(),preparedNormal=roof.normalMap;
+  setInteriorMode(roof,true);
+  assert.equal(roof.map,null);assert.equal(roof.normalMap,null);assert.equal(roof.bumpMap,null);
+  assert.equal(roof.envMapIntensity,0);assert.equal(roof.vertexColors,false);
+  assert.ok(Math.abs(roof.color.r-.94)<1e-8&&Math.abs(roof.color.g-.94)<1e-8&&Math.abs(roof.color.b-.94)<1e-8);
+  setInteriorMode(roof,false);
+  assert.ok(roof.color.equals(exterior));assert.equal(roof.map,map);assert.equal(roof.normalMap,preparedNormal);
+  assert.equal(roof.bumpMap,bumpMap);assert.equal(roof.envMapIntensity,.65);
+});
+
+test('Walk mode also neutralizes the dedicated sloped-ceiling lining',()=>{
+  const ceiling=new THREE.MeshStandardMaterial({name:'ceiling.003',color:0x809060,vertexColors:true});
+  prepareMaterialResponse(ceiling);setInteriorMode(ceiling,true);
+  assert.equal(ceiling.vertexColors,false);assert.equal(ceiling.envMapIntensity,0);
+  assert.ok(Math.abs(ceiling.color.r-.94)<1e-8&&Math.abs(ceiling.color.g-.94)<1e-8&&Math.abs(ceiling.color.b-.94)<1e-8);
 });

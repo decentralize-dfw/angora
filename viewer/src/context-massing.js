@@ -24,14 +24,21 @@ const VEHICLE_NODE = /^R35 \| Garage vehicle(\s|$)/;
 export const authoredNodeName = (name = '') => name.replace(/_/g, ' ').replace(/\s+/g, ' ').trim();
 
 const textureId = value => (value?.isTexture ? value.uuid : value === undefined ? '-' : String(value));
+const semanticMaterialClass = (name='') => {
+  const base=name.replace(/\.\d{3}$/,'');
+  if(/^ceiling$/i.test(base))return 'ceiling';
+  if(/^interior$/i.test(base))return 'interior';
+  if(/clay tile|^roof$|green tiles/i.test(base))return 'roof';
+  return '';
+};
 
 // Two materials are the same material when every value that reaches a shader
-// matches. Names are deliberately excluded: the export splits one authored
-// surface across several numbered copies, and those are exactly the ones worth
-// collapsing.
+// matches. Numbered copies still collapse, but architectural roles remain
+// distinct: ceiling.003 and interior.003 can share the same RGB while needing
+// different response indoors.
 export function materialSignature(material) {
   return JSON.stringify([
-    material.type, material.color?.getHex(), material.roughness, material.metalness,
+    material.type, semanticMaterialClass(material.name), material.color?.getHex(), material.roughness, material.metalness,
     material.emissive?.getHex(), material.emissiveIntensity, material.opacity, material.transparent,
     material.alphaTest, material.side, material.flatShading, material.vertexColors, material.transmission,
     material.clearcoat, material.clearcoatRoughness, material.ior, material.sheen, material.specularIntensity,

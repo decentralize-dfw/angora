@@ -163,14 +163,18 @@ function rig(closedPose=false){
     shadowsDirty:()=>{shadowCalls++;},onSettled:()=>{}});
   return {lift,groups,clipPlane,cabin,shadows:()=>shadowCalls};
 }
-test('Closed native leaf exports use the correct relative hinge offset',()=>{
+test('Closed native leaf exports stay shut, then open outward onto the landing',()=>{
   const {lift,groups}=rig(true);
-  assert.deepEqual(lift.snapshot().doors,[1,0,0]);
+  assert.deepEqual(lift.snapshot().doors,[0,0,0]);
   for(const f of SERVED_FLOORS){
     const pivot=groups.get('level-'+f).children.find(o=>o.name.startsWith('Lift landing door pivot'));
-    assert.ok(Math.abs(pivot.rotation.y-(f===0?-Math.PI/2:0))<1e-8);
+    assert.ok(Math.abs(pivot.rotation.y)<1e-8);
   }
-  lift.park('f2');assert.deepEqual(lift.snapshot().doors,[0,0,1]);
+  lift.setWalkActive(true);lift.setWalkFloor(1);assert.equal(lift.run(0),true);
+  let time=0;while(lift.update(time)&&time<60000)time+=100;
+  assert.ok(time<60000);
+  assert.deepEqual(lift.snapshot().doors,[0,1,0]);
+  assert.ok(Math.abs(doorAngle(groups,1)-Math.PI/2)<1e-8,'arrival leaf swings outward');
 });
 const doorAngle=(groups,f)=>{
   let pivot=null;
@@ -178,16 +182,13 @@ const doorAngle=(groups,f)=>{
   return pivot.rotation.y;
 };
 
-test('Exactly one landing door is open in every parked state',()=>{
+test('Every landing door is closed in parked plan and section states',()=>{
   const {lift,groups}=rig();
-  // construction normalises the delivered all-open state to floor 0
-  assert.equal(doorAngle(groups,0),0);
-  assert.equal(doorAngle(groups,1),CLOSED_ROTATION_Y);
-  assert.equal(doorAngle(groups,2),CLOSED_ROTATION_Y);
+  for(const f of SERVED_FLOORS)assert.equal(doorAngle(groups,f),CLOSED_ROTATION_Y);
   for(const [view,floor] of [['f1',1],['f2',2],['f0',0],['f3',2]]){
     lift.park(view);
     assert.equal(lift.floor,floor,view);
-    for(const f of SERVED_FLOORS)assert.equal(doorAngle(groups,f),f===floor?0:CLOSED_ROTATION_Y,`${view} door ${f}`);
+    for(const f of SERVED_FLOORS)assert.equal(doorAngle(groups,f),CLOSED_ROTATION_Y,`${view} door ${f}`);
   }
   for(const view of ['building','neighborhood','region']){
     lift.park(view);
@@ -253,7 +254,7 @@ test('cancel() snaps the rig back to a coherent parked state mid-trip',()=>{
   lift.cancel();
   assert.equal(lift.travelling,false);
   assert.equal(cabin.position.y,0,'cancelled trip returns to its origin floor');
-  for(const f of SERVED_FLOORS)assert.equal(doorAngle(groups,f),f===0?0:CLOSED_ROTATION_Y);
+  for(const f of SERVED_FLOORS)assert.equal(doorAngle(groups,f),CLOSED_ROTATION_Y);
 });
 
 test('The manifest records the playback as integrated with the measured schedule',()=>{
