@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import {renderPixelRatio,fitDepthRange} from '../src/render-quality.js';
-import {fitContextBounds,prepareMaterialResponse} from '../src/material-response.js';
+import {fitContextBounds,prepareMaterialResponse,materialFamily} from '../src/material-response.js';
 import {smoothGroundNormals} from '../src/context-surfaces.js';
 import {batchContext} from '../src/context-batch.js';
 
@@ -70,4 +70,18 @@ test('Ground smoothing preserves positions/UVs and joins duplicated seams',()=>{
   assert.deepEqual([...g.attributes.normal.array.slice(6,9)],[...g.attributes.normal.array.slice(9,12)]);
   const floor=new THREE.MeshPhysicalMaterial({name:'wood_floor',clearcoat:.25,clearcoatRoughness:.21});
   prepareMaterialResponse(floor);assert.ok(floor.clearcoat<=.08);assert.ok(floor.clearcoatRoughness>=.6);
+});
+
+test('Numbered Blender plaster and ceilings retain neutral smooth finishes',()=>{
+  for(const [name,family,intensity] of [['interior.002','plaster',.55],['ceiling.003','soffit',.2]]){
+    const normal=new THREE.Texture(),bump=new THREE.Texture();
+    const material=new THREE.MeshStandardMaterial({name,normalMap:normal,bumpMap:bump});
+    assert.equal(materialFamily(name),family);
+    prepareMaterialResponse(material);
+    assert.equal(material.normalMap,null);assert.equal(material.bumpMap,null);
+    assert.equal(material.envMapIntensity,intensity);
+  }
+  const normal=new THREE.Texture();
+  const wood=new THREE.MeshStandardMaterial({name:'wood_honey.003',normalMap:normal});
+  prepareMaterialResponse(wood);assert.equal(wood.normalMap,normal);
 });

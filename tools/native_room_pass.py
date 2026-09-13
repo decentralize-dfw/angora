@@ -130,6 +130,10 @@ def ray_info(origin,direction,distance):
 def passage_audit(label):
     result=[]
     for d in DOORS:
+        # The user confirmed this plan-only bathroom was never built.
+        # An empty former opening must not be counted as a passing door.
+        if d['id']=='f0-D13' and SC.get('user_review_basement_bath_removed'):
+            continue
         h,j,n,u,v=door_basis(d);width=d.get('clear_width') or d.get('leaf_width') or d['frame_width']
         centre=Vector((d['frame_centre'][0],-d['frame_centre'][1],d['sill_y']))
         row={'id':d['id'],'angle':90 if SC.get('room_pass_doors_open') else d['swing_deg'],'rays':[],'floor':[]}

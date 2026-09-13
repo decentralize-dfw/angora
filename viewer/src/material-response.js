@@ -3,6 +3,7 @@ import * as THREE from 'three';
 // Presentation response only: source geometry and calibrated dimensions stay
 // untouched. Keep the baked maps, but avoid amplifying their micro-relief.
 export function materialFamily(name='') {
+  name=name.replace(/\.\d{3}$/,'');
   if (/clay tile|^roof$|green tiles/i.test(name)) return 'roof';
   // Glass and mirrors must never reach a roughness floor: 'Lift glass leaf'
   // would otherwise match the landscape family through 'leaf' and pick up a
@@ -56,7 +57,9 @@ export function prepareMaterialResponse(material, {context=false}={}) {
     material.normalScale?.multiplyScalar(.25);
   } else if (family==='plaster') {
     material.envMapIntensity=.55;
+    material.normalMap=null;material.bumpMap=null;
   } else if (family==='soffit') {
+    material.normalMap=null;material.bumpMap=null;
     // A ceiling's normal points at the floor, so of the probe it sees the
     // ground hemisphere and nothing else - .55 of the settlement's olive is
     // still the settlement's olive, which is what a delivered interior frame
