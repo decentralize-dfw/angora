@@ -16,6 +16,7 @@ import { configureCameraControls } from './camera.js';
 import { PendingAction } from './pending-action.js';
 import {fitContextBounds} from './material-response.js';
 import {createSiteContext} from './site-context.js';
+import {createRegionMap} from './region-map.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
 import {prepareContextSurfaces} from './context-surfaces.js';
 import {batchContext} from './context-batch.js';
@@ -40,6 +41,7 @@ const daylightURL = new URL((pages ? 'assets/lighting/' : 'lighting/')+'kloofend
 const titles = {region:'Bölge', neighborhood:'Yakın çevre', building:'Villa 21', f0:'Bodrum', f1:'Giriş katı', f2:'1. kat', f3:'Çatı katı'};
 const groups = new Map();
 const pendingRoomJump = new PendingAction();
+let regionMap = null;   // built on first Bölge visit; a map layer, not a scene
 const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
 // The earth cannot follow the sweeping building cut: its authored cap exists
 // at exactly one height, so this plane snaps between "whole" and "basement
@@ -292,8 +294,14 @@ function selectView(id, initial = false) {
   $('#view-title').textContent = titles[id];
   $('#section-label').textContent = id.startsWith('f')
     ? (id==='f3'?'1,30 m kesit':'1,60 m kesit')
-    : id === 'building' ? 'Bahçe · Havuz · Villa' : id==='region'?'Vaziyet planından 3D yerleşim':'Angora Evleri · Ankara';
+    : id === 'building' ? 'Bahçe · Havuz · Villa' : id==='region'?'Angora Evleri · Beysukent, Ankara':'Angora Evleri · Ankara';
   $('#region-panel').hidden=id!=='region';
+  // The Bölge scale is a north-up map layer; the clouds sweep while the 3D
+  // frame pulls out beneath it, so the model leaves smoothly either way.
+  if (id==='region') {
+    regionMap ??= createRegionMap($('#app'));
+    if (initial) regionMap.show(); else setTimeout(()=>regionMap.show(), 430);
+  } else regionMap?.hide();
   panel('',false);
   if (!ready) return;
   const target = sectionHeight(id, fullHeight);
@@ -323,6 +331,7 @@ function enterWalk(roomId) {
   lighting.setWalkInterior(true);
   // after the section plane is raised, or canRun() reads the previous cut
   lift?.setWalkActive(true);lift?.setWalkFloor(station.floor_index);refreshLiftControl();
+  regionMap?.hide();
   $('#app').dataset.walk='true';$('.camera-tools').hidden=true;$('#walk-tools').hidden=false;$('#enter-walk').hidden=true;
   $('#walk-room').value=station.room_id;
   document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===selected));
@@ -456,6 +465,11 @@ async function loadModel() {
         const planes=planting?[]:building||id==='garden'?[clip]
           :(Array.isArray(o.material)?o.material:[o.material]).some(m=>m?.userData.plotSoil)?[earthClip]:[];
         lighting.prepareMesh(o,{clipped:planes[0]===clip,context:!building});
+        // The neighbourhood is setting, not subject: screen-space occlusion on
+        // the white massing reads as grime in its eaves, so the context sits
+        // outside the AO pass entirely - and outside the villa's section
+        // planes, so changing floor never cuts the neighbours down.
+        if(id==='context')o.userData.aoExcluded=true;
         o.userData.clipPlanes=planes;
         if (planes.length) for (const m of Array.isArray(o.material) ? o.material : [o.material]) {
           m.clippingPlanes = planes; m.side = THREE.DoubleSide;
@@ -607,6 +621,11 @@ function bindInterface() {
   $('#toggle-lights').onclick=()=>{interiorLights=!interiorLights;$('#toggle-lights').setAttribute('aria-pressed',interiorLights);lighting?.setLights(interiorLights);invalidate();};
   $('#lighting-style').onchange=e=>{lighting?.setStyle(e.target.value);rememberState();invalidate();};
   $('#return-villa').onclick=()=>selectView('building');
+  document.querySelectorAll('.region-radius button').forEach(b=>b.onclick=()=>{
+    regionMap ??= createRegionMap($('#app'));
+    regionMap.setRadius(Number(b.dataset.radius));
+    document.querySelectorAll('.region-radius button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  });
   window.addEventListener('keydown',event=>handleEscape(event,{
     panelOpen:Boolean(document.querySelector('.panel:not([hidden])')),closePanel:()=>panel('',false),
     walkActive:walk?.active,immersive:renderer?.xr.isPresenting,exitWalk

@@ -1,0 +1,69 @@
+{
+  "generated_for": "R44 front garden",
+  "marks": {
+    "1": {
+      "screens": [
+        {
+          "name": "Garden east | R44 thuja hedge continuation 1",
+          "z": 1.95,
+          "base_y": 2.75
+        },
+        {
+          "name": "Garden east | R44 thuja hedge continuation 2",
+          "z": 0.8,
+          "base_y": 2.02
+        },
+        {
+          "name": "Garden east | R44 thuja hedge continuation 3",
+          "z": -0.35,
+          "base_y": 2.02
+        },
+        {
+          "name": "Garden east | R44 thuja hedge continuation 4",
+          "z": -1.5,
+          "base_y": 2.02
+        },
+        {
+          "name": "Garden east | R44 thuja hedge continuation 5",
+          "z": -2.65,
+          "base_y": 0.98
+        },
+        {
+          "name": "Garden east | R44 thuja hedge continuation 6",
+          "z": -3.8,
+          "base_y": 0.98
+        },
+        {
+          "name": "Garden east | R44 thuja hedge continuation 7",
+          "z": -4.95,
+          "base_y": 0.98
+        }
+      ]
+    },
+    "2": {
+      "node": "Front garden | R44 court link band",
+      "triangles": 20
+    },
+    "3": {
+      "node": "Front garden | R44 forecourt wedge paving",
+      "triangles": 156,
+      "tree_bed": {
+        "z0": 7,
+        "z1": 9.79,
+        "inset": 0.12,
+        "drop": 0.06,
+        "westX": 1.8
+      },
+      "bed_triangles": 20
+    },
+    "4": {
+      "node": "Front garden | R44 facade walk terrace",
+      "triangles": 126,
+      "area_m2": 32.5,
+      "top": 3.08
+    }
+  },
+  "grass_blades_removed": 21494,
+  "asset_bytes": 8304216,
+  "asset_triangles": 560724
+}

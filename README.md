@@ -230,6 +230,41 @@ R44 dört isteği işler; araçlar `tools/*_r44.mjs` altındadır ve her biri ke
   (`build/villa-merge-r44.json`). Kat başına dosya kalmadığından eski
   `level-*.glb`/`envelope.glb` teslimden çıkarıldı; viewer üç parça bekler.
 
+### R44 ikinci tur — arayüz, cephe, ön bahçe ve bölge haritası
+
+- **Arayüz.** Tek cam dili: Jura (repo içinde woff2), beyaz 0,40 opaklık +
+  8 px blur, hap geometrisi. Üst orta ölçek seçici, sağ orta kamera rayı,
+  alt orta kat/keşif dock'u; mobilde dock iki satıra iner, paneller alt
+  sayfa olur; yürüyüşte üst eylemler gizlenir. Ölçülendirme katmanı
+  `interface-quality.css`'te kaldı.
+- **Cephe beyazları.** R43 kalıntısı iki kural (parapet başlıkları ve 10 cm
+  toleransın beyaza çevirdiği ince çatı katı duvar dışları) yön sondalı yüz
+  yargısıyla değiştirildi: yüzeyin iki yanı katın oda sınırında sınanır,
+  yalnız içeride kalan yüz `interior` olur; tek deri beyazlar 6 mm `stucco`
+  dış deri kazanır. Çatı sırtındaki ince kaynak yarıkları iç dikiş kapaklarıyla
+  kapatıldı (`build/roof-slit-caps-r44.json`). Komşular AO ve kesit
+  düzlemlerinin tamamen dışında (`aoExcluded`).
+- **Ön bahçe** (`tools/fix_front_garden_r44.mjs`, kayıt
+  `build/front-garden-r44.json`): (1) doğu istinat duvarı boyunca mazı
+  hattı 7 ekranla sürdürüldü, her ekran kendi teras kotunda; (2) garaj
+  yolu ile doğu merdiven sahanlığı arasındaki 30 cm boşluk sahanlık
+  kotunda taş bantla kapatıldı; (3) giriş yolu ile diyagonal garaj yolu
+  arasındaki çukur çim kaması iki kenara mükemmel oturan regle yüzeyle
+  taşlandı — sokak ucunda fotoğraftaki gibi bordürlü ağaç yatağı bırakıldı;
+  (4) ön çit mazı sırası ile cephe arasındaki şerit, fotoğraflardaki gibi
+  giriş kotunda (3,08) düz taş teras oldu ve giriş yoluna bağlandı. Yeni
+  taşların altındaki 21.494 çim yaprağı üçgeni kaldırıldı; araç arşivden
+  (`build/garden-pre-frontfix-r44.glb`) yeniden çalıştırılabilir.
+- **Bölge haritası.** "Bölge" ölçeği artık kuzeyi yukarı bakan bir harita
+  katmanı: plan verisi teslimin kendisinden çıkarılır
+  (`tools/extract_region_plan_r44.mjs` → `viewer/src/region-plan.json`;
+  yollar context'in CAD asfaltından rasterlenir, komşular B-aile
+  zarflarıdır, villa kendi taban izidir). 1 km / 2 km yarıçap seçilebilir,
+  geçişler bulut süpürmesiyle ve tek easing ile akar. Uzak yer imleri
+  yaklaşık işaretlidir; **`uzakolcek.html` hiçbir repoda bulunamadı** —
+  eklendiğinde `viewer/src/region-map.js` içindeki `LANDMARKS` onun
+  verisiyle değiştirilmelidir.
+
 ## Çalışma durumu
 
 DWG'den katmanlı Blender sahnesi yeniden kuruldu. **Çalışma / kontrol sürümüdür; bitmiş satış demosu veya birebir doğrulanmış nihai model değildir.** Kaynak çizgileri ve üretilen yüzeyler ayrı tutulur. Fotoğrafa göre eklenen parçalar kendi kanıt durumlarını taşır.
