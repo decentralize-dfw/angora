@@ -1,0 +1,22 @@
+{
+  "generated_for": "R44",
+  "cut_height_m": 1.6,
+  "drawn_at_m": 1.602,
+  "seal_drawn_at_m": 1.5995,
+  "cell_m": 0.1,
+  "fill_area_m2": 43.47,
+  "seal_area_m2": 1.64,
+  "fill_panels": 24,
+  "seal_panels": 16,
+  "skirt_faces": 223,
+  "rejected_full_site_field_removed": true,
+  "property": {
+    "x": [
+      -9.48989315032959,
+      10.970000457763671
+    ],
+    "front_z": 10.18600025177002
+  },
+  "cap_asset_bytes": 86660,
+  "cap_asset_triangles": 3779
+}

@@ -11,7 +11,7 @@ test('Native model, navigation and sections come from the same saved scene',{ski
 });
 test('All current room starts and retained open door passages are navigable',{skip:!manifest.native_delivery},()=>{
   const data=read('build/web/full/navigation.json'),surface=new WalkSurface(data);
-  assert.equal(data.stations.length,27);
+  assert.equal(data.stations.length,28);  // 27 interior + the R44 balcony station
   assert.ok(!data.stations.some(s=>s.room_id==='f0-B10'),'removed bathroom has no tour station');
   for(const station of data.stations)assert.ok(surface.sample(station.position[0],station.position[2],station.position[1]-data.eye_height_m),station.room_id);
   const doors=read('build/qa/roads-native/door-regression.json').filter(d=>d.id!=='f0-D13');assert.equal(doors.length,12);

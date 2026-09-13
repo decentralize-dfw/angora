@@ -34,7 +34,9 @@ const readFloats=(glb,bin,accessorIndex)=>{
   return out;
 };
 
-const level0=glbJson('level-0.glb');
+// R44 merged the storeys into villa.glb; the clip, the panel and every
+// landing leaf now travel in the one building file
+const level0=glbJson('villa.glb');
 
 test('The delivered clip is the three-stop travel the playback is built on',()=>{
   assert.equal(level0.json.animations?.length,1);
@@ -106,8 +108,8 @@ test('All six ordered trips route as clean single-direction moves',()=>{
 
 test('The delivery carries six closed landing-door parts per served floor',()=>{
   const sanitize=s=>s.replace(/\s/g,'_').replace(/[\[\]./:]/g,'');
-  for(const [file,expected] of [['level-0.glb',6],['level-1.glb',6],['level-2.glb',6],
-      ['level-3.glb',0],['envelope.glb',0],['garden.glb',0],['section-caps.glb',0]]){
+  // three served floors x six parts, all in the merged building file
+  for(const [file,expected] of [['villa.glb',18],['garden.glb',0],['section-caps.glb',0]]){
     const {json}=glbJson(file);
     const leaves=(json.nodes??[]).filter(n=>LEAF_NODE.test(sanitize(n.name??'')));
     assert.equal(leaves.length,expected,file);
@@ -142,20 +144,23 @@ test('The repaired car panel stands inside the cabin, no longer at the origin',(
 // A miniature but faithful rig: real cabin node, real leaf placement, driven
 // through the public surface exactly as main.js drives it.
 function rig(closedPose=false){
+  // one merged villa group, the way R44 delivers it: cabin and all three
+  // floors' leaves under a single root, floors told apart by height
   const groups=new Map();
   const cabin=new THREE.Group();cabin.name=CABIN_NODE;
-  const level0Group=new THREE.Group();level0Group.add(cabin);
-  groups.set('level-0',level0Group);
+  const villa=new THREE.Group();villa.add(cabin);
+  groups.set('villa',villa);
   for(const f of SERVED_FLOORS){
-    const group=f===0?level0Group:new THREE.Group();
-    if(f!==0)groups.set('level-'+f,group);
     const leaf=new THREE.Object3D();
     leaf.name='Lift_door_stile'+(f===0?'':String(f).padStart(3,'0'));
     // delivered open pose: leaf swung -90 about the hinge line
     leaf.position.set(HINGE_X,floorDatums[f]+1,HINGE_Z-0.99);
     leaf.quaternion.setFromAxisAngle(new THREE.Vector3(0,1,0),-Math.PI/2);
     if(closedPose){leaf.position.set(HINGE_X-.99,floorDatums[f]+1,HINGE_Z);leaf.quaternion.identity();leaf.userData.lift_leaf_closed_pose=true;}
-    group.add(leaf);
+    // an Object3D has no geometry; give the floor detector its true bounds
+    const marker=new THREE.Mesh(new THREE.BoxGeometry(0.01,0.01,0.01));
+    marker.position.set(0,0,0);leaf.add(marker);
+    villa.add(leaf);
   }
   const clipPlane={constant:16.42};
   let shadowCalls=0;
@@ -167,7 +172,8 @@ test('Closed native leaf exports stay shut, then open outward onto the landing',
   const {lift,groups}=rig(true);
   assert.deepEqual(lift.snapshot().doors,[0,0,0]);
   for(const f of SERVED_FLOORS){
-    const pivot=groups.get('level-'+f).children.find(o=>o.name.startsWith('Lift landing door pivot'));
+    let pivot=null;
+    groups.get('villa').traverse(o=>{if(o.name==='Lift landing door pivot | F'+f)pivot=o;});
     assert.ok(Math.abs(pivot.rotation.y)<1e-8);
   }
   lift.setWalkActive(true);lift.setWalkFloor(1);assert.equal(lift.run(0),true);
@@ -261,7 +267,7 @@ test('The manifest records the playback as integrated with the measured schedule
   const manifest=JSON.parse(fs.readFileSync(delivered('manifest.json')));
   assert.deepEqual(manifest.lift_served_floor_indices,SERVED_FLOORS);
   const native=manifest.native_lift_animation;
-  assert.equal(native.asset,'level-0.glb');
+  assert.equal(native.asset,'villa.glb');
   assert.equal(native.animations,1);
   assert.equal(native.viewer_playback_integrated,true);
   assert.equal(native.clip_name,'Animation');

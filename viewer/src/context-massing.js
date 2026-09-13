@@ -96,10 +96,23 @@ export function abstractVehicle(root) {
 // split, which then still sees the original site materials.
 export const PLOT_SOIL_NODE = /^R32 \| Continuous local soil volume\b/;
 
+// R44: the road repair renamed the soil node's MESH to `Road crossing fitted
+// closed soil`, and a multi-primitive mesh reaches here as child Meshes named
+// after the mesh under a Group named after the node - so testing the Mesh's
+// own name alone silently stopped matching anything, and the earth stood
+// uncut through the basement plane. The node's authored name is still the
+// authority; it is just read off the object or any ancestor, whichever
+// carries it.
+const inPlotSoilNode = object => {
+  for (let o = object; o; o = o.parent)
+    if (PLOT_SOIL_NODE.test(authoredNodeName(o.name))) return true;
+  return false;
+};
+
 export function splitContextSoil(root) {
   const clones = new Map();
   root.traverse(object => {
-    if (!object.isMesh || !PLOT_SOIL_NODE.test(authoredNodeName(object.name))) return;
+    if (!object.isMesh || !inPlotSoilNode(object)) return;
     const swap = material => {
       if (!material) return material;
       let clone = clones.get(material);

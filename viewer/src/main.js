@@ -56,7 +56,7 @@ function message(text, error = false) {
   status.hidden = false; $('#load-message').textContent = text;
   $('#retry').hidden = !error; status.classList.toggle('error', error);
 }
-// The scene is about 38 MB in seven files, so a chunk count alone leaves long
+// The scene is about 27 MB in three files, so a chunk count alone leaves long
 // silences mid-download. The share is shown visually and is deliberately kept
 // out of the live region, which would otherwise read out every update.
 function progress(share) {
@@ -353,7 +353,10 @@ async function loadModel() {
     if (!response.ok) throw Error(`Manifest HTTP ${response.status}`);
     const manifest = await response.json();
     assetRevision=manifest.assets?.map(({file,sha256})=>({file,sha256}));
-    if (!manifest.full_scene || manifest.geometry_preclipped || manifest.assets?.length !== 7) throw Error('Whole-scene manifest required');
+    // R44 merged the four storeys and the envelope into one villa part, so a
+    // whole scene is now three files; older seven-part manifests stay refused
+    // the same way partial ones always were.
+    if (!manifest.full_scene || manifest.geometry_preclipped || manifest.assets?.length !== 3) throw Error('Whole-scene manifest required');
     // R42: the whole scene before the first frame. It used to open on the villa
     // alone and stream the garden and the neighbourhood in behind it, which is
     // quicker to something but slower to the thing that was asked for - the
@@ -361,7 +364,7 @@ async function loadModel() {
     // the street. "hepsini yükle öyle aç." Everything is downloaded and staged
     // before the bar goes, and the order still reveals the building outside-in
     // for whoever is watching the count.
-    const PHASE_ORDER=['envelope','level-1','level-0','level-2','level-3','garden','context'];
+    const PHASE_ORDER=['villa','garden','context'];
     const queue=manifest.assets.slice().sort((a,b)=>PHASE_ORDER.indexOf(a.id)-PHASE_ORDER.indexOf(b.id));
     let completed = 0;
     const totalBytes = manifest.assets.reduce((sum, asset) => sum + (asset.bytes || 0), 0) + (manifest.section_cap_asset?.bytes || 0);
@@ -463,8 +466,7 @@ async function loadModel() {
       lighting.loadEnvironment(daylightURL.href).catch(error=>console.warn('HDR unavailable; atmospheric daylight retained',error)), loadCaps()]);
     const failure = results.find(r => r.status === 'rejected'); if (failure) throw failure.reason;
     for (const id of staged.keys()) stageGroup(id);
-    buildingBox = new THREE.Box3();
-    for (const id of ['level-0', 'level-1', 'level-2', 'level-3', 'envelope']) buildingBox.union(new THREE.Box3().setFromObject(groups.get(id)));
+    buildingBox = new THREE.Box3().setFromObject(groups.get('villa'));
     // Keep the entrance, pool terrace and basement garden in the building frame.
     gardenBox = new THREE.Box3(new THREE.Vector3(-10.2, -4, -29.1), new THREE.Vector3(12.5, 3.4, 11));
     contextBox=buildingBox.clone();
@@ -498,7 +500,7 @@ async function loadModel() {
     roomData=results[3].value;annotations=createAnnotations(roomData,host,enterWalk);scene.add(annotations.group);
     walk = new InteriorWalk(results[4].value,renderer.domElement,invalidate);scene.add(walk.rig);
     lighting.setFixtures(results[4].value.lights);hotspots=createHotspots(host,walk,travelRoom);
-    lift=createLift({groups,clips:stagedClips.get('level-0')??[],clipPlane:clip,fullHeight,
+    lift=createLift({groups,clips:stagedClips.get('villa')??[],clipPlane:clip,fullHeight,
       shadowsDirty:()=>{renderer.shadowMap.needsUpdate=true;},onSettled:()=>refreshLiftControl()});
     refreshLiftControl();
     for(let f=0;f<4;f++) {
