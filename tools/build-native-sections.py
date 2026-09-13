@@ -76,7 +76,12 @@ slices=[]
 for n,old in enumerate(base['slices']):
     if not int(os.environ.get('ANGORA_SECTION_START','0'))<=n<int(os.environ.get('ANGORA_SECTION_END',str(len(base['slices'])))):continue
     checkpoint=SOURCE/('section-slice-'+str(n)+'.json')
-    if checkpoint.exists():slices.append(json.loads(checkpoint.read_text()));continue
+    if checkpoint.exists():
+        record=json.loads(checkpoint.read_text())
+        if os.environ.get('ANGORA_SECTION_REFRESH_FIXED')=='1':
+            record['q'],record['j']=body_section('fixed',old['height'])
+            checkpoint.write_text(json.dumps(record),encoding='utf-8')
+        slices.append(record);continue
     h=old['height'];start=time.monotonic();record=section(h)
     if n>=128:print('WALL',n,h,round(time.monotonic()-start,2),flush=True)
     record['q'],record['j']=body_section('fixed',h)

@@ -197,7 +197,7 @@ export function createLighting(renderer, scene, camera, clip) {
     sun.intensity=(soft?1.55:2.25)*THREE.MathUtils.smoothstep(solar.altitude,-.5,20);
     sun.color.set(0xffbc7b).lerp(new THREE.Color(0xfff5e9),warmth);
     hemisphere.intensity=.08+.42*daylight;
-    scene.environmentIntensity=walkInterior?0:.08+(soft?.85:.65)*daylight;
+    scene.environmentIntensity=.08+(soft?.85:.65)*daylight;
     sun.shadow.radius=soft?2.5:1;sun.shadow.intensity=soft?.82:1;
     horizon.set(0x182734).lerp(new THREE.Color(0xe4e9ed),daylight);
     sky.material.uniforms.sunPosition.value.copy(direction);

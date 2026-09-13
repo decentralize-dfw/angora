@@ -92,24 +92,22 @@ test('Numbered Blender plaster and ceilings retain neutral smooth finishes',()=>
   prepareMaterialResponse(wood);assert.equal(wood.normalMap,normal);
 });
 
-test('The exterior roof keeps clay tiles while its attic-facing side compiles white',()=>{
+test('Clay roof backfaces retain their material with a separate native ceiling',()=>{
   const roof=new THREE.MeshStandardMaterial({name:'roof.003'});
   prepareMaterialResponse(roof);
   const shader={fragmentShader:'#include <roughnessmap_fragment>\n#include <opaque_fragment>'};
   roof.onBeforeCompile(shader,null);
-  assert.match(shader.fragmentShader,/!gl_FrontFacing/);
-  assert.match(shader.fragmentShader,/vec3\(0\.94\)/);
+  assert.doesNotMatch(shader.fragmentShader,/!gl_FrontFacing/);
 });
 
-test('Walk mode gives the roof shell a white ceiling finish and restores exterior tiles',()=>{
+test('Exterior tiles seen through windows retain their finish in walk mode',()=>{
   const map=new THREE.Texture(),normalMap=new THREE.Texture(),bumpMap=new THREE.Texture();
   const roof=new THREE.MeshStandardMaterial({name:'roof.003',color:0x9b4e2d,map,normalMap,bumpMap,envMapIntensity:.65});
   prepareMaterialResponse(roof);
   const exterior=roof.color.clone(),preparedNormal=roof.normalMap;
   setInteriorMode(roof,true);
-  assert.equal(roof.map,null);assert.equal(roof.normalMap,null);assert.equal(roof.bumpMap,null);
-  assert.equal(roof.envMapIntensity,0);assert.equal(roof.vertexColors,false);
-  assert.ok(Math.abs(roof.color.r-.94)<1e-8&&Math.abs(roof.color.g-.94)<1e-8&&Math.abs(roof.color.b-.94)<1e-8);
+  assert.equal(roof.map,map);assert.equal(roof.normalMap,preparedNormal);assert.equal(roof.bumpMap,bumpMap);
+  assert.equal(roof.envMapIntensity,.65);assert.ok(roof.color.equals(exterior));
   setInteriorMode(roof,false);
   assert.ok(roof.color.equals(exterior));assert.equal(roof.map,map);assert.equal(roof.normalMap,preparedNormal);
   assert.equal(roof.bumpMap,bumpMap);assert.equal(roof.envMapIntensity,.65);

@@ -45,17 +45,6 @@ export function prepareMaterialResponse(material, {context=false}={}) {
   if (family==='roof') {
     material.normalScale?.multiplyScalar(context?.18:.3);
     material.envMapIntensity=.65;
-    // The authored roof is a double-sided shell in the attic. Its upper face
-    // keeps the clay-tile response; its lower face is the room ceiling and is
-    // forced to neutral white after lighting so exterior/environment green
-    // can never tint the interior again.
-    const previous=material.onBeforeCompile,previousKey=material.customProgramCacheKey();
-    material.onBeforeCompile=(shader,renderer)=>{
-      previous.call(material,shader,renderer);
-      shader.fragmentShader=shader.fragmentShader.replace('#include <opaque_fragment>',
-        '#include <opaque_fragment>\nif (!gl_FrontFacing) gl_FragColor.rgb = vec3(0.94);');
-    };
-    material.customProgramCacheKey=()=>previousKey+'|white-roof-backface';
     // The eaves trim and the roof plane cross at a very shallow angle where the
     // roof meets a gable, and the trim wins by a hair over a long run - which
     // draws as white shards lying on the tiles. A small depth bias toward the
@@ -105,12 +94,11 @@ export function setMaterialScale(material, view) {
   material.normalScale.copy(state.normal).multiplyScalar(scale);
 }
 
-// In the walk-through the authored roof shell is also the visible sloped
-// ceiling. Keep its clay tiles for the exterior views and give that same shell
-// a neutral, texture-free interior finish while the camera is inside.
+// The native model supplies a separate plaster lining. Exterior clay tiles
+// retain their material in every camera mode, including through windows.
 export function setInteriorMode(material, active) {
   const state=material?.userData?.presentationR27;
-  if(!['roof','soffit'].includes(state?.family))return;
+  if(state?.family!=='soffit')return;
   if(!state.walk)state.walk={
     color:material.color.clone(),map:material.map,normalMap:material.normalMap,
     bumpMap:material.bumpMap,envMapIntensity:material.envMapIntensity,

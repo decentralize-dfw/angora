@@ -134,7 +134,8 @@ test('The wall and roof caps are redundant with the atlas, licensing the decisio
   // ground-floor cut, which is the 1.25 m opening across a 0.160 m wall.
   assert.ok(Math.abs(slice(4.6996).area-(native?14.18948:14.520))<0.05);
   assert.ok(Math.abs(slice(7.9714).area-(native?14.00075:17.812))<0.05);
-  assert.ok(Math.abs(slice(10.7705).area-(native?12.22209:24.487))<0.05);
+  // Restoring the pre-deformation upper walls reduces this cut by 0.11982 m².
+  assert.ok(Math.abs(slice(10.7705).area-(native?12.10227:24.487))<0.05);
   // the soil face, by contrast, exists nowhere in the atlas: no slice at any
   // height reaches even half its 197.89 m2
   for(const s of atlas.slices)assert.ok(s.area<99,`slice at ${s.height} carries ${s.area}`);
