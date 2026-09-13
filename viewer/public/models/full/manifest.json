@@ -1,7 +1,7 @@
 {
   "version": 3,
   "model_revision": "Native interior and roads",
-  "source_native_sha256": "9881ec465fd9eda2ad230bfa361c72968246c302a4ef92e458bc41ff30ef3ff4",
+  "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
   "units": "metres",
   "coordinate_system": "glTF_Y_up",
   "floor_labels": [
@@ -38,7 +38,7 @@
           8.570000171661377
         ]
       ],
-      "source_native_sha256": "9881ec465fd9eda2ad230bfa361c72968246c302a4ef92e458bc41ff30ef3ff4",
+      "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
       "section_elevation_m": null,
       "geometry_simplified": false,
       "evaluated_split_normals_preserved": true,
@@ -68,7 +68,7 @@
           7.099599838256836
         ]
       ],
-      "source_native_sha256": "9881ec465fd9eda2ad230bfa361c72968246c302a4ef92e458bc41ff30ef3ff4",
+      "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
       "section_elevation_m": null,
       "geometry_simplified": false,
       "evaluated_split_normals_preserved": true,
@@ -81,7 +81,7 @@
       "id": "level-2",
       "file": "level-2.glb",
       "bytes": 8591712,
-      "sha256": "9f20f707ec54b0892c8ae67f6920f8e292717f7d787d92544b7ff4303b17e453",
+      "sha256": "c3cd3bccbb5082adfca785792027736a152e8426b0682a7edcc261df0fce43c7",
       "source_objects": 694,
       "exported_mesh_nodes": 694,
       "shared_meshes": 534,
@@ -98,7 +98,7 @@
           10.453055381774902
         ]
       ],
-      "source_native_sha256": "9881ec465fd9eda2ad230bfa361c72968246c302a4ef92e458bc41ff30ef3ff4",
+      "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
       "section_elevation_m": null,
       "geometry_simplified": false,
       "evaluated_split_normals_preserved": true,
@@ -110,12 +110,12 @@
     {
       "id": "level-3",
       "file": "level-3.glb",
-      "bytes": 2709688,
-      "sha256": "540d700eae4f69b660d3bdff1efa264a232018b0b324f0f32b058586cbc15419",
-      "source_objects": 371,
-      "exported_mesh_nodes": 371,
-      "shared_meshes": 360,
-      "triangles": 256280,
+      "bytes": 2809748,
+      "sha256": "006e608420dc11272699b0687ca5cb9a8870ed6b60101de03d36a5f247792c3c",
+      "source_objects": 374,
+      "exported_mesh_nodes": 374,
+      "shared_meshes": 363,
+      "triangles": 263351,
       "bounds_native_m": [
         [
           -6.700300216674805,
@@ -128,7 +128,7 @@
           13.508399963378906
         ]
       ],
-      "source_native_sha256": "9881ec465fd9eda2ad230bfa361c72968246c302a4ef92e458bc41ff30ef3ff4",
+      "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
       "section_elevation_m": null,
       "geometry_simplified": false,
       "evaluated_split_normals_preserved": true,
@@ -158,7 +158,7 @@
           14.420000076293945
         ]
       ],
-      "source_native_sha256": "9881ec465fd9eda2ad230bfa361c72968246c302a4ef92e458bc41ff30ef3ff4",
+      "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
       "section_elevation_m": null,
       "geometry_simplified": false,
       "evaluated_split_normals_preserved": true,
@@ -171,7 +171,7 @@
       "id": "garden",
       "file": "garden.glb",
       "bytes": 11247900,
-      "sha256": "d4463cd86f8b8dca194a6f96a978324d58312dcd84393f94d29181959176e770",
+      "sha256": "75114dd97786589f2602b481896d43b9642a5b46b2a7f24ace8aafb6ca82b948",
       "source_objects": 645,
       "exported_mesh_nodes": 645,
       "shared_meshes": 554,
@@ -188,7 +188,7 @@
           10.332208633422852
         ]
       ],
-      "source_native_sha256": "9881ec465fd9eda2ad230bfa361c72968246c302a4ef92e458bc41ff30ef3ff4",
+      "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
       "section_elevation_m": null,
       "geometry_simplified": true,
       "evaluated_split_normals_preserved": true,
@@ -218,7 +218,7 @@
           27.40839958190918
         ]
       ],
-      "source_native_sha256": "9881ec465fd9eda2ad230bfa361c72968246c302a4ef92e458bc41ff30ef3ff4",
+      "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
       "section_elevation_m": null,
       "geometry_simplified": false,
       "evaluated_split_normals_preserved": true,
@@ -318,18 +318,18 @@
   },
   "section_atlas": {
     "file": "sections.json",
-    "bytes": 3827058,
-    "sha256": "7d265548e48ac6f5cb717b0dd39bcdc67b3f147679b59975862ed49417f228d2"
+    "bytes": 3841984,
+    "sha256": "4efc201b546337936332fe9bb7575c934c30bf55d71b1d191e69b7cadf267c02"
   },
   "room_annotations": {
     "file": "rooms.json",
     "bytes": 147052,
-    "sha256": "84cef7cf8a8d2b7d28b57c0e3d324defd68266672a7535c216c5b3348232fa4a"
+    "sha256": "378e94fbbcfde72a22a39f420d394d14a8e06494bafe3e0074f790fb2099412f"
   },
   "navigation": {
     "file": "navigation.json",
-    "bytes": 195205,
-    "sha256": "96452bf727130a164c665aeb644dfee168445154897c82879a37cf6c9ea3d580"
+    "bytes": 196073,
+    "sha256": "4bcf4c23e821991a933bca9750da4e06d452f080af48204745a865039a3f0086"
   },
   "view_assets": {
     "neighborhood": [
@@ -418,7 +418,7 @@
   },
   "native_delivery": {
     "file": "build/blender/angora-rooms-open-doors.blend",
-    "sha256": "9881ec465fd9eda2ad230bfa361c72968246c302a4ef92e458bc41ff30ef3ff4",
+    "sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
     "doors_open": 12
   }
 }
