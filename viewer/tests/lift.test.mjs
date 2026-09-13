@@ -104,9 +104,9 @@ test('All six ordered trips route as clean single-direction moves',()=>{
   }
 });
 
-test('The delivery carries 17 landing-door leaves per served floor, all open',()=>{
+test('The delivery carries six closed landing-door parts per served floor',()=>{
   const sanitize=s=>s.replace(/\s/g,'_').replace(/[\[\]./:]/g,'');
-  for(const [file,expected] of [['level-0.glb',17],['level-1.glb',17],['level-2.glb',17],
+  for(const [file,expected] of [['level-0.glb',6],['level-1.glb',6],['level-2.glb',6],
       ['level-3.glb',0],['envelope.glb',0],['garden.glb',0],['section-caps.glb',0]]){
     const {json}=glbJson(file);
     const leaves=(json.nodes??[]).filter(n=>LEAF_NODE.test(sanitize(n.name??'')));
@@ -115,7 +115,8 @@ test('The delivery carries 17 landing-door leaves per served floor, all open',()
       const [x,y,z,w]=leaf.rotation??[0,0,0,1];
       // delivered pose: -90 degrees about Y = fully open
       assert.ok(Math.abs(x)<1e-5&&Math.abs(z)<1e-5,leaf.name+' hinge axis is vertical');
-      assert.ok(Math.abs(y- -0.7071067)<1e-4&&Math.abs(w-0.7071067)<1e-4,leaf.name+' delivered open');
+      assert.equal(leaf.extras.lift_leaf_closed_pose,true);
+      assert.ok(Math.abs(y)<1e-4&&Math.abs(w-1)<1e-4,leaf.name+' delivered closed');
     }
   }
 });
@@ -140,7 +141,7 @@ test('The repaired car panel stands inside the cabin, no longer at the origin',(
 
 // A miniature but faithful rig: real cabin node, real leaf placement, driven
 // through the public surface exactly as main.js drives it.
-function rig(){
+function rig(closedPose=false){
   const groups=new Map();
   const cabin=new THREE.Group();cabin.name=CABIN_NODE;
   const level0Group=new THREE.Group();level0Group.add(cabin);
@@ -153,6 +154,7 @@ function rig(){
     // delivered open pose: leaf swung -90 about the hinge line
     leaf.position.set(HINGE_X,floorDatums[f]+1,HINGE_Z-0.99);
     leaf.quaternion.setFromAxisAngle(new THREE.Vector3(0,1,0),-Math.PI/2);
+    if(closedPose){leaf.position.set(HINGE_X-.99,floorDatums[f]+1,HINGE_Z);leaf.quaternion.identity();leaf.userData.lift_leaf_closed_pose=true;}
     group.add(leaf);
   }
   const clipPlane={constant:16.42};
@@ -161,6 +163,15 @@ function rig(){
     shadowsDirty:()=>{shadowCalls++;},onSettled:()=>{}});
   return {lift,groups,clipPlane,cabin,shadows:()=>shadowCalls};
 }
+test('Closed native leaf exports use the correct relative hinge offset',()=>{
+  const {lift,groups}=rig(true);
+  assert.deepEqual(lift.snapshot().doors,[1,0,0]);
+  for(const f of SERVED_FLOORS){
+    const pivot=groups.get('level-'+f).children.find(o=>o.name.startsWith('Lift landing door pivot'));
+    assert.ok(Math.abs(pivot.rotation.y-(f===0?-Math.PI/2:0))<1e-8);
+  }
+  lift.park('f2');assert.deepEqual(lift.snapshot().doors,[0,0,1]);
+});
 const doorAngle=(groups,f)=>{
   let pivot=null;
   for(const group of groups.values())group.traverse(o=>{if(o.name==='Lift landing door pivot | F'+f)pivot=o;});

@@ -4,6 +4,7 @@ import {WalkSurface} from '../viewer/src/walk-surface.js';
 const source=path.resolve(process.argv[2]??(fs.existsSync('build/web/native-current')?'build/web/native-current':'../angora-review/build/web/native-current'));
 const data=JSON.parse(fs.readFileSync(path.join(source,'navigation-draft.json')));
 const cameras=JSON.parse(fs.readFileSync(path.join(source,'native-camera-stations.json')));
+data.stations=data.stations.filter(s=>s.room_id!=='f0-B10'||cameras.some(c=>c.room_id===s.room_id));
 const smallWC=cameras.find(c=>c.room_id==='f0-WC');
 if(smallWC&&!data.stations.some(s=>s.room_id==='f0-WC'))data.stations.push({...smallWC,name:'WC',floor_index:0});
 const surface=new WalkSurface(data),changes=[];

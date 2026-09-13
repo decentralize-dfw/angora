@@ -73,7 +73,7 @@ test('Ground smoothing preserves positions/UVs and joins duplicated seams',()=>{
 });
 
 test('Numbered Blender plaster and ceilings retain neutral smooth finishes',()=>{
-  for(const [name,family,intensity] of [['interior.002','plaster',.55],['ceiling.003','soffit',.2]]){
+  for(const [name,family,intensity] of [['interior.002','plaster',.55],['ceiling.003','soffit',1]]){
     const normal=new THREE.Texture(),bump=new THREE.Texture();
     const material=new THREE.MeshStandardMaterial({name,normalMap:normal,bumpMap:bump});
     assert.equal(materialFamily(name),family);

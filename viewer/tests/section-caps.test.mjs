@@ -129,7 +129,7 @@ test('The wall and roof caps are redundant with the atlas, licensing the decisio
   // cross-section to the basement cut (walls on the 2C056/2C11F witness lines).
   const native=atlas.revision==='native-open-doors-roads';
   // Native repairs remove duplicated/closed doorway faces and refit the attic shell.
-  assert.ok(Math.abs(slice(1.6).area-(native?16.28311:16.364))<0.05);
+  assert.ok(Math.abs(slice(1.6).area-(native?15.80351:16.364))<0.05); // Plan-only bathroom partitions removed.
   // 14.719 before R40; the Giriş doorway takes 0.199 m² of wall out of the
   // ground-floor cut, which is the 1.25 m opening across a 0.160 m wall.
   assert.ok(Math.abs(slice(4.6996).area-(native?14.18948:14.520))<0.05);

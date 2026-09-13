@@ -63,7 +63,7 @@ test('A tag shows the scheduled area, otherwise a registered span, otherwise not
       spans++;
     } else blank++;
   }
-  assert.equal(areas,Object.keys(ROOM_AREAS).length+1); // +1: f0-B10's own derived figure
+  assert.equal(areas,Object.keys(ROOM_AREAS).length); // Removed f0-B10 has no area tag.
   assert.ok(areas>=17,'most rooms should now carry a real area');
   assert.equal(areas+spans+blank,rooms.rooms.length);
 });
@@ -74,7 +74,7 @@ test('Every derived area names its method, and the schedule still outranks it on
   // volumes carry the shared space's figure as a note instead of pretending
   // to their own.
   const derived=rooms.rooms.filter(room=>Number.isFinite(room.area_m2));
-  assert.equal(derived.length,16);
+  assert.equal(derived.length,15);
   const spaceById=new Map(rooms.spaces.map(space=>[space.space_id,space]));
   for(const room of derived){
     assert.ok(room.area_method_label,room.id+' derived area must name its method');

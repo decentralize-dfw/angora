@@ -49,7 +49,7 @@ test('Every displayed span agrees with the original DWG dimension and registered
   const data = JSON.parse(fs.readFileSync(new URL('build/web/full/rooms.json',root)));
   // 27 enclosed rooms, plus the three balconies R40 named. A balcony is an
   // open platform: label only, no polygon, no area, no span, no walk station.
-  assert.equal(data.rooms.length,data.source_native_sha256?31:30);
+  assert.equal(data.rooms.length,30);
   const balconies=data.rooms.filter(r=>r.label_only);
   assert.equal(balconies.length,3);
   for(const b of balconies){
@@ -62,7 +62,7 @@ test('Every displayed span agrees with the original DWG dimension and registered
   // switched off are model-measured spans and face-residual records that must
   // never be displayed, so only the allowed rows face the DWG check.
   const allowed=data.dimensions.filter(d=>d.dimension_label_allowed);
-  assert.ok(allowed.length>=35,String(allowed.length));
+  assert.ok(allowed.length>=33,String(allowed.length)); // Two spans belonged to the removed plan-only bathroom.
   for(const dim of allowed)assert.equal(dim.basis,'dwg_verified');
   for(const dim of data.dimensions.filter(d=>!d.dimension_label_allowed&&d.basis==='model_measured'))
     assert.equal(dim.claim,'model_span_measured');

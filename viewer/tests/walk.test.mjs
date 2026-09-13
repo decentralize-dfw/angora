@@ -22,7 +22,7 @@ test('Every room opens at a supported position clear of walls, furniture and low
   assert.equal(data.source_architecture_sha256,layers['build/blender/layers/10-architecture.blend'],'walking surface is from another export');
   assert.equal(data.source_fittings_sha256,layers['build/blender/layers/20-fixed-fittings.blend'],'cabinet grid is from another export');
   assert.equal(manifest.navigation.sha256,digest('build/web/full/navigation.json'),'navigation manifest checksum');
-  assert.equal(data.stations.length,manifest.native_delivery?28:27);
+  assert.equal(data.stations.length,27);
   for(const station of data.stations) {
     const [x,y,z]=station.position,sample=surface.sample(x,z,y-data.eye_height_m,true);
     assert.ok(sample,station.room_id+' has no safe starting surface');

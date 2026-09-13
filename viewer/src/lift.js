@@ -69,17 +69,18 @@ export function createLift({groups, clips, clipPlane, fullHeight, shadowsDirty, 
     const group = groups.get('level-' + f);
     if (!group) continue;
     const leaves = [];
-    group.traverse(object => {if (LEAF_NODE.test(object.name)) leaves.push(object);});
+    group.traverse(object => {if (LEAF_NODE.test(object.name)||object.userData?.lift_leaf_closed_pose) leaves.push(object);});
     if (!leaves.length) continue;
     const pivot = new THREE.Group();
     pivot.name = 'Lift landing door pivot | F' + f;
+    pivot.userData.closedPose=leaves.some(leaf=>leaf.userData?.lift_leaf_closed_pose);
     pivot.position.set(HINGE_X, floorDatums[f], HINGE_Z);
     group.add(pivot);
     for (const leaf of leaves) pivot.attach(leaf);
     pivots.set(f, pivot);
   }
-  const setDoor = (f, open) => {const pivot = pivots.get(f); if (pivot) pivot.rotation.y = CLOSED_ROTATION_Y * (1 - open);};
-  const doorOpen = f => {const pivot = pivots.get(f); return pivot ? 1 - pivot.rotation.y / CLOSED_ROTATION_Y : 0;};
+  const setDoor = (f, open) => {const pivot = pivots.get(f); if (pivot) pivot.rotation.y = CLOSED_ROTATION_Y * ((pivot.userData.closedPose ? 0 : 1) - open);};
+  const doorOpen = f => {const pivot = pivots.get(f); return pivot ? (pivot.userData.closedPose ? 0 : 1) - pivot.rotation.y / CLOSED_ROTATION_Y : 0;};
 
   // Delivered state is floor 0 with every door open; make it coherent now.
   let floor = 0, trip = null, walkActive = false, walkFloor = null;

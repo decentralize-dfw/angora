@@ -66,7 +66,14 @@ export function prepareMaterialResponse(material, {context=false}={}) {
     // still showed. What lights a ceiling indoors is the room: the fixtures,
     // and the hemisphere fill, whose downward colour is a neutral warm grey.
     // The environment is the one term that has no business being there.
-    material.envMapIntensity=.2;
+    material.envMapIntensity=1;
+    const previous=material.onBeforeCompile,previousKey=material.customProgramCacheKey();
+    material.onBeforeCompile=(shader,renderer)=>{
+      previous.call(material,shader,renderer);
+      const neutral=THREE.ShaderChunk.envmap_physical_pars_fragment.replaceAll('envMapColor.rgb','vec3(dot(envMapColor.rgb, vec3(0.2126, 0.7152, 0.0722)))');
+      shader.fragmentShader=shader.fragmentShader.replace('#include <envmap_physical_pars_fragment>',neutral);
+    };
+    material.customProgramCacheKey=()=>previousKey+'|neutral-ceiling-probe';
   } else if (family==='floor') {
     material.normalScale?.multiplyScalar(.3);
     material.envMapIntensity=.75;

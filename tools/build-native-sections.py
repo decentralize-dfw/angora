@@ -1,5 +1,5 @@
 """Derive web section geometry from the current Blender export."""
-import sys,json,ast,time
+import sys,json,ast,time,os
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'.runtime/python'))
@@ -74,6 +74,7 @@ def body_section(kind,height):
 
 slices=[]
 for n,old in enumerate(base['slices']):
+    if not int(os.environ.get('ANGORA_SECTION_START','0'))<=n<int(os.environ.get('ANGORA_SECTION_END',str(len(base['slices'])))):continue
     checkpoint=SOURCE/('section-slice-'+str(n)+'.json')
     if checkpoint.exists():slices.append(json.loads(checkpoint.read_text()));continue
     h=old['height'];start=time.monotonic();record=section(h)
@@ -81,8 +82,11 @@ for n,old in enumerate(base['slices']):
     record['q'],record['j']=body_section('fixed',h)
     record['fq'],record['fj']=body_section('furniture',h)
     slices.append(record)
-    checkpoint.write_text(json.dumps(record),encoding='utf-8')
+    temporary=checkpoint.with_suffix('.'+str(os.getpid())+'.tmp')
+    temporary.write_text(json.dumps(record),encoding='utf-8');temporary.replace(checkpoint)
     if n%16==0:print('SECTIONS',n,len(base['slices']),flush=True)
+if len(slices)!=len(base['slices']):
+    print('SECTION RANGE COMPLETE',len(slices),flush=True);sys.exit(0)
 base.update(slices=slices,revision='native-open-doors-roads',source_native_sha256=json.loads((SOURCE/'level-1.json').read_text())['source_native_sha256'],method='Current native evaluated wall faces and closed object cross sections')
 (SOURCE/'sections.json').write_text(json.dumps(base,separators=(',',':')),encoding='utf-8')
 print('NATIVE SECTIONS COMPLETE',len(slices),flush=True)

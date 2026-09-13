@@ -1,5 +1,7 @@
 # User photograph correction queue — 13 September 2026
 
+Web export is now regenerated: see `web-review-delivery-2026-09-13.md`. Earlier source-only checkpoints below are historical. The current browser assets, navigation and sections share source SHA `612f1e43b4f6a2191b36f87942ac3439fea29791f4cec7087a2e2656a3974f2e`.
+
 ## Source delivery checkpoint
 
 The editable Blender snapshot recorded at 13:09 is included in this commit with packed textures and repair scripts. SHA-256: `71b0beb426e313f65a2878018a014411efbcfe11bfb2a9c0b6e53912b6f7fd34`.

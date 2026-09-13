@@ -48,7 +48,7 @@ test('The shipped full scene retains lower stairs and full-height floors in ever
       assert.ok(plane.distanceToPoint(new THREE.Vector3(0, cut + 0.01, 0)) < 0);
     }
   }
-  assert.ok(total < 45000000, 'whole-scene transfer budget');
+  assert.ok(total < 46000000, 'whole-scene transfer budget'); // Includes new lift/dolphin textures and tall thuja.
 });
 
 test('Real section geometry fills the wall and keeps gallery, stair and bedroom clear', () => {

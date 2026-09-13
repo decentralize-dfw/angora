@@ -21,6 +21,10 @@ for(const record of records){
 }
 const nav=read(path.join(source,'navigation.json')),rooms=read(path.join(full,'rooms.json'));
 const cameras=read(path.join(source,'native-camera-stations.json'));
+rooms.rooms=rooms.rooms.filter(r=>r.id!=='f0-B10'||cameras.some(c=>c.room_id===r.id));
+const roomIds=new Set(rooms.rooms.map(r=>r.id));
+rooms.dimensions=rooms.dimensions.filter(d=>roomIds.has(d.room_id));
+rooms.spaces=rooms.spaces.filter(s=>s.members.some(id=>roomIds.has(id)));
 const wc=cameras.find(c=>c.room_id==='f0-WC');
 if(wc&&!nav.stations.some(s=>s.room_id===wc.room_id)){
   nav.stations.push({...wc,name:'WC',floor_index:0});
@@ -36,7 +40,7 @@ for(const directory of [full,publicFull]){
   fs.copyFileSync(path.join(source,'sections.json'),path.join(directory,'sections.json'));
 }
 manifest.assets=records;manifest.source_native_sha256=sourceHash;manifest.model_revision='Native interior and roads';
-manifest.native_delivery={file:'build/blender/angora-rooms-open-doors.blend',sha256:sourceHash,doors_open:13};
+manifest.native_delivery={file:'build/blender/angora-rooms-open-doors.blend',sha256:sourceHash,doors_open:12};
 for(const [field,file]of [['navigation','navigation.json'],['room_annotations','rooms.json'],['section_atlas','sections.json']]){
   const p=path.join(full,file);manifest[field]={...manifest[field],file,bytes:fs.statSync(p).size,sha256:digest(p)};
 }

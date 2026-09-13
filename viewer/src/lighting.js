@@ -244,6 +244,9 @@ export function createLighting(renderer, scene, camera, clip) {
       object.castShadow=!glass;object.receiveShadow=!glass;
       for(const material of materials) {
         prepareMaterialResponse(material,{context});preparedMaterials.add(material);
+        // Three uses scene.environmentIntensity when envMap is null. Bind the
+        // room finishes explicitly so their neutral response is respected.
+        if(['plaster','soffit'].includes(material.userData.presentationR27?.family))material.envMap=environment.texture;
         material.clipShadows=true;
         if(isGlazing(material)){material.metalness=0;if(isSeeThrough(material))material.depthWrite=false;}
         for(const value of Object.values(material))if(value?.isTexture)value.anisotropy=Math.min(compact?8:16,renderer.capabilities.getMaxAnisotropy());
