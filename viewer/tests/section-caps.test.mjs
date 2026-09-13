@@ -32,8 +32,10 @@ test('Every authored cap sits exactly on a documented cut height',()=>{
   const heights={'R32 F0 soil cut face.001':1.6,'R32 F0 wall cut face.001':1.6,
     'R32 F1 wall cut face.001':4.6996,'R32 F2 roof cut face':7.9714,'R32 F2 wall cut face.001':7.9714,
     'R32 F3 roof cut face':10.7705,'R32 F3 wall cut face.001':10.7705,
-    // R42: the plan area the basement cut leaves empty, closed in the earth hatch
-    'R42 F0 site section field':null};
+    // R44: the excavated void beside the basement, closed as ground with a
+    // skirt; drawn 2 mm OVER the plane so the buried stubs' own cuts lie
+    // under it, so it is the one face that is deliberately not flat
+    'R44 F0 excavation fill':null};
   assert.equal(glb.json.meshes.length,8);
   for(const mesh of glb.json.meshes){
     const expected=heights[mesh.name];
@@ -55,60 +57,49 @@ test('Every authored cap sits exactly on a documented cut height',()=>{
     assert.ok(Math.abs(floorDatums[f]+(f===3?1.3:1.6)-expected)<1e-9,'floor '+f);
 });
 
-test('The whole plot is cut at one height, and the house is the hole in it',()=>{
-  // R42, fourth attempt, and the rule is the review's own: "arsa içindeki,
-  // bahçe olan ve kesit alanının altında kalan alanlar da taranmalıdır",
-  // "arsa içi, orda kot farkı olmasın, tek bir clipping plane çalışacak işte".
-  // The textbook rule - ink only where the plane is inside the ground - reads
-  // wrong on a sloping plot: it inked the bank by the garage and left the pool
-  // terrace and the rear lawn 1.6 m below the plane, which is the "ön kısım"
-  // and the "arka alan" the review keeps pointing at. So inside the property
-  // the site is one body of earth cut at one height, the rooms are its holes,
-  // and what lies below the cut is inside it rather than beside it.
-  const report=JSON.parse(fs.readFileSync(new URL('build/basement-cut-closure-r42.json',new URL('../../',import.meta.url))));
+test('The excavated void beside the basement is closed as ground, and the rejected full-site field stays gone',()=>{
+  // R44, and the instruction is the review's own: "bodrum katında boş kısım
+  // var ya, orasını taramalısın. boş gözükmemeli öyle. orda o kolonları da
+  // gösterme." The R42 full-site field - the whole plot inked at one height,
+  // lawns and pool terrace included - was rejected and stays out; what is
+  // closed now is only the enclosed excavation under the entrance wing, the
+  // strip the plane finds with no earth to cut and no room to draw, where
+  // the buried stub walls and columns stood in an open pit.
+  const report=JSON.parse(fs.readFileSync(new URL('build/basement-void-fill-r44.json',new URL('../../',import.meta.url))));
   assert.equal(report.cut_height_m,SOIL_CUT_HEIGHT);
-  assert.ok(report.plot_area_m2>550,`the plot's own earth: ${report.plot_area_m2} m²`);
-  // every square metre of the property is either cut ground, the authored
-  // face, or the house - nothing is left uncut inside the boundary
-  const drawn=report.closed_area_m2+report.authored_face_cells*report.cell_m**2;
-  assert.ok(drawn+report.house_area_m2>report.plot_area_m2*0.98,
-    `${drawn.toFixed(0)} m² of section and ${report.house_area_m2.toFixed(0)} m² of house `+
-    `over a ${report.plot_area_m2.toFixed(0)} m² plot`);
-  // the pool basin and the excavation are punched out of the modelled earth;
-  // filling them is what keeps the poché from opening onto the pool
-  assert.ok(report.filled_holes_m2>50,`${report.filled_holes_m2} m² of holes closed`);
-  const face=glb.json.meshes.find(m=>m.name==='R42 F0 site section field');
-  assert.ok(face,'the delivery carries the site field');
+  // the void the CAD excavated under the entrance wing measures about 48 m2;
+  // the fill has to close substantially all of it and cannot grow into the
+  // lawns the rejected field once inked
+  assert.ok(report.fill_area_m2>30&&report.fill_area_m2<70,`${report.fill_area_m2} m2 of fill`);
+  assert.ok(!glb.json.meshes.some(m=>m.name==='R42 F0 site section field'),'the rejected field is out of the delivery');
+  const face=glb.json.meshes.find(m=>m.name==='R44 F0 excavation fill');
+  assert.ok(face,'the delivery carries the excavation fill');
   const accessor=glb.json.accessors[face.primitives[0].attributes.POSITION];
-  // one level, just under the plane so the wall poché drawn at the plane
-  // itself stays on top of it where the two meet
-  assert.ok(accessor.max[1]<SOIL_CUT_HEIGHT&&SOIL_CUT_HEIGHT-accessor.max[1]<0.02,`at ${accessor.max[1]}`);
-  // and a skirt down to the earth's own surface, so the basement view can be
-  // tilted without a sheet appearing on stilts over the lawn
-  assert.ok(report.skirt_faces>100,`${report.skirt_faces} skirt faces`);
-  assert.ok(accessor.min[1]<accessor.max[1]-0.3&&accessor.min[1]>accessor.max[1]-3.1,
-    `the body runs from ${accessor.min[1]} to ${accessor.max[1]}`);
-  // inside the property, never the neighbours' land: the soil body is modelled
-  // a metre or two proud of the retaining walls and the fence, and a section
-  // laid over the whole of it runs past the hedge onto the next-door grass.
-  // The grid rounds up to a whole cell, so the sheet may reach one cell past
-  // the boundary it was trimmed to - never further.
+  // the fill is drawn OVER the plane - that difference is the columns: the
+  // buried stubs are cut open at exactly 1.6 and their poché is drawn there
+  // too, so a face under the plane would print every one of them on the
+  // ground; over it, the ground wins and the columns are simply under it
+  assert.ok(Math.abs(report.drawn_at_m-(SOIL_CUT_HEIGHT+0.002))<1e-6,`drawn at ${report.drawn_at_m}`);
+  assert.ok(accessor.max[1]>SOIL_CUT_HEIGHT&&accessor.max[1]<SOIL_CUT_HEIGHT+0.01,`top at ${accessor.max[1]}`);
+  // its one-cell seal onto real walls stays just UNDER the plane, so a room
+  // wall the fill laps onto keeps its own black cross-section on top
+  assert.ok(report.seal_drawn_at_m<SOIL_CUT_HEIGHT,`seal at ${report.seal_drawn_at_m}`);
+  // and skirts drop where the fill edge meets open air, so a tilted basement
+  // view sees a cut block of ground rather than a sheet on stilts
+  assert.ok(report.skirt_faces>50,`${report.skirt_faces} skirt faces`);
+  assert.ok(accessor.min[1]<SOIL_CUT_HEIGHT-1.0,`the body reaches down to ${accessor.min[1]}`);
+  // inside the property, never the neighbours' land; the grid rounds up to a
+  // whole cell, so a face may reach one cell past the boundary - never further
   const edge=report.cell_m+1e-3;
-  for (const face of glb.json.meshes.filter(m=>/soil cut face|site section field/.test(m.name))) {
-    const a=glb.json.accessors[face.primitives[0].attributes.POSITION];
+  for (const capFace of glb.json.meshes.filter(m=>/soil cut face|excavation fill/.test(m.name))) {
+    const a=glb.json.accessors[capFace.primitives[0].attributes.POSITION];
     assert.ok(a.min[0]>=report.property.x[0]-edge&&a.max[0]<=report.property.x[1]+edge,
-      `${face.name} runs x ${a.min[0]}..${a.max[0]} past ${JSON.stringify(report.property.x)}`);
+      `${capFace.name} runs x ${a.min[0]}..${a.max[0]} past ${JSON.stringify(report.property.x)}`);
     assert.ok(a.max[2]<=report.property.front_z+edge,
-      `${face.name} runs to z ${a.max[2]} past the fence at ${report.property.front_z}`);
+      `${capFace.name} runs to z ${a.max[2]} past the fence at ${report.property.front_z}`);
   }
-  // the boundary itself, which the tool measures off the site's own retaining
-  // walls and fence rather than taking on trust. `authored_faces_trimmed` is
-  // not asserted: it counts the faces a run had to cut back, which is one the
-  // first time and none afterwards, so holding it at one would fail on every
-  // re-run of a tool that had already done its job.
   assert.ok(report.property.x[1]-report.property.x[0]>15&&report.property.x[1]-report.property.x[0]<30,
     `the property is ${(report.property.x[1]-report.property.x[0]).toFixed(1)} m wide`);
-  assert.ok(Number.isFinite(report.property.front_z));
   assert.equal(report.cap_asset_triangles,manifest.section_cap_asset.triangles);
 });
 

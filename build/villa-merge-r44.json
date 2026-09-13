@@ -1,0 +1,18 @@
+{
+  "generated_for": "R44",
+  "sources": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+  ],
+  "mesh_nodes_before": 3569,
+  "mesh_nodes_after": 874,
+  "joined_meshes": 209,
+  "preserved_nodes": 665,
+  "materials": 180,
+  "textures": 43,
+  "triangles": 2795315,
+  "bytes": 12490012
+}

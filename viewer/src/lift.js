@@ -54,7 +54,10 @@ export function route(stops, from, to) {
 
 export function createLift({groups, clips, clipPlane, fullHeight, shadowsDirty, onSettled}) {
   const clip = clips.find(c => c.tracks?.some(t => t.name.startsWith(CABIN_NODE + '.')));
-  const root = groups.get('level-0');
+  // R44 merged the storeys into one villa part, so the cabin and every
+  // landing-door leaf live in the same group and a leaf's floor is read off
+  // its own standing height rather than off which file it arrived in.
+  const root = groups.get('villa') ?? groups.get('level-0');
   if (!clip || !root) return null;
   const stops = readStops(clip);
   const mixer = new THREE.AnimationMixer(root);
@@ -65,18 +68,25 @@ export function createLift({groups, clips, clipPlane, fullHeight, shadowsDirty, 
   // One pivot per served floor, standing on the hinge line the delivered
   // leaves swing about; Object3D.attach keeps every leaf's world pose, so
   // rotation.y = 0 reproduces the delivered open door bit for bit.
+  const leavesByFloor = new Map(SERVED_FLOORS.map(f => [f, []]));
+  const box = new THREE.Box3();
+  root.updateMatrixWorld(true);
+  root.traverse(object => {
+    if (!LEAF_NODE.test(object.name) && !object.userData?.lift_leaf_closed_pose) return;
+    const y = box.setFromObject(object).min.y;
+    let floor = SERVED_FLOORS[0];
+    for (const f of SERVED_FLOORS) if (Math.abs(y - floorDatums[f]) < Math.abs(y - floorDatums[floor])) floor = f;
+    leavesByFloor.get(floor).push(object);
+  });
   const pivots = new Map();
   for (const f of SERVED_FLOORS) {
-    const group = groups.get('level-' + f);
-    if (!group) continue;
-    const leaves = [];
-    group.traverse(object => {if (LEAF_NODE.test(object.name)||object.userData?.lift_leaf_closed_pose) leaves.push(object);});
+    const leaves = leavesByFloor.get(f);
     if (!leaves.length) continue;
     const pivot = new THREE.Group();
     pivot.name = 'Lift landing door pivot | F' + f;
     pivot.userData.closedPose=leaves.some(leaf=>leaf.userData?.lift_leaf_closed_pose);
     pivot.position.set(HINGE_X, floorDatums[f], HINGE_Z);
-    group.add(pivot);
+    root.add(pivot);
     for (const leaf of leaves) pivot.attach(leaf);
     pivots.set(f, pivot);
   }

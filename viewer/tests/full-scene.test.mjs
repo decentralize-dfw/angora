@@ -18,37 +18,39 @@ test('The shipped full scene retains lower stairs and full-height floors in ever
     const data = fs.readFileSync(new URL(asset.file, dir)); total += data.length;
     assert.equal(createHash('sha256').update(data).digest('hex'), asset.sha256);
     assert.equal(data.length, asset.bytes);
-    // The garden is the one asset over ten megabytes - 13.1 MB of planting and
-    // terrain - and it is the next thing to shrink. The cap is set just above
-    // it rather than below, so this guards against a regression instead of
-    // failing on a fact that is already true of the delivery.
+    // The merged villa is the largest part at 12.5 MB; the cap sits just
+    // above the biggest shipped file so growth is a decision, not a drift.
     assert.ok(data.length < 13400000, asset.id + ' individual transfer budget');
     assert.equal(asset.section_elevation_m, null, 'no baked upper or lower cut');
     const gltf = JSON.parse(data.subarray(20, 20 + data.readUInt32LE(12)).toString().trim());
     assert.ok(gltf.extensionsRequired.includes('KHR_draco_mesh_compression'));
-    if (asset.id.startsWith('level-')) {
-      const floor = Number(asset.id.slice(-1));
-      let ymax = -Infinity, ymin = Infinity, walls = 0;
-      for (const node of gltf.nodes) {
-        const extras = node.extras ?? {};
-        if (extras.section_cap_eligible) {
-          walls++; assert.equal(extras.category, 'wall', 'rooms and furniture cannot generate hatches');
-        }
-      }
+    if (asset.id === 'villa') {
+      // R44 merged the four storeys and the envelope into this one part; the
+      // whole building's height must survive uncut, every storey's cut plane
+      // must fall inside its bounds, and the joined nodes must still carry
+      // the categories the furniture toggle and the caps rely on
+      let ymax = -Infinity, ymin = Infinity;
+      const categories = new Set();
+      for (const node of gltf.nodes) if (node.extras?.category) categories.add(node.extras.category);
       for (const mesh of gltf.meshes) for (const p of mesh.primitives) {
         const a = gltf.accessors[p.attributes.POSITION];
+        if (!a?.max) continue;
         ymax = Math.max(ymax, a.max[1]); ymin = Math.min(ymin, a.min[1]);
       }
-      assert.ok(walls >= 1, 'wall masks exported for ' + asset.id);
-      assert.ok(ymax > manifest.floor_datums_m[floor] + 1.8, 'full height geometry retained');
-      assert.ok(ymin < manifest.floor_datums_m[floor], 'below-floor geometry retained');
-      const cut = sectionHeight('f' + floor, 30);
-      const plane = new THREE.Plane(new THREE.Vector3(0, -1, 0), cut);
-      assert.ok(plane.distanceToPoint(new THREE.Vector3(0, -4, 0)) > 0, 'all lower stairs remain on visible side');
-      assert.ok(plane.distanceToPoint(new THREE.Vector3(0, cut + 0.01, 0)) < 0);
+      assert.ok(categories.has('furniture') && categories.has('wall'), 'joined nodes keep their categories');
+      assert.ok(ymax > manifest.floor_datums_m[3] + 1.8, 'full height geometry retained');
+      assert.ok(ymin < manifest.floor_datums_m[0], 'below-floor geometry retained');
+      for (let floor = 0; floor < 4; floor++) {
+        const cut = sectionHeight('f' + floor, 30);
+        const plane = new THREE.Plane(new THREE.Vector3(0, -1, 0), cut);
+        assert.ok(plane.distanceToPoint(new THREE.Vector3(0, -4, 0)) > 0, 'all lower stairs remain on visible side');
+        assert.ok(plane.distanceToPoint(new THREE.Vector3(0, cut + 0.01, 0)) < 0);
+      }
+      assert.equal(gltf.nodes.filter(n => n.mesh !== undefined).length < 1000, true,
+        'the merge keeps the building under a thousand draw calls');
     }
   }
-  assert.ok(total < 46000000, 'whole-scene transfer budget'); // Includes new lift/dolphin textures and tall thuja.
+  assert.ok(total < 46000000, 'whole-scene transfer budget'); // Merged villa + garden + context.
 });
 
 test('Real section geometry fills the wall and keeps gallery, stair and bedroom clear', () => {

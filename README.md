@@ -70,9 +70,10 @@ eder; kesit profili 8 cm aralıklı ön hesaplanmış dilimlerden seçilir. Dolg
 kaynak CAD yüzeylerinin tutarsız yönlerine veya kameranın bakışına bağlı değildir.
 `build/wall-section-qa.json` geometri ve boşluk kontrollerini kaydeder.
 
-Sayfa kendi yayımlandığı repo sürümünün model listesini kullanır. Yedi parça
-toplam yaklaşık 44,8 MB, kesit geometrisi ayrıca 1,1 MB; aynı anda en fazla iki dosya çözülür ve durgun sahne
-sürekli yeniden çizilmez. Gerçek OrbitControls ile dokunma olayları ve sabit
+Sayfa kendi yayımlandığı repo sürümünün model listesini kullanır. R44 ile dört
+kat ve dış kabuk tek `villa.glb` içinde birleştirildi: üç parça (villa, bahçe,
+mahalle) toplam yaklaşık 27,1 MB, kesit geometrisi ayrıca 1,1 MB; aynı anda en
+fazla iki dosya çözülür ve durgun sahne sürekli yeniden çizilmez. Gerçek OrbitControls ile dokunma olayları ve sabit
 kamera yüksekliği, gerçek GLB dosyalarının hash ve tam yükseklik sınırları
 kontrol edildi. Gerçek kesit geometrisi ışın testleri ve Blender görüntüsüyle
 denetlendi. Bulut tarayıcısında WebGL kapalı olduğu için web shader'ının görsel
@@ -195,6 +196,39 @@ npm --prefix viewer run build:pages
 ```
 
 Kesit üretimi normal Python ortamında NumPy, Shapely ve mapbox-earcut kullanır.
+
+## R44 — beyaz iç mekânlar, bodrum dolgusu, dış mekân yürüyüşü ve birleşik model
+
+R44 dört isteği işler; araçlar `tools/*_r44.mjs` altındadır ve her biri kendi
+`build/*-r44.json` kaydını yazar.
+
+- **İç yüzler ve tavanlar beyaz.** R43'ün çatı için kurduğu yüz yargısı alt
+  katlara uygulandı; oda içine bakan duvar yüzleri `interior`, dışa bakanlar
+  cephe renginde kalır. Oda tavanı olarak okunan çatı/döşeme altları yeniden
+  boyanmaz, 25 mm altına `ceiling` malzemesiyle astarlanır; dıştan görünüş
+  değişmez (`build/white-interiors-r44.json`).
+- **Bodrum kesiti.** Yol onarımının sessizce bozduğu arsa toprağı işareti
+  onarıldı (mesh adı değişince `splitContextSoil` hiçbir şeyi işaretlemiyordu);
+  toprak yine 1,60 m'de kesilir. Giriş kanadının altındaki kazı boşluğu
+  taramalı zemin olarak kapatıldı; gömülü kolon ve duvar kütükleri bu yüzeyin
+  altında kalır. Reddedilmiş R42 tüm-arsa taraması geri getirilmedi
+  (`build/basement-void-fill-r44.json`). Mutfak cumbasındaki çukur saksı da
+  dolduruldu (`build/west-planter-fill-r44.json`).
+- **Dışarıda yürüyüş.** Yürüme ızgarası 192×360 hücreye genişletildi; havuz
+  terası, çimler, yan merdiven, ön yaklaşım ve ana yatak balkonu bodrum
+  salonundan yürüyerek ulaşılabilir ve ana balkon oda seçicisine eklendi.
+  Açık dış kapılar kendi kasalarından ölçülür (`build/door-open-r44.json`).
+  `f1-Z10` etiketi bir gölgelik üstüdür, `f2-109` balkonunun kaynak modelde
+  kapısı yoktur; ikisi de bilerek etiket olarak bırakıldı
+  (`build/walk-outdoors-r44.json`).
+- **Birleşik model.** Dört kat + dış kabuk tek `villa.glb` oldu: dokular ve
+  malzemeler bina genelinde tekilleştirildi (43 doku), statik parçalar
+  malzeme×kategori başına birleştirildi. 3 568 mesh düğümü 874'e, beş dosyanın
+  27,2 MB'ı 12,5 MB'a indi; geometri, UV ve dokular bit-eşdeğer geçer, Draco
+  ayarları aynıdır. Asansör kabini/kapı kanatları, garaj aracı, büyük
+  instanced meshler ve saydam yüzeyler ayrık kalır
+  (`build/villa-merge-r44.json`). Kat başına dosya kalmadığından eski
+  `level-*.glb`/`envelope.glb` teslimden çıkarıldı; viewer üç parça bekler.
 
 ## Çalışma durumu
 

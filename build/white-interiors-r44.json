@@ -1,0 +1,196 @@
+{
+  "generated_for": "R44",
+  "tolerance_m": 0.1,
+  "vertical": 0.5,
+  "lining_drop_m": 0.025,
+  "method": "walls re-judged by room-boundary distance and room interiors (R43 rule + inside-polygon); ceilings lined, not repainted",
+  "levels": {
+    "level-0": {
+      "walls": {
+        "F0 | ek dalgalar": {
+          "judged": 149,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 0,
+          "facade": 149
+        },
+        "F0 | KAT 0$DUVAR": {
+          "judged": 841,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 417,
+          "facade": 424
+        },
+        "F0 | KAT 0$DUVAR KAPLAMA": {
+          "judged": 504,
+          "to_white": 0,
+          "to_facade": 40,
+          "interior": 464,
+          "facade": 40
+        },
+        "F0 | KAT 0$TAVAN": {
+          "judged": 22,
+          "to_white": 4,
+          "to_facade": 0,
+          "interior": 4,
+          "facade": 18
+        },
+        "Lift shaft continuous walls | F0": {
+          "judged": 258,
+          "to_white": 0,
+          "to_facade": 159,
+          "interior": 99,
+          "facade": 159
+        }
+      },
+      "lining": {},
+      "asset_bytes": 5698276,
+      "asset_triangles": 297960
+    },
+    "level-1": {
+      "walls": {
+        "F1 | ek dalgalar": {
+          "judged": 89,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 0,
+          "facade": 89
+        },
+        "F1 | KAT 1$DUVAR": {
+          "judged": 1590,
+          "to_white": 7,
+          "to_facade": 0,
+          "interior": 1015,
+          "facade": 575
+        },
+        "F1 | KAT 1$DUVAR KAPLAMA": {
+          "judged": 1689,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 1689,
+          "facade": 0
+        },
+        "F1 | KAT 1$TAVAN": {
+          "judged": 38,
+          "to_white": 27,
+          "to_facade": 0,
+          "interior": 27,
+          "facade": 11
+        },
+        "Kitchen R24 | painted central display back": {
+          "judged": 12,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 12,
+          "facade": 0
+        },
+        "Kitchen R24 | painted side display back": {
+          "judged": 12,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 12,
+          "facade": 0
+        },
+        "Lift shaft continuous walls | F1": {
+          "judged": 158,
+          "to_white": 0,
+          "to_facade": 30,
+          "interior": 128,
+          "facade": 30
+        },
+        "R31 | Solid salon column": {
+          "judged": 418,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 418,
+          "facade": 0
+        }
+      },
+      "lining": {
+        "f0": 760
+      },
+      "asset_bytes": 7427696,
+      "asset_triangles": 789034
+    },
+    "level-2": {
+      "walls": {
+        "107 | Restored window parapet": {
+          "judged": 12,
+          "to_white": 0,
+          "to_facade": 4,
+          "interior": 8,
+          "facade": 4
+        },
+        "F2 | ek dalgalar": {
+          "judged": 81,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 0,
+          "facade": 81
+        },
+        "F2 | KAT 2$DUVAR": {
+          "judged": 2485,
+          "to_white": 12,
+          "to_facade": 0,
+          "interior": 1353,
+          "facade": 1132
+        },
+        "F2 | KAT 2$DUVAR KAPLAMA": {
+          "judged": 1955,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 1955,
+          "facade": 0
+        },
+        "F2 | KAT 2$TAVAN": {
+          "judged": 9,
+          "to_white": 3,
+          "to_facade": 0,
+          "interior": 3,
+          "facade": 6
+        },
+        "Lift shaft continuous walls | F2": {
+          "judged": 154,
+          "to_white": 0,
+          "to_facade": 30,
+          "interior": 124,
+          "facade": 30
+        },
+        "Master | Left plaster reveal": {
+          "judged": 108,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 108,
+          "facade": 0
+        },
+        "Master | Photographed shallow plaster arch": {
+          "judged": 324,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 324,
+          "facade": 0
+        },
+        "Master | Right plaster reveal": {
+          "judged": 108,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 108,
+          "facade": 0
+        }
+      },
+      "lining": {
+        "f1": 484
+      },
+      "asset_bytes": 6913672,
+      "asset_triangles": 619852
+    },
+    "level-3": {
+      "walls": {},
+      "lining": {
+        "f2": 267
+      },
+      "asset_bytes": 1757764,
+      "asset_triangles": 267705
+    }
+  }
+}
