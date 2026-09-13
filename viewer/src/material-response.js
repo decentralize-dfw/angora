@@ -56,7 +56,15 @@ export function prepareMaterialResponse(material, {context=false}={}) {
   } else if (family==='landscape') {
     material.normalScale?.multiplyScalar(.25);
   } else if (family==='plaster') {
-    material.envMapIntensity=.55;
+    // An interior wall's environment is the room, not the sky. At .55 the
+    // probe's upper hemisphere reached a 0.94 white wall with nothing to
+    // occlude it, and the attic's 360° tour showed the result: the ceiling
+    // beside it reads white because its own envMap is 0, while the walls read
+    // the blue-grey of the façade - "iç duvarlar beyaz. dış da ise tüm
+    // duvarlar o grimsi mavimsi renk. bunu karıştırma hiçbir yerde." The
+    // albedo was never the problem; the weight was, and it is the same
+    // argument that took the ceilings to 0.
+    material.envMapIntensity=0;
     material.normalMap=null;material.bumpMap=null;
   } else if (family==='soffit') {
     material.normalMap=null;material.bumpMap=null;
