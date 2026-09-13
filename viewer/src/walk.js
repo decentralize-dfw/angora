@@ -32,22 +32,27 @@ export class InteriorWalk {
       Object.assign(this.pointer,{x:e.clientX,y:e.clientY});this.pose();invalidate();
     });
     const release=e=>{if(this.pointer?.id===e.pointerId)this.pointer=null;};
-    canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);
+    canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);canvas.addEventListener('lostpointercapture',release);
     const movement = ['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'];
     window.addEventListener('keydown',e=>{
-      if (!this.active || this.inputSuspended || /INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+      if (!this.active || this.inputSuspended || e.altKey || e.ctrlKey || e.metaKey || e.target.isContentEditable || /INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
       if (movement.includes(e.code)) {e.preventDefault();this.keys.add(e.code);invalidate();}
     });
     window.addEventListener('keyup',e=>{this.keys.delete(e.code);if(this.active)invalidate();});
-    window.addEventListener('blur',()=>this.keys.clear());
+    window.addEventListener('blur',()=>{this.keys.clear();this.pointer=null;this.lastTime=null;});
+    document.addEventListener('visibilitychange',()=>{
+      this.visibilityPaused=document.hidden;this.keys.clear();this.pointer=null;this.lastTime=null;
+      if(!document.hidden&&this.active)invalidate();
+    });
     document.querySelectorAll('[data-walk-direction]').forEach(button=>{
       const key=button.dataset.walkDirection;
-      button.addEventListener('pointerdown',e=>{e.preventDefault();button.setPointerCapture(e.pointerId);this.keys.add(key);invalidate();});
+      button.addEventListener('pointerdown',e=>{if(!this.active||this.inputSuspended)return;e.preventDefault();button.setPointerCapture(e.pointerId);this.keys.add(key);invalidate();});
       const stop=()=>{this.keys.delete(key);invalidate();};
       button.addEventListener('pointerup',stop);button.addEventListener('pointercancel',stop);
       button.addEventListener('lostpointercapture',stop);
-      button.addEventListener('keydown',e=>{if(['Enter',' '].includes(e.key)){e.preventDefault();this.keys.add(key);invalidate();}});
+      button.addEventListener('keydown',e=>{if(this.active&&!this.inputSuspended&&['Enter',' '].includes(e.key)){e.preventDefault();this.keys.add(key);invalidate();}});
       button.addEventListener('keyup',e=>{if(['Enter',' '].includes(e.key))stop();});
+      button.addEventListener('blur',stop);
     });
   }
   pose() {if(!this.xrActive)this.camera.rotation.set(this.pitch,this.yaw,0,'YXZ');}
@@ -76,7 +81,7 @@ export class InteriorWalk {
   }
   update(time, xrSession) {
     const dt=this.lastTime===null?0:Math.min(.05,(time-this.lastTime)/1000);this.lastTime=time;
-    if(!this.active||this.inputSuspended)return false;
+    if(!this.active||this.inputSuspended||this.visibilityPaused)return false;
     if(this.route&&!this.xrActive) {
       if(this.keys.size){this.route=null;}
       else {

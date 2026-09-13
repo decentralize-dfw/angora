@@ -22,7 +22,7 @@ test('Every room opens at a supported position clear of walls, furniture and low
   assert.equal(data.source_architecture_sha256,layers['build/blender/layers/10-architecture.blend'],'walking surface is from another export');
   assert.equal(data.source_fittings_sha256,layers['build/blender/layers/20-fixed-fittings.blend'],'cabinet grid is from another export');
   assert.equal(manifest.navigation.sha256,digest('build/web/full/navigation.json'),'navigation manifest checksum');
-  assert.equal(data.stations.length,27);
+  assert.equal(data.stations.length,manifest.native_delivery?28:27);
   for(const station of data.stations) {
     const [x,y,z]=station.position,sample=surface.sample(x,z,y-data.eye_height_m,true);
     assert.ok(sample,station.room_id+' has no safe starting surface');
@@ -32,7 +32,12 @@ test('Every room opens at a supported position clear of walls, furniture and low
     // R39 parks a car in it on purpose, so the only clear standing position is
     // further from the room's own anchor.
     const reach=station.room_id==='f1-Z07'?1.2:.8;
-    assert.ok(station.anchor_distance_m<reach,station.room_id+' room anchor');
+    if(manifest.native_delivery){
+      assert.ok(station.native_camera_position,station.room_id+' reviewed native camera');
+      const distance=Math.hypot(x-station.native_camera_position[0],z-station.native_camera_position[2]);
+      assert.ok(distance<=Math.SQRT2*.72+.001,station.room_id+' camera displacement');
+      assert.ok(Math.abs(distance-station.camera_adjustment_m)<.001);
+    }else assert.ok(station.anchor_distance_m<reach,station.room_id+' room anchor');
   }
 });
 test('Movement cannot tunnel through model boundaries, furniture or the first-floor gallery',()=>{

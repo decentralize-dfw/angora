@@ -1,0 +1,42 @@
+[
+  {
+    "name": "CAD garden terraces R26.001 | R32 soil volume owns local groun",
+    "faces": 31615,
+    "vertices": 34894
+  },
+  {
+    "name": "Garden soil clearance construction",
+    "faces": 6,
+    "vertices": 8
+  },
+  {
+    "name": "Garden soil clearance construction.001",
+    "faces": 6,
+    "vertices": 8
+  },
+  {
+    "name": "Garden soil closed columns from retained registered surface",
+    "faces": 6615,
+    "vertices": 7938
+  },
+  {
+    "name": "Garden | Buried soil below stair",
+    "faces": 6,
+    "vertices": 8
+  },
+  {
+    "name": "Garden | Buried soil below stair.001",
+    "faces": 6,
+    "vertices": 8
+  },
+  {
+    "name": "R39 closed soil with preserved shell connectivity",
+    "faces": 5328,
+    "vertices": 5261
+  },
+  {
+    "name": "R39 closed soil with preserved shell connectivity.001",
+    "faces": 5300,
+    "vertices": 3708
+  }
+]

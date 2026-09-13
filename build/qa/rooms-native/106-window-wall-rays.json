@@ -1,0 +1,553 @@
+[
+  {
+    "x": -4.5,
+    "z": 6.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -4.5,
+        -3.99278,
+        6.5
+      ]
+    }
+  },
+  {
+    "x": -4.5,
+    "z": 6.9,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -4.5,
+        -3.99278,
+        6.9
+      ]
+    }
+  },
+  {
+    "x": -4.5,
+    "z": 7.15,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -4.5,
+        -3.99278,
+        7.15
+      ]
+    }
+  },
+  {
+    "x": -4.5,
+    "z": 7.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -4.5,
+        -3.99278,
+        7.5
+      ]
+    }
+  },
+  {
+    "x": -4.5,
+    "z": 8,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -4.5,
+        -3.99278,
+        8.0
+      ]
+    }
+  },
+  {
+    "x": -4.5,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -4.5,
+        -3.99278,
+        8.3
+      ]
+    }
+  },
+  {
+    "x": -4.5,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -4.5,
+        -3.99278,
+        8.5
+      ]
+    }
+  },
+  {
+    "x": -4.2,
+    "z": 6.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -4.2,
+        -3.99278,
+        6.5
+      ]
+    }
+  },
+  {
+    "x": -4.2,
+    "z": 6.9,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -4.2,
+        -3.99278,
+        6.9
+      ]
+    }
+  },
+  {
+    "x": -4.2,
+    "z": 7.15,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -4.2,
+        -3.99278,
+        7.15
+      ]
+    }
+  },
+  {
+    "x": -4.2,
+    "z": 7.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -4.2,
+        -3.99278,
+        7.5
+      ]
+    }
+  },
+  {
+    "x": -4.2,
+    "z": 8,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -4.2,
+        -3.99278,
+        8.0
+      ]
+    }
+  },
+  {
+    "x": -4.2,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -4.2,
+        -3.99278,
+        8.3
+      ]
+    }
+  },
+  {
+    "x": -4.2,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -4.2,
+        -3.99278,
+        8.5
+      ]
+    }
+  },
+  {
+    "x": -3.9,
+    "z": 6.5,
+    "hit": null
+  },
+  {
+    "x": -3.9,
+    "z": 6.9,
+    "hit": null
+  },
+  {
+    "x": -3.9,
+    "z": 7.15,
+    "hit": null
+  },
+  {
+    "x": -3.9,
+    "z": 7.5,
+    "hit": null
+  },
+  {
+    "x": -3.9,
+    "z": 8,
+    "hit": null
+  },
+  {
+    "x": -3.9,
+    "z": 8.3,
+    "hit": {
+      "object": "R33 | External doorway frame rail.009",
+      "material": "R31 | R35 door dark walnut.002",
+      "distance": 0.4196,
+      "point": [
+        -3.9,
+        -4.1196,
+        8.3
+      ]
+    }
+  },
+  {
+    "x": -3.9,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -3.9,
+        -3.99278,
+        8.5
+      ]
+    }
+  },
+  {
+    "x": -3.6,
+    "z": 6.5,
+    "hit": null
+  },
+  {
+    "x": -3.6,
+    "z": 6.9,
+    "hit": null
+  },
+  {
+    "x": -3.6,
+    "z": 7.15,
+    "hit": null
+  },
+  {
+    "x": -3.6,
+    "z": 7.5,
+    "hit": null
+  },
+  {
+    "x": -3.6,
+    "z": 8,
+    "hit": null
+  },
+  {
+    "x": -3.6,
+    "z": 8.3,
+    "hit": {
+      "object": "R33 | External doorway frame rail.009",
+      "material": "R31 | R35 door dark walnut.002",
+      "distance": 0.4196,
+      "point": [
+        -3.6,
+        -4.1196,
+        8.3
+      ]
+    }
+  },
+  {
+    "x": -3.6,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -3.6,
+        -3.99278,
+        8.5
+      ]
+    }
+  },
+  {
+    "x": -3.3,
+    "z": 6.5,
+    "hit": null
+  },
+  {
+    "x": -3.3,
+    "z": 6.9,
+    "hit": null
+  },
+  {
+    "x": -3.3,
+    "z": 7.15,
+    "hit": null
+  },
+  {
+    "x": -3.3,
+    "z": 7.5,
+    "hit": null
+  },
+  {
+    "x": -3.3,
+    "z": 8,
+    "hit": null
+  },
+  {
+    "x": -3.3,
+    "z": 8.3,
+    "hit": {
+      "object": "R33 | External doorway frame rail.009",
+      "material": "R31 | R35 door dark walnut.002",
+      "distance": 0.4196,
+      "point": [
+        -3.3,
+        -4.1196,
+        8.3
+      ]
+    }
+  },
+  {
+    "x": -3.3,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -3.3,
+        -3.99278,
+        8.5
+      ]
+    }
+  },
+  {
+    "x": -3,
+    "z": 6.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR",
+      "material": "interior.002",
+      "distance": 0.32344,
+      "point": [
+        -3.0,
+        -4.02344,
+        6.5
+      ]
+    }
+  },
+  {
+    "x": -3,
+    "z": 6.9,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR",
+      "material": "interior.002",
+      "distance": 0.32344,
+      "point": [
+        -3.0,
+        -4.02344,
+        6.9
+      ]
+    }
+  },
+  {
+    "x": -3,
+    "z": 7.15,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR",
+      "material": "interior.002",
+      "distance": 0.32344,
+      "point": [
+        -3.0,
+        -4.02344,
+        7.15
+      ]
+    }
+  },
+  {
+    "x": -3,
+    "z": 7.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR",
+      "material": "interior.002",
+      "distance": 0.32344,
+      "point": [
+        -3.0,
+        -4.02344,
+        7.5
+      ]
+    }
+  },
+  {
+    "x": -3,
+    "z": 8,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR",
+      "material": "interior.002",
+      "distance": 0.32344,
+      "point": [
+        -3.0,
+        -4.02344,
+        8.0
+      ]
+    }
+  },
+  {
+    "x": -3,
+    "z": 8.3,
+    "hit": {
+      "object": "R33 | External doorway frame stile.009",
+      "material": "R31 | R35 door dark walnut.002",
+      "distance": 0.4196,
+      "point": [
+        -3.0,
+        -4.1196,
+        8.3
+      ]
+    }
+  },
+  {
+    "x": -3,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -3.0,
+        -3.99278,
+        8.5
+      ]
+    }
+  },
+  {
+    "x": -2.7,
+    "z": 6.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -2.7,
+        -3.99278,
+        6.5
+      ]
+    }
+  },
+  {
+    "x": -2.7,
+    "z": 6.9,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -2.7,
+        -3.99278,
+        6.9
+      ]
+    }
+  },
+  {
+    "x": -2.7,
+    "z": 7.15,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -2.7,
+        -3.99278,
+        7.15
+      ]
+    }
+  },
+  {
+    "x": -2.7,
+    "z": 7.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -2.7,
+        -3.99278,
+        7.5
+      ]
+    }
+  },
+  {
+    "x": -2.7,
+    "z": 8,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -2.7,
+        -3.99278,
+        8.0
+      ]
+    }
+  },
+  {
+    "x": -2.7,
+    "z": 8.3,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -2.7,
+        -3.99278,
+        8.3
+      ]
+    }
+  },
+  {
+    "x": -2.7,
+    "z": 8.5,
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 0.29278,
+      "point": [
+        -2.7,
+        -3.99278,
+        8.5
+      ]
+    }
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "closed_cells": 1323,
+  "retained_projected_top_area_m2": 273.7760596978296,
+  "faces": 6615,
+  "nonmanifold_edges": 0,
+  "buried_internal_cell_faces": "Intentional common boundaries below ground; do not weld independent soil columns during glTF export"
+}

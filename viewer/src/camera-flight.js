@@ -12,7 +12,9 @@ export class CameraFlight {
     const {camera,controls}=this;
     const before=new THREE.Spherical().setFromVector3(camera.position.clone().sub(controls.target));
     const radius=span/(2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2)));
-    const end={target:target.clone(),polar,radius,zoom,azimuth:azimuth??before.theta};
+    const desired=azimuth??before.theta;
+    const shortest=Math.atan2(Math.sin(desired-before.theta),Math.cos(desired-before.theta));
+    const end={target:target.clone(),polar,radius,zoom,azimuth:before.theta+shortest};
     const start=performance.now();
     this.active={start,endTime:start+FLIGHT_DURATION,from:{target:controls.target.clone(),polar:before.phi,radius:before.radius,zoom:camera.zoom,azimuth:before.theta},to:end};
     controls.enabled=false;

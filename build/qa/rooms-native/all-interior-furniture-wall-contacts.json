@@ -1,0 +1,869 @@
+[
+  {
+    "object": "Opal ceiling diffuser.005",
+    "wall": "F0 | KAT 0$TAVAN",
+    "face_pairs": 35,
+    "bounds": [
+      [
+        -1.033,
+        2.367,
+        2.5
+      ],
+      [
+        -0.767,
+        2.633,
+        2.626
+      ]
+    ]
+  },
+  {
+    "object": "R40 | B03 banyo bölme duvarları",
+    "wall": "F0 | KAT 0$DUVAR KAPLAMA",
+    "face_pairs": 47,
+    "bounds": [
+      [
+        1.068,
+        3.13403,
+        -0.025
+      ],
+      [
+        3.10006,
+        5.027,
+        2.64
+      ]
+    ]
+  },
+  {
+    "object": "R40 | B03 banyo bölme duvarları",
+    "wall": "F0 | KAT 0$TAVAN",
+    "face_pairs": 81,
+    "bounds": [
+      [
+        1.068,
+        3.13403,
+        -0.025
+      ],
+      [
+        3.10006,
+        5.027,
+        2.64
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame stile.001",
+    "wall": "F0 | KAT 0$DUVAR",
+    "face_pairs": 50,
+    "bounds": [
+      [
+        -0.444,
+        8.17006,
+        0.0
+      ],
+      [
+        -0.392,
+        8.25,
+        2.1296
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame stile.013",
+    "wall": "F0 | KAT 0$DUVAR",
+    "face_pairs": 65,
+    "bounds": [
+      [
+        6.8164,
+        6.86228,
+        -0.0024
+      ],
+      [
+        6.86836,
+        6.9423,
+        1.8976
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame stile",
+    "wall": "F0 | KAT 0$DUVAR",
+    "face_pairs": 21,
+    "bounds": [
+      [
+        -1.582,
+        8.17006,
+        0.0
+      ],
+      [
+        -1.53,
+        8.25,
+        2.1296
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame rail",
+    "wall": "F0 | KAT 0$DUVAR",
+    "face_pairs": 19,
+    "bounds": [
+      [
+        -1.53,
+        8.16999,
+        0.0
+      ],
+      [
+        -0.444,
+        8.25,
+        0.05197
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame stile.012",
+    "wall": "F0 | KAT 0$DUVAR",
+    "face_pairs": 47,
+    "bounds": [
+      [
+        6.0854,
+        6.86228,
+        -0.0024
+      ],
+      [
+        6.13736,
+        6.9423,
+        1.8976
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame rail.012",
+    "wall": "F0 | KAT 0$DUVAR",
+    "face_pairs": 24,
+    "bounds": [
+      [
+        6.1374,
+        6.86231,
+        -0.0024
+      ],
+      [
+        6.8164,
+        6.9423,
+        0.04961
+      ]
+    ]
+  },
+  {
+    "object": "Opal ceiling diffuser.008",
+    "wall": "F0 | KAT 0$TAVAN",
+    "face_pairs": 37,
+    "bounds": [
+      [
+        -0.173,
+        1.387,
+        2.5
+      ],
+      [
+        0.093,
+        1.653,
+        2.626
+      ]
+    ]
+  },
+  {
+    "object": "Lift shaft continuous walls | F0",
+    "wall": "F0 | KAT 0$DUVAR KAPLAMA",
+    "face_pairs": 28,
+    "bounds": [
+      [
+        -2.932,
+        0.05995,
+        0.0
+      ],
+      [
+        -1.00106,
+        1.32,
+        3.0996
+      ]
+    ]
+  },
+  {
+    "object": "Lift shaft continuous walls | F0",
+    "wall": "F0 | KAT 0$DUVAR",
+    "face_pairs": 2,
+    "bounds": [
+      [
+        -2.932,
+        0.05995,
+        0.0
+      ],
+      [
+        -1.00106,
+        1.32,
+        3.0996
+      ]
+    ]
+  },
+  {
+    "object": "Lift shaft continuous walls | F0",
+    "wall": "F0 | KAT 0$TAVAN",
+    "face_pairs": 144,
+    "bounds": [
+      [
+        -2.932,
+        0.05995,
+        0.0
+      ],
+      [
+        -1.00106,
+        1.32,
+        3.0996
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame stile.003",
+    "wall": "F1 | KAT 1$DUVAR",
+    "face_pairs": 82,
+    "bounds": [
+      [
+        -0.444,
+        8.17004,
+        2.7996
+      ],
+      [
+        -0.39199,
+        8.25,
+        4.9296
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame rail.003",
+    "wall": "F1 | KAT 1$DUVAR",
+    "face_pairs": 91,
+    "bounds": [
+      [
+        -1.53,
+        8.16999,
+        4.8776
+      ],
+      [
+        -0.444,
+        8.25,
+        4.92957
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame rail.011",
+    "wall": "F1 | KAT 1$DUVAR",
+    "face_pairs": 46,
+    "bounds": [
+      [
+        1.9705,
+        -4.16299,
+        5.0976
+      ],
+      [
+        2.8165,
+        -4.083,
+        5.1496
+      ]
+    ]
+  },
+  {
+    "object": "Interior window casing.009",
+    "wall": "F1 | KAT 1$DUVAR KAPLAMA",
+    "face_pairs": 10,
+    "bounds": [
+      [
+        2.2255,
+        7.97247,
+        3.365
+      ],
+      [
+        2.30053,
+        8.0475,
+        4.945
+      ]
+    ]
+  },
+  {
+    "object": "Interior window casing.003",
+    "wall": "F1 | KAT 1$DUVAR KAPLAMA",
+    "face_pairs": 4,
+    "bounds": [
+      [
+        -4.257,
+        7.9725,
+        4.8425
+      ],
+      [
+        -3.027,
+        8.0475,
+        4.9175
+      ]
+    ]
+  },
+  {
+    "object": "Interior window casing.004",
+    "wall": "F1 | KAT 1$DUVAR KAPLAMA",
+    "face_pairs": 10,
+    "bounds": [
+      [
+        -1.5995,
+        7.97251,
+        2.755
+      ],
+      [
+        -1.52451,
+        8.0475,
+        4.945
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame stile.007",
+    "wall": "F1 | KAT 1$DUVAR",
+    "face_pairs": 130,
+    "bounds": [
+      [
+        -3.0386,
+        -4.19956,
+        3.0996
+      ],
+      [
+        -2.98659,
+        -4.1196,
+        5.2296
+      ]
+    ]
+  },
+  {
+    "object": "Interior window casing.011",
+    "wall": "F1 | KAT 1$DUVAR KAPLAMA",
+    "face_pairs": 5,
+    "bounds": [
+      [
+        1.073,
+        7.9725,
+        4.8425
+      ],
+      [
+        2.303,
+        8.0475,
+        4.9175
+      ]
+    ]
+  },
+  {
+    "object": "Interior window casing.008",
+    "wall": "F1 | KAT 1$DUVAR KAPLAMA",
+    "face_pairs": 9,
+    "bounds": [
+      [
+        1.0755,
+        7.97247,
+        3.365
+      ],
+      [
+        1.15053,
+        8.0475,
+        4.945
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame stile.011",
+    "wall": "F1 | KAT 1$DUVAR",
+    "face_pairs": 90,
+    "bounds": [
+      [
+        2.8165,
+        -4.16296,
+        3.0996
+      ],
+      [
+        2.86855,
+        -4.083,
+        5.1496
+      ]
+    ]
+  },
+  {
+    "object": "Lift shaft continuous walls | F1",
+    "wall": "F1 | KAT 1$TAVAN",
+    "face_pairs": 156,
+    "bounds": [
+      [
+        -2.932,
+        0.06005,
+        3.0996
+      ],
+      [
+        -1.00103,
+        1.32,
+        6.3714
+      ]
+    ]
+  },
+  {
+    "object": "R31 | Solid salon step east",
+    "wall": "F1 | KAT 1$DUVAR KAPLAMA",
+    "face_pairs": 49,
+    "bounds": [
+      [
+        -0.9516,
+        3.32672,
+        2.7196
+      ],
+      [
+        3.0884,
+        3.6579,
+        3.09961
+      ]
+    ]
+  },
+  {
+    "object": "R31 | Solid salon step east",
+    "wall": "F1 | KAT 1$DUVAR",
+    "face_pairs": 23,
+    "bounds": [
+      [
+        -0.9516,
+        3.32672,
+        2.7196
+      ],
+      [
+        3.0884,
+        3.6579,
+        3.09961
+      ]
+    ]
+  },
+  {
+    "object": "Interior window casing.007",
+    "wall": "F1 | KAT 1$DUVAR KAPLAMA",
+    "face_pairs": 6,
+    "bounds": [
+      [
+        -1.602,
+        7.9725,
+        4.8425
+      ],
+      [
+        -0.372,
+        8.0475,
+        4.9175
+      ]
+    ]
+  },
+  {
+    "object": "R33 | Door hinge barrel.021",
+    "wall": "F1 | KAT 1$DUVAR",
+    "face_pairs": 5,
+    "bounds": [
+      [
+        2.8005,
+        -4.135,
+        4.8106
+      ],
+      [
+        2.8245,
+        -4.111,
+        4.8846
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame rail.007",
+    "wall": "F1 | KAT 1$DUVAR",
+    "face_pairs": 86,
+    "bounds": [
+      [
+        -4.1246,
+        -4.19961,
+        5.1776
+      ],
+      [
+        -3.0386,
+        -4.1196,
+        5.22957
+      ]
+    ]
+  },
+  {
+    "object": "R31 | Solid salon column",
+    "wall": "F1 | KAT 1$TAVAN",
+    "face_pairs": 78,
+    "bounds": [
+      [
+        -1.212,
+        3.09697,
+        2.7996
+      ],
+      [
+        -0.95157,
+        3.7573,
+        5.8914
+      ]
+    ]
+  },
+  {
+    "object": "R31 | Solid salon column",
+    "wall": "F1 | KAT 1$DUVAR",
+    "face_pairs": 22,
+    "bounds": [
+      [
+        -1.212,
+        3.09697,
+        2.7996
+      ],
+      [
+        -0.95157,
+        3.7573,
+        5.8914
+      ]
+    ]
+  },
+  {
+    "object": "Interior window casing.005",
+    "wall": "F1 | KAT 1$DUVAR KAPLAMA",
+    "face_pairs": 10,
+    "bounds": [
+      [
+        -0.4495,
+        7.97251,
+        2.755
+      ],
+      [
+        -0.37451,
+        8.0475,
+        4.945
+      ]
+    ]
+  },
+  {
+    "object": "Interior window casing.001",
+    "wall": "F1 | KAT 1$DUVAR KAPLAMA",
+    "face_pairs": 11,
+    "bounds": [
+      [
+        -3.1045,
+        7.97247,
+        3.365
+      ],
+      [
+        -3.02947,
+        8.0475,
+        4.945
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame stile.006",
+    "wall": "F1 | KAT 1$DUVAR",
+    "face_pairs": 130,
+    "bounds": [
+      [
+        -4.1766,
+        -4.19956,
+        3.0996
+      ],
+      [
+        -4.12459,
+        -4.1196,
+        5.2296
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame rail.002",
+    "wall": "F1 | KAT 1$DUVAR",
+    "face_pairs": 30,
+    "bounds": [
+      [
+        -1.53,
+        8.16999,
+        2.7996
+      ],
+      [
+        -0.444,
+        8.25,
+        2.85157
+      ]
+    ]
+  },
+  {
+    "object": "R33 | Door hinge barrel.020",
+    "wall": "F1 | KAT 1$DUVAR",
+    "face_pairs": 7,
+    "bounds": [
+      [
+        2.8005,
+        -4.135,
+        3.2926
+      ],
+      [
+        2.8245,
+        -4.111,
+        3.3666
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame rail.006",
+    "wall": "F1 | KAT 1$DUVAR",
+    "face_pairs": 102,
+    "bounds": [
+      [
+        -4.1246,
+        -4.19961,
+        3.0996
+      ],
+      [
+        -3.0386,
+        -4.1196,
+        3.15157
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame rail.010",
+    "wall": "F1 | KAT 1$DUVAR",
+    "face_pairs": 99,
+    "bounds": [
+      [
+        1.9705,
+        -4.16299,
+        3.0996
+      ],
+      [
+        2.8165,
+        -4.083,
+        3.1516
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame stile.002",
+    "wall": "F1 | KAT 1$DUVAR",
+    "face_pairs": 77,
+    "bounds": [
+      [
+        -1.582,
+        8.17004,
+        2.7996
+      ],
+      [
+        -1.52999,
+        8.25,
+        4.9296
+      ]
+    ]
+  },
+  {
+    "object": "Opal ceiling diffuser.009",
+    "wall": "F1 | KAT 1$TAVAN",
+    "face_pairs": 70,
+    "bounds": [
+      [
+        3.417,
+        -1.553,
+        5.785
+      ],
+      [
+        3.683,
+        -1.287,
+        5.911
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame stile.010",
+    "wall": "F1 | KAT 1$DUVAR",
+    "face_pairs": 130,
+    "bounds": [
+      [
+        1.9185,
+        -4.16296,
+        3.0996
+      ],
+      [
+        1.97055,
+        -4.083,
+        5.1496
+      ]
+    ]
+  },
+  {
+    "object": "Opal ceiling diffuser.003",
+    "wall": "F2 | KAT 2$TAVAN",
+    "face_pairs": 45,
+    "bounds": [
+      [
+        -0.933,
+        1.967,
+        8.875
+      ],
+      [
+        -0.667,
+        2.233,
+        9.001
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame rail.005",
+    "wall": "F2 | KAT 2$DUVAR",
+    "face_pairs": 93,
+    "bounds": [
+      [
+        -1.53,
+        8.16999,
+        8.2776
+      ],
+      [
+        -0.444,
+        8.25,
+        8.32957
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame stile.004",
+    "wall": "F2 | KAT 2$DUVAR",
+    "face_pairs": 73,
+    "bounds": [
+      [
+        -1.582,
+        8.17004,
+        6.3714
+      ],
+      [
+        -1.53001,
+        8.25,
+        8.3296
+      ]
+    ]
+  },
+  {
+    "object": "Opal ceiling diffuser.002",
+    "wall": "F2 | KAT 2$TAVAN",
+    "face_pairs": 45,
+    "bounds": [
+      [
+        2.767,
+        -2.433,
+        8.875
+      ],
+      [
+        3.033,
+        -2.167,
+        9.001
+      ]
+    ]
+  },
+  {
+    "object": "Opal ceiling diffuser.001",
+    "wall": "F2 | KAT 2$TAVAN",
+    "face_pairs": 49,
+    "bounds": [
+      [
+        1.517,
+        7.417,
+        8.875
+      ],
+      [
+        1.783,
+        7.683,
+        9.001
+      ]
+    ]
+  },
+  {
+    "object": "Lift shaft continuous walls | F2",
+    "wall": "F2 | KAT 2$TAVAN",
+    "face_pairs": 49,
+    "bounds": [
+      [
+        -2.932,
+        0.06001,
+        6.3714
+      ],
+      [
+        -1.00108,
+        1.32,
+        8.991
+      ]
+    ]
+  },
+  {
+    "object": "Opal ceiling diffuser",
+    "wall": "F2 | KAT 2$TAVAN",
+    "face_pairs": 47,
+    "bounds": [
+      [
+        1.517,
+        4.517,
+        8.875
+      ],
+      [
+        1.783,
+        4.783,
+        9.001
+      ]
+    ]
+  },
+  {
+    "object": "Gallery R42 | forged scroll balustrade",
+    "wall": "F2 | KAT 2$DUVAR KAPLAMA",
+    "face_pairs": 21,
+    "bounds": [
+      [
+        0.1624,
+        -0.44866,
+        4.80842
+      ],
+      [
+        3.0494,
+        0.9833,
+        7.32448
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame stile.005",
+    "wall": "F2 | KAT 2$DUVAR",
+    "face_pairs": 78,
+    "bounds": [
+      [
+        -0.444,
+        8.17004,
+        6.3714
+      ],
+      [
+        -0.39201,
+        8.25,
+        8.3296
+      ]
+    ]
+  },
+  {
+    "object": "R33 | External doorway frame rail.004",
+    "wall": "F2 | KAT 2$DUVAR",
+    "face_pairs": 4,
+    "bounds": [
+      [
+        -1.53,
+        8.16999,
+        6.3714
+      ],
+      [
+        -0.444,
+        8.25,
+        6.42337
+      ]
+    ]
+  }
+]

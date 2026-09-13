@@ -1,0 +1,8210 @@
+{
+  "stair_samples": 228,
+  "missing_stair_samples": 0,
+  "soil_intrusions": 0,
+  "body_ray_hits": [],
+  "terrace_floor_samples": 318,
+  "terrace_missing_floor": [],
+  "geometry": [
+    {
+      "name": "F1 | PENCERE_KAPI$SHUTTER",
+      "nonmanifold_edges": 2445,
+      "zero_faces": 102,
+      "hidden": false
+    },
+    {
+      "name": "Spruce needle sprays.003",
+      "nonmanifold_edges": 175164,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Spruce branches.003",
+      "nonmanifold_edges": 1008,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Spruce needle sprays",
+      "nonmanifold_edges": 175042,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Spruce branches",
+      "nonmanifold_edges": 1008,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Photo terrace riser 1",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Terrace coping 1",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Photo terrace riser 2",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Terrace coping 2",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Photo terrace riser 3",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Terrace coping 3",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 0",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 1",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 2",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 3",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 4",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 5",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 6",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 7",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 8",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 9",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 10",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 11",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 12",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 13",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 14",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 15",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 16",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 17",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair stone skirting 18",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 0",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 1",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 2",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 3",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 4",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 5",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 6",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 7",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 8",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 9",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 10",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 11",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 12",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 13",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 14",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 15",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 16",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 17",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Stair side stone infill 18",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Limestone stair nosing 1",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Limestone stair nosing 2",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Limestone stair nosing 3",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Limestone stair nosing 4",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Limestone stair nosing 5",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Limestone stair nosing 7",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Limestone stair nosing 8",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Limestone stair nosing 9",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Limestone stair nosing 10",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Limestone stair nosing 11",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Limestone stair nosing 13",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Limestone stair nosing 14",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Limestone stair nosing 15",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Limestone stair nosing 16",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden west | Limestone stair nosing 17",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Photo terrace riser 1",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Terrace coping 1",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Photo terrace riser 2",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Terrace coping 2",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Photo terrace riser 3",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Terrace coping 3",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 0",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 1",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 2",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 3",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 4",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 5",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 6",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 7",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 8",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 9",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 10",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 11",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 12",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 13",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 14",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 15",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 16",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 17",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair stone skirting 18",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 0",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 1",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 2",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 3",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 4",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 5",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 6",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 7",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 8",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 9",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 10",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 11",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 12",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 13",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 14",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 15",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 16",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 17",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Stair side stone infill 18",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Limestone stair nosing 1",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Limestone stair nosing 2",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Limestone stair nosing 3",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Limestone stair nosing 4",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Limestone stair nosing 5",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Limestone stair nosing 7",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Limestone stair nosing 8",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Limestone stair nosing 9",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Limestone stair nosing 10",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Limestone stair nosing 11",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Limestone stair nosing 13",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Limestone stair nosing 14",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Limestone stair nosing 15",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Limestone stair nosing 16",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden east | Limestone stair nosing 17",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Photographed white canopy soffit",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Canopy deep side beam",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Canopy deep side beam.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Canopy front wood beam",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.002",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.003",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.004",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.005",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.006",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.007",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.008",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.009",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.010",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.011",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.012",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.013",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.014",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.015",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.016",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.017",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.018",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.019",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.020",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table top slat.021",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio tabletop edge",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio tabletop edge.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table trestle foot",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table trestle upright",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table trestle top",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table trestle foot.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table trestle upright.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table trestle top.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio table lower stretcher",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio ceiling light mount",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Patio ceiling light opal bowl",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Buried soil below stair",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Buried soil below stair.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Photo square timber canopy post",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Photo square timber canopy post.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Canopy downpipe with offset bends",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Canopy downpipe with offset bends.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Canopy ivory gutter front",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Pool blue upper tile band",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Pool blue upper tile band.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Pool blue upper tile band.002",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Pool blue upper tile band.003",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Pool circular wall fitting",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Pool circular wall fitting.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Pool circular wall fitting.002",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Pool circular wall fitting.003",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Kitchen recess continuous terrace",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Kitchen recess continuous terrace.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern wall plate",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern curved arm base",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern curved arm rise",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Photo wall lantern foot",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Photo wall lantern glass",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Photo wall lantern roof",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Photo wall lantern finial",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Photo wall lantern bulb",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern glazing frame",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern glazing frame.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern glazing frame.002",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern glazing frame.003",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern glazing frame.004",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern glazing frame.005",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern wall plate.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern curved arm base.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern curved arm rise.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Photo wall lantern foot.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Photo wall lantern glass.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Photo wall lantern roof.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Photo wall lantern finial.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Photo wall lantern bulb.001",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern glazing frame.006",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern glazing frame.007",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern glazing frame.008",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern glazing frame.009",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern glazing frame.010",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "Garden | Lantern glazing frame.011",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    },
+    {
+      "name": "R32 | Continuous local soil volume",
+      "nonmanifold_edges": 0,
+      "zero_faces": 0,
+      "hidden": false
+    }
+  ],
+  "stair_rows": [
+    {
+      "side": "west",
+      "y": -3.1,
+      "stair": [
+        -6.420000076293945,
+        -3.0999999046325684,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -3.0,
+      "stair": [
+        -6.420000076293945,
+        -3.0,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -2.9,
+      "stair": [
+        -6.420000076293945,
+        -2.9000000953674316,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -2.8,
+      "stair": [
+        -6.420000076293945,
+        -2.799999952316284,
+        3.0994796752929688
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -2.6999999999999997,
+      "stair": [
+        -6.420000076293945,
+        -2.700000047683716,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -2.5999999999999996,
+      "stair": [
+        -6.420000076293945,
+        -2.5999999046325684,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -2.4999999999999996,
+      "stair": [
+        -6.420000076293945,
+        -2.5,
+        3.0994796752929688
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -2.3999999999999995,
+      "stair": [
+        -6.420000076293945,
+        -2.4000000953674316,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -2.2999999999999994,
+      "stair": [
+        -6.420000076293945,
+        -2.299999952316284,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -2.1999999999999993,
+      "stair": [
+        -6.420000076293945,
+        -2.200000047683716,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -2.099999999999999,
+      "stair": [
+        -6.420000076293945,
+        -2.0999999046325684,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -1.9999999999999991,
+      "stair": [
+        -6.420000076293945,
+        -2.0,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -1.899999999999999,
+      "stair": [
+        -6.420000076293945,
+        -1.899999976158142,
+        3.0994796752929688
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -1.799999999999999,
+      "stair": [
+        -6.420000076293945,
+        -1.7999999523162842,
+        3.0994796752929688
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -1.6999999999999988,
+      "stair": [
+        -6.420000076293945,
+        -1.7000000476837158,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -1.5999999999999988,
+      "stair": [
+        -6.420000076293945,
+        -1.600000023841858,
+        3.0994796752929688
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -1.4999999999999987,
+      "stair": [
+        -6.420000076293945,
+        -1.5,
+        3.0994796752929688
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -1.3999999999999986,
+      "stair": [
+        -6.420000076293945,
+        -1.399999976158142,
+        3.0994796752929688
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -1.2999999999999985,
+      "stair": [
+        -6.420000076293945,
+        -1.2999999523162842,
+        2.927457809448242
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -1.1999999999999984,
+      "stair": [
+        -6.420000076293945,
+        -1.2000000476837158,
+        2.927457809448242
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -1.0999999999999983,
+      "stair": [
+        -6.420000076293945,
+        -1.100000023841858,
+        2.927457809448242
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -0.9999999999999982,
+      "stair": [
+        -6.420000076293945,
+        -1.0,
+        2.755434036254883
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -0.8999999999999981,
+      "stair": [
+        -6.420000076293945,
+        -0.8999999761581421,
+        2.7554359436035156
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -0.799999999999998,
+      "stair": [
+        -6.420000076293945,
+        -0.800000011920929,
+        2.7554359436035156
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -0.699999999999998,
+      "stair": [
+        -6.420000076293945,
+        -0.699999988079071,
+        2.7554359436035156
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -0.5999999999999979,
+      "stair": [
+        -6.420000076293945,
+        -0.6000000238418579,
+        2.582714080810547
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -0.4999999999999978,
+      "stair": [
+        -6.420000076293945,
+        -0.5,
+        2.5827159881591797
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -0.3999999999999977,
+      "stair": [
+        -6.420000076293945,
+        -0.4000000059604645,
+        2.582714080810547
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -0.2999999999999976,
+      "stair": [
+        -6.420000076293945,
+        -0.30000001192092896,
+        2.4106903076171875
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -0.1999999999999975,
+      "stair": [
+        -6.420000076293945,
+        -0.20000000298023224,
+        2.4106884002685547
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": -0.09999999999999742,
+      "stair": [
+        -6.420000076293945,
+        -0.10000000149011612,
+        2.4106903076171875
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 2.6645352591003757e-15,
+      "stair": [
+        -6.420000076293945,
+        2.6645352591003757e-15,
+        2.238666534423828
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 0.10000000000000275,
+      "stair": [
+        -6.420000076293945,
+        0.10000000149011612,
+        2.238668441772461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 0.20000000000000284,
+      "stair": [
+        -6.420000076293945,
+        0.20000000298023224,
+        2.238666534423828
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 0.30000000000000293,
+      "stair": [
+        -6.420000076293945,
+        0.30000001192092896,
+        2.066638946533203
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 0.400000000000003,
+      "stair": [
+        -6.420000076293945,
+        0.4000000059604645,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 0.5000000000000031,
+      "stair": [
+        -6.420000076293945,
+        0.5,
+        2.066638946533203
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 0.6000000000000032,
+      "stair": [
+        -6.420000076293945,
+        0.6000000238418579,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 0.7000000000000033,
+      "stair": [
+        -6.420000076293945,
+        0.699999988079071,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 0.8000000000000034,
+      "stair": [
+        -6.420000076293945,
+        0.800000011920929,
+        2.066638946533203
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 0.9000000000000035,
+      "stair": [
+        -6.420000076293945,
+        0.8999999761581421,
+        2.066638946533203
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 1.000000000000003,
+      "stair": [
+        -6.420000076293945,
+        1.0,
+        2.066638946533203
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 1.1000000000000036,
+      "stair": [
+        -6.420000076293945,
+        1.100000023841858,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 1.2000000000000042,
+      "stair": [
+        -6.420000076293945,
+        1.2000000476837158,
+        2.066638946533203
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 1.3000000000000038,
+      "stair": [
+        -6.420000076293945,
+        1.2999999523162842,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 1.4000000000000035,
+      "stair": [
+        -6.420000076293945,
+        1.399999976158142,
+        2.066638946533203
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 1.500000000000004,
+      "stair": [
+        -6.420000076293945,
+        1.5,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 1.6000000000000045,
+      "stair": [
+        -6.420000076293945,
+        1.600000023841858,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 1.7000000000000042,
+      "stair": [
+        -6.420000076293945,
+        1.7000000476837158,
+        2.066638946533203
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 1.8000000000000038,
+      "stair": [
+        -6.420000076293945,
+        1.7999999523162842,
+        2.066638946533203
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 1.9000000000000044,
+      "stair": [
+        -6.420000076293945,
+        1.899999976158142,
+        2.066638946533203
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 2.000000000000005,
+      "stair": [
+        -6.420000076293945,
+        2.0,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 2.1000000000000045,
+      "stair": [
+        -6.420000076293945,
+        2.0999999046325684,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 2.200000000000004,
+      "stair": [
+        -6.420000076293945,
+        2.200000047683716,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 2.3000000000000047,
+      "stair": [
+        -6.420000076293945,
+        2.299999952316284,
+        2.066638946533203
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 2.4000000000000052,
+      "stair": [
+        -6.420000076293945,
+        2.4000000953674316,
+        2.066638946533203
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 2.500000000000005,
+      "stair": [
+        -6.420000076293945,
+        2.5,
+        1.8939228057861328
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 2.6000000000000045,
+      "stair": [
+        -6.420000076293945,
+        2.5999999046325684,
+        1.8939208984375
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 2.700000000000005,
+      "stair": [
+        -6.420000076293945,
+        2.700000047683716,
+        1.8939189910888672
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 2.8000000000000056,
+      "stair": [
+        -6.420000076293945,
+        2.799999952316284,
+        1.7218990325927734
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 2.9000000000000052,
+      "stair": [
+        -6.420000076293945,
+        2.9000000953674316,
+        1.7218971252441406
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 3.000000000000005,
+      "stair": [
+        -6.420000076293945,
+        3.0,
+        1.7218971252441406
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 3.1000000000000054,
+      "stair": [
+        -6.420000076293945,
+        3.0999999046325684,
+        1.5498733520507812
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 3.200000000000006,
+      "stair": [
+        -6.420000076293945,
+        3.200000047683716,
+        1.5498733520507812
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 3.3000000000000056,
+      "stair": [
+        -6.420000076293945,
+        3.299999952316284,
+        1.5498733520507812
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 3.4000000000000052,
+      "stair": [
+        -6.420000076293945,
+        3.4000000953674316,
+        1.3778495788574219
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 3.5000000000000058,
+      "stair": [
+        -6.420000076293945,
+        3.5,
+        1.3778495788574219
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 3.6000000000000063,
+      "stair": [
+        -6.420000076293945,
+        3.5999999046325684,
+        1.3778495788574219
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 3.700000000000006,
+      "stair": [
+        -6.420000076293945,
+        3.700000047683716,
+        1.2058601379394531
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 3.8000000000000056,
+      "stair": [
+        -6.420000076293945,
+        3.799999952316284,
+        1.205129623413086
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 3.900000000000006,
+      "stair": [
+        -6.420000076293945,
+        3.9000000953674316,
+        1.2051277160644531
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 4.000000000000007,
+      "stair": [
+        -6.420000076293945,
+        4.0,
+        1.205129623413086
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 4.100000000000007,
+      "stair": [
+        -6.420000076293945,
+        4.099999904632568,
+        1.033102035522461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 4.200000000000006,
+      "stair": [
+        -6.420000076293945,
+        4.199999809265137,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 4.300000000000006,
+      "stair": [
+        -6.420000076293945,
+        4.300000190734863,
+        1.033102035522461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 4.4000000000000075,
+      "stair": [
+        -6.420000076293945,
+        4.400000095367432,
+        1.033102035522461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 4.500000000000007,
+      "stair": [
+        -6.420000076293945,
+        4.5,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 4.600000000000007,
+      "stair": [
+        -6.420000076293945,
+        4.599999904632568,
+        1.033102035522461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 4.700000000000006,
+      "stair": [
+        -6.420000076293945,
+        4.699999809265137,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 4.800000000000008,
+      "stair": [
+        -6.420000076293945,
+        4.800000190734863,
+        1.033102035522461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 4.9000000000000075,
+      "stair": [
+        -6.420000076293945,
+        4.900000095367432,
+        1.033102035522461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 5.000000000000007,
+      "stair": [
+        -6.420000076293945,
+        5.0,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 5.100000000000007,
+      "stair": [
+        -6.420000076293945,
+        5.099999904632568,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 5.200000000000008,
+      "stair": [
+        -6.420000076293945,
+        5.199999809265137,
+        1.033102035522461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 5.300000000000008,
+      "stair": [
+        -6.420000076293945,
+        5.300000190734863,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 5.4000000000000075,
+      "stair": [
+        -6.420000076293945,
+        5.400000095367432,
+        1.033102035522461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 5.500000000000009,
+      "stair": [
+        -6.420000076293945,
+        5.5,
+        1.033102035522461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 5.6000000000000085,
+      "stair": [
+        -6.420000076293945,
+        5.599999904632568,
+        1.033102035522461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 5.700000000000008,
+      "stair": [
+        -6.420000076293945,
+        5.699999809265137,
+        1.033102035522461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 5.800000000000008,
+      "stair": [
+        -6.420000076293945,
+        5.800000190734863,
+        1.033102035522461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 5.9000000000000075,
+      "stair": [
+        -6.420000076293945,
+        5.900000095367432,
+        1.033102035522461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 6.000000000000009,
+      "stair": [
+        -6.420000076293945,
+        6.0,
+        1.033102035522461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 6.1000000000000085,
+      "stair": [
+        -6.420000076293945,
+        6.099999904632568,
+        1.033102035522461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 6.200000000000008,
+      "stair": [
+        -6.420000076293945,
+        6.199999809265137,
+        0.8610801696777344
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 6.30000000000001,
+      "stair": [
+        -6.420000076293945,
+        6.300000190734863,
+        0.8610801696777344
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 6.400000000000009,
+      "stair": [
+        -6.420000076293945,
+        6.400000095367432,
+        0.8610801696777344
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 6.500000000000009,
+      "stair": [
+        -6.420000076293945,
+        6.5,
+        0.689056396484375
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 6.6000000000000085,
+      "stair": [
+        -6.420000076293945,
+        6.599999904632568,
+        0.689056396484375
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 6.700000000000008,
+      "stair": [
+        -6.420000076293945,
+        6.699999809265137,
+        0.689056396484375
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 6.80000000000001,
+      "stair": [
+        -6.420000076293945,
+        6.800000190734863,
+        0.689056396484375
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 6.900000000000009,
+      "stair": [
+        -6.420000076293945,
+        6.900000095367432,
+        0.5163364410400391
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 7.000000000000009,
+      "stair": [
+        -6.420000076293945,
+        7.0,
+        0.5163383483886719
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 7.10000000000001,
+      "stair": [
+        -6.420000076293945,
+        7.099999904632568,
+        0.5163383483886719
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 7.20000000000001,
+      "stair": [
+        -6.420000076293945,
+        7.199999809265137,
+        0.3443126678466797
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 7.30000000000001,
+      "stair": [
+        -6.420000076293945,
+        7.300000190734863,
+        0.3443126678466797
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 7.400000000000009,
+      "stair": [
+        -6.420000076293945,
+        7.400000095367432,
+        0.3443126678466797
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 7.500000000000009,
+      "stair": [
+        -6.420000076293945,
+        7.5,
+        0.1722869873046875
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 7.60000000000001,
+      "stair": [
+        -6.420000076293945,
+        7.599999904632568,
+        0.1722869873046875
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 7.70000000000001,
+      "stair": [
+        -6.420000076293945,
+        7.699999809265137,
+        0.1722869873046875
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 7.80000000000001,
+      "stair": [
+        -6.420000076293945,
+        7.800000190734863,
+        0.019763946533203125
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 7.900000000000011,
+      "stair": [
+        -6.420000076293945,
+        7.900000095367432,
+        0.019763946533203125
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 8.00000000000001,
+      "stair": [
+        -6.420000076293945,
+        8.0,
+        0.019763946533203125
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 8.10000000000001,
+      "stair": [
+        -6.420000076293945,
+        8.100000381469727,
+        0.019763946533203125
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "west",
+      "y": 8.20000000000001,
+      "stair": [
+        -6.420000076293945,
+        8.199999809265137,
+        0.019763946533203125
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -3.1,
+      "stair": [
+        8.119999885559082,
+        -3.0999999046325684,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -3.0,
+      "stair": [
+        8.119999885559082,
+        -3.0,
+        3.0994796752929688
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -2.9,
+      "stair": [
+        8.119999885559082,
+        -2.9000000953674316,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -2.8,
+      "stair": [
+        8.119999885559082,
+        -2.799999952316284,
+        3.0994834899902344
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -2.6999999999999997,
+      "stair": [
+        8.119999885559082,
+        -2.700000047683716,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -2.5999999999999996,
+      "stair": [
+        8.119999885559082,
+        -2.5999999046325684,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -2.4999999999999996,
+      "stair": [
+        8.119999885559082,
+        -2.5,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -2.3999999999999995,
+      "stair": [
+        8.119999885559082,
+        -2.4000000953674316,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -2.2999999999999994,
+      "stair": [
+        8.119999885559082,
+        -2.299999952316284,
+        3.0994834899902344
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -2.1999999999999993,
+      "stair": [
+        8.119999885559082,
+        -2.200000047683716,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -2.099999999999999,
+      "stair": [
+        8.119999885559082,
+        -2.0999999046325684,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -1.9999999999999991,
+      "stair": [
+        8.119999885559082,
+        -2.0,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -1.899999999999999,
+      "stair": [
+        8.119999885559082,
+        -1.899999976158142,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -1.799999999999999,
+      "stair": [
+        8.119999885559082,
+        -1.7999999523162842,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -1.6999999999999988,
+      "stair": [
+        8.119999885559082,
+        -1.7000000476837158,
+        3.0994815826416016
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -1.5999999999999988,
+      "stair": [
+        8.119999885559082,
+        -1.600000023841858,
+        3.0994834899902344
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -1.4999999999999987,
+      "stair": [
+        8.119999885559082,
+        -1.5,
+        3.0994834899902344
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -1.3999999999999986,
+      "stair": [
+        8.119999885559082,
+        -1.399999976158142,
+        3.0994834899902344
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -1.2999999999999985,
+      "stair": [
+        8.119999885559082,
+        -1.2999999523162842,
+        2.927459716796875
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -1.1999999999999984,
+      "stair": [
+        8.119999885559082,
+        -1.2000000476837158,
+        2.927457809448242
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -1.0999999999999983,
+      "stair": [
+        8.119999885559082,
+        -1.100000023841858,
+        2.927457809448242
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -0.9999999999999982,
+      "stair": [
+        8.119999885559082,
+        -1.0,
+        2.755434036254883
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -0.8999999999999981,
+      "stair": [
+        8.119999885559082,
+        -0.8999999761581421,
+        2.7554359436035156
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -0.799999999999998,
+      "stair": [
+        8.119999885559082,
+        -0.800000011920929,
+        2.755434036254883
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -0.699999999999998,
+      "stair": [
+        8.119999885559082,
+        -0.699999988079071,
+        2.7554359436035156
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -0.5999999999999979,
+      "stair": [
+        8.119999885559082,
+        -0.6000000238418579,
+        2.582714080810547
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -0.4999999999999978,
+      "stair": [
+        8.119999885559082,
+        -0.5,
+        2.582714080810547
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -0.3999999999999977,
+      "stair": [
+        8.119999885559082,
+        -0.4000000059604645,
+        2.582714080810547
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -0.2999999999999976,
+      "stair": [
+        8.119999885559082,
+        -0.30000001192092896,
+        2.4106903076171875
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -0.1999999999999975,
+      "stair": [
+        8.119999885559082,
+        -0.20000000298023224,
+        2.4106903076171875
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": -0.09999999999999742,
+      "stair": [
+        8.119999885559082,
+        -0.10000000149011612,
+        2.4106903076171875
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 2.6645352591003757e-15,
+      "stair": [
+        8.119999885559082,
+        2.6645352591003757e-15,
+        2.238666534423828
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 0.10000000000000275,
+      "stair": [
+        8.119999885559082,
+        0.10000000149011612,
+        2.2386646270751953
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 0.20000000000000284,
+      "stair": [
+        8.119999885559082,
+        0.20000000298023224,
+        2.238668441772461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 0.30000000000000293,
+      "stair": [
+        8.119999885559082,
+        0.30000001192092896,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 0.400000000000003,
+      "stair": [
+        8.119999885559082,
+        0.4000000059604645,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 0.5000000000000031,
+      "stair": [
+        8.119999885559082,
+        0.5,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 0.6000000000000032,
+      "stair": [
+        8.119999885559082,
+        0.6000000238418579,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 0.7000000000000033,
+      "stair": [
+        8.119999885559082,
+        0.699999988079071,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 0.8000000000000034,
+      "stair": [
+        8.119999885559082,
+        0.800000011920929,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 0.9000000000000035,
+      "stair": [
+        8.119999885559082,
+        0.8999999761581421,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 1.000000000000003,
+      "stair": [
+        8.119999885559082,
+        1.0,
+        2.0666427612304688
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 1.1000000000000036,
+      "stair": [
+        8.119999885559082,
+        1.100000023841858,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 1.2000000000000042,
+      "stair": [
+        8.119999885559082,
+        1.2000000476837158,
+        2.0666427612304688
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 1.3000000000000038,
+      "stair": [
+        8.119999885559082,
+        1.2999999523162842,
+        2.0666427612304688
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 1.4000000000000035,
+      "stair": [
+        8.119999885559082,
+        1.399999976158142,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 1.500000000000004,
+      "stair": [
+        8.119999885559082,
+        1.5,
+        2.0666427612304688
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 1.6000000000000045,
+      "stair": [
+        8.119999885559082,
+        1.600000023841858,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 1.7000000000000042,
+      "stair": [
+        8.119999885559082,
+        1.7000000476837158,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 1.8000000000000038,
+      "stair": [
+        8.119999885559082,
+        1.7999999523162842,
+        2.0666427612304688
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 1.9000000000000044,
+      "stair": [
+        8.119999885559082,
+        1.899999976158142,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 2.000000000000005,
+      "stair": [
+        8.119999885559082,
+        2.0,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 2.1000000000000045,
+      "stair": [
+        8.119999885559082,
+        2.0999999046325684,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 2.200000000000004,
+      "stair": [
+        8.119999885559082,
+        2.200000047683716,
+        2.066638946533203
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 2.3000000000000047,
+      "stair": [
+        8.119999885559082,
+        2.299999952316284,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 2.4000000000000052,
+      "stair": [
+        8.119999885559082,
+        2.4000000953674316,
+        2.066640853881836
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 2.500000000000005,
+      "stair": [
+        8.119999885559082,
+        2.5,
+        1.8939208984375
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 2.6000000000000045,
+      "stair": [
+        8.119999885559082,
+        2.5999999046325684,
+        1.8939208984375
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 2.700000000000005,
+      "stair": [
+        8.119999885559082,
+        2.700000047683716,
+        1.8939208984375
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 2.8000000000000056,
+      "stair": [
+        8.119999885559082,
+        2.799999952316284,
+        1.7218971252441406
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 2.9000000000000052,
+      "stair": [
+        8.119999885559082,
+        2.9000000953674316,
+        1.7218971252441406
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 3.000000000000005,
+      "stair": [
+        8.119999885559082,
+        3.0,
+        1.7218971252441406
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 3.1000000000000054,
+      "stair": [
+        8.119999885559082,
+        3.0999999046325684,
+        1.5498714447021484
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 3.200000000000006,
+      "stair": [
+        8.119999885559082,
+        3.200000047683716,
+        1.5498733520507812
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 3.3000000000000056,
+      "stair": [
+        8.119999885559082,
+        3.299999952316284,
+        1.549875259399414
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 3.4000000000000052,
+      "stair": [
+        8.119999885559082,
+        3.4000000953674316,
+        1.377847671508789
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 3.5000000000000058,
+      "stair": [
+        8.119999885559082,
+        3.5,
+        1.3778495788574219
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 3.6000000000000063,
+      "stair": [
+        8.119999885559082,
+        3.5999999046325684,
+        1.3778495788574219
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 3.700000000000006,
+      "stair": [
+        8.119999885559082,
+        3.700000047683716,
+        1.2058601379394531
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 3.8000000000000056,
+      "stair": [
+        8.119999885559082,
+        3.799999952316284,
+        1.205129623413086
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 3.900000000000006,
+      "stair": [
+        8.119999885559082,
+        3.9000000953674316,
+        1.2051277160644531
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 4.000000000000007,
+      "stair": [
+        8.119999885559082,
+        4.0,
+        1.2051258087158203
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 4.100000000000007,
+      "stair": [
+        8.119999885559082,
+        4.099999904632568,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 4.200000000000006,
+      "stair": [
+        8.119999885559082,
+        4.199999809265137,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 4.300000000000006,
+      "stair": [
+        8.119999885559082,
+        4.300000190734863,
+        1.0331058502197266
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 4.4000000000000075,
+      "stair": [
+        8.119999885559082,
+        4.400000095367432,
+        1.033102035522461
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 4.500000000000007,
+      "stair": [
+        8.119999885559082,
+        4.5,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 4.600000000000007,
+      "stair": [
+        8.119999885559082,
+        4.599999904632568,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 4.700000000000006,
+      "stair": [
+        8.119999885559082,
+        4.699999809265137,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 4.800000000000008,
+      "stair": [
+        8.119999885559082,
+        4.800000190734863,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 4.9000000000000075,
+      "stair": [
+        8.119999885559082,
+        4.900000095367432,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 5.000000000000007,
+      "stair": [
+        8.119999885559082,
+        5.0,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 5.100000000000007,
+      "stair": [
+        8.119999885559082,
+        5.099999904632568,
+        1.0331058502197266
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 5.200000000000008,
+      "stair": [
+        8.119999885559082,
+        5.199999809265137,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 5.300000000000008,
+      "stair": [
+        8.119999885559082,
+        5.300000190734863,
+        1.0331058502197266
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 5.4000000000000075,
+      "stair": [
+        8.119999885559082,
+        5.400000095367432,
+        1.0331058502197266
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 5.500000000000009,
+      "stair": [
+        8.119999885559082,
+        5.5,
+        1.0331058502197266
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 5.6000000000000085,
+      "stair": [
+        8.119999885559082,
+        5.599999904632568,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 5.700000000000008,
+      "stair": [
+        8.119999885559082,
+        5.699999809265137,
+        1.0331058502197266
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 5.800000000000008,
+      "stair": [
+        8.119999885559082,
+        5.800000190734863,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 5.9000000000000075,
+      "stair": [
+        8.119999885559082,
+        5.900000095367432,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 6.000000000000009,
+      "stair": [
+        8.119999885559082,
+        6.0,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 6.1000000000000085,
+      "stair": [
+        8.119999885559082,
+        6.099999904632568,
+        1.0331039428710938
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 6.200000000000008,
+      "stair": [
+        8.119999885559082,
+        6.199999809265137,
+        0.8610801696777344
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 6.30000000000001,
+      "stair": [
+        8.119999885559082,
+        6.300000190734863,
+        0.8610820770263672
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 6.400000000000009,
+      "stair": [
+        8.119999885559082,
+        6.400000095367432,
+        0.8610801696777344
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 6.500000000000009,
+      "stair": [
+        8.119999885559082,
+        6.5,
+        0.689056396484375
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 6.6000000000000085,
+      "stair": [
+        8.119999885559082,
+        6.599999904632568,
+        0.689056396484375
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 6.700000000000008,
+      "stair": [
+        8.119999885559082,
+        6.699999809265137,
+        0.689056396484375
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 6.80000000000001,
+      "stair": [
+        8.119999885559082,
+        6.800000190734863,
+        0.6890544891357422
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 6.900000000000009,
+      "stair": [
+        8.119999885559082,
+        6.900000095367432,
+        0.5163364410400391
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 7.000000000000009,
+      "stair": [
+        8.119999885559082,
+        7.0,
+        0.5163364410400391
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 7.10000000000001,
+      "stair": [
+        8.119999885559082,
+        7.099999904632568,
+        0.5163364410400391
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 7.20000000000001,
+      "stair": [
+        8.119999885559082,
+        7.199999809265137,
+        0.3443126678466797
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 7.30000000000001,
+      "stair": [
+        8.119999885559082,
+        7.300000190734863,
+        0.3443126678466797
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 7.400000000000009,
+      "stair": [
+        8.119999885559082,
+        7.400000095367432,
+        0.3443126678466797
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 7.500000000000009,
+      "stair": [
+        8.119999885559082,
+        7.5,
+        0.1722869873046875
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 7.60000000000001,
+      "stair": [
+        8.119999885559082,
+        7.599999904632568,
+        0.1722869873046875
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 7.70000000000001,
+      "stair": [
+        8.119999885559082,
+        7.699999809265137,
+        0.1722869873046875
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 7.80000000000001,
+      "stair": [
+        8.119999885559082,
+        7.800000190734863,
+        0.019763946533203125
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 7.900000000000011,
+      "stair": [
+        8.119999885559082,
+        7.900000095367432,
+        0.019763946533203125
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 8.00000000000001,
+      "stair": [
+        8.119999885559082,
+        8.0,
+        0.019763946533203125
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 8.10000000000001,
+      "stair": [
+        8.119999885559082,
+        8.100000381469727,
+        0.019763946533203125
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    },
+    {
+      "side": "east",
+      "y": 8.20000000000001,
+      "stair": [
+        8.119999885559082,
+        8.199999809265137,
+        0.019763946533203125
+      ],
+      "soil": null,
+      "soil_above_stair": false
+    }
+  ],
+  "terrace_floors": [
+    {
+      "x": -5.75,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.75,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.75,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.25,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.25,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.75,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.75,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.25,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.25,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.75,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.75,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.25,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.25,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.75,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.75,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.25,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.25,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.75,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.75,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.25,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.25,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.25,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.25,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.75,
+      "y": 8.5,
+      "support": {
+        "object": "F0 | PENCERE_KAPI$SHUTTER",
+        "material": "wood_dark",
+        "distance": 0.00054,
+        "point": [
+          0.75,
+          8.5,
+          0.34946
+        ]
+      }
+    },
+    {
+      "x": 1.25,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.25,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.75,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.75,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.25,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.25,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.75,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.75,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.25,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.25,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.75,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.75,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.25,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 8.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.75,
+          8.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.75,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.75,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.25,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.25,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.75,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.75,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.25,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.25,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.75,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.75,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.25,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.25,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.75,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.75,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.25,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.25,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.75,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.75,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.25,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.25,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.25,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.25,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.75,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.75,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.25,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.25,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.75,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.75,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.25,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.25,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.75,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.75,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.25,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.25,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.75,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.75,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.25,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 9.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.75,
+          9.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.75,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.75,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.25,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.25,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.75,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.75,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.25,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.25,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.75,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.75,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.25,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.25,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.75,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.75,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.25,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.25,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.75,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.75,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.25,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.25,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.25,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.25,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.75,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.75,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.25,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.25,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.75,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.75,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.25,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.25,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.75,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.75,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.25,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.25,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.75,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.75,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.25,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 9.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.75,
+          9.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.75,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.75,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.25,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.25,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.75,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.75,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.25,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.25,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.75,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.75,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.25,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.25,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.75,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.75,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.25,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.25,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.75,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.75,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.25,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.25,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.25,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.25,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.75,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.75,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.25,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.25,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.75,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.75,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.25,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.25,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.75,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.75,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.25,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.25,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.75,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.75,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.25,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 10.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.75,
+          10.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.75,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.75,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.25,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.25,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.75,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.75,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.25,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.25,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.75,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.75,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.25,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.25,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.75,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.75,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.25,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.25,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.75,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.75,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.25,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.25,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.25,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.25,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.75,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.75,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.25,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.25,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.75,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.75,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.25,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.25,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.75,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.75,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.25,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.25,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.75,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.75,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.25,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 10.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.75,
+          10.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.75,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.75,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.25,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.25,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.75,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.75,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.25,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.25,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.75,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.75,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.25,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.25,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.75,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.75,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.25,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.25,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.75,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.75,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.25,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.25,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.25,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.25,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.75,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.75,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.25,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.25,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.75,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.75,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.25,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.25,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.75,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.75,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.25,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.25,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.75,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.75,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.25,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 11.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.75,
+          11.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.75,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.75,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.25,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.25,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.75,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.75,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.25,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.25,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.75,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.75,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.25,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.25,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.75,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.75,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.25,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.25,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.75,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.75,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.25,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.25,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.25,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.25,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.75,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.75,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.25,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.25,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.75,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.75,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.25,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.25,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.75,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.75,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.25,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.25,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.75,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.75,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.25,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 11.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.75,
+          11.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.75,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.75,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.25,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.25,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.75,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.75,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.25,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.25,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.75,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.75,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.25,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.25,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.75,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.75,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.25,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.25,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.75,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.75,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.25,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.25,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.25,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.25,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.75,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.75,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.25,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.25,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.75,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.75,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.25,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.25,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.75,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.75,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.25,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.25,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.75,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.75,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.25,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 12.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.75,
+          12.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.75,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.75,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.25,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.25,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.75,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.75,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.25,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.25,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.75,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.75,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.25,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.25,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.75,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.75,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.25,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.25,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.75,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.75,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.25,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.25,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.25,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.25,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.75,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.75,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.25,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.25,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.75,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.75,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.25,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.25,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.75,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.75,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.25,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.25,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.75,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.75,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.25,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 12.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.75,
+          12.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.75,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.75,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.25,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.25,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.75,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.75,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.25,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.25,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.75,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.75,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.25,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.25,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.75,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.75,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.25,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.25,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.75,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.75,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.25,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.25,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.25,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.25,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.75,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.75,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.25,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.25,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.75,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.75,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.25,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.25,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.75,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.75,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.25,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.25,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.75,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.75,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.25,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 13.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          5.75,
+          13.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 13.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          13.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 13.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          13.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 13.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          13.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 13.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          13.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 13.5,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.25,
+          13.5,
+          -0.09964
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 13.5,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.75,
+          13.5,
+          -0.09964
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 14.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          14.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 14.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          14.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 14.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          14.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 14.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          14.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 14.0,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.25,
+          14.0,
+          -0.09964
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 14.0,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.75,
+          14.0,
+          -0.09964
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 14.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          14.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 14.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          14.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 14.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          14.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 14.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          14.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 14.5,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.25,
+          14.5,
+          -0.09964
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 14.5,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.75,
+          14.5,
+          -0.09964
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 15.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          15.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 15.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          15.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 15.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          15.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 15.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          15.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 15.0,
+      "support": {
+        "object": "R33 | Natural bent garden grass",
+        "material": "R31 | R37 grass deep blade",
+        "distance": 0.21169,
+        "point": [
+          5.25,
+          15.0,
+          0.13831
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 15.0,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.75,
+          15.0,
+          -0.09964
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 15.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          15.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 15.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          15.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 15.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          15.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 15.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          15.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 15.5,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.25,
+          15.5,
+          -0.09964
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 15.5,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.75,
+          15.5,
+          -0.09964
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 16.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          16.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 16.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          16.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 16.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          16.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 16.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          16.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 16.0,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.25,
+          16.0,
+          -0.09964
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 16.0,
+      "support": {
+        "object": "R33 | Natural bent garden grass",
+        "material": "R31 | R37 grass fresh blade",
+        "distance": 0.32545,
+        "point": [
+          5.75,
+          16.0,
+          0.02455
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 16.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          16.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 16.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          16.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 16.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          16.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 16.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          16.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 16.5,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.25,
+          16.5,
+          -0.09964
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 16.5,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.75,
+          16.5,
+          -0.09964
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 17.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          17.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 17.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          17.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 17.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          17.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 17.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          17.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 17.0,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.25,
+          17.0,
+          -0.09964
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 17.0,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.75,
+          17.0,
+          -0.09964
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 17.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          17.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 17.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          17.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 17.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          17.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 17.5,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          17.5,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 17.5,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.25,
+          17.5,
+          -0.09964
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 17.5,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.75,
+          17.5,
+          -0.09964
+        ]
+      }
+    },
+    {
+      "x": -5.75,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.75,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -5.25,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -5.25,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.75,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.75,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -4.25,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -4.25,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.75,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.75,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -3.25,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -3.25,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.75,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.75,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -2.25,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -2.25,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.75,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.75,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -1.25,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -1.25,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.75,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.75,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": -0.25,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          -0.25,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.25,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.25,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 0.75,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          0.75,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.25,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.25,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 1.75,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          1.75,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.25,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.25,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 2.75,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          2.75,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.25,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.25,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 3.75,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          3.75,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.25,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.25,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 4.75,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Continuous pool terrace",
+        "material": "R31 | R37 garden cream limestone.001",
+        "distance": 0.32969,
+        "point": [
+          4.75,
+          18.0,
+          0.02031
+        ]
+      }
+    },
+    {
+      "x": 5.25,
+      "y": 18.0,
+      "support": {
+        "object": "R33 | Natural bent garden grass",
+        "material": "R31 | R37 grass dry blade",
+        "distance": 0.34204,
+        "point": [
+          5.25,
+          18.0,
+          0.00796
+        ]
+      }
+    },
+    {
+      "x": 5.75,
+      "y": 18.0,
+      "support": {
+        "object": "R32 | Continuous local soil volume",
+        "material": "R31 | R39 continuous grass ground",
+        "distance": 0.44964,
+        "point": [
+          5.75,
+          18.0,
+          -0.09964
+        ]
+      }
+    }
+  ]
+}

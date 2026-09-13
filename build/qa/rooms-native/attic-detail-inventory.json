@@ -1,0 +1,4533 @@
+[
+  {
+    "name": "F2 | Hall photographed radiator",
+    "bounds": [
+      [
+        -5.95188,
+        0.755,
+        6.49
+      ],
+      [
+        -5.88188,
+        2.265,
+        7.08
+      ]
+    ],
+    "materials": [
+      "white_trim.002"
+    ]
+  },
+  {
+    "name": "Coffee table leg.011",
+    "bounds": [
+      [
+        -3.4975,
+        1.98251,
+        9.4705
+      ],
+      [
+        -3.43251,
+        2.0475,
+        9.8705
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | WC seat hinge.005",
+    "bounds": [
+      [
+        1.421,
+        7.767,
+        9.9005
+      ],
+      [
+        1.441,
+        7.817,
+        9.9205
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "Drawer face.045",
+    "bounds": [
+      [
+        1.06799,
+        -3.68,
+        9.6675
+      ],
+      [
+        1.098,
+        -3.27,
+        9.7435
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Towel ring.001",
+    "bounds": [
+      [
+        0.6195,
+        7.938,
+        10.5765
+      ],
+      [
+        0.7735,
+        7.946,
+        10.7645
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "Drawer pull.046",
+    "bounds": [
+      [
+        1.0375,
+        -3.545,
+        9.7895
+      ],
+      [
+        1.0625,
+        -3.405,
+        9.8015
+      ]
+    ],
+    "materials": [
+      "brass.003"
+    ]
+  },
+  {
+    "name": "Radiator fin.029",
+    "bounds": [
+      [
+        -3.29,
+        7.7875,
+        9.555
+      ],
+      [
+        -3.24,
+        7.8725,
+        10.165
+      ]
+    ],
+    "materials": [
+      "ceramic.003"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.005",
+    "bounds": [
+      [
+        -4.25849,
+        3.17401,
+        10.19801
+      ],
+      [
+        -4.24351,
+        3.17799,
+        10.21299
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "F3 | PENCERE_KAPI$SHUTTER",
+    "bounds": [
+      [
+        4.3694,
+        0.8493,
+        9.5896
+      ],
+      [
+        4.64114,
+        3.1453,
+        9.62954
+      ]
+    ],
+    "materials": [
+      "wood_dark.003"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest drawer field.003",
+    "bounds": [
+      [
+        -2.369,
+        -1.5395,
+        10.063
+      ],
+      [
+        -2.35499,
+        -0.8605,
+        10.196
+      ]
+    ],
+    "materials": [
+      "R31 | R33 chest blue paint"
+    ]
+  },
+  {
+    "name": "F3 | KAT 3$DUVAR",
+    "bounds": [
+      [
+        -6.232,
+        -5.223,
+        9.07
+      ],
+      [
+        4.31836,
+        9.2773,
+        12.51732
+      ]
+    ],
+    "materials": [
+      "stucco.003",
+      "interior.003"
+    ]
+  },
+  {
+    "name": "Drawer face.046",
+    "bounds": [
+      [
+        1.06799,
+        -3.68,
+        9.7575
+      ],
+      [
+        1.098,
+        -3.27,
+        9.8335
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.015",
+    "bounds": [
+      [
+        -3.31349,
+        3.17401,
+        10.19801
+      ],
+      [
+        -3.29851,
+        3.17799,
+        10.21299
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "Lamp stem.008",
+    "bounds": [
+      [
+        1.33251,
+        -1.94249,
+        10.0705
+      ],
+      [
+        1.3675,
+        -1.9075,
+        10.3705
+      ]
+    ],
+    "materials": [
+      "brass.003"
+    ]
+  },
+  {
+    "name": "Attic headboard ivory upright border.001",
+    "bounds": [
+      [
+        -2.947,
+        7.235,
+        9.693
+      ],
+      [
+        -2.92101,
+        7.27002,
+        10.548
+      ]
+    ],
+    "materials": [
+      "white_trim.003"
+    ]
+  },
+  {
+    "name": "Bed base.004",
+    "bounds": [
+      [
+        -0.365,
+        -3.17501,
+        9.5455
+      ],
+      [
+        1.665,
+        -2.225,
+        9.87547
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case horizontal.025",
+    "bounds": [
+      [
+        1.106,
+        -3.68301,
+        9.9685
+      ],
+      [
+        1.554,
+        -3.267,
+        9.99051
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case horizontal.022",
+    "bounds": [
+      [
+        1.106,
+        -2.13301,
+        9.4705
+      ],
+      [
+        1.554,
+        -1.717,
+        9.49251
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | WC flush button.001",
+    "bounds": [
+      [
+        1.319,
+        7.864,
+        10.3045
+      ],
+      [
+        1.381,
+        7.926,
+        10.3105
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "R33 | Shower handset",
+    "bounds": [
+      [
+        1.1575,
+        5.6185,
+        11.14402
+      ],
+      [
+        1.1925,
+        5.6815,
+        11.25378
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "R33 | Shower sliding pull.002",
+    "bounds": [
+      [
+        1.31012,
+        6.12645,
+        10.4247
+      ],
+      [
+        1.33011,
+        6.14645,
+        10.5913
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "Attic television console drawer",
+    "bounds": [
+      [
+        -4.02,
+        1.1575,
+        9.6355
+      ],
+      [
+        -3.52,
+        1.1825,
+        9.94549
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer stile.005",
+    "bounds": [
+      [
+        -2.369,
+        -0.8595,
+        9.861
+      ],
+      [
+        -2.351,
+        -0.8415,
+        10.032
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "Radiator fin.034",
+    "bounds": [
+      [
+        -2.965,
+        7.7875,
+        9.555
+      ],
+      [
+        -2.915,
+        7.8725,
+        10.165
+      ]
+    ],
+    "materials": [
+      "ceramic.003"
+    ]
+  },
+  {
+    "name": "Wardrobe handle.017",
+    "bounds": [
+      [
+        -0.8745,
+        6.11233,
+        10.3555
+      ],
+      [
+        -0.8395,
+        6.12633,
+        10.5055
+      ]
+    ],
+    "materials": [
+      "brass.003"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer stile.003",
+    "bounds": [
+      [
+        -2.369,
+        -0.8595,
+        9.678
+      ],
+      [
+        -2.351,
+        -0.8415,
+        9.849
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "Headboard.004",
+    "bounds": [
+      [
+        1.575,
+        -3.245,
+        9.6755
+      ],
+      [
+        1.705,
+        -2.155,
+        10.72551
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "Drawer pull.043",
+    "bounds": [
+      [
+        1.0375,
+        -1.995,
+        9.8795
+      ],
+      [
+        1.0625,
+        -1.855,
+        9.8915
+      ]
+    ],
+    "materials": [
+      "brass.003"
+    ]
+  },
+  {
+    "name": "Drawer face.043",
+    "bounds": [
+      [
+        1.06799,
+        -2.13,
+        9.8475
+      ],
+      [
+        1.098,
+        -1.72,
+        9.9235
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Attic chest television",
+    "bounds": [
+      [
+        -2.645,
+        -1.54,
+        10.5275
+      ],
+      [
+        -2.60499,
+        -0.86,
+        10.93551
+      ]
+    ],
+    "materials": [
+      "R31 | R33 television bezel"
+    ]
+  },
+  {
+    "name": "Attic floor fan metal guard",
+    "bounds": [
+      [
+        -1.5575,
+        7.51149,
+        10.213
+      ],
+      [
+        -1.0625,
+        7.5175,
+        10.708
+      ]
+    ],
+    "materials": [
+      "metal.003"
+    ]
+  },
+  {
+    "name": "Attic floor fan blade",
+    "bounds": [
+      [
+        -1.29084,
+        7.543,
+        10.4055
+      ],
+      [
+        -1.12916,
+        7.567,
+        10.5155
+      ]
+    ],
+    "materials": [
+      "black.003"
+    ]
+  },
+  {
+    "name": "Coffee table leg.010",
+    "bounds": [
+      [
+        -3.4975,
+        1.61251,
+        9.4705
+      ],
+      [
+        -3.43251,
+        1.6775,
+        9.8705
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "Radiator fin.028",
+    "bounds": [
+      [
+        -3.355,
+        7.7875,
+        9.555
+      ],
+      [
+        -3.305,
+        7.8725,
+        10.165
+      ]
+    ],
+    "materials": [
+      "ceramic.003"
+    ]
+  },
+  {
+    "name": "R33 | Fitted draped bedcover.002",
+    "bounds": [
+      [
+        -2.4801,
+        5.7178,
+        9.66898
+      ],
+      [
+        -0.897,
+        7.28215,
+        10.12449
+      ]
+    ],
+    "materials": [
+      "Room pass | Quilted bedspread .002"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer rail.008",
+    "bounds": [
+      [
+        -2.369,
+        -1.5405,
+        10.227
+      ],
+      [
+        -2.351,
+        -0.8595,
+        10.245
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Blue sofa back cushion.001",
+    "bounds": [
+      [
+        -4.11291,
+        3.17859,
+        9.92359
+      ],
+      [
+        -3.58709,
+        3.30341,
+        10.33541
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case horizontal.027",
+    "bounds": [
+      [
+        -2.819,
+        -1.553,
+        10.4485
+      ],
+      [
+        -2.381,
+        -0.847,
+        10.47052
+      ]
+    ],
+    "materials": [
+      "R31 | R33 chest blue paint"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest drawer pull.003",
+    "bounds": [
+      [
+        -2.337,
+        -1.3,
+        10.1235
+      ],
+      [
+        -2.325,
+        -1.1,
+        10.1355
+      ]
+    ],
+    "materials": [
+      "R31 | R33 cabinet brass.001"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case back.011",
+    "bounds": [
+      [
+        1.54699,
+        -2.133,
+        9.4925
+      ],
+      [
+        1.565,
+        -1.717,
+        9.9685
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "Coffee table leg.008",
+    "bounds": [
+      [
+        -4.2675,
+        1.61251,
+        9.4705
+      ],
+      [
+        -4.20251,
+        1.6775,
+        9.8705
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer rail.002",
+    "bounds": [
+      [
+        -2.369,
+        -1.5405,
+        9.678
+      ],
+      [
+        -2.351,
+        -0.8595,
+        9.696
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Rack round upright.001",
+    "bounds": [
+      [
+        -0.069,
+        7.33095,
+        9.4905
+      ],
+      [
+        -0.05095,
+        7.349,
+        11.2505
+      ]
+    ],
+    "materials": [
+      "R31 | R33 near black iron"
+    ]
+  },
+  {
+    "name": "R33 | Open porcelain washbasin.002",
+    "bounds": [
+      [
+        0.075,
+        7.55001,
+        10.1775
+      ],
+      [
+        0.625,
+        7.99,
+        10.33549
+      ]
+    ],
+    "materials": [
+      "R31 | R33 warm porcelain.002"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer stile",
+    "bounds": [
+      [
+        -2.369,
+        -1.5585,
+        9.495
+      ],
+      [
+        -2.351,
+        -1.5405,
+        9.666
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "Lamp base.008",
+    "bounds": [
+      [
+        1.255,
+        -2.02,
+        10.0205
+      ],
+      [
+        1.445,
+        -1.83,
+        10.0905
+      ]
+    ],
+    "materials": [
+      "brass.003"
+    ]
+  },
+  {
+    "name": "R33 | Shower upright.002",
+    "bounds": [
+      [
+        1.79733,
+        5.66521,
+        9.6603
+      ],
+      [
+        1.81732,
+        5.6852,
+        11.4145
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer rail.009",
+    "bounds": [
+      [
+        -2.369,
+        -1.5405,
+        10.38
+      ],
+      [
+        -2.351,
+        -0.8595,
+        10.398
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case horizontal.026",
+    "bounds": [
+      [
+        -2.819,
+        -1.553,
+        9.4705
+      ],
+      [
+        -2.381,
+        -0.847,
+        9.49252
+      ]
+    ],
+    "materials": [
+      "R31 | R33 chest blue paint"
+    ]
+  },
+  {
+    "name": "F3 | PENCERE_KAPI$ÇEPHE ÇERÇECE",
+    "bounds": [
+      [
+        -6.2316,
+        -2.43037,
+        9.5796
+      ],
+      [
+        4.3184,
+        6.5445,
+        11.59777
+      ]
+    ],
+    "materials": [
+      "white_trim.003"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer stile.007",
+    "bounds": [
+      [
+        -2.369,
+        -0.8595,
+        10.044
+      ],
+      [
+        -2.351,
+        -0.8415,
+        10.215
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer rail.001",
+    "bounds": [
+      [
+        -2.369,
+        -1.5405,
+        9.648
+      ],
+      [
+        -2.351,
+        -0.8595,
+        9.666
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "Restored floor above lift | attic parquet",
+    "bounds": [
+      [
+        -2.7,
+        0.19001,
+        9.39
+      ],
+      [
+        -1.34,
+        1.53,
+        9.47052
+      ]
+    ],
+    "materials": [
+      "wood_floor.003"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer stile.004",
+    "bounds": [
+      [
+        -2.369,
+        -1.5585,
+        9.861
+      ],
+      [
+        -2.351,
+        -1.5405,
+        10.032
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.007",
+    "bounds": [
+      [
+        -4.00049,
+        3.17401,
+        10.19801
+      ],
+      [
+        -3.98551,
+        3.17799,
+        10.21299
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Photographed wardrobe frame stile.022",
+    "bounds": [
+      [
+        -0.84149,
+        5.97964,
+        9.5005
+      ],
+      [
+        -0.8165,
+        6.01067,
+        11.4405
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case horizontal.024",
+    "bounds": [
+      [
+        1.106,
+        -3.68301,
+        9.4705
+      ],
+      [
+        1.554,
+        -3.267,
+        9.49251
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Sofa tapered timber foot.001",
+    "bounds": [
+      [
+        -4.7,
+        3.314,
+        9.4745
+      ],
+      [
+        -4.638,
+        3.376,
+        9.5875
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sofa feet walnut"
+    ]
+  },
+  {
+    "name": "Drawer face.044",
+    "bounds": [
+      [
+        1.06799,
+        -3.68,
+        9.5775
+      ],
+      [
+        1.098,
+        -3.27,
+        9.6535
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Photographed wardrobe frame rail.018",
+    "bounds": [
+      [
+        -0.8415,
+        6.52033,
+        9.5005
+      ],
+      [
+        -0.8165,
+        6.913,
+        9.53149
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer rail.003",
+    "bounds": [
+      [
+        -2.369,
+        -1.5405,
+        9.831
+      ],
+      [
+        -2.351,
+        -0.8595,
+        9.849
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest drawer pull.004",
+    "bounds": [
+      [
+        -2.337,
+        -1.3,
+        10.3065
+      ],
+      [
+        -2.325,
+        -1.1,
+        10.3185
+      ]
+    ],
+    "materials": [
+      "R31 | R33 cabinet brass.001"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case back.012",
+    "bounds": [
+      [
+        1.54699,
+        -3.683,
+        9.4925
+      ],
+      [
+        1.565,
+        -3.267,
+        9.9685
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Fixed curved shower glazing",
+    "bounds": [
+      [
+        0.99504,
+        6.1598,
+        9.67108
+      ],
+      [
+        1.32067,
+        6.22802,
+        11.39882
+      ]
+    ],
+    "materials": [
+      "R31 | R33 shower frosted glass.001"
+    ]
+  },
+  {
+    "name": "R33 | Sofa tapered timber foot",
+    "bounds": [
+      [
+        -4.7,
+        2.674,
+        9.4745
+      ],
+      [
+        -4.638,
+        2.736,
+        9.5875
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sofa feet walnut"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.010",
+    "bounds": [
+      [
+        -3.71449,
+        3.17401,
+        10.04301
+      ],
+      [
+        -3.69951,
+        3.17799,
+        10.05799
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.016",
+    "bounds": [
+      [
+        -3.17049,
+        3.17401,
+        10.04301
+      ],
+      [
+        -3.15551,
+        3.17799,
+        10.05799
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.004",
+    "bounds": [
+      [
+        -4.25849,
+        3.17401,
+        10.04301
+      ],
+      [
+        -4.24351,
+        3.17799,
+        10.05799
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Photographed wardrobe frame stile.023",
+    "bounds": [
+      [
+        -0.84149,
+        5.55597,
+        9.5005
+      ],
+      [
+        -0.8165,
+        5.587,
+        11.4405
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Photographed wardrobe frame rail.023",
+    "bounds": [
+      [
+        -0.8415,
+        5.587,
+        11.4095
+      ],
+      [
+        -0.8165,
+        5.97967,
+        11.44049
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Wardrobe interior shelf.002",
+    "bounds": [
+      [
+        -0.78949,
+        5.575,
+        11.1305
+      ],
+      [
+        -0.2945,
+        6.925,
+        11.15052
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "Attic television stand",
+    "bounds": [
+      [
+        -4.22,
+        0.885,
+        10.0705
+      ],
+      [
+        -3.88,
+        1.075,
+        10.11549
+      ]
+    ],
+    "materials": [
+      "black.003"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case side.022",
+    "bounds": [
+      [
+        1.09499,
+        -1.717,
+        9.4705
+      ],
+      [
+        1.565,
+        -1.695,
+        9.9905
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "F3 | PENCERE_KAPI$SHUTTER AİM",
+    "bounds": [
+      [
+        4.3979,
+        0.9335,
+        9.37818
+      ],
+      [
+        4.60178,
+        3.06101,
+        9.57829
+      ]
+    ],
+    "materials": [
+      "wood_dark.003"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer rail",
+    "bounds": [
+      [
+        -2.369,
+        -1.5405,
+        9.495
+      ],
+      [
+        -2.351,
+        -0.8595,
+        9.513
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "Attic leaning mirror face",
+    "bounds": [
+      [
+        -0.7865,
+        7.19,
+        9.5605
+      ],
+      [
+        -0.7775,
+        7.61001,
+        11.0205
+      ]
+    ],
+    "materials": [
+      "Bathroom silver mirror.001"
+    ]
+  },
+  {
+    "name": "Radiator fin.030",
+    "bounds": [
+      [
+        -3.225,
+        7.7875,
+        9.555
+      ],
+      [
+        -3.175,
+        7.8725,
+        10.165
+      ]
+    ],
+    "materials": [
+      "ceramic.003"
+    ]
+  },
+  {
+    "name": "R33 | Rack shelf.005",
+    "bounds": [
+      [
+        -0.065,
+        7.175,
+        11.2245
+      ],
+      [
+        0.165,
+        7.345,
+        11.2365
+      ]
+    ],
+    "materials": [
+      "R31 | R33 near black iron"
+    ]
+  },
+  {
+    "name": "R33 | Photographed wardrobe frame stile.021",
+    "bounds": [
+      [
+        -0.84149,
+        6.02264,
+        9.5005
+      ],
+      [
+        -0.8165,
+        6.05367,
+        11.4405
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Open sliding shower leaf",
+    "bounds": [
+      [
+        1.01559,
+        6.14292,
+        9.67108
+      ],
+      [
+        1.32508,
+        6.21373,
+        11.39882
+      ]
+    ],
+    "materials": [
+      "R31 | R33 shower frosted glass.001"
+    ]
+  },
+  {
+    "name": "R33 | Sofa tapered timber foot.002",
+    "bounds": [
+      [
+        -3.062,
+        2.674,
+        9.4745
+      ],
+      [
+        -3.0,
+        2.736,
+        9.5875
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sofa feet walnut"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer stile.009",
+    "bounds": [
+      [
+        -2.369,
+        -0.8595,
+        10.227
+      ],
+      [
+        -2.351,
+        -0.8415,
+        10.398
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "F3 | KAT 3$DUVAR KAPLAMA",
+    "bounds": [
+      [
+        -6.032,
+        -4.023,
+        8.9905
+      ],
+      [
+        4.17013,
+        8.0773,
+        12.518
+      ]
+    ],
+    "materials": [
+      "interior.003",
+      "stucco.003",
+      "R31 | R33 attic cream tile",
+      "R31 | R33 attic tan mosaic band",
+      "R31 | R33 ivory wall ceramic.001",
+      "Room pass | C03 cream tile and mosaic"
+    ]
+  },
+  {
+    "name": "R33 | Shower curved track.002",
+    "bounds": [
+      [
+        0.99489,
+        5.34988,
+        9.64756
+      ],
+      [
+        1.884,
+        6.239,
+        9.675
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "R33 | Rack round upright.003",
+    "bounds": [
+      [
+        0.151,
+        7.33095,
+        9.4905
+      ],
+      [
+        0.16905,
+        7.349,
+        11.2505
+      ]
+    ],
+    "materials": [
+      "R31 | R33 near black iron"
+    ]
+  },
+  {
+    "name": "R33 | WC curved ceramic body.001",
+    "bounds": [
+      [
+        1.163,
+        7.291,
+        9.4825
+      ],
+      [
+        1.537,
+        7.833,
+        9.88651
+      ]
+    ],
+    "materials": [
+      "R31 | R33 warm porcelain.002"
+    ]
+  },
+  {
+    "name": "R33 | Shower sliding pull.003",
+    "bounds": [
+      [
+        1.77119,
+        5.66574,
+        10.4247
+      ],
+      [
+        1.79119,
+        5.68574,
+        10.5913
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "R33 | Sofa tapered timber foot.003",
+    "bounds": [
+      [
+        -3.062,
+        3.314,
+        9.4745
+      ],
+      [
+        -3.0,
+        3.376,
+        9.5875
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sofa feet walnut"
+    ]
+  },
+  {
+    "name": "R33 | WC cistern.002",
+    "bounds": [
+      [
+        1.168,
+        7.80551,
+        9.8835
+      ],
+      [
+        1.532,
+        7.9845,
+        10.2795
+      ]
+    ],
+    "materials": [
+      "R31 | R33 warm porcelain.002"
+    ]
+  },
+  {
+    "name": "R33 | Soft tailored pillow.008",
+    "bounds": [
+      [
+        0.99,
+        -2.89949,
+        10.09642
+      ],
+      [
+        1.47,
+        -2.5005,
+        10.24458
+      ]
+    ],
+    "materials": [
+      "linen.001"
+    ]
+  },
+  {
+    "name": "R33 | Mirror physical glass.001",
+    "bounds": [
+      [
+        0.095,
+        8.00802,
+        10.5405
+      ],
+      [
+        0.60499,
+        8.014,
+        11.2305
+      ]
+    ],
+    "materials": [
+      "R31 | R33 bathroom mirror.001"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.011",
+    "bounds": [
+      [
+        -3.71449,
+        3.17401,
+        10.19801
+      ],
+      [
+        -3.69951,
+        3.17799,
+        10.21299
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer rail.007",
+    "bounds": [
+      [
+        -2.369,
+        -1.5405,
+        10.197
+      ],
+      [
+        -2.351,
+        -0.8595,
+        10.215
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Blue sofa seat cushion",
+    "bounds": [
+      [
+        -4.65689,
+        2.63711,
+        9.82161
+      ],
+      [
+        -4.13111,
+        3.27489,
+        9.93738
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest drawer pull.002",
+    "bounds": [
+      [
+        -2.337,
+        -1.3,
+        9.9405
+      ],
+      [
+        -2.325,
+        -1.1,
+        9.9525
+      ]
+    ],
+    "materials": [
+      "R31 | R33 cabinet brass.001"
+    ]
+  },
+  {
+    "name": "R33 | Blue sofa lower upholstered rail",
+    "bounds": [
+      [
+        -4.82487,
+        2.59514,
+        9.58463
+      ],
+      [
+        -2.87513,
+        3.45487,
+        9.80432
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Blue sofa back cushion.002",
+    "bounds": [
+      [
+        -3.56891,
+        3.17859,
+        9.92359
+      ],
+      [
+        -3.04309,
+        3.30341,
+        10.33541
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Photographed wardrobe frame stile.020",
+    "bounds": [
+      [
+        -0.84149,
+        6.44631,
+        9.5005
+      ],
+      [
+        -0.8165,
+        6.47733,
+        11.4405
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case horizontal.023",
+    "bounds": [
+      [
+        1.106,
+        -2.13301,
+        9.9685
+      ],
+      [
+        1.554,
+        -1.717,
+        9.99051
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "Drawer pull.047",
+    "bounds": [
+      [
+        1.0375,
+        -3.545,
+        9.8795
+      ],
+      [
+        1.0625,
+        -3.405,
+        9.8915
+      ]
+    ],
+    "materials": [
+      "brass.003"
+    ]
+  },
+  {
+    "name": "R33 | Shower hose",
+    "bounds": [
+      [
+        1.168,
+        5.50399,
+        10.13365
+      ],
+      [
+        1.182,
+        5.80218,
+        11.14134
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.003",
+    "bounds": [
+      [
+        -4.40149,
+        3.17401,
+        10.19801
+      ],
+      [
+        -4.38651,
+        3.17799,
+        10.21299
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "Mattress.004",
+    "bounds": [
+      [
+        -0.365,
+        -3.16001,
+        9.8355
+      ],
+      [
+        1.605,
+        -2.24,
+        10.08549
+      ]
+    ],
+    "materials": [
+      "linen.001"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest drawer pull.001",
+    "bounds": [
+      [
+        -2.337,
+        -1.3,
+        9.7575
+      ],
+      [
+        -2.325,
+        -1.1,
+        9.7695
+      ]
+    ],
+    "materials": [
+      "R31 | R33 cabinet brass.001"
+    ]
+  },
+  {
+    "name": "R33 | Blue sofa seat cushion.001",
+    "bounds": [
+      [
+        -4.11289,
+        2.63711,
+        9.82161
+      ],
+      [
+        -3.58711,
+        3.27489,
+        9.93738
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.017",
+    "bounds": [
+      [
+        -3.17049,
+        3.17401,
+        10.19801
+      ],
+      [
+        -3.15551,
+        3.17799,
+        10.21299
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Shower drain.001",
+    "bounds": [
+      [
+        1.296,
+        5.651,
+        9.5825
+      ],
+      [
+        1.374,
+        5.729,
+        9.5855
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "R33 | WC open seat ring.001",
+    "bounds": [
+      [
+        1.167,
+        7.304,
+        9.8945
+      ],
+      [
+        1.533,
+        7.81,
+        9.91949
+      ]
+    ],
+    "materials": [
+      "R31 | R33 warm porcelain.002"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer rail.004",
+    "bounds": [
+      [
+        -2.369,
+        -1.5405,
+        9.861
+      ],
+      [
+        -2.351,
+        -0.8595,
+        9.879
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Blue sofa tailored arm.001",
+    "bounds": [
+      [
+        -3.02042,
+        2.61208,
+        9.70558
+      ],
+      [
+        -2.8756,
+        3.43192,
+        10.19544
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "Mattress.003",
+    "bounds": [
+      [
+        -2.975,
+        5.815,
+        9.8355
+      ],
+      [
+        -1.005,
+        7.18497,
+        10.08549
+      ]
+    ],
+    "materials": [
+      "linen.001"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case side.027",
+    "bounds": [
+      [
+        -2.83,
+        -0.847,
+        9.4705
+      ],
+      [
+        -2.37001,
+        -0.82503,
+        10.4705
+      ]
+    ],
+    "materials": [
+      "R31 | R33 chest blue paint"
+    ]
+  },
+  {
+    "name": "R33 | Soft tailored pillow.007",
+    "bounds": [
+      [
+        -2.84,
+        6.556,
+        10.09642
+      ],
+      [
+        -2.36,
+        7.144,
+        10.24458
+      ]
+    ],
+    "materials": [
+      "linen.001"
+    ]
+  },
+  {
+    "name": "R33 | Rack round upright",
+    "bounds": [
+      [
+        -0.069,
+        7.17095,
+        9.4905
+      ],
+      [
+        -0.05095,
+        7.189,
+        11.2505
+      ]
+    ],
+    "materials": [
+      "R31 | R33 near black iron"
+    ]
+  },
+  {
+    "name": "R33 | Shower curved track.003",
+    "bounds": [
+      [
+        0.99489,
+        5.34988,
+        11.40078
+      ],
+      [
+        1.884,
+        6.239,
+        11.42822
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "Wardrobe handle.018",
+    "bounds": [
+      [
+        -0.8745,
+        5.64567,
+        10.3555
+      ],
+      [
+        -0.8395,
+        5.65967,
+        10.5055
+      ]
+    ],
+    "materials": [
+      "brass.003"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.012",
+    "bounds": [
+      [
+        -3.45649,
+        3.17401,
+        10.04301
+      ],
+      [
+        -3.44151,
+        3.17799,
+        10.05799
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest drawer field.004",
+    "bounds": [
+      [
+        -2.369,
+        -1.5395,
+        10.246
+      ],
+      [
+        -2.35499,
+        -0.8605,
+        10.379
+      ]
+    ],
+    "materials": [
+      "R31 | R33 chest blue paint"
+    ]
+  },
+  {
+    "name": "R33 | Fitted draped bedcover.003",
+    "bounds": [
+      [
+        -0.473,
+        -3.25724,
+        9.67329
+      ],
+      [
+        1.1101,
+        -2.1428,
+        10.12446
+      ]
+    ],
+    "materials": [
+      "Room pass | Quilted bedspread .003"
+    ]
+  },
+  {
+    "name": "R33 | Washbasin chrome drain.002",
+    "bounds": [
+      [
+        0.326,
+        7.746,
+        10.1995
+      ],
+      [
+        0.374,
+        7.794,
+        10.2025
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "R33 | Rack shelf.003",
+    "bounds": [
+      [
+        -0.065,
+        7.175,
+        10.6045
+      ],
+      [
+        0.165,
+        7.345,
+        10.6165
+      ]
+    ],
+    "materials": [
+      "R31 | R33 near black iron"
+    ]
+  },
+  {
+    "name": "R33 | Photographed wardrobe frame stile.019",
+    "bounds": [
+      [
+        -0.84149,
+        6.48931,
+        9.5005
+      ],
+      [
+        -0.8165,
+        6.52033,
+        11.4405
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case horizontal.021",
+    "bounds": [
+      [
+        -0.80598,
+        5.572,
+        11.4485
+      ],
+      [
+        -0.278,
+        6.928,
+        11.47052
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Shower riser.001",
+    "bounds": [
+      [
+        1.14198,
+        5.49698,
+        10.4149
+      ],
+      [
+        1.168,
+        5.523,
+        11.2871
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "Lamp shade.009",
+    "bounds": [
+      [
+        1.195,
+        -3.63,
+        10.2855
+      ],
+      [
+        1.505,
+        -3.32,
+        10.5555
+      ]
+    ],
+    "materials": [
+      "linen.001"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft",
+    "bounds": [
+      [
+        -4.54449,
+        3.17401,
+        10.04301
+      ],
+      [
+        -4.52951,
+        3.17799,
+        10.05799
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Curved mixer neck.001",
+    "bounds": [
+      [
+        0.338,
+        7.81551,
+        10.40332
+      ],
+      [
+        0.362,
+        7.9588,
+        10.5065
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "Attic headboard ivory horizontal border",
+    "bounds": [
+      [
+        -2.947,
+        5.73,
+        9.6755
+      ],
+      [
+        -2.92096,
+        7.27,
+        9.71047
+      ]
+    ],
+    "materials": [
+      "white_trim.003"
+    ]
+  },
+  {
+    "name": "R33 | Mixer plinth.001",
+    "bounds": [
+      [
+        0.324,
+        7.921,
+        10.3265
+      ],
+      [
+        0.376,
+        7.973,
+        10.4185
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "R33 | Shower upright.001",
+    "bounds": [
+      [
+        1.30956,
+        6.15259,
+        9.6603
+      ],
+      [
+        1.32956,
+        6.17258,
+        11.4145
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case side.020",
+    "bounds": [
+      [
+        -0.81696,
+        6.92803,
+        9.4705
+      ],
+      [
+        -0.267,
+        6.95,
+        11.4705
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "Wardrobe handle.016",
+    "bounds": [
+      [
+        -0.8745,
+        6.579,
+        10.3555
+      ],
+      [
+        -0.8395,
+        6.593,
+        10.5055
+      ]
+    ],
+    "materials": [
+      "brass.003"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case back.013",
+    "bounds": [
+      [
+        -2.83,
+        -1.553,
+        9.4925
+      ],
+      [
+        -2.81203,
+        -0.84699,
+        10.4485
+      ]
+    ],
+    "materials": [
+      "R31 | R33 chest blue paint"
+    ]
+  },
+  {
+    "name": "Attic television stem",
+    "bounds": [
+      [
+        -4.0775,
+        0.9475,
+        10.108
+      ],
+      [
+        -4.0225,
+        0.9825,
+        10.238
+      ]
+    ],
+    "materials": [
+      "black.003"
+    ]
+  },
+  {
+    "name": "Attic floor fan stem",
+    "bounds": [
+      [
+        -1.323,
+        7.557,
+        9.5205
+      ],
+      [
+        -1.297,
+        7.583,
+        10.4005
+      ]
+    ],
+    "materials": [
+      "black.003"
+    ]
+  },
+  {
+    "name": "Attic leaning mirror frame",
+    "bounds": [
+      [
+        -0.835,
+        7.155,
+        9.4755
+      ],
+      [
+        -0.78498,
+        7.64499,
+        11.0855
+      ]
+    ],
+    "materials": [
+      "black.003"
+    ]
+  },
+  {
+    "name": "Drawer pull.041",
+    "bounds": [
+      [
+        1.0375,
+        -1.995,
+        9.6995
+      ],
+      [
+        1.0625,
+        -1.855,
+        9.7115
+      ]
+    ],
+    "materials": [
+      "brass.003"
+    ]
+  },
+  {
+    "name": "Lamp base.009",
+    "bounds": [
+      [
+        1.255,
+        -3.57,
+        10.0205
+      ],
+      [
+        1.445,
+        -3.38,
+        10.0905
+      ]
+    ],
+    "materials": [
+      "brass.003"
+    ]
+  },
+  {
+    "name": "Lamp stem.009",
+    "bounds": [
+      [
+        1.33251,
+        -3.49249,
+        10.0705
+      ],
+      [
+        1.3675,
+        -3.4575,
+        10.3705
+      ]
+    ],
+    "materials": [
+      "brass.003"
+    ]
+  },
+  {
+    "name": "Attic headboard ivory horizontal border.001",
+    "bounds": [
+      [
+        -2.947,
+        5.73,
+        10.5305
+      ],
+      [
+        -2.92096,
+        7.27,
+        10.56547
+      ]
+    ],
+    "materials": [
+      "white_trim.003"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.014",
+    "bounds": [
+      [
+        -3.31349,
+        3.17401,
+        10.04301
+      ],
+      [
+        -3.29851,
+        3.17799,
+        10.05799
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case side.023",
+    "bounds": [
+      [
+        1.09499,
+        -2.155,
+        9.4705
+      ],
+      [
+        1.565,
+        -2.133,
+        9.9905
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "Drawer face.041",
+    "bounds": [
+      [
+        1.06799,
+        -2.13,
+        9.6675
+      ],
+      [
+        1.098,
+        -1.72,
+        9.7435
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "Lamp shade.008",
+    "bounds": [
+      [
+        1.195,
+        -2.08,
+        10.2855
+      ],
+      [
+        1.505,
+        -1.77,
+        10.5555
+      ]
+    ],
+    "materials": [
+      "linen.001"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest drawer field.002",
+    "bounds": [
+      [
+        -2.369,
+        -1.5395,
+        9.88
+      ],
+      [
+        -2.35499,
+        -0.8605,
+        10.013
+      ]
+    ],
+    "materials": [
+      "R31 | R33 chest blue paint"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer stile.001",
+    "bounds": [
+      [
+        -2.369,
+        -0.8595,
+        9.495
+      ],
+      [
+        -2.351,
+        -0.8415,
+        9.666
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Rack shelf.002",
+    "bounds": [
+      [
+        -0.065,
+        7.175,
+        10.2645
+      ],
+      [
+        0.165,
+        7.345,
+        10.2765
+      ]
+    ],
+    "materials": [
+      "R31 | R33 near black iron"
+    ]
+  },
+  {
+    "name": "F3 | PENCERE_KAPI$CEPHE FRAME",
+    "bounds": [
+      [
+        -6.2916,
+        1.31758,
+        9.5696
+      ],
+      [
+        4.3784,
+        2.7198,
+        11.22972
+      ]
+    ],
+    "materials": [
+      "white_trim.003"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.001",
+    "bounds": [
+      [
+        -4.54449,
+        3.17401,
+        10.19801
+      ],
+      [
+        -4.52951,
+        3.17799,
+        10.21299
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "F3 | KAT 3$ZEMİN",
+    "bounds": [
+      [
+        -6.0316,
+        -3.483,
+        9.07
+      ],
+      [
+        3.16979,
+        8.0773,
+        9.3905
+      ]
+    ],
+    "materials": [
+      "wood_floor.003",
+      "stone_tile.003"
+    ]
+  },
+  {
+    "name": "R33 | Wardrobe recessed front.007",
+    "bounds": [
+      [
+        -0.83104,
+        6.52039,
+        9.5315
+      ],
+      [
+        -0.819,
+        6.913,
+        11.4095
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "F3 | ÇATII",
+    "bounds": [
+      [
+        -6.5603,
+        -5.4477,
+        7.66118
+      ],
+      [
+        4.73388,
+        10.769,
+        12.80741
+      ]
+    ],
+    "materials": [
+      "roof.003",
+      "ceiling.003",
+      "wood_dark.003"
+    ]
+  },
+  {
+    "name": "Attic headboard ivory upright border",
+    "bounds": [
+      [
+        -2.947,
+        5.73,
+        9.693
+      ],
+      [
+        -2.92101,
+        5.76502,
+        10.548
+      ]
+    ],
+    "materials": [
+      "white_trim.003"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case side.026",
+    "bounds": [
+      [
+        -2.83,
+        -1.575,
+        9.4705
+      ],
+      [
+        -2.37001,
+        -1.55303,
+        10.4705
+      ]
+    ],
+    "materials": [
+      "R31 | R33 chest blue paint"
+    ]
+  },
+  {
+    "name": "R33 | Blue sofa back cushion",
+    "bounds": [
+      [
+        -4.65691,
+        3.17859,
+        9.92359
+      ],
+      [
+        -4.13109,
+        3.30341,
+        10.33541
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "Radiator fin.032",
+    "bounds": [
+      [
+        -3.095,
+        7.7875,
+        9.555
+      ],
+      [
+        -3.045,
+        7.8725,
+        10.165
+      ]
+    ],
+    "materials": [
+      "ceramic.003"
+    ]
+  },
+  {
+    "name": "R33 | Blue sofa tailored arm",
+    "bounds": [
+      [
+        -4.82442,
+        2.61208,
+        9.70558
+      ],
+      [
+        -4.6796,
+        3.43192,
+        10.19544
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "Drawer face.047",
+    "bounds": [
+      [
+        1.06799,
+        -3.68,
+        9.8475
+      ],
+      [
+        1.098,
+        -3.27,
+        9.9235
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.009",
+    "bounds": [
+      [
+        -3.85749,
+        3.17401,
+        10.19801
+      ],
+      [
+        -3.84251,
+        3.17799,
+        10.21299
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "Radiator fin.025",
+    "bounds": [
+      [
+        -3.55,
+        7.7875,
+        9.555
+      ],
+      [
+        -3.5,
+        7.8725,
+        10.165
+      ]
+    ],
+    "materials": [
+      "ceramic.003"
+    ]
+  },
+  {
+    "name": "R33 | Attic TV foot",
+    "bounds": [
+      [
+        -2.69,
+        -1.325,
+        10.4985
+      ],
+      [
+        -2.49001,
+        -1.075,
+        10.51651
+      ]
+    ],
+    "materials": [
+      "R31 | R33 television bezel"
+    ]
+  },
+  {
+    "name": "Attic floor fan motor",
+    "bounds": [
+      [
+        -1.37372,
+        7.518,
+        10.3935
+      ],
+      [
+        -1.24628,
+        7.662,
+        10.5275
+      ]
+    ],
+    "materials": [
+      "black.003"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.002",
+    "bounds": [
+      [
+        -4.40149,
+        3.17401,
+        10.04301
+      ],
+      [
+        -4.38651,
+        3.17799,
+        10.05799
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer rail.005",
+    "bounds": [
+      [
+        -2.369,
+        -1.5405,
+        10.014
+      ],
+      [
+        -2.351,
+        -0.8595,
+        10.032
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "Attic television console",
+    "bounds": [
+      [
+        -4.625,
+        0.8,
+        9.4905
+      ],
+      [
+        -3.475,
+        1.16003,
+        10.07052
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest drawer field",
+    "bounds": [
+      [
+        -2.369,
+        -1.5395,
+        9.514
+      ],
+      [
+        -2.35499,
+        -0.8605,
+        9.647
+      ]
+    ],
+    "materials": [
+      "R31 | R33 chest blue paint"
+    ]
+  },
+  {
+    "name": "Coffee table leg.009",
+    "bounds": [
+      [
+        -4.2675,
+        1.98251,
+        9.4705
+      ],
+      [
+        -4.20251,
+        2.0475,
+        9.8705
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer stile.006",
+    "bounds": [
+      [
+        -2.369,
+        -1.5585,
+        10.044
+      ],
+      [
+        -2.351,
+        -1.5405,
+        10.215
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer stile.002",
+    "bounds": [
+      [
+        -2.369,
+        -1.5585,
+        9.678
+      ],
+      [
+        -2.351,
+        -1.5405,
+        9.849
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Wardrobe recessed mirror.002",
+    "bounds": [
+      [
+        -0.82796,
+        6.05372,
+        9.5315
+      ],
+      [
+        -0.822,
+        6.44633,
+        11.4095
+      ]
+    ],
+    "materials": [
+      "R31 | R33 wardrobe mirror.001"
+    ]
+  },
+  {
+    "name": "R33 | Soft tailored pillow.006",
+    "bounds": [
+      [
+        -2.84,
+        5.856,
+        10.09642
+      ],
+      [
+        -2.36,
+        6.444,
+        10.24458
+      ]
+    ],
+    "materials": [
+      "linen.001"
+    ]
+  },
+  {
+    "name": "R33 | Photographed wardrobe frame rail.022",
+    "bounds": [
+      [
+        -0.8415,
+        5.587,
+        9.5005
+      ],
+      [
+        -0.8165,
+        5.97967,
+        9.53149
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "Bed base.003",
+    "bounds": [
+      [
+        -3.035,
+        5.8,
+        9.5455
+      ],
+      [
+        -1.005,
+        7.20005,
+        9.87547
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Rack shelf.001",
+    "bounds": [
+      [
+        -0.065,
+        7.175,
+        9.9245
+      ],
+      [
+        0.165,
+        7.345,
+        9.9365
+      ]
+    ],
+    "materials": [
+      "R31 | R33 near black iron"
+    ]
+  },
+  {
+    "name": "R33 | Photographed wardrobe frame stile.018",
+    "bounds": [
+      [
+        -0.84149,
+        6.91298,
+        9.5005
+      ],
+      [
+        -0.8165,
+        6.944,
+        11.4405
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "F3 | ÇATI ALIN",
+    "bounds": [
+      [
+        -6.7003,
+        -5.568,
+        8.51143
+      ],
+      [
+        4.85817,
+        10.894,
+        12.95877
+      ]
+    ],
+    "materials": [
+      "wood_dark.003"
+    ]
+  },
+  {
+    "name": "Drawer pull.042",
+    "bounds": [
+      [
+        1.0375,
+        -1.995,
+        9.7895
+      ],
+      [
+        1.0625,
+        -1.855,
+        9.8015
+      ]
+    ],
+    "materials": [
+      "brass.003"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case side.025",
+    "bounds": [
+      [
+        1.09499,
+        -3.705,
+        9.4705
+      ],
+      [
+        1.565,
+        -3.683,
+        9.9905
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case horizontal.020",
+    "bounds": [
+      [
+        -0.80598,
+        5.572,
+        9.4705
+      ],
+      [
+        -0.278,
+        6.928,
+        9.49252
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | WC cistern lid.002",
+    "bounds": [
+      [
+        1.161,
+        7.8,
+        10.278
+      ],
+      [
+        1.539,
+        7.99,
+        10.30301
+      ]
+    ],
+    "materials": [
+      "R31 | R33 warm porcelain.002"
+    ]
+  },
+  {
+    "name": "Attic floor fan base",
+    "bounds": [
+      [
+        -1.50475,
+        7.37525,
+        9.4805
+      ],
+      [
+        -1.11525,
+        7.76475,
+        9.55551
+      ]
+    ],
+    "materials": [
+      "black.003"
+    ]
+  },
+  {
+    "name": "Radiator fin.031",
+    "bounds": [
+      [
+        -3.16,
+        7.7875,
+        9.555
+      ],
+      [
+        -3.11,
+        7.8725,
+        10.165
+      ]
+    ],
+    "materials": [
+      "ceramic.003"
+    ]
+  },
+  {
+    "name": "Radiator fin.026",
+    "bounds": [
+      [
+        -3.485,
+        7.7875,
+        9.555
+      ],
+      [
+        -3.435,
+        7.8725,
+        10.165
+      ]
+    ],
+    "materials": [
+      "ceramic.003"
+    ]
+  },
+  {
+    "name": "R33 | Fixed curved shower glazing.001",
+    "bounds": [
+      [
+        1.80456,
+        5.35,
+        9.67108
+      ],
+      [
+        1.873,
+        5.67628,
+        11.39882
+      ]
+    ],
+    "materials": [
+      "R31 | R33 shower frosted glass.001"
+    ]
+  },
+  {
+    "name": "R33 | Shower upright",
+    "bounds": [
+      [
+        0.98501,
+        6.21501,
+        9.6603
+      ],
+      [
+        1.005,
+        6.235,
+        11.4145
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "Drawer pull.044",
+    "bounds": [
+      [
+        1.0375,
+        -3.545,
+        9.6095
+      ],
+      [
+        1.0625,
+        -3.405,
+        9.6215
+      ]
+    ],
+    "materials": [
+      "brass.003"
+    ]
+  },
+  {
+    "name": "Drawer pull.040",
+    "bounds": [
+      [
+        1.0375,
+        -1.995,
+        9.6095
+      ],
+      [
+        1.0625,
+        -1.855,
+        9.6215
+      ]
+    ],
+    "materials": [
+      "brass.003"
+    ]
+  },
+  {
+    "name": "Restored floor above lift | attic structure",
+    "bounds": [
+      [
+        -2.7,
+        0.19001,
+        9.07
+      ],
+      [
+        -1.34,
+        1.53,
+        9.39001
+      ]
+    ],
+    "materials": [
+      "interior.003"
+    ]
+  },
+  {
+    "name": "R33 | Porcelain pedestal.001",
+    "bounds": [
+      [
+        0.26,
+        7.714,
+        9.4825
+      ],
+      [
+        0.44002,
+        7.889,
+        10.1505
+      ]
+    ],
+    "materials": [
+      "R31 | R33 warm porcelain.002"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.013",
+    "bounds": [
+      [
+        -3.45649,
+        3.17401,
+        10.19801
+      ],
+      [
+        -3.44151,
+        3.17799,
+        10.21299
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "Radiator fin.033",
+    "bounds": [
+      [
+        -3.03,
+        7.7875,
+        9.555
+      ],
+      [
+        -2.98,
+        7.8725,
+        10.165
+      ]
+    ],
+    "materials": [
+      "ceramic.003"
+    ]
+  },
+  {
+    "name": "Attic television screen",
+    "bounds": [
+      [
+        -4.527,
+        1.006,
+        10.206
+      ],
+      [
+        -3.573,
+        1.01398,
+        10.73998
+      ]
+    ],
+    "materials": [
+      "glass.003"
+    ]
+  },
+  {
+    "name": "Radiator fin.027",
+    "bounds": [
+      [
+        -3.42,
+        7.7875,
+        9.555
+      ],
+      [
+        -3.37,
+        7.8725,
+        10.165
+      ]
+    ],
+    "materials": [
+      "ceramic.003"
+    ]
+  },
+  {
+    "name": "Drawer pull.045",
+    "bounds": [
+      [
+        1.0375,
+        -3.545,
+        9.6995
+      ],
+      [
+        1.0625,
+        -3.405,
+        9.7115
+      ]
+    ],
+    "materials": [
+      "brass.003"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case back.010",
+    "bounds": [
+      [
+        -0.28503,
+        5.57195,
+        9.4925
+      ],
+      [
+        -0.267,
+        6.928,
+        11.4485
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Photographed wardrobe frame rail.021",
+    "bounds": [
+      [
+        -0.8415,
+        6.05367,
+        11.4095
+      ],
+      [
+        -0.8165,
+        6.44633,
+        11.44049
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "F3 | ek dalgalar",
+    "bounds": [
+      [
+        -6.2316,
+        0.52712,
+        9.0705
+      ],
+      [
+        4.3184,
+        6.0523,
+        13.50897
+      ]
+    ],
+    "materials": [
+      "white_trim.003",
+      "stucco.003"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.008",
+    "bounds": [
+      [
+        -3.85749,
+        3.17401,
+        10.04301
+      ],
+      [
+        -3.84251,
+        3.17799,
+        10.05799
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Rack shelf",
+    "bounds": [
+      [
+        -0.065,
+        7.175,
+        9.5845
+      ],
+      [
+        0.165,
+        7.345,
+        9.5965
+      ]
+    ],
+    "materials": [
+      "R31 | R33 near black iron"
+    ]
+  },
+  {
+    "name": "R33 | Shower upright.003",
+    "bounds": [
+      [
+        1.86001,
+        5.34001,
+        9.6603
+      ],
+      [
+        1.88,
+        5.36,
+        11.4145
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "R33 | Attic TV support",
+    "bounds": [
+      [
+        -2.6395,
+        -1.24,
+        10.51
+      ],
+      [
+        -2.6105,
+        -1.16,
+        10.573
+      ]
+    ],
+    "materials": [
+      "R31 | R33 television bezel"
+    ]
+  },
+  {
+    "name": "R33 | Blue sofa seat cushion.002",
+    "bounds": [
+      [
+        -3.56889,
+        2.63711,
+        9.82161
+      ],
+      [
+        -3.04311,
+        3.27489,
+        9.93738
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "Drawer face.040",
+    "bounds": [
+      [
+        1.06799,
+        -2.13,
+        9.5775
+      ],
+      [
+        1.098,
+        -1.72,
+        9.6535
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "Attic television bezel",
+    "bounds": [
+      [
+        -4.55,
+        0.9525,
+        10.183
+      ],
+      [
+        -3.55,
+        1.0075,
+        10.76299
+      ]
+    ],
+    "materials": [
+      "black.003"
+    ]
+  },
+  {
+    "name": "R33 | Subtle upholstery tuft.006",
+    "bounds": [
+      [
+        -4.00049,
+        3.17401,
+        10.04301
+      ],
+      [
+        -3.98551,
+        3.17799,
+        10.05799
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Quadrant molded shower tray",
+    "bounds": [
+      [
+        0.995,
+        5.35,
+        9.4925
+      ],
+      [
+        1.895,
+        6.25,
+        9.65049
+      ]
+    ],
+    "materials": [
+      "R31 | R33 warm porcelain.002"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case side.021",
+    "bounds": [
+      [
+        -0.81696,
+        5.55003,
+        9.4705
+      ],
+      [
+        -0.267,
+        5.572,
+        11.4705
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "Drawer face.042",
+    "bounds": [
+      [
+        1.06799,
+        -2.13,
+        9.7575
+      ],
+      [
+        1.098,
+        -1.72,
+        9.8335
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "Attic floor fan blade.002",
+    "bounds": [
+      [
+        -1.44084,
+        7.543,
+        10.3189
+      ],
+      [
+        -1.27916,
+        7.567,
+        10.4289
+      ]
+    ],
+    "materials": [
+      "black.003"
+    ]
+  },
+  {
+    "name": "R33 | WC seat hinge.004",
+    "bounds": [
+      [
+        1.259,
+        7.767,
+        9.9005
+      ],
+      [
+        1.279,
+        7.817,
+        9.9205
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "Coffee table top.002",
+    "bounds": [
+      [
+        -4.325,
+        1.55499,
+        9.8355
+      ],
+      [
+        -3.375,
+        2.105,
+        9.90549
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer stile.008",
+    "bounds": [
+      [
+        -2.369,
+        -1.5585,
+        10.227
+      ],
+      [
+        -2.351,
+        -1.5405,
+        10.398
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Hollow case side.024",
+    "bounds": [
+      [
+        1.09499,
+        -3.267,
+        9.4705
+      ],
+      [
+        1.565,
+        -3.245,
+        9.9905
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest framed drawer rail.006",
+    "bounds": [
+      [
+        -2.369,
+        -1.5405,
+        10.044
+      ],
+      [
+        -2.351,
+        -0.8595,
+        10.062
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "Attic television console drawer.001",
+    "bounds": [
+      [
+        -4.58,
+        1.1575,
+        9.6355
+      ],
+      [
+        -4.08,
+        1.1825,
+        9.94549
+      ]
+    ],
+    "materials": [
+      "wood_honey.003"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest drawer pull",
+    "bounds": [
+      [
+        -2.337,
+        -1.3,
+        9.5745
+      ],
+      [
+        -2.325,
+        -1.1,
+        9.5865
+      ]
+    ],
+    "materials": [
+      "R31 | R33 cabinet brass.001"
+    ]
+  },
+  {
+    "name": "F3 | PENCERE_KAPI$CAM",
+    "bounds": [
+      [
+        -6.1791,
+        -2.40066,
+        9.7496
+      ],
+      [
+        -3.62802,
+        6.5145,
+        11.3647
+      ]
+    ],
+    "materials": [
+      "glass.003"
+    ]
+  },
+  {
+    "name": "Headboard.003",
+    "bounds": [
+      [
+        -3.075,
+        5.73,
+        9.6755
+      ],
+      [
+        -2.945,
+        7.27,
+        10.56548
+      ]
+    ],
+    "materials": [
+      "black.003"
+    ]
+  },
+  {
+    "name": "R33 | Rack shelf.004",
+    "bounds": [
+      [
+        -0.065,
+        7.175,
+        10.9445
+      ],
+      [
+        0.165,
+        7.345,
+        10.9565
+      ]
+    ],
+    "materials": [
+      "R31 | R33 near black iron"
+    ]
+  },
+  {
+    "name": "R33 | Wardrobe hanging rail.002",
+    "bounds": [
+      [
+        -0.534,
+        5.58,
+        11.0285
+      ],
+      [
+        -0.51003,
+        6.92,
+        11.05246
+      ]
+    ],
+    "materials": [
+      "R31 | R33 cabinet brass.001"
+    ]
+  },
+  {
+    "name": "R33 | Blue sofa continuous back",
+    "bounds": [
+      [
+        -4.82489,
+        3.28906,
+        9.70561
+      ],
+      [
+        -2.87511,
+        3.46889,
+        10.36541
+      ]
+    ],
+    "materials": [
+      "R31 | R33 attic muted blue upholstery"
+    ]
+  },
+  {
+    "name": "R33 | Blue chest drawer field.001",
+    "bounds": [
+      [
+        -2.369,
+        -1.5395,
+        9.697
+      ],
+      [
+        -2.35499,
+        -0.8605,
+        9.83
+      ]
+    ],
+    "materials": [
+      "R31 | R33 chest blue paint"
+    ]
+  },
+  {
+    "name": "R33 | Photographed wardrobe frame rail.020",
+    "bounds": [
+      [
+        -0.8415,
+        6.05367,
+        9.5005
+      ],
+      [
+        -0.8165,
+        6.44633,
+        9.53149
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "F3 | Attic partition core",
+    "bounds": [
+      [
+        -6.282,
+        -5.2727,
+        9.4755
+      ],
+      [
+        4.36834,
+        9.3273,
+        12.51706
+      ]
+    ],
+    "materials": [
+      "interior.003",
+      "stucco.003",
+      "Room pass | C03 cream tile and mosaic"
+    ]
+  },
+  {
+    "name": "R33 | Rack round upright.002",
+    "bounds": [
+      [
+        0.151,
+        7.17095,
+        9.4905
+      ],
+      [
+        0.16905,
+        7.189,
+        11.2505
+      ]
+    ],
+    "materials": [
+      "R31 | R33 near black iron"
+    ]
+  },
+  {
+    "name": "R33 | Open sliding shower leaf.001",
+    "bounds": [
+      [
+        1.7876,
+        5.37127,
+        9.67108
+      ],
+      [
+        1.85873,
+        5.68076,
+        11.39882
+      ]
+    ],
+    "materials": [
+      "R31 | R33 shower frosted glass.001"
+    ]
+  },
+  {
+    "name": "R33 | Mixer lever.002",
+    "bounds": [
+      [
+        0.34786,
+        7.9321,
+        10.4188
+      ],
+      [
+        0.40014,
+        7.9529,
+        10.4462
+      ]
+    ],
+    "materials": [
+      "R31 | R33 sanitary chrome.003"
+    ]
+  },
+  {
+    "name": "R33 | Wardrobe recessed front.008",
+    "bounds": [
+      [
+        -0.83104,
+        5.58706,
+        9.5315
+      ],
+      [
+        -0.819,
+        5.97967,
+        11.4095
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "R33 | Photographed wardrobe frame rail.019",
+    "bounds": [
+      [
+        -0.8415,
+        6.52033,
+        11.4095
+      ],
+      [
+        -0.8165,
+        6.913,
+        11.44049
+      ]
+    ],
+    "materials": [
+      "R31 | R33 ivory wardrobe lacquer.001"
+    ]
+  },
+  {
+    "name": "F3 | KAT 3$ZEMİN KAPLAMA",
+    "bounds": [
+      [
+        -6.0316,
+        -4.0227,
+        9.39
+      ],
+      [
+        3.16951,
+        8.0773,
+        10.64779
+      ]
+    ],
+    "materials": [
+      "wood_floor.003",
+      "R31 | R33 attic cream tile"
+    ]
+  },
+  {
+    "name": "F3 | PENCERE_KAPI$ÇERÇEVE",
+    "bounds": [
+      [
+        -6.1966,
+        -2.06543,
+        9.0496
+      ],
+      [
+        4.2834,
+        6.1795,
+        11.32945
+      ]
+    ],
+    "materials": [
+      "wood_dark.003"
+    ]
+  },
+  {
+    "name": "Attic floor fan blade.001",
+    "bounds": [
+      [
+        -1.44084,
+        7.543,
+        10.4921
+      ],
+      [
+        -1.27916,
+        7.567,
+        10.6021
+      ]
+    ],
+    "materials": [
+      "black.003"
+    ]
+  },
+  {
+    "name": "F3 | Restored landing iron",
+    "bounds": [
+      [
+        1.0225,
+        1.9225,
+        9.4698
+      ],
+      [
+        1.0775,
+        3.1775,
+        10.3898
+      ]
+    ],
+    "materials": [
+      "metal.002"
+    ]
+  },
+  {
+    "name": "F3 | Restored landing wood",
+    "bounds": [
+      [
+        1.02,
+        1.95,
+        10.3848
+      ],
+      [
+        1.08,
+        3.15,
+        10.4348
+      ]
+    ],
+    "materials": [
+      "antique_wood.002"
+    ]
+  },
+  {
+    "name": "F3 | Restored landing brass",
+    "bounds": [
+      [
+        1.032,
+        1.932,
+        9.6784
+      ],
+      [
+        1.068,
+        3.168,
+        10.2608
+      ]
+    ],
+    "materials": [
+      "brass.002"
+    ]
+  },
+  {
+    "name": "F3 | Stair landing return wood",
+    "bounds": [
+      [
+        1.02874,
+        1.855,
+        10.21792
+      ],
+      [
+        1.26476,
+        1.97619,
+        10.4366
+      ]
+    ],
+    "materials": [
+      "antique_wood.002"
+    ]
+  },
+  {
+    "name": "F3 | Stair landing return iron",
+    "bounds": [
+      [
+        1.04223,
+        1.876,
+        10.18164
+      ],
+      [
+        1.25472,
+        1.95786,
+        10.36893
+      ]
+    ],
+    "materials": [
+      "metal.002"
+    ]
+  },
+  {
+    "name": "f3-D10 | Door brass hardware",
+    "bounds": [
+      [
+        0.60458,
+        -0.47766,
+        9.656
+      ],
+      [
+        0.78266,
+        0.39137,
+        11.31093
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door brass.003"
+    ]
+  },
+  {
+    "name": "f3-D11 | Door brass hardware",
+    "bounds": [
+      [
+        -1.04561,
+        4.08796,
+        9.656
+      ],
+      [
+        -0.2614,
+        4.26604,
+        11.31093
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door brass.003"
+    ]
+  },
+  {
+    "name": "f3-D12 | Door brass hardware",
+    "bounds": [
+      [
+        -0.04073,
+        5.21345,
+        9.656
+      ],
+      [
+        0.13707,
+        5.98247,
+        11.31093
+      ]
+    ],
+    "materials": [
+      "R31 | R35 door brass.003"
+    ]
+  },
+  {
+    "name": "f3-D10 | Flush threshold",
+    "bounds": [
+      [
+        -0.2082,
+        0.27726,
+        9.39077
+      ],
+      [
+        0.6948,
+        0.47741,
+        9.46977
+      ]
+    ],
+    "materials": [
+      "wood_floor.003"
+    ]
+  },
+  {
+    "name": "f3-D12 | Flush threshold",
+    "bounds": [
+      [
+        0.0466,
+        5.17693,
+        9.39088
+      ],
+      [
+        0.8496,
+        5.27738,
+        9.46988
+      ]
+    ],
+    "materials": [
+      "wood_floor.003"
+    ]
+  },
+  {
+    "name": "f3-D10 | Solid six-panel open leaf",
+    "bounds": [
+      [
+        0.6726,
+        -0.5157,
+        9.4785
+      ],
+      [
+        0.7146,
+        0.3773,
+        11.4705
+      ]
+    ],
+    "materials": [
+      "wood_dark.003"
+    ]
+  },
+  {
+    "name": "f3-D10 | Solid walnut casing",
+    "bounds": [
+      [
+        -0.2842,
+        0.22725,
+        9.4705
+      ],
+      [
+        0.7708,
+        0.52735,
+        11.5705
+      ]
+    ],
+    "materials": [
+      "wood_dark.003"
+    ]
+  },
+  {
+    "name": "f3-D11 | Solid six-panel open leaf",
+    "bounds": [
+      [
+        -1.0837,
+        4.1562,
+        9.4785
+      ],
+      [
+        -0.2753,
+        4.1982,
+        11.4705
+      ]
+    ],
+    "materials": [
+      "wood_dark.003"
+    ]
+  },
+  {
+    "name": "f3-D11 | Solid walnut casing",
+    "bounds": [
+      [
+        -0.34535,
+        4.142,
+        9.4705
+      ],
+      [
+        -0.20525,
+        5.1124,
+        11.5705
+      ]
+    ],
+    "materials": [
+      "wood_dark.003"
+    ]
+  },
+  {
+    "name": "f3-D12 | Solid six-panel open leaf",
+    "bounds": [
+      [
+        0.0271,
+        5.2273,
+        9.4785
+      ],
+      [
+        0.0691,
+        6.0203,
+        11.4705
+      ]
+    ],
+    "materials": [
+      "wood_dark.003"
+    ]
+  },
+  {
+    "name": "f3-D12 | Solid walnut casing",
+    "bounds": [
+      [
+        -0.0294,
+        5.1273,
+        9.4705
+      ],
+      [
+        0.9256,
+        5.3273,
+        11.5705
+      ]
+    ],
+    "materials": [
+      "wood_dark.003"
+    ]
+  },
+  {
+    "name": "C05 | Low woven lounge rug",
+    "bounds": [
+      [
+        -4.8,
+        1.15,
+        9.472
+      ],
+      [
+        -2.9,
+        2.75,
+        9.478
+      ]
+    ],
+    "materials": [
+      "Room pass | Lounge grey rug"
+    ]
+  },
+  {
+    "name": "C03 | Woven bath runner",
+    "bounds": [
+      [
+        0.42,
+        6.48,
+        9.474
+      ],
+      [
+        1.12,
+        7.55,
+        9.479
+      ]
+    ],
+    "materials": [
+      "Room pass | Burgundy bath runner"
+    ]
+  },
+  {
+    "name": "F3 | Fitted walnut skirtings combined",
+    "bounds": [
+      [
+        -6.04623,
+        -4.022,
+        9.4725
+      ],
+      [
+        3.17669,
+        8.0763,
+        9.5575
+      ]
+    ],
+    "materials": [
+      "wood_dark"
+    ]
+  }
+]

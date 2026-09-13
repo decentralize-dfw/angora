@@ -1,0 +1,146 @@
+[
+  {
+    "name": "Interior window casing.010",
+    "bounds": [
+      [
+        1.073,
+        7.9725,
+        3.3925
+      ],
+      [
+        2.303,
+        8.0475,
+        3.4675
+      ]
+    ],
+    "materials": [
+      "wood_dark.001"
+    ]
+  },
+  {
+    "name": "Canopy fascia",
+    "bounds": [
+      [
+        0.35,
+        8.05,
+        2.74988
+      ],
+      [
+        6.25,
+        8.15012,
+        2.85
+      ]
+    ],
+    "materials": [
+      "metal.004"
+    ]
+  },
+  {
+    "name": "Canopy post",
+    "bounds": [
+      [
+        0.30507,
+        11.455,
+        0.0
+      ],
+      [
+        0.395,
+        11.54493,
+        2.78
+      ]
+    ],
+    "materials": [
+      "wood_dark.004"
+    ]
+  },
+  {
+    "name": "Green rear canopy",
+    "bounds": [
+      [
+        0.35,
+        8.10002,
+        2.82
+      ],
+      [
+        6.25,
+        11.5,
+        3.41998
+      ]
+    ],
+    "materials": [
+      "canopy"
+    ]
+  },
+  {
+    "name": "Canopy fascia.001",
+    "bounds": [
+      [
+        0.35,
+        11.45,
+        2.74988
+      ],
+      [
+        6.25,
+        11.55012,
+        2.85
+      ]
+    ],
+    "materials": [
+      "metal.004"
+    ]
+  },
+  {
+    "name": "Canopy fascia.003",
+    "bounds": [
+      [
+        6.19997,
+        8.1,
+        2.74997
+      ],
+      [
+        6.3,
+        11.5,
+        2.85
+      ]
+    ],
+    "materials": [
+      "metal.004"
+    ]
+  },
+  {
+    "name": "Canopy post.001",
+    "bounds": [
+      [
+        6.20507,
+        11.455,
+        0.0
+      ],
+      [
+        6.295,
+        11.54493,
+        2.78
+      ]
+    ],
+    "materials": [
+      "wood_dark.004"
+    ]
+  },
+  {
+    "name": "Canopy fascia.002",
+    "bounds": [
+      [
+        0.29997,
+        8.1,
+        2.74997
+      ],
+      [
+        0.4,
+        11.5,
+        2.85
+      ]
+    ],
+    "materials": [
+      "metal.004"
+    ]
+  }
+]

@@ -1,0 +1,1477 @@
+[
+  {
+    "name": "R33 | Raised door panel molding stile.005",
+    "bounds": [
+      [
+        2.78594,
+        -4.06995,
+        4.41177
+      ],
+      [
+        2.8097,
+        -4.04711,
+        4.9841
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "Radiator fin.002",
+    "bounds": [
+      [
+        -4.295,
+        -4.7725,
+        3.185
+      ],
+      [
+        -4.245,
+        -4.6875,
+        3.795
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 108,
+    "materials": [
+      "ceramic.001"
+    ]
+  },
+  {
+    "name": "R33 | Open external door leaf stile.015",
+    "bounds": [
+      [
+        -3.07133,
+        -4.21897,
+        3.1096
+      ],
+      [
+        -3.02176,
+        -4.1567,
+        5.1476
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "Radiator fin.006",
+    "bounds": [
+      [
+        -4.035,
+        -4.7725,
+        3.185
+      ],
+      [
+        -3.985,
+        -4.6875,
+        3.795
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 108,
+    "materials": [
+      "ceramic.001"
+    ]
+  },
+  {
+    "name": "Radiator fin.001",
+    "bounds": [
+      [
+        -4.36,
+        -4.7725,
+        3.185
+      ],
+      [
+        -4.31,
+        -4.6875,
+        3.795
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 108,
+    "materials": [
+      "ceramic.001"
+    ]
+  },
+  {
+    "name": "R33 | Door hinge barrel.014",
+    "bounds": [
+      [
+        -3.0546,
+        -4.1716,
+        3.2926
+      ],
+      [
+        -3.0306,
+        -4.1476,
+        3.3666
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 44,
+    "materials": [
+      "R31 | R35 door brass.001"
+    ]
+  },
+  {
+    "name": "R33 | Door clear physical glazing.012",
+    "bounds": [
+      [
+        -4.11533,
+        -4.63137,
+        3.1831
+      ],
+      [
+        -4.05138,
+        -4.21761,
+        4.1151
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 clear door glass.001"
+    ]
+  },
+  {
+    "name": "R33 | Recessed timber door panel.001",
+    "bounds": [
+      [
+        2.7411,
+        -4.04773,
+        3.82343
+      ],
+      [
+        2.81883,
+        -3.36277,
+        4.35375
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "Radiator fin.010",
+    "bounds": [
+      [
+        -3.775,
+        -4.7725,
+        3.185
+      ],
+      [
+        -3.725,
+        -4.6875,
+        3.795
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 108,
+    "materials": [
+      "ceramic.001"
+    ]
+  },
+  {
+    "name": "Radiator fin.009",
+    "bounds": [
+      [
+        -3.84,
+        -4.7725,
+        3.185
+      ],
+      [
+        -3.79,
+        -4.6875,
+        3.795
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 108,
+    "materials": [
+      "ceramic.001"
+    ]
+  },
+  {
+    "name": "R33 | Raised door panel molding stile.003",
+    "bounds": [
+      [
+        2.78594,
+        -4.06995,
+        3.80243
+      ],
+      [
+        2.8097,
+        -4.04711,
+        4.37477
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | External doorway frame stile.007",
+    "bounds": [
+      [
+        -3.0386,
+        -4.19956,
+        3.0996
+      ],
+      [
+        -2.98659,
+        -4.1196,
+        5.2296
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | Door central glazing bar.006",
+    "bounds": [
+      [
+        -4.13345,
+        -4.63587,
+        4.1051
+      ],
+      [
+        -4.03328,
+        -4.21312,
+        4.1521
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "Radiator fin.007",
+    "bounds": [
+      [
+        -3.97,
+        -4.7725,
+        3.185
+      ],
+      [
+        -3.92,
+        -4.6875,
+        3.795
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 108,
+    "materials": [
+      "ceramic.001"
+    ]
+  },
+  {
+    "name": "R33 | Raised door panel molding rail.003",
+    "bounds": [
+      [
+        2.72618,
+        -4.04903,
+        4.35377
+      ],
+      [
+        2.80787,
+        -3.36373,
+        4.37479
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "Radiator fin",
+    "bounds": [
+      [
+        -4.425,
+        -4.7725,
+        3.185
+      ],
+      [
+        -4.375,
+        -4.6875,
+        3.795
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 108,
+    "materials": [
+      "ceramic.001"
+    ]
+  },
+  {
+    "name": "R33 | Open external door leaf rail.014",
+    "bounds": [
+      [
+        -3.12992,
+        -4.63587,
+        3.1096
+      ],
+      [
+        -3.02975,
+        -4.21312,
+        3.1666
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | External doorway frame stile.011",
+    "bounds": [
+      [
+        2.8165,
+        -4.16296,
+        3.0996
+      ],
+      [
+        2.86855,
+        -4.083,
+        5.1496
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | Door clear physical glazing.013",
+    "bounds": [
+      [
+        -4.11533,
+        -4.63137,
+        4.1421
+      ],
+      [
+        -4.05138,
+        -4.21761,
+        5.0741
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 clear door glass.001"
+    ]
+  },
+  {
+    "name": "Radiator fin.004",
+    "bounds": [
+      [
+        -4.165,
+        -4.7725,
+        3.185
+      ],
+      [
+        -4.115,
+        -4.6875,
+        3.795
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 108,
+    "materials": [
+      "ceramic.001"
+    ]
+  },
+  {
+    "name": "R33 | Door handle escutcheon.007",
+    "bounds": [
+      [
+        -3.08467,
+        -4.62961,
+        4.0221
+      ],
+      [
+        -3.06776,
+        -4.59909,
+        4.1771
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 380,
+    "materials": [
+      "R31 | R35 door brass.001"
+    ]
+  },
+  {
+    "name": "R33 | Open external door leaf stile.014",
+    "bounds": [
+      [
+        -3.13785,
+        -4.69232,
+        3.1096
+      ],
+      [
+        -3.08829,
+        -4.63005,
+        5.1476
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | Raised door panel molding rail",
+    "bounds": [
+      [
+        2.72618,
+        -4.04903,
+        3.1931
+      ],
+      [
+        2.80787,
+        -3.36373,
+        3.21412
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | Door central glazing bar.007",
+    "bounds": [
+      [
+        -3.12992,
+        -4.63587,
+        4.1051
+      ],
+      [
+        -3.02975,
+        -4.21312,
+        4.1521
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | Recessed timber door panel.002",
+    "bounds": [
+      [
+        2.7411,
+        -4.04773,
+        4.43277
+      ],
+      [
+        2.81883,
+        -3.36277,
+        4.96308
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | Raised door panel molding rail.004",
+    "bounds": [
+      [
+        2.72618,
+        -4.04903,
+        4.41177
+      ],
+      [
+        2.80787,
+        -3.36373,
+        4.43279
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | Open external door leaf stile.013",
+    "bounds": [
+      [
+        -4.07492,
+        -4.6923,
+        3.1096
+      ],
+      [
+        -4.02535,
+        -4.63003,
+        5.1476
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | Door curved lever.006",
+    "bounds": [
+      [
+        -4.14907,
+        -4.63137,
+        4.1206
+      ],
+      [
+        -4.09662,
+        -4.53944,
+        4.1386
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 596,
+    "materials": [
+      "R31 | R35 door brass.001"
+    ]
+  },
+  {
+    "name": "R33 | Open external door leaf rail.020",
+    "bounds": [
+      [
+        2.72353,
+        -4.06805,
+        3.1096
+      ],
+      [
+        2.82845,
+        -3.34314,
+        3.16661
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | Door curved lever.007",
+    "bounds": [
+      [
+        -3.06658,
+        -4.63137,
+        4.1206
+      ],
+      [
+        -3.01413,
+        -4.53944,
+        4.1386
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 596,
+    "materials": [
+      "R31 | R35 door brass.001"
+    ]
+  },
+  {
+    "name": "R33 | External doorway frame stile.006",
+    "bounds": [
+      [
+        -4.1766,
+        -4.19956,
+        3.0996
+      ],
+      [
+        -4.12459,
+        -4.1196,
+        5.2296
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | Raised door panel molding rail.002",
+    "bounds": [
+      [
+        2.72618,
+        -4.04903,
+        3.80243
+      ],
+      [
+        2.80787,
+        -3.36373,
+        3.82345
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | Door clear physical glazing.015",
+    "bounds": [
+      [
+        -3.11182,
+        -4.63138,
+        4.1421
+      ],
+      [
+        -3.04787,
+        -4.21762,
+        5.0741
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 clear door glass.001"
+    ]
+  },
+  {
+    "name": "Radiator fin.011",
+    "bounds": [
+      [
+        -3.71,
+        -4.7725,
+        3.185
+      ],
+      [
+        -3.66,
+        -4.6875,
+        3.795
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 108,
+    "materials": [
+      "ceramic.001"
+    ]
+  },
+  {
+    "name": "R33 | Raised door panel molding stile.001",
+    "bounds": [
+      [
+        2.78594,
+        -4.06995,
+        3.1931
+      ],
+      [
+        2.8097,
+        -4.04711,
+        3.76543
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | Door hinge barrel.012",
+    "bounds": [
+      [
+        -4.1326,
+        -4.1716,
+        3.2926
+      ],
+      [
+        -4.1086,
+        -4.1476,
+        3.3666
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 44,
+    "materials": [
+      "R31 | R35 door brass.001"
+    ]
+  },
+  {
+    "name": "R33 | Door clear physical glazing.014",
+    "bounds": [
+      [
+        -3.11182,
+        -4.63138,
+        3.1831
+      ],
+      [
+        -3.04787,
+        -4.21762,
+        4.1151
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 clear door glass.001"
+    ]
+  },
+  {
+    "name": "R33 | Recessed timber door panel",
+    "bounds": [
+      [
+        2.7411,
+        -4.04773,
+        3.2141
+      ],
+      [
+        2.81883,
+        -3.36277,
+        3.74442
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "Radiator fin.003",
+    "bounds": [
+      [
+        -4.23,
+        -4.7725,
+        3.185
+      ],
+      [
+        -4.18,
+        -4.6875,
+        3.795
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 108,
+    "materials": [
+      "ceramic.001"
+    ]
+  },
+  {
+    "name": "R33 | Door handle escutcheon.006",
+    "bounds": [
+      [
+        -4.09544,
+        -4.62961,
+        4.0221
+      ],
+      [
+        -4.07853,
+        -4.59908,
+        4.1771
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 380,
+    "materials": [
+      "R31 | R35 door brass.001"
+    ]
+  },
+  {
+    "name": "Radiator fin.005",
+    "bounds": [
+      [
+        -4.1,
+        -4.7725,
+        3.185
+      ],
+      [
+        -4.04999,
+        -4.6875,
+        3.795
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 108,
+    "materials": [
+      "ceramic.001"
+    ]
+  },
+  {
+    "name": "F1 | PENCERE_KAPI$CEPHE FRAME",
+    "bounds": [
+      [
+        -5.8916,
+        -5.2827,
+        2.7996
+      ],
+      [
+        4.90846,
+        8.3373,
+        6.19982
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 452,
+    "materials": [
+      "white_trim.001"
+    ]
+  },
+  {
+    "name": "R33 | Door hinge barrel.020",
+    "bounds": [
+      [
+        2.8005,
+        -4.135,
+        3.2926
+      ],
+      [
+        2.8245,
+        -4.111,
+        3.3666
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 44,
+    "materials": [
+      "R31 | R35 door brass.001"
+    ]
+  },
+  {
+    "name": "R33 | Open external door leaf stile.021",
+    "bounds": [
+      [
+        2.78666,
+        -4.12483,
+        3.1096
+      ],
+      [
+        2.83342,
+        -4.06439,
+        5.0676
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | External doorway frame rail.006",
+    "bounds": [
+      [
+        -4.1246,
+        -4.19961,
+        3.0996
+      ],
+      [
+        -3.0386,
+        -4.1196,
+        3.15157
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | External doorway frame rail.010",
+    "bounds": [
+      [
+        1.9705,
+        -4.16299,
+        3.0996
+      ],
+      [
+        2.8165,
+        -4.083,
+        3.1516
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | Open external door leaf rail.012",
+    "bounds": [
+      [
+        -4.13345,
+        -4.63587,
+        3.1096
+      ],
+      [
+        -4.03328,
+        -4.21312,
+        3.1666
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | Open external door leaf stile.012",
+    "bounds": [
+      [
+        -4.14144,
+        -4.21895,
+        3.1096
+      ],
+      [
+        -4.09188,
+        -4.15668,
+        5.1476
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "Radiator fin.008",
+    "bounds": [
+      [
+        -3.905,
+        -4.7725,
+        3.185
+      ],
+      [
+        -3.855,
+        -4.6875,
+        3.795
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 108,
+    "materials": [
+      "ceramic.001"
+    ]
+  },
+  {
+    "name": "R33 | Raised door panel molding rail.001",
+    "bounds": [
+      [
+        2.72618,
+        -4.04903,
+        3.74443
+      ],
+      [
+        2.80787,
+        -3.36373,
+        3.76545
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | External doorway frame stile.010",
+    "bounds": [
+      [
+        1.9185,
+        -4.16296,
+        3.0996
+      ],
+      [
+        1.97055,
+        -4.083,
+        5.1496
+      ]
+    ],
+    "collections": [
+      "level-1"
+    ],
+    "faces": 428,
+    "materials": [
+      "R31 | R35 door dark walnut.001"
+    ]
+  },
+  {
+    "name": "R33 | Open gate horizontal frame.001",
+    "bounds": [
+      [
+        3.07253,
+        -10.04564,
+        4.03967
+      ],
+      [
+        3.17394,
+        -8.17052,
+        4.07573
+      ]
+    ],
+    "collections": [
+      "garden"
+    ],
+    "faces": 44,
+    "materials": [
+      "R31 | R37 black forged garden iron.002"
+    ]
+  },
+  {
+    "name": "R33 | Connected garage driveway",
+    "bounds": [
+      [
+        3.09,
+        -10.058,
+        2.9196
+      ],
+      [
+        7.21783,
+        -1.43,
+        4.15089
+      ]
+    ],
+    "collections": [
+      "garden"
+    ],
+    "faces": 12,
+    "materials": [
+      "R31 | R37 garden cream limestone"
+    ]
+  },
+  {
+    "name": "R33 | Open gate horizontal frame",
+    "bounds": [
+      [
+        0.33281,
+        -10.04596,
+        3.94208
+      ],
+      [
+        0.44149,
+        -8.65598,
+        3.97805
+      ]
+    ],
+    "collections": [
+      "garden"
+    ],
+    "faces": 44,
+    "materials": [
+      "R31 | R37 black forged garden iron.001"
+    ]
+  },
+  {
+    "name": "R33 | Connected coursed entry path",
+    "bounds": [
+      [
+        0.35,
+        -10.058,
+        2.9196
+      ],
+      [
+        1.79991,
+        -5.14,
+        3.82887
+      ]
+    ],
+    "collections": [
+      "garden"
+    ],
+    "faces": 12,
+    "materials": [
+      "R31 | R37 entry coursed limestone"
+    ]
+  },
+  {
+    "name": "R33 | Open gate horizontal frame.004",
+    "bounds": [
+      [
+        6.88605,
+        -10.04564,
+        4.30296
+      ],
+      [
+        6.98746,
+        -8.17052,
+        4.33901
+      ]
+    ],
+    "collections": [
+      "garden"
+    ],
+    "faces": 44,
+    "materials": [
+      "R31 | R37 black forged garden iron.002"
+    ]
+  },
+  {
+    "name": "B23 | PENCERE_KAPI$CEPHE FRAME",
+    "bounds": [
+      [
+        31.78185,
+        -12.09654,
+        2.1996
+      ],
+      [
+        43.39382,
+        -0.05595,
+        5.29982
+      ]
+    ],
+    "collections": [
+      "context"
+    ],
+    "faces": 184,
+    "materials": [
+      "white_trim.006"
+    ]
+  },
+  {
+    "name": "B20 | PENCERE_KAPI$CEPHE FRAME.002",
+    "bounds": [
+      [
+        -22.75624,
+        -5.19314,
+        3.1996
+      ],
+      [
+        -14.03582,
+        9.42686,
+        6.70937
+      ]
+    ],
+    "collections": [
+      "context"
+    ],
+    "faces": 292,
+    "materials": [
+      "white_trim.006"
+    ]
+  },
+  {
+    "name": "Front pedestrian sidewalk",
+    "bounds": [
+      [
+        -39.0061,
+        -11.16342,
+        0.24396
+      ],
+      [
+        13.45491,
+        -10.04267,
+        5.30657
+      ]
+    ],
+    "collections": [
+      "context"
+    ],
+    "faces": 276,
+    "materials": [
+      "Entrance coursed limestone"
+    ]
+  },
+  {
+    "name": "B20 | PENCERE_KAPI$CEPHE FRAME.001",
+    "bounds": [
+      [
+        -23.28588,
+        -5.19314,
+        -0.2004
+      ],
+      [
+        -12.48582,
+        8.42686,
+        3.19982
+      ]
+    ],
+    "collections": [
+      "context"
+    ],
+    "faces": 400,
+    "materials": [
+      "white_trim.006"
+    ]
+  },
+  {
+    "name": "Terrain — CAD TK and road levels with terraced pads",
+    "bounds": [
+      [
+        -139.26349,
+        -167.48959,
+        -15.88342
+      ],
+      [
+        145.74048,
+        142.51041,
+        16.92742
+      ]
+    ],
+    "collections": [
+      "context"
+    ],
+    "faces": 31615,
+    "materials": [
+      "R31 | R39 continuous grass ground",
+      "Retaining wall rough limestone.001"
+    ]
+  },
+  {
+    "name": "CAD curb edges",
+    "bounds": [
+      [
+        -133.70483,
+        -157.74725,
+        -15.30753
+      ],
+      [
+        173.7561,
+        147.64932,
+        17.23458
+      ]
+    ],
+    "collections": [
+      "context"
+    ],
+    "faces": 510734,
+    "materials": [
+      "stone_tile.005"
+    ]
+  },
+  {
+    "name": "CAD roads — corrected block loops and arterials",
+    "bounds": [
+      [
+        -133.65114,
+        -159.09842,
+        -15.97063
+      ],
+      [
+        173.17128,
+        147.64911,
+        16.07315
+      ]
+    ],
+    "collections": [
+      "context"
+    ],
+    "faces": 17718,
+    "materials": [
+      "R31 | R37 fine asphalt aggregate"
+    ]
+  },
+  {
+    "name": "B22 | PENCERE_KAPI$CEPHE FRAME",
+    "bounds": [
+      [
+        21.74187,
+        -5.59229,
+        2.1996
+      ],
+      [
+        33.35384,
+        6.4483,
+        5.29982
+      ]
+    ],
+    "collections": [
+      "context"
+    ],
+    "faces": 184,
+    "materials": [
+      "white_trim.006"
+    ]
+  },
+  {
+    "name": "B13 | PENCERE_KAPI$CEPHE FRAME.003",
+    "bounds": [
+      [
+        76.75242,
+        -14.43104,
+        2.3196
+      ],
+      [
+        79.15804,
+        -3.67623,
+        3.97972
+      ]
+    ],
+    "collections": [
+      "context"
+    ],
+    "faces": 60,
+    "materials": [
+      "white_trim.006"
+    ]
+  },
+  {
+    "name": "B19 | PENCERE_KAPI$CEPHE FRAME.002",
+    "bounds": [
+      [
+        -37.65586,
+        -5.19314,
+        3.1996
+      ],
+      [
+        -28.93544,
+        9.42686,
+        6.70936
+      ]
+    ],
+    "collections": [
+      "context"
+    ],
+    "faces": 292,
+    "materials": [
+      "white_trim.006"
+    ]
+  },
+  {
+    "name": "B19 | PENCERE_KAPI$CEPHE FRAME.001",
+    "bounds": [
+      [
+        -39.20586,
+        -5.19314,
+        -0.2004
+      ],
+      [
+        -28.4058,
+        8.42686,
+        3.19982
+      ]
+    ],
+    "collections": [
+      "context"
+    ],
+    "faces": 400,
+    "materials": [
+      "white_trim.006"
+    ]
+  }
+]

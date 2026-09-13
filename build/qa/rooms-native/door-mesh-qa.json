@@ -1,0 +1,277 @@
+[
+  {
+    "object": "f0-D01 | Door brass hardware",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f0-D01 | Solid six-panel open leaf",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f0-D01 | Solid walnut casing",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f0-D13 | Solid six-panel open leaf",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f0-D13 | Solid walnut casing",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f0-D13 | Door brass hardware",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f1-D02 | Door brass hardware",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f1-D03 | Door brass hardware",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f1-D04 | Door brass hardware",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f1-D02 | Solid six-panel open leaf",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f1-D02 | Solid walnut casing",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f1-D03 | Solid six-panel open leaf",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f1-D03 | Solid walnut casing",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f1-D04 | Solid six-panel open leaf",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f1-D04 | Solid walnut casing",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f2-D05 | Door brass hardware",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f2-D06 | Door brass hardware",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f2-D07 | Door brass hardware",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f2-D08 | Door brass hardware",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f2-D09 | Door brass hardware",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f2-D05 | Solid six-panel open leaf",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f2-D05 | Solid walnut casing",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f2-D06 | Solid six-panel open leaf",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f2-D06 | Solid walnut casing",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f2-D07 | Solid six-panel open leaf",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f2-D07 | Solid walnut casing",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f2-D08 | Solid six-panel open leaf",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f2-D08 | Solid walnut casing",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f2-D09 | Solid six-panel open leaf",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f2-D09 | Solid walnut casing",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "107 balcony | 1 Hinge stile",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "107 balcony | 1 Latch stile",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "107 balcony | 1 Bottom rail",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "107 balcony | 1 Top rail",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "107 balcony | 1 Mid rail",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "107 balcony | 1 Clear physical glass",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "107 balcony | 1 Clear physical glass.001",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "107 balcony | 1 Brass handle",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "107 balcony | 2 Hinge stile",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "107 balcony | 2 Latch stile",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "107 balcony | 2 Bottom rail",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "107 balcony | 2 Top rail",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "107 balcony | 2 Mid rail",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "107 balcony | 2 Clear physical glass",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "107 balcony | 2 Clear physical glass.001",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "107 balcony | 2 Brass handle",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f3-D10 | Door brass hardware",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f3-D11 | Door brass hardware",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f3-D12 | Door brass hardware",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f3-D10 | Solid six-panel open leaf",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f3-D10 | Solid walnut casing",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f3-D11 | Solid six-panel open leaf",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f3-D11 | Solid walnut casing",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f3-D12 | Solid six-panel open leaf",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  },
+  {
+    "object": "f3-D12 | Solid walnut casing",
+    "nonmanifold_edges": 0,
+    "zero_area_faces": 0
+  }
+]

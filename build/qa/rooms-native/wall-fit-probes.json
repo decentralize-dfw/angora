@@ -1,0 +1,53 @@
+[
+  {
+    "origin": [
+      0.35,
+      7.5,
+      10.9
+    ],
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.52709,
+      "point": [
+        0.35,
+        8.02709,
+        10.9
+      ]
+    }
+  },
+  {
+    "origin": [
+      3.25,
+      -1.4,
+      4.6
+    ],
+    "hit": {
+      "object": "F1 | KAT 1$DUVAR KAPLAMA",
+      "material": "R31 | R33 ivory wall ceramic",
+      "distance": 0.83799,
+      "point": [
+        4.08799,
+        -1.4,
+        4.6
+      ]
+    }
+  },
+  {
+    "origin": [
+      -3.85,
+      2.9,
+      11
+    ],
+    "hit": {
+      "object": "F3 | ÇATII",
+      "material": "ceiling.003",
+      "distance": 0.60528,
+      "point": [
+        -3.85,
+        3.50528,
+        11.0
+      ]
+    }
+  }
+]

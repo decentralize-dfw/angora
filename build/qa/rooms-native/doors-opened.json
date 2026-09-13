@@ -1,0 +1,122 @@
+[
+  {
+    "id": "f0-D01",
+    "angle_before": 83.5,
+    "angle_after": 90,
+    "objects": {
+      "leaf": "f0-D01 | Open walnut door leaf",
+      "frame": "f0-D01 | Walnut door frame",
+      "hardware": "f0-D01 | Door brass hardware"
+    }
+  },
+  {
+    "id": "f1-D02",
+    "angle_before": 67.5,
+    "angle_after": 90,
+    "objects": {
+      "leaf": "f1-D02 | Open walnut door leaf",
+      "frame": "f1-D02 | Walnut door frame",
+      "hardware": "f1-D02 | Door brass hardware"
+    }
+  },
+  {
+    "id": "f1-D03",
+    "angle_before": 82,
+    "angle_after": 90,
+    "objects": {
+      "leaf": "f1-D03 | Open walnut door leaf",
+      "frame": "f1-D03 | Walnut door frame",
+      "hardware": "f1-D03 | Door brass hardware"
+    }
+  },
+  {
+    "id": "f1-D04",
+    "angle_before": 83.5,
+    "angle_after": 90,
+    "objects": {
+      "leaf": "f1-D04 | Open walnut door leaf",
+      "frame": "f1-D04 | Walnut door frame",
+      "hardware": "f1-D04 | Door brass hardware"
+    }
+  },
+  {
+    "id": "f2-D05",
+    "angle_before": 67.5,
+    "angle_after": 90,
+    "objects": {
+      "leaf": "f2-D05 | Open walnut door leaf",
+      "frame": "f2-D05 | Walnut door frame",
+      "hardware": "f2-D05 | Door brass hardware"
+    }
+  },
+  {
+    "id": "f2-D06",
+    "angle_before": 78,
+    "angle_after": 90,
+    "objects": {
+      "leaf": "f2-D06 | Open walnut door leaf",
+      "frame": "f2-D06 | Walnut door frame",
+      "hardware": "f2-D06 | Door brass hardware"
+    }
+  },
+  {
+    "id": "f2-D07",
+    "angle_before": 78,
+    "angle_after": 90,
+    "objects": {
+      "leaf": "f2-D07 | Open walnut door leaf",
+      "frame": "f2-D07 | Walnut door frame",
+      "hardware": "f2-D07 | Door brass hardware"
+    }
+  },
+  {
+    "id": "f2-D08",
+    "angle_before": 86.5,
+    "angle_after": 90,
+    "objects": {
+      "leaf": "f2-D08 | Open walnut door leaf",
+      "frame": "f2-D08 | Walnut door frame",
+      "hardware": "f2-D08 | Door brass hardware"
+    }
+  },
+  {
+    "id": "f2-D09",
+    "angle_before": 70,
+    "angle_after": 90,
+    "objects": {
+      "leaf": "f2-D09 | Open walnut door leaf",
+      "frame": "f2-D09 | Walnut door frame",
+      "hardware": "f2-D09 | Door brass hardware"
+    }
+  },
+  {
+    "id": "f3-D10",
+    "angle_before": 67.5,
+    "angle_after": 90,
+    "objects": {
+      "leaf": "f3-D10 | Open walnut door leaf",
+      "frame": "f3-D10 | Walnut door frame",
+      "hardware": "f3-D10 | Door brass hardware"
+    }
+  },
+  {
+    "id": "f3-D11",
+    "angle_before": 67.5,
+    "angle_after": 90,
+    "objects": {
+      "leaf": "f3-D11 | Open walnut door leaf",
+      "frame": "f3-D11 | Walnut door frame",
+      "hardware": "f3-D11 | Door brass hardware"
+    }
+  },
+  {
+    "id": "f3-D12",
+    "angle_before": 80,
+    "angle_after": 90,
+    "objects": {
+      "leaf": "f3-D12 | Open walnut door leaf",
+      "frame": "f3-D12 | Walnut door frame",
+      "hardware": "f3-D12 | Door brass hardware"
+    }
+  }
+]

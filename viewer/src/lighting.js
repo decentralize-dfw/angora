@@ -107,7 +107,7 @@ export function buildEnvironment(renderer,{sky=null,background=null}) {
     new THREE.MeshBasicMaterial({color:new THREE.Color(GROUND_ALBEDO)}));
   ground.rotation.x=-Math.PI/2;ground.position.y=-1;probe.add(ground);
   const generator=new THREE.PMREMGenerator(renderer);
-  const target=generator.fromScene(probe,.06,.1,20000);
+  const target=generator.fromScene(probe,.035,.1,20000);
   probe.remove(ground);ground.geometry.dispose();ground.material.dispose();generator.dispose();
   return target;
 }

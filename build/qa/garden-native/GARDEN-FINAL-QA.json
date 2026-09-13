@@ -1,0 +1,22 @@
+{
+  "native_file": "build/blender/angora-rooms-open-doors.blend",
+  "status": "rear_garden_and_side_stair_repairs_verified_front_access_pending",
+  "stair_samples": 228,
+  "stair_body_rays": 2736,
+  "stair_body_hits": 0,
+  "soil_intrusions": 0,
+  "terrace_floor_samples": 318,
+  "terrace_floor_holes": 0,
+  "access_samples": 113,
+  "access_hits": 30,
+  "access_hits_scope": "front straight test line crosses physical porch column; verify turning path next",
+  "recess_samples": 20,
+  "recess_holes": 0,
+  "interior_doors": 13,
+  "interior_door_rays": 455,
+  "interior_door_hits": 0,
+  "interior_floor_samples": 273,
+  "new_solid_issues": 0,
+  "web_export_verified": false,
+  "surveyed_replica_verified": false
+}

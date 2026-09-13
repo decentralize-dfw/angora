@@ -1,0 +1,367 @@
+[
+  {
+    "origin": [
+      -4.4,
+      2.8,
+      8.1
+    ],
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 1.04703,
+      "point": [
+        -4.4,
+        3.84703,
+        8.1
+      ]
+    }
+  },
+  {
+    "origin": [
+      -3.8,
+      2.8,
+      8.4
+    ],
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 1.04703,
+      "point": [
+        -3.8,
+        3.84703,
+        8.4
+      ]
+    }
+  },
+  {
+    "origin": [
+      -3.2,
+      2.8,
+      8.1
+    ],
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 1.04703,
+      "point": [
+        -3.2,
+        3.84703,
+        8.1
+      ]
+    }
+  },
+  {
+    "origin": [
+      -3.8,
+      2.8,
+      8.8
+    ],
+    "hit": {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "material": "interior.002",
+      "distance": 1.04703,
+      "point": [
+        -3.8,
+        3.84703,
+        8.8
+      ]
+    }
+  },
+  {
+    "origin": [
+      -4.5,
+      2.8,
+      10.9
+    ],
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.72758,
+      "point": [
+        -4.5,
+        3.52758,
+        10.9
+      ]
+    }
+  },
+  {
+    "origin": [
+      -3.8,
+      2.8,
+      11.2
+    ],
+    "hit": {
+      "object": "F3 | ÇATII",
+      "material": "ceiling.003",
+      "distance": 0.41578,
+      "point": [
+        -3.8,
+        3.21578,
+        11.2
+      ]
+    }
+  },
+  {
+    "origin": [
+      -3.0,
+      2.8,
+      11.4
+    ],
+    "hit": {
+      "object": "F3 | ÇATII",
+      "material": "ceiling.003",
+      "distance": 0.12679,
+      "point": [
+        -3.0,
+        2.92679,
+        11.4
+      ]
+    }
+  },
+  {
+    "origin": [
+      0.6,
+      7.4,
+      10.65
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "hit": {
+      "object": "R33 | Mirror physical glass.001",
+      "material": "R31 | R33 bathroom mirror.001",
+      "distance": 0.60802,
+      "point": [
+        0.6,
+        8.00802,
+        10.65
+      ]
+    }
+  },
+  {
+    "origin": [
+      0.6,
+      7.4,
+      10.65
+    ],
+    "direction": [
+      1,
+      0,
+      0
+    ],
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 1.26773,
+      "point": [
+        1.86773,
+        7.4,
+        10.65
+      ]
+    }
+  },
+  {
+    "origin": [
+      0.6,
+      7.4,
+      10.65
+    ],
+    "direction": [
+      -1,
+      0,
+      0
+    ],
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.68215,
+      "point": [
+        -0.08215,
+        7.4,
+        10.65
+      ]
+    }
+  },
+  {
+    "origin": [
+      0.6,
+      7.4,
+      10.65
+    ],
+    "direction": [
+      0,
+      -1,
+      0
+    ],
+    "hit": null
+  },
+  {
+    "origin": [
+      0.6,
+      6.5,
+      10.65
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "hit": {
+      "object": "R33 | Mirror physical glass.001",
+      "material": "R31 | R33 bathroom mirror.001",
+      "distance": 1.50802,
+      "point": [
+        0.6,
+        8.00802,
+        10.65
+      ]
+    }
+  },
+  {
+    "origin": [
+      0.6,
+      6.5,
+      10.65
+    ],
+    "direction": [
+      1,
+      0,
+      0
+    ],
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 1.26773,
+      "point": [
+        1.86773,
+        6.5,
+        10.65
+      ]
+    }
+  },
+  {
+    "origin": [
+      0.6,
+      6.5,
+      10.65
+    ],
+    "direction": [
+      -1,
+      0,
+      0
+    ],
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.68215,
+      "point": [
+        -0.08215,
+        6.5,
+        10.65
+      ]
+    }
+  },
+  {
+    "origin": [
+      0.6,
+      6.5,
+      10.65
+    ],
+    "direction": [
+      0,
+      -1,
+      0
+    ],
+    "hit": null
+  },
+  {
+    "origin": [
+      1.2,
+      7.4,
+      10.65
+    ],
+    "direction": [
+      0,
+      1,
+      0
+    ],
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.62709,
+      "point": [
+        1.2,
+        8.02709,
+        10.65
+      ]
+    }
+  },
+  {
+    "origin": [
+      1.2,
+      7.4,
+      10.65
+    ],
+    "direction": [
+      1,
+      0,
+      0
+    ],
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 0.66773,
+      "point": [
+        1.86773,
+        7.4,
+        10.65
+      ]
+    }
+  },
+  {
+    "origin": [
+      1.2,
+      7.4,
+      10.65
+    ],
+    "direction": [
+      -1,
+      0,
+      0
+    ],
+    "hit": {
+      "object": "F3 | Attic partition core",
+      "material": "interior.003",
+      "distance": 1.28215,
+      "point": [
+        -0.08215,
+        7.4,
+        10.65
+      ]
+    }
+  },
+  {
+    "origin": [
+      1.2,
+      7.4,
+      10.65
+    ],
+    "direction": [
+      0,
+      -1,
+      0
+    ],
+    "hit": {
+      "object": "R33 | Fixed curved shower glazing",
+      "material": "R31 | R33 shower frosted glass.001",
+      "distance": 1.19627,
+      "point": [
+        1.2,
+        6.20373,
+        10.65
+      ]
+    }
+  }
+]

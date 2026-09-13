@@ -1,0 +1,776 @@
+[
+  {
+    "name": "R33 | Soft tailored pillow.004",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -1.32024,
+        -3.70801,
+        7.02092
+      ],
+      [
+        -0.71976,
+        -2.99199,
+        7.16908
+      ]
+    ]
+  },
+  {
+    "name": "R33 | Wardrobe recessed front.006",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        1.14603,
+        -3.80302,
+        6.4324
+      ],
+      [
+        1.158,
+        -3.342,
+        8.6604
+      ]
+    ]
+  },
+  {
+    "name": "R33 | Soft tailored pillow.003",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.86416,
+        -2.394,
+        6.89511
+      ],
+      [
+        -4.49584,
+        -1.806,
+        7.38488
+      ]
+    ]
+  },
+  {
+    "name": "R33 | Soft tailored pillow.002",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.86416,
+        -3.094,
+        6.89511
+      ],
+      [
+        -4.49584,
+        -2.506,
+        7.38488
+      ]
+    ]
+  },
+  {
+    "name": "106 | Photographed damask side 1",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.56181,
+        -3.861,
+        6.397
+      ],
+      [
+        -4.18181,
+        -3.80754,
+        8.76934
+      ]
+    ]
+  },
+  {
+    "name": "106 | Photographed damask side 2",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -2.98165,
+        -3.861,
+        6.397
+      ],
+      [
+        -2.60165,
+        -3.80754,
+        8.76934
+      ]
+    ]
+  },
+  {
+    "name": "106 | Black curtain pole",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.62181,
+        -3.847,
+        8.79234
+      ],
+      [
+        -2.54165,
+        -3.823,
+        8.81634
+      ]
+    ]
+  },
+  {
+    "name": "107 | Ivory door side curtain",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -0.07701,
+        -4.94099,
+        6.397
+      ],
+      [
+        0.38299,
+        -4.88743,
+        8.32997
+      ]
+    ]
+  },
+  {
+    "name": "107 | Black curtain pole",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -1.07621,
+        -4.92599,
+        8.35397
+      ],
+      [
+        0.43299,
+        -4.90399,
+        8.37597
+      ]
+    ]
+  },
+  {
+    "name": "f2-106 | Fitted stepped ceiling cornice",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.998,
+        -3.9897,
+        8.86136
+      ],
+      [
+        -0.9846,
+        0.05698,
+        8.98736
+      ]
+    ]
+  },
+  {
+    "name": "f2-107 | Fitted stepped ceiling cornice",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -1.9486,
+        -4.989,
+        8.86136
+      ],
+      [
+        1.734,
+        -1.656,
+        8.98736
+      ]
+    ]
+  },
+  {
+    "name": "106 | Round black bedside tabletop",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.84,
+        -3.77,
+        6.97
+      ],
+      [
+        -4.3,
+        -3.23,
+        7.005
+      ]
+    ]
+  },
+  {
+    "name": "106 | Folding table crossed leg",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.77005,
+        -3.682,
+        6.37345
+      ],
+      [
+        -4.35995,
+        -3.658,
+        6.98456
+      ]
+    ]
+  },
+  {
+    "name": "106 | Folding table crossed leg.001",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.78005,
+        -3.682,
+        6.37345
+      ],
+      [
+        -4.36995,
+        -3.658,
+        6.98456
+      ]
+    ]
+  },
+  {
+    "name": "106 | Folding table crossed leg.002",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.77005,
+        -3.342,
+        6.37345
+      ],
+      [
+        -4.35995,
+        -3.318,
+        6.98456
+      ]
+    ]
+  },
+  {
+    "name": "106 | Folding table crossed leg.003",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.78005,
+        -3.342,
+        6.37345
+      ],
+      [
+        -4.36995,
+        -3.318,
+        6.98456
+      ]
+    ]
+  },
+  {
+    "name": "106 | Green bedside lamp base",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.68,
+        -3.555,
+        7.004
+      ],
+      [
+        -4.52,
+        -3.395,
+        7.035
+      ]
+    ]
+  },
+  {
+    "name": "106 | Green bedside lamp shade",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.705,
+        -3.58,
+        7.323
+      ],
+      [
+        -4.495,
+        -3.37,
+        7.438
+      ]
+    ]
+  },
+  {
+    "name": "106 | Green bedside lamp stem",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.608,
+        -3.483,
+        7.023
+      ],
+      [
+        -4.592,
+        -3.467,
+        7.348
+      ]
+    ]
+  },
+  {
+    "name": "106 | Black light suspension",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -3.914,
+        -2.014,
+        8.74
+      ],
+      [
+        -3.886,
+        -1.986,
+        8.982
+      ]
+    ]
+  },
+  {
+    "name": "106 | Black light radial arm",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -3.90211,
+        -2.009,
+        8.66625
+      ],
+      [
+        -3.62789,
+        -1.991,
+        8.74875
+      ]
+    ]
+  },
+  {
+    "name": "106 | Black ceiling shade",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -3.7,
+        -2.07,
+        8.555
+      ],
+      [
+        -3.56,
+        -1.93,
+        8.675
+      ]
+    ]
+  },
+  {
+    "name": "106 | Ceiling shade diffuser",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -3.685,
+        -2.055,
+        8.551
+      ],
+      [
+        -3.575,
+        -1.945,
+        8.556
+      ]
+    ]
+  },
+  {
+    "name": "106 | Black light radial arm.001",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.04279,
+        -2.00486,
+        8.66625
+      ],
+      [
+        -3.89221,
+        -1.76132,
+        8.74875
+      ]
+    ]
+  },
+  {
+    "name": "106 | Black ceiling shade.001",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.105,
+        -1.83617,
+        8.555
+      ],
+      [
+        -3.965,
+        -1.69617,
+        8.675
+      ]
+    ]
+  },
+  {
+    "name": "106 | Ceiling shade diffuser.001",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.09,
+        -1.82117,
+        8.551
+      ],
+      [
+        -3.98,
+        -1.71117,
+        8.556
+      ]
+    ]
+  },
+  {
+    "name": "106 | Black light radial arm.002",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.04279,
+        -2.23868,
+        8.66625
+      ],
+      [
+        -3.89221,
+        -1.99514,
+        8.74875
+      ]
+    ]
+  },
+  {
+    "name": "106 | Black ceiling shade.002",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.105,
+        -2.30383,
+        8.555
+      ],
+      [
+        -3.965,
+        -2.16383,
+        8.675
+      ]
+    ]
+  },
+  {
+    "name": "106 | Ceiling shade diffuser.002",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.09,
+        -2.28883,
+        8.551
+      ],
+      [
+        -3.98,
+        -2.17883,
+        8.556
+      ]
+    ]
+  },
+  {
+    "name": "106 | Original framed line artwork",
+    "room": "f2-106",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -4.995,
+        -3.025,
+        7.91
+      ],
+      [
+        -4.973,
+        -1.875,
+        8.4
+      ]
+    ]
+  },
+  {
+    "name": "107 | Curved timber headboard",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -1.9,
+        -4.17,
+        6.576
+      ],
+      [
+        -1.8,
+        -2.53,
+        7.64142
+      ]
+    ]
+  },
+  {
+    "name": "107 | Headboard curved top rail",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -1.915,
+        -4.17,
+        7.50358
+      ],
+      [
+        -1.775,
+        -2.53,
+        7.65542
+      ]
+    ]
+  },
+  {
+    "name": "107 | Headboard raised edge",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -1.915,
+        -4.17,
+        6.6
+      ],
+      [
+        -1.77,
+        -4.13,
+        7.634
+      ]
+    ]
+  },
+  {
+    "name": "107 | Headboard raised edge.001",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        -1.915,
+        -2.57,
+        6.6
+      ],
+      [
+        -1.77,
+        -2.53,
+        7.634
+      ]
+    ]
+  },
+  {
+    "name": "107 | Balcony side radiator fin",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        0.49,
+        -4.925,
+        6.48
+      ],
+      [
+        0.521,
+        -4.845,
+        7.43
+      ]
+    ]
+  },
+  {
+    "name": "107 | Balcony side radiator fin.001",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        0.539,
+        -4.925,
+        6.48
+      ],
+      [
+        0.57,
+        -4.845,
+        7.43
+      ]
+    ]
+  },
+  {
+    "name": "107 | Balcony side radiator fin.002",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        0.588,
+        -4.925,
+        6.48
+      ],
+      [
+        0.619,
+        -4.845,
+        7.43
+      ]
+    ]
+  },
+  {
+    "name": "107 | Balcony side radiator fin.003",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        0.637,
+        -4.925,
+        6.48
+      ],
+      [
+        0.668,
+        -4.845,
+        7.43
+      ]
+    ]
+  },
+  {
+    "name": "107 | Balcony side radiator fin.004",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        0.686,
+        -4.925,
+        6.48
+      ],
+      [
+        0.717,
+        -4.845,
+        7.43
+      ]
+    ]
+  },
+  {
+    "name": "107 | Balcony side radiator fin.005",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        0.735,
+        -4.925,
+        6.48
+      ],
+      [
+        0.766,
+        -4.845,
+        7.43
+      ]
+    ]
+  },
+  {
+    "name": "107 | Balcony side radiator fin.006",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        0.784,
+        -4.925,
+        6.48
+      ],
+      [
+        0.815,
+        -4.845,
+        7.43
+      ]
+    ]
+  },
+  {
+    "name": "107 | Balcony side radiator fin.007",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        0.833,
+        -4.925,
+        6.48
+      ],
+      [
+        0.864,
+        -4.845,
+        7.43
+      ]
+    ]
+  },
+  {
+    "name": "107 | Balcony side radiator fin.008",
+    "room": "f2-107",
+    "open_edges": 0,
+    "zero_area": 0,
+    "bounds": [
+      [
+        0.882,
+        -4.925,
+        6.48
+      ],
+      [
+        0.913,
+        -4.845,
+        7.43
+      ]
+    ]
+  }
+]

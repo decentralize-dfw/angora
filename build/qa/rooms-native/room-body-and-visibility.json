@@ -1,0 +1,809 @@
+{
+  "scope": "Native Blender room samples, not web navigation verification",
+  "rooms": [
+    {
+      "room": "f0-B06",
+      "position": [
+        -2.819999933242798,
+        5.980000019073486,
+        1.5
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+        "material": "terra_floor",
+        "distance": 1.50003,
+        "point": [
+          -2.82,
+          5.98,
+          -3e-05
+        ]
+      },
+      "ceiling": {
+        "object": "F0 | KAT 0$TAVAN",
+        "material": "ceiling",
+        "distance": 1.12039,
+        "point": [
+          -2.82,
+          5.98,
+          2.62039
+        ]
+      }
+    },
+    {
+      "room": "f0-B05",
+      "position": [
+        -3.180000066757202,
+        1.2999999523162842,
+        1.5
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+        "material": "terra_floor",
+        "distance": 1.50003,
+        "point": [
+          -3.18,
+          1.3,
+          -3e-05
+        ]
+      },
+      "ceiling": {
+        "object": "F0 | KAT 0$TAVAN",
+        "material": "ceiling",
+        "distance": 1.12039,
+        "point": [
+          -3.18,
+          1.3,
+          2.62039
+        ]
+      }
+    },
+    {
+      "room": "f0-B01",
+      "position": [
+        -0.41999998688697815,
+        2.5,
+        1.5
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+        "material": "terra_floor",
+        "distance": 1.50003,
+        "point": [
+          -0.42,
+          2.5,
+          -3e-05
+        ]
+      },
+      "ceiling": {
+        "object": "F0 | KAT 0$TAVAN",
+        "material": "ceiling",
+        "distance": 1.12039,
+        "point": [
+          -0.42,
+          2.5,
+          2.62039
+        ]
+      }
+    },
+    {
+      "room": "f0-B04",
+      "position": [
+        2.3399999141693115,
+        5.980000019073486,
+        1.5
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+        "material": "terra_floor",
+        "distance": 1.50003,
+        "point": [
+          2.34,
+          5.98,
+          -3e-05
+        ]
+      },
+      "ceiling": {
+        "object": "F0 | KAT 0$TAVAN",
+        "material": "ceiling",
+        "distance": 1.12039,
+        "point": [
+          2.34,
+          5.98,
+          2.62039
+        ]
+      }
+    },
+    {
+      "room": "f0-B10",
+      "position": [
+        1.9800000190734863,
+        4.059999942779541,
+        1.5
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+        "material": "terra_floor",
+        "distance": 1.50003,
+        "point": [
+          1.98,
+          4.06,
+          -3e-05
+        ]
+      },
+      "ceiling": {
+        "object": "F0 | KAT 0$TAVAN",
+        "material": "ceiling",
+        "distance": 1.12039,
+        "point": [
+          1.98,
+          4.06,
+          2.62039
+        ]
+      }
+    },
+    {
+      "room": "f0-B02",
+      "position": [
+        5.820000171661377,
+        2.5,
+        1.5
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+        "material": "stone_tile",
+        "distance": 1.50018,
+        "point": [
+          5.82,
+          2.5,
+          -0.00018
+        ]
+      },
+      "ceiling": {
+        "object": "F0 | KAT 0$TAVAN",
+        "material": "ceiling",
+        "distance": 1.12039,
+        "point": [
+          5.82,
+          2.5,
+          2.62039
+        ]
+      }
+    },
+    {
+      "room": "f1-Z06",
+      "position": [
+        -0.41999998688697815,
+        6.21999979019165,
+        4.300000190734863
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+        "material": "wood_floor.001",
+        "distance": 1.50002,
+        "point": [
+          -0.42,
+          6.22,
+          2.79998
+        ]
+      },
+      "ceiling": {
+        "object": "F1 | KAT 1$TAVAN",
+        "material": "ceiling.001",
+        "distance": 1.591,
+        "point": [
+          -0.42,
+          6.22,
+          5.891
+        ]
+      }
+    },
+    {
+      "room": "f1-Z05",
+      "position": [
+        -3.059999942779541,
+        2.380000114440918,
+        4.599999904632568
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+        "material": "wood_floor.001",
+        "distance": 1.49977,
+        "point": [
+          -3.06,
+          2.38,
+          3.10023
+        ]
+      },
+      "ceiling": {
+        "object": "F1 | KAT 1$TAVAN",
+        "material": "ceiling.001",
+        "distance": 1.291,
+        "point": [
+          -3.06,
+          2.38,
+          5.891
+        ]
+      }
+    },
+    {
+      "room": "f1-Z04",
+      "position": [
+        -3.299999952316284,
+        -2.059999942779541,
+        4.599999904632568
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+        "material": "terra_floor.001",
+        "distance": 1.49977,
+        "point": [
+          -3.3,
+          -2.06,
+          3.10023
+        ]
+      },
+      "ceiling": {
+        "object": "F1 | KAT 1$TAVAN",
+        "material": "ceiling.001",
+        "distance": 1.291,
+        "point": [
+          -3.3,
+          -2.06,
+          5.891
+        ]
+      }
+    },
+    {
+      "room": "f1-Z02",
+      "position": [
+        0.5400000214576721,
+        -0.14000000059604645,
+        4.599999904632568
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+        "material": "terra_floor.001",
+        "distance": 1.49977,
+        "point": [
+          0.54,
+          -0.14,
+          3.10023
+        ]
+      },
+      "ceiling": null
+    },
+    {
+      "room": "f1-Z01",
+      "position": [
+        2.0999999046325684,
+        -3.0199999809265137,
+        4.599999904632568
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+        "material": "terra_floor.001",
+        "distance": 1.49977,
+        "point": [
+          2.1,
+          -3.02,
+          3.10023
+        ]
+      },
+      "ceiling": {
+        "object": "F1 | KAT 1$TAVAN",
+        "material": "ceiling.001",
+        "distance": 1.291,
+        "point": [
+          2.1,
+          -3.02,
+          5.891
+        ]
+      }
+    },
+    {
+      "room": "f1-Z03",
+      "position": [
+        3.430000066757202,
+        -1.2699999809265137,
+        4.599999904632568
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+        "material": "R31 | R33 entrance WC ochre tile",
+        "distance": 1.50005,
+        "point": [
+          3.43,
+          -1.27,
+          3.09995
+        ]
+      },
+      "ceiling": {
+        "object": "F1 | KAT 1$TAVAN",
+        "material": "ceiling.001",
+        "distance": 1.291,
+        "point": [
+          3.43,
+          -1.27,
+          5.891
+        ]
+      }
+    },
+    {
+      "room": "f1-Z07",
+      "position": [
+        6.900000095367432,
+        2.0199999809265137,
+        4.599999904632568
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+        "material": "terra_floor.001",
+        "distance": 1.49977,
+        "point": [
+          6.9,
+          2.02,
+          3.10023
+        ]
+      },
+      "ceiling": {
+        "object": "F1 | KAT 1$TAVAN",
+        "material": "ceiling.001",
+        "distance": 1.291,
+        "point": [
+          6.9,
+          2.02,
+          5.891
+        ]
+      }
+    },
+    {
+      "room": "f1-Z08",
+      "position": [
+        5.940000057220459,
+        5.860000133514404,
+        4.599999904632568
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+        "material": "terra_floor.001",
+        "distance": 1.49977,
+        "point": [
+          5.94,
+          5.86,
+          3.10023
+        ]
+      },
+      "ceiling": {
+        "object": "F1 | KAT 1$TAVAN",
+        "material": "ceiling.001",
+        "distance": 1.291,
+        "point": [
+          5.94,
+          5.86,
+          5.891
+        ]
+      }
+    },
+    {
+      "room": "f2-102",
+      "position": [
+        -1.3799999952316284,
+        5.139999866485596,
+        7.870999813079834
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+        "material": "wood_floor.002",
+        "distance": 1.49996,
+        "point": [
+          -1.38,
+          5.14,
+          6.37104
+        ]
+      },
+      "ceiling": {
+        "object": "F2 | KAT 2$TAVAN",
+        "material": "ceiling.002",
+        "distance": 1.12036,
+        "point": [
+          -1.38,
+          5.14,
+          8.99136
+        ]
+      }
+    },
+    {
+      "room": "f2-103",
+      "position": [
+        1.2599999904632568,
+        4.900000095367432,
+        7.870999813079834
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+        "material": "wood_floor.002",
+        "distance": 1.49996,
+        "point": [
+          1.26,
+          4.9,
+          6.37104
+        ]
+      },
+      "ceiling": {
+        "object": "F2 | KAT 2$TAVAN",
+        "material": "ceiling.002",
+        "distance": 1.12036,
+        "point": [
+          1.26,
+          4.9,
+          8.99136
+        ]
+      }
+    },
+    {
+      "room": "f2-104",
+      "position": [
+        1.5,
+        7.179999828338623,
+        7.870999813079834
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "Master blue bathmat",
+        "material": "blue_fabric",
+        "distance": 1.4947,
+        "point": [
+          1.5,
+          7.18,
+          6.3763
+        ]
+      },
+      "ceiling": {
+        "object": "F2 | KAT 2$TAVAN",
+        "material": "ceiling.002",
+        "distance": 1.12036,
+        "point": [
+          1.5,
+          7.18,
+          8.99136
+        ]
+      }
+    },
+    {
+      "room": "f2-105",
+      "position": [
+        -3.9000000953674316,
+        1.4199999570846558,
+        7.870999813079834
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+        "material": "wood_floor.002",
+        "distance": 1.49996,
+        "point": [
+          -3.9,
+          1.42,
+          6.37104
+        ]
+      },
+      "ceiling": {
+        "object": "F2 | Hall timber ceiling beam 4",
+        "material": null,
+        "distance": 1.02036,
+        "point": [
+          -3.9,
+          1.42,
+          8.89136
+        ]
+      }
+    },
+    {
+      "room": "f2-101",
+      "position": [
+        -0.18000000715255737,
+        2.380000114440918,
+        7.870999813079834
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+        "material": "wood_floor.002",
+        "distance": 1.49996,
+        "point": [
+          -0.18,
+          2.38,
+          6.37104
+        ]
+      },
+      "ceiling": {
+        "object": "F2 | KAT 2$TAVAN",
+        "material": "ceiling.002",
+        "distance": 1.12036,
+        "point": [
+          -0.18,
+          2.38,
+          8.99136
+        ]
+      }
+    },
+    {
+      "room": "f2-106",
+      "position": [
+        -3.6600000858306885,
+        -1.100000023841858,
+        7.870999813079834
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+        "material": "wood_floor.002",
+        "distance": 1.49996,
+        "point": [
+          -3.66,
+          -1.1,
+          6.37104
+        ]
+      },
+      "ceiling": {
+        "object": "F2 | KAT 2$TAVAN",
+        "material": "ceiling.002",
+        "distance": 1.12036,
+        "point": [
+          -3.66,
+          -1.1,
+          8.99136
+        ]
+      }
+    },
+    {
+      "room": "f2-107",
+      "position": [
+        -0.5400000214576721,
+        -1.940000057220459,
+        7.870999813079834
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+        "material": "wood_floor.002",
+        "distance": 1.49996,
+        "point": [
+          -0.54,
+          -1.94,
+          6.37104
+        ]
+      },
+      "ceiling": {
+        "object": "F2 | KAT 2$TAVAN",
+        "material": "ceiling.002",
+        "distance": 1.12036,
+        "point": [
+          -0.54,
+          -1.94,
+          8.99136
+        ]
+      }
+    },
+    {
+      "room": "f2-108",
+      "position": [
+        2.940000057220459,
+        -2.059999942779541,
+        7.870999813079834
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "R31 | Navy woven bathmat",
+        "material": "R31 | Bathroom navy bathmat",
+        "distance": 1.48166,
+        "point": [
+          2.94,
+          -2.06,
+          6.38934
+        ]
+      },
+      "ceiling": {
+        "object": "F2 | KAT 2$TAVAN",
+        "material": "ceiling.002",
+        "distance": 1.12036,
+        "point": [
+          2.94,
+          -2.06,
+          8.99136
+        ]
+      }
+    },
+    {
+      "room": "f3-C01",
+      "position": [
+        -0.6600000262260437,
+        2.259999990463257,
+        10.970000267028809
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+        "material": "wood_floor.003",
+        "distance": 1.50023,
+        "point": [
+          -0.66,
+          2.26,
+          9.46977
+        ]
+      },
+      "ceiling": {
+        "object": "F3 | ÇATII",
+        "material": "ceiling.003",
+        "distance": 1.36974,
+        "point": [
+          -0.66,
+          2.26,
+          12.33974
+        ]
+      }
+    },
+    {
+      "room": "f3-C05",
+      "position": [
+        -3.9000000953674316,
+        2.380000114440918,
+        10.970000267028809
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "C05 | Low woven lounge rug",
+        "material": null,
+        "distance": 1.492,
+        "point": [
+          -3.9,
+          2.38,
+          9.478
+        ]
+      },
+      "ceiling": {
+        "object": "F3 | ÇATII",
+        "material": "ceiling.003",
+        "distance": 1.14974,
+        "point": [
+          -3.9,
+          2.38,
+          12.11974
+        ]
+      }
+    },
+    {
+      "room": "f3-C02",
+      "position": [
+        -1.4299999475479126,
+        6.639999866485596,
+        10.970000267028809
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+        "material": "wood_floor.003",
+        "distance": 1.50023,
+        "point": [
+          -1.43,
+          6.64,
+          9.46977
+        ]
+      },
+      "ceiling": {
+        "object": "F3 | ÇATII",
+        "material": "ceiling.003",
+        "distance": 0.83654,
+        "point": [
+          -1.43,
+          6.64,
+          11.80655
+        ]
+      }
+    },
+    {
+      "room": "f3-C03",
+      "position": [
+        0.8999999761581421,
+        6.400000095367432,
+        10.970000267028809
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "C03 | Woven bath runner",
+        "material": null,
+        "distance": 1.491,
+        "point": [
+          0.9,
+          6.4,
+          9.479
+        ]
+      },
+      "ceiling": {
+        "object": "F3 | ÇATII",
+        "material": "ceiling.003",
+        "distance": 0.52324,
+        "point": [
+          0.9,
+          6.4,
+          11.49324
+        ]
+      }
+    },
+    {
+      "room": "f3-C04",
+      "position": [
+        -0.5400000214576721,
+        -0.8600000143051147,
+        10.970000267028809
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+        "material": "wood_floor.003",
+        "distance": 1.50023,
+        "point": [
+          -0.54,
+          -0.86,
+          9.46977
+        ]
+      },
+      "ceiling": {
+        "object": "F3 | ÇATII",
+        "material": "ceiling.003",
+        "distance": 1.45252,
+        "point": [
+          -0.54,
+          -0.86,
+          12.42252
+        ]
+      }
+    },
+    {
+      "room": "f0-WC",
+      "position": [
+        -0.14499999582767487,
+        1.5700000524520874,
+        1.5
+      ],
+      "body_radius_hits": [],
+      "floor": {
+        "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+        "material": "terra_floor",
+        "distance": 1.50003,
+        "point": [
+          -0.145,
+          1.57,
+          -3e-05
+        ]
+      },
+      "ceiling": {
+        "object": "Opal ceiling diffuser.008",
+        "material": "bulb_warm",
+        "distance": 1.03282,
+        "point": [
+          -0.145,
+          1.57,
+          2.53282
+        ]
+      }
+    }
+  ],
+  "mesh_issues": []
+}

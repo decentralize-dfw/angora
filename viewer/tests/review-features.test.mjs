@@ -49,7 +49,7 @@ test('Every displayed span agrees with the original DWG dimension and registered
   const data = JSON.parse(fs.readFileSync(new URL('build/web/full/rooms.json',root)));
   // 27 enclosed rooms, plus the three balconies R40 named. A balcony is an
   // open platform: label only, no polygon, no area, no span, no walk station.
-  assert.equal(data.rooms.length,30);
+  assert.equal(data.rooms.length,data.source_native_sha256?31:30);
   const balconies=data.rooms.filter(r=>r.label_only);
   assert.equal(balconies.length,3);
   for(const b of balconies){

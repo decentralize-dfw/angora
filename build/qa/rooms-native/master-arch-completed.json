@@ -1,0 +1,144 @@
+{
+  "wall_changes": [
+    {
+      "object": "F2 | KAT 2$DUVAR",
+      "cut_faces": 14
+    },
+    {
+      "object": "F2 | KAT 2$DUVAR KAPLAMA",
+      "cut_faces": 21
+    }
+  ],
+  "rough_width": 0.8004199999999999,
+  "spring_clearance": 2.0606,
+  "crown_clearance": 2.2605999999999993,
+  "source": "kat_3_master_bedroom/WhatsApp Image 2026-08-26 at 11.52.43.jpeg",
+  "dimension_status": "Native horizontal opening, photo-interpreted arch rise",
+  "passage_probes": [
+    {
+      "y": 5.19,
+      "z": 6.42,
+      "hit": null
+    },
+    {
+      "y": 5.19,
+      "z": 6.7,
+      "hit": null
+    },
+    {
+      "y": 5.19,
+      "z": 7.32,
+      "hit": null
+    },
+    {
+      "y": 5.19,
+      "z": 8.02,
+      "hit": null
+    },
+    {
+      "y": 5.19,
+      "z": 8.27,
+      "hit": null
+    },
+    {
+      "y": 5.33,
+      "z": 6.42,
+      "hit": null
+    },
+    {
+      "y": 5.33,
+      "z": 6.7,
+      "hit": null
+    },
+    {
+      "y": 5.33,
+      "z": 7.32,
+      "hit": null
+    },
+    {
+      "y": 5.33,
+      "z": 8.02,
+      "hit": null
+    },
+    {
+      "y": 5.33,
+      "z": 8.27,
+      "hit": null
+    },
+    {
+      "y": 5.477,
+      "z": 6.42,
+      "hit": null
+    },
+    {
+      "y": 5.477,
+      "z": 6.7,
+      "hit": null
+    },
+    {
+      "y": 5.477,
+      "z": 7.32,
+      "hit": null
+    },
+    {
+      "y": 5.477,
+      "z": 8.02,
+      "hit": null
+    },
+    {
+      "y": 5.477,
+      "z": 8.27,
+      "hit": null
+    },
+    {
+      "y": 5.62,
+      "z": 6.42,
+      "hit": null
+    },
+    {
+      "y": 5.62,
+      "z": 6.7,
+      "hit": null
+    },
+    {
+      "y": 5.62,
+      "z": 7.32,
+      "hit": null
+    },
+    {
+      "y": 5.62,
+      "z": 8.02,
+      "hit": null
+    },
+    {
+      "y": 5.62,
+      "z": 8.27,
+      "hit": null
+    },
+    {
+      "y": 5.76,
+      "z": 6.42,
+      "hit": null
+    },
+    {
+      "y": 5.76,
+      "z": 6.7,
+      "hit": null
+    },
+    {
+      "y": 5.76,
+      "z": 7.32,
+      "hit": null
+    },
+    {
+      "y": 5.76,
+      "z": 8.02,
+      "hit": null
+    },
+    {
+      "y": 5.76,
+      "z": 8.27,
+      "hit": null
+    }
+  ]
+}
