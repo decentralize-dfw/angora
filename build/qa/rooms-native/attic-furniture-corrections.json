@@ -1,0 +1,359 @@
+[
+  {
+    "name": "R33 | Blue sofa lower upholstered rail",
+    "bounds": [
+      [
+        -4.82487,
+        2.59514,
+        9.58463
+      ],
+      [
+        -2.87513,
+        3.45487,
+        9.80432
+      ]
+    ],
+    "faces": 9408,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "R33 | Blue sofa tailored arm.001",
+    "bounds": [
+      [
+        -3.02042,
+        2.61208,
+        9.70558
+      ],
+      [
+        -2.8756,
+        3.43192,
+        10.19544
+      ]
+    ],
+    "faces": 9408,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "R33 | Blue sofa tailored arm",
+    "bounds": [
+      [
+        -4.82442,
+        2.61208,
+        9.70558
+      ],
+      [
+        -4.6796,
+        3.43192,
+        10.19544
+      ]
+    ],
+    "faces": 9408,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "R33 | Blue sofa continuous back",
+    "bounds": [
+      [
+        -4.82489,
+        3.28906,
+        9.70561
+      ],
+      [
+        -2.87511,
+        3.46889,
+        10.36541
+      ]
+    ],
+    "faces": 9408,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Single button tufted sofa back",
+    "bounds": [
+      [
+        -4.672,
+        3.17889,
+        9.925
+      ],
+      [
+        -3.028,
+        3.45,
+        10.36
+      ]
+    ],
+    "faces": 3248,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Tufted seat left",
+    "bounds": [
+      [
+        -4.672,
+        2.642,
+        9.805
+      ],
+      [
+        -3.86,
+        3.225,
+        9.92651
+      ]
+    ],
+    "faces": 2176,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Tufted seat right",
+    "bounds": [
+      [
+        -3.84,
+        2.642,
+        9.805
+      ],
+      [
+        -3.028,
+        3.225,
+        9.92651
+      ]
+    ],
+    "faces": 2176,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Square timber coffee table",
+    "bounds": [
+      [
+        -4.325,
+        1.355,
+        9.8055
+      ],
+      [
+        -3.375,
+        2.305,
+        9.9055
+      ]
+    ],
+    "faces": 6,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Square table tapered foot",
+    "bounds": [
+      [
+        -4.2775,
+        1.4025,
+        9.478
+      ],
+      [
+        -4.2125,
+        1.4675,
+        9.806
+      ]
+    ],
+    "faces": 6,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Square table tapered foot.001",
+    "bounds": [
+      [
+        -4.2775,
+        2.1925,
+        9.478
+      ],
+      [
+        -4.2125,
+        2.2575,
+        9.806
+      ]
+    ],
+    "faces": 6,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Square table tapered foot.002",
+    "bounds": [
+      [
+        -3.4875,
+        1.4025,
+        9.478
+      ],
+      [
+        -3.4225,
+        1.4675,
+        9.806
+      ]
+    ],
+    "faces": 6,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Square table tapered foot.003",
+    "bounds": [
+      [
+        -3.4875,
+        2.1925,
+        9.478
+      ],
+      [
+        -3.4225,
+        2.2575,
+        9.806
+      ]
+    ],
+    "faces": 6,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Sofa side cabinet left side",
+    "bounds": [
+      [
+        -2.77,
+        3.075,
+        9.49
+      ],
+      [
+        -2.748,
+        3.445,
+        10.34
+      ]
+    ],
+    "faces": 6,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Sofa side cabinet right side",
+    "bounds": [
+      [
+        -2.172,
+        3.075,
+        9.49
+      ],
+      [
+        -2.15,
+        3.445,
+        10.34
+      ]
+    ],
+    "faces": 6,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Sofa side cabinet top",
+    "bounds": [
+      [
+        -2.78,
+        3.065,
+        10.32
+      ],
+      [
+        -2.14,
+        3.455,
+        10.35
+      ]
+    ],
+    "faces": 6,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Sofa side cabinet base",
+    "bounds": [
+      [
+        -2.748,
+        3.09,
+        9.555
+      ],
+      [
+        -2.172,
+        3.43,
+        9.578
+      ]
+    ],
+    "faces": 6,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Sofa side cabinet back",
+    "bounds": [
+      [
+        -2.748,
+        3.425,
+        9.555
+      ],
+      [
+        -2.172,
+        3.445,
+        10.32
+      ]
+    ],
+    "faces": 6,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Sofa side cabinet left door",
+    "bounds": [
+      [
+        -2.738,
+        3.068,
+        9.59
+      ],
+      [
+        -2.464,
+        3.09,
+        10.31
+      ]
+    ],
+    "faces": 6,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Sofa side cabinet right door",
+    "bounds": [
+      [
+        -2.456,
+        3.068,
+        9.59
+      ],
+      [
+        -2.182,
+        3.09,
+        10.31
+      ]
+    ],
+    "faces": 6,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Cabinet vertical handle",
+    "bounds": [
+      [
+        -2.505,
+        3.047,
+        10.1
+      ],
+      [
+        -2.489,
+        3.065,
+        10.22
+      ]
+    ],
+    "faces": 6,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  },
+  {
+    "name": "C05 | Cabinet vertical handle.001",
+    "bounds": [
+      [
+        -2.431,
+        3.047,
+        10.1
+      ],
+      [
+        -2.415,
+        3.065,
+        10.22
+      ]
+    ],
+    "faces": 6,
+    "reference": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg"
+  }
+]

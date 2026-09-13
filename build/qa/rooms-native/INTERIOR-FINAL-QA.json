@@ -1,0 +1,22 @@
+{
+  "native_file": "C:\\Users\\yigit\\Desktop\\WORK\\angora\\angora-review\\build\\blender\\angora-rooms-open-doors.blend",
+  "scope": "Blender interior correction and sampled geometric QA; no web runtime acceptance or surveyed product replication claim",
+  "interior_doors": 13,
+  "door_rays": 455,
+  "door_ray_hits": 0,
+  "floor_samples": 273,
+  "room_stations": 28,
+  "body_radius_hits": 0,
+  "visibility_issues": [],
+  "completion_mesh_objects": 230,
+  "completion_nonmanifold_edges": 0,
+  "completion_zero_area_faces": 0,
+  "completion_wall_intersections": [],
+  "open_leaf_furniture": {
+    "tested_nearby_pairs": 1,
+    "contacts": []
+  },
+  "furniture_audit_objects": 3015,
+  "reviewed_attachment_contacts": 51,
+  "master_arch_clear_rays": 25
+}

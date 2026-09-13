@@ -1,0 +1,403 @@
+[
+  {
+    "name": "F2 | Family gallery wall sconce shade",
+    "bounds": [
+      [
+        -4.528,
+        3.592,
+        8.54
+      ],
+      [
+        -4.352,
+        3.768,
+        8.695
+      ]
+    ],
+    "materials": [
+      "Room pass | Hall sconce parchment"
+    ]
+  },
+  {
+    "name": "F2 | Gallery sconce wall plate",
+    "bounds": [
+      [
+        -4.465,
+        3.8,
+        8.42
+      ],
+      [
+        -4.415,
+        3.84,
+        8.565
+      ]
+    ],
+    "materials": [
+      "brass"
+    ]
+  },
+  {
+    "name": "F2 | Gallery sconce arm",
+    "bounds": [
+      [
+        -4.449,
+        3.68,
+        8.475
+      ],
+      [
+        -4.431,
+        3.81,
+        8.493
+      ]
+    ],
+    "materials": [
+      "brass"
+    ]
+  },
+  {
+    "name": "F2 | Gallery sconce stem",
+    "bounds": [
+      [
+        -4.449,
+        3.671,
+        8.48
+      ],
+      [
+        -4.431,
+        3.689,
+        8.565
+      ]
+    ],
+    "materials": [
+      "brass"
+    ]
+  },
+  {
+    "name": "R33 | Continuous pool terrace",
+    "bounds": [
+      [
+        -7.35,
+        8.24975,
+        -0.31
+      ],
+      [
+        6.35,
+        18.6274,
+        0.02031
+      ]
+    ],
+    "materials": [
+      "R31 | R37 garden cream limestone.001"
+    ]
+  },
+  {
+    "name": "R33 | Connected garage driveway",
+    "bounds": [
+      [
+        3.09,
+        -10.058,
+        2.9196
+      ],
+      [
+        7.21783,
+        -1.43,
+        4.15089
+      ]
+    ],
+    "materials": [
+      "R31 | R37 garden cream limestone"
+    ]
+  },
+  {
+    "name": "R33 | Connected coursed entry path",
+    "bounds": [
+      [
+        0.35,
+        -10.058,
+        2.9196
+      ],
+      [
+        1.79991,
+        -5.14,
+        3.82887
+      ]
+    ],
+    "materials": [
+      "R31 | R37 entry coursed limestone"
+    ]
+  },
+  {
+    "name": "R33 | Natural bent garden grass",
+    "bounds": [
+      [
+        -8.55396,
+        -8.81492,
+        -0.104
+      ],
+      [
+        9.61517,
+        23.31894,
+        3.36827
+      ]
+    ],
+    "materials": [
+      "R31 | R37 grass deep blade",
+      "R31 | R37 grass fresh blade",
+      "R31 | R37 grass dry blade"
+    ]
+  },
+  {
+    "name": "Garden west | Photo terrace riser 1",
+    "bounds": [
+      [
+        -9.038,
+        -1.4227,
+        2.03594
+      ],
+      [
+        -6.989,
+        -1.3627,
+        2.82492
+      ]
+    ],
+    "materials": [
+      "Garden | Irregular local stone"
+    ]
+  },
+  {
+    "name": "Garden west | Terrace coping 1",
+    "bounds": [
+      [
+        -9.044,
+        -1.5177,
+        2.82492
+      ],
+      [
+        -6.983,
+        -1.3127,
+        2.86492
+      ]
+    ],
+    "materials": [
+      "Garden | Limestone coping"
+    ]
+  },
+  {
+    "name": "Garden west | Photo terrace riser 2",
+    "bounds": [
+      [
+        -9.038,
+        2.075,
+        1.00236
+      ],
+      [
+        -6.989,
+        2.135,
+        2.09094
+      ]
+    ],
+    "materials": [
+      "Garden | Weathered blue white render"
+    ]
+  },
+  {
+    "name": "Garden west | Terrace coping 2",
+    "bounds": [
+      [
+        -9.044,
+        1.98,
+        2.09094
+      ],
+      [
+        -6.983,
+        2.185,
+        2.13094
+      ]
+    ],
+    "materials": [
+      "Garden | Limestone coping"
+    ]
+  },
+  {
+    "name": "Garden west | Photo terrace riser 3",
+    "bounds": [
+      [
+        -9.038,
+        5.775,
+        -0.12964
+      ],
+      [
+        -6.989,
+        5.835,
+        1.05736
+      ]
+    ],
+    "materials": [
+      "Garden | Weathered blue white render"
+    ]
+  },
+  {
+    "name": "Garden west | Terrace coping 3",
+    "bounds": [
+      [
+        -9.044,
+        5.68,
+        1.05736
+      ],
+      [
+        -6.983,
+        5.885,
+        1.09736
+      ]
+    ],
+    "materials": [
+      "Garden | Limestone coping"
+    ]
+  },
+  {
+    "name": "Garden east | Photo terrace riser 1",
+    "bounds": [
+      [
+        8.689,
+        -1.4227,
+        2.03594
+      ],
+      [
+        10.518,
+        -1.3627,
+        2.82492
+      ]
+    ],
+    "materials": [
+      "Garden | Irregular local stone"
+    ]
+  },
+  {
+    "name": "Garden east | Terrace coping 1",
+    "bounds": [
+      [
+        8.683,
+        -1.5177,
+        2.82492
+      ],
+      [
+        10.524,
+        -1.3127,
+        2.86492
+      ]
+    ],
+    "materials": [
+      "Garden | Limestone coping"
+    ]
+  },
+  {
+    "name": "Garden east | Photo terrace riser 2",
+    "bounds": [
+      [
+        8.689,
+        2.075,
+        1.00236
+      ],
+      [
+        10.518,
+        2.135,
+        2.09094
+      ]
+    ],
+    "materials": [
+      "Garden | Irregular local stone"
+    ]
+  },
+  {
+    "name": "Garden east | Terrace coping 2",
+    "bounds": [
+      [
+        8.683,
+        1.98,
+        2.09094
+      ],
+      [
+        10.524,
+        2.185,
+        2.13094
+      ]
+    ],
+    "materials": [
+      "Garden | Limestone coping"
+    ]
+  },
+  {
+    "name": "Garden east | Photo terrace riser 3",
+    "bounds": [
+      [
+        8.689,
+        5.775,
+        -0.12964
+      ],
+      [
+        10.518,
+        5.835,
+        1.05736
+      ]
+    ],
+    "materials": [
+      "Garden | Irregular local stone"
+    ]
+  },
+  {
+    "name": "Garden east | Terrace coping 3",
+    "bounds": [
+      [
+        8.683,
+        5.68,
+        1.05736
+      ],
+      [
+        10.524,
+        5.885,
+        1.09736
+      ]
+    ],
+    "materials": [
+      "Garden | Limestone coping"
+    ]
+  },
+  {
+    "name": "Garden | Photo side terrace grass",
+    "bounds": [
+      [
+        -9.07026,
+        -3.09965,
+        -0.10265
+      ],
+      [
+        10.54359,
+        7.82537,
+        3.13691
+      ]
+    ],
+    "materials": [
+      "R31 | R37 grass deep blade",
+      "R31 | R37 grass fresh blade",
+      "R31 | R37 grass dry blade"
+    ]
+  },
+  {
+    "name": "Terrain — CAD TK and road levels with terraced pads",
+    "bounds": [
+      [
+        -139.26349,
+        -167.48959,
+        -15.88342
+      ],
+      [
+        145.74048,
+        142.51041,
+        16.92742
+      ]
+    ],
+    "materials": [
+      "R31 | R39 continuous grass ground",
+      "Retaining wall rough limestone.001"
+    ]
+  }
+]

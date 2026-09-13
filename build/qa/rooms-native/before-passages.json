@@ -1,0 +1,3614 @@
+[
+  {
+    "id": "f0-D01",
+    "angle": 83.5,
+    "rays": [],
+    "floor": [
+      {
+        "width_fraction": 0.12,
+        "depth": -0.12,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+          "material": "terra_floor",
+          "distance": 0.15003,
+          "point": [
+            0.0608,
+            2.1595,
+            -3e-05
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN",
+          "material": "terra_floor",
+          "distance": 0.23,
+          "point": [
+            0.0608,
+            2.0395,
+            -0.08
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0.12,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+          "material": "terra_floor",
+          "distance": 0.15003,
+          "point": [
+            0.0608,
+            1.9195,
+            -3e-05
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": -0.12,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+          "material": "terra_floor",
+          "distance": 0.15003,
+          "point": [
+            -0.03085,
+            2.1595,
+            -3e-05
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN",
+          "material": "terra_floor",
+          "distance": 0.23,
+          "point": [
+            -0.03085,
+            2.0395,
+            -0.08
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0.12,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+          "material": "terra_floor",
+          "distance": 0.15003,
+          "point": [
+            -0.03085,
+            1.9195,
+            -3e-05
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": -0.12,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+          "material": "terra_floor",
+          "distance": 0.15003,
+          "point": [
+            -0.11898,
+            2.1595,
+            -3e-05
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN",
+          "material": "terra_floor",
+          "distance": 0.23,
+          "point": [
+            -0.11898,
+            2.0395,
+            -0.08
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0.12,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+          "material": "terra_floor",
+          "distance": 0.15003,
+          "point": [
+            -0.11898,
+            1.9195,
+            -3e-05
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": -0.12,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+          "material": "terra_floor",
+          "distance": 0.15003,
+          "point": [
+            -0.2071,
+            2.1595,
+            -3e-05
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN",
+          "material": "terra_floor",
+          "distance": 0.23,
+          "point": [
+            -0.2071,
+            2.0395,
+            -0.08
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0.12,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+          "material": "terra_floor",
+          "distance": 0.15003,
+          "point": [
+            -0.2071,
+            1.9195,
+            -3e-05
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": -0.12,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+          "material": "terra_floor",
+          "distance": 0.15003,
+          "point": [
+            -0.29522,
+            2.1595,
+            -3e-05
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN",
+          "material": "terra_floor",
+          "distance": 0.23,
+          "point": [
+            -0.29522,
+            2.0395,
+            -0.08
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0.12,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+          "material": "terra_floor",
+          "distance": 0.15003,
+          "point": [
+            -0.29522,
+            1.9195,
+            -3e-05
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": -0.12,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+          "material": "terra_floor",
+          "distance": 0.15003,
+          "point": [
+            -0.38335,
+            2.1595,
+            -3e-05
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN",
+          "material": "terra_floor",
+          "distance": 0.23,
+          "point": [
+            -0.38335,
+            2.0395,
+            -0.08
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0.12,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+          "material": "terra_floor",
+          "distance": 0.15003,
+          "point": [
+            -0.38335,
+            1.9195,
+            -3e-05
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": -0.12,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+          "material": "terra_floor",
+          "distance": 0.15003,
+          "point": [
+            -0.475,
+            2.1595,
+            -3e-05
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN",
+          "material": "terra_floor",
+          "distance": 0.23,
+          "point": [
+            -0.475,
+            2.0395,
+            -0.08
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0.12,
+        "support": {
+          "object": "F0 | KAT 0$ZEMİN KAPLAMA",
+          "material": "terra_floor",
+          "distance": 0.15003,
+          "point": [
+            -0.475,
+            1.9195,
+            -3e-05
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "f1-D02",
+    "angle": 67.5,
+    "rays": [],
+    "floor": [
+      {
+        "width_fraction": 0.12,
+        "depth": -0.08005,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            4.5245,
+            4.77215,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "stone_tile.001",
+          "distance": 0.22986,
+          "point": [
+            4.5245,
+            4.8522,
+            3.01984
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0.08005,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            4.5245,
+            4.93225,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": -0.08005,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            4.64215,
+            4.77215,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "stone_tile.001",
+          "distance": 0.22986,
+          "point": [
+            4.64215,
+            4.8522,
+            3.01984
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0.08005,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            4.64215,
+            4.93225,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": -0.08005,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            4.75528,
+            4.77215,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "stone_tile.001",
+          "distance": 0.22986,
+          "point": [
+            4.75528,
+            4.8522,
+            3.01984
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0.08005,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            4.75528,
+            4.93225,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": -0.08005,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            4.8684,
+            4.77215,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "stone_tile.001",
+          "distance": 0.22986,
+          "point": [
+            4.8684,
+            4.8522,
+            3.01984
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0.08005,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            4.8684,
+            4.93225,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": -0.08005,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            4.98152,
+            4.77215,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "stone_tile.001",
+          "distance": 0.22986,
+          "point": [
+            4.98152,
+            4.8522,
+            3.01984
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0.08005,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            4.98152,
+            4.93225,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": -0.08005,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            5.09465,
+            4.77215,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "stone_tile.001",
+          "distance": 0.22986,
+          "point": [
+            5.09465,
+            4.8522,
+            3.01984
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0.08005,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            5.09465,
+            4.93225,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": -0.08005,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            5.2123,
+            4.77215,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "stone_tile.001",
+          "distance": 0.22986,
+          "point": [
+            5.2123,
+            4.8522,
+            3.01984
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0.08005,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            5.2123,
+            4.93225,
+            3.10023
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "f1-D03",
+    "angle": 82,
+    "rays": [],
+    "floor": [
+      {
+        "width_fraction": 0.12,
+        "depth": -0.0649,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            2.9385,
+            0.4692,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.0034,
+            0.4692,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0.0649,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.0683,
+            0.4692,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": -0.0649,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            2.9385,
+            0.3522,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.0034,
+            0.3522,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0.0649,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.0683,
+            0.3522,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": -0.0649,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            2.9385,
+            0.2397,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.0034,
+            0.2397,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0.0649,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.0683,
+            0.2397,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": -0.0649,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            2.9385,
+            0.1272,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.0034,
+            0.1272,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0.0649,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.0683,
+            0.1272,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": -0.0649,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            2.9385,
+            0.0147,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.0034,
+            0.0147,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0.0649,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.0683,
+            0.0147,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": -0.0649,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            2.9385,
+            -0.0978,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.0034,
+            -0.0978,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0.0649,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.0683,
+            -0.0978,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": -0.0649,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            2.9385,
+            -0.2148,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.0034,
+            -0.2148,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0.0649,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.0683,
+            -0.2148,
+            3.01978
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "f1-D04",
+    "angle": 83.5,
+    "rays": [],
+    "floor": [
+      {
+        "width_fraction": 0.12,
+        "depth": -0.08015,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            2.80228,
+            -2.06939,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            2.85895,
+            -2.01272,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0.08015,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "stone_tile.001",
+          "distance": 0.14942,
+          "point": [
+            2.91563,
+            -1.95605,
+            3.10028
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": -0.08015,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            2.85789,
+            -2.12501,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            2.91456,
+            -2.06834,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0.08015,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "stone_tile.001",
+          "distance": 0.14942,
+          "point": [
+            2.97124,
+            -2.01166,
+            3.10028
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": -0.08015,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            2.91136,
+            -2.17849,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            2.96803,
+            -2.12182,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0.08015,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "stone_tile.001",
+          "distance": 0.14942,
+          "point": [
+            3.02471,
+            -2.06514,
+            3.10028
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": -0.08015,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            2.96483,
+            -2.23197,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.0215,
+            -2.1753,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0.08015,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "stone_tile.001",
+          "distance": 0.14942,
+          "point": [
+            3.07817,
+            -2.11863,
+            3.10028
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": -0.08015,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            3.0183,
+            -2.28545,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.07497,
+            -2.22878,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0.08015,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "R31 | R33 entrance WC ochre tile",
+          "distance": 0.14975,
+          "point": [
+            3.13164,
+            -2.17211,
+            3.09995
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": -0.08015,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            3.07176,
+            -2.33894,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.12844,
+            -2.28226,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0.08015,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "R31 | R33 entrance WC ochre tile",
+          "distance": 0.14975,
+          "point": [
+            3.18511,
+            -2.22559,
+            3.09995
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": -0.08015,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "terra_floor.001",
+          "distance": 0.14947,
+          "point": [
+            3.12737,
+            -2.39455,
+            3.10023
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN",
+          "material": "terra_floor.001",
+          "distance": 0.22992,
+          "point": [
+            3.18405,
+            -2.33788,
+            3.01978
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0.08015,
+        "support": {
+          "object": "F1 | KAT 1$ZEMİN KAPLAMA",
+          "material": "R31 | R33 entrance WC ochre tile",
+          "distance": 0.14975,
+          "point": [
+            3.24072,
+            -2.28121,
+            3.09995
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "f2-D05",
+    "angle": 67.5,
+    "rays": [],
+    "floor": [
+      {
+        "width_fraction": 0.12,
+        "depth": -0.1031,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.7258,
+            3.1274,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            -0.7258,
+            3.2305,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0.1031,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.7258,
+            3.3336,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": -0.1031,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.60815,
+            3.1274,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            -0.60815,
+            3.2305,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0.1031,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.60815,
+            3.3336,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": -0.1031,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.49503,
+            3.1274,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            -0.49503,
+            3.2305,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0.1031,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.49503,
+            3.3336,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": -0.1031,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.3819,
+            3.1274,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            -0.3819,
+            3.2305,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0.1031,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.3819,
+            3.3336,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": -0.1031,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.26878,
+            3.1274,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            -0.26878,
+            3.2305,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0.1031,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.26878,
+            3.3336,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": -0.1031,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.15565,
+            3.1274,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            -0.15565,
+            3.2305,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0.1031,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.15565,
+            3.3336,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": -0.1031,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.038,
+            3.1274,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            -0.038,
+            3.2305,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0.1031,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.038,
+            3.3336,
+            6.37104
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "f2-D06",
+    "angle": 78,
+    "rays": [],
+    "floor": [
+      {
+        "width_fraction": 0.12,
+        "depth": -0.13,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.9516,
+            -0.6294,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            -1.0816,
+            -0.6294,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0.13,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -1.2116,
+            -0.6294,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": -0.13,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.9516,
+            -0.74705,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            -1.0816,
+            -0.74705,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0.13,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -1.2116,
+            -0.74705,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": -0.13,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.9516,
+            -0.86018,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            -1.0816,
+            -0.86018,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0.13,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -1.2116,
+            -0.86018,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": -0.13,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.9516,
+            -0.9733,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            -1.0816,
+            -0.9733,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0.13,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -1.2116,
+            -0.9733,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": -0.13,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.9516,
+            -1.08642,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            -1.0816,
+            -1.08642,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0.13,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -1.2116,
+            -1.08642,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": -0.13,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.9516,
+            -1.19955,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            -1.0816,
+            -1.19955,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0.13,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -1.2116,
+            -1.19955,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": -0.13,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -0.9516,
+            -1.3172,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            -1.0816,
+            -1.3172,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0.13,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            -1.2116,
+            -1.3172,
+            6.37104
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "f2-D07",
+    "angle": 78,
+    "rays": [],
+    "floor": [
+      {
+        "width_fraction": 0.12,
+        "depth": -0.08,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            0.1747,
+            -1.4927,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            0.1747,
+            -1.5727,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0.08,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            0.1747,
+            -1.6527,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": -0.08,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            0.29235,
+            -1.4927,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            0.29235,
+            -1.5727,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0.08,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            0.29235,
+            -1.6527,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": -0.08,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            0.40547,
+            -1.4927,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            0.40547,
+            -1.5727,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0.08,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            0.40547,
+            -1.6527,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": -0.08,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            0.5186,
+            -1.4927,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            0.5186,
+            -1.5727,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0.08,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            0.5186,
+            -1.6527,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": -0.08,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            0.63172,
+            -1.4927,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            0.63172,
+            -1.5727,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0.08,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            0.63172,
+            -1.6527,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": -0.08,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            0.74485,
+            -1.4927,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            0.74485,
+            -1.5727,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0.08,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            0.74485,
+            -1.6527,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": -0.08,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            0.8625,
+            -1.4927,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            0.8625,
+            -1.5727,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0.08,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            0.8625,
+            -1.6527,
+            6.37104
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "f2-D08",
+    "angle": 86.5,
+    "rays": [],
+    "floor": [
+      {
+        "width_fraction": 0.12,
+        "depth": -0.0762,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.7458,
+            -0.6794,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.822,
+            -0.6794,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0.0762,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.8982,
+            -0.6794,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": -0.0762,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.7458,
+            -0.79705,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.822,
+            -0.79705,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0.0762,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.8982,
+            -0.79705,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": -0.0762,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.7458,
+            -0.91018,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.822,
+            -0.91018,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0.0762,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.8982,
+            -0.91018,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": -0.0762,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.7458,
+            -1.0233,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.822,
+            -1.0233,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0.0762,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.8982,
+            -1.0233,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": -0.0762,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.7458,
+            -1.13643,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.822,
+            -1.13643,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0.0762,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.8982,
+            -1.13643,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": -0.0762,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.7458,
+            -1.24955,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.822,
+            -1.24955,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0.0762,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.8982,
+            -1.24955,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": -0.0762,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.7458,
+            -1.3672,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.822,
+            -1.3672,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0.0762,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.8982,
+            -1.3672,
+            6.37104
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "f2-D09",
+    "angle": 70,
+    "rays": [],
+    "floor": [
+      {
+        "width_fraction": 0.12,
+        "depth": -0.05,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.4626,
+            5.9773,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.4626,
+            6.0273,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0.05,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.4626,
+            6.0773,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": -0.05,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.56725,
+            5.9773,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.56725,
+            6.0273,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0.05,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.56725,
+            6.0773,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": -0.05,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.66787,
+            5.9773,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.66787,
+            6.0273,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0.05,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.66787,
+            6.0773,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": -0.05,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.7685,
+            5.9773,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.7685,
+            6.0273,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0.05,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.7685,
+            6.0773,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": -0.05,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.86913,
+            5.9773,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.86913,
+            6.0273,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0.05,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.86913,
+            6.0773,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": -0.05,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.96975,
+            5.9773,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            1.96975,
+            6.0273,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0.05,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            1.96975,
+            6.0773,
+            6.37104
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": -0.05,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            2.0744,
+            5.9773,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN",
+          "material": "wood_floor.002",
+          "distance": 0.23075,
+          "point": [
+            2.0744,
+            6.0273,
+            6.29085
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0.05,
+        "support": {
+          "object": "F2 | KAT 2$ZEMİN KAPLAMA",
+          "material": "wood_floor.002",
+          "distance": 0.15056,
+          "point": [
+            2.0744,
+            6.0773,
+            6.37104
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "f3-D10",
+    "angle": 67.5,
+    "rays": [],
+    "floor": [
+      {
+        "width_fraction": 0.12,
+        "depth": -0.13005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.5872,
+            0.50735,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN",
+          "material": "wood_floor.003",
+          "distance": 0.23085,
+          "point": [
+            0.5872,
+            0.3773,
+            9.38965
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0.13005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.5872,
+            0.24725,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": -0.13005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.46955,
+            0.50735,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN",
+          "material": "wood_floor.003",
+          "distance": 0.23085,
+          "point": [
+            0.46955,
+            0.3773,
+            9.38965
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0.13005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.46955,
+            0.24725,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": -0.13005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.35642,
+            0.50735,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN",
+          "material": "wood_floor.003",
+          "distance": 0.23085,
+          "point": [
+            0.35642,
+            0.3773,
+            9.38965
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0.13005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.35642,
+            0.24725,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": -0.13005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.2433,
+            0.50735,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN",
+          "material": "wood_floor.003",
+          "distance": 0.23085,
+          "point": [
+            0.2433,
+            0.3773,
+            9.38965
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0.13005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.2433,
+            0.24725,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": -0.13005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.13018,
+            0.50735,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN",
+          "material": "wood_floor.003",
+          "distance": 0.23085,
+          "point": [
+            0.13018,
+            0.3773,
+            9.38965
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0.13005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.13018,
+            0.24725,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": -0.13005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.01705,
+            0.50735,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN",
+          "material": "wood_floor.003",
+          "distance": 0.23085,
+          "point": [
+            0.01705,
+            0.3773,
+            9.38965
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0.13005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.01705,
+            0.24725,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": -0.13005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.1006,
+            0.50735,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN",
+          "material": "wood_floor.003",
+          "distance": 0.23085,
+          "point": [
+            -0.1006,
+            0.3773,
+            9.38965
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0.13005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.1006,
+            0.24725,
+            9.46977
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "f3-D11",
+    "angle": 67.5,
+    "rays": [],
+    "floor": [
+      {
+        "width_fraction": 0.12,
+        "depth": -0.05005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.22525,
+            4.31545,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.2753,
+            4.31545,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0.05005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.32535,
+            4.31545,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": -0.05005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.22525,
+            4.4221,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.2753,
+            4.4221,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0.05005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.32535,
+            4.4221,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": -0.05005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.22525,
+            4.52465,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.2753,
+            4.52465,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0.05005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.32535,
+            4.52465,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": -0.05005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.22525,
+            4.6272,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.2753,
+            4.6272,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0.05005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.32535,
+            4.6272,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": -0.05005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.22525,
+            4.72975,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.2753,
+            4.72975,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0.05005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.32535,
+            4.72975,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": -0.05005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.22525,
+            4.8323,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.2753,
+            4.8323,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0.05005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.32535,
+            4.8323,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": -0.05005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.22525,
+            4.93895,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.2753,
+            4.93895,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0.05005,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            -0.32535,
+            4.93895,
+            9.46977
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "f3-D12",
+    "angle": 80,
+    "rays": [],
+    "floor": [
+      {
+        "width_fraction": 0.12,
+        "depth": -0.08,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.1422,
+            5.1473,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN",
+          "material": "wood_floor.003",
+          "distance": 0.23085,
+          "point": [
+            0.1422,
+            5.2273,
+            9.38965
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.12,
+        "depth": 0.08,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "R31 | R33 attic cream tile",
+          "distance": 0.1505,
+          "point": [
+            0.1422,
+            5.3073,
+            9.47
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": -0.08,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.24685,
+            5.1473,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN",
+          "material": "wood_floor.003",
+          "distance": 0.23085,
+          "point": [
+            0.24685,
+            5.2273,
+            9.38965
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.25,
+        "depth": 0.08,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "R31 | R33 attic cream tile",
+          "distance": 0.1505,
+          "point": [
+            0.24685,
+            5.3073,
+            9.47
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": -0.08,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.34747,
+            5.1473,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN",
+          "material": "wood_floor.003",
+          "distance": 0.23085,
+          "point": [
+            0.34747,
+            5.2273,
+            9.38965
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.375,
+        "depth": 0.08,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "R31 | R33 attic cream tile",
+          "distance": 0.1505,
+          "point": [
+            0.34747,
+            5.3073,
+            9.47
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": -0.08,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.4481,
+            5.1473,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN",
+          "material": "wood_floor.003",
+          "distance": 0.23085,
+          "point": [
+            0.4481,
+            5.2273,
+            9.38965
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.5,
+        "depth": 0.08,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "R31 | R33 attic cream tile",
+          "distance": 0.1505,
+          "point": [
+            0.4481,
+            5.3073,
+            9.47
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": -0.08,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.54873,
+            5.1473,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN",
+          "material": "wood_floor.003",
+          "distance": 0.23085,
+          "point": [
+            0.54873,
+            5.2273,
+            9.38965
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.625,
+        "depth": 0.08,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "R31 | R33 attic cream tile",
+          "distance": 0.1505,
+          "point": [
+            0.54873,
+            5.3073,
+            9.47
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": -0.08,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.64935,
+            5.1473,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN",
+          "material": "wood_floor.003",
+          "distance": 0.23085,
+          "point": [
+            0.64935,
+            5.2273,
+            9.38965
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.75,
+        "depth": 0.08,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "R31 | R33 attic cream tile",
+          "distance": 0.1505,
+          "point": [
+            0.64935,
+            5.3073,
+            9.47
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": -0.08,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "wood_floor.003",
+          "distance": 0.15073,
+          "point": [
+            0.754,
+            5.1473,
+            9.46977
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN",
+          "material": "wood_floor.003",
+          "distance": 0.23085,
+          "point": [
+            0.754,
+            5.2273,
+            9.38965
+          ]
+        }
+      },
+      {
+        "width_fraction": 0.88,
+        "depth": 0.08,
+        "support": {
+          "object": "F3 | KAT 3$ZEMİN KAPLAMA",
+          "material": "R31 | R33 attic cream tile",
+          "distance": 0.1505,
+          "point": [
+            0.754,
+            5.3073,
+            9.47
+          ]
+        }
+      }
+    ]
+  }
+]

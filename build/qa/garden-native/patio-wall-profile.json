@@ -1,0 +1,434 @@
+[
+  {
+    "x": 3.0,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 0.4227,
+      "point": [
+        3.0,
+        8.2773,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 3.1,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 0.4227,
+      "point": [
+        3.1,
+        8.2773,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 3.2,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 0.4227,
+      "point": [
+        3.2,
+        8.2773,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 3.3,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 0.4227,
+      "point": [
+        3.3,
+        8.2773,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 3.4,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        3.4,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 3.5,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        3.5,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 3.6,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        3.6,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 3.7,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        3.7,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 3.8,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        3.8,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 3.9,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        3.9,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 4.0,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        4.0,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 4.1,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        4.1,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 4.2,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        4.2,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 4.3,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        4.3,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 4.4,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        4.4,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 4.5,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        4.5,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 4.6,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        4.6,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 4.7,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        4.7,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 4.8,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        4.8,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 4.9,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        4.9,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 5.0,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        5.0,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 5.1,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        5.1,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 5.2,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        5.2,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 5.3,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        5.3,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 5.4,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 2.09824,
+      "point": [
+        5.4,
+        6.60176,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 5.5,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 1.69758,
+      "point": [
+        5.5,
+        7.00242,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 5.6,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 1.69758,
+      "point": [
+        5.6,
+        7.00242,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 5.7,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 1.69758,
+      "point": [
+        5.7,
+        7.00242,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 5.8,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 1.69758,
+      "point": [
+        5.8,
+        7.00242,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 5.9,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 1.69758,
+      "point": [
+        5.9,
+        7.00242,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 6.0,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 1.69758,
+      "point": [
+        6.0,
+        7.00242,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 6.1,
+    "wall": {
+      "object": "R33 | External doorway frame stile.012",
+      "material": "R31 | R35 door dark walnut",
+      "distance": 1.7577,
+      "point": [
+        6.1,
+        6.9423,
+        0.4
+      ]
+    }
+  },
+  {
+    "x": 6.2,
+    "wall": null
+  },
+  {
+    "x": 6.3,
+    "wall": null
+  },
+  {
+    "x": 6.4,
+    "wall": null
+  },
+  {
+    "x": 6.5,
+    "wall": null
+  }
+]

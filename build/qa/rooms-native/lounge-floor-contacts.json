@@ -1,0 +1,27 @@
+[
+  {
+    "assembly": "blue chair",
+    "floor_z": 9.469765663146973,
+    "vertical_correction": -0.015234336853026775
+  },
+  {
+    "assembly": "brown recliner",
+    "floor_z": 9.469765663146973,
+    "vertical_correction": -0.030234336853027344
+  },
+  {
+    "assembly": "coffee table",
+    "floor_z": 9.469765663146973,
+    "vertical_correction": -0.008234336853027102
+  },
+  {
+    "assembly": "side cabinet",
+    "floor_z": 9.469765663146973,
+    "vertical_correction": -0.020234336853027557
+  },
+  {
+    "assembly": "desk chair",
+    "floor_z": 9.469765663146973,
+    "vertical_correction": -0.01023433685302777
+  }
+]

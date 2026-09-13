@@ -1,0 +1,54 @@
+[
+  {
+    "x": 2.75,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 0.7227,
+      "point": [
+        2.75,
+        8.2773,
+        2.38
+      ]
+    }
+  },
+  {
+    "x": 2.9,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 0.7227,
+      "point": [
+        2.9,
+        8.2773,
+        2.38
+      ]
+    }
+  },
+  {
+    "x": -0.9,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 0.7227,
+      "point": [
+        -0.9,
+        8.2773,
+        2.38
+      ]
+    }
+  },
+  {
+    "x": -1.2,
+    "wall": {
+      "object": "F0 | KAT 0$DUVAR",
+      "material": "stucco",
+      "distance": 0.7227,
+      "point": [
+        -1.2,
+        8.2773,
+        2.38
+      ]
+    }
+  }
+]

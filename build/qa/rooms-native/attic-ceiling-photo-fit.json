@@ -1,0 +1,29 @@
+{
+  "changes": [
+    {
+      "object": "F3 | KAT 3$DUVAR",
+      "moved_vertices": 279,
+      "maximum_raise": 1.0024681033465583
+    },
+    {
+      "object": "F3 | KAT 3$DUVAR KAPLAMA",
+      "moved_vertices": 456,
+      "maximum_raise": 0.9970895822856143
+    },
+    {
+      "object": "F3 | ÇATII",
+      "moved_vertices": 9606,
+      "maximum_raise": 1.005552348962098
+    },
+    {
+      "object": "F3 | Attic partition core",
+      "moved_vertices": 5935,
+      "maximum_raise": 0.9971487040850828
+    }
+  ],
+  "ridge_inner_z": 12.17,
+  "inner_slope": 0.145,
+  "floor_z": 9.46977,
+  "source": "kat_4/WhatsApp Image 2026-08-26 at 11.53.10 (2).jpeg",
+  "dimension_status": "Photo-proportioned reconstruction, not surveyed elevations; main roof retained outside the cross-bay"
+}

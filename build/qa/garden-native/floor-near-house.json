@@ -1,0 +1,226 @@
+[
+  {
+    "x": 3.8,
+    "y": 7.5,
+    "floor": {
+      "object": "R32 | Continuous local soil volume",
+      "material": "R31 | R39 continuous grass ground",
+      "distance": 0.44964,
+      "point": [
+        3.8,
+        7.5,
+        -0.09964
+      ]
+    }
+  },
+  {
+    "x": 3.8,
+    "y": 7.8,
+    "floor": {
+      "object": "R32 | Continuous local soil volume",
+      "material": "R31 | R39 continuous grass ground",
+      "distance": 0.44964,
+      "point": [
+        3.8,
+        7.8,
+        -0.09964
+      ]
+    }
+  },
+  {
+    "x": 3.8,
+    "y": 8.0,
+    "floor": {
+      "object": "R32 | Continuous local soil volume",
+      "material": "R31 | R39 continuous grass ground",
+      "distance": 0.44964,
+      "point": [
+        3.8,
+        8.0,
+        -0.09964
+      ]
+    }
+  },
+  {
+    "x": 3.8,
+    "y": 8.2,
+    "floor": {
+      "object": "R32 | Continuous local soil volume",
+      "material": "R31 | R39 continuous grass ground",
+      "distance": 0.44964,
+      "point": [
+        3.8,
+        8.2,
+        -0.09964
+      ]
+    }
+  },
+  {
+    "x": 4.5,
+    "y": 7.5,
+    "floor": {
+      "object": "R32 | Continuous local soil volume",
+      "material": "R31 | R39 continuous grass ground",
+      "distance": 0.44964,
+      "point": [
+        4.5,
+        7.5,
+        -0.09964
+      ]
+    }
+  },
+  {
+    "x": 4.5,
+    "y": 7.8,
+    "floor": {
+      "object": "R32 | Continuous local soil volume",
+      "material": "R31 | R39 continuous grass ground",
+      "distance": 0.44964,
+      "point": [
+        4.5,
+        7.8,
+        -0.09964
+      ]
+    }
+  },
+  {
+    "x": 4.5,
+    "y": 8.0,
+    "floor": {
+      "object": "R32 | Continuous local soil volume",
+      "material": "R31 | R39 continuous grass ground",
+      "distance": 0.44964,
+      "point": [
+        4.5,
+        8.0,
+        -0.09964
+      ]
+    }
+  },
+  {
+    "x": 4.5,
+    "y": 8.2,
+    "floor": {
+      "object": "R32 | Continuous local soil volume",
+      "material": "R31 | R39 continuous grass ground",
+      "distance": 0.44964,
+      "point": [
+        4.5,
+        8.2,
+        -0.09964
+      ]
+    }
+  },
+  {
+    "x": 5.5,
+    "y": 7.5,
+    "floor": {
+      "object": "R32 | Continuous local soil volume",
+      "material": "R31 | R39 continuous grass ground",
+      "distance": 0.44964,
+      "point": [
+        5.5,
+        7.5,
+        -0.09964
+      ]
+    }
+  },
+  {
+    "x": 5.5,
+    "y": 7.8,
+    "floor": {
+      "object": "R32 | Continuous local soil volume",
+      "material": "R31 | R39 continuous grass ground",
+      "distance": 0.44964,
+      "point": [
+        5.5,
+        7.8,
+        -0.09964
+      ]
+    }
+  },
+  {
+    "x": 5.5,
+    "y": 8.0,
+    "floor": {
+      "object": "R32 | Continuous local soil volume",
+      "material": "R31 | R39 continuous grass ground",
+      "distance": 0.44964,
+      "point": [
+        5.5,
+        8.0,
+        -0.09964
+      ]
+    }
+  },
+  {
+    "x": 5.5,
+    "y": 8.2,
+    "floor": {
+      "object": "R32 | Continuous local soil volume",
+      "material": "R31 | R39 continuous grass ground",
+      "distance": 0.44964,
+      "point": [
+        5.5,
+        8.2,
+        -0.09964
+      ]
+    }
+  },
+  {
+    "x": 6.1,
+    "y": 7.5,
+    "floor": {
+      "object": "R32 | Continuous local soil volume",
+      "material": "R31 | R39 continuous grass ground",
+      "distance": 0.44964,
+      "point": [
+        6.1,
+        7.5,
+        -0.09964
+      ]
+    }
+  },
+  {
+    "x": 6.1,
+    "y": 7.8,
+    "floor": {
+      "object": "R32 | Continuous local soil volume",
+      "material": "R31 | R39 continuous grass ground",
+      "distance": 0.44964,
+      "point": [
+        6.1,
+        7.8,
+        -0.09964
+      ]
+    }
+  },
+  {
+    "x": 6.1,
+    "y": 8.0,
+    "floor": {
+      "object": "R32 | Continuous local soil volume",
+      "material": "R31 | R39 continuous grass ground",
+      "distance": 0.44964,
+      "point": [
+        6.1,
+        8.0,
+        -0.09964
+      ]
+    }
+  },
+  {
+    "x": 6.1,
+    "y": 8.2,
+    "floor": {
+      "object": "R32 | Continuous local soil volume",
+      "material": "R31 | R39 continuous grass ground",
+      "distance": 0.44964,
+      "point": [
+        6.1,
+        8.2,
+        -0.09964
+      ]
+    }
+  }
+]

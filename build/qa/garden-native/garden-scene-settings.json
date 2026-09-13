@@ -1,0 +1,29 @@
+{
+  "lights": [
+    {
+      "name": "Review sun",
+      "type": "SUN",
+      "energy": 2.0,
+      "hidden": false
+    },
+    {
+      "name": "F2 gallery sconce warm light",
+      "type": "POINT",
+      "energy": 3.0,
+      "hidden": false
+    },
+    {
+      "name": "Inspection fill - review only",
+      "type": "AREA",
+      "energy": 700.0,
+      "hidden": true
+    },
+    {
+      "name": "Room pass inspection fill",
+      "type": "POINT",
+      "energy": 85.0,
+      "hidden": true
+    }
+  ],
+  "world": "Review daylight"
+}

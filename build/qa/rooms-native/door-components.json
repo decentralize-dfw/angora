@@ -1,0 +1,2162 @@
+[
+  {
+    "object": "F0 | Interior door hardware",
+    "door": "f0-D01",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -2e-05,
+        -0.02102,
+        1.74754
+      ],
+      [
+        0.00405,
+        0.02103,
+        1.8325
+      ]
+    ],
+    "first_index": 0
+  },
+  {
+    "object": "F0 | Interior door hardware",
+    "door": "f0-D01",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.014,
+        -0.014,
+        1.74754
+      ],
+      [
+        0.01396,
+        0.01395,
+        1.8325
+      ]
+    ],
+    "first_index": 8
+  },
+  {
+    "object": "F0 | Interior door hardware",
+    "door": "f0-D01",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -2e-05,
+        -0.02102,
+        0.95747
+      ],
+      [
+        0.00405,
+        0.02103,
+        1.04253
+      ]
+    ],
+    "first_index": 26
+  },
+  {
+    "object": "F0 | Interior door hardware",
+    "door": "f0-D01",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.014,
+        -0.014,
+        0.95747
+      ],
+      [
+        0.01396,
+        0.01395,
+        1.04253
+      ]
+    ],
+    "first_index": 34
+  },
+  {
+    "object": "F0 | Interior door hardware",
+    "door": "f0-D01",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -2e-05,
+        -0.02102,
+        0.1775
+      ],
+      [
+        0.00405,
+        0.02103,
+        0.26246
+      ]
+    ],
+    "first_index": 52
+  },
+  {
+    "object": "F0 | Interior door hardware",
+    "door": "f0-D01",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.014,
+        -0.014,
+        0.1775
+      ],
+      [
+        0.01396,
+        0.01395,
+        0.26246
+      ]
+    ],
+    "first_index": 60
+  },
+  {
+    "object": "F0 | Interior door hardware",
+    "door": "f0-D01",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.59498,
+        -0.089,
+        0.99151
+      ],
+      [
+        0.65502,
+        -0.02096,
+        1.04849
+      ]
+    ],
+    "first_index": 78
+  },
+  {
+    "object": "F0 | Interior door hardware",
+    "door": "f0-D01",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.59496,
+        0.02097,
+        0.99151
+      ],
+      [
+        0.655,
+        0.08903,
+        1.04849
+      ]
+    ],
+    "first_index": 160
+  },
+  {
+    "object": "F0 | Interior door joinery",
+    "door": "f0-D01",
+    "vertices": 528,
+    "local_bounds": [
+      [
+        3e-05,
+        -0.02104,
+        0.0
+      ],
+      [
+        0.69296,
+        0.02105,
+        2.00002
+      ]
+    ],
+    "first_index": 0
+  },
+  {
+    "object": "F0 | Interior door joinery",
+    "door": "f0-D01",
+    "vertices": 440,
+    "local_bounds": [
+      [
+        -0.14789,
+        -0.78837,
+        -0.00084
+      ],
+      [
+        0.2271,
+        0.09264,
+        2.10071
+      ]
+    ],
+    "first_index": 24
+  },
+  {
+    "object": "F1 | Interior door joinery",
+    "door": "f1-D04",
+    "vertices": 528,
+    "local_bounds": [
+      [
+        -0.0001,
+        -0.02104,
+        0.0
+      ],
+      [
+        0.59323,
+        0.02132,
+        2.00017
+      ]
+    ],
+    "first_index": 0
+  },
+  {
+    "object": "F1 | Interior door joinery",
+    "door": "f1-D03",
+    "vertices": 528,
+    "local_bounds": [
+      [
+        2e-05,
+        -0.02089,
+        0.0
+      ],
+      [
+        0.88806,
+        0.02113,
+        2.00017
+      ]
+    ],
+    "first_index": 24
+  },
+  {
+    "object": "F1 | Interior door joinery",
+    "door": "f1-D02",
+    "vertices": 528,
+    "local_bounds": [
+      [
+        -0.0002,
+        -0.02118,
+        0.0
+      ],
+      [
+        0.89312,
+        0.0212,
+        2.00017
+      ]
+    ],
+    "first_index": 48
+  },
+  {
+    "object": "F1 | Interior door joinery",
+    "door": "f1-D04",
+    "vertices": 440,
+    "local_bounds": [
+      [
+        -0.10258,
+        -0.73442,
+        -0.0
+      ],
+      [
+        0.18189,
+        0.03853,
+        2.09976
+      ]
+    ],
+    "first_index": 72
+  },
+  {
+    "object": "F1 | Interior door joinery",
+    "door": "f1-D03",
+    "vertices": 440,
+    "local_bounds": [
+      [
+        -0.09456,
+        -0.97727,
+        -0.0
+      ],
+      [
+        0.21955,
+        0.086,
+        2.09976
+      ]
+    ],
+    "first_index": 1016
+  },
+  {
+    "object": "F1 | Interior door joinery",
+    "door": "f1-D02",
+    "vertices": 440,
+    "local_bounds": [
+      [
+        -0.12208,
+        -0.94174,
+        -0.0
+      ],
+      [
+        0.46654,
+        0.10944,
+        2.09976
+      ]
+    ],
+    "first_index": 1960
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D04",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -3e-05,
+        -0.02118,
+        1.74766
+      ],
+      [
+        0.00413,
+        0.02103,
+        1.83268
+      ]
+    ],
+    "first_index": 0
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D04",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01402,
+        -0.01401,
+        1.74766
+      ],
+      [
+        0.01413,
+        0.01406,
+        1.83268
+      ]
+    ],
+    "first_index": 8
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D04",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -3e-05,
+        -0.02118,
+        0.95747
+      ],
+      [
+        0.00413,
+        0.02103,
+        1.04248
+      ]
+    ],
+    "first_index": 26
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D04",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01402,
+        -0.01401,
+        0.95747
+      ],
+      [
+        0.01413,
+        0.01406,
+        1.04248
+      ]
+    ],
+    "first_index": 34
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D04",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -3e-05,
+        -0.02118,
+        0.1775
+      ],
+      [
+        0.00413,
+        0.02103,
+        0.26251
+      ]
+    ],
+    "first_index": 52
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D04",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01402,
+        -0.01401,
+        0.1775
+      ],
+      [
+        0.01413,
+        0.01406,
+        0.26251
+      ]
+    ],
+    "first_index": 60
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D04",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.4949,
+        -0.08904,
+        0.99138
+      ],
+      [
+        0.55504,
+        -0.02082,
+        1.04852
+      ]
+    ],
+    "first_index": 78
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D04",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.49507,
+        0.02082,
+        0.99138
+      ],
+      [
+        0.55499,
+        0.08915,
+        1.04852
+      ]
+    ],
+    "first_index": 160
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D03",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00012,
+        -0.02118,
+        1.74766
+      ],
+      [
+        0.00409,
+        0.02107,
+        1.83268
+      ]
+    ],
+    "first_index": 242
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D03",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01409,
+        -0.0142,
+        1.74766
+      ],
+      [
+        0.01409,
+        0.01392,
+        1.83268
+      ]
+    ],
+    "first_index": 250
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D03",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00012,
+        -0.02118,
+        0.95747
+      ],
+      [
+        0.00409,
+        0.02107,
+        1.04248
+      ]
+    ],
+    "first_index": 268
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D03",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01409,
+        -0.0142,
+        0.95747
+      ],
+      [
+        0.01409,
+        0.01392,
+        1.04248
+      ]
+    ],
+    "first_index": 276
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D03",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00012,
+        -0.02118,
+        0.1775
+      ],
+      [
+        0.00409,
+        0.02107,
+        0.26251
+      ]
+    ],
+    "first_index": 294
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D03",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01409,
+        -0.0142,
+        0.1775
+      ],
+      [
+        0.01409,
+        0.01392,
+        0.26251
+      ]
+    ],
+    "first_index": 302
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D03",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.78991,
+        -0.08899,
+        0.99138
+      ],
+      [
+        0.85017,
+        -0.02084,
+        1.04852
+      ]
+    ],
+    "first_index": 320
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D03",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.78989,
+        0.02079,
+        0.99138
+      ],
+      [
+        0.85014,
+        0.08885,
+        1.04852
+      ]
+    ],
+    "first_index": 402
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D02",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00012,
+        -0.02113,
+        1.74766
+      ],
+      [
+        0.00419,
+        0.02097,
+        1.83268
+      ]
+    ],
+    "first_index": 484
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D02",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.0141,
+        -0.01376,
+        1.74766
+      ],
+      [
+        0.01403,
+        0.01394,
+        1.83268
+      ]
+    ],
+    "first_index": 492
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D02",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00012,
+        -0.02113,
+        0.95747
+      ],
+      [
+        0.00419,
+        0.02097,
+        1.04248
+      ]
+    ],
+    "first_index": 510
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D02",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.0141,
+        -0.01376,
+        0.95747
+      ],
+      [
+        0.01403,
+        0.01394,
+        1.04248
+      ]
+    ],
+    "first_index": 518
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D02",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00012,
+        -0.02113,
+        0.1775
+      ],
+      [
+        0.00419,
+        0.02097,
+        0.26251
+      ]
+    ],
+    "first_index": 536
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D02",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.0141,
+        -0.01376,
+        0.1775
+      ],
+      [
+        0.01403,
+        0.01394,
+        0.26251
+      ]
+    ],
+    "first_index": 544
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D02",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.79503,
+        -0.08902,
+        0.99138
+      ],
+      [
+        0.85505,
+        -0.02089,
+        1.04852
+      ]
+    ],
+    "first_index": 562
+  },
+  {
+    "object": "F1 | Interior door hardware",
+    "door": "f1-D02",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.79486,
+        0.02078,
+        0.99138
+      ],
+      [
+        0.85508,
+        0.08904,
+        1.04852
+      ]
+    ],
+    "first_index": 644
+  },
+  {
+    "object": "F2 | Interior door joinery",
+    "door": "f2-D09",
+    "vertices": 528,
+    "local_bounds": [
+      [
+        -0.00013,
+        -0.02118,
+        0.0
+      ],
+      [
+        0.79324,
+        0.02123,
+        2.00008
+      ]
+    ],
+    "first_index": 0
+  },
+  {
+    "object": "F2 | Interior door joinery",
+    "door": "f2-D08",
+    "vertices": 528,
+    "local_bounds": [
+      [
+        -4e-05,
+        -0.02126,
+        0.0
+      ],
+      [
+        0.89323,
+        0.02121,
+        2.00008
+      ]
+    ],
+    "first_index": 24
+  },
+  {
+    "object": "F2 | Interior door joinery",
+    "door": "f2-D07",
+    "vertices": 528,
+    "local_bounds": [
+      [
+        -6e-05,
+        -0.02105,
+        0.0
+      ],
+      [
+        0.89322,
+        0.02123,
+        2.00008
+      ]
+    ],
+    "first_index": 48
+  },
+  {
+    "object": "F2 | Interior door joinery",
+    "door": "f2-D06",
+    "vertices": 528,
+    "local_bounds": [
+      [
+        -0.00011,
+        -0.02128,
+        0.0
+      ],
+      [
+        0.89329,
+        0.02129,
+        2.00008
+      ]
+    ],
+    "first_index": 72
+  },
+  {
+    "object": "F2 | Interior door joinery",
+    "door": "f2-D05",
+    "vertices": 528,
+    "local_bounds": [
+      [
+        -0.00016,
+        -0.02117,
+        0.0
+      ],
+      [
+        0.89326,
+        0.02124,
+        2.00008
+      ]
+    ],
+    "first_index": 96
+  },
+  {
+    "object": "F2 | Interior door joinery",
+    "door": "f2-D09",
+    "vertices": 440,
+    "local_bounds": [
+      [
+        -0.09258,
+        -0.84866,
+        -0.00023
+      ],
+      [
+        0.36596,
+        0.09681,
+        2.09999
+      ]
+    ],
+    "first_index": 120
+  },
+  {
+    "object": "F2 | Interior door joinery",
+    "door": "f2-D08",
+    "vertices": 440,
+    "local_bounds": [
+      [
+        -0.10081,
+        -0.98185,
+        -0.00023
+      ],
+      [
+        0.15595,
+        0.08338,
+        2.09999
+      ]
+    ],
+    "first_index": 1064
+  },
+  {
+    "object": "F2 | Interior door joinery",
+    "door": "f2-D07",
+    "vertices": 440,
+    "local_bounds": [
+      [
+        -0.11417,
+        -0.97745,
+        -0.00023
+      ],
+      [
+        0.30095,
+        0.09647,
+        2.09999
+      ]
+    ],
+    "first_index": 2008
+  },
+  {
+    "object": "F2 | Interior door joinery",
+    "door": "f2-D06",
+    "vertices": 440,
+    "local_bounds": [
+      [
+        -0.1626,
+        -0.98753,
+        -0.00023
+      ],
+      [
+        0.34995,
+        0.10658,
+        2.09999
+      ]
+    ],
+    "first_index": 2952
+  },
+  {
+    "object": "F2 | Interior door joinery",
+    "door": "f2-D05",
+    "vertices": 440,
+    "local_bounds": [
+      [
+        -0.14329,
+        -0.95049,
+        -0.00023
+      ],
+      [
+        0.48788,
+        0.11825,
+        2.09999
+      ]
+    ],
+    "first_index": 3896
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D09",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.0002,
+        -0.02102,
+        1.74741
+      ],
+      [
+        0.00406,
+        0.02115,
+        1.83257
+      ]
+    ],
+    "first_index": 0
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D09",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01398,
+        -0.01394,
+        1.74741
+      ],
+      [
+        0.01403,
+        0.01407,
+        1.83257
+      ]
+    ],
+    "first_index": 8
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D09",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.0002,
+        -0.02102,
+        0.95741
+      ],
+      [
+        0.00406,
+        0.02115,
+        1.04257
+      ]
+    ],
+    "first_index": 26
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D09",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01398,
+        -0.01394,
+        0.95741
+      ],
+      [
+        0.01403,
+        0.01407,
+        1.04257
+      ]
+    ],
+    "first_index": 34
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D09",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.0002,
+        -0.02102,
+        0.1775
+      ],
+      [
+        0.00406,
+        0.02115,
+        0.26266
+      ]
+    ],
+    "first_index": 52
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D09",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01398,
+        -0.01394,
+        0.1775
+      ],
+      [
+        0.01403,
+        0.01407,
+        0.26266
+      ]
+    ],
+    "first_index": 60
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D09",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.69481,
+        -0.08878,
+        0.99159
+      ],
+      [
+        0.75513,
+        -0.02071,
+        1.04874
+      ]
+    ],
+    "first_index": 78
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D09",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.69499,
+        0.02083,
+        0.99159
+      ],
+      [
+        0.75526,
+        0.089,
+        1.04874
+      ]
+    ],
+    "first_index": 160
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D08",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00026,
+        -0.02116,
+        1.74741
+      ],
+      [
+        0.00421,
+        0.02119,
+        1.83257
+      ]
+    ],
+    "first_index": 242
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D08",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01413,
+        -0.01386,
+        1.74741
+      ],
+      [
+        0.01393,
+        0.0142,
+        1.83257
+      ]
+    ],
+    "first_index": 250
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D08",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00026,
+        -0.02116,
+        0.95741
+      ],
+      [
+        0.00421,
+        0.02119,
+        1.04257
+      ]
+    ],
+    "first_index": 268
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D08",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01413,
+        -0.01386,
+        0.95741
+      ],
+      [
+        0.01393,
+        0.0142,
+        1.04257
+      ]
+    ],
+    "first_index": 276
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D08",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00026,
+        -0.02116,
+        0.1775
+      ],
+      [
+        0.00421,
+        0.02119,
+        0.26266
+      ]
+    ],
+    "first_index": 294
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D08",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01413,
+        -0.01386,
+        0.1775
+      ],
+      [
+        0.01393,
+        0.0142,
+        0.26266
+      ]
+    ],
+    "first_index": 302
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D08",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.79489,
+        -0.08916,
+        0.99159
+      ],
+      [
+        0.85527,
+        -0.02082,
+        1.04874
+      ]
+    ],
+    "first_index": 320
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D08",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.79484,
+        0.02073,
+        0.99159
+      ],
+      [
+        0.85519,
+        0.08881,
+        1.04874
+      ]
+    ],
+    "first_index": 402
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D07",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00025,
+        -0.02124,
+        1.74741
+      ],
+      [
+        0.00397,
+        0.02118,
+        1.83257
+      ]
+    ],
+    "first_index": 484
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D07",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01391,
+        -0.01403,
+        1.74741
+      ],
+      [
+        0.01422,
+        0.01399,
+        1.83257
+      ]
+    ],
+    "first_index": 492
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D07",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00025,
+        -0.02124,
+        0.95741
+      ],
+      [
+        0.00397,
+        0.02118,
+        1.04257
+      ]
+    ],
+    "first_index": 510
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D07",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01391,
+        -0.01403,
+        0.95741
+      ],
+      [
+        0.01422,
+        0.01399,
+        1.04257
+      ]
+    ],
+    "first_index": 518
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D07",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00025,
+        -0.02124,
+        0.1775
+      ],
+      [
+        0.00397,
+        0.02118,
+        0.26266
+      ]
+    ],
+    "first_index": 536
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D07",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01391,
+        -0.01403,
+        0.1775
+      ],
+      [
+        0.01422,
+        0.01399,
+        0.26266
+      ]
+    ],
+    "first_index": 544
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D07",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.79474,
+        -0.08904,
+        0.99159
+      ],
+      [
+        0.85489,
+        -0.02077,
+        1.04874
+      ]
+    ],
+    "first_index": 562
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D07",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.79505,
+        0.02074,
+        0.99159
+      ],
+      [
+        0.85521,
+        0.0892,
+        1.04874
+      ]
+    ],
+    "first_index": 644
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D06",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00018,
+        -0.02131,
+        1.74741
+      ],
+      [
+        0.00404,
+        0.02111,
+        1.83257
+      ]
+    ],
+    "first_index": 726
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D06",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01384,
+        -0.01383,
+        1.74741
+      ],
+      [
+        0.01418,
+        0.01419,
+        1.83257
+      ]
+    ],
+    "first_index": 734
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D06",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00018,
+        -0.02131,
+        0.95741
+      ],
+      [
+        0.00404,
+        0.02111,
+        1.04257
+      ]
+    ],
+    "first_index": 752
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D06",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01384,
+        -0.01383,
+        0.95741
+      ],
+      [
+        0.01418,
+        0.01419,
+        1.04257
+      ]
+    ],
+    "first_index": 760
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D06",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00018,
+        -0.02131,
+        0.1775
+      ],
+      [
+        0.00404,
+        0.02111,
+        0.26266
+      ]
+    ],
+    "first_index": 778
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D06",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01384,
+        -0.01383,
+        0.1775
+      ],
+      [
+        0.01418,
+        0.01419,
+        0.26266
+      ]
+    ],
+    "first_index": 786
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D06",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.7947,
+        -0.08884,
+        0.99159
+      ],
+      [
+        0.85497,
+        -0.02082,
+        1.04874
+      ]
+    ],
+    "first_index": 804
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D06",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.79501,
+        0.02083,
+        0.99159
+      ],
+      [
+        0.85528,
+        0.08885,
+        1.04874
+      ]
+    ],
+    "first_index": 886
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D05",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -5e-05,
+        -0.0213,
+        1.74741
+      ],
+      [
+        0.00422,
+        0.02116,
+        1.83257
+      ]
+    ],
+    "first_index": 968
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D05",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01384,
+        -0.01401,
+        1.74741
+      ],
+      [
+        0.01404,
+        0.01387,
+        1.83257
+      ]
+    ],
+    "first_index": 976
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D05",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -5e-05,
+        -0.0213,
+        0.95741
+      ],
+      [
+        0.00422,
+        0.02116,
+        1.04257
+      ]
+    ],
+    "first_index": 994
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D05",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01384,
+        -0.01401,
+        0.95741
+      ],
+      [
+        0.01404,
+        0.01387,
+        1.04257
+      ]
+    ],
+    "first_index": 1002
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D05",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -5e-05,
+        -0.0213,
+        0.1775
+      ],
+      [
+        0.00422,
+        0.02116,
+        0.26266
+      ]
+    ],
+    "first_index": 1020
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D05",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01384,
+        -0.01401,
+        0.1775
+      ],
+      [
+        0.01404,
+        0.01387,
+        0.26266
+      ]
+    ],
+    "first_index": 1028
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D05",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.79499,
+        -0.08896,
+        0.99159
+      ],
+      [
+        0.85519,
+        -0.02069,
+        1.04874
+      ]
+    ],
+    "first_index": 1046
+  },
+  {
+    "object": "F2 | Interior door hardware",
+    "door": "f2-D05",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.79483,
+        0.02081,
+        0.99159
+      ],
+      [
+        0.85503,
+        0.08886,
+        1.04874
+      ]
+    ],
+    "first_index": 1128
+  },
+  {
+    "object": "F3 | Interior door joinery",
+    "door": "f3-D12",
+    "vertices": 528,
+    "local_bounds": [
+      [
+        -0.00011,
+        -0.02112,
+        0.0
+      ],
+      [
+        0.79321,
+        0.02109,
+        1.99995
+      ]
+    ],
+    "first_index": 0
+  },
+  {
+    "object": "F3 | Interior door joinery",
+    "door": "f3-D11",
+    "vertices": 528,
+    "local_bounds": [
+      [
+        -0.00012,
+        -0.02116,
+        0.0
+      ],
+      [
+        0.80839,
+        0.02114,
+        1.99995
+      ]
+    ],
+    "first_index": 24
+  },
+  {
+    "object": "F3 | Interior door joinery",
+    "door": "f3-D10",
+    "vertices": 528,
+    "local_bounds": [
+      [
+        -0.00011,
+        -0.0212,
+        0.0
+      ],
+      [
+        0.893,
+        0.02111,
+        1.99995
+      ]
+    ],
+    "first_index": 48
+  },
+  {
+    "object": "F3 | Interior door joinery",
+    "door": "f3-D12",
+    "vertices": 440,
+    "local_bounds": [
+      [
+        -0.11206,
+        -0.88145,
+        -0.00022
+      ],
+      [
+        0.25093,
+        0.09392,
+        2.10002
+      ]
+    ],
+    "first_index": 72
+  },
+  {
+    "object": "F3 | Interior door joinery",
+    "door": "f3-D11",
+    "vertices": 440,
+    "local_bounds": [
+      [
+        -0.0784,
+        -0.89098,
+        -0.00022
+      ],
+      [
+        0.42267,
+        0.05962,
+        2.10002
+      ]
+    ],
+    "first_index": 1016
+  },
+  {
+    "object": "F3 | Interior door joinery",
+    "door": "f3-D10",
+    "vertices": 440,
+    "local_bounds": [
+      [
+        -0.16808,
+        -0.96056,
+        -0.00022
+      ],
+      [
+        0.51288,
+        0.12892,
+        2.10002
+      ]
+    ],
+    "first_index": 1960
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D12",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -8e-05,
+        -0.02113,
+        1.74743
+      ],
+      [
+        0.00418,
+        0.02107,
+        1.83243
+      ]
+    ],
+    "first_index": 0
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D12",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01385,
+        -0.01389,
+        1.74743
+      ],
+      [
+        0.01396,
+        0.01393,
+        1.83243
+      ]
+    ],
+    "first_index": 8
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D12",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -8e-05,
+        -0.02113,
+        0.95737
+      ],
+      [
+        0.00418,
+        0.02107,
+        1.04237
+      ]
+    ],
+    "first_index": 26
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D12",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01385,
+        -0.01389,
+        0.95737
+      ],
+      [
+        0.01396,
+        0.01393,
+        1.04237
+      ]
+    ],
+    "first_index": 34
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D12",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -8e-05,
+        -0.02113,
+        0.1775
+      ],
+      [
+        0.00418,
+        0.02107,
+        0.2625
+      ]
+    ],
+    "first_index": 52
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D12",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01385,
+        -0.01389,
+        0.1775
+      ],
+      [
+        0.01396,
+        0.01393,
+        0.2625
+      ]
+    ],
+    "first_index": 60
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D12",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.69504,
+        -0.08894,
+        0.99145
+      ],
+      [
+        0.75517,
+        -0.02084,
+        1.04864
+      ]
+    ],
+    "first_index": 78
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D12",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.69512,
+        0.02084,
+        0.99145
+      ],
+      [
+        0.75513,
+        0.08886,
+        1.04864
+      ]
+    ],
+    "first_index": 160
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D11",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00011,
+        -0.02119,
+        1.74743
+      ],
+      [
+        0.00411,
+        0.02119,
+        1.83243
+      ]
+    ],
+    "first_index": 242
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D11",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.0139,
+        -0.01399,
+        1.74743
+      ],
+      [
+        0.01418,
+        0.01394,
+        1.83243
+      ]
+    ],
+    "first_index": 250
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D11",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00011,
+        -0.02119,
+        0.95737
+      ],
+      [
+        0.00411,
+        0.02119,
+        1.04237
+      ]
+    ],
+    "first_index": 268
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D11",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.0139,
+        -0.01399,
+        0.95737
+      ],
+      [
+        0.01418,
+        0.01394,
+        1.04237
+      ]
+    ],
+    "first_index": 276
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D11",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        -0.00011,
+        -0.02119,
+        0.1775
+      ],
+      [
+        0.00411,
+        0.02119,
+        0.2625
+      ]
+    ],
+    "first_index": 294
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D11",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.0139,
+        -0.01399,
+        0.1775
+      ],
+      [
+        0.01418,
+        0.01394,
+        0.2625
+      ]
+    ],
+    "first_index": 302
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D11",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.71042,
+        -0.08891,
+        0.99145
+      ],
+      [
+        0.7703,
+        -0.02097,
+        1.04864
+      ]
+    ],
+    "first_index": 320
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D11",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.71043,
+        0.02086,
+        0.99145
+      ],
+      [
+        0.77031,
+        0.08916,
+        1.04864
+      ]
+    ],
+    "first_index": 402
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D10",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        0.00022,
+        -0.02109,
+        1.74743
+      ],
+      [
+        0.00393,
+        0.02115,
+        1.83243
+      ]
+    ],
+    "first_index": 484
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D10",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01407,
+        -0.01404,
+        1.74743
+      ],
+      [
+        0.01401,
+        0.01404,
+        1.83243
+      ]
+    ],
+    "first_index": 492
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D10",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        0.00022,
+        -0.02109,
+        0.95737
+      ],
+      [
+        0.00393,
+        0.02115,
+        1.04237
+      ]
+    ],
+    "first_index": 510
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D10",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01407,
+        -0.01404,
+        0.95737
+      ],
+      [
+        0.01401,
+        0.01404,
+        1.04237
+      ]
+    ],
+    "first_index": 518
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D10",
+    "vertices": 8,
+    "local_bounds": [
+      [
+        0.00022,
+        -0.02109,
+        0.1775
+      ],
+      [
+        0.00393,
+        0.02115,
+        0.2625
+      ]
+    ],
+    "first_index": 536
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D10",
+    "vertices": 18,
+    "local_bounds": [
+      [
+        -0.01407,
+        -0.01404,
+        0.1775
+      ],
+      [
+        0.01401,
+        0.01404,
+        0.2625
+      ]
+    ],
+    "first_index": 544
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D10",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.79507,
+        -0.08901,
+        0.99145
+      ],
+      [
+        0.85495,
+        -0.02085,
+        1.04864
+      ]
+    ],
+    "first_index": 562
+  },
+  {
+    "object": "F3 | Interior door hardware",
+    "door": "f3-D10",
+    "vertices": 82,
+    "local_bounds": [
+      [
+        0.79507,
+        0.02075,
+        0.99145
+      ],
+      [
+        0.85496,
+        0.08906,
+        1.04864
+      ]
+    ],
+    "first_index": 644
+  }
+]

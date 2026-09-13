@@ -1,0 +1,403 @@
+{
+  "north_wall": [
+    {
+      "x": -5.5,
+      "z": 10.0,
+      "ray": {
+        "object": "C05 | Brown recliner arm.001",
+        "material": null,
+        "distance": 0.01,
+        "point": [
+          -5.5,
+          3.11,
+          10.0
+        ]
+      }
+    },
+    {
+      "x": -5.5,
+      "z": 11.0,
+      "ray": {
+        "object": "C05 | Round interior trim",
+        "material": "white_trim.003",
+        "distance": 0.163,
+        "point": [
+          -5.5,
+          3.263,
+          11.0
+        ]
+      }
+    },
+    {
+      "x": -5.5,
+      "z": 11.3,
+      "ray": {
+        "object": "C05 | Circular physical glazing",
+        "material": "glass.003",
+        "distance": 0.425,
+        "point": [
+          -5.5,
+          3.525,
+          11.3
+        ]
+      }
+    },
+    {
+      "x": -5.5,
+      "z": 11.6,
+      "ray": {
+        "object": "F3 | Attic partition core",
+        "material": "interior.003",
+        "distance": 0.17716,
+        "point": [
+          -5.5,
+          3.27716,
+          11.6
+        ]
+      }
+    },
+    {
+      "x": -5.5,
+      "z": 11.9,
+      "ray": {
+        "object": "F3 | Attic partition core",
+        "material": "interior.003",
+        "distance": 0.17716,
+        "point": [
+          -5.5,
+          3.27716,
+          11.9
+        ]
+      }
+    },
+    {
+      "x": -5.2,
+      "z": 10.0,
+      "ray": {
+        "object": "C05 | Brown recliner arm.001",
+        "material": null,
+        "distance": 0.01,
+        "point": [
+          -5.2,
+          3.11,
+          10.0
+        ]
+      }
+    },
+    {
+      "x": -5.2,
+      "z": 11.0,
+      "ray": {
+        "object": "F3 | Attic partition core",
+        "material": "interior.003",
+        "distance": 0.17716,
+        "point": [
+          -5.2,
+          3.27716,
+          11.0
+        ]
+      }
+    },
+    {
+      "x": -5.2,
+      "z": 11.3,
+      "ray": {
+        "object": "C05 | Round timber window frame",
+        "material": "wood_dark.003",
+        "distance": 0.393,
+        "point": [
+          -5.2,
+          3.493,
+          11.3
+        ]
+      }
+    },
+    {
+      "x": -5.2,
+      "z": 11.6,
+      "ray": {
+        "object": "F3 | Attic partition core",
+        "material": "interior.003",
+        "distance": 0.17716,
+        "point": [
+          -5.2,
+          3.27716,
+          11.6
+        ]
+      }
+    },
+    {
+      "x": -5.2,
+      "z": 11.9,
+      "ray": {
+        "object": "F3 | Attic partition core",
+        "material": "interior.003",
+        "distance": 0.17716,
+        "point": [
+          -5.2,
+          3.27716,
+          11.9
+        ]
+      }
+    },
+    {
+      "x": -4.5,
+      "z": 10.0,
+      "ray": {
+        "object": "C05 | Single button tufted sofa back",
+        "material": "Room pass | Photographed slate blue sofa",
+        "distance": 0.09192,
+        "point": [
+          -4.5,
+          3.19192,
+          10.0
+        ]
+      }
+    },
+    {
+      "x": -4.5,
+      "z": 11.0,
+      "ray": {
+        "object": "F3 | Attic partition core",
+        "material": "interior.003",
+        "distance": 0.42758,
+        "point": [
+          -4.5,
+          3.52758,
+          11.0
+        ]
+      }
+    },
+    {
+      "x": -4.5,
+      "z": 11.3,
+      "ray": {
+        "object": "C05 | Original framed art 1",
+        "material": null,
+        "distance": 0.394,
+        "point": [
+          -4.5,
+          3.494,
+          11.3
+        ]
+      }
+    },
+    {
+      "x": -4.5,
+      "z": 11.6,
+      "ray": {
+        "object": "C05 | Original framed art 1",
+        "material": null,
+        "distance": 0.394,
+        "point": [
+          -4.5,
+          3.494,
+          11.6
+        ]
+      }
+    },
+    {
+      "x": -4.5,
+      "z": 11.9,
+      "ray": {
+        "object": "F3 | Attic partition core",
+        "material": "interior.003",
+        "distance": 0.42758,
+        "point": [
+          -4.5,
+          3.52758,
+          11.9
+        ]
+      }
+    },
+    {
+      "x": -3.5,
+      "z": 10.0,
+      "ray": {
+        "object": "C05 | Single button tufted sofa back",
+        "material": "Room pass | Photographed slate blue sofa",
+        "distance": 0.08568,
+        "point": [
+          -3.5,
+          3.18568,
+          10.0
+        ]
+      }
+    },
+    {
+      "x": -3.5,
+      "z": 11.0,
+      "ray": {
+        "object": "F3 | Attic partition core",
+        "material": "interior.003",
+        "distance": 0.42758,
+        "point": [
+          -3.5,
+          3.52758,
+          11.0
+        ]
+      }
+    },
+    {
+      "x": -3.5,
+      "z": 11.3,
+      "ray": {
+        "object": "C05 | Original framed art 3",
+        "material": null,
+        "distance": 0.394,
+        "point": [
+          -3.5,
+          3.494,
+          11.3
+        ]
+      }
+    },
+    {
+      "x": -3.5,
+      "z": 11.6,
+      "ray": {
+        "object": "C05 | Original framed art 3",
+        "material": null,
+        "distance": 0.394,
+        "point": [
+          -3.5,
+          3.494,
+          11.6
+        ]
+      }
+    },
+    {
+      "x": -3.5,
+      "z": 11.9,
+      "ray": {
+        "object": "F3 | Attic partition core",
+        "material": "interior.003",
+        "distance": 0.42758,
+        "point": [
+          -3.5,
+          3.52758,
+          11.9
+        ]
+      }
+    }
+  ],
+  "107": [
+    {
+      "x": -0.9,
+      "z": 6.42,
+      "ray": null
+    },
+    {
+      "x": -0.9,
+      "z": 6.8,
+      "ray": null
+    },
+    {
+      "x": -0.9,
+      "z": 7.2,
+      "ray": null
+    },
+    {
+      "x": -0.9,
+      "z": 7.7,
+      "ray": null
+    },
+    {
+      "x": -0.9,
+      "z": 8.2,
+      "ray": null
+    },
+    {
+      "x": -0.9,
+      "z": 8.4,
+      "ray": {
+        "object": "F2 | KAT 2$DUVAR KAPLAMA",
+        "material": "interior.002",
+        "distance": 0.29288,
+        "point": [
+          -0.9,
+          -4.99288,
+          8.4
+        ]
+      }
+    },
+    {
+      "x": -0.5,
+      "z": 6.42,
+      "ray": null
+    },
+    {
+      "x": -0.5,
+      "z": 6.8,
+      "ray": null
+    },
+    {
+      "x": -0.5,
+      "z": 7.2,
+      "ray": null
+    },
+    {
+      "x": -0.5,
+      "z": 7.7,
+      "ray": null
+    },
+    {
+      "x": -0.5,
+      "z": 8.2,
+      "ray": null
+    },
+    {
+      "x": -0.5,
+      "z": 8.4,
+      "ray": {
+        "object": "F2 | KAT 2$DUVAR KAPLAMA",
+        "material": "interior.002",
+        "distance": 0.29288,
+        "point": [
+          -0.5,
+          -4.99288,
+          8.4
+        ]
+      }
+    },
+    {
+      "x": 0.0,
+      "z": 6.42,
+      "ray": null
+    },
+    {
+      "x": 0.0,
+      "z": 6.8,
+      "ray": null
+    },
+    {
+      "x": 0.0,
+      "z": 7.2,
+      "ray": null
+    },
+    {
+      "x": 0.0,
+      "z": 7.7,
+      "ray": null
+    },
+    {
+      "x": 0.0,
+      "z": 8.2,
+      "ray": null
+    },
+    {
+      "x": 0.0,
+      "z": 8.4,
+      "ray": {
+        "object": "F2 | KAT 2$DUVAR KAPLAMA",
+        "material": "interior.002",
+        "distance": 0.29288,
+        "point": [
+          0.0,
+          -4.99288,
+          8.4
+        ]
+      }
+    }
+  ]
+}
