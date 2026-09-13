@@ -110,12 +110,12 @@
     {
       "id": "level-3",
       "file": "level-3.glb",
-      "bytes": 2809748,
-      "sha256": "006e608420dc11272699b0687ca5cb9a8870ed6b60101de03d36a5f247792c3c",
+      "bytes": 1753716,
+      "sha256": "850248f65cf51829c33af634a7a6040dbfaed81f5fea973064c04028d7198050",
       "source_objects": 374,
       "exported_mesh_nodes": 374,
       "shared_meshes": 363,
-      "triangles": 263351,
+      "triangles": 280550,
       "bounds_native_m": [
         [
           -6.700300216674805,
