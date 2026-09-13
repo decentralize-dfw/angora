@@ -4,6 +4,11 @@ viewer/dist/
 .runtime/
 *.blend1
 .cache/
+.vite/
+baseline-tests.txt
+interaction-tests.txt
+build/web/native-current/
+viewer/native-tests.txt
 build/intermediate/
 build/cad/source-curves.json.gz
 build/cad/surfaces.json.gz

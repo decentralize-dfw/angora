@@ -61,9 +61,9 @@ export function createAnnotations(data,host,onRoom) {
     const card=document.createElement('i'),meta=document.createElement('em');
     meta.append(area,tour);card.append(name,meta);el.append(card);
     el.setAttribute('aria-label',room.label_only?room.name
-      :area.textContent?`${room.name}, kayıtlı açıklık ${area.textContent}, 360 derece gez`
+      :area.textContent?`${room.name}, ${area.textContent}, 360 derece gez`
       :`${room.name}, 360 derece gez`);
-    el.title=room.area_note??room.area_method_label??'Kaynak kat planı';
+    el.title=room.label_only?'Açık balkon':`${room.name} · 360° keşfet`;
     if(room.label_only)el.disabled=true;
     else el.onclick=e=>{e.stopPropagation();onRoom(room.id);};
     overlay.append(el);
@@ -89,7 +89,7 @@ export function createAnnotations(data,host,onRoom) {
     line.renderOrder=105;line.userData.aoExcluded=true;group.add(line);
     const el=document.createElement('span');
     el.className=measured?'dimension-label measured':'dimension-label';el.textContent=spanLabel(dim.metres);
-    if(dim.provenance)el.title=dim.provenance;
+    el.title=dim.basis==='dwg_verified'?'Çizimde belirtilen ölçü':'Model üzerinden ölçülen açıklık';
     overlay.append(el);dimensions.push({el,line,position:a.clone().add(b).multiplyScalar(.5),floor:dim.floor_index,roomId:dim.room_id,measured});
   }
   function project(entry,camera,w,h,size) {
