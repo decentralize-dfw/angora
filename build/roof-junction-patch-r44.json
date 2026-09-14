@@ -1,0 +1,12 @@
+{
+  "lining_edge_triangles_removed": 0,
+  "verge_tab_triangles_removed": 0,
+  "flashing": {
+    "triangles": 150,
+    "z": [
+      -8.18,
+      -5.85
+    ]
+  },
+  "verge_closure_triangles": 20
+}

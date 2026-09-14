@@ -1,15 +1,15 @@
 {
   "villa": {
     "triangles": {
-      "full": 2774029,
-      "mobile": 1445495
+      "full": 2773448,
+      "mobile": 1444844
     },
-    "bytes": 5855516,
+    "bytes": 5853468,
     "textures_bytes": {
       "full": 4648049,
       "mobile": 257238
     },
-    "simplified_prims": 259
+    "simplified_prims": 260
   },
   "garden": {
     "triangles": {

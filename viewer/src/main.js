@@ -44,9 +44,10 @@ const pendingRoomJump = new PendingAction();
 let regionMap = null;   // built on first Bölge visit; a map layer, not a scene
 // Planting rooted above the basement's soil cut: the front-garden trees and
 // hedges stand on ground the f0 section removes, so drawing them over the
-// excavation hatch reads as trees growing out of the drawing. Filled at
-// staging, hidden only while the f0 cut is active.
-const plantingAboveCut = [];
+// excavation hatch reads as trees growing out of the drawing. Judged by the
+// SOIL under each plant, not the plant's own base - tree trunks are modelled
+// sunk below grade, so a base test lets them keep floating over the hatch.
+const plantingCandidates = [], plantingAboveCut = [];
 const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
 // The earth cannot follow the sweeping building cut: its authored cap exists
 // at exactly one height, so this plane snaps between "whole" and "basement
@@ -479,10 +480,7 @@ async function loadModel() {
         // the plot's own soil is cut, by the snap plane, so the neighbourhood
         // and roads stay whole and the authored cap always fits.
         const planting=id==='garden'&&PLANTING.test(authoredNodeName(o.name));
-        if(planting){
-          const base=new THREE.Box3().setFromObject(o).min.y;
-          if(base>SOIL_CUT_HEIGHT-0.15)plantingAboveCut.push(o);
-        }
+        if(planting)plantingCandidates.push(o);
         const planes=planting?[]:building||id==='garden'?[clip]
           :(Array.isArray(o.material)?o.material:[o.material]).some(m=>m?.userData.plotSoil)?[earthClip]:[];
         lighting.prepareMesh(o,{clipped:planes[0]===clip,context:!building});
@@ -501,6 +499,23 @@ async function loadModel() {
       lighting.loadEnvironment(daylightURL.href).catch(error=>console.warn('HDR unavailable; atmospheric daylight retained',error)), loadCaps()]);
     const failure = results.find(r => r.status === 'rejected'); if (failure) throw failure.reason;
     for (const id of staged.keys()) stageGroup(id);
+    {
+      // ground truth for the f0 planting rule: the plot soil under each plant
+      const soilMeshes=[];
+      groups.get('context')?.traverse(o=>{
+        if(o.isMesh&&(Array.isArray(o.material)?o.material:[o.material]).some(m=>m?.userData.plotSoil))soilMeshes.push(o);
+      });
+      const ray=new THREE.Raycaster();ray.far=80;
+      const down=new THREE.Vector3(0,-1,0),box=new THREE.Box3(),centre=new THREE.Vector3();
+      for(const o of plantingCandidates){
+        box.setFromObject(o).getCenter(centre);
+        ray.set(new THREE.Vector3(centre.x,60,centre.z),down);
+        const hit=soilMeshes.length?ray.intersectObjects(soilMeshes,false)[0]:null;
+        const ground=hit?hit.point.y:box.min.y;
+        if(ground>SOIL_CUT_HEIGHT-0.15)plantingAboveCut.push(o);
+      }
+      plantingCandidates.length=0;
+    }
     buildingBox = new THREE.Box3().setFromObject(groups.get('villa'));
     // Keep the entrance, pool terrace and basement garden in the building frame.
     gardenBox = new THREE.Box3(new THREE.Vector3(-10.2, -4, -29.1), new THREE.Vector3(12.5, 3.4, 11));
