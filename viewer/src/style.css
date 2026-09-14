@@ -172,6 +172,7 @@ h1 strong{font-weight:700}
 .rm-villa{fill:var(--ink)}
 .rm-ring{fill:none;stroke:rgba(22,29,26,.22);stroke-width:1;stroke-dasharray:1 6;stroke-linecap:round}
 .rm-poi{fill:var(--accent);stroke:#fff;stroke-width:1.5}
+.rm-dot{opacity:.5}
 .rm-pulse{fill:none;stroke:rgba(22,29,26,.35);stroke-width:1;animation:rm-pulse 2.6s ease-out infinite}
 @keyframes rm-pulse{0%{r:14;opacity:.7}70%{r:46;opacity:0}100%{r:46;opacity:0}}
 .rm-labels{position:absolute;inset:0}

@@ -16,7 +16,7 @@ import { configureCameraControls } from './camera.js';
 import { PendingAction } from './pending-action.js';
 import {fitContextBounds} from './material-response.js';
 import {createSiteContext} from './site-context.js';
-import {createRegionMap} from './region-map.js';
+import {createRegionMap,atlasMeta} from './region-map.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
 import {prepareContextSurfaces} from './context-surfaces.js';
 import {batchContext} from './context-batch.js';
@@ -497,8 +497,8 @@ async function loadModel() {
       for(const b of contextData.buildings)if(b.bounds)for(const p of b.bounds)settlementBox.expandByPoint(new THREE.Vector3(...p));
       if(!settlementBox.isEmpty())contextBox=settlementBox.union(buildingBox);
       siteContext=createSiteContext(contextData,host,()=>selectView('building'));
-      $('#context-count').textContent=`${contextData.buildings.length} yapı · Kaynak vaziyet planı`;
-    } catch(error){console.warn(error);$('#context-count').textContent='Kaynak vaziyet planı';}
+      $('#context-count').textContent=`${contextData.buildings.length} yapı · ${atlasMeta}`;
+    } catch(error){console.warn(error);$('#context-count').textContent=atlasMeta;}
     // The neighbourhood is in by now, so its bounds, its horizon fade and its
     // white massing are set up here rather than in a continuation that used to
     // run after the first frame.

@@ -1,39 +1,26 @@
 // R44 | The Bölge scale is a map, not a model. North-up, villa-centred,
-// 1 km / 2 km radius; the plan layer under it is the delivery's own data
-// (region-plan.json: context roads rasterised, B-family hulls, the villa's
-// footprint), and the far landmarks are approximate - the panel says so.
+// 1 km / 2 km radius. Two data layers, both the project's own:
+//   - region-plan.json: the settlement itself, extracted from the delivery
+//     (context roads rasterised, B-family hulls, the villa's footprint);
+//   - region-places.json: the surroundings, extracted from uzakolcek.html
+//     at the repo root - the 'Hatırlı Sokak No:10 Kentsel Donatı Atlası'
+//     (OSM + Google/Yandex). Its information is used, never its design:
+//     the atlas centre is the villa's own address point, chip distances
+//     are the atlas's measured metres, and the quiet dot field is its
+//     named amenities thinned by tools/extract_region_places_r44.mjs.
 // One design language with the rest of the chrome: paper, hairline rings,
 // glass chips, ink for the subject.
-//
-// uzakolcek.html was named as the information source for this view but is
-// not in the repository; when it lands, its figures replace LANDMARKS.
 import plan from './region-plan.json';
+import places from './region-places.json';
 
-const ORIGIN = { lat: 39.88, lng: 32.73 };            // daylight.js site coordinate
-const M_PER_DEG_LAT = 111132;
-const M_PER_DEG_LNG = 111320 * Math.cos((ORIGIN.lat * Math.PI) / 180);
-// Named places around Beysukent, positioned from their public map
-// coordinates; distances are rounded and marked approximate in the panel.
-const LANDMARKS = [
-  { name: 'Hacettepe Beytepe', note: 'kampüs', lat: 39.867, lng: 32.735 },
-  { name: 'Bilkent Üniversitesi', note: 'kampüs', lat: 39.868, lng: 32.75 },
-  { name: 'Bilkent Center', note: 'AVM', lat: 39.87, lng: 32.757 },
-  { name: 'Eskişehir Yolu', note: 'E-90', lat: 39.903, lng: 32.745 },
-  { name: 'ODTÜ', note: 'kampüs', lat: 39.891, lng: 32.78 },
-  { name: 'Ankara Şehir Hastanesi', note: '', lat: 39.897, lng: 32.772 },
-  { name: 'Kızılay', note: 'şehir merkezi', lat: 39.921, lng: 32.854 },
-];
 const AREAS = [
   { name: 'Angora Evleri', x: 40, y: -195 },
   { name: 'Beysukent', x: -640, y: -430 },
 ];
 const svgNS = 'http://www.w3.org/2000/svg';
+const km = (m) => (m < 950 ? `${m} m` : `${(m / 1000).toFixed(1).replace('.', ',')} km`);
 
-const toMap = (l) => ({
-  x: (l.lng - ORIGIN.lng) * M_PER_DEG_LNG,
-  y: -(l.lat - ORIGIN.lat) * M_PER_DEG_LAT,           // map y grows southward
-});
-const km = (m) => (m < 950 ? `~${Math.round(m / 50) * 50} m` : `~${(m / 1000).toFixed(1).replace('.', ',')} km`);
+export const atlasMeta = `${places.total} donatı · Atlas ${places.atlas_generated_at} (OSM)`;
 
 export function createRegionMap(host) {
   const el = document.createElement('div');
@@ -63,12 +50,14 @@ export function createRegionMap(host) {
     width: plan.roads.w, height: plan.roads.h, preserveAspectRatio: 'none' });
   shape('polygon', 'rm-plot', { points: poly(plan.plot) });
   for (const b of plan.buildings) shape('polygon', 'rm-building', { points: poly(b) });
+  // the atlas's named amenities as a quiet field under the rings
+  for (const [x, y, g] of places.dots)
+    shape('circle', 'rm-dot', { cx: x, cy: y, r: 9, fill: places.groups[g] });
   for (const r of [500, 1000, 2000]) shape('circle', 'rm-ring', { cx: 0, cy: 0, r, 'vector-effect': 'non-scaling-stroke' });
   shape('circle', 'rm-pulse', { cx: 0, cy: 0, r: 26 });
   shape('polygon', 'rm-villa', { points: poly(plan.villa) });
-  for (const l of LANDMARKS) {
-    const p = toMap(l);
-    if (Math.hypot(p.x, p.y) < 1960) shape('circle', 'rm-poi', { cx: p.x, cy: p.y, r: 4, 'vector-effect': 'non-scaling-stroke' });
+  for (const p of places.curated) {
+    if (p.d <= 2000) shape('circle', 'rm-poi', { cx: p.x, cy: p.y, r: 4, 'vector-effect': 'non-scaling-stroke' });
   }
 
   // labels: glass chips in screen space, gliding with the same projection
@@ -81,16 +70,14 @@ export function createRegionMap(host) {
     chips.push({ el: c, mx, my, clamp });
     return c;
   };
-  chip('rm-chip-villa', '<strong>Villa 21</strong>', plan.villa[0] ? 4 : 0, -16);
+  chip('rm-chip-villa', '<strong>Villa 21</strong>', 4, -16);
   for (const r of [500, 1000, 2000]) chip('rm-chip-ring', r < 1000 ? '500 m' : `${r / 1000} km`, 0, -r);
   for (const a of AREAS) chip('rm-chip-area', a.name, a.x, a.y);
-  for (const l of LANDMARKS) {
-    const p = toMap(l);
-    const d = Math.hypot(p.x, p.y);
+  for (const p of places.curated) {
     const bearing = Math.atan2(p.y, p.x) * 180 / Math.PI;
-    const c = chip('rm-chip-poi', `${l.name}${l.note ? ` <i>${l.note}</i>` : ''} <b>${km(d)}</b>` +
-      (d > 1960 ? ` <em style="transform:rotate(${bearing.toFixed(0)}deg)">→</em>` : ''), p.x, p.y, d > 1960);
-    c.dataset.distance = Math.round(d);
+    const c = chip('rm-chip-poi', `${p.name} <b>${km(p.d)}</b>` +
+      (p.d > 2000 ? ` <em style="transform:rotate(${bearing.toFixed(0)}deg)">→</em>` : ''), p.x, p.y, p.d > 2000);
+    c.dataset.distance = p.d;
   }
   const compass = document.createElement('span');
   compass.className = 'rm-compass';
@@ -105,7 +92,18 @@ export function createRegionMap(host) {
     const cx = vw / 2, cy = vh / 2;
     world.style.transform = `translate(${cx}px, ${cy}px) scale(${s})`;
     let clampRank = 0;
-    for (const c of chips) {
+    // occupied label space: the villa chip and the radius panel are seeded as
+    // blockers, then place chips nearest-first, nudging any collision away
+    // from the centre in 15 px steps until it sits free.
+    const taken = [
+      { x: cx - 60, y: cy - 32, w: 120, h: 58 },                    // villa chip + pulse heart
+      // region panel + scale picker: bottom centre on wide screens, the
+      // whole bottom band on phones where they span nearly edge to edge
+      vw < 560 ? { x: 8, y: vh - 232, w: vw - 16, h: 232 } : { x: cx - 170, y: vh - 190, w: 340, h: 190 },
+    ];
+    const hits = (r) => taken.some((t) => r.x < t.x + t.w && r.x + r.w > t.x && r.y < t.y + t.h && r.y + r.h > t.y);
+    const order = [...chips].sort((a, b) => (Number(a.el.dataset.distance) || 0) - (Number(b.el.dataset.distance) || 0));
+    for (const c of order) {
       let { mx, my } = c;
       if (c.clamp) {
         const d = Math.hypot(mx, my) || 1;
@@ -117,10 +115,26 @@ export function createRegionMap(host) {
       if (c.el.classList.contains('rm-chip-poi')) {
         // keep landmark chips readable inside narrow viewports; a true-position
         // chip beyond the chosen radius fades out instead of hiding under chrome
-        const half = (c.el.offsetWidth || 168) / 2 + 8;
-        px = Math.max(half, Math.min(vw - half, px));
+        const faded = !c.clamp && Number(c.el.dataset.distance) > radius * 1.12;
+        c.el.style.opacity = faded ? 0 : 1;
+        const w = (c.el.offsetWidth || 168) + 10, h = (c.el.offsetHeight || 26) + 6;
+        px = Math.max(w / 2, Math.min(vw - w / 2, px));
         py = Math.max(96, Math.min(vh - 110, py));
-        c.el.style.opacity = !c.clamp && Number(c.el.dataset.distance) > radius * 1.12 ? 0 : 1;
+        if (!faded) {
+          // nudge away from the centre; if that lane is blocked all the way
+          // (the bottom panel), walk the other way instead
+          const start = py;
+          const attempt = (step) => {
+            let y = start;
+            let rect = { x: px - w / 2, y: y - h / 2, w, h };
+            for (let tries = 0; tries < 26 && hits(rect); tries++) { y += step; rect.y = y - h / 2; }
+            return { y, ok: !hits({ x: px - w / 2, y: y - h / 2, w, h }) && y > 90 && y < vh - 104 };
+          };
+          const first = attempt(py >= cy ? 15 : -15);
+          const pick = first.ok ? first : attempt(py >= cy ? -15 : 15);
+          py = Math.max(96, Math.min(vh - 110, (pick.ok ? pick : first).y));
+          taken.push({ x: px - w / 2, y: py - h / 2, w, h });
+        }
       }
       c.el.style.transform = `translate(-50%, -50%) translate(${px}px, ${py}px)`;
     }

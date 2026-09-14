@@ -260,10 +260,14 @@ R44 dört isteği işler; araçlar `tools/*_r44.mjs` altındadır ve her biri ke
   (`tools/extract_region_plan_r44.mjs` → `viewer/src/region-plan.json`;
   yollar context'in CAD asfaltından rasterlenir, komşular B-aile
   zarflarıdır, villa kendi taban izidir). 1 km / 2 km yarıçap seçilebilir,
-  geçişler bulut süpürmesiyle ve tek easing ile akar. Uzak yer imleri
-  yaklaşık işaretlidir; **`uzakolcek.html` hiçbir repoda bulunamadı** —
-  eklendiğinde `viewer/src/region-map.js` içindeki `LANDMARKS` onun
-  verisiyle değiştirilmelidir.
+  geçişler bulut süpürmesiyle ve tek easing ile akar. Çevre bilgisi
+  kök dizindeki `uzakolcek.html`'den gelir — "Hatırlı Sokak No:10
+  Kentsel Donatı Atlası" (OSM + Google/Yandex, 1.580 nokta, 3.250 m):
+  `tools/extract_region_places_r44.mjs` atlasın kendi merkezini harita
+  orijini yapar, her günlük ihtiyaç için en yakın isimli yeri gerçek
+  metre değeriyle çipe çevirir ve isimli donatıları sakin bir nokta
+  alanına inceltir (`viewer/src/region-places.json`). Atlasın yalnız
+  bilgisi kullanılır, tasarımı kullanılmaz.
 
 ## Çalışma durumu
 

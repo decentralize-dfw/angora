@@ -31,14 +31,26 @@ test('The road layer is a real PNG raster registered in metres', () => {
   assert.ok(plan.roads.png.length < 200000, 'raster stays a small bundle cost');
 });
 
-test('The map module projects landmarks within honest bounds', async () => {
+test('The places layer is the uzakolcek.html atlas, centred on the address point', () => {
+  const places = JSON.parse(readFileSync(new URL('../src/region-places.json', import.meta.url), 'utf8'));
+  // the atlas's own centre - Hatırlı Sokak No:10 - anchors every distance
+  assert.ok(Math.abs(places.center.lat - 39.87021694) < 1e-6, `centre lat ${places.center.lat}`);
+  assert.ok(Math.abs(places.center.lon - 32.71868652) < 1e-6, `centre lon ${places.center.lon}`);
+  assert.match(places.source, /uzakolcek\.html/);
+  assert.match(places.source, /OSM/);
+  assert.ok(places.total >= 1000, `${places.total} amenities in the atlas`);
+  assert.ok(places.curated.length >= 10 && places.curated.length <= 20, `${places.curated.length} curated chips`);
+  for (const p of places.curated) {
+    assert.ok(p.name && p.d > 0 && p.d <= places.radius_m, `${p.name} at ${p.d} m inside the atlas radius`);
+    // chip position agrees with its atlas distance (equirectangular rounding)
+    assert.ok(Math.abs(Math.hypot(p.x, p.y) - p.d) < 25, `${p.name} projected ${Math.hypot(p.x, p.y).toFixed(0)} m vs ${p.d} m`);
+  }
+  assert.ok(places.dots.length >= 150 && places.dots.length <= 1500, `${places.dots.length} dots`);
+  for (const [x, y, g] of places.dots) {
+    assert.ok(Math.hypot(x, y) <= 2700, 'dot within the 2 km view margin');
+    assert.ok(g >= 0 && g < places.groups.length, 'dot group indexed');
+  }
   const source = readFileSync(new URL('../src/region-map.js', import.meta.url), 'utf8');
-  // approximate landmarks stay declared as data, and the missing source file
-  // stays named so the replacement duty is visible in review
-  assert.match(source, /uzakolcek\.html/);
-  assert.match(source, /LANDMARKS/);
-  const lat = [...source.matchAll(/lat:\s*([\d.]+)/g)].map((m) => Number(m[1]));
-  const lng = [...source.matchAll(/lng:\s*([\d.]+)/g)].map((m) => Number(m[1]));
-  for (const v of lat) assert.ok(v > 39.7 && v < 40.1, `lat ${v} near Ankara`);
-  for (const v of lng) assert.ok(v > 32.5 && v < 33.0, `lng ${v} near Ankara`);
+  assert.match(source, /region-places\.json/);
+  assert.doesNotMatch(source, /LANDMARKS/, 'the hand-guessed landmark list is gone');
 });
