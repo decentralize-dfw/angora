@@ -41,6 +41,17 @@ const daylightURL = new URL((pages ? 'assets/lighting/' : 'lighting/')+'kloofend
 const titles = {region:'Bölge', neighborhood:'Yakın çevre', building:'Villa 21', f0:'Bodrum', f1:'Giriş katı', f2:'1. kat', f3:'Çatı katı'};
 const groups = new Map();
 const pendingRoomJump = new PendingAction();
+// One device decision for everything: which manifest, how many download
+// workers, how many draco decoders. Phones die on memory PEAKS, not totals -
+// a warm cache hands all three files over at once and three parallel draco
+// heaps finish WebKit off - so lite mode also serialises the pipeline.
+const LITE = (() => {
+  const forced = new URLSearchParams(location.search).get('model');
+  if (forced === 'lite') return true;
+  if (forced === 'full') return false;
+  return (matchMedia('(pointer: coarse)').matches && Math.min(screen.width, screen.height) <= 820)
+    || (navigator.deviceMemory !== undefined && navigator.deviceMemory <= 4);
+})();
 let regionMap = null;   // built on first Bölge visit; a map layer, not a scene
 // Planting rooted above the basement's soil cut: the front-garden trees and
 // hedges stand on ground the f0 section removes, so drawing them over the
@@ -279,7 +290,7 @@ function setup() {
   // core is left for the page, and a phone keeps one fewer decoder in flight so
   // the peak memory of the decode does not stack up on top of the scene.
   const draco = new DRACOLoader(); draco.setDecoderPath(decoderRoot.href);
-  draco.setWorkerLimit(Math.max(2,Math.min(coarse?3:4,(navigator.hardwareConcurrency||4)-1)));
+  draco.setWorkerLimit(LITE?1:Math.max(2,Math.min(coarse?3:4,(navigator.hardwareConcurrency||4)-1)));
   loader = new GLTFLoader(); loader.setDRACOLoader(draco);
   window.addEventListener('resize',()=>{
     const portrait=camera.aspect<1;resize();
@@ -369,11 +380,7 @@ async function loadModel() {
     // Phones get the derived mobile set (simplified geometry, 512px webp,
     // no relief maps): the full 4M-triangle delivery is a desktop budget
     // and WebKit gives up mid-upload. ?model=full / ?model=lite override.
-    const forcedModel = new URLSearchParams(location.search).get('model');
-    const liteDevice = (matchMedia('(pointer: coarse)').matches && Math.min(screen.width, screen.height) <= 820)
-      || (navigator.deviceMemory !== undefined && navigator.deviceMemory <= 4);
-    const wantLite = forcedModel === 'lite' || (forcedModel !== 'full' && liteDevice);
-    let response = wantLite
+    let response = LITE
       ? await fetch(new URL('manifest-mobile.json', modelRoot), {cache:'no-cache'}).catch(() => null)
       : null;
     if (!response?.ok) response = await fetch(new URL('manifest.json', modelRoot), {cache:'no-cache'});
@@ -495,10 +502,16 @@ async function loadModel() {
         }
       });
     }
-    const results = await Promise.allSettled([worker(queue), worker(queue), loadSections(), loadRooms(), loadNavigation(),
+    // On lite devices the second download worker is a resolved no-op so the
+    // settled results keep their positions - they are read by index below.
+    const results = await Promise.allSettled([worker(queue), LITE?Promise.resolve():worker(queue), loadSections(), loadRooms(), loadNavigation(),
       lighting.loadEnvironment(daylightURL.href).catch(error=>console.warn('HDR unavailable; atmospheric daylight retained',error)), loadCaps()]);
     const failure = results.find(r => r.status === 'rejected'); if (failure) throw failure.reason;
     for (const id of staged.keys()) stageGroup(id);
+    // every glb is decoded and staged; the draco workers' wasm heaps are the
+    // largest transient allocation on a phone - give them back now (retry is
+    // a full page reload, so the loader is never reused)
+    loader.dracoLoader?.dispose();
     {
       // ground truth for the f0 planting rule: the plot soil under each plant
       const soilMeshes=[];

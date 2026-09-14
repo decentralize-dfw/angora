@@ -245,10 +245,15 @@ R44 dört isteği işler; araçlar `tools/*_r44.mjs` altındadır ve her biri ke
   sadeleştirme (mimari ~3-4 cm hata payı, yaprak/kumaş serbest), normal ve
   occlusion haritaları yok, dokular ≤512 px webp; bahçenin 144 k üçgenlik
   çim yaprağı alanı ve context'in 510 k üçgenlik bordür meshi mobilde yok.
-  Sonuç üç parça 1,82 M üçgen / 11,9 MB (`tools/build_mobile_delivery_r44.mjs`,
+  Sonuç üç parça 1,70 M üçgen / 11,3 MB (`tools/build_mobile_delivery_r44.mjs`,
   `manifest-mobile.json`). Viewer telefonda (coarse pointer + ≤820 px veya
   ≤4 GB bellek) mobil manifesti seçer; `?model=full` / `?model=lite` iki
-  yönde de zorlar. Navigasyon, odalar, kesitler ortak.
+  yönde de zorlar. Navigasyon, odalar, kesitler ortak. Telefon, toplamdan
+  değil bellek TEPESİNDEN ölür: sıcak önbellek üç dosyayı aynı anda teslim
+  edince üç paralel Draco çözümü WebKit'i düşürüyordu ("a problem
+  repeatedly occurred"); lite modda indirme/çözme hattı tek sıraya iner
+  (tek worker, tek Draco decoder) ve sahneleme biter bitmez Draco WASM
+  yığınları serbest bırakılır.
 - **Bodrum kesiti bitkileri.** Tabanı toprak kesim kotunun üstünde kalan
   bitkiler (ön bahçe ağacı, mazı sıraları) f0 görünümünde gizlenir — kesilen
   zeminin üstünde asılı durmazlar; yürüyüşe girince geri gelirler.

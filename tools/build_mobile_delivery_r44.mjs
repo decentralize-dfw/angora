@@ -44,10 +44,10 @@ const DROP_NODES = {
 // simplification budget per material class
 const CLASSES = [
   // organic mass: silhouettes forgive, borders may move
-  { match: /foliage|Thuja|leaf|leaves|needle|grass|Bedspread|Quilted|drape|sheer|curtain|linen|damask|pillow/i, ratio: 0.22, error: 0.008, lockBorder: false },
-  { match: /^Clay tile|^roof|soil|terrain|Terrain|ground/i, ratio: 0.4, error: 0.002, lockBorder: true },
+  { match: /foliage|Thuja|leaf|leaves|needle|grass|Bedspread|Quilted|drape|sheer|curtain|linen|damask|pillow/i, ratio: 0.18, error: 0.01, lockBorder: false },
+  { match: /^Clay tile|^roof|soil|terrain|Terrain|ground/i, ratio: 0.35, error: 0.0025, lockBorder: true },
   // architecture: ~3-4 cm bound on the villa's span; material seams stay pinned
-  { match: /./, ratio: 0.35, error: 0.0015, lockBorder: true },
+  { match: /./, ratio: 0.3, error: 0.002, lockBorder: true },
 ];
 
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({
