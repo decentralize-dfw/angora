@@ -20,12 +20,12 @@
     {
       "id": "villa",
       "file": "villa.glb",
-      "bytes": 12519884,
-      "sha256": "f923d794a80f7a6dcb58d42d5fff9d7894f78bb737bfdb6170f2f6d2b059e6ed",
+      "bytes": 12375344,
+      "sha256": "7b59b77914c8abc9d8e0dc087a75dd4bfd5fc2686695b96b9e0d5ca5bb2beb02",
       "source_objects": 0,
       "exported_mesh_nodes": 874,
       "shared_meshes": 294,
-      "triangles": 2775130,
+      "triangles": 2774029,
       "bounds_native_m": [
         [
           -7.1429,
@@ -306,5 +306,6 @@
     ],
     "joined_meshes": 208,
     "kept_nodes": 665
-  }
+  },
+  "profile": "full"
 }

@@ -42,6 +42,11 @@ const titles = {region:'Bölge', neighborhood:'Yakın çevre', building:'Villa 2
 const groups = new Map();
 const pendingRoomJump = new PendingAction();
 let regionMap = null;   // built on first Bölge visit; a map layer, not a scene
+// Planting rooted above the basement's soil cut: the front-garden trees and
+// hedges stand on ground the f0 section removes, so drawing them over the
+// excavation hatch reads as trees growing out of the drawing. Filled at
+// staging, hidden only while the f0 cut is active.
+const plantingAboveCut = [];
 const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
 // The earth cannot follow the sweeping building cut: its authored cap exists
 // at exactly one height, so this plane snaps between "whole" and "basement
@@ -306,6 +311,7 @@ function selectView(id, initial = false) {
   if (!ready) return;
   const target = sectionHeight(id, fullHeight);
   const earthTarget = id==='f0' ? SOIL_CUT_HEIGHT : fullHeight;
+  for (const o of plantingAboveCut) o.visible = id !== 'f0';
   if (earthClip.constant !== earthTarget) {earthClip.constant = earthTarget; renderer.shadowMap.needsUpdate = true;}
   lighting.frame(id,contextBox);massing?.set(id);lift?.park(id);
   lighting.interior(id.startsWith('f')?Number(id[1]):null,null);
@@ -332,6 +338,7 @@ function enterWalk(roomId) {
   // after the section plane is raised, or canRun() reads the previous cut
   lift?.setWalkActive(true);lift?.setWalkFloor(station.floor_index);refreshLiftControl();
   regionMap?.hide();
+  for (const o of plantingAboveCut) o.visible = true;   // the walk raises the cut
   $('#app').dataset.walk='true';$('.camera-tools').hidden=true;$('#walk-tools').hidden=false;$('#enter-walk').hidden=true;
   $('#walk-room').value=station.room_id;
   document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===selected));
@@ -358,7 +365,17 @@ async function loadModel() {
   message('Bütün model yükleniyor…');
   const staged = new Map(), stagedClips = new Map();
   try {
-    const response = await fetch(new URL('manifest.json', modelRoot), {cache:'no-cache'});
+    // Phones get the derived mobile set (simplified geometry, 512px webp,
+    // no relief maps): the full 4M-triangle delivery is a desktop budget
+    // and WebKit gives up mid-upload. ?model=full / ?model=lite override.
+    const forcedModel = new URLSearchParams(location.search).get('model');
+    const liteDevice = (matchMedia('(pointer: coarse)').matches && Math.min(screen.width, screen.height) <= 820)
+      || (navigator.deviceMemory !== undefined && navigator.deviceMemory <= 4);
+    const wantLite = forcedModel === 'lite' || (forcedModel !== 'full' && liteDevice);
+    let response = wantLite
+      ? await fetch(new URL('manifest-mobile.json', modelRoot), {cache:'no-cache'}).catch(() => null)
+      : null;
+    if (!response?.ok) response = await fetch(new URL('manifest.json', modelRoot), {cache:'no-cache'});
     if (!response.ok) throw Error(`Manifest HTTP ${response.status}`);
     const manifest = await response.json();
     assetRevision=manifest.assets?.map(({file,sha256})=>({file,sha256}));
@@ -462,6 +479,10 @@ async function loadModel() {
         // the plot's own soil is cut, by the snap plane, so the neighbourhood
         // and roads stay whole and the authored cap always fits.
         const planting=id==='garden'&&PLANTING.test(authoredNodeName(o.name));
+        if(planting){
+          const base=new THREE.Box3().setFromObject(o).min.y;
+          if(base>SOIL_CUT_HEIGHT-0.15)plantingAboveCut.push(o);
+        }
         const planes=planting?[]:building||id==='garden'?[clip]
           :(Array.isArray(o.material)?o.material:[o.material]).some(m=>m?.userData.plotSoil)?[earthClip]:[];
         lighting.prepareMesh(o,{clipped:planes[0]===clip,context:!building});

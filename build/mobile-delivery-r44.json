@@ -1,0 +1,38 @@
+{
+  "villa": {
+    "triangles": {
+      "full": 2774029,
+      "mobile": 1445495
+    },
+    "bytes": 5855516,
+    "textures_bytes": {
+      "full": 4648049,
+      "mobile": 257238
+    },
+    "simplified_prims": 259
+  },
+  "garden": {
+    "triangles": {
+      "full": 560724,
+      "mobile": 197444
+    },
+    "bytes": 2519592,
+    "textures_bytes": {
+      "full": 1827171,
+      "mobile": 37386
+    },
+    "simplified_prims": 307
+  },
+  "context": {
+    "triangles": {
+      "full": 752638,
+      "mobile": 181565
+    },
+    "bytes": 3502652,
+    "textures_bytes": {
+      "full": 48074,
+      "mobile": 37118
+    },
+    "simplified_prims": 116
+  }
+}

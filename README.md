@@ -230,6 +230,29 @@ R44 dört isteği işler; araçlar `tools/*_r44.mjs` altındadır ve her biri ke
   (`build/villa-merge-r44.json`). Kat başına dosya kalmadığından eski
   `level-*.glb`/`envelope.glb` teslimden çıkarıldı; viewer üç parça bekler.
 
+### R44 üçüncü tur — çatı temizliği, mobil teslim, kesit bitkileri
+
+- **Çatı enkazı.** İçe aktarımın kuzey eğiminde bıraktığı çerçeveli tablo
+  takımı (dört kanvas + wood_dark çıtaları + white_trim parçası, z −3,52
+  düzleminde kiremitlerin 4-15 cm üstünde) kaldırıldı. Araç kiremitleri
+  katmanlı örtü olarak okur: bir duvar/doğrama üçgeni altındaki en yüksek
+  katmanın 3,5 cm üstünde ve gökyüzüne ya da hava boşluğuna açıksa kırpılır;
+  saçak/kalkan tahtaları, mahya ve baca korunur
+  (`tools/trim_roof_protrusions_r44.mjs`, `build/roof-trim-r44.json`).
+- **Mobil teslim.** Tam teslim 4,1 M üçgen + ~175 MB çözülmüş doku ile
+  telefon belleğini aşıyordu (WebKit yükleme sırasında çöküyordu). Aynı üç
+  dosyadan türetilen hafif set: malzeme sınıfına göre sınırlandırılmış
+  sadeleştirme (mimari ~3-4 cm hata payı, yaprak/kumaş serbest), normal ve
+  occlusion haritaları yok, dokular ≤512 px webp; bahçenin 144 k üçgenlik
+  çim yaprağı alanı ve context'in 510 k üçgenlik bordür meshi mobilde yok.
+  Sonuç üç parça 1,82 M üçgen / 11,9 MB (`tools/build_mobile_delivery_r44.mjs`,
+  `manifest-mobile.json`). Viewer telefonda (coarse pointer + ≤820 px veya
+  ≤4 GB bellek) mobil manifesti seçer; `?model=full` / `?model=lite` iki
+  yönde de zorlar. Navigasyon, odalar, kesitler ortak.
+- **Bodrum kesiti bitkileri.** Tabanı toprak kesim kotunun üstünde kalan
+  bitkiler (ön bahçe ağacı, mazı sıraları) f0 görünümünde gizlenir — kesilen
+  zeminin üstünde asılı durmazlar; yürüyüşe girince geri gelirler.
+
 ### R44 ikinci tur — arayüz, cephe, ön bahçe ve bölge haritası
 
 - **Arayüz.** Tek cam dili: Jura (repo içinde woff2), beyaz 0,40 opaklık +
