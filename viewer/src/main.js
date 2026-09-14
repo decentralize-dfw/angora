@@ -16,6 +16,7 @@ import { configureCameraControls } from './camera.js';
 import { PendingAction } from './pending-action.js';
 import {fitContextBounds} from './material-response.js';
 import {createSiteContext} from './site-context.js';
+import {createRegionMap,atlasMeta} from './region-map.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
 import {prepareContextSurfaces} from './context-surfaces.js';
 import {batchContext} from './context-batch.js';
@@ -40,6 +41,24 @@ const daylightURL = new URL((pages ? 'assets/lighting/' : 'lighting/')+'kloofend
 const titles = {region:'Bölge', neighborhood:'Yakın çevre', building:'Villa 21', f0:'Bodrum', f1:'Giriş katı', f2:'1. kat', f3:'Çatı katı'};
 const groups = new Map();
 const pendingRoomJump = new PendingAction();
+// One device decision for everything: which manifest, how many download
+// workers, how many draco decoders. Phones die on memory PEAKS, not totals -
+// a warm cache hands all three files over at once and three parallel draco
+// heaps finish WebKit off - so lite mode also serialises the pipeline.
+const LITE = (() => {
+  const forced = new URLSearchParams(location.search).get('model');
+  if (forced === 'lite') return true;
+  if (forced === 'full') return false;
+  return (matchMedia('(pointer: coarse)').matches && Math.min(screen.width, screen.height) <= 820)
+    || (navigator.deviceMemory !== undefined && navigator.deviceMemory <= 4);
+})();
+let regionMap = null;   // built on first Bölge visit; a map layer, not a scene
+// Planting rooted above the basement's soil cut: the front-garden trees and
+// hedges stand on ground the f0 section removes, so drawing them over the
+// excavation hatch reads as trees growing out of the drawing. Judged by the
+// SOIL under each plant, not the plant's own base - tree trunks are modelled
+// sunk below grade, so a base test lets them keep floating over the hatch.
+const plantingCandidates = [], plantingAboveCut = [];
 const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
 // The earth cannot follow the sweeping building cut: its authored cap exists
 // at exactly one height, so this plane snaps between "whole" and "basement
@@ -271,7 +290,7 @@ function setup() {
   // core is left for the page, and a phone keeps one fewer decoder in flight so
   // the peak memory of the decode does not stack up on top of the scene.
   const draco = new DRACOLoader(); draco.setDecoderPath(decoderRoot.href);
-  draco.setWorkerLimit(Math.max(2,Math.min(coarse?3:4,(navigator.hardwareConcurrency||4)-1)));
+  draco.setWorkerLimit(LITE?1:Math.max(2,Math.min(coarse?3:4,(navigator.hardwareConcurrency||4)-1)));
   loader = new GLTFLoader(); loader.setDRACOLoader(draco);
   window.addEventListener('resize',()=>{
     const portrait=camera.aspect<1;resize();
@@ -292,12 +311,19 @@ function selectView(id, initial = false) {
   $('#view-title').textContent = titles[id];
   $('#section-label').textContent = id.startsWith('f')
     ? (id==='f3'?'1,30 m kesit':'1,60 m kesit')
-    : id === 'building' ? 'Bahçe · Havuz · Villa' : id==='region'?'Vaziyet planından 3D yerleşim':'Angora Evleri · Ankara';
+    : id === 'building' ? 'Bahçe · Havuz · Villa' : id==='region'?'Angora Evleri · Beysukent, Ankara':'Angora Evleri · Ankara';
   $('#region-panel').hidden=id!=='region';
+  // The Bölge scale is a north-up map layer; the clouds sweep while the 3D
+  // frame pulls out beneath it, so the model leaves smoothly either way.
+  if (id==='region') {
+    regionMap ??= createRegionMap($('#app'));
+    if (initial) regionMap.show(); else setTimeout(()=>regionMap.show(), 430);
+  } else regionMap?.hide();
   panel('',false);
   if (!ready) return;
   const target = sectionHeight(id, fullHeight);
   const earthTarget = id==='f0' ? SOIL_CUT_HEIGHT : fullHeight;
+  for (const o of plantingAboveCut) o.visible = id !== 'f0';
   if (earthClip.constant !== earthTarget) {earthClip.constant = earthTarget; renderer.shadowMap.needsUpdate = true;}
   lighting.frame(id,contextBox);massing?.set(id);lift?.park(id);
   lighting.interior(id.startsWith('f')?Number(id[1]):null,null);
@@ -323,6 +349,8 @@ function enterWalk(roomId) {
   lighting.setWalkInterior(true);
   // after the section plane is raised, or canRun() reads the previous cut
   lift?.setWalkActive(true);lift?.setWalkFloor(station.floor_index);refreshLiftControl();
+  regionMap?.hide();
+  for (const o of plantingAboveCut) o.visible = true;   // the walk raises the cut
   $('#app').dataset.walk='true';$('.camera-tools').hidden=true;$('#walk-tools').hidden=false;$('#enter-walk').hidden=true;
   $('#walk-room').value=station.room_id;
   document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===selected));
@@ -349,7 +377,13 @@ async function loadModel() {
   message('Bütün model yükleniyor…');
   const staged = new Map(), stagedClips = new Map();
   try {
-    const response = await fetch(new URL('manifest.json', modelRoot), {cache:'no-cache'});
+    // Phones get the derived mobile set (simplified geometry, 512px webp,
+    // no relief maps): the full 4M-triangle delivery is a desktop budget
+    // and WebKit gives up mid-upload. ?model=full / ?model=lite override.
+    let response = LITE
+      ? await fetch(new URL('manifest-mobile.json', modelRoot), {cache:'no-cache'}).catch(() => null)
+      : null;
+    if (!response?.ok) response = await fetch(new URL('manifest.json', modelRoot), {cache:'no-cache'});
     if (!response.ok) throw Error(`Manifest HTTP ${response.status}`);
     const manifest = await response.json();
     assetRevision=manifest.assets?.map(({file,sha256})=>({file,sha256}));
@@ -453,19 +487,48 @@ async function loadModel() {
         // the plot's own soil is cut, by the snap plane, so the neighbourhood
         // and roads stay whole and the authored cap always fits.
         const planting=id==='garden'&&PLANTING.test(authoredNodeName(o.name));
+        if(planting)plantingCandidates.push(o);
         const planes=planting?[]:building||id==='garden'?[clip]
           :(Array.isArray(o.material)?o.material:[o.material]).some(m=>m?.userData.plotSoil)?[earthClip]:[];
         lighting.prepareMesh(o,{clipped:planes[0]===clip,context:!building});
+        // The neighbourhood is setting, not subject: screen-space occlusion on
+        // the white massing reads as grime in its eaves, so the context sits
+        // outside the AO pass entirely - and outside the villa's section
+        // planes, so changing floor never cuts the neighbours down.
+        if(id==='context')o.userData.aoExcluded=true;
         o.userData.clipPlanes=planes;
         if (planes.length) for (const m of Array.isArray(o.material) ? o.material : [o.material]) {
           m.clippingPlanes = planes; m.side = THREE.DoubleSide;
         }
       });
     }
-    const results = await Promise.allSettled([worker(queue), worker(queue), loadSections(), loadRooms(), loadNavigation(),
+    // On lite devices the second download worker is a resolved no-op so the
+    // settled results keep their positions - they are read by index below.
+    const results = await Promise.allSettled([worker(queue), LITE?Promise.resolve():worker(queue), loadSections(), loadRooms(), loadNavigation(),
       lighting.loadEnvironment(daylightURL.href).catch(error=>console.warn('HDR unavailable; atmospheric daylight retained',error)), loadCaps()]);
     const failure = results.find(r => r.status === 'rejected'); if (failure) throw failure.reason;
     for (const id of staged.keys()) stageGroup(id);
+    // every glb is decoded and staged; the draco workers' wasm heaps are the
+    // largest transient allocation on a phone - give them back now (retry is
+    // a full page reload, so the loader is never reused)
+    loader.dracoLoader?.dispose();
+    {
+      // ground truth for the f0 planting rule: the plot soil under each plant
+      const soilMeshes=[];
+      groups.get('context')?.traverse(o=>{
+        if(o.isMesh&&(Array.isArray(o.material)?o.material:[o.material]).some(m=>m?.userData.plotSoil))soilMeshes.push(o);
+      });
+      const ray=new THREE.Raycaster();ray.far=80;
+      const down=new THREE.Vector3(0,-1,0),box=new THREE.Box3(),centre=new THREE.Vector3();
+      for(const o of plantingCandidates){
+        box.setFromObject(o).getCenter(centre);
+        ray.set(new THREE.Vector3(centre.x,60,centre.z),down);
+        const hit=soilMeshes.length?ray.intersectObjects(soilMeshes,false)[0]:null;
+        const ground=hit?hit.point.y:box.min.y;
+        if(ground>SOIL_CUT_HEIGHT-0.15)plantingAboveCut.push(o);
+      }
+      plantingCandidates.length=0;
+    }
     buildingBox = new THREE.Box3().setFromObject(groups.get('villa'));
     // Keep the entrance, pool terrace and basement garden in the building frame.
     gardenBox = new THREE.Box3(new THREE.Vector3(-10.2, -4, -29.1), new THREE.Vector3(12.5, 3.4, 11));
@@ -483,8 +546,8 @@ async function loadModel() {
       for(const b of contextData.buildings)if(b.bounds)for(const p of b.bounds)settlementBox.expandByPoint(new THREE.Vector3(...p));
       if(!settlementBox.isEmpty())contextBox=settlementBox.union(buildingBox);
       siteContext=createSiteContext(contextData,host,()=>selectView('building'));
-      $('#context-count').textContent=`${contextData.buildings.length} yapı · Kaynak vaziyet planı`;
-    } catch(error){console.warn(error);$('#context-count').textContent='Kaynak vaziyet planı';}
+      $('#context-count').textContent=`${contextData.buildings.length} yapı · ${atlasMeta}`;
+    } catch(error){console.warn(error);$('#context-count').textContent=atlasMeta;}
     // The neighbourhood is in by now, so its bounds, its horizon fade and its
     // white massing are set up here rather than in a continuation that used to
     // run after the first frame.
@@ -607,6 +670,11 @@ function bindInterface() {
   $('#toggle-lights').onclick=()=>{interiorLights=!interiorLights;$('#toggle-lights').setAttribute('aria-pressed',interiorLights);lighting?.setLights(interiorLights);invalidate();};
   $('#lighting-style').onchange=e=>{lighting?.setStyle(e.target.value);rememberState();invalidate();};
   $('#return-villa').onclick=()=>selectView('building');
+  document.querySelectorAll('.region-radius button').forEach(b=>b.onclick=()=>{
+    regionMap ??= createRegionMap($('#app'));
+    regionMap.setRadius(Number(b.dataset.radius));
+    document.querySelectorAll('.region-radius button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  });
   window.addEventListener('keydown',event=>handleEscape(event,{
     panelOpen:Boolean(document.querySelector('.panel:not([hidden])')),closePanel:()=>panel('',false),
     walkActive:walk?.active,immersive:renderer?.xr.isPresenting,exitWalk

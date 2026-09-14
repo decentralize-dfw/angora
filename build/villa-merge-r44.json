@@ -8,11 +8,11 @@
     "envelope"
   ],
   "mesh_nodes_before": 3569,
-  "mesh_nodes_after": 874,
-  "joined_meshes": 209,
+  "mesh_nodes_after": 873,
+  "joined_meshes": 208,
   "preserved_nodes": 665,
-  "materials": 180,
+  "materials": 179,
   "textures": 43,
-  "triangles": 2795315,
-  "bytes": 12490012
+  "triangles": 2798499,
+  "bytes": 12539848
 }

@@ -230,6 +230,73 @@ R44 dört isteği işler; araçlar `tools/*_r44.mjs` altındadır ve her biri ke
   (`build/villa-merge-r44.json`). Kat başına dosya kalmadığından eski
   `level-*.glb`/`envelope.glb` teslimden çıkarıldı; viewer üç parça bekler.
 
+### R44 üçüncü tur — çatı temizliği, mobil teslim, kesit bitkileri
+
+- **Çatı enkazı.** İçe aktarımın kuzey eğiminde bıraktığı çerçeveli tablo
+  takımı (dört kanvas + wood_dark çıtaları + white_trim parçası, z −3,52
+  düzleminde kiremitlerin 4-15 cm üstünde) kaldırıldı. Araç kiremitleri
+  katmanlı örtü olarak okur: bir duvar/doğrama üçgeni altındaki en yüksek
+  katmanın 3,5 cm üstünde ve gökyüzüne ya da hava boşluğuna açıksa kırpılır;
+  saçak/kalkan tahtaları, mahya ve baca korunur
+  (`tools/trim_roof_protrusions_r44.mjs`, `build/roof-trim-r44.json`).
+- **Mobil teslim.** Tam teslim 4,1 M üçgen + ~175 MB çözülmüş doku ile
+  telefon belleğini aşıyordu (WebKit yükleme sırasında çöküyordu). Aynı üç
+  dosyadan türetilen hafif set: malzeme sınıfına göre sınırlandırılmış
+  sadeleştirme (mimari ~3-4 cm hata payı, yaprak/kumaş serbest), normal ve
+  occlusion haritaları yok, dokular ≤512 px webp; bahçenin 144 k üçgenlik
+  çim yaprağı alanı ve context'in 510 k üçgenlik bordür meshi mobilde yok.
+  Sonuç üç parça 1,70 M üçgen / 11,3 MB (`tools/build_mobile_delivery_r44.mjs`,
+  `manifest-mobile.json`). Viewer telefonda (coarse pointer + ≤820 px veya
+  ≤4 GB bellek) mobil manifesti seçer; `?model=full` / `?model=lite` iki
+  yönde de zorlar. Navigasyon, odalar, kesitler ortak. Telefon, toplamdan
+  değil bellek TEPESİNDEN ölür: sıcak önbellek üç dosyayı aynı anda teslim
+  edince üç paralel Draco çözümü WebKit'i düşürüyordu ("a problem
+  repeatedly occurred"); lite modda indirme/çözme hattı tek sıraya iner
+  (tek worker, tek Draco decoder) ve sahneleme biter bitmez Draco WASM
+  yığınları serbest bırakılır.
+- **Bodrum kesiti bitkileri.** Tabanı toprak kesim kotunun üstünde kalan
+  bitkiler (ön bahçe ağacı, mazı sıraları) f0 görünümünde gizlenir — kesilen
+  zeminin üstünde asılı durmazlar; yürüyüşe girince geri gelirler.
+
+### R44 ikinci tur — arayüz, cephe, ön bahçe ve bölge haritası
+
+- **Arayüz.** Tek cam dili: Jura (repo içinde woff2), beyaz 0,40 opaklık +
+  8 px blur, hap geometrisi. Üst orta ölçek seçici, sağ orta kamera rayı,
+  alt orta kat/keşif dock'u; mobilde dock iki satıra iner, paneller alt
+  sayfa olur; yürüyüşte üst eylemler gizlenir. Ölçülendirme katmanı
+  `interface-quality.css`'te kaldı.
+- **Cephe beyazları.** R43 kalıntısı iki kural (parapet başlıkları ve 10 cm
+  toleransın beyaza çevirdiği ince çatı katı duvar dışları) yön sondalı yüz
+  yargısıyla değiştirildi: yüzeyin iki yanı katın oda sınırında sınanır,
+  yalnız içeride kalan yüz `interior` olur; tek deri beyazlar 6 mm `stucco`
+  dış deri kazanır. Çatı sırtındaki ince kaynak yarıkları iç dikiş kapaklarıyla
+  kapatıldı (`build/roof-slit-caps-r44.json`). Komşular AO ve kesit
+  düzlemlerinin tamamen dışında (`aoExcluded`).
+- **Ön bahçe** (`tools/fix_front_garden_r44.mjs`, kayıt
+  `build/front-garden-r44.json`): (1) doğu istinat duvarı boyunca mazı
+  hattı 7 ekranla sürdürüldü, her ekran kendi teras kotunda; (2) garaj
+  yolu ile doğu merdiven sahanlığı arasındaki 30 cm boşluk sahanlık
+  kotunda taş bantla kapatıldı; (3) giriş yolu ile diyagonal garaj yolu
+  arasındaki çukur çim kaması iki kenara mükemmel oturan regle yüzeyle
+  taşlandı — sokak ucunda fotoğraftaki gibi bordürlü ağaç yatağı bırakıldı;
+  (4) ön çit mazı sırası ile cephe arasındaki şerit, fotoğraflardaki gibi
+  giriş kotunda (3,08) düz taş teras oldu ve giriş yoluna bağlandı. Yeni
+  taşların altındaki 21.494 çim yaprağı üçgeni kaldırıldı; araç arşivden
+  (`build/garden-pre-frontfix-r44.glb`) yeniden çalıştırılabilir.
+- **Bölge haritası.** "Bölge" ölçeği artık kuzeyi yukarı bakan bir harita
+  katmanı: plan verisi teslimin kendisinden çıkarılır
+  (`tools/extract_region_plan_r44.mjs` → `viewer/src/region-plan.json`;
+  yollar context'in CAD asfaltından rasterlenir, komşular B-aile
+  zarflarıdır, villa kendi taban izidir). 1 km / 2 km yarıçap seçilebilir,
+  geçişler bulut süpürmesiyle ve tek easing ile akar. Çevre bilgisi
+  kök dizindeki `uzakolcek.html`'den gelir — "Hatırlı Sokak No:10
+  Kentsel Donatı Atlası" (OSM + Google/Yandex, 1.580 nokta, 3.250 m):
+  `tools/extract_region_places_r44.mjs` atlasın kendi merkezini harita
+  orijini yapar, her günlük ihtiyaç için en yakın isimli yeri gerçek
+  metre değeriyle çipe çevirir ve isimli donatıları sakin bir nokta
+  alanına inceltir (`viewer/src/region-places.json`). Atlasın yalnız
+  bilgisi kullanılır, tasarımı kullanılmaz.
+
 ## Çalışma durumu
 
 DWG'den katmanlı Blender sahnesi yeniden kuruldu. **Çalışma / kontrol sürümüdür; bitmiş satış demosu veya birebir doğrulanmış nihai model değildir.** Kaynak çizgileri ve üretilen yüzeyler ayrı tutulur. Fotoğrafa göre eklenen parçalar kendi kanıt durumlarını taşır.

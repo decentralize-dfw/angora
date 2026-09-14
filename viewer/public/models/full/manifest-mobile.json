@@ -19,13 +19,13 @@
   "assets": [
     {
       "id": "villa",
-      "file": "villa.glb",
-      "bytes": 12376780,
-      "sha256": "f93dfebb4e7d41a764bba12d9d14e19f501804c22613434d894ed877e61d685c",
+      "file": "villa-m.glb",
+      "bytes": 5683732,
+      "sha256": "381da291c423525d76b42b6ebc6c1c8ba701a7946bdd619604008f0937d61739",
       "source_objects": 0,
       "exported_mesh_nodes": 874,
       "shared_meshes": 294,
-      "triangles": 2773448,
+      "triangles": 1370544,
       "bounds_native_m": [
         [
           -7.1429,
@@ -56,13 +56,13 @@
     },
     {
       "id": "garden",
-      "file": "garden.glb",
-      "bytes": 8304216,
-      "sha256": "0daa0a2b1814beaca2f63701f711344d2ca4c59292b97e79a95826d822555fbf",
+      "file": "garden-m.glb",
+      "bytes": 2265084,
+      "sha256": "05838af85c0102c23513d0c68c599e1e0f84281f3d965453d54ba52fbbaadfdd",
       "source_objects": 645,
       "exported_mesh_nodes": 645,
       "shared_meshes": 554,
-      "triangles": 560724,
+      "triangles": 169475,
       "bounds_native_m": [
         [
           -10.246445655822754,
@@ -86,13 +86,13 @@
     },
     {
       "id": "context",
-      "file": "context.glb",
-      "bytes": 6014084,
-      "sha256": "395ab5ac2501a93ccc3abb36a2d8637f3d6a813b24a9c9ab422bb7cb701a8d44",
+      "file": "context-m.glb",
+      "bytes": 3332248,
+      "sha256": "95df7068adc01214bc1d3147bfb1c51cf3beaca9ba3e41e69728855177eeef59",
       "source_objects": 2371,
       "exported_mesh_nodes": 2371,
       "shared_meshes": 346,
-      "triangles": 752638,
+      "triangles": 165087,
       "bounds_native_m": [
         [
           -139.26348876953125,
@@ -307,5 +307,6 @@
     "joined_meshes": 208,
     "kept_nodes": 665
   },
-  "profile": "full"
+  "profile": "mobile",
+  "derived_from": "manifest.json by tools/build_mobile_delivery_r44.mjs"
 }
