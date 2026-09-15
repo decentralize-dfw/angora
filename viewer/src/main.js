@@ -369,6 +369,11 @@ function selectView(id, initial = false) {
   else if(previous!==id)frame(false,true);
   host.dataset.view = id; host.dataset.loaded = 'true'; rememberState(); invalidate();
 }
+// The lens readout speaks photographer: the 35 mm-equivalent focal length
+// (24 mm frame height) of the tour camera's vertical field.
+function updateLensReadout(){
+  $('#walk-lens-value').textContent=`≈ ${Math.round(12/Math.tan(THREE.MathUtils.degToRad(walk.camera.fov)/2))} mm`;
+}
 function enterWalk(roomId) {
   pendingRoomJump.cancel();
   if (!walk || !ready) return;
@@ -384,6 +389,7 @@ function enterWalk(roomId) {
   for (const o of plantingAboveCut) o.visible = true;   // the walk raises the cut
   $('#app').dataset.walk='true';$('.camera-tools').hidden=true;$('#walk-tools').hidden=false;$('#enter-walk').hidden=true;
   $('#walk-room').value=station.room_id;
+  $('#walk-lens').value=Math.round(walk.camera.fov);updateLensReadout();
   document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===selected));
   $('#gesture-help').textContent='Sürükle: 360° bak · Yerdeki noktalara dokun: ilerle';
   resize();invalidate();
@@ -805,6 +811,13 @@ function bindInterface() {
   $('#toggle-lights').onclick=()=>{interiorLights=!interiorLights;$('#toggle-lights').setAttribute('aria-pressed',interiorLights);lighting?.setLights(interiorLights);invalidate();};
   $('#lighting-style').onchange=e=>{lighting?.setStyle(e.target.value);rememberState();invalidate();};
   $('#return-villa').onclick=()=>selectView('building');
+  // The tour's lens, draggable by hand; the readout speaks photographer -
+  // the 35 mm-equivalent focal length of the chosen vertical field.
+  $('#walk-lens').oninput=e=>{
+    if(!walk)return;
+    walk.setLens(Number(e.target.value));
+    updateLensReadout();invalidate();
+  };
   document.querySelectorAll('.region-radius button').forEach(b=>b.onclick=()=>{
     regionMap ??= createRegionMap($('#app'));
     regionMap.setRadius(Number(b.dataset.radius));

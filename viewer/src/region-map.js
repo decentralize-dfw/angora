@@ -77,17 +77,22 @@ export function createRegionMap(host) {
     width: plan.roads.w, height: plan.roads.h, preserveAspectRatio: 'none' });
   shape('polygon', 'rm-plot', { points: poly(plan.plot) });
   for (const b of plan.buildings) shape('polygon', 'rm-building', { points: poly(b) });
-  // the atlas's named amenities: every dot carries its own title, in its
-  // group's colour - "hepsinin başlığı gözükmek zorundadır". Which titles
-  // actually print at a given radius is decided in layout(), where nothing
-  // is allowed to sit on anything else.
+  // the atlas's named amenities: every dot carries its own title on a
+  // rounded card (the bare halo read as nothing), in its group's colour.
+  // Which titles actually print at a given radius is decided in layout(),
+  // where nothing is allowed to sit on anything else.
   const dotLabels = [];
   for (const [x, y, g, name] of places.dots) {
     shape('circle', `rm-dot rm-g${g}`, { cx: x, cy: y, r: 9, fill: places.groups[g] });
     if (name) {
-      const t = shape('text', `rm-dot-label rm-g${g}`, { x: x + 14, y: y + 10 });
-      t.textContent = name;
-      dotLabels.push({ el: t, x, y, g, name, d: Math.hypot(x, y) });
+      const tag = document.createElementNS(svgNS, 'g');
+      tag.setAttribute('class', `rm-dot-tag rm-g${g}`);
+      const bg = document.createElementNS(svgNS, 'rect');
+      const text = document.createElementNS(svgNS, 'text');
+      text.setAttribute('x', x + 14); text.setAttribute('y', y + 10);
+      text.textContent = name;
+      tag.append(bg, text); world.append(tag);
+      dotLabels.push({ el: tag, bg, x, y, g, name, d: Math.hypot(x, y) });
     }
   }
   dotLabels.sort((a, b) => a.d - b.d);
@@ -138,26 +143,35 @@ export function createRegionMap(host) {
     'kenti dakikalar uzağında bırakır.</p>' +
     '<ul class="rm-info-facts">' + fact('park', near.park) + fact('okul', near.lise) +
     fact('market', near.market) + fact('eczane', near.eczane) + '</ul>';
-  // Every amenity family is filterable: the chips toggle their group's dots,
-  // accents and labels together ("tüm market avm... hepsinin filtresi").
+  // One amenity family at a time: the map opens as the bare plan - every
+  // category off - and a chip turns exactly one on; pressing it again, or
+  // pressing another, puts it away ("hepsi kapalı gelsin, tek bir şey").
   const filters = document.createElement('div');
   filters.className = 'rm-filters';
   filters.setAttribute('role', 'group');
   filters.setAttribute('aria-label', 'Donatı filtreleri');
-  const off = new Set();
-  places.groups.forEach((color, g) => {
+  const off = new Set(places.groups.map((_, i) => i));
+  for (const g of off) el.classList.add(`rm-off-${g}`);
+  let activeGroup = null;
+  const filterButtons = places.groups.map((color, g) => {
     const b = document.createElement('button');
     b.type = 'button';
-    b.setAttribute('aria-pressed', 'true');
+    b.setAttribute('aria-pressed', 'false');
     b.innerHTML = `<i style="background:${color}"></i>${GROUP_LABELS[g] ?? 'Diğer'}`;
     b.onclick = () => {
-      const wasOff = off.has(g);
-      if (wasOff) off.delete(g); else off.add(g);
-      b.setAttribute('aria-pressed', String(wasOff));
-      el.classList.toggle(`rm-off-${g}`, !wasOff);
+      if (activeGroup !== null) {
+        off.add(activeGroup); el.classList.add(`rm-off-${activeGroup}`);
+        filterButtons[activeGroup].setAttribute('aria-pressed', 'false');
+      }
+      if (activeGroup === g) activeGroup = null;
+      else {
+        activeGroup = g; off.delete(g); el.classList.remove(`rm-off-${g}`);
+        b.setAttribute('aria-pressed', 'true');
+      }
       layout();
     };
     filters.append(b);
+    return b;
   });
   el.append(info, filters);
 
@@ -240,13 +254,18 @@ export function createRegionMap(host) {
     // dot titles, nearest first: a title prints only where it overlaps
     // nothing - no chip, no panel, no other title. What cannot sit clear
     // at this radius waits for a closer one; the 500 m view seats them all.
-    const fs = (radius === 2000 ? 46 : radius === 500 ? 14 : 26) * s;
+    // The rounded card behind each title is sized here, since the type
+    // size changes with the radius.
+    const fsU = radius === 2000 ? 46 : radius === 500 ? 14 : 26;
     const kept = [];
     for (const l of dotLabels) {
       if (off.has(l.g)) { l.el.setAttribute('visibility', 'hidden'); continue; }
-      const lx = cx + (l.x + 14) * s, ly = cy + (l.y + 10) * s;
-      const rect = { x: lx - 2, y: ly - fs * 1.1, w: l.name.length * fs * 0.58 + 4, h: fs * 1.35 };
-      const visible = lx > 0 && ly > 0 && lx + rect.w < vw && ly < vh &&
+      const wU = l.name.length * fsU * 0.58 + 14, hU = fsU * 1.6;
+      l.bg.setAttribute('x', l.x + 7); l.bg.setAttribute('y', l.y + 10 - fsU * 1.12);
+      l.bg.setAttribute('width', wU); l.bg.setAttribute('height', hU);
+      l.bg.setAttribute('rx', hU / 2);
+      const rect = { x: cx + (l.x + 7) * s - 2, y: cy + (l.y + 10 - fsU * 1.12) * s - 2, w: wU * s + 4, h: hU * s + 4 };
+      const visible = rect.x > 0 && rect.y > 0 && rect.x + rect.w < vw && rect.y + rect.h < vh &&
         !hits(rect) && !kept.some((t) => rect.x < t.x + t.w && rect.x + rect.w > t.x && rect.y < t.y + t.h && rect.y + rect.h > t.y);
       l.el.setAttribute('visibility', visible ? 'visible' : 'hidden');
       if (visible) kept.push(rect);

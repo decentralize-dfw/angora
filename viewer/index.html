@@ -98,6 +98,7 @@
   </footer>
   <section id="walk-tools" class="walk-tools" aria-label="Oda turu" hidden>
     <button id="exit-walk" class="walk-close" aria-label="360 derece turdan çık ve izometrik görünüme dön">×</button>
+    <label class="walk-lens" for="walk-lens"><span class="walk-lens-label">Lens</span><input id="walk-lens" type="range" min="30" max="95" step="1" aria-label="Tur lensi görüş açısı" /><output id="walk-lens-value" for="walk-lens"></output></label>
     <div class="walk-room-panel"><label for="walk-room" id="walk-room-label">Oda turu</label><select id="walk-room" aria-label="Gezilecek oda"></select><span id="walk-room-area"></span><button id="lift-call" class="lift-call" disabled><span class="lift-call-label">Asansör</span><span class="lift-call-target" id="lift-call-target">bu katta</span></button></div>
     <div class="walk-pad" aria-label="Yürüme yönü">
       <button data-walk-direction="KeyW" class="walk-forward" aria-label="İleri yürü">↑</button>
