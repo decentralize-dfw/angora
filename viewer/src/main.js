@@ -672,6 +672,14 @@ async function loadModel() {
       lighting.interior(id.startsWith('f')?Number(id[1]):null,null);
       if(ghost){ghost.visible=id.startsWith('f');ghost.userData.material.opacity=ghost.visible?0.5:0;}
       renderer.shadowMap.needsUpdate=true;
+      // A render alone is not enough: it frustum-culls, so whatever the boot
+      // camera does not see is compiled later, on the first real visit - the
+      // exact freeze this loop exists to prevent. Compile the whole scene
+      // against THIS floor's light set, then render to warm the passes.
+      try {
+        if (renderer.compileAsync) await renderer.compileAsync(scene, camera);
+        else renderer.compile(scene, camera);
+      } catch (error) {console.warn('Prewarm compile skipped', error);}
       lighting.render(camera);
       await new Promise(resolve=>setTimeout(resolve,0));
     }
