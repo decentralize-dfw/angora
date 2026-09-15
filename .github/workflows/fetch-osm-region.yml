@@ -23,24 +23,44 @@ jobs:
       - name: Query Overpass
         run: |
           set -euo pipefail
-          QUERY='[out:json][timeout:120];(
+          # One combined query 504'd on the main endpoint and came back empty
+          # from the fallback, so the load is split - streets and landuse in
+          # one request, the heavy building set in another - and an endpoint
+          # only counts when it actually returns elements.
+          fetch() {
+            local q="$1" out="$2" n ep
+            for ep in https://overpass-api.de/api/interpreter \
+                      https://overpass.kumi.systems/api/interpreter \
+                      https://overpass.private.coffee/api/interpreter; do
+              echo "-> $ep"
+              if curl -sS --fail -m 260 --data-urlencode "data=$q" "$ep" -o "$out"; then
+                n=$(jq '.elements|length' "$out" 2>/dev/null || echo 0)
+                echo "   elements: $n"
+                [ "$n" -gt 0 ] && return 0
+                head -c 300 "$out"; echo
+              fi
+              sleep 12
+            done
+            echo "no endpoint returned elements for this query"; return 1
+          }
+          STREETS='[out:json][timeout:180][maxsize:1073741824];(
             way(around:2700,39.87021694,32.71868652)["highway"~"^(motorway|trunk|primary|secondary|tertiary|unclassified|residential|living_street|pedestrian|service|track)"];
-            way(around:2700,39.87021694,32.71868652)["building"];
             way(around:2700,39.87021694,32.71868652)["landuse"];
             way(around:2700,39.87021694,32.71868652)["leisure"~"^(park|pitch|garden|playground)$"];
             way(around:3000,39.87021694,32.71868652)["name"~"Angora",i];
             relation(around:3000,39.87021694,32.71868652)["name"~"Angora",i];
           );out geom;'
-          fetch() { curl -sS --fail --retry 2 -m 300 --data-urlencode "data=$QUERY" "$1" -o raw.json; }
-          fetch https://overpass-api.de/api/interpreter || fetch https://overpass.kumi.systems/api/interpreter
-          jq -c '{fetched:(now|todate),elements:[.elements[]|{
+          BUILDINGS='[out:json][timeout:180][maxsize:1073741824];way(around:2700,39.87021694,32.71868652)["building"];out geom;'
+          fetch "$STREETS" streets.json
+          fetch "$BUILDINGS" buildings.json
+          jq -c -s '{fetched:(now|todate),elements:[(.[0].elements[],.[1].elements[])|{
               t:.type,
               tags:((.tags//{})|{highway,building,landuse,leisure,name,place,boundary}|with_entries(select(.value!=null))),
               geometry:(.geometry//null),
               members:(if .members then [.members[]|{role,geometry:(.geometry//null)}] else null end)
-            }]}' raw.json > trimmed.json
+            }]}' streets.json buildings.json > trimmed.json
           gzip -9 -c trimmed.json > tools/osm-region.json.gz
-          echo "raw: $(wc -c < raw.json) B, trimmed: $(wc -c < trimmed.json) B, gz: $(wc -c < tools/osm-region.json.gz) B"
+          echo "streets: $(wc -c < streets.json) B, buildings: $(wc -c < buildings.json) B, trimmed: $(wc -c < trimmed.json) B, gz: $(wc -c < tools/osm-region.json.gz) B"
           jq '.elements|length' trimmed.json
       - name: Commit the extract
         run: |
