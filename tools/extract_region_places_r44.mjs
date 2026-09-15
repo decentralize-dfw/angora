@@ -75,7 +75,7 @@ const GROUPS = [
   { match: /health|emergency/, color: '#c08e9a' },
   { match: /food_drink/, color: '#c8a976' },
   { match: /retail/, color: '#b7a06c' },
-  { match: /sport|parks_recreation/, color: '#8fae8b' },
+  { match: /^(sport|parks_recreation)$/, color: '#8fae8b' },   // NOT public_tranSPORT
   { match: /business_services|finance|culture_tourism|religion|public_civic|animal_pet/, color: '#a2a8a2' },
 ];
 const groupOf = (cat) => GROUPS.findIndex((g) => g.match.test(cat));
@@ -92,7 +92,9 @@ for (const p of named.sort((a, b) => a.distanceM - b.distanceM)) {
   dots.push([x, y, g]);
 }
 
-for (const c of curated) c.g = Math.max(0, groupOf(c.category));
+// A chip whose category has no dot group (the bus stop, the fuel station)
+// files under Hizmet rather than inheriting Eğitim's index by accident.
+for (const c of curated) { const g = groupOf(c.category); c.g = g < 0 ? 5 : g; }
 
 // ------------------------------------------------------------- base wash
 // No street data is reachable from this environment, so the monochrome

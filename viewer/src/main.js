@@ -561,19 +561,30 @@ async function loadModel() {
     }
     {
       // the ghost of the cut-away storeys: the villa's architecture (never
-      // the furniture) re-drawn above the section plane in translucent white
+      // the furniture) re-drawn above the section plane in translucent white.
+      // Every overlapping surface would stack its alpha - four slabs deep the
+      // "60 %" veil read almost solid - so the ghost renders as ONE layer: a
+      // depth-only prepass keeps the nearest ghost surface, and the white
+      // overlay then paints exactly where the prepass depth matches.
+      // transparent:true keeps the prepass in the transparent pass, AFTER the
+      // real glazing has blended - in the opaque pass its depth would occlude
+      // the current floor's own glass behind the veil.
+      const prepass=new THREE.MeshBasicMaterial({colorWrite:false,transparent:true,
+        side:THREE.DoubleSide,clippingPlanes:[ghostClip]});
       const material=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0,
-        depthWrite:false,side:THREE.DoubleSide,clippingPlanes:[ghostClip]});
+        depthWrite:false,depthFunc:THREE.EqualDepth,side:THREE.DoubleSide,clippingPlanes:[ghostClip]});
       ghost=new THREE.Group();ghost.name='Ghost above the cut';ghost.visible=false;
       ghost.userData={material};
       const villaGroup=groups.get('villa');villaGroup.updateMatrixWorld(true);
       const walkGhost=(o,furniture)=>{
         furniture=furniture||o.userData?.category==='furniture';
         if(o.isMesh&&!furniture){
-          const g=new THREE.Mesh(o.geometry,material);
-          g.matrixAutoUpdate=false;g.matrix.copy(o.matrixWorld);
-          g.renderOrder=6;g.userData.aoExcluded=true;g.castShadow=false;g.receiveShadow=false;
-          ghost.add(g);
+          for(const [m,order] of [[prepass,5],[material,6]]){
+            const g=new THREE.Mesh(o.geometry,m);
+            g.matrixAutoUpdate=false;g.matrix.copy(o.matrixWorld);
+            g.renderOrder=order;g.userData.aoExcluded=true;g.castShadow=false;g.receiveShadow=false;
+            ghost.add(g);
+          }
         }
         for(const child of o.children)walkGhost(child,furniture);
       };
