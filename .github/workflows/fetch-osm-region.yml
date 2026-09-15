@@ -34,8 +34,9 @@ jobs:
           SIZE=$(wc -c < turkey.osm.pbf)
           echo "turkey.osm.pbf: $SIZE B"
           [ "$SIZE" -gt 200000000 ]   # a real country extract, not an error page
-          # west,south,east,north = centre ± 2.7 km
-          osmium extract --bbox 32.6870,39.8459,32.7504,39.8945 turkey.osm.pbf -o region.osm.pbf
+          # west,south,east,north = centre ± 4.0 km: a widescreen 2 km view
+          # shows ~3.6 km half-width, so the plan must not stop at 2.7
+          osmium extract --bbox 32.6718,39.8342,32.7655,39.9062 turkey.osm.pbf -o region.osm.pbf
           osmium export region.osm.pbf -o region.geojson --geometry-types=linestring,polygon
           jq -c '{fetched:(now|todate),elements:[.features[]
               | (.properties // {}) as $p | (.geometry) as $g

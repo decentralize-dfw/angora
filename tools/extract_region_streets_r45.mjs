@@ -76,7 +76,7 @@ for (const e of raw.elements) {
   }
   if (!e.geometry) continue;
   const pts = flat(e.geometry);
-  if (pts.length < 4 || !within(pts, 2700)) continue;
+  if (pts.length < 4 || !within(pts, 4100)) continue;
   if (tags.highway) {
     const cls = CLASSES.findIndex((rx) => rx.test(tags.highway));
     if (cls >= 0) roads.push([cls, tags.name ?? '', pts]);
