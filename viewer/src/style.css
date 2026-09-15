@@ -168,9 +168,21 @@ h1 strong{font-weight:700}
 /* ----------------------------------------------------------- region map */
 .region-map{position:absolute;inset:0;z-index:8;background:#eef1ec;opacity:0;transform:scale(1.04);transition:opacity 460ms ease,transform 760ms cubic-bezier(.22,.8,.2,1);overflow:hidden;pointer-events:none}
 .region-map.rm-active{opacity:1;transform:scale(1);pointer-events:auto}
-.rm-svg{position:absolute;inset:0;width:100%;height:100%}
+.rm-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .rm-svg>g{transition:transform 950ms cubic-bezier(.22,.8,.2,1)}
 .rm-base{opacity:.5}
+/* the district drawn as a plan: green, buildings, the street hierarchy */
+.rm-green{fill:rgba(107,138,106,.13)}
+.rm-bldg{fill:rgba(22,29,26,.10)}
+.rm-road{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.rm-road-0{stroke:rgba(22,29,26,.34);stroke-width:13}
+.rm-road-1{stroke:rgba(22,29,26,.27);stroke-width:9}
+.rm-road-2{stroke:rgba(22,29,26,.21);stroke-width:5.5}
+.rm-road-3{stroke:rgba(22,29,26,.12);stroke-width:3}
+.rm-bound{fill:rgba(47,81,71,.05);stroke:var(--accent);stroke-width:3;stroke-dasharray:12 8;opacity:.85}
+.rm-dot-label{font-size:26px;fill:rgba(22,29,26,.78);letter-spacing:.02em;
+  paint-order:stroke;stroke:rgba(255,255,255,.88);stroke-width:7px}
+.region-map[data-radius="2000"] .rm-dot-label{font-size:46px;stroke-width:12px}
 .rm-roads{opacity:.85}
 .rm-plot{fill:rgba(47,81,71,.10)}
 .rm-building{fill:rgba(22,29,26,.13)}

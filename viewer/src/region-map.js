@@ -12,6 +12,9 @@
 // glass chips, ink for the subject.
 import plan from './region-plan.json';
 import places from './region-places.json';
+// The whole 2 km drawn as a plan - every road and building around the villa,
+// from OSM via the fetch-osm-region workflow ("2km boyunca planı çiz").
+import streets from './region-streets.json';
 
 const AREAS = [
   { name: 'Angora Evleri', x: 40, y: -195 },
@@ -22,7 +25,8 @@ const GROUP_LABELS = ['Eğitim', 'Sağlık', 'Yeme içme', 'Alışveriş', 'Spor
 const svgNS = 'http://www.w3.org/2000/svg';
 const km = (m) => (m < 950 ? `${m} m` : `${(m / 1000).toFixed(1).replace('.', ',')} km`);
 
-export const atlasMeta = `${places.total} donatı · Atlas ${places.atlas_generated_at} (OSM)`;
+export const atlasMeta = `${places.total} donatı · Atlas ${places.atlas_generated_at}` +
+  (streets.roads.length ? ' · Plan © OpenStreetMap' : ' (OSM)');
 
 export function createRegionMap(host) {
   const el = document.createElement('div');
@@ -47,18 +51,41 @@ export function createRegionMap(host) {
   };
   const poly = (pts) => pts.map(([x, y]) => `${x},${y}`).join(' ');
 
-  // plan layers, meter units. Underneath everything: the derived monochrome
-  // wash of the whole district ("az opasiteli monokrom"), then the
-  // settlement's own drawing on top of it.
-  shape('image', 'rm-base', { href: places.base.png, x: places.base.x, y: places.base.y,
-    width: places.base.w, height: places.base.h, preserveAspectRatio: 'none' });
+  // plan layers, meter units. Underneath everything the district itself,
+  // drawn as a plan: green, buildings, then the street network with the
+  // hierarchy a drawing gives it. The derived monochrome wash only stands
+  // in while no OSM extract has been fetched.
+  const flatPoints = (pts) => {
+    let s = '';
+    for (let i = 0; i < pts.length; i += 2) s += `${pts[i]},${pts[i + 1]} `;
+    return s.trim();
+  };
+  if (streets.roads.length) {
+    for (const g of streets.green) shape('polygon', 'rm-green', { points: flatPoints(g) });
+    for (const b of streets.buildings) shape('polygon', 'rm-bldg', { points: flatPoints(b) });
+    for (const cls of [3, 2, 1, 0]) for (const [c, , pts] of streets.roads) {
+      if (c !== cls) continue;
+      shape('polyline', `rm-road rm-road-${c}`, { points: flatPoints(pts) });
+    }
+    // the settlement's own OSM polygon: Angora Evleri, outlined
+    if (streets.boundary) shape('polygon', 'rm-bound', { points: flatPoints(streets.boundary.ring) });
+  } else {
+    shape('image', 'rm-base', { href: places.base.png, x: places.base.x, y: places.base.y,
+      width: places.base.w, height: places.base.h, preserveAspectRatio: 'none' });
+  }
   shape('image', 'rm-roads', { href: plan.roads.png, x: plan.roads.x, y: plan.roads.y,
     width: plan.roads.w, height: plan.roads.h, preserveAspectRatio: 'none' });
   shape('polygon', 'rm-plot', { points: poly(plan.plot) });
   for (const b of plan.buildings) shape('polygon', 'rm-building', { points: poly(b) });
-  // the atlas's named amenities as a quiet field under the rings
-  for (const [x, y, g] of places.dots)
+  // the atlas's named amenities: every dot carries its own title, in its
+  // group's colour - "hepsinin başlığı gözükmek zorundadır"
+  for (const [x, y, g, name] of places.dots) {
     shape('circle', `rm-dot rm-g${g}`, { cx: x, cy: y, r: 9, fill: places.groups[g] });
+    if (name) {
+      const t = shape('text', `rm-dot-label rm-g${g}`, { x: x + 14, y: y + 10 });
+      t.textContent = name;
+    }
+  }
   for (const r of [500, 1000, 2000]) shape('circle', 'rm-ring', { cx: 0, cy: 0, r, 'vector-effect': 'non-scaling-stroke' });
   shape('circle', 'rm-pulse', { cx: 0, cy: 0, r: 26 });
   shape('polygon', 'rm-villa', { points: poly(plan.villa) });

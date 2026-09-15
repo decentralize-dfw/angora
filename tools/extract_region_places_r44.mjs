@@ -89,7 +89,8 @@ for (const p of named.sort((a, b) => a.distanceM - b.distanceM)) {
   const cell = `${Math.round(x / 30)},${Math.round(y / 30)}`;
   if (cells.has(cell)) continue;
   cells.add(cell);
-  dots.push([x, y, g]);
+  // the name rides along: every dot on the map carries its own title
+  dots.push([x, y, g, p.name]);
 }
 
 // A chip whose category has no dot group (the bus stop, the fuel station)
