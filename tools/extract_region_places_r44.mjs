@@ -79,10 +79,16 @@ const GROUPS = [
   { match: /business_services|finance|culture_tourism|religion|public_civic|animal_pet/, color: '#a2a8a2' },
 ];
 const groupOf = (cat) => GROUPS.findIndex((g) => g.match.test(cat));
+// OSM carries entries no premium map should title: speculative mappings
+// ("Possible Electrician"), abandoned huts, checkpoints, boiler rooms.
+const JUNK_NAME = /possible|olası|potansiyel|abandoned|terk edilmiş|kimlik kontrol|checkpoint|kazan dairesi|bekçi kul/i;
+// map typography: a title longer than a shop sign is truncated, never wrapped
+const displayName = (name) => (name.length > 30 ? name.slice(0, 29).trimEnd() + '…' : name);
 const cells = new Set();
 const dots = [];
 for (const p of named.sort((a, b) => a.distanceM - b.distanceM)) {
   if (p.distanceM > 2600) continue;
+  if (JUNK_NAME.test(p.name)) continue;
   const g = groupOf(p.category);
   if (g < 0) continue;                       // stops, street furniture, bins, parking stay off the map
   const [x, y] = toXY(p);
@@ -90,7 +96,7 @@ for (const p of named.sort((a, b) => a.distanceM - b.distanceM)) {
   if (cells.has(cell)) continue;
   cells.add(cell);
   // the name rides along: every dot on the map carries its own title
-  dots.push([x, y, g, p.name]);
+  dots.push([x, y, g, displayName(p.name)]);
 }
 
 // A chip whose category has no dot group (the bus stop, the fuel station)

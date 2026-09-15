@@ -78,14 +78,19 @@ export function createRegionMap(host) {
   shape('polygon', 'rm-plot', { points: poly(plan.plot) });
   for (const b of plan.buildings) shape('polygon', 'rm-building', { points: poly(b) });
   // the atlas's named amenities: every dot carries its own title, in its
-  // group's colour - "hepsinin başlığı gözükmek zorundadır"
+  // group's colour - "hepsinin başlığı gözükmek zorundadır". Which titles
+  // actually print at a given radius is decided in layout(), where nothing
+  // is allowed to sit on anything else.
+  const dotLabels = [];
   for (const [x, y, g, name] of places.dots) {
     shape('circle', `rm-dot rm-g${g}`, { cx: x, cy: y, r: 9, fill: places.groups[g] });
     if (name) {
       const t = shape('text', `rm-dot-label rm-g${g}`, { x: x + 14, y: y + 10 });
       t.textContent = name;
+      dotLabels.push({ el: t, x, y, g, name, d: Math.hypot(x, y) });
     }
   }
+  dotLabels.sort((a, b) => a.d - b.d);
   for (const r of [500, 1000, 2000]) shape('circle', 'rm-ring', { cx: 0, cy: 0, r, 'vector-effect': 'non-scaling-stroke' });
   shape('circle', 'rm-pulse', { cx: 0, cy: 0, r: 26 });
   shape('polygon', 'rm-villa', { points: poly(plan.villa) });
@@ -224,7 +229,27 @@ export function createRegionMap(host) {
           }
         }
       }
+      // ring, area and villa chips block label space exactly like the
+      // placed landmark chips do - nothing may sit under them either
+      if (!c.el.classList.contains('rm-chip-poi')) {
+        const w = (c.el.offsetWidth || 60) + 8, h = (c.el.offsetHeight || 22) + 6;
+        taken.push({ x: px - w / 2, y: py - h / 2, w, h });
+      }
       c.el.style.transform = `translate(-50%, -50%) translate(${px}px, ${py}px)`;
+    }
+    // dot titles, nearest first: a title prints only where it overlaps
+    // nothing - no chip, no panel, no other title. What cannot sit clear
+    // at this radius waits for a closer one; the 500 m view seats them all.
+    const fs = (radius === 2000 ? 46 : radius === 500 ? 14 : 26) * s;
+    const kept = [];
+    for (const l of dotLabels) {
+      if (off.has(l.g)) { l.el.setAttribute('visibility', 'hidden'); continue; }
+      const lx = cx + (l.x + 14) * s, ly = cy + (l.y + 10) * s;
+      const rect = { x: lx - 2, y: ly - fs * 1.1, w: l.name.length * fs * 0.58 + 4, h: fs * 1.35 };
+      const visible = lx > 0 && ly > 0 && lx + rect.w < vw && ly < vh &&
+        !hits(rect) && !kept.some((t) => rect.x < t.x + t.w && rect.x + rect.w > t.x && rect.y < t.y + t.h && rect.y + rect.h > t.y);
+      l.el.setAttribute('visibility', visible ? 'visible' : 'hidden');
+      if (visible) kept.push(rect);
     }
     el.dataset.radius = radius;
   };
