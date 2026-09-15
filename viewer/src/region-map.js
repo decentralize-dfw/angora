@@ -146,12 +146,13 @@ export function createRegionMap(host) {
       // screens, the whole bottom band on phones where they span edge to edge
       vw < 560 ? { x: 8, y: vh - 276, w: vw - 16, h: 276 } : { x: cx - 170, y: vh - 190, w: 340, h: 190 },
     ];
-    // the intro card and the filter chips are laid out by the stylesheet;
-    // whatever space they actually hold is blocked for the landmark chips
+    // the intro card, the filter chips and the standing chrome (top bar, the
+    // view description) are laid out elsewhere; whatever space they actually
+    // hold is blocked for the landmark chips
     const er = el.getBoundingClientRect();
-    for (const fixed of [info, filters]) {
-      const r = fixed.getBoundingClientRect();
-      if (r.width) taken.push({ x: r.left - er.left - 6, y: r.top - er.top - 6, w: r.width + 12, h: r.height + 12 });
+    for (const fixed of [info, filters, document.querySelector('.topbar'), document.querySelector('.view-description')]) {
+      const r = fixed?.getBoundingClientRect();
+      if (r?.width) taken.push({ x: r.left - er.left - 6, y: r.top - er.top - 6, w: r.width + 12, h: r.height + 12 });
     }
     const hits = (r) => taken.some((t) => r.x < t.x + t.w && r.x + r.w > t.x && r.y < t.y + t.h && r.y + r.h > t.y);
     const order = [...chips].sort((a, b) => (Number(a.el.dataset.distance) || 0) - (Number(b.el.dataset.distance) || 0));
@@ -181,13 +182,19 @@ export function createRegionMap(host) {
           const attempt = (step) => {
             let y = start;
             let rect = { x: px - w / 2, y: y - h / 2, w, h };
-            for (let tries = 0; tries < 26 && hits(rect); tries++) { y += step; rect.y = y - h / 2; }
+            for (let tries = 0; tries < 60 && hits(rect); tries++) { y += step; rect.y = y - h / 2; }
             return { y, ok: !hits({ x: px - w / 2, y: y - h / 2, w, h }) && y > 90 && y < vh - 104 };
           };
           const first = attempt(py >= cy ? 15 : -15);
           const pick = first.ok ? first : attempt(py >= cy ? -15 : 15);
-          py = Math.max(96, Math.min(vh - 110, (pick.ok ? pick : first).y));
-          taken.push({ x: px - w / 2, y: py - h / 2, w, h });
+          // No free lane at all - a phone's bottom band swallowing the walk -
+          // means this chip yields rather than parking over the controls:
+          // "hiçbir yerde çakışma olmayacak" outranks one more label.
+          if (!pick.ok) { c.el.style.opacity = 0; }
+          else {
+            py = Math.max(96, Math.min(vh - 110, pick.y));
+            taken.push({ x: px - w / 2, y: py - h / 2, w, h });
+          }
         }
       }
       c.el.style.transform = `translate(-50%, -50%) translate(${px}px, ${py}px)`;
