@@ -17,6 +17,8 @@ const AREAS = [
   { name: 'Angora Evleri', x: 40, y: -195 },
   { name: 'Beysukent', x: -640, y: -430 },
 ];
+// one label per amenity group, in places.groups order (see the extractor)
+const GROUP_LABELS = ['Eğitim', 'Sağlık', 'Yeme içme', 'Alışveriş', 'Spor · Park', 'Hizmet'];
 const svgNS = 'http://www.w3.org/2000/svg';
 const km = (m) => (m < 950 ? `${m} m` : `${(m / 1000).toFixed(1).replace('.', ',')} km`);
 
@@ -45,19 +47,23 @@ export function createRegionMap(host) {
   };
   const poly = (pts) => pts.map(([x, y]) => `${x},${y}`).join(' ');
 
-  // plan layers, meter units
+  // plan layers, meter units. Underneath everything: the derived monochrome
+  // wash of the whole district ("az opasiteli monokrom"), then the
+  // settlement's own drawing on top of it.
+  shape('image', 'rm-base', { href: places.base.png, x: places.base.x, y: places.base.y,
+    width: places.base.w, height: places.base.h, preserveAspectRatio: 'none' });
   shape('image', 'rm-roads', { href: plan.roads.png, x: plan.roads.x, y: plan.roads.y,
     width: plan.roads.w, height: plan.roads.h, preserveAspectRatio: 'none' });
   shape('polygon', 'rm-plot', { points: poly(plan.plot) });
   for (const b of plan.buildings) shape('polygon', 'rm-building', { points: poly(b) });
   // the atlas's named amenities as a quiet field under the rings
   for (const [x, y, g] of places.dots)
-    shape('circle', 'rm-dot', { cx: x, cy: y, r: 9, fill: places.groups[g] });
+    shape('circle', `rm-dot rm-g${g}`, { cx: x, cy: y, r: 9, fill: places.groups[g] });
   for (const r of [500, 1000, 2000]) shape('circle', 'rm-ring', { cx: 0, cy: 0, r, 'vector-effect': 'non-scaling-stroke' });
   shape('circle', 'rm-pulse', { cx: 0, cy: 0, r: 26 });
   shape('polygon', 'rm-villa', { points: poly(plan.villa) });
   for (const p of places.curated) {
-    if (p.d <= 2000) shape('circle', 'rm-poi', { cx: p.x, cy: p.y, r: 4, 'vector-effect': 'non-scaling-stroke' });
+    if (p.d <= 2000) shape('circle', `rm-poi rm-g${p.g}`, { cx: p.x, cy: p.y, r: 4, 'vector-effect': 'non-scaling-stroke' });
   }
 
   // labels: glass chips in screen space, gliding with the same projection
@@ -78,11 +84,50 @@ export function createRegionMap(host) {
     const c = chip('rm-chip-poi', `${p.name} <b>${km(p.d)}</b>` +
       (p.d > 2000 ? ` <em style="transform:rotate(${bearing.toFixed(0)}deg)">→</em>` : ''), p.x, p.y, p.d > 2000);
     c.dataset.distance = p.d;
+    c.dataset.g = p.g;
   }
   const compass = document.createElement('span');
   compass.className = 'rm-compass';
   compass.innerHTML = '<i>↑</i>K';
   labels.append(compass);
+
+  // The settlement, introduced once and properly, when the Bölge scale opens.
+  // Every distance in it is the atlas's own measurement, not sales copy.
+  const near = Object.fromEntries(places.curated.map((p) => [p.kind, p]));
+  const fact = (label, p) => (p ? `<li><b>${km(p.d)}</b><span>${label}</span></li>` : '');
+  const info = document.createElement('aside');
+  info.className = 'rm-info';
+  info.setAttribute('aria-label', 'Angora Evleri hakkında');
+  info.innerHTML =
+    '<h3>Angora Evleri</h3><p class="rm-info-set">Beysukent · Çankaya, Ankara</p>' +
+    '<p class="rm-info-body">Ankara’nın batı yakasında, Hacettepe Beytepe kampüsünün ' +
+    'yeşiline komşu, alçak yoğunluklu bir villa yerleşkesi. Planlı sokak dokusu ve olgun ' +
+    'bahçeleri gündelik hayatı yerleşke içinde tutar; Eskişehir Yolu ve Bilkent bağlantısı ' +
+    'kenti dakikalar uzağında bırakır.</p>' +
+    '<ul class="rm-info-facts">' + fact('park', near.park) + fact('okul', near.lise) +
+    fact('market', near.market) + fact('eczane', near.eczane) + '</ul>';
+  // Every amenity family is filterable: the chips toggle their group's dots,
+  // accents and labels together ("tüm market avm... hepsinin filtresi").
+  const filters = document.createElement('div');
+  filters.className = 'rm-filters';
+  filters.setAttribute('role', 'group');
+  filters.setAttribute('aria-label', 'Donatı filtreleri');
+  const off = new Set();
+  places.groups.forEach((color, g) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-pressed', 'true');
+    b.innerHTML = `<i style="background:${color}"></i>${GROUP_LABELS[g] ?? 'Diğer'}`;
+    b.onclick = () => {
+      const wasOff = off.has(g);
+      if (wasOff) off.delete(g); else off.add(g);
+      b.setAttribute('aria-pressed', String(wasOff));
+      el.classList.toggle(`rm-off-${g}`, !wasOff);
+      layout();
+    };
+    filters.append(b);
+  });
+  el.append(info, filters);
 
   let radius = 1000;
   const layout = () => {
@@ -97,10 +142,17 @@ export function createRegionMap(host) {
     // from the centre in 15 px steps until it sits free.
     const taken = [
       { x: cx - 60, y: cy - 32, w: 120, h: 58 },                    // villa chip + pulse heart
-      // region panel + scale picker: bottom centre on wide screens, the
-      // whole bottom band on phones where they span nearly edge to edge
-      vw < 560 ? { x: 8, y: vh - 232, w: vw - 16, h: 232 } : { x: cx - 170, y: vh - 190, w: 340, h: 190 },
+      // region panel + scale picker + filter row: bottom centre on wide
+      // screens, the whole bottom band on phones where they span edge to edge
+      vw < 560 ? { x: 8, y: vh - 276, w: vw - 16, h: 276 } : { x: cx - 170, y: vh - 190, w: 340, h: 190 },
     ];
+    // the intro card and the filter chips are laid out by the stylesheet;
+    // whatever space they actually hold is blocked for the landmark chips
+    const er = el.getBoundingClientRect();
+    for (const fixed of [info, filters]) {
+      const r = fixed.getBoundingClientRect();
+      if (r.width) taken.push({ x: r.left - er.left - 6, y: r.top - er.top - 6, w: r.width + 12, h: r.height + 12 });
+    }
     const hits = (r) => taken.some((t) => r.x < t.x + t.w && r.x + r.w > t.x && r.y < t.y + t.h && r.y + r.h > t.y);
     const order = [...chips].sort((a, b) => (Number(a.el.dataset.distance) || 0) - (Number(b.el.dataset.distance) || 0));
     for (const c of order) {
@@ -114,8 +166,10 @@ export function createRegionMap(host) {
       let px = cx + mx * s, py = cy + my * s;
       if (c.el.classList.contains('rm-chip-poi')) {
         // keep landmark chips readable inside narrow viewports; a true-position
-        // chip beyond the chosen radius fades out instead of hiding under chrome
-        const faded = !c.clamp && Number(c.el.dataset.distance) > radius * 1.12;
+        // chip beyond the chosen radius, or one whose group is filtered off,
+        // fades out instead of hiding under chrome
+        const faded = off.has(Number(c.el.dataset.g)) ||
+          (!c.clamp && Number(c.el.dataset.distance) > radius * 1.12);
         c.el.style.opacity = faded ? 0 : 1;
         const w = (c.el.offsetWidth || 168) + 10, h = (c.el.offsetHeight || 26) + 6;
         px = Math.max(w / 2, Math.min(vw - w / 2, px));

@@ -64,6 +64,11 @@ const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
 // at exactly one height, so this plane snaps between "whole" and "basement
 // cut open" instead of lerping and leaving the excavation uncapped mid-flight.
 const earthClip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
+// The storey cut's counterpart: everything the section removes is drawn
+// once more as a white apparition - "çok hayali" - so the cut reads as a
+// drawing convention, not as demolition. Constant mirrors the cut's.
+const ghostClip = new THREE.Plane(new THREE.Vector3(0, 1, 0), -30);
+let ghost = null;
 let flight, hotspots, planMode=false, roomData, interiorLights=true, soilCap=null;
 let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox, contextBox, lighting, siteContext;
 let selected = 'neighborhood', ready = false, loading = false;
@@ -143,6 +148,17 @@ function renderFrame(time) {
       if (t >= 1) {transition = null; renderer.shadowMap.needsUpdate = true;}
     }
     const flying=flight?.update(time);
+    ghostClip.constant=-clip.constant;
+    if(ghost){
+      const material=ghost.userData.material;
+      // "yüzde 60 opasiteli beyaz" on the perspective cut only; the plan /
+      // isometric drawing stays clean of it ("izometrik modda olmasın").
+      const target=!walk?.active&&!planMode&&selected.startsWith('f')?0.6:0;
+      const dt=Math.min(0.1,(time-(ghost.userData.time??time))/1000);ghost.userData.time=time;
+      const next=THREE.MathUtils.damp(material.opacity,target,5,dt);
+      if(Math.abs(next-material.opacity)>0.0005){material.opacity=next;invalidate();}
+      ghost.visible=material.opacity>0.01&&clip.constant<fullHeight-0.001;
+    }
     caps?.update(clip.constant, clip.constant < fullHeight - 0.001);
     soilCap?.update(earthClip.constant, earthClip.constant < fullHeight - 0.001 && groups.has('context'));
     const changing=walk?.active?walk.update(time,renderer.xr.getSession()):flying?false:controls.update();
@@ -183,16 +199,29 @@ function resize() {
 function frame(initial=false,keep=false) {
   if(!buildingBox)return;
   const floor=selected.startsWith('f'),aspect=host.clientWidth/Math.max(1,host.clientHeight);
-  let box=buildingBox.clone();if(selected==='building'||selected==='f0')box.union(gardenBox);
+  // "villa modunda binayı ortala, arsayı değil": the frame centres on the
+  // house itself. Narrow screens must still fit house AND plot together, so
+  // there the span measures the plot's farthest reach from the house centre.
+  let box=buildingBox.clone();if(selected==='f0')box.union(gardenBox);
   const center=box.getCenter(new THREE.Vector3());center.y=floor?[0,3.0996,6.3714,9.4705][Number(selected[1])]:2;
   let size=box.getSize(new THREE.Vector3());
+  if(selected==='building'){
+    const compact=matchMedia('(pointer: coarse)').matches||aspect<0.9;
+    if(compact&&gardenBox){
+      const plot=buildingBox.clone().union(gardenBox);
+      size.set(2*Math.max(center.x-plot.min.x,plot.max.x-center.x),size.y,
+               2*Math.max(center.z-plot.min.z,plot.max.z-center.z));
+    } else size.multiplyScalar(1.18);
+  }
   if(selected==='neighborhood'){size.set(66,21,70);center.set(0,3,-5);}
   if(selected==='region'&&contextBox){size=contextBox.getSize(new THREE.Vector3());center.copy(contextBox.getCenter(new THREE.Vector3()));}
-  const polar=planMode?.12:selected==='region'?.58:floor?.56:.78;
+  // Plan is a drawing, not a view: straight down, north up, no perspective
+  // worth the name (the 4-degree lens is set alongside planMode).
+  const polar=planMode?.02:selected==='region'?.58:floor?.56:.78;
   frameSpan=Math.max(size.z*Math.cos(polar)+size.y*Math.sin(polar),size.x/aspect)*(floor?1.17:1.14);
   if(selected==='region'&&contextBox)frameSpan=fitContextBounds(contextBox,aspect,polar).span;
   if(keep){center.copy(controls.target);if(floor)center.y=[0,3.0996,6.3714,9.4705][Number(selected[1])];frameSpan=camera.position.distanceTo(controls.target)*2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2));}
-  flight.go({target:center,polar,span:frameSpan,zoom:keep?camera.zoom:1,azimuth:selected==='region'?0:initial?.804:undefined},initial===true);
+  flight.go({target:center,polar,span:frameSpan,zoom:keep?camera.zoom:1,azimuth:selected==='region'||planMode?0:initial?.804:undefined},initial===true);
   resize();
 }
 function panel(id,open) {
@@ -317,7 +346,7 @@ function selectView(id, initial = false) {
   // frame pulls out beneath it, so the model leaves smoothly either way.
   if (id==='region') {
     regionMap ??= createRegionMap($('#app'));
-    if (initial) regionMap.show(); else setTimeout(()=>regionMap.show(), 430);
+    if (initial) regionMap.show(); else setTimeout(()=>regionMap.show(), 180);
   } else regionMap?.hide();
   panel('',false);
   if (!ready) return;
@@ -366,6 +395,7 @@ function exitWalk(reselect = true) {
   lift?.setWalkActive(false);lift?.cancel();refreshLiftControl();
   $('.camera-tools').hidden=false;$('#walk-tools').hidden=true;$('#enter-walk').hidden=false;
   planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);
+  camera.fov=35;camera.updateProjectionMatrix();controls.enableRotate=true;$('#rotate-mode').disabled=false;
   if(reselect){selectView(selected);frame(false);}
   $('#gesture-help').textContent='Sürükle: döndür · İki parmak: kaydır / yakınlaştır';
 }
@@ -529,6 +559,27 @@ async function loadModel() {
       }
       plantingCandidates.length=0;
     }
+    {
+      // the ghost of the cut-away storeys: the villa's architecture (never
+      // the furniture) re-drawn above the section plane in translucent white
+      const material=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0,
+        depthWrite:false,side:THREE.DoubleSide,clippingPlanes:[ghostClip]});
+      ghost=new THREE.Group();ghost.name='Ghost above the cut';ghost.visible=false;
+      ghost.userData={material};
+      const villaGroup=groups.get('villa');villaGroup.updateMatrixWorld(true);
+      const walkGhost=(o,furniture)=>{
+        furniture=furniture||o.userData?.category==='furniture';
+        if(o.isMesh&&!furniture){
+          const g=new THREE.Mesh(o.geometry,material);
+          g.matrixAutoUpdate=false;g.matrix.copy(o.matrixWorld);
+          g.renderOrder=6;g.userData.aoExcluded=true;g.castShadow=false;g.receiveShadow=false;
+          ghost.add(g);
+        }
+        for(const child of o.children)walkGhost(child,furniture);
+      };
+      walkGhost(villaGroup,false);
+      scene.add(ghost);
+    }
     buildingBox = new THREE.Box3().setFromObject(groups.get('villa'));
     // Keep the entrance, pool terrace and basement garden in the building frame.
     gardenBox = new THREE.Box3(new THREE.Vector3(-10.2, -4, -29.1), new THREE.Vector3(12.5, 3.4, 11));
@@ -604,11 +655,40 @@ async function loadModel() {
     // that first shows it: four heights, four slices, and the allocation and
     // the triangulation upload are behind us.
     for (const view of ['f0','f1','f2','f3']) caps.update(sectionHeight(view, fullHeight), true);
+    // "bastığım zaman anında kullanabileyim": every storey changes the set of
+    // live lights, and a changed light set means recompiled shaders - the
+    // freeze the floor buttons used to carry. So while the boot screen is
+    // still up, each state is rendered once: every program, shadow pass and
+    // cap the floor buttons can ever ask for is already warm.
+    message('Görünümler hazırlanıyor…');
+    await new Promise(resolve=>setTimeout(resolve,0));
+    for (const id of ['building','f3','f2','f1','f0']) {
+      clip.constant=sectionHeight(id,fullHeight);
+      ghostClip.constant=-clip.constant;
+      earthClip.constant=id==='f0'?SOIL_CUT_HEIGHT:fullHeight;
+      caps?.update(clip.constant,clip.constant<fullHeight-0.001);
+      soilCap?.update(earthClip.constant,earthClip.constant<fullHeight-0.001&&groups.has('context'));
+      lighting.frame(id,contextBox);massing?.set(id);
+      lighting.interior(id.startsWith('f')?Number(id[1]):null,null);
+      if(ghost){ghost.visible=id.startsWith('f');ghost.userData.material.opacity=ghost.visible?0.5:0;}
+      renderer.shadowMap.needsUpdate=true;
+      lighting.render(camera);
+      await new Promise(resolve=>setTimeout(resolve,0));
+    }
+    if(ghost){ghost.visible=false;ghost.userData.material.opacity=0;}
     selectView(selected, true);
     // One composed frame before the bar goes: the occlusion, antialias, bloom,
     // grade and dither passes compile on their first use like anything else.
     lighting.render(camera);
     status.hidden = true;
+    // the boot screen has done its real work; the interface fades in behind it
+    const boot=$('#boot');
+    if(boot){
+      $('#app').append($('#load-status'));
+      boot.classList.add('boot-done');
+      setTimeout(()=>boot.remove(),720);
+    }
+    delete $('#app').dataset.booting;
   } catch (error) {
     for (const group of staged.values()) {scene.remove(group); dispose(group);}
     groups.clear();
@@ -623,6 +703,17 @@ function zoom(factor){
   if(!ready)return;
   camera.zoom=THREE.MathUtils.clamp(camera.zoom*factor,controls.minZoom,controls.maxZoom);
   camera.updateProjectionMatrix();invalidate();
+}
+// Plan mode is a drawing: a 4-degree lens from far above kills the
+// perspective, the compass snaps north-up, and rotation is refused so
+// nothing can go crooked. Leaving it hands the walking lens back.
+function setPlanMode(on){
+  planMode=on;$('#toggle-plan').setAttribute('aria-pressed',on);
+  camera.fov=on?4:35;camera.updateProjectionMatrix();
+  controls.enableRotate=!on;
+  $('#rotate-mode').disabled=on;
+  if(on)mode(true);
+  frame(false);
 }
 function mode(pan) {
   controls.touches.ONE = pan ? THREE.TOUCH.PAN : THREE.TOUCH.ROTATE;
@@ -650,7 +741,7 @@ function bindInterface() {
   $('#rotate-mode').onclick = () => mode(false); $('#pan-mode').onclick = () => mode(true);
   $('#zoom-in').onclick=()=>zoom(1.3);
   $('#zoom-out').onclick=()=>zoom(1/1.3);
-  $('#reset-view').onclick=()=>{planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);frame(false);}; $('#retry').onclick = loadModel;
+  $('#reset-view').onclick=()=>setPlanMode(false); $('#retry').onclick = loadModel;
   $('#lift-call').onclick=()=>{if(lift?.run(performance.now())){refreshLiftControl();invalidate();}};
   $('#toggle-furniture').onclick = () => setFurnitureVisible(!furnitureVisible);
   $('#toggle-rooms').onclick = () => {
@@ -661,7 +752,7 @@ function bindInterface() {
   };
   $('#enter-walk').onclick=()=>enterWalk();$('#exit-walk').onclick=()=>exitWalk();
   $('#walk-room').onchange=event=>travelRoom(event.target.value);
-  $('#toggle-plan').onclick=()=>{planMode=!planMode;$('#toggle-plan').setAttribute('aria-pressed',planMode);frame(false,true);};
+  $('#toggle-plan').onclick=()=>setPlanMode(!planMode);
   $('#open-options').onclick=()=>panel('options-panel',$('#options-panel').hidden);
   $('#open-info').onclick=()=>panel('info-panel',$('#info-panel').hidden);
   document.querySelectorAll('[data-close-panel]').forEach(button=>button.onclick=()=>panel('',false));

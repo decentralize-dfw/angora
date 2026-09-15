@@ -96,6 +96,9 @@ h1 strong{font-weight:700}
 .walk-launch:not(:disabled):hover{background:#000}
 .walk-launch span{margin-left:8px}
 #app[data-scale=region] .explore-dock{display:none}
+/* Katlar villaya aittir: the floor row appears only once the Villa scale is
+   chosen (data-scale building/floor); street and region keep a clean dock. */
+#app[data-scale=neighborhood] .floor-row{display:none}
 
 /* --------------------------------------------------------- gesture help */
 .gesture-help{bottom:max(22px,env(safe-area-inset-bottom));left:22px;right:auto;margin:0;pointer-events:none;font-size:10.5px;color:var(--muted);border-radius:999px;padding:7px 12px;width:max-content;max-width:min(340px,calc(100vw - 44px))}
@@ -162,17 +165,22 @@ h1 strong{font-weight:700}
 #return-villa:not(:disabled):hover{background:#000}
 
 /* ----------------------------------------------------------- region map */
-.region-map{position:absolute;inset:0;z-index:8;background:#eef1ec;opacity:0;transition:opacity 680ms ease;overflow:hidden;pointer-events:none}
-.region-map.rm-active{opacity:1;pointer-events:auto}
+.region-map{position:absolute;inset:0;z-index:8;background:#eef1ec;opacity:0;transform:scale(1.04);transition:opacity 460ms ease,transform 760ms cubic-bezier(.22,.8,.2,1);overflow:hidden;pointer-events:none}
+.region-map.rm-active{opacity:1;transform:scale(1);pointer-events:auto}
 .rm-svg{position:absolute;inset:0;width:100%;height:100%}
 .rm-svg>g{transition:transform 950ms cubic-bezier(.22,.8,.2,1)}
+.rm-base{opacity:.5}
 .rm-roads{opacity:.85}
 .rm-plot{fill:rgba(47,81,71,.10)}
 .rm-building{fill:rgba(22,29,26,.13)}
 .rm-villa{fill:var(--ink)}
 .rm-ring{fill:none;stroke:rgba(22,29,26,.22);stroke-width:1;stroke-dasharray:1 6;stroke-linecap:round}
-.rm-poi{fill:var(--accent);stroke:#fff;stroke-width:1.5}
-.rm-dot{opacity:.5}
+.rm-poi{stroke:#fff;stroke-width:1.5;transition:opacity 400ms ease}
+.rm-poi.rm-g0{fill:#6c86a6}.rm-poi.rm-g1{fill:#b27b89}.rm-poi.rm-g2{fill:#b3924f}
+.rm-poi.rm-g3{fill:#a08a50}.rm-poi.rm-g4{fill:#74996f}.rm-poi.rm-g5{fill:#84918a}
+.rm-dot{opacity:.5;transition:opacity 400ms ease}
+.rm-off-0 .rm-g0,.rm-off-1 .rm-g1,.rm-off-2 .rm-g2,
+.rm-off-3 .rm-g3,.rm-off-4 .rm-g4,.rm-off-5 .rm-g5{opacity:0;pointer-events:none}
 .rm-pulse{fill:none;stroke:rgba(22,29,26,.35);stroke-width:1;animation:rm-pulse 2.6s ease-out infinite}
 @keyframes rm-pulse{0%{r:14;opacity:.7}70%{r:46;opacity:0}100%{r:46;opacity:0}}
 .rm-labels{position:absolute;inset:0}
@@ -185,6 +193,22 @@ h1 strong{font-weight:700}
 .rm-chip-area{background:transparent;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:rgba(22,29,26,.42);font-size:10px;letter-spacing:.26em;text-transform:uppercase;font-weight:600}
 .rm-compass{position:absolute;right:22px;top:84px;display:grid;place-items:center;width:44px;height:44px;border-radius:999px;background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);font-size:11px;font-weight:700;color:var(--ink);line-height:1}
 .rm-compass i{font-style:normal;font-size:13px;margin-bottom:-2px}
+/* the settlement's introduction, shown with the Bölge scale */
+.rm-info{position:absolute;left:22px;top:152px;width:302px;max-width:calc(100vw - 44px);border-radius:18px;padding:15px 18px 14px;background:var(--glass-strong);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:var(--shadow-soft);z-index:2}
+.rm-info h3{margin:0;font-size:15px;font-weight:700;letter-spacing:.02em}
+.rm-info-set{margin:3px 0 10px;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.rm-info-body{margin:0;font-size:12px;line-height:1.66;color:#2c3833}
+.rm-info-facts{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:7px 14px;padding:11px 0 0;margin:12px 0 0;border-top:1px solid var(--line)}
+.rm-info-facts li{display:flex;align-items:baseline;gap:6px;font-size:11px;color:var(--muted)}
+.rm-info-facts b{font-size:13.5px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+/* one filter per amenity family; pressed = shown */
+.rm-filters{position:absolute;left:22px;bottom:max(22px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:flex-start;gap:5px;z-index:2}
+.rm-filters button{display:flex;align-items:center;gap:8px;min-height:34px;padding:0 15px 0 11px;border-radius:999px;font-size:11.5px;font-weight:600;background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:0 2px 10px #1b322514}
+.rm-filters button i{width:9px;height:9px;border-radius:50%;box-shadow:0 0 0 1.5px #fff;flex-shrink:0}
+.rm-filters button[aria-pressed=true]{background:var(--glass);color:var(--ink)}
+.rm-filters button:hover{background:var(--glass-hover)}
+.rm-filters button[aria-pressed=false]{background:rgba(255,255,255,.14);color:var(--muted);box-shadow:none}
+.rm-filters button[aria-pressed=false] i{opacity:.3}
 #app[data-scale=region] .side-tools,#app[data-scale=region] .model-scale,#app[data-scale=region] .gesture-help{display:none}
 .model-scale{position:absolute;z-index:7;right:22px;bottom:max(22px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:5px;pointer-events:none;font-size:11px;color:var(--ink)}
 .model-scale span{border-radius:999px;padding:3px 10px}
@@ -231,9 +255,26 @@ h1 strong{font-weight:700}
 .load-bar i{display:block;height:100%;width:0;border-radius:2px;background:var(--accent);transition:width .3s ease}
 .error .load-bar,.error #load-percent{display:none}
 
+/* ----------------------------------------------------------------- boot */
+/* A real opening: full paper, the mark, the genuine progress bar, and no
+   other chrome until the whole scene is staged and prewarmed. */
+#boot{position:absolute;inset:0;z-index:80;display:grid;justify-items:center;align-content:center;gap:30px;background:radial-gradient(circle at 50% 36%,#f3f6f2 0,#e6ebe8 78%);transition:opacity 700ms ease}
+#boot .boot-brand{display:flex;align-items:center;gap:14px}
+#boot .brand{font-size:14px;letter-spacing:.34em}
+#boot .brand-divider{height:18px}
+.boot-title{font-size:21px;font-weight:500;letter-spacing:.02em}
+.boot-title strong{font-weight:700}
+#boot .load-status{position:static;transform:none;bottom:auto;left:auto}
+.boot-note{margin:0;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+#boot.boot-done{opacity:0;pointer-events:none}
+.topbar,.scale-picker,.view-description,.side-tools,.explore-dock,
+.region-panel,.model-scale,.gesture-help{transition:opacity 600ms ease}
+#app[data-booting=true] :is(.topbar,.scale-picker,.view-description,.side-tools,
+.explore-dock,.region-panel,.model-scale,.gesture-help,.panel){opacity:0;pointer-events:none}
+
 /* ------------------------------------------------------------ transition */
 #cloud-transition{position:absolute;inset:-20%;z-index:18;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 20% 50%,#fff 0,transparent 55%),radial-gradient(ellipse at 80% 45%,#ffffffed 0,transparent 55%);filter:blur(22px)}
-#cloud-transition.travel{animation:cloud-travel 1250ms ease-in-out}
+#cloud-transition.travel{animation:cloud-travel 950ms ease-in-out}
 @keyframes cloud-travel{0%,100%{opacity:0;transform:scale(1.2)}42%{opacity:.88;transform:scale(1)}70%{opacity:.5;transform:scale(.95)}}
 
 /* --------------------------------------------------------------- mobile */
@@ -244,8 +285,10 @@ h1 strong{font-weight:700}
   h1{font-size:15px}
   .brand-divider{height:13px}
   .quiet-button{font-size:12px;min-height:40px;padding:0 13px}
-  .scale-picker{top:auto;bottom:max(114px,calc(env(safe-area-inset-bottom) + 102px));left:50%;padding:3px}
-  #app[data-scale=region] .scale-picker{bottom:max(170px,calc(env(safe-area-inset-bottom) + 158px))}
+  .scale-picker{top:auto;bottom:max(108px,calc(env(safe-area-inset-bottom) + 96px));left:50%;padding:3px}
+  /* the dock is a single walk button outside the Villa scale */
+  #app[data-scale=neighborhood] .scale-picker{bottom:max(68px,calc(env(safe-area-inset-bottom) + 56px))}
+  #app[data-scale=region] .scale-picker{bottom:max(128px,calc(env(safe-area-inset-bottom) + 116px))}
   .region-panel{bottom:max(14px,env(safe-area-inset-bottom));gap:6px}
   .scale-picker button{min-height:36px;font-size:12px;padding:0 13px}
   .view-description{top:66px;left:12px;max-width:66%;padding:7px 11px}
@@ -265,6 +308,14 @@ h1 strong{font-weight:700}
   .rm-chip{font-size:10px;padding:3px 9px}
   .rm-chip-villa{font-size:11px;padding:5px 12px}
   .rm-compass{width:38px;height:38px;right:12px;top:76px}
+  .rm-info{left:12px;top:114px;width:236px;padding:11px 13px 10px}
+  .rm-info h3{font-size:13px}
+  .rm-info-body{font-size:10.5px;line-height:1.55}
+  .rm-info-facts{gap:5px 10px;padding-top:8px;margin-top:9px}
+  .rm-info-facts b{font-size:12px}
+  .rm-filters{left:12px;right:12px;bottom:max(176px,calc(env(safe-area-inset-bottom) + 164px));flex-direction:row;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+  .rm-filters::-webkit-scrollbar{display:none}
+  .rm-filters button{min-height:30px;font-size:10.5px;padding:0 11px 0 8px;flex:0 0 auto;gap:6px}
   .walk-close{right:12px;top:max(12px,env(safe-area-inset-top))}
   .walk-room-panel{left:12px;transform:none;bottom:max(14px,env(safe-area-inset-bottom));min-width:0;max-width:calc(100% - 190px);padding:9px 12px}
   .walk-pad{right:12px;bottom:max(14px,env(safe-area-inset-bottom));grid-template-columns:repeat(3,44px);grid-template-rows:repeat(2,44px);gap:4px}

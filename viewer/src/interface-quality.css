@@ -40,6 +40,31 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
   .identity {gap:7px;}
   .scale-picker button {padding:0 9px;}
 }
+/* R45 phones: "butonlar çok büyük duruyor" — the 44 px floors above are a
+   pointer-device guarantee; on phone widths every control drops to a tighter
+   30-42 px grid so the chrome stops crowding the scene, and the per-scale
+   offsets in style.css keep every state overlap-free. */
+@media(max-width:720px) {
+  .quiet-button {min-height:36px;min-width:36px;font-size:11.5px;padding:0 12px;}
+  .scale-picker button {min-height:34px;min-width:36px;font-size:11.5px;padding:0 12px;}
+  .floor-row button {min-height:34px;min-width:36px;font-size:11.5px;}
+  .walk-launch {min-height:36px;min-width:36px;font-size:12px;}
+  .region-panel button {min-height:36px;min-width:36px;font-size:12px;padding:7px 15px;}
+  .region-radius button {min-height:30px;min-width:52px;font-size:11.5px;}
+  .side-tools {padding:5px;gap:4px;}
+  .side-tools button {width:36px;height:36px;}
+  #zoom-in,#zoom-out,#reset-view {font-size:17px;}
+  #toggle-plan {font-size:11px;}
+  .rail-divider {width:18px;}
+  .panel-heading button {width:34px;height:34px;font-size:17px;}
+  .scene-options button {min-height:38px;font-size:12px;}
+  .daylight-footer select,.daylight-footer button,.lighting-choice select {min-height:36px;font-size:12px;}
+  .site-label-villa {min-height:38px;min-width:80px;font-size:12px;padding:7px 13px;}
+  .walk-pad {grid-template-columns:repeat(3,42px);grid-template-rows:repeat(2,42px);}
+  .walk-pad button {min-width:42px;min-height:42px;font-size:17px;}
+  .walk-close {width:40px;height:40px;font-size:20px;}
+  h1 {font-size:14px;}
+}
 @media(orientation:landscape) and (max-height:520px) {
   .topbar {top:max(8px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));}
   .scale-picker {top:max(8px,env(safe-area-inset-top));bottom:auto;}

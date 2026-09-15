@@ -130,7 +130,15 @@ export function createAnnotations(data,host,onRoom) {
     // span before it gives up a registered one.
     candidates.sort((a,b)=>Number(a.entry.measured)-Number(b.entry.measured));
     const placed=layoutAnchoredLabels(candidates,{width:w,height:h,obstacles});
-    for(const item of candidates)item.entry.el.hidden=true;
-    for(const {entry,x,y} of placed){entry.el.hidden=false;entry.el.style.left=`${x}px`;entry.el.style.top=`${y}px`;}
+    // "yakınlık parametresi olmaksızın": with Ölçüler on, every span of the
+    // floor stays readable at any zoom. The solver still declutters what it
+    // can; what it cannot place sits on its own anchor instead of vanishing.
+    const solved=new Map(placed.map(p=>[p.entry,p]));
+    for(const item of candidates){
+      const p=solved.get(item.entry);
+      item.entry.el.hidden=false;
+      item.entry.el.style.left=`${(p??item).x}px`;
+      item.entry.el.style.top=`${(p??item).y}px`;
+    }
   },dispose(){overlay.remove();group.traverse(o=>o.geometry?.dispose());material.dispose();measuredMaterial.dispose();}};
 }

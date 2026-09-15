@@ -9,6 +9,7 @@
 //   - thins the named amenities into a quiet dot field,
 // and writes viewer/src/region-places.json for region-map.js.
 import { readFileSync, writeFileSync } from 'node:fs';
+import sharp from 'sharp';
 
 const ROOT = '/home/user/angora';
 const html = readFileSync(ROOT + '/uzakolcek.html', 'utf8');
@@ -47,7 +48,10 @@ const NEEDS = [
   { key: 'banka', category: 'finance', subtypes: ['bank'] },
   { key: 'hastane', category: 'health', subtypes: ['hospital'] },
 ];
-const named = pois.filter((p) => p.tier === 'named_place' && p.name && !p.possibleDuplicate);
+// Private pools and gardens surfaced as leisure amenities in OSM; a
+// neighbour's pool is nobody's donatı ("milletin evinin havuzu").
+const PRIVATE_LEISURE = new Set(['swimming_pool', 'garden']);
+const named = pois.filter((p) => p.tier === 'named_place' && p.name && !p.possibleDuplicate && !PRIVATE_LEISURE.has(p.subtype));
 const used = new Set();
 const curated = [];
 for (const need of NEEDS) {
@@ -60,7 +64,7 @@ for (const need of NEEDS) {
   const [x, y] = toXY(pick);
   curated.push({
     name: (need.prefix || '') + pick.name,
-    kind: need.key, category: pick.category,
+    kind: need.key, category: pick.category, g: -1,   // group filled below
     d: Math.round(pick.distanceM), x, y,
   });
 }
@@ -88,6 +92,40 @@ for (const p of named.sort((a, b) => a.distanceM - b.distanceM)) {
   dots.push([x, y, g]);
 }
 
+for (const c of curated) c.g = Math.max(0, groupOf(c.category));
+
+// ------------------------------------------------------------- base wash
+// No street data is reachable from this environment, so the monochrome
+// base under the rings is derived honestly from the atlas itself: a soft
+// density wash plus a fine stipple of every amenity point - bus stops,
+// parking and street furniture trace the street fabric on their own.
+const B = { half: 2600, px: 768 };
+const scalePx = B.px / (2 * B.half);
+const acc = new Float32Array(B.px * B.px);
+const stamp = (x, y, sigma, weight) => {
+  const cx = (x + B.half) * scalePx, cy = (y + B.half) * scalePx;
+  const r = Math.ceil(sigma * 2.5);
+  for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) {
+    const px = Math.round(cx + dx), py = Math.round(cy + dy);
+    if (px < 0 || py < 0 || px >= B.px || py >= B.px) continue;
+    acc[py * B.px + px] += weight * Math.exp(-(dx * dx + dy * dy) / (2 * sigma * sigma));
+  }
+};
+for (const p of pois) {
+  if (PRIVATE_LEISURE.has(p.subtype) || p.distanceM > 2600) continue;
+  const [x, y] = toXY(p);
+  stamp(x, y, p.tier === 'named_place' ? 2.2 : 1.6, p.tier === 'micro_infrastructure' ? 0.5 : 1);
+  stamp(x, y, 0.7, 2.2);        // the stipple grain on top of the wash
+}
+const raw = Buffer.alloc(B.px * B.px * 4);
+const INK = [92, 102, 97];
+for (let i = 0; i < acc.length; i++) {
+  const a = Math.min(1, acc[i] / 2.6) * 0.55;
+  raw[i * 4] = INK[0]; raw[i * 4 + 1] = INK[1]; raw[i * 4 + 2] = INK[2];
+  raw[i * 4 + 3] = Math.round(a * 255);
+}
+const basePng = await sharp(raw, { raw: { width: B.px, height: B.px, channels: 4 } }).png({ compressionLevel: 9 }).toBuffer();
+
 const out = {
   generated_for: 'R44 region map',
   source: 'uzakolcek.html · Hatırlı Sokak No:10 Kentsel Donatı Atlası (OSM + Google/Yandex)',
@@ -99,7 +137,8 @@ const out = {
   groups: GROUPS.map((g) => g.color),
   curated,
   dots,
+  base: { png: 'data:image/png;base64,' + basePng.toString('base64'), x: -B.half, y: -B.half, w: 2 * B.half, h: 2 * B.half },
 };
 writeFileSync(ROOT + '/viewer/src/region-places.json', JSON.stringify(out));
-console.log(`region-places.json: ${curated.length} chips, ${dots.length} dots, centre ${center.lat},${center.lon}`);
+console.log(`region-places.json: ${curated.length} chips, ${dots.length} dots, base ${(basePng.length/1024).toFixed(0)} KB, centre ${center.lat},${center.lon}`);
 for (const c of curated) console.log(`  ${c.kind}: ${c.name} (${c.d} m)`);
