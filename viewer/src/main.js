@@ -662,6 +662,13 @@ async function loadModel() {
     // cap the floor buttons can ever ask for is already warm.
     message('Görünümler hazırlanıyor…');
     await new Promise(resolve=>setTimeout(resolve,0));
+    // A warming render frustum-culls, and compile() gathers a light set no
+    // real view uses - both leave programs for the first real floor click.
+    // So culling is switched off for these five renders: every mesh passes
+    // through the program path against each state's true lights. The boot
+    // screen covers the canvas, so nothing of this is seen.
+    const culled=[];
+    scene.traverse(o=>{if(o.isMesh&&o.frustumCulled){o.frustumCulled=false;culled.push(o);}});
     for (const id of ['building','f3','f2','f1','f0']) {
       clip.constant=sectionHeight(id,fullHeight);
       ghostClip.constant=-clip.constant;
@@ -672,17 +679,10 @@ async function loadModel() {
       lighting.interior(id.startsWith('f')?Number(id[1]):null,null);
       if(ghost){ghost.visible=id.startsWith('f');ghost.userData.material.opacity=ghost.visible?0.5:0;}
       renderer.shadowMap.needsUpdate=true;
-      // A render alone is not enough: it frustum-culls, so whatever the boot
-      // camera does not see is compiled later, on the first real visit - the
-      // exact freeze this loop exists to prevent. Compile the whole scene
-      // against THIS floor's light set, then render to warm the passes.
-      try {
-        if (renderer.compileAsync) await renderer.compileAsync(scene, camera);
-        else renderer.compile(scene, camera);
-      } catch (error) {console.warn('Prewarm compile skipped', error);}
       lighting.render(camera);
       await new Promise(resolve=>setTimeout(resolve,0));
     }
+    for(const o of culled)o.frustumCulled=true;
     if(ghost){ghost.visible=false;ghost.userData.material.opacity=0;}
     selectView(selected, true);
     // One composed frame before the bar goes: the occlusion, antialias, bloom,
