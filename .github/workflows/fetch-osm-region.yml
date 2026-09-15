@@ -20,47 +20,35 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: claude/sweet-thompson-amqghq
-      - name: Query Overpass
+      - name: Extract from Geofabrik with osmium
         run: |
           set -euo pipefail
-          # One combined query 504'd on the main endpoint and came back empty
-          # from the fallback, so the load is split - streets and landuse in
-          # one request, the heavy building set in another - and an endpoint
-          # only counts when it actually returns elements.
-          fetch() {
-            local q="$1" out="$2" n ep code
-            for ep in https://overpass-api.de/api/interpreter \
-                      https://overpass.kumi.systems/api/interpreter \
-                      https://overpass.private.coffee/api/interpreter \
-                      https://overpass.osm.ch/api/interpreter; do
-              echo "-> $ep"
-              code=$(curl -sS -m 200 -w '%{http_code}' --data-urlencode "data=$q" "$ep" -o "$out" || echo 000)
-              n=$(jq '.elements|length' "$out" 2>/dev/null || echo 0)
-              echo "   http $code, elements: $n"
-              [ "$n" -gt 0 ] && return 0
-              head -c 400 "$out" 2>/dev/null; echo
-              sleep 20
-            done
-            echo "no endpoint returned elements for this query"; return 1
-          }
-          # bbox filters are far cheaper than around(); the converter clips
-          # to the 2.7 km circle afterwards. Box = centre ± 2.7 km.
-          BOX='[bbox:39.8459,32.6870,39.8945,32.7504]'
-          ROADS="[out:json][timeout:120]$BOX;way[\"highway\"~\"^(motorway|trunk|primary|secondary|tertiary|unclassified|residential|living_street|pedestrian|service|track)\"];out geom;"
-          LAND="[out:json][timeout:120]$BOX;(way[\"landuse\"];way[\"leisure\"~\"^(park|pitch|garden|playground)$\"];way[\"name\"~\"Angora\",i];relation[\"name\"~\"Angora\",i];);out geom;"
-          BUILDINGS="[out:json][timeout:120]$BOX;way[\"building\"];out geom;"
-          fetch "$ROADS" roads.json
-          fetch "$LAND" land.json
-          fetch "$BUILDINGS" buildings.json
-          jq -c -s '{fetched:(now|todate),elements:[(.[0].elements[],.[1].elements[],.[2].elements[])|{
-              t:.type,
-              tags:((.tags//{})|{highway,building,landuse,leisure,name,place,boundary}|with_entries(select(.value!=null))),
-              geometry:(.geometry//null),
-              members:(if .members then [.members[]|{role,geometry:(.geometry//null)}] else null end)
-            }]}' roads.json land.json buildings.json > trimmed.json
+          # Public Overpass instances refuse GitHub runner traffic (instant
+          # 406 from the main server, 504s from the mirrors, and the last
+          # mirror only serves Switzerland). So no API at all: download the
+          # Geofabrik Turkey extract and cut the villa's box locally.
+          sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool jq
+          curl -sS --fail --retry 3 -o turkey.osm.pbf https://download.geofabrik.de/europe/turkey-latest.osm.pbf
+          echo "turkey.osm.pbf: $(wc -c < turkey.osm.pbf) B"
+          # west,south,east,north = centre ± 2.7 km
+          osmium extract --bbox 32.6870,39.8459,32.7504,39.8945 turkey.osm.pbf -o region.osm.pbf
+          osmium export region.osm.pbf -o region.geojson --geometry-types=linestring,polygon
+          jq -c '{fetched:(now|todate),elements:[.features[]
+              | (.properties // {}) as $p | (.geometry) as $g
+              | ({highway:$p.highway,building:$p.building,landuse:$p.landuse,leisure:$p.leisure,
+                  name:$p.name,place:$p.place,boundary:$p.boundary}
+                 | with_entries(select(.value!=null))) as $t
+              | select(($t|length)>0)
+              | if $g.type=="LineString" then {t:"way",tags:$t,geometry:[$g.coordinates[]|{lon:.[0],lat:.[1]}]}
+                elif $g.type=="Polygon" then {t:"way",tags:$t,geometry:[$g.coordinates[0][]|{lon:.[0],lat:.[1]}]}
+                elif $g.type=="MultiPolygon" then {t:"relation",tags:$t,
+                  members:[$g.coordinates[]|{role:"outer",geometry:[.[0][]|{lon:.[0],lat:.[1]}]}]}
+                else empty end]}' region.geojson > trimmed.json
           gzip -9 -c trimmed.json > tools/osm-region.json.gz
-          echo "roads: $(wc -c < roads.json) B, land: $(wc -c < land.json) B, buildings: $(wc -c < buildings.json) B, trimmed: $(wc -c < trimmed.json) B, gz: $(wc -c < tools/osm-region.json.gz) B"
-          jq '.elements|length' trimmed.json
+          echo "geojson: $(wc -c < region.geojson) B, trimmed: $(wc -c < trimmed.json) B, gz: $(wc -c < tools/osm-region.json.gz) B"
+          COUNT=$(jq '.elements|length' trimmed.json)
+          echo "elements: $COUNT"
+          [ "$COUNT" -gt 500 ]
       - name: Commit the extract
         run: |
           git config user.name "github-actions[bot]"
