@@ -1,0 +1,51 @@
+# Fetches the Bölge plan's raw material - every road, building and landuse
+# polygon within 2.7 km of the villa - from OpenStreetMap's Overpass API.
+# This runs on GitHub's runners because the development environment's egress
+# proxy blocks the OSM servers. Dispatch it by hand; it commits the gzipped
+# extract to the working branch for tools/extract_region_streets_r45.mjs.
+name: Fetch OSM region data
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/sweet-thompson-amqghq
+      - name: Query Overpass
+        run: |
+          set -euo pipefail
+          QUERY='[out:json][timeout:120];(
+            way(around:2700,39.87021694,32.71868652)["highway"~"^(motorway|trunk|primary|secondary|tertiary|unclassified|residential|living_street|pedestrian|service|track)"];
+            way(around:2700,39.87021694,32.71868652)["building"];
+            way(around:2700,39.87021694,32.71868652)["landuse"];
+            way(around:2700,39.87021694,32.71868652)["leisure"~"^(park|pitch|garden|playground)$"];
+            way(around:3000,39.87021694,32.71868652)["name"~"Angora",i];
+            relation(around:3000,39.87021694,32.71868652)["name"~"Angora",i];
+          );out geom;'
+          fetch() { curl -sS --fail --retry 2 -m 300 --data-urlencode "data=$QUERY" "$1" -o raw.json; }
+          fetch https://overpass-api.de/api/interpreter || fetch https://overpass.kumi.systems/api/interpreter
+          jq -c '{fetched:(now|todate),elements:[.elements[]|{
+              t:.type,
+              tags:((.tags//{})|{highway,building,landuse,leisure,name,place,boundary}|with_entries(select(.value!=null))),
+              geometry:(.geometry//null),
+              members:(if .members then [.members[]|{role,geometry:(.geometry//null)}] else null end)
+            }]}' raw.json > trimmed.json
+          gzip -9 -c trimmed.json > tools/osm-region.json.gz
+          echo "raw: $(wc -c < raw.json) B, trimmed: $(wc -c < trimmed.json) B, gz: $(wc -c < tools/osm-region.json.gz) B"
+          jq '.elements|length' trimmed.json
+      - name: Commit the extract
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/osm-region.json.gz
+          git commit -m "Add the OSM extract for the Bölge plan (roads, buildings, landuse)
+
+          Fetched from Overpass on a GitHub runner because the development
+          environment cannot reach the OSM servers directly.
+
+          Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
+          Claude-Session: https://claude.ai/code/session_01QTnZ17rArnAzDd3jvRyoe9"
+          git push origin claude/sweet-thompson-amqghq
