@@ -149,7 +149,9 @@ function renderFrame(time) {
     const flying=flight?.update(time);
     if(planWash){
       const target=planMode&&!walk?.active?1:0;
-      const dt=Math.min(0.1,(time-(planWash.userData.time??time))/1000);planWash.userData.time=time;
+      // dt caps at 0.25 s so even a slow renderer settles the wash in a
+      // handful of frames instead of a dozen
+      const dt=Math.min(0.25,(time-(planWash.userData.time??time))/1000);planWash.userData.time=time;
       const next=THREE.MathUtils.damp(planWash.userData.level,target,6,dt);
       if(Math.abs(next-planWash.userData.level)>0.0005){
         planWash.userData.level=next;
