@@ -28,8 +28,12 @@ jobs:
           # mirror only serves Switzerland). So no API at all: download the
           # Geofabrik Turkey extract and cut the villa's box locally.
           sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool jq
-          curl -sS --fail --retry 3 -o turkey.osm.pbf https://download.geofabrik.de/europe/turkey-latest.osm.pbf
-          echo "turkey.osm.pbf: $(wc -c < turkey.osm.pbf) B"
+          # -L: geofabrik redirects to a mirror; without it curl saves the
+          # 242-byte redirect body and --fail never notices (3xx is not 4xx)
+          curl -sSL --fail --retry 3 -o turkey.osm.pbf https://download.geofabrik.de/europe/turkey-latest.osm.pbf
+          SIZE=$(wc -c < turkey.osm.pbf)
+          echo "turkey.osm.pbf: $SIZE B"
+          [ "$SIZE" -gt 200000000 ]   # a real country extract, not an error page
           # west,south,east,north = centre ± 2.7 km
           osmium extract --bbox 32.6870,39.8459,32.7504,39.8945 turkey.osm.pbf -o region.osm.pbf
           osmium export region.osm.pbf -o region.geojson --geometry-types=linestring,polygon
