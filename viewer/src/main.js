@@ -677,6 +677,12 @@ async function loadModel() {
       soilCap?.update(earthClip.constant,earthClip.constant<fullHeight-0.001&&groups.has('context'));
       lighting.frame(id,contextBox);massing?.set(id);
       lighting.interior(id.startsWith('f')?Number(id[1]):null,null);
+      // The fixture slots FADE to a selection: light.visible only flips once
+      // update() walks the fade, so a render straight after select() races it
+      // and can compile a zero-light variant instead of the floor's real one
+      // (which floor stayed cold varied run to run). A far-future step snaps
+      // both fade phases before the warming render.
+      lighting.update(performance.now()+60000);
       if(ghost){ghost.visible=id.startsWith('f');ghost.userData.material.opacity=ghost.visible?0.5:0;}
       renderer.shadowMap.needsUpdate=true;
       lighting.render(camera);
