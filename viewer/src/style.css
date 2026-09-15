@@ -95,10 +95,11 @@ h1 strong{font-weight:700}
 .walk-launch{font-size:13px;font-weight:700;min-height:40px;padding:0 18px;border-radius:999px;background:var(--ink);color:#fff;white-space:nowrap;letter-spacing:.02em}
 .walk-launch:not(:disabled):hover{background:#000}
 .walk-launch span{margin-left:8px}
-#app[data-scale=region] .explore-dock{display:none}
-/* Katlar villaya aittir: the floor row appears only once the Villa scale is
-   chosen (data-scale building/floor); street and region keep a clean dock. */
-#app[data-scale=neighborhood] .floor-row{display:none}
+/* The dock belongs to the villa: floors AND the 360° tour appear only once
+   the Villa scale is chosen ("360 keşfet sadece villada katlar arası
+   gezilirken çıkmalıdır"); street and region show no dock at all. */
+#app[data-scale=region] .explore-dock,
+#app[data-scale=neighborhood] .explore-dock{display:none}
 
 /* --------------------------------------------------------- gesture help */
 .gesture-help{bottom:max(22px,env(safe-area-inset-bottom));left:22px;right:auto;margin:0;pointer-events:none;font-size:10.5px;color:var(--muted);border-radius:999px;padding:7px 12px;width:max-content;max-width:min(340px,calc(100vw - 44px))}
@@ -286,8 +287,8 @@ h1 strong{font-weight:700}
   .brand-divider{height:13px}
   .quiet-button{font-size:12px;min-height:40px;padding:0 13px}
   .scale-picker{top:auto;bottom:max(108px,calc(env(safe-area-inset-bottom) + 96px));left:50%;padding:3px}
-  /* the dock is a single walk button outside the Villa scale */
-  #app[data-scale=neighborhood] .scale-picker{bottom:max(68px,calc(env(safe-area-inset-bottom) + 56px))}
+  /* no dock outside the Villa scale - the picker takes the bottom edge */
+  #app[data-scale=neighborhood] .scale-picker{bottom:max(16px,calc(env(safe-area-inset-bottom) + 4px))}
   #app[data-scale=region] .scale-picker{bottom:max(128px,calc(env(safe-area-inset-bottom) + 116px))}
   .region-panel{bottom:max(14px,env(safe-area-inset-bottom));gap:6px}
   .scale-picker button{min-height:36px;font-size:12px;padding:0 13px}

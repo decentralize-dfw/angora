@@ -64,11 +64,10 @@ const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
 // at exactly one height, so this plane snaps between "whole" and "basement
 // cut open" instead of lerping and leaving the excavation uncapped mid-flight.
 const earthClip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
-// The storey cut's counterpart: everything the section removes is drawn
-// once more as a white apparition - "çok hayali" - so the cut reads as a
-// drawing convention, not as demolition. Constant mirrors the cut's.
-const ghostClip = new THREE.Plane(new THREE.Vector3(0, 1, 0), -30);
-let ghost = null;
+// Plan mode's paper wash (surroundings 80 % white, interior 30 %) - built
+// once from the staged groups, faded by planMode alone. The 3D views never
+// see it.
+let planWash = null;
 let flight, hotspots, planMode=false, roomData, interiorLights=true, soilCap=null;
 let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox, contextBox, lighting, siteContext;
 let selected = 'neighborhood', ready = false, loading = false;
@@ -148,16 +147,16 @@ function renderFrame(time) {
       if (t >= 1) {transition = null; renderer.shadowMap.needsUpdate = true;}
     }
     const flying=flight?.update(time);
-    ghostClip.constant=-clip.constant;
-    if(ghost){
-      const material=ghost.userData.material;
-      // "yüzde 60 opasiteli beyaz" on the perspective cut only; the plan /
-      // isometric drawing stays clean of it ("izometrik modda olmasın").
-      const target=!walk?.active&&!planMode&&selected.startsWith('f')?0.6:0;
-      const dt=Math.min(0.1,(time-(ghost.userData.time??time))/1000);ghost.userData.time=time;
-      const next=THREE.MathUtils.damp(material.opacity,target,5,dt);
-      if(Math.abs(next-material.opacity)>0.0005){material.opacity=next;invalidate();}
-      ghost.visible=material.opacity>0.01&&clip.constant<fullHeight-0.001;
+    if(planWash){
+      const target=planMode&&!walk?.active?1:0;
+      const dt=Math.min(0.1,(time-(planWash.userData.time??time))/1000);planWash.userData.time=time;
+      const next=THREE.MathUtils.damp(planWash.userData.level,target,6,dt);
+      if(Math.abs(next-planWash.userData.level)>0.0005){
+        planWash.userData.level=next;
+        for(const over of planWash.userData.overlays)over.opacity=next*over.userData.washBase;
+        invalidate();
+      }
+      planWash.visible=planWash.userData.level>0.01;
     }
     caps?.update(clip.constant, clip.constant < fullHeight - 0.001);
     soilCap?.update(earthClip.constant, earthClip.constant < fullHeight - 0.001 && groups.has('context'));
@@ -221,7 +220,8 @@ function frame(initial=false,keep=false) {
   frameSpan=Math.max(size.z*Math.cos(polar)+size.y*Math.sin(polar),size.x/aspect)*(floor?1.17:1.14);
   if(selected==='region'&&contextBox)frameSpan=fitContextBounds(contextBox,aspect,polar).span;
   if(keep){center.copy(controls.target);if(floor)center.y=[0,3.0996,6.3714,9.4705][Number(selected[1])];frameSpan=camera.position.distanceTo(controls.target)*2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2));}
-  flight.go({target:center,polar,span:frameSpan,zoom:keep?camera.zoom:1,azimuth:selected==='region'||planMode?0:initial?.804:undefined},initial===true);
+  flight.go({target:center,polar,span:frameSpan,zoom:keep?camera.zoom:1,fov:planMode?4:35,
+    azimuth:selected==='region'||planMode?0:initial?.804:undefined},initial===true);
   resize();
 }
 function panel(id,open) {
@@ -560,36 +560,52 @@ async function loadModel() {
       plantingCandidates.length=0;
     }
     {
-      // the ghost of the cut-away storeys: the villa's architecture (never
-      // the furniture) re-drawn above the section plane in translucent white.
-      // Every overlapping surface would stack its alpha - four slabs deep the
-      // "60 %" veil read almost solid - so the ghost renders as ONE layer: a
-      // depth-only prepass keeps the nearest ghost surface, and the white
-      // overlay then paints exactly where the prepass depth matches.
-      // transparent:true keeps the prepass in the transparent pass, AFTER the
-      // real glazing has blended - in the opaque pass its depth would occlude
-      // the current floor's own glass behind the veil.
-      const prepass=new THREE.MeshBasicMaterial({colorWrite:false,transparent:true,
-        side:THREE.DoubleSide,clippingPlanes:[ghostClip]});
-      const material=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0,
-        depthWrite:false,depthFunc:THREE.EqualDepth,side:THREE.DoubleSide,clippingPlanes:[ghostClip]});
-      ghost=new THREE.Group();ghost.name='Ghost above the cut';ghost.visible=false;
-      ghost.userData={material};
-      const villaGroup=groups.get('villa');villaGroup.updateMatrixWorld(true);
-      const walkGhost=(o,furniture)=>{
-        furniture=furniture||o.userData?.category==='furniture';
-        if(o.isMesh&&!furniture){
-          for(const [m,order] of [[prepass,5],[material,6]]){
-            const g=new THREE.Mesh(o.geometry,m);
+      // The plan drawing's paper wash, for PLAN MODE ONLY: the surroundings
+      // sink under 80 % white and the villa's own interior under 30 %, so the
+      // cut walls and the rooms carry the drawing ("etraf yüzde 80, içerisi
+      // yüzde 30"). The 3D floor views stay exactly as modelled.
+      // Each wash renders as ONE layer - a depth-only prepass keeps the
+      // nearest surface, the white overlay paints where that depth matches -
+      // so stacked slabs cannot thicken the veil. transparent:true keeps the
+      // prepass in the transparent pass, after the real glazing has blended.
+      // A wash mesh must vanish exactly where its source is clipped away, so
+      // material pairs are made per clipping signature.
+      planWash=new THREE.Group();planWash.name='Plan paper wash';planWash.visible=false;
+      planWash.userData={level:0,overlays:[]};
+      const planeIds=new Map(),variants=new Map();
+      const idOf=plane=>{if(!planeIds.has(plane))planeIds.set(plane,planeIds.size);return planeIds.get(plane);};
+      const washFor=(planes,base)=>{
+        const key=`${base}|${(planes??[]).map(idOf).join(',')}`;
+        if(!variants.has(key)){
+          const shared={clippingPlanes:planes??null,side:THREE.DoubleSide,transparent:true};
+          const pre=new THREE.MeshBasicMaterial({colorWrite:false,...shared});
+          const over=new THREE.MeshBasicMaterial({color:0xffffff,opacity:0,
+            depthWrite:false,depthFunc:THREE.EqualDepth,...shared});
+          over.userData.washBase=base;
+          planWash.userData.overlays.push(over);
+          variants.set(key,[pre,over]);
+        }
+        return variants.get(key);
+      };
+      const washGroup=(group,base)=>{
+        if(!group)return;
+        group.updateMatrixWorld(true);
+        group.traverse(o=>{
+          if(!o.isMesh)return;
+          const source=Array.isArray(o.material)?o.material[0]:o.material;
+          const [pre,over]=washFor(source?.clippingPlanes??null,base);
+          for(const [material,order] of [[pre,7],[over,8]]){
+            const g=new THREE.Mesh(o.geometry,material);
             g.matrixAutoUpdate=false;g.matrix.copy(o.matrixWorld);
             g.renderOrder=order;g.userData.aoExcluded=true;g.castShadow=false;g.receiveShadow=false;
-            ghost.add(g);
+            planWash.add(g);
           }
-        }
-        for(const child of o.children)walkGhost(child,furniture);
+        });
       };
-      walkGhost(villaGroup,false);
-      scene.add(ghost);
+      washGroup(groups.get('villa'),0.30);
+      washGroup(groups.get('garden'),0.80);
+      washGroup(groups.get('context'),0.80);
+      scene.add(planWash);
     }
     buildingBox = new THREE.Box3().setFromObject(groups.get('villa'));
     // Keep the entrance, pool terrace and basement garden in the building frame.
@@ -682,7 +698,6 @@ async function loadModel() {
     scene.traverse(o=>{if(o.isMesh&&o.frustumCulled){o.frustumCulled=false;culled.push(o);}});
     for (const id of ['building','f3','f2','f1','f0']) {
       clip.constant=sectionHeight(id,fullHeight);
-      ghostClip.constant=-clip.constant;
       earthClip.constant=id==='f0'?SOIL_CUT_HEIGHT:fullHeight;
       caps?.update(clip.constant,clip.constant<fullHeight-0.001);
       soilCap?.update(earthClip.constant,earthClip.constant<fullHeight-0.001&&groups.has('context'));
@@ -694,13 +709,14 @@ async function loadModel() {
       // (which floor stayed cold varied run to run). A far-future step snaps
       // both fade phases before the warming render.
       lighting.update(performance.now()+60000);
-      if(ghost){ghost.visible=id.startsWith('f');ghost.userData.material.opacity=ghost.visible?0.5:0;}
+      // plan mode's paper wash compiles alongside one storey's state
+      if(planWash&&id==='f1'){planWash.visible=true;for(const over of planWash.userData.overlays)over.opacity=over.userData.washBase;}
       renderer.shadowMap.needsUpdate=true;
       lighting.render(camera);
+      if(planWash&&id==='f1'){planWash.visible=false;for(const over of planWash.userData.overlays)over.opacity=0;}
       await new Promise(resolve=>setTimeout(resolve,0));
     }
     for(const o of culled)o.frustumCulled=true;
-    if(ghost){ghost.visible=false;ghost.userData.material.opacity=0;}
     selectView(selected, true);
     // One composed frame before the bar goes: the occlusion, antialias, bloom,
     // grade and dither passes compile on their first use like anything else.
@@ -734,10 +750,11 @@ function zoom(factor){
 // nothing can go crooked. Leaving it hands the walking lens back.
 function setPlanMode(on){
   planMode=on;$('#toggle-plan').setAttribute('aria-pressed',on);
-  camera.fov=on?4:35;camera.updateProjectionMatrix();
   controls.enableRotate=!on;
   $('#rotate-mode').disabled=on;
   if(on)mode(true);
+  // one flight does everything - position, tilt AND the 4-degree lens - so
+  // the toggle reads as a single straight move, never a zoom jolt first
   frame(false);
 }
 function mode(pan) {
