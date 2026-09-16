@@ -798,8 +798,11 @@ async function loadModel() {
     if (capScene) {soilCap = createSoilCap(capScene); if (soilCap) scene.add(soilCap.group);}
     roomData=results[3].value;annotations=createAnnotations(roomData,host,enterWalk);scene.add(annotations.group);
     walk = new InteriorWalk(results[4].value,renderer.domElement,invalidate);scene.add(walk.rig);
-    locator=createWalkLocator(walk.surface,{minX:buildingBox.min.x,maxX:buildingBox.max.x,
-      minZ:buildingBox.min.z,maxZ:buildingBox.max.z});
+    // the villa box includes roof eaves; the walls sit about a metre inside
+    // it, so the outdoor test insets by that much or garden ground under an
+    // eave would still count as "inside the house"
+    locator=createWalkLocator(walk.surface,{minX:buildingBox.min.x+1,maxX:buildingBox.max.x-1,
+      minZ:buildingBox.min.z+1,maxZ:buildingBox.max.z-1});
     lighting.setFixtures(results[4].value.lights);hotspots=createHotspots(host,walk,travelRoom);
     lift=createLift({groups,clips:stagedClips.get('villa')??[],clipPlane:clip,fullHeight,
       shadowsDirty:()=>{renderer.shadowMap.needsUpdate=true;},onSettled:()=>refreshLiftControl()});
