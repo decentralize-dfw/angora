@@ -138,6 +138,7 @@ const ROOM_TERMS = [
   [/^yan bahçe$/i, 'Side garden'], [/^otopark$/i, 'Parking'], [/açık balkon/i, 'Open balcony'],
 ];
 let lang = (() => {
+  if (typeof location === 'undefined') return 'tr';   // node-side tests
   const forced = new URLSearchParams(location.search).get('lang');
   if (forced === 'en' || forced === 'tr') return forced;
   try { return localStorage.getItem('angora-lang') === 'en' ? 'en' : 'tr'; } catch { return 'tr'; }

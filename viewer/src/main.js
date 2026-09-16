@@ -83,6 +83,9 @@ let deviceQA,assetRevision=null,pendingCapture=null,contextLost=false,massing=nu
 // Live location during the tour: the interface names where the feet ARE,
 // with a short dwell so a doorway crossing cannot flicker the title.
 let locator=null,locationKey='',locationPendingKey='',locationPendingSince=0;
+// Whether THIS ENTRY carried a view deep link - read once, before
+// rememberState() starts rewriting the address bar with the current view.
+const openedWithView=new URLSearchParams(location.search).has('view');
 
 function message(text, error = false) {
   status.hidden = false; $('#load-message').textContent = text;
@@ -868,7 +871,9 @@ async function loadModel() {
       await new Promise(resolve=>setTimeout(resolve,0));
     }
     for(const o of culled)o.frustumCulled=true;
-    scene.traverse(o=>{if(o.isLight&&o.shadow)o.shadow.camera.layers.enable(1);});
+    // Sun only: daylight is what the cut falsifies. Fixture shadow passes
+    // keep their old cost, so walk-mode light fades stay as cheap as before.
+    scene.traverse(o=>{if(o.isDirectionalLight&&o.shadow)o.shadow.camera.layers.enable(1);});
     renderer.shadowMap.needsUpdate=true;
     selectView(selected, true);
     // One composed frame before the bar goes: the occlusion, antialias, bloom,
@@ -888,7 +893,7 @@ async function loadModel() {
     // card returns for every fresh tab so demonstrations open on it.
     let welcomeSeen=false;
     try{welcomeSeen=sessionStorage.getItem('angora-welcome')==='1';}catch{/* private mode */}
-    if(!new URLSearchParams(location.search).has('view')&&!welcomeSeen)$('#welcome').hidden=false;
+    if(!openedWithView&&!welcomeSeen)$('#welcome').hidden=false;
   } catch (error) {
     for (const group of staged.values()) {scene.remove(group); dispose(group);}
     groups.clear();

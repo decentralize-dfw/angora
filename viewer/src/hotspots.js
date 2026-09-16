@@ -1,5 +1,25 @@
 import * as THREE from 'three';
 import {t,roomName} from './i18n.js';
+// The admission rule, pure and testable: a same-floor target earns a marker
+// only when its WALK is not much longer than its sightline - anything else
+// is behind walls and belongs in the room menu. Admitted targets anchor a
+// few steps along their actual route, i.e. at the doorway.
+export function reachableStations(surface,position,floor,currentRoom,furniture,limit=3){
+  const candidates=surface.data.stations.filter(s=>s.floor_index===floor&&s.room_id!==currentRoom)
+    .sort((a,b)=>((a.position[0]-position.x)**2+(a.position[2]-position.z)**2)
+                -((b.position[0]-position.x)**2+(b.position[2]-position.z)**2)).slice(0,7);
+  const admitted=[];
+  for(const s of candidates){
+    if(admitted.length===limit)break;
+    const path=surface.path([position.x,position.y,position.z],s.position,furniture);
+    if(!path)continue;
+    let length=0;
+    for(let i=1;i<path.length;i++)length+=Math.hypot(path[i][0]-path[i-1][0],path[i][2]-path[i-1][2]);
+    const straight=Math.hypot(s.position[0]-position.x,s.position[2]-position.z);
+    if(length<=Math.max(6,straight*1.7))admitted.push({station:s,anchor:path[Math.min(10,path.length-1)]});
+  }
+  return admitted;
+}
 export function createHotspots(host,walk,onTravel) {
   const overlay=document.createElement('div');overlay.className='hotspot-overlay';host.append(overlay);
   const point=new THREE.Vector3(),entries=[];let key='';
@@ -14,18 +34,7 @@ export function createHotspots(host,walk,onTravel) {
     // door ("Garaj" over the salon sofa). Those stay in the room menu.
     // What is admitted anchors a few steps along its actual route - at the
     // doorway - so the marker points where the feet would go.
-    const candidates=walk.surface.data.stations.filter(s=>s.floor_index===walk.floor&&s.room_id!==walk.room)
-      .sort((a,b)=>position.distanceToSquared(new THREE.Vector3(...a.position))-position.distanceToSquared(new THREE.Vector3(...b.position))).slice(0,7);
-    const same=[];
-    for(const s of candidates){
-      if(same.length===3)break;
-      const path=walk.surface.path(position.toArray(),s.position,walk.furniture);
-      if(!path)continue;
-      let length=0;
-      for(let i=1;i<path.length;i++)length+=Math.hypot(path[i][0]-path[i-1][0],path[i][2]-path[i-1][2]);
-      const straight=Math.hypot(s.position[0]-position.x,s.position[2]-position.z);
-      if(length<=Math.max(6,straight*1.7))same.push({station:s,anchor:path[Math.min(10,path.length-1)]});
-    }
+    const same=reachableStations(walk.surface,position,walk.floor,walk.room,walk.furniture);
     const adjacent=[-1,1].map(offset=>walk.surface.data.stations.find(s=>s.floor_index===walk.floor+offset&&/hol|antre/i.test(s.name))).filter(Boolean);
     for(const entry of [...same,...adjacent.map(s=>({station:s}))]) {
       const station=entry.station;
