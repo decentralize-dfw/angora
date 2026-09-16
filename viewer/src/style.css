@@ -265,7 +265,7 @@ h1 strong{font-weight:700}
 #app[data-walk=true] .top-actions,
 #app[data-walk=true] .side-tools,#app[data-walk=true] .gesture-help.hide-in-walk{display:none}
 #app[data-walk=true] .view-description{top:74px;max-width:64%}
-#app[data-walk=true] .gesture-help{left:50%;transform:translateX(-50%);bottom:max(192px,calc(env(safe-area-inset-bottom) + 170px))}
+#app[data-walk=true] .gesture-help{left:50%;transform:translateX(-50%);bottom:max(210px,calc(env(safe-area-inset-bottom) + 188px))}
 
 /* ---------------------------------------------------------- load status */
 .load-status{position:absolute;z-index:60;bottom:96px;left:50%;transform:translateX(-50%);border-radius:18px;padding:13px 17px;display:flex;gap:12px;align-items:center;font-size:13px;font-weight:600;max-width:calc(100% - 32px);background:var(--glass-strong);box-shadow:var(--shadow)}
