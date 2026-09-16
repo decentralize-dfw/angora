@@ -15,17 +15,18 @@ import places from './region-places.json';
 // The whole 2 km drawn as a plan - every road and building around the villa,
 // from OSM via the fetch-osm-region workflow ("2km boyunca planı çiz").
 import streets from './region-streets.json';
+import { t } from './i18n.js';
 
 const AREAS = [
   { name: 'Angora Evleri', x: 40, y: -195 },
   { name: 'Beysukent', x: -640, y: -430 },
 ];
 // one label per amenity group, in places.groups order (see the extractor)
-const GROUP_LABELS = ['Eğitim', 'Sağlık', 'Yeme içme', 'Alışveriş', 'Spor · Park', 'Hizmet'];
+const GROUP_KEYS = ['groupEdu', 'groupHealth', 'groupFood', 'groupShop', 'groupSport', 'groupService'];
 const svgNS = 'http://www.w3.org/2000/svg';
 const km = (m) => (m < 950 ? `${m} m` : `${(m / 1000).toFixed(1).replace('.', ',')} km`);
 
-export const atlasMeta = `${places.total} donatı · Atlas ${places.atlas_generated_at}` +
+export const atlasMeta = () => `${places.total} ${t('amenities')} · Atlas ${places.atlas_generated_at}` +
   (streets.roads.length ? ' · Plan © OpenStreetMap' : ' (OSM)');
 
 export function createRegionMap(host) {
@@ -137,12 +138,10 @@ export function createRegionMap(host) {
   info.setAttribute('aria-label', 'Angora Evleri hakkında');
   info.innerHTML =
     '<h3>Angora Evleri</h3><p class="rm-info-set">Beysukent · Çankaya, Ankara</p>' +
-    '<p class="rm-info-body">Ankara’nın batı yakasında, Hacettepe Beytepe kampüsünün ' +
-    'yeşiline komşu, alçak yoğunluklu bir villa yerleşkesi. Planlı sokak dokusu ve olgun ' +
-    'bahçeleri gündelik hayatı yerleşke içinde tutar; Eskişehir Yolu ve Bilkent bağlantısı ' +
-    'kenti dakikalar uzağında bırakır.</p>' +
-    '<ul class="rm-info-facts">' + fact('park', near.park) + fact('okul', near.lise) +
-    fact('market', near.market) + fact('eczane', near.eczane) + '</ul>';
+    `<p class="rm-info-body">${t('regionIntro')}</p>` +
+    '<ul class="rm-info-facts">' + fact(t('lblPark'), near.park) + fact(t('lblSchool'), near.lise) +
+    fact(t('lblMarket'), near.market) + fact(t('lblPharmacy'), near.eczane) + '</ul>' +
+    `<p class="rm-info-dist">${t('distNote')}</p>`;
   // One amenity family at a time: the map opens as the bare plan - every
   // category off - and a chip turns exactly one on; pressing it again, or
   // pressing another, puts it away ("hepsi kapalı gelsin, tek bir şey").
@@ -157,7 +156,7 @@ export function createRegionMap(host) {
     const b = document.createElement('button');
     b.type = 'button';
     b.setAttribute('aria-pressed', 'false');
-    b.innerHTML = `<i style="background:${color}"></i>${GROUP_LABELS[g] ?? 'Diğer'}`;
+    b.innerHTML = `<i style="background:${color}"></i>${t(GROUP_KEYS[g])}`;
     b.onclick = () => {
       if (activeGroup !== null) {
         off.add(activeGroup); el.classList.add(`rm-off-${activeGroup}`);

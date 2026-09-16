@@ -18,48 +18,50 @@
   <title>Angora 21 · MERGVS</title>
 </head>
 <body>
-<main id="app" data-scale="neighborhood" data-booting="true">
+<main id="app" data-scale="building" data-booting="true">
   <div id="viewport" aria-label="Angora villasının etkileşimli 3D modeli"></div>
   <div id="cloud-transition" aria-hidden="true"></div>
   <header class="topbar">
     <div class="identity"><span class="brand">MERGVS</span><span class="brand-divider"></span><h1>Angora <strong>21</strong></h1></div>
     <div class="top-actions">
-      <button id="open-options" class="quiet-button" aria-expanded="false" aria-controls="options-panel" title="Mobilya, ölçüler ve ışık">Ayarlar</button>
-      <button id="open-info" class="quiet-button" aria-expanded="false" aria-controls="info-panel">Bilgi</button>
+      <button id="lang-toggle" class="quiet-button" aria-label="Switch language / Dil değiştir">EN</button>
+      <button id="open-options" class="quiet-button" aria-expanded="false" aria-controls="options-panel" data-i18n="options" data-i18n-title="optionsTitle">Görünüm</button>
+      <button id="open-info" class="quiet-button" aria-expanded="false" aria-controls="info-panel" data-i18n="info" data-i18n-title="infoTitle">Mülk bilgisi</button>
     </div>
   </header>
   <nav class="scale-picker" aria-label="Görünüm ölçeği">
-    <button data-view="region" aria-pressed="false">Bölge</button>
-    <button data-view="neighborhood" aria-pressed="true">Yakın çevre</button>
-    <button data-view="building" aria-pressed="false">Villa</button>
+    <button data-view="region" aria-pressed="false" data-i18n="scaleRegion">Bölge</button>
+    <button data-view="neighborhood" aria-pressed="false" data-i18n="scaleStreet">Yakın çevre</button>
+    <button data-view="building" aria-pressed="true" data-i18n="scaleVilla">Villa</button>
   </nav>
-  <div class="view-description"><h2 id="view-title">Yakın çevre</h2><p id="section-label">Angora Evleri · Ankara</p></div>
+  <div class="view-description"><h2 id="view-title">Villa 21</h2><p id="section-label">Bahçe · Havuz · Villa</p></div>
   <div class="side-tools">
     <div class="camera-tools" aria-label="Kamera araçları">
-      <button id="zoom-in" aria-label="Yakınlaştır">+</button>
-      <button id="zoom-out" aria-label="Uzaklaştır">−</button>
+      <button id="zoom-in" data-i18n-label="zoomIn" aria-label="Yakınlaştır">+</button>
+      <button id="zoom-out" data-i18n-label="zoomOut" aria-label="Uzaklaştır">−</button>
       <span class="rail-divider" aria-hidden="true"></span>
-      <button id="rotate-mode" aria-pressed="true" aria-label="Sürükleyerek döndür" title="Döndür">↻</button>
-      <button id="pan-mode" aria-pressed="false" aria-label="Sürükleyerek kaydır" title="Kaydır">✥</button>
+      <button id="rotate-mode" aria-pressed="true" data-i18n-label="rotate" aria-label="Sürükleyerek döndür" data-i18n-title="rotate">↻</button>
+      <button id="pan-mode" aria-pressed="false" data-i18n-label="pan" aria-label="Sürükleyerek kaydır" data-i18n-title="pan">✥</button>
     </div>
     <span class="rail-divider" aria-hidden="true"></span>
-    <button id="toggle-plan" aria-pressed="false" title="Plan ve izometrik görünüm">Plan</button>
-    <button id="reset-view" aria-label="Görünümü ortala" title="Ortala">⌖</button>
+    <button id="toggle-plan" aria-pressed="false" data-i18n="plan" data-i18n-title="planTitle">Plan</button>
+    <button id="reset-view" data-i18n-label="recenter" aria-label="Görünümü ortala" data-i18n-title="recenter">⌖</button>
   </div>
   <section id="options-panel" class="panel options-panel" aria-label="Görünüm ayarları" hidden>
-    <div class="panel-heading"><h2>Görünüm</h2><button data-close-panel="options-panel" aria-label="Ayarları kapat">×</button></div>
+    <div class="panel-heading"><h2 data-i18n="optionsHeading">Görünüm</h2><button data-close-panel="options-panel" data-i18n-label="closeOptions" aria-label="Ayarları kapat">×</button></div>
     <div class="scene-options">
-      <button id="toggle-furniture" aria-pressed="true" disabled>Mobilya</button>
-      <button id="toggle-rooms" aria-pressed="true" disabled>Oda adları</button>
-      <button id="toggle-measurements" aria-pressed="false" disabled>Ölçüler</button>
+      <button id="toggle-furniture" aria-pressed="true" disabled data-i18n="furniture">Mobilya</button>
+      <button id="toggle-rooms" aria-pressed="true" disabled data-i18n="roomNames">Oda adları</button>
+      <button id="toggle-measurements" aria-pressed="false" disabled data-i18n="measurements">Ölçüler</button>
     </div>
-    <div class="daylight-heading"><label for="daylight-hour">Gün ışığı</label><output id="daylight-time" for="daylight-hour">12:30</output></div>
-    <label class="lighting-choice" for="lighting-style">Işık <select id="lighting-style"><option value="soft">Yumuşak gün ışığı</option><option value="sun">Doğrudan güneş</option></select></label>
+    <div class="daylight-heading"><label for="daylight-hour" data-i18n="daylight">Gün ışığı</label><output id="daylight-time" for="daylight-hour">12:30</output></div>
+    <label class="lighting-choice" for="lighting-style"><span data-i18n="light">Işık</span> <select id="lighting-style"><option value="soft" data-i18n="lightSoft">Yumuşak gün ışığı</option><option value="sun" data-i18n="lightSun">Doğrudan güneş</option></select></label>
     <input id="daylight-hour" type="range" min="6" max="21" step="0.0833333333" value="12.5" aria-label="Gün ışığı saati" />
     <div class="range-endpoints"><span>06:00</span><span>21:00</span></div>
-    <div class="daylight-footer"><select id="daylight-season" aria-label="Gün ışığı tarihi"><option value="172">21 Haziran</option><option value="80">21 Mart</option><option value="355">21 Aralık</option></select><button id="toggle-lights" aria-pressed="true">İç ışıklar</button></div>
-    <p class="small-note" id="solar-note">Yerel saat · Görsel gün ışığı çalışması</p>
-    <div class="scene-options"><button id="toggle-sound" aria-pressed="false">Arayüz sesi kapalı</button></div>
+    <div class="daylight-footer"><select id="daylight-season" aria-label="Gün ışığı tarihi"><option value="172">21 Haziran</option><option value="80">21 Mart</option><option value="355">21 Aralık</option></select><button id="toggle-lights" aria-pressed="true" data-i18n="interiorLights">İç ışıklar</button></div>
+    <p class="small-note" id="solar-note" data-i18n="solarNote">Yerel saat · Görsel gün ışığı çalışması; sertifikalı analiz değildir</p>
+    <p class="small-note" id="cut-light-note" data-i18n="cutLightNote" hidden>Kesit görünümündeki aydınlık gösterim amaçlıdır; kapalı hacim ışığı 360° turda görülür.</p>
+    <div class="scene-options"><button id="toggle-sound" aria-pressed="false" data-i18n="soundOff">Arayüz sesi kapalı</button></div>
     <details class="device-qa">
       <summary>Cihaz ve görüntü kontrolü</summary>
       <p>15 saniye boyunca sahneyi hareket ettir. Ölçüm ve görüntüler yalnızca cihazına indirilir; otomatik gönderilmez.</p>
@@ -70,36 +72,36 @@
     </details>
   </section>
   <section id="info-panel" class="panel info-panel" aria-label="Villa bilgileri" hidden>
-    <div class="panel-heading"><h2>Angora 21</h2><button data-close-panel="info-panel" aria-label="Bilgileri kapat">×</button></div>
+    <div class="panel-heading"><h2>Angora 21</h2><button data-close-panel="info-panel" data-i18n-label="closeInfo" aria-label="Bilgileri kapat">×</button></div>
     <div id="property-info"></div>
-    <a class="listing-link" href="https://remax.com.tr/tr/portfoy/P56131836" target="_blank" rel="noopener noreferrer">İlanı incele ↗</a>
+    <a class="listing-link" href="https://remax.com.tr/tr/portfoy/P56131836" target="_blank" rel="noopener noreferrer" data-i18n="listing">Satış ilanını aç ↗</a>
   </section>
   <section id="region-panel" class="region-panel" aria-label="Bölge haritası" hidden>
-    <div class="region-radius" role="group" aria-label="Harita yarıçapı">
+    <div class="region-radius" role="group" data-i18n-label="radiusLabel" aria-label="Harita yarıçapı">
       <button data-radius="500" aria-pressed="false">500 m</button>
       <button data-radius="1000" aria-pressed="true">1 km</button>
       <button data-radius="2000" aria-pressed="false">2 km</button>
     </div>
-    <span id="context-count" class="region-meta">Vaziyet planı</span>
-    <button id="return-villa" data-needs-model disabled>Villa 21’e yaklaş ↗</button>
+    <span id="context-count" class="region-meta" data-i18n="sitePlan">Vaziyet planı</span>
+    <button id="return-villa" data-needs-model disabled data-i18n="returnVilla">Villa 21’e yaklaş ↗</button>
   </section>
   <div id="model-scale" class="model-scale" aria-label="Model ölçeği" hidden><i></i><span></span></div>
   <footer class="explore-dock">
     <nav class="floor-row" aria-label="Kat seçimi">
-      <button data-view="f0" aria-pressed="false">Bodrum</button>
-      <button data-view="f1" aria-pressed="false">Giriş</button>
-      <button data-view="f2" aria-pressed="false">1. kat</button>
-      <button data-view="f3" aria-pressed="false">Çatı</button>
+      <button data-view="f0" aria-pressed="false" data-i18n="f0Short">Bodrum</button>
+      <button data-view="f1" aria-pressed="false" data-i18n="f1Short">Giriş</button>
+      <button data-view="f2" aria-pressed="false" data-i18n="f2Short">1. kat</button>
+      <button data-view="f3" aria-pressed="false" data-i18n="f3Short">Çatı</button>
     </nav>
     <div class="dock-actions">
-      <button id="enter-walk" class="walk-launch" disabled>360° Keşfet <span aria-hidden="true">↗</span></button>
-      <button id="enter-vr" class="walk-launch" hidden>VR’a gir</button>
+      <button id="enter-walk" class="walk-launch" disabled><span data-i18n="explore">İçeride gez</span> <span aria-hidden="true">↗</span></button>
+      <button id="enter-vr" class="walk-launch" hidden data-i18n="enterVR">VR’a gir</button>
     </div>
   </footer>
   <section id="walk-tools" class="walk-tools" aria-label="Oda turu" hidden>
-    <button id="exit-walk" class="walk-close" aria-label="360 derece turdan çık ve izometrik görünüme dön">×</button>
-    <label class="walk-lens" for="walk-lens"><span class="walk-lens-label">Lens</span><input id="walk-lens" type="range" min="30" max="95" step="1" aria-label="Tur lensi görüş açısı" /><output id="walk-lens-value" for="walk-lens"></output></label>
-    <div class="walk-room-panel"><label for="walk-room" id="walk-room-label">Oda turu</label><select id="walk-room" aria-label="Gezilecek oda"></select><span id="walk-room-area"></span><button id="lift-call" class="lift-call" disabled><span class="lift-call-label">Asansör</span><span class="lift-call-target" id="lift-call-target">bu katta</span></button></div>
+    <button id="exit-walk" class="walk-close" data-i18n="exitWalk" aria-label="Turdan çık ve kat görünümüne dön">Kata dön</button>
+    <label class="walk-lens" for="walk-lens"><span class="walk-lens-label" data-i18n="lens">Görüş açısı</span><input id="walk-lens" type="range" min="30" max="95" step="1" aria-label="Tur lensi görüş açısı" /><output id="walk-lens-value" for="walk-lens"></output></label>
+    <div class="walk-room-panel"><label for="walk-room" id="walk-room-label" data-i18n="goRoom">Gezilecek oda</label><select id="walk-room" aria-label="Gezilecek oda"></select><span id="walk-room-area"></span><button id="lift-call" class="lift-call" disabled><span class="lift-call-label" data-i18n="lift">Asansör</span><span class="lift-call-target" id="lift-call-target">bu katta</span></button></div>
     <div class="walk-pad" aria-label="Yürüme yönü">
       <button data-walk-direction="KeyW" class="walk-forward" aria-label="İleri yürü">↑</button>
       <button data-walk-direction="KeyA" class="walk-left" aria-label="Sola yürü">←</button>
@@ -107,11 +109,45 @@
       <button data-walk-direction="KeyS" class="walk-back" aria-label="Geri yürü">↓</button>
     </div>
   </section>
-  <p class="gesture-help" id="gesture-help">Sürükle: döndür · İki parmak: kaydır / yakınlaştır</p>
+  <section id="welcome" class="welcome" role="dialog" aria-labelledby="welcome-title" hidden>
+    <button id="welcome-close" class="welcome-close" data-i18n-label="welcomeClose" aria-label="Kapat">×</button>
+    <p class="welcome-brand">MERGVS</p>
+    <h2 id="welcome-title">Angora <strong>21</strong></h2>
+    <p class="welcome-set" data-i18n="regionSub">Angora Evleri · Beysukent, Ankara</p>
+    <ul class="welcome-facts">
+      <li><b>500 m²</b><span data-i18n="factGross">brüt</span></li>
+      <li><b>400 m²</b><span data-i18n="factNet">net</span></li>
+      <li><b>5+4</b><span data-i18n="factRooms">oda</span></li>
+      <li><b>4</b><span data-i18n="factFloors">kat</span></li>
+    </ul>
+    <div class="welcome-actions">
+      <button id="welcome-explore" class="walk-launch" data-i18n="welcomeExplore">Evi keşfet</button>
+      <button id="welcome-tour" data-i18n="welcomeTour">Rehberli tur</button>
+    </div>
+    <p class="welcome-note" data-i18n="welcomeNote">Alanlar RE/MAX P56131836 ilanındandır</p>
+  </section>
+  <div id="tour-bar" class="tour-bar" role="group" aria-label="Rehberli tur" hidden>
+    <button id="tour-prev" data-i18n-label="tourPrev" aria-label="Geri">‹</button>
+    <span id="tour-caption"></span>
+    <button id="tour-next" data-i18n-label="tourNext" aria-label="İleri">›</button>
+    <button id="tour-exit" data-i18n="tourStop">Turu bitir</button>
+  </div>
+  <p class="gesture-help" id="gesture-help" data-i18n="orbitHelp">Sürükle: döndür · İki parmak: kaydır / yakınlaştır</p>
   <div id="qa-status" class="device-qa-status" role="status" hidden></div>
   <div id="boot" class="boot" role="presentation">
     <div class="boot-brand"><span class="brand">MERGVS</span><span class="brand-divider"></span><span class="boot-title">Angora <strong>21</strong></span></div>
-    <div class="load-status" id="load-status" role="status" aria-live="polite"><span class="spinner" aria-hidden="true"></span><span class="load-copy"><span class="load-line"><span id="load-message">Model yükleniyor…</span><span id="load-percent" aria-hidden="true"></span></span><span class="load-bar" id="load-bar" aria-hidden="true" hidden><i></i></span></span><button id="retry" hidden>Tekrar dene</button></div>
+    <div class="load-status" id="load-status" role="status" aria-live="polite"><span class="spinner" aria-hidden="true"></span><span class="load-copy"><span class="load-line"><span id="load-message">Model yükleniyor…</span><span id="load-percent" aria-hidden="true"></span></span><span class="load-bar" id="load-bar" aria-hidden="true" hidden><i></i></span></span><button id="retry" hidden data-i18n="retry">Tekrar dene</button></div>
+    <div id="no3d" class="no3d" hidden>
+      <p data-i18n="fallbackLead">3D görünüm bu cihazda başlatılamadı. Mülkün doğrulanmış bilgileri yine buradadır:</p>
+      <ul class="welcome-facts">
+        <li><b>500 m²</b><span data-i18n="factGross">brüt</span></li>
+        <li><b>400 m²</b><span data-i18n="factNet">net</span></li>
+        <li><b>5+4</b><span data-i18n="factRooms">oda</span></li>
+        <li><b>4</b><span data-i18n="factFloors">kat</span></li>
+      </ul>
+      <p class="welcome-set">Angora Evleri · Beysukent, Ankara</p>
+      <a class="listing-link" href="https://remax.com.tr/tr/portfoy/P56131836" target="_blank" rel="noopener noreferrer" data-i18n="listing">Satış ilanını aç ↗</a>
+    </div>
   </div>
   <noscript>3D modeli görüntülemek için JavaScript açık olmalıdır.</noscript>
 </main>

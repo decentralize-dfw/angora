@@ -23,13 +23,15 @@ import {batchContext} from './context-batch.js';
 import {mergeEqualMaterials,abstractVehicle,splitContextSoil,splitContextBuildings,createContextMassing,authoredNodeName} from './context-massing.js';
 // Trees, hedges and beds, by the names the delivery gives them.
 const PLANTING=/spruce|needle|foliage|hedge|leaves|leaf|shrub|tree|branch|trunk|planting/i;
-import {createLift,FLOOR_SEND_LABEL} from './lift.js';
+import {createLift} from './lift.js';
 import {handleEscape} from './interface-actions.js';
 import {createInterfaceSound} from './interface-sound.js';
 import {createDeviceQA} from './device-qa.js';
 import {readShareState,shareSearch} from './share-state.js';
 import {referenceProfile} from './render-profile.js';
 import { sectionHeight, smoothStep, createWallCaps, createSoilCap, SOIL_CUT_HEIGHT } from './section.js';
+import { createWalkLocator } from './walk-locator.js';
+import { t, roomName, applyStatic, setLang, currentLang } from './i18n.js';
 
 const $ = s => document.querySelector(s);
 const host = $('#viewport'), status = $('#load-status');
@@ -38,7 +40,9 @@ const pages = import.meta.env.MODE === 'pages';
 const modelRoot = new URL(pages ? 'build/web/full/' : 'models/full/', publicRoot);
 const decoderRoot = new URL(pages ? 'viewer/public/draco/' : 'draco/', publicRoot);
 const daylightURL = new URL((pages ? 'assets/lighting/' : 'lighting/')+'kloofendal_48d_partly_cloudy_puresky_1k.hdr',publicRoot);
-const titles = {region:'Bölge', neighborhood:'Yakın çevre', building:'Villa 21', f0:'Bodrum', f1:'Giriş katı', f2:'1. kat', f3:'Çatı katı'};
+// Titles read through the language of the moment; every titles[x] call
+// site stays untouched while the words follow the toggle.
+const titles = new Proxy({}, {get: (_, key) => t(key)});
 const groups = new Map();
 const pendingRoomJump = new PendingAction();
 // One device decision for everything: which manifest, how many download
@@ -70,10 +74,15 @@ const earthClip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
 let planWash = null;
 let flight, hotspots, planMode=false, roomData, interiorLights=true, soilCap=null;
 let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox, contextBox, lighting, siteContext;
-let selected = 'neighborhood', ready = false, loading = false;
+// A property presentation opens on the property: the villa is the default,
+// and ?view= deep links (region, a floor) still land exactly where they say.
+let selected = 'building', ready = false, loading = false;
 let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations, walk;
 let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;
 let deviceQA,assetRevision=null,pendingCapture=null,contextLost=false,massing=null,lift=null;
+// Live location during the tour: the interface names where the feet ARE,
+// with a short dwell so a doorway crossing cannot flicker the title.
+let locator=null,locationKey='',locationPendingKey='',locationPendingSince=0;
 
 function message(text, error = false) {
   status.hidden = false; $('#load-message').textContent = text;
@@ -122,7 +131,7 @@ function setFurnitureVisible(visible) {
   });
   caps?.setFurnitureVisible(visible);
   $('#toggle-furniture').setAttribute('aria-pressed', String(visible));
-  $('#toggle-furniture').textContent = 'Mobilya';
+  $('#toggle-furniture').textContent = t('furniture');
   if (renderer) renderer.shadowMap.needsUpdate = true;
   if (walk) {
     walk.furniture = visible;
@@ -167,8 +176,27 @@ function renderFrame(time) {
     if(!walk?.active)fitDepthRange(camera,controls.target,contextBox);
     if(walk?.active){
       const sample=walk.surface.sample(walk.camera.position.x,walk.camera.position.z,walk.camera.position.y-walk.surface.data.eye_height_m,walk.furniture,.3);
-      if(sample&&walk.floor!==sample.floor){walk.floor=sample.floor;selected='f'+sample.floor;lift?.setWalkFloor(sample.floor);refreshLiftControl();}
+      if(sample&&walk.floor!==sample.floor){
+        walk.floor=sample.floor;selected='f'+sample.floor;lift?.setWalkFloor(sample.floor);refreshLiftControl();
+        $('#section-label').textContent=titles[selected]+' · '+t('walkSub');
+        if(roomData)renderPropertyInfo($('#property-info'),roomData,selected);
+      }
       else if(sample){walk.floor=sample.floor;selected='f'+sample.floor;}
+      // The title names where the visitor actually stands - room, stairs,
+      // garden - and only settles after a short dwell so a doorway cannot
+      // flicker it. The room menu stays a go-to control, but it follows the
+      // feet too, so "where am I" and "where can I go" read from one place.
+      if(locator){
+        const here=locator.locate(walk.camera.position.x,walk.camera.position.z,walk.floor);
+        const key=here?(here.outdoor?'out'+(walk.floor>=2?'t':'g'):here.stairs?'stairs':here.station?.room_id??''):locationKey;
+        if(key!==locationPendingKey){locationPendingKey=key;locationPendingSince=time;}
+        else if(key!==locationKey&&time-locationPendingSince>380){
+          locationKey=key;
+          if(here.outdoor)applyWalkLocation(t(walk.floor>=2?'terrace':'garden'),null);
+          else if(here.stairs)applyWalkLocation(t('stairs'),null);
+          else if(here.station)applyWalkLocation(roomName(here.station.name),here.station);
+        }
+      }
       lighting.interior(walk.floor,walk.camera.position.toArray(),time);
     }
     const lightChanging=lighting.update(time);
@@ -248,16 +276,29 @@ function refreshLiftControl(){
   button.disabled=!can;
   if(!can){target.textContent='bu katta';button.setAttribute('aria-label','Asansör bu katta');return;}
   const to=lift.target();
-  target.textContent=to===lift.walkFloor?'bu kata çağır':FLOOR_SEND_LABEL[to];
+  target.textContent=to===lift.walkFloor?t('liftCall'):t('liftSend'+to);
   button.setAttribute('aria-label','Asansörü '+target.textContent);
 }
 function updateRoomUI(station){
   selected='f'+station.floor_index;$('#walk-room').value=station.room_id;
   lift?.setWalkFloor(station.floor_index);refreshLiftControl();
-  $('#view-title').textContent=station.name;
-  $('#section-label').textContent=titles[selected]+' · 360° oda turu';
+  locationKey=station.room_id;locationPendingKey=station.room_id;
+  $('#view-title').textContent=roomName(station.name);
+  $('#section-label').textContent=titles[selected]+' · '+t('walkSub');
   $('#walk-room-area').textContent=areaLabel(roomData.rooms.find(r=>r.id===station.room_id),roomData);
   renderPropertyInfo($('#property-info'),roomData,selected);
+}
+// Live location while walking: the title, the room menu and the area follow
+// the visitor's feet. Circulation and outdoor ground name themselves and
+// show no borrowed room area - a previous room's m² never travels along.
+function applyWalkLocation(name,station){
+  $('#view-title').textContent=name;
+  if(station){
+    walk.room=station.room_id;
+    $('#walk-room').value=station.room_id;
+    $('#walk-room-area').textContent=areaLabel(roomData?.rooms.find(r=>r.id===station.room_id),roomData);
+  } else $('#walk-room-area').textContent='';
+  invalidate();
 }
 function travelRoom(roomId){
   pendingRoomJump.cancel();
@@ -276,7 +317,15 @@ function setup() {
   // antialiasing: the chain that used to do it is not in that path. On desktop
   // the composer's SMAA owns it and canvas MSAA would be paying twice.
   const coarse=matchMedia('(pointer: coarse)').matches;
-  renderer = new THREE.WebGLRenderer({antialias:coarse, alpha:false, powerPreference:'high-performance'});
+  try {
+    renderer = new THREE.WebGLRenderer({antialias:coarse, alpha:false, powerPreference:'high-performance'});
+  } catch (error) {
+    // No 3D is not no product: the boot screen keeps the verified facts,
+    // the listing route and an honest explanation on screen.
+    console.error('WebGL unavailable', error);
+    message(t('loadFailed'), true); $('#retry').hidden = true; $('#no3d').hidden = false;
+    contextLost = true; return;
+  }
   renderer.setPixelRatio(renderPixelRatio(host.clientWidth,host.clientHeight,devicePixelRatio,coarse));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.localClippingEnabled = true;
@@ -313,7 +362,7 @@ function setup() {
     deviceQA.interrupt();
     document.querySelectorAll('[data-needs-model]').forEach(b=>b.disabled=true);
     if(pendingCapture){pendingCapture(null,new Error('WebGL context lost'));pendingCapture=null;}
-    message('3D grafik bağlantısı kesildi. Sayfayı yeniden açarak devam edebilirsin.',true);
+    message(t('contextLost'),true);$('#no3d').hidden=false;
     $('#retry').onclick=()=>location.reload();
   });
   // Seven compressed meshes were being unpacked two at a time on hardware that
@@ -341,8 +390,9 @@ function selectView(id, initial = false) {
   document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === id));
   $('#view-title').textContent = titles[id];
   $('#section-label').textContent = id.startsWith('f')
-    ? (id==='f3'?'1,30 m kesit':'1,60 m kesit')
-    : id === 'building' ? 'Bahçe · Havuz · Villa' : id==='region'?'Angora Evleri · Beysukent, Ankara':'Angora Evleri · Ankara';
+    ? (id==='f3'?t('cut130'):t('cut160'))
+    : id === 'building' ? t('buildingSub') : id==='region'?t('regionSub'):t('neighborhoodSub');
+  $('#cut-light-note').hidden = !id.startsWith('f');
   $('#region-panel').hidden=id!=='region';
   // The Bölge scale is a north-up map layer; the clouds sweep while the 3D
   // frame pulls out beneath it, so the model leaves smoothly either way.
@@ -369,6 +419,86 @@ function selectView(id, initial = false) {
   else if(previous!==id)frame(false,true);
   host.dataset.view = id; host.dataset.loaded = 'true'; rememberState(); invalidate();
 }
+let walkData=null,tourStep=-1;
+// The buyer's room menu: drawing names in the viewer's language, internal
+// codes ('Z06') demoted to tooltips, twins told apart by code only.
+function fillRoomMenu(){
+  const select=$('#walk-room');
+  const value=select.value;
+  select.replaceChildren();
+  for(let f=0;f<4;f++){
+    const group=document.createElement('optgroup');group.label=titles['f'+f];
+    const floorStations=walkData.stations.filter(s=>s.floor_index===f);
+    for(const station of floorStations){
+      const room=roomData?.rooms.find(r=>r.id===station.room_id);
+      const name=roomName(station.name);
+      const twins=floorStations.filter(s=>s.name===station.name).length>1;
+      const option=new Option(twins&&room?name+' ('+room.code+')':name,station.room_id);
+      if(room)option.title=name+' \u00b7 '+room.code;
+      group.append(option);
+    }
+    select.append(group);
+  }
+  if(value)select.value=value;
+}
+// One language switch, every surface: static DOM, state-carrying labels,
+// the room menu, the plan's room tags, the map, the property sheet.
+function refreshChrome(){
+  applyStatic();
+  $('#lang-toggle').textContent=currentLang()==='tr'?'EN':'TR';
+  $('#toggle-furniture').textContent=t('furniture');
+  if(walk?.active){
+    const station=walk.surface.station(walk.room);
+    if(station)$('#view-title').textContent=roomName(station.name);
+    $('#section-label').textContent=titles['f'+walk.floor]+' \u00b7 '+t('walkSub');
+    $('#gesture-help').textContent=t('walkHelp');
+  } else {
+    $('#view-title').textContent=titles[selected];
+    $('#section-label').textContent=selected.startsWith('f')
+      ?(selected==='f3'?t('cut130'):t('cut160'))
+      :selected==='building'?t('buildingSub'):selected==='region'?t('regionSub'):t('neighborhoodSub');
+  }
+  if(walkData)fillRoomMenu();
+  if(roomData)renderPropertyInfo($('#property-info'),roomData,selected);
+  refreshLiftControl();
+  document.querySelectorAll('.room-label strong').forEach(el=>{
+    el.dataset.base??=el.textContent;el.textContent=roomName(el.dataset.base);
+  });
+  if(regionMap){
+    const open=selected==='region';
+    regionMap.element.remove();regionMap=null;
+    if(open){regionMap=createRegionMap($('#app'));regionMap.show();}
+  }
+  hotspots?.reset();
+  if(tourStep>=0)$('#tour-caption').textContent=t(TOUR[tourStep].caption);
+  invalidate();
+}
+// \u00a77: a short, interruptible presentation sequence over composed
+// views. Any direct touch of the scene hands control straight back.
+const TOUR=[
+  {view:'building',caption:'tourExterior'},
+  {view:'f1',caption:'tourLiving'},
+  {view:'f2',caption:'tourUpper'},
+  {view:'f0',caption:'tourGarden'},
+  {walk:/salon/i,caption:'tourInterior'},
+  {view:'neighborhood',caption:'tourStreet'},
+  {view:'region',caption:'tourRegion'},
+];
+function tourApply(){
+  const stop=TOUR[tourStep];
+  $('#tour-caption').textContent=t(stop.caption);
+  $('#tour-prev').disabled=tourStep===0;
+  $('#tour-next').textContent=tourStep===TOUR.length-1?t('tourEnd'):'\u203a';
+  if(stop.walk){
+    const station=walkData?.stations.find(x=>stop.walk.test(x.name))??walkData?.stations[0];
+    if(station)travelRoom(station.room_id);
+  } else {
+    if(walk?.active)exitWalk(false);
+    selectView(stop.view);
+  }
+}
+function startTour(){if(!ready)return;tourStep=0;$('#tour-bar').hidden=false;tourApply();}
+function endTour(openInfo){tourStep=-1;$('#tour-bar').hidden=true;if(openInfo)panel('info-panel',true);}
 // The lens readout speaks photographer: the 35 mm-equivalent focal length
 // (24 mm frame height) of the tour camera's vertical field.
 function updateLensReadout(){
@@ -391,7 +521,7 @@ function enterWalk(roomId) {
   $('#walk-room').value=station.room_id;
   $('#walk-lens').value=Math.round(walk.camera.fov);updateLensReadout();
   document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===selected));
-  $('#gesture-help').textContent='Sürükle: 360° bak · Yerdeki noktalara dokun: ilerle';
+  $('#gesture-help').textContent=t('walkHelp');
   resize();invalidate();
 }
 function exitWalk(reselect = true) {
@@ -405,14 +535,14 @@ function exitWalk(reselect = true) {
   planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);
   camera.fov=35;camera.updateProjectionMatrix();controls.enableRotate=true;$('#rotate-mode').disabled=false;
   if(reselect){selectView(selected);frame(false);}
-  $('#gesture-help').textContent='Sürükle: döndür · İki parmak: kaydır / yakınlaştır';
+  $('#gesture-help').textContent=t('orbitHelp');
 }
 async function loadModel() {
-  if (loading || ready) return;
+  if (loading || ready || !renderer) return;
   loading = true; host.dataset.loaded = 'false';
   // Clear any bar left by a failed attempt before the manifest is back.
   progress(null);
-  message('Bütün model yükleniyor…');
+  message(t('loadingAll'));
   const staged = new Map(), stagedClips = new Map();
   try {
     // Phones get the derived mobile set (simplified geometry, 512px webp,
@@ -615,6 +745,23 @@ async function loadModel() {
       washGroup(groups.get('context'),0.80);
       scene.add(planWash);
     }
+    {
+      // \u00a713: cutting storeys away for viewing must not silently
+      // re-light the house. A shadow-only twin of the villa's architecture
+      // lives on layer 1 - the main camera never draws it, every shadow
+      // camera does - so the WHOLE building keeps shading the garden, the
+      // terraces and the open floor even while upper storeys are hidden.
+      const proxyMaterial=new THREE.MeshBasicMaterial();
+      const shadowProxy=new THREE.Group();shadowProxy.name='Whole-building shadow proxy';
+      groups.get('villa').traverse(o=>{
+        if(!o.isMesh||!o.castShadow||o.userData?.category==='furniture')return;
+        const g=new THREE.Mesh(o.geometry,proxyMaterial);
+        g.matrixAutoUpdate=false;g.matrix.copy(o.matrixWorld);
+        g.castShadow=true;g.receiveShadow=false;g.layers.set(1);g.userData.aoExcluded=true;
+        shadowProxy.add(g);
+      });
+      scene.add(shadowProxy);
+    }
     buildingBox = new THREE.Box3().setFromObject(groups.get('villa'));
     // Keep the entrance, pool terrace and basement garden in the building frame.
     gardenBox = new THREE.Box3(new THREE.Vector3(-10.2, -4, -29.1), new THREE.Vector3(12.5, 3.4, 11));
@@ -632,8 +779,8 @@ async function loadModel() {
       for(const b of contextData.buildings)if(b.bounds)for(const p of b.bounds)settlementBox.expandByPoint(new THREE.Vector3(...p));
       if(!settlementBox.isEmpty())contextBox=settlementBox.union(buildingBox);
       siteContext=createSiteContext(contextData,host,()=>selectView('building'));
-      $('#context-count').textContent=`${contextData.buildings.length} yapı · ${atlasMeta}`;
-    } catch(error){console.warn(error);$('#context-count').textContent=atlasMeta;}
+      $('#context-count').textContent=`${contextData.buildings.length} ${t('buildingsWord')} · ${atlasMeta()}`;
+    } catch(error){console.warn(error);$('#context-count').textContent=atlasMeta();}
     // The neighbourhood is in by now, so its bounds, its horizon fade and its
     // white massing are set up here rather than in a continuation that used to
     // run after the first frame.
@@ -648,18 +795,14 @@ async function loadModel() {
     if (capScene) {soilCap = createSoilCap(capScene); if (soilCap) scene.add(soilCap.group);}
     roomData=results[3].value;annotations=createAnnotations(roomData,host,enterWalk);scene.add(annotations.group);
     walk = new InteriorWalk(results[4].value,renderer.domElement,invalidate);scene.add(walk.rig);
+    locator=createWalkLocator(walk.surface,{minX:buildingBox.min.x,maxX:buildingBox.max.x,
+      minZ:buildingBox.min.z,maxZ:buildingBox.max.z});
     lighting.setFixtures(results[4].value.lights);hotspots=createHotspots(host,walk,travelRoom);
     lift=createLift({groups,clips:stagedClips.get('villa')??[],clipPlane:clip,fullHeight,
       shadowsDirty:()=>{renderer.shadowMap.needsUpdate=true;},onSettled:()=>refreshLiftControl()});
     refreshLiftControl();
-    for(let f=0;f<4;f++) {
-      const group=document.createElement('optgroup');group.label=titles['f'+f];
-      for(const station of results[4].value.stations.filter(s=>s.floor_index===f)) {
-        const room=results[3].value.rooms.find(r=>r.id===station.room_id);
-        group.append(new Option(station.name+' · '+room.code,station.room_id));
-      }
-      $('#walk-room').append(group);
-    }
+    walkData=results[4].value;
+    fillRoomMenu();
     // Everything the first tap used to pay for is paid for here, behind the
     // progress bar. A storey button used to hand the driver a few hundred
     // programs to build at the moment it was pressed - the villa is only ever
@@ -695,7 +838,7 @@ async function loadModel() {
     // freeze the floor buttons used to carry. So while the boot screen is
     // still up, each state is rendered once: every program, shadow pass and
     // cap the floor buttons can ever ask for is already warm.
-    message('Görünümler hazırlanıyor…');
+    message(t('preparing'));
     await new Promise(resolve=>setTimeout(resolve,0));
     // A warming render frustum-culls, and compile() gathers a light set no
     // real view uses - both leave programs for the first real floor click.
@@ -725,6 +868,8 @@ async function loadModel() {
       await new Promise(resolve=>setTimeout(resolve,0));
     }
     for(const o of culled)o.frustumCulled=true;
+    scene.traverse(o=>{if(o.isLight&&o.shadow)o.shadow.camera.layers.enable(1);});
+    renderer.shadowMap.needsUpdate=true;
     selectView(selected, true);
     // One composed frame before the bar goes: the occlusion, antialias, bloom,
     // grade and dither passes compile on their first use like anything else.
@@ -738,10 +883,16 @@ async function loadModel() {
       setTimeout(()=>boot.remove(),720);
     }
     delete $('#app').dataset.booting;
+    // \u00a77: a plain entry greets with the property card - identity, the
+    // verified facts, one clear action. Deep links land untouched, and the
+    // card returns for every fresh tab so demonstrations open on it.
+    let welcomeSeen=false;
+    try{welcomeSeen=sessionStorage.getItem('angora-welcome')==='1';}catch{/* private mode */}
+    if(!new URLSearchParams(location.search).has('view')&&!welcomeSeen)$('#welcome').hidden=false;
   } catch (error) {
     for (const group of staged.values()) {scene.remove(group); dispose(group);}
     groups.clear();
-    message('Model yüklenemedi. Bağlantını kontrol edip tekrar deneyebilirsin.', true);
+    message(t('loadFailed'), true);$('#no3d').hidden=false;
     console.error('Model load failed', error);
   } finally {loading = false;}
 }
@@ -769,7 +920,7 @@ function mode(pan) {
   controls.touches.ONE = pan ? THREE.TOUCH.PAN : THREE.TOUCH.ROTATE;
   controls.mouseButtons.LEFT = pan ? THREE.MOUSE.PAN : THREE.MOUSE.ROTATE;
   $('#rotate-mode').setAttribute('aria-pressed', !pan); $('#pan-mode').setAttribute('aria-pressed', pan);
-  $('#gesture-help').textContent = pan ? 'Sürükle: kaydır · İki parmak: kaydır ve yakınlaştır' : 'Sürükle: döndür · İki parmak: kaydır ve yakınlaştır';
+  $('#gesture-help').textContent = t(pan?'panHelp':'orbitHelp');
 }
 // Panels remain usable if WebGL is unavailable. Model actions are disabled
 // until loading succeeds; do not strand every control in the renderer catch.
@@ -811,6 +962,17 @@ function bindInterface() {
   $('#toggle-lights').onclick=()=>{interiorLights=!interiorLights;$('#toggle-lights').setAttribute('aria-pressed',interiorLights);lighting?.setLights(interiorLights);invalidate();};
   $('#lighting-style').onchange=e=>{lighting?.setStyle(e.target.value);rememberState();invalidate();};
   $('#return-villa').onclick=()=>selectView('building');
+  applyStatic();
+  $('#lang-toggle').textContent=currentLang()==='tr'?'EN':'TR';
+  $('#lang-toggle').onclick=()=>setLang(currentLang()==='tr'?'en':'tr',refreshChrome);
+  const dismissWelcome=()=>{$('#welcome').hidden=true;try{sessionStorage.setItem('angora-welcome','1');}catch{/* private mode */}};
+  $('#welcome-close').onclick=dismissWelcome;
+  $('#welcome-explore').onclick=()=>{dismissWelcome();if(ready)selectView('f1');};
+  $('#welcome-tour').onclick=()=>{dismissWelcome();startTour();};
+  $('#tour-exit').onclick=()=>endTour(false);
+  $('#tour-prev').onclick=()=>{if(tourStep>0){tourStep--;tourApply();}};
+  $('#tour-next').onclick=()=>{if(tourStep<TOUR.length-1){tourStep++;tourApply();}else endTour(true);};
+  host.addEventListener('pointerdown',()=>{if(tourStep>=0)endTour(false);},{capture:true});
   // The tour's lens, draggable by hand; the readout speaks photographer -
   // the 35 mm-equivalent focal length of the chosen vertical field.
   $('#walk-lens').oninput=e=>{

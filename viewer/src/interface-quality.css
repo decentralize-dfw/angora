@@ -62,7 +62,14 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
   .site-label-villa {min-height:38px;min-width:80px;font-size:12px;padding:7px 13px;}
   .walk-pad {grid-template-columns:repeat(3,42px);grid-template-rows:repeat(2,42px);}
   .walk-pad button {min-width:42px;min-height:42px;font-size:17px;}
-  .walk-close {width:40px;height:40px;font-size:20px;}
+  .walk-close {min-height:40px;font-size:12px;padding:0 13px;}
+  /* the visible controls stay at the owner's compact scale; the TOUCH
+     target underneath still reaches 44px through an invisible apron */
+  .quiet-button,.scale-picker button,.floor-row button,.region-radius button,
+  .side-tools button,.rm-filters button,.region-panel button {position:relative;}
+  .quiet-button::after,.scale-picker button::after,.floor-row button::after,
+  .region-radius button::after,.side-tools button::after,.rm-filters button::after,
+  .region-panel button::after {content:'';position:absolute;inset:-5px;border-radius:inherit;}
   h1 {font-size:14px;}
 }
 @media(orientation:landscape) and (max-height:520px) {
