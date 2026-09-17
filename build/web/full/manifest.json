@@ -29,9 +29,9 @@
    "id": "interior",
    "group": "villa",
    "furniture": true,
-   "file": "../kanka/INTERIOR-2-opt-v10-DRACO.glb",
-   "bytes": 2359324,
-   "sha256": "8e76117f5e6bd4a4c4c1d673a45a46d2df5de61154e27a1ad1880b41cf6dc3a0",
+   "file": "../sansi/INTERIOR-3-opt-DRACO.glb",
+   "bytes": 2372348,
+   "sha256": "cf2dbd870da31a98b79d32a21e69f4f266464bfc98412d9c93c9ffa481eba3cf",
    "origin": "kanka-user-optimised"
   },
   {
