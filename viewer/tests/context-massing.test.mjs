@@ -40,11 +40,16 @@ test('Equal-colour ceilings and walls keep distinct semantic materials',()=>{
 test('Two materials that share a texture slot by value but not by image stay apart',()=>{
   const shared=new THREE.Texture();
   const other=new THREE.Texture();
-  const a=new THREE.MeshStandardMaterial({name:'roof',color:0xffffff});a.map=shared;
-  const b=new THREE.MeshStandardMaterial({name:'green tiles',color:0xffffff});b.map=other;
+  // Both ungraded, same semantic class: only the image decides.
+  const a=new THREE.MeshStandardMaterial({name:'green tiles',color:0xffffff});a.map=shared;
+  const b=new THREE.MeshStandardMaterial({name:'Neighbor 20 green tiles',color:0xffffff});b.map=other;
   assert.notEqual(materialSignature(a),materialSignature(b));
   b.map=shared;
   assert.equal(materialSignature(a),materialSignature(b));
+  // An exterior-graded name refuses to merge with a value-identical
+  // ungraded one: the grade later re-tiles or re-textures only its own.
+  const roof=new THREE.MeshStandardMaterial({name:'roof',color:0xffffff});roof.map=shared;
+  assert.notEqual(materialSignature(roof),materialSignature(a));
 });
 
 test('The garage vehicle reduces to a single abstract base',()=>{

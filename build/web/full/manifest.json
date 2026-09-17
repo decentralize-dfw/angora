@@ -20,9 +20,10 @@
   {
    "id": "building",
    "group": "villa",
-   "file": "../kanka/BUILDING-2-opt-v11-DRACO.glb",
-   "bytes": 3949048,
-   "sha256": "0b08d3967a878af44acbb40bf4e1d32bdad042fbcb66b11039ff672f8b41298c",
+   "exterior_grade": true,
+   "file": "../sansi/bldg-3-opt-DRACO.glb",
+   "bytes": 3931404,
+   "sha256": "3d4c561da203ca187e16e5ece002364ec5cc2c754570f7a83b57ccf300acfb81",
    "origin": "kanka-user-optimised"
   },
   {
@@ -37,6 +38,7 @@
   {
    "id": "garden",
    "group": "garden",
+   "exterior_grade": true,
    "file": "../kanka/villa-garden-ground-2-opt-v4.glb",
    "bytes": 113232,
    "sha256": "1df8d238886c2b33bf15510366b0e0075fa8e72f07e26e31f87add1233c1f42e",
@@ -55,6 +57,7 @@
    "id": "context-ground",
    "group": "context",
    "carve_plot": true,
+   "exterior_grade": true,
    "file": "../kanka/context-garden-ground-opt-v3.glb",
    "bytes": 3365360,
    "sha256": "866f759e687e94631107360b30c6ec27c68f218d1ccbcfb3cc5db879ad59f711",
