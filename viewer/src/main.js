@@ -357,7 +357,11 @@ function setup() {
   // the composer's SMAA owns it and canvas MSAA would be paying twice.
   const coarse=matchMedia('(pointer: coarse)').matches;
   try {
-    renderer = new THREE.WebGLRenderer({antialias:coarse, alpha:false, powerPreference:'high-performance'});
+    // stencil: three defaults the canvas attribute to false, and a phone draws
+    // straight to the canvas with no composer in the path - so without it the
+    // section caps' parity count had nowhere to land and the cut faces stayed
+    // hollow on exactly the devices that cannot afford the post chain.
+    renderer = new THREE.WebGLRenderer({antialias:coarse, alpha:false, stencil:true, powerPreference:'high-performance'});
   } catch (error) {
     // No 3D is not no product: the boot screen keeps the verified facts,
     // the listing route and an honest explanation on screen.
