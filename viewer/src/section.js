@@ -49,8 +49,14 @@ export function smoothStep(t) {
 // than a black wire; the earth's line is the ink itself.
 export const SECTION_POCHE = {pitch:0.14, duty:0.065, ground:[0.020,0.020,0.023], ink:[0.32,0.31,0.29], strength:0.62};
 export const SOIL_POCHE = {pitch:0.55, duty:0.075, ground:[0.580,0.568,0.527], ink:[0.015,0.015,0.016], strength:1.0};
-export function createHatchMaterial({pitch, duty, ground, ink, strength=0.62}) {
-  return new THREE.ShaderMaterial({side:THREE.DoubleSide,
+// `cut` gives the material a horizontal section plane of its own. The authored
+// caps sit exactly on the cut and need none, but the poché that closes a cut
+// solid from the inside is a whole 3D body - without the discard it would
+// draw the storeys the section has already taken away. It is the same ruling
+// in the same world space either way, so the two read as one drawing.
+export function createHatchMaterial({pitch, duty, ground, ink, strength=0.62}, {cut=false, side=THREE.DoubleSide}={}) {
+  const material = new THREE.ShaderMaterial({side,
+    uniforms: cut ? {uCut:{value:1e9}} : {},
     vertexShader: `varying vec3 worldPosition;
       void main() {
         vec4 world = modelMatrix * vec4(position, 1.0);
@@ -58,10 +64,12 @@ export function createHatchMaterial({pitch, duty, ground, ink, strength=0.62}) {
         gl_Position = projectionMatrix * viewMatrix * world;
       }`,
     fragmentShader: `varying vec3 worldPosition;
+      ${cut ? 'uniform float uCut;' : ''}
       // how much of one period is inked, and the ruling's antiderivative
       const float INK = ${(2 * duty).toFixed(5)};
       float ruled(float x) { return floor(x) * INK + min(fract(x), INK); }
       void main() {
+        ${cut ? 'if (worldPosition.y > uCut) discard;' : ''}
         float v = (worldPosition.x + worldPosition.y + worldPosition.z) / ${pitch.toFixed(4)};
         float w = max(fwidth(v), 1e-5);
         float hatch = clamp((ruled(v + 0.5 * w) - ruled(v - 0.5 * w)) / w, 0.0, 1.0);
@@ -70,6 +78,7 @@ export function createHatchMaterial({pitch, duty, ground, ink, strength=0.62}) {
         #include <colorspace_fragment>
       }`
   });
+  return material;
 }
 
 // These contours come from opposite source wall faces. They are independent of

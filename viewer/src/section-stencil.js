@@ -156,3 +156,113 @@ export function createStencilCaps(villaGroup, clip, bounds) {
     cap.position.y = height - 0.004;
   }};
 }
+
+// ---------------------------------------------------------------------------
+// The interior poché: what actually closes bldg-3's cut.
+//
+// Parity is exact but it needs a closed surface, and the optimised delivery is
+// not one. Measured over build/web: of bldg-3's 32 primitives only two leave
+// no boundary edge - `Clay tile`, `roof-7`, `STRUCCO`, `WHT`, `WOOD-FL`,
+// `ceiling` and `terra_floor` all have holes - so the stencil can never reach
+// the surfaces the review is about ("çatının kestiği yerleri kontrol et!
+// bunlar bu kadar boktan olmamalı").
+//
+// What the delivery does have is orientation. Every clipped material is drawn
+// DoubleSide, so where the plane opens a solid the renderer cheerfully draws
+// its INSIDE with the tile material - that is the look being complained
+// about. Painting those inward faces with the same wall poché turns the same
+// pixels into a drawn cut, and it needs no watertightness at all: only which
+// side of each mesh faces in.
+//
+// bldg-3 answers that badly too - roof.003, white_trim, wood_floor, ceiling
+// and terra_floor all arrive wound INSIDE-OUT (signed volume about their own
+// centre comes back negative). So the side is measured per mesh rather than
+// assumed: an outward shell shows its inside on BackSide, an inverted one on
+// FrontSide. A sheet has no inside at all and is left alone.
+const SHELL_RATIO = 0.002;
+
+// Signed volume about the geometry's own bbox centre, over its bbox volume.
+// Taken about the centre so an open sheet reads ~0 wherever it sits in world
+// space, which is the whole point: a sheet has no interior to ink.
+function measureShell(geometry) {
+  const position = geometry.attributes?.position;
+  if (!position) return 0;
+  const index = geometry.index;
+  const triangles = Math.floor((index ? index.count : position.count) / 3);
+  if (triangles < 2) return 0;
+  geometry.computeBoundingBox();
+  const box = geometry.boundingBox;
+  const cx = (box.min.x + box.max.x) / 2, cy = (box.min.y + box.max.y) / 2, cz = (box.min.z + box.max.z) / 2;
+  const span = Math.max(box.max.x - box.min.x, 1e-4) * Math.max(box.max.y - box.min.y, 1e-4) *
+    Math.max(box.max.z - box.min.z, 1e-4);
+  let volume = 0;
+  for (let t = 0; t < triangles; t++) {
+    const i0 = index ? index.getX(t * 3) : t * 3;
+    const i1 = index ? index.getX(t * 3 + 1) : t * 3 + 1;
+    const i2 = index ? index.getX(t * 3 + 2) : t * 3 + 2;
+    const ax = position.getX(i0) - cx, ay = position.getY(i0) - cy, az = position.getZ(i0) - cz;
+    const bx = position.getX(i1) - cx, by = position.getY(i1) - cy, bz = position.getZ(i1) - cz;
+    const gx = position.getX(i2) - cx, gy = position.getY(i2) - cy, gz = position.getZ(i2) - cz;
+    volume += (ax * (by * gz - bz * gy) + ay * (bz * gx - bx * gz) + az * (bx * gy - by * gx)) / 6;
+  }
+  return volume / span;
+}
+
+// > 0 outward shell (its inside is the back face), < 0 inside-out (its inside
+// is the front face), 0 a sheet with no interior.
+export function shellSide(geometry) {
+  if (!geometry?.isBufferGeometry) return 0;
+  if (!('angoraShellRatio' in geometry.userData)) geometry.userData.angoraShellRatio = measureShell(geometry);
+  const ratio = geometry.userData.angoraShellRatio;
+  return ratio > SHELL_RATIO ? 1 : ratio < -SHELL_RATIO ? -1 : 0;
+}
+
+export function pocheEligible(object) {
+  if (!object?.isMesh) return false;
+  if (object.userData.sectionPoche) return false;   // never twin a twin
+  if (!object.userData.sectionClipped) return false; // only what the plane cuts
+  if (/lift|asans/i.test(object.name)) return false;
+  const materials = Array.isArray(object.material) ? object.material : [object.material];
+  // See-through glass has no poché: a window's cut belongs to its frame.
+  if (!materials.length || !materials.every(m => m && !isGlazing(m))) return false;
+  return shellSide(object.geometry) !== 0;
+}
+
+export function createInteriorPoche(villaGroup, clip) {
+  const group = new THREE.Group(); group.name = 'Interior section poché';
+  const sides = new Map();
+  const materialFor = side => {
+    if (!sides.has(side)) {
+      const material = createHatchMaterial(SECTION_POCHE, {cut: true, side});
+      // The source draws this very triangle with its own material, so the
+      // poché has to win the tie rather than fight it.
+      material.polygonOffset = true;
+      material.polygonOffsetFactor = -2;
+      material.polygonOffsetUnits = -4;
+      sides.set(side, material);
+    }
+    return sides.get(side);
+  };
+  const sources = [];
+  villaGroup.updateMatrixWorld(true);
+  villaGroup.traverse(o => { if (pocheEligible(o)) sources.push(o); });
+  const twins = [];
+  for (const source of sources) {
+    const twin = new THREE.Mesh(source.geometry,
+      materialFor(shellSide(source.geometry) > 0 ? THREE.BackSide : THREE.FrontSide));
+    twin.matrixAutoUpdate = false; twin.matrix.copy(source.matrixWorld);
+    twin.renderOrder = 6;   // after the content that drew the same face
+    twin.userData.sectionPoche = true; twin.userData.aoExcluded = true;
+    twin.castShadow = twin.receiveShadow = false;
+    twin.frustumCulled = false;
+    group.add(twin); twins.push({twin, source});
+  }
+  return {group, count: twins.length, update(height, visible) {
+    group.visible = visible;
+    if (!visible) return;
+    for (const material of sides.values()) material.uniforms.uCut.value = height;
+    // The furniture toggle hides its bodies; their cut has to go with them,
+    // the way the authored furniture poché layer already does.
+    for (const {twin, source} of twins) twin.visible = source.visible;
+  }};
+}
