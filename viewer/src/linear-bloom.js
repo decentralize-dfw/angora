@@ -8,13 +8,6 @@ const makeMaterial=(uniforms,fragmentShader)=>new ShaderMaterial({uniforms,verte
   depthTest:false,depthWrite:false,toneMapped:false});
 const makeTarget=()=>new WebGLRenderTarget(1,1,{type:HalfFloatType,minFilter:LinearFilter,magFilter:LinearFilter,depthBuffer:false});
 
-// A highlight that overflows the half-float scene buffer arrives here as Inf,
-// and the Inf/Inf in the soft-knee weight below turns it into NaN. The blur is
-// separable, so one such sample spreads along a row and then down a column and
-// reaches the screen as a solid axis-aligned block. Both shaders that sample a
-// buffer drop non-finite values first: equal(c,c) is false only for NaN, and
-// the clamp holds a single hot sample to a level ordinary highlights never
-// reach, so one bad pixel can no longer be smeared across the frame.
 export const FINITE_RGB='vec3 finiteRgb(vec3 c,float limit){return min(mix(vec3(0.0),c,vec3(equal(c,c))),vec3(limit));}';
 
 export function softKneeWeight(luminance,threshold,knee) {
@@ -22,8 +15,6 @@ export function softKneeWeight(luminance,threshold,knee) {
   return Math.max(luminance-threshold,soft*soft/(4*knee+1e-5))/Math.max(luminance,1e-5);
 }
 
-// Linear HDR -> soft-knee bright half-size -> quarter-size separable blur ->
-// linear addition. The single OutputPass after this owns exposure/ACES/sRGB.
 export class LinearBloomPass extends Pass {
   constructor(profile=referenceProfile) {
     super();this.bright=makeTarget();this.blurA=makeTarget();this.blurB=makeTarget();

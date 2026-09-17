@@ -1,10 +1,3 @@
-// R46 | Two complete languages, one source of truth.
-// Turkish is the property's own language; English serves international
-// demonstrations. French/Italian slot in as further columns when verified
-// translations exist - nothing here is structural to Turkish.
-// Static DOM carries data-i18n / data-i18n-label attributes; dynamic code
-// asks t(). Room names translate through ROOM_TERMS so drawing names stay
-// the source of truth and only their language changes.
 const STRINGS = {
   tr: {
     scaleRegion: 'Bölge', scaleStreet: 'Yakın çevre', scaleVilla: 'Villa',
@@ -121,8 +114,6 @@ const STRINGS = {
     piListingNote: 'Listing areas are from RE/MAX P56131836. ≈ marks the modelled ground surface within interpreted garden boundaries, or a photo-based pool estimate; not an on-site measurement or the plot area.',
   },
 };
-// Drawing room names, translated as terms - never invented, only rendered
-// in the viewer's language. Anything unmatched stays in Turkish.
 const ROOM_TERMS = [
   [/^salon$/i, 'Living room'], [/^mutfak$/i, 'Kitchen'], [/^yemek alanı$/i, 'Dining area'],
   [/^oturma alanı$/i, 'Sitting area'], [/^antre$/i, 'Entry hall'], [/^giriş$/i, 'Entrance'],
@@ -140,7 +131,7 @@ const ROOM_TERMS = [
   [/^yan bahçe$/i, 'Side garden'], [/^otopark$/i, 'Parking'], [/açık balkon/i, 'Open balcony'],
 ];
 let lang = (() => {
-  if (typeof location === 'undefined') return 'tr';   // node-side tests
+  if (typeof location === 'undefined') return 'tr';
   const forced = new URLSearchParams(location.search).get('lang');
   if (forced === 'en' || forced === 'tr') return forced;
   try { return localStorage.getItem('angora-lang') === 'en' ? 'en' : 'tr'; } catch { return 'tr'; }
@@ -152,8 +143,6 @@ export function roomName(name) {
   const hit = ROOM_TERMS.find(([rx]) => rx.test(name.trim()));
   return hit ? hit[1] : name;
 }
-// static DOM: <el data-i18n="key"> for text, data-i18n-label for aria-label,
-// data-i18n-title for title. Called at boot and again on every switch.
 export function applyStatic(root = document) {
   for (const el of root.querySelectorAll('[data-i18n]')) el.textContent = t(el.dataset.i18n);
   for (const el of root.querySelectorAll('[data-i18n-label]')) el.setAttribute('aria-label', t(el.dataset.i18nLabel));
@@ -163,7 +152,7 @@ export function applyStatic(root = document) {
 export function setLang(next, onChange) {
   if (next === lang) return;
   lang = next;
-  try { localStorage.setItem('angora-lang', next); } catch { /* private mode */ }
+  try { localStorage.setItem('angora-lang', next); } catch { }
   applyStatic();
   onChange?.(next);
 }

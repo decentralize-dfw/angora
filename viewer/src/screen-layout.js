@@ -2,9 +2,6 @@ export function rectanglesOverlap(a,b,gap=0) {
   return a.left<b.right+gap&&a.right>b.left-gap&&a.top<b.bottom+gap&&a.bottom>b.top-gap;
 }
 
-// Stable input order wins. Never pile labels at a clamped screen edge or move
-// a name far into a different room. Dense labels return as the user zooms in;
-// every room remains available from the tour's room selector.
 export function layoutAnchoredLabels(items,{width,height,obstacles=[],gap=6,padding=8,maxDisplacement=24}) {
   const placed=[],occupied=obstacles.slice();
   for(const item of items) {
@@ -22,14 +19,6 @@ export function layoutAnchoredLabels(items,{width,height,obstacles=[],gap=6,padd
   return placed;
 }
 
-// Actual visible controls, including open sheets and safe-area positioning,
-// replace guessed top/bottom reservations for different phone orientations.
-// Measuring the interface forces the browser to lay the page out, and this ran
-// twice a frame over fourteen selectors - about sixty forced layouts a second,
-// which on a phone is felt as stutter rather than seen. The rectangles only
-// move when the window resizes or a panel opens, so a reading is reused for a
-// moment; a panel that opens is avoided within a frame or two, which is not
-// visible. Passing force skips the cache.
 let cached=null,cachedAt=0,cachedHost=null;
 export function collectUIObstacles(host,force=false) {
   const now=typeof performance==='object'?performance.now():Date.now();

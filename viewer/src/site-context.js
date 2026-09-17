@@ -26,8 +26,6 @@ export function createSiteContext(data,host,onVilla){
       if(item.el.hidden)continue;
       candidates.push({x,y,entry:item,width:item.el.offsetWidth,height:item.el.offsetHeight});
     }
-    // Horizontal ground-plane model distance at the orbit target, not a
-    // surveyed cadastral dimension or screen-wide perspective claim.
     right.set(1,0,0).applyQuaternion(camera.quaternion);right.y=0;right.normalize();
     a.copy(target).project(camera);b.copy(target).add(right).project(camera);
     const ppm=Math.abs(b.x-a.x)*w/2;

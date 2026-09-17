@@ -1,4 +1,3 @@
-// Quiet, opt-in feedback, synthesized locally without downloading audio.
 export function createInterfaceSound({button,root=document,storage,Context=globalThis.AudioContext??globalThis.webkitAudioContext}={}) {
   let enabled=false,context=null,last=-Infinity,generation=0;
   if(storage===undefined)try {storage=globalThis.localStorage;} catch {}
@@ -20,7 +19,7 @@ export function createInterfaceSound({button,root=document,storage,Context=globa
       gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(.025,now+.007);gain.gain.exponentialRampToValueAtTime(.0001,now+.07);
       tone.connect(gain);gain.connect(context.destination);tone.start(now);tone.stop(now+.08);
       tone.onended=()=>{tone.disconnect();gain.disconnect();};
-    } catch { /* Audio availability must never interrupt navigation. */ }
+    } catch { }
   }
   button.disabled=!Context;
   update();

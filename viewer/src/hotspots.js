@@ -1,9 +1,5 @@
 import * as THREE from 'three';
 import {t,roomName} from './i18n.js';
-// The admission rule, pure and testable: a same-floor target earns a marker
-// only when its WALK is not much longer than its sightline - anything else
-// is behind walls and belongs in the room menu. Admitted targets anchor a
-// few steps along their actual route, i.e. at the doorway.
 export function reachableStations(surface,position,floor,currentRoom,furniture,limit=3){
   const candidates=surface.data.stations.filter(s=>s.floor_index===floor&&s.room_id!==currentRoom)
     .sort((a,b)=>((a.position[0]-position.x)**2+(a.position[2]-position.z)**2)
@@ -28,20 +24,12 @@ export function createHotspots(host,walk,onTravel) {
     overlay.replaceChildren();entries.length=0;
     const source=walk.surface.station(walk.room);if(!source)return;
     const position=walk.camera.position;
-    // Candidates by sightline distance, admitted by WALK distance: a room
-    // whose route is much longer than its sightline is behind walls, and a
-    // marker for it would float on this room's wall as though it were a
-    // door ("Garaj" over the salon sofa). Those stay in the room menu.
-    // What is admitted anchors a few steps along its actual route - at the
-    // doorway - so the marker points where the feet would go.
     const same=reachableStations(walk.surface,position,walk.floor,walk.room,walk.furniture);
     const adjacent=[-1,1].map(offset=>walk.surface.data.stations.find(s=>s.floor_index===walk.floor+offset&&/hol|antre/i.test(s.name))).filter(Boolean);
     for(const entry of [...same,...adjacent.map(s=>({station:s}))]) {
       const station=entry.station;
       const crossFloor=station.floor_index!==walk.floor;
       const path=crossFloor?walk.surface.path(position.toArray(),station.position,walk.furniture):null;
-      // A stair marker is on the actual traversable stair route, never in the
-      // lower room hidden under a slab. Non-connected floors remain in the room menu.
       if(crossFloor&&!path)continue;
       const anchor=crossFloor?path[Math.min(20,path.length-1)]:entry.anchor;
       const el=document.createElement('button');el.type='button';el.className='hotspot';

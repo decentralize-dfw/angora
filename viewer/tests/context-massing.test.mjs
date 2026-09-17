@@ -9,8 +9,6 @@ import {prepareContextSurfaces} from '../src/context-surfaces.js';
 
 const box=()=>{const g=new THREE.BoxGeometry(1,1,1);g.deleteAttribute('uv');
   g.setAttribute('uv',new THREE.BufferAttribute(new Float32Array(g.attributes.position.count*2),2));return g;};
-// Name each node the way GLTFLoader will: it sanitises whitespace to `_` and
-// drops []./:, which is exactly what a prefix match has to survive.
 const mesh=(name,material)=>{const m=new THREE.Mesh(box(),material);
   m.name=PropertyBinding.sanitizeNodeName(name);return m;};
 
@@ -40,14 +38,11 @@ test('Equal-colour ceilings and walls keep distinct semantic materials',()=>{
 test('Two materials that share a texture slot by value but not by image stay apart',()=>{
   const shared=new THREE.Texture();
   const other=new THREE.Texture();
-  // Both ungraded, same semantic class: only the image decides.
   const a=new THREE.MeshStandardMaterial({name:'green tiles',color:0xffffff});a.map=shared;
   const b=new THREE.MeshStandardMaterial({name:'Neighbor 20 green tiles',color:0xffffff});b.map=other;
   assert.notEqual(materialSignature(a),materialSignature(b));
   b.map=shared;
   assert.equal(materialSignature(a),materialSignature(b));
-  // An exterior-graded name refuses to merge with a value-identical
-  // ungraded one: the grade later re-tiles or re-textures only its own.
   const roof=new THREE.MeshStandardMaterial({name:'roof',color:0xffffff});roof.map=shared;
   assert.notEqual(materialSignature(roof),materialSignature(a));
 });
@@ -66,8 +61,6 @@ test('The garage vehicle reduces to a single abstract base',()=>{
 });
 
 test('Whitening the neighbour blocks cannot reach the site surface they share',()=>{
-  // stone_tile is both the neighbours' floor slabs and the road curbs. Only the
-  // building side may turn white.
   const paving=new THREE.MeshStandardMaterial({name:'stone_tile',color:0xbdb6a8});
   const roof=new THREE.MeshStandardMaterial({name:'roof',color:0x9c5b3f});
   const root=new THREE.Group();
@@ -98,8 +91,6 @@ test('The massing fade drives one shared uniform and only in the close views',()
   assert.equal(uniforms.length,2);
   assert.equal(uniforms[0].uniforms.massingBlend,uniforms[1].uniforms.massingBlend,'one uniform, so they cross over together');
   assert.equal('#'+uniforms[0].uniforms.massingColour.value.getHexString(),MASSING_ALBEDO);
-  // Albedo is mixed before lighting, so the sun and the occlusion pass still
-  // describe a solid rather than flattening it to a silhouette.
   for(const shader of uniforms){
     assert.match(shader.fragmentShader,/#include <color_fragment>\s*\ndiffuseColor\.rgb = mix\(diffuseColor\.rgb, massingColour, massingBlend\);/);
     assert.match(shader.fragmentShader,/roughnessFactor = mix\(roughnessFactor, 0\.86, massingBlend\)/);
@@ -127,8 +118,6 @@ test('The fade eases across its whole span instead of cutting',()=>{
 });
 
 test('The horizon fade survived the R39 surface rename',()=>{
-  // R39 renamed `grass` to `R31 | R39 continuous grass ground`; matching the
-  // old name exactly left the whole pass switched off.
   const ground=new THREE.MeshStandardMaterial({name:'R31 | R39 continuous grass ground'});
   const curb=new THREE.MeshStandardMaterial({name:'stone_tile'});
   const wall=new THREE.MeshStandardMaterial({name:'neighbor_wall'});
@@ -145,10 +134,6 @@ test('The horizon fade survived the R39 surface rename',()=>{
 });
 
 test('Node prefixes survive the loader renaming them',()=>{
-  // The first cut of this matched the authored names and silently matched
-  // nothing: GLTFLoader had already turned `B10 | KAT 0$DUVAR` into
-  // `B10_|_KAT_0$DUVAR`, so no neighbour block was ever tagged and the villa
-  // view stayed exactly as it was.
   assert.equal(PropertyBinding.sanitizeNodeName('B10 | KAT 0$DUVAR'),'B10_|_KAT_0$DUVAR');
   assert.equal(authoredNodeName('B10_|_KAT_0$DUVAR'),'B10 | KAT 0$DUVAR');
   assert.equal(authoredNodeName(PropertyBinding.sanitizeNodeName('R35 | Garage vehicle / BodyHood')),

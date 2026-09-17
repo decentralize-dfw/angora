@@ -14,8 +14,6 @@ test('r180 AA runs in linear-sRGB before the single final display conversion',()
     output:{name:'Output'},dither:{name:'display dither'}};
   const composer={passes:[],addPass(pass){this.passes.push(pass);}};
   configurePostprocessing(composer,passes);
-  // The dither is last on purpose: it works in display space, so applying it
-  // before the curve would let the curve reshape it back into a step.
   assert.deepEqual(composer.passes,[passes.beauty,passes.ao,passes.smaa,passes.bloom,passes.output,passes.dither]);
 });
 
@@ -24,8 +22,6 @@ test('Reference production baseline has AgX, restrained linear bloom and no idle
   assert.equal(renderer.toneMapping,THREE.AgXToneMapping);assert.equal(renderer.toneMappingExposure,1.1);
   assert.equal(renderer.outputColorSpace,THREE.SRGBColorSpace);assert.equal(renderer.transmissionResolutionScale,1);
   assert.equal(referenceProfile.refinement,false);assert.equal(referenceProfile.pathTracing,false);
-  // Occlusion is on here even though the reference ships it off: see the note
-  // in render-profile.js. Its white studio had no crevices; a villa is crevices.
   assert.equal(referenceProfile.aoEnabled,true);
   const pass=new LinearBloomPass();pass.setSize(1170,2100);
   assert.equal(pass.bright.width,585);assert.equal(pass.blurA.width,292);assert.equal(pass.blurA.height,525);

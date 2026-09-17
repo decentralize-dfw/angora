@@ -7,13 +7,9 @@ import {smoothGroundNormals} from '../src/context-surfaces.js';
 import {batchContext} from '../src/context-batch.js';
 
 test('Phone resolution and depth precision remain stable across orbit scales',()=>{
-  // A phone must not be asked to draw its whole native panel. 390x700 at dpr 3
-  // is 2.46 M drawing-buffer pixels, which is what made this scene stutter and
-  // run out of memory on a handset. The budget is 1.5 M and never above 2x.
   const phone=renderPixelRatio(390,700,3,true);
   assert.ok(phone<=2,`phone ratio ${phone}`);
   assert.ok(390*700*phone*phone<=1_500_000,'phone must stay inside its budget');
-  // A desktop keeps its own, and neither ever drops below native.
   assert.ok(renderPixelRatio(1600,900,2,false)>=1);
   const bounds=new THREE.Box3(new THREE.Vector3(-140,-16,-150),new THREE.Vector3(175,30,170));
   const camera=new THREE.PerspectiveCamera(16,390/700),target=new THREE.Vector3();
@@ -33,17 +29,12 @@ test('Shared context components batch without changing mirrored geometry or UVs'
   mesh.setMatrixAt(1,new THREE.Matrix4().compose(new THREE.Vector3(-2,0,0),new THREE.Quaternion(),new THREE.Vector3(-1,1,1)));
   const expected=new THREE.Box3().setFromObject(root),batched=batchContext(root),actual=new THREE.Box3().setFromObject(batched);
   assert.ok(actual.min.equals(expected.min)&&actual.max.equals(expected.max));
-  // The two instances straddle the 48 m culling-grid boundary at x=0, so they
-  // batch into one chunk per cell - each with its own bounds for the frustum
-  // culler - rather than one neighbourhood-wide mesh.
   assert.equal(batched.children.length,2);
   const flat=batched.children.flatMap(child=>[...child.geometry.index.array]);
   assert.deepEqual(flat.sort().join(','),'0,0,1,1,2,2','both triangles survive with three vertices each');
   for(const child of batched.children)
     assert.deepEqual([...child.geometry.attributes.uv.array],[0,0,1,0,0,1],'UVs pass through unchanged');
-  // the mirrored instance must still render front-facing: both rays hit
   for(const x of [2.2,-2.2])assert.equal(new THREE.Raycaster(new THREE.Vector3(x,3.2,2),new THREE.Vector3(0,0,-1)).intersectObject(batched,true).length,1);
-  // and the mirrored child's winding was actually flipped, not just accepted
   const mirrored=batched.children.find(child=>new THREE.Box3().setFromObject(child).min.x<-1);
   assert.deepEqual([...mirrored.geometry.index.array],[0,2,1]);
 });
@@ -68,9 +59,6 @@ test('Ground smoothing preserves positions/UVs and joins duplicated seams',()=>{
   const positions=g.attributes.position.array.slice(),uv=g.attributes.uv.array.slice();smoothGroundNormals(g);
   assert.deepEqual(g.attributes.position.array,positions);assert.deepEqual(g.attributes.uv.array,uv);
   assert.deepEqual([...g.attributes.normal.array.slice(6,9)],[...g.attributes.normal.array.slice(9,12)]);
-  // The optimised set authors its coats deliberately (wood floors .25/.21):
-  // the authored coat survives up to .35, but the roughness floor keeps the
-  // sheen soft so it can never return as the old wet-pavement artifact.
   const floor=new THREE.MeshPhysicalMaterial({name:'wood_floor',clearcoat:.25,clearcoatRoughness:.21});
   prepareMaterialResponse(floor);assert.equal(floor.clearcoat,.25);assert.ok(floor.clearcoatRoughness>=.35);
   const lacquered=new THREE.MeshPhysicalMaterial({name:'terra_floor',clearcoat:.8,clearcoatRoughness:.1});

@@ -1,7 +1,5 @@
 import * as THREE from 'three';
 
-// Smooth only the continuous earth skin; vertical retaining faces retain
-// their own material and normals. Vertex positions/UVs are never displaced.
 export function smoothSurfaceNormals(geometry,upward=false) {
   const p=geometry.attributes.position,index=geometry.index;
   const sums=new Map(),keys=[],a=new THREE.Vector3(),b=new THREE.Vector3(),c=new THREE.Vector3();
@@ -20,11 +18,6 @@ export function smoothSurfaceNormals(geometry,upward=false) {
 
 export function smoothGroundNormals(geometry){smoothSurfaceNormals(geometry,true);}
 
-// R39 renamed the site surfaces (`grass` became `R31 | R39 continuous grass
-// ground`, and so on), which silently switched both the ground smoothing and the
-// horizon fade off. Match the family rather than one authored name so the next
-// rename cannot do it again. The optimised delivery numbers its copies -
-// `grass (1)` - so a numbering tail is part of the family too.
 const GROUND_SURFACE=/(^|\b)grass( ground)?(\s*\(\d+\))?$|continuous grass/i;
 const FADED_SURFACE=/grass|asphalt|stone_tile|retaining|boundary limestone|soil body/i;
 
@@ -38,8 +31,6 @@ export function prepareContextSurfaces(context,background) {
   context.traverse(o=>{
     if(!o.isMesh)return;
     for(const m of Array.isArray(o.material)?o.material:[o.material]){
-      // Building clones carry the same surface names as the site copies they
-      // were split from; only the site copies meet the horizon.
       if(seen.has(m)||m.userData.contextBuilding||m.userData.plotSoil||!FADED_SURFACE.test(m.name))continue;
       seen.add(m);const previous=m.onBeforeCompile,previousKey=m.customProgramCacheKey();
       m.onBeforeCompile=(shader,renderer)=>{

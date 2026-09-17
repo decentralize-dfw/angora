@@ -2,8 +2,6 @@ export function configureCameraControls(controls, THREE) {
   controls.enableDamping=true;controls.dampingFactor=.12;controls.screenSpacePanning=false;
   controls.minZoom=.35;controls.maxZoom=12;controls.rotateSpeed=.6;
   controls.touches.ONE=THREE.TOUCH.ROTATE;controls.touches.TWO=THREE.TOUCH.DOLLY_PAN;
-  // Perspective dolly normally changes camera altitude. Convert gesture dolly
-  // into optical zoom, retaining the orbit radius and horizontal pan plane.
   let gestureRadius=null;
   controls.addEventListener('start',()=>{
     gestureRadius=controls.object.isPerspectiveCamera

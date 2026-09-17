@@ -1,5 +1,3 @@
-// Reuse four source-positioned spotlights. A slot fades to zero before its
-// source changes; retained fixtures keep their slots when proximity ranks swap.
 export class InteriorLightController {
   constructor(lights, {fadeMs=300, hysteresisMetres=.6}={}) {
     if (!(fadeMs>0)) throw new Error('A positive light fade duration is required');
@@ -23,7 +21,6 @@ export class InteriorLightController {
     const selected=this.enabled&&this.floor!==null
       ?this.fixtures.filter(f=>f.floor_index===this.floor).sort((a,b)=>score(a)-score(b)).slice(0,this.slots.length):[];
     const remaining=new Set(selected),desired=this.slots.map(()=>null);
-    // A fixture selected again during fade-out reverses in its original slot.
     for(const field of ['source','desired'])this.slots.forEach((slot,i)=>{
       if(!desired[i]&&remaining.has(slot[field])){desired[i]=slot[field];remaining.delete(slot[field]);}
     });
@@ -33,7 +30,6 @@ export class InteriorLightController {
     this.slots.forEach((slot,i)=>{
       if(slot.desired===desired[i])return;
       slot.desired=desired[i];
-      // Start at the selection event, not the last frame before a long idle.
       this.fadeTo(slot,slot.source&&slot.source===slot.desired?1:0,time);
     });
   }
@@ -47,8 +43,6 @@ export class InteriorLightController {
     let changed=false,shadowChanged=false;
     for(const slot of this.slots) {
       const {light}=slot,previousVisible=light.visible,previousIntensity=light.intensity;
-      // Absolute deadlines avoid accumulating rounding errors across frames.
-      // At most two phases can complete here: old source out, new source in.
       while(slot.fade) {
         const fade=slot.fade;
         if(time<fade.end) {

@@ -1,22 +1,11 @@
 import * as THREE from 'three';
 import {WalkSurface} from './walk-surface.js';
 
-// Across, not up: the number a lens is quoted at. 95° is the 16-18 mm an
-// interior is actually shot with. A narrower lens is the more honest optic and
-// it was tried first, at 75°; walked, it reads as a keyhole and the rooms come
-// out feeling smaller than they are, because you cannot see a room you cannot
-// fit in the frame. The wide lens shows the room.
 export const WALK_HORIZONTAL_FOV_DEG = 95;
 
 export class InteriorWalk {
   constructor(data, canvas, invalidate) {
     this.surface = new WalkSurface(data); this.canvas = canvas; this.invalidate = invalidate;
-    // 62° of VERTICAL field was an 18 mm lens on a laptop: about 94° across,
-    // which pushes every wall away from the eye and reads the rooms as a
-    // dolls' house. What a room should be walked at is a horizontal field,
-    // held at the 24 mm that interior photography uses, with the vertical
-    // falling out of the viewport - so a phone held upright does not get a
-    // 28° keyhole out of the same number.
     this.camera = new THREE.PerspectiveCamera(60,1,.045,450);
     this.camera.rotation.order = 'YXZ'; this.rig = new THREE.Group(); this.rig.add(this.camera);
     this.active = false; this.xrActive = false; this.keys = new Set(); this.furniture = true;
@@ -56,9 +45,6 @@ export class InteriorWalk {
     });
   }
   pose() {if(!this.xrActive)this.camera.rotation.set(this.pitch,this.yaw,0,'YXZ');}
-  // The tour's lens slider: an explicit vertical field chosen by hand.
-  // While set it survives resizes untouched - the user picked THE lens -
-  // and null returns to the derived default below.
   setLens(fovDeg) {
     this.lensFov=fovDeg;
     if(fovDeg!==null){this.camera.fov=fovDeg;this.camera.updateProjectionMatrix();}
@@ -67,8 +53,6 @@ export class InteriorWalk {
     this.camera.aspect=w/h;
     if(this.lensFov!=null){this.camera.updateProjectionMatrix();return;}
     const horizontal=THREE.MathUtils.degToRad(WALK_HORIZONTAL_FOV_DEG);
-    // Clamped so a tall phone cannot turn the held horizontal field into a
-    // fisheye, and a wide desktop cannot turn it into a telephoto.
     this.camera.fov=THREE.MathUtils.clamp(
       THREE.MathUtils.radToDeg(2*Math.atan(Math.tan(horizontal/2)/this.camera.aspect)),46,82);
     this.camera.updateProjectionMatrix();

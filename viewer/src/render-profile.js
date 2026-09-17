@@ -1,25 +1,5 @@
 import {AgXToneMapping,SRGBColorSpace,PCFSoftShadowMap} from 'three';
 
-// Started from EDETRI's production baseline, and departs from it where the
-// departure is the point. Scene lighting remains architectural: a studio's
-// lamps/ground are not a site.
-//
-// Occlusion is the one place this parts company with the reference's switches.
-// EDETRI ships GTAO off because screen-space occlusion read as dirt on its
-// white cyclorama - a room with no crevices to describe. Its own pipeline notes
-// call the absence of occlusion "the single largest tell", the reason an
-// image-based light fills every crease and gap with exactly as much light as
-// the open ground beside it. A villa is all crevices: eaves, reveals, soffits,
-// balconies, stair treads. Here the reason the reference turned it off does not
-// hold, and the reason it called it the largest tell does.
-//
-// The curve is AgX rather than the reference's ACES: ACES skews saturated hues
-// (sky drifts cyan, warm sun goes orange-red) and crushes bright stucco into a
-// hard shoulder, where AgX rolls highlights off without the hue skew. AgX sits
-// darker at the same exposure, so the exposure moves up with it - the pair is
-// tuned together, in the GradeShader for the desktop chain and on the renderer
-// for the phone/XR path. MSAA 4x under SMAA kills the sub-pixel crawl on
-// mullions and railings that SMAA alone leaves behind.
 export const referenceProfile=Object.freeze({name:'edetri-production-baseline-agx',
   exposure:1.1,bloomStrength:.1,bloomThreshold:.06,bloomKnee:.036,bloomClamp:64,
   aoEnabled:true,msaaSamples:4,refinement:false,pathTracing:false});

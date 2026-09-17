@@ -6,8 +6,6 @@ function download(blob,name) {
   setTimeout(()=>URL.revokeObjectURL(url),60000);
 }
 
-// Explicit, local-only evidence capture. UA/viewport cannot establish that a
-// device is a physical iPhone, nor can frame statistics establish visual quality.
 export function createDeviceQA({getState,invalidate,closePanel,capture}) {
   const $=s=>document.querySelector(s),measurement=new FrameMeasurement();
   const start=$('#qa-start'),save=$('#qa-save'),shot=$('#qa-screenshot'),result=$('#qa-result'),status=$('#qa-status');

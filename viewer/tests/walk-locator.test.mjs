@@ -3,11 +3,6 @@ import assert from 'node:assert/strict';
 import {WalkSurface} from '../src/walk-surface.js';
 import {createWalkLocator} from '../src/walk-locator.js';
 
-// A synthetic two-room floor: 10 x 5 cells of walkable ground split by a
-// full-height wall at column 5, pierced by one doorway at row 2. Station A
-// stands in the west room, station B in the east room. The point of the
-// fixture: a cell just east of the wall is EUCLIDEAN-closer to A, but its
-// only walk there goes through the doorway - so it must belong to B.
 function fixture({stair=false}={}) {
   const width=10,height=5,rows=[];
   for(let z=0;z<height;z++){
@@ -36,11 +31,8 @@ test('Zones follow walls, not straight-line distance', () => {
   const locator=createWalkLocator(surface,{minX:-100,maxX:100,minZ:-100,maxZ:100});
   assert.equal(locator.locate(1.5,2.5,0).station.room_id,'west');
   assert.equal(locator.locate(8.5,2.5,0).station.room_id,'east');
-  // just past the wall, top corner: closer to A as the crow flies, but the
-  // walk goes around through the doorway - it is B's room
   assert.equal(locator.locate(6.5,0.5,0).station.room_id,'east');
   assert.equal(locator.locate(4.5,4.5,0).station.room_id,'west');
-  // the doorway cell itself belongs to somebody, never to nobody
   assert.ok(locator.locate(5.5,2.5,0).station);
 });
 
@@ -51,10 +43,8 @@ test('Stairs and outdoor ground name themselves instead of borrowing a room', ()
   assert.equal(stair.outdoor,true,'past the footprint reads as outdoor');
   const indoors=locator.locate(6.5,4.4,0);
   assert.equal(indoors.outdoor,false);
-  // 0.6 m above the storey datum, inside the footprint, reads as stairs
   const surface2=fixture({stair:true});
   const locator2=createWalkLocator(surface2,{minX:0,maxX:10,minZ:0,maxZ:5});
   assert.equal(locator2.locate(8.5,4.5,0).stairs,true);
-  // a wall cell has no ground: locate refuses rather than guessing
   assert.equal(locator2.locate(5.5,0.5,0),null);
 });
