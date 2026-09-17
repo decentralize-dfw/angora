@@ -18,45 +18,101 @@
  ],
  "assets": [
   {
-   "id": "building",
-   "group": "villa",
-   "file": "../kanka/BUILDING-2-opt-v11-DRACO.glb",
-   "bytes": 3949048,
-   "sha256": "0b08d3967a878af44acbb40bf4e1d32bdad042fbcb66b11039ff672f8b41298c",
-   "origin": "kanka-user-optimised"
-  },
-  {
-   "id": "interior",
-   "group": "villa",
-   "furniture": true,
-   "file": "../kanka/INTERIOR-2-opt-v10-DRACO.glb",
-   "bytes": 2359324,
-   "sha256": "8e76117f5e6bd4a4c4c1d673a45a46d2df5de61154e27a1ad1880b41cf6dc3a0",
-   "origin": "kanka-user-optimised"
+   "id": "villa",
+   "file": "villa.glb",
+   "bytes": 12376780,
+   "sha256": "f93dfebb4e7d41a764bba12d9d14e19f501804c22613434d894ed877e61d685c",
+   "source_objects": 0,
+   "exported_mesh_nodes": 874,
+   "shared_meshes": 294,
+   "triangles": 2773448,
+   "bounds_native_m": [
+    [
+     -7.1429,
+     -6.473,
+     -0.5
+    ],
+    [
+     8.8333,
+     11.5501,
+     14.42
+    ]
+   ],
+   "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
+   "section_elevation_m": null,
+   "geometry_simplified": false,
+   "evaluated_split_normals_preserved": true,
+   "embedded_images": 43,
+   "animations": 1,
+   "browser_upload_under_25_MiB": true,
+   "merged_from": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "vegetation_lod_objects": 0
   },
   {
    "id": "garden",
-   "group": "garden",
-   "file": "../kanka/villa-garden-ground-2-opt-v4.glb",
-   "bytes": 113232,
-   "sha256": "1df8d238886c2b33bf15510366b0e0075fa8e72f07e26e31f87add1233c1f42e",
-   "origin": "kanka-user-optimised"
+   "file": "garden.glb",
+   "bytes": 8304216,
+   "sha256": "0daa0a2b1814beaca2f63701f711344d2ca4c59292b97e79a95826d822555fbf",
+   "source_objects": 645,
+   "exported_mesh_nodes": 645,
+   "shared_meshes": 554,
+   "triangles": 560724,
+   "bounds_native_m": [
+    [
+     -10.246445655822754,
+     -10.210000038146973,
+     -4
+    ],
+    [
+     26.54096031188965,
+     29.055761337280273,
+     10.332208633422852
+    ]
+   ],
+   "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
+   "section_elevation_m": null,
+   "geometry_simplified": true,
+   "evaluated_split_normals_preserved": true,
+   "embedded_images": 42,
+   "animations": 0,
+   "browser_upload_under_25_MiB": true,
+   "vegetation_lod_objects": 10
   },
   {
-   "id": "evrebina",
-   "group": "context",
-   "file": "../kanka/evrebina-opt-v8-DRACO.glb",
-   "bytes": 8671372,
-   "sha256": "847b8d7d75e6a52000a4db304875be36017cc91dbfc5a93fb253dff96bf895ab",
-   "origin": "kanka-user-optimised"
-  },
-  {
-   "id": "context-ground",
-   "group": "context",
-   "file": "../kanka/context-garden-ground-opt-v3.glb",
-   "bytes": 3365360,
-   "sha256": "866f759e687e94631107360b30c6ec27c68f218d1ccbcfb3cc5db879ad59f711",
-   "origin": "kanka-user-optimised"
+   "id": "context",
+   "file": "context.glb",
+   "bytes": 6014084,
+   "sha256": "395ab5ac2501a93ccc3abb36a2d8637f3d6a813b24a9c9ab422bb7cb701a8d44",
+   "source_objects": 2371,
+   "exported_mesh_nodes": 2371,
+   "shared_meshes": 346,
+   "triangles": 752638,
+   "bounds_native_m": [
+    [
+     -139.26348876953125,
+     -167.48959350585938,
+     -15.970625877380371
+    ],
+    [
+     173.75611877441406,
+     147.64932250976562,
+     27.40839958190918
+    ]
+   ],
+   "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
+   "section_elevation_m": null,
+   "geometry_simplified": false,
+   "evaluated_split_normals_preserved": true,
+   "embedded_images": 47,
+   "animations": 0,
+   "browser_upload_under_25_MiB": true,
+   "vegetation_lod_objects": 0
   }
  ],
  "full_scene": true,
@@ -251,6 +307,5 @@
   "joined_meshes": 208,
   "kept_nodes": 665
  },
- "profile": "full",
- "generated_for": "kanka speed-trial set (user-optimised parts)"
+ "profile": "full"
 }

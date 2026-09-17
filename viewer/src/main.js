@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { createLighting } from './lighting.js';
 import { createAnnotations } from './annotations.js';
 import { InteriorWalk, enableImmersiveWalk } from './walk.js';
@@ -375,6 +376,8 @@ function setup() {
   const draco = new DRACOLoader(); draco.setDecoderPath(decoderRoot.href);
   draco.setWorkerLimit(LITE?1:Math.max(2,Math.min(coarse?3:4,(navigator.hardwareConcurrency||4)-1)));
   loader = new GLTFLoader(); loader.setDRACOLoader(draco);
+  // the kanka set carries EXT_meshopt_compression on its ground parts
+  loader.setMeshoptDecoder(MeshoptDecoder);
   window.addEventListener('resize',()=>{
     const portrait=camera.aspect<1;resize();
     if(ready&&!walk?.active&&portrait!==(camera.aspect<1))frame(true);
@@ -551,17 +554,22 @@ async function loadModel() {
     // Phones get the derived mobile set (simplified geometry, 512px webp,
     // no relief maps): the full 4M-triangle delivery is a desktop budget
     // and WebKit gives up mid-upload. ?model=full / ?model=lite override.
+    const forcedModel=new URLSearchParams(location.search).get('model');
     let response = LITE
       ? await fetch(new URL('manifest-mobile.json', modelRoot), {cache:'no-cache'}).catch(() => null)
+      : forcedModel==='classic'
+      ? await fetch(new URL('manifest-classic.json', modelRoot), {cache:'no-cache'}).catch(() => null)
       : null;
     if (!response?.ok) response = await fetch(new URL('manifest.json', modelRoot), {cache:'no-cache'});
     if (!response.ok) throw Error(`Manifest HTTP ${response.status}`);
     const manifest = await response.json();
     assetRevision=manifest.assets?.map(({file,sha256})=>({file,sha256}));
-    // R44 merged the four storeys and the envelope into one villa part, so a
-    // whole scene is now three files; older seven-part manifests stay refused
-    // the same way partial ones always were.
-    if (!manifest.full_scene || manifest.geometry_preclipped || manifest.assets?.length !== 3) throw Error('Whole-scene manifest required');
+    // A whole scene may arrive as any number of parts, but the three groups
+    // the pipeline stages - villa, garden, context - must all be covered.
+    // Entries name their group (kanka set) or ARE the group (classic set).
+    const groupsInManifest=new Set((manifest.assets??[]).map(a=>a.group??a.id));
+    if (!manifest.full_scene || manifest.geometry_preclipped ||
+        !['villa','garden','context'].every(g=>groupsInManifest.has(g))) throw Error('Whole-scene manifest required');
     // R42: the whole scene before the first frame. It used to open on the villa
     // alone and stream the garden and the neighbourhood in behind it, which is
     // quicker to something but slower to the thing that was asked for - the
@@ -570,7 +578,7 @@ async function loadModel() {
     // before the bar goes, and the order still reveals the building outside-in
     // for whoever is watching the count.
     const PHASE_ORDER=['villa','garden','context'];
-    const queue=manifest.assets.slice().sort((a,b)=>PHASE_ORDER.indexOf(a.id)-PHASE_ORDER.indexOf(b.id));
+    const queue=manifest.assets.slice().sort((a,b)=>PHASE_ORDER.indexOf(a.group??a.id)-PHASE_ORDER.indexOf(b.group??b.id));
     let completed = 0;
     const totalBytes = manifest.assets.reduce((sum, asset) => sum + (asset.bytes || 0), 0) + (manifest.section_cap_asset?.bytes || 0);
     const received = new Map();
@@ -591,8 +599,10 @@ async function loadModel() {
         });
         received.set(asset.id, asset.bytes || 0);
         mergeEqualMaterials(gltf.scene); abstractVehicle(gltf.scene);
-        staged.set(asset.id, asset.id==='context'?batchContext(splitContextBuildings(splitContextSoil(gltf.scene))):gltf.scene);
-        if (gltf.animations?.length) stagedClips.set(asset.id, gltf.animations);
+        const group=asset.group??asset.id;
+        staged.set(asset.id, {group, furniture:!!asset.furniture,
+          scene: group==='context'?batchContext(splitContextBuildings(splitContextSoil(gltf.scene))):gltf.scene});
+        if (gltf.animations?.length) stagedClips.set(group, gltf.animations);
         reportProgress();
         if(!ready)message(`Model yükleniyor… ${++completed}/${manifest.assets.length}`);else ++completed;
       }
@@ -642,8 +652,7 @@ async function loadModel() {
       }
       return data;
     }
-    function stageGroup(id) {
-      const group=staged.get(id);
+    function stageGroup(id, group) {
       groups.set(id, group); scene.add(group);
       group.updateMatrixWorld(true);
       group.traverse(o => {
@@ -678,7 +687,17 @@ async function loadModel() {
     const results = await Promise.allSettled([worker(queue), LITE?Promise.resolve():worker(queue), loadSections(), loadRooms(), loadNavigation(),
       lighting.loadEnvironment(daylightURL.href).catch(error=>console.warn('HDR unavailable; atmospheric daylight retained',error)), loadCaps()]);
     const failure = results.find(r => r.status === 'rejected'); if (failure) throw failure.reason;
-    for (const id of staged.keys()) stageGroup(id);
+    // Several files may feed one pipeline group (kanka: BUILDING+INTERIOR are
+    // the villa; evrebina+ground are the context). A file flagged furniture
+    // tags every mesh wholesale, so the Mobilya toggle, the paper wash and
+    // the shadow twin treat it exactly like the merged set's furniture.
+    const mergedGroups=new Map();
+    for (const {group, furniture, scene: part} of staged.values()) {
+      if (furniture) part.traverse(o=>{if(o.isMesh)o.userData.category='furniture';});
+      if (!mergedGroups.has(group)) {const g=new THREE.Group(); g.name=group; mergedGroups.set(group,g);}
+      mergedGroups.get(group).add(part);
+    }
+    for (const [id, group] of mergedGroups) stageGroup(id, group);
     // every glb is decoded and staged; the draco workers' wasm heaps are the
     // largest transient allocation on a phone - give them back now (retry is
     // a full page reload, so the loader is never reused)
