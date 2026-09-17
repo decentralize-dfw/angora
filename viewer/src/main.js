@@ -33,6 +33,7 @@ import {readShareState,shareSearch} from './share-state.js';
 import {referenceProfile} from './render-profile.js';
 import { sectionHeight, smoothStep, createWallCaps, createSoilCap, SOIL_CUT_HEIGHT } from './section.js';
 import { createStencilCaps, createInteriorPoche } from './section-stencil.js';
+import { createContextInfill, infillBuildings } from './context-infill.js';
 import { createWalkLocator } from './walk-locator.js';
 import { t, roomName, applyStatic, setLang, currentLang } from './i18n.js';
 
@@ -743,10 +744,16 @@ async function loadModel() {
     }
     gardenBox = new THREE.Box3(new THREE.Vector3(-10.2, -4, -29.1), new THREE.Vector3(12.5, 3.4, 11));
     contextBox=buildingBox.clone();
+    let infill=null;
+    if(groups.has('context')){
+      infill=createContextInfill(groups.get('context'));
+      console.info(`R50 infill: ${infill.added.length} blocks, ${infill.parts} parts, ${infill.triangles} triangles`);
+    }
     try {
       const contextResponse=await fetch(new URL('../site-context.json',modelRoot),{cache:'no-cache'});
       if(!contextResponse.ok)throw Error('Context labels unavailable');
       const contextData=await contextResponse.json();
+      if(infill?.added.length)contextData.buildings.push(...infillBuildings(infill.added));
       const settlementBox=new THREE.Box3();
       for(const b of contextData.buildings)if(b.bounds)for(const p of b.bounds)settlementBox.expandByPoint(new THREE.Vector3(...p));
       if(!settlementBox.isEmpty())contextBox=settlementBox.union(buildingBox);
