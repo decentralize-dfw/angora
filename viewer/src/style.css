@@ -356,10 +356,10 @@ h1 strong{font-weight:700}
   h1{font-size:15px}
   .brand-divider{height:13px}
   .quiet-button{font-size:12px;min-height:40px;padding:0 13px}
-  .scale-picker{top:auto;bottom:max(108px,calc(env(safe-area-inset-bottom) + 96px));left:50%;padding:3px}
-  /* no dock outside the Villa scale - the picker takes the bottom edge */
+  .scale-picker{top:auto;bottom:max(70px,calc(env(safe-area-inset-bottom) + 58px));left:50%;padding:3px}
   #app[data-scale=neighborhood] .scale-picker{bottom:max(16px,calc(env(safe-area-inset-bottom) + 4px))}
   #app[data-scale=region] .scale-picker{bottom:max(66px,calc(env(safe-area-inset-bottom) + 54px))}
+  #app[data-scale=region] .view-description{display:none}
   .region-panel{bottom:max(12px,env(safe-area-inset-bottom));gap:4px}
   /* the Villa chip already returns to the house; the pill only ate the map */
   #return-villa{display:none}
@@ -369,18 +369,20 @@ h1 strong{font-weight:700}
   .view-description{top:62px;left:12px;max-width:58%;padding:6px 10px}
   .view-description h2{font-size:12px}
   .view-description p{font-size:9.5px}
-  .side-tools{right:8px;padding:5px;gap:4px}
-  .side-tools button{width:38px;height:38px;font-size:12px}
-  .side-tools #enter-walk{width:auto;min-width:38px;padding:0 9px;font-size:10.5px}
-  .explore-dock{bottom:max(14px,env(safe-area-inset-bottom));padding:5px;gap:5px;flex-direction:column;align-items:stretch;border-radius:26px;width:calc(100% - 24px);max-width:420px}
-  .floor-row{gap:4px}
-  .floor-row button{min-height:38px;font-size:12px;padding:0 8px;flex:1}
-  .dock-actions{justify-content:stretch}
-  .dock-actions .walk-launch{flex:1}
-  .walk-launch{min-height:40px;font-size:12px;padding:0 13px}
+  .side-tools{right:8px;padding:4px;gap:3px}
+  .side-tools button{width:36px;height:36px;font-size:12px}
+  .side-tools #enter-walk{width:44px;min-width:0;height:auto;padding:6px 2px;font-size:9px;
+    line-height:1.15;letter-spacing:0;white-space:normal;text-align:center;border-radius:16px}
+  .side-tools #enter-walk span{margin:0}
+  .explore-dock{bottom:max(14px,env(safe-area-inset-bottom));padding:4px;gap:4px;flex-direction:row;
+    align-items:center;border-radius:999px;width:calc(100% - 24px);max-width:420px}
+  .floor-row{gap:2px;flex:1;min-width:0}
+  .floor-row button{min-height:36px;font-size:11px;padding:0 5px;flex:1;min-width:0}
+  .dock-actions{flex:0 0 auto}
+  .walk-launch{min-height:36px;font-size:11.5px;padding:0 14px}
   .gesture-help{display:none}
   .panel{top:auto;right:0;left:0;bottom:0;width:auto;max-width:none;border-radius:22px 22px 0 0;max-height:calc(100dvh - 110px);padding:15px 16px calc(15px + env(safe-area-inset-bottom))}
-  .model-scale{right:12px;bottom:max(162px,calc(env(safe-area-inset-bottom) + 150px))}
+  .model-scale{right:12px;bottom:max(120px,calc(env(safe-area-inset-bottom) + 108px))}
   .rm-chip{font-size:10px;padding:3px 9px}
   .rm-chip-villa{font-size:11px;padding:5px 12px}
   .rm-compass{width:38px;height:38px;right:12px;top:76px}
@@ -390,7 +392,9 @@ h1 strong{font-weight:700}
   .rm-info-body{font-size:10.5px;line-height:1.55}
   .rm-info-facts{gap:5px 10px;padding-top:8px;margin-top:9px}
   .rm-info-facts b{font-size:12px}
-  .rm-filters{left:12px;right:12px;bottom:max(112px,calc(env(safe-area-inset-bottom) + 100px));flex-direction:row;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+  .rm-filters{left:12px;right:12px;bottom:max(112px,calc(env(safe-area-inset-bottom) + 100px));flex-direction:row;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;
+    -webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 26px),transparent 100%);
+    mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 26px),transparent 100%)}
   .rm-filters::-webkit-scrollbar{display:none}
   .rm-filters button{min-height:30px;font-size:10.5px;padding:0 11px 0 8px;flex:0 0 auto;gap:6px}
   .walk-close{right:12px;top:max(12px,env(safe-area-inset-top))}

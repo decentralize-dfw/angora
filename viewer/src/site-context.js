@@ -14,7 +14,7 @@ export function createSiteContext(data,host,onVilla){
   const scale=document.querySelector('#model-scale'),bar=scale.querySelector('i'),label=scale.querySelector('span');
   const point=new THREE.Vector3(),a=new THREE.Vector3(),b=new THREE.Vector3(),right=new THREE.Vector3();
   return {update(view,camera,target,transitioning,walking){
-    const active=['region','neighborhood'].includes(view)&&!transitioning&&!walking;
+    const active=view==='neighborhood'&&!transitioning&&!walking;
     overlay.hidden=!active;scale.hidden=walking||transitioning;
     if(!camera||!target)return;
     camera.updateMatrixWorld();

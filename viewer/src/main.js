@@ -221,7 +221,9 @@ function frame(initial=false) {
   if(selected==='neighborhood'){size.set(66,21,70);center.set(0,3,-5);}
   if(selected==='region'&&contextBox){size=contextBox.getSize(new THREE.Vector3());center.copy(contextBox.getCenter(new THREE.Vector3()));}
   const polar=planMode?.02:selected==='region'?.58:floor?.56:.78;
-  frameSpan=Math.max(size.z*Math.cos(polar)+size.y*Math.sin(polar),size.x/aspect)*(floor?1.1:1.14);
+  const portrait=aspect<0.9;
+  const widthFit=size.x/aspect*(floor&&portrait?.92:1);
+  frameSpan=Math.max(size.z*Math.cos(polar)+size.y*Math.sin(polar),widthFit)*(floor?(portrait?1.02:1.1):1.14);
   if(selected==='region'&&contextBox)frameSpan=fitContextBounds(contextBox,aspect,polar).span;
   flight.go({target:center,polar,span:frameSpan,zoom:1,fov:planMode?4:35,
     azimuth:selected==='region'||planMode?0:initial?.804:undefined},initial===true);
