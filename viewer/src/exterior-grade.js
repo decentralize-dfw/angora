@@ -72,12 +72,18 @@ export function loadGradeTextures(rootURL) {
     if (srgb) texture.colorSpace = THREE.SRGBColorSpace;
     return texture;
   });
-  return Promise.all([
-    one('grass-basecolor.png', true), one('asphalt-basecolor.png', true),
-    one('travertine-basecolor.png', true), one('travertine-normal.png', false),
-    one('stucco-normal.png', false), one('stucco-mottle.png', true),
-  ]).then(([grassMap, asphaltMap, travertineMap, travertineNormal, stuccoNormal, stuccoMottle]) =>
-    ({grassMap, asphaltMap, travertineMap, travertineNormal, stuccoNormal, stuccoMottle}));
+  const keys = ['grassMap', 'asphaltMap', 'travertineMap', 'travertineNormal', 'stuccoNormal', 'stuccoMottle'];
+  const files = [['grass-basecolor.png', true], ['asphalt-basecolor.png', true],
+    ['travertine-basecolor.png', true], ['travertine-normal.png', false],
+    ['stucco-normal.png', false], ['stucco-mottle.png', true]];
+  return Promise.allSettled(files.map(([file, srgb]) => one(file, srgb))).then(results => {
+    const sets = {};
+    results.forEach((result, i) => {
+      if (result.status === 'fulfilled') sets[keys[i]] = result.value;
+      else console.warn('Exterior detail map missing: ' + files[i][0], result.reason);
+    });
+    return sets;
+  });
 }
 
 function horizontalShare(geometry, matrixWorld) {
@@ -183,11 +189,11 @@ export function bindGradeTextures(parts, sets) {
         }
         if (!sets || !entry.set || material.userData.exteriorGradeBound) continue;
         material.userData.exteriorGradeBound = true;
-        if (entry.set.map) {
+        if (entry.set.map && sets[entry.set.map]) {
           material.map = textureFor(entry.set.map, entry.repeat);
           if (!entry.keepTint) material.color?.setRGB(1, 1, 1);
         }
-        if (entry.set.normalMap) {
+        if (entry.set.normalMap && sets[entry.set.normalMap]) {
           material.normalMap = textureFor(entry.set.normalMap, entry.repeat);
           material.normalScale ??= new THREE.Vector2(1, 1);
         }

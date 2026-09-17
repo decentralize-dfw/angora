@@ -369,7 +369,7 @@ function selectView(id, initial = false) {
   if(controls)controls.enableZoom=id!=='neighborhood';
   setAutoRotate(false);
   $('#toggle-autorotate').hidden=id!=='neighborhood';
-  lighting.frame(id,contextBox);massing?.set(id);lift?.park(id);
+  lighting.frame(id,contextBox);massing?.set(id,initial);lift?.park(id);invalidate();
   lighting.interior(id.startsWith('f')?Number(id[1]):null,null);
   if(roomData)renderPropertyInfo($('#property-info'),roomData,id);
   if(!initial&&(id==='region'||previous==='region'))clouds();
@@ -764,6 +764,7 @@ async function loadModel() {
       contextBox.union(new THREE.Box3().setFromObject(groups.get('context')));
       prepareContextSurfaces(groups.get('context'),lighting.horizonColour);
       massing=createContextMassing(groups.get('context'),PLOT_RECT);
+      massing.set(selected,true);
     }
     fullHeight = buildingBox.max.y + 2;
     caps = createWallCaps(results[2].value); scene.add(caps.group);
@@ -855,7 +856,7 @@ async function loadModel() {
       earthClip.constant=id==='f0'?SOIL_CUT_HEIGHT:fullHeight;
       caps?.update(clip.constant,clip.constant<fullHeight-0.001);
       soilCap?.update(earthClip.constant,earthClip.constant<fullHeight-0.001&&plotCutReady);
-      lighting.frame(id,contextBox);massing?.set(id);
+      lighting.frame(id,contextBox);massing?.set(id,true);
       lighting.interior(id.startsWith('f')?Number(id[1]):null,null);
       lighting.update(performance.now()+60000);
       if(planWash&&id==='f1'){planWash.visible=true;for(const over of planWash.userData.overlays)over.opacity=over.userData.washBase;}

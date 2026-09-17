@@ -184,10 +184,10 @@ export function createContextMassing(root, plotRect = null) {
     get value() {return blend.value;},
     set(view, immediate = false) {
       const target = view === 'building' || /^f\d$/.test(view) ? 1 : 0;
+      if (immediate) {to = from = target; blend.value = target; return;}
       if (target === to) return;
       to = target;
-      const reduced = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-      if (immediate || reduced) {blend.value = from = to; return;}
+      if (globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {blend.value = from = to; return;}
       from = blend.value; start = performance.now();
     },
     update(time) {
