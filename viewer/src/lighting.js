@@ -170,7 +170,9 @@ export function createLighting(renderer, scene, camera, clip) {
   // exposure and its colour; it loses the crevice shading and the glare.
   let composer=null,beauty=null,ao=null;
   if(!compact){
-    const target=new THREE.WebGLRenderTarget(1,1,{type:THREE.HalfFloatType,samples:referenceProfile.msaaSamples});
+    // stencilBuffer: the section caps count cut solids in the stencil, and
+    // without it the composer's render target would silently drop the trick.
+    const target=new THREE.WebGLRenderTarget(1,1,{type:THREE.HalfFloatType,samples:referenceProfile.msaaSamples,stencilBuffer:true});
     composer=new EffectComposer(renderer,target);beauty=new RenderPass(scene,camera);
     // Full-resolution occlusion: at .85 the denoiser smeared contact shading
     // off thin rails and window reveals - the pass is the pipeline's own

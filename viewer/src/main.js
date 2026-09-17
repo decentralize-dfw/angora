@@ -33,6 +33,7 @@ import {createDeviceQA} from './device-qa.js';
 import {readShareState,shareSearch} from './share-state.js';
 import {referenceProfile} from './render-profile.js';
 import { sectionHeight, smoothStep, createWallCaps, createSoilCap, SOIL_CUT_HEIGHT } from './section.js';
+import { createStencilCaps } from './section-stencil.js';
 import { createWalkLocator } from './walk-locator.js';
 import { t, roomName, applyStatic, setLang, currentLang } from './i18n.js';
 
@@ -94,7 +95,7 @@ let plotCutReady = false;
 // once from the staged groups, faded by planMode alone. The 3D views never
 // see it.
 let planWash = null;
-let flight, hotspots, planMode=false, roomData, interiorLights=true, soilCap=null;
+let flight, hotspots, planMode=false, roomData, interiorLights=true, soilCap=null, stencilCaps=null;
 let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox, contextBox, lighting, siteContext;
 // A property presentation opens on the property: the villa is the default,
 // and ?view= deep links (region, a floor) still land exactly where they say.
@@ -204,6 +205,7 @@ function renderFrame(time) {
       planWash.visible=planWash.userData.level>0.01;
     }
     caps?.update(clip.constant, clip.constant < fullHeight - 0.001);
+    stencilCaps?.update(clip.constant, clip.constant < fullHeight - 0.001 && !walk?.active);
     soilCap?.update(earthClip.constant, earthClip.constant < fullHeight - 0.001 && plotCutReady);
     const changing=walk?.active?walk.update(time,renderer.xr.getSession()):flying?false:controls.update();
     const activeCamera=walk?.active?walk.camera:camera;
@@ -903,6 +905,11 @@ async function loadModel() {
       scene.add(shadowProxy);
     }
     buildingBox = new THREE.Box3().setFromObject(groups.get('villa'));
+    // Every cut face the authored atlas never knew - bldg-3's modelled roof
+    // tiles, jambs, frames - closes with the same wall poché via the
+    // stencil; see section-stencil.js.
+    stencilCaps=createStencilCaps(groups.get('villa'),clip,buildingBox);
+    scene.add(stencilCaps.group);
     {
       // one pass over the villa's vertices fills all four storey boxes
       const datums=[0,3.0996,6.3714,9.4705,1e9];
