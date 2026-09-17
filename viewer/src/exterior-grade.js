@@ -26,10 +26,14 @@ const TABLE = [
    set: {map: 'clayTileMap', normalMap: 'clayTileNormal'},
    // audited UV density: 1 uv unit = 1/0.64 m; the tile sheet spans 0.8x1.0 m
    repeat: [1.5625 / 0.8, 1.5625 / 1.0], normalScale: 1.2},
-  {key: 'villa-roof', match: /^roof$/i, assets: ['building'],
+  {key: 'villa-roof', match: /^roof(-\d+)?$/i, assets: ['building'],
    set: {map: 'clayTileMap', normalMap: 'clayTileNormal'},
    repeat: [1 / 0.8, 1 / 1.0], normalScale: 1.2},
-  {key: 'stucco', match: /^stucco( \[imported\])?$/i, assets: ['building'], normalScale: 0.55},
+  // bldg-3 spells it STRUCCO and ships no facade normal at all; the authored
+  // colour already sits on the photo hue, so it keeps the base and gains the
+  // sand-float relief.
+  {key: 'stucco', match: /^st?rucco( \[imported\])?$/i, assets: ['building'],
+   set: {normalMap: 'stuccoNormal'}, repeat: [1, 1], normalScale: 0.55},
   {key: 'iron', match: /^metal( \(\d+\))?$/i, assets: ['building', 'garden'],
    color: '#212326', roughness: 0.58, metalness: 0.22},
   {key: 'gravel', match: /^gravel( \[imported\])?$/i, assets: ['building'],
@@ -73,7 +77,12 @@ export function applyGradeValues(root, asset) {
       const entry = entryFor(material.name, asset);
       material.userData.exteriorGrade = entry ? entry.key : '';
       if (!entry) continue;
-      if (entry.color) material.color?.set(entry.color);
+      if (entry.color) {
+        material.color?.set(entry.color);
+        // A colour grade must actually show: a leftover 4x4 placeholder
+        // baseColor would multiply its own stub pixels into it.
+        if (material.map && (material.map.image?.width ?? 0) <= 8) material.map = null;
+      }
       if (entry.roughness !== undefined) material.roughness = entry.roughness;
       if (entry.metalness !== undefined) material.metalness = entry.metalness;
       // prepareMaterialResponse snapshots normalScale before the family
@@ -102,8 +111,9 @@ export function loadGradeTextures(rootURL) {
     one('clay-tile-basecolor.png', true), one('clay-tile-normal.png', false),
     one('grass-basecolor.png', true), one('asphalt-basecolor.png', true),
     one('travertine-basecolor.png', true), one('travertine-normal.png', false),
-  ]).then(([clayTileMap, clayTileNormal, grassMap, asphaltMap, travertineMap, travertineNormal]) =>
-    ({clayTileMap, clayTileNormal, grassMap, asphaltMap, travertineMap, travertineNormal}));
+    one('stucco-normal.png', false),
+  ]).then(([clayTileMap, clayTileNormal, grassMap, asphaltMap, travertineMap, travertineNormal, stuccoNormal]) =>
+    ({clayTileMap, clayTileNormal, grassMap, asphaltMap, travertineMap, travertineNormal, stuccoNormal}));
 }
 
 // Area-weighted share of up-facing surface, in world space: the planar ground
@@ -167,7 +177,12 @@ export function bindGradeTextures(parts, sets) {
         }
         if (!sets || !entry.set || material.userData.exteriorGradeBound) continue;
         material.userData.exteriorGradeBound = true;
-        if (entry.set.map) material.map = textureFor(entry.set.map, entry.repeat);
+        if (entry.set.map) {
+          material.map = textureFor(entry.set.map, entry.repeat);
+          // The sheet carries the photo hue; an authored tint factor (bldg-3
+          // ships 'Clay tile' as a bare dark-rust colour) must not restain it.
+          material.color?.setRGB(1, 1, 1);
+        }
         if (entry.set.normalMap) {
           material.normalMap = textureFor(entry.set.normalMap, entry.repeat);
           material.normalScale ??= new THREE.Vector2(1, 1);

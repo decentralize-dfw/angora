@@ -4,15 +4,19 @@ import * as THREE from 'three';
 // untouched. Keep the baked maps, but avoid amplifying their micro-relief.
 export function materialFamily(name='') {
   name=name.replace(/\.\d{3}$/,'');
-  if (/clay tile|^roof$|green tiles/i.test(name)) return 'roof';
+  // The bldg-3 re-export renamed its surfaces in passing - 'roof' became
+  // 'roof-7', 'stucco' arrived as 'STRUCCO', 'white_trim' as 'WHT',
+  // 'wood_floor' as 'WOOD-FL' - so each family tolerates the variants the
+  // deliveries have actually used rather than one authored spelling.
+  if (/clay tile|^roof(-\d+)?$|green tiles/i.test(name)) return 'roof';
   // Glass and mirrors must never reach a roughness floor: 'Lift glass leaf'
   // would otherwise match the landscape family through 'leaf' and pick up a
   // 0.88 floor, and the mirrors read as masonry through nothing at all - the
   // floor is what matters, so they are named out before any family test.
   if (/glass|mirror/i.test(name)) return 'other';
-  if (/stucco|neighbor_wall|white_trim|limestone|stone_tile|retaining stone|asphalt/i.test(name)) return 'masonry';
+  if (/st?rucco|neighbor_wall|white_trim|^wht$|limestone|stone_tile|retaining stone|asphalt/i.test(name)) return 'masonry';
   if (/grass|foliage|hedge|needle|leaf/i.test(name)) return 'landscape';
-  if (/wood_floor|terra_floor/i.test(name)) return 'floor';
+  if (/wood_floor|^wood-?fl$|terra_floor/i.test(name)) return 'floor';
   // Indoor plaster. It used to fall through to 'other' and keep the loader's
   // envMapIntensity of 1 - the only family in the house left at full strength,
   // while roof sits at .65, floor .75 and masonry .8. A ceiling faces down, so
@@ -22,8 +26,8 @@ export function materialFamily(name='') {
   // ceilings were reading sRGB 118,125,97 - the ground's own colour, not their
   // own - because with no occlusion indoors the environment was most of what
   // reached them. The albedo is right; the weight was not.
-  if (/^ceiling$/.test(name)) return 'soffit';
-  if (/^interior$/.test(name)) return 'plaster';
+  if (/^ceiling$/i.test(name)) return 'soffit';
+  if (/^interior$/i.test(name)) return 'plaster';
   return 'other';
 }
 

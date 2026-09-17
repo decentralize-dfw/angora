@@ -33,14 +33,14 @@ const chunk = (type, data) => {
   out.writeUInt32BE(crc32(head), head.length + 4);
   return out;
 };
-function writePNG(name, rgb) {
+function writePNG(name, rgb, size = SIZE) {
   const ihdr = Buffer.alloc(13);
-  ihdr.writeUInt32BE(SIZE, 0); ihdr.writeUInt32BE(SIZE, 4);
+  ihdr.writeUInt32BE(size, 0); ihdr.writeUInt32BE(size, 4);
   ihdr[8] = 8; ihdr[9] = 2; // 8-bit RGB
-  const raw = Buffer.alloc(SIZE * (SIZE * 3 + 1));
-  for (let y = 0; y < SIZE; y++) {
-    raw[y * (SIZE * 3 + 1)] = 0; // filter none
-    rgb.copy(raw, y * (SIZE * 3 + 1) + 1, y * SIZE * 3, (y + 1) * SIZE * 3);
+  const raw = Buffer.alloc(size * (size * 3 + 1));
+  for (let y = 0; y < size; y++) {
+    raw[y * (size * 3 + 1)] = 0; // filter none
+    rgb.copy(raw, y * (size * 3 + 1) + 1, y * size * 3, (y + 1) * size * 3);
   }
   const png = Buffer.concat([Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]),
     chunk('IHDR', ihdr), chunk('IDAT', deflateSync(raw, {level: 9})), chunk('IEND', Buffer.alloc(0))]);
@@ -76,16 +76,19 @@ const put = (buf, x, y, rgb) => {
   buf[i + 2] = Math.max(0, Math.min(255, Math.round(rgb[2])));
 };
 // central-difference normal map from a wrapping height field, Y-up green
-function normalFrom(height, strength, name) {
-  const buf = Buffer.alloc(SIZE * SIZE * 3);
-  const at = (x, y) => height[((y + SIZE) % SIZE) * SIZE + ((x + SIZE) % SIZE)];
-  for (let y = 0; y < SIZE; y++) for (let x = 0; x < SIZE; x++) {
+function normalFrom(height, strength, name, size = SIZE) {
+  const buf = Buffer.alloc(size * size * 3);
+  const at = (x, y) => height[((y + size) % size) * size + ((x + size) % size)];
+  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
     const dx = (at(x + 1, y) - at(x - 1, y)) * strength;
     const dy = (at(x, y + 1) - at(x, y - 1)) * strength;
     const inv = 1 / Math.hypot(dx, dy, 1);
-    put(buf, x, y, [(-dx * inv * .5 + .5) * 255, (-dy * inv * .5 + .5) * 255, (inv * .5 + .5) * 255]);
+    const i = (y * size + x) * 3;
+    buf[i] = Math.round((-dx * inv * .5 + .5) * 255);
+    buf[i + 1] = Math.round((-dy * inv * .5 + .5) * 255);
+    buf[i + 2] = Math.round((inv * .5 + .5) * 255);
   }
-  writePNG(name, buf);
+  writePNG(name, buf, size);
 }
 
 // ---- 1. clay roof tile: 4 tiles x 3 courses per repeat (0.8 m x 1.0 m) ----
@@ -198,10 +201,25 @@ function normalFrom(height, strength, name) {
   normalFrom(height, 1.6, 'travertine-normal.png');
 }
 
+// ---- 5. stucco relief: 1 m repeat, sand-float grain with sparse roughcast --
+// bldg-3 dropped the facade's baked normal entirely; the photo shows fine
+// 1-2 mm float grain with heavier tyrolean spatter on the side walls.
+{
+  const S = 256;
+  const height = new Float32Array(S * S);
+  for (let y = 0; y < S; y++) for (let x = 0; x < S; x++) {
+    const u = x / S, v = y / S;
+    const grain = noise(u, v, 110, 51) * .5 + noise(u, v, 56, 52) * .3;
+    const nodule = Math.max(0, noise(u, v, 32, 53) - .78) * 3;
+    height[y * S + x] = grain + nodule;
+  }
+  normalFrom(height, 2.2, 'stucco-normal.png', S);
+}
+
 writeFileSync(new URL('source.json', OUT), JSON.stringify({
   generated_by: 'tools/generate_exterior_textures.mjs',
   content: 'procedural, project-authored; no third-party imagery',
   spec_source: 'listing photographs in the repository root, kat_1_bahce and kat_2_on_giris',
-  modules_m: {clay_tile: [0.8, 1.0], grass: 2.0, asphalt: 3.0, travertine: 0.8},
+  modules_m: {clay_tile: [0.8, 1.0], grass: 2.0, asphalt: 3.0, travertine: 0.8, stucco: 1.0},
 }, null, 1));
 console.log('source.json written');

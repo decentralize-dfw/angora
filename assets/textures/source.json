@@ -9,6 +9,7 @@
   ],
   "grass": 2,
   "asphalt": 3,
-  "travertine": 0.8
+  "travertine": 0.8,
+  "stucco": 1
  }
 }

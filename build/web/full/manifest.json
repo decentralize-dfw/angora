@@ -21,9 +21,9 @@
    "id": "building",
    "group": "villa",
    "exterior_grade": true,
-   "file": "../kanka/BUILDING-2-opt-v11-DRACO.glb",
-   "bytes": 3949048,
-   "sha256": "0b08d3967a878af44acbb40bf4e1d32bdad042fbcb66b11039ff672f8b41298c",
+   "file": "../sansi/bldg-3-opt-DRACO.glb",
+   "bytes": 3931404,
+   "sha256": "3d4c561da203ca187e16e5ece002364ec5cc2c754570f7a83b57ccf300acfb81",
    "origin": "kanka-user-optimised"
   },
   {

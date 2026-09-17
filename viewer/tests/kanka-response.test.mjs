@@ -44,8 +44,21 @@ test('A context file in the buildings role whitens wholesale, minus plainly-site
   assert.ok(!againM.userData.contextBuilding);
 });
 
+test("bldg-3's renamed spellings still land in their families",async()=>{
+  const {materialFamily}=await import('../src/material-response.js');
+  assert.equal(materialFamily('STRUCCO'),'masonry');
+  assert.equal(materialFamily('WHT'),'masonry');
+  assert.equal(materialFamily('roof-7'),'roof');
+  assert.equal(materialFamily('WOOD-FL'),'floor');
+  assert.equal(materialFamily('INTERIOR'),'plaster');
+  assert.equal(materialFamily('Clay tile'),'roof');
+});
+
 test('The exterior grade knows its surfaces and leaves everything else alone',()=>{
   assert.equal(gradeKey('Clay tile 5 [imported]'),'clay-tile');
+  assert.equal(gradeKey('Clay tile'),'clay-tile');
+  assert.equal(gradeKey('roof-7'),'villa-roof');
+  assert.equal(gradeKey('STRUCCO'),'stucco');
   assert.equal(gradeKey('stone_tile (4).001'),'terrace');
   assert.equal(gradeKey('grass (1)'),'grass');
   assert.equal(gradeKey('Entrance coursed limestone (1)'),'', 'the healthy 52 m wall is not re-tiled');
@@ -93,6 +106,28 @@ test('Ground UVs are rebuilt from world metres on up-facing meshes only',()=>{
   applyGradeValues(scene2,'context-ground');
   bindGradeTextures([{scene:scene2}],null);
   assert.equal(bare.material.map,null);
+});
+
+test("An authored tint never restains a bound sheet, and placeholder stubs yield to colour grades",()=>{
+  const sets={clayTileMap:new THREE.Texture(),clayTileNormal:new THREE.Texture(),
+    grassMap:new THREE.Texture(),asphaltMap:new THREE.Texture(),
+    travertineMap:new THREE.Texture(),travertineNormal:new THREE.Texture(),stuccoNormal:new THREE.Texture()};
+  // bldg-3 ships 'Clay tile' textureless with a dark rust colour factor
+  const tile=new THREE.MeshStandardMaterial({name:'Clay tile',color:0x752008});
+  const roofMesh=new THREE.Mesh(new THREE.PlaneGeometry(1,1),tile);
+  const scene=new THREE.Group();scene.add(roofMesh);
+  applyGradeValues(scene,'building');
+  bindGradeTextures([{scene}],sets);
+  assert.ok(tile.map,'tile sheet bound');
+  assert.equal('#'+tile.color.getHexString(),'#ffffff','tint cleared - the sheet carries the hue');
+  assert.ok(tile.map.repeat.x>1.9&&tile.map.repeat.x<2,'audited repeat density applied');
+  // a 4x4 placeholder baseColor is dropped when a colour grade lands
+  const stub=new THREE.Texture();stub.image={width:4,height:4};
+  const rail=new THREE.MeshStandardMaterial({name:'metal (4)'});rail.map=stub;
+  const scene2=new THREE.Group();scene2.add(new THREE.Mesh(new THREE.PlaneGeometry(1,1),rail));
+  applyGradeValues(scene2,'building');
+  assert.equal(rail.map,null);
+  assert.equal('#'+rail.color.getHexString(),'#212326');
 });
 
 test("The numbered 'grass (1)' skin is still the ground family",()=>{
