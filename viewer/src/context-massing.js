@@ -179,35 +179,63 @@ export function splitContextBuildings(root, {role} = {}) {
 
 // One shared uniform drives every whitened surface, so the fade costs a single
 // float per frame and the buildings cross over together instead of in bands.
-export function createContextMassing(root) {
+//
+// R49 widens the reading: in the Villa scale EVERYTHING beyond the plot line
+// goes white - lawn, roads, retaining stone, planting - "arsa dışında herşey
+// tek malzeme olacak". The neighbour buildings whiten wholesale as before;
+// the site skins whiten only OUTSIDE the plot rectangle, so the settlement's
+// grass splits cleanly at the boundary with no geometry cut. Yakın çevre and
+// Bölge return everything to the photographic reading.
+export function createContextMassing(root, plotRect = null) {
   const blend = {value: 0}, colour = {value: new THREE.Color(MASSING_ALBEDO)};
+  const rect = {value: new THREE.Vector4(plotRect?.minX ?? 0, plotRect?.minZ ?? 0, plotRect?.maxX ?? 0, plotRect?.maxZ ?? 0)};
   const attached = new Set();
-  root.traverse(object => {
-    if (!object.isMesh) return;
-    for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
-      if (!material?.userData?.contextBuilding || attached.has(material)) continue;
-      attached.add(material);
-      const previous = material.onBeforeCompile, previousKey = material.customProgramCacheKey();
-      material.onBeforeCompile = (shader, renderer) => {
-        previous.call(material, shader, renderer);
-        shader.uniforms.massingBlend = blend;
-        shader.uniforms.massingColour = colour;
-        shader.fragmentShader = 'uniform float massingBlend;\nuniform vec3 massingColour;\n' + shader.fragmentShader;
+  const attach = (material, site) => {
+    attached.add(material);
+    const previous = material.onBeforeCompile, previousKey = material.customProgramCacheKey();
+    material.onBeforeCompile = (shader, renderer) => {
+      previous.call(material, shader, renderer);
+      shader.uniforms.massingBlend = blend;
+      shader.uniforms.massingColour = colour;
+      shader.uniforms.massingPlot = rect;
+      shader.fragmentShader = 'uniform float massingBlend;\nuniform vec3 massingColour;\nuniform vec4 massingPlot;\n' + shader.fragmentShader;
+      let weight = 'massingBlend';
+      if (site) {
+        shader.vertexShader = 'varying vec3 massingWorld;\n' + shader.vertexShader;
+        shader.vertexShader = shader.vertexShader.replace('#include <project_vertex>',
+          '#include <project_vertex>\nmassingWorld = (modelMatrix * vec4(transformed, 1.0)).xyz;');
+        shader.fragmentShader = 'varying vec3 massingWorld;\n' + shader.fragmentShader;
+        // signed distance outside the plot rectangle, feathered over 60 cm
+        shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>',
+          `#include <color_fragment>
+          vec2 massingOut = max(massingPlot.xy - massingWorld.xz, massingWorld.xz - massingPlot.zw);
+          float massingW = massingBlend * smoothstep(0.0, 0.6, max(massingOut.x, massingOut.y));
+          diffuseColor.rgb = mix(diffuseColor.rgb, massingColour, massingW);`);
+        weight = 'massingW';
+      } else {
         // Albedo first, so the sun, the sky probe and the occlusion pass all keep
         // describing the same solid rather than a flat white silhouette.
         shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>',
           '#include <color_fragment>\ndiffuseColor.rgb = mix(diffuseColor.rgb, massingColour, massingBlend);');
-        shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>',
-          `#include <roughnessmap_fragment>\nroughnessFactor = mix(roughnessFactor, ${MASSING_ROUGHNESS.toFixed(2)}, massingBlend);`);
-        shader.fragmentShader = shader.fragmentShader.replace('#include <metalnessmap_fragment>',
-          '#include <metalnessmap_fragment>\nmetalnessFactor = mix(metalnessFactor, 0.0, massingBlend);');
-        // Roof tile and render relief belong to the photographic reading; a
-        // massing model is smooth, so the perturbation eases out with the colour.
-        if (material.normalMap) shader.fragmentShader = shader.fragmentShader.replace('#include <normal_fragment_maps>',
-          '#include <normal_fragment_maps>\nnormal = normalize(mix(normal, nonPerturbedNormal, massingBlend));');
-      };
-      material.customProgramCacheKey = () => previousKey + '|massing-r39';
-      material.needsUpdate = true;
+      }
+      shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>',
+        `#include <roughnessmap_fragment>\nroughnessFactor = mix(roughnessFactor, ${MASSING_ROUGHNESS.toFixed(2)}, ${weight});`);
+      shader.fragmentShader = shader.fragmentShader.replace('#include <metalnessmap_fragment>',
+        `#include <metalnessmap_fragment>\nmetalnessFactor = mix(metalnessFactor, 0.0, ${weight});`);
+      // Roof tile and render relief belong to the photographic reading; a
+      // massing model is smooth, so the perturbation eases out with the colour.
+      if (material.normalMap) shader.fragmentShader = shader.fragmentShader.replace('#include <normal_fragment_maps>',
+        `#include <normal_fragment_maps>\nnormal = normalize(mix(normal, nonPerturbedNormal, ${weight}));`);
+    };
+    material.customProgramCacheKey = () => previousKey + (site ? '|massing-site-r49' : '|massing-r39');
+    material.needsUpdate = true;
+  };
+  root.traverse(object => {
+    if (!object.isMesh) return;
+    for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
+      if (!material || attached.has(material)) continue;
+      if (material.userData.contextBuilding) attach(material, false);
+      else if (plotRect) attach(material, true);
     }
   });
   let from = 0, to = 0, start = 0;

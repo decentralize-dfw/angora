@@ -13,6 +13,7 @@ import {clockLabel} from './daylight.js';
 import {createHotspots} from './hotspots.js';
 import {renderPropertyInfo} from './property-info.js';
 import {areaLabel} from './annotations.js';
+import {ROOM_AREAS} from './room-areas.js';
 import { configureCameraControls } from './camera.js';
 import { PendingAction } from './pending-action.js';
 import {fitContextBounds,neutraliseTransmission} from './material-response.js';
@@ -97,10 +98,19 @@ let flight, hotspots, planMode=false, roomData, interiorLights=true, soilCap=nul
 let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox, contextBox, lighting, siteContext;
 // A property presentation opens on the property: the villa is the default,
 // and ?view= deep links (region, a floor) still land exactly where they say.
-let selected = 'building', ready = false, loading = false;
+// "villa modunda dışarıdan bakmak yok, çatı katından başlamalı": the Villa
+// scale is the sectional reading, so it opens - and returns - on the Çatı
+// cut. The whole-house exterior belongs to Yakın çevre.
+let selected = 'f3', ready = false, loading = false;
 let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations, walk;
 let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;
 let deviceQA,assetRevision=null,pendingCapture=null,contextLost=false,massing=null,lift=null;
+// Per-storey XZ extents of the villa's own geometry, measured vertex by
+// vertex at load: each floor button frames its slice, not the eaves.
+let floorBoxes=[];
+// The basement pair folded into one 'Salon' at load; the menu and the walk
+// area lookups translate the absorbed room to its keeper.
+let mergedBasement=null;
 // Live location during the tour: the interface names where the feet ARE,
 // with a short dwell so a doorway crossing cannot flicker the title.
 let locator=null,locationKey='',locationPendingKey='',locationPendingSince=0;
@@ -249,13 +259,16 @@ function resize() {
   camera.updateProjectionMatrix(); renderer.setSize(w, h); lighting?.resize(w, h); invalidate();
   walk?.resize(w,h);
 }
-function frame(initial=false,keep=false) {
+function frame(initial=false) {
   if(!buildingBox)return;
   const floor=selected.startsWith('f'),aspect=host.clientWidth/Math.max(1,host.clientHeight);
   // "villa modunda binayı ortala, arsayı değil": the frame centres on the
   // house itself. Narrow screens must still fit house AND plot together, so
   // there the span measures the plot's farthest reach from the house centre.
-  let box=buildingBox.clone();if(selected==='f0')box.union(gardenBox);
+  // A storey frames ITS OWN slice - the roof's eaves must not hold the
+  // ground floor at arm's length.
+  let box=(floor?floorBoxes[Number(selected[1])]??buildingBox:buildingBox).clone();
+  if(selected==='f0')box.union(gardenBox);
   const center=box.getCenter(new THREE.Vector3());center.y=floor?[0,3.0996,6.3714,9.4705][Number(selected[1])]:2;
   let size=box.getSize(new THREE.Vector3());
   if(selected==='building'){
@@ -271,10 +284,9 @@ function frame(initial=false,keep=false) {
   // Plan is a drawing, not a view: straight down, north up, no perspective
   // worth the name (the 4-degree lens is set alongside planMode).
   const polar=planMode?.02:selected==='region'?.58:floor?.56:.78;
-  frameSpan=Math.max(size.z*Math.cos(polar)+size.y*Math.sin(polar),size.x/aspect)*(floor?1.17:1.14);
+  frameSpan=Math.max(size.z*Math.cos(polar)+size.y*Math.sin(polar),size.x/aspect)*(floor?1.1:1.14);
   if(selected==='region'&&contextBox)frameSpan=fitContextBounds(contextBox,aspect,polar).span;
-  if(keep){center.copy(controls.target);if(floor)center.y=[0,3.0996,6.3714,9.4705][Number(selected[1])];frameSpan=camera.position.distanceTo(controls.target)*2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2));}
-  flight.go({target:center,polar,span:frameSpan,zoom:keep?camera.zoom:1,fov:planMode?4:35,
+  flight.go({target:center,polar,span:frameSpan,zoom:1,fov:planMode?4:35,
     azimuth:selected==='region'||planMode?0:initial?.804:undefined},initial===true);
   resize();
 }
@@ -319,8 +331,9 @@ function applyWalkLocation(name,station){
   $('#view-title').textContent=name;
   if(station){
     walk.room=station.room_id;
-    $('#walk-room').value=station.room_id;
-    $('#walk-room-area').textContent=areaLabel(roomData?.rooms.find(r=>r.id===station.room_id),roomData);
+    const shownId=station.room_id===mergedBasement?.absorbedId?mergedBasement.keeperId:station.room_id;
+    $('#walk-room').value=shownId;
+    $('#walk-room-area').textContent=areaLabel(roomData?.rooms.find(r=>r.id===shownId),roomData);
   } else $('#walk-room-area').textContent='';
   invalidate();
 }
@@ -413,7 +426,8 @@ function selectView(id, initial = false) {
   if (walk?.active) exitWalk(false);
   const previous = selected; selected = id;
   $('#app').dataset.scale=id.startsWith('f')?'floor':id;
-  document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === id));
+  document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed',
+    b.dataset.view === id || (b.dataset.view === 'building' && id.startsWith('f'))));
   $('#view-title').textContent = titles[id];
   $('#section-label').textContent = id.startsWith('f')
     ? (id==='f3'?t('cut130'):t('cut160'))
@@ -432,17 +446,27 @@ function selectView(id, initial = false) {
   const earthTarget = id==='f0' ? SOIL_CUT_HEIGHT : fullHeight;
   for (const o of plantingAboveCut) o.visible = id !== 'f0';
   if (earthClip.constant !== earthTarget) {earthClip.constant = earthTarget; renderer.shadowMap.needsUpdate = true;}
+  // The street view is a composed establishing shot: it turns (slowly, on
+  // request) but it does not dolly - "yakın çevrede zoom in out izin verme".
+  if(controls)controls.enableZoom=id!=='neighborhood';
+  setAutoRotate(false);
+  $('#toggle-autorotate').hidden=id!=='neighborhood';
   lighting.frame(id,contextBox);massing?.set(id);lift?.park(id);
   lighting.interior(id.startsWith('f')?Number(id[1]):null,null);
   if(roomData)renderPropertyInfo($('#property-info'),roomData,id);
   if(!initial&&(id==='region'||previous==='region'))clouds();
-  if (initial || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  // The sweeping cut is the product's own storytelling, not a decoration:
+  // phones with battery-saver flip prefers-reduced-motion and the storey
+  // change turned into a hard jump there ("mobilde animasyon çalışmadı!").
+  // The camera flights still honour the setting; the cut always sweeps.
+  if (initial) {
     clip.constant = target; transition = null;
   } else transition = {from:clip.constant, to:target, start:performance.now(),
     span:matchMedia('(pointer: coarse)').matches?520:820};
-  // All assets stay loaded and visible; floor changes preserve orbit, pan and zoom.
-  if(initial||!previous.startsWith('f')||!id.startsWith('f'))frame(initial);
-  else if(previous!==id)frame(false,true);
+  // Every storey frames its own interior - "iç alan zoom extend olmalı,
+  // bana bir daha zoom in yaptırma" - so floor changes re-fit instead of
+  // keeping the previous distance.
+  frame(initial);
   host.dataset.view = id; host.dataset.loaded = 'true'; rememberState(); invalidate();
 }
 let walkData=null,tourStep=-1;
@@ -454,7 +478,7 @@ function fillRoomMenu(){
   select.replaceChildren();
   for(let f=0;f<4;f++){
     const group=document.createElement('optgroup');group.label=titles['f'+f];
-    const floorStations=walkData.stations.filter(s=>s.floor_index===f);
+    const floorStations=walkData.stations.filter(s=>s.floor_index===f&&s.room_id!==mergedBasement?.absorbedId);
     for(const station of floorStations){
       const room=roomData?.rooms.find(r=>r.id===station.room_id);
       const name=roomName(station.name);
@@ -502,7 +526,7 @@ function refreshChrome(){
 // \u00a77: a short, interruptible presentation sequence over composed
 // views. Any direct touch of the scene hands control straight back.
 const TOUR=[
-  {view:'building',caption:'tourExterior'},
+  {view:'f3',caption:'tourExterior'},
   {view:'f1',caption:'tourLiving'},
   {view:'f2',caption:'tourUpper'},
   {view:'f0',caption:'tourGarden'},
@@ -534,7 +558,18 @@ function enterWalk(roomId) {
   pendingRoomJump.cancel();
   if (!walk || !ready) return;
   const floor=selected.startsWith('f')?Number(selected[1]):1;
-  roomId ||= walk.surface.data.stations.find(s=>s.floor_index===floor).room_id;
+  // "hangi kattaysa ortadan başlasın": no room given means the tour opens at
+  // the storey's most central station, not whichever station the file lists
+  // first.
+  if(!roomId){
+    const centre=(floorBoxes[floor]??buildingBox).getCenter(new THREE.Vector3());
+    roomId=walk.surface.data.stations.filter(s=>s.floor_index===floor)
+      .reduce((best,s)=>{
+        const d=(s.position[0]-centre.x)**2+(s.position[2]-centre.z)**2;
+        return !best||d<best.d?{d,id:s.room_id}:best;
+      },null)?.id;
+  }
+  if(!roomId)return;
   flight.cancel();panel('',false);const station=walk.enter(roomId);selected='f'+station.floor_index;updateRoomUI(station);
   lighting.interior(station.floor_index,station.position);
   controls.enabled=false;clip.constant=fullHeight;earthClip.constant=fullHeight;transition=null;lighting.frame('building');massing?.set('building');
@@ -546,7 +581,8 @@ function enterWalk(roomId) {
   $('#app').dataset.walk='true';$('.camera-tools').hidden=true;$('#walk-tools').hidden=false;$('#enter-walk').hidden=true;
   $('#walk-room').value=station.room_id;
   $('#walk-lens').value=Math.round(walk.camera.fov);updateLensReadout();
-  document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===selected));
+  document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',
+    b.dataset.view===selected||(b.dataset.view==='building'&&selected.startsWith('f'))));
   $('#gesture-help').textContent=t('walkHelp');
   resize();invalidate();
 }
@@ -749,8 +785,21 @@ async function loadModel() {
     // tags every mesh wholesale, so the Mobilya toggle, the paper wash and
     // the shadow twin treat it exactly like the merged set's furniture.
     const mergedGroups=new Map();
+    const furnitureLift=new THREE.Color('#ffffff');
     for (const {group, furniture, scene: part} of staged.values()) {
-      if (furniture) part.traverse(o=>{if(o.isMesh)o.userData.category='furniture';});
+      // "furniturelar daha smooth light renk olsun": the staging pieces read
+      // lighter and softer than delivered - colours lift toward white and
+      // harsh speculars settle - while metals and glass keep their nature.
+      if (furniture) part.traverse(o=>{
+        if(!o.isMesh)return;
+        o.userData.category='furniture';
+        for(const m of Array.isArray(o.material)?o.material:[o.material]){
+          if(!m||m.userData.furnitureSoftened||/chrome|mirror|glass|brass|stainless/i.test(m.name))continue;
+          m.userData.furnitureSoftened=true;
+          m.color?.lerp(furnitureLift,.18);
+          if(m.roughness!==undefined)m.roughness=Math.max(m.roughness,.45);
+        }
+      });
       if (!mergedGroups.has(group)) {const g=new THREE.Group(); g.name=group; mergedGroups.set(group,g);}
       mergedGroups.get(group).add(part);
     }
@@ -854,6 +903,22 @@ async function loadModel() {
       scene.add(shadowProxy);
     }
     buildingBox = new THREE.Box3().setFromObject(groups.get('villa'));
+    {
+      // one pass over the villa's vertices fills all four storey boxes
+      const datums=[0,3.0996,6.3714,9.4705,1e9];
+      floorBoxes=datums.slice(0,4).map(()=>new THREE.Box3());
+      const p=new THREE.Vector3();
+      groups.get('villa').traverse(o=>{
+        if(!o.isMesh)return;
+        const position=o.geometry.attributes.position;
+        for(let i=0;i<position.count;i++){
+          p.fromBufferAttribute(position,i).applyMatrix4(o.matrixWorld);
+          const band=p.y<datums[1]?0:p.y<datums[2]?1:p.y<datums[3]?2:3;
+          floorBoxes[band].expandByPoint(p);
+        }
+      });
+      for(const [i,b] of floorBoxes.entries())if(b.isEmpty())floorBoxes[i]=null;
+    }
     // Keep the entrance, pool terrace and basement garden in the building frame.
     gardenBox = new THREE.Box3(new THREE.Vector3(-10.2, -4, -29.1), new THREE.Vector3(12.5, 3.4, 11));
     contextBox=buildingBox.clone();
@@ -869,7 +934,7 @@ async function loadModel() {
       const settlementBox=new THREE.Box3();
       for(const b of contextData.buildings)if(b.bounds)for(const p of b.bounds)settlementBox.expandByPoint(new THREE.Vector3(...p));
       if(!settlementBox.isEmpty())contextBox=settlementBox.union(buildingBox);
-      siteContext=createSiteContext(contextData,host,()=>selectView('building'));
+      siteContext=createSiteContext(contextData,host,()=>selectView('f3'));
       $('#context-count').textContent=`${contextData.buildings.length} ${t('buildingsWord')} · ${atlasMeta()}`;
     } catch(error){console.warn(error);$('#context-count').textContent=atlasMeta();}
     // The neighbourhood is in by now, so its bounds, its horizon fade and its
@@ -878,19 +943,83 @@ async function loadModel() {
     if(groups.has('context')){
       contextBox.union(new THREE.Box3().setFromObject(groups.get('context')));
       prepareContextSurfaces(groups.get('context'),lighting.horizonColour);
-      massing=createContextMassing(groups.get('context'));
+      massing=createContextMassing(groups.get('context'),PLOT_RECT);
     }
     fullHeight = buildingBox.max.y + 2;
     caps = createWallCaps(results[2].value); scene.add(caps.group);
     const capScene=results[6].status==='fulfilled'?results[6].value:null;
     if (capScene) {soilCap = createSoilCap(capScene); if (soilCap) scene.add(soilCap.group);}
-    roomData=results[3].value;annotations=createAnnotations(roomData,host,enterWalk);scene.add(annotations.group);
+    roomData=results[3].value;
+    {
+      // "bahçe salonu ve oda diye iki farklı mahal olmamalı": the basement's
+      // pair is one salon in life, so it is one mahal here - one label, the
+      // areas summed, and the second station folded in below.
+      const rooms=roomData.rooms??[];
+      const pair=['bahçe salonu','oda'].map(wanted=>rooms.find(r=>r.floor_index===0&&r.name.toLocaleLowerCase('tr')===wanted));
+      if(pair[0]&&pair[1]){
+        const [keeper,absorbed]=pair;
+        const areaOf=r=>ROOM_AREAS[r.id]??(Number.isFinite(r.area_m2)?r.area_m2:0);
+        ROOM_AREAS[keeper.id]=Math.round((areaOf(keeper)+areaOf(absorbed))*100)/100;
+        keeper.name='Salon';
+        mergedBasement={keeperId:keeper.id,absorbedId:absorbed.id};
+        roomData.rooms=rooms.filter(r=>r!==absorbed);
+        // the absorbed room's spans still describe real walls; they now
+        // dimension the keeper so the per-axis pick sees them together
+        for(const dim of roomData.dimensions??[])if(dim.room_id===absorbed.id)dim.room_id=keeper.id;
+        // and the walk agrees: both stations answer to 'Salon', the title,
+        // the locator and the menu all reading the same single mahal
+        for(const s of results[4].value.stations??[])
+          if(s.room_id===keeper.id||s.room_id===absorbed.id)s.name='Salon';
+      }
+      // §R49: the basement view names its outdoors with real metres - the
+      // pool from its own water body, the garden from the plot line to the
+      // house - model-measured, so the witness lines stay dashed and honest.
+      const water=new THREE.Box3();let hasWater=false;
+      groups.get('garden')?.traverse(o=>{
+        if(o.isMesh&&(Array.isArray(o.material)?o.material:[o.material]).some(m=>/^water$/i.test(m?.name??'')))
+          {water.expandByObject(o);hasWater=true;}
+      });
+      const dims=roomData.dimensions??(roomData.dimensions=[]);
+      const outdoor=(id,name,box,y)=>{
+        const c=box.getCenter(new THREE.Vector3());
+        roomData.rooms.push({id,name,floor_index:0,position:[c.x,y,c.z],label_only:true});
+        dims.push(
+          {id:id+'-x',room_id:id,floor_index:0,basis:'model_measured',dimension_label_allowed:false,
+           metres:box.max.x-box.min.x,a:[box.min.x,y,c.z],b:[box.max.x,y,c.z]},
+          {id:id+'-z',room_id:id,floor_index:0,basis:'model_measured',dimension_label_allowed:false,
+           metres:box.max.z-box.min.z,a:[c.x,y,box.min.z],b:[c.x,y,box.max.z]});
+      };
+      if(hasWater)outdoor('f0-out-pool','Havuz',water,water.max.y+.25);
+      const garden=new THREE.Box3(
+        new THREE.Vector3(PLOT_RECT.minX+.4,-1,PLOT_RECT.minZ+.4),
+        new THREE.Vector3(PLOT_RECT.maxX-.4,3,buildingBox.min.z-.4));
+      if(garden.max.z>garden.min.z+2)outdoor('f0-out-garden','Bahçe',garden,.6);
+    }
+    annotations=createAnnotations(roomData,host,enterWalk);scene.add(annotations.group);
     walk = new InteriorWalk(results[4].value,renderer.domElement,invalidate);scene.add(walk.rig);
     // the villa box includes roof eaves; the walls sit about a metre inside
     // it, so the outdoor test insets by that much or garden ground under an
     // eave would still count as "inside the house"
     locator=createWalkLocator(walk.surface,{minX:buildingBox.min.x+1,maxX:buildingBox.max.x-1,
       minZ:buildingBox.min.z+1,maxZ:buildingBox.max.z-1});
+    {
+      // "ışığı olmayan odalar var": the delivery authored 20 fixtures but
+      // left four interior rooms (the basement salon pair and two attic
+      // bedrooms) with none in reach, so their 360° tours ran on daylight
+      // alone. Each lightless interior station gets a quiet warm ceiling
+      // point, labelled as synthesized - never passed off as authored.
+      const nav=results[4].value;
+      for(const s of nav.stations){
+        if(/balkon|teras|bahçe(?!\s*salonu)|merdiven/i.test(s.name))continue;
+        const [sx,sy,sz]=s.position;
+        const lit=nav.lights.some(l=>Math.abs(l.position[1]-sy)<2.6&&Math.hypot(l.position[0]-sx,l.position[2]-sz)<2.8);
+        if(!lit)nav.lights.push({name:`Synthesized ceiling light (${s.room_id})`,
+          position:[sx,sy+1.15,sz],direction:[0,-1,0],floor_index:s.floor_index,
+          color:[1,.93,.85],intensity_cd:80,
+          intensity_status:'render_assumption_not_measured_electrical_power',
+          source:'viewer_synthesized_for_lightless_room'});
+      }
+    }
     lighting.setFixtures(results[4].value.lights);hotspots=createHotspots(host,walk,travelRoom);
     lift=createLift({groups,clips:stagedClips.get('villa')??[],clipPlane:clip,fullHeight,
       shadowsDirty:()=>{renderer.shadowMap.needsUpdate=true;},onSettled:()=>refreshLiftControl()});
@@ -1016,7 +1145,9 @@ function setPlanMode(on){
   planMode=on;$('#toggle-plan').setAttribute('aria-pressed',on);
   controls.enableRotate=!on;
   $('#rotate-mode').disabled=on;
-  if(on)mode(true);
+  // The drawing pans; the model orbits. Leaving the plan hands the primary
+  // drag back to rotation - it used to stay parked on pan.
+  mode(on);
   // one flight does everything - position, tilt AND the 4-degree lens - so
   // the toggle reads as a single straight move, never a zoom jolt first
   frame(false);
@@ -1026,6 +1157,15 @@ function mode(pan) {
   controls.mouseButtons.LEFT = pan ? THREE.MOUSE.PAN : THREE.MOUSE.ROTATE;
   $('#rotate-mode').setAttribute('aria-pressed', !pan); $('#pan-mode').setAttribute('aria-pressed', pan);
   $('#gesture-help').textContent = t(pan?'panHelp':'orbitHelp');
+}
+// A quiet turntable for the street view: slow, opt-in from the rail, and any
+// hand on the scene stops it immediately.
+function setAutoRotate(on){
+  if(!controls)return;
+  controls.autoRotate=on&&selected==='neighborhood';
+  controls.autoRotateSpeed=.55;
+  $('#toggle-autorotate')?.setAttribute('aria-pressed',String(controls.autoRotate));
+  if(controls.autoRotate)invalidate();
 }
 // Panels remain usable if WebGL is unavailable. Model actions are disabled
 // until loading succeeds; do not strand every control in the renderer catch.
@@ -1042,7 +1182,10 @@ function bindInterface() {
     const button=$('#'+id);button.dataset.needsModel='';button.disabled=true;
   }
   document.querySelectorAll('[data-view]').forEach(b => {
-    b.dataset.needsModel='';b.disabled=true;b.addEventListener('click', () => selectView(b.dataset.view));
+    b.dataset.needsModel='';b.disabled=true;
+    // The Villa chip lands on the Çatı section - the scale has no exterior
+    // orbit of its own any more.
+    b.addEventListener('click', () => selectView(b.dataset.view==='building'?'f3':b.dataset.view));
   });
   $('#rotate-mode').onclick = () => mode(false); $('#pan-mode').onclick = () => mode(true);
   $('#zoom-in').onclick=()=>zoom(1.3);
@@ -1066,7 +1209,7 @@ function bindInterface() {
   $('#daylight-season').onchange=()=>$('#daylight-hour').oninput();
   $('#toggle-lights').onclick=()=>{interiorLights=!interiorLights;$('#toggle-lights').setAttribute('aria-pressed',interiorLights);lighting?.setLights(interiorLights);invalidate();};
   $('#lighting-style').onchange=e=>{lighting?.setStyle(e.target.value);rememberState();invalidate();};
-  $('#return-villa').onclick=()=>selectView('building');
+  $('#return-villa').onclick=()=>selectView('f3');
   applyStatic();
   $('#lang-toggle').textContent=currentLang()==='tr'?'EN':'TR';
   $('#lang-toggle').onclick=()=>setLang(currentLang()==='tr'?'en':'tr',refreshChrome);
@@ -1078,6 +1221,9 @@ function bindInterface() {
   $('#tour-prev').onclick=()=>{if(tourStep>0){tourStep--;tourApply();}};
   $('#tour-next').onclick=()=>{if(tourStep<TOUR.length-1){tourStep++;tourApply();}else endTour(true);};
   host.addEventListener('pointerdown',()=>{if(tourStep>=0)endTour(false);},{capture:true});
+  $('#toggle-autorotate').onclick=()=>setAutoRotate(!controls?.autoRotate);
+  // any hand on the scene stops the turntable
+  host.addEventListener('pointermove',()=>{if(controls?.autoRotate)setAutoRotate(false);},{passive:true});
   // The tour's lens, draggable by hand; the readout speaks photographer -
   // the 35 mm-equivalent focal length of the chosen vertical field.
   $('#walk-lens').oninput=e=>{

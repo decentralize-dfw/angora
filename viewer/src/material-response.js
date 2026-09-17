@@ -69,7 +69,10 @@ export function prepareMaterialResponse(material, {context=false}={}) {
     // albedo was never the problem; the weight was, and it is the same
     // argument that took the ceilings to 0.
     material.envMapIntensity=0;
-    material.normalMap=null;material.bumpMap=null;
+    // A grade-supplied plaster grain is deliberate relief, not baked noise -
+    // only the authored maps are cleared.
+    if(!material.userData.exteriorGradeBound){material.normalMap=null;}
+    material.bumpMap=null;
     // and the rest of what makes a ceiling read white, because the review is
     // about the pair: "iç duvarlar beyaz" against a ceiling that already is.
     // The albedo is 0.940 either way; the ceiling looks it and the wall does
@@ -80,7 +83,8 @@ export function prepareMaterialResponse(material, {context=false}={}) {
     material.vertexColors=false;
     material.emissive?.setRGB(.22,.22,.22);material.emissiveIntensity=1;
   } else if (family==='soffit') {
-    material.normalMap=null;material.bumpMap=null;
+    if(!material.userData.exteriorGradeBound){material.normalMap=null;}
+    material.bumpMap=null;
     material.map=null;
     material.color.setRGB(.94,.94,.94);
     material.vertexColors=false;
@@ -161,7 +165,8 @@ export function setInteriorMode(material, active) {
   };
   if(active){
     material.color.setRGB(.94,.94,.94);
-    material.map=null;material.normalMap=null;material.bumpMap=null;
+    material.map=null;material.bumpMap=null;
+    if(!material.userData.exteriorGradeBound)material.normalMap=null;
     material.envMapIntensity=0;material.vertexColors=false;
     material.emissive?.setRGB(.35,.35,.35);material.emissiveIntensity=1;
   }else{

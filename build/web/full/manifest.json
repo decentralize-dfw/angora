@@ -30,6 +30,7 @@
    "id": "interior",
    "group": "villa",
    "furniture": true,
+   "exterior_grade": true,
    "file": "../sansi/INTERIOR-3-opt-DRACO.glb",
    "bytes": 2372348,
    "sha256": "cf2dbd870da31a98b79d32a21e69f4f266464bfc98412d9c93c9ffa481eba3cf",

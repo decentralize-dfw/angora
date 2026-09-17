@@ -22,27 +22,34 @@ const baseName = (name = '') => name.replace(/\.\d{3}$/, '');
 // gradeKey() itself stays asset-free because it also serves as a merge
 // discriminator inside one file.
 const TABLE = [
-  {key: 'clay-tile', match: /^clay tile/i, assets: ['building'],
-   set: {map: 'clayTileMap', normalMap: 'clayTileNormal'},
-   // audited UV density: 1 uv unit = 1/0.64 m; the tile sheet spans 0.8x1.0 m
-   repeat: [1.5625 / 0.8, 1.5625 / 1.0], normalScale: 1.2},
-  {key: 'villa-roof', match: /^roof(-\d+)?$/i, assets: ['building'],
-   set: {map: 'clayTileMap', normalMap: 'clayTileNormal'},
-   repeat: [1 / 0.8, 1 / 1.0], normalScale: 1.2},
+  // "her bir kiremit modelli zaten": the roof's tiles are individual solids,
+  // so a painted tile sheet fights the geometry ("hatch'i çok kötü olmuş").
+  // Each modelled tile instead draws its OWN colour from the photo lottery,
+  // assigned per connected component at load - texture-free and exactly
+  // aligned with the clay underfoot.
+  {key: 'clay-tile', match: /^clay tile/i, assets: ['building'], lottery: true},
+  {key: 'villa-roof', match: /^roof(-\d+)?$/i, assets: ['building'], lottery: true},
   // bldg-3 spells it STRUCCO and ships no facade normal at all; the authored
-  // colour already sits on the photo hue, so it keeps the base and gains the
-  // sand-float relief.
+  // colour already sits on the photo hue, so it keeps the base (keepTint) and
+  // gains sand-float relief plus a breathing near-white mottle.
   {key: 'stucco', match: /^st?rucco( \[imported\])?$/i, assets: ['building'],
-   set: {normalMap: 'stuccoNormal'}, repeat: [1, 1], normalScale: 0.55},
+   set: {map: 'stuccoMottle', normalMap: 'stuccoNormal'}, keepTint: true,
+   repeat: [1, 1], normalScale: 0.7},
+  // "tavan, zemin... hiçbir dokusu yok, çok dijital": the white finishes get
+  // the same quiet plaster grain, at a scale the eye reads as trowel work.
+  {key: 'plaster-grain', match: /^interior$/i, assets: ['building', 'interior'],
+   set: {normalMap: 'stuccoNormal'}, keepTint: true, repeat: [2, 2], normalScale: 0.35},
+  {key: 'soffit-grain', match: /^ceiling$/i, assets: ['building', 'interior'],
+   set: {normalMap: 'stuccoNormal'}, keepTint: true, repeat: [2, 2], normalScale: 0.3},
   {key: 'iron', match: /^metal( \(\d+\))?$/i, assets: ['building', 'garden'],
    color: '#212326', roughness: 0.58, metalness: 0.22},
   {key: 'gravel', match: /^gravel( \[imported\])?$/i, assets: ['building'],
    color: '#B49E87', roughness: 0.95, normalScale: 1},
   {key: 'canopy', match: /^canopy$/i, assets: ['building'], color: '#728279', roughness: 0.6},
   {key: 'grass', match: /^grass( \(\d+\))?$/i, assets: ['context-ground'],
-   set: {map: 'grassMap'}, groundUV: {module: 2}},
+   set: {map: 'grassMap'}, groundUV: {module: 3}, antiTile: true},
   {key: 'asphalt', match: /^asphalt$/i, assets: ['context-ground'],
-   set: {map: 'asphaltMap'}, groundUV: {module: 3}},
+   set: {map: 'asphaltMap'}, groundUV: {module: 3}, antiTile: true},
   // No colour on map-bound stone: the sheet carries the photo hue and the
   // base colour would tint it a second time.
   {key: 'terrace', match: /^stone_tile \(\d+\)$/i, assets: ['garden'],
@@ -108,12 +115,11 @@ export function loadGradeTextures(rootURL) {
     return texture;
   });
   return Promise.all([
-    one('clay-tile-basecolor.png', true), one('clay-tile-normal.png', false),
     one('grass-basecolor.png', true), one('asphalt-basecolor.png', true),
     one('travertine-basecolor.png', true), one('travertine-normal.png', false),
-    one('stucco-normal.png', false),
-  ]).then(([clayTileMap, clayTileNormal, grassMap, asphaltMap, travertineMap, travertineNormal, stuccoNormal]) =>
-    ({clayTileMap, clayTileNormal, grassMap, asphaltMap, travertineMap, travertineNormal, stuccoNormal}));
+    one('stucco-normal.png', false), one('stucco-mottle.png', true),
+  ]).then(([grassMap, asphaltMap, travertineMap, travertineNormal, stuccoNormal, stuccoMottle]) =>
+    ({grassMap, asphaltMap, travertineMap, travertineNormal, stuccoNormal, stuccoMottle}));
 }
 
 // Area-weighted share of up-facing surface, in world space: the planar ground
@@ -132,6 +138,50 @@ function horizontalShare(geometry, matrixWorld) {
     if (area > 0 && Math.abs(n.y / area) > 0.7) up += area;
   }
   return total ? up / total : 0;
+}
+
+// The listing roof's per-tile firing lottery, weighted toward sunlit salmon.
+const TILE_PALETTE = ['#D08A55', '#C97C4A', '#B76840', '#A85E38', '#8A5333', '#5E3F2C']
+  .map(c => new THREE.Color(c).convertSRGBToLinear());
+const TILE_WEIGHTS = [.3, .24, .2, .14, .08, .04];
+
+// Union-find over welded vertices: every modelled tile is one connected
+// component, and gets one colour of the lottery via vertex colours.
+export function applyTileLottery(mesh) {
+  const geometry = mesh.geometry, position = geometry.attributes.position, index = geometry.index;
+  const weld = new Map(), vertexIsland = new Int32Array(position.count);
+  for (let i = 0; i < position.count; i++) {
+    const key = `${Math.round(position.getX(i) * 5000)},${Math.round(position.getY(i) * 5000)},${Math.round(position.getZ(i) * 5000)}`;
+    const seen = weld.get(key);
+    if (seen === undefined) {weld.set(key, i); vertexIsland[i] = i;}
+    else vertexIsland[i] = seen;
+  }
+  const parent = new Int32Array(position.count);
+  for (let i = 0; i < position.count; i++) parent[i] = vertexIsland[i];
+  const find = i => {let r = i; while (parent[r] !== r) r = parent[r]; while (parent[i] !== r) {const next = parent[i]; parent[i] = r; i = next;} return r;};
+  const union = (a, b) => {const ra = find(a), rb = find(b); if (ra !== rb) parent[ra] = rb;};
+  const count = index ? index.count : position.count;
+  for (let i = 0; i < count; i += 3) {
+    const a = index ? index.getX(i) : i, b = index ? index.getX(i + 1) : i + 1, c = index ? index.getX(i + 2) : i + 2;
+    union(a, b); union(b, c);
+  }
+  const colours = new Float32Array(position.count * 3);
+  const rootColour = new Map();
+  for (let i = 0; i < position.count; i++) {
+    const root = find(i);
+    let colour = rootColour.get(root);
+    if (!colour) {
+      // deterministic per component so reloads look identical
+      let r = ((root * 2654435761) >>> 0) / 4294967296, pick = 0;
+      while (pick < TILE_WEIGHTS.length - 1 && r > TILE_WEIGHTS[pick]) r -= TILE_WEIGHTS[pick++];
+      const jitter = 1 + ((((root * 40503) >>> 0) % 1000) / 1000 - .5) * .14;
+      colour = TILE_PALETTE[pick].clone().multiplyScalar(jitter);
+      rootColour.set(root, colour);
+    }
+    colours[i * 3] = colour.r; colours[i * 3 + 1] = colour.g; colours[i * 3 + 2] = colour.b;
+  }
+  geometry.setAttribute('color', new THREE.BufferAttribute(colours, 3));
+  return rootColour.size;
 }
 
 // Fresh UVs from world XZ so one repeat spans `module` metres. Optionally
@@ -171,6 +221,14 @@ export function bindGradeTextures(parts, sets) {
       for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
         const entry = TABLE.find(e => e.key === material?.userData.exteriorGrade);
         if (!entry) continue;
+        if (entry.lottery && !object.userData.exteriorGradeLottery) {
+          object.userData.exteriorGradeLottery = true;
+          applyTileLottery(object);
+          material.vertexColors = true;
+          material.map = null;
+          material.color?.setRGB(1, 1, 1);
+          material.needsUpdate = true;
+        }
         if (entry.groundUV && !object.userData.exteriorGradeUV) {
           object.userData.exteriorGradeUV = true;
           if (horizontalShare(object.geometry, object.matrixWorld) > 0.5) projectGroundUV(object, entry.groundUV);
@@ -179,13 +237,31 @@ export function bindGradeTextures(parts, sets) {
         material.userData.exteriorGradeBound = true;
         if (entry.set.map) {
           material.map = textureFor(entry.set.map, entry.repeat);
-          // The sheet carries the photo hue; an authored tint factor (bldg-3
-          // ships 'Clay tile' as a bare dark-rust colour) must not restain it.
-          material.color?.setRGB(1, 1, 1);
+          // A colour-carrying sheet must not be restained by an authored tint
+          // (bldg-3 ships 'Clay tile' as bare dark rust); a keepTint entry's
+          // sheet is a near-white multiplier and the tint IS the material.
+          if (!entry.keepTint) material.color?.setRGB(1, 1, 1);
         }
         if (entry.set.normalMap) {
           material.normalMap = textureFor(entry.set.normalMap, entry.repeat);
           material.normalScale ??= new THREE.Vector2(1, 1);
+        }
+        // A single repeated sheet over 300 m of ground reads as wallpaper
+        // ("çok tekrar ediyor"): blending the same sheet with itself at an
+        // uncorrelated second scale erases the period without a second file.
+        if (entry.antiTile && !material.userData.exteriorGradeAnti) {
+          material.userData.exteriorGradeAnti = true;
+          const previous = material.onBeforeCompile, previousKey = material.customProgramCacheKey();
+          material.onBeforeCompile = (shader, renderer) => {
+            previous.call(material, shader, renderer);
+            shader.fragmentShader = shader.fragmentShader.replace('#include <map_fragment>',
+              `#ifdef USE_MAP
+                vec4 tileA = texture2D( map, vMapUv );
+                vec4 tileB = texture2D( map, vMapUv * -0.531 + vec2(0.172, 0.683) );
+                diffuseColor *= mix( tileA, tileB, 0.5 );
+              #endif`);
+          };
+          material.customProgramCacheKey = () => previousKey + '|anti-tile-r49';
         }
         material.needsUpdate = true;
       }

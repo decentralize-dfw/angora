@@ -51,35 +51,36 @@ export function createAnnotations(data,host,onRoom) {
     const area=document.createElement('span');area.textContent=areaLabel(room,data);
     // Inline after the name rather than pinned to the corner, so the name no
     // longer reserves a gutter for it and the card can close up around them.
-    // A balcony is named, not entered: it is an open platform with no walk
-    // station behind it, so its tag drops the 360° badge and the click rather
-    // than offering a tour that cannot start.
-    const tour=document.createElement('small');
-    if(!room.label_only){tour.textContent='360°';tour.setAttribute('aria-hidden','true');}
-    // The badge shares the measure's line instead of sitting after the name, so
-    // a long room name gets the card's full width before it has to truncate.
+    // R49: a room tag names and measures; it no longer teleports - the tour
+    // starts from the dock, at the storey's centre ("mahale tıklayarak
+    // teleport özelliğini kaldır"). So every tag is inert information, and
+    // the 360° badge goes with the click.
     const card=document.createElement('i'),meta=document.createElement('em');
-    meta.append(area,tour);card.append(name,meta);el.append(card);
-    el.setAttribute('aria-label',room.label_only?room.name
-      :area.textContent?`${room.name}, ${area.textContent}, 360 derece gez`
-      :`${room.name}, 360 derece gez`);
-    el.title=room.label_only?'Açık balkon':`${room.name} · 360° keşfet`;
-    if(room.label_only)el.disabled=true;
-    else el.onclick=e=>{e.stopPropagation();onRoom(room.id);};
+    meta.append(area);card.append(name,meta);el.append(card);
+    el.setAttribute('aria-label',area.textContent?`${room.name}, ${area.textContent}`:room.name);
+    if(room.label_only)el.title='Açık balkon';
+    el.disabled=true;
     overlay.append(el);
     names.push({el,position:new THREE.Vector3(...room.position),floor:room.floor_index});
   }
-  // Both axes, on every room that has them. Only 24 of the 53 spans are project
-  // dimensions, so for a long time only those were drawn - and since the rooms
-  // that lack one are almost all open-plan, the plan came out dimensioned
-  // across and not down, which reads as an omission rather than as a statement
-  // about the source. The rest are drawn too, told apart rather than hidden:
-  // a dashed witness line, a pale tag, and the '≈' the data already carries.
-  // The tooltip says which it is; areaLabel() is untouched, so a measured span
-  // still cannot stand in for an area.
-  for(const dim of data.dimensions) {
+  // ONE breadth and ONE depth per room, wall to wall - "her odanın yatay ve
+  // dikey ölçüsü olmalı", nothing more. The set carries many spans per room;
+  // drawing them all is what buried the plan under chips. Per room and per
+  // axis the registered DWG span wins, the longest model-measured span
+  // stands in (dashed, as before) only where the drawing offers none.
+  const chosen=new Map();
+  for(const dim of data.dimensions){
     const measured=!dim.dimension_label_allowed;
     if(measured&&dim.basis!=='model_measured')continue;
+    const axis=Math.abs(dim.b[0]-dim.a[0])>=Math.abs(dim.b[2]-dim.a[2])?'x':'z';
+    const key=`${dim.room_id}|${axis}`;
+    const current=chosen.get(key);
+    const better=!current
+      ||(current.measured&&!measured)
+      ||(current.measured===measured&&dim.metres>current.dim.metres);
+    if(better)chosen.set(key,{dim,measured});
+  }
+  for(const {dim,measured} of chosen.values()) {
     const a=new THREE.Vector3(...dim.a),b=new THREE.Vector3(...dim.b);
     const side=b.clone().sub(a).normalize().cross(new THREE.Vector3(0,1,0)).multiplyScalar(.12);
     const line=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints([
@@ -104,24 +105,33 @@ export function createAnnotations(data,host,onRoom) {
     const floor=/^f[0-3]$/.test(view)?Number(view[1]):-1;
     const w=host.clientWidth,h=host.clientHeight;
     camera.updateMatrixWorld();
-    const obstacles=collectUIObstacles(host),candidates=[];
+    const obstacles=collectUIObstacles(host),candidates=[],nameRects=[];
     // A room name stays on its room. It used to go through the same solver as
     // the dimensions, which pushed it aside to clear its neighbours and the
     // panels and dropped it outright when there was no room left - so a name
     // sat beside its room, or vanished as the view pulled back. project()
     // leaves it on the projected centre and it is not moved again.
+    let lastPpm=12;
     for(const entry of names) {
       entry.el.hidden=!(entry.floor===floor&&showNames&&!transitioning&&!walking);
       if(entry.el.hidden)continue;
       const distance=Math.max(1,entry.position.distanceTo(camera.position));
       const ppm=camera.isPerspectiveCamera?h*camera.zoom/(2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*distance):h*camera.zoom/(camera.top-camera.bottom);
-      project(entry,camera,w,h,labelFontSize(ppm));
+      lastPpm=ppm;
+      const p=project(entry,camera,w,h,labelFontSize(ppm));
+      // A name owns its ground: the measure chips route around every visible
+      // name instead of ever landing on one.
+      if(p)nameRects.push({left:p.x-entry.el.offsetWidth/2-3,right:p.x+entry.el.offsetWidth/2+3,
+        top:p.y-entry.el.offsetHeight/2-3,bottom:p.y+entry.el.offsetHeight/2+3});
     }
+    // The chip is subordinate to the name it serves - "oda isminden daha
+    // büyük olmamalı" - and scales with the drawing exactly as the names do.
+    const dimSize=walking?13:Math.max(6.5,labelFontSize(lastPpm)-2);
     for(const entry of dimensions) {
       const visible=entry.floor===floor&&showDimensions&&!transitioning&&(!walking||entry.roomId===walkRoom);
       entry.line.visible=visible;entry.el.hidden=!visible;
       if(visible){
-        const p=project(entry,camera,w,h,walking?15:14);
+        const p=project(entry,camera,w,h,dimSize);
         if(p)candidates.push({...p,entry,width:entry.el.offsetWidth,height:entry.el.offsetHeight});
       }
     }
@@ -129,7 +139,7 @@ export function createAnnotations(data,host,onRoom) {
     // project dimensions are offered first: a crowded plan gives up a measured
     // span before it gives up a registered one.
     candidates.sort((a,b)=>Number(a.entry.measured)-Number(b.entry.measured));
-    const placed=layoutAnchoredLabels(candidates,{width:w,height:h,obstacles});
+    const placed=layoutAnchoredLabels(candidates,{width:w,height:h,obstacles:[...obstacles,...nameRects]});
     // "yakınlık parametresi olmaksızın": with Ölçüler on, every span of the
     // floor stays readable at any zoom. The solver still declutters what it
     // can; what it cannot place sits on its own anchor instead of vanishing.

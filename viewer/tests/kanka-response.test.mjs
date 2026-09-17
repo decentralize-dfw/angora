@@ -63,7 +63,8 @@ test('The exterior grade knows its surfaces and leaves everything else alone',()
   assert.equal(gradeKey('grass (1)'),'grass');
   assert.equal(gradeKey('Entrance coursed limestone (1)'),'', 'the healthy 52 m wall is not re-tiled');
   assert.equal(gradeKey('stone_tile'),'', 'the villa wall stone is not a paver');
-  assert.equal(gradeKey('interior'),'');
+  assert.equal(gradeKey('interior'),'plaster-grain','interior plaster gets its grain');
+  assert.equal(gradeKey('leather_brown'),'');
   // Application is additionally gated by the manifest asset id: evrebina's
   // photographic neighbour roofs never take the villa tile sheet.
   const roof=new THREE.MeshStandardMaterial({name:'roof.004'});
@@ -92,10 +93,10 @@ test('Ground UVs are rebuilt from world metres on up-facing meshes only',()=>{
   applyGradeValues(scene,'context-ground');
   const wallUV=wall.geometry.attributes.uv.array.slice();
   bindGradeTextures([{scene}],sets);
-  // 8 m plane over a 2 m module: the uv span must be exactly 4 repeats.
+  // 8 m plane over a 3 m module: the uv span must be exactly 8/3 repeats.
   const uv=ground.geometry.attributes.uv;
   let minU=1e9,maxU=-1e9;for(let i=0;i<uv.count;i++){minU=Math.min(minU,uv.getX(i));maxU=Math.max(maxU,uv.getX(i));}
-  assert.ok(Math.abs(maxU-minU-4)<1e-6,`${maxU-minU}`);
+  assert.ok(Math.abs(maxU-minU-8/3)<1e-6,`${maxU-minU}`);
   // the vertical copy keeps its authored UVs
   assert.deepEqual([...wall.geometry.attributes.uv.array],[...wallUV]);
   assert.equal(ground.material.map,sets.grassMap,'ground texture bound at unit repeat');
@@ -108,19 +109,36 @@ test('Ground UVs are rebuilt from world metres on up-facing meshes only',()=>{
   assert.equal(bare.material.map,null);
 });
 
-test("An authored tint never restains a bound sheet, and placeholder stubs yield to colour grades",()=>{
-  const sets={clayTileMap:new THREE.Texture(),clayTileNormal:new THREE.Texture(),
-    grassMap:new THREE.Texture(),asphaltMap:new THREE.Texture(),
-    travertineMap:new THREE.Texture(),travertineNormal:new THREE.Texture(),stuccoNormal:new THREE.Texture()};
-  // bldg-3 ships 'Clay tile' textureless with a dark rust colour factor
+test("Modelled roof tiles draw their own lottery, and stubs yield to colour grades",()=>{
+  const sets={grassMap:new THREE.Texture(),asphaltMap:new THREE.Texture(),
+    travertineMap:new THREE.Texture(),travertineNormal:new THREE.Texture(),
+    stuccoNormal:new THREE.Texture(),stuccoMottle:new THREE.Texture()};
+  // two disjoint quads = two modelled tiles; each must take ONE colour
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.Float32BufferAttribute([
+    0,0,0, 1,0,0, 0,1,0,  1,0,0, 1,1,0, 0,1,0,      // tile A
+    5,0,0, 6,0,0, 5,1,0,  6,0,0, 6,1,0, 5,1,0],3)); // tile B
   const tile=new THREE.MeshStandardMaterial({name:'Clay tile',color:0x752008});
-  const roofMesh=new THREE.Mesh(new THREE.PlaneGeometry(1,1),tile);
+  const roofMesh=new THREE.Mesh(g,tile);
   const scene=new THREE.Group();scene.add(roofMesh);
   applyGradeValues(scene,'building');
   bindGradeTextures([{scene}],sets);
-  assert.ok(tile.map,'tile sheet bound');
-  assert.equal('#'+tile.color.getHexString(),'#ffffff','tint cleared - the sheet carries the hue');
-  assert.ok(tile.map.repeat.x>1.9&&tile.map.repeat.x<2,'audited repeat density applied');
+  assert.equal(tile.map,null,'no painted sheet fights the modelled tiles');
+  assert.equal(tile.vertexColors,true);
+  assert.equal('#'+tile.color.getHexString(),'#ffffff','authored rust tint cleared');
+  const colour=g.attributes.color;
+  assert.ok(colour&&colour.count===12);
+  const cornerOf=i=>[colour.getX(i),colour.getY(i),colour.getZ(i)].join(',');
+  assert.equal(cornerOf(0),cornerOf(4),'tile A is one colour');
+  assert.equal(cornerOf(6),cornerOf(10),'tile B is one colour');
+  // the facade keeps its authored blue-grey under the near-white mottle
+  const facade=new THREE.MeshStandardMaterial({name:'STRUCCO',color:0x9aa3ab});
+  const wall=new THREE.Mesh(new THREE.PlaneGeometry(1,1),facade);
+  const scene3=new THREE.Group();scene3.add(wall);
+  applyGradeValues(scene3,'building');
+  bindGradeTextures([{scene:scene3}],sets);
+  assert.ok(facade.map,'mottle bound');
+  assert.equal('#'+facade.color.getHexString(),'#9aa3ab','keepTint holds the photo hue');
   // a 4x4 placeholder baseColor is dropped when a colour grade lands
   const stub=new THREE.Texture();stub.image={width:4,height:4};
   const rail=new THREE.MeshStandardMaterial({name:'metal (4)'});rail.map=stub;

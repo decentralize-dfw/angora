@@ -136,12 +136,24 @@ export function createRegionMap(host) {
   const info = document.createElement('aside');
   info.className = 'rm-info';
   info.setAttribute('aria-label', 'Angora Evleri hakkında');
+  // On a phone the introduction owned the whole map ("o kadar yer kaplıyor
+  // ki hiçbirşey gözükmüyor"), so it opens as a one-line header there and
+  // expands downward on request; a desktop has the room and starts open.
   info.innerHTML =
-    '<h3>Angora Evleri</h3><p class="rm-info-set">Beysukent · Çankaya, Ankara</p>' +
+    '<button class="rm-info-head" aria-expanded="false"><span><h3>Angora Evleri</h3>' +
+    '<p class="rm-info-set">Beysukent · Çankaya, Ankara</p></span><i aria-hidden="true">⌄</i></button>' +
+    '<div class="rm-info-more">' +
     `<p class="rm-info-body">${t('regionIntro')}</p>` +
     '<ul class="rm-info-facts">' + fact(t('lblPark'), near.park) + fact(t('lblSchool'), near.lise) +
     fact(t('lblMarket'), near.market) + fact(t('lblPharmacy'), near.eczane) + '</ul>' +
-    `<p class="rm-info-dist">${t('distNote')}</p>`;
+    `<p class="rm-info-dist">${t('distNote')}</p></div>`;
+  const infoHead = info.querySelector('.rm-info-head');
+  const setInfoOpen = (open) => {
+    info.classList.toggle('rm-open', open);
+    infoHead.setAttribute('aria-expanded', String(open));
+  };
+  infoHead.addEventListener('click', () => setInfoOpen(!info.classList.contains('rm-open')));
+  setInfoOpen(!matchMedia('(max-width: 720px)').matches);
   // One amenity family at a time: the map opens as the bare plan - every
   // category off - and a chip turns exactly one on; pressing it again, or
   // pressing another, puts it away ("hepsi kapalı gelsin, tek bir şey").

@@ -213,8 +213,14 @@ h1 strong{font-weight:700}
 .rm-compass i{font-style:normal;font-size:13px;margin-bottom:-2px}
 /* the settlement's introduction, shown with the Bölge scale */
 .rm-info{position:absolute;left:22px;top:152px;width:302px;max-width:calc(100vw - 44px);border-radius:18px;padding:15px 18px 14px;background:var(--panel);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:var(--shadow-soft);z-index:2}
+.rm-info-head{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;background:none;border:0;padding:0;margin:0;text-align:left;cursor:pointer;color:inherit;font:inherit}
+.rm-info-head i{font-style:normal;font-size:15px;color:var(--muted);transition:transform 240ms ease}
+.rm-info.rm-open .rm-info-head i{transform:rotate(180deg)}
+.rm-info-more{display:none}
+.rm-info.rm-open .rm-info-more{display:block}
 .rm-info h3{margin:0;font-size:15px;font-weight:700;letter-spacing:.02em}
-.rm-info-set{margin:3px 0 10px;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.rm-info-set{margin:3px 0 0;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.rm-info-more .rm-info-body{margin-top:10px}
 .rm-info-body{margin:0;font-size:12px;line-height:1.66;color:#2c3833}
 .rm-info-facts{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:7px 14px;padding:11px 0 0;margin:12px 0 0;border-top:1px solid var(--line)}
 .rm-info-facts li{display:flex;align-items:baseline;gap:6px;font-size:11px;color:var(--muted)}
@@ -353,14 +359,19 @@ h1 strong{font-weight:700}
   .scale-picker{top:auto;bottom:max(108px,calc(env(safe-area-inset-bottom) + 96px));left:50%;padding:3px}
   /* no dock outside the Villa scale - the picker takes the bottom edge */
   #app[data-scale=neighborhood] .scale-picker{bottom:max(16px,calc(env(safe-area-inset-bottom) + 4px))}
-  #app[data-scale=region] .scale-picker{bottom:max(128px,calc(env(safe-area-inset-bottom) + 116px))}
-  .region-panel{bottom:max(14px,env(safe-area-inset-bottom));gap:6px}
-  .scale-picker button{min-height:36px;font-size:12px;padding:0 13px}
-  .view-description{top:66px;left:12px;max-width:66%;padding:7px 11px}
-  .view-description h2{font-size:12.5px}
-  .view-description p{font-size:10px}
-  .side-tools{right:10px;padding:6px;gap:5px}
-  .side-tools button{width:40px;height:40px}
+  #app[data-scale=region] .scale-picker{bottom:max(66px,calc(env(safe-area-inset-bottom) + 54px))}
+  .region-panel{bottom:max(12px,env(safe-area-inset-bottom));gap:4px}
+  /* the Villa chip already returns to the house; the pill only ate the map */
+  #return-villa{display:none}
+  .region-panel .region-meta{display:none}
+  .region-panel button{min-height:34px;padding:6px 13px;font-size:12px}
+  .scale-picker button{min-height:34px;font-size:11.5px;padding:0 12px}
+  .view-description{top:62px;left:12px;max-width:58%;padding:6px 10px}
+  .view-description h2{font-size:12px}
+  .view-description p{font-size:9.5px}
+  .side-tools{right:8px;padding:5px;gap:4px}
+  .side-tools button{width:38px;height:38px;font-size:12px}
+  .side-tools #enter-walk{width:auto;min-width:38px;padding:0 9px;font-size:10.5px}
   .explore-dock{bottom:max(14px,env(safe-area-inset-bottom));padding:5px;gap:5px;flex-direction:column;align-items:stretch;border-radius:26px;width:calc(100% - 24px);max-width:420px}
   .floor-row{gap:4px}
   .floor-row button{min-height:38px;font-size:12px;padding:0 8px;flex:1}
@@ -373,12 +384,13 @@ h1 strong{font-weight:700}
   .rm-chip{font-size:10px;padding:3px 9px}
   .rm-chip-villa{font-size:11px;padding:5px 12px}
   .rm-compass{width:38px;height:38px;right:12px;top:76px}
-  .rm-info{left:12px;top:114px;width:236px;padding:11px 13px 10px}
+  .rm-info{left:12px;top:104px;width:min(258px,calc(100vw - 24px));padding:10px 12px 9px}
+  .rm-info-more{max-height:min(46dvh,340px);overflow:auto}
   .rm-info h3{font-size:13px}
   .rm-info-body{font-size:10.5px;line-height:1.55}
   .rm-info-facts{gap:5px 10px;padding-top:8px;margin-top:9px}
   .rm-info-facts b{font-size:12px}
-  .rm-filters{left:12px;right:12px;bottom:max(176px,calc(env(safe-area-inset-bottom) + 164px));flex-direction:row;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+  .rm-filters{left:12px;right:12px;bottom:max(112px,calc(env(safe-area-inset-bottom) + 100px));flex-direction:row;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
   .rm-filters::-webkit-scrollbar{display:none}
   .rm-filters button{min-height:30px;font-size:10.5px;padding:0 11px 0 8px;flex:0 0 auto;gap:6px}
   .walk-close{right:12px;top:max(12px,env(safe-area-inset-top))}
