@@ -15,7 +15,7 @@ import {renderPropertyInfo} from './property-info.js';
 import {areaLabel} from './annotations.js';
 import { configureCameraControls } from './camera.js';
 import { PendingAction } from './pending-action.js';
-import {fitContextBounds} from './material-response.js';
+import {fitContextBounds,neutraliseTransmission} from './material-response.js';
 import {createSiteContext} from './site-context.js';
 import {createRegionMap,atlasMeta} from './region-map.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
@@ -69,6 +69,25 @@ const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
 // at exactly one height, so this plane snaps between "whole" and "basement
 // cut open" instead of lerping and leaving the excavation uncapped mid-flight.
 const earthClip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
+// The classic delivery carried a closed plot-soil solid the basement plane
+// could cut. The optimised set ships the plot's lawn and walls as spans of the
+// settlement-wide skins instead - no solid to cut, and a single infinite plane
+// on those skins would behead the whole neighbourhood's ground. So the skins
+// the manifest flags carve_plot are carved with an INTERSECTION of five
+// planes: inside the plot rectangle AND above the earth plane, which is
+// exactly the excavation and nothing beyond the boundary. The rectangle is
+// the classic 'R32 | Continuous local soil volume' extent, measured from the
+// stamped native scene.
+const PLOT_RECT = {minX: -11.2, maxX: 11.5, minZ: -24.0, maxZ: 11.06};
+const plotCarvePlanes = [earthClip,
+  new THREE.Plane(new THREE.Vector3(-1, 0, 0), PLOT_RECT.minX),
+  new THREE.Plane(new THREE.Vector3(1, 0, 0), -PLOT_RECT.maxX),
+  new THREE.Plane(new THREE.Vector3(0, 0, -1), PLOT_RECT.minZ),
+  new THREE.Plane(new THREE.Vector3(0, 0, 1), -PLOT_RECT.maxZ)];
+// Whether the staged context can actually open the excavation - the classic
+// soil solid or carve-flagged skins. The authored hatch face only shows over
+// a real cut; over unbroken earth it would float.
+let plotCutReady = false;
 // Plan mode's paper wash (surroundings 80 % white, interior 30 %) - built
 // once from the staged groups, faded by planMode alone. The 3D views never
 // see it.
@@ -174,7 +193,7 @@ function renderFrame(time) {
       planWash.visible=planWash.userData.level>0.01;
     }
     caps?.update(clip.constant, clip.constant < fullHeight - 0.001);
-    soilCap?.update(earthClip.constant, earthClip.constant < fullHeight - 0.001 && groups.has('context'));
+    soilCap?.update(earthClip.constant, earthClip.constant < fullHeight - 0.001 && plotCutReady);
     const changing=walk?.active?walk.update(time,renderer.xr.getSession()):flying?false:controls.update();
     const activeCamera=walk?.active?walk.camera:camera;
     if(!walk?.active)fitDepthRange(camera,controls.target,contextBox);
@@ -582,9 +601,20 @@ async function loadModel() {
     let completed = 0;
     const totalBytes = manifest.assets.reduce((sum, asset) => sum + (asset.bytes || 0), 0) + (manifest.section_cap_asset?.bytes || 0);
     const received = new Map();
+    // ONE percent bar for the whole boot. "model yüklendi, sonra bekletiyor.
+    // öyle şey mi olur? o da yüzdelik yüklemenin bir parçası olmak zorunda."
+    // Downloads earn 0-70 %; staging, the wash build, assembly, the shader
+    // compile, the cap pre-pass and the five warming renders earn the rest,
+    // each stepping the same bar. The ledger is per-call so a retry restarts
+    // clean, and every synchronous phase yields once so its width paints.
+    const PHASE={download:.70,stage:.04,wash:.02,assemble:.02,compile:.08,caps:.02,prewarm:.10,finish:.02};
+    let bootBase=0;
+    const phase=(name,fraction=1)=>progress(Math.min(1,bootBase+PHASE[name]*fraction));
+    const phaseDone=name=>{bootBase+=PHASE[name];progress(bootBase);};
+    const tick=()=>new Promise(resolve=>setTimeout(resolve,0));
     const reportProgress = () => {
       let done = 0; for (const value of received.values()) done += value;
-      progress(totalBytes ? done / totalBytes : 0);
+      phase('download', totalBytes ? done / totalBytes : 0);
     };
     progress(0);
     async function worker(assets) {
@@ -598,10 +628,20 @@ async function loadModel() {
           reportProgress();
         });
         received.set(asset.id, asset.bytes || 0);
+        // Before the merge, so copies that differed only in transmission
+        // collapse to one program instead of surviving as separate compiles.
+        neutraliseTransmission(gltf.scene);
+        // A carve-flagged asset marks its MATERIALS: the batcher rebuilds
+        // meshes but keeps their material instances, so the flag survives
+        // into stageGroup where the excavation planes are assigned.
+        if (asset.carve_plot) gltf.scene.traverse(o=>{
+          if(!o.isMesh)return;
+          for(const m of Array.isArray(o.material)?o.material:[o.material])if(m)m.userData.carvePlot=true;
+        });
         mergeEqualMaterials(gltf.scene); abstractVehicle(gltf.scene);
         const group=asset.group??asset.id;
         staged.set(asset.id, {group, furniture:!!asset.furniture,
-          scene: group==='context'?batchContext(splitContextBuildings(splitContextSoil(gltf.scene))):gltf.scene});
+          scene: group==='context'?batchContext(splitContextBuildings(splitContextSoil(gltf.scene),{role:asset.context_role})):gltf.scene});
         if (gltf.animations?.length) stagedClips.set(group, gltf.animations);
         reportProgress();
         if(!ready)message(`Model yükleniyor… ${++completed}/${manifest.assets.length}`);else ++completed;
@@ -635,6 +675,7 @@ async function loadModel() {
           reportProgress();
         });
         received.set('section-caps', manifest.section_cap_asset.bytes || 0); reportProgress();
+        neutraliseTransmission(gltf.scene);
         return gltf.scene;
       } catch (error) {console.warn('Section caps unavailable', error); return null;}
     }
@@ -668,8 +709,10 @@ async function loadModel() {
         // and roads stay whole and the authored cap always fits.
         const planting=id==='garden'&&PLANTING.test(authoredNodeName(o.name));
         if(planting)plantingCandidates.push(o);
+        const materials=Array.isArray(o.material)?o.material:[o.material];
         const planes=planting?[]:building||id==='garden'?[clip]
-          :(Array.isArray(o.material)?o.material:[o.material]).some(m=>m?.userData.plotSoil)?[earthClip]:[];
+          :materials.some(m=>m?.userData.plotSoil)?[earthClip]
+          :materials.some(m=>m?.userData.carvePlot)?plotCarvePlanes:[];
         lighting.prepareMesh(o,{clipped:planes[0]===clip,context:!building});
         // The neighbourhood is setting, not subject: screen-space occlusion on
         // the white massing reads as grime in its eaves, so the context sits
@@ -679,6 +722,8 @@ async function loadModel() {
         o.userData.clipPlanes=planes;
         if (planes.length) for (const m of Array.isArray(o.material) ? o.material : [o.material]) {
           m.clippingPlanes = planes; m.side = THREE.DoubleSide;
+          // The carve set is a region (all five planes at once), not a union.
+          m.clipIntersection = planes === plotCarvePlanes;
         }
       });
     }
@@ -687,6 +732,7 @@ async function loadModel() {
     const results = await Promise.allSettled([worker(queue), LITE?Promise.resolve():worker(queue), loadSections(), loadRooms(), loadNavigation(),
       lighting.loadEnvironment(daylightURL.href).catch(error=>console.warn('HDR unavailable; atmospheric daylight retained',error)), loadCaps()]);
     const failure = results.find(r => r.status === 'rejected'); if (failure) throw failure.reason;
+    phaseDone('download');
     // Several files may feed one pipeline group (kanka: BUILDING+INTERIOR are
     // the villa; evrebina+ground are the context). A file flagged furniture
     // tags every mesh wholesale, so the Mobilya toggle, the paper wash and
@@ -697,17 +743,25 @@ async function loadModel() {
       if (!mergedGroups.has(group)) {const g=new THREE.Group(); g.name=group; mergedGroups.set(group,g);}
       mergedGroups.get(group).add(part);
     }
-    for (const [id, group] of mergedGroups) stageGroup(id, group);
+    {
+      let stagedCount=0;
+      for (const [id, group] of mergedGroups) {stageGroup(id, group); phase('stage', ++stagedCount/mergedGroups.size); await tick();}
+      phaseDone('stage');
+    }
     // every glb is decoded and staged; the draco workers' wasm heaps are the
     // largest transient allocation on a phone - give them back now (retry is
     // a full page reload, so the loader is never reused)
     loader.dracoLoader?.dispose();
     {
       // ground truth for the f0 planting rule: the plot soil under each plant
-      const soilMeshes=[];
+      const soilMeshes=[];let carvePresent=false;
       groups.get('context')?.traverse(o=>{
-        if(o.isMesh&&(Array.isArray(o.material)?o.material:[o.material]).some(m=>m?.userData.plotSoil))soilMeshes.push(o);
+        if(!o.isMesh)return;
+        const materials=Array.isArray(o.material)?o.material:[o.material];
+        if(materials.some(m=>m?.userData.plotSoil))soilMeshes.push(o);
+        if(materials.some(m=>m?.userData.carvePlot))carvePresent=true;
       });
+      plotCutReady=soilMeshes.length>0||carvePresent;
       const ray=new THREE.Raycaster();ray.far=80;
       const down=new THREE.Vector3(0,-1,0),box=new THREE.Box3(),centre=new THREE.Vector3();
       for(const o of plantingCandidates){
@@ -734,10 +788,13 @@ async function loadModel() {
       planWash.userData={level:0,overlays:[]};
       const planeIds=new Map(),variants=new Map();
       const idOf=plane=>{if(!planeIds.has(plane))planeIds.set(plane,planeIds.size);return planeIds.get(plane);};
-      const washFor=(planes,base)=>{
-        const key=`${base}|${(planes??[]).map(idOf).join(',')}`;
+      const washFor=(planes,intersection,base)=>{
+        const key=`${base}|${intersection?'i':'u'}|${(planes??[]).map(idOf).join(',')}`;
         if(!variants.has(key)){
-          const shared={clippingPlanes:planes??null,side:THREE.DoubleSide,transparent:true};
+          // clipIntersection travels with the planes: the plot carve is a
+          // five-plane REGION, and a union reading of it would clip the wash
+          // across the whole settlement.
+          const shared={clippingPlanes:planes??null,clipIntersection:intersection,side:THREE.DoubleSide,transparent:true};
           const pre=new THREE.MeshBasicMaterial({colorWrite:false,...shared});
           const over=new THREE.MeshBasicMaterial({color:0xffffff,opacity:0,
             depthWrite:false,depthFunc:THREE.EqualDepth,...shared});
@@ -753,7 +810,7 @@ async function loadModel() {
         group.traverse(o=>{
           if(!o.isMesh)return;
           const source=Array.isArray(o.material)?o.material[0]:o.material;
-          const [pre,over]=washFor(source?.clippingPlanes??null,base);
+          const [pre,over]=washFor(source?.clippingPlanes??null,source?.clipIntersection??false,base);
           for(const [material,order] of [[pre,7],[over,8]]){
             const g=new THREE.Mesh(o.geometry,material);
             g.matrixAutoUpdate=false;g.matrix.copy(o.matrixWorld);
@@ -767,6 +824,7 @@ async function loadModel() {
       washGroup(groups.get('context'),0.80);
       scene.add(planWash);
     }
+    phaseDone('wash'); await tick();
     {
       // \u00a713: cutting storeys away for viewing must not silently
       // re-light the house. A shadow-only twin of the villa's architecture
@@ -835,6 +893,7 @@ async function loadModel() {
     // compile, which is what made the first Bodrum or Çatı crawl and every
     // one after it fine. Compiling first costs the load a beat and gives the
     // interface back a press that opens immediately.
+    phaseDone('assemble'); await tick();
     message('Görünüm hazırlanıyor…');
     // Never fatal: a driver that cannot pre-compile still draws, it just pays
     // at the first press the way it used to.
@@ -848,6 +907,9 @@ async function loadModel() {
           new Promise(resolve => setTimeout(resolve, 8000))]);
       } else renderer.compile(scene, camera);
     } catch (error) {console.warn('Shader pre-compile unavailable; first view will compile on demand', error);}
+    // One honest step: compileAsync is a single promise with no inner
+    // progress, and a fake creep would lie about it.
+    phaseDone('compile');
     ready = true;
     $('#toggle-furniture').disabled = false; setFurnitureVisible(furnitureVisible);
     $('#toggle-rooms').disabled = false; $('#toggle-measurements').disabled = false;
@@ -863,6 +925,7 @@ async function loadModel() {
     // freeze the floor buttons used to carry. So while the boot screen is
     // still up, each state is rendered once: every program, shadow pass and
     // cap the floor buttons can ever ask for is already warm.
+    phaseDone('caps');
     message(t('preparing'));
     await new Promise(resolve=>setTimeout(resolve,0));
     // A warming render frustum-culls, and compile() gathers a light set no
@@ -872,11 +935,12 @@ async function loadModel() {
     // screen covers the canvas, so nothing of this is seen.
     const culled=[];
     scene.traverse(o=>{if(o.isMesh&&o.frustumCulled){o.frustumCulled=false;culled.push(o);}});
-    for (const id of ['building','f3','f2','f1','f0']) {
+    const WARM=['building','f3','f2','f1','f0'];
+    for (const id of WARM) {
       clip.constant=sectionHeight(id,fullHeight);
       earthClip.constant=id==='f0'?SOIL_CUT_HEIGHT:fullHeight;
       caps?.update(clip.constant,clip.constant<fullHeight-0.001);
-      soilCap?.update(earthClip.constant,earthClip.constant<fullHeight-0.001&&groups.has('context'));
+      soilCap?.update(earthClip.constant,earthClip.constant<fullHeight-0.001&&plotCutReady);
       lighting.frame(id,contextBox);massing?.set(id);
       lighting.interior(id.startsWith('f')?Number(id[1]):null,null);
       // The fixture slots FADE to a selection: light.visible only flips once
@@ -890,8 +954,10 @@ async function loadModel() {
       renderer.shadowMap.needsUpdate=true;
       lighting.render(camera);
       if(planWash&&id==='f1'){planWash.visible=false;for(const over of planWash.userData.overlays)over.opacity=0;}
+      phase('prewarm',(WARM.indexOf(id)+1)/WARM.length);
       await new Promise(resolve=>setTimeout(resolve,0));
     }
+    phaseDone('prewarm');
     for(const o of culled)o.frustumCulled=true;
     // Sun only: daylight is what the cut falsifies. Fixture shadow passes
     // keep their old cost, so walk-mode light fades stay as cheap as before.
@@ -901,6 +967,7 @@ async function loadModel() {
     // One composed frame before the bar goes: the occlusion, antialias, bloom,
     // grade and dither passes compile on their first use like anything else.
     lighting.render(camera);
+    phaseDone('finish');
     status.hidden = true;
     // the boot screen has done its real work; the interface fades in behind it
     const boot=$('#boot');

@@ -68,8 +68,13 @@ test('Ground smoothing preserves positions/UVs and joins duplicated seams',()=>{
   const positions=g.attributes.position.array.slice(),uv=g.attributes.uv.array.slice();smoothGroundNormals(g);
   assert.deepEqual(g.attributes.position.array,positions);assert.deepEqual(g.attributes.uv.array,uv);
   assert.deepEqual([...g.attributes.normal.array.slice(6,9)],[...g.attributes.normal.array.slice(9,12)]);
+  // The optimised set authors its coats deliberately (wood floors .25/.21):
+  // the authored coat survives up to .35, but the roughness floor keeps the
+  // sheen soft so it can never return as the old wet-pavement artifact.
   const floor=new THREE.MeshPhysicalMaterial({name:'wood_floor',clearcoat:.25,clearcoatRoughness:.21});
-  prepareMaterialResponse(floor);assert.ok(floor.clearcoat<=.08);assert.ok(floor.clearcoatRoughness>=.6);
+  prepareMaterialResponse(floor);assert.equal(floor.clearcoat,.25);assert.ok(floor.clearcoatRoughness>=.35);
+  const lacquered=new THREE.MeshPhysicalMaterial({name:'terra_floor',clearcoat:.8,clearcoatRoughness:.1});
+  prepareMaterialResponse(lacquered);assert.ok(lacquered.clearcoat<=.35);assert.ok(lacquered.clearcoatRoughness>=.35);
 });
 
 test('Numbered Blender plaster and ceilings retain neutral smooth finishes',()=>{

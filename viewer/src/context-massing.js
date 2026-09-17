@@ -42,6 +42,8 @@ export function materialSignature(material) {
     material.emissive?.getHex(), material.emissiveIntensity, material.opacity, material.transparent,
     material.alphaTest, material.side, material.flatShading, material.vertexColors, material.transmission,
     material.clearcoat, material.clearcoatRoughness, material.ior, material.sheen, material.specularIntensity,
+    material.anisotropy, material.anisotropyRotation, material.thickness, material.attenuationDistance,
+    material.attenuationColor?.getHex?.(),
     material.normalScale?.toArray(), material.aoMapIntensity, material.envMapIntensity, material.displacementScale,
     ['map', 'normalMap', 'roughnessMap', 'metalnessMap', 'aoMap', 'emissiveMap', 'alphaMap', 'bumpMap']
       .map(key => textureId(material[key])),
@@ -129,14 +131,24 @@ export function splitContextSoil(root) {
   return root;
 }
 
+// A delivery whose manifest names a context file as the neighbour-buildings
+// part carries no `B##` node identity - the file itself IS the identity. In
+// that role everything is building except what is plainly site: planting
+// stays green, and the plot's own boundary wall and the settlement's
+// retaining stone stay photographic like the classic set's site always did.
+const ROLE_SITE_NODE = /foliage|leaves|leaf|hedge|shrub|tree|grass|boundary limestone|surrounding retaining/i;
+
 // Give the neighbour blocks their own material instances wherever they share one
 // with the site, so whitening the buildings cannot reach the curbs that happen to
 // use the same paving surface.
-export function splitContextBuildings(root) {
+export function splitContextBuildings(root, {role} = {}) {
+  const isBuilding = object => role === 'buildings'
+    ? !ROLE_SITE_NODE.test(authoredNodeName(object.name))
+    : BUILDING_NODE.test(authoredNodeName(object.name));
   const usage = new Map();
   root.traverse(object => {
     if (!object.isMesh) return;
-    const building = BUILDING_NODE.test(authoredNodeName(object.name));
+    const building = isBuilding(object);
     for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
       if (!material) continue;
       const seen = usage.get(material) ?? {building: false, site: false};
@@ -153,7 +165,7 @@ export function splitContextBuildings(root) {
     clones.set(material, clone);
   }
   if (clones.size) root.traverse(object => {
-    if (!object.isMesh || !BUILDING_NODE.test(authoredNodeName(object.name))) return;
+    if (!object.isMesh || !isBuilding(object)) return;
     const swap = material => clones.get(material) ?? material;
     object.material = Array.isArray(object.material) ? object.material.map(swap) : swap(object.material);
   });

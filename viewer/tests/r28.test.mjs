@@ -19,9 +19,9 @@ test('r180 AA runs in linear-sRGB before the single final display conversion',()
   assert.deepEqual(composer.passes,[passes.beauty,passes.ao,passes.smaa,passes.bloom,passes.output,passes.dither]);
 });
 
-test('Reference production baseline has ACES, restrained linear bloom and no idle render switch',()=>{
+test('Reference production baseline has AgX, restrained linear bloom and no idle render switch',()=>{
   const renderer={shadowMap:{}};applyRenderProfile(renderer);
-  assert.equal(renderer.toneMapping,THREE.ACESFilmicToneMapping);assert.equal(renderer.toneMappingExposure,.75);
+  assert.equal(renderer.toneMapping,THREE.AgXToneMapping);assert.equal(renderer.toneMappingExposure,1.1);
   assert.equal(renderer.outputColorSpace,THREE.SRGBColorSpace);assert.equal(renderer.transmissionResolutionScale,1);
   assert.equal(referenceProfile.refinement,false);assert.equal(referenceProfile.pathTracing,false);
   // Occlusion is on here even though the reference ships it off: see the note

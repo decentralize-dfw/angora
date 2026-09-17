@@ -98,9 +98,42 @@ export function prepareMaterialResponse(material, {context=false}={}) {
   } else if (family==='floor') {
     material.normalScale?.multiplyScalar(.3);
     material.envMapIntensity=.75;
-    if(material.isMeshPhysicalMaterial){material.clearcoat=Math.min(material.clearcoat,.08);material.clearcoatRoughness=.65;}
+    // The hard .08 clamp existed because an early export's floors read as wet
+    // pavement outdoors. The optimised set authors its coats deliberately
+    // (wood floors at .25), so the authored value now stands up to .35 with
+    // enough coat roughness to keep the sheen soft rather than wet.
+    if(material.isMeshPhysicalMaterial){
+      material.clearcoat=Math.min(material.clearcoat,.35);
+      material.clearcoatRoughness=Math.max(material.clearcoatRoughness??.65,.35);
+    }
   }
   material.needsUpdate=true;
+}
+
+// KHR_materials_transmission makes three re-render the entire opaque scene
+// into a transmission buffer every frame any such surface is visible - a
+// hidden second scene pass that is what made the optimised set crawl. The
+// refraction is traded for plain alpha glazing at load time: the openings
+// look the same, isSeeThrough still classifies them as glazing through the
+// opacity branch, and the per-frame scene copy is gone. Running before
+// mergeEqualMaterials also lets copies that differed only in transmission
+// collapse, so fewer programs compile.
+export function neutraliseTransmission(root) {
+  let converted=0;
+  root.traverse(object=>{
+    if(!object.isMesh)return;
+    for(const material of Array.isArray(object.material)?object.material:[object.material]){
+      if(!material||!(material.transmission>0))continue;
+      // Deeper transmission reads as clearer glass, so it maps to lower alpha.
+      material.opacity=Math.min(material.opacity,THREE.MathUtils.clamp(1-.72*material.transmission,.22,.9));
+      material.transmission=0;
+      material.transparent=true;
+      if(material.thickness)material.thickness=0;
+      material.depthWrite=false;
+      material.needsUpdate=true;converted++;
+    }
+  });
+  return converted;
 }
 
 

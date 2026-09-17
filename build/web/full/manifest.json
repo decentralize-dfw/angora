@@ -45,6 +45,7 @@
   {
    "id": "evrebina",
    "group": "context",
+   "context_role": "buildings",
    "file": "../kanka/evrebina-opt-v8-DRACO.glb",
    "bytes": 8671372,
    "sha256": "847b8d7d75e6a52000a4db304875be36017cc91dbfc5a93fb253dff96bf895ab",
@@ -53,6 +54,7 @@
   {
    "id": "context-ground",
    "group": "context",
+   "carve_plot": true,
    "file": "../kanka/context-garden-ground-opt-v3.glb",
    "bytes": 3365360,
    "sha256": "866f759e687e94631107360b30c6ec27c68f218d1ccbcfb3cc5db879ad59f711",
