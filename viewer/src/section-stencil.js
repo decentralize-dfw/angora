@@ -110,7 +110,7 @@ export function createStencilCaps(villaGroup, clip, bounds) {
 }
 
 const SHELL_RATIO = 0.002;
-const POCHE_FAMILY = new Set(['roof']);
+const POCHE_FAMILY = new Set(['roof', 'plaster', 'masonry', 'soffit', 'floor', 'other']);
 
 function measureShell(geometry) {
   const position = geometry.attributes?.position;

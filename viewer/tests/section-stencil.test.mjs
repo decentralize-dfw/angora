@@ -139,35 +139,41 @@ test('A shell knows which of its sides faces in, and a sheet has no inside', () 
   assert.equal(shellSide(new THREE.PlaneGeometry(12, 9, 20, 16).rotateX(Math.PI / 2)), 0);
 });
 
-test('Only the roof the plane cuts gets a poché, measured outward', () => {
-  const solid = new THREE.BoxGeometry(0.4, 0.015, 0.25);
-  assert.equal(pocheEligible(clipped(solid, 'Clay tile')), true);
-  assert.equal(pocheEligible(clipped(solid, 'roof-7')), true);
+test('Whatever the plane opens outward gets a poché; nothing else does', () => {
+  const tile = new THREE.BoxGeometry(0.4, 0.015, 0.25);
+  const wall = new THREE.BoxGeometry(0.2, 3, 4);
+  assert.equal(pocheEligible(clipped(tile, 'Clay tile')), true);
+  assert.equal(pocheEligible(clipped(wall, 'INTERIOR')), true);
+  assert.equal(pocheEligible(clipped(wall, 'STRUCCO')), true);
+  assert.equal(pocheEligible(clipped(wall, 'Room pass | Lounge brown recliner')), true);
 
-  assert.equal(pocheEligible(clipped(insideOut(solid), 'roof-7')), false);
-  assert.equal(pocheEligible(clipped(new THREE.BoxGeometry(0.2, 3, 4), 'STRUCCO')), false);
-  assert.equal(pocheEligible(clipped(new THREE.BoxGeometry(2, 0.2, 3), 'WOOD-FL')), false);
-  assert.equal(pocheEligible(clipped(new THREE.BoxGeometry(2, 0.2, 3), 'ceiling')), false);
-
-  assert.equal(pocheEligible(named(solid, 'Clay tile')), false);
+  assert.equal(pocheEligible(clipped(insideOut(tile), 'roof-7')), false);
+  assert.equal(pocheEligible(clipped(insideOut(wall), 'WOOD-FL')), false);
   assert.equal(pocheEligible(clipped(new THREE.PlaneGeometry(6, 5), 'wood_floor')), false);
-  const glass = clipped(solid, 'Context glazing');
+  assert.equal(pocheEligible(clipped(new THREE.PlaneGeometry(12, 9, 20, 16), 'STRUCCO')), false);
+
+  assert.equal(pocheEligible(named(tile, 'Clay tile')), false);
+  const glass = clipped(tile, 'Context glazing');
   glass.material.transmission = 0.9;
   assert.equal(pocheEligible(glass), false);
+  const cabin = clipped(tile, 'Clay tile');
+  cabin.name = 'Lift cabin';
+  assert.equal(pocheEligible(cabin), false);
 });
 
-test('The poché inks the roof underside only, and rides the cut height', () => {
+test('The poché inks inward faces only, and rides the cut height', () => {
   const villa = new THREE.Group();
   const tiles = clipped(new THREE.BoxGeometry(0.4, 0.015, 0.25), 'Clay tile');
   villa.add(tiles);
-  villa.add(clipped(new THREE.BoxGeometry(0.2, 3, 4), 'STRUCCO'));
+  villa.add(clipped(new THREE.BoxGeometry(0.2, 3, 4), 'INTERIOR'));
   villa.add(clipped(insideOut(new THREE.BoxGeometry(0.4, 0.015, 0.25)), 'roof-7'));
   villa.add(clipped(new THREE.PlaneGeometry(6, 5), 'ceiling'));
   const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 7.9714);
   const poche = createInteriorPoche(villa, clip);
-  assert.equal(poche.count, 1);
+  assert.equal(poche.count, 2);
 
-  assert.deepEqual(poche.group.children.map(child => child.material.side), [THREE.BackSide]);
+  assert.deepEqual(poche.group.children.map(child => child.material.side),
+    [THREE.BackSide, THREE.BackSide]);
   for (const child of poche.group.children) {
     assert.equal(child.userData.sectionPoche, true);
     assert.equal(child.castShadow, false);
