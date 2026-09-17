@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {gradeKey} from './exterior-grade.js';
 
 // Two readings of the same neighbourhood geometry. Far out the context keeps
 // its photographic materials; once the camera settles on the villa the same
@@ -38,7 +39,11 @@ const semanticMaterialClass = (name='') => {
 // different response indoors.
 export function materialSignature(material) {
   return JSON.stringify([
-    material.type, semanticMaterialClass(material.name), material.color?.getHex(), material.roughness, material.metalness,
+    // The exterior grade is applied by name before the merge; two materials
+    // whose values happen to match must still stay apart when only one of
+    // them will later carry a graded detail map or re-tiled repeat.
+    material.type, semanticMaterialClass(material.name), gradeKey(material.name),
+    material.color?.getHex(), material.roughness, material.metalness,
     material.emissive?.getHex(), material.emissiveIntensity, material.opacity, material.transparent,
     material.alphaTest, material.side, material.flatShading, material.vertexColors, material.transmission,
     material.clearcoat, material.clearcoatRoughness, material.ior, material.sheen, material.specularIntensity,

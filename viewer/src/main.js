@@ -16,6 +16,7 @@ import {areaLabel} from './annotations.js';
 import { configureCameraControls } from './camera.js';
 import { PendingAction } from './pending-action.js';
 import {fitContextBounds,neutraliseTransmission} from './material-response.js';
+import {applyGradeValues,loadGradeTextures,bindGradeTextures} from './exterior-grade.js';
 import {createSiteContext} from './site-context.js';
 import {createRegionMap,atlasMeta} from './region-map.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
@@ -638,6 +639,9 @@ async function loadModel() {
           if(!o.isMesh)return;
           for(const m of Array.isArray(o.material)?o.material:[o.material])if(m)m.userData.carvePlot=true;
         });
+        // Photo-graded exterior scalars, before the merge so numbered copies
+        // still collapse and the signature hashes graded values.
+        if (asset.exterior_grade) applyGradeValues(gltf.scene, asset.id);
         mergeEqualMaterials(gltf.scene); abstractVehicle(gltf.scene);
         const group=asset.group??asset.id;
         staged.set(asset.id, {group, furniture:!!asset.furniture,
@@ -729,10 +733,17 @@ async function loadModel() {
     }
     // On lite devices the second download worker is a resolved no-op so the
     // settled results keep their positions - they are read by index below.
+    const wantsGrade = manifest.assets.some(a => a.exterior_grade);
     const results = await Promise.allSettled([worker(queue), LITE?Promise.resolve():worker(queue), loadSections(), loadRooms(), loadNavigation(),
-      lighting.loadEnvironment(daylightURL.href).catch(error=>console.warn('HDR unavailable; atmospheric daylight retained',error)), loadCaps()]);
-    const failure = results.find(r => r.status === 'rejected'); if (failure) throw failure.reason;
+      lighting.loadEnvironment(daylightURL.href).catch(error=>console.warn('HDR unavailable; atmospheric daylight retained',error)), loadCaps(),
+      wantsGrade ? loadGradeTextures(new URL(pages ? 'assets/textures/' : 'textures/', publicRoot)) : Promise.resolve(null)]);
+    const failure = results.slice(0, 7).find(r => r.status === 'rejected'); if (failure) throw failure.reason;
     phaseDone('download');
+    // Detail maps bind before staging so program identity is settled before
+    // compile/prewarm, and the anisotropy pass configures them for free. A
+    // failed fetch keeps the scalar grades and the authored placeholders.
+    if (results[7].status === 'rejected') console.warn('Exterior detail maps unavailable', results[7].reason);
+    bindGradeTextures([...staged.values()], results[7].status === 'fulfilled' ? results[7].value : null);
     // Several files may feed one pipeline group (kanka: BUILDING+INTERIOR are
     // the villa; evrebina+ground are the context). A file flagged furniture
     // tags every mesh wholesale, so the Mobilya toggle, the paper wash and

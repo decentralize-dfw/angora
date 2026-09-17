@@ -1,0 +1,14 @@
+{
+ "generated_by": "tools/generate_exterior_textures.mjs",
+ "content": "procedural, project-authored; no third-party imagery",
+ "spec_source": "listing photographs in the repository root, kat_1_bahce and kat_2_on_giris",
+ "modules_m": {
+  "clay_tile": [
+   0.8,
+   1
+  ],
+  "grass": 2,
+  "asphalt": 3,
+  "travertine": 0.8
+ }
+}

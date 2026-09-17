@@ -2,9 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import {neutraliseTransmission} from '../src/material-response.js';
-import {splitContextBuildings} from '../src/context-massing.js';
+import {splitContextBuildings,materialSignature} from '../src/context-massing.js';
 import {prepareContextSurfaces} from '../src/context-surfaces.js';
 import {isSeeThrough,isGlazing} from '../src/lighting.js';
+import {gradeKey,applyGradeValues,bindGradeTextures} from '../src/exterior-grade.js';
 
 test('Transmission becomes alpha glazing at load: no per-frame scene copy, still see-through',()=>{
   const glass=new THREE.MeshPhysicalMaterial({name:'glass',transmission:1,opacity:1});
@@ -41,6 +42,57 @@ test('A context file in the buildings role whitens wholesale, minus plainly-site
   plain.add(mesh('neighbor_wall.001',againM));
   splitContextBuildings(plain);
   assert.ok(!againM.userData.contextBuilding);
+});
+
+test('The exterior grade knows its surfaces and leaves everything else alone',()=>{
+  assert.equal(gradeKey('Clay tile 5 [imported]'),'clay-tile');
+  assert.equal(gradeKey('stone_tile (4).001'),'terrace');
+  assert.equal(gradeKey('grass (1)'),'grass');
+  assert.equal(gradeKey('Entrance coursed limestone (1)'),'', 'the healthy 52 m wall is not re-tiled');
+  assert.equal(gradeKey('stone_tile'),'', 'the villa wall stone is not a paver');
+  assert.equal(gradeKey('interior'),'');
+  // Application is additionally gated by the manifest asset id: evrebina's
+  // photographic neighbour roofs never take the villa tile sheet.
+  const roof=new THREE.MeshStandardMaterial({name:'roof.004'});
+  const scene=new THREE.Group();scene.add(new THREE.Mesh(new THREE.BufferGeometry(),roof));
+  applyGradeValues(scene,'evrebina');
+  assert.equal(roof.userData.exteriorGrade,'','stamped as ungraded for this asset');
+  const iron=new THREE.MeshStandardMaterial({name:'metal (4)'});
+  const scene2=new THREE.Group();scene2.add(new THREE.Mesh(new THREE.BufferGeometry(),iron));
+  applyGradeValues(scene2,'building');
+  assert.equal(iron.userData.exteriorGrade,'iron');
+  assert.equal('#'+iron.color.getHexString(),'#212326');
+  assert.equal(iron.roughness,0.58);
+  // A graded name can never merge with an ungraded look-alike.
+  const a=new THREE.MeshStandardMaterial({name:'grass (1)'}),b=new THREE.MeshStandardMaterial({name:'meadow'});
+  assert.notEqual(materialSignature(a),materialSignature(b));
+});
+
+test('Ground UVs are rebuilt from world metres on up-facing meshes only',()=>{
+  const sets={grassMap:new THREE.Texture(),asphaltMap:new THREE.Texture(),
+    travertineMap:new THREE.Texture(),travertineNormal:new THREE.Texture(),
+    clayTileMap:new THREE.Texture(),clayTileNormal:new THREE.Texture()};
+  const ground=new THREE.Mesh(new THREE.PlaneGeometry(8,8),new THREE.MeshStandardMaterial({name:'grass (1)'}));
+  ground.rotation.x=-Math.PI/2; // faces up
+  const wall=new THREE.Mesh(new THREE.PlaneGeometry(8,8),new THREE.MeshStandardMaterial({name:'grass (1)'}));
+  const scene=new THREE.Group();scene.add(ground,wall);
+  applyGradeValues(scene,'context-ground');
+  const wallUV=wall.geometry.attributes.uv.array.slice();
+  bindGradeTextures([{scene}],sets);
+  // 8 m plane over a 2 m module: the uv span must be exactly 4 repeats.
+  const uv=ground.geometry.attributes.uv;
+  let minU=1e9,maxU=-1e9;for(let i=0;i<uv.count;i++){minU=Math.min(minU,uv.getX(i));maxU=Math.max(maxU,uv.getX(i));}
+  assert.ok(Math.abs(maxU-minU-4)<1e-6,`${maxU-minU}`);
+  // the vertical copy keeps its authored UVs
+  assert.deepEqual([...wall.geometry.attributes.uv.array],[...wallUV]);
+  assert.equal(ground.material.map,sets.grassMap,'ground texture bound at unit repeat');
+  // and a missing texture set still leaves the grade harmless
+  const bare=new THREE.Mesh(new THREE.PlaneGeometry(2,2),new THREE.MeshStandardMaterial({name:'asphalt'}));
+  bare.rotation.x=-Math.PI/2;
+  const scene2=new THREE.Group();scene2.add(bare);
+  applyGradeValues(scene2,'context-ground');
+  bindGradeTextures([{scene:scene2}],null);
+  assert.equal(bare.material.map,null);
 });
 
 test("The numbered 'grass (1)' skin is still the ground family",()=>{
