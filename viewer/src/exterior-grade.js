@@ -28,7 +28,12 @@ const TABLE = [
   // assigned per connected component at load - texture-free and exactly
   // aligned with the clay underfoot.
   {key: 'clay-tile', match: /^clay tile/i, assets: ['building'], lottery: true},
-  {key: 'villa-roof', match: /^roof(-\d+)?$/i, assets: ['building'], lottery: true},
+  // roof-7 is the covering UNDER the tiles, not the tiles: 695 triangles in 26
+  // connected components against Clay tile's 2 855. Running a per-component
+  // lottery over it gave whole roof planes one random tone each, which is half
+  // of why the new roof read as blocks. It gets a single weathered tone.
+  {key: 'villa-roof', match: /^roof(-\d+)?$/i, assets: ['building'],
+   color: '#8E5A40', roughness: 0.88},
   // bldg-3 spells it STRUCCO and ships no facade normal at all; the authored
   // colour already sits on the photo hue, so it keeps the base (keepTint) and
   // gains sand-float relief plus a breathing near-white mottle.
@@ -140,10 +145,18 @@ function horizontalShare(geometry, matrixWorld) {
   return total ? up / total : 0;
 }
 
-// The listing roof's per-tile firing lottery, weighted toward sunlit salmon.
-const TILE_PALETTE = ['#D08A55', '#C97C4A', '#B76840', '#A85E38', '#8A5333', '#5E3F2C']
+// The listing roof's per-tile firing lottery. Measured: `Clay tile` resolves to
+// 2 855 components at a median 18 vertices - one modelled tile each - so the
+// blockiness photographed at ?view=f3 was never the components, it was the
+// spread. The first palette ran from #D08A55 to #5E3F2C: a 3.4:1 luminance
+// range with ±14% on top, which on individual tiles reads as scattered dark
+// blotches rather than a fired roof. A real clay field varies in hue much more
+// than in value, so the range is now 1.5:1, the darkest tone is a weathered
+// minority, and the jitter is a third of what it was.
+const TILE_PALETTE = ['#C5825A', '#BE7851', '#B66E4A', '#AE6644', '#A55F40', '#98573C']
   .map(c => new THREE.Color(c).convertSRGBToLinear());
-const TILE_WEIGHTS = [.3, .24, .2, .14, .08, .04];
+const TILE_WEIGHTS = [.22, .26, .22, .15, .10, .05];
+const TILE_JITTER = .05;
 
 // Union-find over welded vertices: every modelled tile is one connected
 // component, and gets one colour of the lottery via vertex colours.
@@ -174,7 +187,7 @@ export function applyTileLottery(mesh) {
       // deterministic per component so reloads look identical
       let r = ((root * 2654435761) >>> 0) / 4294967296, pick = 0;
       while (pick < TILE_WEIGHTS.length - 1 && r > TILE_WEIGHTS[pick]) r -= TILE_WEIGHTS[pick++];
-      const jitter = 1 + ((((root * 40503) >>> 0) % 1000) / 1000 - .5) * .14;
+      const jitter = 1 + ((((root * 40503) >>> 0) % 1000) / 1000 - .5) * TILE_JITTER;
       colour = TILE_PALETTE[pick].clone().multiplyScalar(jitter);
       rootColour.set(root, colour);
     }
