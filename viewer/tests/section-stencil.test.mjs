@@ -166,33 +166,42 @@ test('A shell knows which of its sides faces in, and a sheet has no inside', () 
   assert.equal(shellSide(new THREE.PlaneGeometry(12, 9, 20, 16).rotateX(Math.PI / 2)), 0);
 });
 
-test('Only what the section plane cuts gets a poché, and never glass', () => {
-  const solid = new THREE.BoxGeometry(0.2, 3, 4);
-  assert.equal(pocheEligible(clipped(solid, 'STRUCCO')), true);
-  assert.equal(pocheEligible(clipped(insideOut(solid), 'roof-7')), true);
+test('Only the roof the plane cuts gets a poché, measured outward', () => {
+  const solid = new THREE.BoxGeometry(0.4, 0.015, 0.25);
+  assert.equal(pocheEligible(clipped(solid, 'Clay tile')), true);
+  assert.equal(pocheEligible(clipped(solid, 'roof-7')), true);
+
+  // Photographed at ?view=f3, trusting a negative sign inked every visible
+  // floor: on an unclosed body the divergence integral's sign means nothing.
+  assert.equal(pocheEligible(clipped(insideOut(solid), 'roof-7')), false);
+  // and nothing outside the family the review names and the delivery gets
+  // right, whatever its geometry says
+  assert.equal(pocheEligible(clipped(new THREE.BoxGeometry(0.2, 3, 4), 'STRUCCO')), false);
+  assert.equal(pocheEligible(clipped(new THREE.BoxGeometry(2, 0.2, 3), 'WOOD-FL')), false);
+  assert.equal(pocheEligible(clipped(new THREE.BoxGeometry(2, 0.2, 3), 'ceiling')), false);
+
   // The neighbourhood is setting, not subject: it is never clipped, so it is
   // never hatched.
-  assert.equal(pocheEligible(named(solid, 'neighbor_wall')), false);
+  assert.equal(pocheEligible(named(solid, 'Clay tile')), false);
   assert.equal(pocheEligible(clipped(new THREE.PlaneGeometry(6, 5), 'wood_floor')), false);
   const glass = clipped(solid, 'Context glazing');
   glass.material.transmission = 0.9;
   assert.equal(pocheEligible(glass), false);
 });
 
-test('The poché takes the inward side per mesh and rides the cut height', () => {
+test('The poché inks the roof underside only, and rides the cut height', () => {
   const villa = new THREE.Group();
-  villa.add(clipped(new THREE.BoxGeometry(0.2, 3, 4), 'STRUCCO'));               // outward
-  villa.add(clipped(insideOut(new THREE.BoxGeometry(0.4, 0.015, 0.25)), 'roof-7')); // inside-out
-  const furniture = clipped(new THREE.BoxGeometry(0.6, 0.8, 1.9), 'Room pass | Lounge brown recliner');
-  villa.add(furniture);
-  villa.add(clipped(new THREE.PlaneGeometry(6, 5), 'ceiling'));                  // sheet: out
+  const tiles = clipped(new THREE.BoxGeometry(0.4, 0.015, 0.25), 'Clay tile');
+  villa.add(tiles);
+  villa.add(clipped(new THREE.BoxGeometry(0.2, 3, 4), 'STRUCCO'));                 // not the family
+  villa.add(clipped(insideOut(new THREE.BoxGeometry(0.4, 0.015, 0.25)), 'roof-7')); // sign not believed
+  villa.add(clipped(new THREE.PlaneGeometry(6, 5), 'ceiling'));                    // sheet
   const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 7.9714);
   const poche = createInteriorPoche(villa, clip);
-  assert.equal(poche.count, 3);
+  assert.equal(poche.count, 1);
 
-  const sidesUsed = poche.group.children.map(child => child.material.side);
-  assert.equal(sidesUsed.filter(side => side === THREE.BackSide).length, 2);
-  assert.equal(sidesUsed.filter(side => side === THREE.FrontSide).length, 1);
+  // The tiles' top face stays tiles; only the underside the cut exposes inks.
+  assert.deepEqual(poche.group.children.map(child => child.material.side), [THREE.BackSide]);
   for (const child of poche.group.children) {
     assert.equal(child.userData.sectionPoche, true);
     assert.equal(child.castShadow, false);
@@ -211,11 +220,11 @@ test('The poché takes the inward side per mesh and rides the cut height', () =>
   for (const child of poche.group.children) assert.equal(child.material.uniforms.uCut.value, 7.9714);
 
   // A hidden body's cut goes with it, the way the authored furniture layer does
-  furniture.visible = false;
+  tiles.visible = false;
   poche.update(7.9714, true);
-  const twin = poche.group.children.find(child => child.geometry === furniture.geometry);
+  const twin = poche.group.children.find(child => child.geometry === tiles.geometry);
   assert.equal(twin.visible, false);
-  furniture.visible = true;
+  tiles.visible = true;
   poche.update(7.9714, true);
   assert.equal(twin.visible, true);
 

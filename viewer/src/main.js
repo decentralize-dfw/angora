@@ -915,9 +915,9 @@ async function loadModel() {
     // stencil; see section-stencil.js.
     stencilCaps=createStencilCaps(groups.get('villa'),clip,buildingBox);
     scene.add(stencilCaps.group);
-    // Parity needs a closed surface and the optimised delivery has almost
-    // none, so what actually closes bldg-3's cut is the inward-facing poché:
-    // the same wall hatch drawn on whichever side of each mesh faces in.
+    // An inward-facing poché was tried here and photographed: measured
+    // orientation is not trustworthy on this delivery either, so it painted
+    // the floors' visible faces. See createInteriorPoche.
     interiorPoche=createInteriorPoche(groups.get('villa'),clip);
     scene.add(interiorPoche.group);
     {

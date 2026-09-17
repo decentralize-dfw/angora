@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {createHatchMaterial, SECTION_POCHE} from './section.js';
 import {isGlazing} from './lighting.js';
+import {materialFamily} from './material-response.js';
 
 // The authored cap atlas draws the walls the drawing already knew about; the
 // re-exported building brings faces the atlas never saw - bldg-3's modelled
@@ -175,11 +176,21 @@ export function createStencilCaps(villaGroup, clip, bounds) {
 // side of each mesh faces in.
 //
 // bldg-3 answers that badly too - roof.003, white_trim, wood_floor, ceiling
-// and terra_floor all arrive wound INSIDE-OUT (signed volume about their own
-// centre comes back negative). So the side is measured per mesh rather than
-// assumed: an outward shell shows its inside on BackSide, an inverted one on
-// FrontSide. A sheet has no inside at all and is left alone.
+// and terra_floor all measure a NEGATIVE signed volume about their own centre.
+// The first attempt read that as "inside-out" and painted their front faces
+// instead; photographed at ?view=f3 it had inked every visible floor, because
+// on a body that is not closed the divergence integral's SIGN means nothing -
+// it is dominated by wherever the surface is missing.
+//
+// So orientation is trusted only where it is corroborated: a mesh joins the
+// poché when it measures outward AND belongs to the roof family, which is the
+// one the review names and the one the delivery gets right (`Clay tile`
+// +0.1246 over its bbox). Its top face is a front face and stays tiles; the
+// underside the cut exposes is a back face and becomes hatch. Everything
+// else - the sheets with no interior, the bodies whose sign cannot be
+// believed - waits for the section atlas to be regenerated against bldg-3.
 const SHELL_RATIO = 0.002;
+const POCHE_FAMILY = new Set(['roof']);
 
 // Signed volume about the geometry's own bbox centre, over its bbox volume.
 // Taken about the centre so an open sheet reads ~0 wherever it sits in world
@@ -225,7 +236,10 @@ export function pocheEligible(object) {
   const materials = Array.isArray(object.material) ? object.material : [object.material];
   // See-through glass has no poché: a window's cut belongs to its frame.
   if (!materials.length || !materials.every(m => m && !isGlazing(m))) return false;
-  return shellSide(object.geometry) !== 0;
+  if (!materials.every(m => POCHE_FAMILY.has(materialFamily(m.name)))) return false;
+  // Outward only. A negative sign on an unclosed body is not evidence of an
+  // inverted one, and acting on it inked the floors.
+  return shellSide(object.geometry) > 0;
 }
 
 export function createInteriorPoche(villaGroup, clip) {
@@ -248,8 +262,7 @@ export function createInteriorPoche(villaGroup, clip) {
   villaGroup.traverse(o => { if (pocheEligible(o)) sources.push(o); });
   const twins = [];
   for (const source of sources) {
-    const twin = new THREE.Mesh(source.geometry,
-      materialFor(shellSide(source.geometry) > 0 ? THREE.BackSide : THREE.FrontSide));
+    const twin = new THREE.Mesh(source.geometry, materialFor(THREE.BackSide));
     twin.matrixAutoUpdate = false; twin.matrix.copy(source.matrixWorld);
     twin.renderOrder = 6;   // after the content that drew the same face
     twin.userData.sectionPoche = true; twin.userData.aoExcluded = true;
