@@ -10,6 +10,12 @@ export function smoothStep(t) {
 }
 
 export const SECTION_POCHE = {pitch:0.14, duty:0.065, ground:[0.020,0.020,0.023], ink:[0.32,0.31,0.29], strength:0.62};
+export const SECTION_FILL = [0.086, 0.098, 0.105];
+export const FURNITURE_FILL = [0.706, 0.725, 0.729];
+export function createFillMaterial(rgb) {
+  return new THREE.MeshBasicMaterial({color:new THREE.Color(rgb[0],rgb[1],rgb[2]),
+    side:THREE.DoubleSide, toneMapped:false});
+}
 export const SOIL_POCHE = {pitch:0.55, duty:0.075, ground:[0.580,0.568,0.527], ink:[0.015,0.015,0.016], strength:1.0};
 export function createHatchMaterial({pitch, duty, ground, ink, strength=0.62}, {cut=false, side=THREE.DoubleSide}={}) {
   const material = new THREE.ShaderMaterial({side,
@@ -42,15 +48,16 @@ export function createWallCaps(atlas) {
   const group = new THREE.Group(); group.name = 'Geometric wall sections';
   const slices = atlas.slices;
   if (!slices?.length || atlas.coordinate_system !== 'glTF_XZ') throw Error('Invalid section atlas');
-  const material = createHatchMaterial(SECTION_POCHE);
-  const build = (name) => {
-    const mesh = new THREE.Mesh(new THREE.BufferGeometry(), material);
+  const wallFill = createFillMaterial(SECTION_FILL);
+  const furnitureFill = createFillMaterial(FURNITURE_FILL);
+  const build = (name, fill) => {
+    const mesh = new THREE.Mesh(new THREE.BufferGeometry(), fill);
     mesh.name = name; mesh.renderOrder = 2; group.add(mesh); return mesh;
   };
   const layers = [
-    {mesh: build('Solid hatched wall cross section'), p: 'p', i: 'i'},
-    {mesh: build('Solid hatched fixture cross section'), p: 'q', i: 'j'},
-    {mesh: build('Solid hatched furniture cross section'), p: 'fq', i: 'fj', furniture: true},
+    {mesh: build('Solid wall cross section', wallFill), p: 'p', i: 'i'},
+    {mesh: build('Solid fixture cross section', wallFill), p: 'q', i: 'j'},
+    {mesh: build('Solid furniture cross section', furnitureFill), p: 'fq', i: 'fj', furniture: true},
   ];
   let current = -1, furnitureVisible = true;
   function rebuild(index) {

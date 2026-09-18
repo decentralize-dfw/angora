@@ -5,7 +5,7 @@ const baseName = (name = '') => name.replace(/\.\d{3}$/, '');
 const TABLE = [
   {key: 'clay-tile', match: /^clay tile/i, assets: ['building'], lottery: true},
   {key: 'villa-roof', match: /^roof(-\d+)?$/i, assets: ['building'],
-   color: '#8E5A40', roughness: 0.88},
+   color: '#A76C4C', roughness: 0.88},
   {key: 'stucco', match: /^st?rucco( \[imported\])?$/i, assets: ['building'],
    set: {map: 'stuccoMottle', normalMap: 'stuccoNormal'}, keepTint: true,
    repeat: [1, 1], normalScale: 0.7},
@@ -102,7 +102,7 @@ function horizontalShare(geometry, matrixWorld) {
   return total ? up / total : 0;
 }
 
-const TILE_PALETTE = ['#C5825A', '#BE7851', '#B66E4A', '#AE6644', '#A55F40', '#98573C']
+const TILE_PALETTE = ['#D89566', '#D08B5D', '#C88155', '#C0784E', '#B87048', '#AC6742']
   .map(c => new THREE.Color(c).convertSRGBToLinear());
 const TILE_WEIGHTS = [.22, .26, .22, .15, .10, .05];
 const TILE_JITTER = .05;

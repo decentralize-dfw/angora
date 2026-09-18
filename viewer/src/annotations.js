@@ -121,13 +121,15 @@ export function createAnnotations(data,host,onRoom) {
       }
     }
     candidates.sort((a,b)=>Number(a.entry.measured)-Number(b.entry.measured));
-    const placed=layoutAnchoredLabels(candidates,{width:w,height:h,obstacles:[...obstacles,...nameRects]});
+    const placed=layoutAnchoredLabels(candidates,
+      {width:w,height:h,obstacles:[...obstacles,...nameRects],gap:5,maxDisplacement:46});
     const solved=new Map(placed.map(p=>[p.entry,p]));
     for(const item of candidates){
       const p=solved.get(item.entry);
+      if(!p){item.entry.el.hidden=true;continue;}
       item.entry.el.hidden=false;
-      item.entry.el.style.left=`${(p??item).x}px`;
-      item.entry.el.style.top=`${(p??item).y}px`;
+      item.entry.el.style.left=`${p.x}px`;
+      item.entry.el.style.top=`${p.y}px`;
     }
   },dispose(){overlay.remove();group.traverse(o=>o.geometry?.dispose());material.dispose();measuredMaterial.dispose();}};
 }

@@ -32,7 +32,7 @@ import {createDeviceQA} from './device-qa.js';
 import {readShareState,shareSearch} from './share-state.js';
 import {referenceProfile} from './render-profile.js';
 import { sectionHeight, smoothStep, createWallCaps, createSoilCap, SOIL_CUT_HEIGHT } from './section.js';
-import { createStencilCaps, createInteriorPoche } from './section-stencil.js';
+import { createStencilCaps } from './section-stencil.js';
 import { createContextInfill, infillBuildings } from './context-infill.js';
 import { splitPlotFoliage } from './plot-foliage.js';
 import { createWalkLocator } from './walk-locator.js';
@@ -67,9 +67,9 @@ const plotCarvePlanes = [earthClip,
   new THREE.Plane(new THREE.Vector3(0, 0, 1), -PLOT_RECT.maxZ)];
 let plotCutReady = false;
 let planWash = null;
-let flight, hotspots, planMode=false, roomData, interiorLights=true, soilCap=null, stencilCaps=null, interiorPoche=null;
+let flight, hotspots, planMode=false, roomData, interiorLights=true, soilCap=null, stencilCaps=null;
 let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox, contextBox, lighting, siteContext;
-let selected = 'f3', ready = false, loading = false;
+let selected = 'neighborhood', ready = false, loading = false;
 let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations, walk;
 let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;
 let deviceQA,assetRevision=null,pendingCapture=null,contextLost=false,massing=null,lift=null,plotFoliage=null;
@@ -153,7 +153,6 @@ function renderFrame(time) {
     }
     caps?.update(clip.constant, clip.constant < fullHeight - 0.001);
     stencilCaps?.update(clip.constant, clip.constant < fullHeight - 0.001 && !walk?.active);
-    interiorPoche?.update(clip.constant, clip.constant < fullHeight - 0.001 && !walk?.active);
     soilCap?.update(earthClip.constant, earthClip.constant < fullHeight - 0.001 && plotCutReady);
     const changing=walk?.active?walk.update(time,renderer.xr.getSession()):flying?false:controls.update();
     const activeCamera=walk?.active?walk.camera:camera;
@@ -727,8 +726,6 @@ async function loadModel() {
     buildingBox = new THREE.Box3().setFromObject(groups.get('villa'));
     stencilCaps=createStencilCaps(groups.get('villa'),clip,buildingBox);
     scene.add(stencilCaps.group);
-    interiorPoche=createInteriorPoche(groups.get('villa'),clip);
-    scene.add(interiorPoche.group);
     {
       const datums=[0,3.0996,6.3714,9.4705,1e9];
       floorBoxes=datums.slice(0,4).map(()=>new THREE.Box3());

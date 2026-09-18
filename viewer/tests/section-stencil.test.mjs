@@ -75,7 +75,7 @@ test('The writers invert one bit double-sided and the cap only reads it', () => 
 
   assert.equal(caps.twins, 2);
 
-  const writers = caps.group.children.filter(child => child.material.isMeshBasicMaterial);
+  const writers = caps.group.children.filter(child => child.material.stencilZPass === THREE.InvertStencilOp);
   assert.equal(writers.length, 2);
   for (const writer of writers) {
     assert.equal(writer.material.side, THREE.DoubleSide);
@@ -108,101 +108,4 @@ test('The canvas asks for a stencil buffer, or a phone has nowhere to count', ()
   const source = new URL('../src/main.js', import.meta.url);
   const main = fs.readFileSync(source, 'utf8');
   assert.match(main, /new THREE\.WebGLRenderer\(\{[^}]*stencil:\s*true/);
-});
-
-import {shellSide, pocheEligible, createInteriorPoche} from '../src/section-stencil.js';
-
-const clipped = (geometry, name) => {
-  const mesh = named(geometry, name);
-  mesh.userData.sectionClipped = true;
-  return mesh;
-};
-
-function insideOut(geometry) {
-  const flipped = geometry.toNonIndexed();
-  const p = flipped.attributes.position.array;
-  for (let t = 0; t < p.length / 9; t++) {
-    for (let k = 0; k < 3; k++) {
-      const a = t * 9 + k, b = t * 9 + 6 + k;
-      const swap = p[a]; p[a] = p[b]; p[b] = swap;
-    }
-  }
-  return flipped;
-}
-
-test('A shell knows which of its sides faces in, and a sheet has no inside', () => {
-  assert.equal(shellSide(new THREE.BoxGeometry(0.2, 3, 4)), 1);
-  assert.equal(shellSide(new THREE.BoxGeometry(0.4, 0.015, 0.25)), 1);
-  assert.equal(shellSide(insideOut(new THREE.BoxGeometry(0.2, 3, 4))), -1);
-  assert.equal(shellSide(new THREE.PlaneGeometry(8, 6)), 0);
-  assert.equal(shellSide(new THREE.PlaneGeometry(8, 6, 12, 9)), 0);
-  assert.equal(shellSide(new THREE.PlaneGeometry(12, 9, 20, 16).rotateX(Math.PI / 2)), 0);
-});
-
-test('Whatever the plane opens outward gets a poché; nothing else does', () => {
-  const tile = new THREE.BoxGeometry(0.4, 0.015, 0.25);
-  const wall = new THREE.BoxGeometry(0.2, 3, 4);
-  assert.equal(pocheEligible(clipped(tile, 'Clay tile')), true);
-  assert.equal(pocheEligible(clipped(wall, 'INTERIOR')), true);
-  assert.equal(pocheEligible(clipped(wall, 'STRUCCO')), true);
-  assert.equal(pocheEligible(clipped(wall, 'Room pass | Lounge brown recliner')), true);
-
-  assert.equal(pocheEligible(clipped(insideOut(tile), 'roof-7')), false);
-  assert.equal(pocheEligible(clipped(insideOut(wall), 'WOOD-FL')), false);
-  assert.equal(pocheEligible(clipped(new THREE.PlaneGeometry(6, 5), 'wood_floor')), false);
-  assert.equal(pocheEligible(clipped(new THREE.PlaneGeometry(12, 9, 20, 16), 'STRUCCO')), false);
-
-  assert.equal(pocheEligible(named(tile, 'Clay tile')), false);
-  const glass = clipped(tile, 'Context glazing');
-  glass.material.transmission = 0.9;
-  assert.equal(pocheEligible(glass), false);
-  const cabin = clipped(tile, 'Clay tile');
-  cabin.name = 'Lift cabin';
-  assert.equal(pocheEligible(cabin), false);
-});
-
-test('The poché inks inward faces only, and rides the cut height', () => {
-  const villa = new THREE.Group();
-  const tiles = clipped(new THREE.BoxGeometry(0.4, 0.015, 0.25), 'Clay tile');
-  villa.add(tiles);
-  villa.add(clipped(new THREE.BoxGeometry(0.2, 3, 4), 'INTERIOR'));
-  villa.add(clipped(insideOut(new THREE.BoxGeometry(0.4, 0.015, 0.25)), 'roof-7'));
-  villa.add(clipped(new THREE.PlaneGeometry(6, 5), 'ceiling'));
-  const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 7.9714);
-  const poche = createInteriorPoche(villa, clip);
-  assert.equal(poche.count, 2);
-
-  assert.deepEqual(poche.group.children.map(child => child.material.side),
-    [THREE.BackSide, THREE.BackSide]);
-  for (const child of poche.group.children) {
-    assert.equal(child.userData.sectionPoche, true);
-    assert.equal(child.castShadow, false);
-    assert.equal(child.material.polygonOffset, true);
-    assert.ok(child.material.uniforms.uCut, 'the poché carries its own cut');
-  }
-
-  const hatch = poche.group.children[0].material.fragmentShader;
-  assert.match(hatch, /0\.140/);
-  assert.match(hatch, /if \(worldPosition\.y > uCut\) discard;/);
-
-  poche.update(7.9714, true);
-  assert.equal(poche.group.visible, true);
-  for (const child of poche.group.children) assert.equal(child.material.uniforms.uCut.value, 7.9714);
-
-  tiles.visible = false;
-  poche.update(7.9714, true);
-  const twin = poche.group.children.find(child => child.geometry === tiles.geometry);
-  assert.equal(twin.visible, false);
-  tiles.visible = true;
-  poche.update(7.9714, true);
-  assert.equal(twin.visible, true);
-
-  poche.update(7.9714, false);
-  assert.equal(poche.group.visible, false);
-});
-
-test('The viewer builds the poché beside the stencil and drives both per frame', () => {
-  const main = fs.readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
-  assert.match(main, /createInteriorPoche\(groups\.get\('villa'\),clip\)/);
-  assert.match(main, /interiorPoche\?\.update\(clip\.constant/);
 });

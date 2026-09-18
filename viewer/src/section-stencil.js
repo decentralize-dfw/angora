@@ -1,7 +1,6 @@
 import * as THREE from 'three';
-import {createHatchMaterial, SECTION_POCHE} from './section.js';
+import {createFillMaterial, SECTION_FILL} from './section.js';
 import {isGlazing} from './lighting.js';
-import {materialFamily} from './material-response.js';
 
 const TRIANGLE_BUDGET = 400000;
 const WELD = 1e4;
@@ -88,7 +87,7 @@ export function createStencilCaps(villaGroup, clip, bounds) {
   });
   const cap = new THREE.Mesh(
     new THREE.PlaneGeometry(bounds.max.x - bounds.min.x + 6, bounds.max.z - bounds.min.z + 6),
-    createHatchMaterial(SECTION_POCHE));
+    createFillMaterial(SECTION_FILL));
   cap.rotation.x = -Math.PI / 2;
   cap.position.set((bounds.min.x + bounds.max.x) / 2, 0, (bounds.min.z + bounds.max.z) / 2);
   cap.renderOrder = 1.5;
@@ -106,84 +105,5 @@ export function createStencilCaps(villaGroup, clip, bounds) {
   return {group, twins, update(height, visible) {
     group.visible = visible;
     cap.position.y = height - 0.004;
-  }};
-}
-
-const SHELL_RATIO = 0.002;
-const POCHE_FAMILY = new Set(['roof', 'plaster', 'masonry', 'soffit', 'floor', 'other']);
-
-function measureShell(geometry) {
-  const position = geometry.attributes?.position;
-  if (!position) return 0;
-  const index = geometry.index;
-  const triangles = Math.floor((index ? index.count : position.count) / 3);
-  if (triangles < 2) return 0;
-  geometry.computeBoundingBox();
-  const box = geometry.boundingBox;
-  const cx = (box.min.x + box.max.x) / 2, cy = (box.min.y + box.max.y) / 2, cz = (box.min.z + box.max.z) / 2;
-  const span = Math.max(box.max.x - box.min.x, 1e-4) * Math.max(box.max.y - box.min.y, 1e-4) *
-    Math.max(box.max.z - box.min.z, 1e-4);
-  let volume = 0;
-  for (let t = 0; t < triangles; t++) {
-    const i0 = index ? index.getX(t * 3) : t * 3;
-    const i1 = index ? index.getX(t * 3 + 1) : t * 3 + 1;
-    const i2 = index ? index.getX(t * 3 + 2) : t * 3 + 2;
-    const ax = position.getX(i0) - cx, ay = position.getY(i0) - cy, az = position.getZ(i0) - cz;
-    const bx = position.getX(i1) - cx, by = position.getY(i1) - cy, bz = position.getZ(i1) - cz;
-    const gx = position.getX(i2) - cx, gy = position.getY(i2) - cy, gz = position.getZ(i2) - cz;
-    volume += (ax * (by * gz - bz * gy) + ay * (bz * gx - bx * gz) + az * (bx * gy - by * gx)) / 6;
-  }
-  return volume / span;
-}
-
-export function shellSide(geometry) {
-  if (!geometry?.isBufferGeometry) return 0;
-  if (!('angoraShellRatio' in geometry.userData)) geometry.userData.angoraShellRatio = measureShell(geometry);
-  const ratio = geometry.userData.angoraShellRatio;
-  return ratio > SHELL_RATIO ? 1 : ratio < -SHELL_RATIO ? -1 : 0;
-}
-
-export function pocheEligible(object) {
-  if (!object?.isMesh) return false;
-  if (object.userData.sectionPoche) return false;
-  if (!object.userData.sectionClipped) return false;
-  if (/lift|asans/i.test(object.name)) return false;
-  const materials = Array.isArray(object.material) ? object.material : [object.material];
-  if (!materials.length || !materials.every(m => m && !isGlazing(m))) return false;
-  if (!materials.every(m => POCHE_FAMILY.has(materialFamily(m.name)))) return false;
-  return shellSide(object.geometry) > 0;
-}
-
-export function createInteriorPoche(villaGroup, clip) {
-  const group = new THREE.Group(); group.name = 'Interior section poché';
-  const sides = new Map();
-  const materialFor = side => {
-    if (!sides.has(side)) {
-      const material = createHatchMaterial(SECTION_POCHE, {cut: true, side});
-      material.polygonOffset = true;
-      material.polygonOffsetFactor = -2;
-      material.polygonOffsetUnits = -4;
-      sides.set(side, material);
-    }
-    return sides.get(side);
-  };
-  const sources = [];
-  villaGroup.updateMatrixWorld(true);
-  villaGroup.traverse(o => { if (pocheEligible(o)) sources.push(o); });
-  const twins = [];
-  for (const source of sources) {
-    const twin = new THREE.Mesh(source.geometry, materialFor(THREE.BackSide));
-    twin.matrixAutoUpdate = false; twin.matrix.copy(source.matrixWorld);
-    twin.renderOrder = 6;
-    twin.userData.sectionPoche = true; twin.userData.aoExcluded = true;
-    twin.castShadow = twin.receiveShadow = false;
-    twin.frustumCulled = false;
-    group.add(twin); twins.push({twin, source});
-  }
-  return {group, count: twins.length, update(height, visible) {
-    group.visible = visible;
-    if (!visible) return;
-    for (const material of sides.values()) material.uniforms.uCut.value = height;
-    for (const {twin, source} of twins) twin.visible = source.visible;
   }};
 }
