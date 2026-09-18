@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import * as THREE from 'three';
-import {createSoilCap,createHatchMaterial,createWallCaps,SECTION_POCHE,SOIL_POCHE,SOIL_CUT_HEIGHT,floorDatums} from '../src/section.js';
+import {createSoilCap,createFillMaterial,createWallCaps,SECTION_FILL,FURNITURE_FILL,SOIL_FILL,SOIL_CUT_HEIGHT,floorDatums} from '../src/section.js';
 import {splitContextSoil,PLOT_SOIL_NODE,authoredNodeName} from '../src/context-massing.js';
 
 const delivered=name=>new URL(`build/web/full/${name}`,new URL('../../',import.meta.url));
@@ -106,7 +106,7 @@ test('createSoilCap drops the rejected full-site field and keeps the true cut fa
   assert.ok(soilCap);
   const meshes=[];soilCap.group.traverse(o=>{if(o.isMesh)meshes.push(o);});
   assert.equal(meshes.length,1);
-  assert.ok(meshes.every(m=>m.name==='Solid hatched soil cross section'));
+  assert.ok(meshes.every(m=>m.name==='Solid soil cross section'));
   assert.ok(meshes.every(m=>m.castShadow===false));
   assert.equal(meshes[0].material.side,THREE.DoubleSide);
   soilCap.update(SOIL_CUT_HEIGHT,true);assert.equal(soilCap.group.visible,true);
@@ -115,42 +115,17 @@ test('createSoilCap drops the rejected full-site field and keeps the true cut fa
   assert.equal(createSoilCap(new THREE.Group()),null,'a delivery without the cap degrades to the old behaviour');
 });
 
-test('What the plane cuts is drawn as black poché, ruled, with earth and masonry told apart by pitch',()=>{
-  const wall=createHatchMaterial(SECTION_POCHE);
-  assert.match(wall.fragmentShader,/\/ 0\.1400;/);
-  assert.match(wall.fragmentShader,/const float INK = 0\.13000;/);
-  assert.match(wall.fragmentShader,/#include <tonemapping_fragment>/);
-  const soil=createHatchMaterial(SOIL_POCHE);
-  assert.match(soil.fragmentShader,/\/ 0\.5500;/);
-  assert.match(soil.fragmentShader,/const float INK = 0\.15000;/);
-  assert.ok(Math.max(...SECTION_POCHE.ground)<0.05,JSON.stringify(SECTION_POCHE.ground));
-  assert.ok(Math.min(...SECTION_POCHE.ink)>Math.max(...SECTION_POCHE.ground)*4);
-  assert.ok(Math.min(...SOIL_POCHE.ground)>0.4,'the cut earth reads as a pale field');
-  assert.ok(Math.max(...SOIL_POCHE.ink)<0.05,'and its rule is the ink itself');
-  assert.equal(SOIL_POCHE.strength,1,'the earth line takes all of the ink');
-  assert.ok(SECTION_POCHE.strength<0.7,'the masonry rule stays a highlight');
-  assert.notEqual(SECTION_POCHE.pitch,SOIL_POCHE.pitch,'earth and masonry are told apart by the ruling');
-  assert.ok(SOIL_POCHE.duty*2>0.12&&SOIL_POCHE.duty*2<0.20,
-    `${(SOIL_POCHE.duty*2*100).toFixed(0)}% of the period is inked`);
-  assert.ok(SOIL_POCHE.pitch>SECTION_POCHE.pitch*3,'on a far coarser pitch than masonry');
-  assert.ok(!('fade' in SOIL_POCHE)&&!('fade' in SECTION_POCHE),'the hand-tuned far field is retired');
+test('The cut is filled, and wall, furniture and earth are told apart by value',()=>{
+  const wall=createFillMaterial(SECTION_FILL);
+  assert.equal(wall.side,THREE.DoubleSide);
+  assert.equal(wall.toneMapped,false);
+  const luminance=rgb=>0.2126*rgb[0]+0.7152*rgb[1]+0.0722*rgb[2];
+  assert.ok(luminance(SECTION_FILL)<0.15,'masonry reads as a solid dark field');
+  assert.ok(luminance(FURNITURE_FILL)>0.55,'furniture reads as a light, thinner line');
+  assert.ok(luminance(SOIL_FILL)>luminance(SECTION_FILL)*2,'earth is never mistaken for a wall');
+  assert.ok(luminance(SOIL_FILL)<luminance(FURNITURE_FILL),'nor for furniture');
 });
 
-test('The ruling keeps the width it was authored with instead of growing with the pixel',()=>{
-  for (const poche of [SECTION_POCHE,SOIL_POCHE]) {
-    const ink=2*poche.duty;
-    const ruled=x=>Math.floor(x)*ink+Math.min(x-Math.floor(x),ink);
-    const hatch=(v,w)=>Math.min(1,Math.max(0,(ruled(v+0.5*w)-ruled(v-0.5*w))/w));
-    for (const w of [0.002,0.01,0.05,0.2,0.5,1,2,4]) {
-      let sum=0; const N=4096;
-      for (let k=0;k<N;k++) sum+=hatch(17+k/N,w);
-      assert.ok(Math.abs(sum/N-ink)<2e-3,
-        `pixel ${w} periods wide inks ${(sum/N*100).toFixed(1)}% of the field, not ${(ink*100).toFixed(0)}%`);
-      assert.ok(hatch(17.03,w)<=Math.min(1,ink/Math.min(w,1))+1e-6,
-        'a sub-pixel line greys out rather than fattening');
-    }
-  }
-});
 
 test('Only the plot soil node receives private, marked material instances',()=>{
   const sanitize=s=>s.replace(/\s/g,'_').replace(/[\[\]./:]/g,'');

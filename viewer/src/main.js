@@ -59,7 +59,7 @@ let regionMap = null;
 const plantingCandidates = [], plantingAboveCut = [];
 const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
 const earthClip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
-const PLOT_RECT = {minX: -11.2, maxX: 11.5, minZ: -24.0, maxZ: 11.06};
+const PLOT_RECT = {minX: -11.2, maxX: 12.7, minZ: -24.0, maxZ: 15.0};
 const plotCarvePlanes = [earthClip,
   new THREE.Plane(new THREE.Vector3(-1, 0, 0), PLOT_RECT.minX),
   new THREE.Plane(new THREE.Vector3(1, 0, 0), -PLOT_RECT.maxX),
@@ -68,7 +68,7 @@ const plotCarvePlanes = [earthClip,
 let plotCutReady = false;
 let planWash = null;
 let flight, hotspots, planMode=false, roomData, interiorLights=true, soilCap=null, stencilCaps=null;
-let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox, contextBox, lighting, siteContext;
+let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox, basementFrame, contextBox, lighting, siteContext;
 let selected = 'neighborhood', ready = false, loading = false;
 let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations, walk;
 let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;
@@ -209,7 +209,7 @@ function frame(initial=false) {
   if(!buildingBox)return;
   const floor=selected.startsWith('f'),aspect=host.clientWidth/Math.max(1,host.clientHeight);
   let box=(floor?floorBoxes[Number(selected[1])]??buildingBox:buildingBox).clone();
-  if(selected==='f0')box.union(gardenBox);
+  if(selected==='f0'&&basementFrame)box.union(basementFrame);
   const center=box.getCenter(new THREE.Vector3());center.y=floor?[0,3.0996,6.3714,9.4705][Number(selected[1])]:2;
   let size=box.getSize(new THREE.Vector3());
   if(selected==='building'){
@@ -741,7 +741,8 @@ async function loadModel() {
       });
       for(const [i,b] of floorBoxes.entries())if(b.isEmpty())floorBoxes[i]=null;
     }
-    gardenBox = new THREE.Box3(new THREE.Vector3(-10.2, -4, -29.1), new THREE.Vector3(12.5, 3.4, 11));
+    gardenBox = new THREE.Box3(new THREE.Vector3(-10.2, -4, -29.1), new THREE.Vector3(12.7, 3.4, 15));
+    basementFrame = new THREE.Box3(new THREE.Vector3(-10.2, -4, -22), new THREE.Vector3(12.7, 3.4, 2));
     contextBox=buildingBox.clone();
     let infill=null;
     if(groups.has('context')){

@@ -9,39 +9,12 @@ export function smoothStep(t) {
   return t * t * (3 - 2 * t);
 }
 
-export const SECTION_POCHE = {pitch:0.14, duty:0.065, ground:[0.020,0.020,0.023], ink:[0.32,0.31,0.29], strength:0.62};
 export const SECTION_FILL = [0.086, 0.098, 0.105];
 export const FURNITURE_FILL = [0.706, 0.725, 0.729];
+export const SOIL_FILL = [0.352, 0.325, 0.286];
 export function createFillMaterial(rgb) {
   return new THREE.MeshBasicMaterial({color:new THREE.Color(rgb[0],rgb[1],rgb[2]),
     side:THREE.DoubleSide, toneMapped:false});
-}
-export const SOIL_POCHE = {pitch:0.55, duty:0.075, ground:[0.580,0.568,0.527], ink:[0.015,0.015,0.016], strength:1.0};
-export function createHatchMaterial({pitch, duty, ground, ink, strength=0.62}, {cut=false, side=THREE.DoubleSide}={}) {
-  const material = new THREE.ShaderMaterial({side,
-    uniforms: cut ? {uCut:{value:1e9}} : {},
-    vertexShader: `varying vec3 worldPosition;
-      void main() {
-        vec4 world = modelMatrix * vec4(position, 1.0);
-        worldPosition = world.xyz;
-        gl_Position = projectionMatrix * viewMatrix * world;
-      }`,
-    fragmentShader: `varying vec3 worldPosition;
-      ${cut ? 'uniform float uCut;' : ''}
-      // how much of one period is inked, and the ruling's antiderivative
-      const float INK = ${(2 * duty).toFixed(5)};
-      float ruled(float x) { return floor(x) * INK + min(fract(x), INK); }
-      void main() {
-        ${cut ? 'if (worldPosition.y > uCut) discard;' : ''}
-        float v = (worldPosition.x + worldPosition.y + worldPosition.z) / ${pitch.toFixed(4)};
-        float w = max(fwidth(v), 1e-5);
-        float hatch = clamp((ruled(v + 0.5 * w) - ruled(v - 0.5 * w)) / w, 0.0, 1.0);
-        gl_FragColor = vec4(mix(vec3(${ground.map(v=>v.toFixed(3)).join(', ')}), vec3(${ink.map(v=>v.toFixed(3)).join(', ')}), hatch * ${strength.toFixed(2)}), 1.0);
-        #include <tonemapping_fragment>
-        #include <colorspace_fragment>
-      }`
-  });
-  return material;
 }
 
 export function createWallCaps(atlas) {
@@ -104,10 +77,10 @@ export function createSoilCap(capScene) {
         !/^R42[_ ]F0[_ ]site[_ ]section[_ ]field$/i.test(object.name)) sources.push(object);
   });
   if (!sources.length) return null;
-  const material = createHatchMaterial(SOIL_POCHE);
+  const material = createFillMaterial(SOIL_FILL);
   for (const source of sources) {
     const mesh = new THREE.Mesh(source.geometry, material);
-    mesh.name = 'Solid hatched soil cross section';
+    mesh.name = 'Solid soil cross section';
     mesh.applyMatrix4(source.matrixWorld);
     mesh.renderOrder = 2; mesh.castShadow = mesh.receiveShadow = false;
     source.geometry = null;
