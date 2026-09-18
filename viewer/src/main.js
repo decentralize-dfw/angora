@@ -34,6 +34,7 @@ import {referenceProfile} from './render-profile.js';
 import { sectionHeight, smoothStep, createWallCaps, createSoilCap, SOIL_CUT_HEIGHT } from './section.js';
 import { createStencilCaps, createInteriorPoche } from './section-stencil.js';
 import { createContextInfill, infillBuildings } from './context-infill.js';
+import { splitPlotFoliage } from './plot-foliage.js';
 import { createWalkLocator } from './walk-locator.js';
 import { t, roomName, applyStatic, setLang, currentLang } from './i18n.js';
 
@@ -71,7 +72,7 @@ let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox, con
 let selected = 'f3', ready = false, loading = false;
 let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations, walk;
 let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;
-let deviceQA,assetRevision=null,pendingCapture=null,contextLost=false,massing=null,lift=null;
+let deviceQA,assetRevision=null,pendingCapture=null,contextLost=false,massing=null,lift=null,plotFoliage=null;
 let floorBoxes=[];
 let mergedBasement=null;
 let locator=null,locationKey='',locationPendingKey='',locationPendingSince=0;
@@ -180,6 +181,7 @@ function renderFrame(time) {
     }
     const lightChanging=lighting.update(time);
     const massingChanging=massing?.update(time);
+    const foliageChanged=plotFoliage?.setMassed((massing?.value??0)>.5);
     const liftChanging=lift?.update(time);
     annotations?.update(selected,roomNamesVisible,measurementsVisible,Boolean(transition||flight?.active),walk?.active,activeCamera,walk?.room);
     hotspots?.update(activeCamera,walk?.active&&!walk.xrActive&&!walk.route);
@@ -192,7 +194,7 @@ function renderFrame(time) {
     }
     deviceQA?.sample(time,{draw_calls:renderer.info.render.calls,triangles:renderer.info.render.triangles,
       drawing_buffer:`${renderer.domElement.width}×${renderer.domElement.height}`,view:walk?.active?`${selected}:walk`:selected});
-    if(changing||transition||flying||lightChanging||massingChanging||liftChanging||deviceQA?.active)invalidate();
+    if(changing||transition||flying||lightChanging||massingChanging||foliageChanged||liftChanging||deviceQA?.active)invalidate();
 }
 
 function resize() {
@@ -765,6 +767,8 @@ async function loadModel() {
       prepareContextSurfaces(groups.get('context'),lighting.horizonColour);
       massing=createContextMassing(groups.get('context'),PLOT_RECT);
       massing.set(selected,true);
+      plotFoliage=splitPlotFoliage(groups.get('context'),PLOT_RECT);
+      plotFoliage?.setMassed(massing.value>.5);
     }
     fullHeight = buildingBox.max.y + 2;
     caps = createWallCaps(results[2].value); scene.add(caps.group);
