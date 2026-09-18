@@ -1,4 +1,14 @@
-const STAIR_RISE_M = 0.35;
+// R46 | Where the visitor actually IS, not where they last clicked.
+//
+// The walk surface has no room ids per cell, but it has the one thing a
+// containment test really needs: walls are unwalkable. So every walkable
+// cell is claimed once, at load, by the station whose wavefront reaches it
+// first on foot (multi-source BFS on the furniture-free grid). A zone can
+// only spill into the next room through a doorway, which is exactly where
+// a person would say the room changes. Stairs and outdoor ground are named
+// as themselves rather than inheriting whichever room the flood reached
+// them from.
+const STAIR_RISE_M = 0.35;      // this far off the storey datum reads as stairs
 export const FLOOR_DATUMS = [0, 3.0996, 6.3714, 9.4705];
 
 export function createWalkLocator(surface, footprint) {
@@ -30,6 +40,8 @@ export function createWalkLocator(surface, footprint) {
     }
   }
   return {
+    // floor comes from the walk itself (it already tracks the storey the
+    // feet are on); this answers WHAT the feet are standing in.
     locate(x, z, floor) {
       const cell = surface.index(x, z);
       if (cell < 0 || floor < 0 || floor > 3) return null;

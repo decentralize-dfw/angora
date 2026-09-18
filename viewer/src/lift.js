@@ -1,16 +1,33 @@
 import * as THREE from 'three';
 import {floorDatums} from './section.js';
 
+// The delivery carries the lift as data the viewer used to throw away: a 46 s
+// three-stop clip on the node `R39 lift cabin travel` in level-0.glb, and one
+// hinged landing door per served floor (17 leaf nodes each), delivered fully
+// open on all three floors at once. Playback is deliberately not a free
+// running loop: measured against the section cut, a travelling cabin is fully
+// erased once it climbs 1.595 m above the viewed datum, the Villa view hides
+// it behind the opaque envelope, and a permanent animation would force a
+// permanent redraw of the whole 40 MB scene. So outside the interior walk the
+// cabin simply parks at the selected floor with that floor's door open and
+// the other two shut - inside the frame the view change already invalidated -
+// and inside the walk one control calls it or sends it away, playing the
+// native 0.31 m/s travel for real in the one place it can be watched.
 export const CABIN_NODE = 'R39_lift_cabin_travel';
 export const SERVED_FLOORS = [0, 1, 2];
 export const LEAF_NODE = /^Lift_(door_stile|door_rail|door_pull|floral_textured_glass|floral_lead_stem|glass_rose_lead|stained-glass_leaf)\d*$/;
 export const HINGE_X = -1.53, HINGE_Z = -1.33;
-export const CLOSED_ROTATION_Y = Math.PI / 2;
+export const CLOSED_ROTATION_Y = Math.PI / 2; // delivered pose 0 = fully open
 export const OUTWARD_OPEN_ROTATION_Y = Math.PI / 2;
 export const DOOR_SWING_S = 1.0;
 export const FLOOR_SEND_LABEL = ['Bodrum katına gönder', 'Giriş katına gönder', '1. kata gönder'];
 const CLIP_WRAP = t => ((t % 46) + 46) % 46;
 
+// The park schedule is read out of the clip rather than hardcoded: a stop is a
+// pair of consecutive keys with equal height, parked at the window's midpoint,
+// and the height names its floor by the nearest datum - the delivered stops
+// land on the datums to float32 (worst 1.2e-7 m). Throws rather than guesses
+// when a future export changes the shape of the travel.
 export function readStops(clip) {
   const track = clip.tracks.find(t => t.name === CABIN_NODE + '.position');
   if (!track) throw Error('Lift clip has no cabin position track');
@@ -26,6 +43,9 @@ export function readStops(clip) {
   return stops;
 }
 
+// Single-direction routing with no intermediate dwell, verified against the
+// clip: forward for the next floor in the 0-1-2-0 cycle, reverse otherwise -
+// the reverse leg is what lets a basement-to-attic trip skip the middle stop.
 export function route(stops, from, to) {
   const dir = to === (from + 1) % 3 ? 1 : -1;
   const a = stops.get(from), b = stops.get(to);
@@ -34,6 +54,9 @@ export function route(stops, from, to) {
 
 export function createLift({groups, clips, clipPlane, fullHeight, shadowsDirty, onSettled}) {
   const clip = clips.find(c => c.tracks?.some(t => t.name.startsWith(CABIN_NODE + '.')));
+  // R44 merged the storeys into one villa part, so the cabin and every
+  // landing-door leaf live in the same group and a leaf's floor is read off
+  // its own standing height rather than off which file it arrived in.
   const root = groups.get('villa') ?? groups.get('level-0');
   if (!clip || !root) return null;
   const stops = readStops(clip);
@@ -42,6 +65,9 @@ export function createLift({groups, clips, clipPlane, fullHeight, shadowsDirty, 
   action.play(); action.paused = true;
   const scrub = t => {action.time = CLIP_WRAP(t); mixer.update(0);};
 
+  // One pivot per served floor, standing on the hinge line the delivered
+  // leaves swing about; Object3D.attach keeps every leaf's world pose, so
+  // rotation.y = 0 reproduces the delivered open door bit for bit.
   const leavesByFloor = new Map(SERVED_FLOORS.map(f => [f, []]));
   const box = new THREE.Box3();
   root.updateMatrixWorld(true);
@@ -77,6 +103,8 @@ export function createLift({groups, clips, clipPlane, fullHeight, shadowsDirty, 
       : 1 - pivot.rotation.y / CLOSED_ROTATION_Y;
   };
 
+  // Landing doors stay shut until the user calls the lift. Closed-pose leaves
+  // then swing toward the landing, away from the cabin interior.
   let floor = 0, trip = null, walkActive = false, walkFloor = null;
   scrub(stops.get(0));
   for (const f of SERVED_FLOORS) setDoor(f, 0);
@@ -87,6 +115,9 @@ export function createLift({groups, clips, clipPlane, fullHeight, shadowsDirty, 
     get travelling() {return Boolean(trip);},
     get floor() {return floor;},
     get walkFloor() {return walkFloor;},
+    // Villa, neighbourhood and region leave the cabin where it is; a floor view
+    // parks it at that floor (the attic waits at the highest served landing),
+    // instantly, inside the frame the view change already redraws.
     park(view) {
       const f = view === 'f3' ? 2 : /^f[0-2]$/.test(view) ? Number(view[1]) : null;
       if (f === null || (f === floor && !trip)) return;
@@ -95,6 +126,8 @@ export function createLift({groups, clips, clipPlane, fullHeight, shadowsDirty, 
       for (const g of SERVED_FLOORS) setDoor(g, 0);
       shadowsDirty();
     },
+    // The clip may only run when nothing is cut: the walk sets the section
+    // plane to fullHeight, and every other state would slice the moving cabin.
     canRun() {return walkActive && clipPlane.constant >= fullHeight - 0.001 && stops.has(this.target());},
     target() {
       const here = served(walkFloor ?? floor);

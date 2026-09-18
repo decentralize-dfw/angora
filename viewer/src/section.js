@@ -9,28 +9,88 @@ export function smoothStep(t) {
   return t * t * (3 - 2 * t);
 }
 
-export const SECTION_FILL = [0.086, 0.098, 0.105];
-export const FURNITURE_FILL = [0.706, 0.725, 0.729];
-export const SOIL_FILL = [0.352, 0.325, 0.286];
-export function createFillMaterial(rgb) {
-  return new THREE.MeshBasicMaterial({color:new THREE.Color(rgb[0],rgb[1],rgb[2]),
-    side:THREE.DoubleSide, toneMapped:false});
+// One hatch shader, parameterised. What is cut is drawn the way a section
+// drawing draws it: the material the plane passes through goes black, and the
+// ruling rides on top of the black rather than replacing it.
+//
+// The ruling is filtered analytically, which is the whole of R42's fix. Until
+// now the line was drawn `duty + fwidth(v)` wide with a smoothstep, so the
+// pixel footprint was added to the line rather than used to resolve it: at the
+// basement zoom one pixel is about a sixth of the earth's period, so a ruling
+// authored at 7% of the period came out inked over 40% of it, full black at
+// the core - the bold barcode the review calls "çok kaba". Thinning `duty`
+// could not help, because the width the shader drew was the pixel, not the
+// duty.
+//
+// So the fragment now integrates the square wave over the pixel instead. I(x)
+// is the wave's antiderivative, and (I(b) - I(a)) / (b - a) is the exact mean
+// ink over the pixel's own footprint. The line keeps the world width it was
+// authored with and, once it is finer than a pixel, greys out instead of
+// fattening - and at any distance the field settles on exactly the `duty` it
+// was given rather than on whatever the zoom made of it. That also retires
+// `fade`, which existed to pull the over-inked far field back down by hand.
+//
+// The ruling runs on x + y + z rather than x + z so that it crosses a vertical
+// face at 45° as it does a horizontal one. On the cut plane itself, where y is
+// constant, that is the same ruling shifted by a constant - but the site
+// body's skirt is vertical, and on x + z alone it would have come out striped
+// one way on its east face and the other way on its north.
+//
+// The earth is drawn the other way up from masonry: a pale ground carrying a
+// thin dark line on a 0.55 m period, per "siyah çizgileri incelt arasındaki
+// mesafeyi arttır. daha kibar olmalı." With the filter honest, the duty is the
+// tone the field actually takes at any zoom, and 7% - what the old shader was
+// nominally set to while drawing 40% - turns out to be too little to read as
+// hatching at all in the plan view: 4 cm of line every 55 cm is two thirds of
+// a pixel there. 15% is the setting that reads as a ruled field at the plan
+// zoom and stays a delicate line close up, and it is still a quarter of the
+// ink the review was shown. `strength` is how much of the ink the line
+// actually takes - masonry keeps its 0.62 so its rule stays a highlight rather
+// than a black wire; the earth's line is the ink itself.
+export const SECTION_POCHE = {pitch:0.14, duty:0.065, ground:[0.020,0.020,0.023], ink:[0.32,0.31,0.29], strength:0.62};
+export const SOIL_POCHE = {pitch:0.55, duty:0.075, ground:[0.580,0.568,0.527], ink:[0.015,0.015,0.016], strength:1.0};
+export function createHatchMaterial({pitch, duty, ground, ink, strength=0.62}) {
+  return new THREE.ShaderMaterial({side:THREE.DoubleSide,
+    vertexShader: `varying vec3 worldPosition;
+      void main() {
+        vec4 world = modelMatrix * vec4(position, 1.0);
+        worldPosition = world.xyz;
+        gl_Position = projectionMatrix * viewMatrix * world;
+      }`,
+    fragmentShader: `varying vec3 worldPosition;
+      // how much of one period is inked, and the ruling's antiderivative
+      const float INK = ${(2 * duty).toFixed(5)};
+      float ruled(float x) { return floor(x) * INK + min(fract(x), INK); }
+      void main() {
+        float v = (worldPosition.x + worldPosition.y + worldPosition.z) / ${pitch.toFixed(4)};
+        float w = max(fwidth(v), 1e-5);
+        float hatch = clamp((ruled(v + 0.5 * w) - ruled(v - 0.5 * w)) / w, 0.0, 1.0);
+        gl_FragColor = vec4(mix(vec3(${ground.map(v=>v.toFixed(3)).join(', ')}), vec3(${ink.map(v=>v.toFixed(3)).join(', ')}), hatch * ${strength.toFixed(2)}), 1.0);
+        #include <tonemapping_fragment>
+        #include <colorspace_fragment>
+      }`
+  });
 }
 
+// These contours come from opposite source wall faces. They are independent of
+// camera direction and of the inconsistent winding of the recovered CAD skin.
 export function createWallCaps(atlas) {
   const group = new THREE.Group(); group.name = 'Geometric wall sections';
   const slices = atlas.slices;
   if (!slices?.length || atlas.coordinate_system !== 'glTF_XZ') throw Error('Invalid section atlas');
-  const wallFill = createFillMaterial(SECTION_FILL);
-  const furnitureFill = createFillMaterial(FURNITURE_FILL);
-  const build = (name, fill) => {
-    const mesh = new THREE.Mesh(new THREE.BufferGeometry(), fill);
+  const material = createHatchMaterial(SECTION_POCHE);
+  // Three layers, one material. The walls and the fixed bodies the plane cuts
+  // - door leaves, frames, tall units, cisterns - are always drawn; the
+  // furniture poché is a mesh of its own so the furniture toggle can take it
+  // away with the furniture that casts it, rather than leaving its cut behind.
+  const build = (name) => {
+    const mesh = new THREE.Mesh(new THREE.BufferGeometry(), material);
     mesh.name = name; mesh.renderOrder = 2; group.add(mesh); return mesh;
   };
   const layers = [
-    {mesh: build('Solid wall cross section', wallFill), p: 'p', i: 'i'},
-    {mesh: build('Solid fixture cross section', wallFill), p: 'q', i: 'j'},
-    {mesh: build('Solid furniture cross section', furnitureFill), p: 'fq', i: 'fj', furniture: true},
+    {mesh: build('Solid hatched wall cross section'), p: 'p', i: 'i'},
+    {mesh: build('Solid hatched fixture cross section'), p: 'q', i: 'j'},
+    {mesh: build('Solid hatched furniture cross section'), p: 'fq', i: 'fj', furniture: true},
   ];
   let current = -1, furnitureVisible = true;
   function rebuild(index) {
@@ -66,6 +126,23 @@ export function createWallCaps(atlas) {
   }, setFurnitureVisible(value) {furnitureVisible = value;}};
 }
 
+// The basement cut is the one height where the earth is part of the section:
+// the plot soil's cross-section is 198.05 m2 at y=1.6000 and exactly zero at
+// the two upper cuts. section-caps.glb authors that one face (197.89 m2,
+// 0.079% off the analytic slice of the volume it caps), so the cap is taken
+// from the delivery rather than synthesised - a welded re-slice of the Draco
+// geometry recovers the right area at 1.6 m but returns nonsense at other
+// heights, which is exactly why the authored face exists.
+//
+// R42 adds a second face in the same material: the site field. The authored
+// one covers the earth the plane passes through; it cannot cover the 48 m2
+// under the entrance wing, where the CAD excavated the footprint and then
+// built no basement, nor the 283 m2 of plot ground that lies below the cut
+// rather than through it, and the review asks for both. The field is draped
+// over the ground it describes instead of floating on the cut plane, so the
+// basement view can be tilted without a sheet appearing in mid air. Every face
+// in the material is collected here, so a cap added to the delivery needs no
+// change in the viewer.
 export const SOIL_CUT_HEIGHT = 1.6;
 export function createSoilCap(capScene) {
   const group = new THREE.Group(); group.name = 'Authored soil section';
@@ -77,12 +154,13 @@ export function createSoilCap(capScene) {
         !/^R42[_ ]F0[_ ]site[_ ]section[_ ]field$/i.test(object.name)) sources.push(object);
   });
   if (!sources.length) return null;
-  const material = createFillMaterial(SOIL_FILL);
+  const material = createHatchMaterial(SOIL_POCHE);
   for (const source of sources) {
     const mesh = new THREE.Mesh(source.geometry, material);
-    mesh.name = 'Solid soil cross section';
+    mesh.name = 'Solid hatched soil cross section';
     mesh.applyMatrix4(source.matrixWorld);
     mesh.renderOrder = 2; mesh.castShadow = mesh.receiveShadow = false;
+    // keep this geometry, drop the rest of the cap scene and its unused maps
     source.geometry = null;
     group.add(mesh);
   }
@@ -95,6 +173,8 @@ export function createSoilCap(capScene) {
     }
   });
   return {group, update(height, visible) {
+    // the authored face exists at exactly one height; it shows when the earth
+    // plane sits on it and hides for every other state
     group.visible = visible && Math.abs(height - SOIL_CUT_HEIGHT) < 0.001;
   }};
 }

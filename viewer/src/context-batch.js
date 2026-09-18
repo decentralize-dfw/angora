@@ -1,5 +1,14 @@
 import * as THREE from 'three';
 
+// The download shares repeated CAD components. Bake their transforms once
+// after decoding so the whole neighborhood draws in tens of calls instead of
+// thousands - but not into one mesh per material: a single neighbourhood-wide
+// mesh forfeits frustum culling, and measured against the real villa and
+// floor cameras 71-75% of the context is off screen. So solid buckets split
+// on a 48 m ground grid, each chunk with its own bounds, and the culler earns
+// that geometry back. The continuous site skins - terrain, soil, roads -
+// stay whole: their welded normal smoothing and the horizon fade must not
+// meet a chunk seam, and at 50k triangles they are not worth culling.
 const CHUNK_M=48;
 const CONTINUOUS_SITE=/grass|soil|asphalt|terrain|curb/i;
 export function batchContext(root) {

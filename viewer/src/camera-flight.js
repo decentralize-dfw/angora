@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import {smoothStep} from './section.js';
 const FLIGHT_DURATION=1250;
 
+// One camera and one model for both plan and isometric views. Moving in
+// spherical coordinates avoids passing through the building during a flight.
 export class CameraFlight {
   constructor(camera, controls, resize, invalidate) {
     Object.assign(this,{camera,controls,resize,invalidate});this.active=null;
@@ -9,6 +11,9 @@ export class CameraFlight {
   go({target,polar,span,zoom=1,azimuth,fov},instant=false) {
     const {camera,controls}=this;
     const before=new THREE.Spherical().setFromVector3(camera.position.clone().sub(controls.target));
+    // The lens rides the flight: a plan toggle swaps the 35-degree walking
+    // lens for the 4-degree drawing lens, and doing that instantly reads as
+    // a zoom jolt before the move. Radius is sized for the DESTINATION lens.
     const fovEnd=fov??camera.fov;
     const radius=span/(2*Math.tan(THREE.MathUtils.degToRad(fovEnd/2)));
     const desired=azimuth??before.theta;
@@ -22,6 +27,8 @@ export class CameraFlight {
   }
   update(time) {
     if(!this.active)return false;
+    // Comparing against the stored deadline avoids floating-point subtraction
+    // leaving t at 0.9999999999999998 at the exact final frame.
     const a=this.active,done=time>=a.endTime;
     const t=done?1:THREE.MathUtils.clamp((time-a.start)/FLIGHT_DURATION,0,1),s=smoothStep(t),lerp=THREE.MathUtils.lerp;
     const polar=lerp(a.from.polar,a.to.polar,s);

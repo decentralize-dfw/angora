@@ -18,11 +18,17 @@ test('The shipped full scene retains lower stairs and full-height floors in ever
     const data = fs.readFileSync(new URL(asset.file, dir)); total += data.length;
     assert.equal(createHash('sha256').update(data).digest('hex'), asset.sha256);
     assert.equal(data.length, asset.bytes);
+    // The merged villa is the largest part at 12.5 MB; the cap sits just
+    // above the biggest shipped file so growth is a decision, not a drift.
     assert.ok(data.length < 13400000, asset.id + ' individual transfer budget');
     assert.equal(asset.section_elevation_m, null, 'no baked upper or lower cut');
     const gltf = JSON.parse(data.subarray(20, 20 + data.readUInt32LE(12)).toString().trim());
     assert.ok(gltf.extensionsRequired.includes('KHR_draco_mesh_compression'));
     if (asset.id === 'villa') {
+      // R44 merged the four storeys and the envelope into this one part; the
+      // whole building's height must survive uncut, every storey's cut plane
+      // must fall inside its bounds, and the joined nodes must still carry
+      // the categories the furniture toggle and the caps rely on
       let ymax = -Infinity, ymin = Infinity;
       const categories = new Set();
       for (const node of gltf.nodes) if (node.extras?.category) categories.add(node.extras.category);
@@ -44,7 +50,7 @@ test('The shipped full scene retains lower stairs and full-height floors in ever
         'the merge keeps the building under a thousand draw calls');
     }
   }
-  assert.ok(total < 46000000, 'whole-scene transfer budget');
+  assert.ok(total < 46000000, 'whole-scene transfer budget'); // Merged villa + garden + context.
 });
 
 test('Real section geometry fills the wall and keeps gallery, stair and bedroom clear', () => {
@@ -67,10 +73,18 @@ test('Real section geometry fills the wall and keeps gallery, stair and bedroom 
   }
   assert.ok(hits(-5.132, 5) > 0, 'solid cross section between source faces -5.232 and -5.032');
   for (const [x, y] of [[1, .4], [2, 1.2], [-3.35, 6.9]]) assert.equal(hits(x, y), 0, 'occupied space must remain open');
+  // Intermediate cap follows the continuously moving plane, independent of camera orientation.
   caps.update(7.95, true); assert.equal(cap.position.y, 7.95);
   caps.update(30, false); assert.equal(caps.group.visible, false);
 });
 
+// The R27 repack rebuilt the context asset without EXT_mesh_gpu_instancing, so
+// the manifest's `gpu_instancing` block became `exported_mesh_nodes` and
+// `shared_meshes` and this test was pinning a snapshot that had stopped
+// shipping. What it was actually protecting survives either way: whatever the
+// node graph does with transforms, walking it has to land on exactly the world
+// bounds the manifest declares, and the 2507 components must not each carry
+// their own copy of the geometry.
 test('The context asset reproduces its declared world bounds and shares its geometry',()=>{
   const dir=new URL('../public/models/full/',import.meta.url);
   const manifest=JSON.parse(fs.readFileSync(new URL('manifest.json',dir)));
@@ -89,6 +103,8 @@ test('The context asset reproduces its declared world bounds and shares its geom
   function visit(id,parent){
     const n=gltf.nodes[id],world=parent.clone().multiply(n.matrix?new THREE.Matrix4().fromArray(n.matrix):transform(n.translation,n.rotation,n.scale));
     if(n.mesh!==undefined){
+      // instanced or not: an instanced node stands for TRANSLATION.count of
+      // them, a plain one for itself
       const attrs=n.extensions?.EXT_mesh_gpu_instancing?.attributes;
       const count=attrs?gltf.accessors[attrs.TRANSLATION].count:1;components+=count;
       for(let i=0;i<count;i++){

@@ -14,7 +14,7 @@ export function createSiteContext(data,host,onVilla){
   const scale=document.querySelector('#model-scale'),bar=scale.querySelector('i'),label=scale.querySelector('span');
   const point=new THREE.Vector3(),a=new THREE.Vector3(),b=new THREE.Vector3(),right=new THREE.Vector3();
   return {update(view,camera,target,transitioning,walking){
-    const active=view==='neighborhood'&&!transitioning&&!walking;
+    const active=['region','neighborhood'].includes(view)&&!transitioning&&!walking;
     overlay.hidden=!active;scale.hidden=walking||transitioning;
     if(!camera||!target)return;
     camera.updateMatrixWorld();
@@ -26,6 +26,8 @@ export function createSiteContext(data,host,onVilla){
       if(item.el.hidden)continue;
       candidates.push({x,y,entry:item,width:item.el.offsetWidth,height:item.el.offsetHeight});
     }
+    // Horizontal ground-plane model distance at the orbit target, not a
+    // surveyed cadastral dimension or screen-wide perspective claim.
     right.set(1,0,0).applyQuaternion(camera.quaternion);right.y=0;right.normalize();
     a.copy(target).project(camera);b.copy(target).add(right).project(camera);
     const ppm=Math.abs(b.x-a.x)*w/2;

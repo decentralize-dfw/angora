@@ -1,3 +1,10 @@
+// R46 | Two complete languages, one source of truth.
+// Turkish is the property's own language; English serves international
+// demonstrations. French/Italian slot in as further columns when verified
+// translations exist - nothing here is structural to Turkish.
+// Static DOM carries data-i18n / data-i18n-label attributes; dynamic code
+// asks t(). Room names translate through ROOM_TERMS so drawing names stay
+// the source of truth and only their language changes.
 const STRINGS = {
   tr: {
     scaleRegion: 'Bölge', scaleStreet: 'Yakın çevre', scaleVilla: 'Villa',
@@ -16,8 +23,7 @@ const STRINGS = {
     interiorLights: 'İç ışıklar', soundOff: 'Arayüz sesi kapalı', soundOn: 'Arayüz sesi açık',
     solarNote: 'Yerel saat · Görsel gün ışığı çalışması; sertifikalı analiz değildir',
     cutLightNote: 'Kesit görünümündeki aydınlık gösterim amaçlıdır; kapalı hacim ışığı 360° turda görülür.',
-    explore: 'İçeride gez', exploreTitle: 'Bulunduğun katın ortasından 360° tura başla',
-    autoRotate: 'Otomatik dön', exitWalk: 'Kata dön', enterVR: 'VR’a gir',
+    explore: 'İçeride gez', exitWalk: 'Kata dön', enterVR: 'VR’a gir',
     roomTour: 'Oda turu', goRoom: 'Gezilecek oda', lens: 'Görüş açısı',
     lift: 'Asansör', liftHere: 'bu katta',
     walkHelp: 'Sürükle: 360° bak · Yerdeki noktalara dokun: ilerle',
@@ -73,8 +79,7 @@ const STRINGS = {
     interiorLights: 'Interior lights', soundOff: 'Interface sound off', soundOn: 'Interface sound on',
     solarNote: 'Local time · Illustrative daylight study; not a certified analysis',
     cutLightNote: 'Light in cutaway views is illustrative; enclosed-room light is shown in the 360° tour.',
-    explore: 'Explore inside', exploreTitle: 'Start the 360° tour at the centre of this storey',
-    autoRotate: 'Auto-rotate', exitWalk: 'Back to floor', enterVR: 'Enter VR',
+    explore: 'Explore inside', exitWalk: 'Back to floor', enterVR: 'Enter VR',
     roomTour: 'Room tour', goRoom: 'Go to room', lens: 'Field of view',
     lift: 'Lift', liftHere: 'on this floor',
     walkHelp: 'Drag: look around · Tap the floor: walk there',
@@ -114,6 +119,8 @@ const STRINGS = {
     piListingNote: 'Listing areas are from RE/MAX P56131836. ≈ marks the modelled ground surface within interpreted garden boundaries, or a photo-based pool estimate; not an on-site measurement or the plot area.',
   },
 };
+// Drawing room names, translated as terms - never invented, only rendered
+// in the viewer's language. Anything unmatched stays in Turkish.
 const ROOM_TERMS = [
   [/^salon$/i, 'Living room'], [/^mutfak$/i, 'Kitchen'], [/^yemek alanı$/i, 'Dining area'],
   [/^oturma alanı$/i, 'Sitting area'], [/^antre$/i, 'Entry hall'], [/^giriş$/i, 'Entrance'],
@@ -131,7 +138,7 @@ const ROOM_TERMS = [
   [/^yan bahçe$/i, 'Side garden'], [/^otopark$/i, 'Parking'], [/açık balkon/i, 'Open balcony'],
 ];
 let lang = (() => {
-  if (typeof location === 'undefined') return 'tr';
+  if (typeof location === 'undefined') return 'tr';   // node-side tests
   const forced = new URLSearchParams(location.search).get('lang');
   if (forced === 'en' || forced === 'tr') return forced;
   try { return localStorage.getItem('angora-lang') === 'en' ? 'en' : 'tr'; } catch { return 'tr'; }
@@ -143,6 +150,8 @@ export function roomName(name) {
   const hit = ROOM_TERMS.find(([rx]) => rx.test(name.trim()));
   return hit ? hit[1] : name;
 }
+// static DOM: <el data-i18n="key"> for text, data-i18n-label for aria-label,
+// data-i18n-title for title. Called at boot and again on every switch.
 export function applyStatic(root = document) {
   for (const el of root.querySelectorAll('[data-i18n]')) el.textContent = t(el.dataset.i18n);
   for (const el of root.querySelectorAll('[data-i18n-label]')) el.setAttribute('aria-label', t(el.dataset.i18nLabel));
@@ -152,7 +161,7 @@ export function applyStatic(root = document) {
 export function setLang(next, onChange) {
   if (next === lang) return;
   lang = next;
-  try { localStorage.setItem('angora-lang', next); } catch { }
+  try { localStorage.setItem('angora-lang', next); } catch { /* private mode */ }
   applyStatic();
   onChange?.(next);
 }

@@ -1,11 +1,38 @@
+// The last stage before the screen: exposure, grade, vignette, then the curve.
+//
+// The chain used to end at a bare output pass, which applies exposure and the
+// curve and nothing else - so there was no point at which the image could be
+// shaped, and no place to put one that would not be wrong. The reference is
+// explicit about where this belongs: grade and vignette happen HERE, before the
+// tone curve and still in linear. Its own earlier build ran them after the
+// output pass, in screen space, and had to bolt a second soft shoulder on
+// afterwards to stop the result clipping. Ahead of the curve none of that is
+// needed - whatever these do to a value, the curve still has no top.
+//
+// The vignette only ever multiplies down, so it cannot brighten anything.
+//
+// The curve is AgX - the same transform three's own AgXToneMapping runs,
+// written out because this shader is now the last thing between the scene and
+// the screen. It replaced the Stephen Hill ACES fit: ACES pushed saturated
+// hues around (sky toward cyan, low sun toward orange-red) and clipped bright
+// render-white walls to a hard shoulder, where AgX rolls off without the hue
+// skew. The renderer keeps its own matching AgX setting for the phone and XR
+// paths, which bypass this chain.
 import {Vector3} from 'three';
 import {referenceProfile} from './render-profile.js';
 
+// Restrained, and inside the range the reference's own lighting rigs use
+// (saturation 0.94-1.06, gain 0.90-1.05, lift up to 0.014), except saturation,
+// which sits a step higher because AgX itself desaturates toward the ends of
+// its range where ACES oversaturated: a little cool in the shadows where open
+// sky fills them, a little warm in the highlights where the sun is. This is
+// the dial, not a law - it is one place, and every value here is separable.
 export const GRADE = Object.freeze({
   lift: Object.freeze([0.004, 0.005, 0.007]),
   gain: Object.freeze([1.010, 1.000, 0.985]),
   saturation: 1.08,
   grain: 0,
+  // inner radius, strength, vertical centre - the reference's own geometry.
   vignette: Object.freeze([0.55, 0.10, 0.46]),
 });
 

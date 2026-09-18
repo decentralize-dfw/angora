@@ -3,6 +3,9 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 
+// The phone opens the same scene through a derived manifest: simplified
+// geometry, capped textures, no relief maps. These checks keep the derived
+// set honest against the full one - same identity, strictly smaller cost.
 const FULL = new URL('../public/models/full/', import.meta.url);
 const full = JSON.parse(readFileSync(new URL('manifest.json', FULL), 'utf8'));
 const mobile = JSON.parse(readFileSync(new URL('manifest-mobile.json', FULL), 'utf8'));
@@ -12,6 +15,7 @@ test('The mobile manifest is the full manifest, lighter and nothing else', () =>
   assert.equal(full.profile, 'full');
   assert.equal(mobile.assets.length, 3);
   assert.deepEqual(mobile.assets.map((a) => a.id), full.assets.map((a) => a.id));
+  // the walk and the lift bind to the same native revision either way
   assert.equal(mobile.source_native_sha256, full.source_native_sha256);
   assert.deepEqual(mobile.navigation, full.navigation);
   for (const asset of mobile.assets) {

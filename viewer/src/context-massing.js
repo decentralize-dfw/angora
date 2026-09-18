@@ -1,14 +1,27 @@
 import * as THREE from 'three';
 import {gradeKey} from './exterior-grade.js';
 
+// Two readings of the same neighbourhood geometry. Far out the context keeps
+// its photographic materials; once the camera settles on the villa the same
+// buildings fade to a white massing model so the property reads as the subject
+// and the neighbours as its setting. Nothing here edits the delivered model:
+// the split, the merge and the fade are all engine state, so a re-exported
+// model inherits them untouched.
 export const MASSING_ALBEDO = '#f4f3f0';
 export const MASSING_ROUGHNESS = .86;
 export const MASSING_SPAN = 900;
 export const VEHICLE_ALBEDO = '#9ea3a8';
 
+// Neighbour blocks arrive as `B10 | KAT 0$DUVAR`, their footings as
+// `B10 foundation below BK`. Everything else in the file — terrain, roads,
+// curbs, retaining walls, planting — is site, and site never turns white.
 const BUILDING_NODE = /^B\d+(\s|$)/;
 const VEHICLE_NODE = /^R35 \| Garage vehicle(\s|$)/;
 
+// GLTFLoader renames every node on the way in: whitespace becomes `_`, the
+// track-binding characters []./: are dropped, and a repeated name picks up a
+// `_2` tail. Read the authored name back before matching it, or `B10 | KAT
+// 0$DUVAR` arrives as `B10_|_KAT_0$DUVAR` and no prefix ever matches.
 export const authoredNodeName = (name = '') => name.replace(/_/g, ' ').replace(/\s+/g, ' ').trim();
 
 const textureId = value => (value?.isTexture ? value.uuid : value === undefined ? '-' : String(value));
@@ -20,8 +33,15 @@ const semanticMaterialClass = (name='') => {
   return '';
 };
 
+// Two materials are the same material when every value that reaches a shader
+// matches. Numbered copies still collapse, but architectural roles remain
+// distinct: ceiling.003 and interior.003 can share the same RGB while needing
+// different response indoors.
 export function materialSignature(material) {
   return JSON.stringify([
+    // The exterior grade is applied by name before the merge; two materials
+    // whose values happen to match must still stay apart when only one of
+    // them will later carry a graded detail map or re-tiled repeat.
     material.type, semanticMaterialClass(material.name), gradeKey(material.name),
     material.color?.getHex(), material.roughness, material.metalness,
     material.emissive?.getHex(), material.emissiveIntensity, material.opacity, material.transparent,
@@ -35,6 +55,8 @@ export function materialSignature(material) {
   ]);
 }
 
+// Collapse duplicates onto one shared instance so the batcher, the shader cache
+// and every later pass see a single surface where the model carried several.
 export function mergeEqualMaterials(root) {
   const canonical = new Map(), signatures = new WeakMap();
   let merged = 0;
@@ -43,6 +65,8 @@ export function mergeEqualMaterials(root) {
     const materials = Array.isArray(object.material) ? object.material : [object.material];
     const resolved = materials.map(material => {
       if (!material) return material;
+      // A model file reaches this with thousands of nodes and dozens of
+      // surfaces; sign each surface once rather than once per node.
       let key = signatures.get(material);
       if (key === undefined) signatures.set(material, key = materialSignature(material));
       const first = canonical.get(key);
@@ -55,6 +79,9 @@ export function mergeEqualMaterials(root) {
   return merged;
 }
 
+// The garage car ships with seventeen authored surfaces — two paints, rims,
+// brakes, tyres, glass, trim. As a staged prop it only has to read as a car, so
+// it becomes one abstract base and stops competing with the architecture.
 export function abstractVehicle(root) {
   let base = null, count = 0;
   root.traverse(object => {
@@ -69,8 +96,20 @@ export function abstractVehicle(root) {
   return count;
 }
 
+// The plot's own earth is one node that shares two of its three surfaces with
+// geometry that must never be cut - the neighbourhood terrain and 42 block
+// foundations - so cutting the excavation open at the basement view needs the
+// soil to hold private material instances first. Runs before the building
+// split, which then still sees the original site materials.
 export const PLOT_SOIL_NODE = /^R32 \| Continuous local soil volume\b/;
 
+// R44: the road repair renamed the soil node's MESH to `Road crossing fitted
+// closed soil`, and a multi-primitive mesh reaches here as child Meshes named
+// after the mesh under a Group named after the node - so testing the Mesh's
+// own name alone silently stopped matching anything, and the earth stood
+// uncut through the basement plane. The node's authored name is still the
+// authority; it is just read off the object or any ancestor, whichever
+// carries it.
 const inPlotSoilNode = object => {
   for (let o = object; o; o = o.parent)
     if (PLOT_SOIL_NODE.test(authoredNodeName(o.name))) return true;
@@ -97,8 +136,16 @@ export function splitContextSoil(root) {
   return root;
 }
 
+// A delivery whose manifest names a context file as the neighbour-buildings
+// part carries no `B##` node identity - the file itself IS the identity. In
+// that role everything is building except what is plainly site: planting
+// stays green, and the plot's own boundary wall and the settlement's
+// retaining stone stay photographic like the classic set's site always did.
 const ROLE_SITE_NODE = /foliage|leaves|leaf|hedge|shrub|tree|grass|boundary limestone|surrounding retaining/i;
 
+// Give the neighbour blocks their own material instances wherever they share one
+// with the site, so whitening the buildings cannot reach the curbs that happen to
+// use the same paving surface.
 export function splitContextBuildings(root, {role} = {}) {
   const isBuilding = object => role === 'buildings'
     ? !ROLE_SITE_NODE.test(authoredNodeName(object.name))
@@ -130,51 +177,37 @@ export function splitContextBuildings(root, {role} = {}) {
   return root;
 }
 
-export function createContextMassing(root, plotRect = null) {
+// One shared uniform drives every whitened surface, so the fade costs a single
+// float per frame and the buildings cross over together instead of in bands.
+export function createContextMassing(root) {
   const blend = {value: 0}, colour = {value: new THREE.Color(MASSING_ALBEDO)};
-  const rect = {value: new THREE.Vector4(plotRect?.minX ?? 0, plotRect?.minZ ?? 0, plotRect?.maxX ?? 0, plotRect?.maxZ ?? 0)};
   const attached = new Set();
-  const attach = (material, site) => {
-    attached.add(material);
-    const previous = material.onBeforeCompile, previousKey = material.customProgramCacheKey();
-    material.onBeforeCompile = (shader, renderer) => {
-      previous.call(material, shader, renderer);
-      shader.uniforms.massingBlend = blend;
-      shader.uniforms.massingColour = colour;
-      shader.uniforms.massingPlot = rect;
-      shader.fragmentShader = 'uniform float massingBlend;\nuniform vec3 massingColour;\nuniform vec4 massingPlot;\n' + shader.fragmentShader;
-      let weight = 'massingBlend';
-      if (site) {
-        shader.vertexShader = 'varying vec3 massingWorld;\n' + shader.vertexShader;
-        shader.vertexShader = shader.vertexShader.replace('#include <project_vertex>',
-          '#include <project_vertex>\nmassingWorld = (modelMatrix * vec4(transformed, 1.0)).xyz;');
-        shader.fragmentShader = 'varying vec3 massingWorld;\n' + shader.fragmentShader;
-        shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>',
-          `#include <color_fragment>
-          vec2 massingOut = max(massingPlot.xy - massingWorld.xz, massingWorld.xz - massingPlot.zw);
-          float massingW = massingBlend * smoothstep(0.0, 0.6, max(massingOut.x, massingOut.y));
-          diffuseColor.rgb = mix(diffuseColor.rgb, massingColour, massingW);`);
-        weight = 'massingW';
-      } else {
-        shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>',
-          '#include <color_fragment>\ndiffuseColor.rgb = mix(diffuseColor.rgb, massingColour, massingBlend);');
-      }
-      shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>',
-        `#include <roughnessmap_fragment>\nroughnessFactor = mix(roughnessFactor, ${MASSING_ROUGHNESS.toFixed(2)}, ${weight});`);
-      shader.fragmentShader = shader.fragmentShader.replace('#include <metalnessmap_fragment>',
-        `#include <metalnessmap_fragment>\nmetalnessFactor = mix(metalnessFactor, 0.0, ${weight});`);
-      if (material.normalMap) shader.fragmentShader = shader.fragmentShader.replace('#include <normal_fragment_maps>',
-        `#include <normal_fragment_maps>\nnormal = normalize(mix(normal, nonPerturbedNormal, ${weight}));`);
-    };
-    material.customProgramCacheKey = () => previousKey + (site ? '|massing-site-r49' : '|massing-r39');
-    material.needsUpdate = true;
-  };
   root.traverse(object => {
     if (!object.isMesh) return;
     for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
-      if (!material || attached.has(material)) continue;
-      if (material.userData.contextBuilding) attach(material, false);
-      else if (plotRect) attach(material, true);
+      if (!material?.userData?.contextBuilding || attached.has(material)) continue;
+      attached.add(material);
+      const previous = material.onBeforeCompile, previousKey = material.customProgramCacheKey();
+      material.onBeforeCompile = (shader, renderer) => {
+        previous.call(material, shader, renderer);
+        shader.uniforms.massingBlend = blend;
+        shader.uniforms.massingColour = colour;
+        shader.fragmentShader = 'uniform float massingBlend;\nuniform vec3 massingColour;\n' + shader.fragmentShader;
+        // Albedo first, so the sun, the sky probe and the occlusion pass all keep
+        // describing the same solid rather than a flat white silhouette.
+        shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>',
+          '#include <color_fragment>\ndiffuseColor.rgb = mix(diffuseColor.rgb, massingColour, massingBlend);');
+        shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>',
+          `#include <roughnessmap_fragment>\nroughnessFactor = mix(roughnessFactor, ${MASSING_ROUGHNESS.toFixed(2)}, massingBlend);`);
+        shader.fragmentShader = shader.fragmentShader.replace('#include <metalnessmap_fragment>',
+          '#include <metalnessmap_fragment>\nmetalnessFactor = mix(metalnessFactor, 0.0, massingBlend);');
+        // Roof tile and render relief belong to the photographic reading; a
+        // massing model is smooth, so the perturbation eases out with the colour.
+        if (material.normalMap) shader.fragmentShader = shader.fragmentShader.replace('#include <normal_fragment_maps>',
+          '#include <normal_fragment_maps>\nnormal = normalize(mix(normal, nonPerturbedNormal, massingBlend));');
+      };
+      material.customProgramCacheKey = () => previousKey + '|massing-r39';
+      material.needsUpdate = true;
     }
   });
   let from = 0, to = 0, start = 0;
@@ -182,12 +215,14 @@ export function createContextMassing(root, plotRect = null) {
   return {
     surfaces: attached.size,
     get value() {return blend.value;},
+    // Villa and the floor cuts are the close reading; neighbourhood and region
+    // stay photographic.
     set(view, immediate = false) {
       const target = view === 'building' || /^f\d$/.test(view) ? 1 : 0;
-      if (immediate) {to = from = target; blend.value = target; return;}
       if (target === to) return;
       to = target;
-      if (globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {blend.value = from = to; return;}
+      const reduced = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      if (immediate || reduced) {blend.value = from = to; return;}
       from = blend.value; start = performance.now();
     },
     update(time) {

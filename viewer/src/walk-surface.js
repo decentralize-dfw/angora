@@ -1,3 +1,5 @@
+// A conservative, precomputed height field from the original floors, stairs,
+// wall sections and current furnishings. No frame-time mesh raycasting needed.
 export class WalkSurface {
   constructor(data) {
     if (data.coordinate_system !== 'glTF_Y_up' || data.layers?.length !== 4) throw Error('Invalid walking surface');

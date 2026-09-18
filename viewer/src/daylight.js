@@ -1,3 +1,6 @@
+// NOAA fractional-year solar equations. Local civil time is UTC+3.
+// The model-to-north angle is separately recorded; this is a visual study,
+// not a certified insolation survey.
 export function solarPosition(hour, {latitude=39.88, longitude=32.73, day=172, northRotation=0}={}) {
   const rad=Math.PI/180, g=2*Math.PI/365*(day-1+(hour-12)/24);
   const eq=229.18*(.000075+.001868*Math.cos(g)-.032077*Math.sin(g)-.014615*Math.cos(2*g)-.040849*Math.sin(2*g));

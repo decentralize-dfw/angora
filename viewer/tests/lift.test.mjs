@@ -6,6 +6,9 @@ import {readStops,route,createLift,CABIN_NODE,LEAF_NODE,SERVED_FLOORS,
   HINGE_X,HINGE_Z,CLOSED_ROTATION_Y,FLOOR_SEND_LABEL} from '../src/lift.js';
 import {floorDatums} from '../src/section.js';
 
+// Every GLB read targets the delivered set. viewer/public/models/full/ is a
+// stale version-2 delivery whose level-0 has 33 nodes and no animation - a
+// lift test against that copy would pass vacuously or fail confusingly.
 const delivered=name=>new URL(`build/web/full/${name}`,new URL('../../',import.meta.url));
 const glbJson=name=>{
   const data=fs.readFileSync(delivered(name));
@@ -25,10 +28,14 @@ const readFloats=(glb,bin,accessorIndex)=>{
   const components={SCALAR:1,VEC3:3}[accessor.type];
   const start=(view.byteOffset??0)+(accessor.byteOffset??0);
   const out=[];
+  // the Draco re-encode leaves negative zeros in the untouched animation
+  // accessors; normalise so strict deep equality means value equality
   for(let i=0;i<accessor.count*components;i++){const v=bin.readFloatLE(start+i*4);out.push(v===0?0:v);}
   return out;
 };
 
+// R44 merged the storeys into villa.glb; the clip, the panel and every
+// landing leaf now travel in the one building file
 const level0=glbJson('villa.glb');
 
 test('The delivered clip is the three-stop travel the playback is built on',()=>{
@@ -47,6 +54,8 @@ test('The delivered clip is the three-stop travel the playback is built on',()=>
   const heights=values.filter((_,i)=>i%3===1);
   assert.deepEqual(heights,[0,0,3.099600076675415,3.099600076675415,6.371399879455566,6.371399879455566,0]);
   for(let i=0;i<values.length;i+=3){assert.equal(values[i],0);assert.equal(values[i+2],0);}
+  // The stops land on the floor datums to float32; the worst representation
+  // error is 120.5 nm, so no keyframe correction is needed or wanted.
   assert.ok(Math.abs(heights[2]-floorDatums[1])<2e-7);
   assert.ok(Math.abs(heights[4]-floorDatums[2])<2e-7);
 });
@@ -62,7 +71,7 @@ test('readStops derives the park schedule instead of hardcoding it',()=>{
   for(const [floor,time] of stops){
     const track=deliveredClip().tracks[0];
     const i=track.times.findIndex(t=>t>=time);
-    void i;
+    void i; // the height check is the real assertion:
   }
   assert.throws(()=>readStops(clipFrom([0,2,4],[0,1.7,1.7])),/matches no floor datum/);
   assert.throws(()=>readStops(clipFrom([0,2],[0,3.0996])),/fewer than two stops/);
@@ -76,6 +85,8 @@ test('All six ordered trips route as clean single-direction moves',()=>{
     const r=route(stops,from,to);
     assert.equal(r.dir,dir,pair);
     assert.ok(Math.abs(r.dur-dur)<1e-5,`${pair}: ${r.dur}`);
+    // no intermediate stop window is crossed into a dwell: walk the leg and
+    // require monotonic height until arrival
     let previous=null,reversals=0;
     for(let k=0;k<=100;k++){
       const t=((r.a+r.dir*(k/100)*r.dur)%46+46)%46;
@@ -97,12 +108,14 @@ test('All six ordered trips route as clean single-direction moves',()=>{
 
 test('The delivery carries six closed landing-door parts per served floor',()=>{
   const sanitize=s=>s.replace(/\s/g,'_').replace(/[\[\]./:]/g,'');
+  // three served floors x six parts, all in the merged building file
   for(const [file,expected] of [['villa.glb',18],['garden.glb',0],['section-caps.glb',0]]){
     const {json}=glbJson(file);
     const leaves=(json.nodes??[]).filter(n=>LEAF_NODE.test(sanitize(n.name??'')));
     assert.equal(leaves.length,expected,file);
     for(const leaf of leaves){
       const [x,y,z,w]=leaf.rotation??[0,0,0,1];
+      // delivered pose: -90 degrees about Y = fully open
       assert.ok(Math.abs(x)<1e-5&&Math.abs(z)<1e-5,leaf.name+' hinge axis is vertical');
       assert.equal(leaf.extras.lift_leaf_closed_pose,true);
       assert.ok(Math.abs(y)<1e-4&&Math.abs(w-1)<1e-4,leaf.name+' delivered closed');
@@ -111,6 +124,11 @@ test('The delivery carries six closed landing-door parts per served floor',()=>{
 });
 
 test('The repaired car panel stands inside the cabin, no longer at the origin',()=>{
+  // R39 shipped these 15 nodes at translation (0,0,0) - the control strip
+  // stood half-buried in the basement hall floor and rode through the
+  // entrance hall whenever the cabin moved. tools/fit_lift_panel_r39.mjs
+  // rebuilds the panel on the cabin west wall; this pins the repair. When a
+  // future delivery lands with the panel authored in place, this still holds.
   const panel=/^(R33 \| (Cabin (stainless control strip|raised floor button|floor button bezel|floor indicator|alarm button)|Alarm safety surround)|R38 panel marking )/;
   const nodes=(level0.json.nodes??[]).filter(n=>panel.test(n.name??''));
   assert.equal(nodes.length,15);
@@ -123,7 +141,11 @@ test('The repaired car panel stands inside the cabin, no longer at the origin',(
   }
 });
 
+// A miniature but faithful rig: real cabin node, real leaf placement, driven
+// through the public surface exactly as main.js drives it.
 function rig(closedPose=false){
+  // one merged villa group, the way R44 delivers it: cabin and all three
+  // floors' leaves under a single root, floors told apart by height
   const groups=new Map();
   const cabin=new THREE.Group();cabin.name=CABIN_NODE;
   const villa=new THREE.Group();villa.add(cabin);
@@ -131,9 +153,11 @@ function rig(closedPose=false){
   for(const f of SERVED_FLOORS){
     const leaf=new THREE.Object3D();
     leaf.name='Lift_door_stile'+(f===0?'':String(f).padStart(3,'0'));
+    // delivered open pose: leaf swung -90 about the hinge line
     leaf.position.set(HINGE_X,floorDatums[f]+1,HINGE_Z-0.99);
     leaf.quaternion.setFromAxisAngle(new THREE.Vector3(0,1,0),-Math.PI/2);
     if(closedPose){leaf.position.set(HINGE_X-.99,floorDatums[f]+1,HINGE_Z);leaf.quaternion.identity();leaf.userData.lift_leaf_closed_pose=true;}
+    // an Object3D has no geometry; give the floor detector its true bounds
     const marker=new THREE.Mesh(new THREE.BoxGeometry(0.01,0.01,0.01));
     marker.position.set(0,0,0);leaf.add(marker);
     villa.add(leaf);
@@ -208,6 +232,7 @@ test('A trip closes the origin door, travels, then opens the arrival door - and 
   assert.equal(doorAngle(groups,0),CLOSED_ROTATION_Y,'origin door shut');
   assert.equal(sawMotionWithDoorOpen,false,'the cabin never moves with a door open');
   assert.equal(sawDoorWhileUnlevel,false,'no door moves while the cabin is between floors');
+  // and a second press now reads as a send-away
   assert.equal(lift.target(),2,'cabin here: the button offers to send it on');
   assert.equal(FLOOR_SEND_LABEL[2],'1. kata gönder');
 });
@@ -230,7 +255,7 @@ test('cancel() snaps the rig back to a coherent parked state mid-trip',()=>{
   const {lift,groups,cabin}=rig();
   lift.setWalkActive(true);lift.setWalkFloor(2);
   lift.run(0);
-  for(let t=0;t<6000;t+=100)lift.update(t);
+  for(let t=0;t<6000;t+=100)lift.update(t); // mid-travel
   assert.notEqual(cabin.position.y,0);
   lift.cancel();
   assert.equal(lift.travelling,false);

@@ -137,43 +137,22 @@ function normalFrom(height, strength, name, size = SIZE) {
   normalFrom(height, 3.2, 'clay-tile-normal.png');
 }
 
-// ---- 2. meadow grass: ~3 m repeat, layered patchiness -----------------------
-// v2 after review ("çok tekrar ediyor"): a longer module, more octaves of
-// uncorrelated patchiness and clover shadow so no single feature reads as a
-// beacon; the viewer additionally samples this at two uncorrelated scales.
+// ---- 2. meadow grass: ~2 m repeat, patchy greens with straw ---------------
 {
-  const green = hex('#47711F'), yellowGreen = hex('#6A852D'), deep = hex('#2E4A1E'), straw = hex('#8A7448'), clover = hex('#233B17');
+  const green = hex('#47711F'), yellowGreen = hex('#6A852D'), deep = hex('#2E4A1E'), straw = hex('#937442');
   const buf = Buffer.alloc(SIZE * SIZE * 3);
   for (let y = 0; y < SIZE; y++) for (let x = 0; x < SIZE; x++) {
     const u = x / SIZE, v = y / SIZE;
-    const patchA = fbm(u, v, 5, 21);
-    const patchB = fbm(u, v, 9, 27);
-    const blade = noise(u, v, 128, 22) * .6 + noise(u, v, 220, 26) * .4;
-    const dry = Math.max(0, fbm(u, v, 3, 23) - .66) * 1.7;
-    const shade = Math.max(0, fbm(u, v, 7, 28) - .58) * 1.5;
-    let rgb = mix(deep, green, Math.min(1, patchA * 1.5));
-    rgb = mix(rgb, yellowGreen, Math.max(0, patchB - .52) * 1.1);
-    rgb = mix(rgb, clover, Math.min(.6, shade));
-    rgb = mix(rgb, straw, Math.min(.35, dry));
-    rgb = rgb.map(vv => vv * (.84 + blade * .3));
+    const patch = fbm(u, v, 5, 21);          // broad patchiness
+    const blade = noise(u, v, 96, 22);       // fine blade speckle
+    const dry = Math.max(0, fbm(u, v, 3, 23) - .62) * 2.2; // occasional straw
+    let rgb = mix(deep, green, Math.min(1, patch * 1.6));
+    rgb = mix(rgb, yellowGreen, Math.max(0, patch - .55) * 1.4);
+    rgb = mix(rgb, straw, Math.min(.5, dry));
+    rgb = rgb.map(vv => vv * (.82 + blade * .36));
     put(buf, x, y, rgb);
   }
   writePNG('grass-basecolor.png', buf);
-}
-
-// ---- 2b. stucco mottle: near-white multiply map so the render paint shows
-// hand-applied variation instead of a single flat value; the authored facade
-// colour stays the base and this only breathes ±4 % around it.
-{
-  const buf = Buffer.alloc(SIZE * SIZE * 3);
-  for (let y = 0; y < SIZE; y++) for (let x = 0; x < SIZE; x++) {
-    const u = x / SIZE, v = y / SIZE;
-    const wash = fbm(u, v, 6, 61);
-    const grain = noise(u, v, 90, 62);
-    const value = 255 * (.96 + (wash - .5) * .07 + (grain - .5) * .03);
-    put(buf, x, y, [value, value, value]);
-  }
-  writePNG('stucco-mottle.png', buf);
 }
 
 // ---- 3. asphalt: ~3 m repeat, sun-bleached grey with patch seams ----------
