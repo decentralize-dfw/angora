@@ -203,10 +203,10 @@ export function bindGradeTextures(parts, sets) {
           material.onBeforeCompile = (shader, renderer) => {
             previous.call(material, shader, renderer);
             shader.fragmentShader = shader.fragmentShader.replace('#include <map_fragment>',
-              `#ifdef USE_MAP
-                vec4 tileA = texture2D( map, vMapUv );
+              `#include <map_fragment>
+              #ifdef USE_MAP
                 vec4 tileB = texture2D( map, vMapUv * -0.531 + vec2(0.172, 0.683) );
-                diffuseColor *= mix( tileA, tileB, 0.5 );
+                diffuseColor.rgb = mix( diffuseColor.rgb, diffuse.rgb * tileB.rgb, 0.5 );
               #endif`);
           };
           material.customProgramCacheKey = () => previousKey + '|anti-tile-r49';

@@ -22,8 +22,13 @@ const GROUND_SURFACE=/(^|\b)grass( ground)?(\s*\(\d+\))?$|continuous grass/i;
 const FADED_SURFACE=/grass|asphalt|stone_tile|retaining|boundary limestone|soil body/i;
 
 export function prepareContextSurfaces(context,background) {
-  let ground;
-  context.traverse(o=>{if(o.isMesh&&!Array.isArray(o.material)&&GROUND_SURFACE.test(o.material.name)&&!o.material.userData.plotSoil)ground=o;});
+  let ground,widest=0;
+  context.traverse(o=>{
+    if(!o.isMesh||Array.isArray(o.material)||!GROUND_SURFACE.test(o.material.name)||o.material.userData.plotSoil)return;
+    o.geometry.computeBoundingBox();
+    const span=o.geometry.boundingBox.min.distanceTo(o.geometry.boundingBox.max);
+    if(span>widest){widest=span;ground=o;}
+  });
   if(!ground)return;
   smoothGroundNormals(ground.geometry);ground.castShadow=false;
   const bounds=new THREE.Box3().setFromObject(ground);

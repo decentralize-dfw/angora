@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import plan from './context-infill.json';
 
 const PAD = 0.35;
+const GROUND = /grass|asphalt|soil|terrain|lawn/i;
 
 function cutDonor(root, bounds) {
   const min = new THREE.Vector3(bounds[0][0] - PAD, bounds[0][1] - PAD, bounds[0][2] - PAD);
@@ -14,6 +15,8 @@ function cutDonor(root, bounds) {
   const parts = [];
   root.traverse(source => {
     if (!source.isMesh || source.userData.contextInfill) return;
+    const materials = Array.isArray(source.material) ? source.material : [source.material];
+    if (materials.some(m => GROUND.test(m?.name ?? ''))) return;
     const position = source.geometry.attributes?.position;
     if (!position) return;
     local.multiplyMatrices(inverse, source.matrixWorld);
