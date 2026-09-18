@@ -15,6 +15,32 @@ export function areaLabel(room,data) {
     .filter(entry=>entry?.basis==='dwg_verified'&&entry.dimension_label_allowed);
   return rows[0]?spanLabel(rows[0].metres):'';
 }
+export function fillSpaceSpans(data,chosen) {
+  const spaceById=new Map((data.spaces??[]).map(space=>[space.space_id,space]));
+  let added=0;
+  for(const room of data.rooms??[]){
+    if(room.label_only)continue;
+    const space=spaceById.get(room.space_id);
+    if(!space?.boundary_xz?.length||space.members?.length!==1)continue;
+    const xs=space.boundary_xz.map(p=>p[0]), zs=space.boundary_xz.map(p=>p[1]);
+    const bounds={x:[Math.min(...xs),Math.max(...xs)],z:[Math.min(...zs),Math.max(...zs)]};
+    for(const axis of ['x','z']){
+      if(chosen.has(`${room.id}|${axis}`))continue;
+      const span=bounds[axis][1]-bounds[axis][0];
+      if(!(span>0.4))continue;
+      const other=axis==='x'?'z':'x';
+      const mid=(bounds[other][0]+bounds[other][1])/2;
+      const y=room.position?.[1]??0;
+      const a=axis==='x'?[bounds.x[0],y,mid]:[mid,y,bounds.z[0]];
+      const b=axis==='x'?[bounds.x[1],y,mid]:[mid,y,bounds.z[1]];
+      chosen.set(`${room.id}|${axis}`,{measured:true,dim:{
+        id:`${room.id}-space-${axis}`,room_id:room.id,floor_index:room.floor_index,
+        basis:'model_measured',metres:span,a,b}});
+      added++;
+    }
+  }
+  return added;
+}
 export function createAnnotations(data,host,onRoom) {
   if(data.coordinate_system!=='glTF_Y_up')throw Error('Invalid room annotations');
   const group=new THREE.Group();group.name='Source dimensions';group.userData.aoExcluded=true;
@@ -47,6 +73,7 @@ export function createAnnotations(data,host,onRoom) {
       ||(current.measured===measured&&dim.metres>current.dim.metres);
     if(better)chosen.set(key,{dim,measured});
   }
+  fillSpaceSpans(data,chosen);
   for(const {dim,measured} of chosen.values()) {
     const a=new THREE.Vector3(...dim.a),b=new THREE.Vector3(...dim.b);
     const side=b.clone().sub(a).normalize().cross(new THREE.Vector3(0,1,0)).multiplyScalar(.12);
