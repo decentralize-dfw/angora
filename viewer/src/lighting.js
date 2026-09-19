@@ -116,9 +116,9 @@ export function isGlazing(material) {
 export function isSeeThrough(material) {
   return material.transmission>0 || (material.transparent && material.opacity<.98);
 }
-export function createLighting(renderer, scene, camera, clip) {
+export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
   const compact=matchMedia('(pointer: coarse)').matches;
-  renderer.shadowMap.enabled=true;renderer.shadowMap.autoUpdate=false;
+  renderer.shadowMap.enabled=!baked;renderer.shadowMap.autoUpdate=false;
   applyRenderProfile(renderer);
   // The horizon colour is no longer the background - the sky is. It stays as
   // the colour the terrain fades into at its edge and the colour distance
@@ -126,7 +126,7 @@ export function createLighting(renderer, scene, camera, clip) {
   const horizon=new THREE.Color('#e4e9ed');
   const hemisphere=new THREE.HemisphereLight(0xebf2ff,0xb8b2a8,.5);scene.add(hemisphere);
   const sun=new THREE.DirectionalLight(0xfff2df,1.55),direction=new THREE.Vector3(-.45,.85,-.3).normalize();
-  sun.castShadow=true;sun.shadow.mapSize.setScalar(compact?1024:4096);
+  sun.castShadow=!baked;sun.shadow.mapSize.setScalar(compact?1024:4096);
   sun.shadow.bias=-.000025;sun.shadow.normalBias=.018;sun.shadow.radius=2.5;
   sun.shadow.camera.near=.5;sun.shadow.camera.far=700;scene.add(sun,sun.target);
   const sky=new Sky();sky.scale.setScalar(10000);sky.material.uniforms.turbidity.value=3;
@@ -159,7 +159,7 @@ export function createLighting(renderer, scene, camera, clip) {
   // conversion itself when it draws to the canvas, so the image keeps its
   // exposure and its colour; it loses the crevice shading and the glare.
   let composer=null,beauty=null,ao=null;
-  if(!compact){
+  if(!compact&&!baked){
     const target=new THREE.WebGLRenderTarget(1,1,{type:THREE.HalfFloatType,samples:referenceProfile.msaaSamples});
     composer=new EffectComposer(renderer,target);beauty=new RenderPass(scene,camera);
     // Full-resolution occlusion: at .85 the denoiser smeared contact shading
@@ -179,7 +179,7 @@ export function createLighting(renderer, scene, camera, clip) {
     const light=new THREE.SpotLight(0xffead5,0,6,Math.PI*.37,.72,2);
     // Four shadow-casting spots is four extra scene passes every time a fixture
     // changes. Indoors on a phone the fixtures light, they do not cast.
-    light.castShadow=!compact;light.shadow.mapSize.setScalar(512);
+    light.castShadow=!compact&&!baked;light.shadow.mapSize.setScalar(512);
     light.shadow.bias=-.0001;light.shadow.normalBias=.01;light.shadow.camera.near=.06;
     light.visible=false;scene.add(light,light.target);return light;
   });

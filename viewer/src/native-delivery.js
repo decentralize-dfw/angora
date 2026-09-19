@@ -1,8 +1,9 @@
 import * as THREE from 'three';
 import {prepareBakedLighting} from './baked-lighting.js';
+import {prepareBatchedMaterial} from './batched-material.js';
 
-// Only the current floor is resident. Texture Sources share image storage while
-// each glTF texture retains its own UV channel, sampler and colour space.
+// Batched deliveries remain resident across every view. The legacy manifest
+// path retains its older floor streams for explicit compatibility previews.
 export function createNativeDelivery({manifest,root,scene,groups,load,prepare,releaseMaterial}) {
   const loaded=new Map(),sources=new Map();
   const context=['context-ground','context-buildings','context-plants'];
@@ -16,7 +17,7 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
   async function acquire(name){
     if(loaded.has(name))return loaded.get(name);
     const record=records.get(name);if(!record)throw Error('Missing native asset '+name);
-    const url=new URL(record.file.replace(/\.gltf$/,'.gpu.gltf'),root);
+    const url=new URL(manifest.batched?record.file:record.file.replace(/\.gltf$/,'.gpu.gltf'),root);
     if(record.gpu_sha256)url.searchParams.set('v',record.gpu_sha256.slice(0,12));
     const result=await load(url.href),model=result.scene;
     try{
@@ -48,7 +49,8 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     for(const texture of modelTextures)retainedImages.add(texture.source.data);
     for(const data of discardedImages)if(data&&!retainedImages.has(data))data.close?.();
     const clipped=!context.includes(name)&&name!=='villa-context-white'&&name!=='plot-grass';
-    model.traverse(o=>{if(o.isMesh){if(name.startsWith('interior')&&!/floor|tile|door|glass|stair|window|lift|wall/i.test(o.name))o.userData.category='furniture';prepare(o,{clipped,context:!clipped,name});}});
+    model.traverse(o=>{if(o.isMesh){if(!manifest.batched&&name.startsWith('interior')&&!/floor|tile|door|glass|stair|window|lift|wall/i.test(o.name))o.userData.category='furniture';prepare(o,{clipped,context:!clipped,name});}});
+    for(const material of resources(model).materials)prepareBatchedMaterial(material);
     loaded.set(name,model);groups.set(name,model);scene.add(model);return model;
     }catch(error){
       // A failed lightmap/mesh preparation must release this decoded asset
@@ -67,8 +69,15 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     for(const [key,source] of sources)if(!keepSources.has(source))sources.delete(key);
     THREE.Cache.clear();
   }
-  return {loaded,
+  let preload;
+  return {loaded,batched:Boolean(manifest.batched),
     async activate(view){
+      if(manifest.batched){
+        preload??=(async()=>{for(const {name} of manifest.parts)await acquire(name);})();
+        await preload;
+        for(const [name,model] of loaded)model.visible=name!=='interior'||/^f[0-3]$/.test(view);
+        return;
+      }
       await acquire('architecture');await acquire('garden');
       const floor=/^f[0-3]$/.test(view);
       const wanted=new Set(['architecture','garden',...(floor?['plot-grass','villa-context-white','context-plants','interior-common','interior-'+view]:context)]);

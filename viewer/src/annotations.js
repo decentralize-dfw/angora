@@ -42,6 +42,11 @@ export function createAnnotations(data,host,onRoom) {
   const material=new THREE.LineBasicMaterial({color:0x315e5c,depthTest:false,depthWrite:false,toneMapped:false});
   const measuredMaterial=new THREE.LineDashedMaterial({color:0x6d8a82,dashSize:.16,gapSize:.12,
     depthTest:false,depthWrite:false,toneMapped:false});
+  const batches=[material,measuredMaterial].map(m=>{
+    const line=new THREE.LineSegments(new THREE.BufferGeometry(),m);
+    line.renderOrder=105;line.userData.aoExcluded=true;group.add(line);return line;
+  });
+  let dimensionKey='';
   for(const room of data.rooms) {
     const el=document.createElement('div');el.className='room-label';
     const name=document.createElement('strong');name.textContent=room.name;
@@ -69,11 +74,11 @@ export function createAnnotations(data,host,onRoom) {
       a,b,a.clone().add(side),a.clone().sub(side),b.clone().add(side),b.clone().sub(side)]),
       measured?measuredMaterial:material);
     if(measured)line.computeLineDistances();
-    line.renderOrder=105;line.userData.aoExcluded=true;group.add(line);
+    line.renderOrder=105;line.userData.aoExcluded=true;
     const el=document.createElement('span');
     el.className=measured?'dimension-label measured':'dimension-label';el.textContent=spanLabel(dim.metres);
     el.title=dim.basis==='dwg_verified'?'Çizimde belirtilen ölçü':dim.boundary_kind==='floor_edge'?'Modelde döşeme sınırları arasındaki ölçü':'Model üzerinden ölçülen açıklık';
-    overlay.append(el);dimensions.push({el,line,position:a.clone().add(b).multiplyScalar(.5),floor:dim.floor_index,roomId:dim.room_id,measured});
+    overlay.append(el);dimensions.push({el,line,a,b,position:a.clone().add(b).multiplyScalar(.5),floor:dim.floor_index,roomId:dim.room_id,measured});
   }
   function project(entry,camera,w,h,size) {
     point.copy(entry.position).project(camera);
@@ -104,10 +109,34 @@ export function createAnnotations(data,host,onRoom) {
         if(p)candidates.push({...p,entry,width:entry.el.offsetWidth,height:entry.el.offsetHeight});
       }
     }
+    const nextKey=dimensions.map(e=>e.line.visible?'1':'0').join('');
+    if(nextKey!==dimensionKey){
+      dimensionKey=nextKey;
+      batches.forEach((batch,index)=>{
+        const values=dimensions.filter(e=>e.line.visible&&Number(e.measured)===index)
+          .flatMap(e=>Array.from(e.line.geometry.attributes.position.array));
+        batch.geometry.dispose();batch.geometry=new THREE.BufferGeometry();
+        batch.geometry.setAttribute('position',new THREE.Float32BufferAttribute(values,3));
+        batch.visible=values.length>0;if(index&&values.length)batch.computeLineDistances();
+      });
+    }
     // Names are placed first, then dimensions avoid both names and controls.
     const placed=layoutDimensionLabels(candidates,{width:w,height:h,obstacles});
     for(const item of candidates)item.entry.el.hidden=true;
     leaders.replaceChildren();leaders.setAttribute('viewBox',`0 0 ${w} ${h}`);
+    for(const entry of dimensions.filter(e=>e.line.visible)){
+      const a=entry.a.clone().project(camera),b=entry.b.clone().project(camera);
+      if(a.z<-1||a.z>1||b.z<-1||b.z>1)continue;
+      const x1=(a.x+1)*w/2,y1=(1-a.y)*h/2,x2=(b.x+1)*w/2,y2=(1-b.y)*h/2;
+      const line=document.createElementNS(leaders.namespaceURI,'line');
+      for(const [k,v] of Object.entries({x1,y1,x2,y2}))line.setAttribute(k,v);
+      line.classList.add('dimension-witness');leaders.append(line);
+      for(const [cx,cy] of [[x1,y1],[x2,y2]]){
+        const dot=document.createElementNS(leaders.namespaceURI,'circle');
+        for(const [k,v] of Object.entries({cx,cy,r:2.5}))dot.setAttribute(k,v);
+        dot.classList.add('dimension-endpoint');leaders.append(dot);
+      }
+    }
     for(const {entry,x,y,anchorX,anchorY,rect} of placed){
       entry.el.hidden=false;entry.el.style.left=`${x}px`;entry.el.style.top=`${y}px`;
       if(Math.hypot(x-anchorX,y-anchorY)>6){
@@ -118,5 +147,5 @@ export function createAnnotations(data,host,onRoom) {
       }
     }
     overlay.dataset.expected=String(candidates.length);overlay.dataset.placed=String(placed.length);
-  },dispose(){overlay.remove();group.traverse(o=>o.geometry?.dispose());material.dispose();measuredMaterial.dispose();}};
+  },dispose(){overlay.remove();group.traverse(o=>o.geometry?.dispose());dimensions.forEach(e=>e.line.geometry.dispose());material.dispose();measuredMaterial.dispose();}};
 }

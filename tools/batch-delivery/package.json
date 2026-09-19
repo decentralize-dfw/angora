@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "@gltf-transform/core": "4.5.0",
+    "@gltf-transform/extensions": "4.5.0",
+    "@gltf-transform/functions": "4.5.0",
+    "draco3dgltf": "1.5.7",
+    "three": "0.180.0",
+    "sharp": "0.34.5",
+    "meshoptimizer": "1.2.0"
+  }
+}

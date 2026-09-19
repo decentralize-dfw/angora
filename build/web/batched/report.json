@@ -1,0 +1,103 @@
+{
+  "source": "953cd59ecae412ecc3b51b6aac56e1ab6feec4c8ca73f15f6181782e109e8fac",
+  "profiles": {
+    "desktop": {
+      "bytes": 20101900,
+      "primitives": 37,
+      "triangles": 2888054,
+      "parts": [
+        {
+          "name": "architecture",
+          "bytes": 5204372,
+          "primitives": 11,
+          "triangles": 840430
+        },
+        {
+          "name": "interior",
+          "bytes": 2232064,
+          "primitives": 14,
+          "triangles": 446285
+        },
+        {
+          "name": "garden",
+          "bytes": 71388,
+          "primitives": 5,
+          "triangles": 4813
+        },
+        {
+          "name": "context-ground",
+          "bytes": 566348,
+          "primitives": 1,
+          "triangles": 310132
+        },
+        {
+          "name": "context-buildings",
+          "bytes": 6467040,
+          "primitives": 5,
+          "triangles": 772355
+        },
+        {
+          "name": "context-plants",
+          "bytes": 5560688,
+          "primitives": 1,
+          "triangles": 514039
+        }
+      ]
+    },
+    "mobile": {
+      "bytes": 14899104,
+      "primitives": 37,
+      "triangles": 2344323,
+      "parts": [
+        {
+          "name": "architecture",
+          "bytes": 4656092,
+          "primitives": 11,
+          "triangles": 840430
+        },
+        {
+          "name": "interior",
+          "bytes": 1966588,
+          "primitives": 14,
+          "triangles": 446285
+        },
+        {
+          "name": "garden",
+          "bytes": 60848,
+          "primitives": 5,
+          "triangles": 4813
+        },
+        {
+          "name": "context-ground",
+          "bytes": 390292,
+          "primitives": 1,
+          "triangles": 169162
+        },
+        {
+          "name": "context-buildings",
+          "bytes": 5700468,
+          "primitives": 5,
+          "triangles": 694724
+        },
+        {
+          "name": "context-plants",
+          "bytes": 2124816,
+          "primitives": 1,
+          "triangles": 188909
+        }
+      ]
+    }
+  },
+  "textureSize": 512,
+  "houseGeometryDecimation": false,
+  "contextSimplification": {
+    "desktop": {
+      "ratio": 0.55,
+      "error": 0.00015
+    },
+    "mobile": {
+      "ratio": 0.3,
+      "error": 0.0004
+    }
+  }
+}

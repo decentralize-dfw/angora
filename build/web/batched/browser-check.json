@@ -1,0 +1,25 @@
+{
+  "date": "2026-09-19",
+  "environment": "Local Codex in-app browser, Windows desktop GPU; mobile profile at 393x852, not a physical phone",
+  "countIncludesAllRenderPasses": true,
+  "measurementLabelsEnabled": true,
+  "desktop": {
+    "readyMs": 3121,
+    "decodeAndPrepareMs": 2247,
+    "floorDrawCalls": {"f0":43,"f1":42,"f2":42,"f3":41},
+    "neighborhoodDrawCalls":24,
+    "floorTransitionsMs":[1033,971,994,991]
+  },
+  "mobile": {
+    "readyMs":2424,
+    "decodeAndPrepareMs":1581,
+    "floorDrawCalls":{"f0":43,"f1":42,"f2":42,"f3":41},
+    "floorTransitionsMs":[974,950,958,957],
+    "labelPlacement":{"f0":[21,21],"f1":[24,24],"f2":[30,30],"f3":[15,15]}
+  },
+  "residentParts":6,
+  "repeatFloorAssetLoads":0,
+  "unitTestsPassed":125,
+  "physicalPhoneVerified":false,
+  "timingScope":"Localhost; not an internet-download benchmark. Desktop floor timing/count sweep preceded final context simplification; final desktop f3 without dimensions measured 40 calls. Mobile sweep used final assets."
+}

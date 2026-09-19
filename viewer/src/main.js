@@ -46,7 +46,9 @@ const $ = s => document.querySelector(s);
 const host = $('#viewport'), status = $('#load-status');
 const publicRoot = new URL(import.meta.env.BASE_URL, document.baseURI);
 const pages = import.meta.env.MODE === 'pages';
-const modelRoot = new URL(import.meta.env.VITE_MODEL_ROOT || (pages ? 'build/web/native-current/' : 'models/native-current/'), publicRoot);
+const requestedProfile=new URLSearchParams(location.search).get('profile');
+const deliveryProfile=['desktop','mobile'].includes(requestedProfile)?requestedProfile:matchMedia('(pointer: coarse)').matches?'mobile':'desktop';
+const modelRoot = new URL(import.meta.env.VITE_MODEL_ROOT || (pages ? 'build/web/batched/' : 'models/batched/')+deliveryProfile+'/', publicRoot);
 const decoderRoot = new URL(pages ? 'viewer/public/draco/' : 'draco/', publicRoot);
 const daylightURL = new URL((pages ? 'assets/lighting/' : 'lighting/')+'kloofendal_48d_partly_cloudy_puresky_1k.hdr',publicRoot);
 // Titles read through the language of the moment; every titles[x] call
@@ -408,7 +410,7 @@ function setup() {
   configureCameraControls(controls, THREE);
   flight=new CameraFlight(camera,controls,resize,invalidate);
   controls.addEventListener('change', invalidate);
-  lighting = createLighting(renderer, scene, camera, clip);
+  lighting = createLighting(renderer, scene, camera, clip,{baked:modelRoot.pathname.includes('/batched/')});
   // bindInterface() ran before this, so the controls may already carry values
   // from a shared link. Push them in before the first frame is drawn.
   lighting.setStyle($('#lighting-style').value);
@@ -464,9 +466,11 @@ async function selectView(id, initial = false) {
       await nativeDelivery.activate(id);
       lighting.frame(id,contextBox);
       lighting.interior(id.startsWith('f')?Number(id[1]):null,null);
-      if(renderer.compileAsync)await renderer.compileAsync(scene,camera);
-      lighting.warm(camera);
-      await waitForGPU(renderer);
+      if(!nativeDelivery.batched){
+        if(renderer.compileAsync)await renderer.compileAsync(scene,camera);
+        lighting.warm(camera);
+        await waitForGPU(renderer);
+      }
       setFurnitureVisible(furnitureVisible);status.hidden=true;
     }catch(error){message('Görünüm yüklenemedi: '+error.message,true);return;}
     finally{nativeSwitching=false;}
@@ -639,6 +643,7 @@ function exitWalk(reselect = true) {
   $('#gesture-help').textContent=t('orbitHelp');
 }
 async function loadNativeModel(manifest){
+    const loadStarted=performance.now();
   async function json(file){const response=await fetch(new URL(file,modelRoot),{cache:'no-cache'});if(!response.ok)throw Error(file+' HTTP '+response.status);return response.json();}
   const [atlas,rooms,navigation,soil]=await Promise.all([json(manifest.sections),json(manifest.rooms),json(manifest.navigation),manifest.soil_section?json(manifest.soil_section):null]);
   if(navigation.source_native_sha256!==manifest.source_native_sha256)throw Error('Native navigation revision mismatch');
@@ -650,9 +655,11 @@ async function loadNativeModel(manifest){
     releaseMaterial:m=>lighting.releaseMaterial(m),prepare:(o,{clipped,context,name})=>{
       o.renderOrder=5;lighting.prepareMesh(o,{clipped,context});
       const planes=clipped?[clip]:[];o.userData.clipPlanes=planes;
-      for(const material of Array.isArray(o.material)?o.material:[o.material]){material.clippingPlanes=planes;material.clipShadows=true;if(material.aoMap)material.aoMapIntensity=.7;if(name==='garden'||name==='context-plants')plotMask?.apply(material);}
+        for(const material of Array.isArray(o.material)?o.material:[o.material]){material.clippingPlanes=planes;material.clipShadows=true;if(material.aoMap)material.aoMapIntensity=.7;if(name==='garden'||name==='context-plants'||(manifest.batched&&context))plotMask?.apply(material);}
     }});
-  await nativeDelivery.activate(selected==='building'?'f3':selected);
+    await nativeDelivery.activate(selected==='building'?'f3':selected);
+    if(manifest.batched){loader.dracoLoader?.dispose();loader.ktx2Loader?.dispose();}
+    host.dataset.deliveryStats=JSON.stringify({profile:manifest.profile??'legacy',decodeAndPrepareMs:Math.round(performance.now()-loadStarted),residentParts:nativeDelivery.loaded.size});
   buildingBox=new THREE.Box3().setFromObject(groups.get('architecture'));
   gardenBox=new THREE.Box3().setFromObject(groups.get('garden'));contextBox=buildingBox.clone();
   for(const model of groups.values())contextBox.union(new THREE.Box3().setFromObject(model));
@@ -671,6 +678,7 @@ async function loadNativeModel(manifest){
   await lighting.loadEnvironment(daylightURL.href);
   ready=true;document.querySelectorAll('[data-needs-model],#toggle-furniture,#toggle-rooms,#toggle-measurements,#enter-walk').forEach(b=>b.disabled=false);
   await selectView(selected,true);lighting.render(camera);status.hidden=true;
+  host.dataset.deliveryStats=JSON.stringify({...JSON.parse(host.dataset.deliveryStats),readyMs:Math.round(performance.now()-loadStarted)});
   $('#app').append(status);$('#boot')?.remove();delete $('#app').dataset.booting;
 }
 async function loadModel() {

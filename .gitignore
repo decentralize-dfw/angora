@@ -8,6 +8,8 @@ viewer/dist/
 baseline-tests.txt
 interaction-tests.txt
 viewer/public/models/native-current/
+viewer/public/models/batched/
+tools/batch-delivery/node_modules/
 viewer/native-tests.txt
 build/intermediate/
 build/cad/source-curves.json.gz
