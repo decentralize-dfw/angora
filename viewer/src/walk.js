@@ -56,8 +56,16 @@ export class InteriorWalk {
     });
   }
   pose() {if(!this.xrActive)this.camera.rotation.set(this.pitch,this.yaw,0,'YXZ');}
+  // The tour's lens slider: an explicit vertical field chosen by hand.
+  // While set it survives resizes untouched - the user picked THE lens -
+  // and null returns to the derived default below.
+  setLens(fovDeg) {
+    this.lensFov=fovDeg;
+    if(fovDeg!==null){this.camera.fov=fovDeg;this.camera.updateProjectionMatrix();}
+  }
   resize(w,h) {
     this.camera.aspect=w/h;
+    if(this.lensFov!=null){this.camera.updateProjectionMatrix();return;}
     const horizontal=THREE.MathUtils.degToRad(WALK_HORIZONTAL_FOV_DEG);
     // Clamped so a tall phone cannot turn the held horizontal field into a
     // fisheye, and a wide desktop cannot turn it into a telephoto.

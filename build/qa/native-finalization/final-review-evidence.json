@@ -1,0 +1,160 @@
+{
+  "date": "2026-09-19",
+  "applicationTests": {
+    "passed": 105,
+    "failed": 0
+  },
+  "geometry": {
+    "unexpectedHouseChanges": 0,
+    "sourceMeshes": 177,
+    "exception": "exact coincident grass duplicate faces only",
+    "packedDaylightMaps": 5
+  },
+  "mobileViewport": {
+    "size": [
+      390,
+      844
+    ],
+    "firstFloor": {
+      "expected": 30,
+      "placed": 30,
+      "overlaps": 0
+    },
+    "physicalPhoneTest": false,
+    "basementAfterZoom": {
+      "expected": 21,
+      "placed": 21,
+      "fontsPx": [
+        11,
+        10
+      ],
+      "overlaps": 0
+    },
+    "allFloorsAfterHQBakeAndFrameFix": [
+      {
+        "floor": 0,
+        "expected": 21,
+        "placed": 21,
+        "overlaps": 0
+      },
+      {
+        "floor": 1,
+        "expected": 24,
+        "placed": 24,
+        "overlaps": 0
+      },
+      {
+        "floor": 2,
+        "expected": 30,
+        "placed": 30,
+        "overlaps": 0
+      },
+      {
+        "floor": 3,
+        "expected": 15,
+        "placed": 15,
+        "overlaps": 0
+      }
+    ],
+    "latestTransitions": [
+      {
+        "floor": 1,
+        "frames": 27,
+        "elapsedMs": 1029.5
+      },
+      {
+        "floor": 2,
+        "frames": 26,
+        "elapsedMs": 992.7
+      },
+      {
+        "floor": 3,
+        "frames": 26,
+        "elapsedMs": 1056.4
+      }
+    ]
+  },
+  "portablePackage": {
+    "MiB": 158.66261291503906,
+    "dependencyFiles": 266,
+    "loadedFloor": "f3"
+  },
+  "navigation": {
+    "roomsMissingFixture": 0,
+    "centralEntryFacingWallCorrected": true,
+    "firstFloorVisualCheck": true
+  },
+  "context": {
+    "mobileRegionDetailsInitiallyCollapsed": true,
+    "zoomEnabled": false,
+    "autoRotateEnabledAndStoppedOnInteraction": true
+  },
+  "unresolved": [
+    "Exact map registration for two missing context buildings and street elevations",
+    "Merged basement Salon approved net area",
+    "Physical phone stability"
+  ],
+  "pushed": false,
+  "latestApplicationConsoleErrors": 0,
+  "roofPlanAudit": {
+    "report": "roof-cap-coverage.json",
+    "sourceTraceCoverageWithin3mm": 1,
+    "notVolumeProof": true,
+    "openReturnDrawingStrokeMm": 12
+  },
+  "bake": {
+    "aoGroups": 8,
+    "resolution": [
+      2048,
+      4096
+    ],
+    "cyclesSamples": 64,
+    "preservedSurfaceGraphs": 175,
+    "indirectDaylightMaps": 5,
+    "compressionJobs": 131,
+    "compressedAccepted": 114,
+    "originalFallbacks": 17,
+    "mathematicallyLosslessClaim": false
+  },
+  "textureMemory": {
+    "assumption": "RGBA8 source / 8bpp GPU block compression with mipmaps; excludes driver, geometry and decode working memory. Both baseline and streamed floors include the same garden, plot, white context and coloured trees.",
+    "allInteriors": {
+      "textures": 114,
+      "estimatedMiB": 202.02602005004883
+    },
+    "floors": [
+      {
+        "floor": 0,
+        "textures": 85,
+        "estimatedMiB": 109.00250244140625
+      },
+      {
+        "floor": 1,
+        "textures": 92,
+        "estimatedMiB": 120.50566101074219
+      },
+      {
+        "floor": 2,
+        "textures": 100,
+        "estimatedMiB": 162.10757064819336
+      },
+      {
+        "floor": 3,
+        "textures": 89,
+        "estimatedMiB": 133.41771697998047
+      }
+    ],
+    "neighborhood": {
+      "textures": 93,
+      "estimatedMiB": 140.66931915283203
+    }
+  },
+  "cameraFraming": {
+    "dockClearanceVerifiedDesktop": true,
+    "viewport": [
+      1280,
+      800
+    ],
+    "temporaryViewportReset": true
+  }
+}

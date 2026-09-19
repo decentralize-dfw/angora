@@ -4,15 +4,19 @@ import * as THREE from 'three';
 // untouched. Keep the baked maps, but avoid amplifying their micro-relief.
 export function materialFamily(name='') {
   name=name.replace(/\.\d{3}$/,'');
-  if (/clay tile|^roof$|green tiles/i.test(name)) return 'roof';
+  // The bldg-3 re-export renamed its surfaces in passing - 'roof' became
+  // 'roof-7', 'stucco' arrived as 'STRUCCO', 'white_trim' as 'WHT',
+  // 'wood_floor' as 'WOOD-FL' - so each family tolerates the variants the
+  // deliveries have actually used rather than one authored spelling.
+  if (/clay tile|^roof(-\d+)?$|green tiles/i.test(name)) return 'roof';
   // Glass and mirrors must never reach a roughness floor: 'Lift glass leaf'
   // would otherwise match the landscape family through 'leaf' and pick up a
   // 0.88 floor, and the mirrors read as masonry through nothing at all - the
   // floor is what matters, so they are named out before any family test.
   if (/glass|mirror/i.test(name)) return 'other';
-  if (/stucco|neighbor_wall|white_trim|limestone|stone_tile|retaining stone|asphalt/i.test(name)) return 'masonry';
+  if (/st?rucco|neighbor_wall|white_trim|^wht$|limestone|stone_tile|retaining stone|asphalt/i.test(name)) return 'masonry';
   if (/grass|foliage|hedge|needle|leaf/i.test(name)) return 'landscape';
-  if (/wood_floor|terra_floor/i.test(name)) return 'floor';
+  if (/wood_floor|^wood-?fl$|terra_floor/i.test(name)) return 'floor';
   // Indoor plaster. It used to fall through to 'other' and keep the loader's
   // envMapIntensity of 1 - the only family in the house left at full strength,
   // while roof sits at .65, floor .75 and masonry .8. A ceiling faces down, so
@@ -22,8 +26,8 @@ export function materialFamily(name='') {
   // ceilings were reading sRGB 118,125,97 - the ground's own colour, not their
   // own - because with no occlusion indoors the environment was most of what
   // reached them. The albedo is right; the weight was not.
-  if (/^ceiling$/.test(name)) return 'soffit';
-  if (/^interior$/.test(name)) return 'plaster';
+  if (/^ceiling$/i.test(name)) return 'soffit';
+  if (/^interior$/i.test(name)) return 'plaster';
   return 'other';
 }
 
@@ -57,8 +61,25 @@ export function prepareMaterialResponse(material, {context=false}={}) {
   } else if (family==='landscape') {
     material.normalScale?.multiplyScalar(.25);
   } else if (family==='plaster') {
-    material.envMapIntensity=.55;
+    // An interior wall's environment is the room, not the sky. At .55 the
+    // probe's upper hemisphere reached a 0.94 white wall with nothing to
+    // occlude it, and the attic's 360° tour showed the result: the ceiling
+    // beside it reads white because its own envMap is 0, while the walls read
+    // the blue-grey of the façade - "iç duvarlar beyaz. dış da ise tüm
+    // duvarlar o grimsi mavimsi renk. bunu karıştırma hiçbir yerde." The
+    // albedo was never the problem; the weight was, and it is the same
+    // argument that took the ceilings to 0.
+    material.envMapIntensity=0;
     material.normalMap=null;material.bumpMap=null;
+    // and the rest of what makes a ceiling read white, because the review is
+    // about the pair: "iç duvarlar beyaz" against a ceiling that already is.
+    // The albedo is 0.940 either way; the ceiling looks it and the wall does
+    // not, and the difference is here - the forced white, the vertex colours
+    // off, and the small emissive lift that stands in for the bounce an
+    // interior with no occlusion never gets.
+    material.color.setRGB(.94,.94,.94);
+    material.vertexColors=false;
+    material.emissive?.setRGB(.22,.22,.22);material.emissiveIntensity=1;
   } else if (family==='soffit') {
     material.normalMap=null;material.bumpMap=null;
     material.map=null;
@@ -82,9 +103,42 @@ export function prepareMaterialResponse(material, {context=false}={}) {
   } else if (family==='floor') {
     material.normalScale?.multiplyScalar(.3);
     material.envMapIntensity=.75;
-    if(material.isMeshPhysicalMaterial){material.clearcoat=Math.min(material.clearcoat,.08);material.clearcoatRoughness=.65;}
+    // The hard .08 clamp existed because an early export's floors read as wet
+    // pavement outdoors. The optimised set authors its coats deliberately
+    // (wood floors at .25), so the authored value now stands up to .35 with
+    // enough coat roughness to keep the sheen soft rather than wet.
+    if(material.isMeshPhysicalMaterial){
+      material.clearcoat=Math.min(material.clearcoat,.35);
+      material.clearcoatRoughness=Math.max(material.clearcoatRoughness??.65,.35);
+    }
   }
   material.needsUpdate=true;
+}
+
+// KHR_materials_transmission makes three re-render the entire opaque scene
+// into a transmission buffer every frame any such surface is visible - a
+// hidden second scene pass that is what made the optimised set crawl. The
+// refraction is traded for plain alpha glazing at load time: the openings
+// look the same, isSeeThrough still classifies them as glazing through the
+// opacity branch, and the per-frame scene copy is gone. Running before
+// mergeEqualMaterials also lets copies that differed only in transmission
+// collapse, so fewer programs compile.
+export function neutraliseTransmission(root) {
+  let converted=0;
+  root.traverse(object=>{
+    if(!object.isMesh)return;
+    for(const material of Array.isArray(object.material)?object.material:[object.material]){
+      if(!material||!(material.transmission>0))continue;
+      // Deeper transmission reads as clearer glass, so it maps to lower alpha.
+      material.opacity=Math.min(material.opacity,THREE.MathUtils.clamp(1-.72*material.transmission,.22,.9));
+      material.transmission=0;
+      material.transparent=true;
+      if(material.thickness)material.thickness=0;
+      material.depthWrite=false;
+      material.needsUpdate=true;converted++;
+    }
+  });
+  return converted;
 }
 
 

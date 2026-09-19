@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-19",
+  "integratedRemoteMain": "fb55955",
+  "applicationTests": {"passed": 123, "failed": 0},
+  "nativeSceneSha256": "123e8da1989fc113bfc44dfee2224290c27a787d61b66a062ee4de2cb0928281",
+  "drawCalls": {
+    "historicalMatchedBaseline": null,
+    "observedFrames": {"f0": 347, "f1": 351, "f2": 400, "f3": 426},
+    "mode": "3D floor view, fitted camera, desktop browser, transitions finished",
+    "allRenderPasses": true,
+    "note": "Snapshots depend on camera culling, shadow invalidation and render passes. These values do not establish a before/after reduction."
+  },
+  "physicalPhoneValidated": false
+}

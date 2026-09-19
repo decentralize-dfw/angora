@@ -1,0 +1,113 @@
+{
+  "generated_for": "R43",
+  "restored_from": "7ff3a54",
+  "restored_nodes": [
+    "F3 | ÇATII",
+    "F3 | ÇATI ALIN",
+    "F3 | ek dalgalar"
+  ],
+  "removed_nodes": [
+    "F3 | Source high hall roof",
+    "F3 | Corrected continuous inner roof lining"
+  ],
+  "removed_triangles": 7860,
+  "restored_triangles": 12121,
+  "roof_raised_m2": 49.32,
+  "roof_worst_rise_m": 2.8,
+  "roof_lowered_m2": 24.85,
+  "piercing_before": [
+    {
+      "name": "C05 | Painting frame depth 3",
+      "above": 0.454
+    },
+    {
+      "name": "C05 | Original framed art 3",
+      "above": 0.435
+    },
+    {
+      "name": "C05 | Painting frame depth 1",
+      "above": 0.327
+    },
+    {
+      "name": "C05 | Original framed art 1",
+      "above": 0.31
+    },
+    {
+      "name": "C05 | Painting frame depth 4",
+      "above": 0.228
+    },
+    {
+      "name": "C05 | Original framed art 4",
+      "above": 0.213
+    },
+    {
+      "name": "C05 | Plaster circular reveal",
+      "above": 0.166
+    },
+    {
+      "name": "C05 | Round timber window frame",
+      "above": 0.132
+    },
+    {
+      "name": "C05 | Painting frame depth 2",
+      "above": 0.126
+    },
+    {
+      "name": "C05 | Original framed art 2",
+      "above": 0.109
+    },
+    {
+      "name": "C05 | Circular physical glazing",
+      "above": 0.069
+    }
+  ],
+  "piercing_after": [
+    {
+      "name": "C05 | Painting frame depth 3",
+      "above": 0.454
+    },
+    {
+      "name": "C05 | Original framed art 3",
+      "above": 0.435
+    },
+    {
+      "name": "C05 | Painting frame depth 1",
+      "above": 0.327
+    },
+    {
+      "name": "C05 | Original framed art 1",
+      "above": 0.31
+    },
+    {
+      "name": "C05 | Painting frame depth 4",
+      "above": 0.228
+    },
+    {
+      "name": "C05 | Original framed art 4",
+      "above": 0.213
+    },
+    {
+      "name": "C05 | Plaster circular reveal",
+      "above": 0.166
+    },
+    {
+      "name": "C05 | Round timber window frame",
+      "above": 0.132
+    },
+    {
+      "name": "C05 | Painting frame depth 2",
+      "above": 0.126
+    },
+    {
+      "name": "C05 | Original framed art 2",
+      "above": 0.109
+    },
+    {
+      "name": "C05 | Circular physical glazing",
+      "above": 0.069
+    }
+  ],
+  "fittings_removed": [],
+  "asset_bytes": 1753716,
+  "asset_triangles": 280550
+}

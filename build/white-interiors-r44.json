@@ -1,0 +1,239 @@
+{
+  "generated_for": "R44",
+  "tolerance_m": 0.1,
+  "vertical": 0.5,
+  "lining_drop_m": 0.025,
+  "method": "walls re-judged by room-boundary distance and room interiors (R43 rule + inside-polygon); ceilings lined, not repainted",
+  "levels": {
+    "level-0": {
+      "walls": {
+        "F0 | ek dalgalar": {
+          "judged": 149,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 0,
+          "facade": 149,
+          "skinned": 0
+        },
+        "F0 | KAT 0$DUVAR": {
+          "judged": 841,
+          "to_white": 2,
+          "to_facade": 293,
+          "interior": 126,
+          "facade": 715,
+          "skinned": 56
+        },
+        "F0 | KAT 0$DUVAR KAPLAMA": {
+          "judged": 504,
+          "to_white": 0,
+          "to_facade": 240,
+          "interior": 264,
+          "facade": 240,
+          "skinned": 40
+        },
+        "F0 | KAT 0$TAVAN": {
+          "judged": 22,
+          "to_white": 4,
+          "to_facade": 0,
+          "interior": 4,
+          "facade": 18,
+          "skinned": 0
+        }
+      },
+      "lining": {},
+      "exterior_skin_tris": 96,
+      "asset_bytes": 5701688,
+      "asset_triangles": 298056
+    },
+    "level-1": {
+      "walls": {
+        "F1 | ek dalgalar": {
+          "judged": 89,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 0,
+          "facade": 89,
+          "skinned": 0
+        },
+        "F1 | KAT 1$DUVAR": {
+          "judged": 1590,
+          "to_white": 6,
+          "to_facade": 826,
+          "interior": 188,
+          "facade": 1402,
+          "skinned": 65
+        },
+        "F1 | KAT 1$DUVAR KAPLAMA": {
+          "judged": 1689,
+          "to_white": 0,
+          "to_facade": 817,
+          "interior": 872,
+          "facade": 817,
+          "skinned": 99
+        },
+        "F1 | KAT 1$TAVAN": {
+          "judged": 38,
+          "to_white": 27,
+          "to_facade": 0,
+          "interior": 27,
+          "facade": 11,
+          "skinned": 0
+        },
+        "Kitchen R24 | painted central display back": {
+          "judged": 12,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 12,
+          "facade": 0,
+          "skinned": 0
+        },
+        "Kitchen R24 | painted side display back": {
+          "judged": 12,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 12,
+          "facade": 0,
+          "skinned": 0
+        },
+        "R31 | Solid salon column": {
+          "judged": 418,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 418,
+          "facade": 0,
+          "skinned": 0
+        }
+      },
+      "lining": {
+        "f0": 798
+      },
+      "exterior_skin_tris": 164,
+      "asset_bytes": 7437764,
+      "asset_triangles": 789236
+    },
+    "level-2": {
+      "walls": {
+        "107 | Restored window parapet": {
+          "judged": 12,
+          "to_white": 0,
+          "to_facade": 10,
+          "interior": 2,
+          "facade": 10,
+          "skinned": 0
+        },
+        "F2 | ek dalgalar": {
+          "judged": 81,
+          "to_white": 0,
+          "to_facade": 0,
+          "interior": 0,
+          "facade": 81,
+          "skinned": 0
+        },
+        "F2 | KAT 2$DUVAR": {
+          "judged": 2485,
+          "to_white": 5,
+          "to_facade": 722,
+          "interior": 624,
+          "facade": 1861,
+          "skinned": 93
+        },
+        "F2 | KAT 2$DUVAR KAPLAMA": {
+          "judged": 1955,
+          "to_white": 0,
+          "to_facade": 836,
+          "interior": 1119,
+          "facade": 836,
+          "skinned": 120
+        },
+        "F2 | KAT 2$TAVAN": {
+          "judged": 9,
+          "to_white": 3,
+          "to_facade": 0,
+          "interior": 3,
+          "facade": 6,
+          "skinned": 0
+        },
+        "Master | Left plaster reveal": {
+          "judged": 108,
+          "to_white": 0,
+          "to_facade": 24,
+          "interior": 84,
+          "facade": 24,
+          "skinned": 0
+        },
+        "Master | Photographed shallow plaster arch": {
+          "judged": 324,
+          "to_white": 0,
+          "to_facade": 164,
+          "interior": 160,
+          "facade": 164,
+          "skinned": 0
+        },
+        "Master | Right plaster reveal": {
+          "judged": 108,
+          "to_white": 0,
+          "to_facade": 24,
+          "interior": 84,
+          "facade": 24,
+          "skinned": 0
+        }
+      },
+      "lining": {
+        "f1": 747
+      },
+      "exterior_skin_tris": 213,
+      "asset_bytes": 6928780,
+      "asset_triangles": 620327
+    },
+    "level-3": {
+      "walls": {
+        "F3 | Attic partition core": {
+          "judged": 30398,
+          "to_white": 0,
+          "to_facade": 24923,
+          "interior": 5475,
+          "facade": 24923,
+          "skinned": 37
+        },
+        "F3 | Hall parapet triangular gap closed": {
+          "judged": 396,
+          "to_white": 0,
+          "to_facade": 300,
+          "interior": 96,
+          "facade": 300,
+          "skinned": 0
+        },
+        "F3 | KAT 3$DUVAR": {
+          "judged": 2210,
+          "to_white": 50,
+          "to_facade": 658,
+          "interior": 377,
+          "facade": 1833,
+          "skinned": 27
+        },
+        "F3 | KAT 3$DUVAR KAPLAMA": {
+          "judged": 2422,
+          "to_white": 0,
+          "to_facade": 1045,
+          "interior": 1377,
+          "facade": 1045,
+          "skinned": 118
+        },
+        "F3 | ek dalgalar": {
+          "judged": 16,
+          "to_white": 1,
+          "to_facade": 0,
+          "interior": 1,
+          "facade": 15,
+          "skinned": 0
+        }
+      },
+      "lining": {
+        "f2": 2446
+      },
+      "exterior_skin_tris": 182,
+      "asset_bytes": 1785708,
+      "asset_triangles": 270066
+    }
+  }
+}

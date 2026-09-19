@@ -1,35 +1,396 @@
-:root{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#233c38;background:#edf0eb;font-synthesis:none;--paper:rgba(250,251,247,.95);--ink:#233c38;--muted:#63736d;--line:#d8dfd7;--accent:#315c50}
-*{box-sizing:border-box}body{margin:0}button,select,input{font:inherit}button,a,input,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer;border:0;color:inherit;background:transparent;touch-action:manipulation}button:disabled{opacity:.4;cursor:wait}button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #92733d;outline-offset:3px}button[aria-pressed=true]{color:white;background:var(--ink)}[hidden]{display:none!important}#app,#viewport{position:fixed;inset:0;overflow:hidden}#viewport canvas{display:block;touch-action:none;width:100%;height:100%}.topbar,.scale-picker,.view-description,.side-tools,.explore-dock,.panel,.region-panel,.walk-tools,.gesture-help{position:absolute;z-index:20}.topbar{top:max(20px,env(safe-area-inset-top));left:28px;right:28px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}.identity{display:flex;align-items:center;gap:17px}.brand{font-size:12px;font-weight:700;letter-spacing:.26em}.brand-divider{width:1px;height:19px;background:#83978a88}h1{font-size:19px;letter-spacing:-.5px;font-weight:400;margin:0}h1 strong{font-weight:650}.quiet-button{pointer-events:auto;background:var(--paper);border:1px solid #d8dfd799;border-radius:22px;padding:0 16px;min-height:40px;font-size:13px}.quiet-button span{margin-left:12px}.scale-picker{display:flex;top:80px;left:28px;gap:3px;padding:4px;border-radius:26px;background:var(--paper);box-shadow:0 4px 20px #233c3810}.scale-picker button{min-height:38px;border-radius:22px;padding:0 18px;font-size:13px}.view-description{top:140px;left:30px;pointer-events:none;text-shadow:0 1px 12px #ffffff}.view-description h2{font-size:15px;font-weight:550;margin:0 0 5px}.view-description p{font-size:12px;margin:0;color:#40594e}.side-tools{right:28px;top:80px;display:flex;flex-direction:column;gap:8px}.side-tools button{width:44px;height:44px;background:var(--paper);border:1px solid #d8dfd799;border-radius:50%;font-size:12px;box-shadow:0 4px 16px #233c3810}.side-tools button[aria-pressed=true]{background:var(--ink);color:white}#reset-view{font-size:24px}.explore-dock{bottom:max(29px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:var(--paper);border:1px solid #ffffffbb;padding:5px;border-radius:23px;box-shadow:0 9px 40px #162a3420;width:360px;max-width:calc(100% - 24px)}.floor-row{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}.floor-row button{min-height:38px;font-size:13px;border-radius:18px}.dock-actions{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin:4px 6px 0;padding-top:3px;gap:8px}.camera-tools{display:flex;gap:0}.camera-tools button{width:36px;height:38px;border-radius:14px;font-size:21px}.camera-tools button[aria-pressed=true]{background:#dce6df;color:var(--ink)}.walk-launch{font-size:12px;min-height:38px;padding:0 13px;border-radius:16px;background:var(--ink);color:white;white-space:nowrap}.walk-launch span{margin-left:7px}.gesture-help{bottom:4px;left:0;right:0;text-align:center;font-size:10px;color:#476053;margin:0;pointer-events:none}.panel{background:var(--paper);border:1px solid white;border-radius:23px;padding:16px 18px;box-shadow:0 12px 60px #15282024;width:320px;max-width:calc(100% - 24px);max-height:calc(100dvh - 200px);overflow:auto;overscroll-behavior:contain}.options-panel{right:82px;top:80px}.info-panel{right:28px;top:80px}.panel-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.panel h2{font-size:16px;font-weight:550;margin:0}.panel-heading button{width:34px;height:34px;border-radius:50%;font-size:24px;background:#e9eee7}.scene-options{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.scene-options button{min-height:42px;border-radius:12px;font-size:12px;background:#e6ece6}.scene-options button[aria-pressed=true]{background:var(--ink)}.daylight-heading{display:flex;justify-content:space-between;margin:24px 1px 10px;font-size:13px}#daylight-time{font-variant-numeric:tabular-nums;font-size:18px}#daylight-hour{width:100%;accent-color:var(--accent);height:24px;margin:0;cursor:ew-resize}.range-endpoints{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}.daylight-footer{display:flex;justify-content:space-between;margin-top:12px;gap:12px}.daylight-footer select,.daylight-footer button{border:1px solid var(--line);min-height:38px;padding:0 11px;border-radius:12px;font-size:12px}.daylight-footer select{background:transparent;color:var(--ink)}.small-note{color:var(--muted);font-size:11px;line-height:1.5;margin:14px 0 0}.property-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.property-stat{border-bottom:1px solid var(--line);padding-bottom:10px}.property-stat strong{display:block;font-size:23px;font-weight:500;letter-spacing:-.6px}.property-stat span{font-size:11px;color:var(--muted)}.property-room-list{padding:0;list-style:none;margin:15px 0}.property-room-list li{display:flex;justify-content:space-between;padding:7px 0;font-size:12px;border-bottom:1px solid #d8dfd766;gap:12px}.property-room-list span{white-space:nowrap}.listing-link{font-size:12px;color:var(--accent);display:block;text-decoration:none;margin-top:14px}.annotation-overlay,.hotspot-overlay{position:absolute;inset:0;pointer-events:none;z-index:5;overflow:hidden}.room-label{position:absolute;transform:translate(-50%,-50%);padding:5px 8px 5px 9px;background:rgba(255,255,251,.94);box-shadow:0 2px 10px #162a3425;border:1px solid #ffffffb3;border-radius:8px;text-align:left;line-height:1.24;pointer-events:auto;max-width:140px;min-width:65px;min-height:38px;color:#203c35}.room-label strong{display:block;font-weight:600;padding-right:19px}.room-label span{display:block;font-size:.85em;color:#4d665e;margin-top:2px}.room-label small{position:absolute;right:5px;top:6px;font-size:8px;color:#516e62}.dimension-label{position:absolute;transform:translate(-50%,-50%);padding:3px 6px;border-radius:5px;white-space:nowrap;font-weight:600;letter-spacing:.01em;background:#233e37ed;color:white;box-shadow:0 1px 5px #ffffff99}.hotspot{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;background:transparent;color:white;min-height:44px;min-width:44px;filter:drop-shadow(0 1px 3px #0009)}.hotspot i{display:block;margin:auto;width:28px;height:16px;border:2px solid white;border-radius:50%;background:#ffffff44;box-shadow:0 0 0 5px #ffffff1a}.hotspot span{display:block;font-size:11px;max-width:120px;background:#203c35ca;border-radius:6px;margin-top:8px;padding:4px 6px}.walk-tools{inset:0;pointer-events:none}.walk-close{position:absolute;right:28px;top:80px;width:44px;height:44px;pointer-events:auto;border-radius:50%;background:var(--paper);font-size:28px}.walk-room-panel{position:absolute;left:28px;bottom:30px;pointer-events:auto;background:var(--paper);border-radius:18px;padding:12px 16px;max-width:250px;display:grid;gap:5px}.walk-room-panel label{font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}.walk-room-panel select{border:0;background:transparent;color:var(--ink);font-size:14px;width:100%;min-height:30px}.walk-room-panel>span{font-size:12px;color:var(--muted)}.walk-pad{position:absolute;right:28px;bottom:30px;display:grid;grid-template-columns:repeat(3,36px);grid-template-rows:repeat(2,36px);gap:3px;pointer-events:auto}.walk-pad button{font-size:21px;background:var(--paper);border-radius:12px}.walk-forward{grid-column:2}.walk-left{grid-column:1;grid-row:2}.walk-back{grid-column:2;grid-row:2}.walk-right{grid-column:3;grid-row:2}#app[data-walk=true] .scale-picker,#app[data-walk=true] .explore-dock,#app[data-walk=true] #toggle-plan,#app[data-walk=true] #reset-view{display:none}#app[data-walk=true] .view-description{top:82px;max-width:70%}#app[data-walk=true] .side-tools{top:136px}.load-status{position:absolute;z-index:40;bottom:145px;left:50%;transform:translateX(-50%);background:var(--paper);border-radius:16px;padding:13px 17px;display:flex;gap:10px;align-items:center;font-size:13px;max-width:calc(100% - 32px);box-shadow:0 5px 30px #233c3820}.load-status.error{line-height:1.5}.load-status button{background:var(--ink);color:white;border-radius:10px;padding:9px;white-space:nowrap}.spinner{width:15px;height:15px;border:2px solid #315c5022;border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;flex-shrink:0}.error .spinner{display:none}@keyframes spin{to{transform:rotate(360deg)}}#cloud-transition{position:absolute;inset:-20%;z-index:18;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 20% 50%,#fff 0,transparent 55%),radial-gradient(ellipse at 80% 45%,#ffffffed 0,transparent 55%);filter:blur(22px)}#cloud-transition.travel{animation:cloud-travel 1250ms ease-in-out}@keyframes cloud-travel{0%,100%{opacity:0;transform:scale(1.2)}42%{opacity:.88;transform:scale(1)}70%{opacity:.5;transform:scale(.95)}}
-@media(max-width:600px){.topbar{top:max(13px,env(safe-area-inset-top));left:16px;right:16px}.identity{gap:10px}.brand{font-size:10px;letter-spacing:.21em}h1{font-size:17px}.brand-divider{height:16px}.quiet-button{font-size:12px;min-height:36px;padding:0 12px}.scale-picker{top:63px;left:12px;padding:3px}.scale-picker button{min-height:36px;font-size:12px;padding:0 14px}.view-description{top:114px;left:17px;max-width:74%}.view-description h2{font-size:13px}.view-description p{font-size:10px}.side-tools{right:12px;top:63px;gap:6px}.side-tools button{width:40px;height:40px;font-size:11px}.side-tools #reset-view{font-size:23px}.explore-dock{bottom:max(21px,env(safe-area-inset-bottom));width:340px;padding:4px;border-radius:21px}.floor-row button{min-height:36px;font-size:12px}.camera-tools button{width:34px;height:36px}.dock-actions{margin-top:2px;padding-top:2px}.walk-launch{min-height:34px;font-size:11px}.gesture-help{font-size:9px;bottom:4px}.panel{top:auto;right:12px;bottom:116px;width:calc(100% - 24px);max-height:calc(100dvh - 245px);padding:13px 16px}.panel-heading{margin-bottom:8px}.daylight-heading{margin-top:17px}.room-label{max-width:117px;padding:4px 7px;min-height:37px}.walk-close{right:12px;top:63px}.walk-room-panel{left:12px;bottom:25px;max-width:calc(100% - 145px);padding:10px 12px}.walk-pad{right:12px;bottom:25px}#app[data-walk=true] .view-description{top:68px}#app[data-walk=true] .side-tools{top:113px}.load-status{bottom:125px;font-size:12px}.property-stat strong{font-size:21px}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
-.lighting-choice{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px;margin:12px 0}.lighting-choice select{max-width:220px;min-height:40px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:10px;padding:0 9px;font-size:14px}.site-overlay{position:absolute;inset:0;pointer-events:none;z-index:6;overflow:hidden}.site-label{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;min-width:26px;height:26px;border-radius:50%;background:#f6f8f0e8;border:1px solid #233c3833;box-shadow:0 2px 8px #1b322525;font-size:12px;color:var(--ink)}.site-label-villa{pointer-events:auto;min-width:90px;min-height:42px;height:auto;border-radius:18px;padding:8px 13px;background:var(--ink);color:white;font-size:14px;font-weight:600;border:2px solid white}.region-panel{left:28px;bottom:146px;display:grid;gap:9px;font-size:13px}.region-panel>span{color:var(--muted);text-shadow:0 1px 5px white}.region-panel button{border-radius:16px;min-height:42px;padding:9px 15px;background:var(--paper);box-shadow:0 3px 15px #233c3818;font-size:14px}.model-scale{position:absolute;z-index:7;right:28px;bottom:146px;display:flex;flex-direction:column;align-items:center;gap:5px;pointer-events:none;font-size:12px;color:var(--ink);text-shadow:0 1px 3px white}.model-scale i{display:block;height:6px;border:solid var(--ink);border-width:0 1px 2px}#app[data-scale=region] .floor-row{display:none}#app[data-scale=region] .explore-dock{width:340px}#app[data-scale=region] .dock-actions{border-top:0;margin-top:0}#app[data-walk=true] .region-panel{display:none}#app[data-render-error=true] .view-description,#app[data-render-error=true] .model-scale{display:none}@media(max-width:600px){.region-panel{left:17px;bottom:132px;font-size:12px}.model-scale{right:17px;bottom:132px}.scale-picker button,.floor-row button{font-size:14px}.scale-picker button{padding:0 12px}.walk-launch{font-size:13px}.view-description h2{font-size:14px}.view-description p{font-size:12px}.gesture-help{font-size:10px}}
+/* Angora 21 — R44 interface.
+   One material for every control: white glass at 40% over an 8 px blur, a
+   hairline of brighter white for the edge, Jura for every letter. Positions
+   are deliberate: identity and the two sheets live on the top bar, the scale
+   sits top-centre, the camera rail hangs mid-right where a thumb rests, the
+   floors and the tour share the bottom dock. Selection is the one solid: ink. */
 
-.load-copy{display:grid;gap:7px;min-width:172px}.load-line{display:flex;justify-content:space-between;align-items:baseline;gap:14px}#load-percent{font-variant-numeric:tabular-nums;font-size:12px;color:var(--muted)}.load-bar{display:block;height:3px;border-radius:2px;background:#315c5022;overflow:hidden}.load-bar i{display:block;height:100%;width:0;border-radius:2px;background:var(--accent);transition:width .3s ease}.error .load-bar,.error #load-percent{display:none}
-@media(max-width:600px){.load-copy{min-width:148px}}
+@font-face{font-family:'Jura';font-style:normal;font-weight:300 700;font-display:swap;
+  src:url('./fonts/jura-latin-ext.woff2') format('woff2');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Jura';font-style:normal;font-weight:300 700;font-display:swap;
+  src:url('./fonts/jura-latin.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 
-/* Room tags are information, not furniture. The card - background, border,
-   shadow, a 360 badge - was louder than the plan underneath it, so the card is
-   gone: the name and the area sit directly on the model with a white halo to
-   carry them over any surface, and they shrink with the view. The 44 px
-   rectangle stays as the tap target; only the ink is small. */
-.room-label{padding:0;min-width:44px;background:none;border:0;box-shadow:none;display:grid;place-items:center;line-height:1.25}
+:root{
+  font-family:'Jura',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  color:#161d1a;background:#e9eeed;font-synthesis:none;
+  --ink:#161d1a;
+  --muted:#5d6b66;
+  --line:rgba(22,29,26,.10);
+  --accent:#2f5147;
+  --glass:rgba(255,255,255,.40);
+  --glass-hover:rgba(255,255,255,.62);
+  --glass-strong:rgba(255,255,255,.55);
+  /* information-heavy surfaces: readable over grass, glare and dark rooms */
+  --panel:rgba(251,252,251,.86);
+  --edge:rgba(255,255,255,.65);
+  --shadow:0 10px 30px rgba(15,26,22,.12),0 1px 2px rgba(15,26,22,.06);
+  --shadow-soft:0 6px 18px rgba(15,26,22,.10);
+  --blur:blur(8px) saturate(1.5);
+  --paper:var(--glass);
+  --r:16px;
+}
+*{box-sizing:border-box}
+body{margin:0;letter-spacing:.01em}
+button,select,input{font:inherit;letter-spacing:inherit}
+button,a,input,select{-webkit-tap-highlight-color:transparent}
+button{cursor:pointer;border:0;color:inherit;background:transparent;touch-action:manipulation;font-weight:500}
+button:disabled{opacity:.38;cursor:default}
+button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button[aria-pressed=true]{color:#fff;background:var(--ink)}
+[hidden]{display:none!important}
+#app,#viewport{position:fixed;inset:0;overflow:clip}
+#viewport canvas{display:block;touch-action:none;width:100%;height:100%}
+
+/* ---------------------------------------------------------------- glass */
+.glass,.quiet-button,.scale-picker,.view-description,.side-tools,.explore-dock,
+.panel,.region-panel button,.walk-close,.walk-room-panel,.walk-pad button,
+.load-status,.gesture-help,.identity,.model-scale span{
+  background:var(--glass);
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  border:1px solid var(--edge);
+  box-shadow:var(--shadow-soft);
+}
+.topbar,.scale-picker,.view-description,.side-tools,.explore-dock,.panel,
+.region-panel,.walk-tools,.gesture-help{position:absolute;z-index:20}
+
+/* ------------------------------------------------------------- top bar */
+.topbar{top:max(18px,env(safe-area-inset-top));left:22px;right:22px;display:flex;align-items:center;justify-content:space-between;pointer-events:none;gap:12px}
+.identity{display:flex;align-items:center;gap:14px;border-radius:999px;padding:9px 18px 9px 16px}
+.brand{font-size:12px;font-weight:700;letter-spacing:.30em;transform:translateY(.5px)}
+.brand-divider{width:1px;height:16px;background:rgba(22,29,26,.22)}
+h1{font-size:17px;letter-spacing:.02em;font-weight:500;margin:0;white-space:nowrap}
+h1 strong{font-weight:700}
+.top-actions{display:flex;gap:8px;pointer-events:auto}
+.quiet-button{pointer-events:auto;border-radius:999px;padding:0 18px;min-height:42px;font-size:13px;font-weight:600}
+.quiet-button:not(:disabled):hover{background:var(--glass-hover)}
+.quiet-button[aria-expanded=true]{background:var(--ink);color:#fff}
+
+/* --------------------------------------------------------- scale picker */
+.scale-picker{display:flex;top:max(18px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);gap:3px;padding:4px;border-radius:999px}
+.scale-picker button{min-height:38px;border-radius:999px;padding:0 18px;font-size:13px;font-weight:600;white-space:nowrap}
+.scale-picker button:not([aria-pressed=true]):hover{background:var(--glass-hover)}
+
+/* ----------------------------------------------------- view description */
+.view-description{top:86px;left:22px;pointer-events:none;border-radius:14px;padding:9px 14px;max-width:300px}
+.view-description h2{font-size:14px;font-weight:700;margin:0 0 2px;letter-spacing:.02em}
+.view-description p{font-size:11px;margin:0;color:var(--muted)}
+
+/* ------------------------------------------------------- camera rail */
+.side-tools{right:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;border-radius:999px;padding:8px}
+.side-tools button{width:42px;height:42px;background:transparent;border:0;border-radius:999px;font-size:13px;font-weight:600;box-shadow:none;display:grid;place-items:center}
+.side-tools button:not(:disabled):not([aria-pressed=true]):hover{background:var(--glass-hover)}
+.side-tools .camera-tools{display:flex;flex-direction:column;align-items:center;gap:6px}
+.rail-divider{display:block;width:22px;height:1px;background:var(--line)}
+#zoom-in,#zoom-out{font-size:20px;font-weight:400}
+#rotate-mode,#pan-mode{font-size:18px}
+#reset-view{font-size:20px}
+.side-tools .camera-tools[hidden]{display:none}
+
+/* --------------------------------------------------------------- dock */
+.explore-dock{bottom:max(22px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;padding:5px;border-radius:999px;width:max-content;max-width:calc(100% - 20px)}
+.floor-row{display:flex;gap:3px}
+.floor-row button{min-height:40px;font-size:13px;font-weight:600;border-radius:999px;padding:0 16px;white-space:nowrap}
+.floor-row button:not([aria-pressed=true]):hover{background:var(--glass-hover)}
+.dock-actions{display:flex;align-items:center;gap:6px}
+.walk-launch{font-size:13px;font-weight:700;min-height:40px;padding:0 18px;border-radius:999px;background:var(--ink);color:#fff;white-space:nowrap;letter-spacing:.02em}
+.walk-launch:not(:disabled):hover{background:#000}
+.walk-launch span{margin-left:8px}
+/* The dock belongs to the villa: floors AND the 360° tour appear only once
+   the Villa scale is chosen ("360 keşfet sadece villada katlar arası
+   gezilirken çıkmalıdır"); street and region show no dock at all. */
+#app[data-scale=region] .explore-dock,
+#app[data-scale=neighborhood] .explore-dock{display:none}
+
+/* --------------------------------------------------------- gesture help */
+.gesture-help{bottom:max(22px,env(safe-area-inset-bottom));left:22px;right:auto;margin:0;pointer-events:none;font-size:10.5px;color:var(--muted);border-radius:999px;padding:7px 12px;width:max-content;max-width:min(340px,calc(100vw - 44px))}
+
+/* --------------------------------------------------------------- panels */
+.panel{right:22px;top:74px;border-radius:20px;padding:18px 20px;width:340px;max-width:calc(100% - 24px);max-height:calc(100dvh - 170px);overflow:auto;overscroll-behavior:contain;background:var(--panel);box-shadow:var(--shadow);z-index:50}
+.options-panel{right:22px}
+.info-panel{right:22px}
+.panel-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.panel h2{font-size:15px;font-weight:700;margin:0;letter-spacing:.02em}
+.panel-heading button{width:36px;height:36px;border-radius:999px;font-size:20px;background:rgba(255,255,255,.5);border:1px solid var(--edge)}
+.scene-options{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.scene-options button{min-height:42px;border-radius:12px;font-size:12px;font-weight:600;background:rgba(255,255,255,.5);border:1px solid var(--edge)}
+.scene-options button[aria-pressed=true]{background:var(--ink);border-color:var(--ink)}
+.daylight-heading{display:flex;justify-content:space-between;align-items:baseline;margin:22px 1px 8px;font-size:12px;color:var(--muted)}
+#daylight-time{font-variant-numeric:tabular-nums;font-size:17px;font-weight:600;color:var(--ink)}
+#daylight-hour{width:100%;accent-color:var(--accent);height:26px;margin:0;cursor:ew-resize}
+.range-endpoints{display:flex;justify-content:space-between;font-size:10px;color:var(--muted)}
+.daylight-footer{display:flex;justify-content:space-between;margin-top:12px;gap:10px}
+.daylight-footer select,.daylight-footer button{border:1px solid var(--edge);min-height:40px;padding:0 12px;border-radius:12px;font-size:12px;font-weight:600;background:rgba(255,255,255,.5)}
+.daylight-footer button[aria-pressed=true]{background:var(--ink);border-color:var(--ink)}
+.lighting-choice{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;margin:12px 0;color:var(--muted)}
+.lighting-choice select{max-width:210px;min-height:40px;border:1px solid var(--edge);background:rgba(255,255,255,.5);color:var(--ink);border-radius:12px;padding:0 10px;font-size:13px;font-weight:600}
+.small-note{color:var(--muted);font-size:11px;line-height:1.5;margin:12px 0 0}
+.panel .scene-options+.scene-options{margin-top:6px}
+
+/* ------------------------------------------------------------- property */
+.property-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.property-stat{border-bottom:1px solid var(--line);padding-bottom:10px}
+.property-stat strong{display:block;font-size:22px;font-weight:600;letter-spacing:0}
+.property-stat span{font-size:11px;color:var(--muted)}
+.property-room-list{padding:0;list-style:none;margin:14px 0}
+.property-room-list li{display:flex;justify-content:space-between;padding:7px 0;font-size:12px;border-bottom:1px solid var(--line);gap:12px}
+.property-room-list span{white-space:nowrap}
+.listing-link{font-size:12px;font-weight:700;color:var(--accent);display:block;text-decoration:none;margin-top:14px}
+
+/* ------------------------------------------------------ scene overlays */
+.annotation-overlay,.hotspot-overlay{position:absolute;inset:0;pointer-events:none;z-index:5;overflow:hidden}
+.room-label{position:absolute;transform:translate(-50%,-50%);padding:0;background:none;border:0;box-shadow:none;text-align:left;line-height:1.25;pointer-events:auto;max-width:150px;min-width:44px;min-height:44px;color:#1c2622;display:grid;place-items:center}
 .room-label i{padding:0;background:none;border:0;box-shadow:none;max-width:100%;min-width:0;font-style:normal;text-align:center;text-shadow:0 1px 2px #fff,0 0 6px #ffffffd9,0 0 12px #ffffff8c}
-.room-label strong{display:block;font-weight:600;padding-right:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#1b3129}
+.room-label strong{display:block;font-weight:700;padding-right:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#16241e}
 .room-label em{display:block;font-style:normal}
-.room-label span{font-size:.82em;color:#40564d;font-variant-numeric:tabular-nums}
+.room-label span{display:block;font-size:.82em;color:#43584f;margin-top:1px;font-variant-numeric:tabular-nums}
 .room-label small{display:none}
-/* Touch already rotates with one finger and pans with two, so the pair of mode
-   buttons only adds a decision on a phone. */
-@media(pointer:coarse){#rotate-mode,#pan-mode{display:none}}
+.dimension-label{position:absolute;transform:translate(-50%,-50%);padding:3px 7px;border-radius:6px;white-space:nowrap;font-weight:600;letter-spacing:.02em;background:#182420ee;color:#fff;box-shadow:0 1px 5px #ffffff99}
+.dimension-label.measured{background:rgba(255,255,255,.72);color:#31514a;border:1px solid #8ba79d;font-weight:600;box-shadow:0 1px 4px #ffffffcc;-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
+.hotspot{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;background:transparent;color:#fff;min-height:44px;min-width:44px;filter:drop-shadow(0 1px 3px #0009)}
+.hotspot i{display:block;margin:auto;width:28px;height:16px;border:2px solid #fff;border-radius:50%;background:#ffffff44;box-shadow:0 0 0 5px #ffffff1a}
+.hotspot span{display:block;font-size:11px;max-width:120px;background:#182420ca;border-radius:8px;margin-top:8px;padding:4px 7px}
 
-/* The lift control lives in the walk panel: it only means something while
-   standing at a landing, and the panel is already hidden outside the tour. */
-.lift-call{display:grid;gap:2px;text-align:left;min-height:44px;margin-top:6px;padding:7px 9px;border-radius:12px;background:#e6ece6;color:var(--ink)}
-.lift-call .lift-call-label{font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
-.lift-call .lift-call-target{font-size:13px}
+/* ------------------------------------------------------------ site view */
+.site-overlay{position:absolute;inset:0;pointer-events:none;z-index:6;overflow:hidden}
+.site-label{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;min-width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.66);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:0 2px 8px #1b322522;font-size:11px;font-weight:600;color:var(--ink)}
+.site-label-villa{pointer-events:auto;min-width:96px;min-height:44px;height:auto;border-radius:999px;padding:9px 16px;background:var(--ink);color:#fff;font-size:13px;font-weight:700;border:1.5px solid #fff;letter-spacing:.02em}
+.region-panel{left:50%;transform:translateX(-50%);bottom:max(22px,env(safe-area-inset-bottom));display:grid;gap:7px;justify-items:center;font-size:12px}
+.region-panel .region-meta{color:var(--muted);text-shadow:0 1px 5px #fff;font-size:11px}
+.region-panel button{border-radius:999px;min-height:42px;padding:9px 18px;font-size:13px;font-weight:700}
+.region-panel button:not(:disabled):hover{background:var(--glass-hover)}
+.region-radius{display:flex;gap:3px;padding:4px;border-radius:999px;background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge)}
+.region-radius button{min-height:36px;min-width:64px;padding:0 16px;font-size:13px;font-weight:600;border-radius:999px;border:0;background:transparent}
+.region-radius button:not([aria-pressed=true]):hover{background:var(--glass-hover)}
+.region-radius button[aria-pressed=true]{background:var(--ink);color:#fff}
+#return-villa{background:var(--ink);color:#fff}
+#return-villa:not(:disabled):hover{background:#000}
+
+/* ----------------------------------------------------------- region map */
+.region-map{position:absolute;inset:0;z-index:8;background:#eef1ec;opacity:0;transform:scale(1.04);transition:opacity 460ms ease,transform 760ms cubic-bezier(.22,.8,.2,1);overflow:hidden;pointer-events:none}
+.region-map.rm-active{opacity:1;transform:scale(1);pointer-events:auto}
+.rm-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.rm-svg>g{transition:transform 950ms cubic-bezier(.22,.8,.2,1)}
+.rm-base{opacity:.5}
+/* the district drawn as a plan: green, buildings, the street hierarchy */
+.rm-green{fill:rgba(107,138,106,.13)}
+.rm-bldg{fill:rgba(22,29,26,.10)}
+.rm-road{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.rm-road-0{stroke:rgba(22,29,26,.34);stroke-width:13}
+.rm-road-1{stroke:rgba(22,29,26,.27);stroke-width:9}
+.rm-road-2{stroke:rgba(22,29,26,.21);stroke-width:5.5}
+.rm-road-3{stroke:rgba(22,29,26,.12);stroke-width:3}
+.rm-bound{fill:rgba(47,81,71,.05);stroke:var(--accent);stroke-width:3;stroke-dasharray:12 8;opacity:.85}
+/* each title on its own rounded card - a halo alone read as nothing */
+.rm-dot-tag text{font-size:26px;fill:rgba(22,29,26,.82);letter-spacing:.02em}
+.rm-dot-tag rect{fill:rgba(255,255,255,.85);stroke:rgba(22,29,26,.10);stroke-width:1;vector-effect:non-scaling-stroke}
+.region-map[data-radius="2000"] .rm-dot-tag text{font-size:46px}
+.region-map[data-radius="500"] .rm-dot-tag text{font-size:14px}
+.rm-roads{opacity:.85}
+.rm-plot{fill:rgba(47,81,71,.10)}
+.rm-building{fill:rgba(22,29,26,.13)}
+.rm-villa{fill:var(--ink)}
+.rm-ring{fill:none;stroke:rgba(22,29,26,.22);stroke-width:1;stroke-dasharray:1 6;stroke-linecap:round}
+.rm-poi{stroke:#fff;stroke-width:1.5;transition:opacity 400ms ease}
+.rm-poi.rm-g0{fill:#6c86a6}.rm-poi.rm-g1{fill:#b27b89}.rm-poi.rm-g2{fill:#b3924f}
+.rm-poi.rm-g3{fill:#a08a50}.rm-poi.rm-g4{fill:#74996f}.rm-poi.rm-g5{fill:#84918a}
+.rm-dot{opacity:.5;transition:opacity 400ms ease}
+.rm-dot-tag{transition:opacity 400ms ease}
+.rm-off-0 .rm-g0,.rm-off-1 .rm-g1,.rm-off-2 .rm-g2,
+.rm-off-3 .rm-g3,.rm-off-4 .rm-g4,.rm-off-5 .rm-g5{opacity:0;pointer-events:none}
+.rm-pulse{fill:none;stroke:rgba(22,29,26,.35);stroke-width:1;animation:rm-pulse 2.6s ease-out infinite}
+@keyframes rm-pulse{0%{r:14;opacity:.7}70%{r:46;opacity:0}100%{r:46;opacity:0}}
+.rm-labels{position:absolute;inset:0}
+.rm-chip{position:absolute;left:0;top:0;white-space:nowrap;transition:transform 950ms cubic-bezier(.22,.8,.2,1),opacity 500ms ease;border-radius:999px;padding:4px 11px;font-size:11px;color:var(--ink);background:rgba(255,255,255,.55);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:0 2px 10px #1b322514}
+.rm-chip i{font-style:normal;color:var(--muted)}
+.rm-chip b{font-weight:600;color:var(--muted);margin-left:2px}
+.rm-chip em{display:inline-block;font-style:normal;color:var(--accent);margin-left:2px}
+.rm-chip-villa{background:var(--ink);color:#fff;border-color:#fff;font-size:12px;padding:6px 14px;letter-spacing:.02em}
+.rm-chip-ring{background:transparent;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:var(--muted);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:2px 6px}
+.rm-chip-area{background:transparent;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:rgba(22,29,26,.42);font-size:10px;letter-spacing:.26em;text-transform:uppercase;font-weight:600}
+.rm-compass{position:absolute;right:22px;top:84px;display:grid;place-items:center;width:44px;height:44px;border-radius:999px;background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);font-size:11px;font-weight:700;color:var(--ink);line-height:1}
+.rm-compass i{font-style:normal;font-size:13px;margin-bottom:-2px}
+/* the settlement's introduction, shown with the Bölge scale */
+.rm-info{position:absolute;left:22px;top:152px;width:302px;max-width:calc(100vw - 44px);border-radius:18px;padding:15px 18px 14px;background:var(--panel);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:var(--shadow-soft);z-index:2}
+.rm-info h3{margin:0;font-size:15px;font-weight:700;letter-spacing:.02em}
+.rm-info-set{margin:3px 0 10px;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.rm-info-body{margin:0;font-size:12px;line-height:1.66;color:#2c3833}
+.rm-info-facts{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:7px 14px;padding:11px 0 0;margin:12px 0 0;border-top:1px solid var(--line)}
+.rm-info-facts li{display:flex;align-items:baseline;gap:6px;font-size:11px;color:var(--muted)}
+.rm-info-facts b{font-size:13.5px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.rm-info-dist{margin:9px 0 0;font-size:9.5px;color:var(--muted)}
+/* one filter per amenity family; pressed = shown */
+.rm-filters{position:absolute;left:22px;bottom:max(22px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:flex-start;gap:5px;z-index:2}
+.rm-filters button{display:flex;align-items:center;gap:8px;min-height:34px;padding:0 15px 0 11px;border-radius:999px;font-size:11.5px;font-weight:600;background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:0 2px 10px #1b322514}
+.rm-filters button i{width:9px;height:9px;border-radius:50%;box-shadow:0 0 0 1.5px #fff;flex-shrink:0}
+.rm-filters button[aria-pressed=true]{background:var(--glass);color:var(--ink)}
+.rm-filters button:hover{background:var(--glass-hover)}
+.rm-filters button[aria-pressed=false]{background:rgba(255,255,255,.14);color:var(--muted);box-shadow:none}
+.rm-filters button[aria-pressed=false] i{opacity:.3}
+#app[data-scale=region] .side-tools,#app[data-scale=region] .model-scale,#app[data-scale=region] .gesture-help{display:none}
+.model-scale{position:absolute;z-index:7;right:22px;bottom:max(22px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:5px;pointer-events:none;font-size:11px;color:var(--ink)}
+.model-scale span{border-radius:999px;padding:3px 10px}
+.model-scale i{display:block;height:6px;border:solid var(--ink);border-width:0 1px 2px}
+#app[data-walk=true] .region-panel{display:none}
+#app[data-render-error=true] .view-description,#app[data-render-error=true] .model-scale{display:none}
+
+/* ------------------------------------------------------------ walk mode */
+.walk-tools{inset:0;pointer-events:none}
+/* not a bare x: the button says what actually happens */
+.walk-close{position:absolute;right:22px;top:max(18px,env(safe-area-inset-top));min-height:44px;padding:0 18px;pointer-events:auto;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.02em}
+.walk-close::before{content:'‹';margin-right:8px;font-size:16px;font-weight:400}
+.walk-close:hover{background:var(--glass-hover)}
+.walk-room-panel{position:absolute;left:50%;transform:translateX(-50%);bottom:max(22px,env(safe-area-inset-bottom));pointer-events:auto;border-radius:18px;padding:10px 16px 12px;min-width:260px;max-width:min(420px,calc(100% - 190px));display:grid;gap:3px;background:var(--glass-strong)}
+.walk-room-panel label{font-size:9px;color:var(--muted);letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+.walk-room-panel select{border:0;background:transparent;color:var(--ink);font-size:15px;font-weight:600;width:100%;min-height:30px}
+.walk-room-panel>span{font-size:11px;color:var(--muted)}
+.lift-call{display:grid;gap:1px;text-align:left;min-height:44px;margin-top:7px;padding:7px 11px;border-radius:12px;background:rgba(255,255,255,.5);border:1px solid var(--edge);color:var(--ink)}
+.lift-call .lift-call-label{font-size:9px;color:var(--muted);letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+.lift-call .lift-call-target{font-size:13px;font-weight:600}
 .lift-call:disabled{opacity:.5;cursor:default}
+/* the tour's lens: a hand-adjustable field of view, written as glass */
+.walk-lens{position:absolute;left:22px;bottom:max(22px,env(safe-area-inset-bottom));display:flex;align-items:center;gap:10px;pointer-events:auto;border-radius:999px;padding:9px 16px;background:var(--glass-strong);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:var(--shadow-soft)}
+.walk-lens-label{font-size:9px;color:var(--muted);letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+#walk-lens{width:150px;height:26px;accent-color:var(--accent);cursor:ew-resize;margin:0}
+#walk-lens-value{font-size:12px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;min-width:52px;text-align:right}
+.walk-pad{position:absolute;right:22px;bottom:max(22px,env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(3,46px);grid-template-rows:repeat(2,46px);gap:5px;pointer-events:auto}
+.walk-pad button{font-size:19px;border-radius:14px}
+.walk-pad button:active{background:var(--ink);color:#fff}
+.walk-forward{grid-column:2}
+.walk-left{grid-column:1;grid-row:2}
+.walk-back{grid-column:2;grid-row:2}
+.walk-right{grid-column:3;grid-row:2}
+#app[data-walk=true] .scale-picker,#app[data-walk=true] .explore-dock,
+#app[data-walk=true] .top-actions,
+#app[data-walk=true] .side-tools,#app[data-walk=true] .gesture-help.hide-in-walk{display:none}
+#app[data-walk=true] .view-description{top:74px;max-width:64%}
+#app[data-walk=true] .gesture-help{left:50%;transform:translateX(-50%);bottom:max(210px,calc(env(safe-area-inset-bottom) + 188px))}
 
-/* A measured span is not a project dimension and must not be read as one: the
-   tag keeps the same shape so the plan stays legible, and gives up the solid
-   ink for a lighter, outlined one. Its witness line is dashed to match. */
-.dimension-label.measured{background:#f3f6f2e8;color:#3d5a51;border:1px solid #8ba79d;font-weight:500;box-shadow:0 1px 4px #ffffffcc}
+/* ---------------------------------------------------------- load status */
+.load-status{position:absolute;z-index:60;bottom:96px;left:50%;transform:translateX(-50%);border-radius:18px;padding:13px 17px;display:flex;gap:12px;align-items:center;font-size:13px;font-weight:600;max-width:calc(100% - 32px);background:var(--glass-strong);box-shadow:var(--shadow)}
+.load-status.error{line-height:1.5}
+.load-status button{background:var(--ink);color:#fff;border-radius:12px;padding:10px 14px;white-space:nowrap}
+.spinner{width:15px;height:15px;border:2px solid rgba(47,81,71,.18);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;flex-shrink:0}
+.error .spinner{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.load-copy{display:grid;gap:7px;min-width:176px}
+.load-line{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+#load-percent{font-variant-numeric:tabular-nums;font-size:12px;color:var(--muted)}
+.load-bar{display:block;height:3px;border-radius:2px;background:rgba(47,81,71,.16);overflow:hidden}
+.load-bar i{display:block;height:100%;width:0;border-radius:2px;background:var(--accent);transition:width .3s ease}
+.error .load-bar,.error #load-percent{display:none}
+
+/* ----------------------------------------------------------------- boot */
+/* A real opening: full paper, the mark, the genuine progress bar, and no
+   other chrome until the whole scene is staged and prewarmed. */
+#boot{position:absolute;inset:0;z-index:80;display:grid;justify-items:center;align-content:center;gap:30px;background:radial-gradient(circle at 50% 36%,#f3f6f2 0,#e6ebe8 78%);transition:opacity 700ms ease}
+#boot .boot-brand{display:flex;align-items:center;gap:14px}
+#boot .brand{font-size:14px;letter-spacing:.34em}
+#boot .brand-divider{height:18px}
+.boot-title{font-size:21px;font-weight:500;letter-spacing:.02em}
+.boot-title strong{font-weight:700}
+#boot .load-status{position:static;transform:none;bottom:auto;left:auto}
+#boot.boot-done{opacity:0;pointer-events:none}
+.topbar,.scale-picker,.view-description,.side-tools,.explore-dock,
+.region-panel,.model-scale,.gesture-help{transition:opacity 600ms ease}
+#app[data-booting=true] :is(.topbar,.scale-picker,.view-description,.side-tools,
+.explore-dock,.region-panel,.model-scale,.gesture-help,.panel){opacity:0;pointer-events:none}
+/* honest fallback when 3D cannot start: the facts and the listing stay */
+.no3d{max-width:340px;display:grid;gap:14px;justify-items:center;text-align:center;
+  border-radius:20px;padding:20px 22px;background:var(--panel);border:1px solid var(--edge);box-shadow:var(--shadow-soft)}
+.no3d p{margin:0;font-size:13px;line-height:1.6;color:#2c3833}
+.no3d .listing-link{margin:0;font-size:13px}
+
+/* -------------------------------------------------------------- welcome */
+/* §7: the property first - identity, verified facts, one clear action */
+.welcome{position:absolute;left:50%;bottom:max(96px,calc(env(safe-area-inset-bottom) + 84px));transform:translateX(-50%);z-index:40;
+  width:360px;max-width:calc(100vw - 28px);border-radius:22px;padding:20px 22px 16px;text-align:center;
+  background:var(--panel);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  border:1px solid var(--edge);box-shadow:var(--shadow);animation:panel-arrive 320ms cubic-bezier(.2,.8,.25,1)}
+.welcome-brand{margin:0;font-size:10px;font-weight:700;letter-spacing:.32em;color:var(--muted)}
+.welcome h2{margin:4px 0 2px;font-size:24px;font-weight:500;letter-spacing:.02em}
+.welcome h2 strong{font-weight:700}
+.welcome-set{margin:0 0 12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.welcome-facts{list-style:none;display:flex;justify-content:center;gap:18px;padding:12px 0;margin:0 0 12px;border-block:1px solid var(--line)}
+.welcome-facts li{display:grid;gap:1px}
+.welcome-facts b{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums}
+.welcome-facts span{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.welcome-actions{display:flex;gap:8px;justify-content:center}
+.welcome-actions .walk-launch{min-height:42px;padding:0 22px}
+#welcome-tour{min-height:42px;padding:0 18px;border-radius:999px;font-size:13px;font-weight:600;background:rgba(255,255,255,.6);border:1px solid var(--edge)}
+#welcome-tour:hover{background:var(--glass-hover)}
+.welcome-note{margin:12px 0 0;font-size:10px;color:var(--muted)}
+.welcome-close{position:absolute;right:10px;top:10px;width:34px;height:34px;border-radius:999px;font-size:18px;color:var(--muted)}
+.welcome-close:hover{background:var(--glass-hover)}
+
+/* ------------------------------------------------------------- tour bar */
+.tour-bar{position:absolute;left:50%;bottom:max(96px,calc(env(safe-area-inset-bottom) + 84px));transform:translateX(-50%);z-index:40;
+  display:flex;align-items:center;gap:6px;border-radius:999px;padding:6px;
+  background:var(--panel);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  border:1px solid var(--edge);box-shadow:var(--shadow-soft);max-width:calc(100vw - 24px)}
+.tour-bar button{min-width:38px;min-height:38px;border-radius:999px;font-size:16px;font-weight:600}
+.tour-bar button:disabled{opacity:.3}
+.tour-bar button:not(:disabled):hover{background:var(--glass-hover)}
+#tour-caption{font-size:12.5px;font-weight:600;padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:min(52vw,420px)}
+#tour-exit{font-size:11px;color:var(--muted);padding:0 12px;white-space:nowrap}
+#tour-next{background:var(--ink);color:#fff;padding:0 14px;font-size:13px;white-space:nowrap}
+#tour-next:not(:disabled):hover{background:#000}
+
+/* ------------------------------------------------------------ transition */
+#cloud-transition{position:absolute;inset:-20%;z-index:18;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 20% 50%,#fff 0,transparent 55%),radial-gradient(ellipse at 80% 45%,#ffffffed 0,transparent 55%);filter:blur(22px)}
+#cloud-transition.travel{animation:cloud-travel 950ms ease-in-out}
+@keyframes cloud-travel{0%,100%{opacity:0;transform:scale(1.2)}42%{opacity:.88;transform:scale(1)}70%{opacity:.5;transform:scale(.95)}}
+
+/* --------------------------------------------------------------- mobile */
+@media(max-width:720px){
+  .topbar{left:12px;right:12px;top:max(12px,env(safe-area-inset-top))}
+  .identity{gap:9px;padding:7px 13px 7px 12px}
+  .brand{font-size:10px;letter-spacing:.24em}
+  h1{font-size:15px}
+  .brand-divider{height:13px}
+  .quiet-button{font-size:12px;min-height:40px;padding:0 13px}
+  .scale-picker{top:auto;bottom:max(108px,calc(env(safe-area-inset-bottom) + 96px));left:50%;padding:3px}
+  /* no dock outside the Villa scale - the picker takes the bottom edge */
+  #app[data-scale=neighborhood] .scale-picker{bottom:max(16px,calc(env(safe-area-inset-bottom) + 4px))}
+  #app[data-scale=region] .scale-picker{bottom:max(128px,calc(env(safe-area-inset-bottom) + 116px))}
+  .region-panel{bottom:max(14px,env(safe-area-inset-bottom));gap:6px}
+  .scale-picker button{min-height:36px;font-size:12px;padding:0 13px}
+  .view-description{top:66px;left:12px;max-width:66%;padding:7px 11px}
+  .view-description h2{font-size:12.5px}
+  .view-description p{font-size:10px}
+  .side-tools{right:10px;padding:6px;gap:5px}
+  .side-tools button{width:40px;height:40px}
+  .explore-dock{bottom:max(14px,env(safe-area-inset-bottom));padding:5px;gap:5px;flex-direction:column;align-items:stretch;border-radius:26px;width:calc(100% - 24px);max-width:420px}
+  .floor-row{gap:4px}
+  .floor-row button{min-height:38px;font-size:12px;padding:0 8px;flex:1}
+  .dock-actions{justify-content:stretch}
+  .dock-actions .walk-launch{flex:1}
+  .walk-launch{min-height:40px;font-size:12px;padding:0 13px}
+  .gesture-help{display:none}
+  .panel{top:auto;right:0;left:0;bottom:0;width:auto;max-width:none;border-radius:22px 22px 0 0;max-height:calc(100dvh - 110px);padding:15px 16px calc(15px + env(safe-area-inset-bottom))}
+  .model-scale{right:12px;bottom:max(162px,calc(env(safe-area-inset-bottom) + 150px))}
+  .rm-chip{font-size:10px;padding:3px 9px}
+  .rm-chip-villa{font-size:11px;padding:5px 12px}
+  .rm-compass{width:38px;height:38px;right:12px;top:76px}
+  .rm-info{left:12px;top:114px;width:236px;padding:11px 13px 10px}
+  .rm-info h3{font-size:13px}
+  .rm-info-body{font-size:10.5px;line-height:1.55}
+  .rm-info-facts{gap:5px 10px;padding-top:8px;margin-top:9px}
+  .rm-info-facts b{font-size:12px}
+  .rm-filters{left:12px;right:12px;bottom:max(176px,calc(env(safe-area-inset-bottom) + 164px));flex-direction:row;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+  .rm-filters::-webkit-scrollbar{display:none}
+  .rm-filters button{min-height:30px;font-size:10.5px;padding:0 11px 0 8px;flex:0 0 auto;gap:6px}
+  .walk-close{right:12px;top:max(12px,env(safe-area-inset-top))}
+  .walk-room-panel{left:12px;transform:none;bottom:max(14px,env(safe-area-inset-bottom));min-width:0;max-width:calc(100% - 190px);padding:9px 12px}
+  .walk-lens{left:12px;bottom:max(172px,calc(env(safe-area-inset-bottom) + 160px));padding:7px 12px;gap:8px}
+  #walk-lens{width:110px}
+  #walk-lens-value{font-size:11px;min-width:46px}
+  .walk-pad{right:12px;bottom:max(14px,env(safe-area-inset-bottom));grid-template-columns:repeat(3,44px);grid-template-rows:repeat(2,44px);gap:4px}
+  #app[data-walk=true] .view-description{top:62px}
+  #app[data-walk=true] .gesture-help{display:none}
+  .load-status{bottom:120px;font-size:12px}
+  .property-stat strong{font-size:20px}
+}
+@media(pointer:coarse){#rotate-mode,#pan-mode{display:none}.side-tools .camera-tools .rail-divider{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}

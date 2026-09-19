@@ -1,0 +1,19 @@
+{
+  "generated_for": "R43",
+  "node": "F3 | KAT 3$DUVAR",
+  "tolerance_m": 0.1,
+  "vertical": 0.5,
+  "white": "interior.003",
+  "facade": "stucco.003",
+  "was": {
+    "stucco": 1258,
+    "interior": 1001
+  },
+  "now": {
+    "interior": 1034,
+    "stucco": 1225,
+    "heads_and_soffits": 631
+  },
+  "asset_bytes": 1752180,
+  "asset_triangles": 280344
+}

@@ -23,8 +23,9 @@ export function smoothGroundNormals(geometry){smoothSurfaceNormals(geometry,true
 // R39 renamed the site surfaces (`grass` became `R31 | R39 continuous grass
 // ground`, and so on), which silently switched both the ground smoothing and the
 // horizon fade off. Match the family rather than one authored name so the next
-// rename cannot do it again.
-const GROUND_SURFACE=/(^|\b)grass( ground)?$|continuous grass/i;
+// rename cannot do it again. The optimised delivery numbers its copies -
+// `grass (1)` - so a numbering tail is part of the family too.
+const GROUND_SURFACE=/(^|\b)grass( ground)?(\s*\(\d+\))?$|continuous grass/i;
 const FADED_SURFACE=/grass|asphalt|stone_tile|retaining|boundary limestone|soil body/i;
 
 export function prepareContextSurfaces(context,background) {

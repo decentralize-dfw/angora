@@ -1,0 +1,5 @@
+{
+  "surface_materials_compared": 175,
+  "changed_surface_graphs": [],
+  "scope": "Surface output graph including image references and PBR values; unconnected glTF AO output excluded intentionally"
+}

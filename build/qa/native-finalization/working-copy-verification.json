@@ -1,0 +1,14 @@
+{
+  "file": "C:\\Users\\yigit\\Desktop\\WORK\\angora\\model-finalization\\angora-material-lighting-review.blend",
+  "original_meshes_checked": 177,
+  "unchanged_original_meshes": 176,
+  "authorized_exception": "grass (1): exact coincident duplicate faces removed",
+  "unexpected_geometry_changes": [],
+  "packed_daylight_maps": [
+    "Baked indirect daylight | interior.001",
+    "Baked indirect daylight | ceiling [imported]",
+    "Baked indirect daylight | wood_floor.001",
+    "Baked indirect daylight | stucco [imported]",
+    "Baked indirect daylight | neighbor_wall"
+  ]
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "file": "architecture.gltf",
+    "removedAttributes": 8,
+    "decodedUVBytesAvoided": 4189848
+  },
+  {
+    "file": "architecture.gpu.gltf",
+    "removedAttributes": 8,
+    "decodedUVBytesAvoided": 4189848
+  },
+  {
+    "file": "interior.gltf",
+    "removedAttributes": 95,
+    "decodedUVBytesAvoided": 1345792
+  },
+  {
+    "file": "interior.gpu.gltf",
+    "removedAttributes": 95,
+    "decodedUVBytesAvoided": 1345792
+  },
+  {
+    "file": "garden.gltf",
+    "removedAttributes": 0,
+    "decodedUVBytesAvoided": 0
+  },
+  {
+    "file": "garden.gpu.gltf",
+    "removedAttributes": 0,
+    "decodedUVBytesAvoided": 0
+  },
+  {
+    "file": "context-ground.gltf",
+    "removedAttributes": 0,
+    "decodedUVBytesAvoided": 0
+  },
+  {
+    "file": "context-ground.gpu.gltf",
+    "removedAttributes": 0,
+    "decodedUVBytesAvoided": 0
+  },
+  {
+    "file": "context-buildings.gltf",
+    "removedAttributes": 3,
+    "decodedUVBytesAvoided": 975256
+  },
+  {
+    "file": "context-buildings.gpu.gltf",
+    "removedAttributes": 3,
+    "decodedUVBytesAvoided": 975256
+  },
+  {
+    "file": "context-plants.gltf",
+    "removedAttributes": 0,
+    "decodedUVBytesAvoided": 0
+  },
+  {
+    "file": "context-plants.gpu.gltf",
+    "removedAttributes": 0,
+    "decodedUVBytesAvoided": 0
+  },
+  {
+    "file": "baked-trees.gltf",
+    "removedAttributes": 0,
+    "decodedUVBytesAvoided": 0
+  },
+  {
+    "file": "baked-trees.gpu.gltf",
+    "removedAttributes": 0,
+    "decodedUVBytesAvoided": 0
+  },
+  {
+    "file": "plot-grass.gltf",
+    "removedAttributes": 0,
+    "decodedUVBytesAvoided": 0
+  },
+  {
+    "file": "plot-grass.gpu.gltf",
+    "removedAttributes": 0,
+    "decodedUVBytesAvoided": 0
+  },
+  {
+    "file": "villa-context-white.gltf",
+    "removedAttributes": 19,
+    "decodedUVBytesAvoided": 26719784
+  },
+  {
+    "file": "villa-context-white.gpu.gltf",
+    "removedAttributes": 19,
+    "decodedUVBytesAvoided": 26719784
+  },
+  {
+    "file": "interior-common.gltf",
+    "removedAttributes": 5,
+    "decodedUVBytesAvoided": 2504
+  },
+  {
+    "file": "interior-common.gpu.gltf",
+    "removedAttributes": 5,
+    "decodedUVBytesAvoided": 2504
+  },
+  {
+    "file": "interior-f0.gltf",
+    "removedAttributes": 31,
+    "decodedUVBytesAvoided": 206160
+  },
+  {
+    "file": "interior-f0.gpu.gltf",
+    "removedAttributes": 31,
+    "decodedUVBytesAvoided": 206160
+  },
+  {
+    "file": "interior-f1.gltf",
+    "removedAttributes": 28,
+    "decodedUVBytesAvoided": 357872
+  },
+  {
+    "file": "interior-f1.gpu.gltf",
+    "removedAttributes": 28,
+    "decodedUVBytesAvoided": 357872
+  },
+  {
+    "file": "interior-f2.gltf",
+    "removedAttributes": 39,
+    "decodedUVBytesAvoided": 495048
+  },
+  {
+    "file": "interior-f2.gpu.gltf",
+    "removedAttributes": 39,
+    "decodedUVBytesAvoided": 495048
+  },
+  {
+    "file": "interior-f3.gltf",
+    "removedAttributes": 27,
+    "decodedUVBytesAvoided": 285496
+  },
+  {
+    "file": "interior-f3.gpu.gltf",
+    "removedAttributes": 27,
+    "decodedUVBytesAvoided": 285496
+  }
+]

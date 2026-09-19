@@ -1,0 +1,311 @@
+{
+ "version": 3,
+ "model_revision": "Native interior and roads",
+ "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
+ "units": "metres",
+ "coordinate_system": "glTF_Y_up",
+ "floor_labels": [
+  "Bodrum",
+  "Giriş",
+  "1. kat",
+  "Çatı"
+ ],
+ "floor_datums_m": [
+  0,
+  3.0996,
+  6.3714,
+  9.4705
+ ],
+ "assets": [
+  {
+   "id": "villa",
+   "file": "villa.glb",
+   "bytes": 12376780,
+   "sha256": "f93dfebb4e7d41a764bba12d9d14e19f501804c22613434d894ed877e61d685c",
+   "source_objects": 0,
+   "exported_mesh_nodes": 874,
+   "shared_meshes": 294,
+   "triangles": 2773448,
+   "bounds_native_m": [
+    [
+     -7.1429,
+     -6.473,
+     -0.5
+    ],
+    [
+     8.8333,
+     11.5501,
+     14.42
+    ]
+   ],
+   "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
+   "section_elevation_m": null,
+   "geometry_simplified": false,
+   "evaluated_split_normals_preserved": true,
+   "embedded_images": 43,
+   "animations": 1,
+   "browser_upload_under_25_MiB": true,
+   "merged_from": [
+    "level-0",
+    "level-1",
+    "level-2",
+    "level-3",
+    "envelope"
+   ],
+   "vegetation_lod_objects": 0
+  },
+  {
+   "id": "garden",
+   "file": "garden.glb",
+   "bytes": 8304216,
+   "sha256": "0daa0a2b1814beaca2f63701f711344d2ca4c59292b97e79a95826d822555fbf",
+   "source_objects": 645,
+   "exported_mesh_nodes": 645,
+   "shared_meshes": 554,
+   "triangles": 560724,
+   "bounds_native_m": [
+    [
+     -10.246445655822754,
+     -10.210000038146973,
+     -4
+    ],
+    [
+     26.54096031188965,
+     29.055761337280273,
+     10.332208633422852
+    ]
+   ],
+   "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
+   "section_elevation_m": null,
+   "geometry_simplified": true,
+   "evaluated_split_normals_preserved": true,
+   "embedded_images": 42,
+   "animations": 0,
+   "browser_upload_under_25_MiB": true,
+   "vegetation_lod_objects": 10
+  },
+  {
+   "id": "context",
+   "file": "context.glb",
+   "bytes": 6014084,
+   "sha256": "395ab5ac2501a93ccc3abb36a2d8637f3d6a813b24a9c9ab422bb7cb701a8d44",
+   "source_objects": 2371,
+   "exported_mesh_nodes": 2371,
+   "shared_meshes": 346,
+   "triangles": 752638,
+   "bounds_native_m": [
+    [
+     -139.26348876953125,
+     -167.48959350585938,
+     -15.970625877380371
+    ],
+    [
+     173.75611877441406,
+     147.64932250976562,
+     27.40839958190918
+    ]
+   ],
+   "source_native_sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
+   "section_elevation_m": null,
+   "geometry_simplified": false,
+   "evaluated_split_normals_preserved": true,
+   "embedded_images": 47,
+   "animations": 0,
+   "browser_upload_under_25_MiB": true,
+   "vegetation_lod_objects": 0
+  }
+ ],
+ "full_scene": true,
+ "geometry_preclipped": false,
+ "clip_lower_plane": false,
+ "stairs_preserved": true,
+ "geometry_simplified": false,
+ "mobile_lod": false,
+ "photo_matching_complete": false,
+ "source_repository": "https://github.com/decentralize-dfw/angora",
+ "geometry_source": "build/blender/angora21-working.blend",
+ "linked_master_sha256": "4cf14255f50130cb4605c92762e686d3ef0ae4e284b34af8e431acef1d1e8874",
+ "native_source": "build/blender/angora21-working.blend",
+ "lift_served_floor_indices": [
+  0,
+  1,
+  2
+ ],
+ "native_lift_animation": {
+  "asset": "villa.glb",
+  "animations": 1,
+  "viewer_playback_integrated": true,
+  "clip_name": "Animation",
+  "target_node": "R39 lift cabin travel",
+  "duration_s": 46,
+  "interpolation": "LINEAR",
+  "stop_windows_s": [
+   [
+    0.0416666679084301,
+    2
+   ],
+   [
+    12,
+    14
+   ],
+   [
+    24,
+    26
+   ]
+  ],
+  "stop_heights_m": [
+   0,
+   3.099600076675415,
+   6.371399879455566
+  ],
+  "cabin_speed_mps": [
+   0.30996,
+   0.32718,
+   0.31857
+  ],
+  "playback": "parked_to_selected_floor; native_clip_on_user_control_in_interior_walk_only",
+  "landing_door_leaf_nodes_per_floor": 17,
+  "landing_door_hinge_xz_m": [
+   -1.53,
+   -1.33
+  ],
+  "landing_door_delivered_angle_deg": -90,
+  "landing_door_closed_angle_deg": 0,
+  "car_panel": "reconstructed on the cabin west wall by tools/fit_lift_panel_r39.mjs; delivered at the world origin"
+ },
+ "section_caps": "R39 wall and roof atlas; separate soil/wall/roof GLB included for model integration",
+ "section_cap_asset": {
+  "id": "section-caps",
+  "file": "section-caps.glb",
+  "bytes": 86660,
+  "sha256": "010d86c5f6ba6b52f17f6e32e6a482ef2565f61c63356d05fc2492b77f84cf1b",
+  "source_objects": 7,
+  "exported_mesh_nodes": 8,
+  "shared_meshes": 8,
+  "triangles": 3779,
+  "bounds_native_m": [
+   [
+    -9.489889144897461,
+    -10.185918807983398,
+    0.10000000149011612
+   ],
+   [
+    10.969999313354492,
+    9.645000457763672,
+    10.770500183105469
+   ]
+  ],
+  "source_native_sha256": "4cf14255f50130cb4605c92762e686d3ef0ae4e284b34af8e431acef1d1e8874",
+  "section_elevation_m": null,
+  "geometry_simplified": false,
+  "evaluated_split_normals_preserved": true,
+  "embedded_images": 3,
+  "animations": 0,
+  "browser_upload_under_25_MiB": true
+ },
+ "section_atlas": {
+  "file": "sections.json",
+  "bytes": 3841984,
+  "sha256": "4efc201b546337936332fe9bb7575c934c30bf55d71b1d191e69b7cadf267c02"
+ },
+ "room_annotations": {
+  "file": "rooms.json",
+  "bytes": 147052,
+  "sha256": "378e94fbbcfde72a22a39f420d394d14a8e06494bafe3e0074f790fb2099412f"
+ },
+ "navigation": {
+  "file": "navigation.json",
+  "bytes": 380803,
+  "sha256": "6e4bf2f6c3b602abf8d5d3b718763edcd52279531a47eb029d2a726f0422adb1"
+ },
+ "view_assets": {
+  "neighborhood": [
+   "villa",
+   "garden",
+   "context"
+  ],
+  "building": [
+   "villa",
+   "garden",
+   "context"
+  ],
+  "floors": [
+   "villa",
+   "garden",
+   "context"
+  ]
+ },
+ "library_hashes": {
+  "build/blender/layers/shared-materials.blend": "3281715b6a21ca15a555fa17761a624241a745ca4ada9a81028755e16fce35a9",
+  "build/blender/layers/shared-meshes.blend": "f10a0740044f06c56aa1eac9b853ea2318447d25d22e7a1853e452cdd7e09f7d",
+  "build/blender/layers/00-source-reference.blend": "7bd80a29902b1b6b9906ad8f06d205df1781dec75f7c11abe2383facc1d8ef7c",
+  "build/blender/layers/10-architecture.blend": "4d2c9ebfaebe01b825ea80113810e2cbb724685152eab7fec67871bb3855ec71",
+  "build/blender/layers/15-exterior-details.blend": "944efbbbd4f9d1c45c7d1b2878ef9173b4f3507de0a44511f9c879f98e47ed25",
+  "build/blender/layers/20-fixed-fittings.blend": "eb4c3512a85329b4527d87f3fc99ad46de70d67d183f192abf3be8d72f95dcf7",
+  "build/blender/layers/30-furniture-placeholders.blend": "f8f5faaecc07c86c023ef5d305430e09257cebf2eeb7721d960c8a91ca9b675f",
+  "build/blender/layers/40-landscape-01.blend": "86f06ca4840b62860700a6d3cabfb7ea84cb04990a6544c083474c8f56759d04",
+  "build/blender/layers/40-landscape-02.blend": "9172583ea895305c7d1ad0887a5858e0bf74f5a67f5e62cfb4f1472ca4afafe9",
+  "build/blender/layers/40-landscape-03.blend": "294d68887c9672ade67663b9343ae8ab0b51a5cc57b1f4a6c9b607f70ff44836",
+  "build/blender/layers/40-landscape-04.blend": "25078694cc3a5638dcc240d9afd759445e9a07de7ad99866fbd2654bc1d84280",
+  "build/blender/layers/40-landscape-05.blend": "bc00e374c5d7b8fa26b6ddde8ce3e7faec68619497acfa6a2bfe3a0ae02f917c",
+  "build/blender/layers/40-landscape-06.blend": "70dcb9b31c526b97492c61bf56412a6155c9a73b9bda8249105bc58bf79da710",
+  "build/blender/layers/40-landscape-07.blend": "f0fb82fa815d4418c32620870611b79dbe41f42af26a0c4661a5222af298016d",
+  "build/blender/layers/40-landscape-08.blend": "e0981c0090490ead5eb307c04a2831f4822ab89502c10bd374232d2ded2cdf06",
+  "build/blender/layers/40-landscape-09.blend": "2b6b57f321023003b1e786f3ce3ab3aff067b9114870222a5a78dd2549f4b9a9",
+  "build/blender/layers/40-landscape-10.blend": "3a7c5d89b075c10551716a0980ee39fba7c4f9aa8c6972ebb6f4135dc2b72f5c",
+  "build/blender/layers/50-neighborhood-01.blend": "ea62c1a42ec7d5dbc533f89bc571ee1c2861498241402589314fb78889584091",
+  "build/blender/layers/50-neighborhood-02.blend": "d7d5015f07741a2cafc0b6c21107741656be7309d78facb76418099f18f00b74",
+  "build/blender/layers/50-neighborhood-03.blend": "183860c307abc34588c21cafc49ad0cce3922eb12bb6852395a4c8ac7cbea7e1",
+  "build/blender/layers/50-neighborhood-04.blend": "d34ee96285df4480d13b234137d7207e0b150c6ed50c0e9b73d96fa9c202b33f",
+  "build/blender/layers/50-neighborhood-05.blend": "68dbbd7f815455d70500c82bbd2eb25e975bbd2fda52321f70c0054076b7fdb5",
+  "build/blender/layers/50-neighborhood-06.blend": "2a083025cf98bc42162603748d4556ab76b895c55ec354d0b969ddb1147dccea",
+  "build/blender/layers/50-neighborhood-07.blend": "0c323c5c7db043d9a923b213f6bd29999e2978ca6899473090691fca632e2b21",
+  "build/blender/layers/50-neighborhood-08.blend": "5af327eca78fdff0cd8f691a637663702c950a6c421e06f833e59cf31317a866",
+  "build/blender/layers/50-neighborhood-09.blend": "98451a35c44f60c8d8bd49adcfdf3acd7df2e25c86d012e649aee58ccc520beb",
+  "build/blender/layers/50-neighborhood-10.blend": "f598085df9268c25d9791c93ad6d032d917561e0f5a2aa4707986a8276b29fbd"
+ },
+ "glb_delivery": {
+  "all_images_embedded": true,
+  "all_files_under_25_MiB": true,
+  "full_detail_geometry": true,
+  "procedural_materials_baked_to_repeatable_pbr_maps": 33,
+  "roundtrip_bounds_tolerance_m": 0.006,
+  "texture_format": "webp",
+  "texture_max_px": 1024,
+  "geometry_codec": "draco",
+  "node_and_material_structure_preserved": true,
+  "geometry_simplified": false,
+  "delivery_bytes_before": 109513472,
+  "delivery_bytes_after": 32169244,
+  "geometry_quantization": {
+   "position": 14,
+   "normal": 8,
+   "texcoord": 12,
+   "colour": 8
+  },
+  "texture_repack": {
+   "constant_maps_folded_to_factors": true,
+   "flat_normal_maps_unbound": true,
+   "byte_identical_payloads_deduplicated": true,
+   "method": "tools/repack_web_textures.mjs; exact-equivalence transforms only"
+  },
+  "r39_model_corrections": "see docs/model-r39-results-tr.md and the R39 sections of docs/r30-arayuz-ve-teslim-tr.md"
+ },
+ "native_delivery": {
+  "file": "build/blender/angora-rooms-open-doors.blend",
+  "sha256": "92fb6e2feeb6c0daf3cd4c9561f860e1ff091577f1b31d912b66617860fa7838",
+  "doors_open": 12
+ },
+ "merged_villa_r44": {
+  "sources": [
+   "level-0",
+   "level-1",
+   "level-2",
+   "level-3",
+   "envelope"
+  ],
+  "joined_meshes": 208,
+  "kept_nodes": 665
+ },
+ "profile": "full"
+}

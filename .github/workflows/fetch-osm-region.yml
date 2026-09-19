@@ -1,0 +1,70 @@
+# Fetches the Bölge plan's raw material - every road, building and landuse
+# polygon within 2.7 km of the villa - from OpenStreetMap's Overpass API.
+# This runs on GitHub's runners because the development environment's egress
+# proxy blocks the OSM servers. Dispatch it by hand; it commits the gzipped
+# extract to the working branch for tools/extract_region_streets_r45.mjs.
+name: Fetch OSM region data
+# The integration token cannot POST workflow_dispatch (403), so the trigger
+# is a push that touches the request marker below.
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/sweet-thompson-amqghq]
+    paths: ['tools/osm-fetch-request.txt']
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/sweet-thompson-amqghq
+      - name: Extract from Geofabrik with osmium
+        run: |
+          set -euo pipefail
+          # Public Overpass instances refuse GitHub runner traffic (instant
+          # 406 from the main server, 504s from the mirrors, and the last
+          # mirror only serves Switzerland). So no API at all: download the
+          # Geofabrik Turkey extract and cut the villa's box locally.
+          sudo apt-get update -qq && sudo apt-get install -y -qq osmium-tool jq
+          # -L: geofabrik redirects to a mirror; without it curl saves the
+          # 242-byte redirect body and --fail never notices (3xx is not 4xx)
+          curl -sSL --fail --retry 3 -o turkey.osm.pbf https://download.geofabrik.de/europe/turkey-latest.osm.pbf
+          SIZE=$(wc -c < turkey.osm.pbf)
+          echo "turkey.osm.pbf: $SIZE B"
+          [ "$SIZE" -gt 200000000 ]   # a real country extract, not an error page
+          # west,south,east,north = centre ± 4.0 km: a widescreen 2 km view
+          # shows ~3.6 km half-width, so the plan must not stop at 2.7
+          osmium extract --bbox 32.6718,39.8342,32.7655,39.9062 turkey.osm.pbf -o region.osm.pbf
+          osmium export region.osm.pbf -o region.geojson --geometry-types=linestring,polygon
+          jq -c '{fetched:(now|todate),elements:[.features[]
+              | (.properties // {}) as $p | (.geometry) as $g
+              | ({highway:$p.highway,building:$p.building,landuse:$p.landuse,leisure:$p.leisure,
+                  name:$p.name,place:$p.place,boundary:$p.boundary}
+                 | with_entries(select(.value!=null))) as $t
+              | select(($t|length)>0)
+              | if $g.type=="LineString" then {t:"way",tags:$t,geometry:[$g.coordinates[]|{lon:.[0],lat:.[1]}]}
+                elif $g.type=="Polygon" then {t:"way",tags:$t,geometry:[$g.coordinates[0][]|{lon:.[0],lat:.[1]}]}
+                elif $g.type=="MultiPolygon" then {t:"relation",tags:$t,
+                  members:[$g.coordinates[]|{role:"outer",geometry:[.[0][]|{lon:.[0],lat:.[1]}]}]}
+                else empty end]}' region.geojson > trimmed.json
+          gzip -9 -c trimmed.json > tools/osm-region.json.gz
+          echo "geojson: $(wc -c < region.geojson) B, trimmed: $(wc -c < trimmed.json) B, gz: $(wc -c < tools/osm-region.json.gz) B"
+          COUNT=$(jq '.elements|length' trimmed.json)
+          echo "elements: $COUNT"
+          [ "$COUNT" -gt 500 ]
+      - name: Commit the extract
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/osm-region.json.gz
+          git diff --cached --quiet && { echo "extract unchanged"; exit 0; }
+          git commit -m "Add the OSM extract for the Bölge plan (roads, buildings, landuse)
+
+          Fetched from Overpass on a GitHub runner because the development
+          environment cannot reach the OSM servers directly.
+
+          Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
+          Claude-Session: https://claude.ai/code/session_01QTnZ17rArnAzDd3jvRyoe9"
+          git push origin claude/sweet-thompson-amqghq

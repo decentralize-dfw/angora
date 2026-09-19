@@ -1,0 +1,20 @@
+{
+  "generated_for": "R44",
+  "node": "Garden west | R44 kitchen bay planter fill",
+  "x": [
+    -5.86,
+    -5.155
+  ],
+  "z": [
+    -0.53,
+    0.44
+  ],
+  "top_m": 2.58,
+  "grass_top_m": 2.592,
+  "bottom_m": 1.8,
+  "stone_triangles": 16,
+  "grass_triangles": 2,
+  "measured_hole": "rays at x -5.30, z 0.20..-0.40 met no geometry above 1.8 m before the fill",
+  "asset_bytes": 8569536,
+  "asset_triangles": 581896
+}

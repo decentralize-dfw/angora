@@ -1,0 +1,16 @@
+{
+  "generated_for": "R43",
+  "spaces": [
+    "f3-S1"
+  ],
+  "cell_m": 0.05,
+  "ridge_y": 12.4447,
+  "flat_y": 11.9247,
+  "flat_over_floor_m": 2.454,
+  "below_ridge_m": 0.52,
+  "flat_area_m2": 4.89,
+  "panels": 29,
+  "triangles": 58,
+  "asset_bytes": 1755392,
+  "asset_triangles": 280402
+}

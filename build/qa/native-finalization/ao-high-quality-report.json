@@ -1,0 +1,57 @@
+{
+  "method": "Cycles finite-distance geometric AO, existing AO_UV; original albedo/normal/roughness and geometry retained",
+  "device": "OPTIX",
+  "samples": 64,
+  "distance_m": 0.8,
+  "maps": [
+    {
+      "object": "stucco [imported]",
+      "size": 2048,
+      "seconds": 119.39303827285767,
+      "image": "AO HQ | stucco [imported]"
+    },
+    {
+      "object": "interior.001",
+      "size": 2048,
+      "seconds": 4.340286016464233,
+      "image": "AO HQ | interior.001"
+    },
+    {
+      "object": "ceiling [imported]",
+      "size": 2048,
+      "seconds": 6.305899143218994,
+      "image": "AO HQ | ceiling [imported]"
+    },
+    {
+      "object": "Clay tile 6 [imported]",
+      "size": 4096,
+      "seconds": 14.591516494750977,
+      "image": "AO HQ | Clay tile 6 [imported]"
+    },
+    {
+      "object": "wood_floor.001",
+      "size": 2048,
+      "seconds": 6.638211965560913,
+      "image": "AO HQ | wood_floor.001"
+    },
+    {
+      "object": "stone_tile",
+      "size": 2048,
+      "seconds": 6.054933786392212,
+      "image": "AO HQ | stone_tile"
+    },
+    {
+      "object": "Retaining wall rough limestone (1).002",
+      "size": 2048,
+      "seconds": 4.017313718795776,
+      "image": "AO HQ | Retaining wall rough limestone (1).002"
+    },
+    {
+      "object": "neighbor_wall",
+      "size": 4096,
+      "seconds": 9.212780714035034,
+      "image": "AO HQ | neighbor_wall"
+    }
+  ],
+  "complete": true
+}

@@ -1,90 +1,87 @@
-/* R28: readable, measurable UI; scene labels reserve these actual rectangles. */
-button {transition:background-color 160ms ease,color 160ms ease,box-shadow 160ms ease,opacity 160ms ease;}
-button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible {outline:3px solid #92733d;outline-offset:3px;}
+/* R28→R44: readable, measurable UI. This layer only guarantees target sizes,
+   type floors, sheet motion and the small-screen geometry; every surface,
+   colour and blur is style.css's one glass language and is not restated. */
+button {transition:background-color 160ms ease,color 160ms ease,box-shadow 160ms ease,opacity 160ms ease,transform 120ms ease;}
+button:not(:disabled):active {transform:scale(.97);}
 button:disabled {cursor:default;}
-@media(hover:hover) {button:not(:disabled):hover {box-shadow:inset 0 0 0 1px #315c5040;}}
-.panel {background:#f5f7f1fa;border:1px solid #ffffffb3;box-shadow:0 12px 48px #19352b20;}
-.panel:not([hidden]) {animation:panel-arrive 180ms ease-out;overscroll-behavior:contain;scrollbar-gutter:stable;}
+.panel:not([hidden]) {animation:panel-arrive 200ms cubic-bezier(.2,.8,.25,1);overscroll-behavior:contain;scrollbar-gutter:stable;}
 #toggle-sound {grid-column:1/-1;justify-self:stretch;text-align:left;padding-inline:12px;}
-@keyframes panel-arrive {from {opacity:0;transform:translateY(6px);} to {opacity:1;transform:translateY(0);}}
+@keyframes panel-arrive {from {opacity:0;transform:translateY(8px) scale(.985);} to {opacity:1;transform:translateY(0) scale(1);}}
 #app,#viewport {overflow:clip;}
-.quiet-button,.scale-picker button,.floor-row button,.camera-tools button,
+.quiet-button,.scale-picker button,.floor-row button,
 .panel-heading button,.scene-options button,.daylight-footer button,
 .daylight-footer select,.lighting-choice select,.walk-launch,
 .walk-room-panel select,.region-panel button,.site-label-villa {
   min-height:44px;min-width:44px;
 }
-.camera-tools button {width:44px;height:44px;}
-.side-tools button {font-size:14px;}
+.side-tools button {width:44px;height:44px;}
 .load-status {width:min(420px,calc(100% - 24px));}
 .load-status button {min-height:44px;min-width:44px;font-size:14px;flex-shrink:0;}
 #load-message {min-width:0;}
-.panel-heading button {width:44px;height:44px;flex-shrink:0;}
-.walk-pad {grid-template-columns:repeat(3,44px);grid-template-rows:repeat(2,44px);gap:4px;}
+.panel-heading button {width:40px;height:40px;flex-shrink:0;}
+.walk-pad button {min-width:44px;min-height:44px;}
 .room-label {min-height:44px;max-width:150px;}
 .scene-options button,.quiet-button,.scale-picker button,.floor-row button,
 .daylight-footer select,.daylight-footer button,.walk-launch {font-size:14px;}
 .walk-room-panel select {font-size:16px;}
 .small-note,.property-stat span,.property-room-list li,.listing-link {font-size:13px;line-height:1.5;}
-.view-description {padding:8px 10px;border-radius:12px;background:var(--paper);text-shadow:none;}
-.identity {padding:8px 10px;border-radius:12px;background:var(--paper);}
-.gesture-help {left:50%;right:auto;transform:translateX(-50%);width:max-content;max-width:calc(100% - 24px);padding:2px 8px;background:var(--paper);border-radius:8px;font-size:11px;}
-.dock-actions {flex-wrap:wrap;}
-.walk-room-panel {max-width:calc(100% - 206px);}
 #daylight-hour {height:44px;}
-.panel {z-index:50;}
 .device-qa {border-top:1px solid var(--line);margin-top:16px;padding-top:6px;font-size:13px;line-height:1.5;}
-.device-qa summary {cursor:pointer;min-height:44px;padding:11px 0;font-size:14px;}
-.device-qa input {display:block;width:100%;min-height:44px;margin:6px 0 10px;border:1px solid var(--line);border-radius:8px;padding:8px;font-size:16px;background:white;color:var(--ink);}
+.device-qa summary {cursor:pointer;min-height:44px;padding:11px 0;font-size:14px;font-weight:600;}
+.device-qa input {display:block;width:100%;min-height:44px;margin:6px 0 10px;border:1px solid var(--edge);border-radius:10px;padding:8px 10px;font-size:16px;background:rgba(255,255,255,.6);color:var(--ink);}
 .qa-actions {display:flex;flex-wrap:wrap;gap:6px;}
-.qa-actions button {min-height:44px;padding:8px 12px;background:#e6ece6;border-radius:10px;font-size:14px;}
-.device-qa-status {position:absolute;z-index:35;left:50%;top:50%;transform:translate(-50%,-50%);padding:6px 10px;border-radius:10px;background:var(--paper);font-size:12px;pointer-events:none;max-width:80%;}
-summary:focus-visible {outline:2px solid #92733d;outline-offset:3px;}
-@media(max-width:600px) {
-  .topbar {top:calc(env(safe-area-inset-top) + 10px);left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));}
-  .identity {gap:8px;padding:8px;}
-  .brand {font-size:10px;letter-spacing:.15em;}
-  .quiet-button {padding:0 12px;}
-  .quiet-button span {margin-left:5px;}
-  .scale-picker {top:calc(env(safe-area-inset-top) + 68px);left:12px;right:68px;gap:2px;}
-  .scale-picker button {flex:1 1 auto;white-space:nowrap;padding:0 6px;}
-  .side-tools {top:calc(env(safe-area-inset-top) + 68px);right:12px;gap:8px;}
-  .side-tools button {width:44px;height:44px;font-size:14px;}
-  .view-description {top:calc(env(safe-area-inset-top) + 128px);left:12px;max-width:calc(100% - 84px);}
-  .view-description h2 {font-size:15px;}
-  .view-description p {font-size:13px;}
-  .explore-dock {bottom:calc(env(safe-area-inset-bottom) + 28px);width:380px;}
-  .floor-row button {min-height:44px;}
-  .dock-actions {margin:2px 2px 0;gap:4px;}
-  .camera-tools button {width:44px;height:44px;}
-  .walk-launch {padding:0 10px;}
-  .gesture-help {bottom:calc(env(safe-area-inset-bottom) + 4px);font-size:11px;}
-  .panel {top:auto;bottom:calc(env(safe-area-inset-bottom) + 138px);max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 202px);}
-  .room-label {min-height:44px;max-width:132px;}
-  .region-panel,.model-scale {bottom:calc(env(safe-area-inset-bottom) + 146px);}
-  .walk-room-panel {left:12px;bottom:calc(env(safe-area-inset-bottom) + 28px);max-width:calc(100% - 178px);padding:8px;}
-  .walk-pad {right:12px;bottom:calc(env(safe-area-inset-bottom) + 28px);}
-  .walk-close {right:12px;top:calc(env(safe-area-inset-top) + 68px);}
-  #app[data-walk=true] .view-description {top:calc(env(safe-area-inset-top) + 68px);max-width:calc(100% - 84px);}
-  #app[data-walk=true] .side-tools {top:calc(env(safe-area-inset-top) + 128px);}
-  .load-status {bottom:calc(env(safe-area-inset-bottom) + 145px);}
-}
+.qa-actions button {min-height:44px;padding:8px 12px;background:rgba(255,255,255,.5);border:1px solid var(--edge);border-radius:10px;font-size:14px;}
+.device-qa-status {position:absolute;z-index:35;left:50%;top:50%;transform:translate(-50%,-50%);padding:7px 12px;border-radius:999px;background:var(--glass-strong);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);font-size:12px;font-weight:600;pointer-events:none;max-width:80%;}
+summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
 @media(max-width:359px) {
-  .walk-launch {font-size:13px;padding:0 7px;}
-  .walk-launch span {margin-left:2px;}
+  .walk-launch {font-size:12px;padding:0 9px;}
+  .walk-launch span {margin-left:3px;}
   .brand-divider {display:none;}
   .identity {gap:7px;}
-  .gesture-help {font-size:10px;}
+  .scale-picker button {padding:0 9px;}
+}
+/* R45 phones: "butonlar çok büyük duruyor" — the 44 px floors above are a
+   pointer-device guarantee; on phone widths every control drops to a tighter
+   30-42 px grid so the chrome stops crowding the scene, and the per-scale
+   offsets in style.css keep every state overlap-free. */
+@media(max-width:720px) {
+  .quiet-button {min-height:36px;min-width:36px;font-size:11.5px;padding:0 12px;}
+  .scale-picker button {min-height:34px;min-width:36px;font-size:11.5px;padding:0 12px;}
+  .floor-row button {min-height:34px;min-width:36px;font-size:11.5px;}
+  .walk-launch {min-height:36px;min-width:36px;font-size:12px;}
+  .region-panel button {min-height:36px;min-width:36px;font-size:12px;padding:7px 15px;}
+  .region-radius button {min-height:30px;min-width:52px;font-size:11.5px;}
+  .side-tools {padding:5px;gap:4px;}
+  .side-tools button {width:36px;height:36px;}
+  #zoom-in,#zoom-out,#reset-view {font-size:17px;}
+  #toggle-plan {font-size:11px;}
+  .rail-divider {width:18px;}
+  .panel-heading button {width:34px;height:34px;font-size:17px;}
+  .scene-options button {min-height:38px;font-size:12px;}
+  .daylight-footer select,.daylight-footer button,.lighting-choice select {min-height:36px;font-size:12px;}
+  .site-label-villa {min-height:38px;min-width:80px;font-size:12px;padding:7px 13px;}
+  .walk-pad {grid-template-columns:repeat(3,42px);grid-template-rows:repeat(2,42px);}
+  .walk-pad button {min-width:42px;min-height:42px;font-size:17px;}
+  .walk-close {min-height:40px;font-size:12px;padding:0 13px;}
+  /* the visible controls stay at the owner's compact scale; the TOUCH
+     target underneath still reaches 44px through an invisible apron */
+  .quiet-button,.scale-picker button,.floor-row button,.region-radius button,
+  .side-tools button,.rm-filters button,.region-panel button {position:relative;}
+  .quiet-button::after,.scale-picker button::after,.floor-row button::after,
+  .region-radius button::after,.side-tools button::after,.rm-filters button::after,
+  .region-panel button::after {content:'';position:absolute;inset:-5px;border-radius:inherit;}
+  h1 {font-size:14px;}
 }
 @media(orientation:landscape) and (max-height:520px) {
   .topbar {top:max(8px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));}
-  .scale-picker {top:62px;left:max(12px,env(safe-area-inset-left));right:auto;}
-  .side-tools {top:62px;right:max(12px,env(safe-area-inset-right));}
-  .view-description {top:116px;left:max(12px,env(safe-area-inset-left));}
+  .scale-picker {top:max(8px,env(safe-area-inset-top));bottom:auto;}
+  .view-description {top:60px;left:max(12px,env(safe-area-inset-left));}
+  .side-tools {right:max(10px,env(safe-area-inset-right));}
   .explore-dock {left:50%;bottom:calc(env(safe-area-inset-bottom) + 8px);}
   .gesture-help {display:none;}
-  .panel {top:58px;bottom:calc(env(safe-area-inset-bottom) + 8px);right:68px;width:320px;max-height:none;}
-  .region-panel,.model-scale {bottom:calc(env(safe-area-inset-bottom) + 122px);}
+  .panel {top:58px;bottom:calc(env(safe-area-inset-bottom) + 8px);right:max(12px,env(safe-area-inset-right));left:auto;width:320px;max-height:none;}
+  .region-panel {bottom:calc(env(safe-area-inset-bottom) + 62px);}
+  .model-scale {bottom:calc(env(safe-area-inset-bottom) + 62px);}
 }
 
 /* Room names are annotations, not navigation controls. */
@@ -111,3 +108,24 @@ summary:focus-visible {outline:2px solid #92733d;outline-offset:3px;}
 #region-summary div{max-height:180px;overflow:auto;padding-bottom:14px;font-size:12px;line-height:1.5}
 #region-summary p{margin:0 0 8px}
 @media(max-width:600px){.region-panel{left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom) + 12px);max-width:none}}
+
+/* The native delivery keeps its floor drawing clear of the controls. */
+#app[data-delivery=native] .scale-picker{top:80px;bottom:auto;left:22px;transform:none}
+#app[data-delivery=native] .view-description{top:142px}
+#app[data-delivery=native] .side-tools{top:80px;bottom:auto;transform:none}
+#app[data-delivery=native] .explore-dock{bottom:max(22px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:6px}
+#app[data-delivery=native][data-scale=region] .explore-dock,
+#app[data-delivery=native][data-scale=neighborhood] .explore-dock{display:none}
+.dock-actions .camera-tools{display:flex;flex-direction:row;gap:2px}
+.dock-actions .camera-tools button{min-width:36px;min-height:36px}
+.rm-info.rm-info-inline{position:static;width:auto;max-width:none;padding:0;background:none;border:0;box-shadow:none;backdrop-filter:none}
+.region-panel{transform:none;left:22px;bottom:22px;display:block;background:var(--panel)}
+.region-radius{display:flex;gap:4px;padding:0 0 10px}
+.region-meta{display:none}
+@media(max-width:720px){
+ #app[data-delivery=native] .scale-picker{left:12px;top:64px;bottom:auto}
+ #app[data-delivery=native] .view-description{top:112px}
+ #app[data-delivery=native] .side-tools{top:112px;right:10px}
+ #app[data-delivery=native] .explore-dock{bottom:calc(env(safe-area-inset-bottom) + 12px);left:12px;right:12px;transform:none;width:auto}
+ .region-panel{left:12px;right:12px;bottom:12px;max-width:none}
+}

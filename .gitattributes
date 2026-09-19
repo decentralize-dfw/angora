@@ -1,3 +1,6 @@
 build/blender/angora-rooms-open-doors.blend filter=lfs diff=lfs merge=lfs -text
+build/blender/angora-material-lighting.blend filter=lfs diff=lfs merge=lfs -text
 build/web/full/*.json text eol=lf
 viewer/public/models/full/*.json text eol=lf
+build/web/native-current/*.json text eol=lf
+build/web/native-current/*.gltf text eol=lf

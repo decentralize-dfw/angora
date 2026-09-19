@@ -35,8 +35,8 @@ export class SectionGTAOPass extends GTAOPass {
     // whole objects, which reads as dirt rather than as contact. 0.28 m is the
     // scale of a window reveal, an eave underside, a wall meeting a floor.
     this.updateGtaoMaterial({radius:0.28, distanceExponent:1, thickness:1,
-      scale:1.05, samples:12, distanceFallOff:1, screenSpaceRadius:false});
-    this.updatePdMaterial({radius:5, samples:8, depthPhi:3, normalPhi:4});
+      scale:1.05, samples:16, distanceFallOff:1, screenSpaceRadius:false});
+    this.updatePdMaterial({radius:8, samples:8, depthPhi:3, normalPhi:4});
     this.blendIntensity = 0.8;
   }
   setSize(w, h) {
@@ -155,14 +155,17 @@ export function createLighting(renderer, scene, camera, clip) {
   // full-screen passes over a half-float target - occlusion, antialiasing,
   // bloom, grade, dither - and on a handset that is the whole frame budget
   // spent before a single wall is drawn, which is what made it stutter, run hot
-  // and eventually lose the context. Three applies the same ACES curve and sRGB
+  // and eventually lose the context. Three applies the same AgX curve and sRGB
   // conversion itself when it draws to the canvas, so the image keeps its
   // exposure and its colour; it loses the crevice shading and the glare.
   let composer=null,beauty=null,ao=null;
   if(!compact){
     const target=new THREE.WebGLRenderTarget(1,1,{type:THREE.HalfFloatType,samples:referenceProfile.msaaSamples});
     composer=new EffectComposer(renderer,target);beauty=new RenderPass(scene,camera);
-    ao=new SectionGTAOPass(scene,camera,clip,.85);
+    // Full-resolution occlusion: at .85 the denoiser smeared contact shading
+    // off thin rails and window reveals - the pass is the pipeline's own
+    // stated "largest tell", so it gets its headroom.
+    ao=new SectionGTAOPass(scene,camera,clip,1);
     const smaa=new SMAAPass(),bloom=new LinearBloomPass();
     ao.enabled=referenceProfile.aoEnabled;
     configurePostprocessing(composer,{beauty,ao,smaa,bloom,output:new ShaderPass(GradeShader),
@@ -184,10 +187,14 @@ export function createLighting(renderer, scene, camera, clip) {
   function setTime(nextHour=hour,nextDay=day) {
     hour=nextHour;day=nextDay;const solar=solarPosition(hour,{day});direction.fromArray(solar.direction);
     const daylight=THREE.MathUtils.smoothstep(solar.altitude,-6,28),warmth=THREE.MathUtils.smoothstep(solar.altitude,0,35);
-    sun.intensity=(soft?1.55:2.25)*THREE.MathUtils.smoothstep(solar.altitude,-.5,20);
+    // Key over fill, about 2:1 at midday. With the fill nearly as strong as
+    // the sun the image went flat - no shadow side, no specular pop - which
+    // read as a cheap render engine. A defined warm key against a cooler,
+    // dimmer fill is the archviz contrast the daylight is meant to carry.
+    sun.intensity=(soft?1.8:2.4)*THREE.MathUtils.smoothstep(solar.altitude,-.5,20);
     sun.color.set(0xffbc7b).lerp(new THREE.Color(0xfff5e9),warmth);
-    hemisphere.intensity=.08+.42*daylight;
-    scene.environmentIntensity=.08+(soft?.85:.65)*daylight;
+    hemisphere.intensity=.06+.34*daylight;
+    scene.environmentIntensity=.08+(soft?.70:.55)*daylight;
     sun.shadow.radius=soft?2.5:1;sun.shadow.intensity=soft?.82:1;
     horizon.set(0x182734).lerp(new THREE.Color(0xe4e9ed),daylight);
     sky.material.uniforms.sunPosition.value.copy(direction);

@@ -11,7 +11,7 @@ if(!html.includes('./web-assets/'))throw Error('Expected a relative /angora/ bui
 // are served - so the directory is replaced, not merged.
 rmSync(new URL('web-assets/',root),{recursive:true,force:true});
 mkdirSync(new URL('web-assets/',root),{recursive:true});
-copyFileSync(new URL('index.html',dist),new URL('index.html',root));
+writeFileSync(new URL('index.html',root),html.replace(/\r/g,''));
 cpSync(new URL('web-assets/',dist),new URL('web-assets/',root),{recursive:true});
 // The pages build skips the public directory, so the icons a browser asks for
 // at the site root - and the card image a link preview fetches - are staged

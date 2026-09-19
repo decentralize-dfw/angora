@@ -8,15 +8,19 @@ export class CameraFlight {
   constructor(camera, controls, resize, invalidate) {
     Object.assign(this,{camera,controls,resize,invalidate});this.active=null;
   }
-  go({target,polar,span,zoom=1,azimuth},instant=false) {
+  go({target,polar,span,zoom=1,azimuth,fov},instant=false) {
     const {camera,controls}=this;
     const before=new THREE.Spherical().setFromVector3(camera.position.clone().sub(controls.target));
-    const radius=span/(2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2)));
+    // The lens rides the flight: a plan toggle swaps the 35-degree walking
+    // lens for the 4-degree drawing lens, and doing that instantly reads as
+    // a zoom jolt before the move. Radius is sized for the DESTINATION lens.
+    const fovEnd=fov??camera.fov;
+    const radius=span/(2*Math.tan(THREE.MathUtils.degToRad(fovEnd/2)));
     const desired=azimuth??before.theta;
     const shortest=Math.atan2(Math.sin(desired-before.theta),Math.cos(desired-before.theta));
-    const end={target:target.clone(),polar,radius,zoom,azimuth:before.theta+shortest};
+    const end={target:target.clone(),polar,radius,zoom,azimuth:before.theta+shortest,fov:fovEnd};
     const start=performance.now();
-    this.active={start,endTime:start+FLIGHT_DURATION,from:{target:controls.target.clone(),polar:before.phi,radius:before.radius,zoom:camera.zoom,azimuth:before.theta},to:end};
+    this.active={start,endTime:start+FLIGHT_DURATION,from:{target:controls.target.clone(),polar:before.phi,radius:before.radius,zoom:camera.zoom,azimuth:before.theta,fov:camera.fov},to:end};
     controls.enabled=false;
     if(instant||matchMedia('(prefers-reduced-motion: reduce)').matches){this.active.elapsed=FLIGHT_DURATION;this.update(this.active.endTime);}
     this.invalidate();
@@ -35,6 +39,7 @@ export class CameraFlight {
     this.camera.position.copy(this.controls.target).add(new THREE.Vector3().setFromSpherical(new THREE.Spherical(
       lerp(a.from.radius,a.to.radius,s),polar,lerp(a.from.azimuth,a.to.azimuth,s))));
     this.camera.zoom=lerp(a.from.zoom,a.to.zoom,s);
+    this.camera.fov=lerp(a.from.fov,a.to.fov,s);
     if(this.camera.isOrthographicCamera){
       const span=lerp(a.from.radius,a.to.radius,s)*2*Math.tan(THREE.MathUtils.degToRad(this.camera.fov/2));
       this.camera.top=span/2;this.camera.bottom=-span/2;

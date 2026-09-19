@@ -1,6 +1,6 @@
 # Native model delivery
 
-The current application uses `build/web/native-current/` for Pages. This is the canonical, self-contained model package; include it with the application changes when publication is authorized. No publication has been performed.
+The current application uses `build/web/native-current/` for Pages. This is the canonical, self-contained model package. Publication to main was authorized on September 19, 2026. The editable scene is `build/blender/angora-material-lighting.blend` (Git LFS); the original owner scene was not overwritten.
 
 From `viewer`, `npm run dev` and `npm run build` first copy the canonical assets into the ignored `public/models/native-current/` directory. The Pages build references the canonical package directly. A model export can be staged with:
 
@@ -16,7 +16,7 @@ The September 19 recheck repaired missing exported stone/retaining-wall AO, reba
 
 Unused UV attributes were removed without modifying Draco bitstreams, positions, normals or topology. New roof plan fills follow source tile/substrate/inner-surface traces. Thin open source returns are explicitly represented as 12 mm drawing strokes, not fabricated solid volumes. A trace-coverage audit is separate from physical-volume acceptance.
 
-105 application tests pass, including texture/UV delivery and camera framing around the floor dock. See sibling `model-finalization/RECHECK-2026-09-19.md` for the detailed evidence and limitations.
+123 application tests pass after integrating the newer main branch, including texture/UV delivery and camera framing around the floor dock. The existing regional map, language support and walking lens are retained. The native model continues to use its own authored materials and precomputed section atlas. See `build/qa/native-finalization/RECHECK-2026-09-19.md` for detailed prepublication evidence and limitations.
 
 The authoritative house source geometry is preserved. The source scene, material/AO/light baking scripts and detailed review evidence remain in the sibling `model-finalization` working folder. The packaged model includes runtime metadata, not Blender working files.
 
