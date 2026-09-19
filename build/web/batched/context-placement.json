@@ -1,5 +1,5 @@
 {
-  "source": "OpenStreetMap \u00a9 contributors, ODbL; existing repository Overpass snapshot 2026-09-15",
+  "source": "OpenStreetMap © contributors, ODbL; existing repository Overpass snapshot 2026-09-15",
   "registration": {
     "matrix": [
       [
@@ -285,7 +285,7 @@
         157.2071492468681,
         39.85570194971517
       ],
-      "height_offset": 13.090499341495988,
+      "height_offset": 15.25600655818243,
       "footprint_xz": [
         [
           25.142579824643207,
@@ -309,7 +309,36 @@
         ]
       ],
       "height_status": "sampled_existing_ground_mesh",
-      "placement": "rigid_complete_B4_typology_no_scaling"
+      "placement": "rigid_complete_B4_typology_no_scaling",
+      "garden": {
+        "boundary": [
+          [
+            27.342578675419315,
+            29.677744043157094
+          ],
+          [
+            10.105890207965706,
+            43.11803107834337
+          ],
+          [
+            0.13951499778811094,
+            29.825366095735824
+          ],
+          [
+            16.342381644862183,
+            16.617133973682606
+          ]
+        ],
+        "entrance": [
+          21.84248016014075,
+          23.147439008419852
+        ],
+        "road_connection": [
+          22.574347977550204,
+          6.330780464595011,
+          25.479188033143085
+        ]
+      }
     },
     {
       "id": "osm-region-2240",
@@ -334,7 +363,7 @@
         58.68474830341328,
         -211.61305263302438
       ],
-      "height_offset": 2.5342537831816703,
+      "height_offset": 4.634620689475177,
       "footprint_xz": [
         [
           53.65881207793282,
@@ -358,7 +387,36 @@
         ]
       ],
       "height_status": "sampled_existing_ground_mesh",
-      "placement": "rigid_complete_B4_typology_no_scaling"
+      "placement": "rigid_complete_B4_typology_no_scaling",
+      "garden": {
+        "boundary": [
+          [
+            55.75436670393796,
+            -64.79127007880165
+          ],
+          [
+            46.250479527659735,
+            -80.06505171213537
+          ],
+          [
+            33.66459411502211,
+            -70.22297408327388
+          ],
+          [
+            43.90106031795154,
+            -56.46864132856906
+          ]
+        ],
+        "entrance": [
+          49.82771351094475,
+          -60.629955703685354
+        ],
+        "road_connection": [
+          43.79044615247667,
+          -3.309721543053483,
+          -53.223110757991044
+        ]
+      }
     },
     {
       "id": "osm-region-4241",
@@ -383,7 +441,7 @@
         -200.803212731118,
         5.119749526848473
       ],
-      "height_offset": 7.713500668339404,
+      "height_offset": 6.049608884002099,
       "footprint_xz": [
         [
           -60.48862635685499,
@@ -407,7 +465,36 @@
         ]
       ],
       "height_status": "sampled_existing_ground_mesh",
-      "placement": "rigid_complete_B4_typology_no_scaling"
+      "placement": "rigid_complete_B4_typology_no_scaling",
+      "garden": {
+        "boundary": [
+          [
+            -60.11210151341843,
+            -22.15521297141699
+          ],
+          [
+            -73.96121593177746,
+            -30.95067333020919
+          ],
+          [
+            -64.30517651374556,
+            -46.293479955054394
+          ],
+          [
+            -50.45606209538654,
+            -37.49801959626218
+          ]
+        ],
+        "entrance": [
+          -55.28408180440249,
+          -29.826616283839584
+        ],
+        "road_connection": [
+          -47.51623090511965,
+          -3.6132388289159953,
+          -21.723563613988297
+        ]
+      }
     },
     {
       "id": "osm-region-4242",
@@ -432,7 +519,7 @@
         -214.97646982295493,
         -4.86884663645214
       ],
-      "height_offset": 7.762287165547139,
+      "height_offset": 6.256985592792073,
       "footprint_xz": [
         [
           -74.84188618984851,
@@ -456,7 +543,36 @@
         ]
       ],
       "height_status": "sampled_existing_ground_mesh",
-      "placement": "rigid_complete_B4_typology_no_scaling"
+      "placement": "rigid_complete_B4_typology_no_scaling",
+      "garden": {
+        "boundary": [
+          [
+            -74.46976571245348,
+            -32.68934367374763
+          ],
+          [
+            -89.27668643601284,
+            -41.213241202138434
+          ],
+          [
+            -78.9503388321464,
+            -57.78747073355579
+          ],
+          [
+            -63.844883605368366,
+            -48.29723663208328
+          ]
+        ],
+        "entrance": [
+          -69.15732465891092,
+          -40.493290152915456
+        ],
+        "road_connection": [
+          -48.30684769601223,
+          -3.473624717551755,
+          -20.79381403298881
+        ]
+      }
     },
     {
       "id": "osm-region-2235",
@@ -481,7 +597,7 @@
         -16.35684287736951,
         -202.0707861998279
       ],
-      "height_offset": 4.6664602920587,
+      "height_offset": 4.357388087167382,
       "footprint_xz": [
         [
           -24.7006204807199,
@@ -505,7 +621,36 @@
         ]
       ],
       "height_status": "sampled_existing_ground_mesh",
-      "placement": "rigid_complete_B4_typology_no_scaling"
+      "placement": "rigid_complete_B4_typology_no_scaling",
+      "garden": {
+        "boundary": [
+          [
+            -22.615890375397306,
+            -55.38817400113667
+          ],
+          [
+            -32.07248109477602,
+            -70.6912583925288
+          ],
+          [
+            -44.92811570618831,
+            -61.97776420551478
+          ],
+          [
+            -34.4220439535337,
+            -47.094921838629276
+          ]
+        ],
+        "entrance": [
+          -28.518967164465504,
+          -51.241547919882976
+        ],
+        "road_connection": [
+          -22.896369682215166,
+          -6.185281079070464,
+          -46.60976989609701
+        ]
+      }
     },
     {
       "id": "osm-region-2234",
@@ -530,7 +675,7 @@
         -158.85343359793737,
         -103.53989903156591
       ],
-      "height_offset": 4.293143193154158,
+      "height_offset": 4.486488072746362,
       "footprint_xz": [
         [
           -9.93408205357533,
@@ -554,7 +699,36 @@
         ]
       ],
       "height_status": "sampled_existing_ground_mesh",
-      "placement": "rigid_complete_B4_typology_no_scaling"
+      "placement": "rigid_complete_B4_typology_no_scaling",
+      "garden": {
+        "boundary": [
+          [
+            -7.796912621019237,
+            -65.91056415449061
+          ],
+          [
+            -18.036245508196846,
+            -79.80478659770442
+          ],
+          [
+            -29.89822590444877,
+            -71.33627476675018
+          ],
+          [
+            -20.737238639230963,
+            -57.182172871745856
+          ]
+        ],
+        "entrance": [
+          -14.267075630125099,
+          -61.54636851311824
+        ],
+        "road_connection": [
+          -10.458493632249853,
+          -5.876380621128872,
+          -56.926893370241274
+        ]
+      }
     },
     {
       "id": "osm-region-2233",
@@ -579,7 +753,7 @@
         138.70355597139934,
         -48.970135864300396
       ],
-      "height_offset": 3.253322983639795,
+      "height_offset": 4.130799901449228,
       "footprint_xz": [
         [
           7.612424827722996,
@@ -603,7 +777,36 @@
         ]
       ],
       "height_status": "sampled_existing_ground_mesh",
-      "placement": "rigid_complete_B4_typology_no_scaling"
+      "placement": "rigid_complete_B4_typology_no_scaling",
+      "garden": {
+        "boundary": [
+          [
+            9.748348277910718,
+            -81.17376012911609
+          ],
+          [
+            0.5873610126929143,
+            -95.32786202412044
+          ],
+          [
+            -12.35296500551881,
+            -86.59947074137567
+          ],
+          [
+            -2.113632118341202,
+            -72.70524829816186
+          ]
+        ],
+        "entrance": [
+          3.817358079784758,
+          -76.93950421363897
+        ],
+        "road_connection": [
+          8.478839079949497,
+          -6.085072695317141,
+          -70.84476215986302
+        ]
+      }
     },
     {
       "id": "osm-region-2232",
@@ -628,7 +831,7 @@
         152.50676842164265,
         -59.043433539513316
       ],
-      "height_offset": 2.3026810755107974,
+      "height_offset": 4.06726206201823,
       "footprint_xz": [
         [
           21.41563727796629,
@@ -652,7 +855,36 @@
         ]
       ],
       "height_status": "sampled_existing_ground_mesh",
-      "placement": "rigid_complete_B4_typology_no_scaling"
+      "placement": "rigid_complete_B4_typology_no_scaling",
+      "garden": {
+        "boundary": [
+          [
+            23.551560728154012,
+            -91.24705780432893
+          ],
+          [
+            14.390573462936207,
+            -105.40115969933328
+          ],
+          [
+            1.450247444724491,
+            -96.67276841658851
+          ],
+          [
+            11.689580331902091,
+            -82.7785459733747
+          ]
+        ],
+        "entrance": [
+          17.62057053002805,
+          -87.01280188885181
+        ],
+        "road_connection": [
+          22.25665666869898,
+          -6.327442716786637,
+          -80.97339716099061
+        ]
+      }
     }
   ],
   "accuracy_note": "OSM registered approximate siting; identical intact neighborhood typology, rigid placement; terrain mesh elevations, not surveyed new plots."

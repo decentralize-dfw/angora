@@ -1,0 +1,35 @@
+{
+  "scope": "Eight added OSM neighbors, gardens and road entrances",
+  "desktop": {
+    "neighborhoodDrawCalls": 24,
+    "atticDrawCalls": 40,
+    "localReadyMs": 2074
+  },
+  "mobileProfile": {
+    "viewport": [
+      393,
+      852
+    ],
+    "neighborhoodDrawCalls": 24,
+    "atticDrawCalls": 40,
+    "localReadyMs": 1715,
+    "physicalPhoneTested": false
+  },
+  "geometryChecks": {
+    "newHouseFootprintOverlaps": 0,
+    "newGardenPairOverlaps": 0,
+    "completeDonorObjects": 46,
+    "roadConnections": 8,
+    "subjectVillaFilesChanged": false
+  },
+  "visualChecks": [
+    "Complete roofs, facades, balconies and foundations",
+    "Front and oblique neighborhood views",
+    "AO UV islands preserved without facade streaking",
+    "Garden boundary gates and terrain-following asphalt entrances"
+  ],
+  "limitations": [
+    "OSM-registered approximate garden boundaries and terrain-model heights, not a cadastral survey",
+    "Local loading timings do not measure public internet or physical phone performance"
+  ]
+}

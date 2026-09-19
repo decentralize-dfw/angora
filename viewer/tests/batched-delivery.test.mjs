@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 import * as THREE from 'three';
 import {createNativeDelivery} from '../src/native-delivery.js';
 
@@ -24,6 +25,7 @@ test('Both complete model profiles use Draco, embedded WebP atlases and at most 
   let draws=0,ao=0,bytes=0;
   for(const part of manifest.parts){
    const b=await fs.readFile(new URL(part.file,base));bytes+=b.length;
+   assert.equal(part.gpu_sha256,createHash('sha256').update(b).digest('hex'),'Model cache version must match its delivered bytes');
    assert.equal(b.readUInt32LE(0),0x46546c67);
    const json=JSON.parse(b.subarray(20,20+b.readUInt32LE(12)).toString().trim());
    for(const mesh of json.meshes)for(const p of mesh.primitives){draws++;assert.ok(p.extensions.KHR_draco_mesh_compression);}

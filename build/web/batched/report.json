@@ -2,9 +2,9 @@
   "source": "953cd59ecae412ecc3b51b6aac56e1ab6feec4c8ca73f15f6181782e109e8fac",
   "profiles": {
     "desktop": {
-      "bytes": 21290316,
+      "bytes": 21725144,
       "primitives": 37,
-      "triangles": 3030924,
+      "triangles": 3140765,
       "parts": [
         {
           "name": "architecture",
@@ -26,15 +26,15 @@
         },
         {
           "name": "context-ground",
-          "bytes": 566348,
+          "bytes": 575072,
           "primitives": 1,
-          "triangles": 310132
+          "triangles": 311432
         },
         {
           "name": "context-buildings",
-          "bytes": 7655456,
+          "bytes": 8081560,
           "primitives": 5,
-          "triangles": 915225
+          "triangles": 1023766
         },
         {
           "name": "context-plants",
@@ -45,9 +45,9 @@
       ]
     },
     "mobile": {
-      "bytes": 15981696,
+      "bytes": 16387340,
       "primitives": 37,
-      "triangles": 2479795,
+      "triangles": 2589562,
       "parts": [
         {
           "name": "architecture",
@@ -69,15 +69,15 @@
         },
         {
           "name": "context-ground",
-          "bytes": 390292,
+          "bytes": 397828,
           "primitives": 1,
-          "triangles": 169162
+          "triangles": 169872
         },
         {
           "name": "context-buildings",
-          "bytes": 6783060,
+          "bytes": 7181168,
           "primitives": 5,
-          "triangles": 830196
+          "triangles": 939253
         },
         {
           "name": "context-plants",
@@ -100,8 +100,16 @@
       "error": 0.0004
     }
   },
+  "contextGardens": {
+    "gardens": 8,
+    "roadConnections": 8,
+    "materialReuse": true
+  },
   "contextAdditions": {
     "buildings": 8,
-    "donorTriangles": 23782
+    "donorObjects": 46,
+    "donorTriangles": 45806,
+    "bakedFacadeTriangles": 4548,
+    "method": "complete authored objects and baked facade shells; rigid transform; terrain sampled basement datum"
   }
 }

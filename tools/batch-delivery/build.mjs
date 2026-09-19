@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {Document,NodeIO} from '@gltf-transform/core';
 import {ALL_EXTENSIONS} from '@gltf-transform/extensions';
@@ -8,17 +9,24 @@ import {MeshoptSimplifier} from 'meshoptimizer';
 import draco3d from 'draco3dgltf';
 import * as THREE from 'three';
 const {default:sharp}=await import(process.env.ANGORA_SHARP_MODULE??'sharp');
-import {addContextBuildings} from './add-context.mjs';
+import {addContextBuildings,addContextGardens,groundSampler} from './add-context.mjs';
 const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const source=path.resolve(process.argv[2]??path.join(repo,'../model-finalization/web'));
 const target=path.join(repo,'build/web/batched');
 const io=new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'draco3d.decoder':await draco3d.createDecoderModule(),'draco3d.encoder':await draco3d.createEncoderModule()});
+const contextPlan=JSON.parse(await fs.readFile(path.join(repo,'tools/batch-delivery/context-additions.json')));
+const donorDoc=await io.read(path.join(repo,'build/web/full/context.glb'));
+const terrain=groundSampler(await io.read(path.join(source,'context-ground.gltf')));
 const manifest=JSON.parse(await fs.readFile(path.join(source,'manifest.json')));
 const previous=process.env.ANGORA_REBUILD_PART?JSON.parse(await fs.readFile(path.join(target,'report.json'))):null;
+const previousPlacement=previous?JSON.parse(await fs.readFile(path.join(target,'context-placement.json')).catch(()=>'{"additions":[]}')):null;
+for(const item of contextPlan.additions)if(previousPlacement)item.garden=previousPlacement.additions.find(a=>a.id===item.id)?.garden;
 const names=['architecture','interior','garden','context-ground','context-buildings','context-plants'];
 const size=512,pad=4;
 await MeshoptSimplifier.ready;
 const report={source:manifest.source_native_sha256,profiles:{},textureSize:size,houseGeometryDecimation:false,contextSimplification:{desktop:{ratio:.55,error:.00015},mobile:{ratio:.3,error:.0004}}};
+if(previous?.contextGardens)report.contextGardens=previous.contextGardens;
+if(previous?.contextAdditions)report.contextAdditions=previous.contextAdditions;
 function family(name){return /wood|parquet|timber/i.test(name)?'wood':/metal|steel|chrome|alumin|iron|mirror/i.test(name)?'metal':/fabric|cloth|leather|sofa|velvet|cotton/i.test(name)?'fabric':/glass|water/i.test(name)?'glass':/stucco|plaster|ceiling|INTERIOR/i.test(name)?'plaster':/roof|clay|tile/i.test(name)?'tile':'other';}
 const rawCache=new Map();
 async function rawImage(file){if(!rawCache.has(file))rawCache.set(file,await sharp(file).ensureAlpha().raw().toBuffer({resolveWithObject:true}));return rawCache.get(file);}
@@ -27,12 +35,13 @@ for(const profile of ['desktop','mobile']){
  const out=path.join(target,profile);await fs.mkdir(out,{recursive:true});
  const parts=[],totals={bytes:0,primitives:0,triangles:0,parts:[]};
  for(const name of names){
-  if(previous&&name!==process.env.ANGORA_REBUILD_PART){
+  if(previous&&!process.env.ANGORA_REBUILD_PART.split(',').includes(name)){
    const saved=previous.profiles[profile].parts.find(p=>p.name===name);
    parts.push({name,file:name+'.glb'});totals.parts.push(saved);totals.bytes+=saved.bytes;totals.primitives+=saved.primitives;totals.triangles+=saved.triangles;continue;
   }
   const raw=JSON.parse(await fs.readFile(path.join(source,name+'.gltf'))),doc=await io.read(path.join(source,name+'.gltf'));
-  if(name==='context-buildings')report.contextAdditions=addContextBuildings(doc,JSON.parse(await fs.readFile(path.join(repo,'tools/batch-delivery/context-additions.json'))));
+  if(name==='context-buildings')report.contextAdditions=addContextBuildings(doc,contextPlan,donorDoc,terrain);
+  if(name==='context-ground')report.contextGardens=addContextGardens(doc,contextPlan,terrain);
   const byName=new Map(raw.materials.map(m=>[m.name,m]));
   const imageFile=desc=>desc?path.join(source,decodeURIComponent(raw.images[raw.textures[desc.index].source].uri)):null;
   const buckets=new Map();
@@ -115,12 +124,17 @@ for(const profile of ['desktop','mobile']){
   if(context)await output.transform(simplify({simplifier:MeshoptSimplifier,...report.contextSimplification[profile],lockBorder:name==='context-ground'}));
   triangles=output.getRoot().listMeshes().reduce((sum,m)=>sum+m.listPrimitives().reduce((n,p)=>n+p.getIndices().getCount()/3,0),0);
   await output.transform(draco({method:'edgebreaker',encodeSpeed:context?0:4,decodeSpeed:5,quantizePosition:context?(profile==='desktop'?14:13):(profile==='desktop'?17:16),quantizeNormal:context?8:(profile==='desktop'?12:10),quantizeTexcoord:context?10:(profile==='desktop'?14:13),quantizeColor:8,quantizeGeneric:8,quantizationVolume:'scene'}));
+  // Context identity is supplied by the manifest. Repeated editor labels are
+  // not runtime data; retain material names, category extras and all textures.
+  if(context)for(const item of [...output.getRoot().listNodes(),...output.getRoot().listMeshes(),...output.getRoot().listTextures()])item.setName('');
   const file=name+'.glb';await io.write(path.join(out,file),output);const bytes=(await fs.stat(path.join(out,file))).size;
   parts.push({name,file});totals.bytes+=bytes;totals.primitives+=batchIndex;totals.triangles+=triangles;totals.parts.push({name,bytes,primitives:batchIndex,triangles});
   console.log(profile,name,bytes,batchIndex,triangles);rawCache.clear();
  }
+ for(const part of parts)part.gpu_sha256=createHash('sha256').update(await fs.readFile(path.join(out,part.file))).digest('hex');
  const next={...manifest,batched:true,profile,parts,interior_streams:[]};
  for(const key of ['sections','lights','rooms','navigation','site_context','plot_boundary','soil_section'])next[key]='../../native-current/'+path.basename(manifest[key]);
  await fs.writeFile(path.join(out,'manifest.json'),JSON.stringify(next));report.profiles[profile]=totals;
 }
 await fs.writeFile(path.join(target,'report.json'),JSON.stringify(report,null,2));
+await fs.writeFile(path.join(target,'context-placement.json'),JSON.stringify(contextPlan,null,2));

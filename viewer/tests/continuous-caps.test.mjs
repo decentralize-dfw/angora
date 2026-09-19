@@ -24,3 +24,22 @@ test('OSM additions reuse eight mapped envelopes without adding material batches
  const report=JSON.parse(await fs.readFile(new URL('../../build/web/batched/report.json',import.meta.url)));
  for(const profile of Object.values(report.profiles))assert.equal(profile.parts.find(p=>p.name==='context-buildings').primitives,5);
 });
+
+test('Added neighbors keep the complete house scale and connect every garden to a road',async()=>{
+ const base=new URL('../../build/web/batched/',import.meta.url);
+ const plan=JSON.parse(await fs.readFile(new URL('context-placement.json',base)));
+ const report=JSON.parse(await fs.readFile(new URL('report.json',base)));
+ assert.equal(report.contextAdditions.donorObjects,46);
+ assert.equal(report.contextAdditions.donorTriangles,45806);
+ assert.equal(report.contextGardens.roadConnections,8);
+ for(const a of plan.additions){
+  const [[xx,xz],[zx,zz]]=a.matrix_xz;
+  assert.ok(Math.abs(xx*xx+zx*zx-1)<1e-8,'House width was scaled');
+  assert.ok(Math.abs(xz*xz+zz*zz-1)<1e-8,'House depth was scaled');
+  assert.ok(Math.abs(xx*xz+zx*zz)<1e-8,'House was sheared');
+  assert.ok(Number.isFinite(a.height_offset));
+  assert.ok(a.garden.boundary.length>=4);
+  assert.ok(a.garden.road_connection.every(Number.isFinite));
+ }
+ for(const p of Object.values(report.profiles))assert.equal(p.parts.find(x=>x.name==='context-ground').primitives,1);
+});
