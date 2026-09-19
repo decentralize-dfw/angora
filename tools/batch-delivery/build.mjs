@@ -7,12 +7,14 @@ import {draco,weld,simplify} from '@gltf-transform/functions';
 import {MeshoptSimplifier} from 'meshoptimizer';
 import draco3d from 'draco3dgltf';
 import * as THREE from 'three';
-import sharp from 'sharp';
+const {default:sharp}=await import(process.env.ANGORA_SHARP_MODULE??'sharp');
+import {addContextBuildings} from './add-context.mjs';
 const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const source=path.resolve(process.argv[2]??path.join(repo,'../model-finalization/web'));
 const target=path.join(repo,'build/web/batched');
 const io=new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({'draco3d.decoder':await draco3d.createDecoderModule(),'draco3d.encoder':await draco3d.createEncoderModule()});
 const manifest=JSON.parse(await fs.readFile(path.join(source,'manifest.json')));
+const previous=process.env.ANGORA_REBUILD_PART?JSON.parse(await fs.readFile(path.join(target,'report.json'))):null;
 const names=['architecture','interior','garden','context-ground','context-buildings','context-plants'];
 const size=512,pad=4;
 await MeshoptSimplifier.ready;
@@ -25,7 +27,12 @@ for(const profile of ['desktop','mobile']){
  const out=path.join(target,profile);await fs.mkdir(out,{recursive:true});
  const parts=[],totals={bytes:0,primitives:0,triangles:0,parts:[]};
  for(const name of names){
+  if(previous&&name!==process.env.ANGORA_REBUILD_PART){
+   const saved=previous.profiles[profile].parts.find(p=>p.name===name);
+   parts.push({name,file:name+'.glb'});totals.parts.push(saved);totals.bytes+=saved.bytes;totals.primitives+=saved.primitives;totals.triangles+=saved.triangles;continue;
+  }
   const raw=JSON.parse(await fs.readFile(path.join(source,name+'.gltf'))),doc=await io.read(path.join(source,name+'.gltf'));
+  if(name==='context-buildings')report.contextAdditions=addContextBuildings(doc,JSON.parse(await fs.readFile(path.join(repo,'tools/batch-delivery/context-additions.json'))));
   const byName=new Map(raw.materials.map(m=>[m.name,m]));
   const imageFile=desc=>desc?path.join(source,decodeURIComponent(raw.images[raw.textures[desc.index].source].uri)):null;
   const buckets=new Map();
@@ -107,7 +114,7 @@ for(const profile of ['desktop','mobile']){
   await output.transform(weld());
   if(context)await output.transform(simplify({simplifier:MeshoptSimplifier,...report.contextSimplification[profile],lockBorder:name==='context-ground'}));
   triangles=output.getRoot().listMeshes().reduce((sum,m)=>sum+m.listPrimitives().reduce((n,p)=>n+p.getIndices().getCount()/3,0),0);
-  await output.transform(draco({method:'edgebreaker',encodeSpeed:4,decodeSpeed:5,quantizePosition:context?(profile==='desktop'?14:13):(profile==='desktop'?17:16),quantizeNormal:context?8:(profile==='desktop'?12:10),quantizeTexcoord:context?10:(profile==='desktop'?14:13),quantizeColor:8,quantizeGeneric:8,quantizationVolume:'scene'}));
+  await output.transform(draco({method:'edgebreaker',encodeSpeed:context?0:4,decodeSpeed:5,quantizePosition:context?(profile==='desktop'?14:13):(profile==='desktop'?17:16),quantizeNormal:context?8:(profile==='desktop'?12:10),quantizeTexcoord:context?10:(profile==='desktop'?14:13),quantizeColor:8,quantizeGeneric:8,quantizationVolume:'scene'}));
   const file=name+'.glb';await io.write(path.join(out,file),output);const bytes=(await fs.stat(path.join(out,file))).size;
   parts.push({name,file});totals.bytes+=bytes;totals.primitives+=batchIndex;totals.triangles+=triangles;totals.parts.push({name,bytes,primitives:batchIndex,triangles});
   console.log(profile,name,bytes,batchIndex,triangles);rawCache.clear();

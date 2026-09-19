@@ -83,7 +83,7 @@ export function createNativeSoilSection(data){
   return mesh;
 }
 
-export function createWallCaps(atlas) {
+export function createWallCaps(atlas,transitionAtlas=null) {
   const group = new THREE.Group(); group.name = 'Geometric wall sections';
   const slices = atlas.slices;
   if (!slices?.length || atlas.coordinate_system !== 'glTF_XZ') throw Error('Invalid section atlas');
@@ -102,6 +102,7 @@ export function createWallCaps(atlas) {
     {mesh: build('Solid hatched furniture cross section'), p: 'fq', i: 'fj', furniture: true},
   ];
   let current = -1, furnitureVisible = true;
+  let movingIndex=-1,movingGeometry=null;
   const geometries=new Map();
   function buildGeometries(index) {
     if(geometries.has(index))return geometries.get(index);
@@ -125,8 +126,20 @@ export function createWallCaps(atlas) {
   const exactHeights=atlas.exact_floor_heights_m??floorDatums.map((h,f)=>h+(f===3?1.3:1.6));
   for(let i=0;i<slices.length;i++)if(exactHeights.some(h=>Math.abs(h-slices[i].height)<.001))buildGeometries(i);
   return {group, update(height, visible) {
-    group.visible = visible && exactHeights.some(h=>Math.abs(h-height)<.001);
+    const exact=exactHeights.some(h=>Math.abs(h-height)<.001);
+    group.visible = visible && (exact||Boolean(transitionAtlas?.slices?.length));
     if (!group.visible) return;
+    if(!exact&&transitionAtlas?.slices?.length){
+      const index=Math.max(0,Math.min(transitionAtlas.slices.length-1,Math.round(height/transitionAtlas.step)));
+      if(index!==movingIndex){
+        movingIndex=index;movingGeometry?.dispose();
+        const data=transitionAtlas.slices[index],positions=new Float32Array(data.p.length/2*3);
+        for(let k=0;k<data.p.length/2;k++){positions[k*3]=data.p[k*2];positions[k*3+2]=data.p[k*2+1];}
+        movingGeometry=new THREE.BufferGeometry();movingGeometry.setAttribute('position',new THREE.BufferAttribute(positions,3));movingGeometry.setIndex(data.i);movingGeometry.computeBoundingSphere();
+      }
+      layers[0].mesh.geometry=movingGeometry;layers[0].mesh.position.y=height;layers[0].mesh.visible=true;
+      layers[1].mesh.visible=layers[2].mesh.visible=false;current=-2;return;
+    }
     let low = 0, high = slices.length - 1;
     while (low < high) {
       const mid = (low + high) >>> 1;
@@ -143,7 +156,7 @@ export function createWallCaps(atlas) {
       layer.mesh.position.y = height;
     }
   }, setFurnitureVisible(value) {furnitureVisible = value;},
-    dispose(){for(const batch of geometries.values())for(const geometry of batch)geometry.dispose();material.dispose();}
+    dispose(){movingGeometry?.dispose();for(const batch of geometries.values())for(const geometry of batch)geometry.dispose();material.dispose();}
   };
 }
 

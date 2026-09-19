@@ -1,0 +1,16 @@
+{
+  "date":"2026-09-19",
+  "addedBuildings":8,
+  "mapSource":"OpenStreetMap repository Overpass snapshot, 2026-09-15; see tools/batch-delivery/context-additions.json",
+  "registrationRmsMetres":1.98,
+  "accuracy":"Map footprints and orientation; inferred elevations and reused facades, not a measured percentage guarantee",
+  "contextBuildingDrawCallsBefore":5,
+  "contextBuildingDrawCallsAfter":5,
+  "neighborhoodAllPassDrawCalls":24,
+  "desktopMovingSection":{"height":10.367861369065837,"visible":true,"capTriangles":327,"allPassDrawCalls":39},
+  "mobileProfileMovingSection":{"height":9.139596312820725,"visible":true,"capTriangles":107,"allPassDrawCalls":39},
+  "transitionSampleStepMetres":0.08,
+  "finalFloorContoursChanged":false,
+  "unitTestsPassed":127,
+  "physicalPhoneTested":false
+}

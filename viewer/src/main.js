@@ -7,6 +7,7 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import {invalidateUIObstacles} from './screen-layout.js';
 import {createPlotMaterialMask} from './plot-material-mask.js';
 import {createNativeDelivery} from './native-delivery.js';
+import {gunzipSync} from 'three/addons/libs/fflate.module.js';
 import {waitForGPU} from './render-readiness.js';
 import {assetLoadBudget,createLoadQueue} from './asset-loading.js';
 import {createTextureLoader} from './texture-loader.js';
@@ -246,7 +247,7 @@ function renderFrame(time) {
     host.dataset.runtime=JSON.stringify({view:selected,plan:planMode,projection:activeCamera.type,cameraPosition:activeCamera.position.toArray(),target:controls.target.toArray(),sectionHeight:clip.constant,loaded:nativeDelivery?[...nativeDelivery.loaded.keys()]:[...groups.keys()],zoom:activeCamera.zoom,autoRotate:controls.autoRotate,zoomEnabled:controls.enableZoom,rotate:controls.mouseButtons.LEFT===THREE.MOUSE.ROTATE,transition:Boolean(transition),textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries});
     renderer.info.reset();
     lighting.render(activeCamera);
-    host.dataset.frameStats=JSON.stringify({view:selected,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,allRenderPasses:true,transition:Boolean(transition||flight?.active)});
+      host.dataset.frameStats=JSON.stringify({view:selected,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,allRenderPasses:true,transition:Boolean(transition||flight?.active),sectionCaps:{visible:Boolean(caps?.group.visible),height:caps?.group.children[0]?.position.y,triangles:(caps?.group.children[0]?.geometry.index?.count??0)/3}});
     if(measuredTransition){
       measuredTransition.maxCpuMs=Math.max(measuredTransition.maxCpuMs??0,performance.now()-cpuStart);
       if(!transition)host.dataset.lastTransition=JSON.stringify({frames:measuredTransition.frames,elapsed:time-measuredTransition.start,to:measuredTransition.to,maxFrameGap:measuredTransition.maxFrameGap,maxCpuMs:measuredTransition.maxCpuMs,programs:renderer.info.programs?.length,drawCalls:renderer.info.render.calls});
@@ -644,7 +645,7 @@ function exitWalk(reselect = true) {
 }
 async function loadNativeModel(manifest){
     const loadStarted=performance.now();
-  async function json(file){const response=await fetch(new URL(file,modelRoot),{cache:'no-cache'});if(!response.ok)throw Error(file+' HTTP '+response.status);return response.json();}
+    async function json(file){const response=await fetch(new URL(file,modelRoot),{cache:'no-cache'});if(!response.ok)throw Error(file+' HTTP '+response.status);return file.endsWith('.gz')?JSON.parse(new TextDecoder().decode(gunzipSync(new Uint8Array(await response.arrayBuffer())))):response.json();}
   const [atlas,rooms,navigation,soil]=await Promise.all([json(manifest.sections),json(manifest.rooms),json(manifest.navigation),manifest.soil_section?json(manifest.soil_section):null]);
   if(navigation.source_native_sha256!==manifest.source_native_sha256)throw Error('Native navigation revision mismatch');
   nativeAtlas=atlas;roomData=rooms;walkData=navigation;
@@ -668,7 +669,8 @@ async function loadNativeModel(manifest){
     $('#context-count').textContent=`${data.buildings.length} yapı`;
   }
   fullHeight=buildingBox.max.y+2;
-  caps=createWallCaps(atlas);scene.add(caps.group);
+  const movingSections=manifest.batched?await json('../../native-current/transition-sections.json.gz'):null;
+  caps=createWallCaps(atlas,movingSections);scene.add(caps.group);
   if(soil){nativeSoil=createNativeSoilSection(soil);nativeSoil.userData.height=soil.height;scene.add(nativeSoil);}
   annotations=createAnnotations(rooms,host);scene.add(annotations.group);
   walk=new InteriorWalk(navigation,renderer.domElement,invalidate);scene.add(walk.rig);

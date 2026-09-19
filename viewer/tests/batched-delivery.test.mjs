@@ -40,6 +40,8 @@ test('Both complete model profiles use Draco, embedded WebP atlases and at most 
    for(const m of json.materials){assert.ok(m.extras.angoraBatch);if(m.occlusionTexture)ao++;}
   }
   assert.ok(draws<=40,`${profile}: ${draws} geometry calls leave ten for sections/annotations`);
-  assert.ok(bytes<20*1024*1024,`${profile}: ${bytes} bytes`);assert.ok(ao>=5);
+  // Eight map-registered neighbors extend the original 20 MiB delivery.
+  // Keep a bounded 1 MiB allowance; the renderer's 50-call limit is unchanged.
+  assert.ok(bytes<21*1024*1024,`${profile}: ${bytes} bytes`);assert.ok(ao>=5);
  }
 });

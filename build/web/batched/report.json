@@ -2,9 +2,9 @@
   "source": "953cd59ecae412ecc3b51b6aac56e1ab6feec4c8ca73f15f6181782e109e8fac",
   "profiles": {
     "desktop": {
-      "bytes": 20101900,
+      "bytes": 21290316,
       "primitives": 37,
-      "triangles": 2888054,
+      "triangles": 3030924,
       "parts": [
         {
           "name": "architecture",
@@ -32,9 +32,9 @@
         },
         {
           "name": "context-buildings",
-          "bytes": 6467040,
+          "bytes": 7655456,
           "primitives": 5,
-          "triangles": 772355
+          "triangles": 915225
         },
         {
           "name": "context-plants",
@@ -45,9 +45,9 @@
       ]
     },
     "mobile": {
-      "bytes": 14899104,
+      "bytes": 15981696,
       "primitives": 37,
-      "triangles": 2344323,
+      "triangles": 2479795,
       "parts": [
         {
           "name": "architecture",
@@ -75,9 +75,9 @@
         },
         {
           "name": "context-buildings",
-          "bytes": 5700468,
+          "bytes": 6783060,
           "primitives": 5,
-          "triangles": 694724
+          "triangles": 830196
         },
         {
           "name": "context-plants",
@@ -99,5 +99,9 @@
       "ratio": 0.3,
       "error": 0.0004
     }
+  },
+  "contextAdditions": {
+    "buildings": 8,
+    "donorTriangles": 23782
   }
 }
