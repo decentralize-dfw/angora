@@ -115,7 +115,8 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
 #app[data-delivery=native] .side-tools{top:80px;bottom:auto;transform:none}
 #app[data-delivery=native] .explore-dock{bottom:max(22px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:6px}
 #app[data-delivery=native][data-scale=region] .explore-dock,
-#app[data-delivery=native][data-scale=neighborhood] .explore-dock{display:none}
+#app[data-delivery=native][data-scale=neighborhood] .explore-dock,
+#app[data-delivery=native][data-walk=true] .explore-dock{display:none}
 .dock-actions .camera-tools{display:flex;flex-direction:row;gap:2px}
 .dock-actions .camera-tools button{min-width:36px;min-height:36px}
 .rm-info.rm-info-inline{position:static;width:auto;max-width:none;padding:0;background:none;border:0;box-shadow:none;backdrop-filter:none}
