@@ -86,3 +86,28 @@ summary:focus-visible {outline:2px solid #92733d;outline-offset:3px;}
   .panel {top:58px;bottom:calc(env(safe-area-inset-bottom) + 8px);right:68px;width:320px;max-height:none;}
   .region-panel,.model-scale {bottom:calc(env(safe-area-inset-bottom) + 122px);}
 }
+
+/* Room names are annotations, not navigation controls. */
+.room-label{pointer-events:none;min-height:0;min-width:0;padding:2px;max-width:none}
+.room-label strong{overflow:visible;text-overflow:clip}
+.dimension-label{font-size:10px;padding:2px 3px}
+#enter-walk{width:64px;height:48px;border-radius:16px;line-height:1.2}
+#app[data-scale=neighborhood] .explore-dock{display:none}
+@media(max-width:600px){
+  .side-tools{right:10px;gap:5px}
+  .side-tools button{height:40px;width:40px}
+  #enter-walk{width:54px;height:46px;font-size:11px}
+  .view-description{max-width:calc(100% - 88px)}
+  .explore-dock{bottom:calc(env(safe-area-inset-bottom) + 12px)}
+  .gesture-help{display:none}
+}
+
+.annotation-leaders{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:hidden}
+.annotation-leaders line{stroke:#315e5c;stroke-width:.7;opacity:.7}
+
+#app[data-scale=region] .explore-dock{display:none}
+.region-panel{background:var(--paper);border-radius:16px;max-width:320px;padding:0 14px}
+#region-summary summary{min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:24px;cursor:pointer}
+#region-summary div{max-height:180px;overflow:auto;padding-bottom:14px;font-size:12px;line-height:1.5}
+#region-summary p{margin:0 0 8px}
+@media(max-width:600px){.region-panel{left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom) + 12px);max-width:none}}

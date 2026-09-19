@@ -4,10 +4,17 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import {invalidateUIObstacles} from './screen-layout.js';
+import {createPlotMaterialMask} from './plot-material-mask.js';
+import {createNativeDelivery} from './native-delivery.js';
+import {waitForGPU} from './render-readiness.js';
+import {assetLoadBudget,createLoadQueue} from './asset-loading.js';
+import {createTextureLoader} from './texture-loader.js';
 import { createLighting } from './lighting.js';
 import { createAnnotations } from './annotations.js';
 import { InteriorWalk, enableImmersiveWalk } from './walk.js';
 import {CameraFlight} from './camera-flight.js';
+import {frameInsets} from './frame-insets.js';
 import {clockLabel} from './daylight.js';
 import {createHotspots} from './hotspots.js';
 import {renderPropertyInfo} from './property-info.js';
@@ -28,13 +35,13 @@ import {createInterfaceSound} from './interface-sound.js';
 import {createDeviceQA} from './device-qa.js';
 import {readShareState,shareSearch} from './share-state.js';
 import {referenceProfile} from './render-profile.js';
-import { sectionHeight, smoothStep, createWallCaps, createSoilCap, SOIL_CUT_HEIGHT } from './section.js';
+import { sectionHeight, smoothStep, createWallCaps, createSoilCap, createNativeSoilSection, SOIL_CUT_HEIGHT } from './section.js';
 
 const $ = s => document.querySelector(s);
 const host = $('#viewport'), status = $('#load-status');
 const publicRoot = new URL(import.meta.env.BASE_URL, document.baseURI);
 const pages = import.meta.env.MODE === 'pages';
-const modelRoot = new URL(pages ? 'build/web/full/' : 'models/full/', publicRoot);
+const modelRoot = new URL(import.meta.env.VITE_MODEL_ROOT || (pages ? 'build/web/native-current/' : 'models/native-current/'), publicRoot);
 const decoderRoot = new URL(pages ? 'viewer/public/draco/' : 'draco/', publicRoot);
 const daylightURL = new URL((pages ? 'assets/lighting/' : 'lighting/')+'kloofendal_48d_partly_cloudy_puresky_1k.hdr',publicRoot);
 const titles = {region:'Bölge', neighborhood:'Yakın çevre', building:'Villa 21', f0:'Bodrum', f1:'Giriş katı', f2:'1. kat', f3:'Çatı katı'};
@@ -46,7 +53,8 @@ const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
 // cut open" instead of lerping and leaving the excavation uncapped mid-flight.
 const earthClip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 30);
 let flight, hotspots, planMode=false, roomData, interiorLights=true, soilCap=null;
-let scene, camera, renderer, controls, loader, caps, buildingBox, gardenBox, contextBox, lighting, siteContext;
+let scene, camera, renderer, controls, loader, loadAsset, caps, buildingBox, gardenBox, contextBox, lighting, siteContext;
+let nativeDelivery=null,nativeSwitching=false,nativeAtlas=null,nativeSoil=null,plotMask=null;
 let selected = 'neighborhood', ready = false, loading = false;
 let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations, walk;
 let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;
@@ -113,10 +121,15 @@ function invalidate() {
   requestAnimationFrame(time => {if (!renderer.xr.isPresenting) renderFrame(time); else framePending = false;});
 }
 function renderFrame(time) {
+    const cpuStart=performance.now(),measuredTransition=transition;
     framePending = false;
     if(contextLost)return;
     if (transition) {
-      const t = Math.min(1, (time - transition.start) / transition.span);
+      transition.frames=(transition.frames??0)+1;
+      transition.maxFrameGap=Math.max(transition.maxFrameGap??0,time-(transition.last??transition.start));
+      transition.elapsed=(transition.elapsed??0)+Math.min(50,Math.max(0,time-(transition.last??transition.start)));
+      transition.last=time;
+      const t = Math.min(1, transition.elapsed / transition.span);
       clip.constant = THREE.MathUtils.lerp(transition.from, transition.to, smoothStep(t));
       // Re-rendering every shadow map on every frame of the cut was why changing
       // floor crawled: a 4096 sun map plus the fixtures, sixty times a second,
@@ -125,6 +138,7 @@ function renderFrame(time) {
     }
     const flying=flight?.update(time);
     caps?.update(clip.constant, clip.constant < fullHeight - 0.001);
+    if(nativeSoil)nativeSoil.visible=selected==='f0'&&!walk?.active&&Math.abs(clip.constant-nativeSoil.userData.height)<.001;
     soilCap?.update(earthClip.constant, earthClip.constant < fullHeight - 0.001 && groups.has('context'));
     const changing=walk?.active?walk.update(time,renderer.xr.getSession()):flying?false:controls.update();
     const activeCamera=walk?.active?walk.camera:camera;
@@ -141,42 +155,74 @@ function renderFrame(time) {
     annotations?.update(selected,roomNamesVisible,measurementsVisible,Boolean(transition||flight?.active),walk?.active,activeCamera,walk?.room);
     hotspots?.update(activeCamera,walk?.active&&!walk.xrActive&&!walk.route);
     siteContext?.update(selected,activeCamera,controls.target,Boolean(transition||flight?.active),walk?.active);
+    host.dataset.runtime=JSON.stringify({view:selected,plan:planMode,projection:activeCamera.type,cameraPosition:activeCamera.position.toArray(),target:controls.target.toArray(),sectionHeight:clip.constant,loaded:nativeDelivery?[...nativeDelivery.loaded.keys()]:[...groups.keys()],zoom:activeCamera.zoom,autoRotate:controls.autoRotate,zoomEnabled:controls.enableZoom,rotate:controls.mouseButtons.LEFT===THREE.MOUSE.ROTATE,transition:Boolean(transition),textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries});
     renderer.info.reset();
     lighting.render(activeCamera);
+    if(measuredTransition){
+      measuredTransition.maxCpuMs=Math.max(measuredTransition.maxCpuMs??0,performance.now()-cpuStart);
+      if(!transition)host.dataset.lastTransition=JSON.stringify({frames:measuredTransition.frames,elapsed:time-measuredTransition.start,to:measuredTransition.to,maxFrameGap:measuredTransition.maxFrameGap,maxCpuMs:measuredTransition.maxCpuMs,programs:renderer.info.programs?.length,drawCalls:renderer.info.render.calls});
+    }
     if(pendingCapture){
       const callback=pendingCapture,snapshot=deviceQA.snapshot();pendingCapture=null;
       try{renderer.domElement.toBlob(blob=>callback(blob,null,snapshot),'image/png');}catch(error){callback(null,error);}
     }
     deviceQA?.sample(time,{draw_calls:renderer.info.render.calls,triangles:renderer.info.render.triangles,
       drawing_buffer:`${renderer.domElement.width}×${renderer.domElement.height}`,view:walk?.active?`${selected}:walk`:selected});
-    if(changing||transition||flying||lightChanging||massingChanging||liftChanging||deviceQA?.active)invalidate();
+    if(controls.autoRotate||changing||transition||flying||lightChanging||massingChanging||liftChanging||deviceQA?.active)invalidate();
 }
 
+function floorFrameInsets(){
+  const rect=host.getBoundingClientRect(),dock=$('.explore-dock').getBoundingClientRect();
+  const topBottom=rect.width<700?Math.max($('.topbar').getBoundingClientRect().bottom,$('.scale-picker').getBoundingClientRect().bottom)-rect.top:0;
+  return frameInsets(rect.width,rect.height,{dockTop:dock.top-rect.top,topBottom});
+}
 function resize() {
+  invalidateUIObstacles();
   if (!renderer) return;
   const w = host.clientWidth, h = Math.max(1, host.clientHeight), aspect = w / h;
   const ratio=renderPixelRatio(w,h,devicePixelRatio,matchMedia('(pointer: coarse)').matches);
   if(renderer.getPixelRatio()!==ratio){renderer.setPixelRatio(ratio);lighting?.pixelRatio(ratio);}
   camera.aspect=aspect;
+  if(camera.isOrthographicCamera){camera.left=-camera.top*aspect;camera.right=camera.top*aspect;}
+  if(selected.startsWith('f')&&!walk?.active)camera.setViewOffset(w,h,0,floorFrameInsets().offsetY,w,h);
+  else camera.clearViewOffset();
   camera.updateProjectionMatrix(); renderer.setSize(w, h); lighting?.resize(w, h); invalidate();
   walk?.resize(w,h);
 }
 function frame(initial=false,keep=false) {
   if(!buildingBox)return;
+  if(Boolean(camera.isOrthographicCamera)!==planMode){
+    flight.cancel();
+    const next=planMode?new THREE.OrthographicCamera(-20,20,20,-20,camera.near,camera.far):new THREE.PerspectiveCamera(16,camera.aspect,camera.near,camera.far);
+    next.position.copy(camera.position);next.quaternion.copy(camera.quaternion);next.aspect=camera.aspect;next.fov=16;
+    camera=next;controls.object=camera;flight.camera=camera;
+  }
   const floor=selected.startsWith('f'),aspect=host.clientWidth/Math.max(1,host.clientHeight);
   let box=buildingBox.clone();if(selected==='building'||selected==='f0')box.union(gardenBox);
+  if(floor&&nativeAtlas){
+    const slice=nativeAtlas.slices[Number(selected[1])];box.makeEmpty();
+    for(let i=0;i<slice.p.length;i+=2)box.expandByPoint(new THREE.Vector3(slice.p[i],slice.height-.8,slice.p[i+1]));
+    box.expandByScalar(.6);
+    if(selected==='f0'&&planMode){
+      for(const r of roomData?.rooms??[])if(r.id.startsWith('f0-site-'))box.expandByPoint(new THREE.Vector3(...r.position));
+      for(const d of roomData?.dimensions??[])if(d.room_id.startsWith('f0-site-')){box.expandByPoint(new THREE.Vector3(...d.a));box.expandByPoint(new THREE.Vector3(...d.b));}
+      box.expandByScalar(.8);
+    }
+  }
   const center=box.getCenter(new THREE.Vector3());center.y=floor?[0,3.0996,6.3714,9.4705][Number(selected[1])]:2;
   let size=box.getSize(new THREE.Vector3());
   if(selected==='neighborhood'){size.set(66,21,70);center.set(0,3,-5);}
   if(selected==='region'&&contextBox){size=contextBox.getSize(new THREE.Vector3());center.copy(contextBox.getCenter(new THREE.Vector3()));}
-  const polar=planMode?.12:selected==='region'?.58:floor?.56:.78;
-  frameSpan=Math.max(size.z*Math.cos(polar)+size.y*Math.sin(polar),size.x/aspect)*(floor?1.17:1.14);
+  const polar=planMode?.0001:selected==='region'?.58:floor?.56:.78;
+  const insets=floor?floorFrameInsets():{verticalFraction:1,horizontalFraction:1};
+  frameSpan=Math.max((size.z*Math.cos(polar)+size.y*Math.sin(polar))/insets.verticalFraction,size.x/aspect/insets.horizontalFraction)*(floor?1.08:1.14);
   if(selected==='region'&&contextBox)frameSpan=fitContextBounds(contextBox,aspect,polar).span;
   if(keep){center.copy(controls.target);if(floor)center.y=[0,3.0996,6.3714,9.4705][Number(selected[1])];frameSpan=camera.position.distanceTo(controls.target)*2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2));}
-  flight.go({target:center,polar,span:frameSpan,zoom:keep?camera.zoom:1,azimuth:selected==='region'?0:initial?.804:undefined},initial===true);
+  flight.go({target:center,polar,span:frameSpan,zoom:keep?camera.zoom:1,azimuth:planMode||selected==='region'?0:initial?.804:undefined},initial===true);
   resize();
 }
 function panel(id,open) {
+  invalidateUIObstacles();
   if(walk){walk.inputSuspended=open;walk.keys.clear();walk.lastTime=null;}
   const previous=document.querySelector('.panel:not([hidden])');
   for(const name of ['options-panel','info-panel']){
@@ -209,8 +255,17 @@ function updateRoomUI(station){
   $('#walk-room-area').textContent=areaLabel(roomData.rooms.find(r=>r.id===station.room_id),roomData);
   renderPropertyInfo($('#property-info'),roomData,selected);
 }
-function travelRoom(roomId){
+async function travelRoom(roomId){
   pendingRoomJump.cancel();
+  const destination=walk?.surface.data.stations.find(s=>s.room_id===roomId);
+  if(nativeDelivery&&destination&&selected!=='f'+destination.floor_index){
+    if(nativeSwitching)return;
+    nativeSwitching=true;message('Kat hazırlanıyor…');
+    try{await nativeDelivery.activate('f'+destination.floor_index);setFurnitureVisible(furnitureVisible);selected='f'+destination.floor_index;enterWalk(roomId);status.hidden=true;}
+    catch(error){message('Oda yüklenemedi: '+error.message,true);}
+    finally{nativeSwitching=false;}
+    return;
+  }
   if(!walk?.active)return enterWalk(roomId);
   panel('',false);
   if(matchMedia('(prefers-reduced-motion: reduce)').matches){enterWalk(roomId);return;}
@@ -266,29 +321,50 @@ function setup() {
     message('3D grafik bağlantısı kesildi. Sayfayı yeniden açarak devam edebilirsin.',true);
     $('#retry').onclick=()=>location.reload();
   });
-  // Seven compressed meshes were being unpacked two at a time on hardware that
-  // has six or eight cores, which is dead time in the middle of the wait. One
-  // core is left for the page, and a phone keeps one fewer decoder in flight so
-  // the peak memory of the decode does not stack up on top of the scene.
+  // Bound both package concurrency and decoder workers. A phone's core count
+  // does not imply enough memory for simultaneous model/texture decode.
   const draco = new DRACOLoader(); draco.setDecoderPath(decoderRoot.href);
-  draco.setWorkerLimit(Math.max(2,Math.min(coarse?3:4,(navigator.hardwareConcurrency||4)-1)));
+  const budget=assetLoadBudget({compact:coarse,cores:navigator.hardwareConcurrency});
+  draco.setWorkerLimit(budget.draco);
   loader = new GLTFLoader(); loader.setDRACOLoader(draco);
+  loader.setKTX2Loader(createTextureLoader(renderer,budget.textures));
+  const enqueue=createLoadQueue(budget.models);
+  loadAsset=(...args)=>enqueue(()=>loader.loadAsync(...args));
   window.addEventListener('resize',()=>{
     const portrait=camera.aspect<1;resize();
-    if(ready&&!walk?.active&&portrait!==(camera.aspect<1))frame(true);
+    if(ready&&!walk?.active&&(selected.startsWith('f')||portrait!==(camera.aspect<1)))frame(true);
   });
   renderer.xr.addEventListener('sessionstart', () => renderer.setAnimationLoop(renderFrame));
   renderer.xr.addEventListener('sessionend', () => {renderer.setAnimationLoop(null);resize();invalidate();});
 }
-function selectView(id, initial = false) {
+async function selectView(id, initial = false) {
+  if(id==='building')id='f3';
+  setAutoRotate(false);
+  if(nativeDelivery){
+    if(nativeSwitching)return;
+    nativeSwitching=true;message('Kat hazırlanıyor…');
+    try{
+      await nativeDelivery.activate(id);
+      lighting.frame(id,contextBox);
+      lighting.interior(id.startsWith('f')?Number(id[1]):null,null);
+      if(renderer.compileAsync)await renderer.compileAsync(scene,camera);
+      lighting.warm(camera);
+      await waitForGPU(renderer);
+      setFurnitureVisible(furnitureVisible);status.hidden=true;
+    }catch(error){message('Görünüm yüklenemedi: '+error.message,true);return;}
+    finally{nativeSwitching=false;}
+  }
   pendingRoomJump.cancel();
   if (walk?.active && id.startsWith('f')) {
     const station=walk.surface.data.stations.find(s=>s.floor_index===Number(id[1]));travelRoom(station.room_id);return;
   }
   if (walk?.active) exitWalk(false);
   const previous = selected; selected = id;
+  plotMask?.set(id.startsWith('f'));
+  if(!id.startsWith('f')){planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);$('#toggle-plan').textContent='Plan';mode(false);}
+  if(id==='region')$('#region-summary').open=false;
   $('#app').dataset.scale=id.startsWith('f')?'floor':id;
-  document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === id));
+  document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === id || (b.dataset.view==='building' && id.startsWith('f'))));
   $('#view-title').textContent = titles[id];
   $('#section-label').textContent = id.startsWith('f')
     ? (id==='f3'?'1,30 m kesit':'1,60 m kesit')
@@ -296,6 +372,11 @@ function selectView(id, initial = false) {
   $('#region-panel').hidden=id!=='region';
   panel('',false);
   if (!ready) return;
+  controls.enableZoom=id!=='neighborhood';
+  $('#toggle-auto-rotate').hidden=id!=='neighborhood';
+  $('#enter-walk').hidden=!id.startsWith('f');
+  $('#toggle-plan').hidden=!id.startsWith('f');
+  for(const key of ['zoom-in','zoom-out'])$('#'+key).disabled=id==='neighborhood';
   const target = sectionHeight(id, fullHeight);
   const earthTarget = id==='f0' ? SOIL_CUT_HEIGHT : fullHeight;
   if (earthClip.constant !== earthTarget) {earthClip.constant = earthTarget; renderer.shadowMap.needsUpdate = true;}
@@ -306,18 +387,21 @@ function selectView(id, initial = false) {
   if (initial || matchMedia('(prefers-reduced-motion: reduce)').matches) {
     clip.constant = target; transition = null;
   } else transition = {from:clip.constant, to:target, start:performance.now(),
-    span:matchMedia('(pointer: coarse)').matches?520:820};
-  // All assets stay loaded and visible; floor changes preserve orbit, pan and zoom.
-  if(initial||!previous.startsWith('f')||!id.startsWith('f'))frame(initial);
-  else if(previous!==id)frame(false,true);
+    span:950};
+  frame(initial);
+  invalidateUIObstacles();
   host.dataset.view = id; host.dataset.loaded = 'true'; rememberState(); invalidate();
 }
 function enterWalk(roomId) {
   pendingRoomJump.cancel();
   if (!walk || !ready) return;
   const floor=selected.startsWith('f')?Number(selected[1]):1;
-  roomId ||= walk.surface.data.stations.find(s=>s.floor_index===floor).room_id;
-  flight.cancel();panel('',false);const station=walk.enter(roomId);selected='f'+station.floor_index;updateRoomUI(station);
+  const stations=walk.surface.data.stations.filter(s=>s.floor_index===floor);
+  if(!stations.length)return;
+  const centre=buildingBox.getCenter(new THREE.Vector3());
+  const position=roomId?null:walk.surface.center(floor,[centre.x,centre.z],furnitureVisible);
+  roomId ||= stations.reduce((a,b)=>new THREE.Vector3(...a.position).distanceToSquared(centre)<new THREE.Vector3(...b.position).distanceToSquared(centre)?a:b).room_id;
+  flight.cancel();panel('',false);const station=walk.enter(roomId,position);selected='f'+station.floor_index;updateRoomUI(station);
   lighting.interior(station.floor_index,station.position);
   controls.enabled=false;clip.constant=fullHeight;earthClip.constant=fullHeight;transition=null;lighting.frame('building');massing?.set('building');
   lighting.setWalkInterior(true);
@@ -337,9 +421,45 @@ function exitWalk(reselect = true) {
   lighting.interior(null,null);
   lift?.setWalkActive(false);lift?.cancel();refreshLiftControl();
   $('.camera-tools').hidden=false;$('#walk-tools').hidden=true;$('#enter-walk').hidden=false;
-  planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);
+  planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);$('#toggle-plan').textContent='Plan';mode(false);
   if(reselect){selectView(selected);frame(false);}
   $('#gesture-help').textContent='Sürükle: döndür · İki parmak: kaydır / yakınlaştır';
+}
+async function loadNativeModel(manifest){
+  async function json(file){const response=await fetch(new URL(file,modelRoot),{cache:'no-cache'});if(!response.ok)throw Error(file+' HTTP '+response.status);return response.json();}
+  const [atlas,rooms,navigation,soil]=await Promise.all([json(manifest.sections),json(manifest.rooms),json(manifest.navigation),manifest.soil_section?json(manifest.soil_section):null]);
+  if(navigation.source_native_sha256!==manifest.source_native_sha256)throw Error('Native navigation revision mismatch');
+  nativeAtlas=atlas;roomData=rooms;
+  flight.limitFrameStep=true;
+  if(manifest.plot_boundary){const boundary=await json(manifest.plot_boundary);plotMask=createPlotMaterialMask(boundary.polygon_native_xy);}
+  nativeDelivery=createNativeDelivery({manifest,root:modelRoot,scene,groups,load:loadAsset,
+    releaseMaterial:m=>lighting.releaseMaterial(m),prepare:(o,{clipped,context,name})=>{
+      o.renderOrder=5;lighting.prepareMesh(o,{clipped,context});
+      const planes=clipped?[clip]:[];o.userData.clipPlanes=planes;
+      for(const material of Array.isArray(o.material)?o.material:[o.material]){material.clippingPlanes=planes;material.clipShadows=true;if(material.aoMap)material.aoMapIntensity=.7;if(name==='garden'||name==='context-plants')plotMask?.apply(material);}
+    }});
+  await nativeDelivery.activate(selected==='building'?'f3':selected);
+  buildingBox=new THREE.Box3().setFromObject(groups.get('architecture'));
+  gardenBox=new THREE.Box3().setFromObject(groups.get('garden'));contextBox=buildingBox.clone();
+  for(const model of groups.values())contextBox.union(new THREE.Box3().setFromObject(model));
+  if(manifest.site_context){
+    const data=await json(manifest.site_context);siteContext=createSiteContext(data,host,()=>selectView('building'));
+    $('#context-count').textContent=`${data.buildings.length} yapı`;
+  }
+  fullHeight=buildingBox.max.y+2;
+  caps=createWallCaps(atlas);scene.add(caps.group);
+  if(soil){nativeSoil=createNativeSoilSection(soil);nativeSoil.userData.height=soil.height;scene.add(nativeSoil);}
+  annotations=createAnnotations(rooms,host);scene.add(annotations.group);
+  walk=new InteriorWalk(navigation,renderer.domElement,invalidate);scene.add(walk.rig);
+  lighting.setFixtures(navigation.lights,{allRooms:true});hotspots=createHotspots(host,walk,travelRoom);
+  for(let f=0;f<4;f++){
+    const group=document.createElement('optgroup');group.label=titles['f'+f];
+    for(const station of navigation.stations.filter(s=>s.floor_index===f))group.append(new Option(station.name,station.room_id));
+    $('#walk-room').append(group);
+  }
+  await lighting.loadEnvironment(daylightURL.href);
+  ready=true;document.querySelectorAll('[data-needs-model],#toggle-furniture,#toggle-rooms,#toggle-measurements,#enter-walk').forEach(b=>b.disabled=false);
+  await selectView(selected,true);lighting.render(camera);status.hidden=true;
 }
 async function loadModel() {
   if (loading || ready) return;
@@ -352,6 +472,7 @@ async function loadModel() {
     const response = await fetch(new URL('manifest.json', modelRoot), {cache:'no-cache'});
     if (!response.ok) throw Error(`Manifest HTTP ${response.status}`);
     const manifest = await response.json();
+    if(manifest.parts&&manifest.interior_streams){await loadNativeModel(manifest);return;}
     assetRevision=manifest.assets?.map(({file,sha256})=>({file,sha256}));
     if (!manifest.full_scene || manifest.geometry_preclipped || manifest.assets?.length !== 7) throw Error('Whole-scene manifest required');
     // R42: the whole scene before the first frame. It used to open on the villa
@@ -377,7 +498,7 @@ async function loadModel() {
         const url = new URL(asset.file, modelRoot); url.searchParams.set('v', asset.sha256.slice(0, 12));
         // A compressed response reports fewer bytes than the manifest records,
         // so the manifest size stays the denominator and caps each part.
-        const gltf = await loader.loadAsync(url.href, event => {
+        const gltf = await loadAsset(url.href, event => {
           received.set(asset.id, Math.min(event.loaded, asset.bytes || event.loaded));
           reportProgress();
         });
@@ -412,7 +533,7 @@ async function loadModel() {
       const url = new URL(manifest.section_cap_asset.file, modelRoot);
       url.searchParams.set('v', manifest.section_cap_asset.sha256.slice(0, 12));
       try {
-        const gltf = await loader.loadAsync(url.href, event => {
+        const gltf = await loadAsset(url.href, event => {
           received.set('section-caps', Math.min(event.loaded, manifest.section_cap_asset.bytes || event.loaded));
           reportProgress();
         });
@@ -495,7 +616,7 @@ async function loadModel() {
     caps = createWallCaps(results[2].value); scene.add(caps.group);
     const capScene=results[6].status==='fulfilled'?results[6].value:null;
     if (capScene) {soilCap = createSoilCap(capScene); if (soilCap) scene.add(soilCap.group);}
-    roomData=results[3].value;annotations=createAnnotations(roomData,host,enterWalk);scene.add(annotations.group);
+    roomData=results[3].value;annotations=createAnnotations(roomData,host);scene.add(annotations.group);
     walk = new InteriorWalk(results[4].value,renderer.domElement,invalidate);scene.add(walk.rig);
     lighting.setFixtures(results[4].value.lights);hotspots=createHotspots(host,walk,travelRoom);
     lift=createLift({groups,clips:stagedClips.get('level-0')??[],clipPlane:clip,fullHeight,
@@ -545,19 +666,27 @@ async function loadModel() {
     lighting.render(camera);
     status.hidden = true;
   } catch (error) {
+    nativeDelivery?.dispose();nativeDelivery=null;
     for (const group of staged.values()) {scene.remove(group); dispose(group);}
     groups.clear();
     message('Model yüklenemedi. Bağlantını kontrol edip tekrar deneyebilirsin.', true);
-    console.error('Model load failed', error);
+    console.error('Model load failed: '+(error?.stack??error?.message??String(error)));
   } finally {loading = false;}
 }
 // Zoom must not move the camera. This used to fly to controls.minPolarAngle, so
 // every tap on + or - also tilted the view back to its flattest angle and the
 // building appeared to shift under you. Only the zoom changes now.
 function zoom(factor){
-  if(!ready)return;
+  if(!ready||selected==='neighborhood')return;
   camera.zoom=THREE.MathUtils.clamp(camera.zoom*factor,controls.minZoom,controls.maxZoom);
   camera.updateProjectionMatrix();invalidate();
+}
+function setAutoRotate(value) {
+  if(!controls)return;
+  controls.autoRotate=Boolean(value&&selected==='neighborhood');
+  controls.autoRotateSpeed=.25;
+  $('#toggle-auto-rotate').setAttribute('aria-pressed',String(controls.autoRotate));
+  if(controls.autoRotate)invalidate();
 }
 function mode(pan) {
   controls.touches.ONE = pan ? THREE.TOUCH.PAN : THREE.TOUCH.ROTATE;
@@ -585,7 +714,7 @@ function bindInterface() {
   $('#rotate-mode').onclick = () => mode(false); $('#pan-mode').onclick = () => mode(true);
   $('#zoom-in').onclick=()=>zoom(1.3);
   $('#zoom-out').onclick=()=>zoom(1/1.3);
-  $('#reset-view').onclick=()=>{planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);frame(false);}; $('#retry').onclick = loadModel;
+  $('#reset-view').onclick=()=>{planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);$('#toggle-plan').textContent='Plan';mode(false);frame(false);}; $('#retry').onclick = loadModel;
   $('#lift-call').onclick=()=>{if(lift?.run(performance.now())){refreshLiftControl();invalidate();}};
   $('#toggle-furniture').onclick = () => setFurnitureVisible(!furnitureVisible);
   $('#toggle-rooms').onclick = () => {
@@ -596,7 +725,11 @@ function bindInterface() {
   };
   $('#enter-walk').onclick=()=>enterWalk();$('#exit-walk').onclick=()=>exitWalk();
   $('#walk-room').onchange=event=>travelRoom(event.target.value);
-  $('#toggle-plan').onclick=()=>{planMode=!planMode;$('#toggle-plan').setAttribute('aria-pressed',planMode);frame(false,true);};
+  $('#toggle-plan').onclick=()=>{planMode=!planMode;$('#toggle-plan').setAttribute('aria-pressed',planMode);$('#toggle-plan').textContent=planMode?'3D':'Plan';mode(planMode);frame(false);};
+  $('#region-summary').ontoggle=()=>{invalidateUIObstacles();invalidate();};
+  $('#toggle-auto-rotate').onclick=()=>setAutoRotate(!controls.autoRotate);
+  window.addEventListener('pointermove',()=>setAutoRotate(false));
+  host.addEventListener('pointerdown',()=>setAutoRotate(false));
   $('#open-options').onclick=()=>panel('options-panel',$('#options-panel').hidden);
   $('#open-info').onclick=()=>panel('info-panel',$('#info-panel').hidden);
   document.querySelectorAll('[data-close-panel]').forEach(button=>button.onclick=()=>panel('',false));
@@ -604,7 +737,7 @@ function bindInterface() {
   $('#daylight-season').onchange=()=>$('#daylight-hour').oninput();
   $('#toggle-lights').onclick=()=>{interiorLights=!interiorLights;$('#toggle-lights').setAttribute('aria-pressed',interiorLights);lighting?.setLights(interiorLights);invalidate();};
   $('#lighting-style').onchange=e=>{lighting?.setStyle(e.target.value);rememberState();invalidate();};
-  $('#return-villa').onclick=()=>selectView('building');
+
   window.addEventListener('keydown',event=>handleEscape(event,{
     panelOpen:Boolean(document.querySelector('.panel:not([hidden])')),closePanel:()=>panel('',false),
     walkActive:walk?.active,immersive:renderer?.xr.isPresenting,exitWalk

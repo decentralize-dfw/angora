@@ -1,0 +1,29 @@
+{
+  "polygon_native_xy": [
+    [
+      -9.438712865,
+      -10.05825941
+    ],
+    [
+      10.918416804,
+      -10.05825941
+    ],
+    [
+      10.918416799,
+      5.224747337
+    ],
+    [
+      26.5071282,
+      21.53448227
+    ],
+    [
+      -9.438712865,
+      29.06127839
+    ]
+  ],
+  "source": "CAD PDUVAR registered wall lines + owner screenshot closing edges",
+  "survey_verified": false,
+  "house_changed": false,
+  "inside_faces": 10707,
+  "outside_faces": 181064
+}

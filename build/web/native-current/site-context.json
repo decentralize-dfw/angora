@@ -1,0 +1,1351 @@
+{
+ "coordinate_system": "glTF_Y_up",
+ "source": "build/cad/site-elevations.json",
+ "note": "CAD building numbers. Label heights are display offsets, not measured roof heights. Not a georeferenced city map. Her çevre bloğu, Villa 21 tipolojisinin CAD tabanına yerleştirilmiş örneklenmiş bir kopyasıdır; cepheler, çatı biçimi, çatı ve duvar rengi, kat sayısı ve mahya kotu 41 blok için de yorumdur. 42 ve 44 numaralı girişlerin tipoloji uyumu zayıftır (simetrik fark 51,28 m² / Hausdorff 5,203 m ve 92,93 m² / 8,457 m) - CAD çoklu çizgileri eksik olduğu için, binalar küçük olduğu için değil.",
+ "buildings": [
+  {
+   "number": 25,
+   "position": [
+    50.224715154200894,
+    17.8,
+    42.70731612833391
+   ],
+   "bounds": [
+    [
+     41.1678,
+     2.6,
+     33.4974
+    ],
+    [
+     59.6982,
+     16.5087,
+     51.1458
+    ]
+   ],
+   "source_handle": "1D17C",
+   "footprint_status": "cad_registered_closing_edge_inferred",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 153.91,
+   "typology_fit": {
+    "symmetric_difference_m2": 6.542,
+    "hausdorff_m": 0.897
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 39,
+   "position": [
+    -33.51026459278786,
+    28.70000000000009,
+    135.29150308229117
+   ],
+   "bounds": [
+    [
+     -42.6976,
+     13.5,
+     126.71
+    ],
+    [
+     -24.4723,
+     27.4087,
+     144.3584
+    ]
+   ],
+   "source_handle": "1D24E",
+   "footprint_status": "cad_registered_closing_edge_inferred",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 153.4,
+   "typology_fit": {
+    "symmetric_difference_m2": 6.02,
+    "hausdorff_m": 1.0
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 4,
+   "position": [
+    97.06763004242683,
+    4.3,
+    -105.9121777226181
+   ],
+   "bounds": [
+    [
+     88.5543,
+     -10.9,
+     -114.4954
+    ],
+    [
+     106.4052,
+     3.0087,
+     -97.6754
+    ]
+   ],
+   "source_handle": "1E080",
+   "footprint_status": "cad_registered_closing_edge_inferred",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 154.004,
+   "typology_fit": {
+    "symmetric_difference_m2": 6.624,
+    "hausdorff_m": 0.95
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 2,
+   "position": [
+    56.88187757058222,
+    6.3,
+    -77.40007200409704
+   ],
+   "bounds": [
+    [
+     47.1282,
+     -8.9,
+     -87.0819
+    ],
+    [
+     67.1971,
+     5.0087,
+     -68.1628
+    ]
+   ],
+   "source_handle": "1E170",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 152.18,
+   "typology_fit": {
+    "symmetric_difference_m2": 4.8,
+    "hausdorff_m": 0.6
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 3,
+   "position": [
+    68.28895644021631,
+    5.8,
+    -85.89669615322873
+   ],
+   "bounds": [
+    [
+     59.1876,
+     -9.4,
+     -96.1635
+    ],
+    [
+     77.7902,
+     4.5087,
+     -75.9485
+    ]
+   ],
+   "source_handle": "1E188",
+   "footprint_status": "cad_registered_closing_edge_inferred",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 153.018,
+   "typology_fit": {
+    "symmetric_difference_m2": 6.396,
+    "hausdorff_m": 0.808
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 23,
+   "position": [
+    35.87323868828365,
+    17.3,
+    9.531383566807985
+   ],
+   "bounds": [
+    [
+     26.3584,
+     2.1,
+     -0.8278
+    ],
+    [
+     45.2565,
+     16.0087,
+     19.5083
+    ]
+   ],
+   "source_handle": "22BC3",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 152.485,
+   "typology_fit": {
+    "symmetric_difference_m2": 5.105,
+    "hausdorff_m": 0.7
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 42,
+   "position": [
+    -52.36590176570276,
+    25.39999999999991,
+    91.97843216747518
+   ],
+   "bounds": [
+    [
+     -59.8776,
+     10.2,
+     81.9014
+    ],
+    [
+     -40.9794,
+     24.1087,
+     102.2375
+    ]
+   ],
+   "source_handle": "22BDB",
+   "footprint_status": "cad_registered_closing_edge_inferred",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 102.038,
+   "typology_fit": {
+    "symmetric_difference_m2": 51.282,
+    "hausdorff_m": 5.203
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 34,
+   "position": [
+    -63.35855860814164,
+    21.000000000000046,
+    60.48857535398353
+   ],
+   "bounds": [
+    [
+     -71.3983,
+     5.8,
+     51.1218
+    ],
+    [
+     -55.4222,
+     19.7087,
+     68.4888
+    ]
+   ],
+   "source_handle": "22BFC",
+   "footprint_status": "cad_registered_closing_edge_inferred",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 150.786,
+   "typology_fit": {
+    "symmetric_difference_m2": 4.256,
+    "hausdorff_m": 0.802
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 33,
+   "position": [
+    -76.6085570956855,
+    21.000000000000046,
+    60.48857536657446
+   ],
+   "bounds": [
+    [
+     -84.5449,
+     5.8,
+     51.1218
+    ],
+    [
+     -68.5688,
+     19.7087,
+     68.4888
+    ]
+   ],
+   "source_handle": "22CC6",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 150.35,
+   "typology_fit": {
+    "symmetric_difference_m2": 2.97,
+    "hausdorff_m": 0.6
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 27,
+   "position": [
+    20.40844929751591,
+    19.849999999999955,
+    52.19733294468584
+   ],
+   "bounds": [
+    [
+     11.1078,
+     4.65,
+     43.7589
+    ],
+    [
+     29.6382,
+     18.5587,
+     61.4073
+    ]
+   ],
+   "source_handle": "22CE6",
+   "footprint_status": "cad_registered_closing_edge_inferred",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 151.752,
+   "typology_fit": {
+    "symmetric_difference_m2": 4.384,
+    "hausdorff_m": 0.895
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 38,
+   "position": [
+    -6.434992843241058,
+    24.20000000000009,
+    91.63755795730646
+   ],
+   "bounds": [
+    [
+     -15.9339,
+     9.0,
+     82.0427
+    ],
+    [
+     1.7145,
+     22.9087,
+     100.5731
+    ]
+   ],
+   "source_handle": "22DC0",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 158.553,
+   "typology_fit": {
+    "symmetric_difference_m2": 21.894,
+    "hausdorff_m": 2.392
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 37,
+   "position": [
+    -9.645557341456376,
+    23.70000000000009,
+    78.77328824023255
+   ],
+   "bounds": [
+    [
+     -18.7045,
+     8.5,
+     69.7064
+    ],
+    [
+     -0.4792,
+     22.4087,
+     87.3548
+    ]
+   ],
+   "source_handle": "22DD6",
+   "footprint_status": "cad_registered_closing_edge_inferred",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 153.901,
+   "typology_fit": {
+    "symmetric_difference_m2": 6.533,
+    "hausdorff_m": 0.896
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 22,
+   "position": [
+    23.850332872311615,
+    17.3,
+    0.8530608631055241
+   ],
+   "bounds": [
+    [
+     13.7801,
+     2.1,
+     -8.4859
+    ],
+    [
+     34.1577,
+     16.0087,
+     10.2378
+    ]
+   ],
+   "source_handle": "22E02",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 150.35,
+   "typology_fit": {
+    "symmetric_difference_m2": 2.97,
+    "hausdorff_m": 0.6
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 21,
+   "position": [
+    0.8434167794595746,
+    14.8,
+    -1.527263647302342
+   ],
+   "bounds": [
+    [
+     -6.831583218542239,
+     2.8,
+     -9.277263665040113
+    ],
+    [
+     8.518416777461388,
+     16.8,
+     6.222736370435429
+    ]
+   ],
+   "source_handle": "22E1A",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "subject",
+   "in_context_glb": false,
+   "typology_mirrored": false,
+   "footprint_area_m2": 153.32,
+   "typology_fit": {
+    "symmetric_difference_m2": 0.0,
+    "hausdorff_m": 0.0
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 20,
+   "position": [
+    -19.27084440862518,
+    11.8,
+    -2.1168252745578133
+   ],
+   "bounds": [
+    [
+     -27.2106,
+     -3.4,
+     -10.9836
+    ],
+    [
+     -11.2345,
+     10.5087,
+     6.3834
+    ]
+   ],
+   "source_handle": "22E32",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 162.852,
+   "typology_fit": {
+    "symmetric_difference_m2": 16.493,
+    "hausdorff_m": 2.275
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 19,
+   "position": [
+    -32.52084247031038,
+    11.8,
+    -1.616826796314065
+   ],
+   "bounds": [
+    [
+     -40.4572,
+     -3.4,
+     -10.9836
+    ],
+    [
+     -24.4811,
+     10.5087,
+     6.3834
+    ]
+   ],
+   "source_handle": "22E49",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 150.35,
+   "typology_fit": {
+    "symmetric_difference_m2": 2.97,
+    "hausdorff_m": 0.6
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 18,
+   "position": [
+    6.032707018029447,
+    7.750000000000045,
+    -40.15082440498783
+   ],
+   "bounds": [
+    [
+     -3.0201,
+     -7.45,
+     -49.1701
+    ],
+    [
+     14.5996,
+     6.4587,
+     -30.9551
+    ]
+   ],
+   "source_handle": "22E61",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 150.35,
+   "typology_fit": {
+    "symmetric_difference_m2": 2.97,
+    "hausdorff_m": 0.6
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 16,
+   "position": [
+    39.198091876117566,
+    11.349999999999955,
+    -33.361229911574895
+   ],
+   "bounds": [
+    [
+     30.0963,
+     -3.85,
+     -42.3805
+    ],
+    [
+     47.7161,
+     10.0587,
+     -24.1655
+    ]
+   ],
+   "source_handle": "22E79",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 151.19,
+   "typology_fit": {
+    "symmetric_difference_m2": 2.13,
+    "hausdorff_m": 0.6
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 15,
+   "position": [
+    58.24384352871702,
+    10.3,
+    -21.4928896090247
+   ],
+   "bounds": [
+    [
+     49.1112,
+     -4.9,
+     -31.4698
+    ],
+    [
+     68.0094,
+     9.0087,
+     -11.1338
+    ]
+   ],
+   "source_handle": "22F05",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 150.35,
+   "typology_fit": {
+    "symmetric_difference_m2": 2.97,
+    "hausdorff_m": 0.6
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 14,
+   "position": [
+    68.30699254572387,
+    9.8,
+    -10.869643551387352
+   ],
+   "bounds": [
+    [
+     57.9996,
+     -5.4,
+     -20.171
+    ],
+    [
+     78.3772,
+     8.5087,
+     -1.4473
+    ]
+   ],
+   "source_handle": "22F1D",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 152.79,
+   "typology_fit": {
+    "symmetric_difference_m2": 5.41,
+    "hausdorff_m": 0.8
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 13,
+   "position": [
+    78.34746314538107,
+    7.55,
+    10.77886614861902
+   ],
+   "bounds": [
+    [
+     68.9587,
+     -7.65,
+     2.5718
+    ],
+    [
+     86.9474,
+     6.2587,
+     19.3917
+    ]
+   ],
+   "source_handle": "22FFF",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 150.35,
+   "typology_fit": {
+    "symmetric_difference_m2": 2.97,
+    "hausdorff_m": 0.6
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 10,
+   "position": [
+    110.13189559376595,
+    5.750000000000045,
+    -1.3171599415941282
+   ],
+   "bounds": [
+    [
+     101.6186,
+     -9.45,
+     -9.9003
+    ],
+    [
+     119.4694,
+     4.4587,
+     6.9196
+    ]
+   ],
+   "source_handle": "23017",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 152.485,
+   "typology_fit": {
+    "symmetric_difference_m2": 5.105,
+    "hausdorff_m": 0.7
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 9,
+   "position": [
+    108.3672855920898,
+    4.500000000000045,
+    -23.001177354143937
+   ],
+   "bounds": [
+    [
+     99.6359,
+     -10.7,
+     -32.4536
+    ],
+    [
+     116.4558,
+     3.2087,
+     -14.4649
+    ]
+   ],
+   "source_handle": "2302F",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 158.248,
+   "typology_fit": {
+    "symmetric_difference_m2": 22.199,
+    "hausdorff_m": 2.392
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 8,
+   "position": [
+    107.023541172655,
+    4.000000000000045,
+    -36.05805175189127
+   ],
+   "bounds": [
+    [
+     98.7203,
+     -11.2,
+     -44.7762
+    ],
+    [
+     115.5402,
+     2.7087,
+     -26.9254
+    ]
+   ],
+   "source_handle": "23045",
+   "footprint_status": "cad_registered_closing_edge_inferred",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 159.773,
+   "typology_fit": {
+    "symmetric_difference_m2": 22.995,
+    "hausdorff_m": 3.064
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 7,
+   "position": [
+    105.04822571300002,
+    3.500000000000046,
+    -57.857578511710905
+   ],
+   "bounds": [
+    [
+     96.4483,
+     -11.7,
+     -66.4704
+    ],
+    [
+     114.437,
+     2.2087,
+     -49.6505
+    ]
+   ],
+   "source_handle": "2305C",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 150.35,
+   "typology_fit": {
+    "symmetric_difference_m2": 2.97,
+    "hausdorff_m": 0.6
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 43,
+   "position": [
+    -73.60739325294611,
+    21.89999999999991,
+    90.58134960169929
+   ],
+   "bounds": [
+    [
+     -81.6472,
+     6.7,
+     82.5811
+    ],
+    [
+     -65.6711,
+     20.6087,
+     99.9481
+    ]
+   ],
+   "source_handle": "231B0",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 150.35,
+   "typology_fit": {
+    "symmetric_difference_m2": 2.97,
+    "hausdorff_m": 0.6
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 30,
+   "position": [
+    -23.69266105534466,
+    14.39999999999991,
+    28.615885878523123
+   ],
+   "bounds": [
+    [
+     -31.629,
+     -0.8,
+     20.6156
+    ],
+    [
+     -15.6529,
+     13.1087,
+     37.9826
+    ]
+   ],
+   "source_handle": "231E1",
+   "footprint_status": "cad_registered_closing_edge_inferred",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 151.876,
+   "typology_fit": {
+    "symmetric_difference_m2": 4.496,
+    "hausdorff_m": 0.95
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 29,
+   "position": [
+    -10.442662586011508,
+    14.89999999999991,
+    28.615885888679585
+   ],
+   "bounds": [
+    [
+     -18.4824,
+     -0.3,
+     20.6156
+    ],
+    [
+     -2.5063,
+     13.6087,
+     37.9826
+    ]
+   ],
+   "source_handle": "232BF",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 150.35,
+   "typology_fit": {
+    "symmetric_difference_m2": 2.97,
+    "hausdorff_m": 0.6
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 24,
+   "position": [
+    46.99320093425209,
+    17.8,
+    29.709492088047657
+   ],
+   "bounds": [
+    [
+     37.9552,
+     2.6,
+     20.6426
+    ],
+    [
+     56.1805,
+     16.5087,
+     38.291
+    ]
+   ],
+   "source_handle": "2338B",
+   "footprint_status": "cad_registered_closing_edge_inferred",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 151.775,
+   "typology_fit": {
+    "symmetric_difference_m2": 1.727,
+    "hausdorff_m": 0.445
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 12,
+   "position": [
+    79.88519863926254,
+    7.55,
+    23.896067412531323
+   ],
+   "bounds": [
+    [
+     70.5476,
+     -7.65,
+     15.6593
+    ],
+    [
+     88.3985,
+     6.2587,
+     32.4793
+    ]
+   ],
+   "source_handle": "236D7",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 153.4,
+   "typology_fit": {
+    "symmetric_difference_m2": 6.02,
+    "hausdorff_m": 1.0
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 6,
+   "position": [
+    103.71394429697591,
+    4.000000000000045,
+    -70.9747797979835
+   ],
+   "bounds": [
+    [
+     95.4012,
+     -11.2,
+     -79.6929
+    ],
+    [
+     112.2211,
+     2.7087,
+     -61.8421
+    ]
+   ],
+   "source_handle": "238AE",
+   "footprint_status": "cad_registered_closing_edge_inferred",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 159.904,
+   "typology_fit": {
+    "symmetric_difference_m2": 22.437,
+    "hausdorff_m": 2.898
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 41,
+   "position": [
+    -37.73454456721447,
+    25.39999999999991,
+    99.88054659252786
+   ],
+   "bounds": [
+    [
+     -48.0419,
+     10.2,
+     90.4958
+    ],
+    [
+     -27.6643,
+     24.1087,
+     109.2195
+    ]
+   ],
+   "source_handle": "24565",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 150.35,
+   "typology_fit": {
+    "symmetric_difference_m2": 2.97,
+    "hausdorff_m": 0.6
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 26,
+   "position": [
+    21.68773633434627,
+    20.349999999999955,
+    65.71890009460486
+   ],
+   "bounds": [
+    [
+     12.1809,
+     5.15,
+     57.1374
+    ],
+    [
+     30.4062,
+     19.0587,
+     74.7858
+    ]
+   ],
+   "source_handle": "245E8",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 155.535,
+   "typology_fit": {
+    "symmetric_difference_m2": 8.155,
+    "hausdorff_m": 1.0
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 32,
+   "position": [
+    -57.692287114920276,
+    12.8,
+    31.1830093933983
+   ],
+   "bounds": [
+    [
+     -65.6286,
+     -2.4,
+     23.1827
+    ],
+    [
+     -49.6525,
+     11.5087,
+     40.5497
+    ]
+   ],
+   "source_handle": "246CA",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 150.35,
+   "typology_fit": {
+    "symmetric_difference_m2": 2.97,
+    "hausdorff_m": 0.6
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 31,
+   "position": [
+    -44.44228710173023,
+    12.8,
+    28.683009421338426
+   ],
+   "bounds": [
+    [
+     -53.684,
+     -2.4,
+     20.8057
+    ],
+    [
+     -36.317,
+     11.5087,
+     36.7818
+    ]
+   ],
+   "source_handle": "24749",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 156.418,
+   "typology_fit": {
+    "symmetric_difference_m2": 24.029,
+    "hausdorff_m": 2.392
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 36,
+   "position": [
+    -29.765132140238237,
+    23.000000000000046,
+    63.50484181227698
+   ],
+   "bounds": [
+    [
+     -37.8049,
+     7.8,
+     54.1381
+    ],
+    [
+     -21.8288,
+     21.7087,
+     71.5051
+    ]
+   ],
+   "source_handle": "24887",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 150.35,
+   "typology_fit": {
+    "symmetric_difference_m2": 2.97,
+    "hausdorff_m": 0.6
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 35,
+   "position": [
+    -43.01513213390237,
+    22.500000000000046,
+    60.5048418183935
+   ],
+   "bounds": [
+    [
+     -50.9514,
+     7.3,
+     51.1381
+    ],
+    [
+     -34.9753,
+     21.2087,
+     68.5051
+    ]
+   ],
+   "source_handle": "2490D",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 150.35,
+   "typology_fit": {
+    "symmetric_difference_m2": 2.97,
+    "hausdorff_m": 0.6
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 5,
+   "position": [
+    101.59190311744858,
+    4.8,
+    -93.07886456418962
+   ],
+   "bounds": [
+    [
+     92.992,
+     -10.4,
+     -101.6917
+    ],
+    [
+     110.9807,
+     3.5087,
+     -84.8718
+    ]
+   ],
+   "source_handle": "24B8A",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 150.35,
+   "typology_fit": {
+    "symmetric_difference_m2": 2.97,
+    "hausdorff_m": 0.6
+   },
+   "base_elevation_source": "CAD_BK_annotation"
+  },
+  {
+   "number": 44,
+   "position": [
+    -84.93249705163186,
+    21.89999999999991,
+    89.94384961394853
+   ],
+   "bounds": [
+    [
+     -94.9827,
+     6.7,
+     82.0666
+    ],
+    [
+     -77.6157,
+     20.6087,
+     98.0427
+    ]
+   ],
+   "source_handle": "26367",
+   "footprint_status": "cad_registered_closing_edge_inferred",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 60.391,
+   "typology_fit": {
+    "symmetric_difference_m2": 92.929,
+    "hausdorff_m": 8.457
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 45,
+   "position": [
+    -106.24583110551697,
+    22.000000000000046,
+    102.17317643541546
+   ],
+   "bounds": [
+    [
+     -116.2249,
+     6.8,
+     93.0992
+    ],
+    [
+     -96.4726,
+     20.7087,
+     111.7668
+    ]
+   ],
+   "source_handle": "26373",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 153.782,
+   "typology_fit": {
+    "symmetric_difference_m2": 4.723,
+    "hausdorff_m": 0.85
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 17,
+   "position": [
+    19.035734019618737,
+    8.250000000000046,
+    -37.010620565206665
+   ],
+   "bounds": [
+    [
+     9.8473,
+     -6.95,
+     -46.0273
+    ],
+    [
+     27.4671,
+     6.9587,
+     -27.5138
+    ]
+   ],
+   "source_handle": "263D3",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": false,
+   "footprint_area_m2": 152.637,
+   "typology_fit": {
+    "symmetric_difference_m2": 5.258,
+    "hausdorff_m": 0.75
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  },
+  {
+   "number": 40,
+   "position": [
+    -31.85273277021171,
+    27.70000000000009,
+    121.2461916499067
+   ],
+   "bounds": [
+    [
+     -41.3262,
+     12.5,
+     112.8077
+    ],
+    [
+     -22.7958,
+     26.4087,
+     130.4561
+    ]
+   ],
+   "source_handle": "263EB",
+   "footprint_status": "cad_registered",
+   "height_status": "inferred",
+   "role": "neighbour",
+   "in_context_glb": true,
+   "typology_mirrored": true,
+   "footprint_area_m2": 152.485,
+   "typology_fit": {
+    "symmetric_difference_m2": 5.105,
+    "hausdorff_m": 0.7
+   },
+   "base_elevation_source": "inferred_SBK_minus_3_1"
+  }
+ ]
+}

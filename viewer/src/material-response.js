@@ -28,6 +28,7 @@ export function materialFamily(name='') {
 }
 
 export function prepareMaterialResponse(material, {context=false}={}) {
+  if(material?.userData?.angoraAuthoredPBR)return;
   if (!material?.isMeshStandardMaterial || material.userData.presentationR27) return;
   const family=materialFamily(material.name);
   material.userData.presentationR27={family,context,normal:material.normalScale?.clone()};
@@ -88,6 +89,7 @@ export function prepareMaterialResponse(material, {context=false}={}) {
 
 
 export function setMaterialScale(material, view) {
+  if(material?.userData?.angoraAuthoredPBR)return;
   const state=material.userData.presentationR27;
   if(state?.family!=='roof'||!state.normal)return;
   const scale=view==='region'?.06:view==='neighborhood'?.14:state.context?.18:.3;
@@ -97,6 +99,7 @@ export function setMaterialScale(material, view) {
 // The native model supplies a separate plaster lining. Exterior clay tiles
 // retain their material in every camera mode, including through windows.
 export function setInteriorMode(material, active) {
+  if(material?.userData?.angoraAuthoredPBR)return;
   const state=material?.userData?.presentationR27;
   if(state?.family!=='soffit')return;
   if(!state.walk)state.walk={

@@ -71,8 +71,13 @@ test('Real section geometry fills the wall and keeps gallery, stair and bedroom 
   }
   assert.ok(hits(-5.132, 5) > 0, 'solid cross section between source faces -5.232 and -5.032');
   for (const [x, y] of [[1, .4], [2, 1.2], [-3.35, 6.9]]) assert.equal(hits(x, y), 0, 'occupied space must remain open');
-  // Intermediate cap follows the continuously moving plane, independent of camera orientation.
-  caps.update(7.95, true); assert.equal(cap.position.y, 7.95);
+  // Fixed drawings must never be moved onto a different cut height.
+  const original=cap.geometry;
+  caps.update(7.95, true); assert.equal(caps.group.visible,false);
+  for(let repeat=0;repeat<100;repeat++){
+    for(let floor=0;floor<4;floor++)caps.update(sectionHeight('f'+floor,30),true);
+  }
+  caps.update(7.9714,true);assert.equal(cap.geometry,original,'floor switches reuse the same geometry');
   caps.update(30, false); assert.equal(caps.group.visible, false);
 });
 

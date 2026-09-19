@@ -74,6 +74,15 @@ export function createHatchMaterial({pitch, duty, ground, ink, strength=0.62}) {
 
 // These contours come from opposite source wall faces. They are independent of
 // camera direction and of the inconsistent winding of the recovered CAD skin.
+export function createNativeSoilSection(data){
+  if(data.coordinate_system!=='glTF_XZ'||data.floor_index!==0)throw Error('Invalid native soil section');
+  const positions=new Float32Array(data.p.length/2*3);
+  for(let i=0;i<data.p.length/2;i++){positions[i*3]=data.p[i*2];positions[i*3+1]=data.height;positions[i*3+2]=data.p[i*2+1];}
+  const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.BufferAttribute(positions,3));geometry.setIndex(data.i);geometry.computeVertexNormals();geometry.computeBoundingSphere();
+  const mesh=new THREE.Mesh(geometry,createHatchMaterial(SOIL_POCHE));mesh.name='Native basement earth section';mesh.visible=false;mesh.renderOrder=2;
+  return mesh;
+}
+
 export function createWallCaps(atlas) {
   const group = new THREE.Group(); group.name = 'Geometric wall sections';
   const slices = atlas.slices;
@@ -93,7 +102,10 @@ export function createWallCaps(atlas) {
     {mesh: build('Solid hatched furniture cross section'), p: 'fq', i: 'fj', furniture: true},
   ];
   let current = -1, furnitureVisible = true;
-  function rebuild(index) {
+  const geometries=new Map();
+  function buildGeometries(index) {
+    if(geometries.has(index))return geometries.get(index);
+    const result=[];
     const data = slices[index];
     for (const layer of layers) {
       const p = data[layer.p], i = data[layer.i];
@@ -106,11 +118,14 @@ export function createWallCaps(atlas) {
         geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         geometry.setIndex(i); geometry.computeVertexNormals(); geometry.computeBoundingSphere();
       }
-      layer.mesh.geometry.dispose(); layer.mesh.geometry = geometry;
+      result.push(geometry);
     }
+    geometries.set(index,result);return result;
   }
+  const exactHeights=atlas.exact_floor_heights_m??floorDatums.map((h,f)=>h+(f===3?1.3:1.6));
+  for(let i=0;i<slices.length;i++)if(exactHeights.some(h=>Math.abs(h-slices[i].height)<.001))buildGeometries(i);
   return {group, update(height, visible) {
-    group.visible = visible && height <= slices.at(-1).height;
+    group.visible = visible && exactHeights.some(h=>Math.abs(h-height)<.001);
     if (!group.visible) return;
     let low = 0, high = slices.length - 1;
     while (low < high) {
@@ -118,12 +133,18 @@ export function createWallCaps(atlas) {
       if (slices[mid].height < height) low = mid + 1; else high = mid;
     }
     if (low > 0 && height - slices[low - 1].height < slices[low].height - height) low--;
-    if (low !== current) {current = low; rebuild(low);}
+    if (low !== current) {
+      if(current===-1)for(const layer of layers)layer.mesh.geometry.dispose();
+      current=low;const cached=buildGeometries(low);
+      layers.forEach((layer,i)=>{layer.mesh.geometry=cached[i];});
+    }
     for (const layer of layers) {
       layer.mesh.visible = !layer.furniture || furnitureVisible;
       layer.mesh.position.y = height;
     }
-  }, setFurnitureVisible(value) {furnitureVisible = value;}};
+  }, setFurnitureVisible(value) {furnitureVisible = value;},
+    dispose(){for(const batch of geometries.values())for(const geometry of batch)geometry.dispose();material.dispose();}
+  };
 }
 
 // The basement cut is the one height where the earth is part of the section:

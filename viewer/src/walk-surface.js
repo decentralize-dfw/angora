@@ -47,7 +47,38 @@ export class WalkSurface {
     }
     return moved;
   }
+  center(floor,[x,z],furniture=true){
+    const layer=this.layers[floor];if(!layer)return null;
+    const {width,height,step}=this.grid;let best=null,distance=Infinity;
+    for(let row=0;row<height;row++)for(let col=0;col<width;col++){
+      const i=row*width+col;if(layer.heights[i]===-32768||(layer.masks[i]&(furniture?3:1)))continue;
+      const px=this.grid.x+(col+.5)*step,pz=this.grid.z+(row+.5)*step,d=(px-x)**2+(pz-z)**2;
+      if(d<distance){distance=d;best=[px,layer.heights[i]/1000+this.data.eye_height_m,pz];}
+    }
+    return best;
+  }
   station(id) {return this.data.stations.find(s=>s.room_id===id);}
+  openingYaw(position,preferred=0){
+    const [x,y,z]=position,foot=y-this.data.eye_height_m;
+    const start=this.sample(x,z,foot,false);if(!start)return preferred;
+    const step=this.grid.step*.5,reach=6;
+    const depth=yaw=>{
+      for(let d=step;d<=reach;d+=step){
+        const hit=this.sample(x-Math.sin(yaw)*d,z-Math.cos(yaw)*d,foot,false);
+        if(!hit||hit.floor!==start.floor)return d-step;
+      }
+      return reach;
+    };
+    let best=preferred,score=-Infinity;
+    // Prefer a broad clear view, not a single narrow ray through a doorway.
+    // Furniture masks are excluded: low chairs do not obstruct eye-level views.
+    for(let i=0;i<72;i++){
+      const yaw=preferred+i*Math.PI/36;
+      const value=depth(yaw)*.5+depth(yaw-.3)*.25+depth(yaw+.3)*.25;
+      if(value>score+.001){score=value;best=yaw;}
+    }
+    return best;
+  }
   path(from,to,furniture=true) {
     const count=this.grid.width*this.grid.height,mask=furniture?3:1;
     const start=this.sample(from[0],from[2],from[1]-this.data.eye_height_m,furniture,.3);

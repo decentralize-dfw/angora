@@ -7,7 +7,7 @@ viewer/dist/
 .vite/
 baseline-tests.txt
 interaction-tests.txt
-build/web/native-current/
+viewer/public/models/native-current/
 viewer/native-tests.txt
 build/intermediate/
 build/cad/source-curves.json.gz

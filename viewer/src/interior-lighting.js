@@ -68,7 +68,10 @@ export class InteriorLightController {
         }
       }
       light.intensity=slot.source?slot.source.intensity_cd*slot.level:0;
-      light.visible=light.intensity>0;
+      // Native floor streams retain the same shader light count while fixtures
+      // fade. Hiding zero-intensity slots would compile a new shader variant
+      // at both ends of every fade, after the floor's GPU warm-up.
+      light.visible=Boolean(this.keepSlotsVisible)||light.intensity>0;
       changed||=previousIntensity!==light.intensity||previousVisible!==light.visible;
       shadowChanged||=previousVisible!==light.visible;
     }

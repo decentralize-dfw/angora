@@ -1,0 +1,100 @@
+{
+  "parts": [
+    {
+      "name": "architecture",
+      "file": "architecture.gltf",
+      "objects": 34,
+      "vertices": 985722,
+      "gpu_sha256": "f508e986cce937983098f114e0c86f0fa7555923d0f04026f79ac3ef70e4c7c0"
+    },
+    {
+      "name": "garden",
+      "file": "garden.gltf",
+      "objects": 8,
+      "vertices": 7893,
+      "gpu_sha256": "105f79fb74d99d6a5b2fe04c412dc9da20e02d04857b87859ef1c5dc3c4cf3b1"
+    },
+    {
+      "name": "context-ground",
+      "file": "context-ground.gltf",
+      "objects": 4,
+      "vertices": 464770,
+      "gpu_sha256": "070efee44e4fba3b5ca16ad7731faf47c2447cb3f5fce21ebfd91b4f7528d2af"
+    },
+    {
+      "name": "context-buildings",
+      "file": "context-buildings.gltf",
+      "objects": 10,
+      "vertices": 1009528,
+      "gpu_sha256": "7b6db13843a0fdb4cc7b2eb5373d7c0f0493586c77e698deda29524a236804b7"
+    },
+    {
+      "name": "context-plants",
+      "file": "context-plants.gltf",
+      "objects": 2,
+      "vertices": 1372259,
+      "gpu_sha256": "361d6968ce59b40236d7cfcee28c3f7ca932820586983fc516f785632fc22c03"
+    },
+    {
+      "name": "plot-grass",
+      "file": "plot-grass.gltf",
+      "objects": 1,
+      "vertices": 66308,
+      "gpu_sha256": "3302f36f713072a0d7bec15068d602dd1caac8a22b865d850ed8146cd3a7b559"
+    },
+    {
+      "name": "villa-context-white",
+      "file": "villa-context-white.gltf",
+      "objects": 14,
+      "vertices": 1468485,
+      "gpu_sha256": "b1e7a1b1908e406f1c208adffdaec55a266123a2f1bb80a714381eead390cf6f"
+    }
+  ],
+  "sections": "sections-current.json",
+  "lights": "room-lighting.json",
+  "house_geometry_unchanged": true,
+  "terrain_duplicate_faces_removed": 17457,
+  "interior_streams": [
+    {
+      "name": "interior-common",
+      "file": "interior-common.gltf",
+      "objects": 9,
+      "polygons": 4280,
+      "gpu_sha256": "6c645cd2ce984d921d6e8630fd23afdee5c98d8c72b4bf13bee8c41e1993fd56"
+    },
+    {
+      "name": "interior-f0",
+      "file": "interior-f0.gltf",
+      "objects": 33,
+      "polygons": 119939,
+      "gpu_sha256": "d214f950ec1f9af79bf84541d7784b43829d5ef4d2147ffeb10a143aa128822b"
+    },
+    {
+      "name": "interior-f1",
+      "file": "interior-f1.gltf",
+      "objects": 38,
+      "polygons": 121691,
+      "gpu_sha256": "de23e86b95724ec1e3cbf10b23039d724371158e0c4291d94d39c60781072c3e"
+    },
+    {
+      "name": "interior-f2",
+      "file": "interior-f2.gltf",
+      "objects": 55,
+      "polygons": 160372,
+      "gpu_sha256": "147c9ff8e3ab79210abe7a3788fcf475bd99b3dd75d948304499ffc67d1bd63c"
+    },
+    {
+      "name": "interior-f3",
+      "file": "interior-f3.gltf",
+      "objects": 32,
+      "polygons": 39997,
+      "gpu_sha256": "18b185047a81fc3beb63a26c6e50e96f852ce57f012be5223f039fc4e0ccf7b6"
+    }
+  ],
+  "rooms": "native-rooms.json",
+  "navigation": "native-navigation.json",
+  "source_native_sha256": "953cd59ecae412ecc3b51b6aac56e1ab6feec4c8ca73f15f6181782e109e8fac",
+  "site_context": "site-context.json",
+  "plot_boundary": "plot-boundary.json",
+  "soil_section": "native-soil-section.json"
+}

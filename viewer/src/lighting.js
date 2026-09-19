@@ -15,30 +15,16 @@ import {configurePostprocessing} from './postprocessing.js';
 import {applyRenderProfile,referenceProfile} from './render-profile.js';
 import {LinearBloomPass} from './linear-bloom.js';
 import {InteriorLightController} from './interior-lighting.js';
+import {createSectionNormalMaterials} from './section-normal-materials.js';
 
-// The normal/depth pass must be cut exactly where the beauty pass is cut, or
-// the storeys above the section still occlude and their plan outlines appear
-// as grey smudges over the lawn and the floor below.
-//
-// Per-object planes cannot do it. This pass draws the scene through
-// scene.overrideMaterial, so every object is rendered with one material, and
-// three projects a material's clipping planes only when the material changes:
-// WebGLClipping.setState is called with useCache = (same camera && same
-// material id), and a cache hit skips the projection entirely. With one
-// material for the whole pass every object after the first is a cache hit, so
-// the plane the first object happened to carry - none, for the neighbourhood -
-// is the plane the entire pass gets.
-//
-// A renderer-global plane is projected once per render, before any object is
-// drawn, and applies to all of them. It costs the neighbourhood its contact
-// occlusion above the cut while a storey is selected, which is white massing
-// there anyway.
+// Keep AO depth and beauty aligned for both cut interiors and uncut context.
 export class SectionGTAOPass extends GTAOPass {
   constructor(scene, camera, clip, scale) {
     super(scene, camera, 1, 1);
     this.resolutionScale = scale;
     this.normalMaterial.side = THREE.DoubleSide;
     this.clip = clip;
+    this.sectionNormalMaterials=createSectionNormalMaterials(this.normalMaterial);
     // The authored cut faces sit exactly on the plane. Carrying the pass's own
     // copy a few millimetres higher keeps them in the depth buffer - without
     // it they fall out and the occlusion sampled at the wall tops belongs to
@@ -74,17 +60,21 @@ export class SectionGTAOPass extends GTAOPass {
       }
     }
   }
-  // Only the scene draw is cut. The occlusion, denoise and blend quads that
-  // follow are raw shaders with no clipping chunk in them, but the planes are
-  // put back the moment the scene is down regardless, so the beauty pass and
-  // the shadow map keep their own per-material clipping untouched.
   _renderOverride(renderer, overrideMaterial, renderTarget, clearColor, clearAlpha) {
-    const previous = renderer.clippingPlanes;
-    this.sectionPlanes[0].copy(this.clip); this.sectionPlanes[0].constant += 0.004;
-    renderer.clippingPlanes = this.sectionPlanes;
-    try { super._renderOverride(renderer, overrideMaterial, renderTarget, clearColor, clearAlpha); }
-    finally { renderer.clippingPlanes = previous; }
+    renderer.getClearColor(this._originalClearColor);
+    const alpha=renderer.getClearAlpha(),autoClear=renderer.autoClear,override=this.scene.overrideMaterial;
+    renderer.setRenderTarget(renderTarget);renderer.autoClear=false;
+    try{
+      if(clearColor!==undefined&&clearColor!==null){renderer.setClearColor(clearColor);renderer.setClearAlpha(clearAlpha??0);renderer.clear();}
+      this.scene.overrideMaterial=null;
+      return this.sectionNormalMaterials.render(this.scene,()=>renderer.render(this.scene,this.camera));
+    }finally{
+      this.scene.overrideMaterial=override;renderer.autoClear=autoClear;
+      renderer.setClearColor(this._originalClearColor);renderer.setClearAlpha(alpha);
+    }
   }
+  dispose(){this.sectionNormalMaterials.dispose();super.dispose();}
+
 }
 
 // The environment a surface reflects has to have a GROUND. A sky-only probe -
@@ -207,6 +197,7 @@ export function createLighting(renderer, scene, camera, clip) {
     // every press of Bodrum, Giriş, 1. kat and Çatı for no change at all.
     if(!skyDrawn||skyDirection.dot(direction)<.9999){skyDirection.copy(direction);skyDrawn=true;skyCamera.update(renderer,skyScene);}
     sun.position.copy(sun.target.position).addScaledVector(direction,shadowDistance);
+    for(const material of preparedMaterials)if(material.userData.indirectDaylightIntensity)material.lightMapIntensity=material.userData.indirectDaylightIntensity*daylight;
     renderer.shadowMap.needsUpdate=true;return solar;
   }
   return {
@@ -227,7 +218,19 @@ export function createLighting(renderer, scene, camera, clip) {
       scene.environment=next.texture;environment.dispose();environment=next;hdr.dispose();environmentMode='hdr';setTime();
     },
     horizonColour:horizon,
-    setFixtures(data){fixtures.setFixtures(data);},
+    setFixtures(data,{allRooms=false}={}){
+      if(allRooms){
+        const count=Math.max(0,...[0,1,2,3].map(f=>data.filter(x=>x.floor_index===f).length));
+        while(fixtures.slots.length<count){
+          const light=new THREE.SpotLight(0xffead5,0,6,Math.PI*.42,.8,2);
+          light.castShadow=false;light.visible=false;scene.add(light,light.target);
+          fixtures.slots.push({light,source:null,desired:null,level:0,fade:null});
+        }
+        fixtures.keepSlotsVisible=true;
+        for(const slot of fixtures.slots){slot.light.castShadow=false;slot.light.visible=true;}
+      }
+      fixtures.setFixtures(data);
+    },
     interior(floor,position,time){fixtures.select(floor,position,time);},
     setLights(enabled){fixtures.setEnabled(enabled);},setTime,
     setWalkInterior(active){
@@ -242,10 +245,11 @@ export function createLighting(renderer, scene, camera, clip) {
     },
     snapshot(){return {environment:environmentMode,interior:fixtures.snapshot()};},
     setStyle(style){soft=style!=='sun';setTime();},
+    releaseMaterial(material){preparedMaterials.delete(material);},
     prepareMesh(object,{clipped,context}) {
       object.userData.sectionClipped=clipped;
       const materials=Array.isArray(object.material)?object.material:[object.material];
-      if(materials.every(m=>/^(foliage(?:_light)?|hedge)$/.test(m.name)))smoothSurfaceNormals(object.geometry);
+        if(materials.every(m=>!m.userData.angoraAuthoredPBR&&/^(foliage(?:_light)?|hedge)$/.test(m.name)))smoothSurfaceNormals(object.geometry);
       const glass=materials.every(isGlazing);object.userData.aoExcluded=glass;
       object.castShadow=!glass;object.receiveShadow=!glass;
       for(const material of materials) {
@@ -254,7 +258,7 @@ export function createLighting(renderer, scene, camera, clip) {
         // room finishes explicitly so their neutral response is respected.
         if(['plaster','soffit'].includes(material.userData.presentationR27?.family))material.envMap=environment.texture;
         material.clipShadows=true;
-        if(isGlazing(material)){material.metalness=0;if(isSeeThrough(material))material.depthWrite=false;}
+          if(isGlazing(material)&&!material.userData.angoraAuthoredPBR){material.metalness=0;if(isSeeThrough(material))material.depthWrite=false;}
         for(const value of Object.values(material))if(value?.isTexture)value.anisotropy=Math.min(compact?8:16,renderer.capabilities.getMaxAnisotropy());
       }
     },
@@ -276,6 +280,19 @@ export function createLighting(renderer, scene, camera, clip) {
     },
     pixelRatio(ratio){composer?.setPixelRatio(ratio);},
     resize(w,h){composer?.setSize(w,h);},
+    warm(currentCamera){
+      if(composer&&!renderer.xr.isPresenting){
+        // Warm the actual normal/AO/postprocessing passes too. A direct scene
+        // render alone leaves their first floor draw inside the animation.
+        const previous=composer.renderToScreen;composer.renderToScreen=false;
+        try{beauty.camera=currentCamera;ao.setCamera(currentCamera);composer.render();}
+        finally{composer.renderToScreen=previous;}
+        return;
+      }
+      const previous=renderer.getRenderTarget(),target=new THREE.WebGLRenderTarget(1,1);
+      try{renderer.setRenderTarget(target);renderer.render(scene,currentCamera);}
+      finally{renderer.setRenderTarget(previous);target.dispose();}
+    },
     render(currentCamera){
       if(!composer||renderer.xr.isPresenting){renderer.render(scene,currentCamera);return;}
       beauty.camera=currentCamera;ao.setCamera(currentCamera);composer.render();

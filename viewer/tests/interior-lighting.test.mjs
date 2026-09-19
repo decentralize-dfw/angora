@@ -12,6 +12,18 @@ function setup(fixtures,count=1) {
   return {controller,lights};
 }
 
+test('Native light slots keep a stable shader count across floors and lights-off',()=>{
+ const {controller:c,lights}=setup([fixture('A',0,0),fixture('B',1,1)],3);
+ c.keepSlotsVisible=true;
+ for(const [floor,start] of [[0,0],[1,1000],[null,2000]]){
+  c.select(floor,null,start);
+  for(let time=start;time<=start+600;time+=50){c.update(time);assert.equal(lights.filter(light=>light.visible).length,3);}
+ }
+ assert.ok(lights.every(light=>light.intensity===0));
+ c.select(1,null,3000);c.update(3600);assert.equal(lights.reduce((sum,l)=>sum+l.intensity,0),100);
+ c.setEnabled(false,4000);c.update(4600);assert.ok(lights.every(l=>l.visible&&l.intensity===0));
+});
+
 test('A long idle interval is not counted as transition time; light controls settle without camera motion',()=>{
   const {controller:c,lights:[light]}=setup([fixture('A',0)]);
   c.update(0);c.select(1,[0,0,0],60000);

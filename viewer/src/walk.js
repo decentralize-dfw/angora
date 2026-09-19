@@ -65,11 +65,14 @@ export class InteriorWalk {
       THREE.MathUtils.radToDeg(2*Math.atan(Math.tan(horizontal/2)/this.camera.aspect)),46,82);
     this.camera.updateProjectionMatrix();
   }
-  enter(room) {
-    const station=this.surface.station(room);if(!station)throw Error('Unknown room');
+  enter(room,position=null) {
+    let station=this.surface.station(room);if(!station)throw Error('Unknown room');
+    if(position&&this.surface.sample(position[0],position[2],position[1]-this.surface.data.eye_height_m,this.furniture)?.floor===station.floor_index)station={...station,position};
     this.active=true;this.keys.clear();this.lastTime=null;this.route=null;
     this.rig.position.set(0,0,0);this.rig.rotation.set(0,0,0);
-    this.camera.position.fromArray(station.position);this.yaw=station.view_yaw_rad??.85;this.pitch=station.view_pitch_rad??-.04;this.pose();
+    this.camera.position.fromArray(station.position);
+    this.yaw=position?this.surface.openingYaw(station.position,station.view_yaw_rad??.85):station.view_yaw_rad??.85;
+    this.pitch=station.view_pitch_rad??-.04;this.pose();
     this.room=station.room_id;this.floor=station.floor_index;this.invalidate();return station;
   }
   leave() {this.active=false;this.keys.clear();this.pointer=null;this.lastTime=null;this.route=null;}

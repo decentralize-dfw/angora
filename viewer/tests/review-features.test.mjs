@@ -13,27 +13,23 @@ test('AO respects hidden furniture, uncut context, glazing, annotations and came
   scene.add(hidden, glass, label);
   pass._overrideVisibility(); assert.equal(glass.visible, false); assert.equal(label.visible, false);
   pass._restoreVisibility(); assert.equal(hidden.visible, false); assert.equal(glass.visible, true);
-  // The depth/normal draw is cut by a renderer-global plane, because this pass
-  // renders through scene.overrideMaterial and three skips re-projecting a
-  // material's own planes when the material does not change - so per-object
-  // planes silently collapsed to whatever the first object carried, and the
-  // storeys above the cut kept occluding. The plane is the section plane
-  // lifted 4 mm, so the authored cut faces stay in the buffer, and it is put
-  // back the moment the scene is down.
+  const wall=new THREE.Mesh();wall.material.clippingPlanes=[clip];
+  const context=new THREE.Mesh();scene.add(wall,context);
+  const originalWall=wall.material;
   const seen = [];
   const previous = [new THREE.Plane(new THREE.Vector3(0,-1,0), 99)];
   const renderer = {
     clippingPlanes: previous, autoClear: true,
     getClearColor: (target) => target, getClearAlpha: () => 1,
     setClearColor(){}, setClearAlpha(){}, clear(){}, setRenderTarget(){},
-    render(){ seen.push(renderer.clippingPlanes.map(p=>({normal:p.normal.clone(),constant:p.constant}))); },
+    render(){ assert.equal(scene.overrideMaterial,null);assert.equal(context.material.clippingPlanes.length,0);seen.push(wall.material.clippingPlanes.map(p=>({normal:p.normal.clone(),constant:p.constant}))); },
   };
   pass._renderOverride(renderer, pass.normalMaterial, null, 0x7777ff, 1);
   assert.equal(seen.length,1);
   assert.equal(seen[0].length,1);
   assert.deepEqual(seen[0][0].normal,clip.normal);
   assert.ok(Math.abs(seen[0][0].constant-(clip.constant+0.004))<1e-9,String(seen[0][0].constant));
-  assert.equal(renderer.clippingPlanes,previous,'global planes restored');
+  assert.equal(renderer.clippingPlanes,previous,'global planes unchanged');assert.equal(wall.material,originalWall);
   clip.constant = 1.6;
   pass._renderOverride(renderer, pass.normalMaterial, null, 0x7777ff, 1);
   assert.ok(Math.abs(seen[1][0].constant-1.604)<1e-9,String(seen[1][0].constant));
