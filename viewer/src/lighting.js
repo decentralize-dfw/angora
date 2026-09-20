@@ -132,8 +132,10 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
   const sky=new Sky();sky.scale.setScalar(10000);sky.material.uniforms.turbidity.value=3;
   sky.material.uniforms.rayleigh.value=2;sky.material.uniforms.mieCoefficient.value=.003;
   sky.material.uniforms.sunPosition.value.copy(direction);
-  let environment=buildEnvironment(renderer,{sky});
-  scene.environment=environment.texture;scene.environmentIntensity=1.0;
+  // The batched boot awaits the authored HDR before presenting a frame.
+  // Do not compile/convolve a temporary probe that it immediately discards.
+  let environment=baked?null:buildEnvironment(renderer,{sky});
+  scene.environment=environment?.texture??null;scene.environmentIntensity=1.0;
   // The sky was built, handed to the probe and thrown away, leaving a flat fill
   // behind every window and over the whole settlement. It is kept now and
   // re-rendered into a small cube whenever the sun moves, so what the viewer
@@ -175,6 +177,7 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
   const skyDirection=new THREE.Vector3();let skyDrawn=false;
   let soft=true,shadowDistance=110;
   const preparedMaterials=new Set();
+  let groundLight=null,floorLight=null;
   const interior=Array.from({length:4},()=>{
     const light=new THREE.SpotLight(0xffead5,0,6,Math.PI*.37,.72,2);
     // Four shadow-casting spots is four extra scene passes every time a fixture
@@ -186,6 +189,8 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
   const fixtures=new InteriorLightController(interior);
   function setTime(nextHour=hour,nextDay=day) {
     hour=nextHour;day=nextDay;const solar=solarPosition(hour,{day});direction.fromArray(solar.direction);
+    groundLight?.setSun(direction);
+    floorLight?.setSun(direction);
     const daylight=THREE.MathUtils.smoothstep(solar.altitude,-6,28),warmth=THREE.MathUtils.smoothstep(solar.altitude,0,35);
     // Key over fill, about 2:1 at midday. With the fill nearly as strong as
     // the sun the image went flat - no shadow side, no specular pop - which
@@ -202,12 +207,14 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
     // setTime() is also how a storey change re-frames the shadow camera, and
     // that happens with the hour untouched, so this was redrawing the sky on
     // every press of Bodrum, Giriş, 1. kat and Çatı for no change at all.
-    if(!skyDrawn||skyDirection.dot(direction)<.9999){skyDirection.copy(direction);skyDrawn=true;skyCamera.update(renderer,skyScene);}
+    if(environment&&(!skyDrawn||skyDirection.dot(direction)<.9999)){skyDirection.copy(direction);skyDrawn=true;skyCamera.update(renderer,skyScene);}
     sun.position.copy(sun.target.position).addScaledVector(direction,shadowDistance);
     for(const material of preparedMaterials)if(material.userData.indirectDaylightIntensity)material.lightMapIntensity=material.userData.indirectDaylightIntensity*daylight;
     renderer.shadowMap.needsUpdate=true;return solar;
   }
   return {
+    setGroundLight(value){groundLight=value;groundLight?.setSun(direction);},
+    setFloorLight(value){floorLight=value;floorLight?.setSun(direction);},
     async loadEnvironment(url) {
       const hdr=await new HDRLoader().setDataType(THREE.FloatType).loadAsync(url);hdr.mapping=THREE.EquirectangularReflectionMapping;
       // The moving directional light owns the sun. Bound the HDR's solar
@@ -222,7 +229,7 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
       // procedural one rather than straight into the scene: it supplies the
       // dome, the probe supplies the ground under it.
       const next=buildEnvironment(renderer,{background:hdr});
-      scene.environment=next.texture;environment.dispose();environment=next;hdr.dispose();environmentMode='hdr';setTime();
+      scene.environment=next.texture;environment?.dispose();environment=next;hdr.dispose();environmentMode='hdr';setTime();
     },
     horizonColour:horizon,
     setFixtures(data,{allRooms=false}={}){
@@ -253,17 +260,19 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
     snapshot(){return {environment:environmentMode,interior:fixtures.snapshot()};},
     setStyle(style){soft=style!=='sun';setTime();},
     releaseMaterial(material){preparedMaterials.delete(material);},
-    prepareMesh(object,{clipped,context}) {
+    prepareMesh(object,{clipped,context,name}) {
       object.userData.sectionClipped=clipped;
       const materials=Array.isArray(object.material)?object.material:[object.material];
         if(materials.every(m=>!m.userData.angoraAuthoredPBR&&/^(foliage(?:_light)?|hedge)$/.test(m.name)))smoothSurfaceNormals(object.geometry);
       const glass=materials.every(isGlazing);object.userData.aoExcluded=glass;
       object.castShadow=!glass;object.receiveShadow=!glass;
       for(const material of materials) {
+        if(name==='context-ground'||(name==='garden'&&!/metal|glass|wood/.test(material.name)))groundLight?.apply(material);
+        if(['architecture','interior'].includes(name)&&material.userData.angoraBatch?.materials.some(n=>/wood.floor|WOOD-FL|terra_floor|stone_tile|bath_tile|granite floor/i.test(n)))floorLight?.apply(material);
         prepareMaterialResponse(material,{context});preparedMaterials.add(material);
         // Three uses scene.environmentIntensity when envMap is null. Bind the
         // room finishes explicitly so their neutral response is respected.
-        if(['plaster','soffit'].includes(material.userData.presentationR27?.family))material.envMap=environment.texture;
+        if(['plaster','soffit'].includes(material.userData.presentationR27?.family))material.envMap=environment?.texture??null;
         material.clipShadows=true;
           if(isGlazing(material)&&!material.userData.angoraAuthoredPBR){material.metalness=0;if(isSeeThrough(material))material.depthWrite=false;}
         for(const value of Object.values(material))if(value?.isTexture)value.anisotropy=Math.min(compact?8:16,renderer.capabilities.getMaxAnisotropy());

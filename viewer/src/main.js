@@ -7,6 +7,7 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import {invalidateUIObstacles} from './screen-layout.js';
 import {createPlotMaterialMask} from './plot-material-mask.js';
 import {createNativeDelivery} from './native-delivery.js';
+import {createGroundLight} from './ground-light.js';
 import {gunzipSync} from 'three/addons/libs/fflate.module.js';
 import {waitForGPU} from './render-readiness.js';
 import {assetLoadBudget,createLoadQueue} from './asset-loading.js';
@@ -138,7 +139,7 @@ function rememberState() {
   clearTimeout(shareTimer);
   shareTimer = setTimeout(() => {
     const search = shareSearch({view:selected, hour:Number($('#daylight-hour').value),
-      season:$('#daylight-season').value, style:$('#lighting-style').value});
+      season:$('#daylight-season').value, style:$('#lighting-style').value,profile:requestedProfile});
     // An empty search would leave the current query in place, so back at the
     // opening view the path replaces it outright.
     history.replaceState(null, '', (search || location.pathname) + location.hash);
@@ -645,6 +646,11 @@ function exitWalk(reselect = true) {
 }
 async function loadNativeModel(manifest){
     const loadStarted=performance.now();
+  const groundLightReady=Promise.all([['ground_light','setGroundLight'],['floor_light','setFloorLight']].map(async([key,setter])=>{
+    const descriptor=manifest[key];if(!descriptor)return;
+    const texture=await new THREE.TextureLoader().loadAsync(new URL(descriptor.file+'?v='+descriptor.sha256.slice(0,12),modelRoot).href);
+    lighting[setter](createGroundLight(texture,descriptor));
+  }));
     async function json(file){const response=await fetch(new URL(file,modelRoot),{cache:'no-cache'});if(!response.ok)throw Error(file+' HTTP '+response.status);return file.endsWith('.gz')?JSON.parse(new TextDecoder().decode(gunzipSync(new Uint8Array(await response.arrayBuffer())))):response.json();}
   const [atlas,rooms,navigation,soil]=await Promise.all([json(manifest.sections),json(manifest.rooms),json(manifest.navigation),manifest.soil_section?json(manifest.soil_section):null]);
   if(navigation.source_native_sha256!==manifest.source_native_sha256)throw Error('Native navigation revision mismatch');
@@ -654,10 +660,11 @@ async function loadNativeModel(manifest){
   if(manifest.plot_boundary){const boundary=await json(manifest.plot_boundary);plotMask=createPlotMaterialMask(boundary.polygon_native_xy);}
   nativeDelivery=createNativeDelivery({manifest,root:modelRoot,scene,groups,load:loadAsset,
     releaseMaterial:m=>lighting.releaseMaterial(m),prepare:(o,{clipped,context,name})=>{
-      o.renderOrder=5;lighting.prepareMesh(o,{clipped,context});
+      o.renderOrder=5;lighting.prepareMesh(o,{clipped,context,name});
       const planes=clipped?[clip]:[];o.userData.clipPlanes=planes;
-        for(const material of Array.isArray(o.material)?o.material:[o.material]){material.clippingPlanes=planes;material.clipShadows=true;if(material.aoMap)material.aoMapIntensity=.7;if(name==='garden'||name==='context-plants'||(manifest.batched&&context))plotMask?.apply(material);}
+        for(const material of Array.isArray(o.material)?o.material:[o.material]){material.clippingPlanes=planes;material.clipShadows=true;if(material.aoMap)material.aoMapIntensity=.7;if(name==='garden'||name==='context-plants'||(manifest.batched&&context))plotMask?.apply(material,{alwaysOutside:name==='context-buildings'});}
     }});
+    await groundLightReady;
     await nativeDelivery.activate(selected==='building'?'f3':selected);
     if(manifest.batched){loader.dracoLoader?.dispose();loader.ktx2Loader?.dispose();}
     host.dataset.deliveryStats=JSON.stringify({profile:manifest.profile??'legacy',decodeAndPrepareMs:Math.round(performance.now()-loadStarted),residentParts:nativeDelivery.loaded.size});

@@ -1,0 +1,26 @@
+{
+  "date": "2026-09-20",
+  "baselineCommit": "74e7b6d",
+  "geometryChanged": false,
+  "addedTextureBytes": 21748,
+  "addedTextureCount": 2,
+  "testsPassed": 133,
+  "browserErrors": 0,
+  "allPassDrawCalls": {"neighborhood": 24, "attic": 40, "firstFloor": 41, "basement": 42},
+  "measurement": "Existing 15-second requestAnimationFrame QA, Codex in-app browser on desktop; not GPU timing or physical-phone testing.",
+  "desktopAttic1280x720": {
+    "before": {"fps": 22.4, "p95FrameMs": 66.7},
+    "after": {"fps": 24.5, "p95FrameMs": 72.8}
+  },
+  "mobileProfileAttic394x852": {
+    "before": {"fps": 47.2, "p95FrameMs": 30.3},
+    "after": {"fps": 49.1, "p95FrameMs": 30.4}
+  },
+  "finalMobileLocalReadyMs": [2812, 2976],
+  "limitations": [
+    "Desktop p95 frame time increased despite improved average FPS; zero regression on all devices is not established.",
+    "Local ready times do not establish production network performance.",
+    "Static receiver shadows fade when sunlight moves away from the baked direction; these are not realtime ray-traced shadows.",
+    "Original PBR textures and baked indirect light are retained; this change does not establish Unreal or V-Ray visual equivalence."
+  ]
+}

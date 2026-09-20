@@ -27,6 +27,7 @@ export function readShareState(search) {
 // a clean address and a shared link says exactly what it changes.
 export function shareSearch(state) {
   const params = new URLSearchParams();
+  if(['desktop','mobile'].includes(state.profile))params.set('profile',state.profile);
   if (VIEWS.includes(state.view) && state.view !== DEFAULTS.view) params.set('view', state.view);
   if (Number.isFinite(state.hour) && snapHour(state.hour) !== DEFAULTS.hour) params.set('hour', formatHour(state.hour));
   if (SEASONS.includes(state.season) && state.season !== DEFAULTS.season) params.set('season', state.season);

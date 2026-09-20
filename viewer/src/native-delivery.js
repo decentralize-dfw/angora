@@ -50,7 +50,7 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     for(const data of discardedImages)if(data&&!retainedImages.has(data))data.close?.();
     const clipped=!context.includes(name)&&name!=='villa-context-white'&&name!=='plot-grass';
     model.traverse(o=>{if(o.isMesh){if(!manifest.batched&&name.startsWith('interior')&&!/floor|tile|door|glass|stair|window|lift|wall/i.test(o.name))o.userData.category='furniture';prepare(o,{clipped,context:!clipped,name});}});
-    for(const material of resources(model).materials)prepareBatchedMaterial(material);
+    for(const material of resources(model).materials)prepareBatchedMaterial(material,{exterior:context.includes(name)});
     loaded.set(name,model);groups.set(name,model);scene.add(model);return model;
     }catch(error){
       // A failed lightmap/mesh preparation must release this decoded asset

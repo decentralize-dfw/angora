@@ -133,6 +133,13 @@ for(const profile of ['desktop','mobile']){
  }
  for(const part of parts)part.gpu_sha256=createHash('sha256').update(await fs.readFile(path.join(out,part.file))).digest('hex');
  const next={...manifest,batched:true,profile,parts,interior_streams:[]};
+ for(const stem of ['ground-light','floor-light']){
+  const file=path.join(target,'lighting',stem+'.webp');
+  if(await fs.stat(file).catch(()=>null)){
+   const data=await fs.readFile(file),meta=JSON.parse(await fs.readFile(path.join(target,'lighting',stem+'.json')));
+   next[stem.replace('-','_')]={...meta,file:'../lighting/'+stem+'.webp',bytes:data.length,sha256:createHash('sha256').update(data).digest('hex')};
+  }
+ }
  for(const key of ['sections','lights','rooms','navigation','site_context','plot_boundary','soil_section'])next[key]='../../native-current/'+path.basename(manifest[key]);
  await fs.writeFile(path.join(out,'manifest.json'),JSON.stringify(next));report.profiles[profile]=totals;
 }

@@ -1,0 +1,33 @@
+{
+  "size": 512,
+  "boundsXZ": [
+    -15,
+    -18,
+    15,
+    15
+  ],
+  "floorDatums": [
+    0,
+    3.0996,
+    6.3714,
+    9.4705
+  ],
+  "sunDirection": [
+    0.08160200984360343,
+    0.9563862444981027,
+    0.2804754237438638
+  ],
+  "hour": 12.5,
+  "day": 172,
+  "channels": {
+    "r": "direct sun visibility",
+    "g": "local ambient visibility"
+  },
+  "receiverPixels": 31387,
+  "seconds": 5.43,
+  "source": "delivered desktop geometry; horizontal floor receivers",
+  "sourceGeometryHashes": {
+    "architecture": "edf09627ef4d4cbb3f97656185f2bc0d6db51de9389ec265e718b68b7da70893",
+    "interior": "db6185a8c667444c0660a2f2ee23e6b7a1ae381cbfcc31a999b1243cc0a9cc86"
+  }
+}

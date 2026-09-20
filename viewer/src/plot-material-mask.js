@@ -9,7 +9,7 @@ export function createPlotMaterialMask(polygon){
    const ax=literal(a[0]),az=literal(-a[1]),bx=literal(b[0]),bz=literal(-b[1]);
    return `if ((${az} > p.y) != (${bz} > p.y)) { if (p.x < (${bx}-${ax})*(p.y-${az})/(${bz}-${az})+${ax}) insidePlot = !insidePlot; }`;
  }).join('\n');
- return {set(active){enabled.value=active?1:0;},apply(material){
+ return {set(active){enabled.value=active?1:0;},apply(material,{alwaysOutside=false}={}){
   if(seen.has(material))return;seen.add(material);
   const previous=material.onBeforeCompile,key=material.customProgramCacheKey();
   material.onBeforeCompile=(shader,renderer)=>{
@@ -17,11 +17,11 @@ export function createPlotMaterialMask(polygon){
    shader.vertexShader='varying vec2 plotPosition;\n'+shader.vertexShader;
    shader.vertexShader=shader.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\nplotPosition=(modelMatrix*vec4(transformed,1.0)).xz;');
    shader.fragmentShader='varying vec2 plotPosition;\nuniform float plotMaskEnabled;\n'+shader.fragmentShader;
-   shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>\nvec2 p=plotPosition; bool insidePlot=false;\n${code}\nfloat outsidePlot=insidePlot?0.0:plotMaskEnabled; diffuseColor.rgb=mix(diffuseColor.rgb,vec3(0.9,0.9,0.88),outsidePlot);`);
+   shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>\nfloat outsidePlot=plotMaskEnabled;\n${alwaysOutside?'':`if(plotMaskEnabled>.5){vec2 p=plotPosition; bool insidePlot=false;\n${code}\noutsidePlot=insidePlot?0.0:plotMaskEnabled;}`}\ndiffuseColor.rgb=mix(diffuseColor.rgb,vec3(0.9,0.9,0.88),outsidePlot);`);
    shader.fragmentShader=shader.fragmentShader.replace('#include <roughnessmap_fragment>','#include <roughnessmap_fragment>\nroughnessFactor=mix(roughnessFactor,.86,outsidePlot);');
    shader.fragmentShader=shader.fragmentShader.replace('#include <metalnessmap_fragment>','#include <metalnessmap_fragment>\nmetalnessFactor=mix(metalnessFactor,0.0,outsidePlot);');
    shader.fragmentShader=shader.fragmentShader.replace('#include <normal_fragment_maps>','#include <normal_fragment_maps>\nnormal=normalize(mix(normal,nonPerturbedNormal,outsidePlot));');
   };
-  material.customProgramCacheKey=()=>key+'|plot-boundary-v1';material.needsUpdate=true;
+  material.customProgramCacheKey=()=>key+'|plot-boundary-v2|'+alwaysOutside;material.needsUpdate=true;
  }};
 }

@@ -11,6 +11,7 @@ viewer/public/models/native-current/
 viewer/public/models/batched/
 tools/batch-delivery/node_modules/
 viewer/native-tests.txt
+build/web/batched/lighting/*.png
 build/intermediate/
 build/cad/source-curves.json.gz
 build/cad/surfaces.json.gz

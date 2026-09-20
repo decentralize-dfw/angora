@@ -23,6 +23,7 @@ test('Both complete model profiles use Draco, embedded WebP atlases and at most 
   const base=new URL('../../build/web/batched/'+profile+'/',import.meta.url);
   const manifest=JSON.parse(await fs.readFile(new URL('manifest.json',base)));
   let draws=0,ao=0,bytes=0;
+  bytes+=(manifest.ground_light?.bytes??0)+(manifest.floor_light?.bytes??0);
   for(const part of manifest.parts){
    const b=await fs.readFile(new URL(part.file,base));bytes+=b.length;
    assert.equal(part.gpu_sha256,createHash('sha256').update(b).digest('hex'),'Model cache version must match its delivered bytes');

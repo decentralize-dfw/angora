@@ -1,0 +1,30 @@
+{
+  "size": 512,
+  "boundsXZ": [
+    -105,
+    -125,
+    110,
+    110
+  ],
+  "floorDatums": null,
+  "sunDirection": [
+    0.08160200984360343,
+    0.9563862444981027,
+    0.2804754237438638
+  ],
+  "hour": 12.5,
+  "day": 172,
+  "channels": {
+    "r": "direct sun visibility",
+    "g": "local ambient visibility"
+  },
+  "receiverPixels": 230013,
+  "seconds": 21.72,
+  "source": "delivered desktop geometry; static outdoor receivers only",
+  "sourceGeometryHashes": {
+    "architecture": "edf09627ef4d4cbb3f97656185f2bc0d6db51de9389ec265e718b68b7da70893",
+    "context-buildings": "e0a536bf713af1b55d57a5661a4e12e885f7146b3f936137c072edbd5be1b233",
+    "context-ground": "6450c61156f64e6f3625364cdc0b1a33f28c26f47ecd8b257dd2170ca361e18d",
+    "garden": "4796c4dd2c3934e00fc775912687e59739b56c90f232ba253cc9e20543733feb"
+  }
+}
