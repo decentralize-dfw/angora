@@ -1,0 +1,136 @@
+{
+  "method": "Replace only image buffer views; compressed geometry byte-identical",
+  "profiles": {
+    "desktop": {
+      "changes": [
+        {
+          "part": "architecture",
+          "beforeBytes": 5204372,
+          "afterBytes": 5930012,
+          "images": 21,
+          "compressedGeometryUnchanged": true
+        },
+        {
+          "part": "interior",
+          "beforeBytes": 2232064,
+          "afterBytes": 2364560,
+          "images": 14,
+          "compressedGeometryUnchanged": true
+        }
+      ],
+      "modelBytes": 22583280,
+      "electricBytes": 192600,
+      "reflectionBytes": 1577748,
+      "sceneAssetBytes": 24375376,
+      "geometryStreams": {
+        "architecture": [
+          "6f31f87baab8289a5e30bcd0a7004b01df2e7cae9eb762b15c69424bf7cc3bb7",
+          "27b4bb3d5e072f4cc22824705ccd920f7bdbc21e5ff6d3bafcbd738a30859a72",
+          "3aa5061a5942aaf29f98f1b6ae65af6f2baa953f07560e99ea9f0986bc0b8576",
+          "dea35362f4d75f4026e08f48c11e31abcde7a2b2e0889e2120c4729ef1f83092",
+          "5b0ebf69b1eab3da7c14b851c65017679544a67f014bf7b74f53a313f0e2f3fb",
+          "5858bd49f3ebd9696a887a8ded0a9899be4e7c8ba5e3cfa9a9448aebede38a4d",
+          "a2402e61460c26dc29643ca4d71c72db904143b99c35e9e8b7ba1039a9b25f38",
+          "0e1f012ef92eb506c9c8d4ef60572a1b36715f1052306b7b21ef6b497b0c752e",
+          "0e808d08b7448cdf388d985987e214efedca36951c0d6da3a0cd2c2d7f2b3279",
+          "67af3bf1d05089f9a649a6cab3363d9b7198bafe2477519a372130650b33a54f",
+          "7ac0eca7082cb65130ba77700742c021c5b5d866f0aa40432f075b6ec79b05f2"
+        ],
+        "interior": [
+          "8f4dc7cc46b00a7c4051641fa5e5b29c7e6a37f7256ed92632569b22395d3e29",
+          "a34208b9c8a6cb92e78628712171a024373df28f89566327256dca8d7b55e4ad",
+          "9ffd400208ecd6efb3b927e354b198a5d59ccfa1191820e5530146cee204aae6",
+          "96911a3f7947c0fbcb45d41cd25c67018b011d28ea8acfe26a5a4fd7e3f73ff8",
+          "da2bebb844cefd4299ad50893072c38bfb3bcda77788a7032a0a7f0965e797d7",
+          "9547c52d82acbb7073a360389b6c66840672c50bbbf20da9c094ee4050c68833",
+          "ee5bdaebcbdb3576fb6b5706dfa95fb2f4d397efb92eb00bb3d55369dd6b1d50",
+          "551c7860a399fe8b7c0da9f7dc79a10ba7c05d968983fb860750065cfc12bb64",
+          "010ba47a2ae240b609eebaa5f1c7380a70495246aacd0f03eb3506decaeffb15",
+          "fa52c8ceeddba37af3ca25a3869923e2ca521d6bf89f9883477f41bce2db70b0",
+          "3581cc250bdcbf497a0c24d6aa245eb52e5a2a5353ad924e49d4a5430d3623c2",
+          "3738ef56afb5148f4a34208f7eb52d3dc99b97a8cbf60367b26febf88f0e2fcf",
+          "aaa69845d4488a6e4b9699afc1d60250166637cdfde386d24d14caefc3a3fc9f",
+          "b944b83ca9ac0a3104a819bad36dae59fd5125fc7aee0aaadff01bd943000848"
+        ],
+        "garden": [
+          "d4064745e2d2f84bc55918477422c8e2b8d450a4b46020eb94803ac7e13af60b",
+          "5482f56bdd266ce547d5397b954aabcfc7a732fa96e196670090be0f7b917649",
+          "093ad88caa715c1871a95fc10a5ea357612f4e7c047e83a338e6b98bf2cbdcac",
+          "cc59ea9d731591e88588b18cf88ee274c5030b39a04a74a65f28a14162f55182",
+          "342a3cd3690634ac94d0e97471b91d660f7e735d8fe7742f09c48a3082f10e17"
+        ],
+        "context-ground": [
+          "d73572cf32d18d271b131adbc2314235d93e4c66eadcbb21b4493f9fb11091f2"
+        ],
+        "context-buildings": [
+          "96abeaa0dce1d740f48bb62977441f537ecde3809d75f2b486c89c70bbdf6f40",
+          "478b4a5a03f3028a3ce6a4a6afae5e293bf94cc7c8d4fca481add83d90e1f7fb",
+          "688d8de6d3dbff36f6ceed0e9ffe238a1ad0f56d591d363dcba8fe5b09de96ce",
+          "4841dd64eaeae928964d5367e255920dbf7315b98c41534051412466115d0606",
+          "6369509d30abc971be10046c0c4ac5a4c8805aec18b38a35eb0485bb18eb8ad0"
+        ],
+        "context-plants": [
+          "7d032bafc3975fb18bab86669ef832355c9d81d6c156d2a5313b6bd10f7c47ee"
+        ]
+      }
+    },
+    "mobile": {
+      "changes": [],
+      "modelBytes": 16387340,
+      "electricBytes": 58402,
+      "reflectionBytes": 413723,
+      "sceneAssetBytes": 16881213,
+      "geometryStreams": {
+        "architecture": [
+          "e8ddc43fad7c1d14214ebb7756054a2a9322db49b771e2416eb77e5e4f7ea56d",
+          "93ba63aabf78255e5b2cb43086d041d98a6f65d1b84195bbd5b3add3a2ae8bbb",
+          "6db8db17b54059d70bae1a37ffd612c85491332bc4936920ddab02a6721cc210",
+          "ec4e87182a1b34c2e9c0cc06bb3b10ade6a47d81406266a741ac8ccec95821b8",
+          "f212954d7f254de06f6ffd9cc439cbfe5b9b5ad081388391700a75064dc62ffd",
+          "7450c6ba583dcfecdc25e07ba26f39c60263cdde3fa54cb173abc686d287cafc",
+          "adc4ee2b63cce074eba1b8c1ae264b080d27fc307db83bc5cfba1c3a7ff7582e",
+          "40c2718bc4a6fbd4f8d2afdb965dcf0c33b7645b1757f74c8653511b0b9b5fd3",
+          "c990e89f0d2e2d93a49cdd86e9e7c12c77bcfda67060e2aaabccedf93541e35b",
+          "0fe3da4a459032e1422f4d87710da35ac10ec357d95b1f98495673a58055fec8",
+          "5cc6d63f1039dea5d388b417b0b62b74900a7515501f0edf71879990db777802"
+        ],
+        "interior": [
+          "4546077089f2e46a3d37350fa690573775cdb4185ff983de5e9fb4589ff65c98",
+          "e901f50130659b8c158e751738d108f28192b1481c23d8b7a17c7d2501d9be57",
+          "0b5c3a6751de2e9af4fd77eac08057c0df0a4fd4a0c6d51139f15c54a7e98ef4",
+          "5bbfa0907b73e89c51840f087812a53403a604189f68232035594bb8f8e3b52e",
+          "8a37cfcdd2c46b59a7499184362ae7e5bdedc23a5dff624103526f45ff056ff2",
+          "4b06ac8eaec9e1bd9a9da863561ec95d39e24077f74737a37335ed0609f660f7",
+          "71a622f48a9f168a5d69a5c25aa092c63c4c04c49b11d3b864b7e4881b5a1660",
+          "24fea775a78c42c35523a16ea70d99483cc7b350b830b4ed93e96f90db3bced0",
+          "0743fbd4928ad91006cc177e0a1df801beb2e900c40458a411bd86ab551bd0d7",
+          "a82ad65ca9e20bc94110cb39da7fc5936160ec492130650e7dae64d11436ded0",
+          "2d3b1856c0b0e93ebf31c3a13db2daa6fa0fb555ae654cb72b0a2840220ac202",
+          "54d02a25c9c22f0418da4f54d2351b6d8defbbcce26cb821d1d22bb14c947107",
+          "e6fc2ebc3cd1be6cae50681963dec5d62593563f728e70dfe3858c4937f352df",
+          "1a6617acfc60b527c7c79955bcc1bf008aabccc26bbde4ac59afc86fb98fa1e5"
+        ],
+        "garden": [
+          "220ee10088ed1ca077e2dd8d6633958b8d6d96d478eb2ee7f8cd9873cacf9247",
+          "38a2e60c697b38603fefcf7c6ddfb0eb7463e364007c24c4c163261de3abe55d",
+          "d38aefbf2157e4c37768d91274176efed607565cb7db8045638e0fe22a7cf989",
+          "d3aed00680e638f7833d0472fa5778b495f6d1bac1f7be194d15d2c3673aae0e",
+          "c33fac3d4109dcb489e5b6d20cd02e9fdb9295cb1bbcc73371d15dbb7f26befc"
+        ],
+        "context-ground": [
+          "f73930013db604c3bf64b54f5d02c4486c12cd587068e26c663e32ccbc13da39"
+        ],
+        "context-buildings": [
+          "f7ef193f0174c70a295f3a089f7c51573c35b850664ef001b9b9b620e923a084",
+          "3423f1c1a0f71f9edd6513174a457dd98d7b24dd3916903ee9e4ec43c1bb22fa",
+          "f844b71ac1097f60cf66e23624570c7dde16c486e214dc21f7860f03ff97a687",
+          "05c10bb1be8168bb7339a595cd045ca961d286a4a81059c3c2ea4e99c71c6c2b",
+          "8b1a49f841056eee00ea10613a0f02e1c79d7edb18fae14cecf677ec0c44fd0d"
+        ],
+        "context-plants": [
+          "ceeaaa54a63689e954c59d3e613593909c95c4f778d12baaac3c26327092abd9"
+        ]
+      }
+    }
+  }
+}

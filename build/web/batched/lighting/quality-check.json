@@ -1,0 +1,28 @@
+{
+  "date": "2026-09-20",
+  "baselineCommit": "067e15f",
+  "testsPassed": 141,
+  "geometry": "All desktop and mobile Draco streams matched the baseline byte-for-byte; hashes are in detail-report.json.",
+  "desktopAttic1422x1120": {
+    "baseline": {"fps": 6.9, "p95FrameMs": 163.6, "drawCalls": 41},
+    "final": {"fps": 20.2, "p95FrameMs": 54.6, "drawCalls": 41},
+    "finalFirstReadyMs": 16711
+  },
+  "mobileProfile393x852": {
+    "readyMs": 4013,
+    "residentParts": 6,
+    "basementTransitionMs": 970.6,
+    "maxTransitionFrameGapMs": 36.5,
+    "basementDrawCalls": 43,
+    "currentBundleShaderErrors": 0
+  },
+  "method": "Local in-app browser, 15-second requestAnimationFrame measurement. Baseline used its original committed model files and bundle. No physical-phone or production-network claim.",
+  "limitations": [
+    "Measurements varied with local machine conditions and shader cache. No universal zero-regression guarantee.",
+    "Desktop first shader preparation was still 16.7 seconds in this run; mobile-profile 4-second readiness is not representative of every device.",
+    "The room captures are static floor-level reflection approximations, not parallax-correct mirrors or ray tracing.",
+    "Unbaked furniture uses vertex diffuse fixture lighting; direct sun and reflections remain per pixel.",
+    "Selective desktop detail increases texture memory and transfer size. Mobile material atlas resolution remains unchanged.",
+    "Visual equivalence to V-Ray or Unreal is not established."
+  ]
+}

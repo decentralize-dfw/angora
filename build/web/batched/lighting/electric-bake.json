@@ -1,0 +1,32 @@
+{
+  "method": "Cycles fixture diffuse direct and indirect, including occlusion; no daylight or albedo",
+  "samples": 128,
+  "bounces": 6,
+  "fixtures": 30,
+  "maps": [
+    {
+      "stem": "electric-walls",
+      "materials": [
+        "INTERIOR"
+      ],
+      "intensity": 20.552744976919357,
+      "seconds": 6.86
+    },
+    {
+      "stem": "electric-ceiling",
+      "materials": [
+        "ceiling"
+      ],
+      "intensity": 32.851031476201925,
+      "seconds": 9.98
+    },
+    {
+      "stem": "electric-floor",
+      "materials": [
+        "WOOD-FL"
+      ],
+      "intensity": 4.663771226985828,
+      "seconds": 7.96
+    }
+  ]
+}

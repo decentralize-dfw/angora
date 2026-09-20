@@ -2,19 +2,19 @@
   "source": "953cd59ecae412ecc3b51b6aac56e1ab6feec4c8ca73f15f6181782e109e8fac",
   "profiles": {
     "desktop": {
-      "bytes": 21725144,
+      "bytes": 22583280,
       "primitives": 37,
       "triangles": 3140765,
       "parts": [
         {
           "name": "architecture",
-          "bytes": 5204372,
+          "bytes": 5930012,
           "primitives": 11,
           "triangles": 840430
         },
         {
           "name": "interior",
-          "bytes": 2232064,
+          "bytes": 2364560,
           "primitives": 14,
           "triangles": 446285
         },

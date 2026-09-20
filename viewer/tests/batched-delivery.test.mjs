@@ -18,11 +18,13 @@ test('All batched parts load once; floor and neighborhood changes only change vi
  delivery.dispose();assert.equal(scene.children.length,0);
 });
 
-test('Both complete model profiles use Draco, embedded WebP atlases and at most 40 geometry draws',async()=>{
+test('Both complete model profiles use Draco, profile-bounded WebP atlases and at most 40 geometry draws',async()=>{
  for(const profile of ['desktop','mobile']){
   const base=new URL('../../build/web/batched/'+profile+'/',import.meta.url);
   const manifest=JSON.parse(await fs.readFile(new URL('manifest.json',base)));
   let draws=0,ao=0,bytes=0;
+  bytes+=(manifest.electric_light??[]).reduce((n,m)=>n+m.bytes,0);
+  bytes+=(manifest.room_probes??[]).reduce((n,m)=>n+m.bytes,0);
   bytes+=(manifest.ground_light?.bytes??0)+(manifest.floor_light?.bytes??0);
   for(const part of manifest.parts){
    const b=await fs.readFile(new URL(part.file,base));bytes+=b.length;
@@ -38,13 +40,13 @@ test('Both complete model profiles use Draco, embedded WebP atlases and at most 
     if(type==='VP8X'){width=1+data.readUIntLE(24,3);height=1+data.readUIntLE(27,3);}
     else if(type==='VP8 '){width=data.readUInt16LE(26)&16383;height=data.readUInt16LE(28)&16383;}
     else if(type==='VP8L'){const bits=data.readUInt32LE(21);width=(bits&16383)+1;height=((bits>>>14)&16383)+1;}
-    assert.ok(width>0&&width<=512&&height>0&&height<=512,`${type}: ${width}x${height}`);
+    assert.ok(width>0&&width<=(profile==='desktop'?1024:512)&&height>0&&height<=(profile==='desktop'?1024:512),`${type}: ${width}x${height}`);
    }
    for(const m of json.materials){assert.ok(m.extras.angoraBatch);if(m.occlusionTexture)ao++;}
   }
   assert.ok(draws<=40,`${profile}: ${draws} geometry calls leave ten for sections/annotations`);
-  // Eight map-registered neighbors extend the original 20 MiB delivery.
-  // Keep a bounded 1 MiB allowance; the renderer's 50-call limit is unchanged.
-  assert.ok(bytes<21*1024*1024,`${profile}: ${bytes} bytes`);assert.ok(ao>=5);
+  // Selective desktop detail and offline lighting have explicit profile
+  // budgets; include every reflection and light bake, not just the GLBs.
+  assert.ok(bytes<(profile==='desktop'?24:17)*1024*1024,`${profile}: ${bytes} bytes`);assert.ok(ao>=5);
  }
 });

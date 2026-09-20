@@ -1,0 +1,98 @@
+[
+  {
+    "floor": 0,
+    "profile": "desktop",
+    "file": "room-probe-0-desktop.hdr",
+    "position": [
+      -2.74,
+      1.62,
+      -6.0200000000000005
+    ],
+    "room": "Salon",
+    "width": 512
+  },
+  {
+    "floor": 0,
+    "profile": "mobile",
+    "file": "room-probe-0-mobile.hdr",
+    "position": [
+      -2.74,
+      1.62,
+      -6.0200000000000005
+    ],
+    "room": "Salon",
+    "width": 256
+  },
+  {
+    "floor": 1,
+    "profile": "desktop",
+    "file": "room-probe-1-desktop.hdr",
+    "position": [
+      -0.45999999999999996,
+      4.42,
+      -6.26
+    ],
+    "room": "Salon",
+    "width": 512
+  },
+  {
+    "floor": 1,
+    "profile": "mobile",
+    "file": "room-probe-1-mobile.hdr",
+    "position": [
+      -0.45999999999999996,
+      4.42,
+      -6.26
+    ],
+    "room": "Salon",
+    "width": 256
+  },
+  {
+    "floor": 2,
+    "profile": "desktop",
+    "file": "room-probe-2-desktop.hdr",
+    "position": [
+      -3.8200000000000003,
+      7.9910000000000005,
+      -1.700000000000001
+    ],
+    "room": "Oturma alan\u0131",
+    "width": 512
+  },
+  {
+    "floor": 2,
+    "profile": "mobile",
+    "file": "room-probe-2-mobile.hdr",
+    "position": [
+      -3.8200000000000003,
+      7.9910000000000005,
+      -1.700000000000001
+    ],
+    "room": "Oturma alan\u0131",
+    "width": 256
+  },
+  {
+    "floor": 3,
+    "profile": "desktop",
+    "file": "room-probe-3-desktop.hdr",
+    "position": [
+      -4.42,
+      11.088999999999999,
+      -2.3000000000000007
+    ],
+    "room": "Oturma alan\u0131",
+    "width": 512
+  },
+  {
+    "floor": 3,
+    "profile": "mobile",
+    "file": "room-probe-3-mobile.hdr",
+    "position": [
+      -4.42,
+      11.088999999999999,
+      -2.3000000000000007
+    ],
+    "room": "Oturma alan\u0131",
+    "width": 256
+  }
+]

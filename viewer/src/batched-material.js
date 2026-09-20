@@ -18,10 +18,10 @@ export function prepareBatchedMaterial(material,{exterior=false}={}){
   shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nbatchId=_batchid;');
   shader.fragmentShader=`varying float batchId;
    vec2 atlasUV(vec2 uv){float id=floor(batchId+0.5);return vec2(mod(id,${batch.grid}.0),floor(id/${batch.grid}.0))/${batch.grid}.0+vec2(${batch.pad})+fract(uv)*${batch.inner};}
-   vec4 atlasSample(sampler2D tex,vec2 uv){vec2 dx=dFdx(uv)*512.0*${batch.inner},dy=dFdy(uv)*512.0*${batch.inner};float lod=clamp(log2(max(max(length(dx),length(dy)),1.0)),0.0,2.0);return textureLod(tex,atlasUV(uv),lod);}
+   vec4 atlasSample(sampler2D tex,vec2 uv,float width,float maxLod){vec2 dx=dFdx(uv)*width*${batch.inner},dy=dFdy(uv)*width*${batch.inner};float lod=clamp(log2(max(max(length(dx),length(dy)),1.0)),0.0,maxLod);return textureLod(tex,atlasUV(uv),lod);}
    `+shader.fragmentShader;
   for(const chunk of ['map_fragment','normal_fragment_maps','roughnessmap_fragment','metalnessmap_fragment']){
-   const code=ShaderChunk[chunk].replace(/texture2D\( (map|normalMap|roughnessMap|metalnessMap), (v\w+Uv) \)/g,'atlasSample( $1, $2 )');
+   const code=ShaderChunk[chunk].replace(/texture2D\( (map|normalMap|roughnessMap|metalnessMap), (v\w+Uv) \)/g,(_match,map,uv)=>{const width=material[map]?.image?.width??512;return `atlasSample( ${map}, ${uv}, ${width.toFixed(1)}, ${Math.log2(Math.max(1,width*batch.pad)).toFixed(1)} )`;});
    shader.fragmentShader=shader.fragmentShader.replace('#include <'+chunk+'>',code);
   }
   if(neutralInterior){
@@ -29,7 +29,7 @@ export function prepareBatchedMaterial(material,{exterior=false}={}){
     'vec3 roomProbe=getIBLIrradiance(geometryNormal);\niblIrradiance+=vec3(dot(roomProbe,vec3(.2126,.7152,.0722)));');
    shader.fragmentShader=shader.fragmentShader.replace('#include <lights_fragment_maps>',maps);
   }
-  if(exterior){
+  if(exterior||material.userData.vertexFixtures){
    // Room fixture lights must not illuminate distant context through walls.
    // Remove their loops instead of computing zero attenuation per fragment.
    shader.fragmentShader=shader.fragmentShader.replace('#include <lights_fragment_begin>',ShaderChunk.lights_fragment_begin);
@@ -40,5 +40,5 @@ export function prepareBatchedMaterial(material,{exterior=false}={}){
     'float glazingGrazing=pow(1.0-saturate(dot(normal,geometryViewDir)),5.0);\ndiffuseColor.a=mix(diffuseColor.a,max(diffuseColor.a,.75),glazingGrazing);\n#include <opaque_fragment>');
   }
  };
- material.customProgramCacheKey=()=>key+'|atlas512-v4|'+batch.grid+'|'+neutralInterior+'|'+material.transparent+'|'+exterior;material.needsUpdate=true;
+ material.customProgramCacheKey=()=>key+'|atlas-scaled-v6|'+batch.grid+'|'+neutralInterior+'|'+material.transparent+'|'+exterior+'|'+['map','normalMap','roughnessMap','metalnessMap'].map(name=>material[name]?.image?.width??512).join(',');material.needsUpdate=true;
 }

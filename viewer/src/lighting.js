@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {CompactOutput} from './compact-output.js';
+import {createFixtureVertices} from './fixture-vertices.js';
 import { Sky } from 'three/addons/objects/Sky.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
@@ -179,7 +180,15 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
   const skyDirection=new THREE.Vector3();let skyDrawn=false;
   let soft=true,shadowDistance=110;
   const preparedMaterials=new Set();
-  let groundLight=null,floorLight=null;
+  let groundLight=null,floorLight=null,electricLight=null,roomReflections=null,reflectionFloor=null,activeInteriorFloor=null;
+  const reflectionMaterials=new Set();
+  function updateReflections(){
+    const map=roomReflections?.get(reflectionFloor)??null;
+    for(const material of reflectionMaterials){
+      if(Boolean(material.envMap)!==Boolean(map))material.needsUpdate=true;
+      material.envMap=map;
+    }
+  }
   const interior=Array.from({length:4},()=>{
     const light=new THREE.SpotLight(0xffead5,0,6,Math.PI*.37,.72,2);
     // Four shadow-casting spots is four extra scene passes every time a fixture
@@ -189,6 +198,7 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
     light.visible=false;scene.add(light,light.target);return light;
   });
   const fixtures=new InteriorLightController(interior);
+  const fixtureVertices=createFixtureVertices(fixtures);
   function setTime(nextHour=hour,nextDay=day) {
     hour=nextHour;day=nextDay;const solar=solarPosition(hour,{day});direction.fromArray(solar.direction);
     groundLight?.setSun(direction);
@@ -203,7 +213,7 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
     // The indoor camera exposes for the room, and the fixture bounce fills
     // downward-facing ceilings. Reuse the existing hemisphere: no extra light
     // loop, shadow map or render pass. This is a presentation fill, not GI.
-    hemisphere.intensity=.06+.34*daylight+(walkInterior?(lightsEnabled?.45:.18*daylight):0);
+    hemisphere.intensity=.06+.34*daylight+(walkInterior&&!electricLight?(lightsEnabled?.45:.18*daylight):0);
     hemisphere.groundColor.set(walkInterior?0xe9e1d5:0xb8b2a8);
     renderer.toneMappingExposure=referenceProfile.exposure*(walkInterior?1.18:1);
     scene.environmentIntensity=.08+(soft?.70:.55)*daylight;
@@ -220,6 +230,8 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
     renderer.shadowMap.needsUpdate=true;return solar;
   }
   return {
+    setRoomReflections(value){roomReflections=value;updateReflections();},
+    setElectricLight(value){electricLight=value;electricLight?.setEnabled(lightsEnabled);},
     setGroundLight(value){groundLight=value;groundLight?.setSun(direction);},
     setFloorLight(value){floorLight=value;floorLight?.setSun(direction);},
     async loadEnvironment(url) {
@@ -252,21 +264,23 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
       }
       fixtures.setFixtures(data);
     },
-    interior(floor,position,time){fixtures.select(floor,position,time);},
-    setLights(enabled){lightsEnabled=enabled;fixtures.setEnabled(enabled);setTime();},setTime,
+    interior(floor,position,time){activeInteriorFloor=floor;if(walkInterior&&reflectionFloor!==floor){reflectionFloor=floor;updateReflections();}fixtures.select(floor,position,time);},
+    setLights(enabled){lightsEnabled=enabled;electricLight?.setEnabled(enabled);fixtures.setEnabled(enabled);setTime();},setTime,
     setWalkInterior(active){
       walkInterior=active;
+      if(active){reflectionFloor=activeInteriorFloor;updateReflections();}
       for(const material of preparedMaterials)setInteriorMode(material,active);
       setTime(hour,day);
     },
     update(time){
       const state=fixtures.update(time);
+      fixtureVertices.update();
       if(state.shadowChanged)renderer.shadowMap.needsUpdate=true;
       return state.active;
     },
     snapshot(){return {environment:environmentMode,interior:fixtures.snapshot()};},
     setStyle(style){soft=style!=='sun';setTime();},
-    releaseMaterial(material){preparedMaterials.delete(material);},
+    releaseMaterial(material){preparedMaterials.delete(material);reflectionMaterials.delete(material);},
     prepareMesh(object,{clipped,context,name}) {
       object.userData.sectionClipped=clipped;
       const materials=Array.isArray(object.material)?object.material:[object.material];
@@ -274,6 +288,11 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
       const glass=materials.every(isGlazing);object.userData.aoExcluded=glass;
       object.castShadow=!glass;object.receiveShadow=!glass;
       for(const material of materials) {
+        electricLight?.apply(material);
+        if(baked&&['architecture','interior'].includes(name))fixtureVertices.apply(material);
+        if(['architecture','interior'].includes(name)&&/-(metal|glass|wood)-/.test(material.name)){
+          reflectionMaterials.add(material);material.envMap=roomReflections?.get(reflectionFloor)??null;
+        }
         if(name==='context-ground'||(name==='garden'&&!/metal|glass|wood/.test(material.name)))groundLight?.apply(material);
         if(['architecture','interior'].includes(name)&&material.userData.angoraBatch?.materials.some(n=>/wood.floor|WOOD-FL|terra_floor|stone_tile|bath_tile|granite floor/i.test(n)))floorLight?.apply(material);
         prepareMaterialResponse(material,{context});preparedMaterials.add(material);
@@ -286,6 +305,7 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
       }
     },
     frame(view,contextBounds) {
+      reflectionFloor=/^f[0-3]$/.test(view)?Number(view.slice(1)):null;updateReflections();
       const contextSize=contextBounds?.getSize(new THREE.Vector3());
       const extent=view==='neighborhood'?52:view==='region'?Math.max(contextSize?.x??320,contextSize?.z??320)*.65:24;
       sun.shadow.normalBias=view==='region'?.09:view==='neighborhood'?.035:.018;
@@ -303,6 +323,16 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
     },
     pixelRatio(ratio){composer?.setPixelRatio(ratio);},
     resize(w,h){composer?.setSize(w,h);},
+    async compile(currentCamera){
+      if(!renderer.compileAsync)return;
+      const previous=renderer.getRenderTarget();
+      try{
+        // Compile for the actual HDR target; a canvas compile would prepare
+        // a different tone-mapping shader and still stall the first draw.
+        if(compactOutput)renderer.setRenderTarget(compactOutput.target);
+        await renderer.compileAsync(scene,currentCamera);
+      }finally{renderer.setRenderTarget(previous);}
+    },
     warm(currentCamera){
       if(composer&&!renderer.xr.isPresenting){
         // Warm the actual normal/AO/postprocessing passes too. A direct scene

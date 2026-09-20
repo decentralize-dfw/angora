@@ -1,3 +1,5 @@
+import {loadRoomReflections} from './room-reflections.js';
+import {createElectricLighting} from './electric-light.js';
 import './style.css';
 import './interface-quality.css';
 import * as THREE from 'three';
@@ -646,6 +648,16 @@ function exitWalk(reselect = true) {
 }
 async function loadNativeModel(manifest){
     const loadStarted=performance.now();
+  const lightingReady=Promise.all([
+    lighting.loadEnvironment(daylightURL.href),
+    manifest.room_probes?.length?loadRoomReflections(renderer,manifest.room_probes,modelRoot).then(value=>lighting.setRoomReflections(value)):Promise.resolve()
+  ]);
+  // Keep early network failures handled while model workers are still busy;
+  // the awaited promise below still reports the original failure to boot.
+  lightingReady.catch(()=>{});
+  const electricReady=Promise.all((manifest.electric_light??[]).map(async descriptor=>({
+    ...descriptor,texture:await new THREE.TextureLoader().loadAsync(new URL(descriptor.file+'?v='+descriptor.sha256.slice(0,12),modelRoot).href)
+  }))).then(entries=>{if(entries.length)lighting.setElectricLight(createElectricLighting(entries));});
   const groundLightReady=Promise.all([['ground_light','setGroundLight'],['floor_light','setFloorLight']].map(async([key,setter])=>{
     const descriptor=manifest[key];if(!descriptor)return;
     const texture=await new THREE.TextureLoader().loadAsync(new URL(descriptor.file+'?v='+descriptor.sha256.slice(0,12),modelRoot).href);
@@ -664,7 +676,7 @@ async function loadNativeModel(manifest){
       const planes=clipped?[clip]:[];o.userData.clipPlanes=planes;
         for(const material of Array.isArray(o.material)?o.material:[o.material]){material.clippingPlanes=planes;material.clipShadows=true;if(material.aoMap)material.aoMapIntensity=.7;if(name==='garden'||name==='context-plants'||(manifest.batched&&context))plotMask?.apply(material,{alwaysOutside:name==='context-buildings'});}
     }});
-    await groundLightReady;
+    await Promise.all([groundLightReady,electricReady]);
     await nativeDelivery.activate(selected==='building'?'f3':selected);
     if(manifest.batched){loader.dracoLoader?.dispose();loader.ktx2Loader?.dispose();}
     host.dataset.deliveryStats=JSON.stringify({profile:manifest.profile??'legacy',decodeAndPrepareMs:Math.round(performance.now()-loadStarted),residentParts:nativeDelivery.loaded.size});
@@ -684,7 +696,9 @@ async function loadNativeModel(manifest){
   lighting.setFixtures(navigation.lights,{allRooms:true});hotspots=createHotspots(host,walk,travelRoom);
   fillRoomMenu();
   locator=createWalkLocator(walk.surface,{minX:buildingBox.min.x+1,maxX:buildingBox.max.x-1,minZ:buildingBox.min.z+1,maxZ:buildingBox.max.z-1});
-  await lighting.loadEnvironment(daylightURL.href);
+  await lightingReady;
+  lighting.frame(selected==='building'?'f3':selected,contextBox);
+  await lighting.compile(camera);
   ready=true;document.querySelectorAll('[data-needs-model],#toggle-furniture,#toggle-rooms,#toggle-measurements,#enter-walk').forEach(b=>b.disabled=false);
   await selectView(selected,true);lighting.render(camera);status.hidden=true;
   host.dataset.deliveryStats=JSON.stringify({...JSON.parse(host.dataset.deliveryStats),readyMs:Math.round(performance.now()-loadStarted)});
