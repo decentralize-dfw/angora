@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {prepareBakedLighting} from './baked-lighting.js';
+import {restoreBatchSurface} from './batch-surface-response.js';
 import {prepareBatchedMaterial} from './batched-material.js';
 
 // Batched deliveries remain resident across every view. The legacy manifest
@@ -21,6 +22,12 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     if(record.gpu_sha256)url.searchParams.set('v',record.gpu_sha256.slice(0,12));
     const result=await load(url.href),model=result.scene;
     try{
+    if(manifest.batched){
+      const replacements=new Map();
+      for(const material of resources(model).materials)replacements.set(material,restoreBatchSurface(material,manifest.surface_response?.[name]));
+      model.traverse(o=>{if(o.isMesh)o.material=Array.isArray(o.material)?o.material.map(m=>replacements.get(m)):replacements.get(o.material);});
+      for(const [old,next] of replacements)if(old!==next)old.dispose();
+    }
     for(const material of resources(model).materials){
       const descriptor=material.userData.angoraLightMapTexture;if(!descriptor)continue;
       const texture=await result.parser.getDependency('texture',descriptor.index);

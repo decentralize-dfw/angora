@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {CompactOutput} from './compact-output.js';
 import { Sky } from 'three/addons/objects/Sky.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
@@ -160,6 +161,7 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
   // and eventually lose the context. Three applies the same AgX curve and sRGB
   // conversion itself when it draws to the canvas, so the image keeps its
   // exposure and its colour; it loses the crevice shading and the glare.
+  const compactOutput=baked&&!compact?new CompactOutput():null;
   let composer=null,beauty=null,ao=null;
   if(!compact&&!baked){
     const target=new THREE.WebGLRenderTarget(1,1,{type:THREE.HalfFloatType,samples:referenceProfile.msaaSamples});
@@ -173,7 +175,7 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
     configurePostprocessing(composer,{beauty,ao,smaa,bloom,output:new ShaderPass(GradeShader),
       dither:new ShaderPass(DisplayDitherShader)});
   }
-  let day=172,hour=12.5,environmentMode='procedural-sky',walkInterior=false;
+  let day=172,hour=12.5,environmentMode='procedural-sky',walkInterior=false,lightsEnabled=true;
   const skyDirection=new THREE.Vector3();let skyDrawn=false;
   let soft=true,shadowDistance=110;
   const preparedMaterials=new Set();
@@ -198,7 +200,12 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
     // dimmer fill is the archviz contrast the daylight is meant to carry.
     sun.intensity=(soft?1.8:2.4)*THREE.MathUtils.smoothstep(solar.altitude,-.5,20);
     sun.color.set(0xffbc7b).lerp(new THREE.Color(0xfff5e9),warmth);
-    hemisphere.intensity=.06+.34*daylight;
+    // The indoor camera exposes for the room, and the fixture bounce fills
+    // downward-facing ceilings. Reuse the existing hemisphere: no extra light
+    // loop, shadow map or render pass. This is a presentation fill, not GI.
+    hemisphere.intensity=.06+.34*daylight+(walkInterior?(lightsEnabled?.45:.18*daylight):0);
+    hemisphere.groundColor.set(walkInterior?0xe9e1d5:0xb8b2a8);
+    renderer.toneMappingExposure=referenceProfile.exposure*(walkInterior?1.18:1);
     scene.environmentIntensity=.08+(soft?.70:.55)*daylight;
     sun.shadow.radius=soft?2.5:1;sun.shadow.intensity=soft?.82:1;
     horizon.set(0x182734).lerp(new THREE.Color(0xe4e9ed),daylight);
@@ -246,7 +253,7 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
       fixtures.setFixtures(data);
     },
     interior(floor,position,time){fixtures.select(floor,position,time);},
-    setLights(enabled){fixtures.setEnabled(enabled);},setTime,
+    setLights(enabled){lightsEnabled=enabled;fixtures.setEnabled(enabled);setTime();},setTime,
     setWalkInterior(active){
       walkInterior=active;
       for(const material of preparedMaterials)setInteriorMode(material,active);
@@ -310,6 +317,7 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
       finally{renderer.setRenderTarget(previous);target.dispose();}
     },
     render(currentCamera){
+      if(compactOutput&&!renderer.xr.isPresenting){compactOutput.render(renderer,scene,currentCamera);return;}
       if(!composer||renderer.xr.isPresenting){renderer.render(scene,currentCamera);return;}
       beauty.camera=currentCamera;ao.setCamera(currentCamera);composer.render();
     }

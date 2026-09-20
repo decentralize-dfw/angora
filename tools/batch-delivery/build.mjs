@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import {sourceResponses} from './surface-response.mjs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
@@ -132,7 +133,7 @@ for(const profile of ['desktop','mobile']){
   console.log(profile,name,bytes,batchIndex,triangles);rawCache.clear();
  }
  for(const part of parts)part.gpu_sha256=createHash('sha256').update(await fs.readFile(path.join(out,part.file))).digest('hex');
- const next={...manifest,batched:true,profile,parts,interior_streams:[]};
+ const next={...manifest,batched:true,profile,parts,interior_streams:[],surface_response:await sourceResponses(source,parts)};
  for(const stem of ['ground-light','floor-light']){
   const file=path.join(target,'lighting',stem+'.webp');
   if(await fs.stat(file).catch(()=>null)){
