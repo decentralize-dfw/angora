@@ -1,10 +1,10 @@
-import json,sys
+import json,sys,subprocess
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2];OUT=ROOT/'.runtime/finishing';sys.path.insert(0,str(OUT/'deps'))
 import numpy as np,mapbox_earcut
 from shapely.geometry import Polygon,LineString,box
 from shapely.ops import unary_union,linemerge
-items=json.loads((OUT/'repaired.json').read_text());atlas=json.loads((ROOT/'build/web/native-current/sections-current.json').read_text());report=[]
+items=json.loads((OUT/'repaired.json').read_text());atlas=json.loads(subprocess.check_output(['git','show','27dcb56:build/web/native-current/sections-current.json'],cwd=ROOT));report=[]
 def cut(item,h):
  p=np.array(item['attributes']['POSITION']).reshape(-1,3);tri=p[np.array(item['indices']).reshape(-1,3)];result=[]
  for t in tri[(tri[:,:,1].min(1)<h)&(tri[:,:,1].max(1)>h)]:

@@ -1,0 +1,192 @@
+{
+  "source_file": "E:/angora/EXPORT 2 GLB AYRIK/DENEME/BUILDING-2.glb",
+  "sha256": "322138f5b8c3a482e7881c93af75c86be6a45bb75ce949dc24ce858e419b59f6",
+  "triangles": 148,
+  "sections": [
+    {
+      "file": "sections-current.json",
+      "height": 1.6,
+      "solid_area_m2": 1.98077209
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 0.0,
+      "solid_area_m2": 5.931910649999999
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 0.08,
+      "solid_area_m2": 5.93191065
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 0.16,
+      "solid_area_m2": 5.63187587
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 0.24,
+      "solid_area_m2": 5.63187587
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 0.32,
+      "solid_area_m2": 5.331961199999999
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 0.4,
+      "solid_area_m2": 5.331961200000001
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 0.48,
+      "solid_area_m2": 5.031325870000001
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 0.56,
+      "solid_area_m2": 5.03132587
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 0.64,
+      "solid_area_m2": 4.7306905399999994
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 0.72,
+      "solid_area_m2": 4.7306905399999994
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 0.8,
+      "solid_area_m2": 4.73069054
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 0.88,
+      "solid_area_m2": 4.430775869999999
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 0.96,
+      "solid_area_m2": 4.43077587
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 1.04,
+      "solid_area_m2": 4.130140539999999
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 1.12,
+      "solid_area_m2": 4.130140539999999
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 1.2,
+      "solid_area_m2": 3.83022587
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 1.28,
+      "solid_area_m2": 3.8302258699999996
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 1.36,
+      "solid_area_m2": 3.52959054
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 1.44,
+      "solid_area_m2": 3.52959054
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 1.52,
+      "solid_area_m2": 1.9807720899999999
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 1.6,
+      "solid_area_m2": 1.98077209
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 1.68,
+      "solid_area_m2": 1.7382384800000001
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 1.76,
+      "solid_area_m2": 1.7382384800000001
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 1.84,
+      "solid_area_m2": 1.49512209
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 1.92,
+      "solid_area_m2": 1.49512209
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 2.0,
+      "solid_area_m2": 1.4951220899999997
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 2.08,
+      "solid_area_m2": 1.2520057000000002
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 2.16,
+      "solid_area_m2": 1.2520057000000002
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 2.24,
+      "solid_area_m2": 1.00947209
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 2.32,
+      "solid_area_m2": 1.00947209
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 2.4,
+      "solid_area_m2": 0.7663557
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 2.48,
+      "solid_area_m2": 0.7663557
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 2.56,
+      "solid_area_m2": 0.5238220899999999
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 2.64,
+      "solid_area_m2": 0.5238220899999999
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 2.72,
+      "solid_area_m2": 0.2807056999999999
+    },
+    {
+      "file": "transition-sections.json.gz",
+      "height": 2.8,
+      "solid_area_m2": 0.2807056999999999
+    }
+  ]
+}

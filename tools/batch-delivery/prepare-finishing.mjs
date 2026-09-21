@@ -12,7 +12,7 @@ for(const part of ['architecture','interior','garden','context-ground']){
  const doc=await io.read(path.join(source,part+'.gltf'));
  for(const node of doc.getRoot().listNodes())for(const [pi,p] of (node.getMesh()?.listPrimitives()??[]).entries()){
   const name=node.getName(),mat=p.getMaterial().getName();
-  if(part==='architecture'&&!/interior\.001|ceiling|wood_floor|Restored stair|stucco|cream tile|wall tile|wall ceramic|ochre tile|mosaic band|roof\.003|white_trim \(4\)/i.test(name))continue;
+  if(part==='architecture'&&!/interior\.001|ceiling|wood_floor|terra_floor|stone_tile|Restored stair|stucco|cream tile|wall tile|wall ceramic|ochre tile|mosaic band|roof\.003|white_trim \(4\)/i.test(name))continue;
   if(part==='interior'&&!/curtain|drape|picture|artwork/i.test(name))continue;
   if(part==='context-ground'&&!/grass|terrain|ground|soil/i.test(mat+' '+name))continue;
   const world=new Matrix4().fromArray(node.getWorldMatrix()),normal=new Matrix3().getNormalMatrix(world),v=new Vector3();

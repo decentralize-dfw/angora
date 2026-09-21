@@ -15,27 +15,37 @@ test('Earth remains capped during both directions of floor transition with one r
  soil.userData.update(2.2,false);assert.equal(soil.visible,false);
  soil.userData.update(8,true);assert.equal(soil.visible,false);
 });
-test('Every intermediate earth contour has a closed side and bottom at the same draw',()=>{
+test('Earth hatching stays on the horizontal cut and cannot cover exterior facades',()=>{
  const data=read('build/web/native-current/native-soil-section.json'),soil=createNativeSoilSection(data);
  for(const s of data.slices){
   if(!s.i.length)continue;
   soil.userData.update(s.height,true);
   assert.equal(soil.children.length,0);
-  assert.equal(soil.geometry.index.count,s.i.length*2+s.edges.length*3);
+  assert.equal(soil.geometry.index.count,s.i.length);
   const p=soil.geometry.attributes.position;
-  assert.equal(p.count,s.p.length);
-  assert.ok(Math.abs(p.getY(p.count/2)+s.height-s.bottom)<.00001);
-  assert.ok(s.edges.every(i=>i>=0&&i<s.p.length/2));
+  assert.equal(p.count,s.p.length/2);
+  for(let i=0;i<p.count;i++)assert.equal(p.getY(i),0,'no false vertical soil facade');
  }
 });
-test('Both descending side stairs remain part of the basement earth section',()=>{
+test('Exterior stair caps stop at the actual 1.60 m solid intersection, leaving lower treads open',()=>{
  const data=read('build/web/native-current/native-soil-section.json');
  const cross=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);
- for(const s of data.slices.filter(s=>s.height<=2.8))for(const point of [[-6.4,-2.8],[8,-2]]){
+ const cases=data.slices.filter(s=>s.height<=2.8).flatMap(s=>[[-6.4,-2.8],[8,-2]].map(point=>({s,point,expected:false})));
+ for(const [point,expected] of [[[-6.4,-.32],false],[[-6.4,-.29],true],[[8,-1.74],false],[[8,-1.70],true]])cases.push({s:data.slices[0],point,expected});
+ for(const {s,point,expected} of cases){
   const vertices=Array.from({length:s.p.length/2},(_,i)=>s.p.slice(i*2,i*2+2));let covered=false;
   for(let i=0;i<s.i.length;i+=3){const [a,b,c]=s.i.slice(i,i+3).map(k=>vertices[k]);const signs=[cross(a,b,point),cross(b,c,point),cross(c,a,point)];if(signs.every(v=>v>=-1e-8)||signs.every(v=>v<=1e-8)){covered=true;break;}}
-  assert.ok(covered,`${point} at ${s.height}`);
+  assert.equal(covered,expected,`${point} at ${s.height}`);
  }
+});
+test('Basement stair section and collider use the supplied owner solid',()=>{
+ const source=read('build/web/native-current/owner-stair-restoration.json');
+ assert.equal(source.triangles,148);
+ assert.equal(source.sha256,'322138f5b8c3a482e7881c93af75c86be6a45bb75ce949dc24ce858e419b59f6');
+ const cut=source.sections.find(s=>s.file==='sections-current.json'&&s.height===1.6);
+ assert.ok(cut.solid_area_m2>1.9&&cut.solid_area_m2<2.1);
+ assert.equal(read('build/web/native-current/native-navigation.json').owner_basement_stair_sha256,source.sha256);
+ assert.equal(read('build/web/native-current/sections-current.json').owner_basement_stair_sha256,source.sha256);
 });
 test('All first-floor rooms and both balconies are connected with furniture enabled',()=>{
  const nav=read('build/web/native-current/native-navigation.json'),walk=new WalkSurface(nav),hall=nav.stations.find(s=>s.room_id==='f2-101');

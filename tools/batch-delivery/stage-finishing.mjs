@@ -44,20 +44,23 @@ for(const part of ['architecture','interior','garden','context-ground','context-
   }
  }
  if(part==='architecture'){
-  // Closed concrete stair plates fitted beneath the existing six flights.
+  // Upper-floor concrete stair plates; basement uses the owner reference solid.
   // The authored treads/landings are retained, including the stairwell void.
   const positions=[],normals=[],uv=[],indices=[];
   function face(points){
    const a=points[0],b=points[1],c=points[2],u=b.map((v,i)=>v-a[i]),v=c.map((v,i)=>v-a[i]);let n=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]],l=Math.hypot(...n);n=n.map(v=>v/l);const start=positions.length/3;
    for(const p of points){positions.push(...p);normals.push(...n);uv.push(p[0],p[2]);}indices.push(start,start+1,start+2,start,start+2,start+3);
   }
-  for(const datum of [0,3.0996,6.3714])for(const [x0,x1,h0,h1,z0,z1] of [[.83,2.9,-.08,1.34,-3.128,-2.129],[.87,2.84,2.72,1.36,-1.928,-.931]]){
+  for(const datum of [3.0996,6.3714])for(const [x0,x1,h0,h1,z0,z1] of [[.83,2.9,-.08,1.34,-3.128,-2.129],[.87,2.84,2.72,1.36,-1.928,-.931]]){
    const top=[[x0,datum+h0,z0],[x1,datum+h1,z0],[x1,datum+h1,z1],[x0,datum+h0,z1]],bottom=top.map(p=>[p[0],p[1]-.16,p[2]]);
    face(top);face([...bottom].reverse());for(let i=0;i<4;i++)face([top[i],bottom[i],bottom[(i+1)%4],top[(i+1)%4]]);
   }
   const material=doc.materials.findIndex(m=>m.name==='WHT');if(material<0)throw Error('Missing existing stair concrete finish');
   const mesh=doc.meshes.length;doc.meshes.push({name:'Closed stair concrete plates',primitives:[{material,attributes:{POSITION:accessor(positions,3),NORMAL:accessor(normals,3),TEXCOORD_0:accessor(uv,2)},indices:accessor(indices,1,true)}]});
   const node=doc.nodes.length;doc.nodes.push({name:'Closed stair concrete plates',mesh});doc.scenes[doc.scene??0].nodes.push(node);
+  const original=JSON.parse(await fs.readFile(path.join(work,'owner-solid-stair.json')));
+  const ownerMesh=doc.meshes.length;doc.meshes.push({name:original.name,primitives:[{material,attributes:Object.fromEntries(Object.entries(original.attributes).map(([key,a])=>[key,accessor(a,key.startsWith('TEXCOORD')?2:3)])),indices:accessor(original.indices,1,true)}]});
+  const ownerNode=doc.nodes.length;doc.nodes.push({name:original.name,mesh:ownerMesh,extras:{source_sha256:original.source_sha256}});doc.scenes[doc.scene??0].nodes.push(ownerNode);
  }
  // Reuse the archived dolphin motif exactly; pool wall tiles get a separate finish.
  if(part==='garden'){

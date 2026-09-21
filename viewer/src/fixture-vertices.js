@@ -7,6 +7,9 @@ export function createFixtureVertices(controller){
  const shaders=new Set();
  function update(){
   for(const u of shaders)controller.slots.forEach(({light},i)=>{
+   // A loading-frame shader may predate the complete fixture pool.
+   // Its uniform capacity is fixed until the new program is compiled.
+   if(i>=u.fixturePosition.value.length)return;
    u.fixturePosition.value[i].copy(light.position);
    u.fixtureDirection.value[i].subVectors(light.target.position,light.position).normalize();
    u.fixtureRadiance.value[i].set(light.color.r,light.color.g,light.color.b).multiplyScalar(light.intensity);
@@ -21,6 +24,7 @@ export function createFixtureVertices(controller){
   material.onBeforeCompile=(shader,renderer)=>{
    previous.call(material,shader,renderer);
    const count=controller.slots.length;
+   if(!count)return;
    const vectors=()=>Array.from({length:count},()=>new Vector3());
    const uniforms={fixturePosition:{value:vectors()},fixtureDirection:{value:vectors()},fixtureRadiance:{value:vectors()},fixtureCone:{value:Array.from({length:count},()=>new Vector4())}};
    shaders.add(uniforms);Object.assign(shader.uniforms,uniforms);update();

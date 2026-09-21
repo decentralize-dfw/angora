@@ -4,10 +4,31 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2];OUT=ROOT/'.runtime/finishing'
 sys.path.insert(0,str(OUT/'deps'))
 import numpy as np
-from shapely.geometry import Polygon,box
+from shapely.geometry import Polygon,box,Point
 from shapely.ops import unary_union
 import mapbox_earcut
 items=json.loads((OUT/'input.json').read_text());report=[];seen={}
+attic_tiles=[]
+for item in items:
+ if item['name']=='R31 | R33 attic cream tile':
+  p=np.array(item['attributes']['POSITION']).reshape(-1,3)
+  for t in p[np.array(item['indices']).reshape(-1,3)]:
+   if np.ptp(t[:,1])<.001 and abs(t[:,1].mean()-9.38956)<.003:
+    g=Polygon(t[:,[0,2]])
+    if g.is_valid and g.area>1e-9:attic_tiles.append(g)
+attic_tile_floor=unary_union(attic_tiles)
+if attic_tile_floor.is_empty:raise RuntimeError('Original attic cream tile floor missing')
+service_tiles=[]
+for item in items:
+ if item['name']=='stone_tile':
+  p=np.array(item['attributes']['POSITION']).reshape(-1,3)
+  for t in p[np.array(item['indices']).reshape(-1,3)]:
+   if np.ptp(t[:,1])<.001 and abs(t[:,1].mean()-3.0605)<.002:
+    g=Polygon(t[:,[0,2]])
+    if g.is_valid and g.area>1e-9:service_tiles.append(g)
+service_union=unary_union(service_tiles)
+service_floor=unary_union([g for g in ([service_union] if service_union.geom_type=='Polygon' else service_union.geoms) if g.covers(Point(5.8,-2)) or g.covers(Point(6,-5.85))])
+if service_floor.is_empty:raise RuntimeError('Original garage/service stone floor missing')
 def tri(poly):
  rings=[poly.exterior,*poly.interiors];xy=np.array([c for r in rings for c in list(r.coords)[:-1]],dtype=np.float64)
  ends=np.cumsum([len(r.coords)-1 for r in rings],dtype=np.uint32)
@@ -24,11 +45,17 @@ for item in items:
   if length<1e-10:continue
   normal=cross/length;axis=np.argmax(abs(normal));axes=[i for i in range(3) if i!=axis];canonical=normal*np.sign(normal[axis]);distance=np.dot(canonical,xyz[0]);key=tuple(np.round(canonical,4))+ (round(distance,3),)
   poly=Polygon(xyz[:,axes]);remaining=poly
+  # Original finishes are buried under additional floor skins: remove those
+  # skins only inside the source finish contours, preserving original UVs.
+  if item['name']=='wood_floor.001' and axis==1 and abs(xyz[:,1].mean()-9.38956)<.06:
+   remaining=remaining.difference(attic_tile_floor)
+  if item['name']=='terra_floor' and axis==1 and 3.06<xyz[:,1].mean()<3.12:
+   remaining=remaining.difference(service_floor)
   # Only structural skins are compared across objects, never roof against wall.
   family='wall' if item['name']=='interior.001' or any(k in item['name'] for k in ['tile','ceramic','mosaic']) and item['part']=='architecture' else item['name']
   key=(family,*key)
   previous=seen.get(key)
-  if previous is not None:remaining=poly.difference(previous)
+  if previous is not None:remaining=remaining.difference(previous)
   seen[key]=poly if previous is None else previous.union(poly)
   removed+=max(0,poly.area-remaining.area)
   if remaining.area<poly.area-1e-8:changed+=1

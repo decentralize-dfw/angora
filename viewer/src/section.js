@@ -78,13 +78,12 @@ export function createNativeSoilSection(data){
   if(data.coordinate_system!=='glTF_XZ'||data.floor_index!==0)throw Error('Invalid native soil section');
   const slices=data.slices??[data];
   const geometries=slices.map(s=>{
-    const count=s.p.length/2,positions=new Float32Array(count*3*(s.edges?2:1)),indices=[...s.i];
+    const count=s.p.length/2,positions=new Float32Array(count*3),indices=s.i;
     for(let i=0;i<count;i++){
       positions[i*3]=s.p[i*2];positions[i*3+2]=s.p[i*2+1];
-      if(s.edges){positions[(count+i)*3]=s.p[i*2];positions[(count+i)*3+1]=s.bottom-s.height;positions[(count+i)*3+2]=s.p[i*2+1];}
     }
-    for(let i=0;i<(s.edges?.length??0);i+=2){const a=s.edges[i],b=s.edges[i+1];indices.push(a,b,b+count,a,b+count,a+count);}
-    if(s.edges)for(let i=0;i<s.i.length;i+=3)indices.push(s.i[i+2]+count,s.i[i+1]+count,s.i[i]+count);
+    // Earth is hatched only where the horizontal cutting plane intersects it.
+    // Extruding its outline downward creates false facades over the real house.
     const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(positions,3));g.setIndex(indices);g.computeBoundingSphere();return g;
   });
   const mesh=new THREE.Mesh(geometries[0],createHatchMaterial(SOIL_POCHE));mesh.name='Native basement earth section';mesh.visible=false;mesh.renderOrder=2;

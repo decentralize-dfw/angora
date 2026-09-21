@@ -2,15 +2,15 @@
   "source": "953cd59ecae412ecc3b51b6aac56e1ab6feec4c8ca73f15f6181782e109e8fac",
   "profiles": {
     "desktop": {
-      "bytes": 22436476,
+      "bytes": 22437988,
       "primitives": 37,
-      "triangles": 3141866,
+      "triangles": 3142221,
       "parts": [
         {
           "name": "architecture",
-          "bytes": 5855372,
+          "bytes": 5856884,
           "primitives": 11,
-          "triangles": 841506
+          "triangles": 841861
         },
         {
           "name": "interior",
@@ -45,15 +45,15 @@
       ]
     },
     "mobile": {
-      "bytes": 16300452,
+      "bytes": 16301528,
       "primitives": 37,
-      "triangles": 2590663,
+      "triangles": 2591018,
       "parts": [
         {
           "name": "architecture",
-          "bytes": 4593536,
+          "bytes": 4594612,
           "primitives": 11,
-          "triangles": 841506
+          "triangles": 841861
         },
         {
           "name": "interior",
