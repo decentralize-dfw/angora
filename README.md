@@ -312,6 +312,41 @@ Kesit üretimi normal Python ortamında NumPy, Shapely ve mapbox-earcut kullanı
   düğmeleri (34 px) kendi ölçeğine indi. 44 px'lik dokunma tabanı telefonda
   olduğu gibi durur; daraltma yalnız imleçli cihazlarda geçerlidir.
 
+### R47 dördüncü tur — sabit işaretler, telefonda sığan arayüz
+
+- **İşaretin yeri sabittir.** Kamera işaretleri artık ne birbirinden ne de bir
+  düğmeden kaçıyor, kadrajın içine de çekilmiyor: her işaret kendi kamerasının
+  modeldeki yerinde durur. Üçüncü turdaki kenarda tutma ve kalabalıkta kenara
+  çekilme kaldırıldı — pan ile gezinirken işaretlerin yer değiştirmesi
+  "kaçışan fareler" görüntüsü veriyordu. Kadrajın dışına çıkan işaret çizilmez,
+  görüş oraya dönünce geri gelir. Üst üste binen iki işaretten öndeki basmayı
+  alır; derinlik sırası bunu belirler. Plan ölçüleri işaretleri engel saymaya
+  devam eder. Bunun bilinen bedeli: bahçedeki 24 ve 26 hâlâ dört katın da
+  verisinde işaretlidir, ama kat görünümü kat izini çerçevelediği için çoğu
+  zaman — özellikle telefonda — kadrajın dışında kalır ve çizilmez;
+  uzaklaştırıldığında ya da plan görünümünde geri gelirler. Bu, üçüncü turdaki
+  "her katta gözüksün" isteğinin, dördüncü turdaki "kadrajda olma zorunluluğu
+  yok, yeri sabit" isteğiyle değiş tokuşudur.
+- **Telefonda işaret küçüldü.** İşaret kendi noktası etrafında %66'ya çekildi —
+  nokta yerinde kalır, yalnız ışınlar kısalır — ve basma hedefi 44 px yerine
+  çizimin kendi ölçüsünde (34 px) durur, böylece komşu işaretler birbirinin
+  basmasını daha az çalar.
+- **Dişli telefonda sağ üstte.** Alt menünün yüz piksel üstünde boşlukta duran
+  dişli, ölçek seçicinin karşısına, sağ üste taşındı; model ölçeği de
+  havada kalmayıp alt menünün hemen üstüne indi. Masaüstünde hiçbir şey
+  değişmedi — dişli sağ altta, sayfa da kendi köşesinden açılıyor.
+- **Görünüm açıklaması kaldırıldı.** Ölçek seçicinin altında ölçeği ve katı
+  bir daha yazan şerit hem masaüstünde hem telefonda çizilmiyor. Belgeden
+  silinmedi, yazılmaya da devam ediyor (başlıklar paylaşılan bağlantıda ve QA
+  raporunda duruyor); yalnız görünmüyor.
+- **Donatı filtreleri telefonda ikon.** Altı adlı çip telefon genişliğine
+  sığmıyor, sağ kenardan taşıyordu. Her aile artık kendi rengindeki tek bir
+  ikonla gösteriliyor — mezuniyet kepi, sağlık artısı, çatal-bıçak, alışveriş
+  çantası, ağaç ve sütunlu kamu binası — altısı ekran genişliğine sığar,
+  kaydırma kalmaz. Ad düğmenin etiketinde durur, ekran okuyucu ve uzun basış
+  aynı adı verir; masaüstünde adlı çipler aynen kalır. Satır da haritanın
+  ortasından inip bölge panelinin hemen üstüne alındı.
+
 ## R44 — beyaz iç mekânlar, bodrum dolgusu, dış mekân yürüyüşü ve birleşik model
 
 R44 dört isteği işler; araçlar `tools/*_r44.mjs` altındadır ve her biri kendi

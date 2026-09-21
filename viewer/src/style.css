@@ -87,7 +87,11 @@ h1 strong{font-weight:700}
 .scale-picker button:not([aria-pressed=true]):hover{background:var(--glass-hover)}
 
 /* ----------------------------------------------------- view description */
-.view-description{top:86px;left:22px;pointer-events:none;border-radius:14px;padding:9px 14px;max-width:300px}
+/* Retired. The scale picker already says which scale is open and the floor
+   row which storey, so this strip repeated them a second time under the
+   picker on both screens. Kept in the document and kept written to - the
+   titles feed the shared link and the QA report - simply not drawn. */
+.view-description{display:none;top:86px;left:22px;pointer-events:none;border-radius:14px;padding:9px 14px;max-width:300px}
 .view-description h2{font-size:14px;font-weight:700;margin:0 0 2px;letter-spacing:.02em}
 .view-description p{font-size:11px;margin:0;color:var(--muted)}
 
@@ -253,9 +257,9 @@ h1 strong{font-weight:700}
 /* The press target is a CIRCLE on the camera dot, not the mark's rotated box.
    A rotated box leaves dead corners where a press lands on the model instead,
    and neighbouring boxes steal each other's presses - between them that was
-   the "sometimes one press, sometimes five" the owner hit. The circle is
-   smaller than the clearance photo-gallery.js keeps between two marks, so no
-   two targets can ever overlap, and depth decides the stacking anyway. */
+   the "sometimes one press, sometimes five" the owner hit. Marks no longer
+   step aside for one another, so two targets can overlap; depth decides the
+   stacking, and the mark in front is the one a press reaches. */
 .photo-pin{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;padding:0;background:transparent;border:0;box-shadow:none;line-height:0;pointer-events:auto;touch-action:manipulation}
 /* No halo under the mark: a white glow behind fifty-six of these fogs the
    plan it is drawn on. The dot's own white stroke is the separation, and a
@@ -370,10 +374,14 @@ h1 strong{font-weight:700}
 .rm-filters{position:absolute;left:50%;transform:translateX(-50%);bottom:max(22px,env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px;z-index:2;max-width:min(760px,calc(100vw - 420px))}
 .rm-filters button{display:flex;align-items:center;gap:8px;min-height:34px;padding:0 15px 0 11px;border-radius:999px;font-size:11.5px;font-weight:600;background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:0 2px 10px #1b322514}
 .rm-filters button i{width:9px;height:9px;border-radius:50%;box-shadow:0 0 0 1.5px #fff;flex-shrink:0}
+/* Each chip carries both forms - a colour dot with its name, and an icon in
+   that same colour - and the screen picks one. There is room for the words
+   here, so the icon waits for the phone. */
+.rm-filters .rm-ico{display:none}
 .rm-filters button[aria-pressed=true]{background:var(--glass);color:var(--ink)}
 .rm-filters button:hover{background:var(--glass-hover)}
 .rm-filters button[aria-pressed=false]{background:rgba(255,255,255,.14);color:var(--muted);box-shadow:none}
-.rm-filters button[aria-pressed=false] i{opacity:.3}
+.rm-filters button[aria-pressed=false] i,.rm-filters button[aria-pressed=false] .rm-ico{opacity:.32}
 #app[data-scale=region] .side-tools,#app[data-scale=region] .model-scale,#app[data-scale=region] .gesture-help,
 #app[data-scale=region] .tool-dock{display:none}
 .model-scale{position:absolute;z-index:7;left:22px;bottom:max(22px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:5px;pointer-events:none;font-size:11px;color:var(--ink)}
@@ -528,9 +536,13 @@ h1 strong{font-weight:700}
   .gesture-help{display:none}
   .panel{top:auto;right:0;left:0;bottom:0;width:auto;max-width:none;border-radius:22px 22px 0 0;max-height:calc(100dvh - 110px);padding:15px 16px calc(15px + env(safe-area-inset-bottom))}
   .options-panel{bottom:0;max-height:calc(100dvh - 110px)}
-  .model-scale{left:12px;bottom:max(162px,calc(env(safe-area-inset-bottom) + 150px))}
-  .tool-dock{right:12px;bottom:max(162px,calc(env(safe-area-inset-bottom) + 150px))}
-  .tool-button{width:44px;height:44px}
+  /* The gear stood a hundred pixels above the dock with nothing between
+     them; on a phone it belongs at the top right, opposite the scale
+     picker, and the model scale sits just clear of the dock instead of
+     floating halfway up the drawing. */
+  .model-scale{left:12px;bottom:max(116px,calc(env(safe-area-inset-bottom) + 104px))}
+  .tool-button{width:40px;height:40px}
+  .tool-button svg{width:19px;height:19px}
   .lang-switch{padding:2px;gap:1px}
   .lang-flag{width:32px;height:32px}
   .rm-chip{font-size:10px;padding:3px 9px}
@@ -541,9 +553,21 @@ h1 strong{font-weight:700}
   .rm-info-body{font-size:10.5px;line-height:1.55}
   .rm-info-facts{gap:5px 10px;padding-top:8px;margin-top:9px}
   .rm-info-facts b{font-size:12px}
-  .rm-filters{left:12px;right:12px;transform:none;max-width:none;bottom:max(176px,calc(env(safe-area-inset-bottom) + 164px));flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
-  .rm-filters::-webkit-scrollbar{display:none}
-  .rm-filters button{min-height:30px;font-size:10.5px;padding:0 11px 0 8px;flex:0 0 auto;gap:6px}
+  /* Six named chips do not fit a phone: they ran off the right edge and the
+     row had to be scrolled to reach the last two. Each becomes its own icon
+     in the family's own colour, six across the width with nothing to scroll,
+     and the row sits a finger's width above the region panel rather than a
+     third of the way up the map. The name stays on the button as its label,
+     so a screen reader and a long press still read it. */
+  .rm-filters{left:12px;right:12px;transform:none;max-width:none;bottom:max(118px,calc(env(safe-area-inset-bottom) + 106px));flex-wrap:nowrap;justify-content:stretch;gap:5px}
+  .rm-filters button{min-height:38px;padding:0;flex:1 1 0;min-width:0;gap:0}
+  .rm-filters button i,.rm-filters button span{display:none}
+  .rm-filters .rm-ico{display:block;width:19px;height:19px;margin:0 auto}
+  /* With the name gone the icon is the whole button, so a closed family may
+     be quiet but must still be legible over the map - which the chip's own
+     faint state was not once there were no words beside it to carry it. */
+  .rm-filters button[aria-pressed=false]{background:rgba(255,255,255,.52)}
+  .rm-filters button[aria-pressed=false] .rm-ico{opacity:.5}
   .walk-close{right:12px;top:max(12px,env(safe-area-inset-top))}
   .walk-room-panel{left:12px;transform:none;bottom:max(14px,env(safe-area-inset-bottom));min-width:0;max-width:calc(100% - 190px);padding:9px 12px}
   .walk-lens{left:12px;bottom:max(172px,calc(env(safe-area-inset-bottom) + 160px));padding:7px 12px;gap:8px}
@@ -552,6 +576,10 @@ h1 strong{font-weight:700}
   .walk-pad{right:12px;bottom:max(14px,env(safe-area-inset-bottom));grid-template-columns:repeat(3,44px);grid-template-rows:repeat(2,44px);gap:4px}
   #app[data-walk=true] .view-description{top:62px}
   #app[data-walk=true] .gesture-help{display:none}
+  /* "kamera acilarinin boyutunu kucult" - the same mark, drawn smaller about
+     its own dot, so a crowded storey reads as a drawing again. The dot keeps
+     its place exactly; only the rays get shorter. */
+  .photo-pin svg{transform:translate(-6px,-14px) rotate(var(--pin-angle,0deg)) scale(.66)}
   .photo-backdrop{display:block}
   .photo-dock{right:auto;left:0;width:100%;top:0;bottom:0;justify-items:center;align-content:center}
   .photo-view{width:80vw;max-width:80vw;max-height:80dvh}

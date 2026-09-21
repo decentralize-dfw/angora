@@ -24,6 +24,23 @@ const AREAS = [
 ];
 // one label per amenity group, in places.groups order (see the extractor)
 const GROUP_KEYS = ['groupEdu', 'groupHealth', 'groupFood', 'groupShop', 'groupSport', 'groupService'];
+// One drawing per family, in that family's own colour. Six named chips do not
+// fit across a phone - the row ran off the right edge and the last two had to
+// be scrolled to - so on a phone the name comes off the button and this takes
+// its place: a cap, a cross, a fork and knife, a bag, a tree and a civic
+// front, which is about as close to unambiguous as a 19 px mark gets. The
+// name stays on the button as its label, so nothing is lost to a reader.
+const GROUP_ICONS = [
+  '<path d="M8 2.6 15 5.9 8 9.2 1 5.9Z" fill="currentColor" stroke="none"/><path d="M4.3 7.5v3c0 1.3 7.4 1.3 7.4 0v-3"/>',
+  '<path d="M6.5 2.4h3v4.1h4.1v3h-4.1v4.1h-3V9.5H2.4v-3h4.1Z" fill="currentColor" stroke="none"/>',
+  '<path d="M4 2.4v3.1M6 2.4v3.1M8 2.4v3.1M4 5.5h4M6 5.5v8.1"/><path d="M10.9 2.4c1.5 1 1.5 5.4 0 6.4v4.8"/>',
+  '<path d="M3.6 5.7h8.8l-.8 7.9H4.4Z"/><path d="M6.2 5.7V4.4a1.8 1.8 0 0 1 3.6 0v1.3"/>',
+  '<path d="M8 2.2 4.6 7.1h6.8Z"/><path d="M8 5.7 3.6 11.5h8.8Z"/><path d="M8 11.5v2.3"/>',
+  '<path d="M2.4 6.5 8 3.2l5.6 3.3"/><path d="M4.6 7.9v4.2M8 7.9v4.2M11.4 7.9v4.2"/><path d="M2.8 13.3h10.4"/>',
+];
+const groupIcon = (g, color) =>
+  `<svg class="rm-ico" viewBox="0 0 16 16" style="color:${color}" fill="none" stroke="currentColor"` +
+  ` stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${GROUP_ICONS[g]}</svg>`;
 const svgNS = 'http://www.w3.org/2000/svg';
 const km = (m) => (m < 950 ? `${m} m` : `${(m / 1000).toFixed(1).replace('.', ',')} km`);
 
@@ -158,7 +175,11 @@ export function createRegionMap(host) {
     const b = document.createElement('button');
     b.type = 'button';
     b.setAttribute('aria-pressed', 'false');
-    b.innerHTML = `<i style="background:${color}"></i>${t(GROUP_KEYS[g])}`;
+    // Both forms travel on the button; the screen decides which is drawn.
+    const name = t(GROUP_KEYS[g]);
+    b.innerHTML = `<i style="background:${color}"></i>${groupIcon(g, color)}<span>${name}</span>`;
+    b.setAttribute('aria-label', name);
+    b.title = name;
     b.onclick = () => {
       if (activeGroup !== null) {
         off.add(activeGroup); el.classList.add(`rm-off-${activeGroup}`);

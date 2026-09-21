@@ -95,27 +95,3 @@ test('A frame marked on several storeys follows them, and only an outdoor one is
   // basement's own garden and are not repeated up the building.
   for (const id of [25, 27]) assert.deepEqual(PHOTO_POINTS.find(p => p.id === id).floors ?? [0], [0]);
 });
-
-// A garden viewpoint is twenty metres outside the storey the drawing frames,
-// so the mark has to be brought back to the edge rather than dropped. What
-// must survive that is the bearing: the held mark still says which way the
-// photograph was taken from.
-test('A mark the frame cannot contain holds the edge on its own bearing', async () => {
-  const {holdToFrame, HOLD} = await import('../src/photo-gallery.js');
-  const w = 1440, h = 900, inside = holdToFrame(700, 400, w, h);
-  assert.deepEqual([inside.x, inside.y, inside.held], [700, 400, false]);
-  // The safe frame is the interface's own room, read from the module rather
-  // than restated here, so moving an inset moves the test with it.
-  const left = HOLD.side, right = w - HOLD.side, top = HOLD.top, bottom = h - HOLD.bottom;
-  const cx = (left + right) / 2, cy = (top + bottom) / 2;
-  for (const [x, y] of [[3200, -400], [-900, 500], [720, 2400], [1600, 880]]) {
-    const held = holdToFrame(x, y, w, h);
-    assert.equal(held.held, true);
-    assert.ok(held.x >= left - 1e-6 && held.x <= right + 1e-6 && held.y >= top - 1e-6 && held.y <= bottom + 1e-6,
-      `held mark left the safe frame at ${held.x},${held.y}`);
-    assert.ok(Math.abs(Math.atan2(held.y - cy, held.x - cx) - Math.atan2(y - cy, x - cx)) < 1e-9,
-      'a held mark changed the direction it went out on');
-  }
-  // A frame with no inside cannot hold anything, and must not invent a place.
-  assert.deepEqual(holdToFrame(10, 10, 50, 50), {x: 10, y: 10, held: false});
-});

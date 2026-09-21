@@ -153,3 +153,16 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
  #app[data-delivery=native] .explore-dock{bottom:calc(env(safe-area-inset-bottom) + 12px);left:12px;right:12px;transform:none;width:auto}
  .region-panel{left:12px;right:12px;bottom:12px;max-width:none}
 }
+
+/* R47 | "mobile mahsus, settings i sag en uste koy". The gear's phone anchor
+   is settled here, after the landscape block above that would otherwise pull
+   it back down to the bottom edge and leave it stretched between the two.
+   Opposite the scale picker, clear of the top bar, and out of the drawing's
+   bottom half where the dock and the floor row already live. The press target
+   follows the mark down to its drawn size, so crowded marks stop taking one
+   another's presses now that none of them steps aside. */
+@media(max-width:720px) {
+  .tool-dock {top:max(64px,calc(env(safe-area-inset-top) + 56px));bottom:auto;right:max(12px,env(safe-area-inset-right));}
+  .tool-button {min-width:40px;min-height:40px;}
+  .photo-pin {min-width:30px;min-height:30px;}
+}
