@@ -245,6 +245,40 @@ Kesit üretimi normal Python ortamında NumPy, Shapely ve mapbox-earcut kullanı
   Görünüm` adımları sırayla yanar. Çubuk dolduğunda ilk kare zaten çizilmiştir,
   ekran beklemeden kapanır.
 
+### R47 ikinci tur — kamera işareti, basma hedefi, ayrık sayfalar ve oda plakaları
+
+- **İşaret artık kamera.** Numaralı rozet kaldırıldı: nokta fotoğrafçının
+  durduğu yer, iki ışın objektifin açısı, noktadan inen ince kesikli çizgi de
+  o katın döşemesine iner — işaret kalabalıktan ötürü kenara çekildiğinde bile
+  çizgi gerçek noktasına bağlı kalır. İki işaret arasında 36 px açıklık
+  korunur; sıkışan işaret genişleyen bir halka üzerinde boş yer arar, bu
+  yüzden hiçbir kamera konumu bir diğerinin altında kaybolmaz.
+- **Basma.** İşaret `click` yerine `pointerdown` ile açılır. İşaret her
+  çizilen karede yeniden konumlandığı için, kamera otururken parmağın
+  kalktığı eleman bastığı eleman olmuyor, tarayıcı da click üretmiyordu —
+  "bazen tek basışta açılıyor, bazen beş basış yetmiyor" bundandı. Basma
+  hedefi de döndürülmüş kutu değil, kamera noktasındaki 34 px'lik daire;
+  daireler korunan açıklıktan küçük olduğu için birbirinin basmasını
+  çalamaz. Ölçülen açılma süresi 5–19 ms.
+- **Hiçbir şey çakışmaz.** Görünüm sayfası kendi dişlisinin üstünde açılır;
+  her sayfanın köşesi ve yükseklik sınırı sabittir; fotoğraf çerçevesi ise
+  açık sayfalardan arta kalan banda yerleşir ve bant 300 px'in altına
+  düşerse boş olan sol sütuna geçer. Çerçeve açıkken kat çizimi projeksiyon
+  kaydırmasıyla çerçevenin altından çıkar (tuval yeniden boyutlanmaz, yalnız
+  projeksiyon kayar), böylece altında kalan hiçbir işaret erişilmez olmaz.
+  Plan ölçüleri de kamera işaretlerini engel sayar.
+- **Oda etiketleri.** Beyaz hale okunurluk değil pusluluk üretiyordu; yerine
+  %40 beyaz, yuvarlatılmış bir plaka geldi. Plaka, odanın kayıtlı x/z
+  ölçülerinden kurulan dikdörtgenin ekrana düşen dörtgeninin içine sığacak
+  şekilde ölçeklenir — dört kenarın her biri bir sınır verir, model hangi
+  açıya çevrilirse çevrilsin etiket odanın dışına taşmaz — ve sığmıyorsa
+  etiket hiç çizilmez.
+- **Üç ayrı sayfa.** `Kat bilgisi` yalnız Villa ölçeğinde görünür ve yalnız
+  açık katı anlatır (katın kendi metni, kaplama izdüşümü, mahal listesi).
+  `Mülk bilgisi` yalnız ilandır. Bölge metni (Çayyolu, Angora Evleri,
+  ulaşım) bölge paneline taşındı ve donatı çipleri, yerleşke panelinin
+  altında kaybolmasınlar diye alt ortaya alındı.
+
 ## R44 — beyaz iç mekânlar, bodrum dolgusu, dış mekân yürüyüşü ve birleşik model
 
 R44 dört isteği işler; araçlar `tools/*_r44.mjs` altındadır ve her biri kendi

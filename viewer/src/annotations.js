@@ -39,6 +39,17 @@ export function createAnnotations(data,host,onRoom) {
   const overlay=document.createElement('div');overlay.className='annotation-overlay';host.append(overlay);
   const leaders=document.createElementNS('http://www.w3.org/2000/svg','svg');leaders.classList.add('annotation-leaders');overlay.append(leaders);
   const names=[],dimensions=[],point=new THREE.Vector3();
+  // Every room in the register carries its measured x and z spans, so the
+  // rectangle a name has to stay inside is known rather than guessed.
+  const spanOf=room=>{
+    const span={x:0,z:0};
+    for(const id of room.dimensions??[]){
+      const dim=data.dimensions?.find(entry=>entry.id===id);if(!dim)continue;
+      const axis=Math.abs(dim.b[0]-dim.a[0])>=Math.abs(dim.b[2]-dim.a[2])?'x':'z';
+      span[axis]=Math.max(span[axis],dim.metres);
+    }
+    return span;
+  };
   const material=new THREE.LineBasicMaterial({color:0x315e5c,depthTest:false,depthWrite:false,toneMapped:false});
   const measuredMaterial=new THREE.LineDashedMaterial({color:0x6d8a82,dashSize:.16,gapSize:.12,
     depthTest:false,depthWrite:false,toneMapped:false});
@@ -55,7 +66,10 @@ export function createAnnotations(data,host,onRoom) {
     meta.append(area);card.append(name,meta);el.append(card);
     el.setAttribute('aria-label',`${room.name} ${area.textContent}`);
     overlay.append(el);
-    names.push({el,kind:'name',position:new THREE.Vector3(...room.position),floor:room.floor_index});
+    const span=spanOf(room);
+    names.push({el,kind:'name',position:new THREE.Vector3(...room.position),floor:room.floor_index,
+      span,corners:[[-1,-1],[1,-1],[1,1],[-1,1]].map(([sx,sz])=>
+        new THREE.Vector3(room.position[0]+sx*span.x/2,room.position[1],room.position[2]+sz*span.z/2))});
   }
   // Both axes, on every room that has them. Only 24 of the 53 spans are project
   // dimensions, so for a long time only those were drawn - and since the rooms
@@ -80,6 +94,29 @@ export function createAnnotations(data,host,onRoom) {
     el.title=dim.basis==='dwg_verified'?'Çizimde belirtilen ölçü':dim.boundary_kind==='floor_edge'?'Modelde döşeme sınırları arasındaki ölçü':'Model üzerinden ölçülen açıklık';
     overlay.append(el);dimensions.push({el,line,a,b,position:a.clone().add(b).multiplyScalar(.5),floor:dim.floor_index,roomId:dim.room_id,measured});
   }
+  // The largest uniform scale at which a w×h upright plate centred at (cx,cy)
+  // still fits inside a convex screen quad. Each edge gives one bound; the
+  // outward normal is the one pointing away from the quad's own centre, so the
+  // winding of the projection - which flips as the model is orbited - cannot
+  // invert the test. This is what keeps a room's name inside that room's
+  // floor from every angle instead of bleeding over the wall.
+  function fitInside(quad,cx,cy,w,h) {
+    let gx=0,gy=0;
+    for(const p of quad){gx+=p[0]/4;gy+=p[1]/4;}
+    let fit=Infinity;
+    for(let i=0;i<4;i++){
+      const a=quad[i],b=quad[(i+1)%4];
+      let nx=b[1]-a[1],ny=a[0]-b[0];
+      const length=Math.hypot(nx,ny);if(length<1e-6)continue;
+      nx/=length;ny/=length;
+      if(nx*(gx-a[0])+ny*(gy-a[1])>0){nx=-nx;ny=-ny;}
+      const room=nx*a[0]+ny*a[1]-(nx*cx+ny*cy);
+      const reach=Math.abs(nx)*w/2+Math.abs(ny)*h/2;
+      if(reach<1e-6)continue;
+      fit=Math.min(fit,room/reach);
+    }
+    return fit;
+  }
   function project(entry,camera,w,h,size) {
     point.copy(entry.position).project(camera);
     const visible=point.z>-1&&point.z<1;
@@ -88,7 +125,8 @@ export function createAnnotations(data,host,onRoom) {
     entry.el.style.left=`${x}px`;entry.el.style.top=`${y}px`;entry.el.style.fontSize=`${size}px`;
     return {x,y};
   }
-  return {group,data,update(view,showNames,showDimensions,transitioning,walking,camera,walkRoom) {
+  const corner=new THREE.Vector3();
+  return {group,data,update(view,showNames,showDimensions,transitioning,walking,camera,walkRoom,extraObstacles=[]) {
     const floor=/^f[0-3]$/.test(view)?Number(view[1]):-1;
     const w=host.clientWidth,h=host.clientHeight;
     camera.updateMatrixWorld();
@@ -99,8 +137,22 @@ export function createAnnotations(data,host,onRoom) {
       const distance=Math.max(1,entry.position.distanceTo(camera.position));
       const ppm=camera.isPerspectiveCamera?h*camera.zoom/(2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*distance):h*camera.zoom/(camera.top-camera.bottom);
       const p=project(entry,camera,w,h,labelFontSize(ppm));
-      if(p)candidates.push({...p,entry,width:entry.el.offsetWidth,height:entry.el.offsetHeight});
+      if(!p)continue;
+      // The tag is a plate now, not glowing text, so it has to earn its area:
+      // it shrinks until it sits inside its own room and disappears when that
+      // room is too small on screen to carry a legible one.
+      const width=entry.el.offsetWidth,height=entry.el.offsetHeight;
+      let fit=1;
+      if(entry.span.x>0&&entry.span.z>0){
+        const quad=entry.corners.map(v=>{corner.copy(v).project(camera);
+          return [(corner.x+1)*w/2,(1-corner.y)*h/2];});
+        fit=Math.max(0,Math.min(1,fitInside(quad,p.x,p.y,width,height)));
+      }
+      if(fit<0.56){entry.el.hidden=true;continue;}
+      entry.el.style.setProperty('--label-fit',fit.toFixed(3));
+      candidates.push({...p,entry,width:width*fit,height:height*fit});
     }
+    const nameCount=candidates.length;
     for(const entry of dimensions) {
       const visible=entry.floor===floor&&showDimensions&&!transitioning&&(!walking||entry.roomId===walkRoom);
       entry.line.visible=visible;entry.el.hidden=!visible;
@@ -120,8 +172,10 @@ export function createAnnotations(data,host,onRoom) {
         batch.visible=values.length>0;if(index&&values.length)batch.computeLineDistances();
       });
     }
-    // Names are placed first, then dimensions avoid both names and controls.
-    const placed=layoutDimensionLabels(candidates,{width:w,height:h,obstacles});
+    // Names are placed first, then dimensions avoid the names, the controls
+    // AND the photograph marks - a measurement printed under a camera pin is
+    // two drawings on one spot, which is what the owner saw on the attic plan.
+    const placed=layoutDimensionLabels(candidates,{width:w,height:h,obstacles,extraFrom:nameCount,extraObstacles});
     for(const item of candidates)item.entry.el.hidden=true;
     leaders.replaceChildren();leaders.setAttribute('viewBox',`0 0 ${w} ${h}`);
     for(const entry of dimensions.filter(e=>e.line.visible)){
@@ -139,6 +193,9 @@ export function createAnnotations(data,host,onRoom) {
     }
     for(const {entry,x,y,anchorX,anchorY,rect} of placed){
       entry.el.hidden=false;entry.el.style.left=`${x}px`;entry.el.style.top=`${y}px`;
+      // A name that had to leave its anchor is no longer inside its room, so
+      // it gives up the plate and goes back to reading over the drawing.
+      if(entry.kind==='name')entry.el.dataset.plate=Math.hypot(x-anchorX,y-anchorY)>6?'off':'on';
       if(Math.hypot(x-anchorX,y-anchorY)>6){
         const line=document.createElementNS(leaders.namespaceURI,'line');
         line.setAttribute('x1',anchorX);line.setAttribute('y1',anchorY);

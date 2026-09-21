@@ -47,9 +47,15 @@ function measureUIObstacles(host) {
 
 // Search real free space instead of silently discarding crowded dimensions.
 // A leader preserves the association with the measured wall-to-wall line.
-export function layoutDimensionLabels(items,{width,height,obstacles=[],gap=3,padding=8}) {
+// extraFrom / extraObstacles: the items from that index on (the plan's
+// dimension tags) also keep clear of a second set of rectangles - the
+// photograph marks - which the names before them are allowed to sit among.
+export function layoutDimensionLabels(items,{width,height,obstacles=[],gap=3,padding=8,extraFrom=Infinity,extraObstacles=[]}) {
   const occupied=obstacles.slice(),placed=[];
+  let index=-1;
   for(const item of items){
+    index++;
+    const blocked=index>=extraFrom&&extraObstacles.length?occupied.concat(extraObstacles):occupied;
     const halfW=item.width/2,halfH=item.height/2;
     if(![item.x,item.y,halfW,halfH].every(Number.isFinite))continue;
     const minX=padding+halfW,maxX=width-padding-halfW,minY=padding+halfH,maxY=height-padding-halfH;
@@ -58,7 +64,7 @@ export function layoutDimensionLabels(items,{width,height,obstacles=[],gap=3,pad
       if(x<minX||x>maxX||y<minY||y>maxY)return;
       const cost=(x-item.x)**2+(y-item.y)**2;if(cost>=bestCost)return;
       const rect={left:x-halfW,right:x+halfW,top:y-halfH,bottom:y+halfH};
-      if(occupied.some(other=>rectanglesOverlap(rect,other,gap)))return;
+      if(blocked.some(other=>rectanglesOverlap(rect,other,gap)))return;
       best={...item,x,y,rect,anchorX:item.x,anchorY:item.y};bestCost=cost;
     };
     consider(item.x,item.y);

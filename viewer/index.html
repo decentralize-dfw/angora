@@ -28,7 +28,8 @@
         <button type="button" class="lang-flag" data-lang="tr" aria-pressed="true" aria-label="Türkçe" title="Türkçe"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#e30a17"/><circle cx="9.1" cy="8" r="4" fill="#fff"/><circle cx="10.5" cy="8" r="3.2" fill="#e30a17"/><path fill="#fff" d="m14.9 5.5.56 1.73h1.82l-1.47 1.07.56 1.73-1.47-1.07-1.47 1.07.56-1.73-1.47-1.07h1.82z"/></svg></button>
         <button type="button" class="lang-flag" data-lang="en" aria-pressed="false" aria-label="English" title="English"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#012169"/><path d="M0 0 24 16M24 0 0 16" stroke="#fff" stroke-width="3.2"/><path d="M0 0 24 16M24 0 0 16" stroke="#c8102e" stroke-width="1.8"/><path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="5.2"/><path d="M12 0v16M0 8h24" stroke="#c8102e" stroke-width="3"/></svg></button>
       </div>
-      <button id="open-info" class="quiet-button" aria-expanded="false" aria-controls="info-panel" data-i18n="info" data-i18n-title="infoTitle">Mülk bilgisi</button>
+      <button id="open-floor" class="quiet-button" aria-expanded="false" aria-controls="floor-panel" data-i18n-label="floorInfo" data-i18n-title="floorInfoTitle" aria-label="Kat bilgisi"><span class="label-long" data-i18n="floorInfo">Kat bilgisi</span><span class="label-short" data-i18n="floorInfoShort">Kat</span></button>
+      <button id="open-info" class="quiet-button" aria-expanded="false" aria-controls="info-panel" data-i18n-label="info" data-i18n-title="infoTitle" aria-label="Mülk bilgisi"><span class="label-long" data-i18n="info">Mülk bilgisi</span><span class="label-short" data-i18n="infoShort">Mülk</span></button>
     </div>
   </header>
   <nav class="scale-picker" aria-label="Görünüm ölçeği">
@@ -72,6 +73,10 @@
       <div class="qa-actions"><button id="qa-start" data-needs-model disabled>15 sn ölç</button><button id="qa-save" disabled>Raporu indir</button><button id="qa-screenshot" data-needs-model disabled>Sahneyi indir</button></div>
       <p id="qa-result" role="status">Henüz ölçüm yok. Ölçüm, gerçek cihaz veya görsel kalite onayı değildir.</p>
     </details>
+  </section>
+  <section id="floor-panel" class="panel floor-panel" aria-label="Kat bilgileri" hidden>
+    <div class="panel-heading"><h2 id="floor-panel-title">Kat bilgisi</h2><button data-close-panel="floor-panel" data-i18n-label="closeFloor" aria-label="Kat bilgilerini kapat">×</button></div>
+    <div id="floor-info"></div>
   </section>
   <section id="info-panel" class="panel info-panel" aria-label="Villa bilgileri" hidden>
     <div class="panel-heading"><h2>Angora 21</h2><button data-close-panel="info-panel" data-i18n-label="closeInfo" aria-label="Bilgileri kapat">×</button></div>
@@ -120,11 +125,13 @@
        wash the brief asks for; on a desktop the frame sits at the right edge
        and the model stays visible and usable beside it. -->
   <div id="photo-backdrop" class="photo-backdrop" hidden></div>
-  <figure id="photo-view" class="photo-view" aria-label="Seçilen fotoğraf" hidden>
-    <button id="photo-close" class="photo-close" data-i18n-label="closePhoto" aria-label="Fotoğrafı kapat">×</button>
-    <img id="photo-image" alt="" decoding="async" />
-    <figcaption id="photo-caption"></figcaption>
-  </figure>
+  <div id="photo-dock" class="photo-dock" hidden>
+    <figure id="photo-view" class="photo-view" aria-label="Seçilen fotoğraf">
+      <button id="photo-close" class="photo-close" data-i18n-label="closePhoto" aria-label="Fotoğrafı kapat">×</button>
+      <img id="photo-image" alt="" decoding="async" />
+      <figcaption id="photo-caption"></figcaption>
+    </figure>
+  </div>
   <section id="welcome" class="welcome" role="dialog" aria-labelledby="welcome-title" hidden>
     <button id="welcome-close" class="welcome-close" data-i18n-label="welcomeClose" aria-label="Kapat">×</button>
     <p class="welcome-brand">MERGVS</p>

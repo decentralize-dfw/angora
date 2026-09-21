@@ -140,10 +140,10 @@ export function createRegionMap(host) {
   const info = document.createElement('aside');
   info.className = 'rm-info';
   info.setAttribute('aria-label', 'Angora Evleri hakkında');
+  const area = listing(currentLang()).region;
   info.innerHTML =
-    '<h3>Angora Evleri</h3><p class="rm-info-set">Mutlukent · Çankaya, Ankara</p>' +
-    `<p class="rm-info-body">${t('regionIntro')}</p>` +
-    `<p class="rm-info-body rm-info-location">${listing(currentLang()).location}</p>`;
+    `<h3>Angora Evleri</h3><p class="rm-info-set">${area.set}</p>` +
+    area.body.map(text => `<p class="rm-info-body">${text}</p>`).join('');
   // One amenity family at a time: the map opens as the bare plan - every
   // category off - and a chip turns exactly one on; pressing it again, or
   // pressing another, puts it away ("hepsi kapalı gelsin, tek bir şey").
