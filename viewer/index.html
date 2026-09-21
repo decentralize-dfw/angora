@@ -24,7 +24,10 @@
   <header class="topbar">
     <div class="identity"><span class="brand">MERGVS</span><span class="brand-divider"></span><h1>Angora <strong>21</strong></h1></div>
     <div class="top-actions">
-      <button id="lang-toggle" class="quiet-button" aria-label="Switch language / Dil değiştir">EN</button>
+      <div class="lang-switch" role="group" aria-label="Dil / Language">
+        <button type="button" class="lang-flag" data-lang="tr" aria-pressed="true" aria-label="Türkçe" title="Türkçe"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#e30a17"/><circle cx="9.1" cy="8" r="4" fill="#fff"/><circle cx="10.5" cy="8" r="3.2" fill="#e30a17"/><path fill="#fff" d="m14.9 5.5.56 1.73h1.82l-1.47 1.07.56 1.73-1.47-1.07-1.47 1.07.56-1.73-1.47-1.07h1.82z"/></svg></button>
+        <button type="button" class="lang-flag" data-lang="en" aria-pressed="false" aria-label="English" title="English"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#012169"/><path d="M0 0 24 16M24 0 0 16" stroke="#fff" stroke-width="3.2"/><path d="M0 0 24 16M24 0 0 16" stroke="#c8102e" stroke-width="1.8"/><path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="5.2"/><path d="M12 0v16M0 8h24" stroke="#c8102e" stroke-width="3"/></svg></button>
+      </div>
       <button id="open-info" class="quiet-button" aria-expanded="false" aria-controls="info-panel" data-i18n="info" data-i18n-title="infoTitle">Mülk bilgisi</button>
     </div>
   </header>
@@ -34,11 +37,16 @@
     <button data-view="building" aria-pressed="true" data-i18n="scaleVilla">Villa</button>
   </nav>
   <div class="view-description"><h2 id="view-title">Villa 21</h2><p id="section-label">Bahçe · Havuz · Villa</p></div>
+  <!-- The rail keeps only the slow-orbit toggle, which exists for the street
+       scale alone. Walking in and recentring stay wired and scripted; they are
+       simply not drawn over the model any more. -->
   <div class="side-tools">
-    <button id="enter-walk" title="Bu katta içeride gez" disabled>İçeride gez</button>
+    <button id="enter-walk" class="tool-retired" title="Bu katta içeride gez" disabled>İçeride gez</button>
     <button id="toggle-auto-rotate" aria-label="Yavaş otomatik dönüş" aria-pressed="false" title="Yavaş otomatik dönüş">↻</button>
-    <button id="open-options" aria-expanded="false" aria-controls="options-panel" title="Mobilya, ölçüler ve ışık">Ayar</button>
-    <button id="reset-view" aria-label="Görünümü ortala" title="Ortala">⌖</button>
+    <button id="reset-view" class="tool-retired" aria-label="Görünümü ortala" title="Ortala">⌖</button>
+  </div>
+  <div class="tool-dock">
+    <button id="open-options" class="tool-button" aria-expanded="false" aria-controls="options-panel" data-i18n-label="options" data-i18n-title="optionsTitle" aria-label="Görünüm" title="Mobilya, ölçüler ve ışık"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.05"/><path d="M19.05 14.6a1.55 1.55 0 0 0 .31 1.72l.06.05a1.88 1.88 0 1 1-2.66 2.66l-.05-.06a1.55 1.55 0 0 0-1.72-.31 1.55 1.55 0 0 0-.94 1.42v.16a1.88 1.88 0 1 1-3.76 0v-.09a1.55 1.55 0 0 0-1.01-1.42 1.55 1.55 0 0 0-1.72.31l-.05.06a1.88 1.88 0 1 1-2.66-2.66l.06-.05a1.55 1.55 0 0 0 .31-1.72 1.55 1.55 0 0 0-1.42-.94h-.16a1.88 1.88 0 1 1 0-3.76h.09a1.55 1.55 0 0 0 1.42-1.01 1.55 1.55 0 0 0-.31-1.72l-.06-.05a1.88 1.88 0 1 1 2.66-2.66l.05.06a1.55 1.55 0 0 0 1.72.31h.07a1.55 1.55 0 0 0 .94-1.42v-.16a1.88 1.88 0 1 1 3.76 0v.09a1.55 1.55 0 0 0 .94 1.42 1.55 1.55 0 0 0 1.72-.31l.05-.06a1.88 1.88 0 1 1 2.66 2.66l-.06.05a1.55 1.55 0 0 0-.31 1.72v.07a1.55 1.55 0 0 0 1.42.94h.16a1.88 1.88 0 1 1 0 3.76h-.09a1.55 1.55 0 0 0-1.42.94z"/></svg></button>
   </div>
   <section id="options-panel" class="panel options-panel" aria-label="Görünüm ayarları" hidden>
     <div class="panel-heading"><h2 data-i18n="optionsHeading">Görünüm</h2><button data-close-panel="options-panel" data-i18n-label="closeOptions" aria-label="Ayarları kapat">×</button></div>
@@ -46,16 +54,17 @@
       <button id="toggle-furniture" aria-pressed="true" disabled data-i18n="furniture">Mobilya</button>
       <button id="toggle-rooms" aria-pressed="true" disabled data-i18n="roomNames">Oda adları</button>
       <button id="toggle-measurements" aria-pressed="false" disabled data-i18n="measurements">Ölçüler</button>
+      <button id="toggle-photos" aria-pressed="false" disabled data-i18n="photos">Fotoğraflar</button>
     </div>
     <div class="daylight-heading"><label for="daylight-hour" data-i18n="daylight">Gün ışığı</label><output id="daylight-time" for="daylight-hour">12:30</output></div>
-    <label class="lighting-choice" for="lighting-style"><span data-i18n="light">Işık</span> <select id="lighting-style"><option value="soft" data-i18n="lightSoft">Yumuşak gün ışığı</option><option value="sun" data-i18n="lightSun">Doğrudan güneş</option></select></label>
+    <label class="lighting-choice option-hidden" for="lighting-style"><span data-i18n="light">Işık</span> <select id="lighting-style"><option value="soft" data-i18n="lightSoft">Yumuşak gün ışığı</option><option value="sun" data-i18n="lightSun">Doğrudan güneş</option></select></label>
     <input id="daylight-hour" type="range" min="6" max="21" step="0.0833333333" value="12.5" aria-label="Gün ışığı saati" />
     <div class="range-endpoints"><span>06:00</span><span>21:00</span></div>
-    <div class="daylight-footer"><select id="daylight-season" aria-label="Gün ışığı tarihi"><option value="172">21 Haziran</option><option value="80">21 Mart</option><option value="355">21 Aralık</option></select><button id="toggle-lights" aria-pressed="true" data-i18n="interiorLights">İç ışıklar</button></div>
-    <p class="small-note" id="solar-note" data-i18n="solarNote">Yerel saat · Görsel gün ışığı çalışması; sertifikalı analiz değildir</p>
-    <p class="small-note" id="cut-light-note" data-i18n="cutLightNote" hidden>Kesit görünümündeki aydınlık gösterim amaçlıdır; kapalı hacim ışığı 360° turda görülür.</p>
-    <div class="scene-options"><button id="toggle-sound" aria-pressed="false" data-i18n="soundOff">Arayüz sesi kapalı</button></div>
-    <details class="device-qa">
+    <div class="daylight-footer"><select id="daylight-season" class="option-hidden" aria-label="Gün ışığı tarihi"><option value="172">21 Haziran</option><option value="80">21 Mart</option><option value="355">21 Aralık</option></select><button id="toggle-lights" aria-pressed="true" data-i18n="interiorLights">İç ışıklar</button></div>
+    <p class="small-note option-hidden" id="solar-note" data-i18n="solarNote">Yerel saat · Görsel gün ışığı çalışması; sertifikalı analiz değildir</p>
+    <p class="small-note option-hidden" id="cut-light-note" data-i18n="cutLightNote" hidden>Kesit görünümündeki aydınlık gösterim amaçlıdır; kapalı hacim ışığı 360° turda görülür.</p>
+    <div class="scene-options option-hidden"><button id="toggle-sound" aria-pressed="false" data-i18n="soundOff">Arayüz sesi kapalı</button></div>
+    <details class="device-qa option-hidden">
       <summary>Cihaz ve görüntü kontrolü</summary>
       <p>15 saniye boyunca sahneyi hareket ettir. Ölçüm ve görüntüler yalnızca cihazına indirilir; otomatik gönderilmez.</p>
       <label for="qa-device">Cihaz modeli / sistem sürümü (isteğe bağlı)</label>
@@ -107,6 +116,15 @@
       <button data-walk-direction="KeyS" class="walk-back" aria-label="Geri yürü">↓</button>
     </div>
   </section>
+  <!-- One frame at a time. On a phone the backdrop behind it is the 60 % white
+       wash the brief asks for; on a desktop the frame sits at the right edge
+       and the model stays visible and usable beside it. -->
+  <div id="photo-backdrop" class="photo-backdrop" hidden></div>
+  <figure id="photo-view" class="photo-view" aria-label="Seçilen fotoğraf" hidden>
+    <button id="photo-close" class="photo-close" data-i18n-label="closePhoto" aria-label="Fotoğrafı kapat">×</button>
+    <img id="photo-image" alt="" decoding="async" />
+    <figcaption id="photo-caption"></figcaption>
+  </figure>
   <section id="welcome" class="welcome" role="dialog" aria-labelledby="welcome-title" hidden>
     <button id="welcome-close" class="welcome-close" data-i18n-label="welcomeClose" aria-label="Kapat">×</button>
     <p class="welcome-brand">MERGVS</p>
@@ -134,7 +152,7 @@
   <div id="qa-status" class="device-qa-status" role="status" hidden></div>
   <div id="boot" class="boot" role="presentation">
     <div class="boot-brand"><span class="brand">MERGVS</span><span class="brand-divider"></span><span class="boot-title">Angora <strong>21</strong></span></div>
-    <div class="load-status" id="load-status" role="status" aria-live="polite"><span class="spinner" aria-hidden="true"></span><span class="load-copy"><span class="load-line"><span id="load-message">Model yükleniyor…</span><span id="load-percent" aria-hidden="true"></span></span><span class="load-bar" id="load-bar" aria-hidden="true" hidden><i></i></span></span><button id="retry" hidden data-i18n="retry">Tekrar dene</button></div>
+    <div class="load-status" id="load-status" role="status" aria-live="polite"><span class="spinner" aria-hidden="true"></span><span class="load-copy"><span class="load-line"><span id="load-message">Model yükleniyor…</span><span id="load-percent" aria-hidden="true"></span></span><span class="load-bar" id="load-bar" aria-hidden="true" hidden><i></i></span><span class="load-steps" id="load-steps" aria-hidden="true"><span data-step="model" data-i18n="stepModel">Model</span><span data-step="light" data-i18n="stepLight">Işık</span><span data-step="scene" data-i18n="stepScene">Sahne</span><span data-step="view" data-i18n="stepView">Görünüm</span></span></span><button id="retry" hidden data-i18n="retry">Tekrar dene</button></div>
     <div id="no3d" class="no3d" hidden>
       <p data-i18n="fallbackLead">3D görünüm bu cihazda başlatılamadı. Mülkün doğrulanmış bilgileri yine buradadır:</p>
       <ul class="welcome-facts">

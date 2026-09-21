@@ -9,6 +9,7 @@ baseline-tests.txt
 interaction-tests.txt
 viewer/public/models/native-current/
 viewer/public/models/batched/
+viewer/public/photogallery/
 tools/batch-delivery/node_modules/
 viewer/native-tests.txt
 build/web/batched/lighting/*.png
