@@ -84,10 +84,18 @@ export function createPhotoPins(host, root, {onOpen}) {
 // or by switching the photographs off again in the view options.
 export function createPhotoViewer({figure, image, caption, close, backdrop, pins, onClose}) {
   let open = null;
+  // A listing frame is half a megabyte, and on a phone that is a second of
+  // nothing. The frame therefore opens at a readable size straight away and
+  // says it is working; the picture fades in over it. A token guards against
+  // a slow frame landing after the visitor has moved to the next pin.
+  image.onload = () => {if (image.dataset.token === String(open)) figure.dataset.state = 'ready';};
+  image.onerror = () => {if (image.dataset.token === String(open)) figure.dataset.state = 'error';};
   function show(id) {
     const point = pins.point(id);
     if (!point) return;
     open = id;
+    figure.dataset.state = 'loading';
+    image.dataset.token = String(id);
     image.src = pins.file(id);
     image.alt = photoCaption(point, currentLang());
     caption.textContent = `${photoCaption(point, currentLang())} · ${id}`;
@@ -104,6 +112,7 @@ export function createPhotoViewer({figure, image, caption, close, backdrop, pins
     // Release the decoded frame; a phone holding a dozen 4000 px JPEGs from a
     // browsing session is the same memory peak the model set is budgeted for.
     image.removeAttribute('src');
+    delete figure.dataset.state;
     pins.select(null);
     onClose?.();
   }
