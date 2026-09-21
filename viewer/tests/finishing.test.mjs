@@ -15,6 +15,28 @@ test('Earth remains capped during both directions of floor transition with one r
  soil.userData.update(2.2,false);assert.equal(soil.visible,false);
  soil.userData.update(8,true);assert.equal(soil.visible,false);
 });
+test('Every intermediate earth contour has a closed side and bottom at the same draw',()=>{
+ const data=read('build/web/native-current/native-soil-section.json'),soil=createNativeSoilSection(data);
+ for(const s of data.slices){
+  if(!s.i.length)continue;
+  soil.userData.update(s.height,true);
+  assert.equal(soil.children.length,0);
+  assert.equal(soil.geometry.index.count,s.i.length*2+s.edges.length*3);
+  const p=soil.geometry.attributes.position;
+  assert.equal(p.count,s.p.length);
+  assert.ok(Math.abs(p.getY(p.count/2)+s.height-s.bottom)<.00001);
+  assert.ok(s.edges.every(i=>i>=0&&i<s.p.length/2));
+ }
+});
+test('Both descending side stairs remain part of the basement earth section',()=>{
+ const data=read('build/web/native-current/native-soil-section.json');
+ const cross=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);
+ for(const s of data.slices.filter(s=>s.height<=2.8))for(const point of [[-6.4,-2.8],[8,-2]]){
+  const vertices=Array.from({length:s.p.length/2},(_,i)=>s.p.slice(i*2,i*2+2));let covered=false;
+  for(let i=0;i<s.i.length;i+=3){const [a,b,c]=s.i.slice(i,i+3).map(k=>vertices[k]);const signs=[cross(a,b,point),cross(b,c,point),cross(c,a,point)];if(signs.every(v=>v>=-1e-8)||signs.every(v=>v<=1e-8)){covered=true;break;}}
+  assert.ok(covered,`${point} at ${s.height}`);
+ }
+});
 test('All first-floor rooms and both balconies are connected with furniture enabled',()=>{
  const nav=read('build/web/native-current/native-navigation.json'),walk=new WalkSurface(nav),hall=nav.stations.find(s=>s.room_id==='f2-101');
  for(const id of ['102','103','104','105','106','107','108','109','110']){
