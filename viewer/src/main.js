@@ -1267,7 +1267,15 @@ async function loadModel() {
     $('#toggle-photos').disabled = false;
     $('#enter-walk').disabled=false;
     document.querySelectorAll('[data-needs-model]').forEach(b=>b.disabled=false);
-    enableImmersiveWalk(renderer,scene,walk,groups,()=>{if(!walk.active)enterWalk();},()=>{resize();invalidate();},shiftWalkFloor);
+    // Offered, never imposed: if the device answers for WebXR the welcome card
+    // grows a third choice, and taking it puts the visitor inside the house on
+    // their feet before the session opens. Declining it - or closing the card -
+    // leaves the viewer exactly as it is on a screen.
+    enableImmersiveWalk(renderer,scene,walk,groups,()=>{
+      $('#welcome').hidden=true;
+      try{sessionStorage.setItem('angora-welcome','1');}catch{/* private mode */}
+      if(!walk.active)enterWalk();
+    },()=>{resize();invalidate();},shiftWalkFloor);
     // Build each storey's cut geometry once, here, rather than on the frame
     // that first shows it: four heights, four slices, and the allocation and
     // the triangulation upload are behind us.

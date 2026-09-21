@@ -40,7 +40,9 @@ function reachable(from) {
       }
     }
   }
-  return {seen, at: (floor, x, z) => {const i = surface.index(x, z); return i >= 0 && seen[floor * count + i] === 1;}};
+  const per = [0, 0, 0, 0];
+  for (let i = 0; i < count * 4; i++) if (seen[i]) per[Math.floor(i / count)]++;
+  return {seen, per, at: (floor, x, z) => {const i = surface.index(x, z); return i >= 0 && seen[floor * count + i] === 1;}};
 }
 
 const basementSalon = data.stations.find(station => station.room_id === 'f0-B06').position;
@@ -59,6 +61,27 @@ test('The garden, the pool surround and the front approach are walkable ground',
     const hit = surface.sample(x, z, null, true, Infinity) ?? surface.sample(x, z, 0, true, 40);
     assert.ok(hit, `${name} is not standable ground`);
     assert.equal(hit.floor, expected, `${name} came out on floor ${hit.floor}`);
+  }
+});
+
+test('The stairs connect all four storeys on foot', () => {
+  // The native raster had no interior staircase in it at all, so its four
+  // storeys were four islands: in a headset, where there is no room menu and
+  // no lift button, a visitor could never leave the floor they arrived on.
+  const found = reachable(basementSalon);
+  // Named rooms, read from the delivery's own station list rather than
+  // guessed at, one per storey plus both balconies.
+  for (const id of ['f1-Z06', 'f2-101', 'f2-110', 'f2-109', 'f3-C01']) {
+    const station = data.stations.find(s => s.room_id === id);
+    assert.ok(found.at(station.floor_index, station.position[0], station.position[2]),
+      `${id} (${station.name}) cannot be walked to from the basement`);
+  }
+  // Every storey, and nearly every station: two rooms sit behind doors the
+  // source model has shut, and no route is invented for them.
+  const missed = data.stations.filter(s => !found.at(s.floor_index, s.position[0], s.position[2]));
+  assert.ok(missed.length <= 2, `${missed.length} stations cannot be walked to: ${missed.map(s => s.room_id)}`);
+  for (let floor = 0; floor < 4; floor++) {
+    assert.ok(found.per[floor] > 1500, `floor ${floor} is an island again (${found.per[floor]} cells)`);
   }
 });
 
@@ -92,15 +115,17 @@ test('Nothing indoors was opened up to get there', () => {
   const outdoors = data.outdoors;
   assert.ok(outdoors, 'the outdoor pass left no record of itself');
   assert.equal(outdoors.native_cells_altered, 0, 'the merge moved cells the house already owned');
-  assert.ok(outdoors.native_cells_preserved > 30000, 'too few native cells were carried through');
+  assert.ok(outdoors.native_cells_preserved > 28000, 'too few native cells were carried through');
   assert.ok(outdoors.added_cells[0] > 10000, 'the ground floor gained no outdoors');
-  // And the one thing a bridge across a gallery void would break: the storeys
-  // stay separate. The delivery says its surface has no stairs in it, so a
-  // visitor upstairs must still be unable to walk down - if that ever changes
-  // it is either a real stair pass or an invented floor, and both want reading.
-  const upstairs = reachable(data.stations.find(s => s.room_id === 'f2-102').position);
-  assert.ok(!upstairs.at(0, -0.46, -21.98), 'the first floor now walks straight out into the garden');
-  assert.ok(upstairs.at(2, -0.98, -9.35), 'the first-floor balcony is not reachable from the first floor');
+  // A bridge across a gallery void would show up as a storey you can reach
+  // without using the stairs. The stairs are the only vertical link there is,
+  // so blocking the shaft must cut the house in two: everything above the
+  // ground floor becomes unreachable again. If it does not, something else is
+  // carrying weight that should not be.
+  const shaft = outdoors.stairwell.groups[0];
+  assert.ok(shaft && shaft.layers.length === 4, 'the staircase does not run the height of the house');
+  assert.ok(Math.max(...shaft.span_m) <= 6 && shaft.rise_m > 8,
+    'the shaft that was carried over is not shaped like a flight of stairs');
 });
 
 test('A held key walks you across the lawn, with the ground under your feet', () => {

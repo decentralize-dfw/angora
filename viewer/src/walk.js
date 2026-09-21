@@ -203,14 +203,18 @@ export class InteriorWalk {
 // inside it. Neither is drawn at all unless WebXR answers for this device, so
 // nothing about the page changes on a machine that has no headset.
 export async function enableImmersiveWalk(renderer, scene, walk, meshGroups, onStart, onEnd, onFloor) {
+  // Two of these say what the session is doing and change their label with
+  // it; the welcome card's says what it offers and is gone the moment it is
+  // taken, so it keeps its own word.
   const buttons=[...document.querySelectorAll('#enter-vr,#enter-vr-walk')];
+  const offers=[...document.querySelectorAll('#welcome-vr')];
   if(!buttons.length || !navigator.xr || !window.isSecureContext)return;
   let supported=false;try{supported=await navigator.xr.isSessionSupported('immersive-vr');}catch{return;}
   if(!supported)return;
   walk.onFloorRequest=onFloor;
   const label=key=>{for(const button of buttons){button.textContent=t(key);button.dataset.i18n=key;button.setAttribute('aria-label',t(key));}};
   renderer.xr.enabled=true;renderer.xr.setReferenceSpaceType('local-floor');
-  for(const button of buttons)button.hidden=false;
+  for(const button of [...buttons,...offers])button.hidden=false;
   const ray=new THREE.Raycaster(),rotation=new THREE.Matrix4();
   for(let index=0;index<2;index++) {
     const controller=renderer.xr.getController(index);walk.rig.add(controller);
@@ -240,7 +244,7 @@ export async function enableImmersiveWalk(renderer, scene, walk, meshGroups, onS
       await renderer.xr.setSession(session);
     } catch(error) {label('retryVR');console.warn('XR session could not start',error);}
   };
-  for(const button of buttons)button.onclick=open;
+  for(const button of [...buttons,...offers])button.onclick=open;
   renderer.xr.addEventListener('sessionstart',()=>{walk.startXR();label('exitVR');});
   renderer.xr.addEventListener('sessionend',()=>{walk.endXR();label('enterVR');onEnd();});
 }

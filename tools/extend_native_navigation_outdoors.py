@@ -25,6 +25,26 @@ The merge, per floor and per cell:
     safety of this: over a gallery void the floor below is native-supported, so
     the void stays a void and never becomes a walkable bridge; under a balcony
     or out on the lawn there is nothing below, so the ground comes through.
+  * the STAIRWELL is taken from the full surface whole, on all four layers.
+    The native raster has no interior staircase in it at all - not one cell
+    between two storey datums anywhere inside the house - so its four storeys
+    are four islands and a visitor can only change floor by the lift or the
+    room menu, in a headset not even that. Treads cannot be spliced in one at
+    a time: a cell holds one height per layer, and in the stairwell the native
+    raster spent layer 0's on the basement slab, so there is nowhere to put a
+    tread without evicting the floor under it cell by cell, and the landings
+    at each end would not line up. The full surface has the whole flight and
+    is vertically connected - walked, its four storeys are one region - so the
+    shaft comes across intact.
+
+    The shaft finds itself, by what a flight of stairs is: NARROW IN PLAN AND
+    TALL IN SECTION. A tread is a cell whose height lies strictly between two
+    storey datums; the treads are grouped by touching; and a group is a
+    staircase when it stacks on three or more storeys, fits inside six metres
+    each way in plan, and climbs at least one storey. The front garden's slope
+    also stacks on three storeys - it rises through them - but it is fifteen
+    metres across, so it is not a stair. The group is then grown by half a
+    metre so the landing at each end comes with it.
 
 The grid grows to the union of the two, aligned to the native origin so every
 existing native cell keeps its exact index and the interior is bit-identical.
@@ -106,6 +126,13 @@ def main():
             return None
         return full_layers[floor].get((col, row))
 
+    # A tread sits clear of its own storey's floor and clear of the one above.
+    datums = [0.0, 3.0996, 6.3714, 9.4705]
+    def is_tread(floor, height_mm):
+        height = height_mm / 1000
+        top = datums[floor + 1] - 0.05 if floor + 1 < len(datums) else datums[floor] + 2.0
+        return datums[floor] + 0.05 < height < top
+
     merged = [dict() for _ in range(4)]
     added = [0, 0, 0, 0]
     refused_below = [0, 0, 0, 0]
@@ -137,12 +164,98 @@ def main():
                 merged[floor][(col, row)] = outside
                 added[floor] += 1
 
+    # --- the stairwell, taken whole -------------------------------------
+    # Treads on the full surface, by plan cell: which layers carry one.
+    tread_layers = {}
+    for floor in range(4):
+        for (col, row), (height, mask) in full_layers[floor].items():
+            if mask & 3 or height == UNSUPPORTED or not is_tread(floor, height):
+                continue
+            tread_layers.setdefault((col, row), set()).add(floor)
+    # Connected groups of those cells, eight ways.
+    groups, seen_cells = [], set()
+    for cell in tread_layers:
+        if cell in seen_cells:
+            continue
+        stack, group = [cell], []
+        seen_cells.add(cell)
+        while stack:
+            col, row = stack.pop()
+            group.append((col, row))
+            for dc in (-1, 0, 1):
+                for dr in (-1, 0, 1):
+                    other = (col + dc, row + dr)
+                    if other in tread_layers and other not in seen_cells:
+                        seen_cells.add(other)
+                        stack.append(other)
+        groups.append(group)
+    # A staircase is a group that stacks: three storeys or more, at the same
+    # place in plan. A garden slope or a ramped approach is one layer deep.
+    SHAFT_SPAN_M, SHAFT_RISE_M = 6.0, 2.5
+    shaft = set()
+    shafts = []
+    for group in groups:
+        layers_here = set()
+        heights = []
+        for cell in group:
+            layers_here |= tread_layers[cell]
+            for floor in tread_layers[cell]:
+                heights.append(full_layers[floor][cell][0] / 1000)
+        if len(layers_here) < 3:
+            continue
+        span_x = (max(c for c, _ in group) - min(c for c, _ in group) + 1) * step
+        span_z = (max(r for _, r in group) - min(r for _, r in group) + 1) * step
+        rise = max(heights) - min(heights)
+        if span_x > SHAFT_SPAN_M or span_z > SHAFT_SPAN_M or rise < SHAFT_RISE_M:
+            continue
+        shafts.append({'cells': len(group), 'layers': sorted(layers_here),
+                       'span_m': [round(span_x, 2), round(span_z, 2)], 'rise_m': round(rise, 2)})
+        shaft |= set(group)
+    # Onto the new grid, through the world rather than through indices: the two
+    # deliveries are offset by a third of a cell, so full's columns are not the
+    # new grid's columns plus a constant. Then grown by half a metre, so the
+    # landing at each end of the flight comes with it.
+    def to_new(col, row):
+        x = full_grid['x'] + (col + 0.5) * step
+        z = full_grid['z'] + (row + 0.5) * step
+        return int((x - x0) // step), int((z - z0) // step)
+
+    grow = int(round(0.5 / step))
+    grown = set()
+    for cell in shaft:
+        col, row = to_new(*cell)
+        for dc in range(-grow, grow + 1):
+            for dr in range(-grow, grow + 1):
+                grown.add((col + dc, row + dr))
+    stairwell_changed = 0
+    for col, row in grown:
+        if not (0 <= col < width and 0 <= row < height):
+            continue
+        x = x0 + (col + 0.5) * step
+        z = z0 + (row + 0.5) * step
+        for floor in range(4):
+            before = merged[floor].get((col, row))
+            value = full_at(floor, x, z)
+            if value == before:
+                continue
+            if value is None:
+                merged[floor].pop((col, row), None)
+            else:
+                merged[floor][(col, row)] = value
+            stairwell_changed += 1
+    shaft_note = {'groups': shafts, 'cells': len(shaft), 'with_landings': len(grown),
+                  'cells_changed': stairwell_changed}
+
     # The claim the whole merge rests on, proved here where both inputs are in
-    # hand: every cell the native raster supported came through untouched. If
-    # this ever fails the file is not written at all.
+    # hand: every cell the native raster supported came through untouched
+    # OUTSIDE the stairwell, which is the one place the full surface overrides
+    # it and is reported separately above. If this ever fails the file is not
+    # written at all.
     preserved = altered = 0
     for floor in range(4):
         for (col, row), value in native_layers[floor].items():
+            if (col + shift_x, row + shift_z) in grown:
+                continue
             got = merged[floor].get((col + shift_x, row + shift_z))
             if got == value:
                 preserved += 1
@@ -213,12 +326,14 @@ def main():
         'from': 'build/web/full/navigation.json (R44 outdoor pass)',
         'rule': 'native support wins; the full surface fills only cells with no native support on this or any lower floor',
         'added_cells': added,
+        'stairwell': shaft_note,
         'native_cells_preserved': preserved,
         'native_cells_altered': altered,
     }
     NATIVE.write_text(json.dumps(native, separators=(',', ':')))
     report = {
         'grid': grid,
+        'stairwell': shaft_note,
         'shift': {'x': shift_x, 'z': shift_z},
         'added_cells': added,
         'refused_because_blocked_in_full': refused_blocked,

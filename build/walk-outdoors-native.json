@@ -6,6 +6,27 @@
     "width": 193,
     "height": 361
   },
+  "stairwell": {
+    "groups": [
+      {
+        "cells": 339,
+        "layers": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "span_m": [
+          3.36,
+          2.28
+        ],
+        "rise_m": 10.6
+      }
+    ],
+    "cells": 339,
+    "with_landings": 904,
+    "cells_changed": 2672
+  },
   "shift": {
     "x": 29,
     "z": 154
@@ -29,12 +50,12 @@
     567
   ],
   "walkable_furnished_cells": [
-    19689,
-    14522,
-    4586,
-    3008
+    20002,
+    14758,
+    4862,
+    3041
   ],
-  "native_cells_preserved": 30208,
+  "native_cells_preserved": 28329,
   "native_cells_altered": 0,
   "stations_added": [
     {

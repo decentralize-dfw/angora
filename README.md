@@ -376,25 +376,55 @@ Kesit üretimi normal Python ortamında NumPy, Shapely ve mapbox-earcut kullanı
   durak eklendi — `Havuz`, `Bahçe`, `Ön bahçe` — her biri gerçekten
   basılabilecek en yakın hücreye oturtuldu ve eve bakar. İki balkonun durağı
   zaten vardı.
-- **Kalan sınır, olduğu gibi.** Native yürüme yüzeyinde merdiven yok; teslimat
-  bunu kendi `limitations` alanında zaten söylüyor (hiçbir katman bir üst kata
-  devretmiyor). Yani bodrum ile giriş katı birbirine ve bahçeye bağlıdır, 1. kat
-  ve çatı katı kendi adalarıdır; oraya oda menüsü ya da asansörle geçilir.
-  Bu bu turda açılmadı: merdiven taraması kaynak geometriyi ister ve
-  `build/intermediate/` bu depoda yok.
+- **Merdiven kovası bütün olarak taşındı.** Native tarayıcıda iç merdivenden
+  tek bir hücre bile yoktu — evin içinde iki kat kotu arasında hiçbir yükseklik
+  yok — yani dört kat dört ayrı adaydı ve kat değiştirmenin tek yolu asansör ya
+  da oda menüsüydü; başlıkta ise hiçbir yolu yoktu. Basamakları teker teker
+  eklemek işe yaramaz: bir hücre katman başına tek yükseklik tutar ve kovada
+  native o yüksekliği bodrum döşemesine harcamış, basamağa yer kalmıyor;
+  sahanlıklar da tutmuyor. Bu yüzden kova, dört katmanıyla birlikte, `full`
+  yüzeyinden olduğu gibi alınıyor.
+  Kova kendini buluyor: **bir merdiven planda dar, kesitte yüksektir.** Basamak
+  = yüksekliği iki kat kotunun tam arasında kalan hücre; değen basamaklar
+  gruplanıyor; ve bir grup ancak üç ya da daha çok katta üst üste geliyorsa,
+  planda her iki yönde 6 m'ye sığıyorsa ve en az bir kat yükseliyorsa merdiven
+  sayılıyor. Ön bahçenin yamacı da üç kata yayılıyor ama 15 m genişliğinde, o
+  yüzden merdiven değil. Bulunan tek kova: 339 hücre, dört katta, planda
+  3,36 × 2,28 m, 10,6 m yükseliyor. Sahanlıklar gelsin diye yarım metre
+  büyütülüyor (904 hücre). Kovanın dışında native'in desteklediği 28.329
+  hücrenin hiçbiri değişmiyor.
+- **Sonuç: ev yürüyerek tamamen bağlı.** Bodrum salonundan yürüyerek dört kata
+  da çıkılıyor (19.036 / 12.826 / 3.821 / 1.916 hücre) — iki balkon dahil.
+  Ulaşılamayan iki durak kalıyor (`f1-Z03 WC`, `f3-C05 Oturma alanı`): kaynak
+  modelde kapıları kapalı, onlara uydurma yol açılmadı. `full` yüzeyinde de üç
+  durak aynı sebeple ulaşılamıyor.
+- **Bahçede nereye gidilebiliyor.** 914 m²'lik parselde ev izi ~202 m². Dışarıda
+  yürünebilen zemin ~298 m²; kalan ~413 m²'de yürüme yüzeyi hiç yok (parselin
+  batı, doğu ve arka kenarındaki dikim şeritleri). Yürünebilen zeminin
+  %92'sine bodrum salonundan yürüyerek gidiliyor: havuz çevresi, arka çim,
+  evin doğu yanı, ön yaklaşım ve yol. Ulaşılamayan %8, ön bahçenin doğu
+  ucundaki bir cep — `full` yüzeyinde de aynı şekilde ulaşılamıyor, yani
+  birleştirmede kaybolmuş değil, modelde duvarla ayrılmış.
+  Bahçedeki yan merdivenlerden batıdaki veride var ve bahçeden üstüne
+  çıkılıyor, ama yalnız ~1,5 m yükseliyor ve orada bitiyor: bodrum kotunu
+  giriş katına bağlamıyor. Bodrum ↔ giriş katı bağlantısı iç merdivenden ve
+  önden dolaşarak kuruluyor.
 - **VR.** WebXR yolu zaten kuruluydu; bu tur kullanılabilir hâle getirildi.
-  Başlık WebXR'a cevap veriyorsa iki düğme çizilir — modele bakarken alt
-  çubukta `Plan`'ın yanında, tur içindeyken turun kendi üst satırında — ve
-  ikisi de aynı oturumu açar. Oturum açılmadan **önce** ziyaretçi eve sokulup
-  ayağa kaldırılır, böylece vizörde ilk görünen şey dışarıdan model değil
-  içinde durulan odadır.
+  Cihaz WebXR'a cevap veriyorsa açılıştaki karşılama kartı üçüncü bir seçenek
+  kazanır: **`VR ile gez` / `Start immersive`**. Tıklanırsa kart kapanır,
+  ziyaretçi eve sokulup ayağa kaldırılır ve oturum ondan **sonra** açılır —
+  vizörde ilk görünen şey dışarıdan model değil, içinde durulan odadır.
+  Tıklanmazsa ya da kart kapatılırsa hiçbir şey değişmez: ekrandaki mevcut
+  web hâli aynen açılır. Destek yoksa düğme hiç çizilmez. Oturumu sonradan
+  açmak için iki düğme daha var — modele bakarken alt çubukta `Plan`'ın
+  yanında, tur içindeyken turun kendi üst satırında.
 - **VR kumandası.** Sol çubuk bakış yönünde yürütür (vardı). Sağ çubuk sağa/sola
   **30°'lik kademeli dönüş** yapar — vizör altında sürekli kayan bir dönüş
   insanı en hızlı rahatsız eden şeydir — ve dönüş rig'in değil **başın**
   etrafındadır, yoksa ziyaretçi arkasındaki bir nokta çevresinde savrulur. Sağ
-  çubuğu yukarı/aşağı itmek **kat değiştirir**: merdiven yürüme yüzeyinde
-  olmadığı için bu olmadan başlıktaki ziyaretçi girdiği kattan hiç çıkamaz ve
-  balkonlar ona hem gösterilmiş hem yasaklanmış olurdu. Ziyaretçi durduğu
+  çubuğu yukarı/aşağı itmek **kat değiştirir**: merdiven artık yürünüyor ama
+  karşıdan karşıya bir kat atlamak isteyen için bu hâlâ en kısa yol, ve
+  merdiveni bulamayan ziyaretçi kattan hiç çıkamamış olmaz. Ziyaretçi durduğu
   noktanın tam üstünde/altında, o katta gerçekten basılabilecek en yakın yerde
   çıkar; katın iç mekânı oda menüsündeki gibi önce yüklenir. Her itiş bir kez
   iş görür: çubuk bırakma eşiğine dönmeden ikinci kez dönmez ya da kat
