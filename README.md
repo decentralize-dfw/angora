@@ -201,7 +201,7 @@ Kesit üretimi normal Python ortamında NumPy, Shapely ve mapbox-earcut kullanı
 
 ## R47 — çekim noktaları, sadeleşen arayüz, ilan metni ve yükleme ekranı
 
-- **Fotoğraf pinleri.** `photogallery/FOTOLAR-KONUM.jpg`, 55 ilan fotoğrafının
+- **Fotoğraf pinleri.** `photogallery/FOTOLAR-KONUM.jpg`, 56 ilan fotoğrafının
   her birini dört kat planı üzerinde bir nokta (kamera) ve bir okla (bakış
   yönü) işaretler. Bu planlar arayüzün kendi ekran görüntüleri olduğu için
   plan→model dönüşümü her kat için o planın taşıdığı oda etiketlerinden en
@@ -214,13 +214,9 @@ Kesit üretimi normal Python ortamında NumPy, Shapely ve mapbox-earcut kullanı
   ortada, telefonda ekranın %80'inde (kalan alan %60 beyaz + 8 px bulanıklık)
   açılır; altında hangi odadan çekildiği yazar. Başka bir pin aynı çerçeveyi
   değiştirir; sağ üstteki çarpı ya da `Fotoğraflar` düğmesini kapatmak
-  çerçeveyi kaldırır. `angora_28` dosyası depoda yoktur; 20 ve 24–27 çizimde
-  işaretli değildir, fotoğrafların kendisinden yerleştirilmiştir. 24, 26 ve 27
-  drone ile evden epey geriden çekilmiştir; gerçek uzaklıklarına konursa kat
-  görünümünün dışında kalıp hiç açılamazlar, bu yüzden baktıkları havuz
-  terasına, kendi yönleriyle ve kendi açılarıyla yerleştirildiler — eve olan
-  uzaklık sıkıştırıldı, bakış noktası uydurulmadı. Veri dosyası bu beş girdiyi
-  yaklaşık olarak işaretler.
+  çerçeveyi kaldırır. 20 ve 24–28 çizimde işaretli değildir, fotoğrafların
+  kendisinden ve malikin plan üzerindeki işaretlerinden yerleştirilmiştir;
+  veri dosyası bu altı girdiyi yaklaşık olarak işaretler.
 - **Arayüz sadeleşmesi.** Sağ ray yalnız yakın çevre ölçeğindeki yavaş dönüş
   düğmesini taşır; `İçeride gez` ve `Ortala` arayüzden çekildi — düğmeler,
   bağlantıları ve klavye yolları yerinde durur, çizilmezler. `Ayar` sağ alta
@@ -278,6 +274,43 @@ Kesit üretimi normal Python ortamında NumPy, Shapely ve mapbox-earcut kullanı
   `Mülk bilgisi` yalnız ilandır. Bölge metni (Çayyolu, Angora Evleri,
   ulaşım) bölge paneline taşındı ve donatı çipleri, yerleşke panelinin
   altında kaybolmasınlar diye alt ortaya alındı.
+
+### R47 üçüncü tur — bahçe işaretleri, sade işaret ve dişliden açılan görünüm sayfası
+
+- **Bahçeye çıkan işaretler.** İkinci turda 24, 26 ve 27 kat çerçevesinin
+  dışında kaldıkları için havuz terasına sıkıştırılmıştı. Malikin çizdiği
+  gerçek duruş noktalarıyla hepsi bahçedeki kendi yerlerine döndü; bakış
+  yükseklikleri 1,6 m insan gözü. 25 ve 27 havuz seviyesinde durur, yalnız
+  bodrum katında çizilir. 24 ve 26 eve dışarıdan bakar: `follow` işaretiyle
+  dört katta da çizilirler ve her kat açıldığında o katın kendi döşeme
+  kotunda yeniden kurulurlar — göz de, ince çizginin indiği ayak da — yani
+  bakış noktası ziyaretçiyle birlikte binada yükselir. Yeni `angora_28` ön
+  cephe / otopark karesi aynı şekilde giriş katından yukarı her katta çizilir.
+  Kat içi 21 numaralı mutfak karesi de malikin işaretlediği yere taşındı.
+- **Çerçevenin tutamadığı işaret kenarda durur.** Kat görünümü kat izini
+  çerçeveler, parseli değil; bahçede yirmi metre geriden çekilmiş bir kare
+  ekranın dışına düşer ve fotoğrafı hiç açılamaz. Artık veri gerçek yerini
+  tutar, çizim ise tutamadığı işareti çerçevenin ortasından gerçek yerine giden
+  doğru üzerinde güvenli kenara çeker: yön birebir korunur, yalnız uzaklık
+  kısalır, ince çizgi de dışarıyı gösteren kısa bir çizgiye döner ve yere
+  inen nokta çizilmez. Kenar payı üst çubuğun, kat sırasının ve dişlinin
+  kendi alanıdır, böylece tutulan işaret hiçbir denetimin altına girmez;
+  kalabalıkta kenara çekilen işaretler de aynı payın dışına taşamaz. Kaba
+  pay yetmediğinde arayüzün kendi ölçtüğü denetim dikdörtgenleri devreye
+  girer: plan ölçülerinin kullandığı aynı liste artık işaretleri de iter,
+  yani kat sırasının ya da dişlinin altına düşen — dolayısıyla hiç
+  açılamayan — işaret kalmaz.
+- **Sade işaret.** Kamera işaretinin altındaki beyaz hale kaldırıldı — elli
+  altı halenin altında plan puslanıyordu; ayırmayı noktanın kendi beyaz
+  konturu yapıyor. İki ışının arasındaki göz de kaldırıldı: bu boyutta
+  ikinci bir basılacak şey gibi okunuyordu. Geriye tripodun noktası ve
+  objektifin açısını veren iki çizgi kalır.
+- **Görünüm sayfası dişlinin üstünde.** Sayfa artık dişlinin bir üstünde
+  değil, dişlinin tam kendi köşesinde açılır: aynı sağ kenar, aynı alt
+  kenar, köşeden büyüyen bir açılma. Dört düğme ve bir kaydıraç için 340
+  px'lik cam sütun gereksizdi — sayfa 264 px'e, iç boşlukları, başlığı ve
+  düğmeleri (34 px) kendi ölçeğine indi. 44 px'lik dokunma tabanı telefonda
+  olduğu gibi durur; daraltma yalnız imleçli cihazlarda geçerlidir.
 
 ## R44 — beyaz iç mekânlar, bodrum dolgusu, dış mekân yürüyüşü ve birleşik model
 

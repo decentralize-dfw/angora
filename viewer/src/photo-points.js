@@ -9,20 +9,30 @@
 // the navigation mask of its own floor, so nothing here is an eyeballed guess
 // about which room a photograph belongs to.
 //
-// Photographs 20 and 24-27 carry no mark on the drawing - 20 repeats 4's
-// frame, 24-27 are the drone and garden frames - so those five are placed
-// from the photographs themselves and are the only approximate entries.
-// 24, 26 and 27 were flown a long way back from the house; pinned at that
-// real standoff they sit well outside the storey's own frame and cannot be
-// reached at all. They are pinned instead over the pool terrace they look
-// across, on their true bearing and with their true direction, at a stated
-// cost: the distance to the house is compressed, the viewpoint is not
-// invented. Numbers follow the drawing; 28 has no file and no pin.
+// Photographs 20 and 24-28 carry no mark on the drawing - 20 repeats 4's
+// frame, 24-28 are the garden and facade frames - so those six are placed
+// from the photographs themselves, against the owner's marks on the plan, and
+// are the only approximate entries. They stand out in the garden where the
+// photographer stood, at a person's eye height over the ground they were
+// taken from, rather than being compressed onto the terrace to stay inside a
+// storey's frame.
 //
-// position: metres, glTF Y-up, the model's own coordinates. y is eye height
-// over the storey datum (drone frames carry their own height); floorY is that
-// storey's own datum, which is where the mark's leader line lands.
-// dx/dz: the unit look direction on the ground plane.
+// position: metres, glTF Y-up, the model's own coordinates. y is the eye
+// itself; floorY is the datum of the storey the frame is filed under, which
+// is where the mark's leader line lands, so y - floorY is the height of the
+// eye over that ground. dx/dz: the unit look direction on the ground.
+//
+// floors: which storeys a frame is marked on, defaulting to its own. follow:
+// the frame looks at the house from outside rather than standing on a floor,
+// so it is marked on every storey it takes in and rides that storey's datum -
+// eye and leader are redrawn at the level of whatever floor is open, and the
+// viewpoint climbs the building with the visitor.
+
+// The delivery's own storey datums (native-rooms.json, floor_datums_m). A
+// following mark needs the level of whatever floor is open, not of the one it
+// is filed under; the test checks these against the delivery.
+export const FLOOR_DATUMS = [0, 3.0996, 6.3714, 9.4705];
+
 export const PHOTO_POINTS = [
   {id:1,file:'angora_01.jpg',floor:0,outdoor:false,x:-1.584,floorY:0,y:1.55,z:-4.881,dx:-0.682,dz:0.731,tr:'Bodrum · Mutfak',en:'Basement · Kitchen'},
   {id:2,file:'angora_02.jpg',floor:0,outdoor:false,x:-3.698,floorY:0,y:1.55,z:-7.64,dx:0.937,dz:0.35,tr:'Bodrum · Salon',en:'Basement · Living room'},
@@ -44,13 +54,14 @@ export const PHOTO_POINTS = [
   {id:18,file:'angora_18.jpg',floor:2,outdoor:false,x:-1.001,floorY:6.3714,y:7.921,z:-2.823,dx:0.501,dz:0.865,tr:'1. kat · Kat holü · Merdiven',en:'First floor · Landing · Stairs'},
   {id:19,file:'angora_19.jpg',floor:2,outdoor:false,x:-0.539,floorY:6.3714,y:7.921,z:-5.504,dx:-0.872,dz:-0.49,tr:'1. kat · Ebeveyn yatak odası',en:'First floor · Primary bedroom'},
   {id:20,file:'angora_20.jpg',floor:1,outdoor:false,x:-4.35,floorY:3.0996,y:4.65,z:-6.9,dx:0.62,dz:0.78,tr:'Giriş katı · Salon',en:'Ground floor · Living room'},
-  {id:21,file:'angora_21.jpg',floor:1,outdoor:false,x:-0.598,floorY:3.0996,y:4.65,z:1.283,dx:-0.862,dz:0.507,tr:'Giriş katı · Mutfak',en:'Ground floor · Kitchen'},
+  {id:21,file:'angora_21.jpg',floor:1,outdoor:false,x:-2.0,floorY:3.0996,y:4.65,z:3.05,dx:-0.75,dz:-0.66,tr:'Giriş katı · Mutfak',en:'Ground floor · Kitchen'},
   {id:22,file:'angora_22.jpg',floor:1,outdoor:false,x:-4.172,floorY:3.0996,y:4.65,z:3.544,dx:0.936,dz:-0.351,tr:'Giriş katı · Mutfak',en:'Ground floor · Kitchen'},
   {id:23,file:'angora_23.jpg',floor:1,outdoor:false,x:-0.216,floorY:3.0996,y:4.65,z:-6.846,dx:-0.714,dz:0.7,tr:'Giriş katı · Yemek alanı',en:'Ground floor · Dining area'},
-  {id:24,file:'angora_24.jpg',floor:0,outdoor:true,x:0.5,floorY:0,y:3.0,z:-11.2,dx:0.15,dz:0.99,tr:'Havuz ve bahçe',en:'Pool and garden'},
-  {id:25,file:'angora_25.jpg',floor:0,outdoor:true,x:3.0,floorY:0,y:1.7,z:-13.5,dx:0.03,dz:1.0,tr:'Bahçe · Arka cephe',en:'Garden · Rear facade'},
-  {id:26,file:'angora_26.jpg',floor:0,outdoor:true,x:-1.5,floorY:0,y:2.6,z:-10.0,dx:0.42,dz:0.91,tr:'Havuz ve bahçe',en:'Pool and garden'},
-  {id:27,file:'angora_27.jpg',floor:0,outdoor:true,x:5.5,floorY:0,y:3.4,z:-12.0,dx:-0.3,dz:0.95,tr:'Havuz ve bahçe',en:'Pool and garden'},
+  {id:24,file:'angora_24.jpg',floor:0,outdoor:true,x:11.8,floorY:0,y:1.6,z:-22.5,dx:-0.52,dz:0.86,tr:'Havuz ve bahçe',en:'Pool and garden',floors:[0,1,2,3],follow:true},
+  {id:25,file:'angora_25.jpg',floor:0,outdoor:true,x:-5.2,floorY:0,y:1.6,z:-20.9,dx:0.28,dz:0.96,tr:'Bahçe · Arka cephe',en:'Garden · Rear facade'},
+  {id:26,file:'angora_26.jpg',floor:0,outdoor:true,x:-0.3,floorY:0,y:1.6,z:-25.8,dx:0.1,dz:0.99,tr:'Havuz ve bahçe',en:'Pool and garden',floors:[0,1,2,3],follow:true},
+  {id:27,file:'angora_27.jpg',floor:0,outdoor:true,x:15.4,floorY:0,y:1.6,z:-17.8,dx:-0.72,dz:0.69,tr:'Havuz ve bahçe',en:'Pool and garden'},
+  {id:28,file:'angora_28.jpeg',floor:1,outdoor:true,x:4.7,floorY:3.0996,y:4.6996,z:10.85,dx:-0.37,dz:-0.93,floors:[1,2,3],follow:true,tr:'Ön cephe · Otopark',en:'Front facade · Driveway'},
   {id:29,file:'angora_29.jpg',floor:3,outdoor:false,x:0.446,floorY:9.4705,y:11.021,z:-1.318,dx:0.0,dz:-1.0,tr:'Çatı katı · Kat holü',en:'Attic floor · Landing'},
   {id:30,file:'angora_30.jpg',floor:2,outdoor:false,x:-1.423,floorY:6.3714,y:7.921,z:0.081,dx:-0.71,dz:0.705,tr:'1. kat · Yatak odası',en:'First floor · Bedroom'},
   {id:31,file:'angora_31.jpg',floor:2,outdoor:false,x:-1.862,floorY:6.3714,y:7.921,z:-7.377,dx:0.562,dz:0.827,tr:'1. kat · Ebeveyn yatak odası',en:'First floor · Primary bedroom'},

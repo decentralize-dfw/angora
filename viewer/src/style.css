@@ -142,8 +142,14 @@ h1 strong{font-weight:700}
 /* Each sheet has a reserved corner and a bounded height, so two of them - or
    a sheet and an open photograph - can never land on the same pixels. The
    view options rise out of their own gear at the bottom right; the two
-   information sheets hang from the buttons that open them at the top. */
-.options-panel{right:22px;top:auto;bottom:calc(max(22px,env(safe-area-inset-bottom)) + 58px);max-height:min(58dvh,520px)}
+   information sheets hang from the buttons that open them at the top.
+   The options sheet shares the gear's corner exactly - same right edge, same
+   bottom edge - so it reads as the gear opening upward rather than as a
+   second panel hovering over it, and the cross in its heading closes it
+   again. Four toggles and a daylight slider do not need a 340 px column of
+   glass either, so this one sheet is drawn tighter than the reading sheets
+   beside it. */
+.options-panel{right:22px;top:auto;bottom:max(22px,env(safe-area-inset-bottom));width:264px;padding:12px 13px;max-height:min(54dvh,440px)}
 .info-panel{right:22px}
 .floor-panel{right:22px}
 .panel-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
@@ -165,6 +171,22 @@ h1 strong{font-weight:700}
 .lighting-choice select{max-width:210px;min-height:40px;border:1px solid var(--edge);background:rgba(255,255,255,.5);color:var(--ink);border-radius:12px;padding:0 10px;font-size:13px;font-weight:600}
 .small-note{color:var(--muted);font-size:11px;line-height:1.5;margin:12px 0 0}
 .panel .scene-options+.scene-options{margin-top:6px}
+/* The view options at their own scale. Every line here restates a sheet
+   default one notch down, and must follow those defaults in the file to beat
+   them - the two carry the same weight, so the cascade decides. Only on a
+   pointer device: on a phone this sheet is the full-width bottom sheet the
+   media query below draws, and it is already at the phone's own scale. */
+@media(min-width:721px){
+  .options-panel .panel-heading{margin-bottom:9px}
+  .options-panel h2{font-size:13px}
+  .options-panel .scene-options{gap:5px}
+  .options-panel .daylight-heading{margin:14px 1px 6px;font-size:11px}
+  .options-panel #daylight-time{font-size:15px}
+  .options-panel #daylight-hour{height:22px}
+  .options-panel .range-endpoints{font-size:9.5px}
+  .options-panel .daylight-footer{margin-top:9px;gap:8px}
+  .options-panel .small-note{font-size:10.5px;margin-top:9px}
+}
 /* Kept in the document, kept wired, kept in the shared link and in the QA
    report - simply not drawn in the sheet any more. Nothing is removed: the
    lighting style, the date, the interface sound and the device report all
@@ -235,19 +257,19 @@ h1 strong{font-weight:700}
    smaller than the clearance photo-gallery.js keeps between two marks, so no
    two targets can ever overlap, and depth decides the stacking anyway. */
 .photo-pin{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;padding:0;background:transparent;border:0;box-shadow:none;line-height:0;pointer-events:auto;touch-action:manipulation}
+/* No halo under the mark: a white glow behind fifty-six of these fogs the
+   plan it is drawn on. The dot's own white stroke is the separation, and a
+   hairline shadow keeps the rays off a dark floor without lighting up. */
 .photo-pin svg{position:absolute;left:17px;top:17px;width:36px;height:28px;pointer-events:none;overflow:visible;
   transform-origin:6px 14px;transform:translate(-6px,-14px) rotate(var(--pin-angle,0deg));
-  filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px #ffffffcc) drop-shadow(0 1px 2px #14201b40)}
+  filter:drop-shadow(0 1px 1.5px #14201b33)}
 .pin-ray{fill:none;stroke:#16241e;stroke-width:1.7;stroke-linecap:round}
-.pin-lens{fill:rgba(255,255,255,.94);stroke:#16241e;stroke-width:1.5;stroke-linejoin:round}
-.pin-pupil{fill:#16241e}
 .pin-dot{fill:#16241e;stroke:#fff;stroke-width:1.1}
-.photo-pin:hover .pin-ray,.photo-pin:hover .pin-lens{stroke:var(--accent)}
-.photo-pin:hover .pin-pupil,.photo-pin:hover .pin-dot{fill:var(--accent)}
+.photo-pin:hover .pin-ray{stroke:var(--accent)}
+.photo-pin:hover .pin-dot{fill:var(--accent)}
 .photo-pin[aria-pressed=true]{background:transparent}
 .photo-pin[aria-pressed=true] .pin-ray{stroke:var(--accent);stroke-width:2.1}
-.photo-pin[aria-pressed=true] .pin-lens{stroke:var(--accent);stroke-width:1.9;fill:#fff}
-.photo-pin[aria-pressed=true] .pin-pupil,.photo-pin[aria-pressed=true] .pin-dot{fill:var(--accent)}
+.photo-pin[aria-pressed=true] .pin-dot{fill:var(--accent)}
 
 /* ------------------------------------------------------ photograph view */
 /* On a desktop it sits at the right edge so the plan stays visible and the

@@ -91,6 +91,20 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
   .tool-dock {bottom:calc(env(safe-area-inset-bottom) + 62px);}
 }
 
+/* R47 | "ayarlar arayuzu daha kucuk ve kompakt olsun" - the view options are
+   four toggles and a slider, and the 44 px floors above are a touch
+   guarantee, not a look. On a pointer device this one sheet keeps a tighter
+   grid; it still opens from the gear's own corner, so it scales out of that
+   corner rather than out of its middle. Phone widths are untouched - the
+   max-width:720px block above owns them. */
+@media(min-width:721px) {
+  .options-panel {transform-origin:100% 100%;}
+  .options-panel .panel-heading button {width:30px;height:30px;min-width:30px;min-height:30px;font-size:17px;}
+  .options-panel .scene-options button {min-height:34px;min-width:0;font-size:12px;}
+  .options-panel .daylight-footer button,.options-panel .daylight-footer select,
+  .options-panel .lighting-choice select {min-height:32px;min-width:0;font-size:12px;}
+}
+
 /* Room names are annotations, not navigation controls. */
 .room-label{pointer-events:none;min-height:0;min-width:0;padding:2px;max-width:none}
 .room-label strong{overflow:visible;text-overflow:clip}
