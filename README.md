@@ -398,17 +398,33 @@ Kesit üretimi normal Python ortamında NumPy, Shapely ve mapbox-earcut kullanı
   Ulaşılamayan iki durak kalıyor (`f1-Z03 WC`, `f3-C05 Oturma alanı`): kaynak
   modelde kapıları kapalı, onlara uydurma yol açılmadı. `full` yüzeyinde de üç
   durak aynı sebeple ulaşılamıyor.
-- **Bahçede nereye gidilebiliyor.** 914 m²'lik parselde ev izi ~202 m². Dışarıda
-  yürünebilen zemin ~298 m²; kalan ~413 m²'de yürüme yüzeyi hiç yok (parselin
-  batı, doğu ve arka kenarındaki dikim şeritleri). Yürünebilen zeminin
-  %92'sine bodrum salonundan yürüyerek gidiliyor: havuz çevresi, arka çim,
-  evin doğu yanı, ön yaklaşım ve yol. Ulaşılamayan %8, ön bahçenin doğu
-  ucundaki bir cep — `full` yüzeyinde de aynı şekilde ulaşılamıyor, yani
-  birleştirmede kaybolmuş değil, modelde duvarla ayrılmış.
-  Bahçedeki yan merdivenlerden batıdaki veride var ve bahçeden üstüne
-  çıkılıyor, ama yalnız ~1,5 m yükseliyor ve orada bitiyor: bodrum kotunu
-  giriş katına bağlamıyor. Bodrum ↔ giriş katı bağlantısı iç merdivenden ve
-  önden dolaşarak kuruluyor.
+- **Bahçenin tamamı zemin oldu.** R44 dış mekân taraması ziyaretçinin
+  kullanacağı yerlere zemin sermiş — havuz çevresi, yollar, ön yaklaşım, evin
+  yanındaki şeritler — ve parselin batı, doğu ve arka kenarındaki dikim
+  şeritlerini yüzeysiz bırakmıştı: ziyaretçinin yürüyüp önünde durduğu ~413 m².
+  `tools/raster_plot_terrain.mjs` parselin kendi çimini, viewer'ın çizdiği
+  teslimattan doğrudan tarar. `plot-grass.gpu.gltf` tek mesh, tek malzeme ve
+  **çimin kendisidir**: duvar değil, havuz değil, çatı değil. Yalnız onu
+  taramak işin dürüstlüğüdür — okunan meshte olmadığı için hiçbir hücre bahçe
+  duvarının üstüne ya da suyun üzerine düşemez. Üç sınır: (1) yalnız yüzeyin
+  hiçbir şey bilmediği hücreye — herhangi bir katta yüksekliği olan hücre
+  olduğu gibi kalır, yani iç mekân, teraslar, yol ve merdiven kovası tanım
+  gereği dokunulmaz; (2) yalnız teslimatın kendi kayıtlı parsel sınırı içine,
+  komşunun arsası komşuda kalsın diye; (3) yalnız yamaç 40°'den dik değilse —
+  daha diki bakılacak şevdir, yürünecek zemin değil. Hangi hücreye hangi
+  yükseklik: çimin orada ulaştığı en üst kot; hangi kata: üstünde durduğu
+  döşeme kotuna. Eklenen 16.812 hücre (13.005 bodrum kotunda, 3.807 giriş
+  kotunda). 11.715 üçgenin 4.992'si dikliği yüzünden elendi.
+- **Sonuç.** Dışarıda yürünebilen zemin 315 → **552 m²**, bodrum salonundan
+  yürüyerek ulaşılan 290 → **480 m²** (dış zeminin %87'si). Parselin batı ve
+  doğu kenarına, kuzeydoğu ve güneybatı köşelerine yürünüyor.
+  Kalan ~72 m² parselin doğu ve batısındaki **alt teraslar**: 0,5–0,9 m'lik
+  istinat kenarlarının altındalar ve modelde oraya inen basamak yok. Yüzeyin
+  kendi 24 cm adım kuralı orayı geçirmiyor; uydurma basamak eklenmedi.
+- **Yanlar da bağlandı.** İç merdiven kovası tamamen kapatıldığında bile
+  bodrum kotundan giriş katına **evin etrafından dolaşarak** çıkılıyor — giriş
+  katı salonu ve ön yaklaşım dahil. Üst katlara dışarıdan yol yok, o da
+  uydurulmadı; 1. kat ve çatı katı iç merdivenden.
 - **VR.** WebXR yolu zaten kuruluydu; bu tur kullanılabilir hâle getirildi.
   Cihaz WebXR'a cevap veriyorsa açılıştaki karşılama kartı üçüncü bir seçenek
   kazanır: **`VR ile gez` / `Start immersive`**. Tıklanırsa kart kapanır,

@@ -17,7 +17,7 @@ const count = data.grid.width * data.grid.height;
 
 // Everywhere a person can walk to from a starting point, over every storey the
 // surface will hand them between. The same rule WalkSurface.path uses.
-function reachable(from) {
+function reachable(from, shut = null) {
   const start = surface.sample(from[0], from[2], from[1] - eye, true, .35);
   assert.ok(start, 'the starting point is not on the walking surface');
   const seen = new Uint8Array(count * 4), queue = new Int32Array(count * 4);
@@ -32,6 +32,10 @@ function reachable(from) {
       const nc = col + dc, nr = row + dr;
       if (nc < 0 || nr < 0 || nc >= data.grid.width || nr >= data.grid.height) continue;
       const next = nr * data.grid.width + nc;
+      if (shut) {
+        const x = data.grid.x + (nc + .5) * data.grid.step, z = data.grid.z + (nr + .5) * data.grid.step;
+        if (x > shut[0] && x < shut[1] && z > shut[2] && z < shut[3]) continue;
+      }
       for (let f = 0; f < 4; f++) {
         const key = f * count + next, layer = surface.layers[f];
         if (seen[key] || layer.masks[next] & 3 || layer.heights[next] === -32768) continue;
@@ -150,6 +154,47 @@ test('A held key walks you across the lawn, with the ground under your feet', ()
   assert.ok(ground, 'the walk ended off the surface');
   assert.ok(Math.abs(at.y - (ground.height + eye)) < 1e-6, 'the eye came loose from the ground');
   assert.notEqual(at.y, station.position[1], 'the ground under the garden reads as perfectly flat');
+});
+
+test('The whole garden is ground, and the sides carry a route up on their own', () => {
+  // The R44 pass laid ground where a visitor was expected to walk and left the
+  // planted borders with none; tools/raster_plot_terrain.mjs rasterises the
+  // plot's own grass mesh into the rest. What that has to be worth is area you
+  // can actually reach, so it is measured as area.
+  const terrain = data.plot_terrain;
+  assert.ok(terrain, 'the plot terrain pass left no record of itself');
+  assert.ok(terrain.added_cells.reduce((a, b) => a + b) > 12000, 'the borders gained almost nothing');
+  const found = reachable(basementSalon);
+  let standable = 0, walkable = 0;
+  for (let row = 0; row < data.grid.height; row++) for (let col = 0; col < data.grid.width; col++) {
+    const x = data.grid.x + (col + .5) * data.grid.step, z = data.grid.z + (row + .5) * data.grid.step;
+    if (x > -6.6 && x < 7.6 && z > -8.6 && z < 5.6) continue;          // the house itself
+    const index = row * data.grid.width + col;
+    let ground = false, reached = false;
+    for (let floor = 0; floor < 4; floor++) {
+      const layer = surface.layers[floor];
+      if (layer.heights[index] === -32768 || layer.masks[index] & 3) continue;
+      ground = true;
+      if (found.seen[floor * count + index]) reached = true;
+    }
+    if (ground) {standable++; if (reached) walkable++;}
+  }
+  assert.ok(walkable * 0.0144 > 430, `only ${(walkable * 0.0144).toFixed(0)} m² of garden can be walked`);
+  assert.ok(walkable / standable > 0.8, `only ${(100 * walkable / standable).toFixed(0)}% of the outdoor ground is reachable`);
+  // The corners of the plot, not just the middle of it.
+  for (const [name, x, z] of [['west border', -8.5, -6], ['east border', 9.5, -6],
+    ['north-east corner', 10, -20], ['south-west corner', -8, -24]]) {
+    const hit = surface.sample(x, z, 0, true, 60);
+    assert.ok(hit && found.at(hit.floor, x, z), `${name} cannot be walked to`);
+  }
+  // "yanlar da baglansin": shut the interior stairwell entirely and the garden
+  // must still carry a visitor from the basement level up to the ground floor
+  // round the outside of the house. Upstairs is another matter - there is no
+  // outdoor route to the first floor, and none is invented.
+  const sides = reachable(basementSalon, [0.2, 4.8, -3.9, -0.2]);
+  assert.ok(sides.at(1, -4.25, -7.3), 'with the stairs shut there is no way round to the ground floor');
+  assert.ok(sides.at(1, 0.02, 8.02), 'with the stairs shut the front approach is cut off');
+  assert.ok(sides.per[2] === 0 && sides.per[3] === 0, 'the upper storeys are reachable without the stairs');
 });
 
 test('The outdoors and both balconies can be asked for by name', () => {
