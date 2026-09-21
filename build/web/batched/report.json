@@ -2,31 +2,31 @@
   "source": "953cd59ecae412ecc3b51b6aac56e1ab6feec4c8ca73f15f6181782e109e8fac",
   "profiles": {
     "desktop": {
-      "bytes": 22583280,
+      "bytes": 22436476,
       "primitives": 37,
-      "triangles": 3140765,
+      "triangles": 3141866,
       "parts": [
         {
           "name": "architecture",
-          "bytes": 5930012,
+          "bytes": 5855372,
           "primitives": 11,
-          "triangles": 840430
+          "triangles": 841506
         },
         {
           "name": "interior",
-          "bytes": 2364560,
+          "bytes": 2307656,
           "primitives": 14,
           "triangles": 446285
         },
         {
           "name": "garden",
-          "bytes": 71388,
+          "bytes": 61132,
           "primitives": 5,
-          "triangles": 4813
+          "triangles": 4838
         },
         {
           "name": "context-ground",
-          "bytes": 575072,
+          "bytes": 570068,
           "primitives": 1,
           "triangles": 311432
         },
@@ -45,31 +45,31 @@
       ]
     },
     "mobile": {
-      "bytes": 16387340,
+      "bytes": 16300452,
       "primitives": 37,
-      "triangles": 2589562,
+      "triangles": 2590663,
       "parts": [
         {
           "name": "architecture",
-          "bytes": 4656092,
+          "bytes": 4593536,
           "primitives": 11,
-          "triangles": 840430
+          "triangles": 841506
         },
         {
           "name": "interior",
-          "bytes": 1966588,
+          "bytes": 1954584,
           "primitives": 14,
           "triangles": 446285
         },
         {
           "name": "garden",
-          "bytes": 60848,
+          "bytes": 52712,
           "primitives": 5,
-          "triangles": 4813
+          "triangles": 4838
         },
         {
           "name": "context-ground",
-          "bytes": 397828,
+          "bytes": 393636,
           "primitives": 1,
           "triangles": 169872
         },

@@ -5,23 +5,23 @@
       "changes": [
         {
           "part": "architecture",
-          "beforeBytes": 5204372,
-          "afterBytes": 5930012,
-          "images": 21,
+          "beforeBytes": 5122076,
+          "afterBytes": 5855372,
+          "images": 19,
           "compressedGeometryUnchanged": true
         },
         {
           "part": "interior",
-          "beforeBytes": 2232064,
-          "afterBytes": 2364560,
+          "beforeBytes": 2307656,
+          "afterBytes": 2307656,
           "images": 14,
           "compressedGeometryUnchanged": true
         }
       ],
-      "modelBytes": 22583280,
+      "modelBytes": 22436476,
       "electricBytes": 192600,
       "reflectionBytes": 1577748,
-      "sceneAssetBytes": 24375376,
+      "sceneAssetBytes": 24228572,
       "geometryStreams": {
         "architecture": [
           "6f31f87baab8289a5e30bcd0a7004b01df2e7cae9eb762b15c69424bf7cc3bb7",
@@ -76,10 +76,10 @@
     },
     "mobile": {
       "changes": [],
-      "modelBytes": 16387340,
+      "modelBytes": 16300452,
       "electricBytes": 58402,
       "reflectionBytes": 413723,
-      "sceneAssetBytes": 16881213,
+      "sceneAssetBytes": 16794325,
       "geometryStreams": {
         "architecture": [
           "e8ddc43fad7c1d14214ebb7756054a2a9322db49b771e2416eb77e5e4f7ea56d",

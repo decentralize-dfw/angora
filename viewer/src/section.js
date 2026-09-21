@@ -76,10 +76,18 @@ export function createHatchMaterial({pitch, duty, ground, ink, strength=0.62}) {
 // camera direction and of the inconsistent winding of the recovered CAD skin.
 export function createNativeSoilSection(data){
   if(data.coordinate_system!=='glTF_XZ'||data.floor_index!==0)throw Error('Invalid native soil section');
-  const positions=new Float32Array(data.p.length/2*3);
-  for(let i=0;i<data.p.length/2;i++){positions[i*3]=data.p[i*2];positions[i*3+1]=data.height;positions[i*3+2]=data.p[i*2+1];}
-  const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.BufferAttribute(positions,3));geometry.setIndex(data.i);geometry.computeVertexNormals();geometry.computeBoundingSphere();
-  const mesh=new THREE.Mesh(geometry,createHatchMaterial(SOIL_POCHE));mesh.name='Native basement earth section';mesh.visible=false;mesh.renderOrder=2;
+  const slices=data.slices??[data];
+  const geometries=slices.map(s=>{
+    const positions=new Float32Array(s.p.length/2*3);
+    for(let i=0;i<s.p.length/2;i++){positions[i*3]=s.p[i*2];positions[i*3+2]=s.p[i*2+1];}
+    const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(positions,3));g.setIndex(s.i);g.computeBoundingSphere();return g;
+  });
+  const mesh=new THREE.Mesh(geometries[0],createHatchMaterial(SOIL_POCHE));mesh.name='Native basement earth section';mesh.visible=false;mesh.renderOrder=2;
+  mesh.userData.update=(height,enabled)=>{
+    const index=Math.max(0,Math.min(slices.length-1,Math.round((height-data.height)/(data.step??.1))));
+    mesh.visible=enabled&&height>=data.height-.001&&height<=slices.at(-1).height+.001&&slices[index].i.length>0;
+    mesh.geometry=geometries[index];mesh.position.y=height+.001;
+  };
   return mesh;
 }
 
@@ -103,6 +111,7 @@ export function createWallCaps(atlas,transitionAtlas=null) {
   ];
   let current = -1, furnitureVisible = true;
   let movingIndex=-1,movingGeometry=null;
+  const movingCache=new Map();
   const geometries=new Map();
   function buildGeometries(index) {
     if(geometries.has(index))return geometries.get(index);
@@ -132,10 +141,14 @@ export function createWallCaps(atlas,transitionAtlas=null) {
     if(!exact&&transitionAtlas?.slices?.length){
       const index=Math.max(0,Math.min(transitionAtlas.slices.length-1,Math.round(height/transitionAtlas.step)));
       if(index!==movingIndex){
-        movingIndex=index;movingGeometry?.dispose();
+        movingIndex=index;
+        if(movingCache.has(index))movingGeometry=movingCache.get(index);
+        else {
         const data=transitionAtlas.slices[index],positions=new Float32Array(data.p.length/2*3);
         for(let k=0;k<data.p.length/2;k++){positions[k*3]=data.p[k*2];positions[k*3+2]=data.p[k*2+1];}
         movingGeometry=new THREE.BufferGeometry();movingGeometry.setAttribute('position',new THREE.BufferAttribute(positions,3));movingGeometry.setIndex(data.i);movingGeometry.computeBoundingSphere();
+        movingCache.set(index,movingGeometry);
+        }
       }
       layers[0].mesh.geometry=movingGeometry;layers[0].mesh.position.y=height;layers[0].mesh.visible=true;
       layers[1].mesh.visible=layers[2].mesh.visible=false;current=-2;return;
@@ -156,7 +169,7 @@ export function createWallCaps(atlas,transitionAtlas=null) {
       layer.mesh.position.y = height;
     }
   }, setFurnitureVisible(value) {furnitureVisible = value;},
-    dispose(){movingGeometry?.dispose();for(const batch of geometries.values())for(const geometry of batch)geometry.dispose();material.dispose();}
+    dispose(){for(const geometry of movingCache.values())geometry.dispose();for(const batch of geometries.values())for(const geometry of batch)geometry.dispose();material.dispose();}
   };
 }
 

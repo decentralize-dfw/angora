@@ -16,7 +16,7 @@ export function createFixtureVertices(controller){
  return {update,apply(material){
   if(!material.userData.angoraBatch)return;
   material.userData.vertexFixtures=true;
-  if(material.userData.hasElectricBake)return;
+  if(material.userData.hasElectricBake||material.userData.angoraUniformPlaster)return;
   const previous=material.onBeforeCompile,key=material.customProgramCacheKey();
   material.onBeforeCompile=(shader,renderer)=>{
    previous.call(material,shader,renderer);

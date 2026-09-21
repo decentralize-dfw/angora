@@ -187,7 +187,7 @@ function renderFrame(time) {
     if (transition) {
       transition.frames=(transition.frames??0)+1;
       transition.maxFrameGap=Math.max(transition.maxFrameGap??0,time-(transition.last??transition.start));
-      transition.elapsed=(transition.elapsed??0)+Math.min(50,Math.max(0,time-(transition.last??transition.start)));
+      transition.elapsed=Math.max(0,time-transition.start);
       transition.last=time;
       const t = Math.min(1, transition.elapsed / transition.span);
       clip.constant = THREE.MathUtils.lerp(transition.from, transition.to, smoothStep(t));
@@ -211,7 +211,9 @@ function renderFrame(time) {
       planWash.visible=planWash.userData.level>0.01;
     }
     caps?.update(clip.constant, clip.constant < fullHeight - 0.001);
-    if(nativeSoil)nativeSoil.visible=selected==='f0'&&!walk?.active&&Math.abs(clip.constant-nativeSoil.userData.height)<.001;
+    const earthSectionActive=/^f[0-3]$/.test(selected)&&!walk?.active&&clip.constant<fullHeight-.001;
+    plotMask?.setSoilCut(earthSectionActive?clip.constant:1e6);
+    nativeSoil?.userData.update(clip.constant,earthSectionActive);
     soilCap?.update(earthClip.constant, earthClip.constant < fullHeight - 0.001 && plotCutReady);
     const changing=walk?.active?walk.update(time,renderer.xr.getSession()):flying?false:controls.update();
     const activeCamera=walk?.active?walk.camera:camera;
@@ -668,13 +670,13 @@ async function loadNativeModel(manifest){
   if(navigation.source_native_sha256!==manifest.source_native_sha256)throw Error('Native navigation revision mismatch');
   nativeAtlas=atlas;roomData=rooms;walkData=navigation;
   $('#app').dataset.delivery='native';
-  flight.limitFrameStep=true;
+  flight.limitFrameStep=false;
   if(manifest.plot_boundary){const boundary=await json(manifest.plot_boundary);plotMask=createPlotMaterialMask(boundary.polygon_native_xy);}
   nativeDelivery=createNativeDelivery({manifest,root:modelRoot,scene,groups,load:loadAsset,
     releaseMaterial:m=>lighting.releaseMaterial(m),prepare:(o,{clipped,context,name})=>{
       o.renderOrder=5;lighting.prepareMesh(o,{clipped,context,name});
       const planes=clipped?[clip]:[];o.userData.clipPlanes=planes;
-        for(const material of Array.isArray(o.material)?o.material:[o.material]){material.clippingPlanes=planes;material.clipShadows=true;if(material.aoMap)material.aoMapIntensity=.7;if(name==='garden'||name==='context-plants'||(manifest.batched&&context))plotMask?.apply(material,{alwaysOutside:name==='context-buildings'});}
+        for(const material of Array.isArray(o.material)?o.material:[o.material]){material.clippingPlanes=planes;material.clipShadows=true;if(material.aoMap)material.aoMapIntensity=.7;if(name==='garden'||name==='context-plants'||(manifest.batched&&context))plotMask?.apply(material,{alwaysOutside:name==='context-buildings',cutInsidePlot:name==='context-ground'||name==='garden'});}
     }});
     await Promise.all([groundLightReady,electricReady]);
     await nativeDelivery.activate(selected==='building'?'f3':selected);

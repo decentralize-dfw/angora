@@ -10,7 +10,8 @@ export function prepareBatchedMaterial(material,{exterior=false}={}){
   material.lightMapIntensity=batch.light;material.userData.indirectDaylightIntensity=batch.light;
  }
  material.forceSinglePass=true;
- const neutralInterior=batch.materials.every(name=>/^(ceiling|INTERIOR)(\.\d+)?$/i.test(name));
+ if(material.transparent)material.depthWrite=false;
+ const neutralInterior=material.userData.angoraUniformPlaster||batch.materials.every(name=>/^(ceiling|INTERIOR)(\.\d+)?$/i.test(name));
  const previous=material.onBeforeCompile,key=material.customProgramCacheKey();
  material.onBeforeCompile=(shader,renderer)=>{
   previous.call(material,shader,renderer);

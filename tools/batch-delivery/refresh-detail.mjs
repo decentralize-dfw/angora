@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 const {default:sharp}=await import(process.env.ANGORA_SHARP_MODULE??'sharp');
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
-const source=path.join(root,'../model-finalization/web'),base=path.join(root,'build/web/batched');
+const source=path.resolve(process.env.ANGORA_DETAIL_SOURCE??path.join(root,'../model-finalization/web')),base=path.join(root,'build/web/batched');
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const linear=x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4;
 const srgb=x=>x<=.0031308?12.92*x:1.055*x**(1/2.4)-.055;
@@ -38,7 +38,7 @@ for(const profile of ['desktop','mobile']){
     const tile=await sharp(pixels,{raw:{width:inner,height:inner,channels:4}}).extend({top:pad,bottom:pad,left:pad,right:pad,extendWith:'repeat'}).png().toBuffer();
     composites.push({input:tile,left:(id%batch.grid)*cell,top:Math.floor(id/batch.grid)*cell});
    }
-   const color=await sharp({create:{width:size,height:size,channels:4,background:'#ffffff'}}).composite(composites).webp({quality:90}).toBuffer();
+   const color=await sharp({create:{width:size,height:size,channels:4,background:{r:255,g:255,b:255,alpha:material.alphaMode==='BLEND'?0:1}}}).composite(composites).webp({quality:90}).toBuffer();
    replacements.set(imageIndex(material.pbrMetallicRoughness.baseColorTexture),color);
    for(const [target,desc] of [[material.occlusionTexture,mats[0].occlusionTexture],[material.emissiveTexture,mats[0].extras?.angoraLightMapTexture]]){
     if(target&&desc)replacements.set(imageIndex(target),await sharp(sourceFile(desc)).resize(1024,1024).webp({quality:93}).toBuffer());

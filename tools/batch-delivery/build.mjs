@@ -21,7 +21,7 @@ const terrain=groundSampler(await io.read(path.join(source,'context-ground.gltf'
 const manifest=JSON.parse(await fs.readFile(path.join(source,'manifest.json')));
 const previous=process.env.ANGORA_REBUILD_PART?JSON.parse(await fs.readFile(path.join(target,'report.json'))):null;
 const previousPlacement=previous?JSON.parse(await fs.readFile(path.join(target,'context-placement.json')).catch(()=>'{"additions":[]}')):null;
-for(const item of contextPlan.additions)if(previousPlacement)item.garden=previousPlacement.additions.find(a=>a.id===item.id)?.garden;
+for(const item of contextPlan.additions)if(previousPlacement){const saved=previousPlacement.additions.find(a=>a.id===item.id);if(saved)Object.assign(item,saved);}
 const names=['architecture','interior','garden','context-ground','context-buildings','context-plants'];
 const size=512,pad=4;
 await MeshoptSimplifier.ready;
@@ -84,7 +84,7 @@ for(const profile of ['desktop','mobile']){
     const material=output.createMaterial(`${name}-${family(first.m.name)}-${batchIndex}`).setDoubleSided(true).setBaseColorFactor([1,1,1,1]).setRoughnessFactor(1).setMetallicFactor(1);
     if(!hasORM)material.setRoughnessFactor(rough(mats[0])).setMetallicFactor(metal(mats[0]));
     for(const role of roles){
-     const data=await sharp({create:{width:size,height:size,channels:4,background:role==='normal'?{r:128,g:128,b:255,alpha:1}:{r:255,g:255,b:255,alpha:1}}}).composite(composites[role]).webp({quality:role==='normal'?95:profile==='desktop'?88:78}).toBuffer();
+     const data=await sharp({create:{width:size,height:size,channels:4,background:role==='normal'?{r:128,g:128,b:255,alpha:1}:{r:255,g:255,b:255,alpha:role==='color'&&first.glass?0:1}}}).composite(composites[role]).webp({quality:role==='normal'?95:profile==='desktop'?88:78}).toBuffer();
      const tex=output.createTexture(role).setImage(data).setMimeType('image/webp');
      if(role==='color')material.setBaseColorTexture(tex);else if(role==='normal')material.setNormalTexture(tex);else material.setMetallicRoughnessTexture(tex);
     }
@@ -93,7 +93,7 @@ for(const profile of ['desktop','mobile']){
     if(aoFile){material.setOcclusionTexture(await loadTexture(aoFile,'AO'));material.getOcclusionTextureInfo().setTexCoord(1);}
     // Emissive texture transports the existing indirect-light bake; runtime binds it as lightMap.
     if(lightFile){material.setEmissiveTexture(await loadTexture(lightFile,'indirect'));material.getEmissiveTextureInfo().setTexCoord(2);}
-    material.setExtras({angoraAuthoredPBR:true,angoraBatch:{grid,pad:pad/size,inner:inner/size,light:lightFile?first.m.extras.angoraLightMapTexture.intensity:0,materials:mats.map(m=>m.name)}});
+    material.setExtras({angoraAuthoredPBR:true,angoraUniformPlaster:mats.every(m=>['ceiling','INTERIOR attic clean'].includes(m.name)),angoraBatch:{grid,pad:pad/size,inner:inner/size,light:lightFile?first.m.extras.angoraLightMapTexture.intensity:0,materials:mats.map(m=>m.name)}});
     let vertexCount=0,indexCount=0;for(const {p} of items){vertexCount+=p.getAttribute('POSITION').getCount();indexCount+=p.getIndices()?.getCount()??p.getAttribute('POSITION').getCount();}
     const pos=new Float32Array(vertexCount*3),normal=new Float32Array(vertexCount*3),uv=new Float32Array(vertexCount*2),uvAO=new Float32Array(vertexCount*2),uvLight=new Float32Array(vertexCount*2),ids=new Float32Array(vertexCount),colors=new Float32Array(vertexCount*4),indices=new Uint32Array(indexCount);
     let vertex=0,offset=0;const v=new THREE.Vector3(),n=new THREE.Vector3();
@@ -109,6 +109,7 @@ for(const profile of ['desktop','mobile']){
       v.fromArray(p.getAttribute('POSITION').getElement(i,[])).applyMatrix4(mat).toArray(pos,(vertex+i)*3);
       n.fromArray(p.getAttribute('NORMAL')?.getElement(i,[])??[0,1,0]).applyMatrix3(norm).normalize().toArray(normal,(vertex+i)*3);
       writeUV(baseUV,uv,i);writeUV(aoUV,uvAO,i);writeUV(lightUV,uvLight,i);ids[vertex+i]=id;
+      if(/limestone/i.test(m.name)){uv[(vertex+i)*2]=(Math.abs(n.z)>Math.abs(n.x)?v.x:v.z)/1.2;uv[(vertex+i)*2+1]=(Math.abs(n.y)>.8?v.z:v.y)/1.2;}
       const c=p.getAttribute('COLOR_0')?.getElement(i,[])??[1,1,1,1];colors.set([c[0],c[1],c[2],c[3]??1],(vertex+i)*4);
      }
      const idx=p.getIndices();for(let i=0;i<(idx?.getCount()??count);i++)indices[offset++]=vertex+(idx?idx.getScalar(i):i);vertex+=count;
@@ -134,6 +135,7 @@ for(const profile of ['desktop','mobile']){
  }
  for(const part of parts)part.gpu_sha256=createHash('sha256').update(await fs.readFile(path.join(out,part.file))).digest('hex');
  const next={...manifest,batched:true,profile,parts,interior_streams:[],surface_response:await sourceResponses(source,parts)};
+ if(source.includes(path.join('.runtime','finishing','source'))){next.house_geometry_unchanged=false;next.finishing_changes=['coplanar skin cleanup','closed stair undersides','master balcony curtain opening','continuous parquet UV','neutral ceiling and attic plaster','pool motif and retaining material'];}
  for(const stem of ['ground-light','floor-light']){
   const file=path.join(target,'lighting',stem+'.webp');
   if(await fs.stat(file).catch(()=>null)){
