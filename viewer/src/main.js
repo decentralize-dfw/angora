@@ -23,7 +23,7 @@ import {frameInsets} from './frame-insets.js';
 import {clockLabel} from './daylight.js';
 import {createHotspots} from './hotspots.js';
 import {createPhotoPins,createPhotoViewer} from './photo-gallery.js';
-import {renderPropertyInfo} from './property-info.js';
+import {renderPropertyInfo,renderFloorInfo} from './property-info.js';
 import {areaLabel} from './annotations.js';
 import { configureCameraControls } from './camera.js';
 import { PendingAction } from './pending-action.js';
@@ -242,7 +242,7 @@ function renderFrame(time) {
       if(sample&&walk.floor!==sample.floor){
         walk.floor=sample.floor;selected='f'+sample.floor;lift?.setWalkFloor(sample.floor);refreshLiftControl();
         $('#section-label').textContent=titles[selected]+' · '+t('walkSub');
-        if(roomData)renderPropertyInfo($('#property-info'),roomData,selected);
+        refreshSheets(selected);
       }
       else if(sample){walk.floor=sample.floor;selected='f'+sample.floor;}
       // The title names where the visitor actually stands - room, stairs,
@@ -265,9 +265,9 @@ function renderFrame(time) {
     const lightChanging=lighting.update(time);
     const massingChanging=massing?.update(time);
     const liftChanging=lift?.update(time);
-    annotations?.update(selected,roomNamesVisible,measurementsVisible,Boolean(transition||flight?.active),walk?.active,activeCamera,walk?.room);
-    hotspots?.update(activeCamera,walk?.active&&!walk.xrActive&&!walk.route);
     photoPins?.update(selected,photosVisible,Boolean(transition||flight?.active),walk?.active,activeCamera);
+    annotations?.update(selected,roomNamesVisible,measurementsVisible,Boolean(transition||flight?.active),walk?.active,activeCamera,walk?.room,photoPins?.obstacles()??[]);
+    hotspots?.update(activeCamera,walk?.active&&!walk.xrActive&&!walk.route);
     siteContext?.update(selected,activeCamera,controls.target,Boolean(transition||flight?.active),walk?.active);
     host.dataset.runtime=JSON.stringify({view:selected,plan:planMode,projection:activeCamera.type,cameraPosition:activeCamera.position.toArray(),target:controls.target.toArray(),sectionHeight:clip.constant,loaded:nativeDelivery?[...nativeDelivery.loaded.keys()]:[...groups.keys()],zoom:activeCamera.zoom,autoRotate:controls.autoRotate,zoomEnabled:controls.enableZoom,rotate:controls.mouseButtons.LEFT===THREE.MOUSE.ROTATE,transition:Boolean(transition),textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries});
     renderer.info.reset();
@@ -299,9 +299,9 @@ function resize() {
   if(renderer.getPixelRatio()!==ratio){renderer.setPixelRatio(ratio);lighting?.pixelRatio(ratio);}
   camera.aspect=aspect;
   if(camera.isOrthographicCamera){camera.left=-camera.top*aspect;camera.right=camera.top*aspect;}
-  if(selected.startsWith('f')&&!walk?.active)camera.setViewOffset(w,h,0,floorFrameInsets().offsetY,w,h);
+  if(selected.startsWith('f')&&!walk?.active)camera.setViewOffset(w,h,photoOffsetX(w),floorFrameInsets().offsetY,w,h);
   else camera.clearViewOffset();
-  camera.updateProjectionMatrix(); renderer.setSize(w, h); lighting?.resize(w, h); invalidate();
+  camera.updateProjectionMatrix(); renderer.setSize(w, h); lighting?.resize(w, h); layoutOverlays(); invalidate();
   walk?.resize(w,h);
 }
 function frame(initial=false,keep=false) {
@@ -344,17 +344,102 @@ function frame(initial=false,keep=false) {
   flight.go({target:center,polar,span:frameSpan,zoom:keep?camera.zoom:1,azimuth:planMode||selected==='region'?0:initial?.804:undefined},initial===true);
   resize();
 }
+const SHEETS={'options-panel':'open-options','info-panel':'open-info','floor-panel':'open-floor'};
+// The property sheet is the listing and never changes with the view; the
+// storey sheet is the open floor and exists only while one is open.
+function refreshSheets(view){
+  if(!roomData)return;
+  renderPropertyInfo($('#property-info'),roomData);
+  renderFloorInfo($('#floor-info'),roomData,view);
+  $('#floor-panel-title').textContent=/^f[0-3]$/.test(view)?titles[view]:t('floorInfo');
+  if(!/^f[0-3]$/.test(view)&&!$('#floor-panel').hidden)panel('',false);
+}
 function panel(id,open) {
   invalidateUIObstacles();
   if(walk){walk.inputSuspended=open;walk.keys.clear();walk.lastTime=null;}
   const previous=document.querySelector('.panel:not([hidden])');
-  for(const name of ['options-panel','info-panel']){
+  for(const [name,button] of Object.entries(SHEETS)){
     const show=name===id&&open;$('#'+name).hidden=!show;
-    $('#'+(name==='options-panel'?'open-options':'open-info')).setAttribute('aria-expanded',show);
+    $('#'+button).setAttribute('aria-expanded',show);
   }
   if(open){$('#'+id).querySelector('[data-close-panel]')?.focus();}
-  else if(previous){$('#'+(previous.id==='options-panel'?'open-options':'open-info')).focus();}
-  invalidate();
+  else if(previous){$('#'+SHEETS[previous.id])?.focus();}
+  layoutOverlays();
+  reframeForOverlays();
+}
+// Nothing the interface opens may land on anything else it has already
+// opened. The sheets own fixed corners in CSS; the photograph frame is the
+// one floating thing, so its band is measured here from whatever is open -
+// the gear at the bottom right, the view options above it, an information
+// sheet hanging from the top - and the frame is centred in what is left.
+// On a phone the frame is the screen and the media query owns it.
+// A frame squeezed into eighty pixels is not a photograph, so the band has a
+// floor: when the right column cannot give it one - a long storey sheet next
+// to the gear leaves a sliver - the frame moves to the empty left column
+// rather than shrinking or being drawn over.
+const PHOTO_BAND=300;
+// A frame parked over the right-hand quarter of the screen is parked over the
+// marks under it, and a mark you cannot reach is a mark that "does not open".
+// So the drawing steps aside instead: the projection is offset by half the
+// frame's width while it is up, which slides the whole storey out from under
+// it and back again when it closes. Bounded, so a narrow window cannot push
+// the plan off its other edge.
+function photoOffsetX(width){
+  const dock=$('#photo-dock');
+  if(!dock||dock.hidden||matchMedia('(max-width:720px)').matches)return 0;
+  const frame=host.getBoundingClientRect();
+  let left=0,right=0;
+  const claim=(rect,side)=>{
+    if(side==='left')left=Math.max(left,rect.right-frame.left);
+    else right=Math.max(right,frame.right-rect.left);
+  };
+  claim(dock.getBoundingClientRect(),dock.dataset.side==='left'?'left':'right');
+  // A sheet open on the right narrows the window from that side too, so with
+  // the frame parked left and a sheet parked right the drawing barely moves.
+  for(const id of Object.keys(SHEETS)){
+    const sheet=$('#'+id);if(!sheet||sheet.hidden||!sheet.getClientRects().length)continue;
+    claim(sheet.getBoundingClientRect(),'right');
+  }
+  const limit=width*0.16;
+  return Math.max(-limit,Math.min(limit,(right-left)/2));
+}
+// Only the projection moves, not the canvas: a full resize() would reset the
+// drawing buffer and flash the scene every time a photograph is opened.
+function reframeForOverlays(){
+  if(!renderer||!camera)return;
+  const w=host.clientWidth,h=Math.max(1,host.clientHeight);
+  if(selected.startsWith('f')&&!walk?.active)camera.setViewOffset(w,h,photoOffsetX(w),floorFrameInsets().offsetY,w,h);
+  else camera.clearViewOffset();
+  camera.updateProjectionMatrix();invalidate();
+}
+function layoutOverlays() {
+  const dock=$('#photo-dock');if(!dock)return;
+  if(matchMedia('(max-width:720px)').matches){
+    for(const key of ['top','bottom'])dock.style.removeProperty(key);
+    delete dock.dataset.side;return;
+  }
+  const frame=host.getBoundingClientRect();
+  // Whatever is on a side eats into that side's band from the edge it hangs
+  // off, so the frame is always centred in what nothing else has claimed.
+  const bandOf=elements=>{
+    let top=74,bottom=22;
+    for(const el of elements){
+      if(!el||el.hidden||!el.getClientRects().length)continue;
+      const rect=el.getBoundingClientRect();if(!rect.height)continue;
+      if((rect.top+rect.bottom)/2-frame.top<frame.height/2)top=Math.max(top,rect.bottom-frame.top+12);
+      else bottom=Math.max(bottom,frame.bottom-rect.top+12);
+    }
+    return {top,bottom,free:frame.height-top-bottom};
+  };
+  const right=bandOf([$('.tool-dock'),...Object.keys(SHEETS).map(id=>$('#'+id))]);
+  let side='right',band=right;
+  if(right.free<PHOTO_BAND){
+    const left=bandOf([$('.view-description'),$('#model-scale')]);
+    if(left.free>right.free){side='left';band=left;}
+  }
+  dock.dataset.side=side;
+  dock.style.top=`${Math.round(band.top)}px`;
+  dock.style.bottom=`${Math.round(band.bottom)}px`;
 }
 function clouds(){const el=$('#cloud-transition');el.classList.remove('travel');void el.offsetWidth;el.classList.add('travel');}
 // One label that always names exactly what the press will do: call the cabin
@@ -377,7 +462,7 @@ function updateRoomUI(station){
   $('#view-title').textContent=roomName(station.name);
   $('#section-label').textContent=titles[selected]+' · '+t('walkSub');
   $('#walk-room-area').textContent=areaLabel(roomData.rooms.find(r=>r.id===station.room_id),roomData);
-  renderPropertyInfo($('#property-info'),roomData,selected);
+  refreshSheets(selected);
 }
 // Live location while walking: the title, the room menu and the area follow
 // the visitor's feet. Circulation and outdoor ground name themselves and
@@ -540,7 +625,7 @@ async function selectView(id, initial = false) {
   if (earthClip.constant !== earthTarget) {earthClip.constant = earthTarget; renderer.shadowMap.needsUpdate = true;}
   lighting.frame(id,contextBox);massing?.set(id);lift?.park(id);
   lighting.interior(id.startsWith('f')?Number(id[1]):null,null);
-  if(roomData)renderPropertyInfo($('#property-info'),roomData,id);
+  refreshSheets(id);
   if(!initial&&(id==='region'||previous==='region'))clouds();
   if (initial || matchMedia('(prefers-reduced-motion: reduce)').matches) {
     clip.constant = target; transition = null;
@@ -598,7 +683,7 @@ function refreshChrome(){
       :selected==='building'?t('buildingSub'):selected==='region'?t('regionSub'):t('neighborhoodSub');
   }
   if(walkData)fillRoomMenu();
-  if(roomData)renderPropertyInfo($('#property-info'),roomData,selected);
+  refreshSheets(selected);
   refreshLiftControl();
   document.querySelectorAll('.room-label strong').forEach(el=>{
     el.dataset.base??=el.textContent;el.textContent=roomName(el.dataset.base);
@@ -1282,9 +1367,10 @@ function bindInterface() {
   // built here and only the switch waits for the model.
   photoPins = createPhotoPins(host, photoRoot, {onOpen: id => {photoViewer.show(id); invalidate();}});
   photoViewer = createPhotoViewer({
-    figure: $('#photo-view'), image: $('#photo-image'), caption: $('#photo-caption'),
+    dock: $('#photo-dock'), figure: $('#photo-view'), image: $('#photo-image'), caption: $('#photo-caption'),
     close: $('#photo-close'), backdrop: $('#photo-backdrop'), pins: photoPins,
-    onClose: () => {invalidateUIObstacles(); invalidate();},
+    onShow: () => {layoutOverlays(); reframeForOverlays(); invalidateUIObstacles();},
+    onClose: () => {layoutOverlays(); reframeForOverlays(); invalidateUIObstacles();},
   });
   // Switching the photographs off is also how an open frame is put away -
   // the brief asks for both that and the frame's own cross.
@@ -1302,6 +1388,7 @@ function bindInterface() {
   host.addEventListener('pointerdown',()=>setAutoRotate(false));
   $('#open-options').onclick=()=>panel('options-panel',$('#options-panel').hidden);
   $('#open-info').onclick=()=>panel('info-panel',$('#info-panel').hidden);
+  $('#open-floor').onclick=()=>panel('floor-panel',$('#floor-panel').hidden);
   document.querySelectorAll('[data-close-panel]').forEach(button=>button.onclick=()=>panel('',false));
   $('#daylight-hour').oninput=()=>{const hour=Number($('#daylight-hour').value);$('#daylight-time').textContent=clockLabel(hour);$('#daylight-hour').setAttribute('aria-valuetext',clockLabel(hour));lighting?.setTime(hour,Number($('#daylight-season').value));rememberState();invalidate();};
   $('#daylight-season').onchange=()=>$('#daylight-hour').oninput();
@@ -1359,5 +1446,5 @@ try {
   // The renderer never started, so no manifest hash is available to version
   // this with; revalidate so the panel cannot fall back to stale room data.
   fetch(new URL('rooms.json',modelRoot),{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('Property info unavailable');return r.json();})
-    .then(data=>{roomData=data;renderPropertyInfo($('#property-info'),data,'building');}).catch(console.warn);
+    .then(data=>{roomData=data;renderPropertyInfo($('#property-info'),data);}).catch(console.warn);
 }

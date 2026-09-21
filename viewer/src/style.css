@@ -66,6 +66,13 @@ h1 strong{font-weight:700}
 .quiet-button{pointer-events:auto;border-radius:999px;padding:0 18px;min-height:42px;font-size:13px;font-weight:600}
 .quiet-button:not(:disabled):hover{background:var(--glass-hover)}
 .quiet-button[aria-expanded=true]{background:var(--ink);color:#fff}
+/* The storey sheet belongs to the storeys: it is not offered at the street
+   or the area scale, where there is no open floor to describe. */
+#open-floor{display:none}
+#app[data-scale=floor] #open-floor{display:inline-flex;align-items:center}
+/* Two sheet buttons, the flags and the mark do not fit across a phone, so
+   the buttons carry a short name there and their full one everywhere else. */
+.label-short{display:none}
 /* Two flags, both always present; the active one is simply the one in
    colour. Smaller than the word it replaces. */
 .lang-switch{display:flex;gap:2px;padding:3px;border-radius:999px;pointer-events:auto;background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:var(--shadow-soft)}
@@ -132,8 +139,13 @@ h1 strong{font-weight:700}
 
 /* --------------------------------------------------------------- panels */
 .panel{right:22px;top:74px;border-radius:20px;padding:18px 20px;width:340px;max-width:calc(100% - 24px);max-height:calc(100dvh - 170px);overflow:auto;overscroll-behavior:contain;background:var(--panel);box-shadow:var(--shadow);z-index:50}
-.options-panel{right:22px}
+/* Each sheet has a reserved corner and a bounded height, so two of them - or
+   a sheet and an open photograph - can never land on the same pixels. The
+   view options rise out of their own gear at the bottom right; the two
+   information sheets hang from the buttons that open them at the top. */
+.options-panel{right:22px;top:auto;bottom:calc(max(22px,env(safe-area-inset-bottom)) + 58px);max-height:min(58dvh,520px)}
 .info-panel{right:22px}
+.floor-panel{right:22px}
 .panel-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .panel h2{font-size:15px;font-weight:700;margin:0;letter-spacing:.02em}
 .panel-heading button{width:36px;height:36px;border-radius:999px;font-size:20px;background:rgba(255,255,255,.5);border:1px solid var(--edge)}
@@ -187,8 +199,15 @@ h1 strong{font-weight:700}
 
 /* ------------------------------------------------------ scene overlays */
 .annotation-overlay,.hotspot-overlay{position:absolute;inset:0;pointer-events:none;z-index:5;overflow:hidden}
-.room-label{position:absolute;transform:translate(-50%,-50%);padding:0;background:none;border:0;box-shadow:none;text-align:left;line-height:1.25;pointer-events:auto;max-width:150px;min-width:44px;min-height:44px;color:#1c2622;display:grid;place-items:center}
-.room-label i{padding:0;background:none;border:0;box-shadow:none;max-width:100%;min-width:0;font-style:normal;text-align:center;text-shadow:0 1px 2px #fff,0 0 6px #ffffffd9,0 0 12px #ffffff8c}
+.room-label{position:absolute;transform:translate(-50%,-50%) scale(var(--label-fit,1));padding:0;background:none;border:0;box-shadow:none;text-align:left;line-height:1.25;pointer-events:auto;max-width:150px;min-width:44px;min-height:44px;color:#1c2622;display:grid;place-items:center}
+/* A white glow over a walnut floor is not contrast, it is haze - the names
+   and their m² were being read off the wood rather than off anything. The tag
+   sits on a plate instead, and annotations.js scales that plate until it fits
+   inside the room's own measured rectangle from whatever angle the model is
+   turned to; a name that cannot keep its plate inside the room gives it up
+   (data-plate=off) or leaves the drawing altogether. */
+.room-label i{padding:4px 9px 5px;background:rgba(255,255,255,.4);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);border:0;border-radius:11px;box-shadow:0 1px 3px #1b322514;max-width:100%;min-width:0;font-style:normal;text-align:center;text-shadow:none}
+.room-label[data-plate=off] i{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none;text-shadow:0 1px 2px #fff,0 0 6px #ffffffd9,0 0 12px #ffffff8c}
 .room-label strong{display:block;font-weight:700;padding-right:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#16241e}
 .room-label em{display:block;font-style:normal}
 .room-label span{display:block;font-size:.82em;color:#43584f;margin-top:1px;font-variant-numeric:tabular-nums}
@@ -200,24 +219,35 @@ h1 strong{font-weight:700}
 .hotspot span{display:block;font-size:11px;max-width:120px;background:#182420ca;border-radius:8px;margin-top:8px;padding:4px 7px}
 
 /* ----------------------------------------------------- photograph pins */
-/* A pin is the CAMERA: the numbered dot is where the photographer stood and
-   the wedge is the direction the lens faced, both taken from the owner's own
-   key drawing. No thumbnail is drawn on the model - a storey carrying fifty
-   little pictures is a contact sheet, not a plan - so the frame itself opens
-   once, beside the model, when a pin is pressed. */
+/* A pin is the CAMERA: the dot is where the photographer stood, the two rays
+   are the lens's angle, and the dotted line drops to the floor point under
+   the dot - so a mark that had to step aside from a crowded neighbour still
+   says exactly which spot it belongs to. No number: fifty-five badges over a
+   storey plan is a contact sheet, not a drawing. */
 .photo-overlay{position:absolute;inset:0;pointer-events:none;z-index:6;overflow:hidden}
-.photo-pin{position:absolute;transform:translate(-50%,-50%);width:44px;height:44px;display:grid;place-items:center;padding:0;background:transparent;border:0;box-shadow:none;color:var(--ink);pointer-events:auto}
+.photo-leaders{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.photo-leader{stroke:#16241e;stroke-width:1;stroke-opacity:.45;stroke-dasharray:2.5 2.5}
+.photo-foot{fill:#16241e;fill-opacity:.5;stroke:#fff;stroke-width:.9;stroke-opacity:.85}
+/* The press target is a CIRCLE on the camera dot, not the mark's rotated box.
+   A rotated box leaves dead corners where a press lands on the model instead,
+   and neighbouring boxes steal each other's presses - between them that was
+   the "sometimes one press, sometimes five" the owner hit. The circle is
+   smaller than the clearance photo-gallery.js keeps between two marks, so no
+   two targets can ever overlap, and depth decides the stacking anyway. */
+.photo-pin{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;padding:0;background:transparent;border:0;box-shadow:none;line-height:0;pointer-events:auto;touch-action:manipulation}
+.photo-pin svg{position:absolute;left:17px;top:17px;width:36px;height:28px;pointer-events:none;overflow:visible;
+  transform-origin:6px 14px;transform:translate(-6px,-14px) rotate(var(--pin-angle,0deg));
+  filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px #ffffffcc) drop-shadow(0 1px 2px #14201b40)}
+.pin-ray{fill:none;stroke:#16241e;stroke-width:1.7;stroke-linecap:round}
+.pin-lens{fill:rgba(255,255,255,.94);stroke:#16241e;stroke-width:1.5;stroke-linejoin:round}
+.pin-pupil{fill:#16241e}
+.pin-dot{fill:#16241e;stroke:#fff;stroke-width:1.1}
+.photo-pin:hover .pin-ray,.photo-pin:hover .pin-lens{stroke:var(--accent)}
+.photo-pin:hover .pin-pupil,.photo-pin:hover .pin-dot{fill:var(--accent)}
 .photo-pin[aria-pressed=true]{background:transparent}
-.photo-pin i{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none;
-  border-left:10px solid transparent;border-right:10px solid transparent;
-  border-top:20px solid rgba(255,255,255,.72);
-  transform:translate(-50%,-50%) rotate(var(--pin-angle,0deg)) translateY(-10px);
-  filter:drop-shadow(0 1px 2px rgba(22,34,29,.3))}
-.photo-pin b{position:relative;display:grid;place-items:center;min-width:21px;height:21px;padding:0 5px;border-radius:999px;background:var(--ink);color:#fff;font-size:10.5px;font-weight:700;font-variant-numeric:tabular-nums;box-shadow:0 1px 4px rgba(22,34,29,.4),0 0 0 2px rgba(255,255,255,.88);transition:transform .16s ease,background .16s ease}
-.photo-pin:hover b{background:var(--accent);transform:scale(1.12)}
-.photo-pin:hover i{border-top-color:rgba(47,110,96,.55)}
-.photo-pin[aria-pressed=true] b{background:var(--accent);transform:scale(1.18)}
-.photo-pin[aria-pressed=true] i{border-top-color:rgba(47,110,96,.72)}
+.photo-pin[aria-pressed=true] .pin-ray{stroke:var(--accent);stroke-width:2.1}
+.photo-pin[aria-pressed=true] .pin-lens{stroke:var(--accent);stroke-width:1.9;fill:#fff}
+.photo-pin[aria-pressed=true] .pin-pupil,.photo-pin[aria-pressed=true] .pin-dot{fill:var(--accent)}
 
 /* ------------------------------------------------------ photograph view */
 /* On a desktop it sits at the right edge so the plan stays visible and the
@@ -226,8 +256,13 @@ h1 strong{font-weight:700}
    pressing another pin replaces it - and the cross or the Fotoğraflar
    switch puts it away. */
 .photo-backdrop{position:absolute;inset:0;z-index:44;display:none;background:rgba(255,255,255,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-.photo-view{position:absolute;z-index:45;margin:0;right:22px;top:50%;transform:translateY(-50%);width:min(34vw,470px);border-radius:18px;overflow:hidden;background:var(--panel);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:var(--shadow)}
-.photo-view img{display:block;width:100%;height:auto;max-height:min(62dvh,560px);object-fit:contain;background:#e5eae7;transition:opacity 220ms ease}
+/* The dock is the reserved band, set by main.js from whatever sheets are
+   open: the frame is centred inside it and can never reach the gear, the
+   view options or an information sheet. */
+.photo-dock{position:absolute;z-index:45;right:22px;top:74px;bottom:88px;width:min(34vw,470px);display:grid;align-content:center;pointer-events:none}
+.photo-dock[data-side=left]{right:auto;left:22px}
+.photo-view{position:relative;margin:0;display:flex;flex-direction:column;max-height:100%;border-radius:18px;overflow:hidden;background:var(--panel);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:var(--shadow);pointer-events:auto}
+.photo-view img{display:block;width:100%;height:auto;flex:0 1 auto;min-height:0;max-height:min(62dvh,560px);object-fit:contain;background:#e5eae7;transition:opacity 220ms ease}
 /* Half a megabyte of photograph is a beat of nothing on a phone, so the
    frame opens at a readable size and says it is working. */
 .photo-view[data-state=loading] img{opacity:.25;min-height:min(38dvh,300px);background-image:linear-gradient(100deg,#e7ebe8 32%,#f3f6f3 50%,#e7ebe8 68%);background-size:220% 100%;animation:photo-loading 1.2s linear infinite}
@@ -235,7 +270,7 @@ h1 strong{font-weight:700}
 .photo-view figcaption{padding:10px 14px 12px;font-size:12px;font-weight:600;letter-spacing:.01em;color:var(--ink);text-align:center}
 .photo-close{position:absolute;right:9px;top:9px;z-index:2;width:34px;height:34px;border-radius:999px;font-size:19px;line-height:1;color:var(--ink);background:rgba(255,255,255,.82);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:0 2px 8px rgba(22,34,29,.22)}
 .photo-close:hover{background:#fff}
-#app[data-walk=true] .photo-view,#app[data-walk=true] .photo-backdrop{display:none}
+#app[data-walk=true] .photo-dock,#app[data-walk=true] .photo-backdrop{display:none}
 
 /* ------------------------------------------------------------ site view */
 .site-overlay{position:absolute;inset:0;pointer-events:none;z-index:6;overflow:hidden}
@@ -307,7 +342,10 @@ h1 strong{font-weight:700}
 .rm-info-dist{margin:9px 0 0;font-size:9.5px;color:var(--muted)}
 .rm-info-location{margin-top:9px}
 /* one filter per amenity family; pressed = shown */
-.rm-filters{position:absolute;left:22px;bottom:max(22px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:flex-start;gap:5px;z-index:2}
+/* They used to stack up the left edge, straight under the settlement panel,
+   which swallowed the last three. Centred along the bottom they have the
+   whole width and the panel keeps its corner. */
+.rm-filters{position:absolute;left:50%;transform:translateX(-50%);bottom:max(22px,env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px;z-index:2;max-width:min(760px,calc(100vw - 420px))}
 .rm-filters button{display:flex;align-items:center;gap:8px;min-height:34px;padding:0 15px 0 11px;border-radius:999px;font-size:11.5px;font-weight:600;background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:0 2px 10px #1b322514}
 .rm-filters button i{width:9px;height:9px;border-radius:50%;box-shadow:0 0 0 1.5px #fff;flex-shrink:0}
 .rm-filters button[aria-pressed=true]{background:var(--glass);color:var(--ink)}
@@ -445,7 +483,9 @@ h1 strong{font-weight:700}
   .brand{font-size:10px;letter-spacing:.24em}
   h1{font-size:15px}
   .brand-divider{height:13px}
-  .quiet-button{font-size:12px;min-height:40px;padding:0 13px}
+  .quiet-button{font-size:12px;min-height:40px;padding:0 11px}
+  .label-long{display:none}
+  .label-short{display:inline}
   .scale-picker{top:auto;bottom:max(108px,calc(env(safe-area-inset-bottom) + 96px));left:50%;padding:3px}
   /* no dock outside the Villa scale - the picker takes the bottom edge */
   #app[data-scale=neighborhood] .scale-picker{bottom:max(16px,calc(env(safe-area-inset-bottom) + 4px))}
@@ -465,6 +505,7 @@ h1 strong{font-weight:700}
   .walk-launch{min-height:40px;font-size:12px;padding:0 13px}
   .gesture-help{display:none}
   .panel{top:auto;right:0;left:0;bottom:0;width:auto;max-width:none;border-radius:22px 22px 0 0;max-height:calc(100dvh - 110px);padding:15px 16px calc(15px + env(safe-area-inset-bottom))}
+  .options-panel{bottom:0;max-height:calc(100dvh - 110px)}
   .model-scale{left:12px;bottom:max(162px,calc(env(safe-area-inset-bottom) + 150px))}
   .tool-dock{right:12px;bottom:max(162px,calc(env(safe-area-inset-bottom) + 150px))}
   .tool-button{width:44px;height:44px}
@@ -478,7 +519,7 @@ h1 strong{font-weight:700}
   .rm-info-body{font-size:10.5px;line-height:1.55}
   .rm-info-facts{gap:5px 10px;padding-top:8px;margin-top:9px}
   .rm-info-facts b{font-size:12px}
-  .rm-filters{left:12px;right:12px;bottom:max(176px,calc(env(safe-area-inset-bottom) + 164px));flex-direction:row;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+  .rm-filters{left:12px;right:12px;transform:none;max-width:none;bottom:max(176px,calc(env(safe-area-inset-bottom) + 164px));flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
   .rm-filters::-webkit-scrollbar{display:none}
   .rm-filters button{min-height:30px;font-size:10.5px;padding:0 11px 0 8px;flex:0 0 auto;gap:6px}
   .walk-close{right:12px;top:max(12px,env(safe-area-inset-top))}
@@ -490,7 +531,8 @@ h1 strong{font-weight:700}
   #app[data-walk=true] .view-description{top:62px}
   #app[data-walk=true] .gesture-help{display:none}
   .photo-backdrop{display:block}
-  .photo-view{right:auto;left:50%;top:50%;transform:translate(-50%,-50%);width:80vw;max-width:80vw;max-height:80dvh;display:grid;grid-template-rows:1fr auto}
+  .photo-dock{right:auto;left:0;width:100%;top:0;bottom:0;justify-items:center;align-content:center}
+  .photo-view{width:80vw;max-width:80vw;max-height:80dvh}
   .photo-view img{max-height:calc(80dvh - 46px)}
   .photo-view[data-state=loading] img{min-height:min(46dvh,340px)}
   .photo-close{right:8px;top:8px;width:36px;height:36px}

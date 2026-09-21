@@ -51,6 +51,13 @@ export const LISTING = {
       ]},
     ],
     location: 'Çankaya’nın Mutlukent Mahallesi’nde, Angora Evleri içinde yer alan villa, Eskişehir Yolu’na yakınlığı sayesinde şehrin önemli merkezlerine kolay ulaşım imkânı sağlar.',
+    region: {
+      set: 'Çayyolu · Mutlukent · Çankaya, Ankara',
+      body: [
+        'Angora Evleri, Çankaya’nın Çayyolu bölgesinde, Mutlukent Mahallesi sınırları içinde yer alan alçak yoğunluklu bir villa yerleşimidir. Planlı sokak dokusu, olgun bahçeleri ve kendi içine dönük düzeniyle Ankara’nın en köklü villa adreslerinden biridir.',
+        'Hacettepe Beytepe kampüsünün yeşili yerleşkenin hemen komşusudur; Eskişehir Yolu ve Bilkent bağlantısı sayesinde şehrin önemli merkezlerine ulaşım dakikalarla ölçülür. Günlük ihtiyaçlar Çayyolu’nun çarşı ve alışveriş hattında karşılanır.',
+      ],
+    },
   },
   en: {
     kind: 'Detached villa',
@@ -96,6 +103,13 @@ export const LISTING = {
       ]},
     ],
     location: 'In Çankaya’s Mutlukent district, inside Angora Evleri, the villa is close to the Eskişehir road, which puts the city’s main centres within easy reach.',
+    region: {
+      set: 'Çayyolu · Mutlukent · Çankaya, Ankara',
+      body: [
+        'Angora Evleri is a low-density villa settlement in Çankaya’s Çayyolu, within the Mutlukent district. Its planned street fabric, mature gardens and inward-facing layout make it one of Ankara’s oldest established villa addresses.',
+        'The green of the Hacettepe Beytepe campus borders the settlement; the Eskişehir road and the Bilkent link put the city’s main centres minutes away, and daily needs are met along Çayyolu’s shopping streets.',
+      ],
+    },
   },
 };
 export const listing = lang => LISTING[lang] ?? LISTING.tr;
