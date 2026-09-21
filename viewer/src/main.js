@@ -114,7 +114,11 @@ let planWash = null;
 let flight, hotspots, planMode=false, roomData, interiorLights=true, soilCap=null;
 let scene, camera, renderer, controls, loader, loadAsset, caps, buildingBox, gardenBox, contextBox, lighting, siteContext;
 let nativeDelivery=null,nativeSwitching=false,nativeAtlas=null,nativeSoil=null,plotMask=null;
-let selected = 'building', ready = false, loading = false;
+// The opening view is the street, not the house: a visitor should see where
+// Angora 21 sits before they see what it is. share-state.js has always called
+// this the default - a link carries no view parameter for it - and this is the
+// line that used to disagree with it.
+let selected = 'neighborhood', ready = false, loading = false;
 let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations, walk;
 let photosVisible = false, photoPins = null, photoViewer = null;
 let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;

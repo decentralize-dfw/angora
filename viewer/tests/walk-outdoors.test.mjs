@@ -179,8 +179,19 @@ test('The whole garden is ground, and the sides carry a route up on their own', 
     }
     if (ground) {standable++; if (reached) walkable++;}
   }
-  assert.ok(walkable * 0.0144 > 430, `only ${(walkable * 0.0144).toFixed(0)} m² of garden can be walked`);
-  assert.ok(walkable / standable > 0.8, `only ${(100 * walkable / standable).toFixed(0)}% of the outdoor ground is reachable`);
+  assert.ok(walkable * 0.0144 > 500, `only ${(walkable * 0.0144).toFixed(0)} m² of garden can be walked`);
+  assert.ok(walkable / standable > 0.95, `only ${(100 * walkable / standable).toFixed(0)}% of the outdoor ground is reachable`);
+  // The flights down to the lower terraces are an addition to the model, not a
+  // reading of it, and the delivery has to say so in its own words.
+  const steps = data.terrace_steps;
+  assert.ok(steps?.invented === true, 'the terrace steps are not marked as invented');
+  assert.ok(/no steps/i.test(steps.note), 'the terrace steps carry no note about where they came from');
+  assert.ok(steps.flights.length >= 4 && steps.flights.length <= 20,
+    `${steps.flights.length} flights is not a few steps, it is a redesign`);
+  for (const flight of steps.flights) {
+    assert.ok(Math.abs(flight.rise_m) < 2, `a flight climbing ${flight.rise_m} m is not a garden step`);
+    assert.ok(flight.length_m <= 6, `a flight ${flight.length_m} m long is a path, not a step`);
+  }
   // The corners of the plot, not just the middle of it.
   for (const [name, x, z] of [['west border', -8.5, -6], ['east border', 9.5, -6],
     ['north-east corner', 10, -20], ['south-west corner', -8, -24]]) {

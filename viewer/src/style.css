@@ -58,7 +58,8 @@ button[aria-pressed=true]{color:#fff;background:var(--ink)}
 /* ------------------------------------------------------------- top bar */
 .topbar{top:max(18px,env(safe-area-inset-top));left:22px;right:22px;display:flex;align-items:center;justify-content:space-between;pointer-events:none;gap:12px}
 .identity{display:flex;align-items:center;gap:14px;border-radius:999px;padding:9px 18px 9px 16px}
-.brand{font-size:12px;font-weight:700;letter-spacing:.30em;transform:translateY(.5px)}
+.brand{font-size:12px;font-weight:700;letter-spacing:.30em;transform:translateY(.5px);color:inherit;text-decoration:none;pointer-events:auto}
+.brand:hover{color:var(--accent)}
 .brand-divider{width:1px;height:16px;background:rgba(22,29,26,.22)}
 h1{font-size:17px;letter-spacing:.02em;font-weight:500;margin:0;white-space:nowrap}
 h1 strong{font-weight:700}
@@ -384,9 +385,20 @@ h1 strong{font-weight:700}
 .rm-filters button[aria-pressed=false] i,.rm-filters button[aria-pressed=false] .rm-ico{opacity:.32}
 #app[data-scale=region] .side-tools,#app[data-scale=region] .model-scale,#app[data-scale=region] .gesture-help,
 #app[data-scale=region] .tool-dock{display:none}
-.model-scale{position:absolute;z-index:7;left:22px;bottom:max(22px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:5px;pointer-events:none;font-size:11px;color:var(--ink)}
+.model-scale{position:absolute;z-index:7;left:22px;bottom:calc(max(22px,env(safe-area-inset-bottom)) + 34px);display:flex;flex-direction:column;align-items:center;gap:5px;pointer-events:none;font-size:11px;color:var(--ink)}
 .model-scale span{border-radius:999px;padding:3px 10px}
 .model-scale i{display:block;height:6px;border:solid var(--ink);border-width:0 1px 2px}
+/* One line under the scale bar: who owns the house and who drew it. Over grass
+   at ten pixels, plain text is not readable - it takes the same glass the
+   scale's own label wears. */
+.site-credit{position:absolute;z-index:7;left:22px;bottom:max(22px,env(safe-area-inset-bottom));margin:0;
+  padding:4px 11px 5px;border-radius:999px;line-height:1.4;
+  background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  border:1px solid var(--edge);box-shadow:var(--shadow-soft);
+  font-size:10.5px;letter-spacing:.06em;color:var(--muted);pointer-events:none}
+.site-credit a{color:var(--ink);font-weight:700;letter-spacing:.14em;text-decoration:none;pointer-events:auto}
+.site-credit a:hover{color:var(--accent)}
+#app[data-walk=true] .site-credit,#app[data-render-error=true] .site-credit{display:none}
 #app[data-walk=true] .region-panel{display:none}
 #app[data-render-error=true] .view-description,#app[data-render-error=true] .model-scale{display:none}
 
@@ -464,9 +476,9 @@ h1 strong{font-weight:700}
 #boot .load-status{position:static;transform:none;bottom:auto;left:auto}
 #boot.boot-done{opacity:0;pointer-events:none}
 .topbar,.scale-picker,.view-description,.side-tools,.explore-dock,
-.region-panel,.model-scale,.gesture-help,.tool-dock{transition:opacity 420ms ease}
+.region-panel,.model-scale,.site-credit,.gesture-help,.tool-dock{transition:opacity 420ms ease}
 #app[data-booting=true] :is(.topbar,.scale-picker,.view-description,.side-tools,
-.explore-dock,.region-panel,.model-scale,.gesture-help,.tool-dock,.panel){opacity:0;pointer-events:none}
+.explore-dock,.region-panel,.model-scale,.site-credit,.gesture-help,.tool-dock,.panel){opacity:0;pointer-events:none}
 /* honest fallback when 3D cannot start: the facts and the listing stay */
 .no3d{max-width:340px;display:grid;gap:14px;justify-items:center;text-align:center;
   border-radius:20px;padding:20px 22px;background:var(--panel);border:1px solid var(--edge);box-shadow:var(--shadow-soft)}
@@ -550,7 +562,8 @@ h1 strong{font-weight:700}
      them; on a phone it belongs at the top right, opposite the scale
      picker, and the model scale sits just clear of the dock instead of
      floating halfway up the drawing. */
-  .model-scale{left:12px;bottom:max(116px,calc(env(safe-area-inset-bottom) + 104px))}
+  .site-credit{left:12px;bottom:max(116px,calc(env(safe-area-inset-bottom) + 104px));font-size:9.5px;padding:3px 9px 4px}
+  .model-scale{left:12px;bottom:max(146px,calc(env(safe-area-inset-bottom) + 134px))}
   .tool-button{width:40px;height:40px}
   .tool-button svg{width:19px;height:19px}
   .lang-switch{padding:2px;gap:1px}

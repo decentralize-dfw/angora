@@ -133,7 +133,11 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
 @media(max-width:600px){.region-panel{left:12px;right:12px;bottom:calc(env(safe-area-inset-bottom) + 12px);max-width:none}}
 
 /* The native delivery keeps its floor drawing clear of the controls. */
-#app[data-delivery=native] .scale-picker{top:80px;bottom:auto;left:22px;transform:none}
+/* The scale picker belongs in the middle of the top, between the mark and the
+   two sheet buttons: it is the one control that says where you are standing in
+   the whole story, and the left column it used to sit in is now the model's
+   own. */
+#app[data-delivery=native] .scale-picker{top:max(18px,env(safe-area-inset-top));bottom:auto;left:50%;transform:translateX(-50%)}
 #app[data-delivery=native] .view-description{top:142px}
 #app[data-delivery=native] .side-tools{top:80px;bottom:auto;transform:none}
 #app[data-delivery=native] .explore-dock{bottom:max(22px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:6px}

@@ -418,9 +418,18 @@ Kesit üretimi normal Python ortamında NumPy, Shapely ve mapbox-earcut kullanı
 - **Sonuç.** Dışarıda yürünebilen zemin 315 → **552 m²**, bodrum salonundan
   yürüyerek ulaşılan 290 → **480 m²** (dış zeminin %87'si). Parselin batı ve
   doğu kenarına, kuzeydoğu ve güneybatı köşelerine yürünüyor.
-  Kalan ~72 m² parselin doğu ve batısındaki **alt teraslar**: 0,5–0,9 m'lik
-  istinat kenarlarının altındalar ve modelde oraya inen basamak yok. Yüzeyin
-  kendi 24 cm adım kuralı orayı geçirmiyor; uydurma basamak eklenmedi.
+  Kalan cepler `tools/add_terrace_steps.mjs` ile bağlandı. **Bu araç geometri
+  uyduruyor** ve bunu teslimata imzalıyor (`terrace_steps.invented: true` ve
+  nereden geldiğini söyleyen bir not): kaynak modelde alt teraslara inen
+  basamak yok, malik istedi, bu da modelin okunması değil ev hakkında bir
+  karar. O yüzden yalan en küçüğüne indirildi — cep başına **tek** kol, iki
+  kotun birbirine en çok yaklaştığı tek noktada, 1,20 m genişlikte, bahçe
+  merdiveni eğiminde, başka hiçbir yerde. İstinat kenarı o tek kol dışında
+  boyunca duvar olarak kalır. Bir cep bağlanamıyorsa bağlanmıyor ve raporda
+  sebebiyle yazılıyor. Konan dokuz kolun yedisinin yükselişi ±0,2 m'nin
+  altında: teraslar aslında duvarla değil, zemindeki boşlukla ayrılmışmış;
+  yalnız biri gerçek bir 1,41 m'lik iniş. Sonuç: dış zeminin **%96,7'si**
+  (558 m²'nin 539 m²'si) bodrum salonundan yürüyerek geziliyor.
 - **Yanlar da bağlandı.** İç merdiven kovası tamamen kapatıldığında bile
   bodrum kotundan giriş katına **evin etrafından dolaşarak** çıkılıyor — giriş
   katı salonu ve ön yaklaşım dahil. Üst katlara dışarıdan yol yok, o da
@@ -454,6 +463,27 @@ Kesit üretimi normal Python ortamında NumPy, Shapely ve mapbox-earcut kullanı
   "0 hücre değişti" kaydını doğrular. Hücre hücre kanıt aracın kendisindedir —
   eski ve yeni yüzeyin aynı anda elde olduğu tek yer orasıdır ve biri oynamışsa
   dosyayı yazmayı reddeder.
+
+### R47 altıncı tur — açılış ölçeği, künye ve üst orta menü
+
+Yürüme yüzeyi üç adımda, bu sırayla üretilir ve her adım kendi raporunu yazar:
+`python3 tools/extend_native_navigation_outdoors.py` (dış mekân + merdiven
+kovası) → `node tools/raster_plot_terrain.mjs` (parselin çimi) →
+`node tools/add_terrace_steps.mjs` (alt teraslara kollar).
+
+- **Açılış görünümü `Yakın çevre`.** Ziyaretçi Angora 21'in ne olduğunu
+  görmeden önce nerede olduğunu görsün. `share-state.js` bunu zaten varsayılan
+  sayıyordu (bağlantı bu görünüm için `view` parametresi taşımaz);
+  `main.js` bu satırda onunla çelişiyordu, artık çelişmiyor. VR açılışta
+  dayatılmaz: WebXR'a cevap veren cihazda karşılama kartındaki `Start
+  immersive` bir seçenektir, alınmazsa ekrandaki hâl aynen açılır.
+- **Ölçek menüsü üst ortada.** `Bölge · Yakın çevre · Villa`, markanın ve iki
+  sayfa düğmesinin arasına, üst şeridin ortasına alındı: bütün hikâyede nerede
+  durduğunuzu söyleyen tek denetim orası. Sol sütun modelin kendisine kaldı.
+- **MERGVS künyesi.** Üst soldaki marka artık mergvs.com'a gider. Sol alta,
+  ölçek çubuğunun altına tek satır künye kondu: Türkçe `Proje geliştiricisi ve
+  sahibi: MERGVS`, İngilizce `Owner and developer: MERGVS`. Tur sırasında
+  çizilmez.
 
 ## R44 — beyaz iç mekânlar, bodrum dolgusu, dış mekân yürüyüşü ve birleşik model
 
