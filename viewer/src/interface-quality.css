@@ -15,6 +15,12 @@ button:disabled {cursor:default;}
   min-height:44px;min-width:44px;
 }
 .side-tools button {width:44px;height:44px;}
+.tool-button {min-width:44px;min-height:44px;}
+.photo-pin {min-width:44px;min-height:44px;}
+.photo-close {min-width:34px;min-height:34px;}
+/* Small flags, full-size touch target underneath. */
+.lang-flag {position:relative;}
+.lang-flag::after {content:'';position:absolute;inset:-5px;border-radius:inherit;}
 .load-status {width:min(420px,calc(100% - 24px));}
 .load-status button {min-height:44px;min-width:44px;font-size:14px;flex-shrink:0;}
 #load-message {min-width:0;}
@@ -82,6 +88,7 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
   .panel {top:58px;bottom:calc(env(safe-area-inset-bottom) + 8px);right:max(12px,env(safe-area-inset-right));left:auto;width:320px;max-height:none;}
   .region-panel {bottom:calc(env(safe-area-inset-bottom) + 62px);}
   .model-scale {bottom:calc(env(safe-area-inset-bottom) + 62px);}
+  .tool-dock {bottom:calc(env(safe-area-inset-bottom) + 62px);}
 }
 
 /* Room names are annotations, not navigation controls. */

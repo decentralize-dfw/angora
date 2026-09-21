@@ -199,6 +199,52 @@ npm --prefix viewer run build:pages
 
 Kesit üretimi normal Python ortamında NumPy, Shapely ve mapbox-earcut kullanır.
 
+## R47 — çekim noktaları, sadeleşen arayüz, ilan metni ve yükleme ekranı
+
+- **Fotoğraf pinleri.** `photogallery/FOTOLAR-KONUM.jpg`, 55 ilan fotoğrafının
+  her birini dört kat planı üzerinde bir nokta (kamera) ve bir okla (bakış
+  yönü) işaretler. Bu planlar arayüzün kendi ekran görüntüleri olduğu için
+  plan→model dönüşümü her kat için o planın taşıdığı oda etiketlerinden en
+  küçük karelerle çözüldü: artıklar 0,02–0,13 m, ve her iç mekân noktası kendi
+  katının yürüme maskesine düşüyor (`viewer/src/photo-points.js`,
+  `viewer/tests/photo-points.test.mjs`). Görünüm sayfasındaki `Fotoğraflar`
+  düğmesi pinleri açar. Pin küçük resim taşımaz; numaralı nokta kameranın
+  durduğu yer, koni objektifin baktığı yöndür ve koninin ekrandaki açısı her
+  karede ölçülür, varsayılmaz. Bir pine basınca fotoğraf masaüstünde sağ
+  ortada, telefonda ekranın %80'inde (kalan alan %60 beyaz + 8 px bulanıklık)
+  açılır; altında hangi odadan çekildiği yazar. Başka bir pin aynı çerçeveyi
+  değiştirir; sağ üstteki çarpı ya da `Fotoğraflar` düğmesini kapatmak
+  çerçeveyi kaldırır. `angora_28` dosyası depoda yoktur; 20 ve 24–27 çizimde
+  işaretli değildir, fotoğrafların kendisinden yerleştirilmiştir. 24, 26 ve 27
+  drone ile evden epey geriden çekilmiştir; gerçek uzaklıklarına konursa kat
+  görünümünün dışında kalıp hiç açılamazlar, bu yüzden baktıkları havuz
+  terasına, kendi yönleriyle ve kendi açılarıyla yerleştirildiler — eve olan
+  uzaklık sıkıştırıldı, bakış noktası uydurulmadı. Veri dosyası bu beş girdiyi
+  yaklaşık olarak işaretler.
+- **Arayüz sadeleşmesi.** Sağ ray yalnız yakın çevre ölçeğindeki yavaş dönüş
+  düğmesini taşır; `İçeride gez` ve `Ortala` arayüzden çekildi — düğmeler,
+  bağlantıları ve klavye yolları yerinde durur, çizilmezler. `Ayar` sağ alta
+  dişli simgesi olarak taşındı; model ölçeği, kaldırılan hareket açıklamasının
+  yerine sol alta geçti. Görünüm sayfasında ışık türü ve tarih seçimleri, iki
+  küçük not, arayüz sesi ve cihaz raporu gizlendi; hiçbiri kaldırılmadı, hepsi
+  paylaşılan bağlantıdan ve QA raporundan aynı şekilde çalışır. Dil düğmesi iki
+  bayrağa dönüştü, etkin olan renkli durur.
+- **İlan metni.** Sahibinin ilan metni `viewer/src/listing.js` içinde tek
+  kaynak olarak durur ve ait olduğu yerde görünür: kimlik, adres, fiyat ve öne
+  çıkanlar mülk bilgisinde her görünümde; kat paragrafları yalnız o kat açıkken,
+  katın kendi kaplama ölçüsü ve mahal listesiyle birlikte; konum paragrafı bölge
+  panelinde. İlan sözü ile model ölçümü karışmaz: alıntılar ilanın kendi
+  başlıkları altında, türetilen her sayı eski köken notuyla kalır. Bölge
+  panelindeki park/okul/market/eczane mesafe listesi kaldırıldı — mesafeler
+  zaten haritanın kendi çiplerinde ve ölçülmüş oldukları yerde duruyor.
+- **Yükleme ekranı.** Toplu teslim yolunda ilerleme hiç bildirilmiyordu: yirmi
+  küsur megabayt tek bir cümlenin arkasında iniyordu. Artık plan verisi, model
+  baytları (manifestteki yeni `bytes` alanıyla ağırlıklı, böylece 8 MB'lık
+  mahalle 60 KB'lık bahçe kadar adım atmaz), ışık, sahne kurulumu ve
+  gölgelendirici derlemesi aynı çubuğa yazılır; `Model · Işık · Sahne ·
+  Görünüm` adımları sırayla yanar. Çubuk dolduğunda ilk kare zaten çizilmiştir,
+  ekran beklemeden kapanır.
+
 ## R44 — beyaz iç mekânlar, bodrum dolgusu, dış mekân yürüyüşü ve birleşik model
 
 R44 dört isteği işler; araçlar `tools/*_r44.mjs` altındadır ve her biri kendi

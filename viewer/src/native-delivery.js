@@ -5,7 +5,7 @@ import {prepareBatchedMaterial} from './batched-material.js';
 
 // Batched deliveries remain resident across every view. The legacy manifest
 // path retains its older floor streams for explicit compatibility previews.
-export function createNativeDelivery({manifest,root,scene,groups,load,prepare,releaseMaterial}) {
+export function createNativeDelivery({manifest,root,scene,groups,load,prepare,releaseMaterial,onProgress}) {
   const loaded=new Map(),sources=new Map();
   const context=['context-ground','context-buildings','context-plants'];
   const records=new Map([...manifest.parts,...manifest.interior_streams].map(p=>[p.name,p]));
@@ -20,7 +20,12 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     const record=records.get(name);if(!record)throw Error('Missing native asset '+name);
     const url=new URL(manifest.batched?record.file:record.file.replace(/\.gltf$/,'.gpu.gltf'),root);
     if(record.gpu_sha256)url.searchParams.set('v',record.gpu_sha256.slice(0,12));
-    const result=await load(url.href),model=result.scene;
+    // The boot bar is weighed by these bytes, so the download reports as it
+    // runs and once more on completion - a compressed response reports fewer
+    // bytes than the manifest records, so the manifest size caps each part.
+    const result=await load(url.href,event=>onProgress?.(name,event.loaded,false));
+    onProgress?.(name,record.bytes??0,true);
+    const model=result.scene;
     try{
     if(manifest.batched){
       const replacements=new Map();

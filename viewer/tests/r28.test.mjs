@@ -86,9 +86,11 @@ test('Dense and offscreen labels are hidden instead of piled at the bottom',()=>
 
 test('Escape closes only the uppermost UI and never exits immersive mode',()=>{
   const calls=[],event={key:'Escape',preventDefault(){calls.push('prevent');}};
-  const actions={panelOpen:true,closePanel(){calls.push('panel');},walkActive:true,immersive:false,exitWalk(){calls.push('walk');}};
+  const actions={panelOpen:true,closePanel(){calls.push('panel');},photoOpen:true,closePhoto(){calls.push('photo');},
+    walkActive:true,immersive:false,exitWalk(){calls.push('walk');}};
   assert.equal(handleEscape(event,actions),'panel');assert.deepEqual(calls,['prevent','panel']);
-  calls.length=0;actions.panelOpen=false;assert.equal(handleEscape(event,actions),'walk');assert.deepEqual(calls,['prevent','walk']);
+  calls.length=0;actions.panelOpen=false;assert.equal(handleEscape(event,actions),'photo');assert.deepEqual(calls,['prevent','photo']);
+  calls.length=0;actions.photoOpen=false;assert.equal(handleEscape(event,actions),'walk');assert.deepEqual(calls,['prevent','walk']);
   calls.length=0;actions.immersive=true;assert.equal(handleEscape(event,actions),null);assert.deepEqual(calls,[]);
   assert.equal(handleEscape({key:'Tab'},actions),null);
 });

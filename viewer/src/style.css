@@ -66,6 +66,13 @@ h1 strong{font-weight:700}
 .quiet-button{pointer-events:auto;border-radius:999px;padding:0 18px;min-height:42px;font-size:13px;font-weight:600}
 .quiet-button:not(:disabled):hover{background:var(--glass-hover)}
 .quiet-button[aria-expanded=true]{background:var(--ink);color:#fff}
+/* Two flags, both always present; the active one is simply the one in
+   colour. Smaller than the word it replaces. */
+.lang-switch{display:flex;gap:2px;padding:3px;border-radius:999px;pointer-events:auto;background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:var(--shadow-soft)}
+.lang-flag{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;background:transparent;border:0;box-shadow:none;padding:0;opacity:.4;filter:saturate(.2);transition:opacity .18s ease,filter .18s ease}
+.lang-flag svg{width:21px;height:14px;border-radius:3px;box-shadow:0 0 0 1px rgba(22,29,26,.2)}
+.lang-flag:hover{opacity:.85;filter:none}
+.lang-flag[aria-pressed=true]{opacity:1;filter:none;color:var(--ink);background:rgba(255,255,255,.72);box-shadow:inset 0 0 0 1px var(--edge)}
 
 /* --------------------------------------------------------- scale picker */
 .scale-picker{display:flex;top:max(18px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);gap:3px;padding:4px;border-radius:999px}
@@ -78,7 +85,12 @@ h1 strong{font-weight:700}
 .view-description p{font-size:11px;margin:0;color:var(--muted)}
 
 /* ------------------------------------------------------- camera rail */
-.side-tools{right:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;border-radius:999px;padding:8px}
+.side-tools{right:22px;top:50%;transform:translateY(-50%);display:none;flex-direction:column;align-items:center;gap:6px;border-radius:999px;padding:8px}
+/* The rail exists for one control now - the slow orbit, which is a street
+   thing - so it only appears at that scale. Walking in and recentring are
+   still bound and still scripted; they are simply not drawn. */
+#app[data-scale=neighborhood] .side-tools{display:flex}
+.side-tools button.tool-retired{display:none}
 .side-tools button{width:42px;height:42px;background:transparent;border:0;border-radius:999px;font-size:13px;font-weight:600;box-shadow:none;display:grid;place-items:center}
 .side-tools button:not(:disabled):not([aria-pressed=true]):hover{background:var(--glass-hover)}
 .side-tools .camera-tools{display:flex;flex-direction:column;align-items:center;gap:6px}
@@ -104,7 +116,19 @@ h1 strong{font-weight:700}
 #app[data-scale=neighborhood] .explore-dock{display:none}
 
 /* --------------------------------------------------------- gesture help */
-.gesture-help{bottom:max(22px,env(safe-area-inset-bottom));left:22px;right:auto;margin:0;pointer-events:none;font-size:10.5px;color:var(--muted);border-radius:999px;padding:7px 12px;width:max-content;max-width:min(340px,calc(100vw - 44px))}
+/* Retired from the screen: a permanent sentence explaining that dragging
+   rotates is furniture, not help. The element stays because the walk mode
+   still writes its own guidance into it, and the bottom-left corner it used
+   to hold now carries the model scale. */
+.gesture-help{display:none;bottom:max(22px,env(safe-area-inset-bottom));left:22px;right:auto;margin:0;pointer-events:none;font-size:10.5px;color:var(--muted);border-radius:999px;padding:7px 12px;width:max-content;max-width:min(340px,calc(100vw - 44px))}
+
+/* ------------------------------------------------------------ tool dock */
+/* One control at the bottom right: the view options, drawn as a gear. */
+.tool-dock{position:absolute;z-index:20;right:22px;bottom:max(22px,env(safe-area-inset-bottom));display:flex;gap:6px;pointer-events:none}
+.tool-button{pointer-events:auto;width:46px;height:46px;display:grid;place-items:center;border-radius:999px;color:var(--ink);background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:var(--shadow-soft);padding:0}
+.tool-button svg{width:21px;height:21px;display:block}
+.tool-button:not(:disabled):hover{background:var(--glass-hover)}
+.tool-button[aria-expanded=true]{background:var(--ink);color:#fff}
 
 /* --------------------------------------------------------------- panels */
 .panel{right:22px;top:74px;border-radius:20px;padding:18px 20px;width:340px;max-width:calc(100% - 24px);max-height:calc(100dvh - 170px);overflow:auto;overscroll-behavior:contain;background:var(--panel);box-shadow:var(--shadow);z-index:50}
@@ -113,7 +137,7 @@ h1 strong{font-weight:700}
 .panel-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .panel h2{font-size:15px;font-weight:700;margin:0;letter-spacing:.02em}
 .panel-heading button{width:36px;height:36px;border-radius:999px;font-size:20px;background:rgba(255,255,255,.5);border:1px solid var(--edge)}
-.scene-options{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.scene-options{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
 .scene-options button{min-height:42px;border-radius:12px;font-size:12px;font-weight:600;background:rgba(255,255,255,.5);border:1px solid var(--edge)}
 .scene-options button[aria-pressed=true]{background:var(--ink);border-color:var(--ink)}
 .daylight-heading{display:flex;justify-content:space-between;align-items:baseline;margin:22px 1px 8px;font-size:12px;color:var(--muted)}
@@ -123,10 +147,17 @@ h1 strong{font-weight:700}
 .daylight-footer{display:flex;justify-content:space-between;margin-top:12px;gap:10px}
 .daylight-footer select,.daylight-footer button{border:1px solid var(--edge);min-height:40px;padding:0 12px;border-radius:12px;font-size:12px;font-weight:600;background:rgba(255,255,255,.5)}
 .daylight-footer button[aria-pressed=true]{background:var(--ink);border-color:var(--ink)}
+/* With the date select retired the interior-lights toggle is the row. */
+.daylight-footer button{flex:1}
 .lighting-choice{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;margin:12px 0;color:var(--muted)}
 .lighting-choice select{max-width:210px;min-height:40px;border:1px solid var(--edge);background:rgba(255,255,255,.5);color:var(--ink);border-radius:12px;padding:0 10px;font-size:13px;font-weight:600}
 .small-note{color:var(--muted);font-size:11px;line-height:1.5;margin:12px 0 0}
 .panel .scene-options+.scene-options{margin-top:6px}
+/* Kept in the document, kept wired, kept in the shared link and in the QA
+   report - simply not drawn in the sheet any more. Nothing is removed: the
+   lighting style, the date, the interface sound and the device report all
+   still work from script and from a deep link. */
+.option-hidden{display:none!important}
 
 /* ------------------------------------------------------------- property */
 .property-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -137,6 +168,22 @@ h1 strong{font-weight:700}
 .property-room-list li{display:flex;justify-content:space-between;padding:7px 0;font-size:12px;border-bottom:1px solid var(--line);gap:12px}
 .property-room-list span{white-space:nowrap}
 .listing-link{font-size:12px;font-weight:700;color:var(--accent);display:block;text-decoration:none;margin-top:14px}
+.property-head{margin:2px 0 0}
+.property-kind{margin:0;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.property-address{margin:5px 0 0;font-size:12.5px;line-height:1.5;color:var(--ink)}
+.property-price{margin:10px 0 0;font-size:23px;font-weight:700;letter-spacing:.01em;font-variant-numeric:tabular-nums;color:var(--accent)}
+.property-head+.property-grid{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.property-prose{margin:18px 0 0}
+/* The open storey reads as the sheet's subject, the listing as context. */
+.property-floor{padding-top:16px;border-top:1px solid var(--line)}
+.property-floor h3{color:var(--accent)}
+.property-prose+.property-grid{margin-top:12px}
+.property-prose h3{margin:0 0 6px;font-size:13px;font-weight:700;letter-spacing:.01em;line-height:1.4}
+.property-prose p{margin:0 0 8px;font-size:12px;line-height:1.66;color:#2c3833}
+.property-prose p:last-child{margin-bottom:0}
+.property-features{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.property-features li{font-size:11px;font-weight:600;color:#2c3833;background:rgba(255,255,255,.55);border:1px solid var(--edge);border-radius:999px;padding:5px 10px}
+.property-deed{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:11px;line-height:1.6;color:var(--muted)}
 
 /* ------------------------------------------------------ scene overlays */
 .annotation-overlay,.hotspot-overlay{position:absolute;inset:0;pointer-events:none;z-index:5;overflow:hidden}
@@ -151,6 +198,40 @@ h1 strong{font-weight:700}
 .hotspot{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;background:transparent;color:#fff;min-height:44px;min-width:44px;filter:drop-shadow(0 1px 3px #0009)}
 .hotspot i{display:block;margin:auto;width:28px;height:16px;border:2px solid #fff;border-radius:50%;background:#ffffff44;box-shadow:0 0 0 5px #ffffff1a}
 .hotspot span{display:block;font-size:11px;max-width:120px;background:#182420ca;border-radius:8px;margin-top:8px;padding:4px 7px}
+
+/* ----------------------------------------------------- photograph pins */
+/* A pin is the CAMERA: the numbered dot is where the photographer stood and
+   the wedge is the direction the lens faced, both taken from the owner's own
+   key drawing. No thumbnail is drawn on the model - a storey carrying fifty
+   little pictures is a contact sheet, not a plan - so the frame itself opens
+   once, beside the model, when a pin is pressed. */
+.photo-overlay{position:absolute;inset:0;pointer-events:none;z-index:6;overflow:hidden}
+.photo-pin{position:absolute;transform:translate(-50%,-50%);width:44px;height:44px;display:grid;place-items:center;padding:0;background:transparent;border:0;box-shadow:none;color:var(--ink);pointer-events:auto}
+.photo-pin[aria-pressed=true]{background:transparent}
+.photo-pin i{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none;
+  border-left:10px solid transparent;border-right:10px solid transparent;
+  border-top:20px solid rgba(255,255,255,.72);
+  transform:translate(-50%,-50%) rotate(var(--pin-angle,0deg)) translateY(-10px);
+  filter:drop-shadow(0 1px 2px rgba(22,34,29,.3))}
+.photo-pin b{position:relative;display:grid;place-items:center;min-width:21px;height:21px;padding:0 5px;border-radius:999px;background:var(--ink);color:#fff;font-size:10.5px;font-weight:700;font-variant-numeric:tabular-nums;box-shadow:0 1px 4px rgba(22,34,29,.4),0 0 0 2px rgba(255,255,255,.88);transition:transform .16s ease,background .16s ease}
+.photo-pin:hover b{background:var(--accent);transform:scale(1.12)}
+.photo-pin:hover i{border-top-color:rgba(47,110,96,.55)}
+.photo-pin[aria-pressed=true] b{background:var(--accent);transform:scale(1.18)}
+.photo-pin[aria-pressed=true] i{border-top-color:rgba(47,110,96,.72)}
+
+/* ------------------------------------------------------ photograph view */
+/* On a desktop it sits at the right edge so the plan stays visible and the
+   next pin stays clickable. On a phone it is the screen: 80 % of it, over a
+   60 % white wash with an 8 px blur. Either way, one frame at a time -
+   pressing another pin replaces it - and the cross or the Fotoğraflar
+   switch puts it away. */
+.photo-backdrop{position:absolute;inset:0;z-index:44;display:none;background:rgba(255,255,255,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.photo-view{position:absolute;z-index:45;margin:0;right:22px;top:50%;transform:translateY(-50%);width:min(34vw,470px);border-radius:18px;overflow:hidden;background:var(--panel);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:var(--shadow)}
+.photo-view img{display:block;width:100%;height:auto;max-height:min(62dvh,560px);object-fit:contain;background:#e5eae7}
+.photo-view figcaption{padding:10px 14px 12px;font-size:12px;font-weight:600;letter-spacing:.01em;color:var(--ink);text-align:center}
+.photo-close{position:absolute;right:9px;top:9px;z-index:2;width:34px;height:34px;border-radius:999px;font-size:19px;line-height:1;color:var(--ink);background:rgba(255,255,255,.82);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:0 2px 8px rgba(22,34,29,.22)}
+.photo-close:hover{background:#fff}
+#app[data-walk=true] .photo-view,#app[data-walk=true] .photo-backdrop{display:none}
 
 /* ------------------------------------------------------------ site view */
 .site-overlay{position:absolute;inset:0;pointer-events:none;z-index:6;overflow:hidden}
@@ -220,6 +301,7 @@ h1 strong{font-weight:700}
 .rm-info-facts li{display:flex;align-items:baseline;gap:6px;font-size:11px;color:var(--muted)}
 .rm-info-facts b{font-size:13.5px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
 .rm-info-dist{margin:9px 0 0;font-size:9.5px;color:var(--muted)}
+.rm-info-location{margin-top:9px}
 /* one filter per amenity family; pressed = shown */
 .rm-filters{position:absolute;left:22px;bottom:max(22px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:flex-start;gap:5px;z-index:2}
 .rm-filters button{display:flex;align-items:center;gap:8px;min-height:34px;padding:0 15px 0 11px;border-radius:999px;font-size:11.5px;font-weight:600;background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:0 2px 10px #1b322514}
@@ -228,8 +310,9 @@ h1 strong{font-weight:700}
 .rm-filters button:hover{background:var(--glass-hover)}
 .rm-filters button[aria-pressed=false]{background:rgba(255,255,255,.14);color:var(--muted);box-shadow:none}
 .rm-filters button[aria-pressed=false] i{opacity:.3}
-#app[data-scale=region] .side-tools,#app[data-scale=region] .model-scale,#app[data-scale=region] .gesture-help{display:none}
-.model-scale{position:absolute;z-index:7;right:22px;bottom:max(22px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:5px;pointer-events:none;font-size:11px;color:var(--ink)}
+#app[data-scale=region] .side-tools,#app[data-scale=region] .model-scale,#app[data-scale=region] .gesture-help,
+#app[data-scale=region] .tool-dock{display:none}
+.model-scale{position:absolute;z-index:7;left:22px;bottom:max(22px,env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:5px;pointer-events:none;font-size:11px;color:var(--ink)}
 .model-scale span{border-radius:999px;padding:3px 10px}
 .model-scale i{display:block;height:6px;border:solid var(--ink);border-width:0 1px 2px}
 #app[data-walk=true] .region-panel{display:none}
@@ -263,9 +346,11 @@ h1 strong{font-weight:700}
 .walk-right{grid-column:3;grid-row:2}
 #app[data-walk=true] .scale-picker,#app[data-walk=true] .explore-dock,
 #app[data-walk=true] .top-actions,
-#app[data-walk=true] .side-tools,#app[data-walk=true] .gesture-help.hide-in-walk{display:none}
+#app[data-walk=true] .side-tools,#app[data-walk=true] .tool-dock,#app[data-walk=true] .gesture-help.hide-in-walk{display:none}
 #app[data-walk=true] .view-description{top:74px;max-width:64%}
-#app[data-walk=true] .gesture-help{left:50%;transform:translateX(-50%);bottom:max(210px,calc(env(safe-area-inset-bottom) + 188px))}
+/* The tour still needs its own line - how to look and how to walk is not
+   obvious - so the element returns inside the tour and nowhere else. */
+#app[data-walk=true] .gesture-help{display:block;left:50%;transform:translateX(-50%);bottom:max(210px,calc(env(safe-area-inset-bottom) + 188px))}
 
 /* ---------------------------------------------------------- load status */
 .load-status{position:absolute;z-index:60;bottom:96px;left:50%;transform:translateX(-50%);border-radius:18px;padding:13px 17px;display:flex;gap:12px;align-items:center;font-size:13px;font-weight:600;max-width:calc(100% - 32px);background:var(--glass-strong);box-shadow:var(--shadow)}
@@ -277,6 +362,13 @@ h1 strong{font-weight:700}
 .load-copy{display:grid;gap:7px;min-width:176px}
 .load-line{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
 #load-percent{font-variant-numeric:tabular-nums;font-size:12px;color:var(--muted)}
+/* The bar alone says how far; these say what is actually happening, which is
+   what a long wait needs. Each step lights as it starts and stays lit. */
+.load-steps{display:flex;flex-wrap:wrap;gap:9px;font-size:9px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:rgba(47,81,71,.3)}
+.load-steps span{transition:color .3s ease}
+.load-steps span[data-state=done]{color:rgba(47,81,71,.6)}
+.load-steps span[data-state=active]{color:var(--accent)}
+.error .load-steps{display:none}
 .load-bar{display:block;height:3px;border-radius:2px;background:rgba(47,81,71,.16);overflow:hidden}
 .load-bar i{display:block;height:100%;width:0;border-radius:2px;background:var(--accent);transition:width .3s ease}
 .error .load-bar,.error #load-percent{display:none}
@@ -284,7 +376,7 @@ h1 strong{font-weight:700}
 /* ----------------------------------------------------------------- boot */
 /* A real opening: full paper, the mark, the genuine progress bar, and no
    other chrome until the whole scene is staged and prewarmed. */
-#boot{position:absolute;inset:0;z-index:80;display:grid;justify-items:center;align-content:center;gap:30px;background:radial-gradient(circle at 50% 36%,#f3f6f2 0,#e6ebe8 78%);transition:opacity 700ms ease}
+#boot{position:absolute;inset:0;z-index:80;display:grid;justify-items:center;align-content:center;gap:30px;background:radial-gradient(circle at 50% 36%,#f3f6f2 0,#e6ebe8 78%);transition:opacity 420ms ease}
 #boot .boot-brand{display:flex;align-items:center;gap:14px}
 #boot .brand{font-size:14px;letter-spacing:.34em}
 #boot .brand-divider{height:18px}
@@ -293,9 +385,9 @@ h1 strong{font-weight:700}
 #boot .load-status{position:static;transform:none;bottom:auto;left:auto}
 #boot.boot-done{opacity:0;pointer-events:none}
 .topbar,.scale-picker,.view-description,.side-tools,.explore-dock,
-.region-panel,.model-scale,.gesture-help{transition:opacity 600ms ease}
+.region-panel,.model-scale,.gesture-help,.tool-dock{transition:opacity 420ms ease}
 #app[data-booting=true] :is(.topbar,.scale-picker,.view-description,.side-tools,
-.explore-dock,.region-panel,.model-scale,.gesture-help,.panel){opacity:0;pointer-events:none}
+.explore-dock,.region-panel,.model-scale,.gesture-help,.tool-dock,.panel){opacity:0;pointer-events:none}
 /* honest fallback when 3D cannot start: the facts and the listing stay */
 .no3d{max-width:340px;display:grid;gap:14px;justify-items:center;text-align:center;
   border-radius:20px;padding:20px 22px;background:var(--panel);border:1px solid var(--edge);box-shadow:var(--shadow-soft)}
@@ -369,7 +461,11 @@ h1 strong{font-weight:700}
   .walk-launch{min-height:40px;font-size:12px;padding:0 13px}
   .gesture-help{display:none}
   .panel{top:auto;right:0;left:0;bottom:0;width:auto;max-width:none;border-radius:22px 22px 0 0;max-height:calc(100dvh - 110px);padding:15px 16px calc(15px + env(safe-area-inset-bottom))}
-  .model-scale{right:12px;bottom:max(162px,calc(env(safe-area-inset-bottom) + 150px))}
+  .model-scale{left:12px;bottom:max(162px,calc(env(safe-area-inset-bottom) + 150px))}
+  .tool-dock{right:12px;bottom:max(162px,calc(env(safe-area-inset-bottom) + 150px))}
+  .tool-button{width:44px;height:44px}
+  .lang-switch{padding:2px;gap:1px}
+  .lang-flag{width:32px;height:32px}
   .rm-chip{font-size:10px;padding:3px 9px}
   .rm-chip-villa{font-size:11px;padding:5px 12px}
   .rm-compass{width:38px;height:38px;right:12px;top:76px}
@@ -389,6 +485,10 @@ h1 strong{font-weight:700}
   .walk-pad{right:12px;bottom:max(14px,env(safe-area-inset-bottom));grid-template-columns:repeat(3,44px);grid-template-rows:repeat(2,44px);gap:4px}
   #app[data-walk=true] .view-description{top:62px}
   #app[data-walk=true] .gesture-help{display:none}
+  .photo-backdrop{display:block}
+  .photo-view{right:auto;left:50%;top:50%;transform:translate(-50%,-50%);width:80vw;max-width:80vw;max-height:80dvh;display:grid;grid-template-rows:1fr auto}
+  .photo-view img{max-height:calc(80dvh - 46px)}
+  .photo-close{right:8px;top:8px;width:36px;height:36px}
   .load-status{bottom:120px;font-size:12px}
   .property-stat strong{font-size:20px}
 }

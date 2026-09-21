@@ -15,7 +15,8 @@ import places from './region-places.json';
 // The whole 2 km drawn as a plan - every road and building around the villa,
 // from OSM via the fetch-osm-region workflow ("2km boyunca planı çiz").
 import streets from './region-streets.json';
-import { t } from './i18n.js';
+import { t, currentLang } from './i18n.js';
+import { listing } from './listing.js';
 
 const AREAS = [
   { name: 'Angora Evleri', x: 40, y: -195 },
@@ -130,18 +131,19 @@ export function createRegionMap(host) {
   labels.append(compass);
 
   // The settlement, introduced once and properly, when the Bölge scale opens.
-  // Every distance in it is the atlas's own measurement, not sales copy.
-  const near = Object.fromEntries(places.curated.map((p) => [p.kind, p]));
-  const fact = (label, p) => (p ? `<li><b>${km(p.d)}</b><span>${label}</span></li>` : '');
+  // The panel used to close on a grid of straight-line distances to a park, a
+  // school, a market and a pharmacy. They are still on the map, each dot
+  // carrying its own measured distance in its chip, which is where a distance
+  // belongs; repeated as a headline list they read as sales copy about
+  // somewhere else. The introduction and the listing's own location paragraph
+  // stand in their place.
   const info = document.createElement('aside');
   info.className = 'rm-info';
   info.setAttribute('aria-label', 'Angora Evleri hakkında');
   info.innerHTML =
-    '<h3>Angora Evleri</h3><p class="rm-info-set">Beysukent · Çankaya, Ankara</p>' +
+    '<h3>Angora Evleri</h3><p class="rm-info-set">Mutlukent · Çankaya, Ankara</p>' +
     `<p class="rm-info-body">${t('regionIntro')}</p>` +
-    '<ul class="rm-info-facts">' + fact(t('lblPark'), near.park) + fact(t('lblSchool'), near.lise) +
-    fact(t('lblMarket'), near.market) + fact(t('lblPharmacy'), near.eczane) + '</ul>' +
-    `<p class="rm-info-dist">${t('distNote')}</p>`;
+    `<p class="rm-info-body rm-info-location">${listing(currentLang()).location}</p>`;
   // One amenity family at a time: the map opens as the bare plan - every
   // category off - and a chip turns exactly one on; pressing it again, or
   // pressing another, puts it away ("hepsi kapalı gelsin, tek bir şey").

@@ -22,6 +22,7 @@ import {CameraFlight} from './camera-flight.js';
 import {frameInsets} from './frame-insets.js';
 import {clockLabel} from './daylight.js';
 import {createHotspots} from './hotspots.js';
+import {createPhotoPins,createPhotoViewer} from './photo-gallery.js';
 import {renderPropertyInfo} from './property-info.js';
 import {areaLabel} from './annotations.js';
 import { configureCameraControls } from './camera.js';
@@ -55,6 +56,10 @@ const deliveryProfile=['desktop','mobile'].includes(requestedProfile)?requestedP
 const modelRoot = new URL(import.meta.env.VITE_MODEL_ROOT || (pages ? 'build/web/batched/' : 'models/batched/')+deliveryProfile+'/', publicRoot);
 const decoderRoot = new URL(pages ? 'viewer/public/draco/' : 'draco/', publicRoot);
 const daylightURL = new URL((pages ? 'assets/lighting/' : 'lighting/')+'kloofendal_48d_partly_cloudy_puresky_1k.hdr',publicRoot);
+// The owner's photographs live beside the model, not inside the bundle:
+// fifty-five frames are a folder, and only the one that is opened is ever
+// fetched. prepare-native.mjs stages the same folder for the dev server.
+const photoRoot = new URL('photogallery/', publicRoot);
 // Titles read through the language of the moment; every titles[x] call
 // site stays untouched while the words follow the toggle.
 const titles = new Proxy({}, {get: (_, key) => t(key)});
@@ -111,6 +116,7 @@ let scene, camera, renderer, controls, loader, loadAsset, caps, buildingBox, gar
 let nativeDelivery=null,nativeSwitching=false,nativeAtlas=null,nativeSoil=null,plotMask=null;
 let selected = 'building', ready = false, loading = false;
 let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations, walk;
+let photosVisible = false, photoPins = null, photoViewer = null;
 let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;
 let deviceQA,assetRevision=null,pendingCapture=null,contextLost=false,massing=null,lift=null;
 // Live location during the tour: the interface names where the feet ARE,
@@ -133,6 +139,19 @@ function progress(share) {
   const whole = Math.max(0, Math.min(100, Math.round(share * 100)));
   bar.hidden = false; bar.firstElementChild.style.width = `${whole}%`;
   percent.textContent = `%${whole}`;
+}
+// What the bar cannot say: WHICH wait is being served. A percentage alone,
+// on a twenty-megabyte scene, reads as one long undifferentiated stall; the
+// named steps turn it into a sequence with an end in sight. Each lights as it
+// starts and stays lit, and step(null) marks them all done.
+const LOAD_STEPS=['model','light','scene','view'];
+function step(name) {
+  const list=$('#load-steps'); if(!list) return;
+  const index=LOAD_STEPS.indexOf(name);
+  for(const el of list.children){
+    const at=LOAD_STEPS.indexOf(el.dataset.step);
+    el.dataset.state=name===null?'done':at<index?'done':at===index?'active':'idle';
+  }
 }
 // Dragging the daylight slider fires continuously, and Safari rate-limits
 // history writes, so the address is rewritten once the controls settle.
@@ -248,6 +267,7 @@ function renderFrame(time) {
     const liftChanging=lift?.update(time);
     annotations?.update(selected,roomNamesVisible,measurementsVisible,Boolean(transition||flight?.active),walk?.active,activeCamera,walk?.room);
     hotspots?.update(activeCamera,walk?.active&&!walk.xrActive&&!walk.route);
+    photoPins?.update(selected,photosVisible,Boolean(transition||flight?.active),walk?.active,activeCamera);
     siteContext?.update(selected,activeCamera,controls.target,Boolean(transition||flight?.active),walk?.active);
     host.dataset.runtime=JSON.stringify({view:selected,plan:planMode,projection:activeCamera.type,cameraPosition:activeCamera.position.toArray(),target:controls.target.toArray(),sectionHeight:clip.constant,loaded:nativeDelivery?[...nativeDelivery.loaded.keys()]:[...groups.keys()],zoom:activeCamera.zoom,autoRotate:controls.autoRotate,zoomEnabled:controls.enableZoom,rotate:controls.mouseButtons.LEFT===THREE.MOUSE.ROTATE,transition:Boolean(transition),textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries});
     renderer.info.reset();
@@ -487,6 +507,9 @@ async function selectView(id, initial = false) {
   }
   if (walk?.active) exitWalk(false);
   const previous = selected; selected = id;
+  // The pin that opened a frame is about to leave the screen, so the frame
+  // goes with it rather than hanging over another storey.
+  if (previous !== id) photoViewer?.hide();
   plotMask?.set(id.startsWith('f'));
   if(!id.startsWith('f')){planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);$('#toggle-plan').textContent='Plan';mode(false);}
   if(id==='region')$('#region-summary').open=false;
@@ -549,11 +572,19 @@ function fillRoomMenu(){
   }
   if(value)select.value=value;
 }
+// Both flags stay on screen; the active one is the one marked pressed, which
+// is what colours it.
+function markLanguage(){
+  document.querySelectorAll('.lang-flag').forEach(button=>
+    button.setAttribute('aria-pressed',String(button.dataset.lang===currentLang())));
+}
 // One language switch, every surface: static DOM, state-carrying labels,
-// the room menu, the plan's room tags, the map, the property sheet.
+// the room menu, the plan's room tags, the map, the property sheet, the
+// photograph captions.
 function refreshChrome(){
   applyStatic();
-  $('#lang-toggle').textContent=currentLang()==='tr'?'EN':'TR';
+  markLanguage();
+  photoPins?.refreshLabels();photoViewer?.refresh();
   $('#toggle-furniture').textContent=t('furniture');
   if(walk?.active){
     const station=walk.surface.station(walk.room);
@@ -621,7 +652,7 @@ function enterWalk(roomId) {
   const centre=buildingBox.getCenter(new THREE.Vector3());
   const position=roomId?null:walk.surface.center(floor,[centre.x,centre.z],furnitureVisible);
   roomId ||= stations.reduce((a,b)=>new THREE.Vector3(...a.position).distanceToSquared(centre)<new THREE.Vector3(...b.position).distanceToSquared(centre)?a:b).room_id;
-  flight.cancel();panel('',false);const station=walk.enter(roomId,position);selected='f'+station.floor_index;updateRoomUI(station);
+  flight.cancel();panel('',false);photoViewer?.hide();const station=walk.enter(roomId,position);selected='f'+station.floor_index;updateRoomUI(station);
   lighting.interior(station.floor_index,station.position);
   controls.enabled=false;clip.constant=fullHeight;earthClip.constant=fullHeight;transition=null;lighting.frame('building');massing?.set('building');
   lighting.setWalkInterior(true);
@@ -648,8 +679,22 @@ function exitWalk(reselect = true) {
   if(reselect){selectView(selected);frame(false);}
   $('#gesture-help').textContent=t('orbitHelp');
 }
+// R47 | One honest bar and four named steps, from the first byte to the
+// first drawn frame. The batched delivery used to show a single sentence for
+// its whole boot - twenty-odd megabytes behind a spinner that never moved -
+// which reads as a stall rather than as work. Every wait the visitor actually
+// serves is now weighed into the same bar: the plan data, the model bytes
+// (by their manifest sizes, so the big parts count for what they cost), the
+// light, the scene assembly, the shader compile and the first composed frame.
+// Nothing creeps and nothing is faked; when it reaches the end the model is
+// already on screen and the boot screen leaves immediately.
 async function loadNativeModel(manifest){
-    const loadStarted=performance.now();
+  const loadStarted=performance.now();
+  const PHASE={data:.06,model:.62,light:.10,scene:.10,view:.12};
+  let bootBase=0;
+  const phase=(name,fraction=1)=>progress(Math.min(1,bootBase+PHASE[name]*fraction));
+  const phaseDone=name=>{bootBase+=PHASE[name];progress(bootBase);};
+  step('model');message(t('loadingData'));progress(0);
   const lightingReady=Promise.all([
     lighting.loadEnvironment(daylightURL.href),
     manifest.room_probes?.length?loadRoomReflections(renderer,manifest.room_probes,modelRoot).then(value=>lighting.setRoomReflections(value)):Promise.resolve()
@@ -668,20 +713,41 @@ async function loadNativeModel(manifest){
     async function json(file){const response=await fetch(new URL(file,modelRoot),{cache:'no-cache'});if(!response.ok)throw Error(file+' HTTP '+response.status);return file.endsWith('.gz')?JSON.parse(new TextDecoder().decode(gunzipSync(new Uint8Array(await response.arrayBuffer())))):response.json();}
   const [atlas,rooms,navigation,soil]=await Promise.all([json(manifest.sections),json(manifest.rooms),json(manifest.navigation),manifest.soil_section?json(manifest.soil_section):null]);
   if(navigation.source_native_sha256!==manifest.source_native_sha256)throw Error('Native navigation revision mismatch');
+  phaseDone('data');
   nativeAtlas=atlas;roomData=rooms;walkData=navigation;
   $('#app').dataset.delivery='native';
   flight.limitFrameStep=false;
   if(manifest.plot_boundary){const boundary=await json(manifest.plot_boundary);plotMask=createPlotMaterialMask(boundary.polygon_native_xy);}
+  // Byte weighting where the manifest records sizes, part counting where it
+  // does not - a two-hundred-kilobyte garden must not step the bar as far as
+  // an eight-megabyte neighbourhood.
+  const parts=manifest.parts??[];
+  const sizes=new Map(parts.map(part=>[part.name,part.bytes||0]));
+  const weighed=[...sizes.values()].some(value=>value>0);
+  const totalWeight=weighed?[...sizes.values()].reduce((sum,value)=>sum+value,0):parts.length;
+  const received=new Map();
+  message(t('loadingModel'));
   nativeDelivery=createNativeDelivery({manifest,root:modelRoot,scene,groups,load:loadAsset,
+    onProgress:(name,loaded,complete)=>{
+      if(!sizes.has(name))return;
+      const size=sizes.get(name);
+      received.set(name,weighed?(complete?size:Math.min(loaded,size||loaded)):(complete?1:0));
+      let done=0;for(const value of received.values())done+=value;
+      phase('model',totalWeight?done/totalWeight:1);
+    },
     releaseMaterial:m=>lighting.releaseMaterial(m),prepare:(o,{clipped,context,name})=>{
       o.renderOrder=5;lighting.prepareMesh(o,{clipped,context,name});
       const planes=clipped?[clip]:[];o.userData.clipPlanes=planes;
         for(const material of Array.isArray(o.material)?o.material:[o.material]){material.clippingPlanes=planes;material.clipShadows=true;if(material.aoMap)material.aoMapIntensity=.7;if(name==='garden'||name==='context-plants'||(manifest.batched&&context))plotMask?.apply(material,{alwaysOutside:name==='context-buildings',cutInsidePlot:name==='context-ground'||name==='garden'});}
     }});
-    await Promise.all([groundLightReady,electricReady]);
     await nativeDelivery.activate(selected==='building'?'f3':selected);
+    phaseDone('model');
+    step('light');message(t('loadingLight'));
+    await Promise.all([groundLightReady,electricReady]);
+    phaseDone('light');
     if(manifest.batched){loader.dracoLoader?.dispose();loader.ktx2Loader?.dispose();}
     host.dataset.deliveryStats=JSON.stringify({profile:manifest.profile??'legacy',decodeAndPrepareMs:Math.round(performance.now()-loadStarted),residentParts:nativeDelivery.loaded.size});
+  step('scene');message(t('loadingScene'));
   buildingBox=new THREE.Box3().setFromObject(groups.get('architecture'));
   gardenBox=new THREE.Box3().setFromObject(groups.get('garden'));contextBox=buildingBox.clone();
   for(const model of groups.values())contextBox.union(new THREE.Box3().setFromObject(model));
@@ -689,6 +755,7 @@ async function loadNativeModel(manifest){
     const data=await json(manifest.site_context);siteContext=createSiteContext(data,host,()=>selectView('building'));
     $('#context-count').textContent=`${data.buildings.length} yapı`;
   }
+  phase('scene',.4);
   fullHeight=buildingBox.max.y+2;
   const movingSections=manifest.batched?await json('../../native-current/transition-sections.json.gz'):null;
   caps=createWallCaps(atlas,movingSections);scene.add(caps.group);
@@ -698,13 +765,23 @@ async function loadNativeModel(manifest){
   lighting.setFixtures(navigation.lights,{allRooms:true});hotspots=createHotspots(host,walk,travelRoom);
   fillRoomMenu();
   locator=createWalkLocator(walk.surface,{minX:buildingBox.min.x+1,maxX:buildingBox.max.x-1,minZ:buildingBox.min.z+1,maxZ:buildingBox.max.z-1});
+  phaseDone('scene');
+  step('view');message(t('loadingView'));
   await lightingReady;
+  phase('view',.3);
   lighting.frame(selected==='building'?'f3':selected,contextBox);
   await lighting.compile(camera);
-  ready=true;document.querySelectorAll('[data-needs-model],#toggle-furniture,#toggle-rooms,#toggle-measurements,#enter-walk').forEach(b=>b.disabled=false);
-  await selectView(selected,true);lighting.render(camera);status.hidden=true;
+  phase('view',.75);
+  ready=true;document.querySelectorAll('[data-needs-model],#toggle-furniture,#toggle-rooms,#toggle-measurements,#toggle-photos,#enter-walk').forEach(b=>b.disabled=false);
+  await selectView(selected,true);lighting.render(camera);
+  phaseDone('view');step(null);status.hidden=true;
   host.dataset.deliveryStats=JSON.stringify({...JSON.parse(host.dataset.deliveryStats),readyMs:Math.round(performance.now()-loadStarted)});
-  $('#app').append(status);$('#boot')?.remove();delete $('#app').dataset.booting;
+  // The frame behind it is already drawn, so the screen leaves at once and
+  // fades rather than sitting on a full bar waiting to be dismissed.
+  $('#app').append(status);
+  const boot=$('#boot');
+  if(boot){boot.classList.add('boot-done');setTimeout(()=>boot.remove(),460);}
+  delete $('#app').dataset.booting;
 }
 async function loadModel() {
   if (loading || ready || !renderer) return;
@@ -754,6 +831,7 @@ async function loadModel() {
     // each stepping the same bar. The ledger is per-call so a retry restarts
     // clean, and every synchronous phase yields once so its width paints.
     const PHASE={download:.70,stage:.04,wash:.02,assemble:.02,compile:.08,caps:.02,prewarm:.10,finish:.02};
+    step('model');
     let bootBase=0;
     const phase=(name,fraction=1)=>progress(Math.min(1,bootBase+PHASE[name]*fraction));
     const phaseDone=name=>{bootBase+=PHASE[name];progress(bootBase);};
@@ -900,7 +978,7 @@ async function loadModel() {
       mergedGroups.get(group).add(part);
     }
     {
-      let stagedCount=0;
+      let stagedCount=0;step('scene');
       for (const [id, group] of mergedGroups) {stageGroup(id, group); phase('stage', ++stagedCount/mergedGroups.size); await tick();}
       phaseDone('stage');
     }
@@ -1050,7 +1128,7 @@ async function loadModel() {
     // one after it fine. Compiling first costs the load a beat and gives the
     // interface back a press that opens immediately.
     phaseDone('assemble'); await tick();
-    message('Görünüm hazırlanıyor…');
+    step('view');message(t('loadingView'));
     // Never fatal: a driver that cannot pre-compile still draws, it just pays
     // at the first press the way it used to.
     try {
@@ -1069,6 +1147,7 @@ async function loadModel() {
     ready = true;
     $('#toggle-furniture').disabled = false; setFurnitureVisible(furnitureVisible);
     $('#toggle-rooms').disabled = false; $('#toggle-measurements').disabled = false;
+    $('#toggle-photos').disabled = false;
     $('#enter-walk').disabled=false;
     document.querySelectorAll('[data-needs-model]').forEach(b=>b.disabled=false);
     enableImmersiveWalk(renderer,scene,walk,groups,()=>{if(!walk.active)enterWalk();},()=>{resize();invalidate();});
@@ -1124,13 +1203,14 @@ async function loadModel() {
     // grade and dither passes compile on their first use like anything else.
     lighting.render(camera);
     phaseDone('finish');
+    step(null);
     status.hidden = true;
     // the boot screen has done its real work; the interface fades in behind it
     const boot=$('#boot');
     if(boot){
       $('#app').append($('#load-status'));
       boot.classList.add('boot-done');
-      setTimeout(()=>boot.remove(),720);
+      setTimeout(()=>boot.remove(),460);
     }
     delete $('#app').dataset.booting;
     // \u00a77: a plain entry greets with the property card - identity, the
@@ -1197,6 +1277,22 @@ function bindInterface() {
   $('#toggle-measurements').onclick = () => {
     measurementsVisible = !measurementsVisible; $('#toggle-measurements').setAttribute('aria-pressed', measurementsVisible); invalidate();
   };
+  // The pins and the frame are pure interface - they need the host element and
+  // the drawing's own coordinates, nothing from the delivery - so they are
+  // built here and only the switch waits for the model.
+  photoPins = createPhotoPins(host, photoRoot, {onOpen: id => {photoViewer.show(id); invalidate();}});
+  photoViewer = createPhotoViewer({
+    figure: $('#photo-view'), image: $('#photo-image'), caption: $('#photo-caption'),
+    close: $('#photo-close'), backdrop: $('#photo-backdrop'), pins: photoPins,
+    onClose: () => {invalidateUIObstacles(); invalidate();},
+  });
+  // Switching the photographs off is also how an open frame is put away -
+  // the brief asks for both that and the frame's own cross.
+  $('#toggle-photos').onclick = () => {
+    photosVisible = !photosVisible; $('#toggle-photos').setAttribute('aria-pressed', photosVisible);
+    if (!photosVisible) photoViewer?.hide();
+    invalidate();
+  };
   $('#enter-walk').onclick=()=>enterWalk();$('#exit-walk').onclick=()=>exitWalk();
   $('#walk-room').onchange=event=>travelRoom(event.target.value);
   $('#toggle-plan').onclick=()=>{planMode=!planMode;$('#toggle-plan').setAttribute('aria-pressed',planMode);$('#toggle-plan').textContent=planMode?'3D':'Plan';mode(planMode);frame(false);};
@@ -1212,8 +1308,10 @@ function bindInterface() {
   $('#toggle-lights').onclick=()=>{interiorLights=!interiorLights;$('#toggle-lights').setAttribute('aria-pressed',interiorLights);lighting?.setLights(interiorLights);invalidate();};
   $('#lighting-style').onchange=e=>{lighting?.setStyle(e.target.value);rememberState();invalidate();};
   applyStatic();
-  $('#lang-toggle').textContent=currentLang()==='tr'?'EN':'TR';
-  $('#lang-toggle').onclick=()=>setLang(currentLang()==='tr'?'en':'tr',refreshChrome);
+  document.querySelectorAll('.lang-flag').forEach(button=>{
+    button.onclick=()=>setLang(button.dataset.lang,refreshChrome);
+  });
+  markLanguage();
   const dismissWelcome=()=>{$('#welcome').hidden=true;try{sessionStorage.setItem('angora-welcome','1');}catch{/* private mode */}};
   $('#welcome-close').onclick=dismissWelcome;
   $('#welcome-explore').onclick=()=>{dismissWelcome();if(ready)selectView('f1');};
@@ -1236,6 +1334,7 @@ function bindInterface() {
   });
   window.addEventListener('keydown',event=>handleEscape(event,{
     panelOpen:Boolean(document.querySelector('.panel:not([hidden])')),closePanel:()=>panel('',false),
+    photoOpen:photoViewer?.open!==null&&photoViewer?.open!==undefined,closePhoto:()=>photoViewer?.hide(),
     walkActive:walk?.active,immersive:renderer?.xr.isPresenting,exitWalk
   }));
   // Keep keyboard navigation inside an open sheet, with Escape and explicit
