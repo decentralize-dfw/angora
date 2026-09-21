@@ -107,11 +107,17 @@
         <button id="zoom-out" aria-label="Uzaklaştır">−</button><button id="zoom-in" aria-label="Yakınlaştır">+</button>
       </div>
       <button id="toggle-plan" class="walk-launch" aria-pressed="false" disabled>Plan</button>
-      <button id="enter-vr" class="walk-launch" hidden>VR’a gir</button>
+      <button id="enter-vr" class="walk-launch" data-i18n="enterVR" hidden>VR’a gir</button>
     </div>
   </footer>
   <section id="walk-tools" class="walk-tools" aria-label="Oda turu" hidden>
-    <button id="exit-walk" class="walk-close" data-i18n="exitWalk" aria-label="Turdan çık ve kat görünümüne dön">Kata dön</button>
+    <!-- The way into the headset from inside the tour. The same control sits
+         beside Plan in the footer for somebody still looking at the model;
+         both drive one session, and both are drawn only where WebXR answers. -->
+    <div class="walk-top">
+      <button id="enter-vr-walk" class="walk-close walk-vr" data-i18n="enterVR" aria-label="VR’a gir" hidden>VR’a gir</button>
+      <button id="exit-walk" class="walk-close" data-i18n="exitWalk" aria-label="Turdan çık ve kat görünümüne dön">Kata dön</button>
+    </div>
     <label class="walk-lens" for="walk-lens"><span class="walk-lens-label" data-i18n="lens">Görüş açısı</span><input id="walk-lens" type="range" min="30" max="95" step="1" aria-label="Tur lensi görüş açısı" /><output id="walk-lens-value" for="walk-lens"></output></label>
     <div class="walk-room-panel"><label for="walk-room" id="walk-room-label" data-i18n="goRoom">Gezilecek oda</label><select id="walk-room" aria-label="Gezilecek oda"></select><span id="walk-room-area"></span><button id="lift-call" class="lift-call" disabled><span class="lift-call-label" data-i18n="lift">Asansör</span><span class="lift-call-target" id="lift-call-target">bu katta</span></button></div>
     <div class="walk-pad" aria-label="Yürüme yönü">

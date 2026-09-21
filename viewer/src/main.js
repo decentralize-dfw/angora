@@ -495,6 +495,38 @@ async function travelRoom(roomId){
   clouds();pendingRoomJump.run(()=>enterWalk(roomId),480);
 }
 
+// In a headset there is no room menu and no lift button to press, and the
+// walking surface carries no stairs - the delivery states that limitation
+// itself - so the right stick is how a visitor changes storey. They come out
+// directly above or below where they were standing, or at the nearest place on
+// that floor where a person can actually stand, and the storey's own interior
+// is loaded first exactly as the room menu loads it.
+let storeyShifting=false;
+async function shiftWalkFloor(delta){
+  if(!walk?.active||storeyShifting||nativeSwitching)return;
+  const floor=Math.max(0,Math.min(3,(walk.floor??1)+delta));
+  if(floor===walk.floor)return;
+  storeyShifting=true;
+  try{
+    const head=walk.camera.getWorldPosition(new THREE.Vector3());
+    if(nativeDelivery&&selected!=='f'+floor){
+      nativeSwitching=true;
+      try{await nativeDelivery.activate('f'+floor);setFurnitureVisible(furnitureVisible);}
+      finally{nativeSwitching=false;}
+    }
+    const station=walk.surface.data.stations.find(s=>s.floor_index===floor);
+    const landing=walk.surface.center(floor,[head.x,head.z],furnitureVisible)??station?.position;
+    if(!landing)return;
+    walk.placeAt(landing);walk.floor=floor;selected='f'+floor;
+    lift?.setWalkFloor(floor);refreshLiftControl();
+    lighting.interior(floor,landing);
+    $('#section-label').textContent=titles[selected]+' \u00b7 '+t('walkSub');
+    refreshSheets(selected);
+    document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===selected));
+    invalidate();
+  } finally{storeyShifting=false;}
+}
+
 function setup() {
   scene = new THREE.Scene(); scene.background = new THREE.Color('#e9eeed');
   camera = new THREE.PerspectiveCamera(16,1,1,2000);camera.position.set(60,100,60);
@@ -1235,7 +1267,7 @@ async function loadModel() {
     $('#toggle-photos').disabled = false;
     $('#enter-walk').disabled=false;
     document.querySelectorAll('[data-needs-model]').forEach(b=>b.disabled=false);
-    enableImmersiveWalk(renderer,scene,walk,groups,()=>{if(!walk.active)enterWalk();},()=>{resize();invalidate();});
+    enableImmersiveWalk(renderer,scene,walk,groups,()=>{if(!walk.active)enterWalk();},()=>{resize();invalidate();},shiftWalkFloor);
     // Build each storey's cut geometry once, here, rather than on the frame
     // that first shows it: four heights, four slices, and the allocation and
     // the triangulation upload are behind us.

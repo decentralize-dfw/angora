@@ -1,0 +1,71 @@
+{
+  "grid": {
+    "x": -10.48,
+    "z": -29.48,
+    "step": 0.12,
+    "width": 193,
+    "height": 361
+  },
+  "shift": {
+    "x": 29,
+    "z": 154
+  },
+  "added_cells": [
+    16096,
+    8910,
+    649,
+    150
+  ],
+  "refused_because_blocked_in_full": [
+    12766,
+    7971,
+    2168,
+    3565
+  ],
+  "refused_because_native_supports_a_lower_floor": [
+    0,
+    248,
+    1252,
+    567
+  ],
+  "walkable_furnished_cells": [
+    19689,
+    14522,
+    4586,
+    3008
+  ],
+  "native_cells_preserved": 30208,
+  "native_cells_altered": 0,
+  "stations_added": [
+    {
+      "room_id": "f0-site-pool",
+      "placed": true,
+      "position": [
+        3.86,
+        1.64,
+        -13.94
+      ],
+      "moved_m": 0.563
+    },
+    {
+      "room_id": "f0-site-garden",
+      "placed": true,
+      "position": [
+        -0.46,
+        1.52,
+        -21.98
+      ],
+      "moved_m": 0.045
+    },
+    {
+      "room_id": "f1-site-approach",
+      "placed": true,
+      "position": [
+        0.02,
+        4.599,
+        8.02
+      ],
+      "moved_m": 0.028
+    }
+  ]
+}

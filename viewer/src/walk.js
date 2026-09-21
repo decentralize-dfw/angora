@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {WalkSurface} from './walk-surface.js';
+import {t} from './i18n.js';
 
 // Across, not up: the number a lens is quoted at. 95° is the 16-18 mm an
 // interior is actually shot with. A narrower lens is the more honest optic and
@@ -7,6 +8,15 @@ import {WalkSurface} from './walk-surface.js';
 // out feeling smaller than they are, because you cannot see a room you cannot
 // fit in the frame. The wide lens shows the room.
 export const WALK_HORIZONTAL_FOV_DEG = 95;
+
+// The right hand, in a headset. Turning is snapped rather than swept: a yaw
+// that slides continuously under a visor is the quickest way to make somebody
+// ill, and 30° steps are what comfort settings in the field settle on. A flick
+// up or down changes storey, because the walking surface has no stairs in it -
+// the delivery says so in its own limitations - so without this a visitor in a
+// headset could never leave the floor they arrived on, and the balconies and
+// the upper rooms would be shown to them and kept from them at once.
+const SNAP_TURN_DEG = 30, STICK_PRESS = .72, STICK_RELEASE = .35;
 
 export class InteriorWalk {
   constructor(data, canvas, invalidate) {
@@ -56,6 +66,30 @@ export class InteriorWalk {
     });
   }
   pose() {if(!this.xrActive)this.camera.rotation.set(this.pitch,this.yaw,0,'YXZ');}
+  // Turn the room about the HEAD, not about the rig's origin. Rotating the rig
+  // alone swings the visitor around a point somewhere behind them, which reads
+  // as being shoved sideways; this leaves them standing exactly where they are
+  // and turns the house around them.
+  snapTurnXR(direction) {
+    const head=this.camera.getWorldPosition(new THREE.Vector3());
+    const angle=-direction*THREE.MathUtils.degToRad(SNAP_TURN_DEG);
+    const cos=Math.cos(angle),sin=Math.sin(angle);
+    const dx=this.rig.position.x-head.x,dz=this.rig.position.z-head.z;
+    this.rig.position.x=head.x+dx*cos+dz*sin;
+    this.rig.position.z=head.z-dx*sin+dz*cos;
+    this.rig.rotation.y+=angle;
+    this.invalidate();
+  }
+  // Stand the visitor at a world point without disturbing where they are
+  // looking - the same call whether a headset is on or not.
+  placeAt([x,y,z]) {
+    if(this.xrActive) {
+      const head=this.camera.getWorldPosition(new THREE.Vector3());
+      this.rig.position.x+=x-head.x;this.rig.position.z+=z-head.z;
+      this.rig.position.y=y-this.surface.data.eye_height_m;
+    } else {this.camera.position.set(x,y,z);this.pose();}
+    this.invalidate();
+  }
   // The tour's lens slider: an explicit vertical field chosen by hand.
   // While set it survives resizes untouched - the user picked THE lens -
   // and null returns to the derived default below.
@@ -115,6 +149,7 @@ export class InteriorWalk {
     if(this.xrActive && xrSession) {
       const input=[...xrSession.inputSources].find(i=>i.handedness==='left' && i.gamepad);
       if(input) {const axes=input.gamepad.axes,offset=axes.length>=4?2:0;side=axes[offset]??0;forward=-(axes[offset+1]??0);if(Math.abs(side)<.18)side=0;if(Math.abs(forward)<.18)forward=0;}
+      this.rightStick(xrSession);
       const direction=this.camera.getWorldDirection(new THREE.Vector3());yaw=Math.atan2(-direction.x,-direction.z);
     }
     const length=Math.hypot(forward,side);if(!length)return false;
@@ -126,6 +161,23 @@ export class InteriorWalk {
       this.rig.position.add(p.sub(before));
     } else this.surface.move(this.camera.position,dx,dz,this.furniture);
     return true;
+  }
+  // One push, one answer. The stick has to come back past the release
+  // threshold before it will turn or change storey again, so a held stick
+  // spins nobody and a diagonal push does one thing rather than two.
+  rightStick(xrSession) {
+    const input=[...xrSession.inputSources].find(i=>i.handedness==='right' && i.gamepad);
+    this.stick ??= {turn:false,storey:false};
+    if(!input) {this.stick.turn=false;this.stick.storey=false;return;}
+    const axes=input.gamepad.axes,offset=axes.length>=4?2:0;
+    const x=axes[offset]??0,y=axes[offset+1]??0;
+    if(Math.abs(x)>=Math.abs(y)) {
+      if(Math.abs(x)>STICK_PRESS&&!this.stick.turn){this.stick.turn=true;this.snapTurnXR(Math.sign(x));}
+    } else if(Math.abs(y)>STICK_PRESS&&!this.stick.storey){
+      this.stick.storey=true;this.onFloorRequest?.(y<0?1:-1);
+    }
+    if(Math.abs(x)<STICK_RELEASE)this.stick.turn=false;
+    if(Math.abs(y)<STICK_RELEASE)this.stick.storey=false;
   }
   startXR() {
     const position=this.camera.getWorldPosition(new THREE.Vector3());
@@ -146,12 +198,19 @@ export class InteriorWalk {
   }
 }
 
-export async function enableImmersiveWalk(renderer, scene, walk, meshGroups, onStart, onEnd) {
-  const button=document.querySelector('#enter-vr');
-  if(!navigator.xr || !window.isSecureContext)return;
+// Two doors into one session: the footer button for a visitor still looking at
+// the model, and the one in the tour's own top row for a visitor already
+// inside it. Neither is drawn at all unless WebXR answers for this device, so
+// nothing about the page changes on a machine that has no headset.
+export async function enableImmersiveWalk(renderer, scene, walk, meshGroups, onStart, onEnd, onFloor) {
+  const buttons=[...document.querySelectorAll('#enter-vr,#enter-vr-walk')];
+  if(!buttons.length || !navigator.xr || !window.isSecureContext)return;
   let supported=false;try{supported=await navigator.xr.isSessionSupported('immersive-vr');}catch{return;}
   if(!supported)return;
-  renderer.xr.enabled=true;renderer.xr.setReferenceSpaceType('local-floor');button.hidden=false;
+  walk.onFloorRequest=onFloor;
+  const label=key=>{for(const button of buttons){button.textContent=t(key);button.dataset.i18n=key;button.setAttribute('aria-label',t(key));}};
+  renderer.xr.enabled=true;renderer.xr.setReferenceSpaceType('local-floor');
+  for(const button of buttons)button.hidden=false;
   const ray=new THREE.Raycaster(),rotation=new THREE.Matrix4();
   for(let index=0;index<2;index++) {
     const controller=renderer.xr.getController(index);walk.rig.add(controller);
@@ -159,21 +218,29 @@ export async function enableImmersiveWalk(renderer, scene, walk, meshGroups, onS
     line.userData.aoExcluded=true;controller.add(line);
     controller.addEventListener('select',()=>{
       controller.updateWorldMatrix(true,false);rotation.extractRotation(controller.matrixWorld);
-      ray.ray.origin.setFromMatrixPosition(controller.matrixWorld);ray.ray.direction.set(0,0,-1).applyMatrix4(rotation);ray.far=12;
+      ray.ray.origin.setFromMatrixPosition(controller.matrixWorld);ray.ray.direction.set(0,0,-1).applyMatrix4(rotation);
+      // Far enough to cross the garden in a few hops rather than a dozen: the
+      // plot runs forty metres and a twelve-metre reach was drawn for rooms.
+      ray.far=20;
       const hits=ray.intersectObjects([...meshGroups.values()],true).filter(hit=>hit.object.visible);
       const hit=hits[0];if(!hit?.face)return;
       const normal=hit.face.normal.clone().transformDirection(hit.object.matrixWorld);
       if(normal.y>.7)walk.teleportXR(hit.point);
     });
   }
-  button.onclick=async()=>{
+  const open=async()=>{
     try {
       if(renderer.xr.isPresenting){await renderer.xr.getSession().end();return;}
+      // Walking first, then the headset: the visitor is put inside the house
+      // and on their feet before the session opens, so the first thing the
+      // visor shows is the room they are standing in rather than the model
+      // seen from outside.
       onStart();
       const session=await navigator.xr.requestSession('immersive-vr',{optionalFeatures:['local-floor','bounded-floor']});
       await renderer.xr.setSession(session);
-    } catch(error) {button.textContent='VR’a tekrar gir';console.warn('XR session could not start',error);}
+    } catch(error) {label('retryVR');console.warn('XR session could not start',error);}
   };
-  renderer.xr.addEventListener('sessionstart',()=>{walk.startXR();button.textContent='VR’dan çık';});
-  renderer.xr.addEventListener('sessionend',()=>{walk.endXR();button.textContent='VR’a gir';onEnd();});
+  for(const button of buttons)button.onclick=open;
+  renderer.xr.addEventListener('sessionstart',()=>{walk.startXR();label('exitVR');});
+  renderer.xr.addEventListener('sessionend',()=>{walk.endXR();label('enterVR');onEnd();});
 }

@@ -395,6 +395,13 @@ h1 strong{font-weight:700}
 /* not a bare x: the button says what actually happens */
 .walk-close{position:absolute;right:22px;top:max(18px,env(safe-area-inset-top));min-height:44px;padding:0 18px;pointer-events:auto;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.02em}
 .walk-close::before{content:'‹';margin-right:8px;font-size:16px;font-weight:400}
+/* Leaving the tour and entering the headset are the same kind of decision and
+   sit in the same corner; the row keeps them from stacking on one another. */
+.walk-top{position:absolute;right:22px;top:max(18px,env(safe-area-inset-top));display:flex;gap:8px;align-items:center;pointer-events:none}
+.walk-top>*{position:static;right:auto;top:auto;pointer-events:auto}
+.walk-vr::before{content:none}
+.walk-vr{background:var(--ink);color:#fff;border-color:var(--ink)}
+.walk-vr:hover{background:#000}
 .walk-close:hover{background:var(--glass-hover)}
 .walk-room-panel{position:absolute;left:50%;transform:translateX(-50%);bottom:max(22px,env(safe-area-inset-bottom));pointer-events:auto;border-radius:18px;padding:10px 16px 12px;min-width:260px;max-width:min(420px,calc(100% - 190px));display:grid;gap:3px;background:var(--glass-strong)}
 .walk-room-panel label{font-size:9px;color:var(--muted);letter-spacing:.22em;text-transform:uppercase;font-weight:700}
@@ -569,6 +576,8 @@ h1 strong{font-weight:700}
   .rm-filters button[aria-pressed=false]{background:rgba(255,255,255,.52)}
   .rm-filters button[aria-pressed=false] .rm-ico{opacity:.5}
   .walk-close{right:12px;top:max(12px,env(safe-area-inset-top))}
+  .walk-top{right:12px;top:max(12px,env(safe-area-inset-top));gap:6px}
+  .walk-top>*{min-height:38px;padding:0 13px;font-size:12px}
   .walk-room-panel{left:12px;transform:none;bottom:max(14px,env(safe-area-inset-bottom));min-width:0;max-width:calc(100% - 190px);padding:9px 12px}
   .walk-lens{left:12px;bottom:max(172px,calc(env(safe-area-inset-bottom) + 160px));padding:7px 12px;gap:8px}
   #walk-lens{width:110px}

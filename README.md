@@ -347,6 +347,68 @@ Kesit üretimi normal Python ortamında NumPy, Shapely ve mapbox-earcut kullanı
   aynı adı verir; masaüstünde adlı çipler aynen kalır. Satır da haritanın
   ortasından inip bölge panelinin hemen üstüne alındı.
 
+### R47 beşinci tur — VR ve bahçeye çıkan yürüyüş
+
+- **Yürüme yüzeyi artık bahçeyi de içeriyor.** Native teslimatın yürüme
+  yüzeyi binanın kendi döşeme katmanlarından (`$ZEMİN`, `$ZEMİN KAPLAMA`,
+  `$MERDİVEN`) tarandığı için duvarlarda bitiyordu: ızgarası evi ve bir iki
+  metrelik terası kapsıyor, bahçe, havuz çevresi, ön yol ve balkonların
+  altındaki zemin hiç yok. Ziyaretçi bodrum kapısını açıp olduğu yerde
+  kalıyordu. R44'te bu sorunu çözen dış mekân taraması (`build/walk-outdoors-r44.json`)
+  *full* teslimata uygulanmış, native'e hiç geçmemişti.
+  `tools/extend_native_navigation_outdoors.py` iki teslimatı birleştirir.
+  İkisi de aynı evi aynı dünya koordinatlarında, aynı 12 cm adımda anlatır ve
+  paylaştıkları hücrelerde yükseklikleri milimetrede uyuşur (17.840 ortak
+  yürünebilir hücrede medyan 0,000 m, p90 0,000 m). Kural: **native'in
+  desteklediği her hücrede native kazanır** — kendi yükseklikleri, kendi
+  blokları, kendi dar gövde yarıçapı (0,21 m) ve baş boşluğu (1,68 m). Native'in
+  hiç desteği olmayan hücreye full zemin verebilir, ama yalnız o hücrenin
+  **altındaki hiçbir katta da** native desteği yoksa. Bu son şart işin tüm
+  güvenliğidir: galeri boşluğunun altında zaten bir döşeme vardır, o yüzden
+  boşluk boşluk kalır ve yürünebilir köprüye dönüşmez; balkon altında ya da
+  çimende altta bir şey yoktur, zemin oradan geçer. Araç, yazmadan önce
+  native'in desteklediği her hücreyi yazdığıyla karşılaştırır ve biri oynamışsa
+  dosyayı hiç yazmaz (30.208 hücre korundu, 0 değişti). Izgara 128×150'den
+  193×361'e, dosya 94 KB'den 190 KB'ye çıktı.
+- **Ne açıldı.** Bodrum salonundan yürüyerek ulaşılabilen alan 2.133 hücreden
+  (tek kat, 7,5 × 7,5 m) 31.244 hücreye çıktı: havuz çevresi, arka çim, doğu ve
+  batı yan bahçeleri, ön yol ve giriş katı yaklaşımı. Oda menüsüne de üç yeni
+  durak eklendi — `Havuz`, `Bahçe`, `Ön bahçe` — her biri gerçekten
+  basılabilecek en yakın hücreye oturtuldu ve eve bakar. İki balkonun durağı
+  zaten vardı.
+- **Kalan sınır, olduğu gibi.** Native yürüme yüzeyinde merdiven yok; teslimat
+  bunu kendi `limitations` alanında zaten söylüyor (hiçbir katman bir üst kata
+  devretmiyor). Yani bodrum ile giriş katı birbirine ve bahçeye bağlıdır, 1. kat
+  ve çatı katı kendi adalarıdır; oraya oda menüsü ya da asansörle geçilir.
+  Bu bu turda açılmadı: merdiven taraması kaynak geometriyi ister ve
+  `build/intermediate/` bu depoda yok.
+- **VR.** WebXR yolu zaten kuruluydu; bu tur kullanılabilir hâle getirildi.
+  Başlık WebXR'a cevap veriyorsa iki düğme çizilir — modele bakarken alt
+  çubukta `Plan`'ın yanında, tur içindeyken turun kendi üst satırında — ve
+  ikisi de aynı oturumu açar. Oturum açılmadan **önce** ziyaretçi eve sokulup
+  ayağa kaldırılır, böylece vizörde ilk görünen şey dışarıdan model değil
+  içinde durulan odadır.
+- **VR kumandası.** Sol çubuk bakış yönünde yürütür (vardı). Sağ çubuk sağa/sola
+  **30°'lik kademeli dönüş** yapar — vizör altında sürekli kayan bir dönüş
+  insanı en hızlı rahatsız eden şeydir — ve dönüş rig'in değil **başın**
+  etrafındadır, yoksa ziyaretçi arkasındaki bir nokta çevresinde savrulur. Sağ
+  çubuğu yukarı/aşağı itmek **kat değiştirir**: merdiven yürüme yüzeyinde
+  olmadığı için bu olmadan başlıktaki ziyaretçi girdiği kattan hiç çıkamaz ve
+  balkonlar ona hem gösterilmiş hem yasaklanmış olurdu. Ziyaretçi durduğu
+  noktanın tam üstünde/altında, o katta gerçekten basılabilecek en yakın yerde
+  çıkar; katın iç mekânı oda menüsündeki gibi önce yüklenir. Her itiş bir kez
+  iş görür: çubuk bırakma eşiğine dönmeden ikinci kez dönmez ya da kat
+  değiştirmez. Tetik, ışınla zemine ışınlanmayı korur; menzili 12 m'den 20 m'ye
+  çıkarıldı, çünkü 12 m odalar için çizilmişti ve parsel kırk metre.
+- **Ne test ediliyor.** `viewer/tests/walk-outdoors.test.mjs` teslim edilen
+  yürüme yüzeyini gerçek `WalkSurface` ile dolaşır: ızgaranın parselin dört
+  ucuna yettiğini, bodrum salonundan havuz çevresine, arka çime, doğu ve batı
+  yanına ve ön yaklaşıma **yürüyerek** gidilebildiğini (25.000'den çok hücre),
+  her durağın hâlâ yüzeyin üstünde durduğunu ve dosyanın taşıdığı
+  "0 hücre değişti" kaydını doğrular. Hücre hücre kanıt aracın kendisindedir —
+  eski ve yeni yüzeyin aynı anda elde olduğu tek yer orasıdır ve biri oynamışsa
+  dosyayı yazmayı reddeder.
+
 ## R44 — beyaz iç mekânlar, bodrum dolgusu, dış mekân yürüyüşü ve birleşik model
 
 R44 dört isteği işler; araçlar `tools/*_r44.mjs` altındadır ve her biri kendi
