@@ -112,7 +112,8 @@ export function installQaHarness({host, query, hooks}) {
       camera: appliedCamera?.id ?? null,
       view: hooks.selected(),
       walking: Boolean(hooks.walk()?.active),
-      tier: detectTierFromEnvironment({search: location.search}),
+      tier: hooks.quality?.()?.tier ?? detectTierFromEnvironment({search: location.search}),
+      qualityView: hooks.quality?.()?.view ?? null,
       deliveryProfile: hooks.deliveryProfile,
       commit: null,                       // stamped by the capture script
       capturedAt: new Date().toISOString(),

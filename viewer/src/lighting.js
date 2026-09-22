@@ -118,9 +118,13 @@ export function isGlazing(material) {
 export function isSeeThrough(material) {
   return material.transmission>0 || (material.transparent && material.opacity<.98);
 }
-export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
-  const compact=matchMedia('(pointer: coarse)').matches;
-  renderer.shadowMap.enabled=!baked;renderer.shadowMap.autoUpdate=false;
+// Task 1.1 flag surgery: this function no longer reads pointer-coarseness or
+// the model root. Every capability arrives through the quality profile
+// (quality-profile.js), whose legacy-compat mapping reproduces the old
+// baked/compact behavior exactly while the FAZ 1 feature flags stay off.
+export function createLighting(renderer, scene, camera, clip,{quality}={}) {
+  const q=quality.value;
+  renderer.shadowMap.enabled=q.dynamicSunShadow;renderer.shadowMap.autoUpdate=false;
   applyRenderProfile(renderer);
   // The horizon colour is no longer the background - the sky is. It stays as
   // the colour the terrain fades into at its edge and the colour distance
@@ -128,7 +132,7 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
   const horizon=new THREE.Color('#e4e9ed');
   const hemisphere=new THREE.HemisphereLight(0xebf2ff,0xb8b2a8,.5);scene.add(hemisphere);
   const sun=new THREE.DirectionalLight(0xfff2df,1.55),direction=new THREE.Vector3(-.45,.85,-.3).normalize();
-  sun.castShadow=!baked;sun.shadow.mapSize.setScalar(compact?1024:4096);
+  sun.castShadow=q.dynamicSunShadow;sun.shadow.mapSize.setScalar(q.shadowMapSize||1024);
   sun.shadow.bias=-.000025;sun.shadow.normalBias=.018;sun.shadow.radius=2.5;
   sun.shadow.camera.near=.5;sun.shadow.camera.far=700;scene.add(sun,sun.target);
   const sky=new Sky();sky.scale.setScalar(10000);sky.material.uniforms.turbidity.value=3;
@@ -136,7 +140,7 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
   sky.material.uniforms.sunPosition.value.copy(direction);
   // The batched boot awaits the authored HDR before presenting a frame.
   // Do not compile/convolve a temporary probe that it immediately discards.
-  let environment=baked?null:buildEnvironment(renderer,{sky});
+  let environment=q.buildProbeAtBoot?buildEnvironment(renderer,{sky}):null;
   scene.environment=environment?.texture??null;scene.environmentIntensity=1.0;
   // The sky was built, handed to the probe and thrown away, leaving a flat fill
   // behind every window and over the whole settlement. It is kept now and
@@ -162,15 +166,15 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
   // and eventually lose the context. Three applies the same AgX curve and sRGB
   // conversion itself when it draws to the canvas, so the image keeps its
   // exposure and its colour; it loses the crevice shading and the glare.
-  const compactOutput=baked&&!compact?new CompactOutput():null;
+  const compactOutput=q.compactOutput?new CompactOutput():null;
   let composer=null,beauty=null,ao=null;
-  if(!compact&&!baked){
+  if(q.postProcessing){
     const target=new THREE.WebGLRenderTarget(1,1,{type:THREE.HalfFloatType,samples:referenceProfile.msaaSamples});
     composer=new EffectComposer(renderer,target);beauty=new RenderPass(scene,camera);
     // Full-resolution occlusion: at .85 the denoiser smeared contact shading
     // off thin rails and window reveals - the pass is the pipeline's own
     // stated "largest tell", so it gets its headroom.
-    ao=new SectionGTAOPass(scene,camera,clip,1);
+    ao=new SectionGTAOPass(scene,camera,clip,q.gtaoResolutionScale??1);
     const smaa=new SMAAPass(),bloom=new LinearBloomPass();
     ao.enabled=referenceProfile.aoEnabled;
     configurePostprocessing(composer,{beauty,ao,smaa,bloom,output:new ShaderPass(GradeShader),
@@ -195,7 +199,7 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
     const light=new THREE.SpotLight(0xffead5,0,6,Math.PI*.37,.72,2);
     // Four shadow-casting spots is four extra scene passes every time a fixture
     // changes. Indoors on a phone the fixtures light, they do not cast.
-    light.castShadow=!compact&&!baked;light.shadow.mapSize.setScalar(512);
+    light.castShadow=q.fixtureShadows;light.shadow.mapSize.setScalar(512);
     light.shadow.bias=-.0001;light.shadow.normalBias=.01;light.shadow.camera.near=.06;
     light.visible=false;scene.add(light,light.target);return light;
   });
@@ -325,7 +329,7 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
       object.castShadow=!glass;object.receiveShadow=!glass;
       for(const material of materials) {
         electricLight?.apply(material);
-        if(baked&&['architecture','interior'].includes(name))fixtureVertices.apply(material);
+        if(q.batchedGeometry&&['architecture','interior'].includes(name))fixtureVertices.apply(material);
         if(['architecture','interior'].includes(name)&&/-(metal|glass|wood)-/.test(material.name)){
           reflectionMaterials.add(material);material.envMap=roomReflections?.get(reflectionFloor)??null;
         }
@@ -344,7 +348,7 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
         // see through it collected nothing at all, and the first build of the
         // glow lit an empty set.
         if(name==='architecture'&&isGlazing(material))glazing.add(material);
-        for(const value of Object.values(material))if(value?.isTexture)value.anisotropy=Math.min(compact?8:16,renderer.capabilities.getMaxAnisotropy());
+        for(const value of Object.values(material))if(value?.isTexture)value.anisotropy=Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy());
       }
     },
     frame(view,contextBounds) {

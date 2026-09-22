@@ -5,8 +5,13 @@ import * as THREE from 'three';
 // on a modern handset that is the whole native panel, for a scene this size,
 // and it is why it stuttered and ran out of memory. A phone now draws at most
 // 1.5 M pixels and never above 2x; the desktop keeps its own budget.
-export function renderPixelRatio(width,height,dpr,compact) {
-  return Math.max(1,Math.min(dpr,2,Math.sqrt((compact?1_500_000:5_000_000)/Math.max(1,width*height))));
+// The budget may arrive as the quality profile ({pixelBudget, maxPixelRatio})
+// or as the older compact boolean, which maps to the same two numbers.
+export function renderPixelRatio(width,height,dpr,budget) {
+  const compact=budget===true;
+  const pixelBudget=typeof budget==='object'?budget.pixelBudget:compact?1_500_000:5_000_000;
+  const maxRatio=typeof budget==='object'?budget.maxPixelRatio:2;
+  return Math.max(1,Math.min(dpr,maxRatio,Math.sqrt(pixelBudget/Math.max(1,width*height))));
 }
 
 // The former 0.2–50,000 m frustum discarded most depth precision at the

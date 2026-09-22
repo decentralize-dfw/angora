@@ -59,7 +59,10 @@ export function detectTierFromEnvironment({search = '', probe = null} = {}) {
 // measurements; the ratchet file is the gate.
 const TIER_MATRIX = {
   'mobile-low': {
-    textureProfile: 'mobile', maxPixelRatio: 1.5, pixelBudget: 1_000_000,
+    // pixel budget/ratio deliberately match mobile-high (the legacy phone
+    // budget) until a REAL low-end device measurement justifies tightening
+    // to the plan's 1.0 M / 1.5 - a change here must not ride flag surgery.
+    textureProfile: 'mobile', maxPixelRatio: 2.0, pixelBudget: 1_500_000,
     bakedIndirectLighting: true, bakedReceiverVisibility: true,
     dynamicSunShadow: false, shadowMapSize: 0, shadowCameraMode: 'disabled', shadowType: 'pcfsoft',
     postProcessing: false, gtao: false, gtaoResolutionScale: 0.5,
@@ -135,25 +138,62 @@ export function resolveQuality(tier, view = 'villa') {
   return Object.freeze(profile);
 }
 
-export function createQualityProfile({tier, view = 'neighborhood'} = {}) {
-  let current = resolveQuality(tier, view);
+// The renderer-facing profile: the matrix above, feature-gated back to the
+// EXACT pre-surgery behavior wherever a task has not shipped yet. With every
+// feature flag off this must reproduce the legacy pipeline bit for bit:
+//   shadowMap.enabled = !baked      composer  = !baked && !coarse
+//   compact output    = baked && !coarse      probe-at-boot = !baked
+//   fixture shadows   = !baked && !coarse     anisotropy    = coarse ? 8 : 16
+// where baked meant "model root under /batched/" and coarse meant a mobile
+// pointer. Those two reads now live here and nowhere else.
+export function effectiveQuality(tier, view, {batched = true, features = {}} = {}) {
+  const matrix = resolveQuality(tier, view);
+  const mobile = tier.startsWith('mobile');
+  const value = {...matrix, batchedGeometry: batched,
+    buildProbeAtBoot: !batched, fixtureShadows: false, compactOutput: false};
+  if (!features.hybridSunShadow) {
+    value.dynamicSunShadow = !batched;
+    value.shadowMapSize = value.dynamicSunShadow ? (mobile ? 1024 : 4096) : 0;
+    value.shadowCameraMode = 'legacy-frame';
+    value.fixtureShadows = !mobile && !batched;
+  }
+  if (!features.postfxV2) {
+    value.postProcessing = !batched && !mobile;
+    value.gtao = value.postProcessing;
+    value.gtaoResolutionScale = 1;
+    value.antialiasing = mobile ? 'canvas-msaa' : value.postProcessing ? 'smaa' : 'fxaa';
+    value.bloom = value.postProcessing;
+    value.grade = value.postProcessing;
+    value.dither = value.postProcessing;
+  }
+  value.compactOutput = !mobile && !value.postProcessing;
+  if (!features.atlasAnisotropyFix) value.anisotropy = mobile ? 8 : 16;
+  return Object.freeze(value);
+}
+
+export function createQualityProfile({tier, view = 'neighborhood', deliveryPath = '/batched/', features = {}} = {}) {
+  // The ONE place delivery packing may be read off the model root, kept for
+  // exact legacy equivalence (production always resolves batched).
+  const batched = deliveryPath.includes('/batched/');
+  const state = {tier, view: VIEWS.includes(view) ? view : viewIdFor(view)};
+  let current = effectiveQuality(state.tier, state.view, {batched, features});
   const listeners = new Set();
+  const refresh = () => {
+    current = effectiveQuality(state.tier, state.view, {batched, features});
+    for (const listener of listeners) listener(current);
+    return current;
+  };
   return {
     get tier() { return current.tier; },
     get view() { return current.view; },
     get value() { return current; },
     applyView(nextView, options) {
       const id = VIEWS.includes(nextView) ? nextView : viewIdFor(nextView, options);
-      if (id === current.view) return current;
-      current = resolveQuality(current.tier, id);
-      for (const listener of listeners) listener(current);
-      return current;
+      if (id === state.view) return current;
+      state.view = id;
+      return refresh();
     },
-    setTier(nextTier) {
-      current = resolveQuality(nextTier, current.view);
-      for (const listener of listeners) listener(current);
-      return current;
-    },
+    setTier(nextTier) { state.tier = nextTier; return refresh(); },
     onChange(listener) { listeners.add(listener); return () => listeners.delete(listener); },
   };
 }

@@ -48,6 +48,8 @@ import {createInterfaceSound} from './interface-sound.js';
 import {createDeviceQA} from './device-qa.js';
 import {readShareState,shareSearch} from './share-state.js';
 import {referenceProfile} from './render-profile.js';
+import {FEATURES} from './features.js';
+import {createQualityProfile,detectTierFromEnvironment} from './quality-profile.js';
 import { sectionHeight, smoothStep, createWallCaps, createSoilCap, createNativeSoilSection, SOIL_CUT_HEIGHT } from './section.js';
 import { createWalkLocator } from './walk-locator.js';
 import { t, roomName, applyStatic, setLang, currentLang } from './i18n.js';
@@ -123,7 +125,7 @@ let plotCutReady = false;
 // see it.
 let planWash = null;
 let flight, hotspots, planMode=false, roomData, interiorLights=true, soilCap=null;
-let scene, camera, renderer, controls, loader, loadAsset, caps, buildingBox, gardenBox, contextBox, lighting, siteContext;
+let scene, camera, renderer, controls, loader, loadAsset, caps, buildingBox, gardenBox, contextBox, lighting, siteContext, quality;
 let nativeDelivery=null,nativeSwitching=false,nativeAtlas=null,nativeSoil=null,plotMask=null;
 // The opening view is the street, not the house: a visitor should see where
 // Angora 21 sits before they see what it is. share-state.js has always called
@@ -320,7 +322,7 @@ function resize() {
   invalidateUIObstacles();
   if (!renderer) return;
   const w = host.clientWidth, h = Math.max(1, host.clientHeight), aspect = w / h;
-  const ratio=renderPixelRatio(w,h,devicePixelRatio,matchMedia('(pointer: coarse)').matches);
+  const ratio=renderPixelRatio(w,h,devicePixelRatio,quality?.value??false);
   if(renderer.getPixelRatio()!==ratio){renderer.setPixelRatio(ratio);lighting?.pixelRatio(ratio);}
   camera.aspect=aspect;
   if(camera.isOrthographicCamera){camera.left=-camera.top*aspect;camera.right=camera.top*aspect;}
@@ -555,12 +557,18 @@ async function shiftWalkFloor(delta){
 function setup() {
   scene = new THREE.Scene(); scene.background = new THREE.Color('#e9eeed');
   camera = new THREE.PerspectiveCamera(16,1,1,2000);camera.position.set(60,100,60);
+  // One quality decision for the whole pipeline (Task 1.1). Tier detection
+  // and the model-root read live inside quality-profile.js; nothing after
+  // this line asks the pointer or the pathname a quality question.
+  quality = createQualityProfile({
+    tier: detectTierFromEnvironment({search: location.search}),
+    view: selected, deliveryPath: modelRoot.pathname, features: FEATURES,
+  });
   // A phone draws straight to the canvas, so the canvas has to do the
   // antialiasing: the chain that used to do it is not in that path. On desktop
   // the composer's SMAA owns it and canvas MSAA would be paying twice.
-  const coarse=matchMedia('(pointer: coarse)').matches;
   try {
-    renderer = new THREE.WebGLRenderer({antialias:coarse, alpha:false, powerPreference:'high-performance'});
+    renderer = new THREE.WebGLRenderer({antialias:quality.value.antialiasing==='canvas-msaa', alpha:false, powerPreference:'high-performance'});
   } catch (error) {
     // No 3D is not no product: the boot screen keeps the verified facts,
     // the listing route and an honest explanation on screen.
@@ -568,7 +576,7 @@ function setup() {
     message(t('loadFailed'), true); $('#retry').hidden = true; $('#no3d').hidden = false;
     contextLost = true; return;
   }
-  renderer.setPixelRatio(renderPixelRatio(host.clientWidth,host.clientHeight,devicePixelRatio,coarse));
+  renderer.setPixelRatio(renderPixelRatio(host.clientWidth,host.clientHeight,devicePixelRatio,quality.value));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.localClippingEnabled = true;
   renderer.info.autoReset=false;
@@ -578,7 +586,7 @@ function setup() {
   configureCameraControls(controls, THREE);
   flight=new CameraFlight(camera,controls,resize,invalidate);
   controls.addEventListener('change', invalidate);
-  lighting = createLighting(renderer, scene, camera, clip,{baked:modelRoot.pathname.includes('/batched/')});
+  lighting = createLighting(renderer, scene, camera, clip,{quality});
   // bindInterface() ran before this, so the controls may already carry values
   // from a shared link. Push them in before the first frame is drawn.
   lighting.setStyle($('#lighting-style').value);
@@ -609,8 +617,10 @@ function setup() {
   });
   // Bound both package concurrency and decoder workers. A phone's core count
   // does not imply enough memory for simultaneous model/texture decode.
+  // This is a decode-memory decision, not a render-quality one, so it keys
+  // off the delivery profile rather than the quality tier.
   const draco = new DRACOLoader(); draco.setDecoderPath(decoderRoot.href);
-  const budget=assetLoadBudget({compact:coarse,cores:navigator.hardwareConcurrency});
+  const budget=assetLoadBudget({compact:deliveryProfile==='mobile',cores:navigator.hardwareConcurrency});
   draco.setWorkerLimit(budget.draco);
   loader = new GLTFLoader(); loader.setDRACOLoader(draco);
   loader.setKTX2Loader(createTextureLoader(renderer,budget.textures));
@@ -649,6 +659,7 @@ async function selectView(id, initial = false) {
   }
   if (walk?.active) exitWalk(false);
   const previous = selected; selected = id;
+  quality?.applyView(id,{plan:planMode,walking:walk?.active});
   // The pin that opened a frame is about to leave the screen, so the frame
   // goes with it rather than hanging over another storey.
   if (previous !== id) photoViewer?.hide();
@@ -1134,6 +1145,7 @@ function enterWalk(roomId) {
   const position=roomId?null:walk.surface.center(floor,[centre.x,centre.z],furnitureVisible);
   roomId ||= stations.reduce((a,b)=>new THREE.Vector3(...a.position).distanceToSquared(centre)<new THREE.Vector3(...b.position).distanceToSquared(centre)?a:b).room_id;
   flight.cancel();panel('',false);photoViewer?.hide();const station=walk.enter(roomId,position);selected='f'+station.floor_index;updateRoomUI(station);
+  quality?.applyView(selected,{walking:true});
   lighting.interior(station.floor_index,station.position);
   controls.enabled=false;clip.constant=fullHeight;earthClip.constant=fullHeight;transition=null;lighting.frame('building');massing?.set('building');
   lighting.setWalkInterior(true);
@@ -1152,6 +1164,7 @@ function exitWalk(reselect = true) {
   pendingRoomJump.cancel();
   if(!walk?.active)return;
   walk.leave();controls.enabled=true;$('#app').dataset.walk='false';
+  quality?.applyView(selected,{walking:false,plan:planMode});
   lighting.setWalkInterior(false);
   lighting.interior(null,null);
   lift?.setWalkActive(false);lift?.cancel();refreshLiftControl();
@@ -1800,7 +1813,7 @@ function bindInterface() {
   };
   $('#enter-walk').onclick=()=>enterWalk();$('#exit-walk').onclick=()=>exitWalk();
   $('#walk-room').onchange=event=>travelRoom(event.target.value);
-  $('#toggle-plan').onclick=()=>{planMode=!planMode;$('#toggle-plan').setAttribute('aria-pressed',planMode);$('#toggle-plan').textContent=planMode?'3D':'Plan';mode(planMode);frame(false);};
+  $('#toggle-plan').onclick=()=>{planMode=!planMode;$('#toggle-plan').setAttribute('aria-pressed',planMode);$('#toggle-plan').textContent=planMode?'3D':'Plan';mode(planMode);quality?.applyView(selected,{plan:planMode});frame(false);};
   $('#region-summary').ontoggle=()=>{invalidateUIObstacles();invalidate();};
   $('#toggle-auto-rotate').onclick=()=>setAutoRotate(!controls.autoRotate);
   // A press takes the camera; merely moving the mouse does not. The idle
@@ -1873,6 +1886,7 @@ if(qaQuery.get('stats')==='1'||qaQuery.get('camera')){
       camera:()=>walk?.active?walk.camera:camera,
       controls:()=>controls,flight:()=>flight,
       lighting:()=>lighting,walk:()=>walk,
+      quality:()=>quality,
       selected:()=>selected,
       enterWalk,exitWalk,invalidate,
       deliveryProfile,
@@ -1883,6 +1897,25 @@ if(qaQuery.get('stats')==='1'||qaQuery.get('camera')){
       },
     },
   })).catch(error=>console.warn('QA harness unavailable',error));
+}
+// ?debug=quality — the live state of the one quality decision, on screen,
+// so a broken tier or a flag that silently failed to flip is seen during
+// development instead of discovered in a measurement.
+if(qaQuery.get('debug')==='quality'){
+  const box=document.createElement('pre');
+  box.style.cssText='position:fixed;left:8px;bottom:8px;z-index:99;background:rgba(20,26,24,.82);color:#d9f2e6;font:11px/1.5 ui-monospace,monospace;padding:8px 10px;border-radius:8px;pointer-events:none;margin:0';
+  document.body.append(box);
+  setInterval(()=>{
+    const q=quality?.value;if(!q||!renderer)return;
+    const frame=JSON.parse(host.dataset.frameStats??'{}');
+    box.textContent=[
+      `tier ${q.tier} · view ${q.view}`,
+      `dynamicSunShadow ${q.dynamicSunShadow?'✓':'✗'}  postProcessing ${q.postProcessing?'✓':'✗'}`,
+      `gtao ${q.gtao?'✓':'✗'}  bloom ${q.bloom?'✓':'✗'}  compactOutput ${q.compactOutput?'✓':'✗'}`,
+      `batched ${q.batchedGeometry?'✓':'✗'}  bakedGI ${q.bakedIndirectLighting?'✓':'✗'}  receiverVis ${q.bakedReceiverVisibility?'✓':'✗'}`,
+      `calls ${frame.drawCalls??'—'}  tris ${frame.triangles??'—'}  shadowMap ${renderer.shadowMap.enabled?'on':'off'}`,
+    ].join('\n');
+  },500);
 }
 interfaceSound=createInterfaceSound({button:$('#toggle-sound')});
 try {
