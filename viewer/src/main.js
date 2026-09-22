@@ -24,7 +24,7 @@ import {clockLabel} from './daylight.js';
 import {createHotspots} from './hotspots.js';
 import {createGuidedTour} from './guided-tour.js';
 import {createSpotlight} from './tour-spotlight.js';
-import {TOUR_AUDIO,TOUR_DURATION} from './tour-script.js';
+import {TOUR_DURATION,tourLang} from './tour-script.js';
 import {roomBox,clampToFloor} from './tour-rooms.js';
 import {createPhotoPins,createPhotoViewer} from './photo-gallery.js';
 import {PHOTO_POINTS,photoCaption} from './photo-points.js';
@@ -749,6 +749,9 @@ function refreshChrome(){
   applyStatic();
   markLanguage();
   photoPins?.refreshLabels();photoViewer?.refresh();
+  // There is a recording per language, so the switch is not only a caption
+  // change: mid-tour the other voice picks up the sentence being spoken.
+  guidedTour?.setLanguage(currentLang());
   $('#toggle-furniture').textContent=t('furniture');
   if(walk?.active){
     const station=walk.surface.station(walk.room);
@@ -1023,7 +1026,7 @@ function setTourSweep(step){
   // the whole closing is one unbroken move - and it follows the transport: at
   // 2x the words finish in half the time and so must the turn.
   tourSweep=step?.sweep?{from:step.azimuth,through:step.sweep,
-    span:Math.max(8,(TOUR_DURATION-step.at)/(guidedTour?.rate??1)),done:0}:null;
+    span:Math.max(8,(TOUR_DURATION[tourLang(currentLang())]-step.at)/(guidedTour?.rate??1)),done:0}:null;
   if(tourSweep)invalidate();
 }
 function advanceTourSweep(time){
@@ -1079,7 +1082,7 @@ function ensureSpotlight(){
 function startTour(){
   if(!ready)return;
   ensureSpotlight();
-  guidedTour??=createGuidedTour({element:$('#tour-bar'),src:new URL(TOUR_AUDIO,audioRoot).href,
+  guidedTour??=createGuidedTour({element:$('#tour-bar'),audioRoot,lang:currentLang(),
     apply:applyTourStep,caption:tourCaption,onEnd:()=>endTour(true),
     // The bar stays up with the reason in it, so leaving is still one press.
     onError:()=>{$('#tour-caption').textContent=t('tourAudioFailed');

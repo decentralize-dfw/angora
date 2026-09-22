@@ -76,8 +76,18 @@ h1 strong{font-weight:700}
 .label-short{display:none}
 /* Two flags, both always present; the active one is simply the one in
    colour. Smaller than the word it replaces. */
+/* In the settings panel the switch sits on a labelled row like every other
+   option, rather than floating in the chrome. */
+.option-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:11px}
+.option-row>span{font-size:12.5px;font-weight:600;color:var(--ink-soft,var(--ink))}
 .lang-switch{display:flex;gap:2px;padding:3px;border-radius:999px;pointer-events:auto;background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:var(--shadow-soft)}
-.lang-flag{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;background:transparent;border:0;box-shadow:none;padding:0;opacity:.4;filter:saturate(.2);transition:opacity .18s ease,filter .18s ease}
+.lang-flag{min-height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:7px;
+  background:transparent;border:0;box-shadow:none;padding:0 11px;opacity:.4;filter:saturate(.2);
+  transition:opacity .18s ease,filter .18s ease}
+/* The name, not only the flag: a visitor who does not know the flags still
+   knows which button is theirs, and at the loading panel that is the only
+   chance to get it right before the tour speaks. */
+.lang-flag b{font-size:12px;font-weight:650;letter-spacing:.01em;color:var(--ink)}
 .lang-flag svg{width:21px;height:14px;border-radius:3px;box-shadow:0 0 0 1px rgba(22,29,26,.2)}
 .lang-flag:hover{opacity:.85;filter:none}
 .lang-flag[aria-pressed=true]{opacity:1;filter:none;color:var(--ink);background:rgba(255,255,255,.72);box-shadow:inset 0 0 0 1px var(--edge)}
@@ -448,6 +458,14 @@ h1 strong{font-weight:700}
 /* ---------------------------------------------------------- load status */
 .load-status{position:absolute;z-index:60;bottom:96px;left:50%;transform:translateX(-50%);border-radius:18px;padding:13px 17px;display:flex;gap:12px;align-items:center;font-size:13px;font-weight:600;max-width:calc(100% - 32px);background:var(--glass-strong);box-shadow:var(--shadow)}
 .load-status.error{line-height:1.5}
+/* Bottom centre, under the loading card: the language is settled before the
+   model is, so the first thing anyone hears is already the right voice. It
+   goes when the card goes. */
+.load-language{position:absolute;z-index:60;bottom:52px;left:50%;transform:translateX(-50%);
+  display:flex;justify-content:center;pointer-events:none;
+  transition:opacity .3s ease}
+#app:not([data-booting=true]) .load-language{opacity:0;pointer-events:none;visibility:hidden}
+.load-language .lang-switch{pointer-events:auto}
 .load-status button{background:var(--ink);color:#fff;border-radius:12px;padding:10px 14px;white-space:nowrap}
 .spinner{width:15px;height:15px;border:2px solid rgba(47,81,71,.18);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;flex-shrink:0}
 .error .spinner{display:none}
@@ -653,7 +671,8 @@ h1 strong{font-weight:700}
   .tool-button{width:40px;height:40px}
   .tool-button svg{width:19px;height:19px}
   .lang-switch{padding:2px;gap:1px}
-  .lang-flag{width:32px;height:32px}
+  .lang-flag{min-height:32px;padding:0 9px}
+  .lang-flag b{font-size:11px}
   .rm-chip{font-size:10px;padding:3px 9px}
   .rm-chip-villa{font-size:11px;padding:5px 12px}
   .rm-compass{width:38px;height:38px;right:12px;top:76px}

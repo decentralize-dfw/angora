@@ -13,7 +13,7 @@ import * as THREE from 'three';
 // register actually holds. Both are checkable without a browser, so they are
 // checked here rather than trusted.
 const rooms = JSON.parse(fs.readFileSync(new URL('../../build/web/native-current/native-rooms.json', import.meta.url)));
-const audio = new URL('../../audio/' + TOUR_AUDIO, import.meta.url);
+const audio = new URL('../../audio/' + TOUR_AUDIO.tr, import.meta.url);
 const steps = resolveCues();
 
 test('the cues run forward and end inside the recording', () => {
@@ -22,9 +22,9 @@ test('the cues run forward and end inside the recording', () => {
     assert.ok(cue.at > previous, `cue at ${cue.at} does not follow ${previous}`);
     previous = cue.at;
   }
-  assert.ok(previous < TOUR_DURATION, 'the last cue starts after the recording ends');
+  assert.ok(previous < TOUR_DURATION.tr, 'the last cue starts after the recording ends');
   // The last sentence still has to be heard where it is shown.
-  assert.ok(TOUR_DURATION - previous > 2, 'the closing cue has no time to be heard');
+  assert.ok(TOUR_DURATION.tr - previous > 2, 'the closing cue has no time to be heard');
   // Every step knows how long it holds, which is what spreads a sentence's
   // rooms across it.
   for (const step of steps) assert.ok(step.span > 0, `the step at ${step.at} s holds for no time`);
@@ -169,11 +169,11 @@ test('cueAt finds the sentence being spoken', () => {
   assert.equal(steps[cueAt(steps, 0.8)].at, 0);
   assert.equal(steps[cueAt(steps, 19.5)].at, 14.4);
   assert.equal(steps[cueAt(steps, 19.6)].at, 19.6, 'a cue must own its own instant');
-  assert.equal(cueAt(steps, TOUR_DURATION), steps.length - 1, 'the last sentence holds to the end');
+  assert.equal(cueAt(steps, TOUR_DURATION.tr), steps.length - 1, 'the last sentence holds to the end');
 });
 
 test('the voiceover on disk is the recording the cues are written for', () => {
-  assert.ok(fs.existsSync(audio), 'audio/' + TOUR_AUDIO + ' is missing');
+  assert.ok(fs.existsSync(audio), 'audio/' + TOUR_AUDIO.tr + ' is missing');
   const bytes = fs.readFileSync(audio);
   // Constant 192 kbps, 48 kHz, joint stereo: every frame is 576 bytes and
   // 1152 samples, so the duration the cues are written against is a byte
@@ -182,8 +182,8 @@ test('the voiceover on disk is the recording the cues are written for', () => {
   assert.deepEqual([...bytes.subarray(0, 2)], [0xff, 0xfb], 'the file does not start on an MPEG frame');
   assert.equal(bytes.length % 576, 0, 'the file is not a whole number of 576-byte frames');
   const seconds = (bytes.length / 576) * 1152 / 48000;
-  assert.ok(Math.abs(seconds - TOUR_DURATION) < 0.05,
-    `the recording is ${seconds.toFixed(2)} s but the cues are written for ${TOUR_DURATION} s`);
+  assert.ok(Math.abs(seconds - TOUR_DURATION.tr) < 0.05,
+    `the recording is ${seconds.toFixed(2)} s but the cues are written for ${TOUR_DURATION.tr} s`);
 });
 
 test('a room box is the rectangle the register measured', () => {
@@ -476,4 +476,93 @@ test('the sweep turns the camera with an API that exists', () => {
   for (const call of fn[0].matchAll(/controls\.(\w+)\(/g))
     assert.match(orbit, new RegExp(`\\n\\t${call[1]}\\(`),
       `OrbitControls has no ${call[1]}()`);
+});
+
+// The English tour is the same tour: the same cues, the same camera, over a
+// recording that is half a minute longer and whose sentences fall elsewhere.
+// Everything checked of the Turkish timeline is checked of this one, because
+// a second timeline is a second chance to drift.
+const english = resolveCues(TOUR_CUES, 'en');
+
+test('the English recording is the one the English cues are written for', () => {
+  const file = new URL('../../audio/' + TOUR_AUDIO.en, import.meta.url);
+  assert.ok(fs.existsSync(file), 'audio/' + TOUR_AUDIO.en + ' is missing');
+  // Counted frame by frame, the way the Turkish one is: a container's own
+  // claim about its length is not evidence.
+  const bytes = fs.readFileSync(file);
+  const rates = {0: 44100, 1: 48000, 2: 32000};
+  const kbps = [0, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, 0];
+  let at = 0, seconds = 0, frames = 0;
+  while (at < bytes.length - 4) {
+    if (bytes[at] === 0xFF && (bytes[at + 1] & 0xE0) === 0xE0) {
+      const version = (bytes[at + 1] >> 3) & 3, layer = (bytes[at + 1] >> 1) & 3;
+      const rate = (bytes[at + 2] >> 4) & 0xF, sample = (bytes[at + 2] >> 2) & 3, pad = (bytes[at + 2] >> 1) & 1;
+      if (version === 3 && layer === 1 && rate !== 0 && rate !== 15 && sample !== 3) {
+        at += Math.floor(144 * kbps[rate] * 1000 / rates[sample]) + pad;
+        seconds += 1152 / rates[sample]; frames++;
+        continue;
+      }
+    }
+    at++;
+  }
+  assert.ok(frames > 10000, `only ${frames} frames - the file is not the delivered recording`);
+  assert.ok(Math.abs(seconds - TOUR_DURATION.en) < 0.05,
+    `the recording is ${seconds.toFixed(2)} s but the English cues are written for ${TOUR_DURATION.en} s`);
+});
+
+test('the English cues run forward and end inside their own recording', () => {
+  assert.equal(english.length, steps.length, 'the two languages have different cue counts');
+  let previous = -1;
+  for (const step of english) {
+    assert.ok(step.at > previous, `the English cue at ${step.at} s does not move forward`);
+    assert.ok(step.span >= 0, `the English cue at ${step.at} s has a negative span`);
+    previous = step.at;
+  }
+  assert.ok(previous < TOUR_DURATION.en, 'the last English cue starts after the recording ends');
+  assert.ok(TOUR_DURATION.en - previous > 2, 'the closing English cue has no time to be heard');
+  assert.equal(cueAt(english, TOUR_DURATION.en), english.length - 1,
+    'the last English sentence does not hold to the end');
+});
+
+test('a cue shows the same thing in both languages', () => {
+  // Only the clock differs. If a cue framed one room in Turkish and another
+  // in English the tours would not be translations of each other.
+  english.forEach((step, i) => {
+    assert.equal(cueKey(step), cueKey(steps[i]), `cue ${i} frames differently in English`);
+    assert.deepEqual(step.photos, steps[i].photos, `cue ${i} shows different photographs in English`);
+    assert.equal(step.hour, steps[i].hour, `cue ${i} uses a different light in English`);
+    assert.equal(step.link, steps[i].link, `cue ${i} offers the listing differently in English`);
+  });
+});
+
+test('every cue carries an English time, and a camera-only cue lands inside its sentence', () => {
+  TOUR_CUES.forEach((cue, i) => {
+    assert.equal(typeof cue.atEn, 'number', `cue ${i} at ${cue.at} s has no English time`);
+  });
+  // A cue with no words of its own belongs to the sentence it falls in, and
+  // must fall at the same point through it in both languages - otherwise the
+  // camera move drifts out of the phrase it was written for.
+  TOUR_CUES.forEach((cue, i) => {
+    if (cue.tr || i === 0 || i === TOUR_CUES.length - 1) return;
+    const opens = TOUR_CUES.slice(0, i).reverse().find(c => c.tr);
+    const closes = TOUR_CUES.slice(i + 1).find(c => c.tr);
+    if (!opens || !closes) return;
+    const through = (cue.at - opens.at) / (closes.at - opens.at);
+    const inEnglish = (cue.atEn - opens.atEn) / (closes.atEn - opens.atEn);
+    assert.ok(Math.abs(through - inEnglish) < 0.12,
+      `the camera move at ${cue.at} s sits ${(through * 100).toFixed(0)}% through its Turkish sentence `
+      + `but ${(inEnglish * 100).toFixed(0)}% through the English one`);
+  });
+});
+
+test('both recordings are the same delivery, and both are shipped', () => {
+  assert.deepEqual(Object.keys(TOUR_AUDIO).sort(), ['en', 'tr']);
+  for (const [lang, name] of Object.entries(TOUR_AUDIO)) {
+    const file = new URL('../../audio/' + name, import.meta.url);
+    assert.ok(fs.existsSync(file), `${name} is missing`);
+    const head = fs.readFileSync(file).subarray(0, 3);
+    assert.notDeepEqual([...head], [0x49, 0x44, 0x33], `${name} still carries an ID3 header`);
+    assert.equal(head[0], 0xFF, `${name} does not open on a frame`);
+    assert.ok(TOUR_DURATION[lang] > 300, `${lang} has no duration`);
+  }
 });

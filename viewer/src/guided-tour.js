@@ -1,4 +1,4 @@
-import {resolveCues, cueKey, TOUR_CUES} from './tour-script.js';
+import {resolveCues, cueKey, TOUR_CUES, TOUR_AUDIO, tourLang} from './tour-script.js';
 // The narrated tour's clock. The voiceover is the timeline - it never stops
 // for a camera - so the driver reads the audio element and asks the viewer to
 // catch up, rather than stepping the viewer and hoping the words follow.
@@ -17,11 +17,14 @@ export function cueAt(steps, time) {
   }
   return time < steps[0].at ? -1 : found;
 }
-export function createGuidedTour({element, src, apply, caption, onEnd, onError, cues = TOUR_CUES}) {
-  const steps = resolveCues(cues);
+export function createGuidedTour({element, audioRoot, apply, caption, onEnd, onError,
+                                  cues = TOUR_CUES, lang = 'tr'}) {
+  let speech = tourLang(lang);
+  let steps = resolveCues(cues, speech);
   const audio = new Audio();
   audio.preload = 'none';
-  audio.src = src;
+  const source = () => new URL(TOUR_AUDIO[speech], audioRoot).href;
+  audio.src = source();
   const $ = s => element.querySelector(s);
   const play = $('#tour-play'), fill = $('#tour-fill'), readout = $('#tour-clock'), track = $('#tour-track');
   const speed = $('#tour-speed');
@@ -105,8 +108,38 @@ export function createGuidedTour({element, src, apply, caption, onEnd, onError, 
     audio.currentTime = Math.min(audio.duration, Math.max(0, audio.currentTime + jump));
     release(); index = -1; scrubbed = true; tick();
   };
+  // The same tour over the other voice. The two recordings are not the same
+  // length and their sentences do not line up, so a switch cannot keep the
+  // clock: it keeps the SENTENCE, and re-enters the new recording where that
+  // sentence begins there. Mid-tour the words carry on from where they had
+  // got to; before it starts there is nothing to keep and the swap is just a
+  // different file.
+  function setLanguage(next) {
+    const wanted = tourLang(next);
+    if (wanted === speech) return;
+    const spoken = running ? Math.max(0, index) : -1;
+    speech = wanted;
+    steps = resolveCues(cues, speech);
+    const playing = running && !audio.paused;
+    release();
+    audio.src = source();
+    if (spoken >= 0) {
+      // Seeking needs metadata, and the new file has none yet.
+      const resume = () => {
+        audio.removeEventListener('loadedmetadata', resume);
+        audio.currentTime = steps[spoken].at;
+        index = -1; scrubbed = true; tick();
+        if (playing) audio.play().catch(() => {});
+      };
+      audio.addEventListener('loadedmetadata', resume);
+      audio.load();
+      caption(steps[spoken]);
+    }
+  }
   return {
-    steps,
+    get steps() {return steps;},
+    get lang() {return speech;},
+    setLanguage,
     get active() {return running;},
     get paused() {return audio.paused;},
     get time() {return audio.currentTime;},

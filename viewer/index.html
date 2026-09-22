@@ -24,10 +24,6 @@
   <header class="topbar">
     <div class="identity"><a class="brand" href="https://mergvs.com" target="_blank" rel="noopener noreferrer">MERGVS</a><span class="brand-divider"></span><h1>Angora <strong>21</strong></h1></div>
     <div class="top-actions">
-      <div class="lang-switch" role="group" aria-label="Dil / Language">
-        <button type="button" class="lang-flag" data-lang="tr" aria-pressed="true" aria-label="Türkçe" title="Türkçe"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#e30a17"/><circle cx="9.1" cy="8" r="4" fill="#fff"/><circle cx="10.5" cy="8" r="3.2" fill="#e30a17"/><path fill="#fff" d="m14.9 5.5.56 1.73h1.82l-1.47 1.07.56 1.73-1.47-1.07-1.47 1.07.56-1.73-1.47-1.07h1.82z"/></svg></button>
-        <button type="button" class="lang-flag" data-lang="en" aria-pressed="false" aria-label="English" title="English"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#012169"/><path d="M0 0 24 16M24 0 0 16" stroke="#fff" stroke-width="3.2"/><path d="M0 0 24 16M24 0 0 16" stroke="#c8102e" stroke-width="1.8"/><path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="5.2"/><path d="M12 0v16M0 8h24" stroke="#c8102e" stroke-width="3"/></svg></button>
-      </div>
       <!-- The narrated tour is the headline way through the house, so it is
            drawn in the chrome rather than living only on the welcome card. -->
       <button id="start-tour" class="tour-launch" data-needs-model disabled data-i18n-title="welcomeTour" title="Sesli tur"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5.6 3.4 12.4 8l-6.8 4.6z" fill="currentColor"/></svg><span data-i18n="welcomeTour">Sesli tur</span></button>
@@ -54,6 +50,13 @@
   </div>
   <section id="options-panel" class="panel options-panel" aria-label="Görünüm ayarları" hidden>
     <div class="panel-heading"><h2 data-i18n="optionsHeading">Görünüm</h2><button data-close-panel="options-panel" data-i18n-label="closeOptions" aria-label="Ayarları kapat">×</button></div>
+    <div class="option-row language-row">
+      <span data-i18n="language">Dil</span>
+      <div class="lang-switch" role="group" aria-label="Dil / Language">
+        <button type="button" class="lang-flag" data-lang="tr" aria-pressed="true" aria-label="Türkçe" title="Türkçe"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#e30a17"/><circle cx="9.1" cy="8" r="4" fill="#fff"/><circle cx="10.5" cy="8" r="3.2" fill="#e30a17"/><path fill="#fff" d="m14.9 5.5.56 1.73h1.82l-1.47 1.07.56 1.73-1.47-1.07-1.47 1.07.56-1.73-1.47-1.07h1.82z"/></svg><b>Türkçe</b></button>
+        <button type="button" class="lang-flag" data-lang="en" aria-pressed="false" aria-label="English" title="English"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#012169"/><path d="M0 0 24 16M24 0 0 16" stroke="#fff" stroke-width="3.2"/><path d="M0 0 24 16M24 0 0 16" stroke="#c8102e" stroke-width="1.8"/><path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="5.2"/><path d="M12 0v16M0 8h24" stroke="#c8102e" stroke-width="3"/></svg><b>English</b></button>
+      </div>
+    </div>
     <div class="scene-options">
       <button id="toggle-furniture" aria-pressed="true" disabled data-i18n="furniture">Mobilya</button>
       <button id="toggle-rooms" aria-pressed="true" disabled data-i18n="roomNames">Oda adları</button>
@@ -192,6 +195,15 @@
   <div id="boot" class="boot" role="presentation">
     <div class="boot-brand"><span class="brand">MERGVS</span><span class="brand-divider"></span><span class="boot-title">Angora <strong>21</strong></span></div>
     <div class="load-status" id="load-status" role="status" aria-live="polite"><span class="spinner" aria-hidden="true"></span><span class="load-copy"><span class="load-line"><span id="load-message">Model yükleniyor…</span><span id="load-percent" aria-hidden="true"></span></span><span class="load-bar" id="load-bar" aria-hidden="true" hidden><i></i></span><span class="load-steps" id="load-steps" aria-hidden="true"><span data-step="model" data-i18n="stepModel">Model</span><span data-step="light" data-i18n="stepLight">Işık</span><span data-step="scene" data-i18n="stepScene">Sahne</span><span data-step="view" data-i18n="stepView">Görünüm</span></span></span><button id="retry" hidden data-i18n="retry">Tekrar dene</button></div>
+    <!-- Chosen while the model loads, which is the one moment every visitor
+         spends looking at this corner of the screen. The same .lang-flag
+         buttons as the settings panel, so one handler drives both. -->
+    <div class="load-language" id="load-language">
+      <span class="lang-switch" role="group" aria-label="Dil / Language">
+        <button type="button" class="lang-flag" data-lang="tr" aria-pressed="true" aria-label="Türkçe" title="Türkçe"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#e30a17"/><circle cx="9.1" cy="8" r="4" fill="#fff"/><circle cx="10.5" cy="8" r="3.2" fill="#e30a17"/><path fill="#fff" d="m14.9 5.5.56 1.73h1.82l-1.47 1.07.56 1.73-1.47-1.07-1.47 1.07.56-1.73-1.47-1.07h1.82z"/></svg><b>Türkçe</b></button>
+        <button type="button" class="lang-flag" data-lang="en" aria-pressed="false" aria-label="English" title="English"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#012169"/><path d="M0 0 24 16M24 0 0 16" stroke="#fff" stroke-width="3.2"/><path d="M0 0 24 16M24 0 0 16" stroke="#c8102e" stroke-width="1.8"/><path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="5.2"/><path d="M12 0v16M0 8h24" stroke="#c8102e" stroke-width="3"/></svg><b>English</b></button>
+      </span>
+    </div>
     <div id="no3d" class="no3d" hidden>
       <p data-i18n="fallbackLead">3D görünüm bu cihazda başlatılamadı. Mülkün doğrulanmış bilgileri yine buradadır:</p>
       <ul class="welcome-facts">

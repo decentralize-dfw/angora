@@ -58,3 +58,53 @@ test('the neighbours give up their numbers to the tour', () => {
   assert.match(main, /siteContext\?\.update\(.*Boolean\(guidedTour\?\.active\)\)/,
     'main never tells the site context that the tour is numbering');
 });
+
+// "dil seyini ayarlara koy. giriste yuklenirken orta alt ksimda secilebilsin."
+// The switch lives in the settings panel like every other option, and a copy
+// sits under the loading card - the one moment every visitor spends looking
+// at that corner of the screen, and the last moment before the tour speaks.
+test('the language can be chosen while the model loads, and from the settings', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../src/style.css', import.meta.url), 'utf8');
+  const main = readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
+
+  const topbar = html.slice(html.indexOf('<header class="topbar">'), html.indexOf('</header>'));
+  assert.ok(!topbar.includes('lang-flag'), 'the switch is still floating in the chrome');
+
+  const options = html.slice(html.indexOf('id="options-panel"'), html.indexOf('</section>', html.indexOf('id="options-panel"')));
+  assert.match(options, /class="lang-flag" data-lang="tr"/, 'settings has no Turkish button');
+  assert.match(options, /class="lang-flag" data-lang="en"/, 'settings has no English button');
+  assert.match(options, /data-i18n="language"/, 'the settings row is unlabelled');
+
+  const loading = html.slice(html.indexOf('id="load-language"'), html.indexOf('</div>', html.indexOf('id="load-language"') + 400));
+  assert.match(loading, /data-lang="tr"/, 'the loading panel offers no Turkish');
+  assert.match(loading, /data-lang="en"/, 'the loading panel offers no English');
+
+  // Bottom centre, and it retires with the loading card rather than sitting
+  // over the model for the rest of the session.
+  assert.match(css, /\.load-language\{[^}]*bottom:\s*\d+px/, 'the loading picker is not anchored to the bottom');
+  assert.match(css, /\.load-language\{[^}]*left:50%/, 'the loading picker is not centred');
+  assert.match(css, /#app:not\(\[data-booting=true\]\) \.load-language\{[^}]*visibility:hidden/,
+    'the loading picker never goes away');
+
+  // One handler drives every copy, and it is bound before the model loads -
+  // otherwise the picker would be dead for the whole time it is on screen.
+  assert.match(main, /document\.querySelectorAll\('\.lang-flag'\)\.forEach\(button=>\{\s*\n\s*button\.onclick=\(\)=>setLang\(button\.dataset\.lang,refreshChrome\);/,
+    'the language buttons are not bound by one handler');
+  assert.ok(main.indexOf('bindInterface();') < main.indexOf('loadModel();'),
+    'the interface is bound after the model starts loading');
+});
+
+// Two recordings, so switching language mid-tour is not only a caption change.
+test('a language switch reaches the recording, not just the subtitles', () => {
+  const main = readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
+  const tour = readFileSync(new URL('../src/guided-tour.js', import.meta.url), 'utf8');
+  assert.match(main, /guidedTour\?\.setLanguage\(currentLang\(\)\)/,
+    'refreshChrome never tells the tour the language changed');
+  assert.match(tour, /function setLanguage\(next\)/, 'the tour cannot change language');
+  // It keeps the sentence rather than the clock: the recordings are different
+  // lengths and their sentences do not line up.
+  const fn = tour.slice(tour.indexOf('function setLanguage(next)'), tour.indexOf('return {', tour.indexOf('function setLanguage(next)')));
+  assert.match(fn, /steps\[spoken\]\.at/, 'the switch keeps the clock instead of the sentence');
+  assert.match(fn, /loadedmetadata/, 'the switch seeks before the new recording has a duration');
+});
