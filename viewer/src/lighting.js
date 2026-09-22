@@ -181,6 +181,8 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
   let soft=true,shadowDistance=110;
   const preparedMaterials=new Set();
   let groundLight=null,floorLight=null,electricLight=null,roomReflections=null,reflectionFloor=null,activeInteriorFloor=null;
+  // The villa's see-through glazing, and what it was before the tour lit it.
+  const glazing=new Set(),glazingRest=new WeakMap();
   const reflectionMaterials=new Set();
   function updateReflections(){
     const map=roomReflections?.get(reflectionFloor)??null;
@@ -287,7 +289,28 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
       if(state.shadowChanged)renderer.shadowMap.needsUpdate=true;
       return state.active;
     },
-    snapshot(){return {environment:environmentMode,interior:fixtures.snapshot()};},
+    // "icerdeki isiklar disardan gozuksun". Lighting the rooms does not do
+    // it: prepareBatchedMaterial strips NUM_SPOT_LIGHTS to 0 on everything
+    // carrying vertex fixtures, which in this delivery is the architecture and
+    // the interior both, and the same pass drives transparent glazing towards
+    // alpha .75 at grazing angles - which is most of a window seen from a low
+    // camera. So the rooms can be lit and rendered and the elevation still
+    // reads as an empty house, which is exactly what shipped twice.
+    //
+    // What a lit window does from the garden is GLOW, so the glazing itself
+    // carries it. Warm, and well under 1: at full strength it stops being a
+    // window and becomes a lamp, and the room behind it disappears.
+    setWindowGlow(level){
+      for(const material of glazing){
+        if(!glazingRest.has(material))
+          glazingRest.set(material,{colour:material.emissive.clone(),intensity:material.emissiveIntensity});
+        const rest=glazingRest.get(material);
+        if(level>0){material.emissive.set(0xffc98a);material.emissiveIntensity=level;}
+        else{material.emissive.copy(rest.colour);material.emissiveIntensity=rest.intensity;}
+      }
+      return glazing.size;
+    },
+    snapshot(){return {environment:environmentMode,interior:fixtures.snapshot(),glazing:glazing.size};},
     setStyle(style){soft=style!=='sun';setTime();},
     releaseMaterial(material){preparedMaterials.delete(material);reflectionMaterials.delete(material);},
     prepareMesh(object,{clipped,context,name}) {
@@ -310,6 +333,8 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
         if(['plaster','soffit'].includes(material.userData.presentationR27?.family))material.envMap=environment?.texture??null;
         material.clipShadows=true;
           if(isGlazing(material)&&!material.userData.angoraAuthoredPBR){material.metalness=0;if(isSeeThrough(material))material.depthWrite=false;}
+        // The house's own windows, kept so a night exterior can light them.
+        if(name==='architecture'&&isSeeThrough(material))glazing.add(material);
         for(const value of Object.values(material))if(value?.isTexture)value.anisotropy=Math.min(compact?8:16,renderer.capabilities.getMaxAnisotropy());
       }
     },

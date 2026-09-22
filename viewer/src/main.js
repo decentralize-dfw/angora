@@ -294,7 +294,7 @@ function renderFrame(time) {
       if(tourShade>.01&&spotlight.update(activeCamera,host.clientWidth,host.clientHeight))invalidate();
     }
     siteContext?.update(selected,activeCamera,controls.target,Boolean(transition||flight?.active),walk?.active);
-    host.dataset.runtime=JSON.stringify({view:selected,plan:planMode,projection:activeCamera.type,cameraPosition:activeCamera.position.toArray(),target:controls.target.toArray(),sectionHeight:clip.constant,loaded:nativeDelivery?[...nativeDelivery.loaded.keys()]:[...groups.keys()],zoom:activeCamera.zoom,autoRotate:controls.autoRotate,zoomEnabled:controls.enableZoom,rotate:controls.mouseButtons.LEFT===THREE.MOUSE.ROTATE,transition:Boolean(transition),textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,rooms:Boolean(groups.get('interior')?.visible),lamps:lighting?.snapshot?.().interior?.map(f=>Math.round(f.rendered_intensity_cd))??[]});
+    host.dataset.runtime=JSON.stringify({view:selected,plan:planMode,projection:activeCamera.type,cameraPosition:activeCamera.position.toArray(),target:controls.target.toArray(),sectionHeight:clip.constant,loaded:nativeDelivery?[...nativeDelivery.loaded.keys()]:[...groups.keys()],zoom:activeCamera.zoom,autoRotate:controls.autoRotate,zoomEnabled:controls.enableZoom,rotate:controls.mouseButtons.LEFT===THREE.MOUSE.ROTATE,transition:Boolean(transition),textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,rooms:Boolean(groups.get('interior')?.visible),lamps:lighting?.snapshot?.().interior?.map(f=>Math.round(f.rendered_intensity_cd))??[],glazing:lighting?.snapshot?.().glazing??0});
     renderer.info.reset();
     lighting.render(activeCamera);
       host.dataset.frameStats=JSON.stringify({view:selected,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,allRenderPasses:true,transition:Boolean(transition||flight?.active),sectionCaps:{visible:Boolean(caps?.group.visible),height:caps?.group.children[0]?.position.y,triangles:(caps?.group.children[0]?.geometry.index?.count??0)/3}});
@@ -1062,8 +1062,13 @@ function setTourWindows(on){
     // through glass at an exterior's exposure.
     lighting.interior('all',buildingBox?.getCenter(new THREE.Vector3())?.toArray()??null,
       undefined,{gain:5.5,reach:16});
+    // And the windows themselves carry it, because the lamps cannot: the
+    // batched shaders compile the spot lights out of the very surfaces the
+    // rooms are made of. See lighting.setWindowGlow.
+    lighting.setWindowGlow(.42);
   } else if(tourLightsBefore!==null){
     lighting.setLights(tourLightsBefore);tourLightsBefore=null;
+    lighting.setWindowGlow(0);
     lighting.interior(/^f[0-3]$/.test(selected)?Number(selected[1]):null,null,undefined,{});
   }
 }
