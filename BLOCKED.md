@@ -105,6 +105,14 @@ culling'i — görsel riski yok); `viewCulling` kapalı (walk'ta camdan görüne
 bitkiyi gizlemek ayrı bir kalite kararı); `tools/batch-delivery/patch-*.mjs`
 araçları H8 çözülünce hazır.
 
+## H9 — FAZ 3 Blender kalemleri (daimi emir 2025-09-22 ile sabitlendi)
+**Durum:** BLOCKED — Blender yok (H2/H3/H4 ile aynı kök neden).
+**Kapsam:** 3.1 (malzeme yazarlığı), 3.2 (bevel + weighted normals),
+3.4a-b-c (lightmap/AO UV repack + rebake, probe panoramaları).
+**Ajan yarısı ETKİLENMEZ:** 3.4f, 3.5, 3.4d (hazır KTX2 AO teslimi),
+3.3, 3.4g bu dal üzerinde yürütülüyor (PROGRESS.md sırası).
+**Ayrıca:** 4.3 hosting H5'te BLOCKED olarak kalır (Pages Cache-Control).
+
 ## H7 — Gerçek telefonda gece modu ölçümü
 **Durum:** BLOCKED — fiziksel cihaz gerekli (H1 ile aynı yol).
 **Bloke ettiği:** Task 3.4g'nin kabulü. `qa-mobile.html` protokolüne gece
