@@ -34,6 +34,7 @@ import { configureCameraControls } from './camera.js';
 import { PendingAction } from './pending-action.js';
 import {fitContextBounds,neutraliseTransmission} from './material-response.js';
 import {applyGradeValues,loadGradeTextures,bindGradeTextures,reviveBatchedGrade} from './exterior-grade.js';
+import {reviveBakedOcclusion} from './ao-revival.js';
 import {createSiteContext} from './site-context.js';
 import {createRegionMap,atlasMeta} from './region-map.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
@@ -1315,6 +1316,18 @@ async function loadNativeModel(manifest){
           resolve(applied);
         })
         .catch(error=>{console.warn('Exterior detail maps unavailable',error);resolve(0);});
+    }));
+  }
+  // Task 3.4d: the source pipeline's own KTX2 occlusion bakes (4×the WebP
+  // texel) rebind on idle, desktop only - a phone keeps its WebP and its
+  // bytes. Exposed like __angoraGradeReady so a capture can await the swap.
+  if(FEATURES.bakedAoRevival&&manifest.batched&&quality.tier.startsWith('desktop')){
+    const idle=window.requestIdleCallback?.bind(window)??(fn=>setTimeout(fn,1500));
+    window.__angoraAoReady=new Promise(resolve=>idle(()=>{
+      const ktx2=createTextureLoader(renderer,1);
+      reviveBakedOcclusion(nativeDelivery.loaded,{loader:ktx2,root:new URL('../../native-current/',modelRoot)})
+        .then(applied=>{ktx2?.dispose();if(applied)invalidate();console.info('Baked occlusion revived on '+applied+' materials');resolve(applied);})
+        .catch(error=>{ktx2?.dispose();console.warn('KTX2 occlusion bakes unavailable',error);resolve(0);});
     }));
   }
   // The property card greets a plain entry here too. It used to be raised

@@ -256,6 +256,7 @@ export function installQaHarness({host, query, hooks}) {
     // junction on the mobile C07 gate frame (26 px). With the feature off
     // this path must not yield at all.
     if (window.__angoraGradeReady) await window.__angoraGradeReady;
+    if (window.__angoraAoReady) await window.__angoraAoReady;
     // Fixture and daylight fades ease over wall-clock time; a screenshot taken
     // mid-fade depends on boot timing. A far-future update() snaps every fade
     // to its settled state - the same trick the boot's warming renders use.
