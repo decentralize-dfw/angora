@@ -46,13 +46,24 @@ function collectSceneResources(scene, extraTextures = []) {
   }
   let textureBytesTotal = 0;
   for (const bytes of bySource.values()) textureBytesTotal += bytes;
+  // Chunked meshes (context-plants, Task 1.4) SHARE their vertex attributes
+  // across many geometries - the renderer uploads a shared buffer once, so
+  // the estimate must count each attribute object once too, or five chunks
+  // read as five plant fields (+180 MiB of fiction, measured).
   let geometryBytesTotal = 0;
+  const countedBuffers = new Set();
   for (const geometry of geometries) {
     if (!geometry) continue;
     for (const attribute of Object.values(geometry.attributes ?? {})) {
+      if (countedBuffers.has(attribute)) continue;
+      countedBuffers.add(attribute);
       geometryBytesTotal += attribute.array?.byteLength ?? 0;
     }
-    geometryBytesTotal += geometry.index?.array?.byteLength ?? 0;
+    const index = geometry.index;
+    if (index && !countedBuffers.has(index)) {
+      countedBuffers.add(index);
+      geometryBytesTotal += index.array?.byteLength ?? 0;
+    }
   }
   return {
     textureCount: bySource.size,

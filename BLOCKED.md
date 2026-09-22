@@ -56,6 +56,17 @@ kaynak-tarafı devamıdır.
 **Durum:** BLOCKED — Blender gerekli.
 **Bloke ettiği:** Task 3.2 içerik tarafı. Ajan tarafı (GLB üzerinde
 coplanar/duplicate/ters-normal taraması) Faz 3'te üretilecek.
+**Task 1.4 A/B bulgusu (gate-1.4, desktop C03/C10):** teslimatın büyük kısmı
+tek-yüzey yazarlıklı ve `doubleSided` kapatılınca kaybolyor —
+(1) context-buildings "additions" B4 objelerinin AYNALI kopyaları: aynalama
+winding'i ters çeviriyor, duvarlar toptan yok oluyor; (2) interior
+astar/tavan tek düzlem: salon tavanı alttan bakınca kayboldu; (3) garden
+istinat duvarları/havuz çevresi parçalanıyor. Bu yüzden Task 1.4 yalnız
+`architecture.glb`'yi tek-yüzlüye çevirdi (10/11 malzeme); kalan parçalar
+Blender'da kaynak onarımı yapılana dek çift yüzlü kalıyor
+(`build/web/batched/single-sided-report.json` gerekçeleri taşıyor).
+Onarım listesi: aynalı kopyalarda winding düzeltme, astar/tavanlara
+kalınlık veya tutarlı normal, istinat duvarlarını kapalı hacme çevirme.
 
 ## H5 — Hosting kararı (Cloudflare / Netlify / R2)
 **Durum:** BLOCKED — hesap + DNS erişimi gerekli; ürün sahibi kararı.

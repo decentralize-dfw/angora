@@ -1,28 +1,41 @@
-// Task 1.4 — turn the delivery's unconditional doubleSided off, in place.
+// Task 1.4 — turn unconditional doubleSided off where it is actually safe.
 //
-// build.mjs:~84 stamps every batched material setDoubleSided(true), so all
-// ~3.1 M triangles pay backface shading in closed volumes. The source scene
-// is not available to rebuild from (BLOCKED H6); this patches the published
-// GLBs' JSON chunks directly via patch-glb.mjs, keeps every material that
-// genuinely needs both faces (blend/mask alpha, foliage-like names), and
-// re-stamps each part's gpu_sha256 in the manifest - native-delivery.js uses
-// that hash as the ?v= cache-buster, so a stale hash would silently serve
-// the OLD file and fake a null result.
+// build.mjs stamps every batched material setDoubleSided(true). The A/B on
+// the gate frames showed how much of this delivery is single-surface
+// authored: the context "additions" are MIRRORED copies of the B4 objects
+// (mirroring reverses winding - their walls vanish when culled), the
+// interior linings and ceilings are single planes seen from their back
+// side, and the garden's retaining walls shard the pool side. Only the
+// villa's exterior shell (architecture.glb) is closed, consistently wound
+// volume - so only it flips. The rest keeps its authored sides until the
+// source is repaired in Blender (BLOCKED H4), and each skipped part carries
+// its measured reason in the report.
 //
 //   node tools/batch-delivery/patch-single-sided.mjs [--dry]
 //
-// Report: build/web/batched/single-sided-report.json (per material, with
-// the reason a side was kept). Runtime valve: ?features=singleSided:0
-// forces DoubleSide back per material without re-patching.
+// GLB surgery via patch-glb.mjs (Draco BIN byte-guarded); every touched
+// manifest part gets a fresh gpu_sha256 - the ?v= cache-buster that would
+// otherwise serve stale bytes and fake a null result. Runtime valve:
+// ?features=singleSided:0 puts DoubleSide back per material.
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {patchGlbJson} from './patch-glb.mjs';
 
-// Thin or cutout growth and drapery is modelled as single surfaces on
-// purpose; culling them would delete their far side. Named materials added
-// here after A/B review carry their reason in KEEP_NAMED.
+// Parts whose closed, consistently-wound geometry survived the A/B.
+const FLIP_PARTS = new Set(['architecture']);
+// Why the others stay authored (gate-1.4 A/B, desktop C03/C10 frames):
+const SKIP_REASONS = {
+  interior: 'linings and ceilings are single planes - the salon ceiling vanished from below',
+  garden: 'retaining walls and pool surrounds shard when back faces cull',
+  'context-buildings': 'mirrored B4 additions reverse winding - whole walls vanish (H4)',
+  'context-ground': 'terrain skins are single surfaces by construction',
+  'context-plants': 'planting is cutout single-surface foliage by design',
+};
+// Within a flipped part: alpha-blended/masked surfaces and single-surface
+// growth or drapery keep both faces; names added here after review carry
+// their reason.
 const PRESERVE = /foliage|leaf|leaves|needle|hedge|curtain|sheer|fabric|blind|grass/i;
 const KEEP_NAMED = new Map([
   // 'material name' -> 'reason recorded by A/B review'
@@ -36,6 +49,11 @@ for (const profile of ['desktop', 'mobile']) {
   const manifestPath = path.join(base, profile, 'manifest.json');
   const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
   for (const part of manifest.parts) {
+    if (!FLIP_PARTS.has(part.name)) {
+      report.push({profile, part: part.name, skipped: SKIP_REASONS[part.name] ?? 'not in FLIP_PARTS'});
+      console.log(`${profile}/${part.name}: kept authored (${SKIP_REASONS[part.name] ?? 'not in FLIP_PARTS'})`);
+      continue;
+    }
     const file = path.join(base, profile, part.file);
     const flipped = [], kept = [];
     const out = await patchGlbJson(file, doc => {
