@@ -96,7 +96,7 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     for(const [key,source] of sources)if(!keepSources.has(source))sources.delete(key);
     THREE.Cache.clear();
   }
-  let preload,walking=false;
+  let preload,walking=false,interiorReady=null,currentView='neighborhood';
   const applyVisibility=view=>{
     for(const [name,model] of loaded){
       model.visible=name!=='interior'||/^f[0-3]$/.test(view);
@@ -110,12 +110,30 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     setWalkMode(active,view){
       if(walking===active)return;
       walking=active;
-      if(manifest.batched)applyVisibility(view);
+      if(manifest.batched){
+        currentView=view;
+        if(active&&features.progressiveLoaderV2)(interiorReady??=acquire('interior').catch(error=>{interiorReady=null;throw error;})).then(()=>applyVisibility(currentView)).catch(()=>{});
+        applyVisibility(view);
+      }
     },
     async activate(view){
       if(manifest.batched){
-        preload??=(async()=>{for(const {name} of manifest.parts)await acquire(name);})();
+        // Task 2.1: the interior is invisible in every exterior view, so its
+        // bytes have no business on the first-orbit critical path. With the
+        // progressive flag the boot loads everything BUT the interior, an
+        // idle prefetch brings it in behind the first frame, and a floor
+        // pick that outruns the idle simply awaits the same acquire.
+        const deferInterior=features.progressiveLoaderV2;
+        preload??=(async()=>{
+          for(const {name} of manifest.parts)if(!deferInterior||name!=='interior')await acquire(name);
+          if(deferInterior){
+            const idle=globalThis.requestIdleCallback?.bind(globalThis)??(fn=>setTimeout(fn,2000));
+            idle(()=>{interiorReady??=acquire('interior').then(()=>applyVisibility(currentView)).catch(error=>{interiorReady=null;console.warn('Interior prefetch failed; retried on demand',error);});});
+          }
+        })();
         await preload;
+        currentView=view;
+        if(deferInterior&&(/^f[0-3]$/.test(view)||walking))await (interiorReady??=acquire('interior').catch(error=>{interiorReady=null;throw error;}));
         applyVisibility(view);
         return;
       }

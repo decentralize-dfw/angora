@@ -1,4 +1,4 @@
-import {loadRoomReflections} from './room-reflections.js';
+import {loadRoomReflections,createLazyRoomReflections} from './room-reflections.js';
 import {createElectricLighting} from './electric-light.js';
 import './style.css';
 import './interface-quality.css';
@@ -652,6 +652,7 @@ async function selectView(id, initial = false) {
       await nativeDelivery.activate(id);
       lighting.frame(id,contextBox);
       lighting.interior(id.startsWith('f')?Number(id[1]):null,null);
+      if(/^f[0-3]$/.test(id))ensureRoomProbe(Number(id[1]));
       if(!nativeDelivery.batched){
         if(renderer.compileAsync)await renderer.compileAsync(scene,camera);
         lighting.warm(camera);
@@ -722,6 +723,13 @@ let walkData=null;
 // currently is - eased per frame so starting and leaving the tour are fades
 // rather than a cut.
 let guidedTour=null,spotlight=null,tourShade=0,tourShadeTarget=0,tourShadeTime=null;
+let roomProbes=null;
+// Task 2.1-c: a storey's probe arrives on its first visit; rebinding goes
+// through setRoomReflections, which is idempotent and refreshes the glazing.
+function ensureRoomProbe(floor){
+  if(!roomProbes||typeof floor!=='number')return;
+  roomProbes.ensure(floor).then(()=>{lighting?.setRoomReflections(roomProbes);invalidate();}).catch(()=>{});
+}
 // The Bolge map's slow turn during the opening. It is driven by its own timer
 // rather than by the render loop: the map is an opaque DOM layer over the
 // scene, so turning it must not ask the renderer for forty megabytes of frame.
@@ -1165,6 +1173,7 @@ function enterWalk(roomId) {
   quality?.applyView(selected,{walking:true});
   nativeDelivery?.setWalkMode(true,selected);
   lighting.interior(station.floor_index,station.position);
+  ensureRoomProbe(station.floor_index);
   controls.enabled=false;clip.constant=fullHeight;earthClip.constant=fullHeight;transition=null;lighting.frame('building');massing?.set('building');
   lighting.setWalkInterior(true);
   // after the section plane is raised, or canRun() reads the previous cut
@@ -1210,7 +1219,13 @@ async function loadNativeModel(manifest){
   step('model');message(t('loadingData'));progress(0);
   const lightingReady=Promise.all([
     lighting.loadEnvironment(daylightURL.href),
-    manifest.room_probes?.length?loadRoomReflections(renderer,manifest.room_probes,modelRoot).then(value=>lighting.setRoomReflections(value)):Promise.resolve()
+    // Task 2.1-c: with the progressive loader the four storey probes stop
+    // riding the boot; each loads on its floor's first visit (ensureRoomProbe).
+    manifest.room_probes?.length
+      ?(FEATURES.progressiveLoaderV2
+        ?Promise.resolve(lighting.setRoomReflections(roomProbes=createLazyRoomReflections(renderer,manifest.room_probes,modelRoot)))
+        :loadRoomReflections(renderer,manifest.room_probes,modelRoot).then(value=>lighting.setRoomReflections(value)))
+      :Promise.resolve()
   ]);
   // Keep early network failures handled while model workers are still busy;
   // the awaited promise below still reports the original failure to boot.
@@ -1229,13 +1244,20 @@ async function loadNativeModel(manifest){
       // and hands them over already inflated. The magic bytes decide.
       const bytes=new Uint8Array(await response.arrayBuffer());
       return JSON.parse(new TextDecoder().decode(bytes[0]===0x1f&&bytes[1]===0x8b?gunzipSync(bytes):bytes));}
-  const [atlas,rooms,navigation,soil]=await Promise.all([json(manifest.sections),json(manifest.rooms),json(manifest.navigation),manifest.soil_section?json(manifest.soil_section):null]);
+    // Task 2.1-b: the scene JSONs ship gzipped next to their originals
+    // (1.17 MB -> 291 KB); a missing .gz falls back to the plain file so a
+    // stale deploy can never fail the boot.
+    async function gzJson(file){
+      if(!FEATURES.gzipSceneJson||typeof file!=='string'||!file.endsWith('.json'))return json(file);
+      try{return await json(file+'.gz');}catch{return json(file);}
+    }
+  const [atlas,rooms,navigation,soil]=await Promise.all([gzJson(manifest.sections),gzJson(manifest.rooms),gzJson(manifest.navigation),manifest.soil_section?gzJson(manifest.soil_section):null]);
   if(navigation.source_native_sha256!==manifest.source_native_sha256)throw Error('Native navigation revision mismatch');
   phaseDone('data');
   nativeAtlas=atlas;roomData=rooms;walkData=navigation;
   $('#app').dataset.delivery='native';
   flight.limitFrameStep=false;
-  if(manifest.plot_boundary){const boundary=await json(manifest.plot_boundary);plotMask=createPlotMaterialMask(boundary.polygon_native_xy);}
+  if(manifest.plot_boundary){const boundary=await gzJson(manifest.plot_boundary);plotMask=createPlotMaterialMask(boundary.polygon_native_xy);}
   // Byte weighting where the manifest records sizes, part counting where it
   // does not - a two-hundred-kilobyte garden must not step the bar as far as
   // an eight-megabyte neighbourhood.
@@ -1276,7 +1298,7 @@ async function loadNativeModel(manifest){
   lighting.setShadowBounds(buildingBox,gardenBox);
   for(const model of groups.values())contextBox.union(new THREE.Box3().setFromObject(model));
   if(manifest.site_context){
-    const data=await json(manifest.site_context);siteContext=createSiteContext(data,host,()=>selectView('building'));
+    const data=await gzJson(manifest.site_context);siteContext=createSiteContext(data,host,()=>selectView('building'));
     $('#context-count').textContent=`${data.buildings.length} yapı`;
   }
   phase('scene',.4);

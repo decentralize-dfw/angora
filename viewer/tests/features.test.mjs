@@ -14,7 +14,9 @@ test('?features= flips known flags and ignores strangers and garbage', () => {
 
 test('singleSided ships on, every unshipped task ships off', () => {
   assert.equal(DEFAULT_FEATURES.singleSided, true);
-  for (const flag of ['authoredMaterialsV2', 'progressiveLoaderV2', 'ktx2Delivery', 'contextLodV2', 'cinemaStill']) {
+  // Task 2.1 shipped progressiveLoaderV2; the still-unshipped set shrinks.
+  assert.equal(DEFAULT_FEATURES.progressiveLoaderV2, true);
+  for (const flag of ['authoredMaterialsV2', 'ktx2Delivery', 'contextLodV2', 'cinemaStill']) {
     assert.equal(DEFAULT_FEATURES[flag], false, flag);
   }
 });

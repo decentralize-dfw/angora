@@ -279,13 +279,22 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     },
     requestShadowUpdate(){if(renderer.shadowMap.enabled)renderer.shadowMap.needsUpdate=true;},
     async loadEnvironment(url) {
-      const hdr=await new HDRLoader().setDataType(THREE.FloatType).loadAsync(url);hdr.mapping=THREE.EquirectangularReflectionMapping;
+      // Task 2.1-d: half floats. The PMREM this feeds is half-float anyway,
+      // so a full-float upload was 2x the memory for no signal.
+      const hdr=await new HDRLoader().setDataType(THREE.HalfFloatType).loadAsync(url);hdr.mapping=THREE.EquirectangularReflectionMapping;
       // The moving directional light owns the sun. Bound the HDR's solar
       // hotspot before convolution so it does not add a second fixed sun.
+      // The buffer now carries uint16 halves, so the clamp decodes and
+      // re-encodes through three's own DataUtils.
       const pixels=hdr.image.data;
+      const read=i=>THREE.DataUtils.fromHalfFloat(pixels[i]);
       for(let i=0;i<pixels.length;i+=4){
-        const luminance=.2126*pixels[i]+.7152*pixels[i+1]+.0722*pixels[i+2];
-        if(luminance>8){const scale=8/luminance;pixels[i]*=scale;pixels[i+1]*=scale;pixels[i+2]*=scale;}
+        const r=read(i),g=read(i+1),b=read(i+2);
+        const luminance=.2126*r+.7152*g+.0722*b;
+        if(luminance>8){const scale=8/luminance;
+          pixels[i]=THREE.DataUtils.toHalfFloat(r*scale);
+          pixels[i+1]=THREE.DataUtils.toHalfFloat(g*scale);
+          pixels[i+2]=THREE.DataUtils.toHalfFloat(b*scale);}
       }
       hdr.needsUpdate=true;
       // The HDR is a pure sky, so it goes through the same probe as the
