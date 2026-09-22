@@ -33,7 +33,7 @@ import {areaLabel} from './annotations.js';
 import { configureCameraControls } from './camera.js';
 import { PendingAction } from './pending-action.js';
 import {fitContextBounds,neutraliseTransmission} from './material-response.js';
-import {applyGradeValues,loadGradeTextures,bindGradeTextures} from './exterior-grade.js';
+import {applyGradeValues,loadGradeTextures,bindGradeTextures,reviveBatchedGrade} from './exterior-grade.js';
 import {createSiteContext} from './site-context.js';
 import {createRegionMap,atlasMeta} from './region-map.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
@@ -1146,6 +1146,7 @@ function enterWalk(roomId) {
   roomId ||= stations.reduce((a,b)=>new THREE.Vector3(...a.position).distanceToSquared(centre)<new THREE.Vector3(...b.position).distanceToSquared(centre)?a:b).room_id;
   flight.cancel();panel('',false);photoViewer?.hide();const station=walk.enter(roomId,position);selected='f'+station.floor_index;updateRoomUI(station);
   quality?.applyView(selected,{walking:true});
+  nativeDelivery?.setWalkMode(true,selected);
   lighting.interior(station.floor_index,station.position);
   controls.enabled=false;clip.constant=fullHeight;earthClip.constant=fullHeight;transition=null;lighting.frame('building');massing?.set('building');
   lighting.setWalkInterior(true);
@@ -1165,6 +1166,7 @@ function exitWalk(reselect = true) {
   if(!walk?.active)return;
   walk.leave();controls.enabled=true;$('#app').dataset.walk='false';
   quality?.applyView(selected,{walking:false,plan:planMode});
+  nativeDelivery?.setWalkMode(false,selected);
   lighting.setWalkInterior(false);
   lighting.interior(null,null);
   lift?.setWalkActive(false);lift?.cancel();refreshLiftControl();
@@ -1226,7 +1228,7 @@ async function loadNativeModel(manifest){
   const totalWeight=weighed?[...sizes.values()].reduce((sum,value)=>sum+value,0):parts.length;
   const received=new Map();
   message(t('loadingModel'));
-  nativeDelivery=createNativeDelivery({manifest,root:modelRoot,scene,groups,load:loadAsset,
+  nativeDelivery=createNativeDelivery({manifest,root:modelRoot,scene,groups,load:loadAsset,features:FEATURES,
     onProgress:(name,loaded,complete)=>{
       if(!sizes.has(name))return;
       const size=sizes.get(name);
@@ -1281,6 +1283,27 @@ async function loadNativeModel(manifest){
   const boot=$('#boot');
   if(boot){boot.classList.add('boot-done');setTimeout(()=>boot.remove(),460);}
   delete $('#app').dataset.booting;
+  // Task 1.3: the repository's own tileable detail maps (1.2 MB of real
+  // texture the delivery stopped shipping) revive off the critical path.
+  // Until they arrive the atlas look stands; on arrival the grid=1 hero
+  // materials rebind and recompile once, during idle.
+  if(FEATURES.exteriorGradeRevival){
+    const idle=window.requestIdleCallback?.bind(window)??(fn=>setTimeout(fn,1500));
+    // The promise is exposed so a QA capture can await the rebind instead of
+    // racing the idle callback - a screenshot half a second either side of
+    // the revival is two different images.
+    window.__angoraGradeReady=new Promise(resolve=>idle(()=>{
+      loadGradeTextures(new URL(pages?'assets/textures/':'textures/',publicRoot))
+        .then(textures=>{
+          const applied=reviveBatchedGrade(nativeDelivery.loaded,textures,
+            {anisotropy:Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy())});
+          if(applied){renderer.shadowMap.needsUpdate=true;invalidate();}
+          console.info('Exterior grade revived on '+applied+' materials');
+          resolve(applied);
+        })
+        .catch(error=>{console.warn('Exterior detail maps unavailable',error);resolve(0);});
+    }));
+  }
   // The property card greets a plain entry here too. It used to be raised
   // only on the classic path, which this one returns before ever reaching -
   // so on the delivered build nobody was ever offered the tour.

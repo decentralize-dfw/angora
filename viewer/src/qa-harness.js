@@ -237,6 +237,9 @@ export function installQaHarness({host, query, hooks}) {
       }, true);
     }
     appliedCamera = spec;
+    // The idle detail-map revival (Task 1.3) rebinds hero materials some
+    // time after boot; a deterministic frame waits for it, not for luck.
+    await window.__angoraGradeReady?.catch?.(() => {});
     // Fixture and daylight fades ease over wall-clock time; a screenshot taken
     // mid-fade depends on boot timing. A far-future update() snaps every fade
     // to its settled state - the same trick the boot's warming renders use.

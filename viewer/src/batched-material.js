@@ -22,7 +22,12 @@ export function prepareBatchedMaterial(material,{exterior=false}={}){
    vec4 atlasSample(sampler2D tex,vec2 uv,float width,float maxLod){vec2 dx=dFdx(uv)*width*${batch.inner},dy=dFdy(uv)*width*${batch.inner};float lod=clamp(log2(max(max(length(dx),length(dy)),1.0)),0.0,maxLod);return textureLod(tex,atlasUV(uv),lod);}
    `+shader.fragmentShader;
   for(const chunk of ['map_fragment','normal_fragment_maps','roughnessmap_fragment','metalnessmap_fragment']){
-   const code=ShaderChunk[chunk].replace(/texture2D\( (map|normalMap|roughnessMap|metalnessMap), (v\w+Uv) \)/g,(_match,map,uv)=>{const width=material[map]?.image?.width??512;return `atlasSample( ${map}, ${uv}, ${width.toFixed(1)}, ${Math.log2(Math.max(1,width*batch.pad)).toFixed(1)} )`;});
+   const code=ShaderChunk[chunk].replace(/texture2D\( (map|normalMap|roughnessMap|metalnessMap), (v\w+Uv) \)/g,(match,map,uv)=>{
+    // Task 1.3: a slot bound to a tileable detail map (grid=1 heroes) keeps
+    // three's own texture2D - full hardware mip chain and anisotropy - while
+    // its siblings stay on the atlas path. maxLod 2-3 was the shimmer.
+    if(material.userData.exteriorGradeDetail?.includes(map))return match;
+    const width=material[map]?.image?.width??512;return `atlasSample( ${map}, ${uv}, ${width.toFixed(1)}, ${Math.log2(Math.max(1,width*batch.pad)).toFixed(1)} )`;});
    shader.fragmentShader=shader.fragmentShader.replace('#include <'+chunk+'>',code);
   }
   if(neutralInterior){
@@ -41,5 +46,5 @@ export function prepareBatchedMaterial(material,{exterior=false}={}){
     'float glazingGrazing=pow(1.0-saturate(dot(normal,geometryViewDir)),5.0);\ndiffuseColor.a=mix(diffuseColor.a,max(diffuseColor.a,.75),glazingGrazing);\n#include <opaque_fragment>');
   }
  };
- material.customProgramCacheKey=()=>key+'|atlas-scaled-v6|'+batch.grid+'|'+neutralInterior+'|'+material.transparent+'|'+exterior+'|'+['map','normalMap','roughnessMap','metalnessMap'].map(name=>material[name]?.image?.width??512).join(',');material.needsUpdate=true;
+ material.customProgramCacheKey=()=>key+'|atlas-scaled-v6|'+batch.grid+'|'+neutralInterior+'|'+material.transparent+'|'+exterior+'|'+['map','normalMap','roughnessMap','metalnessMap'].map(name=>material[name]?.image?.width??512).join(',')+'|detail:'+(material.userData.exteriorGradeDetail??[]).join('.');material.needsUpdate=true;
 }

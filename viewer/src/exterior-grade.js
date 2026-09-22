@@ -150,6 +150,73 @@ function projectGroundUV(mesh, {module, diagonal}) {
   geometry.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
 }
 
+// Task 1.3 - the same revival for the BATCHED delivery, where materials are
+// consolidated and the source names live in userData.angoraBatch.materials.
+// Only grid=1 batches (one source material, the whole atlas its cell) can
+// take a tileable detail map directly: their UVs are the authored UVs, and
+// batched-material.js skips its atlasSample injection per bound slot so the
+// hardware mip chain and anisotropy come back for exactly these textures.
+// Everything here is measured against the R48 audit: the doc's grid=1 hero
+// list, with the repeats the legacy TABLE already carries.
+const BATCHED_TABLE = [
+  {name: 'Clay tile', set: {map: 'clayTileMap', normalMap: 'clayTileNormal'},
+   repeat: [1.5625 / 0.8, 1.5625 / 1.0], normalScale: 1.2},
+  {name: 'STRUCCO', set: {normalMap: 'stuccoNormal'}, repeat: [1, 1], normalScale: 0.55},
+  {name: 'stone_tile', set: {map: 'travertineMap', normalMap: 'travertineNormal'},
+   groundUV: {module: 0.8, diagonal: true}},
+  // The neighbours' plaster: same sand-float relief as the villa's stucco,
+  // fainter - context is setting, not subject.
+  {name: 'ceiling.004', set: {normalMap: 'stuccoNormal'}, repeat: [1, 1], normalScale: 0.3},
+];
+
+export function reviveBatchedGrade(models, sets, {anisotropy = 8} = {}) {
+  if (!sets) return 0;
+  const clones = new Map();
+  const textureFor = (name, repeat) => {
+    const key = name + '|' + (repeat ? repeat.join(',') : '1');
+    if (!clones.has(key)) {
+      const texture = repeat ? sets[name].clone() : sets[name];
+      if (repeat) texture.repeat.set(repeat[0], repeat[1]);
+      texture.anisotropy = anisotropy;
+      clones.set(key, texture);
+    }
+    return clones.get(key);
+  };
+  let applied = 0;
+  for (const model of models.values()) {
+    model.updateMatrixWorld(true);
+    model.traverse(object => {
+      if (!object.isMesh) return;
+      const material = Array.isArray(object.material) ? null : object.material;
+      if (!material) return;
+      const batch = material.userData.angoraBatch;
+      if (!batch || batch.grid !== 1 || batch.materials.length !== 1) return;
+      const entry = BATCHED_TABLE.find(e => e.name === batch.materials[0]);
+      if (!entry) return;
+      if (entry.groundUV && !object.userData.exteriorGradeUV) {
+        object.userData.exteriorGradeUV = true;
+        if (horizontalShare(object.geometry, object.matrixWorld) > 0.5) projectGroundUV(object, entry.groundUV);
+      }
+      if (material.userData.exteriorGradeDetail) return;   // one binding per material
+      const slots = [];
+      if (entry.set.map) {
+        material.map = textureFor(entry.set.map, entry.groundUV ? null : entry.repeat);
+        material.color?.setRGB(1, 1, 1);   // the sheet carries the photo hue
+        slots.push('map');
+      }
+      if (entry.set.normalMap) {
+        material.normalMap = textureFor(entry.set.normalMap, entry.groundUV ? null : entry.repeat);
+        material.normalScale?.setScalar(entry.normalScale ?? 1);
+        slots.push('normalMap');
+      }
+      material.userData.exteriorGradeDetail = slots;
+      material.needsUpdate = true;
+      applied++;
+    });
+  }
+  return applied;
+}
+
 // STAGE B - after every part is decoded and merged, before staging/compile:
 // bind the detail maps onto the canonical materials and rebuild ground UVs.
 // `sets` may be null (texture fetch failed) - the scalar grades stand alone.

@@ -17,6 +17,7 @@ import {configurePostprocessing} from './postprocessing.js';
 import {applyRenderProfile,referenceProfile} from './render-profile.js';
 import {LinearBloomPass} from './linear-bloom.js';
 import {InteriorLightController} from './interior-lighting.js';
+import {FEATURES} from './features.js';
 import {createSectionNormalMaterials} from './section-normal-materials.js';
 
 // Keep AO depth and beauty aligned for both cut interiors and uncut context.
@@ -348,7 +349,18 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
         // see through it collected nothing at all, and the first build of the
         // glow lit an empty set.
         if(name==='architecture'&&isGlazing(material))glazing.add(material);
-        for(const value of Object.values(material))if(value?.isTexture)value.anisotropy=Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy());
+        // Task 1.6: atlasSample() reads through textureLod, which ignores
+        // anisotropic filtering entirely - setting 16x on those four maps
+        // burns sampler state for zero pixels. Anisotropy goes only to
+        // textures on the real texture2D path (AO, lightmaps, electric
+        // bakes, exterior-grade detail); the atlas-sampled quartet gets 1.
+        {
+          const atlasSampled=FEATURES.atlasAnisotropyFix&&Boolean(material.userData.angoraBatch);
+          const detailSlots=material.userData.exteriorGradeDetail??[];
+          const tierAnisotropy=Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy());
+          for(const [slot,value] of Object.entries(material))if(value?.isTexture)
+            value.anisotropy=atlasSampled&&['map','normalMap','roughnessMap','metalnessMap'].includes(slot)&&!detailSlots.includes(slot)?1:tierAnisotropy;
+        }
       }
     },
     frame(view,contextBounds) {

@@ -2,10 +2,11 @@ import * as THREE from 'three';
 import {prepareBakedLighting} from './baked-lighting.js';
 import {restoreBatchSurface} from './batch-surface-response.js';
 import {prepareBatchedMaterial} from './batched-material.js';
+import {chunkModelInPlace} from './context-plants-chunks.js';
 
 // Batched deliveries remain resident across every view. The legacy manifest
 // path retains its older floor streams for explicit compatibility previews.
-export function createNativeDelivery({manifest,root,scene,groups,load,prepare,releaseMaterial,onProgress}) {
+export function createNativeDelivery({manifest,root,scene,groups,load,prepare,releaseMaterial,onProgress,features={}}) {
   const loaded=new Map(),sources=new Map();
   const context=['context-ground','context-buildings','context-plants'];
   const records=new Map([...manifest.parts,...manifest.interior_streams].map(p=>[p.name,p]));
@@ -32,6 +33,12 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
       for(const material of resources(model).materials)replacements.set(material,restoreBatchSurface(material,manifest.surface_response?.[name]));
       model.traverse(o=>{if(o.isMesh)o.material=Array.isArray(o.material)?o.material.map(m=>replacements.get(m)):replacements.get(o.material);});
       for(const [old,next] of replacements)if(old!==next)old.dispose();
+      // Task 1.4 safety valve: the published GLBs are patched single-sided;
+      // ?features=singleSided:0 puts both faces back at load time so a
+      // surface lost to an inverted source normal can be confirmed without
+      // re-patching the delivery.
+      if(features.singleSided===false)for(const material of resources(model).materials)
+        if(material.userData.angoraBatch)material.side=THREE.DoubleSide;
     }
     for(const material of resources(model).materials){
       const descriptor=material.userData.angoraLightMapTexture;if(!descriptor)continue;
@@ -60,9 +67,17 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     const retainedImages=new Set([...sources.values()].map(source=>source.data));
     for(const texture of modelTextures)retainedImages.add(texture.source.data);
     for(const data of discardedImages)if(data&&!retainedImages.has(data))data.close?.();
+    // Task 1.4: the planting ships as ONE mesh whose bound is the whole
+    // settlement, so the culler can never drop an off-screen tree. Split it
+    // into 48 m cells before mesh preparation runs, so each chunk gets the
+    // same clipping/lighting treatment the single mesh would have.
+    if(features.plantsChunking&&manifest.batched&&name==='context-plants')chunkModelInPlace(model);
     const clipped=!context.includes(name)&&name!=='villa-context-white'&&name!=='plot-grass';
     model.traverse(o=>{if(o.isMesh){if(!manifest.batched&&name.startsWith('interior')&&!/floor|tile|door|glass|stair|window|lift|wall/i.test(o.name))o.userData.category='furniture';prepare(o,{clipped,context:!clipped,name});}});
-    for(const material of resources(model).materials)prepareBatchedMaterial(material,{exterior:context.includes(name)});
+    // Task 1.6: the garden is outdoors too. Without this its surfaces
+    // compile the four interior fixture loops and evaluate them per fragment
+    // for lamps they can never see through the walls.
+    for(const material of resources(model).materials)prepareBatchedMaterial(material,{exterior:context.includes(name)||(features.gardenSpotStrip&&name==='garden')});
     loaded.set(name,model);groups.set(name,model);scene.add(model);return model;
     }catch(error){
       // A failed lightmap/mesh preparation must release this decoded asset
@@ -81,13 +96,27 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     for(const [key,source] of sources)if(!keepSources.has(source))sources.delete(key);
     THREE.Cache.clear();
   }
-  let preload;
+  let preload,walking=false;
+  const applyVisibility=view=>{
+    for(const [name,model] of loaded){
+      model.visible=name!=='interior'||/^f[0-3]$/.test(view);
+      // Walking happens indoors: the neighbourhood's planting is 514k
+      // triangles of trees seen, at most, through a window. First step of
+      // Task 1.4's view culling - A/B'd on the walk cameras before shipping.
+      if(features.viewCulling&&name==='context-plants'&&walking)model.visible=false;
+    }
+  };
   return {loaded,batched:Boolean(manifest.batched),
+    setWalkMode(active,view){
+      if(walking===active)return;
+      walking=active;
+      if(manifest.batched)applyVisibility(view);
+    },
     async activate(view){
       if(manifest.batched){
         preload??=(async()=>{for(const {name} of manifest.parts)await acquire(name);})();
         await preload;
-        for(const [name,model] of loaded)model.visible=name!=='interior'||/^f[0-3]$/.test(view);
+        applyVisibility(view);
         return;
       }
       await acquire('architecture');await acquire('garden');
