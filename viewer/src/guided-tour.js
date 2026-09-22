@@ -24,7 +24,13 @@ export function createGuidedTour({element, src, apply, caption, onEnd, onError, 
   audio.src = src;
   const $ = s => element.querySelector(s);
   const play = $('#tour-play'), fill = $('#tour-fill'), readout = $('#tour-clock'), track = $('#tour-track');
-  let index = -1, key = '', running = false;
+  let index = -1, key = '', running = false, holdTimer = null, scrubbed = false;
+  // A cue may ask the recording to wait on it - the lift is shown in a
+  // silence the script does not contain - so the hold is taken out of the
+  // voice rather than out of the timeline. Only playback triggers it: a
+  // scrub that lands on the same cue must not stop the audio it just asked
+  // to hear.
+  const release = () => {clearTimeout(holdTimer); holdTimer = null;};
 
   function show(now, total) {
     const share = total ? Math.min(1, now / total) : 0;
@@ -44,6 +50,11 @@ export function createGuidedTour({element, src, apply, caption, onEnd, onError, 
       caption(at < 0 ? null : step);
       const next = cueKey(step);
       if (at >= 0 && next !== key) {key = next; apply(step, at);}
+      if (at >= 0 && step.hold && !scrubbed && !audio.paused) {
+        audio.pause(); release();
+        holdTimer = setTimeout(() => {holdTimer = null; if (running) audio.play().catch(() => {});}, step.hold * 1000);
+      }
+      scrubbed = false;
     }
     show(now, audio.duration || 0);
   }
@@ -52,11 +63,12 @@ export function createGuidedTour({element, src, apply, caption, onEnd, onError, 
   audio.addEventListener('ended', () => {running = false; onEnd?.(true);});
   // A recording that cannot be fetched must say so. Left alone the transport
   // sits on Play, the shade never lifts, and the tour looks merely stuck.
-  audio.addEventListener('error', () => {running = false; onError?.();});
+  audio.addEventListener('error', () => {running = false; release(); onError?.();});
   audio.addEventListener('play', () => {play.dataset.state = 'playing'; play.setAttribute('aria-label', play.dataset.pauseLabel || 'Duraklat');});
   audio.addEventListener('pause', () => {play.dataset.state = 'paused'; play.setAttribute('aria-label', play.dataset.playLabel || 'Devam et');});
 
-  play.onclick = () => {audio.paused ? audio.play().catch(() => {}) : audio.pause();};
+  // A press during a hold owns the transport from then on.
+  play.onclick = () => {release(); audio.paused ? audio.play().catch(() => {}) : audio.pause();};
   // Nothing may be asked of the element before it has metadata: seeking a
   // media element with no duration is an error, not a no-op.
   const loaded = () => Number.isFinite(audio.duration) && audio.duration > 0;
@@ -67,16 +79,22 @@ export function createGuidedTour({element, src, apply, caption, onEnd, onError, 
     audio.currentTime = share * audio.duration;
     // A scrub lands mid-sentence, so the cue is re-read from scratch rather
     // than waiting for the next boundary to notice the jump.
-    index = -1; tick();
+    release(); index = -1; scrubbed = true; tick();
   };
-  track.onpointerdown = event => {track.setPointerCapture(event.pointerId); seekTo(event);};
-  track.onpointermove = event => {if (track.hasPointerCapture(event.pointerId)) seekTo(event);};
+  // Capture is a convenience for dragging, not a precondition for seeking:
+  // a pointer that is no longer active makes it throw, and the press that
+  // asked for the seek would then be swallowed by the exception.
+  track.onpointerdown = event => {
+    try {track.setPointerCapture(event.pointerId);} catch {/* no live pointer */}
+    seekTo(event);
+  };
+  track.onpointermove = event => {if (track.hasPointerCapture?.(event.pointerId)) seekTo(event);};
   track.onkeydown = event => {
     const jump = {ArrowLeft: -10, ArrowRight: 10, Home: -1e5, End: 1e5}[event.key];
     if (jump === undefined || !loaded()) return;
     event.preventDefault();
     audio.currentTime = Math.min(audio.duration, Math.max(0, audio.currentTime + jump));
-    index = -1; tick();
+    release(); index = -1; scrubbed = true; tick();
   };
   return {
     steps,
@@ -84,7 +102,7 @@ export function createGuidedTour({element, src, apply, caption, onEnd, onError, 
     get paused() {return audio.paused;},
     get time() {return audio.currentTime;},
     async start() {
-      running = true; index = -1; key = '';
+      running = true; index = -1; key = ''; release(); scrubbed = false;
       if (loaded()) audio.currentTime = 0;
       // Play is claimed FIRST, while the click that started the tour is still
       // the browser's active user activation. Applying the opening view means
@@ -97,7 +115,7 @@ export function createGuidedTour({element, src, apply, caption, onEnd, onError, 
       await apply(steps[0], 0);
       await playing;
     },
-    stop() {running = false; audio.pause(); if (loaded()) audio.currentTime = 0; index = -1; key = '';},
+    stop() {running = false; release(); audio.pause(); if (loaded()) audio.currentTime = 0; index = -1; key = '';},
     refresh() {if (running) {const at = Math.max(0, index); caption(steps[at]);}},
   };
 }

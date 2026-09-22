@@ -41,7 +41,7 @@ import {batchContext} from './context-batch.js';
 import {mergeEqualMaterials,abstractVehicle,splitContextSoil,splitContextBuildings,createContextMassing,authoredNodeName} from './context-massing.js';
 // Trees, hedges and beds, by the names the delivery gives them.
 const PLANTING=/spruce|needle|foliage|hedge|leaves|leaf|shrub|tree|branch|trunk|planting/i;
-import {createLift} from './lift.js';
+import {createLift,SHAFT} from './lift.js';
 import {handleEscape} from './interface-actions.js';
 import {createInterfaceSound} from './interface-sound.js';
 import {createDeviceQA} from './device-qa.js';
@@ -693,6 +693,11 @@ let walkData=null;
 // currently is - eased per frame so starting and leaving the tour are fades
 // rather than a cut.
 let guidedTour=null,spotlight=null,tourShade=0,tourShadeTarget=0,tourShadeTime=null;
+// The Bolge map's slow turn during the opening. It is driven by its own timer
+// rather than by the render loop: the map is an opaque DOM layer over the
+// scene, so turning it must not ask the renderer for forty megabytes of frame.
+const REGION_SPIN_DEG=0.75;
+let tourSpinTimer=null,tourBearing=0;
 // The buyer's room menu: drawing names in the viewer's language, internal
 // codes ('Z06') demoted to tooltips, twins told apart by code only.
 function fillRoomMenu(){
@@ -777,16 +782,64 @@ function floorFootprint(floor){
   }
   return Number.isFinite(box.min[0])?box:null;
 }
+// Every part of the plot that is not the house, as the four spans a plan
+// reads: the street side, the garden behind, and the two flanks. The plot is
+// the registered R32 rectangle and the house is its own box, so this is
+// subtraction rather than invention - and it is how "the garden wraps the
+// villa" is shown to include the front and the sides, which the register's
+// single Bahce label does not cover.
+function plotRingBoxes(){
+  if(!buildingBox)return [];
+  // Tall enough to span both grades: the street side stands a storey above
+  // the pool terrace, and one mark has to cover the whole slope.
+  const low=-0.8,high=4.2,house=buildingBox;
+  return [[PLOT_RECT.minX,PLOT_RECT.maxX,house.max.z,PLOT_RECT.maxZ],
+          [PLOT_RECT.minX,PLOT_RECT.maxX,PLOT_RECT.minZ,house.min.z],
+          [PLOT_RECT.minX,house.min.x,house.min.z,house.max.z],
+          [house.max.x,PLOT_RECT.maxX,house.min.z,house.max.z]]
+    .filter(([x0,x1,z0,z1])=>x1-x0>.6&&z1-z0>.6)
+    .map(([x0,x1,z0,z1])=>new THREE.Box3(new THREE.Vector3(x0,low,z0),new THREE.Vector3(x1,high,z1)));
+}
+// The shaft, at one storey's height. Its footprint is lift.js's recorded
+// measurement of the delivered model rather than a guess, and the roof storey
+// has no landing, so it is never asked for.
+function liftBox(floor){
+  const datums=roomData?.floor_datums_m??[0,3.0996,6.3714,9.4705];
+  const base=datums[floor];if(base===undefined)return null;
+  const top=base+(datums[floor+1]?datums[floor+1]-base-.3:2.75);
+  return new THREE.Box3(new THREE.Vector3(SHAFT.minX,base,SHAFT.minZ),
+                        new THREE.Vector3(SHAFT.maxX,top,SHAFT.maxZ));
+}
 function tourBoxes(ids){
   if(!roomData)return [];
   const boxes=[];
   for(const id of ids){
+    // Marks are the tour's own, told apart from register ids by their prefix
+    // so neither can ever be mistaken for the other.
+    if(id==='mark:plot-ring'){boxes.push(...plotRingBoxes());continue;}
+    const shaft=/^mark:lift-([0-2])$/.exec(id);
+    if(shaft){const box=liftBox(Number(shaft[1]));if(box)boxes.push(box);continue;}
     const room=roomData.rooms.find(entry=>entry.id===id);if(!room)continue;
     const raw=roomBox(room,roomData.dimensions,roomData.floor_datums_m);
     const box=id.includes('-site-')?raw:clampToFloor(raw,floorFootprint(room.floor_index));
     boxes.push(new THREE.Box3(new THREE.Vector3(...box.min),new THREE.Vector3(...box.max)));
   }
   return boxes;
+}
+function setTourSpin(on){
+  if(on===Boolean(tourSpinTimer))return;
+  if(!on){clearInterval(tourSpinTimer);tourSpinTimer=null;return;}
+  let last=performance.now();
+  tourSpinTimer=setInterval(()=>{
+    const now=performance.now(),dt=Math.min(.5,(now-last)/1000);last=now;
+    if(!regionMap||selected!=='region'||guidedTour?.paused)return;
+    tourBearing+=dt*REGION_SPIN_DEG;
+    regionMap.setBearing(Math.round(tourBearing*10)/10);
+  },80);
+}
+function restRegionMap(){
+  setTourSpin(false);tourBearing=0;
+  regionMap?.setBearing(0);regionMap?.setGroup(null);
 }
 function tourCaption(step){
   $('#tour-caption').textContent=step?(currentLang()==='en'?step.en:step.tr):'';
@@ -802,6 +855,7 @@ function refreshTourLabels(){
 async function applyTourStep(step){
   if(walk?.active)exitWalk(false);
   photoViewer?.hide();
+  $('#tour-listing').hidden=!step.link;
   // The B\u00f6lge scale is a map layer, so its cues move its radius rather than
   // a camera, and the only thing to light is the address at its centre.
   if(step.view==='region'){
@@ -810,22 +864,30 @@ async function applyTourStep(step){
     regionMap.setRadius(step.radius);
     document.querySelectorAll('.region-radius button').forEach(button=>
       button.setAttribute('aria-pressed',String(Number(button.dataset.radius)===step.radius)));
+    // One amenity family per sentence, chosen to match it: the civic set
+    // under "idari ve sosyal", the parks under "en yesil", transport under
+    // "kolay ulasim", the schools under "ailelerin gozdesi".
+    regionMap.setGroup(step.group);
+    setTourSpin(step.spin);
     spotlight?.setBoxes([]);spotlight?.setCentre(step.spot==='centre');
     tourShadeTarget=step.spot==='centre'?1:0;
     setAutoRotate(false);invalidate();return;
   }
+  restRegionMap();
   spotlight?.setCentre(false);
   if(selected!==step.view)await selectView(step.view);
   const boxes=tourBoxes(step.rooms);
-  spotlight?.setBoxes(boxes);
+  spotlight?.setBoxes(boxes,{glow:!step.rooms.includes('mark:plot-ring')});
   tourShadeTarget=boxes.length?1:0;
   // What the camera is for. A cue about the plot frames the villa WITH what
   // is lit - the garden reads as wrapping the house only if the house is in
-  // the picture - and a cue about the villa frames the house alone. With
-  // neither, the lit rooms are the subject, and with nothing lit the view's
-  // own framing stands.
+  // the picture - and a cue about the villa frames the house alone. 'storey'
+  // keeps the view's own framing while something inside it is lit, which is
+  // how the lift is marked ON a floor rather than filling the screen with a
+  // 1,2 m shaft. With none of them the lit rooms are the subject, and with
+  // nothing lit the view frames itself.
   const lit=boxes.length?boxes.reduce((box,next)=>box.union(next),new THREE.Box3()):null;
-  const framed=!buildingBox?null
+  const framed=!buildingBox||step.frame==='storey'?null
     :step.frame==='plot'?(lit?.clone()??new THREE.Box3()).union(buildingBox).union(gardenBox??buildingBox)
     :step.frame==='villa'?buildingBox.clone().union(lit??buildingBox)
     :lit;
@@ -838,7 +900,7 @@ async function applyTourStep(step){
     // the trees and the house itself back in the picture.
     const outdoor=step.rooms.length>0&&step.rooms.every(id=>id.includes('-site-'));
     const polar=step.polar??(step.frame==='villa'?1:step.frame==='plot'?.86:outdoor?.95:.62);
-    const pad=step.frame==='villa'?1.12:step.frame==='plot'?1:outdoor?2.4:1.7;
+    const pad=step.frame==='villa'?1.12:step.frame==='plot'?1.1:outdoor?2.4:1.7;
     const span=Math.max(size.z*Math.cos(polar)+size.y*Math.sin(polar),size.x/aspect)*pad;
     // Looked at from its own side of the house, so the camera is never put
     // behind the wall it is meant to be showing through.
@@ -874,6 +936,8 @@ function startTour(){
 function endTour(openInfo){
   guidedTour?.stop();
   $('#tour-bar').hidden=true;$('#app').dataset.tour='false';
+  $('#tour-listing').hidden=true;
+  restRegionMap();
   tourCaption(null);
   spotlight?.setBoxes([]);spotlight?.setCentre(false);
   tourShadeTarget=0;
@@ -1495,8 +1559,12 @@ function zoom(factor){
 }
 function setAutoRotate(value) {
   if(!controls)return;
-  // The neighbourhood turns on request; during the narrated tour the tour\n  // decides, so the villa may turn as well.\n  controls.autoRotate=Boolean(value&&(selected==='neighborhood'||guidedTour?.active));
-  controls.autoRotateSpeed=.25;
+  // The neighbourhood turns on request; during the narrated tour the tour
+  // decides, so the villa may turn as well.
+  controls.autoRotate=Boolean(value&&(selected==='neighborhood'||guidedTour?.active));
+  // A quarter-speed orbit is right for an idle street view and invisible
+  // over a six-second sentence, so the tour turns at its own pace.
+  controls.autoRotateSpeed=guidedTour?.active?.9:.25;
   $('#toggle-auto-rotate').setAttribute('aria-pressed',String(controls.autoRotate));
   if(controls.autoRotate)invalidate();
 }
@@ -1557,7 +1625,10 @@ function bindInterface() {
   $('#toggle-plan').onclick=()=>{planMode=!planMode;$('#toggle-plan').setAttribute('aria-pressed',planMode);$('#toggle-plan').textContent=planMode?'3D':'Plan';mode(planMode);frame(false);};
   $('#region-summary').ontoggle=()=>{invalidateUIObstacles();invalidate();};
   $('#toggle-auto-rotate').onclick=()=>setAutoRotate(!controls.autoRotate);
-  window.addEventListener('pointermove',()=>setAutoRotate(false));
+  // A press takes the camera; merely moving the mouse does not. The idle
+  // street orbit still yields to a move, but the tour's own turn would
+  // otherwise stop the moment the visitor's hand crossed the window.
+  window.addEventListener('pointermove',()=>{if(!guidedTour?.active)setAutoRotate(false);});
   host.addEventListener('pointerdown',()=>setAutoRotate(false));
   $('#open-options').onclick=()=>panel('options-panel',$('#options-panel').hidden);
   $('#open-info').onclick=()=>panel('info-panel',$('#info-panel').hidden);

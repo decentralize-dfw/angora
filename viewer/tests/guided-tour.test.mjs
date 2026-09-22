@@ -28,24 +28,39 @@ test('the cues run forward and end inside the recording', () => {
 });
 
 test('every cue carries both subtitles', () => {
-  for (const cue of TOUR_CUES) {
-    for (const lang of ['tr', 'en']) {
-      assert.equal(typeof cue[lang], 'string', `cue at ${cue.at} has no ${lang} subtitle`);
-      assert.ok(cue[lang].trim().length > 2, `cue at ${cue.at} has an empty ${lang} subtitle`);
-    }
+  // A cue may have no words of its own - the lift rides down three storeys
+  // inside one sentence - but every resolved step must still show what is
+  // being spoken, so the subtitle is carried rather than blanked.
+  for (const cue of TOUR_CUES) for (const lang of ['tr', 'en']) {
+    if (cue[lang] === undefined) continue;
+    assert.equal(typeof cue[lang], 'string', `cue at ${cue.at} has a ${lang} subtitle that is not text`);
+    assert.ok(cue[lang].trim().length > 2, `cue at ${cue.at} has an empty ${lang} subtitle`);
   }
+  for (const step of steps) for (const lang of ['tr', 'en'])
+    assert.ok(step[lang]?.trim().length > 2, `the step at ${step.at} s shows no ${lang} subtitle`);
 });
 
+const MARKS = new Set(['mark:plot-ring', 'mark:lift-0', 'mark:lift-1', 'mark:lift-2']);
 test('every room a sentence names is one the register holds', () => {
   const known = new Set(rooms.rooms.map(room => room.id));
-  for (const step of steps) for (const id of step.rooms)
+  for (const step of steps) for (const id of step.rooms) {
+    if (id.startsWith('mark:')) {
+      // The tour's own marks - the plot minus the house, the lift shaft - are
+      // built in main.js from the plot rectangle, the building box and the
+      // delivered cabin. They are named apart so neither set can be mistaken
+      // for the other, and an unknown one must not fail silently.
+      assert.ok(MARKS.has(id), `${id} is lit at ${step.at} s and is not a mark the viewer can build`);
+      continue;
+    }
     assert.ok(known.has(id), `${id} is lit at ${step.at} s but is not in native-rooms.json`);
+  }
 });
 
 test('a lit room is always on the storey the cue is showing', () => {
   for (const step of steps) {
     if (!/^f[0-3]$/.test(step.view)) continue;
     for (const id of step.rooms) {
+      if (id.startsWith('mark:')) continue;
       const room = rooms.rooms.find(entry => entry.id === id);
       assert.equal('f' + room.floor_index, step.view,
         `${id} is lit while ${step.view} is on screen, but it stands on f${room.floor_index}`);
@@ -53,15 +68,50 @@ test('a lit room is always on the storey the cue is showing', () => {
   }
 });
 
-test('the storey changes are announced before the rooms on them are lit', () => {
-  let view = null;
-  for (const step of steps) {
-    if (step.view !== view) {
-      view = step.view;
-      assert.equal(step.rooms.length, 0,
-        `the cue at ${step.at} s changes to ${view} and lights a room in the same breath`);
-    }
+test('the lift is marked on the storeys it serves, and on no other', () => {
+  // The delivery's lift serves the basement, the ground floor and the first
+  // floor; the roof storey has no landing, so the descent starts below it.
+  const lit = steps.filter(step => step.rooms.some(id => id.startsWith('mark:lift-')));
+  assert.equal(lit.length, 3, 'the lift is not shown on three storeys');
+  assert.deepEqual(lit.map(step => step.view), ['f2', 'f1', 'f0'], 'the lift does not ride down');
+  for (const step of lit) {
+    const floor = step.rooms.find(id => id.startsWith('mark:lift-')).slice(-1);
+    assert.equal('f' + floor, step.view, `the lift mark at ${step.at} s is on the wrong storey`);
   }
+  // It has to be shown in a silence, because the script has none to spare.
+  const held = steps.filter(step => step.hold > 0);
+  assert.equal(held.length, 1, 'the recording is held somewhere other than the lift');
+  assert.ok(held[0].rooms.includes('mark:lift-2'), 'the hold is not the one that shows the lift');
+  assert.ok(held[0].hold >= 2 && held[0].hold <= 5, 'the hold is not a beat');
+});
+
+test('the plot is shown in plan, with everything that is not the house lit', () => {
+  const plan = steps.filter(step => step.rooms.includes('mark:plot-ring'));
+  assert.ok(plan.length >= 1, 'the plot is never shown as a whole');
+  for (const step of plan) {
+    assert.ok(step.polar !== null && step.polar < 0.35, 'the plot is not looked at from above');
+    assert.equal(step.frame, 'plot', 'the plan does not frame the plot');
+  }
+});
+
+test('the opening moves: the map turns, and each sentence brings its own set', () => {
+  const region = steps.filter(step => step.view === 'region');
+  assert.ok(region.filter(step => step.spin).length > 6, 'the map stands still through the opening');
+  // Every family shown is a real one, and no two sentences in a row repeat it.
+  const shown = region.map(step => step.group);
+  for (const g of shown) assert.ok(g === null || (Number.isInteger(g) && g >= 0 && g < 6), `${g} is not an amenity family`);
+  assert.ok(new Set(shown.filter(g => g !== null)).size >= 4, 'the opening leans on one family');
+  // The last word of the opening is the settlement itself, with nothing else
+  // on the map and the turning stopped.
+  const last = region[region.length - 1];
+  assert.equal(last.spot, 'centre'); assert.equal(last.group, null); assert.equal(last.spin, false);
+});
+
+test('the closing turns, and offers the listing', () => {
+  const last = steps[steps.length - 1];
+  assert.ok(last.rotate, 'the closing shot stands still');
+  assert.ok(last.link, 'the closing never offers the listing');
+  assert.equal(steps.filter(step => step.link).length, 1, 'the listing is offered before the price is named');
 });
 
 test('inherited state only reframes where a cue asks it to', () => {
@@ -148,8 +198,11 @@ test('the tour visits every storey, the garden and the pool', () => {
   for (const view of ['region', 'neighborhood', 'f0', 'f1', 'f2', 'f3'])
     assert.ok(views.has(view), `the tour never shows ${view}`);
   const lit = new Set(steps.flatMap(step => step.rooms));
-  for (const id of ['f0-site-garden', 'f0-site-pool'])
-    assert.ok(lit.has(id), `${id} is never lit`);
+  assert.ok(lit.has('f0-site-pool'), 'the pool is never lit');
+  // The garden is shown as the plot minus the house rather than as its one
+  // registered Bahce label, because the sentence says the garden WRAPS the
+  // villa and that label is only the lawn behind it.
+  assert.ok(lit.has('mark:plot-ring'), 'the garden is never shown');
 });
 
 test('the hole is cut where the room actually lands on screen', () => {

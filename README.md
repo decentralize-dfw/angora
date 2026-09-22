@@ -60,6 +60,28 @@ kutusu kayıtlı etiket noktası ve iki ölçülü açıklıktan kurulur
 yakmak açıldığı holü de yakar — bu kaynağın kendi ifadesidir, kutunun hatası
 değil. Kesit atlasına kırpılarak duvarın dışına taşması engellenir.
 
+Açılışın 44 saniyesi Bölge haritasındadır ve hareketlidir: harita villa
+çevresinde yavaşça döner (0,75°/sn; pusula ve bütün yazılar ters döndürülerek
+dik tutulur), yarıçap 2 km → 1 km → 500 m iner ve her cümleye kendi donatı
+ailesi eşlik eder — "en yeşil"de parklar, "kolay ulaşım"da duraklar,
+"ailelerin gözdesi"nde okullar, "Çayyolu'nun kalbindeyiz"de market ve
+alışveriş. Aileler 2 km'de değil 1 km ve 500 m'de açılır; nokta yarıçapı metre
+cinsinden çizildiği için 2 km'de görünmezler. "Angora Evleri" denince dönüş
+durur ve yerleşkenin kendisi dairesel bir ışıkla ayrılır.
+
+Bahçe, arsanın ev olmayan bütün parçaları olarak plan görünüşünden gösterilir:
+kayıtlı R32 arsa dikdörtgeninden bina kutusu çıkarılarak elde edilen dört
+şerit — sokak tarafı, arka bahçe ve iki yan — yani ön taraf ve yanlar da
+bahçedir. Kayıttaki tek "Bahçe" etiketi yalnız arka çimi kapsar.
+
+Kapanış cümlesi "Asansör" kelimesiyle açılır ve asansör o ana kadar hiç
+gösterilmemiştir; bu yüzden kayıt orada **3 saniye bekletilir**, şaft hizmet
+ettiği en üst katta (1. kat) işaretlenir, sonra cümleyle birlikte giriş ve
+bodrum katlarına iner. Çatı katında durak yoktur, iniş bu yüzden onun altından
+başlar. Şaftın ayak izi tahmin değildir: teslimdeki kabin ve kat kapılarından
+ölçülür (`lift.js`). Fiyatın söylendiği son cümlede RE/MAX ilan bağlantısı
+ekrana gelir ve yeni sekmede açılır.
+
 Tur sırasında arayüz geri çekilir; sahne, cümle ve turu bitirme düğmesi kalır.
 Sahneye dokunmak turu bitirmez: anlatım kamera için durmadığından konuşurken
 etrafa bakmak mümkündür, bir sonraki cümle kadrajı geri alır.

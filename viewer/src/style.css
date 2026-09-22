@@ -357,7 +357,8 @@ h1 strong{font-weight:700}
 .rm-chip-ring{background:transparent;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:var(--muted);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:2px 6px}
 .rm-chip-area{background:transparent;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:rgba(22,29,26,.42);font-size:10px;letter-spacing:.26em;text-transform:uppercase;font-weight:600}
 .rm-compass{position:absolute;right:22px;top:84px;display:grid;place-items:center;width:44px;height:44px;border-radius:999px;background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);font-size:11px;font-weight:700;color:var(--ink);line-height:1}
-.rm-compass i{font-style:normal;font-size:13px;margin-bottom:-2px}
+.rm-compass i{font-style:normal;font-size:13px;margin-bottom:-2px;
+  transform:rotate(var(--rm-bearing,0deg));transition:transform 120ms linear}
 /* the settlement's introduction, shown with the Bölge scale */
 .rm-info{position:absolute;left:22px;top:152px;width:302px;max-width:calc(100vw - 44px);border-radius:18px;padding:15px 18px 14px;background:var(--panel);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:var(--shadow-soft);z-index:2}
 .rm-info h3{margin:0;font-size:15px;font-weight:700;letter-spacing:.02em}
@@ -529,6 +530,14 @@ h1 strong{font-weight:700}
   -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid rgba(255,255,255,.12);
   box-shadow:0 10px 30px rgba(6,12,10,.38);transition:opacity 260ms ease}
 .tour-caption:empty{display:none}
+/* The way to the listing, raised by the sentence that names the price. It
+   is the one thing in the tour that leads anywhere, so it is the one thing
+   drawn in ink rather than in the subtitle's glass. */
+.tour-listing{pointer-events:auto;display:inline-flex;align-items:center;min-height:38px;padding:0 17px;
+  border-radius:999px;background:var(--ink);color:#fff;font-size:12.5px;font-weight:600;white-space:nowrap;
+  text-decoration:none;box-shadow:0 8px 24px rgba(6,12,10,.34)}
+.tour-listing:hover{background:#000}
+.tour-listing[hidden]{display:none}
 .tour-transport{pointer-events:auto;display:flex;align-items:center;gap:9px;border-radius:999px;padding:6px 8px 6px 6px;
   background:var(--panel);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
   border:1px solid var(--edge);box-shadow:var(--shadow-soft)}
@@ -568,6 +577,7 @@ h1 strong{font-weight:700}
   .tour-launch span{display:none}
   .tour-hud{width:calc(100vw - 20px);gap:8px;bottom:max(14px,calc(env(safe-area-inset-bottom) + 10px))}
   .tour-caption{font-size:13.5px;line-height:1.45;padding:9px 14px;border-radius:15px}
+  .tour-listing{font-size:12px;padding:0 14px;min-height:36px}
   .tour-transport{gap:7px;padding:5px 7px 5px 5px}
   .tour-track{width:min(150px,32vw)}
   .tour-clock{display:none}

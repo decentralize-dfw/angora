@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import * as THREE from 'three';
-import {readStops,route,createLift,CABIN_NODE,LEAF_NODE,SERVED_FLOORS,
+import {readStops,route,createLift,CABIN_NODE,LEAF_NODE,SERVED_FLOORS,SHAFT,
   HINGE_X,HINGE_Z,CLOSED_ROTATION_Y,FLOOR_SEND_LABEL} from '../src/lift.js';
 import {floorDatums} from '../src/section.js';
 
@@ -274,4 +274,59 @@ test('The manifest records the playback as integrated with the measured schedule
   assert.equal(native.target_node,'R39 lift cabin travel');
   assert.deepEqual(native.stop_heights_m,[0,3.099600076675415,6.371399879455566]);
   assert.equal(native.playback,'parked_to_selected_floor; native_clip_on_user_control_in_interior_walk_only');
+});
+
+// The narrated tour marks the lift on each storey it serves, and the live
+// delivery is batched: the merge keeps the geometry and throws the node names
+// away, so nothing in the running scene can be asked where the shaft is. The
+// footprint is recorded in lift.js instead, and this re-measures the delivery
+// it was taken from so the record cannot quietly go stale.
+test('The recorded shaft footprint is still the delivered one', () => {
+  const file = new URL('../../build/web/full/villa.glb', import.meta.url);
+  const bytes = fs.readFileSync(file);
+  const glb = JSON.parse(bytes.subarray(20, 20 + bytes.readUInt32LE(12)).toString('utf8'));
+  // glTF node transforms, composed down the tree; the AABB comes off each
+  // primitive's POSITION accessor bounds, so no geometry has to be decoded.
+  const mul = (a, b) => {
+    const o = new Array(16).fill(0);
+    for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) for (let k = 0; k < 4; k++) o[j * 4 + i] += a[k * 4 + i] * b[j * 4 + k];
+    return o;
+  };
+  const trs = n => {
+    if (n.matrix) return n.matrix;
+    const t = n.translation ?? [0, 0, 0], [x, y, z, w] = n.rotation ?? [0, 0, 0, 1], s = n.scale ?? [1, 1, 1];
+    const x2 = x + x, y2 = y + y, z2 = z + z;
+    const xx = x * x2, xy = x * y2, xz = x * z2, yy = y * y2, yz = y * z2, zz = z * z2, wx = w * x2, wy = w * y2, wz = w * z2;
+    return [(1 - (yy + zz)) * s[0], (xy + wz) * s[0], (xz - wy) * s[0], 0,
+            (xy - wz) * s[1], (1 - (xx + zz)) * s[1], (yz + wx) * s[1], 0,
+            (xz + wy) * s[2], (yz - wx) * s[2], (1 - (xx + yy)) * s[2], 0, t[0], t[1], t[2], 1];
+  };
+  const at = (m, p) => [m[0] * p[0] + m[4] * p[1] + m[8] * p[2] + m[12], 0, m[2] * p[0] + m[6] * p[1] + m[10] * p[2] + m[14]];
+  const box = {minX: Infinity, maxX: -Infinity, minZ: Infinity, maxZ: -Infinity};
+  let parts = 0;
+  const walk = (index, parent) => {
+    const node = glb.nodes[index], world = mul(parent, trs(node));
+    if (node.mesh !== undefined && /^Lift/i.test(node.name ?? '')) {
+      for (const prim of glb.meshes[node.mesh].primitives) {
+        const acc = glb.accessors[prim.attributes.POSITION];
+        if (!acc?.min) continue;
+        parts++;
+        for (let c = 0; c < 8; c++) {
+          const [x, , z] = at(world, [c & 1 ? acc.max[0] : acc.min[0], c & 2 ? acc.max[1] : acc.min[1], c & 4 ? acc.max[2] : acc.min[2]]);
+          box.minX = Math.min(box.minX, x); box.maxX = Math.max(box.maxX, x);
+          box.minZ = Math.min(box.minZ, z); box.maxZ = Math.max(box.maxZ, z);
+        }
+      }
+    }
+    for (const child of node.children ?? []) walk(child, world);
+  };
+  for (const scene of glb.scenes) for (const root of scene.nodes) walk(root, [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1]);
+  assert.ok(parts > 100, `only ${parts} lift parts found; the delivery no longer names them`);
+  for (const key of ['minX', 'maxX', 'minZ', 'maxZ'])
+    assert.ok(Math.abs(box[key] - SHAFT[key]) < 0.005,
+      `${key}: the delivery measures ${box[key].toFixed(3)} m, lift.js records ${SHAFT[key]}`);
+  // A domestic shaft, not a room: whatever the model says, a mark this size
+  // has to stay the size of a lift.
+  assert.ok(SHAFT.maxX - SHAFT.minX > 1 && SHAFT.maxX - SHAFT.minX < 2.5, 'the shaft is not lift-sized across');
+  assert.ok(SHAFT.maxZ - SHAFT.minZ > 1 && SHAFT.maxZ - SHAFT.minZ < 2.5, 'the shaft is not lift-sized deep');
 });

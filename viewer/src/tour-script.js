@@ -24,13 +24,18 @@ export const TOUR_TRIM_S = 6.975;
 //           brought in - which is what frame:'villa' does.
 //   radius  region map radius in metres (2000 | 1000 | 500)
 //   rooms   room ids from native-rooms.json to light; [] darkens nothing
-//   frame   what the camera is for: 'villa', 'plot', or null for the lit
-//           rooms, or for the view's own framing when nothing is lit
+//   frame   what the camera is for: 'villa', 'plot', 'storey' (the view's own
+//           framing, with something inside it lit), or null for the lit rooms
+//           - and for the view's own framing when nothing is lit
+//   group   which amenity family the Bolge map shows; null puts them away
+//   spin    the map turns slowly about the villa while this cue holds
+//   link    the listing link stands on screen from this cue on
+//   hold    seconds the recording waits here, for something with no words
 //   azimuth camera bearing in radians; omitted lets the framing choose
 //   polar   camera pitch in radians; omitted keeps the view's own
 //   rotate  slow orbit while this cue holds
 export const TOUR_CUES = [
-  {at: 0.71, view: 'region', radius: 2000, rooms: [],
+  {at: 0.71, view: 'region', radius: 2000, rooms: [], spin: true, group: null,
    tr: 'Hoş geldiniz.',
    en: 'Welcome.'},
   {at: 1.03,
@@ -42,22 +47,27 @@ export const TOUR_CUES = [
   {at: 14.03,
    tr: 'Şehrin batısına, Eskişehir Yolu aksına doğru ilerledikçe ise Çankaya’nın en sakin, en yeşil ve en çok tercih edilen yaşam bölgesiyle karşılaşıyoruz.',
    en: 'Moving west along the Eskişehir Road axis, we reach Çankaya’s calmest, greenest and most sought-after district.'},
-  {at: 24.03, radius: 1000,
+  // The amenity dots are drawn in metres, so at the 2 km view they are specks
+  // and a family turned on there shows nothing. The families start where the
+  // map is close enough to read them: the green as the sentence reaches "en
+  // yesil", and then one per sentence down to the address itself.
+  {at: 19.53, radius: 1000, group: 4},
+  {at: 24.03, group: null,
    tr: 'Çayyolu.',
    en: 'Çayyolu.'},
-  {at: 25.03,
+  {at: 25.03, group: 5,
    tr: 'Şehir merkezine kolay ulaşım ama şehrin gürültüsünden uzak bir yaşam.',
    en: 'Easy reach of the city centre, and a life away from its noise.'},
-  {at: 31.03,
+  {at: 31.03, group: 0,
    tr: 'Çayyolu’nu yıllardır ailelerin gözdesi yapan şey tam da bu denge.',
    en: 'That balance is exactly what has made Çayyolu a favourite with families for years.'},
-  {at: 36.03, radius: 500,
+  {at: 36.03, radius: 500, group: 3,
    tr: 'Şimdi Çayyolu’nun kalbindeyiz.',
    en: 'Now we are in the heart of Çayyolu.'},
-  {at: 39.03,
+  {at: 39.03, group: null,
    tr: 'Karşınızda, Ankara’nın en köklü ve en tanınmış villa yerleşimlerinden biri.',
    en: 'Before you is one of Ankara’s most established and best known villa settlements.'},
-  {at: 44.03, spot: 'centre',
+  {at: 44.03, spot: 'centre', spin: false,
    tr: 'Angora Evleri.',
    en: 'Angora Evleri.'},
 
@@ -79,10 +89,10 @@ export const TOUR_CUES = [
   {at: 66.03, rotate: true,
    tr: 'Yaklaşık 500 metrekare brüt, 400 metrekare net kullanım alanına sahip, asansörlü, müstakil bir villa.',
    en: 'A detached villa of about 500 m² gross and 400 m² net, with its own lift.'},
-  {at: 74.03, rooms: ['f0-site-garden', 'f0-site-pool'], frame: 'plot', rotate: false, azimuth: 2.65,
+  {at: 74.03, rooms: ['mark:plot-ring'], frame: 'plot', rotate: false, azimuth: 0, polar: 0.17,
    tr: 'Villayı 900 metrekarelik bir bahçe çevreliyor.',
    en: 'A 900 m² garden wraps around the villa.'},
-  {at: 78.03, rooms: ['f0-site-pool'], frame: null, azimuth: 3.05,
+  {at: 78.03, rooms: ['f0-site-pool'], frame: null, azimuth: 3.05, polar: null,
    tr: 'Meyve ağaçları, yeşil alanlar ve yaklaşık 50 metrekarelik özel bir havuz.',
    en: 'Fruit trees, lawns, and a private pool of about 50 m².'},
   {at: 84.03, rooms: [], frame: 'villa', rotate: true,
@@ -177,10 +187,19 @@ export const TOUR_CUES = [
    tr: 'Yetişkin çocuklar, uzun süreli misafirler ya da sessiz bir çalışma alanı arayanlar için mükemmel bir çözüm.',
    en: 'Ideal for grown-up children, long-staying guests, or anyone wanting a quiet place to work.'},
 
-  {at: 251.03, view: 'neighborhood', rooms: [], frame: 'plot', rotate: true, azimuth: 2.2,
+  // The closing sentence opens on the word "Asansör", and the lift is the one
+  // thing in it the tour has never shown. So the recording waits three
+  // seconds here while the shaft is marked on the storey it serves highest,
+  // and then rides down with the sentence - 1. kat, giris, bodrum - before
+  // going back outside for the pool and the garden it names next. The roof
+  // storey has no landing, which is why the descent starts below it.
+  {at: 251.03, view: 'f2', rooms: ['mark:lift-2'], frame: 'storey', rotate: false, hold: 3,
    tr: 'Asansör, özel havuz, 900 metrekarelik bahçe, bağımsız müştemilat ve her kuşağa ayrı yaşam alanı sunan esnek bir kurgu.',
    en: 'A lift, a private pool, a 900 m² garden, a separate annexe, and a plan flexible enough to give every generation its own space.'},
-  {at: 261.03, frame: 'villa', rotate: false, azimuth: 0.8,
+  {at: 253.6, view: 'f1', rooms: ['mark:lift-1']},
+  {at: 256.1, view: 'f0', rooms: ['mark:lift-0']},
+  {at: 258.4, view: 'neighborhood', rooms: [], frame: 'plot', rotate: true, azimuth: 2.2, polar: null},
+  {at: 261.03, frame: 'villa', rotate: true, azimuth: 0.8, link: true,
    tr: 'Çayyolu’nun kalbinde, Angora Evleri Hatırlı Sokak 10 numaradaki bu villa, 99 milyon Türk lirası fiyatıyla satışta.',
    en: 'In the heart of Çayyolu, at Angora Evleri, Hatırlı Sokak 10, this villa is for sale at 99 million Turkish lira.'},
 ];
@@ -191,12 +210,19 @@ export const TOUR_CUES = [
 // set to null or [] clears it.
 export function resolveCues(cues = TOUR_CUES) {
   const carried = {view: 'region', radius: 2000, rooms: [], frame: null,
-    azimuth: null, polar: null, rotate: false, spot: null};
+    azimuth: null, polar: null, rotate: false, spot: null, spin: false,
+    group: null, link: false};
+  let tr = '', en = '';
   return cues.map(cue => {
     for (const key of Object.keys(carried)) if (key in cue) carried[key] = cue[key];
-    return {...carried, at: cue.at, tr: cue.tr, en: cue.en};
+    // A cue with no words of its own keeps the sentence still being spoken -
+    // the lift rides down through three storeys inside one sentence.
+    tr = cue.tr ?? tr; en = cue.en ?? en;
+    // hold belongs to the moment, not to the state: it is not inherited.
+    return {...carried, at: cue.at, tr, en, hold: cue.hold ?? 0};
   });
 }
 // What must be reframed for, as opposed to merely re-subtitled.
 export const cueKey = step =>
-  [step.view, step.radius, step.rooms.join('+'), step.frame, step.azimuth, step.polar, step.rotate, step.spot].join('|');
+  [step.view, step.radius, step.rooms.join('+'), step.frame, step.azimuth, step.polar,
+   step.rotate, step.spot, step.spin, step.group, step.link].join('|');

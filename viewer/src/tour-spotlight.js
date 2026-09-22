@@ -85,7 +85,7 @@ export function createSpotlight(app) {
   const ringMaterial = new THREE.LineBasicMaterial({color: 0xffd9a0, transparent: true, opacity: .75,
     depthTest: false, depthWrite: false, toneMapped: false});
 
-  let boxes = [], centre = false, level = 0;
+  let boxes = [], centre = false, level = 0, glow = true;
   function shape(index) {
     while (pools.length <= index) {
       const pool = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), poolMaterial);
@@ -109,19 +109,22 @@ export function createSpotlight(app) {
       pool.position.set(mid.x, box.min.y + .035, mid.z);
       ring.scale.set(size.x, 1, size.z);
       ring.position.set(mid.x, box.min.y + .05, mid.z);
-      pool.visible = ring.visible = level > .02;
+      pool.visible = ring.visible = glow && level > .02;
     });
   }
   return {
     group,
     // World boxes (THREE.Box3) to keep lit; an empty list lifts the shade.
-    setBoxes(next) {boxes = next ?? []; place();},
+    // A mark over the whole plot is a region rather than a room, and four
+    // glowing rectangles the size of a garden read as stage lighting, so the
+    // pool and its ring can be left off and the shade left to do the work.
+    setBoxes(next, {glow: wantGlow = true} = {}) {boxes = next ?? []; glow = wantGlow; place();},
     setCentre(on) {centre = on;},
     // 0 lifts the shade entirely, 1 is the tour's full darkness.
     setLevel(value) {
       level = value; svg.style.opacity = String(value);
       svg.hidden = value <= .01;
-      for (let i = 0; i < pools.length; i++) pools[i].visible = rings[i].visible = value > .02 && i < boxes.length;
+      for (let i = 0; i < pools.length; i++) pools[i].visible = rings[i].visible = glow && value > .02 && i < boxes.length;
       poolMaterial.opacity = .5 * value; ringMaterial.opacity = .75 * value;
     },
     get level() {return level;},

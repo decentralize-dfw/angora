@@ -200,12 +200,23 @@ export function createRegionMap(host) {
   else el.append(info, filters);
 
   let radius = 1000;
+  // The map is north-up at rest. The narrated tour turns it slowly about
+  // the villa - its own centre - while the opening sentences place the
+  // district, because a still map for thirty-eight seconds reads as a
+  // picture rather than as a place. Everything that carries words is
+  // counter-turned so the drawing moves and the reading does not.
+  let bearing = 0;
   const layout = () => {
     const vw = el.clientWidth || innerWidth, vh = el.clientHeight || innerHeight;
     const pad = Math.min(vw, vh) < 560 ? 46 : 72;
     const s = (Math.min(vw, vh) / 2 - pad) / radius;
     const cx = vw / 2, cy = vh / 2;
-    world.style.transform = `translate(${cx}px, ${cy}px) scale(${s})`;
+    world.style.transform = `translate(${cx}px, ${cy}px) rotate(${bearing}deg) scale(${s})`;
+    // The same turn, applied to the metre coordinates the chips are placed
+    // from, so screen-space labels and the drawing under them stay agreed.
+    const cosB = Math.cos(bearing * Math.PI / 180), sinB = Math.sin(bearing * Math.PI / 180);
+    const turn = (x, y) => [x * cosB - y * sinB, x * sinB + y * cosB];
+    compass.style.setProperty('--rm-bearing', `${bearing}deg`);
     let clampRank = 0;
     // occupied label space: the villa chip and the radius panel are seeded as
     // blockers, then place chips nearest-first, nudging any collision away
@@ -234,6 +245,7 @@ export function createRegionMap(host) {
         const lim = radius * (0.94 - (clampRank++ % 3) * 0.085);
         if (d > lim) { mx = (mx / d) * lim; my = (my / d) * lim; }
       }
+      [mx, my] = turn(mx, my);
       let px = cx + mx * s, py = cy + my * s;
       if (c.el.classList.contains('rm-chip-poi')) {
         // keep landmark chips readable inside narrow viewports; a true-position
@@ -288,7 +300,9 @@ export function createRegionMap(host) {
       l.bg.setAttribute('x', l.x + 7); l.bg.setAttribute('y', l.y + 10 - fsU * 1.12);
       l.bg.setAttribute('width', wU); l.bg.setAttribute('height', hU);
       l.bg.setAttribute('rx', hU / 2);
-      const rect = { x: cx + (l.x + 7) * s - 2, y: cy + (l.y + 10 - fsU * 1.12) * s - 2, w: wU * s + 4, h: hU * s + 4 };
+      const [tx, ty] = turn(l.x + 7, l.y + 10 - fsU * 1.12);
+      const rect = { x: cx + tx * s - 2, y: cy + ty * s - 2, w: wU * s + 4, h: hU * s + 4 };
+      l.el.setAttribute('transform', bearing ? `rotate(${-bearing} ${l.x + 7} ${l.y + 10})` : '');
       const visible = rect.x > 0 && rect.y > 0 && rect.x + rect.w < vw && rect.y + rect.h < vh &&
         !hits(rect) && !kept.some((t) => rect.x < t.x + t.w && rect.x + rect.w > t.x && rect.y < t.y + t.h && rect.y + rect.h > t.y);
       l.el.setAttribute('visibility', visible ? 'visible' : 'hidden');
@@ -305,6 +319,15 @@ export function createRegionMap(host) {
     element: el,
     get radius() { return radius; },
     setRadius(r) { radius = r; layout(); },
+    // Degrees clockwise about the villa. Cheap enough to call at a few hertz:
+    // with every family filtered off there is almost nothing left to place.
+    setBearing(deg) { if (deg === bearing) return; bearing = deg; layout(); },
+    get bearing() { return bearing; },
+    // The amenity family on show, by the same one-at-a-time rule the chips
+    // follow; null puts them all away. This is what a filter press does, so a
+    // visitor who presses one afterwards finds the buttons telling the truth.
+    setGroup(g) { if (g !== activeGroup) filterButtons[g ?? activeGroup]?.click(); },
+    get group() { return activeGroup; },
     show() {
       if (!el.hidden) return;
       el.hidden = false;

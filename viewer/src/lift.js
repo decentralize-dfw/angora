@@ -17,6 +17,14 @@ export const CABIN_NODE = 'R39_lift_cabin_travel';
 export const SERVED_FLOORS = [0, 1, 2];
 export const LEAF_NODE = /^Lift_(door_stile|door_rail|door_pull|floral_textured_glass|floral_lead_stem|glass_rose_lead|stained-glass_leaf)\d*$/;
 export const HINGE_X = -1.53, HINGE_Z = -1.33;
+// The shaft's footprint in world metres: 1,272 x 1,186 m, measured off
+// build/web/full/villa.glb over its 560 "Lift..." parts - cabin, car panels
+// and the three sets of landing doors - which stack on one vertical run from
+// y 0,01 to 8,44. It is recorded rather than read at load time because the set
+// the viewer actually runs on is BATCHED: the merge keeps the geometry and
+// throws the node names away, so nothing in the live scene can be asked where
+// the lift is. lift.test.mjs re-measures the GLB against this.
+export const SHAFT = {minX: -2.656, maxX: -1.384, minZ: -1.4083, maxZ: -0.2221};
 export const CLOSED_ROTATION_Y = Math.PI / 2; // delivered pose 0 = fully open
 export const OUTWARD_OPEN_ROTATION_Y = Math.PI / 2;
 export const DOOR_SWING_S = 1.0;
