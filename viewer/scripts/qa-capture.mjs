@@ -58,8 +58,15 @@ for (const profile of profiles) {
   await mkdir(path.join(outDir, profile), {recursive: true});
   for (const camera of CAMERAS) {
     if (only && !only.has(camera.id)) continue;
+    // Two passes per camera: dpr 1 and dpr 2. At 1600x900 with dpr 1 every
+    // pixel-budget clamps to ratio 1.0, so a broken budget is invisible to
+    // the pixel gate; the @2x pass makes renderPixelRatio actually bite
+    // (legacy desktop: sqrt(5M / 1.44M) ≈ 1.86) and the numeric gate reads
+    // it back from qaReport.renderer.
+    for (const scale of [1, 2]) {
+    const suffix = scale === 1 ? '' : '@2x';
     const browser = await launchBrowser();
-    const page = await browser.newPage({viewport: VIEWPORTS[profile]});
+    const page = await browser.newPage({viewport: VIEWPORTS[profile], deviceScaleFactor: scale});
     const errors = [];
     page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
     page.on('pageerror', e => errors.push(String(e)));
@@ -86,22 +93,25 @@ for (const profile of profiles) {
       report.softwareRaster = true;   // frame numbers are NOT device numbers
       report.emulated = true;
       report.viewport = VIEWPORTS[profile];
+      report.deviceScaleFactor = scale;
       report.captureMs = Date.now() - started;
       report.consoleErrors = errors;
-      await page.screenshot({path: path.join(outDir, profile, camera.id + '.png'), timeout: 90_000});
-      await writeFile(path.join(outDir, profile, camera.id + '.json'), JSON.stringify(report, null, 2));
-      summary.runs.push({profile, camera: camera.id, ok: true,
+      await page.screenshot({path: path.join(outDir, profile, camera.id + suffix + '.png'), timeout: 120_000});
+      await writeFile(path.join(outDir, profile, camera.id + suffix + '.json'), JSON.stringify(report, null, 2));
+      summary.runs.push({profile, camera: camera.id, scale, ok: true,
         drawCalls: report.renderer.drawCalls, triangles: report.renderer.triangles,
+        pixelRatio: report.renderer.pixelRatio, drawingBuffer: report.renderer.drawingBuffer,
         textureMiB: report.memory.estimatedTextureMiB, geometryMiB: report.memory.estimatedGeometryMiB,
         fps: report.frame?.fps ?? null, errors: errors.length});
-      console.log(`${profile}/${camera.id}  calls=${report.renderer.drawCalls} tris=${report.renderer.triangles} tex=${report.memory.estimatedTextureMiB}MiB${errors.length ? '  ⚠ ' + errors.length + ' console errors' : ''}`);
+      console.log(`${profile}/${camera.id}${suffix}  calls=${report.renderer.drawCalls} tris=${report.renderer.triangles} ratio=${report.renderer.pixelRatio} buffer=${report.renderer.drawingBuffer.join('x')}${errors.length ? '  ⚠ ' + errors.length + ' console errors' : ''}`);
     } catch (error) {
-      summary.runs.push({profile, camera: camera.id, ok: false, error: String(error?.message ?? error), errors});
-      console.log(`${profile}/${camera.id}  FAILED: ${error.message}`);
-      await page.screenshot({path: path.join(outDir, profile, camera.id + '-failed.png')}).catch(() => {});
+      summary.runs.push({profile, camera: camera.id, scale, ok: false, error: String(error?.message ?? error), errors});
+      console.log(`${profile}/${camera.id}${suffix}  FAILED: ${error.message}`);
+      await page.screenshot({path: path.join(outDir, profile, camera.id + suffix + '-failed.png')}).catch(() => {});
     }
     await page.close();
     await browser.close();
+    }
   }
 }
 

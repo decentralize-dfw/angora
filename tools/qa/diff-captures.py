@@ -13,6 +13,12 @@ Verdict per frame:
 The tool never decides whether a change is GOOD - it only says where and how
 big. Screenshots include the DOM chrome, so a UI change also reads as
 'changed'; judge with the images beside the numbers.
+
+Beside the pixels, each frame's qaReport JSON is compared numerically:
+pixelRatio and drawingBuffer exactly (at 1600x900 dpr=1 every budget clamps
+to ratio 1.0, so a broken pixel budget is INVISIBLE to the pixel gate and
+only the @2x numbers can catch it), draw calls, triangles and the flag set
+exactly, memory estimates to 0.2 MiB.
 """
 import json
 import sys
@@ -22,6 +28,30 @@ import numpy as np
 from PIL import Image
 
 NOISE_SHARE = 0.00005   # 0.005% of pixels
+MIB_TOLERANCE = 0.2
+
+def numeric_mismatches(a_json, b_json):
+    try:
+        a = json.loads(a_json.read_text())
+        b = json.loads(b_json.read_text())
+    except FileNotFoundError:
+        return ['missing qaReport json']
+    problems = []
+    ar, br = a.get('renderer', {}), b.get('renderer', {})
+    for key in ('pixelRatio', 'drawingBuffer', 'drawCalls', 'triangles'):
+        if ar.get(key) != br.get(key):
+            problems.append(f"renderer.{key}: {ar.get(key)} -> {br.get(key)}")
+    if a.get('flags') != b.get('flags'):
+        problems.append(f"flags: {a.get('flags')} -> {b.get('flags')}")
+    am, bm = a.get('memory', {}), b.get('memory', {})
+    for key in ('estimatedTextureMiB', 'estimatedGeometryMiB'):
+        av, bv = am.get(key), bm.get(key)
+        if av is None or bv is None:
+            if av != bv:
+                problems.append(f"memory.{key}: {av} -> {bv}")
+        elif abs(av - bv) > MIB_TOLERANCE:
+            problems.append(f"memory.{key}: {av} -> {bv}")
+    return problems
 
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
@@ -47,6 +77,9 @@ def main():
         share = changed / delta.size
         worst = max(worst, share)
         ys, xs = np.nonzero(delta)
+        numbers = numeric_mismatches(a_png.with_suffix('.json'), b_png.with_suffix('.json'))
+        pixel_verdict = ('identical' if changed == 0
+                         else 'noise' if share <= NOISE_SHARE else 'changed')
         rows.append({
             'frame': str(rel),
             'changedPx': changed,
@@ -54,8 +87,8 @@ def main():
             'maxDelta': int(delta.max()),
             'bbox': None if changed == 0 else
                 [int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max())],
-            'verdict': 'identical' if changed == 0
-                else 'noise' if share <= NOISE_SHARE else 'changed',
+            'numericMismatches': numbers,
+            'verdict': 'numeric-mismatch' if numbers else pixel_verdict,
         })
     report = {'a': str(a_root), 'b': str(b_root), 'noiseShare': NOISE_SHARE,
               'worstShare': round(worst, 8), 'frames': rows}
@@ -63,8 +96,10 @@ def main():
     if out:
         Path(out).write_text(text)
     for row in rows:
-        print(f"{row['frame']:<28} {row['verdict']:<12} "
+        print(f"{row['frame']:<32} {row['verdict']:<16} "
               f"{row.get('changedPx', '-')} px  bbox={row.get('bbox')}")
+        for problem in row.get('numericMismatches', []):
+            print('    ', problem)
     print('worst share:', report['worstShare'])
     if any(r['verdict'] not in ('identical', 'noise') for r in rows):
         sys.exit(1)

@@ -21,12 +21,19 @@ test('Explicitly weak phones land in mobile-low', () => {
 });
 
 test('Desktop splits on memory, cores and texture size', () => {
-  assert.equal(detectTier({coarse: false, deviceMemory: 16, hardwareConcurrency: 12}), 'desktop-high');
-  assert.equal(detectTier({coarse: false, deviceMemory: 8, hardwareConcurrency: 12}), 'desktop-balanced');
+  assert.equal(detectTier({coarse: false, deviceMemory: 4, hardwareConcurrency: 12}), 'desktop-balanced');
   assert.equal(detectTier({coarse: false, hardwareConcurrency: 4}), 'desktop-balanced');
   assert.equal(detectTier({coarse: false, hardwareConcurrency: 12, maxTextureSize: 4096}), 'desktop-balanced');
   // Unknown memory on a desktop is not a downgrade signal either.
   assert.equal(detectTier({coarse: false, hardwareConcurrency: 12}), 'desktop-high');
+});
+
+// navigator.deviceMemory is capped at 8 by specification: every healthy
+// Chrome desktop - a 64 GB workstation included - reports exactly 8. Reading
+// 8 as "small" made desktop-high unreachable anywhere Chrome runs.
+test('A 64 GB machine reports deviceMemory 8 and still reaches desktop-high', () => {
+  assert.equal(detectTier({coarse: false, deviceMemory: 8, hardwareConcurrency: 24}), 'desktop-high');
+  assert.equal(detectTier({coarse: false, deviceMemory: 8, hardwareConcurrency: 12, maxSamples: 4}), 'desktop-high');
 });
 
 test('Forced and stored tiers win, garbage is ignored', () => {

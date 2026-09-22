@@ -34,7 +34,10 @@ export function detectTier({
     const lowMemory = deviceMemory !== undefined && deviceMemory <= 3;
     return (lowMemory || cores <= 4 || maxSamples < 4) ? 'mobile-low' : 'mobile-high';
   }
-  const smallMemory = deviceMemory !== undefined && deviceMemory <= 8;
+  // navigator.deviceMemory is spec-capped at 8: a 64 GB workstation reports
+  // 8, so 8 is the HIGH end of the scale, not a small machine. Only an
+  // explicit 4 or less marks a desktop as memory-constrained.
+  const smallMemory = deviceMemory !== undefined && deviceMemory <= 4;
   return (smallMemory || cores <= 4 || maxTextureSize < 8192) ? 'desktop-balanced' : 'desktop-high';
 }
 
@@ -168,6 +171,15 @@ export function effectiveQuality(tier, view, {batched = true, features = {}} = {
   }
   value.compactOutput = !mobile && !value.postProcessing;
   if (!features.atlasAnisotropyFix) value.anisotropy = mobile ? 8 : 16;
+  // Legacy drawing-buffer budget was one number per pointer class, capped at
+  // 2x - render-quality.js's own constants. The matrix's tiered budgets
+  // (desktop-balanced 3.5 M) only take effect behind their own flag; without
+  // this a desktop-balanced machine would silently render at a smaller
+  // buffer than the pipeline it must match pixel for pixel.
+  if (!features.pixelBudgetV2) {
+    value.pixelBudget = mobile ? 1_500_000 : 5_000_000;
+    value.maxPixelRatio = 2;
+  }
   return Object.freeze(value);
 }
 

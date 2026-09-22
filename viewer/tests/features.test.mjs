@@ -58,6 +58,26 @@ test('Legacy equivalence: classic (non-batched) delivery', () => {
   assert.equal(phone.fixtureShadows, false);
 });
 
+// P1: the legacy drawing buffer was one budget per pointer class (mobile
+// 1.5 M / desktop 5 M, ratio cap 2). The matrix's tiered budgets - notably
+// desktop-balanced's 3.5 M - must stay behind pixelBudgetV2, or flag surgery
+// alone would shrink a desktop-balanced machine's buffer.
+test('Pixel budget stays legacy until pixelBudgetV2 ships', () => {
+  const off = {};
+  for (const tier of ['desktop-balanced', 'desktop-high']) {
+    const q = effectiveQuality(tier, 'villa', {batched: true, features: off});
+    assert.equal(q.pixelBudget, 5_000_000, tier);
+    assert.equal(q.maxPixelRatio, 2, tier);
+  }
+  for (const tier of ['mobile-low', 'mobile-high']) {
+    const q = effectiveQuality(tier, 'villa', {batched: true, features: off});
+    assert.equal(q.pixelBudget, 1_500_000, tier);
+    assert.equal(q.maxPixelRatio, 2, tier);
+  }
+  const tiered = effectiveQuality('desktop-balanced', 'villa', {batched: true, features: {pixelBudgetV2: true}});
+  assert.equal(tiered.pixelBudget, 3_500_000);
+});
+
 test('Feature flags hand control to the matrix, mobile red lines hold', () => {
   const on = {hybridSunShadow: true, postfxV2: true, atlasAnisotropyFix: true};
   const desktop = effectiveQuality('desktop-high', 'villa', {batched: true, features: on});

@@ -14,6 +14,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   gardenSpotStrip: false,      // Task 1.6 - strip fixture loops from garden shaders
   atlasAnisotropyFix: false,   // Task 1.6 - anisotropy only where texture2D samples
   postfxV2: false,             // Task 1.1b - composer per quality matrix
+  pixelBudgetV2: false,        // matrix pixel budgets; off = legacy mobile 1.5M / desktop 5M, cap 2
   authoredMaterialsV2: false,  // Faz 3
   progressiveLoaderV2: false,  // Faz 2
   ktx2Delivery: false,         // Faz 4.1
