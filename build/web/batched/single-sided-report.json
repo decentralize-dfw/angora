@@ -2,11 +2,11 @@
   {
     "profile": "desktop",
     "part": "architecture",
-    "bytes": 5856896,
+    "bytes": 5856892,
     "flipped": [],
     "kept": [
       "architecture-plaster-0 (already single-sided)",
-      "architecture-tile-1 (already single-sided)",
+      "architecture-tile-1 (kept: roof back face papers the dormer/eaves trim sliver (H4))",
       "architecture-wood-2 (already single-sided)",
       "architecture-glass-3 (kept: BLEND)",
       "architecture-other-4 (already single-sided)",
@@ -50,7 +50,7 @@
     "flipped": [],
     "kept": [
       "architecture-plaster-0 (already single-sided)",
-      "architecture-tile-1 (already single-sided)",
+      "architecture-tile-1 (kept: roof back face papers the dormer/eaves trim sliver (H4))",
       "architecture-wood-2 (already single-sided)",
       "architecture-glass-3 (kept: BLEND)",
       "architecture-other-4 (already single-sided)",

@@ -38,7 +38,11 @@ const SKIP_REASONS = {
 // their reason.
 const PRESERVE = /foliage|leaf|leaves|needle|hedge|curtain|sheer|fabric|blind|grass/i;
 const KEEP_NAMED = new Map([
-  // 'material name' -> 'reason recorded by A/B review'
+  // gate-1.4 A/B, desktop C03: the eaves/dormer trim crosses the tile plane
+  // at a shallow angle and the tile's BACK face papered over the sliver;
+  // culling it opened white shards at the dormer junction. The back face
+  // stays until H4 closes the junction geometry.
+  ['Clay tile', 'roof back face papers the dormer/eaves trim sliver (H4)'],
 ]);
 
 const dry = process.argv.includes('--dry');
