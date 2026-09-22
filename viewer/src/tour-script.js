@@ -1,207 +1,273 @@
 // R48 | The narrated tour: the owner's voiceover, and what the viewer shows
 // while each sentence is spoken.
 //
-// The recording is a single unbroken read - 94 phrases, no pause longer than
-// 1,4 s - so the tour is driven by the audio clock rather than by a step
-// button. Every cue carries the sentence itself, which doubles as the
-// subtitle, so what is written and what is heard cannot drift apart.
+// Times are seconds into audio/angora21-tur.mp3, taken from the owner's own
+// transcript of it; the recording opens on its first word, so nothing is
+// offset. The file is the delivered 48 kHz joint-stereo 192 kbps MP3 with its
+// ID3 tags stripped and not one frame re-encoded.
 //
-// Times are seconds into audio/angora21-tur.mp3. That file is the delivered
-// recording with its 6,975 s slate ("#Angora Evleri / Villa 21 / Sanal Tur
-// Senaryosu / Yaklaşık 5 dakika") trimmed off at an MPEG frame boundary, so
-// every timestamp here is the voiceover's own minus 6,975 s.
+// Every cue carries the sentence itself, which doubles as the subtitle, so
+// what is written and what is heard cannot drift apart.
 export const TOUR_AUDIO = 'angora21-tur.mp3';
-export const TOUR_DURATION = 268.64;
-// What the slate cost, kept so a re-trim can be checked against the source.
-export const TOUR_TRIM_S = 6.975;
+export const TOUR_DURATION = 401.64;
 
 // A cue names only what CHANGES. The driver carries the rest forward, so a
 // run of sentences about one room reframes once and then simply turns over
 // its subtitles.
-//   view    'region' | 'neighborhood' | 'f0'..'f3'. There is no separate
-//           villa view: 'building' in the scale picker is the f3 cut, so an
-//           UNCUT house is the neighbourhood's section height with the camera
-//           brought in - which is what frame:'villa' does.
+//   view    'region' | 'neighborhood' | 'f0'..'f3'. There is no separate villa
+//           view: 'building' in the scale picker is the f3 cut, so an UNCUT
+//           house is the neighbourhood's section height with the camera
+//           brought in, which is what frame:'villa' does.
 //   radius  region map radius in metres (2000 | 1000 | 500)
-//   rooms   room ids from native-rooms.json to light; [] darkens nothing
+//   rooms   room ids from native-rooms.json to light, plus the tour's own
+//           'mark:' volumes; [] darkens nothing. Where a sentence names
+//           several, they light one after another across the sentence rather
+//           than all at once.
 //   frame   what the camera is for: 'villa', 'plot', 'storey' (the view's own
 //           framing, with something inside it lit), or null for the lit rooms
-//           - and for the view's own framing when nothing is lit
+//   photos  listing photograph ids for the side gallery; [] closes it
 //   group   which amenity family the Bolge map shows; null puts them away
+//   season  day of the year the daylight is set to (172 / 80 / 355)
+//   azimuth camera bearing in radians; polar its pitch
+//   rotate  the camera turns while this cue holds
 //   spin    the map turns slowly about the villa while this cue holds
 //   link    the listing link stands on screen from this cue on
-//   hold    seconds the recording waits here, for something with no words
-//   azimuth camera bearing in radians; omitted lets the framing choose
-//   polar   camera pitch in radians; omitted keeps the view's own
-//   rotate  slow orbit while this cue holds
+//
+// The turn follows one rule, kept deliberately blunt: OUTSIDE the house the
+// view is always turning - the map spins, the camera orbits - and INSIDE it
+// never does. Nothing starts and stops mid-thought.
 export const TOUR_CUES = [
-  {at: 0.71, view: 'region', radius: 2000, rooms: [], spin: true, group: null,
+  // ---------------------------------------------------------------- Bolge
+  {at: 0.0, view: 'region', radius: 2000, rooms: [], spin: true, group: null, season: 172,
    tr: 'Hoş geldiniz.',
    en: 'Welcome.'},
-  {at: 1.03,
-   tr: 'Bugün sizi Ankara’nın en prestijli konut bölgelerinden birinde özel bir villa turuna davet ediyorum.',
+  {at: 1.3,
+   tr: 'Bugün sizi Ankara’nın en prestijli konut bölgelerinden birinde, özel bir villa turuna davet ediyorum.',
    en: 'Today I invite you on a tour of a private villa in one of Ankara’s most prestigious residential districts.'},
-  {at: 8.03,
-   tr: 'Çankaya, başkentin hem idari hem de sosyal yaşamının kalbi.',
-   en: 'Çankaya is the heart of the capital’s administrative and social life alike.'},
-  {at: 14.03,
-   tr: 'Şehrin batısına, Eskişehir Yolu aksına doğru ilerledikçe ise Çankaya’nın en sakin, en yeşil ve en çok tercih edilen yaşam bölgesiyle karşılaşıyoruz.',
-   en: 'Moving west along the Eskişehir Road axis, we reach Çankaya’s calmest, greenest and most sought-after district.'},
-  // The amenity dots are drawn in metres, so at the 2 km view they are specks
-  // and a family turned on there shows nothing. The families start where the
-  // map is close enough to read them: the green as the sentence reaches "en
-  // yesil", and then one per sentence down to the address itself.
-  {at: 19.53, radius: 1000, group: 4},
-  {at: 24.03, group: null,
-   tr: 'Çayyolu.',
-   en: 'Çayyolu.'},
-  {at: 25.03, group: 5,
-   tr: 'Şehir merkezine kolay ulaşım ama şehrin gürültüsünden uzak bir yaşam.',
-   en: 'Easy reach of the city centre, and a life away from its noise.'},
-  {at: 31.03, group: 0,
-   tr: 'Çayyolu’nu yıllardır ailelerin gözdesi yapan şey tam da bu denge.',
-   en: 'That balance is exactly what has made Çayyolu a favourite with families for years.'},
-  {at: 36.03, radius: 500, group: 3,
+  {at: 8.9,
+   tr: 'Başkentin kalbi Çankaya’dan batıya, Eskişehir Yolu aksına doğru ilerliyoruz ve şehrin en sakin, en yeşil yaşam bölgesi Çayyolu’na ulaşıyoruz.',
+   en: 'From Çankaya, the heart of the capital, we move west along the Eskişehir Road axis to Çayyolu — the city’s calmest and greenest district.'},
+  {at: 14.4, radius: 1000, group: 4},
+  {at: 19.6, radius: 500, group: 3,
    tr: 'Şimdi Çayyolu’nun kalbindeyiz.',
    en: 'Now we are in the heart of Çayyolu.'},
-  {at: 39.03, group: null,
-   tr: 'Karşınızda, Ankara’nın en köklü ve en tanınmış villa yerleşimlerinden biri.',
-   en: 'Before you is one of Ankara’s most established and best known villa settlements.'},
-  {at: 44.03, spot: 'centre', spin: false,
-   tr: 'Angora Evleri.',
-   en: 'Angora Evleri.'},
+  {at: 22.2, group: null, spot: 'centre',
+   tr: 'Karşınızda, Ankara’nın en köklü ve en tanınmış villa yerleşimi: Angora Evleri.',
+   en: 'Before you is Ankara’s most established and best known villa settlement: Angora Evleri.'},
 
-  {at: 45.03, view: 'neighborhood', rotate: true,
-   tr: 'Kiremit çatılar, geniş bahçeler, olgun ağaçlar ve sakin sokaklar.',
-   en: 'Tiled roofs, generous gardens, mature trees and quiet streets.'},
-  {at: 51.03,
-   tr: 'Angora Evleri yıllardır kendine özgü yaşam dokusuyla ayrıcalıklı bir adres olmayı sürdürüyor.',
-   en: 'Angora Evleri has kept its standing as a privileged address through its own way of living.'},
-  {at: 58.03, frame: 'villa', rotate: true, azimuth: 0.95,
-   tr: 'Ve şimdi bu dokunun içindeki özel bir villaya doğru ilerliyoruz.',
-   en: 'And now we move towards one particular villa inside that fabric.'},
-  {at: 62.03, rotate: false, azimuth: 0.45,
+  // --------------------------------------------------------- the settlement
+  {at: 27.8, view: 'neighborhood', spot: null, rotate: true, frame: null, azimuth: 0.9,
+   tr: 'Angora Evleri, bir yerleşim yeri olarak baştan sona planlanmış, kendi içinde bütünlüklü bir yaşam alanı.',
+   en: 'Angora Evleri was planned from end to end as a settlement — a complete place to live in its own right.'},
+  {at: 35.7,
+   tr: 'Yüzlerce müstakil villa, sıra evler ve bloklardan oluşan bu büyük yerleşim; düşük yapı yoğunluğu, geniş bulvarları, büyük yeşil alanları, spor alanları ve bulvar boyunca uzanan yürüyüş yollarıyla tasarlandı.',
+   en: 'Hundreds of detached villas, terraces and apartment blocks, laid out at low density with wide boulevards, large greens, sports grounds and walking paths the length of the avenue.'},
+  {at: 50.6,
+   tr: 'Mimarisinde İskandinav esintileri taşıyan kiremit çatılı evler, olgun ağaçlar ve sakin sokaklar, Angora’ya kendine özgü bir karakter kazandırıyor.',
+   en: 'Tiled roofs with a Scandinavian touch, mature trees and quiet streets give Angora a character of its own.'},
+  {at: 61.1,
+   tr: 'Site, dört ayrı güvenlik girişiyle korunuyor.',
+   en: 'The estate is protected by four separate security gates.'},
+  {at: 64.0,
+   tr: 'Bu da sakinlerine huzurlu ve güvenli bir yaşam sunuyor.',
+   en: 'Which gives its residents a calm and secure life.'},
+  // Not snow - the viewer has none - but the light of 21 December, which is
+  // the winter this sentence is about, with its long low shadows.
+  {at: 68.3, season: 355,
+   tr: 'Kış aylarında karla kaplandığında ise Angora Evleri adeta bir masal kasabasına dönüşüyor.',
+   en: 'Under winter snow, Angora Evleri turns into something out of a storybook.'},
+  {at: 74.4, season: 172,
+   tr: 'Angora’nın bir diğer ayrıcalığı da çevresi.',
+   en: 'Angora’s other advantage is what surrounds it.'},
+
+  // ------------------------------------------------------- the surroundings
+  {at: 78.1, view: 'region', radius: 2000, spin: true, group: null,
+   tr: 'Site, Beysukent ve Beytepe ormanlarına komşu.',
+   en: 'The estate borders the Beysukent and Beytepe woods.'},
+  {at: 81.4,
+   tr: 'Yani doğanın hemen yanı başında bir yaşam.',
+   en: 'A life right beside open country.'},
+  {at: 84.7,
+   tr: 'Beytepe ve Beysukent yalnızca birkaç dakika uzaklıkta.',
+   en: 'Beytepe and Beysukent are minutes away.'},
+  {at: 89.0, group: 0,
+   tr: 'Hacettepe Üniversitesi Beytepe Kampüsü, Bilkent Üniversitesi ve Orta Doğu Teknik Üniversitesi kısa mesafede.',
+   en: 'Hacettepe’s Beytepe campus, Bilkent University and METU are all a short distance away.'},
+  {at: 97.1, group: 3,
+   tr: 'Eskişehir Yolu üzerinden ise şehir merkezine, alışveriş merkezlerine, okullara ve hastanelere kolayca ulaşılıyor.',
+   en: 'The Eskişehir road puts the city centre, the shopping centres, schools and hospitals within easy reach.'},
+  {at: 101.6, group: 1},
+  {at: 104.7, group: null,
+   tr: 'Doğayla iç içe, güvenli ve prestijli bir yaşam…',
+   en: 'A secure, prestigious life, close to nature…'},
+
+  // --------------------------------------------------------------- the villa
+  {at: 108.3, view: 'neighborhood', spin: false, rotate: true, azimuth: 0.95, photos: [28],
+   tr: 'Ve şimdi Angora Evleri’nin içindeki özel bir villaya doğru ilerliyoruz.',
+   en: 'And now we move towards one particular villa inside Angora Evleri.'},
+  {at: 113.0, frame: 'villa', azimuth: 0.45, photos: [38],
    tr: 'Hatırlı Sokak, numara 10.',
    en: 'Hatırlı Sokak, number 10.'},
-  {at: 64.03, azimuth: 0.8,
+  {at: 115.2, azimuth: 0.8,
    tr: 'Karşınızda Villa 21.',
    en: 'This is Villa 21.'},
-  {at: 66.03, rotate: true,
+  {at: 117.9, photos: [28, 55],
    tr: 'Yaklaşık 500 metrekare brüt, 400 metrekare net kullanım alanına sahip, asansörlü, müstakil bir villa.',
    en: 'A detached villa of about 500 m² gross and 400 m² net, with its own lift.'},
-  {at: 74.03, rooms: ['mark:plot-ring'], frame: 'plot', rotate: false, azimuth: 0, polar: 0.17,
+  // The lift gets its sentence here through the gallery rather than through a
+  // camera move: three storey changes inside four seconds would be a lurch,
+  // and the owner's own frames of the car say it better.
+  {at: 126.8, photos: [48, 49],
+   tr: 'Asansör, katlar arasında rahat ve konforlu bir bağlantı sunuyor.',
+   en: 'The lift connects the floors comfortably.'},
+  {at: 131.6, rooms: ['mark:plot-ring'], frame: 'plot', polar: 0.17, azimuth: 0, photos: [25, 50],
    tr: 'Villayı 900 metrekarelik bir bahçe çevreliyor.',
    en: 'A 900 m² garden wraps around the villa.'},
-  {at: 78.03, rooms: ['f0-site-pool'], frame: null, azimuth: 3.05, polar: null,
+  {at: 135.4, rooms: ['f0-site-pool'], frame: null, polar: null, azimuth: 3.05, photos: [53, 54, 24],
    tr: 'Meyve ağaçları, yeşil alanlar ve yaklaşık 50 metrekarelik özel bir havuz.',
    en: 'Fruit trees, lawns, and a private pool of about 50 m².'},
-  {at: 84.03, rooms: [], frame: 'villa', rotate: true,
+  {at: 140.6, rooms: [], frame: 'villa', azimuth: 1.9, photos: [],
    tr: '5 yatak odası, 4 yaşam alanı, 3 banyo, bağımsız girişli bir müştemilat ve 3 araçlık otopark.',
    en: 'Five bedrooms, four living spaces, three bathrooms, a separately entered annexe and parking for three.'},
-  {at: 91.03, rotate: false, azimuth: 0.55,
+  {at: 149.2, azimuth: 0.55,
    tr: 'Evin kurgusunda önemli bir detay var.',
    en: 'There is one important thing about how this house is set out.'},
-  {at: 94.03, rooms: ['f1-Z01'],
+  {at: 152.1, rooms: ['f1-Z01'], photos: [38, 37],
    tr: 'Sokaktan giriş, bodrumun bir üst seviyesindeki giriş katından yapılıyor.',
    en: 'You enter from the street on the ground floor, one level above the basement.'},
-  {at: 99.03, rooms: ['f0-B06'], azimuth: 2.85,
+  {at: 157.1, rooms: ['f0-B06'], azimuth: 2.85, photos: [25, 51],
    tr: 'Arazinin eğimi sayesinde bodrum kat ise doğrudan bahçe ve havuz seviyesine açılıyor.',
    en: 'The slope of the site lets the basement open straight onto the garden and pool.'},
 
-  {at: 105.03, view: 'f0', rooms: [], frame: null, rotate: false,
+  // ------------------------------------------------------------- the basement
+  {at: 163.4, view: 'f0', rooms: [], rotate: false, frame: null, photos: [],
    tr: 'Turumuza da bu kattan, en alttan başlıyoruz.',
    en: 'So our tour begins there, at the lowest level.'},
-  {at: 108.03,
-   tr: 'Bodrum kattayız.',
-   en: 'We are on the basement floor.'},
-  {at: 110.03,
-   tr: 'Ama burası alışık olduğunuz bir bodrum değil.',
-   en: 'But this is not the basement you are picturing.'},
-  {at: 113.03, rooms: ['f0-B06'],
-   tr: 'Bahçeye ve havuza doğrudan açılan, gün ışığı alan, bağımsız girişli tam bir müştemilat.',
-   en: 'A full annexe with its own entrance, daylight, and doors straight onto the garden and pool.'},
-  {at: 119.03, rooms: ['f0-B06', 'f0-B05'],
-   tr: 'Yaklaşık 54 metrekarelik geniş yaşam alanı, açık mutfağıyla birlikte ferah ve kullanışlı bir bütün oluşturuyor.',
-   en: 'About 54 m² of living space, open to the kitchen, reads as one airy, workable whole.'},
-  {at: 127.03, rooms: ['f0-site-pool'], azimuth: 3.05,
-   tr: 'Havuz başında geçen yaz günleri, bahçede açık hava yemekleri, kalabalık davetler… Hepsi için ideal.',
-   en: 'Summer days by the pool, meals outdoors, large gatherings — it suits all of them.'},
-  {at: 133.03, rooms: ['f0-B02', 'f0-WC'],
-   tr: 'Ana yaşam alanının yanı sıra yaklaşık 27 metrekarelik ayrı bir oda ve müştemilatın kendi banyosu ve WC’si bulunuyor.',
-   en: 'Beside the main living space there is a separate room of about 27 m², plus the annexe’s own bathroom and WC.'},
-  {at: 143.03, rooms: [],
-   tr: 'Yani bu kat kendi içinde eksiksiz bir yaşam birimi.',
-   en: 'This floor is a complete dwelling in itself.'},
-  {at: 147.03,
-   tr: 'Misafirler, aile büyükleri ya da çalışanlar için bağımsız ve konforlu bir alan.',
-   en: 'An independent, comfortable space for guests, grandparents or staff.'},
+  {at: 166.6,
+   tr: 'Bodrum kattayız. Ama burası alışık olduğunuz bir bodrum değil.',
+   en: 'We are in the basement. But this is not the basement you are picturing.'},
+  {at: 170.6, rooms: ['f0-B06'], photos: [2, 3, 5],
+   tr: 'Bahçeye ve havuza doğrudan açılan, gün ışığı alan ferah bir yaşam katı.',
+   en: 'An airy living floor with daylight, opening straight onto the garden and pool.'},
+  {at: 175.6, rooms: ['f0-B06', 'f0-B05'], photos: [1, 2],
+   tr: 'Yaklaşık 54 metrekarelik geniş yaşam alanı, açık mutfağıyla birlikte kullanışlı bir bütün oluşturuyor.',
+   en: 'About 54 m² of living space, open to the kitchen, makes one workable whole.'},
+  {at: 182.7, rooms: ['f0-site-pool'], photos: [53, 54, 51],
+   tr: 'Havuz başında geçen yaz günleri, barbekülü bahçede açık hava yemekleri, kalabalık davetler…',
+   en: 'Summer days by the pool, meals outdoors by the barbecue, large gatherings…'},
+  {at: 188.7,
+   tr: 'Hepsi için ideal.',
+   en: 'It suits all of them.'},
+  {at: 189.9, rooms: ['f0-B02'], photos: [],
+   tr: 'Bu katta ayrıca yaklaşık 27 metrekarelik, bağımsız girişli bir müştemilat bulunuyor.',
+   en: 'This floor also holds a separately entered annexe of about 27 m².'},
+  {at: 196.8, rooms: ['f0-B02', 'f0-WC'], photos: [45, 46, 47],
+   tr: 'Kendi ayrı odası, banyosu ve tuvaleti olan bu bölüm, çalışanlar için ya da ihtiyaca göre farklı amaçlarla kullanılabilecek, evin ana yaşamından ayrı ve konforlu bir alan sunuyor.',
+   en: 'With its own room, bathroom and WC, it is a comfortable space apart from the main house — for staff, or for whatever else is needed.'},
 
-  {at: 153.03, view: 'f1', rooms: [],
+  // --------------------------------------------------------- the ground floor
+  {at: 208.6, view: 'f1', rooms: [], photos: [],
    tr: 'Şimdi bir üst kata, sokak seviyesindeki giriş katına çıkıyoruz.',
    en: 'Now we go up a level, to the ground floor at street height.'},
-  {at: 157.03, rooms: ['f1-Z01', 'f1-Z02'],
-   tr: 'Giriş holünden geçip yaklaşık 12 metrekarelik antreye adım atıyoruz.',
-   en: 'Through the entrance hall we step into a hallway of about 12 m².'},
-  {at: 162.03,
+  {at: 213.6, rooms: ['f1-Z01', 'f1-Z02'], photos: [41, 40],
+   tr: 'Girişten geçip yaklaşık 12 metrekarelik antreye adım atıyoruz.',
+   en: 'Through the entrance we step into a hallway of about 12 m².'},
+  {at: 217.8,
    tr: 'Buradan evin ana yaşam alanlarına açılıyoruz.',
    en: 'From here the house opens into its main living spaces.'},
-  {at: 165.03, rooms: ['f1-Z06', 'f1-Z05'],
+  {at: 221.0, rooms: ['f1-Z06', 'f1-Z05'], photos: [4, 20, 23],
    tr: 'Yaklaşık 53 metrekarelik salon ve yemek alanı, evin kalbi.',
    en: 'The living and dining space, about 53 m², is the heart of the house.'},
-  {at: 170.03, rooms: ['f1-Z06'], azimuth: 2.9,
+  {at: 225.2, rooms: ['f1-Z06'], photos: [4, 23],
    tr: 'Geniş pencerelerden gün ışığı içeri doluyor ve havuza bakan balkonu, bahçe manzarasını salonun bir parçası hâline getiriyor.',
    en: 'Daylight pours through the wide windows, and the pool-facing balcony makes the garden part of the room.'},
-  {at: 178.03, rooms: ['f1-Z04'],
+  {at: 234.2, rooms: ['f1-Z04'], photos: [21, 22],
    tr: 'Yaklaşık 26 metrekarelik kapalı mutfak, kahvaltı köşesine yer verecek kadar geniş.',
    en: 'The enclosed kitchen, about 26 m², has room for a breakfast corner.'},
-  {at: 183.03, rooms: ['f1-Z03', 'f1-Z08', 'f1-Z07'],
-   tr: 'Katta ayrıca misafir WC’si, tesisat odası ve evin içinden doğrudan ulaşılan yaklaşık 21 metrekarelik kapalı garaj bulunuyor.',
+  {at: 240.0, rooms: ['f1-Z03', 'f1-Z08', 'f1-Z07'], photos: [39, 43, 44],
+   tr: 'Katta ayrıca bir misafir tuvaleti, tesisat odası ve evin içinden doğrudan ulaşılan, yaklaşık 21 metrekarelik kapalı garaj bulunuyor.',
    en: 'The floor also holds a guest WC, a plant room, and a 21 m² garage reached from inside the house.'},
 
-  {at: 194.03, view: 'f2', rooms: [],
+  // ----------------------------------------------------------- the first floor
+  // The lift, quickly: it is marked on the floor we leave and on the one we
+  // arrive at, inside the sentence that names it, and the tour does not stop.
+  {at: 249.2, rooms: ['mark:lift-1'], frame: 'storey', photos: [42],
    tr: 'Asansörle ya da ferforje korkuluklu merdivenden birinci kata çıkıyoruz.',
    en: 'By lift, or up the wrought-iron staircase, we reach the first floor.'},
-  {at: 198.03,
+  {at: 251.4, view: 'f2', rooms: ['mark:lift-2'], photos: [18, 34]},
+  {at: 253.5, rooms: [], frame: null, photos: [35, 34],
    tr: 'Bu kat tamamen gece yaşamına ayrılmış.',
    en: 'This floor is given over entirely to the night.'},
-  {at: 201.03, rooms: ['f2-102', 'f2-103', 'f2-104'],
-   tr: 'Yaklaşık 22 metrekarelik ebeveyn yatak odası, kendi giyinme odası ve yaklaşık 8,5 metrekarelik ebeveyn banyosuyla gerçek bir süit.',
+  {at: 257.1, rooms: ['f2-102', 'f2-103', 'f2-104'], photos: [19, 31, 16],
+   tr: 'Yaklaşık 22 metrekarelik ebeveyn yatak odası, kendi giyinme odası ve yaklaşık sekiz buçuk metrekarelik ebeveyn banyosuyla gerçek bir süit.',
    en: 'A 22 m² principal bedroom with its own dressing room and an 8.5 m² en-suite — a true suite.'},
-  {at: 212.03, rooms: ['f2-110'], azimuth: 2.9,
+  {at: 266.6, rooms: ['f2-110'], azimuth: 2.95, photos: [32, 31],
    tr: 'Ve kendi balkonuna açılıyor.',
    en: 'And it opens onto its own balcony.'},
-  {at: 214.03, rooms: ['f2-106', 'f2-107', 'f2-108', 'f2-105'],
-   tr: 'Katta yaklaşık 13 ve 12 metrekarelik iki yatak odası, ortak banyo ve yaklaşık 15 metrekarelik bir oturma alanı yer alıyor.',
+  {at: 269.2, rooms: ['f2-106', 'f2-107', 'f2-108', 'f2-105'], azimuth: null, photos: [13, 30, 11],
+   tr: 'Katta ayrıca yaklaşık 13 ve 12 metrekarelik iki yatak odası, ortak banyo ve yaklaşık 15 metrekarelik bir oturma alanı yer alıyor.',
    en: 'The floor also has bedrooms of about 13 and 12 m², a shared bathroom, and a 15 m² sitting area.'},
-  {at: 223.03, rooms: ['f2-109'], azimuth: 0.2,
+  // The corner balcony is the OTHER one: 110 hangs over the pool on the garden
+  // side, 109 sits on the street corner, so they are looked at from opposite
+  // bearings and cannot be taken for the same balcony.
+  {at: 278.7, rooms: ['f2-109'], azimuth: 0.15, photos: [17, 33],
    tr: 'Geniş köşe balkonu ise sabah kahvesi için en keyifli nokta olmaya aday.',
    en: 'The wide corner balcony is the pick of the house for morning coffee.'},
 
-  {at: 228.03, view: 'f3', rooms: [],
+  // ------------------------------------------------------------ the roof floor
+  {at: 284.1, view: 'f3', rooms: [], azimuth: null, photos: [29],
    tr: 'Merdivenle son kata, çatı katına çıkıyoruz.',
    en: 'The stairs take us to the top floor, under the roof.'},
-  {at: 232.03, rooms: ['f3-C05', 'f3-C04', 'f3-C02', 'f3-C03'],
-   tr: 'Yaklaşık 24 metrekarelik oturma alanı, yaklaşık 20 ve 10,5 metrekarelik iki yatak odası, banyo ve mini mutfağıyla bu kat kendi içinde bağımsız bir yaşam sunuyor.',
+  {at: 287.3, rooms: ['f3-C05', 'f3-C04', 'f3-C02', 'f3-C03'], photos: [9, 14, 15],
+   tr: 'Yaklaşık 24 metrekarelik oturma alanı, yaklaşık 20 ve 10,5 metrekarelik iki yatak odası, banyo ve mini mutfağıyla bu kat, kendi içinde bağımsız bir yaşam sunuyor.',
    en: 'A 24 m² sitting area, bedrooms of about 20 and 10.5 m², a bathroom and a kitchenette make this floor a home of its own.'},
-  {at: 244.03, rooms: [],
+  {at: 299.0, rooms: [], photos: [10, 6],
    tr: 'Yetişkin çocuklar, uzun süreli misafirler ya da sessiz bir çalışma alanı arayanlar için mükemmel bir çözüm.',
    en: 'Ideal for grown-up children, long-staying guests, or anyone wanting a quiet place to work.'},
 
-  // The closing sentence opens on the word "Asansör", and the lift is the one
-  // thing in it the tour has never shown. So the recording waits three
-  // seconds here while the shaft is marked on the storey it serves highest,
-  // and then rides down with the sentence - 1. kat, giris, bodrum - before
-  // going back outside for the pool and the garden it names next. The roof
-  // storey has no landing, which is why the descent starts below it.
-  {at: 251.03, view: 'f2', rooms: ['mark:lift-2'], frame: 'storey', rotate: false, hold: 3,
-   tr: 'Asansör, özel havuz, 900 metrekarelik bahçe, bağımsız müştemilat ve her kuşağa ayrı yaşam alanı sunan esnek bir kurgu.',
-   en: 'A lift, a private pool, a 900 m² garden, a separate annexe, and a plan flexible enough to give every generation its own space.'},
-  {at: 253.6, view: 'f1', rooms: ['mark:lift-1']},
-  {at: 256.1, view: 'f0', rooms: ['mark:lift-0']},
-  {at: 258.4, view: 'neighborhood', rooms: [], frame: 'plot', rotate: true, azimuth: 2.2, polar: null},
-  {at: 261.03, frame: 'villa', rotate: true, azimuth: 0.8, link: true,
+  // ---------------------------------------------------------------- materials
+  {at: 305.6, photos: [8, 14],
+   tr: 'Evin genelinde kullanılan malzemeler de bu sıcak ve klasik atmosferi tamamlıyor.',
+   en: 'The materials used throughout complete this warm, classical atmosphere.'},
+  {at: 311.5, view: 'f2', rooms: ['f2-102', 'f2-105'], photos: [19, 33, 13],
+   tr: 'Yaşam alanlarında ve yatak odalarında, yüksek parlaklıkta cilalı, maun tonlarında ahşap parke kullanılmış.',
+   en: 'The living spaces and bedrooms are laid with high-gloss parquet in mahogany tones.'},
+  {at: 318.4, rooms: [], photos: [30, 12],
+   tr: 'Derin kırmızı kahverengi rengi ve belirgin damar yapısıyla bu parke, mekânlara hem sıcaklık hem de zamansız bir şıklık katıyor.',
+   en: 'Its deep red-brown colour and pronounced grain give the rooms both warmth and a timeless elegance.'},
+  {at: 327.9, view: 'f1', rooms: ['f1-Z04', 'f1-Z02', 'f1-Z07'], photos: [21, 40, 43],
+   tr: 'Mutfaklarda, bodrum katta, garajda ve antrede ise bej ve toprak tonlarında, doğal taş görünümlü seramik karolar tercih edilmiş.',
+   en: 'The kitchens, basement, garage and hallway are tiled in beige and earth tones, in a natural stone finish.'},
+  {at: 336.6, rooms: [], photos: [44, 22],
+   tr: 'Neme dayanıklı ve kolay temizlenen bu zemin, günlük kullanımın yoğun olduğu alanlarda pratiklik sağlıyor.',
+   en: 'Moisture-resistant and easy to clean, it is the practical choice where daily use is heaviest.'},
+
+  // ------------------------------------------------------------------ closing
+  {at: 343.7, view: 'neighborhood', rooms: ['mark:plot-ring'], frame: 'plot', rotate: true,
+   polar: 0.17, azimuth: 0, photos: [24, 26, 55],
+   tr: 'İlk üç katı birbirine bağlayan asansör, 10 metreye 5 metre boyutunda kendine ait deposu olan özel havuz, 900 metrekarelik çift kotlu bahçe, bağımsız girişli müştemilat ve her kuşağa ayrı yaşam alanı sunan esnek bir kurgu.',
+   en: 'A lift joining the first three floors, a private pool of 10 by 5 metres with its own tank, a 900 m² garden on two levels, a separately entered annexe, and a plan flexible enough to give every generation its own space.'},
+  {at: 359.8, rooms: [], frame: 'plot', polar: 0.86, azimuth: 2.4, photos: [25, 50, 36],
+   tr: 'Bahçenin çevresindeki uzun ağaçlar ise tam bir mahremiyet garantilemektedir.',
+   en: 'The tall trees around the garden make it completely private.'},
+  {at: 364.8, frame: 'villa', polar: null, azimuth: 0.8, link: true, photos: [],
    tr: 'Çayyolu’nun kalbinde, Angora Evleri Hatırlı Sokak 10 numaradaki bu villa, 99 milyon Türk lirası fiyatıyla satışta.',
    en: 'In the heart of Çayyolu, at Angora Evleri, Hatırlı Sokak 10, this villa is for sale at 99 million Turkish lira.'},
+  {at: 373.5,
+   tr: 'Ev krediye uygun, boş ve hemen teslime hazır.',
+   en: 'It is mortgageable, empty, and ready for immediate handover.'},
+  {at: 377.3,
+   tr: 'Bu emlak satış arayüzü, Lüksemburg merkezli MERGVS tarafından geliştirilmiştir.',
+   en: 'This property interface was built by MERGVS, based in Luxembourg.'},
+  {at: 382.5,
+   tr: 'Evi yerinde görmek ve satın alma süreciyle ilgili detaylı bilgi almak için ilan linkine tıklayarak RE/MAX satış temsilcisiyle iletişime geçebilirsiniz.',
+   en: 'To see the house in person and ask about the purchase, follow the listing link to the RE/MAX agent.'},
+  {at: 391.4,
+   tr: 'Bu güzel aile evinin alıcısına şimdiden bol şans ve mutluluk getirmesini dileriz.',
+   en: 'We wish this fine family home every happiness for whoever buys it.'},
+  {at: 398.3,
+   tr: 'Bizi dinlediğiniz için teşekkür ederiz.',
+   en: 'Thank you for listening.'},
 ];
 
 // The state a cue leaves behind, so the driver can tell a reframe from a
@@ -211,18 +277,20 @@ export const TOUR_CUES = [
 export function resolveCues(cues = TOUR_CUES) {
   const carried = {view: 'region', radius: 2000, rooms: [], frame: null,
     azimuth: null, polar: null, rotate: false, spot: null, spin: false,
-    group: null, link: false};
+    group: null, link: false, photos: [], season: 172};
   let tr = '', en = '';
-  return cues.map(cue => {
+  return cues.map((cue, i) => {
     for (const key of Object.keys(carried)) if (key in cue) carried[key] = cue[key];
     // A cue with no words of its own keeps the sentence still being spoken -
-    // the lift rides down through three storeys inside one sentence.
+    // the lift is marked on two storeys inside one sentence.
     tr = cue.tr ?? tr; en = cue.en ?? en;
-    // hold belongs to the moment, not to the state: it is not inherited.
-    return {...carried, at: cue.at, tr, en, hold: cue.hold ?? 0};
+    // How long this cue holds, which is how the rooms it names are spread.
+    const until = cues[i + 1]?.at ?? TOUR_DURATION;
+    return {...carried, at: cue.at, tr, en, span: Math.max(0, until - cue.at)};
   });
 }
 // What must be reframed for, as opposed to merely re-subtitled.
 export const cueKey = step =>
   [step.view, step.radius, step.rooms.join('+'), step.frame, step.azimuth, step.polar,
-   step.rotate, step.spot, step.spin, step.group, step.link].join('|');
+   step.rotate, step.spot, step.spin, step.group, step.link, step.season,
+   step.photos.join('+')].join('|');

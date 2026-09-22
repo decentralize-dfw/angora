@@ -530,6 +530,22 @@ h1 strong{font-weight:700}
   -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid rgba(255,255,255,.12);
   box-shadow:0 10px 30px rgba(6,12,10,.38);transition:opacity 260ms ease}
 .tour-caption:empty{display:none}
+/* The owner's own frames of the room being named. They stand beside the
+   scene rather than over it: the spotlight has already darkened everything
+   the sentence is not about, and that is where the eye should still go. */
+.tour-gallery{position:absolute;z-index:39;left:22px;top:50%;transform:translateY(-50%);
+  display:grid;gap:10px;width:min(250px,25vw);pointer-events:none}
+.tour-gallery[hidden]{display:none}
+.tour-gallery figure{margin:0;border-radius:14px;overflow:hidden;background:rgba(10,16,14,.74);
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
+  border:1px solid rgba(255,255,255,.12);box-shadow:0 10px 30px rgba(6,12,10,.4);
+  animation:tour-photo-in 460ms cubic-bezier(.22,.8,.2,1) both}
+.tour-gallery figure:nth-child(2){animation-delay:110ms}
+.tour-gallery figure:nth-child(3){animation-delay:220ms}
+.tour-gallery img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#1b2320}
+.tour-gallery figcaption{padding:6px 11px 8px;font-size:11px;line-height:1.35;color:#dee6e1}
+@keyframes tour-photo-in{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.tour-gallery figure{animation:none}}
 /* The way to the listing, raised by the sentence that names the price. It
    is the one thing in the tour that leads anywhere, so it is the one thing
    drawn in ink rather than in the subtitle's glass. */
@@ -578,6 +594,11 @@ h1 strong{font-weight:700}
   .tour-hud{width:calc(100vw - 20px);gap:8px;bottom:max(14px,calc(env(safe-area-inset-bottom) + 10px))}
   .tour-caption{font-size:13.5px;line-height:1.45;padding:9px 14px;border-radius:15px}
   .tour-listing{font-size:12px;padding:0 14px;min-height:36px}
+  /* A phone has no side, so the frames sit under the bar as one row. */
+  .tour-gallery{left:10px;right:10px;top:max(58px,calc(env(safe-area-inset-top) + 50px));
+    bottom:auto;transform:none;width:auto;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px}
+  .tour-gallery img{aspect-ratio:1/1}
+  .tour-gallery figcaption{display:none}
   .tour-transport{gap:7px;padding:5px 7px 5px 5px}
   .tour-track{width:min(150px,32vw)}
   .tour-clock{display:none}

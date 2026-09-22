@@ -27,6 +27,7 @@ import {createSpotlight} from './tour-spotlight.js';
 import {TOUR_AUDIO} from './tour-script.js';
 import {roomBox,clampToFloor} from './tour-rooms.js';
 import {createPhotoPins,createPhotoViewer} from './photo-gallery.js';
+import {PHOTO_POINTS,photoCaption} from './photo-points.js';
 import {renderPropertyInfo,renderFloorInfo} from './property-info.js';
 import {areaLabel} from './annotations.js';
 import { configureCameraControls } from './camera.js';
@@ -698,6 +699,10 @@ let guidedTour=null,spotlight=null,tourShade=0,tourShadeTarget=0,tourShadeTime=n
 // scene, so turning it must not ask the renderer for forty megabytes of frame.
 const REGION_SPIN_DEG=0.75;
 let tourSpinTimer=null,tourBearing=0;
+// The side gallery's current frames, and the timers that light a sentence's
+// rooms one after another. Both are kept so a language switch can redraw the
+// captions and a cue change can cancel a reveal still in flight.
+let tourPhotos=[],tourReveal=[],tourSeasonBefore=null;
 // The buyer's room menu: drawing names in the viewer's language, internal
 // codes ('Z06') demoted to tooltips, twins told apart by code only.
 function fillRoomMenu(){
@@ -756,7 +761,7 @@ function refreshChrome(){
     if(open){regionMap=createRegionMap($('#app'));regionMap.show();}
   }
   hotspots?.reset();
-  refreshTourLabels();guidedTour?.refresh();
+  refreshTourLabels();setTourPhotos(tourPhotos);guidedTour?.refresh();
   invalidate();
 }
 // \u00a77: the owner's voiceover, and the viewer keeping up with it.
@@ -826,6 +831,48 @@ function tourBoxes(ids){
   }
   return boxes;
 }
+// The owner's own frames of whatever the sentence is naming. Three at most:
+// beyond that they stop being a glance and start being a contact sheet. Two
+// on a phone - the row is narrower, and these are half-megabyte listing
+// photographs going over whatever connection the visitor has.
+function setTourPhotos(ids){
+  const el=$('#tour-gallery');if(!el)return;
+  tourPhotos=ids??[];
+  const limit=matchMedia('(max-width:720px)').matches?2:3;
+  const cards=tourPhotos.slice(0,limit).map(id=>{
+    const point=PHOTO_POINTS.find(entry=>entry.id===id);if(!point)return null;
+    const figure=document.createElement('figure');
+    const image=document.createElement('img');
+    image.src=new URL(point.file,photoRoot).href;
+    image.alt='';image.loading='lazy';image.decoding='async';
+    const caption=document.createElement('figcaption');
+    caption.textContent=photoCaption(point,currentLang());
+    figure.append(image,caption);return figure;
+  }).filter(Boolean);
+  el.replaceChildren(...cards);
+  el.hidden=!cards.length;
+}
+// "aynı anda üçünü de açma": a sentence that names three rooms lights them in
+// the order it names them, spread across the words rather than thrown on at
+// once. The camera still frames all of them from the start, so the view does
+// not creep while they arrive.
+const REVEAL_MAX_S=2.4;
+function clearTourReveal(){for(const id of tourReveal)clearTimeout(id);tourReveal=[];}
+function revealBoxes(boxes,glow,span){
+  clearTourReveal();
+  if(boxes.length<2||span<1.6){spotlight?.setBoxes(boxes,{glow});return;}
+  const gap=Math.min(REVEAL_MAX_S,span/(boxes.length+0.6));
+  spotlight?.setBoxes(boxes.slice(0,1),{glow});
+  for(let i=1;i<boxes.length;i++)
+    tourReveal.push(setTimeout(()=>{spotlight?.setBoxes(boxes.slice(0,i+1),{glow});invalidate();},gap*i*1000));
+}
+// The daylight the tour asks for; the visitor's own setting is put back when
+// it ends, so a tour cannot quietly leave the house in December.
+function setTourSeason(day){
+  const select=$('#daylight-season');if(!select||String(day)===select.value)return;
+  tourSeasonBefore??=select.value;
+  select.value=String(day);$('#daylight-hour').oninput();
+}
 function setTourSpin(on){
   if(on===Boolean(tourSpinTimer))return;
   if(!on){clearInterval(tourSpinTimer);tourSpinTimer=null;return;}
@@ -856,6 +903,8 @@ async function applyTourStep(step){
   if(walk?.active)exitWalk(false);
   photoViewer?.hide();
   $('#tour-listing').hidden=!step.link;
+  setTourPhotos(step.photos);
+  setTourSeason(step.season);
   // The B\u00f6lge scale is a map layer, so its cues move its radius rather than
   // a camera, and the only thing to light is the address at its centre.
   if(step.view==='region'){
@@ -869,6 +918,7 @@ async function applyTourStep(step){
     // "kolay ulasim", the schools under "ailelerin gozdesi".
     regionMap.setGroup(step.group);
     setTourSpin(step.spin);
+    clearTourReveal();
     spotlight?.setBoxes([]);spotlight?.setCentre(step.spot==='centre');
     tourShadeTarget=step.spot==='centre'?1:0;
     setAutoRotate(false);invalidate();return;
@@ -877,7 +927,7 @@ async function applyTourStep(step){
   spotlight?.setCentre(false);
   if(selected!==step.view)await selectView(step.view);
   const boxes=tourBoxes(step.rooms);
-  spotlight?.setBoxes(boxes,{glow:!step.rooms.includes('mark:plot-ring')});
+  revealBoxes(boxes,!step.rooms.includes('mark:plot-ring'),step.span);
   tourShadeTarget=boxes.length?1:0;
   // What the camera is for. A cue about the plot frames the villa WITH what
   // is lit - the garden reads as wrapping the house only if the house is in
@@ -937,6 +987,8 @@ function endTour(openInfo){
   guidedTour?.stop();
   $('#tour-bar').hidden=true;$('#app').dataset.tour='false';
   $('#tour-listing').hidden=true;
+  clearTourReveal();setTourPhotos([]);
+  if(tourSeasonBefore!==null){$('#daylight-season').value=tourSeasonBefore;$('#daylight-hour').oninput();tourSeasonBefore=null;}
   restRegionMap();
   tourCaption(null);
   spotlight?.setBoxes([]);spotlight?.setCentre(false);

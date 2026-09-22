@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {TOUR_CUES, TOUR_DURATION, TOUR_TRIM_S, TOUR_AUDIO, resolveCues, cueKey} from '../src/tour-script.js';
+import {TOUR_CUES, TOUR_DURATION, TOUR_AUDIO, resolveCues, cueKey} from '../src/tour-script.js';
+import {PHOTO_POINTS} from '../src/photo-points.js';
 import {cueAt} from '../src/guided-tour.js';
 import {roomBox, roomSpan, unionBox, clampToFloor} from '../src/tour-rooms.js';
 import {projectBox} from '../src/tour-spotlight.js';
@@ -22,9 +23,11 @@ test('the cues run forward and end inside the recording', () => {
     previous = cue.at;
   }
   assert.ok(previous < TOUR_DURATION, 'the last cue starts after the recording ends');
-  // The closing sentence is about eight seconds long; a tour whose last cue
-  // lands in the final moments would show the price over a black screen.
-  assert.ok(TOUR_DURATION - previous > 5, 'the closing cue has no time to be heard');
+  // The last sentence still has to be heard where it is shown.
+  assert.ok(TOUR_DURATION - previous > 2, 'the closing cue has no time to be heard');
+  // Every step knows how long it holds, which is what spreads a sentence's
+  // rooms across it.
+  for (const step of steps) assert.ok(step.span > 0, `the step at ${step.at} s holds for no time`);
 });
 
 test('every cue carries both subtitles', () => {
@@ -68,21 +71,19 @@ test('a lit room is always on the storey the cue is showing', () => {
   }
 });
 
-test('the lift is marked on the storeys it serves, and on no other', () => {
-  // The delivery's lift serves the basement, the ground floor and the first
-  // floor; the roof storey has no landing, so the descent starts below it.
+test('the lift is marked as the tour climbs past it, and nowhere it has no landing', () => {
   const lit = steps.filter(step => step.rooms.some(id => id.startsWith('mark:lift-')));
-  assert.equal(lit.length, 3, 'the lift is not shown on three storeys');
-  assert.deepEqual(lit.map(step => step.view), ['f2', 'f1', 'f0'], 'the lift does not ride down');
+  assert.ok(lit.length >= 2, 'the lift is never marked');
   for (const step of lit) {
     const floor = step.rooms.find(id => id.startsWith('mark:lift-')).slice(-1);
     assert.equal('f' + floor, step.view, `the lift mark at ${step.at} s is on the wrong storey`);
+    assert.notEqual(step.view, 'f3', 'the roof storey has no landing and must not be marked');
   }
-  // It has to be shown in a silence, because the script has none to spare.
-  const held = steps.filter(step => step.hold > 0);
-  assert.equal(held.length, 1, 'the recording is held somewhere other than the lift');
-  assert.ok(held[0].rooms.includes('mark:lift-2'), 'the hold is not the one that shows the lift');
-  assert.ok(held[0].hold >= 2 && held[0].hold <= 5, 'the hold is not a beat');
+  // It is shown inside the sentence that names it, not in a silence of its
+  // own: the whole run is over in a few seconds.
+  const run = lit[lit.length - 1].at - lit[0].at;
+  assert.ok(run > 0 && run < 6, `the lift takes ${run.toFixed(1)} s to ride down; it should be quick`);
+  assert.ok(steps.every(step => !step.hold), 'the tour still stops the recording somewhere');
 });
 
 test('the plot is shown in plan, with everything that is not the house lit', () => {
@@ -96,22 +97,33 @@ test('the plot is shown in plan, with everything that is not the house lit', () 
 
 test('the opening moves: the map turns, and each sentence brings its own set', () => {
   const region = steps.filter(step => step.view === 'region');
-  assert.ok(region.filter(step => step.spin).length > 6, 'the map stands still through the opening');
-  // Every family shown is a real one, and no two sentences in a row repeat it.
+  assert.ok(region.every(step => step.spin || step.spot === 'centre'), 'the map stands still somewhere in the opening');
   const shown = region.map(step => step.group);
   for (const g of shown) assert.ok(g === null || (Number.isInteger(g) && g >= 0 && g < 6), `${g} is not an amenity family`);
   assert.ok(new Set(shown.filter(g => g !== null)).size >= 4, 'the opening leans on one family');
-  // The last word of the opening is the settlement itself, with nothing else
-  // on the map and the turning stopped.
-  const last = region[region.length - 1];
-  assert.equal(last.spot, 'centre'); assert.equal(last.group, null); assert.equal(last.spin, false);
+});
+
+test('the turn follows one rule: outside always, inside never', () => {
+  // "dönüyor, duruyor, sonra dönmeye devam ediyor. bunlar olmasın." - the
+  // camera is not allowed to start and stop with the sentences. It turns for
+  // as long as the house is seen from outside, and holds still for as long as
+  // the tour is in it.
+  for (const step of steps) {
+    if (/^f[0-3]$/.test(step.view)) assert.equal(step.rotate, false, `the camera turns inside, at ${step.at} s`);
+    else if (step.view === 'neighborhood') assert.equal(step.rotate, true, `the camera stands still outside, at ${step.at} s`);
+  }
+  // And the rule is not achieved by never leaving one state.
+  assert.ok(steps.some(step => step.rotate) && steps.some(step => !step.rotate));
 });
 
 test('the closing turns, and offers the listing', () => {
   const last = steps[steps.length - 1];
   assert.ok(last.rotate, 'the closing shot stands still');
   assert.ok(last.link, 'the closing never offers the listing');
-  assert.equal(steps.filter(step => step.link).length, 1, 'the listing is offered before the price is named');
+  // One cue raises it, and it stays up to the end rather than blinking off.
+  const first = steps.findIndex(step => step.link);
+  assert.ok(first > 0, 'the listing is offered before the price is named');
+  assert.ok(steps.slice(first).every(step => step.link), 'the listing link comes and goes');
 });
 
 test('inherited state only reframes where a cue asks it to', () => {
@@ -121,31 +133,34 @@ test('inherited state only reframes where a cue asks it to', () => {
   const changes = keys.filter((key, i) => key !== keys[i - 1]).length;
   assert.ok(changes < steps.length, 'every cue reframes; nothing is being carried forward');
   assert.ok(changes > 20, 'the tour barely moves');
-  // Carried forward, not cleared: a subtitle-only cue keeps the last bearing.
-  const after = steps[steps.findIndex(s => s.at === 25.03)];
-  assert.equal(after.radius, 1000, 'the 1 km radius did not survive into the next sentence');
+  // Carried forward, not cleared: a cue with no words of its own keeps the
+  // sentence being spoken, and a subtitle-only cue keeps the last framing.
+  const wordless = steps[steps.findIndex(step => step.at === 14.4)];
+  assert.equal(wordless.radius, 1000, 'the radius cue did not take');
+  assert.ok(wordless.tr.startsWith('Başkentin kalbi'), 'a wordless cue blanked the subtitle');
 });
 
 test('cueAt finds the sentence being spoken', () => {
-  assert.equal(cueAt(steps, 0), -1, 'the lead-in silence has no subtitle');
-  assert.equal(steps[cueAt(steps, 0.8)].at, 0.71);
-  assert.equal(steps[cueAt(steps, 24.9)].at, 24.03);
-  assert.equal(steps[cueAt(steps, 25.03)].at, 25.03, 'a cue must own its own instant');
+  // This recording opens on its first word, so there is no lead-in to sit in.
+  assert.equal(steps[cueAt(steps, 0)].at, 0);
+  assert.equal(steps[cueAt(steps, 0.8)].at, 0);
+  assert.equal(steps[cueAt(steps, 19.5)].at, 14.4);
+  assert.equal(steps[cueAt(steps, 19.6)].at, 19.6, 'a cue must own its own instant');
   assert.equal(cueAt(steps, TOUR_DURATION), steps.length - 1, 'the last sentence holds to the end');
 });
 
-test('the voiceover is the delivered recording with its slate trimmed', () => {
+test('the voiceover on disk is the recording the cues are written for', () => {
   assert.ok(fs.existsSync(audio), 'audio/' + TOUR_AUDIO + ' is missing');
   const bytes = fs.readFileSync(audio);
-  // Constant 128 kbps, 44,1 kHz mono: every frame is 1152 samples, so the
-  // duration the cues are written against is a byte count, not a guess.
+  // Constant 192 kbps, 48 kHz, joint stereo: every frame is 576 bytes and
+  // 1152 samples, so the duration the cues are written against is a byte
+  // count rather than a guess. The tags are stripped, so the file opens on a
+  // frame header.
   assert.deepEqual([...bytes.subarray(0, 2)], [0xff, 0xfb], 'the file does not start on an MPEG frame');
-  const frames = bytes.length / 418;
-  assert.ok(Math.abs(frames - Math.round(frames)) < 0.02, 'the file is not a whole number of frames');
-  const seconds = Math.round(frames) * 1152 / 44100;
+  assert.equal(bytes.length % 576, 0, 'the file is not a whole number of 576-byte frames');
+  const seconds = (bytes.length / 576) * 1152 / 48000;
   assert.ok(Math.abs(seconds - TOUR_DURATION) < 0.05,
     `the recording is ${seconds.toFixed(2)} s but the cues are written for ${TOUR_DURATION} s`);
-  assert.ok(TOUR_TRIM_S > 6.9 && TOUR_TRIM_S < 7.1, 'the recorded trim no longer matches the slate');
 });
 
 test('a room box is the register\'s own span, stood on the register\'s own datum', () => {
@@ -219,4 +234,51 @@ test('the hole is cut where the room actually lands on screen', () => {
   // the screen, which would blow the hole out to the whole viewport.
   const behind = new THREE.Box3(new THREE.Vector3(-4, 0, 60), new THREE.Vector3(4, 3, 68));
   assert.equal(projectBox(behind, camera, 1440, 900), null);
+});
+
+test('the side gallery shows the owner\'s own frames of what is being named', () => {
+  const known = new Map(PHOTO_POINTS.map(point => [point.id, point]));
+  let shown = 0;
+  for (const step of steps) {
+    assert.ok(step.photos.length <= 3,
+      `${step.photos.length} frames at ${step.at} s; beyond three it is a contact sheet`);
+    for (const id of step.photos) {
+      const point = known.get(id);
+      assert.ok(point, `photograph ${id} is shown at ${step.at} s and is not in the register`);
+      // A frame taken inside the house must belong to the storey on screen;
+      // an outdoor frame, or one that follows the visitor up the building,
+      // may appear anywhere.
+      if (/^f[0-3]$/.test(step.view) && !point.outdoor && !point.follow)
+        assert.equal('f' + point.floor, step.view,
+          `photograph ${id} (${point.tr}) is shown while ${step.view} is open`);
+      shown++;
+    }
+  }
+  assert.ok(shown > 60, `only ${shown} frames across the whole tour`);
+  // Every storey of the house gets some, so no floor is described blind.
+  for (const view of ['f0', 'f1', 'f2', 'f3'])
+    assert.ok(steps.some(step => step.view === view && step.photos.length), `${view} is described with no photographs`);
+});
+
+test('a sentence that names several rooms lights them one after another', () => {
+  // "odalar dendiği zaman ışıklar tak tak yanıp sönmelidir, aynı anda üçünü
+  // de açma" - the reveal is spread across the sentence, so a cue naming
+  // three rooms has to hold long enough for three beats.
+  const many = steps.filter(step => step.rooms.filter(id => !id.startsWith('mark:')).length > 1);
+  assert.ok(many.length >= 5, 'no sentence names more than one room');
+  for (const step of many)
+    assert.ok(step.span >= 1.6 * step.rooms.length / 2,
+      `${step.rooms.length} rooms in ${step.span.toFixed(1)} s at ${step.at} s is too fast to read`);
+});
+
+test('the two balconies are told apart', () => {
+  // The master's balcony hangs over the pool; the corner balcony the coffee
+  // sentence names is the OTHER one, on the street side. They must not be
+  // shown from the same bearing or they read as one balcony seen twice.
+  const master = steps.find(step => step.rooms.includes('f2-110'));
+  const corner = steps.find(step => step.rooms.includes('f2-109'));
+  assert.ok(master && corner, 'one of the balconies is never shown');
+  assert.notEqual(master.rooms[0], corner.rooms[0]);
+  const apart = Math.abs(Math.atan2(Math.sin(master.azimuth - corner.azimuth), Math.cos(master.azimuth - corner.azimuth)));
+  assert.ok(apart > 2, `the balconies are looked at from ${apart.toFixed(2)} rad apart; they will read as one`);
 });

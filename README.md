@@ -41,50 +41,60 @@ PBR/gölge yolunu kullanır; ekran uzayı GTAO iki göze uygulanmaz. Gerçek ba�
 ve telefon testi tamamlanmadı; bu destek cihaz üzerinde doğrulama bekler.
 
 R48: `Sesli tur` sahibinin seslendirmesini çalar ve görüntüyü ona uydurur.
-Kayıt `audio/angora21-tur.mp3`: teslim edilen ElevenLabs dosyasının 6,975 s'lik
-künye kısmı ("#Angora Evleri / Villa 21 / Sanal Tur Senaryosu / Yaklaşık 5
-dakika") MPEG çerçeve sınırından kesilmiş hâli — 4:28,6, 44,1 kHz mono, sabit
-128 kbps; ses yeniden kodlanmadı. Kayıt tek parça bir okuma olduğu için
-(94 öbek, en uzun duraklama 1,41 s) tur adım düğmesiyle değil ses saatiyle
-sürülür: `viewer/src/tour-script.js` hangi cümlede neyin ekranda olacağını
-tutar, `guided-tour.js` sesi okur, `main.js` görünümü ona getirir. Cümlenin
-kendisi aynı zamanda altyazıdır (TR/EN), böylece yazı ile söz ayrışamaz.
+Kayıt `audio/angora21-tur.mp3`: teslim edilen 6:41,6'lık dosyanın ID3 etiketleri
+ayıklanmış hâli — 48 kHz ortak stereo, sabit 192 kbps, tek bir çerçeve yeniden
+kodlanmadı. Kayıt ilk kelimesiyle başladığı için zaman kodları sahibinin kendi
+deşifresinden doğrudan alınır; kaydırma yoktur. `viewer/src/tour-script.js`
+hangi cümlede neyin ekranda olacağını tutar, `guided-tour.js` sesi okur,
+`main.js` görünümü ona getirir. Cümlenin kendisi aynı zamanda altyazıdır
+(TR/EN), böylece yazı ile söz ayrışamaz.
 
-Bir cümle oda adlandırdığında o oda aydınlık kalır, geri kalan ekran karartılır.
-Karartma malzeme üzerinden değil ekran uzayında yapılır: teslim toplu çizimdir,
-bir kata ait duvarlar tek çağrıda gelir, yani odaya ait bir malzeme yoktur.
-`tour-spotlight.js` odanın kutusunu ekrana izdüşürüp maskeyi oradan keser; aynı
-maske hem 3B sahnenin hem de SVG olan Bölge haritasının üstünde çalışır. Oda
-kutusu kayıtlı etiket noktası ve iki ölçülü açıklıktan kurulur
-(`tour-rooms.js`); açık planda etiketler mekânın açıklığını taşıdığı için salonu
-yakmak açıldığı holü de yakar — bu kaynağın kendi ifadesidir, kutunun hatası
-değil. Kesit atlasına kırpılarak duvarın dışına taşması engellenir.
+Dönüş tek bir kurala bağlıdır: **ev dışarıdan görülürken görüntü hep döner**
+(harita villa çevresinde 0,75°/sn, kamera yakın çevrede saat yönünde), **içeri
+girildiğinde hiç dönmez**. Cümle başına dur-kalk yoktur.
 
-Açılışın 44 saniyesi Bölge haritasındadır ve hareketlidir: harita villa
-çevresinde yavaşça döner (0,75°/sn; pusula ve bütün yazılar ters döndürülerek
-dik tutulur), yarıçap 2 km → 1 km → 500 m iner ve her cümleye kendi donatı
-ailesi eşlik eder — "en yeşil"de parklar, "kolay ulaşım"da duraklar,
-"ailelerin gözdesi"nde okullar, "Çayyolu'nun kalbindeyiz"de market ve
-alışveriş. Aileler 2 km'de değil 1 km ve 500 m'de açılır; nokta yarıçapı metre
-cinsinden çizildiği için 2 km'de görünmezler. "Angora Evleri" denince dönüş
-durur ve yerleşkenin kendisi dairesel bir ışıkla ayrılır.
+Açılışın 28 saniyesi Bölge haritasındadır: yarıçap 2 km → 1 km → 500 m iner,
+"en yeşil"de parklar, "kolay ulaşım"da duraklar, üniversiteler sayılırken
+okullar, AVM'ler ve hastaneler anılırken sırasıyla alışveriş ve sağlık aileleri
+açılır. Aileler 2 km'de değil 1 km ve 500 m'de açılır; nokta yarıçapı metre
+cinsinden çizildiği için 2 km'de görünmezler. Kış cümlesinde gün ışığı 21
+Aralık'a alınır — kar yoktur, o cümlenin anlattığı kışın ışığı vardır; tur
+biterken ziyaretçinin kendi ayarı geri konur.
+
+Bir cümle birden çok oda adlandırdığında odalar **aynı anda değil, cümle
+boyunca sırayla** yanar; kamera baştan hepsini birden kadrajlar, böylece ışık
+gelirken görüntü kaymaz. Aynı anda, anlatılan mekânın sahibinin kendi ilan
+fotoğrafları yanda (telefonda üstte) açılır — en çok üç kare. Fotoğrafın hangi
+odaya ait olduğu `photo-points.js` kaydındandır; testler iç mekân karesinin
+ancak kendi katı açıkken gösterilebileceğini tutar.
 
 Bahçe, arsanın ev olmayan bütün parçaları olarak plan görünüşünden gösterilir:
 kayıtlı R32 arsa dikdörtgeninden bina kutusu çıkarılarak elde edilen dört
-şerit — sokak tarafı, arka bahçe ve iki yan — yani ön taraf ve yanlar da
-bahçedir. Kayıttaki tek "Bahçe" etiketi yalnız arka çimi kapsar.
+şerit — sokak tarafı, arka bahçe ve iki yan. Kayıttaki tek "Bahçe" etiketi
+yalnız arka çimi kapsar.
 
-Kapanış cümlesi "Asansör" kelimesiyle açılır ve asansör o ana kadar hiç
-gösterilmemiştir; bu yüzden kayıt orada **3 saniye bekletilir**, şaft hizmet
-ettiği en üst katta (1. kat) işaretlenir, sonra cümleyle birlikte giriş ve
-bodrum katlarına iner. Çatı katında durak yoktur, iniş bu yüzden onun altından
-başlar. Şaftın ayak izi tahmin değildir: teslimdeki kabin ve kat kapılarından
-ölçülür (`lift.js`). Fiyatın söylendiği son cümlede RE/MAX ilan bağlantısı
-ekrana gelir ve yeni sekmede açılır.
+Asansör, "Asansörle… birinci kata çıkıyoruz" cümlesinin içinde, çıkılan iki
+katta hızlıca işaretlenir; kayıt durdurulmaz. Şaftın ayak izi tahmin değildir:
+teslimdeki kabin ve kat kapılarından ölçülür ve `lift.js`'te kayıtlıdır
+(1,272 × 1,186 m); `lift.test.mjs` her çalıştığında GLB'yi yeniden ölçer.
+Asansöre ayrılmış erken cümlede ise kamera yerinde kalır, sahibinin kabin ve
+kat sahanlığı kareleri yandan girer.
 
-Tur sırasında arayüz geri çekilir; sahne, cümle ve turu bitirme düğmesi kalır.
-Sahneye dokunmak turu bitirmez: anlatım kamera için durmadığından konuşurken
-etrafa bakmak mümkündür, bir sonraki cümle kadrajı geri alır.
+Bir cümle karartmayı gerektirdiğinde karartma malzeme üzerinden değil ekran
+uzayında yapılır: teslim toplu çizimdir, bir kata ait duvarlar tek çağrıda
+gelir, yani odaya ait bir malzeme yoktur. `tour-spotlight.js` odanın kutusunu
+ekrana izdüşürüp maskeyi oradan keser; aynı maske hem 3B sahnenin hem de SVG
+olan Bölge haritasının üstünde çalışır. Oda kutusu kayıtlı etiket noktası ve
+iki ölçülü açıklıktan kurulur (`tour-rooms.js`); açık planda etiketler mekânın
+açıklığını taşıdığı için salonu yakmak açıldığı holü de yakar — bu kaynağın
+kendi ifadesidir, kutunun hatası değil. Kesit atlasına kırpılarak duvarın
+dışına taşması engellenir.
+
+Fiyatın söylendiği cümlede RE/MAX ilan bağlantısı ekrana gelir ve sonuna kadar
+kalır; yeni sekmede açılır. Tur sırasında arayüz geri çekilir; sahne, cümle,
+fotoğraflar ve turu bitirme düğmesi kalır. Sahneye dokunmak turu bitirmez:
+anlatım kamera için durmadığından konuşurken etrafa bakmak mümkündür, bir
+sonraki cümle kadrajı geri alır.
 
 R21: `Oda adları` ve `Ölçüler` düğmeleri seçilen katın bilgilerini zemine
 yerleştirir. 27 mahal etiketi vardır. Ölçüler, orijinal DWG DIMENSION kaydı,
