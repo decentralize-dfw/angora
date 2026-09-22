@@ -50,9 +50,12 @@ const outDir = path.join(repoRoot, 'build/qa', tag);
 let base = option('base');
 let staticServer = null;
 if (!base) {
-  staticServer = await servePages(repoRoot);
+  // --root serves any checkout (e.g. a git worktree of an old commit) the
+  // same way the repo root is served - one process, no server juggling.
+  const serveRoot = option('root', repoRoot);
+  staticServer = await servePages(serveRoot);
   base = `http://127.0.0.1:${staticServer.port}/`;
-  console.log('Serving pages root at', base);
+  console.log('Serving', serveRoot, 'at', base);
 }
 
 const summary = {tag, commit, base, gate, capturedAt: new Date().toISOString(),

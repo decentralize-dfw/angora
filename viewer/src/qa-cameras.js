@@ -27,28 +27,28 @@ export const VIEWPORTS = {
   mobile: {width: 393, height: 852},
 };
 
-// Orbit values were read back from the running viewer (frame()'s own output,
-// commit of FAZ 0) and then frozen here as absolute numbers.
-// Orbit values C01/C02/C05-C08 are the app's own framing at FAZ 0, read back
-// from a live desktop session (1600x900) and frozen. C03/C04 are QA-authored
-// villa hero framings; C09 is f1's framing straight down.
+// Orbit values C01/C02/C05-C08 follow the app's own framing (span/target
+// read back live and frozen); their fov moved 16 -> per-view rig values
+// when Task 1.5 landed - the FAZ 0-era fov-16 specs live in git history
+// (tag: pre-1.5) for regression pairs. C03/C04 are QA-authored villa hero
+// framings, re-lensed at 30° for the same reason; C09 is f1 straight down.
 export const CAMERAS = [
   {id: 'C01', label: 'region', view: 'region',
-   orbit: {target: [16.95, 5.76, 9.92], polar: 0.58, azimuth: 0, span: 407.1, zoom: 1, fov: 16}},
+   orbit: {target: [16.95, 5.76, 9.92], polar: 0.58, azimuth: 0, span: 407.1, zoom: 1, fov: 20}},
   {id: 'C02', label: 'neighborhood', view: 'neighborhood',
-   orbit: {target: [0, 3, -5], polar: 0.78, azimuth: 0.804, span: 73.6, zoom: 1, fov: 16}},
+   orbit: {target: [0, 3, -5], polar: 0.78, azimuth: 0.804, span: 73.6, zoom: 1, fov: 26}},
   {id: 'C03', label: 'villa-front', view: 'neighborhood',
-   orbit: {target: [0.15, 4.5, -3.0], polar: 1.18, azimuth: 0.85, span: 26, zoom: 1, fov: 16}},
+   orbit: {target: [0.15, 4.5, -3.0], polar: 1.18, azimuth: 0.85, span: 26, zoom: 1, fov: 30}},
   {id: 'C04', label: 'villa-pool', view: 'neighborhood',
-   orbit: {target: [0.6, 3.6, -8.5], polar: 1.18, azimuth: Math.PI - 0.55, span: 30, zoom: 1, fov: 16}},
+   orbit: {target: [0.6, 3.6, -8.5], polar: 1.18, azimuth: Math.PI - 0.55, span: 30, zoom: 1, fov: 30}},
   {id: 'C05', label: 'floor-f0', view: 'f0',
-   orbit: {target: [0.87, 0.00, -5.31], polar: 0.56, azimuth: 0.804, span: 16.9, zoom: 1, fov: 16}},
+   orbit: {target: [0.87, 0.00, -5.31], polar: 0.56, azimuth: 0.804, span: 16.9, zoom: 1, fov: 28}},
   {id: 'C06', label: 'floor-f1', view: 'f1',
-   orbit: {target: [0.78, 3.10, -1.96], polar: 0.56, azimuth: 0.804, span: 20.7, zoom: 1, fov: 16}},
+   orbit: {target: [0.78, 3.10, -1.96], polar: 0.56, azimuth: 0.804, span: 20.7, zoom: 1, fov: 28}},
   {id: 'C07', label: 'floor-f2', view: 'f2',
-   orbit: {target: [-1.03, 6.37, -1.96], polar: 0.56, azimuth: 0.804, span: 20.7, zoom: 1, fov: 16}},
+   orbit: {target: [-1.03, 6.37, -1.96], polar: 0.56, azimuth: 0.804, span: 20.7, zoom: 1, fov: 28}},
   {id: 'C08', label: 'floor-f3', view: 'f3',
-   orbit: {target: [-0.75, 9.47, -2.04], polar: 0.56, azimuth: 0.804, span: 18.9, zoom: 1, fov: 16}},
+   orbit: {target: [-0.75, 9.47, -2.04], polar: 0.56, azimuth: 0.804, span: 18.9, zoom: 1, fov: 28}},
   {id: 'C09', label: 'plan-f1', view: 'f1', plan: true,
    orbit: {target: [0.78, 3.10, -1.96], polar: 0.0001, azimuth: 0, span: 20.7, zoom: 1, fov: 16}},
   {id: 'C10', label: 'interior-salon', view: 'f1',

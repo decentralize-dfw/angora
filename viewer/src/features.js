@@ -9,10 +9,15 @@ export const DEFAULT_FEATURES = Object.freeze({
   hybridSunShadow: false,      // Task 1.2 - villa-local dynamic sun shadow (desktop)
   mobileSunShadow: false,      // Task 1.2 - phones join ONLY after H1 measures the ratchet green
   exteriorGradeRevival: false, // Task 1.3 - detail maps on batched materials
-  singleSided: true,           // Task 1.4 - honor patched GLBs; 0 forces DoubleSide back
-  viewCulling: true,          // Task 1.4 - walk hides the neighbourhood planting
-  plantsChunking: true,       // Task 1.4 - split context-plants into 48 m culling cells
-  cameraRigsV2: false,         // Task 1.5 - per-view FOV / golden hour
+  // Task 1.4 is SHELVED (BLOCKED H8): the shell walls are two skins, the
+  // context additions are mirrored copies whose winding build.mjs never
+  // corrects, and the honest fix needs a Draco re-encode this environment
+  // must not do. The delivery ships authored double-sided; the valve stays
+  // inert until H8 reopens the task.
+  singleSided: true,           // inert - no patched GLBs ship; 0 still forces DoubleSide back
+  viewCulling: false,          // hiding planting seen through walk glazing is a quality call, deferred
+  plantsChunking: true,        // pure culling win: shared attributes, off-screen cells only
+  cameraRigsV2: true,          // Task 1.5 ACTIVE - per-view lenses, 16:30 sun opening, horizon fog
   gardenSpotStrip: false,      // Task 1.6 - strip fixture loops from garden shaders
   atlasAnisotropyFix: false,   // Task 1.6 - anisotropy only where texture2D samples
   postfxV2: false,             // Task 1.1b - composer per quality matrix

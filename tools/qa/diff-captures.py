@@ -110,6 +110,13 @@ def main():
         for problem in row.get('numericMismatches', []):
             print('    ', problem)
     print('worst share:', report['worstShare'])
+    # --visual: the comparison is a step that MEANS to change pixels (a lens,
+    # a texture, a shadow). Everything is still measured and printed, but
+    # only structural failures fail the run - regression judgment shifts to
+    # console errors, sane draw calls, and eyes on the cut frames.
+    if '--visual' in sys.argv:
+        broken = [r for r in rows if r['verdict'] in ('missing-in-b', 'size-mismatch')]
+        sys.exit(1 if broken else 0)
     if any(r['verdict'] not in ('identical', 'noise') for r in rows):
         sys.exit(1)
 

@@ -83,6 +83,28 @@ yerinde yamalanıyor (`tools/batch-delivery/patch-glb.mjs` tekniği, Bölüm 0.7
 **Bloke ettiği:** batched paketin sıfırdan yeniden üretimi (ör. atlas yeniden
 dizilimi, Task 3.3'ün build tarafı).
 
+## H8 — build.mjs aynalı kopya sarım düzeltmesi + Draco yeniden kodlama (Task 1.4'ün ön koşulu)
+**Durum:** BLOCKED — Task 1.4 (doubleSided kapatma) RAFA KALDIRILDI.
+**Ölçülen gerçekler (gate A/B, 4 tur):**
+- `architecture.glb` duvarları iki kabuk (STRUCCO dışa / INTERIOR içe);
+  kat kesiti İÇ kabuğun yüzüne bakar → tek taraf yapınca kesitte duvarlar
+  kayboldu (ürün sahibi C07'de gördü; kapı gözle değerlendirildiği için
+  ilk turda kaçtı — artık C05–C08 karelerinde >%1 piksel değişimi otomatik
+  kırmızı).
+- `context-buildings` "additions" B4 objelerinin AYNALI kopyaları:
+  `add-context.mjs:82` ve `context-batch.js:47` negatif determinantta üçgen
+  sarımını ters çevirir, **`build.mjs` çevirmez** → yayınlanan batched
+  geometri aynalı kopyalarda ters sarımlı; tek taraf yapınca o binaların
+  duvarları toptan kayboluyor (uçan çatılar, ilk gate koşusunda kanıtlandı).
+- Sarımı yamayla düzeltmek Draco decode → index ters çevir → re-encode
+  ister; "BIN byte-byte aynı" garantisi (patch-glb.mjs sözleşmesi) kaybolur.
+**Yeniden açılma koşulu:** H1 iPhone ölçümü hız yetersizliği gösterirse VE
+kaynak tarafında (H6/H4) sarım düzeltmesi yapılmış yeni bir teslim gelirse.
+**Kalan miras:** `plantsChunking` açık (attribute-paylaşımlı 48 m hücre
+culling'i — görsel riski yok); `viewCulling` kapalı (walk'ta camdan görünen
+bitkiyi gizlemek ayrı bir kalite kararı); `tools/batch-delivery/patch-*.mjs`
+araçları H8 çözülünce hazır.
+
 ## H7 — Gerçek telefonda gece modu ölçümü
 **Durum:** BLOCKED — fiziksel cihaz gerekli (H1 ile aynı yol).
 **Bloke ettiği:** Task 3.4g'nin kabulü. `qa-mobile.html` protokolüne gece
