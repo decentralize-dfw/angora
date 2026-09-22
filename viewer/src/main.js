@@ -1253,20 +1253,17 @@ async function loadNativeModel(manifest){
     step('light');message(t('loadingLight'));
     await Promise.all([groundLightReady,electricReady]);
     phaseDone('light');
+    // Task 1.2-b withdrawn: a shadow-only proxy cannot exist in r180 -
+    // WebGLShadowMap culls casters with the BEAUTY camera's layers, so a
+    // layer the main camera never draws never reaches the depth map either.
+    // The scene's own meshes cast instead (event-driven, cached map), and
+    // manifest.shadow_proxy is no longer fetched.
     if(manifest.batched){loader.dracoLoader?.dispose();loader.ktx2Loader?.dispose();}
     host.dataset.deliveryStats=JSON.stringify({profile:manifest.profile??'legacy',decodeAndPrepareMs:Math.round(performance.now()-loadStarted),residentParts:nativeDelivery.loaded.size});
   step('scene');message(t('loadingScene'));
   buildingBox=new THREE.Box3().setFromObject(groups.get('architecture'));
   gardenBox=new THREE.Box3().setFromObject(groups.get('garden'));contextBox=buildingBox.clone();
   lighting.setShadowBounds(buildingBox,gardenBox);
-  // Task 1.2-b: the sun's depth pass renders this simplified stand-in, not
-  // the 3 M-triangle scene. Off the critical path; until it arrives the sun
-  // simply casts nothing, which is yesterday's look.
-  if(FEATURES.hybridSunShadow&&manifest.shadow_proxy){
-    const proxyURL=new URL(manifest.shadow_proxy.file+'?v='+manifest.shadow_proxy.gpu_sha256.slice(0,12),modelRoot);
-    loadAsset(proxyURL.href).then(gltf=>{lighting.attachShadowProxy(gltf.scene,clip);invalidate();})
-      .catch(error=>console.warn('Shadow proxy unavailable; dynamic sun casts nothing',error));
-  }
   for(const model of groups.values())contextBox.union(new THREE.Box3().setFromObject(model));
   if(manifest.site_context){
     const data=await json(manifest.site_context);siteContext=createSiteContext(data,host,()=>selectView('building'));

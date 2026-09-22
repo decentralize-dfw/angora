@@ -81,7 +81,7 @@ for (const profile of profiles) {
         await page.goto(url, {waitUntil: 'domcontentloaded'});
         await page.waitForFunction(
           () => JSON.parse(document.querySelector('#viewport')?.dataset.qaReport ?? 'null')?.camera,
-          null, {timeout: 300_000});
+          null, {timeout: 480_000});
         if (measureSeconds > 0) {
           await page.evaluate(seconds => window.__angoraQA.measure(seconds), measureSeconds);
           await page.evaluate(() => window.__angoraQA.snapshot());

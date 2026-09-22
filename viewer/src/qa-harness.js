@@ -279,6 +279,22 @@ export function installQaHarness({host, query, hooks}) {
     }
   });
 
-  window.__angoraQA = {applyCamera, snapshot, measure, get report() { return JSON.parse(host.dataset.qaReport ?? 'null'); }};
+  // 1.2 debugging: the shadow's own state, and how many draws one forced
+  // shadow refresh adds to a frame (depth-pass evidence the steady state
+  // hides, since the cached map adds nothing per frame).
+  async function debugShadow() {
+    const lighting = hooks.lighting();
+    const renderer = hooks.renderer();
+    const before = lighting?.qaState?.().shadow ?? null;
+    lighting?.requestShadowUpdate?.();
+    hooks.invalidate();
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    const during = {calls: renderer.info.render.calls, triangles: renderer.info.render.triangles};
+    hooks.invalidate();
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    const after = {calls: renderer.info.render.calls, triangles: renderer.info.render.triangles};
+    return {shadow: before, frameWithShadowUpdate: during, steadyFrame: after};
+  }
+  window.__angoraQA = {applyCamera, snapshot, measure, debugShadow, get report() { return JSON.parse(host.dataset.qaReport ?? 'null'); }};
   return window.__angoraQA;
 }

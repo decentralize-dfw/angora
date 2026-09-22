@@ -211,10 +211,14 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
   const fixtures=new InteriorLightController(interior);
   const fixtureVertices=createFixtureVertices(fixtures);
   // Task 1.2 - hybrid sun shadow. The baked GI stays; ONE dynamic sun draws
-  // the contact the bake cannot: villa-local, proxy-only depth pass,
-  // re-rendered on events rather than frames.
+  // the contact the bake cannot, re-rendered on events rather than frames.
+  // The scene's own meshes are the casters: WebGLShadowMap culls the depth
+  // pass with the BEAUTY camera's layers (renderObject tests camera.layers,
+  // not shadowCamera.layers), so a caster on a shadow-only layer can never
+  // reach the map - the planned layer-3 proxy was unreachable by design.
+  // With autoUpdate=false the full-scene depth render costs one frame per
+  // slider release/view change and nothing in steady state.
   let shadowBounds=null,shadowMapSizeApplied=q.shadowMapSize||1024;
-  const shadowProxyMaterial=new THREE.MeshBasicMaterial();
   const dynamicShadowActive=()=>FEATURES.hybridSunShadow&&quality.value.dynamicSunShadow;
   function applyShadowQuality(current){
     const enabled=Boolean(current.dynamicSunShadow);
@@ -245,8 +249,12 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     shadowDistance=radius*2.2;
     sun.position.copy(centre).addScaledVector(direction,shadowDistance);
     Object.assign(sun.shadow.camera,{left:-radius,right:radius,top:radius,bottom:-radius,near:radius*.2,far:radius*4.4});
-    // The authored bias pair was calibrated for a 4096 map; scale with size.
-    sun.shadow.normalBias=.018*(4096/shadowMapSizeApplied);
+    // With the real scene casting, every lit surface is its own occluder in
+    // the map; the offset that keeps that comparison honest is the map's
+    // WORLD texel size, not a fixed number. Two texels of normal offset
+    // (villa-local ~3 cm/texel -> .06 m; wide ~7 cm/texel -> .14 m) removed
+    // the broad acne dimming the A/B probe showed without detaching contact.
+    sun.shadow.normalBias=2*(2*radius/shadowMapSizeApplied);
     sun.shadow.camera.updateProjectionMatrix();
     return true;
   }
@@ -301,17 +309,6 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
       if(dynamicShadowActive()&&fitSunShadow(quality.value))renderer.shadowMap.needsUpdate=true;
     },
     requestShadowUpdate(){if(renderer.shadowMap.enabled)renderer.shadowMap.needsUpdate=true;},
-    attachShadowProxy(model,clipPlane){
-      shadowProxyMaterial.clippingPlanes=[clipPlane];
-      shadowProxyMaterial.clipShadows=true;
-      model.traverse(o=>{if(!o.isMesh)return;
-        o.layers.set(3);o.castShadow=true;o.receiveShadow=false;o.material=shadowProxyMaterial;});
-      // The depth pass sees ONLY the proxy layer; the beauty camera never
-      // looks at layer 3, so the stand-in costs one depth render and no
-      // visible pixel.
-      sun.shadow.camera.layers.set(3);
-      scene.add(model);renderer.shadowMap.needsUpdate=true;
-    },
     async loadEnvironment(url) {
       const hdr=await new HDRLoader().setDataType(THREE.FloatType).loadAsync(url);hdr.mapping=THREE.EquirectangularReflectionMapping;
       // The moving directional light owns the sun. Bound the HDR's solar
@@ -390,6 +387,10 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     // Read-only evidence for the QA harness: which output path is live, and
     // the textures held in closures that a scene traversal cannot reach.
     qaState(){return {composer:Boolean(composer),gtao:Boolean(ao?.enabled),compactOutput:Boolean(compactOutput),
+      shadow:{enabled:renderer.shadowMap.enabled,castShadow:sun.castShadow,mapSize:shadowMapSizeApplied,
+        mapExists:Boolean(sun.shadow.map),normalBias:sun.shadow.normalBias,
+        camera:{left:sun.shadow.camera.left,right:sun.shadow.camera.right,near:sun.shadow.camera.near,far:sun.shadow.camera.far},
+        sunPosition:sun.position.toArray().map(v=>Math.round(v*10)/10),target:sun.target.position.toArray().map(v=>Math.round(v*10)/10)},
       textures:[groundLight?.texture,floorLight?.texture,...(electricLight?.textures??[]),environment?.texture].filter(Boolean)};},
     setStyle(style){soft=style!=='sun';setTime();},
     releaseMaterial(material){preparedMaterials.delete(material);reflectionMaterials.delete(material);},
