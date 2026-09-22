@@ -334,7 +334,12 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
         material.clipShadows=true;
           if(isGlazing(material)&&!material.userData.angoraAuthoredPBR){material.metalness=0;if(isSeeThrough(material))material.depthWrite=false;}
         // The house's own windows, kept so a night exterior can light them.
-        if(name==='architecture'&&isSeeThrough(material))glazing.add(material);
+        // isGlazing, not isSeeThrough: the delivered pane is alphaMode BLEND
+        // with no baseColorFactor and no transmission extension, so its opacity
+        // reads 1 and its alpha lives in the texture. Asking whether you can
+        // see through it collected nothing at all, and the first build of the
+        // glow lit an empty set.
+        if(name==='architecture'&&isGlazing(material))glazing.add(material);
         for(const value of Object.values(material))if(value?.isTexture)value.anisotropy=Math.min(compact?8:16,renderer.capabilities.getMaxAnisotropy());
       }
     },
