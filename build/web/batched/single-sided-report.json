@@ -1,0 +1,178 @@
+[
+  {
+    "profile": "desktop",
+    "part": "architecture",
+    "bytes": 5856896,
+    "flipped": [
+      "architecture-plaster-0",
+      "architecture-tile-1",
+      "architecture-wood-2",
+      "architecture-other-4",
+      "architecture-plaster-5",
+      "architecture-metal-6",
+      "architecture-tile-7",
+      "architecture-tile-8",
+      "architecture-other-9",
+      "architecture-wood-10"
+    ],
+    "kept": [
+      "architecture-glass-3 (kept: BLEND)"
+    ]
+  },
+  {
+    "profile": "desktop",
+    "part": "interior",
+    "bytes": 2307664,
+    "flipped": [
+      "interior-wood-0",
+      "interior-other-1",
+      "interior-other-3",
+      "interior-other-4",
+      "interior-tile-6",
+      "interior-metal-7",
+      "interior-metal-11",
+      "interior-wood-13"
+    ],
+    "kept": [
+      "interior-other-2 (kept: preserve-name)",
+      "interior-other-5 (kept: preserve-name)",
+      "interior-fabric-8 (kept: preserve-name)",
+      "interior-glass-9 (kept: BLEND)",
+      "interior-other-10 (kept: BLEND)",
+      "interior-other-12 (kept: preserve-name)"
+    ]
+  },
+  {
+    "profile": "desktop",
+    "part": "garden",
+    "bytes": 61136,
+    "flipped": [
+      "garden-metal-0",
+      "garden-other-1",
+      "garden-tile-2",
+      "garden-other-3"
+    ],
+    "kept": [
+      "garden-glass-4 (kept: BLEND)"
+    ]
+  },
+  {
+    "profile": "desktop",
+    "part": "context-ground",
+    "bytes": 570068,
+    "flipped": [],
+    "kept": [
+      "context-ground-other-0 (kept: preserve-name)"
+    ]
+  },
+  {
+    "profile": "desktop",
+    "part": "context-buildings",
+    "bytes": 8081568,
+    "flipped": [
+      "context-buildings-plaster-0",
+      "context-buildings-other-1",
+      "context-buildings-tile-2",
+      "context-buildings-other-3",
+      "context-buildings-wood-4"
+    ],
+    "kept": []
+  },
+  {
+    "profile": "desktop",
+    "part": "context-plants",
+    "bytes": 5560688,
+    "flipped": [],
+    "kept": [
+      "context-plants-other-0 (kept: preserve-name)"
+    ]
+  },
+  {
+    "profile": "mobile",
+    "part": "architecture",
+    "bytes": 4594620,
+    "flipped": [
+      "architecture-plaster-0",
+      "architecture-tile-1",
+      "architecture-wood-2",
+      "architecture-other-4",
+      "architecture-plaster-5",
+      "architecture-metal-6",
+      "architecture-tile-7",
+      "architecture-tile-8",
+      "architecture-other-9",
+      "architecture-wood-10"
+    ],
+    "kept": [
+      "architecture-glass-3 (kept: BLEND)"
+    ]
+  },
+  {
+    "profile": "mobile",
+    "part": "interior",
+    "bytes": 1954592,
+    "flipped": [
+      "interior-wood-0",
+      "interior-other-1",
+      "interior-other-3",
+      "interior-other-4",
+      "interior-tile-6",
+      "interior-metal-7",
+      "interior-metal-11",
+      "interior-wood-13"
+    ],
+    "kept": [
+      "interior-other-2 (kept: preserve-name)",
+      "interior-other-5 (kept: preserve-name)",
+      "interior-fabric-8 (kept: preserve-name)",
+      "interior-glass-9 (kept: BLEND)",
+      "interior-other-10 (kept: BLEND)",
+      "interior-other-12 (kept: preserve-name)"
+    ]
+  },
+  {
+    "profile": "mobile",
+    "part": "garden",
+    "bytes": 52716,
+    "flipped": [
+      "garden-metal-0",
+      "garden-other-1",
+      "garden-tile-2",
+      "garden-other-3"
+    ],
+    "kept": [
+      "garden-glass-4 (kept: BLEND)"
+    ]
+  },
+  {
+    "profile": "mobile",
+    "part": "context-ground",
+    "bytes": 393636,
+    "flipped": [],
+    "kept": [
+      "context-ground-other-0 (kept: preserve-name)"
+    ]
+  },
+  {
+    "profile": "mobile",
+    "part": "context-buildings",
+    "bytes": 7181176,
+    "flipped": [
+      "context-buildings-plaster-0",
+      "context-buildings-other-1",
+      "context-buildings-tile-2",
+      "context-buildings-other-3",
+      "context-buildings-wood-4"
+    ],
+    "kept": []
+  },
+  {
+    "profile": "mobile",
+    "part": "context-plants",
+    "bytes": 2124816,
+    "flipped": [],
+    "kept": [
+      "context-plants-other-0 (kept: preserve-name)"
+    ]
+  }
+]

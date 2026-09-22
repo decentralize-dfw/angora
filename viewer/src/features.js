@@ -9,8 +9,8 @@ export const DEFAULT_FEATURES = Object.freeze({
   hybridSunShadow: false,      // Task 1.2 - villa-local dynamic sun shadow
   exteriorGradeRevival: false, // Task 1.3 - detail maps on batched materials
   singleSided: true,           // Task 1.4 - honor patched GLBs; 0 forces DoubleSide back
-  viewCulling: false,          // Task 1.4 - walk hides the neighbourhood planting
-  plantsChunking: false,       // Task 1.4 - split context-plants into 48 m culling cells
+  viewCulling: true,          // Task 1.4 - walk hides the neighbourhood planting
+  plantsChunking: true,       // Task 1.4 - split context-plants into 48 m culling cells
   cameraRigsV2: false,         // Task 1.5 - per-view FOV / golden hour
   gardenSpotStrip: false,      // Task 1.6 - strip fixture loops from garden shaders
   atlasAnisotropyFix: false,   // Task 1.6 - anisotropy only where texture2D samples
