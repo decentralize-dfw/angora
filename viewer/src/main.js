@@ -2011,6 +2011,11 @@ if(qaQuery.get('debug')==='quality'){
       `gtao ${q.gtao?'✓':'✗'}  bloom ${q.bloom?'✓':'✗'}  compactOutput ${q.compactOutput?'✓':'✗'}`,
       `batched ${q.batchedGeometry?'✓':'✗'}  bakedGI ${q.bakedIndirectLighting?'✓':'✗'}  receiverVis ${q.bakedReceiverVisibility?'✓':'✗'}`,
       `calls ${frame.drawCalls??'—'}  tris ${frame.triangles??'—'}  shadowMap ${renderer.shadowMap.enabled?'on':'off'}`,
+      // Task 4.4: the two numbers the plan's overlay spec still missed. Both
+      // come from the ?stats=1 harness when it is up; without it they stay
+      // honest dashes rather than an estimate the estimator never made.
+      (()=>{const report=window.__angoraQA?.report;
+        return `p95 ${report?.frame?.p95FrameMs?.toFixed?.(1)??'—'} ms  gpuTex ${report?.memory?.estimatedTextureMiB??'—'} MiB  geo ${report?.memory?.estimatedGeometryMiB??'—'} MiB`;})(),
     ].join('\n');
   },500);
 }
