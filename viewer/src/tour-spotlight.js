@@ -50,6 +50,32 @@ export function projectBox(box, camera, width, height) {
   if (seen < 4) return null;
   return {x: minX, y: minY, w: maxX - minX, h: maxY - minY};
 }
+// A box's identity, so the same room asked for twice is the same light.
+export const boxKey = box =>
+  box.min.toArray().concat(box.max.toArray()).map(v => v.toFixed(2)).join(',');
+// What is lit after this call. A room already up stays up at whatever level it
+// reached - a reveal ADDS the next room rather than restarting the ones beside
+// it - and a room no longer wanted is kept, aimed at zero, so it goes down
+// rather than vanishing.
+export function mergeEntries(previous, boxes) {
+  const kept = new Map(previous.map(entry => [entry.key, entry]));
+  const entries = boxes.map(box => {
+    const key = boxKey(box);
+    const had = kept.get(key);
+    kept.delete(key);
+    if (had) {had.to = 1; return had;}
+    return {key, box, t: 0, to: 1};
+  });
+  for (const gone of kept.values()) if (gone.t > 0.01) {gone.to = 0; entries.push(gone);}
+  return entries;
+}
+// One step of the fade, and the ones that have finished going down are done.
+export function advanceEntries(entries, dt, fade = FADE_S) {
+  const step = dt / fade;
+  for (const entry of entries)
+    entry.t = entry.to > entry.t ? Math.min(entry.to, entry.t + step) : Math.max(entry.to, entry.t - step);
+  return entries.filter(entry => entry.to > 0 || entry.t > 0.01);
+}
 export function createSpotlight(app) {
   // Built as nodes rather than from a markup string: innerHTML on an SVG
   // element is not something to rely on, and a pool of rectangles whose
@@ -157,18 +183,7 @@ export function createSpotlight(app) {
     // pool and its ring can be left off and the shade left to do the work.
     setBoxes(next, {glow: wantGlow = true} = {}) {
       glow = wantGlow;
-      const wanted = next ?? [];
-      // A room already up stays up at whatever level it reached: a reveal
-      // ADDS the next room rather than restarting the ones beside it.
-      const kept = new Map(entries.map(entry => [entry.key, entry]));
-      entries = wanted.map(box => {
-        const key = box.min.toArray().concat(box.max.toArray()).map(v => v.toFixed(2)).join(',');
-        const had = kept.get(key);
-        kept.delete(key);
-        return had ?? {key, box, t: 0, to: 1};
-      });
-      // What is no longer wanted goes down rather than vanishing.
-      for (const gone of kept.values()) if (gone.t > 0.01) {gone.to = 0; entries.push(gone);}
+      entries = mergeEntries(entries, next ?? []);
       place();
     },
     // What the side gallery is showing, so the scene can say where each of
@@ -189,11 +204,7 @@ export function createSpotlight(app) {
       const dt = Math.min(.25, (now - (last || now)) / 1000); last = now;
       // "şak diye değil, fade in fade out": a room comes up and goes down over
       // half a second rather than being switched.
-      for (const entry of entries) {
-        const step = dt / FADE_S;
-        entry.t = entry.to > entry.t ? Math.min(entry.to, entry.t + step) : Math.max(entry.to, entry.t - step);
-      }
-      entries = entries.filter(entry => entry.to > 0 || entry.t > .01);
+      entries = advanceEntries(entries, dt);
       svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
       for (const el of [lit, shade]) {
         el.setAttribute('x', 0); el.setAttribute('y', 0);

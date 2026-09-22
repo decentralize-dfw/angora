@@ -5,7 +5,7 @@ import {TOUR_CUES, TOUR_DURATION, TOUR_AUDIO, resolveCues, cueKey} from '../src/
 import {PHOTO_POINTS} from '../src/photo-points.js';
 import {cueAt} from '../src/guided-tour.js';
 import {roomBox, roomSpan, spaceOf, spaceRect, unionBox, clampToFloor} from '../src/tour-rooms.js';
-import {projectBox} from '../src/tour-spotlight.js';
+import {projectBox, mergeEntries, advanceEntries, boxKey} from '../src/tour-spotlight.js';
 import * as THREE from 'three';
 
 // The narrated tour is a promise made twice over: the subtitle on screen is
@@ -318,4 +318,32 @@ test('the two balconies are told apart', () => {
   assert.notEqual(master.rooms[0], corner.rooms[0]);
   const apart = Math.abs(Math.atan2(Math.sin(master.azimuth - corner.azimuth), Math.cos(master.azimuth - corner.azimuth)));
   assert.ok(apart > 2, `the balconies are looked at from ${apart.toFixed(2)} rad apart; they will read as one`);
+});
+
+test('a room comes up and goes down rather than being switched', () => {
+  // "ışıkların yanıp sönmesi şak diye değil daha fade in fade out smooth
+  // olmalıdır." Half a second up, half a second down, per room.
+  const box = n => new THREE.Box3(new THREE.Vector3(n, 0, n), new THREE.Vector3(n + 1, 2, n + 1));
+  let entries = mergeEntries([], [box(0)]);
+  assert.equal(entries.length, 1);
+  assert.equal(entries[0].t, 0, 'a new room starts lit');
+  entries = advanceEntries(entries, 0.1, 0.5);
+  assert.ok(entries[0].t > 0.15 && entries[0].t < 0.25, `a fifth of the way up, not ${entries[0].t}`);
+  for (let i = 0; i < 10; i++) entries = advanceEntries(entries, 0.1, 0.5);
+  assert.equal(entries[0].t, 1, 'it never reaches full');
+
+  // The next room in the sentence ARRIVES; the first does not restart.
+  entries = mergeEntries(entries, [box(0), box(5)]);
+  assert.equal(entries.length, 2);
+  assert.equal(entries[0].t, 1, 'the room already up was restarted');
+  assert.equal(entries[1].t, 0, 'the room arriving is already up');
+
+  // Dropping one aims it at zero and keeps it until it gets there.
+  entries = advanceEntries(mergeEntries(entries, [box(5)]), 0.1, 0.5);
+  const leaving = entries.find(entry => entry.key === boxKey(box(0)));
+  assert.ok(leaving, 'the room that left vanished instead of fading');
+  assert.ok(leaving.t < 1 && leaving.to === 0, 'it is not on its way down');
+  for (let i = 0; i < 10; i++) entries = advanceEntries(entries, 0.1, 0.5);
+  assert.ok(!entries.some(entry => entry.key === boxKey(box(0))), 'it never finished going down');
+  assert.equal(entries.length, 1);
 });
