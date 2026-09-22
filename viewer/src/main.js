@@ -24,7 +24,7 @@ import {clockLabel} from './daylight.js';
 import {createHotspots} from './hotspots.js';
 import {createGuidedTour} from './guided-tour.js';
 import {createSpotlight} from './tour-spotlight.js';
-import {TOUR_AUDIO} from './tour-script.js';
+import {TOUR_AUDIO,TOUR_DURATION} from './tour-script.js';
 import {roomBox,clampToFloor} from './tour-rooms.js';
 import {createPhotoPins,createPhotoViewer} from './photo-gallery.js';
 import {PHOTO_POINTS,photoCaption} from './photo-points.js';
@@ -249,6 +249,7 @@ function renderFrame(time) {
     plotMask?.setSoilCut(earthSectionActive?clip.constant:1e6);
     nativeSoil?.userData.update(clip.constant,earthSectionActive);
     soilCap?.update(earthClip.constant, earthClip.constant < fullHeight - 0.001 && plotCutReady);
+    if(tourSweep&&!flying&&!walk?.active)advanceTourSweep(time);
     const changing=walk?.active?walk.update(time,renderer.xr.getSession()):flying?false:controls.update();
     const activeCamera=walk?.active?walk.camera:camera;
     if(!walk?.active)fitDepthRange(camera,controls.target,contextBox);
@@ -711,6 +712,9 @@ let tourSpinTimer=null,tourBearing=0;
 // rooms one after another. Both are kept so a language switch can redraw the
 // captions and a cue change can cancel a reveal still in flight.
 let tourPhotos=[],tourReveal=[],tourHourBefore=null,tourLightsBefore=null;
+// The closing's turn, and the lens it is taken with. Both are restored when
+// the tour ends; see setTourSweep and endTour.
+let tourSweep=null,tourLensBefore=null;
 // The buyer's room menu: drawing names in the viewer's language, internal
 // codes ('Z06') demoted to tooltips, twins told apart by code only.
 function fillRoomMenu(){
@@ -942,6 +946,7 @@ async function applyTourStep(step){
     spotlight?.setBoxes([]);spotlight?.setCentre(step.spot==='centre');
     tourShadeTarget=step.spot==='centre'?1:0;
     setTourWindows(step.windows);
+    setTourSweep(null);
     setAutoRotate(false);invalidate();return;
   }
   restRegionMap();
@@ -983,9 +988,14 @@ async function applyTourStep(step){
     const house=buildingBox.getCenter(new THREE.Vector3());
     const offset=new THREE.Vector2(centre.x-house.x,centre.z-house.z);
     const azimuth=step.azimuth??(offset.length()>1.2?Math.atan2(offset.x,offset.y):undefined);
-    flight.go({target:centre,polar,span,azimuth});
+    // A cue may ask for its own lens. The closing does, because the only
+    // unobstructed way round this house is close to it, and the tour's own
+    // 16 deg would then see a window rather than a villa.
+    if(step.lens&&tourLensBefore===null)tourLensBefore=camera.fov;
+    flight.go({target:centre,polar,span,azimuth,fov:step.lens??tourLensBefore??camera.fov});
   } else frame(false);
   setTourWindows(step.windows);
+  setTourSweep(step);
   setAutoRotate(step.rotate);
   invalidate();
 }
@@ -997,8 +1007,44 @@ async function applyTourStep(step){
 //
 // The visitor's own switch is borrowed, not spent: whatever they had set is
 // restored when the tour ends, the same way their daylight is.
+// "orda artik yavasca etrafindan rotate edebilrisn" - and a full turn is not
+// available here. A neighbour stands 11 m from this villa's centre, so at the
+// tour's 16 deg lens an orbit has to stand 74 m out, and clearing that roof
+// from there needs the eye 40 m up: the roof view the closing was asked to
+// stop being. Close enough to look up at the house, better than a third of the
+// circle puts the CAMERA inside a neighbour's walls.
+//
+// So the closing turns through the arc that is actually clear - 155 to 234
+// degrees, across the pool and the garden, which is the face the listing's own
+// photographs were taken from - and takes its time over it: one slow pass,
+// eased at both ends so it neither starts nor stops with a jerk.
+function setTourSweep(step){
+  // It runs to the end of the recording, not to the end of the sentence, so
+  // the whole closing is one unbroken move - and it follows the transport: at
+  // 2x the words finish in half the time and so must the turn.
+  tourSweep=step?.sweep?{from:step.azimuth,through:step.sweep,
+    span:Math.max(8,(TOUR_DURATION-step.at)/(guidedTour?.rate??1)),done:0}:null;
+  if(tourSweep)invalidate();
+}
+function advanceTourSweep(time){
+  const last=tourSweep.last??time;tourSweep.last=time;
+  // Paused means paused: the camera waits with the voice rather than turning
+  // on through a silence the listener asked for.
+  if(!guidedTour?.paused)tourSweep.done+=(time-last)/1000;
+  const t=Math.min(1,tourSweep.done/tourSweep.span);
+  // Smoothstep: the turn creeps in and settles rather than snapping to speed.
+  controls.setAzimuthalAngle(tourSweep.from+tourSweep.through*(t*t*(3-2*t)));
+  if(t<1)invalidate(); else tourSweep=null;
+}
 function setTourWindows(on){
   if(!lighting)return;
+  // An exterior view hides the interior group outright - native-delivery.js
+  // keeps it visible only for /^f[0-3]$/ - so four lamps inside an uncut shell
+  // light nothing at all, which is exactly what shipped the first time. The
+  // closing is the one exterior view that wants the rooms rendered, because
+  // the rooms are what the glazing has to show.
+  const rooms=groups.get('interior');
+  if(rooms)rooms.visible=on||/^f[0-3]$/.test(selected);
   if(on){
     if(tourLightsBefore===null){tourLightsBefore=interiorLights;lighting.setLights(true);}
     // Ranked from the middle of the house, not from the camera: the closing
@@ -1008,6 +1054,7 @@ function setTourWindows(on){
     lighting.interior('all',buildingBox?.getCenter(new THREE.Vector3())?.toArray()??null);
   } else if(tourLightsBefore!==null){
     lighting.setLights(tourLightsBefore);tourLightsBefore=null;
+    lighting.interior(/^f[0-3]$/.test(selected)?Number(selected[1]):null,null);
   }
 }
 function ensureSpotlight(){
@@ -1035,7 +1082,11 @@ function endTour(openInfo){
   guidedTour?.stop();
   $('#tour-bar').hidden=true;$('#app').dataset.tour='false';
   $('#tour-listing').hidden=true;
-  clearTourReveal();setTourPhotos([]);setTourWindows(false);
+  clearTourReveal();setTourPhotos([]);setTourWindows(false);setTourSweep(null);
+  // The closing's wide lens belongs to the closing. Left in place the whole
+  // viewer would carry it, and every view after the tour would be a
+  // different building.
+  if(tourLensBefore!==null){camera.fov=tourLensBefore;camera.updateProjectionMatrix();tourLensBefore=null;}
   if(tourHourBefore!==null){$('#daylight-hour').value=tourHourBefore;$('#daylight-hour').oninput();tourHourBefore=null;}
   restRegionMap();
   tourCaption(null);

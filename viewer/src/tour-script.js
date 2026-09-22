@@ -245,13 +245,31 @@ export const TOUR_CUES = [
 
   // ------------------------------------------------------------------ closing
   // Almost a front elevation, at the viewer's own dusk: the camera comes down
-  // off the roof, closer in, with nothing marked, and turns slowly through the
+  // off the roof, with nothing marked, and turns slowly through the
   // whole summary - and the house's own lamps are lit behind the glazing, one
   // to a storey, which is the only thing that makes a dark elevation read as a
   // home rather than a model. The visitor's daylight and their own light switch
   // are both put back when the tour ends.
-  {at: 343.7, view: 'neighborhood', rooms: [], frame: 'villa', rotate: true,
-   polar: 1.42, pad: 0.92, azimuth: 2.2, hour: 21, windows: true, photos: [48, 49, 24],
+  //
+  // None of that is taste; it is what the plot allows. A neighbour stands 11 m
+  // from this villa's centre, so at the tour's own 16 deg lens the frame has to
+  // stand 74 m out - and from there, clearing that neighbour's roof needs the
+  // eye 40 m up, which is the roof shot this cue was asked to stop being. Hence
+  // the 50 deg lens: it brings the same frame in to 22 m, close enough to look
+  // UP at the house - and the nearer the camera, the more of the circle opens
+  // up, because a short sight line meets fewer neighbours.
+  //
+  // And hence a sweep rather than an orbit. Even at 22 m better than a third of
+  // the circle puts the camera inside a neighbour's walls, so the turn runs
+  // through the arc that is actually clear at this distance - 158 to 230
+  // degrees, across the pool and the garden, the face the listing's own
+  // exterior photographs were taken from - in one slow pass over the whole
+  // closing. pad 1.18 leaves the
+  // roof room: at this polar the near face is metres closer than the box's
+  // middle, so it projects about a fifth larger.
+  {at: 343.7, view: 'neighborhood', rooms: [], frame: 'villa',
+   polar: 1.42, pad: 1.18, lens: 50, azimuth: 2.76, sweep: 1.26,
+   hour: 21, windows: true, photos: [48, 49, 24],
    tr: 'İlk üç katı birbirine bağlayan asansör, 10 metreye 5 metre boyutunda kendine ait deposu olan özel havuz, 900 metrekarelik çift kotlu bahçe, bağımsız girişli müştemilat ve her kuşağa ayrı yaşam alanı sunan esnek bir kurgu.',
    en: 'A lift joining the first three floors, a private pool of 10 by 5 metres with its own tank, a 900 m² garden on two levels, a separately entered annexe, and a plan flexible enough to give every generation its own space.'},
   {at: 359.8, photos: [25, 50, 36],
@@ -284,7 +302,8 @@ export const TOUR_CUES = [
 export function resolveCues(cues = TOUR_CUES) {
   const carried = {view: 'region', radius: 2000, rooms: [], frame: null,
     azimuth: null, polar: null, rotate: false, spot: null, spin: false,
-    group: null, link: false, photos: [], pad: null, hour: null, windows: false};
+    group: null, link: false, photos: [], pad: null, hour: null, windows: false,
+    lens: null, sweep: 0};
   let tr = '', en = '';
   return cues.map((cue, i) => {
     for (const key of Object.keys(carried)) if (key in cue) carried[key] = cue[key];
@@ -302,4 +321,5 @@ export function resolveCues(cues = TOUR_CUES) {
 // what used to rewind the orbit three times before "Karşınızda Villa 21".
 export const cueKey = step =>
   [step.view, step.radius, step.rooms.join('+'), step.frame, step.azimuth, step.polar,
-   step.pad, step.rotate, step.spot, step.spin, step.group, step.windows].join('|');
+   step.pad, step.rotate, step.spot, step.spin, step.group, step.windows,
+   step.lens, step.sweep].join('|');

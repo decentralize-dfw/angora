@@ -103,19 +103,22 @@ test('the opening moves: the map turns, and each sentence brings its own set', (
   assert.ok(new Set(shown.filter(g => g !== null)).size >= 4, 'the opening leans on one family');
 });
 
+// A cue turns either by orbiting freely or by sweeping a bounded arc; the
+// rule is about the turn, not about which mechanism makes it.
+const turns = step => Boolean(step.rotate || step.sweep);
 test('the turn follows one rule, and it is not a habit', () => {
   // "dönüyor, duruyor, sonra dönmeye devam ediyor. bunlar olmasın." The camera
   // orbits only where there is nothing to point at and a long time to fill,
   // and never while something is lit or the tour is inside the house.
   for (const step of steps) {
-    if (!step.rotate) continue;
+    if (!turns(step)) continue;
     assert.ok(!/^f[0-3]$/.test(step.view), `the camera turns inside the house, at ${step.at} s`);
     assert.equal(step.rooms.length, 0, `the camera turns while something is lit, at ${step.at} s`);
   }
   // Two turns, each a long one - not a dozen short ones.
   const blocks = [];
   for (const step of steps) {
-    if (!step.rotate) {blocks.push(null); continue;}
+    if (!turns(step)) {blocks.push(null); continue;}
     const open = blocks[blocks.length - 1];
     if (open) open.push(step.at); else blocks.push([step.at]);
   }
@@ -138,7 +141,7 @@ test('a cue that only changes the pictures does not restart the camera', () => {
 
 test('the closing turns, and offers the listing', () => {
   const last = steps[steps.length - 1];
-  assert.ok(last.rotate, 'the closing shot stands still');
+  assert.ok(turns(last), 'the closing shot stands still');
   assert.ok(last.link, 'the closing never offers the listing');
   // One cue raises it, and it stays up to the end rather than blinking off.
   const first = steps.findIndex(step => step.link);
@@ -386,16 +389,75 @@ test('the closing is the only cue that lights the windows', () => {
   assert.notEqual(cueKey(before), cueKey(lit[0]), 'the windows come on without a reframe');
 });
 
+// The first version of this cue asserted only that the cue ASKED for the
+// windows, and shipped a closing that opened on a neighbour's roof with every
+// window dark. Both of those are checkable without a renderer, so they are.
+test('the closing turns through ground that is actually clear', () => {
+  const plan = JSON.parse(fs.readFileSync(new URL('../src/region-plan.json', import.meta.url)));
+  const closing = steps.find(step => step.windows);
+  const box = ring => {
+    const xs = ring.map(p => p[0]), zs = ring.map(p => p[1]);
+    return [Math.min(...xs), Math.max(...xs), Math.min(...zs), Math.max(...zs)];
+  };
+  const villa = box(plan.villa);
+  const others = plan.buildings.map(box).filter(b =>
+    !(b[0] >= villa[0] - 2 && b[1] <= villa[1] + 2 && b[2] >= villa[2] - 2 && b[3] <= villa[3] + 2));
+  assert.ok(others.length > 20, `only ${others.length} neighbours to be blocked by`);
+  // Both centres the frame could take: the plan's own villa footprint, and the
+  // centre the delivered model's box actually resolves to.
+  const centres = [[(villa[0] + villa[1]) / 2, (villa[2] + villa[3]) / 2], [0.44, -2.93]];
+  const flat = Math.sin(closing.polar);
+  const blocked = (theta, radius) => centres.some(c => {
+    const eye = [c[0] + radius * flat * Math.sin(theta), c[1] + radius * flat * Math.cos(theta)];
+    for (let t = 0.08; t <= 1.0001; t += 0.005) {
+      const x = c[0] + t * (eye[0] - c[0]), z = c[1] + t * (eye[1] - c[1]);
+      if (others.some(b => x >= b[0] && x <= b[1] && z >= b[2] && z <= b[3])) return true;
+    }
+    return false;
+  });
+  // A 50 deg lens puts this frame about 22 m out, and the flight arrives along
+  // the radius - so every bearing the turn passes through has to be clear at
+  // every distance it is seen from, not only where it comes to rest.
+  assert.equal(closing.lens, 50, 'the closing lens changed; re-derive the radii');
+  for (let step = 0; step <= 1.0001; step += 1 / 90) {
+    const theta = closing.azimuth + closing.sweep * step;
+    for (let radius = 16; radius <= 24; radius += 2) {
+      assert.ok(!blocked(theta, radius),
+        `at ${radius} m the closing looks through a neighbour at ${(theta * 180 / Math.PI).toFixed(0)} deg`);
+    }
+  }
+  // It turns far enough to read as a move, and not so far it comes round to
+  // the blocked side.
+  assert.ok(closing.sweep > 1.0 && closing.sweep < 2.1,
+    `a turn of ${(closing.sweep * 180 / Math.PI).toFixed(0)} deg`);
+  // And it leaves the roof room: below 1 the frame is tighter than the box,
+  // and at this polar the near face already projects about a fifth larger.
+  assert.ok(closing.pad >= 1.15, `pad ${closing.pad} crops the house`);
+  // The turn is a sweep, not an orbit: an orbit here goes behind the neighbours.
+  assert.ok(!closing.rotate, 'the closing orbits freely again');
+});
+
+// The lamps need something to light. An exterior view hides the interior
+// group, so the closing has to put it back or the windows stay dark.
+test('the closing renders the rooms its lamps are lighting', () => {
+  const main = fs.readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
+  const fn = main.match(/function setTourWindows\(on\)\{[\s\S]*?\n\}/);
+  assert.ok(fn, 'setTourWindows is gone');
+  assert.match(fn[0], /groups\.get\('interior'\)/, 'the interior group is never made visible');
+  assert.match(fn[0], /visible=on\|\|\/\^f\[0-3\]\$\/\.test\(selected\)/,
+    'leaving the closing does not hand the interior back to the storey rule');
+});
+
 test('the closing comes down off the roof and waits for dusk', () => {
   const closing = steps.filter(step => step.at >= 343.7);
   for (const step of closing) {
     assert.ok(step.polar > 1.2, `the closing still looks down from ${step.polar} at ${step.at} s`);
     assert.equal(step.hour, 21, 'the closing is not at dusk');
     assert.equal(step.rooms.length, 0, 'something is still lit over the closing');
-    assert.ok(step.rotate, 'the closing shot stands still');
+    assert.ok(turns(step), 'the closing shot stands still');
   }
   // One unbroken hold, so the orbit is one move from the summary to the end.
-  assert.equal(new Set(closing.map(cueKey)).size, 1, 'the closing orbit is interrupted');
+  assert.equal(new Set(closing.map(cueKey)).size, 1, 'the closing turn is interrupted');
   // And nothing before it touches the daylight.
   for (const step of steps.filter(step => step.at < 343.7))
     assert.equal(step.hour, null, `the tour changes the light at ${step.at} s`);
