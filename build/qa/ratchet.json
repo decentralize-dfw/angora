@@ -1,0 +1,33 @@
+{
+  "$comment": "Performans mandalı (ANGORA-QUALITY-UPGRADE Bölüm 0.6.2). Baseline YALNIZ gerçek iPhone 13 / Safari ölçümüyle doldurulur — qa-mobile.html çıktısının ratchetCandidate alanı. Ölçülmemiş alan null kalır, 0 değil. Emülasyon/SwiftShader değerleri buraya asla yazılmaz (softwareRaster:true kayıtları build/qa/baseline-*/ altında ayrı durur).",
+  "baseline": {
+    "commit": null,
+    "device": "iPhone 13 / Safari",
+    "acceptedByOwner": false,
+    "villaFps": null,
+    "p95FrameMs": null,
+    "firstInteractiveMs": null,
+    "firstInteractiveBytes": null,
+    "gpuTextureMiB": null,
+    "contextLost": null
+  },
+  "current": {
+    "commit": null,
+    "device": null,
+    "acceptedByOwner": null,
+    "villaFps": null,
+    "p95FrameMs": null,
+    "firstInteractiveMs": null,
+    "firstInteractiveBytes": null,
+    "gpuTextureMiB": null,
+    "contextLost": null
+  },
+  "gate": {
+    "villaFps": ">= baseline.villaFps",
+    "p95FrameMs": "<= baseline.p95FrameMs * 1.05",
+    "firstInteractiveMs": "<= baseline.firstInteractiveMs",
+    "firstInteractiveBytes": "<= baseline.firstInteractiveBytes",
+    "gpuTextureMiB": "<= baseline.gpuTextureMiB",
+    "contextLost": "=== false"
+  }
+}

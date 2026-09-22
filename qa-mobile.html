@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Angora 21 — Telefon Ölçümü</title>
+<style>
+  :root{color-scheme:light}
+  body{margin:0;font:16px/1.5 -apple-system,system-ui,sans-serif;background:#f2f4f3;color:#1c2422}
+  header{padding:14px 18px;background:#1c2422;color:#f2f4f3}
+  header h1{font-size:17px;margin:0;font-weight:600}
+  main{padding:16px;max-width:640px;margin:0 auto}
+  ol{padding-left:22px}
+  li{margin:6px 0}
+  button{font:inherit;border:0;border-radius:12px;cursor:pointer}
+  #start{display:block;width:100%;padding:18px;background:#0a5c46;color:#fff;font-size:20px;font-weight:600;margin:14px 0}
+  #start:disabled{background:#9ab3ac}
+  #copy,#share{padding:12px 18px;background:#1c2422;color:#fff;margin-right:8px}
+  #status{padding:12px 14px;background:#fff;border-radius:12px;border:1px solid #d5dcd9;min-height:44px;white-space:pre-line}
+  #frame-wrap{position:relative;margin:14px 0;border-radius:12px;overflow:hidden;border:1px solid #d5dcd9;background:#dde3e0}
+  iframe{display:block;width:100%;height:62vh;border:0}
+  #result{width:100%;height:200px;font:12px/1.4 ui-monospace,monospace;border:1px solid #d5dcd9;border-radius:12px;padding:10px;box-sizing:border-box}
+  .warn{color:#8a4b00}
+  .done{color:#0a5c46;font-weight:600}
+</style>
+</head>
+<body>
+<header><h1>Angora 21 — iPhone 13 baseline ölçümü</h1></header>
+<main>
+  <p><strong>Bu sayfa neyi ölçer?</strong> Görüntüleyicinin bu telefondaki gerçek
+  akıcılığını ve bellek davranışını. Ölçüm bittiğinde çıkan JSON,
+  <code>build/qa/ratchet.json</code> dosyasının <code>baseline</code> alanına
+  yapıştırılır. Ölçüm yaklaşık 5 dakika sürer.</p>
+  <ol>
+    <li>Bu sayfayı <strong>iPhone 13'te Safari ile</strong> aç (başka cihaz ölçümü mandala yazılmaz).</li>
+    <li>Telefonu şarja takma, düşük güç modunu kapat, diğer sekmeleri kapat.</li>
+    <li><strong>Ölçümü başlat</strong>'a bas ve sayfayı ölçüm bitene kadar açık tut — ekran kilitlenmesin.</li>
+    <li>Bittiğinde <strong>Kopyala</strong> ile JSON'u al ve geliştirme ekibine gönder.</li>
+  </ol>
+  <button id="start">Ölçümü başlat</button>
+  <div id="status">Hazır. Ölçüm başlatılmadı.</div>
+  <div id="frame-wrap"><iframe id="viewer" title="Angora 21 viewer"></iframe></div>
+  <p><button id="copy" hidden>Kopyala</button><button id="share" hidden>Paylaş</button></p>
+  <textarea id="result" hidden readonly></textarea>
+</main>
+<script type="module">
+const $=s=>document.querySelector(s);
+const status=(text)=>{$('#status').textContent=text;};
+const frame=$('#viewer');
+let report={
+  schema:'angora-qa-mobile-1',
+  startedAt:null,finishedAt:null,
+  device:{userAgent:navigator.userAgent,platform:navigator.platform,
+    devicePixelRatio:devicePixelRatio,
+    screen:{width:screen.width,height:screen.height},
+    deviceMemory:navigator.deviceMemory??null,
+    hardwareConcurrency:navigator.hardwareConcurrency??null},
+  physicalDeviceVerified:false, // insan doğrular; sayfa cihazı kanıtlayamaz
+  emulated:false,softwareRaster:false,
+  steps:{},
+  ratchetCandidate:null,
+  contextLost:false,
+  interrupted:null,
+};
+const doc=()=>frame.contentDocument;
+const qa=()=>frame.contentWindow?.__angoraQA;
+const host=()=>doc()?.querySelector('#viewport');
+function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+async function until(test,timeoutMs,label){
+  const start=Date.now();
+  while(Date.now()-start<timeoutMs){
+    try{if(test())return true;}catch{/* frame henüz hazır değil */}
+    await wait(250);
+  }
+  throw Error(label+' zaman aşımı ('+Math.round(timeoutMs/1000)+' sn)');
+}
+async function open(search){
+  frame.src='./'+search;
+  await until(()=>qa()&&host()?.dataset.qaReport
+    &&JSON.parse(host().dataset.qaReport).camera,240000,'Görünüm yüklenmesi');
+  return JSON.parse(host().dataset.qaReport);
+}
+async function run(){
+  $('#start').disabled=true;
+  report.startedAt=new Date().toISOString();
+  try{
+    // 1 — soğuk açılış: villa kamerası, mobil profil
+    status('1/5 · Görünüm yükleniyor (villa)…');
+    const boot=await open('?view=neighborhood&hour=16.5&season=172&light=sun&camera=C03&stats=1');
+    report.steps.boot=boot;
+    doc().defaultView.addEventListener('pagehide',()=>{report.interrupted='pagehide';});
+    // 2 — 15 sn orbit ölçümü
+    status('2/5 · 15 sn orbit ölçümü — telefona dokunma…');
+    const orbit=await qa().measure(15);
+    report.steps.villaOrbit=orbit;
+    // 3 — kat geçişleri
+    status('3/5 · Kat geçişleri (Bodrum → 1. kat → Çatı)…');
+    const transitions=[];
+    for(const id of ['C05','C07','C08']){
+      const t0=performance.now();
+      await qa().applyCamera(id);
+      transitions.push({camera:id,applyMs:Math.round(performance.now()-t0),
+        lastTransition:JSON.parse(host().dataset.lastTransition??'null')});
+    }
+    report.steps.floorTransitions=transitions;
+    // 4 — 30 sn iç mekân yürüyüşü
+    status('4/5 · Salonda 30 sn yürüyüş ölçümü…');
+    await qa().applyCamera('C10');
+    report.steps.walk=await qa().measure(30);
+    // 5 — 3 dakika kesintisiz bekleme: context loss var mı?
+    status('5/5 · 3 dakika dayanıklılık — sayfayı açık tut, ekran kapanmasın…');
+    for(let s=180;s>0;s-=10){
+      await wait(10000);
+      const current=qa().snapshot();
+      if(current.contextLost){report.contextLost=true;break;}
+      status('5/5 · Dayanıklılık: '+s+' sn kaldı…');
+    }
+    const final=qa().snapshot();
+    report.steps.final=final;
+    report.contextLost=report.contextLost||final.contextLost;
+    // Mandal adayı — ratchet.json'ın baseline şemasıyla aynı adlar.
+    // Ölçülemeyen alan null kalır, 0 değil.
+    report.ratchetCandidate={
+      device:'DOLDUR: ör. iPhone 13 / Safari '+(navigator.userAgent.match(/Version\/[\d.]+/)?.[0]??''),
+      acceptedByOwner:false,
+      villaFps:orbit.frame?.fps??null,
+      p95FrameMs:orbit.frame?.p95FrameMs??null,
+      firstInteractiveMs:boot.timing?.firstInteractiveOrbit??null,
+      firstInteractiveBytes:boot.network?.firstInteractiveBytes??null,
+      gpuTextureMiB:final.memory?.estimatedTextureMiB??null,
+      contextLost:report.contextLost,
+    };
+    report.finishedAt=new Date().toISOString();
+    status('Bitti. JSON aşağıda — Kopyala ile al, ekibe gönder.\n'+
+      'Villa FPS: '+(orbit.frame?.fps??'—')+' · p95: '+(orbit.frame?.p95FrameMs?.toFixed(1)??'—')+
+      ' ms · context loss: '+(report.contextLost?'VAR ⚠':'yok'));
+    $('#status').classList.add(report.contextLost?'warn':'done');
+  }catch(error){
+    report.error=String(error?.message??error);
+    report.finishedAt=new Date().toISOString();
+    status('Ölçüm tamamlanamadı: '+report.error+'\nEksik ölçüm mandala yazılmaz; sayfayı yenileyip tekrar dene.');
+  }
+  const json=JSON.stringify(report,null,2);
+  $('#result').hidden=false;$('#result').value=json;
+  $('#copy').hidden=false;
+  if(navigator.share)$('#share').hidden=false;
+  $('#start').disabled=false;
+}
+$('#start').onclick=run;
+$('#copy').onclick=async()=>{
+  try{await navigator.clipboard.writeText($('#result').value);status('Kopyalandı. Ekibe gönderebilirsin.');}
+  catch{$('#result').select();document.execCommand('copy');}
+};
+$('#share').onclick=()=>navigator.share({title:'Angora 21 telefon ölçümü',text:$('#result').value}).catch(()=>{});
+</script>
+</body>
+</html>

@@ -8,6 +8,7 @@ export function createGroundLight(texture,descriptor){
  const direction=new Vector3(...descriptor.sunDirection).normalize(),seen=new WeakSet();
  const floors=descriptor.floorDatums;
  return {
+  texture,
   setSun(sun){const alignment=direction.dot(sun);strength.value=Math.max(0,Math.min(1,(alignment-.985)/.014));},
   apply(material){
    if(seen.has(material))return;seen.add(material);

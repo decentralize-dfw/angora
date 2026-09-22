@@ -311,6 +311,10 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
       return glazing.size;
     },
     snapshot(){return {environment:environmentMode,interior:fixtures.snapshot(),glazing:glazing.size};},
+    // Read-only evidence for the QA harness: which output path is live, and
+    // the textures held in closures that a scene traversal cannot reach.
+    qaState(){return {composer:Boolean(composer),gtao:Boolean(ao?.enabled),compactOutput:Boolean(compactOutput),
+      textures:[groundLight?.texture,floorLight?.texture,...(electricLight?.textures??[]),environment?.texture].filter(Boolean)};},
     setStyle(style){soft=style!=='sun';setTime();},
     releaseMaterial(material){preparedMaterials.delete(material);reflectionMaterials.delete(material);},
     prepareMesh(object,{clipped,context,name}) {

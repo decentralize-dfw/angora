@@ -6,6 +6,7 @@ export function createElectricLighting(entries){
  const enabled={value:1},seen=new WeakSet();
  for(const entry of entries){entry.texture.colorSpace=SRGBColorSpace;entry.texture.flipY=false;}
  return {
+  textures:entries.map(entry=>entry.texture),
   setEnabled(value){enabled.value=value?1:0;},
   apply(material){
    const batch=material.userData.angoraBatch;

@@ -1191,7 +1191,12 @@ async function loadNativeModel(manifest){
     const texture=await new THREE.TextureLoader().loadAsync(new URL(descriptor.file+'?v='+descriptor.sha256.slice(0,12),modelRoot).href);
     lighting[setter](createGroundLight(texture,descriptor));
   }));
-    async function json(file){const response=await fetch(new URL(file,modelRoot),{cache:'no-cache'});if(!response.ok)throw Error(file+' HTTP '+response.status);return file.endsWith('.gz')?JSON.parse(new TextDecoder().decode(gunzipSync(new Uint8Array(await response.arrayBuffer())))):response.json();}
+    async function json(file){const response=await fetch(new URL(file,modelRoot),{cache:'no-cache'});if(!response.ok)throw Error(file+' HTTP '+response.status);
+      if(!file.endsWith('.gz'))return response.json();
+      // Pages serves .gz bytes raw; the dev server negotiates Content-Encoding
+      // and hands them over already inflated. The magic bytes decide.
+      const bytes=new Uint8Array(await response.arrayBuffer());
+      return JSON.parse(new TextDecoder().decode(bytes[0]===0x1f&&bytes[1]===0x8b?gunzipSync(bytes):bytes));}
   const [atlas,rooms,navigation,soil]=await Promise.all([json(manifest.sections),json(manifest.rooms),json(manifest.navigation),manifest.soil_section?json(manifest.soil_section):null]);
   if(navigation.source_native_sha256!==manifest.source_native_sha256)throw Error('Native navigation revision mismatch');
   phaseDone('data');
@@ -1854,6 +1859,31 @@ function bindInterface() {
   }));
 }
 bindInterface();
+// FAZ 0 QA harness: measurement and deterministic cameras, loaded only when
+// the address asks for them (?stats=1 / ?camera=C0x). Without those keys this
+// block imports nothing and the visitor path is untouched.
+const qaQuery=new URLSearchParams(location.search);
+if(qaQuery.get('stats')==='1'||qaQuery.get('camera')){
+  import('./qa-harness.js').then(({installQaHarness})=>installQaHarness({
+    host,query:qaQuery,
+    hooks:{
+      three:THREE,
+      isReady:()=>ready,
+      renderer:()=>renderer,scene:()=>scene,
+      camera:()=>walk?.active?walk.camera:camera,
+      controls:()=>controls,flight:()=>flight,
+      lighting:()=>lighting,walk:()=>walk,
+      selected:()=>selected,
+      enterWalk,exitWalk,invalidate,
+      deliveryProfile,
+      setPlan(on){
+        if(planMode===on)return;
+        planMode=on;$('#toggle-plan').setAttribute('aria-pressed',on);
+        $('#toggle-plan').textContent=on?'3D':'Plan';mode(on);frame(false);
+      },
+    },
+  })).catch(error=>console.warn('QA harness unavailable',error));
+}
 interfaceSound=createInterfaceSound({button:$('#toggle-sound')});
 try {
   setup();
