@@ -71,3 +71,40 @@ test('The street plan layer is OSM-backed once fetched, and villa-centred', () =
   }
   assert.ok(near >= 5, 'streets pass near the villa - the projection is centred');
 });
+
+// The narrated tour's light on the settlement. This one was shipped wrong
+// twice - first as a circle about the villa, which lit a disc of Beysukent
+// and cut the estate's east half off, then as a hole cut from region-plan's
+// `plot`, which is the VILLA's own 22 x 35 m plot: a mark the size of one
+// house on a two-kilometre map. Angora Evleri has an outline of its own, the
+// same one the dashed boundary is drawn from, and the lit area is that shape
+// or it is wrong.
+test('The settlement light is cut from the settlement, not from the villa plot', () => {
+  const streets = JSON.parse(readFileSync(new URL('../src/region-streets.json', import.meta.url), 'utf8'));
+  const source = readFileSync(new URL('../src/region-map.js', import.meta.url), 'utf8');
+  const hole = source.match(/dimHole\.setAttribute\('points',([\s\S]{0,140}?)\);/);
+  assert.ok(hole, 'the dim mask no longer cuts a hole');
+  assert.match(hole[1], /streets\.boundary\.ring/, 'the hole is not cut from the settlement boundary');
+  assert.doesNotMatch(source, /rm-plot-mask[\s\S]*?createElementNS\(svgNS, 'circle'\)/,
+    'the light is a disc about the villa again');
+  if (!streets.roads.length) return;   // stub until the workflow's extract lands
+  assert.ok(streets.boundary, 'region-streets carries no settlement boundary to cut from');
+  assert.match(streets.boundary.name, /Angora/i);
+  // The dashed line and the lit area are the same ring, so they cannot drift.
+  assert.match(source, /shape\('polygon', 'rm-bound', \{ points: flatPoints\(streets\.boundary\.ring\)/);
+  const ring = streets.boundary.ring;
+  assert.ok(ring.length >= 40 && ring.length % 2 === 0, `${ring.length} boundary ordinates`);
+  const span = axis => {
+    const v = ring.filter((_, i) => i % 2 === axis);
+    return Math.max(...v) - Math.min(...v);
+  };
+  // Hundreds of metres across, not the tens of metres a single plot spans.
+  assert.ok(span(0) > 800 && span(1) > 800,
+    `the boundary is ${span(0).toFixed(0)} x ${span(1).toFixed(0)} m - that is a plot, not a settlement`);
+  const plotSpan = axis => {
+    const v = plan.plot.map(p => p[axis]);
+    return Math.max(...v) - Math.min(...v);
+  };
+  assert.ok(plotSpan(0) < 100 && plotSpan(1) < 100,
+    'region-plan.plot is no longer the villa plot - the comment in region-map.js needs rewriting');
+});

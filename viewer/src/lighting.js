@@ -264,7 +264,15 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
       }
       fixtures.setFixtures(data);
     },
-    interior(floor,position,time){activeInteriorFloor=floor;if(walkInterior&&reflectionFloor!==floor){reflectionFloor=floor;updateReflections();}fixtures.select(floor,position,time);},
+    // floor may be 'all' - the whole house lit for a night exterior - which
+    // is not a storey a reflection probe can be baked for, so the probe keeps
+    // the last real storey and only the fixtures hear about it.
+    interior(floor,position,time){
+      const storey=typeof floor==='number'?floor:null;
+      activeInteriorFloor=storey;
+      if(walkInterior&&reflectionFloor!==storey){reflectionFloor=storey;updateReflections();}
+      fixtures.select(floor,position,time);
+    },
     setLights(enabled){lightsEnabled=enabled;electricLight?.setEnabled(enabled);fixtures.setEnabled(enabled);setTime();},setTime,
     setWalkInterior(active){
       walkInterior=active;

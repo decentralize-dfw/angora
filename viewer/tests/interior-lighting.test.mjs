@@ -89,3 +89,33 @@ test('Walking all source stations preserves lamp positions, floor selection and 
   c.select(null,null,time);c.update(time+600);assert.ok(lights.every(light=>!light.visible));
   assert.deepEqual(navigation.lights,source,'The authored light records must not change');
 });
+
+// "içerdeki ışıklar dışardan gözüksün". The closing looks at the house from
+// outside after dark, and a storey's worth of lamps in one room would read as
+// a single bright window. 'all' spends the slots one to a storey instead, so
+// the elevation lights up the way a lived-in house does.
+test("the whole house lights one window per storey, not four in one room",()=>{
+ const fixtures=[];
+ for(const floor of [0,1,2,3]) for(const x of [0,4,8,12]) fixtures.push(fixture(`f${floor}-${x}`,x,floor));
+ const {controller:c,lights}=setup(fixtures,4);
+ c.select('all',[0,3,0],0);c.update(1000);
+ const storeys=c.slots.map(slot=>slot.source?.floor_index);
+ assert.deepEqual([...storeys].sort(),[0,1,2,3],`the slots landed on storeys ${storeys}`);
+ // Ranked from the given point, so each storey contributes its nearest lamp.
+ assert.ok(c.slots.every(slot=>slot.source.position[0]===0),
+   `a storey gave up a nearer lamp: ${c.slots.map(s=>s.source.name)}`);
+ assert.equal(lights.filter(light=>light.intensity>0).length,4);
+ // A storey selection still spends every slot on that storey.
+ c.select(2,[0,3,0],2000);c.update(3000);
+ assert.ok(c.slots.every(slot=>slot.source?.floor_index===2),
+   `walking floor 2 lit ${c.slots.map(s=>s.source?.floor_index)}`);
+});
+
+// Fewer storeys than slots must not leave a slot dark: the rest go to the
+// next nearest lamps wherever they are.
+test("a house with fewer storeys than slots still spends them all",()=>{
+ const {controller:c}=setup([fixture('a',0,0),fixture('b',2,0),fixture('c',4,1),fixture('d',6,1)],4);
+ c.select('all',[0,3,0],0);c.update(1000);
+ assert.equal(c.slots.filter(slot=>slot.source).length,4);
+ assert.equal(new Set(c.slots.map(slot=>slot.source)).size,4,'a fixture was given two slots');
+});

@@ -710,7 +710,7 @@ let tourSpinTimer=null,tourBearing=0;
 // The side gallery's current frames, and the timers that light a sentence's
 // rooms one after another. Both are kept so a language switch can redraw the
 // captions and a cue change can cancel a reveal still in flight.
-let tourPhotos=[],tourReveal=[],tourHourBefore=null;
+let tourPhotos=[],tourReveal=[],tourHourBefore=null,tourLightsBefore=null;
 // The buyer's room menu: drawing names in the viewer's language, internal
 // codes ('Z06') demoted to tooltips, twins told apart by code only.
 function fillRoomMenu(){
@@ -941,6 +941,7 @@ async function applyTourStep(step){
     clearTourReveal();
     spotlight?.setBoxes([]);spotlight?.setCentre(step.spot==='centre');
     tourShadeTarget=step.spot==='centre'?1:0;
+    setTourWindows(step.windows);
     setAutoRotate(false);invalidate();return;
   }
   restRegionMap();
@@ -984,8 +985,30 @@ async function applyTourStep(step){
     const azimuth=step.azimuth??(offset.length()>1.2?Math.atan2(offset.x,offset.y):undefined);
     flight.go({target:centre,polar,span,azimuth});
   } else frame(false);
+  setTourWindows(step.windows);
   setAutoRotate(step.rotate);
   invalidate();
+}
+// "i\u00e7erdeki \u0131\u015f\u0131klar d\u0131\u015fardan g\u00f6z\u00fcks\u00fcn": the closing is a dark elevation, and a
+// dark elevation of an empty house is a model. Lighting one lamp per storey
+// puts a home behind the glazing instead - and it has to be asked for, because
+// selectView turns the interior off for every exterior view, which is right
+// everywhere else in the tour.
+//
+// The visitor's own switch is borrowed, not spent: whatever they had set is
+// restored when the tour ends, the same way their daylight is.
+function setTourWindows(on){
+  if(!lighting)return;
+  if(on){
+    if(tourLightsBefore===null){tourLightsBefore=interiorLights;lighting.setLights(true);}
+    // Ranked from the middle of the house, not from the camera: the closing
+    // is an orbit, so any choice made from where the camera happens to be is
+    // wrong by the time it has turned. From the centre the slots land on the
+    // hall and landing lamps - the ones a stairwell window shows off anyway.
+    lighting.interior('all',buildingBox?.getCenter(new THREE.Vector3())?.toArray()??null);
+  } else if(tourLightsBefore!==null){
+    lighting.setLights(tourLightsBefore);tourLightsBefore=null;
+  }
 }
 function ensureSpotlight(){
   if(!spotlight&&scene){spotlight=createSpotlight($('#app'));scene.add(spotlight.group);}
@@ -1012,7 +1035,7 @@ function endTour(openInfo){
   guidedTour?.stop();
   $('#tour-bar').hidden=true;$('#app').dataset.tour='false';
   $('#tour-listing').hidden=true;
-  clearTourReveal();setTourPhotos([]);
+  clearTourReveal();setTourPhotos([]);setTourWindows(false);
   if(tourHourBefore!==null){$('#daylight-hour').value=tourHourBefore;$('#daylight-hour').oninput();tourHourBefore=null;}
   restRegionMap();
   tourCaption(null);

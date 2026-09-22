@@ -20,8 +20,7 @@ export class InteriorLightController {
     const retained=new Set(this.slots.map(slot=>slot.desired));
     const score=fixture=>Math.hypot(...fixture.position.map((v,i)=>v-this.position[i]))
       -(retained.has(fixture)?this.hysteresisMetres:0);
-    const selected=this.enabled&&this.floor!==null
-      ?this.fixtures.filter(f=>f.floor_index===this.floor).sort((a,b)=>score(a)-score(b)).slice(0,this.slots.length):[];
+    const selected=this.enabled&&this.floor!==null?this.pick(score):[];
     const remaining=new Set(selected),desired=this.slots.map(()=>null);
     // A fixture selected again during fade-out reverses in its original slot.
     for(const field of ['source','desired'])this.slots.forEach((slot,i)=>{
@@ -36,6 +35,29 @@ export class InteriorLightController {
       // Start at the selection event, not the last frame before a long idle.
       this.fadeTo(slot,slot.source&&slot.source===slot.desired?1:0,time);
     });
+  }
+  // Which fixtures the slots are spent on. Walking a storey spends them all
+  // on that storey, nearest the visitor - four lamps around one room is what
+  // being in the room looks like.
+  //
+  // 'all' is the house seen from outside after dark, which is not one lit
+  // storey: it is a window here and a window there. So the slots go one to a
+  // storey, each the nearest of its own, and only double up where the house
+  // has fewer storeys than slots.
+  pick(score) {
+    const ordered=this.fixtures.slice().sort((a,b)=>score(a)-score(b));
+    if(this.floor!=='all')
+      return ordered.filter(f=>f.floor_index===this.floor).slice(0,this.slots.length);
+    const perStorey=new Map();
+    for(const fixture of ordered)
+      if(!perStorey.has(fixture.floor_index))perStorey.set(fixture.floor_index,fixture);
+    const chosen=[...perStorey.values()].slice(0,this.slots.length);
+    const taken=new Set(chosen);
+    for(const fixture of ordered){
+      if(chosen.length>=this.slots.length)break;
+      if(!taken.has(fixture)){chosen.push(fixture);taken.add(fixture);}
+    }
+    return chosen;
   }
   fadeTo(slot,to,start) {
     slot.fade={from:slot.level,to,start,end:start+Math.abs(to-slot.level)*this.fadeMs};

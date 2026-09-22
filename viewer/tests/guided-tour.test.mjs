@@ -369,6 +369,23 @@ test('no cue shows the same frame twice', () => {
   }
 });
 
+// "en son kapanista ... icıskılar disardan gozuksun": the windows are lit for
+// the closing and for nothing else, and the tour is the only thing that ever
+// asks for them, so the visitor's own switch comes back untouched.
+test('the closing is the only cue that lights the windows', () => {
+  const lit = steps.filter(step => step.windows);
+  assert.ok(lit.length, 'no cue lights the house at the closing');
+  assert.ok(lit.every(step => step.at >= 343.7), 'the windows are lit before the closing');
+  assert.ok(lit.every(step => step.hour !== null && step.hour >= 20),
+    'the windows are lit in daylight, where they would not be seen');
+  assert.ok(lit.every(step => !step.view.startsWith('f')),
+    'the windows are lit from inside a storey, where the point is lost');
+  // It is part of the flight's identity, so the cue that turns them on
+  // reframes rather than merely turning over a subtitle.
+  const before = steps[steps.indexOf(lit[0]) - 1];
+  assert.notEqual(cueKey(before), cueKey(lit[0]), 'the windows come on without a reframe');
+});
+
 test('the closing comes down off the roof and waits for dusk', () => {
   const closing = steps.filter(step => step.at >= 343.7);
   for (const step of closing) {

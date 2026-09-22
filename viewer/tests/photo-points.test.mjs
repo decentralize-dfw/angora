@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {PHOTO_POINTS, FLOOR_DATUMS, photoCaption} from '../src/photo-points.js';
+import {roomBox} from '../src/tour-rooms.js';
 
 // The pins are read off the owner's key drawing (photogallery/FOTOLAR-KONUM.jpg)
 // and registered onto the model through each storey plan's room labels. What
@@ -94,4 +95,58 @@ test('A frame marked on several storeys follows them, and only an outdoor one is
   // 25 and 27 are at ground level looking across the pool: they belong to the
   // basement's own garden and are not repeated up the building.
   for (const id of [25, 27]) assert.deepEqual(PHOTO_POINTS.find(p => p.id === id).floors ?? [0], [0]);
+});
+
+// "oda 1 oda 2 gibi yapabilirsin. karışmasın!" - two cards side by side both
+// reading "1. kat · Yatak odası" tell a buyer nothing about which bedroom is
+// which. The register does have twins - 106 and 107 on the first floor, C02
+// and C04 in the attic - and the room menu already tells them apart by code,
+// so the captions carry the same code.
+//
+// Which twin a frame belongs to is not guessed and not read off the caption:
+// a camera photographs what it points at, so the point's own look direction
+// is cast into the twins' measured boxes and the first one the ray enters is
+// the room. Standing in a doorway is why point-in-room is not enough - 13 is
+// taken from the landing side of 107's door.
+test('a photograph of a twin room says which twin, and says the register\'s own code', () => {
+  const datums = rooms.floor_datums_m;
+  const box = room => roomBox(room, rooms.dimensions, datums, rooms.spaces);
+  // Slab intersection on the ground plane: the distance at which the ray
+  // (x,z) + t·(dx,dz) enters the box, or null if it never does.
+  const entry = (point, b) => {
+    let near = -Infinity, far = Infinity;
+    for (const [origin, d, lo, hi] of [[point.x, point.dx, b.min[0], b.max[0]],
+                                       [point.z, point.dz, b.min[2], b.max[2]]]) {
+      if (Math.abs(d) < 1e-9) {if (origin < lo || origin > hi) return null; continue;}
+      let a = (lo - origin) / d, c = (hi - origin) / d;
+      if (a > c) [a, c] = [c, a];
+      near = Math.max(near, a); far = Math.min(far, c);
+    }
+    return far < Math.max(near, 0) ? null : Math.max(near, 0);
+  };
+  // A name borne by two rooms of one storey is a name that needs a code.
+  const twins = new Map();
+  for (const room of rooms.rooms) {
+    const key = `${room.floor_index}|${room.name}`;
+    twins.set(key, (twins.get(key) ?? []).concat(room));
+  }
+  let checked = 0;
+  for (const point of PHOTO_POINTS) {
+    const leaf = point.tr.split(' · ').pop().replace(/ \([^)]*\)$/, '');
+    const family = twins.get(`${point.floor}|${leaf}`);
+    if (!family || family.length < 2) {
+      assert.ok(!/ \([0-9A-Z]+\)$/.test(point.tr),
+        `photograph ${point.id} carries a room code for ${leaf}, which is not a twin on floor ${point.floor}`);
+      continue;
+    }
+    const aimed = family.map(room => ({room, t: entry(point, box(room))}))
+      .filter(hit => hit.t !== null).sort((a, b) => a.t - b.t)[0];
+    assert.ok(aimed, `photograph ${point.id} is captioned ${leaf} but points at neither ${family.map(r => r.code).join(' nor ')}`);
+    assert.match(point.tr, new RegExp(`\\(${aimed.room.code}\\)$`),
+      `photograph ${point.id} looks into ${aimed.room.id} but its caption does not say so`);
+    assert.match(point.en, new RegExp(`\\(${aimed.room.code}\\)$`),
+      `photograph ${point.id}'s English caption does not carry ${aimed.room.code}`);
+    checked++;
+  }
+  assert.ok(checked >= 6, `only ${checked} twin-room photographs were checked`);
 });
