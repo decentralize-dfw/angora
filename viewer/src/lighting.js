@@ -13,6 +13,7 @@ import { HDRLoader } from 'three/addons/loaders/HDRLoader.js';
 import {solarPosition} from './daylight.js';
 import {prepareMaterialResponse,setInteriorMode,setMaterialScale} from './material-response.js';
 import {smoothSurfaceNormals} from './context-surfaces.js';
+import {applyWaterSurface,waterBoundsFrom} from './water-surface.js';
 import {configurePostprocessing} from './postprocessing.js';
 import {applyRenderProfile,referenceProfile} from './render-profile.js';
 import {LinearBloomPass} from './linear-bloom.js';
@@ -216,6 +217,10 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
   }
   let day=172,hour=12.5,environmentMode='procedural-sky',walkInterior=false,lightsEnabled=true;
   let pendingProbeHdr=null,probeMassingGroup=null;
+  // Task 3.5: the pool's wave phase follows the daylight hour - the one time
+  // axis this on-demand renderer actually moves - so captures of the same
+  // state stay byte-deterministic while the hour slider still stirs the water.
+  const waterPhase={value:0};
   const skyDirection=new THREE.Vector3();let skyDrawn=false;
   let soft=true,shadowDistance=110;
   const preparedMaterials=new Set();
@@ -290,6 +295,7 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
   }
   function setTime(nextHour=hour,nextDay=day) {
     hour=nextHour;day=nextDay;const solar=solarPosition(hour,{day});direction.fromArray(solar.direction);
+    waterPhase.value=hour*2.4;
     // Task 1.2-d: with a live sun the baked R channel (direct visibility)
     // would draw the same shadow twice; the G channel's ambient dirt is
     // sun-independent and always stays.
@@ -457,6 +463,13 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
           reflectionMaterials.add(material);material.envMap=roomReflections?.get(reflectionFloor)??null;
         }
         if(name==='context-ground'||(name==='garden'&&!/metal|glass|wood/.test(material.name)))groundLight?.apply(material);
+        // Task 3.5: the pool lives inside the garden batch; the wave/absorption
+        // response keys on its _batchid, so the batch stays one draw.
+        if(FEATURES.poolWaterV2&&name==='garden'&&!material.userData.waterApplied
+          &&material.userData.angoraBatch?.materials.includes('water')){
+          const bounds=waterBoundsFrom(object.geometry,material.userData.angoraBatch.materials.indexOf('water'));
+          if(bounds&&applyWaterSurface(material,{bounds,phase:waterPhase}))material.userData.waterApplied=true;
+        }
         if(['architecture','interior'].includes(name)&&material.userData.angoraBatch?.materials.some(n=>/wood.floor|WOOD-FL|terra_floor|stone_tile|bath_tile|granite floor/i.test(n)))floorLight?.apply(material);
         prepareMaterialResponse(material,{context});preparedMaterials.add(material);
         // Three uses scene.environmentIntensity when envMap is null. Bind the
@@ -464,6 +477,15 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
         if(['plaster','soffit'].includes(material.userData.presentationR27?.family))material.envMap=environment?.texture??null;
         material.clipShadows=true;
           if(isGlazing(material)&&!material.userData.angoraAuthoredPBR){material.metalness=0;if(isSeeThrough(material))material.depthWrite=false;}
+        // Task 3.5, villa tier: exterior panes must be optically flat enough
+        // to hand back the probe's settlement silhouette (3.4f) instead of a
+        // matte smear. roughness SCALES the atlas roughness sample, so .12
+        // caps the pane at near-mirror without touching the frosted interior
+        // set, which stays authored. Context buildings ship no glass at all
+        // (openings are baked into the facades), so the context tier is
+        // already the cheap one by construction.
+        if(FEATURES.glassTiersV2&&['architecture','garden'].includes(name)&&isGlazing(material)&&!material.userData.angoraAuthoredPBR)
+          material.roughness=Math.min(material.roughness??1,.12);
         // The house's own windows, kept so a night exterior can light them.
         // isGlazing, not isSeeThrough: the delivered pane is alphaMode BLEND
         // with no baseColorFactor and no transmission extension, so its opacity

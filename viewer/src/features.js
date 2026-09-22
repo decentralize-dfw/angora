@@ -23,6 +23,8 @@ export const DEFAULT_FEATURES = Object.freeze({
   postfxV2: true,              // Task 1.1b ACTIVE - composer per matrix, desktop tiers only
   pixelBudgetV2: false,        // matrix pixel budgets; off = legacy mobile 1.5M / desktop 5M, cap 2
   probeMassing: true,          // Task 3.4f ACTIVE - context mass in the PMREM probe, one-time rebuild
+  poolWaterV2: true,           // Task 3.5 ACTIVE - analytic wave pool: fresnel + probe reflection + absorption
+  glassTiersV2: true,          // Task 3.5 ACTIVE - exterior glazing polished to reflect the probe silhouette
   authoredMaterialsV2: false,  // Faz 3
   progressiveLoaderV2: false,  // Faz 2
   ktx2Delivery: false,         // Faz 4.1
