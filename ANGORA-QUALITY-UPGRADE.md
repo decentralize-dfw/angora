@@ -107,7 +107,7 @@ Site **GitHub Pages**'te yayınlanıyor:
 - GitHub Pages **özel `Cache-Control` header'ı kabul etmez**; tüm asset'lere
   sabit `max-age=600` gönderir ve bu override edilemez
 
-Bu bir kod görevi değil, **hosting kararı**. Bölüm 5.3'e bak.
+Bu bir kod görevi değil, **hosting kararı**. Task 4.3'e bak.
 
 ### HATA 3 — İki prompt da malzemeyi Phase 3'e koyuyor. Malzeme Phase 1'dir.
 
@@ -234,6 +234,231 @@ villa-local 1024 shadow map · exterior-grade detail map · TANGENT attribute
 
 **Her mobil eklemesi tek tek ölçülür ve tek tek geri alınabilir olmalı.**
 Toplu merge yok.
+
+---
+
+# 0.7. ÇALIŞMA SÖZLEŞMESİ — ENGELLER, YETKİLER, YASAKLAR
+
+> **Bu bölüm dokümanın en önemli kısmıdır.** Ajan olarak yapabileceklerin ve
+> yapamayacakların burada yazılı. Bunu okumadan bir göreve başlarsan,
+> yapamayacağın bir işi "yaptım" diye raporlama riskin var.
+
+## 0.7.1 — Ortamda NE VAR, NE YOK (doğrulandı)
+
+| Araç | Durum | Sonuç |
+|---|---|---|
+| `node` v22 + `npm` | ✅ var | `cd viewer && npm ci` çalışır |
+| **Chromium + Playwright** | ✅ var (`PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers`) | **Masaüstü ölçüm ve screenshot YAPABİLİRSİN** |
+| Python 3 + Pillow | ✅ var | GLB/doku analizi, atlas dilimleme yapabilirsin |
+| `sharp` (npm) | ⚠️ kurulabilir | `tools/batch-delivery` için `pnpm install` gerekir |
+| **`../model-finalization/web`** | ❌ **YOK** | **`build.mjs` ÇALIŞTIRILAMAZ** — Bölüm 0.7.2 |
+| **`build/blender/*.blend`** | ❌ **LFS pointer** (134 B; gerçeği 217 MB) | Blender işi yapılamaz |
+| **`git lfs`** | ❌ **kurulu değil** | `.blend` indirilemez |
+| **Blender** | ❌ **kurulu değil** | Bake/UV repack yapılamaz |
+| **iPhone 13** | ❌ (fiziksel cihaz) | **Mobil mandal ölçümü YAPAMAZSIN** |
+| `playwright` npm paketi | ⚠️ kurulu değil | `npm i -D playwright` ile kur; **tarayıcı indirme, `executablePath` kullan** |
+
+`npm i -D playwright` sonrası **asla `playwright install` çalıştırma** —
+tarayıcı zaten `/opt/pw-browsers/chromium` altında.
+
+## 0.7.2 — ⚠️ `build.mjs` çalıştırılamaz — ama buna İHTİYACIN YOK
+
+`tools/batch-delivery/build.mjs:15` kaynağı şurada arıyor:
+```js
+const source = path.resolve(process.argv[2] ?? path.join(repo,'../model-finalization/web'));
+```
+Bu dizin **repoda yok** ve sağlanmayacak. Yani:
+
+> **Yayındaki GLB'leri yeniden ÜRETEMEZSİN. Ama YERİNDE YAMALAYABİLİRSİN.**
+
+`tools/batch-delivery/refresh-detail.mjs` bu tekniği zaten kullanıyor:
+GLB'yi oku → JSON chunk'ı değiştir → offsetleri yeniden hesapla → yaz →
+**Draco stream'lerinin byte-byte aynı kaldığını doğrula.**
+
+### Test edilmiş yama fonksiyonu — bunu kullan
+
+`tools/batch-delivery/patch-glb.mjs` olarak oluştur:
+
+```js
+import fs from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+const sha = b => createHash('sha256').update(b).digest('hex');
+
+/** GLB'nin JSON chunk'ını değiştirir; BIN chunk'a HİÇ dokunmaz.
+ *  BIN bir bayt değişirse fırlatır — Draco geometrisi kutsaldır. */
+export async function patchGlbJson(file, mutate){
+  const input  = await fs.readFile(file);
+  if(input.readUInt32LE(0)!==0x46546C67) throw Error('glTF değil: '+file);
+  const jsonLen  = input.readUInt32LE(12);
+  const doc      = JSON.parse(input.subarray(20, 20+jsonLen).toString('utf8'));
+  const binStart = 20 + jsonLen;
+  const binLen   = input.readUInt32LE(binStart);
+  const bin      = input.subarray(binStart+8, binStart+8+binLen);
+  const before   = sha(bin);
+
+  mutate(doc);                                  // <-- senin değişikliğin
+
+  const json   = Buffer.from(JSON.stringify(doc),'utf8');
+  const padded = Buffer.concat([json, Buffer.alloc((4-json.length%4)%4, 0x20)]);
+  const out    = Buffer.alloc(12 + 8 + padded.length + 8 + bin.length);
+  out.write('glTF',0,'ascii'); out.writeUInt32LE(2,4); out.writeUInt32LE(out.length,8);
+  out.writeUInt32LE(padded.length,12); out.writeUInt32LE(0x4E4F534A,16); padded.copy(out,20);
+  const bo = 20 + padded.length;
+  out.writeUInt32LE(bin.length,bo); out.writeUInt32LE(0x004E4942,bo+4); bin.copy(out,bo+8);
+
+  if(sha(out.subarray(bo+8, bo+8+bin.length)) !== before)
+    throw Error('BIN chunk değişti — iptal: '+file);
+  return out;
+}
+```
+
+**Bu fonksiyon test edildi:** `architecture.glb` üzerinde 11 malzemenin 10'u
+tek-taraflıya çevrildi, dosya 5.856.884 → 5.856.896 B oldu,
+**Draco BIN chunk'ı byte-byte aynı kaldı**, `extensionsRequired` korundu.
+
+### Bu teknikle yapılabilecekler (kaynak gerekmez)
+
+| Görev | Yöntem | Kaynak gerekir mi |
+|---|---|---|
+| **Task 1.4 `doubleSided`** | JSON chunk: `material.doubleSided=false` | ❌ gerekmez |
+| Malzeme `extras` ekleme/değiştirme | JSON chunk | ❌ |
+| `alphaMode`, `alphaCutoff` düzeltme | JSON chunk | ❌ |
+| `KHR_materials_*` uzantısı ekleme | JSON chunk | ❌ |
+| **Task 4.1 KTX2** | bufferView içeriğini değiştir (`refresh-detail.mjs` modeli) | ❌ — mevcut WebP'yi decode edip KTX2'ye çevir |
+| **Task 3.3 texture2DArray** | Mevcut atlası Pillow/sharp ile dilimle, katman dizisi üret | ❌ |
+| Shadow proxy üretimi | `@gltf-transform` ile mevcut `architecture.glb`'den simplify | ❌ |
+| `interior.glb`'yi kata bölme | primitive bazlı ayırma + Draco stream'leri taşıma | ❌ (zor ama mümkün) |
+| Yeni UV kanalı, yeni geometri, bevel | — | ✅ **Blender gerekir → YAPAMAZSIN** |
+| Lightmap/AO yeniden pişirme | — | ✅ **Blender gerekir → YAPAMAZSIN** |
+| Yeni basecolor/normal doku yazarlığı | — | ✅ **YAPAMAZSIN** |
+
+**Kural:** `build.mjs`'i **yine de düzelt** (gelecekte kaynakla çalıştırılacak),
+ama **teslim ettiğin sonuç yama script'i + yamalanmış GLB olmalı.**
+`build.mjs`'i değiştirip "yeniden build edilince düzelecek" deme — bu teslim değildir.
+
+## 0.7.3 — Yapamayacağın işler: İNSAN GÖREV LİSTESİ
+
+Bu işler **sende değil.** Karşılaştığında Bölüm 0.7.4'teki protokolü uygula.
+
+| # | İş | Neden sende değil | Hangi task |
+|---|---|---|---|
+| H1 | **iPhone 13 ölçümü** (baseline + her faz) | Fiziksel cihaz | Faz 0.4, tüm mandal kapıları |
+| H2 | **Blender bake** (lightmap/AO/probe/HDRI) | Blender + 217 MB LFS yok | 3.4 |
+| H3 | **Malzeme yazarlığı** (fotoğraf kalibreli doku) | Blender + sanatçı kararı | 3.1 |
+| H4 | **Bevel + weighted normals + mesh temizliği** | Blender | 3.2 |
+| H5 | **Hosting kararı** (Cloudflare / Netlify / R2) | Hesap + DNS erişimi | 4.3 |
+| H6 | **`../model-finalization/web` kaynağının sağlanması** | Sahipte | build.mjs |
+| H7 | **Gerçek telefonda gece modu ölçümü** | Fiziksel cihaz | 3.4g |
+
+## 0.7.4 — 🚦 ENGEL PROTOKOLÜ — bir iş sende değilse
+
+Bir göreve geldin ve yapamıyorsun. **Üç seçeneğin var ve sırası bu:**
+
+**1. ETRAFINDAN DOLAŞ.** Gerçekten imkânsız mı, yoksa alışılmış yol mu kapalı?
+   `build.mjs` çalışmıyor → GLB'yi yamala (0.7.2). Blender yok → atlası
+   Pillow ile dilimle. **Önce bunu dene ve denediğini raporla.**
+
+**2. KISMİ TESLİM ET + AÇIKÇA İŞARETLE.** Görevi ikiye böl:
+   senin yapabildiğin kod tarafı + insana kalan içerik tarafı.
+   Kod tarafını **tam** bitir, insan tarafını `BLOCKED.md`'ye yaz:
+
+```markdown
+## H1 — iPhone 13 baseline ölçümü
+**Durum:** BLOCKED — fiziksel cihaz gerekli
+**Hazırladığım:** viewer/src/qa-harness.js + ?stats=1 + 12 kamera URL'i
+**İnsandan istenen:**
+  1. iPhone 13 Safari'de şu URL'i aç: <URL>
+  2. Sayfadaki "Ölçümü başlat" düğmesine bas, 15 s bekleme
+  3. Çıkan JSON'u kopyala, build/qa/ratchet.json içine `baseline` olarak yapıştır
+**Bloke ettiği:** Faz 0 kapanışı, tüm mandal kapıları
+**Bloke ETMEDİĞİ:** Faz 1'in kod görevleri (masaüstü ölçümüyle ilerlenebilir)
+```
+
+**3. DURMA, DEVAM ET.** Bloke iş **sadece kendisini** bloke eder.
+   Faz 1'in kod görevleri iPhone ölçümü olmadan da yazılabilir ve
+   masaüstü Chromium'da ölçülebilir. **Bekleme, ilerle, sonunda raporla.**
+
+### ⛔ MUTLAK YASAKLAR
+
+- **Sayı uydurma.** Ölçemediğin hiçbir metriği yazma. Tahmin ediyorsan
+  `"estimated": true` ve nasıl tahmin ettiğini yaz. `ratchet.json`'da
+  ölçülmemiş alan `null` kalır, `0` değil.
+- **`BLOCKED` işi `done` işaretleme.** Kısmi teslim kısmi raporlanır.
+- **"Yeniden build edilince düzelecek" deme.** Teslim = çalışan çıktı.
+- **Faz kapatma yetkisi sende değil** — mandal tablosunda ölçülmemiş satır
+  varsa faz "kod tarafı bitti, ölçüm bekliyor" durumundadır, "bitti" değil.
+- **Testi silme/skip etme.** Kırmızı test kırmızı kalır ve raporlanır.
+- **Emülasyonu gerçek cihaz diye sunma.** Chromium'un mobil emülasyonu
+  masaüstü GPU'da çalışır; FPS'i mobil FPS değildir. Emülasyon ölçümlerini
+  `"emulated": true` ile işaretle ve mandala **yazma**.
+
+## 0.7.5 — ANTİ-TEMBELLİK SÖZLEŞMESİ
+
+Bu doküman uzun. Her görevin sonunda bir kabul listesi var. Sözleşme:
+
+1. **Bir task'ı, kabul listesinin HER maddesi ✅ olmadan kapatma.**
+   Bir madde ölçülemiyorsa (insan işi), `BLOCKED` yaz — atlamak yok.
+2. **`TODO`, `FIXME`, stub fonksiyon, boş `catch`, `// implement later`
+   bırakma.** Bırakacaksan `BLOCKED.md`'ye taşı.
+3. **"Büyük ölçüde", "çoğunlukla", "temelde tamamlandı" yasak.** Sayı ver.
+4. **Her shader değişikliğinin gerçekten derlendiğini kanıtla.**
+   `onBeforeCompile` içinde yaptığın `replace()` eşleşmezse sessizce hiçbir
+   şey olmaz. Her enjeksiyon için assertion testi yaz:
+   ```js
+   // tests/shader-injection.test.mjs
+   const src = captureFragmentShader(material);
+   assert.ok(src.includes('groundVisibility'), 'ground-light enjekte edilmedi');
+   assert.ok(!src.includes('#include <lights_fragment_begin>'), 'chunk değişmedi');
+   ```
+   **Bu testler olmadan "shader'ı değiştirdim" demek kanıtlanmamış iddiadır.**
+5. **Her task için en az bir yeni test.** `viewer/tests/` altına,
+   mevcut 67 testin yanına. Task listesi → test listesi eşlemesi
+   final raporda olmalı.
+6. **Kod yazdıktan sonra çalıştır.** `npm test` + Playwright ile en az bir
+   gerçek sayfa yüklemesi. Tarayıcı konsolunda hata = task kapanmaz.
+7. **Her faz sonunda `git diff --stat` ver.** Değişmediğini söylediğin bir
+   dosya diff'te görünüyorsa açıkla.
+
+## 0.7.6 — Masaüstü ölçüm ve screenshot harness'i (BUNU SEN YAPACAKSIN)
+
+Chromium var, yani **masaüstü tarafının tamamını sen ölçebilirsin.**
+Mazeret yok. `viewer/scripts/qa-capture.mjs` oluştur:
+
+```js
+// npm i -D playwright   (playwright install ÇALIŞTIRMA)
+import {chromium} from 'playwright';
+import {CAMERAS} from '../src/qa-cameras.js';
+
+const browser = await chromium.launch({
+  executablePath: process.env.PLAYWRIGHT_BROWSERS_PATH
+    ? '/opt/pw-browsers/chromium/chrome-linux/chrome' : undefined,
+  args: ['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'],
+});
+// ⚠️ SwiftShader yazılım rasterizer'dır: FPS'i GERÇEK GPU FPS'i DEĞİLDİR.
+// Screenshot ve draw-call/triangle/program sayımı için GEÇERLİ,
+// FPS/p95 için ölçümü "softwareRaster": true ile işaretle.
+for (const cam of CAMERAS) {
+  const page = await browser.newPage({viewport: cam.viewport});
+  await page.goto(`http://localhost:4173/${cam.url}`, {waitUntil:'networkidle'});
+  await page.waitForFunction(() => document.querySelector('#viewport')?.dataset.deliveryStats);
+  await page.screenshot({path:`build/qa/${tag}/${cam.id}.png`});
+  const stats = await page.evaluate(() => JSON.parse(
+    document.querySelector('#viewport').dataset.qaReport));
+  ...
+}
+```
+
+**Ölçebileceklerin (yazılım rasterizer'da bile geçerli):**
+draw calls · triangles · programs · geometries · textures ·
+`estimatedTextureMiB` · `estimatedGeometryMiB` · ilk-interaktif byte ·
+istek sayısı ve sırası · shader enjeksiyon doğrulaması · görsel diff
+
+**Ölçemeyeceklerin:** gerçek FPS, gerçek p95, gerçek GPU bellek basıncı,
+context loss davranışı. Bunlar `"softwareRaster": true` ile işaretlenir ve
+**mandala yazılmaz.**
+
+> Yani: **geometri/draw-call/bellek/byte tarafında mazeretin yok, sen ölçersin.
+> Sadece FPS tarafı insana kalır.**
 
 ---
 
@@ -703,7 +928,14 @@ Asansör navigasyonu (`lift.js`) · Mobil dokunma kontrolleri (1 parmak rotate, 
 WebXR (`immersive-vr`) · TR/EN i18n · Rehberli sesli tur (`audio/angora21-tur.mp3`, `tour-script.js`) ·
 Clipping plane geçişleri · Kesit yüzeyleri ve cap/hatch sistemi (`section.js`, `sections-current.json`) ·
 Bölge haritası (`region-map.js`) · Paylaşım linki state'i (`share-state.js`) ·
+**Gece dış cephesi: pencere parıltısı (`lighting.js:303 setWindowGlow`) ve
+fixture boost'u (`lighting.js:272 interior(…,boost)`)** ·
 Mevcut doğrulanmış ölçüler ve oda m² değerleri
+
+> ⚠️ **`main` aktif bir daldır — bu doküman yazıldıktan sonra da özellik eklendi.**
+> Faz 1'e başlamadan `git log --oneline <bu-commit>..origin/main -- viewer/src/`
+> çalıştır ve yeni eklenen her özelliği bu korunacaklar listesine ekle.
+> Rebase et, çakışmayı kendi lehine çözme. Yeni özellik = yeni regression testi.
 
 **Geometri ve ölçü doğruluğu kutsaldır.** Topografya kot farkları (havuz tarafı sol
 zemin ~2 m yüksek, sağ ~5-6 m alçak) korunacak. Triangle azaltma topografyayı düzleştirerek
@@ -813,14 +1045,48 @@ Repo'nun mevcut QA çıktıları (`quality-check.json`, `render-check.json`)
 Sonucu `build/qa/ratchet.json` → `baseline` alanına yaz (Bölüm 0.6.2 şeması).
 **Bu dosya bundan sonra her fazın kabul kapısıdır ve asla kötüleşemez.**
 
-### Kabul
-- [ ] `npm test` → 67/67
-- [ ] 12 kamera URL ile tekrar açılabiliyor, piksel farkı yok
-- [ ] Baseline JSON + screenshot seti commit edildi
-- [ ] **`build/qa/ratchet.json` iPhone 13 / Safari ölçümüyle dolduruldu**
-- [ ] `detectTier()` iPhone 13'ü **`mobile-high`** olarak sınıflandırıyor
-      (`mobile-low` değil — doğrula, gerekirse eşikleri ayarla)
-- [ ] Hiçbir render davranışı değişmedi (görsel diff = 0)
+### Task 0.5 — 📱 Mobil ölçüm sayfası (BLOKE İŞİ İNSANA DEVREDİLEBİLİR HALE GETİR)
+
+iPhone 13'e erişimin yok (Bölüm 0.7.1) ama **ölçümü insanın 2 dakikada
+yapabileceği hale getirebilirsin.** Bu senin işin, bloke değil.
+
+`viewer/qa-mobile.html` oluştur — tek dosya, bağımlılıksız:
+- Büyük "Ölçümü başlat" düğmesi
+- Viewer'ı iframe'de veya aynı sayfada `?camera=C03&quality=mobile-high&stats=1` ile açar
+- Protokolü **otomatik** yürütür: 15 s orbit → kat geçişleri → 30 s walk →
+  3 dk bekleme, context-loss dinleyicisi açık
+- Sonunda JSON'u ekranda gösterir + **"Kopyala" düğmesi** + QR/paylaş
+- Ekranda adım adım Türkçe talimat: *"1. Bu sayfayı iPhone 13 Safari'de aç…"*
+
+Bu sayfa `BLOCKED.md`'deki H1 maddesinin teslimatıdır.
+**İnsanın yapması gereken tek şey: aç, bas, JSON'u yapıştır.**
+
+### Kabul — AJAN TARAFI (mazeret yok, hepsi sende)
+- [ ] `cd viewer && npm ci && npm test` → **67/67 yeşil**
+- [ ] `viewer/src/qa-cameras.js` — 12 kamera, `share-state.js` formatında
+- [ ] 12 kamera `?camera=C0x` ile açılıyor, iki kez açılışta piksel farkı **= 0**
+- [ ] `viewer/scripts/qa-capture.mjs` çalışıyor, 12×2 screenshot üretiyor
+- [ ] `?stats=1` → `host.dataset.qaReport` tam JSON şemasıyla dolu
+- [ ] `estimatedTextureMiB` doğrulaması: masaüstü ≈ **256 MiB**, mobil ≈ **124 MiB**
+      çıkmalı (bu dokümandaki ölçümle ±%10 uyuşmazsa harness hatalıdır, düzelt)
+- [ ] `build/qa/baseline-<commit>/` commit edildi
+- [ ] `viewer/qa-mobile.html` çalışıyor (masaüstü tarayıcıda da test edilebilir)
+- [ ] `detectTier()` yazıldı ve **iPhone 13 profiliyle** (`deviceMemory` yok,
+      `hardwareConcurrency` 6, `screen.min` 390, `pointer:coarse`)
+      **`mobile-high`** döndürüyor — birim testi yaz.
+      ⚠️ Mevcut `LITE` mantığı (`main.js:83`) iPhone 13'ü `lite` sayıyor
+      (`min(screen) 390 ≤ 820`). Yeni tier bunu tekrarlamamalı.
+- [ ] Hiçbir render davranışı değişmedi — 12 kamerada görsel diff **= 0**
+- [ ] `BLOCKED.md` oluşturuldu, H1 maddesi yazıldı
+
+### Kabul — İNSAN TARAFI (sen yapamazsın, ama hazırlarsın)
+- [ ] `build/qa/ratchet.json` → `baseline` iPhone 13 ölçümüyle dolu,
+      `"acceptedByOwner": true`
+
+> **Faz 0 "kod tarafı bitti" olarak kapanabilir ve Faz 1'e geçilebilir.**
+> Mandal `null` kaldığı sürece **hiçbir faz "tamamlandı" ilan edilemez** —
+> ama kod işi durmaz. İnsan ölçümü geldiğinde mandal geriye dönük doldurulur
+> ve o ana kadarki fazlar yeniden değerlendirilir.
 
 ---
 
@@ -958,7 +1224,7 @@ mevcut değerler 4096 için ayarlanmış. 2048'e inerken `normalBias`'ı
 - Yüksek detay mimari: `castShadow=false`, `receiveShadow=true`
 
 **Bütçe kontrolü:** proxy Draco ile ~150–400 KB olmalı. Bu, `packageMaxMiB`
-bütçesine eklenir — Task 5.2'de bütçe yeniden tanımlanacak.
+bütçesine eklenir — Task 4.1'de (KTX2) bütçe yeniden tanımlanacak.
 
 #### 1.2-c — Gölge güncelleme politikası
 
@@ -1138,7 +1404,7 @@ const gradeReady = FEATURES.exteriorGradeRevival
 `prepare()` callback'inden **sonra**, `prepareBatchedMaterial()`'dan **önce**
 bağla — program kimliği derlemeden önce yerleşsin.
 
-**Bütçe:** 1,2 MB PNG → KTX2'ye çevrilince ~350 KB (Task 5.1). İlk etapta PNG kalsın,
+**Bütçe:** 1,2 MB PNG → KTX2'ye çevrilince ~350 KB (Task 4.1). İlk etapta PNG kalsın,
 `requestIdleCallback` ile yükle, gelene kadar düz renk görünsün.
 
 ### Kabul 1.3
@@ -1154,10 +1420,12 @@ bağla — program kimliği derlemeden önce yerleşsin.
 
 ### Task 1.4 — `doubleSided` katliamı + culling
 
-**Tek satır, en yüksek perf getirisi:**
+**En yüksek perf getirisi. `build.mjs` çalışmıyor (Bölüm 0.7.2) — GLB'yi yamala.**
 
+### İKİ YERE BİRDEN yaz
+
+**(a) `build.mjs:84` — gelecek için düzelt** (kaynak sağlandığında doğru üretsin):
 ```js
-// tools/batch-delivery/build.mjs:84
 // ESKİ
 output.createMaterial(...).setDoubleSided(true)
 // YENİ
@@ -1169,16 +1437,70 @@ const needsDoubleSided =
 output.createMaterial(...).setDoubleSided(needsDoubleSided)
 ```
 
-**Risk:** ters normal'li yüzeyler kaybolur. Bu bir **bug açığa çıkarma** işlemidir,
-gizlenmiş hatayı görünür yapar. Prosedür:
-1. `build.mjs` çıktısında hangi batch'lerin tek taraflı olduğunu raporla
-2. 12 QA kamerasında A/B screenshot al
-3. Kaybolan yüzey varsa **kaynağı düzelt** (Blender'da normal recalculate),
-   `doubleSided`'e geri dönme
-4. Geçici güvenlik valfi: `?features=singleSided:0`
+**(b) `tools/batch-delivery/patch-single-sided.mjs` — ŞİMDİ teslim edilecek olan.**
+Bölüm 0.7.2'deki `patchGlbJson()` ile, 12 GLB'yi (2 profil × 6 parça) yerinde yamala:
 
-**Beklenen kazanç:** kapalı hacimlerde fragment işi ~%40–50 azalır.
-`renderer.info.render.triangles` değişmez ama **frame time düşer** — ölç.
+```js
+import {patchGlbJson} from './patch-glb.mjs';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {createHash} from 'node:crypto';
+
+const PRESERVE = /foliage|leaf|leaves|needle|hedge|curtain|sheer|fabric|blind|grass/i;
+const base = 'build/web/batched';
+const report = [];
+
+for (const profile of ['desktop','mobile']) {
+  const manifest = JSON.parse(await fs.readFile(path.join(base,profile,'manifest.json')));
+  for (const part of manifest.parts) {
+    const file = path.join(base, profile, part.file);
+    let flipped = [], kept = [];
+    const out = await patchGlbJson(file, doc => {
+      for (const m of doc.materials) {
+        const names = m.extras?.angoraBatch?.materials ?? [];
+        const needs = m.alphaMode === 'BLEND' || m.alphaMode === 'MASK'
+                   || names.some(n => PRESERVE.test(n));
+        if (m.doubleSided && !needs) { m.doubleSided = false; flipped.push(m.name); }
+        else kept.push(m.name + (needs ? ' (gerekli)' : ' (zaten tek taraflı)'));
+      }
+    });
+    await fs.writeFile(file, out);
+    part.gpu_sha256 = createHash('sha256').update(out).digest('hex');  // ← ŞART
+    report.push({profile, part: part.name, flipped, kept});
+  }
+  await fs.writeFile(path.join(base,profile,'manifest.json'), JSON.stringify(manifest));
+}
+await fs.writeFile(path.join(base,'single-sided-report.json'), JSON.stringify(report,null,2));
+```
+
+> ⚠️ **`gpu_sha256`'yı manifest'te güncellemeyi UNUTMA.** `native-delivery.js:36`
+> onu `?v=` cache-buster olarak kullanıyor; güncellemezsen tarayıcı eski GLB'yi
+> servis eder ve "değişmedi" sanırsın. Bu tam olarak bir sahte-negatif tuzağıdır.
+
+**Doğrulanmış beklenti** (bu doküman yazılırken `architecture.glb` üzerinde test edildi):
+```
+11 malzemenin 10'u tek-taraflıya çevrildi, 1'i (BLEND cam) korundu
+dosya 5.856.884 → 5.856.896 B   ·   Draco BIN chunk byte-byte AYNI
+```
+
+### Risk yönetimi — ters normal'li yüzeyler kaybolabilir
+
+Bu bir **bug açığa çıkarma** işlemidir. Prosedür:
+1. `single-sided-report.json` — hangi malzeme çevrildi, hangisi neden korundu
+2. 12 QA kamerasında A/B screenshot + **piksel diff yüzdesi** (sadece göz değil)
+3. Bir yüzey kayboluyorsa: o malzemeyi `PRESERVE` listesine **isimle** ekle,
+   sebebini rapora yaz (*"context-buildings-other-1: komşu çit tek yüzey modellenmiş"*).
+   **Toplu geri alma yok** — tek tek, gerekçeli.
+4. Blender'da normal düzeltme **senin işin değil** (H4) → `BLOCKED.md`'ye yaz
+5. Güvenlik valfi: `?features=singleSided:0` runtime'da eski davranışa döner
+   (`native-delivery.js`'de malzeme hazırlanırken `material.side=DoubleSide`)
+
+**Beklenen kazanç:** kapalı hacimlerde fragment işi ~%25–45 azalır.
+`renderer.info.render.triangles` **değişmez** — frame time düşer.
+Yazılım rasterizer'da FPS güvenilmez; bunun yerine **`?debug=timing` ile
+GPU-agnostik bir proxy ölç:** aynı kamerada 200 kare çiz, toplam JS+submit
+süresini karşılaştır, ve `EXT_disjoint_timer_query_webgl2` varsa gerçek GPU
+zamanı al (Chromium'da `--enable-webgl-draft-extensions` ile).
 
 **Ek: frustum culling.**
 ```js
@@ -1510,6 +1832,41 @@ normal map, roughness varyasyonu. **Villa arsası ile çevre arasında dikiş ol
 > **Ön koşul:** Task 4.1 (KTX2) bu fazdan **önce** bitmiş olmalı.
 > Aşağıdaki "BÜTÇE ACİL DURUMU" kuralına bak.
 
+## 🚦 FAZ 3 ENGEL HARİTASI — neyi sen yapacaksın, neyi yapamazsın
+
+Bu fazın **içerik** tarafı Blender gerektirir ve Blender yok (Bölüm 0.7.1).
+`build/blender/angora-material-lighting.blend` **134 baytlık bir LFS pointer'ı**
+(gerçeği 217 MB) ve `git lfs` kurulu değil. Göreve başlamadan bu tabloyu oku:
+
+| Task | Ajan yapar | İnsan yapar | Ajanın teslimi |
+|---|---|---|---|
+| **3.1 Malzeme yazarlığı** | ❌ | ✅ H3 | Her hero malzeme için **ölçülmüş eksik raporu**: mevcut sd, hücre px, texel/m, hedef; `assets/pbr/manifest.json` için doldurulacak şablon; ekran-alanı texel yoğunluğu ölçüm aracı |
+| **3.2 Bevel + mesh temizliği** | ❌ | ✅ H4 | **Kusur listesi**: coplanar/duplicate/ters normal taraması (GLB üzerinde Python ile yapılabilir), `polygonOffset` hack'inin tetiklendiği yüzeyler, öncelik sırası |
+| **3.3 texture2DArray** | ✅ **TAM** | — | Atlası Pillow ile dilimle, `DataArrayTexture` üret, `batched-material.js`'i dönüştür, `atlasSample`/`maxLod`/`pad`/`grid` kavramlarını sil |
+| **3.4a/b UV repack** | ❌ | ✅ H2 | **Doluluk ölçüm aracı** (%4,1 / %3,5 sayılarını üreten script) + hedef %65 doğrulayıcısı |
+| **3.4c/d Rebake / native-current yeniden teslim** | ⚠️ **kısmen** | ✅ H2 | `native-current/ktx2/`'deki 4096²/2048² AO'ları **KTX2 olarak doğrudan bağlama** hattı — bu **bake değil, teslim** işidir ve sende |
+| **3.4e Probe'lar** | ⚠️ kısmen | ✅ H2 | Probe seçim/interpolasyon kodu sende; panorama üretimi insanda |
+| **3.4f HDRI + çevre kütleli probe** | ✅ **TAM** | — | `buildEnvironment()`'a düz zemin yerine context LOD2 mesh'i koy — **kod işi, yeni asset yok** |
+| **3.4g Gece modu / shadow_flag** | ✅ **TAM** | — | `room-lighting.json` düzenlemesi + shader varyant ölçümü |
+| **3.5 Cam / havuz** | ✅ **TAM** | — | Üç kademeli cam, havuz shader'ı, planar reflection — hepsi kod |
+
+**Yani Faz 3'ün yaklaşık yarısı senin.** "Blender yok" demek Faz 3'ü atlamak
+değildir — 3.3, 3.4f, 3.4g, 3.5 tamamen sende ve bunlar tek başına büyük
+görsel kazanç. Önce onları bitir, sonra 3.1/3.2/3.4a-b için `BLOCKED.md`'ye
+**ölçülmüş, öncelik sıralı, insanın doğrudan çalışabileceği** brief yaz.
+
+### 3.4d için özel not — bu "bake" değil, "teslim"
+
+`build/web/native-current/ktx2/` içinde **113 KTX2, 41,9 MB**, içinde
+**2 × 4096²** ve **7 × 2048²** AO bake'i **zaten UASTC+ZSTD olarak duruyor.**
+Bunları kullanmak için Blender gerekmiyor — sadece:
+1. Hangi KTX2'nin hangi malzemeye ait olduğunu `*.gpu.gltf` dosyalarından çöz
+2. Bütçeye sığdır (4096² → 2048² KTX2 downscale, `toktx`/`basisu` yoksa
+   decode→resize→re-encode; yoksa mevcut mip seviyesini kırp)
+3. `patchGlbJson` + bufferView değişimiyle batched GLB'lere bağla
+
+**Bu tamamen sende ve mevcut 1024² WebP AO'ya göre 4× texel kazandırır.**
+
 ### ⚡ BÜTÇE ACİL DURUMU — KTX2'yi öne çek
 
 Faz 1 veya Faz 2 sonunda mobil mandalı **GPU bellek** kaleminden kırılıyorsa,
@@ -1664,7 +2021,7 @@ c) **Rebake.** `build/blender/angora-material-lighting.blend` (Git LFS).
 
 d) **`build/web/native-current/`'daki 4K/2K AO'ları YENİDEN KULLAN.**
    113 KTX2 / 41,9 MB zaten var: 2×4096², 7×2048². **Yeniden pişirme —
-   yeniden teslim et.** Task 5.1 KTX2 hattı bunları doğrudan taşıyabilir.
+   yeniden teslim et.** Task 4.1 KTX2 hattı bunları doğrudan taşıyabilir.
    Bütçe için: 4096² AO'yu 2048² KTX2 UASTC'ye indir (~1,2 MB) — hâlâ
    mevcut 1024² WebP'den **4× texel.**
 
@@ -1937,7 +2294,11 @@ Aşağıdakiler sağlanmadan **"görsel kalite tamamlandı" deme:**
 - [ ] Kat kesiti sırasında gölge ve AO bozulmuyor
 - [ ] Plan modunda görüntü temiz ve okunaklı
 - [ ] Oda isimleri ve ölçüler her kalite profilinde okunuyor
-- [ ] Hiçbir malzemede `emissiveIntensity > 0` — gerçek lamba mesh'i hariç
+- [ ] Hiçbir malzemede `emissiveIntensity > 0` — **üç istisna dışında:**
+      (1) gerçek lamba/armatür mesh'i,
+      (2) `setWindowGlow()` ile aydınlatılan villa camları (`lighting.js:303`) —
+          gece dış cephesi özelliğidir, **kaldırma**,
+      (3) `interior(…, boost)` gece modu fixture takviyesi (`lighting.js:272`)
 - [ ] Bloom tüm beyaz duvarı parlatmıyor, sadece armatür/highlight
 
 ---
@@ -2061,28 +2422,71 @@ rapora yazılır ve sonraki fazda bütçe açıldığında geri açılır.
 # 11. İLK SOMUT ADIM — ŞİMDİ BUNU YAP
 
 ```
+0. Bölüm 0.5 (önceki prompt hataları) ve Bölüm 0.7 (çalışma sözleşmesi) OKU
 1. cd viewer && npm ci && npm test        → 67/67 yeşil olmalı
-2. FAZ 0'ı tamamla:
-   - 12 QA kamerası + ölçüm harness'i
-   - GERÇEK TELEFONDA baseline ölçümü → build/qa/ratchet.json
-3. FAZ 1 için DOSYA BAZLI implementation planı yaz:
+2. BLOCKED.md oluştur, H1–H7'yi (Bölüm 0.7.3) içine yaz
+3. FAZ 0'ı tamamla — AJAN TARAFI:
+   12 QA kamerası · qa-capture.mjs (Playwright) · ?stats=1 harness ·
+   qa-mobile.html · detectTier() + testi · baseline screenshot seti
+   → iPhone ölçümü BLOCKED kalır, DURMA
+4. FAZ 1 için DOSYA BAZLI plan yaz:
    her task → değişecek dosyalar, satırlar, yeni dosyalar, yeni testler
-   + her task için TAHMİNÎ BÜTÇE ETKİSİ (kazanç mı maliyet mi, ne kadar)
-4. Planı onaya sunmadan uygula — FAZ 1 MERGE SIRASINA uy:
+   + TAHMİNÎ BÜTÇE ETKİSİ (kazanç mı maliyet mi, ne kadar)
+5. Onay bekleme, uygula — FAZ 1 MERGE SIRASINA uy:
    1.1 → 1.4 → 1.6 → [ARA ÖLÇÜM] → 1.3 → 1.5 → 1.2 → 1.1b
-5. Her merge'den sonra mandal tablosunu güncelle
-6. Faz 1 çıkış kapısı raporunu üret
+6. Her merge'den sonra ölç ve mandal tablosunu güncelle
+   (ölçemediğin satır null kalır, 0 değil)
+7. Faz 1 çıkış kapısı raporunu üret + BLOCKED.md'yi güncelle
 ```
 
-Gereksiz onay isteme. Belirsiz durumda **mimari doğruluğu, ölçü doğruluğunu ve
-mobil performansı koruyan** seçeneği seç ve gerekçesini raporla.
+## Ne zaman SORMA, ne zaman SOR
+
+**SORMA — kendin karar ver ve gerekçeni raporla:**
+- İki teknik yaklaşım arasında seçim (VSM mi PCFSoft mu, hangi LOD eşiği)
+- Bir sayının tam değeri (shadow bias, fog yoğunluğu, FOV derecesi)
+- Bir kalite kaleminin bütçe yüzünden kısılması
+- Bir dosyanın nereye konacağı, bir fonksiyonun nasıl adlandırılacağı
+- Bir testin nasıl yazılacağı
+- Bölüm 0.7.2'deki yama tekniğine geçmek
+
+**SOR / `BLOCKED.md`'ye yaz ve devam et:**
+- Fiziksel cihaz gerektiren her şey (H1, H7)
+- Blender gerektiren her şey (H2, H3, H4)
+- Hesap/DNS/para gerektiren her şey (H5)
+- Repoda olmayan kaynak dosya (H6)
+- **Mevcut bir ürün özelliğini kaldırmak zorunda kalman** (Bölüm 3 listesi) —
+  bu asla tek taraflı verilecek bir karar değil
+
+**DUR ve sor (nadir):**
+- Bölüm 3'teki değiştirilemez bir gereksinimi korumanın tek yolu,
+  bu dokümandaki bir talimatı çiğnemekse
+- Ölçüm, bu dokümandaki bir temel sayıyı çürütüyorsa
+  (örn. atlaslar düz değilse, gölge aslında çalışıyorsa) —
+  **teşhis yanlışsa plan da yanlıştır, devam etme, raporla**
 
 **Kalite ile hız çatıştığında hız kazanır.** Kaliteyi kıs, ölç, raporla —
 ve hangi kalite kaleminin hangi bütçe yüzünden kısıldığını yaz ki
 sonraki fazda (KTX2 ve LOD bütçe açtığında) geri açılabilsin.
 
-Tamamlandığını yalnızca **kod + screenshot + performans ölçümü + mandal tablosu**
-ile kanıtlayabildiğinde bildir.
+## Bitirdiğini nasıl söylersin
+
+Şu üç cümleden **hangisi doğruysa onu** söyle, karıştırma:
+
+> **"Faz N tamamlandı."**
+> → Kabul listesinin her maddesi ✅, mandal tablosunda hiç `null` yok,
+>   `npm test` yeşil, screenshot'lar üretildi. **Başka hiçbir durumda deme.**
+
+> **"Faz N kod tarafı tamamlandı, ölçüm bekliyor."**
+> → Kod maddeleri ✅, mandalda insan ölçümü eksik.
+>   `BLOCKED.md`'de tam olarak ne beklendiği yazılı.
+
+> **"Faz N kısmen tamamlandı: X, Y bitti; Z bloke."**
+> → Z'nin neden bloke olduğu ve etrafından dolaşmayı **denediğin**
+>   yazılı (Bölüm 0.7.4 adım 1).
+
+Tamamlandığını yalnızca **kod + screenshot + ölçüm + mandal tablosu +
+güncel `BLOCKED.md`** ile kanıtlayabildiğinde bildir.
+**Bu beşinden biri eksikse "tamamlandı" kelimesini kullanma.**
 
 ---
 
@@ -2110,10 +2514,10 @@ main.js:562   WebGLRenderer({antialias:coarse})
 main.js:570   renderPixelRatio
 main.js:580   createLighting({baked: ...})      ← Task 1.1 ANA HEDEF
 main.js:1080  loadNativeModel (batched yolu)
-main.js:1089  room probe yüklemesi              ← Task 2.1c
+main.js:1089  room probe yüklemesi              ← Task 2.1-c
 main.js:1130  aoMapIntensity = .7
 main.js:1137  ktx2Loader.dispose()              ← Task 4.1
-main.js:1149  gunzipSync örneği                 ← Task 2.1b modeli
+main.js:1149  gunzipSync örneği                 ← Task 2.1-b modeli
 main.js:1154  setFixtures(allRooms:true)
 main.js:1202  batched erken return              ← Task 1.3 engeli
 main.js:1354  wantsGrade (ÖLÜ)                  ← Task 1.3
@@ -2127,16 +2531,18 @@ lighting.js:130   DirectionalLight
 lighting.js:131   sun.castShadow / mapSize      ← Task 1.2
 lighting.js:165   compactOutput
 lighting.js:167   if(!compact && !baked)        ← Task 1.1
-lighting.js:196   spot castShadow
-lighting.js:230   setTime() sonu — koşulsuz shadow needsUpdate ← Task 1.2c
-lighting.js:238   HDRLoader FloatType           ← Task 2.1d
-lighting.js:263   keepSlotsVisible
-lighting.js:267   interior(floor|'all') — gece dış cephesi modu ← Task 3.4g
-lighting.js:297   object.castShadow = !glass
-lighting.js:304   groundLight.apply (villa DIŞINDA) ← Task 1.2d
-lighting.js:305   floorLight.apply
-lighting.js:306   prepareMaterialResponse (ÖLÜ)
-lighting.js:312   anisotropy (ÖLÜ)              ← Task 1.6
+lighting.js:198   spot castShadow
+lighting.js:232   setTime() sonu — koşulsuz shadow needsUpdate ← Task 1.2-c
+lighting.js:240   HDRLoader FloatType           ← Task 2.1-d
+lighting.js:265   keepSlotsVisible
+lighting.js:272   interior(floor|'all', …, boost) — gece modu ← Task 3.4-g
+lighting.js:303   setWindowGlow() — pencere parıltısı ⚠️ KORUNACAK (Bölüm 3)
+lighting.js:321   object.castShadow = !glass
+lighting.js:328   groundLight.apply (villa DIŞINDA) ← Task 1.2-d
+lighting.js:329   floorLight.apply
+lighting.js:330   prepareMaterialResponse (ÖLÜ)
+lighting.js:342   glazing.add — gece parıltısı malzeme seti
+lighting.js:343   anisotropy (ÖLÜ)              ← Task 1.6
 
 material-response.js:35/146/156  angoraAuthoredPBR guard  ← ÖLÜ KOD (Bölüm 0.5)
 material-response.js:66          roof polygonOffset hack  ← Task 3.2
@@ -2148,7 +2554,7 @@ batched-material.js:25  maxLod = log2(width*pad)  ← Task 3.3 / shimmer kaynağ
 batched-material.js:33  spot strip (garden hariç) ← Task 1.6
 
 native-delivery.js:90   model.visible             ← Task 1.4
-ground-light.js         setSun fade penceresi     ← Task 1.2d
+ground-light.js         setSun fade penceresi     ← Task 1.2-d
 exterior-grade.js       TÜM DOSYA ÖLÜ             ← Task 1.3
 
 tools/batch-delivery/build.mjs:26        size=512, pad=4
@@ -2156,7 +2562,7 @@ tools/batch-delivery/build.mjs:63        grid seçimi
 tools/batch-delivery/build.mjs:84        setDoubleSided(true)   ← Task 1.4
 tools/batch-delivery/build.mjs:96        angoraAuthoredPBR:true
 tools/batch-delivery/refresh-detail.mjs:81  texture_limits
-tools/batch-delivery/refresh-detail.mjs:90  byte budget throw   ← Task 3.4d
+tools/batch-delivery/refresh-detail.mjs:90  byte budget throw   ← Task 3.4-d
 ```
 
 ## EK B — Kullanılmayan, hazır duran varlıklar
@@ -2164,7 +2570,7 @@ tools/batch-delivery/refresh-detail.mjs:90  byte budget throw   ← Task 3.4d
 ```
 viewer/public/textures/*.png        1,2 MB  gerçek tileable doku      → Task 1.3
 assets/textures/*.png               1,2 MB  (pages kopyası)           → Task 1.3
-build/web/native-current/ktx2/      41,9 MB 113 KTX2, 2×4096², 7×2048² → Task 3.4d
+build/web/native-current/ktx2/      41,9 MB 113 KTX2, 2×4096², 7×2048² → Task 3.4-d
 build/web/native-current/shared/    118 MB  orijinal PNG/bin           → Task 3.1 referansı
 assets/review-textures/*.png        8,5 MB  fotoğraf referansları      → Task 3.1
 photogallery/                       34 MB   55 mülk fotoğrafı          → Task 3.1 kalibrasyon
