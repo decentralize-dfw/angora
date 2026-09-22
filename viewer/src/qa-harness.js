@@ -239,7 +239,12 @@ export function installQaHarness({host, query, hooks}) {
     appliedCamera = spec;
     // The idle detail-map revival (Task 1.3) rebinds hero materials some
     // time after boot; a deterministic frame waits for it, not for luck.
-    await window.__angoraGradeReady?.catch?.(() => {});
+    // Guarded, not optional-chained: an unconditional await yields to the
+    // event loop even when the promise does not exist, and that one
+    // interleaved frame was measured flipping a z-fight tie at the eaves
+    // junction on the mobile C07 gate frame (26 px). With the feature off
+    // this path must not yield at all.
+    if (window.__angoraGradeReady) await window.__angoraGradeReady;
     // Fixture and daylight fades ease over wall-clock time; a screenshot taken
     // mid-fade depends on boot timing. A far-future update() snaps every fade
     // to its settled state - the same trick the boot's warming renders use.

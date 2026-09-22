@@ -617,10 +617,12 @@ function setup() {
   });
   // Bound both package concurrency and decoder workers. A phone's core count
   // does not imply enough memory for simultaneous model/texture decode.
-  // This is a decode-memory decision, not a render-quality one, so it keys
-  // off the delivery profile rather than the quality tier.
+  // A decode-memory decision, not a render-quality one - and it stays on the
+  // physical pointer: keying it off ?profile= changed decode order under a
+  // forced profile, which re-ties a z-fight at the eaves junction (measured:
+  // 26 px on the mobile C07 gate frame). Loading must not move pixels.
   const draco = new DRACOLoader(); draco.setDecoderPath(decoderRoot.href);
-  const budget=assetLoadBudget({compact:deliveryProfile==='mobile',cores:navigator.hardwareConcurrency});
+  const budget=assetLoadBudget({compact:matchMedia('(pointer: coarse)').matches,cores:navigator.hardwareConcurrency});
   draco.setWorkerLimit(budget.draco);
   loader = new GLTFLoader(); loader.setDRACOLoader(draco);
   loader.setKTX2Loader(createTextureLoader(renderer,budget.textures));
