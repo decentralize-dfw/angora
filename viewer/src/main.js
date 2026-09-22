@@ -293,7 +293,7 @@ function renderFrame(time) {
       if(next!==tourShade){tourShade=next;spotlight.setLevel(tourShade);invalidate();}
       if(tourShade>.01&&spotlight.update(activeCamera,host.clientWidth,host.clientHeight))invalidate();
     }
-    siteContext?.update(selected,activeCamera,controls.target,Boolean(transition||flight?.active),walk?.active);
+    siteContext?.update(selected,activeCamera,controls.target,Boolean(transition||flight?.active),walk?.active,Boolean(guidedTour?.active));
     host.dataset.runtime=JSON.stringify({view:selected,plan:planMode,projection:activeCamera.type,cameraPosition:activeCamera.position.toArray(),target:controls.target.toArray(),sectionHeight:clip.constant,loaded:nativeDelivery?[...nativeDelivery.loaded.keys()]:[...groups.keys()],zoom:activeCamera.zoom,autoRotate:controls.autoRotate,zoomEnabled:controls.enableZoom,rotate:controls.mouseButtons.LEFT===THREE.MOUSE.ROTATE,transition:Boolean(transition),textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,rooms:Boolean(groups.get('interior')?.visible),lamps:lighting?.snapshot?.().interior?.map(f=>Math.round(f.rendered_intensity_cd))??[],glazing:lighting?.snapshot?.().glazing??0});
     renderer.info.reset();
     lighting.render(activeCamera);

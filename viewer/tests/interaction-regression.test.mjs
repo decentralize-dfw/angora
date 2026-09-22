@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import * as THREE from 'three';
 import {CameraFlight} from '../src/camera-flight.js';
 import {createInterfaceSound} from '../src/interface-sound.js';
@@ -42,4 +43,18 @@ test('Audio remains opt-in and denied storage does not block the control',()=>{
 test('Unavailable audio is disabled without breaking the viewer',()=>{
   const button=new Button();createInterfaceSound({button,root:new EventTarget(),storage:null,Context:null});
   assert.equal(button.disabled,true);
+});
+
+// The neighbourhood labels every plot with its number, which is useful when
+// you are reading the street - and during the narrated tour it is two
+// numbering systems in one picture, competing with the camera marks that
+// match the photo cards. The tour owns the numbering while it runs.
+test('the neighbours give up their numbers to the tour', () => {
+  const site = readFileSync(new URL('../src/site-context.js', import.meta.url), 'utf8');
+  const main = readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
+  assert.match(site, /update\(view,camera,target,transitioning,walking,numbering\)/,
+    'site-context takes no numbering flag');
+  assert.match(site, /&&!numbering;/, 'the numbering flag does not put the labels away');
+  assert.match(main, /siteContext\?\.update\(.*Boolean\(guidedTour\?\.active\)\)/,
+    'main never tells the site context that the tour is numbering');
 });

@@ -13,8 +13,12 @@ export function createSiteContext(data,host,onVilla){
   });
   const scale=document.querySelector('#model-scale'),bar=scale.querySelector('i'),label=scale.querySelector('span');
   const point=new THREE.Vector3(),a=new THREE.Vector3(),b=new THREE.Vector3(),right=new THREE.Vector3();
-  return {update(view,camera,target,transitioning,walking){
-    const active=['region','neighborhood'].includes(view)&&!transitioning&&!walking;
+  return {update(view,camera,target,transitioning,walking,numbering){
+    // The narrated tour numbers things of its own - the camera marks that
+    // match its photo cards - and two numbered circles in one picture is the
+    // confusion the cards were numbered to end. While the tour owns the
+    // numbering, the neighbours stand down.
+    const active=['region','neighborhood'].includes(view)&&!transitioning&&!walking&&!numbering;
     overlay.hidden=!active;scale.hidden=walking||transitioning;
     if(!camera||!target)return;
     camera.updateMatrixWorld();
