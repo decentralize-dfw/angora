@@ -18,8 +18,8 @@ export const DEFAULT_FEATURES = Object.freeze({
   viewCulling: false,          // hiding planting seen through walk glazing is a quality call, deferred
   plantsChunking: true,        // pure culling win: shared attributes, off-screen cells only
   cameraRigsV2: true,          // Task 1.5 ACTIVE - per-view lenses, 16:30 sun opening, horizon fog
-  gardenSpotStrip: false,      // Task 1.6 - strip fixture loops from garden shaders
-  atlasAnisotropyFix: false,   // Task 1.6 - anisotropy only where texture2D samples
+  gardenSpotStrip: true,       // Task 1.6 ACTIVE - strip fixture loops from garden shaders
+  atlasAnisotropyFix: true,    // Task 1.6 ACTIVE - anisotropy only where texture2D samples
   postfxV2: false,             // Task 1.1b - composer per quality matrix
   pixelBudgetV2: false,        // matrix pixel budgets; off = legacy mobile 1.5M / desktop 5M, cap 2
   authoredMaterialsV2: false,  // Faz 3
