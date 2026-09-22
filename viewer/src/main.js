@@ -37,6 +37,7 @@ import {applyGradeValues,loadGradeTextures,bindGradeTextures,reviveBatchedGrade}
 import {createSiteContext} from './site-context.js';
 import {createRegionMap,atlasMeta} from './region-map.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
+import {rigFovFor} from './camera-rigs.js';
 import {prepareContextSurfaces} from './context-surfaces.js';
 import {batchContext} from './context-batch.js';
 import {mergeEqualMaterials,abstractVehicle,splitContextSoil,splitContextBuildings,createContextMassing,authoredNodeName} from './context-massing.js';
@@ -335,8 +336,11 @@ function frame(initial=false,keep=false) {
   if(!buildingBox)return;
   if(Boolean(camera.isOrthographicCamera)!==planMode){
     flight.cancel();
-    const next=planMode?new THREE.OrthographicCamera(-20,20,20,-20,camera.near,camera.far):new THREE.PerspectiveCamera(16,camera.aspect,camera.near,camera.far);
-    next.position.copy(camera.position);next.quaternion.copy(camera.quaternion);next.aspect=camera.aspect;next.fov=16;
+    // Task 1.5: leaving plan mode restores the VIEW'S lens, not the one
+    // hardcoded 16 that used to snap every storey back to telephoto.
+    const rigFov=rigFovFor(selected,{enabled:FEATURES.cameraRigsV2});
+    const next=planMode?new THREE.OrthographicCamera(-20,20,20,-20,camera.near,camera.far):new THREE.PerspectiveCamera(rigFov,camera.aspect,camera.near,camera.far);
+    next.position.copy(camera.position);next.quaternion.copy(camera.quaternion);next.aspect=camera.aspect;next.fov=rigFov;
     camera=next;controls.object=camera;flight.camera=camera;
   }
   const floor=selected.startsWith('f'),aspect=host.clientWidth/Math.max(1,host.clientHeight);
@@ -366,9 +370,10 @@ function frame(initial=false,keep=false) {
   const polar=planMode?.0001:selected==='region'?.58:floor?.56:.78;
   const insets=floor?floorFrameInsets():{verticalFraction:1,horizontalFraction:1};
   frameSpan=Math.max((size.z*Math.cos(polar)+size.y*Math.sin(polar))/insets.verticalFraction,size.x/aspect/insets.horizontalFraction)*(floor?1.08:1.14);
-  if(selected==='region'&&contextBox)frameSpan=fitContextBounds(contextBox,aspect,polar).span;
+  const rigFov=rigFovFor(selected,{enabled:FEATURES.cameraRigsV2});
+  if(selected==='region'&&contextBox)frameSpan=fitContextBounds(contextBox,aspect,polar,0,rigFov).span;
   if(keep){center.copy(controls.target);if(floor)center.y=[0,3.0996,6.3714,9.4705][Number(selected[1])];frameSpan=camera.position.distanceTo(controls.target)*2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2));}
-  flight.go({target:center,polar,span:frameSpan,zoom:keep?camera.zoom:1,azimuth:planMode||selected==='region'?0:initial?.804:undefined},initial===true);
+  flight.go({target:center,polar,span:frameSpan,zoom:keep?camera.zoom:1,azimuth:planMode||selected==='region'?0:initial?.804:undefined,fov:planMode?undefined:rigFov},initial===true);
   resize();
 }
 const SHEETS={'options-panel':'open-options','info-panel':'open-info','floor-panel':'open-floor'};
@@ -1253,6 +1258,15 @@ async function loadNativeModel(manifest){
   step('scene');message(t('loadingScene'));
   buildingBox=new THREE.Box3().setFromObject(groups.get('architecture'));
   gardenBox=new THREE.Box3().setFromObject(groups.get('garden'));contextBox=buildingBox.clone();
+  lighting.setShadowBounds(buildingBox,gardenBox);
+  // Task 1.2-b: the sun's depth pass renders this simplified stand-in, not
+  // the 3 M-triangle scene. Off the critical path; until it arrives the sun
+  // simply casts nothing, which is yesterday's look.
+  if(FEATURES.hybridSunShadow&&manifest.shadow_proxy){
+    const proxyURL=new URL(manifest.shadow_proxy.file+'?v='+manifest.shadow_proxy.gpu_sha256.slice(0,12),modelRoot);
+    loadAsset(proxyURL.href).then(gltf=>{lighting.attachShadowProxy(gltf.scene,clip);invalidate();})
+      .catch(error=>console.warn('Shadow proxy unavailable; dynamic sun casts nothing',error));
+  }
   for(const model of groups.values())contextBox.union(new THREE.Box3().setFromObject(model));
   if(manifest.site_context){
     const data=await json(manifest.site_context);siteContext=createSiteContext(data,host,()=>selectView('building'));
@@ -1801,6 +1815,13 @@ function bindInterface() {
   if (shared.hour !== undefined) $('#daylight-hour').value = shared.hour;
   if (shared.season) $('#daylight-season').value = shared.season;
   if (shared.style) $('#lighting-style').value = shared.style;
+  // Task 1.5: the door opens at golden hour under direct sun - noon-flat
+  // light is the flattest the facade can look. A shared link still says
+  // exactly what it wants; only the unspoken opening changes.
+  if (FEATURES.cameraRigsV2) {
+    if (shared.hour === undefined) $('#daylight-hour').value = 16.5;
+    if (!shared.style) $('#lighting-style').value = 'sun';
+  }
   for(const id of ['toggle-plan','reset-view','rotate-mode','pan-mode','zoom-in','zoom-out']){
     const button=$('#'+id);button.dataset.needsModel='';button.disabled=true;
   }
@@ -1851,7 +1872,10 @@ function bindInterface() {
   $('#open-floor').onclick=()=>panel('floor-panel',$('#floor-panel').hidden);
   document.querySelectorAll('[data-close-panel]').forEach(button=>button.onclick=()=>panel('',false));
   $('#daylight-hour').oninput=()=>{const hour=Number($('#daylight-hour').value);$('#daylight-time').textContent=clockLabel(hour);$('#daylight-hour').setAttribute('aria-valuetext',clockLabel(hour));lighting?.setTime(hour,Number($('#daylight-season').value));rememberState();invalidate();};
-  $('#daylight-season').onchange=()=>$('#daylight-hour').oninput();
+  $('#daylight-season').onchange=()=>{$('#daylight-hour').oninput();lighting?.requestShadowUpdate();invalidate();};
+  // Task 1.2-c: the shadow map re-renders when the hand SETTLES on an hour
+  // (change fires on release/keyup), never per drag tick.
+  $('#daylight-hour').addEventListener('change',()=>{lighting?.requestShadowUpdate();invalidate();});
   $('#toggle-lights').onclick=()=>{interiorLights=!interiorLights;$('#toggle-lights').setAttribute('aria-pressed',interiorLights);lighting?.setLights(interiorLights);invalidate();};
   $('#lighting-style').onchange=e=>{lighting?.setStyle(e.target.value);rememberState();invalidate();};
   applyStatic();

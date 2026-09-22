@@ -9,7 +9,14 @@ export function createGroundLight(texture,descriptor){
  const floors=descriptor.floorDatums;
  return {
   texture,
-  setSun(sun){const alignment=direction.dot(sun);strength.value=Math.max(0,Math.min(1,(alignment-.985)/.014));},
+  // Task 1.2-d: the R channel is the baked DIRECT-sun visibility. With a
+  // live shadow map drawing the same occlusion it doubles the darkening, so
+  // it stands down; the G channel's local ambient term is applied in the
+  // shader unconditionally and never depends on the sun.
+  setSun(sun,dynamicShadowActive=false){
+    const alignment=direction.dot(sun);
+    strength.value=dynamicShadowActive?0:Math.max(0,Math.min(1,(alignment-.985)/.014));
+  },
   apply(material){
    if(seen.has(material))return;seen.add(material);
    const previous=material.onBeforeCompile,key=material.customProgramCacheKey();

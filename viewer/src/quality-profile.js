@@ -159,6 +159,14 @@ export function effectiveQuality(tier, view, {batched = true, features = {}} = {
     value.shadowMapSize = value.dynamicSunShadow ? (mobile ? 1024 : 4096) : 0;
     value.shadowCameraMode = 'legacy-frame';
     value.fixtureShadows = !mobile && !batched;
+  } else if (mobile && !features.mobileSunShadow) {
+    // Bölüm 0.6.2: the iPhone 13 ratchet decides whether a phone can afford
+    // the depth pass, and the ratchet is measured on the device (H1), never
+    // assumed. Until that measurement is green, the matrix's mobile-high
+    // shadow stays off.
+    value.dynamicSunShadow = false;
+    value.shadowCameraMode = 'disabled';
+    value.shadowMapSize = 0;
   }
   if (!features.postfxV2) {
     value.postProcessing = !batched && !mobile;

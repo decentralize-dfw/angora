@@ -6,7 +6,8 @@
 // Flags flip to true only in the task that ships their behavior, after the
 // task's own measurement - never in bulk.
 export const DEFAULT_FEATURES = Object.freeze({
-  hybridSunShadow: false,      // Task 1.2 - villa-local dynamic sun shadow
+  hybridSunShadow: false,      // Task 1.2 - villa-local dynamic sun shadow (desktop)
+  mobileSunShadow: false,      // Task 1.2 - phones join ONLY after H1 measures the ratchet green
   exteriorGradeRevival: false, // Task 1.3 - detail maps on batched materials
   singleSided: true,           // Task 1.4 - honor patched GLBs; 0 forces DoubleSide back
   viewCulling: true,          // Task 1.4 - walk hides the neighbourhood planting

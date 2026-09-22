@@ -156,10 +156,14 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
   // exposes for, so unscaled it reaches the curve already saturated and lands
   // as flat white with no blue left in it. This holds it where a sky belongs.
   scene.backgroundIntensity=.55;
-  // No haze. Distance fog was tried here for depth and it read as a grey cast
-  // over the whole settlement rather than as air, which is worse than the flat
-  // look it was meant to fix.
+  // No haze by default. Distance fog was tried here for depth and it read as
+  // a grey cast over the whole settlement rather than as air. Task 1.5 tries
+  // again with what that attempt lacked: the HORIZON'S own colour (tracked by
+  // the hour) instead of grey, and only at the two scales where kilometres of
+  // depth exist to describe - region and neighbourhood. Density starts at the
+  // plan's 0.0018 and is judged on the gate frames.
   scene.fog=null;
+  const atmosphericFog=FEATURES.cameraRigsV2?new THREE.FogExp2(horizon.getHex(),0.0018):null;
   // A phone draws the scene straight to the canvas. The desktop chain is six
   // full-screen passes over a half-float target - occlusion, antialiasing,
   // bloom, grade, dither - and on a handset that is the whole frame budget
@@ -206,10 +210,53 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
   });
   const fixtures=new InteriorLightController(interior);
   const fixtureVertices=createFixtureVertices(fixtures);
+  // Task 1.2 - hybrid sun shadow. The baked GI stays; ONE dynamic sun draws
+  // the contact the bake cannot: villa-local, proxy-only depth pass,
+  // re-rendered on events rather than frames.
+  let shadowBounds=null,shadowMapSizeApplied=q.shadowMapSize||1024;
+  const shadowProxyMaterial=new THREE.MeshBasicMaterial();
+  const dynamicShadowActive=()=>FEATURES.hybridSunShadow&&quality.value.dynamicSunShadow;
+  function applyShadowQuality(current){
+    const enabled=Boolean(current.dynamicSunShadow);
+    if(renderer.shadowMap.enabled!==enabled){renderer.shadowMap.enabled=enabled;if(enabled)renderer.shadowMap.needsUpdate=true;}
+    sun.castShadow=enabled;
+    const size=current.shadowMapSize;
+    if(enabled&&size&&size!==shadowMapSizeApplied){
+      shadowMapSizeApplied=size;sun.shadow.mapSize.setScalar(size);
+      sun.shadow.map?.dispose();sun.shadow.map=null;renderer.shadowMap.needsUpdate=true;
+    }
+  }
+  // Tight light-space box around the subject (Bölüm 4, Task 1.2-a): extents
+  // come from the measured building/garden bounds, never a fixed number.
+  // villa-local at 2048 over a ~34 m span is ~60 texel/m - the baked ground
+  // map carries 0.42 m/texel, twenty-five times coarser.
+  function fitSunShadow(current){
+    if(!shadowBounds)return false;
+    let target=null;
+    switch(current.shadowCameraMode){
+      case 'floor-local':target=shadowBounds.building.clone().expandByScalar(3);break;
+      case 'villa-local':target=shadowBounds.building.clone().union(shadowBounds.garden).expandByScalar(8);break;
+      case 'wide-proxy':target=shadowBounds.building.clone().union(shadowBounds.garden).expandByScalar(25);break;
+      default:return false;
+    }
+    const centre=target.getCenter(new THREE.Vector3());
+    const radius=target.getBoundingSphere(new THREE.Sphere()).radius;
+    sun.target.position.copy(centre);
+    shadowDistance=radius*2.2;
+    sun.position.copy(centre).addScaledVector(direction,shadowDistance);
+    Object.assign(sun.shadow.camera,{left:-radius,right:radius,top:radius,bottom:-radius,near:radius*.2,far:radius*4.4});
+    // The authored bias pair was calibrated for a 4096 map; scale with size.
+    sun.shadow.normalBias=.018*(4096/shadowMapSizeApplied);
+    sun.shadow.camera.updateProjectionMatrix();
+    return true;
+  }
   function setTime(nextHour=hour,nextDay=day) {
     hour=nextHour;day=nextDay;const solar=solarPosition(hour,{day});direction.fromArray(solar.direction);
-    groundLight?.setSun(direction);
-    floorLight?.setSun(direction);
+    // Task 1.2-d: with a live sun the baked R channel (direct visibility)
+    // would draw the same shadow twice; the G channel's ambient dirt is
+    // sun-independent and always stays.
+    groundLight?.setSun(direction,dynamicShadowActive());
+    floorLight?.setSun(direction,dynamicShadowActive());
     const daylight=THREE.MathUtils.smoothstep(solar.altitude,-6,28),warmth=THREE.MathUtils.smoothstep(solar.altitude,0,35);
     // Key over fill, about 2:1 at midday. With the fill nearly as strong as
     // the sun the image went flat - no shadow side, no specular pop - which
@@ -226,6 +273,7 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     scene.environmentIntensity=.08+(soft?.70:.55)*daylight;
     sun.shadow.radius=soft?2.5:1;sun.shadow.intensity=soft?.82:1;
     horizon.set(0x182734).lerp(new THREE.Color(0xe4e9ed),daylight);
+    atmosphericFog?.color.copy(horizon);
     sky.material.uniforms.sunPosition.value.copy(direction);
     // Six cube faces of sky, re-rendered only when the sun has actually moved.
     // setTime() is also how a storey change re-frames the shadow camera, and
@@ -234,13 +282,36 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     if(environment&&(!skyDrawn||skyDirection.dot(direction)<.9999)){skyDirection.copy(direction);skyDrawn=true;skyCamera.update(renderer,skyScene);}
     sun.position.copy(sun.target.position).addScaledVector(direction,shadowDistance);
     for(const material of preparedMaterials)if(material.userData.indirectDaylightIntensity)material.lightMapIntensity=material.userData.indirectDaylightIntensity*daylight;
-    renderer.shadowMap.needsUpdate=true;return solar;
+    // Task 1.2-c: while the hour slider DRAGS, only the sun moves; the
+    // shadow map re-renders on discrete events (slider release, storey
+    // change, view change) through requestShadowUpdate. The legacy pipeline
+    // keeps its per-setTime refresh.
+    if(!FEATURES.hybridSunShadow)renderer.shadowMap.needsUpdate=true;
+    return solar;
   }
   return {
     setRoomReflections(value){roomReflections=value;updateReflections();},
     setElectricLight(value){electricLight=value;electricLight?.setEnabled(lightsEnabled);},
-    setGroundLight(value){groundLight=value;groundLight?.setSun(direction);},
-    setFloorLight(value){floorLight=value;floorLight?.setSun(direction);},
+    setGroundLight(value){groundLight=value;groundLight?.setSun(direction,dynamicShadowActive());},
+    setFloorLight(value){floorLight=value;floorLight?.setSun(direction,dynamicShadowActive());},
+    // Task 1.2: the measured subject bounds the shadow camera wraps, and the
+    // simplified stand-in the depth pass renders instead of the real scene.
+    setShadowBounds(building,garden){
+      shadowBounds={building:building.clone(),garden:garden.clone()};
+      if(dynamicShadowActive()&&fitSunShadow(quality.value))renderer.shadowMap.needsUpdate=true;
+    },
+    requestShadowUpdate(){if(renderer.shadowMap.enabled)renderer.shadowMap.needsUpdate=true;},
+    attachShadowProxy(model,clipPlane){
+      shadowProxyMaterial.clippingPlanes=[clipPlane];
+      shadowProxyMaterial.clipShadows=true;
+      model.traverse(o=>{if(!o.isMesh)return;
+        o.layers.set(3);o.castShadow=true;o.receiveShadow=false;o.material=shadowProxyMaterial;});
+      // The depth pass sees ONLY the proxy layer; the beauty camera never
+      // looks at layer 3, so the stand-in costs one depth render and no
+      // visible pixel.
+      sun.shadow.camera.layers.set(3);
+      scene.add(model);renderer.shadowMap.needsUpdate=true;
+    },
     async loadEnvironment(url) {
       const hdr=await new HDRLoader().setDataType(THREE.FloatType).loadAsync(url);hdr.mapping=THREE.EquirectangularReflectionMapping;
       // The moving directional light owns the sun. Bound the HDR's solar
@@ -365,15 +436,24 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     },
     frame(view,contextBounds) {
       reflectionFloor=/^f[0-3]$/.test(view)?Number(view.slice(1)):null;updateReflections();
-      const contextSize=contextBounds?.getSize(new THREE.Vector3());
-      const extent=view==='neighborhood'?52:view==='region'?Math.max(contextSize?.x??320,contextSize?.z??320)*.65:24;
-      sun.shadow.normalBias=view==='region'?.09:view==='neighborhood'?.035:.018;
-      shadowDistance=view==='region'?340:110;
-      sun.target.position.set(0,4,-5);
-      if(view==='region'&&contextBounds)sun.target.position.copy(contextBounds.getCenter(new THREE.Vector3()));
-      sun.position.copy(sun.target.position).addScaledVector(direction,shadowDistance);
-      Object.assign(sun.shadow.camera,{left:-extent,right:extent,top:extent,bottom:-extent});
+      // The quality profile has already been told the view by selectView;
+      // enable/size follow it, then the camera wraps the subject.
+      applyShadowQuality(quality.value);
+      const hybrid=dynamicShadowActive()&&fitSunShadow(quality.value);
+      if(!hybrid){
+        const contextSize=contextBounds?.getSize(new THREE.Vector3());
+        const extent=view==='neighborhood'?52:view==='region'?Math.max(contextSize?.x??320,contextSize?.z??320)*.65:24;
+        sun.shadow.normalBias=view==='region'?.09:view==='neighborhood'?.035:.018;
+        shadowDistance=view==='region'?340:110;
+        sun.target.position.set(0,4,-5);
+        if(view==='region'&&contextBounds)sun.target.position.copy(contextBounds.getCenter(new THREE.Vector3()));
+        sun.position.copy(sun.target.position).addScaledVector(direction,shadowDistance);
+        Object.assign(sun.shadow.camera,{left:-extent,right:extent,top:extent,bottom:-extent});
+      }
       sun.shadow.camera.updateProjectionMatrix();renderer.shadowMap.needsUpdate=true;
+      // Air only where there is distance to read through it; indoors and at
+      // the villa a fog term would just grey the subject.
+      scene.fog=atmosphericFog&&(view==='region'||view==='neighborhood')?atmosphericFog:null;
       // Region frames the whole settlement, where a crevice-scale radius has
       // nothing left to describe and only costs, so occlusion stops there.
       if(ao)ao.enabled=referenceProfile.aoEnabled&&view!=='region';

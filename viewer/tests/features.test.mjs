@@ -85,11 +85,19 @@ test('Feature flags hand control to the matrix, mobile red lines hold', () => {
   assert.equal(desktop.shadowMapSize, 2048);
   assert.equal(desktop.postProcessing, true);
   assert.equal(desktop.compactOutput, false);
+  // Task 1.2 / Bölüm 0.6.2: a phone joins the shadow only after the H1
+  // device measurement flips mobileSunShadow - the matrix alone is not
+  // permission to spend an iPhone's frame budget.
   const phone = effectiveQuality('mobile-high', 'villa', {batched: true, features: on});
-  assert.equal(phone.dynamicSunShadow, true);
-  assert.equal(phone.shadowMapSize, 1024);
+  assert.equal(phone.dynamicSunShadow, false);
+  assert.equal(phone.shadowMapSize, 0);
   assert.equal(phone.postProcessing, false);        // Bölüm 0.6.4: no postfx on mobile, ever
   assert.equal(phone.compactOutput, false);
+  const measuredPhone = effectiveQuality('mobile-high', 'villa',
+    {batched: true, features: {...on, mobileSunShadow: true}});
+  assert.equal(measuredPhone.dynamicSunShadow, true);
+  assert.equal(measuredPhone.shadowMapSize, 1024);
+  assert.equal(measuredPhone.postProcessing, false);
   const low = effectiveQuality('mobile-low', 'villa', {batched: true, features: on});
   assert.equal(low.dynamicSunShadow, false);
   assert.equal(low.shadowMapSize, 0);
