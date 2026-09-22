@@ -542,8 +542,18 @@ h1 strong{font-weight:700}
   animation:tour-photo-in 460ms cubic-bezier(.22,.8,.2,1) both}
 .tour-gallery figure:nth-child(2){animation-delay:110ms}
 .tour-gallery figure:nth-child(3){animation-delay:220ms}
-.tour-gallery img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#1b2320}
-.tour-gallery figcaption{padding:6px 11px 8px;font-size:11px;line-height:1.35;color:#dee6e1}
+/* The frames sit back at 40 %: they are a glance at the room, not the subject.
+   The caption and its number stay legible. */
+.tour-gallery img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#1b2320;opacity:.4}
+.tour-gallery figcaption{display:flex;align-items:baseline;gap:7px;padding:6px 11px 8px;
+  font-size:11px;line-height:1.35;color:#dee6e1}
+.tour-gallery figcaption b{flex:0 0 auto;width:15px;height:15px;border-radius:999px;
+  display:grid;place-items:center;font-size:9.5px;font-weight:700;color:#10201c;background:#f0d9ad}
+.tour-gallery[data-single=true] figcaption b{display:none}
+/* And where each of them was taken from, numbered to match, in the scene. */
+.tour-mark circle{fill:rgba(12,18,16,.72);stroke:#f0d9ad;stroke-width:1.4}
+.tour-mark .tour-mark-dot{fill:#f0d9ad;stroke:none}
+.tour-mark text{fill:#f0d9ad;font-size:10.5px;font-weight:700;font-family:inherit}
 @keyframes tour-photo-in{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.tour-gallery figure{animation:none}}
 /* The way to the listing, raised by the sentence that names the price. It

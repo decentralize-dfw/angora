@@ -68,6 +68,9 @@ const photoRoot = new URL('photogallery/', publicRoot);
 // The voiceover is served the same way - a file beside the model, fetched
 // only when someone actually starts the narrated tour.
 const audioRoot = new URL('audio/', publicRoot);
+// The gallery's own 400 px versions of the listing photographs, made by
+// tools/make-photo-thumbs.py from the same originals the viewer opens.
+const thumbRoot = new URL('photogallery/thumbs/', publicRoot);
 // Titles read through the language of the moment; every titles[x] call
 // site stays untouched while the words follow the toggle.
 const titles = new Proxy({}, {get: (_, key) => t(key)});
@@ -130,7 +133,7 @@ let selected = 'neighborhood', ready = false, loading = false;
 let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations, walk;
 let photosVisible = false, photoPins = null, photoViewer = null;
 let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;
-let deviceQA,assetRevision=null,pendingCapture=null,contextLost=false,massing=null,lift=null;
+let deviceQA,assetRevision=null,pendingCapture=null,contextLost=false,massing=null,lift=null,interfaceSound=null;
 // Live location during the tour: the interface names where the feet ARE,
 // with a short dwell so a doorway crossing cannot flicker the title.
 let locator=null,locationKey='',locationPendingKey='',locationPendingSince=0;
@@ -287,7 +290,7 @@ function renderFrame(time) {
       const dt=Math.min(.25,(time-(tourShadeTime??time))/1000);tourShadeTime=time;
       const next=Math.abs(tourShadeTarget-tourShade)<.004?tourShadeTarget:THREE.MathUtils.damp(tourShade,tourShadeTarget,5,dt);
       if(next!==tourShade){tourShade=next;spotlight.setLevel(tourShade);invalidate();}
-      if(tourShade>.01)spotlight.update(activeCamera,host.clientWidth,host.clientHeight);
+      if(tourShade>.01&&spotlight.update(activeCamera,host.clientWidth,host.clientHeight))invalidate();
     }
     siteContext?.update(selected,activeCamera,controls.target,Boolean(transition||flight?.active),walk?.active);
     host.dataset.runtime=JSON.stringify({view:selected,plan:planMode,projection:activeCamera.type,cameraPosition:activeCamera.position.toArray(),target:controls.target.toArray(),sectionHeight:clip.constant,loaded:nativeDelivery?[...nativeDelivery.loaded.keys()]:[...groups.keys()],zoom:activeCamera.zoom,autoRotate:controls.autoRotate,zoomEnabled:controls.enableZoom,rotate:controls.mouseButtons.LEFT===THREE.MOUSE.ROTATE,transition:Boolean(transition),textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries});
@@ -682,8 +685,13 @@ async function selectView(id, initial = false) {
   if(!initial&&(id==='region'||previous==='region'))clouds();
   if (initial || matchMedia('(prefers-reduced-motion: reduce)').matches) {
     clip.constant = target; transition = null;
-  } else transition = {from:clip.constant, to:target, start:performance.now(),
-    span:950};
+  } else {
+    transition = {from:clip.constant, to:target, start:performance.now(), span:950};
+    // The plane takes just under a second to travel; the sweep takes exactly
+    // as long and runs the way the plane runs. Forced during the tour, which
+    // is already playing a voice.
+    interfaceSound?.transition(950, target > clip.constant, guidedTour?.active);
+  }
   frame(initial);
   invalidateUIObstacles();
   host.dataset.view = id; host.dataset.loaded = 'true'; rememberState(); invalidate();
@@ -702,7 +710,7 @@ let tourSpinTimer=null,tourBearing=0;
 // The side gallery's current frames, and the timers that light a sentence's
 // rooms one after another. Both are kept so a language switch can redraw the
 // captions and a cue change can cancel a reveal still in flight.
-let tourPhotos=[],tourReveal=[],tourSeasonBefore=null;
+let tourPhotos=[],tourReveal=[];
 // The buyer's room menu: drawing names in the viewer's language, internal
 // codes ('Z06') demoted to tooltips, twins told apart by code only.
 function fillRoomMenu(){
@@ -817,7 +825,7 @@ function liftBox(floor){
 }
 function tourBoxes(ids){
   if(!roomData)return [];
-  const boxes=[];
+  const boxes=[],seen=new Set();
   for(const id of ids){
     // Marks are the tour's own, told apart from register ids by their prefix
     // so neither can ever be mistaken for the other.
@@ -825,8 +833,12 @@ function tourBoxes(ids){
     const shaft=/^mark:lift-([0-2])$/.exec(id);
     if(shaft){const box=liftBox(Number(shaft[1]));if(box)boxes.push(box);continue;}
     const room=roomData.rooms.find(entry=>entry.id===id);if(!room)continue;
-    const raw=roomBox(room,roomData.dimensions,roomData.floor_datums_m);
-    const box=id.includes('-site-')?raw:clampToFloor(raw,floorFootprint(room.floor_index));
+    const raw=roomBox(room,roomData.dimensions,roomData.floor_datums_m,roomData.spaces);
+    // Two labels of one open plan are one enclosure, and the register says so:
+    // lighting the salon has already lit the hall it opens into, so naming
+    // both must not light the same rectangle twice.
+    if(raw.space){if(seen.has(raw.space))continue;seen.add(raw.space);}
+    const box=raw.space||id.includes('-site-')?raw:clampToFloor(raw,floorFootprint(room.floor_index));
     boxes.push(new THREE.Box3(new THREE.Vector3(...box.min),new THREE.Vector3(...box.max)));
   }
   return boxes;
@@ -839,18 +851,25 @@ function setTourPhotos(ids){
   const el=$('#tour-gallery');if(!el)return;
   tourPhotos=ids??[];
   const limit=matchMedia('(max-width:720px)').matches?2:3;
-  const cards=tourPhotos.slice(0,limit).map(id=>{
-    const point=PHOTO_POINTS.find(entry=>entry.id===id);if(!point)return null;
+  const shown=tourPhotos.slice(0,limit).map(id=>PHOTO_POINTS.find(entry=>entry.id===id)).filter(Boolean);
+  el.replaceChildren(...shown.map((point,i)=>{
     const figure=document.createElement('figure');
     const image=document.createElement('img');
-    image.src=new URL(point.file,photoRoot).href;
+    // The 400 px versions, made from the same originals: a card is 250 px
+    // wide and the full frames are half a megabyte each.
+    image.src=new URL(point.file.replace(/\.[^.]+$/,'.jpg'),thumbRoot).href;
     image.alt='';image.loading='lazy';image.decoding='async';
     const caption=document.createElement('figcaption');
-    caption.textContent=photoCaption(point,currentLang());
+    const number=document.createElement('b');number.textContent=String(i+1);
+    const where=document.createElement('span');where.textContent=photoCaption(point,currentLang());
+    caption.append(number,where);
     figure.append(image,caption);return figure;
-  }).filter(Boolean);
-  el.replaceChildren(...cards);
-  el.hidden=!cards.length;
+  }));
+  el.dataset.single=String(shown.length<2);
+  el.hidden=!shown.length;
+  // Each card's number is repeated in the scene, at the spot the photograph
+  // was taken from, so "where is this" is answered by the model itself.
+  spotlight?.setShots(shown.map((point,i)=>({n:i+1,position:[point.x,point.y,point.z]})));
 }
 // "aynı anda üçünü de açma": a sentence that names three rooms lights them in
 // the order it names them, spread across the words rather than thrown on at
@@ -865,13 +884,6 @@ function revealBoxes(boxes,glow,span){
   spotlight?.setBoxes(boxes.slice(0,1),{glow});
   for(let i=1;i<boxes.length;i++)
     tourReveal.push(setTimeout(()=>{spotlight?.setBoxes(boxes.slice(0,i+1),{glow});invalidate();},gap*i*1000));
-}
-// The daylight the tour asks for; the visitor's own setting is put back when
-// it ends, so a tour cannot quietly leave the house in December.
-function setTourSeason(day){
-  const select=$('#daylight-season');if(!select||String(day)===select.value)return;
-  tourSeasonBefore??=select.value;
-  select.value=String(day);$('#daylight-hour').oninput();
 }
 function setTourSpin(on){
   if(on===Boolean(tourSpinTimer))return;
@@ -904,7 +916,6 @@ async function applyTourStep(step){
   photoViewer?.hide();
   $('#tour-listing').hidden=!step.link;
   setTourPhotos(step.photos);
-  setTourSeason(step.season);
   // The B\u00f6lge scale is a map layer, so its cues move its radius rather than
   // a camera, and the only thing to light is the address at its centre.
   if(step.view==='region'){
@@ -950,7 +961,7 @@ async function applyTourStep(step){
     // the trees and the house itself back in the picture.
     const outdoor=step.rooms.length>0&&step.rooms.every(id=>id.includes('-site-'));
     const polar=step.polar??(step.frame==='villa'?1:step.frame==='plot'?.86:outdoor?.95:.62);
-    const pad=step.frame==='villa'?1.12:step.frame==='plot'?1.1:outdoor?2.4:1.7;
+    const pad=step.pad??(step.frame==='villa'?1.12:step.frame==='plot'?1.1:outdoor?2.4:1.7);
     const span=Math.max(size.z*Math.cos(polar)+size.y*Math.sin(polar),size.x/aspect)*pad;
     // Looked at from its own side of the house, so the camera is never put
     // behind the wall it is meant to be showing through.
@@ -988,12 +999,15 @@ function endTour(openInfo){
   $('#tour-bar').hidden=true;$('#app').dataset.tour='false';
   $('#tour-listing').hidden=true;
   clearTourReveal();setTourPhotos([]);
-  if(tourSeasonBefore!==null){$('#daylight-season').value=tourSeasonBefore;$('#daylight-hour').oninput();tourSeasonBefore=null;}
   restRegionMap();
   tourCaption(null);
   spotlight?.setBoxes([]);spotlight?.setCentre(false);
   tourShadeTarget=0;
   setAutoRotate(false);
+  // The closing orbit leaves the camera low and close, and the flight pins the
+  // polar angle it was given. The presentation is over, so the view goes back
+  // to its own framing rather than leaving the visitor where the tour parked.
+  frame(false);
   invalidateUIObstacles();
   if(openInfo)panel('info-panel',true);
   invalidate();
@@ -1616,7 +1630,7 @@ function setAutoRotate(value) {
   controls.autoRotate=Boolean(value&&(selected==='neighborhood'||guidedTour?.active));
   // A quarter-speed orbit is right for an idle street view and invisible
   // over a six-second sentence, so the tour turns at its own pace.
-  controls.autoRotateSpeed=guidedTour?.active?.9:.25;
+  controls.autoRotateSpeed=guidedTour?.active?.45:.25;
   $('#toggle-auto-rotate').setAttribute('aria-pressed',String(controls.autoRotate));
   if(controls.autoRotate)invalidate();
 }
@@ -1733,7 +1747,7 @@ function bindInterface() {
   }));
 }
 bindInterface();
-createInterfaceSound({button:$('#toggle-sound')});
+interfaceSound=createInterfaceSound({button:$('#toggle-sound')});
 try {
   setup();
   loadModel();

@@ -27,18 +27,20 @@ export const TOUR_DURATION = 401.64;
 //           framing, with something inside it lit), or null for the lit rooms
 //   photos  listing photograph ids for the side gallery; [] closes it
 //   group   which amenity family the Bolge map shows; null puts them away
-//   season  day of the year the daylight is set to (172 / 80 / 355)
-//   azimuth camera bearing in radians; polar its pitch
+//   azimuth camera bearing in radians; polar its pitch; pad how much air
 //   rotate  the camera turns while this cue holds
 //   spin    the map turns slowly about the villa while this cue holds
 //   link    the listing link stands on screen from this cue on
 //
-// The turn follows one rule, kept deliberately blunt: OUTSIDE the house the
-// view is always turning - the map spins, the camera orbits - and INSIDE it
-// never does. Nothing starts and stops mid-thought.
+// The turn follows one rule. The camera orbits only where there is nothing to
+// point at and a long time to fill: the settlement described from the street,
+// and the closing summary. It never turns while a room, the plot or the pool
+// is lit, and never inside the house. So there are exactly two orbits in six
+// and a half minutes rather than a turn that starts and stops with every
+// sentence - which, rewound by every reframe, read as a glitch.
 export const TOUR_CUES = [
   // ---------------------------------------------------------------- Bolge
-  {at: 0.0, view: 'region', radius: 2000, rooms: [], spin: true, group: null, season: 172,
+  {at: 0.0, view: 'region', radius: 2000, rooms: [], spin: true, group: null, photos: [],
    tr: 'Hoş geldiniz.',
    en: 'Welcome.'},
   {at: 1.3,
@@ -71,17 +73,15 @@ export const TOUR_CUES = [
   {at: 64.0,
    tr: 'Bu da sakinlerine huzurlu ve güvenli bir yaşam sunuyor.',
    en: 'Which gives its residents a calm and secure life.'},
-  // Not snow - the viewer has none - but the light of 21 December, which is
-  // the winter this sentence is about, with its long low shadows.
-  {at: 68.3, season: 355,
+  {at: 68.3,
    tr: 'Kış aylarında karla kaplandığında ise Angora Evleri adeta bir masal kasabasına dönüşüyor.',
    en: 'Under winter snow, Angora Evleri turns into something out of a storybook.'},
-  {at: 74.4, season: 172,
+  {at: 74.4,
    tr: 'Angora’nın bir diğer ayrıcalığı da çevresi.',
    en: 'Angora’s other advantage is what surrounds it.'},
 
   // ------------------------------------------------------- the surroundings
-  {at: 78.1, view: 'region', radius: 2000, spin: true, group: null,
+  {at: 78.1, view: 'region', radius: 2000, rotate: false, spin: true, group: null,
    tr: 'Site, Beysukent ve Beytepe ormanlarına komşu.',
    en: 'The estate borders the Beysukent and Beytepe woods.'},
   {at: 81.4,
@@ -102,13 +102,13 @@ export const TOUR_CUES = [
    en: 'A secure, prestigious life, close to nature…'},
 
   // --------------------------------------------------------------- the villa
-  {at: 108.3, view: 'neighborhood', spin: false, rotate: true, azimuth: 0.95, photos: [28],
+  {at: 108.3, view: 'neighborhood', spin: false, rotate: false, azimuth: 0.95, photos: [],
    tr: 'Ve şimdi Angora Evleri’nin içindeki özel bir villaya doğru ilerliyoruz.',
    en: 'And now we move towards one particular villa inside Angora Evleri.'},
   {at: 113.0, frame: 'villa', azimuth: 0.45, photos: [38],
    tr: 'Hatırlı Sokak, numara 10.',
    en: 'Hatırlı Sokak, number 10.'},
-  {at: 115.2, azimuth: 0.8,
+  {at: 115.2, azimuth: 0.8, photos: [28],
    tr: 'Karşınızda Villa 21.',
    en: 'This is Villa 21.'},
   {at: 117.9, photos: [28, 55],
@@ -117,7 +117,7 @@ export const TOUR_CUES = [
   // The lift gets its sentence here through the gallery rather than through a
   // camera move: three storey changes inside four seconds would be a lurch,
   // and the owner's own frames of the car say it better.
-  {at: 126.8, photos: [48, 49],
+  {at: 126.8,
    tr: 'Asansör, katlar arasında rahat ve konforlu bir bağlantı sunuyor.',
    en: 'The lift connects the floors comfortably.'},
   {at: 131.6, rooms: ['mark:plot-ring'], frame: 'plot', polar: 0.17, azimuth: 0, photos: [25, 50],
@@ -140,10 +140,10 @@ export const TOUR_CUES = [
    en: 'The slope of the site lets the basement open straight onto the garden and pool.'},
 
   // ------------------------------------------------------------- the basement
-  {at: 163.4, view: 'f0', rooms: [], rotate: false, frame: null, photos: [],
+  {at: 163.4, view: 'f0', rooms: [], frame: null, photos: [],
    tr: 'Turumuza da bu kattan, en alttan başlıyoruz.',
    en: 'So our tour begins there, at the lowest level.'},
-  {at: 166.6,
+  {at: 166.6, photos: [47],
    tr: 'Bodrum kattayız. Ama burası alışık olduğunuz bir bodrum değil.',
    en: 'We are in the basement. But this is not the basement you are picturing.'},
   {at: 170.6, rooms: ['f0-B06'], photos: [2, 3, 5],
@@ -161,12 +161,12 @@ export const TOUR_CUES = [
   {at: 189.9, rooms: ['f0-B02'], photos: [],
    tr: 'Bu katta ayrıca yaklaşık 27 metrekarelik, bağımsız girişli bir müştemilat bulunuyor.',
    en: 'This floor also holds a separately entered annexe of about 27 m².'},
-  {at: 196.8, rooms: ['f0-B02', 'f0-WC'], photos: [45, 46, 47],
+  {at: 196.8,
    tr: 'Kendi ayrı odası, banyosu ve tuvaleti olan bu bölüm, çalışanlar için ya da ihtiyaca göre farklı amaçlarla kullanılabilecek, evin ana yaşamından ayrı ve konforlu bir alan sunuyor.',
    en: 'With its own room, bathroom and WC, it is a comfortable space apart from the main house — for staff, or for whatever else is needed.'},
 
   // --------------------------------------------------------- the ground floor
-  {at: 208.6, view: 'f1', rooms: [], photos: [],
+  {at: 208.6, view: 'f1', rooms: [], photos: [42],
    tr: 'Şimdi bir üst kata, sokak seviyesindeki giriş katına çıkıyoruz.',
    en: 'Now we go up a level, to the ground floor at street height.'},
   {at: 213.6, rooms: ['f1-Z01', 'f1-Z02'], photos: [41, 40],
@@ -195,13 +195,13 @@ export const TOUR_CUES = [
    tr: 'Asansörle ya da ferforje korkuluklu merdivenden birinci kata çıkıyoruz.',
    en: 'By lift, or up the wrought-iron staircase, we reach the first floor.'},
   {at: 251.4, view: 'f2', rooms: ['mark:lift-2'], photos: [18, 34]},
-  {at: 253.5, rooms: [], frame: null, photos: [35, 34],
+  {at: 253.5, rooms: [], frame: null, photos: [35],
    tr: 'Bu kat tamamen gece yaşamına ayrılmış.',
    en: 'This floor is given over entirely to the night.'},
-  {at: 257.1, rooms: ['f2-102', 'f2-103', 'f2-104'], photos: [19, 31, 16],
+  {at: 257.1, rooms: ['f2-102', 'f2-103', 'f2-104'], photos: [19, 16, 32],
    tr: 'Yaklaşık 22 metrekarelik ebeveyn yatak odası, kendi giyinme odası ve yaklaşık sekiz buçuk metrekarelik ebeveyn banyosuyla gerçek bir süit.',
    en: 'A 22 m² principal bedroom with its own dressing room and an 8.5 m² en-suite — a true suite.'},
-  {at: 266.6, rooms: ['f2-110'], azimuth: 2.95, photos: [32, 31],
+  {at: 266.6, rooms: ['f2-110'], azimuth: 2.95, photos: [31],
    tr: 'Ve kendi balkonuna açılıyor.',
    en: 'And it opens onto its own balcony.'},
   {at: 269.2, rooms: ['f2-106', 'f2-107', 'f2-108', 'f2-105'], azimuth: null, photos: [13, 30, 11],
@@ -210,7 +210,7 @@ export const TOUR_CUES = [
   // The corner balcony is the OTHER one: 110 hangs over the pool on the garden
   // side, 109 sits on the street corner, so they are looked at from opposite
   // bearings and cannot be taken for the same balcony.
-  {at: 278.7, rooms: ['f2-109'], azimuth: 0.15, photos: [17, 33],
+  {at: 278.7, rooms: ['f2-109'], azimuth: 0.15, photos: [],
    tr: 'Geniş köşe balkonu ise sabah kahvesi için en keyifli nokta olmaya aday.',
    en: 'The wide corner balcony is the pick of the house for morning coffee.'},
 
@@ -243,14 +243,14 @@ export const TOUR_CUES = [
    en: 'Moisture-resistant and easy to clean, it is the practical choice where daily use is heaviest.'},
 
   // ------------------------------------------------------------------ closing
-  {at: 343.7, view: 'neighborhood', rooms: ['mark:plot-ring'], frame: 'plot', rotate: true,
+  {at: 343.7, view: 'neighborhood', rooms: [], frame: 'villa', rotate: true, polar: 1.22, pad: 0.95, azimuth: 2.2, photos: [48, 49, 24],
    polar: 0.17, azimuth: 0, photos: [24, 26, 55],
    tr: 'İlk üç katı birbirine bağlayan asansör, 10 metreye 5 metre boyutunda kendine ait deposu olan özel havuz, 900 metrekarelik çift kotlu bahçe, bağımsız girişli müştemilat ve her kuşağa ayrı yaşam alanı sunan esnek bir kurgu.',
    en: 'A lift joining the first three floors, a private pool of 10 by 5 metres with its own tank, a 900 m² garden on two levels, a separately entered annexe, and a plan flexible enough to give every generation its own space.'},
-  {at: 359.8, rooms: [], frame: 'plot', polar: 0.86, azimuth: 2.4, photos: [25, 50, 36],
+  {at: 359.8, photos: [25, 50, 36],
    tr: 'Bahçenin çevresindeki uzun ağaçlar ise tam bir mahremiyet garantilemektedir.',
    en: 'The tall trees around the garden make it completely private.'},
-  {at: 364.8, frame: 'villa', polar: null, azimuth: 0.8, link: true, photos: [],
+  {at: 364.8, link: true, photos: [],
    tr: 'Çayyolu’nun kalbinde, Angora Evleri Hatırlı Sokak 10 numaradaki bu villa, 99 milyon Türk lirası fiyatıyla satışta.',
    en: 'In the heart of Çayyolu, at Angora Evleri, Hatırlı Sokak 10, this villa is for sale at 99 million Turkish lira.'},
   {at: 373.5,
@@ -277,7 +277,7 @@ export const TOUR_CUES = [
 export function resolveCues(cues = TOUR_CUES) {
   const carried = {view: 'region', radius: 2000, rooms: [], frame: null,
     azimuth: null, polar: null, rotate: false, spot: null, spin: false,
-    group: null, link: false, photos: [], season: 172};
+    group: null, link: false, photos: [], pad: null};
   let tr = '', en = '';
   return cues.map((cue, i) => {
     for (const key of Object.keys(carried)) if (key in cue) carried[key] = cue[key];
@@ -289,8 +289,10 @@ export function resolveCues(cues = TOUR_CUES) {
     return {...carried, at: cue.at, tr, en, span: Math.max(0, until - cue.at)};
   });
 }
-// What must be reframed for, as opposed to merely re-subtitled.
+// What must be reframed for, as opposed to merely re-subtitled. The side
+// gallery and the listing link are applied before the camera is touched at
+// all, so a cue that changes only those must not restart a flight - that is
+// what used to rewind the orbit three times before "Karşınızda Villa 21".
 export const cueKey = step =>
   [step.view, step.radius, step.rooms.join('+'), step.frame, step.azimuth, step.polar,
-   step.rotate, step.spot, step.spin, step.group, step.link, step.season,
-   step.photos.join('+')].join('|');
+   step.pad, step.rotate, step.spot, step.spin, step.group].join('|');

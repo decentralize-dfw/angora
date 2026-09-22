@@ -25,18 +25,41 @@ export function roomSpan(room, dimensions) {
   }
   return span;
 }
-// A box in world metres, as {min,max} triples. Rooms with no registered span
-// still light: they fall back to a 2 m square about their anchor rather than
-// collapsing to a point.
-export function roomBox(room, dimensions, datums) {
-  const span = roomSpan(room, dimensions);
-  const x = span.x || 2, z = span.z || 2;
+// The enclosure a room stands in, as the register draws it: rooms.json
+// carries a boundary polygon per SPACE - the walls, with the openings in
+// them - and names which rooms share it. Its bounding rectangle is the room's
+// own extent to the walls, which a label anchor plus two spans is not: an
+// open-plan label carries the whole space's span, so about its own anchor it
+// runs out past the wall on one side and stops short of it on the other.
+export function spaceOf(room, spaces) {
+  return spaces?.find(space => space.members?.includes(room.id) && space.boundary_xz?.length) ?? null;
+}
+export function spaceRect(space) {
+  let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+  for (const [x, z] of space.boundary_xz) {
+    minX = Math.min(minX, x); maxX = Math.max(maxX, x);
+    minZ = Math.min(minZ, z); maxZ = Math.max(maxZ, z);
+  }
+  return {minX, maxX, minZ, maxZ};
+}
+// A box in world metres, as {min,max} triples, plus the space it came from so
+// a caller can tell two labels of one open plan apart from two rooms. Rooms
+// the register draws no boundary for - the balconies, the pool, the garden -
+// fall back to the anchor and its two measured spans.
+export function roomBox(room, dimensions, datums, spaces) {
+  const space = spaceOf(room, spaces);
   const site = SITE.test(room.id);
   const base = site ? room.position[1] - SITE_BELOW : datums[room.floor_index];
   const next = datums[room.floor_index + 1];
   const top = site ? base + SITE_HEIGHT : base + (next ? next - base - SLAB : ROOM_HEIGHT);
+  if (space) {
+    const r = spaceRect(space);
+    return {min: [r.minX, base, r.minZ], max: [r.maxX, top, r.maxZ], space: space.space_id};
+  }
+  const span = roomSpan(room, dimensions);
+  const x = span.x || 2, z = span.z || 2;
   return {min: [room.position[0] - x / 2, base, room.position[2] - z / 2],
-          max: [room.position[0] + x / 2, top, room.position[2] + z / 2]};
+          max: [room.position[0] + x / 2, top, room.position[2] + z / 2], space: null};
 }
 export function unionBox(boxes) {
   if (!boxes.length) return null;

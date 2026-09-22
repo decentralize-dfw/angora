@@ -10,6 +10,7 @@ import * as THREE from 'three';
 // SVG, not scene), and costs one composited rectangle.
 const NS = 'http://www.w3.org/2000/svg';
 const FEATHER = 30;          // px of soft edge on the hole
+const FADE_S = 0.55;         // how long a room takes to come up, and to go
 const PAD = 26;              // px the hole stands off the lit box
 const SHADE = '#070d0c';
 
@@ -74,6 +75,11 @@ export function createSpotlight(app) {
   app.append(svg);
   const circle = make('circle', {fill: '#000', r: 0});
   const rects = [];
+  // Where each photograph in the side gallery was taken from, numbered to
+  // match its card. Drawn over the shade rather than through it.
+  const marksLayer = make('g', {class: 'tour-marks'});
+  svg.append(marksLayer);
+  const marks = [];
 
   const group = new THREE.Group();
   group.name = 'Guided tour light';
@@ -85,23 +91,51 @@ export function createSpotlight(app) {
   const ringMaterial = new THREE.LineBasicMaterial({color: 0xffd9a0, transparent: true, opacity: .75,
     depthTest: false, depthWrite: false, toneMapped: false});
 
-  let boxes = [], centre = false, level = 0, glow = true;
+  let entries = [], centre = false, level = 0, glow = true, shots = [], last = 0;
   function shape(index) {
     while (pools.length <= index) {
-      const pool = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), poolMaterial);
+      const pool = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), poolMaterial.clone());
       pool.rotation.x = -Math.PI / 2; pool.renderOrder = 60; pool.userData.aoExcluded = true;
       const ring = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(
         [[-.5, 0, -.5], [.5, 0, -.5], [.5, 0, -.5], [.5, 0, .5], [.5, 0, .5], [-.5, 0, .5], [-.5, 0, .5], [-.5, 0, -.5]]
-          .map(p => new THREE.Vector3(...p))), ringMaterial);
+          .map(p => new THREE.Vector3(...p))), ringMaterial.clone());
       ring.renderOrder = 61; ring.userData.aoExcluded = true;
       group.add(pool, ring); pools.push(pool); rings.push(ring);
     }
     return [pools[index], rings[index]];
   }
+  // A numbered chip where a photograph in the side gallery was taken from, so
+  // "this is that corner" is answered in the scene rather than left to the
+  // caption. Hidden when the viewpoint is behind the camera.
+  function placeShots(camera, width, height) {
+    while (marks.length < shots.length) {
+      const group = make('g', {class: 'tour-mark'});
+      const ring = make('circle', {r: 11});
+      const dot = make('circle', {r: 2.6, class: 'tour-mark-dot'});
+      const label = make('text', {'text-anchor': 'middle', dy: '4.2'});
+      group.append(ring, dot, label); marksLayer.append(group); marks.push({group, ring, dot, label});
+    }
+    const point = new THREE.Vector3(), view = new THREE.Vector3();
+    marks.forEach((mark, i) => {
+      const shot = shots[i];
+      if (!shot) {mark.group.setAttribute('visibility', 'hidden'); return;}
+      point.set(shot.position[0], shot.position[1], shot.position[2]);
+      view.copy(point).applyMatrix4(camera.matrixWorldInverse);
+      if (camera.isPerspectiveCamera && view.z > -camera.near) {mark.group.setAttribute('visibility', 'hidden'); return;}
+      point.project(camera);
+      const x = (point.x + 1) * width / 2, y = (1 - point.y) * height / 2;
+      if (x < 8 || y < 8 || x > width - 8 || y > height - 8) {mark.group.setAttribute('visibility', 'hidden'); return;}
+      mark.group.setAttribute('visibility', 'visible');
+      for (const node of [mark.ring, mark.dot]) {node.setAttribute('cx', x.toFixed(1)); node.setAttribute('cy', y.toFixed(1));}
+      mark.label.setAttribute('x', x.toFixed(1)); mark.label.setAttribute('y', y.toFixed(1));
+      mark.label.textContent = String(shot.n);
+    });
+  }
   function place() {
     for (let i = 0; i < pools.length; i++) pools[i].visible = rings[i].visible = false;
-    boxes.forEach((box, i) => {
+    entries.forEach((entry, i) => {
       const [pool, ring] = shape(i);
+      const box = entry.box;
       const size = box.getSize(new THREE.Vector3()), mid = box.getCenter(new THREE.Vector3());
       // The pool spreads a little past the walls so the room's own floor is
       // lit to its edges rather than fading out short of them.
@@ -109,7 +143,10 @@ export function createSpotlight(app) {
       pool.position.set(mid.x, box.min.y + .035, mid.z);
       ring.scale.set(size.x, 1, size.z);
       ring.position.set(mid.x, box.min.y + .05, mid.z);
-      pool.visible = ring.visible = glow && level > .02;
+      const lit = glow && level > .02 && entry.t > .01;
+      pool.visible = ring.visible = lit;
+      pool.material.opacity = .5 * level * entry.t;
+      ring.material.opacity = .75 * level * entry.t;
     });
   }
   return {
@@ -118,18 +155,45 @@ export function createSpotlight(app) {
     // A mark over the whole plot is a region rather than a room, and four
     // glowing rectangles the size of a garden read as stage lighting, so the
     // pool and its ring can be left off and the shade left to do the work.
-    setBoxes(next, {glow: wantGlow = true} = {}) {boxes = next ?? []; glow = wantGlow; place();},
+    setBoxes(next, {glow: wantGlow = true} = {}) {
+      glow = wantGlow;
+      const wanted = next ?? [];
+      // A room already up stays up at whatever level it reached: a reveal
+      // ADDS the next room rather than restarting the ones beside it.
+      const kept = new Map(entries.map(entry => [entry.key, entry]));
+      entries = wanted.map(box => {
+        const key = box.min.toArray().concat(box.max.toArray()).map(v => v.toFixed(2)).join(',');
+        const had = kept.get(key);
+        kept.delete(key);
+        return had ?? {key, box, t: 0, to: 1};
+      });
+      // What is no longer wanted goes down rather than vanishing.
+      for (const gone of kept.values()) if (gone.t > 0.01) {gone.to = 0; entries.push(gone);}
+      place();
+    },
+    // What the side gallery is showing, so the scene can say where each of
+    // those frames was taken from. Plain {n, position} in world metres.
+    setShots(next) {shots = next ?? [];},
     setCentre(on) {centre = on;},
     // 0 lifts the shade entirely, 1 is the tour's full darkness.
     setLevel(value) {
       level = value; svg.style.opacity = String(value);
       svg.hidden = value <= .01;
-      for (let i = 0; i < pools.length; i++) pools[i].visible = rings[i].visible = glow && value > .02 && i < boxes.length;
-      poolMaterial.opacity = .5 * value; ringMaterial.opacity = .75 * value;
+      place();
     },
     get level() {return level;},
+    get fading() {return entries.some(entry => Math.abs(entry.t - entry.to) > .01);},
     update(camera, width, height) {
-      if (svg.hidden) return;
+      if (svg.hidden) return false;
+      const now = performance.now();
+      const dt = Math.min(.25, (now - (last || now)) / 1000); last = now;
+      // "şak diye değil, fade in fade out": a room comes up and goes down over
+      // half a second rather than being switched.
+      for (const entry of entries) {
+        const step = dt / FADE_S;
+        entry.t = entry.to > entry.t ? Math.min(entry.to, entry.t + step) : Math.max(entry.to, entry.t - step);
+      }
+      entries = entries.filter(entry => entry.to > 0 || entry.t > .01);
       svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
       for (const el of [lit, shade]) {
         el.setAttribute('x', 0); el.setAttribute('y', 0);
@@ -149,8 +213,8 @@ export function createSpotlight(app) {
         cut++;
       } else circle.remove();
       let used = 0;
-      for (const box of boxes) {
-        const rect = projectBox(box, camera, width, height);
+      for (const entry of entries) {
+        const rect = projectBox(entry.box, camera, width, height);
         if (!rect) continue;
         while (rects.length <= used) {const node = make('rect', {fill: '#000'}); rects.push(node);}
         const node = rects[used++];
@@ -158,6 +222,9 @@ export function createSpotlight(app) {
         node.setAttribute('x', x.toFixed(1)); node.setAttribute('y', y.toFixed(1));
         node.setAttribute('width', w.toFixed(1)); node.setAttribute('height', h.toFixed(1));
         node.setAttribute('rx', Math.min(46, Math.min(w, h) / 2.4).toFixed(1));
+        // A hole at half strength half-lifts the shade over it, which is the
+        // fade: the room arrives out of the dark rather than snapping open.
+        node.setAttribute('fill-opacity', entry.t.toFixed(3));
         if (!node.parentNode) holes.append(node);
         cut++;
       }
@@ -165,13 +232,16 @@ export function createSpotlight(app) {
       // Nothing lit means nothing to darken: an all-white mask would paint
       // the whole viewport black rather than leaving the view alone.
       shade.setAttribute('fill-opacity', cut ? '.68' : '0');
+      placeShots(camera, width, height);
       place();
+      return entries.some(entry => Math.abs(entry.t - entry.to) > .01);
     },
     dispose() {
       svg.remove(); group.removeFromParent();
       for (const rect of rects) rect.remove();
-      for (const pool of pools) pool.geometry.dispose();
-      for (const ring of rings) ring.geometry.dispose();
+      for (const mark of marks) mark.group.remove();
+      for (const pool of pools) {pool.geometry.dispose(); pool.material.dispose();}
+      for (const ring of rings) {ring.geometry.dispose(); ring.material.dispose();}
       poolMaterial.dispose(); ringMaterial.dispose(); texture?.dispose();
     },
   };

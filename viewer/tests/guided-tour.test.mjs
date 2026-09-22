@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {TOUR_CUES, TOUR_DURATION, TOUR_AUDIO, resolveCues, cueKey} from '../src/tour-script.js';
 import {PHOTO_POINTS} from '../src/photo-points.js';
 import {cueAt} from '../src/guided-tour.js';
-import {roomBox, roomSpan, unionBox, clampToFloor} from '../src/tour-rooms.js';
+import {roomBox, roomSpan, spaceOf, spaceRect, unionBox, clampToFloor} from '../src/tour-rooms.js';
 import {projectBox} from '../src/tour-spotlight.js';
 import * as THREE from 'three';
 
@@ -103,17 +103,37 @@ test('the opening moves: the map turns, and each sentence brings its own set', (
   assert.ok(new Set(shown.filter(g => g !== null)).size >= 4, 'the opening leans on one family');
 });
 
-test('the turn follows one rule: outside always, inside never', () => {
-  // "dönüyor, duruyor, sonra dönmeye devam ediyor. bunlar olmasın." - the
-  // camera is not allowed to start and stop with the sentences. It turns for
-  // as long as the house is seen from outside, and holds still for as long as
-  // the tour is in it.
+test('the turn follows one rule, and it is not a habit', () => {
+  // "dönüyor, duruyor, sonra dönmeye devam ediyor. bunlar olmasın." The camera
+  // orbits only where there is nothing to point at and a long time to fill,
+  // and never while something is lit or the tour is inside the house.
   for (const step of steps) {
-    if (/^f[0-3]$/.test(step.view)) assert.equal(step.rotate, false, `the camera turns inside, at ${step.at} s`);
-    else if (step.view === 'neighborhood') assert.equal(step.rotate, true, `the camera stands still outside, at ${step.at} s`);
+    if (!step.rotate) continue;
+    assert.ok(!/^f[0-3]$/.test(step.view), `the camera turns inside the house, at ${step.at} s`);
+    assert.equal(step.rooms.length, 0, `the camera turns while something is lit, at ${step.at} s`);
   }
-  // And the rule is not achieved by never leaving one state.
-  assert.ok(steps.some(step => step.rotate) && steps.some(step => !step.rotate));
+  // Two turns, each a long one - not a dozen short ones.
+  const blocks = [];
+  for (const step of steps) {
+    if (!step.rotate) {blocks.push(null); continue;}
+    const open = blocks[blocks.length - 1];
+    if (open) open.push(step.at); else blocks.push([step.at]);
+  }
+  const runs = blocks.filter(Boolean);
+  assert.equal(runs.length, 2, `${runs.length} separate turns; the rule says two`);
+  for (const run of runs) assert.ok(run[run.length - 1] - run[0] > 30, 'a turn too short to read as one move');
+});
+
+test('a cue that only changes the pictures does not restart the camera', () => {
+  // The side gallery and the listing link are applied before the camera is
+  // touched, so they must not be in the key a reframe is decided by; when they
+  // were, each one rewound the orbit and read as a glitch.
+  const a = steps.find(step => step.at === 343.7), b = steps.find(step => step.at === 359.8);
+  assert.notDeepEqual(a.photos, b.photos, 'these two cues no longer differ in their pictures');
+  assert.equal(cueKey(a), cueKey(b), 'a change of pictures still reframes');
+  const price = steps.find(step => step.at === 364.8);
+  assert.ok(price.link && !a.link, 'the listing test is watching the wrong cue');
+  assert.equal(cueKey(a), cueKey(price), 'raising the listing link still reframes');
 });
 
 test('the closing turns, and offers the listing', () => {
@@ -163,34 +183,51 @@ test('the voiceover on disk is the recording the cues are written for', () => {
     `the recording is ${seconds.toFixed(2)} s but the cues are written for ${TOUR_DURATION} s`);
 });
 
-test('a room box is the register\'s own span, stood on the register\'s own datum', () => {
-  const salon = rooms.rooms.find(room => room.id === 'f1-Z06');
-  const span = roomSpan(salon, rooms.dimensions);
-  const box = roomBox(salon, rooms.dimensions, rooms.floor_datums_m);
-  assert.ok(Math.abs((box.max[0] - box.min[0]) - span.x) < 1e-6, 'the box is not the measured x span');
-  assert.ok(Math.abs((box.max[2] - box.min[2]) - span.z) < 1e-6, 'the box is not the measured z span');
+test('a room box is the enclosure the register draws, not a span about a label', () => {
+  const rooms_ = rooms.rooms;
+  const salon = rooms_.find(room => room.id === 'f1-Z06');
+  const space = spaceOf(salon, rooms.spaces);
+  assert.ok(space, 'the salon has no registered enclosure');
+  const rect = spaceRect(space);
+  const box = roomBox(salon, rooms.dimensions, rooms.floor_datums_m, rooms.spaces);
+  assert.equal(box.space, space.space_id, 'the box does not say which enclosure it came from');
+  for (const [i, key] of [[0, 'minX'], [2, 'minZ']]) assert.equal(box.min[i], rect[key]);
+  for (const [i, key] of [[0, 'maxX'], [2, 'maxZ']]) assert.equal(box.max[i], rect[key]);
   assert.equal(box.min[1], rooms.floor_datums_m[1], 'the box does not stand on its storey');
   assert.ok(box.max[1] < rooms.floor_datums_m[2], 'the box reaches through the floor above');
+  // The old box was the label anchor plus the SPACE's span, which about that
+  // anchor overran the wall on one side. Every enclosure must now sit inside
+  // the storey it belongs to.
+  const storey = {minX: -7.15, maxX: 8.84, minZ: -10.4, maxZ: 8.6};
+  for (const room of rooms_) {
+    const own = roomBox(room, rooms.dimensions, rooms.floor_datums_m, rooms.spaces);
+    if (!own.space) continue;
+    assert.ok(own.min[0] >= storey.minX - 0.1 && own.max[0] <= storey.maxX + 0.1, `${room.id} runs past the wall in x`);
+    assert.ok(own.min[2] >= storey.minZ - 0.1 && own.max[2] <= storey.maxZ + 0.1, `${room.id} runs past the wall in z`);
+  }
   // The pool is water, not a room: a storey-high box over it would light sky.
-  const pool = roomBox(rooms.rooms.find(room => room.id === 'f0-site-pool'), rooms.dimensions, rooms.floor_datums_m);
+  const pool = roomBox(rooms_.find(room => room.id === 'f0-site-pool'), rooms.dimensions, rooms.floor_datums_m, rooms.spaces);
+  assert.equal(pool.space, null, 'the pool is being treated as an enclosure');
   assert.ok(pool.max[1] - pool.min[1] < 2, 'the pool is being lit as though it were a storey');
 });
 
-test('a shared open-plan span is held inside the storey that carries it', () => {
-  // f3-C05 and f3-C01 share one space, so the register gives both the SPACE's
-  // 10 m span - which, about C05's own anchor, runs out past the west wall.
-  const c05 = roomBox(rooms.rooms.find(room => room.id === 'f3-C05'), rooms.dimensions, rooms.floor_datums_m);
-  assert.ok(c05.min[0] < -8, 'the unclamped box no longer overruns; this test is watching the wrong thing');
-  const storey = {min: [-7.15, 0, -10.4], max: [8.84, 0, 8.6]};
-  const held = clampToFloor(c05, storey);
-  assert.ok(held.min[0] >= storey.min[0] - .4, 'the clamped box still runs past the wall');
-  assert.ok(held.max[0] <= storey.max[0] + .4, 'the clamped box still runs past the wall');
-  assert.ok(held.max[0] > held.min[0], 'clamping collapsed the box');
+test('two labels of one open plan are one light', () => {
+  // f1-Z06 and f1-Z05 are the salon and the dining area, and the register
+  // draws ONE boundary around them. Lighting the salon has already lit the
+  // dining area, so the sentence that names both must not light it twice.
+  const a = roomBox(rooms.rooms.find(room => room.id === 'f1-Z06'), rooms.dimensions, rooms.floor_datums_m, rooms.spaces);
+  const b = roomBox(rooms.rooms.find(room => room.id === 'f1-Z05'), rooms.dimensions, rooms.floor_datums_m, rooms.spaces);
+  assert.equal(a.space, b.space);
+  assert.deepEqual(a.min, b.min); assert.deepEqual(a.max, b.max);
+  // And two rooms that do NOT share one are two lights.
+  const bed = roomBox(rooms.rooms.find(room => room.id === 'f2-102'), rooms.dimensions, rooms.floor_datums_m, rooms.spaces);
+  const dress = roomBox(rooms.rooms.find(room => room.id === 'f2-103'), rooms.dimensions, rooms.floor_datums_m, rooms.spaces);
+  assert.notEqual(bed.space, dress.space);
 });
 
 test('a union covers every room the sentence names', () => {
   const ids = ['f2-102', 'f2-103', 'f2-104'];
-  const boxes = ids.map(id => roomBox(rooms.rooms.find(room => room.id === id), rooms.dimensions, rooms.floor_datums_m));
+  const boxes = ids.map(id => roomBox(rooms.rooms.find(room => room.id === id), rooms.dimensions, rooms.floor_datums_m, rooms.spaces));
   const union = unionBox(boxes);
   for (const box of boxes) for (const axis of [0, 1, 2]) {
     assert.ok(union.min[axis] <= box.min[axis] && union.max[axis] >= box.max[axis], 'the suite is not fully covered');

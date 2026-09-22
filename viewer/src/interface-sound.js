@@ -22,6 +22,41 @@ export function createInterfaceSound({button,root=document,storage,Context=globa
       tone.onended=()=>{tone.disconnect();gain.disconnect();};
     } catch { /* Audio availability must never interrupt navigation. */ }
   }
+  // The section cut has a sound now: two soft sines sweeping the way the plane
+  // travels, over exactly as long as the plane takes. It is deliberately small
+  // - a transmission, not a whoosh - and it plays for the narrated tour even
+  // when the interface click is switched off, because the tour is already an
+  // audio piece and a silent cut inside it reads as a dropout.
+  async function transition(ms=950,rising=true,force=false) {
+    if((!enabled&&!force)||!Context||root.hidden)return;
+    const ticket=generation;
+    try {
+      context??=new Context();
+      if(context.state==='suspended')await context.resume();
+      if((!enabled&&!force)||ticket!==generation||root.hidden||context.state!=='running')return;
+      const now=context.currentTime,span=Math.max(.25,Math.min(2.5,ms/1000));
+      const from=rising?196:392,to=rising?392:196;
+      const filter=context.createBiquadFilter();
+      filter.type='bandpass';filter.Q.value=1.1;
+      filter.frequency.setValueAtTime(from*2,now);
+      filter.frequency.exponentialRampToValueAtTime(to*2,now+span);
+      const gain=context.createGain();
+      gain.gain.setValueAtTime(.0001,now);
+      gain.gain.exponentialRampToValueAtTime(.016,now+span*.22);
+      gain.gain.setValueAtTime(.016,now+span*.6);
+      gain.gain.exponentialRampToValueAtTime(.0001,now+span);
+      const voices=[from,from*1.5].map((hz,i)=>{
+        const tone=context.createOscillator();
+        tone.type=i?'triangle':'sine';
+        tone.frequency.setValueAtTime(hz,now);
+        tone.frequency.exponentialRampToValueAtTime(hz*to/from,now+span);
+        tone.connect(filter);tone.start(now);tone.stop(now+span+.05);
+        return tone;
+      });
+      filter.connect(gain);gain.connect(context.destination);
+      voices[0].onended=()=>{for(const v of voices)v.disconnect();filter.disconnect();gain.disconnect();};
+    } catch { /* Audio availability must never interrupt navigation. */ }
+  }
   button.disabled=!Context;
   update();
   button.addEventListener('click',()=>{
@@ -35,5 +70,5 @@ export function createInterfaceSound({button,root=document,storage,Context=globa
     if(control&&control!==button&&!control.disabled)void play();
   });
   root.addEventListener('visibilitychange',()=>{if(root.hidden){generation++;suspend();}});
-  return {play,get enabled(){return enabled;}};
+  return {play,transition,get enabled(){return enabled;}};
 }

@@ -49,24 +49,44 @@ hangi cümlede neyin ekranda olacağını tutar, `guided-tour.js` sesi okur,
 `main.js` görünümü ona getirir. Cümlenin kendisi aynı zamanda altyazıdır
 (TR/EN), böylece yazı ile söz ayrışamaz.
 
-Dönüş tek bir kurala bağlıdır: **ev dışarıdan görülürken görüntü hep döner**
-(harita villa çevresinde 0,75°/sn, kamera yakın çevrede saat yönünde), **içeri
-girildiğinde hiç dönmez**. Cümle başına dur-kalk yoktur.
+Dönüş tek bir kurala bağlıdır: kamera **yalnız gösterilecek bir şey yokken ve
+doldurulacak uzun bir süre varken** döner — sokaktan anlatılan yerleşke bölümü
+ve kapanış özeti. Bir oda, arsa ya da havuz yanarken asla dönmez, evin içinde
+hiç dönmez. Böylece altı buçuk dakikada iki dönüş vardır, her biri yaklaşık bir
+dakika; cümle başına başlayıp duran bir dönüş yoktur. Yan galeri ve ilan
+bağlantısı kameradan önce uygulandığı için yalnız onları değiştiren bir cümle
+kadrajı yeniden başlatmaz — eskiden bu, "Karşınızda Villa 21"den önce dönüşü
+üç kez geri sardırıp tökezleme gibi okunuyordu.
 
 Açılışın 28 saniyesi Bölge haritasındadır: yarıçap 2 km → 1 km → 500 m iner,
 "en yeşil"de parklar, "kolay ulaşım"da duraklar, üniversiteler sayılırken
 okullar, AVM'ler ve hastaneler anılırken sırasıyla alışveriş ve sağlık aileleri
 açılır. Aileler 2 km'de değil 1 km ve 500 m'de açılır; nokta yarıçapı metre
-cinsinden çizildiği için 2 km'de görünmezler. Kış cümlesinde gün ışığı 21
-Aralık'a alınır — kar yoktur, o cümlenin anlattığı kışın ışığı vardır; tur
-biterken ziyaretçinin kendi ayarı geri konur.
+cinsinden çizildiği için 2 km'de görünmezler.
 
 Bir cümle birden çok oda adlandırdığında odalar **aynı anda değil, cümle
-boyunca sırayla** yanar; kamera baştan hepsini birden kadrajlar, böylece ışık
-gelirken görüntü kaymaz. Aynı anda, anlatılan mekânın sahibinin kendi ilan
-fotoğrafları yanda (telefonda üstte) açılır — en çok üç kare. Fotoğrafın hangi
-odaya ait olduğu `photo-points.js` kaydındandır; testler iç mekân karesinin
-ancak kendi katı açıkken gösterilebileceğini tutar.
+boyunca sırayla** yanar ve yanma şak diye değil yarım saniyede olur; kamera
+baştan hepsini birden kadrajlar, böylece ışık gelirken görüntü kaymaz. Odanın
+işareti kayıtlı **mahal sınırından** gelir: rooms.json her mekân için duvar
+poligonu (`spaces[].boundary_xz`) taşır, dikdörtgen onun sınırıdır. Etiket
+noktası + açıklık yöntemi bırakıldı; açık planda etiket bütün mekânın
+açıklığını taşıdığı için kendi noktası etrafında bir yandan duvarı aşıyor,
+öbür yandan duvara yetişmiyordu. Aynı poligonu paylaşan iki etiket tek ışıktır
+— salonu yakmak açıldığı yemek alanını zaten yakar.
+
+Anlatılan mekânın sahibinin kendi ilan fotoğrafları yanda (telefonda üstte)
+açılır — ekranda üç, telefonda iki kare, %40 opasitede, numaralı. Aynı numara
+sahnede fotoğrafın çekildiği noktada da görünür, böylece "bu neresi" sorusunu
+modelin kendisi yanıtlar. Kareler `photogallery/thumbs/` altındaki 400 px'lik
+sürümlerdir (`tools/make-photo-thumbs.py`; 32 MB → 1,2 MB). Hangi fotoğrafın
+hangi odaya ait olduğu `photo-points.js` kaydındandır; testler iç mekân
+karesinin ancak kendi katı açıkken gösterilebileceğini tutar, ve bir mekânın
+fotoğrafı yoksa kare gösterilmez.
+
+Kesit düzlemi hareket ederken arayüz sesi kısa bir süpürme çalar: düzlemin
+gittiği yöne göre yükselen ya da alçalan iki yumuşak sinüs, tam düzlemin
+süresi kadar. Tur sırasında arayüz sesi kapalı olsa da çalar, çünkü tur zaten
+sesli bir yapıttır ve içindeki sessiz bir kesit kopma gibi okunur.
 
 Bahçe, arsanın ev olmayan bütün parçaları olarak plan görünüşünden gösterilir:
 kayıtlı R32 arsa dikdörtgeninden bina kutusu çıkarılarak elde edilen dört
@@ -74,12 +94,10 @@ kayıtlı R32 arsa dikdörtgeninden bina kutusu çıkarılarak elde edilen dört
 yalnız arka çimi kapsar.
 
 Asansör, "Asansörle… birinci kata çıkıyoruz" cümlesinin içinde, çıkılan iki
-katta hızlıca işaretlenir; kayıt durdurulmaz. Şaftın ayak izi tahmin değildir:
+katta hızlıca işaretlenir; kayıt durdurulmaz. Kabin ve sahanlık fotoğrafları
+ise turun en sonundaki asansör cümlesinde açılır. Şaftın ayak izi tahmin değildir:
 teslimdeki kabin ve kat kapılarından ölçülür ve `lift.js`'te kayıtlıdır
 (1,272 × 1,186 m); `lift.test.mjs` her çalıştığında GLB'yi yeniden ölçer.
-Asansöre ayrılmış erken cümlede ise kamera yerinde kalır, sahibinin kabin ve
-kat sahanlığı kareleri yandan girer.
-
 Bir cümle karartmayı gerektirdiğinde karartma malzeme üzerinden değil ekran
 uzayında yapılır: teslim toplu çizimdir, bir kata ait duvarlar tek çağrıda
 gelir, yani odaya ait bir malzeme yoktur. `tour-spotlight.js` odanın kutusunu
