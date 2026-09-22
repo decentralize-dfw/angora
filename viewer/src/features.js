@@ -26,6 +26,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   poolWaterV2: true,           // Task 3.5 ACTIVE - analytic wave pool: fresnel + probe reflection + absorption
   glassTiersV2: true,          // Task 3.5 ACTIVE - exterior glazing polished to reflect the probe silhouette
   bakedAoRevival: true,        // Task 3.4d ACTIVE - source KTX2 AO bakes rebind on idle, desktop only
+  atlasArrayV2: true,          // Task 3.3 ACTIVE (runtime half) - atlas cells as texture array layers
   authoredMaterialsV2: false,  // Faz 3
   progressiveLoaderV2: false,  // Faz 2
   ktx2Delivery: false,         // Faz 4.1

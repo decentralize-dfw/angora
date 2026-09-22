@@ -35,6 +35,7 @@ import { PendingAction } from './pending-action.js';
 import {fitContextBounds,neutraliseTransmission} from './material-response.js';
 import {applyGradeValues,loadGradeTextures,bindGradeTextures,reviveBatchedGrade} from './exterior-grade.js';
 import {reviveBakedOcclusion} from './ao-revival.js';
+import {upgradeAtlasToArrays} from './atlas-array.js';
 import {createSiteContext} from './site-context.js';
 import {createRegionMap,atlasMeta} from './region-map.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
@@ -1328,6 +1329,20 @@ async function loadNativeModel(manifest){
       reviveBakedOcclusion(nativeDelivery.loaded,{loader:ktx2,root:new URL('../../native-current/',modelRoot)})
         .then(applied=>{ktx2?.dispose();if(applied)invalidate();console.info('Baked occlusion revived on '+applied+' materials');resolve(applied);})
         .catch(error=>{ktx2?.dispose();console.warn('KTX2 occlusion bakes unavailable',error);resolve(0);});
+    }));
+  }
+  // Task 3.3 (runtime half): the atlas cells move into texture-array layers
+  // on idle - one recompile per batched material, then true wrapping, full
+  // mips and anisotropy at the same texel count. Exposed for QA like the
+  // other idle upgrades so captures never race the swap.
+  if(FEATURES.atlasArrayV2&&manifest.batched){
+    const idle=window.requestIdleCallback?.bind(window)??(fn=>setTimeout(fn,1500));
+    window.__angoraAtlasReady=new Promise(resolve=>idle(()=>{
+      try{
+        const applied=upgradeAtlasToArrays(nativeDelivery.loaded);
+        if(applied)invalidate();
+        console.info('Atlas arrays upgraded on '+applied+' materials');resolve(applied);
+      }catch(error){console.warn('Atlas array upgrade failed; textureLod path retained',error);resolve(0);}
     }));
   }
   // The property card greets a plain entry here too. It used to be raised
