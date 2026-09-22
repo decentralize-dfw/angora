@@ -28,6 +28,8 @@ export const DEFAULT_FEATURES = Object.freeze({
   bakedAoRevival: true,        // Task 3.4d ACTIVE - source KTX2 AO bakes rebind on idle, desktop only
   atlasArrayV2: true,          // Task 3.3 ACTIVE (runtime half) - atlas cells as texture array layers
   gzipSceneJson: true,         // Task 2.1-b ACTIVE - scene JSONs fetched as .gz with plain fallback
+  buildingsChunking: true,     // Task 2.2 ACTIVE (runtime half) - 48 m culling cells for the neighbour blocks
+  plantVariation: true,        // Task 2.3 ACTIVE (runtime half) - per-plant hue/value drift via component seed
   authoredMaterialsV2: false,  // Faz 3
   progressiveLoaderV2: true,   // Task 2.1 ACTIVE - interior off the critical path, lazy storey probes
   ktx2Delivery: false,         // Faz 4.1

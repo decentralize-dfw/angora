@@ -3,6 +3,7 @@ import {prepareBakedLighting} from './baked-lighting.js';
 import {restoreBatchSurface} from './batch-surface-response.js';
 import {prepareBatchedMaterial} from './batched-material.js';
 import {chunkModelInPlace} from './context-plants-chunks.js';
+import {applyPlantVariation} from './plant-variation.js';
 
 // Batched deliveries remain resident across every view. The legacy manifest
 // path retains its older floor streams for explicit compatibility previews.
@@ -71,7 +72,19 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     // settlement, so the culler can never drop an off-screen tree. Split it
     // into 48 m cells before mesh preparation runs, so each chunk gets the
     // same clipping/lighting treatment the single mesh would have.
+    // Task 2.3 (runtime half): per-PLANT hue/value drift. Runs before the
+    // chunker so a tree straddling a cell keeps one seed across both chunks
+    // (the attribute rides the shared vertex buffer).
+    if(features.plantVariation&&manifest.batched&&name==='context-plants')
+      model.traverse(o=>{if(o.isMesh)applyPlantVariation(o);});
     if(features.plantsChunking&&manifest.batched&&name==='context-plants')chunkModelInPlace(model);
+    // Task 2.2 (runtime half): the neighbour blocks are 1.02 M merged
+    // triangles behind one settlement-sized bound - same disease the
+    // planting had, same cure: triangle-bucketed 48 m cells over SHARED
+    // attributes, so an orbit that faces away stops paying for the far
+    // half of the settlement. Real instancing and the LOD tiers need the
+    // pre-merge source objects, which only build.mjs sees - H6.
+    if(features.buildingsChunking&&manifest.batched&&name==='context-buildings')chunkModelInPlace(model);
     const clipped=!context.includes(name)&&name!=='villa-context-white'&&name!=='plot-grass';
     model.traverse(o=>{if(o.isMesh){if(!manifest.batched&&name.startsWith('interior')&&!/floor|tile|door|glass|stair|window|lift|wall/i.test(o.name))o.userData.category='furniture';prepare(o,{clipped,context:!clipped,name});}});
     // Task 1.6: the garden is outdoors too. Without this its surfaces
