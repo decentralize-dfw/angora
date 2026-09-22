@@ -255,6 +255,7 @@ export function installQaHarness({host, query, hooks}) {
     // interleaved frame was measured flipping a z-fight tie at the eaves
     // junction on the mobile C07 gate frame (26 px). With the feature off
     // this path must not yield at all.
+    if (window.__angoraPostfxReady) await window.__angoraPostfxReady;
     if (window.__angoraGradeReady) await window.__angoraGradeReady;
     if (window.__angoraAoReady) await window.__angoraAoReady;
     if (window.__angoraAtlasReady) await window.__angoraAtlasReady;

@@ -18,10 +18,11 @@
 // that language's subtitle, so what is written and what is heard cannot drift
 // apart in either.
 export const TOUR_AUDIO = {tr: 'angora21-tur.mp3', en: 'angora21-eng.mp3'};
-export const TOUR_DURATION = {tr: 401.64, en: 433.18};
+import {TOUR_DURATION, tourLang} from './tour-meta.js';
+export {TOUR_DURATION, tourLang};
 // Which recording a language listens to. Anything that is not English gets the
 // Turkish one, which is the viewer's own default.
-export const tourLang = lang => (lang === 'en' ? 'en' : 'tr');
+
 export const cueTime = (cue, lang) => (tourLang(lang) === 'en' ? cue.atEn : cue.at);
 
 // A cue names only what CHANGES. The driver carries the rest forward, so a

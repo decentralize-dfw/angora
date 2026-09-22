@@ -22,12 +22,9 @@ import {CameraFlight} from './camera-flight.js';
 import {frameInsets} from './frame-insets.js';
 import {clockLabel} from './daylight.js';
 import {createHotspots} from './hotspots.js';
-import {createGuidedTour} from './guided-tour.js';
 import {createSpotlight} from './tour-spotlight.js';
-import {TOUR_DURATION,tourLang} from './tour-script.js';
+import {TOUR_DURATION,tourLang} from './tour-meta.js';
 import {roomBox,clampToFloor} from './tour-rooms.js';
-import {createPhotoPins,createPhotoViewer} from './photo-gallery.js';
-import {PHOTO_POINTS,photoCaption} from './photo-points.js';
 import {renderPropertyInfo,renderFloorInfo} from './property-info.js';
 import {areaLabel} from './annotations.js';
 import { configureCameraControls } from './camera.js';
@@ -37,7 +34,6 @@ import {applyGradeValues,loadGradeTextures,bindGradeTextures,reviveBatchedGrade}
 import {reviveBakedOcclusion} from './ao-revival.js';
 import {upgradeAtlasToArrays} from './atlas-array.js';
 import {createSiteContext} from './site-context.js';
-import {createRegionMap,atlasMeta} from './region-map.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
 import {rigFovFor} from './camera-rigs.js';
 import {prepareContextSurfaces} from './context-surfaces.js';
@@ -136,7 +132,7 @@ let nativeDelivery=null,nativeSwitching=false,nativeAtlas=null,nativeSoil=null,p
 // line that used to disagree with it.
 let selected = 'neighborhood', ready = false, loading = false;
 let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations, walk;
-let photosVisible = false, photoPins = null, photoViewer = null;
+let photosVisible = false, photoPins = null, photoViewer = null;let photoPoints=null;
 let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;
 let deviceQA,assetRevision=null,pendingCapture=null,contextLost=false,massing=null,lift=null,interfaceSound=null;
 // Live location during the tour: the interface names where the feet ARE,
@@ -594,6 +590,9 @@ function setup() {
   flight=new CameraFlight(camera,controls,resize,invalidate);
   controls.addEventListener('change', invalidate);
   lighting = createLighting(renderer, scene, camera, clip,{quality});
+  // Task 4.2: the desktop postfx chain arrives through a dynamic import;
+  // a capture must not screenshot the canvas-path frames it bridges with.
+  window.__angoraPostfxReady=lighting.postfxReady?.then?.(chain=>{if(chain)invalidate();return Boolean(chain);});
   // bindInterface() ran before this, so the controls may already carry values
   // from a shared link. Push them in before the first frame is drawn.
   lighting.setStyle($('#lighting-style').value);
@@ -686,7 +685,7 @@ async function selectView(id, initial = false) {
   // The Bölge scale is a north-up map layer; the clouds sweep while the 3D
   // frame pulls out beneath it, so the model leaves smoothly either way.
   if (id==='region') {
-    regionMap ??= createRegionMap($('#app'));
+    await ensureRegionMap();
     regionMap.show(initial ? 0 : 180);
   } else regionMap?.hide();
   panel('',false);
@@ -793,7 +792,7 @@ function refreshChrome(){
   if(regionMap){
     const open=selected==='region';
     regionMap.element.remove();regionMap=null;
-    if(open){regionMap=createRegionMap($('#app'));regionMap.show();}
+    if(open&&regionMapFactory){regionMap=regionMapFactory($('#app'));regionMap.show();}
   }
   hotspots?.reset();
   refreshTourLabels();setTourPhotos(tourPhotos);guidedTour?.refresh();
@@ -878,7 +877,7 @@ function setTourPhotos(ids){
   const el=$('#tour-gallery');if(!el)return;
   tourPhotos=ids??[];
   const limit=matchMedia('(max-width:720px)').matches?2:3;
-  const shown=tourPhotos.slice(0,limit).map(id=>PHOTO_POINTS.find(entry=>entry.id===id)).filter(Boolean);
+  const shown=photoPoints?tourPhotos.slice(0,limit).map(id=>photoPoints.PHOTO_POINTS.find(entry=>entry.id===id)).filter(Boolean):[];
   el.replaceChildren(...shown.map((point,i)=>{
     const figure=document.createElement('figure');
     const image=document.createElement('img');
@@ -888,7 +887,7 @@ function setTourPhotos(ids){
     image.alt='';image.loading='lazy';image.decoding='async';
     const caption=document.createElement('figcaption');
     const number=document.createElement('b');number.textContent=String(i+1);
-    const where=document.createElement('span');where.textContent=photoCaption(point,currentLang());
+    const where=document.createElement('span');where.textContent=photoPoints.photoCaption(point,currentLang());
     caption.append(number,where);
     figure.append(image,caption);return figure;
   }));
@@ -956,7 +955,7 @@ async function applyTourStep(step){
   // a camera, and the only thing to light is the address at its centre.
   if(step.view==='region'){
     if(selected!=='region')await selectView('region');
-    regionMap??=createRegionMap($('#app'));
+    await ensureRegionMap();
     regionMap.setRadius(step.radius);
     document.querySelectorAll('.region-radius button').forEach(button=>
       button.setAttribute('aria-pressed',String(Number(button.dataset.radius)===step.radius)));
@@ -1095,14 +1094,23 @@ function setTourWindows(on){
     lighting.interior(/^f[0-3]$/.test(selected)?Number(selected[1]):null,null,undefined,{});
   }
 }
+// Task 4.2: the region map layer (21 KB plus its OSM street/amenity JSON)
+// loads on the first visit to the Bölge scale, not with the boot bundle.
+let regionMapFactory=null;
+async function ensureRegionMap(){
+  regionMapFactory??=(await import('./region-map.js')).createRegionMap;
+  return regionMap??=regionMapFactory($('#app'));
+}
 function ensureSpotlight(){
   if(!spotlight&&scene){spotlight=createSpotlight($('#app'));scene.add(spotlight.group);}
   return spotlight;
 }
-function startTour(){
+async function startTour(){
   if(!ready)return;
   ensureSpotlight();
-  guidedTour??=createGuidedTour({element:$('#tour-bar'),audioRoot,lang:currentLang(),
+  // Task 4.2: the narrated tour and its four-minute script load on the
+  // first press, not with the boot bundle.
+  guidedTour??=(await import('./guided-tour.js')).createGuidedTour({element:$('#tour-bar'),audioRoot,lang:currentLang(),
     apply:applyTourStep,caption:tourCaption,onEnd:()=>endTour(true),
     // The bar stays up with the reason in it, so leaving is still one press.
     onError:()=>{$('#tour-caption').textContent=t('tourAudioFailed');
@@ -1662,8 +1670,9 @@ async function loadModel() {
       for(const b of contextData.buildings)if(b.bounds)for(const p of b.bounds)settlementBox.expandByPoint(new THREE.Vector3(...p));
       if(!settlementBox.isEmpty())contextBox=settlementBox.union(buildingBox);
       siteContext=createSiteContext(contextData,host,()=>selectView('building'));
+      const {atlasMeta}=await import('./region-map.js');
       $('#context-count').textContent=`${contextData.buildings.length} ${t('buildingsWord')} · ${atlasMeta()}`;
-    } catch(error){console.warn(error);$('#context-count').textContent=atlasMeta();}
+    } catch(error){console.warn(error);$('#context-count').textContent=(await import('./region-map.js')).atlasMeta();}
     // The neighbourhood is in by now, so its bounds, its horizon fade and its
     // white massing are set up here rather than in a continuation that used to
     // run after the first frame.
@@ -1872,13 +1881,23 @@ function bindInterface() {
   // The pins and the frame are pure interface - they need the host element and
   // the drawing's own coordinates, nothing from the delivery - so they are
   // built here and only the switch waits for the model.
-  photoPins = createPhotoPins(host, photoRoot, {onOpen: id => {photoViewer.show(id); invalidate();}});
-  photoViewer = createPhotoViewer({
-    dock: $('#photo-dock'), figure: $('#photo-view'), image: $('#photo-image'), caption: $('#photo-caption'),
-    close: $('#photo-close'), backdrop: $('#photo-backdrop'), pins: photoPins,
-    onShow: () => {layoutOverlays(); reframeForOverlays(); invalidateUIObstacles();},
-    onClose: () => {layoutOverlays(); reframeForOverlays(); invalidateUIObstacles();},
-  });
+  // Task 4.2: the photo layer (gallery + 11 KB of point data) rides an idle
+  // import; every later use already guards with photoViewer?./photoPins?..
+  {
+    const idle=window.requestIdleCallback?.bind(window)??(fn=>setTimeout(fn,1200));
+    idle(async()=>{
+      const [gallery,points]=await Promise.all([import('./photo-gallery.js'),import('./photo-points.js')]);
+      photoPoints=points;
+      photoPins = gallery.createPhotoPins(host, photoRoot, {onOpen: id => {photoViewer.show(id); invalidate();}});
+      photoViewer = gallery.createPhotoViewer({
+        dock: $('#photo-dock'), figure: $('#photo-view'), image: $('#photo-image'), caption: $('#photo-caption'),
+        close: $('#photo-close'), backdrop: $('#photo-backdrop'), pins: photoPins,
+        onShow: () => {layoutOverlays(); reframeForOverlays(); invalidateUIObstacles();},
+        onClose: () => {layoutOverlays(); reframeForOverlays(); invalidateUIObstacles();},
+      });
+      invalidate();
+    });
+  }
   // Switching the photographs off is also how an open frame is put away -
   // the brief asks for both that and the frame's own cross.
   $('#toggle-photos').onclick = () => {

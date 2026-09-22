@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import * as THREE from 'three';
-import {SectionGTAOPass} from '../src/lighting.js';
+import {SectionGTAOPass} from '../src/section-gtao.js';
 
 test('AO respects hidden furniture, uncut context, glazing, annotations and camera changes', () => {
   const scene = new THREE.Scene(), ortho = new THREE.OrthographicCamera(), clip = new THREE.Plane(new THREE.Vector3(0,-1,0),7.9714);

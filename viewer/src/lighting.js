@@ -2,84 +2,14 @@ import * as THREE from 'three';
 import {CompactOutput} from './compact-output.js';
 import {createFixtureVertices} from './fixture-vertices.js';
 import { Sky } from 'three/addons/objects/Sky.js';
-import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
-import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
-import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
-import {DisplayDitherShader} from './display-dither.js';
-import {GradeShader} from './grade-pass.js';
 import { HDRLoader } from 'three/addons/loaders/HDRLoader.js';
 import {solarPosition} from './daylight.js';
 import {prepareMaterialResponse,setInteriorMode,setMaterialScale} from './material-response.js';
 import {smoothSurfaceNormals} from './context-surfaces.js';
 import {applyWaterSurface,waterBoundsFrom} from './water-surface.js';
-import {configurePostprocessing} from './postprocessing.js';
 import {applyRenderProfile,referenceProfile} from './render-profile.js';
-import {LinearBloomPass} from './linear-bloom.js';
 import {InteriorLightController} from './interior-lighting.js';
 import {FEATURES} from './features.js';
-import {createSectionNormalMaterials} from './section-normal-materials.js';
-
-// Keep AO depth and beauty aligned for both cut interiors and uncut context.
-export class SectionGTAOPass extends GTAOPass {
-  constructor(scene, camera, clip, scale) {
-    super(scene, camera, 1, 1);
-    this.resolutionScale = scale;
-    this.normalMaterial.side = THREE.DoubleSide;
-    this.clip = clip;
-    this.sectionNormalMaterials=createSectionNormalMaterials(this.normalMaterial);
-    // The authored cut faces sit exactly on the plane. Carrying the pass's own
-    // copy a few millimetres higher keeps them in the depth buffer - without
-    // it they fall out and the occlusion sampled at the wall tops belongs to
-    // the floor far below them.
-    this.sectionPlanes = [new THREE.Plane(clip.normal.clone(), clip.constant)];
-    // The reference's own numbers. Radius is in world metres and it matters:
-    // too large and the occlusion stops describing crevices and starts shading
-    // whole objects, which reads as dirt rather than as contact. 0.28 m is the
-    // scale of a window reveal, an eave underside, a wall meeting a floor.
-    this.updateGtaoMaterial({radius:0.28, distanceExponent:1, thickness:1,
-      scale:1.05, samples:16, distanceFallOff:1, screenSpaceRadius:false});
-    this.updatePdMaterial({radius:8, samples:8, depthPhi:3, normalPhi:4});
-    this.blendIntensity = 0.8;
-  }
-  setSize(w, h) {
-    const scale = this.resolutionScale ?? 1;
-    super.setSize(Math.max(1, Math.round(w * scale)), Math.max(1, Math.round(h * scale)));
-  }
-  _overrideVisibility() {
-    super._overrideVisibility();
-    this.scene.traverse(object => {
-      if (object.visible && (object.userData.aoExcluded || object.isSprite)) {
-        object.visible = false; this._visibilityCache.push(object);
-      }
-    });
-  }
-  setCamera(camera) {
-    this.camera = camera;
-    for (const material of [this.gtaoMaterial, this.depthRenderMaterial]) {
-      const value = camera.isPerspectiveCamera ? 1 : 0;
-      if (material.defines.PERSPECTIVE_CAMERA !== value) {
-        material.defines.PERSPECTIVE_CAMERA = value; material.needsUpdate = true;
-      }
-    }
-  }
-  _renderOverride(renderer, overrideMaterial, renderTarget, clearColor, clearAlpha) {
-    renderer.getClearColor(this._originalClearColor);
-    const alpha=renderer.getClearAlpha(),autoClear=renderer.autoClear,override=this.scene.overrideMaterial;
-    renderer.setRenderTarget(renderTarget);renderer.autoClear=false;
-    try{
-      if(clearColor!==undefined&&clearColor!==null){renderer.setClearColor(clearColor);renderer.setClearAlpha(clearAlpha??0);renderer.clear();}
-      this.scene.overrideMaterial=null;
-      return this.sectionNormalMaterials.render(this.scene,()=>renderer.render(this.scene,this.camera));
-    }finally{
-      this.scene.overrideMaterial=override;renderer.autoClear=autoClear;
-      renderer.setClearColor(this._originalClearColor);renderer.setClearAlpha(alpha);
-    }
-  }
-  dispose(){this.sectionNormalMaterials.dispose();super.dispose();}
-
-}
 
 // The environment a surface reflects has to have a GROUND. A sky-only probe -
 // the procedural sky, and the puresky HDR that replaces it - leaves the whole
@@ -199,22 +129,22 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
   // exposure and its colour; it loses the crevice shading and the glare.
   const compactOutput=q.compactOutput?new CompactOutput():null;
   let composer=null,beauty=null,ao=null,bloomPass=null,gradePass=null;
-  if(q.postProcessing){
-    const target=new THREE.WebGLRenderTarget(1,1,{type:THREE.HalfFloatType,samples:referenceProfile.msaaSamples});
-    composer=new EffectComposer(renderer,target);beauty=new RenderPass(scene,camera);
-    // Full-resolution occlusion: at .85 the denoiser smeared contact shading
-    // off thin rails and window reveals - the pass is the pipeline's own
-    // stated "largest tell", so it gets its headroom.
-    ao=new SectionGTAOPass(scene,camera,clip,q.gtaoResolutionScale??1);
-    const smaa=new SMAAPass(),bloom=new LinearBloomPass();bloomPass=bloom;gradePass=new ShaderPass(GradeShader);
-    // Task 1.1b: every pass is BUILT (a view can re-enable what another view
-    // rests), but starts at the matrix+view row the boot view resolved;
-    // frame() moves pass.enabled per view. Flag off = the legacy composer.
-    ao.enabled=FEATURES.postfxV2?Boolean(q.gtao):referenceProfile.aoEnabled;
-    bloom.enabled=FEATURES.postfxV2?Boolean(q.bloom):true;
-    configurePostprocessing(composer,{beauty,ao,smaa,bloom,output:gradePass,
-      dither:new ShaderPass(DisplayDitherShader)});
-  }
+  // Task 4.2: the composer and everything behind it (GTAO, SMAA, bloom,
+  // grade, dither) load through a dynamic seam. A phone's quality row never
+  // asks for postProcessing, so a phone never downloads a byte of it; on
+  // desktop the canvas path (same AgX, no crevice shading) carries the boot
+  // frames until the chain lands, then render() switches over. QA awaits
+  // window.__angoraPostfxReady (wired in main.js) so captures never race it.
+  let postfxSize=null,postfxRatio=null;
+  const postfxReady=q.postProcessing
+    ?import('./postfx-chain.js').then(({buildPostfxChain})=>{
+      const chain=buildPostfxChain({renderer,scene,camera,clip,quality:q,postfxV2:FEATURES.postfxV2});
+      ({composer,beauty,ao}=chain);bloomPass=chain.bloom;gradePass=chain.grade;
+      if(postfxRatio)composer.setPixelRatio(postfxRatio);
+      if(postfxSize)composer.setSize(postfxSize[0],postfxSize[1]);
+      return chain;
+    })
+    :Promise.resolve(null);
   let day=172,hour=12.5,environmentMode='procedural-sky',walkInterior=false,lightsEnabled=true;
   let pendingProbeHdr=null,probeMassingGroup=null;
   // Task 3.5: the pool's wave phase follows the daylight hour - the one time
@@ -449,6 +379,7 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
         sunPosition:sun.position.toArray().map(v=>Math.round(v*10)/10),target:sun.target.position.toArray().map(v=>Math.round(v*10)/10)},
       textures:[groundLight?.texture,floorLight?.texture,...(electricLight?.textures??[]),environment?.texture].filter(Boolean)};},
     setStyle(style){soft=style!=='sun';setTime();},
+    postfxReady,
     releaseMaterial(material){preparedMaterials.delete(material);reflectionMaterials.delete(material);},
     prepareMesh(object,{clipped,context,name}) {
       object.userData.sectionClipped=clipped;
@@ -537,8 +468,8 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
       setTime();
       for(const material of preparedMaterials)setMaterialScale(material,view);
     },
-    pixelRatio(ratio){composer?.setPixelRatio(ratio);},
-    resize(w,h){composer?.setSize(w,h);},
+    pixelRatio(ratio){postfxRatio=ratio;composer?.setPixelRatio(ratio);},
+    resize(w,h){postfxSize=[w,h];composer?.setSize(w,h);},
     async compile(currentCamera){
       if(!renderer.compileAsync)return;
       const previous=renderer.getRenderTarget();
