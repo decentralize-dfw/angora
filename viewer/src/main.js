@@ -666,7 +666,7 @@ async function selectView(id, initial = false) {
   // frame pulls out beneath it, so the model leaves smoothly either way.
   if (id==='region') {
     regionMap ??= createRegionMap($('#app'));
-    if (initial) regionMap.show(); else setTimeout(()=>regionMap.show(), 180);
+    regionMap.show(initial ? 0 : 180);
   } else regionMap?.hide();
   panel('',false);
   if (!ready) return;

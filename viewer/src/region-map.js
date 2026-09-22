@@ -349,6 +349,16 @@ export function createRegionMap(host) {
   const onResize = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(layout); };
 
   host.append(el);
+  // The reveal proper, kept apart from show() so a queued one can be dropped.
+  let pendingShow = null;
+  const reveal = () => {
+    if (!el.hidden) return;
+    el.hidden = false;
+    el.setAttribute('aria-hidden', 'false');
+    layout();
+    addEventListener('resize', onResize);
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('rm-active')));
+  };
   return {
     element: el,
     get radius() { return radius; },
@@ -364,15 +374,18 @@ export function createRegionMap(host) {
     // visitor who presses one afterwards finds the buttons telling the truth.
     setGroup(g) { if (g !== activeGroup) filterButtons[g ?? activeGroup]?.click(); },
     get group() { return activeGroup; },
-    show() {
-      if (!el.hidden) return;
-      el.hidden = false;
-      el.setAttribute('aria-hidden', 'false');
-      layout();
-      addEventListener('resize', onResize);
-      requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('rm-active')));
+    // The reveal waits for the 3D frame to pull out beneath it, and that wait
+    // is held HERE rather than in a caller's setTimeout: a scrub can leave the
+    // map again inside those 180 ms, and a hide() that ran while the map was
+    // still hidden used to return early and let the queued show() fire anyway
+    // - which is how the region map ended up sitting over the first floor.
+    show(delay = 0) {
+      clearTimeout(pendingShow); pendingShow = null;
+      if (delay > 0) {pendingShow = setTimeout(() => {pendingShow = null; reveal();}, delay); return;}
+      reveal();
     },
     hide() {
+      clearTimeout(pendingShow); pendingShow = null;
       if (el.hidden) return;
       el.classList.remove('rm-active');
       el.setAttribute('aria-hidden', 'true');

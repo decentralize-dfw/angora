@@ -108,3 +108,23 @@ test('The settlement light is cut from the settlement, not from the villa plot',
   assert.ok(plotSpan(0) < 100 && plotSpan(1) < 100,
     'region-plan.plot is no longer the villa plot - the comment in region-map.js needs rewriting');
 });
+
+// A scrub through the opening leaves the map again within the 180 ms the
+// reveal waits, and the map used to come up anyway - over the first floor,
+// where it then stayed. The wait belongs to the map, not to a caller's
+// setTimeout, so that a hide() can cancel it.
+test('leaving the map cancels a reveal that has not happened yet', () => {
+  const map = readFileSync(new URL('../src/region-map.js', import.meta.url), 'utf8');
+  const main = readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
+  assert.doesNotMatch(main, /setTimeout\(\s*\(\)\s*=>\s*regionMap\.show\(\)/,
+    'main.js still queues the reveal itself, where hide() cannot reach it');
+  assert.match(main, /regionMap\.show\(initial \? 0 : 180\)/, 'the delay is no longer handed to the map');
+  assert.match(map, /show\(delay = 0\)/, 'show() takes no delay');
+  const hide = map.match(/hide\(\) \{[\s\S]*?\n    \},/);
+  assert.ok(hide, 'the map no longer hides');
+  // The cancel has to come BEFORE the early return, or a hidden map with a
+  // reveal in flight still reveals.
+  const cancel = hide[0].indexOf('clearTimeout(pendingShow)');
+  const bail = hide[0].indexOf('if (el.hidden) return');
+  assert.ok(cancel >= 0 && cancel < bail, 'hide() returns before cancelling the pending reveal');
+});
