@@ -8,15 +8,31 @@
 
 ## Şu an neredeyiz
 
-- **FAZ:** 1 çıkışı — 1.6 YEŞİL (2cfbff5), 1.1b YEŞİL (297a68b);
-  `build/qa/faz1-exit.md` yazıldı, ledger güncel.
-- **Aktif iş:** `faz1-final` 12 kameralık tam capture koşuyor (hem
-  faz1-ab hem final-ab'ın SONRA'sı). Bitince `build/qa/faz1-ab/` C03/C04/
-  C07 kompozitleri (`compose-ab.py`, ÖNCE = gate-visual-ref) → commit.
-- **Sonraki:** FAZ 3 ajan yarısı — 3.4f (buildEnvironment'a context LOD2
-  kütlesi) → 3.5 → 3.4d → 3.3 → 3.4g.
-- **Mobil borç:** ilk-interaktif +13 091 B (bundle: gölge+postfx kodu);
-  4.2 bundle splitting'de kapanacak (ledger "Mobil borç kaydı").
+- **FAZ 1 bitti** (hepsi YEŞİL gate'li commit'lerde; faz1-exit.md yazıldı).
+  `faz1-final` 12-kamera capture'ı HÂLÂ koşuyor (yavaş: postfx'li
+  SwiftShader; ÖLDÜRME) — bitince: (1) faz1-ab + final-ab kompozitleri
+  (ÖNCE=gate-visual-ref, SONRA=faz1-final), (2) `npm run build:pages`,
+  (3) COMBINED gate "gate-f3f4f2" (aşağıdaki bekleyen işler tek gate,
+  kırmızıda ?features= ile bayrak-bisect), (4) nightProbe SwiftShader
+  ölçümü, (5) 2.1-e bellek dönüş probe'u, (6) 4.1 için sayfa-içi en-büyük-10
+  doku raporu → karar.
+- **Kod tarafı BİTMİŞ, gate BEKLEYEN işler** (hepsi commit'li, bayrak açık):
+  3.4f probeMassing · 3.5 poolWaterV2+glassTiersV2 · 3.4d bakedAoRevival ·
+  3.3 atlasArrayV2 (runtime; 512/1024 hücre H6'da) · 3.4g nightProbe+
+  qa-mobile gece adımı · 4.2 bundle split (ilk JS 780→308,6 KB gzip;
+  postfx/region-map/tour/foto dinamik; scratch dist-trial ile doğrulandı) ·
+  4.4 overlay p95+GPU MiB · 2.1 progressive (interior defer + lazy probes
+  + gzip JSON + HDR half).
+- **Sonraki kod işi:** 2.2 runtime yarısı (context-buildings'e plants tarzı
+  chunk culling; instancing/LOD H6'ya kayıt) → 2.3 runtime yarısı
+  (bitki hue/scale jitter shader'ı) → 2.4 (toktx İNDİRİLDİ:
+  scratchpad/ktxsw/usr/bin/toktx, LD_LIBRARY_PATH=scratchpad/ktxsw/usr/lib;
+  gltf-transform simplify + ≤5cm kot testi — teslim GLB'sini değiştirir,
+  capture bitmeden YAZMA) → FAZ 5 idle birikim (opsiyonel).
+- **4.1 ara bulgular:** tel boyutu ters (normal webp 67KB→UASTC 264KB);
+  atlas dörtlüsü webp KALMALI (3.3 canvas'la okuyor, compressed okunamaz);
+  AO desktop'ta 3.4d ile zaten KTX2; karar sayfa-içi doku raporuna kaldı.
+  Mobil ilk-interaktif kırmızı çizgisi 4.2+2.1 ile fazlasıyla korunuyor.
 
 ## Bayrak durumu (viewer/src/features.js)
 
