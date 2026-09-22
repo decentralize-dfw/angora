@@ -8,7 +8,7 @@
 export const DEFAULT_FEATURES = Object.freeze({
   hybridSunShadow: false,      // Task 1.2 - villa-local dynamic sun shadow (desktop)
   mobileSunShadow: false,      // Task 1.2 - phones join ONLY after H1 measures the ratchet green
-  exteriorGradeRevival: false, // Task 1.3 - detail maps on batched materials
+  exteriorGradeRevival: true,  // Task 1.3 ACTIVE - tileable detail maps on the grid=1 heroes, idle-loaded
   // Task 1.4 is SHELVED (BLOCKED H8): the shell walls are two skins, the
   // context additions are mirrored copies whose winding build.mjs never
   // corrects, and the honest fix needs a Draco re-encode this environment
