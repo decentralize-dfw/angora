@@ -3,11 +3,13 @@
 //   node scripts/qa-capture.mjs --tag <name> [--gate] [--base http://...]
 //     [--profiles desktop,mobile] [--cameras C01,C03] [--measure 5]
 //
-// --gate is THE regression gate for every FAZ 1 merge: C03 (facade),
-// C07 (storey cut), C09 (plan), C10 (walk) at dpr 1, plus C03 once more at
-// dpr 2 - the one frame where the pixel budget actually bites
-// (legacy desktop: ratio = sqrt(5M / 1.44M) ≈ 1.86). Ten frames across the
-// two delivery profiles; the full 12-camera archive is opt-in, not routine.
+// --gate is THE regression gate for every FAZ 1 merge: C03 (facade), the
+// FOUR storey cuts C05-C08 (a wall lost to back-face culling shows ONLY
+// when a cut looks at the shell's inner skin - C07 alone missed exactly
+// that once), C09 (plan), C10 (walk) at dpr 1, plus C03 at dpr 2 - the one
+// frame where the pixel budget actually bites (legacy desktop ratio
+// ≈ 1.86). Sixteen frames across the two delivery profiles; the full
+// 12-camera archive is opt-in, not routine.
 //
 // Without --base it serves the REPOSITORY ROOT (the committed pages build)
 // through serve-pages.mjs - run `npm run build:pages` first when the source
@@ -39,7 +41,7 @@ const commit = execSync('git rev-parse --short HEAD', {cwd: repoRoot}).toString(
 const tag = option('tag', 'capture-' + commit);
 const profiles = option('profiles', 'desktop,mobile').split(',');
 const gate = args.includes('--gate');
-const only = gate ? new Set(['C03', 'C07', 'C09', 'C10'])
+const only = gate ? new Set(['C03', 'C05', 'C06', 'C07', 'C08', 'C09', 'C10'])
   : option('cameras') ? new Set(option('cameras').split(',')) : null;
 const scalesFor = camera => (gate && camera.id === 'C03') ? [1, 2] : [1];
 const measureSeconds = Number(option('measure', '0'));

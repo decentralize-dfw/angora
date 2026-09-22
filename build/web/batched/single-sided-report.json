@@ -2,22 +2,7 @@
   {
     "profile": "desktop",
     "part": "architecture",
-    "bytes": 5856892,
-    "flipped": [
-      "architecture-plaster-0",
-      "architecture-wood-2",
-      "architecture-other-4",
-      "architecture-plaster-5",
-      "architecture-metal-6",
-      "architecture-tile-8",
-      "architecture-other-9",
-      "architecture-wood-10"
-    ],
-    "kept": [
-      "architecture-tile-1 (kept: roof back face papers the dormer/eaves trim sliver (H4))",
-      "architecture-glass-3 (kept: BLEND)",
-      "architecture-tile-7 (kept: dormer slopes are wound inward - faces vanish single-sided (H4))"
-    ]
+    "skipped": "two-skin shell - cut views face the INTERIOR skin; flipping deleted walls (C07, owner)"
   },
   {
     "profile": "desktop",
@@ -32,12 +17,24 @@
   {
     "profile": "desktop",
     "part": "context-ground",
-    "skipped": "terrain skins are single surfaces by construction"
+    "bytes": 570068,
+    "flipped": [],
+    "kept": [
+      "context-ground-other-0 (kept: preserve-name)"
+    ]
   },
   {
     "profile": "desktop",
     "part": "context-buildings",
-    "skipped": "mirrored B4 additions reverse winding - whole walls vanish (H4)"
+    "bytes": 8081568,
+    "flipped": [
+      "context-buildings-plaster-0",
+      "context-buildings-other-1",
+      "context-buildings-tile-2",
+      "context-buildings-other-3",
+      "context-buildings-wood-4"
+    ],
+    "kept": []
   },
   {
     "profile": "desktop",
@@ -47,22 +44,7 @@
   {
     "profile": "mobile",
     "part": "architecture",
-    "bytes": 4594620,
-    "flipped": [
-      "architecture-plaster-0",
-      "architecture-wood-2",
-      "architecture-other-4",
-      "architecture-plaster-5",
-      "architecture-metal-6",
-      "architecture-tile-8",
-      "architecture-other-9",
-      "architecture-wood-10"
-    ],
-    "kept": [
-      "architecture-tile-1 (kept: roof back face papers the dormer/eaves trim sliver (H4))",
-      "architecture-glass-3 (kept: BLEND)",
-      "architecture-tile-7 (kept: dormer slopes are wound inward - faces vanish single-sided (H4))"
-    ]
+    "skipped": "two-skin shell - cut views face the INTERIOR skin; flipping deleted walls (C07, owner)"
   },
   {
     "profile": "mobile",
@@ -77,12 +59,24 @@
   {
     "profile": "mobile",
     "part": "context-ground",
-    "skipped": "terrain skins are single surfaces by construction"
+    "bytes": 393636,
+    "flipped": [],
+    "kept": [
+      "context-ground-other-0 (kept: preserve-name)"
+    ]
   },
   {
     "profile": "mobile",
     "part": "context-buildings",
-    "skipped": "mirrored B4 additions reverse winding - whole walls vanish (H4)"
+    "bytes": 7181176,
+    "flipped": [
+      "context-buildings-plaster-0",
+      "context-buildings-other-1",
+      "context-buildings-tile-2",
+      "context-buildings-other-3",
+      "context-buildings-wood-4"
+    ],
+    "kept": []
   },
   {
     "profile": "mobile",

@@ -29,6 +29,12 @@ from PIL import Image
 
 NOISE_SHARE = 0.00005   # 0.005% of pixels
 MIB_TOLERANCE = 0.2
+# Storey-cut frames look straight at interior wall faces - the one place a
+# back-face culling mistake deletes geometry. Anything past 1% of a cut
+# frame is an automatic red, no eyeballing: 'looks fine' already produced
+# one false negative on C07.
+CUT_FRAMES = ('C05', 'C06', 'C07', 'C08')
+CUT_LIMIT = 0.01
 
 def numeric_mismatches(a_json, b_json):
     try:
@@ -78,7 +84,10 @@ def main():
         worst = max(worst, share)
         ys, xs = np.nonzero(delta)
         numbers = numeric_mismatches(a_png.with_suffix('.json'), b_png.with_suffix('.json'))
-        pixel_verdict = ('identical' if changed == 0
+        stem = rel.name.split('.')[0].replace('@2x', '')
+        cut_red = stem in CUT_FRAMES and share > CUT_LIMIT
+        pixel_verdict = ('cut-frame-over-limit' if cut_red
+                         else 'identical' if changed == 0
                          else 'noise' if share <= NOISE_SHARE else 'changed')
         rows.append({
             'frame': str(rel),

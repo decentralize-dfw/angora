@@ -23,14 +23,20 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {patchGlbJson} from './patch-glb.mjs';
 
-// Parts whose closed, consistently-wound geometry survived the A/B.
-const FLIP_PARTS = new Set(['architecture']);
-// Why the others stay authored (gate-1.4 A/B, desktop C03/C10 frames):
+// Parts the flip is allowed to touch. The villa is OUT: its walls are a
+// two-skin shell (STRUCCO facing the street, INTERIOR facing the room), and
+// the storey-cut views look at the INTERIOR skin's face - flipping the
+// shell deleted the walls from every cut view (owner-reported, C07).
+// The neighbourhood is where the triangles are anyway: context-buildings
+// (1.02 M) + context-ground (0.31 M) beat the shell's 842 k, and neither is
+// ever seen from inside. Mirrored materials that lose faces are pulled back
+// individually via KEEP_NAMED with the gate's numbers as evidence.
+const FLIP_PARTS = new Set(['context-buildings', 'context-ground']);
+// Why the rest stays authored (gate A/B evidence, desktop frames):
 const SKIP_REASONS = {
+  architecture: 'two-skin shell - cut views face the INTERIOR skin; flipping deleted walls (C07, owner)',
   interior: 'linings and ceilings are single planes - the salon ceiling vanished from below',
   garden: 'retaining walls and pool surrounds shard when back faces cull',
-  'context-buildings': 'mirrored B4 additions reverse winding - whole walls vanish (H4)',
-  'context-ground': 'terrain skins are single surfaces by construction',
   'context-plants': 'planting is cutout single-surface foliage by design',
 };
 // Within a flipped part: alpha-blended/masked surfaces and single-surface
@@ -38,15 +44,8 @@ const SKIP_REASONS = {
 // their reason.
 const PRESERVE = /foliage|leaf|leaves|needle|hedge|curtain|sheer|fabric|blind|grass/i;
 const KEEP_NAMED = new Map([
-  // gate-1.4 A/B, desktop C03: the eaves/dormer trim crosses the tile plane
-  // at a shallow angle and the tile's BACK face papered over the sliver;
-  // culling it opened white shards at the dormer junction. The back face
-  // stays until H4 closes the junction geometry.
-  ['Clay tile', 'roof back face papers the dormer/eaves trim sliver (H4)'],
-  // gate-1.4 A/B round two, desktop C03: the dormer slopes are authored
-  // with inward-wound 'roof-7' faces - whitish under two sides, GONE under
-  // one. The winding repair is H4's; until then both faces stay.
-  ['roof-7', 'dormer slopes are wound inward - faces vanish single-sided (H4)'],
+  // (architecture findings from the withdrawn shell flip stay recorded in
+  // git history and H4; the shell no longer flips at all.)
 ]);
 
 const dry = process.argv.includes('--dry');
@@ -64,12 +63,15 @@ for (const profile of ['desktop', 'mobile']) {
     }
     const file = path.join(base, profile, part.file);
     const flipped = [], kept = [];
+    // The foliage regex protects cutout CARDS; the terrain's 'grass' is a
+    // ground skin seen from above and must not hide behind the same word.
+    const preserveApplies = part.name !== 'context-ground';
     const out = await patchGlbJson(file, doc => {
       for (const material of doc.materials ?? []) {
         const names = material.extras?.angoraBatch?.materials ?? [material.name];
         const namedKeep = names.find(name => KEEP_NAMED.has(name));
         const needs = material.alphaMode === 'BLEND' || material.alphaMode === 'MASK'
-          || names.some(name => PRESERVE.test(name)) || Boolean(namedKeep);
+          || (preserveApplies && names.some(name => PRESERVE.test(name))) || Boolean(namedKeep);
         if (material.doubleSided && !needs) { material.doubleSided = false; flipped.push(material.name); }
         else kept.push(material.name + (material.doubleSided
           ? ' (kept: ' + (namedKeep ? KEEP_NAMED.get(namedKeep)
