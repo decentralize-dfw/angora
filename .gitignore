@@ -10,6 +10,7 @@ interaction-tests.txt
 viewer/public/models/native-current/
 viewer/public/models/batched/
 viewer/public/photogallery/
+viewer/public/audio/
 tools/batch-delivery/node_modules/
 viewer/native-tests.txt
 build/web/batched/lighting/*.png

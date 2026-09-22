@@ -40,6 +40,30 @@ Sol kumanda çubuğu yürütür; tetik, desteklenen döşemeye ışınlanır. VR
 PBR/gölge yolunu kullanır; ekran uzayı GTAO iki göze uygulanmaz. Gerçek başlık
 ve telefon testi tamamlanmadı; bu destek cihaz üzerinde doğrulama bekler.
 
+R48: `Sesli tur` sahibinin seslendirmesini çalar ve görüntüyü ona uydurur.
+Kayıt `audio/angora21-tur.mp3`: teslim edilen ElevenLabs dosyasının 6,975 s'lik
+künye kısmı ("#Angora Evleri / Villa 21 / Sanal Tur Senaryosu / Yaklaşık 5
+dakika") MPEG çerçeve sınırından kesilmiş hâli — 4:28,6, 44,1 kHz mono, sabit
+128 kbps; ses yeniden kodlanmadı. Kayıt tek parça bir okuma olduğu için
+(94 öbek, en uzun duraklama 1,41 s) tur adım düğmesiyle değil ses saatiyle
+sürülür: `viewer/src/tour-script.js` hangi cümlede neyin ekranda olacağını
+tutar, `guided-tour.js` sesi okur, `main.js` görünümü ona getirir. Cümlenin
+kendisi aynı zamanda altyazıdır (TR/EN), böylece yazı ile söz ayrışamaz.
+
+Bir cümle oda adlandırdığında o oda aydınlık kalır, geri kalan ekran karartılır.
+Karartma malzeme üzerinden değil ekran uzayında yapılır: teslim toplu çizimdir,
+bir kata ait duvarlar tek çağrıda gelir, yani odaya ait bir malzeme yoktur.
+`tour-spotlight.js` odanın kutusunu ekrana izdüşürüp maskeyi oradan keser; aynı
+maske hem 3B sahnenin hem de SVG olan Bölge haritasının üstünde çalışır. Oda
+kutusu kayıtlı etiket noktası ve iki ölçülü açıklıktan kurulur
+(`tour-rooms.js`); açık planda etiketler mekânın açıklığını taşıdığı için salonu
+yakmak açıldığı holü de yakar — bu kaynağın kendi ifadesidir, kutunun hatası
+değil. Kesit atlasına kırpılarak duvarın dışına taşması engellenir.
+
+Tur sırasında arayüz geri çekilir; sahne, cümle ve turu bitirme düğmesi kalır.
+Sahneye dokunmak turu bitirmez: anlatım kamera için durmadığından konuşurken
+etrafa bakmak mümkündür, bir sonraki cümle kadrajı geri alır.
+
 R21: `Oda adları` ve `Ölçüler` düğmeleri seçilen katın bilgilerini zemine
 yerleştirir. 27 mahal etiketi vardır. Ölçüler, orijinal DWG DIMENSION kaydı,
 eşleşen karşılıklı duvar yüzeyleri ve kesintisiz kaynak döşemesi birlikte

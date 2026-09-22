@@ -10,4 +10,7 @@ await cp(new URL('../../build/web/batched/',import.meta.url),new URL('../public/
 // the dev server needs the same folder under public. force:false keeps a
 // second run from recopying thirty-odd megabytes that have not changed.
 await cp(new URL('../../photogallery/',import.meta.url),new URL('../public/photogallery/',import.meta.url),{recursive:true,force:false,errorOnExist:false});
-console.log('Prepared desktop/mobile batched models, section metadata and photographs.');
+// The narrated tour's voiceover is served from the repository root on Pages
+// for the same reason, and the dev server needs the same folder under public.
+await cp(new URL('../../audio/',import.meta.url),new URL('../public/audio/',import.meta.url),{recursive:true});
+console.log('Prepared desktop/mobile batched models, section metadata, photographs and the tour voiceover.');

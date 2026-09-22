@@ -4,3 +4,4 @@ build/web/full/*.json text eol=lf
 viewer/public/models/full/*.json text eol=lf
 build/web/native-current/*.json text eol=lf
 build/web/native-current/*.gltf text eol=lf
+audio/*.mp3 -text -diff

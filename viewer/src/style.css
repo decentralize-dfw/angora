@@ -510,18 +510,50 @@ h1 strong{font-weight:700}
 .welcome-close{position:absolute;right:10px;top:10px;width:34px;height:34px;border-radius:999px;font-size:18px;color:var(--muted)}
 .welcome-close:hover{background:var(--glass-hover)}
 
+/* The way into the narrated tour. Ink-filled because it is the one thing on
+   the bar that starts something rather than opening a sheet. */
+.tour-launch{display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:0 15px 0 13px;border-radius:999px;
+  background:var(--ink);color:#fff;font-size:12.5px;font-weight:600;letter-spacing:.01em;white-space:nowrap}
+.tour-launch svg{width:13px;height:13px;flex:0 0 auto}
+.tour-launch:not(:disabled):hover{background:#000}
+.tour-launch:disabled{opacity:.4}
+
 /* ------------------------------------------------------------- tour bar */
-.tour-bar{position:absolute;left:50%;bottom:max(96px,calc(env(safe-area-inset-bottom) + 84px));transform:translateX(-50%);z-index:40;
-  display:flex;align-items:center;gap:6px;border-radius:999px;padding:6px;
+/* The narrated tour: a subtitle and a transport, over a darkened scene.
+   The chip is dark because the scene behind it is - once the spotlight is
+   down, a pale pill is the brightest thing on screen. */
+.tour-hud{position:absolute;left:50%;bottom:max(20px,calc(env(safe-area-inset-bottom) + 14px));transform:translateX(-50%);z-index:40;
+  display:grid;justify-items:center;gap:10px;width:min(880px,calc(100vw - 24px));pointer-events:none}
+.tour-caption{margin:0;max-width:100%;border-radius:17px;padding:11px 19px;text-align:center;text-wrap:balance;
+  font-size:15px;line-height:1.5;font-weight:500;color:#f4f7f4;background:rgba(10,16,14,.74);
+  -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 10px 30px rgba(6,12,10,.38);transition:opacity 260ms ease}
+.tour-caption:empty{display:none}
+.tour-transport{pointer-events:auto;display:flex;align-items:center;gap:9px;border-radius:999px;padding:6px 8px 6px 6px;
   background:var(--panel);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
-  border:1px solid var(--edge);box-shadow:var(--shadow-soft);max-width:calc(100vw - 24px)}
-.tour-bar button{min-width:38px;min-height:38px;border-radius:999px;font-size:16px;font-weight:600}
-.tour-bar button:disabled{opacity:.3}
-.tour-bar button:not(:disabled):hover{background:var(--glass-hover)}
-#tour-caption{font-size:12.5px;font-weight:600;padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:min(52vw,420px)}
-#tour-exit{font-size:11px;color:var(--muted);padding:0 12px;white-space:nowrap}
-#tour-next{background:var(--ink);color:#fff;padding:0 14px;font-size:13px;white-space:nowrap}
-#tour-next:not(:disabled):hover{background:#000}
+  border:1px solid var(--edge);box-shadow:var(--shadow-soft)}
+.tour-play{width:38px;height:38px;min-width:38px;border-radius:999px;background:var(--ink);color:#fff;
+  display:grid;place-items:center;font-size:12px;line-height:1}
+.tour-play::before{content:'\275A\275A';letter-spacing:1px}
+.tour-play[data-state=paused]::before{content:'\25B6';font-size:13px;margin-left:2px;letter-spacing:0}
+.tour-play:hover{background:#000}
+.tour-track{position:relative;width:min(330px,38vw);height:7px;border-radius:999px;background:rgba(22,34,29,.14);
+  cursor:pointer;touch-action:none;flex:0 0 auto}
+.tour-track:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.tour-track>i{display:block;height:100%;width:0;border-radius:999px;background:var(--ink)}
+.tour-clock{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:82px;text-align:center}
+#tour-exit{font-size:11px;color:var(--muted);padding:0 12px;white-space:nowrap;min-height:34px}
+#tour-exit:hover{background:var(--glass-hover)}
+/* The shade itself. Above the model and the Bölge map, under every control -
+   what is darkened is the view, never the way out of it. */
+.tour-spot{position:absolute;inset:0;z-index:9;pointer-events:none;opacity:0;transition:opacity 520ms ease}
+/* While the tour runs the chrome stands down, so the only things on screen
+   are the house, the sentence and the way to stop. */
+#app[data-tour=true] .scale-picker,#app[data-tour=true] .tool-dock,#app[data-tour=true] .model-scale,
+#app[data-tour=true] .site-credit,#app[data-tour=true] .gesture-help,#app[data-tour=true] .region-panel,
+#app[data-tour=true] .rm-filters,#app[data-tour=true] .rm-info,#app[data-tour=true] #photo-dock,
+#app[data-tour=true] .top-actions,#app[data-tour=true] .side-tools,#app[data-tour=true] .explore-dock{
+  opacity:0;pointer-events:none;transition:opacity 320ms ease}
 
 /* ------------------------------------------------------------ transition */
 #cloud-transition{position:absolute;inset:-20%;z-index:18;pointer-events:none;opacity:0;background:radial-gradient(ellipse at 20% 50%,#fff 0,transparent 55%),radial-gradient(ellipse at 80% 45%,#ffffffed 0,transparent 55%);filter:blur(22px)}
@@ -530,6 +562,16 @@ h1 strong{font-weight:700}
 
 /* --------------------------------------------------------------- mobile */
 @media(max-width:720px){
+  /* On a phone the subtitle is the tour, so it takes the width it needs and
+     the transport gives up its clock rather than wrapping to two rows. */
+  .tour-launch{padding:0 11px;gap:0}
+  .tour-launch span{display:none}
+  .tour-hud{width:calc(100vw - 20px);gap:8px;bottom:max(14px,calc(env(safe-area-inset-bottom) + 10px))}
+  .tour-caption{font-size:13.5px;line-height:1.45;padding:9px 14px;border-radius:15px}
+  .tour-transport{gap:7px;padding:5px 7px 5px 5px}
+  .tour-track{width:min(150px,32vw)}
+  .tour-clock{display:none}
+  #tour-exit{padding:0 10px}
   .topbar{left:12px;right:12px;top:max(12px,env(safe-area-inset-top))}
   .identity{gap:9px;padding:7px 13px 7px 12px}
   .brand{font-size:10px;letter-spacing:.24em}

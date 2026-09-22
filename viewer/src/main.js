@@ -22,6 +22,10 @@ import {CameraFlight} from './camera-flight.js';
 import {frameInsets} from './frame-insets.js';
 import {clockLabel} from './daylight.js';
 import {createHotspots} from './hotspots.js';
+import {createGuidedTour} from './guided-tour.js';
+import {createSpotlight} from './tour-spotlight.js';
+import {TOUR_AUDIO} from './tour-script.js';
+import {roomBox,clampToFloor} from './tour-rooms.js';
 import {createPhotoPins,createPhotoViewer} from './photo-gallery.js';
 import {renderPropertyInfo,renderFloorInfo} from './property-info.js';
 import {areaLabel} from './annotations.js';
@@ -60,6 +64,9 @@ const daylightURL = new URL((pages ? 'assets/lighting/' : 'lighting/')+'kloofend
 // fifty-five frames are a folder, and only the one that is opened is ever
 // fetched. prepare-native.mjs stages the same folder for the dev server.
 const photoRoot = new URL('photogallery/', publicRoot);
+// The voiceover is served the same way - a file beside the model, fetched
+// only when someone actually starts the narrated tour.
+const audioRoot = new URL('audio/', publicRoot);
 // Titles read through the language of the moment; every titles[x] call
 // site stays untouched while the words follow the toggle.
 const titles = new Proxy({}, {get: (_, key) => t(key)});
@@ -272,6 +279,15 @@ function renderFrame(time) {
     photoPins?.update(selected,photosVisible,Boolean(transition||flight?.active),walk?.active,activeCamera);
     annotations?.update(selected,roomNamesVisible,measurementsVisible,Boolean(transition||flight?.active),walk?.active,activeCamera,walk?.room,photoPins?.obstacles()??[]);
     hotspots?.update(activeCamera,walk?.active&&!walk.xrActive&&!walk.route);
+    // The tour's shade eases in and out rather than cutting, and once it is
+    // down it is re-laid every frame: the hole has to follow the room while
+    // the camera flies to it.
+    if(spotlight){
+      const dt=Math.min(.25,(time-(tourShadeTime??time))/1000);tourShadeTime=time;
+      const next=Math.abs(tourShadeTarget-tourShade)<.004?tourShadeTarget:THREE.MathUtils.damp(tourShade,tourShadeTarget,5,dt);
+      if(next!==tourShade){tourShade=next;spotlight.setLevel(tourShade);invalidate();}
+      if(tourShade>.01)spotlight.update(activeCamera,host.clientWidth,host.clientHeight);
+    }
     siteContext?.update(selected,activeCamera,controls.target,Boolean(transition||flight?.active),walk?.active);
     host.dataset.runtime=JSON.stringify({view:selected,plan:planMode,projection:activeCamera.type,cameraPosition:activeCamera.position.toArray(),target:controls.target.toArray(),sectionHeight:clip.constant,loaded:nativeDelivery?[...nativeDelivery.loaded.keys()]:[...groups.keys()],zoom:activeCamera.zoom,autoRotate:controls.autoRotate,zoomEnabled:controls.enableZoom,rotate:controls.mouseButtons.LEFT===THREE.MOUSE.ROTATE,transition:Boolean(transition),textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries});
     renderer.info.reset();
@@ -671,7 +687,12 @@ async function selectView(id, initial = false) {
   invalidateUIObstacles();
   host.dataset.view = id; host.dataset.loaded = 'true'; rememberState(); invalidate();
 }
-let walkData=null,tourStep=-1;
+let walkData=null;
+// The narrated tour: the driver (audio clock and subtitles), the shade it
+// draws over everything the sentence is not about, and how dark that shade
+// currently is - eased per frame so starting and leaving the tour are fades
+// rather than a cut.
+let guidedTour=null,spotlight=null,tourShade=0,tourShadeTarget=0,tourShadeTime=null;
 // The buyer's room menu: drawing names in the viewer's language, internal
 // codes ('Z06') demoted to tooltips, twins told apart by code only.
 function fillRoomMenu(){
@@ -730,35 +751,137 @@ function refreshChrome(){
     if(open){regionMap=createRegionMap($('#app'));regionMap.show();}
   }
   hotspots?.reset();
-  if(tourStep>=0)$('#tour-caption').textContent=t(TOUR[tourStep].caption);
+  refreshTourLabels();guidedTour?.refresh();
   invalidate();
 }
-// \u00a77: a short, interruptible presentation sequence over composed
-// views. Any direct touch of the scene hands control straight back.
-const TOUR=[
-  {view:'building',caption:'tourExterior'},
-  {view:'f1',caption:'tourLiving'},
-  {view:'f2',caption:'tourUpper'},
-  {view:'f0',caption:'tourGarden'},
-  {walk:/salon/i,caption:'tourInterior'},
-  {view:'neighborhood',caption:'tourStreet'},
-  {view:'region',caption:'tourRegion'},
-];
-function tourApply(){
-  const stop=TOUR[tourStep];
-  $('#tour-caption').textContent=t(stop.caption);
-  $('#tour-prev').disabled=tourStep===0;
-  $('#tour-next').textContent=tourStep===TOUR.length-1?t('tourEnd'):'\u203a';
-  if(stop.walk){
-    const station=walkData?.stations.find(x=>stop.walk.test(x.name))??walkData?.stations[0];
-    if(station)travelRoom(station.room_id);
-  } else {
-    if(walk?.active)exitWalk(false);
-    selectView(stop.view);
+// \u00a77: the owner's voiceover, and the viewer keeping up with it.
+//
+// The recording is one unbroken four-and-a-half-minute read - no pause in it
+// reaches a second and a half - so there is nothing for a step button to step
+// between. The audio is the timeline: tour-script.js says what should be on
+// screen while each sentence is spoken, the driver reads the audio clock, and
+// this is what it asks the viewer to do. Where a sentence names rooms they are
+// lit and everything else is taken down to a shade; where it names only a
+// view, the view's own framing stands.
+// The storey's own footprint, taken from the same section atlas the floor
+// views frame with. An open-plan label carries its SPACE's span in the
+// register, so without this the salon's box runs out past the wall that holds
+// it; site boxes - the pool, the garden - are meant to reach beyond the house
+// and keep their own extent.
+function floorFootprint(floor){
+  const slice=nativeAtlas?.slices?.[floor];if(!slice?.p?.length)return null;
+  const box={min:[Infinity,0,Infinity],max:[-Infinity,0,-Infinity]};
+  for(let i=0;i<slice.p.length;i+=2){
+    box.min[0]=Math.min(box.min[0],slice.p[i]);box.max[0]=Math.max(box.max[0],slice.p[i]);
+    box.min[2]=Math.min(box.min[2],slice.p[i+1]);box.max[2]=Math.max(box.max[2],slice.p[i+1]);
   }
+  return Number.isFinite(box.min[0])?box:null;
 }
-function startTour(){if(!ready)return;tourStep=0;$('#tour-bar').hidden=false;tourApply();}
-function endTour(openInfo){tourStep=-1;$('#tour-bar').hidden=true;if(openInfo)panel('info-panel',true);}
+function tourBoxes(ids){
+  if(!roomData)return [];
+  const boxes=[];
+  for(const id of ids){
+    const room=roomData.rooms.find(entry=>entry.id===id);if(!room)continue;
+    const raw=roomBox(room,roomData.dimensions,roomData.floor_datums_m);
+    const box=id.includes('-site-')?raw:clampToFloor(raw,floorFootprint(room.floor_index));
+    boxes.push(new THREE.Box3(new THREE.Vector3(...box.min),new THREE.Vector3(...box.max)));
+  }
+  return boxes;
+}
+function tourCaption(step){
+  $('#tour-caption').textContent=step?(currentLang()==='en'?step.en:step.tr):'';
+}
+// applyStatic() writes the transport's aria-label straight from the markup's
+// key, which is the PAUSE wording; a language switch made mid-pause would
+// otherwise leave the play button telling a screen reader to pause.
+function refreshTourLabels(){
+  const play=$('#tour-play');if(!play)return;
+  play.dataset.pauseLabel=t('tourPause');play.dataset.playLabel=t('tourResume');
+  play.setAttribute('aria-label',play.dataset.state==='paused'?play.dataset.playLabel:play.dataset.pauseLabel);
+}
+async function applyTourStep(step){
+  if(walk?.active)exitWalk(false);
+  photoViewer?.hide();
+  // The B\u00f6lge scale is a map layer, so its cues move its radius rather than
+  // a camera, and the only thing to light is the address at its centre.
+  if(step.view==='region'){
+    if(selected!=='region')await selectView('region');
+    regionMap??=createRegionMap($('#app'));
+    regionMap.setRadius(step.radius);
+    document.querySelectorAll('.region-radius button').forEach(button=>
+      button.setAttribute('aria-pressed',String(Number(button.dataset.radius)===step.radius)));
+    spotlight?.setBoxes([]);spotlight?.setCentre(step.spot==='centre');
+    tourShadeTarget=step.spot==='centre'?1:0;
+    setAutoRotate(false);invalidate();return;
+  }
+  spotlight?.setCentre(false);
+  if(selected!==step.view)await selectView(step.view);
+  const boxes=tourBoxes(step.rooms);
+  spotlight?.setBoxes(boxes);
+  tourShadeTarget=boxes.length?1:0;
+  // What the camera is for. A cue about the plot frames the villa WITH what
+  // is lit - the garden reads as wrapping the house only if the house is in
+  // the picture - and a cue about the villa frames the house alone. With
+  // neither, the lit rooms are the subject, and with nothing lit the view's
+  // own framing stands.
+  const lit=boxes.length?boxes.reduce((box,next)=>box.union(next),new THREE.Box3()):null;
+  const framed=!buildingBox?null
+    :step.frame==='plot'?(lit?.clone()??new THREE.Box3()).union(buildingBox).union(gardenBox??buildingBox)
+    :step.frame==='villa'?buildingBox.clone().union(lit??buildingBox)
+    :lit;
+  if(framed&&!framed.isEmpty()){
+    const centre=framed.getCenter(new THREE.Vector3()),size=framed.getSize(new THREE.Vector3());
+    const aspect=host.clientWidth/Math.max(1,host.clientHeight);
+    // Outdoor ground has no walls to hold the eye, so the pool framed to its
+    // own edges reads as a photograph of water rather than as a garden: site
+    // boxes take a wider frame and a lower camera, which puts the terrace,
+    // the trees and the house itself back in the picture.
+    const outdoor=step.rooms.length>0&&step.rooms.every(id=>id.includes('-site-'));
+    const polar=step.polar??(step.frame==='villa'?1:step.frame==='plot'?.86:outdoor?.95:.62);
+    const pad=step.frame==='villa'?1.12:step.frame==='plot'?1:outdoor?2.4:1.7;
+    const span=Math.max(size.z*Math.cos(polar)+size.y*Math.sin(polar),size.x/aspect)*pad;
+    // Looked at from its own side of the house, so the camera is never put
+    // behind the wall it is meant to be showing through.
+    const house=buildingBox.getCenter(new THREE.Vector3());
+    const offset=new THREE.Vector2(centre.x-house.x,centre.z-house.z);
+    const azimuth=step.azimuth??(offset.length()>1.2?Math.atan2(offset.x,offset.y):undefined);
+    flight.go({target:centre,polar,span,azimuth});
+  } else frame(false);
+  setAutoRotate(step.rotate);
+  invalidate();
+}
+function ensureSpotlight(){
+  if(!spotlight&&scene){spotlight=createSpotlight($('#app'));scene.add(spotlight.group);}
+  return spotlight;
+}
+function startTour(){
+  if(!ready)return;
+  ensureSpotlight();
+  guidedTour??=createGuidedTour({element:$('#tour-bar'),src:new URL(TOUR_AUDIO,audioRoot).href,
+    apply:applyTourStep,caption:tourCaption,onEnd:()=>endTour(true),
+    // The bar stays up with the reason in it, so leaving is still one press.
+    onError:()=>{$('#tour-caption').textContent=t('tourAudioFailed');
+      spotlight?.setBoxes([]);spotlight?.setCentre(false);tourShadeTarget=0;invalidate();}});
+  panel('',false);photoViewer?.hide();
+  // A tour that opened over the plan drawing would spend four minutes looking
+  // straight down through an orthographic lens; the narration describes rooms,
+  // not sheets.
+  planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);$('#toggle-plan').textContent='Plan';mode(false);
+  $('#tour-bar').hidden=false;$('#app').dataset.tour='true';
+  invalidateUIObstacles();
+  guidedTour.start();
+}
+function endTour(openInfo){
+  guidedTour?.stop();
+  $('#tour-bar').hidden=true;$('#app').dataset.tour='false';
+  tourCaption(null);
+  spotlight?.setBoxes([]);spotlight?.setCentre(false);
+  tourShadeTarget=0;
+  setAutoRotate(false);
+  invalidateUIObstacles();
+  if(openInfo)panel('info-panel',true);
+  invalidate();
+}
 // The lens readout speaks photographer: the 35 mm-equivalent focal length
 // (24 mm frame height) of the tour camera's vertical field.
 function updateLensReadout(){
@@ -903,6 +1026,12 @@ async function loadNativeModel(manifest){
   const boot=$('#boot');
   if(boot){boot.classList.add('boot-done');setTimeout(()=>boot.remove(),460);}
   delete $('#app').dataset.booting;
+  // The property card greets a plain entry here too. It used to be raised
+  // only on the classic path, which this one returns before ever reaching -
+  // so on the delivered build nobody was ever offered the tour.
+  let welcomeSeen=false;
+  try{welcomeSeen=sessionStorage.getItem('angora-welcome')==='1';}catch{/* private mode */}
+  if(!openedWithView&&!welcomeSeen)$('#welcome').hidden=false;
 }
 async function loadModel() {
   if (loading || ready || !renderer) return;
@@ -1366,7 +1495,7 @@ function zoom(factor){
 }
 function setAutoRotate(value) {
   if(!controls)return;
-  controls.autoRotate=Boolean(value&&selected==='neighborhood');
+  // The neighbourhood turns on request; during the narrated tour the tour\n  // decides, so the villa may turn as well.\n  controls.autoRotate=Boolean(value&&(selected==='neighborhood'||guidedTour?.active));
   controls.autoRotateSpeed=.25;
   $('#toggle-auto-rotate').setAttribute('aria-pressed',String(controls.autoRotate));
   if(controls.autoRotate)invalidate();
@@ -1447,10 +1576,12 @@ function bindInterface() {
   $('#welcome-close').onclick=dismissWelcome;
   $('#welcome-explore').onclick=()=>{dismissWelcome();if(ready)selectView('f1');};
   $('#welcome-tour').onclick=()=>{dismissWelcome();startTour();};
+  $('#start-tour').onclick=()=>{dismissWelcome();startTour();};
   $('#tour-exit').onclick=()=>endTour(false);
-  $('#tour-prev').onclick=()=>{if(tourStep>0){tourStep--;tourApply();}};
-  $('#tour-next').onclick=()=>{if(tourStep<TOUR.length-1){tourStep++;tourApply();}else endTour(true);};
-  host.addEventListener('pointerdown',()=>{if(tourStep>=0)endTour(false);},{capture:true});
+  // Touching the scene no longer ends the tour. The narration does not stop
+  // for a camera, so looking around while it speaks is the point; the next
+  // cue reframes and the visitor never loses their place.
+  refreshTourLabels();
   // The tour's lens, draggable by hand; the readout speaks photographer -
   // the 35 mm-equivalent focal length of the chosen vertical field.
   $('#walk-lens').oninput=e=>{
