@@ -172,7 +172,7 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
   // conversion itself when it draws to the canvas, so the image keeps its
   // exposure and its colour; it loses the crevice shading and the glare.
   const compactOutput=q.compactOutput?new CompactOutput():null;
-  let composer=null,beauty=null,ao=null;
+  let composer=null,beauty=null,ao=null,bloomPass=null,gradePass=null;
   if(q.postProcessing){
     const target=new THREE.WebGLRenderTarget(1,1,{type:THREE.HalfFloatType,samples:referenceProfile.msaaSamples});
     composer=new EffectComposer(renderer,target);beauty=new RenderPass(scene,camera);
@@ -180,9 +180,13 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     // off thin rails and window reveals - the pass is the pipeline's own
     // stated "largest tell", so it gets its headroom.
     ao=new SectionGTAOPass(scene,camera,clip,q.gtaoResolutionScale??1);
-    const smaa=new SMAAPass(),bloom=new LinearBloomPass();
-    ao.enabled=referenceProfile.aoEnabled;
-    configurePostprocessing(composer,{beauty,ao,smaa,bloom,output:new ShaderPass(GradeShader),
+    const smaa=new SMAAPass(),bloom=new LinearBloomPass();bloomPass=bloom;gradePass=new ShaderPass(GradeShader);
+    // Task 1.1b: every pass is BUILT (a view can re-enable what another view
+    // rests), but starts at the matrix+view row the boot view resolved;
+    // frame() moves pass.enabled per view. Flag off = the legacy composer.
+    ao.enabled=FEATURES.postfxV2?Boolean(q.gtao):referenceProfile.aoEnabled;
+    bloom.enabled=FEATURES.postfxV2?Boolean(q.bloom):true;
+    configurePostprocessing(composer,{beauty,ao,smaa,bloom,output:gradePass,
       dither:new ShaderPass(DisplayDitherShader)});
   }
   let day=172,hour=12.5,environmentMode='procedural-sky',walkInterior=false,lightsEnabled=true;
@@ -278,6 +282,9 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     hemisphere.intensity=.06+.34*daylight+(walkInterior&&!electricLight?(lightsEnabled?.45:.18*daylight):0);
     hemisphere.groundColor.set(walkInterior?0xe9e1d5:0xb8b2a8);
     renderer.toneMappingExposure=referenceProfile.exposure*(walkInterior?1.18:1);
+    // With the composer live, r180 skips the canvas tone map (the grade pass
+    // owns curve+exposure), so the walk-interior stop lives in ITS uniform.
+    if(FEATURES.postfxV2&&gradePass)gradePass.uniforms.uExposure.value=referenceProfile.exposure*(walkInterior?1.18:1);
     scene.environmentIntensity=.08+(soft?.70:.55)*daylight;
     sun.shadow.radius=soft?2.5:1;sun.shadow.intensity=soft?.82:1;
     horizon.set(0x182734).lerp(new THREE.Color(0xe4e9ed),daylight);
@@ -457,7 +464,11 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
       scene.fog=atmosphericFog&&(view==='region'||view==='neighborhood')?atmosphericFog:null;
       // Region frames the whole settlement, where a crevice-scale radius has
       // nothing left to describe and only costs, so occlusion stops there.
-      if(ao)ao.enabled=referenceProfile.aoEnabled&&view!=='region';
+      // Task 1.1b: with the flag on, the matrix+view row (quality.value has
+      // the view folded in by selectView) decides which passes spend; with it
+      // off, the legacy region-only rest stays byte-identical.
+      if(ao)ao.enabled=FEATURES.postfxV2?Boolean(quality.value.gtao):(referenceProfile.aoEnabled&&view!=='region');
+      if(bloomPass&&FEATURES.postfxV2)bloomPass.enabled=Boolean(quality.value.bloom);
       setTime();
       for(const material of preparedMaterials)setMaterialScale(material,view);
     },
