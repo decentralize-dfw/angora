@@ -463,3 +463,17 @@ test('the closing comes down off the roof and waits for dusk', () => {
     assert.equal(step.hour, null, `the tour changes the light at ${step.at} s`);
 });
 
+
+// OrbitControls in three r180 has getAzimuthalAngle and no setter, and the
+// closing's sweep called the setter for one build - a PAGEERROR on every
+// frame of it, and a closing that simply stood still.
+test('the sweep turns the camera with an API that exists', () => {
+  const main = fs.readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
+  const orbit = fs.readFileSync(
+    new URL('../node_modules/three/examples/jsm/controls/OrbitControls.js', import.meta.url), 'utf8');
+  const fn = main.match(/function advanceTourSweep\(time\)\{[\s\S]*?\n\}/);
+  assert.ok(fn, 'advanceTourSweep is gone');
+  for (const call of fn[0].matchAll(/controls\.(\w+)\(/g))
+    assert.match(orbit, new RegExp(`\\n\\t${call[1]}\\(`),
+      `OrbitControls has no ${call[1]}()`);
+});

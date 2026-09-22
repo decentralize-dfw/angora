@@ -1033,7 +1033,13 @@ function advanceTourSweep(time){
   if(!guidedTour?.paused)tourSweep.done+=(time-last)/1000;
   const t=Math.min(1,tourSweep.done/tourSweep.span);
   // Smoothstep: the turn creeps in and settles rather than snapping to speed.
-  controls.setAzimuthalAngle(tourSweep.from+tourSweep.through*(t*t*(3-2*t)));
+  // OrbitControls has getAzimuthalAngle but no setter, so the bearing is put
+  // back the way the flight does it - recompose the offset from the target.
+  const spherical=new THREE.Spherical().setFromVector3(
+    new THREE.Vector3().subVectors(camera.position,controls.target));
+  spherical.theta=tourSweep.from+tourSweep.through*(t*t*(3-2*t));
+  camera.position.copy(controls.target).add(new THREE.Vector3().setFromSpherical(spherical));
+  camera.lookAt(controls.target);
   if(t<1)invalidate(); else tourSweep=null;
 }
 function setTourWindows(on){
