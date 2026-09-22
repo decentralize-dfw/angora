@@ -6,12 +6,26 @@ export class InteriorLightController {
     this.fadeMs=fadeMs;this.hysteresisMetres=hysteresisMetres;
     this.slots=lights.map(light=>({light,source:null,desired:null,level:0,fade:null}));
     this.fixtures=[];this.floor=null;this.position=[0,0,0];this.enabled=true;
+    // A lamp measured for the room it stands in. Seen from the garden at
+    // night, through glass, at the exposure an exterior is graded for, a 6 m
+    // throw is nothing at all - so the whole-house mode may ask for more.
+    // The lamps stay where the register put them; only their reach changes.
+    this.gain=1;this.reach=null;
+    this.throw$=lights.map(light=>light.distance);
   }
   setFixtures(fixtures, time=performance.now()) {
     this.fixtures=fixtures??[];this.choose(time);
   }
   select(floor, position, time=performance.now()) {
     this.floor=floor;this.position=position??[0,0,0];this.choose(time);
+  }
+  // gain multiplies the rendered candela, reach replaces the spot's cutoff
+  // distance in metres; null puts each light back on its own.
+  setBoost({gain=1, reach=null}={}) {
+    if(gain===this.gain&&reach===this.reach)return false;
+    this.gain=gain;this.reach=reach;
+    this.slots.forEach((slot,i)=>{slot.light.distance=reach??this.throw$[i];});
+    return true;
   }
   setEnabled(enabled, time=performance.now()) {
     this.enabled=enabled;this.choose(time);
@@ -89,7 +103,7 @@ export class InteriorLightController {
           changed=true;shadowChanged=true;
         }
       }
-      light.intensity=slot.source?slot.source.intensity_cd*slot.level:0;
+      light.intensity=slot.source?slot.source.intensity_cd*slot.level*this.gain:0;
       // Native floor streams retain the same shader light count while fixtures
       // fade. Hiding zero-intensity slots would compile a new shader variant
       // at both ends of every fade, after the floor's GPU warm-up.

@@ -267,10 +267,11 @@ export function createLighting(renderer, scene, camera, clip,{baked=false}={}) {
     // floor may be 'all' - the whole house lit for a night exterior - which
     // is not a storey a reflection probe can be baked for, so the probe keeps
     // the last real storey and only the fixtures hear about it.
-    interior(floor,position,time){
+    interior(floor,position,time,boost){
       const storey=typeof floor==='number'?floor:null;
       activeInteriorFloor=storey;
       if(walkInterior&&reflectionFloor!==storey){reflectionFloor=storey;updateReflections();}
+      if(fixtures.setBoost(boost))setTime();
       fixtures.select(floor,position,time);
     },
     setLights(enabled){lightsEnabled=enabled;electricLight?.setEnabled(enabled);fixtures.setEnabled(enabled);setTime();},setTime,

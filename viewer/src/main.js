@@ -1057,10 +1057,14 @@ function setTourWindows(on){
     // is an orbit, so any choice made from where the camera happens to be is
     // wrong by the time it has turned. From the centre the slots land on the
     // hall and landing lamps - the ones a stairwell window shows off anyway.
-    lighting.interior('all',buildingBox?.getCenter(new THREE.Vector3())?.toArray()??null);
+    // Reach far enough to be seen from the garden: the closing stands about
+    // 22 m out, and a lamp measured for its own room does not carry that far
+    // through glass at an exterior's exposure.
+    lighting.interior('all',buildingBox?.getCenter(new THREE.Vector3())?.toArray()??null,
+      undefined,{gain:5.5,reach:16});
   } else if(tourLightsBefore!==null){
     lighting.setLights(tourLightsBefore);tourLightsBefore=null;
-    lighting.interior(/^f[0-3]$/.test(selected)?Number(selected[1]):null,null);
+    lighting.interior(/^f[0-3]$/.test(selected)?Number(selected[1]):null,null,undefined,{});
   }
 }
 function ensureSpotlight(){

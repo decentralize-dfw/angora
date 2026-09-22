@@ -119,3 +119,35 @@ test("a house with fewer storeys than slots still spends them all",()=>{
  assert.equal(c.slots.filter(slot=>slot.source).length,4);
  assert.equal(new Set(c.slots.map(slot=>slot.source)).size,4,'a fixture was given two slots');
 });
+
+// The lamps are measured for the rooms they stand in - a 6 m throw. The
+// closing looks at the house from 22 m away, through glass, at an exterior's
+// exposure, and the first build of it rendered every window black. The boost
+// is what makes them carry that far; it changes reach and brightness only,
+// never which lamp is lit or where it stands.
+test("the whole-house lamps can be given reach without being moved",()=>{
+ const fixtures=[fixture('a',0,0),fixture('b',4,1),fixture('c',8,2),fixture('d',12,3)];
+ const {controller:c,lights}=setup(fixtures,4);
+ const reach=lights.map(light=>light.distance);
+ c.select('all',[0,3,0],0);c.update(1000);
+ const plain=lights.map(light=>light.intensity);
+ const chosen=c.slots.map(slot=>slot.source?.name);
+ assert.ok(plain.every(v=>v>0),'the lamps are dark before any boost');
+
+ assert.equal(c.setBoost({gain:5.5,reach:16}),true,'the boost reported no change');
+ c.update(1100);
+ assert.deepEqual(c.slots.map(slot=>slot.source?.name),chosen,'the boost moved the lamps');
+ lights.forEach((light,i)=>{
+   assert.equal(light.distance,16,'the reach was not applied');
+   assert.ok(Math.abs(light.intensity-plain[i]*5.5)<1e-6,'the gain was not applied');
+ });
+ // Asking twice changes nothing, so a per-cue call does not churn the shaders.
+ assert.equal(c.setBoost({gain:5.5,reach:16}),false,'an unchanged boost reported a change');
+
+ // And it comes off cleanly: each light gets ITS OWN throw back, not a shared one.
+ assert.equal(c.setBoost({}),true);c.update(1200);
+ lights.forEach((light,i)=>{
+   assert.equal(light.distance,reach[i],'a light kept the boosted reach');
+   assert.ok(Math.abs(light.intensity-plain[i])<1e-6,'a light kept the boosted gain');
+ });
+});
