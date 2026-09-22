@@ -136,24 +136,38 @@ export function createSpotlight(app) {
   function placeShots(camera, width, height) {
     while (marks.length < shots.length) {
       const group = make('g', {class: 'tour-mark'});
-      const ring = make('circle', {r: 11});
-      const dot = make('circle', {r: 2.6, class: 'tour-mark-dot'});
-      const label = make('text', {'text-anchor': 'middle', dy: '4.2'});
-      group.append(ring, dot, label); marksLayer.append(group); marks.push({group, ring, dot, label});
+      // The same mark the viewer draws over the plan: the camera point and the
+      // angle it opens through, so a tour mark and a photograph pin read as
+      // the same thing. The number sits behind the apex, clear of the rays.
+      const rays = make('path', {class: 'tour-mark-rays', d: 'M0 0 L27.5 -10.4 M0 0 L27.5 10.4'});
+      const dot = make('circle', {class: 'tour-mark-dot', r: 3.4, cx: 0, cy: 0});
+      const badge = make('circle', {class: 'tour-mark-badge', r: 8.5});
+      const label = make('text', {'text-anchor': 'middle', dy: '3.6'});
+      group.append(rays, dot, badge, label); marksLayer.append(group); marks.push({group, rays, dot, badge, label});
     }
-    const point = new THREE.Vector3(), view = new THREE.Vector3();
+    const eye = new THREE.Vector3(), ahead = new THREE.Vector3(), view = new THREE.Vector3();
     marks.forEach((mark, i) => {
       const shot = shots[i];
-      if (!shot) {mark.group.setAttribute('visibility', 'hidden'); return;}
-      point.set(shot.position[0], shot.position[1], shot.position[2]);
-      view.copy(point).applyMatrix4(camera.matrixWorldInverse);
-      if (camera.isPerspectiveCamera && view.z > -camera.near) {mark.group.setAttribute('visibility', 'hidden'); return;}
-      point.project(camera);
-      const x = (point.x + 1) * width / 2, y = (1 - point.y) * height / 2;
-      if (x < 8 || y < 8 || x > width - 8 || y > height - 8) {mark.group.setAttribute('visibility', 'hidden'); return;}
+      const hide = () => mark.group.setAttribute('visibility', 'hidden');
+      if (!shot) return hide();
+      eye.set(shot.position[0], shot.position[1], shot.position[2]);
+      view.copy(eye).applyMatrix4(camera.matrixWorldInverse);
+      if (camera.isPerspectiveCamera && view.z > -camera.near) return hide();
+      // A metre along the look direction, projected too: the angle between the
+      // two on screen is the heading in plan, in section and at every orbit.
+      ahead.set(eye.x + (shot.look?.[0] ?? 0), eye.y, eye.z + (shot.look?.[1] ?? 0));
+      eye.project(camera); ahead.project(camera);
+      const x = (eye.x + 1) * width / 2, y = (1 - eye.y) * height / 2;
+      const ax = (ahead.x + 1) * width / 2, ay = (1 - ahead.y) * height / 2;
+      if (x < 6 || y < 6 || x > width - 6 || y > height - 6) return hide();
       mark.group.setAttribute('visibility', 'visible');
-      for (const node of [mark.ring, mark.dot]) {node.setAttribute('cx', x.toFixed(1)); node.setAttribute('cy', y.toFixed(1));}
-      mark.label.setAttribute('x', x.toFixed(1)); mark.label.setAttribute('y', y.toFixed(1));
+      const turn = Math.atan2(ay - y, ax - x) * 180 / Math.PI;
+      mark.rays.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${turn.toFixed(1)})`);
+      mark.dot.setAttribute('cx', x.toFixed(1)); mark.dot.setAttribute('cy', y.toFixed(1));
+      // The number rides behind the apex, away from the rays.
+      const bx = x - Math.cos(turn * Math.PI / 180) * 15, by = y - Math.sin(turn * Math.PI / 180) * 15;
+      mark.badge.setAttribute('cx', bx.toFixed(1)); mark.badge.setAttribute('cy', by.toFixed(1));
+      mark.label.setAttribute('x', bx.toFixed(1)); mark.label.setAttribute('y', by.toFixed(1));
       mark.label.textContent = String(shot.n);
     });
   }

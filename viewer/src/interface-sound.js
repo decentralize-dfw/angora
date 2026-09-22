@@ -34,27 +34,32 @@ export function createInterfaceSound({button,root=document,storage,Context=globa
       context??=new Context();
       if(context.state==='suspended')await context.resume();
       if((!enabled&&!force)||ticket!==generation||root.hidden||context.state!=='running')return;
-      const now=context.currentTime,span=Math.max(.25,Math.min(2.5,ms/1000));
-      const from=rising?196:392,to=rising?392:196;
+      const now=context.currentTime,span=Math.max(.3,Math.min(2.5,ms/1000));
+      // A swell, not a sweep. Two sines a fifth apart drifting by barely a
+      // tone, under a lowpass that opens and closes - so the cut is FELT
+      // rather than heard as an effect. The earlier version ran a bandpass
+      // over an octave glide and read as a sci-fi door.
+      const base=rising?174.6:146.8,drift=rising?1.12:0.89;
       const filter=context.createBiquadFilter();
-      filter.type='bandpass';filter.Q.value=1.1;
-      filter.frequency.setValueAtTime(from*2,now);
-      filter.frequency.exponentialRampToValueAtTime(to*2,now+span);
+      filter.type='lowpass';filter.Q.value=.5;
+      filter.frequency.setValueAtTime(320,now);
+      filter.frequency.linearRampToValueAtTime(1150,now+span*.45);
+      filter.frequency.linearRampToValueAtTime(300,now+span);
       const gain=context.createGain();
       gain.gain.setValueAtTime(.0001,now);
-      gain.gain.exponentialRampToValueAtTime(.016,now+span*.22);
-      gain.gain.setValueAtTime(.016,now+span*.6);
+      gain.gain.linearRampToValueAtTime(.03,now+span*.38);
+      gain.gain.linearRampToValueAtTime(.024,now+span*.7);
       gain.gain.exponentialRampToValueAtTime(.0001,now+span);
-      const voices=[from,from*1.5].map((hz,i)=>{
-        const tone=context.createOscillator();
-        tone.type=i?'triangle':'sine';
+      const voices=[[base,'sine',1],[base*1.5,'sine',.5],[base*2,'triangle',.18]].map(([hz,type,level])=>{
+        const tone=context.createOscillator(),level$=context.createGain();
+        tone.type=type;level$.gain.value=level;
         tone.frequency.setValueAtTime(hz,now);
-        tone.frequency.exponentialRampToValueAtTime(hz*to/from,now+span);
-        tone.connect(filter);tone.start(now);tone.stop(now+span+.05);
-        return tone;
+        tone.frequency.linearRampToValueAtTime(hz*drift,now+span);
+        tone.connect(level$);level$.connect(filter);tone.start(now);tone.stop(now+span+.08);
+        return {tone,level$};
       });
       filter.connect(gain);gain.connect(context.destination);
-      voices[0].onended=()=>{for(const v of voices)v.disconnect();filter.disconnect();gain.disconnect();};
+      voices[0].tone.onended=()=>{for(const v of voices){v.tone.disconnect();v.level$.disconnect();}filter.disconnect();gain.disconnect();};
     } catch { /* Audio availability must never interrupt navigation. */ }
   }
   button.disabled=!Context;

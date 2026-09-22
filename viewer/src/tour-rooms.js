@@ -25,12 +25,29 @@ export function roomSpan(room, dimensions) {
   }
   return span;
 }
-// The enclosure a room stands in, as the register draws it: rooms.json
-// carries a boundary polygon per SPACE - the walls, with the openings in
-// them - and names which rooms share it. Its bounding rectangle is the room's
-// own extent to the walls, which a label anchor plus two spans is not: an
-// open-plan label carries the whole space's span, so about its own anchor it
-// runs out past the wall on one side and stops short of it on the other.
+// The rectangle the register MEASURED, rather than one built around a label.
+// Each room carries an x and a z dimension whose endpoints are the wall faces
+// the span was taken between, so the two together are a rectangle standing on
+// real faces - which a label anchor plus two lengths is not. In an open plan
+// the label's length belongs to the whole space, so about its own anchor it
+// overran the wall on one side; these endpoints do not move.
+export function dimensionRect(room, dimensions) {
+  const rect = {};
+  for (const id of room.dimensions ?? []) {
+    const dim = dimensions.find(entry => entry.id === id);
+    if (!dim) continue;
+    if (Math.abs(dim.b[0] - dim.a[0]) >= Math.abs(dim.b[2] - dim.a[2])) {
+      rect.minX = Math.min(dim.a[0], dim.b[0]); rect.maxX = Math.max(dim.a[0], dim.b[0]);
+    } else {
+      rect.minZ = Math.min(dim.a[2], dim.b[2]); rect.maxZ = Math.max(dim.a[2], dim.b[2]);
+    }
+  }
+  return rect.minX !== undefined && rect.minZ !== undefined ? rect : null;
+}
+// The enclosure a room stands in, as the register draws it: rooms.json carries
+// a boundary polygon per SPACE - the walls, with the openings in them - and
+// names which rooms share it. It is the fallback for a room the dimension
+// register does not cover, and the bound a measured rectangle is held inside.
 export function spaceOf(room, spaces) {
   return spaces?.find(space => space.members?.includes(room.id) && space.boundary_xz?.length) ?? null;
 }
@@ -42,24 +59,30 @@ export function spaceRect(space) {
   }
   return {minX, maxX, minZ, maxZ};
 }
-// A box in world metres, as {min,max} triples, plus the space it came from so
-// a caller can tell two labels of one open plan apart from two rooms. Rooms
-// the register draws no boundary for - the balconies, the pool, the garden -
-// fall back to the anchor and its two measured spans.
+const clip = (rect, bound) => !bound ? rect : {
+  minX: Math.max(rect.minX, bound.minX), maxX: Math.min(rect.maxX, bound.maxX),
+  minZ: Math.max(rect.minZ, bound.minZ), maxZ: Math.min(rect.maxZ, bound.maxZ)};
+
+// A box in world metres, as {min,max} triples, plus how it was arrived at.
+// Rooms the register draws no boundary and takes no dimension for - the
+// balconies aside, which it dimensions - fall back to the anchor and its two
+// measured spans.
 export function roomBox(room, dimensions, datums, spaces) {
-  const space = spaceOf(room, spaces);
   const site = SITE.test(room.id);
   const base = site ? room.position[1] - SITE_BELOW : datums[room.floor_index];
   const next = datums[room.floor_index + 1];
   const top = site ? base + SITE_HEIGHT : base + (next ? next - base - SLAB : ROOM_HEIGHT);
-  if (space) {
-    const r = spaceRect(space);
-    return {min: [r.minX, base, r.minZ], max: [r.maxX, top, r.maxZ], space: space.space_id};
-  }
+  const space = site ? null : spaceOf(room, spaces);
+  const bound = space ? spaceRect(space) : null;
+  const measured = site ? null : dimensionRect(room, dimensions);
+  const rect = measured ? clip(measured, bound) : bound;
+  if (rect && rect.maxX > rect.minX && rect.maxZ > rect.minZ)
+    return {min: [rect.minX, base, rect.minZ], max: [rect.maxX, top, rect.maxZ],
+            space: space?.space_id ?? null, from: measured ? 'dimensions' : 'space'};
   const span = roomSpan(room, dimensions);
   const x = span.x || 2, z = span.z || 2;
   return {min: [room.position[0] - x / 2, base, room.position[2] - z / 2],
-          max: [room.position[0] + x / 2, top, room.position[2] + z / 2], space: null};
+          max: [room.position[0] + x / 2, top, room.position[2] + z / 2], space: null, from: 'anchor'};
 }
 export function unionBox(boxes) {
   if (!boxes.length) return null;

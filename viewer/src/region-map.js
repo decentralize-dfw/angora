@@ -95,6 +95,35 @@ export function createRegionMap(host) {
   shape('image', 'rm-roads', { href: plan.roads.png, x: plan.roads.x, y: plan.roads.y,
     width: plan.roads.w, height: plan.roads.h, preserveAspectRatio: 'none' });
   shape('polygon', 'rm-plot', { points: poly(plan.plot) });
+  // The narrated tour's light on the settlement. It is cut along the
+  // settlement's OWN outline - the same polygon the dashed boundary is drawn
+  // from - rather than as a circle about the villa, which lit a disc of
+  // Beysukent and cut the estate's east half off. Drawn inside the world
+  // group, so it keeps its registration through every radius and turn.
+  const dimDefs = document.createElementNS(svgNS, 'defs');
+  const dimMask = document.createElementNS(svgNS, 'mask');
+  dimMask.setAttribute('id', 'rm-plot-mask');
+  dimMask.setAttribute('maskUnits', 'userSpaceOnUse');
+  const dimAll = document.createElementNS(svgNS, 'rect');
+  for (const [k, v] of Object.entries({x: -12000, y: -12000, width: 24000, height: 24000, fill: '#fff'}))
+    dimAll.setAttribute(k, v);
+  const dimBlur = document.createElementNS(svgNS, 'filter');
+  dimBlur.setAttribute('id', 'rm-plot-feather');
+  dimBlur.setAttribute('x', '-20%'); dimBlur.setAttribute('y', '-20%');
+  dimBlur.setAttribute('width', '140%'); dimBlur.setAttribute('height', '140%');
+  const dimGauss = document.createElementNS(svgNS, 'feGaussianBlur');
+  dimGauss.setAttribute('stdDeviation', '26');
+  dimBlur.append(dimGauss);
+  const dimHole = document.createElementNS(svgNS, 'polygon');
+  dimHole.setAttribute('points', poly(plan.plot));
+  dimHole.setAttribute('fill', '#000');
+  dimHole.setAttribute('filter', 'url(#rm-plot-feather)');
+  dimMask.append(dimAll, dimHole);
+  dimDefs.append(dimBlur, dimMask);
+  world.append(dimDefs);
+  const dim = shape('rect', 'rm-dim', {x: -12000, y: -12000, width: 24000, height: 24000,
+    mask: 'url(#rm-plot-mask)'});
+  dim.setAttribute('visibility', 'hidden');
   for (const b of plan.buildings) shape('polygon', 'rm-building', { points: poly(b) });
   // the atlas's named amenities: every dot carries its own title on a
   // rounded card (the bare halo read as nothing), in its group's colour.
@@ -322,6 +351,8 @@ export function createRegionMap(host) {
     // Degrees clockwise about the villa. Cheap enough to call at a few hertz:
     // with every family filtered off there is almost nothing left to place.
     setBearing(deg) { if (deg === bearing) return; bearing = deg; layout(); },
+    // Everything outside the settlement goes dark, along its own outline.
+    setHighlight(on) {dim.setAttribute('visibility', on ? 'visible' : 'hidden');},
     get bearing() { return bearing; },
     // The amenity family on show, by the same one-at-a-time rule the chips
     // follow; null puts them all away. This is what a filter press does, so a

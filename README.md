@@ -52,41 +52,47 @@ hangi cümlede neyin ekranda olacağını tutar, `guided-tour.js` sesi okur,
 Dönüş tek bir kurala bağlıdır: kamera **yalnız gösterilecek bir şey yokken ve
 doldurulacak uzun bir süre varken** döner — sokaktan anlatılan yerleşke bölümü
 ve kapanış özeti. Bir oda, arsa ya da havuz yanarken asla dönmez, evin içinde
-hiç dönmez. Böylece altı buçuk dakikada iki dönüş vardır, her biri yaklaşık bir
-dakika; cümle başına başlayıp duran bir dönüş yoktur. Yan galeri ve ilan
-bağlantısı kameradan önce uygulandığı için yalnız onları değiştiren bir cümle
-kadrajı yeniden başlatmaz — eskiden bu, "Karşınızda Villa 21"den önce dönüşü
-üç kez geri sardırıp tökezleme gibi okunuyordu.
+hiç dönmez. Altı buçuk dakikada iki dönüş vardır, her biri yaklaşık bir dakika.
+Yan galeri, ilan bağlantısı ve gün ışığı kameradan önce uygulandığı için yalnız
+onları değiştiren bir cümle kadrajı yeniden başlatmaz.
 
-Açılışın 28 saniyesi Bölge haritasındadır: yarıçap 2 km → 1 km → 500 m iner,
-"en yeşil"de parklar, "kolay ulaşım"da duraklar, üniversiteler sayılırken
-okullar, AVM'ler ve hastaneler anılırken sırasıyla alışveriş ve sağlık aileleri
-açılır. Aileler 2 km'de değil 1 km ve 500 m'de açılır; nokta yarıçapı metre
-cinsinden çizildiği için 2 km'de görünmezler.
+Açılışta Bölge haritası kendi ekseni etrafında yavaşça döner, yarıçap 2 km →
+1 km → 500 m iner ve her cümleye kendi donatı ailesi eşlik eder. "Angora
+Evleri" denince yerleşke **kendi sınırı boyunca** aydınlanır: karartma,
+haritanın kendi `rm-plot` poligonundan maskelenir — villanın etrafına çizilen
+bir daire değil, çünkü daire Beysukent'in bir bölümünü aydınlatıp yerleşkenin
+doğu yarısını dışarıda bırakıyordu.
 
-Bir cümle birden çok oda adlandırdığında odalar **aynı anda değil, cümle
-boyunca sırayla** yanar ve yanma şak diye değil yarım saniyede olur; kamera
-baştan hepsini birden kadrajlar, böylece ışık gelirken görüntü kaymaz. Odanın
-işareti kayıtlı **mahal sınırından** gelir: rooms.json her mekân için duvar
-poligonu (`spaces[].boundary_xz`) taşır, dikdörtgen onun sınırıdır. Etiket
-noktası + açıklık yöntemi bırakıldı; açık planda etiket bütün mekânın
-açıklığını taşıdığı için kendi noktası etrafında bir yandan duvarı aşıyor,
-öbür yandan duvara yetişmiyordu. Aynı poligonu paylaşan iki etiket tek ışıktır
-— salonu yakmak açıldığı yemek alanını zaten yakar.
+Oda işareti **kaydın ölçtüğü dikdörtgendir**: her mahallin bir x bir de z
+ölçüsü var ve bu ölçülerin uç noktaları duvar yüzleridir, dolayısıyla ikisi
+birlikte gerçek yüzlere oturan bir dikdörtgen verir. Etiket noktası + açıklık
+yöntemi de, mekân poligonunun sınır kutusu da bırakıldı: açık planda ikisi de
+salonu yakarken bütün katı yakıyordu. Ölçülü dikdörtgen her mahalli ayrı
+tutar — antre antredir, salon salondur. Mekân poligonu artık yalnızca sınır
+olarak kullanılır (ölçülü dikdörtgen onun dışına taşamaz) ve ölçüsü olmayan
+mahaller için yedektir.
 
-Anlatılan mekânın sahibinin kendi ilan fotoğrafları yanda (telefonda üstte)
-açılır — ekranda üç, telefonda iki kare, %40 opasitede, numaralı. Aynı numara
-sahnede fotoğrafın çekildiği noktada da görünür, böylece "bu neresi" sorusunu
-modelin kendisi yanıtlar. Kareler `photogallery/thumbs/` altındaki 400 px'lik
-sürümlerdir (`tools/make-photo-thumbs.py`; 32 MB → 1,2 MB). Hangi fotoğrafın
-hangi odaya ait olduğu `photo-points.js` kaydındandır; testler iç mekân
-karesinin ancak kendi katı açıkken gösterilebileceğini tutar, ve bir mekânın
-fotoğrafı yoksa kare gösterilmez.
+Bir cümle birden çok oda adlandırdığında odalar sırayla yanar; yanma ve sönme
+yarım saniyede olur, yeni oda gelirken önceki yerinde kalır. Anlatılan mekânın
+ilan fotoğrafları solda küçük kartlar olarak açılır (ekranda üç, **telefonda
+hiç** — 390 px'e üç kare anlattığı evi örtüyordu), tam opasitede, numaralı.
+Aynı numara sahnede fotoğrafın çekildiği noktada, arayüzün kendi kamera
+işaretiyle (tripod noktası ve açtığı açı) görünür. Kareler
+`photogallery/thumbs/` altındaki 400 px'lik sürümlerdir
+(`tools/make-photo-thumbs.py`). Telefonda ayrıca kadrajlar %25 daha geniş
+alınır, böylece gösterilen şey üst bar, altyazı ve kumanda arasında kesinlikle
+sığar.
 
-Kesit düzlemi hareket ederken arayüz sesi kısa bir süpürme çalar: düzlemin
-gittiği yöne göre yükselen ya da alçalan iki yumuşak sinüs, tam düzlemin
-süresi kadar. Tur sırasında arayüz sesi kapalı olsa da çalar, çünkü tur zaten
-sesli bir yapıttır ve içindeki sessiz bir kesit kopma gibi okunur.
+Kumandada 1× / 1,5× / 2× hız düğmesi vardır. Kesit düzlemi hareket ederken
+alçak bir kabarma duyulur — bant geçiren süpürme değil, alçak geçiren altında
+beşli aralıklı iki sinüs, tam düzlemin süresi kadar. Sunum boyunca arkada
+sentezlenmiş bir zemin çalar (`tour-ambient.js`): üç ses, tek akor, sesin
+elli'de biri kadar, ve akor turun bölümleriyle birlikte ilerler — harita,
+yerleşke, villa, odalar, kapanış.
+
+Kapanışta kamera çatıdan iner, neredeyse cepheden bakar (polar 1,42), eve
+yaklaşır ve hiçbir şey yanmadan yavaşça döner; gün ışığı 21:00'e alınır ve tur
+bitince ziyaretçinin kendi ayarı geri konur.
 
 Bahçe, arsanın ev olmayan bütün parçaları olarak plan görünüşünden gösterilir:
 kayıtlı R32 arsa dikdörtgeninden bina kutusu çıkarılarak elde edilen dört

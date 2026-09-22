@@ -24,7 +24,11 @@ export function createGuidedTour({element, src, apply, caption, onEnd, onError, 
   audio.src = src;
   const $ = s => element.querySelector(s);
   const play = $('#tour-play'), fill = $('#tour-fill'), readout = $('#tour-clock'), track = $('#tour-track');
-  let index = -1, key = '', running = false, holdTimer = null, scrubbed = false;
+  const speed = $('#tour-speed');
+  // A presentation somebody has already sat through once should not have to
+  // be sat through again at the same pace.
+  const SPEEDS = [1, 1.5, 2];
+  let index = -1, key = '', running = false, holdTimer = null, scrubbed = false, speedAt = 0;
   // A cue may ask the recording to wait on it - the lift is shown in a
   // silence the script does not contain - so the hold is taken out of the
   // voice rather than out of the timeline. Only playback triggers it: a
@@ -69,6 +73,11 @@ export function createGuidedTour({element, src, apply, caption, onEnd, onError, 
 
   // A press during a hold owns the transport from then on.
   play.onclick = () => {release(); audio.paused ? audio.play().catch(() => {}) : audio.pause();};
+  const showSpeed = () => {
+    audio.playbackRate = SPEEDS[speedAt];
+    speed.textContent = `${String(SPEEDS[speedAt]).replace('.', ',')}\u00d7`;
+  };
+  speed.onclick = () => {speedAt = (speedAt + 1) % SPEEDS.length; showSpeed();};
   // Nothing may be asked of the element before it has metadata: seeking a
   // media element with no duration is an error, not a no-op.
   const loaded = () => Number.isFinite(audio.duration) && audio.duration > 0;
@@ -101,8 +110,9 @@ export function createGuidedTour({element, src, apply, caption, onEnd, onError, 
     get active() {return running;},
     get paused() {return audio.paused;},
     get time() {return audio.currentTime;},
+    get rate() {return SPEEDS[speedAt];},
     async start() {
-      running = true; index = -1; key = ''; release(); scrubbed = false;
+      running = true; index = -1; key = ''; release(); scrubbed = false; showSpeed();
       if (loaded()) audio.currentTime = 0;
       // Play is claimed FIRST, while the click that started the tour is still
       // the browser's active user activation. Applying the opening view means

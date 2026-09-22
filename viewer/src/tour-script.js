@@ -28,6 +28,7 @@ export const TOUR_DURATION = 401.64;
 //   photos  listing photograph ids for the side gallery; [] closes it
 //   group   which amenity family the Bolge map shows; null puts them away
 //   azimuth camera bearing in radians; polar its pitch; pad how much air
+//   hour    the daylight hour the cue asks for (6..21)
 //   rotate  the camera turns while this cue holds
 //   spin    the map turns slowly about the villa while this cue holds
 //   link    the listing link stands on screen from this cue on
@@ -175,7 +176,7 @@ export const TOUR_CUES = [
   {at: 217.8,
    tr: 'Buradan evin ana yaşam alanlarına açılıyoruz.',
    en: 'From here the house opens into its main living spaces.'},
-  {at: 221.0, rooms: ['f1-Z06', 'f1-Z05'], photos: [4, 20, 23],
+  {at: 221.0, rooms: ['f1-Z06', 'f1-Z05'], photos: [4, 23],
    tr: 'Yaklaşık 53 metrekarelik salon ve yemek alanı, evin kalbi.',
    en: 'The living and dining space, about 53 m², is the heart of the house.'},
   {at: 225.2, rooms: ['f1-Z06'], photos: [4, 23],
@@ -201,7 +202,7 @@ export const TOUR_CUES = [
   {at: 257.1, rooms: ['f2-102', 'f2-103', 'f2-104'], photos: [19, 16, 32],
    tr: 'Yaklaşık 22 metrekarelik ebeveyn yatak odası, kendi giyinme odası ve yaklaşık sekiz buçuk metrekarelik ebeveyn banyosuyla gerçek bir süit.',
    en: 'A 22 m² principal bedroom with its own dressing room and an 8.5 m² en-suite — a true suite.'},
-  {at: 266.6, rooms: ['f2-110'], azimuth: 2.95, photos: [31],
+  {at: 266.6, rooms: ['f2-110'], azimuth: 2.95, photos: [],
    tr: 'Ve kendi balkonuna açılıyor.',
    en: 'And it opens onto its own balcony.'},
   {at: 269.2, rooms: ['f2-106', 'f2-107', 'f2-108', 'f2-105'], azimuth: null, photos: [13, 30, 11],
@@ -243,8 +244,11 @@ export const TOUR_CUES = [
    en: 'Moisture-resistant and easy to clean, it is the practical choice where daily use is heaviest.'},
 
   // ------------------------------------------------------------------ closing
-  {at: 343.7, view: 'neighborhood', rooms: [], frame: 'villa', rotate: true, polar: 1.22, pad: 0.95, azimuth: 2.2, photos: [48, 49, 24],
-   polar: 0.17, azimuth: 0, photos: [24, 26, 55],
+  // Almost a front elevation, at the viewer's own dusk: the camera comes down
+  // off the roof, closer in, with nothing lit, and turns slowly through the
+  // whole summary. The visitor's daylight is put back when the tour ends.
+  {at: 343.7, view: 'neighborhood', rooms: [], frame: 'villa', rotate: true,
+   polar: 1.42, pad: 0.92, azimuth: 2.2, hour: 21, photos: [48, 49, 24],
    tr: 'İlk üç katı birbirine bağlayan asansör, 10 metreye 5 metre boyutunda kendine ait deposu olan özel havuz, 900 metrekarelik çift kotlu bahçe, bağımsız girişli müştemilat ve her kuşağa ayrı yaşam alanı sunan esnek bir kurgu.',
    en: 'A lift joining the first three floors, a private pool of 10 by 5 metres with its own tank, a 900 m² garden on two levels, a separately entered annexe, and a plan flexible enough to give every generation its own space.'},
   {at: 359.8, photos: [25, 50, 36],
@@ -277,7 +281,7 @@ export const TOUR_CUES = [
 export function resolveCues(cues = TOUR_CUES) {
   const carried = {view: 'region', radius: 2000, rooms: [], frame: null,
     azimuth: null, polar: null, rotate: false, spot: null, spin: false,
-    group: null, link: false, photos: [], pad: null};
+    group: null, link: false, photos: [], pad: null, hour: null};
   let tr = '', en = '';
   return cues.map((cue, i) => {
     for (const key of Object.keys(carried)) if (key in cue) carried[key] = cue[key];

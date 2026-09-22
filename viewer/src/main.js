@@ -25,6 +25,7 @@ import {createHotspots} from './hotspots.js';
 import {createGuidedTour} from './guided-tour.js';
 import {createSpotlight} from './tour-spotlight.js';
 import {TOUR_AUDIO} from './tour-script.js';
+import {createTourAmbient,moodFor} from './tour-ambient.js';
 import {roomBox,clampToFloor} from './tour-rooms.js';
 import {createPhotoPins,createPhotoViewer} from './photo-gallery.js';
 import {PHOTO_POINTS,photoCaption} from './photo-points.js';
@@ -710,7 +711,7 @@ let tourSpinTimer=null,tourBearing=0;
 // The side gallery's current frames, and the timers that light a sentence's
 // rooms one after another. Both are kept so a language switch can redraw the
 // captions and a cue change can cancel a reveal still in flight.
-let tourPhotos=[],tourReveal=[];
+let tourPhotos=[],tourReveal=[],tourAmbient=null,tourHourBefore=null;
 // The buyer's room menu: drawing names in the viewer's language, internal
 // codes ('Z06') demoted to tooltips, twins told apart by code only.
 function fillRoomMenu(){
@@ -869,7 +870,8 @@ function setTourPhotos(ids){
   el.hidden=!shown.length;
   // Each card's number is repeated in the scene, at the spot the photograph
   // was taken from, so "where is this" is answered by the model itself.
-  spotlight?.setShots(shown.map((point,i)=>({n:i+1,position:[point.x,point.y,point.z]})));
+  spotlight?.setShots(shown.map((point,i)=>(
+    {n:i+1,position:[point.x,point.y,point.z],look:[point.dx,point.dz]})));
 }
 // "aynı anda üçünü de açma": a sentence that names three rooms lights them in
 // the order it names them, spread across the words rather than thrown on at
@@ -885,6 +887,13 @@ function revealBoxes(boxes,glow,span){
   for(let i=1;i<boxes.length;i++)
     tourReveal.push(setTimeout(()=>{spotlight?.setBoxes(boxes.slice(0,i+1),{glow});invalidate();},gap*i*1000));
 }
+// The hour a cue asks for - the closing is at dusk - with the visitor's own
+// setting remembered and put back when the tour ends.
+function setTourHour(hour){
+  const slider=$('#daylight-hour');if(!slider||hour===null||String(hour)===slider.value)return;
+  tourHourBefore??=slider.value;
+  slider.value=String(hour);slider.oninput();
+}
 function setTourSpin(on){
   if(on===Boolean(tourSpinTimer))return;
   if(!on){clearInterval(tourSpinTimer);tourSpinTimer=null;return;}
@@ -898,7 +907,7 @@ function setTourSpin(on){
 }
 function restRegionMap(){
   setTourSpin(false);tourBearing=0;
-  regionMap?.setBearing(0);regionMap?.setGroup(null);
+  regionMap?.setBearing(0);regionMap?.setGroup(null);regionMap?.setHighlight(false);
 }
 function tourCaption(step){
   $('#tour-caption').textContent=step?(currentLang()==='en'?step.en:step.tr):'';
@@ -914,8 +923,10 @@ function refreshTourLabels(){
 async function applyTourStep(step){
   if(walk?.active)exitWalk(false);
   photoViewer?.hide();
+  tourAmbient?.set(moodFor(step,step.at));
   $('#tour-listing').hidden=!step.link;
   setTourPhotos(step.photos);
+  setTourHour(step.hour);
   // The B\u00f6lge scale is a map layer, so its cues move its radius rather than
   // a camera, and the only thing to light is the address at its centre.
   if(step.view==='region'){
@@ -962,7 +973,12 @@ async function applyTourStep(step){
     const outdoor=step.rooms.length>0&&step.rooms.every(id=>id.includes('-site-'));
     const polar=step.polar??(step.frame==='villa'?1:step.frame==='plot'?.86:outdoor?.95:.62);
     const pad=step.pad??(step.frame==='villa'?1.12:step.frame==='plot'?1.1:outdoor?2.4:1.7);
-    const span=Math.max(size.z*Math.cos(polar)+size.y*Math.sin(polar),size.x/aspect)*pad;
+    // A phone's frame is what the owner saw run off the edges: the same span
+    // that fits on a screen does not fit under a topbar, a subtitle card and a
+    // transport. Everything the tour frames is brought to about four fifths of
+    // the viewport there.
+    const room=matchMedia('(max-width:720px)').matches?1.25:1;
+    const span=Math.max(size.z*Math.cos(polar)+size.y*Math.sin(polar),size.x/aspect)*pad*room;
     // Looked at from its own side of the house, so the camera is never put
     // behind the wall it is meant to be showing through.
     const house=buildingBox.getCenter(new THREE.Vector3());
@@ -992,6 +1008,8 @@ function startTour(){
   planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);$('#toggle-plan').textContent='Plan';mode(false);
   $('#tour-bar').hidden=false;$('#app').dataset.tour='true';
   invalidateUIObstacles();
+  tourAmbient??=createTourAmbient();
+  tourAmbient?.start();
   guidedTour.start();
 }
 function endTour(openInfo){
@@ -999,6 +1017,8 @@ function endTour(openInfo){
   $('#tour-bar').hidden=true;$('#app').dataset.tour='false';
   $('#tour-listing').hidden=true;
   clearTourReveal();setTourPhotos([]);
+  tourAmbient?.stop();
+  if(tourHourBefore!==null){$('#daylight-hour').value=tourHourBefore;$('#daylight-hour').oninput();tourHourBefore=null;}
   restRegionMap();
   tourCaption(null);
   spotlight?.setBoxes([]);spotlight?.setCentre(false);

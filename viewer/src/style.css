@@ -356,6 +356,7 @@ h1 strong{font-weight:700}
 .rm-chip-villa{background:var(--ink);color:#fff;border-color:#fff;font-size:12px;padding:6px 14px;letter-spacing:.02em}
 .rm-chip-ring{background:transparent;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:var(--muted);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:2px 6px}
 .rm-chip-area{background:transparent;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:rgba(22,29,26,.42);font-size:10px;letter-spacing:.26em;text-transform:uppercase;font-weight:600}
+.rm-dim{fill:#070d0c;fill-opacity:.7;pointer-events:none}
 .rm-compass{position:absolute;right:22px;top:84px;display:grid;place-items:center;width:44px;height:44px;border-radius:999px;background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);font-size:11px;font-weight:700;color:var(--ink);line-height:1}
 .rm-compass i{font-style:normal;font-size:13px;margin-bottom:-2px;
   transform:rotate(var(--rm-bearing,0deg));transition:transform 120ms linear}
@@ -533,8 +534,8 @@ h1 strong{font-weight:700}
 /* The owner's own frames of the room being named. They stand beside the
    scene rather than over it: the spotlight has already darkened everything
    the sentence is not about, and that is where the eye should still go. */
-.tour-gallery{position:absolute;z-index:39;left:22px;top:50%;transform:translateY(-50%);
-  display:grid;gap:10px;width:min(250px,25vw);pointer-events:none}
+.tour-gallery{position:absolute;z-index:39;left:18px;top:50%;transform:translateY(-50%);
+  display:grid;gap:8px;width:min(186px,17vw);pointer-events:none}
 .tour-gallery[hidden]{display:none}
 .tour-gallery figure{margin:0;border-radius:14px;overflow:hidden;background:rgba(10,16,14,.74);
   -webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);
@@ -542,18 +543,19 @@ h1 strong{font-weight:700}
   animation:tour-photo-in 460ms cubic-bezier(.22,.8,.2,1) both}
 .tour-gallery figure:nth-child(2){animation-delay:110ms}
 .tour-gallery figure:nth-child(3){animation-delay:220ms}
-/* The frames sit back at 40 %: they are a glance at the room, not the subject.
-   The caption and its number stay legible. */
-.tour-gallery img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#1b2320;opacity:.4}
-.tour-gallery figcaption{display:flex;align-items:baseline;gap:7px;padding:6px 11px 8px;
-  font-size:11px;line-height:1.35;color:#dee6e1}
-.tour-gallery figcaption b{flex:0 0 auto;width:15px;height:15px;border-radius:999px;
-  display:grid;place-items:center;font-size:9.5px;font-weight:700;color:#10201c;background:#f0d9ad}
+/* Small and at full strength: a glance at the room, not a wash over it. */
+.tour-gallery img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#1b2320}
+.tour-gallery figcaption{display:flex;align-items:baseline;gap:6px;padding:4px 8px 6px;
+  font-size:9.5px;line-height:1.3;color:#e4ebe6}
+.tour-gallery figcaption b{flex:0 0 auto;width:13px;height:13px;border-radius:999px;
+  display:grid;place-items:center;font-size:8.5px;font-weight:700;color:#10201c;background:#f0d9ad}
 .tour-gallery[data-single=true] figcaption b{display:none}
-/* And where each of them was taken from, numbered to match, in the scene. */
-.tour-mark circle{fill:rgba(12,18,16,.72);stroke:#f0d9ad;stroke-width:1.4}
-.tour-mark .tour-mark-dot{fill:#f0d9ad;stroke:none}
-.tour-mark text{fill:#f0d9ad;font-size:10.5px;font-weight:700;font-family:inherit}
+/* And where each of them was taken from, numbered to match, in the scene -
+   the same camera mark the viewer draws over the plan. */
+.tour-mark-rays{fill:none;stroke:#f0d9ad;stroke-width:1.7;stroke-linecap:round;opacity:.92}
+.tour-mark .tour-mark-dot{fill:#f0d9ad;stroke:rgba(12,18,16,.8);stroke-width:1.1}
+.tour-mark .tour-mark-badge{fill:rgba(12,18,16,.86);stroke:#f0d9ad;stroke-width:1.3}
+.tour-mark text{fill:#f0d9ad;font-size:10px;font-weight:700;font-family:inherit}
 @keyframes tour-photo-in{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.tour-gallery figure{animation:none}}
 /* The way to the listing, raised by the sentence that names the price. It
@@ -576,6 +578,9 @@ h1 strong{font-weight:700}
   cursor:pointer;touch-action:none;flex:0 0 auto}
 .tour-track:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .tour-track>i{display:block;height:100%;width:0;border-radius:999px;background:var(--ink)}
+.tour-speed{min-width:40px;height:30px;border-radius:999px;font-size:11.5px;font-weight:700;
+  color:var(--ink);background:var(--glass);border:1px solid var(--edge);font-variant-numeric:tabular-nums}
+.tour-speed:hover{background:var(--glass-hover)}
 .tour-clock{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:82px;text-align:center}
 #tour-exit{font-size:11px;color:var(--muted);padding:0 12px;white-space:nowrap;min-height:34px}
 #tour-exit:hover{background:var(--glass-hover)}
@@ -604,11 +609,9 @@ h1 strong{font-weight:700}
   .tour-hud{width:calc(100vw - 20px);gap:8px;bottom:max(14px,calc(env(safe-area-inset-bottom) + 10px))}
   .tour-caption{font-size:13.5px;line-height:1.45;padding:9px 14px;border-radius:15px}
   .tour-listing{font-size:12px;padding:0 14px;min-height:36px}
-  /* A phone has no side, so the frames sit under the bar as one row. */
-  .tour-gallery{left:10px;right:10px;top:max(58px,calc(env(safe-area-inset-top) + 50px));
-    bottom:auto;transform:none;width:auto;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px}
-  .tour-gallery img{aspect-ratio:1/1}
-  .tour-gallery figcaption{display:none}
+  /* A phone has no side to give them. Three listing frames over a 390 px
+     screen bury the house they are about, so on a phone there are none. */
+  .tour-gallery{display:none}
   .tour-transport{gap:7px;padding:5px 7px 5px 5px}
   .tour-track{width:min(150px,32vw)}
   .tour-clock{display:none}
