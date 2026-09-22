@@ -297,6 +297,27 @@ export function installQaHarness({host, query, hooks}) {
     const after = {calls: renderer.info.render.calls, triangles: renderer.info.render.triangles};
     return {shadow: before, frameWithShadowUpdate: during, steadyFrame: after};
   }
-  window.__angoraQA = {applyCamera, snapshot, measure, debugShadow, get report() { return JSON.parse(host.dataset.qaReport ?? 'null'); }};
+  // Task 3.4g: the night exterior is the most expensive light state - ten
+  // fixture spots go visible at once, and three keys programs on light
+  // COUNTS, so even materials whose 1.6 strip compiles the loops to nothing
+  // get fresh program objects. This measures that variant cost: programs
+  // and draws before, entering night ('all' rooms + window glow + lamps),
+  // and after two settled frames.
+  async function nightProbe() {
+    const renderer = hooks.renderer();
+    const lighting = hooks.lighting();
+    const day = {programs: renderer.info.programs.length, calls: renderer.info.render.calls};
+    lighting.setLights?.(true);
+    lighting.interior('all', null, undefined, {gain: 5.5, reach: 16});
+    lighting.setWindowGlow(.42);
+    hooks.invalidate();
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    hooks.invalidate();
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    const night = {programs: renderer.info.programs.length, calls: renderer.info.render.calls,
+      triangles: renderer.info.render.triangles};
+    return {day, night, addedPrograms: night.programs - day.programs};
+  }
+  window.__angoraQA = {applyCamera, snapshot, measure, debugShadow, nightProbe, get report() { return JSON.parse(host.dataset.qaReport ?? 'null'); }};
   return window.__angoraQA;
 }

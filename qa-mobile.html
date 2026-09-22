@@ -86,16 +86,16 @@ async function run(){
   report.startedAt=new Date().toISOString();
   try{
     // 1 — soğuk açılış: villa kamerası, mobil profil
-    status('1/5 · Görünüm yükleniyor (villa)…');
+    status('1/6 · Görünüm yükleniyor (villa)…');
     const boot=await open('?view=neighborhood&hour=16.5&season=172&light=sun&camera=C03&stats=1');
     report.steps.boot=boot;
     doc().defaultView.addEventListener('pagehide',()=>{report.interrupted='pagehide';});
     // 2 — 15 sn orbit ölçümü
-    status('2/5 · 15 sn orbit ölçümü — telefona dokunma…');
+    status('2/6 · 15 sn orbit ölçümü — telefona dokunma…');
     const orbit=await qa().measure(15);
     report.steps.villaOrbit=orbit;
     // 3 — kat geçişleri
-    status('3/5 · Kat geçişleri (Bodrum → 1. kat → Çatı)…');
+    status('3/6 · Kat geçişleri (Bodrum → 1. kat → Çatı)…');
     const transitions=[];
     for(const id of ['C05','C07','C08']){
       const t0=performance.now();
@@ -105,16 +105,24 @@ async function run(){
     }
     report.steps.floorTransitions=transitions;
     // 4 — 30 sn iç mekân yürüyüşü
-    status('4/5 · Salonda 30 sn yürüyüş ölçümü…');
+    status('4/6 · Salonda 30 sn yürüyüş ölçümü…');
     await qa().applyCamera('C10');
     report.steps.walk=await qa().measure(30);
-    // 5 — 3 dakika kesintisiz bekleme: context loss var mı?
-    status('5/5 · 3 dakika dayanıklılık — sayfayı açık tut, ekran kapanmasın…');
+    // 5 — Task 3.4g / H7: gece dış cephesi (C04 havuz tarafı) — en pahalı
+    // ışık durumu. Program varyant sayısı + 10 sn ölçüm mandalın parçası.
+    status('5/6 · Gece modu (havuz tarafı) ölçümü…');
+    try{
+      await qa().applyCamera('C04');
+      report.steps.nightVariants=await qa().nightProbe();
+      report.steps.night=await qa().measure(10);
+    }catch(error){report.steps.night={error:String(error)};}
+    // 6 — 3 dakika kesintisiz bekleme: context loss var mı?
+    status('6/6 · 3 dakika dayanıklılık — sayfayı açık tut, ekran kapanmasın…');
     for(let s=180;s>0;s-=10){
       await wait(10000);
       const current=qa().snapshot();
       if(current.contextLost){report.contextLost=true;break;}
-      status('5/5 · Dayanıklılık: '+s+' sn kaldı…');
+      status('6/6 · Dayanıklılık: '+s+' sn kaldı…');
     }
     const final=qa().snapshot();
     report.steps.final=final;
