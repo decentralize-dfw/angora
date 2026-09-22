@@ -43,6 +43,10 @@ const KEEP_NAMED = new Map([
   // culling it opened white shards at the dormer junction. The back face
   // stays until H4 closes the junction geometry.
   ['Clay tile', 'roof back face papers the dormer/eaves trim sliver (H4)'],
+  // gate-1.4 A/B round two, desktop C03: the dormer slopes are authored
+  // with inward-wound 'roof-7' faces - whitish under two sides, GONE under
+  // one. The winding repair is H4's; until then both faces stay.
+  ['roof-7', 'dormer slopes are wound inward - faces vanish single-sided (H4)'],
 ]);
 
 const dry = process.argv.includes('--dry');

@@ -3,19 +3,20 @@
     "profile": "desktop",
     "part": "architecture",
     "bytes": 5856892,
-    "flipped": [],
+    "flipped": [
+      "architecture-plaster-0",
+      "architecture-wood-2",
+      "architecture-other-4",
+      "architecture-plaster-5",
+      "architecture-metal-6",
+      "architecture-tile-8",
+      "architecture-other-9",
+      "architecture-wood-10"
+    ],
     "kept": [
-      "architecture-plaster-0 (already single-sided)",
       "architecture-tile-1 (kept: roof back face papers the dormer/eaves trim sliver (H4))",
-      "architecture-wood-2 (already single-sided)",
       "architecture-glass-3 (kept: BLEND)",
-      "architecture-other-4 (already single-sided)",
-      "architecture-plaster-5 (already single-sided)",
-      "architecture-metal-6 (already single-sided)",
-      "architecture-tile-7 (already single-sided)",
-      "architecture-tile-8 (already single-sided)",
-      "architecture-other-9 (already single-sided)",
-      "architecture-wood-10 (already single-sided)"
+      "architecture-tile-7 (kept: dormer slopes are wound inward - faces vanish single-sided (H4))"
     ]
   },
   {
@@ -47,19 +48,20 @@
     "profile": "mobile",
     "part": "architecture",
     "bytes": 4594620,
-    "flipped": [],
+    "flipped": [
+      "architecture-plaster-0",
+      "architecture-wood-2",
+      "architecture-other-4",
+      "architecture-plaster-5",
+      "architecture-metal-6",
+      "architecture-tile-8",
+      "architecture-other-9",
+      "architecture-wood-10"
+    ],
     "kept": [
-      "architecture-plaster-0 (already single-sided)",
       "architecture-tile-1 (kept: roof back face papers the dormer/eaves trim sliver (H4))",
-      "architecture-wood-2 (already single-sided)",
       "architecture-glass-3 (kept: BLEND)",
-      "architecture-other-4 (already single-sided)",
-      "architecture-plaster-5 (already single-sided)",
-      "architecture-metal-6 (already single-sided)",
-      "architecture-tile-7 (already single-sided)",
-      "architecture-tile-8 (already single-sided)",
-      "architecture-other-9 (already single-sided)",
-      "architecture-wood-10 (already single-sided)"
+      "architecture-tile-7 (kept: dormer slopes are wound inward - faces vanish single-sided (H4))"
     ]
   },
   {
