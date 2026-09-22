@@ -92,17 +92,42 @@ export class SectionGTAOPass extends GTAOPass {
 // reaching flat ground is PI*L and it leaves again as albedo*L, so the panel is
 // the site's own albedo rendered unlit at the sky's own level.
 const GROUND_ALBEDO='#6f7a60'; // the settlement's grass, paving and roads, averaged
-export function buildEnvironment(renderer,{sky=null,background=null}) {
+export function buildEnvironment(renderer,{sky=null,background=null,massing=null}) {
   const probe=new THREE.Scene();
   if(sky)probe.add(sky);
   if(background){background.mapping=THREE.EquirectangularReflectionMapping;probe.background=background;}
   const ground=new THREE.Mesh(new THREE.PlaneGeometry(8000,8000),
     new THREE.MeshBasicMaterial({color:new THREE.Color(GROUND_ALBEDO)}));
   ground.rotation.x=-Math.PI/2;ground.position.y=-1;probe.add(ground);
+  // Task 3.4f: the neighbourhood's own mass under the dome, so glazing and
+  // plaster reflect a settlement silhouette instead of an empty plain. The
+  // group shares the delivered geometry (probeMassingFrom) - one flat
+  // unlit material, rendered exactly once into the PMREM.
+  if(massing)probe.add(massing);
   const generator=new THREE.PMREMGenerator(renderer);
   const target=generator.fromScene(probe,.035,.1,20000);
+  if(massing)probe.remove(massing);
   probe.remove(ground);ground.geometry.dispose();ground.material.dispose();generator.dispose();
   return target;
+}
+
+// A probe stand-in built from the context delivery: shared geometry, one
+// unlit material, furniture and foliage left out (alpha cards would bake as
+// opaque blobs). World transforms are frozen at call time - the context
+// never animates, and the probe renders once.
+export function probeMassingFrom(root){
+  const material=new THREE.MeshBasicMaterial({color:new THREE.Color('#c8c4bc')});
+  const group=new THREE.Group();group.name='probe-massing';
+  root.updateWorldMatrix(true,true);
+  root.traverse(o=>{
+    if(!o.isMesh||o.userData?.category==='furniture')return;
+    const materials=Array.isArray(o.material)?o.material:[o.material];
+    if(materials.some(m=>m&&(/foliage|hedge|leaf|leaves|tree|shrub/i.test(m.name)||m.transparent||m.alphaTest>0)))return;
+    const stand=new THREE.Mesh(o.geometry,material);
+    stand.matrixAutoUpdate=false;stand.matrix.copy(o.matrixWorld);
+    group.add(stand);
+  });
+  return group;
 }
 
 export function isGlazing(material) {
@@ -190,6 +215,7 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
       dither:new ShaderPass(DisplayDitherShader)});
   }
   let day=172,hour=12.5,environmentMode='procedural-sky',walkInterior=false,lightsEnabled=true;
+  let pendingProbeHdr=null,probeMassingGroup=null;
   const skyDirection=new THREE.Vector3();let skyDrawn=false;
   let soft=true,shadowDistance=110;
   const preparedMaterials=new Set();
@@ -329,8 +355,25 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
       // The HDR is a pure sky, so it goes through the same probe as the
       // procedural one rather than straight into the scene: it supplies the
       // dome, the probe supplies the ground under it.
-      const next=buildEnvironment(renderer,{background:hdr});
-      scene.environment=next.texture;environment?.dispose();environment=next;hdr.dispose();environmentMode='hdr';setTime();
+      const next=buildEnvironment(renderer,{background:hdr,massing:probeMassingGroup});
+      scene.environment=next.texture;environment?.dispose();environment=next;environmentMode='hdr';setTime();
+      // Task 3.4f: the HDR usually resolves before the context is staged.
+      // Hold the clamped dome until the massing arrives (one rebuild), then
+      // let it go; with the flag off it is released here as before.
+      if(FEATURES.probeMassing&&!probeMassingGroup){pendingProbeHdr?.dispose();pendingProbeHdr=hdr;}
+      else hdr.dispose();
+    },
+    // Task 3.4f: called once the context group is staged. Rebuilds the HDR
+    // probe with the settlement mass inside it - a one-time cost; if the HDR
+    // has not resolved yet, loadEnvironment picks the massing up itself.
+    setEnvironmentMassing(group){
+      if(!FEATURES.probeMassing||!group)return false;
+      probeMassingGroup=group;
+      if(!pendingProbeHdr)return false;
+      const next=buildEnvironment(renderer,{background:pendingProbeHdr,massing:group});
+      scene.environment=next.texture;environment?.dispose();environment=next;
+      pendingProbeHdr.dispose();pendingProbeHdr=null;setTime();
+      return true;
     },
     horizonColour:horizon,
     setFixtures(data,{allRooms=false}={}){

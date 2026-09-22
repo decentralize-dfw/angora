@@ -15,7 +15,7 @@ import {waitForGPU} from './render-readiness.js';
 import {assetLoadBudget,createLoadQueue} from './asset-loading.js';
 import {createTextureLoader} from './texture-loader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
-import { createLighting } from './lighting.js';
+import { createLighting, probeMassingFrom } from './lighting.js';
 import { createAnnotations } from './annotations.js';
 import { InteriorWalk, enableImmersiveWalk } from './walk.js';
 import {CameraFlight} from './camera-flight.js';
@@ -1643,6 +1643,10 @@ async function loadModel() {
       contextBox.union(new THREE.Box3().setFromObject(groups.get('context')));
       prepareContextSurfaces(groups.get('context'),lighting.horizonColour);
       massing=createContextMassing(groups.get('context'));
+      // Task 3.4f: rebuild the sky probe with the settlement's own mass in
+      // it, so glazing reflects the neighbourhood silhouette. One-time cost;
+      // no-op while FEATURES.probeMassing is off.
+      if(FEATURES.probeMassing&&lighting.setEnvironmentMassing(probeMassingFrom(groups.get('context'))))invalidate();
     }
     fullHeight = buildingBox.max.y + 2;
     caps = createWallCaps(results[2].value); scene.add(caps.group);
