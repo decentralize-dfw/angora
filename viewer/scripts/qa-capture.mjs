@@ -88,7 +88,7 @@ for (const profile of profiles) {
       report.viewport = VIEWPORTS[profile];
       report.captureMs = Date.now() - started;
       report.consoleErrors = errors;
-      await page.screenshot({path: path.join(outDir, profile, camera.id + '.png')});
+      await page.screenshot({path: path.join(outDir, profile, camera.id + '.png'), timeout: 90_000});
       await writeFile(path.join(outDir, profile, camera.id + '.json'), JSON.stringify(report, null, 2));
       summary.runs.push({profile, camera: camera.id, ok: true,
         drawCalls: report.renderer.drawCalls, triangles: report.renderer.triangles,
