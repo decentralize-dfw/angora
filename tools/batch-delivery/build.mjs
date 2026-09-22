@@ -81,7 +81,16 @@ for(const profile of ['desktop','mobile']){
       composites[role].push({input:tile,left:(id%grid)*cell,top:Math.floor(id/grid)*cell});
      }
     }
-    const material=output.createMaterial(`${name}-${family(first.m.name)}-${batchIndex}`).setDoubleSided(true).setBaseColorFactor([1,1,1,1]).setRoughnessFactor(1).setMetallicFactor(1);
+    // Both faces only where a face can actually be seen from behind: authored
+    // double-sided sources, cutout/blended surfaces, and single-surface growth
+    // or drapery. Everything else is closed volume, and unconditional
+    // DoubleSide was charging every closed wall twice per fragment.
+    // (Published GLBs carry the same rule via patch-single-sided.mjs - H6.)
+    const needsDoubleSided=first.m.doubleSided===true
+      ||mats.some(m=>/foliage|leaf|leaves|needle|hedge|curtain|sheer|fabric|blind|grass/i.test(m.name))
+      ||first.glass
+      ||first.m.alphaMode==='MASK';
+    const material=output.createMaterial(`${name}-${family(first.m.name)}-${batchIndex}`).setDoubleSided(needsDoubleSided).setBaseColorFactor([1,1,1,1]).setRoughnessFactor(1).setMetallicFactor(1);
     if(!hasORM)material.setRoughnessFactor(rough(mats[0])).setMetallicFactor(metal(mats[0]));
     for(const role of roles){
      const data=await sharp({create:{width:size,height:size,channels:4,background:role==='normal'?{r:128,g:128,b:255,alpha:1}:{r:255,g:255,b:255,alpha:role==='color'&&first.glass?0:1}}}).composite(composites[role]).webp({quality:role==='normal'?95:profile==='desktop'?88:78}).toBuffer();
