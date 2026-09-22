@@ -6,7 +6,7 @@
 // Flags flip to true only in the task that ships their behavior, after the
 // task's own measurement - never in bulk.
 export const DEFAULT_FEATURES = Object.freeze({
-  hybridSunShadow: false,      // Task 1.2 - villa-local dynamic sun shadow (desktop)
+  hybridSunShadow: true,       // Task 1.2 ACTIVE - villa-local dynamic sun (desktop; phones wait on H1)
   mobileSunShadow: false,      // Task 1.2 - phones join ONLY after H1 measures the ratchet green
   exteriorGradeRevival: true,  // Task 1.3 ACTIVE - tileable detail maps on the grid=1 heroes, idle-loaded
   // Task 1.4 is SHELVED (BLOCKED H8): the shell walls are two skins, the

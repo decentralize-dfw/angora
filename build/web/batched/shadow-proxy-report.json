@@ -1,0 +1,22 @@
+[
+  {
+    "profile": "desktop",
+    "triangles": {
+      "before": 846686,
+      "after": 103322
+    },
+    "droppedBlendPrimitives": 2,
+    "bytes": 315708,
+    "simplifyError": 0.5
+  },
+  {
+    "profile": "mobile",
+    "triangles": {
+      "before": 846686,
+      "after": 103244
+    },
+    "droppedBlendPrimitives": 2,
+    "bytes": 312272,
+    "simplifyError": 0.5
+  }
+]
