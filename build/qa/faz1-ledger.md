@@ -9,18 +9,23 @@ Baseline etiketi: `build/qa/baseline-496c674/` (FAZ 0 kodu, 12 kamera × 2 profi
 
 | Adım | Kalem | Yön | Kanıt (ölçülen) | Durum |
 |---|---|---|---|---|
-| 1.1 | Bayrak cerrahisi | nötr | 12×2 piksel diff baseline'a karşı: _bekliyor_ | — |
-| 1.4a | doubleSided → seçici | KAZANÇ | fragment işi (SwiftShader'da FPS ölçülmez; kanıt: patch raporu + görsel diff + gerçek cihaz H1) | — |
-| 1.4b | plants chunk + walk culling | KAZANÇ | draw call Δ kamera dönüşünde; walk görünür üçgen | — |
-| 1.6a | garden spot strip | KAZANÇ | shader kaynak assertion; program sayısı | — |
-| 1.6b | atlas anisotropy → 1 | KAZANÇ | doku filtre state; görsel diff = 0 beklenir | — |
-| 1.3 | exterior-grade | ~nötr | +transfer ≤ 1,3 MB idle; atlas bypass shader kanıtı | — |
-| 1.5 | FOV + altın saat + fog | ~nötr | kompozisyon ekran görüntüleri | — |
-| 1.2 | hibrit güneş gölgesi | MALİYET | +1 depth pass, olay-bazlı (aşağıya bak); slider'da 0 shadow render | — |
-| 1.1b | postfx (desktop) | MALİYET | +4 pass yalnız desktop; luminance testi | — |
+| 1.1 | Bayrak cerrahisi | nötr | gate-1.1: 10 kare piksel-birebir, @2x sayısal eş | YEŞİL |
+| 1.4a | doubleSided → seçici | KAZANÇ | RAFTA (H8): kesitte duvar kaybı; GLB'ler geri alındı | RAFTA |
+| 1.4b | plants chunk + walk culling | KAZANÇ | plantsChunking açık (görsel risk yok); viewCulling kapalı | KISMEN |
+| 1.6a | garden spot strip | KAZANÇ | gate-1.6: call/üçgen birebir; bahçede fixture sızıntısı kalktı (C05 >8Δ yalnız 1 847 px) | YEŞİL |
+| 1.6b | atlas anisotropy → 1 | KAZANÇ | gate-1.6: piksel etkisi yok (textureLod yolu), filtre state bırakıldı | YEŞİL |
+| 1.3 | exterior-grade | ~nötr | gate-1.3: call/üçgen birebir, doku −9 MiB, ilk-interaktif byte değişmedi | YEŞİL |
+| 1.5 | FOV + altın saat + fog | ~nötr | gate-1.5: call +2..+5%, üçgen baseline altı | YEŞİL |
+| 1.2 | hibrit güneş gölgesi | MALİYET | gate-1.2: sabit durum birebir; güncelleme karesi +25 call/+2,69 M üçgen (olay-bazlı) | YEŞİL |
+| 1.1b | postfx (desktop) | MALİYET | gate-1.1b: C03 +4 call; kat görünümü ×2,2 (GTAO ön-geçişi); luminance +%4,6 (grade, çift AgX değil) | YEŞİL |
 
 **Mandal:** iPhone 13 ölçümü gelmeden hiçbir satır mandala yazılmaz;
 `build/qa/ratchet.json` baseline `null` durumda (H1).
+
+**Mobil borç kaydı:** FAZ 1 sonunda ilk-interaktif byte +13 091 (bundle
+büyümesi: gölge+postfx kodu tek bundle'da; C03 ölçümü, iki profil aynı).
+Kırmızı çizgi "mobil ilk-interaktif byte artmaz" — borç 4.2 bundle
+splitting'de kapanacak (postfx dynamic import'a çıkınca mobil bundle küçülür).
 
 ## 1.2 karar kaydı: gölge-proxy'si geri çekildi (onaylı)
 

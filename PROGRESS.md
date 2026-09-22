@@ -8,13 +8,15 @@
 
 ## Şu an neredeyiz
 
-- **FAZ:** 1 (kapanışa yakın)
-- **Aktif task:** 1.6 — bayraklar açık, commit'li (1c67205); 16 karelik
-  gate-1.6 capture'ı koşuyor/az önce bitti. Sıradaki adım: gate-1.6 diff
-  (referans `build/qa/gate-1.2`) → verdict → kareleri commit → 1.1b.
-- **Sonraki:** 1.1b postfxV2 (YALNIZ desktop-balanced/high) → FAZ 1 çıkış
-  raporu + `build/qa/faz1-ab/` C03/C04/C07 ÖNCE/SONRA kompozitleri
-  (`tools/qa/compose-ab.py`; ÖNCE = `build/qa/gate-visual-ref`).
+- **FAZ:** 1 çıkışı — 1.6 YEŞİL (2cfbff5), 1.1b YEŞİL (297a68b);
+  `build/qa/faz1-exit.md` yazıldı, ledger güncel.
+- **Aktif iş:** `faz1-final` 12 kameralık tam capture koşuyor (hem
+  faz1-ab hem final-ab'ın SONRA'sı). Bitince `build/qa/faz1-ab/` C03/C04/
+  C07 kompozitleri (`compose-ab.py`, ÖNCE = gate-visual-ref) → commit.
+- **Sonraki:** FAZ 3 ajan yarısı — 3.4f (buildEnvironment'a context LOD2
+  kütlesi) → 3.5 → 3.4d → 3.3 → 3.4g.
+- **Mobil borç:** ilk-interaktif +13 091 B (bundle: gölge+postfx kodu);
+  4.2 bundle splitting'de kapanacak (ledger "Mobil borç kaydı").
 
 ## Bayrak durumu (viewer/src/features.js)
 
