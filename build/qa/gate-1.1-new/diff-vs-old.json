@@ -1,0 +1,108 @@
+{
+  "a": "build/qa/gate-1.1-old",
+  "b": "build/qa/gate-1.1-new",
+  "noiseShare": 5e-05,
+  "worstShare": 1.25e-05,
+  "frames": [
+    {
+      "frame": "desktop/C03.png",
+      "changedPx": 13,
+      "share": 9.03e-06,
+      "maxDelta": 62,
+      "bbox": [
+        412,
+        451,
+        418,
+        453
+      ],
+      "numericMismatches": [],
+      "verdict": "noise"
+    },
+    {
+      "frame": "desktop/C03@2x.png",
+      "changedPx": 0,
+      "share": 0.0,
+      "maxDelta": 0,
+      "bbox": null,
+      "numericMismatches": [],
+      "verdict": "identical"
+    },
+    {
+      "frame": "desktop/C07.png",
+      "changedPx": 18,
+      "share": 1.25e-05,
+      "maxDelta": 19,
+      "bbox": [
+        626,
+        599,
+        1112,
+        662
+      ],
+      "numericMismatches": [],
+      "verdict": "noise"
+    },
+    {
+      "frame": "desktop/C09.png",
+      "changedPx": 0,
+      "share": 0.0,
+      "maxDelta": 0,
+      "bbox": null,
+      "numericMismatches": [],
+      "verdict": "identical"
+    },
+    {
+      "frame": "desktop/C10.png",
+      "changedPx": 0,
+      "share": 0.0,
+      "maxDelta": 0,
+      "bbox": null,
+      "numericMismatches": [],
+      "verdict": "identical"
+    },
+    {
+      "frame": "mobile/C03.png",
+      "changedPx": 0,
+      "share": 0.0,
+      "maxDelta": 0,
+      "bbox": null,
+      "numericMismatches": [],
+      "verdict": "identical"
+    },
+    {
+      "frame": "mobile/C03@2x.png",
+      "changedPx": 0,
+      "share": 0.0,
+      "maxDelta": 0,
+      "bbox": null,
+      "numericMismatches": [],
+      "verdict": "identical"
+    },
+    {
+      "frame": "mobile/C07.png",
+      "changedPx": 0,
+      "share": 0.0,
+      "maxDelta": 0,
+      "bbox": null,
+      "numericMismatches": [],
+      "verdict": "identical"
+    },
+    {
+      "frame": "mobile/C09.png",
+      "changedPx": 0,
+      "share": 0.0,
+      "maxDelta": 0,
+      "bbox": null,
+      "numericMismatches": [],
+      "verdict": "identical"
+    },
+    {
+      "frame": "mobile/C10.png",
+      "changedPx": 0,
+      "share": 0.0,
+      "maxDelta": 0,
+      "bbox": null,
+      "numericMismatches": [],
+      "verdict": "identical"
+    }
+  ]
+}
