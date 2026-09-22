@@ -6,7 +6,6 @@ import {PHOTO_POINTS} from '../src/photo-points.js';
 import {cueAt} from '../src/guided-tour.js';
 import {roomBox, roomSpan, spaceOf, spaceRect, dimensionRect, unionBox, clampToFloor} from '../src/tour-rooms.js';
 import {projectBox, mergeEntries, advanceEntries, boxKey} from '../src/tour-spotlight.js';
-import {moodFor} from '../src/tour-ambient.js';
 import * as THREE from 'three';
 
 // The narrated tour is a promise made twice over: the subtitle on screen is
@@ -385,12 +384,3 @@ test('the closing comes down off the roof and waits for dusk', () => {
     assert.equal(step.hour, null, `the tour changes the light at ${step.at} s`);
 });
 
-test('the bed follows the shape of the tour, not a clock', () => {
-  const seen = steps.map(step => moodFor(step, step.at));
-  assert.equal(seen[0], 0, 'the map does not open the piece');
-  assert.equal(seen[seen.length - 1], 4, 'the closing does not settle');
-  assert.ok(new Set(seen).size >= 4, `only ${new Set(seen).size} moods across six minutes`);
-  // It never jumps two sections in one cue, which would read as an edit.
-  for (let i = 1; i < seen.length; i++)
-    assert.ok(Math.abs(seen[i] - seen[i - 1]) <= 1, `the bed jumps at ${steps[i].at} s`);
-});

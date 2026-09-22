@@ -95,11 +95,15 @@ export function createRegionMap(host) {
   shape('image', 'rm-roads', { href: plan.roads.png, x: plan.roads.x, y: plan.roads.y,
     width: plan.roads.w, height: plan.roads.h, preserveAspectRatio: 'none' });
   shape('polygon', 'rm-plot', { points: poly(plan.plot) });
-  // The narrated tour's light on the settlement. It is cut along the
-  // settlement's OWN outline - the same polygon the dashed boundary is drawn
-  // from - rather than as a circle about the villa, which lit a disc of
-  // Beysukent and cut the estate's east half off. Drawn inside the world
-  // group, so it keeps its registration through every radius and turn.
+  // The narrated tour's light on the settlement. Cut along Angora Evleri's own
+  // boundary - streets.boundary.ring, the OSM way this map already draws as
+  // the dashed outline - and drawn inside the world group, so it keeps its
+  // registration through every radius and turn.
+  //
+  // NOT plan.plot, which is the VILLA's 22 x 35 m plot: cutting the hole from
+  // that left a mark the size of one house on a two-kilometre map. And not a
+  // circle about the villa either, which is what it was before that: a disc
+  // lights part of Beysukent and leaves the estate's east half in the dark.
   const dimDefs = document.createElementNS(svgNS, 'defs');
   const dimMask = document.createElementNS(svgNS, 'mask');
   dimMask.setAttribute('id', 'rm-plot-mask');
@@ -115,7 +119,8 @@ export function createRegionMap(host) {
   dimGauss.setAttribute('stdDeviation', '26');
   dimBlur.append(dimGauss);
   const dimHole = document.createElementNS(svgNS, 'polygon');
-  dimHole.setAttribute('points', poly(plan.plot));
+  dimHole.setAttribute('points', streets.boundary
+    ? flatPoints(streets.boundary.ring) : poly(plan.plot));
   dimHole.setAttribute('fill', '#000');
   dimHole.setAttribute('filter', 'url(#rm-plot-feather)');
   dimMask.append(dimAll, dimHole);

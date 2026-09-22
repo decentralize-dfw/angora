@@ -25,7 +25,6 @@ import {createHotspots} from './hotspots.js';
 import {createGuidedTour} from './guided-tour.js';
 import {createSpotlight} from './tour-spotlight.js';
 import {TOUR_AUDIO} from './tour-script.js';
-import {createTourAmbient,moodFor} from './tour-ambient.js';
 import {roomBox,clampToFloor} from './tour-rooms.js';
 import {createPhotoPins,createPhotoViewer} from './photo-gallery.js';
 import {PHOTO_POINTS,photoCaption} from './photo-points.js';
@@ -711,7 +710,7 @@ let tourSpinTimer=null,tourBearing=0;
 // The side gallery's current frames, and the timers that light a sentence's
 // rooms one after another. Both are kept so a language switch can redraw the
 // captions and a cue change can cancel a reveal still in flight.
-let tourPhotos=[],tourReveal=[],tourAmbient=null,tourHourBefore=null;
+let tourPhotos=[],tourReveal=[],tourHourBefore=null;
 // The buyer's room menu: drawing names in the viewer's language, internal
 // codes ('Z06') demoted to tooltips, twins told apart by code only.
 function fillRoomMenu(){
@@ -923,7 +922,6 @@ function refreshTourLabels(){
 async function applyTourStep(step){
   if(walk?.active)exitWalk(false);
   photoViewer?.hide();
-  tourAmbient?.set(moodFor(step,step.at));
   $('#tour-listing').hidden=!step.link;
   setTourPhotos(step.photos);
   setTourHour(step.hour);
@@ -1008,8 +1006,6 @@ function startTour(){
   planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);$('#toggle-plan').textContent='Plan';mode(false);
   $('#tour-bar').hidden=false;$('#app').dataset.tour='true';
   invalidateUIObstacles();
-  tourAmbient??=createTourAmbient();
-  tourAmbient?.start();
   guidedTour.start();
 }
 function endTour(openInfo){
@@ -1017,7 +1013,6 @@ function endTour(openInfo){
   $('#tour-bar').hidden=true;$('#app').dataset.tour='false';
   $('#tour-listing').hidden=true;
   clearTourReveal();setTourPhotos([]);
-  tourAmbient?.stop();
   if(tourHourBefore!==null){$('#daylight-hour').value=tourHourBefore;$('#daylight-hour').oninput();tourHourBefore=null;}
   restRegionMap();
   tourCaption(null);
