@@ -167,6 +167,20 @@ const BATCHED_TABLE = [
   // The neighbours' plaster: same sand-float relief as the villa's stucco,
   // fainter - context is setting, not subject.
   {name: 'ceiling.004', set: {normalMap: 'stuccoNormal'}, repeat: [1, 1], normalScale: 0.3},
+  // FAZ 6 İŞ A - the rest of the reachable grid=1 heroes, from the SAME
+  // shipped texture set (no new bytes). Interior amplitudes stay at half
+  // the exterior read (BÖLÜM 4.2): light indoors is already soft.
+  {name: 'INTERIOR', set: {normalMap: 'stuccoNormal'}, repeat: [1, 1], normalScale: 0.25},
+  {name: 'neighbor_wall', set: {normalMap: 'stuccoNormal'}, repeat: [1, 1], normalScale: 0.3},
+  {name: 'Retaining wall rough limestone.001', set: {normalMap: 'travertineNormal'},
+   repeat: [1 / 1.5, 1 / 1.5], normalScale: 0.6},
+  // The villa ironwork ships as flat placeholder grey; the audited iron
+  // grade from the classic TABLE, as scalars - no texture involved.
+  {name: 'metal', color: '#212326', roughness: 0.58, metalness: 0.22},
+  // WOOD-FL / wood_dark.002 / wood_floor.001 stay untouched here: the
+  // shipped set has no wood detail sheet, and stucco relief on timber
+  // would be a lie. Their variation arrives with İŞ B's procedural
+  // roughness instead.
 ];
 
 export function reviveBatchedGrade(models, sets, {anisotropy = 8} = {}) {
@@ -198,6 +212,18 @@ export function reviveBatchedGrade(models, sets, {anisotropy = 8} = {}) {
         if (horizontalShare(object.geometry, object.matrixWorld) > 0.5) projectGroundUV(object, entry.groundUV);
       }
       if (material.userData.exteriorGradeDetail) return;   // one binding per material
+      // İŞ A: scalar-only rows (no texture) grade in place and still count -
+      // the iron railings go from placeholder grey to the audited iron.
+      if (!entry.set) {
+        if (material.userData.exteriorGradeScalar) return;
+        material.userData.exteriorGradeScalar = true;
+        if (entry.color) material.color?.set(entry.color);
+        if (entry.roughness !== undefined) material.roughness = entry.roughness;
+        if (entry.metalness !== undefined) material.metalness = entry.metalness;
+        material.needsUpdate = true;
+        applied++;
+        return;
+      }
       const slots = [];
       if (entry.set.map) {
         material.map = textureFor(entry.set.map, entry.groundUV ? null : entry.repeat);
