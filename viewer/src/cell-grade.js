@@ -85,10 +85,18 @@ export function applyCellGrade(material, sets, {anisotropy = 8} = {}) {
     shader.vertexShader = 'varying vec3 vCellWorld;\n' + shader.vertexShader;
     shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>',
       '#include <begin_vertex>\nvCellWorld=(modelMatrix*vec4(position,1.0)).xyz;');
+    // Declarations go to the top; the HELPER cannot. vMapUv is declared by
+    // three's own uv_pars_fragment further down the file, so a function
+    // prepended above it referenced an identifier that did not exist yet -
+    // USE_MAP is a preprocessor define and passes the #ifdef regardless,
+    // which is why this failed at link time and not at parse time. The
+    // helper is injected right after the varyings it reads.
     shader.fragmentShader = `varying vec3 vCellWorld;
 uniform vec4 uCellP[${count}];
 uniform vec2 uCellN[${count}];
 ${samplerDecl}
+` + shader.fragmentShader;
+    const helper = `
 vec2 angoraCellUv(vec4 p){
   if(p.y>0.0)return vCellWorld.xz/p.y;      // dünya-uzayı: bozuk UV'yi tamamen atlar
 #ifdef USE_MAP
@@ -97,7 +105,10 @@ vec2 angoraCellUv(vec4 p){
   return vCellWorld.xz*p.zw;
 #endif
 }
-` + shader.fragmentShader;
+`;
+    shader.fragmentShader = shader.fragmentShader.includes('#include <uv_pars_fragment>')
+      ? shader.fragmentShader.replace('#include <uv_pars_fragment>', '#include <uv_pars_fragment>\n' + helper)
+      : shader.fragmentShader.replace('void main() {', helper + '\nvoid main() {');
     // Albedo: the placeholder cell colour is REPLACED by the photo-hue
     // sheet. Ground cells only take it on up-facing pixels (the
     // horizontalShare rule, per pixel: no grass down a retaining wall).
