@@ -97,7 +97,9 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     // for lamps they can never see through the walls.
     for(const material of resources(model).materials)prepareBatchedMaterial(material,{exterior:context.includes(name)||(features.gardenSpotStrip&&name==='garden'),
       proceduralDetail:Boolean(proceduralDetail.enabled),detailOctaves:proceduralDetail.octaves??2,detailInterior:Boolean(proceduralDetail.interior),detailBoost:proceduralDetail.boost??null});
-    loaded.set(name,model);groups.set(name,model);scene.add(model);onAcquired?.(name,model);return model;
+    loaded.set(name,model);groups.set(name,model);scene.add(model);
+    if(manifest.parts.every(part=>loaded.has(part.name)))resolveParts();
+    onAcquired?.(name,model);return model;
     }catch(error){
       // A failed lightmap/mesh preparation must release this decoded asset
       // too; it has not yet been added to the visible scene or loaded map.
@@ -125,6 +127,14 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
   // villa floats for the first seconds). contextDone resolves when ALL
   // deferred parts are in, so QA captures stay deterministic.
   let resolveContext;const contextDone=new Promise(resolve=>{resolveContext=resolve;});
+  // AYDINLIK İŞ 6: boot used to dispose the Draco/KTX2 decoders the moment
+  // activate() returned - and a DEFERRED part (interior on idle, context
+  // behind progressiveContextV1, or a floor click racing the idle) then
+  // decodes against a dead worker pool: the promise never settles, the
+  // status bar parks at "Kat hazırlanıyor… %100" with zero console errors.
+  // partsDone resolves only when EVERY manifest part is resident; main
+  // disposes the decoders then, not before.
+  let resolveParts;const partsDone=new Promise(resolve=>{resolveParts=resolve;});
   const applyVisibility=view=>{
     for(const [name,model] of loaded){
       model.visible=name!=='interior'||/^f[0-3]$/.test(view);
@@ -134,8 +144,8 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
       if(features.viewCulling&&name==='context-plants'&&walking)model.visible=false;
     }
   };
-  if(!manifest.batched)resolveContext(); // classic path defers nothing
-  return {loaded,batched:Boolean(manifest.batched),contextReady:contextDone,
+  if(!manifest.batched){resolveContext();resolveParts();} // classic path defers nothing
+  return {loaded,batched:Boolean(manifest.batched),contextReady:contextDone,partsDone,
     setWalkMode(active,view){
       if(walking===active)return;
       walking=active;

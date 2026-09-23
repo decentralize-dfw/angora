@@ -772,7 +772,43 @@ let walkData=null;
 // currently is - eased per frame so starting and leaving the tour are fades
 // rather than a cut.
 let guidedTour=null,spotlight=null,tourShade=0,tourShadeTarget=0,tourShadeTime=null;
-let roomProbes=null,contactBake=null;
+let roomProbes=null,contactBake=null,lateGradeTextures=null;
+// AYDINLIK İŞ 6: a part that arrives AFTER boot (deferred interior/context)
+// used to miss every idle upgrade - the console counted it: exterior grade
+// 5 yerine 8, atlas 9 yerine 20, contact AO 503k yerine 1 072k. Every
+// upgrade the boot runs over nativeDelivery.loaded now also runs, per
+// model, on arrival; each applier is idempotent (guarded per material),
+// so the numbers EQUALISE between deferred and boot-path loads - the
+// order's acceptance. The per-name applied counts log with "(late)" so
+// the parity is countable in the same console.
+async function latePartUpgrade(name,model){
+  try{
+    const single=new Map([[name,model]]);
+    await Promise.all([window.__angoraGradeReady??0,window.__angoraAoReady??0,window.__angoraAtlasReady??0]);
+    if(lateGradeTextures){
+      const applied=reviveBatchedGrade(single,lateGradeTextures,
+        {anisotropy:Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy())});
+      if(applied)console.info(`Exterior grade revived on ${applied} materials (late: ${name})`);
+    }
+    if(FEATURES.bakedAoRevival&&quality.tier.startsWith('desktop')){
+      const ktx2=createTextureLoader(renderer,1);
+      try{
+        const applied=await reviveBakedOcclusion(single,{loader:ktx2,root:new URL('../../native-current/',modelRoot)});
+        if(applied)console.info(`Baked occlusion revived on ${applied} materials (late: ${name})`);
+      }finally{ktx2?.dispose();}
+    }
+    if(FEATURES.atlasArrayV2){
+      const applied=upgradeAtlasToArrays(single);
+      if(applied)console.info(`Atlas arrays upgraded on ${applied} materials (late: ${name})`);
+    }
+    await (window.__angoraContactReady??0); // grid kurulmadan bakeLate yok
+    if(contactBake?.bakeLate){
+      const vertices=contactBake.bakeLate(model);
+      if(vertices)console.info(`Contact AO baked (late: ${name}): ${vertices} vertices`);
+    }
+    renderer.shadowMap.needsUpdate=true;invalidate();
+  }catch(error){console.warn('Late part upgrade failed for '+name,error);}
+}
 // Task 2.1-c: a storey's probe arrives on its first visit; rebinding goes
 // through setRoomReflections, which is idempotent and refreshes the glazing.
 function ensureRoomProbe(floor){
@@ -1317,7 +1353,13 @@ async function loadNativeModel(manifest){
   const received=new Map();
   message(t('loadingModel'));
   nativeDelivery=createNativeDelivery({manifest,root:modelRoot,scene,groups,load:loadAsset,features:FEATURES,
-    onAcquired:(name,model)=>{if(contactBake?.bakeLate&&contactBake.bakeLate(model))invalidate();},
+    // İŞ 6: boot yolundaki parçaları global idle blokları kapsıyor; boot
+    // SONRASI gelen her parça tam boru hattından geçer (grade+AO+atlas+
+    // contact) - sayı eşitliği bununla sağlanır.
+    onAcquired:(name,model)=>{
+      if(ready)latePartUpgrade(name,model);
+      else if(contactBake?.bakeLate&&contactBake.bakeLate(model))invalidate();
+    },
     // FAZ 6 İŞ B: analytic drift is a desktop spend until H1 measures a
     // phone; the flag stays honest (?features=proceduralDetailV1:0 = zero
     // trace) while the tier gate keeps every mobile tier on the old bytes.
@@ -1358,7 +1400,11 @@ async function loadNativeModel(manifest){
     // layer the main camera never draws never reaches the depth map either.
     // The scene's own meshes cast instead (event-driven, cached map), and
     // manifest.shadow_proxy is no longer fetched.
-    if(manifest.batched){loader.dracoLoader?.dispose();loader.ktx2Loader?.dispose();}
+    // AYDINLIK İŞ 6 (kök neden): decoder'lar burada HEMEN dispose ediliyordu;
+    // ertelenen interior/context parçaları ölü worker havuzunda decode
+    // bekliyor, söz asla çözülmüyordu ("Kat hazırlanıyor… %100" + kaybolan
+    // komşular, iki bayrak tek bug). Artık HER parça yerleşince.
+    if(manifest.batched)nativeDelivery.partsDone.then(()=>{loader.dracoLoader?.dispose();loader.ktx2Loader?.dispose();});
     host.dataset.deliveryStats=JSON.stringify({profile:manifest.profile??'legacy',decodeAndPrepareMs:Math.round(performance.now()-loadStarted),residentParts:nativeDelivery.loaded.size});
   step('scene');message(t('loadingScene'));
   buildingBox=new THREE.Box3().setFromObject(groups.get('architecture'));
@@ -1408,6 +1454,7 @@ async function loadNativeModel(manifest){
     window.__angoraGradeReady=new Promise(resolve=>idle(()=>{
       loadGradeTextures(new URL(pages?'assets/textures/':'textures/',publicRoot))
         .then(textures=>{
+          lateGradeTextures=textures; // İŞ 6: geç gelen parçalar da aynı setle
           const applied=reviveBatchedGrade(nativeDelivery.loaded,textures,
             {anisotropy:Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy())});
           if(applied){renderer.shadowMap.needsUpdate=true;invalidate();}

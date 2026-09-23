@@ -87,3 +87,29 @@ test('with progressiveContextV1 off, contextReady resolves on the boot path',asy
  await delivery.contextReady;
  assert.equal(delivery.loaded.size,5,'everything on the boot path, promise settled');
 });
+
+// AYDINLIK İŞ 6: partsDone must resolve only when EVERY manifest part is
+// resident - main keeps the Draco/KTX2 decoders alive until then (the
+// stuck "Kat hazırlanıyor… %100" was a deferred part decoding against a
+// disposed worker pool).
+test('partsDone waits for the deferred parts, then resolves',async()=>{
+ const names=['architecture','interior','garden','context-ground','context-buildings','context-plants'];
+ const groups=new Map(),scene=new THREE.Scene();
+ const idlers=[];globalThis.requestIdleCallback=fn=>{idlers.push(fn);return 1;};
+ try{
+  const delivery=createNativeDelivery({manifest:{batched:true,parts:names.map(name=>({name,file:name+'.glb'})),interior_streams:[]},
+   root:'https://example.test/models/',scene,groups,prepare(){},
+   features:{progressiveLoaderV2:true,progressiveContextV1:true},
+   load:async()=>{const model=new THREE.Group();model.add(new THREE.Mesh(new THREE.BoxGeometry(),new THREE.MeshStandardMaterial()));
+    return {scene:model,parser:{associations:new Map(),json:{}}};}});
+  await delivery.activate('neighborhood');
+  let settled=false;delivery.partsDone.then(()=>{settled=true;});
+  await new Promise(r=>setTimeout(r,20));
+  assert.equal(settled,false,'decoders must stay alive while parts are deferred');
+  for(const fn of idlers.splice(0))fn();
+  await delivery.contextReady;
+  await delivery.activate('f1');            // floor click pulls the interior
+  await delivery.partsDone;
+  assert.equal(delivery.loaded.size,6,'all six parts resident');
+ } finally {delete globalThis.requestIdleCallback;}
+});
