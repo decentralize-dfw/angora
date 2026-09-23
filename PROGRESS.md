@@ -6,7 +6,7 @@
 > (önce Bölüm 0.5 + 0.7 oku). İnsan işleri: `BLOCKED.md`. Bütçe defteri:
 > `build/qa/faz1-ledger.md`.
 
-## Şu an neredeyiz (GÜNCEL: FAZ 7 kod bitti, TEK doğrulama oturumu koşuyor)
+## Şu an neredeyiz (GÜNCEL: KAPANIŞ EMRİ uygulandı - aşağıda "KAPANIŞ EMRİ" bloğu ve kapanış raporu)
 
 Emir zinciri: FAZ-6-DUZ-RENK + IS-EMRI + FAZ-6-EK + DENETIM + DAİMİ EMİR
 (A1-A9 + B yöntemi) + B3-DÜZELTME + ŞİMDİ-YAP + FAZ-7-MASAUSTU. Ara gate
@@ -106,6 +106,60 @@ kapalı, gerçek tarayıcı değerlendirmesi bekliyor); mobil FAZ 8'e kaldı."
   SONUNA gelindi. Kalanlar dışarı bağlı: instancing+LOD (H6 kaynak),
   arazi 311k→85.8k (H10 rebake), iç mekân lightmap %4.1→%65 (H2
   Blender), KTX2 (ölçüldü, ertelendi).
+
+**KAPANIŞ EMRİ (2026-09-23, main'de):**
+- İŞ 1 ✅ FAZ 7 bayrakları TEK TEK ölçüldü (`build/qa/flag-costs.json`,
+  renderer.info, cinemaStill KAPALI, SwiftShader - yapısal sayılar; süre
+  sayısı YOK). Taban dh C03: 112 program / 104 draw / 4 102 395 üçgen /
+  153,3 MiB doku / 23,9 MB ilk-byte / 0 konsol hatası. Bayrak farkları:
+  · materialResponseV2: Δprogram −5, gerisi 0 → AÇIK
+  · proceduralDetailHigh: yapısal 0 (statik ~210 ALU op) → AÇIK
+  · windowPortalLight (C10): Δprogram +34, draw/üçgen/VRAM 0 → AÇIK
+  · softShadowsV2: yapısal 0; ALU statik 42 derinlik örneği (17 blocker
+    + 25 PCF) vs eski 9 → AÇIK
+  · gtaoFullRes: yapısal 0 ama maliyeti 4x PİKSEL - FPS ölçümü olmadan
+    savunulamaz (MALZEME 3.2 zaten 0.5'e çekmişti) → KAPALI-GEREKÇELİ
+  · screenSpaceReflection: Δprogram −4, +1 draw → önce UCUZLATILDI:
+    28→12 adım, 32→10 m (binary refine 4 duruyor); yürüyüş maliyeti ~5x
+    düşer, teras/zemin yansıması 10 m'de aynı sınıf → AÇIK
+  Açık kadro: SSR + PCSS + portal + 4-oktav + physical + cinemaStill/Dof.
+- İŞ 2.1 ✅ ALTI SAYI (mobile-high C03, elleme öncesi build): doku
+  49,3 MiB / geometri 404,4 MiB / üçgen 1 607 667 / draw 46 / ilk-
+  interaktif 17 859 381 B / program 85. Konsol hatası 0.
+- İŞ 2.2 ✅ KTX2 ölçüldü, karar SAYIYLA: YAPMA (`build/qa/ktx2-karar.json`).
+  En büyük 10 mobil doku (hepsi 512² webp): tel 564 KB → UASTC+zstd
+  1956 KB (+1392 KB = ilk-interaktifin +%8'i, transcoder wasm ~250 KB
+  hariç); VRAM kazancı 13,3 → 3,3 MiB (−10 MiB, toplam 49,3'ün %20'si).
+  Tel tarafı baskın; KHR_texture_basisu boru hattı 10 MiB için değmez.
+  Asıl mobil yük GEOMETRİ (404 MiB) - o da H6/H10 kaynak işi.
+- İŞ 2.3 ✅ viewCulling mobilde ZORLA açık (deliveryFeatures override) +
+  agresif mesafe cull'u: updateMobileCull() chunk hücreleri bitki 120 m /
+  bina 180 m'de gizler (8 m kamera histerezisi, cache'li dünya-küre).
+- İŞ 2.4 ✅ mobileSunShadow varsayılan AÇIK - 512, villa-yerel (mobilde
+  wide-proxy yok), quality-profile mobile-high 512. Sahibi telefonda
+  yargılar; kapatma: `?features=mobileSunShadow:0`. Derinlik geçişi
+  maliyeti aşağıda (doğrulama koşumu).
+- İŞ 2.5 ✅ DÜRÜST RAPOR: mobilde postfx AÇILMADI. GTAO/bloom/grade/SSR/
+  DOF mobil satırlarda kapalı kalıyor; mobil görüntü iyileşmesi bu
+  emirde YOK (gölge 512 hariç). Tile-GPU'da fullscreen geçişler ve
+  MRT maliyeti tel+pil tarafında savunulamaz.
+- İŞ 3 ✅ cinemaStill ÇÖZÜLMÜŞ kareden başlıyor: renderRefineSample'da
+  örnek 0 = tohum (sunSway/jitter/dofShift yok) → ilk birikim karesi
+  ekrandaki çözülmüş karenin aynısı, siyah kare bitti; kullanıcı girişi
+  birikimi İPTAL eder (ekrana dokunmaz). cinemaStill+cinemaDof AÇIK.
+- İŞ 4 ✅ dış cephe PBR kanal-başına TEK sampler2DArray: cell-grade.js v2,
+  3 DataArrayTexture (uCellColor/uCellNormal/uCellOrm; 512/512/256).
+  SAYILDI: context-ground-other-0 statik 4 atlas + ao + lightmap + env +
+  shadow + groundLight + 3 dizi = 13 ≤ 16. atlas-array yükseltmesi
+  cellGrade'li materyali ATLAR (tavanı yeniden zorlamasın). 4.3: cephe
+  RENGİNE dokunulmadı - STRUCCO satırında albedo yok, düzlük ORM+normal
+  ile kırılıyor. Villa çatı repeat 0.64/2.4 (47945ce reçetesi); duvarlar
+  baskın-eksen dünya projeksiyonu (çizgilenme yok). Dokular generate.py
+  ile yeniden üretildi (24 webp, ~2,5 MB).
+- İŞ 5 ✅ BLOCKED.md tek sayfa: H2/H10/H6/H1 - komut, beklenen çıktı,
+  doğrulama, "İNSANIN YAPMASI GEREKEN TEK ŞEY" satırı; scriptler bu
+  oturumda doğrulandı (ayna tespiti 5/8 zaten koşulmuş).
+- Testler her adımda 309/309; her iş main'e push'landı (izinli).
 
 **Bilinen sinyal:** bayrak-açık desktop-balanced C01 probe yüklemesi bir
 kez 480 sn'de rapor verememişti (contact-AO bake + portal + context idle

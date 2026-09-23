@@ -1,0 +1,22 @@
+{
+ "capturedAt": "2026-09-23T18:12:00Z",
+ "note": "KAPANIŞ İŞ 2.2 - mobil GLB'lerdeki en büyük 10 doku (hepsi 512x512 webp). toktx UASTC q2 + zstd18 + mip. VRAM: RGBA8 512*512*4*1.3333 vs UASTC transkode 1 B/texel*1.3333.",
+ "rows": [
+  {"glb": "architecture.glb", "image": 24, "kind": "normal", "px": "512x512", "wireWebpB": 109092, "wireKtx2B": 282977},
+  {"glb": "architecture.glb", "image": 4, "kind": "AO", "px": "512x512", "wireWebpB": 104790, "wireKtx2B": 230448},
+  {"glb": "context-buildings.glb", "image": 9, "kind": "", "px": "512x512", "wireWebpB": 97222, "wireKtx2B": 275524},
+  {"glb": "architecture.glb", "image": 2, "kind": "normal", "px": "512x512", "wireWebpB": 66892, "wireKtx2B": 264208},
+  {"glb": "context-buildings.glb", "image": 11, "kind": "", "px": "512x512", "wireWebpB": 55166, "wireKtx2B": 161697},
+  {"glb": "context-ground.glb", "image": 1, "kind": "", "px": "512x512", "wireWebpB": 41710, "wireKtx2B": 139788},
+  {"glb": "architecture.glb", "image": 26, "kind": "AO", "px": "512x512", "wireWebpB": 38096, "wireKtx2B": 190430},
+  {"glb": "architecture.glb", "image": 16, "kind": "AO", "px": "512x512", "wireWebpB": 27158, "wireKtx2B": 139905},
+  {"glb": "architecture.glb", "image": 14, "kind": "normal", "px": "512x512", "wireWebpB": 18652, "wireKtx2B": 159045},
+  {"glb": "context-buildings.glb", "image": 1, "kind": "", "px": "512x512", "wireWebpB": 18652, "wireKtx2B": 159045}
+ ],
+ "totals": {
+  "wireWebpKB": 564, "wireKtx2KB": 1956, "wireDeltaKB": 1392,
+  "vramRgba8MiB": 13.3, "vramUastcMiB": 3.3, "vramSavingMiB": 10.0,
+  "wireDeltaPctOfFirstInteractive": 8.0
+ },
+ "decision": "YAPMA. Tel 564 KB -> 1956 KB (+1392 KB, ilk-interaktifin +%8'i) + basis transcoder wasm ~250 KB; VRAM kazancı 10 MiB (49.3 MiB'in %20'si). Mobil dokular zaten 512² webp - tel tarafı baskın, boru hattı değişikliği (KHR_texture_basisu) 10 MiB için savunulamaz."
+}
