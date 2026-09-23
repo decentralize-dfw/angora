@@ -11,7 +11,12 @@ export function renderPixelRatio(width,height,dpr,budget) {
   const compact=budget===true;
   const pixelBudget=typeof budget==='object'?budget.pixelBudget:compact?1_500_000:5_000_000;
   const maxRatio=typeof budget==='object'?budget.maxPixelRatio:2;
-  return Math.max(1,Math.min(dpr,maxRatio,Math.sqrt(pixelBudget/Math.max(1,width*height))));
+  // MALZEME İŞ 3.1: masaüstü postfx zinciri 0.8x tamponda çizer (0.64x
+  // piksel), tarayıcı canvas'ı yumuşak büyütür; SMAA düşük çözünürlükte
+  // koşup kenarları zaten toparlar. Mobil (postProcessing:false) ve
+  // legacy boolean yolu DOKUNULMAZ.
+  const scale=typeof budget==='object'&&budget.postProcessing?0.8:1;
+  return Math.max(scale,Math.min(dpr,maxRatio,Math.sqrt(pixelBudget/Math.max(1,width*height)))*scale);
 }
 
 // The former 0.2–50,000 m frustum discarded most depth precision at the

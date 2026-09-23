@@ -21,7 +21,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   gardenSpotStrip: true,       // T1.6 - iki tier'da da canlı
   atlasAnisotropyFix: true,    // T1.6 - iki tier'da da canlı
   postfxV2: true,              // T1.1b - masaüstü tier'ları SADECE; mobil matris satırı postProcessing:false
-  pixelBudgetV2: false,        // matrix pixel budgets; off = legacy mobile 1.5M / desktop 5M, cap 2
+  pixelBudgetV2: true,         // MALZEME İŞ 3.3 - matris bütçeleri canlı: balanced 3.5M (legacy 5M'di), mobil 1.5M aynı
   probeMassing: true,          // T3.4f - iki tier'da da canlı (tek seferlik probe yeniden kurulumu)
   poolWaterV2: true,           // T3.5 - iki tier'da da canlı (analitik dalga, saat-fazlı)
   glassTiersV2: true,          // T3.5/İŞ E.1 - iki tier; hücre-bazlı polish (gül+buzlu cam korunur, testte). 3.5'teki hali ÖLÜydü (angoraAuthoredPBR 37/37); doğrulama faz6-final C10 diff

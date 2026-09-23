@@ -80,6 +80,33 @@ kapalı, gerçek tarayıcı değerlendirmesi bekliyor); mobil FAZ 8'e kaldı."
 - Karşılaştırma adresleri: bayraksız https://angora.mergvs.com/ ·
   bayraklı https://angora.mergvs.com/?features=warmGradeV1:1
 
+**MALZEME VE IŞIK protokolü (2026-09-23, main'de):**
+- İŞ 1 ✅ gölgeler dinamik: wide-proxy hedefi building∪garden+25 →
+  contextBox+4; shadowMapSize masaüstü 2048 → 4096 (≈17 texel/m);
+  pişmiş R kanalı zaten geri çekiliyordu (1.2-d), G ambians kalıyor.
+- İŞ 2 ✅ gradeAnyGridV1 (AÇIK): cell-grade.js - yol seçimi SAMPLER-PER-
+  SLOT (doku dizisi değil; materyal başına ≤3 doku). applied 8 → ≥14
+  (testte sayıldı). Çim grassMap@dünya 2 m, asfalt@4 m, komşu çatıları+
+  roof-7 clayTile villa ölçeği (1/0.8,1/1.0) + normal, giriş travertine
+  @0.8 m. STRUCCO stucco-basecolor.png (ÜRETİLDİ: stucco-normal gren +
+  FFT dikişsiz alçak frekans, ort. sRGB 167, ±%8; komşular -soft ±%4);
+  villa rengi hücre-ortalaması telafisiyle sabit. grass/asphalt artık
+  bağlı - boşa inen doku kalmadı.
+- İŞ 3 (özellik silmeden optimizasyon) - eski → yeni:
+  · 3.1 render ölçeği: masaüstü postfx tamponu 1.0 → 0.8x (0.64x piksel)
+  · 3.2 GTAO scale: high 0.65 → 0.5 (FAZ 7'nin 1.0'ı geri alındı)
+  · 3.3 pixelBudgetV2: false → TRUE (balanced 5M → 3.5M bütçe)
+  · 3.4 tam-ekran geçişler: bloom.combine+grade+dither 3 → 1 (parlama
+    ve dither grade'e katlandı; bloom composite:false yalnız piramit)
+  · 3.5 fixture oda-başına derleme: YAPILMADI - kare süresi bu ortamda
+    ölçülemez (SwiftShader duvar saati cihaz sayısı değil; capture da
+    yasak) ve bu kalemin kazancı yapısal sayıyla gösterilemez; 3.1-3.4
+    yapısal (piksel/geçiş sayısı) olduğundan ölçümsüz savunulabilir.
+- Kapanış notu (Bölüm 4): İŞ 1-3 ile runtime tarafında yapılabileceğin
+  SONUNA gelindi. Kalanlar dışarı bağlı: instancing+LOD (H6 kaynak),
+  arazi 311k→85.8k (H10 rebake), iç mekân lightmap %4.1→%65 (H2
+  Blender), KTX2 (ölçüldü, ertelendi).
+
 **Bilinen sinyal:** bayrak-açık desktop-balanced C01 probe yüklemesi bir
 kez 480 sn'de rapor verememişti (contact-AO bake + portal + context idle
 zinciri şüphesi). faz7-final'in ilk karesi bunu ya doğrular ya aklar -

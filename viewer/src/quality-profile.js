@@ -94,7 +94,9 @@ const TIER_MATRIX = {
     textureProfile: 'desktop', maxPixelRatio: 2.0, pixelBudget: 5_000_000,
     bakedIndirectLighting: true, bakedReceiverVisibility: true,
     dynamicSunShadow: true, shadowMapSize: 4096, shadowCameraMode: 'villa-local', shadowType: 'pcfsoft',
-    postProcessing: true, gtao: true, gtaoResolutionScale: 0.65,
+    // MALZEME İŞ 3.2: 0.65 -> 0.5 (FAZ 7'nin 1.0 denemesi geri alındı:
+    // 4x piksel maliyeti, görünmeyen fark).
+    postProcessing: true, gtao: true, gtaoResolutionScale: 0.5,
     antialiasing: 'smaa', msaaSamples: 0, bloom: true, grade: true, dither: true,
     physicalGlass: 'hero-only', planarPoolReflection: 0.5, anisotropy: 16,
   },

@@ -25,8 +25,13 @@ export function softKneeWeight(luminance,threshold,knee) {
 // Linear HDR -> soft-knee bright half-size -> quarter-size separable blur ->
 // linear addition. The single OutputPass after this owns exposure/ACES/sRGB.
 export class LinearBloomPass extends Pass {
-  constructor(profile=referenceProfile) {
-    super();this.bright=makeTarget();this.blurA=makeTarget();this.blurB=makeTarget();
+  // MALZEME İŞ 3.4: composite:false ile bu geçiş yalnız piramidi üretir
+  // (yarım + çeyrek hedefler) ve readBuffer'a DOKUNMAZ (needsSwap=false);
+  // parlama grade geçişinde toplanır - tam çözünürlük geçiş sayısı
+  // bloom.combine + grade + dither = 3'ten 1'e iner.
+  constructor(profile=referenceProfile,{composite=true}={}) {
+    super();this.composite=composite;if(!composite)this.needsSwap=false;
+    this.bright=makeTarget();this.blurA=makeTarget();this.blurB=makeTarget();
     this.extract=makeMaterial({source:{value:null},threshold:{value:profile.bloomThreshold},knee:{value:profile.bloomKnee},clampMax:{value:profile.bloomClamp}},`
       varying vec2 vUv;uniform sampler2D source;uniform float threshold,knee,clampMax;
       ${FINITE_RGB}
@@ -57,6 +62,7 @@ export class LinearBloomPass extends Pass {
     this.bright.setSize(Math.max(1,Math.floor(width/2)),Math.max(1,Math.floor(height/2)));
     for(const target of [this.blurA,this.blurB])target.setSize(Math.max(1,Math.floor(width/4)),Math.max(1,Math.floor(height/4)));
   }
+  get glareTexture(){return this.blurB.texture;}
   render(renderer,writeBuffer,readBuffer) {
     const previousTarget=renderer.getRenderTarget();
     const draw=(material,target)=>{this.quad.material=material;renderer.setRenderTarget(target);this.quad.render(renderer);};
@@ -68,8 +74,10 @@ export class LinearBloomPass extends Pass {
         this.blur.uniforms.direction.value.set(dx/target.width,dy/target.height);
         draw(this.blur,target);source=target.texture;
       }
-      this.combine.uniforms.source.value=readBuffer.texture;
-      draw(this.combine,this.renderToScreen?null:writeBuffer);
+      if(this.composite){
+        this.combine.uniforms.source.value=readBuffer.texture;
+        draw(this.combine,this.renderToScreen?null:writeBuffer);
+      }
     }finally{renderer.setRenderTarget(previousTarget);}
   }
   dispose(){

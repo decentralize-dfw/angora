@@ -7,7 +7,7 @@ import {SectionGTAOPass} from './section-gtao.js';
 import {SsrPass} from './ssr-pass.js';
 import {LinearBloomPass} from './linear-bloom.js';
 import {GradeShader} from './grade-pass.js';
-import {DisplayDitherShader} from './display-dither.js';
+// display-dither: İŞ 3.4 ile grade'e katlandı; shader referans olarak duruyor.
 import {configurePostprocessing} from './postprocessing.js';
 import {referenceProfile} from './render-profile.js';
 import {FEATURES} from './features.js';
@@ -24,10 +24,16 @@ export function buildPostfxChain({renderer, scene, camera, clip, quality, postfx
   // off thin rails and window reveals - the pass is the pipeline's own
   // stated "largest tell", so it gets its headroom.
   const ao = new SectionGTAOPass(scene, camera, clip, quality.gtaoResolutionScale ?? 1);
-  const smaa = new SMAAPass(), bloom = new LinearBloomPass();
+  const smaa = new SMAAPass();
+  // MALZEME İŞ 3.4: bloom yalnız piramit üretir; birleşim + dither grade
+  // içinde - tam çözünürlük geçişleri 3 -> 1.
+  const bloom = new LinearBloomPass(referenceProfile, {composite: false});
   const grade = new ShaderPass(GradeShader);
   ao.enabled = postfxV2 ? Boolean(quality.gtao) : referenceProfile.aoEnabled;
   bloom.enabled = postfxV2 ? Boolean(quality.bloom) : true;
+  grade.material.uniforms.uGlare.value = bloom.glareTexture;
+  grade.material.uniforms.uBloomStrength.value = bloom.enabled ? referenceProfile.bloomStrength : 0;
+  grade.material.uniforms.uBloomClamp.value = referenceProfile.bloomClamp;
   // FAZ 7 İŞ 1: SSR reuses the GTAO pass's depth+normal buffers; the pass
   // exists only when the quality row resolved ssr (desktop, flag'lı) and
   // self-disables per frame when AO is off, so the flag-off chain is the
@@ -43,7 +49,6 @@ export function buildPostfxChain({renderer, scene, camera, clip, quality, postfx
     grade.material.uniforms.uVig.value.y = 0.05;   // vinyet de yarı - kasvet kalemi
   }
   const ssr = quality.ssr ? new SsrPass(ao, camera) : null;
-  configurePostprocessing(composer, {beauty, ao, ssr, smaa, bloom, output: grade,
-    dither: new ShaderPass(DisplayDitherShader)});
+  configurePostprocessing(composer, {beauty, ao, ssr, smaa, bloom, output: grade});
   return {composer, beauty, ao, ssr, bloom, grade};
 }

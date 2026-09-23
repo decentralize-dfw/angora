@@ -19,6 +19,7 @@
 // skew. The renderer keeps its own matching AgX setting for the phone and XR
 // paths, which bypass this chain.
 import {Vector3} from 'three';
+import {FINITE_RGB} from './linear-bloom.js';
 import {referenceProfile} from './render-profile.js';
 
 // Restrained, and inside the range the reference's own lighting rigs use
@@ -50,6 +51,11 @@ export const GradeShader = {
     // davetkar - orta gri (0.18) pivotlu.
     uWarm: {value: new Vector3(1, 1, 1)},
     uContrast: {value: 1},
+    // MALZEME İŞ 3.4: parlama (bloom piramidinin çeyrek hedefi) ve dither
+    // artık burada toplanır - bloom.combine + dither geçişleri kalktı.
+    uGlare: {value: null},
+    uBloomStrength: {value: 0},
+    uBloomClamp: {value: 8},
   },
   vertexShader: `varying vec2 vUv;
     void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
@@ -58,6 +64,8 @@ export const GradeShader = {
     uniform sampler2D tDiffuse;
     uniform float uExposure,uSat,uGrain,uContrast;
     uniform vec3 uLift,uGain,uVig,uWarm;
+    uniform sampler2D uGlare;
+    ${FINITE_RGB}
 
     // three r180's AgX: rec709 -> rec2020, Filament inset, log2 encode over
     // [-12.474, 4.026] EV, 6th-order sigmoid, outset, back to linear rec709.
@@ -109,7 +117,9 @@ export const GradeShader = {
     }
 
     void main(){
-      vec3 c=texture2D(tDiffuse,vUv).rgb*uExposure;
+      vec3 c=texture2D(tDiffuse,vUv).rgb;
+      if(uBloomStrength>0.0)c=finiteRgb(c,uBloomClamp)+finiteRgb(texture2D(uGlare,vUv).rgb,uBloomClamp)*uBloomStrength;
+      c*=uExposure;
       c=uLift+c*(uGain-uLift);
       float lum=dot(c,vec3(0.2126,0.7152,0.0722));
       c=mix(vec3(lum),c,uSat);
@@ -123,6 +133,10 @@ export const GradeShader = {
       float dv=distance(vUv,vec2(0.5,uVig.z));
       c*=1.0-smoothstep(uVig.x,0.92,dv)*uVig.y;
       c=agxToneMap(max(c,vec3(0.0)));
-      gl_FragColor=vec4(linearToSRGB(c),1.0);
+      vec3 srgb=linearToSRGB(c);
+      // display-dither buraya katlandı: yalnız ÇIKARIR, eğrinin üst sınırı
+      // dokunulmaz (display-dither.js'in ölçülmüş gerekçesi aynen).
+      float dd=fract(sin(dot(gl_FragCoord.xy,vec2(12.9898,78.233)))*43758.5453);
+      gl_FragColor=vec4(srgb-dd/255.0,1.0);
     }`
 };
