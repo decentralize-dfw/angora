@@ -94,3 +94,33 @@ test('an all-zero batch (pure glazing) never injects at all', () => {
   assert.ok(!shader.fragmentShader.includes('uDetail'));
   assert.ok(!material.customProgramCacheKey().includes('pdetail'));
 });
+
+// İŞ D (IS-EMRI BÖLÜM 2): the neutralInterior path flattens the room
+// probe's IBL to luma; the interior drift must ride ON TOP of that, not
+// replace it and not be erased by it. Both injections coexist in one
+// program: the luma flatten lives in lights_fragment_maps, the albedo
+// drift after map_fragment - the drift modulates the flattened light.
+test('İŞ D: interior drift coexists with neutralInterior, gated by detailInterior', () => {
+  const make = detailInterior => {
+    const material = new THREE.MeshStandardMaterial();
+    material.userData.angoraBatch = {grid: 1, pad: 0.0078, inner: 0.9844, materials: ['INTERIOR']};
+    prepareBatchedMaterial(material, {proceduralDetail: true, detailInterior});
+    const shader = {uniforms: {}, vertexShader: '#include <begin_vertex>',
+      fragmentShader: ['#include <map_fragment>', '#include <roughnessmap_fragment>',
+        '#include <lights_fragment_maps>'].join('\n')};
+    material.onBeforeCompile(shader, null);
+    return shader;
+  };
+  const on = make(true);
+  assert.ok(on.fragmentShader.includes('dot(roomProbe'), 'neutralInterior flatten still present');
+  assert.ok(on.fragmentShader.includes('angoraDrift=angoraDetailDrift'), 'interior drift injected');
+  const cell = on.uniforms.uDetail.value[0];
+  assert.ok(cell.x > 0 && cell.y > 0, 'INTERIOR cell non-zero with the switch on');
+  assert.ok(on.fragmentShader.indexOf('angoraDrift=angoraDetailDrift') <
+            on.fragmentShader.indexOf('dot(roomProbe'),
+    'albedo drift lands before lighting reads diffuseColor - it modulates the flattened light');
+  // switch off: the INTERIOR batch is all-zero, so NOTHING injects (2.5)
+  const off = make(false);
+  assert.ok(off.fragmentShader.includes('dot(roomProbe'), 'flatten independent of the switch');
+  assert.ok(!off.fragmentShader.includes('uDetail'), 'no drift without the switch');
+});

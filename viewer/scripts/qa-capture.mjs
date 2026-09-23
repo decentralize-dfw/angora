@@ -66,6 +66,14 @@ const featuresParam = featuresAt >= 0 ? args[featuresAt + 1] : null;
 const only = option('cameras') ? new Set(option('cameras').split(',')) : null;
 const scalesFor = (camera, tier) =>
   (gate && camera.id === 'C03' && tier === 'desktop-balanced') ? [1, 2] : [1];
+// DAİMİ EMİR A1 / kapanış md. 16: the gate also shoots REAL night frames -
+// hour=21 (sun below the horizon on day 172) + the product's own lamp
+// state via __angoraQA.nightScene(). gate-f342's "night" png was a
+// lamps-on day frame; this is the one that can actually answer FAZ 3
+// kabul md. 9 (windows read lit, scene reads GI, no point-light bloom).
+// Two cameras (pool facade + interior walk) on the two verdict tiers.
+const NIGHT_CAMERAS = new Set(['C04', 'C10']);
+const NIGHT_TIERS = new Set(['desktop-balanced', 'mobile-high']);
 const measureSeconds = Number(option('measure', '0'));
 const outDir = path.join(repoRoot, 'build/qa', tag);
 
@@ -92,8 +100,12 @@ for (const tier of tiers) {
   });
   for (const camera of CAMERAS) {
     if (only && !only.has(camera.id)) continue;
-    for (const scale of scalesFor(camera, tier)) {
-      const suffix = scale === 1 ? '' : '@2x';
+    const variants = scalesFor(camera, tier).map(scale =>
+      ({scale, suffix: scale === 1 ? '' : '@2x', night: false}));
+    if (gate && NIGHT_CAMERAS.has(camera.id) && NIGHT_TIERS.has(tier)) {
+      variants.push({scale: 1, suffix: '-night', night: true});
+    }
+    for (const {scale, suffix, night} of variants) {
       const page = await browser.newPage({viewport: VIEWPORTS[profile], deviceScaleFactor: scale});
       const errors = [];
       const infos = [];
@@ -102,7 +114,8 @@ for (const tier of tiers) {
         else if (m.type() === 'info') infos.push(m.text());
       });
       page.on('pageerror', e => errors.push(String(e)));
-      const url = base + search(camera, profile, {quality: tier}) +
+      const url = base + search(camera, profile,
+        night ? {quality: tier, hour: '21'} : {quality: tier}) +
         (featuresParam ? '&features=' + featuresParam : '');
       const started = Date.now();
       try {
@@ -110,6 +123,10 @@ for (const tier of tiers) {
         await page.waitForFunction(
           () => JSON.parse(document.querySelector('#viewport')?.dataset.qaReport ?? 'null')?.camera,
           null, {timeout: 480_000});
+        if (night) {
+          await page.evaluate(() => window.__angoraQA.nightScene());
+          await page.waitForTimeout(600);
+        }
         if (measureSeconds > 0) {
           await page.evaluate(seconds => window.__angoraQA.measure(seconds), measureSeconds);
           await page.evaluate(() => window.__angoraQA.snapshot());

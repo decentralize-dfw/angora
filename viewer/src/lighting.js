@@ -147,6 +147,7 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     })
     :Promise.resolve(null);
   let day=172,hour=12.5,environmentMode='procedural-sky',walkInterior=false,lightsEnabled=true;
+  let waterApplied=0; // A2: poolWaterV2 coverage, counted not claimed
   let pendingProbeHdr=null,probeMassingGroup=null;
   // Task 3.5: the pool's wave phase follows the daylight hour - the one time
   // axis this on-demand renderer actually moves - so captures of the same
@@ -419,7 +420,13 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
         if(FEATURES.poolWaterV2&&name==='garden'&&!material.userData.waterApplied
           &&material.userData.angoraBatch?.materials.includes('water')){
           const bounds=waterBoundsFrom(object.geometry,material.userData.angoraBatch.materials.indexOf('water'));
-          if(bounds&&applyWaterSurface(material,{bounds,phase:waterPhase}))material.userData.waterApplied=true;
+          // DAİMİ EMİR A2: applied is COUNTED in the console, like İŞ A's
+          // revival - final-probes.json shipped `applied: null` and "canlı"
+          // was claimed without a number. Expected: 1, via garden-glass-4.
+          if(bounds&&applyWaterSurface(material,{bounds,phase:waterPhase})){
+            material.userData.waterApplied=true;
+            console.info(`Pool water response applied on ${++waterApplied} material(s): ${material.name}`);
+          }
         }
         if(['architecture','interior'].includes(name)&&material.userData.angoraBatch?.materials.some(n=>/wood.floor|WOOD-FL|terra_floor|stone_tile|bath_tile|granite floor/i.test(n)))floorLight?.apply(material);
         prepareMaterialResponse(material,{context});preparedMaterials.add(material);

@@ -168,7 +168,8 @@ export function roomName(name) {
 }
 // static DOM: <el data-i18n="key"> for text, data-i18n-label for aria-label,
 // data-i18n-title for title. Called at boot and again on every switch.
-export function applyStatic(root = document) {
+export function applyStatic(root = typeof document === 'undefined' ? null : document) {
+  if (!root) return;                                  // node-side tests
   for (const el of root.querySelectorAll('[data-i18n]')) el.textContent = t(el.dataset.i18n);
   for (const el of root.querySelectorAll('[data-i18n-label]')) el.setAttribute('aria-label', t(el.dataset.i18nLabel));
   for (const el of root.querySelectorAll('[data-i18n-title]')) el.title = t(el.dataset.i18nTitle);

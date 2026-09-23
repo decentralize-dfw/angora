@@ -320,6 +320,22 @@ export function installQaHarness({host, query, hooks}) {
       triangles: renderer.info.render.triangles};
     return {day, night, addedPrograms: night.programs - day.programs};
   }
-  window.__angoraQA = {applyCamera, snapshot, measure, debugShadow, nightProbe, get report() { return JSON.parse(host.dataset.qaReport ?? 'null'); }};
+  // DAİMİ EMİR A1: nightProbe COUNTS programs but never leaves daylight -
+  // the page's hour stays whatever the URL said, so its screenshot is a
+  // lamps-on DAY frame (the mislabeled C04-night-probe.png of gate-f342).
+  // A real night frame needs the URL at hour=21 (sun below the horizon at
+  // day 172) plus this: the product's own lamp state, then a settle.
+  async function nightScene() {
+    const lighting = hooks.lighting();
+    lighting.setLights?.(true);
+    lighting.interior('all', null, undefined, {gain: 5.5, reach: 16});
+    lighting.setWindowGlow(.42);
+    hooks.invalidate();
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    hooks.invalidate();
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    return true;
+  }
+  window.__angoraQA = {applyCamera, snapshot, measure, debugShadow, nightProbe, nightScene, get report() { return JSON.parse(host.dataset.qaReport ?? 'null'); }};
   return window.__angoraQA;
 }
