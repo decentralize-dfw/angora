@@ -6,7 +6,17 @@
 > (önce Bölüm 0.5 + 0.7 oku). İnsan işleri: `BLOCKED.md`. Bütçe defteri:
 > `build/qa/faz1-ledger.md`.
 
-## Şu an neredeyiz
+## Şu an neredeyiz (GÜNCEL: final paketleme)
+
+- Combined gate **gate-f342 YEŞİL** (commit 700c210; kanıtlar
+  final-probes.json dahil). FAZ 5 cinemaStill AKTİF (85cca7f).
+- FINAL-REPORT.md yazıldı. `final-current` 24 karelik SON-hal capture'ı
+  koşuyor; bitince: `build/qa/final-ab/` kompozitleri (İLK =
+  baseline-496c674, SON = final-current; C03/C04/C07/C10 × 2 profil) +
+  final build commit + push. Sonra İŞ BİTTİ — merge İZİN BEKLER.
+- 4.1 ktx2Delivery KAPALI bırakıldı (karar 700c210 mesajında).
+
+## Eski durum notları (tarihçe)
 
 - **FAZ 1 bitti** (hepsi YEŞİL gate'li commit'lerde; faz1-exit.md yazıldı).
   `faz1-final` 12-kamera capture'ı HÂLÂ koşuyor (yavaş: postfx'li
