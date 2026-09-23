@@ -66,6 +66,20 @@ const featuresParam = featuresAt >= 0 ? args[featuresAt + 1] : null;
 const only = option('cameras') ? new Set(option('cameras').split(',')) : null;
 const scalesFor = (camera, tier) =>
   (gate && camera.id === 'C03' && tier === 'desktop-balanced') ? [1, 2] : [1];
+// B3 DÜZELTMESİ: a verdict does not need the full 12x4 grid. --plan gives
+// per-tier camera lists, semicolon-separated; a `@night` suffix on the
+// tier shoots those cameras at hour=21 with the lamps on instead:
+//   --plan "desktop-balanced:C03,C07;mobile-high:C03;desktop-balanced@night:C04,C10"
+// With --plan, the tier/camera cross-product and the gate's automatic
+// night variants are both bypassed - the plan IS the shot list.
+const planOpt = option('plan');
+const plan = planOpt ? planOpt.split(';').map(entry => {
+  const [head, cams] = entry.split(':');
+  const night = head.endsWith('@night');
+  const tier = night ? head.slice(0, -'@night'.length) : head;
+  if (!TIER_PROFILE[tier]) { console.error('Unknown tier in plan: ' + head); process.exit(1); }
+  return {tier, night, cameras: cams.split(',')};
+}) : null;
 // DAİMİ EMİR A1 / kapanış md. 16: the gate also shoots REAL night frames -
 // hour=21 (sun below the horizon on day 172) + the product's own lamp
 // state via __angoraQA.nightScene(). gate-f342's "night" png was a
@@ -88,10 +102,13 @@ if (!base) {
   console.log('Serving', serveRoot, 'at', base);
 }
 
-const summary = {tag, commit, base, gate, tiers, capturedAt: new Date().toISOString(),
+const summary = {tag, commit, base, gate, tiers, plan: planOpt ?? null,
+  features: featuresParam ?? null, capturedAt: new Date().toISOString(),
   softwareRaster: true, emulated: true, runs: []};
 
-for (const tier of tiers) {
+const sessions = plan ?? tiers.map(tier => ({tier, night: false, cameras: null}));
+for (const session of sessions) {
+  const {tier} = session;
   const profile = TIER_PROFILE[tier];
   await mkdir(path.join(outDir, tier), {recursive: true});
   const browser = await chromium.launch({
@@ -99,10 +116,13 @@ for (const tier of tiers) {
     args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
   });
   for (const camera of CAMERAS) {
-    if (only && !only.has(camera.id)) continue;
-    const variants = scalesFor(camera, tier).map(scale =>
-      ({scale, suffix: scale === 1 ? '' : '@2x', night: false}));
-    if (gate && NIGHT_CAMERAS.has(camera.id) && NIGHT_TIERS.has(tier)) {
+    if (session.cameras ? !session.cameras.includes(camera.id)
+      : (only && !only.has(camera.id))) continue;
+    const variants = session.night
+      ? [{scale: 1, suffix: '-night', night: true}]
+      : scalesFor(camera, tier).map(scale =>
+        ({scale, suffix: scale === 1 ? '' : '@2x', night: false}));
+    if (!plan && gate && NIGHT_CAMERAS.has(camera.id) && NIGHT_TIERS.has(tier)) {
       variants.push({scale: 1, suffix: '-night', night: true});
     }
     for (const {scale, suffix, night} of variants) {

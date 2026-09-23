@@ -40,7 +40,9 @@ export const DETAIL_TABLE = [
   // garden cells (FAZ-6-DUZ-RENK.md omitted it; EK Bölüm 0: the file wins).
   // Roughness variation is what reads on metal, not albedo — İŞ A's scalar
   // grade set the base, this drifts around it.
-  {match: /^(chrome|metal)( \(\d+\))?$/i, value: new Vector4(0.02, 0.14, 1 / 0.5, 0.4)},
+  // Spec satırı: `chrome (5)`, `metal (5)`, `metal` - çıplak `chrome` YOK
+  // (interior-metal-7'nin krom hücresi olduğu gibi kalır).
+  {match: /^(chrome \(\d+\)|metal( \(\d+\))?)$/i, value: new Vector4(0.02, 0.14, 1 / 0.5, 0.4)},
   {match: /boundary limestone top/i, value: new Vector4(0.07, 0.09, 1 / 2, 0.4)},
   {match: /^Retaining wall rough limestone/i, value: new Vector4(0.09, 0.10, 1 / 1.5, 0.5)},
   {match: /^(pool_tile|STONE-TILE)$/i, value: new Vector4(0.04, 0.06, 1, 0.3)},
