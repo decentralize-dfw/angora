@@ -4,9 +4,15 @@
 Hedef: web'de V-Ray kalitesi. Mobil optimizasyonu sonraya kalıyor.
 
 **Yeni kısıt, tek cümle:** Mobil tier satırları (`mobile-low`,
-`mobile-high`) **bugünkü halinde kalır** — bozulmaz, ama yeni hiçbir iş
-oraya inmek zorunda değil. Bütün FAZ 7 işleri `desktop-balanced` ve
-`desktop-high` satırlarına iner.
+`mobile-high`) **bugünkü halinde kalır**. Bütün FAZ 7 işleri **her iki
+masaüstü tier'ına birden** iner.
+
+**Tier ayrımı yapma.** `desktop-balanced` ile `desktop-high` arasında
+kalite farkı bırakma — hangi makinede açılırsa açılsın aynı kaliteyi
+görsün. `desktop-balanced` satırını `desktop-high` seviyesine çek:
+`shadowMapSize` 4096, `gtaoResolutionScale` 1.0,
+`planarPoolReflection` 0.5, `cinemaStill` iki tier'da da.
+İki satır arasında anlamlı fark kalmasın.
 
 **Bütçe kuralı değişti:** masaüstünde ALU/maliyet **tavanı yok**.
 Kural artık "ölç ve yaz" — maliyeti raporla, kesme. Kırmızı çizgi sadece
@@ -41,7 +47,7 @@ doğrulama FAZ 6'daki gibi sonda tek oturumda.
 
 ### İŞ 1 — SSR: ekran-uzayı yansıma ⭐ en görünür
 
-**Bayrak:** `screenSpaceReflection` · **Tier:** desktop-balanced + high
+**Bayrak:** `screenSpaceReflection` · **Tier:** her iki masaüstü tier'ı
 
 `postfx-chain.js`'e SSR geçişi ekle. Three r180'in kendi `SSRPass`'i
 örneklerde var; ya onu uyarla ya kendi geçişini yaz (depth + normal
@@ -60,7 +66,7 @@ su shader'ının fresnel'iyle birleştir, ikisini birden uygulama.
 
 ### İŞ 2 — PCSS: temas sertleşen gölge
 
-**Bayrak:** `softShadowsV2` · **Tier:** desktop-balanced + high
+**Bayrak:** `softShadowsV2` · **Tier:** her iki masaüstü tier'ı
 
 `lighting.js`'in gölge kurulumunda `shadowType`'ı PCSS'e çevir —
 three'nin `shadowmap_pars_fragment` chunk'ını override ederek blocker
@@ -69,7 +75,7 @@ search + değişken yarıçaplı PCF. Penumbra engelden uzaklık ile genişlesin
 Saçak-duvar birleşiminde gölge keskin, bahçeye düşen uzun gölgede yumuşak
 olmalı. Bugün ikisi de aynı.
 
-Birlikte: `desktop-high` satırında `shadowMapSize` **2048 → 4096**.
+Birlikte: **her iki masaüstü satırında** `shadowMapSize` **4096**.
 Mobil satırlara dokunma.
 
 **Kabul:** C03'te saçak gölgesi duvara yakın keskin, uzakta yumuşak.
@@ -77,7 +83,7 @@ Aynı karede iki farklı penumbra genişliği ölçülebilir olmalı.
 
 ### İŞ 3 — Pencere ışığı: iç mekânın asıl sorunu
 
-**Bayrak:** `windowPortalLight` · **Tier:** desktop-balanced + high
+**Bayrak:** `windowPortalLight` · **Tier:** her iki masaüstü tier'ı
 
 İç mekân bugün IBL + 4 spot ile aydınlanıyor ve düz okuyor. H2 (Blender
 lightmap rebake) gerçek çözüm ama Blender yok. **Çalışma zamanı ikamesi:**
@@ -96,12 +102,12 @@ yakını parlak, oda derinliği karanlık. Bugün her yer eşit aydınlıkta.
 
 ### İŞ 4 — Prosedürel detayı masaüstünde aç
 
-**Bayrak:** `proceduralDetailHigh` · **Tier:** desktop-high
+**Bayrak:** `proceduralDetailHigh` · **Tier:** her iki masaüstü tier'ı
 
 `procedural-detail.js` 2 oktav ve genlikler mobil paylaşımlı kodda
-temkinli seçilmişti. Masaüstü-high'da:
+temkinli seçilmişti. Masaüstünde:
 - **4 oktav** (mikro detaye kadar, 5–10 cm)
-- Genlikler **1,5–2×** — `uDetail` tablosuna desktop-high çarpanı
+- Genlikler **1,5–2×** — `uDetail` tablosuna masaüstü çarpanı
 - Roughness varyasyonu özellikle artsın: V-Ray farkının 1 numaralı
   malzeme bileşeni bu
 
@@ -112,9 +118,10 @@ zeminde damar varyasyonu gözle okunuyor.
 
 ### İŞ 5 — GTAO'yu tam çözünürlüğe çıkar
 
-**Bayrak:** `gtaoFullRes` · **Tier:** desktop-high
+**Bayrak:** `gtaoFullRes` · **Tier:** her iki masaüstü tier'ı
 
-`gtaoResolutionScale` 0.65 → **1.0**, yarıçap ve kalınlık parametrelerini
+`gtaoResolutionScale` her iki masaüstü satırında **1.0**, yarıçap ve
+kalınlık parametrelerini
 iç mekân için ayrıca ayarla. GTAO şu an yarı çözünürlükte, köşe
 kararmaları bulanık.
 
@@ -122,7 +129,7 @@ kararmaları bulanık.
 
 ### İŞ 6 — Clearcoat ve sheen
 
-**Bayrak:** `materialResponseV2` · **Tier:** desktop-balanced + high
+**Bayrak:** `materialResponseV2` · **Tier:** her iki masaüstü tier'ı
 
 `MeshPhysicalMaterial` alanları: cilalı taş/ahşap/seramikte `clearcoat`,
 kumaş/halı/perdede `sheen`. `angoraBatch.materials` adlarından aile
@@ -136,7 +143,7 @@ parlıyor.
 
 ### İŞ 7 — Alan derinliği (cinema still)
 
-**Bayrak:** `cinemaDof` · **Tier:** desktop-high, yalnız cinemaStill içinde
+**Bayrak:** `cinemaDof` · **Tier:** her iki masaüstü tier'ı (cinemaStill içinde)
 
 `cinemaStill` zaten 24 Halton örneği biriktiriyor. Her örnekte kamerayı
 apertür yarıçapı kadar kaydır ve odak düzlemine nişan al — **bedava
@@ -178,11 +185,11 @@ bayraklar açık, tek oturumda çift koşum.
 | Koşum | Tier | Kameralar |
 |---|---|---|
 | Çift (kapalı+açık) | `desktop-high` | C03, C04, C05, C06, C07, C08, C10, C11, C12 |
-| Çift (kapalı+açık) | `desktop-balanced` | C03, C07, C10 |
+| Tek (açık) | `desktop-balanced` | C03, C10 — **high ile aynı kaliteyi verdiğinin kanıtı** |
 | Tek (açık) | `mobile-high` | C03, C07, C10 — **bozulmadığının kanıtı** |
 | Tek (açık) | gece, `desktop-high` | C04, C10 |
 
-24 + 6 + 3 + 2 = **35 kare ≈ 2 saat.**
+18 + 2 + 3 + 2 = **25 kare ≈ 1,5 saat.**
 
 Ayrıca `desktop-high` + `cinemaStill` + `cinemaDof` ile **C03 ve C10
 sinema karesi** — bunlar ürünün vitrin kareleri, kompozitte ayrı göster.
@@ -191,7 +198,9 @@ sinema karesi** — bunlar ürünün vitrin kareleri, kompozitte ayrı göster.
 
 ## BÖLÜM 4 — KAPANIŞ LİSTESİ
 
-1. Yedi bayrak açık, her birinin tier kapsamı `features.js`'te yazılı
+1. Yedi bayrak açık, hepsi **her iki masaüstü tier'ında** aktif
+1b. `desktop-balanced` ile `desktop-high` arasında görünür kalite farkı
+    YOK — C03/C10 kareleri karşılaştırılarak kanıtlanır
 2. Mobil matris satırları değişmemiş — diff ile kanıt
 3. `mobile-high` C03/C07/C10 kareleri FAZ 6 kapanışıyla **birebir**
    (bozulmadı)
