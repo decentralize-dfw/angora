@@ -20,7 +20,7 @@ test('singleSided ships on, every unshipped task ships off', () => {
   // dropping to black whenever they stopped moving. It ships again once the
   // refinement starts from the resolved frame instead of from zero.
   assert.equal(DEFAULT_FEATURES.progressiveLoaderV2, true);
-  assert.equal(DEFAULT_FEATURES.cinemaStill, false);
+  assert.equal(DEFAULT_FEATURES.cinemaStill, true);   // KAPANIŞ İŞ 3: seed'li birikimle geri açıldı
   for (const flag of ['authoredMaterialsV2', 'ktx2Delivery', 'contextLodV2']) {
     assert.equal(DEFAULT_FEATURES[flag], false, flag);
   }

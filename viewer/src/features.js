@@ -40,7 +40,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   progressiveContextV1: false, // KAPALI - ürün sahibi: sahne açıldıktan ~5 sn sonra mahallenin belirmesi kabul edilemez. 13,6 MB kazanç pop etkisine değmiyor; erteleme yerine kaynak tarafı LOD/instancing (H6) beklenecek.
   ktx2Delivery: false,         // Faz 4.1
   contextLodV2: false,         // Faz 2
-  cinemaStill: false,         // KAPALI - boşta birikim siyahtan başlıyor ve her girdide sıfırlanıyor; ürün sahibi siyah ekran bildirdi. İlerlemeli rafinasyon çözülmüş kareden başlayacak şekilde yeniden yazılana kadar kapalı.
+  cinemaStill: true,          // KAPANIŞ İŞ 3 ile AÇIK: örnek 0 artık jittersiz ÇÖZÜLMÜŞ KARE (lighting.renderRefineSample seed yolu) - birikim hiçbir anda normal kareden karanlık olamaz; girdide iptal, sıfırlama yok.
   // -- FAZ 7 (FAZ-7-MASAUSTU.md): masaüstü V-Ray. Hepsi İKİ masaüstü
   //    tier'ına birden; mobil satırlar YAPISAL olarak dokunulmaz (quality
   //    profile'daki !mobile guard'ı + testler). Ürün sahibi kararı (2026-09-23):
@@ -58,7 +58,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   proceduralDetailHigh: false, // İŞ 4 - 4 oktav + genlik çarpanı (albedo 1.5x, roughness 2x); proceduralDetailV1 üstüne masaüstü katmanı
   gtaoFullRes: false,          // İŞ 5 - gtaoResolutionScale 1.0 iki masaüstü satırında
   materialResponseV2: false,   // İŞ 6 - clearcoat (cilalı taş/ahşap/seramik) + sheen (kumaş) aile bazlı, masaüstü
-  cinemaDof: false,            // İŞ 7 - cinemaStill birikiminde apertür yürüyüşü (gerçek DOF); balanced'ı sinemaya katar
+  cinemaDof: true,             // İŞ 7 + KAPANIŞ İŞ 3 - apertür yürüyüşü örnek 1'den itibaren (seed net kalır); balanced'ı sinemaya katar
 });
 
 // '?features=a:0,b:1' - unknown names are ignored so a stale link cannot

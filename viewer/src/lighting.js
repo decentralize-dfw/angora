@@ -605,16 +605,24 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     // lighting closure can reach - the composer, the sun, the shadow map.
     renderRefineSample(currentCamera,refine){
       if(!composer||renderer.xr.isPresenting)return false;
-      const [a,b]=refine.sunSway();
+      // KAPANIŞ İŞ 3: örnek 0 = ÇÖZÜLMÜŞ KARE - jitter yok, güneş oynamaz,
+      // apertür kapalı. Birikimin ilk sunduğu görüntü normal karenin
+      // kendisidir; ekran hiçbir örnek sayısında ondan karanlık olamaz.
+      // Girdi geldiğinde main iptal eder (sıfırlama değil) ve normal kare
+      // zaten aynı piksellerdir - "fareyi bırakınca siyah" biter.
+      const seed=refine.index===0;
+      const [a,b]=seed?[0,0]:refine.sunSway();
       const home=sun.position.clone();
-      sun.position.sub(sun.target.position)
-        .applyAxisAngle(new THREE.Vector3(0,1,0),a)
-        .applyAxisAngle(new THREE.Vector3(1,0,0),b)
-        .add(sun.target.position);
-      renderer.shadowMap.needsUpdate=true;
-      const jitter=refine.jitter(currentCamera);
+      if(!seed){
+        sun.position.sub(sun.target.position)
+          .applyAxisAngle(new THREE.Vector3(0,1,0),a)
+          .applyAxisAngle(new THREE.Vector3(1,0,0),b)
+          .add(sun.target.position);
+        renderer.shadowMap.needsUpdate=true;
+      }
+      const jitter=seed?null:refine.jitter(currentCamera);
       // FAZ 7 İŞ 7: aperture walk (no-op unless main armed setDof).
-      const dofShift=refine.dofShift?.(currentCamera)??null;
+      const dofShift=seed?null:(refine.dofShift?.(currentCamera)??null);
       const previous=composer.renderToScreen;composer.renderToScreen=false;
       try{
         beauty.camera=currentCamera;ao.setCamera(currentCamera);ssrPass?.setCamera(currentCamera);composer.render();
@@ -622,7 +630,7 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
       }finally{
         composer.renderToScreen=previous;
         refine.undoDofShift?.(currentCamera,dofShift);
-        refine.unjitter(currentCamera,jitter);
+        if(jitter)refine.unjitter(currentCamera,jitter);
         sun.position.copy(home);
       }
     }
