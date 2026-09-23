@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import {prepareBakedLighting} from './baked-lighting.js';
 import {restoreBatchSurface} from './batch-surface-response.js';
 import {prepareBatchedMaterial} from './batched-material.js';
-import {applyMaterialResponse} from './material-response.js';
+import {applyMaterialResponse} from './material-response-v2.js';
 import {chunkModelInPlace} from './context-plants-chunks.js';
 import {applyPlantVariation} from './plant-variation.js';
 

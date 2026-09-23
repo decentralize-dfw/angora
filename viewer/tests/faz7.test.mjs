@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import {detailFragment, DETAIL_TABLE, detailFor} from '../src/procedural-detail.js';
 import {prepareBatchedMaterial} from '../src/batched-material.js';
 import {effectiveQuality} from '../src/quality-profile.js';
-import {responseMasksFor, applyMaterialResponse} from '../src/material-response.js';
+import {responseMasksFor, applyMaterialResponse} from '../src/material-response-v2.js';
 import {createIdleRefine} from '../src/idle-refine.js';
 
 // FAZ 7 (FAZ-7-MASAUSTU.md). The one structural promise every test here
