@@ -6,7 +6,26 @@
 > (önce Bölüm 0.5 + 0.7 oku). İnsan işleri: `BLOCKED.md`. Bütçe defteri:
 > `build/qa/faz1-ledger.md`.
 
-## Şu an neredeyiz (GÜNCEL: final paketleme)
+## Şu an neredeyiz (GÜNCEL: FAZ 6 — kalite kapanışı emri)
+
+Yeni daimi emir (FAZ 6): İŞ A → İŞ B dış → İŞ C → İŞ D, her biri kendi
+16-kare gate'iyle (build/qa/faz6-<iş>/), kompozit zorunlu (her gate'te
+farklı kareler + en az bir C10), kesit kaybı >%1 kırmızı, ALU/varying
+sayımı gate dosyasına, flag-off GLSL diff BOŞ. NOT: brief BÖLÜM 2'nin başı
+kesik ulaştı - uDetail'in kesilme üstü satırları aynı şemayla yazarlandı
+ve procedural-detail.js başında işaretli.
+
+- İŞ A commit'li (a9c49b9): BATCHED_TABLE 8 malzeme; gate faz6-a KOŞUYOR.
+- İŞ B commit'li (f9ed80d): proceduralDetailV1=true desktop-tier;
+  iç satırlar İŞ D anahtarında (detailInterior). Gate faz6-b sırada.
+- İŞ C commit'li (748e6f6): runtimeVertexAO=false (brief); gate faz6-c
+  '--features runtimeVertexAO:1' ile koşacak (qa-capture'a küçük
+  passthrough eklendi); yeşilse desktop-tier açılır, mobil H1.
+- İŞ D: procedural-detail iç satırları hazır - main'deki
+  proceduralDetail.interior:false → true + gate faz6-d.
+- Kabul listesi BÖLÜM 6 (9 madde) - kapanışta tek tek sayılacak.
+
+## Önceki durum (final paket, tarihçe)
 
 - Combined gate **gate-f342 YEŞİL** (commit 700c210; kanıtlar
   final-probes.json dahil). FAZ 5 cinemaStill AKTİF (85cca7f).
