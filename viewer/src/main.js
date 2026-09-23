@@ -346,6 +346,21 @@ function scheduleIdleRefine(){
   },400);
 }
 
+// FAZ 7 doğrulama: the showcase (cinema) frame on demand - QA drives the
+// SAME accumulation path the idle scheduler uses, synchronously, so a
+// capture can screenshot the settled 24-sample still instead of racing
+// the 400 ms idle timer on a software rasteriser.
+if(typeof window!=='undefined')window.__angoraCinemaRefine=async(samples=24)=>{
+  if(!FEATURES.cinemaStill||!lighting||!camera)return 0;
+  idleRefine??=(await import('./idle-refine.js')).createIdleRefine({renderer});
+  idleRefine.setDof(FEATURES.cinemaDof&&controls?
+    {focus:camera.position.distanceTo(controls.target),aperture:.12}:null);
+  idleRefining=false;                       // park the idle loop
+  idleRefine.reset();
+  let count=0,more=true;
+  while(more&&count<samples){more=lighting.renderRefineSample(camera,idleRefine);count++;}
+  return count;
+};
 function floorFrameInsets(){
   const rect=host.getBoundingClientRect(),dock=$('.explore-dock').getBoundingClientRect();
   const topBottom=rect.width<700?Math.max($('.topbar').getBoundingClientRect().bottom,$('.scale-picker').getBoundingClientRect().bottom)-rect.top:0;

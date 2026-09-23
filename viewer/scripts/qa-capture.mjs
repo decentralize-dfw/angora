@@ -75,10 +75,12 @@ const scalesFor = (camera, tier) =>
 const planOpt = option('plan');
 const plan = planOpt ? planOpt.split(';').map(entry => {
   const [head, cams] = entry.split(':');
-  const night = head.endsWith('@night');
-  const tier = night ? head.slice(0, -'@night'.length) : head;
+  const [tier, mode] = head.split('@');
   if (!TIER_PROFILE[tier]) { console.error('Unknown tier in plan: ' + head); process.exit(1); }
-  return {tier, night, cameras: cams.split(',')};
+  if (mode && mode !== 'night' && mode !== 'cinema') {
+    console.error('Unknown plan mode @' + mode); process.exit(1);
+  }
+  return {tier, night: mode === 'night', cinema: mode === 'cinema', cameras: cams.split(',')};
 }) : null;
 // DAİMİ EMİR A1 / kapanış md. 16: the gate also shoots REAL night frames -
 // hour=21 (sun below the horizon on day 172) + the product's own lamp
@@ -120,12 +122,14 @@ for (const session of sessions) {
       : (only && !only.has(camera.id))) continue;
     const variants = session.night
       ? [{scale: 1, suffix: '-night', night: true}]
-      : scalesFor(camera, tier).map(scale =>
-        ({scale, suffix: scale === 1 ? '' : '@2x', night: false}));
+      : session.cinema
+        ? [{scale: 1, suffix: '-cinema', night: false, cinema: true}]
+        : scalesFor(camera, tier).map(scale =>
+          ({scale, suffix: scale === 1 ? '' : '@2x', night: false}));
     if (!plan && gate && NIGHT_CAMERAS.has(camera.id) && NIGHT_TIERS.has(tier)) {
       variants.push({scale: 1, suffix: '-night', night: true});
     }
-    for (const {scale, suffix, night} of variants) {
+    for (const {scale, suffix, night, cinema} of variants) {
       const page = await browser.newPage({viewport: VIEWPORTS[profile], deviceScaleFactor: scale});
       const errors = [];
       const infos = [];
@@ -172,7 +176,13 @@ for (const session of sessions) {
         // console.info lines are coverage EVIDENCE (e.g. "Exterior grade
         // revived on N materials", vertex-AO skip logs) — counted, not claimed.
         report.consoleInfo = infos;
-        await page.screenshot({path: path.join(outDir, tier, camera.id + suffix + '.png'), timeout: 120_000});
+        if (cinema) {
+          // FAZ 7 vitrin karesi: 24 birikim örneği SON adım olarak senkron
+          // koşulur (snapshot'ın kendi karesi biriktirmeyi ezmesin diye);
+          // ekranda kalan görüntü yerleşmiş sinema karesidir.
+          report.cinemaSamples = await page.evaluate(() => window.__angoraCinemaRefine?.(24) ?? 0);
+        }
+        await page.screenshot({path: path.join(outDir, tier, camera.id + suffix + '.png'), timeout: cinema ? 480_000 : 120_000});
         await writeFile(path.join(outDir, tier, camera.id + suffix + '.json'), JSON.stringify(report, null, 2));
         summary.runs.push({tier, profile, camera: camera.id, scale, ok: true,
           drawCalls: report.renderer.drawCalls, triangles: report.renderer.triangles,

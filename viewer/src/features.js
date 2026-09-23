@@ -43,15 +43,15 @@ export const DEFAULT_FEATURES = Object.freeze({
   cinemaStill: true,           // FAZ 5 - YALNIZ desktop-high + postfx; telefonda ve walk'ta asla (cinemaDof açılınca balanced da katılır)
   // -- FAZ 7 (FAZ-7-MASAUSTU.md): masaüstü V-Ray. Hepsi İKİ masaüstü
   //    tier'ına birden; mobil satırlar YAPISAL olarak dokunulmaz (quality
-  //    profile'daki !mobile guard'ı + testler). Varsayılan false; kod
-  //    bitince hepsi açılır, doğrulama tek oturumda.
-  screenSpaceReflection: false, // İŞ 1 - SSR geçişi (postfx); havuz HARİÇ (poolWaterV2 kendi yansımasını sürer); planarPoolReflection 0.5'e eşitlenir
-  softShadowsV2: false,        // İŞ 2 - PCSS (blocker search + değişken PCF) + iki masaüstü satırında 4096 harita
-  windowPortalLight: false,    // İŞ 3 - pencere alan ışığı (glazing setinden konum/normal, gök rengi, oda başına <=2)
-  proceduralDetailHigh: false, // İŞ 4 - 4 oktav + genlik çarpanı (albedo 1.5x, roughness 2x); proceduralDetailV1 üstüne masaüstü katmanı
-  gtaoFullRes: false,          // İŞ 5 - gtaoResolutionScale 1.0 iki masaüstü satırında
-  materialResponseV2: false,   // İŞ 6 - clearcoat (cilalı taş/ahşap/seramik) + sheen (kumaş) aile bazlı, masaüstü
-  cinemaDof: false,            // İŞ 7 - cinemaStill birikiminde apertür yürüyüşü (gerçek DOF); balanced'ı sinemaya katar
+  //    profile'daki !mobile guard'ı + testler). Kod bitti, 13 bayrak birden
+  //    açıldı (SIMDI-YAP B2); doğrulama tek oturumda, sonda.
+  screenSpaceReflection: true,  // İŞ 1 - SSR geçişi (postfx); havuz HARİÇ (poolWaterV2 kendi yansımasını sürer); planarPoolReflection 0.5'e eşitlenir
+  softShadowsV2: true,         // İŞ 2 - PCSS (blocker search + değişken PCF) + iki masaüstü satırında 4096 harita
+  windowPortalLight: true,     // İŞ 3 - pencere alan ışığı (glazing setinden konum/normal, gök rengi, oda başına <=2)
+  proceduralDetailHigh: true,  // İŞ 4 - 4 oktav + genlik çarpanı (albedo 1.5x, roughness 2x); proceduralDetailV1 üstüne masaüstü katmanı
+  gtaoFullRes: true,           // İŞ 5 - gtaoResolutionScale 1.0 iki masaüstü satırında
+  materialResponseV2: true,    // İŞ 6 - clearcoat (cilalı taş/ahşap/seramik) + sheen (kumaş) aile bazlı, masaüstü
+  cinemaDof: true,             // İŞ 7 - cinemaStill birikiminde apertür yürüyüşü (gerçek DOF); balanced'ı sinemaya katar
 });
 
 // '?features=a:0,b:1' - unknown names are ignored so a stale link cannot
