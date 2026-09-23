@@ -119,7 +119,12 @@ vec2 angoraCellUv(vec4 p){
     // normal path (getTangentFrame lives behind USE_NORMALMAP); roofs get
     // the villa's clay relief, ground cells stay geometry-lit.
     shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', `
-#ifdef USE_NORMALMAP
+// getTangentFrame is declared by normal_pars_fragment only for the
+// TANGENTSPACE path and only when the geometry ships NO tangent attribute
+// (with USE_TANGENT three uses vTangent/vBitangent instead and the helper
+// does not exist). Guarding on USE_NORMALMAP alone asked for an identifier
+// the program had not declared, and the whole material failed to compile.
+#if defined( USE_NORMALMAP_TANGENTSPACE ) && !defined( USE_TANGENT )
 {
   int cgSlot=int(uCellN[${cell}].x+0.5);
   if(cgSlot>0){
