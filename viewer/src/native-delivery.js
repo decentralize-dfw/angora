@@ -7,7 +7,7 @@ import {applyPlantVariation} from './plant-variation.js';
 
 // Batched deliveries remain resident across every view. The legacy manifest
 // path retains its older floor streams for explicit compatibility previews.
-export function createNativeDelivery({manifest,root,scene,groups,load,prepare,releaseMaterial,onProgress,features={},proceduralDetail={}}) {
+export function createNativeDelivery({manifest,root,scene,groups,load,prepare,releaseMaterial,onProgress,onAcquired,features={},proceduralDetail={}}) {
   const loaded=new Map(),sources=new Map();
   const context=['context-ground','context-buildings','context-plants'];
   const records=new Map([...manifest.parts,...manifest.interior_streams].map(p=>[p.name,p]));
@@ -92,7 +92,7 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     // for lamps they can never see through the walls.
     for(const material of resources(model).materials)prepareBatchedMaterial(material,{exterior:context.includes(name)||(features.gardenSpotStrip&&name==='garden'),
       proceduralDetail:Boolean(proceduralDetail.enabled),detailOctaves:proceduralDetail.octaves??2,detailInterior:Boolean(proceduralDetail.interior)});
-    loaded.set(name,model);groups.set(name,model);scene.add(model);return model;
+    loaded.set(name,model);groups.set(name,model);scene.add(model);onAcquired?.(name,model);return model;
     }catch(error){
       // A failed lightmap/mesh preparation must release this decoded asset
       // too; it has not yet been added to the visible scene or loaded map.

@@ -33,6 +33,7 @@ import {fitContextBounds,neutraliseTransmission} from './material-response.js';
 import {applyGradeValues,loadGradeTextures,bindGradeTextures,reviveBatchedGrade} from './exterior-grade.js';
 import {reviveBakedOcclusion} from './ao-revival.js';
 import {upgradeAtlasToArrays} from './atlas-array.js';
+import {bakeContactOcclusion} from './vertex-ao.js';
 import {createSiteContext} from './site-context.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
 import {rigFovFor} from './camera-rigs.js';
@@ -749,7 +750,7 @@ let walkData=null;
 // currently is - eased per frame so starting and leaving the tour are fades
 // rather than a cut.
 let guidedTour=null,spotlight=null,tourShade=0,tourShadeTarget=0,tourShadeTime=null;
-let roomProbes=null;
+let roomProbes=null,contactBake=null;
 // Task 2.1-c: a storey's probe arrives on its first visit; rebinding goes
 // through setRoomReflections, which is idempotent and refreshes the glazing.
 function ensureRoomProbe(floor){
@@ -1294,6 +1295,7 @@ async function loadNativeModel(manifest){
   const received=new Map();
   message(t('loadingModel'));
   nativeDelivery=createNativeDelivery({manifest,root:modelRoot,scene,groups,load:loadAsset,features:FEATURES,
+    onAcquired:(name,model)=>{if(contactBake?.bakeLate&&contactBake.bakeLate(model))invalidate();},
     // FAZ 6 İŞ B: analytic drift is a desktop spend until H1 measures a
     // phone; the flag stays honest (?features=proceduralDetailV1:0 = zero
     // trace) while the tier gate keeps every mobile tier on the old bytes.
@@ -1404,6 +1406,19 @@ async function loadNativeModel(manifest){
         console.info('Atlas arrays upgraded on '+applied+' materials');resolve(applied);
       }catch(error){console.warn('Atlas array upgrade failed; textureLod path retained',error);resolve(0);}
     }));
+  }
+  // FAZ 6 İŞ C: contact darkening. Joins the SAME idle queue and explicitly
+  // waits for the other idle upgrades (BÖLÜM 3: onların önüne geçme); the
+  // deferred interior bakes late against the same occupancy grid.
+  if(FEATURES.runtimeVertexAO&&manifest.batched){
+    window.__angoraContactReady=Promise.all([
+      window.__angoraGradeReady??0,window.__angoraAoReady??0,window.__angoraAtlasReady??0,
+    ]).then(()=>bakeContactOcclusion(nativeDelivery.loaded)).then(result=>{
+      contactBake=result;
+      if(result.materials)invalidate();
+      console.info('Contact AO baked: '+result.vertices+' vertices / '+result.meshes+' meshes / '+result.materials+' materials');
+      return result;
+    }).catch(error=>{console.warn('Contact AO unavailable',error);return null;});
   }
   // The property card greets a plain entry here too. It used to be raised
   // only on the classic path, which this one returns before ever reaching -

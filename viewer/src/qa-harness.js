@@ -259,6 +259,7 @@ export function installQaHarness({host, query, hooks}) {
     if (window.__angoraGradeReady) await window.__angoraGradeReady;
     if (window.__angoraAoReady) await window.__angoraAoReady;
     if (window.__angoraAtlasReady) await window.__angoraAtlasReady;
+    if (window.__angoraContactReady) await window.__angoraContactReady;
     // Fixture and daylight fades ease over wall-clock time; a screenshot taken
     // mid-fade depends on boot timing. A far-future update() snaps every fade
     // to its settled state - the same trick the boot's warming renders use.

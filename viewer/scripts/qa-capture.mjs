@@ -41,6 +41,11 @@ const commit = execSync('git rev-parse --short HEAD', {cwd: repoRoot}).toString(
 const tag = option('tag', 'capture-' + commit);
 const profiles = option('profiles', 'desktop,mobile').split(',');
 const gate = args.includes('--gate');
+// FAZ 6: a gate may exercise a default-off flag (e.g. runtimeVertexAO)
+// without shipping it on - the string is appended verbatim to every page
+// URL as &features=..., which resolveFeatures already understands.
+const featuresAt = args.indexOf('--features');
+const featuresParam = featuresAt >= 0 ? args[featuresAt + 1] : null;
 const only = gate ? new Set(['C03', 'C05', 'C06', 'C07', 'C08', 'C09', 'C10'])
   : option('cameras') ? new Set(option('cameras').split(',')) : null;
 const scalesFor = camera => (gate && camera.id === 'C03') ? [1, 2] : [1];
@@ -75,7 +80,7 @@ for (const profile of profiles) {
       const errors = [];
       page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
       page.on('pageerror', e => errors.push(String(e)));
-      const url = base + search(camera, profile);
+      const url = base + search(camera, profile) + (featuresParam ? '&features=' + featuresParam : '');
       const started = Date.now();
       try {
         await page.goto(url, {waitUntil: 'domcontentloaded'});
