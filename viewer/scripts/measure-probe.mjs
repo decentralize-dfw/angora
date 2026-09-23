@@ -53,7 +53,9 @@ for (const row of rows) {
   page.on('console', m => { if (m.type() === 'error') errors.push(m.text().slice(0, 200)); });
   page.on('pageerror', e => errors.push(String(e).slice(0, 200)));
   const features = 'cinemaStill:0' + (row.features ? ',' + row.features : '');
-  const url = `http://127.0.0.1:${server.port}/?view=neighborhood&hour=13.5&season=172&light=sun` +
+  // KAPANIŞ İŞ 2.4: neighborhood'da desktopOnlyShadow mobil gölgeyi kapatır -
+  // gölge ölçümü kat/villa görünümünde yapılır (row.view).
+  const url = `http://127.0.0.1:${server.port}/?view=${row.view ?? 'neighborhood'}&hour=13.5&season=172&light=sun` +
     `&profile=${mobile ? 'mobile' : 'desktop'}&camera=${row.camera}&stats=1&quality=${row.quality}` +
     `&features=${features}`;
   const started = Date.now();
