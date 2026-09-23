@@ -201,6 +201,11 @@ kusursuz olacak; anlatımı kısalacak.
 - Değişmemiş testi tekrar koşmak.
 - Cevabı brief'te olan soruyu sormak.
 - Plan anlatıp sonra aynı şeyi yapmak. Doğrudan yap.
+- **"Analiz ediyorum / inceliyorum / bakıyorum / şimdi şuna geçiyorum"**
+  gibi ön cümleler. Bakacaksan bak ve **aynı turda** sonucu uygula.
+  Niyet beyanı iş değildir.
+- Takıldığını anlatmak. Takıldıysan ya çöz, ya `BLOCKED.md`'ye H numarası
+  + teslimat paketi yaz ve **sıradakine geç**. Üçüncü seçenek yok.
 
 **Serbest, kısılmayacak:**
 - Ölçüm. Sayı üretmek token değil, iş.
