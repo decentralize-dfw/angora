@@ -1,4 +1,4 @@
-import{P as Z,S as C,U as O,F as Te,V as U,W as Y,H as q,e as z,C as nt,f as $e,g as Ke,L as ke,h as be,a as F,M as k,D as et,R as we,i as lt,A as ve,Z as me,j as Qe,k as Je,m as ct,n as ut,o as ht,p as dt,q as ft,r as vt,u as mt,v as xt,w as pt,x as G,y as gt}from"./index-Bqkf08uW.js";const Me={name:"CopyShader",uniforms:{tDiffuse:{value:null},opacity:{value:1}},vertexShader:`
+import{P as Z,S as C,U as O,F as Te,V as U,W as Y,H as q,e as z,C as nt,f as $e,g as Ke,L as ke,h as be,a as F,M as k,D as et,R as we,i as lt,A as ve,Z as me,j as Qe,k as Je,m as ct,n as ut,o as ht,p as dt,q as ft,r as vt,u as mt,v as xt,w as pt,x as G,y as gt}from"./index-B3FGF_Fo.js";const Me={name:"CopyShader",uniforms:{tDiffuse:{value:null},opacity:{value:1}},vertexShader:`
 
 		varying vec2 vUv;
 
@@ -875,7 +875,7 @@ void main(){vUv=uv;gl_Position=vec4(position.xy,0.0,1.0);}`,Xe=(c,e)=>new C({uni
     void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,fragmentShader:`
     varying vec2 vUv;
     uniform sampler2D tDiffuse;
-    uniform float uExposure,uSat,uGrain,uContrast;
+    uniform float uExposure,uSat,uGrain,uContrast,uBloomStrength,uBloomClamp;
     uniform vec3 uLift,uGain,uVig,uWarm;
     uniform sampler2D uGlare;
     ${Ye}
@@ -883,7 +883,7 @@ void main(){vUv=uv;gl_Position=vec4(position.xy,0.0,1.0);}`,Xe=(c,e)=>new C({uni
     // three r180's AgX: rec709 -> rec2020, Filament inset, log2 encode over
     // [-12.474, 4.026] EV, 6th-order sigmoid, outset, back to linear rec709.
     // Exposure is NOT applied here - it already happened at the top of main().
-    vec3 agxDefaultContrastApprox(vec3 x){
+    vec3 angoraAgxContrast(vec3 x){
       vec3 x2=x*x;
       vec3 x4=x2*x2;
       return +15.5*x4*x2
@@ -919,7 +919,7 @@ void main(){vUv=uv;gl_Position=vec4(position.xy,0.0,1.0);}`,Xe=(c,e)=>new C({uni
       color=log2(color);
       color=(color-AgxMinEv)/(AgxMaxEv-AgxMinEv);
       color=clamp(color,0.0,1.0);
-      color=agxDefaultContrastApprox(color);
+      color=angoraAgxContrast(color);
       color=AgXOutsetMatrix*color;
       color=pow(max(vec3(0.0),color),vec3(2.2));
       color=LINEAR_REC2020_TO_LINEAR_SRGB*color;

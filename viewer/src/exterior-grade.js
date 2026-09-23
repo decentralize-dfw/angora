@@ -110,11 +110,19 @@ export function applyGradeValues(root, asset) {
 // baseColor is the only sRGB slot.
 export function loadGradeTextures(rootURL) {
   const loader = new THREE.TextureLoader();
+  // One missing file used to reject the whole Promise.all and lose EVERY
+  // detail map - a 404 on the stucco albedo took the grass, the asphalt and
+  // the clay tile down with it, and the console said only "Exterior detail
+  // maps unavailable". Each map now fails alone and resolves null; the
+  // binders below skip a null slot and leave that surface on the atlas.
   const one = (file, srgb) => loader.loadAsync(new URL(file, rootURL).href).then(texture => {
     texture.flipY = false;
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
     if (srgb) texture.colorSpace = THREE.SRGBColorSpace;
     return texture;
+  }).catch(error => {
+    console.warn('Exterior detail map missing: ' + file, error?.message ?? error);
+    return null;
   });
   return Promise.all([
     one('clay-tile-basecolor.png', true), one('clay-tile-normal.png', false),
@@ -230,6 +238,7 @@ export function reviveBatchedGrade(models, sets, {anisotropy = 8, anyGrid = fals
   const clones = new Map();
   const textureFor = (name, repeat) => {
     const key = name + '|' + (repeat ? repeat.join(',') : '1');
+    if (!sets[name]) return null;          // this one 404'd; leave the atlas alone
     if (!clones.has(key)) {
       const texture = repeat ? sets[name].clone() : sets[name];
       if (repeat) texture.repeat.set(repeat[0], repeat[1]);
@@ -275,19 +284,28 @@ export function reviveBatchedGrade(models, sets, {anisotropy = 8, anyGrid = fals
         return;
       }
       const slots = [];
+      // A null here means that sheet 404'd. Assigning it would strip the
+      // atlas map and render the surface flat white - leave the material on
+      // the delivery's own texture instead.
       if (entry.set.map) {
-        const average = entry.keepAverage ? averageCellLinear(material) : null;
-        material.map = textureFor(entry.set.map, entry.groundUV ? null : entry.repeat);
-        if (average) material.color?.setRGB(...average.map(v => Math.min(2, v / STUCCO_SHEET_LINEAR)));
-        else if (entry.keepAverage) material.color?.setRGB(1, 1, 1); // ölçülemedi: nötr
-        else material.color?.setRGB(1, 1, 1);   // the sheet carries the photo hue
-        slots.push('map');
+        const sheet = textureFor(entry.set.map, entry.groundUV ? null : entry.repeat);
+        if (sheet) {
+          const average = entry.keepAverage ? averageCellLinear(material) : null;
+          material.map = sheet;
+          if (average) material.color?.setRGB(...average.map(v => Math.min(2, v / STUCCO_SHEET_LINEAR)));
+          else material.color?.setRGB(1, 1, 1);   // the sheet carries the photo hue
+          slots.push('map');
+        }
       }
       if (entry.set.normalMap) {
-        material.normalMap = textureFor(entry.set.normalMap, entry.groundUV ? null : entry.repeat);
-        material.normalScale?.setScalar(entry.normalScale ?? 1);
-        slots.push('normalMap');
+        const sheet = textureFor(entry.set.normalMap, entry.groundUV ? null : entry.repeat);
+        if (sheet) {
+          material.normalMap = sheet;
+          material.normalScale?.setScalar(entry.normalScale ?? 1);
+          slots.push('normalMap');
+        }
       }
+      if (!slots.length) return;   // nothing bound: do not mark, do not recompile
       material.userData.exteriorGradeDetail = slots;
       material.needsUpdate = true;
       applied++;
@@ -303,6 +321,7 @@ export function bindGradeTextures(parts, sets) {
   const clones = new Map();
   const textureFor = (name, repeat) => {
     const key = name + '|' + (repeat ? repeat.join(',') : '1');
+    if (!sets[name]) return null;          // this one 404'd; leave the atlas alone
     if (!clones.has(key)) {
       const texture = repeat ? sets[name].clone() : sets[name];
       if (repeat) texture.repeat.set(repeat[0], repeat[1]);
@@ -324,14 +343,20 @@ export function bindGradeTextures(parts, sets) {
         if (!sets || !entry.set || material.userData.exteriorGradeBound) continue;
         material.userData.exteriorGradeBound = true;
         if (entry.set.map) {
-          material.map = textureFor(entry.set.map, entry.repeat);
-          // The sheet carries the photo hue; an authored tint factor (bldg-3
-          // ships 'Clay tile' as a bare dark-rust colour) must not restain it.
-          material.color?.setRGB(1, 1, 1);
+          const sheet = textureFor(entry.set.map, entry.repeat);
+          if (sheet) {
+            material.map = sheet;
+            // The sheet carries the photo hue; an authored tint factor (bldg-3
+            // ships 'Clay tile' as a bare dark-rust colour) must not restain it.
+            material.color?.setRGB(1, 1, 1);
+          }
         }
         if (entry.set.normalMap) {
-          material.normalMap = textureFor(entry.set.normalMap, entry.repeat);
-          material.normalScale ??= new THREE.Vector2(1, 1);
+          const sheet = textureFor(entry.set.normalMap, entry.repeat);
+          if (sheet) {
+            material.normalMap = sheet;
+            material.normalScale ??= new THREE.Vector2(1, 1);
+          }
         }
         material.needsUpdate = true;
       }
