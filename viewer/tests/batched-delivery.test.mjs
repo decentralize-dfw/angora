@@ -50,3 +50,40 @@ test('Both complete model profiles use Draco, profile-bounded WebP atlases and a
   assert.ok(bytes<(profile==='desktop'?24:17)*1024*1024,`${profile}: ${bytes} bytes`);assert.ok(ao>=5);
  }
 });
+
+// DAİMİ EMİR A7: first-interactive carried 13.6 MB of scenery. Behind
+// progressiveContextV1 the two big context parts come in on idle, exactly
+// like the interior; activate() resolves without them and contextReady
+// resolves once they are in (the QA determinism hook).
+test('progressiveContextV1 keeps buildings+plants off the first-interactive path',async()=>{
+ const names=['architecture','interior','garden','context-ground','context-buildings','context-plants'];
+ const calls=[],groups=new Map(),scene=new THREE.Scene();
+ const idlers=[];globalThis.requestIdleCallback=fn=>{idlers.push(fn);return 1;};
+ try{
+  const delivery=createNativeDelivery({manifest:{batched:true,parts:names.map(name=>({name,file:name+'.glb'})),interior_streams:[]},
+   root:'https://example.test/models/',scene,groups,prepare(){},
+   features:{progressiveLoaderV2:true,progressiveContextV1:true},
+   load:async url=>{calls.push(url.split('/').pop().split('.')[0]);
+    const model=new THREE.Group();model.add(new THREE.Mesh(new THREE.BoxGeometry(),new THREE.MeshStandardMaterial()));
+    return {scene:model,parser:{associations:new Map(),json:{}}};}});
+  await delivery.activate('neighborhood');
+  assert.deepEqual(calls.sort(),['architecture','context-ground','garden'],
+   'first interactive = villa + ground only');
+  for(const fn of idlers.splice(0))fn();
+  await delivery.contextReady;
+  assert.ok(calls.includes('context-buildings')&&calls.includes('context-plants'),'idle brings the scenery');
+  assert.equal(groups.get('context-plants').visible,true);
+ } finally {delete globalThis.requestIdleCallback;}
+});
+
+test('with progressiveContextV1 off, contextReady resolves on the boot path',async()=>{
+ const names=['architecture','garden','context-ground','context-buildings','context-plants'];
+ const groups=new Map(),scene=new THREE.Scene();
+ const delivery=createNativeDelivery({manifest:{batched:true,parts:names.map(name=>({name,file:name+'.glb'})),interior_streams:[]},
+  root:'https://example.test/models/',scene,groups,prepare(){},features:{},
+  load:async()=>{const model=new THREE.Group();model.add(new THREE.Mesh(new THREE.BoxGeometry(),new THREE.MeshStandardMaterial()));
+   return {scene:model,parser:{associations:new Map(),json:{}}};}});
+ await delivery.activate('neighborhood');
+ await delivery.contextReady;
+ assert.equal(delivery.loaded.size,5,'everything on the boot path, promise settled');
+});

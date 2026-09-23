@@ -1315,6 +1315,9 @@ async function loadNativeModel(manifest){
         for(const material of Array.isArray(o.material)?o.material:[o.material]){material.clippingPlanes=planes;material.clipShadows=true;if(material.aoMap)material.aoMapIntensity=.7;if(name==='garden'||name==='context-plants'||(manifest.batched&&context))plotMask?.apply(material,{alwaysOutside:name==='context-buildings',cutInsidePlot:name==='context-ground'||name==='garden'});}
     }});
     await nativeDelivery.activate(selected==='building'?'f3':selected);
+    // A7: deferred context parts land behind the first frame; QA screenshots
+    // stay deterministic by awaiting this (guarded - absent when flag off).
+    if(FEATURES.progressiveContextV1)window.__angoraContextPartsReady=nativeDelivery.contextReady.then(()=>{invalidate();return true;});
     phaseDone('model');
     step('light');message(t('loadingLight'));
     await Promise.all([groundLightReady,electricReady]);

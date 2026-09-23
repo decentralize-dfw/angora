@@ -37,6 +37,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   plantVariation: true,        // T2.3 runtime - iki tier'da da canlı
   authoredMaterialsV2: false,  // Faz 3
   progressiveLoaderV2: true,   // T2.1 - iki tier'da da canlı (interior defer + tembel kat probe'ları)
+  progressiveContextV1: false, // A7/T2.1 - context-buildings+plants boşta yüklenir (ilk interaktif -13.6/-9.3 MB); faz6-final ile açılır
   ktx2Delivery: false,         // Faz 4.1
   contextLodV2: false,         // Faz 2
   cinemaStill: true,           // FAZ 5 - YALNIZ desktop-high + postfx; telefonda ve walk'ta asla

@@ -111,6 +111,15 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     THREE.Cache.clear();
   }
   let preload,walking=false,interiorReady=null,currentView='neighborhood';
+  // DAİMİ EMİR A7: first-interactive was 23.8 MB desktop / 18.2 MB mobile
+  // against Task 2.1's 5/4 MB target, and 13.6 MB of it is the two big
+  // context parts (buildings 8.1 + plants 5.6 on desktop). They are scenery
+  // behind the villa, not the villa: behind progressiveContextV1 they load
+  // like the interior does - off the critical path, on idle, visible when
+  // ready. context-ground stays on the boot path (0.6 MB; without it the
+  // villa floats for the first seconds). contextDone resolves when ALL
+  // deferred parts are in, so QA captures stay deterministic.
+  let resolveContext;const contextDone=new Promise(resolve=>{resolveContext=resolve;});
   const applyVisibility=view=>{
     for(const [name,model] of loaded){
       model.visible=name!=='interior'||/^f[0-3]$/.test(view);
@@ -120,7 +129,8 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
       if(features.viewCulling&&name==='context-plants'&&walking)model.visible=false;
     }
   };
-  return {loaded,batched:Boolean(manifest.batched),
+  if(!manifest.batched)resolveContext(); // classic path defers nothing
+  return {loaded,batched:Boolean(manifest.batched),contextReady:contextDone,
     setWalkMode(active,view){
       if(walking===active)return;
       walking=active;
@@ -138,10 +148,17 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
         // idle prefetch brings it in behind the first frame, and a floor
         // pick that outruns the idle simply awaits the same acquire.
         const deferInterior=features.progressiveLoaderV2;
+        const deferredContext=features.progressiveContextV1?['context-buildings','context-plants']:[];
         preload??=(async()=>{
-          for(const {name} of manifest.parts)if(!deferInterior||name!=='interior')await acquire(name);
+          for(const {name} of manifest.parts)if(!(deferInterior&&name==='interior')&&!deferredContext.includes(name))await acquire(name);
+          const idle=globalThis.requestIdleCallback?.bind(globalThis)??(fn=>setTimeout(fn,2000));
+          if(deferredContext.length){
+            idle(()=>{(async()=>{
+              for(const name of deferredContext)await acquire(name);
+              applyVisibility(currentView);
+            })().catch(error=>console.warn('Context prefetch failed',error)).finally(resolveContext);});
+          } else resolveContext();
           if(deferInterior){
-            const idle=globalThis.requestIdleCallback?.bind(globalThis)??(fn=>setTimeout(fn,2000));
             idle(()=>{interiorReady??=acquire('interior').then(()=>applyVisibility(currentView)).catch(error=>{interiorReady=null;console.warn('Interior prefetch failed; retried on demand',error);});});
           }
         })();
