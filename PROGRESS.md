@@ -160,6 +160,32 @@ kapalı, gerçek tarayıcı değerlendirmesi bekliyor); mobil FAZ 8'e kaldı."
   doğrulama, "İNSANIN YAPMASI GEREKEN TEK ŞEY" satırı; scriptler bu
   oturumda doğrulandı (ayna tespiti 5/8 zaten koşulmuş).
 - Testler her adımda 309/309; her iş main'e push'landı (izinli).
+- DOĞRULAMA (yeni build, `build/qa/kapanis-verify*.json`, konsol hatası
+  her satırda 0, context loss 0):
+  · dh C03 (tüm bayraklar): 118 program / 105 draw / 4 102 396 üçgen /
+    161 MiB doku / 23,9 MB ilk-byte
+  · dh C10 (cell-grade + portal + iç mekân): 182 program / 162 draw /
+    4 909 701 üçgen - İŞ 4 shader'ları tarayıcıda derlendi, 0 hata
+  · mobile-high C06 kat görünümü, mobileSunShadow AÇIK: 512 harita CANLI
+    (villa-local ±19 m, texel-ölçekli normalBias 0.149). İŞ 2.4 derinlik
+    geçişi maliyeti: gölge güncelleme karesinde 99 draw / 3 810 674 üçgen
+    vs sabit 52 / 1 909 328 → +47 draw / +1,9 M üçgen YALNIZ olay-bazlı
+    güncelleme karesinde; sabit durumda +0 draw, +0 üçgen, VRAM +0,
+    tel +0, program +2. Kapalıyla açık arasında sabit kare farkı YOK.
+
+**KAPANIŞ RAPORU (2026-09-23):**
+Kod tarafı bitti; şunlar insanda: H1, H2, H6, H10 (tek sayfa komutlarıyla
+`BLOCKED.md` başında).
+Runtime'da KALAN açık kalem YOK: FAZ 7 bayrakları ölçülüp açıldı (tek
+kapalı: gtaoFullRes - gerekçesi yazılı, FPS ölçümü H1'e bağlı),
+cinemaStill çözülmüş kareden, dış cephe PBR 13/16 birimle canlı, mobil
+viewCulling + mesafe cull + 512 gölge gemide, KTX2 sayıyla reddedildi.
+Runtime dışına BAĞLI kalanlar (insan mandalları): H1 gerçek cihaz FPS +
+ratchet (ratchet.json hâlâ null - "FAZ TAMAMLANDI" bu yüzden YAZILMADI),
+H2 iç mekân lightmap %4,1→%65 (Blender), H6 kaynak dokular/instancing
+(geometri 404 MiB mobilin asıl yükü), H10 arazi rebake 311k→85,8k.
+Ürün sahibi telefon kararı: gölge akıcı değilse
+`?features=mobileSunShadow:0`.
 
 **Bilinen sinyal:** bayrak-açık desktop-balanced C01 probe yüklemesi bir
 kez 480 sn'de rapor verememişti (contact-AO bake + portal + context idle

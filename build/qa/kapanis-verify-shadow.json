@@ -1,0 +1,101 @@
+{
+ "capturedAt": "2026-09-23T18:41:03.547Z",
+ "softwareRaster": true,
+ "note": "wall time is NOT a device number",
+ "rows": [
+  {
+   "label": "verify-mobile-shadow-C06-floor",
+   "quality": "mobile-high",
+   "camera": "C06",
+   "features": "cinemaStill:0,mobileSunShadow:1",
+   "consoleErrors": [],
+   "programs": 148,
+   "drawCalls": 52,
+   "triangles": 1909328,
+   "textureMiB": 53.3,
+   "geometryMiB": 404.6,
+   "firstInteractiveBytes": 19920980,
+   "loadSecondsSwiftshaderOnly": 153,
+   "shadowUpdate": {
+    "shadow": {
+     "enabled": true,
+     "castShadow": true,
+     "mapSize": 512,
+     "mapExists": true,
+     "normalBias": 0.14946181806188125,
+     "camera": {
+      "left": -19.1311127119208,
+      "right": 19.1311127119208,
+      "near": 3.8262225423841603,
+      "far": 84.17689593245153
+     },
+     "sunPosition": [
+      -6.2,
+      46.9,
+      8.6
+     ],
+     "target": [
+      0.4,
+      7,
+      -2.9
+     ]
+    },
+    "frameWithShadowUpdate": {
+     "calls": 99,
+     "triangles": 3810674
+    },
+    "steadyFrame": {
+     "calls": 52,
+     "triangles": 1909328
+    }
+   }
+  },
+  {
+   "label": "verify-mobile-noshadow-C06-floor",
+   "quality": "mobile-high",
+   "camera": "C06",
+   "features": "cinemaStill:0,mobileSunShadow:0",
+   "consoleErrors": [],
+   "programs": 146,
+   "drawCalls": 52,
+   "triangles": 1909328,
+   "textureMiB": 53.3,
+   "geometryMiB": 404.6,
+   "firstInteractiveBytes": 19920980,
+   "loadSecondsSwiftshaderOnly": 139,
+   "shadowUpdate": {
+    "shadow": {
+     "enabled": false,
+     "castShadow": false,
+     "mapSize": 1024,
+     "mapExists": false,
+     "normalBias": 0.018,
+     "camera": {
+      "left": -24,
+      "right": 24,
+      "near": 0.5,
+      "far": 700
+     },
+     "sunPosition": [
+      -17.3,
+      108.4,
+      25.1
+     ],
+     "target": [
+      0,
+      4,
+      -5
+     ]
+    },
+    "frameWithShadowUpdate": {
+     "calls": 52,
+     "triangles": 1909328
+    },
+    "steadyFrame": {
+     "calls": 52,
+     "triangles": 1909328
+    }
+   }
+  }
+ ]
+}
