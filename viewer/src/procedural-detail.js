@@ -36,7 +36,11 @@ export const DETAIL_TABLE = [
   {match: /^(roof\.004|Neighbor 20 green tiles)$/i, value: new Vector4(0.08, 0.08, 1 / 2, 0.4)},
   {match: /^roof-7$/i, value: new Vector4(0.06, 0.08, 1, 0.5)},
   {match: /^white_trim( \(\d+\))?$/i, value: new Vector4(0.04, 0.10, 1, 0.3)},
-  {match: /^(chrome|metal) \(\d+\)$/i, value: new Vector4(0.02, 0.14, 1 / 0.5, 0.4)},
+  // IS-EMRI.md BÖLÜM 2 row 12 lists bare `metal` alongside the numbered
+  // garden cells (FAZ-6-DUZ-RENK.md omitted it; EK Bölüm 0: the file wins).
+  // Roughness variation is what reads on metal, not albedo — İŞ A's scalar
+  // grade set the base, this drifts around it.
+  {match: /^(chrome|metal)( \(\d+\))?$/i, value: new Vector4(0.02, 0.14, 1 / 0.5, 0.4)},
   {match: /boundary limestone top/i, value: new Vector4(0.07, 0.09, 1 / 2, 0.4)},
   {match: /^Retaining wall rough limestone/i, value: new Vector4(0.09, 0.10, 1 / 1.5, 0.5)},
   {match: /^(pool_tile|STONE-TILE)$/i, value: new Vector4(0.04, 0.06, 1, 0.3)},
@@ -81,14 +85,13 @@ export function detailTableFor(batch, {interior = false} = {}) {
 //   bilinear mix          : 3 mix x 3                                     = 9
 //   drift apply (albedo mul+clamp, roughness add+clamp)                   = 9
 //   ---- single octave (mobile form) total                                = 69
-//        (~17 slots vec4-issue; brief tavanı mobil 14 - AŞIYOR, kayıt:
-//        mobil zaten bayrak KAPALI ship ediliyor, H1 yeşillemeden açılmaz;
-//        açılacağı gün ilk düşürülecek kalem 4 hash -> 1 hash'li değer
-//        gürültüsüdür.)
+//        FAZ-6-EK.md Bölüm 1 tavanı: mobil ≤ 80 skaler op — ALTINDA.
+//        (Brief'in ilk "≤ +14" tavanı EK'te düzeltildi; 1-hash'e düşürme
+//        planı rafta: optimizasyon YAPILMAYACAK, görsel kaliteyi düşürür.)
 //   second octave adds    : mul2 + lattice 9 + hashes 24 + mix 9 + blend 3 = 47
 //   ---- two octaves (desktop) total                                      = 116
-//        enjekte edilen blok; masaüstü tavanı 38 slot ~ 152 skaler op'a
-//        denk gelir - ALTINDA.
+//        EK tavanı masaüstü ≤ 160 skaler op — ALTINDA. Sayım yöntemi
+//        korunur: emitted bloktan SAY, tahmin etme.
 export const NOISE_GLSL = `
 float angoraHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float angoraNoise(vec2 p){

@@ -12,10 +12,11 @@ import {prepareBatchedMaterial} from '../src/batched-material.js';
 
 // Member names lifted from the shipped manifests (batch inventory).
 // BÖLÜM 2.3'ün hücre listesi, teslimin kendi üye adlarıyla. Clay tile /
-// stone_tile gerçek doku taşıyor (İŞ A yolu), bare 'metal' İŞ A'nın skaler
-// grade'inde - spec tablosunda yoklar ve sıfır kalmaları da testte.
+// stone_tile gerçek doku taşıyor (İŞ A yolu) ve tabloda yoklar; bare
+// 'metal' İŞ A'nın skaler grade'i ÜSTÜNE IS-EMRI satır 12'den roughness
+// drift'i de alır (EK Bölüm 0: dosyadaki kazanır).
 const EXTERIOR_MEMBERS = ['STRUCCO', 'ceiling.004', 'neighbor_wall',
-  'Retaining wall rough limestone.001', 'metal (5)', 'chrome (5)',
+  'Retaining wall rough limestone.001', 'metal', 'metal (5)', 'chrome (5)',
   'foliage', 'foliage_light', 'roof.004', 'Neighbor 20 green tiles', 'roof-7',
   'white_trim (5)', 'R31 | R39 boundary limestone top',
   'pool_tile', 'STONE-TILE', 'Garden | Dark stained canopy timber', 'canopy.001',
@@ -31,9 +32,9 @@ test('kabul 6.2: >=20 exterior and >=6 interior cells are non-zero, counted', ()
   assert.ok(interior.length >= 6, `interior ${interior.length} < 6: ${interior.join(', ')}`);
 });
 
-test('glazing, water, textured heroes and bare iron stay at vec4(0)', () => {
+test('glazing, water and textured heroes stay at vec4(0)', () => {
   for (const name of ['Context glazing', 'water', 'glass', 'FINISH | Silver mirror',
-    'R31 | R33 shower frosted glass', 'Clay tile', 'stone_tile', 'metal', 'wood_dark.002']) {
+    'R31 | R33 shower frosted glass', 'Clay tile', 'stone_tile', 'wood_dark.002']) {
     const v = detailFor(name);
     assert.deepEqual([v.x, v.y, v.z, v.w], [0, 0, 0, 0], name);
   }

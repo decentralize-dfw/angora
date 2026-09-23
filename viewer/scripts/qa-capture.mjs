@@ -1,15 +1,17 @@
 // FAZ 0 · Task 0.4 — deterministic capture into build/qa/<tag>/.
 //
 //   node scripts/qa-capture.mjs --tag <name> [--gate] [--base http://...]
-//     [--profiles desktop,mobile] [--cameras C01,C03] [--measure 5]
+//     [--tiers desktop-balanced,mobile-high] [--cameras C01,C03] [--measure 5]
 //
-// --gate is THE regression gate for every FAZ 1 merge: C03 (facade), the
-// FOUR storey cuts C05-C08 (a wall lost to back-face culling shows ONLY
-// when a cut looks at the shell's inner skin - C07 alone missed exactly
-// that once), C09 (plan), C10 (walk) at dpr 1, plus C03 at dpr 2 - the one
-// frame where the pixel budget actually bites (legacy desktop ratio
-// ≈ 1.86). Sixteen frames across the two delivery profiles; the full
-// 12-camera archive is opt-in, not routine.
+// --gate is THE regression gate (FAZ 6 EK Bölüm 3 form): ALL TWELVE cameras
+// on ALL FOUR quality tiers, forced through the product's own ?quality=
+// override. The audit (DENETIM.md A1/A4) found every earlier capture had
+// silently run desktop-balanced — the "mobile" folders were just a phone
+// viewport on the desktop tier — and that C04/C11/C12 never passed a gate.
+// So each run now records under build/qa/<tag>/<tier>/ and FAILS if the
+// page's own report.tier disagrees with the forced tier. A gate without a
+// mobile-high folder is invalid. C03 additionally captures at dpr 2 on
+// desktop-balanced only (the one frame where the pixel budget bites).
 //
 // Without --base it serves the REPOSITORY ROOT (the committed pages build)
 // through serve-pages.mjs - run `npm run build:pages` first when the source
@@ -39,16 +41,31 @@ const option = (name, fallback = null) => {
 const repoRoot = fileURLToPath(new URL('../../', import.meta.url));
 const commit = execSync('git rev-parse --short HEAD', {cwd: repoRoot}).toString().trim();
 const tag = option('tag', 'capture-' + commit);
-const profiles = option('profiles', 'desktop,mobile').split(',');
 const gate = args.includes('--gate');
+// Tier -> viewport family. SwiftShader cannot measure FPS on any of them,
+// but forcing ?quality= decides WHICH CODE RUNS — the mobile render path
+// (no shadow, no postfx) had never been photographed before this (A1).
+const TIER_PROFILE = {
+  'desktop-balanced': 'desktop', 'desktop-high': 'desktop',
+  'mobile-high': 'mobile', 'mobile-low': 'mobile',
+};
+const tiers = (option('tiers') ?? (gate
+  ? 'desktop-balanced,desktop-high,mobile-high,mobile-low'
+  : 'desktop-balanced')).split(',');
+for (const tier of tiers) if (!TIER_PROFILE[tier]) {
+  console.error('Unknown tier ' + tier); process.exit(1);
+}
 // FAZ 6: a gate may exercise a default-off flag (e.g. runtimeVertexAO)
 // without shipping it on - the string is appended verbatim to every page
 // URL as &features=..., which resolveFeatures already understands.
 const featuresAt = args.indexOf('--features');
 const featuresParam = featuresAt >= 0 ? args[featuresAt + 1] : null;
-const only = gate ? new Set(['C03', 'C05', 'C06', 'C07', 'C08', 'C09', 'C10'])
-  : option('cameras') ? new Set(option('cameras').split(',')) : null;
-const scalesFor = camera => (gate && camera.id === 'C03') ? [1, 2] : [1];
+// A gate runs every camera — C04/C11/C12 had never been gated (A4) and the
+// two interiors are exactly where the complaint lives. --cameras narrows
+// only for debugging runs, never for a verdict.
+const only = option('cameras') ? new Set(option('cameras').split(',')) : null;
+const scalesFor = (camera, tier) =>
+  (gate && camera.id === 'C03' && tier === 'desktop-balanced') ? [1, 2] : [1];
 const measureSeconds = Number(option('measure', '0'));
 const outDir = path.join(repoRoot, 'build/qa', tag);
 
@@ -63,24 +80,30 @@ if (!base) {
   console.log('Serving', serveRoot, 'at', base);
 }
 
-const summary = {tag, commit, base, gate, capturedAt: new Date().toISOString(),
+const summary = {tag, commit, base, gate, tiers, capturedAt: new Date().toISOString(),
   softwareRaster: true, emulated: true, runs: []};
 
-for (const profile of profiles) {
-  await mkdir(path.join(outDir, profile), {recursive: true});
+for (const tier of tiers) {
+  const profile = TIER_PROFILE[tier];
+  await mkdir(path.join(outDir, tier), {recursive: true});
   const browser = await chromium.launch({
     executablePath: process.env.PLAYWRIGHT_BROWSERS_PATH ? '/opt/pw-browsers/chromium' : undefined,
     args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
   });
   for (const camera of CAMERAS) {
     if (only && !only.has(camera.id)) continue;
-    for (const scale of scalesFor(camera)) {
+    for (const scale of scalesFor(camera, tier)) {
       const suffix = scale === 1 ? '' : '@2x';
       const page = await browser.newPage({viewport: VIEWPORTS[profile], deviceScaleFactor: scale});
       const errors = [];
-      page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+      const infos = [];
+      page.on('console', m => {
+        if (m.type() === 'error') errors.push(m.text());
+        else if (m.type() === 'info') infos.push(m.text());
+      });
       page.on('pageerror', e => errors.push(String(e)));
-      const url = base + search(camera, profile) + (featuresParam ? '&features=' + featuresParam : '');
+      const url = base + search(camera, profile, {quality: tier}) +
+        (featuresParam ? '&features=' + featuresParam : '');
       const started = Date.now();
       try {
         await page.goto(url, {waitUntil: 'domcontentloaded'});
@@ -97,6 +120,11 @@ for (const profile of profiles) {
         await page.evaluate(() => window.__angoraQA.snapshot());
         await page.waitForTimeout(200);
         const report = JSON.parse(await page.evaluate(() => document.querySelector('#viewport').dataset.qaReport));
+        // The one check whose absence let five phases pass on the wrong
+        // tier: the page must have actually RUN the tier we asked for.
+        if (report.tier !== tier) {
+          throw new Error(`tier mismatch: forced ${tier}, page ran ${report.tier}`);
+        }
         report.commit = commit;
         report.softwareRaster = true;   // frame numbers are NOT device numbers
         report.emulated = true;
@@ -104,18 +132,21 @@ for (const profile of profiles) {
         report.deviceScaleFactor = scale;
         report.captureMs = Date.now() - started;
         report.consoleErrors = errors;
-        await page.screenshot({path: path.join(outDir, profile, camera.id + suffix + '.png'), timeout: 120_000});
-        await writeFile(path.join(outDir, profile, camera.id + suffix + '.json'), JSON.stringify(report, null, 2));
-        summary.runs.push({profile, camera: camera.id, scale, ok: true,
+        // console.info lines are coverage EVIDENCE (e.g. "Exterior grade
+        // revived on N materials", vertex-AO skip logs) — counted, not claimed.
+        report.consoleInfo = infos;
+        await page.screenshot({path: path.join(outDir, tier, camera.id + suffix + '.png'), timeout: 120_000});
+        await writeFile(path.join(outDir, tier, camera.id + suffix + '.json'), JSON.stringify(report, null, 2));
+        summary.runs.push({tier, profile, camera: camera.id, scale, ok: true,
           drawCalls: report.renderer.drawCalls, triangles: report.renderer.triangles,
           pixelRatio: report.renderer.pixelRatio, drawingBuffer: report.renderer.drawingBuffer,
           textureMiB: report.memory.estimatedTextureMiB, geometryMiB: report.memory.estimatedGeometryMiB,
           fps: report.frame?.fps ?? null, errors: errors.length});
-        console.log(`${profile}/${camera.id}${suffix}  calls=${report.renderer.drawCalls} tris=${report.renderer.triangles} ratio=${report.renderer.pixelRatio} buffer=${report.renderer.drawingBuffer.join('x')}${errors.length ? '  ⚠ ' + errors.length + ' console errors' : ''}`);
+        console.log(`${tier}/${camera.id}${suffix}  calls=${report.renderer.drawCalls} tris=${report.renderer.triangles} ratio=${report.renderer.pixelRatio} buffer=${report.renderer.drawingBuffer.join('x')}${errors.length ? '  ⚠ ' + errors.length + ' console errors' : ''}`);
       } catch (error) {
-        summary.runs.push({profile, camera: camera.id, scale, ok: false, error: String(error?.message ?? error), errors});
-        console.log(`${profile}/${camera.id}${suffix}  FAILED: ${error.message}`);
-        await page.screenshot({path: path.join(outDir, profile, camera.id + suffix + '-failed.png')}).catch(() => {});
+        summary.runs.push({tier, profile, camera: camera.id, scale, ok: false, error: String(error?.message ?? error), errors});
+        console.log(`${tier}/${camera.id}${suffix}  FAILED: ${error.message}`);
+        await page.screenshot({path: path.join(outDir, tier, camera.id + suffix + '-failed.png')}).catch(() => {});
       }
       await page.close();
     }

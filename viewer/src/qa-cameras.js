@@ -29,9 +29,16 @@ export const VIEWPORTS = {
 
 // Orbit values C01/C02/C05-C08 follow the app's own framing (span/target
 // read back live and frozen); their fov moved 16 -> per-view rig values
-// when Task 1.5 landed - the FAZ 0-era fov-16 specs live in git history
-// (tag: pre-1.5) for regression pairs. C03/C04 are QA-authored villa hero
-// framings, re-lensed at 30° for the same reason; C09 is f1 straight down.
+// when Task 1.5 landed - the FAZ 0-era fov-16 specs live at commit 496c674
+// (no tag exists; an earlier note here claimed a `pre-1.5` tag that was
+// never created). C03/C04 are QA-authored villa hero framings, re-lensed at
+// 30° for the same reason; C09 is f1 straight down.
+//
+// FAZ 6 EK 3.3 — the 1.5 re-lens moved the camera itself (C03 44.0 m,
+// C04 50.7 m), so every A/B composite that straddles it mixes framing with
+// quality. From here on a lens/framing change is NOT quality work: shoot
+// one frame with the OLD lens (the quality pair) and a separate frame with
+// the new lens (the composition pair), in SEPARATE composites.
 export const CAMERAS = [
   {id: 'C01', label: 'region', view: 'region',
    orbit: {target: [16.95, 5.76, 9.92], polar: 0.58, azimuth: 0, span: 407.1, zoom: 1, fov: 20}},
