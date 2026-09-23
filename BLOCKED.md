@@ -113,6 +113,24 @@ araçları H8 çözülünce hazır.
 3.3, 3.4g bu dal üzerinde yürütülüyor (PROGRESS.md sırası).
 **Ayrıca:** 4.3 hosting H5'te BLOCKED olarak kalır (Pages Cache-Control).
 
+## H10 — Task 2.4 terrain apply: görünürlük bake'i yeniden pişirilmeli
+**Durum:** BLOCKED — `tools/batch-delivery/bake-ground-light.py` Blender
+(bpy) ister; bu ortamda yok (H2 kök nedeni).
+**Hazır olan:** `tools/batch-delivery/simplify-terrain.mjs` kot-tanıklı
+sadeleştirici: desktop 311 432→85 782 üçgen, mobil 169 872→58 313,
+590 örnekte worst 1,9 cm (≤5 cm sınırı, 0 ihlal), lockBorder ile dikişler
+kilitli. `--apply` bir komut; scratch kanıtları build/qa/terrain-trial*.
+**Neden geri alındı:** manifest'teki `ground_light.sourceGeometryHashes`
+sözleşmesi bake'in kaynak GLB'ye bağlılığını korur; context-ground hash'i
+değişince testler doğru olarak kırmızıya düştü. 1,9 cm sapma 0,42 m/texel
+bake'in iki kademe altında — bake fiilen geçerli — ama hash'i rebake'siz
+güncellemek repo sözleşmesini kanıtsız bükmek olurdu.
+**İnsandan istenen:** Blender'lı ortamda sırasıyla:
+1. `node tools/batch-delivery/simplify-terrain.mjs --apply`
+2. `blender --background --factory-startup --python tools/batch-delivery/bake-ground-light.py`
+   (ve `--interior` varyantı) + `node tools/batch-delivery/prepare-visibility.mjs`
+3. `npm test` (260) + 16 kare gate.
+
 ## H7 — Gerçek telefonda gece modu ölçümü
 **Durum:** BLOCKED — fiziksel cihaz gerekli (H1 ile aynı yol).
 **Bloke ettiği:** Task 3.4g'nin kabulü. `qa-mobile.html` protokolüne gece
