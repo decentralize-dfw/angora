@@ -174,3 +174,27 @@ test('İŞ 3: glazing panes cluster into per-opening portals; skylights and sliv
   assert.ok(sunOn > sunOff && sunOff > 0, 'sun-facing window carries the sun, the rest carry sky');
   assert.equal(night, 0, 'no portal light at night');
 });
+
+test('İŞ 1: SSR sits between AO and SMAA, scopes to floors, spares the pool', async () => {
+  const {SsrPass, SsrShader} = await import('../src/ssr-pass.js');
+  const {configurePostprocessing} = await import('../src/postprocessing.js');
+  const frag = SsrShader.fragmentShader;
+  assert.ok(frag.includes('NORMAL_GATE') && frag.includes('worldNormal.y < NORMAL_GATE'),
+    'up-facing gate: floors/terrace only');
+  assert.ok(frag.includes('uPoolRect') && frag.indexOf('uPoolRect') < frag.indexOf('rayDir'),
+    'pool rect rejected before any marching');
+  assert.ok(frag.includes('uEnabled < 0.5'), 'AO-off frames pass through untouched');
+  const ao = {enabled: false};
+  const pass = new SsrPass(ao, new THREE.PerspectiveCamera());
+  pass.setPoolRect(new THREE.Vector4(-3, -9, 4, -1));
+  assert.deepEqual(pass.uniforms.uPoolRect.value.toArray(), [-3, -9, 4, -1]);
+  const order = [];
+  const composer = {addPass: p => order.push(p)};
+  const [beauty, aoPass, smaa, bloom, output, dither] = ['b', 'ao', 's', 'bl', 'o', 'd'];
+  configurePostprocessing(composer, {beauty, ao: aoPass, ssr: pass, smaa, bloom, output, dither});
+  assert.equal(order.indexOf(pass), order.indexOf(aoPass) + 1, 'SSR right after AO');
+  assert.ok(order.indexOf(pass) < order.indexOf(smaa), 'and before AA');
+  const without = [];
+  configurePostprocessing({addPass: p => without.push(p)}, {beauty, ao: aoPass, smaa, bloom, output, dither});
+  assert.equal(without.length, 6, 'no ssr = the FAZ 6 chain, pass for pass');
+});

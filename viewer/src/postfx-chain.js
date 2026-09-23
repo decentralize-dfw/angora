@@ -4,6 +4,7 @@ import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
 import {SMAAPass} from 'three/addons/postprocessing/SMAAPass.js';
 import {ShaderPass} from 'three/addons/postprocessing/ShaderPass.js';
 import {SectionGTAOPass} from './section-gtao.js';
+import {SsrPass} from './ssr-pass.js';
 import {LinearBloomPass} from './linear-bloom.js';
 import {GradeShader} from './grade-pass.js';
 import {DisplayDitherShader} from './display-dither.js';
@@ -26,7 +27,12 @@ export function buildPostfxChain({renderer, scene, camera, clip, quality, postfx
   const grade = new ShaderPass(GradeShader);
   ao.enabled = postfxV2 ? Boolean(quality.gtao) : referenceProfile.aoEnabled;
   bloom.enabled = postfxV2 ? Boolean(quality.bloom) : true;
-  configurePostprocessing(composer, {beauty, ao, smaa, bloom, output: grade,
+  // FAZ 7 İŞ 1: SSR reuses the GTAO pass's depth+normal buffers; the pass
+  // exists only when the quality row resolved ssr (desktop, flag'lı) and
+  // self-disables per frame when AO is off, so the flag-off chain is the
+  // FAZ 6 chain object for object.
+  const ssr = quality.ssr ? new SsrPass(ao, camera) : null;
+  configurePostprocessing(composer, {beauty, ao, ssr, smaa, bloom, output: grade,
     dither: new ShaderPass(DisplayDitherShader)});
-  return {composer, beauty, ao, bloom, grade};
+  return {composer, beauty, ao, ssr, bloom, grade};
 }

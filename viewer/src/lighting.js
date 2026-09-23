@@ -130,7 +130,7 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
   // conversion itself when it draws to the canvas, so the image keeps its
   // exposure and its colour; it loses the crevice shading and the glare.
   const compactOutput=q.compactOutput?new CompactOutput():null;
-  let composer=null,beauty=null,ao=null,bloomPass=null,gradePass=null;
+  let composer=null,beauty=null,ao=null,bloomPass=null,gradePass=null,ssrPass=null,ssrPoolRect=null;
   // Task 4.2: the composer and everything behind it (GTAO, SMAA, bloom,
   // grade, dither) load through a dynamic seam. A phone's quality row never
   // asks for postProcessing, so a phone never downloads a byte of it; on
@@ -142,6 +142,8 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     ?import('./postfx-chain.js').then(({buildPostfxChain})=>{
       const chain=buildPostfxChain({renderer,scene,camera,clip,quality:q,postfxV2:FEATURES.postfxV2});
       ({composer,beauty,ao}=chain);bloomPass=chain.bloom;gradePass=chain.grade;
+      // İŞ 1: the pool may have registered its rect before the chain landed
+      ssrPass=chain.ssr??null;if(ssrPass&&ssrPoolRect)ssrPass.setPoolRect(ssrPoolRect);
       if(postfxRatio)composer.setPixelRatio(postfxRatio);
       if(postfxSize)composer.setSize(postfxSize[0],postfxSize[1]);
       return chain;
@@ -473,6 +475,8 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
           // was claimed without a number. Expected: 1, via garden-glass-4.
           if(bounds&&applyWaterSurface(material,{bounds,phase:waterPhase})){
             material.userData.waterApplied=true;
+            // İŞ 1: SSR excludes the pool rect - the water reflects itself
+            ssrPoolRect=bounds;ssrPass?.setPoolRect(bounds);
             console.info(`Pool water response applied on ${++waterApplied} material(s): ${material.name}`);
           }
         }
@@ -564,7 +568,7 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
         // Warm the actual normal/AO/postprocessing passes too. A direct scene
         // render alone leaves their first floor draw inside the animation.
         const previous=composer.renderToScreen;composer.renderToScreen=false;
-        try{beauty.camera=currentCamera;ao.setCamera(currentCamera);composer.render();}
+        try{beauty.camera=currentCamera;ao.setCamera(currentCamera);ssrPass?.setCamera(currentCamera);composer.render();}
         finally{composer.renderToScreen=previous;}
         return;
       }
@@ -575,7 +579,7 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     render(currentCamera){
       if(compactOutput&&!renderer.xr.isPresenting){compactOutput.render(renderer,scene,currentCamera);return;}
       if(!composer||renderer.xr.isPresenting){renderer.render(scene,currentCamera);return;}
-      beauty.camera=currentCamera;ao.setCamera(currentCamera);composer.render();
+      beauty.camera=currentCamera;ao.setCamera(currentCamera);ssrPass?.setCamera(currentCamera);composer.render();
     },
     // FAZ 5: one accumulation sample. main.js owns the idle scheduling and
     // the refine instance (dynamically imported); this owns what only the
@@ -594,7 +598,7 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
       const dofShift=refine.dofShift?.(currentCamera)??null;
       const previous=composer.renderToScreen;composer.renderToScreen=false;
       try{
-        beauty.camera=currentCamera;ao.setCamera(currentCamera);composer.render();
+        beauty.camera=currentCamera;ao.setCamera(currentCamera);ssrPass?.setCamera(currentCamera);composer.render();
         return refine.accumulate(composer.readBuffer);
       }finally{
         composer.renderToScreen=previous;
