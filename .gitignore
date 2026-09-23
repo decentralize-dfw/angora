@@ -23,3 +23,6 @@ build/glb/angora21-villa-review.glb
 build/glb/angora21-neighborhood-review.glb
 build/glb/context-near.glb
 build/glb/villa-garden.glb
+
+# Blender çalışma dosyası yerelde üretilir (tools/batch-delivery/make-blender-glb.mjs)
+build/blender/*.glb
