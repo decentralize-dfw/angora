@@ -1,0 +1,419 @@
+{
+  "tag": "faz1-final",
+  "commit": "297a68b",
+  "base": "http://127.0.0.1:40165/",
+  "gate": false,
+  "capturedAt": "2026-09-22T23:23:16.701Z",
+  "softwareRaster": true,
+  "emulated": true,
+  "runs": [
+    {
+      "profile": "desktop",
+      "camera": "C01",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 33,
+      "triangles": 2695940,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        1600,
+        900
+      ],
+      "textureMiB": 268.7,
+      "geometryMiB": 226.1,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "desktop",
+      "camera": "C02",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 33,
+      "triangles": 2695940,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        1600,
+        900
+      ],
+      "textureMiB": 268.7,
+      "geometryMiB": 226.1,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "desktop",
+      "camera": "C03",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 30,
+      "triangles": 2535120,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        1600,
+        900
+      ],
+      "textureMiB": 268.7,
+      "geometryMiB": 226.1,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "desktop",
+      "camera": "C04",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 32,
+      "triangles": 2665029,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        1600,
+        900
+      ],
+      "textureMiB": 268.7,
+      "geometryMiB": 226.1,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "desktop",
+      "camera": "C05",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 98,
+      "triangles": 5960472,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        1600,
+        900
+      ],
+      "textureMiB": 269.4,
+      "geometryMiB": 226.2,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "desktop",
+      "camera": "C06",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 96,
+      "triangles": 5962944,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        1600,
+        900
+      ],
+      "textureMiB": 269.4,
+      "geometryMiB": 226.2,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "desktop",
+      "camera": "C07",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 96,
+      "triangles": 5965516,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        1600,
+        900
+      ],
+      "textureMiB": 269.4,
+      "geometryMiB": 226.2,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "desktop",
+      "camera": "C08",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 94,
+      "triangles": 5963846,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        1600,
+        900
+      ],
+      "textureMiB": 269.4,
+      "geometryMiB": 226.2,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "desktop",
+      "camera": "C09",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 96,
+      "triangles": 5962944,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        1600,
+        900
+      ],
+      "textureMiB": 269.4,
+      "geometryMiB": 226.2,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "desktop",
+      "camera": "C10",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 91,
+      "triangles": 5772330,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        1600,
+        900
+      ],
+      "textureMiB": 269.4,
+      "geometryMiB": 226.2,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "desktop",
+      "camera": "C11",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 84,
+      "triangles": 5952298,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        1600,
+        900
+      ],
+      "textureMiB": 269.4,
+      "geometryMiB": 226.2,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "desktop",
+      "camera": "C12",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 83,
+      "triangles": 5576432,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        1600,
+        900
+      ],
+      "textureMiB": 269.4,
+      "geometryMiB": 226.2,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "mobile",
+      "camera": "C01",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 33,
+      "triangles": 2144737,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        393,
+        852
+      ],
+      "textureMiB": 132.7,
+      "geometryMiB": 183.6,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "mobile",
+      "camera": "C02",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 30,
+      "triangles": 2085463,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        393,
+        852
+      ],
+      "textureMiB": 132.7,
+      "geometryMiB": 183.6,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "mobile",
+      "camera": "C03",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 30,
+      "triangles": 2085463,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        393,
+        852
+      ],
+      "textureMiB": 132.7,
+      "geometryMiB": 183.6,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "mobile",
+      "camera": "C04",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 31,
+      "triangles": 2120865,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        393,
+        852
+      ],
+      "textureMiB": 132.7,
+      "geometryMiB": 183.6,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "mobile",
+      "camera": "C05",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 96,
+      "triangles": 5059990,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        393,
+        852
+      ],
+      "textureMiB": 133,
+      "geometryMiB": 183.7,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "mobile",
+      "camera": "C06",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 95,
+      "triangles": 5063618,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        393,
+        852
+      ],
+      "textureMiB": 133,
+      "geometryMiB": 183.8,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "mobile",
+      "camera": "C07",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 95,
+      "triangles": 5066190,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        393,
+        852
+      ],
+      "textureMiB": 133,
+      "geometryMiB": 183.8,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "mobile",
+      "camera": "C08",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 93,
+      "triangles": 5064520,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        393,
+        852
+      ],
+      "textureMiB": 133,
+      "geometryMiB": 183.8,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "mobile",
+      "camera": "C09",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 96,
+      "triangles": 5063630,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        393,
+        852
+      ],
+      "textureMiB": 133,
+      "geometryMiB": 183.8,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "mobile",
+      "camera": "C10",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 89,
+      "triangles": 4890864,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        393,
+        852
+      ],
+      "textureMiB": 133,
+      "geometryMiB": 183.8,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "mobile",
+      "camera": "C11",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 84,
+      "triangles": 5052984,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        393,
+        852
+      ],
+      "textureMiB": 133,
+      "geometryMiB": 183.8,
+      "fps": null,
+      "errors": 0
+    },
+    {
+      "profile": "mobile",
+      "camera": "C12",
+      "scale": 1,
+      "ok": true,
+      "drawCalls": 81,
+      "triangles": 4886896,
+      "pixelRatio": 1,
+      "drawingBuffer": [
+        393,
+        852
+      ],
+      "textureMiB": 133,
+      "geometryMiB": 183.7,
+      "fps": null,
+      "errors": 0
+    }
+  ]
+}
