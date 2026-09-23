@@ -2,23 +2,36 @@
 
 ## 1. İKİ BUG — ürün sahibi tarayıcıda bisect etti, ikisi de KESİN
 
-### Bug A — SSR ekran kartını boğuyor
+### Bug A — `cinemaStill` siyah basıyor ⭐ ASIL SUÇLU
 
-Tek değişkenli test: aynı URL'ye sadece `screenSpaceReflection:1` eklenince
-ekran siyahlaşıp gidip geliyor. Çıkarınca düzeliyor. **Suçlu kesin.**
+Ürün sahibi tarayıcıda bisect etti. `cinemaStill:0,cinemaDof:0` →
+**hiç siyahlık yok.** SSR, `gtaoFullRes`, `softShadowsV2` tek tek
+denendi, hepsinde siyah vardı; hepsinde `cinemaStill` de açıktı.
+Kapatılınca hepsi temizlendi.
 
-Sebep `ssr-pass.js:49`: piksel başına **28 ray-march adımı**, `MAX_DISTANCE 32`,
-tam çözünürlük. 1600×900'de kare başına ~40 milyon doku okuması.
+Semptom: döndürürken görüntü var, bırakınca siyah, dokununca geri geliyor.
+Bu performans değil — **boşta kalma davranışı.**
 
-**Kesme, ucuzlat.** Dört kol var, çarpımları 10–20 kat:
-- Yarı (hatta çeyrek) çözünürlüklü SSR tamponu → 4–16 kat
-- Adım 28 → **12**, isabet noktasında ikili arama ile rafine et (adım başına
-  kalite artar, toplam adım düşer)
-- `MAX_DISTANCE` 32 m → **10–12 m** (teras ve iç zemin için fazlasıyla yeter)
-- Erken çıkış: `roughness > 0.4` olan fragment'te hiç yürüme — sahnenin
-  çoğu zaten mat, yansıma görünmüyor
+Mekanizma: 400 ms sükunet sonrası 24 Halton örneği biriktiriliyor.
+Birikim **sıfırdan (siyahtan) başlıyor** ve her girdide yeniden başlıyor.
+Pahalı FAZ 7 geçişleriyle her örnek uzun sürdüğü için kullanıcı yarı-birikmiş
+(karanlık) tamponu saniyelerce görüyor.
 
-Hepsi ayarlanabilir olsun; kapat/aç değil **kademeli**.
+**Not:** Denetim bunu öngörmüştü — `desktop-high` tier'ı hiçbir gate'te
+render edilmedi, yani `cinemaStill` bu projede **hiç görülmeden** ship
+edildi. Görülmemiş özellik bozuk çıktı.
+
+**Acil:** `cinemaStill` ve `cinemaDof` varsayılan KAPALI, build, push.
+
+**Kalıcı düzeltme:** Birikim siyahtan başlamayacak. İlerlemeli
+rafinasyonun kuralı: **çözülmüş kareden başla, sıfırdan değil.** Tek
+örneklik normal kare zaten hazır; birikim onun üstüne biner ve tamamlanana
+kadar görünür tamponu asla siyaha düşürmez. Ayrıca her girdide sıfırlamak
+yerine iptal edip mevcut kareyi bırak.
+
+**SSR yeniden denenecek:** SSR'ın "siyah" verdiği testlerde `cinemaStill`
+de açıktı. Asıl suçlu bulunduğuna göre SSR temiz çıkabilir — kesmeden önce
+`cinemaStill:0` ile tekrar ölç.
 
 ### Bug B — `progressiveContextV1` komşu binaları yok ediyor
 
