@@ -185,6 +185,38 @@ iş (özellikle İŞ E.2 yaprak normalleri) **kendi testini kodla birlikte
 yazar**. Kesitte yüzey kaybı birim testiyle yakalanabiliyorsa orada
 yakalanır. Task 1.4'te duvarları kaçıran şey buydu; capture'a bırakılmaz.
 
+## C0. TOKEN DİSİPLİNİ — anlatma, yap
+
+Tasarruf **konuşmamaktan** gelir, az iş yapmaktan değil. İşin kendisi
+kusursuz olacak; anlatımı kısalacak.
+
+**Yasak:**
+- Her adımdan sonra uzun durum raporu yazmak. Rapor yeri `PROGRESS.md`,
+  sohbet değil.
+- Bağlamda zaten olan dosyayı yeniden okumak.
+- Verilmiş kararı yeniden gerekçelendirmek. Brief'te yazan tartışılmaz.
+- Kod yerine analiz yazmak. Bir şey ölçülecekse script yaz, çalıştır,
+  **sayıyı** kaydet.
+- Dosya içeriğini transkripte dökmek. Gereken satırı `sed -n`/`grep` ile al.
+- Değişmemiş testi tekrar koşmak.
+- Cevabı brief'te olan soruyu sormak.
+- Plan anlatıp sonra aynı şeyi yapmak. Doğrudan yap.
+
+**Serbest, kısılmayacak:**
+- Ölçüm. Sayı üretmek token değil, iş.
+- Test yazmak ve koşmak.
+- `BLOCKED.md` teslimat paketleri (A8) — bunlar teslimat, laf değil.
+- Kod yorumu. Bir sonraki kişi için yazılan yorum israf değil.
+
+**Tur bitirme biçimi:** tek satır — ne bitti, sırada ne var. Örnek:
+`A2 bitti (poolWater applied=1, logda). Sırada A3.`
+Uzun özet yok. Kullanıcı sonda bakacak.
+
+**"Kusursuz" ne demek:** Bölüm D'nin her maddesi ya sayıyla ✅ ya
+H-numaralı BLOKE + paket. Kısa yazmak, eksik yapmanın mazereti değil.
+
+---
+
 ## C. ASLA
 
 - **Boşta tur bitirme.** A'daki sıradaki işe geç; kuyruk bitince İŞ D/F,
