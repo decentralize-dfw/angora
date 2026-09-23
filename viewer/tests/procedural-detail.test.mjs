@@ -11,13 +11,16 @@ import {prepareBatchedMaterial} from '../src/batched-material.js';
 // absent, not weighted away; exactly ONE new varying (world position).
 
 // Member names lifted from the shipped manifests (batch inventory).
-const EXTERIOR_MEMBERS = ['Clay tile', 'STRUCCO', 'stone_tile', 'ceiling.004',
-  'neighbor_wall', 'Retaining wall rough limestone.001', 'metal', 'metal (5)', 'chrome (5)',
+// BÖLÜM 2.3'ün hücre listesi, teslimin kendi üye adlarıyla. Clay tile /
+// stone_tile gerçek doku taşıyor (İŞ A yolu), bare 'metal' İŞ A'nın skaler
+// grade'inde - spec tablosunda yoklar ve sıfır kalmaları da testte.
+const EXTERIOR_MEMBERS = ['STRUCCO', 'ceiling.004', 'neighbor_wall',
+  'Retaining wall rough limestone.001', 'metal (5)', 'chrome (5)',
   'foliage', 'foliage_light', 'roof.004', 'Neighbor 20 green tiles', 'roof-7',
-  'white_trim (5)', 'R31 | R39 boundary limestone top', 'R31 | R39 surrounding retaining stone',
+  'white_trim (5)', 'R31 | R39 boundary limestone top',
   'pool_tile', 'STONE-TILE', 'Garden | Dark stained canopy timber', 'canopy.001',
   'R31 | R39 continuous grass ground', 'R31 | R37 fine asphalt aggregate',
-  'gravel', 'Entrance coursed limestone.001', 'wood_dark.002'];
+  'gravel', 'gravel [imported]', 'Entrance coursed limestone.001'];
 const INTERIOR_MEMBERS = ['INTERIOR', 'WOOD-FL', 'wood_floor.001', 'bath_tile',
   'Basement | Ochre wall tile 0', 'Basement | Ochre wall tile 3', 'terra_floor'];
 
@@ -28,9 +31,9 @@ test('kabul 6.2: >=20 exterior and >=6 interior cells are non-zero, counted', ()
   assert.ok(interior.length >= 6, `interior ${interior.length} < 6: ${interior.join(', ')}`);
 });
 
-test('glazing and water stay at vec4(0) - separate shader paths', () => {
+test('glazing, water, textured heroes and bare iron stay at vec4(0)', () => {
   for (const name of ['Context glazing', 'water', 'glass', 'FINISH | Silver mirror',
-    'R31 | R33 shower frosted glass']) {
+    'R31 | R33 shower frosted glass', 'Clay tile', 'stone_tile', 'metal', 'wood_dark.002']) {
     const v = detailFor(name);
     assert.deepEqual([v.x, v.y, v.z, v.w], [0, 0, 0, 0], name);
   }

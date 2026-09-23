@@ -167,20 +167,20 @@ const BATCHED_TABLE = [
   // The neighbours' plaster: same sand-float relief as the villa's stucco,
   // fainter - context is setting, not subject.
   {name: 'ceiling.004', set: {normalMap: 'stuccoNormal'}, repeat: [1, 1], normalScale: 0.3},
-  // FAZ 6 İŞ A - the rest of the reachable grid=1 heroes, from the SAME
-  // shipped texture set (no new bytes). Interior amplitudes stay at half
-  // the exterior read (BÖLÜM 4.2): light indoors is already soft.
-  {name: 'INTERIOR', set: {normalMap: 'stuccoNormal'}, repeat: [1, 1], normalScale: 0.25},
-  {name: 'neighbor_wall', set: {normalMap: 'stuccoNormal'}, repeat: [1, 1], normalScale: 0.3},
+  // FAZ 6 İŞ A (FAZ-6-DUZ-RENK.md BÖLÜM 1) - the five idle grid=1
+  // surfaces, from the SAME shipped texture set. No new bytes, no new
+  // mechanism; water is poolWaterV2's and stays untouched; STRUCCO /
+  // ceiling.004 keep normal-only (İŞ B's macro variation owns their
+  // albedo - two mechanisms stacked would blotch).
+  {name: 'neighbor_wall', set: {normalMap: 'stuccoNormal'}, repeat: [1, 1], normalScale: 0.35},
   {name: 'Retaining wall rough limestone.001', set: {normalMap: 'travertineNormal'},
-   repeat: [1 / 1.5, 1 / 1.5], normalScale: 0.6},
-  // The villa ironwork ships as flat placeholder grey; the audited iron
-  // grade from the classic TABLE, as scalars - no texture involved.
-  {name: 'metal', color: '#212326', roughness: 0.58, metalness: 0.22},
-  // WOOD-FL / wood_dark.002 / wood_floor.001 stay untouched here: the
-  // shipped set has no wood detail sheet, and stucco relief on timber
-  // would be a lie. Their variation arrives with İŞ B's procedural
-  // roughness instead.
+   repeat: [1 / 1.5, 1 / 1.5], normalScale: 0.8},
+  // The villa ironwork: cell range=0, dead flat. The dead TABLE's iron
+  // grade moves here as scalars; the 4x4 placeholder map is NULLED or it
+  // multiplies its own stub pixel into the colour.
+  {name: 'metal', color: '#212326', roughness: 0.58, metalness: 0.22, dropMap: true},
+  // Neighbour timber: not a texture problem, a sheen problem.
+  {name: 'wood_dark.002', roughness: 0.82},
 ];
 
 export function reviveBatchedGrade(models, sets, {anisotropy = 8} = {}) {
@@ -220,6 +220,7 @@ export function reviveBatchedGrade(models, sets, {anisotropy = 8} = {}) {
         if (entry.color) material.color?.set(entry.color);
         if (entry.roughness !== undefined) material.roughness = entry.roughness;
         if (entry.metalness !== undefined) material.metalness = entry.metalness;
+        if (entry.dropMap && material.map) {material.map.dispose(); material.map = null;}
         material.needsUpdate = true;
         applied++;
         return;

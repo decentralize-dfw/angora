@@ -28,7 +28,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   bakedAoRevival: true,        // Task 3.4d ACTIVE - source KTX2 AO bakes rebind on idle, desktop only
   atlasArrayV2: true,          // Task 3.3 ACTIVE (runtime half) - atlas cells as texture array layers
   gzipSceneJson: true,         // Task 2.1-b ACTIVE - scene JSONs fetched as .gz with plain fallback
-  proceduralDetailV1: true,    // FAZ 6 İŞ B ACTIVE - analytic per-cell drift; desktop tiers only until H1
+  proceduralDetailV1: false,   // FAZ 6 İŞ B - BÖLÜM 2.5: varsayılan false; gate ?features ile, yeşilse desktop açılır
   runtimeVertexAO: false,      // FAZ 6 İŞ C - contact AO; gate ?features ile koşar, masaüstü yeşilse açılır (H1: mobil)
   buildingsChunking: true,     // Task 2.2 ACTIVE (runtime half) - 48 m culling cells for the neighbour blocks
   plantVariation: true,        // Task 2.3 ACTIVE (runtime half) - per-plant hue/value drift via component seed
