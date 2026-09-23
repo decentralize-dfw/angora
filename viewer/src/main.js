@@ -1299,7 +1299,9 @@ async function loadNativeModel(manifest){
     // FAZ 6 İŞ B: analytic drift is a desktop spend until H1 measures a
     // phone; the flag stays honest (?features=proceduralDetailV1:0 = zero
     // trace) while the tier gate keeps every mobile tier on the old bytes.
-    proceduralDetail:{enabled:FEATURES.proceduralDetailV1&&quality.tier.startsWith('desktop'),octaves:2,interior:false},
+    // İŞ D is a switch, not new code: the interior rows of DETAIL_TABLE
+    // (half the exterior amplitudes) open behind their own flag and gate.
+    proceduralDetail:{enabled:FEATURES.proceduralDetailV1&&quality.tier.startsWith('desktop'),octaves:2,interior:Boolean(FEATURES.proceduralDetailInterior)},
     onProgress:(name,loaded,complete)=>{
       if(!sizes.has(name))return;
       const size=sizes.get(name);

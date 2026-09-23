@@ -103,3 +103,27 @@ test('viewIdFor maps the interface vocabulary onto the plan vocabulary', () => {
   assert.equal(viewIdFor('f2', {walking: true}), 'interior');
   assert.equal(viewIdFor('building'), 'villa');
 });
+
+// FAZ 6 İŞ F (EK Bölüm 2): exteriorGtao lifts the neighbourhood view's GTAO
+// narrowing — and ONLY that. Region keeps it off, mobile keeps everything
+// off, and the resolution scale stays the tier's own number.
+test('İŞ F: exteriorGtao opens GTAO on neighborhood, desktop tiers only', async () => {
+  const {effectiveQuality} = await import('../src/quality-profile.js');
+  const on = {postfxV2: true, exteriorGtao: true, hybridSunShadow: true};
+  const off = {postfxV2: true, hybridSunShadow: true};
+  for (const tier of ['desktop-balanced', 'desktop-high']) {
+    assert.equal(effectiveQuality(tier, 'neighborhood', {features: off}).gtao, false,
+      tier + ' flag off = today');
+    const q = effectiveQuality(tier, 'neighborhood', {features: on});
+    assert.equal(q.gtao, true, tier + ' flag on');
+    assert.equal(q.gtaoResolutionScale, resolveQuality(tier, 'villa').gtaoResolutionScale,
+      tier + ' resolution scale untouched');
+  }
+  assert.equal(effectiveQuality('desktop-high', 'region', {features: on}).gtao, false,
+    'region NEVER');
+  for (const tier of ['mobile-high', 'mobile-low']) {
+    const q = effectiveQuality(tier, 'neighborhood', {features: on});
+    assert.equal(q.gtao, false, tier + ' untouched');
+    assert.equal(q.postProcessing, false, tier + ' still no postfx');
+  }
+});

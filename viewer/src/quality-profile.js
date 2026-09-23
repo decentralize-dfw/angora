@@ -177,6 +177,18 @@ export function effectiveQuality(tier, view, {batched = true, features = {}} = {
     value.grade = value.postProcessing;
     value.dither = value.postProcessing;
   }
+  // FAZ 6 İŞ F (EK Bölüm 2): VIEW_OVERRIDES.neighborhood zeroes GTAO on the
+  // ONE view that shows the villa whole, so contact/corner darkening never
+  // ran on the exterior — on any device, ever (DENETIM C4: C01–C04 all
+  // gtao:false). The flag lifts that view narrowing on `neighborhood` only.
+  // region stays off (no win across a 400 m span, real cost) and mobile is
+  // untouched: its matrix postProcessing:false already forced gtao false
+  // above, which the value.postProcessing guard preserves.
+  // gtaoResolutionScale keeps the tier's own value.
+  if (features.exteriorGtao && features.postfxV2 && view === 'neighborhood' &&
+      value.postProcessing) {
+    value.gtao = true;
+  }
   value.compactOutput = !mobile && !value.postProcessing;
   if (!features.atlasAnisotropyFix) value.anisotropy = mobile ? 8 : 16;
   // Legacy drawing-buffer budget was one number per pointer class, capped at

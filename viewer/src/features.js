@@ -29,7 +29,9 @@ export const DEFAULT_FEATURES = Object.freeze({
   atlasArrayV2: true,          // T3.3 runtime - iki tier'da da canlı; 512/1024 hücre H6'da
   gzipSceneJson: true,         // T2.1-b - iki tier'da da canlı (.gz + düz dosya fallback)
   proceduralDetailV1: false,   // FAZ 6 İŞ B - BÖLÜM 2.5: varsayılan false; gate ?features ile, yeşilse desktop açılır
+  proceduralDetailInterior: false, // İŞ D - iç mekân uDetail satırları (yarı genlik); faz6-d gate'iyle, proceduralDetailV1 gerektirir
   runtimeVertexAO: false,      // İŞ C - gate ?features ile; masaüstü yeşilse açılır, iPhone 13 H1'e bağlı
+  exteriorGtao: false,         // İŞ F (EK Bölüm 2) - neighborhood görünümünde GTAO; region'da ASLA, mobilde etkisiz (postProcessing:false)
   plantNormalsV1: false,       // İŞ E.2 - yaprak normal düzeltmesi (eski eşleşme ÖLÜydü); faz6-e gate'iyle açılır
   buildingsChunking: true,     // T2.2 runtime - iki tier'da da canlı
   plantVariation: true,        // T2.3 runtime - iki tier'da da canlı
