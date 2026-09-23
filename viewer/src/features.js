@@ -40,7 +40,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   progressiveContextV1: true,  // A7/T2.1 - iki tier; context-buildings+plants boşta (ilk interaktif -13,6 MB desktop / -9,3 MB mobil, faz6-final'de ölçülür)
   ktx2Delivery: false,         // Faz 4.1
   contextLodV2: false,         // Faz 2
-  cinemaStill: true,           // FAZ 5 - YALNIZ desktop-high + postfx; telefonda ve walk'ta asla (cinemaDof açılınca balanced da katılır)
+  cinemaStill: false,         // KAPALI - boşta birikim siyahtan başlıyor ve her girdide sıfırlanıyor; ürün sahibi siyah ekran bildirdi. İlerlemeli rafinasyon çözülmüş kareden başlayacak şekilde yeniden yazılana kadar kapalı.
   // -- FAZ 7 (FAZ-7-MASAUSTU.md): masaüstü V-Ray. Hepsi İKİ masaüstü
   //    tier'ına birden; mobil satırlar YAPISAL olarak dokunulmaz (quality
   //    profile'daki !mobile guard'ı + testler). Ürün sahibi kararı (2026-09-23):
