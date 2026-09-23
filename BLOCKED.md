@@ -39,11 +39,27 @@ doku-bellek tahminleri karşılaştırma için geçerlidir.
 ## H2 — Blender bake işleri (lightmap/AO UV repack + rebake, probe panoramaları)
 **Durum:** BLOCKED — Blender yok; `build/blender/*.blend` LFS pointer'ı (134 B),
 `git lfs` kurulu değil.
-**Bloke ettiği:** Task 3.4a-c/e içerik tarafı.
+**Bloke ettiği:** Task 3.4a-c/e içerik tarafı; FAZ 3 kabul "lightmap UV
+doluluğu ≥%65" (denetim ölçümü: iç mekân **%4,1**).
 **Bloke ETMEDİĞİ:** Task 3.4d (native-current'taki hazır 4K/2K KTX2 AO'ların
 yeniden teslimi — ajan işi), 3.4f (probe'a çevre kütlesi — kod işi), 3.4g.
-**İnsandan istenen:** Faz 3 başlarken ayrıntılı brief bu dosyaya eklenecek
-(ölçülmüş doluluk raporlarıyla). Şimdilik aksiyon yok.
+
+**TESLİMAT PAKETİ (A8):** `tools/blender/rebake-interior-lightmaps.py` —
+hazır bpy script'i. Girdi: teslim edilen `build/web/batched/desktop/
+{interior,architecture}.glb` (Blender ≥3.6, Draco+WebP importer; .blend
+gerekmez, LFS engeli aşılmış olur). Yaptığı: her interior mesh'e 'Lightmap'
+UV kanalı (Smart UV Project 66° + pack_islands 0.003), doluluğu ÖLÇER ve
+%65 altında kalırsa exit 1; kat başına (f0–f3) 2048×2048 Cycles bake —
+`interior-ao-f*.png` + `interior-light-f*.png` (AO + direct+indirect
+DIFFUSE, güneş QA saatine sabit: 21 Haziran 16:30, daylight.js'in NOAA
+açıları). Çıktı: `build/blender/out/` + `occupancy-report.json`
+(mesh başına doluluk + sha256'lar). Doğrulama: script'in kendi doluluk
+sayısı + repoda `node tools/batch-delivery/prepare-visibility.mjs` +
+`cd viewer && npm test`.
+
+**İNSANIN YAPMASI GEREKEN TEK ŞEY:** Blender'lı bir makinede
+`blender --background --factory-startup --python tools/blender/rebake-interior-lightmaps.py`
+koşup `build/blender/out/` klasörünü commit'lemek.
 
 ## H3 — Malzeme yazarlığı (fotoğraf kalibreli doku kütüphanesi)
 **Durum:** BLOCKED — Blender + sanatçı kararı gerekli.
@@ -80,8 +96,31 @@ fiyatlandırıldı; öneri: Cloudflare'i önüne koy (A).
 **Sonuç:** `tools/batch-delivery/build.mjs` çalıştırılamaz. Faz 1'de GLB'ler
 yerinde yamalanıyor (`tools/batch-delivery/patch-glb.mjs` tekniği, Bölüm 0.7.2);
 `build.mjs` gelecek için ayrıca düzeltiliyor ama teslim yamalı GLB'lerdir.
-**Bloke ettiği:** batched paketin sıfırdan yeniden üretimi (ör. atlas yeniden
-dizilimi, Task 3.3'ün build tarafı).
+**Bloke ettiği:** batched paketin sıfırdan yeniden üretimi (atlas yeniden
+dizilimi / Task 3.3 build tarafı, kat bölmesi + LOD streaming) ve ilk
+interaktif payload'ın kalan kısmı (A7): progressiveContextV1 sonrası ilk
+interaktif ≈ villa çekirdeği; `architecture.glb` TEK BAŞINA desktop 5,86 MB /
+mobil 4,59 MB — 5/4 MB hedefinin altına ancak kaynaktan kat bölmesi ya da
+Draco+KTX2 yeniden teslimiyle inilir. Sayılar: desktop toplam 22,44 MB'ın
+ertelenen kısmı 13,64 MB (buildings 8,08 + plants 5,56), boot'ta kalan
+6,49 MB GLB + bundle/probe ~2 MB.
+
+**TESLİMAT PAKETİ (A8) — kaynağın tam manifesti:** `build.mjs` şunları okur
+(`node tools/batch-delivery/build.mjs [kaynak-yolu]`, varsayılan
+`../model-finalization/web`):
+- `manifest.json` — `source_native_sha256` alanı **`a841390433412f55db96916ca424a59aad312b8ba1bf8fbb0f144fc649833ce6`**
+  ile eşleşmeli (yayındaki paketin kaynağı buydu; farklıysa kaynak başka
+  bir ihracat demektir ve fark raporlanmalı).
+- Altı parçanın kaynak glTF'leri: `architecture.gltf`, `interior.gltf`,
+  `garden.gltf`, `context-ground.gltf`, `context-buildings.gltf`,
+  `context-plants.gltf` + her birinin yanındaki `.bin` ve `images[].uri`
+  dokuları (build.mjs `imageFile()` bunları aynı dizinden çözer).
+**Geldiğinde koşulacak:** `node tools/batch-delivery/build.mjs <yol>` →
+`build/web/batched/{desktop,mobile}` yenilenir → `cd viewer && npm test` →
+tam format doğrulama koşumu (B3 çifti).
+
+**İNSANIN YAPMASI GEREKEN TEK ŞEY:** `model-finalization/web` klasörünü
+(yukarıdaki dosyalarla) repo kökünün YANINA koymak — gerisi tek komut.
 
 ## H8 — build.mjs aynalı kopya sarım düzeltmesi + Draco yeniden kodlama (Task 1.4'ün ön koşulu)
 **Durum:** BLOCKED — Task 1.4 (doubleSided kapatma) RAFA KALDIRILDI.
@@ -105,6 +144,27 @@ culling'i — görsel riski yok); `viewCulling` kapalı (walk'ta camdan görüne
 bitkiyi gizlemek ayrı bir kalite kararı); `tools/batch-delivery/patch-*.mjs`
 araçları H8 çözülünce hazır.
 
+**TESLİMAT PAKETİ (A8):**
+- **Tespit (çalıştırıldı, ölçüldü):**
+  `node tools/batch-delivery/detect-mirrored-context.mjs` →
+  **5/8 addition aynalı** (det=-1): osm-region-4234, -2240, -4241, -4242,
+  -2235. Diğer 3'ü (2232–2234) düz. İnsanın seçeceği bir şey yok.
+- **Düzeltme reçetesi (Draco'lu makinede):** her AYNALI addition'ın
+  `context-buildings.glb` içindeki primitive aralığı için: Draco decode →
+  her üçgende `[i1,i2] = [i2,i1]` (add-context.mjs:82'nin runtime'da
+  yaptığının aynısı) → Draco re-encode (`draco_encoder -cl 7`, aynı
+  quantization bitleri: POSITION 14, NORMAL 10, TEX_COORD 12) →
+  `gpu_sha256` alanlarını `manifest.json`'da güncelle.
+- **Doğrulama:** `cd viewer && npm test` (batched-delivery.test.mjs
+  gpu_sha256 eşleşmesini zaten zorlar) + `?features=singleSided:1` ile
+  C05–C08 kesit kareleri (kayıp yüzey ≤%1 kuralı) + uçan çatı kontrolü
+  C02'de.
+
+**İNSANIN YAPMASI GEREKEN TEK ŞEY:** draco_encoder bulunan bir makinede
+yukarıdaki reçeteyi 5 addition'a uygulamak (ya da H6 kaynağı gelirse
+`build.mjs`'e determinant<0 sarım çevirisini ekletmek — tek satır,
+add-context.mjs:82 kopyası — ve paketi yeniden üretmek).
+
 ## H9 — FAZ 3 Blender kalemleri (daimi emir 2025-09-22 ile sabitlendi)
 **Durum:** BLOCKED — Blender yok (H2/H3/H4 ile aynı kök neden).
 **Kapsam:** 3.1 (malzeme yazarlığı), 3.2 (bevel + weighted normals),
@@ -125,11 +185,20 @@ sözleşmesi bake'in kaynak GLB'ye bağlılığını korur; context-ground hash'
 değişince testler doğru olarak kırmızıya düştü. 1,9 cm sapma 0,42 m/texel
 bake'in iki kademe altında — bake fiilen geçerli — ama hash'i rebake'siz
 güncellemek repo sözleşmesini kanıtsız bükmek olurdu.
-**İnsandan istenen:** Blender'lı ortamda sırasıyla:
+**TESLİMAT PAKETİ (A8) — Blender'lı ortamda sırasıyla (H2 ile aynı oturum):**
 1. `node tools/batch-delivery/simplify-terrain.mjs --apply`
+   (kanıtları hazır: build/qa/terrain-trial*, worst 1,9 cm / 590 tanık)
 2. `blender --background --factory-startup --python tools/batch-delivery/bake-ground-light.py`
-   (ve `--interior` varyantı) + `node tools/batch-delivery/prepare-visibility.mjs`
-3. `npm test` (260) + 16 kare gate.
+   (ve `--interior` varyantı)
+3. `node tools/batch-delivery/prepare-visibility.mjs` — sourceGeometryHashes
+   attestasyonu YENİ context-ground hash'iyle, bake kanıtıyla birlikte yenilenir
+4. `cd viewer && npm test` (292) + tam format doğrulama koşumu (B3)
+**Doğrulama:** "Rebake visibility when source geometry changes" testi yeşile
+döner (bugün bilerek kırmızıya düşen sözleşme buydu); C01/C02'de üçgen
+sayısı ~225k düşer (311k→85,8k terrain).
+
+**İNSANIN YAPMASI GEREKEN TEK ŞEY:** Blender'lı makinede yukarıdaki 4 komutu
+sırayla koşup değişen dosyaları commit'lemek.
 
 ## H7 — Gerçek telefonda gece modu ölçümü
 **Durum:** BLOCKED — fiziksel cihaz gerekli (H1 ile aynı yol).
