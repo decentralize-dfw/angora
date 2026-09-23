@@ -48,6 +48,19 @@ KAPANIS.md 24 + FAZ-7 Bölüm 4'ün 14 maddesi SAYIYLA, roughness/saturation/
 coverage/payload ölçümleri, PROGRESS güncelle. Kapanış dili:
 "masaüstü kod tarafı bitti; mobil FAZ 8'e kaldı." Merge İZİN BEKLER.
 
+**ÜRÜN SAHİBİ KARARI (2026-09-23, doğrulama oturumu yerine):** FAZ 7'nin
+7 bayrağı varsayılan KAPALI ship edildi; kod dalda hazır, herhangi biri
+`?features=screenSpaceReflection:1,...` ile tarayıcıda açılır. FAZ 6
+bayrakları AÇIK. Dal main'e push'landı (açık izinle). Capture/koşum YOK -
+değerlendirme ürün sahibinin gerçek tarayıcısında. Doğrulama oturumunun
+ölçülmüş durumu: faz7-baseline (dh, 13+1 bayrak kapalı) 9/9 YEŞİL, 0
+konsol hatası, C03 274 sn; bayrak-açık kareler SwiftShader'da 480 sn
+tavanını aşıyordu (konsol 0) - duvar saati meselesi, tavan 1500 sn'ye
+alındı ama koşum ürün sahibi emriyle durduruldu. KAPANIS.md maddeleri
+sayılmış hâlleriyle duruyor; kapanış dili geçerli: FAZ 6 "kod tarafı
+bitti, mandal bekliyor", FAZ 7 "masaüstü kod tarafı bitti (bayraklar
+kapalı, gerçek tarayıcı değerlendirmesi bekliyor); mobil FAZ 8'e kaldı."
+
 **Bilinen sinyal:** bayrak-açık desktop-balanced C01 probe yüklemesi bir
 kez 480 sn'de rapor verememişti (contact-AO bake + portal + context idle
 zinciri şüphesi). faz7-final'in ilk karesi bunu ya doğrular ya aklar -
