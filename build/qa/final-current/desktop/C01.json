@@ -1,0 +1,76 @@
+{
+  "camera": "C01",
+  "view": "region",
+  "walking": false,
+  "tier": "desktop-balanced",
+  "qualityView": "region",
+  "deliveryProfile": "desktop",
+  "commit": "700c210",
+  "capturedAt": "2026-09-23T01:38:26.146Z",
+  "timing": {
+    "firstMeaningfulPaint": null,
+    "firstInteractiveOrbit": 19259,
+    "decodeAndPrepareMs": 6088,
+    "villaReady": null,
+    "interiorReady": null,
+    "allReady": 19259
+  },
+  "frame": null,
+  "renderer": {
+    "drawCalls": 111,
+    "triangles": 2695940,
+    "programs": 59,
+    "geometries": 108,
+    "textures": 77,
+    "drawingBuffer": [
+      1600,
+      900
+    ],
+    "pixelRatio": 1,
+    "toneMapping": 6,
+    "shadowMapEnabled": false
+  },
+  "memory": {
+    "estimatedTextureMiB": 181.7,
+    "estimatedGeometryMiB": 206.4,
+    "countedTextures": 69,
+    "countedGeometries": 111,
+    "jsHeapMiB": 232.6
+  },
+  "network": {
+    "firstInteractiveBytes": 24971690,
+    "totalBytes": 24971690,
+    "requests": 32
+  },
+  "flags": {
+    "dynamicSunShadow": false,
+    "gtao": false,
+    "postProcessing": true,
+    "compactOutput": false
+  },
+  "cameraState": {
+    "type": "PerspectiveCamera",
+    "position": [
+      16.9539,
+      982.8792,
+      650.098
+    ],
+    "target": [
+      16.9539,
+      5.7626,
+      9.922
+    ],
+    "fov": 20,
+    "zoom": 1
+  },
+  "contextLost": false,
+  "softwareRaster": true,
+  "emulated": true,
+  "viewport": {
+    "width": 1600,
+    "height": 900
+  },
+  "deviceScaleFactor": 1,
+  "captureMs": 82116,
+  "consoleErrors": []
+}
