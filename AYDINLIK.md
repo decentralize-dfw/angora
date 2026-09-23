@@ -130,10 +130,30 @@ villaya ve kaybolan mahalleye değmez.
 
 ## KURALLAR
 
-- Hepsi **tek bayrak** altında: `warmGradeV1`, varsayılan `false`.
+### TEST YOK — kod yaz, build al, main'e pushla
+
+**Hiçbir doğrulama koşma.** Capture yok, gate yok, QA oturumu yok,
+bisect yok, kare çekme yok. Ürün sahibi tarayıcıdan bakacak, testi
+birlikte yapacağız.
+
+Tek istisna: `npm test` (3 saniye). O bir QA koşumu değil, bozuk kodu
+canlı siteye göndermeni engelleyen emniyet kemeri. Kırmızıysa **pushlama**.
+
+Akış, her iş için:
+```
+kod yaz  →  npm test  →  build  →  main'e push  →  sıradaki iş
+```
+
+Ara rapor yok. Tur sonu tek satır: ne bitti, sırada ne var.
+
+### Diğer
+
+- İŞ 1–5 **tek bayrak** altında: `warmGradeV1`, varsayılan `false`.
   Ürün sahibi `?features=warmGradeV1:1` ile karşılaştıracak.
-- Villa düzeltmesi (İŞ 6) bayrak altında **değil** — o bug, doğrudan düzelt.
-- **Capture koşma.** Ürün sahibi tarayıcıdan bakıyor.
-- Her iş için değeri `PROGRESS.md`'ye yaz (eski → yeni), ki geri almak
-  ya da ayarlamak tek satır olsun.
-- Bitince build + `main`'e push, iki adres ver: bayraklı ve bayraksız.
+- İŞ 6 (iki erteleme bug'ı) bayrak altında **değil** — doğrudan düzelt.
+  Düzelene kadar `progressiveLoaderV2` ve `progressiveContextV1`
+  varsayılan **KAPALI** kalsın; düzelince ikisini de aç.
+- Her değeri `PROGRESS.md`'ye yaz (eski → yeni), ayarlamak tek satır olsun.
+- Bitince iki adresi ver: bayraklı ve bayraksız.
+- `main`'e push için **izin verildi** — her iş bitiminde doğrudan pushla,
+  sorma.
