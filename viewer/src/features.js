@@ -34,7 +34,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   progressiveLoaderV2: true,   // Task 2.1 ACTIVE - interior off the critical path, lazy storey probes
   ktx2Delivery: false,         // Faz 4.1
   contextLodV2: false,         // Faz 2
-  cinemaStill: false,          // Faz 5
+  cinemaStill: true,           // FAZ 5 ACTIVE - idle accumulation still, desktop-high only, never in walk
 });
 
 // '?features=a:0,b:1' - unknown names are ignored so a stale link cannot

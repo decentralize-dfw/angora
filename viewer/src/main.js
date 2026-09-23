@@ -218,6 +218,7 @@ function invalidate() {
 function renderFrame(time) {
     const cpuStart=performance.now(),measuredTransition=transition;
     framePending = false;
+    idleRefining=false;clearTimeout(idleRefineTimer);
     if(contextLost)return;
     if (transition) {
       transition.frames=(transition.frames??0)+1;
@@ -310,6 +311,31 @@ function renderFrame(time) {
     deviceQA?.sample(time,{draw_calls:renderer.info.render.calls,triangles:renderer.info.render.triangles,
       drawing_buffer:`${renderer.domElement.width}×${renderer.domElement.height}`,view:walk?.active?`${selected}:walk`:selected});
     if(controls.autoRotate||changing||transition||flying||lightChanging||massingChanging||liftChanging||deviceQA?.active)invalidate();
+    // FAZ 5: a still camera on desktop-high earns the cinema treatment -
+    // 400 ms of quiet, then up to 24 jittered samples accumulate soft
+    // shadows and settled AO. Any new frame request cancels instantly.
+    else scheduleIdleRefine();
+}
+let idleRefine=null,idleRefineTimer=null,idleRefining=false;
+function scheduleIdleRefine(){
+  if(!FEATURES.cinemaStill||!ready)return;
+  clearTimeout(idleRefineTimer);
+  idleRefineTimer=setTimeout(async()=>{
+    if(framePending||idleRefining||walk?.active||contextLost)return;
+    const q=quality?.value;
+    if(q?.tier!=='desktop-high'||!q.postProcessing)return;
+    idleRefine??=(await import('./idle-refine.js')).createIdleRefine({renderer});
+    if(framePending||walk?.active)return;
+    idleRefine.reset();idleRefining=true;
+    const step=()=>{
+      if(!idleRefining||framePending||walk?.active){idleRefining=false;return;}
+      let more=false;
+      try{more=lighting.renderRefineSample(camera,idleRefine);}
+      catch(error){console.warn('Idle refine stopped',error);more=false;}
+      if(more)requestAnimationFrame(step);else idleRefining=false;
+    };
+    requestAnimationFrame(step);
+  },400);
 }
 
 function floorFrameInsets(){

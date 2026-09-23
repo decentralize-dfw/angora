@@ -506,6 +506,29 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
       if(compactOutput&&!renderer.xr.isPresenting){compactOutput.render(renderer,scene,currentCamera);return;}
       if(!composer||renderer.xr.isPresenting){renderer.render(scene,currentCamera);return;}
       beauty.camera=currentCamera;ao.setCamera(currentCamera);composer.render();
+    },
+    // FAZ 5: one accumulation sample. main.js owns the idle scheduling and
+    // the refine instance (dynamically imported); this owns what only the
+    // lighting closure can reach - the composer, the sun, the shadow map.
+    renderRefineSample(currentCamera,refine){
+      if(!composer||renderer.xr.isPresenting)return false;
+      const [a,b]=refine.sunSway();
+      const home=sun.position.clone();
+      sun.position.sub(sun.target.position)
+        .applyAxisAngle(new THREE.Vector3(0,1,0),a)
+        .applyAxisAngle(new THREE.Vector3(1,0,0),b)
+        .add(sun.target.position);
+      renderer.shadowMap.needsUpdate=true;
+      const jitter=refine.jitter(currentCamera);
+      const previous=composer.renderToScreen;composer.renderToScreen=false;
+      try{
+        beauty.camera=currentCamera;ao.setCamera(currentCamera);composer.render();
+        return refine.accumulate(composer.readBuffer);
+      }finally{
+        composer.renderToScreen=previous;
+        refine.unjitter(currentCamera,jitter);
+        sun.position.copy(home);
+      }
     }
   };
 }
