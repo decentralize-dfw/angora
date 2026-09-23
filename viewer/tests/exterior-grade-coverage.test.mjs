@@ -22,7 +22,8 @@ function batchedScene(names) {
 }
 
 const fakeSets = () => Object.fromEntries(['clayTileMap', 'clayTileNormal', 'grassMap',
-  'asphaltMap', 'travertineMap', 'travertineNormal', 'stuccoNormal']
+  'asphaltMap', 'travertineMap', 'travertineNormal', 'stuccoNormal',
+  'stuccoMap', 'stuccoMapSoft']
   .map(name => [name, Object.assign(new THREE.Texture(), {repeat: new THREE.Vector2(1, 1)})]));
 
 test('İŞ A: applied count reaches 8 over the reachable single-member batches', () => {

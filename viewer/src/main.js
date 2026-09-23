@@ -31,6 +31,7 @@ import { configureCameraControls } from './camera.js';
 import { PendingAction } from './pending-action.js';
 import {fitContextBounds,neutraliseTransmission} from './material-response.js';
 import {applyGradeValues,loadGradeTextures,bindGradeTextures,reviveBatchedGrade} from './exterior-grade.js';
+import {applyCellGrade} from './cell-grade.js';
 import {reviveBakedOcclusion} from './ao-revival.js';
 import {upgradeAtlasToArrays} from './atlas-array.js';
 import {bakeContactOcclusion} from './vertex-ao.js';
@@ -787,7 +788,7 @@ async function latePartUpgrade(name,model){
     await Promise.all([window.__angoraGradeReady??0,window.__angoraAoReady??0,window.__angoraAtlasReady??0]);
     if(lateGradeTextures){
       const applied=reviveBatchedGrade(single,lateGradeTextures,
-        {anisotropy:Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy())});
+        {anisotropy:Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy()),anyGrid:FEATURES.gradeAnyGridV1,cellGrade:applyCellGrade});
       if(applied)console.info(`Exterior grade revived on ${applied} materials (late: ${name})`);
     }
     if(FEATURES.bakedAoRevival&&quality.tier.startsWith('desktop')){
@@ -1457,7 +1458,7 @@ async function loadNativeModel(manifest){
         .then(textures=>{
           lateGradeTextures=textures; // İŞ 6: geç gelen parçalar da aynı setle
           const applied=reviveBatchedGrade(nativeDelivery.loaded,textures,
-            {anisotropy:Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy())});
+            {anisotropy:Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy()),anyGrid:FEATURES.gradeAnyGridV1,cellGrade:applyCellGrade});
           if(applied){renderer.shadowMap.needsUpdate=true;invalidate();}
           console.info('Exterior grade revived on '+applied+' materials');
           resolve(applied);

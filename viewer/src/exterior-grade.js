@@ -121,8 +121,13 @@ export function loadGradeTextures(rootURL) {
     one('grass-basecolor.png', true), one('asphalt-basecolor.png', true),
     one('travertine-basecolor.png', true), one('travertine-normal.png', false),
     one('stucco-normal.png', false),
-  ]).then(([clayTileMap, clayTileNormal, grassMap, asphaltMap, travertineMap, travertineNormal, stuccoNormal]) =>
-    ({clayTileMap, clayTileNormal, grassMap, asphaltMap, travertineMap, travertineNormal, stuccoNormal}));
+    // MALZEME İŞ 2.3-A: stucco-normal'den türetilmiş, dikişsiz, ortalaması
+    // sRGB 167'de sabit albedo çifti (tools yok - üretim komutu commit
+    // mesajında). Villa cephesinin RENGİ değişmez: reviveBatchedGrade
+    // hücre ortalamasını ölçüp material.color ile telafi eder.
+    one('stucco-basecolor.png', true), one('stucco-basecolor-soft.png', true),
+  ]).then(([clayTileMap, clayTileNormal, grassMap, asphaltMap, travertineMap, travertineNormal, stuccoNormal, stuccoMap, stuccoMapSoft]) =>
+    ({clayTileMap, clayTileNormal, grassMap, asphaltMap, travertineMap, travertineNormal, stuccoNormal, stuccoMap, stuccoMapSoft}));
 }
 
 // Area-weighted share of up-facing surface, in world space: the planar ground
@@ -170,18 +175,24 @@ function projectGroundUV(mesh, {module, diagonal}) {
 const BATCHED_TABLE = [
   {name: 'Clay tile', set: {map: 'clayTileMap', normalMap: 'clayTileNormal'},
    repeat: [1.5625 / 0.8, 1.5625 / 1.0], normalScale: 1.2},
-  {name: 'STRUCCO', set: {normalMap: 'stuccoNormal'}, repeat: [1, 1], normalScale: 0.55},
+  // MALZEME İŞ 2.3: kabartma + DÜZ renk 'plastik' okur; türetilmiş kum
+  // albedo'su cephenin ortalama rengini koruyarak (keepAverage: hücre
+  // ortalaması / doku ortalaması telafisi) sadece düzlüğü kırar.
+  {name: 'STRUCCO', set: {map: 'stuccoMap', normalMap: 'stuccoNormal'},
+   repeat: [1, 1], normalScale: 0.55, keepAverage: true},
   {name: 'stone_tile', set: {map: 'travertineMap', normalMap: 'travertineNormal'},
    groundUV: {module: 0.8, diagonal: true}},
   // The neighbours' plaster: same sand-float relief as the villa's stucco,
   // fainter - context is setting, not subject.
-  {name: 'ceiling.004', set: {normalMap: 'stuccoNormal'}, repeat: [1, 1], normalScale: 0.3},
+  {name: 'ceiling.004', set: {map: 'stuccoMapSoft', normalMap: 'stuccoNormal'},
+   repeat: [1, 1], normalScale: 0.3, keepAverage: true},
   // FAZ 6 İŞ A (FAZ-6-DUZ-RENK.md BÖLÜM 1) - the five idle grid=1
   // surfaces, from the SAME shipped texture set. No new bytes, no new
   // mechanism; water is poolWaterV2's and stays untouched; STRUCCO /
   // ceiling.004 keep normal-only (İŞ B's macro variation owns their
   // albedo - two mechanisms stacked would blotch).
-  {name: 'neighbor_wall', set: {normalMap: 'stuccoNormal'}, repeat: [1, 1], normalScale: 0.35},
+  {name: 'neighbor_wall', set: {map: 'stuccoMapSoft', normalMap: 'stuccoNormal'},
+   repeat: [1, 1], normalScale: 0.35, keepAverage: true},
   {name: 'Retaining wall rough limestone.001', set: {normalMap: 'travertineNormal'},
    repeat: [1 / 1.5, 1 / 1.5], normalScale: 0.8},
   // The villa ironwork: cell range=0, dead flat. The dead TABLE's iron
@@ -192,7 +203,29 @@ const BATCHED_TABLE = [
   {name: 'wood_dark.002', roughness: 0.82},
 ];
 
-export function reviveBatchedGrade(models, sets, {anisotropy = 8} = {}) {
+// keepAverage: the generated stucco sheet is authored around sRGB 167
+// (linear ~0.394); the cell's own average, read once off the uploaded
+// atlas bitmap, becomes material.color so the facade keeps its colour
+// and gains only the +-8% value break. Canvas yoksa (node testleri)
+// nötr gri telafisi kullanılır.
+const STUCCO_SHEET_LINEAR = Math.pow(167 / 255, 2.2);
+function averageCellLinear(material) {
+  try {
+    const image = material.map?.image;
+    if (!image || typeof document === 'undefined') return null;
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = 16;
+    const context = canvas.getContext('2d');
+    context.drawImage(image, 0, 0, 16, 16);
+    const data = context.getImageData(0, 0, 16, 16).data;
+    let r = 0, g = 0, b = 0;
+    for (let i = 0; i < data.length; i += 4) { r += data[i]; g += data[i + 1]; b += data[i + 2]; }
+    const n = data.length / 4 * 255;
+    return [Math.pow(r / n, 2.2), Math.pow(g / n, 2.2), Math.pow(b / n, 2.2)];
+  } catch { return null; }
+}
+
+export function reviveBatchedGrade(models, sets, {anisotropy = 8, anyGrid = false, cellGrade = null} = {}) {
   if (!sets) return 0;
   const clones = new Map();
   const textureFor = (name, repeat) => {
@@ -213,7 +246,14 @@ export function reviveBatchedGrade(models, sets, {anisotropy = 8} = {}) {
       const material = Array.isArray(object.material) ? null : object.material;
       if (!material) return;
       const batch = material.userData.angoraBatch;
-      if (!batch || batch.grid !== 1 || batch.materials.length !== 1) return;
+      if (!batch) return;
+      if (batch.grid !== 1 || batch.materials.length !== 1) {
+        // MALZEME İŞ 2 (gradeAnyGridV1): the grid===1 wall falls - shared
+        // batches take per-cell samplers via cell-grade.js. Each ACTIVE
+        // cell counts toward `applied`, so the log's number is coverage.
+        if (anyGrid && cellGrade) applied += cellGrade(material, sets, {anisotropy});
+        return;
+      }
       const entry = BATCHED_TABLE.find(e => e.name === batch.materials[0]);
       if (!entry) return;
       if (entry.groundUV && !object.userData.exteriorGradeUV) {
@@ -236,8 +276,11 @@ export function reviveBatchedGrade(models, sets, {anisotropy = 8} = {}) {
       }
       const slots = [];
       if (entry.set.map) {
+        const average = entry.keepAverage ? averageCellLinear(material) : null;
         material.map = textureFor(entry.set.map, entry.groundUV ? null : entry.repeat);
-        material.color?.setRGB(1, 1, 1);   // the sheet carries the photo hue
+        if (average) material.color?.setRGB(...average.map(v => Math.min(2, v / STUCCO_SHEET_LINEAR)));
+        else if (entry.keepAverage) material.color?.setRGB(1, 1, 1); // ölçülemedi: nötr
+        else material.color?.setRGB(1, 1, 1);   // the sheet carries the photo hue
         slots.push('map');
       }
       if (entry.set.normalMap) {

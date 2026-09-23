@@ -51,6 +51,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   // gök 0.85, kararma terimleri hafifler + min-birleşir, grade sıcak ve
   // düşük kontrast, açılış saati 13:30. ?features=warmGradeV1:1 ile A/B.
   warmGradeV1: false,
+  gradeAnyGridV1: true,        // MALZEME İŞ 2 - grid şartı kalktı: hücre-bazlı gerçek dokular (çim/asfalt dünya-uzayı, komşu çatıları villa kiremidiyle aynı ölçek, cephe kum albedosu). Kapatmak: ?features=gradeAnyGridV1:0
   screenSpaceReflection: false, // İŞ 1 - SSR geçişi (postfx); havuz HARİÇ (poolWaterV2 kendi yansımasını sürer); planarPoolReflection 0.5'e eşitlenir
   softShadowsV2: false,        // İŞ 2 - PCSS (blocker search + değişken PCF) + iki masaüstü satırında 4096 harita
   windowPortalLight: false,    // İŞ 3 - pencere alan ışığı (glazing setinden konum/normal, gök rengi, oda başına <=2)
