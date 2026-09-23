@@ -1413,7 +1413,9 @@ async function loadNativeModel(manifest){
   if(FEATURES.runtimeVertexAO&&manifest.batched){
     window.__angoraContactReady=Promise.all([
       window.__angoraGradeReady??0,window.__angoraAoReady??0,window.__angoraAtlasReady??0,
-    ]).then(()=>bakeContactOcclusion(nativeDelivery.loaded)).then(result=>{
+    ]).then(()=>bakeContactOcclusion(nativeDelivery.loaded,
+      // BÖLÜM 3: telefonda 8-12 ışın, kalite masaüstünde artar.
+      {rays:quality.tier.startsWith('desktop')?16:10})).then(result=>{
       contactBake=result;
       if(result.materials)invalidate();
       console.info('Contact AO baked: '+result.vertices+' vertices / '+result.meshes+' meshes / '+result.materials+' materials');
