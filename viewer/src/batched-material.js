@@ -3,13 +3,19 @@ import {detailTableFor,detailFragment,DETAIL_VERTEX,DETAIL_APPLY} from './proced
 
 // Keep repeating source UVs. Wrapping vertex UVs into an atlas would smear
 // triangles crossing a repeat boundary; wrap only the fragment lookup.
-export function prepareBatchedMaterial(material,{exterior=false,proceduralDetail=false,detailOctaves=2,detailInterior=false}={}){
+export function prepareBatchedMaterial(material,{exterior=false,proceduralDetail=false,detailOctaves=2,detailInterior=false,detailBoost=null}={}){
  const batch=material.userData.angoraBatch;if(!batch||material.userData.batchPrepared)return;
  material.userData.batchPrepared=true;
  // FAZ 6 İŞ B: per-cell analytic drift. Resolved ONCE here; with the flag
  // off `detail` stays null and NOTHING below - injection or cache key -
  // ever mentions it (BÖLÜM 2.5: zero trace when off).
- const detail=proceduralDetail?detailTableFor(batch,{interior:detailInterior}):null;
+ // FAZ 7 İŞ 4: detailBoost {albedo,roughness} scales the amplitudes for
+ // the desktop-high look - uniform data only, cloned so the table's own
+ // vectors stay pristine for the boost-off path.
+ let detail=proceduralDetail?detailTableFor(batch,{interior:detailInterior}):null;
+ if(detail&&detailBoost)detail=detail.map(v=>{
+  const boosted=v.clone();boosted.x*=detailBoost.albedo??1;boosted.y*=detailBoost.roughness??1;return boosted;
+ });
  if(batch.light&&material.emissiveMap){
   material.lightMap=material.emissiveMap;material.emissiveMap=null;
   material.lightMapIntensity=batch.light;material.userData.indirectDaylightIntensity=batch.light;

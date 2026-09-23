@@ -324,9 +324,16 @@ function scheduleIdleRefine(){
   idleRefineTimer=setTimeout(async()=>{
     if(framePending||idleRefining||walk?.active||contextLost)return;
     const q=quality?.value;
-    if(q?.tier!=='desktop-high'||!q.postProcessing)return;
+    // FAZ 7 eşitleme: cinemaDof açıkken sinema karesi desktop-balanced'a
+    // da iner (1b: iki masaüstü tier'ı aynı kaliteyi verir); bayrak
+    // kapalıyken FAZ 6 davranışı - yalnız desktop-high.
+    const cinemaTier=q?.tier==='desktop-high'||(FEATURES.cinemaDof&&q?.tier==='desktop-balanced');
+    if(!cinemaTier||!q.postProcessing)return;
     idleRefine??=(await import('./idle-refine.js')).createIdleRefine({renderer});
     if(framePending||walk?.active)return;
+    // FAZ 7 İŞ 7: odak = orbit hedefi (kadraj öznesi); apertür 0.12 m.
+    idleRefine.setDof(FEATURES.cinemaDof&&controls?
+      {focus:camera.position.distanceTo(controls.target),aperture:.12}:null);
     idleRefine.reset();idleRefining=true;
     const step=()=>{
       if(!idleRefining||framePending||walk?.active){idleRefining=false;return;}
@@ -1301,7 +1308,16 @@ async function loadNativeModel(manifest){
     // trace) while the tier gate keeps every mobile tier on the old bytes.
     // İŞ D is a switch, not new code: the interior rows of DETAIL_TABLE
     // (half the exterior amplitudes) open behind their own flag and gate.
-    proceduralDetail:{enabled:FEATURES.proceduralDetailV1&&quality.tier.startsWith('desktop'),octaves:2,interior:Boolean(FEATURES.proceduralDetailInterior)},
+    // FAZ 7 İŞ 4: on desktop the high layer raises octaves 2->4 and boosts
+    // amplitudes (roughness hardest - the V-Ray material signal). Mobile
+    // tiers never reach here (enabled is desktop-gated), so their code
+    // and bytes stay exactly FAZ 6.
+    proceduralDetail:{enabled:FEATURES.proceduralDetailV1&&quality.tier.startsWith('desktop'),
+      octaves:FEATURES.proceduralDetailHigh?4:2,
+      boost:FEATURES.proceduralDetailHigh?{albedo:1.5,roughness:2}:null,
+      interior:Boolean(FEATURES.proceduralDetailInterior)},
+    // FAZ 7 İŞ 6: aile bazlı clearcoat/sheen - masaüstü SADECE.
+    materialResponse:FEATURES.materialResponseV2&&quality.tier.startsWith('desktop'),
     onProgress:(name,loaded,complete)=>{
       if(!sizes.has(name))return;
       const size=sizes.get(name);

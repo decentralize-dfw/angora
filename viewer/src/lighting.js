@@ -542,12 +542,15 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
         .add(sun.target.position);
       renderer.shadowMap.needsUpdate=true;
       const jitter=refine.jitter(currentCamera);
+      // FAZ 7 İŞ 7: aperture walk (no-op unless main armed setDof).
+      const dofShift=refine.dofShift?.(currentCamera)??null;
       const previous=composer.renderToScreen;composer.renderToScreen=false;
       try{
         beauty.camera=currentCamera;ao.setCamera(currentCamera);composer.render();
         return refine.accumulate(composer.readBuffer);
       }finally{
         composer.renderToScreen=previous;
+        refine.undoDofShift?.(currentCamera,dofShift);
         refine.unjitter(currentCamera,jitter);
         sun.position.copy(home);
       }

@@ -104,6 +104,16 @@ float angoraNoise(vec2 p){
   return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);
 }`;
 
+// FAZ 7 İŞ 4: octaves scale past the mobile pair. Frequencies are
+// non-integer so lattices never align; weights taper so micro octaves
+// texture rather than shout. At d.z = 1/3 the fourth octave lands at
+// ~17 cycles/m ≈ 6 cm - the "kum dokusu" scale the order asks for.
+const OCTAVE_LINES = [
+  'n=mix(n,angoraNoise(p*3.7+11.17),d.w);',
+  'n=mix(n,angoraNoise(p*13.9+29.3),d.w*0.6);',
+  'n=mix(n,angoraNoise(p*51.7+71.9),d.w*0.35);',
+];
+
 export function detailFragment({octaves = 2, count}) {
   return `
 uniform vec4 uDetail[${count}];
@@ -116,7 +126,7 @@ vec2 angoraDetailDrift(float id){
   vec2 pp=(fn.y>max(fn.x,fn.z))?vDetailWorld.xz:(fn.x>fn.z?vDetailWorld.zy:vDetailWorld.xy);
   vec2 p=pp*d.z;
   float n=angoraNoise(p);
-  ${octaves >= 2 ? 'n=mix(n,angoraNoise(p*3.7+11.17),d.w);' : ''}
+  ${OCTAVE_LINES.slice(0, Math.max(0, octaves - 1)).join('\n  ')}
   return (n-0.5)*2.0*d.xy;
 }`;
 }

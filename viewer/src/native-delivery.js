@@ -2,12 +2,13 @@ import * as THREE from 'three';
 import {prepareBakedLighting} from './baked-lighting.js';
 import {restoreBatchSurface} from './batch-surface-response.js';
 import {prepareBatchedMaterial} from './batched-material.js';
+import {applyMaterialResponse} from './material-response.js';
 import {chunkModelInPlace} from './context-plants-chunks.js';
 import {applyPlantVariation} from './plant-variation.js';
 
 // Batched deliveries remain resident across every view. The legacy manifest
 // path retains its older floor streams for explicit compatibility previews.
-export function createNativeDelivery({manifest,root,scene,groups,load,prepare,releaseMaterial,onProgress,onAcquired,features={},proceduralDetail={}}) {
+export function createNativeDelivery({manifest,root,scene,groups,load,prepare,releaseMaterial,onProgress,onAcquired,features={},proceduralDetail={},materialResponse=false}) {
   const loaded=new Map(),sources=new Map();
   const context=['context-ground','context-buildings','context-plants'];
   const records=new Map([...manifest.parts,...manifest.interior_streams].map(p=>[p.name,p]));
@@ -31,7 +32,11 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     try{
     if(manifest.batched){
       const replacements=new Map();
-      for(const material of resources(model).materials)replacements.set(material,restoreBatchSurface(material,manifest.surface_response?.[name]));
+      // FAZ 7 İŞ 6 rides the same replacement pass the surface restore
+      // owns: standard -> physical upgrade with per-cell clearcoat/sheen.
+      // materialResponse is tier-gated in main (desktop only, flag'lı).
+      for(const material of resources(model).materials)replacements.set(material,
+        (materialResponse?applyMaterialResponse:(m=>m))(restoreBatchSurface(material,manifest.surface_response?.[name])));
       model.traverse(o=>{if(o.isMesh)o.material=Array.isArray(o.material)?o.material.map(m=>replacements.get(m)):replacements.get(o.material);});
       for(const [old,next] of replacements)if(old!==next)old.dispose();
       // Task 1.4 safety valve: the published GLBs are patched single-sided;
@@ -91,7 +96,7 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     // compile the four interior fixture loops and evaluate them per fragment
     // for lamps they can never see through the walls.
     for(const material of resources(model).materials)prepareBatchedMaterial(material,{exterior:context.includes(name)||(features.gardenSpotStrip&&name==='garden'),
-      proceduralDetail:Boolean(proceduralDetail.enabled),detailOctaves:proceduralDetail.octaves??2,detailInterior:Boolean(proceduralDetail.interior)});
+      proceduralDetail:Boolean(proceduralDetail.enabled),detailOctaves:proceduralDetail.octaves??2,detailInterior:Boolean(proceduralDetail.interior),detailBoost:proceduralDetail.boost??null});
     loaded.set(name,model);groups.set(name,model);scene.add(model);onAcquired?.(name,model);return model;
     }catch(error){
       // A failed lightmap/mesh preparation must release this decoded asset

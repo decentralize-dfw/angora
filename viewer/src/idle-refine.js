@@ -32,10 +32,40 @@ export function createIdleRefine({renderer, samples = 24}) {
   const show = new FullScreenQuad(new THREE.ShaderMaterial({...BLEND, transparent: false,
     fragmentShader: 'varying vec2 vUv;uniform sampler2D tDiffuse;void main(){gl_FragColor=texture2D(tDiffuse,vUv);}'}));
   let index = 0;
+  // FAZ 7 İŞ 7: thin-lens DOF for free - each accumulation sample shifts
+  // the camera across the aperture disc and shears the projection so the
+  // FOCUS plane stays pixel-fixed; everything off-plane walks a disc whose
+  // radius grows with |1/z - 1/focus|. The average of 24 such frames IS
+  // depth of field - no extra pass, no depth-blur artifacts.
+  let dof = null;
   return {
     samples,
     get index() {return index;},
     reset() {index = 0;},
+    setDof(next) {dof = next && next.aperture > 0 && next.focus > 0 ? next : null;},
+    dofShift(camera) {
+      if (!dof) return null;
+      const radius = Math.sqrt(halton(index + 1, 11)) * dof.aperture;
+      const theta = halton(index + 1, 13) * 2 * Math.PI;
+      const dx = Math.cos(theta) * radius, dy = Math.sin(theta) * radius;
+      const right = new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld, 0);
+      const up = new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld, 1);
+      camera.position.addScaledVector(right, dx).addScaledVector(up, dy);
+      camera.updateMatrixWorld();
+      const proj = camera.projectionMatrix.elements;
+      // m00/m11 already hold 1/tan (with aspect); the constant NDC shear
+      // that re-pins the focus plane is shift * m/focus on the z column.
+      const cx = -dx * proj[0] / dof.focus, cy = -dy * proj[5] / dof.focus;
+      proj[8] += cx; proj[9] += cy;
+      return {right, up, dx, dy, cx, cy};
+    },
+    undoDofShift(camera, shift) {
+      if (!shift) return;
+      camera.position.addScaledVector(shift.right, -shift.dx).addScaledVector(shift.up, -shift.dy);
+      camera.updateMatrixWorld();
+      camera.projectionMatrix.elements[8] -= shift.cx;
+      camera.projectionMatrix.elements[9] -= shift.cy;
+    },
     // sample: the composer has just rendered into `source` (renderToScreen
     // false). Blend it into the accumulation at 1/(n+1) and present.
     accumulate(source) {

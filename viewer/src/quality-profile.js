@@ -189,6 +189,24 @@ export function effectiveQuality(tier, view, {batched = true, features = {}} = {
       value.postProcessing) {
     value.gtao = true;
   }
+  // FAZ 7 (masaüstü V-Ray): the two desktop rows equalize UP - whatever
+  // machine opens the page sees the same quality. Every raise rides its
+  // own flag (zero trace off) and NEVER touches a mobile row: the mobile
+  // guard here is structural, not a promise.
+  if (!mobile) {
+    if (features.softShadowsV2 && value.dynamicSunShadow) {
+      // İŞ 2: contact-hardening PCSS + one 4096 map on BOTH desktop rows.
+      value.shadowType = 'pcss';
+      value.shadowMapSize = Math.max(value.shadowMapSize, 4096);
+    }
+    if (features.gtaoFullRes && value.postProcessing && value.gtao) {
+      value.gtaoResolutionScale = 1;                      // İŞ 5
+    }
+    if (features.screenSpaceReflection && value.postProcessing) {
+      value.ssr = true;                                   // İŞ 1
+      if (value.planarPoolReflection) value.planarPoolReflection = 0.5;
+    }
+  }
   value.compactOutput = !mobile && !value.postProcessing;
   if (!features.atlasAnisotropyFix) value.anisotropy = mobile ? 8 : 16;
   // Legacy drawing-buffer budget was one number per pointer class, capped at
