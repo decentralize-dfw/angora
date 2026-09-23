@@ -6,7 +6,7 @@ import {ShaderPass} from 'three/addons/postprocessing/ShaderPass.js';
 import {SectionGTAOPass} from './section-gtao.js';
 import {SsrPass} from './ssr-pass.js';
 import {LinearBloomPass} from './linear-bloom.js';
-import {GradeShader} from './grade-pass.js';
+import {GradeShader, GRADE} from './grade-pass.js';
 // display-dither: İŞ 3.4 ile grade'e katlandı; shader referans olarak duruyor.
 import {configurePostprocessing} from './postprocessing.js';
 import {referenceProfile} from './render-profile.js';
@@ -43,10 +43,15 @@ export function buildPostfxChain({renderer, scene, camera, clip, quality, postfx
   // fotoğrafı referansı; gotik değil. Değerler uniform - bayrak
   // kapalıyken shader'a tek byte dokunulmaz.
   if (FEATURES.warmGradeV1) {
-    grade.material.uniforms.uLift.value.set(0.016, 0.015, 0.012);
-    grade.material.uniforms.uWarm.value.set(1.045, 1.005, 0.94);
-    grade.material.uniforms.uContrast.value = 0.92;
-    grade.material.uniforms.uVig.value.y = 0.05;   // vinyet de yarı - kasvet kalemi
+    // Ürün sahibi ilk turda "renkler çok depresif" dedi: kontrast 0.92 ile
+    // düşürülmüş, doygunluk taban değerinde ve sis rengi emiyordu. Sis
+    // kalktı; kontrast nötre döndü (düşük kontrast davetkâr değil, CANSIZ
+    // yapar) ve doygunluk yukarı alındı. Amber orta tonlarda kaldı.
+    grade.material.uniforms.uLift.value.set(0.014, 0.013, 0.010);
+    grade.material.uniforms.uWarm.value.set(1.055, 1.010, 0.930);
+    grade.material.uniforms.uContrast.value = 1.02;
+    grade.material.uniforms.uSat.value = GRADE.saturation * 1.18;
+    grade.material.uniforms.uVig.value.y = 0.03;
   }
   const ssr = quality.ssr ? new SsrPass(ao, camera) : null;
   configurePostprocessing(composer, {beauty, ao, ssr, smaa, bloom, output: grade});

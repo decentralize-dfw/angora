@@ -555,7 +555,11 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
       // the villa a fog term would just grey the subject.
       // AYDINLIK İŞ 1: 70 metrelik mahalle karesinde FogExp2 0.0018 pus
       // yapar, hava değil - warmGradeV1 sisi yalnız region'da bırakır.
-      scene.fog=atmosphericFog&&(view==='region'||(view==='neighborhood'&&!FEATURES.warmGradeV1))?atmosphericFog:null;
+      // Sis KAPALI. Ürün sahibi dört ayrı turda "puslu/kasvetli" bildirdi,
+      // yakın çevreden kaldırmak da yetmedi ("aydınlık versiyon da sisli").
+      // Kilometrelerce derinlik olan yerde hava hissi verir; bu sahnede
+      // sadece rengi emiyor. Mekanizma duruyor, bağlanmıyor.
+      scene.fog=null;
       // Region frames the whole settlement, where a crevice-scale radius has
       // nothing left to describe and only costs, so occlusion stops there.
       // Task 1.1b: with the flag on, the matrix+view row (quality.value has

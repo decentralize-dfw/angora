@@ -21,15 +21,26 @@ import * as THREE from 'three';
 // water (poolWaterV2) ve cam hücreleri (glassTiersV2) bu tabloya
 // GİRMEZ - kurallar bölümünün açık şartı.
 
+// Every rule projects from WORLD SPACE, in metres. Authored UVs were tried
+// for the roofs with the villa's own repeat and came out as giant blobby
+// tiles: that repeat is calibrated to the villa mesh's UV density (1 unit =
+// 1/0.64 m) and the neighbours' meshes are scaled differently, so the same
+// number means a different tile size on every roof. World space is the only
+// figure that reads the same everywhere - a 0.9 m course is 0.9 m on any
+// mesh, whatever its UVs.
+//
+// `blend` mixes the sheet INTO the delivered colour rather than replacing
+// it. At 1.0 the sheet wins outright, which is right for a roof; the ground
+// keeps most of its own green and takes the sheet as texture, so it reads
+// as grass rather than as a bitmap tiled across a field.
 export const CELL_RULES = [
-  {match: /^R31 \| R39 continuous grass ground$/i, map: 'grassMap', world: 2},
-  {match: /^R31 \| R37 fine asphalt aggregate$/i, map: 'asphaltMap', world: 4},
-  // Komşu çatıları + villanın ikinci çatısı: villa kiremidiyle AYNI doku,
-  // AYNI ölçek (1/0.8, 1/1.0) - sahibinin ilk şikâyeti bu tutarsızlıktı.
+  {match: /^R31 \| R39 continuous grass ground$/i, map: 'grassMap', world: 7, blend: 1},
+  {match: /^R31 \| R37 fine asphalt aggregate$/i, map: 'asphaltMap', world: 5, blend: 1},
+  // Komşu çatıları + villanın ikinci çatısı. 0.9 m = bir kiremit sırası.
   {match: /^(roof\.004|Neighbor 20 green tiles|roof-7)$/i,
-    map: 'clayTileMap', normal: 'clayTileNormal', repeat: [1 / 0.8, 1 / 1.0], normalScale: 1.2},
+    map: 'clayTileMap', normal: 'clayTileNormal', world: 0.9, normalScale: 1.0, blend: 0.9},
   {match: /^Entrance coursed limestone(\.\d{3})?$/i,
-    map: 'travertineMap', normal: 'travertineNormal', world: 0.8},
+    map: 'travertineMap', normal: 'travertineNormal', world: 0.8, blend: 1},
 ];
 
 export function cellRuleFor(name) {
@@ -60,7 +71,12 @@ export function applyCellGrade(material, sets, {anisotropy = 8} = {}) {
     if (!rule) { params.push([0, 0, 1, 1]); normals.push([0, 1]); continue; }
     const map = slotFor(rule.map);
     const normal = rule.normal ? slotFor(rule.normal) : 0;
-    params.push([map, rule.world ?? 0, rule.repeat?.[0] ?? 1, rule.repeat?.[1] ?? 1]);
+    // p.zw carries the authored-UV repeat only when world is 0; for a
+    // world-projected cell p.z is free, so the blend factor rides there.
+    const world = rule.world ?? 0;
+    params.push([map, world,
+      world > 0 ? (rule.blend ?? 1) : (rule.repeat?.[0] ?? 1),
+      rule.repeat?.[1] ?? 1]);
     normals.push([normal, rule.normalScale ?? 1]);
     if (map) active++;
   }
@@ -121,7 +137,8 @@ vec2 angoraCellUv(vec4 p){
     if(cgP.y>0.0){vec3 cgFn=abs(cross(dFdx(vCellWorld),dFdy(vCellWorld)));cgUp=cgFn.y>=max(cgFn.x,cgFn.z);}
     if(cgUp){
       vec2 cgUv=angoraCellUv(cgP);
-      diffuseColor.rgb=(${pick('texture2D(%T%,cgUv)', 'vec4(1.0)')}).rgb;
+      vec3 cgSheet=(${pick('texture2D(%T%,cgUv)', 'vec4(1.0)')}).rgb;
+      diffuseColor.rgb=mix(diffuseColor.rgb,cgSheet,cgP.y>0.0?clamp(cgP.z,0.0,1.0):1.0);
     }
   }
 }

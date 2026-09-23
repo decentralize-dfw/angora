@@ -18,11 +18,20 @@ function batched(members, grid) {
   return material;
 }
 
-test('cell rules: ground goes world-space, roofs share the villa scale, water/glass never match', () => {
-  assert.equal(cellRuleFor('R31 | R39 continuous grass ground').world, 2);
-  assert.equal(cellRuleFor('R31 | R37 fine asphalt aggregate').world, 4);
+test('cell rules: every cell projects from world space, water/glass never match', () => {
+  // The owner saw the first pass: 2 m tiled visibly across a field, and the
+  // roofs - on the villa's authored repeat, which is calibrated to the villa
+  // mesh's UV density - came out as giant blobs on meshes scaled otherwise.
+  // Metres are the only figure that means the same thing on every mesh.
+  assert.equal(cellRuleFor('R31 | R39 continuous grass ground').world, 7);
+  assert.equal(cellRuleFor('R31 | R37 fine asphalt aggregate').world, 5);
   const roof = cellRuleFor('roof.004');
-  assert.deepEqual(roof.repeat, [1 / 0.8, 1 / 1.0], 'villa çatısıyla aynı ölçek');
+  assert.equal(roof.world, 0.9, 'bir kiremit sırası, mesh UV\'sinden bağımsız');
+  assert.equal(roof.repeat, undefined, 'authored UV yolu bırakıldı');
+  // The ground sheet is a real grass texture now, not a wash over the
+  // delivered green: the owner asked for the texture itself, so blend 1.
+  assert.equal(cellRuleFor('R31 | R39 continuous grass ground').blend, 1);
+  assert.ok(roof.blend >= 0.9);
   assert.equal(cellRuleFor('Neighbor 20 green tiles'), roof);
   assert.equal(cellRuleFor('roof-7'), roof);
   for (const name of ['water', 'glass', 'Context glazing', 'Lift | Photographed rose glass 80 percent']) {
@@ -39,10 +48,10 @@ test('applyCellGrade: per-cell samplers, batchId gate, both anchors survive the 
   material.onBeforeCompile(shader, null);
   assert.equal(shader.uniforms.uCellP.value.length, 4);
   assert.equal(shader.uniforms.uCellP.value[1].x, 0, 'water cell inactive');
-  assert.ok(shader.uniforms.uCellP.value[2].y === 2, 'grass = world module 2 m');
-  assert.ok(shader.uniforms.uCellP.value[0].y === 0 && shader.uniforms.uCellP.value[0].z > 1,
-    'roof = authored UV with villa repeat');
-  assert.ok(shader.fragmentShader.includes('diffuseColor.rgb='), 'albedo override in');
+  assert.equal(shader.uniforms.uCellP.value[2].y, 7, 'grass = world module 7 m');
+  assert.equal(shader.uniforms.uCellP.value[2].z, 1, 'grass sheet replaces, not washes');
+  assert.equal(shader.uniforms.uCellP.value[0].y, 0.9, 'roof = 0.9 m world course');
+  assert.ok(shader.fragmentShader.includes('diffuseColor.rgb=mix('), 'albedo blends in');
   assert.ok(shader.fragmentShader.includes('getTangentFrame'), 'roof normal path in');
   assert.ok(shader.fragmentShader.includes('cgFn.y>=max'), 'per-pixel up-facing guard for world cells');
   assert.match(material.customProgramCacheKey(), /\|cell-grade-v1:/);
