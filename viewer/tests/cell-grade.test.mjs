@@ -7,9 +7,7 @@ import {reviveBatchedGrade} from '../src/exterior-grade.js';
 // MALZEME İŞ 2 (gradeAnyGridV1): the grid===1 wall falls. Coverage is
 // COUNTED against fake deliveries mirroring the shipped batch layout.
 
-const sets = () => Object.fromEntries(['clayTileMap', 'clayTileNormal', 'grassMap',
-  'asphaltMap', 'travertineMap', 'travertineNormal', 'stuccoNormal',
-  'stuccoMap', 'stuccoMapSoft']
+const sets = () => Object.fromEntries(['clayTileMap','clayTileNormal','clayTileOrm','grassMap','grassNormal','grassOrm','asphaltMap','asphaltNormal','asphaltOrm','travertineMap','travertineNormal','travertineOrm','stuccoMap','stuccoMapSoft','stuccoNormal','stuccoOrm','limestoneMap','limestoneNormal','limestoneOrm','timberMap','timberNormal','timberOrm','metalNormal','metalOrm']
   .map(name => [name, Object.assign(new THREE.Texture(), {repeat: new THREE.Vector2(1, 1)})]));
 
 function batched(members, grid) {

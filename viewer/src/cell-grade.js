@@ -34,13 +34,34 @@ import * as THREE from 'three';
 // keeps most of its own green and takes the sheet as texture, so it reads
 // as grass rather than as a bitmap tiled across a field.
 export const CELL_RULES = [
-  {match: /^R31 \| R39 continuous grass ground$/i, map: 'grassMap', world: 7, blend: 1},
-  {match: /^R31 \| R37 fine asphalt aggregate$/i, map: 'asphaltMap', world: 5, blend: 1},
+  {match: /^R31 \| R39 continuous grass ground$/i,
+    map: 'grassMap', normal: 'grassNormal', orm: 'grassOrm', world: 7, blend: 1, normalScale: 0.6},
+  {match: /^R31 \| R37 fine asphalt aggregate$/i,
+    map: 'asphaltMap', normal: 'asphaltNormal', orm: 'asphaltOrm', world: 5, blend: 1, normalScale: 0.8},
   // Komşu çatıları + villanın ikinci çatısı. 0.9 m = bir kiremit sırası.
   {match: /^(roof\.004|Neighbor 20 green tiles|roof-7)$/i,
-    map: 'clayTileMap', normal: 'clayTileNormal', world: 0.9, normalScale: 1.0, blend: 0.9},
+    map: 'clayTileMap', normal: 'clayTileNormal', orm: 'clayTileOrm',
+    world: 0.9, normalScale: 1.0, blend: 0.9},
   {match: /^Entrance coursed limestone(\.\d{3})?$/i,
-    map: 'travertineMap', normal: 'travertineNormal', world: 0.8, blend: 1},
+    map: 'travertineMap', normal: 'travertineNormal', orm: 'travertineOrm', world: 0.8, blend: 1},
+  // Bahçe ve çevrenin kesme taşı: istinat duvarları, sınır harpuştası.
+  {match: /^(Retaining wall rough limestone \(1\)|R31 \| R39 surrounding retaining stone|R31 \| R39 boundary limestone top)$/i,
+    map: 'limestoneMap', normal: 'limestoneNormal', orm: 'limestoneOrm',
+    world: 1.6, normalScale: 0.9, blend: 0.85},
+  // Sundurma kirişi ve komşu ahşabı.
+  {match: /^(Garden \| Dark stained canopy timber|wood_dark \(3\)|wood_dark\.001)$/i,
+    map: 'timberMap', normal: 'timberNormal', orm: 'timberOrm', world: 1.2, normalScale: 0.7, blend: 0.9},
+  // Bahçe metali: renk teslimatın, kazandığı şey cevap. Albedo YOK.
+  {match: /^(chrome|metal) \(\d+\)$/i,
+    normal: 'metalNormal', orm: 'metalOrm', world: 0.6, normalScale: 0.5},
+  // Beyaz denizlik: hücre range=0. Sıvanın yumuşak seti, rengi korunarak.
+  {match: /^white_trim \(\d+\)$/i,
+    map: 'stuccoMapSoft', normal: 'stuccoNormal', orm: 'stuccoOrm',
+    world: 1.2, normalScale: 0.3, blend: 0.5},
+  // Çakıl ve sundurma sacı.
+  {match: /^gravel( \[imported\])?$/i,
+    map: 'limestoneMap', normal: 'limestoneNormal', orm: 'limestoneOrm',
+    world: 0.5, normalScale: 1.1, blend: 0.8},
 ];
 
 export function cellRuleFor(name) {
@@ -58,7 +79,7 @@ export function applyCellGrade(material, sets, {anisotropy = 8} = {}) {
   const members = batch.materials;
   const slots = [];           // unique texture bindings
   const params = [];          // per member: [slot+1, worldModule, repU, repV]
-  const normals = [];         // per member: [normalSlot+1, normalScale]
+  const normals = [];   // [normalSlot, normalScale, ormSlot, 0]         // per member: [normalSlot+1, normalScale]
   const slotFor = name => {
     if (!sets?.[name]) return 0;
     let at = slots.indexOf(name);
@@ -68,17 +89,18 @@ export function applyCellGrade(material, sets, {anisotropy = 8} = {}) {
   let active = 0;
   for (const name of members) {
     const rule = cellRuleFor(name);
-    if (!rule) { params.push([0, 0, 1, 1]); normals.push([0, 1]); continue; }
+    if (!rule) { params.push([0, 0, 1, 1]); normals.push([0, 1, 0, 0]); continue; }
     const map = slotFor(rule.map);
     const normal = rule.normal ? slotFor(rule.normal) : 0;
+    const ormSlot = rule.orm ? slotFor(rule.orm) : 0;
     // p.zw carries the authored-UV repeat only when world is 0; for a
     // world-projected cell p.z is free, so the blend factor rides there.
     const world = rule.world ?? 0;
     params.push([map, world,
       world > 0 ? (rule.blend ?? 1) : (rule.repeat?.[0] ?? 1),
       rule.repeat?.[1] ?? 1]);
-    normals.push([normal, rule.normalScale ?? 1]);
-    if (map) active++;
+    normals.push([normal, rule.normalScale ?? 1, ormSlot, 0]);
+    if (map || ormSlot) active++;
   }
   if (!active) return 0;
   material.userData.cellGrade = true;
@@ -96,7 +118,7 @@ export function applyCellGrade(material, sets, {anisotropy = 8} = {}) {
   material.onBeforeCompile = (shader, renderer) => {
     previous.call(material, shader, renderer);
     shader.uniforms.uCellP = {value: params.map(v => new THREE.Vector4(...v))};
-    shader.uniforms.uCellN = {value: normals.map(v => new THREE.Vector2(...v))};
+    shader.uniforms.uCellN = {value: normals.map(v => new THREE.Vector4(...v))};
     for (const [i, texture] of textures.entries()) shader.uniforms['uCellTex' + i] = {value: texture};
     shader.vertexShader = 'varying vec3 vCellWorld;\n' + shader.vertexShader;
     shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>',
@@ -109,7 +131,7 @@ export function applyCellGrade(material, sets, {anisotropy = 8} = {}) {
     // helper is injected right after the varyings it reads.
     shader.fragmentShader = `varying vec3 vCellWorld;
 uniform vec4 uCellP[${count}];
-uniform vec2 uCellN[${count}];
+uniform vec4 uCellN[${count}];
 ${samplerDecl}
 ` + shader.fragmentShader;
     const helper = `
@@ -146,6 +168,24 @@ vec2 angoraCellUv(vec4 p){
     // Normal: only where the batch material compiled a tangent-space
     // normal path (getTangentFrame lives behind USE_NORMALMAP); roofs get
     // the villa's clay relief, ground cells stay geometry-lit.
+    // Roughness and metalness: glTF packs them in G and B. This is the flat
+    // response fix - 164 of 177 source materials measured NO within-cell
+    // roughness variation, and one uniform gloss over a whole facade is a
+    // stronger "this is CG" signal than flat colour is. Injected at
+    // emissivemap_fragment, which still precedes lights_physical_fragment,
+    // so the factors are overridden before anything reads them.
+    shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', `
+{
+  int cgSlot=int(uCellN[${cell}].z+0.5);
+  if(cgSlot>0){
+    vec4 cgP=uCellP[${cell}];
+    vec2 cgUv=angoraCellUv(cgP);
+    vec3 cgOrm=(${pick('texture2D(%T%,cgUv)', 'vec4(0.0,1.0,0.0,1.0)')}).rgb;
+    roughnessFactor=clamp(cgOrm.g,0.04,1.0);
+    metalnessFactor=cgOrm.b;
+  }
+}
+#include <emissivemap_fragment>`);
     shader.fragmentShader = shader.fragmentShader.replace('#include <emissivemap_fragment>', `
 // getTangentFrame is declared by normal_pars_fragment only for the
 // TANGENTSPACE path and only when the geometry ships NO tangent attribute

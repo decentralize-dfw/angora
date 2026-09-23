@@ -21,9 +21,7 @@ function batchedScene(names) {
   return group;
 }
 
-const fakeSets = () => Object.fromEntries(['clayTileMap', 'clayTileNormal', 'grassMap',
-  'asphaltMap', 'travertineMap', 'travertineNormal', 'stuccoNormal',
-  'stuccoMap', 'stuccoMapSoft']
+const fakeSets = () => Object.fromEntries(['clayTileMap','clayTileNormal','clayTileOrm','grassMap','grassNormal','grassOrm','asphaltMap','asphaltNormal','asphaltOrm','travertineMap','travertineNormal','travertineOrm','stuccoMap','stuccoMapSoft','stuccoNormal','stuccoOrm','limestoneMap','limestoneNormal','limestoneOrm','timberMap','timberNormal','timberOrm','metalNormal','metalOrm']
   .map(name => [name, Object.assign(new THREE.Texture(), {repeat: new THREE.Vector2(1, 1)})]));
 
 test('İŞ A: applied count reaches 8 over the reachable single-member batches', () => {
@@ -32,27 +30,34 @@ test('İŞ A: applied count reaches 8 over the reachable single-member batches',
   assert.ok(applied >= 8, `applied ${applied} < 8`);
 });
 
-test('the scalar iron row grades in place, NULLS the placeholder map, no detail slot', () => {
+test('the iron row keeps its colour and gains a response, placeholder map NULLED', () => {
   const group = batchedScene(['metal']);
   const material = group.children[0].material;
   let disposed = false;
   material.map = Object.assign(new THREE.Texture(), {dispose: () => {disposed = true;}});
   assert.equal(reviveBatchedGrade(new Map([['a', group]]), fakeSets()), 1);
-  assert.equal(material.userData.exteriorGradeDetail, undefined);
-  assert.equal('#' + material.color.getHexString(), '#212326');
-  assert.equal(material.roughness, 0.58);
-  assert.equal(material.metalness, 0.22);
-  assert.equal(material.map, null, 'BÖLÜM 1: placeholder map nulled');
+  assert.equal('#' + material.color.getHexString(), '#212326', 'colour still the delivery\'s');
+  assert.equal(material.map, null, 'placeholder map nulled');
   assert.equal(disposed, true);
+  // The cell measured a single RGB value - range 0. Scalars alone left it
+  // reading as a decal, so it takes the brushed sheet: relief plus a
+  // roughness that drifts. The factors go to 1 because glTF multiplies
+  // them into the sampled value.
+  assert.ok(material.roughnessMap, 'brushed response bound');
+  assert.equal(material.roughnessMap, material.metalnessMap, 'one sheet, G and B');
+  assert.equal(material.roughness, 1);
+  assert.equal(material.metalness, 1);
+  assert.ok(material.userData.exteriorGradeDetail.includes('roughnessMap'));
   assert.equal(reviveBatchedGrade(new Map([['a', group]]), fakeSets()), 0, 'second run no-op');
 });
 
-test('neighbour timber gets its sheen broken, nothing else', () => {
+test('neighbour timber gets a real grain, not just a roughness number', () => {
   const group = batchedScene(['wood_dark.002']);
   const material = group.children[0].material;
   assert.equal(reviveBatchedGrade(new Map([['a', group]]), fakeSets()), 1);
-  assert.equal(material.roughness, 0.82);
-  assert.equal(material.normalMap, null);
+  assert.ok(material.map, 'directional grain sheet');
+  assert.ok(material.normalMap, 'relief');
+  assert.ok(material.roughnessMap, 'response');
 });
 
 test('interior timber and water stay untouched here - İŞ D and poolWaterV2 own them', () => {
