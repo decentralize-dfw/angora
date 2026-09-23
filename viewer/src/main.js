@@ -217,11 +217,33 @@ function invalidate() {
   framePending = true;
   requestAnimationFrame(time => {if (!renderer.xr.isPresenting) renderFrame(time); else framePending = false;});
 }
+// KAPANIŞ İŞ 2.3: mobilde uzak context hücreleri (48 m chunk'lar) mesafeyle
+// gizlenir - bitkiler 120 m, binalar 180 m. Kamera 8 m'den az oynadıysa
+// liste yeniden taranmaz; masaüstü hiç girmez.
+let mobileCullAt=null;
+const MOBILE_CULL={'context-plants':120,'context-buildings':180};
+function updateMobileCull(){
+  if(!quality?.tier?.startsWith('mobile')||!nativeDelivery)return;
+  const p=camera.position;
+  if(mobileCullAt&&mobileCullAt.distanceToSquared(p)<64)return;
+  mobileCullAt=(mobileCullAt??new THREE.Vector3()).copy(p);
+  for(const [name,limit] of Object.entries(MOBILE_CULL)){
+    const model=nativeDelivery.loaded.get(name);if(!model||!model.visible)continue;
+    for(const cell of model.children){
+      if(!cell.isMesh)continue;
+      cell.geometry.boundingSphere??cell.geometry.computeBoundingSphere();
+      const sphere=cell.geometry.boundingSphere;if(!sphere)continue;
+      const centre=cell.userData._cullCentre??=sphere.center.clone().applyMatrix4(cell.matrixWorld);
+      cell.visible=centre.distanceTo(p)-sphere.radius<=limit;
+    }
+  }
+}
 function renderFrame(time) {
     const cpuStart=performance.now(),measuredTransition=transition;
     framePending = false;
     idleRefining=false;clearTimeout(idleRefineTimer);
     if(contextLost)return;
+    updateMobileCull();
     if (transition) {
       transition.frames=(transition.frames??0)+1;
       transition.maxFrameGap=Math.max(transition.maxFrameGap??0,time-(transition.last??transition.start));
@@ -1353,7 +1375,10 @@ async function loadNativeModel(manifest){
   const totalWeight=weighed?[...sizes.values()].reduce((sum,value)=>sum+value,0):parts.length;
   const received=new Map();
   message(t('loadingModel'));
-  nativeDelivery=createNativeDelivery({manifest,root:modelRoot,scene,groups,load:loadAsset,features:FEATURES,
+  // KAPANIŞ İŞ 2.3: walk'ta camdan görünen 514k üçgenlik bitki mobilde
+  // gizlenir - masaüstünde kalite kararı bayrakta kalır.
+  const deliveryFeatures={...FEATURES,viewCulling:FEATURES.viewCulling||quality.tier.startsWith('mobile')};
+  nativeDelivery=createNativeDelivery({manifest,root:modelRoot,scene,groups,load:loadAsset,features:deliveryFeatures,
     // İŞ 6: boot yolundaki parçaları global idle blokları kapsıyor; boot
     // SONRASI gelen her parça tam boru hattından geçer (grade+AO+atlas+
     // contact) - sayı eşitliği bununla sağlanır.

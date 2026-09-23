@@ -103,7 +103,7 @@ test('Feature flags hand control to the matrix, mobile red lines hold', () => {
   const measuredPhone = effectiveQuality('mobile-high', 'villa',
     {batched: true, features: {...on, mobileSunShadow: true}});
   assert.equal(measuredPhone.dynamicSunShadow, true);
-  assert.equal(measuredPhone.shadowMapSize, 1024);
+  assert.equal(measuredPhone.shadowMapSize, 512);   // KAPANIŞ İŞ 2.4
   assert.equal(measuredPhone.postProcessing, false);
   const low = effectiveQuality('mobile-low', 'villa', {batched: true, features: on});
   assert.equal(low.dynamicSunShadow, false);

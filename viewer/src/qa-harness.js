@@ -338,6 +338,14 @@ export function installQaHarness({host, query, hooks}) {
     await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
     return true;
   }
-  window.__angoraQA = {applyCamera, snapshot, measure, debugShadow, nightProbe, nightScene, get report() { return JSON.parse(host.dataset.qaReport ?? 'null'); }};
+  // KAPANIŞ İŞ 1/2: the flag-cost probe reads these directly - program
+  // count is the one number the report never carried.
+  function stats() {
+    const renderer = hooks.renderer();
+    return {programs: renderer.info.programs.length,
+      calls: renderer.info.render.calls, triangles: renderer.info.render.triangles,
+      geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures};
+  }
+  window.__angoraQA = {applyCamera, snapshot, measure, debugShadow, nightProbe, nightScene, stats, get report() { return JSON.parse(host.dataset.qaReport ?? 'null'); }};
   return window.__angoraQA;
 }

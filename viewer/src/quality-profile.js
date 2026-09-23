@@ -75,7 +75,10 @@ const TIER_MATRIX = {
   'mobile-high': {
     textureProfile: 'mobile', maxPixelRatio: 2.0, pixelBudget: 1_500_000,
     bakedIndirectLighting: true, bakedReceiverVisibility: true,
-    dynamicSunShadow: true, shadowMapSize: 1024, shadowCameraMode: 'villa-local', shadowType: 'pcfsoft',
+    // KAPANIŞ İŞ 2.4: telefon gölgesi 512'de denenir (olay bazlı depth
+    // pass - kare başı sabit maliyet değil); ürün sahibi telefonda bakar,
+    // akıcı değilse tek bayrak (mobileSunShadow) kapatır.
+    dynamicSunShadow: true, shadowMapSize: 512, shadowCameraMode: 'villa-local', shadowType: 'pcfsoft',
     postProcessing: false, gtao: false, gtaoResolutionScale: 0.5,
     antialiasing: 'canvas-msaa', msaaSamples: 0, bloom: false, grade: false, dither: false,
     physicalGlass: 'hero-only', planarPoolReflection: false, anisotropy: 8,
