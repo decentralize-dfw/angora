@@ -7,6 +7,7 @@ import {solarPosition} from './daylight.js';
 import {prepareMaterialResponse,setInteriorMode,setMaterialScale} from './material-response.js';
 import {smoothSurfaceNormals} from './context-surfaces.js';
 import {applyWaterSurface,waterBoundsFrom} from './water-surface.js';
+import {applyGlassCellPolish} from './glass-cells.js';
 import {applyRenderProfile,referenceProfile} from './render-profile.js';
 import {InteriorLightController} from './interior-lighting.js';
 import {FEATURES} from './features.js';
@@ -393,7 +394,17 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     prepareMesh(object,{clipped,context,name}) {
       object.userData.sectionClipped=clipped;
       const materials=Array.isArray(object.material)?object.material:[object.material];
-        if(materials.every(m=>!m.userData.angoraAuthoredPBR&&/^(foliage(?:_light)?|hedge)$/.test(m.name)))smoothSurfaceNormals(object.geometry);
+        // İŞ E.2: the old test was dead twice over - angoraAuthoredPBR is
+        // stamped true on every batched material, and the batched NAME is
+        // 'context-plants-other-0', never 'foliage'; the source names live
+        // in angoraBatch.materials. Runtime-only normal write: the GLB
+        // files (and so sourceGeometryHashes) are untouched, and the
+        // ground-light bake's occluder set does not include plants.
+        {
+          const plantish=m=>(m.userData.angoraBatch?.materials??[m.name]).every(n=>/^(foliage(?:_light)?|hedge)$/i.test(n));
+          if(FEATURES.plantNormalsV1?materials.every(plantish)
+            :materials.every(m=>!m.userData.angoraAuthoredPBR&&/^(foliage(?:_light)?|hedge)$/.test(m.name)))smoothSurfaceNormals(object.geometry);
+        }
       const glass=materials.every(isGlazing);object.userData.aoExcluded=glass;
       object.castShadow=!glass;object.receiveShadow=!glass;
       for(const material of materials) {
@@ -416,16 +427,20 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
         // room finishes explicitly so their neutral response is respected.
         if(['plaster','soffit'].includes(material.userData.presentationR27?.family))material.envMap=environment?.texture??null;
         material.clipShadows=true;
-          if(isGlazing(material)&&!material.userData.angoraAuthoredPBR){material.metalness=0;if(isSeeThrough(material))material.depthWrite=false;}
-        // Task 3.5, villa tier: exterior panes must be optically flat enough
-        // to hand back the probe's settlement silhouette (3.4f) instead of a
-        // matte smear. roughness SCALES the atlas roughness sample, so .12
-        // caps the pane at near-mirror without touching the frosted interior
-        // set, which stays authored. Context buildings ship no glass at all
-        // (openings are baked into the facades), so the context tier is
-        // already the cheap one by construction.
-        if(FEATURES.glassTiersV2&&['architecture','garden'].includes(name)&&isGlazing(material)&&!material.userData.angoraAuthoredPBR)
-          material.roughness=Math.min(material.roughness??1,.12);
+          // İŞ E.1: on the batched path angoraAuthoredPBR is true 37/37 and
+          // discriminates nothing; being a batch IS the distinction. The
+          // legacy (non-batched) delivery keeps the authored-PBR guard.
+          if(isGlazing(material)&&(FEATURES.glassTiersV2?Boolean(material.userData.angoraBatch)||!material.userData.angoraAuthoredPBR
+            :!material.userData.angoraAuthoredPBR)){material.metalness=0;if(isSeeThrough(material))material.depthWrite=false;}
+        // Task 3.5 / İŞ E.1: the exterior-pane polish, repaired. Per CELL by
+        // _batchid (glass-cells.js): architecture-glass-3 carries the lift's
+        // photographed rose glass in the same material as the clear panes -
+        // a material-level clamp would turn the rose window into a mirror.
+        // Targets: 'glass', 'R31 | R35 clear door glass' (architecture) and
+        // 'Context glazing' (context-buildings); the frosted interior set
+        // never reaches this part filter.
+        if(FEATURES.glassTiersV2&&['architecture','garden','context-buildings'].includes(name))
+          applyGlassCellPolish(material);
         // The house's own windows, kept so a night exterior can light them.
         // isGlazing, not isSeeThrough: the delivered pane is alphaMode BLEND
         // with no baseColorFactor and no transmission extension, so its opacity

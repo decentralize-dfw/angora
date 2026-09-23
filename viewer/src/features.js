@@ -6,9 +6,9 @@
 // Flags flip to true only in the task that ships their behavior, after the
 // task's own measurement - never in bulk.
 export const DEFAULT_FEATURES = Object.freeze({
-  hybridSunShadow: true,       // Task 1.2 ACTIVE - villa-local dynamic sun (desktop; phones wait on H1)
+  hybridSunShadow: true,       // T1.2 - masaüstü tier'ları; iPhone 13'te KAPALI (mobileSunShadow, H1)
   mobileSunShadow: false,      // Task 1.2 - phones join ONLY after H1 measures the ratchet green
-  exteriorGradeRevival: true,  // Task 1.3 ACTIVE - tileable detail maps on the grid=1 heroes, idle-loaded
+  exteriorGradeRevival: true,  // T1.3+İŞ A - 37 batched materyalin 8'i (sayım testte); iki tier'da da canlı
   // Task 1.4 is SHELVED (BLOCKED H8): the shell walls are two skins, the
   // context additions are mirrored copies whose winding build.mjs never
   // corrects, and the honest fix needs a Draco re-encode this environment
@@ -17,26 +17,27 @@ export const DEFAULT_FEATURES = Object.freeze({
   singleSided: true,           // inert - no patched GLBs ship; 0 still forces DoubleSide back
   viewCulling: false,          // hiding planting seen through walk glazing is a quality call, deferred
   plantsChunking: true,        // pure culling win: shared attributes, off-screen cells only
-  cameraRigsV2: true,          // Task 1.5 ACTIVE - per-view lenses, 16:30 sun opening, horizon fog
-  gardenSpotStrip: true,       // Task 1.6 ACTIVE - strip fixture loops from garden shaders
-  atlasAnisotropyFix: true,    // Task 1.6 ACTIVE - anisotropy only where texture2D samples
-  postfxV2: true,              // Task 1.1b ACTIVE - composer per matrix, desktop tiers only
+  cameraRigsV2: true,          // T1.5 - iki tier'da da canlı
+  gardenSpotStrip: true,       // T1.6 - iki tier'da da canlı
+  atlasAnisotropyFix: true,    // T1.6 - iki tier'da da canlı
+  postfxV2: true,              // T1.1b - masaüstü tier'ları SADECE; mobil matris satırı postProcessing:false
   pixelBudgetV2: false,        // matrix pixel budgets; off = legacy mobile 1.5M / desktop 5M, cap 2
-  probeMassing: true,          // Task 3.4f ACTIVE - context mass in the PMREM probe, one-time rebuild
-  poolWaterV2: true,           // Task 3.5 ACTIVE - analytic wave pool: fresnel + probe reflection + absorption
-  glassTiersV2: true,          // Task 3.5 ACTIVE - exterior glazing polished to reflect the probe silhouette
-  bakedAoRevival: true,        // Task 3.4d ACTIVE - source KTX2 AO bakes rebind on idle, desktop only
-  atlasArrayV2: true,          // Task 3.3 ACTIVE (runtime half) - atlas cells as texture array layers
-  gzipSceneJson: true,         // Task 2.1-b ACTIVE - scene JSONs fetched as .gz with plain fallback
+  probeMassing: true,          // T3.4f - iki tier'da da canlı (tek seferlik probe yeniden kurulumu)
+  poolWaterV2: true,           // T3.5 - iki tier'da da canlı (analitik dalga, saat-fazlı)
+  glassTiersV2: false,         // T3.5/İŞ E.1 - bugüne dek ÖLÜydü (angoraAuthoredPBR 37/37 true); onarılmış hücre-bazlı hali faz6-e gate'iyle açılır
+  bakedAoRevival: true,        // T3.4d - masaüstü SADECE (main.js tier şartı); telefon WebP AO'da
+  atlasArrayV2: true,          // T3.3 runtime - iki tier'da da canlı; 512/1024 hücre H6'da
+  gzipSceneJson: true,         // T2.1-b - iki tier'da da canlı (.gz + düz dosya fallback)
   proceduralDetailV1: false,   // FAZ 6 İŞ B - BÖLÜM 2.5: varsayılan false; gate ?features ile, yeşilse desktop açılır
-  runtimeVertexAO: false,      // FAZ 6 İŞ C - contact AO; gate ?features ile koşar, masaüstü yeşilse açılır (H1: mobil)
-  buildingsChunking: true,     // Task 2.2 ACTIVE (runtime half) - 48 m culling cells for the neighbour blocks
-  plantVariation: true,        // Task 2.3 ACTIVE (runtime half) - per-plant hue/value drift via component seed
+  runtimeVertexAO: false,      // İŞ C - gate ?features ile; masaüstü yeşilse açılır, iPhone 13 H1'e bağlı
+  plantNormalsV1: false,       // İŞ E.2 - yaprak normal düzeltmesi (eski eşleşme ÖLÜydü); faz6-e gate'iyle açılır
+  buildingsChunking: true,     // T2.2 runtime - iki tier'da da canlı
+  plantVariation: true,        // T2.3 runtime - iki tier'da da canlı
   authoredMaterialsV2: false,  // Faz 3
-  progressiveLoaderV2: true,   // Task 2.1 ACTIVE - interior off the critical path, lazy storey probes
+  progressiveLoaderV2: true,   // T2.1 - iki tier'da da canlı (interior defer + tembel kat probe'ları)
   ktx2Delivery: false,         // Faz 4.1
   contextLodV2: false,         // Faz 2
-  cinemaStill: true,           // FAZ 5 ACTIVE - idle accumulation still, desktop-high only, never in walk
+  cinemaStill: true,           // FAZ 5 - YALNIZ desktop-high + postfx; telefonda ve walk'ta asla
 });
 
 // '?features=a:0,b:1' - unknown names are ignored so a stale link cannot

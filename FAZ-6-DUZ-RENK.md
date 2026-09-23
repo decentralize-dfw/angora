@@ -97,6 +97,62 @@ Eksik doku değil. **Geniş yüzeyde tek tip albedo + tek tip roughness + temas
 kararması yokluğu.** V-Ray'in imzası tam olarak bu üçünün tersi. Bu faz üçünü
 de hedefler; doku ekleme (İŞ A) sadece en ucuz kısmı.
 
+### 0.5 ÜRETİMDE FİİLEN NE ÇALIŞIYOR — flag flag doğrulandı
+
+Yukarıdaki hata sınıfı ("flag `true`, ama koşul üretimde hiç sağlanmıyor")
+tek bir yerde değil. Her flag'in kullanım yeri açılıp koşulu üretim verisine
+karşı değerlendirildi:
+
+| Flag / iş | Masaüstü | iPhone 13 (mobile-high) | Durum |
+|---|---|---|---|
+| `exteriorGradeRevival` (T1.3) | kısmi | kısmi | **37 materyalin 4'ü** |
+| `hybridSunShadow` (T1.2) | ✅ | ❌ | `mobileSunShadow:false`, H1 açık |
+| `postfxV2` — GTAO/SMAA/bloom/grade/dither (T1.1b) | ✅ | ❌ | mobil matris satırı `postProcessing:false` |
+| `bakedAoRevival` (T3.4d) | ✅ | ❌ | `main.js:1381` desktop-only |
+| `cinemaStill` (Faz 5) | desktop-high | ❌ | `main.js:326` |
+| `glassTiersV2` (T3.5) | ❌ | ❌ | **ÖLÜ** — aşağıda |
+| foliage `smoothSurfaceNormals` | ❌ | ❌ | **ÖLÜ** — aşağıda |
+| `TABLE` / `applyGradeValues` / `bindGradeTextures` | ❌ | ❌ | **ÖLÜ** — 0.1 |
+| `poolWaterV2` (T3.5) | ✅ | ✅ | canlı |
+| `cameraRigsV2` (T1.5) | ✅ | ✅ | canlı |
+| `atlasArrayV2` (T3.3) | ✅ | ✅ | canlı |
+| `probeMassing` (T3.4f) | ✅ | ✅ | canlı |
+| `plantVariation`, `*Chunking`, `gzipSceneJson` | ✅ | ✅ | canlı |
+
+**Referans cihaz iPhone 13'tür.** O cihazda bugün ekrana ulaşan görsel iş:
+4 materyale doku, kamera lensleri + sis, havuz suyu, bitki varyasyonu.
+**Gölge yok. Ortam kapanması yok. Renk gradasyonu yok. Post-process yok.**
+
+Bu, "hâlâ SketchUp" şikâyetinin birebir teknik karşılığıdır ve Faz 6'nın
+sıralamasını belirler: **mobilde çalışmayan bir iş bu şikâyeti çözmez.**
+Dört işin (A, B, C, D) dördü de mobilde çalışır — sıralama bu yüzden doğru.
+Yeni bir iş önerirken ilk soru: *bu iPhone 13'te açık mı?*
+
+### 0.6 İki ölü kod yolu daha — İŞ E'de ele alınacak
+
+**`glassTiersV2` (Task 3.5, "dış cam probe siluetini yansıtsın")**
+`lighting.js:427`:
+
+```js
+if(FEATURES.glassTiersV2&&['architecture','garden'].includes(name)
+   &&isGlazing(material)&&!material.userData.angoraAuthoredPBR)
+```
+
+`build.mjs:96` `angoraAuthoredPBR:true`'yu **her** materyale yazıyor; üretim
+GLB'leri açıldığında 37/37 doğrulandı. `!true` → koşul asla sağlanmıyor.
+`lighting.js:419`'daki `metalness=0` / `depthWrite` kolu da aynı guard'da.
+
+**Yaprak normalleri** — `lighting.js:396`:
+
+```js
+if(materials.every(m=>!m.userData.angoraAuthoredPBR&&/^(foliage(?:_light)?|hedge)$/.test(m.name)))
+```
+
+İki sebepten ölü: aynı `angoraAuthoredPBR` guard'ı, **ve** batched materyal
+adı `context-plants-other-0` — regex `foliage` bekliyor. Kaynak adları
+`userData.angoraBatch.materials` içinde, `material.name`'de değil.
+
+
 ---
 
 ## BÖLÜM 1 — İŞ A: `BATCHED_TABLE`'ın grid=1 boşluklarını kapat
@@ -289,6 +345,77 @@ Yani `reviveBatchedGrade` iç mekânın **hiçbirine** erişemiyor.
 
 ---
 
+## BÖLÜM 4.5 — İŞ E: ölü kod yollarını kapat
+
+0.6'daki iki yol ve 0.1'deki `TABLE` yolu bugün "ACTIVE" diye işaretli ama
+üretimde sıfır etkili. Bu faz bunları **belirsiz bırakmadan** kapatır.
+
+### E.1 `glassTiersV2` — guard'ı düzelt
+
+`angoraAuthoredPBR` batched teslimatta "bu materyalin PBR'ı yazarlandı"
+anlamına gelmiyor; `build.mjs` onu ayrım yapmadan hepsine basıyor. Yani bu
+alan batched yolda **ayırt edici değil** ve guard olarak kullanılamaz.
+
+Yap: batched yolda guard'ı `angoraAuthoredPBR` yerine gerçek ayrıma bağla —
+`material.userData.angoraBatch?.materials` içindeki kaynak adlarına. Dış cam
+için hedef `architecture-glass-3` (`glass`, `R31 | R35 clear door glass`) ve
+`context-buildings-other-1` (`Context glazing`). Buzlu iç set
+(`R31 | R33 shower frosted glass`, `R31 | Shower satin glass`,
+`R31 | Bathroom etched green glass` — hepsi `interior-glass-9`) **dokunulmadan
+kalmalı**; zaten `interior` parçasında olduğu için `['architecture','garden']`
+filtresi onu dışarıda tutuyor, bunu bozma.
+
+Dikkat: `architecture-glass-3` grid=2 ve içinde `Lift | Photographed rose
+glass 80 percent` var (hücre `range=255` — gerçek fotoğraf dokusu). Ona
+`roughness .12` uygularsan asansörün gül camı aynaya döner. `_batchid` ile
+hücre bazında kapı — İŞ B'nin `uDetail` mekanizması burada da kullanılabilir.
+
+### E.2 Yaprak normalleri — isim eşleşmesini düzelt
+
+Eşleşmeyi `material.name` yerine `material.userData.angoraBatch?.materials`
+üzerinden yap ve `angoraAuthoredPBR` guard'ını kaldır. Hedef:
+`context-plants-other-0` (`foliage`, `foliage_light`).
+
+Bu grid=2 ve mesh paylaşımlı — `smoothSurfaceNormals` geometriye yazıyor.
+**Önce doğrula:** bu mesh'ler `sourceGeometryHashes` attestasyonuna dahil mi?
+Dahilse ve normal yazımı hash'i değiştiriyorsa **yapma**, H-numarası aç,
+İŞ B'nin prosedürel yolu yaprakları zaten kapsıyor (0.09 albedo / 0.05
+roughness satırı). Bake'leri geçersiz kılmak bu işin kazancından pahalı.
+
+### E.3 `TABLE` yolu — sil ya da etiketle
+
+`applyGradeValues` / `bindGradeTextures` / `TABLE` klasik teslimatta hâlâ
+kullanılıyor olabilir. **Önce doğrula:** klasik teslimat (`viewer/public/models/`)
+hâlâ yayında bir yoldan servis ediliyor mu? 
+
+- Ediliyorsa: silme, ama dosyanın başına üretimde çalışmadığını yazan bir
+  yorum koy ve `features.js`'te `exteriorGradeRevival` yorumunu düzelt —
+  "grid=1 heroes" değil, "37 materyalin 4'ü" yazsın.
+- Edilmiyorsa: sil. Ölü kod, bir sonraki kişiyi de yanıltır — beni yanılttığı
+  gibi.
+
+### E.4 `features.js` yorumları dürüstleşsin
+
+Bugün dört flag `ACTIVE` diyor ama etkisi ya kısmi ya sıfır. Her flag
+yorumu **hangi tier'da** çalıştığını yazsın. Örnek:
+
+```js
+postfxV2: true,   // T1.1b - masaüstü tier'ları SADECE; mobil matris satırı postProcessing:false
+glassTiersV2: ...,// T3.5 - E.1'e kadar ÖLÜ: angoraAuthoredPBR 37/37 true
+```
+
+"ACTIVE" kelimesini, ölçülmüş bir kapsama sayısı olmadan bir daha yazma.
+
+### E.5 Kabul
+
+- `glassTiersV2` uygulanan materyal sayısı > 0, logda.
+- Asansör gül camı ve iç buzlu cam **değişmemiş** — C10 pixel diff ile kanıtla.
+- `features.js`'te her flag'in tier kapsamı yazılı.
+- Ölü `TABLE` yolu ya silinmiş ya etiketlenmiş, hangisi olduğu `PROGRESS.md`'de.
+
+
+---
+
 ## BÖLÜM 5 — BÜTÇE, RATCHET, KAPILAR
 
 ### 5.1 Ölçülebilir olan ve olmayan
@@ -325,8 +452,14 @@ geçti, Task 1.4 dört saat yakıp sıfır teslim etti. Bu fazda sıra:
 
 1. **İŞ A** (en ucuz, en hızlı görünür kazanç — tablo satırı)
 2. **İŞ B dış mekân** (merkez iş)
-3. **İŞ C** (temas kararması)
+3. **İŞ C** (temas kararması — **mobilde en büyük tek kazanç**, 0.5'e bak)
 4. **İŞ B iç mekân** (İŞ D)
+5. **İŞ E** (ölü kod yolları)
+
+İŞ C'yi öne alma isteği doğar — mobilde gölge de AO da yok, temas kararması
+oradaki en büyük boşluk. Ama İŞ C geometri üzerinde çalışıyor ve bake
+attestasyonuna dokunma riski taşıyor; A ve B sıfır riskli ve aynı gün
+görünür. Sıra böyle kalsın. İŞ C bloke olursa A+B yine teslim edilmiş olur.
 
 Her adım kendi gate'i ile kapanır, bir sonraki başlamadan önce. Bir adım
 BLOCKED olursa **atla ve sonrakine geç** — sırayı bekletme.
@@ -359,6 +492,12 @@ Faz 6 ancak şunların **hepsi** sağlanınca kapanır:
 7. Kesit kareleri yeşil (kayıp yüzey ≤ %1).
 8. 260/260 test yeşil, `main` el değmemiş.
 9. Mobil tier'larda flag durumu açıkça belgelenmiş (H1 kapanmadıysa kapalı).
+10. `glassTiersV2` canlı, uygulanan sayı > 0; asansör gül camı ve iç buzlu
+    cam değişmemiş.
+11. `features.js`'te her flag'in **hangi tier'da** çalıştığı yazılı;
+    ölçülmemiş "ACTIVE" etiketi kalmamış.
+12. **0.5 tablosu yeniden üretilmiş** ve güncel hali `PROGRESS.md`'de —
+    yani "bu iş iPhone 13'te açık mı" sorusunun cevabı her iş için yazılı.
 
 ---
 

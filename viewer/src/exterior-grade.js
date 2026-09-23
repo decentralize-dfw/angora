@@ -17,6 +17,15 @@ import * as THREE from 'three';
 // Matching mirrors materialFamily: the numbered-copy tail never matters.
 const baseName = (name = '') => name.replace(/\.\d{3}$/, '');
 
+// İŞ E.3 (FAZ-6-DUZ-RENK.md 0.1): BU TABLO ÜRETİMDE ÇALIŞMAZ. The TABLE
+// path below runs only for manifest entries flagged `exterior_grade`, and
+// the production batched manifest carries `parts` with no such flag - so
+// none of these ten grades has ever reached the shipped viewer. It stays
+// because the CLASSIC delivery (viewer/public/models, dev server and
+// ?model= previews) still walks it. Production repair lives in
+// BATCHED_TABLE / reviveBatchedGrade further down. Do not base coverage
+// claims on this table.
+//
 // One entry per exterior family that needs help. `assets` gates application
 // (Stage A) so a same-named material in another delivery part is never hit;
 // gradeKey() itself stays asset-free because it also serves as a merge
