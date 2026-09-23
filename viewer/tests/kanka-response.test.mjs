@@ -120,7 +120,7 @@ test("An authored tint never restains a bound sheet, and placeholder stubs yield
   bindGradeTextures([{scene}],sets);
   assert.ok(tile.map,'tile sheet bound');
   assert.equal('#'+tile.color.getHexString(),'#ffffff','tint cleared - the sheet carries the hue');
-  assert.ok(tile.map.repeat.x>1.9&&tile.map.repeat.x<2,'audited repeat density applied');
+  assert.ok(Math.abs(tile.map.repeat.x-0.64/2.4)<1e-6,'KAPANIŞ 4.2: 1 UV=0.64 m, sayfa 2.4 m - 34 cm karo');
   // a 4x4 placeholder baseColor is dropped when a colour grade lands
   const stub=new THREE.Texture();stub.image={width:4,height:4};
   const rail=new THREE.MeshStandardMaterial({name:'metal (4)'});rail.map=stub;

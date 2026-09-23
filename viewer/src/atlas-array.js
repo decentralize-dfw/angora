@@ -71,7 +71,10 @@ export function upgradeAtlasToArrays(models) {
       if (!object.isMesh) return;
       const material = Array.isArray(object.material) ? null : object.material;
       const batch = material?.userData.angoraBatch;
-      if (!batch || batch.grid <= 1 || seen.has(material) || material.userData.atlasArrays) return;
+      // KAPANIŞ İŞ 4.1: cellGrade'li materyal 3 aile dizisini zaten
+      // taşıyor; üstüne 4 atlas dizisi daha bindirmek 16 birim tavanını
+      // yeniden zorlar. O materyaller temel atlas sampler'larında kalır.
+      if (!batch || batch.grid <= 1 || seen.has(material) || material.userData.atlasArrays || material.userData.cellGrade) return;
       seen.add(material);
       const bound = {};
       for (const slot of SLOTS) {

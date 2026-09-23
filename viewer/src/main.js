@@ -31,7 +31,7 @@ import { configureCameraControls } from './camera.js';
 import { PendingAction } from './pending-action.js';
 import {fitContextBounds,neutraliseTransmission} from './material-response.js';
 import {applyGradeValues,loadGradeTextures,bindGradeTextures,reviveBatchedGrade} from './exterior-grade.js';
-import {applyCellGrade} from './cell-grade.js';
+import {applyCellGrade,buildCellFamilies} from './cell-grade.js';
 import {reviveBakedOcclusion} from './ao-revival.js';
 import {upgradeAtlasToArrays} from './atlas-array.js';
 import {bakeContactOcclusion} from './vertex-ao.js';
@@ -795,7 +795,7 @@ let walkData=null;
 // currently is - eased per frame so starting and leaving the tour are fades
 // rather than a cut.
 let guidedTour=null,spotlight=null,tourShade=0,tourShadeTarget=0,tourShadeTime=null;
-let roomProbes=null,contactBake=null,lateGradeTextures=null;
+let roomProbes=null,contactBake=null,lateGradeTextures=null,lateCellFamilies=null;
 // AYDINLIK İŞ 6: a part that arrives AFTER boot (deferred interior/context)
 // used to miss every idle upgrade - the console counted it: exterior grade
 // 5 yerine 8, atlas 9 yerine 20, contact AO 503k yerine 1 072k. Every
@@ -810,7 +810,7 @@ async function latePartUpgrade(name,model){
     await Promise.all([window.__angoraGradeReady??0,window.__angoraAoReady??0,window.__angoraAtlasReady??0]);
     if(lateGradeTextures){
       const applied=reviveBatchedGrade(single,lateGradeTextures,
-        {anisotropy:Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy()),anyGrid:FEATURES.gradeAnyGridV1,cellGrade:applyCellGrade});
+        {anisotropy:Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy()),anyGrid:FEATURES.gradeAnyGridV1,cellGrade:(m,_sets,o)=>applyCellGrade(m,lateCellFamilies,o)});
       if(applied)console.info(`Exterior grade revived on ${applied} materials (late: ${name})`);
     }
     if(FEATURES.bakedAoRevival&&quality.tier.startsWith('desktop')){
@@ -1482,8 +1482,11 @@ async function loadNativeModel(manifest){
       loadGradeTextures(new URL(pages?'assets/textures/':'textures/',publicRoot))
         .then(textures=>{
           lateGradeTextures=textures; // İŞ 6: geç gelen parçalar da aynı setle
+          // KAPANIŞ İŞ 4.1: aile dizileri TEK SEFER kurulur (3 birim);
+          // hücre-grade bütün katmanlarını buradan indeksler.
+          lateCellFamilies??=buildCellFamilies(textures,{anisotropy:Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy())});
           const applied=reviveBatchedGrade(nativeDelivery.loaded,textures,
-            {anisotropy:Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy()),anyGrid:FEATURES.gradeAnyGridV1,cellGrade:applyCellGrade});
+            {anisotropy:Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy()),anyGrid:FEATURES.gradeAnyGridV1,cellGrade:(m,_sets,o)=>applyCellGrade(m,lateCellFamilies,o)});
           if(applied){renderer.shadowMap.needsUpdate=true;invalidate();}
           console.info('Exterior grade revived on '+applied+' materials');
           resolve(applied);
