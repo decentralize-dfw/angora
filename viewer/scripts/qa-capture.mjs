@@ -146,7 +146,11 @@ for (const session of sessions) {
         await page.goto(url, {waitUntil: 'domcontentloaded'});
         await page.waitForFunction(
           () => JSON.parse(document.querySelector('#viewport')?.dataset.qaReport ?? 'null')?.camera,
-          null, {timeout: 480_000});
+          // SwiftShader duvar saati ürün metriği DEĞİL (kırmızı çizgi:
+          // konsol hatası 0 + context loss 0). Bayrak-açık desktop-high
+          // karesi yazılım rasterinde 8 dk tavanı aşar; ölçülen maliyet
+          // captureMs olarak rapora yazılır, kesilmez (FAZ-7 Bölüm 2).
+          null, {timeout: 1_500_000});
         if (night) {
           await page.evaluate(() => window.__angoraQA.nightScene());
           await page.waitForTimeout(600);
@@ -182,7 +186,7 @@ for (const session of sessions) {
           // ekranda kalan görüntü yerleşmiş sinema karesidir.
           report.cinemaSamples = await page.evaluate(() => window.__angoraCinemaRefine?.(24) ?? 0);
         }
-        await page.screenshot({path: path.join(outDir, tier, camera.id + suffix + '.png'), timeout: cinema ? 480_000 : 120_000});
+        await page.screenshot({path: path.join(outDir, tier, camera.id + suffix + '.png'), timeout: cinema ? 900_000 : 300_000});
         await writeFile(path.join(outDir, tier, camera.id + suffix + '.json'), JSON.stringify(report, null, 2));
         summary.runs.push({tier, profile, camera: camera.id, scale, ok: true,
           drawCalls: report.renderer.drawCalls, triangles: report.renderer.triangles,
