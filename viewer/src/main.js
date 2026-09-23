@@ -1443,6 +1443,17 @@ async function loadNativeModel(manifest){
       return result;
     }).catch(error=>{console.warn('Contact AO unavailable',error);return null;});
   }
+  // FAZ 7 İŞ 3: window portal lights - built on idle AFTER the FAZ 6
+  // chain, visible only in floor/interior views (LTC is an interior
+  // spend; hidden lights compile out of exterior programs).
+  if(FEATURES.windowPortalLight&&manifest.batched){
+    const portalView=()=>{lighting.setPortalVisibility(['floor','interior'].includes(quality.view));invalidate();};
+    quality.onChange(portalView);
+    window.__angoraPortalsReady=Promise.resolve(window.__angoraContactReady??null)
+      .then(()=>lighting.buildWindowPortals())
+      .then(count=>{portalView();return count;})
+      .catch(error=>{console.warn('Window portals unavailable',error);return 0;});
+  }
   // The property card greets a plain entry here too. It used to be raised
   // only on the classic path, which this one returns before ever reaching -
   // so on the delivered build nobody was ever offered the tour.

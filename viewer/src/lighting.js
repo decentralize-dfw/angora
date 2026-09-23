@@ -11,6 +11,7 @@ import {applyGlassCellPolish} from './glass-cells.js';
 import {applyRenderProfile,referenceProfile} from './render-profile.js';
 import {InteriorLightController} from './interior-lighting.js';
 import {FEATURES} from './features.js';
+import {installPcss} from './pcss.js';
 
 // The environment a surface reflects has to have a GROUND. A sky-only probe -
 // the procedural sky, and the puresky HDR that replaces it - leaves the whole
@@ -148,6 +149,20 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     :Promise.resolve(null);
   let day=172,hour=12.5,environmentMode='procedural-sky',walkInterior=false,lightsEnabled=true;
   let waterApplied=0; // A2: poolWaterV2 coverage, counted not claimed
+  // FAZ 7 İŞ 3: the villa's own glazing meshes, collected at prepareMesh,
+  // become window portal area lights (desktop, flag'lı, boşta kurulur).
+  const portalCandidates=FEATURES.windowPortalLight?[]:null;
+  let portalGroup=null,portalSolar={altitude:0},portalIntensityFn=null;
+  function updatePortalLights(){
+    if(!portalGroup||!portalIntensityFn)return;
+    const dayness=Math.max(0,Math.sin(Math.max(0,portalSolar.altitude*Math.PI/180)));
+    for(const light of portalGroup.children){
+      light.intensity=portalIntensityFn(light.userData.portal,
+        {altitude:portalSolar.altitude,sunDirection:direction,gain:light.userData.gain});
+      // low sun = warm glass; the same story the sky tells
+      light.color.setRGB(1,.97-.17*(1-dayness),.92-.3*(1-dayness));
+    }
+  }
   let pendingProbeHdr=null,probeMassingGroup=null;
   // Task 3.5: the pool's wave phase follows the daylight hour - the one time
   // axis this on-demand renderer actually moves - so captures of the same
@@ -191,6 +206,14 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     const enabled=Boolean(current.dynamicSunShadow);
     if(renderer.shadowMap.enabled!==enabled){renderer.shadowMap.enabled=enabled;if(enabled)renderer.shadowMap.needsUpdate=true;}
     sun.castShadow=enabled;
+    // FAZ 7 İŞ 2: the quality profile resolves shadowType 'pcss' only on
+    // desktop tiers behind softShadowsV2; the chunk rewrite happens ONCE
+    // and existing programs recompile via needsUpdate. Flag off = the
+    // pristine three chunk, byte for byte (pcss.js keeps the source).
+    if(enabled&&current.shadowType==='pcss'&&installPcss()){
+      scene.traverse(o=>{if(o.isMesh)for(const m of Array.isArray(o.material)?o.material:[o.material])m.needsUpdate=true;});
+      renderer.shadowMap.needsUpdate=true;
+    }
     const size=current.shadowMapSize;
     if(enabled&&size&&size!==shadowMapSizeApplied){
       shadowMapSizeApplied=size;sun.shadow.mapSize.setScalar(size);
@@ -227,6 +250,7 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
   }
   function setTime(nextHour=hour,nextDay=day) {
     hour=nextHour;day=nextDay;const solar=solarPosition(hour,{day});direction.fromArray(solar.direction);
+    portalSolar=solar;updatePortalLights();
     waterPhase.value=hour*2.4;
     // Task 1.2-d: with a live sun the baked R channel (direct visibility)
     // would draw the same shadow twice; the G channel's ambient dirt is
@@ -280,6 +304,29 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
       if(dynamicShadowActive()&&fitSunShadow(quality.value))renderer.shadowMap.needsUpdate=true;
     },
     requestShadowUpdate(){if(renderer.shadowMap.enabled)renderer.shadowMap.needsUpdate=true;},
+    // FAZ 7 İŞ 3: built once, on idle, from the villa's own panes. The
+    // group ships INVISIBLE and main flips it per view - LTC evaluation
+    // is an interior spend; an exterior orbit never pays it (and with it
+    // hidden, three counts zero rect lights, so exterior programs keep
+    // their FAZ 6 defines).
+    async buildWindowPortals(){
+      if(!portalCandidates?.length||portalGroup||!quality.tier.startsWith('desktop'))return 0;
+      const [portals,{RectAreaLightUniformsLib}]=await Promise.all([
+        import('./window-portals.js'),import('three/addons/lights/RectAreaLightUniformsLib.js')]);
+      RectAreaLightUniformsLib.init();
+      const centre=shadowBounds?shadowBounds.building.getCenter(new THREE.Vector3()):new THREE.Vector3();
+      const openings=portals.orientPortalsInward(portals.collectWindowPortals(portalCandidates),centre);
+      portalIntensityFn=portals.portalIntensity;
+      portalGroup=portals.createPortalLights(openings,{gain:2.2});
+      portalGroup.visible=false;
+      scene.add(portalGroup);
+      updatePortalLights();
+      console.info(`Window portal lights: ${portalGroup.children.length} lights from ${openings.length} openings (applied)`);
+      return portalGroup.children.length;
+    },
+    setPortalVisibility(visible){
+      if(portalGroup&&portalGroup.visible!==Boolean(visible))portalGroup.visible=Boolean(visible);
+    },
     async loadEnvironment(url) {
       // Task 2.1-d: half floats. The PMREM this feeds is half-float anyway,
       // so a full-float upload was 2x the memory for no signal.
@@ -407,6 +454,7 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
             :materials.every(m=>!m.userData.angoraAuthoredPBR&&/^(foliage(?:_light)?|hedge)$/.test(m.name)))smoothSurfaceNormals(object.geometry);
         }
       const glass=materials.every(isGlazing);object.userData.aoExcluded=glass;
+      if(glass&&portalCandidates&&name==='architecture')portalCandidates.push(object);
       object.castShadow=!glass;object.receiveShadow=!glass;
       for(const material of materials) {
         electricLight?.apply(material);

@@ -127,3 +127,50 @@ test('İŞ 7: the aperture walk keeps the FOCUS plane pixel-fixed and blurs off-
   refine.setDof(null);
   assert.equal(refine.dofShift(camera), null);
 });
+
+test('İŞ 2: the PCSS rewrite is anchored, reversible and idempotent', async () => {
+  const {pcssShadowChunk, installPcss, uninstallPcss} = await import('../src/pcss.js');
+  const pristine = THREE.ShaderChunk.shadowmap_pars_fragment;
+  const patched = pcssShadowChunk();
+  assert.ok(patched.includes('angoraPenumbra') && patched.includes('angoraPCSS'));
+  assert.ok(patched.indexOf('angoraPCSS(') < patched.indexOf('#if defined( SHADOWMAP_TYPE_PCF )'),
+    'early return lands before the constant-radius PCF branch');
+  assert.ok(patched.indexOf('float getShadow') < patched.indexOf('return angoraPCSS'),
+    'the return sits INSIDE getShadow');
+  assert.ok(patched.includes('SHADOWMAP_TYPE_VSM'), 'other branches survive');
+  assert.equal(installPcss(), true);
+  assert.equal(installPcss(), false, 'idempotent');
+  assert.ok(THREE.ShaderChunk.shadowmap_pars_fragment.includes('angoraPCSS'));
+  uninstallPcss();
+  assert.equal(THREE.ShaderChunk.shadowmap_pars_fragment, pristine, 'flag-off chunk byte-identical');
+});
+
+test('İŞ 3: glazing panes cluster into per-opening portals; skylights and slivers drop', async () => {
+  const {collectWindowPortals, orientPortalsInward, portalIntensity} =
+    await import('../src/window-portals.js');
+  const wallWindow = (x, z = 0) => {
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(1.5, 1.2));
+    mesh.position.set(x, 1.5, z);           // pane facing +z
+    mesh.updateMatrixWorld();
+    return mesh;
+  };
+  const skylight = new THREE.Mesh(new THREE.PlaneGeometry(2, 2));
+  skylight.rotation.x = -Math.PI / 2; skylight.position.set(0, 9, 0);
+  skylight.updateMatrixWorld();
+  const sliver = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.3));
+  sliver.position.set(20, 1.5, 0); sliver.updateMatrixWorld();
+  // a mullioned pair 0.8 m apart = ONE opening
+  const portals = collectWindowPortals([wallWindow(0), wallWindow(0.8), wallWindow(8), skylight, sliver]);
+  assert.equal(portals.length, 2, `mullion merged, skylight+sliver dropped: ${portals.length}`);
+  assert.ok(portals[0].area > portals[1].area, 'sorted by area');
+  orientPortalsInward(portals, new THREE.Vector3(0, 0, -10));   // building behind the panes
+  for (const portal of portals) {
+    assert.ok(portal.normal.z < 0, 'light points INTO the building');
+    assert.ok(portal.outward.z > 0.6, 'outward recorded');
+  }
+  const sunOn = portalIntensity(portals[0], {altitude: 40, sunDirection: new THREE.Vector3(0, 0.6, 0.8).normalize()});
+  const sunOff = portalIntensity(portals[0], {altitude: 40, sunDirection: new THREE.Vector3(0, 0.6, -0.8).normalize()});
+  const night = portalIntensity(portals[0], {altitude: -5, sunDirection: new THREE.Vector3(0, 0.6, 0.8).normalize()});
+  assert.ok(sunOn > sunOff && sunOff > 0, 'sun-facing window carries the sun, the rest carry sky');
+  assert.equal(night, 0, 'no portal light at night');
+});
