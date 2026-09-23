@@ -36,6 +36,30 @@ test('rules: ground world-space+upOnly, roofs world 2.4 shared, water/glass neve
   }
 });
 
+test('kapanış denetimi: üç dış yüzey relief+ORM alır, albedo YOLU elleneMEZ', () => {
+  for (const name of ['STONE-TILE', 'WHT', 'canopy.001']) {
+    const rule = cellRuleFor(name);
+    assert.ok(rule, name + ' bir kural görmeli');
+    assert.equal(rule.map, undefined, name + ': albedo bağlanmamalı (renk revert edilmişti)');
+    assert.ok(rule.normal && rule.orm, name + ': relief ve ORM gelmeli');
+    assert.ok(rule.world > 0, name + ': dünya-uzayı ölçeği verilmeli');
+    // metal-orm metalness 224/255 - boyalı/taş yüzeye asla bağlanmaz.
+    assert.notEqual(rule.orm, 'metalOrm', name + ': dielektrik ORM olmalı');
+  }
+  // Aileler büyümedi: üç birim sabit, yeni doku inmiyor.
+  assert.equal(Object.keys(FAMILY_LAYERS).length, 3);
+});
+
+test('hücre-grade iç mekâna ASLA girmez - ada göre eşleşen kural sızdırmaz', () => {
+  const material = batched(['WHT']);
+  material.name = 'interior-other-5';
+  assert.equal(applyCellGrade(material, fakeFamilies()), 0, 'interior- atlas geçilmeli');
+  assert.equal(material.userData.cellGrade, undefined, 'enjeksiyon kurulmamalı');
+  const outside = batched(['WHT']);
+  outside.name = 'context-buildings-other-1';
+  assert.ok(applyCellGrade(outside, fakeFamilies()) > 0, 'dışarıda aynı ad grade almalı');
+});
+
 test('İŞ 4.1: THREE array units, layer-indexed - no per-cell samplers anywhere', () => {
   const material = batched(['roof.004', 'water', 'R31 | R39 continuous grass ground',
     'R31 | R39 boundary limestone top'], 2);

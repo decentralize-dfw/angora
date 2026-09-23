@@ -46,6 +46,19 @@ export const CELL_RULES = [
   {match: /^white_trim \(\d+\)$/i,
     map: 'stuccoMapSoft', normal: 'stuccoNormal', orm: 'stuccoOrm',
     world: 1.2, normalScale: 0.3, blend: 0.5},
+  // KONTROL (kapanış denetimi): dış cephede kural GÖRMEYEN üç yüzey kaldı -
+  // havuz çevresi döşemesi, beyaz denizlik/harpuşta varyantı (WHT: white_trim
+  // regex'inin yakalamadığı ad) ve arka sundurma. Üçü de SADECE relief+ORM
+  // alır, albedo YOK: ürün sahibi bir kez cephe rengi değiştiği için revert
+  // istedi, o yüzden renk yolu elleneMEZ. Yeni doku da inmez - aileler zaten
+  // yüklü, üç birim sabit. ORM'ler dielektrik (metal kanalı <=23/255);
+  // metal-orm'un metalness'ı 224/255, boyalı yüzeye BAĞLANAMAZ.
+  {match: /^STONE-TILE$/i,
+    normal: 'travertineNormal', orm: 'travertineOrm', world: 2.0, normalScale: 0.7},
+  {match: /^WHT$/i,
+    normal: 'stuccoNormal', orm: 'stuccoOrm', world: 1.2, normalScale: 0.3},
+  {match: /^canopy\.001$/i,
+    normal: 'stuccoNormal', orm: 'stuccoOrm', world: 1.2, normalScale: 0.35},
   // Çakıl.
   {match: /^gravel( \[imported\])?$/i,
     map: 'limestoneMap', normal: 'limestoneNormal', orm: 'limestoneOrm',
@@ -116,6 +129,13 @@ export function buildCellFamilies(sets, {anisotropy = 8} = {}) {
 export function applyCellGrade(material, families, {anisotropy = 8} = {}) {
   const batch = material.userData.angoraBatch;
   if (!batch || material.userData.cellGrade || !families) return 0;
+  // Hücre-grade bir DIŞ MEKÂN sistemidir. İç mekânın kendi yolu var
+  // (lightmap + proceduralDetailInterior + materialResponseV2) ve ürün
+  // sahibi içeriden memnun olduğunu söyledi. Ölçüm: bu guard'dan ÖNCE de
+  // 120 iç hücrenin sıfırı buraya düşüyordu - yani davranış değişmiyor;
+  // guard yalnızca değişmezi yazıya döküyor, ki WHT gibi ADA göre eşleşen
+  // bir kural atlas'ı iç mekânda da yakalayınca sessizce içeri sızmasın.
+  if (/^interior-/.test(material.name ?? '')) return 0;
   const members = batch.materials;
   const params = [];   // [colorLayer+1, worldModule, blend|repU, upOnly|repV]
   const normals = [];  // [normalLayer+1, normalScale, ormLayer+1, 0]
