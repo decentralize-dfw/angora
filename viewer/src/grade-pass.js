@@ -45,14 +45,19 @@ export const GradeShader = {
     uSat: {value: GRADE.saturation},
     uGrain: {value: GRADE.grain},
     uVig: {value: new Vector3(...GRADE.vignette)},
+    // AYDINLIK İŞ 4 (warmGradeV1 chain'de ayarlar; varsayılanlar no-op):
+    // uWarm orta tonlara amber (gölgelere değil), uContrast 1'in altında
+    // davetkar - orta gri (0.18) pivotlu.
+    uWarm: {value: new Vector3(1, 1, 1)},
+    uContrast: {value: 1},
   },
   vertexShader: `varying vec2 vUv;
     void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
   fragmentShader: `
     varying vec2 vUv;
     uniform sampler2D tDiffuse;
-    uniform float uExposure,uSat,uGrain;
-    uniform vec3 uLift,uGain,uVig;
+    uniform float uExposure,uSat,uGrain,uContrast;
+    uniform vec3 uLift,uGain,uVig,uWarm;
 
     // three r180's AgX: rec709 -> rec2020, Filament inset, log2 encode over
     // [-12.474, 4.026] EV, 6th-order sigmoid, outset, back to linear rec709.
@@ -108,6 +113,11 @@ export const GradeShader = {
       c=uLift+c*(uGain-uLift);
       float lum=dot(c,vec3(0.2126,0.7152,0.0722));
       c=mix(vec3(lum),c,uSat);
+      // İŞ 4: amber yalnız orta bantta (gölge ve parlak uçlar maskeli),
+      // kontrast orta-gri pivotla iner - dramatik değil davetkar.
+      float midBand=smoothstep(0.03,0.25,lum)*(1.0-smoothstep(0.65,0.95,lum));
+      c*=mix(vec3(1.0),uWarm,midBand);
+      c=(c-0.18)*uContrast+0.18;
       float n=fract(52.9829189*fract(dot(gl_FragCoord.xy,vec2(0.06711056,0.00583715))))-0.5;
       c+=n*uGrain;
       float dv=distance(vUv,vec2(0.5,uVig.z));

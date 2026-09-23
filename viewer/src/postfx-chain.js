@@ -10,6 +10,7 @@ import {GradeShader} from './grade-pass.js';
 import {DisplayDitherShader} from './display-dither.js';
 import {configurePostprocessing} from './postprocessing.js';
 import {referenceProfile} from './render-profile.js';
+import {FEATURES} from './features.js';
 
 // Task 4.2: the whole desktop composer - passes, their shaders, GTAO's
 // tables - lives behind this dynamic seam. A phone's quality row never asks
@@ -31,6 +32,16 @@ export function buildPostfxChain({renderer, scene, camera, clip, quality, postfx
   // exists only when the quality row resolved ssr (desktop, flag'lı) and
   // self-disables per frame when AO is off, so the flag-off chain is the
   // FAZ 6 chain object for object.
+  // AYDINLIK İŞ 4: yüksek anahtar - siyah nokta yukarı (dipler
+  // yapışmasın), orta tonlara hafif amber, kontrast aşağı. Emlak
+  // fotoğrafı referansı; gotik değil. Değerler uniform - bayrak
+  // kapalıyken shader'a tek byte dokunulmaz.
+  if (FEATURES.warmGradeV1) {
+    grade.material.uniforms.uLift.value.set(0.016, 0.015, 0.012);
+    grade.material.uniforms.uWarm.value.set(1.045, 1.005, 0.94);
+    grade.material.uniforms.uContrast.value = 0.92;
+    grade.material.uniforms.uVig.value.y = 0.05;   // vinyet de yarı - kasvet kalemi
+  }
   const ssr = quality.ssr ? new SsrPass(ao, camera) : null;
   configurePostprocessing(composer, {beauty, ao, ssr, smaa, bloom, output: grade,
     dither: new ShaderPass(DisplayDitherShader)});

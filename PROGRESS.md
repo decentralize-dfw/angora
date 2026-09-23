@@ -61,6 +61,25 @@ sayılmış hâlleriyle duruyor; kapanış dili geçerli: FAZ 6 "kod tarafı
 bitti, mandal bekliyor", FAZ 7 "masaüstü kod tarafı bitti (bayraklar
 kapalı, gerçek tarayıcı değerlendirmesi bekliyor); mobil FAZ 8'e kaldı."
 
+**AYDINLIK protokolü (2026-09-23, uygulandı, main'de):**
+- İŞ 6 (bayraksız, kök neden): decoder dispose activate sonrasından
+  partsDone'a taşındı (ertelenen parça ölü worker'da decode bekliyordu -
+  "Kat hazırlanıyor %100" + kayıp komşular); onAcquired boot sonrası her
+  parça için TAM boru hattı koşuyor ("(late: ad)" loglu). progressive
+  Loader/Context AÇIK.
+- warmGradeV1 (varsayılan false, tek anahtar) - değerler eski → yeni:
+  · İŞ 1 sis: neighborhood FogExp2 0.0018 → KAPALI (region'da duruyor)
+  · İŞ 2 backgroundIntensity: 0.55 → 0.85 (geri adım önerisi 0.75)
+  · İŞ 3 contact strength 0.55 → 0.35; aoMapIntensity 0.7 → 0.55;
+    GTAO blendIntensity neighborhood 0.8 → 0.4 (lighting.frame'de);
+    contact×aoMap çarpımı → min (CONTACT_FRAGMENT_WARM)
+  · İŞ 4 grade: uLift (0.004,0.005,0.007) → (0.016,0.015,0.012);
+    uWarm (1,1,1) → (1.045,1.005,0.94) orta-bant maskeli;
+    uContrast 1 → 0.92 (0.18 pivot); vinyet gücü 0.10 → 0.05
+  · İŞ 5 açılış saati: 16.5 → 13.5 (slider'da altın saat duruyor)
+- Karşılaştırma adresleri: bayraksız https://angora.mergvs.com/ ·
+  bayraklı https://angora.mergvs.com/?features=warmGradeV1:1
+
 **Bilinen sinyal:** bayrak-açık desktop-balanced C01 probe yüklemesi bir
 kez 480 sn'de rapor verememişti (contact-AO bake + portal + context idle
 zinciri şüphesi). faz7-final'in ilk karesi bunu ya doğrular ya aklar -

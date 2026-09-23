@@ -138,7 +138,21 @@ float contactShade=1.0-vContactOcc;
 reflectedLight.indirectDiffuse*=contactShade;
 reflectedLight.indirectSpecular*=mix(1.0,contactShade,0.6);`;
 
-export function applyContactShading(material) {
+// AYDINLIK İŞ 3: üç kapanma terimi (contact x aoMap x GTAO) çarpılınca
+// köşeler deliğe döner. warm modda contact, aoMap'in payını GERİ ALIP
+// ikisinin EN KOYUSUNU uygular (min) - üstelenme biter; GTAO'nun payı
+// yakın çevrede ayrıca yarıya iner (lighting.frame).
+export const CONTACT_FRAGMENT_WARM = `
+float contactShade=1.0-vContactOcc;
+#if defined( USE_AOMAP )
+float contactFloor=min(ambientOcclusion,contactShade)/max(ambientOcclusion,1e-3);
+#else
+float contactFloor=contactShade;
+#endif
+reflectedLight.indirectDiffuse*=contactFloor;
+reflectedLight.indirectSpecular*=mix(1.0,contactFloor,0.6);`;
+
+export function applyContactShading(material, {warm = false} = {}) {
   if (material.userData.contactShading) return false;
   material.userData.contactShading = true;
   const previous = material.onBeforeCompile, key = material.customProgramCacheKey();
@@ -147,16 +161,16 @@ export function applyContactShading(material) {
     shader.vertexShader = CONTACT_VERTEX.declare + shader.vertexShader;
     shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>' + CONTACT_VERTEX.assign);
     shader.fragmentShader = 'varying float vContactOcc;\n' + shader.fragmentShader;
-    shader.fragmentShader = shader.fragmentShader.replace('#include <aomap_fragment>', '#include <aomap_fragment>' + CONTACT_FRAGMENT);
+    shader.fragmentShader = shader.fragmentShader.replace('#include <aomap_fragment>', '#include <aomap_fragment>' + (warm ? CONTACT_FRAGMENT_WARM : CONTACT_FRAGMENT));
   };
-  material.customProgramCacheKey = () => key + '|contact-ao-v1';
+  material.customProgramCacheKey = () => key + (warm ? '|contact-ao-v1w' : '|contact-ao-v1');
   material.needsUpdate = true;
   return true;
 }
 
 // The idle driver: builds the grid, then walks receiver meshes in slices so
 // no single callback overruns its deadline. Resolves with vertex total.
-export function bakeContactOcclusion(models, {rays = 12, idle} = {}) {
+export function bakeContactOcclusion(models, {rays = 12, strength = 0.55, warm = false, idle} = {}) {
   const schedule = idle ?? (globalThis.requestIdleCallback
     ? (fn => globalThis.requestIdleCallback(fn, {timeout: 250}))
     : (fn => setTimeout(() => fn({timeRemaining: () => 50}), 50)));
@@ -174,11 +188,11 @@ export function bakeContactOcclusion(models, {rays = 12, idle} = {}) {
     const step = deadline => {
       while (queue.length && (deadline?.timeRemaining?.() ?? 50) > 8) {
         const mesh = queue.shift();
-        const count = bakeMeshContactOcclusion(mesh, grid, {rays});
+        const count = bakeMeshContactOcclusion(mesh, grid, {rays, strength});
         if (count) {
           vertices += count; meshes++;
           for (const material of Array.isArray(mesh.material) ? mesh.material : [mesh.material])
-            if (material && applyContactShading(material)) touched.add(material);
+            if (material && applyContactShading(material, {warm})) touched.add(material);
         }
       }
       if (queue.length) schedule(step);
@@ -188,7 +202,7 @@ export function bakeContactOcclusion(models, {rays = 12, idle} = {}) {
           if (!o.isMesh) return;
           const ms = Array.isArray(o.material) ? o.material : [o.material];
           if (ms.every(m => m && (m.transparent || /glass|water|mirror/i.test(m.name)))) return;
-          const c = bakeMeshContactOcclusion(o, grid, {rays});
+          const c = bakeMeshContactOcclusion(o, grid, {rays, strength});
           if (c) {v += c; for (const m of ms) if (m) applyContactShading(m);}
         }); return v;}});
     };

@@ -113,7 +113,9 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
   // The sky shader's own radiance sits well above the range this pipeline
   // exposes for, so unscaled it reaches the curve already saturated and lands
   // as flat white with no blue left in it. This holds it where a sky belongs.
-  scene.backgroundIntensity=.55;
+  // AYDINLIK İŞ 2: 0.55'te gök yarı kısıktı; parlak gök hem aydınlatır
+  // hem "güzel gün" der. Beyaza patlarsa ilk geri adım 0.75.
+  scene.backgroundIntensity=FEATURES.warmGradeV1?.85:.55;
   // No haze by default. Distance fog was tried here for depth and it read as
   // a grey cast over the whole settlement rather than as air. Task 1.5 tries
   // again with what that attempt lacked: the HORIZON'S own colour (tracked by
@@ -522,6 +524,9 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
       }
     },
     frame(view,contextBounds) {
+      // AYDINLIK İŞ 3: warm modda GTAO'nun payı ana dış karede yarıya
+      // iner (üçüncü kararma terimi); iç/kat görünümleri tam kalır.
+      if(FEATURES.warmGradeV1&&ao)ao.blendIntensity=view==='neighborhood'?0.4:0.8;
       reflectionFloor=/^f[0-3]$/.test(view)?Number(view.slice(1)):null;updateReflections();
       // The quality profile has already been told the view by selectView;
       // enable/size follow it, then the camera wraps the subject.
@@ -540,7 +545,9 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
       sun.shadow.camera.updateProjectionMatrix();renderer.shadowMap.needsUpdate=true;
       // Air only where there is distance to read through it; indoors and at
       // the villa a fog term would just grey the subject.
-      scene.fog=atmosphericFog&&(view==='region'||view==='neighborhood')?atmosphericFog:null;
+      // AYDINLIK İŞ 1: 70 metrelik mahalle karesinde FogExp2 0.0018 pus
+      // yapar, hava değil - warmGradeV1 sisi yalnız region'da bırakır.
+      scene.fog=atmosphericFog&&(view==='region'||(view==='neighborhood'&&!FEATURES.warmGradeV1))?atmosphericFog:null;
       // Region frames the whole settlement, where a crevice-scale radius has
       // nothing left to describe and only costs, so occlusion stops there.
       // Task 1.1b: with the flag on, the matrix+view row (quality.value has

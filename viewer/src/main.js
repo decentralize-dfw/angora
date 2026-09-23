@@ -1385,7 +1385,7 @@ async function loadNativeModel(manifest){
     releaseMaterial:m=>lighting.releaseMaterial(m),prepare:(o,{clipped,context,name})=>{
       o.renderOrder=5;lighting.prepareMesh(o,{clipped,context,name});
       const planes=clipped?[clip]:[];o.userData.clipPlanes=planes;
-        for(const material of Array.isArray(o.material)?o.material:[o.material]){material.clippingPlanes=planes;material.clipShadows=true;if(material.aoMap)material.aoMapIntensity=.7;if(name==='garden'||name==='context-plants'||(manifest.batched&&context))plotMask?.apply(material,{alwaysOutside:name==='context-buildings',cutInsidePlot:name==='context-ground'||name==='garden'});}
+        for(const material of Array.isArray(o.material)?o.material:[o.material]){material.clippingPlanes=planes;material.clipShadows=true;if(material.aoMap)material.aoMapIntensity=FEATURES.warmGradeV1?.55:.7;if(name==='garden'||name==='context-plants'||(manifest.batched&&context))plotMask?.apply(material,{alwaysOutside:name==='context-buildings',cutInsidePlot:name==='context-ground'||name==='garden'});}
     }});
     await nativeDelivery.activate(selected==='building'?'f3':selected);
     // A7: deferred context parts land behind the first frame; QA screenshots
@@ -1498,7 +1498,10 @@ async function loadNativeModel(manifest){
       window.__angoraGradeReady??0,window.__angoraAoReady??0,window.__angoraAtlasReady??0,
     ]).then(()=>bakeContactOcclusion(nativeDelivery.loaded,
       // BÖLÜM 3: telefonda 8-12 ışın, kalite masaüstünde artar.
-      {rays:quality.tier.startsWith('desktop')?16:10})).then(result=>{
+      // AYDINLIK İŞ 3: warm modda kararma hafifler (0.55->0.35) ve
+      // aoMap ile min-birleşir (üç terim çarpımı biterdi).
+      {rays:quality.tier.startsWith('desktop')?16:10,
+       strength:FEATURES.warmGradeV1?0.35:0.55,warm:FEATURES.warmGradeV1})).then(result=>{
       contactBake=result;
       if(result.materials)invalidate();
       console.info('Contact AO baked: '+result.vertices+' vertices / '+result.meshes+' meshes / '+result.materials+' materials');
@@ -2020,7 +2023,9 @@ function bindInterface() {
   // light is the flattest the facade can look. A shared link still says
   // exactly what it wants; only the unspoken opening changes.
   if (FEATURES.cameraRigsV2) {
-    if (shared.hour === undefined) $('#daylight-hour').value = 16.5;
+    // AYDINLIK İŞ 5: açılış karesi altın saat değil parlak öğleden sonra
+    // olsun; altın saat slider'da duruyor.
+    if (shared.hour === undefined) $('#daylight-hour').value = FEATURES.warmGradeV1 ? 13.5 : 16.5;
     if (!shared.style) $('#lighting-style').value = 'sun';
   }
   for(const id of ['toggle-plan','reset-view','rotate-mode','pan-mode','zoom-in','zoom-out']){

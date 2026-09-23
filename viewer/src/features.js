@@ -46,6 +46,11 @@ export const DEFAULT_FEATURES = Object.freeze({
   //    profile'daki !mobile guard'ı + testler). Ürün sahibi kararı (2026-09-23):
   //    FAZ 7 bayrakları KAPALI ship - kod hazır, ?features= ile açılır;
   //    gerçek tarayıcı değerlendirmesi bekleniyor. FAZ 6 bayrakları AÇIK.
+  // AYDINLIK (ürün sahibi: "çok puslu, fazla gotik" - emlak görseli
+  // YÜKSEK ANAHTAR ister). İŞ 1-5 tek bayrak: sis neighborhood'dan çıkar,
+  // gök 0.85, kararma terimleri hafifler + min-birleşir, grade sıcak ve
+  // düşük kontrast, açılış saati 13:30. ?features=warmGradeV1:1 ile A/B.
+  warmGradeV1: false,
   screenSpaceReflection: false, // İŞ 1 - SSR geçişi (postfx); havuz HARİÇ (poolWaterV2 kendi yansımasını sürer); planarPoolReflection 0.5'e eşitlenir
   softShadowsV2: false,        // İŞ 2 - PCSS (blocker search + değişken PCF) + iki masaüstü satırında 4096 harita
   windowPortalLight: false,    // İŞ 3 - pencere alan ışığı (glazing setinden konum/normal, gök rengi, oda başına <=2)
