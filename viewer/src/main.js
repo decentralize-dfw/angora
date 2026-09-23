@@ -1294,6 +1294,10 @@ async function loadNativeModel(manifest){
   const received=new Map();
   message(t('loadingModel'));
   nativeDelivery=createNativeDelivery({manifest,root:modelRoot,scene,groups,load:loadAsset,features:FEATURES,
+    // FAZ 6 İŞ B: analytic drift is a desktop spend until H1 measures a
+    // phone; the flag stays honest (?features=proceduralDetailV1:0 = zero
+    // trace) while the tier gate keeps every mobile tier on the old bytes.
+    proceduralDetail:{enabled:FEATURES.proceduralDetailV1&&quality.tier.startsWith('desktop'),octaves:2,interior:false},
     onProgress:(name,loaded,complete)=>{
       if(!sizes.has(name))return;
       const size=sizes.get(name);
