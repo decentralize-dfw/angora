@@ -109,9 +109,88 @@ Kapanışta sıfırdan yazma.
 
 ---
 
-## B. CAPTURE BİTİNCE — gate zinciri, kesintisiz
+## B. GATE EKONOMİSİ — 18 saati öne al
 
-`baseline-a36e184` → verdict → **durmadan**:
+**DEĞİŞİKLİK: tam format yalnız KAPANIŞTA. Ara gate'ler kısa.**
+
+Sebep: 12 kamera × 4 tier = 49 kare ≈ 3 saat. Altı ara gate + baseline =
+~18 saat ve ilk geri bildirim en sonda gelir. Bir bayrak yanlışsa 18 saat
+sonra öğrenilir. Kabul edilemez.
+
+### B1. Şu anki baseline'ı DURDUR
+
+`baseline-a36e184` (49 kare) koşuyorsa **durdur**. Yerine:
+
+**`baseline-short`** — 4 kamera × 2 tier = **8 kare, ~30 dk**
+
+| | |
+|---|---|
+| Kameralar | **C03** (dış hero) · **C04** (havuz cephesi — FAZ 1'de hiç gate'lenmedi) · **C07** (kesit) · **C10** (iç mekân) |
+| Tier'lar | **desktop-balanced** + **mobile-high** |
+
+Bu dörtlü FAZ 6'nın bütün işlerinin göründüğü yer: dış cephe, kesit kuralı,
+iç mekân. `mobile-high` pazarlıksız — referans cihaz o ve asıl garanti
+"mobil bozulmadı".
+
+### B2. Ara gate'ler aynı format — 8 kare, ~30 dk
+
+`faz6-b` · `faz6-c` · `faz6-d` · `faz6-e` · `faz6-f`
+Hepsi `baseline-short` ile aynı 4 kamera × 2 tier.
+
+Altı gate × 30 dk = **3 saat**, ve her bayrağın sonucu 30 dakikada belli
+olur. Kırmızı gelirse o gate'i tekrar koşmak da 30 dk.
+
+Masaüstü-only bir bayrakta (`exteriorGtao`, `proceduralDetailV1`)
+`mobile-high` kareleri **boşa değil** — mobilin değişmediğinin kanıtı,
+yani korumak istediğimiz asıl şeyin kanıtı. Atlama.
+
+### B3. KAPANIŞ — tam format, tek sefer
+
+Bütün bayraklar yeşillendikten sonra, tek oturumda:
+
+| Koşum | Kare | Bayraklar |
+|---|---|---|
+| **`baseline-full`** | 12 kamera × 4 tier + C03@2x = **49** | hepsi KAPALI |
+| **`faz6-final`** | aynı 49 | hepsi AÇIK |
+
+≈ 6 saat, bir kez. A/B kompozitleri bu iki koşumdan çıkar — aynı kod,
+aynı kameralar, tek fark bayraklar. **Kalite karşılaştırması ilk kez
+gerçekten temiz olur.**
+
+`desktop-high` ve `mobile-low` burada ilk kez görülür; FAZ 5 cinemaStill
+de (yalnız `desktop-high`'da çalışıyor) ilk kez render edilmiş olur.
+
+### B4. Kapanış kırmızı gelirse
+
+Altı bayrak birden açık olduğu için hangisinin bozduğu belirsiz olabilir.
+`?features=` ile bisect yap — her bisect koşumu **8 karelik kısa format**,
+30 dk. Tam formatı tekrar koşma; sebebi bulup düzelttikten sonra tek
+seferde tekrarla.
+
+### B5. Toplam
+
+| | Süre |
+|---|---|
+| `baseline-short` | 0,5 sa |
+| 6 ara gate | 3 sa |
+| `baseline-full` + `faz6-final` | 6 sa |
+| **Toplam** | **~9,5 sa** — ve ilk sonuç 30 dakikada |
+
+Eski plan 18 saatti ve ilk sonuç en sonda geliyordu.
+
+### B6. Kısa formatın kaçırabileceği şey — kabul edilen risk
+
+8 karelik gate C05/C06/C08/C09/C11/C12'yi ve `desktop-high`/`mobile-low`
+tier'larını görmez. Oralarda çıkacak bir regresyon ancak kapanışta
+yakalanır. Kabul: kapanış tam formatta ve bisect ucuz. **Ama kesit kuralı
+(C07, kayıp yüzey >%1 KIRMIZI) her ara gate'te geçerli** — Task 1.4'te
+duvarları kaçıran şey buydu, o kapı hiç açılmaz.
+
+---
+
+## B7. GATE ZİNCİRİ — kesintisiz
+
+`baseline-short` → verdict → **durmadan**:
 
 ```
 faz6-b (proceduralDetailV1)  →  faz6-c (runtimeVertexAO)
@@ -119,9 +198,9 @@ faz6-b (proceduralDetailV1)  →  faz6-c (runtimeVertexAO)
    →  faz6-f (exteriorGtao)  →  KAPANIŞ
 ```
 
-Her gate: **12 kamera × 4 tier**, kompozit zorunlu, her gate'te farklı
-kareler, en az bir C10. Kesit kaybı >%1 KIRMIZI. ALU/varying sayımı gate
-dosyasına. Flag-off GLSL diff BOŞ.
+Her ara gate: **4 kamera × 2 tier** (B2). Kompozit zorunlu, en az bir C10.
+Kesit kaybı >%1 KIRMIZI. ALU/varying sayımı gate dosyasına. Flag-off GLSL
+diff BOŞ. Kapanış tam formatta (B3).
 
 Bir gate kırmızı gelirse: `?features=` ile bayrak-bisect yap, sebebi bul,
 düzelt, **aynı gate'i tekrar koş**. Sırayı atlama, ama sonraki gate'in
@@ -150,8 +229,10 @@ kodunu bu arada hazırla — boşta bekleme.
 ## D. KAPANIŞ LİSTESİ — her madde ✅ ya da H-numaralı BLOKE + paket
 
 **Süreç**
-1. Her gate 12 kamera × 4 tier üretti, `mobile-high` dahil
-2. `baseline-a36e184` commit'li ve tüm A/B'lerin ÖNCE'si
+1. Ara gate'ler 4 kamera × 2 tier (`mobile-high` dahil); kapanış
+   12 kamera × 4 tier
+2. `baseline-full` + `faz6-final` aynı kodtan, tek fark bayraklar —
+   A/B kompozitleri bu çiftten
 3. Lens değişikliği varsa eski/yeni ayrı kompozitlerde
 4. `features.js`'te her bayrağın tier kapsamı yazılı, ölçülmemiş "ACTIVE" yok
 
