@@ -1,53 +1,47 @@
 # DURUM — 23 Eylül
 
-## 1. NEDEN AÇILMIYOR
+## 1. İKİ BUG — ürün sahibi tarayıcıda bisect etti, ikisi de KESİN
 
-**Açılıyor. Ölçüm ortamı çizemiyor.** İkisi farklı şey.
+### Bug A — SSR ekran kartını boğuyor
 
-- Bayraklar **kapalı**: 9/9 kare temiz, yeşil, saklı
-- Bayraklar **açık**: hiçbir kare 480 saniyede rapor veremiyor
+Tek değişkenli test: aynı URL'ye sadece `screenSpaceReflection:1` eklenince
+ekran siyahlaşıp gidip geliyor. Çıkarınca düzeliyor. **Suçlu kesin.**
 
-### Hesap
+Sebep `ssr-pass.js:49`: piksel başına **28 ray-march adımı**, `MAX_DISTANCE 32`,
+tam çözünürlük. 1600×900'de kare başına ~40 milyon doku okuması.
 
-| Kalem | Maliyet |
-|---|---|
-| **SSR** | piksel başına **28 ray-march adımı** (`ssr-pass.js:49`), 1600×900 = **40 milyon doku okuması / kare** |
-| **GTAO** | çözünürlük ölçeği 0,65 → **1,0** (İŞ 5). GTAO piksel sayısı **2,4 kat** arttı |
-| **PCSS** | blocker search — gölge başına çok örnekli, sabit PCF'in katı |
-| **Prosedürel detay** | 2 oktav → **4 oktav**, her fragment'te |
+**Kesme, ucuzlat.** Dört kol var, çarpımları 10–20 kat:
+- Yarı (hatta çeyrek) çözünürlüklü SSR tamponu → 4–16 kat
+- Adım 28 → **12**, isabet noktasında ikili arama ile rafine et (adım başına
+  kalite artar, toplam adım düşer)
+- `MAX_DISTANCE` 32 m → **10–12 m** (teras ve iç zemin için fazlasıyla yeter)
+- Erken çıkış: `roughness > 0.4` olan fragment'te hiç yürüme — sahnenin
+  çoğu zaten mat, yansıma görünmüyor
 
-Dördü de **tam ekran, piksel başına**. Üst üste bindi.
+Hepsi ayarlanabilir olsun; kapat/aç değil **kademeli**.
 
-### Kritik nokta
+### Bug B — `progressiveContextV1` komşu binaları yok ediyor
 
-Ölçüm ortamı **SwiftShader** — GPU yok, yazılım rasterizer, tek CPU.
-Gerçek bir ekran kartında 40 milyon doku okuması sıradan bir SSR
-maliyetidir, milisaniyelerle ölçülür. SwiftShader'da aynı iş dakikalar
-sürer.
+`progressiveContextV1:0` ile binalar geliyor, `1` ile **hiç gelmiyorlar**.
 
-**Yani bu kırmızı, sitenin tarayıcıda açılmadığını KANITLAMIYOR.**
-Kanıtladığı tek şey: SwiftShader bu kareyi 8 dakikada çizemiyor.
+Sebep: A7 komşu binaları + bitkileri boşta kuyruğuna aldı, ama yükleme
+sonrası geçişler onları beklemiyor. `main.js:1320`'deki kanca geç gelen
+parça için **tek bir şey** yapıyor:
 
-Ama tersini de kanıtlamıyor. FPS bu ortamda ölçülemiyor — "masaüstünde
-bütçe tavanı yok" derken açık bıraktığım delik tam burası.
+```js
+onAcquired:(name,model)=>{if(contactBake?.bakeLate&&contactBake.bakeLate(model))invalidate();}
+```
 
-### Gerçek cevabı veren tek şey
+Kanıt: konsolda `Exterior grade revived on 5 materials` — **8 olmalıydı**.
+Eksik üçü tam olarak komşu binalarınki: `ceiling.004`, `neighbor_wall`,
+`wood_dark.002`.
 
-Bayraklar açık build'i **gerçek tarayıcıda açmak.** 2 dakikalık iş,
-sadece sen yapabilirsin. O açılırsa mesele yok; açılmazsa hangi bayrağın
-pahalı olduğu bisect ile bulunur.
+`onAcquired` geç gelen parça için bütün parça-sonrası geçişleri tekrar
+koşmalı: `reviveBatchedGrade`, atlas dizisi yükseltmesi, plot maskesi,
+clipping düzlemleri, ışık bağlama. Sayı 8'e çıkmalı.
 
-### Ajanın teşhisi neden eksik
-
-Ajan `requestIdleCallback` açlığı dedi ve her boşta halkasına timeout
-ekledi (`6c65e47`). Doğru bir sertleştirme ama **sebep bu değil**:
-zincirin ucundaki contact-AO bake ve portal ışıkları bayraklar kapalıyken
-de koşuyordu ve o koşum 9/9 yeşildi. Değişen şey kare maliyeti.
-
-Bisect de yanıltabilir: "suçlu SSR" diye çıkacak, oysa SSR gerçek GPU'da
-muhtemelen sorunsuz. Kesmeden önce gerçek tarayıcı denemesi şart.
-
----
+**Düzelene kadar `progressiveContextV1` varsayılan KAPALI.** 13,6 MB
+kazanç, kaybolan komşulara değmez.
 
 ## 2. FAZLAR — ne bitti, ne bitmedi
 
