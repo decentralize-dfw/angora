@@ -24,20 +24,20 @@ export const DEFAULT_FEATURES = Object.freeze({
   pixelBudgetV2: false,        // matrix pixel budgets; off = legacy mobile 1.5M / desktop 5M, cap 2
   probeMassing: true,          // T3.4f - iki tier'da da canlı (tek seferlik probe yeniden kurulumu)
   poolWaterV2: true,           // T3.5 - iki tier'da da canlı (analitik dalga, saat-fazlı)
-  glassTiersV2: false,         // T3.5/İŞ E.1 - bugüne dek ÖLÜydü (angoraAuthoredPBR 37/37 true); onarılmış hücre-bazlı hali faz6-e gate'iyle açılır
+  glassTiersV2: true,          // T3.5/İŞ E.1 - iki tier; hücre-bazlı polish (gül+buzlu cam korunur, testte). 3.5'teki hali ÖLÜydü (angoraAuthoredPBR 37/37); doğrulama faz6-final C10 diff
   bakedAoRevival: true,        // T3.4d - masaüstü SADECE (main.js tier şartı); telefon WebP AO'da
   atlasArrayV2: true,          // T3.3 runtime - iki tier'da da canlı; 512/1024 hücre H6'da
   gzipSceneJson: true,         // T2.1-b - iki tier'da da canlı (.gz + düz dosya fallback)
-  proceduralDetailV1: false,   // FAZ 6 İŞ B - BÖLÜM 2.5: varsayılan false; gate ?features ile, yeşilse desktop açılır
-  proceduralDetailInterior: false, // İŞ D - iç mekân uDetail satırları (yarı genlik); faz6-d gate'iyle, proceduralDetailV1 gerektirir
-  runtimeVertexAO: false,      // İŞ C - gate ?features ile; masaüstü yeşilse açılır, iPhone 13 H1'e bağlı
-  exteriorGtao: false,         // İŞ F (EK Bölüm 2) - neighborhood görünümünde GTAO; region'da ASLA, mobilde etkisiz (postProcessing:false)
-  plantNormalsV1: false,       // İŞ E.2 - yaprak normal düzeltmesi (eski eşleşme ÖLÜydü); faz6-e gate'iyle açılır
+  proceduralDetailV1: true,    // İŞ B - main.js tier şartıyla masaüstü SADECE; mobil eski byte'larda (H1). Doğrulama faz6-final
+  proceduralDetailInterior: true, // İŞ D - iç uDetail satırları (yarı genlik); proceduralDetail üzerinden masaüstü SADECE
+  runtimeVertexAO: true,       // İŞ C - İKİ tier (IS-EMRI: "mobilde de çalışan tek AO"; kare başı maliyet 0 draw/byte, bake boşta; mobil 10 ışın). H1 veto edebilir
+  exteriorGtao: true,          // İŞ F - neighborhood'da GTAO, masaüstü SADECE (mobil matris postProcessing:false); region ASLA
+  plantNormalsV1: true,        // İŞ E.2 - iki tier; RAM-içi normal düzeltme, bake attestasyonuna dokunmaz (testte)
   buildingsChunking: true,     // T2.2 runtime - iki tier'da da canlı
   plantVariation: true,        // T2.3 runtime - iki tier'da da canlı
   authoredMaterialsV2: false,  // Faz 3
   progressiveLoaderV2: true,   // T2.1 - iki tier'da da canlı (interior defer + tembel kat probe'ları)
-  progressiveContextV1: false, // A7/T2.1 - context-buildings+plants boşta yüklenir (ilk interaktif -13.6/-9.3 MB); faz6-final ile açılır
+  progressiveContextV1: true,  // A7/T2.1 - iki tier; context-buildings+plants boşta (ilk interaktif -13,6 MB desktop / -9,3 MB mobil, faz6-final'de ölçülür)
   ktx2Delivery: false,         // Faz 4.1
   contextLodV2: false,         // Faz 2
   cinemaStill: true,           // FAZ 5 - YALNIZ desktop-high + postfx; telefonda ve walk'ta asla

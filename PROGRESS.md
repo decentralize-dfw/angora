@@ -28,11 +28,40 @@ DENETIM.md (26-task denetim; 164/177 düz roughness, tier A1 bulgusu).
 - Kapanış dili (EK Bölüm 5): "kod tarafı bitti, mandal bekliyor."
   "TAMAMLANDI" YASAK; ratchet null + acceptedByOwner:false sürüyor.
 
-**Sıra:** süreç onarımı ✅ (a36e184) → baseline-a36e184 (KOŞUYOR, 49 kare)
-= faz6-a kanıtı → faz6-b (`--features proceduralDetailV1:1`) → faz6-c
-(`runtimeVertexAO:1`) → faz6-d (`proceduralDetailV1:1,proceduralDetailInterior:1`)
-→ faz6-e (`glassTiersV2:1,plantNormalsV1:1`) → faz6-f (`exteriorGtao:1`)
-→ kapanış (EK Bölüm 4 ölçümleri sayıyla).
+**DAİMİ EMİR (son, ara gate'leri kaldırdı):** kod bitene kadar SIFIR
+capture; bütün bayraklar açılır; doğrulama TEK oturumda en sonda (B3):
+`baseline-full` (bayraklar kapalı) ↔ `faz6-final` (hepsi açık), 12 kamera
+× 4 tier + C03@2x + gece kareleri, aynı kod. Kırmızıda bisect: 4 kamera
+× 2 tier kısa format. Kapanış listesi: build/qa/KAPANIS.md (24 madde).
+
+**A kuyruğu (hepsi bitti):**
+- A1 ✅ gece karesi: nightProbe saat değiştirmiyordu; gate'e gerçek gece
+  varyantı eklendi (C04/C10, hour=21 + nightScene()); eski png
+  C04-lamps-day-probe.png oldu (94488be).
+- A2 ✅ poolWater applied console.info sayacı (beklenen 1, garden-glass-4).
+- A3 ✅ İŞ D kodu + neutralInterior sıra testi. A4 ✅ İŞ F testi (4 tier).
+- A5 ✅ i18n.test.mjs. 
+- A6 ✅ CEVAP: "Ölçüler" VAR = annotations.js boyut katmanı (yalnız
+  dwg_verified + dimension_label_allowed satırlar etiket; ayarlardaki
+  measurements anahtarı; share linkinde settings.dimensions). "VR" VAR =
+  WebXR immersive walk (walk.js xrActive + enableImmersiveWalk;
+  i18n enterVR). İkisi de testli: annotations.test.mjs, walk-xr.test.mjs.
+  frame-measurement.js ölçü aracı DEĞİL (FPS toplayıcı).
+- A7 ✅ progressiveContextV1: ilk interaktiften 13,6 MB (desktop) manzara
+  çıktı; kalan çekirdek 6,49 MB GLB (architecture 5,86 tek başına) → H6'ya
+  sayıyla yazıldı. firstInteractiveBytes faz6-final'de ölçülecek.
+- A8 ✅ H2/H6/H8/H10 teslimat paketleri (BLOCKED.md; H8 tespiti KOŞTU:
+  5/8 addition aynalı). A9 ✅ KAPANIS.md iskeleti.
+
+**BAYRAKLAR AÇILDI (bu commit):** proceduralDetailV1 (masaüstü tier şartı
+main'de), proceduralDetailInterior, runtimeVertexAO (İKİ tier - IS-EMRI
+"mobilde de çalışan tek AO", kare başı 0 draw/byte), glassTiersV2,
+plantNormalsV1, exteriorGtao (mobilde yapısal etkisiz), progressiveContextV1.
+mobileSunShadow H1'e kadar KAPALI. Testler 292/292.
+
+**SIRADA:** build → B3 çift koşum (`baseline-full` ~57 kare + `faz6-final`
+~57 kare) → KAPANIS.md 24 maddeyi sayıyla doldur → "kod tarafı bitti,
+mandal bekliyor."
 
 - İŞ A canlı (a9c49b9 + spec hizası 04bc5e8): 8 malzeme, sayım testte.
 - İŞ B commit'li (f9ed80d + metal satırı a36e184), bayrak kapalı.
