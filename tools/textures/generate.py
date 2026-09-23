@@ -308,10 +308,10 @@ def grass():
     blades = Image.new('RGB', (N, N), (0, 0, 0))
     bd = ImageDraw.Draw(blades)
     rng = random.Random(55)
-    for _ in range(260000):
+    for _ in range(340000):
         x, y = rng.randrange(N), rng.randrange(N)
-        ln = rng.randint(6, 16)
-        dx = rng.randint(-4, 4); dy = -rng.randint(ln // 2, ln)
+        ln = rng.randint(4, 10)          # 4.5 m modülde ~3.5-9 cm
+        dx = rng.randint(-2, 2); dy = -rng.randint(ln // 2, ln)
         v = rng.randint(-30, 34)
         col = (max(0, 88 + v), max(0, 114 + v), max(0, 50 + int(v * .7)))
         for ox, oy in ((0, 0), (-N, 0), (N, 0), (0, -N), (0, N)):

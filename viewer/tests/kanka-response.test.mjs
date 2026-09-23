@@ -120,7 +120,11 @@ test("An authored tint never restains a bound sheet, and placeholder stubs yield
   bindGradeTextures([{scene}],sets);
   assert.ok(tile.map,'tile sheet bound');
   assert.equal('#'+tile.color.getHexString(),'#ffffff','tint cleared - the sheet carries the hue');
-  assert.ok(tile.map.repeat.x>1.9&&tile.map.repeat.x<2,'audited repeat density applied');
+  // The sheet used to hold ONE tile and now holds 9x7 of them, so the
+  // audited density divides through: 0.64 m per UV unit over a 2.4 m
+  // sheet. The old number drew 4.7 cm tiles on the villa while the
+  // neighbours drew 34 cm ones.
+  assert.ok(tile.map.repeat.x>0.26&&tile.map.repeat.x<0.27,'sheet scaled to real tile size');
   // a 4x4 placeholder baseColor is dropped when a colour grade lands
   const stub=new THREE.Texture();stub.image={width:4,height:4};
   const rail=new THREE.MeshStandardMaterial({name:'metal (4)'});rail.map=stub;

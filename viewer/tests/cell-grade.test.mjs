@@ -21,10 +21,12 @@ test('cell rules: every cell projects from world space, water/glass never match'
   // roofs - on the villa's authored repeat, which is calibrated to the villa
   // mesh's UV density - came out as giant blobs on meshes scaled otherwise.
   // Metres are the only figure that means the same thing on every mesh.
-  assert.equal(cellRuleFor('R31 | R39 continuous grass ground').world, 7);
+  assert.equal(cellRuleFor('R31 | R39 continuous grass ground').world, 4.5);
   assert.equal(cellRuleFor('R31 | R37 fine asphalt aggregate').world, 5);
   const roof = cellRuleFor('roof.004');
-  assert.equal(roof.world, 0.9, 'bir kiremit sırası, mesh UV\'sinden bağımsız');
+  // Sayfada 9 sıra x 7 karo var: 2.4 m modül karo başına 34 x 26 cm
+  // verir, gerçek pantile ölçüsü. 0.9 m ile 12 cm çıkıyordu.
+  assert.equal(roof.world, 2.4, 'gerçek karo ölçüsü, mesh UV\'sinden bağımsız');
   assert.equal(roof.repeat, undefined, 'authored UV yolu bırakıldı');
   // The ground sheet is a real grass texture now, not a wash over the
   // delivered green: the owner asked for the texture itself, so blend 1.
@@ -46,12 +48,17 @@ test('applyCellGrade: per-cell samplers, batchId gate, both anchors survive the 
   material.onBeforeCompile(shader, null);
   assert.equal(shader.uniforms.uCellP.value.length, 4);
   assert.equal(shader.uniforms.uCellP.value[1].x, 0, 'water cell inactive');
-  assert.equal(shader.uniforms.uCellP.value[2].y, 7, 'grass = world module 7 m');
+  assert.equal(shader.uniforms.uCellP.value[2].y, 4.5, 'grass = world module 4.5 m');
   assert.equal(shader.uniforms.uCellP.value[2].z, 1, 'grass sheet replaces, not washes');
-  assert.equal(shader.uniforms.uCellP.value[0].y, 0.9, 'roof = 0.9 m world course');
+  assert.equal(shader.uniforms.uCellP.value[0].y, 2.4, 'roof = 2.4 m sheet, 34 cm tiles');
   assert.ok(shader.fragmentShader.includes('diffuseColor.rgb=mix('), 'albedo blends in');
   assert.ok(shader.fragmentShader.includes('getTangentFrame'), 'roof normal path in');
-  assert.ok(shader.fragmentShader.includes('cgFn.y>=max'), 'per-pixel up-facing guard for world cells');
+  assert.ok(shader.fragmentShader.includes('cgFn.y>=max'), 'up-facing guard present');
+  // Kapı YALNIZ zemin için: duvar ve çatı malzemeleri ondan geçemezdi.
+  assert.equal(cellRuleFor('R31 | R39 continuous grass ground').upOnly, true);
+  assert.equal(cellRuleFor('roof.004').upOnly, undefined, 'çatı kapıdan muaf');
+  assert.equal(cellRuleFor('Retaining wall rough limestone (1)').upOnly, undefined,
+    'dikey istinat duvarı: kapı açık olsaydı hiç doku almazdı');
   assert.match(material.customProgramCacheKey(), /\|cell-grade-v1:/);
   assert.equal(applyCellGrade(material, sets()), 0, 'idempotent');
 });

@@ -34,7 +34,10 @@ const TABLE = [
   {key: 'clay-tile', match: /^clay tile/i, assets: ['building'],
    set: {map: 'clayTileMap', normalMap: 'clayTileNormal'},
    // audited UV density: 1 uv unit = 1/0.64 m; the tile sheet spans 0.8x1.0 m
-   repeat: [1.5625 / 0.8, 1.5625 / 1.0], normalScale: 1.2},
+   // 1 UV birimi = 0.64 m. Yeni sayfa 9x7 karo taşıyor, eskisi tek karo
+   // taşıyordu: eski repeat villada 4.7 cm'lik karo veriyordu, komşularda
+   // dünya modülü 34 cm. Ürün sahibinin ilk şikâyeti bu uyumsuzluktu.
+   repeat: [0.64 / 2.4, 0.64 / 2.4], normalScale: 1.2},
   {key: 'villa-roof', match: /^roof(-\d+)?$/i, assets: ['building'],
    set: {map: 'clayTileMap', normalMap: 'clayTileNormal'},
    repeat: [1 / 0.8, 1 / 1.0], normalScale: 1.2},
@@ -57,7 +60,7 @@ const TABLE = [
   {key: 'terrace', match: /^stone_tile \(\d+\)$/i, assets: ['garden'],
    set: {map: 'travertineMap', normalMap: 'travertineNormal'},
    // the pool terrace is laid on the diagonal in the photographs
-   groundUV: {module: 0.8, diagonal: true}},
+   groundUV: {module: 2.0, diagonal: true}},
   {key: 'entrance-court', match: /^Entrance coursed limestone$/i, assets: ['garden'],
    set: {map: 'travertineMap', normalMap: 'travertineNormal'},
    groundUV: {module: 0.8}},
@@ -194,14 +197,17 @@ function projectGroundUV(mesh, {module, diagonal}) {
 // list, with the repeats the legacy TABLE already carries.
 const BATCHED_TABLE = [
   {name: 'Clay tile', set: {map: 'clayTileMap', normalMap: 'clayTileNormal', ormMap: 'clayTileOrm'},
-   repeat: [1.5625 / 0.8, 1.5625 / 1.0], normalScale: 1.2},
+   // 1 UV birimi = 0.64 m. Yeni sayfa 9x7 karo taşıyor, eskisi tek karo
+   // taşıyordu: eski repeat villada 4.7 cm'lik karo veriyordu, komşularda
+   // dünya modülü 34 cm. Ürün sahibinin ilk şikâyeti bu uyumsuzluktu.
+   repeat: [0.64 / 2.4, 0.64 / 2.4], normalScale: 1.2},
   // Kabartma + DÜZ renk 'plastik' okur; türetilmiş kum albedo'su cephenin
   // ortalama rengini koruyarak (keepAverage) sadece düzlüğü kırar. ORM ile
   // artık parlaklık da tek düze değil - asıl "CG" sinyali oydu.
   {name: 'STRUCCO', set: {map: 'stuccoMap', normalMap: 'stuccoNormal', ormMap: 'stuccoOrm'},
-   repeat: [1, 1], normalScale: 0.55, keepAverage: true},
+   repeat: [0.64 / 1.5, 0.64 / 1.5], normalScale: 0.55, keepAverage: true},
   {name: 'stone_tile', set: {map: 'travertineMap', normalMap: 'travertineNormal', ormMap: 'travertineOrm'},
-   groundUV: {module: 0.8, diagonal: true}},
+   groundUV: {module: 2.0, diagonal: true}},
   {name: 'ceiling.004', set: {map: 'stuccoMapSoft', normalMap: 'stuccoNormal', ormMap: 'stuccoOrm'},
    repeat: [1, 1], normalScale: 0.3, keepAverage: true},
   {name: 'neighbor_wall', set: {map: 'stuccoMapSoft', normalMap: 'stuccoNormal', ormMap: 'stuccoOrm'},
@@ -209,7 +215,7 @@ const BATCHED_TABLE = [
   // İstinat duvarı: travertin normal'i yerine kendi kaba kesme taşı seti.
   {name: 'Retaining wall rough limestone.001',
    set: {map: 'limestoneMap', normalMap: 'limestoneNormal', ormMap: 'limestoneOrm'},
-   groundUV: {module: 1.6}, normalScale: 0.9, keepAverage: true},
+   groundUV: {module: 2.5}, normalScale: 0.9, keepAverage: true},
   // Villa demiri: hücre range=0, dümdüz. Renk teslimatın; kazandığı şey
   // CEVAP - fırça dokusu ve parlaklık dalgalanması.
   {name: 'metal', color: '#212326', dropMap: true,

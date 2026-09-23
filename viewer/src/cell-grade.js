@@ -35,19 +35,19 @@ import * as THREE from 'three';
 // as grass rather than as a bitmap tiled across a field.
 export const CELL_RULES = [
   {match: /^R31 \| R39 continuous grass ground$/i,
-    map: 'grassMap', normal: 'grassNormal', orm: 'grassOrm', world: 7, blend: 1, normalScale: 0.6},
+    upOnly: true, map: 'grassMap', normal: 'grassNormal', orm: 'grassOrm', world: 4.5, blend: 1, normalScale: 0.6},
   {match: /^R31 \| R37 fine asphalt aggregate$/i,
-    map: 'asphaltMap', normal: 'asphaltNormal', orm: 'asphaltOrm', world: 5, blend: 1, normalScale: 0.8},
+    upOnly: true, map: 'asphaltMap', normal: 'asphaltNormal', orm: 'asphaltOrm', world: 5, blend: 1, normalScale: 0.8},
   // Komşu çatıları + villanın ikinci çatısı. 0.9 m = bir kiremit sırası.
   {match: /^(roof\.004|Neighbor 20 green tiles|roof-7)$/i,
     map: 'clayTileMap', normal: 'clayTileNormal', orm: 'clayTileOrm',
-    world: 0.9, normalScale: 1.0, blend: 0.9},
+    world: 2.4, normalScale: 1.0, blend: 0.9},
   {match: /^Entrance coursed limestone(\.\d{3})?$/i,
-    map: 'travertineMap', normal: 'travertineNormal', orm: 'travertineOrm', world: 0.8, blend: 1},
+    upOnly: true, map: 'travertineMap', normal: 'travertineNormal', orm: 'travertineOrm', world: 2.0, blend: 1},
   // Bahçe ve çevrenin kesme taşı: istinat duvarları, sınır harpuştası.
   {match: /^(Retaining wall rough limestone \(1\)|R31 \| R39 surrounding retaining stone|R31 \| R39 boundary limestone top)$/i,
     map: 'limestoneMap', normal: 'limestoneNormal', orm: 'limestoneOrm',
-    world: 1.6, normalScale: 0.9, blend: 0.85},
+    world: 2.5, normalScale: 0.9, blend: 0.85},
   // Sundurma kirişi ve komşu ahşabı.
   {match: /^(Garden \| Dark stained canopy timber|wood_dark \(3\)|wood_dark\.001)$/i,
     map: 'timberMap', normal: 'timberNormal', orm: 'timberOrm', world: 1.2, normalScale: 0.7, blend: 0.9},
@@ -98,7 +98,7 @@ export function applyCellGrade(material, sets, {anisotropy = 8} = {}) {
     const world = rule.world ?? 0;
     params.push([map, world,
       world > 0 ? (rule.blend ?? 1) : (rule.repeat?.[0] ?? 1),
-      rule.repeat?.[1] ?? 1]);
+      world > 0 ? (rule.upOnly ? 1 : 0) : (rule.repeat?.[1] ?? 1)]);
     normals.push([normal, rule.normalScale ?? 1, ormSlot, 0]);
     if (map || ormSlot) active++;
   }
@@ -136,7 +136,16 @@ ${samplerDecl}
 ` + shader.fragmentShader;
     const helper = `
 vec2 angoraCellUv(vec4 p){
-  if(p.y>0.0)return vCellWorld.xz/p.y;      // dünya-uzayı: bozuk UV'yi tamamen atlar
+  // Dünya-uzayı projeksiyonu, BASKIN EKSENE göre. Yalnız XZ kullanmak
+  // istinat duvarı gibi dikey yüzeyleri dikey şeritlere çeviriyordu - ve
+  // cgUp kapısı onları zaten tamamen atlıyordu, yani o duvarlar hiç doku
+  // almıyordu. Tam triplanar üç örnek demek; tek düzlem yeter.
+  if(p.y>0.0){
+    vec3 an=abs(cross(dFdx(vCellWorld),dFdy(vCellWorld)));
+    vec2 pp=(an.y>=max(an.x,an.z))?vCellWorld.xz
+           :(an.x>an.z?vCellWorld.zy:vCellWorld.xy);
+    return pp/p.y;
+  }
 #ifdef USE_MAP
   return vMapUv*p.zw;                        // authored UV, villa ölçeğiyle
 #else
@@ -155,8 +164,11 @@ vec2 angoraCellUv(vec4 p){
   int cgSlot=int(uCellP[${cell}].x+0.5);
   if(cgSlot>0){
     vec4 cgP=uCellP[${cell}];
+    // Yukarı-bakan kapısı YALNIZ zemin malzemeleri için: çimin istinat
+    // duvarından aşağı akmasını engeller. Duvar ve çatı malzemeleri bu
+    // kapıdan geçemezdi, o yüzden hiç görünmüyorlardı.
     bool cgUp=true;
-    if(cgP.y>0.0){vec3 cgFn=abs(cross(dFdx(vCellWorld),dFdy(vCellWorld)));cgUp=cgFn.y>=max(cgFn.x,cgFn.z);}
+    if(cgP.y>0.0&&cgP.w>0.5){vec3 cgFn=abs(cross(dFdx(vCellWorld),dFdy(vCellWorld)));cgUp=cgFn.y>=max(cgFn.x,cgFn.z);}
     if(cgUp){
       vec2 cgUv=angoraCellUv(cgP);
       vec3 cgSheet=(${pick('texture2D(%T%,cgUv)', 'vec4(1.0)')}).rgb;
