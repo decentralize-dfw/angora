@@ -10,11 +10,17 @@ kapanmaz.
 
 ---
 
-## A. CAPTURE KOŞARKEN — sırayla, durmadan
+## A. İŞ KUYRUĞU — sırayla, durmadan
 
-`baseline-a36e184` SwiftShader'da CPU'yu yiyor. **İkinci bir capture veya
-ağır render başlatma.** Bunun dışında her şey serbest: kod, test
-(`npm test` 3 saniye), GLB okuma, ölçüm script'i, doküman.
+**ŞU ANDA HİÇ CAPTURE YOK.** Koşan `baseline-a36e184`'ü durdur; yenisini
+başlatma. Ne 49 karelik tam format, ne 8 karelik kısa format — **hiçbiri.**
+Kısa format yalnız kapanışta, o da sadece bisect aracı olarak (B4).
+
+Bütün CPU koda gider. Serbest olan her şey: kod, `npm test` (3 sn),
+GLB okuma, ölçüm script'i, build, doküman. Yasak olan tek şey: capture.
+
+Kuyruk bitince durma — İŞ D/F, sonra bayraklar, sonra tek doğrulama
+oturumu (B3).
 
 ### A1. Gece karesi GÜNDÜZ çıktı — düzelt
 
@@ -109,108 +115,80 @@ Kapanışta sıfırdan yazma.
 
 ---
 
-## B. GATE EKONOMİSİ — 18 saati öne al
+## B. YÖNTEM DEĞİŞTİ — önce hepsini yap, doğrulamayı sona bırak
 
-**DEĞİŞİKLİK: tam format yalnız KAPANIŞTA. Ara gate'ler kısa.**
+**Ara gate YOK.** Her bayrağı tek tek gate'leyip beklemek yok. Bütün kodu
+yaz, bütün bayrakları aç, **doğrulamayı tek oturumda en sonda** yap.
 
-Sebep: 12 kamera × 4 tier = 49 kare ≈ 3 saat. Altı ara gate + baseline =
-~18 saat ve ilk geri bildirim en sonda gelir. Bir bayrak yanlışsa 18 saat
-sonra öğrenilir. Kabul edilemez.
+Gerekçe: hiçbir şey `main`'e gitmiyor, izin bekliyor. Yani ara gate'in
+koruduğu bir şey yok — sadece ilerlemeyi yavaşlatıyor. Öncelik
+**tamamlanma**; doğrulama kapanışta, titizce, tek seferde.
 
-### B1. Şu anki baseline'ı DURDUR
+Bu, kısa formatı da kapsar. Daha önce "ara gate 8 kare / 30 dk olsun"
+denmişti — **o da kalktı.** Kod bitene kadar sıfır capture.
 
-`baseline-a36e184` (49 kare) koşuyorsa **durdur**. Yerine:
+### B1. Koşan capture'ı DURDUR
 
-**`baseline-short`** — 4 kamera × 2 tier = **8 kare, ~30 dk**
+`baseline-a36e184` (49 kare) koşuyorsa **durdur**. Şu an hiçbir capture'a
+ihtiyaç yok — CPU koda ve ölçüm araçlarına gitsin.
 
-| | |
-|---|---|
-| Kameralar | **C03** (dış hero) · **C04** (havuz cephesi — FAZ 1'de hiç gate'lenmedi) · **C07** (kesit) · **C10** (iç mekân) |
-| Tier'lar | **desktop-balanced** + **mobile-high** |
+### B2. Sıra: bütün kod → bütün bayraklar açık → tek doğrulama
 
-Bu dörtlü FAZ 6'nın bütün işlerinin göründüğü yer: dış cephe, kesit kuralı,
-iç mekân. `mobile-high` pazarlıksız — referans cihaz o ve asıl garanti
-"mobil bozulmadı".
+```
+A1…A9 kuyruğu  →  İŞ D + İŞ F bitir  →  BÜTÜN BAYRAKLARI AÇ
+   →  npm test yeşil  →  build  →  TEK DOĞRULAMA OTURUMU (B3)
+```
 
-### B2. Ara gate'ler aynı format — 8 kare, ~30 dk
+Kod yazarken gate koşma. Her iş bitiminde: `npm test` (3 sn) + commit +
+push + `PROGRESS.md`. Capture yok.
 
-`faz6-b` · `faz6-c` · `faz6-d` · `faz6-e` · `faz6-f`
-Hepsi `baseline-short` ile aynı 4 kamera × 2 tier.
+### B3. TEK DOĞRULAMA OTURUMU — en sonda, tam format
 
-Altı gate × 30 dk = **3 saat**, ve her bayrağın sonucu 30 dakikada belli
-olur. Kırmızı gelirse o gate'i tekrar koşmak da 30 dk.
-
-Masaüstü-only bir bayrakta (`exteriorGtao`, `proceduralDetailV1`)
-`mobile-high` kareleri **boşa değil** — mobilin değişmediğinin kanıtı,
-yani korumak istediğimiz asıl şeyin kanıtı. Atlama.
-
-### B3. KAPANIŞ — tam format, tek sefer
-
-Bütün bayraklar yeşillendikten sonra, tek oturumda:
+Bütün kod bitince, tek oturumda çift koşum:
 
 | Koşum | Kare | Bayraklar |
 |---|---|---|
-| **`baseline-full`** | 12 kamera × 4 tier + C03@2x = **49** | hepsi KAPALI |
+| **`baseline-full`** | 12 kamera × 4 tier + C03@2x = **49** | FAZ 6 bayrakları KAPALI |
 | **`faz6-final`** | aynı 49 | hepsi AÇIK |
 
-≈ 6 saat, bir kez. A/B kompozitleri bu iki koşumdan çıkar — aynı kod,
-aynı kameralar, tek fark bayraklar. **Kalite karşılaştırması ilk kez
-gerçekten temiz olur.**
+≈ 6 saat, bir kez. Aynı kod, aynı kameralar, **tek fark bayraklar** —
+bu projedeki ilk gerçekten temiz A/B. `desktop-high` ve `mobile-low` ilk
+kez render edilir; FAZ 5 cinemaStill (yalnız `desktop-high`'da çalışır)
+ilk kez görülür.
 
-`desktop-high` ve `mobile-low` burada ilk kez görülür; FAZ 5 cinemaStill
-de (yalnız `desktop-high`'da çalışıyor) ilk kez render edilmiş olur.
+Sonra Bölüm D'deki 24 maddenin hepsi **bu iki koşumdan** ölçülür.
 
-### B4. Kapanış kırmızı gelirse
+### B4. Kapanış kırmızı gelirse — bisect
 
-Altı bayrak birden açık olduğu için hangisinin bozduğu belirsiz olabilir.
-`?features=` ile bisect yap — her bisect koşumu **8 karelik kısa format**,
-30 dk. Tam formatı tekrar koşma; sebebi bulup düzelttikten sonra tek
-seferde tekrarla.
+Altı bayrak birden açık, hangisinin bozduğu belirsiz olabilir.
+`?features=<ad>:0` ile bisect yap. **Bisect koşumu kısa format:**
+4 kamera (C03, C04, C07, C10) × 2 tier (desktop-balanced, mobile-high)
+= 8 kare, ~30 dk. Sebebi bulup düzelt, sonra tam formatı **bir kez**
+tekrarla.
 
-### B5. Toplam
+### B5. "%90 tamamlanma" ne demek
 
-| | Süre |
-|---|---|
-| `baseline-short` | 0,5 sa |
-| 6 ara gate | 3 sa |
-| `baseline-full` + `faz6-final` | 6 sa |
-| **Toplam** | **~9,5 sa** — ve ilk sonuç 30 dakikada |
+Öncelik kapsama, mükemmellik değil. Bölüm D'nin 24 maddesinden:
 
-Eski plan 18 saatti ve ilk sonuç en sonda geliyordu.
+- **Kod maddeleri (1–22)** — hepsi sende, hepsi bitmeli. **Asıl hedef bu.**
+- **Engel maddeleri (23–24)** — H1/H2/H6/H8/H10 insana bağlı; senin payın
+  **teslimat paketini üretmek** (A8), ölçümü yapmak değil.
 
-### B6. Kısa formatın kaçırabileceği şey — kabul edilen risk
+Bir madde tam kapanmıyorsa **yarısını kapat ve sayıyla yaz** — atlama.
+Örnek: düz roughness 164/177'den 60'a inmiyorsa, kaça indiyse onu yaz;
+"iyileşti" değil, **sayı**.
 
-8 karelik gate C05/C06/C08/C09/C11/C12'yi ve `desktop-high`/`mobile-low`
-tier'larını görmez. Oralarda çıkacak bir regresyon ancak kapanışta
-yakalanır. Kabul: kapanış tam formatta ve bisect ucuz. **Ama kesit kuralı
-(C07, kayıp yüzey >%1 KIRMIZI) her ara gate'te geçerli** — Task 1.4'te
-duvarları kaçıran şey buydu, o kapı hiç açılmaz.
+### B6. Tek istisna — kesit kuralı hiç gevşemez
 
----
-
-## B7. GATE ZİNCİRİ — kesintisiz
-
-`baseline-short` → verdict → **durmadan**:
-
-```
-faz6-b (proceduralDetailV1)  →  faz6-c (runtimeVertexAO)
-   →  faz6-d (proceduralDetailInterior)  →  faz6-e (glassTiersV2 + plantNormalsV1)
-   →  faz6-f (exteriorGtao)  →  KAPANIŞ
-```
-
-Her ara gate: **4 kamera × 2 tier** (B2). Kompozit zorunlu, en az bir C10.
-Kesit kaybı >%1 KIRMIZI. ALU/varying sayımı gate dosyasına. Flag-off GLSL
-diff BOŞ. Kapanış tam formatta (B3).
-
-Bir gate kırmızı gelirse: `?features=` ile bayrak-bisect yap, sebebi bul,
-düzelt, **aynı gate'i tekrar koş**. Sırayı atlama, ama sonraki gate'in
-kodunu bu arada hazırla — boşta bekleme.
-
----
+Doğrulama sona bırakıldı ama `singleSided`, geometri ve normal yazan her
+iş (özellikle İŞ E.2 yaprak normalleri) **kendi testini kodla birlikte
+yazar**. Kesitte yüzey kaybı birim testiyle yakalanabiliyorsa orada
+yakalanır. Task 1.4'te duvarları kaçıran şey buydu; capture'a bırakılmaz.
 
 ## C. ASLA
 
-- **Boşta tur bitirme.** Capture koşuyorsa A'daki sıradaki işe geç.
+- **Boşta tur bitirme.** A'daki sıradaki işe geç; kuyruk bitince İŞ D/F,
+  sonra bayraklar, sonra doğrulama oturumu.
   Check-in'i her turda yeniden kur; kapanana kadar iptal etme.
 - **"FAZ 6 TAMAMLANDI" yazma.** `ratchet.json` baseline'ı `null`,
   `acceptedByOwner: false`. Planın kendi kuralı (Task 0.4):
@@ -222,7 +200,8 @@ kodunu bu arada hazırla — boşta bekleme.
   kapatılmıştı, 25 yüzeyin 2'sine dokunmuştu. `applied` sayısı logda olacak.
 - **Gözle "iyi görünüyor" ile gate geçme.** Sayısal kural varsa o geçerli.
 - **`main`'e merge etme.** İzin bekler.
-- İkinci capture / ağır render başlatma (A'nın başındaki CPU kuralı).
+- **Capture başlatma.** Bütün kod bitip bayraklar açılana kadar tek bir
+  kare bile çekilmez. Doğrulama B3'te, tek oturumda.
 
 ---
 
