@@ -1,0 +1,12 @@
+FAZ 6 İŞ B kapı kanıtı (BÖLÜM 2.5): bayrak KAPALIYKEN emitted GLSL,
+İŞ B ÖNCESİ kodla (commit a9c49b9) birebir mi?
+
+case grid=1 members=1 transparent=false: IDENTICAL (frag+vert+cacheKey)
+case grid=2 members=4 transparent=false: IDENTICAL (frag+vert+cacheKey)
+case grid=4 members=16 transparent=true: IDENTICAL (frag+vert+cacheKey)
+
+Diff (bayrak kapalı): BOŞ
+Bayrak AÇIK enjeksiyonu: +948 karakter fragment; yeni varying=1 (vec3 dünya poz).
+ALU sayımı (procedural-detail.js icinde satır satır): tek oktav 69 skaler op (~17 slot;
+mobil 14 tavanı asiliyor - mobil bayrak KAPALI ship, H1 sarti; acilis günü 4 hash->1 hash indirimi ilk kalem),
+iki oktav 116 op (masaüstü 38 slot ~152 op tavanının ALTINDA).
