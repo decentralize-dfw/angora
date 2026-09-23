@@ -37,7 +37,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   plantVariation: true,        // T2.3 runtime - iki tier'da da canlı
   authoredMaterialsV2: false,  // Faz 3
   progressiveLoaderV2: true,   // T2.1 - iki tier'da da canlı (interior defer + tembel kat probe'ları)
-  progressiveContextV1: true,  // A7/T2.1 - iki tier; context-buildings+plants boşta (ilk interaktif -13,6 MB desktop / -9,3 MB mobil, faz6-final'de ölçülür)
+  progressiveContextV1: false, // KAPALI - ürün sahibi: sahne açıldıktan ~5 sn sonra mahallenin belirmesi kabul edilemez. 13,6 MB kazanç pop etkisine değmiyor; erteleme yerine kaynak tarafı LOD/instancing (H6) beklenecek.
   ktx2Delivery: false,         // Faz 4.1
   contextLodV2: false,         // Faz 2
   cinemaStill: false,         // KAPALI - boşta birikim siyahtan başlıyor ve her girdide sıfırlanıyor; ürün sahibi siyah ekran bildirdi. İlerlemeli rafinasyon çözülmüş kareden başlayacak şekilde yeniden yazılana kadar kapalı.
