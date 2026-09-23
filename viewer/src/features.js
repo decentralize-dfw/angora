@@ -7,7 +7,7 @@
 // task's own measurement - never in bulk.
 export const DEFAULT_FEATURES = Object.freeze({
   hybridSunShadow: true,       // T1.2 - masaüstü tier'ları; iPhone 13'te KAPALI (mobileSunShadow, H1)
-  mobileSunShadow: false,      // Task 1.2 - phones join ONLY after H1 measures the ratchet green
+  mobileSunShadow: true,       // KAPANIŞ İŞ 2.4: 512 harita, villa-local, olay bazlı depth pass. Ürün sahibi telefonda bakar; akıcı değilse bu tek bayrak kapatır (?features=mobileSunShadow:0)
   exteriorGradeRevival: true,  // T1.3+İŞ A - 37 batched materyalin 8'i (sayım testte); iki tier'da da canlı
   // Task 1.4 is SHELVED (BLOCKED H8): the shell walls are two skins, the
   // context additions are mirrored copies whose winding build.mjs never
@@ -52,12 +52,12 @@ export const DEFAULT_FEATURES = Object.freeze({
   // düşük kontrast, açılış saati 13:30. ?features=warmGradeV1:1 ile A/B.
   warmGradeV1: true,           // AÇIK - ürün sahibi pusu defalarca bildirdi ve aydınlık sürümü tercih etti: sis yakın çevreden kalkar, gök 0.85, kararma terimleri düşer, grade gölgeleri kaldırıp orta tonları ısıtır, açılış 13:30. Eski hal: ?features=warmGradeV1:0
   gradeAnyGridV1: true,        // MALZEME İŞ 2 - grid şartı kalktı: hücre-bazlı gerçek dokular (çim/asfalt dünya-uzayı, komşu çatıları villa kiremidiyle aynı ölçek, cephe kum albedosu). Kapatmak: ?features=gradeAnyGridV1:0
-  screenSpaceReflection: false, // İŞ 1 - SSR geçişi (postfx); havuz HARİÇ (poolWaterV2 kendi yansımasını sürer); planarPoolReflection 0.5'e eşitlenir
-  softShadowsV2: false,        // İŞ 2 - PCSS (blocker search + değişken PCF) + iki masaüstü satırında 4096 harita
-  windowPortalLight: false,    // İŞ 3 - pencere alan ışığı (glazing setinden konum/normal, gök rengi, oda başına <=2)
-  proceduralDetailHigh: false, // İŞ 4 - 4 oktav + genlik çarpanı (albedo 1.5x, roughness 2x); proceduralDetailV1 üstüne masaüstü katmanı
-  gtaoFullRes: false,          // İŞ 5 - gtaoResolutionScale 1.0 iki masaüstü satırında
-  materialResponseV2: false,   // İŞ 6 - clearcoat (cilalı taş/ahşap/seramik) + sheen (kumaş) aile bazlı, masaüstü
+  screenSpaceReflection: true, // AÇIK (ölçüldü: prog -4, draw +1, tri +1, konsol 0, cinemaStill kapalıyken); ucuzlatıldı: 12 adım / 10 m. Havuz HARİÇ; planarPoolReflection 0.5
+  softShadowsV2: true,         // AÇIK (ölçüldü: prog -1, draw/tri/tex +0, konsol 0). PCSS 17+25=42 gölge örneği/piksel (statik sayım; eski PCF 9)
+  windowPortalLight: true,     // AÇIK (ölçüldü C10: prog +34 - LTC derlemesi; draw +0, tri +0, tex +0, konsol 0). İç mekânın en büyük görsel kazancı
+  proceduralDetailHigh: true,  // AÇIK (ölçüldü: prog -1, geri kalan +0, konsol 0; ALU statik 210 skaler op - masaüstünde tavan yok, ölç-ve-yaz)
+  gtaoFullRes: false,          // KAPALI-GEREKÇELİ: 4x GTAO pikseli; daha önce açılıp geri alındı (görünmeyen fark, MALZEME 3.2) ve bu turda da draw/prog etkisi sıfırken piksel maliyeti FPS'siz savunulamaz
+  materialResponseV2: true,    // AÇIK (ölçüldü: prog -5, draw/tri/tex +0, konsol 0) - clearcoat/sheen aile bazlı, masaüstü
   cinemaDof: true,             // İŞ 7 + KAPANIŞ İŞ 3 - apertür yürüyüşü örnek 1'den itibaren (seed net kalır); balanced'ı sinemaya katar
 });
 

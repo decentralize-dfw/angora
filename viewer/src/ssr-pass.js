@@ -46,9 +46,12 @@ export const SsrShader = {
     uniform mat4 uProjection, uInverseProjection, uCameraWorld;
     uniform vec4 uPoolRect;
     uniform vec2 uResolution;
-    #define STEPS 28
+    // KAPANIŞ İŞ 1: ölçüm sonrası ucuzlatma - 28 adım/32 m yerine
+    // 12 adım/10 m (+4 ikili arama). Teras/zemin yansıması 10 m'de
+    // fazlasıyla dolu; maliyet ~5x düşer, görünürlük aynı sınıf.
+    #define STEPS 12
     #define REFINE 4
-    #define MAX_DISTANCE 32.0
+    #define MAX_DISTANCE 10.0
     #define THICKNESS 0.4
     #define NORMAL_GATE 0.64
     vec3 viewPosition(vec2 uv, float depth) {
