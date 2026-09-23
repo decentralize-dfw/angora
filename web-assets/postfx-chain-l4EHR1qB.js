@@ -1,4 +1,4 @@
-import{P as Z,S as C,U as O,F as Te,V as U,W as Y,H as q,e as z,C as nt,f as $e,g as Ke,L as ke,h as be,a as F,M as k,D as et,R as we,i as lt,A as ve,Z as me,j as Qe,k as Je,m as ct,n as ut,o as ht,p as dt,q as ft,r as vt,u as mt,v as xt,w as pt,x as G,y as gt}from"./index-Dj61xZ60.js";const Me={name:"CopyShader",uniforms:{tDiffuse:{value:null},opacity:{value:1}},vertexShader:`
+import{P as Z,S as C,U as O,F as Te,V as U,W as Y,H as q,e as z,C as nt,f as $e,g as Ke,L as ke,h as be,a as F,M as k,D as et,R as we,i as lt,A as ve,Z as me,j as Qe,k as Je,m as ct,n as ut,o as ht,p as dt,q as ft,r as vt,u as mt,v as xt,w as pt,x as G,y as gt}from"./index-DU9L4sT1.js";const Me={name:"CopyShader",uniforms:{tDiffuse:{value:null},opacity:{value:1}},vertexShader:`
 
 		varying vec2 vUv;
 
@@ -787,9 +787,12 @@ import{P as Z,S as C,U as O,F as Te,V as U,W as Y,H as q,e as z,C as nt,f as $e,
     uniform mat4 uProjection, uInverseProjection, uCameraWorld;
     uniform vec4 uPoolRect;
     uniform vec2 uResolution;
-    #define STEPS 28
+    // KAPANIŞ İŞ 1: ölçüm sonrası ucuzlatma - 28 adım/32 m yerine
+    // 12 adım/10 m (+4 ikili arama). Teras/zemin yansıması 10 m'de
+    // fazlasıyla dolu; maliyet ~5x düşer, görünürlük aynı sınıf.
+    #define STEPS 12
     #define REFINE 4
-    #define MAX_DISTANCE 32.0
+    #define MAX_DISTANCE 10.0
     #define THICKNESS 0.4
     #define NORMAL_GATE 0.64
     vec3 viewPosition(vec2 uv, float depth) {
