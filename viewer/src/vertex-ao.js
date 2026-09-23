@@ -157,7 +157,9 @@ export function applyContactShading(material) {
 // The idle driver: builds the grid, then walks receiver meshes in slices so
 // no single callback overruns its deadline. Resolves with vertex total.
 export function bakeContactOcclusion(models, {rays = 12, idle} = {}) {
-  const schedule = idle ?? (globalThis.requestIdleCallback?.bind(globalThis) ?? (fn => setTimeout(() => fn({timeRemaining: () => 50}), 50)));
+  const schedule = idle ?? (globalThis.requestIdleCallback
+    ? (fn => globalThis.requestIdleCallback(fn, {timeout: 250}))
+    : (fn => setTimeout(() => fn({timeRemaining: () => 50}), 50)));
   return new Promise(resolve => {
     const grid = buildOccupancy(models);
     if (!grid) return resolve({vertices: 0, meshes: 0});

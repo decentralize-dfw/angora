@@ -1401,7 +1401,7 @@ async function loadNativeModel(manifest){
   // Until they arrive the atlas look stands; on arrival the grid=1 hero
   // materials rebind and recompile once, during idle.
   if(FEATURES.exteriorGradeRevival){
-    const idle=window.requestIdleCallback?.bind(window)??(fn=>setTimeout(fn,1500));
+    const idle=window.requestIdleCallback?(fn=>window.requestIdleCallback(fn,{timeout:1500})):(fn=>setTimeout(fn,1500));
     // The promise is exposed so a QA capture can await the rebind instead of
     // racing the idle callback - a screenshot half a second either side of
     // the revival is two different images.
@@ -1421,7 +1421,7 @@ async function loadNativeModel(manifest){
   // texel) rebind on idle, desktop only - a phone keeps its WebP and its
   // bytes. Exposed like __angoraGradeReady so a capture can await the swap.
   if(FEATURES.bakedAoRevival&&manifest.batched&&quality.tier.startsWith('desktop')){
-    const idle=window.requestIdleCallback?.bind(window)??(fn=>setTimeout(fn,1500));
+    const idle=window.requestIdleCallback?(fn=>window.requestIdleCallback(fn,{timeout:1500})):(fn=>setTimeout(fn,1500));
     window.__angoraAoReady=new Promise(resolve=>idle(()=>{
       const ktx2=createTextureLoader(renderer,1);
       reviveBakedOcclusion(nativeDelivery.loaded,{loader:ktx2,root:new URL('../../native-current/',modelRoot)})
@@ -1434,7 +1434,7 @@ async function loadNativeModel(manifest){
   // mips and anisotropy at the same texel count. Exposed for QA like the
   // other idle upgrades so captures never race the swap.
   if(FEATURES.atlasArrayV2&&manifest.batched){
-    const idle=window.requestIdleCallback?.bind(window)??(fn=>setTimeout(fn,1500));
+    const idle=window.requestIdleCallback?(fn=>window.requestIdleCallback(fn,{timeout:1500})):(fn=>setTimeout(fn,1500));
     window.__angoraAtlasReady=new Promise(resolve=>idle(()=>{
       try{
         const applied=upgradeAtlasToArrays(nativeDelivery.loaded);
@@ -2000,7 +2000,7 @@ function bindInterface() {
   // Task 4.2: the photo layer (gallery + 11 KB of point data) rides an idle
   // import; every later use already guards with photoViewer?./photoPins?..
   {
-    const idle=window.requestIdleCallback?.bind(window)??(fn=>setTimeout(fn,1200));
+    const idle=window.requestIdleCallback?(fn=>window.requestIdleCallback(fn,{timeout:1200})):(fn=>setTimeout(fn,1200));
     idle(async()=>{
       const [gallery,points]=await Promise.all([import('./photo-gallery.js'),import('./photo-points.js')]);
       photoPoints=points;

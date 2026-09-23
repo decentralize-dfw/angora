@@ -156,7 +156,7 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
         const deferredContext=features.progressiveContextV1?['context-buildings','context-plants']:[];
         preload??=(async()=>{
           for(const {name} of manifest.parts)if(!(deferInterior&&name==='interior')&&!deferredContext.includes(name))await acquire(name);
-          const idle=globalThis.requestIdleCallback?.bind(globalThis)??(fn=>setTimeout(fn,2000));
+          const idle=globalThis.requestIdleCallback?(fn=>globalThis.requestIdleCallback(fn,{timeout:2500})):(fn=>setTimeout(fn,2000));
           if(deferredContext.length){
             idle(()=>{(async()=>{
               for(const name of deferredContext)await acquire(name);
