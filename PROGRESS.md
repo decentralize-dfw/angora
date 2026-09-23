@@ -6,24 +6,49 @@
 > (önce Bölüm 0.5 + 0.7 oku). İnsan işleri: `BLOCKED.md`. Bütçe defteri:
 > `build/qa/faz1-ledger.md`.
 
-## Şu an neredeyiz (GÜNCEL: FAZ 6 — kalite kapanışı emri)
+## Şu an neredeyiz (GÜNCEL: FAZ 6 + FAZ-6-EK.md işlendi, 2026-09-23)
 
-Yeni daimi emir (FAZ 6): İŞ A → İŞ B dış → İŞ C → İŞ D, her biri kendi
-16-kare gate'iyle (build/qa/faz6-<iş>/), kompozit zorunlu (her gate'te
-farklı kareler + en az bir C10), kesit kaybı >%1 kırmızı, ALU/varying
-sayımı gate dosyasına, flag-off GLSL diff BOŞ. NOT: brief BÖLÜM 2'nin başı
-kesik ulaştı - uDetail'in kesilme üstü satırları aynı şemayla yazarlandı
-ve procedural-detail.js başında işaretli.
+Spec kaynakları (dal `claude/clever-tesla-ataxcq`): FAZ-6-DUZ-RENK.md +
+IS-EMRI.md (uDetail tam tablo — fark çıkarsa DOSYA kazanır; çıplak
+`metal` satırı böyle girdi) + FAZ-6-EK.md (denetim sonrası ek emir) +
+DENETIM.md (26-task denetim; 164/177 düz roughness, tier A1 bulgusu).
 
-- İŞ A commit'li (a9c49b9): BATCHED_TABLE 8 malzeme; gate faz6-a KOŞUYOR.
-- İŞ B commit'li (f9ed80d): proceduralDetailV1=true desktop-tier;
-  iç satırlar İŞ D anahtarında (detailInterior). Gate faz6-b sırada.
-- İŞ C commit'li (748e6f6): runtimeVertexAO=false (brief); gate faz6-c
-  '--features runtimeVertexAO:1' ile koşacak (qa-capture'a küçük
-  passthrough eklendi); yeşilse desktop-tier açılır, mobil H1.
-- İŞ D: procedural-detail iç satırları hazır - main'deki
-  proceduralDetail.interior:false → true + gate faz6-d.
-- Kabul listesi BÖLÜM 6 (9 madde) - kapanışta tek tek sayılacak.
+**EK ile değişen kurallar (gate yöntemi bölümünü de ezer):**
+- Her gate 12 kamera × 4 tier (`?quality=` zorlaması + report.tier
+  doğrulaması, a36e184). mobile-high'sız gate GEÇERSİZ. Çıktı:
+  `build/qa/<tag>/<tier>/`. C03@2x yalnız desktop-balanced.
+- `baseline-a36e184/` (12×4, İŞ A canlı-öncesi durum DEĞİL — İŞ A dahil
+  mevcut kod, B/C/D/E/F bayrakları kapalı) bundan sonraki her A/B'nin
+  ÖNCE'si. İŞ A'nın kendi A/B'si: desktop-balanced tier'ı ↔ final-current
+  (İŞ A öncesi, aynı tier, 12 kamera).
+- ALU tavanı düzeltildi (EK Bölüm 1): mobil ≤80 / masaüstü ≤160 skaler
+  op; ölçüm 69/116 — İKİSİ DE ALTINDA, optimizasyon rafta.
+- Lens kuralı (EK 3.3): lens değişikliği kalite işi değil; eski lens =
+  kalite karesi, yeni lens = kompozisyon karesi, ayrı kompozit.
+- Kapanış dili (EK Bölüm 5): "kod tarafı bitti, mandal bekliyor."
+  "TAMAMLANDI" YASAK; ratchet null + acceptedByOwner:false sürüyor.
+
+**Sıra:** süreç onarımı ✅ (a36e184) → baseline-a36e184 (KOŞUYOR, 49 kare)
+= faz6-a kanıtı → faz6-b (`--features proceduralDetailV1:1`) → faz6-c
+(`runtimeVertexAO:1`) → faz6-d (`proceduralDetailV1:1,proceduralDetailInterior:1`)
+→ faz6-e (`glassTiersV2:1,plantNormalsV1:1`) → faz6-f (`exteriorGtao:1`)
+→ kapanış (EK Bölüm 4 ölçümleri sayıyla).
+
+- İŞ A canlı (a9c49b9 + spec hizası 04bc5e8): 8 malzeme, sayım testte.
+- İŞ B commit'li (f9ed80d + metal satırı a36e184), bayrak kapalı.
+- İŞ C commit'li (748e6f6 + tier-ışın 5b42287), bayrak kapalı.
+- İŞ D anahtarı: proceduralDetailInterior bayrağı (cdb94ee).
+- İŞ E commit'li (3a4bf9f): glass-cells.js hücre-kapılı polish,
+  plantNormalsV1, TABLE etiketi, features dürüstlüğü.
+- İŞ F kodu (cdb94ee): exteriorGtao — neighborhood'da GTAO, region asla,
+  mobil etkisiz. Test 279/279.
+- EK Bölüm 4 ölçüm araçları: tools/qa/roughness-cells.py (denetimin
+  164/177'si BİREBİR yeniden üretildi — yöntem doğrulandı),
+  tools/qa/saturation.py. NOT (kapanışta dürüst yazılacak): İŞ B
+  çalışma-zamanı gürültüsü DOKU metriğini oynatamaz (byte+0 sözleşmesi);
+  doku sayısı ile efektif (shader) kapsama ayrı ayrı raporlanacak,
+  ≤60/177 doku hedefi zero-byte mimariyle yapısal çelişkide — kapanışta
+  H numarasıyla ölçülüp kayda geçecek.
 
 ## Önceki durum (final paket, tarihçe)
 
