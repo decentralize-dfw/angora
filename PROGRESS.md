@@ -6,78 +6,52 @@
 > (önce Bölüm 0.5 + 0.7 oku). İnsan işleri: `BLOCKED.md`. Bütçe defteri:
 > `build/qa/faz1-ledger.md`.
 
-## Şu an neredeyiz (GÜNCEL: FAZ 6 + FAZ-6-EK.md işlendi, 2026-09-23)
+## Şu an neredeyiz (GÜNCEL: FAZ 7 kod bitti, TEK doğrulama oturumu koşuyor)
 
-Spec kaynakları (dal `claude/clever-tesla-ataxcq`): FAZ-6-DUZ-RENK.md +
-IS-EMRI.md (uDetail tam tablo — fark çıkarsa DOSYA kazanır; çıplak
-`metal` satırı böyle girdi) + FAZ-6-EK.md (denetim sonrası ek emir) +
-DENETIM.md (26-task denetim; 164/177 düz roughness, tier A1 bulgusu).
+Emir zinciri: FAZ-6-DUZ-RENK + IS-EMRI + FAZ-6-EK + DENETIM + DAİMİ EMİR
+(A1-A9 + B yöntemi) + B3-DÜZELTME + ŞİMDİ-YAP + FAZ-7-MASAUSTU. Ara gate
+YOK; kod bitti, 13 bayrak açık, doğrulama tek oturumda (koşuyor).
 
-**EK ile değişen kurallar (gate yöntemi bölümünü de ezer):**
-- Her gate 12 kamera × 4 tier (`?quality=` zorlaması + report.tier
-  doğrulaması, a36e184). mobile-high'sız gate GEÇERSİZ. Çıktı:
-  `build/qa/<tag>/<tier>/`. C03@2x yalnız desktop-balanced.
-- `baseline-a36e184/` (12×4, İŞ A canlı-öncesi durum DEĞİL — İŞ A dahil
-  mevcut kod, B/C/D/E/F bayrakları kapalı) bundan sonraki her A/B'nin
-  ÖNCE'si. İŞ A'nın kendi A/B'si: desktop-balanced tier'ı ↔ final-current
-  (İŞ A öncesi, aynı tier, 12 kamera).
-- ALU tavanı düzeltildi (EK Bölüm 1): mobil ≤80 / masaüstü ≤160 skaler
-  op; ölçüm 69/116 — İKİSİ DE ALTINDA, optimizasyon rafta.
-- Lens kuralı (EK 3.3): lens değişikliği kalite işi değil; eski lens =
-  kalite karesi, yeni lens = kompozisyon karesi, ayrı kompozit.
-- Kapanış dili (EK Bölüm 5): "kod tarafı bitti, mandal bekliyor."
-  "TAMAMLANDI" YASAK; ratchet null + acceptedByOwner:false sürüyor.
+**FAZ 6 (kod tarafı bitti, mandal bekliyor):** İŞ A-F + süreç onarımı +
+A1-A9 kuyruğu tamam. Sayılmış: uDetail 26 dış / 10 iç (coverage-count),
+glass polish 3 hücre (gül cam maskede 0), roughness DOKU metriği 164/177
+değişmez (byte-0 mimari; efektif 41/177 runtime - kapanışta H11), ALU
+69/116 (tavan 80/160). KAPANIS.md iskeleti build/qa/'da.
 
-**DAİMİ EMİR (son, ara gate'leri kaldırdı):** kod bitene kadar SIFIR
-capture; bütün bayraklar açılır; doğrulama TEK oturumda en sonda (B3):
-`baseline-full` (bayraklar kapalı) ↔ `faz6-final` (hepsi açık), 12 kamera
-× 4 tier + C03@2x + gece kareleri, aynı kod. Kırmızıda bisect: 4 kamera
-× 2 tier kısa format. Kapanış listesi: build/qa/KAPANIS.md (24 madde).
+**FAZ 7 (masaüstü V-Ray, 7 iş kodlandı, 302/302):**
+- İŞ 1 SSR (ssr-pass.js): AO depth+normal yeniden kullanılır; yalnız
+  yukarı bakan yüzeyler; havuz dikdörtgeni dünya-uzayında hariç;
+  roughness G-buffer yok -> fresnel+fade sabit yansıtıcılık (yazılı sınır).
+- İŞ 2 PCSS (pcss.js): global chunk TEK SEFER, bayrak+masaüstü çözünce;
+  blocker search 17 + Poisson PCF 25; kapalıyken chunk byte-özdeş (test).
+  shadowMapSize iki masaüstü satırında 4096.
+- İŞ 3 windowPortalLight (window-portals.js): glazing mesh'lerinden açıklık
+  kümeleme (1.2 m hücre + birleşme + 2.5 m dedupe), RectAreaLight içeri
+  bakar, güneş/gök takipli, YALNIZ floor/interior görünümlerinde görünür.
+- İŞ 4 proceduralDetailHigh: 4 oktav (13.9x/51.7x) + boost albedo 1.5x /
+  roughness 2x (uniform katı, tablo pristine).
+- İŞ 5 gtaoFullRes: iki masaüstü satırında scale 1.0.
+- İŞ 6 materialResponseV2 (material-response-v2.js - DİKKAT: material-
+  response.js R27 modülü AYRI ve DOKUNULMAZ; bir kez yanlışlıkla ezildi,
+  d5b183b ile geri geldi): Standard->Physical, hücre-kapılı clearcoat/
+  sheen, aileler üye adından; masaüstü SADECE.
+- İŞ 7 cinemaDof: idle-refine apertür yürüyüşü, odak düzlemi piksel-sabit
+  (testte 1e-6); cinemaStill artık balanced'da da; __angoraCinemaRefine(24)
+  QA kancası + qa-capture @cinema modu.
+- Mobil satırlar: 2 tier x 5 görünüm deepEqual ile FAZ 6'ya eşit (test).
 
-**A kuyruğu (hepsi bitti):**
-- A1 ✅ gece karesi: nightProbe saat değiştirmiyordu; gate'e gerçek gece
-  varyantı eklendi (C04/C10, hour=21 + nightScene()); eski png
-  C04-lamps-day-probe.png oldu (94488be).
-- A2 ✅ poolWater applied console.info sayacı (beklenen 1, garden-glass-4).
-- A3 ✅ İŞ D kodu + neutralInterior sıra testi. A4 ✅ İŞ F testi (4 tier).
-- A5 ✅ i18n.test.mjs. 
-- A6 ✅ CEVAP: "Ölçüler" VAR = annotations.js boyut katmanı (yalnız
-  dwg_verified + dimension_label_allowed satırlar etiket; ayarlardaki
-  measurements anahtarı; share linkinde settings.dimensions). "VR" VAR =
-  WebXR immersive walk (walk.js xrActive + enableImmersiveWalk;
-  i18n enterVR). İkisi de testli: annotations.test.mjs, walk-xr.test.mjs.
-  frame-measurement.js ölçü aracı DEĞİL (FPS toplayıcı).
-- A7 ✅ progressiveContextV1: ilk interaktiften 13,6 MB (desktop) manzara
-  çıktı; kalan çekirdek 6,49 MB GLB (architecture 5,86 tek başına) → H6'ya
-  sayıyla yazıldı. firstInteractiveBytes faz6-final'de ölçülecek.
-- A8 ✅ H2/H6/H8/H10 teslimat paketleri (BLOCKED.md; H8 tespiti KOŞTU:
-  5/8 addition aynalı). A9 ✅ KAPANIS.md iskeleti.
+**KOŞAN (görev b1d0gadty):** faz7-baseline (desktop-high x C03-C12 arası
+9 kare, 13+1 bayrak :0) + faz7-final (dh 9 + db C03,C10 + mh C03,C07,C10
++ dh@night C04,C10 + dh@cinema C03,C10 = 18 kare). Bitince: diff (kesit
+>%1 kırmızı; konsol hatası 0; context loss 0), kompozitler (sinema ayrı),
+KAPANIS.md 24 + FAZ-7 Bölüm 4'ün 14 maddesi SAYIYLA, roughness/saturation/
+coverage/payload ölçümleri, PROGRESS güncelle. Kapanış dili:
+"masaüstü kod tarafı bitti; mobil FAZ 8'e kaldı." Merge İZİN BEKLER.
 
-**BAYRAKLAR AÇILDI (bu commit):** proceduralDetailV1 (masaüstü tier şartı
-main'de), proceduralDetailInterior, runtimeVertexAO (İKİ tier - IS-EMRI
-"mobilde de çalışan tek AO", kare başı 0 draw/byte), glassTiersV2,
-plantNormalsV1, exteriorGtao (mobilde yapısal etkisiz), progressiveContextV1.
-mobileSunShadow H1'e kadar KAPALI. Testler 292/292.
-
-**SIRADA:** build → B3 çift koşum (`baseline-full` ~57 kare + `faz6-final`
-~57 kare) → KAPANIS.md 24 maddeyi sayıyla doldur → "kod tarafı bitti,
-mandal bekliyor."
-
-- İŞ A canlı (a9c49b9 + spec hizası 04bc5e8): 8 malzeme, sayım testte.
-- İŞ B commit'li (f9ed80d + metal satırı a36e184), bayrak kapalı.
-- İŞ C commit'li (748e6f6 + tier-ışın 5b42287), bayrak kapalı.
-- İŞ D anahtarı: proceduralDetailInterior bayrağı (cdb94ee).
-- İŞ E commit'li (3a4bf9f): glass-cells.js hücre-kapılı polish,
-  plantNormalsV1, TABLE etiketi, features dürüstlüğü.
-- İŞ F kodu (cdb94ee): exteriorGtao — neighborhood'da GTAO, region asla,
-  mobil etkisiz. Test 279/279.
-- EK Bölüm 4 ölçüm araçları: tools/qa/roughness-cells.py (denetimin
-  164/177'si BİREBİR yeniden üretildi — yöntem doğrulandı),
-  tools/qa/saturation.py. NOT (kapanışta dürüst yazılacak): İŞ B
-  çalışma-zamanı gürültüsü DOKU metriğini oynatamaz (byte+0 sözleşmesi);
-  doku sayısı ile efektif (shader) kapsama ayrı ayrı raporlanacak,
-  ≤60/177 doku hedefi zero-byte mimariyle yapısal çelişkide — kapanışta
-  H numarasıyla ölçülüp kayda geçecek.
+**Bilinen sinyal:** bayrak-açık desktop-balanced C01 probe yüklemesi bir
+kez 480 sn'de rapor verememişti (contact-AO bake + portal + context idle
+zinciri şüphesi). faz7-final'in ilk karesi bunu ya doğrular ya aklar -
+check-in 45 dk'da bakacak; kırmızıysa bisect 4 kamera x 1 tier.
 
 ## Önceki durum (final paket, tarihçe)
 
