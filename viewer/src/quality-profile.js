@@ -83,7 +83,9 @@ const TIER_MATRIX = {
   'desktop-balanced': {
     textureProfile: 'desktop', maxPixelRatio: 2.0, pixelBudget: 3_500_000,
     bakedIndirectLighting: true, bakedReceiverVisibility: true,
-    dynamicSunShadow: true, shadowMapSize: 2048, shadowCameraMode: 'villa-local', shadowType: 'pcfsoft',
+    // MALZEME İŞ 1: gölge kamerası artık bütün mahalleyi sarıyor
+    // (contextBox); 4096 / ~235 m ≈ 17 texel/m - villa-local'in sınıfı.
+    dynamicSunShadow: true, shadowMapSize: 4096, shadowCameraMode: 'villa-local', shadowType: 'pcfsoft',
     postProcessing: true, gtao: true, gtaoResolutionScale: 0.5,
     antialiasing: 'smaa', msaaSamples: 0, bloom: true, grade: true, dither: true,
     physicalGlass: 'hero-only', planarPoolReflection: 0.25, anisotropy: 16,
@@ -91,7 +93,7 @@ const TIER_MATRIX = {
   'desktop-high': {
     textureProfile: 'desktop', maxPixelRatio: 2.0, pixelBudget: 5_000_000,
     bakedIndirectLighting: true, bakedReceiverVisibility: true,
-    dynamicSunShadow: true, shadowMapSize: 2048, shadowCameraMode: 'villa-local', shadowType: 'pcfsoft',
+    dynamicSunShadow: true, shadowMapSize: 4096, shadowCameraMode: 'villa-local', shadowType: 'pcfsoft',
     postProcessing: true, gtao: true, gtaoResolutionScale: 0.65,
     antialiasing: 'smaa', msaaSamples: 0, bloom: true, grade: true, dither: true,
     physicalGlass: 'hero-only', planarPoolReflection: 0.5, anisotropy: 16,

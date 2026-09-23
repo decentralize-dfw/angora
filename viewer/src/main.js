@@ -1411,6 +1411,7 @@ async function loadNativeModel(manifest){
   gardenBox=new THREE.Box3().setFromObject(groups.get('garden'));contextBox=buildingBox.clone();
   lighting.setShadowBounds(buildingBox,gardenBox);
   for(const model of groups.values())contextBox.union(new THREE.Box3().setFromObject(model));
+  lighting.setShadowBounds(buildingBox,gardenBox,contextBox); // İŞ 1: mahalle gölgesi bu kutuyu sarar
   if(manifest.site_context){
     const data=await gzJson(manifest.site_context);siteContext=createSiteContext(data,host,()=>selectView('building'));
     $('#context-count').textContent=`${data.buildings.length} yapı`;

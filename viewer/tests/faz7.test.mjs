@@ -48,7 +48,7 @@ test('İŞ 2+5+1: desktop rows equalize UP behind flags; both desktops identical
   }
   const off = effectiveQuality('desktop-balanced', 'villa', {features: {postfxV2: true, hybridSunShadow: true}});
   assert.equal(off.shadowType, 'pcfsoft', 'flags off = FAZ 6 exactly');
-  assert.equal(off.shadowMapSize, 2048);
+  assert.equal(off.shadowMapSize, 4096, 'MALZEME İŞ 1: masaüstü varsayılanı');
   assert.equal(off.gtaoResolutionScale, 0.5);
   assert.equal(off.ssr, undefined);
   assert.equal(off.planarPoolReflection, 0.25);

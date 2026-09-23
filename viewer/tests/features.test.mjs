@@ -89,7 +89,7 @@ test('Feature flags hand control to the matrix, mobile red lines hold', () => {
   const on = {hybridSunShadow: true, postfxV2: true, atlasAnisotropyFix: true};
   const desktop = effectiveQuality('desktop-high', 'villa', {batched: true, features: on});
   assert.equal(desktop.dynamicSunShadow, true);
-  assert.equal(desktop.shadowMapSize, 2048);
+  assert.equal(desktop.shadowMapSize, 4096);   // MALZEME İŞ 1: mahalle gölgesi
   assert.equal(desktop.postProcessing, true);
   assert.equal(desktop.compactOutput, false);
   // Task 1.2 / Bölüm 0.6.2: a phone joins the shadow only after the H1

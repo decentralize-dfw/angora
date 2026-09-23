@@ -234,7 +234,9 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     switch(current.shadowCameraMode){
       case 'floor-local':target=shadowBounds.building.clone().expandByScalar(3);break;
       case 'villa-local':target=shadowBounds.building.clone().union(shadowBounds.garden).expandByScalar(8);break;
-      case 'wide-proxy':target=shadowBounds.building.clone().union(shadowBounds.garden).expandByScalar(25);break;
+      case 'wide-proxy':target=shadowBounds.context
+        ?shadowBounds.context.clone().expandByScalar(4)
+        :shadowBounds.building.clone().union(shadowBounds.garden).expandByScalar(25);break;
       default:return false;
     }
     const centre=target.getCenter(new THREE.Vector3());
@@ -303,8 +305,14 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     setFloorLight(value){floorLight=value;floorLight?.setSun(direction,dynamicShadowActive());},
     // Task 1.2: the measured subject bounds the shadow camera wraps, and the
     // simplified stand-in the depth pass renders instead of the real scene.
-    setShadowBounds(building,garden){
-      shadowBounds={building:building.clone(),garden:garden.clone()};
+    setShadowBounds(building,garden,context=null){
+      // MALZEME İŞ 1: mahalle gölgeleri dinamik - komşuların pişmiş
+      // 12:30 gölgesi (ground-light R kanalı) dinamik gölge aktifken
+      // ZATEN geri çekiliyor (Task 1.2-d, setSun strength 0); eksik
+      // olan dinamik kameranın komşuları hiç kapsamamasıydı. Sınır
+      // sabit sayı değil, contextBox'tan gelir.
+      shadowBounds={building:building.clone(),garden:garden.clone(),
+        context:context?context.clone():shadowBounds?.context??null};
       if(dynamicShadowActive()&&fitSunShadow(quality.value))renderer.shadowMap.needsUpdate=true;
     },
     requestShadowUpdate(){if(renderer.shadowMap.enabled)renderer.shadowMap.needsUpdate=true;},
