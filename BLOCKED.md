@@ -1,9 +1,20 @@
-# BLOCKED — insan görev listesi (ANGORA-QUALITY-UPGRADE, Bölüm 0.7.3)
+# BLOCKED — insan işleri
 
-Bu dosya, quality-upgrade planında **ajanın yapamayacağı** işleri taşır.
-Her madde: durum, ajanın hazırladığı zemin, insandan istenen adımlar,
-ve neyi bloke edip etmediği. Bir madde kapanınca buradan silinmez;
-durumu `DONE` yapılır ve kanıt linklenir.
+## TEK SAYFA: dört engel, dört komut (KAPANIŞ İŞ 5)
+
+Script'lerin hepsi bu repoda ve söz dizimi doğrulanmış durumda
+(py_compile / node --check, 2026-09-23). Ayrıntılar aşağıdaki H
+bölümlerinde; burada her engelin TEK komutu:
+
+| Engel | İNSANIN YAPMASI GEREKEN TEK ŞEY | Doğrulama | Kazanç |
+|---|---|---|---|
+| **H2** iç lightmap (%4,1 → ≥%65) | Blender ≥3.6 makinede: `blender --background --factory-startup --python tools/blender/rebake-interior-lightmaps.py` → `build/blender/out/` klasörünü commit | script kendi doluluk sayısını basar (<%65 ise exit 1); sonra `node tools/batch-delivery/prepare-visibility.mjs && cd viewer && npm test` | İç mekân V-Ray hissinin ta kendisi: gerçek GI sıçraması |
+| **H10** arazi (311 432 → 85 782 üçgen) | Aynı Blender oturumunda sırayla: `node tools/batch-delivery/simplify-terrain.mjs --apply` → `blender --background --factory-startup --python tools/batch-delivery/bake-ground-light.py` (+ `--interior`) → `node tools/batch-delivery/prepare-visibility.mjs` → `cd viewer && npm test` | "Rebake visibility when source geometry changes" testi yeşile döner | −225k üçgen (kanıt: build/qa/terrain-trial*, worst 1,9 cm / 590 tanık) |
+| **H6** kaynak dizin | `model-finalization/web` klasörünü repo kökünün YANINA koymak (manifest `source_native_sha256` = `a8413904…33ce6` ile eşleşmeli) — sonra `node tools/batch-delivery/build.mjs` | `cd viewer && npm test` + tam doğrulama koşumu | Komşular 1,02 M üçgen → instancing + LOD; atlas yeniden dizilimi; kat bölmesiyle ilk-interaktif ≤5 MB |
+| **H1** iPhone 13 mandalı | Telefonda `https://angora.mergvs.com/qa-mobile.html` açıp 2 dakikalık protokolü koşmak, çıkan JSON'u yapıştırmak | `build/qa/ratchet.json` doldurulur | Mobil kararlar (gölge, ileride postfx) sayıya bağlanır; "mandal null" kapanır |
+
+Mirror tespiti (H8'in girdisi) zaten KOŞULDU: 5/8 addition aynalı
+(`node tools/batch-delivery/detect-mirrored-context.mjs`).
 
 ---
 
