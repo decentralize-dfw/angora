@@ -235,13 +235,68 @@ FAZ 3 kabulde 9 kriterin 2'si karşılandı · Task 1.3 kabulde 6'nın 4'ü.
 
 ---
 
-## G. BU DENETİMİN SINIRI
+## G. DENETİM BOŞLUKLARI — KAPATILDI (23 Eylül, ikinci tur)
 
-Ölçmediğim, sadece kod varlığına baktığım kalemler:
-- 2.1'in ağ waterfall sırası (ekran görüntüsü delili istenmişti, yok)
-- Oda geçişinde probe dikişi (FAZ 3 kabul md. 8)
-- Gece modunun görsel kalitesi (FAZ 3 kabul md. 9)
-- Regresyon listesi: asansör, VR, i18n, sesli tur, fotoğraf pinleri, ölçüler,
-  paylaşım linki — testler geçiyor ama elle açılıp bakılmadı
+İlk turda ölçmediğim dört kalem kapatıldı. İkisinden yeni bulgu çıktı.
 
-Bunları da istersen ölçerim.
+### G1. Task 2.1 kabul: ilk interaktif payload — **KARŞILANMIYOR**
+
+Plan: **≤5 MB desktop, ≤4 MB mobile**. Ölçülen (final-current C01):
+
+| | Ölçülen | Hedef | Sapma |
+|---|---|---|---|
+| desktop | **23,8 MB** | 5 MB | **4,8×** |
+| mobile profili | **18,2 MB** | 4 MB | **4,6×** |
+
+2.1 "progressive loader" gerçekten çalışıyor (interior kritik yoldan çıktı,
+bundle 708→301 KB) ama kabul kriteri model payload'ı hakkındaydı ve model
+hâlâ 22,4 MB. Kriter karşılanmıyor ve bu **rapor edilmemiş**.
+Kısmen engelli: gerçek çözüm kat bölmesi + LOD streaming, ikisi de H6.
+
+### G2. Regresyon listesi — çoğu testli
+
+| Özellik | Modül | Test |
+|---|---|---|
+| Asansör | `lift.js` | ✅ `lift.test.mjs` |
+| Sesli tur | `guided-tour.js`, `tour-*.js` | ✅ `guided-tour.test.mjs` |
+| Fotoğraf pinleri | `photo-points.js` | ✅ `photo-points.test.mjs` |
+| Paylaşım linki | `share-state.js` | ✅ `share-state.test.mjs` |
+| i18n | `i18n.js` | ❌ test yok |
+| Ölçüler | ayrı modül bulunamadı | ❌ |
+| VR | **tanımlanabilir modül yok** | ❌ |
+
+`frame-measurement.js` ölçü aracı değil, FPS/percentile toplayıcısı.
+Planın regresyon listesindeki "ölçüler" ve "VR" kalemlerinin bu kod
+tabanında karşılığını bulamadım — ya `main.js` içinde gömülü, ya da liste
+gerçekte var olmayan özellikleri sayıyor. **Açık soru.**
+
+### G3. Gece modu — **karesi gündüz**
+
+`final-probes.json` `night` probe'u: gündüz 80 program / 62 çağrı,
+gece 80 / 62, `addedPrograms: 0`. **Bu iddia doğru** — gece geçişinde
+program patlaması yok.
+
+Ama probe **yalnız program sayıyor.** FAZ 3 kabul md. 9 görsel bir
+kriterdi ("gece modu GI sahnesindeki lambalar gibi, 20 OpenGL point light
+gibi değil") ve hiç değerlendirilmedi.
+
+Üstelik: tek gece karesi `gate-f342/desktop/C04-night-probe.png` açıldı —
+**parlak gündüz karesi.** Yeşil çim, güneşli cepheler, yanan pencere yok.
+Ya probe gece moduna hiç geçmedi, ya kare yanlış adlandırıldı. Her iki
+durumda da **gece modunun görsel doğrulaması sıfır.**
+
+### G4. Havuz suyu — runtime sayısı hiç doğrulanmadı
+
+`final-probes.json`:
+```json
+"water": { "note": "scene walk unavailable without hooks", "applied": null }
+```
+`poolWaterV2` kod yolu erişilebilir (doğruladım), ama **kaç materyale
+uygulandığı ölçülmedi.** "Canlı" demek için yeterli değil; `applied`
+sayısı loglanmalı — İŞ A'da `reviveBatchedGrade` için yapıldığı gibi.
+
+### G5. Probe dikişi (FAZ 3 kabul md. 8)
+
+Oda geçişinde probe dikişi: **bu ortamda ölçülemez** — walk moduna
+hook'suz girilemiyor (G4'teki aynı sınır). Gerçek cihaz/tarayıcıda
+elle bakılmalı. H7 ile birlikte insana devredilir.
