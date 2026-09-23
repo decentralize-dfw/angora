@@ -1,0 +1,45 @@
+{
+ "c03at2x": {
+  "seconds": 491,
+  "calls": 54,
+  "tris": 2053171,
+  "ratio": 1.8633899812498247,
+  "buffer": [
+   2981,
+   1677
+  ]
+ },
+ "water": {
+  "note": "scene walk unavailable without hooks",
+  "applied": null
+ },
+ "c04memory": {
+  "estimatedTextureMiB": 151.3,
+  "estimatedGeometryMiB": 206.4,
+  "countedTextures": 69,
+  "countedGeometries": 111,
+  "jsHeapMiB": 356.2
+ },
+ "night": {
+  "day": {
+   "programs": 80,
+   "calls": 62
+  },
+  "night": {
+   "programs": 80,
+   "calls": 62,
+   "triangles": 2263888
+  },
+  "addedPrograms": 0
+ },
+ "memoryReturn": {
+  "before": {
+   "textures": 114,
+   "geometries": 93
+  },
+  "after": {
+   "textures": 114,
+   "geometries": 93
+  }
+ }
+}
