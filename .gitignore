@@ -24,5 +24,8 @@ build/glb/angora21-neighborhood-review.glb
 build/glb/context-near.glb
 build/glb/villa-garden.glb
 
-# Blender çalışma dosyası yerelde üretilir (tools/batch-delivery/make-blender-glb.mjs)
-build/blender/*.glb
+# Blender: üç GRUP dosyası depoda (her biri 100 MB altında, indirilip açılır).
+# Tek parça birleşik derlemeler 100 MB'ı aştığı için yerelde üretilir.
+build/blender/angora-blender36-tam.glb
+build/blender/angora-blender36-malzeme.glb
+build/blender/angora-blender36-full.glb

@@ -1,79 +1,80 @@
-# angora-blender36-full.glb — Blender 3.6 çalışma dosyası
+# Blender 3.6 — ne yapman gerekiyor
 
-Tek dosya, **Draco yok**, **KTX2 yok**, **171 malzemenin hepsi içinde**.
+**`layers/` klasörüne dokunma.** Onlar eski Blender katman dosyaları, bu işle
+ilgisi yok. Tek tek açman gereken bir şey yok.
 
-## Üretmek (tek komut, ~40 sn)
+## 1. Şu üç dosyayı indir
 
-Dosya depoya konmuyor: 258,8 MB, GitHub'ın 100 MB dosya sınırının üstünde ve
-bu konteynerden LFS yüklemesi ağ politikasıyla kapalı. Gerek de yok —
-**kaynağın tamamı (`build/web/native-current/`, 161 MB, 275 dosya) zaten
-depoda izleniyor**, dosya kendi makinenizde üretiliyor:
+| Dosya | Boyut | İçinde ne var |
+|---|---|---|
+| [`angora-kabuk.glb`](angora-kabuk.glb) | 74,7 MB | Bina kabuğu, bahçe, zemin, çim/asfalt — **43 malzeme** |
+| [`angora-icmekan.glb`](angora-icmekan.glb) | 39,2 MB | Bütün iç mekân, 4 kat — **119 malzeme** |
+| [`angora-komsular.glb`](angora-komsular.glb) | 71,9 MB | Komşu binalar, çatıları, duvarları — **9 malzeme** |
+
+GitHub'da dosyaya tıkla → sağ üstteki **Download** düğmesi. Ya da doğrudan:
 
 ```
-git pull
+https://github.com/decentralize-dfw/angora/raw/main/build/blender/angora-kabuk.glb
+https://github.com/decentralize-dfw/angora/raw/main/build/blender/angora-icmekan.glb
+https://github.com/decentralize-dfw/angora/raw/main/build/blender/angora-komsular.glb
+```
+
+## 2. Blender 3.6'da aç
+
+`File > Import > glTF 2.0 (.glb/.gltf)` → dosyayı seç → **Import glTF 2.0**.
+
+Ayarlara dokunma, varsayılanlar doğru (**+Y Up** açık kalsın).
+
+Üçünü de aynı sahneye üst üste import edebilirsin — hepsi aynı dünya
+koordinatlarında duruyor, hizalama gerekmez. Yalnız cephe malzemesiyle
+uğraşacaksan sadece `angora-kabuk.glb`'yi açman yeter; en hızlısı o.
+
+## 3. Hepsi bu
+
+Malzemeler Principled BSDF olarak gelir, dokular dosyanın içinde gömülü.
+Kaydedince `.blend` içine paketlenir.
+
+---
+
+## Neden üç dosya, neden tek dosya değil
+
+Tek dosya 185 MB çıkıyor; GitHub'ın dosya başına sınırı 100 MB. LFS denendi,
+`lfs.github.com` bu ortamda ağ politikasıyla kapalı (403). Kayıpsız
+sıkıştırma yetmedi (weld yalnız 6,6 MB kazandırdı — veri Draco'dan geldiği
+için zaten sıkı). Nicemleme tek dosyayı kurtarırdı ama Blender 3.6'nın
+`KHR_mesh_quantization` desteğini bu ortamdan doğrulayamadım, doğrulanmamış
+varsayıma yatırmadım.
+
+Üç grup her biri sınırın altında ve her biri kendi başına açılıyor.
+
+## Neden web teslimatını doğrudan açamıyorsun
+
+`build/web/native-current/` Blender'a doğrudan girmez. Asıl engel Draco
+değil: dokular **KTX2** (`KHR_texture_basisu`) ve **Blender 3.6 bunu
+okuyamaz** — dokular sessizce boş gelir. Her dokunun PNG yedeği zaten vardı,
+dönüştürücü onu tutuyor.
+
+`build/web/batched/` ise büsbütün yanlış kaynak: orada malzemeler 37 atlasa
+birleşmiş, üzerinde çalışacağın 171 malzeme grafiği yok.
+
+## Künye
+
+- **168 malzeme** (171'in 168'i; dışarıda kalan 3'ü: uzaktaki beyaz kütleler
+  tek malzeme + 2 yaprak kartı — geometrinin %72'si bunlardaydı ve üzerinde
+  malzeme yazılacak şeyler değil)
+- 2.840.086 üçgen, 224 mesh, 107 doku
+- **Draco yok, KTX2 yok.** Dokular PNG; yalnız 8 adet pişmiş AO haritası
+  JPEG'e indi (13,7 MB → 1,0 MB). base / normal / ORM **kayıpsız PNG** —
+  asıl çalışılacak kanallar onlar.
+- glTF uzantıları: clearcoat, ior, specular, transmission, texture_transform
+  — hepsi Blender 3.6 içe aktarıcısında destekli
+- Her dosya bağımsız ayrıştırıcıyla geri okunup doğrulandı: 0 Draco
+  primitifi, 0 basisu dokusu, tek sahne.
+
+## Yeniden üretmek / tam sürüm
+
+```
 cd tools/batch-delivery && npm install
-node --max-old-space-size=8192 make-blender-glb.mjs
+node --max-old-space-size=8192 make-blender-glb.mjs --grup=kabuk
+node --max-old-space-size=8192 make-blender-glb.mjs --tam    # 259 MB, her şey dahil
 ```
-
-Çıktı: `build/blender/angora-blender36-full.glb` (gitignore'da).
-Başka bir yere yazmak için yola argüman verin.
-
-| | |
-|---|---|
-| Boyut | 258,8 MB |
-| Malzeme | 171 (hepsi benzersiz ad) |
-| Mesh / nesne | 240 |
-| Doku | 108, hepsi PNG, gömülü |
-| Vertex / üçgen | 7.721.607 / 4.948.742 |
-| Sınır kutusu | X −139,3→173,2 · Y −15,9→30,5 · Z −328,6→167,5 m |
-| glTF uzantıları | clearcoat, ior, specular, transmission, texture_transform |
-
-## Neden bu dosya üretildi
-
-Web teslimatı (`build/web/native-current/`) Blender'a doğrudan girmez, iki
-sebepten:
-
-1. **KHR_draco_mesh_compression** — 3.6 açabilir ama istenmedi.
-2. **KHR_texture_basisu (KTX2)** — asıl engel bu: **Blender 3.6 KTX2
-   okuyamaz.** Dokular sessizce boş gelir.
-
-Teslimattaki her dokunun zaten bir PNG `source` yedeği var (basisu yalnızca
-`extensionsUsed` içinde, `extensionsRequired` içinde DEĞİL). Dönüştürücü
-basisu uzantısını kaydetmeyerek PNG'lerin kalmasını sağlıyor; 113 KTX2
-görüntü düşüyor, 108 PNG kalıyor.
-
-Batched teslimat (`build/web/batched/`) bu iş için **yanlış kaynak**: orada
-malzemeler 37 atlasa birleştirilmiş durumda, orijinal 171 malzeme grafiği
-yok.
-
-## Blender 3.6'da açmak
-
-`File > Import > glTF 2.0 (.glb/.gltf)`, varsayılan ayarlar yeterli:
-
-- **+Y Up** açık kalsın — glTF Y-up, Blender Z-up; içe aktarıcı çevirir.
-- Malzemeler Principled BSDF olarak gelir. `transmission`, `clearcoat`,
-  `ior` ve `specular` uzantıları Principled girdilerine bağlanır.
-- `KHR_texture_transform` taşıyan dokular Mapping + Texture Coordinate
-  düğümleriyle gelir.
-- Dokular dosyaya gömülü; Blender onları `.blend` içine paketler.
-
-Sahne büyük (4,9 M üçgen). İçe aktarma birkaç dakika sürebilir; viewport'ta
-Material Preview yerine önce Solid'de çalışmak rahat eder.
-
-## Betik ne yapıyor
-
-Kaynak `build/web/native-current/` içindeki 12 parça `.gpu.gltf`. Betik
-Draco'yu çözer, basisu'yu düşürür, 12 parçayı tek sahnede birleştirir,
-`dedup` ile parçalar arası aynı doku/accessor'ları teke indirir (171 doku +
-174 accessor elendi), VRM eklentisinin malzeme `extras`'ına bıraktığı artığı
-siler (222 malzemede), `unpartition` ile tek buffer'a toplar.
-
-## Doğrulandı
-
-Dosya bağımsız bir ayrıştırıcıyla geri okundu: 0 Draco primitifi, 0 basisu
-dokusu, 108/108 görüntü `image/png`, tek sahne, 240 kök düğüm. Viewer'ın
-kural tablolarının dayandığı adlar dosyada mevcut: `Clay tile`, `roof.004`,
-`roof-7`, `Neighbor 20 green tiles`, `Entrance coursed limestone.001`,
-`R31 | R39 continuous grass ground`, `R31 | R37 fine asphalt aggregate`,
-`STONE-TILE`, `WHT`, `canopy.001`, `STRUCCO`, `water`, `glass`,
-`Retaining wall rough limestone (1)`.
