@@ -86,45 +86,93 @@ export function buildOccupancy(models, {voxel = VOXEL_M} = {}) {
     }};
 }
 
-// One mesh's receivers. Writes _contactOcc (0..1 occlusion) and returns the
-// vertex count, or 0 when the mesh opted out (too big, no normals).
-export function bakeMeshContactOcclusion(mesh, grid, {rays = 12, strength = 0.55} = {}) {
+// Wall clock, not the idle callback's timeRemaining(): Safari has no
+// requestIdleCallback at all, so the fallback used to hand the scheduler a
+// FABRICATED `timeRemaining: () => 50` and it never yielded honestly.
+const now = () => (globalThis.performance?.now?.() ?? Date.now());
+
+// Reading the clock costs more than a vertex does, so it is read once per
+// slice rather than once per vertex.
+const CLOCK_EVERY = 256;
+
+// How long one callback may hold the main thread, and how long it steps
+// aside for when the browser gives us no idle signal. 8 ms leaves a 60 Hz
+// frame its budget; the 12 ms gap keeps the duty cycle around 40% so a
+// drag still lands while the bake is running.
+const BUDGET_MS = 8;
+const GAP_MS = 12;
+
+// One mesh's receivers, RESUMABLE. The loop body is identical to the old
+// one-shot bake; what is new is that it can stop at a wall-clock budget and
+// pick up at the same vertex.
+//
+// Why: the scheduler below used to check its deadline BETWEEN meshes, then
+// hand a whole mesh to this function. A receiver just under SKIP_TRIANGLES
+// carries ~200k vertices; at 10 rays x 6 steps that is ~12 million grid
+// lookups in ONE uninterruptible block - measured at 3,3 s per mesh under
+// 6x CPU throttling, repeating for every such mesh. The scene rendered and
+// then refused every touch, which is exactly what the phone showed. The
+// deadline check was real; its granularity was the bug.
+//
+// Returns null when the mesh opts out (too big, no normals, already baked).
+export function createMeshBake(mesh, grid, {rays = 12, strength = 0.55} = {}) {
   const geometry = mesh.geometry;
   const position = geometry?.attributes.position, normal = geometry?.attributes.normal;
-  if (!position || !normal || geometry.attributes._contactOcc) return 0;
+  if (!position || !normal || geometry.attributes._contactOcc) return null;
   const triangles = (geometry.index ? geometry.index.count : position.count) / 3;
   if (triangles > SKIP_TRIANGLES) {
     console.info(`Contact AO skipped ${mesh.name || 'mesh'}: ${Math.round(triangles)} tris > ${SKIP_TRIANGLES}`);
-    return 0;
+    return null;
   }
   const fan = hemisphere(rays);
   const out = new Float32Array(position.count);
   const p = new THREE.Vector3(), n = new THREE.Vector3(), dir = new THREE.Vector3();
   const up = new THREE.Vector3(0, 1, 0), q = new THREE.Quaternion();
   const steps = Math.ceil(RAY_RANGE_M / grid.voxel);
-  for (let i = 0; i < position.count; i++) {
-    p.fromBufferAttribute(position, i).applyMatrix4(mesh.matrixWorld);
-    n.fromBufferAttribute(normal, i).transformDirection(mesh.matrixWorld);
-    // lift the origin one voxel off the surface: the receiver's OWN slab of
-    // occupied cells must never read as its occluder
-    p.addScaledVector(n, grid.voxel * 0.9);
-    q.setFromUnitVectors(up, n);
-    let hits = 0;
-    for (const ray of fan) {
-      dir.copy(ray).applyQuaternion(q);
-      for (let s = 1; s <= steps; s++) {
-        const d = (s + 0.35) * grid.voxel;
-        if (grid.occupied(p.x + dir.x * d, p.y + dir.y * d, p.z + dir.z * d)) {
-          // near hits shade harder than far ones
-          hits += 1 - (s - 1) / steps;
-          break;
+  let i = 0;
+  return {
+    count: position.count,
+    // true when the mesh is finished and the attribute is written.
+    step(budgetMs = Infinity) {
+      const until = now() + budgetMs;
+      while (i < position.count) {
+        const slice = Math.min(position.count, i + CLOCK_EVERY);
+        for (; i < slice; i++) {
+          p.fromBufferAttribute(position, i).applyMatrix4(mesh.matrixWorld);
+          n.fromBufferAttribute(normal, i).transformDirection(mesh.matrixWorld);
+          // lift the origin one voxel off the surface: the receiver's OWN slab
+          // of occupied cells must never read as its occluder
+          p.addScaledVector(n, grid.voxel * 0.9);
+          q.setFromUnitVectors(up, n);
+          let hits = 0;
+          for (const ray of fan) {
+            dir.copy(ray).applyQuaternion(q);
+            for (let s = 1; s <= steps; s++) {
+              const d = (s + 0.35) * grid.voxel;
+              if (grid.occupied(p.x + dir.x * d, p.y + dir.y * d, p.z + dir.z * d)) {
+                // near hits shade harder than far ones
+                hits += 1 - (s - 1) / steps;
+                break;
+              }
+            }
+          }
+          out[i] = Math.min(1, (hits / rays) * strength * 1.6);
         }
+        if (i < position.count && now() >= until) return false;
       }
-    }
-    out[i] = Math.min(1, (hits / rays) * strength * 1.6);
-  }
-  geometry.setAttribute('_contactOcc', new THREE.BufferAttribute(out, 1));
-  return position.count;
+      geometry.setAttribute('_contactOcc', new THREE.BufferAttribute(out, 1));
+      return true;
+    },
+  };
+}
+
+// One mesh, all at once. Same numbers as before - the resumable bake run
+// with no budget. Kept for the late path and the tests.
+export function bakeMeshContactOcclusion(mesh, grid, options = {}) {
+  const bake = createMeshBake(mesh, grid, options);
+  if (!bake) return 0;
+  bake.step();
+  return bake.count;
 }
 
 // Fragment-side application: indirect terms only, guarded so a material
@@ -170,10 +218,15 @@ export function applyContactShading(material, {warm = false} = {}) {
 
 // The idle driver: builds the grid, then walks receiver meshes in slices so
 // no single callback overruns its deadline. Resolves with vertex total.
-export function bakeContactOcclusion(models, {rays = 12, strength = 0.55, warm = false, idle} = {}) {
+export function bakeContactOcclusion(models, {rays = 12, strength = 0.55, warm = false,
+  idle, budgetMs = BUDGET_MS} = {}) {
+  // Safari has no requestIdleCallback. The old fallback fabricated a 50 ms
+  // timeRemaining(), so on iPhone the scheduler believed it always had room
+  // and never yielded. The fallback now just yields to the event loop and
+  // the BUDGET below - a real clock - decides how long a callback may run.
   const schedule = idle ?? (globalThis.requestIdleCallback
     ? (fn => globalThis.requestIdleCallback(fn, {timeout: 250}))
-    : (fn => setTimeout(() => fn({timeRemaining: () => 50}), 50)));
+    : (fn => setTimeout(fn, GAP_MS)));
   return new Promise(resolve => {
     const grid = buildOccupancy(models);
     if (!grid) return resolve({vertices: 0, meshes: 0});
@@ -184,18 +237,34 @@ export function bakeContactOcclusion(models, {rays = 12, strength = 0.55, warm =
       if (materials.every(m => m && (m.transparent || /glass|water|mirror/i.test(m.name)))) return;
       queue.push(o);
     });
-    let vertices = 0, meshes = 0, touched = new Set();
-    const step = deadline => {
-      while (queue.length && (deadline?.timeRemaining?.() ?? 50) > 8) {
-        const mesh = queue.shift();
-        const count = bakeMeshContactOcclusion(mesh, grid, {rays, strength});
-        if (count) {
-          vertices += count; meshes++;
-          for (const material of Array.isArray(mesh.material) ? mesh.material : [mesh.material])
-            if (material && applyContactShading(material, {warm})) touched.add(material);
+    let vertices = 0, meshes = 0, touched = new Set(), current = null;
+    const finish = mesh => {
+      vertices += current.count; meshes++;
+      for (const material of Array.isArray(mesh.material) ? mesh.material : [mesh.material])
+        if (material && applyContactShading(material, {warm})) touched.add(material);
+      current = null;
+    };
+    const step = () => {
+      const until = now() + budgetMs;
+      // The budget is now spent INSIDE meshes as well as between them, so a
+      // single 200k-vertex receiver can no longer hold the main thread.
+      //
+      // do/while, not while: FORWARD PROGRESS must not depend on the clock.
+      // With a zero or sub-resolution budget the condition is already false
+      // on entry, and a plain `while` baked nothing and rescheduled itself
+      // forever - the scheduler span without advancing. One unit of work
+      // always runs; createMeshBake reads its own clock only AFTER a slice.
+      do {
+        if (!current) {
+          if (!queue.length) break;
+          const mesh = queue.shift();
+          const bake = createMeshBake(mesh, grid, {rays, strength});
+          if (!bake) continue;                       // opted out; next mesh
+          current = {mesh, ...bake, step: bake.step};
         }
-      }
-      if (queue.length) schedule(step);
+        if (current.step(Math.max(1, until - now()))) finish(current.mesh);
+      } while (now() < until);
+      if (queue.length || current) schedule(step);
       else resolve({vertices, meshes, materials: touched.size, grid,
         // late arrivals (the deferred interior) bake against the same grid
         bakeLate: model => {let v = 0; model.traverse(o => {
