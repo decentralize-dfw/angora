@@ -151,7 +151,13 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
 .region-radius{display:flex;gap:4px;padding:0 0 10px}
 .region-meta{display:none}
 @media(max-width:720px){
- #app[data-delivery=native] .scale-picker{left:12px;top:64px;bottom:auto}
+ /* transform:none ZORUNLU: iki kural yukarıdaki native satırı ortalamak için
+    translateX(-50%) uyguluyor. Telefonda seçici sola alınınca o kaydırma
+    iptal edilmeyince üstüne biniyordu - 211 px genişlikte 12px - 105,6px =
+    -94px, yani kontrol ekranın SOLUNDA kalıyordu (ölçüldü, 390 px ekran).
+    Aynı bloktaki .explore-dock ve .side-tools satırları transform'u zaten
+    sıfırlıyor; bu satırda unutulmuş. */
+ #app[data-delivery=native] .scale-picker{left:12px;top:64px;bottom:auto;transform:none}
  #app[data-delivery=native] .view-description{top:112px}
  #app[data-delivery=native] .side-tools{top:112px;right:10px}
  #app[data-delivery=native] .explore-dock{bottom:calc(env(safe-area-inset-bottom) + 12px);left:12px;right:12px;transform:none;width:auto}
