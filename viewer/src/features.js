@@ -41,7 +41,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   progressiveContextV1: false, // KAPALI - ürün sahibi: sahne açıldıktan ~5 sn sonra mahallenin belirmesi kabul edilemez. 13,6 MB kazanç pop etkisine değmiyor; erteleme yerine kaynak tarafı LOD/instancing (H6) beklenecek.
   ktx2Delivery: false,         // Faz 4.1
   contextLodV2: false,         // Faz 2
-  cinemaStill: true,          // KAPANIŞ İŞ 3 ile AÇIK: örnek 0 artık jittersiz ÇÖZÜLMÜŞ KARE (lighting.renderRefineSample seed yolu) - birikim hiçbir anda normal kareden karanlık olamaz; girdide iptal, sıfırlama yok.
+  cinemaStill: false,          // KAPALI - ürün sahibi masaüstünde İKİNCİ kez siyah ekran bildirdi: "hareket ettirince gözüküyor, durunca siyah oluyor". Boştaki birikim devreye girince ekran kararıyor. KAPANIŞ İŞ 3'teki "örnek 0 = çözülmüş kare" düzeltmesi gerçek GPU'da TUTMUYOR; yazılım rasterizerde (SwiftShader) hata üretilemedi, o yüzden kör düzeltme yapılmadı. Siyah ekran, rafine boşta karesinden pahalı: özellik kapalı ship ediliyor. Açmak: ?features=cinemaStill:1
   // -- FAZ 7 (FAZ-7-MASAUSTU.md): masaüstü V-Ray. Hepsi İKİ masaüstü
   //    tier'ına birden; mobil satırlar YAPISAL olarak dokunulmaz (quality
   //    profile'daki !mobile guard'ı + testler). Ürün sahibi kararı (2026-09-23):
@@ -59,7 +59,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   proceduralDetailHigh: true,  // AÇIK (ölçüldü: prog -1, geri kalan +0, konsol 0; ALU statik 210 skaler op - masaüstünde tavan yok, ölç-ve-yaz)
   gtaoFullRes: false,          // KAPALI-GEREKÇELİ: 4x GTAO pikseli; daha önce açılıp geri alındı (görünmeyen fark, MALZEME 3.2) ve bu turda da draw/prog etkisi sıfırken piksel maliyeti FPS'siz savunulamaz
   materialResponseV2: true,    // AÇIK (ölçüldü: prog -5, draw/tri/tex +0, konsol 0) - clearcoat/sheen aile bazlı, masaüstü
-  cinemaDof: true,             // İŞ 7 + KAPANIŞ İŞ 3 - apertür yürüyüşü örnek 1'den itibaren (seed net kalır); balanced'ı sinemaya katar
+  cinemaDof: false,            // KAPALI - cinemaStill'e bağlı (onun birikiminde apertür yürür); o kapalıyken zaten ölü, ayrıca desktop-balanced'ı da sinema yoluna sokuyordu. Birlikte açılır: ?features=cinemaStill:1,cinemaDof:1
 });
 
 // '?features=a:0,b:1' - unknown names are ignored so a stale link cannot

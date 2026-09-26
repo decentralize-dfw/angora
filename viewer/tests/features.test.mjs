@@ -15,12 +15,19 @@ test('?features= flips known flags and ignores strangers and garbage', () => {
 test('singleSided ships on, every unshipped task ships off', () => {
   assert.equal(DEFAULT_FEATURES.singleSided, true);
   // Task 2.1 shipped progressiveLoaderV2; the still-unshipped set keeps
-  // shrinking. cinemaStill went back OFF: its idle accumulation starts from
-  // black and restarts on every input, which the owner saw as the viewport
-  // dropping to black whenever they stopped moving. It ships again once the
-  // refinement starts from the resolved frame instead of from zero.
+  // shrinking.
   assert.equal(DEFAULT_FEATURES.progressiveLoaderV2, true);
-  assert.equal(DEFAULT_FEATURES.cinemaStill, true);   // KAPANIŞ İŞ 3: seed'li birikimle geri açıldı
+  // cinemaStill is OFF again, and this assertion is the guard that keeps it
+  // off. The owner reported a black viewport twice: "hareket ettirince
+  // gözüküyor, durunca siyah oluyor" - the idle accumulation takes the
+  // screen when input stops. KAPANIŞ İŞ 3's "sample 0 = resolved frame"
+  // seeding did NOT hold on a real GPU, and the fault does not reproduce
+  // under the software rasteriser here, so no blind second fix was made.
+  // A black screen costs more than a refined idle still. It ships again
+  // only when the failure is reproduced and fixed on real hardware.
+  // cinemaDof rides the same accumulation, so it goes with it.
+  assert.equal(DEFAULT_FEATURES.cinemaStill, false);
+  assert.equal(DEFAULT_FEATURES.cinemaDof, false);
   for (const flag of ['authoredMaterialsV2', 'ktx2Delivery', 'contextLodV2']) {
     assert.equal(DEFAULT_FEATURES[flag], false, flag);
   }
