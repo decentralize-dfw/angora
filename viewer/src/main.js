@@ -36,6 +36,7 @@ import {reviveBakedOcclusion} from './ao-revival.js';
 import {upgradeAtlasToArrays} from './atlas-array.js';
 import {bakeContactOcclusion} from './vertex-ao.js';
 import {markUploads,releaseGeometryArrays} from './geometry-release.js';
+import {applyVillaModelV3} from './villa-model-v3.js';
 import {createSiteContext} from './site-context.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
 import {rigFovFor} from './camera-rigs.js';
@@ -715,6 +716,8 @@ function setup() {
   renderer.xr.addEventListener('sessionstart', () => renderer.setAnimationLoop(renderFrame));
   renderer.xr.addEventListener('sessionend', () => {renderer.setAnimationLoop(null);resize();invalidate();});
 }
+// Kat başına tek sefer shader derlemesi - aşağıda selectView kullanıyor.
+const compiledFloors=new Set();
 async function selectView(id, initial = false) {
   if(id==='building')id='f3';
   setAutoRotate(false);
@@ -729,6 +732,17 @@ async function selectView(id, initial = false) {
       if(!nativeDelivery.batched){
         if(renderer.compileAsync)await renderer.compileAsync(scene,camera);
         lighting.warm(camera);
+        await waitForGPU(renderer);
+      } else if(/^f[0-3]$/.test(id)&&!compiledFloors.has(id)){
+        // "Zoom yapınca bir daha takılmasın": iç mekân indirilip görünür
+        // yapılınca programları HENÜZ derlenmemiş oluyor ve ilk kare onları
+        // satır içi derliyor - takılma tam orada. Derleme yolu şimdiye kadar
+        // yalnız batched OLMAYAN teslimatta vardı. Kat ilk kez açılırken
+        // burada derleniyor: yükleme göstergesi zaten ekranda, yani maliyet
+        // kullanıcının beklediği ana taşınıyor, sahneye girdiği ana değil.
+        // Kat başına bir kez; ikinci girişte iş yok.
+        compiledFloors.add(id);
+        if(renderer.compileAsync)await renderer.compileAsync(scene,camera);
         await waitForGPU(renderer);
       }
       setFurnitureVisible(furnitureVisible);status.hidden=true;
@@ -1609,6 +1623,21 @@ async function loadModel() {
     if (!response?.ok) response = await fetch(new URL('manifest.json', modelRoot), {cache:'no-cache'});
     if (!response.ok) throw Error(`Manifest HTTP ${response.status}`);
     const manifest = await response.json();
+    // 26.09.2026: villa kabuğu, bahçesi ve iç mobilyası ürün sahibinin kendi
+    // malzeme yazarlığını yaptığı modellere geçer. Yalnız üç parçanın DOSYA
+    // ADI değişir - çevre, ışık, kamera, teslimat mekanizması aynı kalır ve
+    // ?features=villaModelV3:0 teslimatı bire bir eskiye döndürür.
+    // MASAÜSTÜ ŞARTI ölçümle konuldu, keyfi değil. Yeni üç modelin dokuları
+    // diskte 5,3 MB WebP ama BELLEKTE açılınca doku bütçesi 105 -> 313 MiB
+    // çıkıyor (A/B ölçümü, aynı kare). Telefon bu oturumda 505 -> 241 MiB
+    // heap'e indirilerek ancak ayakta tutuldu; üstüne 208 MiB koymak ölçülmüş
+    // bir crash demek. Dokular küçültülünce mobil de açılır - o zamana kadar
+    // telefon eski teslimatta kalıyor. ?profile=desktop ile telefonda da
+    // denenebilir (bilerek).
+    if(FEATURES.villaModelV3&&deliveryProfile==='desktop'){
+      const swapped=applyVillaModelV3(manifest);
+      if(swapped.length)console.info('Villa model v3: '+swapped.join(', '));
+    }
     if(manifest.parts&&manifest.interior_streams){await loadNativeModel(manifest);return;}
     assetRevision=manifest.assets?.map(({file,sha256})=>({file,sha256}));
     // A whole scene may arrive as any number of parts, but the three groups
