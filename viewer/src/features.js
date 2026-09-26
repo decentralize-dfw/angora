@@ -16,6 +16,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   // inert until H8 reopens the task.
   singleSided: true,           // inert - no patched GLBs ship; 0 still forces DoubleSide back
   viewCulling: false,          // hiding planting seen through walk glazing is a quality call, deferred
+  mobileGeometryRelease: true, // MOBİL BELLEK: yüklemeden SONRA CPU'daki vertex dizilerini bırak (ölçüm: 207,6 MiB tutuluyordu, JS heap 334,9 MiB -> iPhone sekmeyi öldürüyor). Görüntü DEĞİŞMEZ. Kapatmak: ?features=mobileGeometryRelease:0
   plantsChunking: true,        // pure culling win: shared attributes, off-screen cells only
   cameraRigsV2: true,          // T1.5 - iki tier'da da canlı
   gardenSpotStrip: true,       // T1.6 - iki tier'da da canlı

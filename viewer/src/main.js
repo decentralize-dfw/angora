@@ -35,6 +35,7 @@ import {applyCellGrade,buildCellFamilies} from './cell-grade.js';
 import {reviveBakedOcclusion} from './ao-revival.js';
 import {upgradeAtlasToArrays} from './atlas-array.js';
 import {bakeContactOcclusion} from './vertex-ao.js';
+import {markUploads,releaseGeometryArrays} from './geometry-release.js';
 import {createSiteContext} from './site-context.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
 import {rigFovFor} from './camera-rigs.js';
@@ -1383,6 +1384,12 @@ async function loadNativeModel(manifest){
     // SONRASI gelen her parça tam boru hattından geçer (grade+AO+atlas+
     // contact) - sayı eşitliği bununla sağlanır.
     onAcquired:(name,model)=>{
+      // MOBİL BELLEK: yükleme işaretçisi parça sahneye girdiği anda, İLK
+      // RENDER'DAN ÖNCE kurulur - sonra kurulsa three'nin onUploadCallback'i
+      // çoktan çağrılmış olur ve o diziler "yüklenmedi" sayılıp asla
+      // bırakılamaz. Hiçbir davranış değişmez, yalnız kayıt tutulur.
+      if(FEATURES.mobileGeometryRelease&&quality.tier.startsWith('mobile'))
+        markUploads(new Map([[name,model]]));
       if(ready)latePartUpgrade(name,model);
       else if(contactBake?.bakeLate&&contactBake.bakeLate(model))invalidate();
     },
@@ -1548,6 +1555,31 @@ async function loadNativeModel(manifest){
       .then(()=>lighting.buildWindowPortals())
       .then(count=>{portalView();return count;})
       .catch(error=>{console.warn('Window portals unavailable',error);return 0;});
+  }
+  // MOBİL BELLEK: bütün boştaki yükseltmeler bittikten SONRA CPU'daki vertex
+  // dizilerini bırak. Görüntü değişmez; ölçülen tutulan geometri 207,6 MiB ve
+  // JS heap 334,9 MiB'ti - iPhone Safari o ağırlıkta sekmeyi öldürüyor (ürün
+  // sahibi crash bildirdi).
+  //
+  // Sırayı bozmak YASAK: grade/AO/atlas/temas-AO geçişlerinin hepsi vertex
+  // dizilerini OKUR (temas AO'su position+normal üzerinden ışın yürütür), o
+  // yüzden boşaltma hepsinin arkasına dizilir.
+  //
+  // WebXR ışınlaması bütün mesh gruplarını raycast eder ve raycast diziye
+  // bakar; navigator.xr olmayan cihazda walk.js hiç kurulmadığı için
+  // renderer.xr.enabled false kalır. Kurulmuşsa bu geçiş hiç çalışmaz.
+  if(FEATURES.mobileGeometryRelease&&quality.tier.startsWith('mobile')&&manifest.batched){
+    window.__angoraReleaseReady=Promise.all([
+      window.__angoraGradeReady??0,window.__angoraAoReady??0,
+      window.__angoraAtlasReady??0,window.__angoraContactReady??0,
+    ]).then(()=>{
+      if(renderer.xr.enabled){console.info('Geometry release skipped: WebXR active');return null;}
+      const result=releaseGeometryArrays(nativeDelivery.loaded);
+      console.info(`Geometry arrays released: ${result.releasedMiB} MiB from `+
+        `${result.releasedAttributes} attributes / ${result.geometries} geometries `+
+        `(${result.deferred} deferred to first upload)`);
+      return result;
+    }).catch(error=>{console.warn('Geometry release unavailable',error);return null;});
   }
   // The property card greets a plain entry here too. It used to be raised
   // only on the classic path, which this one returns before ever reaching -
