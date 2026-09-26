@@ -21,8 +21,8 @@
   <!-- Yerel arama: villa tek bir adreste, konum sinyali açıkça verilir. -->
   <meta name="geo.region" content="TR-06" />
   <meta name="geo.placename" content="Mutlukent, Çankaya, Ankara" />
-  <meta name="geo.position" content="39.8617;32.6896" />
-  <meta name="ICBM" content="39.8617, 32.6896" />
+  <meta name="geo.position" content="39.8702169;32.7186865" />
+  <meta name="ICBM" content="39.8702169, 32.7186865" />
 
   <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
@@ -90,8 +90,8 @@
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 39.8617,
-        "longitude": 32.6896
+        "latitude": 39.8702169,
+        "longitude": 32.7186865
       },
       "numberOfRooms": 9,
       "numberOfBedrooms": 5,
@@ -360,6 +360,16 @@
       <p>Angora Evleri, Çankaya’nın Çayyolu bölgesinde, Mutlukent Mahallesi sınırları içinde yer alan alçak yoğunluklu bir villa yerleşimidir. Hacettepe Beytepe kampüsünün yeşili yerleşkenin hemen komşusudur; Eskişehir Yolu ve Bilkent bağlantısı sayesinde şehrin önemli merkezlerine ulaşım dakikalarla ölçülür.</p>
     </div>
     <a class="listing-link" href="https://remax.com.tr/tr/portfoy/P56131836" target="_blank" rel="noopener noreferrer" data-i18n="listing">Satış ilanını aç ↗</a>
+    <!-- İÇ BAĞLANTI: içerik sayfaları buradan bulunur ve ana sayfanın
+         otoritesini alır. Tarayıcı JS çalıştırmasa da bu bağlantılar
+         kaynak HTML'de durur. Sayfalar tools/seo/build-seo-pages.mjs ile
+         ilan verisinden üretilir. -->
+    <nav class="listing-more" aria-label="Villa hakkında daha fazlası">
+      <a href="/kat-planlari.html">Kat planları: dört kat, oda oda →</a>
+      <a href="/galeri.html">Fotoğraf galerisi: 56 fotoğraf →</a>
+      <a href="/angora-evleri-rehberi.html">Angora Evleri rehberi: konum ve çevre →</a>
+      <a href="/sikca-sorulan-sorular.html">Sıkça sorulan sorular →</a>
+    </nav>
   </section>
   <section id="region-panel" class="region-panel" aria-label="Bölge haritası" hidden>
     <details id="region-summary"><summary>Angora Evleri <span aria-hidden="true">⌃</span></summary><div id="region-description"></div></details>

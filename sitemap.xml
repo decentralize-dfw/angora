@@ -16,4 +16,28 @@
       <image:caption>900 m² bahçeli, özel havuzlu, asansörlü 4 katlı müstakil villa</image:caption>
     </image:image>
   </url>
+  <url>
+    <loc>https://angora.mergvs.com/kat-planlari.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://angora.mergvs.com/galeri.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://angora.mergvs.com/angora-evleri-rehberi.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://angora.mergvs.com/sikca-sorulan-sorular.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
