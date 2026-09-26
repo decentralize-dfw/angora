@@ -1,0 +1,27 @@
+{
+  "name": "Angora 21 · Angora Evleri’nde havuzlu, asansörlü, 900 m² bahçeli müstakil villa",
+  "short_name": "Angora 21",
+  "description": "Ankara’nın en köklü ve en çok tercih edilen villa yerleşimlerinden biri olan Angora Evleri’nde, Hatırlı Sokak’ta konumlanan bu müstakil villa; 900 m²’lik bahçesi, özel havuzu ve ferah yaşam alanlarıyla ayrıcalıklı bir yaşam sunuyor.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#edf0eb",
+  "theme_color": "#edf0eb",
+  "lang": "tr",
+  "categories": [
+    "lifestyle",
+    "business"
+  ],
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

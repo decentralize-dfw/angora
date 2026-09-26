@@ -26,12 +26,19 @@ const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(
 
 // Sayfalar arası gezinme: her sayfa diğerlerine bağlanır, böylece hem
 // kullanıcı hem tarayıcı sitede dolaşır ve otorite sayfalara dağılır.
-const NAV = [
+const NAV_TR = [
   {href: '/', label: '3B Villa Turu'},
   {href: '/kat-planlari.html', label: 'Kat Planları'},
   {href: '/galeri.html', label: 'Fotoğraf Galerisi'},
   {href: '/angora-evleri-rehberi.html', label: 'Angora Evleri Rehberi'},
   {href: '/sikca-sorulan-sorular.html', label: 'Sıkça Sorulan Sorular'},
+];
+const NAV_EN = [
+  {href: '/?lang=en', label: '3D Villa Tour'},
+  {href: '/en/floor-plans.html', label: 'Floor Plans'},
+  {href: '/en/photo-gallery.html', label: 'Photo Gallery'},
+  {href: '/en/angora-evleri-guide.html', label: 'Angora Evleri Guide'},
+  {href: '/en/faq.html', label: 'FAQ'},
 ];
 
 const CSS = `:root{--ink:#1b2420;--muted:#5d6b63;--line:#dfe5df;--bg:#f7f8f6;--accent:#2f4f3e}
@@ -62,7 +69,7 @@ footer.site a{margin-right:14px}
 .note{font-size:13px;color:var(--muted);border-left:3px solid var(--line);padding-left:12px}
 @media(max-width:640px){h1{font-size:25px}.wrap{padding:0 16px}}`;
 
-function page({slug, title, description, h1, lede, body, extraLd = [], keywords}) {
+function page({slug, title, description, h1, lede, body, extraLd = [], keywords, lang = 'tr', alt}) {
   const url = `${SITE}/${slug}`;
   const crumbs = {
     '@type': 'BreadcrumbList',
@@ -72,22 +79,28 @@ function page({slug, title, description, h1, lede, body, extraLd = [], keywords}
     ],
   };
   const ld = {'@context': 'https://schema.org', '@graph': [crumbs, ...extraLd]};
+  // hreflang çifti: aynı içeriğin TR ve EN hâli birbirini gösterir, yoksa
+  // Google ikisini kopya sanıp birini eler.
+  const hreflang = alt ? `<link rel="alternate" hreflang="tr" href="${SITE}/${lang === 'tr' ? slug : alt}" />
+<link rel="alternate" hreflang="en" href="${SITE}/${lang === 'en' ? slug : alt}" />
+<link rel="alternate" hreflang="x-default" href="${SITE}/${lang === 'tr' ? slug : alt}" />
+` : '';
   return `<!doctype html>
-<html lang="tr">
+<html lang="${lang}">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}" />
 ${keywords ? `<meta name="keywords" content="${esc(keywords)}" />\n` : ''}<link rel="canonical" href="${url}" />
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+${hreflang}<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 <meta name="geo.region" content="TR-06" />
 <meta name="geo.placename" content="Mutlukent, Çankaya, Ankara" />
 <meta name="geo.position" content="${GEO.lat};${GEO.lon}" />
 <meta name="ICBM" content="${GEO.lat}, ${GEO.lon}" />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="MERGVS · Angora 21" />
-<meta property="og:locale" content="tr_TR" />
+<meta property="og:locale" content="${lang === 'en' ? 'en_US' : 'tr_TR'}" />
 <meta property="og:url" content="${url}" />
 <meta property="og:title" content="${esc(title)}" />
 <meta property="og:description" content="${esc(description)}" />
@@ -100,31 +113,35 @@ ${keywords ? `<meta name="keywords" content="${esc(keywords)}" />\n` : ''}<link 
 <body>
 <header class="site"><div class="wrap">
   <a class="brand" href="/">MERGVS · ANGORA 21</a>
-  <nav class="site" aria-label="Site gezinmesi">${NAV.map(n =>
+  <nav class="site" aria-label="${lang === 'en' ? 'Site navigation' : 'Site gezinmesi'}">${(lang === 'en' ? NAV_EN : NAV_TR).map(n =>
     `<a href="${n.href}"${('/' + slug) === n.href ? ' aria-current="page"' : ''}>${n.label}</a>`).join('')}</nav>
 </div></header>
 <main class="wrap">
-  <p class="crumbs"><a href="/">Angora 21</a> › ${esc(h1)}</p>
+  <p class="crumbs"><a href="${lang === 'en' ? '/?lang=en' : '/'}">Angora 21</a> › ${esc(h1)}</p>
   <h1>${esc(h1)}</h1>
   <p class="lede">${esc(lede)}</p>
 ${body}
-  <p><a class="cta" href="/">Villayı 3B modelde gez →</a><a class="cta ghost" href="https://remax.com.tr/tr/portfoy/P56131836" target="_blank" rel="noopener">Satış ilanını aç ↗</a></p>
+  <p><a class="cta" href="${lang === 'en' ? '/?lang=en' : '/'}">${lang === 'en' ? 'Explore the villa in 3D →' : 'Villayı 3B modelde gez →'}</a><a class="cta ghost" href="https://remax.com.tr/tr/portfoy/P56131836" target="_blank" rel="noopener">${lang === 'en' ? 'Open the sales listing ↗' : 'Satış ilanını aç ↗'}</a></p>
 </main>
 <footer class="site"><div class="wrap">
-  <p>${NAV.map(n => `<a href="${n.href}">${n.label}</a>`).join('')}</p>
-  <p>${esc(tr.address.join(' · '))} · Ankara · MERGVS</p>
-  <p class="note">İlan alanları ve özellikleri RE/MAX P56131836 kaynağındandır.</p>
+  <p>${(lang === 'en' ? NAV_EN : NAV_TR).map(n => `<a href="${n.href}">${n.label}</a>`).join('')}</p>
+  <p>${esc((lang === 'en' ? LISTING.en : tr).address.join(' · '))} · Ankara · MERGVS</p>
+  <p class="note">${lang === 'en' ? 'Areas and features are from RE/MAX listing P56131836.' : 'İlan alanları ve özellikleri RE/MAX P56131836 kaynağındandır.'}</p>
+  <p><a href="${lang === 'en' ? '/' : '/en/floor-plans.html'}">${lang === 'en' ? 'Türkçe' : 'English'}</a></p>
 </div></footer>
 </body>
 </html>`;
 }
 
 const out = [];
-const write = (slug, html) => {writeFileSync(new URL(slug, ROOT), html); out.push(slug);};
+const write = (slug, html) => {
+  if (slug.includes('/')) mkdirSync(new URL(slug.slice(0, slug.lastIndexOf('/')), ROOT), {recursive: true});
+  writeFileSync(new URL(slug, ROOT), html); out.push(slug);
+};
 
 /* ---------------- 1. KAT PLANLARI ---------------- */
 write('kat-planlari.html', page({
-  slug: 'kat-planlari.html',
+  slug: 'kat-planlari.html', alt: 'en/floor-plans.html',
   title: 'Kat Planları · 4 Katlı Müstakil Villa · Angora Evleri, Çankaya Ankara',
   description: 'Angora Evleri Hatırlı Sokak\'taki müstakil villanın dört katı: bodrum havuz katı, giriş katı, ebeveyn süitli birinci kat ve bağımsız çatı katı. Oda oda m² değerleriyle.',
   keywords: 'villa kat planı, 4 katlı villa, Angora Evleri kat planı, ebeveyn süiti, müştemilat, Ankara villa oda ölçüleri',
@@ -150,7 +167,7 @@ for (const p of photos) {
   groups.get(key).push(p);
 }
 write('galeri.html', page({
-  slug: 'galeri.html',
+  slug: 'galeri.html', alt: 'en/photo-gallery.html',
   title: `Fotoğraf Galerisi · ${photos.length} Fotoğraf · Angora Evleri'nde Satılık Villa`,
   description: `Angora Evleri Hatırlı Sokak'taki müstakil villanın ${photos.length} fotoğrafı: salon, mutfak, ebeveyn süiti, banyolar, havuz, bahçe, garaj ve müştemilat. Her kare hangi odada çekildiği yazılı.`,
   keywords: 'Angora Evleri villa fotoğrafları, Ankara satılık villa iç mekan, havuzlu villa fotoğraf, villa salon mutfak yatak odası',
@@ -175,7 +192,7 @@ const CATEGORY_TR = {
   religion: 'İbadet', health: 'Sağlık', business_services: 'Hizmet', finance: 'Finans',
 };
 write('angora-evleri-rehberi.html', page({
-  slug: 'angora-evleri-rehberi.html',
+  slug: 'angora-evleri-rehberi.html', alt: 'en/angora-evleri-guide.html',
   title: 'Angora Evleri Rehberi · Çayyolu, Mutlukent, Çankaya Ankara · Villa Yerleşimi',
   description: 'Angora Evleri nerede, neden tercih edilir? Çankaya Çayyolu\'ndaki bu villa yerleşiminin konumu, ulaşımı, okulları ve çevresindeki donatılar — Hatırlı Sokak\'a yürüme mesafesiyle.',
   keywords: 'Angora Evleri nerede, Angora Evleri Ankara, Çayyolu villa, Mutlukent Mahallesi, Çankaya villa sitesi, Beytepe, Eskişehir Yolu, Ankara villa bölgesi',
@@ -216,7 +233,7 @@ const FAQ = [
   ['Villayı yerinde görmeden gezebilir miyim?', 'Evet. Villanın dört katı da etkileşimli 3B modelde açık: kat seçip odaları dolaşabilir, gün ışığını saatine göre değiştirebilir, 360° oda turuna girebilir ve fotoğrafları odalarıyla birlikte görebilirsiniz.'],
 ];
 write('sikca-sorulan-sorular.html', page({
-  slug: 'sikca-sorulan-sorular.html',
+  slug: 'sikca-sorulan-sorular.html', alt: 'en/faq.html',
   title: 'Sıkça Sorulan Sorular · Angora Evleri\'nde Satılık Villa · Çankaya Ankara',
   description: 'Angora Evleri Hatırlı Sokak\'taki satılık müstakil villa hakkında sık sorulanlar: alan, oda sayısı, kat, havuz, otopark, ısıtma, tapu durumu ve fiyat.',
   keywords: 'Angora Evleri villa fiyat, satılık villa tapu durumu, villa kaç oda, havuzlu villa Ankara, villa krediye uygun mu',
@@ -228,11 +245,102 @@ write('sikca-sorulan-sorular.html', page({
       acceptedAnswer: {'@type': 'Answer', text: a}}))}],
 }));
 
+/* ---------------- İNGİLİZCE SAYFALAR ----------------
+   Ankara'da yabancı alıcı/kiracı kitlesi gerçek (elçilikler, üniversiteler,
+   kurumsal atamalar) ve "villa for sale Ankara" sorgusunda Türkçe sayfa
+   çıkmaz. Metin uydurulmuyor: LISTING.en zaten ürün sahibinin ilanının
+   İngilizcesi. TR/EN sayfalar hreflang ile eşlenir, yoksa Google ikisini
+   kopya sanıp birini eler.                                              */
+const en = LISTING.en;
+const enCurated = curated;
+
+write('en/floor-plans.html', page({
+  slug: 'en/floor-plans.html', alt: 'kat-planlari.html', lang: 'en',
+  title: 'Floor Plans · Four-Storey Detached Villa · Angora Evleri, Ankara',
+  description: 'The four floors of the detached villa on Hatırlı Sokak in Angora Evleri, Ankara: basement pool floor, ground floor, primary-suite first floor and a self-contained attic. Room by room, with areas.',
+  keywords: 'villa floor plan Ankara, four storey villa, Angora Evleri floor plan, detached house Ankara layout',
+  h1: 'Floor Plans: Four Storeys, Room by Room',
+  lede: `${en.features[0]}, ${en.features[1]}. Four floors linked by a lift; because the site falls away, the basement opens straight onto the garden and the pool.`,
+  body: `  <ul class="facts">${en.features.map(f => `<li>${esc(f)}</li>`).join('')}</ul>
+${en.floors.map(f => `  <h2>${esc(f.title)}</h2>\n${f.body.map(x => `  <p>${esc(x)}</p>`).join('\n')}`).join('\n')}
+  <h2>Title deed and handover</h2>
+  <p>${esc(en.deed)}</p>`,
+  extraLd: [{'@type': 'WebPage', '@id': SITE + '/en/floor-plans.html', about: {'@id': SITE + '/#villa'}, inLanguage: 'en'}],
+}));
+
+write('en/photo-gallery.html', page({
+  slug: 'en/photo-gallery.html', alt: 'galeri.html', lang: 'en',
+  title: `Photo Gallery · ${photos.length} Photographs · Villa for Sale in Angora Evleri, Ankara`,
+  description: `${photos.length} photographs of the detached villa on Hatırlı Sokak, Angora Evleri: living rooms, kitchens, the primary suite, bathrooms, the pool, the garden, the garage and the annexe.`,
+  keywords: 'Ankara villa photos, villa for sale Ankara interior, house with pool Ankara pictures',
+  h1: `${photos.length} Photographs of the Villa`,
+  lede: 'Each photograph names the floor and the room it was taken in. You can walk the same points in the 3D model.',
+  body: [...groups.entries()].map(([name, list]) => {
+    const enName = list[0].outdoor ? 'Garden, pool and exterior' : (['Basement · pool and garden', 'Ground floor', 'First floor', 'Attic floor'][list[0].floor] ?? 'Villa');
+    return `  <h2>${esc(enName)} (${list.length})</h2>
+  <ul class="gallery">${list.map(p => `<li><figure><img src="/photogallery/${esc(p.file)}" width="800" height="600" loading="lazy" decoding="async" alt="${esc(p.en + ' · villa for sale in Angora Evleri, Ankara')}" /><figcaption>${esc(p.en)}</figcaption></figure></li>`).join('')}</ul>`;
+  }).join('\n'),
+  extraLd: [{'@type': 'ImageGallery', '@id': SITE + '/en/photo-gallery.html', inLanguage: 'en',
+    about: {'@id': SITE + '/#villa'},
+    image: photos.slice(0, 30).map(p => ({'@type': 'ImageObject',
+      contentUrl: `${SITE}/photogallery/${p.file}`, caption: `${p.en} · villa for sale in Angora Evleri, Ankara`}))}],
+}));
+
+write('en/angora-evleri-guide.html', page({
+  slug: 'en/angora-evleri-guide.html', alt: 'angora-evleri-rehberi.html', lang: 'en',
+  title: 'Angora Evleri Guide · Çayyolu, Mutlukent, Çankaya · Ankara Villa Settlement',
+  description: 'Where is Angora Evleri and why do people choose it? The location, transport, schools and amenities around this low-density villa settlement in Çankaya, Ankara — with walking distances from Hatırlı Sokak.',
+  keywords: 'Angora Evleri Ankara, Cayyolu villas, Mutlukent, Çankaya villa settlement, living in Ankara villa',
+  h1: 'Angora Evleri Guide: Çayyolu · Mutlukent · Çankaya',
+  lede: en.region.set,
+  body: `${en.region.body.map(x => `  <p>${esc(x)}</p>`).join('\n')}
+  <h2>Location</h2>
+  <p>${esc(en.location)}</p>
+  <h2>Amenities within walking distance</h2>
+  <p>Distances are straight-line from Hatırlı Sokak No: 10, drawn from ${places.named} named amenities within ${places.radius_m} m of the villa.</p>
+  <table><thead><tr><th>Place</th><th>Distance</th></tr></thead>
+  <tbody>${enCurated.map(c => `<tr><td>${esc(c.name)}</td><td>${c.d} m</td></tr>`).join('')}</tbody></table>
+  <p class="note">Source: ${esc(places.source)} · ${esc(places.atlas_generated_at)}.</p>`,
+  extraLd: [{'@type': 'Place', '@id': SITE + '/en/#angora-evleri', name: 'Angora Evleri',
+    description: en.region.body[0],
+    geo: {'@type': 'GeoCoordinates', latitude: Number(GEO.lat), longitude: Number(GEO.lon)}}],
+}));
+
+const FAQ_EN = [
+  ['Where is this villa in Angora Evleri?', `The villa is at ${en.address[0]}, ${en.address[1]}, in the Angora Evleri settlement within Mutlukent, in the Çayyolu part of Çankaya, Ankara.`],
+  ['How large is the villa?', `${en.features[0]} and ${en.features[1]}, with a ${en.features[2]}.`],
+  ['How many rooms and floors?', `${en.features[3]}, ${en.features[5]}. The floors are linked by a lift and each floor has its own sitting area.`],
+  ['How many bathrooms?', `${en.features[4]}.`],
+  ['Is there a pool?', 'Yes. A private pool sits at the same level as the basement, with roughly 50 m² of water, opening straight onto the garden.'],
+  ['What about parking?', `${en.features[8]}. The garage connects internally to the ground floor and is about 21 m².`],
+  ['How is the house heated?', 'By a natural-gas combi boiler. There is also a 6-tonne water tank.'],
+  ['Is there an annexe?', 'Yes — about 27 m² on the basement floor with its own entrance, suitable as a guest room, staff room or office.'],
+  ['What is the title deed status?', en.deed],
+  ['What is the price?', `The listed price is ${en.price}. See RE/MAX listing P56131836 for the current position.`],
+  ['Can I view the villa without visiting?', 'Yes. All four floors are open in an interactive 3D model: pick a floor, walk the rooms, change the daylight by hour, take the 360° room tour and see the photographs in place.'],
+];
+write('en/faq.html', page({
+  slug: 'en/faq.html', alt: 'sikca-sorulan-sorular.html', lang: 'en',
+  title: 'Frequently Asked Questions · Villa for Sale in Angora Evleri, Ankara',
+  description: 'Common questions about the detached villa for sale on Hatırlı Sokak, Angora Evleri: size, rooms, floors, pool, parking, heating, title deed and price.',
+  keywords: 'Ankara villa price, villa for sale Turkey title deed, house with pool Ankara',
+  h1: 'Frequently Asked Questions',
+  lede: 'The questions asked most often, answered from the listing.',
+  body: FAQ_EN.map(([q, a]) => `  <h2>${esc(q)}</h2>\n  <p>${esc(a)}</p>`).join('\n'),
+  extraLd: [{'@type': 'FAQPage', '@id': SITE + '/en/faq.html', inLanguage: 'en',
+    mainEntity: FAQ_EN.map(([q, a]) => ({'@type': 'Question', name: q, acceptedAnswer: {'@type': 'Answer', text: a}}))}],
+}));
+
 /* ---------------- SITEMAP ---------------- */
 const today = new Date().toISOString().slice(0, 10);
 const urls = [
   {loc: SITE + '/', priority: '1.0', changefreq: 'weekly', image: true},
-  ...out.map(slug => ({loc: `${SITE}/${slug}`, priority: '0.8', changefreq: 'monthly'})),
+  ...out.map(slug => ({loc: `${SITE}/${slug}`, priority: '0.8', changefreq: 'monthly',
+    // Galeri sayfaları 56 fotoğrafın TAMAMINI sitemap'e taşır. Google
+    // Görseller emlakta ayrı bir giriş kapısı: "angora evleri villa"
+    // aramasının önemli kısmı görsel sekmesinde olur ve oradan tıklanan
+    // fotoğraf sayfayı açar. Başlıksız/altyazısız fotoğraf o kapıyı kapatır.
+    photos: slug.endsWith('galeri.html') || slug.endsWith('photo-gallery.html')})),
 ];
 writeFileSync(new URL('viewer/public/sitemap.xml', ROOT),
 `<?xml version="1.0" encoding="UTF-8"?>
@@ -243,7 +351,12 @@ ${urls.map(u => `  <url>
     <loc>${u.loc}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
-    <priority>${u.priority}</priority>${u.image ? `
+    <priority>${u.priority}</priority>${u.photos ? PHOTO_POINTS.filter(p => p.file).map(p => `
+    <image:image>
+      <image:loc>${SITE}/photogallery/${p.file}</image:loc>
+      <image:title>${esc(p.tr)} · Angora Evleri'nde satılık villa</image:title>
+      <image:caption>${esc(p.tr)} · ${esc(tr.address[1])}, Çankaya Ankara</image:caption>
+    </image:image>`).join('') : ''}${u.image ? `
     <xhtml:link rel="alternate" hreflang="tr" href="${SITE}/"/>
     <xhtml:link rel="alternate" hreflang="en" href="${SITE}/?lang=en"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}/"/>
@@ -255,6 +368,69 @@ ${urls.map(u => `  <url>
   </url>`).join('\n')}
 </urlset>
 `);
+
+/* ---------------- llms.txt ----------------
+   Artık aramanın bir kısmı ChatGPT / Gemini / Perplexity üzerinden
+   yapılıyor ve bu asistanlar sayfayı okurken JS çalıştırmıyor, yapılandırılmış
+   özet arıyor. llms.txt o özeti tek dosyada verir: ne satılıyor, nerede,
+   hangi sayfada ne var. Maliyeti birkaç KB.                            */
+writeFileSync(new URL('llms.txt', ROOT), `# Angora 21 — ${tr.headline}
+
+> ${tr.address[0]}, ${tr.address[1]}, Çankaya / Ankara, Türkiye.
+> ${tr.features.slice(0, 6).join(' · ')}. İlan fiyatı ${tr.price}.
+> Kaynak: RE/MAX ilanı P56131836. Etkileşimli 3B model: ${SITE}/
+
+## Özet
+${tr.overview.join('\n')}
+
+## Sayfalar
+${NAV_TR.filter(n => n.href !== '/').map(n => `- [${n.label}](${SITE}${n.href})`).join('\n')}
+- [3B villa turu — dört kat, 360° oda turu, saate göre gün ışığı](${SITE}/)
+
+## English
+${NAV_EN.filter(n => !n.href.startsWith('/?')).map(n => `- [${n.label}](${SITE}${n.href})`).join('\n')}
+
+## Özellikler
+${tr.features.map(f => `- ${f}`).join('\n')}
+
+## Katlar
+${tr.floors.map(f => `### ${f.title}\n${f.body.join('\n')}`).join('\n\n')}
+
+## Tapu
+${tr.deed}
+
+## Konum
+${tr.location}
+${tr.region.body.join('\n')}
+
+Koordinat: ${GEO.lat}, ${GEO.lon}
+`);
+
+/* ---------------- 404 ----------------
+   GitHub Pages 404.html'i servis eder. Kırık bağlantıya düşen ziyaretçi
+   boş sayfa yerine sitenin haritasını görür; arama motoru da soft-404
+   yerine düzgün bir 404 alır.                                          */
+write('404.html', page({
+  slug: '404.html',
+  title: 'Sayfa bulunamadı · Angora 21',
+  description: 'Aradığınız sayfa bulunamadı. Angora Evleri\'ndeki satılık villanın kat planlarına, fotoğraf galerisine ve 3B turuna buradan ulaşabilirsiniz.',
+  h1: 'Sayfa bulunamadı',
+  lede: 'Aradığınız sayfa taşınmış ya da hiç var olmamış olabilir. Aşağıdakiler villanın bütün sayfaları.',
+  body: `  <ul>${NAV_TR.map(n => `<li><a href="${n.href}">${n.label}</a></li>`).join('')}</ul>
+  <p>${esc(tr.address.join(' · '))}</p>`,
+}));
+out.pop();   // 404 sitemap'e girmez
+
+/* ---------------- web app manifest ---------------- */
+writeFileSync(new URL('site.webmanifest', ROOT), JSON.stringify({
+  name: `Angora 21 · ${tr.headline}`,
+  short_name: 'Angora 21',
+  description: tr.overview[0],
+  start_url: '/', display: 'standalone', background_color: '#edf0eb', theme_color: '#edf0eb',
+  lang: 'tr', categories: ['lifestyle', 'business'],
+  icons: [{src: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png'},
+    {src: '/favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any'}],
+}, null, 2));
 
 console.log('Üretilen sayfalar:', out.join(', '));
 console.log('sitemap URL sayısı:', urls.length);

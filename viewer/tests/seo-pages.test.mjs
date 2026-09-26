@@ -18,7 +18,12 @@ const read = name => readFileSync(new URL(name, root), 'utf8');
 const tr = LISTING.tr;
 const places = JSON.parse(read('viewer/src/region-places.json'));
 
-const PAGES = ['kat-planlari.html', 'galeri.html', 'angora-evleri-rehberi.html', 'sikca-sorulan-sorular.html'];
+const PAGES_TR = ['kat-planlari.html', 'galeri.html', 'angora-evleri-rehberi.html', 'sikca-sorulan-sorular.html'];
+const PAGES_EN = ['en/floor-plans.html', 'en/photo-gallery.html', 'en/angora-evleri-guide.html', 'en/faq.html'];
+const PAGES = [...PAGES_TR, ...PAGES_EN];
+// TR <-> EN eşleri: hreflang bunları karşılıklı göstermeli, yoksa Google
+// ikisini kopya sanıp birini eler.
+const PAIRS = PAGES_TR.map((t, i) => [t, PAGES_EN[i]]);
 const html = Object.fromEntries(PAGES.map(p => [p, read(p)]));
 const ldOf = s => JSON.parse(s.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
 const textOf = s => s.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '')
@@ -33,7 +38,8 @@ test('her sayfa SEO iskeletini taşır', () => {
     assert.ok(s.includes(`<link rel="canonical" href="https://angora.mergvs.com/${name}" />`), name + ' canonical yanlış');
     assert.match(s, /<meta name="robots" content="index, follow/, name + ' robots eksik');
     assert.equal((s.match(/<h1/g) ?? []).length, 1, name + ' tam bir h1 olmalı');
-    assert.ok(s.includes('<html lang="tr">'), name + ' dil tr olmalı');
+    const wantLang = name.startsWith('en/') ? 'en' : 'tr';
+    assert.ok(s.includes(`<html lang="${wantLang}">`), `${name} dili ${wantLang} olmalı`);
     assert.ok(s.includes('og:title') && s.includes('og:url'), name + ' OG eksik');
     assert.ok(!s.includes('<script src') && !s.includes('type="module"'), name + ' içerik sayfası JS yüklememeli');
   }
@@ -46,17 +52,63 @@ test('sayfalar DOLU - doorway değil', () => {
   }
 });
 
-test('sayfalar birbirine VE ana sayfaya bağlanır', () => {
-  for (const [name, s] of Object.entries(html)) {
-    assert.ok(s.includes('href="/"'), name + ' ana sayfaya bağlanmıyor');
-    for (const other of PAGES) {
-      if (other === name) continue;
-      assert.ok(s.includes(`href="/${other}"`), `${name} -> ${other} bağlantısı yok`);
+test('sayfalar KENDİ DİLİNDE birbirine ve ana sayfaya bağlanır', () => {
+  for (const set of [PAGES_TR, PAGES_EN]) {
+    for (const name of set) {
+      const s = html[name];
+      for (const other of set) {
+        if (other === name) continue;
+        assert.ok(s.includes(`href="/${other}"`), `${name} -> ${other} bağlantısı yok`);
+      }
     }
   }
-  // ana sayfa da onlara bağlanmalı, yoksa sayfalar bulunmaz ve otorite almaz
+  // ana sayfa TR sayfalarına bağlanmalı, yoksa bulunmaz ve otorite almaz
   const index = read('viewer/index.html');
-  for (const p of PAGES) assert.ok(index.includes(`href="/${p}"`), 'ana sayfa -> ' + p + ' bağlantısı yok');
+  for (const p of PAGES_TR) assert.ok(index.includes(`href="/${p}"`), 'ana sayfa -> ' + p + ' bağlantısı yok');
+});
+
+test('TR ve EN sayfalar hreflang ile KARŞILIKLI eşlenir', () => {
+  for (const [trPage, enPage] of PAIRS) {
+    for (const [name, other] of [[trPage, enPage], [enPage, trPage]]) {
+      const s = html[name];
+      assert.ok(s.includes(`hreflang="tr" href="https://angora.mergvs.com/${name === trPage ? name : other}"`),
+        name + ' tr hreflang yanlış');
+      assert.ok(s.includes(`hreflang="en" href="https://angora.mergvs.com/${name === enPage ? name : other}"`),
+        name + ' en hreflang yanlış');
+      assert.ok(s.includes('hreflang="x-default"'), name + ' x-default yok');
+    }
+    assert.ok(html[enPage].includes('<html lang="en">'), enPage + ' dili en olmalı');
+    assert.ok(html[trPage].includes('<html lang="tr">'), trPage + ' dili tr olmalı');
+  }
+});
+
+test('görsel sitemap: 56 fotoğrafın HEPSİ başlık ve altyazıyla', () => {
+  const sitemap = read('viewer/public/sitemap.xml');
+  const photos = PHOTO_POINTS.filter(p => p.file);
+  for (const p of photos) {
+    assert.ok(sitemap.includes(`/photogallery/${p.file}`), 'sitemap\'de yok: ' + p.file);
+  }
+  const locs = (sitemap.match(/<image:loc>/g) ?? []).length;
+  assert.ok(locs >= photos.length, 'görsel kaydı az: ' + locs);
+  assert.equal((sitemap.match(/<image:title>/g) ?? []).length, locs, 'her görselin başlığı olmalı');
+});
+
+test('llms.txt, 404 ve manifest yerinde', () => {
+  const llms = read('llms.txt');
+  assert.ok(llms.includes(tr.headline), 'llms.txt ilan başlığını taşımalı');
+  assert.ok(llms.includes(tr.price) && llms.includes(tr.deed), 'llms.txt fiyat/tapu taşımalı');
+  for (const f of tr.floors) assert.ok(llms.includes(f.title), 'llms.txt kat eksik: ' + f.title);
+  assert.ok(llms.includes('P56131836'), 'llms.txt kaynağı yazmalı');
+
+  const notFound = read('404.html');
+  assert.ok(notFound.includes('<h1'), '404 sayfası boş olmamalı');
+  for (const p of PAGES_TR) assert.ok(notFound.includes(`href="/${p}"`), '404 -> ' + p + ' bağlantısı yok');
+  assert.ok(!read('viewer/public/sitemap.xml').includes('404.html'), '404 sitemap\'e girmemeli');
+
+  const manifest = JSON.parse(read('site.webmanifest'));
+  assert.ok(manifest.name.includes('Angora'), 'manifest adı');
+  assert.equal(manifest.start_url, '/');
+  assert.ok(manifest.icons.length >= 2, 'manifest ikonları');
 });
 
 test('kat planları: dört katın hepsi ilan metniyle', () => {

@@ -26,6 +26,7 @@
 
   <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="MERGVS · Angora 21" />
@@ -43,8 +44,7 @@
   <meta name="twitter:description" content="Çankaya Mutlukent, Hatırlı Sokak. 500 m² brüt, 400 m² net, 900 m² bahçe, özel havuz, asansör, 5+4 oda, 4 kat." />
   <meta name="twitter:image" content="https://angora.mergvs.com/og-cover.jpg" />
 
-  <script type="application/ld+json">
-{
+  <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -72,7 +72,16 @@
           "@type": "RealEstateAgent",
           "name": "RE/MAX",
           "identifier": "P56131836"
-        }
+        },
+        "priceValidUntil": "2027-09-26"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".property-price",
+          ".property-address"
+        ]
       }
     },
     {
@@ -242,10 +251,45 @@
           "item": "https://angora.mergvs.com/"
         }
       ]
+    },
+    {
+      "@type": "RealEstateAgent",
+      "@id": "https://angora.mergvs.com/#satici",
+      "name": "MERGVS",
+      "url": "https://mergvs.com",
+      "areaServed": {
+        "@type": "City",
+        "name": "Ankara"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Çankaya",
+        "addressRegion": "Ankara",
+        "addressCountry": "TR"
+      },
+      "makesOffer": {
+        "@id": "https://angora.mergvs.com/#ilan"
+      }
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "name": [
+        "3B Villa Turu",
+        "Kat Planları",
+        "Fotoğraf Galerisi",
+        "Angora Evleri Rehberi",
+        "Sıkça Sorulan Sorular"
+      ],
+      "url": [
+        "https://angora.mergvs.com/",
+        "https://angora.mergvs.com/kat-planlari.html",
+        "https://angora.mergvs.com/galeri.html",
+        "https://angora.mergvs.com/angora-evleri-rehberi.html",
+        "https://angora.mergvs.com/sikca-sorulan-sorular.html"
+      ]
     }
   ]
-}
-  </script>
+}</script>
 </head>
 <body>
 <main id="app" data-scale="neighborhood" data-booting="true">
