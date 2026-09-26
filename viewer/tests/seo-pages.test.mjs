@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {LISTING} from '../src/listing.js';
 import {PHOTO_POINTS} from '../src/photo-points.js';
+import {imageName} from '../../tools/seo/build-gallery-images.mjs';
 
 // İçerik sayfaları tools/seo/build-seo-pages.mjs ile ÜRETİLİR; kaynakları
 // listing.js, photo-points.js ve region-places.json'dur. Bu testler üretilen
@@ -86,7 +87,8 @@ test('görsel sitemap: 56 fotoğrafın HEPSİ başlık ve altyazıyla', () => {
   const sitemap = read('viewer/public/sitemap.xml');
   const photos = PHOTO_POINTS.filter(p => p.file);
   for (const p of photos) {
-    assert.ok(sitemap.includes(`/photogallery/${p.file}`), 'sitemap\'de yok: ' + p.file);
+    assert.ok(sitemap.includes(`/assets/galeri/${imageName(p)}-1280.webp`),
+      'sitemap sayfada GÖRÜNEN görseli göstermeli: ' + p.tr);
   }
   const locs = (sitemap.match(/<image:loc>/g) ?? []).length;
   assert.ok(locs >= photos.length, 'görsel kaydı az: ' + locs);
@@ -129,6 +131,14 @@ test('galeri: her fotoğraf alt metinli ve tembel yüklenir', () => {
     assert.match(img, /alt="[^"]{10,}"/, 'alt metni yok veya çok kısa: ' + img.slice(0, 80));
     assert.ok(img.includes('loading="lazy"'), 'lazy eksik');
     assert.ok(img.includes('width=') && img.includes('height='), 'boyut yok - düzen kayması (CLS) yapar');
+    // WebP + srcset: 32 MB JPEG -> 8,2 MB. sizes olmadan telefon da
+    // 1280'liği indirir, yani srcset'in yarısı boşa gider.
+    assert.ok(img.includes('.webp'), 'WebP değil: ' + img.slice(0, 70));
+    assert.ok(img.includes('srcset=') && img.includes('sizes='), 'srcset/sizes eksik');
+  }
+  // dosya adı oda etiketinden türemeli - görsel aramada ad sinyaldir
+  for (const p of photos) {
+    assert.ok(s.includes(`/assets/galeri/${imageName(p)}-1280.webp`), 'anlamlı adlı görsel yok: ' + p.tr);
   }
   const gallery = ldOf(s)['@graph'].find(n => n['@type'] === 'ImageGallery');
   assert.ok(gallery.image.length > 0, 'ImageObject listesi boş');

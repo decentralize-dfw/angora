@@ -542,7 +542,38 @@
       <a class="listing-link" href="https://remax.com.tr/tr/portfoy/P56131836" target="_blank" rel="noopener noreferrer" data-i18n="listing">Satış ilanını aç ↗</a>
     </div>
   </div>
-  <noscript>3D modeli görüntülemek için JavaScript açık olmalıdır.</noscript>
+  <!-- JS KAPALIYSA: eskiden burada tek cümle vardı ve ziyaretçi sonsuza
+       kadar "Model yükleniyor…" spinner'ına bakıyordu. Artık boot ekranı
+       gizlenip ilanın özeti ve bütün içerik sayfaları veriliyor. Bu blok
+       JS çalıştırmayan tarayıcıları da kapsar (bazı arama motorları ve
+       sohbet asistanları sayfayı böyle okur). -->
+  <noscript>
+    <style>
+      #boot,#cloud-transition{display:none!important}
+      .noscript-page{position:absolute;inset:0;overflow:auto;background:#f7f8f6;color:#1b2420;
+        z-index:200;padding:26px 20px 60px;font:16px/1.65 ui-sans-serif,system-ui,sans-serif}
+      .noscript-page .inner{max-width:720px;margin:0 auto}
+      .noscript-page h2{font-size:24px;line-height:1.3;margin:0 0 10px}
+      .noscript-page ul{padding-left:20px}
+      .noscript-page .tag{display:inline-block;background:#fff;border:1px solid #dfe5df;
+        border-radius:8px;padding:5px 10px;margin:0 6px 6px 0;font-size:14px}
+      .noscript-page a{color:#2f4f3e}
+    </style>
+    <section class="noscript-page"><div class="inner">
+      <h2>Angora Evleri’nde satılık müstakil villa · Hatırlı Sokak, Çankaya Ankara</h2>
+      <p>Etkileşimli 3B tur için JavaScript gerekiyor. Villanın bütün bilgileri aşağıdaki
+         sayfalarda JavaScript olmadan da okunabilir.</p>
+      <p><span class="tag">500 m² brüt</span><span class="tag">400 m² net</span><span class="tag">900 m² bahçe</span><span class="tag">5+4 oda</span><span class="tag">4 kat</span><span class="tag">Özel havuz</span><span class="tag">Asansör</span><span class="tag">Müştemilat</span></p>
+      <ul>
+        <li><a href="/kat-planlari.html">Kat planları — dört kat, oda oda m² değerleriyle</a></li>
+        <li><a href="/galeri.html">Fotoğraf galerisi — 56 fotoğraf, her biri odasıyla</a></li>
+        <li><a href="/angora-evleri-rehberi.html">Angora Evleri rehberi — konum, ulaşım, çevredeki donatılar</a></li>
+        <li><a href="/sikca-sorulan-sorular.html">Sıkça sorulan sorular — alan, tapu, fiyat</a></li>
+        <li><a href="https://remax.com.tr/tr/portfoy/P56131836" rel="noopener">Satış ilanı (RE/MAX P56131836)</a></li>
+      </ul>
+      <p><a href="/en/floor-plans.html">English</a></p>
+    </div></section>
+  </noscript>
 </main>
 <script type="module" src="/src/main.js"></script>
 </body>

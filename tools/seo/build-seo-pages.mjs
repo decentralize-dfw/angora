@@ -15,12 +15,24 @@
 import {readFileSync, writeFileSync, mkdirSync} from 'node:fs';
 import {LISTING} from '../../viewer/src/listing.js';
 import {PHOTO_POINTS} from '../../viewer/src/photo-points.js';
+import {imageName} from './build-gallery-images.mjs';
 
 const ROOT = new URL('../../', import.meta.url);
 const SITE = 'https://angora.mergvs.com';
 const tr = LISTING.tr;
 const places = JSON.parse(readFileSync(new URL('viewer/src/region-places.json', ROOT), 'utf8'));
 const GEO = {lat: places.center.lat.toFixed(7), lon: places.center.lon.toFixed(7)};
+
+// Galeri görseli: WebP + srcset. Dosya adı fotoğrafın kendi oda etiketinden
+// türer (build-gallery-images.mjs) - Google Görseller dosya adını sinyal
+// olarak kullanıyor ve `angora_01.jpg` hiçbir şey söylemiyordu. sizes,
+// telefonun 640'lık olanı indirmesini sağlar.
+const galleryImg = (p, alt) => {
+  const base = `/assets/galeri/${imageName(p)}`;
+  return `<img src="${base}-1280.webp" srcset="${base}-640.webp 640w, ${base}-1280.webp 1280w" `
+    + `sizes="(max-width: 640px) 100vw, 260px" width="1280" height="960" `
+    + `loading="lazy" decoding="async" alt="${esc(alt)}" />`;
+};
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -176,12 +188,13 @@ write('galeri.html', page({
   body: [...groups.entries()].map(([name, list]) => `  <h2>${esc(name)} (${list.length})</h2>
   <ul class="gallery">${list.map(p => {
     const caption = `${p.tr} · Angora Evleri'nde satılık villa`;
-    return `<li><figure><img src="/photogallery/${esc(p.file)}" width="800" height="600" loading="lazy" decoding="async" alt="${esc(caption)}" /><figcaption>${esc(p.tr)}</figcaption></figure></li>`;
+    return `<li><figure>${galleryImg(p, caption)}<figcaption>${esc(p.tr)}</figcaption></figure></li>`;
   }).join('')}</ul>`).join('\n'),
   extraLd: [{'@type': 'ImageGallery', '@id': SITE + '/galeri.html', inLanguage: 'tr-TR',
     about: {'@id': SITE + '/#villa'},
     image: photos.slice(0, 30).map(p => ({'@type': 'ImageObject',
-      contentUrl: `${SITE}/photogallery/${p.file}`, caption: `${p.tr} · Angora Evleri'nde satılık villa`}))}],
+      contentUrl: `${SITE}/assets/galeri/${imageName(p)}-1280.webp`, width: 1280, height: 960,
+      caption: `${p.tr} · Angora Evleri'nde satılık villa`}))}],
 }));
 
 /* ---------------- 3. ANGORA EVLERİ REHBERİ ---------------- */
@@ -278,12 +291,13 @@ write('en/photo-gallery.html', page({
   body: [...groups.entries()].map(([name, list]) => {
     const enName = list[0].outdoor ? 'Garden, pool and exterior' : (['Basement · pool and garden', 'Ground floor', 'First floor', 'Attic floor'][list[0].floor] ?? 'Villa');
     return `  <h2>${esc(enName)} (${list.length})</h2>
-  <ul class="gallery">${list.map(p => `<li><figure><img src="/photogallery/${esc(p.file)}" width="800" height="600" loading="lazy" decoding="async" alt="${esc(p.en + ' · villa for sale in Angora Evleri, Ankara')}" /><figcaption>${esc(p.en)}</figcaption></figure></li>`).join('')}</ul>`;
+  <ul class="gallery">${list.map(p => `<li><figure>${galleryImg(p, p.en + ' · villa for sale in Angora Evleri, Ankara')}<figcaption>${esc(p.en)}</figcaption></figure></li>`).join('')}</ul>`;
   }).join('\n'),
   extraLd: [{'@type': 'ImageGallery', '@id': SITE + '/en/photo-gallery.html', inLanguage: 'en',
     about: {'@id': SITE + '/#villa'},
     image: photos.slice(0, 30).map(p => ({'@type': 'ImageObject',
-      contentUrl: `${SITE}/photogallery/${p.file}`, caption: `${p.en} · villa for sale in Angora Evleri, Ankara`}))}],
+      contentUrl: `${SITE}/assets/galeri/${imageName(p)}-1280.webp`, width: 1280, height: 960,
+      caption: `${p.en} · villa for sale in Angora Evleri, Ankara`}))}],
 }));
 
 write('en/angora-evleri-guide.html', page({
@@ -353,7 +367,7 @@ ${urls.map(u => `  <url>
     <changefreq>${u.changefreq}</changefreq>
     <priority>${u.priority}</priority>${u.photos ? PHOTO_POINTS.filter(p => p.file).map(p => `
     <image:image>
-      <image:loc>${SITE}/photogallery/${p.file}</image:loc>
+      <image:loc>${SITE}/assets/galeri/${imageName(p)}-1280.webp</image:loc>
       <image:title>${esc(p.tr)} · Angora Evleri'nde satılık villa</image:title>
       <image:caption>${esc(p.tr)} · ${esc(tr.address[1])}, Çankaya Ankara</image:caption>
     </image:image>`).join('') : ''}${u.image ? `
