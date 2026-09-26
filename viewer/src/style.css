@@ -61,6 +61,13 @@ button[aria-pressed=true]{color:#fff;background:var(--ink)}
 .brand{font-size:12px;font-weight:700;letter-spacing:.30em;transform:translateY(.5px);color:inherit;text-decoration:none;pointer-events:auto}
 .brand:hover{color:var(--accent)}
 .brand-divider{width:1px;height:16px;background:rgba(22,29,26,.22)}
+/* Ekran okuyucuya açık, göze görünmeyen metin. SEO için gizli anahtar
+   kelime yığını DEĞİL: h1'in ve bağlantıların cümlesini tamamlar, yani
+   ekran okuyucu kullanıcısı da aynı bilgiyi alır. Standart erişilebilirlik
+   kalıbı (clip-path + 1px kutu); display:none DEĞİL, çünkü o okuyucudan da
+   gizler ve arama motoru tarafından da yok sayılır. */
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
 h1{font-size:17px;letter-spacing:.02em;font-weight:500;margin:0;white-space:nowrap}
 h1 strong{font-weight:700}
 .top-actions{display:flex;gap:8px;pointer-events:auto}

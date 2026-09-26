@@ -1,0 +1,17 @@
+# Angora 21 · angora.mergvs.com
+User-agent: *
+Allow: /
+
+# QA ve ölçüm sayfaları ilan değildir, arama sonucuna çıkmamalı.
+Disallow: /qa-mobile.html
+Disallow: /uzakolcek.html
+
+# Model, doku ve paket dizinleri: taranmaları arama için hiçbir şey
+# kazandırmaz, tarama bütçesini yer (native-current tek başına 161 MB).
+Disallow: /build/
+Disallow: /web-assets/
+Disallow: /viewer/
+Disallow: /tools/
+Disallow: /assets/textures/
+
+Sitemap: https://angora.mergvs.com/sitemap.xml
