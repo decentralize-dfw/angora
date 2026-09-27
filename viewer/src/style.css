@@ -94,8 +94,7 @@ h1 strong{font-weight:700}
 /* The name, not only the flag: a visitor who does not know the flags still
    knows which button is theirs, and at the loading panel that is the only
    chance to get it right before the tour speaks. */
-.lang-flag b{font-size:12px;font-weight:650;letter-spacing:.01em;color:var(--ink)}
-.lang-flag svg{width:21px;height:14px;border-radius:3px;box-shadow:0 0 0 1px rgba(22,29,26,.2)}
+.lang-flag b{font-size:11.5px;font-weight:650;letter-spacing:.08em;color:var(--ink)}
 .lang-flag:hover{opacity:.85;filter:none}
 .lang-flag[aria-pressed=true]{opacity:1;filter:none;color:var(--ink);background:rgba(255,255,255,.72);box-shadow:inset 0 0 0 1px var(--edge)}
 
@@ -681,6 +680,10 @@ h1 strong{font-weight:700}
      floating halfway up the drawing. */
   .site-credit{left:12px;bottom:max(116px,calc(env(safe-area-inset-bottom) + 104px));font-size:9.5px;padding:3px 9px 4px}
   .model-scale{left:12px;bottom:max(146px,calc(env(safe-area-inset-bottom) + 134px))}
+  /* Yakın çevrede alt menü yok: künye ve ölçek boşlukta asılı kalmasın,
+     ekranın altına otursun. */
+  #app[data-scale=neighborhood] .site-credit{bottom:max(12px,calc(env(safe-area-inset-bottom) + 8px))}
+  #app[data-scale=neighborhood] .model-scale{bottom:max(42px,calc(env(safe-area-inset-bottom) + 38px))}
   .tool-button{width:40px;height:40px}
   .tool-button svg{width:19px;height:19px}
   .lang-switch{padding:2px;gap:1px}
@@ -742,3 +745,27 @@ h1 strong{font-weight:700}
   padding-top:12px;border-top:1px solid var(--edge)}
 .listing-more a{font-size:13px;color:var(--muted);text-decoration:none}
 .listing-more a:hover{color:var(--ink);text-decoration:underline}
+
+/* Masaüstü: ayarlar sağ kenarın ortasında HEP duran kompakt şerit.
+   Çark düğmesi ve kapatma çarpısı gerekmez; başlık yerine ince bir etiket.
+   Bir bilgi sayfası (Mülk / Kat bilgisi) açıldığında şerit yol verir;
+   turda ve içeride gezerken çekilir. */
+#app[data-options-docked=true] #open-options{display:none}
+#app[data-options-docked=true] .options-panel{top:50%;bottom:auto;right:16px;transform:translateY(-50%);
+  width:196px;padding:10px 11px 11px;border-radius:16px;max-height:calc(100dvh - 180px);
+  transition:opacity 260ms ease,transform 260ms ease;animation:none}
+#app[data-options-docked=true] .options-panel .panel-heading{margin-bottom:7px}
+#app[data-options-docked=true] .options-panel .panel-heading button{display:none}
+#app[data-options-docked=true] .options-panel h2{font-size:10.5px;font-weight:650;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+#app[data-options-docked=true] .options-panel .language-row{margin:0 0 8px}
+#app[data-options-docked=true] .options-panel .scene-options{gap:4px}
+#app[data-options-docked=true] .options-panel .scene-options button{min-height:30px;font-size:11px;border-radius:10px;padding:0 6px}
+#app[data-options-docked=true] .options-panel .daylight-heading{margin:10px 1px 4px;font-size:10.5px}
+#app[data-options-docked=true] .options-panel #daylight-time{font-size:13px}
+#app[data-options-docked=true] .options-panel .range-endpoints{font-size:9px}
+#app[data-options-docked=true] .options-panel .daylight-footer{margin-top:7px}
+#app[data-options-docked=true] .options-panel .daylight-footer button{min-height:30px;font-size:11px;border-radius:10px}
+#app[data-options-docked=true][data-sheet=info-panel] .options-panel,
+#app[data-options-docked=true][data-sheet=floor-panel] .options-panel,
+#app[data-options-docked=true][data-tour=true] .options-panel,
+#app[data-options-docked=true][data-walk=true] .options-panel{opacity:0;pointer-events:none;transform:translate(12px,-50%)}

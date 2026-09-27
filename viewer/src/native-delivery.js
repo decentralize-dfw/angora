@@ -108,7 +108,16 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
       if(repaired)console.info(`Untextured wood given the model's own wood maps: ${repaired} (${name})`);
     }
     const clipped=!context.includes(name)&&name!=='villa-context-white'&&name!=='plot-grass';
-    model.traverse(o=>{if(o.isMesh){if(!manifest.batched&&name.startsWith('interior')&&!/floor|tile|door|glass|stair|window|lift|wall/i.test(o.name))o.userData.category='furniture';prepare(o,{clipped,context:!clipped,name});}});
+    // Mobilya anahtarı: eski klasik teslimat adla ayırıyordu. Ürün sahibinin
+    // INTERIOR-opt-v2'si (villa-model-v3) batched manifest'in İÇİNDEN gelir
+    // ama batch verisi taşımaz - duvar/zemin BUILDING'de, bu dosyanın tamamı
+    // mobilya ve donatı. Önceden hiçbiri etiketlenmiyordu, anahtar ölüydü.
+    // Asansör camı (bina parçası gibi duruyor) hariç.
+    const ownerInterior=name==='interior'&&manifest.batched&&![...resources(model).materials].some(m=>m.userData.angoraBatch);
+    model.traverse(o=>{if(o.isMesh){
+      if(!manifest.batched&&name.startsWith('interior')&&!/floor|tile|door|glass|stair|window|lift|wall/i.test(o.name))o.userData.category='furniture';
+      if(ownerInterior&&!/^Lift\b/i.test(o.name))o.userData.category='furniture';
+      prepare(o,{clipped,context:!clipped,name});}});
     // Task 1.6: the garden is outdoors too. Without this its surfaces
     // compile the four interior fixture loops and evaluate them per fragment
     // for lamps they can never see through the walls.

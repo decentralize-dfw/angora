@@ -259,6 +259,7 @@ function renderFrame(time) {
       // for a whole second. They only have to be right once the cut settles.
       if (t >= 1) {transition = null; renderer.shadowMap.needsUpdate = true;}
     }
+    const zooming=advanceZoomEase(time);
     const flying=flight?.update(time);
     if(planWash){
       const target=planMode&&!walk?.active?1:0;
@@ -339,7 +340,7 @@ function renderFrame(time) {
     }
     deviceQA?.sample(time,{draw_calls:renderer.info.render.calls,triangles:renderer.info.render.triangles,
       drawing_buffer:`${renderer.domElement.width}×${renderer.domElement.height}`,view:walk?.active?`${selected}:walk`:selected});
-    if(controls.autoRotate||changing||transition||flying||lightChanging||massingChanging||liftChanging||deviceQA?.active)invalidate();
+    if(controls.autoRotate||changing||transition||flying||zooming||lightChanging||massingChanging||liftChanging||deviceQA?.active)invalidate();
     // FAZ 5: a still camera on desktop-high earns the cinema treatment -
     // 400 ms of quiet, then up to 24 jittered samples accumulate soft
     // shadows and settled AO. Any new frame request cancels instantly.
@@ -461,14 +462,27 @@ function refreshSheets(view){
   $('#floor-panel-title').textContent=/^f[0-3]$/.test(view)?titles[view]:t('floorInfo');
   if(!/^f[0-3]$/.test(view)&&!$('#floor-panel').hidden)panel('',false);
 }
+// Masaüstünde ayarlar bir açılır pencere değil: sağ kenarın ortasında HEP
+// duran kompakt bir şerit (dokunmadan kullanılır). Telefonda eskisi gibi alt
+// çekmece. Başka bir bilgi sayfası açıkken şerit yol verir.
+const optionsDocked=matchMedia('(min-width:900px) and (pointer:fine)');
+function applyOptionsDock(){
+  const docked=optionsDocked.matches;
+  $('#app').dataset.optionsDocked=String(docked);
+  if(docked)$('#options-panel').hidden=false;
+  else if(document.activeElement?.closest?.('#options-panel')==null)$('#options-panel').hidden=true;
+}
+optionsDocked.addEventListener?.('change',()=>{applyOptionsDock();invalidateUIObstacles();layoutOverlays();});
 function panel(id,open) {
   invalidateUIObstacles();
-  if(walk){walk.inputSuspended=open;walk.keys.clear();walk.lastTime=null;}
+  if(walk){walk.inputSuspended=open&&!(optionsDocked.matches&&id==='options-panel');walk.keys.clear();walk.lastTime=null;}
   const previous=document.querySelector('.panel:not([hidden])');
   for(const [name,button] of Object.entries(SHEETS)){
-    const show=name===id&&open;$('#'+name).hidden=!show;
+    const show=name===id&&open;
+    $('#'+name).hidden=name==='options-panel'&&optionsDocked.matches?false:!show;
     $('#'+button).setAttribute('aria-expanded',show);
   }
+  $('#app').dataset.sheet=open&&id!=='options-panel'?id:'';
   if(open){$('#'+id).querySelector('[data-close-panel]')?.focus();}
   else if(previous){$('#'+SHEETS[previous.id])?.focus();}
   layoutOverlays();
@@ -666,6 +680,7 @@ function setup() {
   configureCameraControls(controls, THREE);
   flight=new CameraFlight(camera,controls,resize,invalidate);
   controls.addEventListener('change', invalidate);
+  controls.addEventListener('start', ()=>{zoomEase=null;}); // el hareketi yumuşak yakınlaştırmayı keser
   lighting = createLighting(renderer, scene, camera, clip,{quality});
   // Task 4.2: the desktop postfx chain arrives through a dynamic import;
   // a capture must not screenshot the canvas-path frames it bridges with.
@@ -792,6 +807,9 @@ async function selectView(id, initial = false) {
   panel('',false);
   if (!ready) return;
   controls.enableZoom=id!=='neighborhood';
+  // Yakın çevrede kaydırma YOK - hiçbir girişle (sağ tık, iki parmak, pan modu).
+  controls.enablePan=id!=='neighborhood';
+  if(id==='neighborhood')mode(false);
   $('#toggle-auto-rotate').hidden=id!=='neighborhood';
   $('#enter-walk').hidden=!id.startsWith('f');
   $('#toggle-plan').hidden=!id.startsWith('f');
@@ -1471,6 +1489,8 @@ async function loadNativeModel(manifest){
       // bırakılamaz. Hiçbir davranış değişmez, yalnız kayıt tutulur.
       if(FEATURES.mobileGeometryRelease&&quality.tier.startsWith('mobile'))
         markUploads(new Map([[name,model]]));
+      // Geç gelen iç mekân kullanıcının mobilya seçimini devralsın.
+      if(!furnitureVisible)model.traverse(o=>{if(o.isMesh&&o.userData.category==='furniture')o.visible=false;});
       if(ready)latePartUpgrade(name,model);
       else if(contactBake?.bakeLate&&contactBake.bakeLate(model))invalidate();
     },
@@ -2219,10 +2239,24 @@ async function loadModel() {
 // Zoom must not move the camera. This used to fly to controls.minPolarAngle, so
 // every tap on + or - also tilted the view back to its flattest angle and the
 // building appeared to shift under you. Only the zoom changes now.
+// + / - ease to the target instead of jumping. Repeated taps accumulate on
+// the TARGET, so three quick presses still land exactly where three slow ones
+// would; a wheel or pinch gesture (controls 'start') cancels the ease.
+let zoomEase=null;
 function zoom(factor){
   if(!ready||selected==='neighborhood')return;
-  camera.zoom=THREE.MathUtils.clamp(camera.zoom*factor,controls.minZoom,controls.maxZoom);
-  camera.updateProjectionMatrix();invalidate();
+  const from=camera.zoom,base=zoomEase?zoomEase.to:from;
+  const to=THREE.MathUtils.clamp(base*factor,controls.minZoom,controls.maxZoom);
+  if(to===from&&!zoomEase)return;
+  zoomEase={from,to,start:performance.now(),span:320};invalidate();
+}
+function advanceZoomEase(time){
+  if(!zoomEase)return false;
+  const t=Math.min(1,(time-zoomEase.start)/zoomEase.span),k=1-Math.pow(1-t,3);
+  camera.zoom=zoomEase.from*Math.pow(zoomEase.to/zoomEase.from,k);
+  camera.updateProjectionMatrix();
+  if(t>=1)zoomEase=null;
+  return true;
 }
 function setAutoRotate(value) {
   if(!controls)return;
@@ -2244,6 +2278,7 @@ function mode(pan) {
 // Panels remain usable if WebGL is unavailable. Model actions are disabled
 // until loading succeeds; do not strand every control in the renderer catch.
 function bindInterface() {
+  applyOptionsDock();
   // The controls hold the shared state; lighting is built later in setup() and
   // reads its opening values back off them, so a link lands on the right hour
   // rather than easing into it after the first frame.
