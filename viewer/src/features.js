@@ -69,6 +69,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   villaFixtureStrip: true,     // Yeni (batched olmayan) bahçe malzemeleri 8 iç mekân spot döngüsünü her pikselde hesaplıyordu; bahçe dışarıda, o lambaları göremez. Kıyas: ?features=villaFixtureStrip:0
   contactAoDesktop: false,     // Masaüstünde de KAPALI: 2,7 M üçgeni tek blokta tarayıp ardından toplu yeniden derleme yapıyordu ("villanın içinde takılıyor"); yeni modeller kendi AO'sunu taşıyor. Kıyas: ?features=contactAoDesktop:1
   daylightV2: true,            // ADIM 2 - IŞIK: co-online/edetri reçetesi şehir ölçeğine uyarlandı. ACES eğrisi (0.8), nötr grade (siyah kaldırma/amber/ek doygunluk yok), güçlü güneş + zayıf ve koyu tabanlı ortam ışığı, dış karede tam GTAO. Eski ışık: ?features=daylightV2:0
+  mobileIdleUpgrades: false,   // Telefonda komşu bina doku/atlas yükseltmeleri KAPALI: ilk dokunuşa bağlı toplu yeniden derleme = açılış sonrası kilit. Masaüstü etkilenmez. Denemek: ?features=mobileIdleUpgrades:1
   programPrelink: false,       // KAPALI (27.09): açıkken villaya tıklamada masaüstü Chrome 'Sayfa yanıt vermiyor' verdi - ürün sahibi bildirdi. Kata giriş ve açılışta shader'lar yükleme göstergesi ARKASINDA gerçekten bağlanır (Safari paralel derleme yapmaz; compileAsync orada bağlamayı ilk çizime bırakıyordu) ve kat derlemesi pencere ışıkları açıldıktan SONRA yapılır. Denemek: ?features=programPrelink:1
 });
 

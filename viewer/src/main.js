@@ -857,7 +857,7 @@ async function latePartUpgrade(name,model){
         if(applied)console.info(`Baked occlusion revived on ${applied} materials (late: ${name})`);
       }finally{ktx2?.dispose();}
     }
-    if(FEATURES.atlasArrayV2){
+    if(FEATURES.atlasArrayV2&&(quality.tier.startsWith('desktop')||FEATURES.mobileIdleUpgrades)){
       const applied=upgradeAtlasToArrays(single);
       if(applied)console.info(`Atlas arrays upgraded on ${applied} materials (late: ${name})`);
     }
@@ -1581,7 +1581,15 @@ async function loadNativeModel(manifest){
         const t=setTimeout(done,8000);
       })
     :Promise.resolve();
-  if(FEATURES.exteriorGradeRevival){
+  // TAKILMA (mobil): telefonda villa artık kendi (batched olmayan) modeli -
+  // bu iki yükseltme yalnız komşu binaların atlaslarına dokunuyor, ama
+  // bootYieldV1 onları İLK DOKUNUŞA bağlıyordu: ziyaretçi parmağını
+  // koyduğu anda doku indirme + dizi paketleme + toplu shader yeniden
+  // derleme başlıyordu ("ilk 2 saniye oynuyor, sonra kilitleniyor").
+  // 256 px'lik telefon teslimatında görünür kazancı yok. Masaüstü aynen.
+  // Telefonda geri açmak: ?features=mobileIdleUpgrades:1
+  const idleUpgrades=quality.tier.startsWith('desktop')||FEATURES.mobileIdleUpgrades;
+  if(FEATURES.exteriorGradeRevival&&idleUpgrades){
     const idle=window.requestIdleCallback?(fn=>window.requestIdleCallback(fn,{timeout:1500})):(fn=>setTimeout(fn,1500));
     // The promise is exposed so a QA capture can await the rebind instead of
     // racing the idle callback - a screenshot half a second either side of
@@ -1635,7 +1643,7 @@ async function loadNativeModel(manifest){
   // on idle - one recompile per batched material, then true wrapping, full
   // mips and anisotropy at the same texel count. Exposed for QA like the
   // other idle upgrades so captures never race the swap.
-  if(FEATURES.atlasArrayV2&&manifest.batched){
+  if(FEATURES.atlasArrayV2&&manifest.batched&&idleUpgrades){
     const idle=window.requestIdleCallback?(fn=>window.requestIdleCallback(fn,{timeout:1500})):(fn=>setTimeout(fn,1500));
     window.__angoraAtlasReady=new Promise(resolve=>idle(()=>{
       firstGesture.then(async()=>{   // MOBİL İŞ 3: aynı erteleme + dilimleme
