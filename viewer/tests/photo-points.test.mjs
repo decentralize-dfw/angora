@@ -20,12 +20,30 @@ const walkable = new Map(navigation.layers.map(layer => {
 }));
 const cellOf = (x, z) => `${Math.round((x - navigation.grid.x) / navigation.grid.step)},${Math.round((z - navigation.grid.z) / navigation.grid.step)}`;
 
+// GERİ ÇEKİLENLER: dosyası duran ama artık gösterilmeyen kareler. Tek üyesi
+// var ve sebebi yazılı - ürün sahibi "1. kat salonda aynı resimden iki tane
+// koyulmuş onun bir tanesini hem mobilden hem de desktopdan kaldır" dedi;
+// 20 ile 4 aynı kareydi ve plana işaretli olan 4. Dosya SİLİNMEDİ (ürün
+// sahibinin kendi fotoğrafı), yalnız gösterimden çıktı. Liste burada açıkça
+// duruyor ki yeni bir dosya sessizce iplenmeden kalamasın - yetim kare
+// yakalama kuralı geri kalan her şey için aynen işliyor.
+const WITHDRAWN = new Set(['angora_20.jpg']);
+
 test('Every pinned photograph is a file in the gallery, and every file is pinned', async () => {
   const files = (await fs.readdir(gallery)).filter(name => /^angora_\d+\.(jpe?g|png)$/.test(name));
   const pinned = PHOTO_POINTS.map(point => point.file);
   assert.equal(new Set(pinned).size, pinned.length, 'A photograph may carry only one pin');
   for (const file of pinned) assert.ok(files.includes(file), `Missing photograph ${file}`);
-  for (const file of files) assert.ok(pinned.includes(file), `Unpinned photograph ${file}`);
+  for (const file of files) {
+    if (WITHDRAWN.has(file)) {
+      assert.equal(pinned.includes(file), false, `${file} geri çekildi, pinlenmiş olamaz`);
+      continue;
+    }
+    assert.ok(pinned.includes(file), `Unpinned photograph ${file}`);
+  }
+  // Geri çekilen liste gerçekten diskte duran dosyalardan oluşmalı, yoksa
+  // eskimiş bir istisna sessizce birikir.
+  for (const file of WITHDRAWN) assert.ok(files.includes(file), `${file} zaten yok, istisna gereksiz`);
 });
 
 test('Ids are unique, floors are real and every look direction is a unit vector', () => {
@@ -58,11 +76,14 @@ test('Every storey carries pins, and the drawing-marked ones outnumber the place
   for (let floor = 0; floor < 4; floor++) {
     assert.ok(PHOTO_POINTS.some(point => point.floor === floor), `Floor ${floor} has no photographs`);
   }
-  // 20 and 24-28 carry no mark on the key drawing and are placed from the
-  // photographs themselves; the rest are transcribed. If that ratio moves, the
-  // comment at the head of photo-points.js is out of date.
-  const approximate = PHOTO_POINTS.filter(point => [20, 24, 25, 26, 27, 28].includes(point.id));
-  assert.equal(approximate.length, 6);
+  // 24-28 carry no mark on the key drawing and are placed from the photographs
+  // themselves; the rest are transcribed. If that ratio moves, the comment at
+  // the head of photo-points.js is out of date. 20 was in this list and is
+  // GONE: it repeated 4's frame and the owner asked for the pair to become one.
+  const approximate = PHOTO_POINTS.filter(point => [24, 25, 26, 27, 28].includes(point.id));
+  assert.equal(approximate.length, 5);
+  assert.equal(PHOTO_POINTS.some(point => point.id === 20), false,
+    '20, 4\'ün aynı karesiydi - çift görüntü kaldırıldı');
   assert.ok(PHOTO_POINTS.length - approximate.length >= 45);
 });
 

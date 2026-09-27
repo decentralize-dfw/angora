@@ -9,10 +9,16 @@
 // the navigation mask of its own floor, so nothing here is an eyeballed guess
 // about which room a photograph belongs to.
 //
-// Photographs 20 and 24-28 carry no mark on the drawing - 20 repeats 4's
-// frame, 24-28 are the garden and facade frames - so those six are placed
-// from the photographs themselves, against the owner's marks on the plan, and
-// are the only approximate entries. They stand out in the garden where the
+// Photograph 20 was the SAME frame as 4 - one press away from the other, the
+// same room from the same spot - and the owner asked for one of the pair to
+// go: "1. kat salonda aynı resimden iki tane koyulmuş onun bir tanesini hem
+// mobilden hem de desktopdan kaldır". 4 is the one the key drawing marks, so
+// 20 is the one that went; ids are NOT renumbered, because the numbers are the
+// owner's own photograph numbers and 21 is not 20.
+//
+// Photographs 24-28 carry no mark on the drawing - they are the garden and
+// facade frames - so those five are placed from the photographs themselves,
+// against the owner's marks on the plan, and are the only approximate entries. They stand out in the garden where the
 // photographer stood, at a person's eye height over the ground they were
 // taken from, rather than being compressed onto the terrace to stay inside a
 // storey's frame.
@@ -53,7 +59,6 @@ export const PHOTO_POINTS = [
   {id:17,file:'angora_17.jpg',floor:2,outdoor:false,x:0.784,floorY:6.3714,y:7.921,z:4.757,dx:-0.468,dz:-0.884,tr:'1. kat · Yatak odası (107)',en:'First floor · Bedroom (107)'},
   {id:18,file:'angora_18.jpg',floor:2,outdoor:false,x:-1.001,floorY:6.3714,y:7.921,z:-2.823,dx:0.501,dz:0.865,tr:'1. kat · Kat holü · Merdiven',en:'First floor · Landing · Stairs'},
   {id:19,file:'angora_19.jpg',floor:2,outdoor:false,x:-0.539,floorY:6.3714,y:7.921,z:-5.504,dx:-0.872,dz:-0.49,tr:'1. kat · Ebeveyn yatak odası',en:'First floor · Primary bedroom'},
-  {id:20,file:'angora_20.jpg',floor:1,outdoor:false,x:-4.35,floorY:3.0996,y:4.65,z:-6.9,dx:0.62,dz:0.78,tr:'Giriş katı · Salon',en:'Ground floor · Living room'},
   {id:21,file:'angora_21.jpg',floor:1,outdoor:false,x:-2.0,floorY:3.0996,y:4.65,z:3.05,dx:-0.75,dz:-0.66,tr:'Giriş katı · Mutfak',en:'Ground floor · Kitchen'},
   {id:22,file:'angora_22.jpg',floor:1,outdoor:false,x:-4.172,floorY:3.0996,y:4.65,z:3.544,dx:0.936,dz:-0.351,tr:'Giriş katı · Mutfak',en:'Ground floor · Kitchen'},
   {id:23,file:'angora_23.jpg',floor:1,outdoor:false,x:-0.216,floorY:3.0996,y:4.65,z:-6.846,dx:-0.714,dz:0.7,tr:'Giriş katı · Yemek alanı',en:'Ground floor · Dining area'},

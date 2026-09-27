@@ -137,6 +137,10 @@ let nativeDelivery=null,nativeSwitching=false,nativeAtlas=null,nativeSoil=null,p
 let selected = 'neighborhood', ready = false, loading = false;
 let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations, walk;
 let photosVisible = false, photoPins = null, photoViewer = null;let photoPoints=null;
+// TELEFON ŞERİDİ: ekranın üst %15'i. Tuvalin yüksekliğini değiştirdiği için
+// durumu her karede değil, yalnız DURUM DEĞİŞİMLERİNDE tazeleniyor
+// (refreshPhotoStrip) - şerit kamerayla hareket etmiyor.
+let photoStrip=null;
 let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;
 let deviceQA,assetRevision=null,pendingCapture=null,contextLost=false,massing=null,lift=null,interfaceSound=null;
 // Live location during the tour: the interface names where the feet ARE,
@@ -441,7 +445,11 @@ function frame(initial=false,keep=false) {
   if(selected==='region'&&contextBox){size=contextBox.getSize(new THREE.Vector3());center.copy(contextBox.getCenter(new THREE.Vector3()));}
   const polar=planMode?.0001:selected==='region'?.58:floor?.56:.78;
   const insets=floor?floorFrameInsets():{verticalFraction:1,horizontalFraction:1};
-  frameSpan=Math.max((size.z*Math.cos(polar)+size.y*Math.sin(polar))/insets.verticalFraction,size.x/aspect/insets.horizontalFraction)*(floor?1.08:1.14);
+  // Şerit açıkken tuval kısalıyor ve kadraj kendiliğinden daralıyor; ürün
+  // sahibi bunun üstüne bir tık daha geri istedi: "biraz geriye alabilirsin,
+  // zoom out hafif, yani sığmıyor hissi olmasın".
+  const stripPullback=photoStrip?.active?1.08:1;
+  frameSpan=Math.max((size.z*Math.cos(polar)+size.y*Math.sin(polar))/insets.verticalFraction,size.x/aspect/insets.horizontalFraction)*(floor?1.08:1.14)*stripPullback;
   const rigFov=rigFovFor(selected,{enabled:FEATURES.cameraRigsV2});
   if(selected==='region'&&contextBox)frameSpan=fitContextBounds(contextBox,aspect,polar,0,rigFov).span;
   if(keep){center.copy(controls.target);if(floor)center.y=[0,3.0996,6.3714,9.4705][Number(selected[1])];frameSpan=camera.position.distanceTo(controls.target)*2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2));}
@@ -710,11 +718,22 @@ function setup() {
   loadAsset=(...args)=>enqueue(()=>loader.loadAsync(...args));
   loader.setMeshoptDecoder(MeshoptDecoder);
   window.addEventListener('resize',()=>{
-    const portrait=camera.aspect<1;resize();
+    const portrait=camera.aspect<1;refreshPhotoStrip();resize();
     if(ready&&!walk?.active&&(selected.startsWith('f')||portrait!==(camera.aspect<1)))frame(true);
   });
   renderer.xr.addEventListener('sessionstart', () => renderer.setAnimationLoop(renderFrame));
   renderer.xr.addEventListener('sessionend', () => {renderer.setAnimationLoop(null);resize();invalidate();});
+}
+// Şerit açılıp kapandığında TUVALİN YÜKSEKLİĞİ değişir (CSS --strip-h),
+// ve CSS kaynaklı boyut değişimi resize olayı üretmez - bu yüzden değişimi
+// biz haber veriyoruz. update() yalnız etkin durum değiştiyse true döner,
+// yani her kat geçişinde boşuna yeniden boyutlandırma yok.
+function refreshPhotoStrip(){
+  if(!photoStrip)return false;
+  const mobile=matchMedia('(max-width:720px)').matches;
+  const parked=Boolean(walk?.active)||$('#app').dataset.tour==='true';
+  if(!photoStrip.update(selected,{mobile,walking:parked}))return false;
+  resize();invalidateUIObstacles();return true;
 }
 // Kat başına tek sefer shader derlemesi - aşağıda selectView kullanıyor.
 const compiledFloors=new Set();
@@ -800,6 +819,7 @@ async function selectView(id, initial = false) {
     // is already playing a voice.
     interfaceSound?.transition(950, target > clip.constant, guidedTour?.active);
   }
+  refreshPhotoStrip();   // frame'den ÖNCE: kadraj yeni tuval yüksekliğine göre kurulsun
   frame(initial);
   invalidateUIObstacles();
   host.dataset.view = id; host.dataset.loaded = 'true'; rememberState(); invalidate();
@@ -898,7 +918,7 @@ function markLanguage(){
 function refreshChrome(){
   applyStatic();
   markLanguage();
-  photoPins?.refreshLabels();photoViewer?.refresh();
+  photoPins?.refreshLabels();photoStrip?.refreshLabels();photoViewer?.refresh();
   // There is a recording per language, so the switch is not only a caption
   // change: mid-tour the other voice picks up the sentence being spoken.
   guidedTour?.setLanguage(currentLang());
@@ -1251,13 +1271,13 @@ async function startTour(){
   // straight down through an orthographic lens; the narration describes rooms,
   // not sheets.
   planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);$('#toggle-plan').textContent='Plan';mode(false);
-  $('#tour-bar').hidden=false;$('#app').dataset.tour='true';
+  $('#tour-bar').hidden=false;$('#app').dataset.tour='true';refreshPhotoStrip();
   invalidateUIObstacles();
   guidedTour.start();
 }
 function endTour(openInfo){
   guidedTour?.stop();
-  $('#tour-bar').hidden=true;$('#app').dataset.tour='false';
+  $('#tour-bar').hidden=true;$('#app').dataset.tour='false';refreshPhotoStrip();
   $('#tour-listing').hidden=true;
   clearTourReveal();setTourPhotos([]);setTourWindows(false);setTourSweep(null);
   // The closing's wide lens belongs to the closing. Left in place the whole
@@ -1308,6 +1328,7 @@ function enterWalk(roomId) {
   $('#walk-lens').value=Math.round(walk.camera.fov);updateLensReadout();
   document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===selected));
   $('#gesture-help').textContent=t('walkHelp');
+  refreshPhotoStrip();   // yürüyüşte şerit çekilir, tuval yüksekliğin tamamını alır
   resize();invalidate();
 }
 function exitWalk(reselect = true) {
@@ -1322,6 +1343,7 @@ function exitWalk(reselect = true) {
   $('.camera-tools').hidden=false;$('#walk-tools').hidden=true;$('#enter-walk').hidden=false;
   planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);$('#toggle-plan').textContent='Plan';mode(false);
   if(reselect){selectView(selected);frame(false);}
+  refreshPhotoStrip();   // reselect=false yolunda selectView hiç çağrılmıyor
   $('#gesture-help').textContent=t('orbitHelp');
 }
 // R47 | One honest bar and four named steps, from the first byte to the
@@ -2203,15 +2225,21 @@ function bindInterface() {
   {
     const idle=window.requestIdleCallback?(fn=>window.requestIdleCallback(fn,{timeout:1200})):(fn=>setTimeout(fn,1200));
     idle(async()=>{
-      const [gallery,points]=await Promise.all([import('./photo-gallery.js'),import('./photo-points.js')]);
+      const [gallery,points,stripModule]=await Promise.all([
+        import('./photo-gallery.js'),import('./photo-points.js'),import('./photo-strip.js')]);
       photoPoints=points;
       photoPins = gallery.createPhotoPins(host, photoRoot, {onOpen: id => {photoViewer.show(id); invalidate();}});
+      // Şerit telefonda ilanın 55 karesine giden TEK yol: dock 720 px'in
+      // altında hiç çalışmıyor, pinler de ancak fotoğraf anahtarı açıkken
+      // çiziliyor. Pinlerle aynı tembel içe aktarmaya biniyor.
+      photoStrip = stripModule.createPhotoStrip($('#app'), photoRoot, {onOpen: id => {photoViewer.show(id); invalidate();}});
       photoViewer = gallery.createPhotoViewer({
         dock: $('#photo-dock'), figure: $('#photo-view'), image: $('#photo-image'), caption: $('#photo-caption'),
         close: $('#photo-close'), backdrop: $('#photo-backdrop'), pins: photoPins,
-        onShow: () => {layoutOverlays(); reframeForOverlays(); invalidateUIObstacles();},
-        onClose: () => {layoutOverlays(); reframeForOverlays(); invalidateUIObstacles();},
+        onShow: () => {photoStrip?.select(photoViewer?.open ?? null); layoutOverlays(); reframeForOverlays(); invalidateUIObstacles();},
+        onClose: () => {photoStrip?.select(null); layoutOverlays(); reframeForOverlays(); invalidateUIObstacles();},
       });
+      refreshPhotoStrip();
       invalidate();
     });
   }
