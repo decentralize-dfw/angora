@@ -8,7 +8,7 @@ import {prepareMaterialResponse,setInteriorMode,setMaterialScale} from './materi
 import {smoothSurfaceNormals} from './context-surfaces.js';
 import {applyWaterSurface,waterBoundsFrom} from './water-surface.js';
 import {applyGlassCellPolish} from './glass-cells.js';
-import {applyRenderProfile,referenceProfile} from './render-profile.js';
+import {applyRenderProfile,baseExposure,referenceProfile} from './render-profile.js';
 import {InteriorLightController} from './interior-lighting.js';
 import {FEATURES} from './features.js';
 import {installPcss} from './pcss.js';
@@ -268,19 +268,25 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     // the sun the image went flat - no shadow side, no specular pop - which
     // read as a cheap render engine. A defined warm key against a cooler,
     // dimmer fill is the archviz contrast the daylight is meant to carry.
-    sun.intensity=(soft?1.8:2.4)*THREE.MathUtils.smoothstep(solar.altitude,-.5,20);
+    // ADIM 2 (daylightV2): the references light with ONE strong key against a
+    // weak fill (co-online: sun 3.5, hemisphere 0.3 over a BLACK ground). Here
+    // the fill was nearly as strong as the key and its ground colour a light
+    // grey that lit every underside - the flat, shadowless look. The key
+    // carries the image now; shadows read as shadow, not as a tint.
+    const daylightV2=FEATURES.daylightV2;
+    sun.intensity=(daylightV2?(soft?3.0:3.4):(soft?1.8:2.4))*THREE.MathUtils.smoothstep(solar.altitude,-.5,20);
     sun.color.set(0xffbc7b).lerp(new THREE.Color(0xfff5e9),warmth);
     // The indoor camera exposes for the room, and the fixture bounce fills
     // downward-facing ceilings. Reuse the existing hemisphere: no extra light
     // loop, shadow map or render pass. This is a presentation fill, not GI.
-    hemisphere.intensity=.06+.34*daylight+(walkInterior&&!electricLight?(lightsEnabled?.45:.18*daylight):0);
-    hemisphere.groundColor.set(walkInterior?0xe9e1d5:0xb8b2a8);
-    renderer.toneMappingExposure=referenceProfile.exposure*(walkInterior?1.18:1);
+    hemisphere.intensity=.06+(daylightV2?.12:.34)*daylight+(walkInterior&&!electricLight?(lightsEnabled?.45:.18*daylight):0);
+    hemisphere.groundColor.set(walkInterior?0xe9e1d5:daylightV2?0x4a4a3c:0xb8b2a8);
+    renderer.toneMappingExposure=baseExposure()*(walkInterior?1.18:1);
     // With the composer live, r180 skips the canvas tone map (the grade pass
     // owns curve+exposure), so the walk-interior stop lives in ITS uniform.
-    if(FEATURES.postfxV2&&gradePass)gradePass.uniforms.uExposure.value=referenceProfile.exposure*(walkInterior?1.18:1);
+    if(FEATURES.postfxV2&&gradePass)gradePass.uniforms.uExposure.value=baseExposure()*(walkInterior?1.18:1);
     scene.environmentIntensity=.08+(soft?.70:.55)*daylight;
-    sun.shadow.radius=soft?2.5:1;sun.shadow.intensity=soft?.82:1;
+    sun.shadow.radius=soft?2.5:1;sun.shadow.intensity=soft&&!daylightV2?.82:1;
     horizon.set(0x182734).lerp(new THREE.Color(0xe4e9ed),daylight);
     atmosphericFog?.color.copy(horizon);
     sky.material.uniforms.sunPosition.value.copy(direction);
@@ -534,7 +540,9 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     frame(view,contextBounds) {
       // AYDINLIK İŞ 3: warm modda GTAO'nun payı ana dış karede yarıya
       // iner (üçüncü kararma terimi); iç/kat görünümleri tam kalır.
-      if(FEATURES.warmGradeV1&&ao)ao.blendIntensity=view==='neighborhood'?0.4:0.8;
+      // ADIM 2: tam GTAO dış karede de - saçak, pencere boşluğu ve zemin
+      // teması gerçekçiliğin kendisi (edetri: AO eksikliği "en büyük ele veren").
+      if(FEATURES.warmGradeV1&&ao)ao.blendIntensity=view==='neighborhood'&&!FEATURES.daylightV2?0.4:0.8;
       reflectionFloor=/^f[0-3]$/.test(view)?Number(view.slice(1)):null;updateReflections();
       // The quality profile has already been told the view by selectView;
       // enable/size follow it, then the camera wraps the subject.

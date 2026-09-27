@@ -1,4 +1,5 @@
-import {AgXToneMapping,SRGBColorSpace,PCFSoftShadowMap} from 'three';
+import {ACESFilmicToneMapping,AgXToneMapping,SRGBColorSpace,PCFSoftShadowMap} from 'three';
+import {FEATURES} from './features.js';
 
 // Started from EDETRI's production baseline, and departs from it where the
 // departure is the point. Scene lighting remains architectural: a studio's
@@ -24,9 +25,18 @@ export const referenceProfile=Object.freeze({name:'edetri-production-baseline-ag
   exposure:1.1,bloomStrength:.1,bloomThreshold:.06,bloomKnee:.036,bloomClamp:64,
   aoEnabled:true,msaaSamples:4,refinement:false,pathTracing:false});
 
+// ADIM 2 (daylightV2): both reference projects the owner is happy with end
+// on ACES near exposure 0.75 (three's ACES divides by 0.6, so ~1.25 into the
+// curve) - contrast with a real toe, where AgX at 1.1 left the whole frame on
+// its flat mid-slope. The key light rises with it (lighting.js), so the scene
+// is not simply darker: the sun carries more, the fill carries less.
+export const DAYLIGHT_EXPOSURE=0.8;
+export const daylightCurve=()=>Boolean(FEATURES.daylightV2);
+export const baseExposure=()=>daylightCurve()?DAYLIGHT_EXPOSURE:referenceProfile.exposure;
+
 export function applyRenderProfile(renderer) {
-  renderer.toneMapping=AgXToneMapping;
-  renderer.toneMappingExposure=referenceProfile.exposure;
+  renderer.toneMapping=daylightCurve()?ACESFilmicToneMapping:AgXToneMapping;
+  renderer.toneMappingExposure=baseExposure();
   renderer.outputColorSpace=SRGBColorSpace;
   renderer.transmissionResolutionScale=1;
   renderer.shadowMap.type=PCFSoftShadowMap;

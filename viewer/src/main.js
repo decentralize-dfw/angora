@@ -56,6 +56,7 @@ import {createQualityProfile,detectTierFromEnvironment} from './quality-profile.
 import { sectionHeight, smoothStep, createWallCaps, createSoilCap, createNativeSoilSection, SOIL_CUT_HEIGHT } from './section.js';
 import { createWalkLocator } from './walk-locator.js';
 import { t, roomName, applyStatic, setLang, currentLang } from './i18n.js';
+const FRAME_STATS=/[?&](stats=1|camera=)/.test(location.search); // QA-only per-frame evidence
 
 const $ = s => document.querySelector(s);
 const host = $('#viewport'), status = $('#load-status');
@@ -322,10 +323,12 @@ function renderFrame(time) {
       if(tourShade>.01&&spotlight.update(activeCamera,host.clientWidth,host.clientHeight))invalidate();
     }
     siteContext?.update(selected,activeCamera,controls.target,Boolean(transition||flight?.active),walk?.active,Boolean(guidedTour?.active));
-    host.dataset.runtime=JSON.stringify({view:selected,plan:planMode,projection:activeCamera.type,cameraPosition:activeCamera.position.toArray(),target:controls.target.toArray(),sectionHeight:clip.constant,loaded:nativeDelivery?[...nativeDelivery.loaded.keys()]:[...groups.keys()],zoom:activeCamera.zoom,autoRotate:controls.autoRotate,zoomEnabled:controls.enableZoom,rotate:controls.mouseButtons.LEFT===THREE.MOUSE.ROTATE,transition:Boolean(transition),textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,rooms:Boolean(groups.get('interior')?.visible),lamps:lighting?.snapshot?.().interior?.map(f=>Math.round(f.rendered_intensity_cd))??[],glazing:lighting?.snapshot?.().glazing??0});
+    // Per-frame JSON into DOM attributes is QA evidence, not product: gated
+    // on ?stats/?camera so a visitor's orbit pays no string build or DOM write.
+    if(FRAME_STATS)host.dataset.runtime=JSON.stringify({view:selected,plan:planMode,projection:activeCamera.type,cameraPosition:activeCamera.position.toArray(),target:controls.target.toArray(),sectionHeight:clip.constant,loaded:nativeDelivery?[...nativeDelivery.loaded.keys()]:[...groups.keys()],zoom:activeCamera.zoom,autoRotate:controls.autoRotate,zoomEnabled:controls.enableZoom,rotate:controls.mouseButtons.LEFT===THREE.MOUSE.ROTATE,transition:Boolean(transition),textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,rooms:Boolean(groups.get('interior')?.visible),lamps:lighting?.snapshot?.().interior?.map(f=>Math.round(f.rendered_intensity_cd))??[],glazing:lighting?.snapshot?.().glazing??0});
     renderer.info.reset();
     lighting.render(activeCamera);
-      host.dataset.frameStats=JSON.stringify({view:selected,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,allRenderPasses:true,transition:Boolean(transition||flight?.active),sectionCaps:{visible:Boolean(caps?.group.visible),height:caps?.group.children[0]?.position.y,triangles:(caps?.group.children[0]?.geometry.index?.count??0)/3}});
+      if(FRAME_STATS)host.dataset.frameStats=JSON.stringify({view:selected,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,allRenderPasses:true,transition:Boolean(transition||flight?.active),sectionCaps:{visible:Boolean(caps?.group.visible),height:caps?.group.children[0]?.position.y,triangles:(caps?.group.children[0]?.geometry.index?.count??0)/3}});
     if(measuredTransition){
       measuredTransition.maxCpuMs=Math.max(measuredTransition.maxCpuMs??0,performance.now()-cpuStart);
       if(!transition)host.dataset.lastTransition=JSON.stringify({frames:measuredTransition.frames,elapsed:time-measuredTransition.start,to:measuredTransition.to,maxFrameGap:measuredTransition.maxFrameGap,maxCpuMs:measuredTransition.maxCpuMs,programs:renderer.info.programs?.length,drawCalls:renderer.info.render.calls});
@@ -1600,8 +1603,10 @@ async function loadNativeModel(manifest){
             for(;;){
               const slice=reviveBatchedGrade(nativeDelivery.loaded,textures,{...opts,budgetMs:BOOT_SLICE_MS});
               applied+=slice.applied;
-              if(slice.applied){renderer.shadowMap.needsUpdate=true;invalidate();}
-              if(slice.done)break;
+              // Material rebinding does not move a caster: one shadow refresh
+              // after the loop, not a full 4096 depth pass per slice.
+              if(slice.applied)invalidate();
+              if(slice.done){if(applied)renderer.shadowMap.needsUpdate=true;break;}
               await idleStep();   // derlemeler bu dilimin kadarıyla sınırlı kalsın
             }
           }else{

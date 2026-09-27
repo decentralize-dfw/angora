@@ -35,7 +35,11 @@ test('The grade stays inside the range the reference rigs demonstrate',()=>{
 });
 
 test('This pass owns exposure and the curve now that the output pass is gone',()=>{
-  assert.equal(GradeShader.uniforms.uExposure.value,referenceProfile.exposure);
+  // ADIM 2 (daylightV2, default on): the pass carries the ACES exposure and
+  // selects the ACES branch; the AgX branch stays for daylightV2:0.
+  assert.equal(GradeShader.uniforms.uExposure.value,0.8);
+  assert.equal(GradeShader.uniforms.uCurve.value,1);
+  assert.match(GradeShader.fragmentShader,/gradeAces\(/);
   assert.deepEqual(GradeShader.uniforms.uLift.value.toArray(),[...GRADE.lift]);
   assert.deepEqual(GradeShader.uniforms.uGain.value.toArray(),[...GRADE.gain]);
   assert.equal(GradeShader.uniforms.uSat.value,GRADE.saturation);

@@ -42,7 +42,20 @@ export function buildPostfxChain({renderer, scene, camera, clip, quality, postfx
   // yapışmasın), orta tonlara hafif amber, kontrast aşağı. Emlak
   // fotoğrafı referansı; gotik değil. Değerler uniform - bayrak
   // kapalıyken shader'a tek byte dokunulmaz.
-  if (FEATURES.warmGradeV1) {
+  // ADIM 2 (daylightV2): nötr. Referansların ikisi de hiç renklendirmiyor -
+  // "altı küçük sıcak sapma bir sarı filtredir" (edetri). Siyah nokta sıfır
+  // (gölgeler grileşmez), amber yok, ek doygunluk yok; kontrastı ACES'in
+  // kendi eğrisi verir. Hafif vinyet göze merkezi gösterir.
+  if (FEATURES.daylightV2) {
+    grade.material.uniforms.uLift.value.set(0, 0, 0);
+    grade.material.uniforms.uGain.value.set(1, 1, 1);
+    grade.material.uniforms.uWarm.value.set(1, 1, 1);
+    grade.material.uniforms.uContrast.value = 1;
+    // ACES itself pushes mid-saturated hues (grass, tile) up; the lower end of
+    // the references' own saturation range (0.94-1.06) takes that back.
+    grade.material.uniforms.uSat.value = 0.94;
+    grade.material.uniforms.uVig.value.y = 0.08;
+  } else if (FEATURES.warmGradeV1) {
     // Ürün sahibi ilk turda "renkler çok depresif" dedi: kontrast 0.92 ile
     // düşürülmüş, doygunluk taban değerinde ve sis rengi emiyordu. Sis
     // kalktı; kontrast nötre döndü (düşük kontrast davetkâr değil, CANSIZ

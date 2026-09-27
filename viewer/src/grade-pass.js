@@ -20,7 +20,7 @@
 // paths, which bypass this chain.
 import {Vector3} from 'three';
 import {FINITE_RGB} from './linear-bloom.js';
-import {referenceProfile} from './render-profile.js';
+import {baseExposure,daylightCurve} from './render-profile.js';
 
 // Restrained, and inside the range the reference's own lighting rigs use
 // (saturation 0.94-1.06, gain 0.90-1.05, lift up to 0.014), except saturation,
@@ -40,7 +40,10 @@ export const GRADE = Object.freeze({
 export const GradeShader = {
   uniforms: {
     tDiffuse: {value: null},
-    uExposure: {value: referenceProfile.exposure},
+    uExposure: {value: baseExposure()},
+    // ADIM 2: 1 = ACES (daylightV2), 0 = AgX. A uniform, not a define, so the
+    // same program serves both and a flag flip never recompiles.
+    uCurve: {value: daylightCurve() ? 1 : 0},
     uLift: {value: new Vector3(...GRADE.lift)},
     uGain: {value: new Vector3(...GRADE.gain)},
     uSat: {value: GRADE.saturation},
@@ -62,7 +65,7 @@ export const GradeShader = {
   fragmentShader: `
     varying vec2 vUv;
     uniform sampler2D tDiffuse;
-    uniform float uExposure,uSat,uGrain,uContrast,uBloomStrength,uBloomClamp;
+    uniform float uExposure,uSat,uGrain,uContrast,uBloomStrength,uBloomClamp,uCurve;
     uniform vec3 uLift,uGain,uVig,uWarm;
     uniform sampler2D uGlare;
     ${FINITE_RGB}
@@ -112,6 +115,21 @@ export const GradeShader = {
       color=LINEAR_REC2020_TO_LINEAR_SRGB*color;
       return clamp(color,0.0,1.0);
     }
+    // three's ACESFilmic (Hill fit, RRT+ODT), exposure already applied above;
+    // the /0.6 is three's own pre-scale. Named apart from three's chunk, which
+    // the ShaderMaterial prefix may also carry.
+    vec3 gradeAcesFit(vec3 v){
+      vec3 a=v*(v+0.0245786)-0.000090537;
+      vec3 b=v*(0.983729*v+0.4329510)+0.238081;
+      return a/b;
+    }
+    vec3 gradeAces(vec3 color){
+      const mat3 inM=mat3(vec3(0.59719,0.07600,0.02840),vec3(0.35458,0.90834,0.13383),vec3(0.04823,0.01566,0.83777));
+      const mat3 outM=mat3(vec3(1.60475,-0.10208,-0.00327),vec3(-0.53108,1.10813,-0.07276),vec3(-0.07367,-0.00605,1.07602));
+      color/=0.6;
+      color=outM*gradeAcesFit(inM*color);
+      return clamp(color,0.0,1.0);
+    }
     vec3 linearToSRGB(vec3 c){
       return mix(c*12.92,1.055*pow(max(c,vec3(0.0)),vec3(0.41666))-0.055,step(vec3(0.0031308),c));
     }
@@ -132,7 +150,7 @@ export const GradeShader = {
       c+=n*uGrain;
       float dv=distance(vUv,vec2(0.5,uVig.z));
       c*=1.0-smoothstep(uVig.x,0.92,dv)*uVig.y;
-      c=agxToneMap(max(c,vec3(0.0)));
+      c=uCurve>0.5?gradeAces(max(c,vec3(0.0))):agxToneMap(max(c,vec3(0.0)));
       vec3 srgb=linearToSRGB(c);
       // display-dither buraya katlandı: yalnız ÇIKARIR, eğrinin üst sınırı
       // dokunulmaz (display-dither.js'in ölçülmüş gerekçesi aynen).

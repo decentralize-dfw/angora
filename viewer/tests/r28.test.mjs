@@ -21,7 +21,8 @@ test('r180 AA runs in linear-sRGB before the single final display conversion',()
 
 test('Reference production baseline has AgX, restrained linear bloom and no idle render switch',()=>{
   const renderer={shadowMap:{}};applyRenderProfile(renderer);
-  assert.equal(renderer.toneMapping,THREE.AgXToneMapping);assert.equal(renderer.toneMappingExposure,1.1);
+  // ADIM 2 (daylightV2, default on): ACES at 0.8, the references' curve.
+  assert.equal(renderer.toneMapping,THREE.ACESFilmicToneMapping);assert.equal(renderer.toneMappingExposure,0.8);
   assert.equal(renderer.outputColorSpace,THREE.SRGBColorSpace);assert.equal(renderer.transmissionResolutionScale,1);
   assert.equal(referenceProfile.refinement,false);assert.equal(referenceProfile.pathTracing,false);
   // Occlusion is on here even though the reference ships it off: see the note
