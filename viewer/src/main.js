@@ -1001,9 +1001,9 @@ function tourBoxes(ids){
   return boxes;
 }
 // The owner's own frames of whatever the sentence is naming. Three at most:
-// beyond that they stop being a glance and start being a contact sheet. Two
-// on a phone - the row is narrower, and these are half-megabyte listing
-// photographs going over whatever connection the visitor has.
+// beyond that they stop being a glance and start being a contact sheet.
+// Telefonda da üç: şerit üstte ve sütunları kare sayısına bölüyor, yani
+// bir, iki veya üç kare her durumda kaydırmasız sığıyor.
 function setTourPhotos(ids){
   const el=$('#tour-gallery');if(!el)return;
   tourPhotos=ids??[];
@@ -1174,6 +1174,48 @@ async function applyTourStep(step){
 // degrees, across the pool and the garden, which is the face the listing's own
 // photographs were taken from - and takes its time over it: one slow pass,
 // eased at both ends so it neither starts nor stops with a jerk.
+// TUR KADRAJ DENETİMİ (QA kancası). Ürün sahibi: "bak burda tur esnasında
+// nereyi gösteriyorsun? tüm turu kontrol et. gösterilen yer ekranda
+// ortalanmak ve sığmak zorundadır." Altmış ipucunu gözle denetlemek
+// yürümez; bu kanca her ipucunu uygular, uçuş oturunca aydınlatılan kutuyu
+// ekrana projelendirir ve sığma/ortalanma karnesini döndürür. Ölçüm dosyası
+// TEMBEL yükleniyor - üretimde tek satır maliyeti var.
+if(typeof window!=='undefined')window.__angoraTourAudit=async({settleMs=9000}={})=>{
+  const [{TOUR_CUES,resolveCues},audit]=await Promise.all([
+    import('./tour-script.js'),import('./tour-audit.js')]);
+  const steps=resolveCues(TOUR_CUES,currentLang());
+  const app=$('#app'),before={tour:app.dataset.tour,view:selected};
+  app.dataset.tour='true';
+  const frameOnce=()=>new Promise(resolve=>requestAnimationFrame(resolve));
+  const rows=[];
+  for(let i=0;i<steps.length;i++){
+    const step=steps[i];
+    await applyTourStep(step);
+    const until=performance.now()+settleMs;
+    while((flight?.active||transition)&&performance.now()<until)await frameOnce();
+    await frameOnce();invalidate();await frameOnce();
+    const w=host.clientWidth,h=Math.max(1,host.clientHeight);
+    camera.updateMatrixWorld();
+    // Arayüzün turda ekranda DURAN parçaları: marka çubuğu, altyazı,
+    // transport, masaüstünde fotoğraf sütunu. Gizli olanlar sayılmaz.
+    const rects=['.topbar','.tour-caption','#tour-bar','#tour-gallery','#tour-listing']
+      .map(sel=>$(sel)).filter(el=>el&&!el.hidden&&el.getClientRects().length)
+      .map(el=>{const r=el.getBoundingClientRect();const host0=host.getBoundingClientRect();
+        return {x:r.x-host0.x,y:r.y-host0.y,width:r.width,height:r.height};});
+    const area=audit.safeArea(w,h,rects);
+    const boxes=step.view==='region'?[]:tourBoxes(step.rooms);
+    const lit=boxes.length?boxes.reduce((box,next)=>box.union(next),new THREE.Box3()):null;
+    const rect=lit?audit.projectBox(lit,camera,w,h,THREE):null;
+    rows.push({i,at:step.at,view:step.view,frame:step.frame??null,
+      rooms:step.rooms??[],photos:(step.photos??[]).length,
+      ...audit.gradeFraming(rect,area),
+      rect:rect?{x0:Math.round(rect.x0),y0:Math.round(rect.y0),x1:Math.round(rect.x1),y1:Math.round(rect.y1)}:null,
+      area:{top:Math.round(area.top),bottom:Math.round(area.bottom),left:Math.round(area.left),right:Math.round(area.right)}});
+  }
+  app.dataset.tour=before.tour??'false';
+  if(selected!==before.view)await selectView(before.view);
+  return rows;
+};
 function setTourSweep(step){
   // It runs to the end of the recording, not to the end of the sentence, so
   // the whole closing is one unbroken move - and it follows the transport: at
