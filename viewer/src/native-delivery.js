@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import {prepareBakedLighting} from './baked-lighting.js';
 import {restoreBatchSurface} from './batch-surface-response.js';
-import {prepareBatchedMaterial} from './batched-material.js';
+import {prepareBatchedMaterial,stripFixtureLoops} from './batched-material.js';
+import {neutraliseTransmission} from './material-response.js';
 import {applyMaterialResponse} from './material-response-v2.js';
 import {chunkModelInPlace} from './context-plants-chunks.js';
 import {applyPlantVariation} from './plant-variation.js';
@@ -90,6 +91,17 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     // half of the settlement. Real instancing and the LOD tiers need the
     // pre-merge source objects, which only build.mjs sees - H6.
     if(features.buildingsChunking&&manifest.batched&&name==='context-buildings')chunkModelInPlace(model);
+    // TAKILMA 1: the owner-authored villa set ships its glazing, pool water
+    // and cabinet glass as KHR_materials_transmission. Any visible
+    // transmissive surface makes three redraw the WHOLE opaque scene into a
+    // transmission buffer every frame - a hidden second scene pass on both
+    // tiers, nearly every view. The legacy path always traded it for alpha
+    // glazing; this delivery path never did. ?features=villaGlassAlpha:0
+    // puts the refraction back for comparison.
+    if(features.villaGlassAlpha!==false){
+      const converted=neutraliseTransmission(model);
+      if(converted)console.info(`Transmission -> alpha glazing on ${converted} material(s) (${name})`);
+    }
     const clipped=!context.includes(name)&&name!=='villa-context-white'&&name!=='plot-grass';
     model.traverse(o=>{if(o.isMesh){if(!manifest.batched&&name.startsWith('interior')&&!/floor|tile|door|glass|stair|window|lift|wall/i.test(o.name))o.userData.category='furniture';prepare(o,{clipped,context:!clipped,name});}});
     // Task 1.6: the garden is outdoors too. Without this its surfaces
@@ -97,6 +109,9 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     // for lamps they can never see through the walls.
     for(const material of resources(model).materials)prepareBatchedMaterial(material,{exterior:context.includes(name)||(features.gardenSpotStrip&&name==='garden'),
       proceduralDetail:Boolean(proceduralDetail.enabled),detailOctaves:proceduralDetail.octaves??2,detailInterior:Boolean(proceduralDetail.interior),detailBoost:proceduralDetail.boost??null});
+    // TAKILMA 2: the same outdoor strip for the non-batched garden.
+    if(features.gardenSpotStrip&&name==='garden'&&features.villaFixtureStrip!==false)
+      for(const material of resources(model).materials)stripFixtureLoops(material);
     loaded.set(name,model);groups.set(name,model);scene.add(model);
     if(manifest.parts.every(part=>loaded.has(part.name)))resolveParts();
     onAcquired?.(name,model);return model;

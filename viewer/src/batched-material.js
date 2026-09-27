@@ -83,3 +83,21 @@ export function prepareBatchedMaterial(material,{exterior=false,proceduralDetail
  };
  material.customProgramCacheKey=()=>key+'|atlas-scaled-v6|'+batch.grid+'|'+neutralInterior+'|'+material.transparent+'|'+exterior+'|'+['map','normalMap','roughnessMap','metalnessMap'].map(name=>material[name]?.image?.width??512).join(',')+'|detail:'+(material.userData.exteriorGradeDetail??[]).join('.')+'|array:'+Object.keys(material.userData.atlasArrays??{}).join('.')+(detail?'|pdetail-v1:'+detailOctaves:'');material.needsUpdate=true;
 }
+
+// The owner-authored villa set (villa-model-v3.js) carries no angoraBatch, so
+// prepareBatchedMaterial above returns before its fixture strip - and every
+// garden surface compiled and shaded the eight interior spot loops for lamps
+// it can never see. Outdoor parts get the same strip on its own.
+export function stripFixtureLoops(material){
+ if(material.userData.angoraBatch||material.userData.fixtureLoopsStripped)return false;
+ material.userData.fixtureLoopsStripped=true;
+ const previous=material.onBeforeCompile,key=material.customProgramCacheKey();
+ material.onBeforeCompile=(shader,renderer)=>{
+  previous.call(material,shader,renderer);
+  shader.fragmentShader=shader.fragmentShader.replace('#include <lights_fragment_begin>',ShaderChunk.lights_fragment_begin);
+  shader.fragmentShader=shader.fragmentShader.replaceAll('NUM_SPOT_LIGHTS','0').replaceAll('NUM_POINT_LIGHTS','0');
+ };
+ material.customProgramCacheKey=()=>key+'|fixture-strip-v1';
+ material.needsUpdate=true;
+ return true;
+}

@@ -76,7 +76,14 @@ export function createIdleRefine({renderer, samples = 24}) {
       if (index === 0) renderer.clear();
       blend.material.uniforms.tDiffuse.value = source.texture;
       blend.material.uniforms.weight.value = 1 / (index + 1);
-      blend.render(renderer);
+      // The blend must land ON the accumulation. FullScreenQuad goes through
+      // renderer.render, which clears first while autoClear is on (the
+      // default) - every sample then blended at 1/(n+1) over black, so the
+      // still frame dimmed toward nothing: "hareket edince görünüyor, durunca
+      // siyah oluyor".
+      const autoClear = renderer.autoClear;
+      renderer.autoClear = false;
+      try {blend.render(renderer);} finally {renderer.autoClear = autoClear;}
       renderer.setRenderTarget(null);
       show.material.uniforms.tDiffuse.value = accum.texture;
       show.render(renderer);

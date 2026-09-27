@@ -64,6 +64,11 @@ export const DEFAULT_FEATURES = Object.freeze({
   gtaoFullRes: false,          // KAPALI-GEREKÇELİ: 4x GTAO pikseli; daha önce açılıp geri alındı (görünmeyen fark, MALZEME 3.2) ve bu turda da draw/prog etkisi sıfırken piksel maliyeti FPS'siz savunulamaz
   materialResponseV2: true,    // AÇIK (ölçüldü: prog -5, draw/tri/tex +0, konsol 0) - clearcoat/sheen aile bazlı, masaüstü
   cinemaDof: false,            // KAPALI - cinemaStill'e bağlı (onun birikiminde apertür yürür); o kapalıyken zaten ölü, ayrıca desktop-balanced'ı da sinema yoluna sokuyordu. Birlikte açılır: ?features=cinemaStill:1,cinemaDof:1
+  // ADIM 1 - TAKILMA (27.09.2026). Her biri tek başına geri alınabilir.
+  villaGlassAlpha: true,       // Yeni villa setinin camı/havuz suyu/dolap camı KHR_materials_transmission taşıyor -> three her karede tüm opak sahneyi ikinci kez çiziyordu. Eski yol bunu hep alfa camına çeviriyordu, yeni yol çevirmiyordu. Kıyas: ?features=villaGlassAlpha:0
+  villaFixtureStrip: true,     // Yeni (batched olmayan) bahçe malzemeleri 8 iç mekân spot döngüsünü her pikselde hesaplıyordu; bahçe dışarıda, o lambaları göremez. Kıyas: ?features=villaFixtureStrip:0
+  contactAoDesktop: false,     // Masaüstünde de KAPALI: 2,7 M üçgeni tek blokta tarayıp ardından toplu yeniden derleme yapıyordu ("villanın içinde takılıyor"); yeni modeller kendi AO'sunu taşıyor. Kıyas: ?features=contactAoDesktop:1
+  programPrelink: true,        // Kata giriş ve açılışta shader'lar yükleme göstergesi ARKASINDA gerçekten bağlanır (Safari paralel derleme yapmaz; compileAsync orada bağlamayı ilk çizime bırakıyordu) ve kat derlemesi pencere ışıkları açıldıktan SONRA yapılır. Kıyas: ?features=programPrelink:0
 });
 
 // '?features=a:0,b:1' - unknown names are ignored so a stale link cannot

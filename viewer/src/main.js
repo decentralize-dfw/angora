@@ -742,7 +742,17 @@ async function selectView(id, initial = false) {
         // kullanıcının beklediği ana taşınıyor, sahneye girdiği ana değil.
         // Kat başına bir kez; ikinci girişte iş yok.
         compiledFloors.add(id);
+        // ADIM 1: derleme, katın GERÇEK ışık durumunda yapılmalı. applyView
+        // pencere portal ışıklarını açıyor ve ışık sayısı her programın
+        // anahtarında - önceden derleme ondan ÖNCE yapılıyordu, yani ilk kat
+        // karesi her şeyi bir daha derliyordu. Sonra programlar gösterge
+        // ekrandayken bağlanır (linkPrograms).
+        if(FEATURES.programPrelink){
+          quality?.applyView(id,{plan:planMode,walking:walk?.active});
+          lighting.frame(id,contextBox); // gölge ayarı da görünüme bağlı - program anahtarında
+        }
         if(renderer.compileAsync)await renderer.compileAsync(scene,camera);
+        if(FEATURES.programPrelink)linkPrograms();
         await waitForGPU(renderer);
       }
       setFurnitureVisible(furnitureVisible);status.hidden=true;
@@ -811,6 +821,15 @@ let walkData=null;
 // rather than a cut.
 let guidedTour=null,spotlight=null,tourShade=0,tourShadeTarget=0,tourShadeTime=null;
 let roomProbes=null,contactBake=null,lateGradeTextures=null,lateCellFamilies=null;
+// Forces the driver to finish linking every program three has created.
+// Without KHR_parallel_shader_compile (Safari) compileAsync only CREATES the
+// programs; the link is paid on the first draw that uses each one. Asking a
+// program for its uniforms blocks on that link - so calling this while a
+// loading indicator is up moves the stall to where the visitor is waiting.
+// Idempotent: three caches the uniform table per program.
+function linkPrograms(){
+  for(const program of renderer.info.programs??[]){try{program.getUniforms();}catch{}}
+}
 // AYDINLIK İŞ 6: a part that arrives AFTER boot (deferred interior/context)
 // used to miss every idle upgrade - the console counted it: exterior grade
 // 5 yerine 8, atlas 9 yerine 20, contact AO 503k yerine 1 072k. Every
@@ -1524,6 +1543,10 @@ async function loadNativeModel(manifest){
   phase('view',.3);
   lighting.frame(selected==='building'?'f3':selected,contextBox);
   await lighting.compile(camera);
+  // ADIM 1: Safari'de compileAsync programı gerçekten bağlamıyor; bağlama ilk
+  // çizimde, yani gösterge kalktıktan SONRA ana iş parçacığında oluyordu.
+  // Burada, gösterge ekrandayken yapılır.
+  if(FEATURES.programPrelink){await new Promise(requestAnimationFrame);linkPrograms();}
   phase('view',.75);
   ready=true;document.querySelectorAll('[data-needs-model],#toggle-furniture,#toggle-rooms,#toggle-measurements,#toggle-photos,#enter-walk').forEach(b=>b.disabled=false);
   await selectView(selected,true);lighting.render(camera);
@@ -1641,8 +1664,11 @@ async function loadNativeModel(manifest){
   // TEK senkron blokta tarıyor (7 voksel damgası/üçgen) ve pişirme yalnız
   // mesh SINIRINDA dilimlenebiliyor (en büyük tek mesh 483 996 tepe x 10 ışın).
   // MASAÜSTÜ DEĞİŞMEDİ. Telefonda geri açmak: ?features=contactAoMobile:1
+  // ADIM 1: masaüstünde de kapalı (contactAoDesktop). Bu geçiş masaüstünde
+  // birkaç saniyelik tek blok + ardından bütün dokunduğu malzemelerin aynı
+  // karede yeniden derlenmesi demekti; yeni villa seti AO'sunu kendi taşıyor.
   if(FEATURES.runtimeVertexAO&&manifest.batched&&
-     (quality.tier.startsWith('desktop')||FEATURES.contactAoMobile)){
+     (quality.tier.startsWith('desktop')?FEATURES.contactAoDesktop:FEATURES.contactAoMobile)){
     window.__angoraContactReady=Promise.all([
       window.__angoraGradeReady??0,window.__angoraAoReady??0,window.__angoraAtlasReady??0,
     ]).then(()=>bakeContactOcclusion(nativeDelivery.loaded,

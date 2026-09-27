@@ -131,17 +131,32 @@ export function createAnnotations(data,host,onRoom) {
     const w=host.clientWidth,h=host.clientHeight;
     camera.updateMatrixWorld();
     const obstacles=collectUIObstacles(host),candidates=[];
+    // Writes first, reads second: reading offsetWidth right after writing a
+    // label's left/top/fontSize forces a synchronous layout PER LABEL, every
+    // frame the floor is orbited - dozens of layouts a frame inside the
+    // villa. Positioning every label and only then measuring them all costs
+    // one layout for the whole set.
+    const named=[];
     for(const entry of names) {
       entry.el.hidden=!(entry.floor===floor&&showNames&&!transitioning&&!walking);
       if(entry.el.hidden)continue;
       const distance=Math.max(1,entry.position.distanceTo(camera.position));
       const ppm=camera.isPerspectiveCamera?h*camera.zoom/(2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*distance):h*camera.zoom/(camera.top-camera.bottom);
       const p=project(entry,camera,w,h,labelFontSize(ppm));
-      if(!p)continue;
+      if(p)named.push({entry,p});
+    }
+    const measured=[];
+    for(const entry of dimensions) {
+      const visible=entry.floor===floor&&showDimensions&&!transitioning&&(!walking||entry.roomId===walkRoom);
+      entry.line.visible=visible;entry.el.hidden=!visible;
+      if(visible){const p=project(entry,camera,w,h,10);if(p)measured.push({entry,p});}
+    }
+    for(const item of named){item.width=item.entry.el.offsetWidth;item.height=item.entry.el.offsetHeight;}
+    for(const item of measured){item.width=item.entry.el.offsetWidth;item.height=item.entry.el.offsetHeight;}
+    for(const {entry,p,width,height} of named) {
       // The tag is a plate now, not glowing text, so it has to earn its area:
       // it shrinks until it sits inside its own room and disappears when that
       // room is too small on screen to carry a legible one.
-      const width=entry.el.offsetWidth,height=entry.el.offsetHeight;
       let fit=1;
       if(entry.span.x>0&&entry.span.z>0){
         const quad=entry.corners.map(v=>{corner.copy(v).project(camera);
@@ -153,14 +168,7 @@ export function createAnnotations(data,host,onRoom) {
       candidates.push({...p,entry,width:width*fit,height:height*fit});
     }
     const nameCount=candidates.length;
-    for(const entry of dimensions) {
-      const visible=entry.floor===floor&&showDimensions&&!transitioning&&(!walking||entry.roomId===walkRoom);
-      entry.line.visible=visible;entry.el.hidden=!visible;
-      if(visible){
-        const p=project(entry,camera,w,h,10);
-        if(p)candidates.push({...p,entry,width:entry.el.offsetWidth,height:entry.el.offsetHeight});
-      }
-    }
+    for(const {entry,p,width,height} of measured)candidates.push({...p,entry,width,height});
     const nextKey=dimensions.map(e=>e.line.visible?'1':'0').join('');
     if(nextKey!==dimensionKey){
       dimensionKey=nextKey;
