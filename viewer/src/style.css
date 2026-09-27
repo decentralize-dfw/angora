@@ -318,7 +318,13 @@ h1 strong{font-weight:700}
 
 /* ------------------------------------------------------------ site view */
 .site-overlay{position:absolute;inset:0;pointer-events:none;z-index:6;overflow:hidden}
-.site-label{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;min-width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.66);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:0 2px 8px #1b322522;font-size:11px;font-weight:600;color:var(--ink)}
+.site-label{position:absolute;left:0;top:0;/* Konum JS'ten translate3d ile geliyor (site-context.js). left/top ile
+   konumlandırmak her kamera hareketinde LAYOUT KAYMASI üretiyordu:
+   ölçüldü, ana sayfanın CLS'inin tamamı (0,087) bu etiketlerdendi.
+   transform değişimi layout'a dokunmaz - ne kayma sayılır ne de kare
+   başına yeniden hesap ister. left:0/top:0 şart: konumsuz mutlak öğede
+   transform'un çıkış noktası akıştaki yeri olurdu. */
+  transform:translate(-50%,-50%);display:grid;place-items:center;min-width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.66);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:0 2px 8px #1b322522;font-size:11px;font-weight:600;color:var(--ink)}
 .site-label-villa{pointer-events:auto;min-width:96px;min-height:44px;height:auto;border-radius:999px;padding:9px 16px;background:var(--ink);color:#fff;font-size:13px;font-weight:700;border:1.5px solid #fff;letter-spacing:.02em}
 .region-panel{left:50%;transform:translateX(-50%);bottom:max(22px,env(safe-area-inset-bottom));display:grid;gap:7px;justify-items:center;font-size:12px}
 .region-panel .region-meta{color:var(--muted);text-shadow:0 1px 5px #fff;font-size:11px}
