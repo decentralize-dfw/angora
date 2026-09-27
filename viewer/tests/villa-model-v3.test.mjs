@@ -64,6 +64,30 @@ test('batched olmayan veya parçasız manifest ellenmez', () => {
   assert.deepEqual(applyVillaModelV3(null), []);
 });
 
+// MOBİL İŞ EMRİ İŞ 1+2: telefon aynı üç modeli 256 px ETC1S KTX2 dokulu
+// kopyalardan alır (26092026/mobile/). Kaynak dosyalara dokunulmaz;
+// masaüstü eşlemesi bire bir aynı kalır.
+test('mobil eşleme KTX2 kopyaları gösterir, çevre yine ellenmez', () => {
+  const m = manifest();
+  const swapped = applyVillaModelV3(m, {mobile: true});
+  assert.deepEqual(swapped.sort(), ['architecture', 'garden', 'interior']);
+  const byName = Object.fromEntries(m.parts.map(p => [p.name, p]));
+  assert.equal(byName.architecture.file, '../../26092026/mobile/BUILDING-opt-v3.ktx2.glb');
+  assert.equal(byName.garden.file, '../../26092026/mobile/GARDEN-opt-v2.ktx2.glb');
+  assert.equal(byName.interior.file, '../../26092026/mobile/INTERIOR-opt-v2.ktx2.glb');
+  assert.equal(byName.architecture.bytes, 3696484);
+  assert.equal(byName.garden.bytes, 4947588);
+  assert.equal(byName.interior.bytes, 4229468);
+  assert.equal(byName.architecture.gpu_sha256, undefined);
+  for (const name of ['context-ground', 'context-buildings', 'context-plants']) {
+    assert.equal(byName[name].file, name + '.glb', name + ' dokunulmamalı');
+  }
+});
+
+test('mobil bayrak açık ship ediliyor (villaModelV3Mobile)', () => {
+  assert.equal(DEFAULT_FEATURES.villaModelV3Mobile, true);
+});
+
 test('bayrak açık ship ediliyor ve tek bayrakla geri alınabilir', () => {
   assert.equal(DEFAULT_FEATURES.villaModelV3, true);
   // kapalıyken manifest'e hiç dokunulmadığı main tarafında şart; burada

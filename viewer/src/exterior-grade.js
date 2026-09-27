@@ -249,8 +249,17 @@ function averageCellLinear(material) {
   } catch { return null; }
 }
 
-export function reviveBatchedGrade(models, sets, {anisotropy = 8, anyGrid = false, cellGrade = null} = {}) {
-  if (!sets) return 0;
+// MOBİL İŞ 3 (bootYieldV1): `budgetMs` verilirse çağrı {applied, done}
+// döndürür ve bütçe dolunca traverse'i keser - materyal başına idempotent
+// guard'lar (exteriorGradeDetail / exteriorGradeScalar / cellGrade) sayesinde
+// bir SONRAKİ çağrı kaldığı yerden devam eder. Böylece needsUpdate fırtınası
+// (30 shader derlemesi tek karede) kare bütçesine yayılır. Bütçesiz çağrı
+// eskisi gibi sayı döndürür; her dilimde EN AZ bir materyal işlenir
+// (ilerleme garantisi, vertex-ao.js kalıbı).
+export function reviveBatchedGrade(models, sets, {anisotropy = 8, anyGrid = false, cellGrade = null, budgetMs = 0} = {}) {
+  if (!sets) return budgetMs ? {applied: 0, done: true} : 0;
+  const deadline = budgetMs ? performance.now() + budgetMs : Infinity;
+  let progressed = 0, exhausted = false;
   const clones = new Map();
   const textureFor = (name, repeat) => {
     const key = name + '|' + (repeat ? repeat.join(',') : '1');
@@ -267,16 +276,22 @@ export function reviveBatchedGrade(models, sets, {anisotropy = 8, anyGrid = fals
   for (const model of models.values()) {
     model.updateMatrixWorld(true);
     model.traverse(object => {
-      if (!object.isMesh) return;
+      if (exhausted || !object.isMesh) return;
       const material = Array.isArray(object.material) ? null : object.material;
       if (!material) return;
       const batch = material.userData.angoraBatch;
       if (!batch) return;
+      // Bütçe kontrolü yalnız İŞ YAPACAK materyalde ve en az bir ilerleme
+      // sonrasında: işlenmişler (guard'lı) bedava geçer, dilim asla boş dönmez.
+      if (progressed && performance.now() > deadline) { exhausted = true; return; }
       if (batch.grid !== 1 || batch.materials.length !== 1) {
         // MALZEME İŞ 2 (gradeAnyGridV1): the grid===1 wall falls - shared
         // batches take per-cell samplers via cell-grade.js. Each ACTIVE
         // cell counts toward `applied`, so the log's number is coverage.
-        if (anyGrid && cellGrade) applied += cellGrade(material, sets, {anisotropy});
+        if (anyGrid && cellGrade) {
+          const n = cellGrade(material, sets, {anisotropy});
+          applied += n; progressed += n;
+        }
         return;
       }
       const entry = BATCHED_TABLE.find(e => e.name === batch.materials[0]);
@@ -284,6 +299,7 @@ export function reviveBatchedGrade(models, sets, {anisotropy = 8, anyGrid = fals
       if (entry.groundUV && !object.userData.exteriorGradeUV) {
         object.userData.exteriorGradeUV = true;
         if (horizontalShare(object.geometry, object.matrixWorld) > 0.5) projectGroundUV(object, entry.groundUV);
+        progressed++;
       }
       if (material.userData.exteriorGradeDetail) return;   // one binding per material
       // İŞ A: scalar-only rows (no texture) grade in place and still count -
@@ -298,7 +314,7 @@ export function reviveBatchedGrade(models, sets, {anisotropy = 8, anyGrid = fals
         if (entry.metalness !== undefined) material.metalness = entry.metalness;
         if (entry.dropMap && material.map) {material.map.dispose(); material.map = null;}
         material.needsUpdate = true;
-        if (!entry.set) {applied++; return;}
+        if (!entry.set) {applied++; progressed++; return;}
       } else if (!entry.set) return;
       const slots = [];
       // A null here means that sheet 404'd. Assigning it would strip the
@@ -341,10 +357,10 @@ export function reviveBatchedGrade(models, sets, {anisotropy = 8, anyGrid = fals
       if (!slots.length) return;   // nothing bound: do not mark, do not recompile
       material.userData.exteriorGradeDetail = slots;
       material.needsUpdate = true;
-      applied++;
+      applied++; progressed++;
     });
   }
-  return applied;
+  return budgetMs ? {applied, done: !exhausted} : applied;
 }
 
 // STAGE B - after every part is decoded and merged, before staging/compile:

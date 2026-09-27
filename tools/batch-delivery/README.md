@@ -68,3 +68,14 @@ The closed-earth side extrusion described above is superseded as well: it incorr
 Exterior stair correction: full-footprint covers are removed. finish-soil-motion.py intersects the authored stone stair and white cheek triangles with each horizontal slice, polygonizes closed intersection loops and unions them with the existing terrain cap. At 1.60 m the tread-front limits are native z=-0.3064 and z=-1.7231; tests check points immediately on both sides. Lower treads remain visible. No vertical hatch skirts or new material/draw are added.
 
 Floor finish restoration: repair-finishing.py removes overlaid parquet skins within the original attic cream-tile contour and overlaid terra_floor skins within the connected original stone_tile contours for garage/service room. Source finish coordinates, material textures and UVs are retained. Run verify-floor-finishes.mjs after build and refresh-detail; it decodes both delivery profiles and checks the uppermost floor material at all three room samples.
+
+## Mobil KTX2 doku seti (MOBİL İŞ EMRİ İŞ 2)
+
+`make-mobile-ktx2.mjs` üç yeni villa modelinin (build/web/26092026/) dokularını
+≤256 px ETC1S KTX2'ye çevirip `build/web/26092026/mobile/<ad>.ktx2.glb` olarak
+AYRI yazar (kaynaklara dokunmaz; idempotent). Ölçüm: üç modelin doku-VRAM'i
+369 → 3,5 MiB. Encoder olarak KTX-Software `toktx` (v4.3+) gerekir — depoda yok:
+
+    curl -fL -o /tmp/ktx.deb https://github.com/KhronosGroup/KTX-Software/releases/download/v4.3.2/KTX-Software-4.3.2-Linux-x86_64.deb
+    dpkg -x /tmp/ktx.deb ~/ktxsw
+    TOKTX=~/ktxsw/usr/bin/toktx TOKTX_LIB=~/ktxsw/usr/lib node make-mobile-ktx2.mjs

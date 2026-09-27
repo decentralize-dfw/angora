@@ -17,6 +17,8 @@ export const DEFAULT_FEATURES = Object.freeze({
   singleSided: true,           // inert - no patched GLBs ship; 0 still forces DoubleSide back
   viewCulling: false,          // hiding planting seen through walk glazing is a quality call, deferred
   villaModelV3: true,          // 26.09.2026 yüklemesi: ürün sahibinin kendi malzeme yazarlığını yaptığı BUILDING-opt-v3 / GARDEN-opt-v2 / INTERIOR-opt-v2. Manifest'te ÜÇ parçanın dosyası değişir, eskiler silinmez; kapatınca teslimat bire bir eskiye döner: ?features=villaModelV3:0
+  bootYieldV1: true,           // MOBİL İŞ 3: boşta yükseltmeler (grade revive / atlas dizileri / hücre aileleri) mobilde ilk etkileşime kadar bekler (8 sn emniyet) ve kare bütçesiyle dilim dilim koşar - 30 shader derlemesi tek karede olmaz, kart hemen tıklanabilir. Kapatmak: ?features=bootYieldV1:0
+  villaModelV3Mobile: true,    // MOBİL İŞ 1+2: aynı üç model telefonda 256 px ETC1S KTX2 kopyalarıyla (26092026/mobile/, doku-VRAM 369 -> 3,5 MiB). Yalnız mobil profili etkiler; kapatınca telefon eski batched teslimata döner: ?features=villaModelV3Mobile:0
   mobileGeometryRelease: true, // MOBİL BELLEK: yüklemeden SONRA CPU'daki vertex dizilerini bırak (ölçüm: 207,6 MiB tutuluyordu, JS heap 334,9 MiB -> iPhone sekmeyi öldürüyor). Görüntü DEĞİŞMEZ. Kapatmak: ?features=mobileGeometryRelease:0
   plantsChunking: true,        // pure culling win: shared attributes, off-screen cells only
   cameraRigsV2: true,          // T1.5 - iki tier'da da canlı

@@ -59,3 +59,23 @@ test('interior timber and water stay untouched here - İŞ D and poolWaterV2 own
   const group = batchedScene(['WOOD-FL', 'wood_floor.001', 'water', 'INTERIOR']);
   assert.equal(reviveBatchedGrade(new Map([['a', group]]), fakeSets()), 0);
 });
+
+// MOBİL İŞ 3 (bootYieldV1): budgetMs verilince çağrı {applied, done} döner,
+// bütçe dolunca keser ve idempotent guard'lar sayesinde sonraki çağrı
+// kaldığı yerden sürer. Dilim başına EN AZ bir materyal işlenir - bütçe 0 ms
+// bile olsa döngü ilerler, sonsuz dilim olmaz.
+test('MOBİL İŞ 3: bütçeli çağrı dilim dilim tamamlar, toplam bütçesizle aynı', () => {
+  const whole = reviveBatchedGrade(new Map([['a', batchedScene(REACHABLE)]]), fakeSets());
+  const group = batchedScene(REACHABLE);
+  const models = new Map([['a', group]]);
+  let total = 0, rounds = 0;
+  for (;;) {
+    const slice = reviveBatchedGrade(models, fakeSets(), {budgetMs: 0.0001});
+    assert.equal(typeof slice.applied, 'number');
+    total += slice.applied;
+    rounds++;
+    assert.ok(rounds < 100, 'ilerleme garantisi bozulmuş: 100 dilimde bitmedi');
+    if (slice.done) break;
+  }
+  assert.equal(total, whole, 'dilimli toplam bütçesiz koşuya eşit olmalı');
+});

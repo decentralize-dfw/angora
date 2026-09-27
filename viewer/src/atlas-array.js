@@ -62,15 +62,25 @@ function shrinkToPlaceholder(texture) {
 // Idle upgrade pass: every atlased material (grid>1) gets its arrays, keyed
 // by SOURCE texture so an ORM shared between roughness and metalness builds
 // once. Returns how many materials switched; each recompiles exactly once.
-export function upgradeAtlasToArrays(models) {
+//
+// MOBİL İŞ 3 (bootYieldV1): `budgetMs` verilirse {applied, done} döner ve
+// bütçe dolunca keser - userData.atlasArrays guard'ı idempotent olduğundan
+// sonraki çağrı kalanlardan devam eder (dilim başına en az bir materyal).
+// Dizi önbelleği (arrays) çağrı başınadır; kaynak dokular materyale özel
+// olduğu için dilimler arasında pratikte mükerrer dizi kurulmaz.
+export function upgradeAtlasToArrays(models, {budgetMs = 0} = {}) {
+  const deadline = budgetMs ? performance.now() + budgetMs : Infinity;
+  let exhausted = false;
   const arrays = new Map();   // source texture -> DataArrayTexture
   let applied = 0;
   const seen = new Set();
   for (const model of models.values()) {
     model.traverse(object => {
-      if (!object.isMesh) return;
+      if (exhausted || !object.isMesh) return;
       const material = Array.isArray(object.material) ? null : object.material;
       const batch = material?.userData.angoraBatch;
+      if (batch && batch.grid > 1 && !material.userData.atlasArrays && !material.userData.cellGrade &&
+          applied && performance.now() > deadline) { exhausted = true; return; }
       // KAPANIŞ İŞ 4.1: cellGrade'li materyal 3 aile dizisini zaten
       // taşıyor; üstüne 4 atlas dizisi daha bindirmek 16 birim tavanını
       // yeniden zorlar. O materyaller temel atlas sampler'larında kalır.
@@ -91,5 +101,5 @@ export function upgradeAtlasToArrays(models) {
       applied++;
     });
   }
-  return applied;
+  return budgetMs ? {applied, done: !exhausted} : applied;
 }

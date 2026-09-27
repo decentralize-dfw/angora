@@ -31,7 +31,7 @@ import { configureCameraControls } from './camera.js';
 import { PendingAction } from './pending-action.js';
 import {fitContextBounds,neutraliseTransmission} from './material-response.js';
 import {applyGradeValues,loadGradeTextures,bindGradeTextures,reviveBatchedGrade} from './exterior-grade.js';
-import {applyCellGrade,buildCellFamilies} from './cell-grade.js';
+import {applyCellGrade,buildCellFamilies,buildCellFamiliesSliced} from './cell-grade.js';
 import {reviveBakedOcclusion} from './ao-revival.js';
 import {upgradeAtlasToArrays} from './atlas-array.js';
 import {bakeContactOcclusion} from './vertex-ao.js';
@@ -1494,21 +1494,52 @@ async function loadNativeModel(manifest){
   // texture the delivery stopped shipping) revive off the critical path.
   // Until they arrive the atlas look stands; on arrival the grid=1 hero
   // materials rebind and recompile once, during idle.
+  // MOBİL İŞ 3 (bootYieldV1): açılış kilidinin kökü boşta yükseltmelerin
+  // TEK bloklarıydı - 30 materyalde birden needsUpdate, sonraki karede 30
+  // senkron shader derlemesi (Safari'de KHR_parallel_shader_compile yok).
+  // Çözüm iki katman: (1) mobilde boşta yükseltmeler İLK ETKİLEŞİME kadar
+  // bekler (dokunulmazsa 8 sn emniyet - kart hemen tıklanabilir), (2) her
+  // yükseltme kare bütçesiyle dilim dilim koşar (dilim başına en az bir
+  // materyal; vertex-ao.js kalıbı). Kapatmak: ?features=bootYieldV1:0.
+  const BOOT_SLICE_MS=6;
+  const idleStep=window.requestIdleCallback?(fn=>new Promise(r=>window.requestIdleCallback(()=>r(fn?.()),{timeout:1500}))):(fn=>new Promise(r=>setTimeout(()=>r(fn?.()),50)));
+  const firstGesture=FEATURES.bootYieldV1&&deliveryProfile==='mobile'
+    ?new Promise(resolve=>{
+        const done=()=>{removeEventListener('pointerdown',done,true);clearTimeout(t);resolve();};
+        addEventListener('pointerdown',done,true);
+        const t=setTimeout(done,8000);
+      })
+    :Promise.resolve();
   if(FEATURES.exteriorGradeRevival){
     const idle=window.requestIdleCallback?(fn=>window.requestIdleCallback(fn,{timeout:1500})):(fn=>setTimeout(fn,1500));
     // The promise is exposed so a QA capture can await the rebind instead of
     // racing the idle callback - a screenshot half a second either side of
     // the revival is two different images.
     window.__angoraGradeReady=new Promise(resolve=>idle(()=>{
-      loadGradeTextures(new URL(pages?'assets/textures/':'textures/',publicRoot))
-        .then(textures=>{
+      const anisotropy=Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy());
+      firstGesture
+        .then(()=>loadGradeTextures(new URL(pages?'assets/textures/':'textures/',publicRoot)))
+        .then(async textures=>{
           lateGradeTextures=textures; // İŞ 6: geç gelen parçalar da aynı setle
           // KAPANIŞ İŞ 4.1: aile dizileri TEK SEFER kurulur (3 birim);
           // hücre-grade bütün katmanlarını buradan indeksler.
-          lateCellFamilies??=buildCellFamilies(textures,{anisotropy:Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy())});
-          const applied=reviveBatchedGrade(nativeDelivery.loaded,textures,
-            {anisotropy:Math.min(quality.value.anisotropy,renderer.capabilities.getMaxAnisotropy()),anyGrid:FEATURES.gradeAnyGridV1,cellGrade:(m,_sets,o)=>applyCellGrade(m,lateCellFamilies,o)});
-          if(applied){renderer.shadowMap.needsUpdate=true;invalidate();}
+          lateCellFamilies??=FEATURES.bootYieldV1
+            ?await buildCellFamiliesSliced(textures,{anisotropy},()=>idleStep())
+            :buildCellFamilies(textures,{anisotropy});
+          const opts={anisotropy,anyGrid:FEATURES.gradeAnyGridV1,cellGrade:(m,_sets,o)=>applyCellGrade(m,lateCellFamilies,o)};
+          let applied=0;
+          if(FEATURES.bootYieldV1){
+            for(;;){
+              const slice=reviveBatchedGrade(nativeDelivery.loaded,textures,{...opts,budgetMs:BOOT_SLICE_MS});
+              applied+=slice.applied;
+              if(slice.applied){renderer.shadowMap.needsUpdate=true;invalidate();}
+              if(slice.done)break;
+              await idleStep();   // derlemeler bu dilimin kadarıyla sınırlı kalsın
+            }
+          }else{
+            applied=reviveBatchedGrade(nativeDelivery.loaded,textures,opts);
+            if(applied){renderer.shadowMap.needsUpdate=true;invalidate();}
+          }
           console.info('Exterior grade revived on '+applied+' materials');
           resolve(applied);
         })
@@ -1534,11 +1565,24 @@ async function loadNativeModel(manifest){
   if(FEATURES.atlasArrayV2&&manifest.batched){
     const idle=window.requestIdleCallback?(fn=>window.requestIdleCallback(fn,{timeout:1500})):(fn=>setTimeout(fn,1500));
     window.__angoraAtlasReady=new Promise(resolve=>idle(()=>{
-      try{
-        const applied=upgradeAtlasToArrays(nativeDelivery.loaded);
-        if(applied)invalidate();
-        console.info('Atlas arrays upgraded on '+applied+' materials');resolve(applied);
-      }catch(error){console.warn('Atlas array upgrade failed; textureLod path retained',error);resolve(0);}
+      firstGesture.then(async()=>{   // MOBİL İŞ 3: aynı erteleme + dilimleme
+        try{
+          let applied=0;
+          if(FEATURES.bootYieldV1){
+            for(;;){
+              const slice=upgradeAtlasToArrays(nativeDelivery.loaded,{budgetMs:BOOT_SLICE_MS});
+              applied+=slice.applied;
+              if(slice.applied)invalidate();
+              if(slice.done)break;
+              await idleStep();
+            }
+          }else{
+            applied=upgradeAtlasToArrays(nativeDelivery.loaded);
+            if(applied)invalidate();
+          }
+          console.info('Atlas arrays upgraded on '+applied+' materials');resolve(applied);
+        }catch(error){console.warn('Atlas array upgrade failed; textureLod path retained',error);resolve(0);}
+      });
     }));
   }
   // FAZ 6 İŞ C: contact darkening. Joins the SAME idle queue and explicitly
@@ -1634,9 +1678,14 @@ async function loadModel() {
     // bir crash demek. Dokular küçültülünce mobil de açılır - o zamana kadar
     // telefon eski teslimatta kalıyor. ?profile=desktop ile telefonda da
     // denenebilir (bilerek).
-    if(FEATURES.villaModelV3&&deliveryProfile==='desktop'){
-      const swapped=applyVillaModelV3(manifest);
-      if(swapped.length)console.info('Villa model v3: '+swapped.join(', '));
+    // MOBİL İŞ 1: masaüstü şartı ölçümle kalktı - telefon aynı üç modeli
+    // 256 px ETC1S KTX2 dokulu kopyalardan alır (doku-VRAM 369 -> 3,5 MiB,
+    // make-mobile-ktx2.mjs). Masaüstü teslimatı DEĞİŞMEDİ (1024 tam set).
+    // Geri dönüş: ?features=villaModelV3Mobile:0 telefonu eski batched
+    // teslimata, ?features=villaModelV3:0 her şeyi bire bir eskiye döndürür.
+    if(FEATURES.villaModelV3&&(deliveryProfile==='desktop'||FEATURES.villaModelV3Mobile)){
+      const swapped=applyVillaModelV3(manifest,{mobile:deliveryProfile==='mobile'});
+      if(swapped.length)console.info('Villa model v3'+(deliveryProfile==='mobile'?' (mobil ktx2)':'')+': '+swapped.join(', '));
     }
     if(manifest.parts&&manifest.interior_streams){await loadNativeModel(manifest);return;}
     assetRevision=manifest.assets?.map(({file,sha256})=>({file,sha256}));

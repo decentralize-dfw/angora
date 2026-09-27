@@ -87,38 +87,55 @@ const FAMILY_SIZE = {color: 512, normal: 512, orm: 256};
 // images) into the three arrays. A missing sheet leaves a neutral layer -
 // one 404 cannot take the family down. Returns null where canvas is
 // unavailable (node tests mock the families instead).
+function buildFamily(channel, names, sets, anisotropy) {
+  const size = FAMILY_SIZE[channel];
+  const data = new Uint8Array(size * size * 4 * names.length);
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = size;
+  const context = canvas.getContext('2d', {willReadFrequently: true});
+  const layers = new Map();
+  names.forEach((name, layer) => {
+    layers.set(name, layer);
+    const image = sets[name]?.image;
+    context.clearRect(0, 0, size, size);
+    if (image) context.drawImage(image, 0, 0, size, size);
+    else {                                   // neutral: grey / flat normal / rough 1
+      context.fillStyle = channel === 'normal' ? 'rgb(128,128,255)'
+        : channel === 'orm' ? 'rgb(0,255,0)' : 'rgb(128,128,128)';
+      context.fillRect(0, 0, size, size);
+    }
+    data.set(context.getImageData(0, 0, size, size).data, size * size * 4 * layer);
+  });
+  const texture = new THREE.DataArrayTexture(data, size, size, names.length);
+  texture.format = THREE.RGBAFormat;
+  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+  texture.minFilter = THREE.LinearMipmapLinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+  texture.generateMipmaps = true;
+  texture.anisotropy = anisotropy;
+  if (channel === 'color') texture.colorSpace = THREE.SRGBColorSpace;
+  texture.needsUpdate = true;
+  return {texture, layers};
+}
+
 export function buildCellFamilies(sets, {anisotropy = 8} = {}) {
   if (typeof document === 'undefined' || !sets) return null;
   const families = {};
   for (const [channel, names] of Object.entries(FAMILY_LAYERS)) {
-    const size = FAMILY_SIZE[channel];
-    const data = new Uint8Array(size * size * 4 * names.length);
-    const canvas = document.createElement('canvas');
-    canvas.width = canvas.height = size;
-    const context = canvas.getContext('2d', {willReadFrequently: true});
-    const layers = new Map();
-    names.forEach((name, layer) => {
-      layers.set(name, layer);
-      const image = sets[name]?.image;
-      context.clearRect(0, 0, size, size);
-      if (image) context.drawImage(image, 0, 0, size, size);
-      else {                                   // neutral: grey / flat normal / rough 1
-        context.fillStyle = channel === 'normal' ? 'rgb(128,128,255)'
-          : channel === 'orm' ? 'rgb(0,255,0)' : 'rgb(128,128,128)';
-        context.fillRect(0, 0, size, size);
-      }
-      data.set(context.getImageData(0, 0, size, size).data, size * size * 4 * layer);
-    });
-    const texture = new THREE.DataArrayTexture(data, size, size, names.length);
-    texture.format = THREE.RGBAFormat;
-    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-    texture.minFilter = THREE.LinearMipmapLinearFilter;
-    texture.magFilter = THREE.LinearFilter;
-    texture.generateMipmaps = true;
-    texture.anisotropy = anisotropy;
-    if (channel === 'color') texture.colorSpace = THREE.SRGBColorSpace;
-    texture.needsUpdate = true;
-    families[channel] = {texture, layers};
+    families[channel] = buildFamily(channel, names, sets, anisotropy);
+  }
+  return families;
+}
+
+// MOBİL İŞ 3 (bootYieldV1): aynı iş, aile başına bir `step` beklemesiyle -
+// üç kanvas paketlemesi (drawImage + getImageData, ~19 MB) tek blok yerine
+// üç dilime bölünür. `step` çağıran tarafın boşta-bekleme fonksiyonudur.
+export async function buildCellFamiliesSliced(sets, {anisotropy = 8} = {}, step = () => Promise.resolve()) {
+  if (typeof document === 'undefined' || !sets) return null;
+  const families = {};
+  for (const [channel, names] of Object.entries(FAMILY_LAYERS)) {
+    await step();
+    families[channel] = buildFamily(channel, names, sets, anisotropy);
   }
   return families;
 }
