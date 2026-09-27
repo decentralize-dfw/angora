@@ -4,8 +4,8 @@ import {currentLang} from './i18n.js';
 
 // R47 | The owner's photographs, put back where they were taken.
 //
-// A pin is the CAMERA, not the picture: the dot is the tripod, the two rays
-// are the lens's angle, and the line dropping away from the dot lands on the
+// A pin is the CAMERA, not the picture: the disc is the lens, the arc outside
+// it is where the lens looked, and the line dropping away from it lands on the
 // floor the photographer stood on. No thumbnail and no number - fifty-six
 // little pictures or fifty-six badges over a storey plan is a contact sheet,
 // not a drawing - so the frame itself only appears once a pin is pressed, in
@@ -32,8 +32,13 @@ import {currentLang} from './i18n.js';
 // floor view and at every orbit angle.
 
 // The mark's own box, and where inside it the camera point sits. Everything
-// else - the rays and the leader - is drawn from that apex.
-const MARK = {w: 36, h: 28, apexX: 6, apexY: 14};
+// else - the heading arc and the leader - is drawn from that centre.
+// Tasarım v3 (28.09, ürün sahibi: "yeni bir tasarım - şık, minimal, sade"):
+// yelpaze/ışın yok. Kamera, beyaz bir mercek diski (siyah kıl çizgi halka,
+// ortada siyah objektif noktası); baktığı yön diskin dışında ince bir YÖN
+// YAYI - pusuladaki gibi. Yay, siyah çizginin altında beyaz bir kılıfla
+// çizilir: koyu zeminde de açık zeminde de net okunur, parlama yok.
+const MARK = {w: 40, h: 40, apexX: 20, apexY: 20};
 // How far past the frame a mark may still be drawn. Its centre is allowed
 // outside; the overlay clips what hangs over, so a camera at the edge of the
 // view fades off it rather than popping out of existence a mark early.
@@ -43,17 +48,14 @@ function mark(document) {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('viewBox', `0 0 ${MARK.w} ${MARK.h}`);
   svg.setAttribute('aria-hidden', 'true');
-  // The tripod and the angle it opens through, and nothing between them: an
-  // eye drawn inside the two rays reads as a second thing to press at this
-  // size, and a fifty-six-times-repeated one is noise over the plan.
-  // Tasarım (27.09): iki sert ışın yerine objektifin açısı YUMUŞAK bir
-  // yelpaze - yönü ve genişliği aynen okunur, plan üstünde gürültü yapmaz.
-  // Kamera noktası beyaz halkalı küçük bir disk; seçilince vurgu rengi.
+  // 80° yay, r=14: sağa (+x) bakar; bütün işaret --pin-angle ile döner.
+  const arc = 'M30.72 11 A14 14 0 0 1 30.72 29';
   svg.innerHTML =
-    '<path class="pin-cone" d="M6 14 L32.2 4.5 A27.9 27.9 0 0 1 32.2 23.5 Z"/>' +
-    '<path class="pin-ray" d="M6 14 L32.2 4.5 M6 14 L32.2 23.5"/>' +
-    '<circle class="pin-dot" cx="6" cy="14" r="4"/>' +
-    '<circle class="pin-core" cx="6" cy="14" r="1.5"/>';
+    `<circle class="pin-focus" cx="20" cy="20" r="12.5"/>` +
+    `<path class="pin-arc-case" d="${arc}"/>` +
+    `<path class="pin-arc" d="${arc}"/>` +
+    '<circle class="pin-disc" cx="20" cy="20" r="7.5"/>' +
+    '<circle class="pin-lens" cx="20" cy="20" r="2.6"/>';
   return svg;
 }
 
@@ -177,10 +179,8 @@ export function createPhotoPins(host, root, {onOpen}) {
         // The mark is not a disc: it runs from the dot along the look
         // direction, so what the plan's dimension tags have to avoid is that
         // swept box, not a circle around the apex.
-        const rad = angle * Math.PI / 180;
-        const ex = x + Math.cos(rad) * 30, ey = y + Math.sin(rad) * 30;
-        occupied.push({left: Math.min(x, ex) - 13, right: Math.max(x, ex) + 13,
-          top: Math.min(y, ey) - 13, bottom: Math.max(y, ey) + 13});
+        // Disk + yön yayı: merkez çevresinde 17 px'lik bir daire.
+        occupied.push({left: x - 17, right: x + 17, top: y - 17, bottom: y + 17});
       }
     },
     get current() {return current;},

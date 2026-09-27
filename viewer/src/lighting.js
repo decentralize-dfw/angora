@@ -478,7 +478,11 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
         }
       const glass=materials.every(isGlazing);object.userData.aoExcluded=glass;
       if(glass&&portalCandidates&&name==='architecture')portalCandidates.push(object);
-      object.castShadow=!glass;object.receiveShadow=!glass;
+      // Zemin+yol gölge ATMAZ, yalnız alır: yumuşatılmış normallerle kaba
+      // üçgenli arazinin kendi üstüne düşürdüğü gölge (shadow terminator)
+      // çimde anlamsız koyu kıymıklar olarak görünüyordu. Evler, ağaçlar ve
+      // villa gölgesini zemine düşürmeye devam eder.
+      object.castShadow=!glass&&name!=='context-ground';object.receiveShadow=!glass;
       for(const material of materials) {
         electricLight?.apply(material);
         if(q.batchedGeometry&&['architecture','interior'].includes(name))fixtureVertices.apply(material);

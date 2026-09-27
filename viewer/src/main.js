@@ -148,10 +148,15 @@ let locator=null,locationKey='',locationPendingKey='',locationPendingSince=0;
 // rememberState() starts rewriting the address bar with the current view.
 const openedWithView=new URLSearchParams(location.search).has('view');
 
+// The live line is remembered by its key, so a language switch while the
+// model is still loading re-says it in the new language at once.
+let messageKey = null;
 function message(text, error = false) {
+  messageKey = null;
   status.hidden = false; $('#load-message').textContent = text;
   $('#retry').hidden = !error; status.classList.toggle('error', error);
 }
+function say(key, error = false) { message(t(key), error); messageKey = key; }
 // The scene is about 27 MB in three files, so a chunk count alone leaves long
 // silences mid-download. The share is shown visually and is deliberately kept
 // out of the live region, which would otherwise read out every update.
@@ -613,7 +618,7 @@ async function travelRoom(roomId){
   const destination=walk?.surface.data.stations.find(s=>s.room_id===roomId);
   if(nativeDelivery&&destination&&selected!=='f'+destination.floor_index){
     if(nativeSwitching)return;
-    nativeSwitching=true;message('Kat hazırlanıyor…');
+    nativeSwitching=true;say('preparingFloor');
     try{await nativeDelivery.activate('f'+destination.floor_index);setFurnitureVisible(furnitureVisible);selected='f'+destination.floor_index;enterWalk(roomId);status.hidden=true;}
     catch(error){message('Oda yüklenemedi: '+error.message,true);}
     finally{nativeSwitching=false;}
@@ -678,7 +683,7 @@ function setup() {
     // No 3D is not no product: the boot screen keeps the verified facts,
     // the listing route and an honest explanation on screen.
     console.error('WebGL unavailable', error);
-    message(t('loadFailed'), true); $('#retry').hidden = true; $('#no3d').hidden = false;
+    say('loadFailed', true); $('#retry').hidden = true; $('#no3d').hidden = false;
     contextLost = true; return;
   }
   renderer.setPixelRatio(renderPixelRatio(host.clientWidth,host.clientHeight,devicePixelRatio,quality.value));
@@ -721,7 +726,7 @@ function setup() {
     deviceQA.interrupt();
     document.querySelectorAll('[data-needs-model]').forEach(b=>b.disabled=true);
     if(pendingCapture){pendingCapture(null,new Error('WebGL context lost'));pendingCapture=null;}
-    message(t('contextLost'),true);$('#no3d').hidden=false;
+    say('contextLost',true);$('#no3d').hidden=false;
     $('#retry').onclick=()=>location.reload();
   });
   // Bound both package concurrency and decoder workers. A phone's core count
@@ -752,7 +757,7 @@ async function selectView(id, initial = false) {
   setAutoRotate(false);
   if(nativeDelivery){
     if(nativeSwitching)return;
-    nativeSwitching=true;message('Kat hazırlanıyor…');
+    nativeSwitching=true;say('preparingFloor');
     try{
       await nativeDelivery.activate(id);
       lighting.frame(id,contextBox);
@@ -950,6 +955,7 @@ function refreshChrome(){
   rememberState(); // adresteki görünüm kelimesi dile göre (TR/EN)
   applyStatic();
   markLanguage();
+  if(messageKey&&!status.hidden)$('#load-message').textContent=t(messageKey);
   photoPins?.refreshLabels();photoViewer?.refresh();
   // There is a recording per language, so the switch is not only a caption
   // change: mid-tour the other voice picks up the sentence being spoken.
@@ -1534,7 +1540,7 @@ async function loadNativeModel(manifest){
   let bootBase=0;
   const phase=(name,fraction=1)=>progress(Math.min(1,bootBase+PHASE[name]*fraction));
   const phaseDone=name=>{bootBase+=PHASE[name];progress(bootBase);};
-  step('model');message(t('loadingData'));progress(0);
+  step('model');say('loadingData');progress(0);
   const lightingReady=Promise.all([
     lighting.loadEnvironment(daylightURL.href),
     // Task 2.1-c: with the progressive loader the four storey probes stop
@@ -1584,7 +1590,7 @@ async function loadNativeModel(manifest){
   const weighed=[...sizes.values()].some(value=>value>0);
   const totalWeight=weighed?[...sizes.values()].reduce((sum,value)=>sum+value,0):parts.length;
   const received=new Map();
-  message(t('loadingModel'));
+  say('loadingModel');
   // KAPANIŞ İŞ 2.3: walk'ta camdan görünen 514k üçgenlik bitki mobilde
   // gizlenir - masaüstünde kalite kararı bayrakta kalır.
   const deliveryFeatures={...FEATURES,viewCulling:FEATURES.viewCulling||quality.tier.startsWith('mobile')};
@@ -1636,7 +1642,7 @@ async function loadNativeModel(manifest){
     // stay deterministic by awaiting this (guarded - absent when flag off).
     if(FEATURES.progressiveContextV1)window.__angoraContextPartsReady=nativeDelivery.contextReady.then(()=>{invalidate();return true;});
     phaseDone('model');
-    step('light');message(t('loadingLight'));
+    step('light');say('loadingLight');
     await Promise.all([groundLightReady,electricReady]);
     phaseDone('light');
     // Task 1.2-b withdrawn: a shadow-only proxy cannot exist in r180 -
@@ -1650,7 +1656,7 @@ async function loadNativeModel(manifest){
     // komşular, iki bayrak tek bug). Artık HER parça yerleşince.
     if(manifest.batched)nativeDelivery.partsDone.then(()=>{loader.dracoLoader?.dispose();loader.ktx2Loader?.dispose();});
     host.dataset.deliveryStats=JSON.stringify({profile:manifest.profile??'legacy',decodeAndPrepareMs:Math.round(performance.now()-loadStarted),residentParts:nativeDelivery.loaded.size});
-  step('scene');message(t('loadingScene'));
+  step('scene');say('loadingScene');
   buildingBox=new THREE.Box3().setFromObject(groups.get('architecture'));
   gardenBox=new THREE.Box3().setFromObject(groups.get('garden'));contextBox=buildingBox.clone();
   lighting.setShadowBounds(buildingBox,gardenBox);
@@ -1672,7 +1678,7 @@ async function loadNativeModel(manifest){
   fillRoomMenu();
   locator=createWalkLocator(walk.surface,{minX:buildingBox.min.x+1,maxX:buildingBox.max.x-1,minZ:buildingBox.min.z+1,maxZ:buildingBox.max.z-1});
   phaseDone('scene');
-  step('view');message(t('loadingView'));
+  step('view');say('loadingView');
   await lightingReady;
   phase('view',.3);
   lighting.frame(selected==='building'?'f3':selected,contextBox);
@@ -1875,7 +1881,7 @@ async function loadModel() {
   loading = true; host.dataset.loaded = 'false';
   // Clear any bar left by a failed attempt before the manifest is back.
   progress(null);
-  message(t('loadingAll'));
+  say('loadingAll');
   const staged = new Map(), stagedClips = new Map();
   try {
     // Phones get the derived mobile set (simplified geometry, 512px webp,
@@ -1984,7 +1990,7 @@ async function loadModel() {
           scene: group==='context'?batchContext(splitContextBuildings(splitContextSoil(gltf.scene),{role:asset.context_role})):gltf.scene});
         if (gltf.animations?.length) stagedClips.set(group, gltf.animations);
         reportProgress();
-        if(!ready)message(`Model yükleniyor… ${++completed}/${manifest.assets.length}`);else ++completed;
+        if(!ready)message(`${t('loading')} ${++completed}/${manifest.assets.length}`);else ++completed;
       }
     }
     // Bound decode concurrency on phones, and settle both workers before cleanup.
@@ -2246,7 +2252,7 @@ async function loadModel() {
     // one after it fine. Compiling first costs the load a beat and gives the
     // interface back a press that opens immediately.
     phaseDone('assemble'); await tick();
-    step('view');message(t('loadingView'));
+    step('view');say('loadingView');
     // Never fatal: a driver that cannot pre-compile still draws, it just pays
     // at the first press the way it used to.
     try {
@@ -2287,7 +2293,7 @@ async function loadModel() {
     // still up, each state is rendered once: every program, shadow pass and
     // cap the floor buttons can ever ask for is already warm.
     phaseDone('caps');
-    message(t('preparing'));
+    say('preparing');
     await new Promise(resolve=>setTimeout(resolve,0));
     // A warming render frustum-culls, and compile() gathers a light set no
     // real view uses - both leave programs for the first real floor click.

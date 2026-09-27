@@ -279,24 +279,29 @@ h1 strong{font-weight:700}
 /* No halo under the mark: a white glow behind fifty-six of these fogs the
    plan it is drawn on. The dot's own white stroke is the separation, and a
    hairline shadow keeps the rays off a dark floor without lighting up. */
-.photo-pin svg{position:absolute;left:17px;top:17px;width:36px;height:28px;pointer-events:none;overflow:visible;
-  transform-origin:6px 14px;transform:translate(-6px,-14px) rotate(var(--pin-angle,0deg));
+.photo-pin svg{position:absolute;left:17px;top:17px;width:40px;height:40px;pointer-events:none;overflow:visible;
+  transform-origin:20px 20px;transform:translate(-20px,-20px) rotate(var(--pin-angle,0deg));
 }
-.pin-cone{fill:#111;fill-opacity:.09;stroke:none;transition:fill-opacity 160ms ease}
-.pin-ray{fill:none;stroke:#111;stroke-opacity:.34;stroke-width:.8;stroke-linecap:round;transition:stroke-opacity 160ms ease}
-.pin-dot{fill:#fff;stroke:#111;stroke-width:1.3;transition:fill 160ms ease}
-.pin-core{fill:#111;transition:fill 160ms ease}
-/* Siyah-beyaz, parlamasız (ürün sahibi: "yeşil kullanma, glow atma"). */
-.photo-pin:hover .pin-cone{fill-opacity:.16}
-.photo-pin:hover .pin-ray{stroke-opacity:.6}
+/* Kamera işareti v3: beyaz mercek diski, kıl çizgi siyah halka, siyah
+   objektif; bakış yönü diskin dışında ince yay. Yalnız siyah ve beyaz,
+   gölge/parlama yok. */
+.pin-disc{fill:#fff;stroke:#111;stroke-width:1.1;transition:fill 180ms ease,stroke-width 180ms ease}
+.pin-lens{fill:#111;transition:fill 180ms ease}
+.pin-arc-case{fill:none;stroke:#fff;stroke-opacity:.92;stroke-width:4.2;stroke-linecap:round}
+.pin-arc{fill:none;stroke:#111;stroke-width:1.5;stroke-linecap:round;transition:stroke-width 180ms ease}
+.pin-focus{fill:none;stroke:#111;stroke-width:.8;stroke-opacity:0;transition:stroke-opacity 180ms ease}
+.photo-pin:hover .pin-disc{stroke-width:1.6}
+.photo-pin:hover .pin-arc{stroke-width:2}
+.photo-pin:focus-visible{outline:none}
+.photo-pin:focus-visible .pin-focus{stroke-opacity:.7}
 .photo-pin[aria-pressed=true]{background:transparent}
-.photo-pin[aria-pressed=true] .pin-cone{fill-opacity:.24}
-.photo-pin[aria-pressed=true] .pin-ray{stroke-opacity:.85;stroke-width:1}
-.photo-pin[aria-pressed=true] .pin-dot{fill:#111;stroke:#fff;stroke-width:1.5}
-.photo-pin[aria-pressed=true] .pin-core{fill:#fff}
-/* Zemine inen çizgi: ince, kesikli, gri. */
-.photo-leader{stroke:#111;stroke-opacity:.28;stroke-width:1;stroke-dasharray:2 3;fill:none}
-.photo-foot{fill:#111;fill-opacity:.4}
+.photo-pin[aria-pressed=true] .pin-disc{fill:#111;stroke:#fff;stroke-width:1.4}
+.photo-pin[aria-pressed=true] .pin-lens{fill:#fff}
+.photo-pin[aria-pressed=true] .pin-arc{stroke-width:2.2}
+.photo-pin[aria-pressed=true] .pin-focus{stroke-opacity:.55}
+/* Zemine inen çizgi: tek kıl çizgi, ucunda küçük halka. */
+.photo-leader{stroke:#111;stroke-opacity:.3;stroke-width:.9;fill:none}
+.photo-foot{fill:#fff;stroke:#111;stroke-opacity:.55;stroke-width:.9}
 
 /* ------------------------------------------------------ photograph view */
 /* On a desktop it sits at the right edge so the plan stays visible and the
@@ -729,7 +734,7 @@ h1 strong{font-weight:700}
   /* "kamera acilarinin boyutunu kucult" - the same mark, drawn smaller about
      its own dot, so a crowded storey reads as a drawing again. The dot keeps
      its place exactly; only the rays get shorter. */
-  .photo-pin svg{transform:translate(-6px,-14px) rotate(var(--pin-angle,0deg)) scale(.66)}
+  .photo-pin svg{transform:translate(-20px,-20px) rotate(var(--pin-angle,0deg)) scale(.82)}
   .photo-backdrop{display:block}
   .photo-dock{right:auto;left:0;width:100%;top:0;bottom:0;justify-items:center;align-content:center}
   .photo-view{width:80vw;max-width:80vw;max-height:80dvh}
@@ -761,7 +766,7 @@ h1 strong{font-weight:700}
 #app[data-options-docked=true] .topbar .top-actions{margin-left:auto}
 #app[data-options-docked=true] .options-panel{top:auto;bottom:max(22px,env(safe-area-inset-bottom));right:22px;left:auto;transform:none;
   width:max-content;max-width:calc(50vw - 230px);max-height:none;overflow:visible;padding:5px;border-radius:26px;
-  display:grid;grid-template-columns:auto 170px auto;grid-auto-rows:40px;gap:6px;align-items:center;
+  display:grid;grid-template-columns:auto 170px auto;grid-auto-rows:minmax(40px,auto);gap:6px;align-items:center;
   background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:var(--shadow-soft);
   transition:opacity 260ms ease,transform 260ms ease;animation:none}
 #app[data-options-docked=true] .options-panel>*{margin:0}
@@ -770,7 +775,7 @@ h1 strong{font-weight:700}
 #app[data-options-docked=true] .options-panel .option-hidden,
 #app[data-options-docked=true] .options-panel .language-row,
 #app[data-options-docked=true] .options-panel .small-note{display:none}
-#app[data-options-docked=true] .options-panel .scene-options.villa-only{grid-column:1 / 4;grid-row:1;display:flex;gap:3px;justify-content:flex-end}
+#app[data-options-docked=true] .options-panel .scene-options.villa-only{grid-column:1 / 4;grid-row:1;display:flex;flex-wrap:wrap;gap:3px;justify-content:flex-end}
 #app[data-options-docked=true] .options-panel .scene-options button{min-height:40px;height:40px;font-size:12.5px;font-weight:600;border-radius:999px;padding:0 14px;white-space:nowrap}
 #app[data-options-docked=true] .options-panel .daylight-heading{grid-column:1;grid-row:2;display:flex;gap:6px;align-items:baseline;font-size:11px;padding-left:12px}
 #app[data-options-docked=true] .options-panel #daylight-time{font-size:13px}
@@ -778,9 +783,9 @@ h1 strong{font-weight:700}
 #app[data-options-docked=true] .options-panel .daylight-footer{grid-column:3;grid-row:2;display:flex}
 #app[data-options-docked=true] .options-panel .daylight-footer button{min-height:40px;height:40px;font-size:12.5px;border-radius:999px;padding:0 16px;white-space:nowrap}
 /* Yakın çevre / bölge: villa anahtarları yok - tek satır, yalnız ışık. */
-#app[data-options-docked=true]:not([data-scale=floor]) .options-panel .daylight-heading,
-#app[data-options-docked=true]:not([data-scale=floor]) .options-panel #daylight-hour,
-#app[data-options-docked=true]:not([data-scale=floor]) .options-panel .daylight-footer{grid-row:1}
+#app[data-options-docked=true]:is([data-scale=neighborhood],[data-scale=region]) .options-panel .daylight-heading,
+#app[data-options-docked=true]:is([data-scale=neighborhood],[data-scale=region]) .options-panel #daylight-hour,
+#app[data-options-docked=true]:is([data-scale=neighborhood],[data-scale=region]) .options-panel .daylight-footer{grid-row:1}
 #app[data-options-docked=true][data-sheet=info-panel] .options-panel,
 #app[data-options-docked=true][data-sheet=floor-panel] .options-panel,
 #app[data-options-docked=true][data-tour=true] .options-panel,
@@ -823,7 +828,10 @@ body.pegman-dragging,body.pegman-dragging *{cursor:grabbing !important}
 
 /* Mobilya / oda adları / ölçüler / fotoğraflar yalnız villa (kat) görünümünde
    bir şey yapar - yakın çevrede ve bölgede gösterilmez (masaüstü ve telefon). */
-#app:not([data-scale=floor]) .options-panel .villa-only{display:none}
+/* !important: kapsülün kendi satır kuralı (#app[data-options-docked] ...
+   .scene-options.villa-only{display:flex}) daha özgül olduğu için bu kural
+   masaüstünde eziliyordu - yakın çevrede anahtarlar görünmeye devam etti. */
+#app:is([data-scale=neighborhood],[data-scale=region]) .options-panel .villa-only{display:none !important}
 
 /* İçeride gez: lens 14 mm sabit - seçici gösterilmez. */
 .walk-lens{display:none !important}

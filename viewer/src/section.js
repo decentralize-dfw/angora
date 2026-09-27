@@ -48,7 +48,37 @@ export function smoothStep(t) {
 // actually takes - masonry keeps its 0.62 so its rule stays a highlight rather
 // than a black wire; the earth's line is the ink itself.
 export const SECTION_POCHE = {pitch:0.14, duty:0.065, ground:[0.020,0.020,0.023], ink:[0.32,0.31,0.29], strength:0.62};
-export const SOIL_POCHE = {pitch:0.55, duty:0.075, ground:[0.580,0.568,0.527], ink:[0.015,0.015,0.016], strength:1.0};
+//
+// 28.09 (ürün sahibi: "bu hatchi daha elegant bir şey yapalım"): toprak artık
+// kâğıt tonunda açık, sıcak bir gri üstünde ince, orta gri kıl çizgilerle
+// taranır - 0,45 m aralık, 2,7 cm çizgi, %70 mürekkep. Plan yakınlığında
+// çizgiler ince bir tarama olarak okunur, uzakta zemin tonuna kaybolur;
+// siyah "barkod" yok.
+export const SOIL_POCHE = {pitch:0.45, duty:0.030, ground:[0.800,0.782,0.742], ink:[0.200,0.195,0.182], strength:0.70};
+// A cut face is a flat horizontal sheet, but the section data carries no
+// normals and the recovered CAD skin winds its triangles both ways. Without a
+// normal the AO pass (MeshNormalMaterial) read the sheet as a zero vector and
+// declared it fully occluded, so GTAO multiplied the earth hatch down to a
+// fifth of its tone - the "hatch in shadow" the owner saw. Every triangle is
+// turned to face up and the sheet gets an explicit up normal.
+export function flatCapGeometry(positions, indices) {
+  const index = Array.from(indices);
+  for (let t = 0; t < index.length; t += 3) {
+    const a = index[t] * 3, b = index[t + 1] * 3, c = index[t + 2] * 3;
+    // y of (b - a) x (c - a) on the XZ plane
+    const ny = (positions[b + 2] - positions[a + 2]) * (positions[c] - positions[a])
+      - (positions[b] - positions[a]) * (positions[c + 2] - positions[a + 2]);
+    if (ny < 0) { const swap = index[t + 1]; index[t + 1] = index[t + 2]; index[t + 2] = swap; }
+  }
+  const normals = new Float32Array(positions.length);
+  for (let k = 1; k < normals.length; k += 3) normals[k] = 1;
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
+  geometry.setIndex(index); geometry.computeBoundingSphere();
+  return geometry;
+}
+
 export function createHatchMaterial({pitch, duty, ground, ink, strength=0.62}) {
   return new THREE.ShaderMaterial({side:THREE.DoubleSide,
     vertexShader: `varying vec3 worldPosition;
@@ -84,7 +114,7 @@ export function createNativeSoilSection(data){
     }
     // Earth is hatched only where the horizontal cutting plane intersects it.
     // Extruding its outline downward creates false facades over the real house.
-    const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(positions,3));g.setIndex(indices);g.computeBoundingSphere();return g;
+    return flatCapGeometry(positions,indices);
   });
   const mesh=new THREE.Mesh(geometries[0],createHatchMaterial(SOIL_POCHE));mesh.name='Native basement earth section';mesh.visible=false;mesh.renderOrder=2;
   mesh.userData.update=(height,enabled)=>{
@@ -132,8 +162,7 @@ export function createWallCaps(atlas,transitionAtlas=null) {
         for (let k = 0; k < p.length / 2; k++) {
           positions[k * 3] = p[k * 2]; positions[k * 3 + 2] = p[k * 2 + 1];
         }
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        geometry.setIndex(i); geometry.computeVertexNormals(); geometry.computeBoundingSphere();
+        result.push(flatCapGeometry(positions, i)); continue;
       }
       result.push(geometry);
     }
@@ -153,7 +182,7 @@ export function createWallCaps(atlas,transitionAtlas=null) {
         else {
         const data=transitionAtlas.slices[index],positions=new Float32Array(data.p.length/2*3);
         for(let k=0;k<data.p.length/2;k++){positions[k*3]=data.p[k*2];positions[k*3+2]=data.p[k*2+1];}
-        movingGeometry=new THREE.BufferGeometry();movingGeometry.setAttribute('position',new THREE.BufferAttribute(positions,3));movingGeometry.setIndex(data.i);movingGeometry.computeBoundingSphere();
+        movingGeometry=flatCapGeometry(positions,data.i);
         movingCache.set(index,movingGeometry);
         }
       }

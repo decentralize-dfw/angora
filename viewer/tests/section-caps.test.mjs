@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import * as THREE from 'three';
-import {createSoilCap,createHatchMaterial,createWallCaps,SECTION_POCHE,SOIL_POCHE,SOIL_CUT_HEIGHT,floorDatums} from '../src/section.js';
+import {createSoilCap,createHatchMaterial,createWallCaps,flatCapGeometry,SECTION_POCHE,SOIL_POCHE,SOIL_CUT_HEIGHT,floorDatums} from '../src/section.js';
 import {splitContextSoil,PLOT_SOIL_NODE,authoredNodeName} from '../src/context-massing.js';
 
 // All reads target the delivered set; viewer/public/models/full/ is a stale
@@ -173,8 +173,8 @@ test('What the plane cuts is drawn as black poché, ruled, with earth and masonr
   assert.match(wall.fragmentShader,/const float INK = 0\.13000;/);
   assert.match(wall.fragmentShader,/#include <tonemapping_fragment>/);
   const soil=createHatchMaterial(SOIL_POCHE);
-  assert.match(soil.fragmentShader,/\/ 0\.5500;/);
-  assert.match(soil.fragmentShader,/const float INK = 0\.15000;/);
+  assert.match(soil.fragmentShader,/\/ 0\.4500;/);
+  assert.match(soil.fragmentShader,/const float INK = 0\.06000;/);
   // R40 put the earth's ground near black so that pulling back left solid
   // poché rather than a flat tan panel. R42 inverts the earth on the client's
   // instruction: the cut ground is pale and carries a thin dark line, so it is
@@ -183,15 +183,19 @@ test('What the plane cuts is drawn as black poché, ruled, with earth and masonr
   assert.ok(Math.max(...SECTION_POCHE.ground)<0.05,JSON.stringify(SECTION_POCHE.ground));
   assert.ok(Math.min(...SECTION_POCHE.ink)>Math.max(...SECTION_POCHE.ground)*4);
   assert.ok(Math.min(...SOIL_POCHE.ground)>0.4,'the cut earth reads as a pale field');
-  assert.ok(Math.max(...SOIL_POCHE.ink)<0.05,'and its rule is the ink itself');
-  assert.equal(SOIL_POCHE.strength,1,'the earth line takes all of the ink');
+  // 28.09: "daha elegant" - the earth's rule is a mid-grey hairline, not a
+  // black line, and it takes most but not all of that ink.
+  assert.ok(Math.max(...SOIL_POCHE.ink)<0.3&&Math.min(...SOIL_POCHE.ink)>0.1,'a grey hairline, not black');
+  assert.ok(SOIL_POCHE.strength>0.5&&SOIL_POCHE.strength<1,'the hairline stays quiet');
+  assert.ok(Math.min(...SOIL_POCHE.ground)>0.7,'on a paper-light field');
   assert.ok(SECTION_POCHE.strength<0.7,'the masonry rule stays a highlight');
   assert.notEqual(SECTION_POCHE.pitch,SOIL_POCHE.pitch,'earth and masonry are told apart by the ruling');
   // thin line, wide gap: "siyah çizgileri incelt arasındaki mesafeyi arttır".
   // The shader was drawing about 40% of the period at the plan zoom whatever
   // the duty said; now that the duty is what is drawn, it has to be high
   // enough to read as a ruling there and low enough to stay a line close up.
-  assert.ok(SOIL_POCHE.duty*2>0.12&&SOIL_POCHE.duty*2<0.20,
+  // 28.09: a finer, sparser hairline - 5-10% of the period.
+  assert.ok(SOIL_POCHE.duty*2>0.05&&SOIL_POCHE.duty*2<0.10,
     `${(SOIL_POCHE.duty*2*100).toFixed(0)}% of the period is inked`);
   assert.ok(SOIL_POCHE.pitch>SECTION_POCHE.pitch*3,'on a far coarser pitch than masonry');
   assert.ok(!('fade' in SOIL_POCHE)&&!('fade' in SECTION_POCHE),'the hand-tuned far field is retired');
@@ -273,4 +277,19 @@ test('Everything the plane cuts is poché, and the furniture poché goes with th
   caps.setFurnitureVisible(false); caps.update(4.6996,true);
   assert.equal(furniture.visible,false);
   for(const mesh of caps.group.children)assert.ok(Math.abs(mesh.position.y-4.6996)<1e-9);
+});
+
+// The section data carries no normals and mixed winding. The AO pass reads
+// normals, so a cut face without them came out fully occluded (the dark
+// "shadowed" earth hatch). Every cap faces up and says so.
+test('Cut faces are wound upward and carry an explicit up normal for the AO pass',()=>{
+  const positions=new Float32Array([0,0,0, 1,0,0, 0,0,1, 2,0,0, 3,0,0, 2,0,1]);
+  const g=flatCapGeometry(positions,[0,1,2, 3,5,4]);
+  const n=g.attributes.normal;
+  for(let i=0;i<n.count;i++)assert.deepEqual([n.getX(i),n.getY(i),n.getZ(i)],[0,1,0]);
+  const p=g.attributes.position,idx=g.index.array;
+  for(let t=0;t<idx.length;t+=3){
+    const a=new THREE.Vector3().fromBufferAttribute(p,idx[t]),b=new THREE.Vector3().fromBufferAttribute(p,idx[t+1]),c=new THREE.Vector3().fromBufferAttribute(p,idx[t+2]);
+    assert.ok(b.sub(a).cross(c.sub(a)).y>0,'triangle '+t/3+' faces up');
+  }
 });
