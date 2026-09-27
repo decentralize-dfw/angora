@@ -246,3 +246,75 @@ testinde kart `×` ve "Evi keşfet" **ilk saniyede** tepki vermeli.
 - commit mesajında sayılar dursun
 
 Türkçe konuş.
+
+---
+
+# EK — İŞ 3 HÂLÂ AÇIK. KÖK SEBEP BULUNDU, HEDEF YANLIŞTI
+
+Ürün sahibi bildirdi: **"geldi görünüyor fakat hâlâ en başta kilitleniyor
+açılırken uzun bir süre."** `bootYieldV1` sorunu çözmedi ve sebebi ölçüldü:
+**dilimlenen iş, kilidin sebebi değil.**
+
+## Ölçüm 1 — boot boyunca CPU profili (mobil taklit, 79,2 sn)
+
+```
+ 64222ms  (program) < (root)                                  ← %81
+  5591ms  M < getUniforms < ab < renderBufferDirect < Gf
+  3790ms  M < getUniforms < ab < renderBufferDirect < Gf
+  2029ms  (idle) < (root)
+   794ms  cy < prepareMesh < prepare < (anon) < traverse
+```
+
+`(program)` = JS dışı yerel kod, yani **GL sürücüsü**. Boştaki yükseltmeler
+(grade revive / atlas dizileri / hücre aileleri / temas AO) profilde
+**hiç görünmüyor** - dilimlenmeleri boşa gitti. `getUniforms <
+renderBufferDirect` zinciri ise programın ilk kullanımda kurulması demek:
+derleme + bağlama + uniform yansıması.
+
+## Ölçüm 2 — A/B, tek fark model seti
+
+| | ESKİ model (`villaModelV3Mobile:0`) | YENİ model |
+|---|---|---|
+| açılış | 26,0 sn | **69,6 sn** |
+| **shader programı** | **52** | **108** |
+| draw (kare toplamı) | 59 | 160 |
+| doku | 115 MiB | 33,8 MiB |
+
+**Kök sebep: program sayısı ikiye katlanıyor (52 → 108).** Yeni üç model
+batched DEĞİL - 58 ayrı malzeme taşıyorlar ve her malzeme gölge/derinlik
+geçişleriyle birden çok program varyantı üretiyor. Safari'de
+`KHR_parallel_shader_compile` YOK, yani 108 programın derlenmesi ilk
+çizimde, ana iş parçacığında, tek tek oluyor. Kilit tam olarak bu.
+
+KTX2 işi bunu çözemezdi: doku belleği düştü (115 → 33,8 MiB) ama program
+sayısı dokuyla ilgili değil.
+
+## İki yol — biri gerçek çözüm, biri palyatif
+
+**A) Modelleri atlasla (GERÇEK ÇÖZÜM).** Malzemeleri aileye göre birleştir;
+program sayısı eski teslimatın seviyesine iner. Eski teslimat 162 kaynak
+malzemeyi 30 atlas malzemesine sıkıştırdığı için 52 programda kalıyordu -
+atlasın varlık sebebi zaten bu. Ürün sahibinin malzeme GRAFİKLERİ korunmalı,
+yalnız paketleme değişir. Boru hattı `tools/batch-delivery/build.mjs`'te.
+Bu iş masaüstüne de yarar (orada da 58 malzeme var).
+
+**B) Derlemeyi açılış ekranına taşı (PALYATİF).** `renderer.compileAsync(scene,
+camera)` boot ekranı HÂLÂ GÖRÜNÜRKEN çağrılırsa maliyet kaybolmaz ama
+kullanıcının zaten beklediği ana taşınır - "açıldı ama basamıyorum" yerine
+"yükleniyor" olur. `main.js`'te kat girişi için benzeri zaten var
+(`compiledFloors`); boot yolunda yok. İlerleme çubuğuna bir adım eklemek
+şart, yoksa açılış sessizce uzar.
+
+Önerilen: **B'yi hemen yap** (ürün sahibi bugün rahatlasın), **A'yı
+arkasından** (kalıcı çözüm). A yapılınca B'nin maliyeti de küçülür.
+
+## Kabul
+
+- Program sayısı ve açılış süresi için önce/sonra tablo (yukarıdaki A/B
+  betiğinin aynısı: `?features=villaModelV3Mobile:0` ile kıyas)
+- Kart `×` ve "Evi keşfet" ilk saniyede tepki vermeli
+- `npm test` yeşil
+
+**UYARI:** buradaki saniyeler SwiftShader + 6x kısma altındadır, gerçek
+telefon süresi DEĞİLDİR. Kıyas için geçerli, mutlak değer için değil.
+Program SAYISI ise gerçektir - donanımdan bağımsız.
