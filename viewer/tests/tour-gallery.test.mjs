@@ -53,6 +53,16 @@ test('kareler %80 - yanlarda ve üstte/altta %10 boşluk, köşeler yuvarlak', (
   assert.match(figure[1], /border-radius:\d+px/, 'köşeler yuvarlak olmalı');
 });
 
+test('kareler yandan değil, marka çubuğunun altından AŞAĞI düşer', () => {
+  // Masaüstü animasyonu soldan kaydırıyor (kartlar sol sütunda). Üstteki
+  // şeritte bu yanlamasına süzülme okunuyor - ölçümde kareler duruş
+  // yerlerinden 16 px solda yakalandı. Telefonda dikey giriş.
+  assert.match(css, /#app\[data-tour=true\] \.tour-gallery figure\{animation-name:tour-photo-drop\}/);
+  assert.match(css, /@keyframes tour-photo-drop\{from\{opacity:0;transform:translateY\(-\d+px\)\}/);
+  assert.match(read('viewer/src/style.css'), /@keyframes tour-photo-in\{from\{opacity:0;transform:translateX/,
+    'masaüstü yatay girişini korumalı');
+});
+
 test('marka çubuğu YERİNDE kalır, şerit onun altına iner', () => {
   // "fakat MERGVS Angora 21 vs alt tarafa atılmasın, o üstte kalsın"
   assert.ok(!/#app\[data-tour=true\][^{]*\.topbar\s*\{/.test(css),

@@ -218,6 +218,11 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
     flex:0 0 auto;align-items:center;gap:5px;padding:3px 7px 4px;
     font-size:9px;white-space:nowrap;overflow:hidden}
   #app[data-tour=true] .tour-gallery figcaption span{overflow:hidden;text-overflow:ellipsis}
+  /* Giriş yönü: masaüstünde kartlar SOL sütunda olduğu için soldan kayarak
+     geliyorlar (translateX). Üstteki şeritte bu yanlış okunuyor - kareler
+     yanlamasına süzülüyor; ölçümde de duruş yerlerinden 16 px solda
+     yakalandılar. Telefonda marka çubuğunun altından AŞAĞI düşerler. */
+  #app[data-tour=true] .tour-gallery figure{animation-name:tour-photo-drop}
   /* Numara TEK kare olsa da görünür: "hangisi hangisi" sorusunu sahnedeki
      işaretle eşleştiren tek şey o. Masaüstünde tek kareyken gizli kalıyor. */
   #app[data-tour=true] .tour-gallery[data-single=true] figcaption b{display:grid}
@@ -226,3 +231,4 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
      altyazısı zaten var. */
   #app[data-tour=true] .view-description{opacity:0;pointer-events:none;transition:opacity 320ms ease}
 }
+@keyframes tour-photo-drop{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
