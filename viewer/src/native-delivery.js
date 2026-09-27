@@ -3,6 +3,7 @@ import {prepareBakedLighting} from './baked-lighting.js';
 import {restoreBatchSurface} from './batch-surface-response.js';
 import {prepareBatchedMaterial,stripFixtureLoops} from './batched-material.js';
 import {neutraliseTransmission} from './material-response.js';
+import {repairUntexturedWood} from './villa-model-v3.js';
 import {applyMaterialResponse} from './material-response-v2.js';
 import {chunkModelInPlace} from './context-plants-chunks.js';
 import {applyPlantVariation} from './plant-variation.js';
@@ -101,6 +102,10 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     if(features.villaGlassAlpha!==false){
       const converted=neutraliseTransmission(model);
       if(converted)console.info(`Transmission -> alpha glazing on ${converted} material(s) (${name})`);
+    }
+    if(!manifest.batched||name==='architecture'){
+      const repaired=repairUntexturedWood(model);
+      if(repaired)console.info(`Untextured wood given the model's own wood maps: ${repaired} (${name})`);
     }
     const clipped=!context.includes(name)&&name!=='villa-context-white'&&name!=='plot-grass';
     model.traverse(o=>{if(o.isMesh){if(!manifest.batched&&name.startsWith('interior')&&!/floor|tile|door|glass|stair|window|lift|wall/i.test(o.name))o.userData.category='furniture';prepare(o,{clipped,context:!clipped,name});}});

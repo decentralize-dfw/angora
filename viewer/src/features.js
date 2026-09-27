@@ -57,9 +57,9 @@ export const DEFAULT_FEATURES = Object.freeze({
   // düşük kontrast, açılış saati 13:30. ?features=warmGradeV1:1 ile A/B.
   warmGradeV1: true,           // AÇIK - ürün sahibi pusu defalarca bildirdi ve aydınlık sürümü tercih etti: sis yakın çevreden kalkar, gök 0.85, kararma terimleri düşer, grade gölgeleri kaldırıp orta tonları ısıtır, açılış 13:30. Eski hal: ?features=warmGradeV1:0
   gradeAnyGridV1: true,        // MALZEME İŞ 2 - grid şartı kalktı: hücre-bazlı gerçek dokular (çim/asfalt dünya-uzayı, komşu çatıları villa kiremidiyle aynı ölçek, cephe kum albedosu). Kapatmak: ?features=gradeAnyGridV1:0
-  screenSpaceReflection: true, // AÇIK (ölçüldü: prog -4, draw +1, tri +1, konsol 0, cinemaStill kapalıyken); ucuzlatıldı: 12 adım / 10 m. Havuz HARİÇ; planarPoolReflection 0.5
+  screenSpaceReflection: false, // KAPALI (27.09): ürün sahibi kıyasladı - kapalıyken dış cephe daha az karanlık; SSR mat sıvaya da karanlık yansıma basıyordu. Açmak: ?features=screenSpaceReflection:1
   softShadowsV2: true,         // AÇIK (ölçüldü: prog -1, draw/tri/tex +0, konsol 0). PCSS 17+25=42 gölge örneği/piksel (statik sayım; eski PCF 9)
-  windowPortalLight: true,     // AÇIK (ölçüldü C10: prog +34 - LTC derlemesi; draw +0, tri +0, tex +0, konsol 0). İç mekânın en büyük görsel kazancı
+  windowPortalLight: false, // KAPALI (27.09): 17 pencere alan ışığı villa katına girişte yeni modelin HER malzemesine 17 LTC döngüsü ekliyordu -> kat açılırken dev shader derlemesi (villaya tıklayınca kilit). Açmak: ?features=windowPortalLight:1
   proceduralDetailHigh: true,  // AÇIK (ölçüldü: prog -1, geri kalan +0, konsol 0; ALU statik 210 skaler op - masaüstünde tavan yok, ölç-ve-yaz)
   gtaoFullRes: false,          // KAPALI-GEREKÇELİ: 4x GTAO pikseli; daha önce açılıp geri alındı (görünmeyen fark, MALZEME 3.2) ve bu turda da draw/prog etkisi sıfırken piksel maliyeti FPS'siz savunulamaz
   materialResponseV2: true,    // AÇIK (ölçüldü: prog -5, draw/tri/tex +0, konsol 0) - clearcoat/sheen aile bazlı, masaüstü

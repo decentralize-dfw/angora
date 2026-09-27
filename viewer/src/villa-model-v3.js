@@ -60,3 +60,25 @@ export function applyVillaModelV3(manifest, {mobile = false} = {}) {
   }
   return swapped;
 }
+
+// "Procedural Wood" (asansörün ceviz kapısı) Blender'da prosedürel dokuyla
+// yazılmış; glTF prosedürel düğüm taşıyamadığı için dosyada dokusuz ve
+// renksiz - yani BEYAZ - geliyor. Aynı modelin kendi koyu ahşap malzemesinin
+// dokuları ödünç verilir; rengi tahmin edilmez, modelde zaten olan ahşap
+// kullanılır. Dokusu olan bir malzemeye dokunulmaz.
+export function repairUntexturedWood(model) {
+  const materials = new Set();
+  model.traverse(o => { if (o.isMesh) for (const m of [].concat(o.material)) if (m) materials.add(m); });
+  const donor = [...materials].find(m => /^WOODY-DARK/i.test(m.name) && m.map)
+    ?? [...materials].find(m => /wood/i.test(m.name) && m.map);
+  if (!donor) return 0;
+  let repaired = 0;
+  for (const m of materials) {
+    if (!/^Procedural Wood/i.test(m.name) || m.map) continue;
+    m.map = donor.map; m.normalMap = donor.normalMap ?? null; m.roughnessMap = donor.roughnessMap ?? null;
+    if (donor.normalMap) m.normalScale.copy(donor.normalScale);
+    m.color.set(0xffffff); m.roughness = donor.roughness; m.metalness = 0;
+    m.needsUpdate = true; repaired++;
+  }
+  return repaired;
+}

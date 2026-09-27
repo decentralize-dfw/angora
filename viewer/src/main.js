@@ -750,10 +750,10 @@ async function selectView(id, initial = false) {
         // anahtarında - önceden derleme ondan ÖNCE yapılıyordu, yani ilk kat
         // karesi her şeyi bir daha derliyordu. Sonra programlar gösterge
         // ekrandayken bağlanır (linkPrograms).
-        if(FEATURES.programPrelink){
-          quality?.applyView(id,{plan:planMode,walking:walk?.active});
-          lighting.frame(id,contextBox); // gölge ayarı da görünüme bağlı - program anahtarında
-        }
+        // Derleme katın GERÇEK ışık/gölge durumunda yapılır; aksi hâlde ilk
+        // kat karesi her programı bir daha, senkron derliyordu.
+        quality?.applyView(id,{plan:planMode,walking:walk?.active});
+        lighting.frame(id,contextBox); // gölge ayarı da görünüme bağlı - program anahtarında
         if(renderer.compileAsync)await renderer.compileAsync(scene,camera);
         if(FEATURES.programPrelink)linkPrograms();
         await waitForGPU(renderer);

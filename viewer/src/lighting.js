@@ -279,8 +279,8 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     // The indoor camera exposes for the room, and the fixture bounce fills
     // downward-facing ceilings. Reuse the existing hemisphere: no extra light
     // loop, shadow map or render pass. This is a presentation fill, not GI.
-    hemisphere.intensity=.06+(daylightV2?.12:.34)*daylight+(walkInterior&&!electricLight?(lightsEnabled?.45:.18*daylight):0);
-    hemisphere.groundColor.set(walkInterior?0xe9e1d5:daylightV2?0x4a4a3c:0xb8b2a8);
+    hemisphere.intensity=.06+(daylightV2?.22:.34)*daylight+(walkInterior&&!electricLight?(lightsEnabled?.45:.18*daylight):0);
+    hemisphere.groundColor.set(walkInterior?0xe9e1d5:daylightV2?0x77705f:0xb8b2a8);
     renderer.toneMappingExposure=baseExposure()*(walkInterior?1.18:1);
     // With the composer live, r180 skips the canvas tone map (the grade pass
     // owns curve+exposure), so the walk-interior stop lives in ITS uniform.

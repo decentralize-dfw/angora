@@ -50,10 +50,10 @@ export function buildPostfxChain({renderer, scene, camera, clip, quality, postfx
     grade.material.uniforms.uLift.value.set(0, 0, 0);
     grade.material.uniforms.uGain.value.set(1, 1, 1);
     grade.material.uniforms.uWarm.value.set(1, 1, 1);
-    grade.material.uniforms.uContrast.value = 1;
     // ACES itself pushes mid-saturated hues (grass, tile) up; the lower end of
     // the references' own saturation range (0.94-1.06) takes that back.
-    grade.material.uniforms.uSat.value = 0.94;
+    grade.material.uniforms.uSat.value = 0.88;   // ürün sahibi: 0.94 hâlâ fazla doygun
+    grade.material.uniforms.uContrast.value = 0.96; // ve fazla kontrastlı
     grade.material.uniforms.uVig.value.y = 0.08;
   } else if (FEATURES.warmGradeV1) {
     // Ürün sahibi ilk turda "renkler çok depresif" dedi: kontrast 0.92 ile
