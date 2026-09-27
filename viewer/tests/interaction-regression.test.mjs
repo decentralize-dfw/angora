@@ -68,8 +68,12 @@ test('the language can be chosen while the model loads, and from the settings', 
   const css = readFileSync(new URL('../src/style.css', import.meta.url), 'utf8');
   const main = readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
 
+  // 27.09 (ürün sahibi): masaüstünde dil markanın YANINDA ("dili mergusun
+  // yanına al"); telefonda ayarlar panelinde kalır. Üst şeritteki kopya yalnız
+  // ayarların sağ altta yerleştiği masaüstünde görünür.
   const topbar = html.slice(html.indexOf('<header class="topbar">'), html.indexOf('</header>'));
-  assert.ok(!topbar.includes('lang-flag'), 'the switch is still floating in the chrome');
+  assert.match(topbar, /class="lang-switch topbar-lang"/, 'desktop language switch is not beside the brand');
+  assert.match(css, /\.topbar-lang\{display:none\}/, 'the topbar copy shows on phones too');
 
   const options = html.slice(html.indexOf('id="options-panel"'), html.indexOf('</section>', html.indexOf('id="options-panel"')));
   assert.match(options, /class="lang-flag" data-lang="tr"/, 'settings has no Turkish button');

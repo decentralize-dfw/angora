@@ -128,7 +128,26 @@ export const WALK_RAMPS = [
 export const WALK_PASSAGES = [
   {name: 'antre-garaj', floor: 1, x0: 2.6, x1: 4.6, z0: -0.62, z1: 0.30, refX: 2.0, refZ: -0.16},
 ];
-export function patchWalkSurface(surface, {ramps = WALK_RAMPS, passages = WALK_PASSAGES} = {}) {
+// 3) Havuz: su yüzeyi (GARDEN-opt-v2 water: x -1,91..8,50, z -18,39..-13,53)
+//    yürünmez - bütün katmanlarda engel.
+// 4) Giriş kapısı önü: sahanlık (3,1 m) ile sokağa çıkan merdiven (3,4 m)
+//    arasında veride 2,8 m'lik bir yarık şerit var; iki yönde de adımı aşıyor,
+//    kapıdan çıkınca merdivene geçilemiyordu. Şerit sahanlık kotuna dolar.
+// 5) Dış mekândaki tek basamaklar veride ~0,3 m'lik kot farkı; adım sınırı
+//    0,24 -> 0,34 m (mobilya ayrı işaretli, üstüne çıkılmaz).
+export const WALK_BLOCKS = [
+  {name: 'pool', x0: -1.95, x1: 8.55, z0: -18.45, z1: -13.45},
+];
+export const WALK_FILLS = [
+  {name: 'entrance-gap', x0: 2.85, x1: 3.85, z0: 4.3, z1: 6.5, near: 2.8, height: 3.2},
+  // Doğu çim rampasının üstü (2,80) ile garaj önü sahanlığı (3,10) arasında
+  // veride 0,5 m'lik boş sütun (korkuluk). Geçiş: ara kot 2,95 m.
+  {name: 'east-yard-link', x0: 8.45, x1: 8.95, z0: 1.4, z1: 3.0, near: null, height: 2.95},
+  // Garaj önünde 2,8 m'lik ince oluk (kapı eşiği): iki yanı 3,1-3,2 m.
+  {name: 'garage-threshold', x0: 7.12, x1: 7.42, z0: 1.7, z1: 4.4, near: 2.8, height: 3.15},
+];
+export const WALK_MAX_STEP_M = .34;
+export function patchWalkSurface(surface, {ramps = WALK_RAMPS, passages = WALK_PASSAGES, blocks = WALK_BLOCKS, fills = WALK_FILLS} = {}) {
   const {x: gx, z: gz, step, width, height} = surface.grid;
   const cells = (x0, x1, z0, z1, visit) => {
     for (let row = Math.max(0, Math.floor((z0 - gz) / step)); row <= Math.min(height - 1, Math.floor((z1 - gz) / step)); row++)
@@ -147,5 +166,21 @@ export function patchWalkSurface(surface, {ramps = WALK_RAMPS, passages = WALK_P
     if (!layer || ref < 0 || layer.heights[ref] === -32768) continue;
     cells(p.x0, p.x1, p.z0, p.z1, i => {layer.heights[i] = layer.heights[ref]; layer.masks[i] &= ~1; openedCells++;});
   }
-  return {rampCells, openedCells};
+  let blockedCells = 0, filledCells = 0;
+  for (const b of blocks) cells(b.x0, b.x1, b.z0, b.z1, i => {for (const layer of surface.layers) layer.masks[i] |= 1; blockedCells++;});
+  for (const f of fills) cells(f.x0, f.x1, f.z0, f.z1, i => {
+    if (f.near === null) {
+      // boş hücre yaratılır (ya da o kotun yakınındaki hücre düzeltilir)
+      const layer = surface.layers.find(l => l.heights[i] !== -32768 && Math.abs(l.heights[i] / 1000 - f.height) < .5)
+        ?? surface.layers.find(l => l.heights[i] === -32768) ?? surface.layers[0];
+      layer.heights[i] = Math.round(f.height * 1000); layer.masks[i] = 0; filledCells++;
+      return;
+    }
+    for (const layer of surface.layers) {
+      if (layer.heights[i] === -32768 || Math.abs(layer.heights[i] / 1000 - f.near) > .25) continue;
+      layer.heights[i] = Math.round(f.height * 1000); layer.masks[i] &= ~1; filledCells++;
+    }
+  });
+  surface.data.maximum_step_m = Math.max(surface.data.maximum_step_m, WALK_MAX_STEP_M);
+  return {rampCells, openedCells, blockedCells, filledCells};
 }

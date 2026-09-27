@@ -7,6 +7,7 @@ import {solarPosition} from './daylight.js';
 import {prepareMaterialResponse,setInteriorMode,setMaterialScale} from './material-response.js';
 import {smoothSurfaceNormals} from './context-surfaces.js';
 import {applyWaterSurface,waterBoundsFrom} from './water-surface.js';
+import {applyPoolDolphin} from './pool-dolphin.js';
 import {applyGlassCellPolish} from './glass-cells.js';
 import {applyRenderProfile,baseExposure,referenceProfile} from './render-profile.js';
 import {InteriorLightController} from './interior-lighting.js';
@@ -81,7 +82,7 @@ export function isSeeThrough(material) {
 // the model root. Every capability arrives through the quality profile
 // (quality-profile.js), whose legacy-compat mapping reproduces the old
 // baked/compact behavior exactly while the FAZ 1 feature flags stay off.
-export function createLighting(renderer, scene, camera, clip,{quality}={}) {
+export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl=null}={}) {
   const q=quality.value;
   renderer.shadowMap.enabled=q.dynamicSunShadow;renderer.shadowMap.autoUpdate=false;
   applyRenderProfile(renderer);
@@ -503,6 +504,8 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
             console.info(`Pool water response applied on ${++waterApplied} material(s): ${material.name}`);
           }
         }
+        // Havuz tabanındaki yunus mozaiği (ürün sahibinin bahçe modeli).
+        if(name==='garden'&&/^pool_tile/i.test(material.name)&&dolphinUrl)applyPoolDolphin(material,dolphinUrl);
         if(['architecture','interior'].includes(name)&&material.userData.angoraBatch?.materials.some(n=>/wood.floor|WOOD-FL|terra_floor|stone_tile|bath_tile|granite floor/i.test(n)))floorLight?.apply(material);
         prepareMaterialResponse(material,{context});preparedMaterials.add(material);
         // Three uses scene.environmentIntensity when envMap is null. Bind the

@@ -32,3 +32,20 @@ test('antre kapısından garaja geçilir; yamasız veride geçilmiyordu', () => 
   const p = st('f1-Z02');
   assert.ok(walkTo(patched, p, 2.2, -.16) && walkTo(patched, p, 4.9, -.16) && walkTo(patched, p, 5.78, -2.06));
 });
+
+// 27.09 (2. tur): kapıdan çıkınca sokak merdiveni, doğu rampasından garaj
+// önü, doğu merdiveninden bahçe; havuzun üstünde yürünmez.
+const route = (start, points) => {
+  const nav = data(), surface = new WalkSurface(nav); patchWalkSurface(surface);
+  const p = new THREE.Vector3(start[0], start[1] + nav.eye_height_m, start[2]);
+  return points.every(([x, z]) => walkTo(surface, p, x, z));
+};
+test('giriş kapısı -> sokak merdiveni; doğu rampası -> garaj önü; doğu merdiveni -> bahçe', () => {
+  const nav = data(), gate = nav.stations.find(s => s.room_id === 'f1-Z01').position;
+  assert.ok(route([gate[0], gate[1] - nav.eye_height_m, gate[2]], [[2.2, 4.4], [2.4, 5.0], [4.6, 5.2], [5.0, 8.5]]));
+  assert.ok(route([9.6, -.1, -6.5], [[9.6, 1.0], [9.4, 2.2], [8.0, 2.4], [6.0, 2.6]]));
+  assert.ok(route([8.0, 3.1, 2.2], [[8.1, -4.5], [8.3, -4.9], [8.3, -7.2], [8.6, -9.0]]));
+});
+test('havuzun üstünde yürünmez', () => {
+  assert.equal(route([3.3, 0, -12.3], [[3.3, -15.9]]), false);
+});

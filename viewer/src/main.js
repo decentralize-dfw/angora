@@ -692,7 +692,7 @@ function setup() {
   flight=new CameraFlight(camera,controls,resize,invalidate);
   controls.addEventListener('change', invalidate);
   controls.addEventListener('start', ()=>{zoomEase=null;}); // el hareketi yumuşak yakınlaştırmayı keser
-  lighting = createLighting(renderer, scene, camera, clip,{quality});
+  lighting = createLighting(renderer, scene, camera, clip,{quality,dolphinUrl:new URL(pages?'assets/textures/pool-dolphin.webp':'textures/pool-dolphin.webp',publicRoot).href});
   // Task 4.2: the desktop postfx chain arrives through a dynamic import;
   // a capture must not screenshot the canvas-path frames it bridges with.
   window.__angoraPostfxReady=lighting.postfxReady?.then?.(chain=>{if(chain)invalidate();return Boolean(chain);});

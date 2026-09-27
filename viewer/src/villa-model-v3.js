@@ -91,12 +91,12 @@ export function repairUntexturedWood(model) {
 // ürün sahibinin yeni modeli. Yeni zeminde arsa ve kenar ağaçları yok; eski
 // mahalle ağaçları parçası (context-plants) teslimattan çıkar.
 export const CONTEXT_V2 = Object.freeze({
-  'context-buildings': {file: 'KOMSULAR-opt-v2.glb', bytes: 8222300},
-  'context-ground':    {file: 'CEVRE-YOL-opt-v2.glb', bytes: 717972},
+  'context-buildings': {file: 'KOMSULAR-opt-v2.glb', bytes: 9468024},
+  'context-ground':    {file: 'CEVRE-YOL-opt-v2.glb', bytes: 932092},
 });
 export const CONTEXT_V2_MOBILE = Object.freeze({
-  'context-buildings': {file: 'mobile/KOMSULAR-opt-v2.ktx2.glb', bytes: 8164988},
-  'context-ground':    {file: 'mobile/CEVRE-YOL-opt-v2.ktx2.glb', bytes: 639076},
+  'context-buildings': {file: 'mobile/KOMSULAR-opt-v2.ktx2.glb', bytes: 9445700},
+  'context-ground':    {file: 'mobile/CEVRE-YOL-opt-v2.ktx2.glb', bytes: 864772},
 });
 const CONTEXT_V2_DROPPED = ['context-plants'];
 export function applyContextV2(manifest, {mobile = false} = {}) {
