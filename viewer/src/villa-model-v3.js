@@ -27,7 +27,9 @@
 const ROOT = '../../26092026/';
 
 export const VILLA_MODEL_V3 = Object.freeze({
-  architecture: {file: 'BUILDING-opt-v3.glb', bytes: 5806572},
+  // 27.09: v4 = v3 + ürün sahibinin asansör kapısı (Simple wood) ve Simple
+  // White Wall'a katılan merdiven altı (tools/batch-delivery/make-building-v4.mjs).
+  architecture: {file: 'BUILDING-opt-v4.glb', bytes: 5999548},
   garden:       {file: 'GARDEN-opt-v2.glb',   bytes: 7071908},
   interior:     {file: 'INTERIOR-opt-v2.glb', bytes: 4770284},
 });
@@ -37,7 +39,7 @@ export const VILLA_MODEL_V3 = Object.freeze({
 // kaynaklara dokunmaz). Ölçüm: üç modelin doku-VRAM'i 369 -> 3,5 MiB;
 // malzeme grafiği ve geometri sıkıştırması (draco/meshopt) aynı.
 export const VILLA_MODEL_V3_MOBILE = Object.freeze({
-  architecture: {file: 'mobile/BUILDING-opt-v3.ktx2.glb', bytes: 3696484},
+  architecture: {file: 'mobile/BUILDING-opt-v4.ktx2.glb', bytes: 3694708},
   garden:       {file: 'mobile/GARDEN-opt-v2.ktx2.glb',   bytes: 4947588},
   interior:     {file: 'mobile/INTERIOR-opt-v2.ktx2.glb', bytes: 4229468},
 });

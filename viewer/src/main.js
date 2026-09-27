@@ -2258,7 +2258,7 @@ function bindInterface() {
   if (FEATURES.cameraRigsV2) {
     // AYDINLIK İŞ 5: açılış karesi altın saat değil parlak öğleden sonra
     // olsun; altın saat slider'da duruyor.
-    if (shared.hour === undefined) $('#daylight-hour').value = FEATURES.warmGradeV1 ? 13.5 : 16.5;
+    if (shared.hour === undefined) $('#daylight-hour').value = FEATURES.daylightV2 ? 16 : FEATURES.warmGradeV1 ? 13.5 : 16.5; // 16:00 -> güneş 47°: gölgeler cepheyi ve odaları modeller (13:30'da 72°, neredeyse gölgesiz)
     if (!shared.style) $('#lighting-style').value = 'sun';
   }
   for(const id of ['toggle-plan','reset-view','rotate-mode','pan-mode','zoom-in','zoom-out']){

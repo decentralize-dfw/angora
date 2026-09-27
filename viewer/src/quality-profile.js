@@ -114,7 +114,10 @@ const VIEW_OVERRIDES = {
   villa: {shadowCameraMode: 'villa-local'},
   floor: {shadowCameraMode: 'floor-local'},
   interior: {shadowCameraMode: 'floor-local'},
-  plan: {dynamicSunShadow: false, shadowCameraMode: 'disabled', gtao: false, bloom: false},
+  // Plan'da güneş gölgesi AÇIK kalır: kapatmak renderer.shadowMap.enabled'ı
+  // değiştiriyordu, o da sahnedeki HER programın yeniden derlenmesi demek -
+  // önceden yüklenmiş bir katta bile Plan'a basınca bekleme buydu.
+  plan: {shadowCameraMode: 'floor-local', gtao: false, bloom: false},
 };
 
 // The interface's storey ids collapse onto the plan's view vocabulary.

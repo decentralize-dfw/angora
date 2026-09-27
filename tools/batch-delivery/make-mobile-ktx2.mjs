@@ -58,7 +58,7 @@ try {
 
 const files = process.argv.length > 2
   ? process.argv.slice(2)
-  : ['BUILDING-opt-v3.glb', 'GARDEN-opt-v2.glb', 'INTERIOR-opt-v2.glb']
+  : ['BUILDING-opt-v4.glb', 'GARDEN-opt-v2.glb', 'INTERIOR-opt-v2.glb']
       .map(f => path.join(SOURCE_DIR, f));
 
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({

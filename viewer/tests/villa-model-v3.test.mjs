@@ -26,7 +26,7 @@ test('üç villa parçası değişir, ÇEVRE parçalarına dokunulmaz', () => {
   assert.deepEqual(swapped.sort(), ['architecture', 'garden', 'interior']);
 
   const byName = Object.fromEntries(m.parts.map(p => [p.name, p]));
-  assert.equal(byName.architecture.file, '../../26092026/BUILDING-opt-v3.glb');
+  assert.equal(byName.architecture.file, '../../26092026/BUILDING-opt-v4.glb');
   assert.equal(byName.garden.file, '../../26092026/GARDEN-opt-v2.glb');
   assert.equal(byName.interior.file, '../../26092026/INTERIOR-opt-v2.glb');
 
@@ -51,7 +51,7 @@ test('bytes gerçek dosya boyutuna güncellenir (ilerleme çubuğu ağırlığı
   const m = manifest();
   applyVillaModelV3(m);
   const byName = Object.fromEntries(m.parts.map(p => [p.name, p]));
-  assert.equal(byName.architecture.bytes, 5806572);
+  assert.equal(byName.architecture.bytes, 5999548);
   assert.equal(byName.garden.bytes, 7071908);
   assert.equal(byName.interior.bytes, 4770284);
 });
@@ -72,10 +72,10 @@ test('mobil eşleme KTX2 kopyaları gösterir, çevre yine ellenmez', () => {
   const swapped = applyVillaModelV3(m, {mobile: true});
   assert.deepEqual(swapped.sort(), ['architecture', 'garden', 'interior']);
   const byName = Object.fromEntries(m.parts.map(p => [p.name, p]));
-  assert.equal(byName.architecture.file, '../../26092026/mobile/BUILDING-opt-v3.ktx2.glb');
+  assert.equal(byName.architecture.file, '../../26092026/mobile/BUILDING-opt-v4.ktx2.glb');
   assert.equal(byName.garden.file, '../../26092026/mobile/GARDEN-opt-v2.ktx2.glb');
   assert.equal(byName.interior.file, '../../26092026/mobile/INTERIOR-opt-v2.ktx2.glb');
-  assert.equal(byName.architecture.bytes, 3696484);
+  assert.equal(byName.architecture.bytes, 3694708);
   assert.equal(byName.garden.bytes, 4947588);
   assert.equal(byName.interior.bytes, 4229468);
   assert.equal(byName.architecture.gpu_sha256, undefined);

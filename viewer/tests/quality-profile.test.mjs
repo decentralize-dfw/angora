@@ -65,14 +65,17 @@ test('mobile-low never gains a sun shadow from any view', () => {
   }
 });
 
-test('Region and plan turn dynamic shadow and postfx extras off everywhere', () => {
+test('Region and plan turn postfx extras off; region drops the shadow, plan keeps the floor\'s', () => {
   for (const tier of TIERS) {
     for (const view of ['region', 'plan']) {
       const profile = resolveQuality(tier, view);
-      assert.equal(profile.dynamicSunShadow, false);
       assert.equal(profile.gtao, false);
       assert.equal(profile.bloom, false);
     }
+    assert.equal(resolveQuality(tier, 'region').dynamicSunShadow, false);
+    // Plan toggling the shadow map on/off recompiled every program in the
+    // scene (the wait on pressing Plan); it keeps exactly the floor's state.
+    assert.equal(resolveQuality(tier, 'plan').dynamicSunShadow, resolveQuality(tier, 'floor').dynamicSunShadow);
   }
 });
 
