@@ -9,7 +9,8 @@ ilgisi yok. Tek tek açman gereken bir şey yok.
 |---|---|---|
 | [`angora-kabuk.glb`](angora-kabuk.glb) | 74,7 MB | Bina kabuğu, bahçe, zemin, çim/asfalt — **43 malzeme** |
 | [`angora-icmekan.glb`](angora-icmekan.glb) | 39,2 MB | Bütün iç mekân, 4 kat — **119 malzeme** |
-| [`angora-komsular.glb`](angora-komsular.glb) | 71,9 MB | Komşu binalar, çatıları, duvarları — **9 malzeme** |
+| [`angora-komsular.glb`](angora-komsular.glb) | 86,6 MB | Komşu binalar, çatıları, duvarları — sitedeki **8 eklenen ev dahil** (27.09) — **9 malzeme** |
+| [`angora-cevre.glb`](angora-cevre.glb) | 77,4 MB | Çevre peyzajı: zemin, çim, asfalt, yollar, eklenen evlerin bahçe duvarı ve giriş yolları, mahalle ağaçları — **6 malzeme** |
 
 GitHub'da dosyaya tıkla → sağ üstteki **Download** düğmesi. Ya da doğrudan:
 
@@ -17,6 +18,7 @@ GitHub'da dosyaya tıkla → sağ üstteki **Download** düğmesi. Ya da doğrud
 https://github.com/decentralize-dfw/angora/raw/main/build/blender/angora-kabuk.glb
 https://github.com/decentralize-dfw/angora/raw/main/build/blender/angora-icmekan.glb
 https://github.com/decentralize-dfw/angora/raw/main/build/blender/angora-komsular.glb
+https://github.com/decentralize-dfw/angora/raw/main/build/blender/angora-cevre.glb
 ```
 
 ## 2. Blender 3.6'da aç

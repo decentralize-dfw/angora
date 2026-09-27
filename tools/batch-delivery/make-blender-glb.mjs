@@ -50,6 +50,9 @@ const GROUPS = {
   kabuk:    ['architecture', 'garden', 'plot-grass', 'context-ground'],
   icmekan:  ['interior-common', 'interior-f0', 'interior-f1', 'interior-f2', 'interior-f3'],
   komsular: ['context-buildings'],
+  // Çevre peyzajı: zemin (çim/asfalt/yollar + eklenen evlerin bahçe duvarı
+  // ve giriş yolları) ve mahalle ağaçları. Komşu binalar ayrı (komsular).
+  cevre:    ['context-ground', 'context-plants'],
 };
 
 const extensions = ALL_EXTENSIONS.filter(e => e.EXTENSION_NAME !== 'KHR_texture_basisu');
@@ -65,9 +68,37 @@ if (groupArg) {
 } else if (!full) parts = parts.filter(f => !BALLAST.has(f));
 console.log(`${parts.length} parça okunuyor (${groupArg ? 'grup: ' + groupArg : full ? 'TAM' : 'MALZEME'})...`);
 
+// SİTEDEKİ EKLENEN EVLER: web teslimatı (build.mjs) context-buildings'e
+// OSM'den yerleştirilen evleri, context-ground'a da onların bahçe duvarı ve
+// yol bağlantısını ekliyor. native-current bu eklemeleri TAŞIMIYOR - bu
+// yüzden eski komsular.glb'de o evler yoktu. Aynı adım, aynı kayıtlı
+// yerleşimle (batched/context-placement.json) burada da uygulanır.
+const {addContextBuildings, addContextGardens, groundSampler} = await import('./add-context.mjs');
+const placement = JSON.parse(fs.readFileSync('/home/user/angora/build/web/batched/context-placement.json', 'utf8'));
+const plan = JSON.parse(fs.readFileSync(path.join(path.dirname(new URL(import.meta.url).pathname), 'context-additions.json'), 'utf8'));
+for (const item of plan.additions) {const saved = placement.additions?.find(a => a.id === item.id); if (saved) Object.assign(item, saved);}
+let terrain = null, donor = null;
+async function withAdditions(part, next) {
+  if (part === 'context-buildings.gpu.gltf') {
+    terrain ??= groundSampler(await io.read(path.join(SRC, 'context-ground.gpu.gltf')));
+    donor ??= await io.read('/home/user/angora/build/web/full/context.glb');
+    const r = addContextBuildings(next, plan, donor, terrain);
+    // Bağışçının adıyla eşleşmeyen bir malzeme kalırsa beyaz söve malzemesine düşer.
+    const trim = next.getRoot().listMaterials().find(m => /white_trim|WHT/i.test(m.getName()));
+    for (const mesh of next.getRoot().listMeshes()) for (const p of mesh.listPrimitives()) if (!p.getMaterial() && trim) p.setMaterial(trim);
+    console.log(`  + ${r.buildings} eklenen ev (${r.donorObjects} bağışçı nesne)`);
+  }
+  if (part === 'context-ground.gpu.gltf') {
+    terrain ??= groundSampler(await io.read(path.join(SRC, 'context-ground.gpu.gltf')));
+    const r = addContextGardens(next, plan, terrain);
+    console.log(`  + ${r.gardens} bahçe duvarı / giriş yolu`);
+  }
+  return next;
+}
+
 let doc = null;
 for (const part of parts) {
-  const next = await io.read(path.join(SRC, part));
+  const next = await withAdditions(part, await io.read(path.join(SRC, part)));
   if (!doc) doc = next; else mergeDocuments(doc, next);
   console.log('  ' + part);
 }
