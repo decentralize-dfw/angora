@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import {buildOccupancy, bakeMeshContactOcclusion, applyContactShading,
   bakeContactOcclusion, SKIP_TRIANGLES} from '../src/vertex-ao.js';
+import {readFileSync} from 'node:fs';
+import {DEFAULT_FEATURES, resolveFeatures} from '../src/features.js';
 
 // FAZ 6 İŞ C - contact darkening. A floor vertex against a wall must read
 // occluded; a lone plane in the open must not; a mesh past the triangle
@@ -74,4 +76,30 @@ test('the idle driver resolves with counts and a late-bake hook for the deferred
   late.updateMatrixWorld(true);
   assert.ok(result.bakeLate(late) > 0);
   assert.ok(late.children[0].geometry.attributes._contactOcc);
+});
+
+// MOBİLDE KAPALI. Ürün sahibinin kararı: "model de AO yok ki zaten, modelin
+// içinde; olsa bile mobilde fazlalık, desktopda açık kalsın". Ölçüm de bunu
+// destekliyor: bu geçiş telefonda boşta yapılan EN PAHALI iş ve dilimlemesi
+// yetersiz - buildOccupancy 2 707 206 üçgeni tek senkron blokta tarıyor,
+// pişirme yalnız mesh SINIRINDA kesilebiliyor (en büyük tek mesh 483 996
+// tepe x 10 ışın). Boot silindikten sonra ölçülen 55,8 sn donmanın 18,5 sn'si
+// buydu (?features=runtimeVertexAO:0 A/B'si).
+//
+// Bu test iki şeyi birlikte tutuyor, çünkü biri olmadan öteki sessizce
+// bozulabilir: bayrağın DEĞERİ ve main.js'teki KATMAN ŞARTI. Bayrak kapalı
+// kalıp şart silinirse telefon yine pişirir.
+test('temas AO telefonda kapalı, masaüstünde açık', () => {
+  assert.equal(DEFAULT_FEATURES.runtimeVertexAO, true, 'masaüstü DEĞİŞMEDİ');
+  assert.equal(DEFAULT_FEATURES.contactAoMobile, false, 'telefon pişirmemeli');
+  assert.equal(resolveFeatures('?features=contactAoMobile:1').contactAoMobile, true,
+    'telefonda geri açılabilmeli - ölçüm için şart');
+
+  const main = readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
+  const gate = main.match(/if\(FEATURES\.runtimeVertexAO&&manifest\.batched&&[\s\S]{0,140}?\)\{/);
+  assert.ok(gate, 'main.js temas AO çağrısı katman şartı taşımalı');
+  assert.match(gate[0], /quality\.tier\.startsWith\('desktop'\)/,
+    'şart masaüstü katmanına bakmalı');
+  assert.match(gate[0], /FEATURES\.contactAoMobile/,
+    'telefonda geri açma yolu kodda olmalı');
 });

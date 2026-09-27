@@ -1588,7 +1588,16 @@ async function loadNativeModel(manifest){
   // FAZ 6 İŞ C: contact darkening. Joins the SAME idle queue and explicitly
   // waits for the other idle upgrades (BÖLÜM 3: onların önüne geçme); the
   // deferred interior bakes late against the same occupancy grid.
-  if(FEATURES.runtimeVertexAO&&manifest.batched){
+  // MOBİL KAPALI (contactAoMobile): ürün sahibi - "model de AO yok ki zaten,
+  // modelin içinde; olsa bile mobilde fazlalık, desktopda açık kalsın".
+  // Ölçüm: boot SİLİNDİKTEN sonra 75 sn'de ekrana 4 kare çizildi, üç blok
+  // ~18,5 sn; ?features=runtimeVertexAO:0 ile bir blok (18,5 sn) kayboldu.
+  // Bu geçiş telefonda en pahalı boşta iş: buildOccupancy 2 707 206 üçgeni
+  // TEK senkron blokta tarıyor (7 voksel damgası/üçgen) ve pişirme yalnız
+  // mesh SINIRINDA dilimlenebiliyor (en büyük tek mesh 483 996 tepe x 10 ışın).
+  // MASAÜSTÜ DEĞİŞMEDİ. Telefonda geri açmak: ?features=contactAoMobile:1
+  if(FEATURES.runtimeVertexAO&&manifest.batched&&
+     (quality.tier.startsWith('desktop')||FEATURES.contactAoMobile)){
     window.__angoraContactReady=Promise.all([
       window.__angoraGradeReady??0,window.__angoraAoReady??0,window.__angoraAtlasReady??0,
     ]).then(()=>bakeContactOcclusion(nativeDelivery.loaded,
