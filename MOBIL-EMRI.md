@@ -59,6 +59,46 @@ Telefon bu oturumda JS heap 505 → 241 MiB'a indirilerek ancak ayakta tutuldu
 **Yapılacak:** İŞ 2'yi (256 px KTX2) bitirdikten SONRA bu şartı kaldır ve
 yerine mobil için küçültülmüş doku setini bağla. Şartı İŞ 2 olmadan kaldırma.
 
+### Dosya dosya ölçüm — disk ve BELLEK ayrı şeyler
+
+Diskteki MB indirilen bayttır; doku-VRAM ise dokunun açıldıktan sonra
+bellekte tuttuğu yerdir. 1024×1024 bir doku, dosyada 50 KB olsa bile
+bellekte ~5,6 MiB tutar (4 bayt/piksel + mipmap). Karıştırma.
+
+**A) Mobilin ŞU AN indirdiği (eski teslimat, mobil profil):**
+
+| dosya | disk | doku-VRAM | doku | üçgen |
+|---|---|---|---|---|
+| architecture | 4,38 MB | 41 MiB | 31 | 841.848 |
+| interior | 1,86 MB | 40 MiB | 30 | 446.285 |
+| garden | 0,05 MB | 16 MiB | 12 | 4.838 |
+| context-ground | 0,38 MB | 4 MiB | 3 | 169.872 |
+| context-buildings | 6,85 MB | 19 MiB | 14 | 939.253 |
+| context-plants | 2,03 MB | 4 MiB | 3 | 188.909 |
+| **TOPLAM** | **15,55 MB** | **124 MiB** | | **2.591.005** |
+
+**B) Kapı kalksa mobilin indireceği (yeni üç model + eski çevre):**
+
+| dosya | disk | doku-VRAM | doku | üçgen |
+|---|---|---|---|---|
+| BUILDING-opt-v3 | 5,54 MB | **184 MiB** | 45 | 673.006 |
+| INTERIOR-opt-v2 | 4,55 MB | 84 MiB | 21 | 384.993 |
+| GARDEN-opt-v2 | 6,74 MB | **101 MiB** | 32 | 355.921 |
+| context-ground | 0,38 MB | 4 MiB | 3 | 169.872 |
+| context-buildings | 6,85 MB | 19 MiB | 14 | 939.253 |
+| context-plants | 2,03 MB | 4 MiB | 3 | 188.909 |
+| **TOPLAM** | **26,08 MB** | **396 MiB** | | **2.711.954** |
+
+**Fark: disk +10,54 MB · doku-VRAM +272 MiB · üçgen +120.949**
+
+Kritik gözlem: en büyük sıçrama **bahçede**. Eski mobil garden 12 adet
+küçük 512'lik doku taşıyordu (16 MiB); yenisi 18 adet 1024'lük (101 MiB).
+Mobil profilin zaten küçültülmüş kendi doku seti var; yeni üç model ise
+tek set ve masaüstü kalitesinde. İŞ 2 tam olarak bu farkı kapatmak için.
+
+Hedefin: B tablosundaki 396 MiB'ı, 256 px KTX2 ile **A'nın 124 MiB'ının
+altına** indirmek.
+
 Model dosyalarının dağılımı (`inspect-model.mjs` çıktısı):
 
 ```
@@ -75,6 +115,11 @@ INTERIOR-opt-v2.glb   21 malzeme · 384.993 üçgen · 21 doku ·  84 MiB VRAM
 ## İŞ 2 — Mobil için 256 px KTX2 doku seti
 
 Ürün sahibinin isteği: **mobil sürümde dokular 256 px ve KTX2.**
+
+> **YALNIZCA MOBİL.** Masaüstü teslimatı HİÇ değişmeyecek: orada ürün
+> sahibinin 1024'lük dokuları tam kalitesiyle kalacak. Bu iş mobil profil
+> için AYRI bir dosya seti üretmektir, mevcut dosyaları küçültmek değil.
+> `build/web/26092026/` altındaki üç kaynak dosyaya dokunma.
 
 **Hedef aritmetiği** (bunu tutturmaya çalış, tutmazsa ölçtüğünü yaz):
 98 doku, 256×256, ETC1S ≈ 0,5 bayt/piksel, mipmap ×1,33
