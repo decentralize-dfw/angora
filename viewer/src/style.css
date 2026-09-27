@@ -346,16 +346,14 @@ h1 strong{font-weight:700}
 .rm-green{fill:rgba(107,138,106,.13)}
 .rm-bldg{fill:rgba(22,29,26,.10)}
 .rm-road{fill:none;stroke-linecap:round;stroke-linejoin:round}
-.rm-road-0{stroke:rgba(22,29,26,.34);stroke-width:13}
-.rm-road-1{stroke:rgba(22,29,26,.27);stroke-width:9}
-.rm-road-2{stroke:rgba(22,29,26,.21);stroke-width:5.5}
-.rm-road-3{stroke:rgba(22,29,26,.12);stroke-width:3}
-.rm-bound{fill:rgba(47,81,71,.05);stroke:var(--accent);stroke-width:3;stroke-dasharray:12 8;opacity:.85}
+.rm-road-0{stroke:rgba(22,29,26,.34);stroke-width:3.2px;vector-effect:non-scaling-stroke}
+.rm-road-1{stroke:rgba(22,29,26,.27);stroke-width:2.3px;vector-effect:non-scaling-stroke}
+.rm-road-2{stroke:rgba(22,29,26,.21);stroke-width:1.5px;vector-effect:non-scaling-stroke}
+.rm-road-3{stroke:rgba(22,29,26,.12);stroke-width:.9px;vector-effect:non-scaling-stroke}
+.rm-bound{fill:rgba(47,81,71,.05);stroke:var(--accent);stroke-width:1.6px;vector-effect:non-scaling-stroke;stroke-dasharray:6 5;opacity:.85}
 /* each title on its own rounded card - a halo alone read as nothing */
 .rm-dot-tag text{font-size:26px;fill:rgba(22,29,26,.82);letter-spacing:.02em}
 .rm-dot-tag rect{fill:rgba(255,255,255,.85);stroke:rgba(22,29,26,.10);stroke-width:1;vector-effect:non-scaling-stroke}
-.region-map[data-radius="2000"] .rm-dot-tag text{font-size:46px}
-.region-map[data-radius="500"] .rm-dot-tag text{font-size:14px}
 .rm-roads{opacity:.85}
 .rm-plot{fill:rgba(47,81,71,.10)}
 .rm-building{fill:rgba(22,29,26,.13)}
@@ -368,8 +366,8 @@ h1 strong{font-weight:700}
 .rm-dot-tag{transition:opacity 400ms ease}
 .rm-off-0 .rm-g0,.rm-off-1 .rm-g1,.rm-off-2 .rm-g2,
 .rm-off-3 .rm-g3,.rm-off-4 .rm-g4,.rm-off-5 .rm-g5{opacity:0;pointer-events:none}
-.rm-pulse{fill:none;stroke:rgba(22,29,26,.35);stroke-width:1;animation:rm-pulse 2.6s ease-out infinite}
-@keyframes rm-pulse{0%{r:14;opacity:.7}70%{r:46;opacity:0}100%{r:46;opacity:0}}
+.rm-pulse{fill:none;stroke:rgba(22,29,26,.35);stroke-width:1px;vector-effect:non-scaling-stroke;transform-box:fill-box;transform-origin:center;animation:rm-pulse 2.6s ease-out infinite}
+@keyframes rm-pulse{0%{transform:scale(1);opacity:.7}70%{transform:scale(3.2);opacity:0}100%{transform:scale(3.2);opacity:0}}
 .rm-labels{position:absolute;inset:0}
 .rm-chip{position:absolute;left:0;top:0;white-space:nowrap;transition:transform 950ms cubic-bezier(.22,.8,.2,1),opacity 500ms ease;border-radius:999px;padding:4px 11px;font-size:11px;color:var(--ink);background:rgba(255,255,255,.55);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:0 2px 10px #1b322514}
 .rm-chip i{font-style:normal;color:var(--muted)}
@@ -769,3 +767,10 @@ h1 strong{font-weight:700}
 #app[data-options-docked=true][data-sheet=floor-panel] .options-panel,
 #app[data-options-docked=true][data-tour=true] .options-panel,
 #app[data-options-docked=true][data-walk=true] .options-panel{opacity:0;pointer-events:none;transform:translate(12px,-50%)}
+
+/* Sesli rehberin andığı yer: yumuşak halka + öne çıkan etiket. */
+.rm-mention-glow{fill:rgba(47,81,71,.16);stroke:var(--accent);stroke-width:1.4px;vector-effect:non-scaling-stroke;opacity:0;transition:opacity 700ms ease}
+.rm-mention-glow.rm-on{opacity:1;animation:rm-mention 2.4s ease-in-out infinite}
+@keyframes rm-mention{0%,100%{fill-opacity:.16}50%{fill-opacity:.32}}
+.rm-chip-mention{background:var(--ink);color:#fff;border-color:rgba(255,255,255,.7);font-weight:650;letter-spacing:.02em;padding:5px 12px}
+.rm-chip-mention em{color:#fff}

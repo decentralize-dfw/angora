@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {collectUIObstacles,layoutDimensionLabels} from './screen-layout.js';
+import {collectUIObstacles,layoutDimensionsAtMidpoint} from './screen-layout.js';
 import {ROOM_AREAS} from './room-areas.js';
 
 // Fixed screen size keeps annotations readable throughout camera movement.
@@ -183,7 +183,7 @@ export function createAnnotations(data,host,onRoom) {
     // Names are placed first, then dimensions avoid the names, the controls
     // AND the photograph marks - a measurement printed under a camera pin is
     // two drawings on one spot, which is what the owner saw on the attic plan.
-    const placed=layoutDimensionLabels(candidates,{width:w,height:h,obstacles,extraFrom:nameCount,extraObstacles});
+    const placed=layoutDimensionsAtMidpoint(candidates,{width:w,height:h,obstacles,fixedFrom:nameCount,extraObstacles});
     for(const item of candidates)item.entry.el.hidden=true;
     leaders.replaceChildren();leaders.setAttribute('viewBox',`0 0 ${w} ${h}`);
     for(const entry of dimensions.filter(e=>e.line.visible)){
@@ -199,17 +199,11 @@ export function createAnnotations(data,host,onRoom) {
         dot.classList.add('dimension-endpoint');leaders.append(dot);
       }
     }
-    for(const {entry,x,y,anchorX,anchorY,rect} of placed){
+    // Ölçüler çizgi ortasında sabit, adlar en çok bir satır kayar - kaçan
+    // etiketin bağlantı çizgisine artık gerek yok.
+    for(const {entry,x,y} of placed){
       entry.el.hidden=false;entry.el.style.left=`${x}px`;entry.el.style.top=`${y}px`;
-      // A name that had to leave its anchor is no longer inside its room, so
-      // it gives up the plate and goes back to reading over the drawing.
-      if(entry.kind==='name')entry.el.dataset.plate=Math.hypot(x-anchorX,y-anchorY)>6?'off':'on';
-      if(Math.hypot(x-anchorX,y-anchorY)>6){
-        const line=document.createElementNS(leaders.namespaceURI,'line');
-        line.setAttribute('x1',anchorX);line.setAttribute('y1',anchorY);
-        line.setAttribute('x2',Math.max(rect.left,Math.min(rect.right,anchorX)));
-        line.setAttribute('y2',Math.max(rect.top,Math.min(rect.bottom,anchorY)));leaders.append(line);
-      }
+      if(entry.kind==='name')entry.el.dataset.plate='on';
     }
     overlay.dataset.expected=String(candidates.length);overlay.dataset.placed=String(placed.length);
   },dispose(){overlay.remove();group.traverse(o=>o.geometry?.dispose());dimensions.forEach(e=>e.line.geometry.dispose());material.dispose();measuredMaterial.dispose();}};

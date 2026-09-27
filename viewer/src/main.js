@@ -277,6 +277,17 @@ function renderFrame(time) {
     caps?.update(clip.constant, clip.constant < fullHeight - 0.001);
     const earthSectionActive=/^f[0-3]$/.test(selected)&&!walk?.active&&clip.constant<fullHeight-.001;
     plotMask?.setSoilCut(earthSectionActive?clip.constant:1e6);
+    // Plan (Giriş / 1. kat / Çatı): bina dışı gri tonlamaya solar; 3D'ye
+    // dönüşte ya da Bodrum'a geçişte geri renklenir.
+    if(plotMask){
+      const target=planMode&&!walk?.active&&/^f[1-3]$/.test(selected)?1:0,level=plotMask.monochrome;
+      if(level!==target){
+        const dt=Math.min(.25,(time-(plotMask.monoTime??time))/1000);
+        const next=Math.abs(target-level)<.004?target:THREE.MathUtils.damp(level,target,5,dt);
+        plotMask.setMonochrome(next);invalidate();
+      }
+      plotMask.monoTime=time;
+    }
     nativeSoil?.userData.update(clip.constant,earthSectionActive);
     soilCap?.update(earthClip.constant, earthClip.constant < fullHeight - 0.001 && plotCutReady);
     if(tourSweep&&!flying&&!walk?.active)advanceTourSweep(time);
@@ -1106,7 +1117,7 @@ function setTourSpin(on){
 }
 function restRegionMap(){
   setTourSpin(false);tourBearing=0;
-  regionMap?.setBearing(0);regionMap?.setGroup(null);regionMap?.setHighlight(false);
+  regionMap?.setBearing(0);regionMap?.setGroup(null);regionMap?.setHighlight(false);regionMap?.setMentions?.([]);
 }
 function tourCaption(step){
   $('#tour-caption').textContent=step?(currentLang()==='en'?step.en:step.tr):'';
@@ -1137,6 +1148,7 @@ async function applyTourStep(step){
     // under "idari ve sosyal", the parks under "en yesil", transport under
     // "kolay ulasim", the schools under "ailelerin gozdesi".
     regionMap.setGroup(step.group);
+    regionMap.setMentions?.(step.mentions??[]);
     setTourSpin(step.spin);
     clearTourReveal();
     spotlight?.setBoxes([]);spotlight?.setCentre(step.spot==='centre');

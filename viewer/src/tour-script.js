@@ -61,10 +61,10 @@ export const TOUR_CUES = [
   {at: 1.3, atEn: 1.1,
    tr: 'Bugün sizi Ankara’nın en prestijli konut bölgelerinden birinde, özel bir villa turuna davet ediyorum.',
    en: 'Today, I invite you on an exclusive villa tour in one of Ankara’s most prestigious residential areas.'},
-  {at: 8.9, atEn: 8.0,
+  {at: 8.9, atEn: 8.0, mentions: ['cankaya', 'cayyolu'],
    tr: 'Başkentin kalbi Çankaya’dan batıya, Eskişehir Yolu aksına doğru ilerliyoruz ve şehrin en sakin, en yeşil yaşam bölgesi Çayyolu’na ulaşıyoruz.',
    en: 'From Çankaya, the heart of the capital, we head west along the Eskişehir Road corridor and arrive in Çayyolu, the city’s calmest and greenest residential area.'},
-  {at: 14.4, atEn: 13.7, radius: 1000, group: 4},
+  {at: 14.4, atEn: 13.7, radius: 1000, group: 4, mentions: []},
   {at: 19.6, atEn: 19.0, radius: 500, group: 3,
    tr: 'Şimdi Çayyolu’nun kalbindeyiz.',
    en: 'We are now in the heart of Çayyolu.'},
@@ -97,18 +97,19 @@ export const TOUR_CUES = [
 
   // ------------------------------------------------------- the surroundings
   {at: 78.1, atEn: 76.9, view: 'region', radius: 2000, rotate: false, spin: true, group: null,
+   mentions: ['beysukent', 'beytepe-forest'],
    tr: 'Site, Beysukent ve Beytepe ormanlarına komşu.',
    en: 'The community borders the Beysukent and Beytepe forests,'},
-  {at: 81.4, atEn: 80.7,
+  {at: 81.4, atEn: 80.7, mentions: ['beysukent', 'beytepe-forest'],
    tr: 'Yani doğanın hemen yanı başında bir yaşam.',
    en: 'which means life right next to nature.'},
-  {at: 84.7, atEn: 83.9,
+  {at: 84.7, atEn: 83.9, mentions: ['beytepe', 'beysukent'],
    tr: 'Beytepe ve Beysukent yalnızca birkaç dakika uzaklıkta.',
    en: 'Beytepe and Beysukent are only a few minutes away.'},
-  {at: 89.0, atEn: 87.6, group: 0,
+  {at: 89.0, atEn: 87.6, group: 0, mentions: ['hacettepe', 'bilkent', 'odtu'],
    tr: 'Hacettepe Üniversitesi Beytepe Kampüsü, Bilkent Üniversitesi ve Orta Doğu Teknik Üniversitesi kısa mesafede.',
    en: 'Hacettepe University’s Beytepe Campus, Bilkent University and Middle East Technical University are all close by.'},
-  {at: 97.1, atEn: 95.3, group: 3,
+  {at: 97.1, atEn: 95.3, group: 3, mentions: [],
    tr: 'Eskişehir Yolu üzerinden ise şehir merkezine, alışveriş merkezlerine, okullara ve hastanelere kolayca ulaşılıyor.',
    en: 'And via Eskişehir Road, the city centre, shopping centres, schools and hospitals are all easily accessible.'},
   {at: 101.6, atEn: 99.8, group: 1},
@@ -117,7 +118,7 @@ export const TOUR_CUES = [
    en: 'A life surrounded by nature, secure and prestigious…'},
 
   // --------------------------------------------------------------- the villa
-  {at: 108.3, atEn: 107.9, view: 'neighborhood', spin: false, rotate: false, azimuth: 0.95, photos: [],
+  {at: 108.3, atEn: 107.9, view: 'neighborhood', spin: false, rotate: false, azimuth: 0.95, photos: [], mentions: [],
    tr: 'Ve şimdi Angora Evleri’nin içindeki özel bir villaya doğru ilerliyoruz.',
    en: 'And now, we are heading towards a very special villa within Angora Evleri.'},
   {at: 113.0, atEn: 113.9, frame: 'villa', azimuth: 0.45, photos: [38],
@@ -318,7 +319,7 @@ export function resolveCues(cues = TOUR_CUES, lang = 'tr') {
   const carried = {view: 'region', radius: 2000, rooms: [], frame: null,
     azimuth: null, polar: null, rotate: false, spot: null, spin: false,
     group: null, link: false, photos: [], pad: null, hour: null, windows: false,
-    lens: null, sweep: 0};
+    lens: null, sweep: 0, mentions: []};
   let tr = '', en = '';
   return cues.map((cue, i) => {
     for (const key of Object.keys(carried)) if (key in cue) carried[key] = cue[key];
@@ -338,4 +339,4 @@ export function resolveCues(cues = TOUR_CUES, lang = 'tr') {
 export const cueKey = step =>
   [step.view, step.radius, step.rooms.join('+'), step.frame, step.azimuth, step.polar,
    step.pad, step.rotate, step.spot, step.spin, step.group, step.windows,
-   step.lens, step.sweep].join('|');
+   step.lens, step.sweep, (step.mentions ?? []).join('+')].join('|');

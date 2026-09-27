@@ -11,6 +11,8 @@ export class InteriorLightController {
     // throw is nothing at all - so the whole-house mode may ask for more.
     // The lamps stay where the register put them; only their reach changes.
     this.gain=1;this.reach=null;
+    // Akşam çarpanı: güneş battıkça oda armatürleri odanın ANA ışığı olur.
+    this.nightGain=1;
     this.throw$=lights.map(light=>light.distance);
   }
   setFixtures(fixtures, time=performance.now()) {
@@ -26,6 +28,11 @@ export class InteriorLightController {
     this.gain=gain;this.reach=reach;
     this.slots.forEach((slot,i)=>{slot.light.distance=reach??this.throw$[i];});
     return true;
+  }
+  // Gün ışığına bağlı çarpan - lighting.setTime verir. true = değişti.
+  setNightGain(value) {
+    if(Math.abs(value-this.nightGain)<1e-3)return false;
+    this.nightGain=value;return true;
   }
   setEnabled(enabled, time=performance.now()) {
     this.enabled=enabled;this.choose(time);
@@ -103,7 +110,7 @@ export class InteriorLightController {
           changed=true;shadowChanged=true;
         }
       }
-      light.intensity=slot.source?slot.source.intensity_cd*slot.level*this.gain:0;
+      light.intensity=slot.source?slot.source.intensity_cd*slot.level*this.gain*this.nightGain:0;
       // Native floor streams retain the same shader light count while fixtures
       // fade. Hiding zero-intensity slots would compile a new shader variant
       // at both ends of every fade, after the floor's GPU warm-up.

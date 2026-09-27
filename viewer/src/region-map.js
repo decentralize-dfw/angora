@@ -22,6 +22,20 @@ const AREAS = [
   { name: 'Angora Evleri', x: 40, y: -195 },
   { name: 'Beysukent', x: -640, y: -430 },
 ];
+// Sesli rehberin andığı yerler (tour-script.js 'mentions'). Konumlar harita
+// verisinin kendisinden: orman, kampüs ve semt noktaları region-places.json
+// kayıtlarından; 2 km'nin dışındakiler (Bilkent, ODTÜ, Çankaya) kenarda yön
+// okuyla durur. Anıldıkları cümle boyunca haritada yanarlar.
+const MENTIONS = {
+  cankaya:         {tr: 'Çankaya', en: 'Çankaya', x: 15000, y: -1500},
+  cayyolu:         {tr: 'Çayyolu', en: 'Çayyolu', x: -1400, y: -1500},
+  beysukent:       {tr: 'Beysukent', en: 'Beysukent', x: -640, y: -430},
+  'beytepe-forest':{tr: 'Beytepe Ormanı', en: 'Beytepe Forest', x: 542, y: -841},
+  beytepe:         {tr: 'Beytepe', en: 'Beytepe', x: -600, y: 1050},
+  hacettepe:       {tr: 'Hacettepe Üniversitesi', en: 'Hacettepe University', x: 1423, y: 199},
+  bilkent:         {tr: 'Bilkent Üniversitesi', en: 'Bilkent University', x: 2521, y: 280},
+  odtu:            {tr: 'ODTÜ', en: 'METU', x: 6000, y: -1200},
+};
 // one label per amenity group, in places.groups order (see the extractor)
 const GROUP_KEYS = ['groupEdu', 'groupHealth', 'groupFood', 'groupShop', 'groupSport', 'groupService'];
 // One drawing per family, in that family's own colour. Six named chips do not
@@ -134,9 +148,9 @@ export function createRegionMap(host) {
   // rounded card (the bare halo read as nothing), in its group's colour.
   // Which titles actually print at a given radius is decided in layout(),
   // where nothing is allowed to sit on anything else.
-  const dotLabels = [];
+  const dotLabels = [], dotMarks = [];
   for (const [x, y, g, name] of places.dots) {
-    shape('circle', `rm-dot rm-g${g}`, { cx: x, cy: y, r: 9, fill: places.groups[g] });
+    dotMarks.push(shape('circle', `rm-dot rm-g${g}`, { cx: x, cy: y, r: 9, fill: places.groups[g] }));
     if (name) {
       const tag = document.createElementNS(svgNS, 'g');
       tag.setAttribute('class', `rm-dot-tag rm-g${g}`);
@@ -145,15 +159,15 @@ export function createRegionMap(host) {
       text.setAttribute('x', x + 14); text.setAttribute('y', y + 10);
       text.textContent = name;
       tag.append(bg, text); world.append(tag);
-      dotLabels.push({ el: tag, bg, x, y, g, name, d: Math.hypot(x, y) });
+      dotLabels.push({ el: tag, bg, text, x, y, g, name, d: Math.hypot(x, y) });
     }
   }
   dotLabels.sort((a, b) => a.d - b.d);
   for (const r of [500, 1000, 2000]) shape('circle', 'rm-ring', { cx: 0, cy: 0, r, 'vector-effect': 'non-scaling-stroke' });
-  shape('circle', 'rm-pulse', { cx: 0, cy: 0, r: 26 });
+  const pulse = shape('circle', 'rm-pulse', { cx: 0, cy: 0, r: 26 });
   shape('polygon', 'rm-villa', { points: poly(plan.villa) });
   for (const p of places.curated) {
-    if (p.d <= 2000) shape('circle', `rm-poi rm-g${p.g}`, { cx: p.x, cy: p.y, r: 4, 'vector-effect': 'non-scaling-stroke' });
+    if (p.d <= 2000) dotMarks.push(shape('circle', `rm-poi rm-g${p.g}`, { cx: p.x, cy: p.y, r: 4, 'vector-effect': 'non-scaling-stroke' }));
   }
 
   // labels: glass chips in screen space, gliding with the same projection
@@ -175,6 +189,18 @@ export function createRegionMap(host) {
       (p.d > 2000 ? ` <em style="transform:rotate(${bearing.toFixed(0)}deg)">→</em>` : ''), p.x, p.y, p.d > 2000);
     c.dataset.distance = p.d;
     c.dataset.g = p.g;
+  }
+  // Anılan yerler: haritada yumuşak bir ışık halkası + kendi etiketi.
+  const mentionState = new Set();
+  const mentionMarks = [];
+  for (const [id, m] of Object.entries(MENTIONS)) {
+    const d = Math.hypot(m.x, m.y);
+    const glow = shape('circle', 'rm-mention-glow', { cx: m.x, cy: m.y, r: 40 });
+    mentionMarks.push({ id, glow, d });
+    const bearingDeg = Math.atan2(m.y, m.x) * 180 / Math.PI;
+    const c = chip('rm-chip-poi rm-chip-mention', `${currentLang() === 'en' ? m.en : m.tr}` +
+      (d > 2000 ? ` <em style="transform:rotate(${bearingDeg.toFixed(0)}deg)">→</em>` : ''), m.x, m.y, d > 2000);
+    c.dataset.distance = d; c.dataset.g = '-1'; c.dataset.mention = id;
   }
   const compass = document.createElement('span');
   compass.className = 'rm-compass';
@@ -244,6 +270,7 @@ export function createRegionMap(host) {
     const vw = el.clientWidth || innerWidth, vh = el.clientHeight || innerHeight;
     const pad = Math.min(vw, vh) < 560 ? 46 : 72;
     const s = (Math.min(vw, vh) / 2 - pad) / radius;
+    const phone = Math.min(vw, vh) < 560;
     const cx = vw / 2, cy = vh / 2;
     world.style.transform = `translate(${cx}px, ${cy}px) rotate(${bearing}deg) scale(${s})`;
     // The same turn, applied to the metre coordinates the chips are placed
@@ -271,7 +298,15 @@ export function createRegionMap(host) {
     }
     const hits = (r) => taken.some((t) => r.x < t.x + t.w && r.x + r.w > t.x && r.y < t.y + t.h && r.y + r.h > t.y);
     const order = [...chips].sort((a, b) => (Number(a.el.dataset.distance) || 0) - (Number(b.el.dataset.distance) || 0));
+    for (const m of mentionMarks) {
+      const on = mentionState.has(m.id);
+      m.glow.classList.toggle('rm-on', on);
+      m.glow.setAttribute('r', (phone ? 26 : 34) / s);
+    }
     for (const c of order) {
+      const mention = c.el.dataset.mention;
+      if (mention && !mentionState.has(mention)) { c.el.style.opacity = 0; c.el.classList.remove('rm-on'); continue; }
+      if (mention) c.el.classList.add('rm-on');
       let { mx, my } = c;
       if (c.clamp) {
         const d = Math.hypot(mx, my) || 1;
@@ -326,17 +361,27 @@ export function createRegionMap(host) {
     // at this radius waits for a closer one; the 500 m view seats them all.
     // The rounded card behind each title is sized here, since the type
     // size changes with the radius.
-    const fsU = radius === 2000 ? 46 : radius === 500 ? 14 : 26;
+    // EKRAN PİKSELİNE SABİT: yazı, nokta ve etiket kartı harita birimiyle
+    // verilince ekrana sığdırma ölçeğiyle büyüyüp küçülüyordu (aynı başlık
+    // masaüstünde ~10 px, telefonda ~4 px). Hedef boyut sabit, harita birimi
+    // ondan türetilir - her yarıçapta, her ekranda aynı okunaklılık.
+    const fsU = (phone ? 10.5 : 11.5) / s;
+    for (const m of dotMarks) m.setAttribute('r', (phone ? 3.2 : 3.8) / s);
+    pulse.setAttribute('r', 14 / s);
+    // Kalabalık olmasın: yakından uzağa en çok bu kadar başlık.
+    const maxTitles = phone ? 6 : 12;
     const kept = [];
     for (const l of dotLabels) {
-      if (off.has(l.g)) { l.el.setAttribute('visibility', 'hidden'); continue; }
-      const wU = l.name.length * fsU * 0.58 + 14, hU = fsU * 1.6;
-      l.bg.setAttribute('x', l.x + 7); l.bg.setAttribute('y', l.y + 10 - fsU * 1.12);
+      l.text.style.fontSize = `${fsU}px`;
+      if (off.has(l.g) || kept.length >= maxTitles) { l.el.setAttribute('visibility', 'hidden'); continue; }
+      const gapU = 6 / s, wU = l.name.length * fsU * 0.58 + 2 * gapU, hU = fsU * 1.6;
+      l.text.setAttribute('x', l.x + gapU * 1.6); l.text.setAttribute('y', l.y + fsU * 0.38);
+      l.bg.setAttribute('x', l.x + gapU * 0.6); l.bg.setAttribute('y', l.y + fsU * 0.38 - fsU * 1.12);
       l.bg.setAttribute('width', wU); l.bg.setAttribute('height', hU);
       l.bg.setAttribute('rx', hU / 2);
-      const [tx, ty] = turn(l.x + 7, l.y + 10 - fsU * 1.12);
+      const [tx, ty] = turn(l.x + gapU * 0.6, l.y + fsU * 0.38 - fsU * 1.12);
       const rect = { x: cx + tx * s - 2, y: cy + ty * s - 2, w: wU * s + 4, h: hU * s + 4 };
-      l.el.setAttribute('transform', bearing ? `rotate(${-bearing} ${l.x + 7} ${l.y + 10})` : '');
+      l.el.setAttribute('transform', bearing ? `rotate(${-bearing} ${l.x} ${l.y})` : '');
       const visible = rect.x > 0 && rect.y > 0 && rect.x + rect.w < vw && rect.y + rect.h < vh &&
         !hits(rect) && !kept.some((t) => rect.x < t.x + t.w && rect.x + rect.w > t.x && rect.y < t.y + t.h && rect.y + rect.h > t.y);
       l.el.setAttribute('visibility', visible ? 'visible' : 'hidden');
@@ -368,6 +413,13 @@ export function createRegionMap(host) {
     setBearing(deg) { if (deg === bearing) return; bearing = deg; layout(); },
     // Everything outside the settlement goes dark, along its own outline.
     setHighlight(on) {dim.setAttribute('visibility', on ? 'visible' : 'hidden');},
+    // Sesli rehberin o cümlede andığı yerler; [] hepsini söndürür.
+    setMentions(ids = []) {
+      const next = new Set(ids.filter(id => id in MENTIONS));
+      if (next.size === mentionState.size && [...next].every(id => mentionState.has(id))) return;
+      mentionState.clear(); for (const id of next) mentionState.add(id);
+      layout();
+    },
     get bearing() { return bearing; },
     // The amenity family on show, by the same one-at-a-time rule the chips
     // follow; null puts them all away. This is what a filter press does, so a

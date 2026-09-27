@@ -264,6 +264,10 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
     groundLight?.setSun(direction,dynamicShadowActive());
     floorLight?.setSun(direction,dynamicShadowActive());
     const daylight=THREE.MathUtils.smoothstep(solar.altitude,-6,28),warmth=THREE.MathUtils.smoothstep(solar.altitude,0,35);
+    // Akşam iç ışıklar: armatürler kayıtta 3 cd - gündüz dolgu için doğru,
+    // akşam pozlamasında odayı aydınlatamıyordu ("çok zayıf kalıyor").
+    // Güneş alçaldıkça her odanın kendi armatürü 8 katına kadar güçlenir.
+    if(fixtures.setNightGain(FEATURES.daylightV2?1+7*(1-daylight):1))fixtures.update(performance.now());
     // Key over fill, about 2:1 at midday. With the fill nearly as strong as
     // the sun the image went flat - no shadow side, no specular pop - which
     // read as a cheap render engine. A defined warm key against a cooler,

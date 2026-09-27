@@ -75,3 +75,36 @@ export function layoutDimensionLabels(items,{width,height,obstacles=[],gap=3,pad
   }
   return placed;
 }
+
+// Ölçüler ÇİZGİLERİNİN ORTASINDA SABİT durur - ekranda boş yer aramaz. Eski
+// yerleşim çakışınca en yakın boş noktayı bütün ekranda arıyordu; yakınlaşıp
+// uzaklaşırken etiket bir yerden bir yere sıçrıyor, hangi çizgiye ait olduğu
+// kayboluyordu. Kural artık:
+//   1. Ölçüler (fixedFrom sonrası) tam çizgi ortasına konur. Arayüzle, foto
+//      işaretleriyle ya da daha önce konmuş bir ölçüyle çakışan GİZLENİR,
+//      taşınmaz (çizginin kendisi görünür kalır).
+//   2. Oda adları sonra konur ve ölçülerle ASLA çakışmaz: önce kendi
+//      yerinde, olmazsa hemen üstünde/altında bir satır denenir, o da
+//      olmazsa ad o kare için çekilir.
+export function layoutDimensionsAtMidpoint(items,{width,height,obstacles=[],gap=3,padding=8,fixedFrom=0,extraObstacles=[]}) {
+  const rectAt=(item,x,y)=>({left:x-item.width/2,right:x+item.width/2,top:y-item.height/2,bottom:y+item.height/2});
+  const inside=r=>r.left>=padding&&r.right<=width-padding&&r.top>=padding&&r.bottom<=height-padding;
+  const valid=item=>[item.x,item.y,item.width,item.height].every(Number.isFinite);
+  const placed=[],dims=[],names=[];
+  const ui=obstacles.concat(extraObstacles);
+  for(const item of items.slice(fixedFrom)){
+    if(!valid(item))continue;
+    const rect=rectAt(item,item.x,item.y);
+    if(!inside(rect)||ui.some(o=>rectanglesOverlap(rect,o,gap))||dims.some(o=>rectanglesOverlap(rect,o,gap)))continue;
+    dims.push(rect);placed.push({...item,rect,anchorX:item.x,anchorY:item.y});
+  }
+  for(const item of items.slice(0,fixedFrom)){
+    if(!valid(item))continue;
+    for(const dy of [0,-(item.height+gap),item.height+gap]){
+      const rect=rectAt(item,item.x,item.y+dy);
+      if(!inside(rect)||obstacles.some(o=>rectanglesOverlap(rect,o,gap))||dims.some(o=>rectanglesOverlap(rect,o,gap))||names.some(o=>rectanglesOverlap(rect,o,gap)))continue;
+      names.push(rect);placed.push({...item,y:item.y+dy,rect,anchorX:item.x,anchorY:item.y});break;
+    }
+  }
+  return placed;
+}
