@@ -39,6 +39,13 @@ export function createSiteContext(data,host,onVilla){
     bar.style.width=Math.max(1,metres*ppm)+'px';label.textContent=metres.toLocaleString('tr-TR')+' m';
     const placed=layoutAnchoredLabels(candidates,{width:w,height:h,obstacles:collectUIObstacles(host),maxDisplacement:0});
     for(const item of candidates)item.entry.el.hidden=true;
-    for(const {entry,x,y} of placed){entry.el.hidden=false;entry.el.style.left=x+'px';entry.el.style.top=y+'px';}
+    // translate3d + merkezleme: left/top yazmak her karede layout kaymasıdır
+    // (ölçüm: ana sayfa CLS 0,087'nin tamamı buradan) ve her etiket için
+    // yeniden hesap demektir. Merkezleme CSS'ten JS'e taşındı, çünkü JS
+    // transform'u CSS'inkini ezer.
+    for(const {entry,x,y} of placed){
+      entry.el.hidden=false;
+      entry.el.style.transform=`translate3d(${x}px,${y}px,0) translate(-50%,-50%)`;
+    }
   },dispose(){overlay.remove();}};
 }

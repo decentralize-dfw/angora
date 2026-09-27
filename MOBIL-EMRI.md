@@ -206,6 +206,21 @@ Referans ölçüm (vertex-AO düzeltmesinden sonra, 6× kısma): 15 uzun görev,
 toplam 79,7 s blok. Hedef: **açılıştan sonraki ilk 10 saniyede 200 ms üstü
 blok kalmasın.**
 
+**EK İPUCU — kare başına layout hesabı.** Ekran üstü etiketler her karede
+`style.left/top` ile konumlanıyor; bu, her etiket için layout yeniden hesabı
+demek ve ana iş parçacığını yiyor. `site-context.js` bu oturumda `translate3d`'ye
+çevrildi ve ana sayfanın CLS'i **0,087 -> 0,002**'ye düştü. AYNI KALIP hâlâ üç
+dosyada duruyor ve mobilde kare başına iş çıkarıyor:
+
+- `viewer/src/annotations.js:125` ve `:195`
+- `viewer/src/hotspots.js:59`
+- `viewer/src/photo-gallery.js:156`
+
+Çevirirken dikkat: JS'ten yazılan `transform` CSS'teki merkezlemeyi EZER, o
+yüzden merkezleme JS değerine katılmalı ve öğeye `left:0;top:0` verilmeli
+(konumsuz mutlak öğede transform'un çıkış noktası akıştaki yeri olur).
+`.room-label`'da ayrıca `scale(var(--label-fit))` var, onu da koru.
+
 **Çözüm yönü (öneri, ölçümle doğrula):**
 - Shader derlemelerini kareye yay: hepsini aynı anda `needsUpdate` yapma,
   boşta birkaç materyal işle (vertex-ao.js'teki dilimleme kalıbının aynısı:
