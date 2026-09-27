@@ -1,0 +1,39 @@
+{
+ "capturedAt": "2026-09-27T09:10:56.334Z",
+ "softwareRaster": true,
+ "note": "SwiftShader - bayt/bellek gecerli, sure/FPS gecersiz",
+ "rows": [
+  {
+   "label": "eski-teslimat",
+   "camera": "C03",
+   "features": "villaModelV3Mobile:0",
+   "textureMiB": 53,
+   "geometryMiB": 170.4,
+   "firstInteractiveBytes": 19821010,
+   "jsHeapAfterGcMiB": 271.4,
+   "consoleErrors": [],
+   "screenshot": "build/qa/mobil-ab/eski-teslimat.png"
+  },
+  {
+   "label": "ktx2-teslimat",
+   "error": "page.screenshot: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n",
+   "consoleErrors": []
+  },
+  {
+   "label": "eski-interior",
+   "camera": "C10",
+   "features": "villaModelV3Mobile:0",
+   "textureMiB": 53.3,
+   "geometryMiB": 207.7,
+   "firstInteractiveBytes": 20131227,
+   "jsHeapAfterGcMiB": 309.8,
+   "consoleErrors": [],
+   "screenshot": "build/qa/mobil-ab/eski-interior.png"
+  },
+  {
+   "label": "ktx2-interior",
+   "error": "page.screenshot: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n",
+   "consoleErrors": []
+  }
+ ]
+}

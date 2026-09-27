@@ -58,14 +58,21 @@ for (const row of ROWS) {
     await page.waitForTimeout(400);
     await cdp.send('HeapProfiler.collectGarbage');
     const heap = await page.evaluate(() => performance.memory?.usedJSHeapSize ?? null);
-    const shot = path.join(repoRoot, outDir, row.label + '.png');
-    await page.screenshot({path: shot});
+    // Sayılar ekran görüntüsünden ÖNCE kayda girer - screenshot SwiftShader'da
+    // takılırsa (ilk koşuda KTX2 satırlarında 30 sn'de takıldı) ölçüm kaybolmaz.
     const entry = {label: row.label, camera: row.camera, features: row.features,
       textureMiB: report.memory?.estimatedTextureMiB ?? null,
       geometryMiB: report.memory?.estimatedGeometryMiB ?? null,
       firstInteractiveBytes: report.network?.firstInteractiveBytes ?? null,
       jsHeapAfterGcMiB: heap == null ? null : +(heap / 1048576).toFixed(1),
-      consoleErrors: errors, screenshot: path.relative(repoRoot, shot)};
+      consoleErrors: errors};
+    const shot = path.join(repoRoot, outDir, row.label + '.png');
+    try {
+      await page.screenshot({path: shot, timeout: 120_000});
+      entry.screenshot = path.relative(repoRoot, shot);
+    } catch (error) {
+      entry.screenshotError = String(error?.message ?? error).slice(0, 120);
+    }
     results.push(entry);
     console.log(JSON.stringify(entry));
   } catch (error) {
