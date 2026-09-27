@@ -39,6 +39,12 @@
 // is filed under; the test checks these against the delivery.
 export const FLOOR_DATUMS = [0, 3.0996, 6.3714, 9.4705];
 
+// Sesli rehberde bir cümlenin yanında gösterilebilecek EN FAZLA kare.
+// Telefonda ayrı bir sayı yok: ürün sahibi "zaten max 3 tane oluyor rehber
+// esnasında... 1 de 2 de 3 de olsa hepsi tam sığsın" dedi, şerit de sütunları
+// kare sayısına bölüyor - iki farklı sınır tutmak yerleşimi bozardı.
+export const TOUR_PHOTO_MAX = 3;
+
 export const PHOTO_POINTS = [
   {id:1,file:'angora_01.jpg',floor:0,outdoor:false,x:-1.584,floorY:0,y:1.55,z:-4.881,dx:-0.682,dz:0.731,tr:'Bodrum · Mutfak',en:'Basement · Kitchen'},
   {id:2,file:'angora_02.jpg',floor:0,outdoor:false,x:-3.698,floorY:0,y:1.55,z:-7.64,dx:0.937,dz:0.35,tr:'Bodrum · Salon',en:'Basement · Living room'},

@@ -178,67 +178,51 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
 }
 
 /* ==========================================================================
-   TELEFON FOTOĞRAF ŞERİDİ — ekranın üst %15'i
+   SESLİ REHBER — telefonda turun fotoğrafları ÜSTTE
    ==========================================================================
-   Ürün sahibi: "mobil kısımda üst kısımda yüzde 15'lik bir alan ayır, ekranın
-   yüzde 15 height'i. kalan alanın da kamera ona göre yeniden extend olsun...
-   üstte yüzde 15'te ise yan yana resimleri göster, aralarında ve kenardan ince
-   çizgilerle ayrılsınlar, kalan alana sığacak şekilde yerleştir."
+   Ürün sahibi: "sesli rehber esnasında, resimlerin nereden çekildiği
+   gözüküyor ya, o sırada üstte de gösterilen fotoğraflar gözüksün. fakat
+   MERGVS Angora 21 vs alt tarafa atılmasın, o üstte kalsın, onun altında
+   olsun. köşelerini rounded yap. ve şu an dipdibeler, yüzde 80'de olsunlar,
+   yani aralarında yüzde 10 + 10'dan 20 mesafe olsun, tepe ve aşağılarda da
+   yüzde 10, yani biraz yüzüyor gibi olabilir havada. resme tıklanınca da
+   açılmasın, orda dursun sadece bilgi olarak. 1 2 3 falan diye yazıyor ya,
+   onlar da yazsın hangisi hangisi anlayalım. zaten max 3 tane oluyor rehber
+   esnasında, kaydırmalı sığmasın, 1 de 2 de 3 de olsa hepsi tam sığsın.
+   sadece sesli rehber esnasında."
 
-   Tuvali küçülten tek şey BURASI: #viewport position:fixed;inset:0 idi, artık
-   top'u şeridin yüksekliği kadar iniyor. Kamera kendiliğinden yeniden oturuyor
-   çünkü resize()/frame() host.clientHeight'i okuyor - main.js şerit açılıp
-   kapandığında resize() çağırıyor, CSS boyut değişimi resize olayı üretmez.
+   Yeni bir eleman YOK: #tour-gallery zaten turun karelerini numaralarıyla
+   gösteriyor (numara sahnedeki işaretle eşleşiyor) ve pointer-events:none
+   olduğu için zaten tıklanmıyor. style.css telefonda onu tamamen kapatıyordu
+   - "üç kart 390 px ekranda evi gömüyor" - ki SOL SÜTUN için doğruydu.
+   Üstte, yatay ve %80'lik boşluklarla gömmüyor.
 
-   dvh kullanılıyor, vh DEĞİL: telefonda adres çubuğu gizlenince vh sabit kalır
-   ve şerit ekranın %15'inden büyük görünür.
-
-   İnce çizgiler: hücreler arasında 1px gap, kenarlarda 1px padding. Şeridin
-   zemini çizgi rengi, hücrelerin zemini panel rengi - yani "çizgi" diye ayrı
-   bir eleman yok, arka plan boşluklardan görünüyor. */
-#app{--strip-h:0px}
-.photo-strip{display:none}
-
+   Kaydırma yok: sütunlar 1fr, yani kaç kare varsa ekranı o kadar eşit paya
+   böler. Bir, iki veya üç - hepsi her durumda tam sığar. */
 @media(max-width:720px){
-  #app[data-photostrip=true]{--strip-h:15dvh}
-  #app[data-photostrip=true] #viewport{top:var(--strip-h)}
-  .photo-strip{
-    position:fixed;top:0;left:0;right:0;height:var(--strip-h);z-index:46;
-    box-sizing:border-box;display:flex;gap:1px;padding:1px;
-    background:rgba(22,29,26,.22);
-    border-bottom:1px solid rgba(22,29,26,.22);
-    overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;
-    -webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;
-    scrollbar-width:none}
-  .photo-strip::-webkit-scrollbar{display:none}
-  .photo-strip[hidden]{display:none}
-  /* Kareler şeridin yüksekliğine oturur ve kendi en-boy oranını korur; kata
-     sığmayanlar yatayda kayar. 18 kareyi 390 px'e zorla sığdırmak kare başına
-     21 px demekti - o bir şerit değil, bir çizgi. */
-  .photo-strip-cell{
-    flex:0 0 auto;height:100%;aspect-ratio:4/3;padding:0;border:0;border-radius:0;
-    background:var(--panel);overflow:hidden;scroll-snap-align:start}
-  .photo-strip-cell[hidden]{display:none}
-  .photo-strip-cell img{display:block;width:100%;height:100%;object-fit:cover}
-  /* button[aria-pressed=true] genel kuralı zemini mürekkebe boyuyor; burada
-     açık olan kare çerçeveyle işaretlenir, fotoğrafın üstü boyanmaz. */
-  .photo-strip-cell[aria-pressed=true]{background:var(--panel)}
-  .photo-strip-cell[aria-pressed=true] img{outline:3px solid var(--accent);outline-offset:-3px}
-
-  /* Üstteki arayüz şeridin ALTINA iner. Şerit kapalıyken --strip-h 0'dır,
-     yani bu satırlar mevcut yerleşimi aynen bırakır. */
-  #app[data-photostrip=true] .topbar{top:calc(var(--strip-h) + max(12px,env(safe-area-inset-top)))}
-  #app[data-photostrip=true] .tool-dock{top:calc(var(--strip-h) + max(64px,calc(env(safe-area-inset-top) + 56px)))}
-  #app[data-delivery=native][data-photostrip=true] .scale-picker{top:calc(var(--strip-h) + 64px)}
-  #app[data-delivery=native][data-photostrip=true] .view-description{top:calc(var(--strip-h) + 112px)}
-  #app[data-delivery=native][data-photostrip=true] .side-tools{top:calc(var(--strip-h) + 112px)}
-  /* Yürüyüşte, turda ve açılışta bütün arayüz gibi şerit de çekilir - ve
-     yüksekliği de sıfırlanır. Yalnız display:none deseydik --strip-h 15dvh
-     kalır, tuvalin tepesinde görünmez bir boşluk dururdu. JS zaten bu üç
-     durumda photostrip'i false yapıyor; bu satırlar o bir kareyi de kapatıyor. */
-  #app[data-walk=true][data-photostrip=true],
-  #app[data-tour=true][data-photostrip=true],
-  #app[data-booting=true][data-photostrip=true]{--strip-h:0px}
-  #app[data-walk=true] .photo-strip,#app[data-tour=true] .photo-strip,
-  #app[data-booting=true] .photo-strip{display:none}
+  #app[data-tour=true] .tour-gallery{
+    display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:0;
+    left:0;right:0;width:auto;max-width:none;transform:none;
+    /* Marka çubuğu YERİNDE KALIR, şerit onun altına iner. */
+    top:calc(max(12px,env(safe-area-inset-top)) + 52px);
+    height:15dvh;overflow:visible;pointer-events:none}
+  #app[data-tour=true] .tour-gallery[hidden]{display:none}
+  /* %80 kare: yanlarda %10+%10 (aralarında %20), üstte ve altta %10.
+     margin:auto olduğu için kare kendi sütununun tam ortasında yüzer. */
+  #app[data-tour=true] .tour-gallery figure{
+    width:80%;height:80%;margin:auto;display:flex;flex-direction:column;
+    border-radius:12px}
+  #app[data-tour=true] .tour-gallery img{
+    flex:1 1 auto;min-height:0;width:100%;height:auto;aspect-ratio:auto}
+  #app[data-tour=true] .tour-gallery figcaption{
+    flex:0 0 auto;align-items:center;gap:5px;padding:3px 7px 4px;
+    font-size:9px;white-space:nowrap;overflow:hidden}
+  #app[data-tour=true] .tour-gallery figcaption span{overflow:hidden;text-overflow:ellipsis}
+  /* Numara TEK kare olsa da görünür: "hangisi hangisi" sorusunu sahnedeki
+     işaretle eşleştiren tek şey o. Masaüstünde tek kareyken gizli kalıyor. */
+  #app[data-tour=true] .tour-gallery[data-single=true] figcaption b{display:grid}
+  /* Görünüm başlığı tam bu bandın içinde duruyordu (native telefonda
+     top:112px). Turda geri kalan arayüz gibi o da çekilir - turun kendi
+     altyazısı zaten var. */
+  #app[data-tour=true] .view-description{opacity:0;pointer-events:none;transition:opacity 320ms ease}
 }
