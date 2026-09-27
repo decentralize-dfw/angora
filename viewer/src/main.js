@@ -1380,14 +1380,61 @@ function endTour(openInfo){
 function updateLensReadout(){
   $('#walk-lens-value').textContent=`≈ ${Math.round(12/Math.tan(THREE.MathUtils.degToRad(walk.camera.fov)/2))} mm`;
 }
-function enterWalk(roomId) {
+// İçeride gez adamı (masaüstü). Sürüklenir, kat görünümünde canvas üstüne
+// bırakılınca o katın zemin düzlemine ışın atılır; yürünebilir en yakın
+// noktada içeride doğulur. Zemin dışına (bahçe, boşluk) bırakılırsa bir şey
+// olmaz - adam yerine döner.
+function bindPegman(){
+  const button=$('#walk-pegman');if(!button)return;
+  const plane=new THREE.Plane(new THREE.Vector3(0,1,0),0),ray=new THREE.Raycaster(),hit=new THREE.Vector3(),ndc=new THREE.Vector2();
+  const dropPoint=(clientX,clientY)=>{
+    if(!ready||!walk||!/^f[0-3]$/.test(selected))return null;
+    const rect=renderer.domElement.getBoundingClientRect();
+    if(clientX<rect.left||clientX>rect.right||clientY<rect.top||clientY>rect.bottom)return null;
+    ndc.set((clientX-rect.left)/rect.width*2-1,-(clientY-rect.top)/rect.height*2+1);
+    ray.setFromCamera(ndc,camera);
+    const floor=Number(selected[1]);
+    plane.constant=-[0,3.0996,6.3714,9.4705][floor]; // kat döşeme kotları (frame() ile aynı)
+    if(!ray.ray.intersectPlane(plane,hit))return null;
+    // Yürünebilir zemine 1,5 m'den uzak bir bırakış (bahçe, boşluk) sayılmaz.
+    const landing=walk.surface.center(floor,[hit.x,hit.z],furnitureVisible);
+    return landing&&Math.hypot(landing[0]-hit.x,landing[2]-hit.z)<1.5?[hit.x,hit.z]:null;
+  };
+  let ghost=null;
+  const move=event=>{
+    if(!ghost)return;
+    ghost.style.transform=`translate(${event.clientX}px,${event.clientY}px)`;
+    ghost.dataset.ok=String(Boolean(dropPoint(event.clientX,event.clientY)));
+  };
+  const end=event=>{
+    removeEventListener('pointermove',move);removeEventListener('pointerup',end);removeEventListener('pointercancel',end);
+    document.body.classList.remove('pegman-dragging');
+    const at=event.type==='pointerup'?dropPoint(event.clientX,event.clientY):null;
+    ghost?.remove();ghost=null;
+    if(at)enterWalk(null,at);
+  };
+  button.addEventListener('pointerdown',event=>{
+    if(event.button!==0)return;
+    event.preventDefault();
+    ghost=document.createElement('div');ghost.className='pegman-ghost';ghost.innerHTML=button.innerHTML;
+    document.body.append(ghost);document.body.classList.add('pegman-dragging');move(event);
+    addEventListener('pointermove',move);addEventListener('pointerup',end);addEventListener('pointercancel',end);
+  });
+  // Klavye: Enter/Space katın ortasında başlatır.
+  button.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();enterWalk();}});
+}
+// at: [x,z] - içeride gez adamının bırakıldığı nokta (dünya koordinatı);
+// verilmezse eskisi gibi katın ortası.
+function enterWalk(roomId, at=null) {
   pendingRoomJump.cancel();
   if (!walk || !ready) return;
   const floor=selected.startsWith('f')?Number(selected[1]):1;
   const stations=walk.surface.data.stations.filter(s=>s.floor_index===floor);
   if(!stations.length)return;
-  const centre=buildingBox.getCenter(new THREE.Vector3());
+  const centre=at?new THREE.Vector3(at[0],0,at[1]):buildingBox.getCenter(new THREE.Vector3());
   const position=roomId?null:walk.surface.center(floor,[centre.x,centre.z],furnitureVisible);
+  if(at&&!position)return;
+  if(position)centre.set(position[0],0,position[2]);
   roomId ||= stations.reduce((a,b)=>new THREE.Vector3(...a.position).distanceToSquared(centre)<new THREE.Vector3(...b.position).distanceToSquared(centre)?a:b).room_id;
   flight.cancel();panel('',false);photoViewer?.hide();const station=walk.enter(roomId,position);selected='f'+station.floor_index;updateRoomUI(station);
   quality?.applyView(selected,{walking:true});
@@ -2354,6 +2401,7 @@ function bindInterface() {
     invalidate();
   };
   $('#enter-walk').onclick=()=>enterWalk();$('#exit-walk').onclick=()=>exitWalk();
+  bindPegman();
   $('#walk-room').onchange=event=>travelRoom(event.target.value);
   $('#toggle-plan').onclick=()=>{planMode=!planMode;$('#toggle-plan').setAttribute('aria-pressed',planMode);$('#toggle-plan').textContent=planMode?'3D':'Plan';mode(planMode);quality?.applyView(selected,{plan:planMode});frame(false);};
   $('#region-summary').ontoggle=()=>{invalidateUIObstacles();invalidate();};

@@ -46,9 +46,14 @@ function mark(document) {
   // The tripod and the angle it opens through, and nothing between them: an
   // eye drawn inside the two rays reads as a second thing to press at this
   // size, and a fifty-six-times-repeated one is noise over the plan.
+  // Tasarım (27.09): iki sert ışın yerine objektifin açısı YUMUŞAK bir
+  // yelpaze - yönü ve genişliği aynen okunur, plan üstünde gürültü yapmaz.
+  // Kamera noktası beyaz halkalı küçük bir disk; seçilince vurgu rengi.
   svg.innerHTML =
-    '<path class="pin-ray" d="M6 14 L33.5 3.6 M6 14 L33.5 24.4"/>' +
-    '<circle class="pin-dot" cx="6" cy="14" r="2.9"/>';
+    '<path class="pin-cone" d="M6 14 L32.2 4.5 A27.9 27.9 0 0 1 32.2 23.5 Z"/>' +
+    '<path class="pin-ray" d="M6 14 L32.2 4.5 M6 14 L32.2 23.5"/>' +
+    '<circle class="pin-dot" cx="6" cy="14" r="4"/>' +
+    '<circle class="pin-core" cx="6" cy="14" r="1.5"/>';
   return svg;
 }
 
