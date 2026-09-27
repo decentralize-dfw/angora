@@ -751,29 +751,35 @@ h1 strong{font-weight:700}
 .listing-more a{font-size:13px;color:var(--muted);text-decoration:none}
 .listing-more a:hover{color:var(--ink);text-decoration:underline}
 
-/* Masaüstü: ayarlar sağ kenarın ortasında HEP duran kompakt şerit.
-   Çark düğmesi ve kapatma çarpısı gerekmez; başlık yerine ince bir etiket.
-   Bir bilgi sayfası (Mülk / Kat bilgisi) açıldığında şerit yol verir;
-   turda ve içeride gezerken çekilir. */
+/* Masaüstü: ayarlar SAĞ ALTTA, ortadaki kat çubuğuyla aynı dilde - iki
+   satırlık cam kapsül. Üst satır: dil + (villada) dört anahtar. Alt satır:
+   saat, gün ışığı kaydırıcısı, iç ışıklar. Başlık, çark ve çarpı yok. Bilgi
+   sayfası açıkken, turda ve içeride gezerken çekilir. */
 #app[data-options-docked=true] #open-options{display:none}
-#app[data-options-docked=true] .options-panel{top:50%;bottom:auto;right:16px;transform:translateY(-50%);
-  width:196px;padding:10px 11px 11px;border-radius:16px;max-height:calc(100dvh - 180px);
+#app[data-options-docked=true] .options-panel{top:auto;bottom:max(22px,env(safe-area-inset-bottom));right:22px;left:auto;transform:none;
+  width:max-content;max-width:calc(50vw - 215px);max-height:none;overflow:visible;padding:6px 8px;border-radius:26px;
+  display:grid;grid-template-columns:auto minmax(120px,1fr) auto;grid-auto-rows:auto;column-gap:8px;row-gap:5px;align-items:center;
+  background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:var(--shadow-soft);
   transition:opacity 260ms ease,transform 260ms ease;animation:none}
-#app[data-options-docked=true] .options-panel .panel-heading{margin-bottom:7px}
-#app[data-options-docked=true] .options-panel .panel-heading button{display:none}
-#app[data-options-docked=true] .options-panel h2{font-size:10.5px;font-weight:650;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-#app[data-options-docked=true] .options-panel .language-row{margin:0 0 8px}
-#app[data-options-docked=true] .options-panel .scene-options{gap:4px}
-#app[data-options-docked=true] .options-panel .scene-options button{min-height:30px;font-size:11px;border-radius:10px;padding:0 6px}
-#app[data-options-docked=true] .options-panel .daylight-heading{margin:10px 1px 4px;font-size:10.5px}
+#app[data-options-docked=true] .options-panel>*{margin:0}
+#app[data-options-docked=true] .options-panel .panel-heading,
+#app[data-options-docked=true] .options-panel .range-endpoints,
+#app[data-options-docked=true] .options-panel .option-hidden,
+#app[data-options-docked=true] .options-panel .small-note{display:none}
+#app[data-options-docked=true] .options-panel .language-row{grid-column:1;grid-row:1}
+#app[data-options-docked=true] .options-panel .language-row>span{display:none}
+#app[data-options-docked=true] .options-panel .lang-flag{min-height:30px;padding:0 10px}
+#app[data-options-docked=true] .options-panel .scene-options.villa-only{grid-column:2 / 4;grid-row:1;display:flex;gap:4px;flex-wrap:wrap}
+#app[data-options-docked=true] .options-panel .scene-options button{min-height:30px;font-size:11.5px;border-radius:999px;padding:0 11px;white-space:nowrap}
+#app[data-options-docked=true] .options-panel .daylight-heading{grid-column:1;grid-row:2;display:flex;gap:6px;align-items:baseline;font-size:10.5px;padding-left:6px}
 #app[data-options-docked=true] .options-panel #daylight-time{font-size:13px}
-#app[data-options-docked=true] .options-panel .range-endpoints{font-size:9px}
-#app[data-options-docked=true] .options-panel .daylight-footer{margin-top:7px}
-#app[data-options-docked=true] .options-panel .daylight-footer button{min-height:30px;font-size:11px;border-radius:10px}
+#app[data-options-docked=true] .options-panel #daylight-hour{grid-column:2;grid-row:2;height:22px}
+#app[data-options-docked=true] .options-panel .daylight-footer{grid-column:3;grid-row:2;display:flex}
+#app[data-options-docked=true] .options-panel .daylight-footer button{min-height:30px;font-size:11.5px;border-radius:999px;padding:0 12px;white-space:nowrap}
 #app[data-options-docked=true][data-sheet=info-panel] .options-panel,
 #app[data-options-docked=true][data-sheet=floor-panel] .options-panel,
 #app[data-options-docked=true][data-tour=true] .options-panel,
-#app[data-options-docked=true][data-walk=true] .options-panel{opacity:0;pointer-events:none;transform:translate(12px,-50%)}
+#app[data-options-docked=true][data-walk=true] .options-panel{opacity:0;pointer-events:none;transform:translateY(10px)}
 
 /* Sesli rehberin andığı yer: yumuşak halka + öne çıkan etiket. */
 .rm-mention-glow{fill:rgba(47,81,71,.16);stroke:var(--accent);stroke-width:1.4px;vector-effect:non-scaling-stroke;opacity:0;transition:opacity 700ms ease}
@@ -783,16 +789,27 @@ h1 strong{font-weight:700}
 .rm-chip-mention em{color:#fff}
 
 /* İçeride gez adamı: yalnız masaüstünde, kat görünümünde, dolaşırken değil. */
-.walk-pegman{display:none;width:40px;height:40px;border-radius:999px;align-items:center;justify-content:center;padding:0;
-  background:#f2b233;border:1px solid rgba(0,0,0,.12);box-shadow:0 2px 8px rgba(22,34,29,.22);cursor:grab;touch-action:none}
-.walk-pegman svg{width:22px;height:22px;fill:#1c2621}
-.walk-pegman:hover{background:#f6c04f}
+.walk-pegman{display:none;width:36px;height:36px;flex:0 0 36px;border-radius:999px;align-items:center;justify-content:center;padding:0;
+  background:#fff;border:1px solid var(--edge);box-shadow:none;cursor:grab;touch-action:none}
+.walk-pegman svg{width:19px;height:19px;fill:#16211c}
+.walk-pegman:hover{background:#f3f4f2}
+/* Kat çubuğu hiçbir genişlikte taşmasın: araç satırı sığmazsa kendi içinde
+   ortalanıp alta sarar. */
+.dock-actions{flex-wrap:wrap;justify-content:center;gap:5px}
+.explore-dock .camera-tools{display:flex;align-items:center;gap:2px}
 @media(pointer:fine){#app[data-scale=floor]:not([data-walk=true]) .walk-pegman{display:inline-flex}}
 .pegman-ghost{position:fixed;z-index:400;left:0;top:0;width:34px;height:34px;margin:-30px 0 0 -17px;pointer-events:none;
   filter:drop-shadow(0 4px 6px rgba(0,0,0,.35));transition:transform 120ms ease}
-.pegman-ghost svg{width:100%;height:100%;fill:#f2b233;stroke:#1c2621;stroke-width:1.1}
+.pegman-ghost svg{width:100%;height:100%;fill:#fff;stroke:#16211c;stroke-width:1.2}
 .pegman-ghost::after{content:'';position:absolute;left:50%;bottom:-8px;width:14px;height:5px;margin-left:-7px;border-radius:50%;background:rgba(0,0,0,.28)}
 .pegman-ghost[data-ok=false]{opacity:.45}
 body.pegman-dragging,body.pegman-dragging *{cursor:grabbing !important}
 /* Masaüstü ayar şeridi sağ ortada: yakın çevre araç rayı onun soluna geçer. */
-#app[data-options-docked=true] .side-tools{right:224px}
+/* Yakın çevre araç rayı sağ ortada; ayarlar artık sağ altta, çakışma yok. */
+
+/* Mobilya / oda adları / ölçüler / fotoğraflar yalnız villa (kat) görünümünde
+   bir şey yapar - yakın çevrede ve bölgede gösterilmez (masaüstü ve telefon). */
+#app:not([data-scale=floor]) .options-panel .villa-only{display:none}
+
+/* İçeride gez: lens 14 mm sabit - seçici gösterilmez. */
+.walk-lens{display:none !important}

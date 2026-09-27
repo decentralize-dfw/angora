@@ -484,7 +484,10 @@ export function createLighting(renderer, scene, camera, clip,{quality}={}) {
         if(['architecture','interior'].includes(name)&&/-(metal|glass|wood)-/.test(material.name)){
           reflectionMaterials.add(material);material.envMap=roomReflections?.get(reflectionFloor)??null;
         }
-        if(name==='context-ground'||(name==='garden'&&!/metal|glass|wood/.test(material.name)))groundLight?.apply(material);
+        // Pişmiş zemin gölgesi eski teslimatın ağaçlarını/arsasını taşıyor;
+        // ürün sahibinin yeni zemininde (batch verisi yok) olmayan ağaçların
+        // izi olurdu - orada gölgeyi canlı güneş verir.
+        if((name==='context-ground'&&material.userData.angoraBatch)||(name==='garden'&&!/metal|glass|wood/.test(material.name)))groundLight?.apply(material);
         // Task 3.5: the pool lives inside the garden batch; the wave/absorption
         // response keys on its _batchid, so the batch stays one draw.
         if(FEATURES.poolWaterV2&&name==='garden'&&!material.userData.waterApplied

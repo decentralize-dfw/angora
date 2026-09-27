@@ -110,3 +110,42 @@ export class WalkSurface {
     path.reverse();path.push(to);return path;
   }
 }
+
+// 27.09 (ürün sahibi): yürüme yüzeyine elle yapılan iki düzeltme, veri
+// dosyasına dokunmadan, yüklemede uygulanır.
+//
+// 1) Binanın iki yanındaki dış merdivenler veride basamak olarak yok: zemin
+//    -0,10 / 0,88 / 1,67 / 2,80 m'lik düz teraslar, aralarında ~1 m sıçrama
+//    (yürüyüş en çok 0,24 m adım atar). Her iki yana bahçeden giriş kotuna
+//    TEK EĞİMLİ düz rampa: dikdörtgenin içinde yükseklik z boyunca doğrusal,
+//    diğer katmanlardaki hücreler temizlenir ki ayak rampadan kaymasın.
+// 2) Antre -> Garaj kapısı veride ~0,5 m açık (gövde çapı 0,42 m): pratikte
+//    geçilmiyordu. Açıklık 0,9 m'ye genişletilir, zemin antre kotunda.
+export const WALK_RAMPS = [
+  {name: 'west-side', x0: -8.9, x1: -7.1, z0: -5.3, z1: 1.5, h0: -.10, h1: 2.80},
+  {name: 'east-side', x0: 8.85, x1: 10.45, z0: -6.0, z1: 1.45, h0: -.10, h1: 2.80},
+];
+export const WALK_PASSAGES = [
+  {name: 'antre-garaj', floor: 1, x0: 2.6, x1: 4.6, z0: -0.62, z1: 0.30, refX: 2.0, refZ: -0.16},
+];
+export function patchWalkSurface(surface, {ramps = WALK_RAMPS, passages = WALK_PASSAGES} = {}) {
+  const {x: gx, z: gz, step, width, height} = surface.grid;
+  const cells = (x0, x1, z0, z1, visit) => {
+    for (let row = Math.max(0, Math.floor((z0 - gz) / step)); row <= Math.min(height - 1, Math.floor((z1 - gz) / step)); row++)
+      for (let col = Math.max(0, Math.floor((x0 - gx) / step)); col <= Math.min(width - 1, Math.floor((x1 - gx) / step)); col++)
+        visit(row * width + col, gz + (row + .5) * step);
+  };
+  let rampCells = 0, openedCells = 0;
+  for (const r of ramps) cells(r.x0, r.x1, r.z0, r.z1, (i, z) => {
+    const t = Math.min(1, Math.max(0, (z - r.z0) / (r.z1 - r.z0)));
+    surface.layers.forEach((layer, f) => {if (f) {layer.heights[i] = -32768; layer.masks[i] = 1;}});
+    surface.layers[0].heights[i] = Math.round((r.h0 + (r.h1 - r.h0) * t) * 1000);
+    surface.layers[0].masks[i] = 0; rampCells++;
+  });
+  for (const p of passages) {
+    const layer = surface.layers[p.floor], ref = surface.index(p.refX, p.refZ);
+    if (!layer || ref < 0 || layer.heights[ref] === -32768) continue;
+    cells(p.x0, p.x1, p.z0, p.z1, i => {layer.heights[i] = layer.heights[ref]; layer.masks[i] &= ~1; openedCells++;});
+  }
+  return {rampCells, openedCells};
+}

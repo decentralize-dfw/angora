@@ -124,7 +124,7 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     for(const material of resources(model).materials)prepareBatchedMaterial(material,{exterior:context.includes(name)||(features.gardenSpotStrip&&name==='garden'),
       proceduralDetail:Boolean(proceduralDetail.enabled),detailOctaves:proceduralDetail.octaves??2,detailInterior:Boolean(proceduralDetail.interior),detailBoost:proceduralDetail.boost??null});
     // TAKILMA 2: the same outdoor strip for the non-batched garden.
-    if(features.gardenSpotStrip&&name==='garden'&&features.villaFixtureStrip!==false)
+    if(features.gardenSpotStrip&&(name==='garden'||context.includes(name))&&features.villaFixtureStrip!==false)
       for(const material of resources(model).materials)stripFixtureLoops(material);
     loaded.set(name,model);groups.set(name,model);scene.add(model);
     if(manifest.parts.every(part=>loaded.has(part.name)))resolveParts();
@@ -192,7 +192,7 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
         // idle prefetch brings it in behind the first frame, and a floor
         // pick that outruns the idle simply awaits the same acquire.
         const deferInterior=features.progressiveLoaderV2;
-        const deferredContext=features.progressiveContextV1?['context-buildings','context-plants']:[];
+        const deferredContext=features.progressiveContextV1?['context-buildings','context-plants'].filter(name=>records.has(name)&&manifest.parts.some(p=>p.name===name)):[];
         preload??=(async()=>{
           for(const {name} of manifest.parts)if(!(deferInterior&&name==='interior')&&!deferredContext.includes(name))await acquire(name);
           const idle=globalThis.requestIdleCallback?(fn=>globalThis.requestIdleCallback(fn,{timeout:2500})):(fn=>setTimeout(fn,2000));

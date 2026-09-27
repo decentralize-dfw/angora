@@ -20,7 +20,7 @@ import { createAnnotations } from './annotations.js';
 import { InteriorWalk, enableImmersiveWalk } from './walk.js';
 import {CameraFlight} from './camera-flight.js';
 import {frameInsets} from './frame-insets.js';
-import {clockLabel} from './daylight.js';
+import {clockLabel,solarPosition} from './daylight.js';
 import {createHotspots} from './hotspots.js';
 import {createSpotlight} from './tour-spotlight.js';
 import {TOUR_DURATION,tourLang} from './tour-meta.js';
@@ -29,14 +29,14 @@ import {renderPropertyInfo,renderFloorInfo} from './property-info.js';
 import {areaLabel} from './annotations.js';
 import { configureCameraControls } from './camera.js';
 import { PendingAction } from './pending-action.js';
-import {fitContextBounds,neutraliseTransmission} from './material-response.js';
+import {neutraliseTransmission} from './material-response.js';
 import {applyGradeValues,loadGradeTextures,bindGradeTextures,reviveBatchedGrade} from './exterior-grade.js';
 import {applyCellGrade,buildCellFamilies,buildCellFamiliesSliced} from './cell-grade.js';
 import {reviveBakedOcclusion} from './ao-revival.js';
 import {upgradeAtlasToArrays} from './atlas-array.js';
 import {bakeContactOcclusion} from './vertex-ao.js';
 import {markUploads,releaseGeometryArrays} from './geometry-release.js';
-import {applyVillaModelV3} from './villa-model-v3.js';
+import {applyVillaModelV3,applyContextV2} from './villa-model-v3.js';
 import {createSiteContext} from './site-context.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
 import {rigFovFor} from './camera-rigs.js';
@@ -55,6 +55,7 @@ import {FEATURES} from './features.js';
 import {createQualityProfile,detectTierFromEnvironment} from './quality-profile.js';
 import { sectionHeight, smoothStep, createWallCaps, createSoilCap, createNativeSoilSection, SOIL_CUT_HEIGHT } from './section.js';
 import { createWalkLocator } from './walk-locator.js';
+import {patchWalkSurface} from './walk-surface.js';
 import { t, roomName, applyStatic, setLang, currentLang } from './i18n.js';
 const FRAME_STATS=/[?&](stats=1|camera=)/.test(location.search); // QA-only per-frame evidence
 
@@ -180,8 +181,7 @@ let shareTimer = null;
 function rememberState() {
   clearTimeout(shareTimer);
   shareTimer = setTimeout(() => {
-    const search = shareSearch({view:selected, hour:Number($('#daylight-hour').value),
-      season:$('#daylight-season').value, style:$('#lighting-style').value,profile:requestedProfile});
+    const search = shareSearch({view:selected,lang:currentLang(),profile:requestedProfile});
     // An empty search would leave the current query in place, so back at the
     // opening view the path replaces it outright.
     history.replaceState(null, '', (search || location.pathname) + location.hash);
@@ -453,12 +453,15 @@ function frame(initial=false,keep=false) {
     } else size.multiplyScalar(1.18);
   }
   if(selected==='neighborhood'){size.set(66,21,70);center.set(0,3,-5);}
-  if(selected==='region'&&contextBox){size=contextBox.getSize(new THREE.Vector3());center.copy(contextBox.getCenter(new THREE.Vector3()));}
+  // Bölge: harita katmanı kareyi kaplar, 3B sahne altında yalnız GEÇİŞ için
+  // çekilir. Eskiden bütün çevre kutusunu (yakın çevrenin ~5 katı) sığdırıyordu
+  // - geçişte haritanın dışı görünüyordu. Artık yakın çevrenin 2 katı.
+  if(selected==='region'){size.set(132,21,140);center.set(0,3,-5);}
   const polar=planMode?.0001:selected==='region'?.58:floor?.56:.78;
   const insets=floor?floorFrameInsets():{verticalFraction:1,horizontalFraction:1};
   frameSpan=Math.max((size.z*Math.cos(polar)+size.y*Math.sin(polar))/insets.verticalFraction,size.x/aspect/insets.horizontalFraction)*(floor?1.08:1.14);
   const rigFov=rigFovFor(selected,{enabled:FEATURES.cameraRigsV2});
-  if(selected==='region'&&contextBox)frameSpan=fitContextBounds(contextBox,aspect,polar,0,rigFov).span;
+  // (bölge çerçevesi yukarıda: yakın çevrenin 2 katı - fitContextBounds artık kullanılmaz)
   if(keep){center.copy(controls.target);if(floor)center.y=[0,3.0996,6.3714,9.4705][Number(selected[1])];frameSpan=camera.position.distanceTo(controls.target)*2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2));}
   flight.go({target:center,polar,span:frameSpan,zoom:keep?camera.zoom:1,azimuth:planMode||selected==='region'?0:initial?.804:undefined,fov:planMode?undefined:rigFov},initial===true);
   resize();
@@ -564,11 +567,8 @@ function layoutOverlays() {
     return {top,bottom,free:frame.height-top-bottom};
   };
   const right=bandOf([$('.tool-dock'),...Object.keys(SHEETS).map(id=>$('#'+id))]);
-  let side='right',band=right;
-  if(right.free<PHOTO_BAND){
-    const left=bandOf([$('.view-description'),$('#model-scale')]);
-    if(left.free>right.free){side='left';band=left;}
-  }
+  // Ürün sahibi: fotoğraf HER ZAMAN sağda açılır (sol sütuna kaçmaz).
+  const side='right',band=right;
   dock.dataset.side=side;
   dock.style.top=`${Math.round(band.top)}px`;
   dock.style.bottom=`${Math.round(band.bottom)}px`;
@@ -844,7 +844,7 @@ async function selectView(id, initial = false) {
   }
   frame(initial);
   invalidateUIObstacles();
-  host.dataset.view = id; host.dataset.loaded = 'true'; rememberState(); invalidate();
+  host.dataset.view = id; host.dataset.loaded = 'true'; applyNightHouse(); rememberState(); invalidate();
 }
 let walkData=null;
 // The narrated tour: the driver (audio clock and subtitles), the shade it
@@ -947,6 +947,7 @@ function markLanguage(){
 // the room menu, the plan's room tags, the map, the property sheet, the
 // photograph captions.
 function refreshChrome(){
+  rememberState(); // adresteki görünüm kelimesi dile göre (TR/EN)
   applyStatic();
   markLanguage();
   photoPins?.refreshLabels();photoViewer?.refresh();
@@ -1322,6 +1323,36 @@ function setTourWindows(on){
     lighting.interior(/^f[0-3]$/.test(selected)?Number(selected[1]):null,null,undefined,{});
   }
 }
+// AKŞAM EVİ: sesli turun kapanışındaki gece hâli artık saat kaydırıcısına
+// bağlı - güneş battıkça evin ışıkları dışarıdan görünür: pencereler sıcak
+// parlar, yakın çevrede bütün katların armatürleri yanar ve iç mekân
+// camların ardında çizilir. Villa (kat) görünümünde açık kat kendi
+// armatürleriyle yanar, pencereler yine parlar. İç ışıklar kapalıysa yok.
+let nightHouse=false;
+function nightLevel(){
+  const hour=Number($('#daylight-hour')?.value??12),day=Number($('#daylight-season')?.value??172);
+  const altitude=solarPosition(hour,{day}).altitude;
+  return 1-THREE.MathUtils.smoothstep(altitude,-4,6);
+}
+function applyNightHouse(){
+  if(!lighting||!ready||walk?.active||guidedTour?.active||tourLightsBefore!==null)return;
+  const level=interiorLights?nightLevel():0,on=level>.02,exterior=!/^f[0-3]$/.test(selected)&&selected!=='region';
+  const rooms=groups.get('interior');
+  if(on){
+    lighting.setWindowGlow(.42*level);
+    if(exterior){
+      if(rooms)rooms.visible=true;
+      lighting.interior('all',buildingBox?.getCenter(new THREE.Vector3())?.toArray()??null,undefined,{gain:5.5,reach:16});
+    }
+    nightHouse=true;
+  } else if(nightHouse){
+    lighting.setWindowGlow(0);
+    if(rooms)rooms.visible=/^f[0-3]$/.test(selected);
+    lighting.interior(/^f[0-3]$/.test(selected)?Number(selected[1]):null,null,undefined,{});
+    nightHouse=false;
+  }
+  invalidate();
+}
 // Task 4.2: the region map layer (21 KB plus its OSM street/amenity JSON)
 // loads on the first visit to the Bölge scale, not with the boot bundle.
 let regionMapFactory=null;
@@ -1398,7 +1429,16 @@ function bindPegman(){
     if(!ray.ray.intersectPlane(plane,hit))return null;
     // Yürünebilir zemine 1,5 m'den uzak bir bırakış (bahçe, boşluk) sayılmaz.
     const landing=walk.surface.center(floor,[hit.x,hit.z],furnitureVisible);
-    return landing&&Math.hypot(landing[0]-hit.x,landing[2]-hit.z)<1.5?[hit.x,hit.z]:null;
+    if(!landing||Math.hypot(landing[0]-hit.x,landing[2]-hit.z)>=1.5)return null;
+    // Yalnız İÇ MEKÂN: bina ayak izinin içinde ve katın kendi döşeme kotunda.
+    // Çatı eğimi, teras/bahçe kotu ya da bina dışı kabul edilmez.
+    const inside=buildingBox&&hit.x>buildingBox.min.x+.4&&hit.x<buildingBox.max.x-.4&&hit.z>buildingBox.min.z+.4&&hit.z<buildingBox.max.z-.4;
+    const foot=landing[1]-walk.surface.data.eye_height_m;
+    if(!inside||Math.abs(foot-[0,3.0996,6.3714,9.4705][floor])>.45)return null;
+    // Oda istasyonu olmayan yerler (dış yaklaşım) de sayılmaz.
+    const stations=walk.surface.data.stations.filter(st=>st.floor_index===floor&&!/site|approach|garden|terrace/i.test(st.room_id));
+    const near=stations.some(st=>Math.hypot(st.position[0]-hit.x,st.position[2]-hit.z)<6);
+    return near?[hit.x,hit.z]:null;
   };
   let ghost=null;
   const move=event=>{
@@ -1409,7 +1449,18 @@ function bindPegman(){
   const end=event=>{
     removeEventListener('pointermove',move);removeEventListener('pointerup',end);removeEventListener('pointercancel',end);
     document.body.classList.remove('pegman-dragging');
-    const at=event.type==='pointerup'?dropPoint(event.clientX,event.clientY):null;
+    let at=event.type==='pointerup'?dropPoint(event.clientX,event.clientY):null;
+    // Bırakışta (yalnız bir kez) gerçek bina geometrisine ışın: ilk çarpılan
+    // yüzey katın döşemesinin 0,6 m'den fazla üstündeyse (çatı, üst döşeme)
+    // adam oraya inmez - çatıya atılamaz.
+    if(at){
+      const rect=renderer.domElement.getBoundingClientRect();
+      ndc.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1);
+      ray.setFromCamera(ndc,camera);
+      const targets=['architecture','interior'].map(name=>groups.get(name)).filter(Boolean);
+      const first=ray.intersectObjects(targets,true).find(hit=>hit.object.visible&&!hit.object.userData.aoExcluded);
+      if(first&&first.point.y>[0,3.0996,6.3714,9.4705][Number(selected[1])]+.6&&first.point.y<clip.constant)at=null;
+    }
     ghost?.remove();ghost=null;
     if(at)enterWalk(null,at);
   };
@@ -1616,6 +1667,7 @@ async function loadNativeModel(manifest){
   if(soil){nativeSoil=createNativeSoilSection(soil);nativeSoil.userData.height=soil.height;scene.add(nativeSoil);}
   annotations=createAnnotations(rooms,host);scene.add(annotations.group);
   walk=new InteriorWalk(navigation,renderer.domElement,invalidate);scene.add(walk.rig);
+  {const patched=patchWalkSurface(walk.surface);console.info(`Yürüme yüzeyi: ${patched.rampCells} rampa hücresi, ${patched.openedCells} açılan kapı hücresi`);}
   lighting.setFixtures(navigation.lights,{allRooms:true});hotspots=createHotspots(host,walk,travelRoom);
   fillRoomMenu();
   locator=createWalkLocator(walk.surface,{minX:buildingBox.min.x+1,maxX:buildingBox.max.x-1,minZ:buildingBox.min.z+1,maxZ:buildingBox.max.z-1});
@@ -1858,6 +1910,12 @@ async function loadModel() {
     if(FEATURES.villaModelV3&&(deliveryProfile==='desktop'||FEATURES.villaModelV3Mobile)){
       const swapped=applyVillaModelV3(manifest,{mobile:deliveryProfile==='mobile'});
       if(swapped.length)console.info('Villa model v3'+(deliveryProfile==='mobile'?' (mobil ktx2)':'')+': '+swapped.join(', '));
+    }
+    // Çevre v2: ürün sahibinin komşu binaları ve zemin+yol modeli. Eski
+    // çevreye dönmek: ?features=contextV2:0
+    if(FEATURES.contextV2){
+      const changed=applyContextV2(manifest,{mobile:deliveryProfile==='mobile'});
+      if(changed.length)console.info('Çevre v2: '+changed.join(', '));
     }
     if(manifest.parts&&manifest.interior_streams){await loadNativeModel(manifest);return;}
     assetRevision=manifest.assets?.map(({file,sha256})=>({file,sha256}));
@@ -2168,7 +2226,7 @@ async function loadModel() {
     const capScene=results[6].status==='fulfilled'?results[6].value:null;
     if (capScene) {soilCap = createSoilCap(capScene); if (soilCap) scene.add(soilCap.group);}
     roomData=results[3].value;annotations=createAnnotations(roomData,host);scene.add(annotations.group);
-    walk = new InteriorWalk(results[4].value,renderer.domElement,invalidate);scene.add(walk.rig);
+    walk = new InteriorWalk(results[4].value,renderer.domElement,invalidate);scene.add(walk.rig);patchWalkSurface(walk.surface);
     // the villa box includes roof eaves; the walls sit about a metre inside
     // it, so the outdoor test insets by that much or garden ground under an
     // eave would still count as "inside the house"
@@ -2365,7 +2423,7 @@ function bindInterface() {
   $('#zoom-in').onclick=()=>zoom(1.3);
   $('#zoom-out').onclick=()=>zoom(1/1.3);
   $('#reset-view').onclick=()=>{planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);$('#toggle-plan').textContent='Plan';mode(false);frame(false);}; $('#retry').onclick = loadModel;
-  $('#lift-call').onclick=()=>{if(lift?.run(performance.now())){refreshLiftControl();invalidate();}};
+  // Asansör çağırma düğmesi kaldırıldı (ürün sahibi: "o eskidendi").
   $('#toggle-furniture').onclick = () => setFurnitureVisible(!furnitureVisible);
   $('#toggle-rooms').onclick = () => {
     roomNamesVisible = !roomNamesVisible; $('#toggle-rooms').setAttribute('aria-pressed', roomNamesVisible); invalidate();
@@ -2415,12 +2473,12 @@ function bindInterface() {
   $('#open-info').onclick=()=>panel('info-panel',$('#info-panel').hidden);
   $('#open-floor').onclick=()=>panel('floor-panel',$('#floor-panel').hidden);
   document.querySelectorAll('[data-close-panel]').forEach(button=>button.onclick=()=>panel('',false));
-  $('#daylight-hour').oninput=()=>{const hour=Number($('#daylight-hour').value);$('#daylight-time').textContent=clockLabel(hour);$('#daylight-hour').setAttribute('aria-valuetext',clockLabel(hour));lighting?.setTime(hour,Number($('#daylight-season').value));rememberState();invalidate();};
+  $('#daylight-hour').oninput=()=>{const hour=Number($('#daylight-hour').value);$('#daylight-time').textContent=clockLabel(hour);$('#daylight-hour').setAttribute('aria-valuetext',clockLabel(hour));lighting?.setTime(hour,Number($('#daylight-season').value));applyNightHouse();rememberState();invalidate();};
   $('#daylight-season').onchange=()=>{$('#daylight-hour').oninput();lighting?.requestShadowUpdate();invalidate();};
   // Task 1.2-c: the shadow map re-renders when the hand SETTLES on an hour
   // (change fires on release/keyup), never per drag tick.
   $('#daylight-hour').addEventListener('change',()=>{lighting?.requestShadowUpdate();invalidate();});
-  $('#toggle-lights').onclick=()=>{interiorLights=!interiorLights;$('#toggle-lights').setAttribute('aria-pressed',interiorLights);lighting?.setLights(interiorLights);invalidate();};
+  $('#toggle-lights').onclick=()=>{interiorLights=!interiorLights;$('#toggle-lights').setAttribute('aria-pressed',interiorLights);lighting?.setLights(interiorLights);applyNightHouse();invalidate();};
   $('#lighting-style').onchange=e=>{lighting?.setStyle(e.target.value);rememberState();invalidate();};
   applyStatic();
   document.querySelectorAll('.lang-flag').forEach(button=>{

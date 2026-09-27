@@ -44,6 +44,7 @@ export const VILLA_MODEL_V3_MOBILE = Object.freeze({
   interior:     {file: 'mobile/INTERIOR-opt-v2.ktx2.glb', bytes: 4229468},
 });
 
+
 // Manifest'i YERİNDE değiştirir ve değiştirilen parça adlarını döndürür.
 // gpu_sha256 temizlenir: o hash eski dosyanın içeriğiydi, yenisinde
 // tutmaz ve acquire onu ?v= olarak yazdığı için yanlış bir önbellek
@@ -83,4 +84,33 @@ export function repairUntexturedWood(model) {
     m.needsUpdate = true; repaired++;
   }
   return repaired;
+}
+
+// 27.09 ÇEVRE v2 (tools/batch-delivery/make-context-v2.mjs) - villadan AYRI,
+// kendi bayrağıyla (contextV2): komşular düz mat beyaz cepheyle, zemin+yol
+// ürün sahibinin yeni modeli. Yeni zeminde arsa ve kenar ağaçları yok; eski
+// mahalle ağaçları parçası (context-plants) teslimattan çıkar.
+export const CONTEXT_V2 = Object.freeze({
+  'context-buildings': {file: 'KOMSULAR-opt-v2.glb', bytes: 8222300},
+  'context-ground':    {file: 'CEVRE-YOL-opt-v2.glb', bytes: 717972},
+});
+export const CONTEXT_V2_MOBILE = Object.freeze({
+  'context-buildings': {file: 'mobile/KOMSULAR-opt-v2.ktx2.glb', bytes: 8164988},
+  'context-ground':    {file: 'mobile/CEVRE-YOL-opt-v2.ktx2.glb', bytes: 639076},
+});
+const CONTEXT_V2_DROPPED = ['context-plants'];
+export function applyContextV2(manifest, {mobile = false} = {}) {
+  if (!manifest?.parts || !manifest.batched) return [];
+  const table = mobile ? CONTEXT_V2_MOBILE : CONTEXT_V2;
+  const changed = [];
+  for (const part of manifest.parts) {
+    const next = table[part.name];
+    if (!next) continue;
+    part.file = ROOT + next.file; part.bytes = next.bytes; delete part.gpu_sha256;
+    changed.push(part.name);
+  }
+  const before = manifest.parts.length;
+  manifest.parts = manifest.parts.filter(part => !CONTEXT_V2_DROPPED.includes(part.name));
+  if (manifest.parts.length !== before) changed.push(...CONTEXT_V2_DROPPED.map(name => '-' + name));
+  return changed;
 }

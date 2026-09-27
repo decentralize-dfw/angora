@@ -99,3 +99,19 @@ test('bayrak açık ship ediliyor ve tek bayrakla geri alınabilir', () => {
   applyVillaModelV3(m);
   assert.deepEqual(m.parts.map(p => p.name), before, 'parça adları ve sıra korunmalı');
 });
+
+// 27.09 çevre v2 - villadan ayrı, kendi bayrağıyla.
+import {applyContextV2} from '../src/villa-model-v3.js';
+test('çevre v2: komşu ve zemin dosyası değişir, eski ağaç parçası çıkar, villa ellenmez', () => {
+  const m = manifest();
+  const changed = applyContextV2(m);
+  assert.deepEqual(changed.sort(), ['-context-plants', 'context-buildings', 'context-ground']);
+  const byName = Object.fromEntries(m.parts.map(p => [p.name, p]));
+  assert.equal(byName['context-buildings'].file, '../../26092026/KOMSULAR-opt-v2.glb');
+  assert.equal(byName['context-ground'].file, '../../26092026/CEVRE-YOL-opt-v2.glb');
+  assert.equal(byName['context-plants'], undefined);
+  assert.equal(byName.architecture.file, 'architecture.glb');
+  const mobile = manifest(); applyContextV2(mobile, {mobile: true});
+  assert.match(mobile.parts.find(p => p.name === 'context-buildings').file, /mobile\/KOMSULAR-opt-v2\.ktx2\.glb$/);
+  assert.equal(DEFAULT_FEATURES.contextV2, true);
+});

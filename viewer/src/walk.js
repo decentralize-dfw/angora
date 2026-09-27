@@ -17,6 +17,13 @@ export const WALK_HORIZONTAL_FOV_DEG = 95;
 // headset could never leave the floor they arrived on, and the balconies and
 // the upper rooms would be shown to them and kept from them at once.
 const SNAP_TURN_DEG = 30, STICK_PRESS = .72, STICK_RELEASE = .35;
+// Ürün sahibi (27.09): lens 14 mm SABİT (24 mm film yüksekliğine göre dikey
+// açı), göz biraz alçak, yürüyüş 1,5 kat hızlı, Shift ile 2,5 kat.
+export const WALK_LENS_MM = 14;
+export const WALK_LENS_FOV = 2 * Math.atan(12 / WALK_LENS_MM) * 180 / Math.PI;
+// Görüntünün göz yüksekliği çarpışma yüzeyinden bu kadar aşağıda: yalnız
+// rig kaydırılır, zemin/basamak hesabı (camera.position) değişmez.
+const EYE_DROP_M = .12, WALK_SPEED = 1.25 * 1.5, SPRINT = 2.5;
 
 export class InteriorWalk {
   constructor(data, canvas, invalidate) {
@@ -46,9 +53,10 @@ export class InteriorWalk {
     const movement = ['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'];
     window.addEventListener('keydown',e=>{
       if (!this.active || this.inputSuspended || e.altKey || e.ctrlKey || e.metaKey || e.target.isContentEditable || /INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+      this.sprint=e.shiftKey;
       if (movement.includes(e.code)) {e.preventDefault();this.keys.add(e.code);invalidate();}
     });
-    window.addEventListener('keyup',e=>{this.keys.delete(e.code);if(this.active)invalidate();});
+    window.addEventListener('keyup',e=>{this.keys.delete(e.code);this.sprint=e.shiftKey;if(this.active)invalidate();});
     window.addEventListener('blur',()=>{this.keys.clear();this.pointer=null;this.lastTime=null;});
     document.addEventListener('visibilitychange',()=>{
       this.visibilityPaused=document.hidden;this.keys.clear();this.pointer=null;this.lastTime=null;
@@ -111,8 +119,9 @@ export class InteriorWalk {
     let station=this.surface.station(room);if(!station)throw Error('Unknown room');
     if(position&&this.surface.sample(position[0],position[2],position[1]-this.surface.data.eye_height_m,this.furniture)?.floor===station.floor_index)station={...station,position};
     this.active=true;this.keys.clear();this.lastTime=null;this.route=null;
-    this.rig.position.set(0,0,0);this.rig.rotation.set(0,0,0);
+    this.rig.position.set(0,-EYE_DROP_M,0);this.rig.rotation.set(0,0,0);
     this.camera.position.fromArray(station.position);
+    this.setLens(WALK_LENS_FOV);
     this.yaw=position?this.surface.openingYaw(station.position,station.view_yaw_rad??.85):station.view_yaw_rad??.85;
     this.pitch=station.view_pitch_rad??-.04;this.pose();
     this.room=station.room_id;this.floor=station.floor_index;this.invalidate();return station;
@@ -154,7 +163,7 @@ export class InteriorWalk {
     }
     const length=Math.hypot(forward,side);if(!length)return false;
     forward/=Math.max(1,length);side/=Math.max(1,length);
-    const speed=1.25*dt,dx=(-Math.sin(yaw)*forward+Math.cos(yaw)*side)*speed,dz=(-Math.cos(yaw)*forward-Math.sin(yaw)*side)*speed;
+    const speed=WALK_SPEED*(this.sprint&&!this.xrActive?SPRINT:1)*dt,dx=(-Math.sin(yaw)*forward+Math.cos(yaw)*side)*speed,dz=(-Math.cos(yaw)*forward-Math.sin(yaw)*side)*speed;
     if(this.xrActive) {
       const p=this.camera.getWorldPosition(new THREE.Vector3());p.y=this.rig.position.y+this.surface.data.eye_height_m;
       const before=p.clone();this.surface.move(p,dx,dz,this.furniture);
@@ -187,7 +196,7 @@ export class InteriorWalk {
   }
   endXR() {
     const position=this.camera.getWorldPosition(new THREE.Vector3()),direction=this.camera.getWorldDirection(new THREE.Vector3());
-    const floor=this.rig.position.y;this.rig.position.set(0,0,0);this.rig.rotation.set(0,0,0);
+    const floor=this.rig.position.y;this.rig.position.set(0,-EYE_DROP_M,0);this.rig.rotation.set(0,0,0);
     this.camera.position.copy(position);this.camera.position.y=floor+this.surface.data.eye_height_m;
     this.xrActive=false;this.yaw=Math.atan2(-direction.x,-direction.z);this.pitch=Math.asin(THREE.MathUtils.clamp(direction.y,-1,1));this.pose();
   }

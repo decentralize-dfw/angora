@@ -16,6 +16,7 @@ const formatHour = hour => String(Number(snapHour(hour).toFixed(2)));
 export function readShareState(search) {
   const params = new URLSearchParams(search), state = {};
   if (VIEWS.includes(params.get('view'))) state.view = params.get('view');
+  const slugView = viewFromSlug(params); if (slugView) state.view = slugView;
   const hour = Number(params.get('hour'));
   if (params.has('hour') && Number.isFinite(hour) && hour >= 6 && hour <= 21) state.hour = snapHour(hour);
   if (SEASONS.includes(params.get('season'))) state.season = params.get('season');
@@ -23,15 +24,25 @@ export function readShareState(search) {
   return state;
 }
 
-// Only what differs from the opening view is written, so the common case keeps
-// a clean address and a shared link says exactly what it changes.
+// 27.09 (ürün sahibi): adres çubuğunda "?hour=16&light=sun" gibi şeyler
+// YAZILMAZ. En çok TEK bir görünüm kelimesi, dile göre Türkçe ya da İngilizce;
+// açılış görünümünde (yakın çevre) hiç parametre yok. Saat/ışık/mevsim eski
+// linklerden OKUNMAYA devam eder ama bir daha yazılmaz.
+export const VIEW_SLUGS = Object.freeze({
+  tr: {region: 'bolge', neighborhood: 'yakin-cevre', building: 'villa', f0: 'bodrum', f1: 'giris', f2: '1-kat', f3: 'cati'},
+  en: {region: 'region', neighborhood: 'neighborhood', building: 'villa', f0: 'basement', f1: 'entrance', f2: 'first-floor', f3: 'attic'},
+});
+export function viewFromSlug(params) {
+  for (const table of Object.values(VIEW_SLUGS))
+    for (const [view, slug] of Object.entries(table)) if (params.has(slug) && params.get(slug) === '') return view;
+  return null;
+}
 export function shareSearch(state) {
-  const params = new URLSearchParams();
-  if(['desktop','mobile'].includes(state.profile))params.set('profile',state.profile);
-  if (VIEWS.includes(state.view) && state.view !== DEFAULTS.view) params.set('view', state.view);
-  if (Number.isFinite(state.hour) && snapHour(state.hour) !== DEFAULTS.hour) params.set('hour', formatHour(state.hour));
-  if (SEASONS.includes(state.season) && state.season !== DEFAULTS.season) params.set('season', state.season);
-  if (STYLES.includes(state.style) && state.style !== DEFAULTS.style) params.set('light', state.style);
-  const search = params.toString();
-  return search ? `?${search}` : '';
+  const parts = [];
+  // Dil ve (QA'nın) zorlanan profili ziyaretçinin kendi seçimi - korunur.
+  if (state.lang === 'en') parts.push('lang=en');
+  if (['desktop','mobile'].includes(state.profile)) parts.push('profile=' + state.profile);
+  if (VIEWS.includes(state.view) && state.view !== DEFAULTS.view)
+    parts.push(VIEW_SLUGS[state.lang === 'en' ? 'en' : 'tr'][state.view]);
+  return parts.length ? '?' + parts.join('&') : '';
 }

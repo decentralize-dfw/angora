@@ -114,6 +114,15 @@ try {
     }
     void basisu; // required listesinde kalır
     const outFile = path.join(OUT_DIR, path.basename(file, '.glb') + '.ktx2.glb');
+    // Çevre v2 dosyaları masaüstünde normal 8 / UV 11 bit Draco ile yazıldı;
+    // okununca bu ayar kaybolur ve varsayılanla (10/12) yeniden yazılırsa
+    // telefon kopyası masaüstünden BÜYÜK çıkar. Aynı nicemleme korunur
+    // (konum her zaman 14 bit - mesh değişmez).
+    if (/^(KOMSULAR|CEVRE-YOL)-/.test(path.basename(file))) {
+      const draco = root.listExtensionsUsed().find(e => e.extensionName === 'KHR_draco_mesh_compression');
+      draco?.setEncoderOptions({method: draco.constructor.EncoderMethod.EDGEBREAKER, encodeSpeed: 0, decodeSpeed: 5,
+        quantizationBits: {POSITION: 14, NORMAL: 8, TEX_COORD: 11, COLOR: 8, GENERIC: 12}});
+    }
     await io.write(outFile, document);
     const row = {
       file: path.basename(outFile), textures: count,
