@@ -15,6 +15,7 @@ Kameralar sitenin kendi QA kameraları (viewer/src/qa-cameras.js):
   C10 salon (içeride)   C11 ebeveyn yatak odası   C12 bodrum mutfak
 """
 import json, os, sys, time
+sys.stdout.reconfigure(encoding='utf-8')  # Windows konsolu cp1252: ş, ı yazamıyor
 from PIL import Image, ImageDraw, ImageFont
 from playwright.sync_api import sync_playwright
 
