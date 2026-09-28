@@ -597,3 +597,258 @@ Başlangıç 2026-09-28 20:35 +02. Yeni kusurlar için ek geometri döngüsü a�
 ### Yakın parke çizgisi — salt okunur inceleme
 
 630 ışın, aynı `wood_floor.001 / WOOD-FL` yüzeyine çarptı. Koyu çizginin 5 örneği Y≈2.027–2.029m, Z≈9.4694m; atlas U sınırında değil (U≈0.676). Büyük döşeme yüzeyinin topoloji/normal incelemesi Adım07; kesin neden bu adımda kanıtlandı sayılmıyor. `parke-cizgi-ray.json` ham sonuçları içerir. Yeni kusur üzerinde ek modelleme yapılmadı.
+
+## Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü
+Parke ilk 10 dakikalık düzeltme bölümü sonunda kilitlendi. Yeni kusur doğrulanmadıkça yeniden düzenlenmeyecek. Damar: Poly Haven European Walnut Veneer 05, 4K, CC0; renk: foto29/34 içindeki 44 örnekten filtre sonrası 21 sıcak örnek. 23 koyu/uygunsuz örnek çıkarıldı. 420 tahta, bağımsız sıra kaydırmaları; dikey sınırdan taşan tahtalar karşı kenarda devam ediyor.
+### Çapraz çizgi teşhisi
+Wireframe ve önceki ışın ölçümleri aynı wood_floor.001 kenarını gösterdi: Y=2.02709484 m, kenar Z=9.47023296 m; komşu ışın isabetleri Z≈9.46937 m. Mesh özel bölünmüş normaller içeriyordu. Atlas U sınırı değil. Teşhis: zemin mesh sınırındaki milimetre altı kot/normal süreksizliği; üst üste iki ayrı döşeme nesnesi kanıtlanmadı, rastgele alt yüz silinmedi. Render/doku yardımcısında yakın kotlar eşitlendi, yakın köşeler birleştirildi, normaller yeniden hesaplandı; parke normal haritası WORLD uzayına alındı. Kanıt: adim07/parke_wireframe.png ve wireframe-teshis.json.
+### Merdiven ve kalan düzeltmeler
+Adım05 yedeğindeki basamak/rıht meshleri temel alındı. Her yüzey kendi parçasının UV sınırları içinde, sarım eki olmadan kaplandı. Düz düşük kontrastlı damar; roughness 0.25. Adım05 yuvarlatılmış ve rıhttan taşan burun geometrisi korundu. Foto29 üst spotları %55 ölçeğe, emisyon 0.15 değerine indirildi. Taşan A06 eşik alt blokları kaldırıldı; kapak üstleri zemine sıfırlandı. Kartonpiyer yakın uçları kaynaklandı. Foto40 kamera ve kapı kanat açısı yeniden ayarlandı. Bunların görsel olarak kalan farkları aşağıda tamamlandı sayılmadan listelenmiştir.
+### 40 fotoğraf: oda bazında öz denetim
+40 render dosyası üretildi; bu, 40 kameranın doğru olduğu anlamına gelmez. Kapanan/siyah kadrajlar açıkça işaretlidir. Yeni odalardaki farklar Adım08 kapsamıdır; bu adımda düzeltilmedi. Mobilya üretimi bu adım kapsamında değildir.
+
+#### Foto 01 — Bodrum · Mutfak
+- **Malzeme tonu:** KALDI (Adım08): Bodrum zemini fotoğraftaki turuncu çapraz karoya karşı bej/düz görünüyor.
+- **Fazla/eksik nesne:** KALDI (Adım08): Buzdolabı, tezgâh üstü küçük cihaz ve eşyalar eksik.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Ada ve kapı kadrajı fotoğrafa göre yakın ve kaymış.
+- **Geometri/oran:** KALDI (Adım08): Ada genişliği/tezgâh oranı ve dolap kapak bölümleri farklı.
+
+#### Foto 02 — Bodrum · Salon
+- **Malzeme tonu:** KALDI (Adım08): Bodrum karo tonu çok açık; güneş şeridi fotoğraftan kuvvetli.
+- **Fazla/eksik nesne:** KALDI (Adım08): Kırmızı dolap, koltuklar, duvar saatleri ve küçük eşyalar eksik; masa/sandalye farklı.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Şömine ve merdiven aynı genel yönde; masa yerleşimi farklı.
+- **Geometri/oran:** KALDI (Adım08): Şömine taç oranı ve avize şekli fotoğrafla aynı değil.
+
+#### Foto 03 — Bodrum · Salon
+- **Malzeme tonu:** KALDI (Adım08): Bodrum zemini ve tavan aydınlığı fotoğraftan farklı.
+- **Fazla/eksik nesne:** KALDI (Adım08): Koltuk, sehpa, perdeler, kırmızı dolap ve duvar resimleri eksik.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Pencere/kapı dizisi kadrajda farklı; ışık şeritleri aşırı.
+- **Geometri/oran:** KALDI (Adım08): Masa/sandalyeler şablon görünümünde, fotoğrafla aynı oran değil.
+
+#### Foto 04 — Giriş katı · Salon
+- **Malzeme tonu:** KALDI (Adım08): Parke daha koyu; duvar ve döşeme ışık dağılımı farklı.
+- **Fazla/eksik nesne:** KALDI (Adım08): Halı, sehpa üzeri eşya ve perde ayrıntıları eksik; avize farklı.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Yemek masası kameraya fazla yakın, oturma grubu yönü farklı.
+- **Geometri/oran:** KALDI (Adım08): Masa ve sandalye biçimi, avize kolları fotoğrafla uyuşmuyor.
+
+#### Foto 05 — Bodrum · Salon
+- **Malzeme tonu:** KALDI (Adım08): Karo çok açık ve düz; fotoğraftaki turuncu derzli kaplama yok.
+- **Fazla/eksik nesne:** KALDI (Adım08): Duvar fotoğrafları, perdeler ve koltuk grubunun çoğu eksik.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Masa aşırı önde; tek kanepe fotoğraftaki L grubunu karşılamıyor.
+- **Geometri/oran:** KALDI (Adım08): Şömine/oturma grubu ve avize ayrıntıları farklı.
+
+#### Foto 06 — Çatı katı · Mini mutfak
+- **Malzeme tonu:** KALDI (Adım08): Mini mutfak görünmediğinden dolap tonu değerlendirilemedi; banyo karanlık.
+- **Fazla/eksik nesne:** KALDI (Adım08): Fotoğraftaki mini mutfak ve raflar kadrajda yok.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera duvara çok yakın; sağ tarafı duvar kapatıyor.
+- **Geometri/oran:** KALDI (Adım08): Kapı açıklığı/kadraj eşleşmiyor; Adım08 kamera önceliği.
+
+#### Foto 07 — Çatı katı · Yatak odası (C02)
+- **Malzeme tonu:** KALDI (Adım08): Siyah render nedeniyle değerlendirilemedi.
+- **Fazla/eksik nesne:** KALDI (Adım08): Siyah render nedeniyle nesne varlığı değerlendirilemedi.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera engellenmiş/kapalı hacimde; kesin neden henüz ölçülmedi.
+- **Geometri/oran:** KALDI (Adım08): Adım08: kamera düzeltildikten sonra bu oda yeniden denetlenecek.
+
+#### Foto 08 — Çatı katı · Yatak odası (C04)
+- **Malzeme tonu:** KALDI (Adım08): Oda fotoğrafa göre koyu/soğuk; zemin fazla karanlık.
+- **Fazla/eksik nesne:** KALDI (Adım08): Dolap, çalışma masası, sandalyeler, ayna ve raflar eksik.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Yatak/pencere kadrajı ve çatı eğimi yönü fotoğraftan farklı.
+- **Geometri/oran:** KALDI (Adım08): Çatı/pencere nişi oranı ve yatak biçimi farklı.
+
+#### Foto 09 — Çatı katı · Oturma alanı
+- **Malzeme tonu:** KALDI (Adım08): Parke fotoğrafa göre koyu; duvar ışık dağılımı farklı.
+- **Fazla/eksik nesne:** KALDI (Adım08): Duvar tabloları, TV ünitesi ve sehpa kadrajda eksik.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera fazla ileride; kanepe yalnız kenardan görünüyor.
+- **Geometri/oran:** KALDI (Adım08): Çatı eğimi/ışıklık profili fotoğrafla eşleşmiyor.
+
+#### Foto 10 — Çatı katı · Oturma alanı
+- **Malzeme tonu:** KALDI (Adım08): Duvar daha nötr/soğuk, fotoğraftaki sıcak yerel ışık eksik.
+- **Fazla/eksik nesne:** KALDI (Adım08): Tablolar ve yan duvar dolabı eksik; halı ve lambader farklı.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Koltuk grubu/masa konumları ve perde görünümü farklı.
+- **Geometri/oran:** KALDI (Adım08): Tavan kirişleri, koltuk ve sehpa oranları farklı.
+
+#### Foto 11 — 1. kat · Ortak banyo
+- **Malzeme tonu:** KALDI (Adım08): Seramik tonu kameranın engellenmesi nedeniyle güvenle karşılaştırılamıyor.
+- **Fazla/eksik nesne:** KALDI (Adım08): Lavabo, ayna, çamaşır makinesi ve WC fotoğraftaki gibi kadrajda görünmüyor.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera duş camı/çerçevesine çok yakın; banyo görünümü kapanıyor.
+- **Geometri/oran:** KALDI (Adım08): Adım08: ortak banyo kamera konumu ve duş geometrisi kontrolü.
+
+#### Foto 12 — 1. kat · Oturma alanı
+- **Malzeme tonu:** KALDI (Adım08): Zemin ve duvar fotoğraftan açık; sehpa ahşabı fotoğraftaki koyu tona uymuyor.
+- **Fazla/eksik nesne:** KALDI (Adım08): Tablolar ve aplikler eksik; sandalye/koltuk adedi ve biçimi farklı.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera ters yana kaymış; dolap sağda büyük, sol koltuklar kesiliyor.
+- **Geometri/oran:** KALDI (Adım08): Merdiven açıklığı kemeri ve tavan ahşaplarının aralığı farklı.
+
+#### Foto 13 — 1. kat · Yatak odası (107)
+- **Malzeme tonu:** KALDI (Adım08): Parke sıcak renkli; pencere yansıması mavi-gri, fotoğraftaki yansıma dağılımı farklı.
+- **Fazla/eksik nesne:** KALDI (Adım08): Yatak bu tur kapsam gereği ARSIV dışında; perde, duvar resmi ve doğru üçlü armatür eksik.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Büyük sarkıt fotoğraftakinden farklı ve kadraja taşıyor.
+- **Geometri/oran:** KALDI (Adım08): Pencere/radyatör ve kamera oranı farklı.
+
+#### Foto 14 — Çatı katı · Yatak odası (C04)
+- **Malzeme tonu:** KALDI (Adım08): Duvar kadrajı kapattığından oda malzemeleri değerlendirilemedi.
+- **Fazla/eksik nesne:** KALDI (Adım08): Yatak ve dolap modelde bu açıdan doğrulanamıyor.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera bir duvar/çatı yüzeyi arkasında; Adım08 kamera önceliği.
+- **Geometri/oran:** KALDI (Adım08): Oda karşılaştırması için kadraj yeniden kurulmalı.
+
+#### Foto 15 — Çatı katı · Banyo
+- **Malzeme tonu:** KALDI (Adım08): Banyo fotoğraftan çok koyu; seramik gri-kahve görünüyor.
+- **Fazla/eksik nesne:** KALDI (Adım08): Halı, havluluk, küçük aksesuarlar eksik/farklı.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Lavabo çok önde, duş ve WC kadrajları farklı.
+- **Geometri/oran:** KALDI (Adım08): Duş kabini profili ve eğimli tavan oranı uyuşmuyor.
+
+#### Foto 16 — 1. kat · Giyinme odası
+- **Malzeme tonu:** KALDI (Adım08): Dolap tonu fotoğraftan turuncu; ayna/ahşap yüzey ayrımı zayıf.
+- **Fazla/eksik nesne:** KALDI (Adım08): Mavi halı eksik; tavanda fotoğraftan farklı armatür görünüyor.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Dolap kapak ve ayna yerleşimleri farklı.
+- **Geometri/oran:** KALDI (Adım08): Sürgülü geniş ayna yerine dar kapaklı dolap oranı var.
+
+#### Foto 17 — 1. kat · Yatak odası (107)
+- **Malzeme tonu:** DÜZELTİLDİ: düz damarlı sıcak parke; KALDI: fotoğrafa göre daha mat yansıma.
+- **Fazla/eksik nesne:** DÜZELTİLDİ: ARSIV yatağı kontrol dışında; KALDI: yanlış büyük sarkıt, duvar resmi eksik.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kapı kanadı/kasa hizası fotoğraftan farklı.
+- **Geometri/oran:** KALDI (Adım08): Kartonpiyer köşe profili fotoğraftan daha ince/ayrı görünüyor.
+
+#### Foto 18 — 1. kat · Kat holü · Merdiven
+- **Malzeme tonu:** DÜZELTİLDİ: basamak/rıht derzsiz düz damar, roughness .25; KALDI: fotoğrafa göre koyu ışık.
+- **Fazla/eksik nesne:** KALDI (Adım08): Korkuluk ve zincir mevcut; sağ kapının kanat görünümü fotoğraftan farklı.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Basamak ortası UV eki kaldırıldı; alt hol duvarındaki beyaz yuvarlak parçalar fotoğraftaki yerleşimle uyuşmuyor.
+- **Geometri/oran:** DÜZELTİLDİ: Adım05 basamak geometrisi; KALDI: korkuluk/galeri açıklığı ince oran farkı.
+
+#### Foto 19 — 1. kat · Ebeveyn yatak odası
+- **Malzeme tonu:** KALDI (Adım08): Duvar ve mobilya tonları fotoğraftan koyu/sarı.
+- **Fazla/eksik nesne:** KALDI (Adım08): Şifonyer aynası yerine TV ve farklı dolap var; yatak ve komodinler farklı.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera yatak eksenine oturmuyor; sağ mobilya önde.
+- **Geometri/oran:** KALDI (Adım08): Yatak başlığı, şifonyer ve sarkıt oranları fotoğrafla aynı değil.
+
+#### Foto 21 — Giriş katı · Mutfak
+- **Malzeme tonu:** KALDI (Adım08): Mutfak dolabı fazla turuncu/çizgili; karo çok açık ve homojen.
+- **Fazla/eksik nesne:** KALDI (Adım08): Buzdolabı kadrajda yok; ankastre/davlumbaz biçimleri farklı.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera tezgâha fazla yakın; dolap taç ahşabı yönü farklı.
+- **Geometri/oran:** KALDI (Adım08): Davlumbaz ve üst dolap bölümleri fotoğrafla uyuşmuyor.
+
+#### Foto 22 — Giriş katı · Mutfak
+- **Malzeme tonu:** KALDI (Adım08): Dolap ahşabı fazla turuncu; karo fotoğraftan açık/düz.
+- **Fazla/eksik nesne:** KALDI (Adım08): Camlı kapı yerine geniş boşluk, farklı buzdolabı/avize ve masa-sandalyeler var.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Mutfak kamerası farklı yönde; ocak/davlumbaz kadraj dışında.
+- **Geometri/oran:** KALDI (Adım08): Dolap cam bölmeleri ve kapı açıklığı oranları uyuşmuyor.
+
+#### Foto 23 — Giriş katı · Yemek alanı
+- **Malzeme tonu:** KALDI (Adım08): Parke fotoğrafa göre koyu; mobilya döşemeleri fazla açık.
+- **Fazla/eksik nesne:** KALDI (Adım08): Fotoğraftaki vitrinin ayrıntıları ve giriş armatürü farklı/eksik.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Masa fazla önde; basamak/kolon yerleşimi kadrajda farklı.
+- **Geometri/oran:** KALDI (Adım08): Masa/sandalye ve kolon başlık oranları farklı.
+
+#### Foto 29 — Çatı katı · Kat holü
+- **Malzeme tonu:** DÜZELTİLDİ: ince düz damar ve sıcak örnekler; KALDI: fotoğraftaki kadar aydınlık değil.
+- **Fazla/eksik nesne:** DÜZELTİLDİ: üstteki iki spot küçültüldü ve emisyonu azaltıldı; KALDI: diafon/priz ve küçük armatür ayrıntıları.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: zemin mesh kenarı/normalleri; KALDI: kapı açıklığı üst köşe ve sağ süpürgelik ince farkları.
+- **Geometri/oran:** KALDI (Adım08): Korkuluk deseni fotoğraftan daha seyrek; kamera/çatı oranı tam eşleşmiyor.
+
+#### Foto 30 — 1. kat · Yatak odası (106)
+- **Malzeme tonu:** KALDI (Adım08): Kapı yüzeyi kadrajı kapattığından oda malzemeleri güvenle değerlendirilemiyor.
+- **Fazla/eksik nesne:** KALDI (Adım08): Perde/radyatör ve yatak fotoğraftaki gibi kadrajda değil.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera kapı arkasında; Adım08 kamera düzeltmesi gerekli.
+- **Geometri/oran:** KALDI (Adım08): Kapı açısı ve yatak odası perspektifi farklı.
+
+#### Foto 31 — 1. kat · Ebeveyn yatak odası
+- **Malzeme tonu:** KALDI (Adım08): Parke fotoğraftan koyu; soldaki dolap açık/pembe.
+- **Fazla/eksik nesne:** KALDI (Adım08): Şifonyer ve ayna kadrajda yok; kapı açıklıkları farklı.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera odanın farklı köşesine bakıyor.
+- **Geometri/oran:** KALDI (Adım08): Fotoğraftaki kemerli açıklık yerine dikdörtgen açıklık görünüyor.
+
+#### Foto 32 — 1. kat · Ebeveyn banyosu
+- **Malzeme tonu:** KALDI (Adım08): Lavabo dolabı fazla açık/turuncu; mavi halı gri görünüyor.
+- **Fazla/eksik nesne:** KALDI (Adım08): Fotoğrafta olmayan tavan plafonyeri var; aksesuarlar eksik.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Ayna, duvar lambası ve duş yerleşimi/oranı farklı.
+- **Geometri/oran:** KALDI (Adım08): Duş küvet yüksekliği, çerçevesi ve pencere boyutu farklı.
+
+#### Foto 33 — 1. kat · Oturma alanı
+- **Malzeme tonu:** KALDI (Adım08): Parke çok koyu; ahşap tavan tonu fotoğraftan farklı.
+- **Fazla/eksik nesne:** KALDI (Adım08): Perdeler ve sağ aplik eksik; tablo yerleşimi fotoğraftaki kadrajda farklı.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera koridorun farklı yanından bakıyor; koltuklar daha uzakta.
+- **Geometri/oran:** KALDI (Adım08): Tavan ahşap aralığı ve oturma grubu oranı farklı.
+
+#### Foto 34 — 1. kat · Kat holü · Merdiven
+- **Malzeme tonu:** DÜZELTİLDİ: parke ince düz damar; KALDI: fotoğraf yansıma/aydınlık farkı.
+- **Fazla/eksik nesne:** KALDI (Adım08): Sarkıt mevcut; galeri üstünde görünen beyaz merdiven parçalarının görünümü farklı.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: taşan alt eşik blokları kaldırıldı; KALDI: uzak odanın kapı altındaki parlak çizgi.
+- **Geometri/oran:** KALDI (Adım08): Korkuluk daha seyrek ve merdiven/üst birleşim silueti fotoğraftan farklı; kartonpiyer köşeleri tam eşleşmiyor.
+
+#### Foto 35 — 1. kat · Kat holü
+- **Malzeme tonu:** KALDI (Adım08): Duvar/parke genel sıcaklığı farklı; fotoğraftaki alt hol sıcak ışığı yok.
+- **Fazla/eksik nesne:** KALDI (Adım08): Diafon ve küçük duvar spotu eksik; tavan armatürü farklı.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera yakın duvar tarafından kapanıyor; galerinin çoğu kadraj dışında.
+- **Geometri/oran:** KALDI (Adım08): Kemerli açıklık görünmüyor; Adım08 kamera ve açıklık oranı kontrolü.
+
+#### Foto 39 — Giriş katı · Misafir WC
+- **Malzeme tonu:** KALDI (Adım08): Seramik bant deseni ve alt duvar tonu fotoğraftan farklı.
+- **Fazla/eksik nesne:** KALDI (Adım08): Çöp kovası/tuvalet aksesuarları eksik, lavabo görünümü farklı.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera kapı kanadı arkasında; WC karşıdan görünmüyor.
+- **Geometri/oran:** KALDI (Adım08): Pencere, lavabo ve klozetin kadrajdaki oran/yerleşimi farklı.
+
+#### Foto 40 — Giriş katı · Antre
+- **Malzeme tonu:** KALDI (Adım08): Giriş ahşabı korunuyor; zemin fotoğraftan daha düz/açık.
+- **Fazla/eksik nesne:** KALDI (Adım08): Sandalye ve diafon eksik; fotoğrafta görünmeyen üçlü duvar lambası/sol kapı kadrajda.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: plafonyer artık tam kadrajda, kapı kanadı menteşede 10° ayarlandı; KALDI: kamera hâlâ fotoğrafla birebir değil.
+- **Geometri/oran:** KALDI (Adım08): Radyatör solda ancak dar görünür; üst kiriş ve kartonpiyer birleşimi fotoğraftan farklı.
+
+#### Foto 41 — Giriş katı · Giriş holü
+- **Malzeme tonu:** KALDI (Adım08): Aynalı dolap yüzeyi ahşap kaplanmış görünüyor; giriş kapısı tonu/deseni farklı.
+- **Fazla/eksik nesne:** KALDI (Adım08): Kristal avize ve fotoğraftaki dolap aynası eksik.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera giriş kapısına karşıdan bakmıyor.
+- **Geometri/oran:** KALDI (Adım08): Giriş kapısı panel düzeni ve dolap oranları farklı.
+
+#### Foto 42 — Giriş katı · Antre · Merdiven
+- **Malzeme tonu:** KALDI (Adım08): Karo fotoğraftan daha düz ve sarı; duvar ışığı farklı.
+- **Fazla/eksik nesne:** KALDI (Adım08): İki sandalye ve küçük duvar tablosu eksik; sağ camlı kapı fotoğraftaki kadrajda yok.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: taşan eşik alt bloğu kaldırıldı; KALDI: kapı altı ince parlak/seviye çizgisi ve lambaların yükseklik farkı.
+- **Geometri/oran:** KALDI (Adım08): Radyatör daha dar, korkuluk motifi daha seyrek; kartonpiyer köşe profili farklı.
+
+#### Foto 43 — Garaj
+- **Malzeme tonu:** KALDI (Adım08): Fotoğraftaki turuncu karo yerine çok açık zemin var.
+- **Fazla/eksik nesne:** KALDI (Adım08): Kapalı seksiyonel garaj kapısı, ray/motor ve küçük servis eşyaları yok.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Garaj açıklığı dış gökyüzüne açık; fotoğrafla temel durum farklı.
+- **Geometri/oran:** KALDI (Adım08): Kapı boşluğu ve tavan mekanizması Adım08 öncelikli.
+
+#### Foto 44 — Garaj · Depo
+- **Malzeme tonu:** KALDI (Adım08): Garaj dolabı tonu ve zemin karo görünümü farklı.
+- **Fazla/eksik nesne:** KALDI (Adım08): Depo rafları, kutular ve garaj motor/rayları eksik; tavan armatürü farklı.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera depoya ters yönden/çok yakın bakıyor; büyük dolap yanlış tarafta görünür.
+- **Geometri/oran:** KALDI (Adım08): Depo/dolap ve kapı oranları farklı.
+
+#### Foto 45 — Bodrum · Misafir WC
+- **Malzeme tonu:** KALDI (Adım08): Ayna çerçevesi fotoğraftan açık/metalik; dolap tonu kadraj dışında.
+- **Fazla/eksik nesne:** KALDI (Adım08): Lavabo/dolap ve havluluk fotoğraftaki gibi görünmüyor; küçük aksesuarlar eksik.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera aynaya yandan çok yakın, kapı/duvar kadrajı kesiyor.
+- **Geometri/oran:** KALDI (Adım08): Ayna çerçevesi ve WC giriş geometrisi fotoğrafla aynı değil.
+
+#### Foto 46 — Bodrum · Misafir WC
+- **Malzeme tonu:** KALDI (Adım08): WC duvar/kapı ışığı farklı; zemin kadrajda değil.
+- **Fazla/eksik nesne:** KALDI (Adım08): Klozet fotoğraftaki gibi görünmüyor; raf, havlu ve aksesuarlar farklı/eksik.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kapı kadrajı kesiyor; bitki ve beyaz yuvarlak parçalar havada görünüyor.
+- **Geometri/oran:** KALDI (Adım08): WC kamera konumu ve aksesuar yükseklikleri yeniden ölçülmeli.
+
+#### Foto 47 — Bodrum · Hol · Merdiven
+- **Malzeme tonu:** KALDI (Adım08): Basamaklar fotoğraftan daha koyu; bodrum karosu açık/bej.
+- **Fazla/eksik nesne:** KALDI (Adım08): Fotoğraftaki tavan lambası ve duvar resmi kadrajda yok.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Önceki beyaz testere dişi kalıntı görünmüyor; kamera çok geriden/yan taraftan bakıyor.
+- **Geometri/oran:** KALDI (Adım08): Merdiven açıklığı/hol genişliği ve basamak aydınlığı fotoğraftan farklı.
+
+#### Foto 48 — Bodrum · Hol · Asansör
+- **Malzeme tonu:** KALDI (Adım08): Asansör çevresi zemini fotoğraftan açık; kapı camı farklı.
+- **Fazla/eksik nesne:** KALDI (Adım08): Açık asansör kabini yerine kapalı desenli cam kanat görünüyor.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kapı açık/kapalı durumu fotoğrafla eşleşmiyor; iç kabin doğrulanamadı.
+- **Geometri/oran:** KALDI (Adım08): Asansör kapı oranı ve kamera yüksekliği farklı.
+
+#### Foto 49 — Asansör kabini
+- **Malzeme tonu:** KALDI (Adım08): İç kabin metal malzemesi kapalı kapı nedeniyle görülemiyor.
+- **Fazla/eksik nesne:** KALDI (Adım08): Kabinin ayna, küpeşte ve tavan ışıkları bu kadrajda doğrulanamadı.
+- **Kalıntı/yerleşim:** KALDI (Adım08): Kamera kapalı desenli cama çok yakın; fotoğraftaki açık kabin görünümü yok.
+- **Geometri/oran:** KALDI (Adım08): Adım08: kapı durumu ve kabin kamera konumu öncelikli.
+
+### Son yakın kontrol
+
+DÜZELTİLDİ: yakın parke görüntüsünde önceki çapraz koyu çizgi artık görünmüyor. Düz ince damar ve tahtaların ayrı derzleri okunuyor; parke bu haliyle kilitli. Fotoğrafın daha açık/parlak görünmesi ışık/pozlama eşleşmesi olarak KALDI; bu adımda yeniden doku döngüsü açılmadı.
+
+DÜZELTİLDİ: merdiven basamak ve rıhtları ortada sarım eki olmadan tek parça görünüyor. KALDI: foto18'e göre aydınlık/parlaklık düşük ve burun profili fotoğraftaki kadar dolgun/yuvarlak değil; Adım05 geometrisinin yuvarlatılmış kenarı korundu ancak profil bütünüyle birebir sayılmıyor. Foto40 tam kamera/kapı eşleşmesi, kapı altı ince ışık çizgileri ve kartonpiyer uç profilleri de KALDI. Bunlar Adım08'e devredildi.

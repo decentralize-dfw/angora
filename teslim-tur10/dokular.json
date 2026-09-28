@@ -102,7 +102,7 @@
   ],
   "emin_degil": true,
   "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
-  "kaynak": "Renk foto29/34, 44 tahta; damar Poly Haven walnut_veneer_02 4K",
+  "kaynak": "Renk foto29/34, 44 tahta; damar Poly Haven european_walnut_veneer_05 4K",
   "perspektif": {
    "piksel_koseleri": [
     [
@@ -2211,9 +2211,9 @@
    0.3
   ],
   "renk_hex": null,
-  "purluluk": 0.43,
+  "purluluk": 0.25,
   "clearcoat": 0.12,
-  "normal_siddeti": 0.18,
+  "normal_siddeti": 0.1,
   "secim_nedeni": "Cherry Veneer sıcak ve ince damar bakımından basamaklara yakın; American Walnut Veneer daha soğuk ve koyu.",
   "secilen_doku": "cherry_veneer",
   "karsilastirilan_adaylar": [
@@ -2226,7 +2226,7 @@
   ],
   "emin_degil": true,
   "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
-  "kaynak": "Fotoğraf tonu + Poly Haven walnut_veneer_02 4K damar",
+  "kaynak": "Fotoğraf tonu + Poly Haven european_walnut_veneer_05 4K damar",
   "perspektif": {
    "piksel_koseleri": [
     [
@@ -11078,7 +11078,7 @@
   ],
   "emin_degil": true,
   "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
-  "kaynak": "Renk foto29/34, 44 tahta; damar Poly Haven walnut_veneer_02 4K",
+  "kaynak": "Renk foto29/34, 44 tahta; damar Poly Haven european_walnut_veneer_05 4K",
   "perspektif": {
    "piksel_koseleri": [
     [

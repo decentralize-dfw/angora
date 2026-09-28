@@ -1,0 +1,19 @@
+{
+ "modul": "A07",
+ "nesneler": 2204,
+ "ucgen": 430529,
+ "en_buyuk": 5999,
+ "notlar": {
+  "foto": [
+   18,
+   29,
+   34,
+   40,
+   42
+  ],
+  "basamak_kaynak": "ekler-adim05.blend",
+  "parke": "kilitli; ince düz damar",
+  "spot29": "0.55 ölçek, düşük emisyon",
+  "esik": "taşan A06 alt döşemeler kaldırıldı, üst kapak zemine sıfır"
+ }
+}

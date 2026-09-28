@@ -1,0 +1,154 @@
+{
+ "dugum": 2204,
+ "arsiv_yatak": [],
+ "dokular": [
+  {
+   "ad": "albedo",
+   "boyut": [
+    512,
+    512
+   ]
+  },
+  {
+   "ad": "roughness",
+   "boyut": [
+    512,
+    512
+   ]
+  },
+  {
+   "ad": "normal",
+   "boyut": [
+    4096,
+    4096
+   ]
+  },
+  {
+   "ad": "albedo",
+   "boyut": [
+    4096,
+    4096
+   ]
+  },
+  {
+   "ad": "roughness",
+   "boyut": [
+    4096,
+    4096
+   ]
+  },
+  {
+   "ad": "normal",
+   "boyut": [
+    1024,
+    1024
+   ]
+  },
+  {
+   "ad": "albedo",
+   "boyut": [
+    1024,
+    1024
+   ]
+  },
+  {
+   "ad": "roughness",
+   "boyut": [
+    512,
+    512
+   ]
+  },
+  {
+   "ad": "normal",
+   "boyut": [
+    1024,
+    1024
+   ]
+  },
+  {
+   "ad": "albedo",
+   "boyut": [
+    1024,
+    1024
+   ]
+  },
+  {
+   "ad": "roughness",
+   "boyut": [
+    512,
+    512
+   ]
+  },
+  {
+   "ad": "normal",
+   "boyut": [
+    4096,
+    4096
+   ]
+  },
+  {
+   "ad": "albedo",
+   "boyut": [
+    4096,
+    4096
+   ]
+  },
+  {
+   "ad": "roughness",
+   "boyut": [
+    4096,
+    4096
+   ]
+  },
+  {
+   "ad": "albedo",
+   "boyut": [
+    4096,
+    4096
+   ]
+  },
+  {
+   "ad": "albedo",
+   "boyut": [
+    512,
+    512
+   ]
+  },
+  {
+   "ad": "roughness",
+   "boyut": [
+    512,
+    512
+   ]
+  },
+  {
+   "ad": "normal",
+   "boyut": [
+    4096,
+    4096
+   ]
+  },
+  {
+   "ad": "albedo",
+   "boyut": [
+    4096,
+    4096
+   ]
+  },
+  {
+   "ad": "roughness",
+   "boyut": [
+    4096,
+    4096
+   ]
+  },
+  {
+   "ad": "cam40",
+   "boyut": [
+    512,
+    1024
+   ]
+  }
+ ],
+ "duvar_tavan_karo_hash_degismedi": true
+}

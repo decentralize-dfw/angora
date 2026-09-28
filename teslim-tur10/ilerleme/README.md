@@ -123,3 +123,55 @@ Mevcut haliyle kapatıldı. Çözülmeyenler ve Adım 04 ilk işleri: [notlar.md
 Küpeşte ΔE76 **2.04**. 44 fotoğraf tahta rengi + 4K ceviz damarı; bağımsız kaydırmalı 409 tahta. Fotoğraf/render yakın parke aynı zemin izdüşümünde.
 
 **KALDI / Adım07:** Yakın zemindeki atlas dışı çapraz koyu çizgi; basamak damar kontrastı ve UV sarım eki; bazı eşik taşmaları/ışık çizgileri; kartonpiyer ince birleşimleri; Foto40 tam kamera/kapı açısı ve üstten kesilen plafonyer. [Ayrıntılı fark listesi ve ölçümler](../notlar.md).
+
+## 07 · Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 01](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_01.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 02](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_02.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 03](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_03.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 04](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_04.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 05](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_05.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 06](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_06.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 07](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_07.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 08](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_08.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 09](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_09.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 10](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_10.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 11](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_11.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 12](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_12.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 13](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_13.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 14](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_14.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 15](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_15.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 16](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_16.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 17](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_17.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 18](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_18.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 19](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_19.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 21](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_21.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 22](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_22.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 23](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_23.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 29](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_29.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 30](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_30.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 31](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_31.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 32](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_32.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 33](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_33.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 34](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_34.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 35](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_35.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 39](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_39.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 40](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_40.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 41](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_41.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 42](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_42.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 43](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_43.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 44](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_44.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 45](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_45.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 46](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_46.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 47](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_47.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 48](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_48.jpg)
+![Adım 07 · parke kapanış + merdiven + 40 fotoğraf kontrolü foto 49](07_adim-07-parke-kapanis-merdiven-40-fotogr_foto_49.jpg)
+
+### Adım 07 yakın ve tekrar kontrolü
+
+![Yakın parke, foto29 ile aynı zemin alanı](../adim07/yakin_parke.jpg)
+
+![Yakın merdiven, foto18](../adim07/yakin_merdiven.jpg)
+
+[Parke 2×2](../adim07/parke_2x2.jpg) · [Yarım boy kaydırma](../adim07/parke_kaydir.jpg) · [Wireframe](../adim07/parke_wireframe.png) · [40 fotoğraf denetimi](../notlar.md)
+
+**KALDI / Adım08:** merdiven aydınlığı ve burun profili; eşik ışık çizgileri ve kartonpiyer birleşimleri; foto40 tam kamera/kapı eşleşmesi; yeni odalardaki kamera engelleri, eksik/farklı nesneler ve malzemeler. Foto07 siyah, 06/11/14/30/35/39/45/46/49 kadrajları engelli veya yanlış yönde; bunlar başarılı eşleşme sayılmadı. 40 dosyanın tamamı yukarıda görünür. Parke kilitli.

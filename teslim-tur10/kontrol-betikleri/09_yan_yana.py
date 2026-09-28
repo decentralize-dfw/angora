@@ -23,13 +23,13 @@ made = []
 for path in sorted(glob.glob(os.path.join(DIR, 'render_*.png'))):
     n = int(re.search(r'render_(\d+)', path).group(1))
     render = Image.open(path).convert('RGB')
-    photo = Image.open(os.path.join(REPO, 'photogallery', f'angora_{n:02d}.jpg')).convert('RGB').resize(render.size)
+    photo = Image.open(next(p for ext in ['jpg','png','jpeg'] if os.path.exists(p:=os.path.join(REPO,'photogallery',f'angora_{n:02d}.{ext}')))).convert('RGB').resize(render.size)
     panels = [('FOTO', photo)]
     prev = os.path.join(PREV, f'render_{n:02d}.png') if PREV else None
     if prev and os.path.exists(prev):
         panels += [('ÖNCE', Image.open(prev).convert('RGB').resize(render.size)), ('SONRA', render)]
     else:
-        panels += [('MODEL', render)]
+        panels += [('SONRA', render)]
     out = Image.new('RGB', (render.width * len(panels), render.height + 34), (0, 0, 0))
     d = ImageDraw.Draw(out)
     for i, (title, img) in enumerate(panels):

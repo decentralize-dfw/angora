@@ -35,11 +35,24 @@ def uygula(objects,spec_path):
   if strength:
    normal=tex('normal.jpg',False)
    if normal:
-    nm=nt.nodes.new('ShaderNodeNormalMap');nm.inputs['Strength'].default_value=strength;nt.links.new(normal.outputs['Color'],nm.inputs['Color']);nt.links.new(nm.outputs['Normal'],bs.inputs['Normal'])
+    nm=nt.nodes.new('ShaderNodeNormalMap');nm.space='WORLD' if rec['no'] in [3,19] else 'TANGENT';nm.inputs['Strength'].default_value=strength;nt.links.new(normal.outputs['Color'],nm.inputs['Color']);nt.links.new(nm.outputs['Normal'],bs.inputs['Normal'])
   cache[key]=mat;return mat
  for ob in objects:
   if ob.type!='MESH':continue
-  me=ob.data;originals=[m.get('angora_original',re.sub(r'^FOTO_\d+_','',m.name)) if m else '' for m in me.materials]
+  me=ob.data
+  if ob.name.startswith('wood_floor') and not ob.get('adim07_floor'):
+   # Imported sub-millimetre floor steps and split normals share the visible diagonal.
+   import bmesh
+   mw0=ob.matrix_world;inv=mw0.inverted()
+   for v in me.vertices:
+    w=mw0@v.co
+    for z in [3.0996,6.3714,9.4705]:
+     if abs(w.z-z)<.003:w.z=z;v.co=inv@w;break
+   bm=bmesh.new();bm.from_mesh(me);bmesh.ops.remove_doubles(bm,verts=list(bm.verts),dist=.0015);bmesh.ops.recalc_face_normals(bm,faces=list(bm.faces));bm.to_mesh(me);bm.free()
+   if me.has_custom_normals:me.normals_split_custom_set([(0,0,0)]*len(me.loops))
+   for face in me.polygons:face.use_smooth=False
+   ob['adim07_floor']=True
+  originals=[m.get('angora_original',re.sub(r'^FOTO_\d+_','',m.name)) if m else '' for m in me.materials]
   candidates={i:[r for r in records if match(n,r)] for i,n in enumerate(originals)}
   if not any(candidates.values()):continue
   mw=ob.matrix_world;coords=[mw@v.co for v in me.vertices];slots={};changed=[]
@@ -65,5 +78,9 @@ def uygula(objects,spec_path):
    if rec['no'] in [3,19] and axis==2:axes=(1,0)
    if rec.get('ahsap_tek_parca') and rec['no']==10:axes=(1,0) if axis==2 else ((1,2) if axis==0 else (0,2))
    sx,sy=rec.get('doku_olcusu_xy_m',[rec.get('doku_olcusu_m',1)]*2)
-   for li,pt in zip(p.loop_indices,pts):uv.data[li].uv=(pt[axes[0]]/sx,pt[axes[1]]/sy)
+   for li,pt in zip(p.loop_indices,pts):
+    if rec.get('ahsap_tek_parca') and rec['no']==10:
+     lo=[min(v[i] for v in coords) for i in axes];hi=[max(v[i] for v in coords) for i in axes]
+     uv.data[li].uv=(.01+.98*(pt[axes[0]]-lo[0])/max(hi[0]-lo[0],.001),.01+.98*(pt[axes[1]]-lo[1])/max(hi[1]-lo[1],.001))
+    else:uv.data[li].uv=(pt[axes[0]]/sx,pt[axes[1]]/sy)
  print('[foto-doku]',len(cache),'malzeme',total,'yüz',flush=True)

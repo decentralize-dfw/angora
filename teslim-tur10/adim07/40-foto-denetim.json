@@ -1,0 +1,322 @@
+[
+ {
+  "foto": 1,
+  "oda": "Bodrum · Mutfak",
+  "Malzeme tonu": "Bodrum zemini fotoğraftaki turuncu çapraz karoya karşı bej/düz görünüyor.",
+  "Fazla/eksik nesne": "Buzdolabı, tezgâh üstü küçük cihaz ve eşyalar eksik.",
+  "Kalıntı/yerleşim": "Ada ve kapı kadrajı fotoğrafa göre yakın ve kaymış.",
+  "Geometri/oran": "Ada genişliği/tezgâh oranı ve dolap kapak bölümleri farklı."
+ },
+ {
+  "foto": 2,
+  "oda": "Bodrum · Salon",
+  "Malzeme tonu": "Bodrum karo tonu çok açık; güneş şeridi fotoğraftan kuvvetli.",
+  "Fazla/eksik nesne": "Kırmızı dolap, koltuklar, duvar saatleri ve küçük eşyalar eksik; masa/sandalye farklı.",
+  "Kalıntı/yerleşim": "Şömine ve merdiven aynı genel yönde; masa yerleşimi farklı.",
+  "Geometri/oran": "Şömine taç oranı ve avize şekli fotoğrafla aynı değil."
+ },
+ {
+  "foto": 3,
+  "oda": "Bodrum · Salon",
+  "Malzeme tonu": "Bodrum zemini ve tavan aydınlığı fotoğraftan farklı.",
+  "Fazla/eksik nesne": "Koltuk, sehpa, perdeler, kırmızı dolap ve duvar resimleri eksik.",
+  "Kalıntı/yerleşim": "Pencere/kapı dizisi kadrajda farklı; ışık şeritleri aşırı.",
+  "Geometri/oran": "Masa/sandalyeler şablon görünümünde, fotoğrafla aynı oran değil."
+ },
+ {
+  "foto": 4,
+  "oda": "Giriş katı · Salon",
+  "Malzeme tonu": "Parke daha koyu; duvar ve döşeme ışık dağılımı farklı.",
+  "Fazla/eksik nesne": "Halı, sehpa üzeri eşya ve perde ayrıntıları eksik; avize farklı.",
+  "Kalıntı/yerleşim": "Yemek masası kameraya fazla yakın, oturma grubu yönü farklı.",
+  "Geometri/oran": "Masa ve sandalye biçimi, avize kolları fotoğrafla uyuşmuyor."
+ },
+ {
+  "foto": 5,
+  "oda": "Bodrum · Salon",
+  "Malzeme tonu": "Karo çok açık ve düz; fotoğraftaki turuncu derzli kaplama yok.",
+  "Fazla/eksik nesne": "Duvar fotoğrafları, perdeler ve koltuk grubunun çoğu eksik.",
+  "Kalıntı/yerleşim": "Masa aşırı önde; tek kanepe fotoğraftaki L grubunu karşılamıyor.",
+  "Geometri/oran": "Şömine/oturma grubu ve avize ayrıntıları farklı."
+ },
+ {
+  "foto": 6,
+  "oda": "Çatı katı · Mini mutfak",
+  "Malzeme tonu": "Mini mutfak görünmediğinden dolap tonu değerlendirilemedi; banyo karanlık.",
+  "Fazla/eksik nesne": "Fotoğraftaki mini mutfak ve raflar kadrajda yok.",
+  "Kalıntı/yerleşim": "Kamera duvara çok yakın; sağ tarafı duvar kapatıyor.",
+  "Geometri/oran": "Kapı açıklığı/kadraj eşleşmiyor; Adım08 kamera önceliği."
+ },
+ {
+  "foto": 7,
+  "oda": "Çatı katı · Yatak odası (C02)",
+  "Malzeme tonu": "Siyah render nedeniyle değerlendirilemedi.",
+  "Fazla/eksik nesne": "Siyah render nedeniyle nesne varlığı değerlendirilemedi.",
+  "Kalıntı/yerleşim": "Kamera engellenmiş/kapalı hacimde; kesin neden henüz ölçülmedi.",
+  "Geometri/oran": "Adım08: kamera düzeltildikten sonra bu oda yeniden denetlenecek."
+ },
+ {
+  "foto": 8,
+  "oda": "Çatı katı · Yatak odası (C04)",
+  "Malzeme tonu": "Oda fotoğrafa göre koyu/soğuk; zemin fazla karanlık.",
+  "Fazla/eksik nesne": "Dolap, çalışma masası, sandalyeler, ayna ve raflar eksik.",
+  "Kalıntı/yerleşim": "Yatak/pencere kadrajı ve çatı eğimi yönü fotoğraftan farklı.",
+  "Geometri/oran": "Çatı/pencere nişi oranı ve yatak biçimi farklı."
+ },
+ {
+  "foto": 9,
+  "oda": "Çatı katı · Oturma alanı",
+  "Malzeme tonu": "Parke fotoğrafa göre koyu; duvar ışık dağılımı farklı.",
+  "Fazla/eksik nesne": "Duvar tabloları, TV ünitesi ve sehpa kadrajda eksik.",
+  "Kalıntı/yerleşim": "Kamera fazla ileride; kanepe yalnız kenardan görünüyor.",
+  "Geometri/oran": "Çatı eğimi/ışıklık profili fotoğrafla eşleşmiyor."
+ },
+ {
+  "foto": 10,
+  "oda": "Çatı katı · Oturma alanı",
+  "Malzeme tonu": "Duvar daha nötr/soğuk, fotoğraftaki sıcak yerel ışık eksik.",
+  "Fazla/eksik nesne": "Tablolar ve yan duvar dolabı eksik; halı ve lambader farklı.",
+  "Kalıntı/yerleşim": "Koltuk grubu/masa konumları ve perde görünümü farklı.",
+  "Geometri/oran": "Tavan kirişleri, koltuk ve sehpa oranları farklı."
+ },
+ {
+  "foto": 11,
+  "oda": "1. kat · Ortak banyo",
+  "Malzeme tonu": "Seramik tonu kameranın engellenmesi nedeniyle güvenle karşılaştırılamıyor.",
+  "Fazla/eksik nesne": "Lavabo, ayna, çamaşır makinesi ve WC fotoğraftaki gibi kadrajda görünmüyor.",
+  "Kalıntı/yerleşim": "Kamera duş camı/çerçevesine çok yakın; banyo görünümü kapanıyor.",
+  "Geometri/oran": "Adım08: ortak banyo kamera konumu ve duş geometrisi kontrolü."
+ },
+ {
+  "foto": 12,
+  "oda": "1. kat · Oturma alanı",
+  "Malzeme tonu": "Zemin ve duvar fotoğraftan açık; sehpa ahşabı fotoğraftaki koyu tona uymuyor.",
+  "Fazla/eksik nesne": "Tablolar ve aplikler eksik; sandalye/koltuk adedi ve biçimi farklı.",
+  "Kalıntı/yerleşim": "Kamera ters yana kaymış; dolap sağda büyük, sol koltuklar kesiliyor.",
+  "Geometri/oran": "Merdiven açıklığı kemeri ve tavan ahşaplarının aralığı farklı."
+ },
+ {
+  "foto": 13,
+  "oda": "1. kat · Yatak odası (107)",
+  "Malzeme tonu": "Parke sıcak renkli; pencere yansıması mavi-gri, fotoğraftaki yansıma dağılımı farklı.",
+  "Fazla/eksik nesne": "Yatak bu tur kapsam gereği ARSIV dışında; perde, duvar resmi ve doğru üçlü armatür eksik.",
+  "Kalıntı/yerleşim": "Büyük sarkıt fotoğraftakinden farklı ve kadraja taşıyor.",
+  "Geometri/oran": "Pencere/radyatör ve kamera oranı farklı."
+ },
+ {
+  "foto": 14,
+  "oda": "Çatı katı · Yatak odası (C04)",
+  "Malzeme tonu": "Duvar kadrajı kapattığından oda malzemeleri değerlendirilemedi.",
+  "Fazla/eksik nesne": "Yatak ve dolap modelde bu açıdan doğrulanamıyor.",
+  "Kalıntı/yerleşim": "Kamera bir duvar/çatı yüzeyi arkasında; Adım08 kamera önceliği.",
+  "Geometri/oran": "Oda karşılaştırması için kadraj yeniden kurulmalı."
+ },
+ {
+  "foto": 15,
+  "oda": "Çatı katı · Banyo",
+  "Malzeme tonu": "Banyo fotoğraftan çok koyu; seramik gri-kahve görünüyor.",
+  "Fazla/eksik nesne": "Halı, havluluk, küçük aksesuarlar eksik/farklı.",
+  "Kalıntı/yerleşim": "Lavabo çok önde, duş ve WC kadrajları farklı.",
+  "Geometri/oran": "Duş kabini profili ve eğimli tavan oranı uyuşmuyor."
+ },
+ {
+  "foto": 16,
+  "oda": "1. kat · Giyinme odası",
+  "Malzeme tonu": "Dolap tonu fotoğraftan turuncu; ayna/ahşap yüzey ayrımı zayıf.",
+  "Fazla/eksik nesne": "Mavi halı eksik; tavanda fotoğraftan farklı armatür görünüyor.",
+  "Kalıntı/yerleşim": "Dolap kapak ve ayna yerleşimleri farklı.",
+  "Geometri/oran": "Sürgülü geniş ayna yerine dar kapaklı dolap oranı var."
+ },
+ {
+  "foto": 17,
+  "oda": "1. kat · Yatak odası (107)",
+  "Malzeme tonu": "DÜZELTİLDİ: düz damarlı sıcak parke; KALDI: fotoğrafa göre daha mat yansıma.",
+  "Fazla/eksik nesne": "DÜZELTİLDİ: ARSIV yatağı kontrol dışında; KALDI: yanlış büyük sarkıt, duvar resmi eksik.",
+  "Kalıntı/yerleşim": "Kapı kanadı/kasa hizası fotoğraftan farklı.",
+  "Geometri/oran": "Kartonpiyer köşe profili fotoğraftan daha ince/ayrı görünüyor."
+ },
+ {
+  "foto": 18,
+  "oda": "1. kat · Kat holü · Merdiven",
+  "Malzeme tonu": "DÜZELTİLDİ: basamak/rıht derzsiz düz damar, roughness .25; KALDI: fotoğrafa göre koyu ışık.",
+  "Fazla/eksik nesne": "Korkuluk ve zincir mevcut; sağ kapının kanat görünümü fotoğraftan farklı.",
+  "Kalıntı/yerleşim": "Basamak ortası UV eki kaldırıldı; alt hol duvarındaki beyaz yuvarlak parçalar fotoğraftaki yerleşimle uyuşmuyor.",
+  "Geometri/oran": "DÜZELTİLDİ: Adım05 basamak geometrisi; KALDI: korkuluk/galeri açıklığı ince oran farkı."
+ },
+ {
+  "foto": 19,
+  "oda": "1. kat · Ebeveyn yatak odası",
+  "Malzeme tonu": "Duvar ve mobilya tonları fotoğraftan koyu/sarı.",
+  "Fazla/eksik nesne": "Şifonyer aynası yerine TV ve farklı dolap var; yatak ve komodinler farklı.",
+  "Kalıntı/yerleşim": "Kamera yatak eksenine oturmuyor; sağ mobilya önde.",
+  "Geometri/oran": "Yatak başlığı, şifonyer ve sarkıt oranları fotoğrafla aynı değil."
+ },
+ {
+  "foto": 21,
+  "oda": "Giriş katı · Mutfak",
+  "Malzeme tonu": "Mutfak dolabı fazla turuncu/çizgili; karo çok açık ve homojen.",
+  "Fazla/eksik nesne": "Buzdolabı kadrajda yok; ankastre/davlumbaz biçimleri farklı.",
+  "Kalıntı/yerleşim": "Kamera tezgâha fazla yakın; dolap taç ahşabı yönü farklı.",
+  "Geometri/oran": "Davlumbaz ve üst dolap bölümleri fotoğrafla uyuşmuyor."
+ },
+ {
+  "foto": 22,
+  "oda": "Giriş katı · Mutfak",
+  "Malzeme tonu": "Dolap ahşabı fazla turuncu; karo fotoğraftan açık/düz.",
+  "Fazla/eksik nesne": "Camlı kapı yerine geniş boşluk, farklı buzdolabı/avize ve masa-sandalyeler var.",
+  "Kalıntı/yerleşim": "Mutfak kamerası farklı yönde; ocak/davlumbaz kadraj dışında.",
+  "Geometri/oran": "Dolap cam bölmeleri ve kapı açıklığı oranları uyuşmuyor."
+ },
+ {
+  "foto": 23,
+  "oda": "Giriş katı · Yemek alanı",
+  "Malzeme tonu": "Parke fotoğrafa göre koyu; mobilya döşemeleri fazla açık.",
+  "Fazla/eksik nesne": "Fotoğraftaki vitrinin ayrıntıları ve giriş armatürü farklı/eksik.",
+  "Kalıntı/yerleşim": "Masa fazla önde; basamak/kolon yerleşimi kadrajda farklı.",
+  "Geometri/oran": "Masa/sandalye ve kolon başlık oranları farklı."
+ },
+ {
+  "foto": 29,
+  "oda": "Çatı katı · Kat holü",
+  "Malzeme tonu": "DÜZELTİLDİ: ince düz damar ve sıcak örnekler; KALDI: fotoğraftaki kadar aydınlık değil.",
+  "Fazla/eksik nesne": "DÜZELTİLDİ: üstteki iki spot küçültüldü ve emisyonu azaltıldı; KALDI: diafon/priz ve küçük armatür ayrıntıları.",
+  "Kalıntı/yerleşim": "DÜZELTİLDİ: zemin mesh kenarı/normalleri; KALDI: kapı açıklığı üst köşe ve sağ süpürgelik ince farkları.",
+  "Geometri/oran": "Korkuluk deseni fotoğraftan daha seyrek; kamera/çatı oranı tam eşleşmiyor."
+ },
+ {
+  "foto": 30,
+  "oda": "1. kat · Yatak odası (106)",
+  "Malzeme tonu": "Kapı yüzeyi kadrajı kapattığından oda malzemeleri güvenle değerlendirilemiyor.",
+  "Fazla/eksik nesne": "Perde/radyatör ve yatak fotoğraftaki gibi kadrajda değil.",
+  "Kalıntı/yerleşim": "Kamera kapı arkasında; Adım08 kamera düzeltmesi gerekli.",
+  "Geometri/oran": "Kapı açısı ve yatak odası perspektifi farklı."
+ },
+ {
+  "foto": 31,
+  "oda": "1. kat · Ebeveyn yatak odası",
+  "Malzeme tonu": "Parke fotoğraftan koyu; soldaki dolap açık/pembe.",
+  "Fazla/eksik nesne": "Şifonyer ve ayna kadrajda yok; kapı açıklıkları farklı.",
+  "Kalıntı/yerleşim": "Kamera odanın farklı köşesine bakıyor.",
+  "Geometri/oran": "Fotoğraftaki kemerli açıklık yerine dikdörtgen açıklık görünüyor."
+ },
+ {
+  "foto": 32,
+  "oda": "1. kat · Ebeveyn banyosu",
+  "Malzeme tonu": "Lavabo dolabı fazla açık/turuncu; mavi halı gri görünüyor.",
+  "Fazla/eksik nesne": "Fotoğrafta olmayan tavan plafonyeri var; aksesuarlar eksik.",
+  "Kalıntı/yerleşim": "Ayna, duvar lambası ve duş yerleşimi/oranı farklı.",
+  "Geometri/oran": "Duş küvet yüksekliği, çerçevesi ve pencere boyutu farklı."
+ },
+ {
+  "foto": 33,
+  "oda": "1. kat · Oturma alanı",
+  "Malzeme tonu": "Parke çok koyu; ahşap tavan tonu fotoğraftan farklı.",
+  "Fazla/eksik nesne": "Perdeler ve sağ aplik eksik; tablo yerleşimi fotoğraftaki kadrajda farklı.",
+  "Kalıntı/yerleşim": "Kamera koridorun farklı yanından bakıyor; koltuklar daha uzakta.",
+  "Geometri/oran": "Tavan ahşap aralığı ve oturma grubu oranı farklı."
+ },
+ {
+  "foto": 34,
+  "oda": "1. kat · Kat holü · Merdiven",
+  "Malzeme tonu": "DÜZELTİLDİ: parke ince düz damar; KALDI: fotoğraf yansıma/aydınlık farkı.",
+  "Fazla/eksik nesne": "Sarkıt mevcut; galeri üstünde görünen beyaz merdiven parçalarının görünümü farklı.",
+  "Kalıntı/yerleşim": "DÜZELTİLDİ: taşan alt eşik blokları kaldırıldı; KALDI: uzak odanın kapı altındaki parlak çizgi.",
+  "Geometri/oran": "Korkuluk daha seyrek ve merdiven/üst birleşim silueti fotoğraftan farklı; kartonpiyer köşeleri tam eşleşmiyor."
+ },
+ {
+  "foto": 35,
+  "oda": "1. kat · Kat holü",
+  "Malzeme tonu": "Duvar/parke genel sıcaklığı farklı; fotoğraftaki alt hol sıcak ışığı yok.",
+  "Fazla/eksik nesne": "Diafon ve küçük duvar spotu eksik; tavan armatürü farklı.",
+  "Kalıntı/yerleşim": "Kamera yakın duvar tarafından kapanıyor; galerinin çoğu kadraj dışında.",
+  "Geometri/oran": "Kemerli açıklık görünmüyor; Adım08 kamera ve açıklık oranı kontrolü."
+ },
+ {
+  "foto": 39,
+  "oda": "Giriş katı · Misafir WC",
+  "Malzeme tonu": "Seramik bant deseni ve alt duvar tonu fotoğraftan farklı.",
+  "Fazla/eksik nesne": "Çöp kovası/tuvalet aksesuarları eksik, lavabo görünümü farklı.",
+  "Kalıntı/yerleşim": "Kamera kapı kanadı arkasında; WC karşıdan görünmüyor.",
+  "Geometri/oran": "Pencere, lavabo ve klozetin kadrajdaki oran/yerleşimi farklı."
+ },
+ {
+  "foto": 40,
+  "oda": "Giriş katı · Antre",
+  "Malzeme tonu": "Giriş ahşabı korunuyor; zemin fotoğraftan daha düz/açık.",
+  "Fazla/eksik nesne": "Sandalye ve diafon eksik; fotoğrafta görünmeyen üçlü duvar lambası/sol kapı kadrajda.",
+  "Kalıntı/yerleşim": "DÜZELTİLDİ: plafonyer artık tam kadrajda, kapı kanadı menteşede 10° ayarlandı; KALDI: kamera hâlâ fotoğrafla birebir değil.",
+  "Geometri/oran": "Radyatör solda ancak dar görünür; üst kiriş ve kartonpiyer birleşimi fotoğraftan farklı."
+ },
+ {
+  "foto": 41,
+  "oda": "Giriş katı · Giriş holü",
+  "Malzeme tonu": "Aynalı dolap yüzeyi ahşap kaplanmış görünüyor; giriş kapısı tonu/deseni farklı.",
+  "Fazla/eksik nesne": "Kristal avize ve fotoğraftaki dolap aynası eksik.",
+  "Kalıntı/yerleşim": "Kamera giriş kapısına karşıdan bakmıyor.",
+  "Geometri/oran": "Giriş kapısı panel düzeni ve dolap oranları farklı."
+ },
+ {
+  "foto": 42,
+  "oda": "Giriş katı · Antre · Merdiven",
+  "Malzeme tonu": "Karo fotoğraftan daha düz ve sarı; duvar ışığı farklı.",
+  "Fazla/eksik nesne": "İki sandalye ve küçük duvar tablosu eksik; sağ camlı kapı fotoğraftaki kadrajda yok.",
+  "Kalıntı/yerleşim": "DÜZELTİLDİ: taşan eşik alt bloğu kaldırıldı; KALDI: kapı altı ince parlak/seviye çizgisi ve lambaların yükseklik farkı.",
+  "Geometri/oran": "Radyatör daha dar, korkuluk motifi daha seyrek; kartonpiyer köşe profili farklı."
+ },
+ {
+  "foto": 43,
+  "oda": "Garaj",
+  "Malzeme tonu": "Fotoğraftaki turuncu karo yerine çok açık zemin var.",
+  "Fazla/eksik nesne": "Kapalı seksiyonel garaj kapısı, ray/motor ve küçük servis eşyaları yok.",
+  "Kalıntı/yerleşim": "Garaj açıklığı dış gökyüzüne açık; fotoğrafla temel durum farklı.",
+  "Geometri/oran": "Kapı boşluğu ve tavan mekanizması Adım08 öncelikli."
+ },
+ {
+  "foto": 44,
+  "oda": "Garaj · Depo",
+  "Malzeme tonu": "Garaj dolabı tonu ve zemin karo görünümü farklı.",
+  "Fazla/eksik nesne": "Depo rafları, kutular ve garaj motor/rayları eksik; tavan armatürü farklı.",
+  "Kalıntı/yerleşim": "Kamera depoya ters yönden/çok yakın bakıyor; büyük dolap yanlış tarafta görünür.",
+  "Geometri/oran": "Depo/dolap ve kapı oranları farklı."
+ },
+ {
+  "foto": 45,
+  "oda": "Bodrum · Misafir WC",
+  "Malzeme tonu": "Ayna çerçevesi fotoğraftan açık/metalik; dolap tonu kadraj dışında.",
+  "Fazla/eksik nesne": "Lavabo/dolap ve havluluk fotoğraftaki gibi görünmüyor; küçük aksesuarlar eksik.",
+  "Kalıntı/yerleşim": "Kamera aynaya yandan çok yakın, kapı/duvar kadrajı kesiyor.",
+  "Geometri/oran": "Ayna çerçevesi ve WC giriş geometrisi fotoğrafla aynı değil."
+ },
+ {
+  "foto": 46,
+  "oda": "Bodrum · Misafir WC",
+  "Malzeme tonu": "WC duvar/kapı ışığı farklı; zemin kadrajda değil.",
+  "Fazla/eksik nesne": "Klozet fotoğraftaki gibi görünmüyor; raf, havlu ve aksesuarlar farklı/eksik.",
+  "Kalıntı/yerleşim": "Kapı kadrajı kesiyor; bitki ve beyaz yuvarlak parçalar havada görünüyor.",
+  "Geometri/oran": "WC kamera konumu ve aksesuar yükseklikleri yeniden ölçülmeli."
+ },
+ {
+  "foto": 47,
+  "oda": "Bodrum · Hol · Merdiven",
+  "Malzeme tonu": "Basamaklar fotoğraftan daha koyu; bodrum karosu açık/bej.",
+  "Fazla/eksik nesne": "Fotoğraftaki tavan lambası ve duvar resmi kadrajda yok.",
+  "Kalıntı/yerleşim": "Önceki beyaz testere dişi kalıntı görünmüyor; kamera çok geriden/yan taraftan bakıyor.",
+  "Geometri/oran": "Merdiven açıklığı/hol genişliği ve basamak aydınlığı fotoğraftan farklı."
+ },
+ {
+  "foto": 48,
+  "oda": "Bodrum · Hol · Asansör",
+  "Malzeme tonu": "Asansör çevresi zemini fotoğraftan açık; kapı camı farklı.",
+  "Fazla/eksik nesne": "Açık asansör kabini yerine kapalı desenli cam kanat görünüyor.",
+  "Kalıntı/yerleşim": "Kapı açık/kapalı durumu fotoğrafla eşleşmiyor; iç kabin doğrulanamadı.",
+  "Geometri/oran": "Asansör kapı oranı ve kamera yüksekliği farklı."
+ },
+ {
+  "foto": 49,
+  "oda": "Asansör kabini",
+  "Malzeme tonu": "İç kabin metal malzemesi kapalı kapı nedeniyle görülemiyor.",
+  "Fazla/eksik nesne": "Kabinin ayna, küpeşte ve tavan ışıkları bu kadrajda doğrulanamadı.",
+  "Kalıntı/yerleşim": "Kamera kapalı desenli cama çok yakın; fotoğraftaki açık kabin görünümü yok.",
+  "Geometri/oran": "Adım08: kapı durumu ve kabin kamera konumu öncelikli."
+ }
+]

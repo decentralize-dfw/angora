@@ -1,0 +1,33 @@
+21:33:13 | INFO: Data are loaded, start creating Blender stuff
+21:33:13 | INFO: Blender create Mesh node Mesh_15183.008
+21:33:13 | INFO: Blender create Mesh node Mesh_3020.001
+21:33:13 | INFO: Blender create Mesh node Mesh_15183.003
+21:33:13 | INFO: Blender create Mesh node Mesh_11.004
+21:33:13 | INFO: Blender create Mesh node antique_wood (2) | interior-common.118
+21:33:13 | INFO: Blender create Mesh node Mesh_3020.004
+21:33:13 | INFO: Blender create Mesh node Cube.001
+21:33:13 | INFO: Blender create Mesh node Mesh_3020.009
+21:33:14 | INFO: Blender create Mesh node Mesh_15183.114
+21:33:14 | INFO: Blender create Mesh node Cube.003
+21:33:15 | INFO: Blender create Mesh node Mesh_93.005
+21:33:16 | INFO: Blender create Mesh node Mesh_3020.002
+21:33:16 | INFO: Blender create Mesh node Mesh_242
+21:33:16 | INFO: Blender create Mesh node Mesh_11.003
+21:33:16 | INFO: Blender create Mesh node Mesh_11.001
+21:33:16 | INFO: Blender create Mesh node Mesh_15183.002
+21:33:16 | INFO: Blender create Mesh node Mesh_15183.104
+21:33:16 | INFO: Blender create Mesh node Mesh_15183.109
+21:33:16 | INFO: Blender create Mesh node Mesh_97
+21:33:16 | INFO: Blender create Mesh node Mesh_15183.103
+21:33:16 | INFO: Blender create Mesh node Mesh_15183.107
+21:33:16 | INFO: Blender create Mesh node Mesh_15183.108
+21:33:16 | INFO: Blender create Mesh node Mesh_15183.099
+21:33:16 | INFO: Blender create Mesh node Mesh_15183.100
+21:33:16 | INFO: Blender create Mesh node Mesh_15183.001
+21:33:16 | INFO: glTF import finished in 3.07s
+C:\Users\yigit\Desktop\WORK\angora\tur10-adim07-wire.py:15: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m=bpy.data.materials.new('Wire');m.use_nodes=True;n=m.node_tree.nodes;n.clear();out=n.new('ShaderNodeOutputMaterial');em=n.new('ShaderNodeEmission');wire=n.new('ShaderNodeWireframe');wire.inputs['Size'].default_value=.004;mix=n.new('ShaderNodeMixRGB');mix.inputs[1].default_value=(.65,.65,.65,1);mix.inputs[2].default_value=(.005,.005,.005,1);m.node_tree.links.new(wire.outputs[0],mix.inputs[0]);m.node_tree.links.new(mix.outputs[0],em.inputs[0]);m.node_tree.links.new(em.outputs[0],out.inputs[0]);o.data.materials.clear();o.data.materials.append(m)
+00:09.547  render           | Saved: 'C:\Users\yigit\angora-tur10\adim07\parke_wireframe.png'
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit
