@@ -34,6 +34,10 @@ for i,fr in enumerate(frames):
  localbox(tag+'_ust_kasa',c,ux,uy,0,0,2.045,width,.15,.06,wood)
  for face in [-1,1]:localbox(tag+'_ust_pervaz',c,ux,uy,0,face*.089,2.065,width,.019,.07,wood)
  localbox(tag+'_esik_doseme',c,ux,uy,0,0,-.022,width-.07,max(.60,min(size.x,size.y)+.1),.045,threshold if floor<3.2 else wood,.002)
+ if i+1==10:
+  # Foto 42 kapı arkası: ray ölçümünde x=3.2..3.8 döşeme z=2.7,
+  # iki taraftaki normal döşeme z=3.0998. Bu çökük şeridi kapat.
+  o.kutu(tag+'_doseme_boslugu',(3.5,center.y,3.0773),(1.05,width-.055,.045),threshold,.002)
  a,b=Vector(lf['min']),Vector(lf['max']);lc=(a+b)/2;ls=b-a;la=0 if ls.x>ls.y else math.pi/2
  if ls.x>.3 and ls.y>.3:la=math.pi/4
  # Foto 17: kanat sağ pervaza bağlı, oda içine açılıyor.
@@ -49,6 +53,9 @@ for i,fr in enumerate(frames):
  # Kat holündeki sağ kapı: foto 18'de kanat tam 90 derece açık değil.
  if abs(floor-6.3713)<.01 and abs(center.x-1.8226)<.08:
   hinge=c+ux*(width/2-.074);direction=Vector((math.sin(math.radians(35)),-math.cos(math.radians(35)),0))
+ if i+1==11:
+  # Foto 44: garaj deposu kanadı kapalı.
+  direction=ux if (hinge-c).dot(ux)<0 else -ux
  lx=direction;ly=Vector((-lx.y,lx.x,0));lc=hinge+lx*w/2;lc.z=floor+.008
  localbox(tag+'_kanat',lc,lx,ly,0,0,h/2,w,.037,h,wood,.005)
  # 2 x 3 paneller: kısa üst, uzun orta, orta boy alt.
@@ -77,7 +84,8 @@ for i,fr in enumerate(frames):
   hc=lc-lx*(w/2)+Vector((0,0,z));o.boru(tag+'_mentese',[hc-Vector((0,0,.034)),hc+Vector((0,0,.034))],.009,brass)
  for kind,q in [('kasa',fr),('kanat',lf)]:
   boxes.append({'ad':tag+'_'+kind,'katman':'mimari','min':[v-.006 for v in q['min']],'max':[v+.006 for v in q['max']],'malzemeler':['WOODY-DARK.001']})
+ boxes.append({'ad':tag+'_eski_topuz_mentese','katman':'mobilya','min':[v-.14 for v in lf['min']],'max':[v+.14 for v in lf['max']],'malzemeler':['brass (4)']})
  records.append({'no':i+1,'kasa':fr,'kanat':lf,'genislik':w,'mentese':[round(v,4) for v in hinge],'acik_yon':[round(v,4) for v in direction]})
 (o.W/'silme-kutulari.json').write_text(json.dumps(boxes,ensure_ascii=False,indent=1),encoding='utf-8')
 (o.W/'kapi-yerlesimleri.json').write_text(json.dumps(records,ensure_ascii=False,indent=1),encoding='utf-8')
-o.bitir('M3',{'panel_kapi':len(frames),'panel_duzeni':'2 sütun × 3 sıra','camli_kapi':'mevcut cam ve floral desen korundu'})
+o.bitir('M3',{'toplam_kapi':len(frames),'panel_kapi':len(frames)-1,'duz_kapi':1,'panel_duzeni':'01: 1×3; 11: düz; diğerleri: 2×3','camli_kapi':'mevcut cam ve floral desen korundu'})

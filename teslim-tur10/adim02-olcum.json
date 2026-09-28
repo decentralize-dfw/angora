@@ -1,0 +1,439 @@
+{
+ "donanim": {
+  "mimari_1": {
+   "Simple White Wall": 9,
+   "wood_floor": 2,
+   "WOODY-DARK.001": 671,
+   "WOOD-FL": 9,
+   "R31 | R33 ivory wall ceramic": 5,
+   "R31 | R33 attic cream tile": 10,
+   "R31 | R33 attic tan mosaic band": 8
+  },
+  "mimari_2": {
+   "Simple White Wall": 4,
+   "WOODY-DARK.001": 616,
+   "WOOD-FL": 3
+  },
+  "mimari_3": {
+   "Simple White Wall": 70,
+   "wood_floor": 2,
+   "WOODY-DARK.001": 779,
+   "WOOD-FL": 2
+  },
+  "mimari_4": {
+   "Simple White Wall": 6,
+   "wood_floor": 2,
+   "WOODY-DARK.001": 605,
+   "WOOD-FL": 3
+  },
+  "mimari_5": {
+   "Simple White Wall": 85,
+   "wood_floor": 2,
+   "WOODY-DARK.001": 605,
+   "metal.001": 21,
+   "WOOD-FL": 10,
+   "RR": 35
+  },
+  "mimari_6": {
+   "Simple White Wall": 56,
+   "wood_floor": 2,
+   "WOODY-DARK.001": 609,
+   "WOOD-FL": 3
+  },
+  "mimari_7": {
+   "Simple White Wall": 34,
+   "wood_floor": 2,
+   "WOODY-DARK.001": 615,
+   "WOOD-FL": 10
+  },
+  "mimari_8": {
+   "Simple White Wall": 77,
+   "wood_floor": 2,
+   "WOODY-DARK.001": 689,
+   "WOOD-FL": 8
+  },
+  "mimari_9": {
+   "Simple White Wall": 35,
+   "WOODY-DARK.001": 594,
+   "terra_floor": 88,
+   "R31 | R33 entrance WC ochre tile": 10,
+   "R31 | R33 entrance navy mosaic band": 9,
+   "R31 | R33 ivory wall ceramic": 7
+  },
+  "mimari_10": {
+   "Simple White Wall": 16,
+   "Stucco painted wall": 2,
+   "WOODY-DARK.001": 588,
+   "terra_floor": 3
+  },
+  "mimari_11": {
+   "Simple White Wall": 44,
+   "Stucco painted wall": 10,
+   "WOODY-DARK.001": 586,
+   "terra_floor": 4
+  },
+  "mimari_12": {
+   "Simple White Wall": 4,
+   "WOODY-DARK.001": 584,
+   "metal.001": 49,
+   "terra_floor": 7
+  },
+  "mobilya_1": {
+   "FINISH | Silver mirror": 6,
+   "brass (4)": 295,
+   "R31 | Warm white porcelain": 12
+  },
+  "mobilya_2": {
+   "brass (4)": 364
+  },
+  "mobilya_3": {
+   "brass (4)": 288,
+   "X": 250
+  },
+  "mobilya_4": {
+   "brass (4)": 322,
+   "ROUGHNSS1": 1
+  },
+  "mobilya_5": {
+   "brass (4)": 352,
+   "R31 | R35 garage galvanized steel": 48,
+   "R31 | Warm white porcelain": 169,
+   "R31 | R33 antique nook walnut": 2
+  },
+  "mobilya_6": {
+   "brass (4)": 329,
+   "ROUGHNSS1": 79,
+   "wood_honey": 1
+  },
+  "mobilya_7": {
+   "brass (4)": 296
+  },
+  "mobilya_8": {
+   "brass (4)": 330
+  },
+  "mobilya_9": {
+   "brass (4)": 340
+  },
+  "mobilya_10": {
+   "brass (4)": 290
+  },
+  "mobilya_11": {
+   "brass (4)": 328
+  },
+  "mobilya_12": {
+   "brass (4)": 345,
+   "WHT": 47
+  }
+ },
+ "kupeşte": [
+  {
+   "min": [
+    0.8962889909744263,
+    0.8913568258285522,
+    3.941793203353882
+   ],
+   "max": [
+    2.922802209854126,
+    0.9793916940689087,
+    3.994917869567871
+   ],
+   "nv": 8
+  },
+  {
+   "min": [
+    0.8386110067367554,
+    0.9353742599487305,
+    3.941793203353882
+   ],
+   "max": [
+    0.9547260999679565,
+    0.9353742599487305,
+    3.994917869567871
+   ],
+   "nv": 4
+  },
+  {
+   "min": [
+    2.8954811096191406,
+    0.9141243696212769,
+    3.942552089691162
+   ],
+   "max": [
+    2.95088267326355,
+    0.9566240310668945,
+    3.942552089691162
+   ],
+   "nv": 4
+  },
+  {
+   "min": [
+    0.8689678907394409,
+    0.9141243696212769,
+    3.942552089691162
+   ],
+   "max": [
+    0.924369215965271,
+    0.9566240310668945,
+    3.942552089691162
+   ],
+   "nv": 4
+  },
+  {
+   "min": [
+    0.18347090482711792,
+    -0.47185802459716797,
+    7.319189071655273
+   ],
+   "max": [
+    1.7182023525238037,
+    -0.3836333751678467,
+    7.371554851531982
+   ],
+   "nv": 8
+  },
+  {
+   "min": [
+    0.13945335149765015,
+    -0.4278407096862793,
+    7.319189071655273
+   ],
+   "max": [
+    0.22748839855194092,
+    0.9626953601837158,
+    7.371554851531982
+   ],
+   "nv": 8
+  },
+  {
+   "min": [
+    1.019993543624878,
+    1.9494847059249878,
+    10.384857177734375
+   ],
+   "max": [
+    1.0799483060836792,
+    3.1501004695892334,
+    10.434946060180664
+   ],
+   "nv": 16
+  }
+ ],
+ "zemin": [
+  [
+   2.6,
+   -0.3,
+   3.0998,
+   "terra_floor"
+  ],
+  [
+   2.8,
+   -0.3,
+   3.0998,
+   "terra_floor"
+  ],
+  [
+   3.0,
+   -0.3,
+   3.1049,
+   "WOODY-DARK.001"
+  ],
+  [
+   3.2,
+   -0.3,
+   2.7,
+   "terra_floor"
+  ],
+  [
+   3.4,
+   -0.3,
+   2.7,
+   "terra_floor"
+  ],
+  [
+   3.6,
+   -0.3,
+   2.7,
+   "terra_floor"
+  ],
+  [
+   3.8,
+   -0.3,
+   2.7,
+   "terra_floor"
+  ],
+  [
+   4.0,
+   -0.3,
+   3.0998,
+   "terra_floor"
+  ],
+  [
+   4.2,
+   -0.3,
+   3.0998,
+   "terra_floor"
+  ],
+  [
+   2.6,
+   0.0,
+   3.0998,
+   "terra_floor"
+  ],
+  [
+   2.8,
+   0.0,
+   3.0998,
+   "terra_floor"
+  ],
+  [
+   3.0,
+   0.0,
+   3.1049,
+   "WOODY-DARK.001"
+  ],
+  [
+   3.2,
+   0.0,
+   2.7,
+   "terra_floor"
+  ],
+  [
+   3.4,
+   0.0,
+   2.7,
+   "terra_floor"
+  ],
+  [
+   3.6,
+   0.0,
+   2.7,
+   "terra_floor"
+  ],
+  [
+   3.8,
+   0.0,
+   2.7,
+   "terra_floor"
+  ],
+  [
+   4.0,
+   0.0,
+   3.0998,
+   "terra_floor"
+  ],
+  [
+   4.2,
+   0.0,
+   3.0998,
+   "terra_floor"
+  ],
+  [
+   2.6,
+   0.3,
+   3.0998,
+   "terra_floor"
+  ],
+  [
+   2.8,
+   0.3,
+   3.0998,
+   "terra_floor"
+  ],
+  [
+   3.0,
+   0.3,
+   3.1049,
+   "WOODY-DARK.001"
+  ],
+  [
+   3.2,
+   0.3,
+   2.7,
+   "terra_floor"
+  ],
+  [
+   3.4,
+   0.3,
+   2.7,
+   "terra_floor"
+  ],
+  [
+   3.6,
+   0.3,
+   2.7,
+   "terra_floor"
+  ],
+  [
+   3.8,
+   0.3,
+   2.7,
+   "terra_floor"
+  ],
+  [
+   4.0,
+   0.3,
+   3.0998,
+   "terra_floor"
+  ],
+  [
+   4.2,
+   0.3,
+   3.0998,
+   "terra_floor"
+  ],
+  [
+   2.6,
+   0.6,
+   3.0998,
+   "terra_floor"
+  ],
+  [
+   2.8,
+   0.6,
+   3.0998,
+   "terra_floor"
+  ],
+  [
+   3.0,
+   0.6,
+   3.0198,
+   "terra_floor"
+  ],
+  [
+   3.2,
+   0.6,
+   2.7,
+   "terra_floor"
+  ],
+  [
+   3.4,
+   0.6,
+   2.7,
+   "terra_floor"
+  ],
+  [
+   3.6,
+   0.6,
+   2.7,
+   "terra_floor"
+  ],
+  [
+   3.8,
+   0.6,
+   2.7,
+   "terra_floor"
+  ],
+  [
+   4.0,
+   0.6,
+   3.0998,
+   "terra_floor"
+  ],
+  [
+   4.2,
+   0.6,
+   null,
+   null
+  ]
+ ]
+}

@@ -72,9 +72,13 @@ for level,(base,top,nlower,nupper) in enumerate([(0,3.0996,9,9),(3.0996,6.3714,1
  z=base+nlower*rise
  o.kutu(f'M2_K{level}_sahanlik',(3.6717,2.02725,z-.018),(1.0,2.1999,.036),wood,.009)
  o.kutu(f'M2_K{level}_sahanlik_alti',(3.6717,2.02725,z-.143),(1.0,2.1999,.214),white,.004)
-for level,z in enumerate([3.0996,6.3714,9.4705]):
- for j,(a,b) in enumerate([((.18,-.45),(.18,.927)),((.18,-.45),(2.92,-.45))]):
-  korkuluk(f'M2_K{level}_bosluk_korkuluk_{j}',(*a,z),(*b,z),['giris','birinci','cati'][level])
+# Her katın orijinal yatay küpeşte bileşeni ayrı ölçüldü (adim02-olcum.json).
+galleries=[(3.0996,'giris',[((.8967,.9354),(2.9232,.9354))]),
+           (6.3714,'birinci',[((.1835,-.4278),(.1835,.9627)),((.1835,-.4278),(1.7182,-.4278))]),
+           (9.4705,'cati',[((1.05,1.9495),(1.05,3.1501))])]
+for level,(z,variant,segments) in enumerate(galleries):
+ for j,(a,b) in enumerate(segments):
+  korkuluk(f'M2_K{level}_bosluk_korkuluk_{j}',(*a,z),(*b,z),variant)
 # Yalnız eski merdiven ahşabı ve kovadaki metal; duvar/kapı/zemin malzemeleri korunur.
 p=o.W/'silme-kutulari.json';boxes=json.loads(p.read_text(encoding='utf-8'))
 boxes=[b for b in boxes if not b['ad'].startswith('M2_') and b['ad']!='107 eski ahsap karyola, silte ve ortu']

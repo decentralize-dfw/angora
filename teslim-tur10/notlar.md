@@ -56,3 +56,19 @@ Kalan: Foto 17'de eski kapı topuzları duvarda kaldı. Foto 42'de eşik arkası
 | M3 kapı 12, bodrum WC | 47,45 | Foto 47'de kısmi koyu panel kapı; 45 aynasında yalnız kenar görülüyor. |
 
 Geometri toplamı: 1.925 nesne, 322.432 üçgen, en büyük nesne 1.036 üçgen. M3 otomatik raporundaki genel “panel_kapi:12” etiketi toplam kapı sayısıdır: 11 panelli + 1 düz garaj kanadı.
+
+
+## Adım 02 — Eşik, eski donanım ve katlara özel galeri konumu
+Kaynak ölçümü: adim02-olcum.json. Giriş kapısı arkasında x=3.2–3.8 aralığındaki döşeme z=2.7; iki tarafında z=3.0998 ölçüldü. Bu çökük şerit aynı üst kota gelen döşeme parçasıyla kapatıldı. Eski kanat kutularında ölçülen brass (4) topuz/menteşe yüzleri ayrı malzeme süzgeciyle kaldırıldı.
+Galeri korkulukları tek yerleşimden çoğaltılmadı: giriş y=0.9354, x=0.8967–2.9232; birinci kat x=0.1835 / y=-0.4278 L biçimi; çatı x=1.05, y=1.9495–3.1501. Konumlar orijinal küpeşte bileşenlerinden ölçüldü. Foto 44 garaj kanadı kapatıldı.
+
+| Yer | Foto | Değişiklik |
+|---|---|---|
+| Giriş galeri | 42,40 | Sağ duvar önündeki yanlış korkuluk kaldırıldı; ölçülen sol boşluk kenarına yerleşti. |
+| Birinci kat galeri | 18,34 | L korkuluğun uzun kolu modelde ölçülen 1.7182 uç koordinatına kısaltıldı. |
+| Çatı galeri | 29 | Korkuluk özgün x=1.05 kenarına alındı. |
+| Oda 107 kapısı | 17,13 | Eski pirinç topuzlar kaldırıldı; yeni menteşe ve topuz korundu. |
+| Giriş holü eşiği | 42 | Kapı arkasındaki 40 cm kot düşüklüğü kapatıldı. |
+| Garaj deposu kapısı | 44 | Fotoğraftaki kapalı konuma döndürüldü. |
+
+Malzeme fotoğraf dokuları ve ışık tonu bu adımda değiştirilmedi. Desen birebirliği ve karanlık çatı banyosu henüz tamamlanmış doğrulama değildir.

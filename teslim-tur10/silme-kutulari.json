@@ -96,6 +96,23 @@
   ]
  },
  {
+  "ad": "M3_01_eski_topuz_mentese",
+  "katman": "mobilya",
+  "min": [
+   -0.11200000000000002,
+   5.0877,
+   9.3392
+  ],
+  "max": [
+   0.20990000000000003,
+   6.1609,
+   11.6111
+  ],
+  "malzemeler": [
+   "brass (4)"
+  ]
+ },
+ {
   "ad": "M3_02_kasa",
   "katman": "mimari",
   "min": [
@@ -127,6 +144,23 @@
   ],
   "malzemeler": [
    "WOODY-DARK.001"
+  ]
+ },
+ {
+  "ad": "M3_02_eski_topuz_mentese",
+  "katman": "mobilya",
+  "min": [
+   -1.2233,
+   4.016500000000001,
+   9.3392
+  ],
+  "max": [
+   -0.1347,
+   4.3385,
+   11.6111
+  ],
+  "malzemeler": [
+   "brass (4)"
   ]
  },
  {
@@ -164,6 +198,23 @@
   ]
  },
  {
+  "ad": "M3_03_eski_topuz_mentese",
+  "katman": "mobilya",
+  "min": [
+   0.5334,
+   -0.6557000000000001,
+   9.3392
+  ],
+  "max": [
+   0.8554,
+   0.5177,
+   11.6111
+  ],
+  "malzemeler": [
+   "brass (4)"
+  ]
+ },
+ {
   "ad": "M3_04_kasa",
   "katman": "mimari",
   "min": [
@@ -195,6 +246,23 @@
   ],
   "malzemeler": [
    "WOODY-DARK.001"
+  ]
+ },
+ {
+  "ad": "M3_04_eski_topuz_mentese",
+  "katman": "mobilya",
+  "min": [
+   1.2081,
+   5.887300000000001,
+   6.2395000000000005
+  ],
+  "max": [
+   1.5299999999999998,
+   6.9613,
+   8.5115
+  ],
+  "malzemeler": [
+   "brass (4)"
   ]
  },
  {
@@ -232,6 +300,23 @@
   ]
  },
  {
+  "ad": "M3_05_eski_topuz_mentese",
+  "katman": "mobilya",
+  "min": [
+   1.6829999999999998,
+   -0.7341,
+   6.2395000000000005
+  ],
+  "max": [
+   2.8555,
+   -0.4121,
+   8.5115
+  ],
+  "malzemeler": [
+   "brass (4)"
+  ]
+ },
+ {
   "ad": "M3_06_kasa",
   "katman": "mimari",
   "min": [
@@ -263,6 +348,23 @@
   ],
   "malzemeler": [
    "WOODY-DARK.001"
+  ]
+ },
+ {
+  "ad": "M3_06_eski_topuz_mentese",
+  "katman": "mobilya",
+  "min": [
+   -0.09200000000000001,
+   -2.6057,
+   6.2395000000000005
+  ],
+  "max": [
+   0.23,
+   -1.4323000000000001,
+   8.5115
+  ],
+  "malzemeler": [
+   "brass (4)"
   ]
  },
  {
@@ -300,6 +402,23 @@
   ]
  },
  {
+  "ad": "M3_07_eski_topuz_mentese",
+  "katman": "mobilya",
+  "min": [
+   -2.114,
+   -0.6839000000000001,
+   6.2395000000000005
+  ],
+  "max": [
+   -0.9406,
+   -0.362,
+   8.5115
+  ],
+  "malzemeler": [
+   "brass (4)"
+  ]
+ },
+ {
   "ad": "M3_08_kasa",
   "katman": "mimari",
   "min": [
@@ -331,6 +450,23 @@
   ],
   "malzemeler": [
    "WOODY-DARK.001"
+  ]
+ },
+ {
+  "ad": "M3_08_eski_topuz_mentese",
+  "katman": "mobilya",
+  "min": [
+   -0.9918,
+   3.0903,
+   6.2395000000000005
+  ],
+  "max": [
+   -0.6698,
+   4.2637,
+   8.5115
+  ],
+  "malzemeler": [
+   "brass (4)"
   ]
  },
  {
@@ -368,6 +504,23 @@
   ]
  },
  {
+  "ad": "M3_09_eski_topuz_mentese",
+  "katman": "mobilya",
+  "min": [
+   2.6202,
+   -2.0824,
+   2.9676
+  ],
+  "max": [
+   3.3487,
+   -1.3530000000000002,
+   5.239599999999999
+  ],
+  "malzemeler": [
+   "brass (4)"
+  ]
+ },
+ {
   "ad": "M3_10_kasa",
   "katman": "mimari",
   "min": [
@@ -399,6 +552,23 @@
   ],
   "malzemeler": [
    "WOODY-DARK.001"
+  ]
+ },
+ {
+  "ad": "M3_10_eski_topuz_mentese",
+  "katman": "mobilya",
+  "min": [
+   2.8636,
+   0.4155,
+   2.9676
+  ],
+  "max": [
+   4.0325,
+   0.7384000000000001,
+   5.239599999999999
+  ],
+  "malzemeler": [
+   "brass (4)"
   ]
  },
  {
@@ -436,6 +606,23 @@
   ]
  },
  {
+  "ad": "M3_11_eski_topuz_mentese",
+  "katman": "mobilya",
+  "min": [
+   4.2584,
+   4.7121,
+   2.9676
+  ],
+  "max": [
+   4.5804,
+   5.8846,
+   5.239599999999999
+  ],
+  "malzemeler": [
+   "brass (4)"
+  ]
+ },
+ {
   "ad": "M3_12_kasa",
   "katman": "mimari",
   "min": [
@@ -467,6 +654,23 @@
   ],
   "malzemeler": [
    "WOODY-DARK.001"
+  ]
+ },
+ {
+  "ad": "M3_12_eski_topuz_mentese",
+  "katman": "mobilya",
+  "min": [
+   -0.017200000000000007,
+   1.2067999999999999,
+   -0.132
+  ],
+  "max": [
+   0.3047,
+   2.1797,
+   2.14
+  ],
+  "malzemeler": [
+   "brass (4)"
   ]
  }
 ]

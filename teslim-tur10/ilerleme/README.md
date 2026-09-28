@@ -16,3 +16,18 @@ Her adım: FOTO | ÖNCE | SONRA
 ![A yerlesim duzeltmeleri - ilk kontrol foto 42](01_a-yerlesim-duzeltmeleri-ilk-kontrol_foto_42.jpg)
 ![A yerlesim duzeltmeleri - ilk kontrol foto 44](01_a-yerlesim-duzeltmeleri-ilk-kontrol_foto_44.jpg)
 ![A yerlesim duzeltmeleri - ilk kontrol foto 47](01_a-yerlesim-duzeltmeleri-ilk-kontrol_foto_47.jpg)
+
+## 02 · A esik ve eski donanim temizligi
+![A esik ve eski donanim temizligi foto 04](02_a-esik-ve-eski-donanim-temizligi_foto_04.jpg)
+![A esik ve eski donanim temizligi foto 13](02_a-esik-ve-eski-donanim-temizligi_foto_13.jpg)
+![A esik ve eski donanim temizligi foto 15](02_a-esik-ve-eski-donanim-temizligi_foto_15.jpg)
+![A esik ve eski donanim temizligi foto 17](02_a-esik-ve-eski-donanim-temizligi_foto_17.jpg)
+![A esik ve eski donanim temizligi foto 18](02_a-esik-ve-eski-donanim-temizligi_foto_18.jpg)
+![A esik ve eski donanim temizligi foto 19](02_a-esik-ve-eski-donanim-temizligi_foto_19.jpg)
+![A esik ve eski donanim temizligi foto 21](02_a-esik-ve-eski-donanim-temizligi_foto_21.jpg)
+![A esik ve eski donanim temizligi foto 29](02_a-esik-ve-eski-donanim-temizligi_foto_29.jpg)
+![A esik ve eski donanim temizligi foto 34](02_a-esik-ve-eski-donanim-temizligi_foto_34.jpg)
+![A esik ve eski donanim temizligi foto 40](02_a-esik-ve-eski-donanim-temizligi_foto_40.jpg)
+![A esik ve eski donanim temizligi foto 42](02_a-esik-ve-eski-donanim-temizligi_foto_42.jpg)
+![A esik ve eski donanim temizligi foto 44](02_a-esik-ve-eski-donanim-temizligi_foto_44.jpg)
+![A esik ve eski donanim temizligi foto 47](02_a-esik-ve-eski-donanim-temizligi_foto_47.jpg)
