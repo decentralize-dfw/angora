@@ -1,0 +1,82 @@
+{
+ "incelenen_ic_ciftler": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  21,
+  22,
+  23,
+  29,
+  30,
+  31,
+  32,
+  33,
+  34,
+  35,
+  39,
+  40,
+  41,
+  42,
+  43,
+  44,
+  45,
+  46,
+  47,
+  48,
+  49
+ ],
+ "incelenen_dis_fotolar": [
+  24,
+  25,
+  26,
+  27,
+  28,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  56
+ ],
+ "dis_model_kanitlari": [
+  "dis_C03.png",
+  "dis_C04.png",
+  "dis_C02.png"
+ ],
+ "sinirlar": [
+  "Foto30 kapı kadrajı örter; foto43 iç yerine dışarı bakar; foto45–46 duvar/kapı yakınlığı donatıları örter; foto48–49 kapalı asansör kapısı kabini örter. Görünmeyen nesneler yalnız bu yüzden yok sayılmadı.",
+  "Dış fotoğraf oda adları 40 iç karelik rapor.json içinde yok; dış kayıtlarında Dış · konum açıklaması kullanıldı.",
+  "C02 uzak, C03/C04 eğik dış açılardır. Foto50 servis kapısı ve basamak ayrıntısı, foto52 yan kapı/aplikler ve foto54–56 küçük tesisat elemanları bu açılardan kesin sınıflanamaz.",
+  "Fotoğraflarda görülen dış aplikler, veranda tavan ışıkları, interkom, hortum/musluk, saksılar, süpürge, paspaslar, havuz sualtı lambaları ve drenaj ızgaraları uzak görüntülerde doğrulanamadığı için kesin eksik listesine alınmadı.",
+  "Foto08 gardırop başka açıda foto14 modelinde görünür; foto09 sehpa foto10 modelinde görünür: yok değil yanlış kaydedildi.",
+  "Aynı nesne farklı fotoğraflarda tek foto dizisinde toplandı; oda isimleri rapor.json yer alanından alındı. Adet ve boyutlar tahminidir.",
+  "Envanter görsel farkları kaydeder; görünmezlik geometri dosyasında nesnenin bulunmadığının teknik kanıtı değildir."
+ ],
+ "genel_isik": [
+  "Gerçek iç fotoğraflarda sıcak krem/kehribar yapay ışık ile daha nötr pencere gün ışığı birlikte görülüyor; pişmiş ışığı kapalı model çoğunlukla daha soğuk mavi-gri görünüyor.",
+  "Pencere ışığı pencere yakınında ve cilalı parkede güçlü, odanın içine doğru kademeli azalan geniş aydınlık alanlar oluşturuyor; modelde bu dağılım daha düz.",
+  "İç mekânda gölgeler çoğunlukla yumuşak, doğrudan güneş alan dış cephe ve bahçede ise saçak ve bitki gölgeleri daha keskin."
+ ],
+ "sayilar": {
+  "malzeme_yuzeyi": 22,
+  "nesne_kaydi": 105,
+  "onem_1": 37
+ }
+}

@@ -1,0 +1,2559 @@
+[
+ {
+  "foto": [
+   1
+  ],
+  "nesne": "tezgâh üstü küçük ev aletleri ve mutfak aksesuarları",
+  "durum": "yok",
+  "konum": "Bodrum mutfakta ocak ve evye çevresinde; kettle, kahve makinesi, bulaşıklık ve şişeler",
+  "adet": 1,
+  "onem": 2,
+  "oda": "Bodrum · Mutfak",
+  "yaklasik_olcu_m": [
+   0.8,
+   0.35,
+   0.35
+  ],
+  "malzeme_renk": "siyah/inoks cihazlar, beyaz bulaşıklık",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_01.jpg"
+  ]
+ },
+ {
+  "foto": [
+   1
+  ],
+  "nesne": "dolap içi açık baharat rafları",
+  "durum": "yanlış",
+  "detay": "Gerçekte dar açık raflarda kavanozlar var; modelde detaylar ve kavanozlar seçilmiyor.",
+  "konum": "Üst dolapların dar dikey aralıkları",
+  "adet": 2,
+  "onem": 2,
+  "oda": "Bodrum · Mutfak",
+  "yaklasik_olcu_m": [
+   0.15,
+   0.8,
+   0.25
+  ],
+  "malzeme_renk": "ceviz raf, küçük cam kavanozlar",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_01.jpg"
+  ]
+ },
+ {
+  "foto": [
+   2,
+   3,
+   5
+  ],
+  "nesne": "köşe koltuk ve minderleri",
+  "durum": "yanlış",
+  "konum": "Bodrum salonunda bahçe pencereleri boyunca sol oturma bölümü",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Foto_05 modelinde düz üçlü koltuk var; fotoğraftaki L biçimli köşe koltuk, köşe uzantısı ve minder düzeni karşılanmıyor.",
+  "oda": "Bodrum · Salon",
+  "yaklasik_olcu_m": [
+   2.8,
+   0.9,
+   1.8
+  ],
+  "malzeme_renk": "açık gri-bej kumaş",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_02.jpg",
+   "foto_03.jpg",
+   "foto_05.jpg"
+  ]
+ },
+ {
+  "foto": [
+   2,
+   3
+  ],
+  "nesne": "sandık sehpa",
+  "durum": "yok",
+  "konum": "Köşe koltuğun önünde",
+  "adet": 1,
+  "onem": 1,
+  "oda": "Bodrum · Salon",
+  "yaklasik_olcu_m": [
+   1,
+   0.5,
+   0.6
+  ],
+  "malzeme_renk": "eskitilmiş kahverengi ahşap, koyu yeşil yan paneller ve metal detaylar",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_02.jpg",
+   "foto_03.jpg"
+  ]
+ },
+ {
+  "foto": [
+   2,
+   3
+  ],
+  "nesne": "kırmızı yüksek dolap",
+  "durum": "yok",
+  "konum": "Şöminenin solunda, pencere ile şömine arasında",
+  "adet": 1,
+  "onem": 1,
+  "oda": "Bodrum · Salon",
+  "yaklasik_olcu_m": [
+   0.9,
+   1.8,
+   0.45
+  ],
+  "malzeme_renk": "koyu kırmızı eskitme ahşap, metal kapak plakaları",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_02.jpg",
+   "foto_03.jpg"
+  ]
+ },
+ {
+  "foto": [
+   2,
+   3
+  ],
+  "nesne": "fon perdeler ve korniş",
+  "durum": "yok",
+  "konum": "Bodrum salonunun bahçeye açılan doğramalarının yanlarında, tavandan yere",
+  "adet": 3,
+  "onem": 1,
+  "oda": "Bodrum · Salon",
+  "yaklasik_olcu_m": [
+   0.65,
+   2.5,
+   0.15
+  ],
+  "malzeme_renk": "hardal-altın fon kumaşı",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_02.jpg",
+   "foto_03.jpg"
+  ]
+ },
+ {
+  "foto": [
+   2,
+   3
+  ],
+  "nesne": "çiçek motifli avizeler",
+  "durum": "yanlış",
+  "detay": "Modelde sade koyu kollu armatür var; fotoğraftaki renkli çiçek/yaprak süsleri ve ikinci armatürün görünür karşılığı yok.",
+  "konum": "Bodrum salonunda oturma ve yemek bölgelerinin tavanı",
+  "adet": 2,
+  "onem": 1,
+  "oda": "Bodrum · Salon",
+  "yaklasik_olcu_m": [
+   0.55,
+   0.7,
+   0.55
+  ],
+  "malzeme_renk": "sarı metal, yeşil/pembe çiçek süsleri",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_02.jpg",
+   "foto_03.jpg"
+  ]
+ },
+ {
+  "foto": [
+   2,
+   3
+  ],
+  "nesne": "yemek sandalyeleri",
+  "durum": "yanlış",
+  "detay": "Modelde çok ince düz çubuk sırtlıklar; fotoğrafta kavisli geniş sırtlık ve daha kalın ayaklar.",
+  "konum": "Şömine önündeki koyu yemek masasının çevresi",
+  "adet": 6,
+  "onem": 2,
+  "oda": "Bodrum · Salon",
+  "yaklasik_olcu_m": [
+   0.45,
+   0.9,
+   0.5
+  ],
+  "malzeme_renk": "koyu lacivert/siyah boyalı ahşap",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_02.jpg",
+   "foto_03.jpg"
+  ]
+ },
+ {
+  "foto": [
+   2,
+   3
+  ],
+  "nesne": "ayaklı vantilatör",
+  "durum": "yok",
+  "konum": "Bodrum salonunda orta bahçe kapısının sol yanında",
+  "adet": 1,
+  "onem": 2,
+  "oda": "Bodrum · Salon",
+  "yaklasik_olcu_m": [
+   0.45,
+   1.3,
+   0.4
+  ],
+  "malzeme_renk": "siyah plastik/metal",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_02.jpg",
+   "foto_03.jpg"
+  ]
+ },
+ {
+  "foto": [
+   2,
+   3
+  ],
+  "nesne": "ahşap berjer",
+  "durum": "yok",
+  "konum": "Orta bahçe kapısı ile sağdaki pencere arasında",
+  "adet": 1,
+  "onem": 2,
+  "oda": "Bodrum · Salon",
+  "yaklasik_olcu_m": [
+   0.6,
+   0.9,
+   0.6
+  ],
+  "malzeme_renk": "kahverengi oymalı ahşap",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_02.jpg",
+   "foto_03.jpg"
+  ]
+ },
+ {
+  "foto": [
+   2
+  ],
+  "nesne": "duvar saati ve dekoratif tabak",
+  "durum": "yok",
+  "konum": "Merdivenin sağındaki dar kolonun salona bakan yüzünde üst üste",
+  "adet": 2,
+  "onem": 2,
+  "oda": "Bodrum · Salon",
+  "yaklasik_olcu_m": [
+   0.3,
+   0.75,
+   0.05
+  ],
+  "malzeme_renk": "koyu çerçeve, açık saat yüzü",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_02.jpg"
+  ]
+ },
+ {
+  "foto": [
+   2
+  ],
+  "nesne": "katlanır tabure",
+  "durum": "yok",
+  "konum": "Saatli kolonun dibinde",
+  "adet": 1,
+  "onem": 3,
+  "oda": "Bodrum · Salon",
+  "yaklasik_olcu_m": [
+   0.35,
+   0.45,
+   0.35
+  ],
+  "malzeme_renk": "beyaz boyalı ahşap",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_02.jpg"
+  ]
+ },
+ {
+  "foto": [
+   5
+  ],
+  "nesne": "duvar fotoğraf grubu",
+  "durum": "yok",
+  "konum": "Köşe koltuğun üstündeki geniş duvar",
+  "adet": 10,
+  "onem": 2,
+  "detay": "Modelin aynı duvarı boş.",
+  "oda": "Bodrum · Salon",
+  "yaklasik_olcu_m": [
+   2,
+   1,
+   0.04
+  ],
+  "malzeme_renk": "farklı koyu çerçeveler",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_05.jpg"
+  ]
+ },
+ {
+  "foto": [
+   5
+  ],
+  "nesne": "yan sehpa",
+  "durum": "yok",
+  "konum": "Koltuğun pencere yanındaki ucunda",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Modelde karşılığı görünmüyor.",
+  "oda": "Bodrum · Salon",
+  "yaklasik_olcu_m": [
+   0.45,
+   0.6,
+   0.45
+  ],
+  "malzeme_renk": "yeşil cam/metal",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_05.jpg"
+  ]
+ },
+ {
+  "foto": [
+   4,
+   23
+  ],
+  "nesne": "salon avizesi",
+  "durum": "yanlış",
+  "konum": "Yemek masasının üzerinde",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Kıvrımlı süsler ve küçük kristal ayrıntılar sade koyu kollara dönüşmüş.",
+  "oda": "Giriş katı · Salon / Giriş katı · Yemek alanı",
+  "yaklasik_olcu_m": [
+   0.7,
+   0.8,
+   0.7
+  ],
+  "malzeme_renk": "parlak pirinç, krem mum başlıkları",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_04.jpg",
+   "foto_23.jpg"
+  ]
+ },
+ {
+  "foto": [
+   4,
+   23
+  ],
+  "nesne": "yemek takımı",
+  "durum": "yanlış",
+  "konum": "Giriş salonunun alçak yemek bölümünde",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Masa kök damar/oyma ve sandalyelerin kabara, kıvrım, deri tonları kayıp; model koyu düz takım.",
+  "oda": "Giriş katı · Salon / Giriş katı · Yemek alanı",
+  "yaklasik_olcu_m": [
+   1.8,
+   0.8,
+   1
+  ],
+  "malzeme_renk": "kök ceviz tabla, oymalı ahşap ve kahverengi deri sandalyeler",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_04.jpg",
+   "foto_23.jpg"
+  ]
+ },
+ {
+  "foto": [
+   4,
+   23
+  ],
+  "nesne": "konsol üstü dekorlar",
+  "durum": "yok",
+  "konum": "Arka aynalı konsolun üzerinde",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Konsol üstü fotoğraftaki küçük nesneler modelde yok.",
+  "oda": "Giriş katı · Salon / Giriş katı · Yemek alanı",
+  "yaklasik_olcu_m": [
+   0.9,
+   0.3,
+   0.25
+  ],
+  "malzeme_renk": "beyaz küçük heykeller ve dekor tabaklar",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_04.jpg",
+   "foto_23.jpg"
+  ]
+ },
+ {
+  "foto": [
+   4
+  ],
+  "nesne": "gramofon",
+  "durum": "yok",
+  "konum": "Arka oturma bölümünde yan sehpa üzerinde",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Fotoğraftaki belirgin borulu nesne görünmüyor.",
+  "oda": "Giriş katı · Salon",
+  "yaklasik_olcu_m": [
+   0.4,
+   0.65,
+   0.4
+  ],
+  "malzeme_renk": "pirinç boru ve koyu ahşap",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_04.jpg"
+  ]
+ },
+ {
+  "foto": [
+   4
+  ],
+  "nesne": "deri koltuk ve örtüsü",
+  "durum": "yanlış",
+  "konum": "Salon oturma grubunda",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Model çok koyu pürüzsüz; minder kırışıklıkları ve kırmızı örtü eksik.",
+  "oda": "Giriş katı · Salon",
+  "yaklasik_olcu_m": [
+   2.1,
+   0.9,
+   0.9
+  ],
+  "malzeme_renk": "tütün kahverengi deri, kırmızı örtü",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_04.jpg"
+  ]
+ },
+ {
+  "foto": [
+   23
+  ],
+  "nesne": "vitrin ve içindeki cam eşyalar",
+  "durum": "yanlış",
+  "konum": "Yemek masasının arkasındaki duvar",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Taç profili, yuvarlak yan vitrinler ve çeşitli cam eşyalar modelde düzleştirilmiş; içerik tek tip beyaz tabaklar.",
+  "oda": "Giriş katı · Yemek alanı",
+  "yaklasik_olcu_m": [
+   1.9,
+   2.2,
+   0.5
+  ],
+  "malzeme_renk": "oymalı ceviz ve şeffaf cam",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_23.jpg"
+  ]
+ },
+ {
+  "foto": [
+   23
+  ],
+  "nesne": "bordo fon perde",
+  "durum": "yok",
+  "konum": "Arka küçük oturma bölümünün penceresi",
+  "adet": 2,
+  "onem": 1,
+  "detay": "Pencere yanları modelde açık.",
+  "oda": "Giriş katı · Yemek alanı",
+  "yaklasik_olcu_m": [
+   0.6,
+   2.5,
+   0.15
+  ],
+  "malzeme_renk": "bordo kumaş",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_23.jpg"
+  ]
+ },
+ {
+  "foto": [
+   23
+  ],
+  "nesne": "çerçeveli duvar dekorları",
+  "durum": "yok",
+  "konum": "Vitrinin sağında üst üste",
+  "adet": 2,
+  "onem": 2,
+  "detay": "Modelde aynı duvar boş.",
+  "oda": "Giriş katı · Yemek alanı",
+  "yaklasik_olcu_m": [
+   0.45,
+   0.9,
+   0.04
+  ],
+  "malzeme_renk": "altın/kahverengi çerçeve",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_23.jpg"
+  ]
+ },
+ {
+  "foto": [
+   6
+  ],
+  "nesne": "mini mutfak ünitesi",
+  "durum": "yok",
+  "konum": "Çatı holünde banyo kapısının solundaki niş",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Tezgâh, alt dolap, evye ve mini buzdolabının yerinde boş duvar var.",
+  "oda": "Çatı katı · Mini mutfak",
+  "yaklasik_olcu_m": [
+   1.3,
+   0.9,
+   0.6
+  ],
+  "malzeme_renk": "ahşap dolap, açık tezgâh, beyaz mini buzdolabı, metal evye",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_06.jpg"
+  ]
+ },
+ {
+  "foto": [
+   6
+  ],
+  "nesne": "mutfak üst rafı ve görev lambası",
+  "durum": "yok",
+  "konum": "Mini mutfağın üzerinde",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Raf, üzerindeki eşyalar ve ince siyah lamba görünmüyor.",
+  "oda": "Çatı katı · Mini mutfak",
+  "yaklasik_olcu_m": [
+   1.2,
+   0.6,
+   0.25
+  ],
+  "malzeme_renk": "ahşap raf, bardaklar ve siyah yatay armatür",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_06.jpg"
+  ]
+ },
+ {
+  "foto": [
+   7
+  ],
+  "nesne": "tek kişilik yatak",
+  "durum": "yanlış",
+  "konum": "Üçgen pencerenin yanındaki çatı yatak odası",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Baş/ayak ucu ve yatak örtüsü geometrisi fotoğrafla uyuşmuyor.",
+  "oda": "Çatı katı · Yatak odası (C02)",
+  "yaklasik_olcu_m": [
+   1,
+   1,
+   2
+  ],
+  "malzeme_renk": "kahverengi ahşap ve gri örtü",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_07.jpg"
+  ]
+ },
+ {
+  "foto": [
+   7
+  ],
+  "nesne": "başucu çekmeceli dolap",
+  "durum": "yok",
+  "konum": "Yatağın pencere tarafında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Fotoğraftaki mavi komodinin yerinde aynı eşya görünmüyor.",
+  "oda": "Çatı katı · Yatak odası (C02)",
+  "yaklasik_olcu_m": [
+   0.45,
+   0.6,
+   0.4
+  ],
+  "malzeme_renk": "mavi boyalı ahşap",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_07.jpg"
+  ]
+ },
+ {
+  "foto": [
+   7
+  ],
+  "nesne": "depolama ve teşhir rafı",
+  "durum": "yok",
+  "konum": "Odanın sağ duvarında beyaz dolap üstünde",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Dolap üstü açık raf ve eşya düzeni modelde yok.",
+  "oda": "Çatı katı · Yatak odası (C02)",
+  "yaklasik_olcu_m": [
+   1,
+   1.8,
+   0.4
+  ],
+  "malzeme_renk": "beyaz alt dolap, siyah açık raf, resimler/kutular",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_07.jpg"
+  ]
+ },
+ {
+  "foto": [
+   7
+  ],
+  "nesne": "radyatör",
+  "durum": "yanlış",
+  "konum": "Üçgen pencerenin altında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Fotoğrafta uzun dikey panel, modelde kısa yatay panel.",
+  "oda": "Çatı katı · Yatak odası (C02)",
+  "yaklasik_olcu_m": [
+   0.5,
+   1.3,
+   0.12
+  ],
+  "malzeme_renk": "beyaz metal",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_07.jpg"
+  ]
+ },
+ {
+  "foto": [
+   8,
+   14
+  ],
+  "nesne": "ayna kapaklı gardırop ve şifonyer",
+  "durum": "yanlış",
+  "konum": "Çatı C04 odasında kapı yanındaki duvar",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Modelde gardırop var; fotoğraftaki taç, çekmeceler ve profil kayıp, şifonyer mavi; yerleşim ters görünür.",
+  "oda": "Çatı katı · Yatak odası (C04)",
+  "yaklasik_olcu_m": [
+   1.5,
+   2.1,
+   0.6
+  ],
+  "malzeme_renk": "krem beyaz lake ve orta ayna",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_08.jpg",
+   "foto_14.jpg"
+  ]
+ },
+ {
+  "foto": [
+   8,
+   14
+  ],
+  "nesne": "çift kişilik yatak",
+  "durum": "yanlış",
+  "konum": "Çatı C04 odasında alçalan tavan altında",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Model dar ahşap tek yatak; genişlik, başlık ve örtü yanlış.",
+  "oda": "Çatı katı · Yatak odası (C04)",
+  "yaklasik_olcu_m": [
+   1.6,
+   1,
+   2
+  ],
+  "malzeme_renk": "krem başlık, açık leylak kapitone örtü",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_08.jpg",
+   "foto_14.jpg"
+  ]
+ },
+ {
+  "foto": [
+   8,
+   14
+  ],
+  "nesne": "boy aynası",
+  "durum": "yok",
+  "konum": "Gardırop ile yatak arasında duvara yaslı",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Bağımsız eğik ayna görünmüyor; gardırop aynası ayrı nesne.",
+  "oda": "Çatı katı · Yatak odası (C04)",
+  "yaklasik_olcu_m": [
+   0.55,
+   1.6,
+   0.08
+  ],
+  "malzeme_renk": "koyu ahşap çerçeve",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_08.jpg",
+   "foto_14.jpg"
+  ]
+ },
+ {
+  "foto": [
+   14
+  ],
+  "nesne": "dilsiz uşak askısı",
+  "durum": "yok",
+  "konum": "Yatağın kapı tarafında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Fotoğraftaki bağımsız askılık görünmüyor.",
+  "oda": "Çatı katı · Yatak odası (C04)",
+  "yaklasik_olcu_m": [
+   0.45,
+   1.1,
+   0.35
+  ],
+  "malzeme_renk": "ince ahşap",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_14.jpg"
+  ]
+ },
+ {
+  "foto": [
+   8
+  ],
+  "nesne": "masa ve iki sandalye",
+  "durum": "yok",
+  "konum": "Çatı C04 pencere önünde",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Modelde pencere önü boş.",
+  "oda": "Çatı katı · Yatak odası (C04)",
+  "yaklasik_olcu_m": [
+   1,
+   0.75,
+   0.6
+  ],
+  "malzeme_renk": "açık masa, döşemeli sandalyeler",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_08.jpg"
+  ]
+ },
+ {
+  "foto": [
+   8
+  ],
+  "nesne": "küçük yan raf/yuvalanan sehpalar",
+  "durum": "yok",
+  "konum": "Pencerenin sağındaki alçak duvar",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Modelde aynı köşede görünmüyor.",
+  "oda": "Çatı katı · Yatak odası (C04)",
+  "yaklasik_olcu_m": [
+   0.55,
+   0.65,
+   0.4
+  ],
+  "malzeme_renk": "açık ahşap/beyaz",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_08.jpg"
+  ]
+ },
+ {
+  "foto": [
+   8,
+   14
+  ],
+  "nesne": "duvar apliği",
+  "durum": "yok",
+  "konum": "Gardırop ve boy aynası üstünde",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Fotoğraftaki sıcak ışıklı aplik modelde görünmüyor.",
+  "oda": "Çatı katı · Yatak odası (C04)",
+  "yaklasik_olcu_m": [
+   0.18,
+   0.25,
+   0.2
+  ],
+  "malzeme_renk": "açık cam ve metal",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_08.jpg",
+   "foto_14.jpg"
+  ]
+ },
+ {
+  "foto": [
+   9,
+   10
+  ],
+  "nesne": "duvar resimleri",
+  "durum": "yok",
+  "konum": "Kanepenin üzerinde dört, TV üzerinde iki çerçeve",
+  "adet": 6,
+  "onem": 1,
+  "detay": "Model duvarları boş.",
+  "oda": "Çatı katı · Oturma alanı",
+  "yaklasik_olcu_m": [
+   2.1,
+   0.7,
+   0.04
+  ],
+  "malzeme_renk": "altın ve kahverengi çerçeveler",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_09.jpg",
+   "foto_10.jpg"
+  ]
+ },
+ {
+  "foto": [
+   9,
+   10
+  ],
+  "nesne": "orta sehpa",
+  "durum": "yanlış",
+  "konum": "Çatı oturma alanında kanepe önünde",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Fotoğrafta kalın kutu tabla, modelde ince koyu tabla.",
+  "oda": "Çatı katı · Oturma alanı",
+  "yaklasik_olcu_m": [
+   1.1,
+   0.45,
+   0.65
+  ],
+  "malzeme_renk": "açık doğal ahşap",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_09.jpg",
+   "foto_10.jpg"
+  ]
+ },
+ {
+  "foto": [
+   9,
+   10
+  ],
+  "nesne": "halı",
+  "durum": "yanlış",
+  "konum": "Çatı oturma sehpasının altında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Modelde desensiz açık krem dikdörtgen.",
+  "oda": "Çatı katı · Oturma alanı",
+  "yaklasik_olcu_m": [
+   1.5,
+   0.01,
+   2
+  ],
+  "malzeme_renk": "gri-kahve eskitme desen",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_09.jpg",
+   "foto_10.jpg"
+  ]
+ },
+ {
+  "foto": [
+   9,
+   10
+  ],
+  "nesne": "tavan sarkıtı",
+  "durum": "yanlış",
+  "konum": "Çatı oturma alanının ortasında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Modelde küre yerine tavan vantilatörü var.",
+  "oda": "Çatı katı · Oturma alanı",
+  "yaklasik_olcu_m": [
+   0.25,
+   0.5,
+   0.25
+  ],
+  "malzeme_renk": "beyaz küre cam",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_09.jpg",
+   "foto_10.jpg"
+  ]
+ },
+ {
+  "foto": [
+   9,
+   10
+  ],
+  "nesne": "TV ünitesi ve yan sehpa",
+  "durum": "yanlış",
+  "konum": "Kanepenin karşı duvarında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Model daha koyu ve düz, ünitenin arka ahşap panosu eksik.",
+  "oda": "Çatı katı · Oturma alanı",
+  "yaklasik_olcu_m": [
+   1.8,
+   0.5,
+   0.45
+  ],
+  "malzeme_renk": "açık damar/desenli ahşap",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_09.jpg",
+   "foto_10.jpg"
+  ]
+ },
+ {
+  "foto": [
+   9,
+   10
+  ],
+  "nesne": "kanepe",
+  "durum": "yanlış",
+  "konum": "Çatı oturma alanı uzun duvarında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Fotoğraftaki kapitone düğme, ince ahşap ayak ve genişlik modelde farklı.",
+  "oda": "Çatı katı · Oturma alanı",
+  "yaklasik_olcu_m": [
+   2.1,
+   0.85,
+   0.85
+  ],
+  "malzeme_renk": "füme mavi kadife/kumaş",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_09.jpg",
+   "foto_10.jpg"
+  ]
+ },
+ {
+  "foto": [
+   11
+  ],
+  "nesne": "ayna ve çerçevesi",
+  "durum": "yanlış",
+  "konum": "Lavabonun üstünde",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Model çerçeve ince düz ve yansıma oda yerine çevre gradyanı.",
+  "oda": "1. kat · Ortak banyo",
+  "yaklasik_olcu_m": [
+   0.6,
+   0.6,
+   0.06
+  ],
+  "malzeme_renk": "oymalı altın yuvarlak çerçeve",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_11.jpg"
+  ]
+ },
+ {
+  "foto": [
+   11
+  ],
+  "nesne": "ayna yanı aplikler",
+  "durum": "yok",
+  "konum": "Yüksek pencerenin iki yanında",
+  "adet": 2,
+  "onem": 2,
+  "detay": "Modelde aynı duvar bölgeleri boş.",
+  "oda": "1. kat · Ortak banyo",
+  "yaklasik_olcu_m": [
+   0.2,
+   0.25,
+   0.22
+  ],
+  "malzeme_renk": "pirinç ve krem cam",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_11.jpg"
+  ]
+ },
+ {
+  "foto": [
+   11
+  ],
+  "nesne": "lavabo altı ve boy dolabı",
+  "durum": "yanlış",
+  "konum": "Lavabo tezgâhı altında ve duşun solunda",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Model alt dolap çok kısa; boy dolabında fotoğrafın kapakları yerine açık raflar görünüyor.",
+  "oda": "1. kat · Ortak banyo",
+  "yaklasik_olcu_m": [
+   2.4,
+   2.1,
+   0.55
+  ],
+  "malzeme_renk": "ceviz çerçeveli kapak ve buzlu cam",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_11.jpg"
+  ]
+ },
+ {
+  "foto": [
+   11
+  ],
+  "nesne": "sabunluk ve kâğıt kutusu",
+  "durum": "yok",
+  "konum": "Lavabonun sağ/sol tezgâhında",
+  "adet": 1,
+  "onem": 3,
+  "detay": "Tezgâh modelde boş.",
+  "oda": "1. kat · Ortak banyo",
+  "yaklasik_olcu_m": [
+   0.3,
+   0.15,
+   0.15
+  ],
+  "malzeme_renk": "açık kutu ve küçük cam/plastik",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_11.jpg"
+  ]
+ },
+ {
+  "foto": [
+   12,
+   33
+  ],
+  "nesne": "berjer çifti",
+  "durum": "yanlış",
+  "konum": "Üst kat oturma alanı duvarında",
+  "adet": 2,
+  "onem": 2,
+  "detay": "Model yeşilimsi, gövde ve kulak biçimi kaba; minder ayrıntıları eksik.",
+  "oda": "1. kat · Oturma alanı",
+  "yaklasik_olcu_m": [
+   0.8,
+   1.05,
+   0.8
+  ],
+  "malzeme_renk": "krem-altın çiçekli kumaş",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_12.jpg",
+   "foto_33.jpg"
+  ]
+ },
+ {
+  "foto": [
+   12,
+   33
+  ],
+  "nesne": "mavi orta sehpa",
+  "durum": "yanlış",
+  "konum": "İki berjerin arasında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Model kahverengi düz ayaklı.",
+  "oda": "1. kat · Oturma alanı",
+  "yaklasik_olcu_m": [
+   0.75,
+   0.45,
+   0.65
+  ],
+  "malzeme_renk": "lacivert boyalı kıvrımlı ayaklı ahşap",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_12.jpg",
+   "foto_33.jpg"
+  ]
+ },
+ {
+  "foto": [
+   12
+  ],
+  "nesne": "camlı köşe dolabı",
+  "durum": "yanlış",
+  "konum": "Berjerin sağında merdiven kemerinin solunda",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Fotoğraftaki dar yüksek vitrin yerine modelde geniş aynalı dolap görülüyor; yerleşim de farklı.",
+  "oda": "1. kat · Oturma alanı",
+  "yaklasik_olcu_m": [
+   0.65,
+   2,
+   0.4
+  ],
+  "malzeme_renk": "bal rengi ahşap, cam kapak",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı. Kamera kayması nedeniyle geniş aynalı dolap başka mobilya olabilir; dar vitrinin yokluğu kesin değildir.",
+  "kanit": [
+   "foto_12.jpg"
+  ]
+ },
+ {
+  "foto": [
+   13,
+   17
+  ],
+  "nesne": "ferforje yatak",
+  "durum": "yanlış",
+  "konum": "107 yatak odasında duvar önünde",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Modelde düz ahşap başlık ve metal ayakucu yok; yastık/katlı yorgan farklı.",
+  "oda": "1. kat · Yatak odası (107)",
+  "yaklasik_olcu_m": [
+   1.5,
+   1.2,
+   2
+  ],
+  "malzeme_renk": "siyah metal ve pirinç topuzlar",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_13.jpg",
+   "foto_17.jpg"
+  ]
+ },
+ {
+  "foto": [
+   13
+  ],
+  "nesne": "desenli fon perde",
+  "durum": "yanlış",
+  "konum": "107 odasının penceresi boyunca",
+  "adet": 2,
+  "onem": 1,
+  "detay": "Modelde beyaz düz tül; desen ve kapalı kanat durumu yanlış.",
+  "oda": "1. kat · Yatak odası (107)",
+  "yaklasik_olcu_m": [
+   1.8,
+   2.4,
+   0.15
+  ],
+  "malzeme_renk": "krem zeminde siyah damask",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_13.jpg"
+  ]
+ },
+ {
+  "foto": [
+   13,
+   17
+  ],
+  "nesne": "iki kollu tavan lambası",
+  "durum": "yanlış",
+  "konum": "107 yatak odası tavan ortası",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Modelde tek konik kumaş sarkıt.",
+  "oda": "1. kat · Yatak odası (107)",
+  "yaklasik_olcu_m": [
+   0.7,
+   0.35,
+   0.2
+  ],
+  "malzeme_renk": "siyah metal ve küçük cam başlık",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_13.jpg",
+   "foto_17.jpg"
+  ]
+ },
+ {
+  "foto": [
+   13,
+   17
+  ],
+  "nesne": "yatak üstü uzun resim",
+  "durum": "yok",
+  "konum": "Yatak başlığının üzerinde",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Modelde görünen başucu duvarı boş.",
+  "oda": "1. kat · Yatak odası (107)",
+  "yaklasik_olcu_m": [
+   1,
+   0.35,
+   0.04
+  ],
+  "malzeme_renk": "siyah ince çerçeveli açık çizimler",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_13.jpg",
+   "foto_17.jpg"
+  ]
+ },
+ {
+  "foto": [
+   17
+  ],
+  "nesne": "başucu masa ve çalışma lambası",
+  "durum": "yok",
+  "konum": "Yatağın sol yanında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Modelde karşılığı görünmüyor.",
+  "oda": "1. kat · Yatak odası (107)",
+  "yaklasik_olcu_m": [
+   0.45,
+   0.55,
+   0.45
+  ],
+  "malzeme_renk": "siyah yuvarlak tabla, kollu siyah lamba",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_17.jpg"
+  ]
+ },
+ {
+  "foto": [
+   15
+  ],
+  "nesne": "havalandırma menfezi",
+  "durum": "yok",
+  "konum": "Duşun sağında eğik tavan altındaki duvar",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Model duvarında görünmüyor.",
+  "oda": "Çatı katı · Banyo",
+  "yaklasik_olcu_m": [
+   0.25,
+   0.4,
+   0.03
+  ],
+  "malzeme_renk": "beyaz panjurlu plastik",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_15.jpg"
+  ]
+ },
+ {
+  "foto": [
+   15
+  ],
+  "nesne": "kilim",
+  "durum": "yok",
+  "konum": "Duş ile lavabo/klozet arasındaki zemin",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Model zemini boş.",
+  "oda": "Çatı katı · Banyo",
+  "yaklasik_olcu_m": [
+   0.65,
+   0.01,
+   1.3
+  ],
+  "malzeme_renk": "kırmızı-siyah geometrik dokuma",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_15.jpg"
+  ]
+ },
+ {
+  "foto": [
+   15
+  ],
+  "nesne": "cam lavabo rafı",
+  "durum": "yok",
+  "konum": "Aynanın alt kenarında",
+  "adet": 1,
+  "onem": 3,
+  "detay": "Modelde raf ve aksesuarlar yok.",
+  "oda": "Çatı katı · Banyo",
+  "yaklasik_olcu_m": [
+   0.4,
+   0.04,
+   0.12
+  ],
+  "malzeme_renk": "şeffaf cam ve metal, diş fırçası/şişeler",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_15.jpg"
+  ]
+ },
+ {
+  "foto": [
+   15
+  ],
+  "nesne": "kâğıtlık ve çöp kutusu",
+  "durum": "yok",
+  "konum": "Klozetin sağ yanında duvar ve yerde",
+  "adet": 1,
+  "onem": 3,
+  "detay": "Fotoğraftaki donatılar modelin görünür sağ duvarında yok.",
+  "oda": "Çatı katı · Banyo",
+  "yaklasik_olcu_m": [
+   0.25,
+   0.4,
+   0.2
+  ],
+  "malzeme_renk": "krom metal",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_15.jpg"
+  ]
+ },
+ {
+  "foto": [
+   15
+  ],
+  "nesne": "duş yanındaki raf içeriği",
+  "durum": "yanlış",
+  "konum": "Siyah dar açık banyo rafı üzerinde",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Modelde eş boy beyaz şişe sıraları.",
+  "oda": "Çatı katı · Banyo",
+  "yaklasik_olcu_m": [
+   0.35,
+   1.7,
+   0.3
+  ],
+  "malzeme_renk": "çeşitli renkli şişe, kutu ve sepet",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_15.jpg"
+  ]
+ },
+ {
+  "foto": [
+   16
+  ],
+  "nesne": "aynalı gardırop",
+  "durum": "yanlış",
+  "konum": "Giyinme odasını çevreleyen L dolap",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Kapak bölünmeleri ve çerçeve düzeni farklı; aynalarda gerçek oda yansımıyor.",
+  "oda": "1. kat · Giyinme odası",
+  "yaklasik_olcu_m": [
+   3,
+   2.5,
+   0.6
+  ],
+  "malzeme_renk": "bal ahşap, büyük kayar ayna paneller",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_16.jpg"
+  ]
+ },
+ {
+  "foto": [
+   16
+  ],
+  "nesne": "mavi tüylü paspas",
+  "durum": "yok",
+  "konum": "Giyinme odası zemininde",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Model görünür zemini boş.",
+  "oda": "1. kat · Giyinme odası",
+  "yaklasik_olcu_m": [
+   0.65,
+   0.02,
+   1.2
+  ],
+  "malzeme_renk": "canlı mavi uzun hav",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_16.jpg"
+  ]
+ },
+ {
+  "foto": [
+   16
+  ],
+  "nesne": "gömme tavan spotu",
+  "durum": "yanlış",
+  "konum": "Giyinme odası tavanında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Modelde büyük yüzeye montaj yuvarlak armatür var.",
+  "oda": "1. kat · Giyinme odası",
+  "yaklasik_olcu_m": [
+   0.08,
+   0.03,
+   0.08
+  ],
+  "malzeme_renk": "beyaz çerçeve",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_16.jpg"
+  ]
+ },
+ {
+  "foto": [
+   19,
+   31
+  ],
+  "nesne": "aynalı şifonyer",
+  "durum": "yok",
+  "konum": "Ebeveyn odasında kapı sağındaki duvar; foto19 sol",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Foto31 modelindeki aynı duvar boş; foto19 modelinde başka yerde dar TV dolabı var.",
+  "oda": "1. kat · Ebeveyn yatak odası",
+  "yaklasik_olcu_m": [
+   1.2,
+   1.8,
+   0.5
+  ],
+  "malzeme_renk": "bal ahşap, kavisli çerçeveli ayna",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_19.jpg",
+   "foto_31.jpg"
+  ]
+ },
+ {
+  "foto": [
+   19
+  ],
+  "nesne": "yatak örtüsü ve dekor yastıkları",
+  "durum": "yanlış",
+  "konum": "Ebeveyn yatağı üzerinde",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Modelde koyu örtü ve düz beyaz yastık; desen ölçeği yanlış.",
+  "oda": "1. kat · Ebeveyn yatak odası",
+  "yaklasik_olcu_m": [
+   1.8,
+   0.05,
+   2.1
+  ],
+  "malzeme_renk": "ince pembe desenli örtü, çiçekli iki yastık",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_19.jpg"
+  ]
+ },
+ {
+  "foto": [
+   18,
+   34
+  ],
+  "nesne": "sarkıt zinciri",
+  "durum": "yok",
+  "konum": "Merdiven boşluğunda tavandan aşağı",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Model merdiven boşluğunda fotoğraftaki zincir görünmüyor.",
+  "oda": "1. kat · Kat holü · Merdiven",
+  "yaklasik_olcu_m": [
+   0.03,
+   2.5,
+   0.03
+  ],
+  "malzeme_renk": "koyu metal",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_18.jpg",
+   "foto_34.jpg"
+  ]
+ },
+ {
+  "foto": [
+   18,
+   34,
+   47
+  ],
+  "nesne": "merdiven duvar aplikleri",
+  "durum": "yok",
+  "konum": "Katlar arası merdiven duvarlarında, sahanlıkların üstünde",
+  "adet": 3,
+  "onem": 2,
+  "detay": "Görünen duvarlarda sıcak ışıklı armatürlerin karşılığı yok; adet görünen en az üç.",
+  "oda": "1. kat · Kat holü · Merdiven / Bodrum · Hol · Merdiven",
+  "yaklasik_olcu_m": [
+   0.2,
+   0.25,
+   0.2
+  ],
+  "malzeme_renk": "pirinç/krem cam",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı. Katlar ayrı olduğundan üç farklı görünür konum birlikte kaydedildi; foto18 ve34 aynı üst kat armatürünü gösterebilir.",
+  "kanit": [
+   "foto_18.jpg",
+   "foto_34.jpg",
+   "foto_47.jpg"
+  ]
+ },
+ {
+  "foto": [
+   29
+  ],
+  "nesne": "interkom",
+  "durum": "yok",
+  "konum": "Çatı holünde banyo kapısının solunda",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Model aynı duvarı boş.",
+  "oda": "Çatı katı · Kat holü",
+  "yaklasik_olcu_m": [
+   0.2,
+   0.25,
+   0.06
+  ],
+  "malzeme_renk": "beyaz gövde ve siyah ekran/kordon",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_29.jpg"
+  ]
+ },
+ {
+  "foto": [
+   29
+  ],
+  "nesne": "küçük kapaklı dolap",
+  "durum": "yanlış",
+  "konum": "Çatı holünde banyo kapısının sol altında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Foto29 yerinde görünmüyor; foto10 modelinde kanepe yanına taşınmış benzer dolap var.",
+  "oda": "Çatı katı · Kat holü",
+  "yaklasik_olcu_m": [
+   0.7,
+   0.9,
+   0.35
+  ],
+  "malzeme_renk": "orta ceviz ahşap",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_29.jpg"
+  ]
+ },
+ {
+  "foto": [
+   34,
+   35
+  ],
+  "nesne": "interkom",
+  "durum": "yok",
+  "konum": "1. kat holünde yatak odası kapısının yanında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Model aynı duvarı boş.",
+  "oda": "1. kat · Kat holü · Merdiven / 1. kat · Kat holü",
+  "yaklasik_olcu_m": [
+   0.2,
+   0.25,
+   0.06
+  ],
+  "malzeme_renk": "beyaz ekranlı gövde",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_34.jpg",
+   "foto_35.jpg"
+  ]
+ },
+ {
+  "foto": [
+   34,
+   35
+  ],
+  "nesne": "priz ve anahtar grubu",
+  "durum": "yok",
+  "konum": "İnterkom altında ve kemerli açıklık yanındaki alt duvar",
+  "adet": 3,
+  "onem": 3,
+  "detay": "Fotoğraftaki küçük kontrol plakaları modelde görünmüyor.",
+  "oda": "1. kat · Kat holü · Merdiven / 1. kat · Kat holü",
+  "yaklasik_olcu_m": [
+   0.25,
+   0.1,
+   0.02
+  ],
+  "malzeme_renk": "beyaz/koyu plakalar",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_34.jpg",
+   "foto_35.jpg"
+  ]
+ },
+ {
+  "foto": [
+   35
+  ],
+  "nesne": "kemerli geçiş",
+  "durum": "yanlış",
+  "konum": "Oturma alanına açılan sol açıklık",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Fotoğrafta yuvarlak kemer, modelde dikdörtgen/geometrisi kaymış açıklık.",
+  "oda": "1. kat · Kat holü",
+  "yaklasik_olcu_m": [
+   0.9,
+   2.2,
+   0.2
+  ],
+  "malzeme_renk": "krem boyalı duvar",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_35.jpg"
+  ]
+ },
+ {
+  "foto": [
+   31
+  ],
+  "nesne": "giyinme geçiş kemeri",
+  "durum": "yanlış",
+  "konum": "Ebeveyn odasının sol kapısında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Fotoğraftaki üst kavis modelde düz dikdörtgen.",
+  "oda": "1. kat · Ebeveyn yatak odası",
+  "yaklasik_olcu_m": [
+   0.8,
+   2.2,
+   0.2
+  ],
+  "malzeme_renk": "krem boyalı sıva",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_31.jpg"
+  ]
+ },
+ {
+  "foto": [
+   39
+  ],
+  "nesne": "klozet",
+  "durum": "yanlış",
+  "konum": "Giriş WC arka duvarında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Model düz dikdörtgen rezervuar; fotoğraftaki klasik biçim ve yan kol yok.",
+  "oda": "Giriş katı · Misafir WC",
+  "yaklasik_olcu_m": [
+   0.4,
+   0.85,
+   0.65
+  ],
+  "malzeme_renk": "beyaz klasik profilli porselen",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_39.jpg"
+  ]
+ },
+ {
+  "foto": [
+   40,
+   42
+  ],
+  "nesne": "antre berjerleri",
+  "durum": "yok",
+  "konum": "Giriş merdiveni yanında ve yüksek radyatör çevresinde",
+  "adet": 2,
+  "onem": 1,
+  "detay": "Foto42 aynı anda iki berjer gösteriyor; foto40 bunlardan birini tekrar gösteriyor olabilir. Modelin görünür antre duvarları boş.",
+  "oda": "Giriş katı · Antre / Giriş katı · Antre · Merdiven",
+  "yaklasik_olcu_m": [
+   0.6,
+   0.9,
+   0.6
+  ],
+  "malzeme_renk": "kahverengi deri, oymalı ahşap",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_40.jpg",
+   "foto_42.jpg"
+  ]
+ },
+ {
+  "foto": [
+   40,
+   42
+  ],
+  "nesne": "yüksek radyatörler",
+  "durum": "yok",
+  "konum": "Antre duvarlarında; biri dış giriş geçişi solunda, biri merdiven karşısında",
+  "adet": 2,
+  "onem": 1,
+  "detay": "Modelin görünen duvarları boş.",
+  "oda": "Giriş katı · Antre / Giriş katı · Antre · Merdiven",
+  "yaklasik_olcu_m": [
+   0.65,
+   1.6,
+   0.12
+  ],
+  "malzeme_renk": "beyaz dikey dilimli metal",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı. Foto40 ve42 farklı duvarlarda görünür; kadrajların oda içi eşlemesi kesin olmadığından adet iki tahminidir.",
+  "kanit": [
+   "foto_40.jpg",
+   "foto_42.jpg"
+  ]
+ },
+ {
+  "foto": [
+   40
+  ],
+  "nesne": "antre interkomu",
+  "durum": "yok",
+  "konum": "Dış giriş geçişinin sağında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Modelde yok.",
+  "oda": "Giriş katı · Antre",
+  "yaklasik_olcu_m": [
+   0.2,
+   0.25,
+   0.06
+  ],
+  "malzeme_renk": "beyaz gövde siyah ekran",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_40.jpg"
+  ]
+ },
+ {
+  "foto": [
+   42
+  ],
+  "nesne": "küçük çerçeveli resim",
+  "durum": "yok",
+  "konum": "Yüksek radyatörün sol üstünde",
+  "adet": 1,
+  "onem": 3,
+  "detay": "Modelde duvar boş.",
+  "oda": "Giriş katı · Antre · Merdiven",
+  "yaklasik_olcu_m": [
+   0.25,
+   0.2,
+   0.04
+  ],
+  "malzeme_renk": "koyu ahşap çerçeve",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_42.jpg"
+  ]
+ },
+ {
+  "foto": [
+   41
+  ],
+  "nesne": "portmanto aynası",
+  "durum": "yanlış",
+  "konum": "Dış kapının solunda tam boy dolap",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Model kapakları opak kahverengi; fotoğrafta büyük boy ayna.",
+  "oda": "Giriş katı · Giriş holü",
+  "yaklasik_olcu_m": [
+   1.2,
+   2.4,
+   0.6
+  ],
+  "malzeme_renk": "bal ahşap çerçeve, ayna kayar kapak",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_41.jpg"
+  ]
+ },
+ {
+  "foto": [
+   41
+  ],
+  "nesne": "kristal giriş avizesi",
+  "durum": "yok",
+  "konum": "Dış giriş holü tavanında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Fotoğraf üstünde kristal salkımlar, modelde görünmüyor.",
+  "oda": "Giriş katı · Giriş holü",
+  "yaklasik_olcu_m": [
+   0.45,
+   0.65,
+   0.45
+  ],
+  "malzeme_renk": "şeffaf sarkıt kristaller ve metal",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_41.jpg"
+  ]
+ },
+ {
+  "foto": [
+   41
+  ],
+  "nesne": "giriş kapısı",
+  "durum": "yanlış",
+  "konum": "Dış giriş açıklığında",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Model kapı açık ve koyu; panel/kilit düzeni fotoğraftan farklı.",
+  "oda": "Giriş katı · Giriş holü",
+  "yaklasik_olcu_m": [
+   1,
+   2.1,
+   0.08
+  ],
+  "malzeme_renk": "orta kahverengi altı panel, pirinç kol",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_41.jpg"
+  ]
+ },
+ {
+  "foto": [
+   44
+  ],
+  "nesne": "garaj depo dolabı",
+  "durum": "yanlış",
+  "konum": "Garaj duvarı boyunca",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Model küçük/düz çift kapaklı ve ters duvarda; fotoğraftaki uzun gövde/taç profili yok.",
+  "oda": "Garaj · Depo",
+  "yaklasik_olcu_m": [
+   2.5,
+   2.2,
+   0.6
+  ],
+  "malzeme_renk": "bal meşe çok kapaklı dolap",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_44.jpg"
+  ]
+ },
+ {
+  "foto": [
+   44
+  ],
+  "nesne": "garaj açık rafları ve depolanan kutular",
+  "durum": "yok",
+  "konum": "Garajın sol ve arka duvarı boyunca",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Foto44 modelinde arka bölüm ve görünen duvar boş; fotoğraftaki dolu arka raf görünmüyor. Sol uzun rafın tamamı kadraj dışında kalabileceğinden toplu yokluk kesin değil.",
+  "oda": "Garaj · Depo",
+  "yaklasik_olcu_m": [
+   2.5,
+   1.7,
+   0.45
+  ],
+  "malzeme_renk": "beyaz/siyah raflar, saydam kutular, renkli aletler",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_44.jpg"
+  ]
+ },
+ {
+  "foto": [
+   44
+  ],
+  "nesne": "garaj kapısı motoru ve rayı",
+  "durum": "yok",
+  "konum": "Tavanda garaj doğrultusunda",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Model görünür tavanda mekanizma yok.",
+  "oda": "Garaj · Depo",
+  "yaklasik_olcu_m": [
+   0.3,
+   0.25,
+   2.5
+  ],
+  "malzeme_renk": "gri metal, beyaz motor kutusu",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_44.jpg"
+  ]
+ },
+ {
+  "foto": [
+   44
+  ],
+  "nesne": "servis boruları",
+  "durum": "yok",
+  "konum": "Arka duvarın tavan birleşiminde",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Fotoğraftaki tesisat modelde yok.",
+  "oda": "Garaj · Depo",
+  "yaklasik_olcu_m": [
+   2,
+   0.15,
+   0.15
+  ],
+  "malzeme_renk": "beyaz boru ve sarı yalıtım",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_44.jpg"
+  ]
+ },
+ {
+  "foto": [
+   45
+  ],
+  "nesne": "oval ayna",
+  "durum": "yanlış",
+  "konum": "Bodrum WC lavabosu üzerinde",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Model çerçevesi kaba çokgen ve gerçek oda yansıması yok.",
+  "oda": "Bodrum · Misafir WC",
+  "yaklasik_olcu_m": [
+   0.55,
+   0.85,
+   0.06
+  ],
+  "malzeme_renk": "siyah oymalı çerçeve",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_45.jpg"
+  ]
+ },
+ {
+  "foto": [
+   46
+  ],
+  "nesne": "saksı bitkisi ve raf düzeni",
+  "durum": "yanlış",
+  "konum": "Bodrum WC klozet üstü duvarında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Model büyük köşeli dik yapraklar ve altına ek şişe rafı koymuş; fotoğrafta tek raf.",
+  "oda": "Bodrum · Misafir WC",
+  "yaklasik_olcu_m": [
+   0.5,
+   0.35,
+   0.18
+  ],
+  "malzeme_renk": "sarkan ince yeşil yapraklar, beyaz saksı, siyah raf",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_46.jpg"
+  ]
+ },
+ {
+  "foto": [
+   47
+  ],
+  "nesne": "sahanlık aynası",
+  "durum": "yok",
+  "konum": "Bodrumdan çıkan merdivenin karşı üst duvarında",
+  "adet": 1,
+  "onem": 2,
+  "detay": "Model görünür sahanlık duvarı boş.",
+  "oda": "Bodrum · Hol · Merdiven",
+  "yaklasik_olcu_m": [
+   0.45,
+   0.3,
+   0.05
+  ],
+  "malzeme_renk": "kahverengi süslü çerçeve",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_47.jpg"
+  ]
+ },
+ {
+  "foto": [
+   48,
+   49
+  ],
+  "nesne": "asansör kapısı ve çağrı paneli",
+  "durum": "yanlış",
+  "konum": "Bodrum holündeki asansör açıklığında",
+  "adet": 1,
+  "onem": 1,
+  "detay": "Fotoğrafta açık düz cam kapı ve sayısal panel; model kapalı büyük gül desenli cam. Kabin örtülüyor.",
+  "oda": "Bodrum · Hol · Asansör / Asansör kabini",
+  "yaklasik_olcu_m": [
+   0.85,
+   2.1,
+   0.08
+  ],
+  "malzeme_renk": "ceviz çerçeve, dar şeffaf cam, metal çağrı paneli",
+  "emin_degil": true,
+  "belirsizlik": "Ölçüler ve adetler fotoğraftan tahmindir; ölçü [en, yükseklik, derinlik], grup kaydında toplam zarf ölçüsüdür. Yok: karşılaştırma görüntüsünde görünür bölgede karşılığı yok; tüm model dosyasında yokluğu geometri taramasıyla doğrulanmadı.",
+  "kanit": [
+   "foto_48.jpg",
+   "foto_49.jpg"
+  ]
+ },
+ {
+  "foto": [
+   21,
+   22
+  ],
+  "oda": "Giriş katı · Mutfak",
+  "nesne": "mutfak buzdolabı",
+  "durum": "yanlış",
+  "konum": "Giriş mutfağında kapının solunda",
+  "yaklasik_olcu_m": [
+   0.75,
+   1.9,
+   0.7
+  ],
+  "adet": 1,
+  "malzeme_renk": "açık gümüş metal",
+  "onem": 2,
+  "detay": "Modelde dolap var; fotoğraftaki su sebili, ön panel ve açık metal yüzey yerine düz koyu iki kapak var.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin; kadraj dışı nesneler eksik sayılmadı.",
+  "kanit": [
+   "foto_21.jpg",
+   "foto_22.jpg"
+  ]
+ },
+ {
+  "foto": [
+   22
+  ],
+  "oda": "Giriş katı · Mutfak",
+  "nesne": "mutfak sandalyesi ve küçük sehpa",
+  "durum": "yanlış",
+  "konum": "Mutfak kapısının sağındaki dolap önünde",
+  "yaklasik_olcu_m": [
+   0.8,
+   0.9,
+   0.65
+  ],
+  "adet": 1,
+  "malzeme_renk": "mavi ahşap sandalye, açık minder; desenli yuvarlak tabla ve ferforje ayak",
+  "onem": 2,
+  "detay": "Modelde ince siyah tel sandalye/masa; fotoğraftaki oyma sırtlık, minder ve tabla deseni karşılanmıyor.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin; kadraj dışı nesneler eksik sayılmadı.",
+  "kanit": [
+   "foto_22.jpg"
+  ]
+ },
+ {
+  "foto": [
+   21,
+   22
+  ],
+  "oda": "Giriş katı · Mutfak",
+  "nesne": "davlumbaz çevresi ve buzdolabı üst dolabı",
+  "durum": "yanlış",
+  "konum": "Ocak ve buzdolabının üstünde",
+  "yaklasik_olcu_m": [
+   2,
+   0.8,
+   0.4
+  ],
+  "adet": 1,
+  "malzeme_renk": "bal ahşap",
+  "onem": 2,
+  "detay": "Fotoğrafta davlumbaz dolap nişi içinde ve buzdolabı üzerinde köprü dolap var; modelde davlumbaz bacası açık, üst dolap düzeni eksik.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin; kadraj dışı nesneler eksik sayılmadı.",
+  "kanit": [
+   "foto_21.jpg",
+   "foto_22.jpg"
+  ]
+ },
+ {
+  "foto": [
+   32
+  ],
+  "oda": "1. kat · Ebeveyn banyosu",
+  "nesne": "duş kabini",
+  "durum": "yanlış",
+  "konum": "Ebeveyn banyosunun sağında",
+  "yaklasik_olcu_m": [
+   1,
+   2.1,
+   1
+  ],
+  "adet": 1,
+  "malzeme_renk": "beyaz yüksek tekne, şeffaf cam ve metal",
+  "onem": 1,
+  "detay": "Model alçak tabanlı duş; fotoğraftaki yüksek hidromasaj teknesi ve iç arka panel geometrisi karşılanmıyor.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin; kadraj dışı nesneler eksik sayılmadı.",
+  "kanit": [
+   "foto_32.jpg"
+  ]
+ },
+ {
+  "foto": [
+   32
+  ],
+  "oda": "1. kat · Ebeveyn banyosu",
+  "nesne": "banyo paspası",
+  "durum": "yok",
+  "konum": "Lavabo tezgâhı ile duş arasındaki zemin",
+  "yaklasik_olcu_m": [
+   0.6,
+   0.02,
+   1.2
+  ],
+  "adet": 1,
+  "malzeme_renk": "lacivert uzun havlı tekstil",
+  "onem": 2,
+  "detay": "Fotoğrafta belirgin lacivert paspas var; modelin görünen zemininde yok.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin; kadraj dışı nesneler eksik sayılmadı.",
+  "kanit": [
+   "foto_32.jpg"
+  ]
+ },
+ {
+  "foto": [
+   15
+  ],
+  "oda": "Çatı katı · Banyo",
+  "nesne": "ayaklı lavabo",
+  "durum": "yanlış",
+  "konum": "Çatı banyosunda kapı yanında",
+  "yaklasik_olcu_m": [
+   0.5,
+   0.85,
+   0.45
+  ],
+  "adet": 1,
+  "malzeme_renk": "beyaz porselen",
+  "onem": 2,
+  "detay": "Fotoğrafta tam boy porselen ayak var; modelde küçük asılı çanak görünümü. Alt kısım kadraj sınırında olduğundan ayak yokluğu kesin değil.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin; kadraj dışı nesneler eksik sayılmadı.",
+  "kanit": [
+   "foto_15.jpg"
+  ]
+ },
+ {
+  "foto": [
+   12,
+   33
+  ],
+  "oda": "1. kat · Oturma alanı",
+  "nesne": "tavan ahşap kirişleri",
+  "durum": "yanlış",
+  "konum": "Birinci kat oturma alanının tavanında",
+  "yaklasik_olcu_m": [
+   3.5,
+   0.2,
+   3
+  ],
+  "adet": 1,
+  "malzeme_renk": "sıcak açık ahşap",
+  "onem": 1,
+  "detay": "Fotoğrafta kiriş araları da sıcak ahşap; modelde beyaz şeritler ve daha koyu/ince kirişler var.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin; kadraj dışı nesneler eksik sayılmadı.",
+  "kanit": [
+   "foto_12.jpg",
+   "foto_33.jpg"
+  ]
+ },
+ {
+  "foto": [
+   18,
+   34,
+   42
+  ],
+  "oda": "1. kat · Kat holü · Merdiven / Giriş katı · Antre · Merdiven",
+  "nesne": "merdiven altı kapalı yüzey",
+  "durum": "yanlış",
+  "konum": "Merdiven kollarının alt yüzlerinde",
+  "yaklasik_olcu_m": [
+   1,
+   2.5,
+   3
+  ],
+  "adet": 1,
+  "malzeme_renk": "krem boyalı sıva",
+  "onem": 1,
+  "detay": "Fotoğrafta kapalı düzgün beyaz eğik alt yüz; modelde koyu ahşap basamak altları testere dişi olarak açık görünüyor.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin; kadraj dışı nesneler eksik sayılmadı.",
+  "kanit": [
+   "foto_18.jpg",
+   "foto_34.jpg",
+   "foto_42.jpg"
+  ]
+ },
+ {
+  "foto": [
+   24,
+   25,
+   26,
+   27
+  ],
+  "oda": "Dış · Havuz verandası",
+  "nesne": "veranda oturma takımı",
+  "durum": "yok",
+  "konum": "Havuz cephesindeki yeşil çatılı sundurmanın altında",
+  "yaklasik_olcu_m": [
+   2.8,
+   0.9,
+   2
+  ],
+  "adet": 1,
+  "malzeme_renk": "beyaz hasır iki koltuk, ikili kanepe ve küçük sehpa",
+  "onem": 1,
+  "detay": "C04 açısında sundurma altında boş döşeme var; fotoğraftaki takım görünmüyor.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin. Dış açılar birebir örtüşmez; yok ifadesi görünen bölgede karşılık bulunamaması anlamındadır.",
+  "kanit": [
+   "angora_24",
+   "angora_25",
+   "angora_26",
+   "angora_27",
+   "dis_C04.png"
+  ]
+ },
+ {
+  "foto": [
+   24,
+   25,
+   26,
+   27,
+   53,
+   54
+  ],
+  "oda": "Dış · Havuz verandası",
+  "nesne": "bahçe ahşap masası",
+  "durum": "yok",
+  "konum": "Havuz cephesinde sundurmanın sağında küçük pencere altında",
+  "yaklasik_olcu_m": [
+   1.5,
+   0.75,
+   0.8
+  ],
+  "adet": 1,
+  "malzeme_renk": "kahverengi ahşap çapraz destekli ayaklar",
+  "onem": 1,
+  "detay": "C04 sağ teras açık ve boş; fotoğraftaki masa görünmüyor.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin. Dış açılar birebir örtüşmez; yok ifadesi görünen bölgede karşılık bulunamaması anlamındadır.",
+  "kanit": [
+   "angora_24",
+   "angora_25",
+   "angora_26",
+   "angora_27",
+   "angora_53",
+   "angora_54",
+   "dis_C04.png"
+  ]
+ },
+ {
+  "foto": [
+   24,
+   25,
+   26,
+   27
+  ],
+  "oda": "Dış · Havuz",
+  "nesne": "yeşil şişme yatak",
+  "durum": "yok",
+  "konum": "Havuzun villa tarafındaki kenarına çapraz yaslı",
+  "yaklasik_olcu_m": [
+   0.65,
+   0.15,
+   1.8
+  ],
+  "adet": 1,
+  "malzeme_renk": "parlak yeşil plastik",
+  "onem": 2,
+  "detay": "C04 havuz çevresinde karşılığı yok.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin. Dış açılar birebir örtüşmez; yok ifadesi görünen bölgede karşılık bulunamaması anlamındadır.",
+  "kanit": [
+   "angora_24",
+   "angora_25",
+   "angora_26",
+   "angora_27",
+   "dis_C04.png"
+  ]
+ },
+ {
+  "foto": [
+   24,
+   25,
+   26,
+   27,
+   51
+  ],
+  "oda": "Dış · Havuz",
+  "nesne": "havuz çevresi bakım kapakları",
+  "durum": "yok",
+  "konum": "Havuzun kısa kenarı ve sağ uzun kenarı dışındaki döşemede",
+  "yaklasik_olcu_m": [
+   0.45,
+   0.03,
+   0.45
+  ],
+  "adet": 3,
+  "malzeme_renk": "açık gri metal/taş kare kapak",
+  "onem": 2,
+  "detay": "Fotoğraflardaki üç kare kapak C04 döşemesinde seçilmiyor; uzaklık küçük ayrıntı kesinliğini azaltıyor.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin. Dış açılar birebir örtüşmez; yok ifadesi görünen bölgede karşılık bulunamaması anlamındadır.",
+  "kanit": [
+   "angora_24",
+   "angora_25",
+   "angora_26",
+   "angora_27",
+   "angora_51",
+   "dis_C04.png"
+  ]
+ },
+ {
+  "foto": [
+   24,
+   25,
+   26,
+   27,
+   50,
+   51,
+   55
+  ],
+  "oda": "Dış · Bahçe",
+  "nesne": "bahçe ağaçları ve çit bitkileri",
+  "durum": "yanlış",
+  "konum": "Parsel sınırları boyunca, havuzun iki yanında",
+  "yaklasik_olcu_m": [
+   12,
+   8,
+   15
+  ],
+  "adet": 1,
+  "malzeme_renk": "farklı yeşil tonlar, olgun iğne yapraklı ve geniş yapraklı ağaçlar",
+  "onem": 1,
+  "detay": "C04/C02 modelinde seyrek küçük benzer ağaçlar ve düzenli alçak çit; fotoğraflarda yüksek yoğun bitki örtüsü, farklı taçlar ve iki yapraksız ağaç var. Ölçü tek ağaç değil görünen bahçe grubu zarfıdır.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin. Dış açılar birebir örtüşmez; yok ifadesi görünen bölgede karşılık bulunamaması anlamındadır.",
+  "kanit": [
+   "angora_24",
+   "angora_25",
+   "angora_26",
+   "angora_27",
+   "angora_50",
+   "angora_51",
+   "angora_55",
+   "dis_C04.png",
+   "dis_C02.png"
+  ]
+ },
+ {
+  "foto": [
+   28,
+   43,
+   56
+  ],
+  "oda": "Dış · Garaj girişi",
+  "nesne": "garaj kapısı",
+  "durum": "yanlış",
+  "konum": "Ön cephede giriş kapısının sağındaki geniş açıklık",
+  "yaklasik_olcu_m": [
+   2.5,
+   2.2,
+   0.08
+  ],
+  "adet": 1,
+  "malzeme_renk": "beyaz kasetli seksiyonel kapı",
+  "onem": 1,
+  "detay": "C03 ve foto43 modelinde açıklık açık; fotoğraflarda kapalı beyaz panelli kapı. Kapının modelden silindiği değil görünür açık/kapalı durum farkı doğrulanıyor.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin. Dış açılar birebir örtüşmez; yok ifadesi görünen bölgede karşılık bulunamaması anlamındadır.",
+  "kanit": [
+   "angora_28",
+   "angora_43",
+   "angora_56",
+   "dis_C03.png"
+  ]
+ },
+ {
+  "foto": [
+   28,
+   56
+  ],
+  "oda": "Dış · Ön bahçe",
+  "nesne": "araç giriş kapısı",
+  "durum": "yok",
+  "konum": "Garaj yolunun parsel sınırında",
+  "yaklasik_olcu_m": [
+   2.8,
+   1.1,
+   0.06
+  ],
+  "adet": 1,
+  "malzeme_renk": "siyah dikey çubuklu sivri uçlu metal",
+  "onem": 1,
+  "detay": "C03 araç girişinin önünde geniş kapı kanadı görünmüyor; küçük yaya korkuluğu mevcut.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin. Dış açılar birebir örtüşmez; yok ifadesi görünen bölgede karşılık bulunamaması anlamındadır.",
+  "kanit": [
+   "angora_28",
+   "angora_56",
+   "dis_C03.png"
+  ]
+ },
+ {
+  "foto": [
+   28
+  ],
+  "oda": "Dış · Ön balkon",
+  "nesne": "satılık ilan panosu",
+  "durum": "yok",
+  "konum": "Ön üst balkon korkuluğunda",
+  "yaklasik_olcu_m": [
+   1.2,
+   1,
+   0.02
+  ],
+  "adet": 1,
+  "malzeme_renk": "kırmızı/mavi/beyaz baskılı pano",
+  "onem": 2,
+  "detay": "C03 balkon korkuluğu açık; fotoğrafta büyük ilan panosu var. Geçici ilan nesnesidir.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin. Dış açılar birebir örtüşmez; yok ifadesi görünen bölgede karşılık bulunamaması anlamındadır.",
+  "kanit": [
+   "angora_28",
+   "dis_C03.png"
+  ]
+ },
+ {
+  "foto": [
+   28
+  ],
+  "oda": "Dış · Araç yolu",
+  "nesne": "park edilmiş otomobil",
+  "durum": "yok",
+  "konum": "Garaj önündeki araç yolunda",
+  "yaklasik_olcu_m": [
+   1.8,
+   1.5,
+   4.5
+  ],
+  "adet": 1,
+  "malzeme_renk": "gümüş gri otomobil",
+  "onem": 2,
+  "detay": "C03 araç yolu boş; foto28 araç park halinde. Geçici sahne nesnesidir.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin. Dış açılar birebir örtüşmez; yok ifadesi görünen bölgede karşılık bulunamaması anlamındadır.",
+  "kanit": [
+   "angora_28",
+   "dis_C03.png"
+  ]
+ },
+ {
+  "foto": [
+   24,
+   25,
+   26,
+   27,
+   28
+  ],
+  "oda": "Dış · Çatı",
+  "nesne": "çatı kiremitleri",
+  "durum": "yanlış",
+  "konum": "Ana çatı eğimleri üzerinde",
+  "yaklasik_olcu_m": [
+   8,
+   0.12,
+   10
+  ],
+  "adet": 1,
+  "malzeme_renk": "turuncu-kiremit kırmızı seramik",
+  "onem": 2,
+  "detay": "C03/C04 çok düzenli tek ton çizgiler; fotoğrafta kısa parçalı bindirmeler, eskime ve ton çeşitliliği. Ölçü tek kiremit değil çatı örtüsü zarfıdır.",
+  "emin_degil": true,
+  "belirsizlik": "Ölçü ve adet fotoğraftan tahmin. Dış açılar birebir örtüşmez; yok ifadesi görünen bölgede karşılık bulunamaması anlamındadır.",
+  "kanit": [
+   "angora_24",
+   "angora_25",
+   "angora_26",
+   "angora_27",
+   "angora_28",
+   "dis_C03.png",
+   "dis_C04.png"
+  ]
+ }
+]

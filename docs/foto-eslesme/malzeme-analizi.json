@@ -1,0 +1,1043 @@
+[
+ {
+  "yuzey": "iç duvar boyası",
+  "fotolar": [
+   1,
+   2,
+   3,
+   4,
+   21,
+   22
+  ],
+  "renk_tarifi": "sıcak kırık beyaz ve açık krem; odalar arasında hafif bej farkı",
+  "parlaklik": "mat",
+  "yansima": "Pencere ışığı geniş ve yumuşak aydınlık alanlar oluşturuyor; keskin ayna yansıması yok.",
+  "doku": "İç boyada çok ince yüzey; fotoğrafta belirgin iri sıva taneleri seçilmiyor.",
+  "kabartma": "Çok hafif; kalın kabartma görünmüyor.",
+  "modelden_farki": [
+   "Model daha soğuk mavi-gri görünüyor.",
+   "İç duvar yüzeyi bazı karelerde fazla pütürlü.",
+   "Fotoğraftaki sıcak dolaylı ışık geçişleri daha belirgin."
+  ],
+  "oneri": {
+   "purluluk": 0.85,
+   "metallik": 0,
+   "clearcoat": 0,
+   "normal_siddeti": 0.15
+  },
+  "malzemeler": [
+   "Simple White Wall"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "Simple White Wall",
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "purluluk": 1,
+    "metallik": 0,
+    "clearcoat": null,
+    "normal_siddeti": 1.5
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "tavan ve kartonpiyer",
+  "fotolar": [
+   4,
+   11,
+   21,
+   22,
+   32
+  ],
+  "renk_tarifi": "kırık beyaz tavan; beyaza yakın kartonpiyer",
+  "parlaklik": "mat",
+  "yansima": "Avize çevresinde sıcak yaygın ışık; keskin yansıma yok.",
+  "doku": "Düz boya, kartonpiyerde birkaç basamaklı ince profil.",
+  "kabartma": "Kartonpiyerde gerçek profil çıkıntısı; düz tavanda yok.",
+  "modelden_farki": [
+   "Fotoğraftaki kartonpiyer profili ince ve temiz.",
+   "Tavan malzemesinde mevcut metallik 1; görselde metal davranışı yok."
+  ],
+  "oneri": {
+   "purluluk": 0.9,
+   "metallik": 0,
+   "clearcoat": 0,
+   "normal_siddeti": 0.05
+  },
+  "malzemeler": [
+   "ceiling.001"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "ceiling.001",
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "purluluk": 1,
+    "metallik": 1,
+    "clearcoat": null,
+    "normal_siddeti": 1
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "ahşap parke",
+  "fotolar": [
+   4,
+   10,
+   12,
+   17,
+   19,
+   23,
+   31,
+   33
+  ],
+  "renk_tarifi": "kızıl kahverengi, bal/maun tonlu cilalı ahşap",
+  "parlaklik": "yarı parlak",
+  "yansima": "Pencere önünde uzun ve güçlü fakat bulanık ışık yansıması var.",
+  "doku": "Dar uzun döşeme tahtaları; sıcak ton çeşitlenmesi ve ince damar.",
+  "kabartma": "Tahta birleşimleri ince; derin oyuk görünmüyor.",
+  "modelden_farki": [
+   "Modelde kızıl/sarı ton çeşitliliği daha az.",
+   "Fotoğraftaki uzun pencere yansıması modelde zayıf.",
+   "Tahta ölçeği ve döşeme çizgileri karşılaştırılarak korunmalı."
+  ],
+  "oneri": {
+   "purluluk": 0.24,
+   "metallik": 0,
+   "clearcoat": 0.18,
+   "normal_siddeti": 0.12
+  },
+  "malzemeler": [
+   "wood_floor",
+   "WOOD-FL"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "wood_floor",
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "purluluk": 0.255,
+    "metallik": 0,
+    "clearcoat": 0.063,
+    "normal_siddeti": null
+   },
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "WOOD-FL",
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "purluluk": 0.255,
+    "metallik": 0,
+    "clearcoat": 0.063,
+    "normal_siddeti": null
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "yer karosu",
+  "fotolar": [
+   1,
+   2,
+   3,
+   21,
+   22,
+   11,
+   32
+  ],
+  "renk_tarifi": "bodrumda sıcak terrakota; üst mutfakta bal-bej; banyoda krem/kahve",
+  "parlaklik": "saten",
+  "yansima": "Gün ışığının geniş lekeleri var; bodrumdaki pencerelerin zeminde hafif yansıması seçiliyor.",
+  "doku": "Yaklaşık 30–45 cm kare, bazı odalarda çapraz döşeme; ince açık derz; hafif taş bulutlanması.",
+  "kabartma": "İnce derz; karo yüzeyi çoğunlukla düz.",
+  "modelden_farki": [
+   "Bodrum modelinde renk daha soluk pembe-kahve.",
+   "Bordür kareleri fotoğrafa göre konum/ölçek bakımından kaymış.",
+   "Derzler modelde fazla kontrastlı görünüyor."
+  ],
+  "oneri": {
+   "purluluk": 0.38,
+   "metallik": 0,
+   "clearcoat": 0,
+   "normal_siddeti": 0.15
+  },
+  "malzemeler": [
+   "terra_floor",
+   "stone_tile"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "terra_floor",
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "purluluk": 0.4,
+    "metallik": 0,
+    "clearcoat": null,
+    "normal_siddeti": 0.3
+   },
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "stone_tile",
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "purluluk": 0.745,
+    "metallik": 0.004,
+    "clearcoat": null,
+    "normal_siddeti": null
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "mutfak dolapları — ahşap",
+  "fotolar": [
+   1,
+   21,
+   22
+  ],
+  "renk_tarifi": "bodrumda orta ceviz; giriş mutfağında sıcak bal-meşe",
+  "parlaklik": "saten",
+  "yansima": "Kapaklarda geniş yumuşak aydınlık bantlar, keskin ayna görüntüsü yok.",
+  "doku": "Düşey ince ahşap damar; çerçeveli kapak ve gömme orta tabla.",
+  "kabartma": "Kapak çerçevesi ve kulplar geometrik; damar çok hafif.",
+  "modelden_farki": [
+   "Bodrum ahşabı modelde fazla koyu.",
+   "Giriş mutfağı için sıcak bal tonu ayrı tutulmalı.",
+   "Kapak ve kulp ayrıntıları basitleşmiş."
+  ],
+  "oneri": {
+   "purluluk": 0.34,
+   "metallik": 0,
+   "clearcoat": 0.08,
+   "normal_siddeti": 0.12
+  },
+  "malzemeler": [
+   "WOODY-DARK",
+   "wood_honey"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "WOODY-DARK",
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "purluluk": 1,
+    "metallik": 0,
+    "clearcoat": 0.1,
+    "normal_siddeti": 0.8
+   },
+   {
+    "dosya": "INTERIOR-opt-v2",
+    "malzeme": "wood_honey",
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "purluluk": 0.373,
+    "metallik": 0.008,
+    "clearcoat": 0.04,
+    "normal_siddeti": null
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "mutfak dolapları — buzlu cam",
+  "fotolar": [
+   1,
+   21,
+   22
+  ],
+  "renk_tarifi": "bodrumda desatüre yeşilimsi buzlu cam; girişte nötr yarı saydam cam",
+  "parlaklik": "saten",
+  "yansima": "Bulanık geniş yansımalar, içerik siluetleri; net ayna yansıması yok.",
+  "doku": "Düz buzlu yüzey, büyük desen yok.",
+  "kabartma": "Yok.",
+  "modelden_farki": [
+   "Model bodrum kapakları opak koyu turkuaz blok gibi.",
+   "Giriş camlarının bulanık geçirgenliği fotoğrafta belirgin."
+  ],
+  "oneri": {
+   "purluluk": 0.32,
+   "metallik": 0,
+   "clearcoat": 0,
+   "normal_siddeti": 0
+  },
+  "malzemeler": [
+   "cabinet_glass"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [
+   {
+    "dosya": "INTERIOR-opt-v2",
+    "malzeme": "cabinet_glass",
+    "renk": [
+     0.88,
+     0.88,
+     0.88,
+     1
+    ],
+    "purluluk": 0.043,
+    "metallik": 0,
+    "clearcoat": null,
+    "normal_siddeti": null
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "mutfak tezgâhı",
+  "fotolar": [
+   1,
+   21,
+   22
+  ],
+  "renk_tarifi": "sıcak fildişi/açık krem",
+  "parlaklik": "saten",
+  "yansima": "Yumuşak ışık yayılımı; çok keskin ayna yansıması yok.",
+  "doku": "Çok ince benekli taş görünümü; belirgin büyük damar yok.",
+  "kabartma": "Düz; kenarlar hafif yuvarlatılmış.",
+  "modelden_farki": [
+   "Model daha soğuk beyaz.",
+   "Modelde kenar kalınlığı ve parlaması fotoğrafla tam örtüşmüyor."
+  ],
+  "oneri": {
+   "purluluk": 0.3,
+   "metallik": 0,
+   "clearcoat": 0.05,
+   "normal_siddeti": 0.05
+  },
+  "malzemeler": [
+   "WHT.001",
+   "WHT"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "WHT.001",
+    "renk": [
+     0.863,
+     0.855,
+     0.784,
+     1
+    ],
+    "purluluk": 0.596,
+    "metallik": 0.012,
+    "clearcoat": null,
+    "normal_siddeti": null
+   },
+   {
+    "dosya": "INTERIOR-opt-v2",
+    "malzeme": "WHT",
+    "renk": [
+     0.863,
+     0.863,
+     0.863,
+     1
+    ],
+    "purluluk": 0.596,
+    "metallik": 0.012,
+    "clearcoat": null,
+    "normal_siddeti": null
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "mutfak duvar seramiği",
+  "fotolar": [
+   1,
+   21,
+   22
+  ],
+  "renk_tarifi": "bodrumda sıcak turuncu-bej; girişte açık krem",
+  "parlaklik": "saten",
+  "yansima": "Dolap altı ışıkta yumuşak parlama; keskin pencere yansıması yok.",
+  "doku": "Yaklaşık 10 cm küçük kareler, ince açık derz; seyrek dekor karosu.",
+  "kabartma": "Hafif yüzey dalgalanması ve sığ derz.",
+  "modelden_farki": [
+   "Bodrumdaki seramik modelde koyu gri-kahve.",
+   "Fotoğraftaki dekorlu karolar ve dolap altı sıcak ışık kayıp."
+  ],
+  "oneri": {
+   "purluluk": 0.35,
+   "metallik": 0,
+   "clearcoat": 0,
+   "normal_siddeti": 0.15
+  },
+  "malzemeler": [],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [],
+  "malzeme_eslesmesi": "Yüzeyin kesin malzeme adı bu görsel incelemede doğrulanamadı.",
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "banyo seramikleri",
+  "fotolar": [
+   11,
+   15,
+   32,
+   39
+  ],
+  "renk_tarifi": "sıcak krem/fildişi, ince kahverengi dekor şeritleri",
+  "parlaklik": "saten",
+  "yansima": "Geniş pencere aydınlığı var; sert ayna yansıması düşük.",
+  "doku": "Orta boy dikdörtgen karolar, ince derz; göz hizası ve lavabo üstünde dekor bordürü.",
+  "kabartma": "Sığ derz; hafif taş damarı.",
+  "modelden_farki": [
+   "Fotoğraftaki ince bordür desenleri modelde düz kalın bantlara dönüşüyor.",
+   "Krem ton modelde soğuk/gri.",
+   "Derz ve damar ölçeği korunmamış."
+  ],
+  "oneri": {
+   "purluluk": 0.32,
+   "metallik": 0,
+   "clearcoat": 0,
+   "normal_siddeti": 0.12
+  },
+  "malzemeler": [
+   "R31 | R33 ivory wall ceramic",
+   "R31 | R33 master pale cream tile",
+   "R31 | R33 master fine mosaic band"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "R31 | R33 ivory wall ceramic",
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "purluluk": 0.33,
+    "metallik": 0,
+    "clearcoat": null,
+    "normal_siddeti": null
+   },
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "R31 | R33 master pale cream tile",
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "purluluk": 0.33,
+    "metallik": 0,
+    "clearcoat": null,
+    "normal_siddeti": null
+   },
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "R31 | R33 master fine mosaic band",
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "purluluk": 0.33,
+    "metallik": 0,
+    "clearcoat": null,
+    "normal_siddeti": null
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "banyo armatürleri — metal",
+  "fotolar": [
+   11,
+   32
+  ],
+  "renk_tarifi": "krom/gümüş, yer yer sıcak metal bağlantı parçaları",
+  "parlaklik": "parlak",
+  "yansima": "Muslukta küçük parlak ışık çizgileri ve koyu-açık çevre yansımaları var.",
+  "doku": "Düz metal, görünür iri doku yok.",
+  "kabartma": "Yok.",
+  "modelden_farki": [
+   "Model armatürlerinin parlak yansıması zayıf.",
+   "Fotoğraftaki ince metal kıvrımlar ve bağlantılar basitleşmiş."
+  ],
+  "oneri": {
+   "purluluk": 0.16,
+   "metallik": 1,
+   "clearcoat": null,
+   "normal_siddeti": 0
+  },
+  "malzemeler": [],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [],
+  "malzeme_eslesmesi": "Yüzeyin kesin malzeme adı bu görsel incelemede doğrulanamadı.",
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "banyo armatürleri — lavabo/klozet",
+  "fotolar": [
+   11,
+   32
+  ],
+  "renk_tarifi": "sıcak beyaz sırlı porselen",
+  "parlaklik": "parlak",
+  "yansima": "Kavisli yüzeylerde yumuşak ama güçlü parlak lekeler var.",
+  "doku": "Pürüzsüz sır.",
+  "kabartma": "Yok.",
+  "modelden_farki": [
+   "Mevcut porselen metallik 0.218; fotoğraf metal değil sırlı seramik gösteriyor.",
+   "Modelde yüzey daha donuk ve soğuk."
+  ],
+  "oneri": {
+   "purluluk": 0.16,
+   "metallik": 0,
+   "clearcoat": 0,
+   "normal_siddeti": 0
+  },
+  "malzemeler": [
+   "R31 | Warm white porcelain"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [
+   {
+    "dosya": "INTERIOR-opt-v2",
+    "malzeme": "R31 | Warm white porcelain",
+    "renk": [
+     0.839,
+     0.847,
+     0.791,
+     1
+    ],
+    "purluluk": 0.147,
+    "metallik": 0.218,
+    "clearcoat": null,
+    "normal_siddeti": null
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "iç kapılar ve doğramalar",
+  "fotolar": [
+   1,
+   4,
+   22,
+   32,
+   49
+  ],
+  "renk_tarifi": "orta-koyu ceviz/kahverengi; bazı kapılarda çiçekli buzlu cam",
+  "parlaklik": "saten",
+  "yansima": "Ahşapta geniş yumuşak ışık bantları; camda bulanık geçirgenlik.",
+  "doku": "Düşey ahşap damar, çerçeve ve gömme tabla; camda çiçek deseni.",
+  "kabartma": "Kapı profilleri belirgin; ahşap damarı çok ince.",
+  "modelden_farki": [
+   "Model kapı ahşabı çok koyu ve tek ton.",
+   "Çiçekli camın ölçeği/çerçevesi fotoğraftan farklı.",
+   "Kapı açıklık durumu bazı karelerde kadrajı değiştiriyor."
+  ],
+  "oneri": {
+   "purluluk": 0.32,
+   "metallik": 0,
+   "clearcoat": 0.08,
+   "normal_siddeti": 0.1
+  },
+  "malzemeler": [
+   "WOODY-DARK",
+   "Lift | Photographed rose glass 80 percent"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "WOODY-DARK",
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "purluluk": 1,
+    "metallik": 0,
+    "clearcoat": 0.1,
+    "normal_siddeti": 0.8
+   },
+   {
+    "dosya": "INTERIOR-opt-v2",
+    "malzeme": "Lift | Photographed rose glass 80 percent",
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "purluluk": 0.55,
+    "metallik": 0,
+    "clearcoat": null,
+    "normal_siddeti": null
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "merdiven — ahşap basamak/küpeşte",
+  "fotolar": [
+   2,
+   4
+  ],
+  "renk_tarifi": "sıcak kızıl kahverengi cilalı ahşap",
+  "parlaklik": "yarı parlak",
+  "yansima": "Basamak kenarlarında ve küpeştede ışık şeritleri.",
+  "doku": "İnce ahşap damar; düzgün basamak alnı.",
+  "kabartma": "Damar çok hafif.",
+  "modelden_farki": [
+   "Model basamaklar daha koyu ve düz.",
+   "Fotoğraftaki sıcak cilalı yansıma daha güçlü."
+  ],
+  "oneri": {
+   "purluluk": 0.28,
+   "metallik": 0,
+   "clearcoat": 0.12,
+   "normal_siddeti": 0.1
+  },
+  "malzemeler": [
+   "WOODY-DARK"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "WOODY-DARK",
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "purluluk": 1,
+    "metallik": 0,
+    "clearcoat": 0.1,
+    "normal_siddeti": 0.8
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "merdiven korkuluğu",
+  "fotolar": [
+   2,
+   4,
+   18,
+   29,
+   34,
+   35,
+   42,
+   47
+  ],
+  "renk_tarifi": "siyaha yakın koyu dövme metal",
+  "parlaklik": "saten",
+  "yansima": "İnce kenar parlamaları; geniş ayna yansımaları yok.",
+  "doku": "Kıvrımlı ferforje, ince çubuklar ve dekoratif kıvrımlar.",
+  "kabartma": "Doku az; şekil geometriyle sağlanmalı.",
+  "modelden_farki": [
+   "Modelde kıvrımlı çubuklar yer yer kesik/ince ve düzensiz görünüyor.",
+   "Fotoğraftaki ahşap küpeşte profili daha yuvarlak ve parlak."
+  ],
+  "oneri": {
+   "purluluk": 0.36,
+   "metallik": 0.1,
+   "clearcoat": 0,
+   "normal_siddeti": 0.05
+  },
+  "malzemeler": [
+   "metal.001"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "metal.001",
+    "renk": [
+     0.021,
+     0.023,
+     0.025,
+     1
+    ],
+    "purluluk": 0.341,
+    "metallik": 0,
+    "clearcoat": null,
+    "normal_siddeti": null
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "pencere doğraması",
+  "fotolar": [
+   3,
+   11,
+   21,
+   32
+  ],
+  "renk_tarifi": "koyu sıcak kahverengi",
+  "parlaklik": "saten",
+  "yansima": "Çerçeve kenarlarında hafif parlama.",
+  "doku": "Düz profilli, fotoğrafta çok ince ahşap görünümü.",
+  "kabartma": "Az; profil bölmeleri geometri.",
+  "modelden_farki": [
+   "Model bazı çerçevelerde siyaha yakın soğuk ton kullanıyor.",
+   "Fotoğraftaki yatay/düşey kayıt ve kanat ayrıntıları farklı."
+  ],
+  "oneri": {
+   "purluluk": 0.32,
+   "metallik": 0,
+   "clearcoat": 0.06,
+   "normal_siddeti": 0.08
+  },
+  "malzemeler": [
+   "WOODY-DARK"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "WOODY-DARK",
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "purluluk": 1,
+    "metallik": 0,
+    "clearcoat": 0.1,
+    "normal_siddeti": 0.8
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "pencere camı",
+  "fotolar": [
+   3,
+   21,
+   24,
+   25
+  ],
+  "renk_tarifi": "renksize yakın, çevreye göre hafif soğuk",
+  "parlaklik": "parlak",
+  "yansima": "Ağaç/gökyüzü yansıması ve dışarı görünüşü birlikte var.",
+  "doku": "Düz cam.",
+  "kabartma": "Yok.",
+  "modelden_farki": [
+   "Model camı yer yer opak veya boş açıklık gibi görünüyor.",
+   "Yeşil/mavi renk etkisi fazla olabilir; ışık ve kadraj farkı da etkili."
+  ],
+  "oneri": {
+   "purluluk": 0.06,
+   "metallik": 0,
+   "clearcoat": null,
+   "normal_siddeti": 0
+  },
+  "malzemeler": [
+   "glass"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "glass",
+    "renk": [
+     0.61,
+     0.723,
+     0.723,
+     1
+    ],
+    "purluluk": 0.078,
+    "metallik": 0,
+    "clearcoat": null,
+    "normal_siddeti": null
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "asansör kabini — paslanmaz",
+  "fotolar": [
+   49
+  ],
+  "renk_tarifi": "nötr gümüş, fırçalanmış paslanmaz",
+  "parlaklik": "parlak",
+  "yansima": "Tavan spotları ve çevrenin uzun parlak şeritleri net görülüyor.",
+  "doku": "Düzenli yuvarlak kabartma/nokta dizileri; dikey panel derzleri.",
+  "kabartma": "Düzenli küçük yuvarlak çıkıntılar belirgin.",
+  "modelden_farki": [
+   "Foto48–49 modelinde kapalı gül desenli kapı kabini örtüyor; kabin yüzeyinin görsel farkı belirlenemiyor."
+  ],
+  "oneri": {
+   "purluluk": 0.22,
+   "metallik": 1,
+   "clearcoat": null,
+   "normal_siddeti": 0.3
+  },
+  "malzemeler": [
+   "Lift brushed patterned stainless"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler. Tarif yalnız gerçek foto49 üzerinden; model kabin yüzeyi görünmüyor.",
+  "mevcut_degerler": [
+   {
+    "dosya": "BUILDING-opt-v4",
+    "malzeme": "Lift brushed patterned stainless",
+    "renk": [
+     0.485,
+     0.509,
+     0.533,
+     1
+    ],
+    "purluluk": 0.22,
+    "metallik": 0.996,
+    "clearcoat": null,
+    "normal_siddeti": null
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "asansör kabini — ayna",
+  "fotolar": [
+   49
+  ],
+  "renk_tarifi": "nötr gümüş ayna",
+  "parlaklik": "ayna",
+  "yansima": "Karşı oda ve mobilyalar net yansıyor.",
+  "doku": "Düz.",
+  "kabartma": "Yok.",
+  "modelden_farki": [
+   "Foto48–49 modelinde kapalı gül desenli kapı kabini örtüyor; kabin yüzeyinin görsel farkı belirlenemiyor."
+  ],
+  "oneri": {
+   "purluluk": 0.025,
+   "metallik": 1,
+   "clearcoat": null,
+   "normal_siddeti": 0
+  },
+  "malzemeler": [
+   "FINISH | Silver mirror"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler. Tarif yalnız gerçek foto49 üzerinden; model kabin yüzeyi görünmüyor.",
+  "mevcut_degerler": [
+   {
+    "dosya": "INTERIOR-opt-v2",
+    "malzeme": "FINISH | Silver mirror",
+    "renk": [
+     0.92,
+     0.92,
+     0.92,
+     1
+    ],
+    "purluluk": 0.025,
+    "metallik": 1,
+    "clearcoat": null,
+    "normal_siddeti": null
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "mobilya — deri koltuk",
+  "fotolar": [
+   4
+  ],
+  "renk_tarifi": "sıcak tütün/tarçın kahverengi",
+  "parlaklik": "saten",
+  "yansima": "Kollar ve minder kıvrımlarında geniş parlak lekeler.",
+  "doku": "İnce deri gözenekleri; kırışıklık ve dikiş.",
+  "kabartma": "Yumuşak kıvrımlar belirgin; mikro doku hafif.",
+  "modelden_farki": [
+   "Model daha koyu, tek tonlu.",
+   "Fotoğraftaki minder kırışıklıkları ve deri parlaklığı eksik."
+  ],
+  "oneri": {
+   "purluluk": 0.42,
+   "metallik": 0,
+   "clearcoat": 0.06,
+   "normal_siddeti": 0.25
+  },
+  "malzemeler": [],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [],
+  "malzeme_eslesmesi": "Yüzeyin kesin malzeme adı bu görsel incelemede doğrulanamadı.",
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "mobilya — yemek masası",
+  "fotolar": [
+   4,
+   23
+  ],
+  "renk_tarifi": "sıcak ceviz, bulutlu/kök damar desenli",
+  "parlaklik": "yarı parlak",
+  "yansima": "Geniş yumuşak pencere parlaması.",
+  "doku": "Tabla üzerinde kök ceviz benzeri desen ve çevre bordürü.",
+  "kabartma": "Tabla düz; kenar/ayak oymaları geometrik.",
+  "modelden_farki": [
+   "Model tabla fazla tek renk ve koyu.",
+   "Fotoğraftaki desen ve kenar profili daha zengin."
+  ],
+  "oneri": {
+   "purluluk": 0.28,
+   "metallik": 0,
+   "clearcoat": 0.18,
+   "normal_siddeti": 0.08
+  },
+  "malzemeler": [],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [],
+  "malzeme_eslesmesi": "Yüzeyin kesin malzeme adı bu görsel incelemede doğrulanamadı.",
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "mobilya — sandalye",
+  "fotolar": [
+   4,
+   23
+  ],
+  "renk_tarifi": "ceviz iskelet ve koyu kahverengi deri",
+  "parlaklik": "saten",
+  "yansima": "Ahşap kenarda dar, deride geniş yumuşak parlama.",
+  "doku": "Oyma ahşap, deri döşeme, metal kabara sırası.",
+  "kabartma": "Oyma ve kabaralar belirgin.",
+  "modelden_farki": [
+   "Model sırtlık/iskelet biçimi sadeleşmiş.",
+   "Oyma ve kabara detayları kayıp."
+  ],
+  "oneri": {
+   "purluluk": 0.38,
+   "metallik": 0,
+   "clearcoat": 0.08,
+   "normal_siddeti": 0.2
+  },
+  "malzemeler": [],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [],
+  "malzeme_eslesmesi": "Yüzeyin kesin malzeme adı bu görsel incelemede doğrulanamadı.",
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "yuzey": "mobilya — konsol",
+  "fotolar": [
+   4,
+   23
+  ],
+  "renk_tarifi": "koyu ceviz, sıcak orta kahverengi panel farkları",
+  "parlaklik": "yarı parlak",
+  "yansima": "Ahşapta geniş parlama, üst aynada oda/pencere yansıması.",
+  "doku": "Panel çerçeveleri, oymalı üst taç, ince damar.",
+  "kabartma": "Oyma ve kapak profilleri belirgin.",
+  "modelden_farki": [
+   "Model daha sade ve tek renk.",
+   "Ayna üst tacının ve küçük üst aksesuarların görünümü eksik."
+  ],
+  "oneri": {
+   "purluluk": 0.3,
+   "metallik": 0,
+   "clearcoat": 0.12,
+   "normal_siddeti": 0.12
+  },
+  "malzemeler": [
+   "R31 | R33 antique nook walnut"
+  ],
+  "emin_degil": true,
+  "belirsizlik": "PBR önerileri fotoğraftan görsel başlangıç tahminidir; ölçüm değildir. Beyaz dengesi, pozlama, kamera kayması ve pişmiş ışığın kapalı olması renk karşılaştırmasını etkiler.",
+  "mevcut_degerler": [
+   {
+    "dosya": "INTERIOR-opt-v2",
+    "malzeme": "R31 | R33 antique nook walnut",
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "purluluk": 0.32,
+    "metallik": 0,
+    "clearcoat": null,
+    "normal_siddeti": null
+   }
+  ],
+  "renk_tablosu_notu": "malzeme-renk.json 36 malzeme içerir. Açı/örtülme farkları nedeniyle fotoğraf ve model örnekleri aynı fiziksel yüzeye denk gelmeyebilir; otomatik albedo hedefi olarak kullanılmadı."
+ },
+ {
+  "tur": "genel_isik",
+  "cumleler": [
+   "Gerçek iç fotoğraflarda sıcak krem/kehribar yapay ışık ile daha nötr pencere gün ışığı birlikte görülüyor; pişmiş ışığı kapalı model çoğunlukla daha soğuk mavi-gri görünüyor.",
+   "Pencere ışığı pencere yakınında ve cilalı parkede güçlü, odanın içine doğru kademeli azalan geniş aydınlık alanlar oluşturuyor; modelde bu dağılım daha düz.",
+   "İç mekânda gölgeler çoğunlukla yumuşak, doğrudan güneş alan dış cephe ve bahçede ise saçak ve bitki gölgeleri daha keskin."
+  ],
+  "emin_degil": true,
+  "not": "Renk sıcaklığı Kelvin cinsinden ölçülmedi."
+ }
+]

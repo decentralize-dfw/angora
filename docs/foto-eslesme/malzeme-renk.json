@@ -1,0 +1,547 @@
+{
+ "aciklama": "malzeme başına ortanca renk (0-255 sRGB); açı kayması gürültüsü ortancayla bastırılır",
+ "lens": 72.0,
+ "pismis": 0,
+ "malzemeler": {
+  "Simple White Wall": {
+   "ornek": 8248,
+   "kare": 35,
+   "parca": [],
+   "foto_srgb": [
+    184,
+    155,
+    131
+   ],
+   "model_srgb": [
+    153,
+    158,
+    163
+   ]
+  },
+  "ceiling.001": {
+   "ornek": 3944,
+   "kare": 34,
+   "parca": [],
+   "foto_srgb": [
+    203,
+    182,
+    166
+   ],
+   "model_srgb": [
+    186,
+    185,
+    184
+   ]
+  },
+  "WOODY-DARK": {
+   "ornek": 2728,
+   "kare": 34,
+   "parca": [],
+   "foto_srgb": [
+    142,
+    119,
+    98
+   ],
+   "model_srgb": [
+    24,
+    19,
+    19
+   ]
+  },
+  "wood_honey": {
+   "ornek": 1674,
+   "kare": 22,
+   "parca": [],
+   "foto_srgb": [
+    148,
+    100,
+    72
+   ],
+   "model_srgb": [
+    58,
+    39,
+    26
+   ]
+  },
+  "WOOD-FL": {
+   "ornek": 1637,
+   "kare": 23,
+   "parca": [],
+   "foto_srgb": [
+    110,
+    62,
+    43
+   ],
+   "model_srgb": [
+    77,
+    47,
+    41
+   ]
+  },
+  "terra_floor": {
+   "ornek": 1259,
+   "kare": 15,
+   "parca": [],
+   "foto_srgb": [
+    190,
+    144,
+    105
+   ],
+   "model_srgb": [
+    113,
+    90,
+    81
+   ]
+  },
+  "Simple wood": {
+   "ornek": 933,
+   "kare": 15,
+   "parca": [],
+   "foto_srgb": [
+    153,
+    121,
+    102
+   ],
+   "model_srgb": [
+    22,
+    14,
+    13
+   ]
+  },
+  "ROUGHNSS1": {
+   "ornek": 831,
+   "kare": 20,
+   "parca": [],
+   "foto_srgb": [
+    115,
+    82,
+    71
+   ],
+   "model_srgb": [
+    95,
+    93,
+    102
+   ]
+  },
+  "Lift | Photographed rose glass 80 percent": {
+   "ornek": 818,
+   "kare": 6,
+   "parca": [],
+   "foto_srgb": [
+    148,
+    133,
+    120
+   ],
+   "model_srgb": [
+    137,
+    139,
+    137
+   ]
+  },
+  "R31 | R33 ivory wall ceramic": {
+   "ornek": 635,
+   "kare": 5,
+   "parca": [],
+   "foto_srgb": [
+    209,
+    181,
+    150
+   ],
+   "model_srgb": [
+    127,
+    129,
+    123
+   ]
+  },
+  "WHT": {
+   "ornek": 601,
+   "kare": 15,
+   "parca": [],
+   "foto_srgb": [
+    140,
+    97,
+    79
+   ],
+   "model_srgb": [
+    153,
+    161,
+    169
+   ]
+  },
+  "R31 | R33 antique nook walnut": {
+   "ornek": 536,
+   "kare": 17,
+   "parca": [],
+   "foto_srgb": [
+    125,
+    74,
+    51
+   ],
+   "model_srgb": [
+    50,
+    39,
+    34
+   ]
+  },
+  "FINISH | Silver mirror": {
+   "ornek": 527,
+   "kare": 12,
+   "parca": [],
+   "foto_srgb": [
+    167,
+    124,
+    106
+   ],
+   "model_srgb": [
+    91,
+    100,
+    95
+   ]
+  },
+  "X": {
+   "ornek": 433,
+   "kare": 14,
+   "parca": [],
+   "foto_srgb": [
+    116,
+    95,
+    75
+   ],
+   "model_srgb": [
+    55,
+    65,
+    70
+   ]
+  },
+  "RR": {
+   "ornek": 362,
+   "kare": 3,
+   "parca": [],
+   "foto_srgb": [
+    172,
+    154,
+    138
+   ],
+   "model_srgb": [
+    111,
+    114,
+    108
+   ]
+  },
+  "R31 | R33 master pale cream tile": {
+   "ornek": 360,
+   "kare": 1,
+   "parca": [],
+   "foto_srgb": [
+    156,
+    133,
+    112
+   ],
+   "model_srgb": [
+    137,
+    139,
+    137
+   ]
+  },
+  "stone_tile_wall": {
+   "ornek": 336,
+   "kare": 3,
+   "parca": [],
+   "foto_srgb": [
+    197,
+    138,
+    101
+   ],
+   "model_srgb": [
+    114,
+    118,
+    131
+   ]
+  },
+  "WHT.001": {
+   "ornek": 249,
+   "kare": 16,
+   "parca": [],
+   "foto_srgb": [
+    164,
+    140,
+    116
+   ],
+   "model_srgb": [
+    145,
+    150,
+    153
+   ]
+  },
+  "metal.001": {
+   "ornek": 222,
+   "kare": 17,
+   "parca": [],
+   "foto_srgb": [
+    151,
+    105,
+    77
+   ],
+   "model_srgb": [
+    34,
+    34,
+    33
+   ]
+  },
+  "R31 | Warm white porcelain": {
+   "ornek": 214,
+   "kare": 7,
+   "parca": [],
+   "foto_srgb": [
+    160,
+    127,
+    95
+   ],
+   "model_srgb": [
+    133,
+    138,
+    135
+   ]
+  },
+  "Stucco painted wall": {
+   "ornek": 213,
+   "kare": 11,
+   "parca": [],
+   "foto_srgb": [
+    200,
+    182,
+    169
+   ],
+   "model_srgb": [
+    107,
+    126,
+    142
+   ]
+  },
+  "R31 | R33 attic cream tile": {
+   "ornek": 181,
+   "kare": 3,
+   "parca": [],
+   "foto_srgb": [
+    185,
+    145,
+    104
+   ],
+   "model_srgb": [
+    142,
+    139,
+    125
+   ]
+  },
+  "BLCK": {
+   "ornek": 155,
+   "kare": 17,
+   "parca": [],
+   "foto_srgb": [
+    147,
+    125,
+    98
+   ],
+   "model_srgb": [
+    15,
+    16,
+    18
+   ]
+  },
+  "R31 | R35 garage galvanized steel": {
+   "ornek": 149,
+   "kare": 10,
+   "parca": [],
+   "foto_srgb": [
+    176,
+    121,
+    89
+   ],
+   "model_srgb": [
+    51,
+    59,
+    63
+   ]
+  },
+  "R31 | Hall ochre woven upholstery": {
+   "ornek": 133,
+   "kare": 2,
+   "parca": [],
+   "foto_srgb": [
+    96,
+    62,
+    46
+   ],
+   "model_srgb": [
+    95,
+    86,
+    54
+   ]
+  },
+  "R31 | R33 entrance WC ochre tile": {
+   "ornek": 123,
+   "kare": 2,
+   "parca": [],
+   "foto_srgb": [
+    191,
+    157,
+    115
+   ],
+   "model_srgb": [
+    109,
+    104,
+    75
+   ]
+  },
+  "Master quilt â€” photo projection": {
+   "ornek": 66,
+   "kare": 1,
+   "parca": [],
+   "foto_srgb": [
+    128,
+    75,
+    43
+   ],
+   "model_srgb": [
+    53,
+    43,
+    44
+   ]
+  },
+  "brass (4)": {
+   "ornek": 60,
+   "kare": 21,
+   "parca": [],
+   "foto_srgb": [
+    122,
+    83,
+    53
+   ],
+   "model_srgb": [
+    55,
+    46,
+    33
+   ]
+  },
+  "Room pass | Original hall picture atlas": {
+   "ornek": 19,
+   "kare": 2,
+   "parca": [],
+   "foto_srgb": [
+    162,
+    147,
+    135
+   ],
+   "model_srgb": [
+    46,
+    43,
+    37
+   ]
+  },
+  "R31 | R33 master fine mosaic band": {
+   "ornek": 19,
+   "kare": 1,
+   "parca": [],
+   "foto_srgb": [
+    180,
+    167,
+    161
+   ],
+   "model_srgb": [
+    108,
+    113,
+    113
+   ]
+  },
+  "Matte Porcelain Tile Beige.001": {
+   "ornek": 17,
+   "kare": 2,
+   "parca": [],
+   "foto_srgb": [
+    135,
+    118,
+    100
+   ],
+   "model_srgb": [
+    175,
+    172,
+    168
+   ]
+  },
+  "TREE-1": {
+   "ornek": 16,
+   "kare": 2,
+   "parca": [],
+   "foto_srgb": [
+    218,
+    188,
+    161
+   ],
+   "model_srgb": [
+    21,
+    29,
+    17
+   ]
+  },
+  "TREE-2": {
+   "ornek": 15,
+   "kare": 2,
+   "parca": [],
+   "foto_srgb": [
+    167,
+    139,
+    115
+   ],
+   "model_srgb": [
+    84,
+    93,
+    93
+   ]
+  },
+  "R31 | R33 attic tan mosaic band": {
+   "ornek": 15,
+   "kare": 2,
+   "parca": [],
+   "foto_srgb": [
+    215,
+    176,
+    111
+   ],
+   "model_srgb": [
+    148,
+    145,
+    131
+   ]
+  },
+  "R31 | R33 entrance navy mosaic band": {
+   "ornek": 15,
+   "kare": 2,
+   "parca": [],
+   "foto_srgb": [
+    194,
+    164,
+    122
+   ],
+   "model_srgb": [
+    104,
+    100,
+    81
+   ]
+  },
+  "C02 | Original red framed artwork": {
+   "ornek": 12,
+   "kare": 1,
+   "parca": [],
+   "foto_srgb": [
+    210,
+    199,
+    193
+   ],
+   "model_srgb": [
+    63,
+    32,
+    37
+   ]
+  }
+ }
+}
