@@ -1,0 +1,28 @@
+{
+ "ortak_kirpim": [
+  342,
+  427,
+  999,
+  755
+ ],
+ "foto_to_render_homografi": [
+  [
+   1.0505810513537244,
+   -0.23268096768591776,
+   80.64352379085457
+  ],
+  [
+   0.25505823074081746,
+   1.217612160330136,
+   -1088.2101614048
+  ],
+  [
+   -0.000430305216064653,
+   -0.00017232176089643358,
+   1.0
+  ]
+ ],
+ "iki_panel_ayni_piksel_alani": true,
+ "tahta_en_m": 0.06,
+ "emin_degil": "Gerçek kamera/lens bilinmiyor; fotoğraf-model kalibrasyonu yaklaşık."
+}

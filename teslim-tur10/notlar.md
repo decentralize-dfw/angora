@@ -465,3 +465,135 @@ Yeni görülen ayrıntılar Adım06 listesine alındı; bu adımda yeni geometri
 - Karo KALDI: albedo korundu; eşik yüksekliği ve ışık/pozlama fotoğraftan farklı.
 
 Başlangıç: 2026-09-28 19:48:04 +02; modelleme/render kapatma ve teslim hazırlığı: 20:14 +02. Tamamlanmayan kabul kontrolleri yukarıda KALDI; bu kayıt kusursuz tamamlanma iddiası değildir.
+
+
+## Adım 06 · parke yakın kalite + küpeşte + kalanlar
+
+### Doku, renk ve ölçü kanıtları
+
+- DÜZELTİLDİ: Renkler Foto29'dan 30, Foto34'ten 14 ayrı tahtanın ortalamasıyla örneklendi. 44 işaretli örnek `adim06/renk_ornekleri_29.jpg`, `renk_ornekleri_34.jpg` ve `parke-uretim.json` içinde. Duvar/tavan beyaz dengesi ve geniş ölçekli aydınlık düzeltmesi uygulandı; soğuk yansıma kalıntıları sınırlandı. Önceki kabul edilen uzak görünümün ortanca rengi korundu.
+- DÜZELTİLDİ: Damar kaynağı [Poly Haven Walnut Veneer 02](https://polyhaven.com/a/walnut_veneer_02), 4K, CC0. Resmi indirme MD5 `9294085775080be7c3467837bc2f60d2` doğrulandı. Stoktan renk alınmadı: her tahta farklı stok kesitinin parlaklık sıralaması ve fotoğraf paletinden bir renk ile histogram/kuantil eşlemesi aldı.
+- DÜZELTİLDİ: 4096px atlas, 48 sıra, 409 tahta; bağımsız sıra kaydırması ve sağdan sola devam eden tahta. Aynı x'te derz en fazla 2/48 sıra; bütün yüksekliği kat eden ortak dikey atlas çizgisi yok. Yatay sınır normal sıra derzine denk gelir. Albedo, roughness (.36–.49) ve Non-Color normal (.22 güç) aynı yerleşimden.
+- Ölçüm: Foto29 iki tahta dörtgeni kamera/döşeme izdüşümünde 5.87/5.81 cm en ve 35.55/26.64 cm boy verdi. Foto34 dörtgeni 9.39cm en, 75.98cm boy verdi. Çatı yaklaşık 6cm, diğer parke 9cm; boy dağılımı sırasıyla .20–.50m ve .32–.80m. `tahta-olculeri.json` piksel köşelerini içerir. Kamera kalibrasyonu/model ölçeğine dayalı yaklaşık değerlerdir; saha ölçümü değildir.
+- DÜZELTİLDİ: Basamak ve rıht parke derzli atlasından ayrıldı; sürekli ceviz damarı ve mevcut yuvarlak burun kullanıldı. KALDI: yakın kontrolde stok damar kontrastı fazla ve UV sarımında ek görülüyor; Adım07.
+- DÜZELTİLDİ: Küpeşte sıcak kahve, fotoğraf referanslı kanal düzeltmesi; ΔE76 2.04 < 5.
+- Eş ölçek: Foto29 zemin pikselleri kat düzlemine, oradan 1.5m yakın kameraya homografiyle taşındı; iki panel aynı ortak piksel alanından kırpıldı. `es-olcek-homografi.json` ve `yakin-olcek.json` dönüşümü belgeler. Mutlak ölçek gerçek lens bilinmediği için yaklaşık; iki panelin görüntü alanı ortaktır.
+
+### Sayısal renk kontrolü
+
+İşaretli alanların beyaz dengeli sRGB ortancası → OpenCV Lab D65, ΔE76. Pozlama farkı korunur. Kamera değişen Foto40 eski ROI ile karşılaştırılmadı.
+
+| Foto | Yüzey | Foto RGB | Render RGB | ΔE76 | Durum |
+|---|---|---|---|---|---|
+| 29 | parke | (108.0, 76.3, 60.2) | (131.4, 105.7, 96.3) | 13.1 | KALDI: ışık/ton ince eşleşmesi |
+| 18 | parke | (87.9, 45.9, 36.4) | (81.4, 65.2, 61.2) | 15.89 | KALDI: ışık/ton ince eşleşmesi |
+| 34 | parke | (65.0, 44.3, 30.0) | (101.6, 79.0, 75.1) | 17.12 | KALDI: ışık/ton ince eşleşmesi |
+| 18 | merdiven | (96.7, 57.2, 39.0) | (93.5, 58.2, 44.8) | 4.11 | DÜZELTİLDİ |
+| 34 | kupeste | (54.5, 41.2, 25.3) | (56.0, 39.0, 23.8) | 2.04 | DÜZELTİLDİ |
+
+### Kontrol sonuçları ve Adım07
+
+DÜZELTİLDİ: Atlasın eski ortak dikey çizgisi kaldırıldı, kaydırma ve 2×2 testleri üretildi. KALDI: yakın renderda atlas sınırı olmayan ayrı bir çapraz koyu çizgi var. Işın incelemesi `parke-cizgi-ray.json`; kaynağı kesinleşmeden mevcut modelde yeni düzeltme yapılmadı. Bu nedenle tüm yakın kalite koşulları kusursuz geçti denmiyor.
+
+DÜZELTİLDİ: Foto47'de ray testiyle `Simple White Wall` eski merdiven yan yüzleri Y=1.901063 ve 2.159 olarak saptandı; yalnız bu düzlemler maskelendi. Beyaz testere dişi kalıntı çıktı. Tavan/duvar referansları geniş kutuyla silinmedi.
+
+KALDI: Eşik altlarına bindirmeli döşeme eklendi, fakat tüm ışık çizgileri kapanmadı; bazı kapı önlerinde yeni taşan eşik şeridi görüldü (özellikle34). Yeni kusur kuralıyla Adım07'ye alındı. Kartonpiyer köşeleri kaynakla birleştirildi; tüm köşelerin fotoğraf oranı ve yüzey sürekliliği henüz tam değil. Foto40 radyatör solda, kapı sağda ve kanat fotoğraftaki görünen menteşe tarafında; tam perspektif/açıklık ve tavan plafonyeri kadrajı KALDI.
+
+### Fotoğraf bazında öz denetim
+
+#### Foto 04
+
+- **Malzeme tonu:** DÜZELTİLDİ: yeni dar tahta/renk dağılımı; KALDI: fotoğraf ışık eşleşmesi.
+- **Fazla/eksik nesne:** KALDI: önceki mobilya/armatür ayrıntıları.
+- **Kalıntı/yerleşim:** KALDI: eski modül birleşimleri.
+- **Geometri/oran:** KALDI: önceki mobilya oranları.
+
+#### Foto 13
+
+- **Malzeme tonu:** DÜZELTİLDİ: yeni damar; KALDI: ışık/ton.
+- **Fazla/eksik nesne:** KALDI: perde/armatür eksikleri.
+- **Kalıntı/yerleşim:** KALDI: pencere-kartonpiyer ayrıntıları.
+- **Geometri/oran:** KALDI: oda oranı.
+
+#### Foto 15
+
+- **Malzeme tonu:** DÜZELTİLDİ: önceki yüzeyler korundu.
+- **Fazla/eksik nesne:** KALDI: banyo aksesuar ayrıntıları.
+- **Kalıntı/yerleşim:** KALDI: banyo pozlama/ışık.
+- **Geometri/oran:** KALDI: duş/seramik eşleşmesi.
+
+#### Foto 17
+
+- **Malzeme tonu:** DÜZELTİLDİ: yeni parke, wenge korundu.
+- **Fazla/eksik nesne:** DÜZELTİLDİ: ARSIV yatak hâlâ dışarıda.
+- **Kalıntı/yerleşim:** KALDI: eşik/bini ince farkları.
+- **Geometri/oran:** KALDI: önceki armatür ve köşe oranı.
+
+#### Foto 18
+
+- **Malzeme tonu:** DÜZELTİLDİ: basamak/küpeşte tonu; KALDI: basamak damar kontrastı.
+- **Fazla/eksik nesne:** KALDI: önceki zincir/aplik yerleşimi.
+- **Kalıntı/yerleşim:** KALDI: basamak UV sarımı ekleri.
+- **Geometri/oran:** DÜZELTİLDİ: tek parça ahşap; KALDI: fotoğraftaki burun profili ince farkı.
+
+#### Foto 19
+
+- **Malzeme tonu:** DÜZELTİLDİ: yeni parke damarı.
+- **Fazla/eksik nesne:** KALDI: önceki mobilya/perde.
+- **Kalıntı/yerleşim:** KALDI: eski yerleşim ayrıntıları.
+- **Geometri/oran:** KALDI: oda oranları.
+
+#### Foto 21
+
+- **Malzeme tonu:** DÜZELTİLDİ: önceki dolap/karo korundu.
+- **Fazla/eksik nesne:** KALDI: eski mutfak cihaz farkları.
+- **Kalıntı/yerleşim:** KALDI: dolap taç doku yönü.
+- **Geometri/oran:** KALDI: dolap/davlumbaz oranı.
+
+#### Foto 29
+
+- **Malzeme tonu:** DÜZELTİLDİ: 6cm dar/kısa tahta, güçlü damar; KALDI: ışık/ton farkı.
+- **Fazla/eksik nesne:** DÜZELTİLDİ: önceki dolap/aplik gizlemesi korundu.
+- **Kalıntı/yerleşim:** KALDI: yakın renderdaki çapraz koyu çizgi.
+- **Geometri/oran:** DÜZELTİLDİ: tahta ölçeği fotoğraf izdüşümüne bağlı; KALDI: mutlak lens/ölçü belirsizliği.
+
+#### Foto 34
+
+- **Malzeme tonu:** DÜZELTİLDİ: 9cm tahta, küpeşte ΔE2.04.
+- **Fazla/eksik nesne:** KALDI: önceki sarkıt/aplik ayrıntıları.
+- **Kalıntı/yerleşim:** KALDI: uzak odadaki parlak çizgi ve yeni eşik taşması.
+- **Geometri/oran:** KALDI: korkuluk ince oranları; tavan delikleri kapalı kalıyor.
+
+#### Foto 40
+
+- **Malzeme tonu:** DÜZELTİLDİ: giriş cevizi korundu.
+- **Fazla/eksik nesne:** DÜZELTİLDİ: radyatör sol, camlı kapı sağ.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: kanat menteşe tarafı; KALDI: tam açı/kadraj.
+- **Geometri/oran:** KALDI: plafonyer üstten kesiliyor, fotoğraf perspektifi tam değil.
+
+#### Foto 42
+
+- **Malzeme tonu:** DÜZELTİLDİ: sıcak küpeşte.
+- **Fazla/eksik nesne:** DÜZELTİLDİ: üç yuvarlak lamba korunuyor.
+- **Kalıntı/yerleşim:** KALDI: eşik seviye ve taşma farkları.
+- **Geometri/oran:** KALDI: önceki lamba konum hassasiyeti.
+
+#### Foto 44
+
+- **Malzeme tonu:** DÜZELTİLDİ: önceki yüzeyler korundu.
+- **Fazla/eksik nesne:** KALDI: eski garaj nesneleri.
+- **Kalıntı/yerleşim:** KALDI: kapı ışık/bini ayrıntıları.
+- **Geometri/oran:** KALDI: eski geometri oranları.
+
+#### Foto 47
+
+- **Malzeme tonu:** DÜZELTİLDİ: tek parça basamak/küpeşte; KALDI: damar kontrastı.
+- **Fazla/eksik nesne:** DÜZELTİLDİ: eski beyaz testere dişi yüzler çıktı.
+- **Kalıntı/yerleşim:** KALDI: yeni ve eski merdivenin ince birleşimleri.
+- **Geometri/oran:** DÜZELTİLDİ: büyük duvar/tavan yüzleri korundu.
+
+Başlangıç 2026-09-28 20:35 +02. Yeni kusurlar için ek geometri döngüsü açılmadan, 30 dakika sınırı içinde mevcut teslim pushlanır. KALDI maddeleri tamamlandı sayılmaz.
+
+### Yakın parke çizgisi — salt okunur inceleme
+
+630 ışın, aynı `wood_floor.001 / WOOD-FL` yüzeyine çarptı. Koyu çizginin 5 örneği Y≈2.027–2.029m, Z≈9.4694m; atlas U sınırında değil (U≈0.676). Büyük döşeme yüzeyinin topoloji/normal incelemesi Adım07; kesin neden bu adımda kanıtlandı sayılmıyor. `parke-cizgi-ray.json` ham sonuçları içerir. Yeni kusur üzerinde ek modelleme yapılmadı.

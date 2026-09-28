@@ -62,6 +62,8 @@ def uygula(objects,spec_path):
   for p,rec in changed:
    pts=[coords[v] for v in p.vertices];n=(pts[1]-pts[0]).cross(pts[2]-pts[0]);axis=max(range(3),key=lambda i:abs(n[i]))
    axes=(0,1) if axis==2 else ((0,2) if axis==1 else (1,2))
+   if rec['no'] in [3,19] and axis==2:axes=(1,0)
+   if rec.get('ahsap_tek_parca') and rec['no']==10:axes=(1,0) if axis==2 else ((1,2) if axis==0 else (0,2))
    sx,sy=rec.get('doku_olcusu_xy_m',[rec.get('doku_olcusu_m',1)]*2)
    for li,pt in zip(p.loop_indices,pts):uv.data[li].uv=(pt[axes[0]]/sx,pt[axes[1]]/sy)
  print('[foto-doku]',len(cache),'malzeme',total,'yüz',flush=True)

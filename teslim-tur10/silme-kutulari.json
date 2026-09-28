@@ -849,5 +849,47 @@
    5.91
   ],
   "not": "Foto21 mutfakta olmayan küçük tavan spotları; dolaplar aşağıda korunur."
+ },
+ {
+  "ad": "A06_bodrum_eski_merdiven_yanagi_0",
+  "katman": "mimari",
+  "min": [
+   0.43,
+   1.889063,
+   0.01
+  ],
+  "max": [
+   3.19,
+   1.913063,
+   3.1
+  ],
+  "malzemeler": [
+   "Simple White Wall"
+  ],
+  "normal_axes": [
+   1
+  ],
+  "not": "Foto47 ray testinde doğrulanan eski beyaz merdiven yan düzlemi; büyük tavan ve farklı duvar düzlemleri hariç."
+ },
+ {
+  "ad": "A06_bodrum_eski_merdiven_yanagi_1",
+  "katman": "mimari",
+  "min": [
+   0.43,
+   2.147,
+   0.01
+  ],
+  "max": [
+   3.19,
+   2.171,
+   3.1
+  ],
+  "malzemeler": [
+   "Simple White Wall"
+  ],
+  "normal_axes": [
+   1
+  ],
+  "not": "Foto47 ray testinde doğrulanan eski beyaz merdiven yan düzlemi; büyük tavan ve farklı duvar düzlemleri hariç."
  }
 ]

@@ -83,13 +83,13 @@
   "lisans_url": "https://polyhaven.com/license",
   "doku_olcusu_m": 4.0,
   "doku_olcusu_xy_m": [
-   4.0,
-   4.0
+   4.8,
+   4.32
   ],
   "renk_hex": null,
-  "purluluk": 0.425,
+  "purluluk": 0.44,
   "clearcoat": 0.18,
-  "normal_siddeti": 0.15,
+  "normal_siddeti": 0.22,
   "secim_nedeni": "Wood Floor uzun doğal damarları ve daha sıcak tonu ile seçildi; Laminate Floor 02 daha açık ve yeknesak.",
   "secilen_doku": "wood_floor",
   "karsilastirilan_adaylar": [
@@ -102,7 +102,7 @@
   ],
   "emin_degil": true,
   "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
-  "kaynak": "foto_29 + foto_18; 8 ayrı tahta",
+  "kaynak": "Renk foto29/34, 44 tahta; damar Poly Haven walnut_veneer_02 4K",
   "perspektif": {
    "piksel_koseleri": [
     [
@@ -2207,13 +2207,13 @@
   "lisans_url": "https://polyhaven.com/license",
   "doku_olcusu_m": 4.0,
   "doku_olcusu_xy_m": [
-   4.0,
-   4.0
+   1.2,
+   0.3
   ],
   "renk_hex": null,
-  "purluluk": 0.425,
+  "purluluk": 0.43,
   "clearcoat": 0.12,
-  "normal_siddeti": 0.15,
+  "normal_siddeti": 0.18,
   "secim_nedeni": "Cherry Veneer sıcak ve ince damar bakımından basamaklara yakın; American Walnut Veneer daha soğuk ve koyu.",
   "secilen_doku": "cherry_veneer",
   "karsilastirilan_adaylar": [
@@ -2226,7 +2226,7 @@
   ],
   "emin_degil": true,
   "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
-  "kaynak": "foto_29 + foto_18; 8 ayrı tahta",
+  "kaynak": "Fotoğraf tonu + Poly Haven walnut_veneer_02 4K damar",
   "perspektif": {
    "piksel_koseleri": [
     [
@@ -3802,7 +3802,8 @@
      "kaydir_px": 746
     }
    ]
-  }
+  },
+  "ahsap_tek_parca": true
  },
  {
   "no": 11,
@@ -4578,13 +4579,13 @@
   "lisans_url": "https://polyhaven.com/license",
   "doku_olcusu_m": 4.0,
   "doku_olcusu_xy_m": [
-   4.0,
-   4.0
+   1.2,
+   0.3
   ],
   "renk_hex": null,
-  "purluluk": 0.425,
+  "purluluk": 0.43,
   "clearcoat": 0.18,
-  "normal_siddeti": 0.1,
+  "normal_siddeti": 0.18,
   "secim_nedeni": "Wood Floor uzun doğal damarları ve daha sıcak tonu ile seçildi; Laminate Floor 02 daha açık ve yeknesak.",
   "secilen_doku": "wood_floor",
   "karsilastirilan_adaylar": [
@@ -4597,7 +4598,7 @@
   ],
   "emin_degil": true,
   "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
-  "kaynak": "foto_29 + foto_18; 8 ayrı tahta",
+  "kaynak": "Fotoğraf tonu + Poly Haven walnut_veneer_02 4K damar",
   "perspektif": {
    "piksel_koseleri": [
     [
@@ -6173,7 +6174,8 @@
      "kaydir_px": 746
     }
    ]
-  }
+  },
+  "ahsap_tek_parca": true
  },
  {
   "no": 16,
@@ -11041,6 +11043,1629 @@
      100,
      100,
      2.95
+    ]
+   }
+  ]
+ },
+ {
+  "no": 19,
+  "yuzey": "çatı katı dar kısa parke",
+  "malzemeler": [
+   "WOOD-FL",
+   "wood_floor"
+  ],
+  "klasor": "03_parke",
+  "lisans": "CC0",
+  "lisans_url": "https://polyhaven.com/license",
+  "doku_olcusu_m": 4.0,
+  "doku_olcusu_xy_m": [
+   3.0,
+   2.88
+  ],
+  "renk_hex": null,
+  "purluluk": 0.44,
+  "clearcoat": 0.18,
+  "normal_siddeti": 0.22,
+  "secim_nedeni": "Wood Floor uzun doğal damarları ve daha sıcak tonu ile seçildi; Laminate Floor 02 daha açık ve yeknesak.",
+  "secilen_doku": "wood_floor",
+  "karsilastirilan_adaylar": [
+   "wood_floor",
+   "laminate_floor_02"
+  ],
+  "b1_noktalari": [
+   "4:0.92,0.91",
+   "23:0.35,0.88"
+  ],
+  "emin_degil": true,
+  "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
+  "kaynak": "Renk foto29/34, 44 tahta; damar Poly Haven walnut_veneer_02 4K",
+  "perspektif": {
+   "piksel_koseleri": [
+    [
+     59,
+     924
+    ],
+    [
+     350,
+     1010
+    ],
+    [
+     184,
+     1195
+    ],
+    [
+     0,
+     1129
+    ]
+   ],
+   "olcu_m": [
+    0.6,
+    0.65
+   ],
+   "olcum": "Fotoğraftan yaklaşık; saha ölçümü değil."
+  },
+  "beyaz_dengesi": {
+   "referans_kutusu": [
+    400,
+    120,
+    620,
+    210
+   ],
+   "referans_rgb": [
+    182.0,
+    155.0,
+    134.0
+   ],
+   "kanal_kazanci": [
+    0.8849460603321344,
+    1.0086641234029976,
+    1.106389816264868
+   ]
+  },
+  "uretim": "warpPerspective; büyük Gauss alanına bölme; nötr kırık beyaz dengesi; parlama inpaint; kenar eşleme.",
+  "normal_roughness_kaynak_url": "https://polyhaven.com/a/wood_floor",
+  "adim04": {
+   "ton_hedef_rgb": [
+    62,
+    45,
+    34
+   ],
+   "beyaz_referans": [
+    850,
+    110,
+    960,
+    180
+   ],
+   "yontem": "Perspektif, Gauss gradyan giderme, nötr beyaz dengesi, fotoğraf referansına göre koyu ton kalibrasyonu, kenar eşleme."
+  },
+  "adim05": {
+   "tahta_en_m": 0.125,
+   "boylar_m": [
+    0.5,
+    0.75,
+    1.0,
+    1.25
+   ],
+   "yaklasik_olcu": true,
+   "tohum": 20260928,
+   "kaynaklar": [
+    {
+     "no": 1,
+     "foto": 29,
+     "koseler": [
+      [
+       192,
+       910
+      ],
+      [
+       220,
+       915
+      ],
+      [
+       61,
+       1048
+      ],
+      [
+       34,
+       1041
+      ]
+     ],
+     "duvar_tavan_roi": [
+      [
+       0.26,
+       0.035,
+       0.39,
+       0.085
+      ],
+      [
+       0.12,
+       0.3,
+       0.23,
+       0.4
+      ]
+     ],
+     "beyaz_rgb": [
+      209.0,
+      193.5,
+      181.0
+     ],
+     "gain": [
+      0.930622009569378,
+      1.0051679586563307,
+      1.074585635359116
+     ]
+    },
+    {
+     "no": 2,
+     "foto": 29,
+     "koseler": [
+      [
+       280,
+       938
+      ],
+      [
+       304,
+       943
+      ],
+      [
+       111,
+       1139
+      ],
+      [
+       82,
+       1131
+      ]
+     ],
+     "duvar_tavan_roi": [
+      [
+       0.26,
+       0.035,
+       0.39,
+       0.085
+      ],
+      [
+       0.12,
+       0.3,
+       0.23,
+       0.4
+      ]
+     ],
+     "beyaz_rgb": [
+      209.0,
+      193.5,
+      181.0
+     ],
+     "gain": [
+      0.930622009569378,
+      1.0051679586563307,
+      1.074585635359116
+     ]
+    },
+    {
+     "no": 3,
+     "foto": 29,
+     "koseler": [
+      [
+       343,
+       963
+      ],
+      [
+       363,
+       970
+      ],
+      [
+       235,
+       1148
+      ],
+      [
+       211,
+       1142
+      ]
+     ],
+     "duvar_tavan_roi": [
+      [
+       0.26,
+       0.035,
+       0.39,
+       0.085
+      ],
+      [
+       0.12,
+       0.3,
+       0.23,
+       0.4
+      ]
+     ],
+     "beyaz_rgb": [
+      209.0,
+      193.5,
+      181.0
+     ],
+     "gain": [
+      0.930622009569378,
+      1.0051679586563307,
+      1.074585635359116
+     ]
+    },
+    {
+     "no": 4,
+     "foto": 29,
+     "koseler": [
+      [
+       423,
+       1039
+      ],
+      [
+       446,
+       1040
+      ],
+      [
+       377,
+       1179
+      ],
+      [
+       348,
+       1179
+      ]
+     ],
+     "duvar_tavan_roi": [
+      [
+       0.26,
+       0.035,
+       0.39,
+       0.085
+      ],
+      [
+       0.12,
+       0.3,
+       0.23,
+       0.4
+      ]
+     ],
+     "beyaz_rgb": [
+      209.0,
+      193.5,
+      181.0
+     ],
+     "gain": [
+      0.930622009569378,
+      1.0051679586563307,
+      1.074585635359116
+     ]
+    },
+    {
+     "no": 5,
+     "foto": 29,
+     "koseler": [
+      [
+       530,
+       1069
+      ],
+      [
+       554,
+       1074
+      ],
+      [
+       511,
+       1184
+      ],
+      [
+       486,
+       1181
+      ]
+     ],
+     "duvar_tavan_roi": [
+      [
+       0.26,
+       0.035,
+       0.39,
+       0.085
+      ],
+      [
+       0.12,
+       0.3,
+       0.23,
+       0.4
+      ]
+     ],
+     "beyaz_rgb": [
+      209.0,
+      193.5,
+      181.0
+     ],
+     "gain": [
+      0.930622009569378,
+      1.0051679586563307,
+      1.074585635359116
+     ]
+    },
+    {
+     "no": 6,
+     "foto": 29,
+     "koseler": [
+      [
+       668,
+       1013
+      ],
+      [
+       690,
+       1016
+      ],
+      [
+       677,
+       1167
+      ],
+      [
+       651,
+       1165
+      ]
+     ],
+     "duvar_tavan_roi": [
+      [
+       0.26,
+       0.035,
+       0.39,
+       0.085
+      ],
+      [
+       0.12,
+       0.3,
+       0.23,
+       0.4
+      ]
+     ],
+     "beyaz_rgb": [
+      209.0,
+      193.5,
+      181.0
+     ],
+     "gain": [
+      0.930622009569378,
+      1.0051679586563307,
+      1.074585635359116
+     ]
+    },
+    {
+     "no": 7,
+     "foto": 18,
+     "koseler": [
+      [
+       1180,
+       1000
+      ],
+      [
+       1203,
+       1008
+      ],
+      [
+       1075,
+       1115
+      ],
+      [
+       1050,
+       1106
+      ]
+     ],
+     "duvar_tavan_roi": [
+      [
+       0.39,
+       0.1,
+       0.45,
+       0.15
+      ],
+      [
+       0.65,
+       0.2,
+       0.72,
+       0.27
+      ]
+     ],
+     "beyaz_rgb": [
+      212.0,
+      166.0,
+      130.5
+     ],
+     "gain": [
+      0.7995283018867925,
+      1.0210843373493976,
+      1.2988505747126438
+     ]
+    },
+    {
+     "no": 8,
+     "foto": 18,
+     "koseler": [
+      [
+       1310,
+       1010
+      ],
+      [
+       1335,
+       1020
+      ],
+      [
+       1170,
+       1180
+      ],
+      [
+       1140,
+       1168
+      ]
+     ],
+     "duvar_tavan_roi": [
+      [
+       0.39,
+       0.1,
+       0.45,
+       0.15
+      ],
+      [
+       0.65,
+       0.2,
+       0.72,
+       0.27
+      ]
+     ],
+     "beyaz_rgb": [
+      212.0,
+      166.0,
+      130.5
+     ],
+     "gain": [
+      0.7995283018867925,
+      1.0210843373493976,
+      1.2988505747126438
+     ]
+    }
+   ],
+   "yerlesim": [
+    {
+     "sira": 0,
+     "x_px": 0,
+     "boy_px": 1024,
+     "kaynak": 4,
+     "kaydir_px": 687
+    },
+    {
+     "sira": 0,
+     "x_px": 1024,
+     "boy_px": 512,
+     "kaynak": 1,
+     "kaydir_px": 947
+    },
+    {
+     "sira": 0,
+     "x_px": 1536,
+     "boy_px": 768,
+     "kaynak": 7,
+     "kaydir_px": 200
+    },
+    {
+     "sira": 0,
+     "x_px": 2304,
+     "boy_px": 512,
+     "kaynak": 4,
+     "kaydir_px": 553
+    },
+    {
+     "sira": 0,
+     "x_px": 2816,
+     "boy_px": 768,
+     "kaynak": 4,
+     "kaydir_px": 985
+    },
+    {
+     "sira": 0,
+     "x_px": 3584,
+     "boy_px": 512,
+     "kaynak": 5,
+     "kaydir_px": 687
+    },
+    {
+     "sira": 1,
+     "x_px": 0,
+     "boy_px": 768,
+     "kaynak": 6,
+     "kaydir_px": 515
+    },
+    {
+     "sira": 1,
+     "x_px": 768,
+     "boy_px": 768,
+     "kaynak": 1,
+     "kaydir_px": 712
+    },
+    {
+     "sira": 1,
+     "x_px": 1536,
+     "boy_px": 768,
+     "kaynak": 1,
+     "kaydir_px": 477
+    },
+    {
+     "sira": 1,
+     "x_px": 2304,
+     "boy_px": 512,
+     "kaynak": 4,
+     "kaydir_px": 1
+    },
+    {
+     "sira": 1,
+     "x_px": 2816,
+     "boy_px": 512,
+     "kaynak": 7,
+     "kaydir_px": 879
+    },
+    {
+     "sira": 1,
+     "x_px": 3328,
+     "boy_px": 768,
+     "kaynak": 2,
+     "kaydir_px": 740
+    },
+    {
+     "sira": 2,
+     "x_px": 0,
+     "boy_px": 768,
+     "kaynak": 2,
+     "kaydir_px": 425
+    },
+    {
+     "sira": 2,
+     "x_px": 768,
+     "boy_px": 512,
+     "kaynak": 1,
+     "kaydir_px": 569
+    },
+    {
+     "sira": 2,
+     "x_px": 1280,
+     "boy_px": 512,
+     "kaynak": 2,
+     "kaydir_px": 932
+    },
+    {
+     "sira": 2,
+     "x_px": 1792,
+     "boy_px": 1024,
+     "kaynak": 3,
+     "kaydir_px": 696
+    },
+    {
+     "sira": 2,
+     "x_px": 2816,
+     "boy_px": 768,
+     "kaynak": 2,
+     "kaydir_px": 323
+    },
+    {
+     "sira": 2,
+     "x_px": 3584,
+     "boy_px": 512,
+     "kaynak": 2,
+     "kaydir_px": 326
+    },
+    {
+     "sira": 3,
+     "x_px": 0,
+     "boy_px": 512,
+     "kaynak": 5,
+     "kaydir_px": 434
+    },
+    {
+     "sira": 3,
+     "x_px": 512,
+     "boy_px": 768,
+     "kaynak": 4,
+     "kaydir_px": 2
+    },
+    {
+     "sira": 3,
+     "x_px": 1280,
+     "boy_px": 1024,
+     "kaynak": 7,
+     "kaydir_px": 529
+    },
+    {
+     "sira": 3,
+     "x_px": 2304,
+     "boy_px": 1024,
+     "kaynak": 1,
+     "kaydir_px": 457
+    },
+    {
+     "sira": 3,
+     "x_px": 3328,
+     "boy_px": 768,
+     "kaynak": 2,
+     "kaydir_px": 1012
+    },
+    {
+     "sira": 4,
+     "x_px": 0,
+     "boy_px": 1024,
+     "kaynak": 3,
+     "kaydir_px": 984
+    },
+    {
+     "sira": 4,
+     "x_px": 1024,
+     "boy_px": 512,
+     "kaynak": 7,
+     "kaydir_px": 796
+    },
+    {
+     "sira": 4,
+     "x_px": 1536,
+     "boy_px": 1024,
+     "kaynak": 2,
+     "kaydir_px": 780
+    },
+    {
+     "sira": 4,
+     "x_px": 2560,
+     "boy_px": 768,
+     "kaynak": 7,
+     "kaydir_px": 363
+    },
+    {
+     "sira": 4,
+     "x_px": 3328,
+     "boy_px": 768,
+     "kaynak": 2,
+     "kaydir_px": 562
+    },
+    {
+     "sira": 5,
+     "x_px": 0,
+     "boy_px": 1280,
+     "kaynak": 6,
+     "kaydir_px": 620
+    },
+    {
+     "sira": 5,
+     "x_px": 1280,
+     "boy_px": 1024,
+     "kaynak": 1,
+     "kaydir_px": 958
+    },
+    {
+     "sira": 5,
+     "x_px": 2304,
+     "boy_px": 768,
+     "kaynak": 6,
+     "kaydir_px": 746
+    },
+    {
+     "sira": 5,
+     "x_px": 3072,
+     "boy_px": 512,
+     "kaynak": 5,
+     "kaydir_px": 36
+    },
+    {
+     "sira": 5,
+     "x_px": 3584,
+     "boy_px": 512,
+     "kaynak": 2,
+     "kaydir_px": 925
+    },
+    {
+     "sira": 6,
+     "x_px": 0,
+     "boy_px": 768,
+     "kaynak": 2,
+     "kaydir_px": 899
+    },
+    {
+     "sira": 6,
+     "x_px": 768,
+     "boy_px": 1280,
+     "kaynak": 2,
+     "kaydir_px": 314
+    },
+    {
+     "sira": 6,
+     "x_px": 2048,
+     "boy_px": 1024,
+     "kaynak": 4,
+     "kaydir_px": 809
+    },
+    {
+     "sira": 6,
+     "x_px": 3072,
+     "boy_px": 1024,
+     "kaynak": 8,
+     "kaydir_px": 653
+    },
+    {
+     "sira": 7,
+     "x_px": 0,
+     "boy_px": 768,
+     "kaynak": 7,
+     "kaydir_px": 990
+    },
+    {
+     "sira": 7,
+     "x_px": 768,
+     "boy_px": 768,
+     "kaynak": 3,
+     "kaydir_px": 463
+    },
+    {
+     "sira": 7,
+     "x_px": 1536,
+     "boy_px": 512,
+     "kaynak": 7,
+     "kaydir_px": 976
+    },
+    {
+     "sira": 7,
+     "x_px": 2048,
+     "boy_px": 1024,
+     "kaynak": 7,
+     "kaydir_px": 893
+    },
+    {
+     "sira": 7,
+     "x_px": 3072,
+     "boy_px": 1024,
+     "kaynak": 3,
+     "kaydir_px": 312
+    },
+    {
+     "sira": 8,
+     "x_px": 0,
+     "boy_px": 768,
+     "kaynak": 2,
+     "kaydir_px": 258
+    },
+    {
+     "sira": 8,
+     "x_px": 768,
+     "boy_px": 1024,
+     "kaynak": 3,
+     "kaydir_px": 550
+    },
+    {
+     "sira": 8,
+     "x_px": 1792,
+     "boy_px": 768,
+     "kaynak": 7,
+     "kaydir_px": 100
+    },
+    {
+     "sira": 8,
+     "x_px": 2560,
+     "boy_px": 512,
+     "kaynak": 5,
+     "kaydir_px": 876
+    },
+    {
+     "sira": 8,
+     "x_px": 3072,
+     "boy_px": 1024,
+     "kaynak": 1,
+     "kaydir_px": 216
+    },
+    {
+     "sira": 9,
+     "x_px": 0,
+     "boy_px": 1280,
+     "kaynak": 3,
+     "kaydir_px": 37
+    },
+    {
+     "sira": 9,
+     "x_px": 1280,
+     "boy_px": 512,
+     "kaynak": 7,
+     "kaydir_px": 681
+    },
+    {
+     "sira": 9,
+     "x_px": 1792,
+     "boy_px": 1024,
+     "kaynak": 2,
+     "kaydir_px": 783
+    },
+    {
+     "sira": 9,
+     "x_px": 2816,
+     "boy_px": 768,
+     "kaynak": 2,
+     "kaydir_px": 796
+    },
+    {
+     "sira": 9,
+     "x_px": 3584,
+     "boy_px": 512,
+     "kaynak": 1,
+     "kaydir_px": 239
+    },
+    {
+     "sira": 10,
+     "x_px": 0,
+     "boy_px": 512,
+     "kaynak": 5,
+     "kaydir_px": 38
+    },
+    {
+     "sira": 10,
+     "x_px": 512,
+     "boy_px": 512,
+     "kaynak": 1,
+     "kaydir_px": 273
+    },
+    {
+     "sira": 10,
+     "x_px": 1024,
+     "boy_px": 1024,
+     "kaynak": 4,
+     "kaydir_px": 554
+    },
+    {
+     "sira": 10,
+     "x_px": 2048,
+     "boy_px": 1024,
+     "kaynak": 7,
+     "kaydir_px": 367
+    },
+    {
+     "sira": 10,
+     "x_px": 3072,
+     "boy_px": 1024,
+     "kaynak": 5,
+     "kaydir_px": 419
+    },
+    {
+     "sira": 11,
+     "x_px": 0,
+     "boy_px": 512,
+     "kaynak": 5,
+     "kaydir_px": 750
+    },
+    {
+     "sira": 11,
+     "x_px": 512,
+     "boy_px": 768,
+     "kaynak": 4,
+     "kaydir_px": 684
+    },
+    {
+     "sira": 11,
+     "x_px": 1280,
+     "boy_px": 1024,
+     "kaynak": 5,
+     "kaydir_px": 954
+    },
+    {
+     "sira": 11,
+     "x_px": 2304,
+     "boy_px": 1024,
+     "kaynak": 4,
+     "kaydir_px": 834
+    },
+    {
+     "sira": 11,
+     "x_px": 3328,
+     "boy_px": 768,
+     "kaynak": 5,
+     "kaydir_px": 776
+    },
+    {
+     "sira": 12,
+     "x_px": 0,
+     "boy_px": 1280,
+     "kaynak": 8,
+     "kaydir_px": 930
+    },
+    {
+     "sira": 12,
+     "x_px": 1280,
+     "boy_px": 512,
+     "kaynak": 6,
+     "kaydir_px": 1014
+    },
+    {
+     "sira": 12,
+     "x_px": 1792,
+     "boy_px": 1280,
+     "kaynak": 4,
+     "kaydir_px": 13
+    },
+    {
+     "sira": 12,
+     "x_px": 3072,
+     "boy_px": 1024,
+     "kaynak": 8,
+     "kaydir_px": 138
+    },
+    {
+     "sira": 13,
+     "x_px": 0,
+     "boy_px": 1024,
+     "kaynak": 5,
+     "kaydir_px": 33
+    },
+    {
+     "sira": 13,
+     "x_px": 1024,
+     "boy_px": 1024,
+     "kaynak": 8,
+     "kaydir_px": 533
+    },
+    {
+     "sira": 13,
+     "x_px": 2048,
+     "boy_px": 512,
+     "kaynak": 6,
+     "kaydir_px": 459
+    },
+    {
+     "sira": 13,
+     "x_px": 2560,
+     "boy_px": 512,
+     "kaynak": 7,
+     "kaydir_px": 626
+    },
+    {
+     "sira": 13,
+     "x_px": 3072,
+     "boy_px": 512,
+     "kaynak": 1,
+     "kaydir_px": 431
+    },
+    {
+     "sira": 13,
+     "x_px": 3584,
+     "boy_px": 512,
+     "kaynak": 6,
+     "kaydir_px": 662
+    },
+    {
+     "sira": 14,
+     "x_px": 0,
+     "boy_px": 1024,
+     "kaynak": 8,
+     "kaydir_px": 309
+    },
+    {
+     "sira": 14,
+     "x_px": 1024,
+     "boy_px": 512,
+     "kaynak": 5,
+     "kaydir_px": 614
+    },
+    {
+     "sira": 14,
+     "x_px": 1536,
+     "boy_px": 512,
+     "kaynak": 8,
+     "kaydir_px": 17
+    },
+    {
+     "sira": 14,
+     "x_px": 2048,
+     "boy_px": 768,
+     "kaynak": 3,
+     "kaydir_px": 963
+    },
+    {
+     "sira": 14,
+     "x_px": 2816,
+     "boy_px": 1280,
+     "kaynak": 8,
+     "kaydir_px": 1007
+    },
+    {
+     "sira": 15,
+     "x_px": 0,
+     "boy_px": 512,
+     "kaynak": 3,
+     "kaydir_px": 490
+    },
+    {
+     "sira": 15,
+     "x_px": 512,
+     "boy_px": 768,
+     "kaynak": 6,
+     "kaydir_px": 402
+    },
+    {
+     "sira": 15,
+     "x_px": 1280,
+     "boy_px": 512,
+     "kaynak": 6,
+     "kaydir_px": 1012
+    },
+    {
+     "sira": 15,
+     "x_px": 1792,
+     "boy_px": 1024,
+     "kaynak": 5,
+     "kaydir_px": 217
+    },
+    {
+     "sira": 15,
+     "x_px": 2816,
+     "boy_px": 512,
+     "kaynak": 3,
+     "kaydir_px": 838
+    },
+    {
+     "sira": 15,
+     "x_px": 3328,
+     "boy_px": 768,
+     "kaynak": 2,
+     "kaydir_px": 185
+    },
+    {
+     "sira": 16,
+     "x_px": 0,
+     "boy_px": 1024,
+     "kaynak": 7,
+     "kaydir_px": 313
+    },
+    {
+     "sira": 16,
+     "x_px": 1024,
+     "boy_px": 512,
+     "kaynak": 2,
+     "kaydir_px": 632
+    },
+    {
+     "sira": 16,
+     "x_px": 1536,
+     "boy_px": 1280,
+     "kaynak": 7,
+     "kaydir_px": 86
+    },
+    {
+     "sira": 16,
+     "x_px": 2816,
+     "boy_px": 1280,
+     "kaynak": 3,
+     "kaydir_px": 357
+    },
+    {
+     "sira": 17,
+     "x_px": 0,
+     "boy_px": 768,
+     "kaynak": 5,
+     "kaydir_px": 506
+    },
+    {
+     "sira": 17,
+     "x_px": 768,
+     "boy_px": 1280,
+     "kaynak": 2,
+     "kaydir_px": 764
+    },
+    {
+     "sira": 17,
+     "x_px": 2048,
+     "boy_px": 512,
+     "kaynak": 7,
+     "kaydir_px": 234
+    },
+    {
+     "sira": 17,
+     "x_px": 2560,
+     "boy_px": 768,
+     "kaynak": 8,
+     "kaydir_px": 952
+    },
+    {
+     "sira": 17,
+     "x_px": 3328,
+     "boy_px": 768,
+     "kaynak": 6,
+     "kaydir_px": 18
+    },
+    {
+     "sira": 18,
+     "x_px": 0,
+     "boy_px": 1280,
+     "kaynak": 2,
+     "kaydir_px": 860
+    },
+    {
+     "sira": 18,
+     "x_px": 1280,
+     "boy_px": 512,
+     "kaynak": 6,
+     "kaydir_px": 433
+    },
+    {
+     "sira": 18,
+     "x_px": 1792,
+     "boy_px": 1024,
+     "kaynak": 1,
+     "kaydir_px": 458
+    },
+    {
+     "sira": 18,
+     "x_px": 2816,
+     "boy_px": 768,
+     "kaynak": 8,
+     "kaydir_px": 493
+    },
+    {
+     "sira": 18,
+     "x_px": 3584,
+     "boy_px": 512,
+     "kaynak": 8,
+     "kaydir_px": 919
+    },
+    {
+     "sira": 19,
+     "x_px": 0,
+     "boy_px": 1280,
+     "kaynak": 2,
+     "kaydir_px": 828
+    },
+    {
+     "sira": 19,
+     "x_px": 1280,
+     "boy_px": 768,
+     "kaynak": 6,
+     "kaydir_px": 842
+    },
+    {
+     "sira": 19,
+     "x_px": 2048,
+     "boy_px": 512,
+     "kaynak": 8,
+     "kaydir_px": 74
+    },
+    {
+     "sira": 19,
+     "x_px": 2560,
+     "boy_px": 512,
+     "kaynak": 4,
+     "kaydir_px": 677
+    },
+    {
+     "sira": 19,
+     "x_px": 3072,
+     "boy_px": 512,
+     "kaynak": 6,
+     "kaydir_px": 489
+    },
+    {
+     "sira": 19,
+     "x_px": 3584,
+     "boy_px": 512,
+     "kaynak": 8,
+     "kaydir_px": 741
+    },
+    {
+     "sira": 20,
+     "x_px": 0,
+     "boy_px": 768,
+     "kaynak": 1,
+     "kaydir_px": 691
+    },
+    {
+     "sira": 20,
+     "x_px": 768,
+     "boy_px": 768,
+     "kaynak": 4,
+     "kaydir_px": 60
+    },
+    {
+     "sira": 20,
+     "x_px": 1536,
+     "boy_px": 1280,
+     "kaynak": 6,
+     "kaydir_px": 608
+    },
+    {
+     "sira": 20,
+     "x_px": 2816,
+     "boy_px": 512,
+     "kaynak": 5,
+     "kaydir_px": 38
+    },
+    {
+     "sira": 20,
+     "x_px": 3328,
+     "boy_px": 768,
+     "kaynak": 6,
+     "kaydir_px": 989
+    },
+    {
+     "sira": 21,
+     "x_px": 0,
+     "boy_px": 1280,
+     "kaynak": 3,
+     "kaydir_px": 143
+    },
+    {
+     "sira": 21,
+     "x_px": 1280,
+     "boy_px": 1024,
+     "kaynak": 8,
+     "kaydir_px": 431
+    },
+    {
+     "sira": 21,
+     "x_px": 2304,
+     "boy_px": 1280,
+     "kaynak": 3,
+     "kaydir_px": 773
+    },
+    {
+     "sira": 21,
+     "x_px": 3584,
+     "boy_px": 512,
+     "kaynak": 8,
+     "kaydir_px": 178
+    },
+    {
+     "sira": 22,
+     "x_px": 0,
+     "boy_px": 512,
+     "kaynak": 8,
+     "kaydir_px": 893
+    },
+    {
+     "sira": 22,
+     "x_px": 512,
+     "boy_px": 1024,
+     "kaynak": 3,
+     "kaydir_px": 408
+    },
+    {
+     "sira": 22,
+     "x_px": 1536,
+     "boy_px": 1280,
+     "kaynak": 1,
+     "kaydir_px": 778
+    },
+    {
+     "sira": 22,
+     "x_px": 2816,
+     "boy_px": 512,
+     "kaynak": 8,
+     "kaydir_px": 942
+    },
+    {
+     "sira": 22,
+     "x_px": 3328,
+     "boy_px": 768,
+     "kaynak": 1,
+     "kaydir_px": 757
+    },
+    {
+     "sira": 23,
+     "x_px": 0,
+     "boy_px": 1024,
+     "kaynak": 4,
+     "kaydir_px": 438
+    },
+    {
+     "sira": 23,
+     "x_px": 1024,
+     "boy_px": 1024,
+     "kaynak": 5,
+     "kaydir_px": 111
+    },
+    {
+     "sira": 23,
+     "x_px": 2048,
+     "boy_px": 768,
+     "kaynak": 4,
+     "kaydir_px": 880
+    },
+    {
+     "sira": 23,
+     "x_px": 2816,
+     "boy_px": 768,
+     "kaynak": 7,
+     "kaydir_px": 176
+    },
+    {
+     "sira": 23,
+     "x_px": 3584,
+     "boy_px": 512,
+     "kaynak": 4,
+     "kaydir_px": 680
+    },
+    {
+     "sira": 24,
+     "x_px": 0,
+     "boy_px": 768,
+     "kaynak": 3,
+     "kaydir_px": 183
+    },
+    {
+     "sira": 24,
+     "x_px": 768,
+     "boy_px": 1280,
+     "kaynak": 4,
+     "kaydir_px": 108
+    },
+    {
+     "sira": 24,
+     "x_px": 2048,
+     "boy_px": 512,
+     "kaynak": 8,
+     "kaydir_px": 506
+    },
+    {
+     "sira": 24,
+     "x_px": 2560,
+     "boy_px": 1024,
+     "kaynak": 8,
+     "kaydir_px": 821
+    },
+    {
+     "sira": 24,
+     "x_px": 3584,
+     "boy_px": 512,
+     "kaynak": 2,
+     "kaydir_px": 714
+    },
+    {
+     "sira": 25,
+     "x_px": 0,
+     "boy_px": 768,
+     "kaynak": 5,
+     "kaydir_px": 566
+    },
+    {
+     "sira": 25,
+     "x_px": 768,
+     "boy_px": 768,
+     "kaynak": 5,
+     "kaydir_px": 542
+    },
+    {
+     "sira": 25,
+     "x_px": 1536,
+     "boy_px": 768,
+     "kaynak": 8,
+     "kaydir_px": 681
+    },
+    {
+     "sira": 25,
+     "x_px": 2304,
+     "boy_px": 1024,
+     "kaynak": 3,
+     "kaydir_px": 290
+    },
+    {
+     "sira": 25,
+     "x_px": 3328,
+     "boy_px": 768,
+     "kaynak": 2,
+     "kaydir_px": 705
+    },
+    {
+     "sira": 26,
+     "x_px": 0,
+     "boy_px": 1280,
+     "kaynak": 3,
+     "kaydir_px": 218
+    },
+    {
+     "sira": 26,
+     "x_px": 1280,
+     "boy_px": 1024,
+     "kaynak": 5,
+     "kaydir_px": 575
+    },
+    {
+     "sira": 26,
+     "x_px": 2304,
+     "boy_px": 1280,
+     "kaynak": 6,
+     "kaydir_px": 478
+    },
+    {
+     "sira": 26,
+     "x_px": 3584,
+     "boy_px": 512,
+     "kaynak": 1,
+     "kaydir_px": 965
+    },
+    {
+     "sira": 27,
+     "x_px": 0,
+     "boy_px": 1280,
+     "kaynak": 6,
+     "kaydir_px": 964
+    },
+    {
+     "sira": 27,
+     "x_px": 1280,
+     "boy_px": 768,
+     "kaynak": 8,
+     "kaydir_px": 836
+    },
+    {
+     "sira": 27,
+     "x_px": 2048,
+     "boy_px": 512,
+     "kaynak": 3,
+     "kaydir_px": 575
+    },
+    {
+     "sira": 27,
+     "x_px": 2560,
+     "boy_px": 1024,
+     "kaynak": 1,
+     "kaydir_px": 308
+    },
+    {
+     "sira": 27,
+     "x_px": 3584,
+     "boy_px": 512,
+     "kaynak": 1,
+     "kaydir_px": 22
+    },
+    {
+     "sira": 28,
+     "x_px": 0,
+     "boy_px": 1024,
+     "kaynak": 5,
+     "kaydir_px": 626
+    },
+    {
+     "sira": 28,
+     "x_px": 1024,
+     "boy_px": 512,
+     "kaynak": 5,
+     "kaydir_px": 895
+    },
+    {
+     "sira": 28,
+     "x_px": 1536,
+     "boy_px": 768,
+     "kaynak": 5,
+     "kaydir_px": 37
+    },
+    {
+     "sira": 28,
+     "x_px": 2304,
+     "boy_px": 512,
+     "kaynak": 7,
+     "kaydir_px": 430
+    },
+    {
+     "sira": 28,
+     "x_px": 2816,
+     "boy_px": 768,
+     "kaynak": 4,
+     "kaydir_px": 133
+    },
+    {
+     "sira": 28,
+     "x_px": 3584,
+     "boy_px": 512,
+     "kaynak": 4,
+     "kaydir_px": 823
+    },
+    {
+     "sira": 29,
+     "x_px": 0,
+     "boy_px": 1280,
+     "kaynak": 4,
+     "kaydir_px": 101
+    },
+    {
+     "sira": 29,
+     "x_px": 1280,
+     "boy_px": 1024,
+     "kaynak": 8,
+     "kaydir_px": 563
+    },
+    {
+     "sira": 29,
+     "x_px": 2304,
+     "boy_px": 1280,
+     "kaynak": 3,
+     "kaydir_px": 375
+    },
+    {
+     "sira": 29,
+     "x_px": 3584,
+     "boy_px": 512,
+     "kaynak": 7,
+     "kaydir_px": 673
+    },
+    {
+     "sira": 30,
+     "x_px": 0,
+     "boy_px": 512,
+     "kaynak": 8,
+     "kaydir_px": 525
+    },
+    {
+     "sira": 30,
+     "x_px": 512,
+     "boy_px": 1024,
+     "kaynak": 1,
+     "kaydir_px": 121
+    },
+    {
+     "sira": 30,
+     "x_px": 1536,
+     "boy_px": 1024,
+     "kaynak": 7,
+     "kaydir_px": 903
+    },
+    {
+     "sira": 30,
+     "x_px": 2560,
+     "boy_px": 512,
+     "kaynak": 5,
+     "kaydir_px": 839
+    },
+    {
+     "sira": 30,
+     "x_px": 3072,
+     "boy_px": 512,
+     "kaynak": 2,
+     "kaydir_px": 270
+    },
+    {
+     "sira": 30,
+     "x_px": 3584,
+     "boy_px": 512,
+     "kaynak": 6,
+     "kaydir_px": 676
+    },
+    {
+     "sira": 31,
+     "x_px": 0,
+     "boy_px": 1024,
+     "kaynak": 5,
+     "kaydir_px": 951
+    },
+    {
+     "sira": 31,
+     "x_px": 1024,
+     "boy_px": 768,
+     "kaynak": 2,
+     "kaydir_px": 524
+    },
+    {
+     "sira": 31,
+     "x_px": 1792,
+     "boy_px": 1024,
+     "kaynak": 6,
+     "kaydir_px": 1020
+    },
+    {
+     "sira": 31,
+     "x_px": 2816,
+     "boy_px": 512,
+     "kaynak": 4,
+     "kaydir_px": 416
+    },
+    {
+     "sira": 31,
+     "x_px": 3328,
+     "boy_px": 768,
+     "kaynak": 4,
+     "kaydir_px": 746
+    }
+   ]
+  },
+  "kutular": [
+   {
+    "min": [
+     -100,
+     -100,
+     9.4
+    ],
+    "max": [
+     100,
+     100,
+     9.6
     ]
    }
   ]

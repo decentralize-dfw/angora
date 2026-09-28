@@ -96,3 +96,30 @@ Mevcut haliyle kapatıldı. Çözülmeyenler ve Adım 04 ilk işleri: [notlar.md
 - [Fark listesi ve renk tablosu](../notlar.md)
 
 **KALDI:** Parke yakın plan/tekrar testi geçmedi; damar ayrıntısı yumuşak, ortak dikey derz seçiliyor; ΔE76 13.93–17.84. Küpeşte ΔE76 8.91. Korunan üst wenge/karo pozlama farkı; bodrum beyaz kenarı; eşik ışık çizgileri; kartonpiyer ince birleşimleri; Foto40 kamera/kapı açısı. Ayrıntılar notlar.md içinde.
+
+## 06 · Adım 06 · parke yakın kalite + küpeşte + kalanlar
+![Adım 06 · parke yakın kalite + küpeşte + kalanlar foto 04](06_adim-06-parke-yakin-kalite-kupeste-kalan_foto_04.jpg)
+![Adım 06 · parke yakın kalite + küpeşte + kalanlar foto 13](06_adim-06-parke-yakin-kalite-kupeste-kalan_foto_13.jpg)
+![Adım 06 · parke yakın kalite + küpeşte + kalanlar foto 15](06_adim-06-parke-yakin-kalite-kupeste-kalan_foto_15.jpg)
+![Adım 06 · parke yakın kalite + küpeşte + kalanlar foto 17](06_adim-06-parke-yakin-kalite-kupeste-kalan_foto_17.jpg)
+![Adım 06 · parke yakın kalite + küpeşte + kalanlar foto 18](06_adim-06-parke-yakin-kalite-kupeste-kalan_foto_18.jpg)
+![Adım 06 · parke yakın kalite + küpeşte + kalanlar foto 19](06_adim-06-parke-yakin-kalite-kupeste-kalan_foto_19.jpg)
+![Adım 06 · parke yakın kalite + küpeşte + kalanlar foto 21](06_adim-06-parke-yakin-kalite-kupeste-kalan_foto_21.jpg)
+![Adım 06 · parke yakın kalite + küpeşte + kalanlar foto 29](06_adim-06-parke-yakin-kalite-kupeste-kalan_foto_29.jpg)
+![Adım 06 · parke yakın kalite + küpeşte + kalanlar foto 34](06_adim-06-parke-yakin-kalite-kupeste-kalan_foto_34.jpg)
+![Adım 06 · parke yakın kalite + küpeşte + kalanlar foto 40](06_adim-06-parke-yakin-kalite-kupeste-kalan_foto_40.jpg)
+![Adım 06 · parke yakın kalite + küpeşte + kalanlar foto 42](06_adim-06-parke-yakin-kalite-kupeste-kalan_foto_42.jpg)
+![Adım 06 · parke yakın kalite + küpeşte + kalanlar foto 44](06_adim-06-parke-yakin-kalite-kupeste-kalan_foto_44.jpg)
+![Adım 06 · parke yakın kalite + küpeşte + kalanlar foto 47](06_adim-06-parke-yakin-kalite-kupeste-kalan_foto_47.jpg)
+
+### Adım 06 yakın/tekrar kontrolleri
+
+- [yakin_parke.jpg](../adim06/yakin_parke.jpg)
+- [parke_2x2.jpg](../adim06/parke_2x2.jpg)
+- [parke_kaydir.jpg](../adim06/parke_kaydir.jpg)
+- [yakin_merdiven.jpg](../adim06/yakin_merdiven.jpg)
+- [yakin_kupeste.jpg](../adim06/yakin_kupeste.jpg)
+
+Küpeşte ΔE76 **2.04**. 44 fotoğraf tahta rengi + 4K ceviz damarı; bağımsız kaydırmalı 409 tahta. Fotoğraf/render yakın parke aynı zemin izdüşümünde.
+
+**KALDI / Adım07:** Yakın zemindeki atlas dışı çapraz koyu çizgi; basamak damar kontrastı ve UV sarım eki; bazı eşik taşmaları/ışık çizgileri; kartonpiyer ince birleşimleri; Foto40 tam kamera/kapı açısı ve üstten kesilen plafonyer. [Ayrıntılı fark listesi ve ölçümler](../notlar.md).
