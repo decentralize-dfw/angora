@@ -32,7 +32,8 @@ def shoot(page, camera, hour, lightmaps):
     page.goto(url, wait_until='domcontentloaded')
     page.wait_for_function('() => document.querySelector("#viewport")?.dataset.qaReport', timeout=300000, polling=1000)
     page.evaluate('() => window.__angoraLightmaps ? window.__angoraLightmaps.ready : true')
-    page.evaluate('() => window.__angoraQA && window.__angoraQA.applyCamera(new URLSearchParams(location.search).get("camera"))')
+    # site açılınca adresi sadeleştirir (?camera kaybolur) - kamerayı buradan ver
+    page.evaluate('id => window.__angoraQA.applyCamera(id)', camera)
     page.wait_for_timeout(2500)
     png = os.path.join(OUT, f'_{camera}_{hour}_{lightmaps}.png')
     page.screenshot(path=png)
