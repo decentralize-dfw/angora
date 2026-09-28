@@ -6,7 +6,7 @@ Web modellerinde malzemeler çift yüzlü çizildiği için bazı yüzlerin norm
 duvarın içine baktığı halde görüntüde fark edilmiyordu (28.09 ölçümü: iç
 duvarların ~480 m²'si). Cycles ise pişirmeyi yalnız normal tarafında yapar;
 bu yüzler kara çıkar. Burada her pişen üçgen için:
-  - ön taraf (normal yönü): 30 cm içinde MİMARİ bir yüzeye çarpıyor
+  - ön taraf (normal yönü): 60 cm içinde MİMARİ bir yüzeye çarpıyor
     (mobilya sayılmaz - halının altındaki döşeme ters çevrilmesin)
   - arka taraf: 1 m boyunca boş (oda)
 koşulları, 5 ışından çoğunda sağlanıyorsa üçgen "ters" sayılır.
@@ -86,7 +86,7 @@ for key, name, world, idx in targets:
         if area[i] < 1e-5: continue
         c = tri[i].mean(axis=0); n = fn[i] / (2 * area[i])
         front = cone(n)
-        if hits(arch, c, front, 0.30) < 3: continue           # önü açık: doğru yönde
+        if hits(arch, c, front, 0.60) < 3: continue           # önü açık: doğru yönde (60 cm: 40 cm kalın ters istinat duvarı)
         if hits(full, c, [-d for d in front], 1.0) > 1: continue   # arkası da kapalı: gizli yüz
         flips.append(i)
     flipped_area = float(area[flips].sum()) if flips else 0.0

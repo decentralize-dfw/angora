@@ -27,10 +27,18 @@ export const LIGHTMAP_MODELS = Object.freeze({
 });
 
 const HOURS = [9, 13, 17];
-// Kazançlar: gök 1 = eski ortam ışığının açık yüzeydeki payı (hemisphere +
-// IBL difüz, öğlen ~0.45·albedo); güneş sekmesi canlı güneş şiddetiyle aynı
-// birimde; gece armatürlerin pişmiş watt'ı pozlamaya göre.
-export const LIGHTMAP_GAINS = {sky: 0.62, sun: 1.0, night: 0.55};
+// Kazançlar (Tur 6 çekimleriyle ayarlandı, 28.09):
+//   sky      gök 1 = eski ortam ışığının açık yüzeydeki payı (hemisphere +
+//            IBL difüz, öğlen ~0.6·albedo)
+//   sun      pişmiş güneş şiddet 1 W/m², gök parlaklığı 1: gerçekte güneş
+//            ışınımı gök parlaklığının ~20 katı -> sekme payı gökle aynı birimde
+//   night    armatürlerin pişmiş watt'ı pozlamaya göre
+//   interior iç atlaslarda (duvar, zemin) gök+güneş: iç mekân gerçekte dış
+//            cepheden 20-50 kat karanlık; fotoğrafçının pozlamayı iç mekâna
+//            açması gibi (göz uyumu) ~3 durak. Kırmızı parke sekmesi duvarı
+//            çamur kahveye boyamasın diye renk %35 griye çekilir.
+export const LIGHTMAP_GAINS = {sky: 0.62, sun: 12, night: 0.55, interior: 8, interiorDesat: 0.35};
+const INTERIOR_ATLASES = new Set(['duvar', 'zemin']);
 
 export function sunPair(hour) {
   if (hour <= HOURS[0]) return {a: '09', b: '09', t: 0};
@@ -48,8 +56,10 @@ const LIGHTMAP_FRAGMENT = THREE.ShaderChunk.lights_fragment_maps
 		vec3 lmSunBT = texture2D( lmSunB, vLightMapUv ).rgb;
 		vec3 lmNightT = texture2D( lmNight, vLightMapUv ).rgb;
 		vec3 lmSky = lmSkyT * lmSkyT * lmSkyScale;
-		vec3 lmBaked = mix( lmSunAT * lmSunAT * lmSunAScale, lmSunBT * lmSunBT * lmSunBScale, lmSunMix )
-			+ lmNightT * lmNightT * lmNightScale;
+		vec3 lmSun = mix( lmSunAT * lmSunAT * lmSunAScale, lmSunBT * lmSunBT * lmSunBScale, lmSunMix );
+		float lmSkyL = dot( lmSky, vec3( 0.2126, 0.7152, 0.0722 ) ), lmSunL = dot( lmSun, vec3( 0.2126, 0.7152, 0.0722 ) );
+		lmSky = mix( lmSky, vec3( lmSkyL ), lmDesat );
+		vec3 lmBaked = mix( lmSun, vec3( lmSunL ), lmDesat ) + lmNightT * lmNightT * lmNightScale;
 		irradiance = mix( irradiance, lmSky * PI, lmSkyStrength ) + lmBaked * PI * lmOn;`)
   .replace('iblIrradiance += getIBLIrradiance( geometryNormal );',
     'iblIrradiance += getIBLIrradiance( geometryNormal ) * ( 1.0 - lmSkyStrength );');
@@ -72,7 +82,8 @@ export function createVillaLightmaps({renderer, root}) {
       lmSunA: {value: placeholder}, lmSunB: {value: placeholder}, lmNight: {value: placeholder},
       lmSkyScale: {value: new THREE.Color(0, 0, 0)}, lmSunAScale: {value: new THREE.Color(0, 0, 0)},
       lmSunBScale: {value: new THREE.Color(0, 0, 0)}, lmNightScale: {value: new THREE.Color(0, 0, 0)},
-    }, materials: new Set()});
+      lmDesat: {value: INTERIOR_ATLASES.has(name) ? LIGHTMAP_GAINS.interiorDesat : 0},
+    }, materials: new Set(), interior: INTERIOR_ATLASES.has(name)});
   }
   const state = {hour: 13, daylight: 1, sun: new THREE.Color(1, 1, 1), sunIntensity: 3, sky: new THREE.Color(1, 1, 1),
     night: 0, skyStrength: 1};
@@ -101,8 +112,10 @@ export function createVillaLightmaps({renderer, root}) {
         u.lmSunB.value = atlas.textures['gunes_' + pair.b];
         u.lmNight.value = atlas.textures.gece;
       }
-      u.lmSkyScale.value.copy(state.sky).multiplyScalar(maps.gok.olcek * LIGHTMAP_GAINS.sky * state.daylight);
-      const sun = LIGHTMAP_GAINS.sun * state.sunIntensity / Math.PI;
+      const adapt = atlas.interior ? LIGHTMAP_GAINS.interior : 1;
+      u.lmSkyScale.value.copy(state.sky).multiplyScalar(maps.gok.olcek * LIGHTMAP_GAINS.sky * state.daylight * adapt);
+      // canlı güneş şiddeti ~3 öğlen: sekme payı onunla ölçeklenir
+      const sun = LIGHTMAP_GAINS.sky * LIGHTMAP_GAINS.sun * (state.sunIntensity / 3) * adapt;
       u.lmSunAScale.value.copy(state.sun).multiplyScalar(maps['gunes_' + pair.a].olcek * sun);
       u.lmSunBScale.value.copy(state.sun).multiplyScalar(maps['gunes_' + pair.b].olcek * sun);
       u.lmNightScale.value.setRGB(1, 1, 1).multiplyScalar(maps.gece.olcek * LIGHTMAP_GAINS.night * state.night);
@@ -160,7 +173,7 @@ export function createVillaLightmaps({renderer, root}) {
             .replace('#include <lightmap_pars_fragment>', `#include <lightmap_pars_fragment>
 uniform sampler2D lmSunA, lmSunB, lmNight;
 uniform vec3 lmSkyScale, lmSunAScale, lmSunBScale, lmNightScale;
-uniform float lmSkyStrength, lmOn, lmSunMix;`)
+uniform float lmSkyStrength, lmOn, lmSunMix, lmDesat;`)
             .replace('#include <lights_fragment_maps>', LIGHTMAP_FRAGMENT)
             // armatürlerin ışığı gece haritasında: canlı spot/point bu yüzeye bir daha düşmesin
             .replaceAll('NUM_SPOT_LIGHTS', '0').replaceAll('NUM_POINT_LIGHTS', '0');
