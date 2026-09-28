@@ -628,6 +628,25 @@ function applyWalkLocation(name,station){
   } else $('#walk-room-area').textContent='';
   invalidate();
 }
+// QA (?stats=1): bir ilan fotoğrafının çekildiği yerden bak - fotoğraf ile
+// model aynı açıdan yan yana karşılaştırılsın diye (tools/blender/05_foto_eslesme.py).
+// Yalnız iç mekân kareleri: kamera yürüme yüzeyinde, fotoğrafın göz
+// yüksekliğinde ve bakış yönünde; lens dikey açı (derece).
+async function qaPhotoView(id,fov=58){
+  const {PHOTO_POINTS}=await import('./photo-points.js');
+  const point=PHOTO_POINTS.find(p=>p.id===Number(id));
+  if(!point||point.outdoor)throw Error('İç mekân fotoğrafı değil: '+id);
+  const floor=point.floor;
+  if(nativeDelivery&&selected!=='f'+floor){await nativeDelivery.activate('f'+floor);setFurnitureVisible(furnitureVisible);selected='f'+floor;}
+  const target=new THREE.Vector3(point.x,0,point.z);
+  const station=walk.surface.data.stations.filter(s=>s.floor_index===floor)
+    .reduce((a,b)=>new THREE.Vector3(...a.position).setY(0).distanceToSquared(target)<new THREE.Vector3(...b.position).setY(0).distanceToSquared(target)?a:b);
+  enterWalk(station.room_id);
+  walk.placeAt([point.x,point.y,point.z]);
+  walk.yaw=Math.atan2(-point.dx,-point.dz);walk.pitch=0;walk.setLens(fov);walk.pose();
+  invalidate();
+  return {id:point.id,file:point.file,room:station.room_id,floor};
+}
 async function travelRoom(roomId){
   pendingRoomJump.cancel();
   const destination=walk?.surface.data.stations.find(s=>s.room_id===roomId);
@@ -2573,7 +2592,7 @@ if(qaQuery.get('stats')==='1'||qaQuery.get('camera')){
       lighting:()=>lighting,walk:()=>walk,
       quality:()=>quality,
       selected:()=>selected,
-      enterWalk,exitWalk,invalidate,
+      enterWalk,exitWalk,invalidate,photoView:qaPhotoView,
       deliveryProfile,
       setPlan(on){
         if(planMode===on)return;

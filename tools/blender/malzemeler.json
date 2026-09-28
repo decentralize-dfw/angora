@@ -1,0 +1,1436 @@
+{
+ "aciklama": "Web modellerindeki malzemelerin ŞU ANKİ değerleri. renk: baseColorFactor (doku varsa onunla çarpılır). pürüzlülük 0 ayna - 1 mat.",
+ "dosyalar": {
+  "BUILDING-opt-v4": {
+   "Lift brushed patterned stainless": {
+    "ucgen": 1320,
+    "renk": [
+     0.485,
+     0.509,
+     0.533,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 0.22,
+    "metallik": 0.996,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "Simple White Wall": {
+    "ucgen": 6003,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 1,
+    "metallik": 0,
+    "purluluk_dokusu": true,
+    "normal_dokusu": true,
+    "normal_siddeti": 1.5,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "Stone gravel": {
+    "ucgen": 112,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 1,
+    "metallik": 0,
+    "purluluk_dokusu": true,
+    "normal_dokusu": true,
+    "normal_siddeti": 1,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "ceiling.001": {
+    "ucgen": 2397,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 1,
+    "metallik": 1,
+    "purluluk_dokusu": true,
+    "normal_dokusu": true,
+    "normal_siddeti": 1,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "wood_floor": {
+    "ucgen": 84,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.255,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": 0.063,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "Stucco painted wall": {
+    "ucgen": 2384,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 1,
+    "metallik": 0,
+    "purluluk_dokusu": true,
+    "normal_dokusu": true,
+    "normal_siddeti": 1,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": null,
+    "gecirgenlik": null
+   },
+   "WOODY-DARK": {
+    "ucgen": 178678,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 1,
+    "metallik": 0,
+    "purluluk_dokusu": true,
+    "normal_dokusu": true,
+    "normal_siddeti": 0.8,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": 0.1,
+    "specular": null,
+    "gecirgenlik": null
+   },
+   "glass": {
+    "ucgen": 2357,
+    "renk": [
+     0.61,
+     0.723,
+     0.723,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 0.078,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": 1
+   },
+   "WHT.001": {
+    "ucgen": 7640,
+    "renk": [
+     0.863,
+     0.855,
+     0.784,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 0.596,
+    "metallik": 0.012,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": null,
+    "gecirgenlik": null
+   },
+   "metal.001": {
+    "ucgen": 406047,
+    "renk": [
+     0.021,
+     0.023,
+     0.025,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 0.341,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "Clay tile.001": {
+    "ucgen": 46980,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 1,
+    "metallik": 1,
+    "purluluk_dokusu": true,
+    "normal_dokusu": true,
+    "normal_siddeti": 1,
+    "ao_dokusu": true,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": null,
+    "gecirgenlik": null
+   },
+   "roof-7": {
+    "ucgen": 695,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.745,
+    "metallik": 0.004,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "terra_floor": {
+    "ucgen": 2195,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.4,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": true,
+    "normal_siddeti": 0.3,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "WOOD-FL": {
+    "ucgen": 2248,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.255,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": true,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": 0.063,
+    "specular": null,
+    "gecirgenlik": null
+   },
+   "stone_tile": {
+    "ucgen": 4707,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.745,
+    "metallik": 0.004,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": true,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "R31 | R33 entrance WC ochre tile": {
+    "ucgen": 96,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.33,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "R31 | R33 master pale cream tile": {
+    "ucgen": 55,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.33,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "RR": {
+    "ucgen": 157,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.37,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "R31 | R33 entrance navy mosaic band": {
+    "ucgen": 54,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.33,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "R31 | R33 ivory wall ceramic": {
+    "ucgen": 172,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.33,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "R31 | R33 master fine mosaic band": {
+    "ucgen": 22,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.33,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "R31 | R33 attic cream tile": {
+    "ucgen": 60,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.33,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "R31 | R33 attic tan mosaic band": {
+    "ucgen": 46,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.33,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "Simple wood": {
+    "ucgen": 2287,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 1,
+    "metallik": 0,
+    "purluluk_dokusu": true,
+    "normal_dokusu": true,
+    "normal_siddeti": 1,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": null,
+    "gecirgenlik": null
+   }
+  },
+  "INTERIOR-opt-v2": {
+   "BLCK": {
+    "ucgen": 10628,
+    "renk": [
+     0.012,
+     0.014,
+     0.015,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 0.32,
+    "metallik": 0.65,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "bulb_warm": {
+    "ucgen": 13039,
+    "renk": [
+     1,
+     0.863,
+     0.591,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 0.239,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     1,
+     0.887,
+     0.641
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "FINISH | Silver mirror": {
+    "ucgen": 614,
+    "renk": [
+     0.92,
+     0.92,
+     0.92,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 0.025,
+    "metallik": 1,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": null,
+    "gecirgenlik": null
+   },
+   "cabinet_glass": {
+    "ucgen": 3450,
+    "renk": [
+     0.88,
+     0.88,
+     0.88,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 0.043,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": 1
+   },
+   "Lift | Photographed rose glass 80 percent": {
+    "ucgen": 6,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.55,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "BLEND",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "brass (4)": {
+    "ucgen": 34816,
+    "renk": [
+     0.332,
+     0.191,
+     0.06,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 0.35,
+    "metallik": 0.76,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "R31 | R35 shelving grey steel": {
+    "ucgen": 1168,
+    "renk": [
+     0.356,
+     0.386,
+     0.376,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 0.4,
+    "metallik": 0.55,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "R31 | R35 garage galvanized steel": {
+    "ucgen": 11737,
+    "renk": [
+     0.301,
+     0.337,
+     0.337,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 0.34,
+    "metallik": 0.9,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "R31 | Hall ochre woven upholstery": {
+    "ucgen": 11309,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.86,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": true,
+    "normal_siddeti": 0.3,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "X": {
+    "ucgen": 16353,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.63,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "ROUGHNSS1": {
+    "ucgen": 67724,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.9,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "R31 | Warm white porcelain": {
+    "ucgen": 8067,
+    "renk": [
+     0.839,
+     0.847,
+     0.791,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 0.147,
+    "metallik": 0.218,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "WHT": {
+    "ucgen": 24960,
+    "renk": [
+     0.863,
+     0.863,
+     0.863,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 0.596,
+    "metallik": 0.012,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": null,
+    "gecirgenlik": null
+   },
+   "R31 | R33 antique nook walnut": {
+    "ucgen": 112425,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.32,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "wood_honey": {
+    "ucgen": 64347,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.373,
+    "metallik": 0.008,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": 0.04,
+    "specular": null,
+    "gecirgenlik": null
+   },
+   "C02 | Original red framed artwork": {
+    "ucgen": 12,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.85,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "Master quilt â€” photo projection": {
+    "ucgen": 2256,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.82,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "Room finish | Original bedroom line artwork": {
+    "ucgen": 12,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.85,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "Room pass | Original damask curtain photograph": {
+    "ucgen": 1984,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.95,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "Room pass | Original hall picture atlas": {
+    "ucgen": 84,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.6,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "Salon artwork â€” photographed detail": {
+    "ucgen": 2,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 0.82,
+    "metallik": 0,
+    "purluluk_dokusu": false,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   }
+  },
+  "GARDEN-opt-v2": {
+   "Grass Ground Meadow PBR Scan": {
+    "ucgen": 6498,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 1,
+    "metallik": 0,
+    "purluluk_dokusu": true,
+    "normal_dokusu": true,
+    "normal_siddeti": 1,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": null,
+    "gecirgenlik": null
+   },
+   "chrome (5)": {
+    "ucgen": 196,
+    "renk": [
+     0.423,
+     0.456,
+     0.468,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 1,
+    "metallik": 1,
+    "purluluk_dokusu": true,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "Old dusty roof": {
+    "ucgen": 42,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 1,
+    "metallik": 0,
+    "purluluk_dokusu": true,
+    "normal_dokusu": true,
+    "normal_siddeti": 1,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": null,
+    "gecirgenlik": null
+   },
+   "pool_tile": {
+    "ucgen": 444,
+    "renk": [
+     0.13,
+     0.418,
+     0.479,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 1,
+    "metallik": 1,
+    "purluluk_dokusu": true,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "wood_dark (3)": {
+    "ucgen": 88,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 1,
+    "metallik": 1,
+    "purluluk_dokusu": true,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": 0.04,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "stone_tile_wall": {
+    "ucgen": 1139,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 1,
+    "metallik": 0,
+    "purluluk_dokusu": true,
+    "normal_dokusu": true,
+    "normal_siddeti": 1,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": null,
+    "gecirgenlik": null
+   },
+   "Matte Porcelain Tile Beige.001": {
+    "ucgen": 86,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 1,
+    "metallik": 0,
+    "purluluk_dokusu": true,
+    "normal_dokusu": true,
+    "normal_siddeti": 1,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": null,
+    "gecirgenlik": null
+   },
+   "white_trim (5)": {
+    "ucgen": 972,
+    "renk": [
+     0.871,
+     0.855,
+     0.799,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 1,
+    "metallik": 1,
+    "purluluk_dokusu": true,
+    "normal_dokusu": false,
+    "normal_siddeti": null,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   },
+   "water": {
+    "ucgen": 12,
+    "renk": [
+     0.127,
+     0.468,
+     0.565,
+     1
+    ],
+    "renk_dokusu": false,
+    "purluluk": 1,
+    "metallik": 1,
+    "purluluk_dokusu": true,
+    "normal_dokusu": true,
+    "normal_siddeti": 0.3,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": 1
+   },
+   "TREE-1": {
+    "ucgen": 6140,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 1,
+    "metallik": 1,
+    "purluluk_dokusu": true,
+    "normal_dokusu": true,
+    "normal_siddeti": 1,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": null,
+    "gecirgenlik": null
+   },
+   "TREE-2": {
+    "ucgen": 340187,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 1,
+    "metallik": 1,
+    "purluluk_dokusu": true,
+    "normal_dokusu": true,
+    "normal_siddeti": 1,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": null,
+    "gecirgenlik": null
+   },
+   "Retaining wall rough limestone.001": {
+    "ucgen": 117,
+    "renk": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "renk_dokusu": true,
+    "purluluk": 1,
+    "metallik": 1,
+    "purluluk_dokusu": true,
+    "normal_dokusu": true,
+    "normal_siddeti": 0.3,
+    "ao_dokusu": false,
+    "isik_yayma": [
+     0,
+     0,
+     0
+    ],
+    "alfa": "OPAQUE",
+    "clearcoat": null,
+    "specular": 1,
+    "gecirgenlik": null
+   }
+  }
+ }
+}

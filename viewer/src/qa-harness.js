@@ -346,6 +346,15 @@ export function installQaHarness({host, query, hooks}) {
       calls: renderer.info.render.calls, triangles: renderer.info.render.triangles,
       geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures};
   }
-  window.__angoraQA = {applyCamera, snapshot, measure, debugShadow, nightProbe, nightScene, stats, scene: () => hooks.scene?.(), invalidate: () => hooks.invalidate(), get report() { return JSON.parse(host.dataset.qaReport ?? 'null'); }};
+  // İlan fotoğrafının kamerası (main.js qaPhotoView); hazır olunca kare oturur
+  async function photoView(id, fov) {
+    await waitForReady();
+    const info = await hooks.photoView(id, fov);
+    hooks.lighting()?.update?.(performance.now() + 60000);
+    hooks.invalidate();
+    await nextFrames(10);
+    return info;
+  }
+  window.__angoraQA = {applyCamera, photoView, snapshot, measure, debugShadow, nightProbe, nightScene, stats, scene: () => hooks.scene?.(), invalidate: () => hooks.invalidate(), get report() { return JSON.parse(host.dataset.qaReport ?? 'null'); }};
   return window.__angoraQA;
 }
