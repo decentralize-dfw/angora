@@ -938,3 +938,13 @@ YAPILDI: foto47 için eski beyaz rıht yüzleri hem mimari hem mobilya katmanın
 01,02,11,16,18,21,29,32,34,40,42,47 için SON kontrolü ve yakın korkuluk DWG | FOTO | SONRA üretildi. Yeni mobilya modellenmedi. Eski kapsam dışı kamera/aksesuar farkları bu A tesliminin çözüldü iddiasına dahil değildir.
 
 KALDI / son göz kontrolü: foto47 sol üstteki ince tavan birleşim açıklığı, 34 kapı altı ışık çizgileri ve foto32 bordür motifi; A kapsamındaki ana beyaz rıht ve sağ duvar düzeltmesi son karede doğrulandı.
+
+## Adım 09 B — Web teslimi
+
+YAPILDI: BUILDING-opt-v6-alt.glb + BUILDING-opt-v6-ust.glb ve INTERIOR-opt-v3.glb. BUILDING 100MB üzeri olduğundan iki parçaya ayrıldı; ayrı commitlerle gönderilir. Yeni mimari EKLER birleştirildi, silme kutuları uygulandı, eski mobilyalar korunur.
+YAPILDI: 2048px JPG/PNG dokular, gerçek metre bazlı UV, normal/roughness renk uzayı, G roughness/B metal paketleme, kat extras, özgün kaynak adları, ışıkların ayrı JSON teslimi.
+YAPILDI: üç dosyanın gltf-validator sonucu 0 hata / 0 uyarı. 31 dokunulmayan kaynak grup sınır kontrolü ve 1771 geri-yüklenen grup 1mm sınır kontrolü geçti.
+YAPILDI: 01,02,18,21,34 .blend|GLB kontrolü; ortalama mutlak RGB farkı 255 üzerinden yaklaşık0.81–1.71. Foto40 alfa aktarımı ayrıca kontrol edildi.
+YAPILDI: ilk doku dönüşümündeki siyah görüntü sorunu kaynak ham veriyi Pillow ile okuyarak giderildi; hatalı dosyalar teslim edilmedi. Sıfır UV teğetleri normale dik birim teğete düzeltildi.
+KALDI: A bölümündeki nominal DWG ölçeği doğrulaması, 32 bordür motifi, 47 tavan birleşimi, 34 kapı altı çizgileri. GLB bunları kaynak .blend ile aynı taşır.
+Ayrıntı ve görseller: [web/README.md](web/README.md).

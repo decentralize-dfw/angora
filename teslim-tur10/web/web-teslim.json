@@ -1,0 +1,1303 @@
+[
+ {
+  "dosya": "BUILDING-opt-v6-alt.glb",
+  "bayt": 84068408,
+  "sha256": "05541debcabc8688f0738dd464a84587147fe59a73121e252c1b7d5654c0cfc7",
+  "ucgen_sayisi": 482529,
+  "malzeme_listesi": [
+   "EK_A04_Opal_cam",
+   "EK_A04_Siyah_zincir",
+   "EK_A04_Eskitme_pirinc",
+   "EK_M2_Ceviz_basamak",
+   "EK_M3_Krem_karo_esik",
+   "EK_M3_Koyu_ceviz_kapi",
+   "EK_M3_Koyu_ceviz_kapi",
+   "EK_A05_F42_opal_beyaz",
+   "EK_M1_Beyaz_saten_alci",
+   "EK_M3G_Foto40_gul_desenli_cam",
+   "EK_M3G_Pirinc",
+   "EK_M2_Beyaz_merdiven_alti",
+   "EK_M2_Koyu_ceviz_kupeşte",
+   "EK_A09_DWG_Demir",
+   "EK_M1_Sicak_ceviz_supurgelik",
+   "EK_M1_Sicak_ceviz_supurgelik",
+   "EK_M3_Ceviz_gobek",
+   "EK_M3_Pirinc_donanim",
+   "EK_M3_Garaj_siyah_kulp",
+   "EK_M3_Ceviz_gobek",
+   "EK_M6_Kirik_beyaz_emaye",
+   "EK_M6_Krom_vana",
+   "R31 | R33 entrance navy mosaic band",
+   "stone_tile",
+   "ceiling.001",
+   "Clay tile.001",
+   "WHT.001",
+   "WHT.001",
+   "WOODY-DARK",
+   "WOODY-DARK",
+   "glass",
+   "Stone gravel",
+   "Simple White Wall",
+   "Lift brushed patterned stainless",
+   "Simple wood",
+   "Simple wood",
+   "metal.001",
+   "R31 | R33 entrance WC ochre tile",
+   "R31 | R33 ivory wall ceramic",
+   "roof-7",
+   "Stucco painted wall",
+   "terra_floor",
+   "terra_floor",
+   "WOODY-DARK",
+   "WOODY-DARK",
+   "WOODY-DARK",
+   "wood_floor",
+   "WOOD-FL"
+  ],
+  "dokular": [
+   {
+    "ad": "37953903a0e65f",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "931cdd3a3e45f6",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "4a04e269ea66e0",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "52d1d885f0e2bd",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "e843bae5cf1a90",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "23f1563968d5ea",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "5a6a57089b1357",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "f6c1dca0447b61",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "dd91935e3ec5e7",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "f2cfacb56a4601",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "bf580b2880797e",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "7a21d0f67a29a4",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "6729c6ee958cae",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "7c45317a62bfe2",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "c5beda3e70cf2f",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "03c91cc3b7ae31",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "f464353cd2fa5e",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "f4169819458b1d",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "aefde895ee0974",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "aa775269943e0b",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "0e72bca9b33a7b",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "6dcde0a526ae23",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "53d5c9e1877c41",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "bf019dbe0a35ad-c4806d9c01aef3",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "7a32566295d734",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "e3176db0a01ffb",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "095998daaec7cb",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "804be55ff35112",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "5c358f1e3b43e7",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "e753b1f583e23e",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "99fe97fd852cad",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "0a2f5f3b559ccf",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "c2c51165316472",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "a6d0429c0dfa67",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "be6644102537fe",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "a0f534adb40ca0",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "ab48cf81a1b807",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "053eb3ea5ee827",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "15e8a7fd1cca55",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "3a1529d57284dd",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "281d925b9c255e",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "9f16fdee176f07",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "c775f8c2d6fdae",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "515fdea810ffb8",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "ed22361a561c85",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "88c8b2c82fc9c0",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "1fa14f386ce0c3",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "dfab85f3599373",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "857a50ac4da2ec",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "14af4e9b4c80cb",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   }
+  ],
+  "duzeltilen_sifir_teget": 0,
+  "kat_eksik": [],
+  "isik_uzantisi": false
+ },
+ {
+  "dosya": "BUILDING-opt-v6-ust.glb",
+  "bayt": 82710772,
+  "sha256": "75e49ddb540a9941b624ab1fe66261f888e9aedae1e5ffd91ef9df8629479f99",
+  "ucgen_sayisi": 513723,
+  "malzeme_listesi": [
+   "EK_A04_Siyah_zincir",
+   "EK_A04_Opal_cam",
+   "EK_A04_Eskitme_pirinc",
+   "EK_M1_Beyaz_saten_alci",
+   "EK_A04_Opal_cam.001",
+   "EK_A04_Opal_cam.002",
+   "EK_M2_Ceviz_basamak",
+   "EK_M3_Koyu_ceviz_kapi",
+   "EK_A08_Ceviz",
+   "EK_A08_Ayna",
+   "EK_A08_Siyah_spot",
+   "EK_A08_Sicak_opal",
+   "EK_A09_Banyo_bordur",
+   "EK_M2_Koyu_ceviz_kupeşte",
+   "EK_A09_DWG_Demir",
+   "EK_M1_Sicak_ceviz_supurgelik",
+   "EK_M2_Beyaz_merdiven_alti",
+   "EK_M3_Ceviz_gobek",
+   "EK_M3_Saten_paslanmaz_kulp",
+   "EK_M3_Pirinc_donanim",
+   "EK_M3_Garaj_siyah_kulp",
+   "EK_SimpleWhiteWall",
+   "R31 | R33 attic tan mosaic band",
+   "R31 | R33 master fine mosaic band",
+   "R31 | R33 master pale cream tile",
+   "RR",
+   "RR",
+   "ceiling.001",
+   "Clay tile.001",
+   "WHT.001",
+   "WOODY-DARK",
+   "WOODY-DARK",
+   "glass",
+   "Stone gravel",
+   "Simple White Wall",
+   "Lift brushed patterned stainless",
+   "Simple wood",
+   "metal.001",
+   "R31 | R33 attic cream tile",
+   "R31 | R33 ivory wall ceramic",
+   "roof-7",
+   "Stucco painted wall",
+   "WOODY-DARK",
+   "WOODY-DARK",
+   "wood_floor",
+   "wood_floor",
+   "WOOD-FL",
+   "WOOD-FL"
+  ],
+  "dokular": [
+   {
+    "ad": "6729c6ee958cae",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "7c45317a62bfe2",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "37953903a0e65f",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "931cdd3a3e45f6",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "4a04e269ea66e0",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "f2cfacb56a4601",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "bf580b2880797e",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "7a21d0f67a29a4",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "5a6a57089b1357",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "f6c1dca0447b61",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "dd91935e3ec5e7",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "712b0b66534031",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "03c91cc3b7ae31",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "f464353cd2fa5e",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "7be0a716f1d411",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "c8cb302607fbd8",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "e3176db0a01ffb",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "095998daaec7cb",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "804be55ff35112",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "053eb3ea5ee827",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "15e8a7fd1cca55",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "3a1529d57284dd",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "c791da31e90805",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "a606fff16c2f94",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "53d5c9e1877c41",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "bf019dbe0a35ad-c4806d9c01aef3",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "7a32566295d734",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "ed22361a561c85",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "88c8b2c82fc9c0",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "1fa14f386ce0c3",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "5c358f1e3b43e7",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "e753b1f583e23e",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "99fe97fd852cad",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "0a2f5f3b559ccf",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "c2c51165316472",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "a6d0429c0dfa67",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "be6644102537fe",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "281d925b9c255e",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "dfab85f3599373",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "857a50ac4da2ec",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "14af4e9b4c80cb",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   }
+  ],
+  "duzeltilen_sifir_teget": 0,
+  "kat_eksik": [],
+  "isik_uzantisi": false
+ },
+ {
+  "dosya": "INTERIOR-opt-v3.glb",
+  "bayt": 54238628,
+  "sha256": "3dda3fd30fcad879301216d9a543dd9b04cdc57373ca667fc4263f7e218e5a2e",
+  "ucgen_sayisi": 336584,
+  "malzeme_listesi": [
+   "BLCK",
+   "bulb_warm",
+   "C02 | Original red framed artwork",
+   "FINISH | Silver mirror",
+   "cabinet_glass",
+   "Lift | Photographed rose glass 80 percent",
+   "Master quilt â€” photo projection",
+   "brass (4)",
+   "R31 | R35 shelving grey steel",
+   "R31 | R35 garage galvanized steel",
+   "R31 | Hall ochre woven upholstery",
+   "Room finish | Original bedroom line artwork",
+   "Room pass | Original damask curtain photograph",
+   "Room pass | Original hall picture atlas",
+   "X",
+   "X",
+   "X",
+   "X",
+   "ROUGHNSS1",
+   "Salon artwork â€” photographed detail",
+   "R31 | Warm white porcelain",
+   "WHT",
+   "R31 | R33 antique nook walnut",
+   "R31 | R33 antique nook walnut",
+   "R31 | R33 antique nook walnut",
+   "R31 | R33 antique nook walnut",
+   "wood_honey",
+   "wood_honey",
+   "wood_honey",
+   "wood_honey",
+   "wood_honey",
+   "wood_honey"
+  ],
+  "dokular": [
+   {
+    "ad": "cfec90f6923e1c",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "8a0a676e0e01e1",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "b95fe463e45e6d",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "6e105629ce6251",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "ba231e4ab47d12",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "21ef9814da8557",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "30bac2098f658e",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "732adc5da45783",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "8b7fbd6a3d7def",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "0ab721afc74f5b",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "cfbf1dbfde26f4",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "787393bffbb623",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "fc22192b74456d",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "e97626909c7951",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "e48b395c1a84f8",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "36159d41e81a28",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "596c6807a897f6",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "e0b95be8bce4b3",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "96a53ed7593d42",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "863ef95898f5c2",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "e79d5e5a1bd482",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "43c23f6e62b260",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "b639d54721f9f9",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "efdd7f03e55351",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "88db0267f608ea",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "9a0e54e736af87",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "e5eb23b184cf86",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "434ed331380293",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "920f40edcdb9f0",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "5a6a57089b1357",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "f6c1dca0447b61",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "dd91935e3ec5e7",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "f0c313a0c92dda",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "8a70f1cbbd0649",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "8bc01a011fe915",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   }
+  ],
+  "duzeltilen_sifir_teget": 0,
+  "kat_eksik": [],
+  "isik_uzantisi": false
+ }
+]

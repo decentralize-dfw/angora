@@ -1,0 +1,1434 @@
+{
+ "uri": "BUILDING-opt-v6-alt.glb",
+ "mimeType": "model/gltf-binary",
+ "validatorVersion": "2.0.0-dev.3.10",
+ "validatedAt": "2026-09-28T22:35:11.293Z",
+ "issues": {
+  "numErrors": 0,
+  "numWarnings": 0,
+  "numInfos": 130,
+  "numHints": 0,
+  "messages": [
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/54/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/62/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/71/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/80/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/81/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/83/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/83/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/84/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/84/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/85/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/85/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/86/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/86/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/87/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/87/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/93/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/93/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/94/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/94/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/95/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/95/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/96/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/96/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/103/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/103/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/104/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/104/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/105/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/105/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/106/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/106/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/113/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/113/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/114/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/114/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/115/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/115/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/116/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/116/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/265/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/284/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/295/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/306/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/326/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/337/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/390/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/390/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/391/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/391/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/469/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/469/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/470/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/470/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/563/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/563/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/564/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/564/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/693/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/693/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/694/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/694/primitives/0/attributes/TEXCOORD_2"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/695/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/695/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/695/primitives/0/attributes/TEXCOORD_2"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/696/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/696/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/696/primitives/0/attributes/TEXCOORD_2"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/699/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/699/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/699/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/699/primitives/1/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/700/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/700/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/700/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/701/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/701/primitives/0/attributes/TEXCOORD_2"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/701/primitives/1/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/701/primitives/1/attributes/TEXCOORD_2"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/704/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/704/primitives/0/attributes/TEXCOORD_2"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/705/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/705/primitives/0/attributes/TEXCOORD_2"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/705/primitives/0/attributes/TEXCOORD_3"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/706/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/706/primitives/0/attributes/TEXCOORD_2"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/706/primitives/0/attributes/TEXCOORD_3"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/709/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/709/primitives/0/attributes/TEXCOORD_2"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/709/primitives/1/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/709/primitives/1/attributes/TEXCOORD_2"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/710/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/710/primitives/0/attributes/TEXCOORD_2"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/711/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/711/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/712/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/712/primitives/0/attributes/TEXCOORD_0"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/713/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/713/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/714/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/714/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/715/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/716/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/716/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/717/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/717/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/718/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/718/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/718/primitives/0/attributes/TEXCOORD_2"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/718/primitives/0/attributes/TEXCOORD_3"
+   },
+   {
+    "code": "UNUSED_MESH_TANGENT",
+    "message": "Tangents are not used because the material has no normal texture.",
+    "severity": 2,
+    "pointer": "/meshes/719/primitives/0/attributes/TANGENT"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/719/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/719/primitives/0/attributes/TEXCOORD_2"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/719/primitives/0/attributes/TEXCOORD_3"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/720/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/720/primitives/1/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/721/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/724/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/725/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/725/primitives/0/attributes/TEXCOORD_2"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/726/primitives/0/attributes/TEXCOORD_1"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/meshes/726/primitives/0/attributes/TEXCOORD_2"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/accessors/211"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/accessors/212"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/accessors/213"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/accessors/214"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/accessors/215"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/accessors/242"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/accessors/243"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/accessors/244"
+   },
+   {
+    "code": "UNUSED_OBJECT",
+    "message": "This object may be unused.",
+    "severity": 2,
+    "pointer": "/accessors/245"
+   }
+  ],
+  "truncated": false
+ },
+ "info": {
+  "version": "2.0",
+  "generator": "Khronos glTF Blender I/O v5.2.40",
+  "extensionsUsed": [
+   "KHR_materials_clearcoat",
+   "KHR_materials_transmission",
+   "KHR_materials_emissive_strength",
+   "KHR_materials_specular",
+   "KHR_materials_ior",
+   "KHR_texture_transform"
+  ],
+  "extensionsRequired": [
+   "KHR_texture_transform"
+  ],
+  "resources": [
+   {
+    "pointer": "/buffers/0",
+    "mimeType": "application/gltf-buffer",
+    "storage": "glb",
+    "byteLength": 83218056
+   },
+   {
+    "pointer": "/images/0",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/1",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/2",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/3",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/4",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/5",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/6",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/7",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/8",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/9",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/10",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/11",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/12",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/13",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/14",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/15",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/16",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/17",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/18",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/19",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/20",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/21",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/22",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/23",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/24",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/25",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/26",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/27",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/28",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/29",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/30",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/31",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/32",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/33",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/34",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/35",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/36",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/37",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/38",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/39",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/40",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/41",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/42",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/43",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/44",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/45",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/46",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/47",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/48",
+    "mimeType": "image/jpeg",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "bits": 8
+    }
+   },
+   {
+    "pointer": "/images/49",
+    "mimeType": "image/png",
+    "storage": "buffer-view",
+    "image": {
+     "width": 2048,
+     "height": 2048,
+     "format": "rgb",
+     "primaries": "srgb",
+     "transfer": "srgb",
+     "bits": 8
+    }
+   }
+  ],
+  "animationCount": 0,
+  "materialCount": 48,
+  "hasMorphTargets": false,
+  "hasSkins": false,
+  "hasTextures": true,
+  "hasDefaultScene": true,
+  "drawCallCount": 735,
+  "totalVertexCount": 568424,
+  "totalTriangleCount": 482529,
+  "maxUVs": 4,
+  "maxInfluences": 0,
+  "maxAttributes": 7
+ }
+}

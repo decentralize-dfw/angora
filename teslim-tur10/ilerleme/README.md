@@ -241,3 +241,21 @@ Küpeşte ΔE76 **2.04**. 44 fotoğraf tahta rengi + 4K ceviz damarı; bağıms�
 [DWG panel DXF](../adim09/cad/KORKULUK-1-orijinal-panel.dxf) · [Katman/blok envanteri](../adim09/cad/envanter.json) · [Ahşap paleti ve notlar](../notlar.md)
 
 KALDI: 2D detayın 1.00×0.80m nominal ölçeği ayrıca saha ölçüsüyle doğrulanmadı; banyo bordürü deseni birebir değil. Foto47 beyaz rıhtlar son kontrolde kaldırıldı.
+
+## 11 · Adım 09 B · Web teslimi
+
+[Dosyalar, SHA256 ve doğrulama raporları](../web/README.md)
+
+Üç GLB: **0 hata / 0 uyarı**. 1mm koordinat kontrolü geçti. BUILDING alt/üst olarak iki parçadır.
+
+![.blend ve GLB 01](../web/web_dogrulama_01.jpg)
+
+![.blend ve GLB 02](../web/web_dogrulama_02.jpg)
+
+![.blend ve GLB 18](../web/web_dogrulama_18.jpg)
+
+![.blend ve GLB 21](../web/web_dogrulama_21.jpg)
+
+![.blend ve GLB 34](../web/web_dogrulama_34.jpg)
+
+KALDI: nominal DWG panel ölçüsünün ayrıca doğrulanması; 32 bordür motifi; 47 tavan birleşimi ve 34 kapı altı ışık çizgileri.
