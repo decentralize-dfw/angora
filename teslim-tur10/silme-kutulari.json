@@ -759,7 +759,16 @@
   "malzemeler": [
    "Simple White Wall"
   ],
-  "not": "Adım04: Simple White Wall BUILDING malzemesidir; katman düzeltildi."
+  "not": "Adım05: yalnız küçük basamak/rıht yüzleri; büyük duvar/tavan ve Y-normal yan yüzler korunur.",
+  "max_face_span": [
+   1.1,
+   1.25,
+   0.22
+  ],
+  "normal_axes": [
+   0,
+   2
+  ]
  },
  {
   "ad": "Tur10_foto29_yerel_duvar",
@@ -825,5 +834,20 @@
    "WOODY-DARK.001"
   ],
   "not": "Foto29 ray ölçümü: dolap WOODY-DARK.001 ile BUILDING içinde; mobilya olduğu için gizlendi."
+ },
+ {
+  "ad": "A05_mutfak_tavan_spotlari",
+  "katman": "mobilya",
+  "min": [
+   -4.5,
+   -3.3,
+   5.5
+  ],
+  "max": [
+   -2.8,
+   -0.5,
+   5.91
+  ],
+  "not": "Foto21 mutfakta olmayan küçük tavan spotları; dolaplar aşağıda korunur."
  }
 ]

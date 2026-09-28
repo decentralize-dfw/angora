@@ -24,6 +24,7 @@ def uygula(objects,spec_path):
    bs.inputs['Coat Weight'].default_value=.01
   def tex(fname,color):
    path=root/rec['klasor']/fname
+   if path.with_suffix('.png').exists():path=path.with_suffix('.png')
    if not path.exists():return None
    node=nt.nodes.new('ShaderNodeTexImage');node.image=bpy.data.images.load(str(path),check_existing=True);node.image.colorspace_settings.name='sRGB' if color else 'Non-Color';return node
   albedo=tex('albedo.jpg',True)

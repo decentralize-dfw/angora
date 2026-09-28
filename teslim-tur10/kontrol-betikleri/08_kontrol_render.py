@@ -83,6 +83,12 @@ if BOXES:
                         clear_inner=False, clear_outer=False)
         def inside(face, b):
             if b.get('malzemeler') and (mats[face.material_index] if face.material_index < len(mats) else '') not in b['malzemeler']: return False
+            if b.get('max_face_span'):
+                coords = [mw @ v.co for v in face.verts]
+                if any(max(v[i] for v in coords)-min(v[i] for v in coords)>b['max_face_span'][i] for i in range(3)): return False
+            if b.get('normal_axes'):
+                n = mw.to_3x3() @ face.normal
+                if max(range(3),key=lambda i:abs(n[i])) not in b['normal_axes']: return False
             c = mw @ face.calc_center_median()
             return all(b['min'][i] <= c[i] <= b['max'][i] for i in range(3))
         gone = [face for face in bm.faces if any(inside(face, b) for b in boxes)]
@@ -102,6 +108,7 @@ if opt('--dokular'):
 # ışıklar: 28 armatür + güneş + gök
 data = json.load(open(os.path.join(ROOT, 'tools', 'blender', 'isiklar.json'), encoding='utf-8'))
 for rec in data['isiklar']:
+    if rec['ad'].startswith('Photographed ceiling downlight'): continue
     if rec['ad'].startswith(('Interior fill', 'Sun')) or rec['tur'] != 'AREA': continue
     L = bpy.data.lights.new(rec['ad'], 'AREA'); L.shape, L.size, L.size_y = rec['sekil'], rec['boyut'], rec['boyut_y']
     L.energy, L.color = rec['guc_W'] * (1.0 if NIGHT else .6), rec['renk']

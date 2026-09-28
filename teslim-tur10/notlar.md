@@ -325,3 +325,143 @@ Başlangıç 28.09.2026 19:25 (bilgisayar saati). Tek modelleme/kontrol turu; ye
 - **Fazla/eksik nesne:** Beyaz eski basamak kalıntısı kaldırıldı. KALDI: Yukarıda belirtilen eksik/ince ayrıntılar.
 - **Kalıntı/yerleşim:** Yeni yan duvar açıklığı oluştu; Adım05 öncelik 1. KALDI: Kaydedilen farklar Adım05.
 - **Geometri/oran:** KALDI: Eski basamak maskesi daraltılmalı; koyu basamak tonu korunsun.
+
+
+## Adım 05 · ahşaplar + parke dokusu + düzeltmeler
+
+### Üretim ve sınırlar
+
+- 8 ayrı fotoğraf kesiti; homografi, duvar/tavan beyaz dengesi, geniş Gauss ile ışık alanı düzeltmesi, parlama inpaint. Kaynak uçlarındaki komşu tahta izleri kırpıldı. Fotoğraf ayrıntısı sınırlı: 4096 çıktı yeni optik ayrıntı üretmez.
+- 4 × 4 m, 32 sıra, yaklaşık 12.5 cm en; .50/.75/1/1.25 m rastgele şaşırtmalı 162 tahta. Ölçüler kapı oranlarından yaklaşık, yerinde ölçüm değildir. Sekiz kaynak ve kaydırma/tohum parke-uretim.json içinde.
+- Albedo/roughness/normal aynı yerleşimden. Roughness .413–.443, normal Non-Color ve güç .15. Aktif PNG kenar piksel farkı 0; JPG yalnız inceleme kopyasıdır.
+- Mavi-beyaz şerit: eski albedoda fotoğraftan kalan parlama vardı (parke_eski_albedo_kanit.jpg). Normal zaten Non-Color idi. Stok normalin tahta ekleri albedoyla örtüşmüyordu. Yeni aynı-yerleşim haritaları bu kaynakları kaldırır.
+- Üst kat wenge ve duvar/karo albedosu talimatla korundu. Giriş ceviz ve küpeşte ayrı kayıt; mutfak roughness .65, clearcoat 0.
+- Mimari maske geniş yüzleri ve yan duvar normallerini koruyor. Kartonpiyerde ortak uç kapaklar silinip yakın köşe noktaları birleştirildi. 42 için üç duvar lambası, 29 orta apliksiz; 21 tavan spotları çıkarıldı. Foto40 kamera değişti, radyatör pervazdan uzaklaştırıldı.
+
+### Renk ölçümü
+
+Yöntem: işaretli ROI içindeki sRGB ortancası; her fotoğraf ve render için duvar/tavan referansından kanal beyaz dengesi; OpenCV Lab D65 ve Öklid ΔE76. Pozlama farkı ölçümde korunur. Bu bir spektral albedo ölçümü değildir. ROI, beyaz medyanı ve renkler renk-once/sonra.json dosyalarında. Üst wenge ve karo koruma talimatı nedeniyle bu iki malzemenin yüksek farkı albedo değiştirerek kapatılmadı.
+
+| Foto | Malzeme | Foto RGB (WB) | Son render RGB (WB) | ΔE önce | ΔE sonra | Durum |
+|---|---|---|---|---|---|---|
+| 29 | parke | (108, 76, 60) | (134, 107, 100) | 18.42 | 13.93 | KALDI |
+| 18 | parke | (88, 46, 36) | (86, 68, 65) | 20.9 | 16.29 | KALDI |
+| 34 | parke | (65, 44, 30) | (105, 80, 76) | 25.49 | 17.84 | KALDI |
+| 34 | kapi_ust | (63, 62, 63) | (22, 22, 22) | 19.75 | 19.19 | KALDI |
+| 40 | kapi_giris | (59, 36, 19) | (62, 46, 30) | 5.58 | 5.66 | DÜZELTİLDİ |
+| 18 | merdiven | (97, 57, 39) | (95, 57, 45) | 11.76 | 3.97 | DÜZELTİLDİ |
+| 34 | kupeste | (54, 41, 25) | (39, 35, 28) | ROI yenilendi | 8.91 | KALDI |
+| 21 | mutfak_dolabi | (139, 90, 54) | (120, 72, 36) | 7.56 | 7.43 | DÜZELTİLDİ |
+| 42 | karo | (199, 164, 132) | (126, 110, 91) | 24.83 | 24.41 | KALDI |
+
+### Yakın plan ve tekrar denetimi
+
+Altı yakın kontrol 1.5 m kamera-hedef mesafesiyle, aynı sahnenin ilgili malzemesine ışın testiyle yerleştirildi. Kamera/hedef ve vurulan malzeme yakin-kameralar.json dosyasındadır. Her karşılaştırmanın solunda gerçek fotoğraf kırpımı bulunur.
+
+KALDI: düşük çözünürlüklü kaynak kesitlerinin ayrıntı sınırı ve bazı tahtaların ton farkı. Yarım kaydırmada ortak dikey derz çizgisi ve 2×2 testinde atlas tekrarı seçilebiliyor; görünmez tekrar şartı henüz geçmedi. 2×2 ve yarım kaydırma testleri teslimdedir; piksel sürekliliği sağlansa da görsel tekrarın tamamen kaybolduğu iddia edilmiyor. Yakın planların tamamı kusursuz kabul edilmiş değildir; Adım05 süre sınırında incelemeye teslimdir.
+
+### Fotoğraf bazında öz denetim
+
+#### Foto 04
+
+- **Malzeme tonu:** Ortak parke yeniden renderlandı. KALDI: fotoğrafla birebir ton/ışık eşleşmesi; sayısal ölçülenler tabloda.
+- **Fazla/eksik nesne:** KALDI: mevcut mobilya/armatürlerin fotoğraf eşleşmesi bu ahşap adımında tamamlanmadı.
+- **Kalıntı/yerleşim:** KALDI: eski modül birleşimleri kapsamlı yeniden modellenmedi.
+- **Geometri/oran:** KALDI: eski mobilya oranları.
+
+#### Foto 13
+
+- **Malzeme tonu:** Ortak parke yeniden renderlandı. KALDI: fotoğrafla birebir ton/ışık eşleşmesi; sayısal ölçülenler tabloda.
+- **Fazla/eksik nesne:** KALDI: perde/armatür eksikleri.
+- **Kalıntı/yerleşim:** KALDI: pencere-kartonpiyer ince birleşimleri.
+- **Geometri/oran:** KALDI: fotoğrafla bütün mimari oranlar aynı değil.
+
+#### Foto 15
+
+- **Malzeme tonu:** Korunan banyo yüzeyleri yeniden renderlandı. KALDI: fotoğrafla birebir ton/ışık eşleşmesi; sayısal ölçülenler tabloda.
+- **Fazla/eksik nesne:** KALDI: banyo aksesuarlarının ayrıntıları.
+- **Kalıntı/yerleşim:** KALDI: banyo pozlama/ışık eşleşmesi.
+- **Geometri/oran:** KALDI: duş ve seramik geometri eşleşmesi.
+
+#### Foto 17
+
+- **Malzeme tonu:** Üst wenge korundu; parke yenilendi. KALDI: fotoğrafla birebir ton/ışık eşleşmesi; sayısal ölçülenler tabloda.
+- **Fazla/eksik nesne:** DÜZELTİLDİ: ARSIV beyaz yatak dışa aktarım ve render dışında.
+- **Kalıntı/yerleşim:** KALDI: kapı/eşik ince ışık çizgileri.
+- **Geometri/oran:** KALDI: mevcut armatür formu ve kartonpiyer köşe oranı.
+
+#### Foto 18
+
+- **Malzeme tonu:** Parke/basamak/küpeşte ayrı ahşap kayıtlarına geçti; sayısal sonuç tabloda. KALDI: fotoğrafla birebir ton/ışık eşleşmesi; sayısal ölçülenler tabloda.
+- **Fazla/eksik nesne:** KALDI: zincir ve aplik tam fotoğraf konumunda değil.
+- **Kalıntı/yerleşim:** KALDI: basamak burunlarında parlak ince çizgiler.
+- **Geometri/oran:** KALDI: basamakta tahta derzinin yüzey boyunca bölünmesi gerçek masif basamakla aynı değil.
+
+#### Foto 19
+
+- **Malzeme tonu:** Ortak parke yeniden renderlandı. KALDI: fotoğrafla birebir ton/ışık eşleşmesi; sayısal ölçülenler tabloda.
+- **Fazla/eksik nesne:** KALDI: mevcut mobilya/perde ayrıntıları.
+- **Kalıntı/yerleşim:** KALDI: eski yerleşimlerin ince farkları.
+- **Geometri/oran:** KALDI: tüm oda oranları birebir değil.
+
+#### Foto 21
+
+- **Malzeme tonu:** DÜZELTİLDİ: dolap matlık .65, bej karo korunuyor; renk sonucu tabloda. KALDI: fotoğrafla birebir ton/ışık eşleşmesi; sayısal ölçülenler tabloda.
+- **Fazla/eksik nesne:** DÜZELTİLDİ: fotoğrafta olmayan tavan spotu çıkarıldı. KALDI: eski mutfak modelindeki eksik/farklı cihazlar.
+- **Kalıntı/yerleşim:** KALDI: dolap köşe/damar sürekliliği.
+- **Geometri/oran:** KALDI: dolap ve davlumbaz fotoğraf oranları.
+
+#### Foto 29
+
+- **Malzeme tonu:** Parke sıcak ceviz atlası, küpeşte kahve; renk sonucu tabloda. KALDI: fotoğrafla birebir ton/ışık eşleşmesi; sayısal ölçülenler tabloda.
+- **Fazla/eksik nesne:** DÜZELTİLDİ: orta duvar apliği kaldırıldı, iki üst spot kaldı; dolap gizli.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: geçiş üstünde iki pah görünür.
+- **Geometri/oran:** KALDI: pahlı açıklık/kiriş ölçüsünün ince fotoğraf eşleşmesi.
+
+#### Foto 34
+
+- **Malzeme tonu:** Üst wenge korundu, ahşaplar yeniden renderlandı. KALDI: fotoğrafla birebir ton/ışık eşleşmesi; sayısal ölçülenler tabloda.
+- **Fazla/eksik nesne:** KALDI: sarkıt zincir konumu ve alt armatür farkı.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: geniş tavan/yan duvar yüzleri maske dışında, siyah delikler kapalı. KALDI: uzaktaki kapı altında ışık çizgisi.
+- **Geometri/oran:** KALDI: korkuluk/basamak ince oranları.
+
+#### Foto 40
+
+- **Malzeme tonu:** Giriş orta ceviz; üst wengeye dokunulmadı. KALDI: fotoğrafla birebir ton/ışık eşleşmesi; sayısal ölçülenler tabloda.
+- **Fazla/eksik nesne:** DÜZELTİLDİ: radyatör pervazdan uzaklaştırıldı.
+- **Kalıntı/yerleşim:** KALDI: kamera solda radyatör/sağda camlı kapı koşulunu sağlıyor fakat fotoğraf bakış noktası tam aynı değil.
+- **Geometri/oran:** KALDI: camlı kapı kanat açısı ve yakın kadraj oranları.
+
+#### Foto 42
+
+- **Malzeme tonu:** Giriş ceviz ve korunan bej karo. KALDI: fotoğrafla birebir ton/ışık eşleşmesi; sayısal ölçülenler tabloda.
+- **Fazla/eksik nesne:** DÜZELTİLDİ: sarkan üçlü yerine duvarda üç yuvarlak lamba.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: radyatör-kasa aralığı artırıldı. KALDI: eşik seviyesinin fotoğrafla ince farkı.
+- **Geometri/oran:** KALDI: duvar lambalarının merkez yüksekliği/arası tam ölçülmüş değil.
+
+#### Foto 44
+
+- **Malzeme tonu:** Korunan garaj yüzeyleri yeniden renderlandı. KALDI: fotoğrafla birebir ton/ışık eşleşmesi; sayısal ölçülenler tabloda.
+- **Fazla/eksik nesne:** KALDI: eski garaj nesneleri.
+- **Kalıntı/yerleşim:** KALDI: kapı/eşik ışık çizgileri.
+- **Geometri/oran:** KALDI: garaj modelinin eski oranları.
+
+#### Foto 47
+
+- **Malzeme tonu:** Basamak ve küpeşte sıcak ahşap oldu. KALDI: fotoğrafla birebir ton/ışık eşleşmesi; sayısal ölçülenler tabloda.
+- **Fazla/eksik nesne:** KALDI: sağda eski beyaz merdiven kenarı/kalıntısı.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: büyük yan duvar deliği kapandı; KALDI: yeni ve eski merdivenin birleşimi.
+- **Geometri/oran:** KALDI: bodrum maske sınırı basamak yanaklarını tamamen ayırmıyor.
+
+Yeni görülen ayrıntılar Adım06 listesine alındı; bu adımda yeni geometri düzeltme döngüsü açılmadı. 30 dakika sınırı nedeniyle KALDI maddeleri tamamlandı sayılmıyor.
+
+### Son yakın plan göz denetimi
+
+- Parke KALDI: damar yumuşak ve ortak dikey derz belirgin; yakın kontrol geçmedi.
+- Merdiven KALDI: renk örneği ΔE76 3.97 olsa da rıht/basamakta çapraz tahta ekleri gerçek masif yüzeyle uyuşmuyor.
+- Kapı KALDI: korunan wenge koyuluğu ve panel damar ayrıntısı fotoğrafa tam eşit değil.
+- Küpeşte KALDI: ton koyu, damar az seçiliyor; ΔE76 8.91.
+- Mutfak dolabı KALDI: matlık artırıldı, renk örneği 7.43; üst taçta doku yönü/ekleri hatalı.
+- Karo KALDI: albedo korundu; eşik yüksekliği ve ışık/pozlama fotoğraftan farklı.
+
+Başlangıç: 2026-09-28 19:48:04 +02; modelleme/render kapatma ve teslim hazırlığı: 20:14 +02. Tamamlanmayan kabul kontrolleri yukarıda KALDI; bu kayıt kusursuz tamamlanma iddiası değildir.

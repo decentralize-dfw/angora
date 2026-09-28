@@ -67,3 +67,32 @@ Mevcut haliyle kapatıldı. Çözülmeyenler ve Adım 04 ilk işleri: [notlar.md
 ![Adım 04 · albedo + armatürler foto 44](04_adim-04-albedo-armaturler_foto_44.jpg)
 ![Adım 04 · albedo + armatürler foto 47](04_adim-04-albedo-armaturler_foto_47.jpg)
 
+
+## 05 · Adım 05 · ahşaplar + parke dokusu + düzeltmeler
+![Adım 05 · ahşaplar + parke dokusu + düzeltmeler foto 04](05_adim-05-ahsaplar-parke-dokusu-duzeltmele_foto_04.jpg)
+![Adım 05 · ahşaplar + parke dokusu + düzeltmeler foto 13](05_adim-05-ahsaplar-parke-dokusu-duzeltmele_foto_13.jpg)
+![Adım 05 · ahşaplar + parke dokusu + düzeltmeler foto 15](05_adim-05-ahsaplar-parke-dokusu-duzeltmele_foto_15.jpg)
+![Adım 05 · ahşaplar + parke dokusu + düzeltmeler foto 17](05_adim-05-ahsaplar-parke-dokusu-duzeltmele_foto_17.jpg)
+![Adım 05 · ahşaplar + parke dokusu + düzeltmeler foto 18](05_adim-05-ahsaplar-parke-dokusu-duzeltmele_foto_18.jpg)
+![Adım 05 · ahşaplar + parke dokusu + düzeltmeler foto 19](05_adim-05-ahsaplar-parke-dokusu-duzeltmele_foto_19.jpg)
+![Adım 05 · ahşaplar + parke dokusu + düzeltmeler foto 21](05_adim-05-ahsaplar-parke-dokusu-duzeltmele_foto_21.jpg)
+![Adım 05 · ahşaplar + parke dokusu + düzeltmeler foto 29](05_adim-05-ahsaplar-parke-dokusu-duzeltmele_foto_29.jpg)
+![Adım 05 · ahşaplar + parke dokusu + düzeltmeler foto 34](05_adim-05-ahsaplar-parke-dokusu-duzeltmele_foto_34.jpg)
+![Adım 05 · ahşaplar + parke dokusu + düzeltmeler foto 40](05_adim-05-ahsaplar-parke-dokusu-duzeltmele_foto_40.jpg)
+![Adım 05 · ahşaplar + parke dokusu + düzeltmeler foto 42](05_adim-05-ahsaplar-parke-dokusu-duzeltmele_foto_42.jpg)
+![Adım 05 · ahşaplar + parke dokusu + düzeltmeler foto 44](05_adim-05-ahsaplar-parke-dokusu-duzeltmele_foto_44.jpg)
+![Adım 05 · ahşaplar + parke dokusu + düzeltmeler foto 47](05_adim-05-ahsaplar-parke-dokusu-duzeltmele_foto_47.jpg)
+
+### Adım 05 yakın kontroller ve tekrar testleri
+
+- [yakin_parke.jpg](../adim05/yakin_parke.jpg)
+- [yakin_merdiven.jpg](../adim05/yakin_merdiven.jpg)
+- [yakin_kapi.jpg](../adim05/yakin_kapi.jpg)
+- [yakin_kupeste.jpg](../adim05/yakin_kupeste.jpg)
+- [yakin_mutfak_dolabi.jpg](../adim05/yakin_mutfak_dolabi.jpg)
+- [yakin_karo.jpg](../adim05/yakin_karo.jpg)
+- [parke_2x2.jpg](../adim05/parke_2x2.jpg)
+- [parke_kaydir.jpg](../adim05/parke_kaydir.jpg)
+- [Fark listesi ve renk tablosu](../notlar.md)
+
+**KALDI:** Parke yakın plan/tekrar testi geçmedi; damar ayrıntısı yumuşak, ortak dikey derz seçiliyor; ΔE76 13.93–17.84. Küpeşte ΔE76 8.91. Korunan üst wenge/karo pozlama farkı; bodrum beyaz kenarı; eşik ışık çizgileri; kartonpiyer ince birleşimleri; Foto40 kamera/kapı açısı. Ayrıntılar notlar.md içinde.
