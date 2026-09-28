@@ -1,0 +1,933 @@
+{
+ "olusturma": "tools/blender/web-referans.json - web modellerinin malzeme başına üçgen sayısı ve Blender koordinatında (x, -z, y) sınır kutusu",
+ "dosyalar": {
+  "BUILDING-opt-v4": {
+   "toplam_ucgen": 668739,
+   "malzemeler": {
+    "Lift brushed patterned stainless": {
+     "ucgen": 1320,
+     "min": [
+      -2.721,
+      0.222,
+      -0.19
+     ],
+     "max": [
+      -1.36,
+      1.365,
+      8.57
+     ],
+     "dugumler": [
+      "Lift brushed patterned stainless"
+     ]
+    },
+    "Simple White Wall": {
+     "ucgen": 6003,
+     "min": [
+      -6.032,
+      -5.023,
+      -0.086
+     ],
+     "max": [
+      7.319,
+      9.077,
+      12.518
+     ],
+     "dugumler": [
+      "interior.002"
+     ]
+    },
+    "Stone gravel": {
+     "ucgen": 112,
+     "min": [
+      3.07,
+      -1.443,
+      5.972
+     ],
+     "max": [
+      7.518,
+      7.015,
+      14.42
+     ],
+     "dugumler": [
+      "gravel [imported].001"
+     ]
+    },
+    "ceiling.001": {
+     "ucgen": 2397,
+     "min": [
+      -6.031,
+      -5.023,
+      2.62
+     ],
+     "max": [
+      7.32,
+      9.078,
+      12.475
+     ],
+     "dugumler": [
+      "ceiling [imported].001"
+     ]
+    },
+    "wood_floor": {
+     "ucgen": 84,
+     "min": [
+      -1.182,
+      -1.622,
+      6.292
+     ],
+     "max": [
+      2.17,
+      6.077,
+      9.47
+     ],
+     "dugumler": [
+      "wood_floor"
+     ]
+    },
+    "Stucco painted wall": {
+     "ucgen": 2384,
+     "min": [
+      -6.56,
+      -6.474,
+      -0.4
+     ],
+     "max": [
+      7.518,
+      10.393,
+      13.509
+     ],
+     "dugumler": [
+      "stucco [imported]"
+     ]
+    },
+    "WOODY-DARK": {
+     "ucgen": 180621,
+     "min": [
+      -6.7,
+      -6.473,
+      -0.305
+     ],
+     "max": [
+      7.483,
+      10.894,
+      12.958
+     ],
+     "dugumler": [
+      "Cube.001",
+      "wood_dark (4)"
+     ]
+    },
+    "glass": {
+     "ucgen": 2357,
+     "min": [
+      -6.182,
+      -5.648,
+      -0.241
+     ],
+     "max": [
+      7.453,
+      9.227,
+      11.364
+     ],
+     "dugumler": [
+      "glass"
+     ]
+    },
+    "WHT.001": {
+     "ucgen": 7640,
+     "min": [
+      -6.291,
+      -6.473,
+      -0.3
+     ],
+     "max": [
+      7.579,
+      10.393,
+      14.025
+     ],
+     "dugumler": [
+      "Cube"
+     ]
+    },
+    "metal.001": {
+     "ucgen": 406047,
+     "min": [
+      -9.04,
+      -10.082,
+      0.105
+     ],
+     "max": [
+      4.175,
+      10.253,
+      10.39
+     ],
+     "dugumler": [
+      "metal (5)"
+     ]
+    },
+    "Clay tile.001": {
+     "ucgen": 46980,
+     "min": [
+      -6.358,
+      -6.303,
+      2.75
+     ],
+     "max": [
+      5.719,
+      10.67,
+      12.897
+     ],
+     "dugumler": [
+      "Clay tile 6 [imported]"
+     ]
+    },
+    "roof-7": {
+     "ucgen": 695,
+     "min": [
+      -6.56,
+      -6.348,
+      2.7
+     ],
+     "max": [
+      5.731,
+      10.769,
+      12.807
+     ],
+     "dugumler": [
+      "roof.003"
+     ]
+    },
+    "terra_floor": {
+     "ucgen": 2195,
+     "min": [
+      -5.731,
+      -5.022,
+      -0.4
+     ],
+     "max": [
+      7.319,
+      8.078,
+      3.1
+     ],
+     "dugumler": [
+      "terra_floor"
+     ]
+    },
+    "WOOD-FL": {
+     "ucgen": 2248,
+     "min": [
+      -6.031,
+      -5.022,
+      2.7
+     ],
+     "max": [
+      4.119,
+      9.078,
+      10.648
+     ],
+     "dugumler": [
+      "wood_floor.001"
+     ]
+    },
+    "stone_tile": {
+     "ucgen": 4707,
+     "min": [
+      -5.092,
+      -1.197,
+      -0.5
+     ],
+     "max": [
+      7.319,
+      8.077,
+      3.019
+     ],
+     "dugumler": [
+      "stone_tile"
+     ]
+    },
+    "R31 | R33 entrance WC ochre tile": {
+     "ucgen": 96,
+     "min": [
+      2.816,
+      -2.394,
+      3.019
+     ],
+     "max": [
+      4.088,
+      -0.552,
+      4.12
+     ],
+     "dugumler": [
+      "R31 | R33 entrance WC ochre tile"
+     ]
+    },
+    "R31 | R33 master pale cream tile": {
+     "ucgen": 55,
+     "min": [
+      0.297,
+      6.154,
+      6.371
+     ],
+     "max": [
+      3.089,
+      9.048,
+      8.991
+     ],
+     "dugumler": [
+      "R31 | R33 master pale cream tile"
+     ]
+    },
+    "RR": {
+     "ucgen": 157,
+     "min": [
+      1.891,
+      -3.998,
+      6.371
+     ],
+     "max": [
+      4.094,
+      -0.547,
+      8.991
+     ],
+     "dugumler": [
+      "R44 joined | fixed | R31 | Shared bathroom ivory wall tile"
+     ]
+    },
+    "R31 | R33 entrance navy mosaic band": {
+     "ucgen": 54,
+     "min": [
+      2.817,
+      -2.394,
+      4.119
+     ],
+     "max": [
+      4.088,
+      -0.552,
+      4.19
+     ],
+     "dugumler": [
+      "R31 | R33 entrance navy mosaic band"
+     ]
+    },
+    "R31 | R33 ivory wall ceramic": {
+     "ucgen": 172,
+     "min": [
+      -0.096,
+      -2.438,
+      4.189
+     ],
+     "max": [
+      4.089,
+      8.048,
+      12.162
+     ],
+     "dugumler": [
+      "R31 | R33 ivory wall ceramic"
+     ]
+    },
+    "R31 | R33 master fine mosaic band": {
+     "ucgen": 22,
+     "min": [
+      0.297,
+      6.154,
+      8.571
+     ],
+     "max": [
+      3.089,
+      9.047,
+      8.611
+     ],
+     "dugumler": [
+      "R31 | R33 master fine mosaic band"
+     ]
+    },
+    "R31 | R33 attic cream tile": {
+     "ucgen": 60,
+     "min": [
+      -0.096,
+      5.306,
+      9.39
+     ],
+     "max": [
+      1.896,
+      8.048,
+      10.5
+     ],
+     "dugumler": [
+      "R31 | R33 attic cream tile"
+     ]
+    },
+    "R31 | R33 attic tan mosaic band": {
+     "ucgen": 46,
+     "min": [
+      -0.095,
+      5.306,
+      10.5
+     ],
+     "max": [
+      1.895,
+      8.048,
+      10.57
+     ],
+     "dugumler": [
+      "R31 | R33 attic tan mosaic band"
+     ]
+    },
+    "Simple wood": {
+     "ucgen": 2287,
+     "min": [
+      -2.61,
+      0.927,
+      0
+     ],
+     "max": [
+      4.171,
+      3.13,
+      9.298
+     ],
+     "dugumler": [
+      "Lift | Photographed walnut door finish (4).001"
+     ]
+    }
+   }
+  },
+  "INTERIOR-opt-v2": {
+   "toplam_ucgen": 384993,
+   "malzemeler": {
+    "BLCK": {
+     "ucgen": 10628,
+     "min": [
+      -4.953,
+      -4.929,
+      -0.098
+     ],
+     "max": [
+      7.142,
+      8.038,
+      11.58
+     ],
+     "dugumler": [
+      "BLCK"
+     ]
+    },
+    "bulb_warm": {
+     "ucgen": 13039,
+     "min": [
+      -4.144,
+      -3.389,
+      2.228
+     ],
+     "max": [
+      5.833,
+      8.309,
+      9.001
+     ],
+     "dugumler": [
+      "bulb_warm"
+     ]
+    },
+    "FINISH | Silver mirror": {
+     "ucgen": 614,
+     "min": [
+      -4.607,
+      -3.803,
+      0.435
+     ],
+     "max": [
+      4.052,
+      7.885,
+      11.409
+     ],
+     "dugumler": [
+      "FINISH | Silver mirror"
+     ]
+    },
+    "cabinet_glass": {
+     "ucgen": 3450,
+     "min": [
+      -5.133,
+      -3.973,
+      3.228
+     ],
+     "max": [
+      4.044,
+      8.93,
+      11.399
+     ],
+     "dugumler": [
+      "Kitchen satin glazing"
+     ]
+    },
+    "Lift | Photographed rose glass 80 percent": {
+     "ucgen": 6,
+     "min": [
+      -2.275,
+      1.33,
+      0.33
+     ],
+     "max": [
+      -1.765,
+      1.33,
+      8.321
+     ],
+     "dugumler": [
+      "Lift | Photographed rose glass 80 percent.001"
+     ]
+    },
+    "brass (4)": {
+     "ucgen": 34816,
+     "min": [
+      -5.398,
+      -5.624,
+      0.185
+     ],
+     "max": [
+      6.852,
+      8.671,
+      11.311
+     ],
+     "dugumler": [
+      "metal1"
+     ]
+    },
+    "R31 | R35 shelving grey steel": {
+     "ucgen": 1168,
+     "min": [
+      3.737,
+      -0.9,
+      3.1
+     ],
+     "max": [
+      7.275,
+      4.408,
+      5.828
+     ],
+     "dugumler": [
+      "metal2"
+     ]
+    },
+    "R31 | R35 garage galvanized steel": {
+     "ucgen": 11737,
+     "min": [
+      -5.497,
+      -3.983,
+      0
+     ],
+     "max": [
+      7.271,
+      8.94,
+      11.429
+     ],
+     "dugumler": [
+      "metal3"
+     ]
+    },
+    "R31 | Hall ochre woven upholstery": {
+     "ucgen": 11309,
+     "min": [
+      -4.817,
+      2.914,
+      6.439
+     ],
+     "max": [
+      -2.653,
+      3.799,
+      7.505
+     ],
+     "dugumler": [
+      "R31 | Hall ochre woven upholstery"
+     ]
+    },
+    "X": {
+     "ucgen": 16353,
+     "min": [
+      -5.578,
+      -4.99,
+      0
+     ],
+     "max": [
+      7.252,
+      8.44,
+      10.568
+     ],
+     "dugumler": [
+      "ROUGHNESS63"
+     ]
+    },
+    "ROUGHNSS1": {
+     "ucgen": 67724,
+     "min": [
+      -5.85,
+      -4.941,
+      0.134
+     ],
+     "max": [
+      3.297,
+      7.976,
+      10.465
+     ],
+     "dugumler": [
+      "ROUGHNSS90"
+     ]
+    },
+    "R31 | Warm white porcelain": {
+     "ucgen": 8067,
+     "min": [
+      -0.076,
+      -3.973,
+      3.111
+     ],
+     "max": [
+      4.059,
+      8.93,
+      10.336
+     ],
+     "dugumler": [
+      "wc"
+     ]
+    },
+    "WHT": {
+     "ucgen": 24960,
+     "min": [
+      -5.952,
+      -5.25,
+      -0.08
+     ],
+     "max": [
+      7.219,
+      7.967,
+      12.152
+     ],
+     "dugumler": [
+      "wht"
+     ]
+    },
+    "R31 | R33 antique nook walnut": {
+     "ucgen": 112425,
+     "min": [
+      -5.57,
+      -3.514,
+      0
+     ],
+     "max": [
+      4.07,
+      8.92,
+      10.436
+     ],
+     "dugumler": [
+      "WOOD1"
+     ]
+    },
+    "wood_honey": {
+     "ucgen": 64347,
+     "min": [
+      -5.944,
+      -4.17,
+      -0.091
+     ],
+     "max": [
+      7.25,
+      8.401,
+      10.415
+     ],
+     "dugumler": [
+      "WOOD2"
+     ]
+    },
+    "C02 | Original red framed artwork": {
+     "ucgen": 12,
+     "min": [
+      -2.19,
+      7.986,
+      10.44
+     ],
+     "max": [
+      -1.37,
+      7.987,
+      11.2
+     ],
+     "dugumler": [
+      "C02 | Original red framed artwork"
+     ]
+    },
+    "Master quilt â€” photo projection": {
+     "ucgen": 2256,
+     "min": [
+      -4.89,
+      5.411,
+      6.49
+     ],
+     "max": [
+      -2.839,
+      7.288,
+      7.029
+     ],
+     "dugumler": [
+      "Master quilt â€” photo projection"
+     ]
+    },
+    "Room finish | Original bedroom line artwork": {
+     "ucgen": 12,
+     "min": [
+      -4.995,
+      -3.025,
+      7.91
+     ],
+     "max": [
+      -4.973,
+      -1.875,
+      8.4
+     ],
+     "dugumler": [
+      "Room finish | Original bedroom line artwork"
+     ]
+    },
+    "Room pass | Original damask curtain photograph": {
+     "ucgen": 1984,
+     "min": [
+      -5.952,
+      -3.872,
+      6.403
+     ],
+     "max": [
+      -2.591,
+      2.75,
+      11.28
+     ],
+     "dugumler": [
+      "Room pass | Original damask curtain photograph"
+     ]
+    },
+    "Room pass | Original hall picture atlas": {
+     "ucgen": 84,
+     "min": [
+      -4.66,
+      3.802,
+      7.56
+     ],
+     "max": [
+      -2.915,
+      3.846,
+      8.42
+     ],
+     "dugumler": [
+      "Room pass | Original hall picture atlas"
+     ]
+    },
+    "Salon artwork â€” photographed detail": {
+     "ucgen": 2,
+     "min": [
+      3.035,
+      5.45,
+      4.335
+     ],
+     "max": [
+      3.035,
+      6.19,
+      5.025
+     ],
+     "dugumler": [
+      "Salon artwork â€” photographed detail"
+     ]
+    }
+   }
+  },
+  "GARDEN-opt-v2": {
+   "toplam_ucgen": 355921,
+   "malzemeler": {
+    "Grass Ground Meadow PBR Scan": {
+     "ucgen": 6498,
+     "min": [
+      -9.439,
+      -10.058,
+      -6.603
+     ],
+     "max": [
+      26.507,
+      29.061,
+      3.507
+     ],
+     "dugumler": [
+      "plot-grass.001"
+     ]
+    },
+    "chrome (5)": {
+     "ucgen": 196,
+     "min": [
+      7.177,
+      13.1,
+      -1.019
+     ],
+     "max": [
+      7.691,
+      13.867,
+      0.654
+     ],
+     "dugumler": [
+      "chrome (5).001"
+     ]
+    },
+    "Old dusty roof": {
+     "ucgen": 42,
+     "min": [
+      0.169,
+      6.602,
+      2.56
+     ],
+     "max": [
+      7.521,
+      12.327,
+      3.326
+     ],
+     "dugumler": [
+      "canopy.001"
+     ]
+    },
+    "pool_tile": {
+     "ucgen": 444,
+     "min": [
+      -2.169,
+      13.284,
+      -1.673
+     ],
+     "max": [
+      8.762,
+      18.631,
+      -0.093
+     ],
+     "dugumler": [
+      "pool_tile.001"
+     ]
+    },
+    "wood_dark (3)": {
+     "ucgen": 88,
+     "min": [
+      0.169,
+      6.602,
+      -0.27
+     ],
+     "max": [
+      7.521,
+      12.327,
+      2.559
+     ],
+     "dugumler": [
+      "Garden | Dark stained canopy timber.001"
+     ]
+    },
+    "stone_tile_wall": {
+     "ucgen": 1139,
+     "min": [
+      -9.039,
+      -10.29,
+      -4.674
+     ],
+     "max": [
+      10.986,
+      28.65,
+      3.924
+     ],
+     "dugumler": [
+      "Retaining wall rough limestone (1).001"
+     ]
+    },
+    "Matte Porcelain Tile Beige.001": {
+     "ucgen": 86,
+     "min": [
+      -7.14,
+      6.606,
+      -0.371
+     ],
+     "max": [
+      8.84,
+      20.188,
+      -0.038
+     ],
+     "dugumler": [
+      "stone_tile (4).002"
+     ]
+    },
+    "white_trim (5)": {
+     "ucgen": 972,
+     "min": [
+      -7.151,
+      -3.483,
+      -0.778
+     ],
+     "max": [
+      8.84,
+      18.704,
+      2.929
+     ],
+     "dugumler": [
+      "white_trim (5).001"
+     ]
+    },
+    "water": {
+     "ucgen": 12,
+     "min": [
+      -1.911,
+      13.526,
+      -0.274
+     ],
+     "max": [
+      8.503,
+      18.388,
+      -0.251
+     ],
+     "dugumler": [
+      "water.001"
+     ]
+    },
+    "TREE-1": {
+     "ucgen": 6140,
+     "min": [
+      -9.526,
+      -10.005,
+      -0.48
+     ],
+     "max": [
+      25.235,
+      28.213,
+      6.187
+     ],
+     "dugumler": [
+      "tripo_node_668e24d5-4125-4751-ae2e-92d793b8b138.080"
+     ]
+    },
+    "TREE-2": {
+     "ucgen": 340187,
+     "min": [
+      -9.526,
+      -10.005,
+      -0.48
+     ],
+     "max": [
+      25.235,
+      28.213,
+      6.187
+     ],
+     "dugumler": [
+      "tripo_node_668e24d5-4125-4751-ae2e-92d793b8b138.080"
+     ]
+    },
+    "Retaining wall rough limestone.001": {
+     "ucgen": 117,
+     "min": [
+      -9.638,
+      -10.21,
+      -7.609
+     ],
+     "max": [
+      26.697,
+      29.056,
+      5.041
+     ],
+     "dugumler": [
+      "Retaining wall rough limestone.002"
+     ]
+    }
+   }
+  }
+ }
+}
