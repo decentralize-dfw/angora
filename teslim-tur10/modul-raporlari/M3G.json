@@ -1,0 +1,16 @@
+{
+ "modul": "M3G",
+ "nesneler": 2322,
+ "ucgen": 409806,
+ "en_buyuk": 652,
+ "notlar": {
+  "foto": 40,
+  "yer": "Antre giriş geçişi",
+  "kasa_olcusu_m": [
+   1.3199999999999998,
+   2.1
+  ],
+  "kanat_acisi": 65,
+  "emin_degil": "Açıklık model kesitinden; cam motifi gerçek foto 40 perspektif dönüşümü."
+ }
+}

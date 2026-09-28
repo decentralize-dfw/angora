@@ -72,3 +72,127 @@ Galeri korkulukları tek yerleşimden çoğaltılmadı: giriş y=0.9354, x=0.896
 | Garaj deposu kapısı | 44 | Fotoğraftaki kapalı konuma döndürüldü. |
 
 Malzeme fotoğraf dokuları ve ışık tonu bu adımda değiştirilmedi. Desen birebirliği ve karanlık çatı banyosu henüz tamamlanmış doğrulama değildir.
+
+## Adım 03 · korkuluk deseni + eksikler — mevcut haliyle kapatıldı
+
+Kullanıcının son talimatıyla ek düzeltme yapılmadan bu kontrol noktası yayımlanmıştır; bütün farkların çözüldüğü iddia edilmez. Yeni kusurlar Adım 04 ilk işleri olarak aşağıya kaydedildi. Bundan sonra yeni kusur düzeltmesine başlamadan mevcut adım pushlanacak; adım başına üst sınır 30 dakika.
+
+Ceviz/parke/merdiven/duvar rengi ve albedo Adım 04 işidir; Adım 03 tamamlananlarına dahil değildir. Mevcut render ve GLB ara malzeme denemeleri içerir; bunlar onaylanmış renk sonucu sayılmaz. Yerel doku üretim kodları ve kaynak kesitleri korunmuştur.
+
+### Adım 04 ilk işler — KALDI
+
+- KALDI: Foto 47 bodrum basamaklarının yanındaki beyaz kalıntı. Ray testi interior.002 / Simple White Wall sonucunu verdi; GLB malzeme incelemesi bunun BUILDING katmanında olduğunu doğruladı. Önceki mobilya katmanı maskesi etkisiz kaldı; mimari katmandaki dar bölge ayrıca ölçülerek düzeltilecek.
+- KALDI: Kapı/eşik çevresindeki beyaz ışık yarıkları (özellikle 17,34,40,44); dış kapıya bini eklenmesine rağmen tüm yarıklar kapanmadı.
+- KALDI: Foto 29 geçişte iki pahın simetrik görünümü ve fotoğrafla açıklık oranı; kapıya giren büyük çapraz boşluk giderildi fakat birebir eşleşme tamamlanmadı.
+- KALDI: Korkuluklarda fotoğrafın ince C/S kıvrım ve bağlantı ayrıntıları; yeni kat varyantları mevcut fakat birebir desen doğrulaması tamamlanmadı.
+- KALDI: Kartonpiyer birleşim izleri; fotoğraf bazında yeniden ele alınacak.
+- KALDI: Foto 15 banyo ışığı/kaplaması; pozlama artışı yalnız kontrol görünürlüğü, bitmiş aydınlatma değildir.
+- KALDI: Ceviz, parke, merdiven ahşabı ve duvar kremi: Adım 04 albedo/renk işi.
+
+### Son yerleşim doğrulaması
+
+| Yerleşim | Kendi referansı | Kontrol |
+|---|---|---|
+| Bodrum merdiveni | 47 (48 yardımcı) | 47 render; beyaz kalıntı KALDI |
+| Giriş merdiveni / galeri | 42,40 | iki açı |
+| Birinci kat / galeri | 18,34 | iki açı |
+| Çatı / son kol | 29 | kamera ve yerel duvar onayıyla |
+| Antre radyatörü | 40,42 | tek fiziksel radyatör, iki açı |
+| Camlı antre kapısı | 40,42 | açılış yönü iki açıyla düzeltildi |
+| Dış giriş kapısı 13 | 40,41 | kapalı kanat, kasa bini; alt ışık yarığı KALDI |
+| Diğer kapılar | önceki kapı tablosu | fotoğrafsız satırlar doğrulanmış sayılmaz |
+
+Korkuluk parametreleri moduller/korkuluk_motif.py içinde: yarıçap/tekrar/dikme aralığı metre. Fotoğraf oranlarından yaklaşık çıkarılmıştır; saha ölçümü ya da birebir çizgi izleme iddiası yok.
+
+### Foto 04 — öz denetim
+
+- **Malzeme tonu:** KALDI: Renk/albedo eşleşmesi Adım 04 kapsamıdır; bu görüntüdeki ara malzeme denemesi Adım 03 tamamlanmış işi sayılmaz.
+- **Fazla/eksik nesne:** KALDI: Mevcut koltuk/masa oranları ve avize ayrıntıları; mobilya bu adımda kapsam dışı, armatür M5 işi.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: Ortak merdiven maskesi ve malzemeler bu açıdan yeniden denetlendi.
+- **Geometri/oran:** KALDI: Mevcut mobilyaların fotoğrafla oran eşleşmesi; yeni mobilya üretilmedi.
+
+### Foto 13 — öz denetim
+
+- **Malzeme tonu:** KALDI: Renk/albedo eşleşmesi Adım 04 kapsamıdır; bu görüntüdeki ara malzeme denemesi Adım 03 tamamlanmış işi sayılmaz.
+- **Fazla/eksik nesne:** KALDI: Desenli perde M4, üçlü spot M5; yatak kullanıcı talimatıyla kontrol/EKLER dışında.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: Arşiv ve eski yatak kalıntısı kaldırıldı.
+- **Geometri/oran:** KALDI: Pencere çevresi/perde düzeni M4 adımında ele alınacak.
+
+### Foto 15 — öz denetim
+
+- **Malzeme tonu:** KALDI: Renk/albedo eşleşmesi Adım 04 kapsamıdır; bu görüntüdeki ara malzeme denemesi Adım 03 tamamlanmış işi sayılmaz.
+- **Fazla/eksik nesne:** KALDI: Raf içeriği, paspas ve küçük aksesuarlar; bu adımın altı düzeltmesinde değiller.
+- **Kalıntı/yerleşim:** KALDI: Duş ve mevcut tesisatın fotoğrafa göre tam konum kontrolü; bu adımda yeniden modellenmedi.
+- **Geometri/oran:** KALDI: Banyo kaplaması ve duş oranları fotoğraftakiyle aynı değil; mevcut referans banyo değişmedi.
+
+### Foto 17 — öz denetim
+
+- **Malzeme tonu:** KALDI: Renk/albedo eşleşmesi Adım 04 kapsamıdır; bu görüntüdeki ara malzeme denemesi Adım 03 tamamlanmış işi sayılmaz.
+- **Fazla/eksik nesne:** DÜZELTİLDİ: Beyaz yatak ve arşiv mobilyası kontrol dışında. KALDI: Doğru armatür M5.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: Eski topuz kalıntıları kaldırıldı, kanat menteşe pivotunda. KALDI: Kasa/eşik çevresindeki açık renk ışık yarıkları.
+- **Geometri/oran:** DÜZELTİLDİ: Kasa/kanat ve bitişik hol korkuluğu yeniden kontrol edildi.
+
+### Foto 18 — öz denetim
+
+- **Malzeme tonu:** KALDI: Renk/albedo eşleşmesi Adım 04 kapsamıdır; bu görüntüdeki ara malzeme denemesi Adım 03 tamamlanmış işi sayılmaz.
+- **Fazla/eksik nesne:** KALDI: Fotoğraftaki zincirli armatür/aplik ayrıntıları M5.
+- **Kalıntı/yerleşim:** KALDI: Eski beyaz merdiven kalıntısının mimari katmanda dar maske ile temizlenmesi Adım 04 ilk işi; önceki maske sonuç vermedi.
+- **Geometri/oran:** DÜZELTİLDİ: Birinci kat için ayrı C/S tekrar aralığı ve bordür; galeri L kenarında. Ölçüler fotoğraftan yaklaşık.
+
+### Foto 19 — öz denetim
+
+- **Malzeme tonu:** KALDI: Renk/albedo eşleşmesi Adım 04 kapsamıdır; bu görüntüdeki ara malzeme denemesi Adım 03 tamamlanmış işi sayılmaz.
+- **Fazla/eksik nesne:** KALDI: Mevcut yatak/komodin fotoğraftaki mobilya değil; mobilya bu adımın dışında.
+- **Kalıntı/yerleşim:** KALDI: Perde ve radyatörün bu odadaki varyantı M4/M6.
+- **Geometri/oran:** KALDI: Mevcut mobilya oranları; bu adımda yeni mobilya üretilmedi.
+
+### Foto 21 — öz denetim
+
+- **Malzeme tonu:** KALDI: Renk/albedo eşleşmesi Adım 04 kapsamıdır; bu görüntüdeki ara malzeme denemesi Adım 03 tamamlanmış işi sayılmaz.
+- **Fazla/eksik nesne:** KALDI: Mutfaktaki diğer radyatör M6; priz/cihaz ayrıntıları mevcut modelde farklı.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: Tezgâh ve duvar seramiği ortak X malzemesi kutuyla ayrıldı.
+- **Geometri/oran:** KALDI: Mevcut dolap/ocak yerleşimi ve model oranları; bu adımda mutfak mobilyası yeniden yapılmadı.
+
+### Foto 29 — öz denetim
+
+- **Malzeme tonu:** KALDI: Renk/albedo eşleşmesi Adım 04 kapsamıdır; bu görüntüdeki ara malzeme denemesi Adım 03 tamamlanmış işi sayılmaz.
+- **Fazla/eksik nesne:** KALDI: Duvar aplikleri ve interkom gibi küçük nesneler; M5/sonraki modül kapsamı.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: Kamera geri/aşağı ayarlandı; kullanıcı onayıyla yalnız yerel kapı üstü/yan duvar EKLER ile değiştirildi.
+- **Geometri/oran:** KALDI: Büyük çapraz boşluk kapatıldı; iki pahın görünüşü, açıklık oranı ve ince korkuluk deseni Adım 04 yeniden kontrolü.
+
+### Foto 34 — öz denetim
+
+- **Malzeme tonu:** KALDI: Renk/albedo eşleşmesi Adım 04 kapsamıdır; bu görüntüdeki ara malzeme denemesi Adım 03 tamamlanmış işi sayılmaz.
+- **Fazla/eksik nesne:** KALDI: Tavan/duvar armatürünün ayrıntıları M5.
+- **Kalıntı/yerleşim:** KALDI: Eski beyaz merdiven kalıntısının mimari katmanda dar maske ile temizlenmesi Adım 04 ilk işi; önceki maske sonuç vermedi. KALDI: Kasa/eşik çevresindeki açık renk ışık yarıkları.
+- **Geometri/oran:** DÜZELTİLDİ: 18 ile ortak fiziksel galeri iki açıdan denetlendi; iri kapalı daire yerine C/S kıvrımları.
+
+### Foto 40 — öz denetim
+
+- **Malzeme tonu:** KALDI: Renk/albedo eşleşmesi Adım 04 kapsamıdır; bu görüntüdeki ara malzeme denemesi Adım 03 tamamlanmış işi sayılmaz.
+- **Fazla/eksik nesne:** DÜZELTİLDİ: Dikey radyatör eklendi. KALDI: Sandalye kapsam dışı; interkom/tavan armatürü ayrıntıları henüz yapılmadı.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: Camlı kanadın açılma yönü antre içine alındı; dış kapı kasa bini eklendi. KALDI: Kasa/eşik çevresindeki açık renk ışık yarıkları.
+- **Geometri/oran:** DÜZELTİLDİ: 42 ile aynı radyatörün tek fiziksel yerleşimi doğrulandı; ayrı kopya oluşturulmadı.
+
+### Foto 42 — öz denetim
+
+- **Malzeme tonu:** KALDI: Renk/albedo eşleşmesi Adım 04 kapsamıdır; bu görüntüdeki ara malzeme denemesi Adım 03 tamamlanmış işi sayılmaz.
+- **Fazla/eksik nesne:** DÜZELTİLDİ: Dikey radyatör, vana ve bağlantı boruları. KALDI: Sandalyeler mobilya kapsamı dışında.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: Galeri korkuluğu döşeme boşluğunun sol kenarına oturtuldu; camlı kapı radyatörü kapatmıyor.
+- **Geometri/oran:** DÜZELTİLDİ: Girişe özgü tekrar/dikme ve küçük kıvrım bordürü; oda ortasından geçen çapraz yerleşim kaldırıldı.
+
+### Foto 44 — öz denetim
+
+- **Malzeme tonu:** KALDI: Renk/albedo eşleşmesi Adım 04 kapsamıdır; bu görüntüdeki ara malzeme denemesi Adım 03 tamamlanmış işi sayılmaz.
+- **Fazla/eksik nesne:** KALDI: Garajdaki depolama eşyaları ve raf içerikleri; mobilya/aksesuar bu adımda üretilmedi.
+- **Kalıntı/yerleşim:** DÜZELTİLDİ: Kapalı kanat konumu korunup yeni malzemeyle denetlendi. KALDI: Kasa/eşik çevresindeki açık renk ışık yarıkları.
+- **Geometri/oran:** KALDI: Depolama mobilyası/kadraj oranları referanstan farklı; mevcut model korundu.
+
+### Foto 47 — öz denetim
+
+- **Malzeme tonu:** KALDI: Renk/albedo eşleşmesi Adım 04 kapsamıdır; bu görüntüdeki ara malzeme denemesi Adım 03 tamamlanmış işi sayılmaz.
+- **Fazla/eksik nesne:** KALDI: Sahanlık aynası/aplik ayrıntıları bu adımda yapılmadı.
+- **Kalıntı/yerleşim:** KALDI: Eski beyaz merdiven kalıntısının mimari katmanda dar maske ile temizlenmesi Adım 04 ilk işi; önceki maske sonuç vermedi.
+- **Geometri/oran:** DÜZELTİLDİ: Bodrumun korkuluğu dış kenarda ve ayrı dar kıvrımlı varyant; diğer kat kopyası değil.
+
+Foto 15 pozlama artışı yalnız kontrol görünürlüğü içindir; fiziksel banyo armatürünün tamamlandığı anlamına gelmez. KALDI kayıtları bütün Tur 10 için açık işleri gösterir; mobilya üretilmedi.

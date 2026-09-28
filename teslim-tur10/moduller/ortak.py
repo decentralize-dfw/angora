@@ -53,6 +53,8 @@ def boru(name,pts,r,mat,cyclic=False):
  for p in ob.data.polygons:p.use_smooth=True
  return ob
 def bitir(modul,notlar):
+ from foto_doku_uygula import uygula
+ uygula(list(C.objects),Path(r'C:\Users\yigit\angora-tur9\dokular.json'))
  bpy.ops.object.select_all(action='DESELECT')
  counts={}
  for o in C.objects:

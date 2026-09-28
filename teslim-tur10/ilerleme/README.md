@@ -31,3 +31,21 @@ Her adım: FOTO | ÖNCE | SONRA
 ![A esik ve eski donanim temizligi foto 42](02_a-esik-ve-eski-donanim-temizligi_foto_42.jpg)
 ![A esik ve eski donanim temizligi foto 44](02_a-esik-ve-eski-donanim-temizligi_foto_44.jpg)
 ![A esik ve eski donanim temizligi foto 47](02_a-esik-ve-eski-donanim-temizligi_foto_47.jpg)
+
+## 03 · Adım 03 · korkuluk deseni + eksikler
+
+Mevcut haliyle kapatıldı. Çözülmeyenler ve Adım 04 ilk işleri: [notlar.md](../notlar.md). Ceviz/parke/merdiven/duvar rengi Adım 04 kapsamıdır; aşağıdaki ara renk denemeleri onaylanmış sonuç değildir.
+![Adım 03 · korkuluk deseni + eksikler foto 04](03_adim-03-korkuluk-deseni-eksikler_foto_04.jpg)
+![Adım 03 · korkuluk deseni + eksikler foto 13](03_adim-03-korkuluk-deseni-eksikler_foto_13.jpg)
+![Adım 03 · korkuluk deseni + eksikler foto 15](03_adim-03-korkuluk-deseni-eksikler_foto_15.jpg)
+![Adım 03 · korkuluk deseni + eksikler foto 17](03_adim-03-korkuluk-deseni-eksikler_foto_17.jpg)
+![Adım 03 · korkuluk deseni + eksikler foto 18](03_adim-03-korkuluk-deseni-eksikler_foto_18.jpg)
+![Adım 03 · korkuluk deseni + eksikler foto 19](03_adim-03-korkuluk-deseni-eksikler_foto_19.jpg)
+![Adım 03 · korkuluk deseni + eksikler foto 21](03_adim-03-korkuluk-deseni-eksikler_foto_21.jpg)
+![Adım 03 · korkuluk deseni + eksikler foto 29](03_adim-03-korkuluk-deseni-eksikler_foto_29.jpg)
+![Adım 03 · korkuluk deseni + eksikler foto 34](03_adim-03-korkuluk-deseni-eksikler_foto_34.jpg)
+![Adım 03 · korkuluk deseni + eksikler foto 40](03_adim-03-korkuluk-deseni-eksikler_foto_40.jpg)
+![Adım 03 · korkuluk deseni + eksikler foto 42](03_adim-03-korkuluk-deseni-eksikler_foto_42.jpg)
+![Adım 03 · korkuluk deseni + eksikler foto 44](03_adim-03-korkuluk-deseni-eksikler_foto_44.jpg)
+![Adım 03 · korkuluk deseni + eksikler foto 47](03_adim-03-korkuluk-deseni-eksikler_foto_47.jpg)
+

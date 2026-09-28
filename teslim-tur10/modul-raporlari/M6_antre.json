@@ -1,0 +1,19 @@
+{
+ "modul": "M6_antre",
+ "nesneler": 2281,
+ "ucgen": 418340,
+ "en_buyuk": 652,
+ "notlar": {
+  "fotolar": [
+   40,
+   42
+  ],
+  "adet": 1,
+  "not": "Aynı x=2.969 antre duvarı iki farklı açıdan görülüyor; iki radyatör üst üste kopyalanmadı. Diğer oda radyatörleri bu aşamada yok.",
+  "olcu_m": [
+   0.68,
+   0.1,
+   1.67
+  ]
+ }
+}

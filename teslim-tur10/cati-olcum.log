@@ -1,0 +1,58 @@
+18:57:17 | INFO: Data are loaded, start creating Blender stuff
+18:57:17 | INFO: Blender create Mesh node Mesh_15183.008
+18:57:17 | INFO: Blender create Mesh node Mesh_3020.001
+18:57:17 | INFO: Blender create Mesh node Mesh_15183.003
+18:57:17 | INFO: Blender create Mesh node Mesh_11.004
+18:57:17 | INFO: Blender create Mesh node antique_wood (2) | interior-common.118
+18:57:17 | INFO: Blender create Mesh node Mesh_3020.004
+18:57:17 | INFO: Blender create Mesh node Cube.001
+18:57:17 | INFO: Blender create Mesh node Mesh_3020.009
+18:57:18 | INFO: Blender create Mesh node Mesh_15183.114
+18:57:18 | INFO: Blender create Mesh node Cube.003
+18:57:18 | INFO: Blender create Mesh node Mesh_93.005
+18:57:19 | INFO: Blender create Mesh node Mesh_3020.002
+18:57:19 | INFO: Blender create Mesh node Mesh_242
+18:57:19 | INFO: Blender create Mesh node Mesh_11.003
+18:57:19 | INFO: Blender create Mesh node Mesh_11.001
+18:57:19 | INFO: Blender create Mesh node Mesh_15183.002
+18:57:19 | INFO: Blender create Mesh node Mesh_15183.104
+18:57:19 | INFO: Blender create Mesh node Mesh_15183.109
+18:57:19 | INFO: Blender create Mesh node Mesh_97
+18:57:19 | INFO: Blender create Mesh node Mesh_15183.103
+18:57:19 | INFO: Blender create Mesh node Mesh_15183.107
+18:57:19 | INFO: Blender create Mesh node Mesh_15183.108
+18:57:19 | INFO: Blender create Mesh node Mesh_15183.099
+18:57:19 | INFO: Blender create Mesh node Mesh_15183.100
+18:57:19 | INFO: Blender create Mesh node Mesh_15183.001
+18:57:19 | INFO: glTF import finished in 1.97s
+[CATI] -1.0 3.45 [-1.0, 3.45, 12.1073] ceiling.001
+[CATI] -0.3 3.45 [-0.3, 3.45, 12.3567] ceiling.001
+[CATI] 0 3.45 [0.0, 3.45, 12.1232] ceiling.001
+[CATI] 0.5 3.45 [0.5, 3.45, 11.7696] ceiling.001
+[CATI] 1.0 3.45 [1.0, 3.45, 11.4239] ceiling.001
+[CATI] 1.5 3.45 [1.5, 3.45, 11.0782] ceiling.001
+[CATI] 2.0 3.45 [2.0, 3.45, 10.7325] ceiling.001
+[CATI] -1.0 3.65 [-1.0, 3.65, 12.4535] roof-7
+[CATI] -0.3 3.65 [-0.3, 3.65, 12.676] roof-7
+[CATI] 0 3.65 [0.0, 3.65, 12.1144] ceiling.001
+[CATI] 0.5 3.65 [0.5, 3.65, 11.7689] ceiling.001
+[CATI] 1.0 3.65 [1.0, 3.65, 11.7779] roof-7
+[CATI] 1.5 3.65 [1.5, 3.65, 11.4321] roof-7
+[CATI] 2.0 3.65 [2.0, 3.65, 11.0865] roof-7
+[CATI] -1.0 3.9 [-1.0, 3.9, 12.1046] ceiling.001
+[CATI] -0.3 3.9 [-0.3, 3.9, 12.3791] ceiling.001
+[CATI] 0 3.9 [0.0, 3.9, 12.115] ceiling.001
+[CATI] 0.5 3.9 [0.5, 3.9, 11.7692] ceiling.001
+[CATI] 1.0 3.9 [1.0, 3.9, 11.4234] ceiling.001
+[CATI] 1.5 3.9 [1.5, 3.9, 11.0776] ceiling.001
+[CATI] 2.0 3.9 [2.0, 3.9, 11.0865] roof-7
+[CATI] -1.0 4.4 [-1.0, 4.4, 12.1089] ceiling.001
+[CATI] -0.3 4.4 [-0.3, 4.4, 11.5103] WOODY-DARK.001
+[CATI] 0 4.4 [0.0, 4.4, 12.115] ceiling.001
+[CATI] 0.5 4.4 [0.5, 4.4, 11.7692] ceiling.001
+[CATI] 1.0 4.4 [1.0, 4.4, 11.4234] ceiling.001
+[CATI] 1.5 4.4 [1.5, 4.4, 11.0776] ceiling.001
+[CATI] 2.0 4.4 [2.0, 4.4, 11.0865] roof-7
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

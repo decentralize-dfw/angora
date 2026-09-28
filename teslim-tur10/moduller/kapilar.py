@@ -16,6 +16,8 @@ black=o.malzeme('M3_Garaj_siyah_kulp',(.018,.018,.018),.45,.3)
 d=json.loads((o.W/'mimari-olcum.json').read_text(encoding='utf-8'))['parcalar']
 frames=[p for p in d if p['mat']==['WOODY-DARK.001'] and p['nv'] in [44,55] and 2.09<p['max'][2]-p['min'][2]<2.12]
 leaves=[p for p in d if p['mat']==['WOODY-DARK.001'] and p['nv']==280 and 1.95<p['max'][2]-p['min'][2]<2.02]
+frames += [p for p in d if p['mat']==['WOODY-DARK.001'] and p['nv']==757 and p['min'][1]<-4 and 3<p['min'][2]<3.2]
+leaves += [p for p in d if p['mat']==['WOODY-DARK.001'] and p['nv']==741 and p['min'][1]<-4 and 3<p['min'][2]<3.2]
 boxes=json.loads((o.W/'silme-kutulari.json').read_text(encoding='utf-8'));boxes=[b for b in boxes if not b['ad'].startswith('M3_')]
 records=[]
 def localbox(name,c,ux,uy,u,v,z,su,sv,sz,mat,pah=.004):
@@ -53,9 +55,14 @@ for i,fr in enumerate(frames):
  # Kat holündeki sağ kapı: foto 18'de kanat tam 90 derece açık değil.
  if abs(floor-6.3713)<.01 and abs(center.x-1.8226)<.08:
   hinge=c+ux*(width/2-.074);direction=Vector((math.sin(math.radians(35)),-math.cos(math.radians(35)),0))
- if i+1==11:
-  # Foto 44: garaj deposu kanadı kapalı.
+ if i+1 in [11,13]:
+  # Foto 44 garaj deposu ve foto 40/41 dış giriş kanadı kapalı.
   direction=ux if (hinge-c).dot(ux)<0 else -ux
+ if i+1==13:
+  # Kapalı dış kapının kasadaki bini payı ışık yarığını örter.
+  w=width-.10;h=2.012
+  for side in [-1,1]:localbox(tag+'_kasa_bini',c,ux,uy,side*(width/2-.065),-.038,1.015,.075,.03,2.03,wood,.002)
+  localbox(tag+'_ust_bini',c,ux,uy,0,-.038,2.018,width-.08,.03,.075,wood,.002)
  lx=direction;ly=Vector((-lx.y,lx.x,0));lc=hinge+lx*w/2;lc.z=floor+.008
  localbox(tag+'_kanat',lc,lx,ly,0,0,h/2,w,.037,h,wood,.005)
  # 2 x 3 paneller: kısa üst, uzun orta, orta boy alt.
@@ -70,8 +77,8 @@ for i,fr in enumerate(frames):
      localbox(tag+'_dik_profil',lc,lx,ly,pc+sign*(pw/2+.012),face*.032,zh,.018,.015,high-low+.045,wood,.004)
      localbox(tag+'_yatay_profil',lc,lx,ly,pc,face*.032,zh+sign*((high-low)/2+.012),pw+.045,.015,.018,wood,.004)
   hc=lc+lx*(w/2-.085)+ly*(face*.045)+Vector((0,0,.96))
-  if i+1 in [1,11]:
-   hm=steel if i+1==1 else black
+  if i+1 in [1,5,11,13]:
+   hm=steel if i+1==1 else (brass if i+1==13 else black)
    o.boru(tag+'_kulp',[hc,hc+ly*(face*.045),hc+ly*(face*.045)-lx*.11],.010,hm)
    continue
   o.boru(tag+'_topuz_mili',[hc, hc+ly*(face*.035)],.010,brass)

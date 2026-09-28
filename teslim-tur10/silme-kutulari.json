@@ -26,40 +26,23 @@
   ]
  },
  {
-  "ad": "M2_eski_basamak_ve_korkuluk",
-  "katman": "mimari",
-  "min": [
-   0.12,
-   -0.51,
-   0.001
-  ],
-  "max": [
-   4.19,
-   3.15,
-   10.5
-  ],
-  "malzemeler": [
-   "Simple wood",
-   "metal.001"
-  ]
- },
- {
-  "ad": "M2_eski_kupeşte_ve_pirinc",
+  "ad": "Tur10_oda107_mevcut_yatak_haric",
   "katman": "mobilya",
   "min": [
-   0.12,
-   -0.51,
-   0.001
+   -1.94,
+   -4.21,
+   6.42
   ],
   "max": [
-   4.19,
-   3.15,
-   10.5
+   0.31,
+   -2.5,
+   7.74
   ],
   "malzemeler": [
-   "brass (4)",
-   "R31 | R33 antique nook walnut"
-  ]
+   "wood_honey",
+   "ROUGHNSS1"
+  ],
+  "not": "Foto 13/17 beyaz yatak ve ahşap başlık; geometri-olcum.json bileşen ölçümü. Yeni mobilya üretilmedi."
  },
  {
   "ad": "M3_01_kasa",
@@ -672,5 +655,129 @@
   "malzemeler": [
    "brass (4)"
   ]
+ },
+ {
+  "ad": "M3_13_kasa",
+  "katman": "mimari",
+  "min": [
+   1.9137,
+   -4.1692,
+   3.0934000000000004
+  ],
+  "max": [
+   2.8756,
+   -4.076099999999999,
+   5.1557
+  ],
+  "malzemeler": [
+   "WOODY-DARK.001"
+  ]
+ },
+ {
+  "ad": "M3_13_kanat",
+  "katman": "mimari",
+  "min": [
+   2.7141,
+   -4.13,
+   3.1035000000000004
+  ],
+  "max": [
+   2.8400999999999996,
+   -3.2802000000000002,
+   5.0737000000000005
+  ],
+  "malzemeler": [
+   "WOODY-DARK.001"
+  ]
+ },
+ {
+  "ad": "M3_13_eski_topuz_mentese",
+  "katman": "mobilya",
+  "min": [
+   2.5801,
+   -4.263999999999999,
+   2.9695
+  ],
+  "max": [
+   2.9741,
+   -3.1462,
+   5.2077
+  ],
+  "malzemeler": [
+   "brass (4)"
+  ]
+ },
+ {
+  "ad": "Tur10_foto29_yerel_duvar",
+  "katman": "mimari",
+  "min": [
+   -0.4,
+   3.44,
+   9.475
+  ],
+  "max": [
+   1.02,
+   3.83,
+   12.5
+  ],
+  "malzemeler": [
+   "SimpleWhiteWall"
+  ],
+  "kes": true,
+  "not": "Kullanıcı onaylı yerel kapı üstü/yan duvar; yüzler kutu sınırında bölünür."
+ },
+ {
+  "ad": "M2_eski_basamak_ve_korkuluk",
+  "katman": "mimari",
+  "min": [
+   0.12,
+   -0.51,
+   0.001
+  ],
+  "max": [
+   4.19,
+   3.15,
+   10.5
+  ],
+  "malzemeler": [
+   "Simple wood",
+   "metal.001"
+  ]
+ },
+ {
+  "ad": "M2_eski_kupeşte_ve_pirinc",
+  "katman": "mobilya",
+  "min": [
+   0.12,
+   -0.51,
+   0.001
+  ],
+  "max": [
+   4.19,
+   3.15,
+   10.5
+  ],
+  "malzemeler": [
+   "brass (4)",
+   "R31 | R33 antique nook walnut"
+  ]
+ },
+ {
+  "ad": "M2_INTERIOR_eski_beyaz_merdiven",
+  "katman": "mobilya",
+  "min": [
+   0.75,
+   0.9,
+   -0.01
+  ],
+  "max": [
+   4.19,
+   3.15,
+   9.47
+  ],
+  "malzemeler": [
+   "Simple White Wall"
+  ],
+  "not": "Foto47 ray ölçümü: interior.002 üzerindeki eski beyaz basamaklar; EKLER merdiveni korunur."
  }
 ]
