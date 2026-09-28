@@ -49,3 +49,21 @@ Mevcut haliyle kapatıldı. Çözülmeyenler ve Adım 04 ilk işleri: [notlar.md
 ![Adım 03 · korkuluk deseni + eksikler foto 44](03_adim-03-korkuluk-deseni-eksikler_foto_44.jpg)
 ![Adım 03 · korkuluk deseni + eksikler foto 47](03_adim-03-korkuluk-deseni-eksikler_foto_47.jpg)
 
+
+## 04 · Adım 04 · albedo + armatürler
+
+13 kontrol, tek modelleme turu. Yeni kusurlar düzeltilmeden bu mevcut durum yayımlandı: merdiven yan duvar/tavan açıklıkları, parkede tekrarlayan parlak izler, armatür kadraj/konum sorunları. [Adım 05 ilk işleri ve fotoğraf bazlı denetim](../notlar.md). Duvar ve karo albedoları korundu.
+![Adım 04 · albedo + armatürler foto 04](04_adim-04-albedo-armaturler_foto_04.jpg)
+![Adım 04 · albedo + armatürler foto 13](04_adim-04-albedo-armaturler_foto_13.jpg)
+![Adım 04 · albedo + armatürler foto 15](04_adim-04-albedo-armaturler_foto_15.jpg)
+![Adım 04 · albedo + armatürler foto 17](04_adim-04-albedo-armaturler_foto_17.jpg)
+![Adım 04 · albedo + armatürler foto 18](04_adim-04-albedo-armaturler_foto_18.jpg)
+![Adım 04 · albedo + armatürler foto 19](04_adim-04-albedo-armaturler_foto_19.jpg)
+![Adım 04 · albedo + armatürler foto 21](04_adim-04-albedo-armaturler_foto_21.jpg)
+![Adım 04 · albedo + armatürler foto 29](04_adim-04-albedo-armaturler_foto_29.jpg)
+![Adım 04 · albedo + armatürler foto 34](04_adim-04-albedo-armaturler_foto_34.jpg)
+![Adım 04 · albedo + armatürler foto 40](04_adim-04-albedo-armaturler_foto_40.jpg)
+![Adım 04 · albedo + armatürler foto 42](04_adim-04-albedo-armaturler_foto_42.jpg)
+![Adım 04 · albedo + armatürler foto 44](04_adim-04-albedo-armaturler_foto_44.jpg)
+![Adım 04 · albedo + armatürler foto 47](04_adim-04-albedo-armaturler_foto_47.jpg)
+

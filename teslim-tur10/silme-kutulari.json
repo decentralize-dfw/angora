@@ -708,25 +708,6 @@
   ]
  },
  {
-  "ad": "Tur10_foto29_yerel_duvar",
-  "katman": "mimari",
-  "min": [
-   -0.4,
-   3.44,
-   9.475
-  ],
-  "max": [
-   1.02,
-   3.83,
-   12.5
-  ],
-  "malzemeler": [
-   "SimpleWhiteWall"
-  ],
-  "kes": true,
-  "not": "Kullanıcı onaylı yerel kapı üstü/yan duvar; yüzler kutu sınırında bölünür."
- },
- {
   "ad": "M2_eski_basamak_ve_korkuluk",
   "katman": "mimari",
   "min": [
@@ -764,7 +745,7 @@
  },
  {
   "ad": "M2_INTERIOR_eski_beyaz_merdiven",
-  "katman": "mobilya",
+  "katman": "mimari",
   "min": [
    0.75,
    0.9,
@@ -778,6 +759,71 @@
   "malzemeler": [
    "Simple White Wall"
   ],
-  "not": "Foto47 ray ölçümü: interior.002 üzerindeki eski beyaz basamaklar; EKLER merdiveni korunur."
+  "not": "Adım04: Simple White Wall BUILDING malzemesidir; katman düzeltildi."
+ },
+ {
+  "ad": "Tur10_foto29_yerel_duvar",
+  "katman": "mimari",
+  "min": [
+   -0.4,
+   3.44,
+   9.475
+  ],
+  "max": [
+   1.02,
+   5.08,
+   12.5
+  ],
+  "malzemeler": [
+   "SimpleWhiteWall"
+  ],
+  "kes": true,
+  "not": "Kullanıcı onaylı yerel kapı üstü/yan duvar; iki pahı örten eski yan dönüş de çıkarılır."
+ },
+ {
+  "ad": "A04_F18_tavan",
+  "katman": "mobilya",
+  "min": [
+   -0.65,
+   -1.0,
+   8.6
+  ],
+  "max": [
+   0.15,
+   -0.3,
+   9.0
+  ]
+ },
+ {
+  "ad": "A04_F40_tavan",
+  "katman": "mobilya",
+  "min": [
+   0.98,
+   -1.1,
+   5.45
+  ],
+  "max": [
+   1.8,
+   -0.3,
+   5.9
+  ]
+ },
+ {
+  "ad": "A04_F29_dolap_haric",
+  "katman": "mimari",
+  "min": [
+   -3.5,
+   2.5,
+   9.48
+  ],
+  "max": [
+   -1.95,
+   4.6,
+   10.65
+  ],
+  "malzemeler": [
+   "WOODY-DARK.001"
+  ],
+  "not": "Foto29 ray ölçümü: dolap WOODY-DARK.001 ile BUILDING içinde; mobilya olduğu için gizlendi."
  }
 ]

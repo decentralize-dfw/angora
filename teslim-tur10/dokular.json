@@ -3,238 +3,290 @@
   "no": 1,
   "yuzey": "iç duvar boyası",
   "malzemeler": [
-   "Simple White Wall"
+   "Simple White Wall",
+   "Stucco painted wall",
+   "M2_Beyaz_merdiven_alti",
+   "Stucco painted wall",
+   "M2_Beyaz_merdiven_alti",
+   "Stucco painted wall",
+   "M2_Beyaz_merdiven_alti",
+   "Stucco painted wall",
+   "M2_Beyaz_merdiven_alti"
   ],
   "klasor": "01_duvar",
-  "kaynak_url": "https://polyhaven.com/a/plastered_wall_04",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
-  "doku_olcusu_m": 3.2,
+  "doku_olcusu_m": 1.0,
   "doku_olcusu_xy_m": [
-   3.2,
-   3.2
+   1.0,
+   1.0
   ],
-  "renk_hex": "#d7c1a7",
+  "renk_hex": null,
   "purluluk": 0.85,
   "clearcoat": 0,
-  "normal_siddeti": 0.12,
-  "secim_nedeni": "Plastered Wall 04 daha düzgün ve az lekeli; White Plaster 02 fotoğraftaki boyaya göre belirgin kirli/taneli.",
-  "secilen_doku": "plastered_wall_04",
-  "karsilastirilan_adaylar": [
-   "plastered_wall_04",
-   "white_plaster_02"
-  ],
-  "b1_noktalari": [
-   "4:0.80,0.45",
-   "23:0.70,0.40"
-  ],
-  "renk_ornegi": {
-   "foto": 21,
-   "piksel_kutusu": [
-    32,
-    240,
-    160,
-    360
-   ],
-   "srgb_ortalama": [
-    215,
-    193,
-    167
-   ]
-  },
+  "normal_siddeti": 0.0,
   "emin_degil": true,
-  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
-  "tur10_not": "Renk fotoğraf karşılaştırmasında gözle kontrol edilir; fotoğraf rengi ışık içerdiğinden albedo kesin değildir."
+  "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
+  "kaynak": "foto_21",
+  "uretim": "Kullanıcı talimatındaki lekesiz düz kırık beyaz; fotoğraf ışık lekeleri alınmadı.",
+  "normal_roughness_kaynak_url": "https://polyhaven.com/a/plastered_wall_04",
+  "albedo_haklari": "Kullanıcının sağladığı fotoğraftan türetilmiş veya kullanıcı tarifindeki düz boya; stok lisansı yalnız normal/roughness için geçerlidir."
  },
  {
   "no": 2,
   "yuzey": "tavan",
   "malzemeler": [
-   "ceiling.001"
+   "ceiling.001",
+   "M1_Beyaz_kartonpiyer",
+   "M1_Beyaz_saten_alci",
+   "M1_Beyaz_saten_alci",
+   "M1_Beyaz_saten_alci"
   ],
   "klasor": "02_tavan",
-  "kaynak_url": "https://polyhaven.com/a/plastered_wall_04",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
-  "doku_olcusu_m": 3.2,
+  "doku_olcusu_m": 1.0,
   "doku_olcusu_xy_m": [
-   3.2,
-   3.2
+   1.0,
+   1.0
   ],
-  "renk_hex": "#faf9f5",
+  "renk_hex": null,
   "purluluk": 0.9,
   "clearcoat": 0,
-  "normal_siddeti": 0.05,
-  "secim_nedeni": "Düz tavan için Plastered Wall 04 daha sakin mikro doku verir; diğer adayın yoğun benekleri uygun değil.",
-  "secilen_doku": "plastered_wall_04",
-  "karsilastirilan_adaylar": [
-   "plastered_wall_04",
-   "white_plaster_02"
-  ],
-  "b1_noktalari": [
-   "4:0.50,0.08",
-   "23:0.50,0.08"
-  ],
-  "renk_ornegi": {
-   "foto": 21,
-   "piksel_kutusu": [
-    560,
-    48,
-    880,
-    144
-   ],
-   "srgb_ortalama": [
-    227,
-    208,
-    191
-   ]
-  },
+  "normal_siddeti": 0.0,
   "emin_degil": true,
-  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
-  "tur10_not": "Renk fotoğraf karşılaştırmasında gözle kontrol edilir; fotoğraf rengi ışık içerdiğinden albedo kesin değildir."
+  "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
+  "kaynak": "foto_21",
+  "uretim": "Kullanıcı talimatındaki lekesiz düz kırık beyaz; fotoğraf ışık lekeleri alınmadı.",
+  "normal_roughness_kaynak_url": "https://polyhaven.com/a/plastered_wall_04",
+  "albedo_haklari": "Kullanıcının sağladığı fotoğraftan türetilmiş veya kullanıcı tarifindeki düz boya; stok lisansı yalnız normal/roughness için geçerlidir."
  },
  {
   "no": 3,
   "yuzey": "ahşap parke",
   "malzemeler": [
-   "WOOD-FL"
+   "WOOD-FL",
+   "wood_floor",
+   "wood_floor",
+   "wood_floor",
+   "wood_floor"
   ],
   "klasor": "03_parke",
-  "kaynak_url": "https://polyhaven.com/a/wood_floor",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
-  "doku_olcusu_m": 1.7,
+  "doku_olcusu_m": 0.6,
   "doku_olcusu_xy_m": [
-   1.7,
-   1.7
+   0.6,
+   0.65
   ],
-  "renk_hex": "#85482e",
-  "purluluk": 0.28,
+  "renk_hex": null,
+  "purluluk": 0.43,
   "clearcoat": 0.18,
-  "normal_siddeti": 0.12,
-  "secim_nedeni": "Wood Floor uzun doğal damarları ve daha sıcak tonu ile seçildi; Laminate Floor 02 daha açık ve yeknesak.",
-  "secilen_doku": "wood_floor",
-  "karsilastirilan_adaylar": [
-   "wood_floor",
-   "laminate_floor_02"
-  ],
-  "b1_noktalari": [
-   "4:0.92,0.91",
-   "23:0.35,0.88"
-  ],
-  "renk_ornegi": {
-   "foto": 4,
-   "piksel_kutusu": [
-    128,
-    996,
-    288,
-    1080
+  "normal_siddeti": 0.06,
+  "emin_degil": true,
+  "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
+  "kaynak": "foto_34",
+  "perspektif": {
+   "piksel_koseleri": [
+    [
+     59,
+     924
+    ],
+    [
+     350,
+     1010
+    ],
+    [
+     184,
+     1195
+    ],
+    [
+     0,
+     1129
+    ]
    ],
-   "srgb_ortalama": [
-    226,
-    118,
-    81
+   "olcu_m": [
+    0.6,
+    0.65
+   ],
+   "olcum": "Fotoğraftan yaklaşık; saha ölçümü değil."
+  },
+  "beyaz_dengesi": {
+   "referans_kutusu": [
+    400,
+    120,
+    620,
+    210
+   ],
+   "referans_rgb": [
+    182.0,
+    155.0,
+    134.0
+   ],
+   "kanal_kazanci": [
+    0.8849460603321344,
+    1.0086641234029976,
+    1.106389816264868
    ]
   },
-  "emin_degil": true,
-  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
-  "tur10_not": "Renk fotoğraf karşılaştırmasında gözle kontrol edilir; fotoğraf rengi ışık içerdiğinden albedo kesin değildir."
+  "uretim": "warpPerspective; büyük Gauss alanına bölme; nötr kırık beyaz dengesi; parlama inpaint; kenar eşleme.",
+  "normal_roughness_kaynak_url": "https://polyhaven.com/a/wood_floor",
+  "adim04": {
+   "ton_hedef_rgb": [
+    62,
+    45,
+    34
+   ],
+   "beyaz_referans": [
+    850,
+    110,
+    960,
+    180
+   ],
+   "yontem": "Perspektif, Gauss gradyan giderme, nötr beyaz dengesi, fotoğraf referansına göre koyu ton kalibrasyonu, kenar eşleme."
+  },
+  "albedo_haklari": "Kullanıcının sağladığı fotoğraftan türetilmiş veya kullanıcı tarifindeki düz boya; stok lisansı yalnız normal/roughness için geçerlidir."
  },
  {
   "no": 4,
   "yuzey": "yer karosu (mutfak/antre/bodrum)",
   "malzemeler": [
-   "terra_floor"
+   "terra_floor",
+   "M3_Krem_karo_esik",
+   "M3_Krem_karo_esik",
+   "M3_Krem_karo_esik",
+   "M3_Krem_karo_esik"
   ],
   "klasor": "04_karo",
-  "kaynak_url": "https://polyhaven.com/a/brown_floor_tiles",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
-  "doku_olcusu_m": 1.7,
+  "doku_olcusu_m": 0.45,
   "doku_olcusu_xy_m": [
-   1.7,
-   1.7
+   0.45,
+   0.45
   ],
-  "renk_hex": "#e4c5a9",
-  "purluluk": 0.38,
+  "renk_hex": null,
+  "purluluk": 0.48,
   "clearcoat": 0,
-  "normal_siddeti": 0.15,
-  "secim_nedeni": "Brown Floor Tiles mutfak/antredeki sıcak bej bulutlanmaya daha yakın; Terracotta Floor Tiles bodrum için yakın fakat genel olarak çok koyu kırmızı.",
-  "secilen_doku": "brown_floor_tiles",
-  "karsilastirilan_adaylar": [
-   "brown_floor_tiles",
-   "terracotta_floor_tiles"
-  ],
-  "b1_noktalari": [
-   "21:0.50,0.90",
-   "1:0.35,0.88"
-  ],
-  "renk_ornegi": {
-   "foto": 21,
-   "piksel_kutusu": [
-    512,
-    960,
-    736,
-    1080
+  "normal_siddeti": 0.015,
+  "emin_degil": true,
+  "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
+  "oda_farki": "Aynı terra_floor malzemesi mutfak/antre/bodrumda kullanılıyor; fotoğrafta bodrum daha kırmızı. Tek doku tüm odalara birebir uymaz.",
+  "kaynak": "foto_21",
+  "perspektif": {
+   "piksel_koseleri": [
+    [
+     675,
+     1018
+    ],
+    [
+     815,
+     945
+    ],
+    [
+     963,
+     1026
+    ],
+    [
+     830,
+     1124
+    ]
    ],
-   "srgb_ortalama": [
-    228,
-    197,
-    169
+   "olcu_m": [
+    0.45,
+    0.45
+   ],
+   "olcum": "Fotoğraftaki kapı/karo/basamak oranından yaklaşık fiziksel ölçek; yerinde ölçüm yok."
+  },
+  "beyaz_dengesi": {
+   "referans_kutusu": [
+    800,
+    70,
+    1100,
+    180
+   ],
+   "referans_rgb": [
+    228.0,
+    209.0,
+    191.0
+   ],
+   "kanal_kazanci": [
+    0.9500354115018323,
+    1.0060473889772161,
+    1.0439171995209513
    ]
   },
-  "emin_degil": true,
-  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
-  "oda_farki": "Aynı terra_floor malzemesi mutfak/antre/bodrumda kullanılıyor; fotoğrafta bodrum daha kırmızı. Tek doku tüm odalara birebir uymaz.",
-  "tur10_not": "Renk fotoğraf karşılaştırmasında gözle kontrol edilir; fotoğraf rengi ışık içerdiğinden albedo kesin değildir."
+  "uretim": "warpPerspective; büyük Gauss alanına bölme; nötr kırık beyaz dengesi; parlama inpaint; kenar eşleme.",
+  "normal_roughness_kaynak_url": "https://polyhaven.com/a/brown_floor_tiles",
+  "albedo_haklari": "Kullanıcının sağladığı fotoğraftan türetilmiş veya kullanıcı tarifindeki düz boya; stok lisansı yalnız normal/roughness için geçerlidir."
  },
  {
   "no": 5,
   "yuzey": "mutfak dolabı ahşabı",
   "malzemeler": [
-   "wood_honey",
-   "R31 | R33 antique nook walnut"
+   "wood_honey"
   ],
   "klasor": "05_dolap",
-  "kaynak_url": "https://polyhaven.com/a/oak_veneer_01",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
-  "doku_olcusu_m": 1.83,
+  "doku_olcusu_m": 0.13,
   "doku_olcusu_xy_m": [
-   1.83,
-   1.83
+   0.13,
+   0.49
   ],
-  "renk_hex": "#b3967c",
-  "purluluk": 0.34,
+  "renk_hex": null,
+  "purluluk": 0.4,
   "clearcoat": 0.08,
-  "normal_siddeti": 0.12,
-  "secim_nedeni": "Oak Veneer 01 giriş mutfağındaki bal tonu ve düz damara daha yakın; Kitchen Wood bodrum için düşünülebilir fakat girişte fazla koyu.",
-  "secilen_doku": "oak_veneer_01",
-  "karsilastirilan_adaylar": [
-   "oak_veneer_01",
-   "kitchen_wood"
-  ],
-  "b1_noktalari": [
-   "21:0.38,0.69",
-   "1:0.33,0.37"
-  ],
-  "renk_ornegi": {
-   "foto": 21,
-   "piksel_kutusu": [
-    592,
-    276,
-    640,
-    432
+  "normal_siddeti": 0.015,
+  "emin_degil": true,
+  "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
+  "kaynak": "foto_21",
+  "perspektif": {
+   "piksel_koseleri": [
+    [
+     845,
+     397
+    ],
+    [
+     880,
+     393
+    ],
+    [
+     880,
+     525
+    ],
+    [
+     845,
+     529
+    ]
    ],
-   "srgb_ortalama": [
-    179,
-    150,
-    124
+   "olcu_m": [
+    0.13,
+    0.49
+   ],
+   "olcum": "Fotoğraftaki kapı/karo/basamak oranından yaklaşık fiziksel ölçek; yerinde ölçüm yok."
+  },
+  "beyaz_dengesi": {
+   "referans_kutusu": [
+    800,
+    70,
+    1100,
+    180
+   ],
+   "referans_rgb": [
+    228.0,
+    209.0,
+    191.0
+   ],
+   "kanal_kazanci": [
+    0.9500354115018323,
+    1.0060473889772161,
+    1.0439171995209513
    ]
   },
-  "emin_degil": true,
-  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
-  "tur10_not": "Renk fotoğraf karşılaştırmasında gözle kontrol edilir; fotoğraf rengi ışık içerdiğinden albedo kesin değildir."
+  "uretim": "warpPerspective; büyük Gauss alanına bölme; nötr kırık beyaz dengesi; parlama inpaint; kenar eşleme.",
+  "normal_roughness_kaynak_url": "https://polyhaven.com/a/oak_veneer_01",
+  "albedo_haklari": "Kullanıcının sağladığı fotoğraftan türetilmiş veya kullanıcı tarifindeki düz boya; stok lisansı yalnız normal/roughness için geçerlidir."
  },
  {
   "no": 6,
@@ -243,44 +295,82 @@
    "X"
   ],
   "klasor": "06_tezgah",
-  "kaynak_url": "https://ambientcg.com/a/Granite001A",
   "lisans": "CC0",
   "lisans_url": "https://docs.ambientcg.com/license/",
-  "doku_olcusu_m": null,
-  "doku_olcusu_xy_m": null,
-  "renk_hex": "#dcc8af",
+  "doku_olcusu_m": 0.45,
+  "doku_olcusu_xy_m": [
+   0.45,
+   0.4
+  ],
+  "renk_hex": null,
   "purluluk": 0.3,
   "clearcoat": 0.05,
-  "normal_siddeti": 0.05,
-  "secim_nedeni": "Granite001A sıcak krem tabanı ile seçildi; Granite002A daha soğuk beyaz/siyah, ancak iki aday da fotoğraftan daha belirgin benekli ve eşleşme yaklaşık.",
-  "secilen_doku": "Granite001A",
-  "karsilastirilan_adaylar": [
-   "Granite001A",
-   "Granite002A"
-  ],
-  "b1_noktalari": [
-   "21:0.85,0.65",
-   "1:0.60,0.69"
-  ],
-  "renk_ornegi": {
-   "foto": 21,
-   "piksel_kutusu": [
-    1088,
-    677,
-    1168,
-    708
-   ],
-   "srgb_ortalama": [
-    220,
-    200,
-    175
-   ]
-  },
+  "normal_siddeti": 0.015,
   "emin_degil": true,
-  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
+  "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
   "olcu_notu": "Kaynak fiziksel ölçüyü 0/belirsiz bildiriyor; metre değeri uydurulmadı.",
   "ortak_malzeme_uyarisi": "B1 X adı tezgâh, seramik ve koltukta ortak döndü; yalnız adla toplu değiştirme farklı yüzeyleri bozar. Mesh/primitive ayrımı gerekir.",
-  "tur10_not": "Renk fotoğraf karşılaştırmasında gözle kontrol edilir; fotoğraf rengi ışık içerdiğinden albedo kesin değildir."
+  "kaynak": "foto_21",
+  "perspektif": {
+   "piksel_koseleri": [
+    [
+     1100,
+     667
+    ],
+    [
+     1220,
+     679
+    ],
+    [
+     1220,
+     704
+    ],
+    [
+     1100,
+     688
+    ]
+   ],
+   "olcu_m": [
+    0.45,
+    0.4
+   ],
+   "olcum": "Fotoğraftaki kapı/karo/basamak oranından yaklaşık fiziksel ölçek; yerinde ölçüm yok."
+  },
+  "beyaz_dengesi": {
+   "referans_kutusu": [
+    800,
+    70,
+    1100,
+    180
+   ],
+   "referans_rgb": [
+    228.0,
+    209.0,
+    191.0
+   ],
+   "kanal_kazanci": [
+    0.9500354115018323,
+    1.0060473889772161,
+    1.0439171995209513
+   ]
+  },
+  "uretim": "warpPerspective; büyük Gauss alanına bölme; nötr kırık beyaz dengesi; parlama inpaint; kenar eşleme.",
+  "normal_roughness_kaynak_url": "https://ambientcg.com/a/Granite001A",
+  "kutular": [
+   {
+    "min": [
+     -6.5,
+     -4.5,
+     3.93
+    ],
+    "max": [
+     -1.9,
+     0.1,
+     4.12
+    ]
+   }
+  ],
+  "albedo_haklari": "Kullanıcının sağladığı fotoğraftan türetilmiş veya kullanıcı tarifindeki düz boya; stok lisansı yalnız normal/roughness için geçerlidir."
  },
  {
   "no": 7,
@@ -289,188 +379,344 @@
    "X"
   ],
   "klasor": "07_mutfak_seramik",
-  "kaynak_url": "https://ambientcg.com/a/Tiles107",
   "lisans": "CC0",
   "lisans_url": "https://docs.ambientcg.com/license/",
-  "doku_olcusu_m": 1.0,
+  "doku_olcusu_m": 0.25,
   "doku_olcusu_xy_m": [
-   1.0,
-   1.0
+   0.25,
+   0.25
   ],
-  "renk_hex": "#bea990",
-  "purluluk": 0.35,
+  "renk_hex": null,
+  "purluluk": 0.42,
   "clearcoat": 0,
-  "normal_siddeti": 0.12,
-  "secim_nedeni": "Tiles107 ince derzli daha geniş kareleriyle yakın; Tiles133A küçük sık mozaik ve kaba derz gösteriyor.",
-  "secilen_doku": "Tiles107",
-  "karsilastirilan_adaylar": [
-   "Tiles107",
-   "Tiles133A"
-  ],
-  "b1_noktalari": [
-   "21:0.66,0.53",
-   "1:0.55,0.52"
-  ],
-  "renk_ornegi": {
-   "foto": 21,
-   "piksel_kutusu": [
-    976,
-    516,
-    1056,
-    612
+  "normal_siddeti": 0.015,
+  "emin_degil": true,
+  "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
+  "ortak_malzeme_uyarisi": "B1 X adı tezgâh, seramik ve koltukta ortak döndü; yalnız adla toplu değiştirme farklı yüzeyleri bozar. Mesh/primitive ayrımı gerekir.",
+  "kaynak": "foto_21",
+  "perspektif": {
+   "piksel_koseleri": [
+    [
+     1073,
+     582
+    ],
+    [
+     1135,
+     586
+    ],
+    [
+     1135,
+     641
+    ],
+    [
+     1073,
+     634
+    ]
    ],
-   "srgb_ortalama": [
-    190,
-    169,
-    144
+   "olcu_m": [
+    0.25,
+    0.25
+   ],
+   "olcum": "Fotoğraftaki kapı/karo/basamak oranından yaklaşık fiziksel ölçek; yerinde ölçüm yok."
+  },
+  "beyaz_dengesi": {
+   "referans_kutusu": [
+    800,
+    70,
+    1100,
+    180
+   ],
+   "referans_rgb": [
+    228.0,
+    209.0,
+    191.0
+   ],
+   "kanal_kazanci": [
+    0.9500354115018323,
+    1.0060473889772161,
+    1.0439171995209513
    ]
   },
-  "emin_degil": true,
-  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
-  "ortak_malzeme_uyarisi": "B1 X adı tezgâh, seramik ve koltukta ortak döndü; yalnız adla toplu değiştirme farklı yüzeyleri bozar. Mesh/primitive ayrımı gerekir.",
-  "tur10_not": "Renk fotoğraf karşılaştırmasında gözle kontrol edilir; fotoğraf rengi ışık içerdiğinden albedo kesin değildir."
+  "uretim": "warpPerspective; büyük Gauss alanına bölme; nötr kırık beyaz dengesi; parlama inpaint; kenar eşleme.",
+  "normal_roughness_kaynak_url": "https://ambientcg.com/a/Tiles107",
+  "kutular": [
+   {
+    "min": [
+     -6.5,
+     -4.5,
+     4.12
+    ],
+    "max": [
+     -1.9,
+     0.1,
+     4.9
+    ]
+   }
+  ],
+  "albedo_haklari": "Kullanıcının sağladığı fotoğraftan türetilmiş veya kullanıcı tarifindeki düz boya; stok lisansı yalnız normal/roughness için geçerlidir."
  },
  {
   "no": 8,
   "yuzey": "banyo duvar seramiği",
   "malzemeler": [
    "RR",
-   "R31 | R33 master pale cream tile"
+   "R31 | R33 master pale cream tile",
+   "R31 | R33 ivory wall ceramic",
+   "R31 | R33 attic cream tile",
+   "R31 | R33 ivory wall ceramic",
+   "R31 | R33 attic cream tile",
+   "R31 | R33 ivory wall ceramic",
+   "R31 | R33 attic cream tile",
+   "R31 | R33 ivory wall ceramic",
+   "R31 | R33 attic cream tile"
   ],
   "klasor": "08_banyo_seramik",
-  "kaynak_url": "https://polyhaven.com/a/interior_tiles",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
-  "doku_olcusu_m": 1.9,
+  "doku_olcusu_m": 0.3,
   "doku_olcusu_xy_m": [
-   1.9,
-   1.9
+   0.3,
+   0.3
   ],
-  "renk_hex": "#a18b76",
-  "purluluk": 0.32,
+  "renk_hex": null,
+  "purluluk": 0.36,
   "clearcoat": 0,
-  "normal_siddeti": 0.12,
-  "secim_nedeni": "Interior Tiles krem taş bulutlanmasıyla daha yakın; Long White Tiles dar beyaz mozaik olduğundan elendi, bordürler bu setle karşılanmaz.",
-  "secilen_doku": "interior_tiles",
-  "karsilastirilan_adaylar": [
-   "interior_tiles",
-   "long_white_tiles"
-  ],
-  "b1_noktalari": [
-   "11:0.32,0.52",
-   "32:0.43,0.60"
-  ],
-  "renk_ornegi": {
-   "foto": 11,
-   "piksel_kutusu": [
-    64,
-    384,
-    224,
-    540
+  "normal_siddeti": 0.015,
+  "emin_degil": true,
+  "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
+  "kaynak": "foto_11",
+  "perspektif": {
+   "piksel_koseleri": [
+    [
+     49,
+     328
+    ],
+    [
+     188,
+     350
+    ],
+    [
+     189,
+     520
+    ],
+    [
+     49,
+     528
+    ]
    ],
-   "srgb_ortalama": [
-    161,
-    139,
-    118
+   "olcu_m": [
+    0.3,
+    0.3
+   ],
+   "olcum": "Fotoğraftaki kapı/karo/basamak oranından yaklaşık fiziksel ölçek; yerinde ölçüm yok."
+  },
+  "beyaz_dengesi": {
+   "referans_kutusu": [
+    500,
+    70,
+    700,
+    120
+   ],
+   "referans_rgb": [
+    249.0,
+    245.0,
+    242.0
+   ],
+   "kanal_kazanci": [
+    1.022603689769756,
+    1.0088595329283454,
+    0.9685367773018989
    ]
   },
-  "emin_degil": true,
-  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
-  "tur10_not": "Renk fotoğraf karşılaştırmasında gözle kontrol edilir; fotoğraf rengi ışık içerdiğinden albedo kesin değildir."
+  "uretim": "warpPerspective; büyük Gauss alanına bölme; nötr kırık beyaz dengesi; parlama inpaint; kenar eşleme.",
+  "normal_roughness_kaynak_url": "https://polyhaven.com/a/interior_tiles",
+  "albedo_haklari": "Kullanıcının sağladığı fotoğraftan türetilmiş veya kullanıcı tarifindeki düz boya; stok lisansı yalnız normal/roughness için geçerlidir."
  },
  {
   "no": 9,
   "yuzey": "iç kapı",
   "malzemeler": [
-   "WOODY-DARK"
+   "WOODY-DARK",
+   "WOODY-DARK.001",
+   "M3_Koyu_ceviz_kapi",
+   "M3_Ceviz_gobek",
+   "M2_Koyu_ceviz_kupeşte",
+   "WOODY-DARK.001",
+   "M3_Koyu_ceviz_kapi",
+   "M3_Ceviz_gobek",
+   "M2_Koyu_ceviz_kupeşte",
+   "WOODY-DARK.001",
+   "M3_Koyu_ceviz_kapi",
+   "M3_Ceviz_gobek",
+   "M2_Koyu_ceviz_kupeşte",
+   "WOODY-DARK.001",
+   "M3_Koyu_ceviz_kapi",
+   "M3_Ceviz_gobek",
+   "M2_Koyu_ceviz_kupeşte"
   ],
   "klasor": "09_kapi",
-  "kaynak_url": "https://polyhaven.com/a/walnut_veneer",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
-  "doku_olcusu_m": 1.8,
+  "doku_olcusu_m": 0.045,
   "doku_olcusu_xy_m": [
-   1.8,
-   1.8
+   0.045,
+   0.42
   ],
-  "renk_hex": "#a79994",
-  "purluluk": 0.32,
-  "clearcoat": 0.08,
-  "normal_siddeti": 0.1,
-  "secim_nedeni": "Walnut Veneer ince ve doğrusal ceviz damarıyla kapıya daha yakın; Natural Walnut Veneer aşırı dalgalı yatay damar gösteriyor.",
-  "secilen_doku": "walnut_veneer",
-  "karsilastirilan_adaylar": [
-   "walnut_veneer",
-   "natural_walnut_veneer"
-  ],
-  "b1_noktalari": [
-   "47:0.90,0.40",
-   "13:0.70,0.40"
-  ],
-  "renk_ornegi": {
-   "foto": 17,
-   "piksel_kutusu": [
-    1312,
-    480,
-    1408,
-    636
+  "renk_hex": null,
+  "purluluk": 0.52,
+  "clearcoat": 0.05,
+  "normal_siddeti": 0.06,
+  "emin_degil": true,
+  "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
+  "kaynak": "foto_34",
+  "perspektif": {
+   "piksel_koseleri": [
+    [
+     1360,
+     506
+    ],
+    [
+     1374,
+     508
+    ],
+    [
+     1374,
+     650
+    ],
+    [
+     1360,
+     655
+    ]
    ],
-   "srgb_ortalama": [
-    167,
-    153,
-    148
+   "olcu_m": [
+    0.045,
+    0.42
+   ],
+   "olcum": "Fotoğraftan yaklaşık; saha ölçümü değil."
+  },
+  "beyaz_dengesi": {
+   "referans_kutusu": [
+    340,
+    55,
+    510,
+    95
+   ],
+   "referans_rgb": [
+    192.0,
+    164.0,
+    137.0
+   ],
+   "kanal_kazanci": [
+    0.8755317194699491,
+    0.9949914509661549,
+    1.1294768295638962
    ]
   },
-  "emin_degil": true,
-  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
-  "tur10_not": "Renk fotoğraf karşılaştırmasında gözle kontrol edilir; fotoğraf rengi ışık içerdiğinden albedo kesin değildir."
+  "uretim": "warpPerspective; büyük Gauss alanına bölme; nötr kırık beyaz dengesi; parlama inpaint; kenar eşleme.",
+  "normal_roughness_kaynak_url": "https://polyhaven.com/a/walnut_veneer",
+  "adim04": {
+   "ton_hedef_rgb": [
+    24,
+    22,
+    20
+   ],
+   "beyaz_referans": [
+    850,
+    110,
+    960,
+    180
+   ],
+   "yontem": "Perspektif, Gauss gradyan giderme, nötr beyaz dengesi, fotoğraf referansına göre koyu ton kalibrasyonu, kenar eşleme."
+  },
+  "albedo_haklari": "Kullanıcının sağladığı fotoğraftan türetilmiş veya kullanıcı tarifindeki düz boya; stok lisansı yalnız normal/roughness için geçerlidir."
  },
  {
   "no": 10,
   "yuzey": "merdiven basamağı",
   "malzemeler": [
-   "Simple wood"
+   "Simple wood",
+   "M2_Ceviz_basamak",
+   "M2_Ceviz_basamak",
+   "M2_Ceviz_basamak",
+   "M1_Sicak_ceviz_supurgelik",
+   "M2_Ceviz_basamak",
+   "M1_Sicak_ceviz_supurgelik"
   ],
   "klasor": "10_merdiven",
-  "kaynak_url": "https://polyhaven.com/a/cherry_veneer",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
   "doku_olcusu_m": 1.0,
   "doku_olcusu_xy_m": [
    1.0,
-   1.0
+   0.155
   ],
-  "renk_hex": "#c39978",
-  "purluluk": 0.28,
+  "renk_hex": null,
+  "purluluk": 0.43,
   "clearcoat": 0.12,
-  "normal_siddeti": 0.1,
-  "secim_nedeni": "Cherry Veneer sıcak ve ince damar bakımından basamaklara yakın; American Walnut Veneer daha soğuk ve koyu.",
-  "secilen_doku": "cherry_veneer",
-  "karsilastirilan_adaylar": [
-   "cherry_veneer",
-   "american_walnut_veneer"
-  ],
-  "b1_noktalari": [
-   "47:0.70,0.85",
-   "18:0.14,0.16"
-  ],
-  "renk_ornegi": {
-   "foto": 47,
-   "piksel_kutusu": [
-    496,
-    876,
-    640,
-    924
+  "normal_siddeti": 0.06,
+  "emin_degil": true,
+  "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
+  "kaynak": "foto_18",
+  "perspektif": {
+   "piksel_koseleri": [
+    [
+     166,
+     683
+    ],
+    [
+     471,
+     645
+    ],
+    [
+     475,
+     677
+    ],
+    [
+     158,
+     718
+    ]
    ],
-   "srgb_ortalama": [
-    195,
-    153,
-    120
+   "olcu_m": [
+    1.0,
+    0.155
+   ],
+   "olcum": "Fotoğraftan yaklaşık; saha ölçümü değil."
+  },
+  "beyaz_dengesi": {
+   "referans_kutusu": [
+    565,
+    124,
+    675,
+    206
+   ],
+   "referans_rgb": [
+    235.0,
+    199.0,
+    170.0
+   ],
+   "kanal_kazanci": [
+    0.8775070029125894,
+    1.0059015117174654,
+    1.1165914853699452
    ]
   },
-  "emin_degil": true,
-  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
-  "tur10_not": "Renk fotoğraf karşılaştırmasında gözle kontrol edilir; fotoğraf rengi ışık içerdiğinden albedo kesin değildir."
+  "uretim": "warpPerspective; büyük Gauss alanına bölme; nötr kırık beyaz dengesi; parlama inpaint; kenar eşleme.",
+  "normal_roughness_kaynak_url": "https://polyhaven.com/a/cherry_veneer",
+  "adim04": {
+   "ton_hedef_rgb": [
+    70,
+    51,
+    37
+   ],
+   "beyaz_referans": [
+    850,
+    110,
+    960,
+    180
+   ],
+   "yontem": "Perspektif, Gauss gradyan giderme, nötr beyaz dengesi, fotoğraf referansına göre koyu ton kalibrasyonu, kenar eşleme."
+  },
+  "albedo_haklari": "Kullanıcının sağladığı fotoğraftan türetilmiş veya kullanıcı tarifindeki düz boya; stok lisansı yalnız normal/roughness için geçerlidir."
  },
  {
   "no": 11,
@@ -479,47 +725,82 @@
    "X"
   ],
   "klasor": "11_deri",
-  "kaynak_url": "https://polyhaven.com/a/fabric_leather_02",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
-  "doku_olcusu_m": 0.5,
+  "doku_olcusu_m": 0.35,
   "doku_olcusu_xy_m": [
-   0.5,
-   0.5
+   0.35,
+   0.085
   ],
-  "renk_hex": "#772e1e",
-  "purluluk": 0.42,
+  "renk_hex": null,
+  "purluluk": 0.4,
   "clearcoat": 0.06,
-  "normal_siddeti": 0.25,
-  "secim_nedeni": "Fabric Leather 02 sıcak tütün tonu ve kırışıklıklarıyla yakın; Brown Leather daha düz ve koyu.",
-  "secilen_doku": "fabric_leather_02",
-  "karsilastirilan_adaylar": [
-   "fabric_leather_02",
-   "brown_leather"
-  ],
-  "b1_noktalari": [
-   "4:0.10,0.62",
-   "23:0.56,0.75"
-  ],
-  "renk_ornegi": {
-   "foto": 4,
-   "piksel_kutusu": [
-    288,
-    732,
-    368,
-    792
-   ],
-   "srgb_ortalama": [
-    119,
-    46,
-    30
-   ]
-  },
+  "normal_siddeti": 0.015,
   "emin_degil": true,
-  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
+  "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
   "ortak_malzeme_uyarisi": "B1 X adı tezgâh, seramik ve koltukta ortak döndü; yalnız adla toplu değiştirme farklı yüzeyleri bozar. Mesh/primitive ayrımı gerekir.",
   "b1_siniri": "Deri koltuk foto4 içinde X olarak doğrulandı; foto23 ikinci nokta sandalye döşemesinde ROUGHNSS1 döndü, ikinci koltuk açısı doğrulanamadı.",
-  "tur10_not": "Renk fotoğraf karşılaştırmasında gözle kontrol edilir; fotoğraf rengi ışık içerdiğinden albedo kesin değildir."
+  "kaynak": "foto_04",
+  "perspektif": {
+   "piksel_koseleri": [
+    [
+     105,
+     729
+    ],
+    [
+     198,
+     735
+    ],
+    [
+     198,
+     757
+    ],
+    [
+     105,
+     751
+    ]
+   ],
+   "olcu_m": [
+    0.35,
+    0.085
+   ],
+   "olcum": "Fotoğraftaki kapı/karo/basamak oranından yaklaşık fiziksel ölçek; yerinde ölçüm yok."
+  },
+  "beyaz_dengesi": {
+   "referans_kutusu": [
+    1100,
+    55,
+    1230,
+    105
+   ],
+   "referans_rgb": [
+    234.0,
+    182.0,
+    134.0
+   ],
+   "kanal_kazanci": [
+    0.7781089254848241,
+    0.9711245884114242,
+    1.2507664861037517
+   ]
+  },
+  "uretim": "warpPerspective; büyük Gauss alanına bölme; nötr kırık beyaz dengesi; parlama inpaint; kenar eşleme.",
+  "normal_roughness_kaynak_url": "https://polyhaven.com/a/fabric_leather_02",
+  "kutular": [
+   {
+    "min": [
+     -2,
+     3.7,
+     3.1
+    ],
+    "max": [
+     2,
+     8.5,
+     4.5
+    ]
+   }
+  ],
+  "albedo_haklari": "Kullanıcının sağladığı fotoğraftan türetilmiş veya kullanıcı tarifindeki düz boya; stok lisansı yalnız normal/roughness için geçerlidir."
  },
  {
   "no": 12,
@@ -528,92 +809,574 @@
    "R31 | R33 antique nook walnut"
   ],
   "klasor": "12_yemek_ahsap",
-  "kaynak_url": "https://polyhaven.com/a/natural_walnut_veneer",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
-  "doku_olcusu_m": 1.0,
+  "doku_olcusu_m": 0.4,
   "doku_olcusu_xy_m": [
-   1.0,
-   1.0
+   0.4,
+   0.25
   ],
-  "renk_hex": "#a96241",
-  "purluluk": 0.28,
+  "renk_hex": null,
+  "purluluk": 0.3,
   "clearcoat": 0.18,
-  "normal_siddeti": 0.1,
-  "secim_nedeni": "Natural Walnut Veneer hareketli damarlarıyla kök ceviz hissine daha yakın; Walnut Veneer çok doğrusal, fakat seçilen doku da gerçek kök ceviz ve oymayı birebir karşılamaz.",
-  "secilen_doku": "natural_walnut_veneer",
-  "karsilastirilan_adaylar": [
-   "natural_walnut_veneer",
-   "walnut_veneer"
-  ],
-  "b1_noktalari": [
-   "4:0.68,0.73",
-   "23:0.65,0.72"
-  ],
-  "renk_ornegi": {
-   "foto": 23,
-   "piksel_kutusu": [
-    992,
-    792,
-    1088,
-    840
+  "normal_siddeti": 0.015,
+  "emin_degil": true,
+  "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
+  "kaynak": "foto_04",
+  "perspektif": {
+   "piksel_koseleri": [
+    [
+     880,
+     837
+    ],
+    [
+     1030,
+     876
+    ],
+    [
+     971,
+     925
+    ],
+    [
+     818,
+     883
+    ]
    ],
-   "srgb_ortalama": [
-    169,
-    98,
-    65
+   "olcu_m": [
+    0.4,
+    0.25
+   ],
+   "olcum": "Fotoğraftaki kapı/karo/basamak oranından yaklaşık fiziksel ölçek; yerinde ölçüm yok."
+  },
+  "beyaz_dengesi": {
+   "referans_kutusu": [
+    1100,
+    55,
+    1230,
+    105
+   ],
+   "referans_rgb": [
+    234.0,
+    182.0,
+    134.0
+   ],
+   "kanal_kazanci": [
+    0.7781089254848241,
+    0.9711245884114242,
+    1.2507664861037517
    ]
   },
-  "emin_degil": true,
-  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
-  "tur10_not": "Renk fotoğraf karşılaştırmasında gözle kontrol edilir; fotoğraf rengi ışık içerdiğinden albedo kesin değildir."
+  "uretim": "warpPerspective; büyük Gauss alanına bölme; nötr kırık beyaz dengesi; parlama inpaint; kenar eşleme.",
+  "normal_roughness_kaynak_url": "https://polyhaven.com/a/natural_walnut_veneer",
+  "kutular": [
+   {
+    "min": [
+     -6,
+     3,
+     3.05
+    ],
+    "max": [
+     2,
+     9,
+     5.0
+    ]
+   }
+  ],
+  "albedo_haklari": "Kullanıcının sağladığı fotoğraftan türetilmiş veya kullanıcı tarifindeki düz boya; stok lisansı yalnız normal/roughness için geçerlidir."
  },
  {
   "no": 13,
   "yuzey": "pencere doğraması",
   "malzemeler": [
-   "WOODY-DARK"
+   "WOODY-DARK",
+   "WOODY-DARK.001",
+   "WOODY-DARK.001",
+   "WOODY-DARK.001",
+   "WOODY-DARK.001"
   ],
   "klasor": "13_dograma",
-  "kaynak_url": "https://polyhaven.com/a/walnut_veneer",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
-  "doku_olcusu_m": 1.8,
+  "doku_olcusu_m": 0.22,
   "doku_olcusu_xy_m": [
-   1.8,
-   1.8
+   0.22,
+   0.58
   ],
-  "renk_hex": "#a7a093",
-  "purluluk": 0.32,
-  "clearcoat": 0.06,
-  "normal_siddeti": 0.08,
-  "secim_nedeni": "Walnut Veneer düzgün ince damarıyla cilalı koyu çerçeveye yakın; Kitchen Wood daha kaba ve yıpranmış görünüyor.",
-  "secilen_doku": "walnut_veneer",
-  "karsilastirilan_adaylar": [
-   "walnut_veneer",
-   "kitchen_wood"
-  ],
-  "b1_noktalari": [
-   "21:0.271,0.472",
-   "33:0.438,0.528"
-  ],
-  "renk_ornegi": {
-   "foto": 21,
-   "piksel_kutusu": [
-    401,
-    491,
-    425,
-    624
+  "renk_hex": null,
+  "purluluk": 0.38,
+  "clearcoat": 0.05,
+  "normal_siddeti": 0.06,
+  "emin_degil": true,
+  "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
+  "kaynak": "foto_41",
+  "perspektif": {
+   "piksel_koseleri": [
+    [
+     609,
+     441
+    ],
+    [
+     684,
+     438
+    ],
+    [
+     684,
+     630
+    ],
+    [
+     610,
+     629
+    ]
    ],
-   "srgb_ortalama": [
-    167,
-    160,
-    147
+   "olcu_m": [
+    0.22,
+    0.58
+   ],
+   "olcum": "Fotoğraftaki kapı/karo/basamak oranından yaklaşık fiziksel ölçek; yerinde ölçüm yok."
+  },
+  "beyaz_dengesi": {
+   "referans_kutusu": [
+    340,
+    55,
+    510,
+    95
+   ],
+   "referans_rgb": [
+    192.0,
+    164.0,
+    137.0
+   ],
+   "kanal_kazanci": [
+    0.8755317194699491,
+    0.9949914509661549,
+    1.1294768295638962
    ]
   },
-  "emin_degil": true,
-  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
-  "tur10_not": "Renk fotoğraf karşılaştırmasında gözle kontrol edilir; fotoğraf rengi ışık içerdiğinden albedo kesin değildir."
+  "uretim": "warpPerspective; büyük Gauss alanına bölme; nötr kırık beyaz dengesi; parlama inpaint; kenar eşleme.",
+  "normal_roughness_kaynak_url": "https://polyhaven.com/a/walnut_veneer",
+  "kutular": [
+   {
+    "min": [
+     -6.372,
+     1.077,
+     6.76
+    ],
+    "max": [
+     -5.9719999999999995,
+     2.9770000000000003,
+     8.399999999999999
+    ]
+   },
+   {
+    "min": [
+     -6.364,
+     1.3890000000000002,
+     9.629000000000001
+    ],
+    "max": [
+     -5.9639999999999995,
+     2.689,
+     11.17
+    ]
+   },
+   {
+    "min": [
+     -5.972,
+     1.0775000000000001,
+     3.661
+    ],
+    "max": [
+     -5.572,
+     2.9785,
+     5.3
+    ]
+   },
+   {
+    "min": [
+     -5.969,
+     -2.4785,
+     4.18
+    ],
+    "max": [
+     -5.569,
+     -1.1775000000000002,
+     5.219
+    ]
+   },
+   {
+    "min": [
+     -4.25,
+     0.81,
+     10.086
+    ],
+    "max": [
+     -3.8499999999999996,
+     1.21,
+     10.86
+    ]
+   },
+   {
+    "min": [
+     -4.312,
+     8.015,
+     7.029
+    ],
+    "max": [
+     -3.012,
+     8.415,
+     8.27
+    ]
+   },
+   {
+    "min": [
+     -4.2924999999999995,
+     8.015,
+     0.279
+    ],
+    "max": [
+     -2.9915,
+     8.415,
+     1.8199999999999998
+    ]
+   },
+   {
+    "min": [
+     -4.292,
+     8.015,
+     3.38
+    ],
+    "max": [
+     -2.992,
+     8.415,
+     4.9190000000000005
+    ]
+   },
+   {
+    "min": [
+     -4.282,
+     -4.6240000000000006,
+     3.062
+    ],
+    "max": [
+     -3.8819999999999997,
+     -4.224,
+     5.194
+    ]
+   },
+   {
+    "min": [
+     -4.4415,
+     -4.6240000000000006,
+     6.335
+    ],
+    "max": [
+     -3.7224999999999997,
+     -4.224,
+     7.421
+    ]
+   },
+   {
+    "min": [
+     -4.282,
+     -4.6240000000000006,
+     7.208
+    ],
+    "max": [
+     -3.8819999999999997,
+     -4.224,
+     8.293
+    ]
+   },
+   {
+    "min": [
+     -3.945,
+     5.296,
+     10.532
+    ],
+    "max": [
+     -3.345,
+     5.696000000000001,
+     11.479999999999999
+    ]
+   },
+   {
+    "min": [
+     -3.845,
+     5.196,
+     10.532
+    ],
+    "max": [
+     -3.445,
+     6.664,
+     11.479999999999999
+    ]
+   },
+   {
+    "min": [
+     -3.945,
+     6.164,
+     10.532
+    ],
+    "max": [
+     -3.345,
+     6.564,
+     11.479999999999999
+    ]
+   },
+   {
+    "min": [
+     -3.838,
+     -2.551,
+     10.538
+    ],
+    "max": [
+     -3.4379999999999997,
+     -1.083,
+     11.484
+    ]
+   },
+   {
+    "min": [
+     -3.838,
+     -1.683,
+     10.538
+    ],
+    "max": [
+     -3.4379999999999997,
+     -1.083,
+     11.484
+    ]
+   },
+   {
+    "min": [
+     -3.4385000000000003,
+     -4.6240000000000006,
+     6.335
+    ],
+    "max": [
+     -2.7195,
+     -4.224,
+     8.293
+    ]
+   },
+   {
+    "min": [
+     -3.438,
+     -4.6240000000000006,
+     3.062
+    ],
+    "max": [
+     -2.72,
+     -4.224,
+     5.194
+    ]
+   },
+   {
+    "min": [
+     -1.847,
+     8.275,
+     -0.35
+    ],
+    "max": [
+     -1.129,
+     8.674999999999999,
+     1.7810000000000001
+    ]
+   },
+   {
+    "min": [
+     -1.847,
+     8.275,
+     2.763
+    ],
+    "max": [
+     -1.129,
+     8.674999999999999,
+     4.894
+    ]
+   },
+   {
+    "min": [
+     -1.847,
+     8.275,
+     7.208
+    ],
+    "max": [
+     -1.129,
+     8.674999999999999,
+     8.293
+    ]
+   },
+   {
+    "min": [
+     -1.688,
+     8.1165,
+     6.335
+    ],
+    "max": [
+     -1.288,
+     8.833499999999999,
+     7.421
+    ]
+   },
+   {
+    "min": [
+     -1.688,
+     8.116999999999999,
+     -0.361
+    ],
+    "max": [
+     -1.288,
+     8.833,
+     1.814
+    ]
+   },
+   {
+    "min": [
+     -1.1075,
+     -5.361,
+     3.6799999999999997
+    ],
+    "max": [
+     0.19349999999999995,
+     -4.960999999999999,
+     5.219
+    ]
+   },
+   {
+    "min": [
+     -0.843,
+     8.275,
+     -0.35
+    ],
+    "max": [
+     -0.125,
+     8.674999999999999,
+     1.7810000000000001
+    ]
+   },
+   {
+    "min": [
+     -0.843,
+     8.275,
+     2.763
+    ],
+    "max": [
+     -0.125,
+     8.674999999999999,
+     3.935
+    ]
+   },
+   {
+    "min": [
+     -0.843,
+     8.275,
+     3.722
+    ],
+    "max": [
+     -0.125,
+     8.674999999999999,
+     4.894
+    ]
+   },
+   {
+    "min": [
+     -0.6839999999999999,
+     8.275,
+     6.335
+    ],
+    "max": [
+     -0.284,
+     8.674999999999999,
+     8.293
+    ]
+   },
+   {
+    "min": [
+     -0.6839999999999999,
+     8.116999999999999,
+     -0.361
+    ],
+    "max": [
+     -0.284,
+     8.833,
+     1.814
+    ]
+   },
+   {
+    "min": [
+     1.0379999999999998,
+     8.015,
+     0.279
+    ],
+    "max": [
+     2.338,
+     8.415,
+     1.8199999999999998
+    ]
+   },
+   {
+    "min": [
+     1.0395,
+     8.015,
+     3.38
+    ],
+    "max": [
+     2.3385,
+     8.415,
+     4.9190000000000005
+    ]
+   },
+   {
+    "min": [
+     3.819,
+     6.317,
+     1.0739999999999998
+    ],
+    "max": [
+     4.919,
+     6.7170000000000005,
+     1.8199999999999998
+    ]
+   },
+   {
+    "min": [
+     4.043,
+     -2.3019999999999996,
+     4.89
+    ],
+    "max": [
+     4.4430000000000005,
+     -1.7019999999999997,
+     5.4350000000000005
+    ]
+   },
+   {
+    "min": [
+     4.056,
+     1.3465000000000003,
+     8.409
+    ],
+    "max": [
+     4.456,
+     2.6475,
+     9.649999999999999
+    ]
+   },
+   {
+    "min": [
+     7.242999999999999,
+     3.5465,
+     1.4900000000000002
+    ],
+    "max": [
+     7.643,
+     4.1475,
+     2.334
+    ]
+   }
+  ],
+  "albedo_haklari": "Kullanıcının sağladığı fotoğraftan türetilmiş veya kullanıcı tarifindeki düz boya; stok lisansı yalnız normal/roughness için geçerlidir."
  },
  {
   "no": 14,
@@ -622,43 +1385,67 @@
    "Lift brushed patterned stainless"
   ],
   "klasor": "14_asansor",
-  "kaynak_url": "https://ambientcg.com/a/Metal009",
   "lisans": "CC0",
   "lisans_url": "https://docs.ambientcg.com/license/",
-  "doku_olcusu_m": null,
-  "doku_olcusu_xy_m": null,
-  "renk_hex": "#645e55",
-  "purluluk": 0.22,
+  "doku_olcusu_m": 0.15,
+  "doku_olcusu_xy_m": [
+   0.15,
+   0.4
+  ],
+  "renk_hex": null,
+  "purluluk": 0.3,
   "clearcoat": null,
-  "normal_siddeti": 0.3,
-  "secim_nedeni": "Metal009 yönlü ince fırça iziyle paslanmaza daha yakın; Metal011 daha dağınık, fakat her ikisinde de fotoğraftaki düzenli yuvarlak kabartma yok.",
-  "secilen_doku": "Metal009",
-  "karsilastirilan_adaylar": [
-   "Metal009",
-   "Metal011"
-  ],
-  "b1_noktalari": [
-   "1:0.0625,0.8611",
-   "48:0.77083,0.58333"
-  ],
-  "renk_ornegi": {
-   "foto": 49,
-   "piksel_kutusu": [
-    264,
-    400,
-    336,
-    800
-   ],
-   "srgb_ortalama": [
-    100,
-    94,
-    85
-   ]
-  },
+  "normal_siddeti": 0.015,
   "emin_degil": true,
-  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
+  "not": "Albedo gerçek fotoğraf/düz boya kaynağından; stok set yalnız normal ve roughness için. Fiziksel ölçek yaklaşık.",
   "olcu_notu": "Kaynak fiziksel ölçüyü 0/belirsiz bildiriyor; metre değeri uydurulmadı.",
   "eslesme_siniri": "B1 dar kenardan panel adını verdi; ana kabin kapalı kapıyla örtülüyor. Seçilen doku fırçalı tabandır; yuvarlak kabartma eşleşmesi bulunamadı.",
-  "tur10_not": "Renk fotoğraf karşılaştırmasında gözle kontrol edilir; fotoğraf rengi ışık içerdiğinden albedo kesin değildir."
+  "kaynak": "foto_48",
+  "perspektif": {
+   "piksel_koseleri": [
+    [
+     463,
+     273
+    ],
+    [
+     505,
+     273
+    ],
+    [
+     505,
+     388
+    ],
+    [
+     463,
+     388
+    ]
+   ],
+   "olcu_m": [
+    0.15,
+    0.4
+   ],
+   "olcum": "Fotoğraftaki kapı/karo/basamak oranından yaklaşık fiziksel ölçek; yerinde ölçüm yok."
+  },
+  "beyaz_dengesi": {
+   "referans_kutusu": [
+    314,
+    12,
+    461,
+    99
+   ],
+   "referans_rgb": [
+    217.0,
+    207.0,
+    197.0
+   ],
+   "kanal_kazanci": [
+    0.9895896345676958,
+    1.0070119168571965,
+    1.0033984485751077
+   ]
+  },
+  "uretim": "warpPerspective; büyük Gauss alanına bölme; nötr kırık beyaz dengesi; parlama inpaint; kenar eşleme.",
+  "normal_roughness_kaynak_url": "https://ambientcg.com/a/Metal009",
+  "albedo_haklari": "Kullanıcının sağladığı fotoğraftan türetilmiş veya kullanıcı tarifindeki düz boya; stok lisansı yalnız normal/roughness için geçerlidir."
  }
 ]

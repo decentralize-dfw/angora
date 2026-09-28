@@ -1,0 +1,126 @@
+{
+ "dugum": 2479,
+ "arsiv_yatak_dugum": [],
+ "dokular": [
+  {
+   "ad": "albedo",
+   "boyut": [
+    512,
+    512
+   ]
+  },
+  {
+   "ad": "roughness",
+   "boyut": [
+    512,
+    512
+   ]
+  },
+  {
+   "ad": "normal",
+   "boyut": [
+    1024,
+    1024
+   ]
+  },
+  {
+   "ad": "albedo",
+   "boyut": [
+    1024,
+    1024
+   ]
+  },
+  {
+   "ad": "roughness",
+   "boyut": [
+    512,
+    512
+   ]
+  },
+  {
+   "ad": "normal",
+   "boyut": [
+    1024,
+    1024
+   ]
+  },
+  {
+   "ad": "albedo",
+   "boyut": [
+    1024,
+    1024
+   ]
+  },
+  {
+   "ad": "roughness",
+   "boyut": [
+    512,
+    512
+   ]
+  },
+  {
+   "ad": "normal",
+   "boyut": [
+    1024,
+    1024
+   ]
+  },
+  {
+   "ad": "albedo",
+   "boyut": [
+    1024,
+    1024
+   ]
+  },
+  {
+   "ad": "roughness",
+   "boyut": [
+    512,
+    512
+   ]
+  },
+  {
+   "ad": "albedo",
+   "boyut": [
+    512,
+    512
+   ]
+  },
+  {
+   "ad": "roughness",
+   "boyut": [
+    512,
+    512
+   ]
+  },
+  {
+   "ad": "cam40",
+   "boyut": [
+    512,
+    1024
+   ]
+  }
+ ],
+ "duvar_tavan_karo_hash_degismedi": true,
+ "ornek": 64,
+ "render_en_px": 1200,
+ "model_raporu": {
+  "modul": "A04",
+  "nesneler": 2479,
+  "ucgen": 444290,
+  "en_buyuk": 652,
+  "notlar": {
+   "fotolar": [
+    18,
+    34,
+    40,
+    42,
+    29,
+    47
+   ],
+   "kartonpiyer_gonye_ucu": 453,
+   "zincir_halka": 78,
+   "not": "Yeni kusurlar bu modüle eklenmeyecek; kontrol sonrası Adım05 listesi."
+  }
+ }
+}
