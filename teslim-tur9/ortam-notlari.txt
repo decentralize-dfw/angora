@@ -1,0 +1,2 @@
+A1/A3 tekrar edilmedi. Python urllib 403 yanıtı nedeniyle doku HTTP indirmeleri PowerShell Invoke-WebRequest ile yapıldı. ambientCG filtre parametresi id olarak düzeltildi; assetId ve q sonucu yanlış adaylara yol açtığı için kimlik eşitliği doğrulandı. Kaynak betik mantığı değiştirilmedi.
+Blender terminali için PYTHONIOENCODING=utf-8 kullanıldı. Yalnız kendi plan JSON dosyası iki kez düzeltildi; 06_ekler.py ve 07_malzeme_adi.py repo ile SHA256 olarak aynı.

@@ -1,0 +1,24 @@
+{
+ "tur8_kayit_sayilari": {
+  "malzeme-analizi.json": 23,
+  "eksik-nesneler.json": 105
+ },
+ "dokular": 14,
+ "jpg_sayisi": 54,
+ "ekler_glb": {
+  "bayt": 362752,
+  "mesh_sayisi": 94,
+  "node_sayisi": 94,
+  "sha256": "9014e9157146bef47f2b96c948bed53f1ffa370bd6e3f9e9358cc10f20f49169"
+ },
+ "betikler": {
+  "06_ekler.py": {
+   "sha256": "f0aa10b64e15738129e9c03c65c9b6b9932c5298ca6b40318cf892db2dd7f3cf",
+   "repo_ile_ayni": true
+  },
+  "07_malzeme_adi.py": {
+   "sha256": "bae6b999d1d02a4c765d61acc482db86742f0497b75fa8a25be67f20d447ace3",
+   "repo_ile_ayni": true
+  }
+ }
+}

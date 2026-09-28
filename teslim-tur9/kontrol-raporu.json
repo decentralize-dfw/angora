@@ -1,0 +1,103 @@
+{
+ "duzeltme_turu": 2,
+ "sonuc": "kismi: yerleşim ve kaynak geometri sorunları kaldı",
+ "foto_yatay_aci": 80,
+ "aci_notu": "Kapı, pencere ve çatı yönleri gerçek fotoğraflardan farklı; tek görüş açısı değeriyle çözülecek bir sapma görülmedi. Kamera CSV veya betik değiştirilmedi.",
+ "kontroller": [
+  {
+   "foto": 2,
+   "gercek": "photogallery/angora_02.jpg",
+   "kontrol": "ekler-kontrol/foto_02.png",
+   "gozlem": "Eklenen altın fonlar bu bakışta kısmen/kadraj dışında; modelde oturma düzeni ve yön farklı. Perde boyu başarıyla doğrulanamadı.",
+   "emin_degil": true
+  },
+  {
+   "foto": 3,
+   "gercek": "photogallery/angora_03.jpg",
+   "kontrol": "ekler-kontrol/foto_03.png",
+   "gozlem": "Pencerelerde altın renkli dar parçalar var; gerçek tam boy fon görünümü sağlanmadı. Otomatik oda yönü/örtüşme sorunu kaldı.",
+   "emin_degil": true
+  },
+  {
+   "foto": 5,
+   "gercek": "photogallery/angora_05.jpg",
+   "kontrol": "ekler-kontrol/foto_05.png",
+   "gozlem": "İlk tur öndeki kolona gelen iki resim arka duvara taşındı. İkinci tur üst sıra tavan altına indirildi; iki sıra beşli galeri görülüyor. Kaynak duvar ve pencere geometrisi gerçek fotoğraftan farklı.",
+   "emin_degil": true
+  },
+  {
+   "foto": 9,
+   "gercek": "photogallery/angora_09.jpg",
+   "kontrol": "ekler-kontrol/foto_09.png",
+   "gozlem": "Dört sol, iki sağ tablo ve iki aplik görülüyor; fotoğrafa göre çerçeve boyutları/izdüşümü farklı, sağ üstte çatı örtüşmesi var.",
+   "emin_degil": true
+  },
+  {
+   "foto": 11,
+   "gercek": "photogallery/angora_11.jpg",
+   "kontrol": "ekler-kontrol/foto_11.png",
+   "gozlem": "İki aplik pencerenin iki yanına taşındı; biraz yüksek ve basitleştirilmiş armatürler. Kabin/mobilya biçimi ana modelde farklı.",
+   "emin_degil": true
+  },
+  {
+   "foto": 13,
+   "gercek": "photogallery/angora_13.jpg",
+   "kontrol": "ekler-kontrol/foto_13.png",
+   "gozlem": "Kapıya yapışan tablo kaldırıldı; tablo foto17 ile yatak başı duvarına taşındı. Bu kamerada açık kapı görüşü engelliyor; eksik desenli perde kaldı.",
+   "emin_degil": true
+  },
+  {
+   "foto": 14,
+   "gercek": "photogallery/angora_14.jpg",
+   "kontrol": "ekler-kontrol/foto_14.png",
+   "gozlem": "İlk tur dev yakın aplik sorunu giderildi fakat son görünümde doğru aplik doğrulanamıyor; çatı model yüzeyi büyük kısmı örtüyor. Başarılı sayılmadı.",
+   "emin_degil": true
+  },
+  {
+   "foto": 17,
+   "gercek": "photogallery/angora_17.jpg",
+   "kontrol": "ekler-kontrol/foto_17.png",
+   "gozlem": "Tablo yatak başı duvarında görünüyor; ikinci tur aşağı alındı. Yatak/lamba temel model biçimleri gerçek fotoğraftan farklı.",
+   "emin_degil": true
+  },
+  {
+   "foto": 18,
+   "gercek": "photogallery/angora_18.jpg",
+   "kontrol": "ekler-kontrol/foto_18.png",
+   "gozlem": "Üst aplik merdiven altından görünür duvara alındı; alt aplik alt sahanlık duvarında. Kamera yönü ve merdiven geometrisi nedeniyle gerçekle kesin konum eşleşmesi doğrulanamadı.",
+   "emin_degil": true
+  },
+  {
+   "foto": 23,
+   "gercek": "photogallery/angora_23.jpg",
+   "kontrol": "ekler-kontrol/foto_23.png",
+   "gozlem": "Bordo perdeler beklenen pencere çevresinde görünmüyor; otomatik yerleşim sorunu kaldı. Bu kontrol başarısız.",
+   "emin_degil": true
+  },
+  {
+   "foto": 42,
+   "gercek": "photogallery/angora_42.jpg",
+   "kontrol": "ekler-kontrol/foto_42.png",
+   "gozlem": "Küçük tablo kapının üstünden kapı sağındaki duvara alındı; radyatör temel modelde eksik. Merdiven farklı konumda.",
+   "emin_degil": true
+  },
+  {
+   "foto": 47,
+   "gercek": "photogallery/angora_47.jpg",
+   "kontrol": "ekler-kontrol/foto_47.png",
+   "gozlem": "Aplik korkuluk üzerinden arka sahanlık duvarına alındı. Modelin merdiven/pencere geometrisi ve kamera açısı farklı; yaklaşık eşleşme.",
+   "emin_degil": true
+  }
+ ],
+ "kalan_sorunlar": [
+  "107 numaralı oda pencereler.json içinde bulunmadığı için foto13/17 desenli perdesi üretilemedi.",
+  "Perdelerin otomatik oda yönü/zemin/tavan ışınları hatalı yüzeylere denk geliyor; bazı perdeler kontrol görüntüsünde görünmüyor veya kısa. P31 tabanı 3.88 m, P20/P27 üstü 4.80 m. Betikte plandan yükseklik/yön düzeltme alanı yok; mantık değiştirilmedi.",
+  "Çatı yatak odası foto14: aplik ışını kameraya yakın eğimli yüzeye denk geliyor. İki düzeltmeden sonra da doğru duvar yerleşimi doğrulanamadı; son görünümde aplik seçilemiyor.",
+  "Banyo aplikleri basitleştirilmiş tek abajur geometrisi; fotoğraftaki armatür biçimini birebir temsil etmiyor.",
+  "Foto23 sağ kenarında kesik iki tablo için tam tuval içeriği bulunmadı; eklenmedi.",
+  "Halılarda güvenilir merkez koordinatı yok; talimata uygun olarak eklenmedi.",
+  "B1 deri koltuk için iki farklı fotoğrafta aynı deri yüzey doğrulanamadı: foto4 X, foto23 sandalye döşemesi ROUGHNSS1. İkinci örnek deri koltuk kanıtı sayılmadı.",
+  "Granite001A ve Metal009 kaynak API fiziksel ölçü vermedi; doku_olcusu_m null bırakıldı.",
+  "X tezgâh/seramik/koltuk tarafından paylaşılıyor; doku ataması yapılmadı. Genel malzeme adına tek atama farklı yüzeyleri bozar."
+ ]
+}

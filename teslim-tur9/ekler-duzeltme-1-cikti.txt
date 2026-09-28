@@ -1,0 +1,313 @@
+16:17:41 | INFO: Data are loaded, start creating Blender stuff
+16:17:41 | INFO: Blender create Mesh node Mesh_15183.008
+16:17:41 | INFO: Blender create Mesh node Mesh_3020.001
+16:17:42 | INFO: Blender create Mesh node Mesh_15183.003
+16:17:42 | INFO: Blender create Mesh node Mesh_11.004
+16:17:42 | INFO: Blender create Mesh node antique_wood (2) | interior-common.118
+16:17:42 | INFO: Blender create Mesh node Mesh_3020.004
+16:17:42 | INFO: Blender create Mesh node Cube.001
+16:17:42 | INFO: Blender create Mesh node Mesh_3020.009
+16:17:42 | INFO: Blender create Mesh node Mesh_15183.114
+16:17:42 | INFO: Blender create Mesh node Cube.003
+16:17:42 | INFO: Blender create Mesh node Mesh_93.005
+16:17:44 | INFO: Blender create Mesh node Mesh_3020.002
+16:17:44 | INFO: Blender create Mesh node Mesh_242
+16:17:44 | INFO: Blender create Mesh node Mesh_11.003
+16:17:44 | INFO: Blender create Mesh node Mesh_11.001
+16:17:44 | INFO: Blender create Mesh node Mesh_15183.002
+16:17:44 | INFO: Blender create Mesh node Mesh_15183.104
+16:17:44 | INFO: Blender create Mesh node Mesh_15183.109
+16:17:44 | INFO: Blender create Mesh node Mesh_97
+16:17:44 | INFO: Blender create Mesh node Mesh_15183.103
+16:17:44 | INFO: Blender create Mesh node Mesh_15183.107
+16:17:44 | INFO: Blender create Mesh node Mesh_15183.108
+16:17:44 | INFO: Blender create Mesh node Mesh_15183.099
+16:17:44 | INFO: Blender create Mesh node Mesh_15183.100
+16:17:44 | INFO: Blender create Mesh node Mesh_15183.001
+16:17:44 | INFO: glTF import finished in 2.69s
+16:17:44 | INFO: Data are loaded, start creating Blender stuff
+16:17:44 | INFO: Blender create Mesh node antique_wood (2) | interior-common.087
+16:17:44 | INFO: Blender create Mesh node antique_wood (2) | interior-common.017
+16:17:44 | INFO: Blender create Mesh node antique_wood (2) | interior-common.013
+16:17:44 | INFO: Blender create Mesh node antique_wood (2) | interior-common.043
+16:17:44 | INFO: Blender create Mesh node antique_wood (2) | interior-common.001
+16:17:44 | INFO: Blender create Mesh node antique_wood (2) | interior-common.016
+16:17:44 | INFO: Blender create Mesh node antique_wood (2) | interior-common.084
+16:17:44 | INFO: Blender create Mesh node antique_wood (2) | interior-common.060
+16:17:44 | INFO: Blender create Mesh node antique_wood (2) | interior-common.058
+16:17:44 | INFO: Blender create Mesh node antique_wood (2) | interior-common.067
+16:17:45 | INFO: Blender create Mesh node antique_wood (2) | interior-common.140
+16:17:45 | INFO: Blender create Mesh node antique_wood (2) | interior-common.094
+16:17:45 | INFO: Blender create Mesh node antique_wood (2) | interior-common.047
+16:17:45 | INFO: Blender create Mesh node antique_wood (2) | interior-common.065
+16:17:45 | INFO: Blender create Mesh node antique_wood (2) | interior-common.073
+16:17:46 | INFO: Blender create Mesh node antique_wood (2) | interior-common.019
+16:17:46 | INFO: Blender create Mesh node antique_wood (2) | interior-common.049
+16:17:46 | INFO: Blender create Mesh node antique_wood (2) | interior-common.100
+16:17:46 | INFO: Blender create Mesh node antique_wood (2) | interior-common.120
+16:17:46 | INFO: Blender create Mesh node antique_wood (2) | interior-common.110
+16:17:46 | INFO: Blender create Mesh node antique_wood (2) | interior-common.116
+16:17:46 | INFO: glTF import finished in 1.48s
+C:\Users\yigit\Downloads\angora-main (2)\angora-main\tools\blender\06_ekler.py:55: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  m = bpy.data.materials.new(name); m.use_nodes = True
+[ekler] perde P07 f0-B06 fon 0.01-2.58 m
+[ekler] perde P08 f1-Z06 fon 2.82-5.85 m
+[ekler] perde P19 f0-B06 fon 0.01-2.74 m
+[ekler] perde P20 f1-Z06 fon 2.87-4.80 m
+[ekler] perde P25 f0-B06 fon 0.01-2.50 m
+[ekler] perde P27 f1-Z06 fon 2.87-4.80 m
+[ekler] perde P30 f0-B06 fon 0.01-2.58 m
+[ekler] perde P31 f1-Z06 fon 3.88-5.85 m
+[ekler] aplik 1 [0.26, 3.15, 11.95]
+[ekler] aplik 2 [0.31, 0.74, 11.91]
+[ekler] aplik 3 [4.09, -1.68, 8.89]
+[ekler] aplik 4 [4.09, -3.26, 8.93]
+[ekler] aplik 5 [-2.57, -3.24, 11.42]
+[ekler] aplik 6 [1.07, 1.66, 8.99]
+[ekler] aplik 7 [2.94, 0.53, 6.48]
+[ekler] aplik 8 [4.09, 1.92, 3.08]
+C:\Users\yigit\Downloads\angora-main (2)\angora-main\tools\blender\06_ekler.py:178: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  canvas = bpy.data.materials.new(f'Tablo {i}'); canvas.use_nodes = True
+[ekler] tablo 1 [-5.0, 3.56, 2.51]
+[ekler] tablo 2 [-5.0, 3.93, 2.53]
+[ekler] tablo 3 [-5.0, 4.31, 2.55]
+[ekler] tablo 4 [-5.0, 4.7, 2.57]
+[ekler] tablo 5 [-5.0, 5.11, 2.59]
+[ekler] tablo 6 [-5.0, 3.56, 1.81]
+[ekler] tablo 7 [-5.0, 3.93, 1.82]
+[ekler] tablo 8 [-5.0, 4.31, 1.82]
+[ekler] tablo 9 [-5.0, 4.7, 1.83]
+[ekler] tablo 10 [-5.0, 5.11, 1.83]
+[ekler] tablo 11 [-1.79, 8.05, 2.02]
+[ekler] tablo 12 [-3.23, 3.13, 11.47]
+[ekler] tablo 13 [-2.63, 3.17, 11.44]
+[ekler] tablo 14 [-2.37, 3.06, 11.52]
+[ekler] tablo 15 [-0.43, 3.55, 11.67]
+[ekler] tablo 16 [-1.97, 0.92, 11.47]
+[ekler] tablo 17 [-2.38, 0.82, 11.4]
+[ekler] tablo 18 [-1.95, -2.58, 8.85]
+[ekler] tablo 19 [2.94, -0.93, 5.19]
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+16:17:47 | INFO: Starting glTF 2.0 export
+16:17:47 | INFO: Extracting primitive: Aplik 1 abajur
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 1 ampul
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 1 kol
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 1 taban
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 2 abajur
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 2 ampul
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 2 kol
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 2 taban
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 3 abajur
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 3 ampul
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 3 kol
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 3 taban
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 4 abajur
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 4 ampul
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 4 kol
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 4 taban
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 5 abajur
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 5 ampul
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 5 kol
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 5 taban
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 6 abajur
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 6 ampul
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 6 kol
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 6 taban
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 7 abajur
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 7 ampul
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 7 kol
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 7 taban
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 8 abajur
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 8 ampul
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 8 kol
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Aplik 8 taban
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Fon perde P07 sag
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Fon perde P07 sol
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Fon perde P08 sag
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Fon perde P08 sol
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Fon perde P19 sag
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Fon perde P19 sol
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Fon perde P20 sag
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Fon perde P20 sol
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Fon perde P25 sag
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Fon perde P25 sol
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Fon perde P27 sag
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Fon perde P27 sol
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Fon perde P30 sag
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Fon perde P30 sol
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Fon perde P31 sag
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Fon perde P31 sol
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Korniş P07
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Korniş P08
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Korniş P19
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Korniş P20
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Korniş P25
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Korniş P27
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Korniş P30
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Korniş P31
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 1 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 1 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 2 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 2 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 3 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 3 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 4 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 4 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 5 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 5 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 6 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 6 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 7 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 7 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 8 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 8 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 9 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 9 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 10 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 10 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 11 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 11 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 12 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 12 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 13 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 13 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 14 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 14 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 15 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 15 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 16 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 16 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 17 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 17 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 18 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 18 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 19 tuval
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Extracting primitive: Tablo 19 çerçeve
+16:17:47 | INFO: Primitives created: 1
+16:17:47 | INFO: Finished glTF 2.0 export in 0.4184398651123047 s
+
+[ekler] EKLER.glb: 94 nesne, 0.36 MB -> C:\Users\yigit\Downloads\angora-main (2)\angora-main\build\web\26092026\EKLER.glb
+C:\Users\yigit\Downloads\angora-main (2)\angora-main\tools\blender\06_ekler.py:236: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  world = bpy.data.worlds.new('K'); scene.world = world; world.use_nodes = True
+00:15.437  render           | Saved: 'C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_02.png'
+[ekler] kontrol C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_02.png
+00:16.906  render           | Saved: 'C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_03.png'
+[ekler] kontrol C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_03.png
+00:18.562  render           | Saved: 'C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_05.png'
+[ekler] kontrol C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_05.png
+00:20.000  render           | Saved: 'C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_09.png'
+[ekler] kontrol C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_09.png
+00:21.437  render           | Saved: 'C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_11.png'
+[ekler] kontrol C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_11.png
+00:22.203  render           | Saved: 'C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_13.png'
+[ekler] kontrol C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_13.png
+00:23.547  render           | Saved: 'C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_14.png'
+[ekler] kontrol C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_14.png
+00:24.781  render           | Saved: 'C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_17.png'
+[ekler] kontrol C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_17.png
+00:26.719  render           | Saved: 'C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_18.png'
+[ekler] kontrol C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_18.png
+00:27.812  render           | Saved: 'C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_23.png'
+[ekler] kontrol C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_23.png
+00:29.640  render           | Saved: 'C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_42.png'
+[ekler] kontrol C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_42.png
+00:31.140  render           | Saved: 'C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_47.png'
+[ekler] kontrol C:\Users\yigit\Downloads\angora-main (2)\angora-main\angora-bake\ekler-kontrol\foto_47.png
+[ekler] TAMAM
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

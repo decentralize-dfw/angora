@@ -1,0 +1,81 @@
+{
+ "kapsam": "06_ekler.py desteklediği perde/korniş, aplik, tablo ve halı türleri. Diğer 105 kayıt bu betiğin kapsamı dışında.",
+ "perde_odalar": [
+  {
+   "oda": "f0-B06",
+   "pencereler": [
+    "P07",
+    "P19",
+    "P23",
+    "P25",
+    "P29",
+    "P30"
+   ]
+  },
+  {
+   "oda": "f1-Z06",
+   "pencereler": [
+    "P08",
+    "P20",
+    "P26",
+    "P27",
+    "P31"
+   ]
+  },
+  {
+   "oda": "f2-107",
+   "pencereler": []
+  }
+ ],
+ "atlanmis": [
+  {
+   "pencere": "P23",
+   "temsil_eden": "P19",
+   "neden": "Aynı XY konumundaki cam parçası; üst üste ikinci perde üretilmedi."
+  },
+  {
+   "pencere": "P27",
+   "temsil_eden": "P26",
+   "neden": "Aynı XY konumundaki cam parçası; üst üste ikinci perde üretilmedi."
+  },
+  {
+   "pencere": "P29",
+   "temsil_eden": "P25",
+   "neden": "Aynı XY konumundaki cam parçası; üst üste ikinci perde üretilmedi."
+  },
+  {
+   "oda": "f2-107",
+   "foto": [
+    13,
+    17
+   ],
+   "neden": "Pencere kaydında oda yok; kimlik/konum uydurulmadı. Desenli fon perde modellenemedi."
+  },
+  {
+   "foto": [
+    23
+   ],
+   "nesne": "vitrin sağındaki iki resim",
+   "neden": "İki resim de fotoğraf sağ sınırında kesik; tam tuval içeriği uydurulmadı."
+  },
+  {
+   "foto": [
+    10,
+    15,
+    16,
+    32
+   ],
+   "nesne": "halı/kilim/paspas",
+   "neden": "Kesin oda içi merkez koordinatı güvenilir biçimde çıkarılamadı; talimat uyarınca yerleştirilmedi. Foto10 modelinde zaten halı mevcut."
+  },
+  {
+   "foto": [
+    12,
+    33
+   ],
+   "nesne": "mevcut duvar resimleri/aplikler",
+   "neden": "Modelde karşılıkları bulunduğu için üst üste eklenmedi."
+  }
+ ],
+ "olcu_notu": "Tablo ölçüleri gerçek fotoğraflardan görsel tahmin; ışınla yerleştirme kontrol görüntülerinde denetlenecek."
+}

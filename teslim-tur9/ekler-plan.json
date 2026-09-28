@@ -1,0 +1,412 @@
+{
+ "foto_yatay_aci": 80,
+ "perdeler": [
+  {
+   "pencere": "P07",
+   "tur": "fon",
+   "renk_fon": "#a97b36",
+   "renk_tul": "#f3efe6",
+   "kornis": true,
+   "renk_kornis": "#5a3a25"
+  },
+  {
+   "pencere": "P08",
+   "tur": "fon",
+   "renk_fon": "#542326",
+   "renk_tul": "#f3efe6",
+   "kornis": true,
+   "renk_kornis": "#5a3a25"
+  },
+  {
+   "pencere": "P19",
+   "tur": "fon",
+   "renk_fon": "#a97b36",
+   "renk_tul": "#f3efe6",
+   "kornis": true,
+   "renk_kornis": "#5a3a25"
+  },
+  {
+   "pencere": "P20",
+   "tur": "fon",
+   "renk_fon": "#542326",
+   "renk_tul": "#f3efe6",
+   "kornis": true,
+   "renk_kornis": "#5a3a25"
+  },
+  {
+   "pencere": "P25",
+   "tur": "fon",
+   "renk_fon": "#a97b36",
+   "renk_tul": "#f3efe6",
+   "kornis": true,
+   "renk_kornis": "#5a3a25"
+  },
+  {
+   "pencere": "P27",
+   "tur": "fon",
+   "renk_fon": "#542326",
+   "renk_tul": "#f3efe6",
+   "kornis": true,
+   "renk_kornis": "#5a3a25"
+  },
+  {
+   "pencere": "P30",
+   "tur": "fon",
+   "renk_fon": "#a97b36",
+   "renk_tul": "#f3efe6",
+   "kornis": true,
+   "renk_kornis": "#5a3a25"
+  },
+  {
+   "pencere": "P31",
+   "tur": "fon",
+   "renk_fon": "#542326",
+   "renk_tul": "#f3efe6",
+   "kornis": true,
+   "renk_kornis": "#5a3a25"
+  }
+ ],
+ "aplikler": [
+  {
+   "foto": 9,
+   "u": 0.369,
+   "v": 0.357,
+   "renk": "#efe2c8",
+   "renk_metal": "#a88850",
+   "aciklama": "çatı sol geçiş apliği"
+  },
+  {
+   "foto": 9,
+   "u": 0.646,
+   "v": 0.365,
+   "renk": "#efe2c8",
+   "renk_metal": "#a88850",
+   "aciklama": "çatı sağ kapı apliği"
+  },
+  {
+   "foto": 11,
+   "u": 0.43,
+   "v": 0.2,
+   "renk": "#efe2c8",
+   "renk_metal": "#a88850",
+   "aciklama": "ortak banyo sol aplik"
+  },
+  {
+   "foto": 11,
+   "u": 0.69,
+   "v": 0.26,
+   "renk": "#efe2c8",
+   "renk_metal": "#a88850",
+   "aciklama": "ortak banyo sağ aplik"
+  },
+  {
+   "foto": 14,
+   "u": 0.92,
+   "v": 0.64,
+   "renk": "#efe2c8",
+   "renk_metal": "#a88850",
+   "aciklama": "çatı yatak odası apliği"
+  },
+  {
+   "foto": 18,
+   "u": 0.3,
+   "v": 0.4,
+   "renk": "#efe2c8",
+   "renk_metal": "#a88850",
+   "aciklama": "merdiven üst sahanlık apliği",
+   "yukseklik_m": 2.35
+  },
+  {
+   "foto": 18,
+   "u": 0.16,
+   "v": 0.79,
+   "renk": "#efe2c8",
+   "renk_metal": "#a88850",
+   "aciklama": "merdiven alt sahanlık apliği"
+  },
+  {
+   "foto": 47,
+   "u": 0.65,
+   "v": 0.25,
+   "renk": "#efe2c8",
+   "renk_metal": "#a88850",
+   "aciklama": "bodrum merdiven üst apliği"
+  }
+ ],
+ "tablolar": [
+  {
+   "foto": 5,
+   "u": 0.17,
+   "v": 0.43,
+   "en": 0.26,
+   "boy": 0.3,
+   "kirp": [
+    145,
+    451,
+    181,
+    495
+   ],
+   "aciklama": "Bodrum resim 1"
+  },
+  {
+   "foto": 5,
+   "u": 0.205,
+   "v": 0.43,
+   "en": 0.26,
+   "boy": 0.3,
+   "kirp": [
+    224,
+    463,
+    254,
+    503
+   ],
+   "aciklama": "Bodrum resim 2"
+  },
+  {
+   "foto": 5,
+   "u": 0.24,
+   "v": 0.43,
+   "en": 0.26,
+   "boy": 0.3,
+   "kirp": [
+    300,
+    463,
+    329,
+    497
+   ],
+   "aciklama": "Bodrum resim 3"
+  },
+  {
+   "foto": 5,
+   "u": 0.275,
+   "v": 0.43,
+   "en": 0.26,
+   "boy": 0.3,
+   "kirp": [
+    369,
+    478,
+    394,
+    508
+   ],
+   "aciklama": "Bodrum resim 4"
+  },
+  {
+   "foto": 5,
+   "u": 0.31,
+   "v": 0.43,
+   "en": 0.26,
+   "boy": 0.3,
+   "kirp": [
+    430,
+    483,
+    443,
+    500
+   ],
+   "aciklama": "Bodrum resim 5"
+  },
+  {
+   "foto": 5,
+   "u": 0.17,
+   "v": 0.5,
+   "en": 0.28,
+   "boy": 0.23,
+   "kirp": [
+    110,
+    523,
+    145,
+    565
+   ],
+   "aciklama": "Bodrum resim 6"
+  },
+  {
+   "foto": 5,
+   "u": 0.205,
+   "v": 0.5,
+   "en": 0.28,
+   "boy": 0.23,
+   "kirp": [
+    188,
+    530,
+    246,
+    565
+   ],
+   "aciklama": "Bodrum resim 7"
+  },
+  {
+   "foto": 5,
+   "u": 0.24,
+   "v": 0.5,
+   "en": 0.28,
+   "boy": 0.23,
+   "kirp": [
+    290,
+    534,
+    337,
+    562
+   ],
+   "aciklama": "Bodrum resim 8"
+  },
+  {
+   "foto": 5,
+   "u": 0.275,
+   "v": 0.5,
+   "en": 0.28,
+   "boy": 0.23,
+   "kirp": [
+    380,
+    533,
+    413,
+    560
+   ],
+   "aciklama": "Bodrum resim 9"
+  },
+  {
+   "foto": 5,
+   "u": 0.31,
+   "v": 0.5,
+   "en": 0.28,
+   "boy": 0.23,
+   "kirp": [
+    446,
+    531,
+    465,
+    559
+   ],
+   "aciklama": "Bodrum resim 10"
+  },
+  {
+   "foto": 5,
+   "u": 0.6621875,
+   "v": 0.43333333333333335,
+   "en": 0.3,
+   "boy": 0.35,
+   "kirp": [
+    1043,
+    491,
+    1076,
+    549
+   ],
+   "aciklama": "Bodrum resim 11"
+  },
+  {
+   "foto": 9,
+   "u": 0.100625,
+   "v": 0.2875,
+   "en": 0.42,
+   "boy": 0.4,
+   "kirp": [
+    111,
+    276,
+    211,
+    414
+   ],
+   "aciklama": "Çatı resim 1"
+  },
+  {
+   "foto": 9,
+   "u": 0.196875,
+   "v": 0.35333333333333333,
+   "en": 0.42,
+   "boy": 0.4,
+   "kirp": [
+    287,
+    392,
+    343,
+    456
+   ],
+   "aciklama": "Çatı resim 2"
+  },
+  {
+   "foto": 9,
+   "u": 0.25375,
+   "v": 0.34458333333333335,
+   "en": 0.42,
+   "boy": 0.4,
+   "kirp": [
+    386,
+    374,
+    426,
+    453
+   ],
+   "aciklama": "Çatı resim 3"
+  },
+  {
+   "foto": 9,
+   "u": 0.2959375,
+   "v": 0.38458333333333333,
+   "en": 0.42,
+   "boy": 0.4,
+   "kirp": [
+    458,
+    438,
+    489,
+    485
+   ],
+   "aciklama": "Çatı resim 4"
+  },
+  {
+   "foto": 9,
+   "u": 0.721875,
+   "v": 0.37875,
+   "en": 0.24,
+   "boy": 0.43,
+   "kirp": [
+    1143,
+    416,
+    1167,
+    493
+   ],
+   "aciklama": "Çatı resim 5"
+  },
+  {
+   "foto": 9,
+   "u": 0.781875,
+   "v": 0.38083333333333336,
+   "en": 0.24,
+   "boy": 0.43,
+   "kirp": [
+    1227,
+    407,
+    1275,
+    507
+   ],
+   "aciklama": "Çatı resim 6"
+  },
+  {
+   "foto": 17,
+   "u": 0.24,
+   "v": 0.34,
+   "en": 0.9,
+   "boy": 0.34,
+   "kirp": [
+    366,
+    259,
+    620,
+    400
+   ],
+   "aciklama": "Yatak üstü yatay resim"
+  },
+  {
+   "foto": 42,
+   "u": 0.77,
+   "v": 0.41,
+   "en": 0.24,
+   "boy": 0.24,
+   "kirp": [
+    810,
+    321,
+    844,
+    353
+   ],
+   "aciklama": "Antre küçük resim"
+  }
+ ],
+ "halilar": [],
+ "kontrol_fotolari": [
+  2,
+  3,
+  5,
+  23,
+  13
+ ]
+}

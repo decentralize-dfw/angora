@@ -1,0 +1,558 @@
+[
+ {
+  "no": 1,
+  "dosyalar": [
+   {
+    "dosya": "malzeme-dokulari\\01_duvar\\albedo.jpg",
+    "boyut": 299230,
+    "piksel": [
+     1024,
+     1024
+    ],
+    "sha256": "52d789111bbe93d311c22e49d28b56256593c8f84c75742642403da857a36503"
+   },
+   {
+    "dosya": "malzeme-dokulari\\01_duvar\\ao.jpg",
+    "boyut": 12710,
+    "piksel": [
+     1024,
+     1024
+    ],
+    "sha256": "f955b0561d5a868c7fc67f5d6dcb540b4d5c85234a0060164ef5d0d20cdb50f8"
+   },
+   {
+    "dosya": "malzeme-dokulari\\01_duvar\\normal.jpg",
+    "boyut": 427268,
+    "piksel": [
+     1024,
+     1024
+    ],
+    "sha256": "c0a41dc06e33072ec1156d89f3bd4b481a479616791d4e9df6c5ee7b3283db82"
+   },
+   {
+    "dosya": "malzeme-dokulari\\01_duvar\\roughness.jpg",
+    "boyut": 243061,
+    "piksel": [
+     1024,
+     1024
+    ],
+    "sha256": "76587f1a3cf6bc009caaf3d1d7651ee52359e43ce91bf52e8a3ed07cff9db623"
+   }
+  ]
+ },
+ {
+  "no": 2,
+  "dosyalar": [
+   {
+    "dosya": "malzeme-dokulari\\02_tavan\\albedo.jpg",
+    "boyut": 299230,
+    "piksel": [
+     1024,
+     1024
+    ],
+    "sha256": "52d789111bbe93d311c22e49d28b56256593c8f84c75742642403da857a36503"
+   },
+   {
+    "dosya": "malzeme-dokulari\\02_tavan\\ao.jpg",
+    "boyut": 12710,
+    "piksel": [
+     1024,
+     1024
+    ],
+    "sha256": "f955b0561d5a868c7fc67f5d6dcb540b4d5c85234a0060164ef5d0d20cdb50f8"
+   },
+   {
+    "dosya": "malzeme-dokulari\\02_tavan\\normal.jpg",
+    "boyut": 427268,
+    "piksel": [
+     1024,
+     1024
+    ],
+    "sha256": "c0a41dc06e33072ec1156d89f3bd4b481a479616791d4e9df6c5ee7b3283db82"
+   },
+   {
+    "dosya": "malzeme-dokulari\\02_tavan\\roughness.jpg",
+    "boyut": 243061,
+    "piksel": [
+     1024,
+     1024
+    ],
+    "sha256": "76587f1a3cf6bc009caaf3d1d7651ee52359e43ce91bf52e8a3ed07cff9db623"
+   }
+  ]
+ },
+ {
+  "no": 3,
+  "dosyalar": [
+   {
+    "dosya": "malzeme-dokulari\\03_parke\\albedo.jpg",
+    "boyut": 2983667,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "7c3ff1164c8dd0758ef2c048e9a266d28174120de01052ec40e6ca486177345c"
+   },
+   {
+    "dosya": "malzeme-dokulari\\03_parke\\ao.jpg",
+    "boyut": 2826020,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "9f9aa2da94211afcd08c56d6d74d9bb80b7792666b000297e3b3470739dd18e5"
+   },
+   {
+    "dosya": "malzeme-dokulari\\03_parke\\normal.jpg",
+    "boyut": 1863576,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "eff2e4db46bab930dc05997faf5085157eec4fd652cdfc6cd01fa11edd56ef10"
+   },
+   {
+    "dosya": "malzeme-dokulari\\03_parke\\roughness.jpg",
+    "boyut": 2267559,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "297eda0d75f2020cc541dbf242e1f5fd058053249567f49a4506fc2c5b1a172b"
+   }
+  ]
+ },
+ {
+  "no": 4,
+  "dosyalar": [
+   {
+    "dosya": "malzeme-dokulari\\04_karo\\albedo.jpg",
+    "boyut": 3584512,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "5cfe37ef74f2bec450d52db646714e36325b4723589c9628bf99bf887c65ed49"
+   },
+   {
+    "dosya": "malzeme-dokulari\\04_karo\\ao.jpg",
+    "boyut": 352513,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "0a66c5e2eb8d558a570b46cf27f419e95b70accf16327e28cad3655358505371"
+   },
+   {
+    "dosya": "malzeme-dokulari\\04_karo\\normal.jpg",
+    "boyut": 1410617,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "b953c132296f10b02e8e9bab6bc5e0083a32d57b5cd86a020080588a633c79f9"
+   },
+   {
+    "dosya": "malzeme-dokulari\\04_karo\\roughness.jpg",
+    "boyut": 2841084,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "3bb842eab5e3312c8102963655a969f2587954bb83344527b961889351f4de4b"
+   }
+  ]
+ },
+ {
+  "no": 5,
+  "dosyalar": [
+   {
+    "dosya": "malzeme-dokulari\\05_dolap\\albedo.jpg",
+    "boyut": 2831117,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "0718c2e1a209afe6138ccb41d70e1a18cd825d1e73db33ad7cf80806fa9ce5a4"
+   },
+   {
+    "dosya": "malzeme-dokulari\\05_dolap\\ao.jpg",
+    "boyut": 1936557,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "9a5695ea39303690d66908f6ae1c4e5bc0e929ac4ecc7dcf4622438481849496"
+   },
+   {
+    "dosya": "malzeme-dokulari\\05_dolap\\normal.jpg",
+    "boyut": 2429019,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "e74a9d3ddcd86473a21815a28464f4dac4ceb8f86e7f170226dede8ed70d8eb9"
+   },
+   {
+    "dosya": "malzeme-dokulari\\05_dolap\\roughness.jpg",
+    "boyut": 3968436,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "5c81718ee172299c44e0754fadbe652758b6feed05a8fd88be6efff5aa70ca1e"
+   }
+  ]
+ },
+ {
+  "no": 6,
+  "dosyalar": [
+   {
+    "dosya": "malzeme-dokulari\\06_tezgah\\albedo.jpg",
+    "boyut": 7645960,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "17b2243329840af9035f2e639854f5632d97f7c925dcbd90b1e31599eaa8c666"
+   },
+   {
+    "dosya": "malzeme-dokulari\\06_tezgah\\normal.jpg",
+    "boyut": 1616818,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "ca549fb2aa25bb168460f575f0577dd18dd0272b6e4552deaca6e15966f2a733"
+   },
+   {
+    "dosya": "malzeme-dokulari\\06_tezgah\\roughness.jpg",
+    "boyut": 2411949,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "e4f1822eda3d4b8d07979c050ea952ddb9bb168d1fbf552f3e2c8379d3a6a627"
+   }
+  ]
+ },
+ {
+  "no": 7,
+  "dosyalar": [
+   {
+    "dosya": "malzeme-dokulari\\07_mutfak_seramik\\albedo.jpg",
+    "boyut": 780156,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "a74664ca3721976b9407d5b1bba65534f616eb2519ae16d76b4ec5f426530bdb"
+   },
+   {
+    "dosya": "malzeme-dokulari\\07_mutfak_seramik\\ao.jpg",
+    "boyut": 220471,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "63b3987f5b78bb6ecc693455ab30e5032bbc09cf98255de75abc5f85f50d3ff4"
+   },
+   {
+    "dosya": "malzeme-dokulari\\07_mutfak_seramik\\normal.jpg",
+    "boyut": 1561357,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "063e5e1ad15fadcf7453a2b6be8cb80d5d88da8aa79068f894a39f1414fef4db"
+   },
+   {
+    "dosya": "malzeme-dokulari\\07_mutfak_seramik\\roughness.jpg",
+    "boyut": 601206,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "67cc4cc02b9e5dde932e47b0c3ba6e16b9a0e3847b11f76ea0961641816d9e1d"
+   }
+  ]
+ },
+ {
+  "no": 8,
+  "dosyalar": [
+   {
+    "dosya": "malzeme-dokulari\\08_banyo_seramik\\albedo.jpg",
+    "boyut": 2879908,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "57d3ce95255500e7b0fa677b99b258427a1b1676bd452e90f710eb4ac41f531f"
+   },
+   {
+    "dosya": "malzeme-dokulari\\08_banyo_seramik\\ao.jpg",
+    "boyut": 956741,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "cc3487e383b96edbc81a53bd707dca23ab2575cdeb9e4195f8075802f047e1f2"
+   },
+   {
+    "dosya": "malzeme-dokulari\\08_banyo_seramik\\normal.jpg",
+    "boyut": 1924372,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "67dc47321ca45fc71123eb3c285f7859ca47147d2a93655ee53d44f6a284bffe"
+   },
+   {
+    "dosya": "malzeme-dokulari\\08_banyo_seramik\\roughness.jpg",
+    "boyut": 2272667,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "4e67f21f3ea84926e5f32b439b0200ea0abdf9ccc27a9f5084b98df5c77c5662"
+   }
+  ]
+ },
+ {
+  "no": 9,
+  "dosyalar": [
+   {
+    "dosya": "malzeme-dokulari\\09_kapi\\albedo.jpg",
+    "boyut": 2060618,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "66c73defcc62ac090cb838e8455b8c1febbfea29a15c8f40a5e2d398b2ba4733"
+   },
+   {
+    "dosya": "malzeme-dokulari\\09_kapi\\ao.jpg",
+    "boyut": 2032780,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "a75c171cbb68420ae3388b532a340b69d2db9b4eeafd849f44633d394b6d0150"
+   },
+   {
+    "dosya": "malzeme-dokulari\\09_kapi\\normal.jpg",
+    "boyut": 1891517,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "544d3feffd325a0f6f7db5dc94ae99820349bb3d53ce3651e4647d5e66336cba"
+   },
+   {
+    "dosya": "malzeme-dokulari\\09_kapi\\roughness.jpg",
+    "boyut": 2426374,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "e3a8a7e035a378ce6ce2252fcd4352f62b16a2a6b2f453baacd4e081c2fedb34"
+   }
+  ]
+ },
+ {
+  "no": 10,
+  "dosyalar": [
+   {
+    "dosya": "malzeme-dokulari\\10_merdiven\\albedo.jpg",
+    "boyut": 2068772,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "dc572a16d860d56f03ae7b2df6fbf684adda4a5eee784733069d784a7dfe1a9c"
+   },
+   {
+    "dosya": "malzeme-dokulari\\10_merdiven\\ao.jpg",
+    "boyut": 1555040,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "163669dd7985ead42a4a48e1b714051ee75c14c4ac95662a542d2eec1972c54c"
+   },
+   {
+    "dosya": "malzeme-dokulari\\10_merdiven\\normal.jpg",
+    "boyut": 1407708,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "5be866a2ca4e92b3197f66421a8dcfd1917db11b3d75371f847b53994cbe0b22"
+   },
+   {
+    "dosya": "malzeme-dokulari\\10_merdiven\\roughness.jpg",
+    "boyut": 2100868,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "fbb2f854bc773fde6c0eb37a07b8403f94ac15c74c3e9298a8605a813ed9cf85"
+   }
+  ]
+ },
+ {
+  "no": 11,
+  "dosyalar": [
+   {
+    "dosya": "malzeme-dokulari\\11_deri\\albedo.jpg",
+    "boyut": 2938354,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "d2cd2e14face20b152dffd1d59a48d91bbef7b516242bc39c401c09d018e7eb8"
+   },
+   {
+    "dosya": "malzeme-dokulari\\11_deri\\ao.jpg",
+    "boyut": 1599809,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "b743c4ebe13976dac4f90f9501f10cce9683d826a4cb9ea8130702fd2b6d09b1"
+   },
+   {
+    "dosya": "malzeme-dokulari\\11_deri\\normal.jpg",
+    "boyut": 875379,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "563b03aa64d8eabc9dac426c7f440550f7239480c68065c180a8bb16f31f746e"
+   },
+   {
+    "dosya": "malzeme-dokulari\\11_deri\\roughness.jpg",
+    "boyut": 2709020,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "36af9f3299a221608de05e4a7e2eac59c70f7a725e7de690361d2e1478d1e16f"
+   }
+  ]
+ },
+ {
+  "no": 12,
+  "dosyalar": [
+   {
+    "dosya": "malzeme-dokulari\\12_yemek_ahsap\\albedo.jpg",
+    "boyut": 2484434,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "4a1a84e9537b291ac0cce1e2b8908fb9b5d1057a246ee0b3c25345565ac9686d"
+   },
+   {
+    "dosya": "malzeme-dokulari\\12_yemek_ahsap\\ao.jpg",
+    "boyut": 2369095,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "cc5cbb208ee172989e7e513c8529041c0f717f6a70e09e4ceca6da89a71f639a"
+   },
+   {
+    "dosya": "malzeme-dokulari\\12_yemek_ahsap\\normal.jpg",
+    "boyut": 1893243,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "9b1e316d019b2ae07f5327e2a8203ef34d7c8b86dbf2579273d3b5cf8e5fd441"
+   },
+   {
+    "dosya": "malzeme-dokulari\\12_yemek_ahsap\\roughness.jpg",
+    "boyut": 2316837,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "2056eb8c99a936bdc7ec4fc6b04e3b1a443c7c87ca8fd0e7011bed6188290fef"
+   }
+  ]
+ },
+ {
+  "no": 13,
+  "dosyalar": [
+   {
+    "dosya": "malzeme-dokulari\\13_dograma\\albedo.jpg",
+    "boyut": 2060618,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "66c73defcc62ac090cb838e8455b8c1febbfea29a15c8f40a5e2d398b2ba4733"
+   },
+   {
+    "dosya": "malzeme-dokulari\\13_dograma\\ao.jpg",
+    "boyut": 2032780,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "a75c171cbb68420ae3388b532a340b69d2db9b4eeafd849f44633d394b6d0150"
+   },
+   {
+    "dosya": "malzeme-dokulari\\13_dograma\\normal.jpg",
+    "boyut": 1891517,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "544d3feffd325a0f6f7db5dc94ae99820349bb3d53ce3651e4647d5e66336cba"
+   },
+   {
+    "dosya": "malzeme-dokulari\\13_dograma\\roughness.jpg",
+    "boyut": 2426374,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "e3a8a7e035a378ce6ce2252fcd4352f62b16a2a6b2f453baacd4e081c2fedb34"
+   }
+  ]
+ },
+ {
+  "no": 14,
+  "dosyalar": [
+   {
+    "dosya": "malzeme-dokulari\\14_asansor\\albedo.jpg",
+    "boyut": 2439272,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "209d3bb050be9f58c5af179d9712fa7799567a4cd50afd338d37674bdcff765b"
+   },
+   {
+    "dosya": "malzeme-dokulari\\14_asansor\\normal.jpg",
+    "boyut": 4120356,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "8773d9e97a4b057ced3e538d8ecc6069d27c8948191d61daf79b9ad93d93e3b3"
+   },
+   {
+    "dosya": "malzeme-dokulari\\14_asansor\\roughness.jpg",
+    "boyut": 1891607,
+    "piksel": [
+     2048,
+     2048
+    ],
+    "sha256": "e802f013b93cb1bd4b55cd91f02a1863233475a7f8bd0e6755cfaa447a729674"
+   }
+  ]
+ }
+]

@@ -1,0 +1,106 @@
+foto 4 (0.65,0.25) -> ceiling.001
+foto 4 (0.50,0.08) -> ceiling.001
+foto 4 (0.55,0.88) -> R31 | R33 antique nook walnut
+foto 4 (0.80,0.55) -> Simple White Wall
+foto 4 (0.68,0.73) -> R31 | R33 antique nook walnut
+foto 4 (0.23,0.60) -> Simple White Wall
+foto 4 en çok görünen: ceiling.001 (141), Simple White Wall (82), R31 | R33 antique nook walnut (67), WOOD-FL (66), ROUGHNSS1 (24), X (15), FINISH | Silver mirror (9), Simple wood (8), WHT.001 (5), brass (4) (3), Lift | Photographed rose glass 80 percent (3), WHT (2)
+foto 23 (0.58,0.25) -> ceiling.001
+foto 23 (0.50,0.08) -> ceiling.001
+foto 23 (0.35,0.88) -> WOOD-FL
+foto 23 (0.65,0.72) -> R31 | R33 antique nook walnut
+foto 23 (0.40,0.78) -> WOOD-FL
+foto 23 en çok görünen: ceiling.001 (130), Simple White Wall (100), WOOD-FL (74), R31 | R33 antique nook walnut (58), ROUGHNSS1 (32), WHT.001 (8), Simple wood (6), wood_honey (5), WHT (4), Lift | Photographed rose glass 80 percent (4), terra_floor (3), FINISH | Silver mirror (2)
+foto 21 (0.38,0.69) -> wood_honey
+foto 21 (0.50,0.90) -> terra_floor
+foto 21 (0.32,0.62) -> X
+foto 21 (0.75,0.57) -> X
+foto 21 (0.35,0.43) -> WOODY-DARK
+foto 21 en çok görünen: wood_honey (128), ceiling.001 (87), Simple White Wall (62), terra_floor (56), X (51), R31 | R35 garage galvanized steel (24), WOODY-DARK (8), Stucco painted wall (5), BLCK (5), metal.001 (1)
+foto 22 (0.18,0.55) -> R31 | R35 garage galvanized steel
+foto 22 (0.38,0.89) -> terra_floor
+foto 22 (0.20,0.49) -> R31 | R35 garage galvanized steel
+foto 22 (0.05,0.45) -> wood_honey
+foto 22 (0.23,0.25) -> ceiling.001
+foto 22 en çok görünen: Simple White Wall (124), ceiling.001 (100), terra_floor (91), wood_honey (32), R31 | R35 garage galvanized steel (30), WOODY-DARK (24), Stucco painted wall (18), X (8), BLCK (3), Simple wood (2)
+foto 11 (0.62,0.30) -> Stucco painted wall
+foto 11 en çok görünen: RR (170), WOODY-DARK (74), ceiling.001 (68), R31 | R33 antique nook walnut (33), R31 | Warm white porcelain (25), wood_honey (12), Simple White Wall (9), X (8), brass (4) (7), FINISH | Silver mirror (6), ROUGHNSS1 (6), BLCK (5)
+foto 32 (0.48,0.43) -> WOODY-DARK
+foto 32 en çok görünen: R31 | R33 master pale cream tile (196), WOODY-DARK (93), ceiling.001 (59), R31 | R33 antique nook walnut (25), R31 | R35 garage galvanized steel (15), R31 | Warm white porcelain (14), wood_honey (10), WHT (8), WHT.001 (6), X (2), brass (4) (2), R31 | R33 master fine mosaic band (1)
+foto 17 (0.77,0.45) -> Simple White Wall
+foto 17 en çok görünen: Simple White Wall (117), ceiling.001 (84), ROUGHNSS1 (81), WHT (58), WOOD-FL (25), wood_honey (23), WOODY-DARK (19), FINISH | Silver mirror (18), metal.001 (4), brass (4) (2), R31 | R33 antique nook walnut (1)
+foto 47 (0.90,0.65) -> WOODY-DARK
+foto 47 (0.70,0.85) -> Simple wood
+foto 47 en çok görünen: Simple White Wall (167), ceiling.001 (63), Simple wood (55), WOODY-DARK (54), terra_floor (49), BLCK (18), WHT.001 (11), metal.001 (10), X (5)
+foto 18 (0.14,0.16) -> Simple wood
+foto 18 en çok görünen: Simple White Wall (222), ceiling.001 (75), WOOD-FL (40), Simple wood (39), metal.001 (23), R31 | R33 antique nook walnut (14), WOODY-DARK (7), FINISH | Silver mirror (5), WHT (4), RR (3)
+foto 13 (0.36,0.47) -> (boşluk)
+foto 13 en çok görünen: WOODY-DARK (196), Simple White Wall (64), ceiling.001 (54), ROUGHNSS1 (43), WHT (42), WOOD-FL (17), brass (4) (4), WHT.001 (1), Stucco painted wall (1)
+foto 33 (0.39,0.57) -> Simple White Wall
+foto 33 en çok görünen: Simple White Wall (238), wood_honey (42), WOOD-FL (38), ceiling.001 (34), R31 | Hall ochre woven upholstery (31), Simple wood (15), Lift | Photographed rose glass 80 percent (13), Room pass | Original hall picture atlas (7), WHT (5), WOODY-DARK (4), ROUGHNSS1 (1)
+foto 48 (0.50,0.50) -> Lift | Photographed rose glass 80 percent
+foto 48 en çok görünen: Simple White Wall (223), Simple wood (87), Lift | Photographed rose glass 80 percent (48), terra_floor (23), ceiling.001 (18), X (16), BLCK (10), R31 | R33 antique nook walnut (4), WHT.001 (1), metal.001 (1), Lift brushed patterned stainless (1)
+foto 49 (0.50,0.50) -> Lift | Photographed rose glass 80 percent
+foto 49 en çok görünen: Lift | Photographed rose glass 80 percent (288), Simple wood (144)
+foto 1 (0.62,0.70) -> X
+foto 1 (0.45,0.53) -> X
+foto 1 (0.35,0.88) -> terra_floor
+foto 1 (0.33,0.37) -> R31 | R33 antique nook walnut
+foto 1 en çok görünen: ceiling.001 (116), Simple White Wall (104), X (55), terra_floor (54), Simple wood (42), R31 | R33 antique nook walnut (39), Lift | Photographed rose glass 80 percent (14), R31 | R35 garage galvanized steel (5), BLCK (2), Lift brushed patterned stainless (1)
+foto 19 (0.50,0.20) -> ceiling.001
+foto 19 en çok görünen: ceiling.001 (111), Simple White Wall (98), ROUGHNSS1 (89), WOOD-FL (56), Master quilt â€” photo projection (35), wood_honey (29), BLCK (6), WHT.001 (4), WHT (2), brass (4) (1), WOODY-DARK (1)
+foto 4 (0.80,0.45) -> Simple White Wall
+foto 4 (0.92,0.91) -> WOOD-FL
+foto 4 (0.25,0.72) -> R31 | R33 antique nook walnut
+foto 4 (0.30,0.80) -> ROUGHNSS1
+foto 4 (0.15,0.78) -> WOOD-FL
+foto 4 en çok görünen: ceiling.001 (141), Simple White Wall (82), R31 | R33 antique nook walnut (67), WOOD-FL (66), ROUGHNSS1 (24), X (15), FINISH | Silver mirror (9), Simple wood (8), WHT.001 (5), brass (4) (3), Lift | Photographed rose glass 80 percent (3), WHT (2)
+foto 23 (0.70,0.40) -> Simple White Wall
+foto 23 en çok görünen: ceiling.001 (130), Simple White Wall (100), WOOD-FL (74), R31 | R33 antique nook walnut (58), ROUGHNSS1 (32), WHT.001 (8), Simple wood (6), wood_honey (5), WHT (4), Lift | Photographed rose glass 80 percent (4), terra_floor (3), FINISH | Silver mirror (2)
+foto 21 (0.20,0.54) -> (boşluk)
+foto 21 (0.28,0.60) -> X
+foto 21 (0.30,0.55) -> Stucco painted wall
+foto 21 (0.74,0.67) -> metal.001
+foto 21 (0.43,0.40) -> wood_honey
+foto 21 en çok görünen: wood_honey (128), ceiling.001 (87), Simple White Wall (62), terra_floor (56), X (51), R31 | R35 garage galvanized steel (24), WOODY-DARK (8), Stucco painted wall (5), BLCK (5), metal.001 (1)
+foto 22 (0.07,0.60) -> R31 | R35 garage galvanized steel
+foto 22 (0.04,0.51) -> Simple White Wall
+foto 22 en çok görünen: Simple White Wall (124), ceiling.001 (100), terra_floor (91), wood_honey (32), R31 | R35 garage galvanized steel (30), WOODY-DARK (24), Stucco painted wall (18), X (8), BLCK (3), Simple wood (2)
+foto 1 (0.65,0.50) -> X
+foto 1 (0.56,0.62) -> R31 | R33 antique nook walnut
+foto 1 en çok görünen: ceiling.001 (116), Simple White Wall (104), X (55), terra_floor (54), Simple wood (42), R31 | R33 antique nook walnut (39), Lift | Photographed rose glass 80 percent (14), R31 | R35 garage galvanized steel (5), BLCK (2), Lift brushed patterned stainless (1)
+foto 11 (0.32,0.52) -> RR
+foto 11 (0.80,0.38) -> RR
+foto 11 en çok görünen: RR (170), WOODY-DARK (74), ceiling.001 (68), R31 | R33 antique nook walnut (33), R31 | Warm white porcelain (25), wood_honey (12), Simple White Wall (9), X (8), brass (4) (7), FINISH | Silver mirror (6), ROUGHNSS1 (6), BLCK (5)
+foto 32 (0.43,0.60) -> R31 | R33 master pale cream tile
+foto 32 (0.80,0.30) -> R31 | R33 master pale cream tile
+foto 32 en çok görünen: R31 | R33 master pale cream tile (196), WOODY-DARK (93), ceiling.001 (59), R31 | R33 antique nook walnut (25), R31 | R35 garage galvanized steel (15), R31 | Warm white porcelain (14), wood_honey (10), WHT (8), WHT.001 (6), X (2), brass (4) (2), R31 | R33 master fine mosaic band (1)
+foto 17 (0.88,0.56) -> WHT
+foto 17 en çok görünen: Simple White Wall (117), ceiling.001 (84), ROUGHNSS1 (81), WHT (58), WOOD-FL (25), wood_honey (23), WOODY-DARK (19), FINISH | Silver mirror (18), metal.001 (4), brass (4) (2), R31 | R33 antique nook walnut (1)
+foto 33 (0.48,0.60) -> (boşluk)
+foto 33 en çok görünen: Simple White Wall (238), wood_honey (42), WOOD-FL (38), ceiling.001 (34), R31 | Hall ochre woven upholstery (31), Simple wood (15), Lift | Photographed rose glass 80 percent (13), Room pass | Original hall picture atlas (7), WHT (5), WOODY-DARK (4), ROUGHNSS1 (1)
+foto 48 (0.68,0.38) -> Simple wood
+foto 48 en çok görünen: Simple White Wall (223), Simple wood (87), Lift | Photographed rose glass 80 percent (48), terra_floor (23), ceiling.001 (18), X (16), BLCK (10), R31 | R33 antique nook walnut (4), WHT.001 (1), metal.001 (1), Lift brushed patterned stainless (1)
+foto 49 (0.15,0.50) -> Simple wood
+foto 49 en çok görünen: Lift | Photographed rose glass 80 percent (288), Simple wood (144)
+foto 4 (0.10,0.62) -> X
+foto 4 (0.30,0.62) -> X
+foto 4 en çok görünen: ceiling.001 (141), Simple White Wall (82), R31 | R33 antique nook walnut (67), WOOD-FL (66), ROUGHNSS1 (24), X (15), FINISH | Silver mirror (9), Simple wood (8), WHT.001 (5), brass (4) (3), Lift | Photographed rose glass 80 percent (3), WHT (2)
+foto 23 (0.56,0.75) -> ROUGHNSS1
+foto 23 en çok görünen: ceiling.001 (130), Simple White Wall (100), WOOD-FL (74), R31 | R33 antique nook walnut (58), ROUGHNSS1 (32), WHT.001 (8), Simple wood (6), wood_honey (5), WHT (4), Lift | Photographed rose glass 80 percent (4), terra_floor (3), FINISH | Silver mirror (2)
+foto 21 (0.66,0.53) -> X
+foto 21 (0.85,0.65) -> X
+foto 21 (0.27,0.47) -> WOODY-DARK
+foto 21 en çok görünen: wood_honey (128), ceiling.001 (87), Simple White Wall (62), terra_floor (56), X (51), R31 | R35 garage galvanized steel (24), WOODY-DARK (8), Stucco painted wall (5), BLCK (5), metal.001 (1)
+foto 1 (0.55,0.52) -> X
+foto 1 (0.60,0.69) -> X
+foto 1 (0.06,0.86) -> Lift brushed patterned stainless
+foto 1 en çok görünen: ceiling.001 (116), Simple White Wall (104), X (55), terra_floor (54), Simple wood (42), R31 | R33 antique nook walnut (39), Lift | Photographed rose glass 80 percent (14), R31 | R35 garage galvanized steel (5), BLCK (2), Lift brushed patterned stainless (1)
+foto 48 (0.77,0.58) -> Lift brushed patterned stainless
+foto 48 en çok görünen: Simple White Wall (223), Simple wood (87), Lift | Photographed rose glass 80 percent (48), terra_floor (23), ceiling.001 (18), X (16), BLCK (10), R31 | R33 antique nook walnut (4), WHT.001 (1), metal.001 (1), Lift brushed patterned stainless (1)
+foto 47 (0.90,0.40) -> WOODY-DARK
+foto 47 en çok görünen: Simple White Wall (167), ceiling.001 (63), Simple wood (55), WOODY-DARK (54), terra_floor (49), BLCK (18), WHT.001 (11), metal.001 (10), X (5)
+foto 13 (0.70,0.40) -> WOODY-DARK
+foto 13 en çok görünen: WOODY-DARK (196), Simple White Wall (64), ceiling.001 (54), ROUGHNSS1 (43), WHT (42), WOOD-FL (17), brass (4) (4), WHT.001 (1), Stucco painted wall (1)
+foto 33 (0.44,0.53) -> WOODY-DARK
+foto 33 en çok görünen: Simple White Wall (238), wood_honey (42), WOOD-FL (38), ceiling.001 (34), R31 | Hall ochre woven upholstery (31), Simple wood (15), Lift | Photographed rose glass 80 percent (13), Room pass | Original hall picture atlas (7), WHT (5), WOODY-DARK (4), ROUGHNSS1 (1)

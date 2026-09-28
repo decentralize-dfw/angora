@@ -1,0 +1,650 @@
+[
+ {
+  "no": 1,
+  "yuzey": "iç duvar boyası",
+  "malzemeler": [
+   "Simple White Wall"
+  ],
+  "klasor": "01_duvar",
+  "kaynak_url": "https://polyhaven.com/a/plastered_wall_04",
+  "lisans": "CC0",
+  "lisans_url": "https://polyhaven.com/license",
+  "doku_olcusu_m": 3.2,
+  "doku_olcusu_xy_m": [
+   3.2,
+   3.2
+  ],
+  "renk_hex": "#d7c1a7",
+  "purluluk": 0.85,
+  "clearcoat": 0,
+  "normal_siddeti": 0.12,
+  "secim_nedeni": "Plastered Wall 04 daha düzgün ve az lekeli; White Plaster 02 fotoğraftaki boyaya göre belirgin kirli/taneli.",
+  "secilen_doku": "plastered_wall_04",
+  "karsilastirilan_adaylar": [
+   "plastered_wall_04",
+   "white_plaster_02"
+  ],
+  "b1_noktalari": [
+   "4:0.80,0.45",
+   "23:0.70,0.40"
+  ],
+  "renk_ornegi": {
+   "foto": 21,
+   "piksel_kutusu": [
+    32,
+    240,
+    160,
+    360
+   ],
+   "srgb_ortalama": [
+    215,
+    193,
+    167
+   ]
+  },
+  "emin_degil": true,
+  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı."
+ },
+ {
+  "no": 2,
+  "yuzey": "tavan",
+  "malzemeler": [
+   "ceiling.001"
+  ],
+  "klasor": "02_tavan",
+  "kaynak_url": "https://polyhaven.com/a/plastered_wall_04",
+  "lisans": "CC0",
+  "lisans_url": "https://polyhaven.com/license",
+  "doku_olcusu_m": 3.2,
+  "doku_olcusu_xy_m": [
+   3.2,
+   3.2
+  ],
+  "renk_hex": "#e3d0bf",
+  "purluluk": 0.9,
+  "clearcoat": 0,
+  "normal_siddeti": 0.05,
+  "secim_nedeni": "Düz tavan için Plastered Wall 04 daha sakin mikro doku verir; diğer adayın yoğun benekleri uygun değil.",
+  "secilen_doku": "plastered_wall_04",
+  "karsilastirilan_adaylar": [
+   "plastered_wall_04",
+   "white_plaster_02"
+  ],
+  "b1_noktalari": [
+   "4:0.50,0.08",
+   "23:0.50,0.08"
+  ],
+  "renk_ornegi": {
+   "foto": 21,
+   "piksel_kutusu": [
+    560,
+    48,
+    880,
+    144
+   ],
+   "srgb_ortalama": [
+    227,
+    208,
+    191
+   ]
+  },
+  "emin_degil": true,
+  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı."
+ },
+ {
+  "no": 3,
+  "yuzey": "ahşap parke",
+  "malzemeler": [
+   "WOOD-FL"
+  ],
+  "klasor": "03_parke",
+  "kaynak_url": "https://polyhaven.com/a/wood_floor",
+  "lisans": "CC0",
+  "lisans_url": "https://polyhaven.com/license",
+  "doku_olcusu_m": 1.7,
+  "doku_olcusu_xy_m": [
+   1.7,
+   1.7
+  ],
+  "renk_hex": "#e27651",
+  "purluluk": 0.24,
+  "clearcoat": 0.18,
+  "normal_siddeti": 0.12,
+  "secim_nedeni": "Wood Floor uzun doğal damarları ve daha sıcak tonu ile seçildi; Laminate Floor 02 daha açık ve yeknesak.",
+  "secilen_doku": "wood_floor",
+  "karsilastirilan_adaylar": [
+   "wood_floor",
+   "laminate_floor_02"
+  ],
+  "b1_noktalari": [
+   "4:0.92,0.91",
+   "23:0.35,0.88"
+  ],
+  "renk_ornegi": {
+   "foto": 4,
+   "piksel_kutusu": [
+    128,
+    996,
+    288,
+    1080
+   ],
+   "srgb_ortalama": [
+    226,
+    118,
+    81
+   ]
+  },
+  "emin_degil": true,
+  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı."
+ },
+ {
+  "no": 4,
+  "yuzey": "yer karosu (mutfak/antre/bodrum)",
+  "malzemeler": [
+   "terra_floor"
+  ],
+  "klasor": "04_karo",
+  "kaynak_url": "https://polyhaven.com/a/brown_floor_tiles",
+  "lisans": "CC0",
+  "lisans_url": "https://polyhaven.com/license",
+  "doku_olcusu_m": 1.7,
+  "doku_olcusu_xy_m": [
+   1.7,
+   1.7
+  ],
+  "renk_hex": "#e4c5a9",
+  "purluluk": 0.38,
+  "clearcoat": 0,
+  "normal_siddeti": 0.15,
+  "secim_nedeni": "Brown Floor Tiles mutfak/antredeki sıcak bej bulutlanmaya daha yakın; Terracotta Floor Tiles bodrum için yakın fakat genel olarak çok koyu kırmızı.",
+  "secilen_doku": "brown_floor_tiles",
+  "karsilastirilan_adaylar": [
+   "brown_floor_tiles",
+   "terracotta_floor_tiles"
+  ],
+  "b1_noktalari": [
+   "21:0.50,0.90",
+   "1:0.35,0.88"
+  ],
+  "renk_ornegi": {
+   "foto": 21,
+   "piksel_kutusu": [
+    512,
+    960,
+    736,
+    1080
+   ],
+   "srgb_ortalama": [
+    228,
+    197,
+    169
+   ]
+  },
+  "emin_degil": true,
+  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
+  "oda_farki": "Aynı terra_floor malzemesi mutfak/antre/bodrumda kullanılıyor; fotoğrafta bodrum daha kırmızı. Tek doku tüm odalara birebir uymaz."
+ },
+ {
+  "no": 5,
+  "yuzey": "mutfak dolabı ahşabı",
+  "malzemeler": [
+   "wood_honey",
+   "R31 | R33 antique nook walnut"
+  ],
+  "klasor": "05_dolap",
+  "kaynak_url": "https://polyhaven.com/a/oak_veneer_01",
+  "lisans": "CC0",
+  "lisans_url": "https://polyhaven.com/license",
+  "doku_olcusu_m": 1.83,
+  "doku_olcusu_xy_m": [
+   1.83,
+   1.83
+  ],
+  "renk_hex": "#b3967c",
+  "purluluk": 0.34,
+  "clearcoat": 0.08,
+  "normal_siddeti": 0.12,
+  "secim_nedeni": "Oak Veneer 01 giriş mutfağındaki bal tonu ve düz damara daha yakın; Kitchen Wood bodrum için düşünülebilir fakat girişte fazla koyu.",
+  "secilen_doku": "oak_veneer_01",
+  "karsilastirilan_adaylar": [
+   "oak_veneer_01",
+   "kitchen_wood"
+  ],
+  "b1_noktalari": [
+   "21:0.38,0.69",
+   "1:0.33,0.37"
+  ],
+  "renk_ornegi": {
+   "foto": 21,
+   "piksel_kutusu": [
+    592,
+    276,
+    640,
+    432
+   ],
+   "srgb_ortalama": [
+    179,
+    150,
+    124
+   ]
+  },
+  "emin_degil": true,
+  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı."
+ },
+ {
+  "no": 6,
+  "yuzey": "mutfak tezgâhı",
+  "malzemeler": [
+   "X"
+  ],
+  "klasor": "06_tezgah",
+  "kaynak_url": "https://ambientcg.com/a/Granite001A",
+  "lisans": "CC0",
+  "lisans_url": "https://docs.ambientcg.com/license/",
+  "doku_olcusu_m": null,
+  "doku_olcusu_xy_m": null,
+  "renk_hex": "#dcc8af",
+  "purluluk": 0.3,
+  "clearcoat": 0.05,
+  "normal_siddeti": 0.05,
+  "secim_nedeni": "Granite001A sıcak krem tabanı ile seçildi; Granite002A daha soğuk beyaz/siyah, ancak iki aday da fotoğraftan daha belirgin benekli ve eşleşme yaklaşık.",
+  "secilen_doku": "Granite001A",
+  "karsilastirilan_adaylar": [
+   "Granite001A",
+   "Granite002A"
+  ],
+  "b1_noktalari": [
+   "21:0.85,0.65",
+   "1:0.60,0.69"
+  ],
+  "renk_ornegi": {
+   "foto": 21,
+   "piksel_kutusu": [
+    1088,
+    677,
+    1168,
+    708
+   ],
+   "srgb_ortalama": [
+    220,
+    200,
+    175
+   ]
+  },
+  "emin_degil": true,
+  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
+  "olcu_notu": "Kaynak fiziksel ölçüyü 0/belirsiz bildiriyor; metre değeri uydurulmadı.",
+  "ortak_malzeme_uyarisi": "B1 X adı tezgâh, seramik ve koltukta ortak döndü; yalnız adla toplu değiştirme farklı yüzeyleri bozar. Mesh/primitive ayrımı gerekir."
+ },
+ {
+  "no": 7,
+  "yuzey": "mutfak duvar seramiği",
+  "malzemeler": [
+   "X"
+  ],
+  "klasor": "07_mutfak_seramik",
+  "kaynak_url": "https://ambientcg.com/a/Tiles107",
+  "lisans": "CC0",
+  "lisans_url": "https://docs.ambientcg.com/license/",
+  "doku_olcusu_m": 1.0,
+  "doku_olcusu_xy_m": [
+   1.0,
+   1.0
+  ],
+  "renk_hex": "#bea990",
+  "purluluk": 0.35,
+  "clearcoat": 0,
+  "normal_siddeti": 0.12,
+  "secim_nedeni": "Tiles107 ince derzli daha geniş kareleriyle yakın; Tiles133A küçük sık mozaik ve kaba derz gösteriyor.",
+  "secilen_doku": "Tiles107",
+  "karsilastirilan_adaylar": [
+   "Tiles107",
+   "Tiles133A"
+  ],
+  "b1_noktalari": [
+   "21:0.66,0.53",
+   "1:0.55,0.52"
+  ],
+  "renk_ornegi": {
+   "foto": 21,
+   "piksel_kutusu": [
+    976,
+    516,
+    1056,
+    612
+   ],
+   "srgb_ortalama": [
+    190,
+    169,
+    144
+   ]
+  },
+  "emin_degil": true,
+  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
+  "ortak_malzeme_uyarisi": "B1 X adı tezgâh, seramik ve koltukta ortak döndü; yalnız adla toplu değiştirme farklı yüzeyleri bozar. Mesh/primitive ayrımı gerekir."
+ },
+ {
+  "no": 8,
+  "yuzey": "banyo duvar seramiği",
+  "malzemeler": [
+   "RR",
+   "R31 | R33 master pale cream tile"
+  ],
+  "klasor": "08_banyo_seramik",
+  "kaynak_url": "https://polyhaven.com/a/interior_tiles",
+  "lisans": "CC0",
+  "lisans_url": "https://polyhaven.com/license",
+  "doku_olcusu_m": 1.9,
+  "doku_olcusu_xy_m": [
+   1.9,
+   1.9
+  ],
+  "renk_hex": "#a18b76",
+  "purluluk": 0.32,
+  "clearcoat": 0,
+  "normal_siddeti": 0.12,
+  "secim_nedeni": "Interior Tiles krem taş bulutlanmasıyla daha yakın; Long White Tiles dar beyaz mozaik olduğundan elendi, bordürler bu setle karşılanmaz.",
+  "secilen_doku": "interior_tiles",
+  "karsilastirilan_adaylar": [
+   "interior_tiles",
+   "long_white_tiles"
+  ],
+  "b1_noktalari": [
+   "11:0.32,0.52",
+   "32:0.43,0.60"
+  ],
+  "renk_ornegi": {
+   "foto": 11,
+   "piksel_kutusu": [
+    64,
+    384,
+    224,
+    540
+   ],
+   "srgb_ortalama": [
+    161,
+    139,
+    118
+   ]
+  },
+  "emin_degil": true,
+  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı."
+ },
+ {
+  "no": 9,
+  "yuzey": "iç kapı",
+  "malzemeler": [
+   "WOODY-DARK"
+  ],
+  "klasor": "09_kapi",
+  "kaynak_url": "https://polyhaven.com/a/walnut_veneer",
+  "lisans": "CC0",
+  "lisans_url": "https://polyhaven.com/license",
+  "doku_olcusu_m": 1.8,
+  "doku_olcusu_xy_m": [
+   1.8,
+   1.8
+  ],
+  "renk_hex": "#a79994",
+  "purluluk": 0.32,
+  "clearcoat": 0.08,
+  "normal_siddeti": 0.1,
+  "secim_nedeni": "Walnut Veneer ince ve doğrusal ceviz damarıyla kapıya daha yakın; Natural Walnut Veneer aşırı dalgalı yatay damar gösteriyor.",
+  "secilen_doku": "walnut_veneer",
+  "karsilastirilan_adaylar": [
+   "walnut_veneer",
+   "natural_walnut_veneer"
+  ],
+  "b1_noktalari": [
+   "47:0.90,0.40",
+   "13:0.70,0.40"
+  ],
+  "renk_ornegi": {
+   "foto": 17,
+   "piksel_kutusu": [
+    1312,
+    480,
+    1408,
+    636
+   ],
+   "srgb_ortalama": [
+    167,
+    153,
+    148
+   ]
+  },
+  "emin_degil": true,
+  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı."
+ },
+ {
+  "no": 10,
+  "yuzey": "merdiven basamağı",
+  "malzemeler": [
+   "Simple wood"
+  ],
+  "klasor": "10_merdiven",
+  "kaynak_url": "https://polyhaven.com/a/cherry_veneer",
+  "lisans": "CC0",
+  "lisans_url": "https://polyhaven.com/license",
+  "doku_olcusu_m": 1.0,
+  "doku_olcusu_xy_m": [
+   1.0,
+   1.0
+  ],
+  "renk_hex": "#c39978",
+  "purluluk": 0.28,
+  "clearcoat": 0.12,
+  "normal_siddeti": 0.1,
+  "secim_nedeni": "Cherry Veneer sıcak ve ince damar bakımından basamaklara yakın; American Walnut Veneer daha soğuk ve koyu.",
+  "secilen_doku": "cherry_veneer",
+  "karsilastirilan_adaylar": [
+   "cherry_veneer",
+   "american_walnut_veneer"
+  ],
+  "b1_noktalari": [
+   "47:0.70,0.85",
+   "18:0.14,0.16"
+  ],
+  "renk_ornegi": {
+   "foto": 47,
+   "piksel_kutusu": [
+    496,
+    876,
+    640,
+    924
+   ],
+   "srgb_ortalama": [
+    195,
+    153,
+    120
+   ]
+  },
+  "emin_degil": true,
+  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı."
+ },
+ {
+  "no": 11,
+  "yuzey": "deri koltuk",
+  "malzemeler": [
+   "X"
+  ],
+  "klasor": "11_deri",
+  "kaynak_url": "https://polyhaven.com/a/fabric_leather_02",
+  "lisans": "CC0",
+  "lisans_url": "https://polyhaven.com/license",
+  "doku_olcusu_m": 0.5,
+  "doku_olcusu_xy_m": [
+   0.5,
+   0.5
+  ],
+  "renk_hex": "#772e1e",
+  "purluluk": 0.42,
+  "clearcoat": 0.06,
+  "normal_siddeti": 0.25,
+  "secim_nedeni": "Fabric Leather 02 sıcak tütün tonu ve kırışıklıklarıyla yakın; Brown Leather daha düz ve koyu.",
+  "secilen_doku": "fabric_leather_02",
+  "karsilastirilan_adaylar": [
+   "fabric_leather_02",
+   "brown_leather"
+  ],
+  "b1_noktalari": [
+   "4:0.10,0.62",
+   "23:0.56,0.75"
+  ],
+  "renk_ornegi": {
+   "foto": 4,
+   "piksel_kutusu": [
+    288,
+    732,
+    368,
+    792
+   ],
+   "srgb_ortalama": [
+    119,
+    46,
+    30
+   ]
+  },
+  "emin_degil": true,
+  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
+  "ortak_malzeme_uyarisi": "B1 X adı tezgâh, seramik ve koltukta ortak döndü; yalnız adla toplu değiştirme farklı yüzeyleri bozar. Mesh/primitive ayrımı gerekir.",
+  "b1_siniri": "Deri koltuk foto4 içinde X olarak doğrulandı; foto23 ikinci nokta sandalye döşemesinde ROUGHNSS1 döndü, ikinci koltuk açısı doğrulanamadı."
+ },
+ {
+  "no": 12,
+  "yuzey": "yemek masası / sandalye ahşabı",
+  "malzemeler": [
+   "R31 | R33 antique nook walnut"
+  ],
+  "klasor": "12_yemek_ahsap",
+  "kaynak_url": "https://polyhaven.com/a/natural_walnut_veneer",
+  "lisans": "CC0",
+  "lisans_url": "https://polyhaven.com/license",
+  "doku_olcusu_m": 1.0,
+  "doku_olcusu_xy_m": [
+   1.0,
+   1.0
+  ],
+  "renk_hex": "#a96241",
+  "purluluk": 0.28,
+  "clearcoat": 0.18,
+  "normal_siddeti": 0.1,
+  "secim_nedeni": "Natural Walnut Veneer hareketli damarlarıyla kök ceviz hissine daha yakın; Walnut Veneer çok doğrusal, fakat seçilen doku da gerçek kök ceviz ve oymayı birebir karşılamaz.",
+  "secilen_doku": "natural_walnut_veneer",
+  "karsilastirilan_adaylar": [
+   "natural_walnut_veneer",
+   "walnut_veneer"
+  ],
+  "b1_noktalari": [
+   "4:0.68,0.73",
+   "23:0.65,0.72"
+  ],
+  "renk_ornegi": {
+   "foto": 23,
+   "piksel_kutusu": [
+    992,
+    792,
+    1088,
+    840
+   ],
+   "srgb_ortalama": [
+    169,
+    98,
+    65
+   ]
+  },
+  "emin_degil": true,
+  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı."
+ },
+ {
+  "no": 13,
+  "yuzey": "pencere doğraması",
+  "malzemeler": [
+   "WOODY-DARK"
+  ],
+  "klasor": "13_dograma",
+  "kaynak_url": "https://polyhaven.com/a/walnut_veneer",
+  "lisans": "CC0",
+  "lisans_url": "https://polyhaven.com/license",
+  "doku_olcusu_m": 1.8,
+  "doku_olcusu_xy_m": [
+   1.8,
+   1.8
+  ],
+  "renk_hex": "#a7a093",
+  "purluluk": 0.32,
+  "clearcoat": 0.06,
+  "normal_siddeti": 0.08,
+  "secim_nedeni": "Walnut Veneer düzgün ince damarıyla cilalı koyu çerçeveye yakın; Kitchen Wood daha kaba ve yıpranmış görünüyor.",
+  "secilen_doku": "walnut_veneer",
+  "karsilastirilan_adaylar": [
+   "walnut_veneer",
+   "kitchen_wood"
+  ],
+  "b1_noktalari": [
+   "21:0.271,0.472",
+   "33:0.438,0.528"
+  ],
+  "renk_ornegi": {
+   "foto": 21,
+   "piksel_kutusu": [
+    401,
+    491,
+    425,
+    624
+   ],
+   "srgb_ortalama": [
+    167,
+    160,
+    147
+   ]
+  },
+  "emin_degil": true,
+  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı."
+ },
+ {
+  "no": 14,
+  "yuzey": "asansör kabini paneli",
+  "malzemeler": [
+   "Lift brushed patterned stainless"
+  ],
+  "klasor": "14_asansor",
+  "kaynak_url": "https://ambientcg.com/a/Metal009",
+  "lisans": "CC0",
+  "lisans_url": "https://docs.ambientcg.com/license/",
+  "doku_olcusu_m": null,
+  "doku_olcusu_xy_m": null,
+  "renk_hex": "#645e55",
+  "purluluk": 0.22,
+  "clearcoat": null,
+  "normal_siddeti": 0.3,
+  "secim_nedeni": "Metal009 yönlü ince fırça iziyle paslanmaza daha yakın; Metal011 daha dağınık, fakat her ikisinde de fotoğraftaki düzenli yuvarlak kabartma yok.",
+  "secilen_doku": "Metal009",
+  "karsilastirilan_adaylar": [
+   "Metal009",
+   "Metal011"
+  ],
+  "b1_noktalari": [
+   "1:0.0625,0.8611",
+   "48:0.77083,0.58333"
+  ],
+  "renk_ornegi": {
+   "foto": 49,
+   "piksel_kutusu": [
+    264,
+    400,
+    336,
+    800
+   ],
+   "srgb_ortalama": [
+    100,
+    94,
+    85
+   ]
+  },
+  "emin_degil": true,
+  "not": "Fotoğraf rengi aydınlatma/pozlama içerir; doğrudan albedo çarpanı olarak uygulanmadı. Doku seti teslimdir, modele uygulanmadı.",
+  "olcu_notu": "Kaynak fiziksel ölçüyü 0/belirsiz bildiriyor; metre değeri uydurulmadı.",
+  "eslesme_siniri": "B1 dar kenardan panel adını verdi; ana kabin kapalı kapıyla örtülüyor. Seçilen doku fırçalı tabandır; yuvarlak kabartma eşleşmesi bulunamadı."
+ }
+]
