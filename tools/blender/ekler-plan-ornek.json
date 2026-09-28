@@ -1,0 +1,16 @@
+{
+ "foto_yatay_aci": 80,
+ "perdeler": [
+  {"pencere": "P01", "tur": "ikisi", "renk_tul": "#f3efe6", "renk_fon": "#b99b7a", "kornis": true}
+ ],
+ "aplikler": [
+  {"foto": 19, "u": 0.30, "v": 0.40, "renk": "#efe2c8"}
+ ],
+ "tablolar": [
+  {"foto": 4, "u": 0.24, "v": 0.43, "en": 0.6, "boy": 0.8, "kirp": [380, 520, 490, 690]}
+ ],
+ "halilar": [
+  {"merkez": [-3.0, 6.5], "kat": 1, "en": 2.0, "boy": 3.0, "aci": 0, "renk": "#8a3b2a"}
+ ],
+ "kontrol_fotolari": [4, 19]
+}

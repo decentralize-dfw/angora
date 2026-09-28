@@ -1717,6 +1717,17 @@ async function loadNativeModel(manifest){
         for(const material of Array.isArray(o.material)?o.material:[o.material]){material.clippingPlanes=planes;material.clipShadows=true;if(material.aoMap)material.aoMapIntensity=FEATURES.warmGradeV1?.55:.7;if(name==='garden'||name==='context-plants'||(manifest.batched&&context))plotMask?.apply(material,{alwaysOutside:name==='context-buildings',cutInsidePlot:name==='context-ground'||name==='garden'});}
     }});
     await nativeDelivery.activate(selected==='building'?'f3':selected);
+    // EKLER (Tur 9): fotoğraflarda olup modelde olmayan detaylar - perde,
+    // korniş, aplik, tablo, halı (tools/blender/06_ekler.py). Mimari
+    // grubun içine girer: kesit, kat görünürlüğü ve ışık aynı. Kapat: ?features=ekler:0
+    if(FEATURES.ekler&&groups.get('architecture'))loader.loadAsync(new URL('../../26092026/EKLER.glb',modelRoot).href).then(gltf=>{
+      const root=gltf.scene;root.name='EKLER';
+      root.traverse(o=>{if(!o.isMesh)return;
+        o.renderOrder=5;lighting.prepareMesh(o,{clipped:true,context:false,name:'interior'});o.userData.clipPlanes=[clip];
+        for(const m of Array.isArray(o.material)?o.material:[o.material]){m.clippingPlanes=[clip];m.clipShadows=true;if(m.transparent)m.depthWrite=false;}});
+      groups.get('architecture').add(root);lighting.requestShadowUpdate();invalidate();
+      console.info('EKLER: '+root.children.length+' nesne');
+    }).catch(error=>console.warn('EKLER yüklenemedi',error));
     // A7: deferred context parts land behind the first frame; QA screenshots
     // stay deterministic by awaiting this (guarded - absent when flag off).
     if(FEATURES.progressiveContextV1)window.__angoraContextPartsReady=nativeDelivery.contextReady.then(()=>{invalidate();return true;});
