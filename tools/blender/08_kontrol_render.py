@@ -5,7 +5,13 @@
 Seçenekler:
   --ekler <yol.glb|yol.blend>  ajanın modellediği nesneler (glb içe aktarılır; .blend'den 'EKLER'
                                 koleksiyonu eklenir). Varsayılan: build/web/26092026/EKLER.glb varsa o.
-  --sil <silme-kutulari.json>   eski mobilyaları gizle (aynı kutular web modelinden de silinecek)
+  --sil <silme-kutulari.json>   eski parçaları gizle (aynı kutular web modelinden de silinecek):
+                                [{"ad": "..", "katman": "mobilya" | "mimari", "min": [x,y,z], "max": [x,y,z],
+                                  "malzemeler": ["Simple wood", ...]  (isteğe bağlı: yalnız bu malzemeler)}]
+                                mobilya = INTERIOR, mimari = BUILDING (eski kapı/armatür/merdiven parçası)
+  --dokular <dokular.json>      Tur 9 dokularını malzeme adına göre giydir (kutu izdüşümü, doku_olcusu_m ile;
+                                UV gerekmez). renk_hex, purluluk, normal_siddeti de uygulanır.
+                                Doku klasörü: dokular.json'un yanındaki malzeme-dokulari\
   --kamera <kamera-duzeltme.json>  fotoğraf başına kamera düzeltmesi (aşağıda)
   --ornek N                     Cycles örnek sayısı (varsayılan 96; OIDN gürültü temizler)
   --gece                        armatürler açık, gök kapalı (gece fotoğrafları için)
@@ -42,8 +48,9 @@ bpy.ops.wm.read_factory_settings(use_empty=True)
 scene = bpy.context.scene
 bpy.ops.import_scene.gltf(filepath=os.path.join(ROOT, 'build', 'bake', 'BUILDING-opt-v4-lm.glb'))
 before = set(scene.objects)
+arch_objects = set(before)
 bpy.ops.import_scene.gltf(filepath=os.path.join(ROOT, 'build', 'bake', 'INTERIOR-opt-v2.decoded.glb'))
-base_objects = set(scene.objects) - before   # YALNIZ mobilya (INTERIOR): silme kutuları duvara/parkeye dokunmaz
+base_objects = set(scene.objects) - before   # mobilya (INTERIOR)
 if EKLER and os.path.exists(EKLER):
     if EKLER.endswith('.blend'):
         with bpy.data.libraries.load(EKLER, link=False) as (src, dst): dst.collections = [c for c in src.collections if c == 'EKLER']
@@ -55,14 +62,74 @@ if EKLER and os.path.exists(EKLER):
 # eski mobilya: silme kutularının İÇİNDE kalan yüzler gizlenir (INTERIOR mesh'leri malzeme başına birleşik)
 if BOXES:
     import bmesh
-    for obj in [o for o in base_objects if o.type == 'MESH']:
+    for obj in [o for o in (base_objects | arch_objects) if o.type == 'MESH']:
+        layer = 'mobilya' if obj in base_objects else 'mimari'
+        boxes = [b for b in BOXES if b.get('katman', 'mobilya') == layer]
+        if not boxes: continue
+        mats = [s.material.name if s.material else '' for s in obj.material_slots]
         bm = bmesh.new(); bm.from_mesh(obj.data); mw = obj.matrix_world
-        gone = [face for face in bm.faces if any(all(b['min'][i] <= (mw @ face.calc_center_median())[i] <= b['max'][i]
-                for i in range(3)) for b in BOXES)]
+        def inside(face, b):
+            if b.get('malzemeler') and (mats[face.material_index] if face.material_index < len(mats) else '') not in b['malzemeler']: return False
+            c = mw @ face.calc_center_median()
+            return all(b['min'][i] <= c[i] <= b['max'][i] for i in range(3))
+        gone = [face for face in bm.faces if any(inside(face, b) for b in boxes)]
         if gone:
             bmesh.ops.delete(bm, geom=gone, context='FACES'); bm.to_mesh(obj.data)
-            log('silindi', obj.name, len(gone), 'yüz')
+            log('silindi', layer, obj.name, len(gone), 'yüz')
         bm.free()
+
+# Tur 9 dokuları: malzeme adına göre, kutu izdüşümü (dünya koordinatı, metre ölçeği)
+if opt('--dokular'):
+    spec_path = os.path.abspath(opt('--dokular')); tex_root = os.path.join(os.path.dirname(spec_path), 'malzeme-dokulari')
+    def srgb_lin(h):
+        h = h.lstrip('#'); c = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+        return [x / 12.92 if x <= .04045 else ((x + .055) / 1.055) ** 2.4 for x in c]
+    by_mat = {}
+    for rec in json.load(open(spec_path, encoding='utf-8')):
+        if rec.get('bulunamadi'): continue
+        for name in rec.get('malzemeler', []): by_mat.setdefault(name, rec)
+    done = set()
+    for mat in bpy.data.materials:
+        rec = by_mat.get(mat.name) or by_mat.get(mat.name.rsplit('.', 1)[0])
+        if not rec or not mat.node_tree or mat.name in done: continue
+        nt = mat.node_tree; bsdf = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+        if not bsdf: continue
+        folder = os.path.join(tex_root, rec['klasor'])
+        scale = 1 / max(float(rec.get('doku_olcusu_m') or 1.0), .05)
+        coord = nt.nodes.new('ShaderNodeTexCoord'); mapping = nt.nodes.new('ShaderNodeMapping')
+        mapping.inputs['Scale'].default_value = (scale, scale, scale); nt.links.new(coord.outputs['Object'], mapping.inputs['Vector'])
+        def tex(fname, colour):
+            path = os.path.join(folder, fname)
+            if not os.path.exists(path): return None
+            node = nt.nodes.new('ShaderNodeTexImage'); node.image = bpy.data.images.load(path, check_existing=True)
+            node.image.colorspace_settings.name = 'sRGB' if colour else 'Non-Color'
+            node.projection = 'BOX'; node.projection_blend = .25; nt.links.new(mapping.outputs['Vector'], node.inputs['Vector'])
+            return node
+        albedo = tex('albedo.jpg', True)
+        if albedo:
+            if rec.get('renk_hex'):
+                # dokunun kendi ortalaması yerine fotoğraftaki renk: doku x (hedef / ortalama)
+                mix = nt.nodes.new('ShaderNodeMix'); mix.data_type = 'RGBA'; mix.blend_type = 'MULTIPLY'
+                mix.inputs['Factor'].default_value = 1.0
+                img = albedo.image; import numpy as np
+                px = np.empty(img.size[0] * img.size[1] * 4, np.float32); img.pixels.foreach_get(px)
+                mean = np.maximum(px.reshape(-1, 4)[::53, :3].mean(0), 1e-3)
+                target = np.array(srgb_lin(rec['renk_hex'])); gain = np.clip(target / mean, 0, 4)
+                mix.inputs['B'].default_value = (*gain, 1)
+                nt.links.new(albedo.outputs['Color'], mix.inputs['A']); nt.links.new(mix.outputs['Result'], bsdf.inputs['Base Color'])
+            else:
+                nt.links.new(albedo.outputs['Color'], bsdf.inputs['Base Color'])
+        rough = tex('roughness.jpg', False)
+        if rough: nt.links.new(rough.outputs['Color'], bsdf.inputs['Roughness'])
+        elif rec.get('purluluk') is not None: bsdf.inputs['Roughness'].default_value = float(rec['purluluk'])
+        normal = tex('normal.jpg', False)
+        if normal:
+            nm = nt.nodes.new('ShaderNodeNormalMap'); nm.inputs['Strength'].default_value = float(rec.get('normal_siddeti') or .8)
+            nt.links.new(normal.outputs['Color'], nm.inputs['Color']); nt.links.new(nm.outputs['Normal'], bsdf.inputs['Normal'])
+        if rec.get('clearcoat'):
+            cc = bsdf.inputs.get('Coat Weight') or bsdf.inputs.get('Clearcoat')
+            if cc: cc.default_value = float(rec['clearcoat'])
+        done.add(mat.name); log('doku', mat.name, '<-', rec['klasor'])
 
 # ışıklar: 28 armatür + güneş + gök
 data = json.load(open(os.path.join(ROOT, 'tools', 'blender', 'isiklar.json'), encoding='utf-8'))
