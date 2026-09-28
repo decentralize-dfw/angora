@@ -908,3 +908,33 @@ Ara push: bfaa3f9 (20. dakika). Son kontrol için 01,02,06,11,13,16,17,18,21,32,
 - Ara committeki Python önbelleği/eski doku yedekleri son teslimden çıkarıldı.
 
 - Teslim kontrolü: 13 FOTO | ÖNCE | SONRA ve beş yakın plan (ceviz, kiraz, mutfak çerçeve, terrakota, seramik) üretildi; yakın planlarda damar ve tek derz doğrulandı.
+
+## Adım 09 A — DWG korkuluk, sabit ahşap paleti, seramik ve foto47
+
+### Kaynak ve birim
+
+YAPILDI: ODA File Converter 27.1, ACAD2018 DXF; ANGORA-.dwg yalnız sparse checkout'a eklendi. Arama ilk 6 dakika içinde sonuçlandı. `KORKULUK 1` bloğu `2D$FER` üzerinde 283 LINE + 224 ARC içeriyor; 507 entity panel-ham.json ve bağımsız KORKULUK-1-orijinal-panel.dxf içinde korunuyor. Kontrol edilen katmanlar: KORKULUK (52394), 2D$FER (8070), 2D$FERFORJE (1197), 2D$KTR (308). Tüm katman/blok adları cad/envanter.json içinde.
+
+KALDI / birim yorumu: `$INSUNITS=6` (metre), fakat 2D detay bloğu yerel 100×80 birim ve paftadaki INSERT ölçeği 2.5. Detay 1.00×0.80m panel olarak yorumlandı (yerel .01 katsayısı); bu nominal ölçü saha/ölçü çizgisiyle ayrıca doğrulanmadı. Çizgi/yayların göreli koordinatları değişmedi; yay tessellation sapması en çok yaklaşık 1.2mm. Pafta INSERT koordinatları villa dünya koordinatı olarak kullanılmadı.
+
+YAPILDI: DWG çizgileri Blender eğrileri olarak saklandı (ARSIV_DWG), 12mm kare profil; dışa aktarım için aynı prototip mesh kopyaları. Her segmentte 1m tekrar, son panel sınırda kesilir; merdiven eğimi affine shear ile verilir. Ahşap küpeşte profili korunur ve panel üstüne bağlanır. 2D$KTR içindeki pafta detayı güvenilir plan merkez hattı olarak kullanılamadığından izin verilen döşeme boşluğu kenarı yöntemi kullanıldı; foto18 galeri L şeklindedir. Yerleşim koordinatları korkuluk-yerlesim.json içinde.
+
+### Sabit ahşap atamaları
+
+| Palet | Atanan yüzeyler | Ölçüm kanıtı |
+|---|---|---|
+| Koyu ceviz | 11/32 alt ve boy banyo dolapları; giriş katı kapı/kasaları; 16 sürgülü gömme dolap; 01 çerçeveler; alt kat süpürgelik/küpeşte | olcum_11.jpg; dolap altı gölge telafisi 1.7, ortak ton; 32 ölçümü ayrıca kaydedildi fakat turuncu örnek palete alınmadı |
+| Wenge | Üst kat kapı, kasa ve süpürgelikler | olcum_18.jpg |
+| Kiraz | 21 mutfak dolapları | olcum_21.jpg |
+| Parke | Parke ve merdiven | Önceki kilitli parke/tek parça merdiven dokuları korundu |
+
+YAPILDI: foto11 zemin kırmızı-beyaz, 30cm nominal karo, 45° gerçek UV. Kırmızı ölçüm ilk kontrolde beyaz karoya düştüğü için uygulanmadan düzeltildi; son kırmızı ROI RGB yaklaşık117,78,68. Ahşaplar siyah/gri yüzeyden ölçülmedi.
+YAPILDI: foto32 seramik krem, yaklaşık60cm büyük format; alt bordür döşemeden .95m, üst mevcut bant korunur. Koyu boy dolabı aynı ceviz paletinde. KALDI: bordürün desen ayrıntısı fotoğrafla tam birebir değil.
+YAPILDI: foto02 turuncu-kahve terrakota, 45° UV; krem bordür/dikdörtgen geometri korunur.
+YAPILDI: foto47 için eski beyaz rıht yüzleri hem mimari hem mobilya katmanındaki ölçülen kutulardan çıkarılır; eğik iç yüzler kaldırılır, yeni duvar Y=2.1271 düzleminde tek dikey yüzeydir. Son görsel sonuç aşağıdaki kontrol günlüğüyle birlikte değerlendirilir.
+
+### Kontrol
+
+01,02,11,16,18,21,29,32,34,40,42,47 için SON kontrolü ve yakın korkuluk DWG | FOTO | SONRA üretildi. Yeni mobilya modellenmedi. Eski kapsam dışı kamera/aksesuar farkları bu A tesliminin çözüldü iddiasına dahil değildir.
+
+KALDI / son göz kontrolü: foto47 sol üstteki ince tavan birleşim açıklığı, 34 kapı altı ışık çizgileri ve foto32 bordür motifi; A kapsamındaki ana beyaz rıht ve sağ duvar düzeltmesi son karede doğrulandı.

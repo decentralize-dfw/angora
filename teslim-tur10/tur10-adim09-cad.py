@@ -1,0 +1,3 @@
+import ezdxf,json,re,collections
+from pathlib import Path
+A=Path(r'C:\Users\yigit\angora-tur10\adim09/cad');d=ezdxf.readfile(A/'ANGORA-.dxf');m=d.modelspace();layers=collections.Counter(e.dxf.layer for e in m);blocks=[{'ad':b.name,'adet':len(b),'tipler':dict(collections.Counter(e.dxftype() for e in b))} for b in d.blocks];r={'INSUNITS':d.header.get('$INSUNITS'),'katmanlar':dict(layers),'bloklar':blocks,'toplam':len(m)};(A/'envanter.json').write_text(json.dumps(r,ensure_ascii=False,indent=1),encoding='utf-8');print('INSUNITS',r['INSUNITS'],'entity',len(m));print('LAYERS',dict(layers));print('MATCH BLOCKS',[b for b in blocks if re.search('kork|ferfor|parmak|k.pe|rail|balus|merdiv|stair',b['ad'],re.I)]);print('BLOCKS',[(b['ad'],b['adet']) for b in blocks][:180])

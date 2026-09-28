@@ -980,5 +980,85 @@
    "brass (4)"
   ],
   "not": "Ölçülen eski menteşeli dolap önleri yerine sürgülü ayna kanatlar; yan gövde korunur."
+ },
+ {
+  "ad": "A09_F47_eski_beyaz_ust_basamak",
+  "katman": "mobilya",
+  "min": [
+   0.75,
+   2.125,
+   0.02
+  ],
+  "max": [
+   4.19,
+   3.16,
+   3.12
+  ],
+  "malzemeler": [
+   "Simple White Wall"
+  ],
+  "normal_axes": [
+   0,
+   2
+  ],
+  "kes": true
+ },
+ {
+  "ad": "A09_F47_egik_duvar_yuzleri",
+  "katman": "mobilya",
+  "min": [
+   0.36,
+   1.93,
+   0.02
+  ],
+  "max": [
+   4.19,
+   2.125,
+   3.31
+  ],
+  "malzemeler": [
+   "Simple White Wall"
+  ],
+  "kes": true
+ },
+ {
+  "ad": "A09_F47_eski_beyaz_ust_basamak mimari",
+  "katman": "mimari",
+  "min": [
+   0.75,
+   2.125,
+   0.02
+  ],
+  "max": [
+   4.19,
+   3.16,
+   3.12
+  ],
+  "malzemeler": [
+   "Simple White Wall"
+  ],
+  "normal_axes": [
+   0,
+   2
+  ],
+  "kes": true
+ },
+ {
+  "ad": "A09_F47_egik_duvar_yuzleri mimari",
+  "katman": "mimari",
+  "min": [
+   0.36,
+   1.93,
+   0.02
+  ],
+  "max": [
+   4.19,
+   2.125,
+   3.31
+  ],
+  "malzemeler": [
+   "Simple White Wall"
+  ],
+  "kes": true
  }
 ]

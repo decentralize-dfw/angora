@@ -221,3 +221,23 @@ Küpeşte ΔE76 **2.04**. 44 fotoğraf tahta rengi + 4K ceviz damarı; bağıms�
 ![Yakın seramik](../adim08/yakin_seramik.jpg)
 
 **KALDI:** foto32 bordür/desen; foto06 armatür biçimi ve fotoğraf kadrajı; foto47 beyaz üst basamak yüzeyleri; foto40 tam kamera/oran eşleşmesi; eşik/kartonpiyer ayrıntıları ve foto16 ahşabının daha açık görünmesi. Ayrıntılı tek satırlık YAPILDI/KALDI tablosu: [notlar.md](../notlar.md). Süre uzatılmadan konu kapatıldı.
+
+## 10 · Adım 09 A · DWG korkuluk ve kapanış düzeltmeleri
+![Adım 09 A · DWG korkuluk ve kapanış düzeltmeleri foto 01](10_adim-09-a-dwg-korkuluk-ve-kapanis-duzelt_foto_01.jpg)
+![Adım 09 A · DWG korkuluk ve kapanış düzeltmeleri foto 02](10_adim-09-a-dwg-korkuluk-ve-kapanis-duzelt_foto_02.jpg)
+![Adım 09 A · DWG korkuluk ve kapanış düzeltmeleri foto 11](10_adim-09-a-dwg-korkuluk-ve-kapanis-duzelt_foto_11.jpg)
+![Adım 09 A · DWG korkuluk ve kapanış düzeltmeleri foto 16](10_adim-09-a-dwg-korkuluk-ve-kapanis-duzelt_foto_16.jpg)
+![Adım 09 A · DWG korkuluk ve kapanış düzeltmeleri foto 18](10_adim-09-a-dwg-korkuluk-ve-kapanis-duzelt_foto_18.jpg)
+![Adım 09 A · DWG korkuluk ve kapanış düzeltmeleri foto 21](10_adim-09-a-dwg-korkuluk-ve-kapanis-duzelt_foto_21.jpg)
+![Adım 09 A · DWG korkuluk ve kapanış düzeltmeleri foto 29](10_adim-09-a-dwg-korkuluk-ve-kapanis-duzelt_foto_29.jpg)
+![Adım 09 A · DWG korkuluk ve kapanış düzeltmeleri foto 32](10_adim-09-a-dwg-korkuluk-ve-kapanis-duzelt_foto_32.jpg)
+![Adım 09 A · DWG korkuluk ve kapanış düzeltmeleri foto 34](10_adim-09-a-dwg-korkuluk-ve-kapanis-duzelt_foto_34.jpg)
+![Adım 09 A · DWG korkuluk ve kapanış düzeltmeleri foto 40](10_adim-09-a-dwg-korkuluk-ve-kapanis-duzelt_foto_40.jpg)
+![Adım 09 A · DWG korkuluk ve kapanış düzeltmeleri foto 42](10_adim-09-a-dwg-korkuluk-ve-kapanis-duzelt_foto_42.jpg)
+![Adım 09 A · DWG korkuluk ve kapanış düzeltmeleri foto 47](10_adim-09-a-dwg-korkuluk-ve-kapanis-duzelt_foto_47.jpg)
+
+![DWG paneli, fotoğraf, render](../adim09/yakin_korkuluk.jpg)
+
+[DWG panel DXF](../adim09/cad/KORKULUK-1-orijinal-panel.dxf) · [Katman/blok envanteri](../adim09/cad/envanter.json) · [Ahşap paleti ve notlar](../notlar.md)
+
+KALDI: 2D detayın 1.00×0.80m nominal ölçeği ayrıca saha ölçüsüyle doğrulanmadı; banyo bordürü deseni birebir değil. Foto47 beyaz rıhtlar son kontrolde kaldırıldı.

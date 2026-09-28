@@ -1,0 +1,11 @@
+{
+ "modul": "A09",
+ "nesneler": 1732,
+ "ucgen": 338995,
+ "en_buyuk": 5999,
+ "notlar": {
+  "korkuluk": "507 gerçek DXF LINE/ARC; 12mm kare profil, tek panel, eğim shear",
+  "yerlesim": "döşeme boşluğu kenarları; foto18 L galeri",
+  "F47": "eski beyaz basamak ve eğik yüzey maskesi; tek düz dikey duvar"
+ }
+}

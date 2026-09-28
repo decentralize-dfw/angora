@@ -1,11 +1,93 @@
 [
  {
+  "no": 32,
+  "yuzey": "dama",
+  "malzemeler": [
+   "R31 | Shared bathroom red tile",
+   "R31 | Shared bathroom ivory tile",
+   "RR",
+   "WHT.001",
+   "terra_floor",
+   "stone_tile",
+   "R31 | R33 ivory wall ceramic"
+  ],
+  "klasor": "A09_dama",
+  "doku_olcusu_m": 1,
+  "doku_olcusu_xy_m": [
+   0.6,
+   0.6
+  ],
+  "purluluk": 0.5,
+  "normal_siddeti": 0,
+  "ahsap_uzun_kenar": false,
+  "renk_hex": null,
+  "uv_aci": 45,
+  "kutular": [
+   {
+    "min": [
+     1.5,
+     -4.3,
+     6.35
+    ],
+    "max": [
+     4.5,
+     -0.4,
+     6.4
+    ]
+   }
+  ]
+ },
+ {
+  "no": 31,
+  "yuzey": "koyu_ceviz",
+  "malzemeler": [
+   "wood_honey",
+   "R31 | R33 antique nook walnut"
+  ],
+  "klasor": "A09_koyu_ceviz",
+  "doku_olcusu_m": 1,
+  "doku_olcusu_xy_m": [
+   1,
+   1
+  ],
+  "purluluk": 0.5,
+  "normal_siddeti": 0.12,
+  "ahsap_uzun_kenar": true,
+  "renk_hex": null,
+  "kutular": [
+   {
+    "min": [
+     0.2,
+     -4.2,
+     6.35
+    ],
+    "max": [
+     4.4,
+     -0.5,
+     9.0
+    ]
+   },
+   {
+    "min": [
+     0.1,
+     6.7,
+     6.35
+    ],
+    "max": [
+     1.2,
+     9.3,
+     9.0
+    ]
+   }
+  ]
+ },
+ {
   "no": 30,
   "yuzey": "wenge",
   "malzemeler": [
    "A08_Wenge_kutuphane"
   ],
-  "klasor": "A08_wenge",
+  "klasor": "A09_wenge",
   "doku_olcusu_xy_m": [
    1,
    1
@@ -17,7 +99,8 @@
   "renk_hex": null,
   "ahsap_uzun_kenar": true,
   "kaynak": "Fotoğraf WB ölçümü + Poly Haven 4K",
-  "lisans": "CC0"
+  "lisans": "CC0",
+  "palet": "Wenge"
  },
  {
   "no": 29,
@@ -57,7 +140,8 @@
   "no": 28,
   "yuzey": "bordur",
   "malzemeler": [
-   "R31 | R33 master fine mosaic band"
+   "R31 | R33 master fine mosaic band",
+   "A09_Banyo_bordur"
   ],
   "klasor": "A08_bordur",
   "doku_olcusu_xy_m": [
@@ -82,8 +166,8 @@
   ],
   "klasor": "A08_seramik",
   "doku_olcusu_xy_m": [
-   1.2,
-   1.2
+   2.4,
+   2.4
   ],
   "doku_olcusu_m": 1,
   "purluluk": 0.4,
@@ -217,7 +301,7 @@
   "malzemeler": [
    "wood_honey"
   ],
-  "klasor": "A08_ceviz",
+  "klasor": "A09_koyu_ceviz",
   "doku_olcusu_xy_m": [
    1,
    1
@@ -243,7 +327,8 @@
      6.0
     ]
    }
-  ]
+  ],
+  "palet": "Koyu ceviz"
  },
  {
   "no": 22,
@@ -253,7 +338,7 @@
    "wood_honey",
    "R31 | R33 antique nook walnut"
   ],
-  "klasor": "A08_mese",
+  "klasor": "A09_koyu_ceviz",
   "doku_olcusu_xy_m": [
    1,
    1
@@ -280,7 +365,8 @@
     ]
    }
   ],
-  "not": "Asansor X=-2.15, kutu X<=-2.5; yesil ROUGHNSS1 panel ayri, degistirilmedi."
+  "not": "Asansor X=-2.15, kutu X<=-2.5; yesil ROUGHNSS1 panel ayri, degistirilmedi.",
+  "palet": "Koyu ceviz"
  },
  {
   "no": 21,
@@ -288,7 +374,7 @@
   "malzemeler": [
    "wood_honey"
   ],
-  "klasor": "A08_kiraz",
+  "klasor": "A09_kiraz",
   "doku_olcusu_xy_m": [
    1,
    1
@@ -314,7 +400,8 @@
      5.8
     ]
    }
-  ]
+  ],
+  "palet": "Kiraz"
  },
  {
   "no": 20,
@@ -323,7 +410,7 @@
    "wood_honey",
    "A08_Ceviz"
   ],
-  "klasor": "A08_ceviz",
+  "klasor": "A09_koyu_ceviz",
   "doku_olcusu_xy_m": [
    1,
    1
@@ -349,7 +436,8 @@
      8.85
     ]
    }
-  ]
+  ],
+  "palet": "Koyu ceviz"
  },
  {
   "no": 1,
@@ -2117,7 +2205,7 @@
   "malzemeler": [
    "wood_honey"
   ],
-  "klasor": "05_dolap",
+  "klasor": "A09_koyu_ceviz",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
   "doku_olcusu_m": 0.13,
@@ -2186,7 +2274,8 @@
    ]
   },
   "uretim": "warpPerspective; büyük Gauss alanına bölme; nötr kırık beyaz dengesi; parlama inpaint; kenar eşleme.",
-  "normal_roughness_kaynak_url": "https://polyhaven.com/a/oak_veneer_01"
+  "normal_roughness_kaynak_url": "https://polyhaven.com/a/oak_veneer_01",
+  "palet": "Koyu ceviz"
  },
  {
   "no": 6,
@@ -2462,7 +2551,7 @@
    "M3_Koyu_ceviz_kapi",
    "M3_Ceviz_gobek"
   ],
-  "klasor": "09_kapi",
+  "klasor": "A09_wenge",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
   "doku_olcusu_m": 0.045,
@@ -2545,7 +2634,8 @@
     180
    ],
    "yontem": "Perspektif, Gauss gradyan giderme, nötr beyaz dengesi, fotoğraf referansına göre koyu ton kalibrasyonu, kenar eşleme."
-  }
+  },
+  "palet": "Wenge"
  },
  {
   "no": 10,
@@ -4256,7 +4346,7 @@
   "malzemeler": [
    "R31 | R33 antique nook walnut"
   ],
-  "klasor": "12_yemek_ahsap",
+  "klasor": "A09_koyu_ceviz",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
   "doku_olcusu_m": 0.4,
@@ -4339,7 +4429,8 @@
      5.0
     ]
    }
-  ]
+  ],
+  "palet": "Koyu ceviz"
  },
  {
   "no": 13,
@@ -4926,7 +5017,7 @@
   "malzemeler": [
    "M2_Koyu_ceviz_kupeşte"
   ],
-  "klasor": "15_kupeste",
+  "klasor": "A09_koyu_ceviz",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
   "doku_olcusu_m": 4.0,
@@ -6527,7 +6618,8 @@
     }
    ]
   },
-  "ahsap_tek_parca": true
+  "ahsap_tek_parca": true,
+  "palet": "Koyu ceviz"
  },
  {
   "no": 16,
@@ -6539,7 +6631,7 @@
    "M3_Ceviz_gobek",
    "M1_Sicak_ceviz_supurgelik"
   ],
-  "klasor": "16_giris_ceviz",
+  "klasor": "A09_koyu_ceviz",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
   "doku_olcusu_m": 4.0,
@@ -8153,7 +8245,8 @@
      6.0
     ]
    }
-  ]
+  ],
+  "palet": "Koyu ceviz"
  },
  {
   "no": 17,
@@ -8161,7 +8254,7 @@
   "malzemeler": [
    "M1_Sicak_ceviz_supurgelik"
   ],
-  "klasor": "17_ust_supurgelik",
+  "klasor": "A09_wenge",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
   "doku_olcusu_m": 4.0,
@@ -9775,7 +9868,8 @@
      13
     ]
    }
-  ]
+  ],
+  "palet": "Wenge"
  },
  {
   "no": 18,
@@ -9783,7 +9877,7 @@
   "malzemeler": [
    "M1_Sicak_ceviz_supurgelik"
   ],
-  "klasor": "18_bodrum_supurgelik",
+  "klasor": "A09_koyu_ceviz",
   "lisans": "CC0",
   "lisans_url": "https://polyhaven.com/license",
   "doku_olcusu_m": 4.0,
@@ -11397,7 +11491,8 @@
      2.95
     ]
    }
-  ]
+  ],
+  "palet": "Koyu ceviz"
  },
  {
   "no": 19,

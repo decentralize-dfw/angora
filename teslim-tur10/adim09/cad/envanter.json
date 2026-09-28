@@ -1,0 +1,13529 @@
+{
+ "INSUNITS": 6,
+ "katmanlar": {
+  "MERDİVEN ZMEİN KESME CRV - Copy": 1,
+  "KAPI İÇ$ÇERÇEVE": 828,
+  "KAT 3$DUVAR KAPLAMA": 1100,
+  "KAT 3$DUVAR": 865,
+  "KAPI İÇ$KAPI": 288,
+  "KAT 2$DUVAR": 888,
+  "KAT 2$DUVAR KAPLAMA": 1031,
+  "KAT 1$DUVAR": 908,
+  "KAT 1$DUVAR KAPLAMA": 1238,
+  "KAT 0$DUVAR KAPLAMA": 475,
+  "KAT 0$DUVAR": 568,
+  "KAT 2$TAVAN": 325,
+  "KAT 2$ZEMİN": 137,
+  "KAT 1$TAVAN": 451,
+  "KAT 0$TAVAN": 144,
+  "ÇATII": 767,
+  "KAT 3$ZEMİN KAPLAMA": 328,
+  "KAT 3$ÜSTKATTAVAN - Copy - Copy": 736,
+  "KAT 2$ZEMİN KAPLAMA": 324,
+  "ek dalgalar": 935,
+  "KORKULUK": 52394,
+  "ÇATI ALIN": 1253,
+  "PENCERE_KAPI$SHUTTER AİM": 23088,
+  "PENCERE_KAPI$SHUTTER": 1536,
+  "PENCERE_KAPI$CAM": 2552,
+  "PENCERE_KAPI$ÇERÇEVE": 3158,
+  "PENCERE_KAPI$ÇEPHE ÇERÇECE": 1564,
+  "PENCERE_KAPI$CEPHE FRAME": 996,
+  "PENCERE_KAPI$PENCERE KAPI": 144,
+  "KAT 0$ZEMİN KAPLAMA": 146,
+  "KAT 2$MERDİVEN": 432,
+  "KAT 0$MERDİVEN": 408,
+  "KAT 1$MERDİVEN": 442,
+  "KAT 3$ZEMİN": 141,
+  "KAT 1$ZEMİN KAPLAMA": 596,
+  "KAT 1$ZEMİN": 162,
+  "KAT 0$ZEMİN": 84,
+  "DORBAK": 24,
+  "2D$TB_M": 7,
+  "2D$TZK TK": 96,
+  "2D$OLCU": 2484,
+  "2D$POZ": 562,
+  "2D$S": 14003,
+  "2D$Z_Z_YAKLASMA": 581,
+  "2D$ROL_CEPHE": 713,
+  "2D$ROL_DIK": 1069,
+  "2D$PARSEL": 1,
+  "2D$NADI": 1119,
+  "2D$YKOT": 759,
+  "2D$B": 1842,
+  "2D$YBN": 181,
+  "2D$EKK": 159,
+  "2D$0": 1601,
+  "2D$BODRUM": 19,
+  "2D$BINA": 417,
+  "2D$Z_Z_YAKLASMA_MES": 21,
+  "2D$GRK": 45,
+  "2D$SBK": 45,
+  "2D$KOT": 593,
+  "2D$PYOLBORDUR": 667,
+  "2D$D": 1731,
+  "2D$IZD": 655,
+  "2D$M2": 20,
+  "2D$YDUV": 125,
+  "2D$PMERDIVENOK": 277,
+  "2D$PMERDIVEN": 735,
+  "2D$PSEV": 1508,
+  "2D$YSB": 109,
+  "2D$18967-CEKME": 24,
+  "2D$IZ": 184,
+  "2D$KO_R": 2288,
+  "2D$KO_C": 153,
+  "2D$KO_M": 1148,
+  "2D$M": 551,
+  "2D$KOLON": 272,
+  "2D$KEY": 1894,
+  "2D$PAFTA": 1,
+  "2D$BBLIST": 56,
+  "2D$PDUVAR": 149,
+  "2D$3": 476,
+  "2D$YAZI": 293,
+  "2D$TRETUAR": 4,
+  "2D$YOLKOTLARIYENI": 80,
+  "2D$BOYKESIT": 367,
+  "2D$VGIRIS": 335,
+  "2D$YSEV": 9,
+  "2D$PDOSFARK": 160,
+  "2D$YKOTIMARESKI": 13,
+  "2D$18967-VGIRIS": 108,
+  "2D$DOG": 2043,
+  "2D$YKOTIS": 5,
+  "2D$18967-ADA": 1,
+  "2D$Y": 270,
+  "2D$AKS": 357,
+  "2D$TR": 44,
+  "2D$MERTEK": 405,
+  "2D$SOL": 140,
+  "2D$YAZI1": 1,
+  "2D$60": 43,
+  "2D$AHSAP": 241,
+  "2D$KTR": 308,
+  "2D$SIVA": 91,
+  "2D$FER": 8070,
+  "2D$GOR": 168,
+  "2D$TARA": 22,
+  "2D$KIREMIT": 296,
+  "2D$YALITIM": 17,
+  "2D$TARAMA": 50,
+  "2D$HOR": 217,
+  "2D$OLUK": 572,
+  "2D$DOSEME": 102,
+  "2D$P": 448,
+  "2D$TARA-1": 122,
+  "2D$T": 1797,
+  "2D$TEFRIS": 32,
+  "2D$Defpoints": 13,
+  "2D$OLC": 49,
+  "2D$MER": 12,
+  "2D$IPRO": 49,
+  "2D$FERFORJE": 1197,
+  "2D$CT": 57,
+  "2D$AKS-2": 2
+ },
+ "bloklar": [
+  {
+   "ad": "*Model_Space",
+   "adet": 159407,
+   "tipler": {
+    "POINT": 1358,
+    "SPLINE": 61198,
+    "LINE": 82901,
+    "MTEXT": 8808,
+    "POLYLINE": 2545,
+    "INSERT": 451,
+    "DIMENSION": 1308,
+    "HATCH": 838
+   }
+  },
+  {
+   "ad": "*Paper_Space",
+   "adet": 0,
+   "tipler": {}
+  },
+  {
+   "ad": "*Paper_Space0",
+   "adet": 0,
+   "tipler": {}
+  },
+  {
+   "ad": "RRR",
+   "adet": 1672,
+   "tipler": {
+    "LINE": 1572,
+    "ARC": 96,
+    "POLYLINE": 4
+   }
+  },
+  {
+   "ad": "TT",
+   "adet": 1699,
+   "tipler": {
+    "LINE": 1562,
+    "ARC": 122,
+    "POLYLINE": 15
+   }
+  },
+  {
+   "ad": "GFGGF",
+   "adet": 1564,
+   "tipler": {
+    "LINE": 1463,
+    "ARC": 96,
+    "POLYLINE": 5
+   }
+  },
+  {
+   "ad": "GRR",
+   "adet": 1613,
+   "tipler": {
+    "LINE": 1513,
+    "ARC": 96,
+    "POLYLINE": 4
+   }
+  },
+  {
+   "ad": "RTER",
+   "adet": 2539,
+   "tipler": {
+    "LINE": 2059,
+    "ARC": 351,
+    "POLYLINE": 77,
+    "SPLINE": 47,
+    "CIRCLE": 5
+   }
+  },
+  {
+   "ad": "*D6",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D7",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "A$C1230017E",
+   "adet": 1,
+   "tipler": {
+    "POLYLINE": 1
+   }
+  },
+  {
+   "ad": "A$C4A4A0B91",
+   "adet": 1344,
+   "tipler": {
+    "LINE": 1304,
+    "ARC": 37,
+    "CIRCLE": 1,
+    "POLYLINE": 2
+   }
+  },
+  {
+   "ad": "KOTISARETI",
+   "adet": 5,
+   "tipler": {
+    "LINE": 4,
+    "CIRCLE": 1
+   }
+  },
+  {
+   "ad": "A$C0D511B13",
+   "adet": 1,
+   "tipler": {
+    "POLYLINE": 1
+   }
+  },
+  {
+   "ad": "*D12",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D13",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D14",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D15",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D16",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D17",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D18",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "NOT",
+   "adet": 1,
+   "tipler": {
+    "MTEXT": 1
+   }
+  },
+  {
+   "ad": "*D20",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D21",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D22",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D23",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D24",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D25",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D26",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D27",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D28",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D29",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D30",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D31",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D32",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D33",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D34",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D35",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D36",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D37",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D38",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D39",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D40",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D41",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D42",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D43",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D44",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D45",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D46",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D47",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D48",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D49",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D50",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D51",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D52",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D53",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D54",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D55",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D56",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D57",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D58",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D59",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D60",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D61",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D62",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D63",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D64",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D65",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D66",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D67",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D68",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D69",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D70",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D71",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D72",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D73",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D74",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D75",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D76",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D77",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D78",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D79",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D80",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D81",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D82",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D83",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D84",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D85",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D86",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D87",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D88",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D89",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D90",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D91",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D92",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D93",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D94",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D95",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D96",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D97",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D98",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D99",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D100",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D101",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D102",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D103",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D104",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D105",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D106",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D107",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D108",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D109",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D110",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D111",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D112",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D113",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D114",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D115",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D116",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D117",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D118",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D119",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D120",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D121",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D122",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D123",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D124",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D125",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D126",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D127",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D128",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D129",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D130",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D131",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D132",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D133",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D134",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D135",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D136",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D137",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D138",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D139",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D140",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D141",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D142",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D143",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D144",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D145",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D146",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D147",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D148",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D149",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D150",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D151",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D152",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D153",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D154",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D155",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "SOLID": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "BINAVAZ",
+   "adet": 21,
+   "tipler": {
+    "POLYLINE": 17,
+    "LINE": 3,
+    "INSERT": 1
+   }
+  },
+  {
+   "ad": "3BAS",
+   "adet": 6,
+   "tipler": {
+    "LINE": 6
+   }
+  },
+  {
+   "ad": "LOGO",
+   "adet": 20,
+   "tipler": {
+    "INSERT": 1,
+    "LINE": 16,
+    "ARC": 2,
+    "POLYLINE": 1
+   }
+  },
+  {
+   "ad": "X66",
+   "adet": 353,
+   "tipler": {
+    "LINE": 353
+   }
+  },
+  {
+   "ad": "_ArchTick",
+   "adet": 1,
+   "tipler": {
+    "LWPOLYLINE": 1
+   }
+  },
+  {
+   "ad": "*D161",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "DOT1",
+   "adet": 8,
+   "tipler": {
+    "LINE": 2,
+    "CIRCLE": 6
+   }
+  },
+  {
+   "ad": "DOT",
+   "adet": 8,
+   "tipler": {
+    "LINE": 2,
+    "CIRCLE": 6
+   }
+  },
+  {
+   "ad": "KORKULUK 1",
+   "adet": 507,
+   "tipler": {
+    "LINE": 283,
+    "ARC": 224
+   }
+  },
+  {
+   "ad": "SOLYAN",
+   "adet": 2495,
+   "tipler": {
+    "ARC": 1128,
+    "LINE": 1367
+   }
+  },
+  {
+   "ad": "*D166",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D167",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D168",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D169",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D170",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "D",
+   "adet": 38,
+   "tipler": {
+    "LINE": 38
+   }
+  },
+  {
+   "ad": "*D172",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D173",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D174",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D175",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D176",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D177",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D178",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D179",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D180",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D181",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D182",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D183",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D184",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D185",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D186",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D187",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D188",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D189",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D190",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D191",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D192",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D193",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D194",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D195",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D196",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D197",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D198",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D199",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D200",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D201",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D202",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D203",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D204",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D205",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D206",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D207",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D208",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D209",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D210",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D211",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D212",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D213",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D214",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D215",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D216",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D217",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D218",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D219",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D220",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D221",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D222",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D223",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D224",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D225",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D226",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D227",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D228",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D229",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D230",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D231",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D232",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D233",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D234",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D235",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D236",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D237",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D238",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D239",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D240",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D241",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D242",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D243",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D244",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D245",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D246",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D247",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D248",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D249",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D250",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D251",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D252",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D253",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D254",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D255",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D256",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D257",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D258",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D259",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D260",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D261",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D262",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D263",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D264",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D265",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D266",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D267",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D268",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D269",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D270",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D271",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D272",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D273",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D274",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D275",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D276",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D277",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D278",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D279",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D280",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D281",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D282",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D283",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D284",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D285",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D286",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D287",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D288",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D289",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D290",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D291",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D292",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D293",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D294",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D295",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D296",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D297",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D298",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D299",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D300",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D301",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D302",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D303",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D304",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D305",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D306",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D307",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D308",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D309",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D310",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D311",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D312",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D313",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D314",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D315",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D316",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D317",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D318",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D319",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D320",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D321",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D322",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D323",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D324",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D325",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D326",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D327",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D328",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D329",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D330",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D331",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D332",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D333",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D334",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D335",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D336",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D337",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D338",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D339",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D340",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D341",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D342",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D343",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D344",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D345",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D346",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D347",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D348",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D349",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D350",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D351",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D352",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D353",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D354",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D355",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D356",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D357",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D358",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D359",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D360",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D361",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D362",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D363",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D364",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D365",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D366",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D367",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D368",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D369",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D370",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D371",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D372",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D373",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D374",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D375",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D376",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D377",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D378",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D379",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D380",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D381",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D382",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D383",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D384",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D385",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D386",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D387",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D388",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D389",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D390",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D391",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D392",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D393",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D394",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D395",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D396",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D397",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D398",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D399",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D400",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D401",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D402",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D403",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D404",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D405",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D406",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D407",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D408",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D409",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D410",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D411",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D412",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D413",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D414",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D415",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D416",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D417",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D418",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D419",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D420",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D421",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D422",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D423",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D424",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D425",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D426",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D427",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D428",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D429",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D430",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D431",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D432",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D433",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D434",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D435",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D436",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D437",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D438",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D439",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D440",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D441",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D442",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D443",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D444",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D445",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D446",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D447",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D448",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D449",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D450",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D451",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D452",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D453",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D454",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D455",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D456",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D457",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D458",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D459",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D460",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D461",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D462",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D463",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D464",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D465",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D466",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D467",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D468",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D469",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D470",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D471",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D472",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D473",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D474",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D475",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D476",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D477",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D478",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D479",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D480",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D481",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D482",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D483",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D484",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D485",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D486",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D487",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D488",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D489",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D490",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D491",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D492",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D493",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D494",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D495",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D496",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D497",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D498",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D499",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D500",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D501",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D502",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D503",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D504",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D505",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D506",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "K90-10",
+   "adet": 40,
+   "tipler": {
+    "LINE": 39,
+    "ARC": 1
+   }
+  },
+  {
+   "ad": "MASA8",
+   "adet": 1,
+   "tipler": {
+    "INSERT": 1
+   }
+  },
+  {
+   "ad": "4LUMASA",
+   "adet": 137,
+   "tipler": {
+    "ARC": 68,
+    "LINE": 68,
+    "POLYLINE": 1
+   }
+  },
+  {
+   "ad": "MASA9",
+   "adet": 1,
+   "tipler": {
+    "INSERT": 1
+   }
+  },
+  {
+   "ad": "MASA",
+   "adet": 44,
+   "tipler": {
+    "ARC": 16,
+    "LINE": 28
+   }
+  },
+  {
+   "ad": "LAVABO1",
+   "adet": 26,
+   "tipler": {
+    "ARC": 23,
+    "LINE": 3
+   }
+  },
+  {
+   "ad": "KLOZET",
+   "adet": 11,
+   "tipler": {
+    "LINE": 9,
+    "ARC": 2
+   }
+  },
+  {
+   "ad": "EVIYE",
+   "adet": 24,
+   "tipler": {
+    "POLYLINE": 9,
+    "LINE": 9,
+    "CIRCLE": 6
+   }
+  },
+  {
+   "ad": "BUZDOL",
+   "adet": 13,
+   "tipler": {
+    "LINE": 13
+   }
+  },
+  {
+   "ad": "OCAK",
+   "adet": 22,
+   "tipler": {
+    "POLYLINE": 6,
+    "CIRCLE": 8,
+    "LINE": 8
+   }
+  },
+  {
+   "ad": "*D517",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D518",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D519",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D520",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D521",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D522",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D523",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D524",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D525",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D526",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D527",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D528",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D529",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D530",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D531",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D532",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D533",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D534",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D535",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D536",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D537",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D538",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D539",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D540",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D541",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D542",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D543",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D544",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D545",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D546",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D547",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D548",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D549",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D550",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D551",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D552",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D553",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D554",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D555",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D556",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D557",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D558",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D559",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D560",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D561",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D562",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D563",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D564",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D565",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D566",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D567",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D568",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D569",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D570",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D571",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D572",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D573",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D574",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D575",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D576",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D577",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D578",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D579",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D580",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D581",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D582",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D583",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D584",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D585",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D586",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D587",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D588",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D589",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D590",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D591",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D592",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D593",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D594",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D595",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D596",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D597",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D598",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D599",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D600",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D601",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D602",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D603",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D604",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D605",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D606",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D607",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D608",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D609",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D610",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D611",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D612",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D613",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D614",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D615",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D616",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D617",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D618",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D619",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D620",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D621",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D622",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D623",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D624",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D625",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D626",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D627",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D628",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D629",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D630",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D631",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D632",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D633",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D634",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D635",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D636",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D637",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D638",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D639",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D640",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D641",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D642",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "K90-20",
+   "adet": 40,
+   "tipler": {
+    "LINE": 39,
+    "ARC": 1
+   }
+  },
+  {
+   "ad": "*D644",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D645",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D646",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D647",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D648",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D649",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D650",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D651",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D652",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D653",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D654",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D655",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D656",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D657",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D658",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D659",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D660",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D661",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D662",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D663",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D664",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D665",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D666",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D667",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D668",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D669",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D670",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D671",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D672",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D673",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D674",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D675",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "K80-10",
+   "adet": 40,
+   "tipler": {
+    "LINE": 39,
+    "ARC": 1
+   }
+  },
+  {
+   "ad": "*D677",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D678",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D679",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D680",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D681",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D682",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D683",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D684",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D685",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D686",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D687",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D688",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D689",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D690",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D691",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D692",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D693",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D694",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D695",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D696",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D697",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D698",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D699",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D700",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D701",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D702",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D703",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D704",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D705",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D706",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D707",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D708",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D709",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D710",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D711",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D712",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D713",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D714",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D715",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D716",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D717",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D718",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D719",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D720",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D721",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D722",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D723",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D724",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D725",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D726",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D727",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D728",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D729",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D730",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D731",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D732",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D733",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D734",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D735",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D736",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D737",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D738",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D739",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D740",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D741",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D742",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D743",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D744",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D745",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D746",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D747",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D748",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D749",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D750",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D751",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D752",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D753",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D754",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D755",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D756",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D757",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D758",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D759",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D760",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D761",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D762",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D763",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D764",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D765",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D766",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D767",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D768",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D769",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D770",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D771",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D772",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D773",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D774",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D775",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D776",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D777",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D778",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D779",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D780",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D781",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D782",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D783",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D784",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D785",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D786",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D787",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D788",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D789",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D790",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D791",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D792",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D793",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D794",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D795",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D796",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D797",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D798",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D799",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D800",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D801",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D802",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D803",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D804",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D805",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D806",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D807",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D808",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D809",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D810",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D811",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D812",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D813",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D814",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D815",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D816",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D817",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D818",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D819",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D820",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D821",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D822",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D823",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D824",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D825",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D826",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D827",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D828",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D829",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D830",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D831",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D832",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D833",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D834",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D835",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D836",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D837",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D838",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D839",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D840",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D841",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D842",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D843",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D844",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D845",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D846",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D847",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D848",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D849",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D850",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D851",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D852",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D853",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D854",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D855",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D856",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D857",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D858",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D859",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D860",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D861",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D862",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D863",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D864",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D865",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D866",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D867",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D868",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D869",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D870",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D871",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D872",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D873",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D874",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D875",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D876",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D877",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D878",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D879",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D880",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D881",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D882",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D883",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D884",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D885",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D886",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D887",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D888",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D889",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D890",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D891",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D892",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D893",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D894",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D895",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D896",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D897",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D898",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D899",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D900",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D901",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D902",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D903",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D904",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D905",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D906",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D907",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D908",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D909",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D910",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D911",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D912",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D913",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D914",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D915",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D916",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D917",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D918",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D919",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D920",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D921",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D922",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D923",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D924",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D925",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D926",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D927",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D928",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D929",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D930",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D931",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D932",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D933",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D934",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D935",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D936",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D937",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D938",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D939",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D940",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D941",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D942",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D943",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D944",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D945",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D946",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D947",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D948",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D949",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D950",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D951",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D952",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D953",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D954",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D955",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D956",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D957",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D958",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D959",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D960",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D961",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D962",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D963",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D964",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D965",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D966",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D967",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D968",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D969",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D970",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D971",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D972",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D973",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D974",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D975",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D976",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D977",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D978",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D979",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D980",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D981",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D982",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D983",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D984",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D985",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D986",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D987",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D988",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D989",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D990",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D991",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D992",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D993",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D994",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D995",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D996",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D997",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D998",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D999",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1000",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1001",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1002",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1003",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1004",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1005",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1006",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1007",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1008",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1009",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1010",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1011",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1012",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1013",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1014",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1015",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1016",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1017",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1018",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1019",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1020",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1021",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1022",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1023",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1024",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1025",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1026",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1027",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1028",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1029",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1030",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1031",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1032",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1033",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1034",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1035",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1036",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1037",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1038",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1039",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1040",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1041",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1042",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1043",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1044",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1045",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1046",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1047",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1048",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1049",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1050",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1051",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1052",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1053",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1054",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1055",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1056",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1057",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1058",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1059",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1060",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1061",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1062",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1063",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1064",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1065",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1066",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1067",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1068",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1069",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1070",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1071",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1072",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1073",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1074",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1075",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1076",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1077",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1078",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1079",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1080",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1081",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1082",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1083",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1084",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1085",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1086",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1087",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1088",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1089",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1090",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1091",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1092",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1093",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1094",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1095",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1096",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1097",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1098",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1099",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1100",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1101",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1102",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1103",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1104",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1105",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1106",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1107",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1108",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1109",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1110",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1111",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1112",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1113",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1114",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1115",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1116",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1117",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1118",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1119",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1120",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1121",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1122",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1123",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1124",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1125",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1126",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1127",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1128",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1129",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1130",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1131",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1132",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1133",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1134",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1135",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1136",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1137",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1138",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1139",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1140",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1141",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1142",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1143",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1144",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1145",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1146",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1147",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1148",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1149",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1150",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1151",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1152",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1153",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1154",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1155",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1156",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1157",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1158",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1159",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1160",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1161",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1162",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1163",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1164",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1165",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1166",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1167",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1168",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1169",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1170",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1171",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1172",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1173",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1174",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1175",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1176",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1177",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1178",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1179",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1180",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1181",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1182",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1183",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1184",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1185",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1186",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1187",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1188",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1189",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1190",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1191",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1192",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1193",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1194",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1195",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1196",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1197",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1198",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1199",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1200",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1201",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1202",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1203",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1204",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1205",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1206",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1207",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1208",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1209",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1210",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1211",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1212",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1213",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1214",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1215",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1216",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1217",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1218",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1219",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1220",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1221",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1222",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1223",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1224",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1225",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1226",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1227",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1228",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1229",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1230",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1231",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1232",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1233",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1234",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1235",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1236",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1237",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1238",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1239",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1240",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1241",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1242",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1243",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1244",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1245",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1246",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1247",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1248",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1249",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1250",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1251",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1252",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1253",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1254",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1255",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1256",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1257",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1258",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1259",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1260",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1261",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1262",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1263",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1264",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1265",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1266",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1267",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1268",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1269",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1270",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1271",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1272",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1273",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1274",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1275",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1276",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1277",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1278",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1279",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1280",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1281",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1282",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1283",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1284",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1285",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1286",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1287",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1288",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1289",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1290",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1291",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1292",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1293",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1294",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1295",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1296",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1297",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1298",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1299",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1300",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1301",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1302",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1303",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1304",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1305",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1306",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1307",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1308",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1309",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1310",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1311",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1312",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1313",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1314",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1315",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1316",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1317",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1318",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1319",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1320",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1321",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1322",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1323",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1324",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1325",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1326",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1327",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1328",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1329",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1330",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1331",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1332",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1333",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1334",
+   "adet": 10,
+   "tipler": {
+    "LINE": 4,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1335",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1336",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1337",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1338",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1339",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "*D1340",
+   "adet": 9,
+   "tipler": {
+    "LINE": 3,
+    "INSERT": 2,
+    "MTEXT": 1,
+    "POINT": 3
+   }
+  },
+  {
+   "ad": "DUS",
+   "adet": 6,
+   "tipler": {
+    "LINE": 3,
+    "POLYLINE": 2,
+    "CIRCLE": 1
+   }
+  },
+  {
+   "ad": "HILTON",
+   "adet": 26,
+   "tipler": {
+    "LINE": 8,
+    "CIRCLE": 2,
+    "ARC": 16
+   }
+  },
+  {
+   "ad": "JAKUZI",
+   "adet": 54,
+   "tipler": {
+    "ARC": 41,
+    "LINE": 13
+   }
+  },
+  {
+   "ad": "SAGYAN",
+   "adet": 571,
+   "tipler": {
+    "LINE": 320,
+    "ARC": 251
+   }
+  }
+ ],
+ "toplam": 159407
+}
