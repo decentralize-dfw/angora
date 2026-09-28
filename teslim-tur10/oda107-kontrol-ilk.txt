@@ -1,0 +1,256 @@
+17:09:45 | INFO: Data are loaded, start creating Blender stuff
+17:09:45 | INFO: Blender create Mesh node Mesh_15183.008
+17:09:45 | INFO: Blender create Mesh node Mesh_3020.001
+17:09:45 | INFO: Blender create Mesh node Mesh_15183.003
+17:09:45 | INFO: Blender create Mesh node Mesh_11.004
+17:09:45 | INFO: Blender create Mesh node antique_wood (2) | interior-common.118
+17:09:45 | INFO: Blender create Mesh node Mesh_3020.004
+17:09:45 | INFO: Blender create Mesh node Cube.001
+17:09:45 | INFO: Blender create Mesh node Mesh_3020.009
+17:09:46 | INFO: Blender create Mesh node Mesh_15183.114
+17:09:46 | INFO: Blender create Mesh node Cube.003
+17:09:46 | INFO: Blender create Mesh node Mesh_93.005
+17:09:48 | INFO: Blender create Mesh node Mesh_3020.002
+17:09:48 | INFO: Blender create Mesh node Mesh_242
+17:09:48 | INFO: Blender create Mesh node Mesh_11.003
+17:09:48 | INFO: Blender create Mesh node Mesh_11.001
+17:09:48 | INFO: Blender create Mesh node Mesh_15183.002
+17:09:48 | INFO: Blender create Mesh node Mesh_15183.104
+17:09:48 | INFO: Blender create Mesh node Mesh_15183.109
+17:09:48 | INFO: Blender create Mesh node Mesh_97
+17:09:48 | INFO: Blender create Mesh node Mesh_15183.103
+17:09:48 | INFO: Blender create Mesh node Mesh_15183.107
+17:09:48 | INFO: Blender create Mesh node Mesh_15183.108
+17:09:48 | INFO: Blender create Mesh node Mesh_15183.099
+17:09:48 | INFO: Blender create Mesh node Mesh_15183.100
+17:09:48 | INFO: Blender create Mesh node Mesh_15183.001
+17:09:48 | INFO: glTF import finished in 2.94s
+17:09:48 | INFO: Data are loaded, start creating Blender stuff
+17:09:48 | INFO: Blender create Mesh node antique_wood (2) | interior-common.087
+17:09:48 | INFO: Blender create Mesh node antique_wood (2) | interior-common.017
+17:09:48 | INFO: Blender create Mesh node antique_wood (2) | interior-common.013
+17:09:48 | INFO: Blender create Mesh node antique_wood (2) | interior-common.043
+17:09:48 | INFO: Blender create Mesh node antique_wood (2) | interior-common.001
+17:09:48 | INFO: Blender create Mesh node antique_wood (2) | interior-common.016
+17:09:48 | INFO: Blender create Mesh node antique_wood (2) | interior-common.084
+17:09:48 | INFO: Blender create Mesh node antique_wood (2) | interior-common.060
+17:09:48 | INFO: Blender create Mesh node antique_wood (2) | interior-common.058
+17:09:48 | INFO: Blender create Mesh node antique_wood (2) | interior-common.067
+17:09:49 | INFO: Blender create Mesh node antique_wood (2) | interior-common.140
+17:09:49 | INFO: Blender create Mesh node antique_wood (2) | interior-common.094
+17:09:49 | INFO: Blender create Mesh node antique_wood (2) | interior-common.047
+17:09:49 | INFO: Blender create Mesh node antique_wood (2) | interior-common.065
+17:09:49 | INFO: Blender create Mesh node antique_wood (2) | interior-common.073
+17:09:50 | INFO: Blender create Mesh node antique_wood (2) | interior-common.019
+17:09:50 | INFO: Blender create Mesh node antique_wood (2) | interior-common.049
+17:09:50 | INFO: Blender create Mesh node antique_wood (2) | interior-common.100
+17:09:50 | INFO: Blender create Mesh node antique_wood (2) | interior-common.120
+17:09:50 | INFO: Blender create Mesh node antique_wood (2) | interior-common.110
+17:09:50 | INFO: Blender create Mesh node antique_wood (2) | interior-common.116
+17:09:50 | INFO: glTF import finished in 1.45s
+17:09:50 | INFO: Data are loaded, start creating Blender stuff
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_dikme_Kapi
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_dikme_Pencere
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_dokum_baglanti
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_dokum_baglanti.001
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_dokum_baglanti.002
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_dokum_baglanti.003
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_dokum_baglanti.004
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_dokum_baglanti.005
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_dokum_baglanti.006
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_dokum_baglanti.007
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_dokum_baglanti.008
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_dokum_baglanti.009
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_dokum_baglanti.010
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_dokum_baglanti.011
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_ince_cubuk_0
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_ince_cubuk_1
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_ince_cubuk_2
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_ince_cubuk_3
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_ince_cubuk_4
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_ince_cubuk_5
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_pirinc_ayak_Kapi
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_pirinc_ayak_Pencere
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_pirinc_bogum_Kapi
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_pirinc_bogum_Pencere
+17:09:50 | INFO: Blender create Mesh node Sphere.003
+17:09:50 | INFO: Blender create Mesh node Sphere.002
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_yatay_kayit
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_yatay_kayit.001
+17:09:50 | INFO: Blender create Mesh node 107_Ayakucu_yatay_kayit.002
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_dikme_Kapi
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_dikme_Pencere
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_dokum_baglanti
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_dokum_baglanti.001
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_dokum_baglanti.002
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_dokum_baglanti.003
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_dokum_baglanti.004
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_dokum_baglanti.005
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_dokum_baglanti.006
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_dokum_baglanti.007
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_dokum_baglanti.008
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_dokum_baglanti.009
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_dokum_baglanti.010
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_dokum_baglanti.011
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_ince_cubuk_0
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_ince_cubuk_1
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_ince_cubuk_2
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_ince_cubuk_3
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_ince_cubuk_4
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_ince_cubuk_5
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_pirinc_ayak_Kapi
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_pirinc_ayak_Pencere
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_pirinc_bogum_Kapi
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_pirinc_bogum_Pencere
+17:09:50 | INFO: Blender create Mesh node Sphere.001
+17:09:50 | INFO: Blender create Mesh node Sphere
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_yatay_kayit
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_yatay_kayit.001
+17:09:50 | INFO: Blender create Mesh node 107_Basucu_yatay_kayit.002
+17:09:50 | INFO: Blender create Mesh node 107_Damask_perde_pileli_0
+17:09:50 | INFO: Blender create Mesh node 107_Damask_perde_pileli_1
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.001
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.002
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.003
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.004
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.005
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.006
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.007
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.008
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.009
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.010
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.011
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.012
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.013
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.014
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.015
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.016
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.017
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.018
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.019
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_kavisli_dikis.020
+17:09:50 | INFO: Blender create Mesh node 107_Kapitone_ortu_dokum
+17:09:50 | INFO: Blender create Mesh node Cube
+17:09:50 | INFO: Blender create Mesh node Cube.002
+17:09:50 | INFO: Blender create Mesh node 107_Komodin_alt_halka
+17:09:50 | INFO: Blender create Mesh node 107_Komodin_kavisli_ayak
+17:09:50 | INFO: Blender create Mesh node 107_Komodin_kavisli_ayak.001
+17:09:50 | INFO: Blender create Mesh node 107_Komodin_kavisli_ayak.002
+17:09:50 | INFO: Blender create Mesh node 107_Komodin_tabla
+17:09:50 | INFO: Blender create Mesh node Cube.005
+17:09:50 | INFO: Blender create Mesh node Cube.006
+17:09:50 | INFO: Blender create Mesh node Cube.007
+17:09:50 | INFO: Blender create Mesh node 107_Lamba_cift_mafsalli_kol
+17:09:50 | INFO: Blender create Mesh node 107_Lamba_cift_mafsalli_kol.001
+17:09:50 | INFO: Blender create Mesh node 107_Lamba_cift_mafsalli_kol.002
+17:09:50 | INFO: Blender create Mesh node 107_Lamba_cift_mafsalli_kol.003
+17:09:50 | INFO: Blender create Mesh node 107_Lamba_cift_mafsalli_kol.004
+17:09:50 | INFO: Blender create Mesh node 107_Lamba_cift_mafsalli_kol.005
+17:09:50 | INFO: Blender create Mesh node 107_Lamba_ic_cam
+17:09:50 | INFO: Blender create Mesh node 107_Lamba_kubbe
+17:09:50 | INFO: Blender create Mesh node Sphere.004
+17:09:50 | INFO: Blender create Mesh node Sphere.005
+17:09:50 | INFO: Blender create Mesh node Sphere.006
+17:09:50 | INFO: Blender create Mesh node 107_Masa_lambasi_taban
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.001
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.002
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.003
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.004
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.005
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.006
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.007
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.008
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.009
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.010
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.011
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.012
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.013
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.014
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.015
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.016
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.017
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.018
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.019
+17:09:50 | INFO: Blender create Mesh node 107_Perde_aski_halkasi.020
+17:09:50 | INFO: Blender create Mesh node Sphere.007
+17:09:50 | INFO: Blender create Mesh node Sphere.008
+17:09:50 | INFO: Blender create Mesh node 107_Siyah_perde_cubugu
+17:09:50 | INFO: Blender create Mesh node Cube.008
+17:09:50 | INFO: Blender create Mesh node Cube.009
+17:09:50 | INFO: Blender create Mesh node Cube.011
+17:09:50 | INFO: Blender create Mesh node Cube.012
+17:09:50 | INFO: Blender create Mesh node Cube.013
+17:09:50 | INFO: Blender create Mesh node Cube.014
+17:09:50 | INFO: Blender create Mesh node 107_Tablo_ozgun_cizimler
+17:09:50 | INFO: Blender create Mesh node Cube.010
+17:09:50 | INFO: Blender create Mesh node 107_Tavan_bukulmus_uc_spot_kolu
+17:09:50 | INFO: Blender create Mesh node 107_Tavan_can_spot
+17:09:50 | INFO: Blender create Mesh node 107_Tavan_can_spot.001
+17:09:50 | INFO: Blender create Mesh node 107_Tavan_can_spot.002
+17:09:50 | INFO: Blender create Mesh node 107_Tavan_orta_aski
+17:09:50 | INFO: Blender create Mesh node 107_Tavan_rozansi
+17:09:50 | INFO: Blender create Mesh node 107_Tavan_spot_cam
+17:09:50 | INFO: Blender create Mesh node 107_Tavan_spot_cam.001
+17:09:50 | INFO: Blender create Mesh node 107_Tavan_spot_cam.002
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_firfir_biye
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_firfir_biye.001
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.001
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.002
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.003
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.004
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.005
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.006
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.007
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.008
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.009
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.010
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.011
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.012
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.013
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.014
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.015
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.016
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.017
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.018
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.019
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.020
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.021
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.022
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.023
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.024
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.025
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.026
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.027
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.028
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.029
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.030
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.031
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.032
+17:09:50 | INFO: Blender create Mesh node 107_Yastik_potikare_dikis.033
+17:09:50 | INFO: Blender create Mesh node Cube.004
+17:09:50 | INFO: Blender create Mesh node 107_Yorgan_kat_biyesi
+17:09:50 | INFO: Blender create Mesh node 107_Yorgan_kat_biyesi.001
+17:09:50 | INFO: Blender create Mesh node 107_Yorgan_kat_biyesi.002
+17:09:50 | INFO: glTF import finished in 0.43s
+[kontrol] ekler yüklendi: C:\Users\yigit\Downloads\angora-main (2)\angora-main\build\web\26092026\EKLER.glb
+[kontrol] silindi bulb_warm 302 yüz
+[kontrol] silindi BLCK 28 yüz
+[kontrol] silindi ROUGHNSS90 4602 yüz
+[kontrol] silindi wht 68 yüz
+[kontrol] silindi WOOD2 920 yüz
+C:\Users\yigit\Downloads\angora-main (2)\angora-main\tools\blender\08_kontrol_render.py:77: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  world = bpy.data.worlds.new('Gok'); scene.world = world; world.use_nodes = True
+00:09.250  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:11.406  render           | Saved: 'C:\Users\yigit\angora-tur10\kontrol\_olcum_13.png'
+00:21.703  render           | Saved: 'C:\Users\yigit\angora-tur10\kontrol\render_13.png'
+[kontrol] render 13 pozlama 0.66 -> C:\Users\yigit\angora-tur10\kontrol\render_13.png
+00:22.875  render           | Saved: 'C:\Users\yigit\angora-tur10\kontrol\_olcum_17.png'
+00:33.625  render           | Saved: 'C:\Users\yigit\angora-tur10\kontrol\render_17.png'
+[kontrol] render 17 pozlama 0.98 -> C:\Users\yigit\angora-tur10\kontrol\render_17.png
+[kontrol] TAMAM 2
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

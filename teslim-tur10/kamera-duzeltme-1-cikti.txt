@@ -1,0 +1,67 @@
+16:35:13 | INFO: Data are loaded, start creating Blender stuff
+16:35:13 | INFO: Blender create Mesh node Mesh_15183.008
+16:35:13 | INFO: Blender create Mesh node Mesh_3020.001
+16:35:13 | INFO: Blender create Mesh node Mesh_15183.003
+16:35:13 | INFO: Blender create Mesh node Mesh_11.004
+16:35:13 | INFO: Blender create Mesh node antique_wood (2) | interior-common.118
+16:35:13 | INFO: Blender create Mesh node Mesh_3020.004
+16:35:13 | INFO: Blender create Mesh node Cube.001
+16:35:13 | INFO: Blender create Mesh node Mesh_3020.009
+16:35:14 | INFO: Blender create Mesh node Mesh_15183.114
+16:35:14 | INFO: Blender create Mesh node Cube.003
+16:35:14 | INFO: Blender create Mesh node Mesh_93.005
+16:35:14 | INFO: Blender create Mesh node Mesh_3020.002
+16:35:15 | INFO: Blender create Mesh node Mesh_242
+16:35:15 | INFO: Blender create Mesh node Mesh_11.003
+16:35:15 | INFO: Blender create Mesh node Mesh_11.001
+16:35:15 | INFO: Blender create Mesh node Mesh_15183.002
+16:35:15 | INFO: Blender create Mesh node Mesh_15183.104
+16:35:15 | INFO: Blender create Mesh node Mesh_15183.109
+16:35:15 | INFO: Blender create Mesh node Mesh_97
+16:35:15 | INFO: Blender create Mesh node Mesh_15183.103
+16:35:15 | INFO: Blender create Mesh node Mesh_15183.107
+16:35:15 | INFO: Blender create Mesh node Mesh_15183.108
+16:35:15 | INFO: Blender create Mesh node Mesh_15183.099
+16:35:15 | INFO: Blender create Mesh node Mesh_15183.100
+16:35:15 | INFO: Blender create Mesh node Mesh_15183.001
+16:35:15 | INFO: glTF import finished in 1.73s
+16:35:15 | INFO: Data are loaded, start creating Blender stuff
+16:35:15 | INFO: Blender create Mesh node antique_wood (2) | interior-common.087
+16:35:15 | INFO: Blender create Mesh node antique_wood (2) | interior-common.017
+16:35:15 | INFO: Blender create Mesh node antique_wood (2) | interior-common.013
+16:35:15 | INFO: Blender create Mesh node antique_wood (2) | interior-common.043
+16:35:15 | INFO: Blender create Mesh node antique_wood (2) | interior-common.001
+16:35:15 | INFO: Blender create Mesh node antique_wood (2) | interior-common.016
+16:35:15 | INFO: Blender create Mesh node antique_wood (2) | interior-common.084
+16:35:15 | INFO: Blender create Mesh node antique_wood (2) | interior-common.060
+16:35:15 | INFO: Blender create Mesh node antique_wood (2) | interior-common.058
+16:35:15 | INFO: Blender create Mesh node antique_wood (2) | interior-common.067
+16:35:15 | INFO: Blender create Mesh node antique_wood (2) | interior-common.140
+16:35:15 | INFO: Blender create Mesh node antique_wood (2) | interior-common.094
+16:35:15 | INFO: Blender create Mesh node antique_wood (2) | interior-common.047
+16:35:15 | INFO: Blender create Mesh node antique_wood (2) | interior-common.065
+16:35:15 | INFO: Blender create Mesh node antique_wood (2) | interior-common.073
+16:35:16 | INFO: Blender create Mesh node antique_wood (2) | interior-common.019
+16:35:16 | INFO: Blender create Mesh node antique_wood (2) | interior-common.049
+16:35:16 | INFO: Blender create Mesh node antique_wood (2) | interior-common.100
+16:35:16 | INFO: Blender create Mesh node antique_wood (2) | interior-common.120
+16:35:16 | INFO: Blender create Mesh node antique_wood (2) | interior-common.110
+16:35:16 | INFO: Blender create Mesh node antique_wood (2) | interior-common.116
+16:35:16 | INFO: glTF import finished in 0.96s
+[kontrol] ekler yüklendi: C:\Users\yigit\angora-tur10\ekler-calisma.blend
+C:\Users\yigit\Downloads\angora-main (2)\angora-main\tools\blender\08_kontrol_render.py:77: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  world = bpy.data.worlds.new('Gok'); scene.world = world; world.use_nodes = True
+00:05.250  cycles           | WARNING HIPEW initialization failed: Error opening HIP dynamic library
+00:06.563  render           | Saved: 'C:\Users\yigit\angora-tur10\kontrol\_olcum_13.png'
+00:12.469  render           | Saved: 'C:\Users\yigit\angora-tur10\kontrol\render_13.png'
+[kontrol] render 13 pozlama 5.0 -> C:\Users\yigit\angora-tur10\kontrol\render_13.png
+00:13.422  render           | Saved: 'C:\Users\yigit\angora-tur10\kontrol\_olcum_17.png'
+00:18.344  render           | Saved: 'C:\Users\yigit\angora-tur10\kontrol\render_17.png'
+[kontrol] render 17 pozlama 2.35 -> C:\Users\yigit\angora-tur10\kontrol\render_17.png
+00:19.313  render           | Saved: 'C:\Users\yigit\angora-tur10\kontrol\_olcum_18.png'
+00:25.813  render           | Saved: 'C:\Users\yigit\angora-tur10\kontrol\render_18.png'
+[kontrol] render 18 pozlama 5.0 -> C:\Users\yigit\angora-tur10\kontrol\render_18.png
+[kontrol] TAMAM 3
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit
