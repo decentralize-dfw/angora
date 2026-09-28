@@ -650,16 +650,45 @@ async function qaPhotoView(id,fov=58){
 // QA: ekran noktalarında (0..1, sol üst) hangi malzeme görünüyor - fotoğraf
 // ile model rengini malzeme malzeme karşılaştırmak için (05_foto_eslesme.py).
 function qaPickMaterials(points){
-  const cam=walk?.active?walk.camera:camera,ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
-  const targets=['architecture','interior','garden'].map(name=>groups.get(name)).filter(Boolean);
+  // Işın testi 704 nokta x 1,5 M üçgende kare başı ~2 dk sürüyordu. Bunun
+  // yerine TEK çizim: villa mesh'leri malzeme kimliği renginde (r+g*256)
+  // küçük bir hedefe çizilir, noktalar oradan okunur.
+  const cam=walk?.active?walk.camera:camera;
+  const W=320,H=Math.round(320*cam.aspect**-1)||240;
+  const target=new THREE.WebGLRenderTarget(W,H);
+  const names=[''],ids=new Map(),restore=[];
+  const idMaterial=(m,clipping)=>{
+    if(!m||(m.transparent&&m.opacity<.5)||!m.visible)return null;
+    const name=m.name??'';if(!ids.has(name)){ids.set(name,names.length);names.push(name);}
+    const id=ids.get(name);
+    return new THREE.MeshBasicMaterial({color:new THREE.Color((id&255)/255,(id>>8)/255,0),toneMapped:false,fog:false,
+      side:m.side,clippingPlanes:clipping,alphaTest:m.alphaTest,map:m.alphaTest>0?m.map:null});
+  };
+  const parts=new Map(['architecture','interior','garden'].map(n=>[groups.get(n),n]).filter(([g])=>g));
+  scene.traverse(o=>{
+    if(!o.isMesh&&!o.isSprite&&!o.isPoints&&!o.isLine)return;
+    let p=o;while(p&&!parts.has(p))p=p.parent;
+    restore.push([o,o.material,o.visible]);
+    if(!p||!o.isMesh){o.visible=false;return;}
+    const list=Array.isArray(o.material)?o.material:[o.material];
+    const mapped=list.map(m=>idMaterial(m,m?.clippingPlanes??null)??new THREE.MeshBasicMaterial({visible:false}));
+    o.material=Array.isArray(o.material)?mapped:mapped[0];
+  });
+  const background=scene.background,fog=scene.fog,previous=renderer.getRenderTarget(),clear=renderer.getClearColor(new THREE.Color()),alpha=renderer.getClearAlpha();
+  const pixels=new Uint8Array(W*H*4);
+  try{
+    scene.background=null;scene.fog=null;renderer.setRenderTarget(target);renderer.setClearColor(0x000000,1);renderer.clear();
+    renderer.render(scene,cam);renderer.readRenderTargetPixels(target,0,0,W,H,pixels);
+  }finally{
+    renderer.setRenderTarget(previous);renderer.setClearColor(clear,alpha);scene.background=background;scene.fog=fog;
+    for(const [o,m,v] of restore){const temp=o.material;o.material=m;o.visible=v;
+      if(temp!==m)for(const t of Array.isArray(temp)?temp:[temp])t?.dispose?.();}
+    target.dispose();invalidate();
+  }
   return points.map(([u,v])=>{
-    ndc.set(u*2-1,1-v*2);ray.setFromCamera(ndc,cam);
-    const hit=ray.intersectObjects(targets,true).find(h=>h.object.visible&&!(Array.isArray(h.object.material)?h.object.material:[h.object.material])
-      .every(m=>m.transparent&&m.opacity<.5));
-    if(!hit)return null;
-    const material=Array.isArray(hit.object.material)?hit.object.material[hit.face?.materialIndex??0]:hit.object.material;
-    let part=hit.object;while(part.parent&&!groups.has(part.name)&&![...groups.values()].includes(part))part=part.parent;
-    return {m:material?.name??'',d:Math.round(hit.distance*100)/100,p:[...groups].find(([,g])=>g===part)?.[0]??''};
+    const x=Math.min(W-1,Math.floor(u*W)),y=Math.min(H-1,Math.floor((1-v)*H));   // hedef alttan başlar
+    const i=(y*W+x)*4,id=pixels[i]+pixels[i+1]*256;
+    return id?{m:names[id]??'',p:''}:null;
   });
 }
 async function travelRoom(roomId){
