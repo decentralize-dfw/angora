@@ -202,8 +202,14 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   // (harita koordinatı). Villanın önündeki yol adresten: "Hatırlı Sokak No:10"
   // - villanın giriş yüzüne (model +z) en yakın adsız OSM ekseni.
   // Ürün sahibi yeni ad verdikçe buraya bir satır eklenir.
+  // 28.09 (2): ürün sahibinin Google Haritalar görüntüleri OSM yollarıyla
+  // bindirilip doğrulandı - site içi yolların adları:
   const NAMED_BY_POINT = [
     {name: 'Hatırlı Sokak', near: toMap([0, 14])},
+    {name: 'Gülümser Sokak', near: [-51, 23]},
+    {name: 'Meraklı Sokak', near: [-72, 58]},
+    {name: 'Sanatkarlar Caddesi', near: [99, -133]},
+    {name: 'Özleyen Sokak', near: [82, -52]},
   ];
   const candidates = [];
   for (const [cls, name, pts] of streets.roads) if (name) candidates.push([name, pts]);
@@ -211,7 +217,13 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     let road = null, bestD = Infinity;
     for (const [cls, n, pts] of streets.roads) {
       if (n) continue;
-      for (let i = 0; i < pts.length; i += 2) { const d = Math.hypot(pts[i] - near[0], pts[i + 1] - near[1]); if (d < bestD) { bestD = d; road = pts; } }
+      // parçaya uzaklık (köşeye değil: uzun düz yolda köşeler uzakta kalır)
+      for (let i = 0; i + 2 < pts.length; i += 2) {
+        const ax = pts[i], ay = pts[i + 1], dx = pts[i + 2] - ax, dy = pts[i + 3] - ay, l2 = dx * dx + dy * dy || 1;
+        const t = Math.max(0, Math.min(1, ((near[0] - ax) * dx + (near[1] - ay) * dy) / l2));
+        const d = Math.hypot(ax + t * dx - near[0], ay + t * dy - near[1]);
+        if (d < bestD) { bestD = d; road = pts; }
+      }
     }
     if (road && bestD < 25) candidates.push([name, road]);
   }
@@ -292,7 +304,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   for (const l of labels) { const d = Math.hypot(l.x, l.z); if (!byName.has(l.name) || d < byName.get(l.name).d) byName.set(l.name, {...l, d}); }
   const out = [...byName.values()].filter(l => l.d < 170).map(({d, ...l}) => l);
   fs.writeFileSync(path.join(ROOT, 'viewer/src/street-labels.json'), JSON.stringify({
-    generated_for: '3D sokak adları (28.09.2026)', source: 'OSM yol eksenleri (© OpenStreetMap, ODbL) + CEVRE-YOL-opt-v3 asfalt yüksekliği; Hatırlı Sokak adresten',
+    generated_for: '3D sokak adları (28.09.2026)', source: 'OSM yol eksenleri (© OpenStreetMap, ODbL) + CEVRE-YOL-opt-v3 asfalt yüksekliği; adsız site yollarının adları ürün sahibinin Google Haritalar görüntülerinden (OSM ile bindirilip doğrulandı)',
     labels: out}, null, 1));
   console.log('sokak adları:', out.map(l => `${l.name} (${Math.hypot(l.x, l.z).toFixed(0)} m)`).join(', '));
 }

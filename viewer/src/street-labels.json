@@ -1,6 +1,6 @@
 {
  "generated_for": "3D sokak adları (28.09.2026)",
- "source": "OSM yol eksenleri (© OpenStreetMap, ODbL) + CEVRE-YOL-opt-v3 asfalt yüksekliği; Hatırlı Sokak adresten",
+ "source": "OSM yol eksenleri (© OpenStreetMap, ODbL) + CEVRE-YOL-opt-v3 asfalt yüksekliği; adsız site yollarının adları ürün sahibinin Google Haritalar görüntülerinden (OSM ile bindirilip doğrulandı)",
  "labels": [
   {
    "name": "Besteci Caddesi",
@@ -19,6 +19,42 @@
    "angle": 0.0021,
    "length": 14.3,
    "rise": 1.112
+  },
+  {
+   "name": "Gülümser Sokak",
+   "x": 12.68,
+   "y": -4.71,
+   "z": -56.42,
+   "angle": 0.2343,
+   "length": 15.3,
+   "rise": 0.373
+  },
+  {
+   "name": "Meraklı Sokak",
+   "x": 86.49,
+   "y": -6.39,
+   "z": -67.13,
+   "angle": 1.4868,
+   "length": 14.3,
+   "rise": -0.681
+  },
+  {
+   "name": "Sanatkarlar Caddesi",
+   "x": 29.31,
+   "y": 10.26,
+   "z": 98.54,
+   "angle": -0.7673,
+   "length": 20.1,
+   "rise": -3.808
+  },
+  {
+   "name": "Özleyen Sokak",
+   "x": -44.78,
+   "y": 11.6,
+   "z": 76.04,
+   "angle": 0.1295,
+   "length": 14.3,
+   "rise": 0.323
   }
  ]
 }

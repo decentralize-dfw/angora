@@ -23,6 +23,10 @@ import site from './region-site.json';
 // Overture Maps / Microsoft ML Building Footprints, 2,3 km içinde
 // (tools/region/fetch_overture_buildings.py).
 import mlBuildings from './region-buildings-ml.json';
+// Çevrede: ürün sahibinin işaretlediği yerler + üç site kapısı, her zaman
+// görünür; atlas kayıtlarından "hard ticari" olanlar gizlenir
+// (tools/region/build_region_local.py).
+import local from './region-local.json';
 import { t, currentLang } from './i18n.js';
 import { listing } from './listing.js';
 
@@ -123,6 +127,9 @@ export function createRegionMap(host) {
       });
       for (const [c, pts] of site.osm.keptRuns) if (c === cls) shape('polyline', `rm-road rm-road-${c}`, { points: flatPoints(pts) });
     }
+    // Ana arterler (ürün sahibi kırmızıyla çizdi): bir ton koyu, adıyla
+    for (const [c, name, pts] of streets.roads)
+      if (local.majorRoads.includes(name)) shape('polyline', 'rm-road rm-road-major', { points: flatPoints(pts) });
     // the settlement's own OSM polygon: Angora Evleri, outlined
     if (streets.boundary) shape('polygon', 'rm-bound', { points: flatPoints(streets.boundary.ring) });
   } else {
@@ -171,7 +178,9 @@ export function createRegionMap(host) {
   // Which titles actually print at a given radius is decided in layout(),
   // where nothing is allowed to sit on anything else.
   const dotLabels = [], dotMarks = [];
-  for (const [x, y, g, name] of places.dots) {
+  const hiddenDots = new Set(local.hideDots);
+  for (const [i, [x, y, g, name]] of places.dots.entries()) {
+    if (hiddenDots.has(i)) continue;
     dotMarks.push(shape('circle', `rm-dot rm-g${g}`, { cx: x, cy: y, r: 9, fill: places.groups[g] }));
     if (name) {
       const tag = document.createElementNS(svgNS, 'g');
@@ -191,9 +200,13 @@ export function createRegionMap(host) {
   const villaAt = site.villa.reduce((a, [x, y]) => [a[0] + x / site.villa.length, a[1] + y / site.villa.length], [0, 0]);
   const pulse = shape('circle', 'rm-pulse', { cx: villaAt[0], cy: villaAt[1], r: 26 });
   shape('polygon', 'rm-villa', { points: poly(site.villa) });
-  for (const p of places.curated) {
-    if (p.d <= 2000) dotMarks.push(shape('circle', `rm-poi rm-g${p.g}`, { cx: p.x, cy: p.y, r: 4, 'vector-effect': 'non-scaling-stroke' }));
+  const hiddenCurated = new Set(local.hideCurated);
+  for (const [i, p] of places.curated.entries()) {
+    if (p.d <= 2000 && !hiddenCurated.has(i)) dotMarks.push(shape('circle', `rm-poi rm-g${p.g}`, { cx: p.x, cy: p.y, r: 4, 'vector-effect': 'non-scaling-stroke' }));
   }
+  // Çevrede katmanı: gerçek konumda küçük bir nokta, adı üstünde (her zaman)
+  for (const p of local.places) dotMarks.push(shape('circle', 'rm-local-dot', { cx: p.x, cy: p.y, r: 4, fill: places.groups[p.g] }));
+  for (const g of local.gates) dotMarks.push(shape('circle', 'rm-gate-dot', { cx: g.x, cy: g.y, r: 4 }));
 
   // labels: glass chips in screen space, gliding with the same projection
   const chips = [];
@@ -208,12 +221,40 @@ export function createRegionMap(host) {
   chip('rm-chip-villa', '<strong>Villa 21</strong>', villaAt[0] + 4, villaAt[1] - 16);
   for (const r of [500, 1000, 2000]) chip('rm-chip-ring', r < 1000 ? '500 m' : `${r / 1000} km`, 0, -r);
   for (const a of AREAS) chip('rm-chip-area' + (a.name === 'Angora Evleri' ? ' rm-chip-site' : ''), a.name, a.x, a.y);
-  for (const p of places.curated) {
+  for (const [i, p] of places.curated.entries()) {
+    if (local.hideCurated.includes(i)) continue;
     const bearing = Math.atan2(p.y, p.x) * 180 / Math.PI;
     const c = chip('rm-chip-poi', `${p.name} <b>${km(p.d)}</b>` +
       (p.d > 2000 ? ` <em style="transform:rotate(${bearing.toFixed(0)}deg)">→</em>` : ''), p.x, p.y, p.d > 2000);
     c.dataset.distance = p.d;
     c.dataset.g = p.g;
+  }
+  const en = currentLang() === 'en';
+  for (const p of local.places) {
+    const c = chip("rm-chip-poi rm-chip-local", `${en && p.en ? p.en : p.name}` +
+      (p.list ? `<small>${p.list}</small>` : ''), p.x, p.y);
+    c.dataset.distance = Math.hypot(p.x, p.y); c.dataset.g = '-2'; c.dataset.rank = p.rank ?? 2;
+  }
+  for (const g of local.gates) {
+    const c = chip('rm-chip-poi rm-chip-local rm-chip-gate', en ? 'Site gate' : 'Site kapısı', g.x, g.y);
+    c.dataset.distance = Math.hypot(g.x, g.y); c.dataset.g = '-2'; c.dataset.rank = 0;
+  }
+  // Ana arter adları: yol boyunca döndürülmüş, villaya 250 m'den uzak ilk
+  // uygun noktada (villanın çevresini kalabalıklaştırmaz)
+  const roadNames = [];
+  for (const name of local.majorRoads) {
+    let best = null;
+    for (const [, n, p] of streets.roads) {
+      if (n !== name) continue;
+      for (let i = 2; i + 2 < p.length; i += 2) {
+        const d = Math.hypot(p[i], p[i + 1]);
+        if (d < 250) continue;
+        if (!best || d < best.d) best = {d, x: p[i], y: p[i + 1], a: Math.atan2(p[i + 3] - p[i - 1], p[i + 2] - p[i - 2]) * 180 / Math.PI};
+      }
+    }
+    if (!best) continue;
+    const c = chip('rm-chip-road', name, best.x, best.y);
+    c.dataset.distance = best.d; roadNames.push({el: c, a: best.a, d: best.d});
   }
   // Anılan yerler: haritada yumuşak bir ışık halkası + kendi etiketi.
   const mentionState = new Set();
@@ -358,7 +399,11 @@ export function createRegionMap(host) {
       m.glow.classList.toggle('rm-on', on);
       m.glow.setAttribute('r', (phone ? 26 : 34) / s);
     }
+    const localChips = [];
     for (const c of order) {
+      // Çevrede katmanı ayrı yerleşir (aşağıda): konum doğruluğu önce gelir,
+      // uzak kaydırma yok
+      if (c.el.classList.contains('rm-chip-local')) { localChips.push(c); continue; }
       const mention = c.el.dataset.mention;
       if (mention && !mentionState.has(mention)) { c.el.style.opacity = 0; c.el.classList.remove('rm-on'); continue; }
       if (mention) c.el.classList.add('rm-on');
@@ -409,7 +454,34 @@ export function createRegionMap(host) {
         const w = (c.el.offsetWidth || 60) + 8, h = (c.el.offsetHeight || 22) + 6;
         taken.push({ x: px - w / 2, y: py - h / 2, w, h });
       }
+      const road = c.el.classList.contains('rm-chip-road') ? roadNames.find(r => r.el === c.el) : null;
+      if (road) {
+        let a = road.a + bearing; a = ((a + 90) % 180 + 180) % 180 - 90;   // hep okunur yönde
+        c.el.style.opacity = road.d > radius * 1.08 ? 0 : 1;
+        c.el.style.transform = `translate(-50%, -50%) translate(${px}px, ${py}px) rotate(${a.toFixed(1)}deg)`;
+        continue;
+      }
       c.el.style.transform = `translate(-50%, -50%) translate(${px}px, ${py}px)`;
+    }
+    // Çevrede: etiket noktasının hemen üstünde, sığmazsa altında, sağında,
+    // solunda; hiçbiri boş değilse etiket gizlenir, nokta kalır. Kapılar önce.
+    localChips.sort((a, b) => (Number(a.el.dataset.rank) - Number(b.el.dataset.rank)) ||
+      (Number(a.el.dataset.distance) - Number(b.el.dataset.distance)));
+    for (const c of localChips) {
+      const [mx, my] = turn(c.mx, c.my), x = cx + mx * s, y = cy + my * s;
+      const w = (c.el.offsetWidth || 120) + 6, h = (c.el.offsetHeight || 22) + 4;
+      let placed = null;
+      if (Number(c.el.dataset.distance) <= radius * 1.15 && x > 0 && x < vw && y > 60 && y < vh - 40) {
+        for (const [ox, oy] of [[0, -h / 2 - 6], [0, h / 2 + 6], [w / 2 + 7, 0], [-w / 2 - 7, 0]]) {
+          const r = {x: x + ox - w / 2, y: y + oy - h / 2, w, h};
+          if (r.y < 90 || r.y + r.h > vh - 100 || r.x < 4 || r.x + r.w > vw - 4) continue;
+          if (!hits(r)) { placed = r; break; }
+        }
+      }
+      if (!placed) { c.el.style.opacity = 0; continue; }
+      taken.push(placed);
+      c.el.style.opacity = 1;
+      c.el.style.transform = `translate(${(placed.x + 3).toFixed(1)}px, ${(placed.y + 2).toFixed(1)}px)`;
     }
     // dot titles, nearest first: a title prints only where it overlaps
     // nothing - no chip, no panel, no other title. What cannot sit clear

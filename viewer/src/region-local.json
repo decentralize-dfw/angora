@@ -1,0 +1,268 @@
+{
+ "generated_for": "Bölge haritası - çevrede katmanı (28.09.2026)",
+ "source": "ürün sahibinin Google Haritalar işaretlemeleri, OSM sokak kesişimleriyle ölçülerek haritaya oturtuldu; basketbol/tenis OSM poligonları",
+ "places": [
+  {
+   "name": "Masha Kuaför",
+   "g": 5,
+   "x": -150.1,
+   "y": -0.8
+  },
+  {
+   "name": "Angora Veteriner Kliniği",
+   "en": "Angora Veterinary Clinic",
+   "g": 5,
+   "x": -152.8,
+   "y": 25.5
+  },
+  {
+   "name": "Yigitistan Art Studio",
+   "g": 5,
+   "x": -140.9,
+   "y": 49.6
+  },
+  {
+   "name": "GMO Simitçi",
+   "g": 2,
+   "x": -114.6,
+   "y": -283.7
+  },
+  {
+   "name": "Basketbol sahası",
+   "en": "Basketball court",
+   "g": 4,
+   "x": -138,
+   "y": -238
+  },
+  {
+   "name": "Tenis kortu",
+   "en": "Tennis court",
+   "g": 4,
+   "x": -111,
+   "y": -234
+  },
+  {
+   "name": "Koşu yolu",
+   "en": "Running path",
+   "g": 4,
+   "x": -144.7,
+   "y": -181.7
+  },
+  {
+   "name": "Deniz Parkı",
+   "en": "Deniz Park",
+   "g": 4,
+   "x": -150.3,
+   "y": -1142.9
+  },
+  {
+   "name": "Okyanus Parkı",
+   "en": "Okyanus Park",
+   "g": 4,
+   "x": -201.0,
+   "y": -1071.2
+  },
+  {
+   "name": "Melis Kuruyemiş & Market",
+   "g": 3,
+   "x": -331.4,
+   "y": -904.7
+  },
+  {
+   "name": "Beysupark AVM",
+   "en": "Beysupark Mall",
+   "g": 3,
+   "x": -1037.9,
+   "y": -780.9,
+   "rank": 1,
+   "list": "Migros · SushiCo · OT Cafe · Paris Kuaför · Eczane · Balıkçı · Kasap · Base Life Club · Eşarj"
+  },
+  {
+   "name": "Migros",
+   "g": 3,
+   "x": -997.6,
+   "y": -931.2
+  },
+  {
+   "name": "Starbucks",
+   "g": 2,
+   "x": -917.9,
+   "y": -863.9
+  },
+  {
+   "name": "Angora Robin Hood Drink Shop",
+   "g": 2,
+   "x": -808.5,
+   "y": -963.9
+  },
+  {
+   "name": "Çocuk bahçesi",
+   "en": "Playground",
+   "g": 4,
+   "x": -846.7,
+   "y": -927.4
+  },
+  {
+   "name": "Anıt Çiçek",
+   "g": 3,
+   "x": -834.0,
+   "y": -922.1
+  },
+  {
+   "name": "Merve Parkı",
+   "en": "Merve Park",
+   "g": 4,
+   "x": -939,
+   "y": -759
+  },
+  {
+   "name": "Eşarj şarj istasyonu",
+   "en": "Eşarj EV charging",
+   "g": 5,
+   "x": -1104.9,
+   "y": -713.9
+  },
+  {
+   "name": "Afitap Meyhane Beytepe",
+   "g": 2,
+   "x": -711.4,
+   "y": 652.4
+  },
+  {
+   "name": "Beytepe 1923",
+   "g": 3,
+   "x": -604,
+   "y": 1054,
+   "rank": 1,
+   "list": "Kafe · restoran · Migros · Starbucks"
+  },
+  {
+   "name": "Park",
+   "g": 4,
+   "x": -348.1,
+   "y": 660.3
+  }
+ ],
+ "gates": [
+  {
+   "x": -559.5,
+   "y": -1095.1
+  },
+  {
+   "x": -746.6,
+   "y": -679.3
+  },
+  {
+   "x": -138.1,
+   "y": 124.0
+  }
+ ],
+ "hideDots": [
+  4,
+  10,
+  13,
+  31,
+  40,
+  41,
+  44,
+  46,
+  51,
+  53,
+  56,
+  71,
+  73,
+  84,
+  85,
+  87,
+  89,
+  93,
+  94,
+  95,
+  96,
+  98,
+  111,
+  112,
+  114,
+  115,
+  117,
+  118,
+  125,
+  130,
+  131,
+  133,
+  136,
+  137,
+  138,
+  139,
+  141,
+  142,
+  144,
+  145,
+  147,
+  149,
+  151,
+  154,
+  155,
+  158,
+  159,
+  161,
+  164,
+  165,
+  167,
+  169,
+  171,
+  172,
+  173,
+  178,
+  180,
+  183,
+  189,
+  191,
+  194,
+  197,
+  198,
+  203,
+  208,
+  213,
+  220,
+  224,
+  226,
+  234,
+  240,
+  241,
+  243,
+  246,
+  249,
+  250,
+  252,
+  258,
+  264,
+  274,
+  279,
+  281,
+  294,
+  303,
+  307,
+  314,
+  318,
+  326,
+  330,
+  334,
+  336,
+  337,
+  340,
+  345,
+  350,
+  357,
+  358,
+  361,
+  366,
+  369
+ ],
+ "hideCurated": [],
+ "majorRoads": [
+  "Kanuni Sultan Süleyman Bulvarı",
+  "Hitit Bulvarı",
+  "Beyler Caddesi"
+ ]
+}

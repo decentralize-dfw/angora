@@ -856,3 +856,18 @@ body.pegman-dragging,body.pegman-dragging *{cursor:grabbing !important}
   .region-panel{width:292px;max-width:292px}
   #region-summary div{max-height:min(46dvh,400px)}
 }
+
+/* Bölge "çevrede" katmanı (28.09): ürün sahibinin işaretlediği yerler ve
+   site kapıları her zaman görünür - gerçek konumda küçük nokta, adı hemen
+   üstünde sade bir çip. Ana arterler bir ton koyu ve adıyla. */
+.rm-local-dot{stroke:#fff;stroke-width:1.4px;vector-effect:non-scaling-stroke}
+.rm-gate-dot{fill:var(--ink);stroke:#fff;stroke-width:1.6px;vector-effect:non-scaling-stroke}
+.rm-chip-local{display:inline-flex;flex-direction:column;align-items:center;gap:1px;padding:3px 9px;font-size:10.5px;line-height:1.25;
+  background:rgba(255,255,255,.82);box-shadow:0 1px 6px rgba(27,50,37,.10)}
+.rm-chip-local i{position:absolute;left:-2px;top:50%;width:0;height:0}
+.rm-chip-local small{font-size:9px;color:var(--muted);max-width:220px;white-space:normal;text-align:center}
+.rm-chip-gate{background:var(--ink);color:#fff;border-color:transparent;font-weight:600;letter-spacing:.04em}
+.rm-road-major{stroke:rgba(22,29,26,.46);stroke-width:4.2px;vector-effect:non-scaling-stroke}
+.rm-chip-road{background:transparent;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;padding:0;
+  font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(22,29,26,.62);
+  text-shadow:0 0 3px #eef1ec,0 0 3px #eef1ec,0 0 6px #eef1ec;pointer-events:none}
