@@ -21,7 +21,7 @@ from playwright.sync_api import sync_playwright
 
 args = [a for a in sys.argv[1:] if not a.startswith('--')]
 OUT = os.path.abspath(args[0] if args else 'isik-kontrol')
-SITE = sys.argv[sys.argv.index('--site') + 1] if '--site' in sys.argv else 'https://angora.mergvs.com/'
+SITE = sys.argv[sys.argv.index('--site') + 1] if '--site' in sys.argv else 'https://xrweb.studio/angora/'
 HEADED = '--gorunur' in sys.argv
 SHOTS = [('C03', 13), ('C04', 17), ('C06', 13), ('C10', 13), ('C11', 9), ('C12', 13), ('C10', 21), ('C03', 21)]
 W, H = 1280, 800

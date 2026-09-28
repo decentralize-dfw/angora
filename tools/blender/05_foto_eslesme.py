@@ -26,7 +26,7 @@ args = [a for a in sys.argv[1:] if not a.startswith('--')]
 def opt(name, default):
     return sys.argv[sys.argv.index(name) + 1] if name in sys.argv else default
 REPO = os.path.abspath(args[0]); OUT = os.path.abspath(args[1] if len(args) > 1 else 'foto-eslesme')
-SITE = opt('--site', 'https://angora.mergvs.com/')
+SITE = opt('--site', 'https://xrweb.studio/angora/')
 LENS = float(opt('--lens', 72))
 LIGHTMAPS = 1 if '--pismis' in sys.argv else 0
 H = 720
