@@ -1,0 +1,546 @@
+{
+ "uretim": "tools/blender/lightmap_uv.py",
+ "dolgu_px": 6,
+ "atlaslar": {
+  "duvar": {
+   "boyut": 4096,
+   "dosya": "BUILDING-opt-v4",
+   "alan_m2": 1994.9,
+   "doluluk": 0.751,
+   "px_per_m": 79.7,
+   "dugumler": {
+    "interior.002": {
+     "eski_kose": 16853,
+     "yeni_kose": 16853,
+     "ucgen": 6003,
+     "vmapping": [
+      0,
+      16853
+     ],
+     "indices": [
+      67412,
+      18009
+     ],
+     "uv": [
+      139448,
+      33706
+     ],
+     "texcoord": 3
+    }
+   }
+  },
+  "zemin": {
+   "boyut": 4096,
+   "dosya": "BUILDING-opt-v4",
+   "alan_m2": 2345.4,
+   "doluluk": 0.823,
+   "px_per_m": 73.5,
+   "dugumler": {
+    "ceiling [imported].001": {
+     "eski_kose": 2736,
+     "yeni_kose": 2745,
+     "ucgen": 2397,
+     "vmapping": [
+      274272,
+      2745
+     ],
+     "indices": [
+      285252,
+      7191
+     ],
+     "uv": [
+      314016,
+      5490
+     ],
+     "texcoord": 2
+    },
+    "wood_floor.001": {
+     "eski_kose": 4042,
+     "yeni_kose": 4042,
+     "ucgen": 2248,
+     "vmapping": [
+      335976,
+      4042
+     ],
+     "indices": [
+      352144,
+      6744
+     ],
+     "uv": [
+      379120,
+      8084
+     ],
+     "texcoord": 2
+    },
+    "terra_floor": {
+     "eski_kose": 3154,
+     "yeni_kose": 3166,
+     "ucgen": 2195,
+     "vmapping": [
+      411456,
+      3166
+     ],
+     "indices": [
+      424120,
+      6585
+     ],
+     "uv": [
+      450460,
+      6332
+     ],
+     "texcoord": 1
+    },
+    "wood_floor": {
+     "eski_kose": 168,
+     "yeni_kose": 168,
+     "ucgen": 84,
+     "vmapping": [
+      475788,
+      168
+     ],
+     "indices": [
+      476460,
+      252
+     ],
+     "uv": [
+      477468,
+      336
+     ],
+     "texcoord": 1
+    },
+    "stone_tile": {
+     "eski_kose": 9945,
+     "yeni_kose": 10009,
+     "ucgen": 4707,
+     "vmapping": [
+      478812,
+      10009
+     ],
+     "indices": [
+      518848,
+      14121
+     ],
+     "uv": [
+      575332,
+      20018
+     ],
+     "texcoord": 2
+    },
+    "Cube": {
+     "eski_kose": 7310,
+     "yeni_kose": 9814,
+     "ucgen": 7640,
+     "vmapping": [
+      655404,
+      9814
+     ],
+     "indices": [
+      694660,
+      22920
+     ],
+     "uv": [
+      786340,
+      19628
+     ],
+     "texcoord": 1
+    },
+    "Lift | Photographed walnut door finish (4).001": {
+     "eski_kose": 4257,
+     "yeni_kose": 4257,
+     "ucgen": 2287,
+     "vmapping": [
+      864852,
+      4257
+     ],
+     "indices": [
+      881880,
+      6861
+     ],
+     "uv": [
+      909324,
+      8514
+     ],
+     "texcoord": 2
+    },
+    "R31 | R33 entrance WC ochre tile": {
+     "eski_kose": 138,
+     "yeni_kose": 144,
+     "ucgen": 96,
+     "vmapping": [
+      943380,
+      144
+     ],
+     "indices": [
+      943956,
+      288
+     ],
+     "uv": [
+      945108,
+      288
+     ],
+     "texcoord": 1
+    },
+    "R31 | R33 master pale cream tile": {
+     "eski_kose": 85,
+     "yeni_kose": 85,
+     "ucgen": 55,
+     "vmapping": [
+      946260,
+      85
+     ],
+     "indices": [
+      946600,
+      165
+     ],
+     "uv": [
+      947260,
+      170
+     ],
+     "texcoord": 1
+    },
+    "R44 joined | fixed | R31 | Shared bathroom ivory wall tile": {
+     "eski_kose": 257,
+     "yeni_kose": 257,
+     "ucgen": 157,
+     "vmapping": [
+      947940,
+      257
+     ],
+     "indices": [
+      948968,
+      471
+     ],
+     "uv": [
+      950852,
+      514
+     ],
+     "texcoord": 1
+    },
+    "R31 | R33 entrance navy mosaic band": {
+     "eski_kose": 78,
+     "yeni_kose": 78,
+     "ucgen": 54,
+     "vmapping": [
+      952908,
+      78
+     ],
+     "indices": [
+      953220,
+      162
+     ],
+     "uv": [
+      953868,
+      156
+     ],
+     "texcoord": 1
+    },
+    "R31 | R33 ivory wall ceramic": {
+     "eski_kose": 242,
+     "yeni_kose": 256,
+     "ucgen": 172,
+     "vmapping": [
+      954492,
+      256
+     ],
+     "indices": [
+      955516,
+      516
+     ],
+     "uv": [
+      957580,
+      512
+     ],
+     "texcoord": 1
+    },
+    "R31 | R33 master fine mosaic band": {
+     "eski_kose": 32,
+     "yeni_kose": 32,
+     "ucgen": 22,
+     "vmapping": [
+      959628,
+      32
+     ],
+     "indices": [
+      959756,
+      66
+     ],
+     "uv": [
+      960020,
+      64
+     ],
+     "texcoord": 1
+    },
+    "R31 | R33 attic cream tile": {
+     "eski_kose": 76,
+     "yeni_kose": 76,
+     "ucgen": 60,
+     "vmapping": [
+      960276,
+      76
+     ],
+     "indices": [
+      960580,
+      180
+     ],
+     "uv": [
+      961300,
+      152
+     ],
+     "texcoord": 1
+    },
+    "R31 | R33 attic tan mosaic band": {
+     "eski_kose": 60,
+     "yeni_kose": 60,
+     "ucgen": 46,
+     "vmapping": [
+      961908,
+      60
+     ],
+     "indices": [
+      962148,
+      138
+     ],
+     "uv": [
+      962700,
+      120
+     ],
+     "texcoord": 1
+    }
+   }
+  },
+  "cephe": {
+   "boyut": 2048,
+   "dosya": "BUILDING-opt-v4",
+   "alan_m2": 1701.2,
+   "doluluk": 0.79,
+   "px_per_m": 43.3,
+   "dugumler": {
+    "stucco [imported]": {
+     "eski_kose": 6680,
+     "yeni_kose": 6682,
+     "ucgen": 2384,
+     "vmapping": [
+      963180,
+      6682
+     ],
+     "indices": [
+      989908,
+      7152
+     ],
+     "uv": [
+      1018516,
+      13364
+     ],
+     "texcoord": 3
+    },
+    "Cube.001": {
+     "eski_kose": 4316,
+     "yeni_kose": 4550,
+     "ucgen": 1943,
+     "vmapping": [
+      1071972,
+      4550
+     ],
+     "indices": [
+      1090172,
+      5829
+     ],
+     "uv": [
+      1113488,
+      9100
+     ],
+     "texcoord": 2
+    },
+    "roof.003": {
+     "eski_kose": 775,
+     "yeni_kose": 791,
+     "ucgen": 695,
+     "vmapping": [
+      1149888,
+      791
+     ],
+     "indices": [
+      1153052,
+      2085
+     ],
+     "uv": [
+      1161392,
+      1582
+     ],
+     "texcoord": 1
+    },
+    "gravel [imported].001": {
+     "eski_kose": 224,
+     "yeni_kose": 224,
+     "ucgen": 112,
+     "vmapping": [
+      1167720,
+      224
+     ],
+     "indices": [
+      1168616,
+      336
+     ],
+     "uv": [
+      1169960,
+      448
+     ],
+     "texcoord": 2
+    }
+   }
+  },
+  "bahce": {
+   "boyut": 2048,
+   "dosya": "GARDEN-opt-v2",
+   "alan_m2": 3183.8,
+   "doluluk": 0.841,
+   "px_per_m": 31.6,
+   "dugumler": {
+    "plot-grass.001": {
+     "eski_kose": 5027,
+     "yeni_kose": 5787,
+     "ucgen": 6498,
+     "vmapping": [
+      1171752,
+      5787
+     ],
+     "indices": [
+      1194900,
+      19494
+     ],
+     "uv": [
+      1272876,
+      11574
+     ],
+     "texcoord": 2
+    },
+    "Retaining wall rough limestone (1).001": {
+     "eski_kose": 1837,
+     "yeni_kose": 1862,
+     "ucgen": 1139,
+     "vmapping": [
+      1319172,
+      1862
+     ],
+     "indices": [
+      1326620,
+      3417
+     ],
+     "uv": [
+      1340288,
+      3724
+     ],
+     "texcoord": 2
+    },
+    "Retaining wall rough limestone.002": {
+     "eski_kose": 233,
+     "yeni_kose": 233,
+     "ucgen": 117,
+     "vmapping": [
+      1355184,
+      233
+     ],
+     "indices": [
+      1356116,
+      351
+     ],
+     "uv": [
+      1357520,
+      466
+     ],
+     "texcoord": 2
+    },
+    "stone_tile (4).002": {
+     "eski_kose": 136,
+     "yeni_kose": 142,
+     "ucgen": 86,
+     "vmapping": [
+      1359384,
+      142
+     ],
+     "indices": [
+      1359952,
+      258
+     ],
+     "uv": [
+      1360984,
+      284
+     ],
+     "texcoord": 2
+    },
+    "pool_tile.001": {
+     "eski_kose": 408,
+     "yeni_kose": 408,
+     "ucgen": 444,
+     "vmapping": [
+      1362120,
+      408
+     ],
+     "indices": [
+      1363752,
+      1332
+     ],
+     "uv": [
+      1369080,
+      816
+     ],
+     "texcoord": 1
+    },
+    "white_trim (5).001": {
+     "eski_kose": 864,
+     "yeni_kose": 864,
+     "ucgen": 972,
+     "vmapping": [
+      1372344,
+      864
+     ],
+     "indices": [
+      1375800,
+      2916
+     ],
+     "uv": [
+      1387464,
+      1728
+     ],
+     "texcoord": 1
+    },
+    "canopy.001": {
+     "eski_kose": 80,
+     "yeni_kose": 80,
+     "ucgen": 42,
+     "vmapping": [
+      1394376,
+      80
+     ],
+     "indices": [
+      1394696,
+      126
+     ],
+     "uv": [
+      1395200,
+      160
+     ],
+     "texcoord": 2
+    },
+    "Garden | Dark stained canopy timber.001": {
+     "eski_kose": 156,
+     "yeni_kose": 156,
+     "ucgen": 88,
+     "vmapping": [
+      1395840,
+      156
+     ],
+     "indices": [
+      1396464,
+      264
+     ],
+     "uv": [
+      1397520,
+      312
+     ],
+     "texcoord": 1
+    }
+   }
+  }
+ }
+}

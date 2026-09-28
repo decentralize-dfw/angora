@@ -1,0 +1,1487 @@
+{
+ "kaynak": "build/blender/angora21-working.blend",
+ "isiklar": [
+  {
+   "ad": "Sun",
+   "tur": "SUN",
+   "guc_W": 0.0,
+   "renk": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "matris": [
+    [
+     0.70447,
+     0.42256,
+     -0.57024,
+     0.0
+    ],
+    [
+     -0.59336,
+     0.79149,
+     -0.14653,
+     0.0
+    ],
+    [
+     0.38942,
+     0.44158,
+     0.80831,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "aci": 0.05236
+  },
+  {
+   "ad": "Interior fill 0",
+   "tur": "AREA",
+   "guc_W": 28.0,
+   "renk": [
+    1.0,
+    0.91,
+    0.78
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -1.0
+    ],
+    [
+     0.0,
+     0.99195,
+     -0.12663,
+     3.7
+    ],
+    [
+     0.0,
+     0.12663,
+     0.99195,
+     2.35
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 2.5,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Interior fill 1",
+   "tur": "AREA",
+   "guc_W": 28.0,
+   "renk": [
+    1.0,
+    0.91,
+    0.78
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -1.0
+    ],
+    [
+     0.0,
+     0.99195,
+     -0.12663,
+     3.7
+    ],
+    [
+     0.0,
+     0.12663,
+     0.99195,
+     5.4496
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 2.5,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Interior fill 2",
+   "tur": "AREA",
+   "guc_W": 28.0,
+   "renk": [
+    1.0,
+    0.91,
+    0.78
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -1.0
+    ],
+    [
+     0.0,
+     0.99195,
+     -0.12663,
+     3.7
+    ],
+    [
+     0.0,
+     0.12663,
+     0.99195,
+     8.7214
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 2.5,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Interior fill 3",
+   "tur": "AREA",
+   "guc_W": 28.0,
+   "renk": [
+    1.0,
+    0.91,
+    0.78
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -1.0
+    ],
+    [
+     0.0,
+     0.99195,
+     -0.12663,
+     3.7
+    ],
+    [
+     0.0,
+     0.12663,
+     0.99195,
+     11.8205
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 2.5,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Attic ceiling light",
+   "tur": "AREA",
+   "guc_W": 70.0,
+   "renk": [
+    1.0,
+    0.94,
+    0.87
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -3.1
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     1.4
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     11.65
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.8,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Warm chandelier light",
+   "tur": "AREA",
+   "guc_W": 78.0,
+   "renk": [
+    1.0,
+    0.88,
+    0.72
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -3.02
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     5.42
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     5.465
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 1.0,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Warm chandelier light.001",
+   "tur": "AREA",
+   "guc_W": 78.0,
+   "renk": [
+    1.0,
+    0.88,
+    0.72
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     1.25
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     5.7
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     5.465
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 1.0,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Master pendant light",
+   "tur": "AREA",
+   "guc_W": 48.0,
+   "renk": [
+    1.0,
+    0.88,
+    0.66
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -3.2
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     6.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     8.1
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.35,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Warm chandelier light.002",
+   "tur": "AREA",
+   "guc_W": 78.0,
+   "renk": [
+    1.0,
+    0.88,
+    0.72
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     1.1
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     5.45
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     2.19
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 1.0,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Bathroom mirror sconce",
+   "tur": "AREA",
+   "guc_W": 15.0,
+   "renk": [
+    1.0,
+    0.94,
+    0.85
+   ],
+   "matris": [
+    [
+     -0.0,
+     0.73653,
+     -0.67641,
+     0.515
+    ],
+    [
+     -1.0,
+     -0.0,
+     -0.0,
+     6.8914
+    ],
+    [
+     -0.0,
+     0.67641,
+     0.73653,
+     8.6514
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.16,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Bathroom mirror sconce.001",
+   "tur": "AREA",
+   "guc_W": 15.0,
+   "renk": [
+    1.0,
+    0.94,
+    0.85
+   ],
+   "matris": [
+    [
+     -0.0,
+     0.73653,
+     -0.67641,
+     0.515
+    ],
+    [
+     -1.0,
+     -0.0,
+     -0.0,
+     8.2086
+    ],
+    [
+     -0.0,
+     0.67641,
+     0.73653,
+     8.6514
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.16,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Bathroom mirror sconce.002",
+   "tur": "AREA",
+   "guc_W": 15.0,
+   "renk": [
+    1.0,
+    0.94,
+    0.85
+   ],
+   "matris": [
+    [
+     -0.0,
+     0.73653,
+     -0.67641,
+     2.13
+    ],
+    [
+     -1.0,
+     -0.0,
+     0.0,
+     -3.3164
+    ],
+    [
+     -0.0,
+     0.67641,
+     0.73653,
+     8.6514
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.16,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Bathroom mirror sconce.003",
+   "tur": "AREA",
+   "guc_W": 15.0,
+   "renk": [
+    1.0,
+    0.94,
+    0.85
+   ],
+   "matris": [
+    [
+     -0.0,
+     0.73653,
+     -0.67641,
+     2.13
+    ],
+    [
+     -1.0,
+     -0.0,
+     0.0,
+     -2.0436
+    ],
+    [
+     -0.0,
+     0.67641,
+     0.73653,
+     8.6514
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.16,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Photographed ceiling downlight",
+   "tur": "AREA",
+   "guc_W": 48.0,
+   "renk": [
+    1.0,
+    0.93,
+    0.84
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -4.1
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -1.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     5.84
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.09,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Photographed ceiling downlight.001",
+   "tur": "AREA",
+   "guc_W": 48.0,
+   "renk": [
+    1.0,
+    0.93,
+    0.84
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -3.2
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -2.85
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     5.84
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.09,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Warm chandelier light.003",
+   "tur": "AREA",
+   "guc_W": 78.0,
+   "renk": [
+    1.0,
+    0.88,
+    0.72
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -0.25
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -3.05
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     5.475
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 1.0,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Warm chandelier light.004",
+   "tur": "AREA",
+   "guc_W": 78.0,
+   "renk": [
+    1.0,
+    0.88,
+    0.72
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -3.9
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -2.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     8.565
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 1.0,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Photographed fabric pendant",
+   "tur": "AREA",
+   "guc_W": 62.0,
+   "renk": [
+    1.0,
+    0.9,
+    0.77
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -0.45
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -3.0
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     8.065
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.39,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Photographed opal fixture",
+   "tur": "AREA",
+   "guc_W": 45.0,
+   "renk": [
+    1.0,
+    0.94,
+    0.86
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     1.65
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     4.65
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     8.865
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.24,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Photographed opal fixture.001",
+   "tur": "AREA",
+   "guc_W": 65.0,
+   "renk": [
+    1.0,
+    0.94,
+    0.86
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     1.65
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     7.55
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     8.865
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.24,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Photographed opal fixture.002",
+   "tur": "AREA",
+   "guc_W": 60.0,
+   "renk": [
+    1.0,
+    0.94,
+    0.86
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     2.9
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -2.3
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     8.865
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.24,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Photographed opal fixture.003",
+   "tur": "AREA",
+   "guc_W": 40.0,
+   "renk": [
+    1.0,
+    0.94,
+    0.86
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -0.8
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     2.1
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     8.865
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.24,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Photographed opal fixture.004",
+   "tur": "AREA",
+   "guc_W": 50.0,
+   "renk": [
+    1.0,
+    0.94,
+    0.86
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -3.83
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     1.12
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     2.12
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.3,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Photographed opal fixture.005",
+   "tur": "AREA",
+   "guc_W": 50.0,
+   "renk": [
+    1.0,
+    0.94,
+    0.86
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -0.9
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     2.5
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     2.49
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.24,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Photographed opal fixture.006",
+   "tur": "AREA",
+   "guc_W": 45.0,
+   "renk": [
+    1.0,
+    0.94,
+    0.86
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     5.7
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.7
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     5.74
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.24,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Photographed opal fixture.007",
+   "tur": "AREA",
+   "guc_W": 45.0,
+   "renk": [
+    1.0,
+    0.94,
+    0.86
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     5.7
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     4.7
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     5.74
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.24,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Photographed opal fixture.008",
+   "tur": "AREA",
+   "guc_W": 30.0,
+   "renk": [
+    1.0,
+    0.94,
+    0.86
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -0.04
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     1.52
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     2.49
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.24,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Photographed opal fixture.009",
+   "tur": "AREA",
+   "guc_W": 30.0,
+   "renk": [
+    1.0,
+    0.94,
+    0.86
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     3.55
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     -1.42
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     5.775
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.24,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Lift recessed LED",
+   "tur": "AREA",
+   "guc_W": 6.0,
+   "renk": [
+    1.0,
+    0.91,
+    0.78
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -2.39
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.5
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     2.2
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.075,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Lift recessed LED.001",
+   "tur": "AREA",
+   "guc_W": 6.0,
+   "renk": [
+    1.0,
+    0.91,
+    0.78
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -2.39
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     1.2
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     2.2
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.075,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Lift recessed LED.002",
+   "tur": "AREA",
+   "guc_W": 6.0,
+   "renk": [
+    1.0,
+    0.91,
+    0.78
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -1.65
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     0.5
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     2.2
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.075,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  },
+  {
+   "ad": "Lift recessed LED.003",
+   "tur": "AREA",
+   "guc_W": 6.0,
+   "renk": [
+    1.0,
+    0.91,
+    0.78
+   ],
+   "matris": [
+    [
+     1.0,
+     0.0,
+     0.0,
+     -1.65
+    ],
+    [
+     0.0,
+     1.0,
+     0.0,
+     1.2
+    ],
+    [
+     0.0,
+     0.0,
+     1.0,
+     2.2
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "koleksiyon": [
+    "91_LIGHTING"
+   ],
+   "kutuphane": null,
+   "render_gizli": false,
+   "sekil": "DISK",
+   "boyut": 0.075,
+   "boyut_y": 0.25,
+   "yayilma": 3.1416
+  }
+ ]
+}
