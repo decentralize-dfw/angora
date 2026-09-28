@@ -1,0 +1,56 @@
+id,dosya,yer,blender_x,blender_y,blender_z,bakis_x,bakis_y,bakis_z
+1,photogallery/angora_01.jpg,"Bodrum · Mutfak",-1.584,4.881,1.550,-0.682,-0.731,0
+2,photogallery/angora_02.jpg,"Bodrum · Salon",-3.698,7.640,1.550,0.937,-0.350,0
+3,photogallery/angora_03.jpg,"Bodrum · Salon",-4.237,4.253,1.550,0.783,0.622,0
+4,photogallery/angora_04.jpg,"Giriş katı · Salon",-4.254,7.295,4.650,0.641,-0.768,0
+5,photogallery/angora_05.jpg,"Bodrum · Salon",2.849,4.525,1.550,-0.927,0.374,0
+6,photogallery/angora_06.jpg,"Çatı katı · Mini mutfak",0.151,3.640,11.021,0.549,0.836,0
+7,photogallery/angora_07.jpg,"Çatı katı · Yatak odası (C02)",-0.182,4.615,11.021,-0.756,0.655,0
+8,photogallery/angora_08.jpg,"Çatı katı · Yatak odası (C04)",0.105,0.024,11.021,-0.435,-0.901,0
+9,photogallery/angora_09.jpg,"Çatı katı · Oturma alanı",-4.899,2.015,11.021,1.000,0.000,0
+10,photogallery/angora_10.jpg,"Çatı katı · Oturma alanı",0.242,0.995,11.021,-0.956,0.295,0
+11,photogallery/angora_11.jpg,"1. kat · Ortak banyo",1.713,-0.671,7.921,0.868,-0.497,0
+12,photogallery/angora_12.jpg,"1. kat · Oturma alanı",-5.765,3.006,7.921,0.907,-0.421,0
+13,photogallery/angora_13.jpg,"1. kat · Yatak odası (107)",0.744,-1.453,7.921,-0.508,-0.861,0
+14,photogallery/angora_14.jpg,"Çatı katı · Yatak odası (C04)",-2.660,-3.241,11.021,0.847,0.532,0
+15,photogallery/angora_15.jpg,"Çatı katı · Banyo",0.681,5.234,11.021,-0.028,1.000,0
+16,photogallery/angora_16.jpg,"1. kat · Giyinme odası",0.404,5.754,7.921,0.742,-0.671,0
+17,photogallery/angora_17.jpg,"1. kat · Yatak odası (107)",0.784,-4.757,7.921,-0.468,0.884,0
+18,photogallery/angora_18.jpg,"1. kat · Kat holü · Merdiven",-1.001,2.823,7.921,0.501,-0.865,0
+19,photogallery/angora_19.jpg,"1. kat · Ebeveyn yatak odası",-0.539,5.504,7.921,-0.872,0.490,0
+21,photogallery/angora_21.jpg,"Giriş katı · Mutfak",-2.000,-3.050,4.650,-0.750,0.660,0
+22,photogallery/angora_22.jpg,"Giriş katı · Mutfak",-4.172,-3.544,4.650,0.936,0.351,0
+23,photogallery/angora_23.jpg,"Giriş katı · Yemek alanı",-0.216,6.846,4.650,-0.714,-0.700,0
+24,photogallery/angora_24.jpg,"Havuz ve bahçe",11.800,22.500,1.600,-0.520,-0.860,0
+25,photogallery/angora_25.jpg,"Bahçe · Arka cephe",-5.200,20.900,1.600,0.280,-0.960,0
+26,photogallery/angora_26.jpg,"Havuz ve bahçe",-0.300,25.800,1.600,0.100,-0.990,0
+27,photogallery/angora_27.jpg,"Havuz ve bahçe",15.400,17.800,1.600,-0.720,-0.690,0
+28,photogallery/angora_28.jpeg,"Ön cephe · Otopark",4.700,-10.850,4.700,-0.370,0.930,0
+29,photogallery/angora_29.jpg,"Çatı katı · Kat holü",0.446,1.318,11.021,0.000,1.000,0
+30,photogallery/angora_30.jpg,"1. kat · Yatak odası (106)",-1.423,-0.081,7.921,-0.710,-0.705,0
+31,photogallery/angora_31.jpg,"1. kat · Ebeveyn yatak odası",-1.862,7.377,7.921,0.562,-0.827,0
+32,photogallery/angora_32.png,"1. kat · Ebeveyn banyosu",1.814,6.094,7.921,-0.044,0.999,0
+33,photogallery/angora_33.jpg,"1. kat · Oturma alanı",-0.539,2.022,7.921,-0.998,0.064,0
+34,photogallery/angora_34.jpg,"1. kat · Kat holü · Merdiven",-0.853,-1.316,7.921,0.655,0.756,0
+35,photogallery/angora_35.jpg,"1. kat · Kat holü",0.581,-0.569,7.921,-0.565,0.825,0
+36,photogallery/angora_36.jpg,"Yan bahçe",-6.535,-3.789,4.650,-0.054,0.999,0
+37,photogallery/angora_37.jpg,"Giriş sundurması",-2.778,-5.688,4.650,1.000,0.000,0
+38,photogallery/angora_38.jpg,"Ön cephe · Giriş",2.418,-7.935,4.650,0.000,1.000,0
+39,photogallery/angora_39.jpg,"Giriş katı · Misafir WC",2.859,-2.447,4.650,0.563,0.826,0
+40,photogallery/angora_40.jpg,"Giriş katı · Antre",0.090,0.704,4.650,0.691,-0.723,0
+41,photogallery/angora_41.jpg,"Giriş katı · Giriş holü",1.812,-1.793,4.650,0.738,-0.675,0
+42,photogallery/angora_42.jpg,"Giriş katı · Antre · Merdiven",-0.817,1.148,4.650,0.997,-0.079,0
+43,photogallery/angora_43.jpg,"Garaj",5.719,0.351,4.650,-0.046,-0.999,0
+44,photogallery/angora_44.jpg,"Garaj · Depo",5.543,2.448,4.650,-0.225,0.974,0
+45,photogallery/angora_45.jpg,"Bodrum · Misafir WC",-0.032,1.825,1.550,-0.995,0.100,0
+46,photogallery/angora_46.jpg,"Bodrum · Misafir WC",-0.182,1.249,1.550,0.997,0.073,0
+47,photogallery/angora_47.jpg,"Bodrum · Hol · Merdiven",-0.836,2.870,1.550,0.998,0.056,0
+48,photogallery/angora_48.jpg,"Bodrum · Hol · Asansör",-1.784,2.987,1.550,-0.029,-1.000,0
+49,photogallery/angora_49.jpg,"Asansör kabini",-1.926,1.747,1.550,0.009,-1.000,0
+50,photogallery/angora_50.jpg,"Yan bahçe",-6.832,8.160,1.550,-0.155,-0.988,0
+51,photogallery/angora_51.jpg,"Havuz · Teras",-6.120,8.717,1.550,0.870,0.494,0
+52,photogallery/angora_52.jpg,"Bahçe merdiveni",8.174,7.327,1.550,0.000,-1.000,0
+53,photogallery/angora_53.jpg,"Havuz terası",2.374,10.893,1.550,0.586,-0.810,0
+54,photogallery/angora_54.jpg,"Havuz terası",6.714,10.171,1.550,-0.783,-0.622,0
+55,photogallery/angora_55.jpg,"Yan bahçe · Havuz manzarası",8.082,-1.992,4.650,0.000,1.000,0
+56,photogallery/angora_56.jpg,"Açık otopark · Garaj girişi",6.515,-7.900,4.650,0.000,1.000,0
