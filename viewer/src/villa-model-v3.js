@@ -98,10 +98,16 @@ export const CONTEXT_V2_MOBILE = Object.freeze({
   'context-buildings': {file: 'mobile/KOMSULAR-opt-v2.ktx2.glb', bytes: 9445700},
   'context-ground':    {file: 'mobile/CEVRE-YOL-opt-v2.ktx2.glb', bytes: 864772},
 });
+// 28.09 zemin v3 (tools/batch-delivery/make-context-v3.mjs): aynı geometri,
+// çim ve asfaltta 3 m alan-ağırlıklı "arazi normali". Çimdeki koyu
+// kıymıklar gölge değil, dik ince şeritlerin yan bakan normaliydi.
+export const CONTEXT_GROUND_V3 = Object.freeze({file: 'CEVRE-YOL-opt-v3.glb', bytes: 817680});
+export const CONTEXT_GROUND_V3_MOBILE = Object.freeze({file: 'mobile/CEVRE-YOL-opt-v3.ktx2.glb', bytes: 746060});
 const CONTEXT_V2_DROPPED = ['context-plants'];
-export function applyContextV2(manifest, {mobile = false} = {}) {
+export function applyContextV2(manifest, {mobile = false, groundV3 = false} = {}) {
   if (!manifest?.parts || !manifest.batched) return [];
-  const table = mobile ? CONTEXT_V2_MOBILE : CONTEXT_V2;
+  const table = {...(mobile ? CONTEXT_V2_MOBILE : CONTEXT_V2)};
+  if (groundV3) table['context-ground'] = mobile ? CONTEXT_GROUND_V3_MOBILE : CONTEXT_GROUND_V3;
   const changed = [];
   for (const part of manifest.parts) {
     const next = table[part.name];

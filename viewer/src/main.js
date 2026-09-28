@@ -1920,7 +1920,7 @@ async function loadModel() {
     // Çevre v2: ürün sahibinin komşu binaları ve zemin+yol modeli. Eski
     // çevreye dönmek: ?features=contextV2:0
     if(FEATURES.contextV2){
-      const changed=applyContextV2(manifest,{mobile:deliveryProfile==='mobile'});
+      const changed=applyContextV2(manifest,{mobile:deliveryProfile==='mobile',groundV3:FEATURES.terrainNormalsV3});
       if(changed.length)console.info('Çevre v2: '+changed.join(', '));
     }
     if(manifest.parts&&manifest.interior_streams){await loadNativeModel(manifest);return;}

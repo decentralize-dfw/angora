@@ -115,3 +115,16 @@ test('çevre v2: komşu ve zemin dosyası değişir, eski ağaç parçası çık
   assert.match(mobile.parts.find(p => p.name === 'context-buildings').file, /mobile\/KOMSULAR-opt-v2\.ktx2\.glb$/);
   assert.equal(DEFAULT_FEATURES.contextV2, true);
 });
+
+// 28.09 zemin v3: yalnız zemin dosyası değişir, bayrakla v2'ye dönülür.
+test('zemin v3: arazi normalli dosya, bayrak kapalıyken v2', () => {
+  const m = manifest(); applyContextV2(m, {groundV3: true});
+  assert.equal(m.parts.find(p => p.name === 'context-ground').file, '../../26092026/CEVRE-YOL-opt-v3.glb');
+  assert.equal(m.parts.find(p => p.name === 'context-ground').bytes, 817680);
+  assert.equal(m.parts.find(p => p.name === 'context-buildings').file, '../../26092026/KOMSULAR-opt-v2.glb');
+  const mobile = manifest(); applyContextV2(mobile, {mobile: true, groundV3: true});
+  assert.match(mobile.parts.find(p => p.name === 'context-ground').file, /mobile\/CEVRE-YOL-opt-v3\.ktx2\.glb$/);
+  const old = manifest(); applyContextV2(old, {groundV3: false});
+  assert.equal(old.parts.find(p => p.name === 'context-ground').file, '../../26092026/CEVRE-YOL-opt-v2.glb');
+  assert.equal(DEFAULT_FEATURES.terrainNormalsV3, true);
+});
