@@ -37,6 +37,7 @@ import {upgradeAtlasToArrays} from './atlas-array.js';
 import {bakeContactOcclusion} from './vertex-ao.js';
 import {markUploads,releaseGeometryArrays} from './geometry-release.js';
 import {applyVillaModelV3,applyContextV2} from './villa-model-v3.js';
+import {LIGHTMAP_MODELS,createVillaLightmaps} from './villa-lightmaps.js';
 import {createStreetLabels} from './street-labels.js';
 import {createNeighbourLines} from './neighbour-lines.js';
 import {createSiteContext} from './site-context.js';
@@ -133,6 +134,7 @@ let plotCutReady = false;
 let planWash = null;
 let flight, hotspots, planMode=false, roomData, interiorLights=true, soilCap=null;
 let scene, camera, renderer, controls, loader, loadAsset, caps, buildingBox, gardenBox, contextBox, lighting, siteContext, quality;
+let villaLightmaps=null;
 let nativeDelivery=null,nativeSwitching=false,nativeAtlas=null,nativeSoil=null,plotMask=null,streetLabels=null,neighbourLines=null,neighbourFadeTime=null;
 // The opening view is the street, not the house: a visitor should see where
 // Angora 21 sits before they see what it is. share-state.js has always called
@@ -1647,6 +1649,7 @@ async function loadNativeModel(manifest){
     },
     releaseMaterial:m=>lighting.releaseMaterial(m),prepare:(o,{clipped,context,name})=>{
       o.renderOrder=5;lighting.prepareMesh(o,{clipped,context,name});
+      if(villaLightmaps&&(name==='architecture'||name==='garden'))villaLightmaps.apply(o);
       const planes=clipped?[clip]:[];o.userData.clipPlanes=planes;
         for(const material of Array.isArray(o.material)?o.material:[o.material]){material.clippingPlanes=planes;material.clipShadows=true;if(material.aoMap)material.aoMapIntensity=FEATURES.warmGradeV1?.55:.7;if(name==='garden'||name==='context-plants'||(manifest.batched&&context))plotMask?.apply(material,{alwaysOutside:name==='context-buildings',cutInsidePlot:name==='context-ground'||name==='garden'});}
     }});
@@ -1932,6 +1935,15 @@ async function loadModel() {
     if(FEATURES.villaModelV3&&(deliveryProfile==='desktop'||FEATURES.villaModelV3Mobile)){
       const swapped=applyVillaModelV3(manifest,{mobile:deliveryProfile==='mobile'});
       if(swapped.length)console.info('Villa model v3'+(deliveryProfile==='mobile'?' (mobil ktx2)':'')+': '+swapped.join(', '));
+    }
+    // Pişmiş ışık (masaüstü): kabuk ve bahçe lightmap UV'li v5/v3 dosyalarına
+    // geçer, 20 harita arka planda yüklenir; gelene kadar eski ışık görünür.
+    if(FEATURES.lightmaps&&FEATURES.villaModelV3&&deliveryProfile==='desktop'&&manifest.parts){
+      for(const part of manifest.parts){const next=LIGHTMAP_MODELS[part.name];if(!next)continue;
+        part.file='../../26092026/'+next.file;part.bytes=next.bytes;delete part.gpu_sha256;}
+      villaLightmaps=createVillaLightmaps({renderer,root:new URL('../../26092026/lightmaps/',modelRoot)});
+      if(villaLightmaps.active){lighting.setLightmaps(villaLightmaps);window.__angoraLightmaps=villaLightmaps;villaLightmaps.ready.then(ok=>{if(ok)invalidate();});}
+      else villaLightmaps=null;
     }
     // Çevre v2: ürün sahibinin komşu binaları ve zemin+yol modeli. Eski
     // çevreye dönmek: ?features=contextV2:0

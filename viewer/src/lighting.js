@@ -180,6 +180,9 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
   let soft=true,shadowDistance=110;
   const preparedMaterials=new Set();
   let groundLight=null,floorLight=null,electricLight=null,roomReflections=null,reflectionFloor=null,activeInteriorFloor=null;
+  // Pişmiş ışık (villa-lightmaps.js): gök/güneş sekmesi/gece haritaları; yoksa null
+  let lightmaps=null,lightmapView=null;
+  const lightmapSkyStrength=()=>walkInterior||!/^f[0-3]$/.test(lightmapView??'')?1:.45;
   // The villa's see-through glazing, and what it was before the tour lit it.
   const glazing=new Set(),glazingRest=new WeakMap();
   const reflectionMaterials=new Set();
@@ -306,6 +309,10 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
     if(walkInterior)walkSky?.update(direction,daylight);
     sun.position.copy(sun.target.position).addScaledVector(direction,shadowDistance);
     for(const material of preparedMaterials)if(material.userData.indirectDaylightIntensity)material.lightMapIntensity=material.userData.indirectDaylightIntensity*daylight;
+    // Pişmiş ışık aynı saati, güneşi ve gök rengini okur. Lambalar açıkken
+    // gece haritası akşama doğru tam güce çıkar (gündüz odada payı küçük).
+    lightmaps?.setLight({hour,daylight,sunColor:sun.color,sunIntensity:sun.intensity,skyColor:hemisphere.color,
+      night:lightsEnabled?.3+.7*(1-daylight):0});
     // Task 1.2-c: while the hour slider DRAGS, only the sun moves; the
     // shadow map re-renders on discrete events (slider release, storey
     // change, view change) through requestShadowUpdate. The legacy pipeline
@@ -315,6 +322,7 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
   }
   return {
     setRoomReflections(value){roomReflections=value;updateReflections();},
+    setLightmaps(value){lightmaps=value;lightmaps?.setSkyStrength(lightmapSkyStrength());setTime();},
     setElectricLight(value){electricLight=value;electricLight?.setEnabled(lightsEnabled);},
     setGroundLight(value){groundLight=value;groundLight?.setSun(direction,dynamicShadowActive());},
     setFloorLight(value){floorLight=value;floorLight?.setSun(direction,dynamicShadowActive());},
@@ -428,6 +436,7 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
         scene.backgroundIntensity=active?1:FEATURES.warmGradeV1?.85:.55;
       }
       if(active){reflectionFloor=activeInteriorFloor;updateReflections();}
+      lightmaps?.setSkyStrength(lightmapSkyStrength());
       for(const material of preparedMaterials)setInteriorMode(material,active);
       setTime(hour,day);
     },
@@ -566,6 +575,8 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
       // teması gerçekçiliğin kendisi (edetri: AO eksikliği "en büyük ele veren").
       if(FEATURES.warmGradeV1&&ao)ao.blendIntensity=view==='neighborhood'&&!FEATURES.daylightV2?0.4:0.8;
       reflectionFloor=/^f[0-3]$/.test(view)?Number(view.slice(1)):null;updateReflections();
+      // Kat kesitinde tavan açık: pişmiş gök (tavanlı hesap) orada eski açık ortamla karışır
+      lightmapView=view;lightmaps?.setSkyStrength(lightmapSkyStrength());
       // The quality profile has already been told the view by selectView;
       // enable/size follow it, then the camera wraps the subject.
       applyShadowQuality(quality.value);

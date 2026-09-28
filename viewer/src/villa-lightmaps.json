@@ -1,0 +1,157 @@
+{
+ "uretim": "tools/batch-delivery/make-lightmaps-web.mjs",
+ "kok": "lightmaps/",
+ "kodlama": "x = (v*v) * olcek (doğrusal UASTC, sRGB değil)",
+ "atlaslar": {
+  "duvar": {
+   "dosya": "BUILDING-opt-v4",
+   "haritalar": {
+    "gok": {
+     "dosya": "duvar_gok.ktx2",
+     "boyut": 2048,
+     "olcek": 0.249097,
+     "bytes": 1189943
+    },
+    "gunes_09": {
+     "dosya": "duvar_gunes_09.ktx2",
+     "boyut": 1024,
+     "olcek": 0.00722,
+     "bytes": 405592
+    },
+    "gunes_13": {
+     "dosya": "duvar_gunes_13.ktx2",
+     "boyut": 1024,
+     "olcek": 0.011975,
+     "bytes": 370304
+    },
+    "gunes_17": {
+     "dosya": "duvar_gunes_17.ktx2",
+     "boyut": 1024,
+     "olcek": 0.019798,
+     "bytes": 332808
+    },
+    "gece": {
+     "dosya": "duvar_gece.ktx2",
+     "boyut": 2048,
+     "olcek": 2.577808,
+     "bytes": 1003312
+    }
+   }
+  },
+  "zemin": {
+   "dosya": "BUILDING-opt-v4",
+   "haritalar": {
+    "gok": {
+     "dosya": "zemin_gok.ktx2",
+     "boyut": 2048,
+     "olcek": 0.5554,
+     "bytes": 1458635
+    },
+    "gunes_09": {
+     "dosya": "zemin_gunes_09.ktx2",
+     "boyut": 1024,
+     "olcek": 0.04506,
+     "bytes": 437400
+    },
+    "gunes_13": {
+     "dosya": "zemin_gunes_13.ktx2",
+     "boyut": 1024,
+     "olcek": 0.05967,
+     "bytes": 410771
+    },
+    "gunes_17": {
+     "dosya": "zemin_gunes_17.ktx2",
+     "boyut": 1024,
+     "olcek": 0.05038,
+     "bytes": 411675
+    },
+    "gece": {
+     "dosya": "zemin_gece.ktx2",
+     "boyut": 2048,
+     "olcek": 2.770433,
+     "bytes": 1306186
+    }
+   }
+  },
+  "cephe": {
+   "dosya": "BUILDING-opt-v4",
+   "haritalar": {
+    "gok": {
+     "dosya": "cephe_gok.ktx2",
+     "boyut": 1024,
+     "olcek": 0.93747,
+     "bytes": 512432
+    },
+    "gunes_09": {
+     "dosya": "cephe_gunes_09.ktx2",
+     "boyut": 1024,
+     "olcek": 0.075603,
+     "bytes": 449194
+    },
+    "gunes_13": {
+     "dosya": "cephe_gunes_13.ktx2",
+     "boyut": 1024,
+     "olcek": 0.071979,
+     "bytes": 459974
+    },
+    "gunes_17": {
+     "dosya": "cephe_gunes_17.ktx2",
+     "boyut": 1024,
+     "olcek": 0.071063,
+     "bytes": 415893
+    },
+    "gece": {
+     "dosya": "cephe_gece.ktx2",
+     "boyut": 1024,
+     "olcek": 0.585491,
+     "bytes": 214854
+    }
+   }
+  },
+  "bahce": {
+   "dosya": "GARDEN-opt-v2",
+   "haritalar": {
+    "gok": {
+     "dosya": "bahce_gok.ktx2",
+     "boyut": 1024,
+     "olcek": 0.892398,
+     "bytes": 400651
+    },
+    "gunes_09": {
+     "dosya": "bahce_gunes_09.ktx2",
+     "boyut": 1024,
+     "olcek": 0.071852,
+     "bytes": 298417
+    },
+    "gunes_13": {
+     "dosya": "bahce_gunes_13.ktx2",
+     "boyut": 1024,
+     "olcek": 0.082252,
+     "bytes": 309523
+    },
+    "gunes_17": {
+     "dosya": "bahce_gunes_17.ktx2",
+     "boyut": 1024,
+     "olcek": 0.070832,
+     "bytes": 283538
+    },
+    "gece": {
+     "dosya": "bahce_gece.ktx2",
+     "boyut": 1024,
+     "olcek": 0.141876,
+     "bytes": 194428
+    }
+   }
+  }
+ },
+ "modeller": {
+  "BUILDING-opt-v5.glb": {
+   "kaynak": "BUILDING-opt-v4-lm.glb",
+   "bytes": 6131984
+  },
+  "GARDEN-opt-v3.glb": {
+   "kaynak": "GARDEN-opt-v2-lm.glb",
+   "bytes": 7143336
+  }
+ }
+}
