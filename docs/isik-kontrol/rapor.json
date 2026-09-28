@@ -1,0 +1,166 @@
+{
+ "site": "https://angora.mergvs.com/",
+ "hatalar": [],
+ "kareler": [
+  {
+   "kare": "C03_13.jpg",
+   "eski": {
+    "url": "https://angora.mergvs.com/?profile=desktop&camera=C03&hour=13&features=lightmaps:0",
+    "sure_sn": 27.2,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x00002860) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "lightmaps": null
+   },
+   "pismis": {
+    "url": "https://angora.mergvs.com/?profile=desktop&camera=C03&hour=13&features=lightmaps:1",
+    "sure_sn": 18.8,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x00002860) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "lightmaps": {
+     "loaded": true,
+     "applied": 28,
+     "skyStrength": 1,
+     "hour": 12.9999999972
+    }
+   }
+  },
+  {
+   "kare": "C04_17.jpg",
+   "eski": {
+    "url": "https://angora.mergvs.com/?profile=desktop&camera=C04&hour=17&features=lightmaps:0",
+    "sure_sn": 11.9,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x00002860) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "lightmaps": null
+   },
+   "pismis": {
+    "url": "https://angora.mergvs.com/?profile=desktop&camera=C04&hour=17&features=lightmaps:1",
+    "sure_sn": 10.7,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x00002860) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "lightmaps": {
+     "loaded": true,
+     "applied": 28,
+     "skyStrength": 1,
+     "hour": 16.9999999956
+    }
+   }
+  },
+  {
+   "kare": "C06_13.jpg",
+   "eski": {
+    "url": "https://angora.mergvs.com/?profile=desktop&camera=C06&hour=13&features=lightmaps:0",
+    "sure_sn": 7.9,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x00002860) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "lightmaps": null
+   },
+   "pismis": {
+    "url": "https://angora.mergvs.com/?profile=desktop&camera=C06&hour=13&features=lightmaps:1",
+    "sure_sn": 8.6,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x00002860) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "lightmaps": {
+     "loaded": true,
+     "applied": 28,
+     "skyStrength": 1,
+     "hour": 12.9999999972
+    }
+   }
+  },
+  {
+   "kare": "C10_13.jpg",
+   "eski": {
+    "url": "https://angora.mergvs.com/?profile=desktop&camera=C10&hour=13&features=lightmaps:0",
+    "sure_sn": 12.2,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x00002860) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "lightmaps": null
+   },
+   "pismis": {
+    "url": "https://angora.mergvs.com/?profile=desktop&camera=C10&hour=13&features=lightmaps:1",
+    "sure_sn": 9.0,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x00002860) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "lightmaps": {
+     "loaded": true,
+     "applied": 28,
+     "skyStrength": 1,
+     "hour": 12.9999999972
+    }
+   }
+  },
+  {
+   "kare": "C11_09.jpg",
+   "eski": {
+    "url": "https://angora.mergvs.com/?profile=desktop&camera=C11&hour=9&features=lightmaps:0",
+    "sure_sn": 8.1,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x00002860) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "lightmaps": null
+   },
+   "pismis": {
+    "url": "https://angora.mergvs.com/?profile=desktop&camera=C11&hour=9&features=lightmaps:1",
+    "sure_sn": 11.3,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x00002860) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "lightmaps": {
+     "loaded": true,
+     "applied": 28,
+     "skyStrength": 1,
+     "hour": 8.9999999988
+    }
+   }
+  },
+  {
+   "kare": "C12_13.jpg",
+   "eski": {
+    "url": "https://angora.mergvs.com/?profile=desktop&camera=C12&hour=13&features=lightmaps:0",
+    "sure_sn": 8.3,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x00002860) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "lightmaps": null
+   },
+   "pismis": {
+    "url": "https://angora.mergvs.com/?profile=desktop&camera=C12&hour=13&features=lightmaps:1",
+    "sure_sn": 9.3,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x00002860) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "lightmaps": {
+     "loaded": true,
+     "applied": 28,
+     "skyStrength": 1,
+     "hour": 12.9999999972
+    }
+   }
+  },
+  {
+   "kare": "C10_21.jpg",
+   "eski": {
+    "url": "https://angora.mergvs.com/?profile=desktop&camera=C10&hour=21&features=lightmaps:0",
+    "sure_sn": 7.9,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x00002860) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "lightmaps": null
+   },
+   "pismis": {
+    "url": "https://angora.mergvs.com/?profile=desktop&camera=C10&hour=21&features=lightmaps:1",
+    "sure_sn": 10.8,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x00002860) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "lightmaps": {
+     "loaded": true,
+     "applied": 28,
+     "skyStrength": 1,
+     "hour": 20.999999994
+    }
+   }
+  },
+  {
+   "kare": "C03_21.jpg",
+   "eski": {
+    "url": "https://angora.mergvs.com/?profile=desktop&camera=C03&hour=21&features=lightmaps:0",
+    "sure_sn": 9.2,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x00002860) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "lightmaps": null
+   },
+   "pismis": {
+    "url": "https://angora.mergvs.com/?profile=desktop&camera=C03&hour=21&features=lightmaps:1",
+    "sure_sn": 11.0,
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4070 Laptop GPU (0x00002860) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "lightmaps": {
+     "loaded": true,
+     "applied": 28,
+     "skyStrength": 1,
+     "hour": 20.999999994
+    }
+   }
+  }
+ ]
+}
