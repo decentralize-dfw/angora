@@ -85,12 +85,32 @@ if opt('--dokular'):
         h = h.lstrip('#'); c = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
         return [x / 12.92 if x <= .04045 else ((x + .055) / 1.055) ** 2.4 for x in c]
     by_mat = {}
-    for rec in json.load(open(spec_path, encoding='utf-8')):
-        if rec.get('bulunamadi'): continue
+    records = [r for r in json.load(open(spec_path, encoding='utf-8')) if not r.get('bulunamadi')]
+    # "kutular": aynı malzeme farklı yüzeylerde (ör. X = tezgâh + duvar seramiği) -> kutunun içindeki
+    # yüzler o kayda özel bir malzeme kopyasına alınır. Kutusuz kayıt malzemenin geri kalanını giydirir.
+    import bmesh
+    for ri, rec in enumerate(records):
+        if not rec.get('kutular'): continue
+        for name in rec.get('malzemeler', []):
+            for obj in [o for o in scene.objects if o.type == 'MESH']:
+                slots = [i for i, s in enumerate(obj.material_slots) if s.material and s.material.name.rsplit('.', 1)[0] == name.rsplit('.', 1)[0]]
+                if not slots: continue
+                copy = obj.material_slots[slots[0]].material.copy(); copy.name = f'{name}__{rec["klasor"]}'
+                obj.data.materials.append(copy); new_index = len(obj.material_slots) - 1
+                mw = obj.matrix_world; moved = 0
+                for poly in obj.data.polygons:
+                    if poly.material_index not in slots: continue
+                    c = mw @ poly.center
+                    if any(all(b['min'][i] <= c[i] <= b['max'][i] for i in range(3)) for b in rec['kutular']):
+                        poly.material_index = new_index; moved += 1
+                by_mat[copy.name] = rec
+                log('kutu', name, '->', copy.name, moved, 'yüz')
+    for rec in records:
+        if rec.get('kutular'): continue
         for name in rec.get('malzemeler', []): by_mat.setdefault(name, rec)
     done = set()
     for mat in bpy.data.materials:
-        rec = by_mat.get(mat.name) or by_mat.get(mat.name.rsplit('.', 1)[0])
+        rec = by_mat.get(mat.name) or (None if '__' in mat.name else by_mat.get(mat.name.rsplit('.', 1)[0]))
         if not rec or not mat.node_tree or mat.name in done: continue
         nt = mat.node_tree; bsdf = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
         if not bsdf: continue
