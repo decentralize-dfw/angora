@@ -29,21 +29,27 @@ def mesh(name,vs,fs,mat):
  o=bpy.data.objects.new(name,me);C.objects.link(o);me.materials.append(mat)
  return o
 def kutu(name,pos,size,mat,pah=.005):
- bpy.ops.mesh.primitive_cube_add(size=1,location=pos);ob=bpy.context.object;ob.name=name
- for c in list(ob.users_collection):c.objects.unlink(ob)
- C.objects.link(ob);ob.data.materials.append(mat);ob.dimensions=size
- bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
+ bm=bmesh.new();bmesh.ops.create_cube(bm,size=1)
+ for v in bm.verts:
+  for i in range(3):v.co[i]*=size[i]
  if pah:
-  mod=ob.modifiers.new('Kenar profili','BEVEL');mod.width=pah;mod.segments=3
-  bpy.ops.object.modifier_apply(modifier=mod.name)
- ob.select_set(False);return ob
+  bmesh.ops.bevel(bm,geom=list(bm.edges),offset=min(pah,min(size)/2*.9),segments=3,affect='EDGES')
+ bmesh.ops.recalc_face_normals(bm,faces=list(bm.faces))
+ me=bpy.data.meshes.new(name);bm.to_mesh(me);bm.free()
+ ob=bpy.data.objects.new(name,me);C.objects.link(ob);ob.location=pos;me.materials.append(mat)
+ return ob
 def boru(name,pts,r,mat,cyclic=False):
- cu=bpy.data.curves.new(name,'CURVE');cu.dimensions='3D';cu.bevel_depth=r;cu.bevel_resolution=2
- sp=cu.splines.new('POLY');sp.points.add(len(pts)-1)
- for p,co in zip(sp.points,pts):p.co=(*co,1)
- sp.use_cyclic_u=cyclic;ob=bpy.data.objects.new(name,cu);C.objects.link(ob);cu.materials.append(mat)
- bpy.ops.object.select_all(action='DESELECT');bpy.context.view_layer.objects.active=ob;ob.select_set(True)
- bpy.ops.object.convert(target='MESH');ob.select_set(False)
+ pts=[Vector(p) for p in pts];vs=[];fs=[];n=8
+ for i,p in enumerate(pts):
+  t=(pts[min(i+1,len(pts)-1)]-pts[max(0,i-1)]).normalized()
+  ref=Vector((0,0,1)) if abs(t.z)<.95 else Vector((1,0,0))
+  u=t.cross(ref).normalized();v=t.cross(u).normalized()
+  for j in range(n):vs.append(tuple(p+r*(u*math.cos(j*2*math.pi/n)+v*math.sin(j*2*math.pi/n))))
+ for i in range(len(pts) if cyclic else len(pts)-1):
+  k=(i+1)%len(pts)
+  for j in range(n):fs.append((i*n+j,i*n+(j+1)%n,k*n+(j+1)%n,k*n+j))
+ if not cyclic:fs.extend([tuple(reversed(range(n))),tuple((len(pts)-1)*n+j for j in range(n))])
+ ob=mesh(name,vs,fs,mat)
  for p in ob.data.polygons:p.use_smooth=True
  return ob
 def bitir(modul,notlar):

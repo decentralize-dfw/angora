@@ -1,8 +1,8 @@
 {
  "modul": "M2",
- "nesneler": 931,
- "ucgen": 166800,
- "en_buyuk": 1024,
+ "nesneler": 2019,
+ "ucgen": 413160,
+ "en_buyuk": 1036,
  "notlar": {
   "katlar": 3,
   "riht": 55,
@@ -10,8 +10,25 @@
    18,
    34,
    42,
-   47
+   47,
+   29
   ],
+  "varyantlar": {
+   "bodrum": [
+    47
+   ],
+   "giris": [
+    42,
+    40
+   ],
+   "birinci": [
+    18,
+    34
+   ],
+   "cati": [
+    29
+   ]
+  },
   "olcum": "mimari-olcum.json"
  }
 }
