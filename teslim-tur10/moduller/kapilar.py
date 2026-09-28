@@ -1,0 +1,63 @@
+"""M3. Modelde ölçülen panel kapı kasaları; foto 17/47 altı panelli kanat.
+Kapı başına kasa, çift yüz pervaz, kanat, altı göbek, üç menteşe, pirinç topuz.
+"""
+import sys,math,json
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).parent))
+import ortak as o
+from mathutils import Vector
+o.basla('M3_')
+wood=o.malzeme('M3_Koyu_ceviz_kapi',(.067,.028,.012),.36)
+panel=o.malzeme('M3_Ceviz_gobek',(.080,.035,.016),.38)
+brass=o.malzeme('M3_Pirinc_donanim',(.39,.25,.09),.25,.85)
+d=json.loads((o.W/'mimari-olcum.json').read_text(encoding='utf-8'))['parcalar']
+frames=[p for p in d if p['mat']==['WOODY-DARK.001'] and p['nv'] in [44,55] and 2.09<p['max'][2]-p['min'][2]<2.12]
+leaves=[p for p in d if p['mat']==['WOODY-DARK.001'] and p['nv']==280 and 1.95<p['max'][2]-p['min'][2]<2.02]
+boxes=json.loads((o.W/'silme-kutulari.json').read_text(encoding='utf-8'));boxes=[b for b in boxes if not b['ad'].startswith('M3_')]
+records=[]
+def localbox(name,c,ux,uy,u,v,z,su,sv,sz,mat,pah=.004):
+ pos=c+ux*u+uy*v+Vector((0,0,z));ob=o.kutu(name,pos,(su,sv,sz),mat,pah);ob.rotation_euler.z=math.atan2(ux.y,ux.x);return ob
+for i,fr in enumerate(frames):
+ lo,hi=Vector(fr['min']),Vector(fr['max']);center=(lo+hi)/2;size=hi-lo;floor=lo.z
+ lf=min(leaves,key=lambda q:abs(q['min'][2]-floor)*10+(Vector(q['min'])-lo).length)
+ tag=f'M3_{i+1:02}';axis=0 if size.x>size.y else 1
+ angle=0 if axis==0 else math.pi/2
+ if .5<size.x<.8 and .5<size.y<.8:angle=-math.pi/4
+ ux=Vector((math.cos(angle),math.sin(angle),0));uy=Vector((-ux.y,ux.x,0));c=Vector((center.x,center.y,floor))
+ width=max(size.x,size.y) if abs(angle)!=math.pi/4 else .955
+ for side in [-1,1]:
+  localbox(tag+'_kasa',c,ux,uy,side*(width/2-.025),0,1.015,.05,.15,2.03,wood)
+  for face in [-1,1]:localbox(tag+'_pervaz',c,ux,uy,side*(width/2-.035),face*.089,1.05,.07,.019,2.1,wood)
+ localbox(tag+'_ust_kasa',c,ux,uy,0,0,2.045,width,.15,.06,wood)
+ for face in [-1,1]:localbox(tag+'_ust_pervaz',c,ux,uy,0,face*.089,2.065,width,.019,.07,wood)
+ a,b=Vector(lf['min']),Vector(lf['max']);lc=(a+b)/2;ls=b-a;la=0 if ls.x>ls.y else math.pi/2
+ if ls.x>.3 and ls.y>.3:la=math.pi/4
+ # Foto 17: kanat sağ pervaza bağlı, oda içine açılıyor.
+ if abs(floor-6.3713)<.01 and abs(center.y+1.5723)<.05:lc.x=hi.x-.069
+ lx=Vector((math.cos(la),math.sin(la),0));ly=Vector((-lx.y,lx.x,0));lc.z=floor+.008
+ w=max(ls.x,ls.y) if la!=math.pi/4 else math.hypot(ls.x,ls.y);h=1.992
+ localbox(tag+'_kanat',lc,lx,ly,0,0,h/2,w,.037,h,wood,.005)
+ # 2 x 3 paneller: kısa üst, uzun orta, orta boy alt.
+ for face in [-1,1]:
+  for col in [-1,1]:
+   for low,high in [(.15,.61),(.79,1.49),(1.66,1.86)]:
+    pc=col*w*.235;pw=w*.36;zh=(low+high)/2
+    localbox(tag+'_gobek',lc,lx,ly,pc,face*.023,zh,pw,.014,high-low,panel,.009)
+    for sign in [-1,1]:
+     localbox(tag+'_dik_profil',lc,lx,ly,pc+sign*(pw/2+.012),face*.032,zh,.018,.015,high-low+.045,wood,.004)
+     localbox(tag+'_yatay_profil',lc,lx,ly,pc,face*.032,zh+sign*((high-low)/2+.012),pw+.045,.015,.018,wood,.004)
+  hc=lc+lx*(w/2-.085)+ly*(face*.045)+Vector((0,0,.96))
+  o.boru(tag+'_topuz_mili',[hc, hc+ly*(face*.035)],.010,brass)
+  # Elips döndürülmüş basık küre: topuz; ölçü fotoğraftaki ~5 cm.
+  import bpy
+  bpy.ops.mesh.primitive_uv_sphere_add(segments=20,ring_count=10,radius=.026,location=hc+ly*(face*.040));ob=bpy.context.object
+  for coll in list(ob.users_collection):coll.objects.unlink(ob)
+  o.C.objects.link(ob);ob.name=tag+'_pirinc_topuz';ob.data.materials.append(brass);ob.select_set(False)
+ for z in [.22,1.0,1.78]:
+  hc=lc-lx*(w/2)+Vector((0,0,z));o.boru(tag+'_mentese',[hc-Vector((0,0,.034)),hc+Vector((0,0,.034))],.009,brass)
+ for kind,q in [('kasa',fr),('kanat',lf)]:
+  boxes.append({'ad':tag+'_'+kind,'katman':'mimari','min':[v-.006 for v in q['min']],'max':[v+.006 for v in q['max']],'malzemeler':['WOODY-DARK.001']})
+ records.append({'no':i+1,'kasa':fr,'kanat':lf,'genislik':w})
+(o.W/'silme-kutulari.json').write_text(json.dumps(boxes,ensure_ascii=False,indent=1),encoding='utf-8')
+(o.W/'kapi-yerlesimleri.json').write_text(json.dumps(records,ensure_ascii=False,indent=1),encoding='utf-8')
+o.bitir('M3',{'panel_kapi':len(frames),'panel_duzeni':'2 sütun × 3 sıra','camli_kapi':'mevcut cam ve floral desen korundu'})

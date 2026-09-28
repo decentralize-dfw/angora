@@ -1,0 +1,17 @@
+{
+ "modul": "M2",
+ "nesneler": 931,
+ "ucgen": 166800,
+ "en_buyuk": 1024,
+ "notlar": {
+  "katlar": 3,
+  "riht": 55,
+  "fotolar": [
+   18,
+   34,
+   42,
+   47
+  ],
+  "olcum": "mimari-olcum.json"
+ }
+}
