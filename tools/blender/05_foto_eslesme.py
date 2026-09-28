@@ -52,29 +52,33 @@ report, errors, samples = [], [], {}
 with sync_playwright() as p:
     browser = p.chromium.launch(channel='chrome', headless='--gorunur' not in sys.argv,
                                 args=['--enable-gpu', '--ignore-gpu-blocklist', '--use-angle=d3d11'])
+    # Site BİR KEZ açılır, 40 fotoğraf aynı sayfada dolaşılır (her kare için
+    # yeniden yükleme kare başı 2-3 dk sürüyordu; kat değişimi photoView'de).
+    page = browser.new_page(viewport={'width': 960, 'height': H})
+    page.on('pageerror', lambda e: errors.append(str(e)))
+    t0 = time.time()
+    page.goto(f'{SITE}?profile=desktop&stats=1&view=f1&hour=13&features=lightmaps:{LIGHTMAPS}', wait_until='domcontentloaded')
+    page.wait_for_function('() => document.querySelector("#viewport")?.dataset.qaReport', timeout=600000, polling=1000)
+    page.evaluate('() => window.__angoraLightmaps ? window.__angoraLightmaps.ready : true')
+    # arayüz panelleri karşılaştırmayı örtmesin
+    page.add_style_tag(content='body > *:not(#app) {visibility:hidden !important} '
+                               '#app > *:not(#viewport) {visibility:hidden !important}')
+    print('site yüklendi', round(time.time() - t0, 1), 'sn', flush=True)
+    gpu = page.evaluate('''() => { const gl = document.createElement('canvas').getContext('webgl2');
+      const x = gl && gl.getExtension('WEBGL_debug_renderer_info'); return x ? gl.getParameter(x.UNMASKED_RENDERER_WEBGL) : null; }''')
     for pid, file, floor, place in points():
         photo = Image.open(os.path.join(REPO, 'photogallery', file)).convert('RGB')
         W = round(H * photo.width / photo.height)
-        page = browser.new_page(viewport={'width': W, 'height': H})
-        page.on('pageerror', lambda e: errors.append(str(e)))
         t0 = time.time()
-        page.goto(f'{SITE}?profile=desktop&stats=1&view=f{floor}&hour=13&features=lightmaps:{LIGHTMAPS}', wait_until='domcontentloaded')
-        page.wait_for_function('() => document.querySelector("#viewport")?.dataset.qaReport', timeout=300000, polling=1000)
-        page.evaluate('() => window.__angoraLightmaps ? window.__angoraLightmaps.ready : true')
+        page.set_viewport_size({'width': W, 'height': H})
         try:
             info = page.evaluate('([id, fov]) => window.__angoraQA.photoView(id, fov)', [pid, LENS])
         except Exception as e:
-            errors.append(f'{file}: {e}'); page.close(); continue
-        # arayüz panelleri karşılaştırmayı örtmesin
-        page.add_style_tag(content='body > *:not(#app) {visibility:hidden !important} '
-                                   '#app > *:not(#viewport) {visibility:hidden !important}')
+            errors.append(f'{file}: {e}'); continue
         page.wait_for_timeout(2500)
         shot = os.path.join(OUT, f'_m{pid}.png'); page.screenshot(path=shot)
-        gpu = page.evaluate('''() => { const gl = document.createElement('canvas').getContext('webgl2');
-          const x = gl && gl.getExtension('WEBGL_debug_renderer_info'); return x ? gl.getParameter(x.UNMASKED_RENDERER_WEBGL) : null; }''')
         grid = [((i + .5) / 32, (j + .5) / 24) for j in range(2, 24) for i in range(32)]   # üst etiket şeridi hariç
         picks = page.evaluate('pts => window.__angoraQA.pickMaterials(pts)', grid)
-        page.close()
         model = Image.open(shot).convert('RGB'); os.remove(shot)
         small_photo = photo.resize((W, H)).filter(ImageFilter.MedianFilter(5)); small_model = model.filter(ImageFilter.MedianFilter(5))
         for (u, v), hit in zip(grid, picks):
@@ -87,6 +91,7 @@ with sync_playwright() as p:
         name = f'foto_{pid:02d}.jpg'; pair.save(os.path.join(OUT, name), quality=86)
         report.append({'kare': name, 'foto': file, 'yer': place, **info, 'lens': LENS, 'sure_sn': round(time.time() - t0, 1), 'gpu': gpu})
         print(name, place, info.get('room'), round(time.time() - t0, 1), 'sn |', gpu, flush=True)
+    page.close()
     browser.close()
 def median(values):
     return [sorted(c)[len(c) // 2] for c in zip(*values)]
