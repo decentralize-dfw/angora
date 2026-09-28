@@ -15,6 +15,10 @@ import places from './region-places.json';
 // The whole 2 km drawn as a plan - every road and building around the villa,
 // from OSM via the fetch-osm-region workflow ("2km boyunca planı çiz").
 import streets from './region-streets.json';
+// 28.09: sitenin kendisi ürün sahibinin 3D modellerinden, OSM'e ÖLÇÜLEREK
+// hizalanmış (tools/batch-delivery/make-region-site.mjs). Eski R44 katmanı
+// (region-plan.json: yollar PNG + eski kütleler) OSM ile üst üste biniyordu.
+import site from './region-site.json';
 import { t, currentLang } from './i18n.js';
 import { listing } from './listing.js';
 
@@ -73,7 +77,12 @@ export function createRegionMap(host) {
   svg.append(world);
   const labels = document.createElement('div');
   labels.className = 'rm-labels';
-  el.append(svg, labels);
+  // Sitenin DIŞI: %20 beyaz + 8 px bulanıklık. Sınır çizgisinin üstüne
+  // gelince ya da sesli rehber "Angora Evleri" derken açılır; kırpma yolu
+  // layout() içinde sınırın ekran izdüşümünden kurulur.
+  const outside = document.createElement('div');
+  outside.className = 'rm-outside';
+  el.append(svg, outside, labels);
 
   const shape = (tag, cls, attrs = {}) => {
     const n = document.createElementNS(svgNS, tag);
@@ -94,11 +103,19 @@ export function createRegionMap(host) {
     return s.trim();
   };
   if (streets.roads.length) {
+    // Modelin çizdiği yerde OSM'in kopyası çizilmez: model evine düşen OSM
+    // binası ve modelin asfaltına oturan OSM yol parçası atlanır.
+    const hiddenBuildings = new Set(site.osm.hideBuildings), replacedRoads = new Set(site.osm.replacedRoads);
     for (const g of streets.green) shape('polygon', 'rm-green', { points: flatPoints(g) });
-    for (const b of streets.buildings) shape('polygon', 'rm-bldg', { points: flatPoints(b) });
-    for (const cls of [3, 2, 1, 0]) for (const [c, , pts] of streets.roads) {
-      if (c !== cls) continue;
-      shape('polyline', `rm-road rm-road-${c}`, { points: flatPoints(pts) });
+    streets.buildings.forEach((b, i) => { if (!hiddenBuildings.has(i)) shape('polygon', 'rm-bldg', { points: flatPoints(b) }); });
+    // sitenin gerçek asfaltı (bordür dahil), yol çizgilerinin altında
+    shape('path', 'rm-site-road', { d: site.roads.map(r => 'M' + poly(r) + 'Z').join(' '), 'fill-rule': 'evenodd' });
+    for (const cls of [3, 2, 1, 0]) {
+      streets.roads.forEach(([c, , pts], i) => {
+        if (c !== cls || replacedRoads.has(i)) return;
+        shape('polyline', `rm-road rm-road-${c}`, { points: flatPoints(pts) });
+      });
+      for (const [c, pts] of site.osm.keptRuns) if (c === cls) shape('polyline', `rm-road rm-road-${c}`, { points: flatPoints(pts) });
     }
     // the settlement's own OSM polygon: Angora Evleri, outlined
     if (streets.boundary) shape('polygon', 'rm-bound', { points: flatPoints(streets.boundary.ring) });
@@ -106,9 +123,7 @@ export function createRegionMap(host) {
     shape('image', 'rm-base', { href: places.base.png, x: places.base.x, y: places.base.y,
       width: places.base.w, height: places.base.h, preserveAspectRatio: 'none' });
   }
-  shape('image', 'rm-roads', { href: plan.roads.png, x: plan.roads.x, y: plan.roads.y,
-    width: plan.roads.w, height: plan.roads.h, preserveAspectRatio: 'none' });
-  shape('polygon', 'rm-plot', { points: poly(plan.plot) });
+  shape('polygon', 'rm-plot', { points: poly(site.plot) });
   // The narrated tour's light on the settlement. Cut along Angora Evleri's own
   // boundary - streets.boundary.ring, the OSM way this map already draws as
   // the dashed outline - and drawn inside the world group, so it keeps its
@@ -143,7 +158,8 @@ export function createRegionMap(host) {
   const dim = shape('rect', 'rm-dim', {x: -12000, y: -12000, width: 24000, height: 24000,
     mask: 'url(#rm-plot-mask)'});
   dim.setAttribute('visibility', 'hidden');
-  for (const b of plan.buildings) shape('polygon', 'rm-building', { points: poly(b) });
+  for (const b of site.houses) shape('polygon', 'rm-bldg rm-site-bldg', { points: poly(b) });
+  if (site.pool) shape('polygon', 'rm-pool', { points: poly(site.pool) });
   // the atlas's named amenities: every dot carries its own title on a
   // rounded card (the bare halo read as nothing), in its group's colour.
   // Which titles actually print at a given radius is decided in layout(),
@@ -164,8 +180,11 @@ export function createRegionMap(host) {
   }
   dotLabels.sort((a, b) => a.d - b.d);
   for (const r of [500, 1000, 2000]) shape('circle', 'rm-ring', { cx: 0, cy: 0, r, 'vector-effect': 'non-scaling-stroke' });
-  const pulse = shape('circle', 'rm-pulse', { cx: 0, cy: 0, r: 26 });
-  shape('polygon', 'rm-villa', { points: poly(plan.villa) });
+  // Villa, kendi gerçek yerinde (harita merkezi adres noktası; villa ondan
+  // ~38 m doğu-güneyde).
+  const villaAt = site.villa.reduce((a, [x, y]) => [a[0] + x / site.villa.length, a[1] + y / site.villa.length], [0, 0]);
+  const pulse = shape('circle', 'rm-pulse', { cx: villaAt[0], cy: villaAt[1], r: 26 });
+  shape('polygon', 'rm-villa', { points: poly(site.villa) });
   for (const p of places.curated) {
     if (p.d <= 2000) dotMarks.push(shape('circle', `rm-poi rm-g${p.g}`, { cx: p.x, cy: p.y, r: 4, 'vector-effect': 'non-scaling-stroke' }));
   }
@@ -180,9 +199,9 @@ export function createRegionMap(host) {
     chips.push({ el: c, mx, my, clamp });
     return c;
   };
-  chip('rm-chip-villa', '<strong>Villa 21</strong>', 4, -16);
+  chip('rm-chip-villa', '<strong>Villa 21</strong>', villaAt[0] + 4, villaAt[1] - 16);
   for (const r of [500, 1000, 2000]) chip('rm-chip-ring', r < 1000 ? '500 m' : `${r / 1000} km`, 0, -r);
-  for (const a of AREAS) chip('rm-chip-area', a.name, a.x, a.y);
+  for (const a of AREAS) chip('rm-chip-area' + (a.name === 'Angora Evleri' ? ' rm-chip-site' : ''), a.name, a.x, a.y);
   for (const p of places.curated) {
     const bearing = Math.atan2(p.y, p.x) * 180 / Math.PI;
     const c = chip('rm-chip-poi', `${p.name} <b>${km(p.d)}</b>` +
@@ -259,6 +278,32 @@ export function createRegionMap(host) {
   if(description){description.replaceChildren(info);info.classList.add('rm-info-inline');el.append(filters);}
   else el.append(info, filters);
 
+  // Angora Evleri sınırı (OSM): ekran izdüşümü her layout'ta yenilenir.
+  const ring = streets.boundary ? (() => { const r = []; const f = streets.boundary.ring; for (let i = 0; i < f.length; i += 2) r.push([f[i], f[i + 1]]); return r; })() : null;
+  let screenRing = [];
+  let hoverOn = false, tourOn = false;
+  const siteOn = () => el.classList.toggle('rm-site-on', hoverOn || tourOn);
+  const ringDistance = (px, py) => {
+    let best = Infinity;
+    for (let i = 0; i < screenRing.length; i++) {
+      const [ax, ay] = screenRing[i], [bx, by] = screenRing[(i + 1) % screenRing.length];
+      const dx = bx - ax, dy = by - ay, l2 = dx * dx + dy * dy || 1;
+      const t = Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / l2));
+      best = Math.min(best, Math.hypot(ax + t * dx - px, ay + t * dy - py));
+    }
+    return best;
+  };
+  const insideRing = (px, py) => { let inside = false; for (let i = 0, j = screenRing.length - 1; i < screenRing.length; j = i++) { const [xi, yi] = screenRing[i], [xj, yj] = screenRing[j]; if ((yi > py) !== (yj > py) && px < (xj - xi) * (py - yi) / (yj - yi) + xi) inside = !inside; } return inside; };
+  // Çizginin üstüne gelince açılır; imleç sitenin içinde ya da çizgiye
+  // yakın kaldıkça açık kalır, dışarı uzaklaşınca kapanır.
+  el.addEventListener('pointermove', (event) => {
+    if (!screenRing.length || event.pointerType === 'touch') return;
+    const r = el.getBoundingClientRect(), px = event.clientX - r.left, py = event.clientY - r.top;
+    const d = ringDistance(px, py);
+    const next = d < 10 || (hoverOn && (d < 36 || insideRing(px, py)));
+    if (next !== hoverOn) { hoverOn = next; siteOn(); }
+  });
+  el.addEventListener('pointerleave', () => { if (hoverOn) { hoverOn = false; siteOn(); } });
   let radius = 1000;
   // The map is north-up at rest. The narrated tour turns it slowly about
   // the villa - its own centre - while the opening sentences place the
@@ -278,6 +323,10 @@ export function createRegionMap(host) {
     const cosB = Math.cos(bearing * Math.PI / 180), sinB = Math.sin(bearing * Math.PI / 180);
     const turn = (x, y) => [x * cosB - y * sinB, x * sinB + y * cosB];
     compass.style.setProperty('--rm-bearing', `${bearing}deg`);
+    if (ring) {
+      screenRing = ring.map(([x, y]) => { const [tx, ty] = turn(x, y); return [cx + tx * s, cy + ty * s]; });
+      outside.style.clipPath = `path(evenodd, 'M0 0H${vw}V${vh}H0Z M${screenRing.map(([x, y]) => x.toFixed(1) + ' ' + y.toFixed(1)).join(' L')}Z')`;
+    }
     let clampRank = 0;
     // occupied label space: the villa chip and the radius panel are seeded as
     // blockers, then place chips nearest-first, nudging any collision away
@@ -412,9 +461,12 @@ export function createRegionMap(host) {
     // with every family filtered off there is almost nothing left to place.
     setBearing(deg) { if (deg === bearing) return; bearing = deg; layout(); },
     // Everything outside the settlement goes dark, along its own outline.
-    setHighlight(on) {dim.setAttribute('visibility', on ? 'visible' : 'hidden');},
+    // 28.09: karartma yerine sınır vurgusu - dışarısı %20 beyaz + 8 px bulanık.
+    setHighlight(on) { tourOn = Boolean(on); siteOn(); },
     // Sesli rehberin o cümlede andığı yerler; [] hepsini söndürür.
     setMentions(ids = []) {
+      // 'angora-evleri': sitenin kendisi - halka değil, sınır vurgusu
+      tourOn = ids.includes('angora-evleri'); siteOn();
       const next = new Set(ids.filter(id => id in MENTIONS));
       if (next.size === mentionState.size && [...next].every(id => mentionState.has(id))) return;
       mentionState.clear(); for (const id of next) mentionState.add(id);

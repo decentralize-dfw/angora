@@ -2,8 +2,9 @@ import * as THREE from 'three';
 import {CompactOutput} from './compact-output.js';
 import {createFixtureVertices} from './fixture-vertices.js';
 import { Sky } from 'three/addons/objects/Sky.js';
+import { createWalkSky } from './walk-sky.js';
 import { HDRLoader } from 'three/addons/loaders/HDRLoader.js';
-import {solarPosition} from './daylight.js';
+import {solarPosition,TRUE_NORTH_ROTATION} from './daylight.js';
 import {prepareMaterialResponse,setInteriorMode,setMaterialScale} from './material-response.js';
 import {smoothSurfaceNormals} from './context-surfaces.js';
 import {applyWaterSurface,waterBoundsFrom} from './water-surface.js';
@@ -117,6 +118,8 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
   // AYDINLIK İŞ 2: 0.55'te gök yarı kısıktı; parlak gök hem aydınlatır
   // hem "güzel gün" der. Beyaza patlarsa ilk geri adım 0.75.
   scene.backgroundIntensity=FEATURES.warmGradeV1?.85:.55;
+  // Yürürken arka plan: hafif bulutlu, daha gökyüzü gibi bir küp (walk-sky.js)
+  const walkSky=FEATURES.walkSkyV1?createWalkSky(renderer):null;
   // No haze by default. Distance fog was tried here for depth and it read as
   // a grey cast over the whole settlement rather than as air. Task 1.5 tries
   // again with what that attempt lacked: the HORIZON'S own colour (tracked by
@@ -256,7 +259,7 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
     return true;
   }
   function setTime(nextHour=hour,nextDay=day) {
-    hour=nextHour;day=nextDay;const solar=solarPosition(hour,{day});direction.fromArray(solar.direction);
+    hour=nextHour;day=nextDay;const solar=solarPosition(hour,{day,northRotation:FEATURES.trueNorth?TRUE_NORTH_ROTATION:0});direction.fromArray(solar.direction);
     portalSolar=solar;updatePortalLights();
     waterPhase.value=hour*2.4;
     // Task 1.2-d: with a live sun the baked R channel (direct visibility)
@@ -300,6 +303,7 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
     // that happens with the hour untouched, so this was redrawing the sky on
     // every press of Bodrum, Giriş, 1. kat and Çatı for no change at all.
     if(environment&&(!skyDrawn||skyDirection.dot(direction)<.9999)){skyDirection.copy(direction);skyDrawn=true;skyCamera.update(renderer,skyScene);}
+    if(walkInterior)walkSky?.update(direction,daylight);
     sun.position.copy(sun.target.position).addScaledVector(direction,shadowDistance);
     for(const material of preparedMaterials)if(material.userData.indirectDaylightIntensity)material.lightMapIntensity=material.userData.indirectDaylightIntensity*daylight;
     // Task 1.2-c: while the hour slider DRAGS, only the sun moves; the
@@ -419,6 +423,10 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
     setLights(enabled){lightsEnabled=enabled;electricLight?.setEnabled(enabled);fixtures.setEnabled(enabled);setTime();},setTime,
     setWalkInterior(active){
       walkInterior=active;
+      if(walkSky){
+        scene.background=active?walkSky.texture:skyTarget.texture;
+        scene.backgroundIntensity=active?1:FEATURES.warmGradeV1?.85:.55;
+      }
       if(active){reflectionFloor=activeInteriorFloor;updateReflections();}
       for(const material of preparedMaterials)setInteriorMode(material,active);
       setTime(hour,day);

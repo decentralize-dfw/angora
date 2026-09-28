@@ -835,3 +835,24 @@ body.pegman-dragging,body.pegman-dragging *{cursor:grabbing !important}
 
 /* İçeride gez: lens 14 mm sabit - seçici gösterilmez. */
 .walk-lens{display:none !important}
+
+/* Bölge haritası (28.09): site katmanı modelden - gerçek asfalt genişliği,
+   evler OSM binalarıyla aynı dilde ama bir ton koyu (ölçülmüş, çizilmiş). */
+.rm-site-road{fill:rgba(22,29,26,.16)}
+.rm-site-bldg{fill:rgba(22,29,26,.17)}
+.rm-pool{fill:#9fc4cf}
+/* Sitenin dışı: %20 beyaz + 8 px bulanıklık; sınır çizgisinin üstüne gelince
+   ya da sesli rehber "Angora Evleri" derken. */
+.rm-outside{position:absolute;inset:0;pointer-events:none;opacity:0;background:rgba(255,255,255,.2);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:opacity 380ms ease}
+.region-map.rm-site-on .rm-outside{opacity:1}
+.region-map.rm-site-on .rm-bound{stroke-width:2.2px;opacity:1}
+.region-map .rm-chip-site{transition:transform 950ms cubic-bezier(.22,.8,.2,1),opacity 500ms ease,color 300ms ease,font-size 300ms ease}
+.region-map.rm-site-on .rm-chip-site{color:var(--ink);font-size:12.5px;letter-spacing:.3em;font-weight:700}
+/* Bölgede ışık kapsülü bir şey yapmaz - yakın çevre/villa aracıdır. */
+#app[data-scale=region] .options-panel{display:none !important}
+/* Bölge paneli: açılınca genişliği değişmez, yukarı daha çok açılır. */
+@media(min-width:601px){
+  .region-panel{width:292px;max-width:292px}
+  #region-summary div{max-height:min(46dvh,400px)}
+}

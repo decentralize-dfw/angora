@@ -68,7 +68,7 @@ export const TOUR_CUES = [
   {at: 19.6, atEn: 19.0, radius: 500, group: 3,
    tr: 'Şimdi Çayyolu’nun kalbindeyiz.',
    en: 'We are now in the heart of Çayyolu.'},
-  {at: 22.2, atEn: 21.6, group: null, spot: 'centre',
+  {at: 22.2, atEn: 21.6, group: null, spot: 'centre', mentions: ['angora-evleri'],
    tr: 'Karşınızda, Ankara’nın en köklü ve en tanınmış villa yerleşimi: Angora Evleri.',
    en: 'Before you is Ankara’s most established and best-known villa community: Angora Evleri.'},
 

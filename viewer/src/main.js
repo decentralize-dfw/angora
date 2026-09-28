@@ -37,6 +37,8 @@ import {upgradeAtlasToArrays} from './atlas-array.js';
 import {bakeContactOcclusion} from './vertex-ao.js';
 import {markUploads,releaseGeometryArrays} from './geometry-release.js';
 import {applyVillaModelV3,applyContextV2} from './villa-model-v3.js';
+import {createStreetLabels} from './street-labels.js';
+import {createNeighbourLines} from './neighbour-lines.js';
 import {createSiteContext} from './site-context.js';
 import {renderPixelRatio,fitDepthRange} from './render-quality.js';
 import {rigFovFor} from './camera-rigs.js';
@@ -131,7 +133,7 @@ let plotCutReady = false;
 let planWash = null;
 let flight, hotspots, planMode=false, roomData, interiorLights=true, soilCap=null;
 let scene, camera, renderer, controls, loader, loadAsset, caps, buildingBox, gardenBox, contextBox, lighting, siteContext, quality;
-let nativeDelivery=null,nativeSwitching=false,nativeAtlas=null,nativeSoil=null,plotMask=null;
+let nativeDelivery=null,nativeSwitching=false,nativeAtlas=null,nativeSoil=null,plotMask=null,streetLabels=null,neighbourLines=null;
 // The opening view is the street, not the house: a visitor should see where
 // Angora 21 sits before they see what it is. share-state.js has always called
 // this the default - a link carries no view parameter for it - and this is the
@@ -266,6 +268,11 @@ function renderFrame(time) {
     }
     const zooming=advanceZoomEase(time);
     const flying=flight?.update(time);
+    streetLabels?.setView(selected,Boolean(walk?.active));
+    // Villa modunda komşular yalnız ince çizgi (dolaşırken gerçek hâlleri)
+    if(neighbourLines?.setActive((selected==='building'||/^f[0-3]$/.test(selected))&&!walk?.active,groups.get('context-buildings'))){
+      renderer.shadowMap.needsUpdate=true;lighting?.requestShadowUpdate?.();
+    }
     if(planWash){
       const target=planMode&&!walk?.active?1:0;
       // dt caps at 0.25 s so even a slow renderer settles the wash in a
@@ -345,6 +352,7 @@ function renderFrame(time) {
     if(FRAME_STATS)host.dataset.runtime=JSON.stringify({view:selected,plan:planMode,projection:activeCamera.type,cameraPosition:activeCamera.position.toArray(),target:controls.target.toArray(),sectionHeight:clip.constant,loaded:nativeDelivery?[...nativeDelivery.loaded.keys()]:[...groups.keys()],zoom:activeCamera.zoom,autoRotate:controls.autoRotate,zoomEnabled:controls.enableZoom,rotate:controls.mouseButtons.LEFT===THREE.MOUSE.ROTATE,transition:Boolean(transition),textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,rooms:Boolean(groups.get('interior')?.visible),lamps:lighting?.snapshot?.().interior?.map(f=>Math.round(f.rendered_intensity_cd))??[],glazing:lighting?.snapshot?.().glazing??0});
     renderer.info.reset();
     lighting.render(activeCamera);
+    neighbourLines?.render(scene,activeCamera);
       if(FRAME_STATS)host.dataset.frameStats=JSON.stringify({view:selected,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,allRenderPasses:true,transition:Boolean(transition||flight?.active),sectionCaps:{visible:Boolean(caps?.group.visible),height:caps?.group.children[0]?.position.y,triangles:(caps?.group.children[0]?.geometry.index?.count??0)/3}});
     if(measuredTransition){
       measuredTransition.maxCpuMs=Math.max(measuredTransition.maxCpuMs??0,performance.now()-cpuStart);
@@ -1670,6 +1678,9 @@ async function loadNativeModel(manifest){
   fullHeight=buildingBox.max.y+2;
   const movingSections=manifest.batched?await json('../../native-current/transition-sections.json.gz'):null;
   caps=createWallCaps(atlas,movingSections);scene.add(caps.group);
+  // Yakın çevrede sokak adları (yolun üstünde, yola paralel)
+  if(FEATURES.contextV2){streetLabels=createStreetLabels();scene.add(streetLabels.group);}
+  if(FEATURES.neighbourLines)neighbourLines=createNeighbourLines(renderer);
   if(soil){nativeSoil=createNativeSoilSection(soil);nativeSoil.userData.height=soil.height;scene.add(nativeSoil);}
   annotations=createAnnotations(rooms,host);scene.add(annotations.group);
   walk=new InteriorWalk(navigation,renderer.domElement,invalidate);scene.add(walk.rig);
