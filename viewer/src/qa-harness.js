@@ -355,6 +355,6 @@ export function installQaHarness({host, query, hooks}) {
     await nextFrames(10);
     return info;
   }
-  window.__angoraQA = {applyCamera, photoView, snapshot, measure, debugShadow, nightProbe, nightScene, stats, scene: () => hooks.scene?.(), invalidate: () => hooks.invalidate(), get report() { return JSON.parse(host.dataset.qaReport ?? 'null'); }};
+  window.__angoraQA = {applyCamera, photoView, pickMaterials: points => hooks.pickMaterials(points), snapshot, measure, debugShadow, nightProbe, nightScene, stats, scene: () => hooks.scene?.(), invalidate: () => hooks.invalidate(), get report() { return JSON.parse(host.dataset.qaReport ?? 'null'); }};
   return window.__angoraQA;
 }

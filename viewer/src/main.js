@@ -647,6 +647,21 @@ async function qaPhotoView(id,fov=58){
   invalidate();
   return {id:point.id,file:point.file,room:station.room_id,floor};
 }
+// QA: ekran noktalarında (0..1, sol üst) hangi malzeme görünüyor - fotoğraf
+// ile model rengini malzeme malzeme karşılaştırmak için (05_foto_eslesme.py).
+function qaPickMaterials(points){
+  const cam=walk?.active?walk.camera:camera,ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
+  const targets=['architecture','interior','garden'].map(name=>groups.get(name)).filter(Boolean);
+  return points.map(([u,v])=>{
+    ndc.set(u*2-1,1-v*2);ray.setFromCamera(ndc,cam);
+    const hit=ray.intersectObjects(targets,true).find(h=>h.object.visible&&!(Array.isArray(h.object.material)?h.object.material:[h.object.material])
+      .every(m=>m.transparent&&m.opacity<.5));
+    if(!hit)return null;
+    const material=Array.isArray(hit.object.material)?hit.object.material[hit.face?.materialIndex??0]:hit.object.material;
+    let part=hit.object;while(part.parent&&!groups.has(part.name)&&![...groups.values()].includes(part))part=part.parent;
+    return {m:material?.name??'',d:Math.round(hit.distance*100)/100,p:[...groups].find(([,g])=>g===part)?.[0]??''};
+  });
+}
 async function travelRoom(roomId){
   pendingRoomJump.cancel();
   const destination=walk?.surface.data.stations.find(s=>s.room_id===roomId);
@@ -2592,7 +2607,7 @@ if(qaQuery.get('stats')==='1'||qaQuery.get('camera')){
       lighting:()=>lighting,walk:()=>walk,
       quality:()=>quality,
       selected:()=>selected,
-      enterWalk,exitWalk,invalidate,photoView:qaPhotoView,
+      enterWalk,exitWalk,invalidate,photoView:qaPhotoView,pickMaterials:qaPickMaterials,
       deliveryProfile,
       setPlan(on){
         if(planMode===on)return;
