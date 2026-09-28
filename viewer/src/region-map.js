@@ -19,6 +19,10 @@ import streets from './region-streets.json';
 // hizalanmış (tools/batch-delivery/make-region-site.mjs). Eski R44 katmanı
 // (region-plan.json: yollar PNG + eski kütleler) OSM ile üst üste biniyordu.
 import site from './region-site.json';
+// OSM'in taşımadığı binalar (Beysukent ve çevresinde yarıdan fazlası):
+// Overture Maps / Microsoft ML Building Footprints, 2,3 km içinde
+// (tools/region/fetch_overture_buildings.py).
+import mlBuildings from './region-buildings-ml.json';
 import { t, currentLang } from './i18n.js';
 import { listing } from './listing.js';
 
@@ -63,7 +67,7 @@ const svgNS = 'http://www.w3.org/2000/svg';
 const km = (m) => (m < 950 ? `${m} m` : `${(m / 1000).toFixed(1).replace('.', ',')} km`);
 
 export const atlasMeta = () => `${places.total} ${t('amenities')} · Atlas ${places.atlas_generated_at}` +
-  (streets.roads.length ? ' · Plan © OpenStreetMap' : ' (OSM)');
+  (streets.roads.length ? ' · Plan © OpenStreetMap, Microsoft (Overture)' : ' (OSM)');
 
 export function createRegionMap(host) {
   const el = document.createElement('div');
@@ -108,6 +112,8 @@ export function createRegionMap(host) {
     const hiddenBuildings = new Set(site.osm.hideBuildings), replacedRoads = new Set(site.osm.replacedRoads);
     for (const g of streets.green) shape('polygon', 'rm-green', { points: flatPoints(g) });
     streets.buildings.forEach((b, i) => { if (!hiddenBuildings.has(i)) shape('polygon', 'rm-bldg', { points: flatPoints(b) }); });
+    const hiddenMl = new Set(site.osm.hideMl ?? []);
+    mlBuildings.buildings.forEach((b, i) => { if (!hiddenMl.has(i)) shape('polygon', 'rm-bldg', { points: flatPoints(b) }); });
     // sitenin gerçek asfaltı (bordür dahil), yol çizgilerinin altında
     shape('path', 'rm-site-road', { d: site.roads.map(r => 'M' + poly(r) + 'Z').join(' '), 'fill-rule': 'evenodd' });
     for (const cls of [3, 2, 1, 0]) {

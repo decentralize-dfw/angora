@@ -136,6 +136,16 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   for (let z = 0; z < ar.H; z++) for (let x = 0; x < ar.W; x++) if (ar.grid[z * ar.W + x])
     for (let dz = -B; dz <= B; dz++) for (let dx = -B; dx <= B; dx++) { if (dx * dx + dz * dz > B * B) continue; const nx = x + dx, nz = z + dz; if (nx >= 0 && nz >= 0 && nx < ar.W && nz < ar.H) near[nz * ar.W + nx] = 1; }
   const nearAsphalt = (mx, my) => { const [x, z] = toModel([mx, my]); const gx = Math.floor((x - ar.minX) / ar.cell), gz = Math.floor((z - ar.minZ) / ar.cell); return gx >= 0 && gz >= 0 && gx < ar.W && gz < ar.H && near[gz * ar.W + gx] === 1; };
+  // Microsoft ML (Overture) binaları da modelin evine düşüyorsa gizlenir
+  const mlPath = path.join(ROOT, 'viewer/src/region-buildings-ml.json');
+  const ml = fs.existsSync(mlPath) ? JSON.parse(fs.readFileSync(mlPath)).buildings : [];
+  const hideMl = [];
+  ml.forEach((b, i) => {
+    let cx = 0, cy = 0; for (let k = 0; k < b.length; k += 2) { cx += b[k]; cy += b[k + 1]; } cx /= b.length / 2; cy /= b.length / 2;
+    if (Math.hypot(cx, cy) > 300) return;
+    const pts = [[cx, cy]]; for (let k = 0; k < b.length; k += 2) pts.push([b[k] * 0.7 + cx * 0.3, b[k + 1] * 0.7 + cy * 0.3]);
+    if (modelShapes.some(poly => pts.filter(([x, y]) => inPoly(x, y, poly)).length >= pts.length * 0.4)) hideMl.push(i);
+  });
   const replacedRoads = [], keptRuns = [];
   streetsAll.roads.forEach(([cls, name, pts], i) => {
     let any = false; const flags = [];
@@ -156,7 +166,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     source: 'KOMSULAR-opt-v2 / BUILDING-opt-v4 / GARDEN-opt-v2 / CEVRE-YOL-opt-v3 / plot-boundary.json',
     transform: {...MODEL_TO_MAP, note: 'harita = R(deg)·(model x, model z) + (tx, ty); harita x=doğu, y=güney; OSM bina ayak izleriyle ölçüldü'},
     houses, villa, pool, plot, roads, coverage,
-    osm: {hideBuildings, replacedRoads, keptRuns},
+    osm: {hideBuildings, replacedRoads, keptRuns, hideMl},
   };
   fs.writeFileSync(path.join(ROOT, 'viewer/src/region-site.json'), JSON.stringify(site));
   console.log(`evler ${houses.length}, villa ${villa.length} nokta, havuz ${pool?.length}, yol halkası ${roads.length}, kapsama ${coverage.length}, OSM gizlenen bina ${hideBuildings.length}, yol ${replacedRoads.length}`,
@@ -188,17 +198,23 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     };
   })();
   const names = new Map();
-  // Villanın önündeki yol: adres "Hatırlı Sokak No:10". OSM'de site içi yollar
-  // adsız; villanın giriş yüzüne (model +z) en yakın adsız OSM ekseni bu sokak.
-  const entrance = toMap([0, 14]);
-  let hatirli = null, hatirliD = Infinity;
-  for (const [cls, name, pts] of streets.roads) {
-    if (name) continue;
-    for (let i = 0; i < pts.length; i += 2) { const d = Math.hypot(pts[i] - entrance[0], pts[i + 1] - entrance[1]); if (d < hatirliD) { hatirliD = d; hatirli = pts; } }
-  }
+  // OSM'de adsız site yolları: ad, yolun yanındaki bir noktayla bağlanır
+  // (harita koordinatı). Villanın önündeki yol adresten: "Hatırlı Sokak No:10"
+  // - villanın giriş yüzüne (model +z) en yakın adsız OSM ekseni.
+  // Ürün sahibi yeni ad verdikçe buraya bir satır eklenir.
+  const NAMED_BY_POINT = [
+    {name: 'Hatırlı Sokak', near: toMap([0, 14])},
+  ];
   const candidates = [];
   for (const [cls, name, pts] of streets.roads) if (name) candidates.push([name, pts]);
-  if (hatirli && hatirliD < 25) candidates.push(['Hatırlı Sokak', hatirli]);
+  for (const {name, near} of NAMED_BY_POINT) {
+    let road = null, bestD = Infinity;
+    for (const [cls, n, pts] of streets.roads) {
+      if (n) continue;
+      for (let i = 0; i < pts.length; i += 2) { const d = Math.hypot(pts[i] - near[0], pts[i + 1] - near[1]); if (d < bestD) { bestD = d; road = pts; } }
+    }
+    if (road && bestD < 25) candidates.push([name, road]);
+  }
   const labels = [];
   for (const [name, pts] of candidates) {
     const model = []; for (let i = 0; i < pts.length; i += 2) model.push(toModel([pts[i], pts[i + 1]]));
@@ -209,7 +225,9 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       const [ax, az] = model[i], [bx, bz] = model[i + 1], d = Math.hypot(bx - ax, bz - az);
       for (let s = 0; s < d; s += 1) dense.push([ax + (bx - ax) * s / d, az + (bz - az) * s / d]);
     }
-    let best = null;
+    // Aday parçalar (düz, asfaltta) villaya yakından uzağa; ilk "temiz"
+    // olanı alınır: yazı boyunca yolun genişliği düzgün (kavşak değil).
+    const cands = [];
     for (let i = 0; i < dense.length; i++) {
       const j = i + Math.ceil(len); if (j >= dense.length) break;
       const [ax, az] = dense[i], [bx, bz] = dense[j], chord = Math.hypot(bx - ax, bz - az);
@@ -223,12 +241,45 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       // OSM ekseni modelin asfaltından 2-3 m kayabiliyor: yazının ortası ve
       // en az %85'i asfaltta olmalı
       if (!straight || off > (j - i + 1) * 0.15 || heightAt((ax + bx) / 2, (az + bz) / 2) === null) continue;
-      const mx = (ax + bx) / 2, mz = (az + bz) / 2, dist = Math.hypot(mx, mz);
-      if (!best || dist < best.dist) best = {dist, a: [ax, az], b: [bx, bz]};
+      cands.push({dist: Math.hypot((ax + bx) / 2, (az + bz) / 2), a: [ax, az], b: [bx, bz]});
     }
-    if (!best) { console.log('yer yok:', name); continue; }
-    const [ax, az] = best.a, [bx, bz] = best.b, mx = (ax + bx) / 2, mz = (az + bz) / 2;
-    let angle = Math.atan2(bz - az, bx - ax);
+    cands.sort((p, q) => p.dist - q.dist);
+    // Yolun GERÇEK ortası (ürün sahibi: "tam yolun ortasında"): OSM ekseni
+    // asfalttan birkaç metre kayabiliyor. Yazı boyunca her metrede yola dik
+    // bir kesit alınır, asfalt aralığının ortası bulunur; ortalara doğru
+    // oturtulur (en küçük kareler) - merkez ve yön asfalttan gelir.
+    const centre = ({a: [ax, az], b: [bx, bz]}) => {
+      let mx = (ax + bx) / 2, mz = (az + bz) / 2, angle = Math.atan2(bz - az, bx - ax);
+      const ux = Math.cos(angle), uz = Math.sin(angle), nx = -uz, nz = ux;
+      const samples = [], widths = []; let total = 0;
+      for (let t = -len / 2; t <= len / 2 + 1e-6; t += 1) {
+        total++;
+        const px = mx + ux * t, pz = mz + uz * t, runs = [];
+        let start = null;
+        for (let s = -12; s <= 12.001; s += 0.1) {
+          const on = heightAt(px + nx * s, pz + nz * s) !== null;
+          if (on && start === null) start = s;
+          if ((!on || s > 12) && start !== null) { runs.push([start, on ? s : s - 0.1]); start = null; }
+        }
+        if (!runs.length) continue;
+        const score = r => r[0] <= 0 && r[1] >= 0 ? 0 : Math.min(Math.abs(r[0]), Math.abs(r[1]));
+        const run = runs.sort((p, q) => score(p) - score(q))[0];
+        const width = run[1] - run[0];
+        if (width < 3 || width > 16) continue;
+        samples.push([t, (run[0] + run[1]) / 2]); widths.push(width);
+      }
+      if (samples.length < total * 0.8) return null;
+      if (Math.max(...widths) - Math.min(...widths) > 2.5) return null;   // kavşak / cep
+      const n = samples.length, st = samples.reduce((q, [t]) => q + t, 0) / n, sm = samples.reduce((q, [, m]) => q + m, 0) / n;
+      let num = 0, den = 0; for (const [t, m] of samples) { num += (t - st) * (m - sm); den += (t - st) ** 2; }
+      const slope = den ? num / den : 0, c0 = sm - slope * st;
+      return {mx: mx + nx * c0, mz: mz + nz * c0, angle: angle + Math.atan(slope)};
+    };
+    let placed = null;
+    for (const c of cands) { placed = centre(c); if (placed) break; }
+    if (!placed) { console.log('yer yok:', name); continue; }
+    const {mx, mz} = placed;
+    let angle = placed.angle;
     // okuma yönü: soldan sağa, model +x'e doğru (açı -90°..90°)
     if (angle > Math.PI / 2) angle -= Math.PI; else if (angle <= -Math.PI / 2) angle += Math.PI;
     const ha = (dx) => heightAt(mx + Math.cos(angle) * dx, mz + Math.sin(angle) * dx) ?? heightAt(mx, mz);

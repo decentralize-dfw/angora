@@ -16,10 +16,21 @@ const walkTo = (surface, p, x, z) => {
 
 test('iki yan rampadan bahçeden giriş kotuna yürünür', () => {
   const nav = data(), surface = new WalkSurface(nav); patchWalkSurface(surface);
-  for (const x of [-8, 9.6]) {
+  for (const x of [-8, -6.3, 7.9, 9.6]) {
     const p = new THREE.Vector3(x, -.1 + nav.eye_height_m, -6.5);
     assert.ok(walkTo(surface, p, x, 2.2), 'rampa x=' + x);
-    assert.ok(Math.abs(p.y - nav.eye_height_m - 2.8) < .05);
+    const feet = p.y - nav.eye_height_m;
+    assert.ok(feet > 2.7 && feet < 3.2, 'üst kot x=' + x + ': ' + feet.toFixed(2));
+  }
+});
+
+// 28.09: merdiven + çim tek rampa - yan bahçe boyunca enine de kesintisiz.
+test('yan bahçe merdivenden çime enine kesintisiz (tek düzlem)', () => {
+  const nav = data(), surface = new WalkSurface(nav); patchWalkSurface(surface);
+  const at = (x, z) => new THREE.Vector3(x, surface.sample(x, z, 0, true, 99).height + nav.eye_height_m, z);
+  for (const z of [-7, -4, -1.5, 1]) {
+    assert.ok(walkTo(surface, at(7.7, z), 10.3, z), 'doğu enine z=' + z);
+    assert.ok(walkTo(surface, at(-8.8, z), -6.0, z), 'batı enine z=' + z);
   }
 });
 

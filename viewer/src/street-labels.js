@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import data from './street-labels.json';
 
-// Yakın çevre: sokak adları yolun ÜSTÜNE, yola paralel, asfalt boyası gibi
+// Yakın çevre: sokak adları yolun ORTASINA (asfalt kesitlerinden), yola
+// paralel, %50 opak, asfalt boyası gibi
 // yatık yazılır (ürün sahibi, 28.09: "dönen kamera ile dönmelerine gerek yok,
 // sadece yazsınlar; yola paralel, çok büyük olmayacak"). Yerleşim ve eğim
 // tools/batch-delivery/make-region-site.mjs'ten: OSM ekseni ölçülmüş
@@ -37,7 +38,7 @@ export function createStreetLabels() {
       const texture = new THREE.CanvasTexture(canvas);
       texture.colorSpace = THREE.SRGBColorSpace;
       texture.anisotropy = 8;
-      const material = new THREE.MeshBasicMaterial({map: texture, transparent: true, opacity: 0.82,
+      const material = new THREE.MeshBasicMaterial({map: texture, transparent: true, opacity: 0.5,
         depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -4});
       const width = TEXT_HEIGHT * canvas.width / canvas.height;
       const mesh = new THREE.Mesh(new THREE.PlaneGeometry(width, TEXT_HEIGHT), material);

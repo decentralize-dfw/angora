@@ -121,9 +121,25 @@ export class WalkSurface {
 //    diğer katmanlardaki hücreler temizlenir ki ayak rampadan kaymasın.
 // 2) Antre -> Garaj kapısı veride ~0,5 m açık (gövde çapı 0,42 m): pratikte
 //    geçilmiyordu. Açıklık 0,9 m'ye genişletilir, zemin antre kotunda.
+// 28.09 (ürün sahibi: "iki yan taraf da sadece merdiven değil, bahçe de
+// kesintisiz tek bir rampa olmalı"): rampa artık yan bahçenin TAMAMI -
+// sınır duvarının iç yüzünden evin duvarına kadar, merdiven + kademeli çim
+// tek düzlem. Genişlik ve kotlar ürün sahibinin modelinden (GARDEN-opt-v2 +
+// BUILDING-opt-v4, 0,25 m ızgarada üst yüzey) ölçüldü:
+//   doğu: ev duvarı x 7,45 | merdiven 7,5-8,75 (0,0 -> 3,1) | çim 8,75-10,5
+//         (-0,1 -> 2,8 kademeli) | istinat duvarı 10,5; üstte garaj önü 3,1
+//   batı: istinat duvarı -9,0 | çim -9,0..-7,25 (-0,1 -> 2,8, ~1 m kademeler)
+//         | alçak duvar -7,25..-7,0 | merdiven -7,0..-5,8 (0,2 -> 3,0) | ev -5,75
+// Düzlemin eğimi iki yüzeyin ortalamasına oturur (merdivenden en çok ~0,3 m).
+// Rampanın dibi: yürüme verisi eski modelden; yan bahçelerin bahçeye
+// bağlandığı şeritte eski merdiveni ve yürünemez hücreler taşıyor. Yeni
+// modelde orası bahçe kotunda düz (merdiven sahanlığı 0,0-0,2, çim -0,1,
+// döşeme 0,0) - dip şeridi o kota düzlenir.
 export const WALK_RAMPS = [
-  {name: 'west-side', x0: -8.9, x1: -7.1, z0: -5.3, z1: 1.5, h0: -.10, h1: 2.80},
-  {name: 'east-side', x0: 8.85, x1: 10.45, z0: -6.0, z1: 1.45, h0: -.10, h1: 2.80},
+  {name: 'west-side', x0: -8.95, x1: -5.85, z0: -5.4, z1: 2.0, h0: -.05, h1: 2.80},
+  {name: 'west-side-foot', x0: -8.95, x1: -5.85, z0: -8.0, z1: -5.4, h0: .02, h1: -.05},
+  {name: 'east-side', x0: 7.50, x1: 10.45, z0: -5.9, z1: 2.2, h0: 0.0, h1: 3.10},
+  {name: 'east-side-foot', x0: 7.50, x1: 10.45, z0: -8.3, z1: -5.9, h0: -.05, h1: 0.0},
 ];
 export const WALK_PASSAGES = [
   {name: 'antre-garaj', floor: 1, x0: 2.6, x1: 4.6, z0: -0.62, z1: 0.30, refX: 2.0, refZ: -0.16},
@@ -140,9 +156,8 @@ export const WALK_BLOCKS = [
 ];
 export const WALK_FILLS = [
   {name: 'entrance-gap', x0: 2.85, x1: 3.85, z0: 4.3, z1: 6.5, near: 2.8, height: 3.2},
-  // Doğu çim rampasının üstü (2,80) ile garaj önü sahanlığı (3,10) arasında
-  // veride 0,5 m'lik boş sütun (korkuluk). Geçiş: ara kot 2,95 m.
-  {name: 'east-yard-link', x0: 8.45, x1: 8.95, z0: 1.4, z1: 3.0, near: null, height: 2.95},
+  // (27.09'daki 'east-yard-link' dolgusu kalktı: doğu rampası artık garaj
+  // önü kotuna (3,10) kadar kesintisiz çıkıyor.)
   // Garaj önünde 2,8 m'lik ince oluk (kapı eşiği): iki yanı 3,1-3,2 m.
   {name: 'garage-threshold', x0: 7.12, x1: 7.42, z0: 1.7, z1: 4.4, near: 2.8, height: 3.15},
 ];

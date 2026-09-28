@@ -133,7 +133,7 @@ let plotCutReady = false;
 let planWash = null;
 let flight, hotspots, planMode=false, roomData, interiorLights=true, soilCap=null;
 let scene, camera, renderer, controls, loader, loadAsset, caps, buildingBox, gardenBox, contextBox, lighting, siteContext, quality;
-let nativeDelivery=null,nativeSwitching=false,nativeAtlas=null,nativeSoil=null,plotMask=null,streetLabels=null,neighbourLines=null;
+let nativeDelivery=null,nativeSwitching=false,nativeAtlas=null,nativeSoil=null,plotMask=null,streetLabels=null,neighbourLines=null,neighbourFadeTime=null;
 // The opening view is the street, not the house: a visitor should see where
 // Angora 21 sits before they see what it is. share-state.js has always called
 // this the default - a link carries no view parameter for it - and this is the
@@ -269,9 +269,14 @@ function renderFrame(time) {
     const zooming=advanceZoomEase(time);
     const flying=flight?.update(time);
     streetLabels?.setView(selected,Boolean(walk?.active));
-    // Villa modunda komşular yalnız ince çizgi (dolaşırken gerçek hâlleri)
-    if(neighbourLines?.setActive((selected==='building'||/^f[0-3]$/.test(selected))&&!walk?.active,groups.get('context-buildings'))){
-      renderer.shadowMap.needsUpdate=true;lighting?.requestShadowUpdate?.();
+    // Villa modunda komşular yalnız ince çizgi (dolaşırken gerçek hâlleri).
+    // Geçiş "şak" diye değil: yakınlaşma boyunca ~1 sn'de açılıp kapanır.
+    if(neighbourLines){
+      const target=(selected==='building'||/^f[0-3]$/.test(selected))&&!walk?.active?1:0;
+      const dt=Math.min(.25,(time-(neighbourFadeTime??time))/1000);neighbourFadeTime=time;
+      const level=neighbourLines.fade,next=Math.abs(target-level)<.004?target:THREE.MathUtils.damp(level,target,3.2,dt);
+      if(next!==level)invalidate();
+      if(neighbourLines.update(next,groups.get('context-buildings'))){renderer.shadowMap.needsUpdate=true;lighting?.requestShadowUpdate?.();}
     }
     if(planWash){
       const target=planMode&&!walk?.active?1:0;
