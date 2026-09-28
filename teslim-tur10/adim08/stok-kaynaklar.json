@@ -1,0 +1,72 @@
+{
+ "black_oak_veneer": {
+  "albedo": {
+   "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/black_oak_veneer/black_oak_veneer_diff_4k.jpg",
+   "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\black_oak_veneer\\albedo.jpg"
+  },
+  "normal": {
+   "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/black_oak_veneer/black_oak_veneer_nor_gl_4k.jpg",
+   "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\black_oak_veneer\\normal.jpg"
+  },
+  "roughness": {
+   "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/black_oak_veneer/black_oak_veneer_rough_4k.jpg",
+   "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\black_oak_veneer\\roughness.jpg"
+  }
+ },
+ "cherry_veneer": {
+  "albedo": {
+   "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/cherry_veneer/cherry_veneer_diff_4k.jpg",
+   "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\cherry_veneer\\albedo.jpg"
+  },
+  "normal": {
+   "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/cherry_veneer/cherry_veneer_nor_gl_4k.jpg",
+   "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\cherry_veneer\\normal.jpg"
+  },
+  "roughness": {
+   "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/cherry_veneer/cherry_veneer_rough_4k.jpg",
+   "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\cherry_veneer\\roughness.jpg"
+  }
+ },
+ "european_walnut_veneer_05": {
+  "albedo": {
+   "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/european_walnut_veneer_05/european_walnut_veneer_05_diff_4k.jpg",
+   "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\european_walnut_veneer_05\\albedo.jpg"
+  },
+  "normal": {
+   "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/european_walnut_veneer_05/european_walnut_veneer_05_nor_gl_4k.jpg",
+   "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\european_walnut_veneer_05\\normal.jpg"
+  },
+  "roughness": {
+   "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/european_walnut_veneer_05/european_walnut_veneer_05_rough_4k.jpg",
+   "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\european_walnut_veneer_05\\roughness.jpg"
+  }
+ },
+ "oak_veneer_01": {
+  "albedo": {
+   "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/oak_veneer_01/oak_veneer_01_diff_4k.jpg",
+   "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\oak_veneer_01\\albedo.jpg"
+  },
+  "normal": {
+   "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/oak_veneer_01/oak_veneer_01_nor_gl_4k.jpg",
+   "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\oak_veneer_01\\normal.jpg"
+  },
+  "roughness": {
+   "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/oak_veneer_01/oak_veneer_01_rough_4k.jpg",
+   "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\oak_veneer_01\\roughness.jpg"
+  }
+ },
+ "terracotta_floor_tiles": {
+  "albedo": {
+   "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/terracotta_floor_tiles/terracotta_floor_tiles_diff_4k.jpg",
+   "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\terracotta_floor_tiles\\albedo.jpg"
+  },
+  "normal": {
+   "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/terracotta_floor_tiles/terracotta_floor_tiles_nor_gl_4k.jpg",
+   "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\terracotta_floor_tiles\\normal.jpg"
+  },
+  "roughness": {
+   "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/terracotta_floor_tiles/terracotta_floor_tiles_rough_4k.jpg",
+   "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\terracotta_floor_tiles\\roughness.jpg"
+  }
+ }
+}

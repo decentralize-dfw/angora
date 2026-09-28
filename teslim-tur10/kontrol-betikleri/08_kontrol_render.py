@@ -125,6 +125,10 @@ else:
     except Exception: pass
     world.node_tree.links.new(sky.outputs['Color'], bg.inputs['Color']); bg.inputs['Strength'].default_value = .65
 
+# A08_PHOTO_LIGHTS: photographed attic WC sconce and bedroom three-arm fixture.
+for name,xyz,power in [('A08_WC_aplik',(.33,5.98,11.46),65),('A08_107_spot',(-.45,-3.0,8.52),45)]:
+    data=bpy.data.lights.new(name,'POINT');data.energy=power;data.color=(1.0,.84,.66);data.shadow_soft_size=.075
+    light=bpy.data.objects.new(name,data);scene.collection.objects.link(light);light.location=xyz
 scene.render.engine = 'CYCLES'; cy = scene.cycles
 cy.samples = SAMPLES; cy.use_denoising = True; cy.max_bounces = 8; cy.diffuse_bounces = 4
 try: cy.denoiser = 'OPENIMAGEDENOISE'

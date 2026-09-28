@@ -852,3 +852,17 @@ Adım05 yedeğindeki basamak/rıht meshleri temel alındı. Her yüzey kendi par
 DÜZELTİLDİ: yakın parke görüntüsünde önceki çapraz koyu çizgi artık görünmüyor. Düz ince damar ve tahtaların ayrı derzleri okunuyor; parke bu haliyle kilitli. Fotoğrafın daha açık/parlak görünmesi ışık/pozlama eşleşmesi olarak KALDI; bu adımda yeniden doku döngüsü açılmadı.
 
 DÜZELTİLDİ: merdiven basamak ve rıhtları ortada sarım eki olmadan tek parça görünüyor. KALDI: foto18'e göre aydınlık/parlaklık düşük ve burun profili fotoğraftaki kadar dolgun/yuvarlak değil; Adım05 geometrisinin yuvarlatılmış kenarı korundu ancak profil bütünüyle birebir sayılmıyor. Foto40 tam kamera/kapı eşleşmesi, kapı altı ince ışık çizgileri ve kartonpiyer uç profilleri de KALDI. Bunlar Adım08'e devredildi.
+
+## Adım 08 — 20 dakika ara kontrol
+
+- A ahşap kütüphanesi: KALDI — 4K kaynaklar ve UV uygulandı; foto01 ve21 renk örnekleri yanlış yüzeyi içerdi, ikinci bölümde yeniden örneklenecek.
+- A foto16: KALDI — ceviz/ayna malzemesi uygulandı, geniş sürgülü kanat geometrisi henüz yapılmadı.
+- A foto41: YAPILDI — ahşap çerçeve içinde yansıtıcı ayna kapaklar.
+- B zemin/seramik: KALDI — 45° terrakota, krem bordür ve banyo bordürü var; stok kesitteki eski derz izleri ve renk soğukluğu düzeltilecek.
+- C ortak korkuluk ve foto18: YAPILDI — tek mesh C/S prototipi kopyalandı, eksik galeri kenarı eklendi.
+- C foto02: YAPILDI — ikinci kol altı zemine kadar dolu.
+- C foto47: KALDI — sağ duvar kapatıldı; beyaz basamak kenarı görünümü son kontrol gerektiriyor.
+- D foto11: YAPILDI — kanat menteşeden tam açıldı, banyo görünür.
+- D foto40: YAPILDI — bağımsız menteşeli iki camlı kanat.
+- D foto13/17: KALDI — düzgün üç kollu siyah armatür var; foto13 kadrajında üstten kesiliyor, kamera düzeltilecek.
+- D foto06: KALDI — aplik ve ışık eklendi; yeni kamera duvara takıldı, kontrol kadrajı düzeltilecek.

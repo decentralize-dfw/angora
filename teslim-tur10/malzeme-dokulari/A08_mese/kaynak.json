@@ -1,0 +1,14 @@
+{
+  "albedo": {
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/oak_veneer_01/oak_veneer_01_diff_4k.jpg",
+    "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\oak_veneer_01\\albedo.jpg"
+  },
+  "normal": {
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/oak_veneer_01/oak_veneer_01_nor_gl_4k.jpg",
+    "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\oak_veneer_01\\normal.jpg"
+  },
+  "roughness": {
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/oak_veneer_01/oak_veneer_01_rough_4k.jpg",
+    "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\oak_veneer_01\\roughness.jpg"
+  }
+}

@@ -175,3 +175,18 @@ Küpeşte ΔE76 **2.04**. 44 fotoğraf tahta rengi + 4K ceviz damarı; bağıms�
 [Parke 2×2](../adim07/parke_2x2.jpg) · [Yarım boy kaydırma](../adim07/parke_kaydir.jpg) · [Wireframe](../adim07/parke_wireframe.png) · [40 fotoğraf denetimi](../notlar.md)
 
 **KALDI / Adım08:** merdiven aydınlığı ve burun profili; eşik ışık çizgileri ve kartonpiyer birleşimleri; foto40 tam kamera/kapı eşleşmesi; yeni odalardaki kamera engelleri, eksik/farklı nesneler ve malzemeler. Foto07 siyah, 06/11/14/30/35/39/45/46/49 kadrajları engelli veya yanlış yönde; bunlar başarılı eşleşme sayılmadı. 40 dosyanın tamamı yukarıda görünür. Parke kilitli.
+
+## 08 · Adım 08 · 20 dakika ara kontrol
+![Adım 08 · 20 dakika ara kontrol foto 01](08_adim-08-20-dakika-ara-kontrol_foto_01.jpg)
+![Adım 08 · 20 dakika ara kontrol foto 02](08_adim-08-20-dakika-ara-kontrol_foto_02.jpg)
+![Adım 08 · 20 dakika ara kontrol foto 06](08_adim-08-20-dakika-ara-kontrol_foto_06.jpg)
+![Adım 08 · 20 dakika ara kontrol foto 11](08_adim-08-20-dakika-ara-kontrol_foto_11.jpg)
+![Adım 08 · 20 dakika ara kontrol foto 13](08_adim-08-20-dakika-ara-kontrol_foto_13.jpg)
+![Adım 08 · 20 dakika ara kontrol foto 16](08_adim-08-20-dakika-ara-kontrol_foto_16.jpg)
+![Adım 08 · 20 dakika ara kontrol foto 17](08_adim-08-20-dakika-ara-kontrol_foto_17.jpg)
+![Adım 08 · 20 dakika ara kontrol foto 18](08_adim-08-20-dakika-ara-kontrol_foto_18.jpg)
+![Adım 08 · 20 dakika ara kontrol foto 21](08_adim-08-20-dakika-ara-kontrol_foto_21.jpg)
+![Adım 08 · 20 dakika ara kontrol foto 32](08_adim-08-20-dakika-ara-kontrol_foto_32.jpg)
+![Adım 08 · 20 dakika ara kontrol foto 40](08_adim-08-20-dakika-ara-kontrol_foto_40.jpg)
+![Adım 08 · 20 dakika ara kontrol foto 41](08_adim-08-20-dakika-ara-kontrol_foto_41.jpg)
+![Adım 08 · 20 dakika ara kontrol foto 47](08_adim-08-20-dakika-ara-kontrol_foto_47.jpg)

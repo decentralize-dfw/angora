@@ -1,7 +1,7 @@
 """Fotoğraf dokuları: yüz merkezi kutularıyla seçme + metre ölçekli UV.
 Render ve GLB dışa aktarımı aynı fonksiyonu kullanır. Işıklara dokunmaz.
 """
-import bpy,json,re
+import bpy,json,re,math
 from pathlib import Path
 
 def uygula(objects,spec_path):
@@ -18,6 +18,8 @@ def uygula(objects,spec_path):
   nt=mat.node_tree;nt.nodes.clear();bs=nt.nodes.new('ShaderNodeBsdfPrincipled');out=nt.nodes.new('ShaderNodeOutputMaterial');nt.links.new(bs.outputs[0],out.inputs[0])
   bs.inputs['Roughness'].default_value=rec.get('purluluk',.5)
   bs.inputs['Metallic'].default_value=.85 if rec['no']==14 else 0.
+  if rec.get('mirror'):
+   bs.inputs['Metallic'].default_value=1;bs.inputs['Base Color'].default_value=(.92,.92,.92,1);bs.inputs['Roughness'].default_value=.025;cache[key]=mat;return mat
   bs.inputs['Coat Weight'].default_value=rec.get('clearcoat') or 0.
   if rec['no'] in [9,13]:
    bs.inputs['Specular IOR Level'].default_value=.20
@@ -77,10 +79,16 @@ def uygula(objects,spec_path):
    axes=(0,1) if axis==2 else ((0,2) if axis==1 else (1,2))
    if rec['no'] in [3,19] and axis==2:axes=(1,0)
    if rec.get('ahsap_tek_parca') and rec['no']==10:axes=(1,0) if axis==2 else ((1,2) if axis==0 else (0,2))
+   if rec.get('ahsap_uzun_kenar'):
+    spans=[max(pt[i] for pt in pts)-min(pt[i] for pt in pts) for i in axes]
+    if spans[1]>spans[0]:axes=(axes[1],axes[0])
    sx,sy=rec.get('doku_olcusu_xy_m',[rec.get('doku_olcusu_m',1)]*2)
    for li,pt in zip(p.loop_indices,pts):
     if rec.get('ahsap_tek_parca') and rec['no']==10:
      lo=[min(v[i] for v in coords) for i in axes];hi=[max(v[i] for v in coords) for i in axes]
      uv.data[li].uv=(.01+.98*(pt[axes[0]]-lo[0])/max(hi[0]-lo[0],.001),.01+.98*(pt[axes[1]]-lo[1])/max(hi[1]-lo[1],.001))
-    else:uv.data[li].uv=(pt[axes[0]]/sx,pt[axes[1]]/sy)
+    else:
+     u,v=pt[axes[0]]/sx,pt[axes[1]]/sy
+     angle=math.radians(45 if rec['no']==27 and axis==2 else rec.get('uv_aci',0))
+     uv.data[li].uv=(u*math.cos(angle)-v*math.sin(angle),u*math.sin(angle)+v*math.cos(angle))
  print('[foto-doku]',len(cache),'malzeme',total,'yüz',flush=True)

@@ -708,69 +708,6 @@
   ]
  },
  {
-  "ad": "M2_eski_basamak_ve_korkuluk",
-  "katman": "mimari",
-  "min": [
-   0.12,
-   -0.51,
-   0.001
-  ],
-  "max": [
-   4.19,
-   3.15,
-   10.5
-  ],
-  "malzemeler": [
-   "Simple wood",
-   "metal.001"
-  ]
- },
- {
-  "ad": "M2_eski_kupeşte_ve_pirinc",
-  "katman": "mobilya",
-  "min": [
-   0.12,
-   -0.51,
-   0.001
-  ],
-  "max": [
-   4.19,
-   3.15,
-   10.5
-  ],
-  "malzemeler": [
-   "brass (4)",
-   "R31 | R33 antique nook walnut"
-  ]
- },
- {
-  "ad": "M2_INTERIOR_eski_beyaz_merdiven",
-  "katman": "mimari",
-  "min": [
-   0.75,
-   0.9,
-   -0.01
-  ],
-  "max": [
-   4.19,
-   3.15,
-   9.47
-  ],
-  "malzemeler": [
-   "Simple White Wall"
-  ],
-  "not": "Adım05: yalnız küçük basamak/rıht yüzleri; büyük duvar/tavan ve Y-normal yan yüzler korunur.",
-  "max_face_span": [
-   1.1,
-   1.25,
-   0.22
-  ],
-  "normal_axes": [
-   0,
-   2
-  ]
- },
- {
   "ad": "Tur10_foto29_yerel_duvar",
   "katman": "mimari",
   "min": [
@@ -891,5 +828,77 @@
    1
   ],
   "not": "Foto47 ray testinde doğrulanan eski beyaz merdiven yan düzlemi; büyük tavan ve farklı duvar düzlemleri hariç."
+ },
+ {
+  "ad": "M2_eski_basamak_ve_korkuluk",
+  "katman": "mimari",
+  "min": [
+   0.12,
+   -0.51,
+   0.001
+  ],
+  "max": [
+   4.19,
+   3.15,
+   10.5
+  ],
+  "malzemeler": [
+   "Simple wood",
+   "metal.001"
+  ]
+ },
+ {
+  "ad": "M2_eski_kupeşte_ve_pirinc",
+  "katman": "mobilya",
+  "min": [
+   0.12,
+   -0.51,
+   0.001
+  ],
+  "max": [
+   4.19,
+   3.15,
+   10.5
+  ],
+  "malzemeler": [
+   "brass (4)",
+   "R31 | R33 antique nook walnut"
+  ]
+ },
+ {
+  "ad": "M2_INTERIOR_eski_beyaz_merdiven",
+  "katman": "mobilya",
+  "min": [
+   0.75,
+   0.9,
+   -0.01
+  ],
+  "max": [
+   4.19,
+   3.15,
+   9.47
+  ],
+  "malzemeler": [
+   "Simple White Wall"
+  ],
+  "not": "Foto47 ray ölçümü: interior.002 üzerindeki eski beyaz basamaklar; EKLER merdiveni korunur."
+ },
+ {
+  "ad": "A08_F13_17_eski_abajur",
+  "katman": "mobilya",
+  "min": [
+   -0.9,
+   -3.5,
+   8.0
+  ],
+  "max": [
+   0.05,
+   -2.5,
+   9.1
+  ],
+  "malzemeler": [
+   "ROUGHNSS1"
+  ],
+  "not": "Ölçülen düşük poligonlu sarkıt yerine foto13/17 üç kollu siyah armatür."
  }
 ]

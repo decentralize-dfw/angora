@@ -1,5 +1,335 @@
 [
  {
+  "no": 29,
+  "yuzey": "Bodrum krem karo bordür ve dikdörtgen",
+  "malzemeler": [
+   "WHT.001"
+  ],
+  "klasor": "A08_seramik",
+  "doku_olcusu_xy_m": [
+   1.2,
+   1.2
+  ],
+  "doku_olcusu_m": 1,
+  "purluluk": 0.4,
+  "normal_siddeti": 0.08,
+  "clearcoat": 0,
+  "renk_hex": null,
+  "ahsap_uzun_kenar": false,
+  "kaynak": "Fotoğraf WB ölçümü + Poly Haven 4K",
+  "lisans": "CC0",
+  "kutular": [
+   {
+    "min": [
+     -100,
+     -100,
+     -0.04
+    ],
+    "max": [
+     100,
+     100,
+     0.05
+    ]
+   }
+  ]
+ },
+ {
+  "no": 28,
+  "yuzey": "bordur",
+  "malzemeler": [
+   "R31 | R33 master fine mosaic band"
+  ],
+  "klasor": "A08_bordur",
+  "doku_olcusu_xy_m": [
+   0.64,
+   0.08
+  ],
+  "doku_olcusu_m": 1,
+  "purluluk": 0.4,
+  "normal_siddeti": 0,
+  "clearcoat": 0,
+  "renk_hex": null,
+  "ahsap_uzun_kenar": false,
+  "kaynak": "Fotoğraf WB ölçümü + Poly Haven 4K",
+  "lisans": "CC0"
+ },
+ {
+  "no": 27,
+  "yuzey": "seramik",
+  "malzemeler": [
+   "R31 | R33 master pale cream tile",
+   "A08_Krem_bordur"
+  ],
+  "klasor": "A08_seramik",
+  "doku_olcusu_xy_m": [
+   1.2,
+   1.2
+  ],
+  "doku_olcusu_m": 1,
+  "purluluk": 0.4,
+  "normal_siddeti": 0.08,
+  "clearcoat": 0,
+  "renk_hex": null,
+  "ahsap_uzun_kenar": false,
+  "kaynak": "Fotoğraf WB ölçümü + Poly Haven 4K",
+  "lisans": "CC0"
+ },
+ {
+  "no": 26,
+  "yuzey": "terrakota",
+  "malzemeler": [
+   "terra_floor",
+   "A08_Terrakota"
+  ],
+  "klasor": "A08_terrakota",
+  "doku_olcusu_xy_m": [
+   1.32,
+   1.32
+  ],
+  "doku_olcusu_m": 1,
+  "purluluk": 0.52,
+  "normal_siddeti": 0.12,
+  "clearcoat": 0,
+  "renk_hex": null,
+  "ahsap_uzun_kenar": false,
+  "kaynak": "Fotoğraf WB ölçümü + Poly Haven 4K",
+  "lisans": "CC0",
+  "uv_aci": 45,
+  "kutular": [
+   {
+    "min": [
+     -100,
+     -100,
+     -0.1
+    ],
+    "max": [
+     100,
+     100,
+     0.15
+    ]
+   }
+  ]
+ },
+ {
+  "no": 25,
+  "yuzey": "ayna",
+  "malzemeler": [
+   "wood_honey"
+  ],
+  "klasor": "A08_ayna",
+  "doku_olcusu_xy_m": [
+   1,
+   1
+  ],
+  "doku_olcusu_m": 1,
+  "purluluk": 0.025,
+  "normal_siddeti": 0,
+  "clearcoat": 0,
+  "renk_hex": null,
+  "ahsap_uzun_kenar": false,
+  "kaynak": "Fotoğraf WB ölçümü + Poly Haven 4K",
+  "lisans": "CC0",
+  "mirror": true,
+  "kutular": [
+   {
+    "min": [
+     3.325,
+     -3.925,
+     3.22
+    ],
+    "max": [
+     3.37,
+     -3.599,
+     5.76
+    ]
+   },
+   {
+    "min": [
+     3.325,
+     -3.445,
+     3.22
+    ],
+    "max": [
+     3.37,
+     -3.119,
+     5.76
+    ]
+   },
+   {
+    "min": [
+     3.325,
+     -2.965,
+     3.22
+    ],
+    "max": [
+     3.37,
+     -2.6390000000000002,
+     5.76
+    ]
+   }
+  ]
+ },
+ {
+  "no": 24,
+  "yuzey": "ayna",
+  "malzemeler": [
+   "FINISH | Silver mirror",
+   "A08_Ayna"
+  ],
+  "klasor": "A08_ayna",
+  "doku_olcusu_xy_m": [
+   1,
+   1
+  ],
+  "doku_olcusu_m": 1,
+  "purluluk": 0.025,
+  "normal_siddeti": 0,
+  "clearcoat": 0,
+  "renk_hex": null,
+  "ahsap_uzun_kenar": false,
+  "kaynak": "Fotoğraf WB ölçümü + Poly Haven 4K",
+  "lisans": "CC0",
+  "mirror": true
+ },
+ {
+  "no": 23,
+  "yuzey": "ceviz",
+  "malzemeler": [
+   "wood_honey"
+  ],
+  "klasor": "A08_ceviz",
+  "doku_olcusu_xy_m": [
+   1,
+   1
+  ],
+  "doku_olcusu_m": 1,
+  "purluluk": 0.52,
+  "normal_siddeti": 0.16,
+  "clearcoat": 0,
+  "renk_hex": null,
+  "ahsap_uzun_kenar": true,
+  "kaynak": "Fotoğraf WB ölçümü + Poly Haven 4K",
+  "lisans": "CC0",
+  "kutular": [
+   {
+    "min": [
+     3.2,
+     -4.2,
+     3.09
+    ],
+    "max": [
+     3.7,
+     -2.4,
+     6.0
+    ]
+   }
+  ]
+ },
+ {
+  "no": 22,
+  "yuzey": "mese",
+  "malzemeler": [
+   "Simple wood",
+   "wood_honey",
+   "R31 | R33 antique nook walnut"
+  ],
+  "klasor": "A08_mese",
+  "doku_olcusu_xy_m": [
+   1,
+   1
+  ],
+  "doku_olcusu_m": 1,
+  "purluluk": 0.52,
+  "normal_siddeti": 0.16,
+  "clearcoat": 0,
+  "renk_hex": null,
+  "ahsap_uzun_kenar": true,
+  "kaynak": "Fotoğraf WB ölçümü + Poly Haven 4K",
+  "lisans": "CC0",
+  "kutular": [
+   {
+    "min": [
+     -6,
+     -0.2,
+     0.02
+    ],
+    "max": [
+     -2,
+     4.2,
+     2.5
+    ]
+   }
+  ]
+ },
+ {
+  "no": 21,
+  "yuzey": "kiraz",
+  "malzemeler": [
+   "wood_honey"
+  ],
+  "klasor": "A08_kiraz",
+  "doku_olcusu_xy_m": [
+   1,
+   1
+  ],
+  "doku_olcusu_m": 1,
+  "purluluk": 0.52,
+  "normal_siddeti": 0.16,
+  "clearcoat": 0,
+  "renk_hex": null,
+  "ahsap_uzun_kenar": true,
+  "kaynak": "Fotoğraf WB ölçümü + Poly Haven 4K",
+  "lisans": "CC0",
+  "kutular": [
+   {
+    "min": [
+     -6.5,
+     -4.4,
+     3.1
+    ],
+    "max": [
+     -1.8,
+     0.1,
+     5.8
+    ]
+   }
+  ]
+ },
+ {
+  "no": 20,
+  "yuzey": "ceviz",
+  "malzemeler": [
+   "wood_honey"
+  ],
+  "klasor": "A08_ceviz",
+  "doku_olcusu_xy_m": [
+   1,
+   1
+  ],
+  "doku_olcusu_m": 1,
+  "purluluk": 0.52,
+  "normal_siddeti": 0.16,
+  "clearcoat": 0,
+  "renk_hex": null,
+  "ahsap_uzun_kenar": true,
+  "kaynak": "Fotoğraf WB ölçümü + Poly Haven 4K",
+  "lisans": "CC0",
+  "kutular": [
+   {
+    "min": [
+     0.2,
+     3.3,
+     6.35
+    ],
+    "max": [
+     2.6,
+     5.9,
+     8.85
+    ]
+   }
+  ]
+ },
+ {
   "no": 1,
   "yuzey": "iç duvar boyası",
   "malzemeler": [

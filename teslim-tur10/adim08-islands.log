@@ -1,0 +1,54 @@
+22:59:56 | INFO: Data are loaded, start creating Blender stuff
+22:59:56 | INFO: Blender create Mesh node Mesh_15183.008
+22:59:56 | INFO: Blender create Mesh node Mesh_3020.001
+22:59:56 | INFO: Blender create Mesh node Mesh_15183.003
+22:59:56 | INFO: Blender create Mesh node Mesh_11.004
+22:59:56 | INFO: Blender create Mesh node antique_wood (2) | interior-common.118
+22:59:56 | INFO: Blender create Mesh node Mesh_3020.004
+22:59:56 | INFO: Blender create Mesh node Cube.001
+22:59:56 | INFO: Blender create Mesh node Mesh_3020.009
+22:59:57 | INFO: Blender create Mesh node Mesh_15183.114
+22:59:57 | INFO: Blender create Mesh node Cube.003
+22:59:57 | INFO: Blender create Mesh node Mesh_93.005
+22:59:58 | INFO: Blender create Mesh node Mesh_3020.002
+22:59:59 | INFO: Blender create Mesh node Mesh_242
+22:59:59 | INFO: Blender create Mesh node Mesh_11.003
+22:59:59 | INFO: Blender create Mesh node Mesh_11.001
+22:59:59 | INFO: Blender create Mesh node Mesh_15183.002
+22:59:59 | INFO: Blender create Mesh node Mesh_15183.104
+22:59:59 | INFO: Blender create Mesh node Mesh_15183.109
+22:59:59 | INFO: Blender create Mesh node Mesh_97
+22:59:59 | INFO: Blender create Mesh node Mesh_15183.103
+22:59:59 | INFO: Blender create Mesh node Mesh_15183.107
+22:59:59 | INFO: Blender create Mesh node Mesh_15183.108
+22:59:59 | INFO: Blender create Mesh node Mesh_15183.099
+22:59:59 | INFO: Blender create Mesh node Mesh_15183.100
+22:59:59 | INFO: Blender create Mesh node Mesh_15183.001
+22:59:59 | INFO: glTF import finished in 2.31s
+22:59:59 | INFO: Data are loaded, start creating Blender stuff
+22:59:59 | INFO: Blender create Mesh node antique_wood (2) | interior-common.087
+22:59:59 | INFO: Blender create Mesh node antique_wood (2) | interior-common.017
+22:59:59 | INFO: Blender create Mesh node antique_wood (2) | interior-common.013
+22:59:59 | INFO: Blender create Mesh node antique_wood (2) | interior-common.043
+22:59:59 | INFO: Blender create Mesh node antique_wood (2) | interior-common.001
+22:59:59 | INFO: Blender create Mesh node antique_wood (2) | interior-common.016
+22:59:59 | INFO: Blender create Mesh node antique_wood (2) | interior-common.084
+22:59:59 | INFO: Blender create Mesh node antique_wood (2) | interior-common.060
+22:59:59 | INFO: Blender create Mesh node antique_wood (2) | interior-common.058
+22:59:59 | INFO: Blender create Mesh node antique_wood (2) | interior-common.067
+22:59:59 | INFO: Blender create Mesh node antique_wood (2) | interior-common.140
+22:59:59 | INFO: Blender create Mesh node antique_wood (2) | interior-common.094
+22:59:59 | INFO: Blender create Mesh node antique_wood (2) | interior-common.047
+22:59:59 | INFO: Blender create Mesh node antique_wood (2) | interior-common.065
+23:00:00 | INFO: Blender create Mesh node antique_wood (2) | interior-common.073
+23:00:00 | INFO: Blender create Mesh node antique_wood (2) | interior-common.019
+23:00:00 | INFO: Blender create Mesh node antique_wood (2) | interior-common.049
+23:00:00 | INFO: Blender create Mesh node antique_wood (2) | interior-common.100
+23:00:00 | INFO: Blender create Mesh node antique_wood (2) | interior-common.120
+23:00:00 | INFO: Blender create Mesh node antique_wood (2) | interior-common.110
+23:00:00 | INFO: Blender create Mesh node antique_wood (2) | interior-common.116
+23:00:00 | INFO: glTF import finished in 1.37s
+islands 26610
+Blender 5.2.1 LTS (hash 9e2066aef7ef built 2026-08-25 02:38:20)
+
+Blender quit

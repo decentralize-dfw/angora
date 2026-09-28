@@ -1,0 +1,14 @@
+{
+  "albedo": {
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/european_walnut_veneer_05/european_walnut_veneer_05_diff_4k.jpg",
+    "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\european_walnut_veneer_05\\albedo.jpg"
+  },
+  "normal": {
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/european_walnut_veneer_05/european_walnut_veneer_05_nor_gl_4k.jpg",
+    "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\european_walnut_veneer_05\\normal.jpg"
+  },
+  "roughness": {
+    "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/4k/european_walnut_veneer_05/european_walnut_veneer_05_rough_4k.jpg",
+    "path": "C:\\Users\\yigit\\angora-tur10\\adim08\\stok\\european_walnut_veneer_05\\roughness.jpg"
+  }
+}
