@@ -30,3 +30,5 @@ build/blender/angora-blender36-tam.glb
 build/blender/angora-blender36-malzeme.glb
 build/blender/angora-blender36-full.glb
 angora-bake/
+build/bake/BUILDING-opt-v4.decoded.glb
+build/bake/GARDEN-opt-v2.decoded.glb
