@@ -36,7 +36,7 @@ places = json.load(open(os.path.join(ROOT, 'viewer/src/region-places.json')))
 LOCAL = [
     # görsel-1: Hitit Bulvarı batısı
     {'name': 'Masha Kuaför', 'g': 5, 'x': -150.1, 'y': -0.8},
-    {'name': 'Angora Veteriner Kliniği', 'en': 'Angora Veterinary Clinic', 'g': 5, 'x': -152.8, 'y': 25.5},
+    {'name': 'Angora Veteriner Kliniği', 'en': 'Angora Veterinary Clinic', 'g': 1, 'x': -152.8, 'y': 25.5},
     {'name': 'Yigitistan Art Studio', 'g': 5, 'x': -140.9, 'y': 49.6},
     # görsel-2: Şehitler Parkı (spor alanı) - sahalar OSM poligonlarından
     {'name': 'GMO Simitçi', 'g': 2, 'x': -114.6, 'y': -283.7},

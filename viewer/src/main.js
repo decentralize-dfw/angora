@@ -2484,7 +2484,7 @@ function bindInterface() {
   bindPegman();
   $('#walk-room').onchange=event=>travelRoom(event.target.value);
   $('#toggle-plan').onclick=()=>{planMode=!planMode;$('#toggle-plan').setAttribute('aria-pressed',planMode);$('#toggle-plan').textContent=planMode?'3D':'Plan';mode(planMode);quality?.applyView(selected,{plan:planMode});frame(false);};
-  $('#region-summary').ontoggle=()=>{invalidateUIObstacles();invalidate();};
+  $('#region-summary').ontoggle=()=>{regionMap?.setPanelOpen?.($('#region-summary').open);invalidateUIObstacles();invalidate();};
   $('#toggle-auto-rotate').onclick=()=>setAutoRotate(!controls.autoRotate);
   // A press takes the camera; merely moving the mouse does not. The idle
   // street orbit still yields to a move, but the tour's own turn would

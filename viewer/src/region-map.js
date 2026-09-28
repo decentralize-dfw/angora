@@ -205,7 +205,8 @@ export function createRegionMap(host) {
     if (p.d <= 2000 && !hiddenCurated.has(i)) dotMarks.push(shape('circle', `rm-poi rm-g${p.g}`, { cx: p.x, cy: p.y, r: 4, 'vector-effect': 'non-scaling-stroke' }));
   }
   // Çevrede katmanı: gerçek konumda küçük bir nokta, adı üstünde (her zaman)
-  for (const p of local.places) dotMarks.push(shape('circle', 'rm-local-dot', { cx: p.x, cy: p.y, r: 4, fill: places.groups[p.g] }));
+  // Donatı katmanına uyar: grubu kapalıysa noktası da etiketi de yok
+  for (const p of local.places) dotMarks.push(shape('circle', `rm-local-dot rm-g${p.g}`, { cx: p.x, cy: p.y, r: 4, fill: places.groups[p.g] }));
   for (const g of local.gates) dotMarks.push(shape('circle', 'rm-gate-dot', { cx: g.x, cy: g.y, r: 4 }));
 
   // labels: glass chips in screen space, gliding with the same projection
@@ -233,7 +234,7 @@ export function createRegionMap(host) {
   for (const p of local.places) {
     const c = chip("rm-chip-poi rm-chip-local", `${en && p.en ? p.en : p.name}` +
       (p.list ? `<small>${p.list}</small>` : ''), p.x, p.y);
-    c.dataset.distance = Math.hypot(p.x, p.y); c.dataset.g = '-2'; c.dataset.rank = p.rank ?? 2;
+    c.dataset.distance = Math.hypot(p.x, p.y); c.dataset.g = String(p.g); c.dataset.rank = p.rank ?? 2;
   }
   for (const g of local.gates) {
     const c = chip('rm-chip-poi rm-chip-local rm-chip-gate', en ? 'Site gate' : 'Site kapısı', g.x, g.y);
@@ -328,8 +329,27 @@ export function createRegionMap(host) {
   // Angora Evleri sınırı (OSM): ekran izdüşümü her layout'ta yenilenir.
   const ring = streets.boundary ? (() => { const r = []; const f = streets.boundary.ring; for (let i = 0; i < f.length; i += 2) r.push([f[i], f[i + 1]]); return r; })() : null;
   let screenRing = [];
-  let hoverOn = false, tourOn = false;
-  const siteOn = () => el.classList.toggle('rm-site-on', hoverOn || tourOn);
+  let hoverOn = false, tourOn = false, clickOn = false, panelOn = false;
+  const siteOn = () => el.classList.toggle('rm-site-on', hoverOn || tourOn || clickOn || panelOn);
+  // Haritadaki "Angora Evleri" yazısı: basınca sınır vurgusu açılır/kapanır
+  const siteChip = chips.find(c => c.el.classList.contains('rm-chip-site'));
+  if (siteChip) {
+    siteChip.el.setAttribute('role', 'button'); siteChip.el.tabIndex = 0;
+    const toggle = () => { clickOn = !clickOn; siteOn(); };
+    siteChip.el.addEventListener('click', toggle);
+    siteChip.el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  }
+  // Adı yazmayan noktalar: üzerine gelince ad belirir
+  const tip = document.createElement('span');
+  tip.className = 'rm-chip rm-tip'; tip.hidden = true; labels.append(tip);
+  const hoverables = [
+    ...dotLabels.map(l => ({x: l.x, y: l.y, g: l.g, name: l.name, shown: () => l.el.getAttribute('visibility') === 'visible'})),
+    ...local.places.map(p => {
+      const c = chips.find(ch => ch.el.classList.contains('rm-chip-local') && ch.mx === p.x && ch.my === p.y);
+      return {x: p.x, y: p.y, g: p.g, name: currentLang() === 'en' && p.en ? p.en : p.name, shown: () => c && c.el.style.opacity === '1'};
+    }),
+  ];
+  let screenScale = 1, screenCentre = [0, 0];
   const ringDistance = (px, py) => {
     let best = Infinity;
     for (let i = 0; i < screenRing.length; i++) {
@@ -344,13 +364,27 @@ export function createRegionMap(host) {
   // Çizginin üstüne gelince açılır; imleç sitenin içinde ya da çizgiye
   // yakın kaldıkça açık kalır, dışarı uzaklaşınca kapanır.
   el.addEventListener('pointermove', (event) => {
-    if (!screenRing.length || event.pointerType === 'touch') return;
+    if (event.pointerType === 'touch') return;
     const r = el.getBoundingClientRect(), px = event.clientX - r.left, py = event.clientY - r.top;
+    // en yakın, katmanı açık ve adı görünmeyen nokta (10 px içinde)
+    const cosB = Math.cos(bearing * Math.PI / 180), sinB = Math.sin(bearing * Math.PI / 180);
+    let near = null, nearD = 10;
+    for (const h of hoverables) {
+      if (off.has(h.g)) continue;
+      const sx = screenCentre[0] + (h.x * cosB - h.y * sinB) * screenScale, sy = screenCentre[1] + (h.x * sinB + h.y * cosB) * screenScale;
+      const d = Math.hypot(sx - px, sy - py);
+      if (d < nearD) { nearD = d; near = {h, sx, sy}; }
+    }
+    if (near && !near.h.shown()) {
+      tip.textContent = near.h.name; tip.hidden = false;
+      tip.style.transform = `translate(-50%, -100%) translate(${near.sx.toFixed(1)}px, ${(near.sy - 8).toFixed(1)}px)`;
+    } else tip.hidden = true;
+    if (!screenRing.length) return;
     const d = ringDistance(px, py);
     const next = d < 10 || (hoverOn && (d < 36 || insideRing(px, py)));
     if (next !== hoverOn) { hoverOn = next; siteOn(); }
   });
-  el.addEventListener('pointerleave', () => { if (hoverOn) { hoverOn = false; siteOn(); } });
+  el.addEventListener('pointerleave', () => { tip.hidden = true; if (hoverOn) { hoverOn = false; siteOn(); } });
   let radius = 1000;
   // The map is north-up at rest. The narrated tour turns it slowly about
   // the villa - its own centre - while the opening sentences place the
@@ -365,6 +399,7 @@ export function createRegionMap(host) {
     const phone = Math.min(vw, vh) < 560;
     const cx = vw / 2, cy = vh / 2;
     world.style.transform = `translate(${cx}px, ${cy}px) rotate(${bearing}deg) scale(${s})`;
+    screenScale = s; screenCentre = [cx, cy]; tip.hidden = true;
     // The same turn, applied to the metre coordinates the chips are placed
     // from, so screen-space labels and the drawing under them stay agreed.
     const cosB = Math.cos(bearing * Math.PI / 180), sinB = Math.sin(bearing * Math.PI / 180);
@@ -468,6 +503,7 @@ export function createRegionMap(host) {
     localChips.sort((a, b) => (Number(a.el.dataset.rank) - Number(b.el.dataset.rank)) ||
       (Number(a.el.dataset.distance) - Number(b.el.dataset.distance)));
     for (const c of localChips) {
+      if (off.has(Number(c.el.dataset.g))) { c.el.style.opacity = 0; continue; }
       const [mx, my] = turn(c.mx, c.my), x = cx + mx * s, y = cy + my * s;
       const w = (c.el.offsetWidth || 120) + 6, h = (c.el.offsetHeight || 22) + 4;
       let placed = null;
@@ -541,6 +577,8 @@ export function createRegionMap(host) {
     // Everything outside the settlement goes dark, along its own outline.
     // 28.09: karartma yerine sınır vurgusu - dışarısı %20 beyaz + 8 px bulanık.
     setHighlight(on) { tourOn = Boolean(on); siteOn(); },
+    // Sol alttaki "Angora Evleri" paneli açıkken de sınır vurgusu
+    setPanelOpen(on) { panelOn = Boolean(on); siteOn(); },
     // Sesli rehberin o cümlede andığı yerler; [] hepsini söndürür.
     setMentions(ids = []) {
       // 'angora-evleri': sitenin kendisi - halka değil, sınır vurgusu

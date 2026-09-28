@@ -854,7 +854,10 @@ body.pegman-dragging,body.pegman-dragging *{cursor:grabbing !important}
 /* Bölge paneli: açılınca genişliği değişmez, yukarı daha çok açılır. */
 @media(min-width:601px){
   .region-panel{width:292px;max-width:292px}
-  #region-summary div{max-height:min(46dvh,400px)}
+  /* interface-quality.css'teki 180 px sınırı bunu eziyordu ("hâlâ bodur"):
+     masaüstünde metnin tamamı kaydırmasız sığar; yalnız ekran gerçekten
+     kısaysa kaydırma devreye girer. */
+  .region-panel #region-summary #region-description{max-height:calc(100dvh - 250px);overflow:auto}
 }
 
 /* Bölge "çevrede" katmanı (28.09): ürün sahibinin işaretlediği yerler ve
@@ -871,3 +874,9 @@ body.pegman-dragging,body.pegman-dragging *{cursor:grabbing !important}
 .rm-chip-road{background:transparent;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;padding:0;
   font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(22,29,26,.62);
   text-shadow:0 0 3px #eef1ec,0 0 3px #eef1ec,0 0 6px #eef1ec;pointer-events:none}
+
+/* Haritadaki "Angora Evleri" yazısı basılabilir: sınır vurgusunu açar/kapar. */
+.region-map .rm-chip-site{cursor:pointer;pointer-events:auto}
+.region-map .rm-chip-site:hover{color:var(--ink)}
+/* Adı yazmayan noktanın üstüne gelince beliren ad. */
+.rm-tip{pointer-events:none;z-index:3;font-size:10.5px;padding:3px 9px;background:rgba(255,255,255,.92);transition:none}
