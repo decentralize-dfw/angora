@@ -900,5 +900,85 @@
    "ROUGHNSS1"
   ],
   "not": "Ölçülen düşük poligonlu sarkıt yerine foto13/17 üç kollu siyah armatür."
+ },
+ {
+  "ad": "A08_D16_mimari_0",
+  "katman": "mimari",
+  "min": [
+   2.3,
+   3.43,
+   6.39
+  ],
+  "max": [
+   2.445,
+   5.84,
+   8.72
+  ],
+  "malzemeler": [
+   "wood_honey",
+   "FINISH | Silver mirror",
+   "brass (4)"
+  ],
+  "not": "Ölçülen eski menteşeli dolap önleri yerine sürgülü ayna kanatlar; yan gövde korunur."
+ },
+ {
+  "ad": "A08_D16_mimari_1",
+  "katman": "mimari",
+  "min": [
+   0.34,
+   3.94,
+   6.39
+  ],
+  "max": [
+   2.41,
+   4.02,
+   8.72
+  ],
+  "malzemeler": [
+   "wood_honey",
+   "FINISH | Silver mirror",
+   "brass (4)"
+  ],
+  "not": "Ölçülen eski menteşeli dolap önleri yerine sürgülü ayna kanatlar; yan gövde korunur."
+ },
+ {
+  "ad": "A08_D16_mobilya_0",
+  "katman": "mobilya",
+  "min": [
+   2.3,
+   3.43,
+   6.39
+  ],
+  "max": [
+   2.445,
+   5.84,
+   8.72
+  ],
+  "malzemeler": [
+   "wood_honey",
+   "FINISH | Silver mirror",
+   "brass (4)"
+  ],
+  "not": "Ölçülen eski menteşeli dolap önleri yerine sürgülü ayna kanatlar; yan gövde korunur."
+ },
+ {
+  "ad": "A08_D16_mobilya_1",
+  "katman": "mobilya",
+  "min": [
+   0.34,
+   3.94,
+   6.39
+  ],
+  "max": [
+   2.41,
+   4.02,
+   8.72
+  ],
+  "malzemeler": [
+   "wood_honey",
+   "FINISH | Silver mirror",
+   "brass (4)"
+  ],
+  "not": "Ölçülen eski menteşeli dolap önleri yerine sürgülü ayna kanatlar; yan gövde korunur."
  }
 ]

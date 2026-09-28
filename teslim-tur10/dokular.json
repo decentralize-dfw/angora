@@ -1,7 +1,27 @@
 [
  {
+  "no": 30,
+  "yuzey": "wenge",
+  "malzemeler": [
+   "A08_Wenge_kutuphane"
+  ],
+  "klasor": "A08_wenge",
+  "doku_olcusu_xy_m": [
+   1,
+   1
+  ],
+  "doku_olcusu_m": 1,
+  "purluluk": 0.52,
+  "normal_siddeti": 0.16,
+  "clearcoat": 0,
+  "renk_hex": null,
+  "ahsap_uzun_kenar": true,
+  "kaynak": "Fotoğraf WB ölçümü + Poly Haven 4K",
+  "lisans": "CC0"
+ },
+ {
   "no": 29,
-  "yuzey": "Bodrum krem karo bordür ve dikdörtgen",
+  "yuzey": "seramik",
   "malzemeler": [
    "WHT.001"
   ],
@@ -11,7 +31,7 @@
    1.2
   ],
   "doku_olcusu_m": 1,
-  "purluluk": 0.4,
+  "purluluk": 0.52,
   "normal_siddeti": 0.08,
   "clearcoat": 0,
   "renk_hex": null,
@@ -227,7 +247,7 @@
  },
  {
   "no": 22,
-  "yuzey": "mese",
+  "yuzey": "01 dolap ceviz cerceve - asansor haric",
   "malzemeler": [
    "Simple wood",
    "wood_honey",
@@ -254,12 +274,13 @@
      0.02
     ],
     "max": [
-     -2,
+     -2.5,
      4.2,
      2.5
     ]
    }
-  ]
+  ],
+  "not": "Asansor X=-2.15, kutu X<=-2.5; yesil ROUGHNSS1 panel ayri, degistirilmedi."
  },
  {
   "no": 21,
@@ -299,7 +320,8 @@
   "no": 20,
   "yuzey": "ceviz",
   "malzemeler": [
-   "wood_honey"
+   "wood_honey",
+   "A08_Ceviz"
   ],
   "klasor": "A08_ceviz",
   "doku_olcusu_xy_m": [

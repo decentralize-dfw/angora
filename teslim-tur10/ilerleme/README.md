@@ -190,3 +190,34 @@ Küpeşte ΔE76 **2.04**. 44 fotoğraf tahta rengi + 4K ceviz damarı; bağıms�
 ![Adım 08 · 20 dakika ara kontrol foto 40](08_adim-08-20-dakika-ara-kontrol_foto_40.jpg)
 ![Adım 08 · 20 dakika ara kontrol foto 41](08_adim-08-20-dakika-ara-kontrol_foto_41.jpg)
 ![Adım 08 · 20 dakika ara kontrol foto 47](08_adim-08-20-dakika-ara-kontrol_foto_47.jpg)
+
+## 09 · Adım 08 · kapanış düzeltmeleri
+![Adım 08 · kapanış düzeltmeleri foto 01](09_adim-08-kapanis-duzeltmeleri_foto_01.jpg)
+![Adım 08 · kapanış düzeltmeleri foto 02](09_adim-08-kapanis-duzeltmeleri_foto_02.jpg)
+![Adım 08 · kapanış düzeltmeleri foto 06](09_adim-08-kapanis-duzeltmeleri_foto_06.jpg)
+![Adım 08 · kapanış düzeltmeleri foto 11](09_adim-08-kapanis-duzeltmeleri_foto_11.jpg)
+![Adım 08 · kapanış düzeltmeleri foto 13](09_adim-08-kapanis-duzeltmeleri_foto_13.jpg)
+![Adım 08 · kapanış düzeltmeleri foto 16](09_adim-08-kapanis-duzeltmeleri_foto_16.jpg)
+![Adım 08 · kapanış düzeltmeleri foto 17](09_adim-08-kapanis-duzeltmeleri_foto_17.jpg)
+![Adım 08 · kapanış düzeltmeleri foto 18](09_adim-08-kapanis-duzeltmeleri_foto_18.jpg)
+![Adım 08 · kapanış düzeltmeleri foto 21](09_adim-08-kapanis-duzeltmeleri_foto_21.jpg)
+![Adım 08 · kapanış düzeltmeleri foto 32](09_adim-08-kapanis-duzeltmeleri_foto_32.jpg)
+![Adım 08 · kapanış düzeltmeleri foto 40](09_adim-08-kapanis-duzeltmeleri_foto_40.jpg)
+![Adım 08 · kapanış düzeltmeleri foto 41](09_adim-08-kapanis-duzeltmeleri_foto_41.jpg)
+![Adım 08 · kapanış düzeltmeleri foto 47](09_adim-08-kapanis-duzeltmeleri_foto_47.jpg)
+
+### Adım 08 — ölçüm ve yakın kontroller
+
+[Ölçüm 01](../adim08/olcum_01.jpg) · [Ölçüm 21](../adim08/olcum_21.jpg) · [Tüm renk ölçümleri](../adim08/renk-olculeri.json) · [4K ahşap kütüphanesi](../adim08/ahsap-kutuphanesi.jpg)
+
+![Yakın ceviz](../adim08/yakin_ceviz.jpg)
+
+![Yakın kiraz](../adim08/yakin_kiraz.jpg)
+
+![Yakın mutfak_cerceve](../adim08/yakin_mutfak_cerceve.jpg)
+
+![Yakın terrakota](../adim08/yakin_terrakota.jpg)
+
+![Yakın seramik](../adim08/yakin_seramik.jpg)
+
+**KALDI:** foto32 bordür/desen; foto06 armatür biçimi ve fotoğraf kadrajı; foto47 beyaz üst basamak yüzeyleri; foto40 tam kamera/oran eşleşmesi; eşik/kartonpiyer ayrıntıları ve foto16 ahşabının daha açık görünmesi. Ayrıntılı tek satırlık YAPILDI/KALDI tablosu: [notlar.md](../notlar.md). Süre uzatılmadan konu kapatıldı.

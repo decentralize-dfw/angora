@@ -83,6 +83,7 @@ def uygula(objects,spec_path):
     spans=[max(pt[i] for pt in pts)-min(pt[i] for pt in pts) for i in axes]
     if spans[1]>spans[0]:axes=(axes[1],axes[0])
    sx,sy=rec.get('doku_olcusu_xy_m',[rec.get('doku_olcusu_m',1)]*2)
+   if rec['no']==27 and axis!=2:sy=2.4
    for li,pt in zip(p.loop_indices,pts):
     if rec.get('ahsap_tek_parca') and rec['no']==10:
      lo=[min(v[i] for v in coords) for i in axes];hi=[max(v[i] for v in coords) for i in axes]

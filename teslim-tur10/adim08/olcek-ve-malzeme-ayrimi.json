@@ -1,0 +1,34 @@
+{
+ "01": {
+  "cerceve": "FOTO_22, fotograf ceviz tonu, stok mese damari",
+  "panel": "mevcut ayri ROUGHNSS1 yesil-gri mat panel, ahsap kaydina dahil degil",
+  "asansor": "X=-2.15, dolap kutusu X<=-2.5; eski ahsap eslemesine geri dondu",
+  "karo_m": 0.33,
+  "doseme_derece": 45,
+  "olcu_guveni": "Foto kabin 0.90m varsayimina gore yaklasik; saha olcumu degil"
+ },
+ "21": {
+  "kapak_ornek_roi": [
+   0.535,
+   0.34,
+   0.55,
+   0.4
+  ],
+  "haric": "Buzdolabi, davlumbaz ve duvar farkli malzemeler; wood_honey ve mekansal kutu ile sinirli"
+ },
+ "32": {
+  "zemin_karo_m": [
+   0.3,
+   0.3
+  ],
+  "duvar_karo_m": [
+   0.3,
+   0.6
+  ],
+  "olcu_guveni": "Foto ve mevcut model olcegine gore yaklasik"
+ },
+ "stok": "Poly Haven CC0; wenge icin black oak veneer muadili; orijinal stok renkleri yerine fotograf olcumu",
+ "normal": "Non-Color, guc .08-.16",
+ "ahsap_uv": "Yuzun uzun eksenine 1m bazli UV; metre olcekli",
+ "parke": "Adim07 kilitli, degistirilmedi"
+}
