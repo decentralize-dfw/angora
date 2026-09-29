@@ -119,3 +119,68 @@ export function orientForBake(doc, materials, rooms) {
   }
   return stats;
 }
+
+// Aynı malzemeden, 3 mm içinde başka bir yüzeyin TAMAMEN örttüğü üçgenler atılır.
+// Tur 10 kabuğunda 357 m² beyaz duvar iki kat halindeydi (aynı düzlem, farklı
+// bölünme): malzeme aynı olduğu için sitede görünmüyordu, pişirmede ise öndeki
+// kat arkadakinin ışığını kesiyor, biri aydınlık biri kara pişip titreşiyordu.
+// Küçükten büyüğe gidilir; atılan üçgen başkasını örtmüş sayılmaz (iki kopyadan
+// biri kalır). Kısmen örtülen üçgen kalır (delik açılmaz).
+export function dropCoveredDuplicates(doc) {
+  const root = doc.getRoot(), buffer = root.listBuffers()[0], EPS = 0.003, G = 0.25;
+  const tris = [];
+  for (const node of root.listNodes()) {
+    const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
+    for (const prim of mesh.listPrimitives()) {
+      if (!prim.getIndices()) continue;
+      const mat = prim.getMaterial()?.getName() ?? '', P = prim.getAttribute('POSITION').getArray(), I = prim.getIndices().getArray();
+      const X = i => [w[0]*P[i*3]+w[4]*P[i*3+1]+w[8]*P[i*3+2]+w[12], w[1]*P[i*3]+w[5]*P[i*3+1]+w[9]*P[i*3+2]+w[13], w[2]*P[i*3]+w[6]*P[i*3+1]+w[10]*P[i*3+2]+w[14]];
+      for (let t = 0; t < I.length; t += 3) {
+        const v = [X(I[t]), X(I[t + 1]), X(I[t + 2])];
+        const e1 = v[1].map((x, k) => x - v[0][k]), e2 = v[2].map((x, k) => x - v[0][k]);
+        const cr = [e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]], L = Math.hypot(...cr);
+        if (L < 1e-10) continue;
+        tris.push({prim, t, mat, v, n: cr.map(x => x / L), area: L / 2, e1, e2, dead: false});
+      }
+    }
+  }
+  const grid = new Map(), K = (x, y, z) => `${x},${y},${z}`;
+  tris.forEach((tr, i) => {
+    const lo = [0, 1, 2].map(k => Math.floor((Math.min(tr.v[0][k], tr.v[1][k], tr.v[2][k]) - EPS) / G));
+    const hi = [0, 1, 2].map(k => Math.floor((Math.max(tr.v[0][k], tr.v[1][k], tr.v[2][k]) + EPS) / G));
+    for (let x = lo[0]; x <= hi[0]; x++) for (let y = lo[1]; y <= hi[1]; y++) for (let z = lo[2]; z <= hi[2]; z++) {
+      const k = K(x, y, z); const l = grid.get(k); if (l) l.push(i); else grid.set(k, [i]);
+    }
+  });
+  // p'den u'nun düzlemine dik iz düşüm u'nun içinde (1 mm pay) ve uzaklık <= EPS mi
+  const covers = (u, p) => {
+    const d = u.n, a = u.v[0], dist = (p[0]-a[0])*d[0] + (p[1]-a[1])*d[1] + (p[2]-a[2])*d[2];
+    if (Math.abs(dist) > EPS) return false;
+    const q = [p[0]-d[0]*dist-a[0], p[1]-d[1]*dist-a[1], p[2]-d[2]*dist-a[2]];
+    const d00 = u.e1[0]*u.e1[0]+u.e1[1]*u.e1[1]+u.e1[2]*u.e1[2], d01 = u.e1[0]*u.e2[0]+u.e1[1]*u.e2[1]+u.e1[2]*u.e2[2], d11 = u.e2[0]*u.e2[0]+u.e2[1]*u.e2[1]+u.e2[2]*u.e2[2];
+    const d20 = q[0]*u.e1[0]+q[1]*u.e1[1]+q[2]*u.e1[2], d21 = q[0]*u.e2[0]+q[1]*u.e2[1]+q[2]*u.e2[2], den = d00*d11 - d01*d01;
+    if (Math.abs(den) < 1e-14) return false;
+    const b1 = (d11*d20 - d01*d21) / den, b2 = (d00*d21 - d01*d20) / den, tol = 0.001 / Math.sqrt(Math.max(d00, d11));
+    return b1 >= -tol && b2 >= -tol && b1 + b2 <= 1 + tol;
+  };
+  const order = tris.map((_, i) => i).sort((a, b) => tris[a].area - tris[b].area);
+  let dropped = 0, area = 0;
+  for (const i of order) {
+    const tr = tris[i], c = [0, 1, 2].map(k => (tr.v[0][k] + tr.v[1][k] + tr.v[2][k]) / 3);
+    const pts = [c, ...tr.v.map(p => p.map((x, k) => x + (c[k] - x) * 0.02)),
+      ...[[0, 1], [1, 2], [2, 0]].map(([a, b]) => tr.v[a].map((x, k) => (x + tr.v[b][k]) / 2 * 0.98 + c[k] * 0.02))];
+    const ok = pts.every(p => (grid.get(K(...p.map(x => Math.floor(x / G)))) ?? []).some(j => {
+      if (j === i) return false; const u = tris[j];
+      return !u.dead && u.mat === tr.mat && Math.abs(u.n[0]*tr.n[0] + u.n[1]*tr.n[1] + u.n[2]*tr.n[2]) > 0.98 && covers(u, p);
+    }));
+    if (ok) {tr.dead = true; dropped++; area += tr.area;}
+  }
+  const byPrim = new Map();
+  for (const tr of tris) if (tr.dead) (byPrim.get(tr.prim) ?? byPrim.set(tr.prim, new Set()).get(tr.prim)).add(tr.t);
+  for (const [prim, dead] of byPrim) {
+    const I = prim.getIndices().getArray(), keep = [];
+    for (let t = 0; t < I.length; t += 3) if (!dead.has(t)) keep.push(I[t], I[t + 1], I[t + 2]);
+    prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(keep)).setBuffer(buffer));
+  }
+  return {dropped, area};
+}

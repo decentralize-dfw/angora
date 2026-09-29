@@ -4,11 +4,11 @@
  "atlaslar": {
   "duvar": {
    "boyut": 4096,
-   "alan_m2": 2453.3,
-   "px_per_m": 55.1,
-   "doluluk": 0.695,
+   "alan_m2": 2119.6,
+   "px_per_m": 59.3,
+   "doluluk": 0.687,
    "parca": 3,
-   "ada": 2016,
+   "ada": 1742,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_duvar_000": {
@@ -27,11 +27,11 @@
   },
   "zemin": {
    "boyut": 4096,
-   "alan_m2": 2292.6,
-   "px_per_m": 52.5,
+   "alan_m2": 2267.6,
+   "px_per_m": 52.7,
    "doluluk": 0.79,
    "parca": 19,
-   "ada": 9075,
+   "ada": 9167,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_zemin_000": {
@@ -114,11 +114,11 @@
   },
   "cephe": {
    "boyut": 2048,
-   "alan_m2": 1079.8,
-   "px_per_m": 41.5,
-   "doluluk": 0.733,
+   "alan_m2": 1049.5,
+   "px_per_m": 42.1,
+   "doluluk": 0.716,
    "parca": 3,
-   "ada": 783,
+   "ada": 620,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_cephe_000": {

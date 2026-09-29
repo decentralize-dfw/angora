@@ -33,7 +33,7 @@ import {execFileSync} from 'node:child_process';
 import {mkdirSync, readFileSync, statSync, writeFileSync, copyFileSync} from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {orientForBake} from './tur10-yon.mjs';
+import {orientForBake, dropCoveredDuplicates} from './tur10-yon.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(here, '../..');
@@ -1007,6 +1007,9 @@ async function addFurniture(doc) {
   await doc.transform(dedup(), flatten(), join({keepNamed: false}), prune({keepAttributes: false}),
     textureCompress({encoder: sharp, resize: [MAX_EDGE, MAX_EDGE]}));
   splitPrimitives(doc);
+  // aynı malzemeden iki kat yüzey: pişirmede biri kara çıkıp titreşiyordu (357 m² beyaz duvar)
+  const dup = dropCoveredDuplicates(doc);
+  console.log(`çift katman: ${dup.dropped} örtülen üçgen atıldı (${dup.area.toFixed(0)} m²)`);
   // Cycles yüzeyi normalinin baktığı yandan pişirir: içe bakan duvar/tavan kara çıkıyordu
   const yon = orientForBake(doc, new Set(Object.values(ATLASES).flatMap(s => s.malzemeler)),
     JSON.parse(readFileSync(path.join(REPO, 'build/web/full/rooms.json'), 'utf8')).spaces);

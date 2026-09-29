@@ -28,11 +28,12 @@ const EDGE_SHADER = {
     tNormal: {value: null}, tDepth: {value: null}, texel: {value: new THREE.Vector2()},
     opacity: {value: 0.6}, fade: {value: 1}, paper: {value: new THREE.Vector3(0.878, 0.875, 0.867)},
     cameraNear: {value: 0.1}, cameraFar: {value: 1000}, ortho: {value: 0},
+    sunView: {value: new THREE.Vector3(0, 1, 0)}, daylight: {value: 1},
   },
   vertexShader: `varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }`,
   fragmentShader: `
     uniform sampler2D tNormal, tDepth; uniform vec2 texel; uniform float opacity, fade, cameraNear, cameraFar, ortho;
-    uniform vec3 paper;
+    uniform vec3 paper, sunView; uniform float daylight;
     varying vec2 vUv;
     float viewZ(float d){
       return ortho > 0.5 ? cameraNear + d * (cameraFar - cameraNear)
@@ -53,7 +54,10 @@ const EDGE_SHADER = {
         float z = viewZ(texture2D(tDepth, uv).x);
         if (abs(z - zc) > 0.035 * zc) { edge = 1.0; break; }                    // derinlik sıçraması
       }
-      gl_FragColor = vec4(mix(paper, vec3(0.0), edge * opacity), fade);
+      // kâğıt sahnenin ışığını alır: güneşe bakan yüz aydınlık, gölge yüzü koyu, gece kararır
+      // (29.09: gece de bembeyaz duruyordu)
+      float lit = (0.14 + 0.58 * daylight) + 0.34 * daylight * max(dot(nc, sunView), 0.0);
+      gl_FragColor = vec4(mix(paper * lit, vec3(0.0), edge * opacity), fade);
     }`,
 };
 
@@ -68,8 +72,10 @@ export function createNeighbourLines(renderer) {
   const size = new THREE.Vector2(), clear = new THREE.Color(), layers = new THREE.Layers();
   let meshes = [], fade = 0, parked = false, casting = true;
   const setLayer = layer => { for (const mesh of meshes) mesh.layers.set(layer); };
+  const sunWorld = new THREE.Vector3(0, 1, 0);
   return {
     get fade() { return fade; },
+    setLight(direction, daylight) { sunWorld.copy(direction).normalize(); edge.uniforms.daylight.value = daylight; },
     // Geçiş seviyesi (0 = gerçek komşular, 1 = yalnız çizgi). Gölge atma
     // durumu değiştiyse true döner - çağıran gölge haritasını yeniler.
     update(value, group) {
@@ -108,6 +114,7 @@ export function createNeighbourLines(renderer) {
         edge.uniforms.cameraNear.value = camera.near; edge.uniforms.cameraFar.value = camera.far;
         edge.uniforms.ortho.value = camera.isOrthographicCamera ? 1 : 0;
         edge.uniforms.fade.value = fade;
+        edge.uniforms.sunView.value.copy(sunWorld).transformDirection(camera.matrixWorldInverse);
         renderer.setRenderTarget(null);
         quad.render(renderer);
       } finally {

@@ -32,23 +32,27 @@ vec2 angoraPoisson( int i ) {
 		vec2(0.9884, -0.1936) );
 	return disc[ i ];
 }
-float angoraPenumbra( sampler2D shadowMap, vec2 uv, float zReceiver ) {
+float angoraPenumbra( sampler2D shadowMap, vec2 uv, float zReceiver, float lightSizeUV ) {
 	float blockerSum = 0.0;
 	int blockers = 0;
-	float searchRadius = PCSS_LIGHT_SIZE_UV;
+	float searchRadius = lightSizeUV;
 	for ( int i = 0; i < PCSS_BLOCKER_SAMPLES; i ++ ) {
 		float depth = unpackRGBAToDepth( texture2D( shadowMap, uv + angoraPoisson( i ) * searchRadius ) );
 		if ( depth < zReceiver ) { blockerSum += depth; blockers ++; }
 	}
 	if ( blockers == 0 ) return -1.0;
 	float avgBlocker = blockerSum / float( blockers );
-	return ( zReceiver - avgBlocker ) * PCSS_LIGHT_SIZE_UV / avgBlocker;
+	return ( zReceiver - avgBlocker ) * lightSizeUV / avgBlocker;
 }
-float angoraPCSS( sampler2D shadowMap, vec2 shadowMapSize, float shadowIntensity, vec4 coord ) {
-	float penumbra = angoraPenumbra( shadowMap, coord.xy, coord.z );
+float angoraPCSS( sampler2D shadowMap, vec2 shadowMapSize, float shadowIntensity, float frameScale, vec4 coord ) {
+	// frameScale = 60 m / gölge çerçevesi (shadow.radius taşır): güneşin UV boyu çerçeveyle
+	// küçülür. Sabit 0.009 yakın çevrenin yüzlerce metrelik çerçevesinde gölgeleri
+	// metrelerce bulanık hale yayıyordu.
+	float lightSizeUV = PCSS_LIGHT_SIZE_UV * frameScale;
+	float penumbra = angoraPenumbra( shadowMap, coord.xy, coord.z, lightSizeUV );
 	if ( penumbra < 0.0 ) return 1.0;
 	// never softer than the search window, never harder than one texel
-	float radius = clamp( penumbra, 1.0 / shadowMapSize.x, PCSS_LIGHT_SIZE_UV * 2.0 );
+	float radius = clamp( penumbra, 1.0 / shadowMapSize.x, max( lightSizeUV * 2.0, 1.0 / shadowMapSize.x ) );
 	float sum = 0.0;
 	for ( int i = 0; i < PCSS_PCF_SAMPLES; i ++ ) {
 		sum += step( coord.z, unpackRGBAToDepth( texture2D( shadowMap, coord.xy + angoraPoisson( i ) * radius ) ) );
@@ -58,7 +62,7 @@ float angoraPCSS( sampler2D shadowMap, vec2 shadowMapSize, float shadowIntensity
 `;
 
 const PCSS_RETURN = /* glsl */`
-		return angoraPCSS( shadowMap, shadowMapSize, shadowIntensity, shadowCoord );
+		return angoraPCSS( shadowMap, shadowMapSize, shadowIntensity, shadowRadius, shadowCoord );
 		#if defined( SHADOWMAP_TYPE_PCF )`;
 
 const PRISTINE = ShaderChunk.shadowmap_pars_fragment;
@@ -73,6 +77,9 @@ export function pcssShadowChunk(source = PRISTINE) {
 }
 
 let installed = false;
+export const pcssInstalled = () => installed;
+// PCSS_LIGHT_SIZE_UV'nin ayarlandığı çerçeve (villa ~60 m)
+export const PCSS_REFERENCE_SPAN = 60;
 export function installPcss() {
   if (installed) return false;
   ShaderChunk.shadowmap_pars_fragment = pcssShadowChunk(PRISTINE);

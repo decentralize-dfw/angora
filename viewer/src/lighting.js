@@ -13,7 +13,7 @@ import {applyGlassCellPolish} from './glass-cells.js';
 import {applyRenderProfile,baseExposure,referenceProfile} from './render-profile.js';
 import {InteriorLightController} from './interior-lighting.js';
 import {FEATURES} from './features.js';
-import {installPcss} from './pcss.js';
+import {installPcss,pcssInstalled,PCSS_REFERENCE_SPAN} from './pcss.js';
 
 // The environment a surface reflects has to have a GROUND. A sky-only probe -
 // the procedural sky, and the puresky HDR that replaces it - leaves the whole
@@ -226,7 +226,7 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
     // pristine three chunk, byte for byte (pcss.js keeps the source).
     if(enabled&&current.shadowType==='pcss'&&installPcss()){
       scene.traverse(o=>{if(o.isMesh)for(const m of Array.isArray(o.material)?o.material:[o.material])m.needsUpdate=true;});
-      renderer.shadowMap.needsUpdate=true;
+      renderer.shadowMap.needsUpdate=true;applyPcssScale();
     }
     const size=current.shadowMapSize;
     if(enabled&&size&&size!==shadowMapSizeApplied){
@@ -262,8 +262,16 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
     // the broad acne dimming the A/B probe showed without detaching contact.
     sun.shadow.normalBias=2*(2*radius/shadowMapSizeApplied);
     sun.shadow.camera.updateProjectionMatrix();
+    applyPcssScale();
     return true;
   }
+  // PCSS'de shadow.radius = 60 m / gölge çerçevesi (pcss.js): güneşin UV boyu çerçeveyle ölçeklenir
+  function applyPcssScale(){
+    if(!pcssInstalled())return;
+    const span=sun.shadow.camera.right-sun.shadow.camera.left;
+    sun.shadow.radius=span>0?PCSS_REFERENCE_SPAN/span:1;
+  }
+  let currentDaylight=1;
   function setTime(nextHour=hour,nextDay=day) {
     hour=nextHour;day=nextDay;const solar=solarPosition(hour,{day,northRotation:FEATURES.trueNorth?TRUE_NORTH_ROTATION:0});direction.fromArray(solar.direction);
     portalSolar=solar;updatePortalLights();
@@ -274,6 +282,7 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
     groundLight?.setSun(direction,dynamicShadowActive());
     floorLight?.setSun(direction,dynamicShadowActive());
     const daylight=THREE.MathUtils.smoothstep(solar.altitude,-6,28),warmth=THREE.MathUtils.smoothstep(solar.altitude,0,35);
+    currentDaylight=daylight;
     // Akşam iç ışıklar: armatürler kayıtta 3 cd - gündüz dolgu için doğru,
     // akşam pozlamasında odayı aydınlatamıyordu ("çok zayıf kalıyor").
     // Güneş alçaldıkça her odanın kendi armatürü 8 katına kadar güçlenir.
@@ -300,7 +309,7 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
     // owns curve+exposure), so the walk-interior stop lives in ITS uniform.
     if(FEATURES.postfxV2&&gradePass)gradePass.uniforms.uExposure.value=baseExposure()*(walkInterior?1.18:1);
     scene.environmentIntensity=.08+(soft?.70:.55)*daylight;
-    sun.shadow.radius=soft?2.5:1;sun.shadow.intensity=soft&&!daylightV2?.82:1;
+    if(pcssInstalled())applyPcssScale();else sun.shadow.radius=soft?2.5:1;sun.shadow.intensity=soft&&!daylightV2?.82:1;
     horizon.set(0x182734).lerp(new THREE.Color(0xe4e9ed),daylight);
     atmosphericFog?.color.copy(horizon);
     sky.material.uniforms.sunPosition.value.copy(direction);
@@ -470,6 +479,8 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
       }
       return glazing.size;
     },
+    // komşu çizimi (neighbour-lines) sahnenin güneşiyle gölgelenir
+    sunLight(){return {direction,daylight:currentDaylight};},
     snapshot(){return {environment:environmentMode,interior:fixtures.snapshot(),glazing:glazing.size};},
     // Read-only evidence for the QA harness: which output path is live, and
     // the textures held in closures that a scene traversal cannot reach.
