@@ -210,7 +210,7 @@ export function createContextMassing(root) {
       material.needsUpdate = true;
     }
   });
-  let from = 0, to = 0, start = 0;
+  let from = 0, to = 0, start = 0, elapsed = 0, last = null;
   const ease = t => t * t * (3 - 2 * t);
   return {
     surfaces: attached.size,
@@ -223,11 +223,14 @@ export function createContextMassing(root) {
       to = target;
       const reduced = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
       if (immediate || reduced) {blend.value = from = to; return;}
-      from = blend.value; start = performance.now();
+      from = blend.value; start = performance.now(); elapsed = 0; last = null;
     },
     update(time) {
       if (blend.value === to) return false;
-      const t = Math.min(1, (time - start) / MASSING_SPAN);
+      // kare başına en çok 50 ms: görünüm değişirken gelen yavaş ilk kare
+      // (yükleme/shader derleme) geçişi ilk kareden son kareye atlatıyordu
+      elapsed += Math.min(50, Math.max(0, time - (last ?? start))); last = time;
+      const t = Math.min(1, elapsed / MASSING_SPAN);
       blend.value = THREE.MathUtils.lerp(from, to, ease(t));
       if (t >= 1) blend.value = to;
       return true;

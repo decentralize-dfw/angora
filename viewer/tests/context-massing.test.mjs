@@ -119,11 +119,16 @@ test('The fade eases across its whole span instead of cutting',()=>{
   const start=performance.now();
   massing.set('building');
   assert.equal(massing.value,0,'no jump on the frame the view changes');
-  assert.equal(massing.update(start+450),true);
+  // 60 fps kareler: yarı yolda yarıda
+  let t=start;
+  for(let i=0;i<27;i++)massing.update(t+=16.67);
   assert.ok(massing.value>.35&&massing.value<.65,`half way through the span, got ${massing.value}`);
-  assert.equal(massing.update(start+2000),true);
+  // tek bir 2 sn'lik takılma geçişi bitiremez (iOS'ta shader derleme karesi)
+  massing.update(t+=2000);
+  assert.ok(massing.value<1,`a stalled frame must not jump to the end, got ${massing.value}`);
+  for(let i=0;i<60&&massing.update(t+=16.67);i++);
   assert.equal(massing.value,1);
-  assert.equal(massing.update(start+2100),false,'settled frames stop asking to redraw');
+  assert.equal(massing.update(t+=100),false,'settled frames stop asking to redraw');
 });
 
 test('The horizon fade survived the R39 surface rename',()=>{
