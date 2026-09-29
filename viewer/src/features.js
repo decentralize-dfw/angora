@@ -36,7 +36,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   proceduralDetailInterior: true, // İŞ D - iç uDetail satırları (yarı genlik); proceduralDetail üzerinden masaüstü SADECE
   runtimeVertexAO: true,       // İŞ C - İKİ tier (IS-EMRI: "mobilde de çalışan tek AO"; kare başı maliyet 0 draw/byte, bake boşta; mobil 10 ışın). H1 veto edebilir
   contactAoMobile: false,      // KAPALI - ürün sahibinin kararı: "model de AO yok ki zaten, modelin içinde; olsa bile mobilde fazlalık, desktopda açık kalsın". ÖLÇÜM bunu destekliyor: temas AO'su boot SONRASI 55,8 sn donmanın 18,5 sn'si (buildOccupancy 2,7 M üçgeni TEK blokta tarıyor, pişirme yalnız mesh sınırında dilimli, en büyük tek mesh 484 k tepe x 10 ışın). Modelin kendisi AO taşıyor: BUILDING-opt-v3'te 3 malzemede occlusionTexture var. MASAÜSTÜ DEĞİŞMEDİ (runtimeVertexAO orada açık). Telefonda denemek: ?features=contactAoMobile:1
-  exteriorGtao: true,          // İŞ F - neighborhood'da GTAO, masaüstü SADECE (mobil matris postProcessing:false); region ASLA
+  exteriorGtao: false,         // 29.09 KAPALI: yakın çevrenin geniş çerçevesinde bütün sahneye bulanık hale basıyordu (ürün sahibi ?features=exteriorGtao:0 ile doğruladı).          // İŞ F - neighborhood'da GTAO, masaüstü SADECE (mobil matris postProcessing:false); region ASLA
   plantNormalsV1: true,        // İŞ E.2 - iki tier; RAM-içi normal düzeltme, bake attestasyonuna dokunmaz (testte)
   buildingsChunking: true,     // T2.2 runtime - iki tier'da da canlı
   plantVariation: true,        // T2.3 runtime - iki tier'da da canlı

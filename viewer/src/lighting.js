@@ -189,6 +189,12 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
   // The villa's see-through glazing, and what it was before the tour lit it.
   const glazing=new Set(),glazingRest=new WeakMap();
   const reflectionMaterials=new Set();
+  // Ortam haritası AÇIKÇA bağlanan malzemelerde three scene.environmentIntensity'yi
+  // kullanmaz: gök yansıması gece de gündüz şiddetinde kalıyordu (29.09: gece bembeyaz
+  // parlayan çatı pencereleri). Bunların şiddeti sahnenin gök ölçeğiyle birlikte iner.
+  const boundEnvMaterials=new Set();
+  let envDayScale=1;
+  function scaleBoundEnv(){for(const m of boundEnvMaterials)m.envMapIntensity=(m.userData.envBaseIntensity??1)*envDayScale;}
   function updateReflections(){
     const map=roomReflections?.get(reflectionFloor)??null;
     for(const material of reflectionMaterials){
@@ -309,6 +315,7 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
     // owns curve+exposure), so the walk-interior stop lives in ITS uniform.
     if(FEATURES.postfxV2&&gradePass)gradePass.uniforms.uExposure.value=baseExposure()*(walkInterior?1.18:1);
     scene.environmentIntensity=.08+(soft?.70:.55)*daylight;
+    envDayScale=scene.environmentIntensity/(.08+(soft?.70:.55));scaleBoundEnv();
     if(pcssInstalled())applyPcssScale();else sun.shadow.radius=soft?2.5:1;sun.shadow.intensity=soft&&!daylightV2?.82:1;
     horizon.set(0x182734).lerp(new THREE.Color(0xe4e9ed),daylight);
     atmosphericFog?.color.copy(horizon);
@@ -545,7 +552,11 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
         prepareMaterialResponse(material,{context});preparedMaterials.add(material);
         // Three uses scene.environmentIntensity when envMap is null. Bind the
         // room finishes explicitly so their neutral response is respected.
-        if(['plaster','soffit'].includes(material.userData.presentationR27?.family))material.envMap=environment?.texture??null;
+        if(['plaster','soffit'].includes(material.userData.presentationR27?.family)){
+          material.envMap=environment?.texture??null;
+          material.userData.envBaseIntensity??=material.envMapIntensity;boundEnvMaterials.add(material);
+          material.envMapIntensity=material.userData.envBaseIntensity*envDayScale;
+        }
         material.clipShadows=true;
           // İŞ E.1: on the batched path angoraAuthoredPBR is true 37/37 and
           // discriminates nothing; being a batch IS the distinction. The
