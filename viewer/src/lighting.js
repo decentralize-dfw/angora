@@ -182,7 +182,10 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
   let groundLight=null,floorLight=null,electricLight=null,roomReflections=null,reflectionFloor=null,activeInteriorFloor=null;
   // Pişmiş ışık (villa-lightmaps.js): gök/güneş sekmesi/gece haritaları; yoksa null
   let lightmaps=null,lightmapView=null;
-  const lightmapSkyStrength=()=>walkInterior||!/^f[0-3]$/.test(lightmapView??'')?1:.45;
+  // Kat kesitinde tavan açık: pişmiş gök (tavanlı) orada biraz karanlık kalır, eski açık
+  // ortamla karışır. 29.09 Tur 10: .45 -> .75 - %45'te köşe kararması ve pencere ışığı
+  // kayboluyor, kesit düz/soluk görünüyordu (telefon ekran görüntüsü).
+  const lightmapSkyStrength=()=>walkInterior||!/^f[0-3]$/.test(lightmapView??'')?1:.75;
   // The villa's see-through glazing, and what it was before the tour lit it.
   const glazing=new Set(),glazingRest=new WeakMap();
   const reflectionMaterials=new Set();
