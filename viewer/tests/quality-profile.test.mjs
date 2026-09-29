@@ -59,9 +59,11 @@ test('Every tier resolves for every view, and a view never raises a denied capab
   }
 });
 
-test('mobile-low never gains a sun shadow from any view', () => {
-  for (const view of ['villa', 'floor', 'interior']) {
-    assert.equal(resolveQuality('mobile-low', view).dynamicSunShadow, false);
+test('mobile-low casts the same 512 sun shadow as mobile-high (iOS reports few cores)', () => {
+  for (const view of ['villa', 'floor', 'interior', 'neighborhood']) {
+    const profile = resolveQuality('mobile-low', view);
+    assert.equal(profile.dynamicSunShadow, true);
+    assert.equal(profile.shadowMapSize, 512);
   }
 });
 
@@ -79,9 +81,12 @@ test('Region and plan turn postfx extras off; region drops the shadow, plan keep
   }
 });
 
-test('Neighbourhood shadow is a desktop-only spend', () => {
-  assert.equal(resolveQuality('desktop-high', 'neighborhood').dynamicSunShadow, true);
-  assert.equal(resolveQuality('mobile-high', 'neighborhood').dynamicSunShadow, false);
+test('Neighbourhood shadow is on for every tier, via the wide proxy', () => {
+  for (const tier of ['desktop-high', 'mobile-high', 'mobile-low']) {
+    const profile = resolveQuality(tier, 'neighborhood');
+    assert.equal(profile.dynamicSunShadow, true);
+    assert.equal(profile.shadowCameraMode, 'wide-proxy');
+  }
 });
 
 test('createQualityProfile follows view changes and notifies once per change', () => {

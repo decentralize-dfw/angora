@@ -67,7 +67,9 @@ const TIER_MATRIX = {
     // to the plan's 1.0 M / 1.5 - a change here must not ride flag surgery.
     textureProfile: 'mobile', maxPixelRatio: 2.0, pixelBudget: 1_500_000,
     bakedIndirectLighting: true, bakedReceiverVisibility: true,
-    dynamicSunShadow: false, shadowMapSize: 0, shadowCameraMode: 'disabled', shadowType: 'pcfsoft',
+    // 29.09: iOS Safari çekirdek sayısını düşük bildirdiği için iPhone'lar buraya
+    // düşüyor ve telefonda hiç gölge görünmüyordu; mobile-high ile aynı 512 harita.
+    dynamicSunShadow: true, shadowMapSize: 512, shadowCameraMode: 'villa-local', shadowType: 'pcfsoft',
     postProcessing: false, gtao: false, gtaoResolutionScale: 0.5,
     antialiasing: 'canvas-msaa', msaaSamples: 0, bloom: false, grade: false, dither: false,
     physicalGlass: 'none', planarPoolReflection: false, anisotropy: 4,
@@ -109,8 +111,8 @@ const TIER_MATRIX = {
 // capability the tier denies; it only narrows where the money is spent.
 const VIEW_OVERRIDES = {
   region: {dynamicSunShadow: false, shadowCameraMode: 'disabled', gtao: false, bloom: false},
-  neighborhood: {shadowCameraMode: 'wide-proxy', gtao: false, bloom: false,
-    desktopOnlyShadow: true},
+  // 29.09: telefonda da açık (açılış görünümü; gölgesiz düz duruyordu)
+  neighborhood: {shadowCameraMode: 'wide-proxy', gtao: false, bloom: false},
   villa: {shadowCameraMode: 'villa-local'},
   floor: {shadowCameraMode: 'floor-local'},
   interior: {shadowCameraMode: 'floor-local'},
