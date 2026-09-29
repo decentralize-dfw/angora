@@ -81,6 +81,12 @@ export function applyTur10(manifest) {
     part.file = ROOT + next.file; part.bytes = next.bytes; delete part.gpu_sha256;
     swapped.push(part.name);
   }
+  // Yürüme ızgarası Tur 10 geometrisinden (tools/batch-delivery/make-tur10-navigation.mjs):
+  // eskisi değişen merdivenleri ve duvarları bilmiyor, bodrum merdiveninde takılınıyordu.
+  if (swapped.length && typeof manifest.navigation === 'string') {
+    manifest.navigation = ROOT + 'tur10-navigation.json';
+    swapped.push('navigation');
+  }
   return swapped;
 }
 
