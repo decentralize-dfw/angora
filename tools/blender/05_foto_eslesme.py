@@ -16,6 +16,7 @@ Malzeme renk tablosu: her karede 32x24 ızgara noktasında sitenin kendi
 fotoğrafın rengi ve modelin rengi alınır. Bütün karelerden malzeme başına
 ortanca -> <çıktı>/malzeme-renk.json (fotoğraf sRGB, model sRGB, örnek sayısı).
 --pismis: pişmiş ışık açık (?features=lightmaps:1).
+--ozellik: ek site bayrakları, örn. --ozellik tur10:1 (Tur 10 modelleri).
 """
 import json, os, sys, time
 sys.stdout.reconfigure(encoding='utf-8')
@@ -29,6 +30,7 @@ REPO = os.path.abspath(args[0]); OUT = os.path.abspath(args[1] if len(args) > 1 
 SITE = opt('--site', 'https://xrweb.studio/angora/')
 LENS = float(opt('--lens', 72))
 LIGHTMAPS = 1 if '--pismis' in sys.argv else 0
+EXTRA = opt('--ozellik', '')
 H = 720
 os.makedirs(OUT, exist_ok=True)
 
@@ -57,7 +59,7 @@ with sync_playwright() as p:
     page = browser.new_page(viewport={'width': 960, 'height': H})
     page.on('pageerror', lambda e: errors.append(str(e)))
     t0 = time.time()
-    page.goto(f'{SITE}?profile=desktop&stats=1&view=f1&hour=13&features=lightmaps:{LIGHTMAPS}', wait_until='domcontentloaded')
+    page.goto(f'{SITE}?profile=desktop&stats=1&view=f1&hour=13&features=lightmaps:{LIGHTMAPS}' + (',' + EXTRA if EXTRA else ''), wait_until='domcontentloaded')
     page.wait_for_function('() => document.querySelector("#viewport")?.dataset.qaReport', timeout=600000, polling=1000)
     page.evaluate('() => window.__angoraLightmaps ? window.__angoraLightmaps.ready : true')
     # arayüz panelleri karşılaştırmayı örtmesin
@@ -87,7 +89,7 @@ with sync_playwright() as p:
             samples.setdefault(hit['m'], []).append((small_photo.getpixel((x, y)), small_model.getpixel((x, y)), pid, hit.get('p')))
         pair = Image.new('RGB', (W * 2, H))
         pair.paste(label(photo.resize((W, H)), f'FOTO {pid:02d}  {place}'), (0, 0))
-        pair.paste(label(model, f'MODEL {pid:02d}  lens {LENS:g}°  pişmiş ışık {"açık" if LIGHTMAPS else "kapalı"}'), (W, 0))
+        pair.paste(label(model, f'MODEL {pid:02d}  lens {LENS:g}°  pişmiş ışık {"açık" if LIGHTMAPS else "kapalı"}' + (f'  {EXTRA}' if EXTRA else '')), (W, 0))
         name = f'foto_{pid:02d}.jpg'; pair.save(os.path.join(OUT, name), quality=86)
         report.append({'kare': name, 'foto': file, 'yer': place, **info, 'lens': LENS, 'sure_sn': round(time.time() - t0, 1), 'gpu': gpu})
         print(name, place, info.get('room'), round(time.time() - t0, 1), 'sn |', gpu, flush=True)
@@ -104,6 +106,6 @@ json.dump({'aciklama': 'malzeme başına ortanca renk (0-255 sRGB); açı kaymas
            'lens': LENS, 'pismis': LIGHTMAPS, 'malzemeler': table},
           open(os.path.join(OUT, 'malzeme-renk.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print('malzeme-renk.json:', len(table), 'malzeme')
-json.dump({'site': SITE, 'lens': LENS, 'pismis': LIGHTMAPS, 'hatalar': errors[:30], 'kareler': report},
+json.dump({'site': SITE, 'lens': LENS, 'pismis': LIGHTMAPS, 'ozellik': EXTRA, 'hatalar': errors[:30], 'kareler': report},
           open(os.path.join(OUT, 'rapor.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print('TAMAM', len(report), 'kare ->', OUT, '| hata:', len(errors))
