@@ -572,6 +572,30 @@ function buildKitchenette(doc) {
 }
 
 // --- ortak hazırlık ---------------------------------------------------------
+// Giyinme odası -> ebeveyn banyosu kapısı (EK_M3_04): kanat doğu kasadan menteşeli, odaya
+// 125° açık duruyordu ve gardırobun (D16 X1) ayna kapağını, rayını ve gövdesini kesiyordu.
+// Kanat grubu (68 düğüm) batı kasaya alınır ve 90° açık durur (öteki kapılar gibi):
+// eksen (2,1729, -6,0277) -> (1,3655, -6,0277), y ekseni etrafında -35° katı dönüş. Yansıtma
+// değil: yansıtma normal haritalı ahşabın teğet çerçevesini ters çevirirdi. Kasa, üst kasa ve
+// pervazlar yerinde kalır (açıklığın ortası x 1,7692'ye göre simetrik).
+function fixDressingDoor(doc) {
+  const MOVE = /^EK_M3_04_(kanat|dik_profil|yatay_profil|gobek|pirinc_topuz|topuz_mili|mentese)(\.\d+)?$/;
+  const th = -35 * Math.PI / 180, c = Math.cos(th), s = Math.sin(th);
+  const R = ([x, z]) => [c * x + s * z, -s * x + c * z];                 // R_y(th), xz
+  const [hx, hz] = [2.1729, -6.0277], [nx, nz] = [1.3655, -6.0277];
+  const [rx, rz] = R([hx, hz]), t = [nx - rx, 0, nz - rz];
+  const D = [c, 0, -s, 0, 0, 1, 0, 0, s, 0, c, 0, t[0], t[1], t[2], 1];  // sütun düzeninde
+  const mul = (a, b) => {const o = new Array(16).fill(0); for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) for (let k = 0; k < 4; k++) o[j * 4 + i] += a[k * 4 + i] * b[j * 4 + k]; return o;};
+  let moved = 0;
+  for (const node of doc.getRoot().listNodes()) {
+    if (!MOVE.test(node.getName())) continue;
+    if (node.getParentNode()) throw Error(`kapı EK_M3_04: ${node.getName()} kökte değil`);
+    node.setMatrix(mul(D, node.getMatrix())); moved++;
+  }
+  if (moved !== 68) throw Error(`kapı EK_M3_04: 68 kanat parçası bekleniyordu, ${moved} bulundu`);
+  console.log(`kapı EK_M3_04 (giyinme odası): kanat grubu ${moved} parça batı kasaya, 90° açık (aynadan uzak)`);
+}
+
 async function load(sources, {stairRepair = false} = {}) {
   const doc = await io.read(sources[0]);
   if (stairRepair) repairStair(doc);
@@ -585,7 +609,7 @@ async function load(sources, {stairRepair = false} = {}) {
       merged.dispose();
     }
   }
-  if (stairRepair) {applyFloors(doc); buildKitchenette(doc);}
+  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc);}
   for (const prim of root.listMeshes().flatMap(m => m.listPrimitives()))
     for (const semantic of DROP) if (prim.getAttribute(semantic)) prim.setAttribute(semantic, null);
   for (const node of root.listNodes()) {const kat = node.getExtras()?.kat; node.setExtras(kat ? {kat} : {});}
