@@ -291,3 +291,19 @@ KALDI: zemin: 29 UV üçgen çakışması; zemin: bazı yüzlerde minimum40 texe
 ![UV bahce](../adim10/asama2/uv_bahce.png)
 
 ![UV duvar](../adim10/asama2/uv_duvar.png)
+
+## Adım10 · UV1 olmadan web teslimi
+
+UV denemeleri iptal edildi; yukarıdaki UV sonuçları teslimde kullanılmadı. [Üç GLB, SHA256 ve doğrulama](../web/README.md).
+
+![Web doğrulama 02](../web/web_dogrulama_02.jpg)
+
+![Web doğrulama 16](../web/web_dogrulama_16.jpg)
+
+![Web doğrulama 18](../web/web_dogrulama_18.jpg)
+
+![Web doğrulama 21](../web/web_dogrulama_21.jpg)
+
+![Web doğrulama 34](../web/web_dogrulama_34.jpg)
+
+![Web doğrulama 42](../web/web_dogrulama_42.jpg)

@@ -1,25 +1,26 @@
-# Adım 09 B · Web teslimi
+# Adım10 · Aşama1 geometrisi — UV1 olmadan web teslimi
 
-BUILDING tek dosyada 100 MB sınırını aştığı için ikiye ayrıldı. İki parçayı birlikte, aynı kök dönüşümüyle yükleyin; INTERIOR üçüncü dosyadır. Eski EKLER ayrıca yüklenmez: mimari ekler BUILDING parçalarının içindedir. Eski mobilyalar INTERIOR içinde korunur.
+Kaynak: `angora-tur10/adim10/sahne.blend`. Eski model korkulukları ve 16/21/02 düzeltmeleri dahildir. UV denemeleri, yüz çevirme denemeleri ve lightmap verileri kullanılmadı. GARDEN-opt-v2 aynı kaldı.
+
+BUILDING alt ve üst birlikte yüklenir; mimari EKLER bunlara dahildir. INTERIOR eski mobilyaları korur. Ayrı EKLER yüklenmez.
 
 | Dosya | Bayt | Üçgen | Validator hata / uyarı |
 |---|---:|---:|---:|
-| BUILDING-opt-v6-alt.glb | 84,068,408 | 482,529 | 0 / 0 |
-| BUILDING-opt-v6-ust.glb | 82,710,772 | 513,723 | 0 / 0 |
-| INTERIOR-opt-v3.glb | 54,238,628 | 336,584 | 0 / 0 |
+| BUILDING-opt-v6-alt.glb | 83355672 | 471479 | 0 / 0 |
+| BUILDING-opt-v6-ust.glb | 80841384 | 497412 | 0 / 0 |
+| INTERIOR-opt-v3.glb | 61348456 | 343671 | 0 / 0 |
 
-Tüm gömülü dokular 2048×2048: albedo JPG/sRGB, normal PNG/Non-Color; metallic-roughness PNG'de roughness G, metal B. Draco/Meshopt/KTX sıkıştırması yok. Işık nesneleri GLB'ye alınmadı; etkili kontrol ışıkları `isiklar-v2.json` içinde, glTF Y-up metre konumuyla verilir. Güneş/gök kaydı da bulunur. Site, ışık kurulumunu bu JSON'dan yapmalıdır.
+Her üç dosyada TEXCOORD_1 sayısı **0**. Yalnız malzeme UV0 vardır. Dokular 2048 px: albedo JPG, normal ve metallic-roughness PNG (G roughness, B metal). Geometri/doku sıkıştırması yok; ışık nesneleri dışa aktarılmadı. Kat ve kaynak kimlikleri extras alanlarındadır.
 
-Kaynak 46 mesh grubundan geometriye dokunulmayan 31 grubun kaynak sınır kutuları 1 mm koşulunu sağlar. Üç GLB'nin boş sahneye geri yüklenmesinde 1771 grubun en büyük sınır farkı 0.000000476837 m. Katlara bölünen parçalar özgün kaynak kimliğini extras içinde taşır; her nesnede kat etiketi vardır. Katlar arasında uzanan yeni mimari parçaların katı merkez yüksekliğidir.
+Boş sahneye geri yüklenen 1621 grubun en büyük sınır farkı **0.000000476837 m**; 1 mm kontrolü geçti. Dokunulmayan kaynak grupların kontrolü de geçti.
 
-Foto 01,02,18,21,34 karşılaştırmaları aynı kamera, ışık ve pozlamayla üretildi. Doku 2048 yeniden örneklemesi, JPEG ve gürültü temizleme nedeniyle piksel düzeyinde eşit değiller; sayısal farklar `web-kontrol.json` içinde. Foto40 desenli cam için JPEG RGB korunurken değişken alfa 128×256 yüzey ağına COLOR_0 olarak aktarıldı; ek karşılaştırma da eklendi.
+[SHA256, boyut ve malzemeler](web-teslim.json) · [Koordinat, UV ve validator kontrolleri](web-kontrol.json) · [Işıklar](isiklar-v2.json)
 
-SHA256, bayt, üçgen ve malzeme listeleri: [web-teslim.json](web-teslim.json). Denetimler: [web-kontrol.json](web-kontrol.json). Işıklar: [isiklar-v2.json](isiklar-v2.json).
-
-
-![Web doğrulama 01](web_dogrulama_01.jpg)
+Altı görselde sol Aşama1 .blend, sağ bu GLB'lerin boş sahneye geri yüklenmiş halidir. Kamera, ışık ve pozlama aynıdır; JPEG/2048 örnekleme ve shader aktarımından doğan piksel farkları web-kontrol.json içinde kayıtlıdır.
 
 ![Web doğrulama 02](web_dogrulama_02.jpg)
+
+![Web doğrulama 16](web_dogrulama_16.jpg)
 
 ![Web doğrulama 18](web_dogrulama_18.jpg)
 
@@ -27,10 +28,6 @@ SHA256, bayt, üçgen ve malzeme listeleri: [web-teslim.json](web-teslim.json). 
 
 ![Web doğrulama 34](web_dogrulama_34.jpg)
 
-![Web doğrulama 40](web_dogrulama_40.jpg)
+![Web doğrulama 42](web_dogrulama_42.jpg)
 
-## Kalanlar
-
-DWG panelinin göreli çizgileri korunur; 1.00×0.80 m nominal detay ölçeği saha/ölçü çizgisiyle ayrıca doğrulanmadı. Foto32 bordür motifi birebir değil; foto47 sol üst tavan birleşiminde ince açıklık ve foto34 kapı altı ışık çizgileri kontrol .blend'inde de mevcut. Bu kusurlar GLB aktarımından kaynaklanmıyor; A notlarında kayıtlı.
-
-Bu klasör siteye entegrasyon teslimidir; canlı sitenin dosya bağlantıları değiştirilmedi.
+UV ve pişirme bu teslimin parçası değildir. Claude’un build/bake altına koyacağı *-lm.glb dosyaları bekleniyor. Önceki sahnede kayıtlı 32 bordür, 47 tavan birleşimi ve 34 eşik ayrıntıları değişmedi.

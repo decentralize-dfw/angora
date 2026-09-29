@@ -1,9 +1,9 @@
 [
  {
   "dosya": "BUILDING-opt-v6-alt.glb",
-  "bayt": 84068408,
-  "sha256": "05541debcabc8688f0738dd464a84587147fe59a73121e252c1b7d5654c0cfc7",
-  "ucgen_sayisi": 482529,
+  "bayt": 83355672,
+  "sha256": "b96c8a0bf0d6563f4d74f4b7876cb3dad2c619d5fc58bf6c04abee82e139a461",
+  "ucgen_sayisi": 471479,
   "malzeme_listesi": [
    "EK_A04_Opal_cam",
    "EK_A04_Siyah_zincir",
@@ -17,8 +17,6 @@
    "EK_M3G_Foto40_gul_desenli_cam",
    "EK_M3G_Pirinc",
    "EK_M2_Beyaz_merdiven_alti",
-   "EK_M2_Koyu_ceviz_kupeşte",
-   "EK_A09_DWG_Demir",
    "EK_M1_Sicak_ceviz_supurgelik",
    "EK_M1_Sicak_ceviz_supurgelik",
    "EK_M3_Ceviz_gobek",
@@ -42,6 +40,7 @@
    "Simple wood",
    "Simple wood",
    "metal.001",
+   "EK_metal.002",
    "R31 | R33 entrance WC ochre tile",
    "R31 | R33 ivory wall ceramic",
    "roof-7",
@@ -425,7 +424,7 @@
     "mod": "RGB"
    },
    {
-    "ad": "9f16fdee176f07",
+    "ad": "d9f40d87e6ea5a",
     "mime": "image/png",
     "boyut": [
      2048,
@@ -434,7 +433,7 @@
     "mod": "RGB"
    },
    {
-    "ad": "c775f8c2d6fdae",
+    "ad": "788777209b2450",
     "mime": "image/jpeg",
     "boyut": [
      2048,
@@ -443,7 +442,7 @@
     "mod": "RGB"
    },
    {
-    "ad": "515fdea810ffb8",
+    "ad": "bc1d3e60c896bb",
     "mime": "image/png",
     "boyut": [
      2048,
@@ -506,15 +505,15 @@
     "mod": "RGB"
    }
   ],
-  "duzeltilen_sifir_teget": 0,
+  "duzeltilen_sifir_teget": 2239,
   "kat_eksik": [],
   "isik_uzantisi": false
  },
  {
   "dosya": "BUILDING-opt-v6-ust.glb",
-  "bayt": 82710772,
-  "sha256": "75e49ddb540a9941b624ab1fe66261f888e9aedae1e5ffd91ef9df8629479f99",
-  "ucgen_sayisi": 513723,
+  "bayt": 80841384,
+  "sha256": "3eb24c3d2202c95e529eac13a8f1018d5b4d3c10fc95f0ee63416e2262b2f14e",
+  "ucgen_sayisi": 497412,
   "malzeme_listesi": [
    "EK_A04_Siyah_zincir",
    "EK_A04_Opal_cam",
@@ -529,8 +528,6 @@
    "EK_A08_Siyah_spot",
    "EK_A08_Sicak_opal",
    "EK_A09_Banyo_bordur",
-   "EK_M2_Koyu_ceviz_kupeşte",
-   "EK_A09_DWG_Demir",
    "EK_M1_Sicak_ceviz_supurgelik",
    "EK_M2_Beyaz_merdiven_alti",
    "EK_M3_Ceviz_gobek",
@@ -554,6 +551,7 @@
    "Lift brushed patterned stainless",
    "Simple wood",
    "metal.001",
+   "EK_metal.002",
    "R31 | R33 attic cream tile",
    "R31 | R33 ivory wall ceramic",
    "roof-7",
@@ -639,7 +637,7 @@
     "mod": "RGB"
    },
    {
-    "ad": "5a6a57089b1357",
+    "ad": "866a4ce38b9370",
     "mime": "image/png",
     "boyut": [
      2048,
@@ -648,7 +646,7 @@
     "mod": "RGB"
    },
    {
-    "ad": "f6c1dca0447b61",
+    "ad": "357593d1dbde32",
     "mime": "image/jpeg",
     "boyut": [
      2048,
@@ -657,7 +655,7 @@
     "mod": "RGB"
    },
    {
-    "ad": "dd91935e3ec5e7",
+    "ad": "9d24314be2426b",
     "mime": "image/png",
     "boyut": [
      2048,
@@ -936,36 +934,38 @@
     "mod": "RGB"
    }
   ],
-  "duzeltilen_sifir_teget": 0,
+  "duzeltilen_sifir_teget": 2146,
   "kat_eksik": [],
   "isik_uzantisi": false
  },
  {
   "dosya": "INTERIOR-opt-v3.glb",
-  "bayt": 54238628,
-  "sha256": "3dda3fd30fcad879301216d9a543dd9b04cdc57373ca667fc4263f7e218e5a2e",
-  "ucgen_sayisi": 336584,
+  "bayt": 61348456,
+  "sha256": "3aad9dd5773eb2870ae04638f01d78396fd277092c226f765a1cc738b3545471",
+  "ucgen_sayisi": 343671,
   "malzeme_listesi": [
+   "C02 | Original red framed artwork",
+   "Master quilt â€” photo projection",
+   "R31 | R35 shelving grey steel",
+   "R31 | Hall ochre woven upholstery",
+   "Room finish | Original bedroom line artwork",
+   "Room pass | Original hall picture atlas",
+   "Salon artwork â€” photographed detail",
    "BLCK",
    "bulb_warm",
-   "C02 | Original red framed artwork",
    "FINISH | Silver mirror",
    "cabinet_glass",
    "Lift | Photographed rose glass 80 percent",
-   "Master quilt â€” photo projection",
    "brass (4)",
-   "R31 | R35 shelving grey steel",
    "R31 | R35 garage galvanized steel",
-   "R31 | Hall ochre woven upholstery",
-   "Room finish | Original bedroom line artwork",
+   "brass (4)",
+   "R31 | R33 antique nook walnut",
    "Room pass | Original damask curtain photograph",
-   "Room pass | Original hall picture atlas",
    "X",
    "X",
    "X",
    "X",
    "ROUGHNSS1",
-   "Salon artwork â€” photographed detail",
    "R31 | Warm white porcelain",
    "WHT",
    "R31 | R33 antique nook walnut",
@@ -991,24 +991,6 @@
    },
    {
     "ad": "8a0a676e0e01e1",
-    "mime": "image/jpeg",
-    "boyut": [
-     2048,
-     2048
-    ],
-    "mod": "RGB"
-   },
-   {
-    "ad": "b95fe463e45e6d",
-    "mime": "image/jpeg",
-    "boyut": [
-     2048,
-     2048
-    ],
-    "mod": "RGB"
-   },
-   {
-    "ad": "6e105629ce6251",
     "mime": "image/jpeg",
     "boyut": [
      2048,
@@ -1080,24 +1062,6 @@
     "mod": "RGB"
    },
    {
-    "ad": "787393bffbb623",
-    "mime": "image/jpeg",
-    "boyut": [
-     2048,
-     2048
-    ],
-    "mod": "RGB"
-   },
-   {
-    "ad": "fc22192b74456d",
-    "mime": "image/jpeg",
-    "boyut": [
-     2048,
-     2048
-    ],
-    "mod": "RGB"
-   },
-   {
     "ad": "e97626909c7951",
     "mime": "image/jpeg",
     "boyut": [
@@ -1108,6 +1072,69 @@
    },
    {
     "ad": "e48b395c1a84f8",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "e5eb23b184cf86",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "434ed331380293",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "b95fe463e45e6d",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "6e105629ce6251",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "63413b7d597003",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "787393bffbb623",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "fc22192b74456d",
     "mime": "image/jpeg",
     "boyut": [
      2048,
@@ -1215,24 +1242,6 @@
     "mod": "RGB"
    },
    {
-    "ad": "e5eb23b184cf86",
-    "mime": "image/jpeg",
-    "boyut": [
-     2048,
-     2048
-    ],
-    "mod": "RGB"
-   },
-   {
-    "ad": "434ed331380293",
-    "mime": "image/jpeg",
-    "boyut": [
-     2048,
-     2048
-    ],
-    "mod": "RGB"
-   },
-   {
     "ad": "920f40edcdb9f0",
     "mime": "image/jpeg",
     "boyut": [
@@ -1269,7 +1278,7 @@
     "mod": "RGB"
    },
    {
-    "ad": "f0c313a0c92dda",
+    "ad": "e4dfc1f1806c02",
     "mime": "image/png",
     "boyut": [
      2048,
@@ -1278,7 +1287,7 @@
     "mod": "RGB"
    },
    {
-    "ad": "8a70f1cbbd0649",
+    "ad": "ad197853d143dd",
     "mime": "image/jpeg",
     "boyut": [
      2048,
@@ -1287,7 +1296,34 @@
     "mod": "RGB"
    },
    {
-    "ad": "8bc01a011fe915",
+    "ad": "28140018de92a9",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "3c5bb6bd4e2dc0",
+    "mime": "image/png",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "7ce6c45032e787",
+    "mime": "image/jpeg",
+    "boyut": [
+     2048,
+     2048
+    ],
+    "mod": "RGB"
+   },
+   {
+    "ad": "b284b143091112",
     "mime": "image/png",
     "boyut": [
      2048,
@@ -1296,7 +1332,7 @@
     "mod": "RGB"
    }
   ],
-  "duzeltilen_sifir_teget": 0,
+  "duzeltilen_sifir_teget": 839,
   "kat_eksik": [],
   "isik_uzantisi": false
  }

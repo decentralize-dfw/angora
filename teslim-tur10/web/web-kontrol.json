@@ -1707,88 +1707,45 @@
     "EK_Room pass | Original damask curtain photograph_kat1",
     "EK_Room pass | Original damask curtain photograph_cati"
    ]
+  },
+  {
+   "kaynak": "ORIJINAL_KORKULUK_metal (5).001",
+   "parcalar": [
+    "EK_ORIJINAL_KORKULUK_metal (5).001_bodrum",
+    "EK_ORIJINAL_KORKULUK_metal (5).001_giris",
+    "EK_ORIJINAL_KORKULUK_metal (5).001_kat1",
+    "EK_ORIJINAL_KORKULUK_metal (5).001_cati"
+   ]
+  },
+  {
+   "kaynak": "ORIJINAL_KORKULUK_metal1.001",
+   "parcalar": [
+    "EK_ORIJINAL_KORKULUK_metal1.001_giris",
+    "EK_ORIJINAL_KORKULUK_metal1.001_kat1",
+    "EK_ORIJINAL_KORKULUK_metal1.001_cati"
+   ]
+  },
+  {
+   "kaynak": "ORIJINAL_KORKULUK_WOOD1.001",
+   "parcalar": [
+    "EK_ORIJINAL_KORKULUK_WOOD1.001_giris",
+    "EK_ORIJINAL_KORKULUK_WOOD1.001_kat1",
+    "EK_ORIJINAL_KORKULUK_WOOD1.001_cati"
+   ]
   }
  ],
  "doku_donusum": [
   {
-   "kaynak": "gravel02_diffuse",
-   "dosya": "99fe97fd852cad.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\99fe97fd852cad.jpg.raw",
-   "ortalama_rgb": [
-    154.18,
-    148.37,
-    141.94
-   ]
-  },
-  {
-   "kaynak": "gravel02_roughness",
-   "dosya": "0a2f5f3b559ccf.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\0a2f5f3b559ccf.png.raw",
-   "ortalama_rgb": [
-    250.56,
-    185.44,
-    250.29
-   ]
-  },
-  {
-   "kaynak": "gravel02_normal_opengl",
-   "dosya": "e753b1f583e23e.png",
-   "tur": "normal",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\e753b1f583e23e.png.raw",
-   "ortalama_rgb": [
-    126.97,
-    128.17,
-    209.47
-   ]
-  },
-  {
-   "kaynak": "Image",
-   "dosya": "5c358f1e3b43e7.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\5c358f1e3b43e7.jpg.raw",
-   "ortalama_rgb": [
-    118.0,
-    118.0,
-    118.0
-   ]
-  },
-  {
    "kaynak": "albedo.jpg.005",
    "dosya": "15e8a7fd1cca55.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\15e8a7fd1cca55.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\15e8a7fd1cca55.jpg.raw",
    "ortalama_rgb": [
     163.92,
     139.14,
@@ -1799,13 +1756,13 @@
    "kaynak": "roughness.jpg.009",
    "dosya": "3a1529d57284dd.png",
    "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\3a1529d57284dd.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\3a1529d57284dd.png.raw",
    "ortalama_rgb": [
     91.33,
     91.33,
@@ -1816,13 +1773,13 @@
    "kaynak": "normal.jpg.007",
    "dosya": "053eb3ea5ee827.png",
    "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\053eb3ea5ee827.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\053eb3ea5ee827.png.raw",
    "ortalama_rgb": [
     127.79,
     127.1,
@@ -1830,696 +1787,16 @@
    ]
   },
   {
-   "kaynak": "albedo.png.002",
-   "dosya": "f6c1dca0447b61.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\f6c1dca0447b61.jpg.raw",
-   "ortalama_rgb": [
-    50.96,
-    32.2,
-    24.64
-   ]
-  },
-  {
-   "kaynak": "roughness.jpg.005",
-   "dosya": "dd91935e3ec5e7.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\dd91935e3ec5e7.png.raw",
-   "ortalama_rgb": [
-    132.02,
-    132.02,
-    132.02
-   ]
-  },
-  {
-   "kaynak": "normal.jpg.003",
-   "dosya": "5a6a57089b1357.png",
-   "tur": "normal",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\5a6a57089b1357.png.raw",
-   "ortalama_rgb": [
-    126.5,
-    126.33,
-    253.47
-   ]
-  },
-  {
-   "kaynak": "albedo.png.001",
-   "dosya": "bf580b2880797e.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\bf580b2880797e.jpg.raw",
-   "ortalama_rgb": [
-    39.53,
-    23.99,
-    18.09
-   ]
-  },
-  {
-   "kaynak": "roughness.jpg.003",
-   "dosya": "7a21d0f67a29a4.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\7a21d0f67a29a4.png.raw",
-   "ortalama_rgb": [
-    132.36,
-    132.36,
-    132.36
-   ]
-  },
-  {
-   "kaynak": "normal.jpg.001",
-   "dosya": "f2cfacb56a4601.png",
-   "tur": "normal",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\f2cfacb56a4601.png.raw",
-   "ortalama_rgb": [
-    126.54,
-    126.39,
-    253.76
-   ]
-  },
-  {
-   "kaynak": "wood_floor__Base_Color__0156393902",
-   "dosya": "dd3559bcdd3726.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\dd3559bcdd3726.jpg.raw",
-   "ortalama_rgb": [
-    126.1,
-    68.5,
-    38.93
-   ]
-  },
-  {
-   "kaynak": "wood_floor_001",
-   "dosya": "45a83868a00322.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\45a83868a00322.png.raw",
-   "ortalama_rgb": [
-    44.68,
-    44.67,
-    44.68
-   ]
-  },
-  {
-   "kaynak": "Image_46_001_7d22855164",
-   "dosya": "c8cb302607fbd8.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\c8cb302607fbd8.jpg.raw",
-   "ortalama_rgb": [
-    197.25,
-    186.31,
-    160.75
-   ]
-  },
-  {
-   "kaynak": "Image.010",
-   "dosya": "7be0a716f1d411.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\7be0a716f1d411.jpg.raw",
-   "ortalama_rgb": [
-    2.35,
-    2.35,
-    2.35
-   ]
-  },
-  {
-   "kaynak": "albedo.jpg.003",
-   "dosya": "88c8b2c82fc9c0.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\88c8b2c82fc9c0.jpg.raw",
-   "ortalama_rgb": [
-    94.53,
-    62.5,
-    46.56
-   ]
-  },
-  {
-   "kaynak": "roughness.jpg.004",
-   "dosya": "1fa14f386ce0c3.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\1fa14f386ce0c3.png.raw",
-   "ortalama_rgb": [
-    96.4,
-    96.4,
-    96.4
-   ]
-  },
-  {
-   "kaynak": "normal.jpg.002",
-   "dosya": "ed22361a561c85.png",
-   "tur": "normal",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\ed22361a561c85.png.raw",
-   "ortalama_rgb": [
-    127.01,
-    126.66,
-    253.98
-   ]
-  },
-  {
-   "kaynak": "albedo.png.003",
-   "dosya": "095998daaec7cb.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\095998daaec7cb.jpg.raw",
-   "ortalama_rgb": [
-    183.62,
-    168.83,
-    150.48
-   ]
-  },
-  {
-   "kaynak": "roughness.jpg.006",
-   "dosya": "804be55ff35112.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\804be55ff35112.png.raw",
-   "ortalama_rgb": [
-    102.0,
-    102.0,
-    102.0
-   ]
-  },
-  {
-   "kaynak": "normal.jpg.004",
-   "dosya": "e3176db0a01ffb.png",
-   "tur": "normal",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\e3176db0a01ffb.png.raw",
-   "ortalama_rgb": [
-    127.0,
-    126.0,
-    253.0
-   ]
-  },
-  {
-   "kaynak": "albedo.png",
-   "dosya": "857a50ac4da2ec.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\857a50ac4da2ec.jpg.raw",
-   "ortalama_rgb": [
-    67.28,
-    34.55,
-    23.44
-   ]
-  },
-  {
-   "kaynak": "roughness.png",
-   "dosya": "14af4e9b4c80cb.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\14af4e9b4c80cb.png.raw",
-   "ortalama_rgb": [
-    112.0,
-    112.0,
-    112.0
-   ]
-  },
-  {
-   "kaynak": "normal.png",
-   "dosya": "dfab85f3599373.png",
-   "tur": "normal",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": true,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\dfab85f3599373.png.raw",
-   "ortalama_rgb": [
-    127.0,
-    127.0,
-    254.02
-   ]
-  },
-  {
-   "kaynak": "Image_6_002_aff0132f44_d9f068ccd7",
-   "dosya": "6e105629ce6251.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\6e105629ce6251.jpg.raw",
-   "ortalama_rgb": [
-    171.31,
-    173.46,
-    168.64
-   ]
-  },
-  {
-   "kaynak": "Image.011",
-   "dosya": "b95fe463e45e6d.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\b95fe463e45e6d.jpg.raw",
-   "ortalama_rgb": [
-    6.26,
-    6.25,
-    6.26
-   ]
-  },
-  {
-   "kaynak": "Image_34_001_b62513ba27",
-   "dosya": "e48b395c1a84f8.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\e48b395c1a84f8.jpg.raw",
-   "ortalama_rgb": [
-    120.1,
-    90.57,
-    73.15
-   ]
-  },
-  {
-   "kaynak": "Image.017",
-   "dosya": "e97626909c7951.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\e97626909c7951.jpg.raw",
-   "ortalama_rgb": [
-    1.76,
-    1.76,
-    1.76
-   ]
-  },
-  {
-   "kaynak": "albedo.jpg.008",
-   "dosya": "e79d5e5a1bd482.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\e79d5e5a1bd482.jpg.raw",
-   "ortalama_rgb": [
-    204.83,
-    198.34,
-    179.81
-   ]
-  },
-  {
-   "kaynak": "roughness.jpg.011",
-   "dosya": "43c23f6e62b260.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\43c23f6e62b260.png.raw",
-   "ortalama_rgb": [
-    106.87,
-    106.87,
-    106.87
-   ]
-  },
-  {
-   "kaynak": "normal.jpg.008",
-   "dosya": "863ef95898f5c2.png",
-   "tur": "normal",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\863ef95898f5c2.png.raw",
-   "ortalama_rgb": [
-    127.53,
-    127.45,
-    250.24
-   ]
-  },
-  {
-   "kaynak": "Image_47_001_2817b78825",
-   "dosya": "8f49a527826611.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\8f49a527826611.jpg.raw",
-   "ortalama_rgb": [
-    210.86,
-    201.97,
-    173.15
-   ]
-  },
-  {
-   "kaynak": "Image.009",
-   "dosya": "c5bd8818e3afcf.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\c5bd8818e3afcf.jpg.raw",
-   "ortalama_rgb": [
-    0.5,
-    0.5,
-    0.5
-   ]
-  },
-  {
-   "kaynak": "fired-clay-basecolor_ccefeb7162",
-   "dosya": "7a32566295d734.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\7a32566295d734.jpg.raw",
-   "ortalama_rgb": [
-    168.0,
-    106.38,
-    72.71
-   ]
-  },
-  {
-   "kaynak": "fired-clay-orm_f095d799e9",
-   "dosya": "c4806d9c01aef3.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\c4806d9c01aef3.png.raw",
-   "ortalama_rgb": [
-    254.09,
-    201.26,
-    0.86
-   ]
-  },
-  {
-   "kaynak": "fired-clay-normal_111b29fded",
-   "dosya": "53d5c9e1877c41.png",
-   "tur": "normal",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\53d5c9e1877c41.png.raw",
-   "ortalama_rgb": [
-    127.58,
-    127.53,
-    254.65
-   ]
-  },
-  {
-   "kaynak": "Clay_tile_6__imported_",
-   "dosya": "bf019dbe0a35ad.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\bf019dbe0a35ad.png.raw",
-   "ortalama_rgb": [
-    78.69,
-    78.69,
-    78.69
-   ]
-  },
-  {
-   "kaynak": "Image_37_001_a48d46f0e4",
-   "dosya": "8c9316ff59f4dd.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\8c9316ff59f4dd.jpg.raw",
-   "ortalama_rgb": [
-    222.75,
-    217.85,
-    201.81
-   ]
-  },
-  {
-   "kaynak": "Image.004",
-   "dosya": "9790501232bb6b.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\9790501232bb6b.jpg.raw",
-   "ortalama_rgb": [
-    0.0,
-    0.0,
-    0.0
-   ]
-  },
-  {
-   "kaynak": "albedo.jpg.007",
-   "dosya": "712b0b66534031.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\712b0b66534031.jpg.raw",
-   "ortalama_rgb": [
-    152.6,
-    135.63,
-    108.69
-   ]
-  },
-  {
-   "kaynak": "ROGUHENSS2",
-   "dosya": "36159d41e81a28.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\36159d41e81a28.jpg.raw",
-   "ortalama_rgb": [
-    186.69,
-    178.97,
-    168.59
-   ]
-  },
-  {
-   "kaynak": "Image_26_001_f9182a3bd9",
-   "dosya": "fc22192b74456d.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\fc22192b74456d.jpg.raw",
-   "ortalama_rgb": [
-    123.29,
-    113.2,
-    104.8
-   ]
-  },
-  {
-   "kaynak": "Image.016",
-   "dosya": "787393bffbb623.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\787393bffbb623.jpg.raw",
-   "ortalama_rgb": [
-    15.18,
-    15.18,
-    15.18
-   ]
-  },
-  {
-   "kaynak": "albedo.jpg.002",
-   "dosya": "6729c6ee958cae.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\6729c6ee958cae.jpg.raw",
-   "ortalama_rgb": [
-    245.0,
-    242.0,
-    235.0
-   ]
-  },
-  {
-   "kaynak": "roughness.jpg.002",
-   "dosya": "7c45317a62bfe2.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\7c45317a62bfe2.png.raw",
-   "ortalama_rgb": [
-    228.97,
-    228.97,
-    228.97
-   ]
-  },
-  {
    "kaynak": "wood12b_diffuse",
    "dosya": "0910b56d3b1da8.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\0910b56d3b1da8.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\0910b56d3b1da8.jpg.raw",
    "ortalama_rgb": [
     66.05,
     25.11,
@@ -2530,13 +1807,13 @@
    "kaynak": "wood12_glossiness",
    "dosya": "2523a109e101d1.png",
    "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\2523a109e101d1.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\2523a109e101d1.png.raw",
    "ortalama_rgb": [
     254.88,
     176.97,
@@ -2547,13 +1824,13 @@
    "kaynak": "wood12_opengl_normal",
    "dosya": "bbc67ec3ad9d5d.png",
    "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\bbc67ec3ad9d5d.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\bbc67ec3ad9d5d.png.raw",
    "ortalama_rgb": [
     128.0,
     127.91,
@@ -2561,67 +1838,118 @@
    ]
   },
   {
-   "kaynak": "albedo.jpg.009",
-   "dosya": "efdd7f03e55351.jpg",
+   "kaynak": "albedo.png.008",
+   "dosya": "7ce6c45032e787.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\7ce6c45032e787.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\efdd7f03e55351.jpg.raw",
    "ortalama_rgb": [
-    207.12,
-    200.57,
-    181.91
+    92.99,
+    62.15,
+    40.95
    ]
   },
   {
-   "kaynak": "roughness.jpg.012",
-   "dosya": "88db0267f608ea.png",
+   "kaynak": "roughness.jpg.016",
+   "dosya": "b284b143091112.png",
    "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\b284b143091112.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\88db0267f608ea.png.raw",
    "ortalama_rgb": [
-    76.02,
-    76.02,
-    76.02
+    132.02,
+    132.02,
+    132.02
    ]
   },
   {
-   "kaynak": "normal.jpg.009",
-   "dosya": "b639d54721f9f9.png",
+   "kaynak": "normal.jpg.013",
+   "dosya": "3c5bb6bd4e2dc0.png",
    "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\3c5bb6bd4e2dc0.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\b639d54721f9f9.png.raw",
    "ortalama_rgb": [
-    128.0,
-    127.0,
-    255.0
+    126.5,
+    126.33,
+    253.47
    ]
   },
   {
-   "kaynak": "Image_21_001_407e3da6af_795e98b7a7",
-   "dosya": "920f40edcdb9f0.jpg",
+   "kaynak": "albedo.png.001",
+   "dosya": "bf580b2880797e.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\bf580b2880797e.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
+   "ortalama_rgb": [
+    39.53,
+    23.99,
+    18.09
+   ]
+  },
+  {
+   "kaynak": "roughness.jpg.003",
+   "dosya": "7a21d0f67a29a4.png",
+   "tur": "data",
    "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\7a21d0f67a29a4.png.raw",
    "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\920f40edcdb9f0.jpg.raw",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    132.36,
+    132.36,
+    132.36
+   ]
+  },
+  {
+   "kaynak": "normal.jpg.001",
+   "dosya": "f2cfacb56a4601.png",
+   "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\f2cfacb56a4601.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    126.54,
+    126.39,
+    253.76
+   ]
+  },
+  {
+   "kaynak": "Image_21_001_407e3da6af_795e98b7a7.001",
+   "dosya": "63413b7d597003.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\63413b7d597003.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
    "ortalama_rgb": [
     100.97,
     68.06,
@@ -2629,84 +1957,16 @@
    ]
   },
   {
-   "kaynak": "neutral-ceiling-plaster-basecolor_318c44ecfb",
-   "dosya": "0c89279a08dfcc.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\0c89279a08dfcc.jpg.raw",
-   "ortalama_rgb": [
-    233.65,
-    233.98,
-    231.65
-   ]
-  },
-  {
-   "kaynak": "neutral-ceiling-plaster-orm_3cc1029a9b",
-   "dosya": "5dd47c66c89ac9.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\5dd47c66c89ac9.png.raw",
-   "ortalama_rgb": [
-    254.08,
-    224.6,
-    1.03
-   ]
-  },
-  {
-   "kaynak": "neutral-ceiling-plaster-normal_a7bb3bdc60",
-   "dosya": "50384f9233a2f0.png",
-   "tur": "normal",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\50384f9233a2f0.png.raw",
-   "ortalama_rgb": [
-    127.74,
-    127.16,
-    255.0
-   ]
-  },
-  {
-   "kaynak": "Image.001",
-   "dosya": "ae9fc1c77cab42.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\ae9fc1c77cab42.jpg.raw",
-   "ortalama_rgb": [
-    255.0,
-    255.0,
-    255.0
-   ]
-  },
-  {
    "kaynak": "Wood10_diffuse_xtm",
    "dosya": "95645691ea97b0.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\95645691ea97b0.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\95645691ea97b0.jpg.raw",
    "ortalama_rgb": [
     46.78,
     19.6,
@@ -2717,13 +1977,13 @@
    "kaynak": "Wood10_roughness_xtm",
    "dosya": "2d55d89dd6b6d9.png",
    "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\2d55d89dd6b6d9.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\2d55d89dd6b6d9.png.raw",
    "ortalama_rgb": [
     254.44,
     130.11,
@@ -2734,13 +1994,13 @@
    "kaynak": "Wood10_normal_xtm",
    "dosya": "e36108bd4ab6cf.png",
    "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\e36108bd4ab6cf.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\e36108bd4ab6cf.png.raw",
    "ortalama_rgb": [
     127.58,
     127.51,
@@ -2748,16 +2008,118 @@
    ]
   },
   {
-   "kaynak": "Image_36_001_6215dacbfc",
-   "dosya": "e68edb6c197dc6.jpg",
+   "kaynak": "albedo.jpg.003",
+   "dosya": "88c8b2c82fc9c0.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\88c8b2c82fc9c0.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
+   "ortalama_rgb": [
+    94.53,
+    62.5,
+    46.56
+   ]
+  },
+  {
+   "kaynak": "roughness.jpg.004",
+   "dosya": "1fa14f386ce0c3.png",
+   "tur": "data",
    "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\1fa14f386ce0c3.png.raw",
    "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\e68edb6c197dc6.jpg.raw",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    96.4,
+    96.4,
+    96.4
+   ]
+  },
+  {
+   "kaynak": "normal.jpg.002",
+   "dosya": "ed22361a561c85.png",
+   "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\ed22361a561c85.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    127.01,
+    126.66,
+    253.98
+   ]
+  },
+  {
+   "kaynak": "albedo.png.003",
+   "dosya": "095998daaec7cb.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\095998daaec7cb.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    183.62,
+    168.83,
+    150.48
+   ]
+  },
+  {
+   "kaynak": "roughness.jpg.006",
+   "dosya": "804be55ff35112.png",
+   "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\804be55ff35112.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    102.0,
+    102.0,
+    102.0
+   ]
+  },
+  {
+   "kaynak": "normal.jpg.004",
+   "dosya": "e3176db0a01ffb.png",
+   "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\e3176db0a01ffb.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    127.0,
+    126.0,
+    253.0
+   ]
+  },
+  {
+   "kaynak": "Image_36_001_6215dacbfc",
+   "dosya": "e68edb6c197dc6.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\e68edb6c197dc6.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
    "ortalama_rgb": [
     178.2,
     175.88,
@@ -2768,13 +2130,13 @@
    "kaynak": "Image.008",
    "dosya": "276e8b04b97b9b.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\276e8b04b97b9b.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\276e8b04b97b9b.jpg.raw",
    "ortalama_rgb": [
     0.65,
     0.65,
@@ -2782,16 +2144,152 @@
    ]
   },
   {
-   "kaynak": "Image_40_001_627b5eb781",
-   "dosya": "cfbf1dbfde26f4.jpg",
+   "kaynak": "albedo.png.002",
+   "dosya": "f6c1dca0447b61.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\f6c1dca0447b61.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
+   "ortalama_rgb": [
+    50.96,
+    32.2,
+    24.64
+   ]
+  },
+  {
+   "kaynak": "roughness.jpg.005",
+   "dosya": "dd91935e3ec5e7.png",
+   "tur": "data",
    "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\dd91935e3ec5e7.png.raw",
    "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\cfbf1dbfde26f4.jpg.raw",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    132.02,
+    132.02,
+    132.02
+   ]
+  },
+  {
+   "kaynak": "normal.jpg.003",
+   "dosya": "5a6a57089b1357.png",
+   "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\5a6a57089b1357.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    126.5,
+    126.33,
+    253.47
+   ]
+  },
+  {
+   "kaynak": "albedo.png",
+   "dosya": "857a50ac4da2ec.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\857a50ac4da2ec.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    67.28,
+    34.55,
+    23.44
+   ]
+  },
+  {
+   "kaynak": "roughness.png",
+   "dosya": "14af4e9b4c80cb.png",
+   "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\14af4e9b4c80cb.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    112.0,
+    112.0,
+    112.0
+   ]
+  },
+  {
+   "kaynak": "normal.png",
+   "dosya": "dfab85f3599373.png",
+   "tur": "normal",
+   "world_to_tangent": true,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\dfab85f3599373.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    127.0,
+    127.0,
+    254.02
+   ]
+  },
+  {
+   "kaynak": "Image_6_002_aff0132f44_d9f068ccd7",
+   "dosya": "6e105629ce6251.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\6e105629ce6251.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    171.31,
+    173.46,
+    168.64
+   ]
+  },
+  {
+   "kaynak": "Image.011",
+   "dosya": "b95fe463e45e6d.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\b95fe463e45e6d.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    6.26,
+    6.25,
+    6.26
+   ]
+  },
+  {
+   "kaynak": "Image_40_001_627b5eb781",
+   "dosya": "cfbf1dbfde26f4.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\cfbf1dbfde26f4.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
    "ortalama_rgb": [
     143.44,
     131.9,
@@ -2802,13 +2300,13 @@
    "kaynak": "Image.015",
    "dosya": "0ab721afc74f5b.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\0ab721afc74f5b.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\0ab721afc74f5b.jpg.raw",
    "ortalama_rgb": [
     5.55,
     5.55,
@@ -2819,13 +2317,13 @@
    "kaynak": "Roughn",
    "dosya": "55ab6a6745beee.png",
    "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\55ab6a6745beee.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\55ab6a6745beee.png.raw",
    "ortalama_rgb": [
     254.96,
     246.74,
@@ -2836,13 +2334,13 @@
    "kaynak": "normal",
    "dosya": "7829b7a7fcce83.png",
    "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\7829b7a7fcce83.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\7829b7a7fcce83.png.raw",
    "ortalama_rgb": [
     127.4,
     128.52,
@@ -2850,33 +2348,118 @@
    ]
   },
   {
-   "kaynak": "cam40",
-   "dosya": "c5beda3e70cf2f.jpg",
+   "kaynak": "albedo.jpg.008",
+   "dosya": "e79d5e5a1bd482.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\e79d5e5a1bd482.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\c5beda3e70cf2f.jpg.raw",
    "ortalama_rgb": [
-    97.34,
-    74.75,
-    53.02
+    204.83,
+    198.34,
+    179.81
+   ]
+  },
+  {
+   "kaynak": "roughness.jpg.011",
+   "dosya": "43c23f6e62b260.png",
+   "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\43c23f6e62b260.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    106.87,
+    106.87,
+    106.87
+   ]
+  },
+  {
+   "kaynak": "normal.jpg.008",
+   "dosya": "863ef95898f5c2.png",
+   "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\863ef95898f5c2.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    127.53,
+    127.45,
+    250.24
+   ]
+  },
+  {
+   "kaynak": "albedo.png.007",
+   "dosya": "357593d1dbde32.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\357593d1dbde32.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    92.99,
+    62.15,
+    40.95
+   ]
+  },
+  {
+   "kaynak": "roughness.jpg.015",
+   "dosya": "9d24314be2426b.png",
+   "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\9d24314be2426b.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    132.02,
+    132.02,
+    132.02
+   ]
+  },
+  {
+   "kaynak": "normal.jpg.012",
+   "dosya": "866a4ce38b9370.png",
+   "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\866a4ce38b9370.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    126.5,
+    126.33,
+    253.47
    ]
   },
   {
    "kaynak": "Image_0_003_3f56a2d04e_db12d1f9e5",
    "dosya": "944743bd75e0eb.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\944743bd75e0eb.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\944743bd75e0eb.jpg.raw",
    "ortalama_rgb": [
     153.73,
     116.51,
@@ -2887,13 +2470,13 @@
    "kaynak": "Image_1_003_4b9de5c215_12377f2dfc",
    "dosya": "4c840be12c7b78.png",
    "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\4c840be12c7b78.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\4c840be12c7b78.png.raw",
    "ortalama_rgb": [
     127.97,
     126.99,
@@ -2901,67 +2484,101 @@
    ]
   },
   {
-   "kaynak": "Image_13_001_b9f7c910f2_f6917fd8e1",
-   "dosya": "8b7fbd6a3d7def.jpg",
+   "kaynak": "Image_21_001_407e3da6af_795e98b7a7",
+   "dosya": "920f40edcdb9f0.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\920f40edcdb9f0.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\8b7fbd6a3d7def.jpg.raw",
    "ortalama_rgb": [
-    163.81,
-    143.09,
-    85.4
+    100.97,
+    68.06,
+    44.97
    ]
   },
   {
-   "kaynak": "Image_14_001_03f9cd1968_89db8cb43d",
-   "dosya": "732adc5da45783.png",
+   "kaynak": "fired-clay-basecolor_ccefeb7162",
+   "dosya": "7a32566295d734.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\7a32566295d734.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    168.0,
+    106.38,
+    72.71
+   ]
+  },
+  {
+   "kaynak": "fired-clay-orm_f095d799e9",
+   "dosya": "c4806d9c01aef3.png",
+   "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\c4806d9c01aef3.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    254.09,
+    201.26,
+    0.86
+   ]
+  },
+  {
+   "kaynak": "fired-clay-normal_111b29fded",
+   "dosya": "53d5c9e1877c41.png",
    "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\53d5c9e1877c41.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\732adc5da45783.png.raw",
    "ortalama_rgb": [
-    127.83,
-    127.03,
-    255.0
+    127.58,
+    127.53,
+    254.65
    ]
   },
   {
-   "kaynak": "Image.012",
-   "dosya": "30bac2098f658e.jpg",
-   "tur": "albedo",
+   "kaynak": "Clay_tile_6__imported_",
+   "dosya": "bf019dbe0a35ad.png",
+   "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\bf019dbe0a35ad.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\30bac2098f658e.jpg.raw",
    "ortalama_rgb": [
-    3.84,
-    3.83,
-    3.84
+    78.69,
+    78.69,
+    78.69
    ]
   },
   {
    "kaynak": "Image_48_001_b4d373e89e",
    "dosya": "cb6740ecc2039c.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\cb6740ecc2039c.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\cb6740ecc2039c.jpg.raw",
    "ortalama_rgb": [
     219.73,
     217.75,
@@ -2972,13 +2589,13 @@
    "kaynak": "Image.007",
    "dosya": "94f2e220244982.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\94f2e220244982.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\94f2e220244982.jpg.raw",
    "ortalama_rgb": [
     216.75,
     216.75,
@@ -2986,101 +2603,33 @@
    ]
   },
   {
-   "kaynak": "albedo.jpg.010",
-   "dosya": "e0b95be8bce4b3.jpg",
+   "kaynak": "albedo.jpg.007",
+   "dosya": "712b0b66534031.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\712b0b66534031.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\e0b95be8bce4b3.jpg.raw",
    "ortalama_rgb": [
-    79.01,
-    51.99,
-    47.09
-   ]
-  },
-  {
-   "kaynak": "roughness.jpg.013",
-   "dosya": "96a53ed7593d42.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\96a53ed7593d42.png.raw",
-   "ortalama_rgb": [
-    101.5,
-    101.5,
-    101.5
-   ]
-  },
-  {
-   "kaynak": "normal.jpg.010",
-   "dosya": "596c6807a897f6.png",
-   "tur": "normal",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\596c6807a897f6.png.raw",
-   "ortalama_rgb": [
-    127.86,
-    127.6,
-    250.65
-   ]
-  },
-  {
-   "kaynak": "albedo.jpg.001",
-   "dosya": "03c91cc3b7ae31.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\03c91cc3b7ae31.jpg.raw",
-   "ortalama_rgb": [
-    239.0,
-    233.0,
-    221.0
-   ]
-  },
-  {
-   "kaynak": "roughness.jpg.001",
-   "dosya": "f464353cd2fa5e.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\f464353cd2fa5e.png.raw",
-   "ortalama_rgb": [
-    216.32,
-    216.32,
-    216.32
+    152.6,
+    135.63,
+    108.69
    ]
   },
   {
    "kaynak": "Image_0_56828fef8b_44bbfe415b",
    "dosya": "281d925b9c255e.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\281d925b9c255e.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\281d925b9c255e.jpg.raw",
    "ortalama_rgb": [
     184.63,
     98.9,
@@ -3088,101 +2637,101 @@
    ]
   },
   {
-   "kaynak": "albedo.jpg.006",
-   "dosya": "c791da31e90805.jpg",
+   "kaynak": "albedo.jpg.002",
+   "dosya": "6729c6ee958cae.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\6729c6ee958cae.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\c791da31e90805.jpg.raw",
    "ortalama_rgb": [
-    108.93,
-    92.31,
-    88.83
+    245.0,
+    242.0,
+    235.0
    ]
   },
   {
-   "kaynak": "roughness.jpg.010",
-   "dosya": "a606fff16c2f94.png",
+   "kaynak": "roughness.jpg.002",
+   "dosya": "7c45317a62bfe2.png",
    "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\7c45317a62bfe2.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\a606fff16c2f94.png.raw",
    "ortalama_rgb": [
-    115.0,
-    115.0,
-    115.0
+    228.97,
+    228.97,
+    228.97
    ]
   },
   {
-   "kaynak": "albedo.jpg.004",
-   "dosya": "e843bae5cf1a90.jpg",
+   "kaynak": "albedo.jpg.009",
+   "dosya": "efdd7f03e55351.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\efdd7f03e55351.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\e843bae5cf1a90.jpg.raw",
    "ortalama_rgb": [
-    213.27,
-    187.49,
-    155.29
+    207.12,
+    200.57,
+    181.91
    ]
   },
   {
-   "kaynak": "roughness.jpg.007",
-   "dosya": "23f1563968d5ea.png",
+   "kaynak": "roughness.jpg.012",
+   "dosya": "88db0267f608ea.png",
    "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\88db0267f608ea.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\23f1563968d5ea.png.raw",
    "ortalama_rgb": [
-    121.87,
-    121.87,
-    121.87
+    76.02,
+    76.02,
+    76.02
    ]
   },
   {
-   "kaynak": "normal.jpg.005",
-   "dosya": "52d1d885f0e2bd.png",
+   "kaynak": "normal.jpg.009",
+   "dosya": "b639d54721f9f9.png",
    "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\b639d54721f9f9.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\52d1d885f0e2bd.png.raw",
    "ortalama_rgb": [
-    127.64,
-    127.29,
-    253.84
+    128.0,
+    127.0,
+    255.0
    ]
   },
   {
    "kaynak": "Image_43_001_1892665b70",
    "dosya": "434ed331380293.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\434ed331380293.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\434ed331380293.jpg.raw",
    "ortalama_rgb": [
     127.2,
     98.71,
@@ -3193,13 +2742,13 @@
    "kaynak": "Image.018",
    "dosya": "e5eb23b184cf86.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\e5eb23b184cf86.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\e5eb23b184cf86.jpg.raw",
    "ortalama_rgb": [
     1.45,
     1.45,
@@ -3210,13 +2759,13 @@
    "kaynak": "wall012_diffuse",
    "dosya": "6b8205b69b0b49.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\6b8205b69b0b49.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\6b8205b69b0b49.jpg.raw",
    "ortalama_rgb": [
     171.82,
     189.49,
@@ -3227,13 +2776,13 @@
    "kaynak": "wall01_glossiness",
    "dosya": "90472beb684471.png",
    "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\90472beb684471.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\90472beb684471.png.raw",
    "ortalama_rgb": [
     254.64,
     140.37,
@@ -3244,13 +2793,13 @@
    "kaynak": "wall01_normal",
    "dosya": "b16b4bf013dc47.png",
    "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\b16b4bf013dc47.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\b16b4bf013dc47.png.raw",
    "ortalama_rgb": [
     127.37,
     127.55,
@@ -3258,67 +2807,135 @@
    ]
   },
   {
-   "kaynak": "albedo.png.004",
-   "dosya": "c775f8c2d6fdae.jpg",
+   "kaynak": "Image_13_001_b9f7c910f2_f6917fd8e1",
+   "dosya": "8b7fbd6a3d7def.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\8b7fbd6a3d7def.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\c775f8c2d6fdae.jpg.raw",
    "ortalama_rgb": [
-    118.22,
-    83.15,
-    60.53
+    163.81,
+    143.09,
+    85.4
    ]
   },
   {
-   "kaynak": "roughness.jpg.008",
-   "dosya": "515fdea810ffb8.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\515fdea810ffb8.png.raw",
-   "ortalama_rgb": [
-    128.0,
-    128.0,
-    128.0
-   ]
-  },
-  {
-   "kaynak": "normal.jpg.006",
-   "dosya": "9f16fdee176f07.png",
+   "kaynak": "Image_14_001_03f9cd1968_89db8cb43d",
+   "dosya": "732adc5da45783.png",
    "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\732adc5da45783.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\9f16fdee176f07.png.raw",
    "ortalama_rgb": [
-    127.0,
-    126.0,
-    253.0
+    127.83,
+    127.03,
+    255.0
+   ]
+  },
+  {
+   "kaynak": "Image.012",
+   "dosya": "30bac2098f658e.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\30bac2098f658e.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    3.84,
+    3.83,
+    3.84
+   ]
+  },
+  {
+   "kaynak": "neutral-ceiling-plaster-basecolor_318c44ecfb",
+   "dosya": "0c89279a08dfcc.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\0c89279a08dfcc.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    233.65,
+    233.98,
+    231.65
+   ]
+  },
+  {
+   "kaynak": "neutral-ceiling-plaster-orm_3cc1029a9b",
+   "dosya": "5dd47c66c89ac9.png",
+   "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\5dd47c66c89ac9.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    254.08,
+    224.6,
+    1.03
+   ]
+  },
+  {
+   "kaynak": "neutral-ceiling-plaster-normal_a7bb3bdc60",
+   "dosya": "50384f9233a2f0.png",
+   "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\50384f9233a2f0.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    127.74,
+    127.16,
+    255.0
+   ]
+  },
+  {
+   "kaynak": "Image.001",
+   "dosya": "ae9fc1c77cab42.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\ae9fc1c77cab42.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    255.0,
+    255.0,
+    255.0
    ]
   },
   {
    "kaynak": "Image_49_001_4e9e884c20",
    "dosya": "ab48cf81a1b807.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\ab48cf81a1b807.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\ab48cf81a1b807.jpg.raw",
    "ortalama_rgb": [
     196.0,
     182.22,
@@ -3329,13 +2946,13 @@
    "kaynak": "Image.003",
    "dosya": "a0f534adb40ca0.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\a0f534adb40ca0.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\a0f534adb40ca0.jpg.raw",
    "ortalama_rgb": [
     0.1,
     0.1,
@@ -3343,67 +2960,16 @@
    ]
   },
   {
-   "kaynak": "albedo.png.005",
-   "dosya": "931cdd3a3e45f6.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\931cdd3a3e45f6.jpg.raw",
-   "ortalama_rgb": [
-    65.77,
-    34.51,
-    23.17
-   ]
-  },
-  {
-   "kaynak": "roughness.png.001",
-   "dosya": "4a04e269ea66e0.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\4a04e269ea66e0.png.raw",
-   "ortalama_rgb": [
-    63.13,
-    63.13,
-    63.13
-   ]
-  },
-  {
-   "kaynak": "normal.png.001",
-   "dosya": "37953903a0e65f.png",
-   "tur": "normal",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\37953903a0e65f.png.raw",
-   "ortalama_rgb": [
-    127.0,
-    127.0,
-    254.0
-   ]
-  },
-  {
    "kaynak": "wood_honey__Base_Color__fec46d8524",
    "dosya": "948874eab6280b.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\948874eab6280b.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\948874eab6280b.jpg.raw",
    "ortalama_rgb": [
     132.5,
     85.0,
@@ -3411,50 +2977,16 @@
    ]
   },
   {
-   "kaynak": "Image_27_001_eebce8d9fc",
-   "dosya": "8a0a676e0e01e1.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\8a0a676e0e01e1.jpg.raw",
-   "ortalama_rgb": [
-    134.48,
-    118.76,
-    101.71
-   ]
-  },
-  {
-   "kaynak": "Image.013",
-   "dosya": "cfec90f6923e1c.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\cfec90f6923e1c.jpg.raw",
-   "ortalama_rgb": [
-    2.54,
-    2.54,
-    2.54
-   ]
-  },
-  {
    "kaynak": "Image_35_001_c5c6730af8",
    "dosya": "50528a92fbab73.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\50528a92fbab73.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\50528a92fbab73.jpg.raw",
    "ortalama_rgb": [
     202.46,
     171.54,
@@ -3465,13 +2997,13 @@
    "kaynak": "Image.005",
    "dosya": "aba449a711183f.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\aba449a711183f.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\aba449a711183f.jpg.raw",
    "ortalama_rgb": [
     0.07,
     0.07,
@@ -3479,16 +3011,33 @@
    ]
   },
   {
-   "kaynak": "Image_51_001_d57400d832",
-   "dosya": "6dcde0a526ae23.jpg",
+   "kaynak": "cam40",
+   "dosya": "c5beda3e70cf2f.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\c5beda3e70cf2f.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
+   "ortalama_rgb": [
+    97.34,
+    74.75,
+    53.02
+   ]
+  },
+  {
+   "kaynak": "Image_51_001_d57400d832",
+   "dosya": "6dcde0a526ae23.jpg",
+   "tur": "albedo",
    "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\6dcde0a526ae23.jpg.raw",
    "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\6dcde0a526ae23.jpg.raw",
+   "boyut": [
+    2048,
+    2048
+   ],
    "ortalama_rgb": [
     185.62,
     182.19,
@@ -3499,13 +3048,13 @@
    "kaynak": "stone_tile",
    "dosya": "0e72bca9b33a7b.png",
    "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\0e72bca9b33a7b.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\0e72bca9b33a7b.png.raw",
    "ortalama_rgb": [
     25.72,
     25.72,
@@ -3516,13 +3065,13 @@
    "kaynak": "Image.002",
    "dosya": "aa775269943e0b.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\aa775269943e0b.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\aa775269943e0b.jpg.raw",
    "ortalama_rgb": [
     16.03,
     16.03,
@@ -3530,101 +3079,50 @@
    ]
   },
   {
-   "kaynak": "albedo.png.006",
-   "dosya": "8a70f1cbbd0649.jpg",
+   "kaynak": "Image_26_001_f9182a3bd9",
+   "dosya": "fc22192b74456d.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\fc22192b74456d.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\8a70f1cbbd0649.jpg.raw",
    "ortalama_rgb": [
-    99.97,
-    65.01,
-    40.44
+    123.29,
+    113.2,
+    104.8
    ]
   },
   {
-   "kaynak": "roughness.jpg.014",
-   "dosya": "8bc01a011fe915.png",
-   "tur": "data",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\8bc01a011fe915.png.raw",
-   "ortalama_rgb": [
-    132.07,
-    132.07,
-    132.07
-   ]
-  },
-  {
-   "kaynak": "normal.jpg.011",
-   "dosya": "f0c313a0c92dda.png",
-   "tur": "normal",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\f0c313a0c92dda.png.raw",
-   "ortalama_rgb": [
-    126.67,
-    126.23,
-    254.0
-   ]
-  },
-  {
-   "kaynak": "Image_12_001_c07ff4e5ff_0b081ec94a",
-   "dosya": "21ef9814da8557.jpg",
+   "kaynak": "Image.016",
+   "dosya": "787393bffbb623.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\787393bffbb623.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\21ef9814da8557.jpg.raw",
    "ortalama_rgb": [
-    132.55,
-    105.27,
-    84.87
-   ]
-  },
-  {
-   "kaynak": "Image.014",
-   "dosya": "ba231e4ab47d12.jpg",
-   "tur": "albedo",
-   "boyut": [
-    2048,
-    2048
-   ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\ba231e4ab47d12.jpg.raw",
-   "ortalama_rgb": [
-    1.62,
-    1.62,
-    1.62
+    15.18,
+    15.18,
+    15.18
    ]
   },
   {
    "kaynak": "Image_33_001_41afda2194",
    "dosya": "e0b31cf9b14085.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\e0b31cf9b14085.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\e0b31cf9b14085.jpg.raw",
    "ortalama_rgb": [
     126.08,
     68.36,
@@ -3635,13 +3133,13 @@
    "kaynak": "Image_50_001_cfe65c4d71",
    "dosya": "aefde895ee0974.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\aefde895ee0974.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\aefde895ee0974.jpg.raw",
    "ortalama_rgb": [
     142.64,
     143.71,
@@ -3652,13 +3150,13 @@
    "kaynak": "Image.006",
    "dosya": "f4169819458b1d.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\f4169819458b1d.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\f4169819458b1d.jpg.raw",
    "ortalama_rgb": [
     14.42,
     14.42,
@@ -3666,16 +3164,186 @@
    ]
   },
   {
-   "kaynak": "ROGUHENSS1",
-   "dosya": "9a0e54e736af87.jpg",
+   "kaynak": "albedo.jpg.010",
+   "dosya": "e0b95be8bce4b3.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\e0b95be8bce4b3.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
+   "ortalama_rgb": [
+    79.01,
+    51.99,
+    47.09
+   ]
+  },
+  {
+   "kaynak": "roughness.jpg.013",
+   "dosya": "96a53ed7593d42.png",
+   "tur": "data",
    "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\96a53ed7593d42.png.raw",
    "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\9a0e54e736af87.jpg.raw",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    101.5,
+    101.5,
+    101.5
+   ]
+  },
+  {
+   "kaynak": "normal.jpg.010",
+   "dosya": "596c6807a897f6.png",
+   "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\596c6807a897f6.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    127.86,
+    127.6,
+    250.65
+   ]
+  },
+  {
+   "kaynak": "albedo.jpg.001",
+   "dosya": "03c91cc3b7ae31.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\03c91cc3b7ae31.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    239.0,
+    233.0,
+    221.0
+   ]
+  },
+  {
+   "kaynak": "roughness.jpg.001",
+   "dosya": "f464353cd2fa5e.png",
+   "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\f464353cd2fa5e.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    216.32,
+    216.32,
+    216.32
+   ]
+  },
+  {
+   "kaynak": "albedo.jpg.006",
+   "dosya": "c791da31e90805.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\c791da31e90805.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    108.93,
+    92.31,
+    88.83
+   ]
+  },
+  {
+   "kaynak": "roughness.jpg.010",
+   "dosya": "a606fff16c2f94.png",
+   "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\a606fff16c2f94.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    115.0,
+    115.0,
+    115.0
+   ]
+  },
+  {
+   "kaynak": "albedo.jpg.004",
+   "dosya": "e843bae5cf1a90.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\e843bae5cf1a90.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    213.27,
+    187.49,
+    155.29
+   ]
+  },
+  {
+   "kaynak": "roughness.jpg.007",
+   "dosya": "23f1563968d5ea.png",
+   "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\23f1563968d5ea.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    121.87,
+    121.87,
+    121.87
+   ]
+  },
+  {
+   "kaynak": "normal.jpg.005",
+   "dosya": "52d1d885f0e2bd.png",
+   "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\52d1d885f0e2bd.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    127.64,
+    127.29,
+    253.84
+   ]
+  },
+  {
+   "kaynak": "ROGUHENSS1",
+   "dosya": "9a0e54e736af87.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\9a0e54e736af87.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
    "ortalama_rgb": [
     176.79,
     173.13,
@@ -3683,16 +3351,441 @@
    ]
   },
   {
-   "kaynak": "albedo.jpg",
-   "dosya": "a6d0429c0dfa67.jpg",
+   "kaynak": "gravel02_diffuse",
+   "dosya": "99fe97fd852cad.jpg",
    "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\99fe97fd852cad.jpg.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
+   "ortalama_rgb": [
+    154.18,
+    148.37,
+    141.94
+   ]
+  },
+  {
+   "kaynak": "gravel02_roughness",
+   "dosya": "0a2f5f3b559ccf.png",
+   "tur": "data",
    "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\0a2f5f3b559ccf.png.raw",
    "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\a6d0429c0dfa67.jpg.raw",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    250.56,
+    185.44,
+    250.29
+   ]
+  },
+  {
+   "kaynak": "gravel02_normal_opengl",
+   "dosya": "e753b1f583e23e.png",
+   "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\e753b1f583e23e.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    126.97,
+    128.17,
+    209.47
+   ]
+  },
+  {
+   "kaynak": "Image",
+   "dosya": "5c358f1e3b43e7.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\5c358f1e3b43e7.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    118.0,
+    118.0,
+    118.0
+   ]
+  },
+  {
+   "kaynak": "albedo.jpg.011",
+   "dosya": "788777209b2450.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\788777209b2450.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    127.57,
+    94.29,
+    76.1
+   ]
+  },
+  {
+   "kaynak": "roughness.jpg.018",
+   "dosya": "bc1d3e60c896bb.png",
+   "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\bc1d3e60c896bb.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    128.0,
+    128.0,
+    128.0
+   ]
+  },
+  {
+   "kaynak": "normal.jpg.015",
+   "dosya": "d9f40d87e6ea5a.png",
+   "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\d9f40d87e6ea5a.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    127.0,
+    126.0,
+    253.0
+   ]
+  },
+  {
+   "kaynak": "wood_floor__Base_Color__0156393902",
+   "dosya": "dd3559bcdd3726.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\dd3559bcdd3726.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    126.1,
+    68.5,
+    38.93
+   ]
+  },
+  {
+   "kaynak": "wood_floor_001",
+   "dosya": "45a83868a00322.png",
+   "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\45a83868a00322.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    44.68,
+    44.67,
+    44.68
+   ]
+  },
+  {
+   "kaynak": "Image_46_001_7d22855164",
+   "dosya": "c8cb302607fbd8.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\c8cb302607fbd8.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    197.25,
+    186.31,
+    160.75
+   ]
+  },
+  {
+   "kaynak": "Image.010",
+   "dosya": "7be0a716f1d411.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\7be0a716f1d411.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    2.35,
+    2.35,
+    2.35
+   ]
+  },
+  {
+   "kaynak": "albedo.png.005",
+   "dosya": "931cdd3a3e45f6.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\931cdd3a3e45f6.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    65.77,
+    34.51,
+    23.17
+   ]
+  },
+  {
+   "kaynak": "roughness.png.001",
+   "dosya": "4a04e269ea66e0.png",
+   "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\4a04e269ea66e0.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    63.13,
+    63.13,
+    63.13
+   ]
+  },
+  {
+   "kaynak": "normal.png.001",
+   "dosya": "37953903a0e65f.png",
+   "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\37953903a0e65f.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    127.0,
+    127.0,
+    254.0
+   ]
+  },
+  {
+   "kaynak": "Image_27_001_eebce8d9fc",
+   "dosya": "8a0a676e0e01e1.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\8a0a676e0e01e1.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    134.48,
+    118.76,
+    101.71
+   ]
+  },
+  {
+   "kaynak": "Image.013",
+   "dosya": "cfec90f6923e1c.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\cfec90f6923e1c.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    2.54,
+    2.54,
+    2.54
+   ]
+  },
+  {
+   "kaynak": "Image_34_001_b62513ba27",
+   "dosya": "e48b395c1a84f8.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\e48b395c1a84f8.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    120.1,
+    90.57,
+    73.15
+   ]
+  },
+  {
+   "kaynak": "Image.017",
+   "dosya": "e97626909c7951.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\e97626909c7951.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    1.76,
+    1.76,
+    1.76
+   ]
+  },
+  {
+   "kaynak": "albedo.png.009",
+   "dosya": "ad197853d143dd.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\ad197853d143dd.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    96.62,
+    62.94,
+    39.0
+   ]
+  },
+  {
+   "kaynak": "roughness.jpg.017",
+   "dosya": "28140018de92a9.png",
+   "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\28140018de92a9.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    132.07,
+    132.07,
+    132.07
+   ]
+  },
+  {
+   "kaynak": "normal.jpg.014",
+   "dosya": "e4dfc1f1806c02.png",
+   "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\e4dfc1f1806c02.png.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    126.67,
+    126.23,
+    254.0
+   ]
+  },
+  {
+   "kaynak": "Image_12_001_c07ff4e5ff_0b081ec94a",
+   "dosya": "21ef9814da8557.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\21ef9814da8557.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    132.55,
+    105.27,
+    84.87
+   ]
+  },
+  {
+   "kaynak": "Image.014",
+   "dosya": "ba231e4ab47d12.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\ba231e4ab47d12.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    1.62,
+    1.62,
+    1.62
+   ]
+  },
+  {
+   "kaynak": "Image_47_001_2817b78825",
+   "dosya": "8f49a527826611.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\8f49a527826611.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    210.86,
+    201.97,
+    173.15
+   ]
+  },
+  {
+   "kaynak": "Image.009",
+   "dosya": "c5bd8818e3afcf.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\c5bd8818e3afcf.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    0.5,
+    0.5,
+    0.5
+   ]
+  },
+  {
+   "kaynak": "albedo.jpg",
+   "dosya": "a6d0429c0dfa67.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\a6d0429c0dfa67.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
    "ortalama_rgb": [
     160.28,
     158.68,
@@ -3703,13 +3796,13 @@
    "kaynak": "roughness.jpg",
    "dosya": "be6644102537fe.png",
    "tur": "data",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\be6644102537fe.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\be6644102537fe.png.raw",
    "ortalama_rgb": [
     76.0,
     76.0,
@@ -3720,17 +3813,68 @@
    "kaynak": "normal.jpg",
    "dosya": "c2c51165316472.png",
    "tur": "normal",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\c2c51165316472.png.raw",
+   "ham_tur": "resim",
    "boyut": [
     2048,
     2048
    ],
-   "world_to_tangent": false,
-   "ham_tur": "resim",
-   "ham": "C:\\Users\\yigit\\angora-tur10\\adim09\\web-calisma\\ham-dokular\\c2c51165316472.png.raw",
    "ortalama_rgb": [
     126.89,
     128.59,
     252.74
+   ]
+  },
+  {
+   "kaynak": "Image_37_001_a48d46f0e4",
+   "dosya": "8c9316ff59f4dd.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\8c9316ff59f4dd.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    222.75,
+    217.85,
+    201.81
+   ]
+  },
+  {
+   "kaynak": "Image.004",
+   "dosya": "9790501232bb6b.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\9790501232bb6b.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "kaynak": "ROGUHENSS2",
+   "dosya": "36159d41e81a28.jpg",
+   "tur": "albedo",
+   "world_to_tangent": false,
+   "ham": "C:\\Users\\yigit\\angora-tur10\\adim10\\web-calisma\\ham-dokular\\36159d41e81a28.jpg.raw",
+   "ham_tur": "resim",
+   "boyut": [
+    2048,
+    2048
+   ],
+   "ortalama_rgb": [
+    186.69,
+    178.97,
+    168.59
    ]
   }
  ],
@@ -3743,6 +3887,20 @@
   },
   "JPEG albedo alfa bağlantısı skaler opaklığa dönüştürüldü: Lift | Photographed rose glass 80 percent"
  ],
+ "UV1": "yok; UV denemeleri kullanılmadı",
+ "kaynak_sahne": "C:\\Users\\yigit\\angora-tur10\\adim10\\sahne.blend",
+ "cam40_alfa": {
+  "panel": 2,
+  "yontem": "JPEG RGB + COLOR_0 alpha",
+  "ornekleme": [
+   128,
+   256
+  ],
+  "kaynak_alfa_araligi": [
+   0.45098039215686275,
+   0.8235294117647058
+  ]
+ },
  "geri_yukleme_sinir_kontrol": [
   {
    "nesne": "BUILDING|stone_tile",
@@ -4871,771 +5029,6 @@
   },
   {
    "nesne": "EKLER|A09_F47_tek_duvar",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_0_ahsap_kupeste",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_0_DWG_0_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_0_DWG_0_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_0_DWG_0_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_0_DWG_0_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_0_DWG_1_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_0_DWG_1_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_0_DWG_1_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_0_DWG_1_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_0_DWG_2_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_0_zemin_baglanti_0_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_0_zemin_baglanti_0_0.8725",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_0_zemin_baglanti_1_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_0_zemin_baglanti_1_0.8725",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_1_ahsap_kupeste",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_1_DWG_0_0",
-   "fark_m": 1.4901161193847656e-07,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_1_DWG_0_1",
-   "fark_m": 1.6391277313232422e-07,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_1_DWG_0_2",
-   "fark_m": 1.4901161193847656e-07,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_1_DWG_0_3",
-   "fark_m": 1.6391277313232422e-07,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_1_DWG_1_0",
-   "fark_m": 5.960464477539063e-08,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_1_DWG_1_1",
-   "fark_m": 5.960464477539063e-08,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_1_DWG_1_2",
-   "fark_m": 5.960464477539063e-08,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_1_DWG_1_3",
-   "fark_m": 7.450580596923828e-08,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_1_zemin_baglanti_0_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_1_zemin_baglanti_0_0.8725",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_1_zemin_baglanti_1_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_2_ahsap_kupeste",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_2_DWG_0_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_2_DWG_0_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_2_DWG_0_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_2_DWG_0_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_2_DWG_1_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_2_DWG_1_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_2_DWG_1_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_2_DWG_1_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_2_zemin_baglanti_0_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_2_zemin_baglanti_0_0.8725",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_2_zemin_baglanti_1_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_3_ahsap_kupeste",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_3_DWG_0_0",
-   "fark_m": 1.1920928955078125e-07,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_3_DWG_0_1",
-   "fark_m": 2.384185791015625e-07,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_3_DWG_0_2",
-   "fark_m": 1.1920928955078125e-07,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_3_DWG_0_3",
-   "fark_m": 2.384185791015625e-07,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_3_DWG_1_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_3_DWG_1_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_3_DWG_1_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_3_zemin_baglanti_0_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_3_zemin_baglanti_0_0.8725",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_galeri_3_zemin_baglanti_1_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_ahsap_kupeste",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_DWG_0_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_DWG_0_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_DWG_0_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_DWG_0_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_DWG_1_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_DWG_1_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_DWG_1_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_DWG_1_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_DWG_2_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_DWG_2_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_DWG_2_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_DWG_2_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_zemin_baglanti_0_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_zemin_baglanti_0_0.8725",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_zemin_baglanti_1_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_zemin_baglanti_1_0.8725",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_0_zemin_baglanti_2_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_ahsap_kupeste",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_DWG_0_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_DWG_0_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_DWG_0_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_DWG_0_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_DWG_1_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_DWG_1_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_DWG_1_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_DWG_1_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_DWG_2_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_DWG_2_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_DWG_2_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_DWG_2_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_zemin_baglanti_0_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_zemin_baglanti_0_0.8725",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_zemin_baglanti_1_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_zemin_baglanti_1_0.8725",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K0_1_zemin_baglanti_2_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_ahsap_kupeste",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_DWG_0_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_DWG_0_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_DWG_0_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_DWG_0_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_DWG_1_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_DWG_1_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_DWG_1_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_DWG_1_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_DWG_2_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_DWG_2_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_DWG_2_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_DWG_2_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_zemin_baglanti_0_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_zemin_baglanti_0_0.8725",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_zemin_baglanti_1_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_zemin_baglanti_1_0.8725",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_0_zemin_baglanti_2_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_ahsap_kupeste",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_DWG_0_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_DWG_0_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_DWG_0_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_DWG_0_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_DWG_1_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_DWG_1_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_DWG_1_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_DWG_1_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_DWG_2_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_DWG_2_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_DWG_2_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_DWG_2_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_zemin_baglanti_0_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_zemin_baglanti_0_0.8725",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_zemin_baglanti_1_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_zemin_baglanti_1_0.8725",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K1_1_zemin_baglanti_2_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_ahsap_kupeste",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_DWG_0_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_DWG_0_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_DWG_0_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_DWG_0_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_DWG_1_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_DWG_1_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_DWG_1_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_DWG_1_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_DWG_2_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_DWG_2_1",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_DWG_2_2",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_DWG_2_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_zemin_baglanti_0_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_zemin_baglanti_0_0.8725",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_zemin_baglanti_1_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_zemin_baglanti_1_0.8725",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_0_zemin_baglanti_2_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_1_ahsap_kupeste",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_1_DWG_0_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_1_DWG_0_1",
-   "fark_m": 2.384185791015625e-07,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_1_DWG_0_2",
-   "fark_m": 2.384185791015625e-07,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_1_DWG_0_3",
-   "fark_m": 2.384185791015625e-07,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_1_DWG_1_0",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_1_DWG_1_1",
-   "fark_m": 1.1920928955078125e-07,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_1_DWG_1_2",
-   "fark_m": 2.384185791015625e-07,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_1_DWG_1_3",
-   "fark_m": 1.1920928955078125e-07,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_1_DWG_2_3",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_1_zemin_baglanti_0_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_1_zemin_baglanti_0_0.8725",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_1_zemin_baglanti_1_0.1275",
-   "fark_m": 0.0,
-   "gecerli": true
-  },
-  {
-   "nesne": "EKLER|A09_K2_1_zemin_baglanti_1_0.8725",
    "fark_m": 0.0,
    "gecerli": true
   },
@@ -12598,107 +11991,108 @@
    "nesne": "INTERIOR|Room pass | Original damask curtain photograph",
    "fark_m": 4.76837158203125e-07,
    "gecerli": true
+  },
+  {
+   "nesne": "BUILDING|ORIJINAL_KORKULUK_metal (5).001",
+   "fark_m": 0.0,
+   "gecerli": true
+  },
+  {
+   "nesne": "INTERIOR|ORIJINAL_KORKULUK_metal1.001",
+   "fark_m": 0.0,
+   "gecerli": true
+  },
+  {
+   "nesne": "INTERIOR|ORIJINAL_KORKULUK_WOOD1.001",
+   "fark_m": 0.0,
+   "gecerli": true
   }
  ],
  "geri_yukleme_gecerli": true,
  "gorsel_karsilastirma": [
   {
-   "foto": 1,
-   "ortalama_mutlak_rgb_farki": 1.1823716049382715,
+   "foto": 2,
+   "ortalama_mutlak_rgb_farki": 0.7800154320987654,
    "yuzde95_rgb_farki": 3.0,
-   "rgb20_ustu_piksel_orani": 0.00038796296296296295,
+   "rgb20_ustu_piksel_orani": 5.092592592592592e-05,
    "aciklama": "Denoise, 2048px yeniden örnekleme ve GLTF shader dönüşümü nedeniyle bit eşitliği beklenmez; kamera/ışık/pozlama aynıdır."
   },
   {
-   "foto": 2,
-   "ortalama_mutlak_rgb_farki": 0.8077848765432099,
-   "yuzde95_rgb_farki": 3.0,
-   "rgb20_ustu_piksel_orani": 7.592592592592593e-05,
+   "foto": 16,
+   "ortalama_mutlak_rgb_farki": 1.4198240740740742,
+   "yuzde95_rgb_farki": 5.0,
+   "rgb20_ustu_piksel_orani": 0.0014175925925925927,
    "aciklama": "Denoise, 2048px yeniden örnekleme ve GLTF shader dönüşümü nedeniyle bit eşitliği beklenmez; kamera/ışık/pozlama aynıdır."
   },
   {
    "foto": 18,
-   "ortalama_mutlak_rgb_farki": 1.5530126543209877,
+   "ortalama_mutlak_rgb_farki": 1.5392771604938271,
    "yuzde95_rgb_farki": 5.0,
-   "rgb20_ustu_piksel_orani": 0.0015138888888888888,
+   "rgb20_ustu_piksel_orani": 0.0013,
    "aciklama": "Denoise, 2048px yeniden örnekleme ve GLTF shader dönüşümü nedeniyle bit eşitliği beklenmez; kamera/ışık/pozlama aynıdır."
   },
   {
    "foto": 21,
-   "ortalama_mutlak_rgb_farki": 1.3547956790123457,
+   "ortalama_mutlak_rgb_farki": 1.3573354938271605,
    "yuzde95_rgb_farki": 5.0,
-   "rgb20_ustu_piksel_orani": 0.0007851851851851852,
+   "rgb20_ustu_piksel_orani": 0.0007787037037037037,
    "aciklama": "Denoise, 2048px yeniden örnekleme ve GLTF shader dönüşümü nedeniyle bit eşitliği beklenmez; kamera/ışık/pozlama aynıdır."
   },
   {
    "foto": 34,
-   "ortalama_mutlak_rgb_farki": 1.706270987654321,
+   "ortalama_mutlak_rgb_farki": 1.6672993827160494,
    "yuzde95_rgb_farki": 5.0,
-   "rgb20_ustu_piksel_orani": 0.000712962962962963,
+   "rgb20_ustu_piksel_orani": 0.0007777777777777777,
    "aciklama": "Denoise, 2048px yeniden örnekleme ve GLTF shader dönüşümü nedeniyle bit eşitliği beklenmez; kamera/ışık/pozlama aynıdır."
   },
   {
-   "foto": 40,
-   "ortalama_mutlak_rgb_farki": 0.7708744354110207,
+   "foto": 42,
+   "ortalama_mutlak_rgb_farki": 0.9417856781120227,
    "yuzde95_rgb_farki": 3.0,
-   "rgb20_ustu_piksel_orani": 8.672086720867208e-05,
+   "rgb20_ustu_piksel_orani": 0.00020586447888179885,
    "aciklama": "Denoise, 2048px yeniden örnekleme ve GLTF shader dönüşümü nedeniyle bit eşitliği beklenmez; kamera/ışık/pozlama aynıdır."
   }
  ],
- "cam40_alfa": {
-  "panel": 2,
-  "yontem": "JPEG RGB + COLOR_0 alpha",
-  "ornekleme": [
-   128,
-   256
-  ],
-  "kaynak_alfa_araligi": [
-   0.45098039215686275,
-   0.8235294117647058
-  ]
- },
  "validator": {
   "BUILDING-opt-v6-alt.glb": {
    "numErrors": 0,
    "numWarnings": 0,
-   "numInfos": 130
+   "numInfos": 54
   },
   "BUILDING-opt-v6-ust.glb": {
    "numErrors": 0,
    "numWarnings": 0,
-   "numInfos": 148
+   "numInfos": 55
   },
   "INTERIOR-opt-v3.glb": {
    "numErrors": 0,
    "numWarnings": 0,
-   "numInfos": 84
+   "numInfos": 93
   }
  },
  "dosya_kurallari": [
   {
    "dosya": "BUILDING-opt-v6-alt.glb",
+   "uv1_primitif_sayisi": 0,
    "format_hatasi": [],
    "isik_nesnesi_yok": true,
-   "draco_meshopt_ktx_yok": true,
    "kat_eksik": []
   },
   {
    "dosya": "BUILDING-opt-v6-ust.glb",
+   "uv1_primitif_sayisi": 0,
    "format_hatasi": [],
    "isik_nesnesi_yok": true,
-   "draco_meshopt_ktx_yok": true,
    "kat_eksik": []
   },
   {
    "dosya": "INTERIOR-opt-v3.glb",
+   "uv1_primitif_sayisi": 0,
    "format_hatasi": [],
    "isik_nesnesi_yok": true,
-   "draco_meshopt_ktx_yok": true,
    "kat_eksik": []
   }
  ],
- "uv_yontemi": "Foto-doku malzemelerinde dominant dünya normal ekseni; metre bazlı gerçek UV, doku_olcusu_xy_m ve ahsap_uzun_kenar yönü korunur. Önceden UV açılmış özgün malzemelerde mevcut UV korunur.",
- "kat_yontemi": "Özgün çok katlı meshler 3.0986 / 6.3704 / 9.4695 m düzlemlerinde UV ve normal interpolasyonu ile ayrıldı. Katlar arasında uzanan tek mimari EK_ parçalarında merkez yüksekliği kat etiketi olarak kullanılır.",
- "ad_yontemi": "Özgün mesh ve malzeme adları GLB adlarında; kat parçaları EK_ önekli, kaynak_nesne / kaynak_grup extras alanlarında özgün nesne kimliği. Aynı ada sahip malzeme varyantları glTF indeksleriyle ayrı kalır.",
- "son_gorsel_denetim": "01,02,18,21,34: yan yana göz kontrolünde belirgin geometri veya malzeme kaybı görülmedi. 40 cam alfa aktarımı ayrıca kontrol edildi."
+ "uv_yontemi": "Yalnız UV0. Foto-dokular için mevcut dominant eksen/metre UV korunur; lightmap denemelerinden veri alınmadı.",
+ "bahce": "GARDEN-opt-v2 değiştirilmedi ve yeniden dışa aktarılmadı."
 }

@@ -971,3 +971,10 @@ duvar: {"boyut": 4096, "atlas_sayisi": 5, "alan_m2": 6168.4224140243605, "texel_
 KALDI: zemin: 29 UV üçgen çakışması; zemin: bazı yüzlerde minimum40 texel/m sağlanmadı; cephe: 20 UV üçgen çakışması; bahce: 41 UV üçgen çakışması; duvar: 5 fiziksel sayfa gerekiyor; tek atlas koşulu sağlanmadı; duvar: 6009 UV üçgen çakışması; duvar: bazı yüzlerde minimum40 texel/m sağlanmadı; 18/34 checker renderları: UV koşulları geçmedi ve 25 dakika sınırına ulaşıldı
 
 Üretime hazır: False. [UV kontrolü](adim10/asama2/uv-kontrol.json).
+
+## Adım10 · UV1 olmadan son geometri teslimi
+
+YAPILDI: Aşama1 sahnesinden BUILDING-opt-v6-alt/ust ve INTERIOR-opt-v3 üretildi; özgün korkuluklar ve 16/21/02 düzeltmeleri korundu. GARDEN değişmedi.
+YAPILDI: UV1 yok; UV denemeleri kullanılmadı. 2048 px dokular, kat etiketleri, isimler ve ışık JSON teslimi korundu. Validator ve 1 mm koordinat denetimi geçti.
+YAPILDI: 02,16,18,21,34,42 .blend | GLB görselleri yenilendi.
+KALDI: Claude lightmap UV dosyalarını hazırlayacak. Test/tam pişirme başlatılmadı; bu push sonrasında duruldu. Önceki 32 bordür, 47 tavan ve 34 eşik ayrıntıları bu aktarımda değiştirilmedi.
