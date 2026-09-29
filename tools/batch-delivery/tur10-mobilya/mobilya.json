@@ -1,0 +1,156 @@
+{
+ "aciklama": "Tur 10 mobilyaları (ürün sahibinin Tripo modelleri). make-tur10-web.mjs INTERIOR'a ekler. 'kutu': Tripo dosyası içinde parçayı seçen xz kutusu (bağlı bileşenlerin merkezi bu kutuda olanlar). 'konum': dünya x, z (glTF); y zeminden otomatik. 'yon': y ekseni etrafında derece (0 = Tripo'nun önü +z'ye bakar). 'sil': eski INTERIOR'dan kaldırılacak üçgenler (malzeme + dünya kutusu). 'kat': 0 bodrum, 1 giriş, 2 birinci kat, 3 çatı - zemin o katta aranır.",
+ "kaynaklar": {
+  "bodrum-salon-1": {
+   "dosya": "bodrum-salon-1.glb",
+   "olcek": 3.0,
+   "not": "foto 02: koltuk, kırmızı dolap, siyah yemek masası + 4 sandalye; tek parça, 1 m'ye normalize - masa 76 cm'den ölçek 3,0"
+  }
+ },
+ "parcalar": [
+  {
+   "ad": "bodrum_koltuk",
+   "kaynak": "bodrum-salon-1",
+   "kutu": [
+    -0.51,
+    -0.32,
+    -0.08,
+    0.1
+   ],
+   "konum": [
+    0.55,
+    -7.76
+   ],
+   "yon": 0,
+   "not": "kuzey duvarı, pencerenin (x 1,19-2,19) solu",
+   "kat": 0
+  },
+  {
+   "ad": "antre_koltuk",
+   "kaynak": "bodrum-salon-1",
+   "kutu": [
+    -0.51,
+    -0.32,
+    -0.08,
+    0.1
+   ],
+   "konum": [
+    0.84,
+    1.52
+   ],
+   "yon": 180,
+   "not": "foto 40'taki köşe (radyatör-kapı arası) çift kapının açık sağ kanadıyla dolu (40 cm boşluk): kapının batı yanında güney duvarına sırtı dönük, odaya bakar",
+   "kat": 1
+  },
+  {
+   "ad": "bodrum_dolap",
+   "kaynak": "bodrum-salon-1",
+   "kutu": [
+    -0.17,
+    0.18,
+    -0.38,
+    -0.15
+   ],
+   "konum": [
+    2.585,
+    -7.72
+   ],
+   "yon": 0,
+   "not": "kuzey duvarı, pencere ile doğu köşesi arası",
+   "kat": 0
+  },
+  {
+   "ad": "bodrum_masa",
+   "kaynak": "bodrum-salon-1",
+   "kutu": [
+    0.05,
+    0.48,
+    -0.18,
+    0.3
+   ],
+   "merkez_secim": [
+    0.265,
+    0.057
+   ],
+   "konum": [
+    1.1,
+    -6.05
+   ],
+   "yon": 0,
+   "not": "eski gri masanın yeri, avizenin altı",
+   "kat": 0
+  },
+  {
+   "ad": "bodrum_sandalye_1",
+   "kaynak": "bodrum-salon-1",
+   "merkez_secim": [
+    0.153,
+    0.038
+   ],
+   "konum": [
+    0.764,
+    -6.107
+   ],
+   "yon": 0,
+   "kat": 0
+  },
+  {
+   "ad": "bodrum_sandalye_2",
+   "kaynak": "bodrum-salon-1",
+   "merkez_secim": [
+    0.4125,
+    0.0
+   ],
+   "konum": [
+    1.542,
+    -6.221
+   ],
+   "yon": 0,
+   "kat": 0
+  },
+  {
+   "ad": "bodrum_sandalye_3",
+   "kaynak": "bodrum-salon-1",
+   "merkez_secim": [
+    0.2365,
+    0.2965
+   ],
+   "konum": [
+    1.014,
+    -5.332
+   ],
+   "yon": 0,
+   "kat": 0
+  },
+  {
+   "ad": "bodrum_sandalye_4",
+   "kaynak": "bodrum-salon-1",
+   "merkez_secim": [
+    0.373,
+    0.1555
+   ],
+   "konum": [
+    1.424,
+    -5.755
+   ],
+   "yon": 0,
+   "kat": 0
+  }
+ ],
+ "sil": [
+  {
+   "malzeme": "X",
+   "min": [
+    0.1,
+    -0.2,
+    -6.95
+   ],
+   "max": [
+    2.1,
+    1.1,
+    -5.15
+   ],
+   "not": "eski gri yemek masası + sandalyeler (foto 02)"
+  }
+ ]
+}

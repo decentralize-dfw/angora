@@ -70,7 +70,7 @@ export function applyVillaModelV3(manifest, {mobile = false} = {}) {
 // dosyalar silinmez, bayrak kapatılınca v4/v2'ye döner.
 export const TUR10_MODELS = Object.freeze({
   architecture: {file: 'BUILDING-opt-v6.glb', bytes: 13450804},
-  interior:     {file: 'INTERIOR-opt-v3.glb', bytes: 4427308},
+  interior:     {file: 'INTERIOR-opt-v3.glb', bytes: 4541140},
 });
 export function applyTur10(manifest) {
   if (!manifest?.parts || !manifest.batched) return [];

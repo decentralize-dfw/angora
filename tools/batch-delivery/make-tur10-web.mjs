@@ -487,6 +487,117 @@ async function writeWeb(doc, out) {
     `UV1 ${check.listMeshes().flatMap(m => m.listPrimitives()).filter(p => p.getAttribute('TEXCOORD_1')).length}`);
 }
 
+// --- Mobilya (ürün sahibinin Tripo modelleri, tur10-mobilya/mobilya.json) -----
+// Tripo bir fotoğraftaki grubu TEK mesh olarak ve ~1 m'ye normalize verir:
+// parçalar bağlı bileşenlerden ayrılır ('kutu' ya da en yakın 'merkez_secim'),
+// kaynağın ölçeğiyle büyütülür, 'yon' kadar döner ve alt-orta noktası
+// 'konum'daki ZEMİNE (BUILDING'den dikey ışınla) oturur. 'sil' eski
+// INTERIOR üçgenlerini (malzeme + kutu) kaldırır.
+const FLOOR_TRIS = [];
+function collectFloors(doc) {
+  const WALK = /^(WOOD-FL|wood_floor|terra_floor|terra_floor_giris|stone_tile|RR|R31 \| R33 .*tile)$/;
+  for (const node of doc.getRoot().listNodes()) {
+    const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
+    for (const prim of mesh.listPrimitives()) {
+      if (!WALK.test(prim.getMaterial()?.getName() ?? '')) continue;
+      const pos = prim.getAttribute('POSITION'), idx = prim.getIndices(), v = [0, 0, 0];
+      const P = i => {pos.getElement(i, v); return [w[0]*v[0]+w[4]*v[1]+w[8]*v[2]+w[12], w[1]*v[0]+w[5]*v[1]+w[9]*v[2]+w[13], w[2]*v[0]+w[6]*v[1]+w[10]*v[2]+w[14]];};
+      const n = idx ? idx.getCount() : pos.getCount();
+      for (let t = 0; t < n; t += 3) FLOOR_TRIS.push([P(idx ? idx.getScalar(t) : t), P(idx ? idx.getScalar(t + 1) : t + 1), P(idx ? idx.getScalar(t + 2) : t + 2)]);
+    }
+  }
+}
+function floorAt(x, z, below = 99) {
+  let best = null;
+  for (const [a, b, c] of FLOOR_TRIS) {
+    const d = (b[2]-c[2])*(a[0]-c[0]) + (c[0]-b[0])*(a[2]-c[2]); if (Math.abs(d) < 1e-12) continue;
+    const l1 = ((b[2]-c[2])*(x-c[0]) + (c[0]-b[0])*(z-c[2])) / d, l2 = ((c[2]-a[2])*(x-c[0]) + (a[0]-c[0])*(z-c[2])) / d, l3 = 1 - l1 - l2;
+    if (l1 < -1e-6 || l2 < -1e-6 || l3 < -1e-6) continue;
+    const y = l1 * a[1] + l2 * b[1] + l3 * c[1];
+    if (y < below && (best === null || y > best)) best = y;
+  }
+  return best;
+}
+async function addFurniture(doc) {
+  const DIR_M = path.join(here, 'tur10-mobilya');
+  const spec = JSON.parse(readFileSync(path.join(DIR_M, 'mobilya.json'), 'utf8'));
+  const root = doc.getRoot(), scene = root.listScenes()[0], buffer = root.listBuffers()[0];
+  // eski üçgenleri sil
+  for (const cut of spec.sil ?? []) {
+    let removed = 0;
+    for (const node of root.listNodes()) {
+      const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
+      for (const prim of mesh.listPrimitives()) {
+        if (prim.getMaterial()?.getName() !== cut.malzeme || !prim.getIndices()) continue;
+        const pos = prim.getAttribute('POSITION'), idx = prim.getIndices(), v = [0, 0, 0], keep = [];
+        const inBox = i => {pos.getElement(i, v); const q = [w[0]*v[0]+w[4]*v[1]+w[8]*v[2]+w[12], w[1]*v[0]+w[5]*v[1]+w[9]*v[2]+w[13], w[2]*v[0]+w[6]*v[1]+w[10]*v[2]+w[14]]; return q.every((c, k) => c >= cut.min[k] && c <= cut.max[k]);};
+        for (let t = 0; t < idx.getCount(); t += 3) {
+          const ids = [idx.getScalar(t), idx.getScalar(t + 1), idx.getScalar(t + 2)];
+          if (ids.every(inBox)) removed++; else keep.push(...ids);
+        }
+        prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(keep)).setBuffer(buffer));
+      }
+    }
+    console.log(`mobilya: eski '${cut.malzeme}' ${removed} üçgen silindi (${cut.not ?? ''})`);
+  }
+  // kaynakları oku, bağlı bileşenlere ayır
+  const sources = {};
+  for (const [key, src] of Object.entries(spec.kaynaklar)) {
+    const other = await io.read(path.join(DIR_M, src.dosya));
+    const prim = other.getRoot().listMeshes()[0].listPrimitives()[0];
+    const pos = prim.getAttribute('POSITION').getArray(), idx = prim.getIndices().getArray();
+    const n = pos.length / 3, parent = Int32Array.from({length: n}, (_, i) => i), keyOf = new Map();
+    const find = a => {while (parent[a] !== a) a = parent[a] = parent[parent[a]]; return a;};
+    const rep = new Int32Array(n);
+    for (let i = 0; i < n; i++) {const k = `${pos[3*i].toFixed(5)},${pos[3*i+1].toFixed(5)},${pos[3*i+2].toFixed(5)}`; rep[i] = keyOf.get(k) ?? (keyOf.set(k, i), i);}
+    for (let t = 0; t < idx.length; t += 3) {const a = find(rep[idx[t]]); parent[find(rep[idx[t + 1]])] = a; parent[find(rep[idx[t + 2]])] = a;}
+    const comps = new Map();
+    for (let t = 0; t < idx.length; t += 3) {const r = find(rep[idx[t]]); (comps.get(r) ?? comps.set(r, []).get(r)).push(t);}
+    const list = [...comps.values()].map(tris => {
+      let mn = [9, 9, 9], mx = [-9, -9, -9];
+      for (const t of tris) for (let k = 0; k < 3; k++) {const i = idx[t + k]; for (let j = 0; j < 3; j++) {mn[j] = Math.min(mn[j], pos[3*i+j]); mx[j] = Math.max(mx[j], pos[3*i+j]);}}
+      return {tris, cx: (mn[0] + mx[0]) / 2, cz: (mn[2] + mx[2]) / 2};
+    });
+    const map = mergeDocuments(doc, other);
+    for (const s2 of other.getRoot().listScenes()) {const m = map.get(s2); for (const c of m.listChildren()) {m.removeChild(c); c.dispose();} m.dispose();}
+    sources[key] = {prim: map.get(prim), comps: list, scale: src.olcek};
+  }
+  for (const part of spec.parcalar) {
+    const src = sources[part.kaynak];
+    let chosen;
+    if (part.merkez_secim) {const [x, z] = part.merkez_secim; chosen = [src.comps.reduce((b, c) => Math.hypot(c.cx - x, c.cz - z) < Math.hypot(b.cx - x, b.cz - z) ? c : b)];}
+    else {const [x0, x1, z0, z1] = part.kutu; chosen = src.comps.filter(c => c.cx >= x0 && c.cx <= x1 && c.cz >= z0 && c.cz <= z1);}
+    if (!chosen.length) throw Error(`mobilya: ${part.ad} için parça bulunamadı`);
+    const tris = chosen.flatMap(c => c.tris), sp = src.prim, idx = sp.getIndices().getArray();
+    const used = [...new Set(tris.flatMap(t => [idx[t], idx[t + 1], idx[t + 2]]))], remap = new Map(used.map((o, i) => [o, i]));
+    const prim = doc.createPrimitive().setMaterial(sp.getMaterial());
+    for (const sem of sp.listSemantics()) {
+      const acc = sp.getAttribute(sem), size = acc.getElementSize(), arr = acc.getArray(), out = new arr.constructor(used.length * size);
+      used.forEach((o, i) => {for (let k = 0; k < size; k++) out[i * size + k] = arr[o * size + k];});
+      prim.setAttribute(sem, doc.createAccessor().setType(acc.getType()).setArray(out).setNormalized(acc.getNormalized()).setBuffer(buffer));
+    }
+    prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(tris.flatMap(t => [remap.get(idx[t]), remap.get(idx[t + 1]), remap.get(idx[t + 2])]))).setBuffer(buffer));
+    // alt-orta nokta
+    const pa = prim.getAttribute('POSITION').getArray(); let mn = [9, 9, 9], mx = [-9, -9, -9];
+    for (let i = 0; i < pa.length; i += 3) for (let j = 0; j < 3; j++) {mn[j] = Math.min(mn[j], pa[i + j]); mx[j] = Math.max(mx[j], pa[i + j]);}
+    const pivot = [(mn[0] + mx[0]) / 2, mn[1], (mn[2] + mx[2]) / 2];
+    if (!Number.isInteger(part.kat)) throw Error(`mobilya: ${part.ad} için 'kat' yok`);
+    const [x, z] = part.konum, y = floorAt(x, z, DATUMS[part.kat] + 1.0);
+    if (y !== null && Math.abs(y - DATUMS[part.kat]) > 0.5) throw Error(`mobilya: ${part.ad} zemini ${y} - ${part.kat}. kat değil`);
+    if (y === null) throw Error(`mobilya: ${part.ad} altında zemin yok (${x}, ${z})`);
+    const th = (part.yon ?? 0) * Math.PI / 180, s = src.scale, c = Math.cos(th), sn = Math.sin(th);
+    // M = T(x,y,z) * R_y(th) * S(s) * T(-pivot)
+    const m = [c * s, 0, -sn * s, 0, 0, s, 0, 0, sn * s, 0, c * s, 0, 0, 0, 0, 1];
+    const tp = [-pivot[0] * s, -pivot[1] * s, -pivot[2] * s];
+    m[12] = x + c * tp[0] + sn * tp[2]; m[13] = y + tp[1]; m[14] = z - sn * tp[0] + c * tp[2];
+    const node = doc.createNode('MOBILYA_' + part.ad).setMesh(doc.createMesh('MOBILYA_' + part.ad).addPrimitive(prim)).setMatrix(m).setExtras({kat: floorOf(y)});
+    scene.addChild(node);
+    const w = [(mx[0] - mn[0]) * s, (mx[1] - mn[1]) * s, (mx[2] - mn[2]) * s];
+    console.log(`mobilya: ${part.ad} (${chosen.length} parça) ${w.map(v => v.toFixed(2)).join(' x ')} m @ (${x}, ${y.toFixed(3)}, ${z}) ${part.yon ?? 0}°`);
+  }
+  for (const {prim} of Object.values(sources)) {const mesh = prim.listParents().find(p => p.propertyType === 'Mesh'); prim.dispose(); mesh?.dispose();}
+}
+
 // --- BUILDING ----------------------------------------------------------------
 {
   const doc = await load([path.join(SRC, 'BUILDING-opt-v6-alt.glb'), path.join(SRC, 'BUILDING-opt-v6-ust.glb')], {stairRepair: true});
@@ -501,6 +612,7 @@ async function writeWeb(doc, out) {
   console.log('BUILDING kutu', fmt(after), `kayma ${drift.toExponential(1)} m`);
   await doc.transform(unpartition());
   await io.write(path.join(BAKE, 'BUILDING-opt-v6-lm.glb'), doc);
+  collectFloors(doc);
   // bahçe: Tur 6'nın lightmap UV'li bahçesi aynen (build/bake/GARDEN-opt-v2-lm.glb)
   const old = JSON.parse(readFileSync(path.join(REPO, 'build/bake/lightmap-uv.json'), 'utf8'));
   spec.atlaslar.bahce = {...old.atlaslar.bahce, dosya: 'GARDEN-opt-v2',
@@ -515,6 +627,7 @@ async function writeWeb(doc, out) {
 // --- INTERIOR (mobilya; lightmap almaz, pişirmede gölge verir) ----------------
 {
   const doc = await load([path.join(SRC, 'INTERIOR-opt-v3.glb')]);
+  await addFurniture(doc);
   await doc.transform(dedup(), prune({keepAttributes: false}), textureCompress({encoder: sharp, resize: [MAX_EDGE, MAX_EDGE]}), unpartition());
   await io.write(path.join(BAKE, 'INTERIOR-opt-v3-sahne.glb'), doc);
   await writeWeb(doc, path.join(DIR, 'INTERIOR-opt-v3.glb'));
