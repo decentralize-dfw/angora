@@ -67,6 +67,7 @@ const host = $('#viewport'), status = $('#load-status');
 const publicRoot = new URL(import.meta.env.BASE_URL, document.baseURI);
 const pages = import.meta.env.MODE === 'pages';
 const requestedProfile=new URLSearchParams(location.search).get('profile');
+const requestedFeatures=new URLSearchParams(location.search).get('features');
 const deliveryProfile=['desktop','mobile'].includes(requestedProfile)?requestedProfile:matchMedia('(pointer: coarse)').matches?'mobile':'desktop';
 const modelRoot = new URL(import.meta.env.VITE_MODEL_ROOT || (pages ? 'build/web/batched/' : 'models/batched/')+deliveryProfile+'/', publicRoot);
 const decoderRoot = new URL(pages ? 'viewer/public/draco/' : 'draco/', publicRoot);
@@ -190,7 +191,7 @@ let shareTimer = null;
 function rememberState() {
   clearTimeout(shareTimer);
   shareTimer = setTimeout(() => {
-    const search = shareSearch({view:selected,lang:currentLang(),profile:requestedProfile});
+    const search = shareSearch({view:selected,lang:currentLang(),profile:requestedProfile,features:requestedFeatures});
     // An empty search would leave the current query in place, so back at the
     // opening view the path replaces it outright.
     history.replaceState(null, '', (search || location.pathname) + location.hash);

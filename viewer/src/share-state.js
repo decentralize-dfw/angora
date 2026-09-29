@@ -44,5 +44,9 @@ export function shareSearch(state) {
   if (['desktop','mobile'].includes(state.profile)) parts.push('profile=' + state.profile);
   if (VIEWS.includes(state.view) && state.view !== DEFAULTS.view)
     parts.push(VIEW_SLUGS[state.lang === 'en' ? 'en' : 'tr'][state.view]);
+  // Deneme bayrakları (?features=tur10:1) adres temizlenirken silinirse
+  // yenileme eski modele döner - açıkça istenen bayrak korunur.
+  if (typeof state.features === 'string' && /^[A-Za-z0-9]+:[01](,[A-Za-z0-9]+:[01])*$/.test(state.features))
+    parts.push('features=' + state.features);
   return parts.length ? '?' + parts.join('&') : '';
 }
