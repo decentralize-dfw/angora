@@ -35,3 +35,7 @@ build/bake/GARDEN-opt-v2.decoded.glb
 build/web/26092026/source/tur10/
 build/bake/tur10/giris.*
 build/bake/tur10/cikis.*
+
+# geçici inceleme betikleri (Claude oturumu / alt ajanlar)
+tools/batch-delivery/_*_tmp.mjs
+tools/batch-delivery/_ag_*.mjs
