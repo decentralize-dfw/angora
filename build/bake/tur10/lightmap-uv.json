@@ -6,9 +6,9 @@
    "boyut": 4096,
    "alan_m2": 2453.3,
    "px_per_m": 55.1,
-   "doluluk": 0.693,
+   "doluluk": 0.695,
    "parca": 3,
-   "ada": 1854,
+   "ada": 2016,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_duvar_000": {
@@ -31,7 +31,7 @@
    "px_per_m": 52.5,
    "doluluk": 0.79,
    "parca": 19,
-   "ada": 8870,
+   "ada": 9075,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_zemin_000": {
@@ -116,9 +116,9 @@
    "boyut": 2048,
    "alan_m2": 1079.8,
    "px_per_m": 41.5,
-   "doluluk": 0.727,
+   "doluluk": 0.733,
    "parca": 3,
-   "ada": 712,
+   "ada": 783,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_cephe_000": {

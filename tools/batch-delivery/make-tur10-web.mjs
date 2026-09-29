@@ -33,6 +33,7 @@ import {execFileSync} from 'node:child_process';
 import {mkdirSync, readFileSync, statSync, writeFileSync, copyFileSync} from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {orientForBake} from './tur10-yon.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(here, '../..');
@@ -1006,11 +1007,20 @@ async function addFurniture(doc) {
   await doc.transform(dedup(), flatten(), join({keepNamed: false}), prune({keepAttributes: false}),
     textureCompress({encoder: sharp, resize: [MAX_EDGE, MAX_EDGE]}));
   splitPrimitives(doc);
+  // Cycles yüzeyi normalinin baktığı yandan pişirir: içe bakan duvar/tavan kara çıkıyordu
+  const yon = orientForBake(doc, new Set(Object.values(ATLASES).flatMap(s => s.malzemeler)),
+    JSON.parse(readFileSync(path.join(REPO, 'build/web/full/rooms.json'), 'utf8')).spaces);
+  console.log(`pişirme yönü: ${yon.cevrilen} üçgen (${yon.cevrilen_alan.toFixed(0)} m² / ${yon.alan.toFixed(0)} m²) görünen yana çevrildi, şüpheli ${yon.supheli_alan.toFixed(1)} m²`);
   const spec = lightmapUV(doc);
   const after = box(doc);
   const drift = Math.max(...before.min.map((v, i) => Math.abs(v - after.min[i])), ...before.max.map((v, i) => Math.abs(v - after.max[i])));
   if (drift > 0.002) throw Error(`BUILDING: sınır kutusu kaydı ${drift} m`);
   console.log('BUILDING kutu', fmt(after), `kayma ${drift.toExponential(1)} m`);
+  // yön ve lightmap UV adımlarının yerine koyduğu eski öznitelikler kimseye bağlı değil ama
+  // dosyaya yazılıyordu (4 MB); prune kullanılmaz: tek renkli dokuları faktöre çevirir
+  const root = doc.getRoot(); let orphans = 0;
+  for (const a of root.listAccessors()) if (a.listParents().every(p => p === root)) {a.dispose(); orphans++;}
+  console.log(`BUILDING: ${orphans} bağsız erişimci atıldı`);
   await doc.transform(unpartition());
   await io.write(path.join(BAKE, 'BUILDING-opt-v6-lm.glb'), doc);
   collectFloors(doc);
