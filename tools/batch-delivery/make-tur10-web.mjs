@@ -47,7 +47,7 @@ mkdirSync(BAKE, {recursive: true});
 const ATLASES = {
   duvar: {boyut: 4096, malzemeler: ['Simple White Wall', 'EK_SimpleWhiteWall', 'EK_M2_Beyaz_merdiven_alti']},
   zemin: {boyut: 4096, malzemeler: ['ceiling.001', 'WOOD-FL', 'wood_floor', 'terra_floor', 'terra_floor_giris', 'stone_tile', 'WHT.001',
-    'EK_M2_Ceviz_basamak', 'EK_M3_Krem_karo_esik', 'EK_A09_Banyo_bordur', 'RR',
+    'EK_M2_Ceviz_basamak', 'EK_M3_Krem_karo_esik', 'RR', 'banyo_duvar',
     'R31 | R33 ivory wall ceramic', 'R31 | R33 master pale cream tile', 'R31 | R33 attic cream tile',
     'R31 | R33 entrance WC ochre tile', 'R31 | R33 attic tan mosaic band', 'R31 | R33 entrance navy mosaic band',
     'R31 | R33 master fine mosaic band']},
@@ -269,6 +269,48 @@ function applyFloors(doc) {
       }
     }
     if (mesh.listPrimitives().length === 0) {mesh.dispose(); node.dispose();}
+  }
+  // Banyo duvar seramiği (ürün sahibinin dokusu, bordür dokunun içinde): 1. kat
+  // banyosu (RR) ve ebeveyn banyosu (master pale cream tile). Bu malzemeler
+  // zeminde de kullanılıyor: YALNIZ dikey yüzler yeni malzemeye geçer, zemin
+  // kalır. Karo eni 25 cm (131 px), bordür ortası zeminden 95 cm (fotoğrafta
+  // tezgâhın hemen üstü). Ajanın ayrı bordür şeridi (EK_A09_Banyo_bordur) silinir.
+  {
+    const tile = pbr('banyo-duvar');
+    const wallMat = restyle(doc.createMaterial('banyo_duvar'), tile);
+    const W = 1600 * 0.25 / 131.3, H = 1200 * 0.25 / 131.3, V0 = 617 / 1200, BAND = 0.95;
+    const WALLS = ['RR', 'R31 | R33 master pale cream tile'];
+    const verts = [];
+    for (const node of [...root.listNodes()]) {
+      const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
+      if (/Banyo_bordur/.test(mesh.listPrimitives()[0]?.getMaterial()?.getName() ?? '')) {mesh.dispose(); node.dispose(); continue;}
+      for (const prim of mesh.listPrimitives()) {
+        if (!WALLS.includes(prim.getMaterial()?.getName())) continue;
+        const pos = prim.getAttribute('POSITION'), idx = prim.getIndices(), v = [0, 0, 0];
+        if (!idx) throw Error('banyo duvarı: indekssiz ilkel beklenmiyor');
+        const P = i => {pos.getElement(i, v); return [w[0]*v[0]+w[4]*v[1]+w[8]*v[2]+w[12], w[1]*v[0]+w[5]*v[1]+w[9]*v[2]+w[13], w[2]*v[0]+w[6]*v[1]+w[10]*v[2]+w[14]];};
+        const keep = [];
+        for (let t = 0; t < idx.getCount(); t += 3) {
+          const ids = [idx.getScalar(t), idx.getScalar(t + 1), idx.getScalar(t + 2)], tri = ids.map(P);
+          const e1 = [0, 1, 2].map(k => tri[1][k] - tri[0][k]), e2 = [0, 1, 2].map(k => tri[2][k] - tri[0][k]);
+          const cr = [e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]], L = Math.hypot(...cr);
+          if (L > 1e-12 && Math.abs(cr[1] / L) < 0.5) verts.push({tri, n: cr.map(x => x / L)}); else keep.push(...ids);
+        }
+        prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(keep)).setBuffer(buffer));
+      }
+    }
+    const count = verts.length * 3, p = new Float32Array(count * 3), nr = new Float32Array(count * 3), uv = new Float32Array(count * 2);
+    verts.forEach(({tri, n}, i) => tri.forEach((vv, j) => {
+      const o = i * 3 + j; p.set(vv, o * 3); nr.set(n, o * 3);
+      const k = floorOf((tri[0][1] + tri[1][1] + tri[2][1]) / 3), y0 = DATUMS[k] + BAND + V0 * H;
+      uv[o * 2] = (Math.abs(n[0]) > Math.abs(n[2]) ? vv[2] : vv[0]) / W; uv[o * 2 + 1] = (y0 - vv[1]) / H;
+    }));
+    const prim = doc.createPrimitive().setMaterial(wallMat)
+      .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(p).setBuffer(buffer))
+      .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(nr).setBuffer(buffer))
+      .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(uv).setBuffer(buffer));
+    scene.addChild(doc.createNode('banyo_duvar').setMesh(doc.createMesh('banyo_duvar').addPrimitive(prim)).setExtras({kat: 'kat1'}));
+    console.log(`banyo duvarları: ${verts.length} üçgen yeni seramiğe (${(verts.reduce((a, {tri}) => {const e1 = [0,1,2].map(k => tri[1][k]-tri[0][k]), e2 = [0,1,2].map(k => tri[2][k]-tri[0][k]); return a + Math.hypot(e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]) / 2;}, 0)).toFixed(1)} m²)`);
   }
   console.log(`zeminler: parke/karo dokuları değişti, ıslak hacimlerde kesilen parke üçgeni ${cut}`);
 }

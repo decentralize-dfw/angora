@@ -27,6 +27,7 @@ SPEC = {
     'giris-karo':  ('acik', 0.42, 0.85, 0.35, 3.0),
     'bodrum-karo': ('acik', 0.45, 0.85, 0.35, 3.0),
     'parke':       ('koyu', 0.48, 0.80, 0.55, 2.5),
+    'banyo-duvar': ('acik', 0.30, 0.80, 0.20, 2.0),
 }
 
 def main():

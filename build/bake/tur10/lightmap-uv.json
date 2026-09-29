@@ -27,11 +27,11 @@
   },
   "zemin": {
    "boyut": 4096,
-   "alan_m2": 2295.5,
+   "alan_m2": 2294.4,
    "px_per_m": 52.4,
-   "doluluk": 0.792,
+   "doluluk": 0.791,
    "parca": 19,
-   "ada": 8901,
+   "ada": 8889,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_zemin_000": {
@@ -64,43 +64,43 @@
     },
     "LM_zemin_007": {
      "texcoord": 1,
-     "malzeme": "EK_A09_Banyo_bordur"
+     "malzeme": "R31 | R33 attic tan mosaic band"
     },
     "LM_zemin_008": {
      "texcoord": 1,
-     "malzeme": "R31 | R33 attic tan mosaic band"
+     "malzeme": "R31 | R33 master fine mosaic band"
     },
     "LM_zemin_009": {
      "texcoord": 1,
-     "malzeme": "R31 | R33 master fine mosaic band"
+     "malzeme": "R31 | R33 master pale cream tile"
     },
     "LM_zemin_010": {
      "texcoord": 1,
-     "malzeme": "R31 | R33 master pale cream tile"
+     "malzeme": "RR"
     },
     "LM_zemin_011": {
      "texcoord": 1,
-     "malzeme": "RR"
+     "malzeme": "R31 | R33 attic cream tile"
     },
     "LM_zemin_012": {
      "texcoord": 1,
-     "malzeme": "R31 | R33 attic cream tile"
+     "malzeme": "terra_floor_giris"
     },
     "LM_zemin_013": {
      "texcoord": 1,
-     "malzeme": "terra_floor_giris"
+     "malzeme": "terra_floor"
     },
     "LM_zemin_014": {
      "texcoord": 1,
-     "malzeme": "terra_floor"
+     "malzeme": "wood_floor"
     },
     "LM_zemin_015": {
      "texcoord": 1,
-     "malzeme": "wood_floor"
+     "malzeme": "WOOD-FL"
     },
     "LM_zemin_016": {
      "texcoord": 1,
-     "malzeme": "WOOD-FL"
+     "malzeme": "banyo_duvar"
     },
     "LM_zemin_017": {
      "texcoord": 1,
