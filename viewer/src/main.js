@@ -263,7 +263,10 @@ function renderFrame(time) {
     if (transition) {
       transition.frames=(transition.frames??0)+1;
       transition.maxFrameGap=Math.max(transition.maxFrameGap??0,time-(transition.last??transition.start));
-      transition.elapsed=Math.max(0,time-transition.start);
+      // Kare başına en çok 50 ms ilerler: kat değişince telefon katı yükleyip
+      // gölge/ışık shader'larını derlerken ilk kare 1 sn'den geç geliyordu ve
+      // duvar saatiyle ölçülen geçiş ilk kareden son kareye atlıyordu (iOS Safari).
+      transition.elapsed=(transition.elapsed??0)+Math.min(50,Math.max(0,time-(transition.last??transition.start)));
       transition.last=time;
       const t = Math.min(1, transition.elapsed / transition.span);
       clip.constant = THREE.MathUtils.lerp(transition.from, transition.to, smoothStep(t));
@@ -1662,7 +1665,8 @@ async function loadNativeModel(manifest){
   phaseDone('data');
   nativeAtlas=atlas;roomData=rooms;walkData=navigation;
   $('#app').dataset.delivery='native';
-  flight.limitFrameStep=false;
+  // kamera uçuşu da kare başına en çok 50 ms (yukarıdaki kesit geçişiyle aynı sebep)
+  flight.limitFrameStep=true;
   if(manifest.plot_boundary){const boundary=await gzJson(manifest.plot_boundary);plotMask=createPlotMaterialMask(boundary.polygon_native_xy);}
   // Byte weighting where the manifest records sizes, part counting where it
   // does not - a two-hundred-kilobyte garden must not step the bar as far as
@@ -2488,7 +2492,8 @@ function zoom(factor){
 }
 function advanceZoomEase(time){
   if(!zoomEase)return false;
-  const t=Math.min(1,(time-zoomEase.start)/zoomEase.span),k=1-Math.pow(1-t,3);
+  zoomEase.elapsed=(zoomEase.elapsed??0)+Math.min(50,Math.max(0,time-(zoomEase.last??zoomEase.start)));zoomEase.last=time;
+  const t=Math.min(1,zoomEase.elapsed/zoomEase.span),k=1-Math.pow(1-t,3);
   camera.zoom=zoomEase.from*Math.pow(zoomEase.to/zoomEase.from,k);
   camera.updateProjectionMatrix();
   if(t>=1)zoomEase=null;
