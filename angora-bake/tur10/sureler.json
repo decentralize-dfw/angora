@@ -1,0 +1,270 @@
+[
+ {
+  "atlas": "duvar",
+  "isik": "gok",
+  "boyut": 4096,
+  "ornek": 512,
+  "gecis": [
+   "DIRECT",
+   "INDIRECT"
+  ],
+  "sure_sn": 137.6,
+  "dolu_piksel": 0.212,
+  "ortalama": 0.0027,
+  "p99": 0.1866
+ },
+ {
+  "atlas": "zemin",
+  "isik": "gok",
+  "boyut": 4096,
+  "ornek": 512,
+  "gecis": [
+   "DIRECT",
+   "INDIRECT"
+  ],
+  "sure_sn": 276.4,
+  "dolu_piksel": 0.331,
+  "ortalama": 0.0156,
+  "p99": 0.5213
+ },
+ {
+  "atlas": "cephe",
+  "isik": "gok",
+  "boyut": 2048,
+  "ornek": 512,
+  "gecis": [
+   "DIRECT",
+   "INDIRECT"
+  ],
+  "sure_sn": 29.9,
+  "dolu_piksel": 0.367,
+  "ortalama": 0.0938,
+  "p99": 0.7632
+ },
+ {
+  "atlas": "bahce",
+  "isik": "gok",
+  "boyut": 2048,
+  "ornek": 512,
+  "gecis": [
+   "DIRECT",
+   "INDIRECT"
+  ],
+  "sure_sn": 48.0,
+  "dolu_piksel": 0.596,
+  "ortalama": 0.2244,
+  "p99": 0.8425
+ },
+ {
+  "atlas": "duvar",
+  "isik": "gunes_09",
+  "boyut": 4096,
+  "ornek": 512,
+  "gecis": [
+   "INDIRECT"
+  ],
+  "sure_sn": 65.8,
+  "dolu_piksel": 0.097,
+  "ortalama": 0.0001,
+  "p99": 0.011
+ },
+ {
+  "atlas": "zemin",
+  "isik": "gunes_09",
+  "boyut": 4096,
+  "ornek": 512,
+  "gecis": [
+   "INDIRECT"
+  ],
+  "sure_sn": 181.5,
+  "dolu_piksel": 0.167,
+  "ortalama": 0.0006,
+  "p99": 0.0438
+ },
+ {
+  "atlas": "cephe",
+  "isik": "gunes_09",
+  "boyut": 2048,
+  "ornek": 512,
+  "gecis": [
+   "INDIRECT"
+  ],
+  "sure_sn": 16.5,
+  "dolu_piksel": 0.263,
+  "ortalama": 0.0022,
+  "p99": 0.0576
+ },
+ {
+  "atlas": "bahce",
+  "isik": "gunes_09",
+  "boyut": 2048,
+  "ornek": 512,
+  "gecis": [
+   "INDIRECT"
+  ],
+  "sure_sn": 30.5,
+  "dolu_piksel": 0.223,
+  "ortalama": 0.0015,
+  "p99": 0.052
+ },
+ {
+  "atlas": "duvar",
+  "isik": "gunes_13",
+  "boyut": 4096,
+  "ornek": 512,
+  "gecis": [
+   "INDIRECT"
+  ],
+  "sure_sn": 58.9,
+  "dolu_piksel": 0.078,
+  "ortalama": 0.0001,
+  "p99": 0.0102
+ },
+ {
+  "atlas": "zemin",
+  "isik": "gunes_13",
+  "boyut": 4096,
+  "ornek": 512,
+  "gecis": [
+   "INDIRECT"
+  ],
+  "sure_sn": 164.2,
+  "dolu_piksel": 0.152,
+  "ortalama": 0.0006,
+  "p99": 0.05
+ },
+ {
+  "atlas": "cephe",
+  "isik": "gunes_13",
+  "boyut": 2048,
+  "ornek": 512,
+  "gecis": [
+   "INDIRECT"
+  ],
+  "sure_sn": 14.9,
+  "dolu_piksel": 0.272,
+  "ortalama": 0.0028,
+  "p99": 0.0517
+ },
+ {
+  "atlas": "bahce",
+  "isik": "gunes_13",
+  "boyut": 2048,
+  "ornek": 512,
+  "gecis": [
+   "INDIRECT"
+  ],
+  "sure_sn": 27.6,
+  "dolu_piksel": 0.249,
+  "ortalama": 0.002,
+  "p99": 0.0606
+ },
+ {
+  "atlas": "duvar",
+  "isik": "gunes_17",
+  "boyut": 4096,
+  "ornek": 512,
+  "gecis": [
+   "INDIRECT"
+  ],
+  "sure_sn": 58.6,
+  "dolu_piksel": 0.084,
+  "ortalama": 0.0001,
+  "p99": 0.0158
+ },
+ {
+  "atlas": "zemin",
+  "isik": "gunes_17",
+  "boyut": 4096,
+  "ornek": 512,
+  "gecis": [
+   "INDIRECT"
+  ],
+  "sure_sn": 159.0,
+  "dolu_piksel": 0.165,
+  "ortalama": 0.0006,
+  "p99": 0.0494
+ },
+ {
+  "atlas": "cephe",
+  "isik": "gunes_17",
+  "boyut": 2048,
+  "ornek": 512,
+  "gecis": [
+   "INDIRECT"
+  ],
+  "sure_sn": 12.8,
+  "dolu_piksel": 0.241,
+  "ortalama": 0.0021,
+  "p99": 0.0514
+ },
+ {
+  "atlas": "bahce",
+  "isik": "gunes_17",
+  "boyut": 2048,
+  "ornek": 512,
+  "gecis": [
+   "INDIRECT"
+  ],
+  "sure_sn": 28.0,
+  "dolu_piksel": 0.24,
+  "ortalama": 0.0019,
+  "p99": 0.0546
+ },
+ {
+  "atlas": "duvar",
+  "isik": "gece",
+  "boyut": 4096,
+  "ornek": 512,
+  "gecis": [
+   "DIRECT",
+   "INDIRECT"
+  ],
+  "sure_sn": 118.9,
+  "dolu_piksel": 0.203,
+  "ortalama": 0.0209,
+  "p99": 0.9708
+ },
+ {
+  "atlas": "zemin",
+  "isik": "gece",
+  "boyut": 4096,
+  "ornek": 512,
+  "gecis": [
+   "DIRECT",
+   "INDIRECT"
+  ],
+  "sure_sn": 248.3,
+  "dolu_piksel": 0.304,
+  "ortalama": 0.0416,
+  "p99": 1.0195
+ },
+ {
+  "atlas": "cephe",
+  "isik": "gece",
+  "boyut": 2048,
+  "ornek": 512,
+  "gecis": [
+   "DIRECT",
+   "INDIRECT"
+  ],
+  "sure_sn": 17.6,
+  "dolu_piksel": 0.095,
+  "ortalama": 0.0015,
+  "p99": 0.1294
+ },
+ {
+  "atlas": "bahce",
+  "isik": "gece",
+  "boyut": 2048,
+  "ornek": 512,
+  "gecis": [
+   "DIRECT",
+   "INDIRECT"
+  ],
+  "sure_sn": 30.8,
+  "dolu_piksel": 0.096,
+  "ortalama": 0.0003,
+  "p99": 0.0404
+ }
+]
