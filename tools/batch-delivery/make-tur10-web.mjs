@@ -89,6 +89,7 @@ function repairStair(doc) {
     for (let i = 0; i < p.length; i += 3) {
       const x = p[i] + t[0], y = p[i + 1] + t[1];
       if (y > 0.05) p[i + 1] = STAIR.yAtX1 + (STAIR.x1 - x) * STAIR.slope - t[1];
+      else p[i + 1] = -0.085 - t[1]; // bodrum döşemesi -0,08: kama tabanı zemine oturur (8 cm havada duruyordu)
       if (n && n[i + 1] > 0.9) {n[i] = STAIR.slope / len; n[i + 1] = 1 / len; n[i + 2] = 0;}
     }
     pos.setArray(p); if (n) nor.setArray(n);
@@ -143,7 +144,7 @@ function applyFloors(doc) {
     };
     let patched = 0, dropped = 0;
     for (const node of [...root.listNodes()]) {
-      if (!/esik_(kapagi|doseme)/.test(node.getName()) || !node.getMesh()) continue;
+      if (!/esik_(kapagi|doseme)|doseme_boslugu/.test(node.getName()) || !node.getMesh()) continue;
       const b = getBounds(node), cx = (b.min[0] + b.max[0]) / 2, cz = (b.min[2] + b.max[2]) / 2;
       const hits = [];
       for (const [dx, dz] of [[0, 0], [0.5, 0], [-0.5, 0], [0, 0.5], [0, -0.5], [0.35, 0.35], [-0.35, 0.35], [0.35, -0.35], [-0.35, -0.35]])

@@ -45,7 +45,7 @@ async function triangles(file) {
         const a = P(idx ? idx.getScalar(t) : t), b = P(idx ? idx.getScalar(t + 1) : t + 1), c = P(idx ? idx.getScalar(t + 2) : t + 2);
         const nx = (b[1]-a[1])*(c[2]-a[2]) - (b[2]-a[2])*(c[1]-a[1]), ny = (b[2]-a[2])*(c[0]-a[0]) - (b[0]-a[0])*(c[2]-a[2]), nz = (b[0]-a[0])*(c[1]-a[1]) - (b[1]-a[1])*(c[0]-a[0]);
         const len = Math.hypot(nx, ny, nz); if (len < 1e-10) continue;
-        tris.push({a, b, c, up: Math.abs(ny / len), mat, node: node.getName()});
+        tris.push({a, b, c, up: ny / len, mat, node: node.getName()}); // işaretli: aşağı bakan yüz (basamak altı) zemin sayılmaz
       }
     }
   }
@@ -81,7 +81,7 @@ const [ng, og] = [grid(nt), grid(ot)];
 console.log('üçgen yeni', nt.length, 'eski', ot.length);
 let xs = Infinity, xe = -Infinity, zs = Infinity, ze = -Infinity;
 for (const t of nt) if (WALK.test(t.mat)) for (const p of [t.a, t.b, t.c]) {xs = Math.min(xs, p[0]); xe = Math.max(xe, p[0]); zs = Math.min(zs, p[2]); ze = Math.max(ze, p[2]);}
-const blocked = new Map(), samples = [];
+const blocked = new Map(), bumps = new Map(), samples = [];
 let points = 0;
 for (let x = xs + STEP / 2; x < xe; x += STEP) for (let z = zs + STEP / 2; z < ze; z += STEP) {
   const hits = column(nt, ng, x, z);
@@ -91,6 +91,12 @@ for (let x = xs + STEP / 2; x < xe; x += STEP) for (let z = zs + STEP / 2; z < z
   const old = column(ot, og, x, z);
   for (const y of levels) {
     points++;
+    // kabarık plaka: zeminden 0,5..12 cm yukarıda yatay YENİ (EK_) yüzey - eşik/altlık taşması
+    for (const h of hits) if (/^EK_/.test(h.t.mat) && !/supurgelik/.test(h.t.mat) && h.t.up > 0.9 && h.y > y + 0.005 && h.y < y + 0.12) {
+      const rec = bumps.get(h.t.mat) ?? bumps.set(h.t.mat, {n: 0, ornek: []}).get(h.t.mat);
+      rec.n++; if (rec.ornek.length < 4) rec.ornek.push(`(${x.toFixed(2)},${y.toFixed(2)},${z.toFixed(2)})+${((h.y - y) * 100).toFixed(1)}cm`);
+      break;
+    }
     const lo = y + H0, hi = y + H1;
     const obstacle = hits.filter(h => h.y > lo && h.y < hi && !IGNORE.test(h.t.mat) && !(WALK.test(h.t.mat) && h.t.up > 0.9));
     if (!obstacle.length) continue;
@@ -110,5 +116,8 @@ for (let x = xs + STEP / 2; x < xe; x += STEP) for (let z = zs + STEP / 2; z < z
 const report = [...blocked].sort((p, q) => q[1].n - p[1].n).map(([mat, r]) => ({malzeme: mat, alan_m2: +(r.n * STEP * STEP).toFixed(2), ornek: r.ornek}));
 console.log(`yürünen nokta ${points}; YENİ engel ${samples.length} nokta (${(samples.length * STEP * STEP).toFixed(1)} m²)`);
 for (const r of report) console.log(String(r.alan_m2).padStart(7), 'm² |', r.malzeme, '|', r.ornek.slice(0, 3).map(o => `(${o.x},${o.zemin_y},${o.z})↑${o.engel_y}`).join(' '));
+const bumpReport = [...bumps].sort((p, q) => q[1].n - p[1].n).map(([mat, r]) => ({malzeme: mat, alan_m2: +(r.n * STEP * STEP).toFixed(2), ornek: r.ornek}));
+console.log(`kabarık plaka (zeminden 0,5-12 cm, yeni parça): ${bumpReport.length ? '' : 'yok'}`);
+for (const r of bumpReport) console.log(String(r.alan_m2).padStart(7), 'm² |', r.malzeme, '|', r.ornek.join(' '));
 writeFileSync(process.env.DENETIM_NOKTA ?? '/dev/null', JSON.stringify(samples));
-writeFileSync(path.join(REPO, 'build/bake/tur10/denetim.json'), JSON.stringify({yeni: NEW, eski: OLD, hucre_m: STEP, aralik_m: [H0, H1], yurunen_nokta: points, yeni_engeller: report}, null, 1));
+writeFileSync(path.join(REPO, 'build/bake/tur10/denetim.json'), JSON.stringify({yeni: NEW, eski: OLD, hucre_m: STEP, aralik_m: [H0, H1], yurunen_nokta: points, yeni_engeller: report, kabarik_plaka: bumpReport}, null, 1));
