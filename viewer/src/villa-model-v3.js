@@ -66,17 +66,22 @@ export function applyVillaModelV3(manifest, {mobile = false} = {}) {
 
 // 29.09 TUR 10: fotoğraflardan yeniden modellenmiş kabuk ve iç mekân
 // (tools/batch-delivery/make-tur10-web.mjs; kaynak: modelleme dalı
-// teslim-tur10/web). Yalnız masaüstü; mobil kopyası henüz yok. Eski
+// teslim-tur10/web). Telefon: make-mobile-ktx2.mjs ile 256 px KTX2 kopyası. Eski
 // dosyalar silinmez, bayrak kapatılınca v4/v2'ye döner.
 export const TUR10_MODELS = Object.freeze({
   architecture: {file: 'BUILDING-opt-v6.glb', bytes: 9805676},
   interior:     {file: 'INTERIOR-opt-v3.glb', bytes: 5113800},
 });
-export function applyTur10(manifest) {
+export const TUR10_MODELS_MOBILE = Object.freeze({
+  architecture: {file: 'mobile/BUILDING-opt-v6.ktx2.glb', bytes: 5697812},
+  interior:     {file: 'mobile/INTERIOR-opt-v3.ktx2.glb', bytes: 2646928},
+});
+export function applyTur10(manifest, {mobile = false} = {}) {
   if (!manifest?.parts || !manifest.batched) return [];
+  const table = mobile ? TUR10_MODELS_MOBILE : TUR10_MODELS;
   const swapped = [];
   for (const part of manifest.parts) {
-    const next = TUR10_MODELS[part.name];
+    const next = table[part.name];
     if (!next) continue;
     part.file = ROOT + next.file; part.bytes = next.bytes; delete part.gpu_sha256;
     swapped.push(part.name);

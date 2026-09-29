@@ -69,6 +69,8 @@ const pages = import.meta.env.MODE === 'pages';
 const requestedProfile=new URLSearchParams(location.search).get('profile');
 const requestedFeatures=new URLSearchParams(location.search).get('features');
 const deliveryProfile=['desktop','mobile'].includes(requestedProfile)?requestedProfile:matchMedia('(pointer: coarse)').matches?'mobile':'desktop';
+// Tur 10: masaüstü tam set, telefon 256 px KTX2 kopyası (villaModelV3Mobile ile aynı şart)
+const tur10Active=!!(FEATURES.tur10&&FEATURES.villaModelV3&&(deliveryProfile==='desktop'||FEATURES.villaModelV3Mobile));
 const modelRoot = new URL(import.meta.env.VITE_MODEL_ROOT || (pages ? 'build/web/batched/' : 'models/batched/')+deliveryProfile+'/', publicRoot);
 const decoderRoot = new URL(pages ? 'viewer/public/draco/' : 'draco/', publicRoot);
 const daylightURL = new URL((pages ? 'assets/lighting/' : 'lighting/')+'kloofendal_48d_partly_cloudy_puresky_1k.hdr',publicRoot);
@@ -1721,7 +1723,7 @@ async function loadNativeModel(manifest){
     // EKLER (Tur 9): fotoğraflarda olup modelde olmayan detaylar - perde,
     // korniş, aplik, tablo, halı (tools/blender/06_ekler.py). Mimari
     // grubun içine girer: kesit, kat görünürlüğü ve ışık aynı. Kapat: ?features=ekler:0
-    if(FEATURES.ekler&&!(FEATURES.tur10&&deliveryProfile==='desktop')&&groups.get('architecture'))loader.loadAsync(new URL('../../26092026/EKLER.glb',modelRoot).href).then(gltf=>{
+    if(FEATURES.ekler&&!tur10Active&&groups.get('architecture'))loader.loadAsync(new URL('../../26092026/EKLER.glb',modelRoot).href).then(gltf=>{
       const root=gltf.scene;root.name='EKLER';
       root.traverse(o=>{if(!o.isMesh)return;
         o.renderOrder=5;lighting.prepareMesh(o,{clipped:true,context:false,name:'interior'});o.userData.clipPlanes=[clip];
@@ -2011,11 +2013,11 @@ async function loadModel() {
       const swapped=applyVillaModelV3(manifest,{mobile:deliveryProfile==='mobile'});
       if(swapped.length)console.info('Villa model v3'+(deliveryProfile==='mobile'?' (mobil ktx2)':'')+': '+swapped.join(', '));
     }
-    // Tur 10 (masaüstü): fotoğraflardan yeniden modellenmiş kabuk + iç mekân.
+    // Tur 10: fotoğraflardan yeniden modellenmiş kabuk + iç mekân (telefonda KTX2 kopyası).
     // Eski pişmiş ışık (v5) ve EKLER eski geometriye ait - bu yolda kapalı.
-    const tur10=FEATURES.tur10&&FEATURES.villaModelV3&&deliveryProfile==='desktop';
+    const tur10=tur10Active;
     if(tur10){
-      const swapped=applyTur10(manifest);
+      const swapped=applyTur10(manifest,{mobile:deliveryProfile==='mobile'});
       if(swapped.length)console.info('Tur 10 modeller: '+swapped.join(', '));
     }
     // Pişmiş ışık (masaüstü): kabuk ve bahçe lightmap UV'li v5/v3 dosyalarına
