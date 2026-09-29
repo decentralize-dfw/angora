@@ -955,3 +955,19 @@ YAPILDI: Foto16 A08_ceviz, foto21 A08_kiraz görüntü düğümleri geri bağlan
 YAPILDI: Foto02 terrakota ROI kırmızı çerçeveyle gösterildi; WB RGB [180,133,108], 45 derece gerçek UV korundu.
 YAPILDI: 02,16,18,21,29,34,42 FOTO|SONRA.
 KALDI: Önceki aşamadaki bordür/tavan/eşik ayrıntıları bu aşamanın kapsamı dışında korunur.
+
+## Adım10 Aşama2 · Lightmap UV
+
+Malzeme ataması ve 0.60m / 1m beş ışın ters yüz denetimi tamamlandı. Çevrilen yüz: 9410. Bahçe/istinat duvarı dahil; ağaç yaprakları ve korkuluk/armatür/cam/metal hariç.
+
+zemin: {"boyut": 4096, "atlas_sayisi": 1, "alan_m2": 1134.2645142674446, "texel_m": 40.0, "dolgu_px": 6, "chart_sayisi": 4325, "ucgen_cakisma_sayisi": 29, "ucgen_cakisma_alani_uv": 1.4332994436624684e-06, "texel_m_min": 10.001476287841797, "texel_m_p01": 38.40326690673828, "texel_m_medyan": 50.04789352416992, "sure_sn": 2.9}
+
+cephe: {"boyut": 2048, "atlas_sayisi": 1, "alan_m2": 567.751335144043, "texel_m": 18.0, "dolgu_px": 6, "chart_sayisi": 3079, "ucgen_cakisma_sayisi": 20, "ucgen_cakisma_alani_uv": 0.00048227248818761073, "texel_m_min": 15.502724647521973, "texel_m_p01": 18.332197189331055, "texel_m_medyan": 21.05186653137207, "sure_sn": 5.78}
+
+bahce: {"boyut": 2048, "atlas_sayisi": 1, "alan_m2": 3184.68581366539, "texel_m": 18.0, "dolgu_px": 6, "chart_sayisi": 1037, "ucgen_cakisma_sayisi": 41, "ucgen_cakisma_alani_uv": 0.0003045949816816926, "texel_m_min": 11.75817584991455, "texel_m_p01": 17.163122177124023, "texel_m_medyan": 18.590892791748047, "sure_sn": 2.5}
+
+duvar: {"boyut": 4096, "atlas_sayisi": 5, "alan_m2": 6168.4224140243605, "texel_m": 40.0, "dolgu_px": 6, "chart_sayisi": 120666, "ucgen_cakisma_sayisi": 6009, "ucgen_cakisma_alani_uv": 0.001123800038750695, "texel_m_min": 5.032525062561035, "texel_m_p01": 38.389549255371094, "texel_m_medyan": 51.70873260498047, "sure_sn": 140.54}
+
+KALDI: zemin: 29 UV üçgen çakışması; zemin: bazı yüzlerde minimum40 texel/m sağlanmadı; cephe: 20 UV üçgen çakışması; bahce: 41 UV üçgen çakışması; duvar: 5 fiziksel sayfa gerekiyor; tek atlas koşulu sağlanmadı; duvar: 6009 UV üçgen çakışması; duvar: bazı yüzlerde minimum40 texel/m sağlanmadı; 18/34 checker renderları: UV koşulları geçmedi ve 25 dakika sınırına ulaşıldı
+
+Üretime hazır: False. [UV kontrolü](adim10/asama2/uv-kontrol.json).

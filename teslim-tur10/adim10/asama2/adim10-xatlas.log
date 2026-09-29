@@ -1,0 +1,7 @@
+[UV] duvar pack 4096 4096 atlas 6 charts 150803 tpu 40.0 sec 61.16184997558594
+[UV] en parçalı [(33443, 'wood_dark (4)__FOTO_09_WOODY-DARK.001'), (25521, 'wood_dark (4)__FOTO_16_WOODY-DARK.001'), (16461, 'wood_dark (4)__FOTO_13_WOODY-DARK.001'), (10157, 'WOOD1__FOTO_22_R31 | R33 antique nook walnut'), (6986, 'WOOD2__FOTO_05_wood_honey'), (5855, 'WOOD1__R31 | R33 antique nook walnut'), (4512, 'wht.001'), (3338, 'WOOD2__FOTO_21_wood_honey'), (2816, 'ROUGHNESS63__X'), (1840, 'WOOD1__FOTO_12_R31 | R33 antique nook walnut'), (1834, 'WOOD2__FOTO_23_wood_honey'), (1540, 'Cube__WHT.001'), (1479, 'interior.001'), (1244, 'A05_kartonpiyer_birlesik.001'), (945, 'WOOD2__FOTO_20_wood_honey')]
+Traceback (most recent call last):
+  File "C:\Users\yigit\Desktop\WORK\angora\adim10-xatlas.py", line 15, in <module>
+    result['kaldi'].append(name+' 40 texel/m ile '+str(atlas.atlas_count)+' sayfa gerektiriyor'); (U/'uv-kontrol.json').write_text(json.dumps(result,ensure_ascii=False,indent=1),encoding='utf-8'); raise RuntimeError(name+' tek atlasa sığmadı')
+                                                                                                                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: duvar tek atlasa sığmadı

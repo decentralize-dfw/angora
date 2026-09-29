@@ -1,0 +1,26 @@
+[UV] zemin pack 4096 4096 pages 1 charts 4325
+[UV] zemin mesh 0
+[UV] zemin page checked 1
+[UV] SON zemin overlap 29 min 10.001476287841797
+[UV] cephe pack 2048 2048 pages 1 charts 3079
+[UV] cephe mesh 0
+[UV] cephe page checked 1
+[UV] SON cephe overlap 20 min 15.502724647521973
+[UV] bahce pack 2048 2048 pages 1 charts 1037
+[UV] bahce mesh 0
+[UV] bahce page checked 1
+[UV] SON bahce overlap 41 min 11.75817584991455
+[UV] duvar pack 4096 4096 pages 5 charts 120666
+[UV] duvar mesh 0
+[UV] duvar mesh 200
+[UV] duvar mesh 400
+[UV] duvar mesh 600
+[UV] duvar mesh 800
+[UV] duvar mesh 1000
+[UV] duvar mesh 1200
+[UV] duvar page checked 1
+[UV] duvar page checked 2
+[UV] duvar page checked 3
+[UV] duvar page checked 4
+[UV] duvar page checked 5
+[UV] SON duvar overlap 6009 min 5.032525062561035

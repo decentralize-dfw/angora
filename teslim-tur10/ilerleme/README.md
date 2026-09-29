@@ -277,3 +277,17 @@ KALDI: nominal DWG panel ölçüsünün ayrıca doğrulanması; 32 bordür motif
 ![Foto 42](../adim10/asama1/foto_42.jpg)
 
 [Terrakota ölçümü](../adim10/asama1/olcum_02.jpg) · [Düzeltme raporu](../adim10/asama1/duzeltme-raporu.json)
+
+## Adım10 · Aşama2 · UV denetimi
+
+[uv-kontrol.json](../adim10/asama2/uv-kontrol.json)
+
+KALDI: zemin: 29 UV üçgen çakışması; zemin: bazı yüzlerde minimum40 texel/m sağlanmadı; cephe: 20 UV üçgen çakışması; bahce: 41 UV üçgen çakışması; duvar: 5 fiziksel sayfa gerekiyor; tek atlas koşulu sağlanmadı; duvar: 6009 UV üçgen çakışması; duvar: bazı yüzlerde minimum40 texel/m sağlanmadı; 18/34 checker renderları: UV koşulları geçmedi ve 25 dakika sınırına ulaşıldı
+
+![UV zemin](../adim10/asama2/uv_zemin.png)
+
+![UV cephe](../adim10/asama2/uv_cephe.png)
+
+![UV bahce](../adim10/asama2/uv_bahce.png)
+
+![UV duvar](../adim10/asama2/uv_duvar.png)

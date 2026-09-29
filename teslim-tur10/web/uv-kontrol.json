@@ -1,0 +1,8648 @@
+{
+ "atlaslar": {
+  "zemin": {
+   "boyut": 4096,
+   "atlas_sayisi": 1,
+   "alan_m2": 1134.2645142674446,
+   "texel_m": 40.0,
+   "dolgu_px": 6,
+   "chart_sayisi": 4325,
+   "meshler": [
+    "wood_floor__FOTO_03_wood_floor",
+    "wood_floor__FOTO_19_wood_floor",
+    "Cube__FOTO_29_WHT.001",
+    "terra_floor__FOTO_04_terra_floor",
+    "terra_floor__FOTO_26_terra_floor",
+    "wood_floor.001__FOTO_19_WOOD-FL",
+    "wood_floor.001__FOTO_03_WOOD-FL",
+    "stone_tile.001",
+    "R44 joined | fixed | R31 | Shared bathroom ivory wall tile__FOTO_32_RR",
+    "Lift | Photographed walnut door finish (4).001__FOTO_10_Simple wood",
+    "A04_K01_esik_kapagi.001",
+    "A04_K02_esik_kapagi.001",
+    "A04_K03_esik_kapagi.001",
+    "A04_K04_esik_kapagi.001",
+    "A04_K05_esik_kapagi.001",
+    "A04_K06_esik_kapagi.001",
+    "A04_K07_esik_kapagi.001",
+    "A04_K08_esik_kapagi.001",
+    "A04_K09_esik_kapagi.001",
+    "A04_K10_esik_kapagi.001",
+    "A04_K11_esik_kapagi.001",
+    "A04_K12_esik_kapagi.001",
+    "A04_K13_esik_kapagi.001",
+    "M2_K0_0_basamak.009",
+    "M2_K0_0_basamak.010",
+    "M2_K0_0_basamak.001",
+    "M2_K0_0_basamak.002",
+    "M2_K0_0_basamak.003",
+    "M2_K0_0_basamak.004",
+    "M2_K0_0_basamak.005",
+    "M2_K0_0_basamak.006",
+    "M2_K0_0_basamak.007",
+    "M2_K0_0_riht.009",
+    "M2_K0_0_riht.010",
+    "M2_K0_0_riht.001",
+    "M2_K0_0_riht.002",
+    "M2_K0_0_riht.003",
+    "M2_K0_0_riht.004",
+    "M2_K0_0_riht.005",
+    "M2_K0_0_riht.006",
+    "M2_K0_0_riht.007",
+    "M2_K0_1_basamak.009",
+    "M2_K0_1_basamak.010",
+    "M2_K0_1_basamak.001",
+    "M2_K0_1_basamak.002",
+    "M2_K0_1_basamak.003",
+    "M2_K0_1_basamak.004",
+    "M2_K0_1_basamak.005",
+    "M2_K0_1_basamak.006",
+    "M2_K0_1_basamak.007",
+    "M2_K0_1_riht.009",
+    "M2_K0_1_riht.010",
+    "M2_K0_1_riht.001",
+    "M2_K0_1_riht.002",
+    "M2_K0_1_riht.003",
+    "M2_K0_1_riht.004",
+    "M2_K0_1_riht.005",
+    "M2_K0_1_riht.006",
+    "M2_K0_1_riht.007",
+    "M2_K0_sahanlik.001",
+    "M2_K1_0_basamak.010",
+    "M2_K1_0_basamak.011",
+    "M2_K1_0_basamak.001",
+    "M2_K1_0_basamak.002",
+    "M2_K1_0_basamak.003",
+    "M2_K1_0_basamak.004",
+    "M2_K1_0_basamak.005",
+    "M2_K1_0_basamak.006",
+    "M2_K1_0_basamak.007",
+    "M2_K1_0_basamak.008",
+    "M2_K1_0_riht.010",
+    "M2_K1_0_riht.011",
+    "M2_K1_0_riht.001",
+    "M2_K1_0_riht.002",
+    "M2_K1_0_riht.003",
+    "M2_K1_0_riht.004",
+    "M2_K1_0_riht.005",
+    "M2_K1_0_riht.006",
+    "M2_K1_0_riht.007",
+    "M2_K1_0_riht.008",
+    "M2_K1_1_basamak.009",
+    "M2_K1_1_basamak.010",
+    "M2_K1_1_basamak.001",
+    "M2_K1_1_basamak.002",
+    "M2_K1_1_basamak.003",
+    "M2_K1_1_basamak.004",
+    "M2_K1_1_basamak.005",
+    "M2_K1_1_basamak.006",
+    "M2_K1_1_basamak.007",
+    "M2_K1_1_riht.009",
+    "M2_K1_1_riht.010",
+    "M2_K1_1_riht.001",
+    "M2_K1_1_riht.002",
+    "M2_K1_1_riht.003",
+    "M2_K1_1_riht.004",
+    "M2_K1_1_riht.005",
+    "M2_K1_1_riht.006",
+    "M2_K1_1_riht.007",
+    "M2_K1_sahanlik.001",
+    "M2_K2_0_basamak.009",
+    "M2_K2_0_basamak.010",
+    "M2_K2_0_basamak.001",
+    "M2_K2_0_basamak.002",
+    "M2_K2_0_basamak.003",
+    "M2_K2_0_basamak.004",
+    "M2_K2_0_basamak.005",
+    "M2_K2_0_basamak.006",
+    "M2_K2_0_basamak.007",
+    "M2_K2_0_riht.009",
+    "M2_K2_0_riht.010",
+    "M2_K2_0_riht.001",
+    "M2_K2_0_riht.002",
+    "M2_K2_0_riht.003",
+    "M2_K2_0_riht.004",
+    "M2_K2_0_riht.005",
+    "M2_K2_0_riht.006",
+    "M2_K2_0_riht.007",
+    "M2_K2_1_basamak.009",
+    "M2_K2_1_basamak.010",
+    "M2_K2_1_basamak.001",
+    "M2_K2_1_basamak.002",
+    "M2_K2_1_basamak.003",
+    "M2_K2_1_basamak.004",
+    "M2_K2_1_basamak.005",
+    "M2_K2_1_basamak.006",
+    "M2_K2_1_basamak.007",
+    "M2_K2_1_riht.009",
+    "M2_K2_1_riht.010",
+    "M2_K2_1_riht.001",
+    "M2_K2_1_riht.002",
+    "M2_K2_1_riht.003",
+    "M2_K2_1_riht.004",
+    "M2_K2_1_riht.005",
+    "M2_K2_1_riht.006",
+    "M2_K2_1_riht.007",
+    "M2_K2_sahanlik.001",
+    "M3_09_esik_doseme.001",
+    "M3_10_doseme_boslugu.001",
+    "M3_10_esik_doseme.001",
+    "M3_11_esik_doseme.001",
+    "M3_12_esik_doseme.001",
+    "M3_13_esik_doseme.001"
+   ],
+   "ucgen_cakisma_sayisi": 29,
+   "ucgen_cakisma_alani_uv": 1.4332994436624684e-06,
+   "texel_m_min": 10.001476287841797,
+   "texel_m_p01": 38.40326690673828,
+   "texel_m_medyan": 50.04789352416992,
+   "sure_sn": 2.9
+  },
+  "cephe": {
+   "boyut": 2048,
+   "atlas_sayisi": 1,
+   "alan_m2": 567.751335144043,
+   "texel_m": 18.0,
+   "dolgu_px": 6,
+   "chart_sayisi": 3079,
+   "meshler": [
+    "gravel [imported].002",
+    "Clay tile 6 [imported].001",
+    "roof.001"
+   ],
+   "ucgen_cakisma_sayisi": 20,
+   "ucgen_cakisma_alani_uv": 0.00048227248818761073,
+   "texel_m_min": 15.502724647521973,
+   "texel_m_p01": 18.332197189331055,
+   "texel_m_medyan": 21.05186653137207,
+   "sure_sn": 5.78
+  },
+  "bahce": {
+   "boyut": 2048,
+   "atlas_sayisi": 1,
+   "alan_m2": 3184.68581366539,
+   "texel_m": 18.0,
+   "dolgu_px": 6,
+   "chart_sayisi": 1037,
+   "meshler": [
+    "plot-grass.002",
+    "chrome (5).002",
+    "canopy.002",
+    "pool_tile.002",
+    "Garden | Dark stained canopy timber.002",
+    "Retaining wall rough limestone (1).002",
+    "stone_tile (4).001",
+    "white_trim (5).002",
+    "Retaining wall rough limestone.001"
+   ],
+   "ucgen_cakisma_sayisi": 41,
+   "ucgen_cakisma_alani_uv": 0.0003045949816816926,
+   "texel_m_min": 11.75817584991455,
+   "texel_m_p01": 17.163122177124023,
+   "texel_m_medyan": 18.590892791748047,
+   "sure_sn": 2.5
+  },
+  "duvar": {
+   "boyut": 4096,
+   "atlas_sayisi": 5,
+   "alan_m2": 6168.4224140243605,
+   "texel_m": 40.0,
+   "dolgu_px": 6,
+   "chart_sayisi": 120666,
+   "meshler": [
+    "interior.001",
+    "ceiling [imported].002",
+    "stucco [imported].001",
+    "Cube.001__FOTO_09_WOODY-DARK",
+    "Cube.001__FOTO_13_WOODY-DARK",
+    "Cube.001__FOTO_16_WOODY-DARK",
+    "wood_dark (4)__FOTO_16_WOODY-DARK.001",
+    "wood_dark (4)__FOTO_09_WOODY-DARK.001",
+    "wood_dark (4)__FOTO_13_WOODY-DARK.001",
+    "Cube__WHT.001",
+    "R31 | R33 entrance WC ochre tile.001",
+    "R31 | R33 master pale cream tile.001",
+    "R44 joined | fixed | R31 | Shared bathroom ivory wall tile__FOTO_08_RR",
+    "R31 | R33 entrance navy mosaic band.001",
+    "R31 | R33 ivory wall ceramic.001",
+    "R31 | R33 master fine mosaic band.001",
+    "R31 | R33 attic cream tile.001",
+    "R31 | R33 attic tan mosaic band.001",
+    "Lift | Photographed walnut door finish (4).001__FOTO_22_Simple wood",
+    "metal2.001",
+    "ROUGHNESS63__X",
+    "ROUGHNESS63__FOTO_07_X",
+    "ROUGHNESS63__FOTO_06_X",
+    "ROUGHNESS63__FOTO_11_X",
+    "wc.001",
+    "wht.001",
+    "WOOD1__R31 | R33 antique nook walnut",
+    "WOOD1__FOTO_22_R31 | R33 antique nook walnut",
+    "WOOD1__FOTO_31_R31 | R33 antique nook walnut",
+    "WOOD1__FOTO_12_R31 | R33 antique nook walnut",
+    "WOOD2__FOTO_05_wood_honey",
+    "WOOD2__FOTO_23_wood_honey",
+    "WOOD2__FOTO_21_wood_honey",
+    "WOOD2__FOTO_20_wood_honey",
+    "WOOD2__FOTO_31_wood_honey",
+    "A04_F29_sol_kiris.001",
+    "A04_K01_kasa_ic_kaplama.002",
+    "A04_K01_kasa_ic_kaplama.003",
+    "A04_K01_kasa_ust_kaplama.001",
+    "A04_K02_kasa_ic_kaplama.002",
+    "A04_K02_kasa_ic_kaplama.003",
+    "A04_K02_kasa_ust_kaplama.001",
+    "A04_K03_kasa_ic_kaplama.002",
+    "A04_K03_kasa_ic_kaplama.003",
+    "A04_K03_kasa_ust_kaplama.001",
+    "A04_K04_kasa_ic_kaplama.002",
+    "A04_K04_kasa_ic_kaplama.003",
+    "A04_K04_kasa_ust_kaplama.001",
+    "A04_K05_kasa_ic_kaplama.002",
+    "A04_K05_kasa_ic_kaplama.003",
+    "A04_K05_kasa_ust_kaplama.001",
+    "A04_K06_kasa_ic_kaplama.002",
+    "A04_K06_kasa_ic_kaplama.003",
+    "A04_K06_kasa_ust_kaplama.001",
+    "A04_K07_kasa_ic_kaplama.002",
+    "A04_K07_kasa_ic_kaplama.003",
+    "A04_K07_kasa_ust_kaplama.001",
+    "A04_K08_kasa_ic_kaplama.002",
+    "A04_K08_kasa_ic_kaplama.003",
+    "A04_K08_kasa_ust_kaplama.001",
+    "A04_K09_kasa_ic_kaplama.002",
+    "A04_K09_kasa_ic_kaplama.003",
+    "A04_K09_kasa_ust_kaplama.001",
+    "A04_K10_kasa_ic_kaplama.002",
+    "A04_K10_kasa_ic_kaplama.003",
+    "A04_K10_kasa_ust_kaplama.001",
+    "A04_K11_kasa_ic_kaplama.002",
+    "A04_K11_kasa_ic_kaplama.003",
+    "A04_K11_kasa_ust_kaplama.001",
+    "A04_K12_kasa_ic_kaplama.002",
+    "A04_K12_kasa_ic_kaplama.003",
+    "A04_K12_kasa_ust_kaplama.001",
+    "A04_K13_kasa_ic_kaplama.002",
+    "A04_K13_kasa_ic_kaplama.003",
+    "A04_K13_kasa_ust_kaplama.001",
+    "A05_kartonpiyer_birlesik.001",
+    "A08_Cift_kasa.002",
+    "A08_Cift_kasa.003",
+    "A08_Cift_pervaz.004",
+    "A08_Cift_pervaz.005",
+    "A08_Cift_pervaz.001",
+    "A08_Cift_pervaz.002",
+    "A08_Cift_sag_alt.001",
+    "A08_Cift_sag_dikme.002",
+    "A08_Cift_sag_dikme.003",
+    "A08_Cift_sag_ust.001",
+    "A08_Cift_sol_alt.001",
+    "A08_Cift_sol_dikme.002",
+    "A08_Cift_sol_dikme.003",
+    "A08_Cift_sol_ust.001",
+    "A08_Cift_ust_kasa.001",
+    "A08_D16_X0_ayna.001",
+    "A08_D16_X0_dikme.002",
+    "A08_D16_X0_dikme.003",
+    "A08_D16_X0_ray.002",
+    "A08_D16_X0_ray.003",
+    "A08_D16_X1_dikme.002",
+    "A08_D16_X1_dikme.003",
+    "A08_D16_X1_ray.002",
+    "A08_D16_X1_ray.003",
+    "A08_D16_Y0_ayna.001",
+    "A08_D16_Y0_dikme.002",
+    "A08_D16_Y0_dikme.003",
+    "A08_D16_Y0_ray.002",
+    "A08_D16_Y0_ray.003",
+    "A08_D16_Y1_dikme.002",
+    "A08_D16_Y1_dikme.003",
+    "A08_D16_Y1_ray.002",
+    "A08_D16_Y1_ray.003",
+    "A08_F02_dolu_merdiven_alti.001",
+    "A09_F32_bordur_arka.001",
+    "A09_F32_bordur_sol.001",
+    "A09_F47_tek_duvar.001",
+    "M1_supurgelik_001.001",
+    "M1_supurgelik_002.001",
+    "M1_supurgelik_003.001",
+    "M1_supurgelik_004.001",
+    "M1_supurgelik_005.001",
+    "M1_supurgelik_006.001",
+    "M1_supurgelik_007.001",
+    "M1_supurgelik_008.001",
+    "M1_supurgelik_009.001",
+    "M1_supurgelik_010.001",
+    "M1_supurgelik_011.001",
+    "M1_supurgelik_012.001",
+    "M1_supurgelik_013.001",
+    "M1_supurgelik_014.001",
+    "M1_supurgelik_015.001",
+    "M1_supurgelik_016.001",
+    "M1_supurgelik_017.001",
+    "M1_supurgelik_018.001",
+    "M1_supurgelik_019.001",
+    "M1_supurgelik_020.001",
+    "M1_supurgelik_021.001",
+    "M1_supurgelik_022.001",
+    "M1_supurgelik_023.001",
+    "M1_supurgelik_024.001",
+    "M1_supurgelik_025.001",
+    "M1_supurgelik_026.001",
+    "M1_supurgelik_027.001",
+    "M1_supurgelik_028.001",
+    "M1_supurgelik_029.001",
+    "M1_supurgelik_030.001",
+    "M1_supurgelik_031.001",
+    "M1_supurgelik_032.001",
+    "M1_supurgelik_033.001",
+    "M1_supurgelik_034.001",
+    "M1_supurgelik_035.001",
+    "M1_supurgelik_036.001",
+    "M1_supurgelik_037.001",
+    "M1_supurgelik_038.001",
+    "M1_supurgelik_039.001",
+    "M1_supurgelik_040.001",
+    "M1_supurgelik_041.001",
+    "M1_supurgelik_042.001",
+    "M1_supurgelik_043.001",
+    "M1_supurgelik_044.001",
+    "M1_supurgelik_045.001",
+    "M1_supurgelik_046.001",
+    "M1_supurgelik_047.001",
+    "M1_supurgelik_048.001",
+    "M1_supurgelik_049.001",
+    "M1_supurgelik_050.001",
+    "M1_supurgelik_051.001",
+    "M1_supurgelik_052.001",
+    "M1_supurgelik_053.001",
+    "M1_supurgelik_054.001",
+    "M1_supurgelik_055.001",
+    "M1_supurgelik_056.001",
+    "M1_supurgelik_057.001",
+    "M1_supurgelik_058.001",
+    "M1_supurgelik_059.001",
+    "M1_supurgelik_060.001",
+    "M1_supurgelik_061.001",
+    "M1_supurgelik_062.001",
+    "M1_supurgelik_063.001",
+    "M1_supurgelik_064.001",
+    "M1_supurgelik_065.001",
+    "M1_supurgelik_066.001",
+    "M1_supurgelik_067.001",
+    "M1_supurgelik_068.001",
+    "M1_supurgelik_069.001",
+    "M1_supurgelik_070.001",
+    "M1_supurgelik_071.001",
+    "M1_supurgelik_072.001",
+    "M1_supurgelik_073.001",
+    "M1_supurgelik_074.001",
+    "M1_supurgelik_075.001",
+    "M1_supurgelik_076.001",
+    "M1_supurgelik_077.001",
+    "M1_supurgelik_078.001",
+    "M1_supurgelik_079.001",
+    "M1_supurgelik_080.001",
+    "M1_supurgelik_081.001",
+    "M1_supurgelik_082.001",
+    "M1_supurgelik_083.001",
+    "M1_supurgelik_084.001",
+    "M1_supurgelik_085.001",
+    "M1_supurgelik_086.001",
+    "M1_supurgelik_087.001",
+    "M1_supurgelik_088.001",
+    "M1_supurgelik_089.001",
+    "M1_supurgelik_090.001",
+    "M1_supurgelik_091.001",
+    "M1_supurgelik_092.001",
+    "M1_supurgelik_093.001",
+    "M1_supurgelik_094.001",
+    "M1_supurgelik_095.001",
+    "M1_supurgelik_096.001",
+    "M1_supurgelik_097.001",
+    "M1_supurgelik_098.001",
+    "M1_supurgelik_099.001",
+    "M1_supurgelik_100.001",
+    "M1_supurgelik_101.001",
+    "M1_supurgelik_102.001",
+    "M1_supurgelik_103.001",
+    "M1_supurgelik_104.001",
+    "M1_supurgelik_105.001",
+    "M1_supurgelik_106.001",
+    "M1_supurgelik_107.001",
+    "M1_supurgelik_108.001",
+    "M1_supurgelik_109.001",
+    "M1_supurgelik_110.001",
+    "M1_supurgelik_111.001",
+    "M1_supurgelik_112.001",
+    "M1_supurgelik_113.001",
+    "M1_supurgelik_114.001",
+    "M1_supurgelik_115.001",
+    "M1_supurgelik_116.001",
+    "M1_supurgelik_117.001",
+    "M1_supurgelik_118.001",
+    "M1_supurgelik_119.001",
+    "M1_supurgelik_120.001",
+    "M1_supurgelik_121.001",
+    "M1_supurgelik_122.001",
+    "M1_supurgelik_123.001",
+    "M1_supurgelik_124.001",
+    "M1_supurgelik_125.001",
+    "M1_supurgelik_126.001",
+    "M1_supurgelik_127.001",
+    "M1_supurgelik_128.001",
+    "M1_supurgelik_129.001",
+    "M1_supurgelik_130.001",
+    "M1_supurgelik_131.001",
+    "M1_supurgelik_132.001",
+    "M1_supurgelik_133.001",
+    "M1_supurgelik_134.001",
+    "M1_supurgelik_135.001",
+    "M1_supurgelik_136.001",
+    "M1_supurgelik_137.001",
+    "M1_supurgelik_138.001",
+    "M1_supurgelik_139.001",
+    "M1_supurgelik_140.001",
+    "M1_supurgelik_141.001",
+    "M1_supurgelik_142.001",
+    "M1_supurgelik_143.001",
+    "M1_supurgelik_144.001",
+    "M1_supurgelik_145.001",
+    "M1_supurgelik_146.001",
+    "M1_supurgelik_147.001",
+    "M1_supurgelik_148.001",
+    "M1_supurgelik_149.001",
+    "M1_supurgelik_150.001",
+    "M1_supurgelik_151.001",
+    "M1_supurgelik_152.001",
+    "M1_supurgelik_153.001",
+    "M1_supurgelik_154.001",
+    "M1_supurgelik_155.001",
+    "M1_supurgelik_156.001",
+    "M1_supurgelik_157.001",
+    "M1_supurgelik_158.001",
+    "M1_supurgelik_159.001",
+    "M1_supurgelik_160.001",
+    "M1_supurgelik_161.001",
+    "M1_supurgelik_162.001",
+    "M1_supurgelik_163.001",
+    "M1_supurgelik_164.001",
+    "M1_supurgelik_165.001",
+    "M1_supurgelik_166.001",
+    "M1_supurgelik_167.001",
+    "M1_supurgelik_168.001",
+    "M1_supurgelik_169.001",
+    "M1_supurgelik_170.001",
+    "M1_supurgelik_171.001",
+    "M1_supurgelik_172.001",
+    "M1_supurgelik_173.001",
+    "M1_supurgelik_174.001",
+    "M1_supurgelik_175.001",
+    "M1_supurgelik_176.001",
+    "M1_supurgelik_177.001",
+    "M1_supurgelik_178.001",
+    "M1_supurgelik_179.001",
+    "M1_supurgelik_180.001",
+    "M1_supurgelik_181.001",
+    "M1_supurgelik_182.001",
+    "M1_supurgelik_183.001",
+    "M1_supurgelik_184.001",
+    "M1_supurgelik_185.001",
+    "M1_supurgelik_186.001",
+    "M1_supurgelik_187.001",
+    "M1_supurgelik_188.001",
+    "M1_supurgelik_189.001",
+    "M1_supurgelik_190.001",
+    "M1_supurgelik_191.001",
+    "M1_supurgelik_192.001",
+    "M1_supurgelik_193.001",
+    "M1_supurgelik_194.001",
+    "M1_supurgelik_195.001",
+    "M1_supurgelik_196.001",
+    "M1_supurgelik_197.001",
+    "M1_supurgelik_198.001",
+    "M1_supurgelik_199.001",
+    "M1_supurgelik_200.001",
+    "M1_supurgelik_201.001",
+    "M1_supurgelik_202.001",
+    "M1_supurgelik_203.001",
+    "M1_supurgelik_204.001",
+    "M1_supurgelik_205.001",
+    "M1_supurgelik_206.001",
+    "M1_supurgelik_207.001",
+    "M1_supurgelik_208.001",
+    "M1_supurgelik_209.001",
+    "M1_supurgelik_210.001",
+    "M1_supurgelik_211.001",
+    "M1_supurgelik_212.001",
+    "M1_supurgelik_213.001",
+    "M1_supurgelik_214.001",
+    "M1_supurgelik_215.001",
+    "M1_supurgelik_216.001",
+    "M1_supurgelik_217.001",
+    "M1_supurgelik_218.001",
+    "M1_supurgelik_219.001",
+    "M1_supurgelik_220.001",
+    "M1_supurgelik_221.001",
+    "M1_supurgelik_222.001",
+    "M1_supurgelik_223.001",
+    "M1_supurgelik_224.001",
+    "M1_supurgelik_225.001",
+    "M1_supurgelik_226.001",
+    "M1_supurgelik_227.001",
+    "M1_supurgelik_228.001",
+    "M1_supurgelik_229.001",
+    "M1_supurgelik_230.001",
+    "M1_supurgelik_231.001",
+    "M1_supurgelik_232.001",
+    "M1_supurgelik_233.001",
+    "M1_supurgelik_234.001",
+    "M1_supurgelik_235.001",
+    "M1_supurgelik_236.001",
+    "M1_supurgelik_237.001",
+    "M1_supurgelik_238.001",
+    "M1_supurgelik_239.001",
+    "M1_supurgelik_240.001",
+    "M1_supurgelik_241.001",
+    "M1_supurgelik_242.001",
+    "M1_supurgelik_243.001",
+    "M1_supurgelik_244.001",
+    "M1_supurgelik_245.001",
+    "M1_supurgelik_246.001",
+    "M1_supurgelik_247.001",
+    "M1_supurgelik_248.001",
+    "M1_supurgelik_249.001",
+    "M1_supurgelik_250.001",
+    "M1_supurgelik_251.001",
+    "M1_supurgelik_252.001",
+    "M1_supurgelik_253.001",
+    "M1_supurgelik_254.001",
+    "M1_supurgelik_255.001",
+    "M1_supurgelik_256.001",
+    "M1_supurgelik_257.001",
+    "M1_supurgelik_258.001",
+    "M1_supurgelik_259.001",
+    "M1_supurgelik_260.001",
+    "M1_supurgelik_261.001",
+    "M1_supurgelik_262.001",
+    "M1_supurgelik_263.001",
+    "M1_supurgelik_264.001",
+    "M1_supurgelik_265.001",
+    "M1_supurgelik_266.001",
+    "M1_supurgelik_267.001",
+    "M1_supurgelik_268.001",
+    "M1_supurgelik_269.001",
+    "M1_supurgelik_270.001",
+    "M1_supurgelik_271.001",
+    "M1_supurgelik_272.001",
+    "M1_supurgelik_273.001",
+    "M1_supurgelik_274.001",
+    "M1_supurgelik_275.001",
+    "M1_supurgelik_276.001",
+    "M1_supurgelik_277.001",
+    "M1_supurgelik_278.001",
+    "M1_supurgelik_279.001",
+    "M1_supurgelik_280.001",
+    "M1_supurgelik_281.001",
+    "M1_supurgelik_282.001",
+    "M1_supurgelik_283.001",
+    "M1_supurgelik_284.001",
+    "M1_supurgelik_285.001",
+    "M1_supurgelik_286.001",
+    "M1_supurgelik_287.001",
+    "M1_supurgelik_288.001",
+    "M1_supurgelik_289.001",
+    "M1_supurgelik_290.001",
+    "M1_supurgelik_291.001",
+    "M1_supurgelik_292.001",
+    "M1_supurgelik_293.001",
+    "M1_supurgelik_294.001",
+    "M2_K0_0_beyaz_altyapi.001",
+    "M2_K0_1_beyaz_altyapi.001",
+    "M2_K0_sahanlik_alti.001",
+    "M2_K1_0_beyaz_altyapi.001",
+    "M2_K1_1_beyaz_altyapi.001",
+    "M2_K1_sahanlik_alti.001",
+    "M2_K2_0_beyaz_altyapi.001",
+    "M2_K2_1_beyaz_altyapi.001",
+    "M2_K2_sahanlik_alti.001",
+    "M3_01_dik_profil.012",
+    "M3_01_dik_profil.013",
+    "M3_01_dik_profil.001",
+    "M3_01_dik_profil.002",
+    "M3_01_dik_profil.003",
+    "M3_01_dik_profil.004",
+    "M3_01_dik_profil.005",
+    "M3_01_dik_profil.006",
+    "M3_01_dik_profil.007",
+    "M3_01_dik_profil.008",
+    "M3_01_dik_profil.009",
+    "M3_01_dik_profil.010",
+    "M3_01_esik_doseme.001",
+    "M3_01_gobek.006",
+    "M3_01_gobek.007",
+    "M3_01_gobek.001",
+    "M3_01_gobek.002",
+    "M3_01_gobek.003",
+    "M3_01_gobek.004",
+    "M3_01_kanat.001",
+    "M3_01_kasa.002",
+    "M3_01_kasa.003",
+    "M3_01_pervaz.004",
+    "M3_01_pervaz.005",
+    "M3_01_pervaz.001",
+    "M3_01_pervaz.002",
+    "M3_01_ust_kasa.001",
+    "M3_01_ust_pervaz.002",
+    "M3_01_ust_pervaz.003",
+    "M3_01_yatay_profil.012",
+    "M3_01_yatay_profil.013",
+    "M3_01_yatay_profil.001",
+    "M3_01_yatay_profil.002",
+    "M3_01_yatay_profil.003",
+    "M3_01_yatay_profil.004",
+    "M3_01_yatay_profil.005",
+    "M3_01_yatay_profil.006",
+    "M3_01_yatay_profil.007",
+    "M3_01_yatay_profil.008",
+    "M3_01_yatay_profil.009",
+    "M3_01_yatay_profil.010",
+    "M3_02_dik_profil.024",
+    "M3_02_dik_profil.025",
+    "M3_02_dik_profil.001",
+    "M3_02_dik_profil.002",
+    "M3_02_dik_profil.003",
+    "M3_02_dik_profil.004",
+    "M3_02_dik_profil.005",
+    "M3_02_dik_profil.006",
+    "M3_02_dik_profil.007",
+    "M3_02_dik_profil.008",
+    "M3_02_dik_profil.009",
+    "M3_02_dik_profil.010",
+    "M3_02_dik_profil.011",
+    "M3_02_dik_profil.012",
+    "M3_02_dik_profil.013",
+    "M3_02_dik_profil.014",
+    "M3_02_dik_profil.015",
+    "M3_02_dik_profil.016",
+    "M3_02_dik_profil.017",
+    "M3_02_dik_profil.018",
+    "M3_02_dik_profil.019",
+    "M3_02_dik_profil.020",
+    "M3_02_dik_profil.021",
+    "M3_02_dik_profil.022",
+    "M3_02_esik_doseme.001",
+    "M3_02_gobek.012",
+    "M3_02_gobek.013",
+    "M3_02_gobek.001",
+    "M3_02_gobek.002",
+    "M3_02_gobek.003",
+    "M3_02_gobek.004",
+    "M3_02_gobek.005",
+    "M3_02_gobek.006",
+    "M3_02_gobek.007",
+    "M3_02_gobek.008",
+    "M3_02_gobek.009",
+    "M3_02_gobek.010",
+    "M3_02_kanat.001",
+    "M3_02_kasa.002",
+    "M3_02_kasa.003",
+    "M3_02_pervaz.004",
+    "M3_02_pervaz.005",
+    "M3_02_pervaz.001",
+    "M3_02_pervaz.002",
+    "M3_02_ust_kasa.001",
+    "M3_02_ust_pervaz.002",
+    "M3_02_ust_pervaz.003",
+    "M3_02_yatay_profil.024",
+    "M3_02_yatay_profil.025",
+    "M3_02_yatay_profil.001",
+    "M3_02_yatay_profil.002",
+    "M3_02_yatay_profil.003",
+    "M3_02_yatay_profil.004",
+    "M3_02_yatay_profil.005",
+    "M3_02_yatay_profil.006",
+    "M3_02_yatay_profil.007",
+    "M3_02_yatay_profil.008",
+    "M3_02_yatay_profil.009",
+    "M3_02_yatay_profil.010",
+    "M3_02_yatay_profil.011",
+    "M3_02_yatay_profil.012",
+    "M3_02_yatay_profil.013",
+    "M3_02_yatay_profil.014",
+    "M3_02_yatay_profil.015",
+    "M3_02_yatay_profil.016",
+    "M3_02_yatay_profil.017",
+    "M3_02_yatay_profil.018",
+    "M3_02_yatay_profil.019",
+    "M3_02_yatay_profil.020",
+    "M3_02_yatay_profil.021",
+    "M3_02_yatay_profil.022",
+    "M3_03_dik_profil.024",
+    "M3_03_dik_profil.025",
+    "M3_03_dik_profil.001",
+    "M3_03_dik_profil.002",
+    "M3_03_dik_profil.003",
+    "M3_03_dik_profil.004",
+    "M3_03_dik_profil.005",
+    "M3_03_dik_profil.006",
+    "M3_03_dik_profil.007",
+    "M3_03_dik_profil.008",
+    "M3_03_dik_profil.009",
+    "M3_03_dik_profil.010",
+    "M3_03_dik_profil.011",
+    "M3_03_dik_profil.012",
+    "M3_03_dik_profil.013",
+    "M3_03_dik_profil.014",
+    "M3_03_dik_profil.015",
+    "M3_03_dik_profil.016",
+    "M3_03_dik_profil.017",
+    "M3_03_dik_profil.018",
+    "M3_03_dik_profil.019",
+    "M3_03_dik_profil.020",
+    "M3_03_dik_profil.021",
+    "M3_03_dik_profil.022",
+    "M3_03_esik_doseme.001",
+    "M3_03_gobek.012",
+    "M3_03_gobek.013",
+    "M3_03_gobek.001",
+    "M3_03_gobek.002",
+    "M3_03_gobek.003",
+    "M3_03_gobek.004",
+    "M3_03_gobek.005",
+    "M3_03_gobek.006",
+    "M3_03_gobek.007",
+    "M3_03_gobek.008",
+    "M3_03_gobek.009",
+    "M3_03_gobek.010",
+    "M3_03_kanat.001",
+    "M3_03_kasa.002",
+    "M3_03_kasa.003",
+    "M3_03_pervaz.004",
+    "M3_03_pervaz.005",
+    "M3_03_pervaz.001",
+    "M3_03_pervaz.002",
+    "M3_03_ust_kasa.001",
+    "M3_03_ust_pervaz.002",
+    "M3_03_ust_pervaz.003",
+    "M3_03_yatay_profil.024",
+    "M3_03_yatay_profil.025",
+    "M3_03_yatay_profil.001",
+    "M3_03_yatay_profil.002",
+    "M3_03_yatay_profil.003",
+    "M3_03_yatay_profil.004",
+    "M3_03_yatay_profil.005",
+    "M3_03_yatay_profil.006",
+    "M3_03_yatay_profil.007",
+    "M3_03_yatay_profil.008",
+    "M3_03_yatay_profil.009",
+    "M3_03_yatay_profil.010",
+    "M3_03_yatay_profil.011",
+    "M3_03_yatay_profil.012",
+    "M3_03_yatay_profil.013",
+    "M3_03_yatay_profil.014",
+    "M3_03_yatay_profil.015",
+    "M3_03_yatay_profil.016",
+    "M3_03_yatay_profil.017",
+    "M3_03_yatay_profil.018",
+    "M3_03_yatay_profil.019",
+    "M3_03_yatay_profil.020",
+    "M3_03_yatay_profil.021",
+    "M3_03_yatay_profil.022",
+    "M3_04_dik_profil.024",
+    "M3_04_dik_profil.025",
+    "M3_04_dik_profil.001",
+    "M3_04_dik_profil.002",
+    "M3_04_dik_profil.003",
+    "M3_04_dik_profil.004",
+    "M3_04_dik_profil.005",
+    "M3_04_dik_profil.006",
+    "M3_04_dik_profil.007",
+    "M3_04_dik_profil.008",
+    "M3_04_dik_profil.009",
+    "M3_04_dik_profil.010",
+    "M3_04_dik_profil.011",
+    "M3_04_dik_profil.012",
+    "M3_04_dik_profil.013",
+    "M3_04_dik_profil.014",
+    "M3_04_dik_profil.015",
+    "M3_04_dik_profil.016",
+    "M3_04_dik_profil.017",
+    "M3_04_dik_profil.018",
+    "M3_04_dik_profil.019",
+    "M3_04_dik_profil.020",
+    "M3_04_dik_profil.021",
+    "M3_04_dik_profil.022",
+    "M3_04_esik_doseme.001",
+    "M3_04_gobek.012",
+    "M3_04_gobek.013",
+    "M3_04_gobek.001",
+    "M3_04_gobek.002",
+    "M3_04_gobek.003",
+    "M3_04_gobek.004",
+    "M3_04_gobek.005",
+    "M3_04_gobek.006",
+    "M3_04_gobek.007",
+    "M3_04_gobek.008",
+    "M3_04_gobek.009",
+    "M3_04_gobek.010",
+    "M3_04_kanat.001",
+    "M3_04_kasa.002",
+    "M3_04_kasa.003",
+    "M3_04_pervaz.004",
+    "M3_04_pervaz.005",
+    "M3_04_pervaz.001",
+    "M3_04_pervaz.002",
+    "M3_04_ust_kasa.001",
+    "M3_04_ust_pervaz.002",
+    "M3_04_ust_pervaz.003",
+    "M3_04_yatay_profil.024",
+    "M3_04_yatay_profil.025",
+    "M3_04_yatay_profil.001",
+    "M3_04_yatay_profil.002",
+    "M3_04_yatay_profil.003",
+    "M3_04_yatay_profil.004",
+    "M3_04_yatay_profil.005",
+    "M3_04_yatay_profil.006",
+    "M3_04_yatay_profil.007",
+    "M3_04_yatay_profil.008",
+    "M3_04_yatay_profil.009",
+    "M3_04_yatay_profil.010",
+    "M3_04_yatay_profil.011",
+    "M3_04_yatay_profil.012",
+    "M3_04_yatay_profil.013",
+    "M3_04_yatay_profil.014",
+    "M3_04_yatay_profil.015",
+    "M3_04_yatay_profil.016",
+    "M3_04_yatay_profil.017",
+    "M3_04_yatay_profil.018",
+    "M3_04_yatay_profil.019",
+    "M3_04_yatay_profil.020",
+    "M3_04_yatay_profil.021",
+    "M3_04_yatay_profil.022",
+    "M3_05_dik_profil.024",
+    "M3_05_dik_profil.025",
+    "M3_05_dik_profil.001",
+    "M3_05_dik_profil.002",
+    "M3_05_dik_profil.003",
+    "M3_05_dik_profil.004",
+    "M3_05_dik_profil.005",
+    "M3_05_dik_profil.006",
+    "M3_05_dik_profil.007",
+    "M3_05_dik_profil.008",
+    "M3_05_dik_profil.009",
+    "M3_05_dik_profil.010",
+    "M3_05_dik_profil.011",
+    "M3_05_dik_profil.012",
+    "M3_05_dik_profil.013",
+    "M3_05_dik_profil.014",
+    "M3_05_dik_profil.015",
+    "M3_05_dik_profil.016",
+    "M3_05_dik_profil.017",
+    "M3_05_dik_profil.018",
+    "M3_05_dik_profil.019",
+    "M3_05_dik_profil.020",
+    "M3_05_dik_profil.021",
+    "M3_05_dik_profil.022",
+    "M3_05_esik_doseme.001",
+    "M3_05_gobek.012",
+    "M3_05_gobek.013",
+    "M3_05_gobek.001",
+    "M3_05_gobek.002",
+    "M3_05_gobek.003",
+    "M3_05_gobek.004",
+    "M3_05_gobek.005",
+    "M3_05_gobek.006",
+    "M3_05_gobek.007",
+    "M3_05_gobek.008",
+    "M3_05_gobek.009",
+    "M3_05_gobek.010",
+    "M3_05_kanat.001",
+    "M3_05_kasa.002",
+    "M3_05_kasa.003",
+    "M3_05_kulp.002",
+    "M3_05_kulp.003",
+    "M3_05_pervaz.004",
+    "M3_05_pervaz.005",
+    "M3_05_pervaz.001",
+    "M3_05_pervaz.002",
+    "M3_05_ust_kasa.001",
+    "M3_05_ust_pervaz.002",
+    "M3_05_ust_pervaz.003",
+    "M3_05_yatay_profil.024",
+    "M3_05_yatay_profil.025",
+    "M3_05_yatay_profil.001",
+    "M3_05_yatay_profil.002",
+    "M3_05_yatay_profil.003",
+    "M3_05_yatay_profil.004",
+    "M3_05_yatay_profil.005",
+    "M3_05_yatay_profil.006",
+    "M3_05_yatay_profil.007",
+    "M3_05_yatay_profil.008",
+    "M3_05_yatay_profil.009",
+    "M3_05_yatay_profil.010",
+    "M3_05_yatay_profil.011",
+    "M3_05_yatay_profil.012",
+    "M3_05_yatay_profil.013",
+    "M3_05_yatay_profil.014",
+    "M3_05_yatay_profil.015",
+    "M3_05_yatay_profil.016",
+    "M3_05_yatay_profil.017",
+    "M3_05_yatay_profil.018",
+    "M3_05_yatay_profil.019",
+    "M3_05_yatay_profil.020",
+    "M3_05_yatay_profil.021",
+    "M3_05_yatay_profil.022",
+    "M3_06_dik_profil.024",
+    "M3_06_dik_profil.025",
+    "M3_06_dik_profil.001",
+    "M3_06_dik_profil.002",
+    "M3_06_dik_profil.003",
+    "M3_06_dik_profil.004",
+    "M3_06_dik_profil.005",
+    "M3_06_dik_profil.006",
+    "M3_06_dik_profil.007",
+    "M3_06_dik_profil.008",
+    "M3_06_dik_profil.009",
+    "M3_06_dik_profil.010",
+    "M3_06_dik_profil.011",
+    "M3_06_dik_profil.012",
+    "M3_06_dik_profil.013",
+    "M3_06_dik_profil.014",
+    "M3_06_dik_profil.015",
+    "M3_06_dik_profil.016",
+    "M3_06_dik_profil.017",
+    "M3_06_dik_profil.018",
+    "M3_06_dik_profil.019",
+    "M3_06_dik_profil.020",
+    "M3_06_dik_profil.021",
+    "M3_06_dik_profil.022",
+    "M3_06_esik_doseme.001",
+    "M3_06_gobek.012",
+    "M3_06_gobek.013",
+    "M3_06_gobek.001",
+    "M3_06_gobek.002",
+    "M3_06_gobek.003",
+    "M3_06_gobek.004",
+    "M3_06_gobek.005",
+    "M3_06_gobek.006",
+    "M3_06_gobek.007",
+    "M3_06_gobek.008",
+    "M3_06_gobek.009",
+    "M3_06_gobek.010",
+    "M3_06_kanat.001",
+    "M3_06_kasa.002",
+    "M3_06_kasa.003",
+    "M3_06_pervaz.004",
+    "M3_06_pervaz.005",
+    "M3_06_pervaz.001",
+    "M3_06_pervaz.002",
+    "M3_06_ust_kasa.001",
+    "M3_06_ust_pervaz.002",
+    "M3_06_ust_pervaz.003",
+    "M3_06_yatay_profil.024",
+    "M3_06_yatay_profil.025",
+    "M3_06_yatay_profil.001",
+    "M3_06_yatay_profil.002",
+    "M3_06_yatay_profil.003",
+    "M3_06_yatay_profil.004",
+    "M3_06_yatay_profil.005",
+    "M3_06_yatay_profil.006",
+    "M3_06_yatay_profil.007",
+    "M3_06_yatay_profil.008",
+    "M3_06_yatay_profil.009",
+    "M3_06_yatay_profil.010",
+    "M3_06_yatay_profil.011",
+    "M3_06_yatay_profil.012",
+    "M3_06_yatay_profil.013",
+    "M3_06_yatay_profil.014",
+    "M3_06_yatay_profil.015",
+    "M3_06_yatay_profil.016",
+    "M3_06_yatay_profil.017",
+    "M3_06_yatay_profil.018",
+    "M3_06_yatay_profil.019",
+    "M3_06_yatay_profil.020",
+    "M3_06_yatay_profil.021",
+    "M3_06_yatay_profil.022",
+    "M3_07_dik_profil.024",
+    "M3_07_dik_profil.025",
+    "M3_07_dik_profil.001",
+    "M3_07_dik_profil.002",
+    "M3_07_dik_profil.003",
+    "M3_07_dik_profil.004",
+    "M3_07_dik_profil.005",
+    "M3_07_dik_profil.006",
+    "M3_07_dik_profil.007",
+    "M3_07_dik_profil.008",
+    "M3_07_dik_profil.009",
+    "M3_07_dik_profil.010",
+    "M3_07_dik_profil.011",
+    "M3_07_dik_profil.012",
+    "M3_07_dik_profil.013",
+    "M3_07_dik_profil.014",
+    "M3_07_dik_profil.015",
+    "M3_07_dik_profil.016",
+    "M3_07_dik_profil.017",
+    "M3_07_dik_profil.018",
+    "M3_07_dik_profil.019",
+    "M3_07_dik_profil.020",
+    "M3_07_dik_profil.021",
+    "M3_07_dik_profil.022",
+    "M3_07_esik_doseme.001",
+    "M3_07_gobek.012",
+    "M3_07_gobek.013",
+    "M3_07_gobek.001",
+    "M3_07_gobek.002",
+    "M3_07_gobek.003",
+    "M3_07_gobek.004",
+    "M3_07_gobek.005",
+    "M3_07_gobek.006",
+    "M3_07_gobek.007",
+    "M3_07_gobek.008",
+    "M3_07_gobek.009",
+    "M3_07_gobek.010",
+    "M3_07_kanat.001",
+    "M3_07_kasa.002",
+    "M3_07_kasa.003",
+    "M3_07_pervaz.004",
+    "M3_07_pervaz.005",
+    "M3_07_pervaz.001",
+    "M3_07_pervaz.002",
+    "M3_07_ust_kasa.001",
+    "M3_07_ust_pervaz.002",
+    "M3_07_ust_pervaz.003",
+    "M3_07_yatay_profil.024",
+    "M3_07_yatay_profil.025",
+    "M3_07_yatay_profil.001",
+    "M3_07_yatay_profil.002",
+    "M3_07_yatay_profil.003",
+    "M3_07_yatay_profil.004",
+    "M3_07_yatay_profil.005",
+    "M3_07_yatay_profil.006",
+    "M3_07_yatay_profil.007",
+    "M3_07_yatay_profil.008",
+    "M3_07_yatay_profil.009",
+    "M3_07_yatay_profil.010",
+    "M3_07_yatay_profil.011",
+    "M3_07_yatay_profil.012",
+    "M3_07_yatay_profil.013",
+    "M3_07_yatay_profil.014",
+    "M3_07_yatay_profil.015",
+    "M3_07_yatay_profil.016",
+    "M3_07_yatay_profil.017",
+    "M3_07_yatay_profil.018",
+    "M3_07_yatay_profil.019",
+    "M3_07_yatay_profil.020",
+    "M3_07_yatay_profil.021",
+    "M3_07_yatay_profil.022",
+    "M3_08_dik_profil.024",
+    "M3_08_dik_profil.025",
+    "M3_08_dik_profil.001",
+    "M3_08_dik_profil.002",
+    "M3_08_dik_profil.003",
+    "M3_08_dik_profil.004",
+    "M3_08_dik_profil.005",
+    "M3_08_dik_profil.006",
+    "M3_08_dik_profil.007",
+    "M3_08_dik_profil.008",
+    "M3_08_dik_profil.009",
+    "M3_08_dik_profil.010",
+    "M3_08_dik_profil.011",
+    "M3_08_dik_profil.012",
+    "M3_08_dik_profil.013",
+    "M3_08_dik_profil.014",
+    "M3_08_dik_profil.015",
+    "M3_08_dik_profil.016",
+    "M3_08_dik_profil.017",
+    "M3_08_dik_profil.018",
+    "M3_08_dik_profil.019",
+    "M3_08_dik_profil.020",
+    "M3_08_dik_profil.021",
+    "M3_08_dik_profil.022",
+    "M3_08_esik_doseme.001",
+    "M3_08_gobek.012",
+    "M3_08_gobek.013",
+    "M3_08_gobek.001",
+    "M3_08_gobek.002",
+    "M3_08_gobek.003",
+    "M3_08_gobek.004",
+    "M3_08_gobek.005",
+    "M3_08_gobek.006",
+    "M3_08_gobek.007",
+    "M3_08_gobek.008",
+    "M3_08_gobek.009",
+    "M3_08_gobek.010",
+    "M3_08_kanat.001",
+    "M3_08_kasa.002",
+    "M3_08_kasa.003",
+    "M3_08_pervaz.004",
+    "M3_08_pervaz.005",
+    "M3_08_pervaz.001",
+    "M3_08_pervaz.002",
+    "M3_08_ust_kasa.001",
+    "M3_08_ust_pervaz.002",
+    "M3_08_ust_pervaz.003",
+    "M3_08_yatay_profil.024",
+    "M3_08_yatay_profil.025",
+    "M3_08_yatay_profil.001",
+    "M3_08_yatay_profil.002",
+    "M3_08_yatay_profil.003",
+    "M3_08_yatay_profil.004",
+    "M3_08_yatay_profil.005",
+    "M3_08_yatay_profil.006",
+    "M3_08_yatay_profil.007",
+    "M3_08_yatay_profil.008",
+    "M3_08_yatay_profil.009",
+    "M3_08_yatay_profil.010",
+    "M3_08_yatay_profil.011",
+    "M3_08_yatay_profil.012",
+    "M3_08_yatay_profil.013",
+    "M3_08_yatay_profil.014",
+    "M3_08_yatay_profil.015",
+    "M3_08_yatay_profil.016",
+    "M3_08_yatay_profil.017",
+    "M3_08_yatay_profil.018",
+    "M3_08_yatay_profil.019",
+    "M3_08_yatay_profil.020",
+    "M3_08_yatay_profil.021",
+    "M3_08_yatay_profil.022",
+    "M3_09_dik_profil.024",
+    "M3_09_dik_profil.025",
+    "M3_09_dik_profil.001",
+    "M3_09_dik_profil.002",
+    "M3_09_dik_profil.003",
+    "M3_09_dik_profil.004",
+    "M3_09_dik_profil.005",
+    "M3_09_dik_profil.006",
+    "M3_09_dik_profil.007",
+    "M3_09_dik_profil.008",
+    "M3_09_dik_profil.009",
+    "M3_09_dik_profil.010",
+    "M3_09_dik_profil.011",
+    "M3_09_dik_profil.012",
+    "M3_09_dik_profil.013",
+    "M3_09_dik_profil.014",
+    "M3_09_dik_profil.015",
+    "M3_09_dik_profil.016",
+    "M3_09_dik_profil.017",
+    "M3_09_dik_profil.018",
+    "M3_09_dik_profil.019",
+    "M3_09_dik_profil.020",
+    "M3_09_dik_profil.021",
+    "M3_09_dik_profil.022",
+    "M3_09_gobek.012",
+    "M3_09_gobek.013",
+    "M3_09_gobek.001",
+    "M3_09_gobek.002",
+    "M3_09_gobek.003",
+    "M3_09_gobek.004",
+    "M3_09_gobek.005",
+    "M3_09_gobek.006",
+    "M3_09_gobek.007",
+    "M3_09_gobek.008",
+    "M3_09_gobek.009",
+    "M3_09_gobek.010",
+    "M3_09_kanat.001",
+    "M3_09_kasa.002",
+    "M3_09_kasa.003",
+    "M3_09_pervaz.004",
+    "M3_09_pervaz.005",
+    "M3_09_pervaz.001",
+    "M3_09_pervaz.002",
+    "M3_09_ust_kasa.001",
+    "M3_09_ust_pervaz.002",
+    "M3_09_ust_pervaz.003",
+    "M3_09_yatay_profil.024",
+    "M3_09_yatay_profil.025",
+    "M3_09_yatay_profil.001",
+    "M3_09_yatay_profil.002",
+    "M3_09_yatay_profil.003",
+    "M3_09_yatay_profil.004",
+    "M3_09_yatay_profil.005",
+    "M3_09_yatay_profil.006",
+    "M3_09_yatay_profil.007",
+    "M3_09_yatay_profil.008",
+    "M3_09_yatay_profil.009",
+    "M3_09_yatay_profil.010",
+    "M3_09_yatay_profil.011",
+    "M3_09_yatay_profil.012",
+    "M3_09_yatay_profil.013",
+    "M3_09_yatay_profil.014",
+    "M3_09_yatay_profil.015",
+    "M3_09_yatay_profil.016",
+    "M3_09_yatay_profil.017",
+    "M3_09_yatay_profil.018",
+    "M3_09_yatay_profil.019",
+    "M3_09_yatay_profil.020",
+    "M3_09_yatay_profil.021",
+    "M3_09_yatay_profil.022",
+    "M3_10_dik_profil.024",
+    "M3_10_dik_profil.025",
+    "M3_10_dik_profil.001",
+    "M3_10_dik_profil.002",
+    "M3_10_dik_profil.003",
+    "M3_10_dik_profil.004",
+    "M3_10_dik_profil.005",
+    "M3_10_dik_profil.006",
+    "M3_10_dik_profil.007",
+    "M3_10_dik_profil.008",
+    "M3_10_dik_profil.009",
+    "M3_10_dik_profil.010",
+    "M3_10_dik_profil.011",
+    "M3_10_dik_profil.012",
+    "M3_10_dik_profil.013",
+    "M3_10_dik_profil.014",
+    "M3_10_dik_profil.015",
+    "M3_10_dik_profil.016",
+    "M3_10_dik_profil.017",
+    "M3_10_dik_profil.018",
+    "M3_10_dik_profil.019",
+    "M3_10_dik_profil.020",
+    "M3_10_dik_profil.021",
+    "M3_10_dik_profil.022",
+    "M3_10_gobek.012",
+    "M3_10_gobek.013",
+    "M3_10_gobek.001",
+    "M3_10_gobek.002",
+    "M3_10_gobek.003",
+    "M3_10_gobek.004",
+    "M3_10_gobek.005",
+    "M3_10_gobek.006",
+    "M3_10_gobek.007",
+    "M3_10_gobek.008",
+    "M3_10_gobek.009",
+    "M3_10_gobek.010",
+    "M3_10_kanat.001",
+    "M3_10_kasa.002",
+    "M3_10_kasa.003",
+    "M3_10_pervaz.004",
+    "M3_10_pervaz.005",
+    "M3_10_pervaz.001",
+    "M3_10_pervaz.002",
+    "M3_10_ust_kasa.001",
+    "M3_10_ust_pervaz.002",
+    "M3_10_ust_pervaz.003",
+    "M3_10_yatay_profil.024",
+    "M3_10_yatay_profil.025",
+    "M3_10_yatay_profil.001",
+    "M3_10_yatay_profil.002",
+    "M3_10_yatay_profil.003",
+    "M3_10_yatay_profil.004",
+    "M3_10_yatay_profil.005",
+    "M3_10_yatay_profil.006",
+    "M3_10_yatay_profil.007",
+    "M3_10_yatay_profil.008",
+    "M3_10_yatay_profil.009",
+    "M3_10_yatay_profil.010",
+    "M3_10_yatay_profil.011",
+    "M3_10_yatay_profil.012",
+    "M3_10_yatay_profil.013",
+    "M3_10_yatay_profil.014",
+    "M3_10_yatay_profil.015",
+    "M3_10_yatay_profil.016",
+    "M3_10_yatay_profil.017",
+    "M3_10_yatay_profil.018",
+    "M3_10_yatay_profil.019",
+    "M3_10_yatay_profil.020",
+    "M3_10_yatay_profil.021",
+    "M3_10_yatay_profil.022",
+    "M3_11_kanat.001",
+    "M3_11_kasa.002",
+    "M3_11_kasa.003",
+    "M3_11_kulp.002",
+    "M3_11_kulp.003",
+    "M3_11_pervaz.004",
+    "M3_11_pervaz.005",
+    "M3_11_pervaz.001",
+    "M3_11_pervaz.002",
+    "M3_11_ust_kasa.001",
+    "M3_11_ust_pervaz.002",
+    "M3_11_ust_pervaz.003",
+    "M3_12_dik_profil.024",
+    "M3_12_dik_profil.025",
+    "M3_12_dik_profil.001",
+    "M3_12_dik_profil.002",
+    "M3_12_dik_profil.003",
+    "M3_12_dik_profil.004",
+    "M3_12_dik_profil.005",
+    "M3_12_dik_profil.006",
+    "M3_12_dik_profil.007",
+    "M3_12_dik_profil.008",
+    "M3_12_dik_profil.009",
+    "M3_12_dik_profil.010",
+    "M3_12_dik_profil.011",
+    "M3_12_dik_profil.012",
+    "M3_12_dik_profil.013",
+    "M3_12_dik_profil.014",
+    "M3_12_dik_profil.015",
+    "M3_12_dik_profil.016",
+    "M3_12_dik_profil.017",
+    "M3_12_dik_profil.018",
+    "M3_12_dik_profil.019",
+    "M3_12_dik_profil.020",
+    "M3_12_dik_profil.021",
+    "M3_12_dik_profil.022",
+    "M3_12_gobek.012",
+    "M3_12_gobek.013",
+    "M3_12_gobek.001",
+    "M3_12_gobek.002",
+    "M3_12_gobek.003",
+    "M3_12_gobek.004",
+    "M3_12_gobek.005",
+    "M3_12_gobek.006",
+    "M3_12_gobek.007",
+    "M3_12_gobek.008",
+    "M3_12_gobek.009",
+    "M3_12_gobek.010",
+    "M3_12_kanat.001",
+    "M3_12_kasa.002",
+    "M3_12_kasa.003",
+    "M3_12_pervaz.004",
+    "M3_12_pervaz.005",
+    "M3_12_pervaz.001",
+    "M3_12_pervaz.002",
+    "M3_12_ust_kasa.001",
+    "M3_12_ust_pervaz.002",
+    "M3_12_ust_pervaz.003",
+    "M3_12_yatay_profil.024",
+    "M3_12_yatay_profil.025",
+    "M3_12_yatay_profil.001",
+    "M3_12_yatay_profil.002",
+    "M3_12_yatay_profil.003",
+    "M3_12_yatay_profil.004",
+    "M3_12_yatay_profil.005",
+    "M3_12_yatay_profil.006",
+    "M3_12_yatay_profil.007",
+    "M3_12_yatay_profil.008",
+    "M3_12_yatay_profil.009",
+    "M3_12_yatay_profil.010",
+    "M3_12_yatay_profil.011",
+    "M3_12_yatay_profil.012",
+    "M3_12_yatay_profil.013",
+    "M3_12_yatay_profil.014",
+    "M3_12_yatay_profil.015",
+    "M3_12_yatay_profil.016",
+    "M3_12_yatay_profil.017",
+    "M3_12_yatay_profil.018",
+    "M3_12_yatay_profil.019",
+    "M3_12_yatay_profil.020",
+    "M3_12_yatay_profil.021",
+    "M3_12_yatay_profil.022",
+    "M3_13_dik_profil.024",
+    "M3_13_dik_profil.025",
+    "M3_13_dik_profil.001",
+    "M3_13_dik_profil.002",
+    "M3_13_dik_profil.003",
+    "M3_13_dik_profil.004",
+    "M3_13_dik_profil.005",
+    "M3_13_dik_profil.006",
+    "M3_13_dik_profil.007",
+    "M3_13_dik_profil.008",
+    "M3_13_dik_profil.009",
+    "M3_13_dik_profil.010",
+    "M3_13_dik_profil.011",
+    "M3_13_dik_profil.012",
+    "M3_13_dik_profil.013",
+    "M3_13_dik_profil.014",
+    "M3_13_dik_profil.015",
+    "M3_13_dik_profil.016",
+    "M3_13_dik_profil.017",
+    "M3_13_dik_profil.018",
+    "M3_13_dik_profil.019",
+    "M3_13_dik_profil.020",
+    "M3_13_dik_profil.021",
+    "M3_13_dik_profil.022",
+    "M3_13_gobek.012",
+    "M3_13_gobek.013",
+    "M3_13_gobek.001",
+    "M3_13_gobek.002",
+    "M3_13_gobek.003",
+    "M3_13_gobek.004",
+    "M3_13_gobek.005",
+    "M3_13_gobek.006",
+    "M3_13_gobek.007",
+    "M3_13_gobek.008",
+    "M3_13_gobek.009",
+    "M3_13_gobek.010",
+    "M3_13_kanat.001",
+    "M3_13_kasa.002",
+    "M3_13_kasa.003",
+    "M3_13_kasa_bini.002",
+    "M3_13_kasa_bini.003",
+    "M3_13_pervaz.004",
+    "M3_13_pervaz.005",
+    "M3_13_pervaz.001",
+    "M3_13_pervaz.002",
+    "M3_13_ust_bini.001",
+    "M3_13_ust_kasa.001",
+    "M3_13_ust_pervaz.002",
+    "M3_13_ust_pervaz.003",
+    "M3_13_yatay_profil.024",
+    "M3_13_yatay_profil.025",
+    "M3_13_yatay_profil.001",
+    "M3_13_yatay_profil.002",
+    "M3_13_yatay_profil.003",
+    "M3_13_yatay_profil.004",
+    "M3_13_yatay_profil.005",
+    "M3_13_yatay_profil.006",
+    "M3_13_yatay_profil.007",
+    "M3_13_yatay_profil.008",
+    "M3_13_yatay_profil.009",
+    "M3_13_yatay_profil.010",
+    "M3_13_yatay_profil.011",
+    "M3_13_yatay_profil.012",
+    "M3_13_yatay_profil.013",
+    "M3_13_yatay_profil.014",
+    "M3_13_yatay_profil.015",
+    "M3_13_yatay_profil.016",
+    "M3_13_yatay_profil.017",
+    "M3_13_yatay_profil.018",
+    "M3_13_yatay_profil.019",
+    "M3_13_yatay_profil.020",
+    "M3_13_yatay_profil.021",
+    "M3_13_yatay_profil.022",
+    "M3C_kapi_ustu.001",
+    "M3C_sag_yan.001",
+    "M3C_sol_yan.001"
+   ],
+   "ucgen_cakisma_sayisi": 6009,
+   "ucgen_cakisma_alani_uv": 0.001123800038750695,
+   "texel_m_min": 5.032525062561035,
+   "texel_m_p01": 38.389549255371094,
+   "texel_m_medyan": 51.70873260498047,
+   "sure_sn": 140.54
+  }
+ },
+ "ters_yuz_sayisi": 9410,
+ "ters_yuz_esigi_m": 0.6,
+ "ters_yuz_detay": [
+  {
+   "nesne": "interior.001",
+   "cevrilen": 118,
+   "atlas": "cephe"
+  },
+  {
+   "nesne": "gravel [imported].002",
+   "cevrilen": 0,
+   "atlas": "cephe"
+  },
+  {
+   "nesne": "ceiling [imported].002",
+   "cevrilen": 4,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "wood_floor__FOTO_03_wood_floor",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "wood_floor__FOTO_19_wood_floor",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "stucco [imported].001",
+   "cevrilen": 5,
+   "atlas": "cephe"
+  },
+  {
+   "nesne": "Cube.001__FOTO_09_WOODY-DARK",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "Cube.001__FOTO_13_WOODY-DARK",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "Cube.001__FOTO_16_WOODY-DARK",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "wood_dark (4)__FOTO_16_WOODY-DARK.001",
+   "cevrilen": 3447,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "wood_dark (4)__FOTO_09_WOODY-DARK.001",
+   "cevrilen": 2964,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "wood_dark (4)__FOTO_13_WOODY-DARK.001",
+   "cevrilen": 2176,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "Cube__WHT.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "Cube__FOTO_29_WHT.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "Clay tile 6 [imported].001",
+   "cevrilen": 10,
+   "atlas": "cephe"
+  },
+  {
+   "nesne": "roof.001",
+   "cevrilen": 0,
+   "atlas": "cephe"
+  },
+  {
+   "nesne": "terra_floor__FOTO_04_terra_floor",
+   "cevrilen": 2,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "terra_floor__FOTO_26_terra_floor",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "wood_floor.001__FOTO_19_WOOD-FL",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "wood_floor.001__FOTO_03_WOOD-FL",
+   "cevrilen": 93,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "stone_tile.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "R31 | R33 entrance WC ochre tile.001",
+   "cevrilen": 1,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "R31 | R33 master pale cream tile.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "R44 joined | fixed | R31 | Shared bathroom ivory wall tile__FOTO_08_RR",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "R44 joined | fixed | R31 | Shared bathroom ivory wall tile__FOTO_32_RR",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "R31 | R33 entrance navy mosaic band.001",
+   "cevrilen": 2,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "R31 | R33 ivory wall ceramic.001",
+   "cevrilen": 3,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "R31 | R33 master fine mosaic band.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "R31 | R33 attic cream tile.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "R31 | R33 attic tan mosaic band.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "Lift | Photographed walnut door finish (4).001__FOTO_10_Simple wood",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "Lift | Photographed walnut door finish (4).001__FOTO_22_Simple wood",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "metal2.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "ROUGHNESS63__X",
+   "cevrilen": 66,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "ROUGHNESS63__FOTO_07_X",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "ROUGHNESS63__FOTO_06_X",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "ROUGHNESS63__FOTO_11_X",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "wc.001",
+   "cevrilen": 47,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "wht.001",
+   "cevrilen": 104,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "WOOD1__R31 | R33 antique nook walnut",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "WOOD1__FOTO_22_R31 | R33 antique nook walnut",
+   "cevrilen": 3,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "WOOD1__FOTO_31_R31 | R33 antique nook walnut",
+   "cevrilen": 4,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "WOOD1__FOTO_12_R31 | R33 antique nook walnut",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "WOOD2__FOTO_05_wood_honey",
+   "cevrilen": 21,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "WOOD2__FOTO_23_wood_honey",
+   "cevrilen": 5,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "WOOD2__FOTO_21_wood_honey",
+   "cevrilen": 5,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "WOOD2__FOTO_20_wood_honey",
+   "cevrilen": 2,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "WOOD2__FOTO_31_wood_honey",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_F29_sol_kiris.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K01_esik_kapagi.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "A04_K01_kasa_ic_kaplama.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K01_kasa_ic_kaplama.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K01_kasa_ust_kaplama.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K02_esik_kapagi.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "A04_K02_kasa_ic_kaplama.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K02_kasa_ic_kaplama.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K02_kasa_ust_kaplama.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K03_esik_kapagi.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "A04_K03_kasa_ic_kaplama.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K03_kasa_ic_kaplama.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K03_kasa_ust_kaplama.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K04_esik_kapagi.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "A04_K04_kasa_ic_kaplama.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K04_kasa_ic_kaplama.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K04_kasa_ust_kaplama.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K05_esik_kapagi.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "A04_K05_kasa_ic_kaplama.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K05_kasa_ic_kaplama.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K05_kasa_ust_kaplama.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K06_esik_kapagi.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "A04_K06_kasa_ic_kaplama.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K06_kasa_ic_kaplama.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K06_kasa_ust_kaplama.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K07_esik_kapagi.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "A04_K07_kasa_ic_kaplama.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K07_kasa_ic_kaplama.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K07_kasa_ust_kaplama.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K08_esik_kapagi.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "A04_K08_kasa_ic_kaplama.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K08_kasa_ic_kaplama.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K08_kasa_ust_kaplama.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K09_esik_kapagi.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "A04_K09_kasa_ic_kaplama.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K09_kasa_ic_kaplama.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K09_kasa_ust_kaplama.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K10_esik_kapagi.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "A04_K10_kasa_ic_kaplama.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K10_kasa_ic_kaplama.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K10_kasa_ust_kaplama.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K11_esik_kapagi.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "A04_K11_kasa_ic_kaplama.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K11_kasa_ic_kaplama.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K11_kasa_ust_kaplama.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K12_esik_kapagi.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "A04_K12_kasa_ic_kaplama.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K12_kasa_ic_kaplama.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K12_kasa_ust_kaplama.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K13_esik_kapagi.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "A04_K13_kasa_ic_kaplama.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K13_kasa_ic_kaplama.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A04_K13_kasa_ust_kaplama.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A05_kartonpiyer_birlesik.001",
+   "cevrilen": 68,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_Cift_kasa.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_Cift_kasa.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_Cift_pervaz.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_Cift_pervaz.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_Cift_pervaz.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_Cift_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_Cift_sag_alt.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_Cift_sag_dikme.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_Cift_sag_dikme.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_Cift_sag_ust.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_Cift_sol_alt.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_Cift_sol_dikme.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_Cift_sol_dikme.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_Cift_sol_ust.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_Cift_ust_kasa.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_X0_ayna.001",
+   "cevrilen": 2,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_X0_dikme.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_X0_dikme.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_X0_ray.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_X0_ray.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_X1_dikme.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_X1_dikme.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_X1_ray.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_X1_ray.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_Y0_ayna.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_Y0_dikme.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_Y0_dikme.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_Y0_ray.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_Y0_ray.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_Y1_dikme.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_Y1_dikme.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_Y1_ray.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_D16_Y1_ray.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A08_F02_dolu_merdiven_alti.001",
+   "cevrilen": 5,
+   "atlas": "cephe"
+  },
+  {
+   "nesne": "A09_F32_bordur_arka.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A09_F32_bordur_sol.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "A09_F47_tek_duvar.001",
+   "cevrilen": 0,
+   "atlas": "cephe"
+  },
+  {
+   "nesne": "M1_supurgelik_001.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_002.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_003.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_004.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_005.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_006.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_007.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_008.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_009.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_010.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_011.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_012.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_013.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_014.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_015.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_016.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_017.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_018.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_019.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_020.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_021.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_022.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_023.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_024.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_025.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_026.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_027.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_028.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_029.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_030.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_031.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_032.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_033.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_034.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_035.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_036.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_037.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_038.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_039.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_040.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_041.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_042.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_043.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_044.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_045.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_046.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_047.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_048.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_049.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_050.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_051.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_052.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_053.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_054.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_055.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_056.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_057.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_058.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_059.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_060.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_061.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_062.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_063.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_064.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_065.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_066.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_067.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_068.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_069.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_070.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_071.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_072.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_073.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_074.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_075.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_076.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_077.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_078.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_079.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_080.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_081.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_082.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_083.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_084.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_085.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_086.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_087.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_088.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_089.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_090.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_091.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_092.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_093.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_094.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_095.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_096.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_097.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_098.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_099.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_100.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_101.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_102.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_103.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_104.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_105.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_106.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_107.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_108.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_109.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_110.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_111.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_112.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_113.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_114.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_115.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_116.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_117.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_118.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_119.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_120.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_121.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_122.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_123.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_124.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_125.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_126.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_127.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_128.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_129.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_130.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_131.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_132.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_133.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_134.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_135.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_136.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_137.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_138.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_139.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_140.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_141.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_142.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_143.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_144.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_145.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_146.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_147.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_148.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_149.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_150.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_151.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_152.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_153.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_154.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_155.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_156.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_157.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_158.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_159.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_160.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_161.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_162.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_163.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_164.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_165.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_166.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_167.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_168.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_169.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_170.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_171.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_172.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_173.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_174.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_175.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_176.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_177.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_178.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_179.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_180.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_181.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_182.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_183.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_184.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_185.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_186.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_187.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_188.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_189.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_190.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_191.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_192.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_193.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_194.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_195.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_196.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_197.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_198.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_199.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_200.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_201.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_202.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_203.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_204.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_205.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_206.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_207.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_208.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_209.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_210.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_211.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_212.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_213.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_214.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_215.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_216.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_217.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_218.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_219.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_220.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_221.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_222.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_223.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_224.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_225.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_226.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_227.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_228.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_229.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_230.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_231.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_232.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_233.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_234.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_235.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_236.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_237.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_238.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_239.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_240.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_241.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_242.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_243.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_244.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_245.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_246.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_247.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_248.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_249.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_250.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_251.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_252.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_253.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_254.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_255.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_256.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_257.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_258.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_259.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_260.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_261.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_262.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_263.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_264.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_265.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_266.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_267.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_268.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_269.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_270.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_271.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_272.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_273.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_274.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_275.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_276.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_277.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_278.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_279.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_280.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_281.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_282.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_283.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_284.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_285.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_286.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_287.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_288.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_289.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_290.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_291.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_292.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_293.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M1_supurgelik_294.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M2_K0_0_basamak.009",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_basamak.010",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_basamak.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_basamak.002",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_basamak.003",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_basamak.004",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_basamak.005",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_basamak.006",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_basamak.007",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_beyaz_altyapi.001",
+   "cevrilen": 0,
+   "atlas": "cephe"
+  },
+  {
+   "nesne": "M2_K0_0_riht.009",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_riht.010",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_riht.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_riht.002",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_riht.003",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_riht.004",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_riht.005",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_riht.006",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_0_riht.007",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_basamak.009",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_basamak.010",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_basamak.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_basamak.002",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_basamak.003",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_basamak.004",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_basamak.005",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_basamak.006",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_basamak.007",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_beyaz_altyapi.001",
+   "cevrilen": 0,
+   "atlas": "cephe"
+  },
+  {
+   "nesne": "M2_K0_1_riht.009",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_riht.010",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_riht.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_riht.002",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_riht.003",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_riht.004",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_riht.005",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_riht.006",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_1_riht.007",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_sahanlik.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K0_sahanlik_alti.001",
+   "cevrilen": 0,
+   "atlas": "cephe"
+  },
+  {
+   "nesne": "M2_K1_0_basamak.010",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_basamak.011",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_basamak.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_basamak.002",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_basamak.003",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_basamak.004",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_basamak.005",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_basamak.006",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_basamak.007",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_basamak.008",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_beyaz_altyapi.001",
+   "cevrilen": 0,
+   "atlas": "cephe"
+  },
+  {
+   "nesne": "M2_K1_0_riht.010",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_riht.011",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_riht.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_riht.002",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_riht.003",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_riht.004",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_riht.005",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_riht.006",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_riht.007",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_0_riht.008",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_basamak.009",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_basamak.010",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_basamak.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_basamak.002",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_basamak.003",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_basamak.004",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_basamak.005",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_basamak.006",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_basamak.007",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_beyaz_altyapi.001",
+   "cevrilen": 0,
+   "atlas": "cephe"
+  },
+  {
+   "nesne": "M2_K1_1_riht.009",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_riht.010",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_riht.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_riht.002",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_riht.003",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_riht.004",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_riht.005",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_riht.006",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_1_riht.007",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_sahanlik.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K1_sahanlik_alti.001",
+   "cevrilen": 0,
+   "atlas": "cephe"
+  },
+  {
+   "nesne": "M2_K2_0_basamak.009",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_basamak.010",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_basamak.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_basamak.002",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_basamak.003",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_basamak.004",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_basamak.005",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_basamak.006",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_basamak.007",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_beyaz_altyapi.001",
+   "cevrilen": 0,
+   "atlas": "cephe"
+  },
+  {
+   "nesne": "M2_K2_0_riht.009",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_riht.010",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_riht.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_riht.002",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_riht.003",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_riht.004",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_riht.005",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_riht.006",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_0_riht.007",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_basamak.009",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_basamak.010",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_basamak.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_basamak.002",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_basamak.003",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_basamak.004",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_basamak.005",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_basamak.006",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_basamak.007",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_beyaz_altyapi.001",
+   "cevrilen": 0,
+   "atlas": "cephe"
+  },
+  {
+   "nesne": "M2_K2_1_riht.009",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_riht.010",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_riht.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_riht.002",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_riht.003",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_riht.004",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_riht.005",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_riht.006",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_1_riht.007",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_sahanlik.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M2_K2_sahanlik_alti.001",
+   "cevrilen": 0,
+   "atlas": "cephe"
+  },
+  {
+   "nesne": "M3_01_dik_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_dik_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_dik_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_dik_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_dik_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_dik_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_dik_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_dik_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_dik_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_dik_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_dik_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_dik_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_esik_doseme.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_gobek.006",
+   "cevrilen": 1,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_gobek.007",
+   "cevrilen": 2,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_gobek.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_gobek.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_gobek.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_gobek.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_kanat.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_kasa.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_kasa.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_pervaz.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_pervaz.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_pervaz.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_ust_kasa.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_ust_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_ust_pervaz.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_yatay_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_yatay_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_yatay_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_yatay_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_yatay_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_yatay_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_yatay_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_yatay_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_yatay_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_yatay_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_yatay_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_01_yatay_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_dik_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_esik_doseme.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_gobek.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_gobek.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_gobek.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_gobek.002",
+   "cevrilen": 6,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_gobek.003",
+   "cevrilen": 8,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_gobek.004",
+   "cevrilen": 8,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_gobek.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_gobek.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_gobek.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_gobek.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_gobek.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_gobek.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_kanat.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_kasa.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_kasa.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_pervaz.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_pervaz.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_pervaz.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_ust_kasa.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_ust_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_ust_pervaz.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_02_yatay_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_dik_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_esik_doseme.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_gobek.012",
+   "cevrilen": 3,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_gobek.013",
+   "cevrilen": 4,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_gobek.001",
+   "cevrilen": 4,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_gobek.002",
+   "cevrilen": 6,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_gobek.003",
+   "cevrilen": 8,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_gobek.004",
+   "cevrilen": 8,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_gobek.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_gobek.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_gobek.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_gobek.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_gobek.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_gobek.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_kanat.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_kasa.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_kasa.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_pervaz.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_pervaz.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_pervaz.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_ust_kasa.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_ust_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_ust_pervaz.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_03_yatay_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_dik_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_esik_doseme.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_gobek.012",
+   "cevrilen": 5,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_gobek.013",
+   "cevrilen": 6,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_gobek.001",
+   "cevrilen": 6,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_gobek.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_gobek.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_gobek.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_gobek.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_gobek.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_gobek.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_gobek.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_gobek.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_gobek.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_kanat.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_kasa.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_kasa.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_pervaz.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_pervaz.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_pervaz.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_ust_kasa.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_ust_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_ust_pervaz.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_04_yatay_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_dik_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_esik_doseme.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_gobek.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_gobek.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_gobek.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_gobek.002",
+   "cevrilen": 6,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_gobek.003",
+   "cevrilen": 7,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_gobek.004",
+   "cevrilen": 8,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_gobek.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_gobek.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_gobek.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_gobek.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_gobek.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_gobek.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_kanat.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_kasa.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_kasa.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_kulp.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_kulp.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_pervaz.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_pervaz.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_pervaz.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_ust_kasa.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_ust_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_ust_pervaz.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_05_yatay_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_dik_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_esik_doseme.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_gobek.012",
+   "cevrilen": 2,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_gobek.013",
+   "cevrilen": 2,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_gobek.001",
+   "cevrilen": 2,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_gobek.002",
+   "cevrilen": 6,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_gobek.003",
+   "cevrilen": 8,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_gobek.004",
+   "cevrilen": 8,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_gobek.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_gobek.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_gobek.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_gobek.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_gobek.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_gobek.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_kanat.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_kasa.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_kasa.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_pervaz.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_pervaz.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_pervaz.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_ust_kasa.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_ust_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_ust_pervaz.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_06_yatay_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_dik_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_esik_doseme.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_gobek.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_gobek.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_gobek.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_gobek.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_gobek.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_gobek.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_gobek.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_gobek.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_gobek.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_gobek.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_gobek.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_gobek.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_kanat.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_kasa.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_kasa.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_pervaz.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_pervaz.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_pervaz.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_ust_kasa.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_ust_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_ust_pervaz.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_07_yatay_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_dik_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_esik_doseme.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_gobek.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_gobek.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_gobek.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_gobek.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_gobek.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_gobek.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_gobek.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_gobek.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_gobek.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_gobek.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_gobek.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_gobek.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_kanat.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_kasa.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_kasa.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_pervaz.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_pervaz.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_pervaz.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_ust_kasa.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_ust_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_ust_pervaz.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_08_yatay_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_dik_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_esik_doseme.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M3_09_gobek.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_gobek.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_gobek.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_gobek.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_gobek.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_gobek.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_gobek.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_gobek.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_gobek.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_gobek.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_gobek.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_gobek.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_kanat.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_kasa.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_kasa.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_pervaz.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_pervaz.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_pervaz.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_ust_kasa.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_ust_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_ust_pervaz.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_09_yatay_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_dik_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_doseme_boslugu.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M3_10_esik_doseme.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M3_10_gobek.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_gobek.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_gobek.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_gobek.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_gobek.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_gobek.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_gobek.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_gobek.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_gobek.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_gobek.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_gobek.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_gobek.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_kanat.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_kasa.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_kasa.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_pervaz.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_pervaz.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_pervaz.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_ust_kasa.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_ust_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_ust_pervaz.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_10_yatay_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_11_esik_doseme.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M3_11_kanat.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_11_kasa.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_11_kasa.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_11_kulp.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_11_kulp.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_11_pervaz.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_11_pervaz.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_11_pervaz.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_11_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_11_ust_kasa.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_11_ust_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_11_ust_pervaz.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_dik_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_esik_doseme.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M3_12_gobek.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_gobek.013",
+   "cevrilen": 1,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_gobek.001",
+   "cevrilen": 2,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_gobek.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_gobek.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_gobek.004",
+   "cevrilen": 1,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_gobek.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_gobek.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_gobek.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_gobek.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_gobek.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_gobek.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_kanat.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_kasa.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_kasa.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_pervaz.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_pervaz.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_pervaz.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_ust_kasa.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_ust_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_ust_pervaz.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_12_yatay_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_dik_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_esik_doseme.001",
+   "cevrilen": 0,
+   "atlas": "zemin"
+  },
+  {
+   "nesne": "M3_13_gobek.012",
+   "cevrilen": 6,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_gobek.013",
+   "cevrilen": 8,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_gobek.001",
+   "cevrilen": 8,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_gobek.002",
+   "cevrilen": 5,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_gobek.003",
+   "cevrilen": 6,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_gobek.004",
+   "cevrilen": 6,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_gobek.005",
+   "cevrilen": 8,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_gobek.006",
+   "cevrilen": 8,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_gobek.007",
+   "cevrilen": 8,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_gobek.008",
+   "cevrilen": 5,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_gobek.009",
+   "cevrilen": 6,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_gobek.010",
+   "cevrilen": 6,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_kanat.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_kasa.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_kasa.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_kasa_bini.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_kasa_bini.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_pervaz.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_pervaz.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_pervaz.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_ust_bini.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_ust_kasa.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_ust_pervaz.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_ust_pervaz.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.024",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.025",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.002",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.003",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.004",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.005",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.006",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.007",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.008",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.009",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.010",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.011",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.012",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.013",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.014",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.015",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.016",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.017",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.018",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.019",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.020",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.021",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3_13_yatay_profil.022",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3C_kapi_ustu.001",
+   "cevrilen": 2,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3C_sag_yan.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "M3C_sol_yan.001",
+   "cevrilen": 0,
+   "atlas": "duvar"
+  },
+  {
+   "nesne": "plot-grass.002",
+   "cevrilen": 38,
+   "atlas": "bahce"
+  },
+  {
+   "nesne": "chrome (5).002",
+   "cevrilen": 0,
+   "atlas": "bahce"
+  },
+  {
+   "nesne": "canopy.002",
+   "cevrilen": 0,
+   "atlas": "bahce"
+  },
+  {
+   "nesne": "pool_tile.002",
+   "cevrilen": 0,
+   "atlas": "bahce"
+  },
+  {
+   "nesne": "Garden | Dark stained canopy timber.002",
+   "cevrilen": 0,
+   "atlas": "bahce"
+  },
+  {
+   "nesne": "Retaining wall rough limestone (1).002",
+   "cevrilen": 5,
+   "atlas": "bahce"
+  },
+  {
+   "nesne": "stone_tile (4).001",
+   "cevrilen": 0,
+   "atlas": "bahce"
+  },
+  {
+   "nesne": "white_trim (5).002",
+   "cevrilen": 0,
+   "atlas": "bahce"
+  },
+  {
+   "nesne": "Retaining wall rough limestone.001",
+   "cevrilen": 0,
+   "atlas": "bahce"
+  }
+ ],
+ "malzeme_atlas": {
+  "FOTO_14_Lift brushed patterned stainless": null,
+  "FOTO_01_Simple White Wall": "duvar",
+  "Stone gravel": "cephe",
+  "FOTO_02_ceiling.001": "duvar",
+  "FOTO_03_wood_floor": "zemin",
+  "FOTO_19_wood_floor": "zemin",
+  "FOTO_01_Stucco painted wall": "duvar",
+  "FOTO_09_WOODY-DARK": "duvar",
+  "FOTO_13_WOODY-DARK": "duvar",
+  "FOTO_16_WOODY-DARK": "duvar",
+  "FOTO_16_WOODY-DARK.001": "duvar",
+  "FOTO_09_WOODY-DARK.001": "duvar",
+  "FOTO_13_WOODY-DARK.001": "duvar",
+  "glass": null,
+  "WHT.001": "duvar",
+  "FOTO_29_WHT.001": "zemin",
+  "metal.001": null,
+  "Clay tile.001": "cephe",
+  "roof-7": "cephe",
+  "FOTO_04_terra_floor": "zemin",
+  "FOTO_26_terra_floor": "zemin",
+  "FOTO_19_WOOD-FL": "zemin",
+  "FOTO_03_WOOD-FL": "zemin",
+  "stone_tile": "zemin",
+  "R31 | R33 entrance WC ochre tile": "duvar",
+  "FOTO_27_R31 | R33 master pale cream tile": "duvar",
+  "FOTO_08_RR": "duvar",
+  "FOTO_32_RR": "zemin",
+  "R31 | R33 entrance navy mosaic band": "duvar",
+  "FOTO_08_R31 | R33 ivory wall ceramic": "duvar",
+  "FOTO_28_R31 | R33 master fine mosaic band": "duvar",
+  "FOTO_08_R31 | R33 attic cream tile": "duvar",
+  "R31 | R33 attic tan mosaic band": "duvar",
+  "FOTO_10_Simple wood": "zemin",
+  "FOTO_22_Simple wood": "duvar",
+  "BLCK": null,
+  "bulb_warm": null,
+  "FOTO_24_FINISH | Silver mirror": null,
+  "cabinet_glass": null,
+  "Lift | Photographed rose glass 80 percent": null,
+  "brass (4)": null,
+  "R31 | R35 shelving grey steel": "duvar",
+  "R31 | R35 garage galvanized steel": null,
+  "R31 | Hall ochre woven upholstery": null,
+  "X": "duvar",
+  "FOTO_07_X": "duvar",
+  "FOTO_06_X": "duvar",
+  "FOTO_11_X": "duvar",
+  "ROUGHNSS1": null,
+  "R31 | Warm white porcelain": "duvar",
+  "WHT": "duvar",
+  "R31 | R33 antique nook walnut": "duvar",
+  "FOTO_22_R31 | R33 antique nook walnut": "duvar",
+  "FOTO_31_R31 | R33 antique nook walnut": "duvar",
+  "FOTO_12_R31 | R33 antique nook walnut": "duvar",
+  "FOTO_05_wood_honey": "duvar",
+  "FOTO_23_wood_honey": "duvar",
+  "FOTO_21_wood_honey": "duvar",
+  "FOTO_20_wood_honey": "duvar",
+  "FOTO_25_wood_honey": null,
+  "FOTO_31_wood_honey": "duvar",
+  "C02 | Original red framed artwork": null,
+  "Master quilt â€” photo projection": null,
+  "Room finish | Original bedroom line artwork": null,
+  "Room pass | Original damask curtain photograph": null,
+  "Room pass | Original hall picture atlas": null,
+  "Salon artwork â€” photographed detail": null,
+  "A04_Opal_cam": null,
+  "A04_Siyah_zincir": null,
+  "A04_Eskitme_pirinc": null,
+  "FOTO_02_M1_Beyaz_saten_alci": "duvar",
+  "A04_Opal_cam.001": null,
+  "A04_Opal_cam.002": null,
+  "FOTO_10_M2_Ceviz_basamak": "zemin",
+  "FOTO_09_M3_Koyu_ceviz_kapi": "duvar",
+  "FOTO_04_M3_Krem_karo_esik": "zemin",
+  "FOTO_16_M3_Koyu_ceviz_kapi": "duvar",
+  "A05_F42_opal_beyaz": null,
+  "M3G_Foto40_gul_desenli_cam": null,
+  "M3G_Pirinc": null,
+  "FOTO_20_A08_Ceviz": "duvar",
+  "FOTO_24_A08_Ayna": null,
+  "FOTO_01_M2_Beyaz_merdiven_alti": "duvar",
+  "A08_Siyah_spot": null,
+  "A08_Sicak_opal": null,
+  "FOTO_28_A09_Banyo_bordur": "duvar",
+  "FOTO_16_M1_Sicak_ceviz_supurgelik": "duvar",
+  "FOTO_18_M1_Sicak_ceviz_supurgelik": "duvar",
+  "FOTO_17_M1_Sicak_ceviz_supurgelik": "duvar",
+  "FOTO_09_M3_Ceviz_gobek": "duvar",
+  "M3_Saten_paslanmaz_kulp": null,
+  "M3_Pirinc_donanim": null,
+  "M3_Garaj_siyah_kulp": "duvar",
+  "FOTO_16_M3_Ceviz_gobek": "duvar",
+  "SimpleWhiteWall": "duvar",
+  "M6_Kirik_beyaz_emaye": null,
+  "M6_Krom_vana": null,
+  "metal.002": null,
+  "brass (4).001": null,
+  "R31 | R33 antique nook walnut.001": null,
+  "Grass Ground Meadow PBR Scan": "bahce",
+  "chrome (5)": "bahce",
+  "Old dusty roof": "bahce",
+  "pool_tile": "bahce",
+  "wood_dark (3)": "bahce",
+  "stone_tile_wall": "bahce",
+  "Matte Porcelain Tile Beige.001": "bahce",
+  "white_trim (5)": "bahce",
+  "water": null,
+  "TREE-1": null,
+  "TREE-2": null,
+  "Retaining wall rough limestone.001": "bahce"
+ },
+ "kaldi": [
+  "zemin: 29 UV üçgen çakışması",
+  "zemin: bazı yüzlerde minimum40 texel/m sağlanmadı",
+  "cephe: 20 UV üçgen çakışması",
+  "bahce: 41 UV üçgen çakışması",
+  "duvar: 5 fiziksel sayfa gerekiyor; tek atlas koşulu sağlanmadı",
+  "duvar: 6009 UV üçgen çakışması",
+  "duvar: bazı yüzlerde minimum40 texel/m sağlanmadı",
+  "18/34 checker renderları: UV koşulları geçmedi ve 25 dakika sınırına ulaşıldı"
+ ],
+ "aciklama": "Çakışma her fiziksel sayfa içinde sayılır. Bir atlas çok sayfa ise tek atlas koşulu sağlanmaz ve üretime hazır değildir.",
+ "son_zaman": "2026-09-29T09:24:04.160490",
+ "asama_siniri_dk": 25,
+ "uretime_hazir": false
+}
