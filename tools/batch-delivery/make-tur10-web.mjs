@@ -105,7 +105,9 @@ function repairStair(doc) {
   // (x > 3,17) sahanlık altında (1,30) biter; kesik üstü beyaz kapakla kapanır.
   {
     const Z0 = -2.20, Z1 = -1.86, X0 = 0.30, X1 = 4.25;
-    const top = x => (x <= STAIR.x1 ? STAIR.yAtX1 + (STAIR.x1 - x) * STAIR.slope : 1.30);
+    // kolun tepesinden (x 0,87) sonrası giriş katı döşemesinin altı: eğim orada durur (eskiden
+    // x 0,30-0,83'te parkenin 14 cm'ye kadar üstüne beyaz kama olarak çıkıyordu)
+    const top = x => (x <= STAIR.x1 ? STAIR.yAtX1 + (STAIR.x1 - Math.max(x, STAIR.x0)) * STAIR.slope : 1.30);
     let cutTris = 0, cap = null;
     for (const node of doc.getRoot().listNodes()) {
       const mesh = node.getMesh(); if (!mesh) continue;
@@ -157,6 +159,20 @@ function repairStair(doc) {
       .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(new Float32Array(nr)).setBuffer(buf))
       .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(new Float32Array(p.length / 3 * 2)).setBuffer(buf));
     doc.getRoot().listScenes()[0].addChild(doc.createNode('merdiven_arasi_kapak').setMesh(doc.createMesh('merdiven_arasi_kapak').addPrimitive(capPrim)).setExtras({kat: 'bodrum'}));
+    // F47 duvarının üstü giriş katında iki merdiven arasındaki döşeme boşluğunu da
+    // kapatıyordu (x 0,87-1,15, z -2,13..-1,93): silinince aşağısı görünen delik kaldı. Parke
+    // yaması: WOOD-FL, applyFloors diğer parkeyle aynı dünya UV'sini verir.
+    {
+      const woodMat = doc.getRoot().listMaterials().find(m => m.getName() === 'WOOD-FL');
+      if (!woodMat) throw Error('merdiven: WOOD-FL yok');
+      const y = 3.0996, [xa, xb, za, zb] = [0.87, 1.15, -2.13, -1.93];
+      const pp = new Float32Array([xa, y, za, xa, y, zb, xb, y, zb, xa, y, za, xb, y, zb, xb, y, za]);
+      const patch = doc.createPrimitive().setMaterial(woodMat)
+        .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(pp).setBuffer(buf))
+        .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(new Float32Array(18).map((_, i) => (i % 3 === 1 ? 1 : 0))).setBuffer(buf))
+        .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(new Float32Array(12)).setBuffer(buf));
+      doc.getRoot().listScenes()[0].addChild(doc.createNode('merdiven_arasi_parke').setMesh(doc.createMesh('merdiven_arasi_parke').addPrimitive(patch)).setExtras({kat: 'giris'}));
+    }
     console.log(`merdiven: kollar arası duvar ikinci kolun altına indirildi (${cutTris} üçgen kırpıldı)`);
   }
   console.log('merdiven: F02 kutusu kamaya, F47 duvarı silindi');
@@ -247,6 +263,27 @@ function applyFloors(doc) {
   if (mats.get('wood_floor')) restyle(mats.get('wood_floor'), parke);
   const basement = restyle(mats.get('terra_floor'), pbr('bodrum-karo'));
   const ground = restyle(mats.get('terra_floor').clone().setName('terra_floor_giris'), pbr('giris-karo'));
+  // UV0 ölçeği: malzemenin bütün ilkellerinde (paylaşılan erişimci kopyalanır)
+  const scaleUV = (mat, s) => {
+    for (const prim of root.listMeshes().flatMap(m => m.listPrimitives())) {
+      if (prim.getMaterial() !== mat || !prim.getAttribute('TEXCOORD_0')) continue;
+      const a = prim.getAttribute('TEXCOORD_0');
+      prim.setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(a.getArray().map(v => v * s)).setBuffer(buffer));
+    }
+  };
+  // merdiven basamakları zeminin parkesiyle (ürün sahibi: fotoğraftaki gibi aynı ahşap);
+  // basamak UV'si 2,24/m, parke dokusu 2,0 m -> 0,5/m
+  // (alt ve üst kaynakta aynı adlı AYRI malzemeler var: hepsi değişir)
+  const named = name => root.listMaterials().filter(m => m.getName() === name);
+  for (const stepMat of named('EK_M2_Ceviz_basamak')) {restyle(stepMat, parke); scaleUV(stepMat, 0.5 / 2.24);}
+  // dış cephe: ürün sahibinin mavi-gri sıvası (BUILDING-opt-v4 / angora-wip, wall012). v6'da
+  // ajan düz beyaz dokuya çevirmişti (prune onu tek renge indiriyordu). v4'te doku 2,344/m
+  // (TEXCOORD_2), v6 UV0'ı 1/m: aynı tekrar için UV0 x2,344.
+  const facade = {color: texture('cephe-v4.png', 'cephe-v4'), normal: texture('cephe-v4_normal.png', 'cephe-v4_normal'), mr: texture('cephe-v4_mr.png', 'cephe-v4_mr')};
+  const stuccos = named('Stucco painted wall');
+  if (!stuccos.length) throw Error('cephe: Stucco painted wall yok');
+  for (const stucco of stuccos) {restyle(stucco, facade); scaleUV(stucco, 2.344);}
+  console.log(`cephe: ${stuccos.length} sıva malzemesi v4 mavi-gri dokuya, basamak: ${named('EK_M2_Ceviz_basamak').length} malzeme parkeye`);
   // uv: dünya x/z'den; rot: karo yönü, su/sv: dokunun metre karşılığı
   // sahanlık dikdörtgeni (x-z): x -0,09..1,93, z -5,15..-3,81
   const VEST = [[-0.09, -5.15], [1.93, -5.15], [1.93, -3.81], [-0.09, -3.81]]; // saat yönü tersine (içi solda)
@@ -386,18 +423,22 @@ function applyFloors(doc) {
     scene.addChild(doc.createNode('banyo_duvar').setMesh(doc.createMesh('banyo_duvar').addPrimitive(prim)).setExtras({kat: 'kat1'}));
     console.log(`banyo duvarları: ${verts.length} üçgen yeni seramiğe (${(verts.reduce((a, {tri}) => {const e1 = [0,1,2].map(k => tri[1][k]-tri[0][k]), e2 = [0,1,2].map(k => tri[2][k]-tri[0][k]); return a + Math.hypot(e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]) / 2;}, 0)).toFixed(1)} m²)`);
   }
-  // Kapı boşluklarında 3 cm'lik duvar kaplamasının (Simple White Wall) yukarı bakan alt
-  // kapakları zeminle aynı düzlemde (0-1 mm): eşiğin iki yanında beyaz çizgi olarak
-  // titreşiyordu. Altında 3 mm içinde zemin olan yukarı bakan beyaz duvar üçgeni silinir
-  // (zemin zaten altta; giriş kapısının 4 cm yüksek eşiği gibi gerçek basamaklar kalır).
+  // Kapı boşluklarında ve duvar diplerinde duvar kaplamasının / kasanın YATAY alt kapakları
+  // zeminle aynı düzlemde (0-1 mm): eşiğin iki yanında ve duvar dibinde beyaz/koyu çizgi
+  // olarak titreşiyordu. Malzemeler çift yüzlü (doubleSided): aşağı bakan kapak da yukarıdan
+  // görünür. Altında 4 mm içinde zemin olan, iki yöne de bakan yatay beyaz duvar / kasa
+  // üçgeni silinir (zemin zaten altta; giriş kapısının 4 cm yüksek eşiği gibi gerçek
+  // basamaklar kalır).
   {
     const WALK = /^(WOOD-FL|wood_floor|terra_floor|terra_floor_giris|stone_tile|RR|R31 \| R33 .*tile)$/;
     const floors = [], grid = new Map(), C = 0.5;
-    const up = t => {
+    const slope = t => {
       const e1 = [0, 1, 2].map(k => t[1][k] - t[0][k]), e2 = [0, 1, 2].map(k => t[2][k] - t[0][k]);
       const cy = e1[2]*e2[0] - e1[0]*e2[2], L = Math.hypot(e1[1]*e2[2]-e1[2]*e2[1], cy, e1[0]*e2[1]-e1[1]*e2[0]);
-      return L > 1e-10 && cy / L > 0.9;
+      return L > 1e-10 ? cy / L : 0;
     };
+    const up = t => slope(t) > 0.9, flat = t => Math.abs(slope(t)) > 0.9;
+    const CAPS = /^(Simple White Wall|EK_SimpleWhiteWall|WHT\.001|EK_M1_Beyaz_saten_alci|EK_M3_Koyu_ceviz_kapi|WOODY-DARK)$/;
     const each = (fn) => {
       for (const node of root.listNodes()) {
         const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
@@ -426,17 +467,17 @@ function applyFloors(doc) {
     };
     let removed = 0;
     each((prim, P) => {
-      if (prim.getMaterial()?.getName() !== 'Simple White Wall' || !prim.getIndices()) return;
+      if (!CAPS.test(prim.getMaterial()?.getName() ?? '') || !prim.getIndices()) return;
       const idx = prim.getIndices(), keep = [];
       for (let t = 0; t < idx.getCount(); t += 3) {
         const ids = [idx.getScalar(t), idx.getScalar(t + 1), idx.getScalar(t + 2)], tri = ids.map(P);
         const c = [0, 1, 2].map(k => (tri[0][k] + tri[1][k] + tri[2][k]) / 3);
-        const cover = up(tri) && (grid.get(Math.floor(c[0] / C) * 7919 + Math.floor(c[2] / C)) ?? []).some(i => {const y = hitY(floors[i], c[0], c[2]); return y !== null && Math.abs(y - c[1]) < 0.003;});
+        const cover = flat(tri) && (grid.get(Math.floor(c[0] / C) * 7919 + Math.floor(c[2] / C)) ?? []).some(i => {const y = hitY(floors[i], c[0], c[2]); return y !== null && Math.abs(y - c[1]) < 0.004;});
         if (cover) removed++; else keep.push(...ids);
       }
       if (keep.length !== idx.getCount()) prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(keep)).setBuffer(buffer));
     });
-    console.log(`kapı boşlukları: zeminle aynı düzlemdeki ${removed} beyaz duvar kapağı silindi`);
+    console.log(`kapı boşlukları: zeminle aynı düzlemdeki ${removed} yatay duvar/kasa kapağı silindi`);
   }
   console.log(`zeminler: parke/karo dokuları değişti, ıslak hacimlerde kesilen parke üçgeni ${cut}`);
 }
@@ -446,10 +487,14 @@ function applyFloors(doc) {
 // kuzeyden güneye: evyeli 2 kapaklı dolap 0,83 | mini buzdolabı 0,50 (sıra güney
 // duvarında biter). Tezgâh 0,90 yükseklik, 0,60 derinlik; raf tezgâhın
 // 0,35 m üstünde, askı çubuğu çatı eğiminin hemen altında. Ajanın önünü
-// kapatan duvarı (EK_M3C_sag_yan) ve tavan bloğu (EK_M3C_kapi_ustu) silinir.
+// kapatan duvarı (EK_M3C_sag_yan), tavan bloğu (EK_M3C_kapi_ustu) ve yatak odası kapısını
+// kapatan sol yanı (EK_M3C_sol_yan) silinir.
 function buildKitchenette(doc) {
   const root = doc.getRoot(), scene = root.listScenes()[0], buffer = root.listBuffers()[0];
-  for (const node of [...root.listNodes()]) if (/^EK_M3C_(sag_yan|kapi_ustu)$/.test(node.getName())) {node.getMesh()?.dispose(); node.dispose();}
+  // ajanın eski mutfak kutusunun kalan sol yanı (EK_M3C_sol_yan) çatı yatak odasının kapısını
+  // (x -0,1..-0,25, z -5,1..-4,1) beyaz duvarla kapatıyordu; F29 kirişi ve iki spotu o kutunun
+  // tavanına bağlıydı (z -3,55'te) ve kapının önüne giriyordu: hepsi silinir
+  for (const node of [...root.listNodes()]) if (/^EK_M3C_(sag_yan|sol_yan|kapi_ustu)$|^EK_A04_F29_(sol_kiris|spot_\d)$/.test(node.getName())) {node.getMesh()?.dispose(); node.dispose();}
   // çatı holündeki eski TV'nin ekran camı (0,96 x 0,53 m, z -1,01): TV Tripo oturma grubuyla
   // değişti (mobilya.json cati_oturma), eski TV silinince cam havada kalıyordu
   for (const node of [...root.listNodes()]) if (node.getName() === 'EK_glass_cati') {node.getMesh()?.dispose(); node.dispose();}

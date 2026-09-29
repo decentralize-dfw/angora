@@ -4,11 +4,11 @@
  "atlaslar": {
   "duvar": {
    "boyut": 4096,
-   "alan_m2": 2065.4,
-   "px_per_m": 60.1,
-   "doluluk": 0.688,
-   "parca": 3,
-   "ada": 1723,
+   "alan_m2": 2057.5,
+   "px_per_m": 60.2,
+   "doluluk": 0.686,
+   "parca": 2,
+   "ada": 1710,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_duvar_000": {
@@ -18,20 +18,16 @@
     "LM_duvar_001": {
      "texcoord": 1,
      "malzeme": "Simple White Wall"
-    },
-    "LM_duvar_002": {
-     "texcoord": 1,
-     "malzeme": "EK_SimpleWhiteWall"
     }
    }
   },
   "zemin": {
    "boyut": 4096,
-   "alan_m2": 2294.4,
+   "alan_m2": 2294.5,
    "px_per_m": 52.4,
    "doluluk": 0.792,
    "parca": 20,
-   "ada": 8899,
+   "ada": 8898,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_zemin_000": {

@@ -221,6 +221,20 @@
     -2.55
    ],
    "not": "giriş katı batı: eski ceviz sandalye (yerine sahibin koltuğu)"
+  },
+  {
+   "malzeme": "BLCK",
+   "min": [
+    -1.45,
+    10.15,
+    -6.15
+   ],
+   "max": [
+    -0.85,
+    10.75,
+    -6.05
+   ],
+   "not": "çatı yatak odası (f3-C02): yerde duran 0,5 m siyah telli disk (ajanın EK_BLCK_cati parçası)"
   }
  ],
  "hazir": [
