@@ -6,7 +6,7 @@
   0.15,
   1.8
  ],
- "yurunen_nokta": 59052,
+ "yurunen_nokta": 58821,
  "yeni_engeller": [
   {
    "malzeme": "EK_M2_Beyaz_merdiven_alti",
@@ -94,7 +94,7 @@
   },
   {
    "malzeme": "EK_M3_Koyu_ceviz_kapi",
-   "alan_m2": 0.31,
+   "alan_m2": 0.25,
    "ornek": [
     {
      "x": -1.84,
@@ -141,13 +141,13 @@
     {
      "x": 0.86,
      "z": -5.04,
-     "zemin_y": 9.45,
+     "zemin_y": 9.43,
      "engel_y": 11.22
     },
     {
      "x": 0.86,
      "z": -4.94,
-     "zemin_y": 9.45,
+     "zemin_y": 9.43,
      "engel_y": 11.22
     },
     {
@@ -220,7 +220,7 @@
   },
   {
    "malzeme": "EK_M3_Ceviz_gobek",
-   "alan_m2": 0.04,
+   "alan_m2": 0.03,
    "ornek": [
     {
      "x": 2.26,
@@ -233,12 +233,6 @@
      "z": -5.44,
      "zemin_y": 6.29,
      "engel_y": 6.54
-    },
-    {
-     "x": 2.86,
-     "z": 1.76,
-     "zemin_y": 3.05,
-     "engel_y": 3.26
     },
     {
      "x": 3.16,
@@ -267,24 +261,6 @@
    ]
   },
   {
-   "malzeme": "EK_M3_Garaj_siyah_kulp",
-   "alan_m2": 0.02,
-   "ornek": [
-    {
-     "x": 2.56,
-     "z": 0.66,
-     "zemin_y": 6.37,
-     "engel_y": 7.33
-    },
-    {
-     "x": 5.16,
-     "z": -4.94,
-     "zemin_y": 3.05,
-     "engel_y": 4.06
-    }
-   ]
-  },
-  {
    "malzeme": "EK_M3_Saten_paslanmaz_kulp",
    "alan_m2": 0.01,
    "ornek": [
@@ -293,6 +269,18 @@
      "z": -5.84,
      "zemin_y": 9.39,
      "engel_y": 10.43
+    }
+   ]
+  },
+  {
+   "malzeme": "EK_M3_Garaj_siyah_kulp",
+   "alan_m2": 0.01,
+   "ornek": [
+    {
+     "x": 2.56,
+     "z": 0.66,
+     "zemin_y": 6.37,
+     "engel_y": 7.33
     }
    ]
   },

@@ -2,13 +2,36 @@
  "uretim": "tools/batch-delivery/make-tur10-web.mjs",
  "dolgu_px": 6,
  "atlaslar": {
+  "duvar": {
+   "boyut": 4096,
+   "alan_m2": 2080.2,
+   "px_per_m": 59.9,
+   "doluluk": 0.688,
+   "parca": 3,
+   "ada": 1755,
+   "dosya": "tur10/BUILDING-opt-v6",
+   "dugumler": {
+    "LM_duvar_000": {
+     "texcoord": 1,
+     "malzeme": "EK_M2_Beyaz_merdiven_alti"
+    },
+    "LM_duvar_001": {
+     "texcoord": 1,
+     "malzeme": "Simple White Wall"
+    },
+    "LM_duvar_002": {
+     "texcoord": 1,
+     "malzeme": "EK_SimpleWhiteWall"
+    }
+   }
+  },
   "zemin": {
    "boyut": 4096,
-   "alan_m2": 2305.1,
-   "px_per_m": 52.3,
-   "doluluk": 0.822,
+   "alan_m2": 2296.7,
+   "px_per_m": 52.4,
+   "doluluk": 0.794,
    "parca": 20,
-   "ada": 9824,
+   "ada": 8950,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_zemin_000": {
@@ -90,29 +113,6 @@
     "LM_zemin_019": {
      "texcoord": 1,
      "malzeme": "RR"
-    }
-   }
-  },
-  "duvar": {
-   "boyut": 4096,
-   "alan_m2": 2080.2,
-   "px_per_m": 59.9,
-   "doluluk": 0.688,
-   "parca": 3,
-   "ada": 1755,
-   "dosya": "tur10/BUILDING-opt-v6",
-   "dugumler": {
-    "LM_duvar_000": {
-     "texcoord": 1,
-     "malzeme": "EK_M2_Beyaz_merdiven_alti"
-    },
-    "LM_duvar_001": {
-     "texcoord": 1,
-     "malzeme": "Simple White Wall"
-    },
-    "LM_duvar_002": {
-     "texcoord": 1,
-     "malzeme": "EK_SimpleWhiteWall"
     }
    }
   },

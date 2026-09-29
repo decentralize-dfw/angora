@@ -118,6 +118,53 @@ function applyFloors(doc) {
   const wet = rooms.spaces.filter(sp => WET.some(m => sp.members.includes(m)))
     .map(sp => ({floor: sp.floor_index, poly: sp.boundary_xz}));
   for (const w of wet) if (w.poly.length !== 4) throw Error('ıslak hacim dikdörtgen değil');
+  // Kapı eşikleri (EK_A04_*_esik_kapagi, EK_M3_*_esik_doseme): kapı boşluğundan
+  // büyük (1 m x 0,66 m), zeminden 2-8 cm kabarık, krem/koyu parçalardı. Her biri
+  // bulunduğu yerin ZEMİN malzemesiyle düz bir parçaya çevrilir, zeminin 3 mm
+  // altına iner: zemin olan yerde görünmez, yalnız kapı boşluğundaki açığı
+  // doldurur ve dünya UV'siyle yandaki zeminle kesintisiz devam eder.
+  {
+    const FLOORS = /^(WOOD-FL|wood_floor|terra_floor)$/;
+    const floorTris = [];
+    for (const node of root.listNodes()) {
+      const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
+      for (const prim of mesh.listPrimitives()) {
+        const mat = prim.getMaterial(); if (!FLOORS.test(mat?.getName() ?? '')) continue;
+        const pos = prim.getAttribute('POSITION'), idx = prim.getIndices(), v = [0, 0, 0];
+        const P = i => {pos.getElement(i, v); return [w[0]*v[0]+w[4]*v[1]+w[8]*v[2]+w[12], w[1]*v[0]+w[5]*v[1]+w[9]*v[2]+w[13], w[2]*v[0]+w[6]*v[1]+w[10]*v[2]+w[14]];};
+        const n = idx ? idx.getCount() : pos.getCount();
+        for (let t = 0; t < n; t += 3) floorTris.push({a: P(idx ? idx.getScalar(t) : t), b: P(idx ? idx.getScalar(t + 1) : t + 1), c: P(idx ? idx.getScalar(t + 2) : t + 2), mat});
+      }
+    }
+    const hitY = ({a, b, c}, x, z) => {
+      const d = (b[2]-c[2])*(a[0]-c[0]) + (c[0]-b[0])*(a[2]-c[2]); if (Math.abs(d) < 1e-12) return null;
+      const l1 = ((b[2]-c[2])*(x-c[0]) + (c[0]-b[0])*(z-c[2])) / d, l2 = ((c[2]-a[2])*(x-c[0]) + (a[0]-c[0])*(z-c[2])) / d, l3 = 1 - l1 - l2;
+      return l1 < -1e-6 || l2 < -1e-6 || l3 < -1e-6 ? null : l1 * a[1] + l2 * b[1] + l3 * c[1];
+    };
+    let patched = 0, dropped = 0;
+    for (const node of [...root.listNodes()]) {
+      if (!/esik_(kapagi|doseme)/.test(node.getName()) || !node.getMesh()) continue;
+      const b = getBounds(node), cx = (b.min[0] + b.max[0]) / 2, cz = (b.min[2] + b.max[2]) / 2;
+      const hits = [];
+      for (const [dx, dz] of [[0, 0], [0.5, 0], [-0.5, 0], [0, 0.5], [0, -0.5], [0.35, 0.35], [-0.35, 0.35], [0.35, -0.35], [-0.35, -0.35]])
+        for (const t of floorTris) {const y = hitY(t, cx + dx, cz + dz); if (y !== null && y > b.min[1] - 0.3 && y < b.max[1] + 0.02) hits.push({y, mat: t.mat});}
+      const mesh = node.getMesh();
+      if (!hits.length) {mesh.dispose(); node.dispose(); dropped++; continue;}
+      const ys = hits.map(h => h.y).sort((p, q) => p - q), y = ys[Math.floor(ys.length / 2)] - 0.003;
+      const count = new Map(); for (const h of hits) count.set(h.mat, (count.get(h.mat) ?? 0) + 1);
+      const mat = [...count].sort((p, q) => q[1] - p[1])[0][0];
+      const [x0, x1, z0, z1] = [b.min[0], b.max[0], b.min[2], b.max[2]];
+      const pos = new Float32Array([x0, y, z0, x0, y, z1, x1, y, z1, x0, y, z0, x1, y, z1, x1, y, z0]);
+      const prim = doc.createPrimitive().setMaterial(mat)
+        .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(pos).setBuffer(buffer))
+        .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(new Float32Array(18).map((_, i) => (i % 3 === 1 ? 1 : 0))).setBuffer(buffer))
+        .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(new Float32Array(12)).setBuffer(buffer));
+      const patch = doc.createNode(node.getName()).setMesh(doc.createMesh(node.getName()).addPrimitive(prim)).setExtras({kat: node.getExtras()?.kat});
+      scene.addChild(patch);
+      mesh.dispose(); node.dispose(); patched++;
+    }
+    console.log(`eşikler: ${patched} parça zemine gömüldü, ${dropped} parçanın altında zemin yok (silindi)`);
+  }
   const texture = (file, name) => doc.createTexture(name).setImage(readFileSync(path.join(DOKU, file))).setMimeType(file.endsWith('.png') ? 'image/png' : 'image/jpeg');
   // normal + pürüzlülük: dokunun kendisinden (tur10-dokular/pbr.py), desenle birebir; metal 0
   execFileSync(PYTHON, [path.join(DOKU, 'pbr.py')], {stdio: 'inherit'});
