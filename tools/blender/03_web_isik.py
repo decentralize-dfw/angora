@@ -1,6 +1,7 @@
 """Pişmiş ışık haritalarını (Blender EXR) web'e hazırlar.
 
-    <bpy'li python> tools/blender/03_web_isik.py <isik klasörü>
+    <bpy'li python> tools/blender/03_web_isik.py [--tur10] <isik klasörü>
+      --tur10: build/bake/tur10/lightmap-uv.json, çıktı build/bake/web-isik-tur10/
       (bpy + numpy + pillow; Blender'ın kendi python'u da olur)
 
 Girdi : <isik>/<atlas>_<durum>.exr    (02_pisir.py çıktısı, 20 dosya)
@@ -26,8 +27,9 @@ from lightmap_uv import read_glb, accessor
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
 SRC = os.path.abspath(sys.argv[-1])
-OUT = os.path.join(ROOT, 'build', 'bake', 'web-isik')
-SPEC = json.load(open(os.path.join(ROOT, 'build', 'bake', 'lightmap-uv.json'), encoding='utf-8'))
+TUR10 = '--tur10' in sys.argv
+OUT = os.path.join(ROOT, 'build', 'bake', 'web-isik-tur10' if TUR10 else 'web-isik')
+SPEC = json.load(open(os.path.join(ROOT, 'build', 'bake', 'tur10' if TUR10 else '', 'lightmap-uv.json'), encoding='utf-8'))
 STATES = ['gok', 'gunes_09', 'gunes_13', 'gunes_17', 'gece']
 # web boyutu: iç mekân gök/gece 2048, güneş sekmesi (düşük frekans) 1024; dış 1024
 WEB_SIZE = {('duvar', 'gok'): 2048, ('duvar', 'gece'): 2048, ('zemin', 'gok'): 2048, ('zemin', 'gece'): 2048}

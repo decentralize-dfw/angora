@@ -33,3 +33,5 @@ angora-bake/
 build/bake/BUILDING-opt-v4.decoded.glb
 build/bake/GARDEN-opt-v2.decoded.glb
 build/web/26092026/source/tur10/
+build/bake/tur10/giris.*
+build/bake/tur10/cikis.*

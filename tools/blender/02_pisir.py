@@ -9,6 +9,9 @@ Seçenekler:
     --ornek N         örnek sayısı (varsayılan 512)
     --cihaz GPU|CPU   varsayılan GPU (OPTIX, yoksa CUDA)
     --yeniden         var olan çıktıların üstüne yaz (varsayılan: atla -> kaldığı yerden sürer)
+    --tur10           Tur 10 sahnesi: build/bake/tur10/lightmap-uv.json (dosya listesi ve
+                      ışıklar oradan: BUILDING-opt-v6-lm + GARDEN-opt-v2-lm + INTERIOR-opt-v3,
+                      tools/blender/isiklar-v2.json); çıktı angora-bake/tur10/
 
 Sahne (web tarafının hazırladığı dosyalardan, repoda build/bake/):
     BUILDING-opt-v4-lm.glb, GARDEN-opt-v2-lm.glb  - pişen yüzeyler, lightmap UV'li
@@ -42,9 +45,12 @@ SAMPLES = 16 if TEST else int(opt('--ornek', 512))
 DEVICE = opt('--cihaz', 'GPU').upper()
 LIGHTS_ALL = ['gok', 'gunes_09', 'gunes_13', 'gunes_17', 'gece']
 LIGHTS = opt('--isik', ','.join(LIGHTS_ALL)).split(',')
+TUR10 = '--tur10' in argv
 BAKE_DIR = os.path.join(ROOT, 'build', 'bake')
-OUT = os.path.join(ROOT, 'angora-bake', 'test' if TEST else '')
-SPEC = json.load(open(os.path.join(BAKE_DIR, 'lightmap-uv.json'), encoding='utf-8'))
+OUT = os.path.join(ROOT, 'angora-bake', *(['tur10'] if TUR10 else []), 'test' if TEST else '')
+SPEC = json.load(open(os.path.join(BAKE_DIR, 'tur10' if TUR10 else '', 'lightmap-uv.json'), encoding='utf-8'))
+SCENE_FILES = SPEC.get('sahne', ['BUILDING-opt-v4-lm.glb', 'GARDEN-opt-v2-lm.glb', 'INTERIOR-opt-v2.decoded.glb'])
+LIGHTS_FILE = os.path.join(ROOT, SPEC.get('isiklar', 'tools/blender/isiklar.json'))
 ATLASES = opt('--atlas', ','.join(SPEC['atlaslar'])).split(',')
 for name in LIGHTS: assert name in LIGHTS_ALL, f'bilinmeyen ışık durumu: {name}'
 for name in ATLASES: assert name in SPEC['atlaslar'], f'bilinmeyen atlas: {name}'
@@ -61,7 +67,7 @@ def log(*a): print('[angora]', *a, flush=True)
 def build_scene():
     bpy.ops.wm.read_factory_settings(use_empty=True)
     scene = bpy.context.scene
-    for f in ('BUILDING-opt-v4-lm.glb', 'GARDEN-opt-v2-lm.glb', 'INTERIOR-opt-v2.decoded.glb'):
+    for f in SCENE_FILES:
         path = os.path.join(BAKE_DIR, f)
         assert os.path.exists(path), f'eksik dosya: {path}'
         bpy.ops.import_scene.gltf(filepath=path)
@@ -104,16 +110,21 @@ def build_scene():
                 if slot.material and slot.material.users > 1: slot.material = slot.material.copy()
     # ışıklar
     coll = bpy.data.collections.new('ARMATURLER'); scene.collection.children.link(coll)
-    data = json.load(open(os.path.join(ROOT, 'tools', 'blender', 'isiklar.json'), encoding='utf-8'))
+    data = json.load(open(LIGHTS_FILE, encoding='utf-8'))
     lamps = []
+    from mathutils import Matrix
+    # iki biçim: isiklar.json (guc_W, matris) ve Tur 10 isiklar-v2.json (guc, matris_blender; AREA + POINT)
     for rec in data['isiklar']:
-        if rec['ad'].startswith(SKIP_LIGHTS) or rec['tur'] != 'AREA': continue
-        L = bpy.data.lights.new(rec['ad'], 'AREA')
-        L.shape, L.size, L.size_y, L.spread = rec['sekil'], rec['boyut'], rec['boyut_y'], rec['yayilma']
-        L.energy, L.color = rec['guc_W'], rec['renk']
+        if rec['ad'].startswith(SKIP_LIGHTS) or rec['tur'] not in ('AREA', 'POINT'): continue
+        L = bpy.data.lights.new(rec['ad'], rec['tur'])
+        if rec['tur'] == 'AREA':
+            L.shape, L.size, L.size_y = rec.get('sekil', 'DISK'), rec.get('boyut', 0.3), rec.get('boyut_y', rec.get('boyut', 0.3))
+            if 'yayilma' in rec: L.spread = rec['yayilma']
+        else:
+            L.shadow_soft_size = rec.get('yaricap', 0.05)
+        L.energy, L.color = rec.get('guc_W', rec.get('guc')), rec['renk']
         o = bpy.data.objects.new(rec['ad'], L); coll.objects.link(o)
-        from mathutils import Matrix
-        o.matrix_world = Matrix(rec['matris'])
+        o.matrix_world = Matrix(rec.get('matris') or rec['matris_blender'])
         lamps.append(o)
     sun_data = bpy.data.lights.new('Gunes', 'SUN'); sun_data.energy = 1.0; sun_data.angle = math.radians(0.53)
     sun = bpy.data.objects.new('Gunes', sun_data); scene.collection.objects.link(sun)

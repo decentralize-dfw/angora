@@ -3,7 +3,7 @@ import {prepareBakedLighting} from './baked-lighting.js';
 import {restoreBatchSurface} from './batch-surface-response.js';
 import {prepareBatchedMaterial,stripFixtureLoops} from './batched-material.js';
 import {neutraliseTransmission} from './material-response.js';
-import {repairUntexturedWood} from './villa-model-v3.js';
+import {repairUntexturedWood,settleTur10Overlays} from './villa-model-v3.js';
 import {applyMaterialResponse} from './material-response-v2.js';
 import {chunkModelInPlace} from './context-plants-chunks.js';
 import {applyPlantVariation} from './plant-variation.js';
@@ -105,6 +105,8 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     }
     if(!manifest.batched||name==='architecture'){
       const repaired=repairUntexturedWood(model);
+      const settled=settleTur10Overlays(model);
+      if(settled)console.info(`Tur 10 ekleri öne: ${settled} malzeme (${name})`);
       if(repaired)console.info(`Untextured wood given the model's own wood maps: ${repaired} (${name})`);
     }
     const clipped=!context.includes(name)&&name!=='villa-context-white'&&name!=='plot-grass';

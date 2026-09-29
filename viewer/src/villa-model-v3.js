@@ -69,8 +69,8 @@ export function applyVillaModelV3(manifest, {mobile = false} = {}) {
 // teslim-tur10/web). Yalnız masaüstü; mobil kopyası henüz yok. Eski
 // dosyalar silinmez, bayrak kapatılınca v4/v2'ye döner.
 export const TUR10_MODELS = Object.freeze({
-  architecture: {file: 'BUILDING-opt-v6.glb', bytes: 8371784},
-  interior:     {file: 'INTERIOR-opt-v3.glb', bytes: 4243240},
+  architecture: {file: 'BUILDING-opt-v6.glb', bytes: 12071312},
+  interior:     {file: 'INTERIOR-opt-v3.glb', bytes: 4427308},
 });
 export function applyTur10(manifest) {
   if (!manifest?.parts || !manifest.batched) return [];
@@ -82,6 +82,18 @@ export function applyTur10(manifest) {
     swapped.push(part.name);
   }
   return swapped;
+}
+
+// Tur 10 ekleri (EK_ malzemeleri: süpürgelik, kartonpiyer, merdiven altı
+// kaplaması, eşik, kasa) eski yüzeylerin 3 mm yakınına, aynı yöne bakarak
+// oturuyor (tools/batch-delivery/audit-overlap.mjs ölçtü: ~40 m²). Derinlik
+// eşitliğinde yeni parça öne çizilir - titreyen yama olmaz. Eski modelde
+// EK_ malzemesi yok, dokunulmaz.
+export function settleTur10Overlays(model) {
+  const materials = new Set();
+  model.traverse(o => { if (o.isMesh) for (const m of [].concat(o.material)) if (m && /^EK_/.test(m.name)) materials.add(m); });
+  for (const m of materials) { m.polygonOffset = true; m.polygonOffsetFactor = -1; m.polygonOffsetUnits = -4; }
+  return materials.size;
 }
 
 // "Procedural Wood" (asansörün ceviz kapısı) Blender'da prosedürel dokuyla

@@ -1,0 +1,378 @@
+{
+ "yeni": "/home/user/angora/build/bake/tur10/BUILDING-opt-v6-lm.glb",
+ "eski": "/home/user/angora/build/web/26092026/BUILDING-opt-v4.glb",
+ "hucre_m": 0.1,
+ "aralik_m": [
+  0.15,
+  1.8
+ ],
+ "yurunen_nokta": 69725,
+ "yeni_engeller": [
+  {
+   "malzeme": "EK_M2_Beyaz_merdiven_alti",
+   "alan_m2": 12.25,
+   "ornek": [
+    {
+     "x": 0.66,
+     "z": -3.04,
+     "zemin_y": 3.02,
+     "engel_y": 3.24
+    },
+    {
+     "x": 0.66,
+     "z": -2.94,
+     "zemin_y": 3.02,
+     "engel_y": 3.24
+    },
+    {
+     "x": 0.66,
+     "z": -2.84,
+     "zemin_y": 3.02,
+     "engel_y": 3.24
+    },
+    {
+     "x": 0.66,
+     "z": -2.74,
+     "zemin_y": 3.02,
+     "engel_y": 3.24
+    },
+    {
+     "x": 0.66,
+     "z": -2.64,
+     "zemin_y": 3.02,
+     "engel_y": 3.24
+    },
+    {
+     "x": 0.66,
+     "z": -2.54,
+     "zemin_y": 3.02,
+     "engel_y": 3.24
+    }
+   ]
+  },
+  {
+   "malzeme": "EK_M3_Koyu_ceviz_kapi",
+   "alan_m2": 0.46,
+   "ornek": [
+    {
+     "x": -1.84,
+     "z": 0.56,
+     "zemin_y": 6.29,
+     "engel_y": 6.51
+    },
+    {
+     "x": -1.74,
+     "z": 0.56,
+     "zemin_y": 6.29,
+     "engel_y": 6.51
+    },
+    {
+     "x": -1.64,
+     "z": 0.56,
+     "zemin_y": 6.29,
+     "engel_y": 6.51
+    },
+    {
+     "x": -1.44,
+     "z": 0.56,
+     "zemin_y": 6.29,
+     "engel_y": 6.51
+    },
+    {
+     "x": -1.34,
+     "z": 0.56,
+     "zemin_y": 6.29,
+     "engel_y": 6.51
+    },
+    {
+     "x": -1.24,
+     "z": 0.56,
+     "zemin_y": 6.29,
+     "engel_y": 6.51
+    }
+   ]
+  },
+  {
+   "malzeme": "EK_M2_Ceviz_basamak",
+   "alan_m2": 0.39,
+   "ornek": [
+    {
+     "x": 1.66,
+     "z": -1.84,
+     "zemin_y": 2.55,
+     "engel_y": 2.73
+    },
+    {
+     "x": 1.66,
+     "z": -1.84,
+     "zemin_y": 5.82,
+     "engel_y": 6
+    },
+    {
+     "x": 1.66,
+     "z": -1.74,
+     "zemin_y": 2.55,
+     "engel_y": 2.73
+    },
+    {
+     "x": 1.66,
+     "z": -1.74,
+     "zemin_y": 5.82,
+     "engel_y": 6
+    },
+    {
+     "x": 1.66,
+     "z": -1.64,
+     "zemin_y": 2.55,
+     "engel_y": 2.73
+    },
+    {
+     "x": 1.66,
+     "z": -1.64,
+     "zemin_y": 5.82,
+     "engel_y": 6
+    }
+   ]
+  },
+  {
+   "malzeme": "EK_SimpleWhiteWall",
+   "alan_m2": 0.15,
+   "ornek": [
+    {
+     "x": 0.86,
+     "z": -5.04,
+     "zemin_y": 9.45,
+     "engel_y": 11.22
+    },
+    {
+     "x": 0.86,
+     "z": -4.94,
+     "zemin_y": 9.45,
+     "engel_y": 11.22
+    },
+    {
+     "x": 0.86,
+     "z": -4.84,
+     "zemin_y": 9.47,
+     "engel_y": 11.22
+    },
+    {
+     "x": 0.86,
+     "z": -4.74,
+     "zemin_y": 9.47,
+     "engel_y": 11.22
+    },
+    {
+     "x": 0.86,
+     "z": -4.64,
+     "zemin_y": 9.47,
+     "engel_y": 11.22
+    },
+    {
+     "x": 0.86,
+     "z": -4.54,
+     "zemin_y": 9.47,
+     "engel_y": 11.22
+    }
+   ]
+  },
+  {
+   "malzeme": "EK_M6_Kirik_beyaz_emaye",
+   "alan_m2": 0.14,
+   "ornek": [
+    {
+     "x": 2.86,
+     "z": 0.66,
+     "zemin_y": 2.7,
+     "engel_y": 3.22
+    },
+    {
+     "x": 2.86,
+     "z": 0.66,
+     "zemin_y": 3.02,
+     "engel_y": 3.22
+    },
+    {
+     "x": 2.86,
+     "z": 0.76,
+     "zemin_y": 2.7,
+     "engel_y": 3.22
+    },
+    {
+     "x": 2.86,
+     "z": 0.76,
+     "zemin_y": 3.02,
+     "engel_y": 3.22
+    },
+    {
+     "x": 2.86,
+     "z": 0.86,
+     "zemin_y": 2.7,
+     "engel_y": 3.22
+    },
+    {
+     "x": 2.86,
+     "z": 0.86,
+     "zemin_y": 3.02,
+     "engel_y": 3.22
+    }
+   ]
+  },
+  {
+   "malzeme": "EK_M3_Pirinc_donanim",
+   "alan_m2": 0.06,
+   "ornek": [
+    {
+     "x": -0.94,
+     "z": -4.04,
+     "zemin_y": 6.29,
+     "engel_y": 7.33
+    },
+    {
+     "x": -0.74,
+     "z": -4.04,
+     "zemin_y": 6.29,
+     "engel_y": 7.31
+    },
+    {
+     "x": 0.06,
+     "z": -1.44,
+     "zemin_y": -0.4,
+     "engel_y": 0.94
+    },
+    {
+     "x": 0.06,
+     "z": -1.44,
+     "zemin_y": -0.24,
+     "engel_y": 0.94
+    },
+    {
+     "x": 0.06,
+     "z": -1.44,
+     "zemin_y": -0.08,
+     "engel_y": 0.94
+    },
+    {
+     "x": 1.06,
+     "z": 2.36,
+     "zemin_y": 6.29,
+     "engel_y": 7.33
+    }
+   ]
+  },
+  {
+   "malzeme": "EK_M3_Ceviz_gobek",
+   "alan_m2": 0.05,
+   "ornek": [
+    {
+     "x": 2.26,
+     "z": -5.94,
+     "zemin_y": 6.29,
+     "engel_y": 6.99
+    },
+    {
+     "x": 2.56,
+     "z": -5.44,
+     "zemin_y": 6.29,
+     "engel_y": 6.54
+    },
+    {
+     "x": 2.86,
+     "z": 1.76,
+     "zemin_y": 3.02,
+     "engel_y": 3.26
+    },
+    {
+     "x": 3.16,
+     "z": 1.56,
+     "zemin_y": 2.7,
+     "engel_y": 3.26
+    },
+    {
+     "x": 3.16,
+     "z": 1.56,
+     "zemin_y": 3.02,
+     "engel_y": 3.26
+    }
+   ]
+  },
+  {
+   "malzeme": "EK_M1_Sicak_ceviz_supurgelik",
+   "alan_m2": 0.02,
+   "ornek": [
+    {
+     "x": 0.86,
+     "z": -0.94,
+     "zemin_y": -0.24,
+     "engel_y": 0.08
+    },
+    {
+     "x": 0.86,
+     "z": -0.94,
+     "zemin_y": -0.08,
+     "engel_y": 0.08
+    }
+   ]
+  },
+  {
+   "malzeme": "EK_M3G_Pirinc",
+   "alan_m2": 0.02,
+   "ornek": [
+    {
+     "x": 1.36,
+     "z": 1.26,
+     "zemin_y": 2.7,
+     "engel_y": 4.08
+    },
+    {
+     "x": 1.36,
+     "z": 1.26,
+     "zemin_y": 3.02,
+     "engel_y": 4.08
+    }
+   ]
+  },
+  {
+   "malzeme": "EK_M3_Garaj_siyah_kulp",
+   "alan_m2": 0.02,
+   "ornek": [
+    {
+     "x": 2.56,
+     "z": 0.66,
+     "zemin_y": 6.29,
+     "engel_y": 7.33
+    },
+    {
+     "x": 5.16,
+     "z": -4.94,
+     "zemin_y": 3.05,
+     "engel_y": 4.06
+    }
+   ]
+  },
+  {
+   "malzeme": "EK_M3_Saten_paslanmaz_kulp",
+   "alan_m2": 0.01,
+   "ornek": [
+    {
+     "x": -0.04,
+     "z": -5.84,
+     "zemin_y": 9.39,
+     "engel_y": 10.43
+    }
+   ]
+  },
+  {
+   "malzeme": "EK_A04_Eskitme_pirinc",
+   "alan_m2": 0.01,
+   "ornek": [
+    {
+     "x": 4.06,
+     "z": -2.84,
+     "zemin_y": 7.88,
+     "engel_y": 8.7
+    }
+   ]
+  }
+ ]
+}
