@@ -4,11 +4,11 @@
  "atlaslar": {
   "zemin": {
    "boyut": 4096,
-   "alan_m2": 2340.3,
-   "px_per_m": 51.9,
-   "doluluk": 0.82,
-   "parca": 22,
-   "ada": 9816,
+   "alan_m2": 2305.1,
+   "px_per_m": 52.3,
+   "doluluk": 0.822,
+   "parca": 20,
+   "ada": 9824,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_zemin_000": {
@@ -45,57 +45,49 @@
     },
     "LM_zemin_008": {
      "texcoord": 1,
-     "malzeme": "terra_floor"
+     "malzeme": "EK_A09_Banyo_bordur"
     },
     "LM_zemin_009": {
      "texcoord": 1,
-     "malzeme": "wood_floor"
+     "malzeme": "R31 | R33 attic tan mosaic band"
     },
     "LM_zemin_010": {
      "texcoord": 1,
-     "malzeme": "WOOD-FL"
+     "malzeme": "R31 | R33 master fine mosaic band"
     },
     "LM_zemin_011": {
      "texcoord": 1,
-     "malzeme": "EK_A09_Banyo_bordur"
+     "malzeme": "R31 | R33 master pale cream tile"
     },
     "LM_zemin_012": {
      "texcoord": 1,
-     "malzeme": "R31 | R33 attic tan mosaic band"
+     "malzeme": "RR"
     },
     "LM_zemin_013": {
      "texcoord": 1,
-     "malzeme": "R31 | R33 master fine mosaic band"
+     "malzeme": "R31 | R33 attic cream tile"
     },
     "LM_zemin_014": {
      "texcoord": 1,
-     "malzeme": "R31 | R33 master pale cream tile"
+     "malzeme": "terra_floor_giris"
     },
     "LM_zemin_015": {
      "texcoord": 1,
-     "malzeme": "RR"
+     "malzeme": "terra_floor"
     },
     "LM_zemin_016": {
      "texcoord": 1,
-     "malzeme": "R31 | R33 attic cream tile"
+     "malzeme": "wood_floor"
     },
     "LM_zemin_017": {
      "texcoord": 1,
-     "malzeme": "wood_floor"
+     "malzeme": "WOOD-FL"
     },
     "LM_zemin_018": {
      "texcoord": 1,
-     "malzeme": "WOOD-FL"
-    },
-    "LM_zemin_019": {
-     "texcoord": 1,
      "malzeme": "WHT.001"
     },
-    "LM_zemin_020": {
-     "texcoord": 1,
-     "malzeme": "terra_floor"
-    },
-    "LM_zemin_021": {
+    "LM_zemin_019": {
      "texcoord": 1,
      "malzeme": "RR"
     }
@@ -103,11 +95,11 @@
   },
   "duvar": {
    "boyut": 4096,
-   "alan_m2": 2097.9,
-   "px_per_m": 59.6,
-   "doluluk": 0.689,
+   "alan_m2": 2080.2,
+   "px_per_m": 59.9,
+   "doluluk": 0.688,
    "parca": 3,
-   "ada": 1761,
+   "ada": 1755,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_duvar_000": {

@@ -6,88 +6,46 @@
   0.15,
   1.8
  ],
- "yurunen_nokta": 69725,
+ "yurunen_nokta": 59052,
  "yeni_engeller": [
   {
    "malzeme": "EK_M2_Beyaz_merdiven_alti",
-   "alan_m2": 12.25,
+   "alan_m2": 11.93,
    "ornek": [
     {
-     "x": 0.66,
+     "x": 0.96,
      "z": -3.04,
-     "zemin_y": 3.02,
-     "engel_y": 3.24
+     "zemin_y": 3.1,
+     "engel_y": 3.41
     },
     {
-     "x": 0.66,
+     "x": 0.96,
+     "z": -3.04,
+     "zemin_y": 6.13,
+     "engel_y": 6.51
+    },
+    {
+     "x": 0.96,
      "z": -2.94,
-     "zemin_y": 3.02,
-     "engel_y": 3.24
+     "zemin_y": 3.1,
+     "engel_y": 3.41
     },
     {
-     "x": 0.66,
+     "x": 0.96,
+     "z": -2.94,
+     "zemin_y": 6.13,
+     "engel_y": 6.51
+    },
+    {
+     "x": 0.96,
      "z": -2.84,
-     "zemin_y": 3.02,
-     "engel_y": 3.24
+     "zemin_y": 3.1,
+     "engel_y": 3.41
     },
     {
-     "x": 0.66,
-     "z": -2.74,
-     "zemin_y": 3.02,
-     "engel_y": 3.24
-    },
-    {
-     "x": 0.66,
-     "z": -2.64,
-     "zemin_y": 3.02,
-     "engel_y": 3.24
-    },
-    {
-     "x": 0.66,
-     "z": -2.54,
-     "zemin_y": 3.02,
-     "engel_y": 3.24
-    }
-   ]
-  },
-  {
-   "malzeme": "EK_M3_Koyu_ceviz_kapi",
-   "alan_m2": 0.46,
-   "ornek": [
-    {
-     "x": -1.84,
-     "z": 0.56,
-     "zemin_y": 6.29,
-     "engel_y": 6.51
-    },
-    {
-     "x": -1.74,
-     "z": 0.56,
-     "zemin_y": 6.29,
-     "engel_y": 6.51
-    },
-    {
-     "x": -1.64,
-     "z": 0.56,
-     "zemin_y": 6.29,
-     "engel_y": 6.51
-    },
-    {
-     "x": -1.44,
-     "z": 0.56,
-     "zemin_y": 6.29,
-     "engel_y": 6.51
-    },
-    {
-     "x": -1.34,
-     "z": 0.56,
-     "zemin_y": 6.29,
-     "engel_y": 6.51
-    },
-    {
-     "x": -1.24,
-     "z": 0.56,
-     "zemin_y": 6.29,
+     "x": 0.96,
+     "z": -2.84,
+     "zemin_y": 6.13,
      "engel_y": 6.51
     }
    ]
@@ -135,6 +93,48 @@
    ]
   },
   {
+   "malzeme": "EK_M3_Koyu_ceviz_kapi",
+   "alan_m2": 0.31,
+   "ornek": [
+    {
+     "x": -1.84,
+     "z": 0.56,
+     "zemin_y": 6.29,
+     "engel_y": 6.51
+    },
+    {
+     "x": -1.74,
+     "z": 0.56,
+     "zemin_y": 6.29,
+     "engel_y": 6.51
+    },
+    {
+     "x": -1.64,
+     "z": 0.56,
+     "zemin_y": 6.29,
+     "engel_y": 6.51
+    },
+    {
+     "x": -1.44,
+     "z": 0.56,
+     "zemin_y": 6.29,
+     "engel_y": 6.51
+    },
+    {
+     "x": -1.34,
+     "z": 0.56,
+     "zemin_y": 6.29,
+     "engel_y": 6.51
+    },
+    {
+     "x": -1.24,
+     "z": 0.56,
+     "zemin_y": 6.29,
+     "engel_y": 6.51
+    }
+   ]
+  },
+  {
    "malzeme": "EK_SimpleWhiteWall",
    "alan_m2": 0.15,
    "ornek": [
@@ -173,48 +173,6 @@
      "z": -4.54,
      "zemin_y": 9.47,
      "engel_y": 11.22
-    }
-   ]
-  },
-  {
-   "malzeme": "EK_M6_Kirik_beyaz_emaye",
-   "alan_m2": 0.14,
-   "ornek": [
-    {
-     "x": 2.86,
-     "z": 0.66,
-     "zemin_y": 2.7,
-     "engel_y": 3.22
-    },
-    {
-     "x": 2.86,
-     "z": 0.66,
-     "zemin_y": 3.02,
-     "engel_y": 3.22
-    },
-    {
-     "x": 2.86,
-     "z": 0.76,
-     "zemin_y": 2.7,
-     "engel_y": 3.22
-    },
-    {
-     "x": 2.86,
-     "z": 0.76,
-     "zemin_y": 3.02,
-     "engel_y": 3.22
-    },
-    {
-     "x": 2.86,
-     "z": 0.86,
-     "zemin_y": 2.7,
-     "engel_y": 3.22
-    },
-    {
-     "x": 2.86,
-     "z": 0.86,
-     "zemin_y": 3.02,
-     "engel_y": 3.22
     }
    ]
   },
@@ -262,7 +220,7 @@
   },
   {
    "malzeme": "EK_M3_Ceviz_gobek",
-   "alan_m2": 0.05,
+   "alan_m2": 0.04,
    "ornek": [
     {
      "x": 2.26,
@@ -279,19 +237,13 @@
     {
      "x": 2.86,
      "z": 1.76,
-     "zemin_y": 3.02,
+     "zemin_y": 3.05,
      "engel_y": 3.26
     },
     {
      "x": 3.16,
      "z": 1.56,
-     "zemin_y": 2.7,
-     "engel_y": 3.26
-    },
-    {
-     "x": 3.16,
-     "z": 1.56,
-     "zemin_y": 3.02,
+     "zemin_y": 3.1,
      "engel_y": 3.26
     }
    ]
@@ -315,31 +267,13 @@
    ]
   },
   {
-   "malzeme": "EK_M3G_Pirinc",
-   "alan_m2": 0.02,
-   "ornek": [
-    {
-     "x": 1.36,
-     "z": 1.26,
-     "zemin_y": 2.7,
-     "engel_y": 4.08
-    },
-    {
-     "x": 1.36,
-     "z": 1.26,
-     "zemin_y": 3.02,
-     "engel_y": 4.08
-    }
-   ]
-  },
-  {
    "malzeme": "EK_M3_Garaj_siyah_kulp",
    "alan_m2": 0.02,
    "ornek": [
     {
      "x": 2.56,
      "z": 0.66,
-     "zemin_y": 6.29,
+     "zemin_y": 6.37,
      "engel_y": 7.33
     },
     {
