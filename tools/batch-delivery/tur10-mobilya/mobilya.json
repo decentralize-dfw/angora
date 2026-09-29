@@ -1,10 +1,48 @@
 {
- "aciklama": "Tur 10 mobilyaları (ürün sahibinin Tripo modelleri). make-tur10-web.mjs INTERIOR'a ekler. 'kutu': Tripo dosyası içinde parçayı seçen xz kutusu (bağlı bileşenlerin merkezi bu kutuda olanlar). 'konum': dünya x, z (glTF); y zeminden otomatik. 'yon': y ekseni etrafında derece (0 = Tripo'nun önü +z'ye bakar). 'sil': eski INTERIOR'dan kaldırılacak üçgenler (malzeme + dünya kutusu). 'kat': 0 bodrum, 1 giriş, 2 birinci kat, 3 çatı - zemin o katta aranır.",
+ "aciklama": "Tur 10 mobilyaları (ürün sahibinin Tripo modelleri). make-tur10-web.mjs INTERIOR'a ekler. 'kutu': Tripo dosyası içinde parçayı seçen xz kutusu (bağlı bileşenlerin merkezi bu kutuda olanlar). 'konum': dünya x, z (glTF); y zeminden otomatik. 'yon': y ekseni etrafında derece (0 = Tripo'nun önü +z'ye bakar). 'sil': eski INTERIOR'dan kaldırılacak üçgenler (malzeme ya da malzeme listesi + dünya kutusu; üç köşesi de kutuda olan). 'olcek': sayı ya da Tripo eksenlerinde [x, y, z]; parçada da verilebilir. 'kat': 0 bodrum, 1 giriş, 2 birinci kat, 3 çatı - zemin o katta aranır.",
  "kaynaklar": {
   "bodrum-salon-1": {
    "dosya": "bodrum-salon-1.glb",
    "olcek": 3.0,
    "not": "foto 02: koltuk, kırmızı dolap, siyah yemek masası + 4 sandalye; tek parça, 1 m'ye normalize - masa 76 cm'den ölçek 3,0"
+  },
+  "metal-yatak": {
+   "dosya": "metal-yatak.glb",
+   "olcek": [
+    1.8,
+    2.05,
+    2.15
+   ],
+   "not": "foto: ferforje yatak; tek parça, başlık -z. 160x200 yatak: en 1,66, boy 2,15, başlık 1,22 m"
+  },
+  "berjer-sehpa": {
+   "dosya": "berjer-sehpa.glb",
+   "olcek": 2.16,
+   "not": "foto: kulaklı berjer + koyu sehpa; berjer Tripo içinde -65° dönük (önü -x+z), yükseklik 1,12 m"
+  },
+  "kose-koltuk": {
+   "dosya": "kose-koltuk.glb",
+   "olcek": 3.8,
+   "not": "foto: gri köşe koltuk + sandık; uzun kol -z sırtlı, dönüş +x ucunda +z yönünde. Sırt 0,82 m, uzun kol 3,8 m"
+  },
+  "cati-oturma": {
+   "dosya": "cati-oturma.glb",
+   "olcek": [
+    3.0,
+    3.4,
+    2.7
+   ],
+   "not": "foto 09: mavi kanepe (-x), meşe orta sehpa, TV ünitesi (+x). Boyuna eksen (z) fotoğraftan uzamış: 0,8 ile kısaltıldı; kanepe 2,7 m, sofa oturma 0,48 m"
+  },
+  "deri-takim": {
+   "dosya": "deri-takim.glb",
+   "olcek": 4.2,
+   "not": "foto: deri kanepe + 2 berjer + orta sehpa + 2 yan sehpa (gramofon); tüm düzen fotoğraftaki gibi tek grup. Kanepe sırtı 0,85 m, 2,2 m"
+  },
+  "yemek-takimi": {
+   "dosya": "yemek-takimi.glb",
+   "olcek": 2.85,
+   "not": "foto: oymalı yemek masası + 7 sandalye; masa 0,74 m, sandalye 1,15 m"
   }
  },
  "parcalar": [
@@ -135,6 +173,141 @@
    ],
    "yon": 0,
    "kat": 0
+  },
+  {
+   "ad": "yatak_106",
+   "kaynak": "metal-yatak",
+   "kutu": [
+    -1,
+    1,
+    -1,
+    1
+   ],
+   "konum": [
+    -3.88,
+    2.35
+   ],
+   "yon": 90,
+   "kat": 2,
+   "not": "f2-106: başlık batı duvarında, komodinin (z 3,2-3,7) kuzeyi"
+  },
+  {
+   "ad": "berjer_1",
+   "kaynak": "berjer-sehpa",
+   "kutu": [
+    -1,
+    1,
+    -1,
+    -0.02
+   ],
+   "konum": [
+    -4.385,
+    -3.33
+   ],
+   "yon": 65,
+   "kat": 2,
+   "not": "1. kat hol: kuzey duvarı önü, eski hardal berjerlerin yeri"
+  },
+  {
+   "ad": "berjer_2",
+   "kaynak": "berjer-sehpa",
+   "kutu": [
+    -1,
+    1,
+    -1,
+    -0.02
+   ],
+   "konum": [
+    -3.085,
+    -3.33
+   ],
+   "yon": 65,
+   "kat": 2
+  },
+  {
+   "ad": "berjer_sehpa",
+   "kaynak": "berjer-sehpa",
+   "kutu": [
+    -1,
+    1,
+    -0.02,
+    1
+   ],
+   "konum": [
+    -3.8,
+    -2.05
+   ],
+   "yon": 85.3,
+   "kat": 2,
+   "not": "Tripo sehpası 4,7° eğik: uzun kenar x boyunca"
+  },
+  {
+   "ad": "bodrum_kose_koltuk",
+   "kaynak": "kose-koltuk",
+   "kutu": [
+    -1,
+    1,
+    -1,
+    1
+   ],
+   "konum": [
+    -3.93,
+    -6.12
+   ],
+   "yon": 90,
+   "kat": 0,
+   "not": "bodrum salon (foto 05 yönünden): uzun kol batı duvarında, dönüş kuzey duvarı boyunca; sandık önünde"
+  },
+  {
+   "ad": "cati_oturma",
+   "kaynak": "cati-oturma",
+   "kutu": [
+    -1,
+    1,
+    -1,
+    1
+   ],
+   "konum": [
+    -3.6,
+    -2.03
+   ],
+   "yon": -90,
+   "kat": 3,
+   "not": "çatı holü (foto 09): kanepe kuzeyde, TV güneyde, sehpa arada"
+  },
+  {
+   "ad": "salon_deri_takim",
+   "kaynak": "deri-takim",
+   "kutu": [
+    -1,
+    1,
+    -1,
+    1
+   ],
+   "konum": [
+    2.12,
+    -5.83
+   ],
+   "yon": -90,
+   "kat": 1,
+   "not": "giriş katı salon: kanepe doğu duvarında (x 3,05) batıya bakar, berjerler kuzey/güney uçlarda"
+  },
+  {
+   "ad": "yemek_takimi",
+   "kaynak": "yemek-takimi",
+   "kutu": [
+    -1,
+    1,
+    -1,
+    1
+   ],
+   "konum": [
+    -3.08,
+    -5.4
+   ],
+   "yon": 0,
+   "kat": 1,
+   "not": "giriş katı yemek: eski masanın yeri, uzun kenar z boyunca"
   }
  ],
  "sil": [
@@ -151,6 +324,131 @@
     -5.15
    ],
    "not": "eski gri yemek masası + sandalyeler (foto 02)"
+  },
+  {
+   "malzeme": [
+    "BLCK",
+    "brass (4)",
+    "ROUGHNSS1"
+   ],
+   "min": [
+    -4.99,
+    6.3,
+    1.4
+   ],
+   "max": [
+    -2.7,
+    7.5,
+    3.22
+   ],
+   "not": "eski yatak f2-106"
+  },
+  {
+   "malzeme": [
+    "BLCK",
+    "brass (4)",
+    "ROUGHNSS1"
+   ],
+   "min": [
+    -4.28,
+    6.3,
+    3.2
+   ],
+   "max": [
+    -2.7,
+    7.5,
+    3.85
+   ],
+   "not": "eski yatak f2-106 güney kenarı (komodin x < -4,3 kalır)"
+  },
+  {
+   "malzeme": [
+    "R31 | Hall ochre woven upholstery",
+    "wood_honey"
+   ],
+   "min": [
+    -4.9,
+    6.3,
+    -3.85
+   ],
+   "max": [
+    -2.6,
+    7.6,
+    -1.7
+   ],
+   "not": "eski hardal berjerler + sehpa"
+  },
+  {
+   "malzeme": [
+    "ROUGHNSS1",
+    "R31 | R33 antique nook walnut"
+   ],
+   "min": [
+    -5.0,
+    -0.2,
+    -7.45
+   ],
+   "max": [
+    -4.0,
+    1.2,
+    -4.7
+   ],
+   "not": "eski bodrum kanepesi (batı duvarı)"
+  },
+  {
+   "malzeme": [
+    "BLCK",
+    "ROUGHNSS1",
+    "wood_honey"
+   ],
+   "min": [
+    -4.9,
+    9.4,
+    -3.5
+   ],
+   "max": [
+    -2.85,
+    10.8,
+    -0.75
+   ],
+   "not": "eski çatı oturma grubu"
+  },
+  {
+   "malzeme": [
+    "X",
+    "R31 | R33 antique nook walnut",
+    "wood_honey",
+    "cabinet_glass"
+   ],
+   "min": [
+    0.7,
+    2.7,
+    -7.905
+   ],
+   "max": [
+    3.02,
+    3.95,
+    -3.7
+   ],
+   "not": "eski salon oturma grubu (perdeler z < -7,91 kalır)"
+  },
+  {
+   "malzeme": [
+    "R31 | R33 antique nook walnut",
+    "ROUGHNSS1",
+    "wood_honey"
+   ],
+   "min": [
+    -4.25,
+    2.8,
+    -6.6
+   ],
+   "max": [
+    -1.9,
+    4.1,
+    -4.2
+   ],
+   "not": "eski yemek masası + 6 sandalye"
   }
  ]
 }

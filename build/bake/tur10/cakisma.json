@@ -414,15 +414,6 @@
   ]
  },
  {
-  "cift": "WHT.001  <->  glass",
-  "alan_m2": 0.02,
-  "ornek": [
-   -3.63,
-   11.13,
-   2.1
-  ]
- },
- {
   "cift": "RR  <->  Simple White Wall",
   "alan_m2": 0.02,
   "ornek": [

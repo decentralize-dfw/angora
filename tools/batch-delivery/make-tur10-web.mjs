@@ -396,6 +396,9 @@ function applyFloors(doc) {
 function buildKitchenette(doc) {
   const root = doc.getRoot(), scene = root.listScenes()[0], buffer = root.listBuffers()[0];
   for (const node of [...root.listNodes()]) if (/^EK_M3C_(sag_yan|kapi_ustu)$/.test(node.getName())) {node.getMesh()?.dispose(); node.dispose();}
+  // çatı holündeki eski TV'nin ekran camı (0,96 x 0,53 m, z -1,01): TV Tripo oturma grubuyla
+  // değişti (mobilya.json cati_oturma), eski TV silinince cam havada kalıyordu
+  for (const node of [...root.listNodes()]) if (node.getName() === 'EK_glass_cati') {node.getMesh()?.dispose(); node.dispose();}
   const mats = new Map(root.listMaterials().map(m => [m.getName(), m]));
   const plain = (name, rgb, rough, metal = 0) => doc.createMaterial(name).setBaseColorFactor([...rgb, 1]).setRoughnessFactor(rough).setMetallicFactor(metal);
   const walnut = mats.get('EK_M3_Ceviz_gobek') ?? plain('EK_mini_ceviz', [0.30, 0.15, 0.08], 0.5);
@@ -618,7 +621,7 @@ async function addFurniture(doc) {
     for (const node of root.listNodes()) {
       const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
       for (const prim of mesh.listPrimitives()) {
-        if (prim.getMaterial()?.getName() !== cut.malzeme || !prim.getIndices()) continue;
+        if (![cut.malzeme].flat().includes(prim.getMaterial()?.getName()) || !prim.getIndices()) continue;
         const pos = prim.getAttribute('POSITION'), idx = prim.getIndices(), v = [0, 0, 0], keep = [];
         const inBox = i => {pos.getElement(i, v); const q = [w[0]*v[0]+w[4]*v[1]+w[8]*v[2]+w[12], w[1]*v[0]+w[5]*v[1]+w[9]*v[2]+w[13], w[2]*v[0]+w[6]*v[1]+w[10]*v[2]+w[14]]; return q.every((c, k) => c >= cut.min[k] && c <= cut.max[k]);};
         for (let t = 0; t < idx.getCount(); t += 3) {
@@ -628,7 +631,8 @@ async function addFurniture(doc) {
         prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(keep)).setBuffer(buffer));
       }
     }
-    console.log(`mobilya: eski '${cut.malzeme}' ${removed} üçgen silindi (${cut.not ?? ''})`);
+    if (!removed) throw Error(`mobilya: sil kutusu boş (${cut.not ?? cut.malzeme})`);
+    console.log(`mobilya: eski '${[cut.malzeme].flat().join("', '")}' ${removed} üçgen silindi (${cut.not ?? ''})`);
   }
   // kaynakları oku, bağlı bileşenlere ayır
   const sources = {};
@@ -675,14 +679,17 @@ async function addFurniture(doc) {
     const [x, z] = part.konum, y = floorAt(x, z, DATUMS[part.kat] + 1.0);
     if (y !== null && Math.abs(y - DATUMS[part.kat]) > 0.5) throw Error(`mobilya: ${part.ad} zemini ${y} - ${part.kat}. kat değil`);
     if (y === null) throw Error(`mobilya: ${part.ad} altında zemin yok (${x}, ${z})`);
-    const th = (part.yon ?? 0) * Math.PI / 180, s = src.scale, c = Math.cos(th), sn = Math.sin(th);
+    // ölçek tek sayı ya da Tripo eksenlerinde [x, y, z] (fotoğraftan gelen boy oranı bozukluğu için);
+    // parçanın kendi 'olcek'i kaynağınkini ezer
+    const sc = part.olcek ?? src.scale, s = Array.isArray(sc) ? sc : [sc, sc, sc];
+    const th = (part.yon ?? 0) * Math.PI / 180, c = Math.cos(th), sn = Math.sin(th);
     // M = T(x,y,z) * R_y(th) * S(s) * T(-pivot)
-    const m = [c * s, 0, -sn * s, 0, 0, s, 0, 0, sn * s, 0, c * s, 0, 0, 0, 0, 1];
-    const tp = [-pivot[0] * s, -pivot[1] * s, -pivot[2] * s];
+    const m = [c * s[0], 0, -sn * s[0], 0, 0, s[1], 0, 0, sn * s[2], 0, c * s[2], 0, 0, 0, 0, 1];
+    const tp = [-pivot[0] * s[0], -pivot[1] * s[1], -pivot[2] * s[2]];
     m[12] = x + c * tp[0] + sn * tp[2]; m[13] = y + tp[1]; m[14] = z - sn * tp[0] + c * tp[2];
     const node = doc.createNode('MOBILYA_' + part.ad).setMesh(doc.createMesh('MOBILYA_' + part.ad).addPrimitive(prim)).setMatrix(m).setExtras({kat: floorOf(y)});
     scene.addChild(node);
-    const w = [(mx[0] - mn[0]) * s, (mx[1] - mn[1]) * s, (mx[2] - mn[2]) * s];
+    const w = [(mx[0] - mn[0]) * s[0], (mx[1] - mn[1]) * s[1], (mx[2] - mn[2]) * s[2]];
     console.log(`mobilya: ${part.ad} (${chosen.length} parça) ${w.map(v => v.toFixed(2)).join(' x ')} m @ (${x}, ${y.toFixed(3)}, ${z}) ${part.yon ?? 0}°`);
   }
   for (const {prim} of Object.values(sources)) {const mesh = prim.listParents().find(p => p.propertyType === 'Mesh'); prim.dispose(); mesh?.dispose();}
