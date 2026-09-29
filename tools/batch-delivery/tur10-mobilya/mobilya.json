@@ -1,246 +1,18 @@
 {
- "aciklama": "Tur 10 mobilyaları (ürün sahibinin Tripo modelleri). make-tur10-web.mjs INTERIOR'a ekler. 'kutu': Tripo dosyası içinde parçayı seçen xz kutusu (bağlı bileşenlerin merkezi bu kutuda olanlar). 'konum': dünya x, z (glTF); y zeminden otomatik. 'yon': y ekseni etrafında derece (0 = Tripo'nun önü +z'ye bakar). 'sil': eski INTERIOR'dan kaldırılacak üçgenler (malzeme ya da malzeme listesi + dünya kutusu; üç köşesi de kutuda olan). 'olcek': sayı ya da Tripo eksenlerinde [x, y, z]; parçada da verilebilir. 'kat': 0 bodrum, 1 giriş, 2 birinci kat, 3 çatı - zemin o katta aranır.",
+ "aciklama": "Tur 10 mobilyaları (ürün sahibinin Tripo modelleri). make-tur10-web.mjs INTERIOR'a ekler. 'kutu': Tripo dosyası içinde parçayı seçen xz kutusu (bağlı bileşenlerin merkezi bu kutuda olanlar). 'konum': dünya x, z (glTF); y zeminden otomatik. 'yon': y ekseni etrafında derece (0 = Tripo'nun önü +z'ye bakar). 'sil': eski INTERIOR'dan kaldırılacak üçgenler (malzeme ya da malzeme listesi + dünya kutusu; üç köşesi de kutuda olan). 'olcek': sayı ya da Tripo eksenlerinde [x, y, z]; parçada da verilebilir. 'kat': 0 bodrum, 1 giriş, 2 birinci kat, 3 çatı - zemin o katta aranır. 'hazir': ürün sahibinin Blender'da yerine koyduğu GLB'ler; dünya koordinatında aynen alınır, bileşenler yalnız zemine oturtulur (<= 8 cm).",
  "kaynaklar": {
-  "bodrum-salon-1": {
-   "dosya": "bodrum-salon-1.glb",
-   "olcek": 3.0,
-   "not": "foto 02: koltuk, kırmızı dolap, siyah yemek masası + 4 sandalye; tek parça, 1 m'ye normalize - masa 76 cm'den ölçek 3,0"
-  },
-  "metal-yatak": {
-   "dosya": "metal-yatak.glb",
-   "olcek": [
-    1.8,
-    2.05,
-    2.15
-   ],
-   "not": "foto: ferforje yatak; tek parça, başlık -z. 160x200 yatak: en 1,66, boy 2,15, başlık 1,22 m"
-  },
-  "berjer-sehpa": {
-   "dosya": "berjer-sehpa.glb",
-   "olcek": 2.16,
-   "not": "foto: kulaklı berjer + koyu sehpa; berjer Tripo içinde -65° dönük (önü -x+z), yükseklik 1,12 m"
-  },
   "kose-koltuk": {
    "dosya": "kose-koltuk.glb",
    "olcek": 3.8,
    "not": "foto: gri köşe koltuk + sandık; uzun kol -z sırtlı, dönüş +x ucunda +z yönünde. Sırt 0,82 m, uzun kol 3,8 m"
   },
-  "cati-oturma": {
-   "dosya": "cati-oturma.glb",
-   "olcek": [
-    3.0,
-    3.4,
-    2.7
-   ],
-   "not": "foto 09: mavi kanepe (-x), meşe orta sehpa, TV ünitesi (+x). Boyuna eksen (z) fotoğraftan uzamış: 0,8 ile kısaltıldı; kanepe 2,7 m, sofa oturma 0,48 m"
-  },
   "deri-takim": {
    "dosya": "deri-takim.glb",
    "olcek": 4.2,
    "not": "foto: deri kanepe + 2 berjer + orta sehpa + 2 yan sehpa (gramofon); tüm düzen fotoğraftaki gibi tek grup. Kanepe sırtı 0,85 m, 2,2 m"
-  },
-  "yemek-takimi": {
-   "dosya": "yemek-takimi.glb",
-   "olcek": 2.85,
-   "not": "foto: oymalı yemek masası + 7 sandalye; masa 0,74 m, sandalye 1,15 m"
   }
  },
  "parcalar": [
-  {
-   "ad": "bodrum_koltuk",
-   "kaynak": "bodrum-salon-1",
-   "kutu": [
-    -0.51,
-    -0.32,
-    -0.08,
-    0.1
-   ],
-   "konum": [
-    0.55,
-    -7.76
-   ],
-   "yon": 0,
-   "not": "kuzey duvarı, pencerenin (x 1,19-2,19) solu",
-   "kat": 0
-  },
-  {
-   "ad": "antre_koltuk",
-   "kaynak": "bodrum-salon-1",
-   "kutu": [
-    -0.51,
-    -0.32,
-    -0.08,
-    0.1
-   ],
-   "konum": [
-    0.84,
-    1.52
-   ],
-   "yon": 180,
-   "not": "foto 40'taki köşe (radyatör-kapı arası) çift kapının açık sağ kanadıyla dolu (40 cm boşluk): kapının batı yanında güney duvarına sırtı dönük, odaya bakar",
-   "kat": 1
-  },
-  {
-   "ad": "bodrum_dolap",
-   "kaynak": "bodrum-salon-1",
-   "kutu": [
-    -0.17,
-    0.18,
-    -0.38,
-    -0.15
-   ],
-   "konum": [
-    2.585,
-    -7.72
-   ],
-   "yon": 0,
-   "not": "kuzey duvarı, pencere ile doğu köşesi arası",
-   "kat": 0
-  },
-  {
-   "ad": "bodrum_masa",
-   "kaynak": "bodrum-salon-1",
-   "kutu": [
-    0.05,
-    0.48,
-    -0.18,
-    0.3
-   ],
-   "merkez_secim": [
-    0.265,
-    0.057
-   ],
-   "konum": [
-    1.1,
-    -6.05
-   ],
-   "yon": 0,
-   "not": "eski gri masanın yeri, avizenin altı",
-   "kat": 0
-  },
-  {
-   "ad": "bodrum_sandalye_1",
-   "kaynak": "bodrum-salon-1",
-   "merkez_secim": [
-    0.153,
-    0.038
-   ],
-   "konum": [
-    0.764,
-    -6.107
-   ],
-   "yon": 0,
-   "kat": 0
-  },
-  {
-   "ad": "bodrum_sandalye_2",
-   "kaynak": "bodrum-salon-1",
-   "merkez_secim": [
-    0.4125,
-    0.0
-   ],
-   "konum": [
-    1.542,
-    -6.221
-   ],
-   "yon": 0,
-   "kat": 0
-  },
-  {
-   "ad": "bodrum_sandalye_3",
-   "kaynak": "bodrum-salon-1",
-   "merkez_secim": [
-    0.2365,
-    0.2965
-   ],
-   "konum": [
-    1.014,
-    -5.332
-   ],
-   "yon": 0,
-   "kat": 0
-  },
-  {
-   "ad": "bodrum_sandalye_4",
-   "kaynak": "bodrum-salon-1",
-   "merkez_secim": [
-    0.373,
-    0.1555
-   ],
-   "konum": [
-    1.424,
-    -5.755
-   ],
-   "yon": 0,
-   "kat": 0
-  },
-  {
-   "ad": "yatak_106",
-   "kaynak": "metal-yatak",
-   "kutu": [
-    -1,
-    1,
-    -1,
-    1
-   ],
-   "konum": [
-    -3.88,
-    2.35
-   ],
-   "yon": 90,
-   "kat": 2,
-   "not": "f2-106: başlık batı duvarında, komodinin (z 3,2-3,7) kuzeyi"
-  },
-  {
-   "ad": "berjer_1",
-   "kaynak": "berjer-sehpa",
-   "kutu": [
-    -1,
-    1,
-    -1,
-    -0.02
-   ],
-   "konum": [
-    -4.385,
-    -3.33
-   ],
-   "yon": 65,
-   "kat": 2,
-   "not": "1. kat hol: kuzey duvarı önü, eski hardal berjerlerin yeri"
-  },
-  {
-   "ad": "berjer_2",
-   "kaynak": "berjer-sehpa",
-   "kutu": [
-    -1,
-    1,
-    -1,
-    -0.02
-   ],
-   "konum": [
-    -3.085,
-    -3.33
-   ],
-   "yon": 65,
-   "kat": 2
-  },
-  {
-   "ad": "berjer_sehpa",
-   "kaynak": "berjer-sehpa",
-   "kutu": [
-    -1,
-    1,
-    -0.02,
-    1
-   ],
-   "konum": [
-    -3.8,
-    -2.05
-   ],
-   "yon": 85.3,
-   "kat": 2,
-   "not": "Tripo sehpası 4,7° eğik: uzun kenar x boyunca"
-  },
   {
    "ad": "bodrum_kose_koltuk",
    "kaynak": "kose-koltuk",
@@ -259,23 +31,6 @@
    "not": "bodrum salon (foto 05 yönünden): uzun kol batı duvarında, dönüş kuzey duvarı boyunca; sandık önünde"
   },
   {
-   "ad": "cati_oturma",
-   "kaynak": "cati-oturma",
-   "kutu": [
-    -1,
-    1,
-    -1,
-    1
-   ],
-   "konum": [
-    -3.6,
-    -2.03
-   ],
-   "yon": -90,
-   "kat": 3,
-   "not": "çatı holü (foto 09): kanepe kuzeyde, TV güneyde, sehpa arada"
-  },
-  {
    "ad": "salon_deri_takim",
    "kaynak": "deri-takim",
    "kutu": [
@@ -291,23 +46,6 @@
    "yon": -90,
    "kat": 1,
    "not": "giriş katı salon: kanepe doğu duvarında (x 3,05) batıya bakar, berjerler kuzey/güney uçlarda"
-  },
-  {
-   "ad": "yemek_takimi",
-   "kaynak": "yemek-takimi",
-   "kutu": [
-    -1,
-    1,
-    -1,
-    1
-   ],
-   "konum": [
-    -3.08,
-    -5.4
-   ],
-   "yon": 0,
-   "kat": 1,
-   "not": "giriş katı yemek: eski masanın yeri, uzun kenar z boyunca"
   }
  ],
  "sil": [
@@ -449,6 +187,47 @@
     -4.2
    ],
    "not": "eski yemek masası + 6 sandalye"
+  },
+  {
+   "malzeme": [
+    "R31 | R33 antique nook walnut",
+    "ROUGHNSS1"
+   ],
+   "min": [
+    -4.9,
+    3.05,
+    -1.6
+   ],
+   "max": [
+    -4.3,
+    4.35,
+    -0.9
+   ],
+   "not": "giriş katı batı: eski ceviz sandalye (yerine sahibin koltuğu)"
+  },
+  {
+   "malzeme": [
+    "R31 | R33 antique nook walnut",
+    "ROUGHNSS1"
+   ],
+   "min": [
+    -4.9,
+    3.05,
+    -3.2
+   ],
+   "max": [
+    -4.3,
+    4.35,
+    -2.55
+   ],
+   "not": "giriş katı batı: eski ceviz sandalye (yerine sahibin koltuğu)"
+  }
+ ],
+ "hazir": [
+  {
+   "ad": "sahip",
+   "dosya": "yerlesim-sahip-1.glb",
+   "not": "ürün sahibinin düzenlediği YENIFURNITUERLER.glb (29.09): bodrum takımı + giriş katı 3 koltuk (bodrum-salon-1), yemek takımı, 1. kat berjerler, çatı oturma grubu, 2 ferforje yatak (f2-106 ve f2-107). Tripo parçalarının yerine geçer; deri takım ve gri köşe koltuk parcalar'da kalır."
   }
  ]
 }

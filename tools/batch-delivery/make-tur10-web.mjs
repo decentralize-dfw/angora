@@ -373,7 +373,9 @@ function applyFloors(doc) {
     }
     const count = verts.length * 3, p = new Float32Array(count * 3), nr = new Float32Array(count * 3), uv = new Float32Array(count * 2);
     verts.forEach(({tri, n}, i) => tri.forEach((vv, j) => {
-      const o = i * 3 + j; p.set(vv, o * 3); nr.set(n, o * 3);
+      // eski beyaz duvar (Simple White Wall) aynı düzlemde 1-3 mm arkada kalıyordu: uzakta
+      // derinlik çözünürlüğü yetmiyor, üçgen üçgen beyaz öne çıkıyordu. Seramik 4 mm odaya alınır.
+      const o = i * 3 + j; p.set(vv.map((c, k) => c + n[k] * 0.004), o * 3); nr.set(n, o * 3);
       const k = floorOf((tri[0][1] + tri[1][1] + tri[2][1]) / 3), y0 = DATUMS[k] + BAND + V0 * H;
       uv[o * 2] = (Math.abs(n[0]) > Math.abs(n[2]) ? vv[2] : vv[0]) / W; uv[o * 2 + 1] = (y0 - vv[1]) / H;
     }));
@@ -384,13 +386,65 @@ function applyFloors(doc) {
     scene.addChild(doc.createNode('banyo_duvar').setMesh(doc.createMesh('banyo_duvar').addPrimitive(prim)).setExtras({kat: 'kat1'}));
     console.log(`banyo duvarları: ${verts.length} üçgen yeni seramiğe (${(verts.reduce((a, {tri}) => {const e1 = [0,1,2].map(k => tri[1][k]-tri[0][k]), e2 = [0,1,2].map(k => tri[2][k]-tri[0][k]); return a + Math.hypot(e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]) / 2;}, 0)).toFixed(1)} m²)`);
   }
+  // Kapı boşluklarında 3 cm'lik duvar kaplamasının (Simple White Wall) yukarı bakan alt
+  // kapakları zeminle aynı düzlemde (0-1 mm): eşiğin iki yanında beyaz çizgi olarak
+  // titreşiyordu. Altında 3 mm içinde zemin olan yukarı bakan beyaz duvar üçgeni silinir
+  // (zemin zaten altta; giriş kapısının 4 cm yüksek eşiği gibi gerçek basamaklar kalır).
+  {
+    const WALK = /^(WOOD-FL|wood_floor|terra_floor|terra_floor_giris|stone_tile|RR|R31 \| R33 .*tile)$/;
+    const floors = [], grid = new Map(), C = 0.5;
+    const up = t => {
+      const e1 = [0, 1, 2].map(k => t[1][k] - t[0][k]), e2 = [0, 1, 2].map(k => t[2][k] - t[0][k]);
+      const cy = e1[2]*e2[0] - e1[0]*e2[2], L = Math.hypot(e1[1]*e2[2]-e1[2]*e2[1], cy, e1[0]*e2[1]-e1[1]*e2[0]);
+      return L > 1e-10 && cy / L > 0.9;
+    };
+    const each = (fn) => {
+      for (const node of root.listNodes()) {
+        const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
+        for (const prim of mesh.listPrimitives()) {
+          const pos = prim.getAttribute('POSITION'), v = [0, 0, 0];
+          const P = i => {pos.getElement(i, v); return [w[0]*v[0]+w[4]*v[1]+w[8]*v[2]+w[12], w[1]*v[0]+w[5]*v[1]+w[9]*v[2]+w[13], w[2]*v[0]+w[6]*v[1]+w[10]*v[2]+w[14]];};
+          fn(prim, P);
+        }
+      }
+    };
+    each((prim, P) => {
+      if (!WALK.test(prim.getMaterial()?.getName() ?? '')) return;
+      const idx = prim.getIndices(), n = idx ? idx.getCount() : prim.getAttribute('POSITION').getCount();
+      for (let t = 0; t < n; t += 3) {
+        const tri = [0, 1, 2].map(k => P(idx ? idx.getScalar(t + k) : t + k)); if (!up(tri)) continue;
+        const i = floors.push(tri) - 1;
+        const x0 = Math.floor(Math.min(...tri.map(p => p[0])) / C), x1 = Math.floor(Math.max(...tri.map(p => p[0])) / C);
+        const z0 = Math.floor(Math.min(...tri.map(p => p[2])) / C), z1 = Math.floor(Math.max(...tri.map(p => p[2])) / C);
+        for (let x = x0; x <= x1; x++) for (let z = z0; z <= z1; z++) (grid.get(x * 7919 + z) ?? grid.set(x * 7919 + z, []).get(x * 7919 + z)).push(i);
+      }
+    });
+    const hitY = ([a, b, c], x, z) => {
+      const d = (b[2]-c[2])*(a[0]-c[0]) + (c[0]-b[0])*(a[2]-c[2]); if (Math.abs(d) < 1e-12) return null;
+      const l1 = ((b[2]-c[2])*(x-c[0]) + (c[0]-b[0])*(z-c[2])) / d, l2 = ((c[2]-a[2])*(x-c[0]) + (a[0]-c[0])*(z-c[2])) / d, l3 = 1 - l1 - l2;
+      return l1 < -1e-6 || l2 < -1e-6 || l3 < -1e-6 ? null : l1 * a[1] + l2 * b[1] + l3 * c[1];
+    };
+    let removed = 0;
+    each((prim, P) => {
+      if (prim.getMaterial()?.getName() !== 'Simple White Wall' || !prim.getIndices()) return;
+      const idx = prim.getIndices(), keep = [];
+      for (let t = 0; t < idx.getCount(); t += 3) {
+        const ids = [idx.getScalar(t), idx.getScalar(t + 1), idx.getScalar(t + 2)], tri = ids.map(P);
+        const c = [0, 1, 2].map(k => (tri[0][k] + tri[1][k] + tri[2][k]) / 3);
+        const cover = up(tri) && (grid.get(Math.floor(c[0] / C) * 7919 + Math.floor(c[2] / C)) ?? []).some(i => {const y = hitY(floors[i], c[0], c[2]); return y !== null && Math.abs(y - c[1]) < 0.003;});
+        if (cover) removed++; else keep.push(...ids);
+      }
+      if (keep.length !== idx.getCount()) prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(keep)).setBuffer(buffer));
+    });
+    console.log(`kapı boşlukları: zeminle aynı düzlemdeki ${removed} beyaz duvar kapağı silindi`);
+  }
   console.log(`zeminler: parke/karo dokuları değişti, ıslak hacimlerde kesilen parke üçgeni ${cut}`);
 }
 
 // --- Çatı katı mini mutfak (foto 06), basit kutularla -----------------------
 // Banyo önündeki sahanlıkta doğu duvarı (x 1,89) boyunca, önü batıya bakar;
-// kuzeyden güneye: evyeli 2 kapaklı dolap 0,80 | mini buzdolabı 0,50 | tek
-// kapaklı dolap 0,44. Tezgâh 0,90 yükseklik, 0,60 derinlik; raf tezgâhın
+// kuzeyden güneye: evyeli 2 kapaklı dolap 0,83 | mini buzdolabı 0,50 (sıra güney
+// duvarında biter). Tezgâh 0,90 yükseklik, 0,60 derinlik; raf tezgâhın
 // 0,35 m üstünde, askı çubuğu çatı eğiminin hemen altında. Ajanın önünü
 // kapatan duvarı (EK_M3C_sag_yan) ve tavan bloğu (EK_M3C_kapi_ustu) silinir.
 function buildKitchenette(doc) {
@@ -413,7 +467,10 @@ function buildKitchenette(doc) {
   const F = 9.47, WALL = 1.89, D = 0.60, FRONT = WALL - D, Z0 = -5.14;
   const boxes = [];
   const box = (mat, x0, x1, y0, y1, z0, z1) => boxes.push({mat, min: [x0, F + y0, z0], max: [x1, F + y1, z1]});
-  const units = [['dolap2', 0.80], ['buzdolabi', 0.50], ['dolap1', 0.44]];
+  // sıra sahanlığın güney duvarında (yüz z -3,807) biter: eskiden 0,44'lük tek kapaklı dolapla
+  // z -3,40'a uzanıp duvarı delerek hole taşıyordu. Evyeli dolap kalan boşluğu doldurur.
+  const ZW = -3.807, FRIDGE = 0.50;
+  const units = [['dolap2', ZW - 0.003 - Z0 - FRIDGE], ['buzdolabi', FRIDGE]];
   let z = Z0;
   for (const [kind, w] of units) {
     const za = z, zb = z + w; z = zb;
@@ -693,6 +750,65 @@ async function addFurniture(doc) {
     console.log(`mobilya: ${part.ad} (${chosen.length} parça) ${w.map(v => v.toFixed(2)).join(' x ')} m @ (${x}, ${y.toFixed(3)}, ${z}) ${part.yon ?? 0}°`);
   }
   for (const {prim} of Object.values(sources)) {const mesh = prim.listParents().find(p => p.propertyType === 'Mesh'); prim.dispose(); mesh?.dispose();}
+  // 'hazir': ürün sahibinin Blender'da yerine koyduğu dosyalar (dünya koordinatı, glTF).
+  // Konum/dönüş/ölçek AYNEN alınır; yalnız her bağlı bileşenin altı, birkaç cm'lik
+  // elle yerleştirme payı kadar (<= 8 cm) o kattaki zemine indirilir/kaldırılır. Bir düğüm
+  // birkaç kata yayılabilir (bodrum takımı + giriş koltukları): kat başına ayrı düğüm olur,
+  // sitede kat kesiti mobilyayı doğru katla gizlesin.
+  for (const item of spec.hazir ?? []) {
+    const other = await io.read(path.join(DIR_M, item.dosya));
+    const map = mergeDocuments(doc, other);
+    for (const src of other.getRoot().listNodes()) {
+      const srcMesh = src.getMesh(); if (!srcMesh) continue;
+      const w = src.getWorldMatrix(), sp = map.get(srcMesh.listPrimitives()[0]);
+      const pa = sp.getAttribute('POSITION').getArray(), na = sp.getAttribute('NORMAL')?.getArray(), idx = sp.getIndices().getArray();
+      const n = pa.length / 3, P = new Float32Array(pa.length), N = na ? new Float32Array(na.length) : null;
+      // dünya matrisi köşelere işlenir (ölçek düzgün: normal için aynı 3x3, sonra birim boy)
+      for (let i = 0; i < n; i++) {
+        const v = [pa[3*i], pa[3*i+1], pa[3*i+2]];
+        for (let k = 0; k < 3; k++) P[3*i+k] = w[k]*v[0] + w[4+k]*v[1] + w[8+k]*v[2] + w[12+k];
+        if (N) {
+          const q = [na[3*i], na[3*i+1], na[3*i+2]], r = [0, 1, 2].map(k => w[k]*q[0] + w[4+k]*q[1] + w[8+k]*q[2]), l = Math.hypot(...r) || 1;
+          for (let k = 0; k < 3; k++) N[3*i+k] = r[k] / l;
+        }
+      }
+      // bağlı bileşenler (kaynak konumuna göre kaynaşık köşeler)
+      const parent = Int32Array.from({length: n}, (_, i) => i), keyOf = new Map(), rep = new Int32Array(n);
+      const find = a => {while (parent[a] !== a) a = parent[a] = parent[parent[a]]; return a;};
+      for (let i = 0; i < n; i++) {const k = `${pa[3*i].toFixed(5)},${pa[3*i+1].toFixed(5)},${pa[3*i+2].toFixed(5)}`; rep[i] = keyOf.get(k) ?? (keyOf.set(k, i), i);}
+      for (let t = 0; t < idx.length; t += 3) {const a = find(rep[idx[t]]); parent[find(rep[idx[t + 1]])] = a; parent[find(rep[idx[t + 2]])] = a;}
+      const comps = new Map();
+      for (let t = 0; t < idx.length; t += 3) {const r = find(rep[idx[t]]); (comps.get(r) ?? comps.set(r, []).get(r)).push(t);}
+      const byFloor = new Map(), done = new Set();
+      for (const tris of comps.values()) {
+        const verts = [...new Set(tris.flatMap(t => [idx[t], idx[t + 1], idx[t + 2]]))];
+        let mn = [1e9, 1e9, 1e9], mx = [-1e9, -1e9, -1e9];
+        for (const i of verts) for (let k = 0; k < 3; k++) {mn[k] = Math.min(mn[k], P[3*i+k]); mx[k] = Math.max(mx[k], P[3*i+k]);}
+        const kat = floorOf(mn[1] + 0.3), cx = (mn[0] + mx[0]) / 2, cz = (mn[2] + mx[2]) / 2;
+        const y = floorAt(cx, cz, DATUMS[kat] + 1.0);
+        let dy = 0;
+        if (y !== null && Math.abs(y - DATUMS[kat]) < 0.5 && Math.abs(mn[1] - y) <= 0.08) dy = y - mn[1];
+        for (const i of verts) if (!done.has(i)) {P[3*i+1] += dy; done.add(i);}
+        (byFloor.get(kat) ?? byFloor.set(kat, []).get(kat)).push(...tris);
+      }
+      for (const [kat, tris] of [...byFloor].sort((a, b) => a[0] - b[0])) {
+        const used = [...new Set(tris.flatMap(t => [idx[t], idx[t + 1], idx[t + 2]]))], remap = new Map(used.map((o, i) => [o, i]));
+        const prim = doc.createPrimitive().setMaterial(sp.getMaterial());
+        for (const sem of sp.listSemantics()) {
+          const acc = sp.getAttribute(sem), size = acc.getElementSize();
+          const arr = sem === 'POSITION' ? P : sem === 'NORMAL' && N ? N : acc.getArray(), out = new arr.constructor(used.length * size);
+          used.forEach((o, i) => {for (let k = 0; k < size; k++) out[i * size + k] = arr[o * size + k];});
+          prim.setAttribute(sem, doc.createAccessor().setType(acc.getType()).setArray(out).setNormalized(acc.getNormalized()).setBuffer(buffer));
+        }
+        prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(tris.flatMap(t => [remap.get(idx[t]), remap.get(idx[t + 1]), remap.get(idx[t + 2])]))).setBuffer(buffer));
+        const name = `MOBILYA_${item.ad}_${srcMesh.getName().replace(/\W+/g, '')}_kat${kat}`;
+        scene.addChild(doc.createNode(name).setMesh(doc.createMesh(name).addPrimitive(prim)).setExtras({kat}));
+        console.log(`mobilya: ${name} ${tris.length} üçgen`);
+      }
+      sp.listParents().filter(p => p.propertyType === 'Mesh').forEach(m => m.dispose()); sp.dispose();
+    }
+    for (const s2 of other.getRoot().listScenes()) {const m = map.get(s2); for (const c of m.listChildren()) {m.removeChild(c); c.dispose();} m.dispose();}
+  }
 }
 
 // --- BUILDING ----------------------------------------------------------------
