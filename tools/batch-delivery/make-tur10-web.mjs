@@ -271,19 +271,128 @@ function applyFloors(doc) {
       prim.setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(a.getArray().map(v => v * s)).setBuffer(buffer));
     }
   };
-  // merdiven basamakları zeminin parkesiyle (ürün sahibi: fotoğraftaki gibi aynı ahşap);
-  // basamak UV'si 2,24/m, parke dokusu 2,0 m -> 0,5/m
   // (alt ve üst kaynakta aynı adlı AYRI malzemeler var: hepsi değişir)
   const named = name => root.listMaterials().filter(m => m.getName() === name);
-  for (const stepMat of named('EK_M2_Ceviz_basamak')) {restyle(stepMat, parke); scaleUV(stepMat, 0.5 / 2.24);}
+  // üçgen üçgen dünya koordinatı (düğüm matrisiyle), ilkel başına
+  const worldTris = (node, prim) => {
+    const w = node.getWorldMatrix(), pos = prim.getAttribute('POSITION'), idx = prim.getIndices(), v = [0, 0, 0];
+    const P = i => {pos.getElement(i, v); return [w[0]*v[0]+w[4]*v[1]+w[8]*v[2]+w[12], w[1]*v[0]+w[5]*v[1]+w[9]*v[2]+w[13], w[2]*v[0]+w[6]*v[1]+w[10]*v[2]+w[14]];};
+    const n = idx ? idx.getCount() : pos.getCount(), out = [];
+    for (let t = 0; t < n; t += 3) out.push([0, 1, 2].map(k => P(idx ? idx.getScalar(t + k) : t + k)));
+    return out;
+  };
+  const faceN = t => {
+    const e1 = [0, 1, 2].map(k => t[1][k] - t[0][k]), e2 = [0, 1, 2].map(k => t[2][k] - t[0][k]);
+    const c = [e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]], L = Math.hypot(...c);
+    return L > 1e-12 ? c.map(x => x / L) : null;
+  };
+  // Merdiven basamakları/sahanlıkları ZEMİNİN KENDİ malzemesine (wood = WOOD-FL) geçer:
+  // ürün sahibi 'aynı ahşap' istedi; ayrı malzemede (EK_M2_Ceviz_basamak) sitede farklı
+  // parlıyordu. Üst yüzler plankalar basamak boyunca (z) uzanacak dünya UV'si (2 m),
+  // rıht/yan yüzler kutu izdüşümü.
+  // (üçgenler burada toplanır, ilkel zemin döngüsünden SONRA eklenir: döngü WOOD-FL adlı
+  // her şeye zemin UV'si verirdi, rıhtlar gerilirdi)
+  const stairTris = [];
+  for (const node of [...root.listNodes()]) {
+    const mesh = node.getMesh(); if (!mesh) continue;
+    for (const prim of [...mesh.listPrimitives()]) {
+      if (prim.getMaterial()?.getName() !== 'EK_M2_Ceviz_basamak') continue;
+      stairTris.push(...worldTris(node, prim)); mesh.removePrimitive(prim); prim.dispose();
+    }
+    if (!mesh.listPrimitives().length) {mesh.dispose(); node.dispose();}
+  }
+  const addStairs = () => {
+    const tris = stairTris, p = [], nr = [], uv = [];
+    for (const t of tris) {
+      const n = faceN(t); if (!n) continue;
+      for (const v of t) {
+        p.push(...v); nr.push(...n);
+        if (Math.abs(n[1]) > 0.7) uv.push(v[2] / 2.0, -v[0] / 2.0);
+        else if (Math.abs(n[0]) > Math.abs(n[2])) uv.push(v[2] / 2.0, -v[1] / 2.0);
+        else uv.push(v[0] / 2.0, -v[1] / 2.0);
+      }
+    }
+    const prim = doc.createPrimitive().setMaterial(wood)
+      .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(new Float32Array(p)).setBuffer(buffer))
+      .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(new Float32Array(nr)).setBuffer(buffer))
+      .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(new Float32Array(uv)).setBuffer(buffer));
+    scene.addChild(doc.createNode('merdiven_parke').setMesh(doc.createMesh('merdiven_parke').addPrimitive(prim)));
+    console.log(`merdiven: ${p.length / 9} basamak/sahanlık üçgeni zemin parkesi malzemesine (WOOD-FL)`);
+  };
+  // Sıva (Stucco painted wall) v6'da İÇ duvarlarda da kullanılıyor: yalnız DIŞ cephe mavi-gri
+  // olur. Ölçüt: üçgen merkezinin kendi katındaki oda poligonlarına (rooms.json, bitmiş
+  // duvar yüzü) uzaklığı. İç yüzler ~3 cm, dış cephe duvar kalınlığı kadar (20-35 cm)
+  // uzakta: < 12 cm -> iç (beyaz iç duvar malzemesi), değilse dış.
+  const ROOMS = JSON.parse(readFileSync(path.join(REPO, 'build/web/full/rooms.json'), 'utf8')).spaces;
+  const roomPolys = [0, 1, 2, 3].map(k => ROOMS.filter(r => r.floor_index === k).map(r => r.boundary_xz));
+  const inPoly = (x, z, P) => {let c = false; for (let i = 0, j = P.length - 1; i < P.length; j = i++) {const [a, b] = P[i], [e, f] = P[j]; if ((b > z) !== (f > z) && x < (e - a) * (z - b) / (f - b) + a) c = !c;} return c;};
+  const segDist = (x, z, [a, b], [e, f]) => {const dx = e - a, dz = f - b, L = dx * dx + dz * dz; const t = L ? Math.max(0, Math.min(1, ((x - a) * dx + (z - b) * dz) / L)) : 0; return Math.hypot(x - a - t * dx, z - b - t * dz);};
+  const roomDist = (x, z, k) => {let d = Infinity; for (const P of roomPolys[k]) {if (inPoly(x, z, P)) return 0; for (let i = 0; i < P.length; i++) d = Math.min(d, segDist(x, z, P[i], P[(i + 1) % P.length]));} return d;};
+  const roomFloor = y => (y < DATUMS[1] - 0.3 ? 0 : y < DATUMS[2] - 0.3 ? 1 : y < DATUMS[3] - 0.3 ? 2 : 3);
+  {
+    const white = named('Simple White Wall')[0];
+    if (!white) throw Error('sıva: Simple White Wall yok');
+    let inA = 0, outA = 0;
+    for (const node of [...root.listNodes()]) {
+      const mesh = node.getMesh(); if (!mesh) continue;
+      for (const prim of [...mesh.listPrimitives()]) {
+        if (prim.getMaterial()?.getName() !== 'Stucco painted wall' || !prim.getIndices()) continue;
+        const idx = prim.getIndices(), tris = worldTris(node, prim), inner = [], outer = [];
+        tris.forEach((t, i) => {
+          const c = [0, 1, 2].map(k => (t[0][k] + t[1][k] + t[2][k]) / 3), n = faceN(t);
+          const ids = [idx.getScalar(3 * i), idx.getScalar(3 * i + 1), idx.getScalar(3 * i + 2)];
+          const e1 = [0, 1, 2].map(k => t[1][k] - t[0][k]), e2 = [0, 1, 2].map(k => t[2][k] - t[0][k]);
+          const a = Math.hypot(e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]) / 2;
+          if (roomDist(c[0], c[2], roomFloor(c[1])) < 0.12) {inner.push(...ids); inA += a;} else {outer.push(...ids); outA += a;}
+        });
+        if (!inner.length) continue;
+        const ip = doc.createPrimitive().setMaterial(white).setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(inner)).setBuffer(buffer));
+        for (const sem of prim.listSemantics()) ip.setAttribute(sem, prim.getAttribute(sem));
+        mesh.addPrimitive(ip);
+        if (outer.length) prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(outer)).setBuffer(buffer));
+        else {mesh.removePrimitive(prim); prim.dispose();}
+      }
+    }
+    console.log(`sıva: iç ${inA.toFixed(0)} m² beyaz iç duvara, dış ${outA.toFixed(0)} m² mavi-gri cephe`);
+  }
   // dış cephe: ürün sahibinin mavi-gri sıvası (BUILDING-opt-v4 / angora-wip, wall012). v6'da
   // ajan düz beyaz dokuya çevirmişti (prune onu tek renge indiriyordu). v4'te doku 2,344/m
   // (TEXCOORD_2), v6 UV0'ı 1/m: aynı tekrar için UV0 x2,344.
+  // Çukur salonun (zemin 2,80) duvar dibindeki 22 cm'lik taş karo şeridi (stone_tile, dikey)
+  // süpürgelik gibi görünüyor ama gri karo desenliydi: evin öteki süpürgelikleriyle aynı
+  // ceviz süpürgelik malzemesine geçer (kutu UV, 1 m).
+  {
+    const skirt = named('EK_M1_Sicak_ceviz_supurgelik')[0];
+    if (!skirt) throw Error('süpürgelik malzemesi yok');
+    const moved = [];
+    for (const node of [...root.listNodes()]) {
+      const mesh = node.getMesh(); if (!mesh) continue;
+      for (const prim of [...mesh.listPrimitives()]) {
+        if (prim.getMaterial()?.getName() !== 'stone_tile' || !prim.getIndices()) continue;
+        const idx = prim.getIndices(), keep = [];
+        worldTris(node, prim).forEach((t, i) => {
+          const n = faceN(t), cy = (t[0][1] + t[1][1] + t[2][1]) / 3;
+          if (n && Math.abs(n[1]) < 0.5 && cy > 2.75 && cy < 3.12) moved.push({t, n});
+          else keep.push(idx.getScalar(3 * i), idx.getScalar(3 * i + 1), idx.getScalar(3 * i + 2));
+        });
+        if (keep.length === idx.getCount()) continue;
+        if (keep.length) prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(keep)).setBuffer(buffer));
+        else {mesh.removePrimitive(prim); prim.dispose();}
+      }
+    }
+    const p = [], nr = [], uv = [];
+    for (const {t, n} of moved) for (const v of t) {p.push(...v); nr.push(...n); uv.push(Math.abs(n[0]) > Math.abs(n[2]) ? v[2] : v[0], -v[1]);}
+    if (p.length) scene.addChild(doc.createNode('salon_supurgelik').setMesh(doc.createMesh('salon_supurgelik').addPrimitive(doc.createPrimitive().setMaterial(skirt)
+      .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(new Float32Array(p)).setBuffer(buffer))
+      .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(new Float32Array(nr)).setBuffer(buffer))
+      .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(new Float32Array(uv)).setBuffer(buffer)))));
+    console.log(`salon: taş karo duvar dibi şeridi ${moved.length} üçgen ceviz süpürgeliğe`);
+  }
   const facade = {color: texture('cephe-v4.png', 'cephe-v4'), normal: texture('cephe-v4_normal.png', 'cephe-v4_normal'), mr: texture('cephe-v4_mr.png', 'cephe-v4_mr')};
   const stuccos = named('Stucco painted wall');
   if (!stuccos.length) throw Error('cephe: Stucco painted wall yok');
   for (const stucco of stuccos) {restyle(stucco, facade); scaleUV(stucco, 2.344);}
-  console.log(`cephe: ${stuccos.length} sıva malzemesi v4 mavi-gri dokuya, basamak: ${named('EK_M2_Ceviz_basamak').length} malzeme parkeye`);
+  console.log(`cephe: ${stuccos.length} sıva malzemesi v4 mavi-gri dokuya (yalnız dış yüzler)`);
   // uv: dünya x/z'den; rot: karo yönü, su/sv: dokunun metre karşılığı
   // sahanlık dikdörtgeni (x-z): x -0,09..1,93, z -5,15..-3,81
   const VEST = [[-0.09, -5.15], [1.93, -5.15], [1.93, -3.81], [-0.09, -3.81]]; // saat yönü tersine (içi solda)
@@ -379,6 +488,7 @@ function applyFloors(doc) {
     }
     if (mesh.listPrimitives().length === 0) {mesh.dispose(); node.dispose();}
   }
+  addStairs();
   // Banyo duvar seramiği (ürün sahibinin dokusu, bordür dokunun içinde): 1. kat
   // banyosu (RR) ve ebeveyn banyosu (master pale cream tile). Bu malzemeler
   // zeminde de kullanılıyor: YALNIZ dikey yüzler yeni malzemeye geçer, zemin
@@ -389,7 +499,7 @@ function applyFloors(doc) {
     const wallMat = restyle(doc.createMaterial('EK_banyo_duvar'), tile);
     const W = 1600 * 0.25 / 131.3, H = 1200 * 0.25 / 131.3, V0 = 617 / 1200, BAND = 0.95;
     const WALLS = ['RR', 'R31 | R33 master pale cream tile'];
-    const verts = [];
+    const verts = []; let flipped = 0;
     for (const node of [...root.listNodes()]) {
       const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
       if (/Banyo_bordur/.test(mesh.listPrimitives()[0]?.getMaterial()?.getName() ?? '')) {mesh.dispose(); node.dispose(); continue;}
@@ -403,7 +513,15 @@ function applyFloors(doc) {
           const ids = [idx.getScalar(t), idx.getScalar(t + 1), idx.getScalar(t + 2)], tri = ids.map(P);
           const e1 = [0, 1, 2].map(k => tri[1][k] - tri[0][k]), e2 = [0, 1, 2].map(k => tri[2][k] - tri[0][k]);
           const cr = [e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]], L = Math.hypot(...cr);
-          if (L > 1e-12 && Math.abs(cr[1] / L) < 0.5) verts.push({tri, n: cr.map(x => x / L)}); else keep.push(...ids);
+          if (L > 1e-12 && Math.abs(cr[1] / L) < 0.5) {
+            // sarılması odanın DIŞINA bakan üçgenler çevrilir (yoksa 4 mm kaydırma onları beyaz
+            // duvarın arkasına itiyordu: dörtgenlerin yarısı beyaz görünüyordu)
+            let n = cr.map(x => x / L), t3 = tri;
+            const c = [0, 1, 2].map(k => (tri[0][k] + tri[1][k] + tri[2][k]) / 3), kf = roomFloor(c[1]);
+            const room = d => roomPolys[kf].some(P => inPoly(c[0] + n[0] * d, c[2] + n[2] * d, P));
+            if (!room(0.05) && room(-0.05)) {n = n.map(x => -x); t3 = [tri[0], tri[2], tri[1]]; flipped++;}
+            verts.push({tri: t3, n});
+          } else keep.push(...ids);
         }
         prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(keep)).setBuffer(buffer));
       }
@@ -421,6 +539,7 @@ function applyFloors(doc) {
       .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(nr).setBuffer(buffer))
       .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(uv).setBuffer(buffer));
     scene.addChild(doc.createNode('banyo_duvar').setMesh(doc.createMesh('banyo_duvar').addPrimitive(prim)).setExtras({kat: 'kat1'}));
+    console.log(`banyo duvarları: ${flipped} ters üçgen odaya çevrildi`);
     console.log(`banyo duvarları: ${verts.length} üçgen yeni seramiğe (${(verts.reduce((a, {tri}) => {const e1 = [0,1,2].map(k => tri[1][k]-tri[0][k]), e2 = [0,1,2].map(k => tri[2][k]-tri[0][k]); return a + Math.hypot(e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]) / 2;}, 0)).toFixed(1)} m²)`);
   }
   // Kapı boşluklarında ve duvar diplerinde duvar kaplamasının / kasanın YATAY alt kapakları

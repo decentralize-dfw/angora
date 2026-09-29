@@ -235,6 +235,24 @@
     -6.05
    ],
    "not": "çatı yatak odası (f3-C02): yerde duran 0,5 m siyah telli disk (ajanın EK_BLCK_cati parçası)"
+  },
+  {
+   "malzeme": [
+    "X",
+    "R31 | R33 antique nook walnut",
+    "wood_honey"
+   ],
+   "min": [
+    0.7,
+    3.2,
+    -8.0
+   ],
+   "max": [
+    1.9,
+    3.95,
+    -7.85
+   ],
+   "not": "salon: eski kuzey berjerin sırtından kalan parça (z -7,91..-7,88; ilk kutu -7,905'te kalmıştı). Perdeler ROUGHNSS1, etkilenmez."
   }
  ],
  "hazir": [

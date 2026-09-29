@@ -4,11 +4,11 @@
  "atlaslar": {
   "duvar": {
    "boyut": 4096,
-   "alan_m2": 2057.5,
-   "px_per_m": 60.2,
-   "doluluk": 0.686,
-   "parca": 2,
-   "ada": 1710,
+   "alan_m2": 2453.3,
+   "px_per_m": 55.1,
+   "doluluk": 0.693,
+   "parca": 3,
+   "ada": 1854,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_duvar_000": {
@@ -18,95 +18,95 @@
     "LM_duvar_001": {
      "texcoord": 1,
      "malzeme": "Simple White Wall"
+    },
+    "LM_duvar_002": {
+     "texcoord": 1,
+     "malzeme": "Simple White Wall"
     }
    }
   },
   "zemin": {
    "boyut": 4096,
-   "alan_m2": 2294.5,
-   "px_per_m": 52.4,
-   "doluluk": 0.792,
-   "parca": 20,
-   "ada": 8898,
+   "alan_m2": 2292.6,
+   "px_per_m": 52.5,
+   "doluluk": 0.79,
+   "parca": 19,
+   "ada": 8870,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_zemin_000": {
      "texcoord": 1,
-     "malzeme": "EK_M2_Ceviz_basamak"
+     "malzeme": "R31 | R33 entrance navy mosaic band"
     },
     "LM_zemin_001": {
      "texcoord": 1,
-     "malzeme": "R31 | R33 entrance navy mosaic band"
+     "malzeme": "stone_tile"
     },
     "LM_zemin_002": {
      "texcoord": 1,
-     "malzeme": "stone_tile"
+     "malzeme": "ceiling.001"
     },
     "LM_zemin_003": {
      "texcoord": 1,
-     "malzeme": "ceiling.001"
+     "malzeme": "WHT.001"
     },
     "LM_zemin_004": {
      "texcoord": 1,
-     "malzeme": "WHT.001"
+     "malzeme": "R31 | R33 entrance WC ochre tile"
     },
     "LM_zemin_005": {
      "texcoord": 1,
-     "malzeme": "R31 | R33 entrance WC ochre tile"
+     "malzeme": "R31 | R33 ivory wall ceramic"
     },
     "LM_zemin_006": {
      "texcoord": 1,
-     "malzeme": "R31 | R33 ivory wall ceramic"
+     "malzeme": "R31 | R33 attic tan mosaic band"
     },
     "LM_zemin_007": {
      "texcoord": 1,
-     "malzeme": "R31 | R33 attic tan mosaic band"
+     "malzeme": "R31 | R33 master fine mosaic band"
     },
     "LM_zemin_008": {
      "texcoord": 1,
-     "malzeme": "R31 | R33 master fine mosaic band"
+     "malzeme": "R31 | R33 master pale cream tile"
     },
     "LM_zemin_009": {
      "texcoord": 1,
-     "malzeme": "R31 | R33 master pale cream tile"
+     "malzeme": "RR"
     },
     "LM_zemin_010": {
      "texcoord": 1,
-     "malzeme": "RR"
+     "malzeme": "R31 | R33 attic cream tile"
     },
     "LM_zemin_011": {
      "texcoord": 1,
-     "malzeme": "R31 | R33 attic cream tile"
+     "malzeme": "terra_floor_giris"
     },
     "LM_zemin_012": {
      "texcoord": 1,
-     "malzeme": "terra_floor_giris"
+     "malzeme": "terra_floor"
     },
     "LM_zemin_013": {
      "texcoord": 1,
-     "malzeme": "terra_floor"
+     "malzeme": "wood_floor"
     },
     "LM_zemin_014": {
      "texcoord": 1,
-     "malzeme": "wood_floor"
+     "malzeme": "WOOD-FL"
     },
     "LM_zemin_015": {
      "texcoord": 1,
-     "malzeme": "WOOD-FL"
+     "malzeme": "R31 | R33 attic cream tile"
     },
     "LM_zemin_016": {
      "texcoord": 1,
-     "malzeme": "R31 | R33 attic cream tile"
+     "malzeme": "EK_banyo_duvar"
     },
     "LM_zemin_017": {
      "texcoord": 1,
-     "malzeme": "EK_banyo_duvar"
-    },
-    "LM_zemin_018": {
-     "texcoord": 1,
      "malzeme": "WHT.001"
     },
-    "LM_zemin_019": {
+    "LM_zemin_018": {
      "texcoord": 1,
      "malzeme": "RR"
     }
@@ -114,11 +114,11 @@
   },
   "cephe": {
    "boyut": 2048,
-   "alan_m2": 1475.7,
-   "px_per_m": 35.5,
-   "doluluk": 0.748,
+   "alan_m2": 1079.8,
+   "px_per_m": 41.5,
+   "doluluk": 0.727,
    "parca": 3,
-   "ada": 808,
+   "ada": 712,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_cephe_000": {
