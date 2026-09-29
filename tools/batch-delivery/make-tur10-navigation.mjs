@@ -75,7 +75,10 @@ const SILL = /^(WOODY-DARK|EK_M3_Koyu_ceviz_kapi|EK_M1_.*|Simple White Wall|EK_S
 const nearDatum = t => {const y = (t.p[0][1] + t.p[1][1] + t.p[2][1]) / 3; return [...DAT, 2.80].some(d => y - d > -0.03 && y - d < 0.06);};
 const floors = building.filter(t => upFacing(t) && (WALK.test(t.mat) || (SILL.test(t.mat) && nearDatum(t))));
 const obstacles = building.filter(t => !WALK.test(t.mat) && !IGNORE.test(t.mat));
-const furniture = interior.filter(t => !IGNORE.test(t.mat));
+// Duvar dibine 25 cm'den yakın iç mekân üçgenleri (perdeler, tablolar) mobilya engeli sayılmaz:
+// orada zaten duvar engeli var, ama kapı/pencere önündeki perde balkon kapısını kapatıyordu.
+const edgeDist = (x, z) => {let d = Infinity; for (const P of polys) for (let i = 0; i < P.length; i++) {const [a, b] = P[i], [e, f] = P[(i + 1) % P.length]; d = Math.min(d, segDist(x, z, a, b, e, f));} return d;};
+const furniture = interior.filter(t => !IGNORE.test(t.mat) && !t.p.every(q => edgeDist(q[0], q[2]) < 0.25));
 const [FB, OB, IB] = [bucket(floors), bucket(obstacles), bucket(furniture)];
 const key = (x, z) => Math.floor(x / BK) * 100003 + Math.floor(z / BK);
 const hitY = ([a, b, c], x, z) => {const d = (b[2]-c[2])*(a[0]-c[0]) + (c[0]-b[0])*(a[2]-c[2]); if (Math.abs(d) < 1e-12) return null; const l1 = ((b[2]-c[2])*(x-c[0]) + (c[0]-b[0])*(z-c[2])) / d, l2 = ((c[2]-a[2])*(x-c[0]) + (a[0]-c[0])*(z-c[2])) / d, l3 = 1 - l1 - l2; return l1 < -1e-6 || l2 < -1e-6 || l3 < -1e-6 ? null : l1 * a[1] + l2 * b[1] + l3 * c[1];};
