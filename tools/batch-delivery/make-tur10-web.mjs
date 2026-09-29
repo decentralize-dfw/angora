@@ -248,7 +248,11 @@ function applyFloors(doc) {
   const basement = restyle(mats.get('terra_floor'), pbr('bodrum-karo'));
   const ground = restyle(mats.get('terra_floor').clone().setName('terra_floor_giris'), pbr('giris-karo'));
   // uv: dünya x/z'den; rot: karo yönü, su/sv: dokunun metre karşılığı
+  // sahanlık dikdörtgeni (x-z): x -0,09..1,93, z -5,15..-3,81
+  const VEST = [[-0.09, -5.15], [1.93, -5.15], [1.93, -3.81], [-0.09, -3.81]]; // saat yönü tersine (içi solda)
+  const vestTile = mats.get('R31 | R33 attic cream tile');
   const RULES = {
+    vest: {affine: [1 / 0.30, 0, 0, 0, 1 / 0.30, 1]},  // banyo zemininin kendi UV'si (u = x/0,30, v = z/0,30 + 1)
     'WOOD-FL': {rot: 0, su: 2.0, sv: 2.0}, 'wood_floor': {rot: 0, su: 2.0, sv: 2.0},
     terra0: {rot: Math.PI / 4, su: 1600 / 87.5 * 0.33, sv: 1200 / 87.5 * 0.33},
     terra1: {rot: 0, su: 12.6 * 0.40, sv: 12.6 * 0.40},
@@ -302,6 +306,12 @@ function applyFloors(doc) {
         if (isWood && flat) {
           let pieces = [tri];
           for (const room of wet.filter(r => r.floor === k)) pieces = pieces.flatMap(pc => minus(pc, room.poly.map(([x, z]) => [x, z])));
+          // çatı banyosu önündeki sahanlık (mini mutfak): fotoğrafta krem karo -> banyonun karosu, aynı UV
+          if (k === 3 && vestTile) {
+            const inside = pieces.flatMap(pc => {let r = pc; for (let i = 0; i < VEST.length && r.length >= 3; i++) r = clip(r, VEST[i], VEST[(i + 1) % VEST.length], null, true); return r.length >= 3 ? [r] : [];});
+            for (const pc of inside) for (let i = 1; i + 1 < pc.length; i++) put('vestibul', vestTile, RULES.vest, [pc[0], pc[i], pc[i + 1]]);
+            pieces = pieces.flatMap(pc => minus(pc, VEST));
+          }
           if (pieces.length !== 1 || pieces[0] !== tri) cut++;
           for (const pc of pieces) for (let i = 1; i + 1 < pc.length; i++) put(key, mat, rule, [pc[0], pc[i], pc[i + 1]]);
         } else put(key, mat, rule, tri);
@@ -309,7 +319,7 @@ function applyFloors(doc) {
       mesh.removePrimitive(prim);
       for (const {mat, rule, verts} of groups.values()) {
         const count = verts.length, p = new Float32Array(count * 3), nr = new Float32Array(count * 3), uv = new Float32Array(count * 2);
-        const c = Math.cos(rule.rot), s = Math.sin(rule.rot);
+        const c = Math.cos(rule.rot ?? 0), s = Math.sin(rule.rot ?? 0);
         for (let i = 0; i < count; i += 3) {
           const [a, b, d] = [verts[i], verts[i + 1], verts[i + 2]];
           const e1 = [b[0]-a[0], b[1]-a[1], b[2]-a[2]], e2 = [d[0]-a[0], d[1]-a[1], d[2]-a[2]];
@@ -317,7 +327,8 @@ function applyFloors(doc) {
           for (let j = 0; j < 3; j++) {
             const vv = verts[i + j], o = (i + j);
             p.set(vv, o * 3); nr.set(cr.map(x => x / L), o * 3);
-            uv[o * 2] = (c * vv[0] - s * vv[2]) / rule.su; uv[o * 2 + 1] = (s * vv[0] + c * vv[2]) / rule.sv;
+            if (rule.affine) {const [a, b, e, f, g, h] = rule.affine; uv[o * 2] = a * vv[0] + b * vv[2] + e; uv[o * 2 + 1] = f * vv[0] + g * vv[2] + h;}
+            else {uv[o * 2] = (c * vv[0] - s * vv[2]) / rule.su; uv[o * 2 + 1] = (s * vv[0] + c * vv[2]) / rule.sv;}
           }
         }
         const prim2 = doc.createPrimitive().setMaterial(mat)
@@ -376,6 +387,85 @@ function applyFloors(doc) {
   console.log(`zeminler: parke/karo dokuları değişti, ıslak hacimlerde kesilen parke üçgeni ${cut}`);
 }
 
+// --- Çatı katı mini mutfak (foto 06), basit kutularla -----------------------
+// Banyo önündeki sahanlıkta doğu duvarı (x 1,89) boyunca, önü batıya bakar;
+// kuzeyden güneye: evyeli 2 kapaklı dolap 0,80 | mini buzdolabı 0,50 | tek
+// kapaklı dolap 0,44. Tezgâh 0,90 yükseklik, 0,60 derinlik; raf tezgâhın
+// 0,35 m üstünde, askı çubuğu çatı eğiminin hemen altında. Ajanın önünü
+// kapatan duvarı (EK_M3C_sag_yan) ve tavan bloğu (EK_M3C_kapi_ustu) silinir.
+function buildKitchenette(doc) {
+  const root = doc.getRoot(), scene = root.listScenes()[0], buffer = root.listBuffers()[0];
+  for (const node of [...root.listNodes()]) if (/^EK_M3C_(sag_yan|kapi_ustu)$/.test(node.getName())) {node.getMesh()?.dispose(); node.dispose();}
+  const mats = new Map(root.listMaterials().map(m => [m.getName(), m]));
+  const plain = (name, rgb, rough, metal = 0) => doc.createMaterial(name).setBaseColorFactor([...rgb, 1]).setRoughnessFactor(rough).setMetallicFactor(metal);
+  const walnut = mats.get('EK_M3_Ceviz_gobek') ?? plain('EK_mini_ceviz', [0.30, 0.15, 0.08], 0.5);
+  const M = {
+    govde: walnut, kapak: walnut, raf: walnut,
+    tezgah: plain('EK_mini_tezgah', [0.90, 0.86, 0.78], 0.45),
+    celik: plain('EK_mini_celik', [0.72, 0.72, 0.72], 0.28, 1),
+    beyaz: plain('EK_mini_beyaz', [0.93, 0.93, 0.92], 0.35),
+    siyah: plain('EK_mini_siyah', [0.04, 0.04, 0.04], 0.4, 0.6),
+    baza: plain('EK_mini_baza', [0.12, 0.07, 0.04], 0.6),
+  };
+  const F = 9.47, WALL = 1.89, D = 0.60, FRONT = WALL - D, Z0 = -5.14;
+  const boxes = [];
+  const box = (mat, x0, x1, y0, y1, z0, z1) => boxes.push({mat, min: [x0, F + y0, z0], max: [x1, F + y1, z1]});
+  const units = [['dolap2', 0.80], ['buzdolabi', 0.50], ['dolap1', 0.44]];
+  let z = Z0;
+  for (const [kind, w] of units) {
+    const za = z, zb = z + w; z = zb;
+    if (kind === 'buzdolabi') {
+      box(M.beyaz, FRONT + 0.03, WALL - 0.02, 0.0, 0.85, za + 0.01, zb - 0.01);
+      box(M.celik, FRONT + 0.015, FRONT + 0.03, 0.78, 0.80, za + 0.08, zb - 0.08);          // kapak tutamağı
+      continue;
+    }
+    box(M.baza, FRONT + 0.05, WALL, 0.0, 0.10, za, zb);                                     // baza (içeride)
+    box(M.govde, FRONT + 0.02, WALL, 0.10, 0.86, za, zb);                                   // gövde
+    const n = kind === 'dolap2' ? 2 : 1, dw = (zb - za) / n;
+    for (let i = 0; i < n; i++) {
+      const a = za + i * dw + 0.003, b = za + (i + 1) * dw - 0.003;
+      box(M.kapak, FRONT, FRONT + 0.02, 0.11, 0.85, a, b);                                 // kapak
+      box(M.kapak, FRONT - 0.008, FRONT, 0.19, 0.77, a + 0.07, b - 0.07);                  // göbek
+      const hz = n === 2 ? (i === 0 ? b - 0.05 : a + 0.05) : b - 0.05;
+      box(M.celik, FRONT - 0.03, FRONT - 0.008, 0.64, 0.78, hz - 0.006, hz + 0.006);        // kulp
+    }
+  }
+  const Z1 = z;
+  box(M.tezgah, FRONT - 0.02, WALL, 0.86, 0.90, Z0, Z1);                                    // tezgâh
+  box(M.tezgah, WALL - 0.02, WALL, 0.90, 0.96, Z0, Z1);                                    // arka süpürgelik
+  box(M.celik, FRONT + 0.08, FRONT + 0.48, 0.9005, 0.903, Z0 + 0.12, Z0 + 0.60);            // evye (tezgâhta çelik yüzey)
+  box(M.siyah, FRONT + 0.12, FRONT + 0.44, 0.9031, 0.9035, Z0 + 0.16, Z0 + 0.56);           // evye içi (koyu)
+  box(M.celik, WALL - 0.08, WALL - 0.05, 0.90, 1.12, Z0 + 0.34, Z0 + 0.37);                 // batarya gövdesi
+  box(M.celik, WALL - 0.20, WALL - 0.05, 1.09, 1.12, Z0 + 0.34, Z0 + 0.37);                 // batarya ağzı
+  box(M.raf, WALL - 0.22, WALL, 1.25, 1.28, Z0 + 0.20, Z1);                                // raf
+  for (const zz of [Z0 + 0.45, Z1 - 0.25]) box(M.raf, WALL - 0.03, WALL, 1.05, 1.25, zz - 0.02, zz + 0.02); // konsollar
+  box(M.siyah, WALL - 0.07, WALL - 0.05, 1.36, 1.38, Z0 + 0.30, Z1 - 0.05);                 // askı çubuğu
+  for (const zz of [Z0 + 0.30, Z1 - 0.05]) box(M.siyah, WALL - 0.07, WALL, 1.36, 1.38, zz - 0.01, zz + 0.01); // çubuk ayakları
+  // kutular -> malzeme başına tek ilkel, yüz başına dünya-kutu UV (0,5 m)
+  const byMat = new Map();
+  for (const b of boxes) (byMat.get(b.mat) ?? byMat.set(b.mat, []).get(b.mat)).push(b);
+  const faces = [[0, 1, 1], [0, -1, 1], [1, 1, 0], [1, -1, 0], [2, 1, 0], [2, -1, 0]]; // eksen, işaret, uv ekseni
+  for (const [mat, list] of byMat) {
+    const p = [], nr = [], uv = [];
+    for (const {min, max} of list) for (const [ax, sg] of faces) {
+      const o = [(ax + 1) % 3, (ax + 2) % 3], c = [min, max];
+      const q = [[0, 0], [1, 0], [1, 1], [0, 1]].map(([i, j]) => {const v = [0, 0, 0]; v[ax] = sg > 0 ? max[ax] : min[ax]; v[o[0]] = c[i][o[0]]; v[o[1]] = c[j][o[1]]; return v;});
+      const order = sg > 0 ? [0, 1, 2, 0, 2, 3] : [0, 2, 1, 0, 3, 2];
+      for (const k of order) {
+        const v = q[k]; p.push(...v); const n = [0, 0, 0]; n[ax] = sg; nr.push(...n);
+        const ua = ax === 1 ? 0 : 2, va = ax === 1 ? 2 : 1;                 // dikey yüzde damar dikey (v = y)
+        uv.push(v[ax === 0 ? 2 : 0] / 0.5, -v[va === 1 ? 1 : 2] / 0.5);
+      }
+    }
+    const prim = doc.createPrimitive().setMaterial(mat)
+      .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(new Float32Array(p)).setBuffer(buffer))
+      .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(new Float32Array(nr)).setBuffer(buffer))
+      .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(new Float32Array(uv)).setBuffer(buffer));
+    scene.addChild(doc.createNode('EK_mini_mutfak').setMesh(doc.createMesh('EK_mini_mutfak').addPrimitive(prim)).setExtras({kat: 'cati'}));
+  }
+  console.log(`mini mutfak: ${boxes.length} kutu, z ${Z0}..${Z1.toFixed(2)}, ön yüz x ${FRONT.toFixed(2)}; EK_M3C duvar/tavan bloğu silindi`);
+}
+
 // --- ortak hazırlık ---------------------------------------------------------
 async function load(sources, {stairRepair = false} = {}) {
   const doc = await io.read(sources[0]);
@@ -390,7 +480,7 @@ async function load(sources, {stairRepair = false} = {}) {
       merged.dispose();
     }
   }
-  if (stairRepair) applyFloors(doc);
+  if (stairRepair) {applyFloors(doc); buildKitchenette(doc);}
   for (const prim of root.listMeshes().flatMap(m => m.listPrimitives()))
     for (const semantic of DROP) if (prim.getAttribute(semantic)) prim.setAttribute(semantic, null);
   for (const node of root.listNodes()) {const kat = node.getExtras()?.kat; node.setExtras(kat ? {kat} : {});}
