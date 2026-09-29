@@ -651,7 +651,9 @@ async function qaPhotoView(id,fov=58){
     .reduce((a,b)=>new THREE.Vector3(...a.position).setY(0).distanceToSquared(target)<new THREE.Vector3(...b.position).setY(0).distanceToSquared(target)?a:b);
   enterWalk(station.room_id);
   walk.placeAt([point.x,point.y,point.z]);
-  walk.yaw=Math.atan2(-point.dx,-point.dz);walk.pitch=0;walk.setLens(fov);walk.pose();
+  // Blender'da fotoğrafa oturtulan kamerada eğim (pitch) ve yatay açı (hfov) da var
+  const lens=point.hfov?THREE.MathUtils.radToDeg(2*Math.atan(Math.tan(THREE.MathUtils.degToRad(point.hfov)/2)/Math.max(.5,camera.aspect||1.5))):fov;
+  walk.yaw=Math.atan2(-point.dx,-point.dz);walk.pitch=THREE.MathUtils.degToRad(point.pitch??0);walk.setLens(lens);walk.pose();
   invalidate();
   return {id:point.id,file:point.file,room:station.room_id,floor};
 }
