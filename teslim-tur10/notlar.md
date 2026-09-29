@@ -948,3 +948,10 @@ YAPILDI: 01,02,18,21,34 .blend|GLB kontrolü; ortalama mutlak RGB farkı 255 üz
 YAPILDI: ilk doku dönüşümündeki siyah görüntü sorunu kaynak ham veriyi Pillow ile okuyarak giderildi; hatalı dosyalar teslim edilmedi. Sıfır UV teğetleri normale dik birim teğete düzeltildi.
 KALDI: A bölümündeki nominal DWG ölçeği doğrulaması, 32 bordür motifi, 47 tavan birleşimi, 34 kapı altı çizgileri. GLB bunları kaynak .blend ile aynı taşır.
 Ayrıntı ve görseller: [web/README.md](web/README.md).
+
+## Adım10 Aşama1
+YAPILDI: 153 yeni/DWG korkuluk ve küpeşte parçası kaldırıldı. Özgün BUILDING-opt-v4 / INTERIOR-opt-v2 GLB kaynaklarından eski maskelerin sildiği 17483 metal + 5723 pirinç + 1284 ahşap yüz; özgün konum, geometri, UV ve shader ile geri yüklendi. Korkuluk maskeleri iptal, basamak maskesi ayrı tutuldu. Foto42 dahil kaynak korkuluklar korunur.
+YAPILDI: Foto16 A08_ceviz, foto21 A08_kiraz görüntü düğümleri geri bağlandı; mevcut metre UV kaybolmamıştı, Adım09 düz renk ağırlıklı albedo damar kaybının nedeniydi.
+YAPILDI: Foto02 terrakota ROI kırmızı çerçeveyle gösterildi; WB RGB [180,133,108], 45 derece gerçek UV korundu.
+YAPILDI: 02,16,18,21,29,34,42 FOTO|SONRA.
+KALDI: Önceki aşamadaki bordür/tavan/eşik ayrıntıları bu aşamanın kapsamı dışında korunur.

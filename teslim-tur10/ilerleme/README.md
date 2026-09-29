@@ -259,3 +259,21 @@ KALDI: 2D detayın 1.00×0.80m nominal ölçeği ayrıca saha ölçüsüyle doğ
 ![.blend ve GLB 34](../web/web_dogrulama_34.jpg)
 
 KALDI: nominal DWG panel ölçüsünün ayrıca doğrulanması; 32 bordür motifi; 47 tavan birleşimi ve 34 kapı altı ışık çizgileri.
+
+## Adım10 · Aşama1 · Özgün korkuluk ve malzemeler
+
+![Foto 02](../adim10/asama1/foto_02.jpg)
+
+![Foto 16](../adim10/asama1/foto_16.jpg)
+
+![Foto 18](../adim10/asama1/foto_18.jpg)
+
+![Foto 21](../adim10/asama1/foto_21.jpg)
+
+![Foto 29](../adim10/asama1/foto_29.jpg)
+
+![Foto 34](../adim10/asama1/foto_34.jpg)
+
+![Foto 42](../adim10/asama1/foto_42.jpg)
+
+[Terrakota ölçümü](../adim10/asama1/olcum_02.jpg) · [Düzeltme raporu](../adim10/asama1/duzeltme-raporu.json)

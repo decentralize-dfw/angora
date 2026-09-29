@@ -185,7 +185,7 @@
    "terra_floor",
    "A08_Terrakota"
   ],
-  "klasor": "A08_terrakota",
+  "klasor": "A10_terrakota",
   "doku_olcusu_xy_m": [
    1.32,
    1.32
@@ -196,7 +196,7 @@
   "clearcoat": 0,
   "renk_hex": null,
   "ahsap_uzun_kenar": false,
-  "kaynak": "Fotoğraf WB ölçümü + Poly Haven 4K",
+  "kaynak": "foto_02",
   "lisans": "CC0",
   "uv_aci": 45,
   "kutular": [
@@ -374,7 +374,7 @@
   "malzemeler": [
    "wood_honey"
   ],
-  "klasor": "A09_kiraz",
+  "klasor": "A08_kiraz",
   "doku_olcusu_xy_m": [
    1,
    1
@@ -385,7 +385,7 @@
   "clearcoat": 0,
   "renk_hex": null,
   "ahsap_uzun_kenar": true,
-  "kaynak": "Fotoğraf WB ölçümü + Poly Haven 4K",
+  "kaynak": "Adım08 damarlı özgün doku",
   "lisans": "CC0",
   "kutular": [
    {
@@ -410,7 +410,7 @@
    "wood_honey",
    "A08_Ceviz"
   ],
-  "klasor": "A09_koyu_ceviz",
+  "klasor": "A08_ceviz",
   "doku_olcusu_xy_m": [
    1,
    1
@@ -421,7 +421,7 @@
   "clearcoat": 0,
   "renk_hex": null,
   "ahsap_uzun_kenar": true,
-  "kaynak": "Fotoğraf WB ölçümü + Poly Haven 4K",
+  "kaynak": "Adım08 damarlı özgün doku",
   "lisans": "CC0",
   "kutular": [
    {
