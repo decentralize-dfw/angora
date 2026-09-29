@@ -98,6 +98,67 @@ function repairStair(doc) {
   const wall = nodes.get('EK_A09_F47_tek_duvar');
   if (!wall) throw Error('merdiven onarımı: düğüm yok: EK_A09_F47_tek_duvar');
   wall.getMesh().dispose(); wall.dispose();
+  // Eski modelin iki kol arasındaki duvarı (Simple White Wall, z -2,16..-1,90)
+  // bodrum zemininden tavana (2,62) çıkıyor, sahanlığın üstünden de geçiyordu:
+  // kollar arası kapalı görünüyordu. İkinci kolun alt çizgisine İNDİRİLİR
+  // (kama düzlemi: x 3,17'de 1,35 -> x 0,87'de 2,90), sahanlık bölümünde
+  // (x > 3,17) sahanlık altında (1,30) biter; kesik üstü beyaz kapakla kapanır.
+  {
+    const Z0 = -2.20, Z1 = -1.86, X0 = 0.30, X1 = 4.25;
+    const top = x => (x <= STAIR.x1 ? STAIR.yAtX1 + (STAIR.x1 - x) * STAIR.slope : 1.30);
+    let cutTris = 0, cap = null;
+    for (const node of doc.getRoot().listNodes()) {
+      const mesh = node.getMesh(); if (!mesh) continue;
+      const w = node.getWorldMatrix(), t = [w[12], w[13], w[14]];
+      if (Math.abs(w[0] - 1) + Math.abs(w[5] - 1) + Math.abs(w[10] - 1) > 1e-4) continue;
+      for (const prim of mesh.listPrimitives()) {
+        if (prim.getMaterial()?.getName() !== 'Simple White Wall') continue;
+        const sems = prim.listSemantics(), acc = Object.fromEntries(sems.map(sm => [sm, prim.getAttribute(sm)]));
+        const idx = prim.getIndices(), n = idx ? idx.getCount() : acc.POSITION.getCount();
+        const vert = i => sems.map(sm => acc[sm].getElement(i, new Array(acc[sm].getElementSize()).fill(0)));
+        const lerp = (a, b, f) => a.map((arr, k) => arr.map((x, j) => x + (b[k][j] - x) * f));
+        const px = v => v[sems.indexOf('POSITION')];
+        const out = []; let changed = false;
+        for (let tt = 0; tt < n; tt += 3) {
+          const tri = [0, 1, 2].map(k => vert(idx ? idx.getScalar(tt + k) : tt + k));
+          const W = v => [px(v)[0] + t[0], px(v)[1] + t[1], px(v)[2] + t[2]];
+          const inside = tri.every(v => {const [x, y, z] = W(v); return x > X0 && x < X1 && z > Z0 && z < Z1 && y > -0.2 && y < 2.75;});
+          if (!inside) {out.push(tri); continue;}
+          // x = 3,17 ile ikiye böl, her parçayı kendi üst sınırıyla kırp (y <= top(x))
+          const clipBy = (poly, f) => {const r = []; for (let i = 0; i < poly.length; i++) {const a = poly[i], b = poly[(i + 1) % poly.length], fa = f(W(a)), fb = f(W(b)); if (fa >= 0) r.push(a); if ((fa >= 0) !== (fb >= 0)) r.push(lerp(a, b, fa / (fa - fb)));} return r;};
+          const left = clipBy(clipBy(tri, ([x]) => STAIR.x1 - x), ([x, y]) => top(Math.min(x, STAIR.x1)) - y);
+          const right = clipBy(clipBy(tri, ([x]) => x - STAIR.x1), ([, y]) => 1.30 - y);
+          for (const pc of [left, right]) for (let i = 1; i + 1 < pc.length; i++) out.push([pc[0], pc[i], pc[i + 1]]);
+          changed = true; cutTris++;
+        }
+        if (!changed) continue;
+        for (const [k, sm] of sems.entries()) {
+          const size = acc[sm].getElementSize(), arr = new (acc[sm].getArray().constructor)(out.length * 3 * size);
+          out.forEach((tri, i) => tri.forEach((v, j) => arr.set(v[k], (i * 3 + j) * size)));
+          prim.setAttribute(sm, doc.createAccessor().setType(acc[sm].getType()).setArray(arr).setNormalized(acc[sm].getNormalized()).setBuffer(doc.getRoot().listBuffers()[0]));
+        }
+        prim.setIndices(null);
+        cap = prim.getMaterial();
+      }
+    }
+    if (!cutTris) throw Error('merdiven: kollar arası duvar bulunamadı');
+    // kapak: kesik çizgi boyunca yatay/eğik şerit (duvar kalınlığı Z0'dan Z1'e)
+    const zs = [-2.16, -1.90], pts = [];
+    for (let x = 0.36; x <= STAIR.x1 + 1e-6; x += (STAIR.x1 - 0.36) / 8) pts.push([x, top(x)]);
+    const p = [], nr = [];
+    for (let i = 0; i + 1 < pts.length; i++) {
+      const [a, b] = [pts[i], pts[i + 1]], q = [[a[0], a[1], zs[0]], [a[0], a[1], zs[1]], [b[0], b[1], zs[1]], [b[0], b[1], zs[0]]];
+      const up = [STAIR.slope, 1, 0].map(v => v / Math.hypot(STAIR.slope, 1));
+      for (const k of [0, 1, 2, 0, 2, 3]) {p.push(...q[k]); nr.push(...up);}
+    }
+    const buf = doc.getRoot().listBuffers()[0];
+    const capPrim = doc.createPrimitive().setMaterial(cap)
+      .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(new Float32Array(p)).setBuffer(buf))
+      .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(new Float32Array(nr)).setBuffer(buf))
+      .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(new Float32Array(p.length / 3 * 2)).setBuffer(buf));
+    doc.getRoot().listScenes()[0].addChild(doc.createNode('merdiven_arasi_kapak').setMesh(doc.createMesh('merdiven_arasi_kapak').addPrimitive(capPrim)).setExtras({kat: 'bodrum'}));
+    console.log(`merdiven: kollar arası duvar ikinci kolun altına indirildi (${cutTris} üçgen kırpıldı)`);
+  }
   console.log('merdiven: F02 kutusu kamaya, F47 duvarı silindi');
 }
 
