@@ -11,8 +11,11 @@ const temp=fs.mkdtempSync(path.join(os.tmpdir(),'angora-ktx512-'));
 const tool=process.env.TOKTX;
 if(!tool)throw Error('TOKTX is required');
 fs.mkdirSync(out,{recursive:true});
-const report=process.env.LIGHTMAPS_ONLY?JSON.parse(fs.readFileSync(path.join(out,'conversion.json'))):{models:{},textures:[],geometryUnchanged:true};
-if(process.env.LIGHTMAPS_ONLY)report.textures=report.textures.filter(t=>!t.label.endsWith('.ktx2'));
+// MODELS=BUILDING-opt-v6 gibi: yalnız verilen modeller yeniden üretilir, rapordaki diğerleri korunur
+const ONLY=process.env.MODELS?process.env.MODELS.split(','):null;
+const report=process.env.LIGHTMAPS_ONLY||ONLY?JSON.parse(fs.readFileSync(path.join(out,'conversion.json'))):{models:{},textures:[],geometryUnchanged:true};
+if(ONLY)report.textures=report.textures.filter(t=>!ONLY.some(n=>t.label.startsWith(n+':')));
+if(process.env.LIGHTMAPS_ONLY||ONLY)report.textures=report.textures.filter(t=>!t.label.endsWith('.ktx2'));
 async function encode(data,srgb,label){
  const png=path.join(temp,'in.png'),ktx=path.join(temp,'out.ktx2');
  const meta=await sharp(data).metadata();
@@ -22,7 +25,7 @@ async function encode(data,srgb,label){
  report.textures.push({label,width:b.readUInt32LE(20),height:b.readUInt32LE(24),sourceWidth:meta.width,sourceHeight:meta.height,bytes:b.length,srgb});
  return b;
 }
-for(const name of (process.env.LIGHTMAPS_ONLY?[]:['BUILDING-opt-v6','INTERIOR-opt-v3','GARDEN-opt-v3','KOMSULAR-opt-v2','CEVRE-YOL-opt-v3'])){
+for(const name of (process.env.LIGHTMAPS_ONLY?[]:ONLY??['BUILDING-opt-v6','INTERIOR-opt-v3','GARDEN-opt-v3','KOMSULAR-opt-v2','CEVRE-YOL-opt-v3'])){
  const src=fs.readFileSync(path.join(base,name+'.glb'));
  const jl=src.readUInt32LE(12),g=JSON.parse(src.subarray(20,20+jl).toString());
  const bin=src.subarray(28+jl,28+jl+src.readUInt32LE(20+jl));

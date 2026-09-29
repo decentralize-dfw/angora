@@ -6,38 +6,38 @@
       "haritalar": {
         "gok": {
           "boyut": 512,
-          "olcek": 0.243541,
-          "ortalama": 0.003658,
+          "olcek": 0.248095,
+          "ortalama": 0.004217,
           "dosya": "duvar_gok.ktx2",
-          "bytes": 150017
+          "bytes": 159274
         },
         "gunes_09": {
           "boyut": 512,
-          "olcek": 0.007826,
-          "ortalama": 0.000125,
+          "olcek": 0.008955,
+          "ortalama": 0.000148,
           "dosya": "duvar_gunes_09.ktx2",
-          "bytes": 133048
+          "bytes": 141726
         },
         "gunes_13": {
           "boyut": 512,
-          "olcek": 0.009887,
-          "ortalama": 0.000115,
+          "olcek": 0.011379,
+          "ortalama": 0.000135,
           "dosya": "duvar_gunes_13.ktx2",
-          "bytes": 122641
+          "bytes": 131196
         },
         "gunes_17": {
           "boyut": 512,
-          "olcek": 0.018043,
-          "ortalama": 0.000174,
+          "olcek": 0.019966,
+          "ortalama": 0.000203,
           "dosya": "duvar_gunes_17.ktx2",
-          "bytes": 118716
+          "bytes": 127544
         },
         "gece": {
           "boyut": 512,
-          "olcek": 1.776119,
-          "ortalama": 0.035188,
+          "olcek": 1.897475,
+          "ortalama": 0.040606,
           "dosya": "duvar_gece.ktx2",
-          "bytes": 131924
+          "bytes": 140059
         }
       }
     },
@@ -46,38 +46,38 @@
       "haritalar": {
         "gok": {
           "boyut": 512,
-          "olcek": 0.556068,
-          "ortalama": 0.016193,
+          "olcek": 0.566434,
+          "ortalama": 0.016109,
           "dosya": "zemin_gok.ktx2",
-          "bytes": 199301
+          "bytes": 198911
         },
         "gunes_09": {
           "boyut": 512,
-          "olcek": 0.050618,
-          "ortalama": 0.000618,
+          "olcek": 0.051644,
+          "ortalama": 0.000619,
           "dosya": "zemin_gunes_09.ktx2",
-          "bytes": 170014
+          "bytes": 169213
         },
         "gunes_13": {
           "boyut": 512,
-          "olcek": 0.061138,
-          "ortalama": 0.000527,
+          "olcek": 0.064007,
+          "ortalama": 0.000543,
           "dosya": "zemin_gunes_13.ktx2",
-          "bytes": 162270
+          "bytes": 161505
         },
         "gunes_17": {
           "boyut": 512,
-          "olcek": 0.056184,
-          "ortalama": 0.000531,
+          "olcek": 0.061657,
+          "ortalama": 0.000529,
           "dosya": "zemin_gunes_17.ktx2",
-          "bytes": 167882
+          "bytes": 166812
         },
         "gece": {
           "boyut": 512,
-          "olcek": 2.41369,
-          "ortalama": 0.068441,
+          "olcek": 2.426793,
+          "ortalama": 0.069201,
           "dosya": "zemin_gece.ktx2",
-          "bytes": 177943
+          "bytes": 177419
         }
       }
     },
@@ -86,38 +86,38 @@
       "haritalar": {
         "gok": {
           "boyut": 512,
-          "olcek": 0.920616,
-          "ortalama": 0.170476,
+          "olcek": 0.924365,
+          "ortalama": 0.174357,
           "dosya": "cephe_gok.ktx2",
-          "bytes": 207632
+          "bytes": 206730
         },
         "gunes_09": {
           "boyut": 512,
-          "olcek": 0.083992,
-          "ortalama": 0.00364,
+          "olcek": 0.084233,
+          "ortalama": 0.003743,
           "dosya": "cephe_gunes_09.ktx2",
-          "bytes": 188023
+          "bytes": 186436
         },
         "gunes_13": {
           "boyut": 512,
-          "olcek": 0.079217,
-          "ortalama": 0.004911,
+          "olcek": 0.079558,
+          "ortalama": 0.005075,
           "dosya": "cephe_gunes_13.ktx2",
-          "bytes": 190429
+          "bytes": 191505
         },
         "gunes_17": {
           "boyut": 512,
-          "olcek": 0.075017,
-          "ortalama": 0.003652,
+          "olcek": 0.074364,
+          "ortalama": 0.003756,
           "dosya": "cephe_gunes_17.ktx2",
-          "bytes": 171848
+          "bytes": 173929
         },
         "gece": {
           "boyut": 512,
-          "olcek": 0.425781,
-          "ortalama": 0.002774,
+          "olcek": 0.437433,
+          "ortalama": 0.00284,
           "dosya": "cephe_gece.ktx2",
-          "bytes": 102017
+          "bytes": 104775
         }
       }
     },
@@ -126,38 +126,38 @@
       "haritalar": {
         "gok": {
           "boyut": 512,
-          "olcek": 0.891431,
-          "ortalama": 0.324534,
+          "olcek": 0.891441,
+          "ortalama": 0.324536,
           "dosya": "bahce_gok.ktx2",
-          "bytes": 219661
+          "bytes": 219780
         },
         "gunes_09": {
           "boyut": 512,
-          "olcek": 0.071953,
+          "olcek": 0.071929,
           "ortalama": 0.001807,
           "dosya": "bahce_gunes_09.ktx2",
-          "bytes": 154094
+          "bytes": 153853
         },
         "gunes_13": {
           "boyut": 512,
-          "olcek": 0.082343,
+          "olcek": 0.082358,
           "ortalama": 0.00239,
           "dosya": "bahce_gunes_13.ktx2",
-          "bytes": 159064
+          "bytes": 159131
         },
         "gunes_17": {
           "boyut": 512,
-          "olcek": 0.073075,
+          "olcek": 0.072972,
           "ortalama": 0.002344,
           "dosya": "bahce_gunes_17.ktx2",
-          "bytes": 156301
+          "bytes": 156175
         },
         "gece": {
           "boyut": 512,
-          "olcek": 0.045231,
+          "olcek": 0.045225,
           "ortalama": 0.000373,
           "dosya": "bahce_gece.ktx2",
-          "bytes": 97226
+          "bytes": 97485
         }
       }
     }
