@@ -47,7 +47,7 @@ mkdirSync(BAKE, {recursive: true});
 const ATLASES = {
   duvar: {boyut: 4096, malzemeler: ['Simple White Wall', 'EK_SimpleWhiteWall', 'EK_M2_Beyaz_merdiven_alti']},
   zemin: {boyut: 4096, malzemeler: ['ceiling.001', 'WOOD-FL', 'wood_floor', 'terra_floor', 'terra_floor_giris', 'stone_tile', 'WHT.001',
-    'EK_M2_Ceviz_basamak', 'EK_M3_Krem_karo_esik', 'RR', 'banyo_duvar',
+    'EK_M2_Ceviz_basamak', 'EK_M3_Krem_karo_esik', 'RR', 'EK_banyo_duvar',
     'R31 | R33 ivory wall ceramic', 'R31 | R33 master pale cream tile', 'R31 | R33 attic cream tile',
     'R31 | R33 entrance WC ochre tile', 'R31 | R33 attic tan mosaic band', 'R31 | R33 entrance navy mosaic band',
     'R31 | R33 master fine mosaic band']},
@@ -277,7 +277,7 @@ function applyFloors(doc) {
   // tezgâhın hemen üstü). Ajanın ayrı bordür şeridi (EK_A09_Banyo_bordur) silinir.
   {
     const tile = pbr('banyo-duvar');
-    const wallMat = restyle(doc.createMaterial('banyo_duvar'), tile);
+    const wallMat = restyle(doc.createMaterial('EK_banyo_duvar'), tile);
     const W = 1600 * 0.25 / 131.3, H = 1200 * 0.25 / 131.3, V0 = 617 / 1200, BAND = 0.95;
     const WALLS = ['RR', 'R31 | R33 master pale cream tile'];
     const verts = [];
