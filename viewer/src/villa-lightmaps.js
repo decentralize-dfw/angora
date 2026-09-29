@@ -66,7 +66,7 @@ const LIGHTMAP_FRAGMENT = THREE.ShaderChunk.lights_fragment_maps
 // three sürümü parçayı değiştirirse pişmiş ışık sessizce kapanır, sahne eski ışıkla açılır
 const CHUNK_OK = LIGHTMAP_FRAGMENT.includes('lmBaked * PI') && LIGHTMAP_FRAGMENT.includes('( 1.0 - lmSkyStrength )');
 
-export function createVillaLightmaps({renderer, root}) {
+export function createVillaLightmaps({renderer, root, spec: deliverySpec = spec}) {
   const loader = CHUNK_OK ? createTextureLoader(renderer, 2) : null;
   if (!CHUNK_OK) console.warn('Pişmiş ışık: three lights_fragment_maps parçası beklenen biçimde değil, kapalı');
   const placeholder = new THREE.DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1);
@@ -77,7 +77,7 @@ export function createVillaLightmaps({renderer, root}) {
     lmSunMix: {value: 0},
   };
   const atlases = new Map();
-  for (const [name, entry] of Object.entries(spec.atlaslar)) {
+  for (const [name, entry] of Object.entries(deliverySpec.atlaslar)) {
     atlases.set(name, {entry, textures: {}, byChannel: new Map(), uniforms: {
       lmSunA: {value: placeholder}, lmSunB: {value: placeholder}, lmNight: {value: placeholder},
       lmSkyScale: {value: new THREE.Color(0, 0, 0)}, lmSunAScale: {value: new THREE.Color(0, 0, 0)},
@@ -145,7 +145,7 @@ export function createVillaLightmaps({renderer, root}) {
       }
     }
     loaded = true; update();
-    const bytes = Object.values(spec.atlaslar).reduce((a, e) => a + Object.values(e.haritalar).reduce((b, m) => b + m.bytes, 0), 0);
+    const bytes = Object.values(deliverySpec.atlaslar).reduce((a, e) => a + Object.values(e.haritalar).reduce((b, m) => b + m.bytes, 0), 0);
     console.info(`Pişmiş ışık: ${jobs.length} harita (${(bytes / 1e6).toFixed(1)} MB), ${applied} malzeme`);
     return true;
   })().catch(error => { console.warn('Pişmiş ışık yüklenemedi, canlı ışıkla devam:', error); loader?.dispose(); return false; })

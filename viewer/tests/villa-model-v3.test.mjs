@@ -2,6 +2,22 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {applyVillaModelV3, VILLA_MODEL_V3} from '../src/villa-model-v3.js';
 import {DEFAULT_FEATURES} from '../src/features.js';
+import {applyTur10, TUR10_MODELS} from '../src/villa-model-v3.js';
+
+test('main delivers Tur 10 with the same 512px KTX2 models on desktop and mobile', () => {
+  assert.equal(DEFAULT_FEATURES.tur10, true);
+  assert.equal(DEFAULT_FEATURES.lightmaps, true);
+  for (const mobile of [false, true]) {
+    const m = manifest();
+    applyTur10(m, {mobile});
+    for (const name of ['architecture', 'interior', 'garden']) {
+      const part = m.parts.find(p => p.name === name);
+      assert.equal(part.file, '../../26092026/' + TUR10_MODELS[name].file);
+      assert.match(part.file, /\/ktx512\/.*\.ktx2\.glb$/);
+      assert.equal(part.gpu_sha256, undefined);
+    }
+  }
+});
 
 // 26.09.2026 yüklemesi: ürün sahibinin kendi malzeme yazarlığını yaptığı
 // BUILDING-opt-v3 / GARDEN-opt-v2 / INTERIOR-opt-v2. Değişim manifest
@@ -107,23 +123,23 @@ test('çevre v2: komşu ve zemin dosyası değişir, eski ağaç parçası çık
   const changed = applyContextV2(m);
   assert.deepEqual(changed.sort(), ['-context-plants', 'context-buildings', 'context-ground']);
   const byName = Object.fromEntries(m.parts.map(p => [p.name, p]));
-  assert.equal(byName['context-buildings'].file, '../../26092026/KOMSULAR-opt-v2.glb');
+  assert.equal(byName['context-buildings'].file, '../../26092026/ktx512/KOMSULAR-opt-v2.ktx2.glb');
   assert.equal(byName['context-ground'].file, '../../26092026/CEVRE-YOL-opt-v2.glb');
   assert.equal(byName['context-plants'], undefined);
   assert.equal(byName.architecture.file, 'architecture.glb');
   const mobile = manifest(); applyContextV2(mobile, {mobile: true});
-  assert.match(mobile.parts.find(p => p.name === 'context-buildings').file, /mobile\/KOMSULAR-opt-v2\.ktx2\.glb$/);
+  assert.match(mobile.parts.find(p => p.name === 'context-buildings').file, /ktx512\/KOMSULAR-opt-v2\.ktx2\.glb$/);
   assert.equal(DEFAULT_FEATURES.contextV2, true);
 });
 
 // 28.09 zemin v3: yalnız zemin dosyası değişir, bayrakla v2'ye dönülür.
 test('zemin v3: arazi normalli dosya, bayrak kapalıyken v2', () => {
   const m = manifest(); applyContextV2(m, {groundV3: true});
-  assert.equal(m.parts.find(p => p.name === 'context-ground').file, '../../26092026/CEVRE-YOL-opt-v3.glb');
-  assert.equal(m.parts.find(p => p.name === 'context-ground').bytes, 817680);
-  assert.equal(m.parts.find(p => p.name === 'context-buildings').file, '../../26092026/KOMSULAR-opt-v2.glb');
+  assert.equal(m.parts.find(p => p.name === 'context-ground').file, '../../26092026/ktx512/CEVRE-YOL-opt-v3.ktx2.glb');
+  assert.equal(m.parts.find(p => p.name === 'context-ground').bytes, 1991564);
+  assert.equal(m.parts.find(p => p.name === 'context-buildings').file, '../../26092026/ktx512/KOMSULAR-opt-v2.ktx2.glb');
   const mobile = manifest(); applyContextV2(mobile, {mobile: true, groundV3: true});
-  assert.match(mobile.parts.find(p => p.name === 'context-ground').file, /mobile\/CEVRE-YOL-opt-v3\.ktx2\.glb$/);
+  assert.match(mobile.parts.find(p => p.name === 'context-ground').file, /ktx512\/CEVRE-YOL-opt-v3\.ktx2\.glb$/);
   const old = manifest(); applyContextV2(old, {groundV3: false});
   assert.equal(old.parts.find(p => p.name === 'context-ground').file, '../../26092026/CEVRE-YOL-opt-v2.glb');
   assert.equal(DEFAULT_FEATURES.terrainNormalsV3, true);

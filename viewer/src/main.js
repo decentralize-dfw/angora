@@ -38,6 +38,7 @@ import {bakeContactOcclusion} from './vertex-ao.js';
 import {markUploads,releaseGeometryArrays} from './geometry-release.js';
 import {applyVillaModelV3,applyContextV2,applyTur10} from './villa-model-v3.js';
 import {LIGHTMAP_MODELS,createVillaLightmaps} from './villa-lightmaps.js';
+import tur10Lightmaps from './villa-lightmaps-tur10.json';
 import {createStreetLabels} from './street-labels.js';
 import {createNeighbourLines} from './neighbour-lines.js';
 import {createSiteContext} from './site-context.js';
@@ -2014,7 +2015,7 @@ async function loadModel() {
       if(swapped.length)console.info('Villa model v3'+(deliveryProfile==='mobile'?' (mobil ktx2)':'')+': '+swapped.join(', '));
     }
     // Tur 10: fotoğraflardan yeniden modellenmiş kabuk + iç mekân (telefonda KTX2 kopyası).
-    // Eski pişmiş ışık (v5) ve EKLER eski geometriye ait - bu yolda kapalı.
+    // Tur 10 kendi pişmiş ışıklarını kullanır; ayrı EKLER yüklenmez.
     const tur10=tur10Active;
     if(tur10){
       const swapped=applyTur10(manifest,{mobile:deliveryProfile==='mobile'});
@@ -2022,10 +2023,10 @@ async function loadModel() {
     }
     // Pişmiş ışık (masaüstü): kabuk ve bahçe lightmap UV'li v5/v3 dosyalarına
     // geçer, 20 harita arka planda yüklenir; gelene kadar eski ışık görünür.
-    if(FEATURES.lightmaps&&!tur10&&FEATURES.villaModelV3&&deliveryProfile==='desktop'&&manifest.parts){
-      for(const part of manifest.parts){const next=LIGHTMAP_MODELS[part.name];if(!next)continue;
+    if(FEATURES.lightmaps&&FEATURES.villaModelV3&&(tur10||deliveryProfile==='desktop')&&manifest.parts){
+      if(!tur10)for(const part of manifest.parts){const next=LIGHTMAP_MODELS[part.name];if(!next)continue;
         part.file='../../26092026/'+next.file;part.bytes=next.bytes;delete part.gpu_sha256;}
-      villaLightmaps=createVillaLightmaps({renderer,root:new URL('../../26092026/lightmaps/',modelRoot)});
+      villaLightmaps=createVillaLightmaps({renderer,root:new URL('../../26092026/'+(tur10?'lightmaps-tur10-512/':'lightmaps/'),modelRoot),...(tur10?{spec:tur10Lightmaps}:{})});
       if(villaLightmaps.active){lighting.setLightmaps(villaLightmaps);window.__angoraLightmaps=villaLightmaps;villaLightmaps.ready.then(ok=>{if(ok)invalidate();});}
       else villaLightmaps=null;
     }

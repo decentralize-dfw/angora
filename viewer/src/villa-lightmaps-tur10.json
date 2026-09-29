@@ -1,0 +1,167 @@
+{
+  "kodlama": "x = (v^2) * scale, v = png/255 (doğrusal, sRGB DEĞİL)",
+  "atlaslar": {
+    "duvar": {
+      "bake_boyut": 4096,
+      "haritalar": {
+        "gok": {
+          "boyut": 512,
+          "olcek": 0.243541,
+          "ortalama": 0.003658,
+          "dosya": "duvar_gok.ktx2",
+          "bytes": 150017
+        },
+        "gunes_09": {
+          "boyut": 512,
+          "olcek": 0.007826,
+          "ortalama": 0.000125,
+          "dosya": "duvar_gunes_09.ktx2",
+          "bytes": 133048
+        },
+        "gunes_13": {
+          "boyut": 512,
+          "olcek": 0.009887,
+          "ortalama": 0.000115,
+          "dosya": "duvar_gunes_13.ktx2",
+          "bytes": 122641
+        },
+        "gunes_17": {
+          "boyut": 512,
+          "olcek": 0.018043,
+          "ortalama": 0.000174,
+          "dosya": "duvar_gunes_17.ktx2",
+          "bytes": 118716
+        },
+        "gece": {
+          "boyut": 512,
+          "olcek": 1.776119,
+          "ortalama": 0.035188,
+          "dosya": "duvar_gece.ktx2",
+          "bytes": 131924
+        }
+      }
+    },
+    "zemin": {
+      "bake_boyut": 4096,
+      "haritalar": {
+        "gok": {
+          "boyut": 512,
+          "olcek": 0.556068,
+          "ortalama": 0.016193,
+          "dosya": "zemin_gok.ktx2",
+          "bytes": 199301
+        },
+        "gunes_09": {
+          "boyut": 512,
+          "olcek": 0.050618,
+          "ortalama": 0.000618,
+          "dosya": "zemin_gunes_09.ktx2",
+          "bytes": 170014
+        },
+        "gunes_13": {
+          "boyut": 512,
+          "olcek": 0.061138,
+          "ortalama": 0.000527,
+          "dosya": "zemin_gunes_13.ktx2",
+          "bytes": 162270
+        },
+        "gunes_17": {
+          "boyut": 512,
+          "olcek": 0.056184,
+          "ortalama": 0.000531,
+          "dosya": "zemin_gunes_17.ktx2",
+          "bytes": 167882
+        },
+        "gece": {
+          "boyut": 512,
+          "olcek": 2.41369,
+          "ortalama": 0.068441,
+          "dosya": "zemin_gece.ktx2",
+          "bytes": 177943
+        }
+      }
+    },
+    "cephe": {
+      "bake_boyut": 2048,
+      "haritalar": {
+        "gok": {
+          "boyut": 512,
+          "olcek": 0.920616,
+          "ortalama": 0.170476,
+          "dosya": "cephe_gok.ktx2",
+          "bytes": 207632
+        },
+        "gunes_09": {
+          "boyut": 512,
+          "olcek": 0.083992,
+          "ortalama": 0.00364,
+          "dosya": "cephe_gunes_09.ktx2",
+          "bytes": 188023
+        },
+        "gunes_13": {
+          "boyut": 512,
+          "olcek": 0.079217,
+          "ortalama": 0.004911,
+          "dosya": "cephe_gunes_13.ktx2",
+          "bytes": 190429
+        },
+        "gunes_17": {
+          "boyut": 512,
+          "olcek": 0.075017,
+          "ortalama": 0.003652,
+          "dosya": "cephe_gunes_17.ktx2",
+          "bytes": 171848
+        },
+        "gece": {
+          "boyut": 512,
+          "olcek": 0.425781,
+          "ortalama": 0.002774,
+          "dosya": "cephe_gece.ktx2",
+          "bytes": 102017
+        }
+      }
+    },
+    "bahce": {
+      "bake_boyut": 2048,
+      "haritalar": {
+        "gok": {
+          "boyut": 512,
+          "olcek": 0.891431,
+          "ortalama": 0.324534,
+          "dosya": "bahce_gok.ktx2",
+          "bytes": 219661
+        },
+        "gunes_09": {
+          "boyut": 512,
+          "olcek": 0.071953,
+          "ortalama": 0.001807,
+          "dosya": "bahce_gunes_09.ktx2",
+          "bytes": 154094
+        },
+        "gunes_13": {
+          "boyut": 512,
+          "olcek": 0.082343,
+          "ortalama": 0.00239,
+          "dosya": "bahce_gunes_13.ktx2",
+          "bytes": 159064
+        },
+        "gunes_17": {
+          "boyut": 512,
+          "olcek": 0.073075,
+          "ortalama": 0.002344,
+          "dosya": "bahce_gunes_17.ktx2",
+          "bytes": 156301
+        },
+        "gece": {
+          "boyut": 512,
+          "olcek": 0.045231,
+          "ortalama": 0.000373,
+          "dosya": "bahce_gece.ktx2",
+          "bytes": 97226
+        }
+      }
+    }
+  },
+  "kok": "lightmaps-tur10-512/",
+  "uretim": "tools/batch-delivery/make-ktx512.mjs"
+}

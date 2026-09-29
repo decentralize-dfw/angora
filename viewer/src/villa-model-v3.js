@@ -66,16 +66,23 @@ export function applyVillaModelV3(manifest, {mobile = false} = {}) {
 
 // 29.09 TUR 10: fotoğraflardan yeniden modellenmiş kabuk ve iç mekân
 // (tools/batch-delivery/make-tur10-web.mjs; kaynak: modelleme dalı
-// teslim-tur10/web). Telefon: make-mobile-ktx2.mjs ile 256 px KTX2 kopyası. Eski
+// teslim-tur10/web). Masaüstü ve telefon: 512 px KTX2, aynı geometri ve UV. Eski
 // dosyalar silinmez, bayrak kapatılınca v4/v2'ye döner.
 export const TUR10_MODELS = Object.freeze({
-  architecture: {file: 'BUILDING-opt-v6.glb', bytes: 9805676},
-  interior:     {file: 'INTERIOR-opt-v3.glb', bytes: 5113800},
+  "architecture": {
+    "file": "ktx512/BUILDING-opt-v6.ktx2.glb",
+    "bytes": 12485016
+  },
+  "interior": {
+    "file": "ktx512/INTERIOR-opt-v3.ktx2.glb",
+    "bytes": 9819420
+  },
+  "garden": {
+    "file": "ktx512/GARDEN-opt-v3.ktx2.glb",
+    "bytes": 9040736
+  }
 });
-export const TUR10_MODELS_MOBILE = Object.freeze({
-  architecture: {file: 'mobile/BUILDING-opt-v6.ktx2.glb', bytes: 5697812},
-  interior:     {file: 'mobile/INTERIOR-opt-v3.ktx2.glb', bytes: 2646928},
-});
+export const TUR10_MODELS_MOBILE = TUR10_MODELS;
 export function applyTur10(manifest, {mobile = false} = {}) {
   if (!manifest?.parts || !manifest.batched) return [];
   const table = mobile ? TUR10_MODELS_MOBILE : TUR10_MODELS;
@@ -134,18 +141,18 @@ export function repairUntexturedWood(model) {
 // ürün sahibinin yeni modeli. Yeni zeminde arsa ve kenar ağaçları yok; eski
 // mahalle ağaçları parçası (context-plants) teslimattan çıkar.
 export const CONTEXT_V2 = Object.freeze({
-  'context-buildings': {file: 'KOMSULAR-opt-v2.glb', bytes: 9468024},
+  'context-buildings': {file: 'ktx512/KOMSULAR-opt-v2.ktx2.glb', bytes: 9732452},
   'context-ground':    {file: 'CEVRE-YOL-opt-v2.glb', bytes: 932092},
 });
 export const CONTEXT_V2_MOBILE = Object.freeze({
-  'context-buildings': {file: 'mobile/KOMSULAR-opt-v2.ktx2.glb', bytes: 9445700},
+  'context-buildings': {file: 'ktx512/KOMSULAR-opt-v2.ktx2.glb', bytes: 9732452},
   'context-ground':    {file: 'mobile/CEVRE-YOL-opt-v2.ktx2.glb', bytes: 864772},
 });
 // 28.09 zemin v3 (tools/batch-delivery/make-context-v3.mjs): aynı geometri,
 // çim ve asfaltta 3 m alan-ağırlıklı "arazi normali". Çimdeki koyu
 // kıymıklar gölge değil, dik ince şeritlerin yan bakan normaliydi.
-export const CONTEXT_GROUND_V3 = Object.freeze({file: 'CEVRE-YOL-opt-v3.glb', bytes: 817680});
-export const CONTEXT_GROUND_V3_MOBILE = Object.freeze({file: 'mobile/CEVRE-YOL-opt-v3.ktx2.glb', bytes: 746060});
+export const CONTEXT_GROUND_V3 = Object.freeze({file: 'ktx512/CEVRE-YOL-opt-v3.ktx2.glb', bytes: 1991564});
+export const CONTEXT_GROUND_V3_MOBILE = Object.freeze({file: 'ktx512/CEVRE-YOL-opt-v3.ktx2.glb', bytes: 1991564});
 const CONTEXT_V2_DROPPED = ['context-plants'];
 export function applyContextV2(manifest, {mobile = false, groundV3 = false} = {}) {
   if (!manifest?.parts || !manifest.batched) return [];
