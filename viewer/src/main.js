@@ -36,7 +36,7 @@ import {reviveBakedOcclusion} from './ao-revival.js';
 import {upgradeAtlasToArrays} from './atlas-array.js';
 import {bakeContactOcclusion} from './vertex-ao.js';
 import {markUploads,releaseGeometryArrays} from './geometry-release.js';
-import {applyVillaModelV3,applyContextV2} from './villa-model-v3.js';
+import {applyVillaModelV3,applyContextV2,applyTur10} from './villa-model-v3.js';
 import {LIGHTMAP_MODELS,createVillaLightmaps} from './villa-lightmaps.js';
 import {createStreetLabels} from './street-labels.js';
 import {createNeighbourLines} from './neighbour-lines.js';
@@ -1720,7 +1720,7 @@ async function loadNativeModel(manifest){
     // EKLER (Tur 9): fotoğraflarda olup modelde olmayan detaylar - perde,
     // korniş, aplik, tablo, halı (tools/blender/06_ekler.py). Mimari
     // grubun içine girer: kesit, kat görünürlüğü ve ışık aynı. Kapat: ?features=ekler:0
-    if(FEATURES.ekler&&groups.get('architecture'))loader.loadAsync(new URL('../../26092026/EKLER.glb',modelRoot).href).then(gltf=>{
+    if(FEATURES.ekler&&!(FEATURES.tur10&&deliveryProfile==='desktop')&&groups.get('architecture'))loader.loadAsync(new URL('../../26092026/EKLER.glb',modelRoot).href).then(gltf=>{
       const root=gltf.scene;root.name='EKLER';
       root.traverse(o=>{if(!o.isMesh)return;
         o.renderOrder=5;lighting.prepareMesh(o,{clipped:true,context:false,name:'interior'});o.userData.clipPlanes=[clip];
@@ -2010,9 +2010,16 @@ async function loadModel() {
       const swapped=applyVillaModelV3(manifest,{mobile:deliveryProfile==='mobile'});
       if(swapped.length)console.info('Villa model v3'+(deliveryProfile==='mobile'?' (mobil ktx2)':'')+': '+swapped.join(', '));
     }
+    // Tur 10 (masaüstü): fotoğraflardan yeniden modellenmiş kabuk + iç mekân.
+    // Eski pişmiş ışık (v5) ve EKLER eski geometriye ait - bu yolda kapalı.
+    const tur10=FEATURES.tur10&&FEATURES.villaModelV3&&deliveryProfile==='desktop';
+    if(tur10){
+      const swapped=applyTur10(manifest);
+      if(swapped.length)console.info('Tur 10 modeller: '+swapped.join(', '));
+    }
     // Pişmiş ışık (masaüstü): kabuk ve bahçe lightmap UV'li v5/v3 dosyalarına
     // geçer, 20 harita arka planda yüklenir; gelene kadar eski ışık görünür.
-    if(FEATURES.lightmaps&&FEATURES.villaModelV3&&deliveryProfile==='desktop'&&manifest.parts){
+    if(FEATURES.lightmaps&&!tur10&&FEATURES.villaModelV3&&deliveryProfile==='desktop'&&manifest.parts){
       for(const part of manifest.parts){const next=LIGHTMAP_MODELS[part.name];if(!next)continue;
         part.file='../../26092026/'+next.file;part.bytes=next.bytes;delete part.gpu_sha256;}
       villaLightmaps=createVillaLightmaps({renderer,root:new URL('../../26092026/lightmaps/',modelRoot)});

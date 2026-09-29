@@ -64,6 +64,26 @@ export function applyVillaModelV3(manifest, {mobile = false} = {}) {
   return swapped;
 }
 
+// 29.09 TUR 10: fotoğraflardan yeniden modellenmiş kabuk ve iç mekân
+// (tools/batch-delivery/make-tur10-web.mjs; kaynak: modelleme dalı
+// teslim-tur10/web). Yalnız masaüstü; mobil kopyası henüz yok. Eski
+// dosyalar silinmez, bayrak kapatılınca v4/v2'ye döner.
+export const TUR10_MODELS = Object.freeze({
+  architecture: {file: 'BUILDING-opt-v6.glb', bytes: 8371784},
+  interior:     {file: 'INTERIOR-opt-v3.glb', bytes: 4243240},
+});
+export function applyTur10(manifest) {
+  if (!manifest?.parts || !manifest.batched) return [];
+  const swapped = [];
+  for (const part of manifest.parts) {
+    const next = TUR10_MODELS[part.name];
+    if (!next) continue;
+    part.file = ROOT + next.file; part.bytes = next.bytes; delete part.gpu_sha256;
+    swapped.push(part.name);
+  }
+  return swapped;
+}
+
 // "Procedural Wood" (asansörün ceviz kapısı) Blender'da prosedürel dokuyla
 // yazılmış; glTF prosedürel düğüm taşıyamadığı için dosyada dokusuz ve
 // renksiz - yani BEYAZ - geliyor. Aynı modelin kendi koyu ahşap malzemesinin

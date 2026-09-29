@@ -116,7 +116,7 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     const ownerInterior=name==='interior'&&manifest.batched&&![...resources(model).materials].some(m=>m.userData.angoraBatch);
     model.traverse(o=>{if(o.isMesh){
       if(!manifest.batched&&name.startsWith('interior')&&!/floor|tile|door|glass|stair|window|lift|wall/i.test(o.name))o.userData.category='furniture';
-      if(ownerInterior&&!/^Lift\b/i.test(o.name))o.userData.category='furniture';
+      if(ownerInterior&&!/^(EK_)?Lift\b/i.test(o.name))o.userData.category='furniture';
       prepare(o,{clipped,context:!clipped,name});}});
     // Task 1.6: the garden is outdoors too. Without this its surfaces
     // compile the four interior fixture loops and evaluate them per fragment
