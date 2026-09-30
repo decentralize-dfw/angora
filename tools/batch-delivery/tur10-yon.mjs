@@ -126,7 +126,9 @@ export function orientForBake(doc, materials, rooms) {
 // kat arkadakinin ışığını kesiyor, biri aydınlık biri kara pişip titreşiyordu.
 // Küçükten büyüğe gidilir; atılan üçgen başkasını örtmüş sayılmaz (iki kopyadan
 // biri kalır). Kısmen örtülen üçgen kalır (delik açılmaz).
-export function dropCoveredDuplicates(doc) {
+// extra: {malzeme: /örtebilecek başka malzemeler/} - ör. merdiven altı kaplaması duvarın ve
+// parkenin 3 mm önünde aynı düzlemde duruyordu (basamaklı leke); örtülen kaplama üçgeni atılır.
+export function dropCoveredDuplicates(doc, extra = {}) {
   const root = doc.getRoot(), buffer = root.listBuffers()[0], EPS = 0.003, G = 0.25;
   const tris = [];
   for (const node of root.listNodes()) {
@@ -171,7 +173,7 @@ export function dropCoveredDuplicates(doc) {
       ...[[0, 1], [1, 2], [2, 0]].map(([a, b]) => tr.v[a].map((x, k) => (x + tr.v[b][k]) / 2 * 0.98 + c[k] * 0.02))];
     const ok = pts.every(p => (grid.get(K(...p.map(x => Math.floor(x / G)))) ?? []).some(j => {
       if (j === i) return false; const u = tris[j];
-      return !u.dead && u.mat === tr.mat && Math.abs(u.n[0]*tr.n[0] + u.n[1]*tr.n[1] + u.n[2]*tr.n[2]) > 0.98 && covers(u, p);
+      return !u.dead && (u.mat === tr.mat || extra[tr.mat]?.test(u.mat)) && Math.abs(u.n[0]*tr.n[0] + u.n[1]*tr.n[1] + u.n[2]*tr.n[2]) > 0.98 && covers(u, p);
     }));
     if (ok) {tr.dead = true; dropped++; area += tr.area;}
   }

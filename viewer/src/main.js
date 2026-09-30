@@ -642,7 +642,8 @@ function applyWalkLocation(name,station){
 // yüksekliğinde ve bakış yönünde; lens dikey açı (derece).
 async function qaPhotoView(id,fov=58){
   const {PHOTO_POINTS}=await import('./photo-points.js');
-  const point=PHOTO_POINTS.find(p=>p.id===Number(id));
+  // QA: id yerine {floor,x,y,z,dx,dz,pitch,hfov} verilirse o bakış (fotoğrafsız denetim açıları)
+  const point=typeof id==='object'&&id?{outdoor:false,...id}:PHOTO_POINTS.find(p=>p.id===Number(id));
   if(!point||point.outdoor)throw Error('İç mekân fotoğrafı değil: '+id);
   const floor=point.floor;
   if(nativeDelivery&&selected!=='f'+floor){await nativeDelivery.activate('f'+floor);setFurnitureVisible(furnitureVisible);selected='f'+floor;}

@@ -51,7 +51,7 @@ const ATLASES = {
     'EK_M2_Ceviz_basamak', 'EK_M3_Krem_karo_esik', 'RR', 'EK_banyo_duvar',
     'R31 | R33 ivory wall ceramic', 'R31 | R33 master pale cream tile', 'R31 | R33 attic cream tile',
     'R31 | R33 entrance WC ochre tile', 'R31 | R33 attic tan mosaic band', 'R31 | R33 entrance navy mosaic band',
-    'R31 | R33 master fine mosaic band']},
+    'R31 | R33 master fine mosaic band', 'EK_cam_lambri']},
   cephe: {boyut: 2048, malzemeler: ['Stucco painted wall', 'roof-7', 'Stone gravel']},
 };
 
@@ -261,6 +261,8 @@ function applyFloors(doc) {
   };
   const parke = pbr('parke');
   const wood = restyle(mats.get('WOOD-FL'), parke);
+  // 1. kat oturma alanı tavanı: kirişler arası bal rengi çam lambri (fotoğraf 12; RETILE taşır)
+  restyle(wood.clone().setName('EK_cam_lambri'), pbr('cam-lambri'));
   if (mats.get('wood_floor')) restyle(mats.get('wood_floor'), parke);
   const basement = restyle(mats.get('terra_floor'), pbr('bodrum-karo'));
   const ground = restyle(mats.get('terra_floor').clone().setName('terra_floor_giris'), pbr('giris-karo'));
@@ -699,6 +701,248 @@ function buildKitchenette(doc) {
 // eksen (2,1729, -6,0277) -> (1,3655, -6,0277), y ekseni etrafında -35° katı dönüş. Yansıtma
 // değil: yansıtma normal haritalı ahşabın teğet çerçevesini ters çevirirdi. Kasa, üst kasa ve
 // pervazlar yerinde kalır (açıklığın ortası x 1,7692'ye göre simetrik).
+// Fotoğraf denetiminde (30.09, tools/batch-delivery/_batch: her fotoğraf kamerasından model ile
+// fotoğraf yan yana) bulunan fazla parçalar: malzeme + dünya kutusu; ağırlık merkezi kutudaki
+// üçgenler atılır. Her satır neden orada olduğunu söyler.
+const TRIM = [
+  // giriş katı salon/yemek tavanı: tavandan 12 cm sarkan 46 cm kiriş, fotoğraf 04/23'te yok
+  {mat: /^(Simple White Wall|WHT\.001)$/, min: [-3.3, 5.7, -1.56], max: [0.87, 6.12, -1.07], neden: 'salon tavan kirişi'},
+];
+// Fotoğraf denetimi: yüzeyin malzemesi yanlış (ör. misafir WC'de bordür üstü sıva, fotoğrafta
+// tavana kadar beyaz seramik). Kutudaki dik üçgenler hedef malzemeye taşınır, düzlemsel UV.
+const RETILE = [
+  {mat: /^(Simple White Wall|EK_SimpleWhiteWall)$/, hedef: 'R31 | R33 ivory wall ceramic', uvm: 3.333,
+    min: [2.78, 4.17, 0.5], max: [4.13, 5.95, 2.43], neden: 'misafir WC bordür üstü beyaz seramik (fotoğraf 39)'},
+  // yatay: tavan üçgenleri; tahtalar kirişlere (z boyunca) dik, x boyunca uzanır
+  {mat: /^ceiling\.001$/, hedef: 'EK_cam_lambri', uvm: 1 / 2.4, yatay: true,
+    min: [-5.96, 8.95, -4.26], max: [-2.53, 9.1, -0.05], neden: '1. kat oturma alanı tavanı çam lambri (fotoğraf 12)'},
+];
+function retileBoxes(doc) {
+  const root = doc.getRoot(), buffer = root.listBuffers()[0], scene = root.listScenes()[0];
+  for (const rule of RETILE) {
+    const target = root.listMaterials().find(m => m.getName() === rule.hedef);
+    if (!target) throw Error(`RETILE hedef yok: ${rule.hedef}`);
+    const out = [];
+    for (const node of root.listNodes()) {
+      const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
+      for (const prim of mesh.listPrimitives()) {
+        if (!rule.mat.test(prim.getMaterial()?.getName() ?? '') || !prim.getIndices()) continue;
+        const P = prim.getAttribute('POSITION').getArray(), I = prim.getIndices().getArray(), keep = [];
+        const X = i => [0, 1, 2].map(k => w[k]*P[i*3] + w[4+k]*P[i*3+1] + w[8+k]*P[i*3+2] + w[12+k]);
+        for (let t = 0; t < I.length; t += 3) {
+          const v = [X(I[t]), X(I[t + 1]), X(I[t + 2])], c = [0, 1, 2].map(k => (v[0][k] + v[1][k] + v[2][k]) / 3);
+          const e1 = v[1].map((x, k) => x - v[0][k]), e2 = v[2].map((x, k) => x - v[0][k]);
+          const n = [e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]], L = Math.hypot(...n);
+          if (L > 1e-10 && (rule.yatay ? Math.abs(n[1] / L) > 0.9 : Math.abs(n[1] / L) < 0.3) && c.every((x, k) => x >= rule.min[k] && x <= rule.max[k])) out.push({v, n: n.map(x => x / L)});
+          else keep.push(I[t], I[t + 1], I[t + 2]);
+        }
+        if (keep.length !== I.length) prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(keep)).setBuffer(buffer));
+      }
+    }
+    if (!out.length) throw Error(`RETILE boş: ${rule.neden}`);
+    const p = new Float32Array(out.length * 9), nr = new Float32Array(out.length * 9), uv = new Float32Array(out.length * 6);
+    out.forEach(({v, n}, i) => v.forEach((q, j) => {
+      const o = i * 3 + j; p.set(q, o * 3); nr.set(n, o * 3);
+      if (rule.yatay) {uv[o * 2] = q[0] * rule.uvm; uv[o * 2 + 1] = q[2] * rule.uvm;}
+      else {uv[o * 2] = (Math.abs(n[0]) > Math.abs(n[2]) ? q[2] : q[0]) * rule.uvm; uv[o * 2 + 1] = -q[1] * rule.uvm;}
+    }));
+    const prim = doc.createPrimitive().setMaterial(target)
+      .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(p).setBuffer(buffer))
+      .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(nr).setBuffer(buffer))
+      .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(uv).setBuffer(buffer));
+    scene.addChild(doc.createNode('denetim_' + out.length).setMesh(doc.createMesh('denetim_retile').addPrimitive(prim)));
+    console.log(`denetim: ${rule.neden} - ${out.length} üçgen`);
+  }
+}
+// Fotoğraf 02/42: merdiven korkuluklarının üstünde ceviz küpeşte var; modelde demir lama çıplaktı.
+// Demir (EK_metal.002) bağlı bileşenlere ayrılır; 74-80 cm altında eşi olan lama "üst lama"dır.
+// Üst lamanın noktaları doğru parçalarına bölünür (RANSAC, L biçimli galeri korkuluğu için) ve her
+// parçanın üstüne 6x4,5 cm ceviz kutu konur.
+function addHandrails(doc) {
+  const root = doc.getRoot(), buffer = root.listBuffers()[0], scene = root.listScenes()[0];
+  const wood = root.listMaterials().find(m => m.getName() === 'EK_M1_Sicak_ceviz_supurgelik');
+  if (!wood) throw Error('küpeşte: ceviz malzeme yok');
+  const comps = [];
+  for (const node of root.listNodes()) {
+    const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
+    for (const prim of mesh.listPrimitives()) {
+      if (prim.getMaterial()?.getName() !== 'EK_metal.002' || !prim.getIndices()) continue;
+      const P = prim.getAttribute('POSITION').getArray(), I = prim.getIndices().getArray(), n = P.length / 3;
+      const X = i => [0, 1, 2].map(k => w[k]*P[i*3] + w[4+k]*P[i*3+1] + w[8+k]*P[i*3+2] + w[12+k]);
+      const canon = new Map(), rep = new Int32Array(n);
+      for (let i = 0; i < n; i++) {const k = X(i).map(v => Math.round(v * 2000)).join(); if (!canon.has(k)) canon.set(k, i); rep[i] = canon.get(k);}
+      const par = Int32Array.from({length: n}, (_, i) => i), f = i => {while (par[i] !== i) i = par[i] = par[par[i]]; return i;};
+      for (let t = 0; t < I.length; t += 3) {const a = f(rep[I[t]]), b = f(rep[I[t+1]]), c = f(rep[I[t+2]]); par[a] = b; par[f(b)] = c;}
+      const groups = new Map();
+      for (let i = 0; i < n; i++) {const r = f(rep[i]); (groups.get(r) ?? groups.set(r, []).get(r)).push(X(i));}
+      for (const pts of groups.values()) {
+        const lo = [0, 1, 2].map(k => Math.min(...pts.map(p => p[k]))), hi = [0, 1, 2].map(k => Math.max(...pts.map(p => p[k])));
+        if (Math.max(hi[0] - lo[0], hi[2] - lo[2]) < 0.5 || pts.length < 4) continue;
+        comps.push({pts, lo, hi});
+      }
+    }
+  }
+  // mevcut ahşap (1. kat holünde korkulukların üstünde ceviz küpeşte zaten var, fotoğraf 18):
+  // parçanın boyunca noktaların çoğunun 8 cm üstünde ahşap köşe varsa küpeşte eklenmez
+  const woodGrid = new Set(), G = 0.04, gk = (x, y, z) => `${Math.floor(x / G)},${Math.floor(y / G)},${Math.floor(z / G)}`;
+  for (const node of root.listNodes()) {
+    const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
+    for (const prim of mesh.listPrimitives()) {
+      if (!/ceviz|Ceviz|WOODY|wood|Wood/.test(prim.getMaterial()?.getName() ?? '')) continue;
+      const P = prim.getAttribute('POSITION').getArray();
+      for (let i = 0; i < P.length; i += 3) woodGrid.add(gk(...[0, 1, 2].map(k => w[k]*P[i] + w[4+k]*P[i+1] + w[8+k]*P[i+2] + w[12+k])));
+    }
+  }
+  const hasWood = (a, b) => {
+    let hit = 0, n = 0;
+    for (let t = 0.1; t <= 0.9; t += 0.1) { n++; const q = a.map((x, k) => x + (b[k] - x) * t);
+      let found = false; for (let dx = -2; dx <= 2 && !found; dx++) for (let dy = -1; dy <= 2 && !found; dy++) for (let dz = -2; dz <= 2 && !found; dz++)
+        found = woodGrid.has(gk(q[0] + dx * G, q[1] + dy * G, q[2] + dz * G));
+      if (found) hit++; }
+    return hit / n > 0.5;
+  };
+  // üst lama: 0,70-0,85 m altında, xz'de örtüşen başka bir lama olan
+  const overlap = (a, b) => Math.min(a.hi[0], b.hi[0]) - Math.max(a.lo[0], b.lo[0]) > -0.05 && Math.min(a.hi[2], b.hi[2]) - Math.max(a.lo[2], b.lo[2]) > -0.05;
+  const tops = comps.filter(a => comps.some(b => b !== a && overlap(a, b) && a.lo[1] - b.lo[1] > 0.65 && a.lo[1] - b.lo[1] < 0.9));
+  const boxes = []; let skipped = 0;
+  for (const {pts} of tops) {
+    let rest = pts.slice();
+    for (let seg = 0; seg < 3 && rest.length >= 4; seg++) {
+      let best = null;
+      for (let it = 0; it < 300; it++) {
+        const a = rest[(it * 7919) % rest.length], b = rest[(it * 104729 + 17) % rest.length];
+        const d = [b[0]-a[0], b[1]-a[1], b[2]-a[2]], L = Math.hypot(...d); if (L < 0.3) continue;
+        const u = d.map(x => x / L), inl = rest.filter(p => {const q = [p[0]-a[0], p[1]-a[1], p[2]-a[2]], t = q[0]*u[0]+q[1]*u[1]+q[2]*u[2]; return Math.hypot(q[0]-t*u[0], q[1]-t*u[1], q[2]-t*u[2]) < 0.035;});
+        if (!best || inl.length > best.inl.length) best = {a, u, inl};
+      }
+      if (!best || best.inl.length < 4) break;
+      const ts = best.inl.map(p => (p[0]-best.a[0])*best.u[0] + (p[1]-best.a[1])*best.u[1] + (p[2]-best.a[2])*best.u[2]);
+      const t0 = Math.min(...ts), t1 = Math.max(...ts); if (t1 - t0 < 0.4) break;
+      const top = Math.max(...best.inl.map(p => p[1] - (best.a[1] + ((p[0]-best.a[0])*best.u[0] + (p[1]-best.a[1])*best.u[1] + (p[2]-best.a[2])*best.u[2]) * best.u[1])));
+      const at = t => best.a.map((x, k) => x + best.u[k] * t + (k === 1 ? top : 0));
+      const seg = [at(t0 - 0.03), at(t1 + 0.03)]; if (!hasWood(...seg)) boxes.push(seg); else skipped++;
+      const inSet = new Set(best.inl); rest = rest.filter(p => !inSet.has(p));
+    }
+  }
+  if (!boxes.length) {console.log(`küpeşte: ${skipped} parçanın hepsinde ahşap var, eklenmedi`); return;}
+  const p = [], nr = [], uv = [];
+  for (const [a, b] of boxes) {
+    const d = [b[0]-a[0], b[1]-a[1], b[2]-a[2]], L = Math.hypot(...d), u = d.map(x => x / L);
+    const side = (() => {const s = [u[2], 0, -u[0]], l = Math.hypot(...s) || 1; return s.map(x => x / l);})();
+    const up = [u[1]*side[2]-u[2]*side[1], u[2]*side[0]-u[0]*side[2], u[0]*side[1]-u[1]*side[0]].map((x, _, arr) => x / (Math.hypot(...arr) || 1));
+    const upv = up[1] < 0 ? up.map(x => -x) : up, W = 0.03, H = 0.045;
+    const corner = (t, sx, sy) => [0, 1, 2].map(k => (t ? b[k] : a[k]) + side[k] * sx * W + upv[k] * sy * H);
+    const faces = [[[0,-1,0],[0,1,0],[0,1,1],[0,-1,1]], [[1,-1,0],[1,-1,1],[1,1,1],[1,1,0]], [[0,-1,1],[0,1,1],[1,1,1],[1,-1,1]],
+      [[0,-1,0],[1,-1,0],[1,1,0],[0,1,0]], [[0,-1,0],[0,-1,1],[1,-1,1],[1,-1,0]], [[0,1,0],[1,1,0],[1,1,1],[0,1,1]]];
+    for (const q of faces) {
+      const v = q.map(([t, sx, sy]) => corner(t, sx, sy));
+      const e1 = v[1].map((x, k) => x - v[0][k]), e2 = v[2].map((x, k) => x - v[0][k]);
+      const nn = [e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]], nl = Math.hypot(...nn) || 1;
+      for (const idx of [0, 1, 2, 0, 2, 3]) {p.push(...v[idx]); nr.push(...nn.map(x => x / nl)); uv.push((q[idx][0] ? L : 0) * 2, q[idx][1] * 0.05 + q[idx][2] * 0.05);}
+    }
+  }
+  const prim = doc.createPrimitive().setMaterial(wood)
+    .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(new Float32Array(p)).setBuffer(buffer))
+    .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(new Float32Array(nr)).setBuffer(buffer))
+    .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(new Float32Array(uv)).setBuffer(buffer));
+  scene.addChild(doc.createNode('kupeste').setMesh(doc.createMesh('kupeste').addPrimitive(prim)));
+  console.log(`küpeşte: ${tops.length} üst lama, ${skipped} parçada zaten ahşap var, ${boxes.length} ceviz parça (${boxes.reduce((s, [a, b]) => s + Math.hypot(b[0]-a[0], b[1]-a[1], b[2]-a[2]), 0).toFixed(1)} m)`);
+}
+// Fotoğraf 43: garajın kuzey açıklığında (iç yüz z 1,17, x 4,35..7,20, y 3,10..5,53) kapalı beyaz
+// sectional kapı var; hiçbir modelde yoktu, açıklıktan araç yolu görünüyordu.
+function addGarageDoor(doc) {
+  const root = doc.getRoot(), buffer = root.listBuffers()[0], scene = root.listScenes()[0];
+  const white = doc.createMaterial('EK_garaj_kapisi').setBaseColorFactor([0.9, 0.9, 0.88, 1]).setRoughnessFactor(0.45).setMetallicFactor(0).setDoubleSided(true);
+  const steel = doc.createMaterial('EK_garaj_ray').setBaseColorFactor([0.55, 0.57, 0.58, 1]).setRoughnessFactor(0.4).setMetallicFactor(0.8).setDoubleSided(true);
+  const X0 = 4.36, X1 = 7.19, Y0 = 3.10, Y1 = 5.52, Z = 1.20;
+  const boxes = {[white.getName()]: [[X0, Y0, Z], [X1, Y1, Z + 0.04]]};
+  const rails = [];
+  for (let k = 1; k < 4; k++) {const y = Y0 + (Y1 - Y0) * k / 4; rails.push([[X0 + 0.02, y - 0.012, Z - 0.012], [X1 - 0.02, y + 0.012, Z]]);}   // panel derzleri
+  rails.push([[(X0 + X1) / 2 - 0.02, Y0, Z - 0.012], [(X0 + X1) / 2 + 0.02, Y1, Z]]);                                       // orta dikme
+  for (const x of [X0 - 0.06, X1 + 0.01]) rails.push([[x, Y0, Z - 0.05], [x + 0.05, Y1 + 0.05, Z + 0.02]]);                     // yan raylar
+  rails.push([[X0 - 0.06, Y1, Z - 0.05], [X1 + 0.06, Y1 + 0.05, Z + 0.02]]);                                                   // üst ray
+  const build = (mat, list) => {
+    const p = [], nr = [];
+    for (const [a, b] of list) {
+      const F = [[[0,0,0],[0,1,0],[0,1,1],[0,0,1],[-1,0,0]], [[1,0,0],[1,0,1],[1,1,1],[1,1,0],[1,0,0]], [[0,0,0],[1,0,0],[1,1,0],[0,1,0],[0,0,-1]],
+        [[0,0,1],[0,1,1],[1,1,1],[1,0,1],[0,0,1]], [[0,0,0],[0,0,1],[1,0,1],[1,0,0],[0,-1,0]], [[0,1,0],[1,1,0],[1,1,1],[0,1,1],[0,1,0]]];
+      for (const f of F) {const v = f.slice(0, 4).map(c => c.map((t, k) => t ? b[k] : a[k])); for (const i of [0, 1, 2, 0, 2, 3]) {p.push(...v[i]); nr.push(...f[4]);}}
+    }
+    const prim = doc.createPrimitive().setMaterial(mat)
+      .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(new Float32Array(p)).setBuffer(buffer))
+      .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(new Float32Array(nr)).setBuffer(buffer));
+    scene.addChild(doc.createNode(mat.getName()).setMesh(doc.createMesh(mat.getName()).addPrimitive(prim)));
+  };
+  build(white, [boxes[white.getName()]]); build(steel, rails);
+  console.log('garaj kapısı: 2,83 x 2,42 m beyaz sectional + galvaniz raylar');
+}
+
+// Fotoğraf 22: giriş katı mutfak-hol arasındaki çapraz açıklık (1,5 m, çerçevesi WOODY-DARK var)
+// kapısızdı; fotoğrafta koyu ceviz çerçeveli, çiçek desenli camlı, kuşbaşı çıtalı sürme kanat
+// açıklığın sol (mutfaktan bakınca) yarısını kapatıyor. Duvar ekseni A(-0,93, 0,74) -> B(0,06, 1,87).
+function addKitchenSlider(doc) {
+  const root = doc.getRoot(), buffer = root.listBuffers()[0], scene = root.listScenes()[0];
+  const find = name => root.listMaterials().find(m => m.getName() === name) ?? (() => {throw Error('sürme kapı: malzeme yok ' + name);})();
+  const wood = find('EK_M3_Koyu_ceviz_kapi'), glass = find('EK_M3G_Foto40_gul_desenli_cam');
+  const A = [-0.93, 0.74], B = [0.06, 1.87], L = Math.hypot(B[0] - A[0], B[1] - A[1]);
+  const u = [(B[0] - A[0]) / L, (B[1] - A[1]) / L], n = [-u[1], u[0]];           // n: mutfağa doğru (u, yukarı, n sağ el)
+  const W = ([s, y, t]) => [A[0] + u[0] * s + n[0] * t, y, A[1] + u[1] * s + n[1] * t];
+  const S0 = 0.04, S1 = 0.80, Y0 = 3.105, Y1 = 5.17, T = 0.02;                   // kanat: 76 x 207 x 4 cm
+  const frame = [], glassQ = [];
+  const box = (s0, s1, y0, y1, t0, t1) => frame.push([[s0, y0, t0], [s1, y1, t1]]);
+  const st = 0.09, top = 0.09, bot = 0.16, bar = 0.022;
+  box(S0, S0 + st, Y0, Y1, -T, T); box(S1 - st, S1, Y0, Y1, -T, T);                // dikmeler
+  box(S0 + st, S1 - st, Y1 - top, Y1, -T, T); box(S0 + st, S1 - st, Y0, Y0 + bot, -T, T);  // kayıtlar
+  const g0 = S0 + st, g1 = S1 - st, h0 = Y0 + bot, h1 = Y1 - top;
+  box((g0 + g1) / 2 - bar / 2, (g0 + g1) / 2 + bar / 2, h0, h1, -T * 0.6, T * 0.6); // orta çıta
+  for (let k = 1; k < 7; k++) {const y = h0 + (h1 - h0) * k / 7; box(g0, g1, y - bar / 2, y + bar / 2, -T * 0.6, T * 0.6);}
+  box(-0.02, L + 0.02, Y1 + 0.005, Y1 + 0.05, -0.035, 0.035);                    // üst ray
+  const p = [], nr = [], uv = [];
+  const F = [[[0,0,0],[0,1,0],[0,1,1],[0,0,1],[-1,0,0]], [[1,0,0],[1,0,1],[1,1,1],[1,1,0],[1,0,0]], [[0,0,0],[1,0,0],[1,1,0],[0,1,0],[0,0,-1]],
+    [[0,0,1],[0,1,1],[1,1,1],[1,0,1],[0,0,1]], [[0,0,0],[0,0,1],[1,0,1],[1,0,0],[0,-1,0]], [[0,1,0],[1,1,0],[1,1,1],[0,1,1],[0,1,0]]];
+  const wn = ([a, b, c]) => [u[0] * a + n[0] * c, b, u[1] * a + n[1] * c];
+  for (const [a, b] of frame) for (const f of F) {
+    const v = f.slice(0, 4).map(c => c.map((t, k) => t ? b[k] : a[k]));
+    for (const i of [0, 2, 1, 0, 3, 2]) {                                         // F'nin sırası normalin tersine döner
+      p.push(...W(v[i])); nr.push(...wn(f[4]));
+      uv.push(f[4][1] ? v[i][0] : f[4][0] ? v[i][2] : v[i][0], -v[i][1] + (f[4][1] ? v[i][2] : 0));
+    }
+  }
+  const gp = [], gn = [], guv = [];
+  for (const t of [-0.004, 0.004]) {
+    const q = [[g0, h0], [g1, h0], [g1, h1], [g0, h1]], order = t < 0 ? [0, 3, 2, 0, 2, 1] : [0, 1, 2, 0, 2, 3];
+    for (const i of order) {gp.push(...W([q[i][0], q[i][1], t])); gn.push(...wn([0, 0, Math.sign(t)])); guv.push((q[i][0] - g0) / (g1 - g0), 1 - (q[i][1] - h0) / (h1 - h0));}
+  }
+  const prim = (mat, P, N, U) => doc.createPrimitive().setMaterial(mat)
+    .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(new Float32Array(P)).setBuffer(buffer))
+    .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(new Float32Array(N)).setBuffer(buffer))
+    .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(new Float32Array(U)).setBuffer(buffer));
+  scene.addChild(doc.createNode('EK_mutfak_surme_kapi').setMesh(doc.createMesh('EK_mutfak_surme_kapi')
+    .addPrimitive(prim(wood, p, nr, uv)).addPrimitive(prim(glass, gp, gn, guv))));
+  console.log(`mutfak sürme kapısı: ${(S1 - S0).toFixed(2)} x ${(Y1 - Y0).toFixed(2)} m, açıklık ${L.toFixed(2)} m`);
+}
+
+function trimBoxes(doc) {
+  const buffer = doc.getRoot().listBuffers()[0];
+  for (const rule of TRIM) {
+    let removed = 0;
+    for (const node of doc.getRoot().listNodes()) {
+      const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
+      for (const prim of mesh.listPrimitives()) {
+        if (!rule.mat.test(prim.getMaterial()?.getName() ?? '') || !prim.getIndices()) continue;
+        const P = prim.getAttribute('POSITION').getArray(), I = prim.getIndices().getArray(), keep = [];
+        for (let t = 0; t < I.length; t += 3) {
+          const c = [0, 1, 2].map(k => [0, 1, 2].reduce((a, j) => {const i = I[t + j] * 3; return a + (w[k]*P[i] + w[4+k]*P[i+1] + w[8+k]*P[i+2] + w[12+k]) / 3;}, 0));
+          if (c.every((x, k) => x >= rule.min[k] && x <= rule.max[k])) removed++; else keep.push(I[t], I[t + 1], I[t + 2]);
+        }
+        if (keep.length !== I.length) prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(keep)).setBuffer(buffer));
+      }
+    }
+    if (!removed) throw Error(`TRIM boş: ${rule.neden}`);
+    console.log(`denetim: ${rule.neden} - ${removed} üçgen`);
+  }
+}
+
 function fixDressingDoor(doc) {
   const MOVE = /^EK_M3_04_(kanat|dik_profil|yatay_profil|gobek|pirinc_topuz|topuz_mili|mentese)(\.\d+)?$/;
   const th = -35 * Math.PI / 180, c = Math.cos(th), s = Math.sin(th);
@@ -730,7 +974,7 @@ async function load(sources, {stairRepair = false} = {}) {
       merged.dispose();
     }
   }
-  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc);}
+  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc); trimBoxes(doc); retileBoxes(doc); addHandrails(doc); addGarageDoor(doc); restyleWardrobe(doc); addKitchenSlider(doc);}
   for (const prim of root.listMeshes().flatMap(m => m.listPrimitives()))
     for (const semantic of DROP) if (prim.getAttribute(semantic)) prim.setAttribute(semantic, null);
   for (const node of root.listNodes()) {const kat = node.getExtras()?.kat; node.setExtras(kat ? {kat} : {});}
@@ -1009,7 +1253,7 @@ async function addFurniture(doc) {
     textureCompress({encoder: sharp, resize: [MAX_EDGE, MAX_EDGE]}));
   splitPrimitives(doc);
   // aynı malzemeden iki kat yüzey: pişirmede biri kara çıkıp titreşiyordu (357 m² beyaz duvar)
-  const dup = dropCoveredDuplicates(doc);
+  const dup = dropCoveredDuplicates(doc, {EK_M2_Beyaz_merdiven_alti: /^(Simple White Wall|EK_SimpleWhiteWall|WOOD-FL|wood_floor|terra_floor|terra_floor_giris|stone_tile|WHT\.001|ceiling\.001)$/});
   console.log(`çift katman: ${dup.dropped} örtülen üçgen atıldı (${dup.area.toFixed(0)} m²)`);
   // Cycles yüzeyi normalinin baktığı yandan pişirir: içe bakan duvar/tavan kara çıkıyordu
   const yon = orientForBake(doc, new Set(Object.values(ATLASES).flatMap(s => s.malzemeler)),
@@ -1039,12 +1283,58 @@ async function addFurniture(doc) {
   await writeWeb(doc, path.join(DIR, 'BUILDING-opt-v6.glb'));
 }
 
+// Fotoğraf denetimi, mobilya/ahşap rengi: kutudaki (tamamı içinde) üçgenler aynı erişimcilerle
+// (UV, normal korunur) yeni ilkele, taban rengi DOKU/<doku> olan kopya malzemeye taşınır. Dokular
+// aynı ahşap dokusunun hedef renge çekilmiş hâli: normal/pürüzlülük haritası desenle uyar.
+const RECOLOR = [
+  // 1. kat oturma alanı kirişleri bal rengi çam; modelde koyu ceviz dokulu wood_honey, siyah görünüyordu
+  {mat: 'wood_honey', ad: 'EK_cam_kiris', doku: 'cam-kiris.jpg', min: [-5.96, 8.9, -4.26], max: [-2.53, 9.02, -0.05], neden: 'fotoğraf 12 kirişler'},
+  // giriş katı mutfak dolapları sıcak kiraz (fotoğraf 21/22); model koyu, kahve-gri
+  // 1. kat giyinme odası dolapları açık tik (fotoğraf 16); BUILDING'deki EK_A08_Ceviz de aynı dokuya (restyleWardrobe)
+  {mat: 'wood_honey', ad: 'EK_giyinme_tik', doku: 'giyinme-tik.jpg', min: [0.3, 6.3, -5.96], max: [3.1, 8.8, -3.35], neden: 'fotoğraf 16 giyinme dolapları'},
+  {mat: 'wood_honey', ad: 'EK_mutfak_kiraz', doku: 'mutfak-kiraz.jpg', min: [-5.7, 3.0, -0.2], max: [-2.2, 5.8, 3.3], neden: 'fotoğraf 21 mutfak dolapları'},
+];
+function restyleWardrobe(doc) {
+  const mats = doc.getRoot().listMaterials().filter(m => m.getName() === 'EK_A08_Ceviz');
+  if (!mats.length) throw Error('EK_A08_Ceviz yok');
+  const tex = doc.createTexture('giyinme-tik').setImage(readFileSync(path.join(DOKU, 'giyinme-tik.jpg'))).setMimeType('image/jpeg');
+  for (const m of mats) m.setBaseColorTexture(tex).setBaseColorFactor([1, 1, 1, 1]);
+}
+function recolorBoxes(doc) {
+  const root = doc.getRoot(), buffer = root.listBuffers()[0];
+  for (const rule of RECOLOR) {
+    const tex = doc.createTexture(rule.ad).setImage(readFileSync(path.join(DOKU, rule.doku))).setMimeType('image/jpeg');
+    const clones = new Map(); let moved = 0;
+    for (const node of root.listNodes()) {
+      const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
+      for (const prim of [...mesh.listPrimitives()]) {
+        const mat = prim.getMaterial(); if (mat?.getName() !== rule.mat || !mat.getBaseColorTexture() || !prim.getIndices()) continue;
+        const P = prim.getAttribute('POSITION').getArray(), I = prim.getIndices().getArray(), keep = [], out = [];
+        const X = i => [0, 1, 2].map(k => w[k]*P[i*3] + w[4+k]*P[i*3+1] + w[8+k]*P[i*3+2] + w[12+k]);
+        for (let t = 0; t < I.length; t += 3) {
+          const v = [X(I[t]), X(I[t + 1]), X(I[t + 2])];
+          (v.every(q => q.every((x, k) => x >= rule.min[k] && x <= rule.max[k])) ? out : keep).push(I[t], I[t + 1], I[t + 2]);
+        }
+        if (!out.length) continue;
+        if (!clones.has(mat)) clones.set(mat, mat.clone().setName(rule.ad).setBaseColorTexture(tex).setBaseColorFactor([1, 1, 1, 1]));
+        prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(keep)).setBuffer(buffer));
+        mesh.addPrimitive(prim.clone().setMaterial(clones.get(mat))
+          .setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(out)).setBuffer(buffer)));
+        moved += out.length / 3;
+      }
+    }
+    if (!moved) throw Error(`renk: kutuda ${rule.mat} yok (${rule.neden})`);
+    console.log(`renk: ${rule.neden} - ${moved} üçgen ${rule.ad}`);
+  }
+}
+
 // --- INTERIOR (mobilya; lightmap almaz, pişirmede gölge verir) ----------------
 {
   const doc = await load([path.join(SRC, 'INTERIOR-opt-v3.glb')]);
   await addFurniture(doc);
   // Tripo malzemeleri metalik=1 geliyor: deri/ahşap/kumaş seramik gibi parlıyordu (30.09)
   for (const m of doc.getRoot().listMaterials()) if (/^tripo_material|^adsad$/.test(m.getName())) m.setMetallicFactor(0);
+  recolorBoxes(doc);
   await doc.transform(dedup(), prune({keepAttributes: false}), textureCompress({encoder: sharp, resize: [MAX_EDGE, MAX_EDGE]}), unpartition());
   await io.write(path.join(BAKE, 'INTERIOR-opt-v3-sahne.glb'), doc);
   await writeWeb(doc, path.join(DIR, 'INTERIOR-opt-v3.glb'));

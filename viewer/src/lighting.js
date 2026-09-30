@@ -315,6 +315,10 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
     // downward-facing ceilings. Reuse the existing hemisphere: no extra light
     // loop, shadow map or render pass. This is a presentation fill, not GI.
     hemisphere.intensity=.06+(daylightV2?.22:.34)*daylight+(walkInterior&&!electricLight?(lightsEnabled?.45:.18*daylight):0);
+    // Pişmiş ışıklı iç mekânda duvar/zemin/tavan dolguyu haritadan alır (hemisphere'in yerine
+    // geçer); kapı, dolap, mobilya ise yalnız bu dolguyla aydınlanıyordu ve aydınlık duvarların
+    // önünde simsiyah kalıyordu (30.09 fotoğraf karşılaştırması). Pişmiş yüzeyi etkilemez.
+    if(walkInterior&&lightmaps)hemisphere.intensity+=.25+.9*daylight;
     hemisphere.groundColor.set(walkInterior?0xe9e1d5:daylightV2?0x77705f:0xb8b2a8);
     renderer.toneMappingExposure=baseExposure()*(walkInterior?1.18:1);
     // With the composer live, r180 skips the canvas tone map (the grade pass
@@ -530,7 +534,12 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
       for(const material of materials) {
         electricLight?.apply(material);
         if(q.batchedGeometry&&['architecture','interior'].includes(name))fixtureVertices.apply(material);
-        if(['architecture','interior'].includes(name)&&/-(metal|glass|wood)-/.test(material.name)){
+        // Tur 10 aynaları (EK_A08_Ayna, Silver mirror, ayna gibi yazılmış wood_honey kopyası) göğü
+        // yansıtıyordu: holdeki gardırop kapakları mavi-yeşil görünüyordu (fotoğraf 41). Oda sondası.
+        // Aynı sebeple iç mekândaki bütün metaller (davlumbaz, fırın, bulaşık makinesi - paslanmaz
+        // çelik fotoğraf 21'de mavi görünüyordu; pirinç, siyah metal) oda sondasını yansıtır.
+        const mirror=material.metalness>=.5;
+        if(['architecture','interior'].includes(name)&&(/-(metal|glass|wood)-/.test(material.name)||mirror)){
           reflectionMaterials.add(material);material.envMap=roomReflections?.get(reflectionFloor)??null;
         }
         // Pişmiş zemin gölgesi eski teslimatın ağaçlarını/arsasını taşıyor;

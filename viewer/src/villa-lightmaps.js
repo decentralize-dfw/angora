@@ -40,7 +40,9 @@ const HOURS = [9, 13, 17];
 export const LIGHTMAP_GAINS = {sky: 0.62, sun: 12, night: 0.55, interior: 11, interiorDesat: 0.6,
   // 30.09 fotoğraf karşılaştırması (bodrum salonu, aynı kamera): duvar 5 kat karanlık ve kahveye
   // kaymıştı, tavan doğruydu -> duvar atlasına ayrı kazanç, sekme rengi %60 nötr.
-  atlas: {duvar: 4, zemin: 1.8}};
+  atlas: {duvar: 4, zemin: 2.6},
+  // iç mekân beyaz dengesi: fotoğraflar sıcak ışıkta; pencereden giren gök ışığı parkeyi morarttı
+  interiorTint: [1.0, 0.9, 0.78]};
 const INTERIOR_ATLASES = new Set(['duvar', 'zemin']);
 
 export function sunPair(hour) {
@@ -103,6 +105,7 @@ export function createVillaLightmaps({renderer, root, spec: deliverySpec = spec}
     return atlas.byChannel.get(key);
   }
 
+  const tint = new THREE.Color(...LIGHTMAP_GAINS.interiorTint);
   function update() {
     const pair = sunPair(state.hour);
     shared.lmSunMix.value = pair.t;
@@ -117,10 +120,12 @@ export function createVillaLightmaps({renderer, root, spec: deliverySpec = spec}
       }
       const adapt = (atlas.interior ? LIGHTMAP_GAINS.interior : 1) * (LIGHTMAP_GAINS.atlas[name] ?? 1);
       u.lmSkyScale.value.copy(state.sky).multiplyScalar(maps.gok.olcek * LIGHTMAP_GAINS.sky * state.daylight * adapt);
+      if (atlas.interior) u.lmSkyScale.value.multiply(tint);
       // canlı güneş şiddeti ~3 öğlen: sekme payı onunla ölçeklenir
       const sun = LIGHTMAP_GAINS.sky * LIGHTMAP_GAINS.sun * (state.sunIntensity / 3) * adapt;
       u.lmSunAScale.value.copy(state.sun).multiplyScalar(maps['gunes_' + pair.a].olcek * sun);
       u.lmSunBScale.value.copy(state.sun).multiplyScalar(maps['gunes_' + pair.b].olcek * sun);
+      if (atlas.interior) {u.lmSunAScale.value.multiply(tint); u.lmSunBScale.value.multiply(tint);}
       u.lmNightScale.value.setRGB(1, 1, 1).multiplyScalar(maps.gece.olcek * LIGHTMAP_GAINS.night * state.night);
     }
   }
