@@ -184,7 +184,7 @@ function repairStair(doc) {
 //    Ebeveyn banyosu, 1. kat banyosu ve çatı banyosunda parke seramiğin
 //    ÜSTÜNE taşmıştı (çatıda 5,5 m² seramik üstünde 11 m² parke): ıslak
 //    hacimlerin (rooms.json spaces) içindeki parke kesilip atılır.
-//  * terra_floor ikiye ayrılır: bodrum (kat 0) bodrum-karo.jpg, duvara paralel,
+//  * terra_floor ikiye ayrılır: bodrum (kat 0) bodrum-karo.jpg, 45° çapraz,
 //    karo 33 cm; giriş katı (kat 1) giris-karo.jpg, düz, karo 40 cm.
 //  Normal ve pürüzlülük haritaları dokunun kendisinden (pbr.py); metal 0.
 const DOKU = path.join(here, 'tur10-dokular');
@@ -401,9 +401,8 @@ function applyFloors(doc) {
   const RULES = {
     vest: {affine: [1 / 0.30, 0, 0, 0, 1 / 0.30, 1]},  // banyo zemininin kendi UV'si (u = x/0,30, v = z/0,30 + 1)
     'WOOD-FL': {rot: 0, su: 2.0, sv: 2.0}, 'wood_floor': {rot: 0, su: 2.0, sv: 2.0},
-    // 30.09: duvarlara PARALEL (fotoğraf 05 duvara dik çekilmiş, derzler düz). 45° çapraz fotoğraf
-    // 02'nin çapraz bakışından yanlış okunmuştu.
-    terra0: {rot: 0, su: 1600 / 87.5 * 0.33, sv: 1200 / 87.5 * 0.33},
+    // 45° çapraz (ürün sahibi, fotoğraf 02): bordür düz, karolar duvara 45°
+    terra0: {rot: Math.PI / 4, su: 1600 / 87.5 * 0.33, sv: 1200 / 87.5 * 0.33},
     terra1: {rot: 0, su: 12.6 * 0.40, sv: 12.6 * 0.40},
   };
   const inside = (x, z, P) => {let c = false; for (let i = 0, j = P.length - 1; i < P.length; j = i++) {const [a, b] = P[i], [e, f] = P[j]; if ((b > z) !== (f > z) && x < (e - a) * (z - b) / (f - b) + a) c = !c;} return c;};
