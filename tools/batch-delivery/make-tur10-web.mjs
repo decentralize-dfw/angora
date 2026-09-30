@@ -758,7 +758,7 @@ function retileBoxes(doc) {
 // Demir (EK_metal.002) bağlı bileşenlere ayrılır; 74-80 cm altında eşi olan lama "üst lama"dır.
 // Üst lamanın noktaları doğru parçalarına bölünür (RANSAC, L biçimli galeri korkuluğu için) ve her
 // parçanın üstüne 6x4,5 cm ceviz kutu konur.
-function addHandrails(doc) {
+function addHandrails(doc, interior) {
   const root = doc.getRoot(), buffer = root.listBuffers()[0], scene = root.listScenes()[0];
   const wood = root.listMaterials().find(m => m.getName() === 'EK_M1_Sicak_ceviz_supurgelik');
   if (!wood) throw Error('küpeşte: ceviz malzeme yok');
@@ -785,11 +785,14 @@ function addHandrails(doc) {
   // mevcut ahşap (1. kat holünde korkulukların üstünde ceviz küpeşte zaten var, fotoğraf 18):
   // parçanın boyunca noktaların çoğunun 8 cm üstünde ahşap köşe varsa küpeşte eklenmez
   const woodGrid = new Set(), G = 0.04, gk = (x, y, z) => `${Math.floor(x / G)},${Math.floor(y / G)},${Math.floor(z / G)}`;
-  for (const node of root.listNodes()) {
+  // INTERIOR'daki özgün korkuluk ahşapları da (EK_ORIJINAL_KORKULUK_WOOD*, 'antique nook walnut') sayılır:
+  // 1. kat ve giriş merdiveninde küpeşte orada zaten var, üstüne ikinci küpeşte biniyordu
+  const woodNodes = [...root.listNodes(), ...interior.getRoot().listNodes().filter(n => /KORKULUK/i.test(n.getName()))];
+  for (const node of woodNodes) {
     const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
     for (const prim of mesh.listPrimitives()) {
       const name = prim.getMaterial()?.getName() ?? '';
-      if (!/ceviz|Ceviz|WOODY|wood|Wood/.test(name) || /floor|FL|basamak/.test(name) || !prim.getIndices()) continue;
+      if (!/ceviz|Ceviz|WOODY|wood|Wood|walnut/.test(name) || /floor|FL|basamak/.test(name) || !prim.getIndices()) continue;
       // yüzey örneklenir (uzun düz küpeştede köşe yalnız uçlarda: yalnız köşe noktaları yetmiyordu)
       const P = prim.getAttribute('POSITION').getArray(), I = prim.getIndices().getArray();
       const X = i => [0, 1, 2].map(k => w[k]*P[i*3] + w[4+k]*P[i*3+1] + w[8+k]*P[i*3+2] + w[12+k]);
@@ -982,7 +985,7 @@ async function load(sources, {stairRepair = false} = {}) {
       merged.dispose();
     }
   }
-  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc); trimBoxes(doc); retileBoxes(doc); addHandrails(doc); addGarageDoor(doc); restyleWardrobe(doc); addKitchenSlider(doc);}
+  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc); trimBoxes(doc); retileBoxes(doc); addHandrails(doc, await io.read(path.join(SRC, 'INTERIOR-opt-v3.glb'))); addGarageDoor(doc); restyleWardrobe(doc); addKitchenSlider(doc);}
   for (const prim of root.listMeshes().flatMap(m => m.listPrimitives()))
     for (const semantic of DROP) if (prim.getAttribute(semantic)) prim.setAttribute(semantic, null);
   for (const node of root.listNodes()) {const kat = node.getExtras()?.kat; node.setExtras(kat ? {kat} : {});}
