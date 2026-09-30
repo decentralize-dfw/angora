@@ -194,7 +194,13 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
   // parlayan çatı pencereleri). Bunların şiddeti sahnenin gök ölçeğiyle birlikte iner.
   const boundEnvMaterials=new Set();
   let envDayScale=1;
-  function scaleBoundEnv(){for(const m of boundEnvMaterials)m.envMapIntensity=(m.userData.envBaseIntensity??1)*envDayScale;}
+  // plaster/soffit'in sabit öz-ışıması (material-response: sekme ışığı yerine) gece de
+  // yanıyordu: komşu çatısındaki tavan malzemeli şeritler gece bembeyaz parlıyordu (30.09).
+  const emissiveLiftMaterials=new Set();
+  function scaleBoundEnv(){
+    for(const m of boundEnvMaterials)m.envMapIntensity=(m.userData.envBaseIntensity??1)*envDayScale;
+    for(const m of emissiveLiftMaterials)m.emissiveIntensity=envDayScale;
+  }
   function updateReflections(){
     const map=roomReflections?.get(reflectionFloor)??null;
     for(const material of reflectionMaterials){
@@ -550,6 +556,7 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
         if(name==='garden'&&/^pool_tile/i.test(material.name)&&dolphinUrl)applyPoolDolphin(material,dolphinUrl);
         if(['architecture','interior'].includes(name)&&material.userData.angoraBatch?.materials.some(n=>/wood.floor|WOOD-FL|terra_floor|stone_tile|bath_tile|granite floor/i.test(n)))floorLight?.apply(material);
         prepareMaterialResponse(material,{context});preparedMaterials.add(material);
+        if(material.userData.emissiveLift){emissiveLiftMaterials.add(material);material.emissiveIntensity=envDayScale;}
         // Three uses scene.environmentIntensity when envMap is null. Bind the
         // room finishes explicitly so their neutral response is respected.
         if(['plaster','soffit'].includes(material.userData.presentationR27?.family)){

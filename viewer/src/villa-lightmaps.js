@@ -37,7 +37,7 @@ const HOURS = [9, 13, 17];
 //            cepheden 20-50 kat karanlık; fotoğrafçının pozlamayı iç mekâna
 //            açması gibi (göz uyumu) ~3 durak. Kırmızı parke sekmesi duvarı
 //            çamur kahveye boyamasın diye renk %35 griye çekilir.
-export const LIGHTMAP_GAINS = {sky: 0.62, sun: 12, night: 0.55, interior: 8, interiorDesat: 0.35};
+export const LIGHTMAP_GAINS = {sky: 0.62, sun: 12, night: 0.55, interior: 11, interiorDesat: 0.35}; // 30.09 iç 8 -> 11: Tur 10 iç mekânı hâlâ karanlık
 const INTERIOR_ATLASES = new Set(['duvar', 'zemin']);
 
 export function sunPair(hour) {

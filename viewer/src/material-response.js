@@ -79,7 +79,7 @@ export function prepareMaterialResponse(material, {context=false}={}) {
     // interior with no occlusion never gets.
     material.color.setRGB(.94,.94,.94);
     material.vertexColors=false;
-    material.emissive?.setRGB(.22,.22,.22);material.emissiveIntensity=1;
+    material.emissive?.setRGB(.22,.22,.22);material.emissiveIntensity=1;material.userData.emissiveLift=true;
   } else if (family==='soffit') {
     material.normalMap=null;material.bumpMap=null;
     material.map=null;
@@ -92,7 +92,7 @@ export function prepareMaterialResponse(material, {context=false}={}) {
     // and the hemisphere fill, whose downward colour is a neutral warm grey.
     // The environment is the one term that has no business being there.
     material.envMapIntensity=0;
-    material.emissive?.setRGB(.35,.35,.35);material.emissiveIntensity=1;
+    material.emissive?.setRGB(.35,.35,.35);material.emissiveIntensity=1;material.userData.emissiveLift=true;
     const previous=material.onBeforeCompile,previousKey=material.customProgramCacheKey();
     material.onBeforeCompile=(shader,renderer)=>{
       previous.call(material,shader,renderer);
@@ -166,7 +166,7 @@ export function setInteriorMode(material, active) {
     material.color.setRGB(.94,.94,.94);
     material.map=null;material.normalMap=null;material.bumpMap=null;
     material.envMapIntensity=0;material.vertexColors=false;
-    material.emissive?.setRGB(.35,.35,.35);material.emissiveIntensity=1;
+    material.emissive?.setRGB(.35,.35,.35);material.emissiveIntensity=1;material.userData.emissiveLift=true;
   }else{
     material.color.copy(state.walk.color);
     material.map=state.walk.map;material.normalMap=state.walk.normalMap;
