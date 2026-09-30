@@ -27,6 +27,8 @@ export function materialFamily(name='') {
   // own - because with no occlusion indoors the environment was most of what
   // reached them. The albedo is right; the weight was not.
   if (/^ceiling$/i.test(name)) return 'soffit';
+  // Tur 10 kartonpiyeri pişmiş ışık almaz: çevre ışığının yeşilini alıyordu (fotoğrafta beyaz)
+  if (/Beyaz_saten_alci/i.test(name)) return 'soffit';
   if (/^interior$/i.test(name)) return 'plaster';
   return 'other';
 }
