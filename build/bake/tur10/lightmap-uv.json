@@ -4,11 +4,11 @@
  "atlaslar": {
   "duvar": {
    "boyut": 4096,
-   "alan_m2": 2119.6,
-   "px_per_m": 59.3,
+   "alan_m2": 2093.1,
+   "px_per_m": 59.7,
    "doluluk": 0.687,
    "parca": 3,
-   "ada": 1742,
+   "ada": 1725,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_duvar_000": {
@@ -27,11 +27,11 @@
   },
   "zemin": {
    "boyut": 4096,
-   "alan_m2": 2267.6,
-   "px_per_m": 52.7,
-   "doluluk": 0.79,
-   "parca": 19,
-   "ada": 9167,
+   "alan_m2": 2281.1,
+   "px_per_m": 52.6,
+   "doluluk": 0.792,
+   "parca": 21,
+   "ada": 9189,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_zemin_000": {
@@ -104,9 +104,17 @@
     },
     "LM_zemin_017": {
      "texcoord": 1,
-     "malzeme": "WHT.001"
+     "malzeme": "R31 | R33 ivory wall ceramic"
     },
     "LM_zemin_018": {
+     "texcoord": 1,
+     "malzeme": "EK_cam_lambri"
+    },
+    "LM_zemin_019": {
+     "texcoord": 1,
+     "malzeme": "WHT.001"
+    },
+    "LM_zemin_020": {
      "texcoord": 1,
      "malzeme": "RR"
     }
