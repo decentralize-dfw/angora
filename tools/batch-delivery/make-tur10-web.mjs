@@ -707,6 +707,8 @@ function buildKitchenette(doc) {
 const TRIM = [
   // giriş katı salon/yemek tavanı: tavandan 12 cm sarkan 46 cm kiriş, fotoğraf 04/23'te yok
   {mat: /^(Simple White Wall|WHT\.001)$/, min: [-3.3, 5.7, -1.56], max: [0.87, 6.12, -1.07], neden: 'salon tavan kirişi'},
+  // 1. kat kirişli tavan: duvar dibinde kartonpiyer yok, kirişler duvara oturuyor (fotoğraf 12/33)
+  {mat: /^EK_M1_Beyaz_saten_alci$/, min: [-5.96, 8.8, -4.26], max: [-1.05, 9.0, -0.05], neden: '1. kat kirişli tavan kartonpiyeri'},
 ];
 // Fotoğraf denetimi: yüzeyin malzemesi yanlış (ör. misafir WC'de bordür üstü sıva, fotoğrafta
 // tavana kadar beyaz seramik). Kutudaki dik üçgenler hedef malzemeye taşınır, düzlemsel UV.
@@ -715,7 +717,7 @@ const RETILE = [
     min: [2.78, 4.17, 0.5], max: [4.13, 5.95, 2.43], neden: 'misafir WC bordür üstü beyaz seramik (fotoğraf 39)'},
   // yatay: tavan üçgenleri; tahtalar kirişlere (z boyunca) dik, x boyunca uzanır
   {mat: /^ceiling\.001$/, hedef: 'EK_cam_lambri', uvm: 1 / 2.4, yatay: true,
-    min: [-5.96, 8.95, -4.26], max: [-2.53, 9.1, -0.05], neden: '1. kat oturma alanı tavanı çam lambri (fotoğraf 12)'},
+    min: [-5.96, 8.95, -4.26], max: [-1.05, 9.1, -0.05], neden: '1. kat oturma alanı + hol tavanı çam lambri (fotoğraf 12/33)'},
 ];
 function retileBoxes(doc) {
   const root = doc.getRoot(), buffer = root.listBuffers()[0], scene = root.listScenes()[0];
@@ -933,6 +935,94 @@ function addKitchenSlider(doc) {
   console.log(`mutfak sürme kapısı: ${(S1 - S0).toFixed(2)} x ${(Y1 - Y0).toFixed(2)} m, açıklık ${L.toFixed(2)} m`);
 }
 
+// Eksene hizalı kutular (dünya koordinatı) tek ilkel olarak; dışa bakan yüzler, düzlemsel UV (1 m = 1).
+function addWorldBoxes(doc, name, mat, boxes) {
+  const buffer = doc.getRoot().listBuffers()[0], p = [], nr = [], uv = [];
+  const F = [[[0,0,0],[0,1,0],[0,1,1],[0,0,1],[-1,0,0]], [[1,0,0],[1,0,1],[1,1,1],[1,1,0],[1,0,0]], [[0,0,0],[1,0,0],[1,1,0],[0,1,0],[0,0,-1]],
+    [[0,0,1],[0,1,1],[1,1,1],[1,0,1],[0,0,1]], [[0,0,0],[0,0,1],[1,0,1],[1,0,0],[0,-1,0]], [[0,1,0],[1,1,0],[1,1,1],[0,1,1],[0,1,0]]];
+  for (const [a, b] of boxes) for (const f of F) {
+    const v = f.slice(0, 4).map(c => c.map((t, k) => t ? b[k] : a[k]));
+    for (const i of [0, 2, 1, 0, 3, 2]) {
+      p.push(...v[i]); nr.push(...f[4]);
+      uv.push(f[4][0] ? v[i][2] : v[i][0], f[4][1] ? v[i][2] : -v[i][1]);
+    }
+  }
+  const prim = doc.createPrimitive().setMaterial(mat)
+    .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(new Float32Array(p)).setBuffer(buffer))
+    .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(new Float32Array(nr)).setBuffer(buffer))
+    .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(new Float32Array(uv)).setBuffer(buffer));
+  doc.getRoot().listScenes()[0].addChild(doc.createNode(name).setMesh(doc.createMesh(name).addPrimitive(prim)));
+}
+// Fotoğraf 42: merdiven kollarının açık yan yüzünde basamakları izleyen basamaklı ceviz şerit var
+// (her basamakta basamak altı yatay + rıht dikey bant, ~4,5 cm); modelde yan yüz düz beyazdı.
+// Basamaklar merdiven_parke'nin üst yüzlerinden, yan yüz EK_M2_Beyaz_merdiven_alti dik yüzlerinden bulunur;
+// yan yüzü olmayan uç (duvar tarafı) atlanır.
+function addStairTrim(doc) {
+  const root = doc.getRoot();
+  const wood = root.listMaterials().find(m => m.getName() === 'EK_M1_Sicak_ceviz_supurgelik');
+  if (!wood) throw Error('merdiven şeridi: ceviz malzeme yok');
+  const tris = (test) => {
+    const out = [];
+    for (const node of root.listNodes()) {
+      const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
+      for (const prim of mesh.listPrimitives()) {
+        if (!test(node, prim)) continue;
+        const P = prim.getAttribute('POSITION').getArray(), I = prim.getIndices()?.getArray(), n = I ? I.length : P.length / 3;
+        const X = i => [0, 1, 2].map(k => w[k]*P[i*3] + w[4+k]*P[i*3+1] + w[8+k]*P[i*3+2] + w[12+k]);
+        for (let t = 0; t < n; t += 3) {
+          const v = [X(I ? I[t] : t), X(I ? I[t + 1] : t + 1), X(I ? I[t + 2] : t + 2)];
+          const e1 = v[1].map((x, k) => x - v[0][k]), e2 = v[2].map((x, k) => x - v[0][k]);
+          const c = [e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]], L = Math.hypot(...c);
+          if (L > 1e-9) out.push({v, n: c.map(x => x / L)});
+        }
+      }
+    }
+    return out;
+  };
+  // basamak üst yüzleri -> kutular (aynı yükseklik ±3 cm, xz örtüşen üçgenler birleşir)
+  const tops = tris(node => node.getName() === 'merdiven_parke').filter(t => t.n[1] > 0.9);
+  if (!tops.length) throw Error('merdiven şeridi: merdiven_parke yok');
+  const groups = [];
+  for (const t of tops) {
+    const y = Math.max(...t.v.map(q => q[1])), b = [Math.min(...t.v.map(q => q[0])), Math.max(...t.v.map(q => q[0])), Math.min(...t.v.map(q => q[2])), Math.max(...t.v.map(q => q[2]))];
+    const g = groups.find(g => Math.abs(g.y - y) < 0.03 && b[0] <= g.b[1] + 0.02 && b[1] >= g.b[0] - 0.02 && b[2] <= g.b[3] + 0.02 && b[3] >= g.b[2] - 0.02);
+    if (g) {g.y = Math.max(g.y, y); g.b = [Math.min(g.b[0], b[0]), Math.max(g.b[1], b[1]), Math.min(g.b[2], b[2]), Math.max(g.b[3], b[3])];}
+    else groups.push({y, b});
+  }
+  const treads = groups.map(g => {
+    const dx = g.b[1] - g.b[0], dz = g.b[3] - g.b[2], L = dx > dz ? 0 : 2, R = 2 - L;   // L: genişlik ekseni, R: koşu ekseni
+    const lo = i => (i === 0 ? g.b[0] : g.b[2]), hi = i => (i === 0 ? g.b[1] : g.b[3]);
+    return {y: g.y, L, R, l0: lo(L), l1: hi(L), r0: lo(R), r1: hi(R)};
+  }).filter(t => t.r1 - t.r0 < 0.42 && t.l1 - t.l0 > 0.6 && t.l1 - t.l0 < 1.6);
+  const sides = tris((node, prim) => prim.getMaterial()?.getName() === 'EK_M2_Beyaz_merdiven_alti').filter(t => Math.abs(t.n[1]) < 0.2);
+  const inTri = (t, q, ax) => {   // q'nun ax eksenine dik izdüşümü üçgende mi, düzleme uzaklık < 3 cm
+    const [u, w] = [0, 1, 2].filter(k => k !== ax), [a, b, c] = t.v;
+    const d = (b[w]-c[w])*(a[u]-c[u]) + (c[u]-b[u])*(a[w]-c[w]); if (Math.abs(d) < 1e-12) return false;
+    const l1 = ((b[w]-c[w])*(q[u]-c[u]) + (c[u]-b[u])*(q[w]-c[w])) / d, l2 = ((c[w]-a[w])*(q[u]-c[u]) + (a[u]-c[u])*(q[w]-c[w])) / d, l3 = 1 - l1 - l2;
+    if (l1 < -0.01 || l2 < -0.01 || l3 < -0.01) return false;
+    return Math.abs(l1 * a[ax] + l2 * b[ax] + l3 * c[ax] - q[ax]) < 0.03;
+  };
+  const boxes = [], T = 0.012, W = 0.045; let n = 0;
+  for (const t of treads) {
+    const lower = treads.find(o => o !== t && o.L === t.L && t.y - o.y > 0.1 && t.y - o.y < 0.26
+      && Math.min(o.l1, t.l1) - Math.max(o.l0, t.l0) > 0.5 && (Math.abs(o.r1 - t.r0) < 0.06 || Math.abs(o.r0 - t.r1) < 0.06));
+    for (const [end, out] of [[t.l0, -1], [t.l1, 1]]) {
+      const q = [0, 0, 0]; q[t.L] = end; q[t.R] = (t.r0 + t.r1) / 2; q[1] = t.y - 0.1;
+      if (!sides.some(s => Math.abs(s.n[t.L]) > 0.9 && inTri(s, q, t.L))) continue;
+      const box = (r0, r1, y0, y1) => {const a = [0, y0, 0], b = [0, y1, 0]; a[t.L] = out < 0 ? end - T : end; b[t.L] = out < 0 ? end : end + T; a[t.R] = r0; b[t.R] = r1; boxes.push([a, b]);};
+      box(t.r0 - 0.005, t.r1 + 0.005, t.y - W, t.y + 0.002);                       // basamak bandı
+      if (lower) {
+        const edge = (lower.r0 + lower.r1) / 2 < (t.r0 + t.r1) / 2 ? [t.r0, t.r0 + W] : [t.r1 - W, t.r1];
+        box(edge[0], edge[1], lower.y, t.y - W);                                      // rıht bandı
+      }
+      n++;
+    }
+  }
+  if (!n) throw Error('merdiven şeridi: açık yan yüz bulunamadı');
+  addWorldBoxes(doc, 'merdiven_yan_serit', wood, boxes);
+  console.log(`merdiven yan şeridi: ${treads.length} basamak, ${n} açık uç, ${boxes.length} ceviz parça`);
+}
+
 function trimBoxes(doc) {
   const buffer = doc.getRoot().listBuffers()[0];
   for (const rule of TRIM) {
@@ -985,7 +1075,7 @@ async function load(sources, {stairRepair = false} = {}) {
       merged.dispose();
     }
   }
-  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc); trimBoxes(doc); retileBoxes(doc); addHandrails(doc, await io.read(path.join(SRC, 'INTERIOR-opt-v3.glb'))); addGarageDoor(doc); restyleWardrobe(doc); addKitchenSlider(doc);}
+  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc); trimBoxes(doc); retileBoxes(doc); addHandrails(doc, await io.read(path.join(SRC, 'INTERIOR-opt-v3.glb'))); addGarageDoor(doc); restyleWardrobe(doc); addKitchenSlider(doc); addStairTrim(doc);}
   for (const prim of root.listMeshes().flatMap(m => m.listPrimitives()))
     for (const semantic of DROP) if (prim.getAttribute(semantic)) prim.setAttribute(semantic, null);
   for (const node of root.listNodes()) {const kat = node.getExtras()?.kat; node.setExtras(kat ? {kat} : {});}
@@ -1299,7 +1389,7 @@ async function addFurniture(doc) {
 // aynı ahşap dokusunun hedef renge çekilmiş hâli: normal/pürüzlülük haritası desenle uyar.
 const RECOLOR = [
   // 1. kat oturma alanı kirişleri bal rengi çam; modelde koyu ceviz dokulu wood_honey, siyah görünüyordu
-  {mat: 'wood_honey', ad: 'EK_cam_kiris', doku: 'cam-kiris.jpg', min: [-5.96, 8.9, -4.26], max: [-2.53, 9.02, -0.05], neden: 'fotoğraf 12 kirişler'},
+  {mat: 'wood_honey', ad: 'EK_cam_kiris', doku: 'cam-kiris.jpg', min: [-5.96, 8.9, -4.26], max: [-1.05, 9.02, -0.05], neden: 'fotoğraf 12/33 kirişler (x -1,14e kadar)'},
   // giriş katı mutfak dolapları sıcak kiraz (fotoğraf 21/22); model koyu, kahve-gri
   // 1. kat giyinme odası dolapları açık tik (fotoğraf 16); BUILDING'deki EK_A08_Ceviz de aynı dokuya (restyleWardrobe)
   {mat: 'wood_honey', ad: 'EK_giyinme_tik', doku: 'giyinme-tik.jpg', min: [0.3, 6.3, -5.96], max: [3.1, 8.8, -3.35], neden: 'fotoğraf 16 giyinme dolapları'},
