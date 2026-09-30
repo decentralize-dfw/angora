@@ -1025,14 +1025,18 @@ function addStairTrim(doc) {
   console.log(`merdiven yan şeridi: ${treads.length} basamak, ${n} açık uç, ${boxes.length} ceviz parça`);
 }
 
-// Fotoğraf 12 / 31: iki açıklık gerçekte yarım daire KEMER, modelde dikdörtgendi.
-// Duvar düzlemi x = t0..t1 (yüzler ±x), açıklık z = s0..s1, taban y0; kemer tepesi `crown`,
-// üst dolgu `top`a kadar (tavana kadar açık olanda tavan, lentolu olanda lento altı).
-// Üretilen: iki yüzde kemer üstü dolgu (yay ile üst kenar arası şerit), yay boyunca iç yüz (intrados).
-// Malzeme duvarın kendisi (Simple White Wall): ışık haritası atlası da alır.
+// Fotoğraf 12 / 31 / 29: bu açıklıklar gerçekte KEMER, modelde dikdörtgendi.
+// eksen 'x': duvar yüzleri ±x (t = x0..x1), açıklık z boyunca (s = z); eksen 'z': yüzler ±z, açıklık x boyunca.
+// Açıklık s0..s1, taban y0, kemer tepesi `crown`; `rise` yoksa yarım daire, varsa o yükseklikte basık
+// (daire parçası) kemer. Dolgu kemerden üst sınıra kadar: `top` sabit ya da topAt(s) (eğik tavan).
+// Üretilen: iki yüzde kemer üstü dolgu + yay boyunca iç yüz (intrados). Malzeme duvarın kendisi
+// (Simple White Wall): ışık haritası atlasına girer.
 const ARCHES = [
-  {t0: -1.212, t1: -0.951, s0: -3.097, s1: -1.707, y0: 6.371, crown: 8.471, top: 8.991, neden: '1. kat oturma alanı -> merdiven holü (fotoğraf 12)'},
-  {t0: 0.138, t1: 0.298, s0: -5.877, s1: -5.077, y0: 6.371, crown: 8.472, top: 8.472, neden: 'ebeveyn yatak -> giyinme odası (fotoğraf 31)'},
+  {eksen: 'x', t0: -1.212, t1: -0.951, s0: -3.097, s1: -1.707, y0: 6.371, crown: 8.471, top: 8.991, neden: '1. kat oturma alanı -> merdiven holü (fotoğraf 12/35)'},
+  {eksen: 'x', t0: 0.138, t1: 0.298, s0: -5.877, s1: -5.077, y0: 6.371, crown: 8.472, top: 8.472, neden: 'ebeveyn yatak -> giyinme odası (fotoğraf 31)'},
+  // çatı holü -> banyo koridoru: basık kemer, üstü çatı eğimine kadar dolu (tavan y = 11,551 + (0,816 - x) * 0,690)
+  {eksen: 'z', t0: -3.807, t1: -3.547, s0: 0.005, s1: 0.845, y0: 9.4705, crown: 11.67, rise: 0.2,
+    topAt: x => 11.551 + (0.816 - x) * 0.690 + 0.01, neden: 'çatı holü -> banyo koridoru (fotoğraf 29)'},
 ];
 function addArches(doc) {
   const root = doc.getRoot(), buffer = root.listBuffers()[0];
@@ -1048,24 +1052,30 @@ function addArches(doc) {
   };
   const N = 32;
   for (const A of ARCHES) {
-    const r = (A.s1 - A.s0) / 2, sc = (A.s0 + A.s1) / 2, yc = A.crown - r;
-    if (yc < A.y0 + 0.5 || A.top < A.crown - 1e-6) throw Error('kemer ölçüsü hatalı: ' + A.neden);
-    const arc = Array.from({length: N + 1}, (_, i) => {const th = Math.PI * (1 - i / N); return [sc + r * Math.cos(th), yc + r * Math.sin(th), th];});
-    for (const [x, sgn] of [[A.t0, -1], [A.t1, 1]]) {                 // iki yüz: kemer üstü şerit
-      const n = [sgn, 0, 0], P = ([s, y]) => [x, y, s], U = ([s, y]) => [s, -y];
+    const r = (A.s1 - A.s0) / 2, sc = (A.s0 + A.s1) / 2, h = A.rise ?? r;
+    const R = (r * r + h * h) / (2 * h), yc = A.crown - R, spring = A.crown - h;
+    const topAt = A.topAt ?? (() => A.top);
+    if (spring < A.y0 + 0.5 || topAt(A.s0) < spring || topAt(A.s1) < spring || topAt(sc) < A.crown - 1e-6) throw Error('kemer ölçüsü hatalı: ' + A.neden);
+    const al = Math.atan2(spring - yc, A.s1 - sc);
+    const arc = Array.from({length: N + 1}, (_, i) => {const th = Math.PI - al - (Math.PI - 2 * al) * i / N; return [sc + R * Math.cos(th), yc + R * Math.sin(th), th];});
+    const P = (s, y, t) => (A.eksen === 'x' ? [t, y, s] : [s, y, t]);
+    const axN = sg => (A.eksen === 'x' ? [sg, 0, 0] : [0, 0, sg]);
+    for (const [t, sgn] of [[A.t0, -1], [A.t1, 1]]) {                 // iki yüz: kemer üstü şerit
+      const n = axN(sgn), U = ([s, y]) => [s, -y];
       for (let i = 0; i < N; i++) {
-        const a = arc[i], b = arc[i + 1], ta = [a[0], A.top], tb = [b[0], A.top];
-        tri(P(a), P(b), P(tb), n, U(a), U(b), U(tb)); tri(P(a), P(tb), P(ta), n, U(a), U(tb), U(ta));
+        const a = arc[i], b = arc[i + 1], ta = [a[0], topAt(a[0])], tb = [b[0], topAt(b[0])];
+        tri(P(a[0], a[1], t), P(b[0], b[1], t), P(tb[0], tb[1], t), n, U(a), U(b), U(tb));
+        tri(P(a[0], a[1], t), P(tb[0], tb[1], t), P(ta[0], ta[1], t), n, U(a), U(tb), U(ta));
       }
     }
     for (let i = 0; i < N; i++) {                                         // iç yüz: merkeze bakar
-      const a = arc[i], b = arc[i + 1], th = (a[2] + b[2]) / 2, n = [0, -Math.sin(th), -Math.cos(th)];
-      const la = r * (Math.PI - a[2]), lb = r * (Math.PI - b[2]);
-      const q = (s, y, x) => [x, y, s];
-      tri(q(a[0], a[1], A.t0), q(b[0], b[1], A.t0), q(b[0], b[1], A.t1), n, [la, A.t0], [lb, A.t0], [lb, A.t1]);
-      tri(q(a[0], a[1], A.t0), q(b[0], b[1], A.t1), q(a[0], a[1], A.t1), n, [la, A.t0], [lb, A.t1], [la, A.t1]);
+      const a = arc[i], b = arc[i + 1], th = (a[2] + b[2]) / 2;
+      const n = A.eksen === 'x' ? [0, -Math.sin(th), -Math.cos(th)] : [-Math.cos(th), -Math.sin(th), 0];
+      const la = R * (Math.PI - al - a[2]), lb = R * (Math.PI - al - b[2]);
+      tri(P(a[0], a[1], A.t0), P(b[0], b[1], A.t0), P(b[0], b[1], A.t1), n, [la, A.t0], [lb, A.t0], [lb, A.t1]);
+      tri(P(a[0], a[1], A.t0), P(b[0], b[1], A.t1), P(a[0], a[1], A.t1), n, [la, A.t0], [lb, A.t1], [la, A.t1]);
     }
-    console.log(`kemer: ${A.neden} - açıklık ${(2 * r).toFixed(2)} m, üzengi ${(yc - A.y0).toFixed(2)} m, tepe ${(A.crown - A.y0).toFixed(2)} m`);
+    console.log(`kemer: ${A.neden} - açıklık ${(2 * r).toFixed(2)} m, üzengi ${(spring - A.y0).toFixed(2)} m, tepe ${(A.crown - A.y0).toFixed(2)} m`);
   }
   const prim = doc.createPrimitive().setMaterial(wall)
     .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(new Float32Array(p)).setBuffer(buffer))
