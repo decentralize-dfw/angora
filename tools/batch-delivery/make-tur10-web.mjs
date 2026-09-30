@@ -709,6 +709,8 @@ const TRIM = [
   {mat: /^(Simple White Wall|WHT\.001)$/, min: [-3.3, 5.7, -1.56], max: [0.87, 6.12, -1.07], neden: 'salon tavan kirişi'},
   // 1. kat kirişli tavan: duvar dibinde kartonpiyer yok, kirişler duvara oturuyor (fotoğraf 12/33)
   {mat: /^EK_M1_Beyaz_saten_alci$/, min: [-5.96, 8.8, -4.26], max: [-1.05, 9.0, -0.05], neden: '1. kat kirişli tavan kartonpiyeri'},
+  // ebeveyn yatak -> giyinme kemeri sıva: koyu ahşap kasa (pervaz astarı) fotoğraf 31'de yok
+  {mat: /^WOODY-DARK$/, min: [0.15, 6.36, -5.93], max: [0.29, 8.49, -5.03], neden: 'giyinme kemeri ahşap kasası'},
 ];
 // Fotoğraf denetimi: yüzeyin malzemesi yanlış (ör. misafir WC'de bordür üstü sıva, fotoğrafta
 // tavana kadar beyaz seramik). Kutudaki dik üçgenler hedef malzemeye taşınır, düzlemsel UV.
@@ -1023,6 +1025,55 @@ function addStairTrim(doc) {
   console.log(`merdiven yan şeridi: ${treads.length} basamak, ${n} açık uç, ${boxes.length} ceviz parça`);
 }
 
+// Fotoğraf 12 / 31: iki açıklık gerçekte yarım daire KEMER, modelde dikdörtgendi.
+// Duvar düzlemi x = t0..t1 (yüzler ±x), açıklık z = s0..s1, taban y0; kemer tepesi `crown`,
+// üst dolgu `top`a kadar (tavana kadar açık olanda tavan, lentolu olanda lento altı).
+// Üretilen: iki yüzde kemer üstü dolgu (yay ile üst kenar arası şerit), yay boyunca iç yüz (intrados).
+// Malzeme duvarın kendisi (Simple White Wall): ışık haritası atlası da alır.
+const ARCHES = [
+  {t0: -1.212, t1: -0.951, s0: -3.097, s1: -1.707, y0: 6.371, crown: 8.471, top: 8.991, neden: '1. kat oturma alanı -> merdiven holü (fotoğraf 12)'},
+  {t0: 0.138, t1: 0.298, s0: -5.877, s1: -5.077, y0: 6.371, crown: 8.472, top: 8.472, neden: 'ebeveyn yatak -> giyinme odası (fotoğraf 31)'},
+];
+function addArches(doc) {
+  const root = doc.getRoot(), buffer = root.listBuffers()[0];
+  const wall = root.listMaterials().find(m => m.getName() === 'Simple White Wall');
+  if (!wall) throw Error('kemer: Simple White Wall yok');
+  const p = [], nr = [], uv = [];
+  const tri = (a, b, c, n, ua, ub, uc) => {
+    const e1 = b.map((x, k) => x - a[k]), e2 = c.map((x, k) => x - a[k]);
+    const g = [e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]];
+    if (Math.hypot(...g) < 1e-10) return;
+    if (g[0]*n[0] + g[1]*n[1] + g[2]*n[2] < 0) {[b, c] = [c, b]; [ub, uc] = [uc, ub];}
+    for (const [v, u] of [[a, ua], [b, ub], [c, uc]]) {p.push(...v); nr.push(...n); uv.push(...u);}
+  };
+  const N = 32;
+  for (const A of ARCHES) {
+    const r = (A.s1 - A.s0) / 2, sc = (A.s0 + A.s1) / 2, yc = A.crown - r;
+    if (yc < A.y0 + 0.5 || A.top < A.crown - 1e-6) throw Error('kemer ölçüsü hatalı: ' + A.neden);
+    const arc = Array.from({length: N + 1}, (_, i) => {const th = Math.PI * (1 - i / N); return [sc + r * Math.cos(th), yc + r * Math.sin(th), th];});
+    for (const [x, sgn] of [[A.t0, -1], [A.t1, 1]]) {                 // iki yüz: kemer üstü şerit
+      const n = [sgn, 0, 0], P = ([s, y]) => [x, y, s], U = ([s, y]) => [s, -y];
+      for (let i = 0; i < N; i++) {
+        const a = arc[i], b = arc[i + 1], ta = [a[0], A.top], tb = [b[0], A.top];
+        tri(P(a), P(b), P(tb), n, U(a), U(b), U(tb)); tri(P(a), P(tb), P(ta), n, U(a), U(tb), U(ta));
+      }
+    }
+    for (let i = 0; i < N; i++) {                                         // iç yüz: merkeze bakar
+      const a = arc[i], b = arc[i + 1], th = (a[2] + b[2]) / 2, n = [0, -Math.sin(th), -Math.cos(th)];
+      const la = r * (Math.PI - a[2]), lb = r * (Math.PI - b[2]);
+      const q = (s, y, x) => [x, y, s];
+      tri(q(a[0], a[1], A.t0), q(b[0], b[1], A.t0), q(b[0], b[1], A.t1), n, [la, A.t0], [lb, A.t0], [lb, A.t1]);
+      tri(q(a[0], a[1], A.t0), q(b[0], b[1], A.t1), q(a[0], a[1], A.t1), n, [la, A.t0], [lb, A.t1], [la, A.t1]);
+    }
+    console.log(`kemer: ${A.neden} - açıklık ${(2 * r).toFixed(2)} m, üzengi ${(yc - A.y0).toFixed(2)} m, tepe ${(A.crown - A.y0).toFixed(2)} m`);
+  }
+  const prim = doc.createPrimitive().setMaterial(wall)
+    .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(new Float32Array(p)).setBuffer(buffer))
+    .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(new Float32Array(nr)).setBuffer(buffer))
+    .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(new Float32Array(uv)).setBuffer(buffer));
+  root.listScenes()[0].addChild(doc.createNode('denetim_kemer').setMesh(doc.createMesh('denetim_kemer').addPrimitive(prim)));
+}
+
 function trimBoxes(doc) {
   const buffer = doc.getRoot().listBuffers()[0];
   for (const rule of TRIM) {
@@ -1075,7 +1126,7 @@ async function load(sources, {stairRepair = false} = {}) {
       merged.dispose();
     }
   }
-  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc); trimBoxes(doc); retileBoxes(doc); addHandrails(doc, await io.read(path.join(SRC, 'INTERIOR-opt-v3.glb'))); addGarageDoor(doc); restyleWardrobe(doc); addKitchenSlider(doc); addStairTrim(doc);}
+  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc); trimBoxes(doc); retileBoxes(doc); addHandrails(doc, await io.read(path.join(SRC, 'INTERIOR-opt-v3.glb'))); addGarageDoor(doc); restyleWardrobe(doc); addKitchenSlider(doc); addStairTrim(doc); addArches(doc);}
   for (const prim of root.listMeshes().flatMap(m => m.listPrimitives()))
     for (const semantic of DROP) if (prim.getAttribute(semantic)) prim.setAttribute(semantic, null);
   for (const node of root.listNodes()) {const kat = node.getExtras()?.kat; node.setExtras(kat ? {kat} : {});}
