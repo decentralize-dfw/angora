@@ -788,9 +788,17 @@ function addHandrails(doc) {
   for (const node of root.listNodes()) {
     const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
     for (const prim of mesh.listPrimitives()) {
-      if (!/ceviz|Ceviz|WOODY|wood|Wood/.test(prim.getMaterial()?.getName() ?? '')) continue;
-      const P = prim.getAttribute('POSITION').getArray();
-      for (let i = 0; i < P.length; i += 3) woodGrid.add(gk(...[0, 1, 2].map(k => w[k]*P[i] + w[4+k]*P[i+1] + w[8+k]*P[i+2] + w[12+k])));
+      const name = prim.getMaterial()?.getName() ?? '';
+      if (!/ceviz|Ceviz|WOODY|wood|Wood/.test(name) || /floor|FL|basamak/.test(name) || !prim.getIndices()) continue;
+      // yüzey örneklenir (uzun düz küpeştede köşe yalnız uçlarda: yalnız köşe noktaları yetmiyordu)
+      const P = prim.getAttribute('POSITION').getArray(), I = prim.getIndices().getArray();
+      const X = i => [0, 1, 2].map(k => w[k]*P[i*3] + w[4+k]*P[i*3+1] + w[8+k]*P[i*3+2] + w[12+k]);
+      for (let t = 0; t < I.length; t += 3) {
+        const [a, b, c] = [X(I[t]), X(I[t + 1]), X(I[t + 2])];
+        const m = Math.min(60, Math.ceil(Math.max(Math.hypot(...b.map((x, k) => x - a[k])), Math.hypot(...c.map((x, k) => x - a[k]))) / G));
+        for (let i = 0; i <= m; i++) for (let j = 0; i + j <= m; j++)
+          woodGrid.add(gk(...a.map((x, k) => x + (b[k] - x) * i / Math.max(m, 1) + (c[k] - x) * j / Math.max(m, 1))));
+      }
     }
   }
   const hasWood = (a, b) => {
