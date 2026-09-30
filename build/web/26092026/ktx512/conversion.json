@@ -2,7 +2,7 @@
   "models": {
     "BUILDING-opt-v6": {
       "file": "ktx512/BUILDING-opt-v6.ktx2.glb",
-      "bytes": 12627876,
+      "bytes": 12628560,
       "textures": 59
     },
     "INTERIOR-opt-v3": {
