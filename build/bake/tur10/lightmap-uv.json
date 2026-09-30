@@ -4,11 +4,11 @@
  "atlaslar": {
   "duvar": {
    "boyut": 4096,
-   "alan_m2": 2093.1,
-   "px_per_m": 59.7,
+   "alan_m2": 2095.9,
+   "px_per_m": 59.6,
    "doluluk": 0.687,
    "parca": 3,
-   "ada": 1723,
+   "ada": 1733,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_duvar_000": {
