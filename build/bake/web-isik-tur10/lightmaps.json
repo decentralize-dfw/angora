@@ -6,28 +6,28 @@
    "haritalar": {
     "gok": {
      "boyut": 2048,
-     "olcek": 0.248095,
-     "ortalama": 0.004217
+     "olcek": 0.242333,
+     "ortalama": 0.00326
     },
     "gunes_09": {
      "boyut": 1024,
-     "olcek": 0.008955,
-     "ortalama": 0.000148
+     "olcek": 0.008893,
+     "ortalama": 0.000128
     },
     "gunes_13": {
      "boyut": 1024,
-     "olcek": 0.011379,
-     "ortalama": 0.000135
+     "olcek": 0.004874,
+     "ortalama": 7.1e-05
     },
     "gunes_17": {
      "boyut": 1024,
-     "olcek": 0.019966,
-     "ortalama": 0.000203
+     "olcek": 0.006465,
+     "ortalama": 9.2e-05
     },
     "gece": {
      "boyut": 2048,
-     "olcek": 1.897475,
-     "ortalama": 0.040606
+     "olcek": 1.983712,
+     "ortalama": 0.041473
     }
    }
   },
@@ -36,28 +36,28 @@
    "haritalar": {
     "gok": {
      "boyut": 2048,
-     "olcek": 0.566434,
-     "ortalama": 0.016109
+     "olcek": 0.562438,
+     "ortalama": 0.014751
     },
     "gunes_09": {
      "boyut": 1024,
-     "olcek": 0.051644,
-     "ortalama": 0.000619
+     "olcek": 0.053355,
+     "ortalama": 0.000596
     },
     "gunes_13": {
      "boyut": 1024,
-     "olcek": 0.064007,
-     "ortalama": 0.000543
+     "olcek": 0.061345,
+     "ortalama": 0.00045
     },
     "gunes_17": {
      "boyut": 1024,
-     "olcek": 0.061657,
-     "ortalama": 0.000529
+     "olcek": 0.058779,
+     "ortalama": 0.00038
     },
     "gece": {
      "boyut": 2048,
-     "olcek": 2.426793,
-     "ortalama": 0.069201
+     "olcek": 2.391867,
+     "ortalama": 0.068186
     }
    }
   },
@@ -66,28 +66,28 @@
    "haritalar": {
     "gok": {
      "boyut": 1024,
-     "olcek": 0.924365,
-     "ortalama": 0.174357
+     "olcek": 0.92377,
+     "ortalama": 0.174261
     },
     "gunes_09": {
      "boyut": 1024,
-     "olcek": 0.084233,
-     "ortalama": 0.003743
+     "olcek": 0.084326,
+     "ortalama": 0.003745
     },
     "gunes_13": {
      "boyut": 1024,
-     "olcek": 0.079558,
-     "ortalama": 0.005075
+     "olcek": 0.079509,
+     "ortalama": 0.00507
     },
     "gunes_17": {
      "boyut": 1024,
-     "olcek": 0.074364,
-     "ortalama": 0.003756
+     "olcek": 0.074399,
+     "ortalama": 0.00374
     },
     "gece": {
      "boyut": 1024,
-     "olcek": 0.437433,
-     "ortalama": 0.00284
+     "olcek": 0.438479,
+     "ortalama": 0.002746
     }
    }
   },
@@ -96,28 +96,28 @@
    "haritalar": {
     "gok": {
      "boyut": 1024,
-     "olcek": 0.891441,
-     "ortalama": 0.324536
+     "olcek": 0.891287,
+     "ortalama": 0.324475
     },
     "gunes_09": {
      "boyut": 1024,
-     "olcek": 0.071929,
-     "ortalama": 0.001807
+     "olcek": 0.071972,
+     "ortalama": 0.001806
     },
     "gunes_13": {
      "boyut": 1024,
-     "olcek": 0.082358,
-     "ortalama": 0.00239
+     "olcek": 0.082294,
+     "ortalama": 0.002385
     },
     "gunes_17": {
      "boyut": 1024,
-     "olcek": 0.072972,
-     "ortalama": 0.002344
+     "olcek": 0.072937,
+     "ortalama": 0.002335
     },
     "gece": {
      "boyut": 1024,
-     "olcek": 0.045225,
-     "ortalama": 0.000373
+     "olcek": 0.044366,
+     "ortalama": 0.000299
     }
    }
   }
