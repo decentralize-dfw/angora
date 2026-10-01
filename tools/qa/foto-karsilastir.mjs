@@ -5,13 +5,13 @@
 // olcum.json: her çift için fotoğraf ve model ortalama rengi (tüm kare + 3x3 bölge, sRGB 0-255).
 import fs from 'node:fs';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import {fileURLToPath, pathToFileURL} from 'node:url';
 import {createRequire} from 'node:module';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 // bağımlılıklar mevcut paketlerden: playwright viewer/, sharp tools/batch-delivery/ (npm ci ile kurulu)
 const {chromium} = createRequire(path.join(ROOT, 'viewer/package.json'))('playwright');
 const sharp = createRequire(path.join(ROOT, 'tools/batch-delivery/package.json'))('sharp');
-const {PHOTO_POINTS} = await import(path.join(ROOT, 'viewer/src/photo-points.js'));
+const {PHOTO_POINTS} = await import(pathToFileURL(path.join(ROOT, 'viewer/src/photo-points.js')).href)  // Windows: mutlak yol file:// URL olmalı;
 const [url, outDir, ids] = process.argv.slice(2);
 if (!url || !outDir) throw Error('kullanım: node tools/qa/foto-karsilastir.mjs <url> <klasör> [id,...]');
 fs.mkdirSync(outDir, {recursive: true});
