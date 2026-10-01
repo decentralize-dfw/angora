@@ -71,11 +71,11 @@ export function applyVillaModelV3(manifest, {mobile = false} = {}) {
 export const TUR10_MODELS = Object.freeze({
   "architecture": {
     "file": "ktx512/BUILDING-opt-v6.ktx2.glb",
-    "bytes": 11641280
+    "bytes": 12606448
   },
   "interior": {
     "file": "ktx512/INTERIOR-opt-v3.ktx2.glb",
-    "bytes": 9703064
+    "bytes": 10405884
   },
   "garden": {
     "file": "ktx512/GARDEN-opt-v3.ktx2.glb",
