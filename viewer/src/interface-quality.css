@@ -212,7 +212,7 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
   #app .dock-actions #open-options{width:36px;height:36px;min-width:36px;min-height:36px;flex:0 0 auto;box-shadow:none;border:0;background:transparent}
   #app .dock-actions #open-options[aria-expanded=true]{background:var(--ink);color:#fff}
   #app .dock-actions #open-options svg{width:18px;height:18px}
-  #app[data-gear-docked=true] .options-panel{bottom:calc(var(--m-bottom) + var(--dock-h,0px))}
+  #app[data-gear-docked=true] .options-panel{bottom:calc(var(--m-bottom) + var(--dock-h,0px) + 6px)}
 
   #app .model-scale{display:none!important}
   #app .site-credit,#app[data-scale] .site-credit{left:0;right:0;bottom:calc(env(safe-area-inset-bottom) + 3px);
