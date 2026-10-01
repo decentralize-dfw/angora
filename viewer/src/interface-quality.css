@@ -195,15 +195,19 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
   #app{--m-bottom:calc(env(safe-area-inset-bottom) + 18px);--m-top:max(10px,env(safe-area-inset-top))}
   .topbar .identity{display:none}
   .topbar{top:var(--m-top);left:12px;right:12px;justify-content:flex-end}
-  .topbar .top-actions{gap:5px}
-  .topbar .quiet-button{min-height:34px;padding:0 10px;font-size:11px}
-  .tour-launch{min-height:34px;padding:0 10px}
+  .topbar .top-actions{gap:4px}
+  .topbar .quiet-button{min-height:34px;padding:0 9px;font-size:11px}
+  .tour-launch{min-height:34px;padding:0 11px 0 9px;gap:4px}
+  .topbar .tour-launch span.label-short{display:inline;font-size:11px;font-weight:600}
+  .tour-launch svg{width:13px;height:13px}
   #app .scale-picker,#app[data-delivery=native] .scale-picker,
   #app[data-scale] .scale-picker,#app[data-delivery=native][data-scale] .scale-picker{
     top:var(--m-top);bottom:auto;left:12px;transform:none;padding:3px}
-  #app .scale-picker button{min-height:28px;padding:0 10px;font-size:11px}
+  #app .scale-picker button{min-height:28px;padding:0 9px;font-size:11px}
   #app[data-delivery=native] .view-description,.view-description{top:calc(var(--m-top) + 46px)}
-  #app[data-delivery=native] .side-tools{top:calc(var(--m-top) + 46px)}
+  #app .side-tools,#app[data-delivery=native] .side-tools{top:calc(var(--m-top) + 44px);bottom:auto;right:12px;transform:none;padding:0;gap:0;background:none;border:0;box-shadow:none}
+  #app .side-tools button{width:34px;height:34px;min-width:34px;min-height:34px;font-size:15px;border-radius:999px;background:var(--glass);border:1px solid var(--edge);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
+  #app .region-panel{bottom:var(--m-bottom)}
 
   #app .explore-dock,#app[data-delivery=native] .explore-dock{bottom:var(--m-bottom)}
   #app .tool-dock{top:auto;right:12px;bottom:calc(var(--m-bottom) + var(--dock-h,0px) + 8px)}
