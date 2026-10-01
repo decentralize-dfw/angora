@@ -144,3 +144,31 @@ test('zemin v3: arazi normalli dosya, bayrak kapalıyken v2', () => {
   assert.equal(old.parts.find(p => p.name === 'context-ground').file, '../../26092026/CEVRE-YOL-opt-v2.glb');
   assert.equal(DEFAULT_FEATURES.terrainNormalsV3, true);
 });
+
+import * as THREE from 'three';
+import {retileTur10} from '../src/villa-model-v3.js';
+test('antre: WC seramiğinin antre yüzü beyaz duvara çevrilir, beyaz duvarın altında kırpılır, ışık UV ve atlas korunur', () => {
+  const model = new THREE.Group();
+  const tri = (pts) => { const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pts.flat(), 3));
+    g.setAttribute('uv1', new THREE.Float32BufferAttribute(pts.map((p, i) => [i * .1, p[1] * .01]).flat(), 2)); g.setIndex(pts.map((_, i) => i)); return g; };
+  // -x'e bakan panel üçgeni (y 3,4..5,8) + kutu dışında bir üçgen
+  const ceramic = new THREE.Mesh(tri([[2.938, 3.4, 0.4], [2.938, 3.4, 1.4], [2.938, 5.8, 1.4], [3.098, 4.3, 0.6], [3.098, 4.3, 1.5], [3.098, 5.7, 0.6]]),
+    new THREE.MeshStandardMaterial({name: 'R31 | R33 ivory wall ceramic'}));
+  ceramic.userData.lightmap = {atlas: 'zemin', texcoord: 1};
+  const white = new THREE.Mesh(tri([[0, 0, 0], [0, 1, 0], [0, 0, 1]]), new THREE.MeshStandardMaterial({name: 'Simple White Wall', color: 0xf0eee8}));
+  white.userData.lightmap = {atlas: 'duvar', texcoord: 1};
+  model.add(ceramic, white);
+  const n = new THREE.Vector3();
+  const a = new THREE.Vector3(2.938, 3.4, 0.4), b = new THREE.Vector3(2.938, 3.4, 1.4), c = new THREE.Vector3(2.938, 5.8, 1.4);
+  n.subVectors(b, a).cross(c.clone().sub(a)).normalize();
+  assert.ok(n.x < -0.98, 'test üçgeni -x yönüne bakmalı');
+  assert.equal(retileTur10(model), 1);
+  assert.equal(ceramic.geometry.index.count, 3);
+  const added = model.children.find(o => o.name.endsWith('_yeni_yuz'));
+  assert.ok(added); assert.equal(added.material.name, 'Simple White Wall'); assert.notEqual(added.material, white.material);
+  assert.deepEqual(added.userData.lightmap, {atlas: 'zemin', texcoord: 1});
+  const p = added.geometry.attributes.position;
+  for (let i = 0; i < p.count; i++) assert.ok(p.getY(i) <= 5.2 + 1e-6);
+  assert.ok(added.geometry.attributes.uv1);
+  assert.equal(p.count % 3, 0);
+});
