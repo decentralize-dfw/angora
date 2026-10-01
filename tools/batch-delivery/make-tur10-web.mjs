@@ -39,6 +39,9 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(here, '../..');
 const DIR = path.join(REPO, 'build/web/26092026');
 const SRC = path.join(DIR, 'source/tur10');
+// Fotoğraf denetimi düzeltmeli kaynaklar (model-d1 dalı). Eski kaynaklar için: KAYNAK= node make-tur10-web.mjs
+const KAYNAK = process.env.KAYNAK ?? '-d1';
+const src = ad => path.join(SRC, ad + KAYNAK + '.glb');
 const BAKE = path.join(REPO, 'build/bake/tur10');
 const PYTHON = process.env.PYTHON || 'python3';
 const MAX_EDGE = 1024;
@@ -1223,7 +1226,7 @@ async function load(sources, {stairRepair = false} = {}) {
       merged.dispose();
     }
   }
-  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc); trimBoxes(doc); retileBoxes(doc); addHandrails(doc, await io.read(path.join(SRC, 'INTERIOR-opt-v3.glb'))); addGarageDoor(doc); restyleWardrobe(doc); addKitchenSlider(doc); addStairTrim(doc); addArches(doc); swapBoxes(doc); fixAntreDoor(doc); rotateLeaves(doc);}
+  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc); trimBoxes(doc); retileBoxes(doc); addHandrails(doc, await io.read(src('INTERIOR-opt-v3'))); addGarageDoor(doc); restyleWardrobe(doc); addKitchenSlider(doc); addStairTrim(doc); addArches(doc); swapBoxes(doc); fixAntreDoor(doc); rotateLeaves(doc);}
   for (const prim of root.listMeshes().flatMap(m => m.listPrimitives()))
     for (const semantic of DROP) if (prim.getAttribute(semantic)) prim.setAttribute(semantic, null);
   for (const node of root.listNodes()) {const kat = node.getExtras()?.kat; node.setExtras(kat ? {kat} : {});}
@@ -1496,7 +1499,7 @@ async function addFurniture(doc) {
 
 // --- BUILDING ----------------------------------------------------------------
 {
-  const doc = await load([path.join(SRC, 'BUILDING-opt-v6-alt.glb'), path.join(SRC, 'BUILDING-opt-v6-ust.glb')], {stairRepair: true});
+  const doc = await load([src('BUILDING-opt-v6-alt'), src('BUILDING-opt-v6-ust')], {stairRepair: true});
   const before = box(doc);
   await doc.transform(dedup(), flatten(), join({keepNamed: false}), prune({keepAttributes: false}),
     textureCompress({encoder: sharp, resize: [MAX_EDGE, MAX_EDGE]}));
@@ -1625,7 +1628,7 @@ function recolorBoxes(doc) {
 
 // --- INTERIOR (mobilya; lightmap almaz, pişirmede gölge verir) ----------------
 {
-  const doc = await load([path.join(SRC, 'INTERIOR-opt-v3.glb')]);
+  const doc = await load([src('INTERIOR-opt-v3')]);
   await addFurniture(doc);
   // Tripo malzemeleri metalik=1 geliyor: deri/ahşap/kumaş seramik gibi parlıyordu (30.09)
   for (const m of doc.getRoot().listMaterials()) if (/^tripo_material|^adsad$/.test(m.getName())) m.setMetallicFactor(0);
