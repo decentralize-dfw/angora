@@ -854,7 +854,7 @@ function addHandrails(doc, interior) {
   // üst lama: 0,70-0,85 m altında, xz'de örtüşen başka bir lama olan
   const overlap = (a, b) => Math.min(a.hi[0], b.hi[0]) - Math.max(a.lo[0], b.lo[0]) > -0.05 && Math.min(a.hi[2], b.hi[2]) - Math.max(a.lo[2], b.lo[2]) > -0.05;
   const tops = comps.filter(a => comps.some(b => b !== a && overlap(a, b) && a.lo[1] - b.lo[1] > 0.65 && a.lo[1] - b.lo[1] < 0.9));
-  const boxes = []; let skipped = 0;
+  const boxes = []; let skipped = 0, rejected = 0;
   for (const {pts} of tops) {
     let rest = pts.slice();
     for (let seg = 0; seg < 3 && rest.length >= 4; seg++) {
@@ -870,7 +870,15 @@ function addHandrails(doc, interior) {
       const t0 = Math.min(...ts), t1 = Math.max(...ts); if (t1 - t0 < 0.4) break;
       const top = Math.max(...best.inl.map(p => p[1] - (best.a[1] + ((p[0]-best.a[0])*best.u[0] + (p[1]-best.a[1])*best.u[1] + (p[2]-best.a[2])*best.u[2]) * best.u[1])));
       const at = t => best.a.map((x, k) => x + best.u[k] * t + (k === 1 ? top : 0));
-      const seg = [at(t0 - 0.03), at(t1 + 0.03)]; if (!hasWood(...seg)) boxes.push(seg); else skipped++;
+      const seg = [at(t0 - 0.03), at(t1 + 0.03)];
+      // 01.10: RANSAC iki ayrı lamayı (iki kolun iç lamaları, merdiven + galeri) tek doğru sanabiliyordu:
+      // kollar arası dikine çubuk, sahanlık dönüşlerinde dik parçalar, K1_1 dış küpeştesinin altında eğimi
+      // 0,49 olan ikinci çubuk, galeride planda çapraz parça. Küpeşte ya yataydır ya merdiven eğimindedir
+      // (0,673) ve planda eksene paraleldir; ötekiler atılır.
+      const hz = Math.hypot(best.u[0], best.u[2]), slope = Math.abs(best.u[1]) / Math.max(hz, 1e-9);
+      const axial = Math.max(Math.abs(best.u[0]), Math.abs(best.u[2])) / Math.max(hz, 1e-9) > 0.995;
+      if (!axial || !(slope < 0.05 || (slope > 0.6 && slope < 0.75))) rejected++;
+      else if (!hasWood(...seg)) boxes.push(seg); else skipped++;
       const inSet = new Set(best.inl); rest = rest.filter(p => !inSet.has(p));
     }
   }
@@ -896,7 +904,7 @@ function addHandrails(doc, interior) {
     .setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(new Float32Array(nr)).setBuffer(buffer))
     .setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(new Float32Array(uv)).setBuffer(buffer));
   scene.addChild(doc.createNode('kupeste').setMesh(doc.createMesh('kupeste').addPrimitive(prim)));
-  console.log(`küpeşte: ${tops.length} üst lama, ${skipped} parçada zaten ahşap var, ${boxes.length} ceviz parça (${boxes.reduce((s, [a, b]) => s + Math.hypot(b[0]-a[0], b[1]-a[1], b[2]-a[2]), 0).toFixed(1)} m)`);
+  console.log(`küpeşte: ${tops.length} üst lama, ${skipped} parçada zaten ahşap var, ${rejected} eğik/çapraz uyum atıldı, ${boxes.length} ceviz parça (${boxes.reduce((s, [a, b]) => s + Math.hypot(b[0]-a[0], b[1]-a[1], b[2]-a[2]), 0).toFixed(1)} m)`);
 }
 // Fotoğraf 43: garajın kuzey açıklığında (iç yüz z 1,17, x 4,35..7,20, y 3,10..5,53) kapalı beyaz
 // sectional kapı var; hiçbir modelde yoktu, açıklıktan araç yolu görünüyordu.
@@ -1140,6 +1148,58 @@ function trimBoxes(doc) {
   }
 }
 
+// 01.10 giriş salonu / yemek (ürün sahibi işareti; fotoğraf 04/23: düz tavan, kolon başında tek
+// kartonpiyer halkası). Bağlı parça (konumu 0,1 mm'de kaynaşan üçgen kümesi) dünya sınır kutusu 'kutu'
+// ile her yönde 6 mm içinde örtüşürse silinir; 'bolge' verilirse küme yalnız tamamı o kutuda kalan
+// üçgenlerden kurulur. Kaynakta (BUILDING-opt-v6-alt-d1): EK_Cube_giris 398/404/384, EK_A05_kartonpiyer_birlesik
+// 48/50/39 üçgen. Aynı liste viewer/src/villa-model-v3.js TUR10_DROP_PARTS'ta yayındaki dosyaya uygulanır;
+// burada silinince pişirmede borunun tavana düşen gölge şeridi de kalkar.
+const PARTS = [
+  {mat: /^WHT\.001$/, kutu: [[-4.966, 5.761, -7.982], [3.024, 5.787, -3.392]], neden: 'salon tavanı boru (alt)'},
+  {mat: /^WHT\.001$/, kutu: [[-4.994, 5.783, -8.008], [3.050, 5.817, -3.365]], neden: 'salon tavanı boru (orta)'},
+  {mat: /^WHT\.001$/, kutu: [[-4.988, 5.813, -8.024], [3.066, 5.839, -3.369]], neden: 'salon tavanı boru (üst)'},
+  {mat: /^EK_M1_Beyaz_saten_alci$/, kutu: [[-1.325, 5.773, -3.840], [-0.839, 5.890, -3.728]], neden: 'P1 kolon başı iç kabuk (kuzey)'},
+  {mat: /^EK_M1_Beyaz_saten_alci$/, kutu: [[-1.325, 5.773, -3.126], [-0.839, 5.890, -3.014]], neden: 'P1 kolon başı iç kabuk (güney)'},
+  {mat: /^EK_M1_Beyaz_saten_alci$/, kutu: [[0.705, 5.773, -3.471], [0.817, 5.890, -3.128]],
+    bolge: [[0.60, 5.70, -3.60], [0.95, 5.95, -2.95]], neden: 'merdiven duvarı ucu iç kabuk kartonpiyeri'},
+];
+function dropParts(doc) {
+  const buffer = doc.getRoot().listBuffers()[0];
+  for (const rule of PARTS) {
+    let removed = 0;
+    for (const node of doc.getRoot().listNodes()) {
+      const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
+      for (const prim of mesh.listPrimitives()) {
+        if (!rule.mat.test(prim.getMaterial()?.getName() ?? '') || !prim.getIndices()) continue;
+        const P = prim.getAttribute('POSITION').getArray(), I = prim.getIndices().getArray(), nv = P.length / 3;
+        const X = new Float64Array(nv * 3), weld = new Int32Array(nv), keys = new Map();
+        for (let i = 0; i < nv; i++) {
+          for (let k = 0; k < 3; k++) X[i*3+k] = w[k]*P[i*3] + w[4+k]*P[i*3+1] + w[8+k]*P[i*3+2] + w[12+k];
+          const s = `${Math.round(X[i*3]*1e4)},${Math.round(X[i*3+1]*1e4)},${Math.round(X[i*3+2]*1e4)}`;
+          let q = keys.get(s); if (q === undefined) keys.set(s, q = keys.size); weld[i] = q;
+        }
+        const g = rule.bolge, inside = i => !g || [0, 1, 2].every(k => X[i*3+k] >= g[0][k] && X[i*3+k] <= g[1][k]);
+        const par = Int32Array.from({length: keys.size}, (_, i) => i), find = x => { while (par[x] !== x) { par[x] = par[par[x]]; x = par[x]; } return x; };
+        const use = [];
+        for (let t = 0; t < I.length; t += 3) if (inside(I[t]) && inside(I[t+1]) && inside(I[t+2])) { use.push(t); const r = find(weld[I[t]]); par[find(weld[I[t+1]])] = r; par[find(weld[I[t+2]])] = r; }
+        const box = new Map();
+        for (const t of use) {
+          const r = find(weld[I[t]]); let b = box.get(r); if (!b) box.set(r, b = [Infinity, Infinity, Infinity, -Infinity, -Infinity, -Infinity]);
+          for (let j = 0; j < 3; j++) for (let k = 0; k < 3; k++) { b[k] = Math.min(b[k], X[I[t+j]*3+k]); b[k+3] = Math.max(b[k+3], X[I[t+j]*3+k]); }
+        }
+        const hit = new Set([...box].filter(([, b]) => [0, 1, 2].every(k => Math.abs(b[k] - rule.kutu[0][k]) < 0.006 && Math.abs(b[k+3] - rule.kutu[1][k]) < 0.006)).map(([r]) => r));
+        if (!hit.size) continue;
+        const drop = new Set(use.filter(t => hit.has(find(weld[I[t]])))), keep = [];
+        for (let t = 0; t < I.length; t += 3) if (!drop.has(t)) keep.push(I[t], I[t+1], I[t+2]);
+        removed += drop.size;
+        prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(keep)).setBuffer(buffer));
+      }
+    }
+    if (!removed) throw Error(`PARÇA boş: ${rule.neden}`);
+    console.log(`denetim: ${rule.neden} - ${removed} üçgen`);
+  }
+}
+
 function fixDressingDoor(doc) {
   const MOVE = /^EK_M3_04_(kanat|dik_profil|yatay_profil|gobek|pirinc_topuz|topuz_mili|mentese)(\.\d+)?$/;
   // Kaynakta kanat doğu kasada (menteşe x 2,1729) ama giyinme odasına ~125° açık. Ürün sahibi (01.10, foto 16):
@@ -1241,7 +1301,7 @@ async function load(sources, {stairRepair = false} = {}) {
       merged.dispose();
     }
   }
-  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc); trimBoxes(doc); retileBoxes(doc); addHandrails(doc, await io.read(src('INTERIOR-opt-v3'))); /* addGarageDoor(doc): 01.10 kaldırıldı - modelde kapı zaten var (tepede) */ restyleWardrobe(doc); addKitchenSlider(doc); addStairTrim(doc); addArches(doc); swapBoxes(doc); fixAntreDoor(doc); rotateLeaves(doc);}
+  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc); trimBoxes(doc); dropParts(doc); retileBoxes(doc); addHandrails(doc, await io.read(src('INTERIOR-opt-v3'))); /* addGarageDoor(doc): 01.10 kaldırıldı - modelde kapı zaten var (tepede) */ restyleWardrobe(doc); addKitchenSlider(doc); addStairTrim(doc); addArches(doc); swapBoxes(doc); fixAntreDoor(doc); rotateLeaves(doc);}
   for (const prim of root.listMeshes().flatMap(m => m.listPrimitives()))
     for (const semantic of DROP) if (prim.getAttribute(semantic)) prim.setAttribute(semantic, null);
   for (const node of root.listNodes()) {const kat = node.getExtras()?.kat; node.setExtras(kat ? {kat} : {});}
