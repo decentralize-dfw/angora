@@ -882,3 +882,12 @@ body.pegman-dragging,body.pegman-dragging *{cursor:grabbing !important}
 .rm-tip{pointer-events:none;z-index:3;font-size:10.5px;padding:3px 9px;background:rgba(255,255,255,.92);transition:none}
 /* İlan bağlantısı mülk bilgisinin en üstünde */
 .listing-link-top{display:inline-flex;margin:0 0 12px}
+/* Kaydırma çubukları arayüzün diliyle: ince, yuvarlak, yarı saydam koyu yeşil; ok
+   düğmesi yok, yuvarlak köşelere değmesin diye iz uçlardan içeride başlar.
+   (Chromium/Safari ::-webkit-scrollbar; Firefox scrollbar-color.) */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent;margin:16px 0}
+::-webkit-scrollbar-thumb{background:rgba(28,38,34,.22);border-radius:999px;border:1px solid transparent;background-clip:padding-box}
+::-webkit-scrollbar-thumb:hover{background:rgba(28,38,34,.42);background-clip:padding-box}
+::-webkit-scrollbar-button,::-webkit-scrollbar-corner{display:none;background:transparent}
+@supports (-moz-appearance:none){*{scrollbar-width:thin;scrollbar-color:rgba(28,38,34,.28) transparent}}
