@@ -2,9 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {applyVillaModelV3, VILLA_MODEL_V3} from '../src/villa-model-v3.js';
 import {DEFAULT_FEATURES} from '../src/features.js';
-import {applyTur10, TUR10_MODELS} from '../src/villa-model-v3.js';
+import {applyTur10, TUR10_MODELS, TUR10_MODELS_MOBILE} from '../src/villa-model-v3.js';
 
-test('main delivers Tur 10 with the same 512px KTX2 models on desktop and mobile', () => {
+test('main delivers Tur 10: desktop 512px UASTC, mobile 512px ETC1S copies of the same geometry', () => {
   assert.equal(DEFAULT_FEATURES.tur10, true);
   assert.equal(DEFAULT_FEATURES.lightmaps, true);
   for (const mobile of [false, true]) {
@@ -12,8 +12,8 @@ test('main delivers Tur 10 with the same 512px KTX2 models on desktop and mobile
     applyTur10(m, {mobile});
     for (const name of ['architecture', 'interior', 'garden']) {
       const part = m.parts.find(p => p.name === name);
-      assert.equal(part.file, '../../26092026/' + TUR10_MODELS[name].file);
-      assert.match(part.file, /\/ktx512\/.*\.ktx2\.glb$/);
+      assert.equal(part.file, '../../26092026/' + (mobile ? TUR10_MODELS_MOBILE : TUR10_MODELS)[name].file);
+      assert.match(part.file, mobile ? /\/mobile-tur10\/.*\.ktx2\.glb$/ : /\/ktx512\/.*\.ktx2\.glb$/);
       assert.equal(part.gpu_sha256, undefined);
     }
   }
@@ -128,7 +128,7 @@ test('çevre v2: komşu ve zemin dosyası değişir, eski ağaç parçası çık
   assert.equal(byName['context-plants'], undefined);
   assert.equal(byName.architecture.file, 'architecture.glb');
   const mobile = manifest(); applyContextV2(mobile, {mobile: true});
-  assert.match(mobile.parts.find(p => p.name === 'context-buildings').file, /ktx512\/KOMSULAR-opt-v2\.ktx2\.glb$/);
+  assert.match(mobile.parts.find(p => p.name === 'context-buildings').file, /mobile-tur10\/KOMSULAR-opt-v2\.ktx2\.glb$/);
   assert.equal(DEFAULT_FEATURES.contextV2, true);
 });
 
@@ -139,7 +139,7 @@ test('zemin v3: arazi normalli dosya, bayrak kapalıyken v2', () => {
   assert.equal(m.parts.find(p => p.name === 'context-ground').bytes, 1991564);
   assert.equal(m.parts.find(p => p.name === 'context-buildings').file, '../../26092026/ktx512/KOMSULAR-opt-v2.ktx2.glb');
   const mobile = manifest(); applyContextV2(mobile, {mobile: true, groundV3: true});
-  assert.match(mobile.parts.find(p => p.name === 'context-ground').file, /ktx512\/CEVRE-YOL-opt-v3\.ktx2\.glb$/);
+  assert.match(mobile.parts.find(p => p.name === 'context-ground').file, /mobile-tur10\/CEVRE-YOL-opt-v3\.ktx2\.glb$/);
   const old = manifest(); applyContextV2(old, {groundV3: false});
   assert.equal(old.parts.find(p => p.name === 'context-ground').file, '../../26092026/CEVRE-YOL-opt-v2.glb');
   assert.equal(DEFAULT_FEATURES.terrainNormalsV3, true);

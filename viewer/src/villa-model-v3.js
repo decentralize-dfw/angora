@@ -82,7 +82,13 @@ export const TUR10_MODELS = Object.freeze({
     "bytes": 9040736
   }
 });
-export const TUR10_MODELS_MOBILE = TUR10_MODELS;
+// Telefon: aynı geometri (ışık UV'si birebir), dokular 512 px ETC1S (make-mobile-tur10.mjs).
+// UASTC'ye göre indirme 32 -> 17 MB, telefonda doku çözme çok daha hızlı.
+export const TUR10_MODELS_MOBILE = Object.freeze({
+  architecture: {file: 'mobile-tur10/BUILDING-opt-v6.ktx2.glb', bytes: 6555184},
+  interior:     {file: 'mobile-tur10/INTERIOR-opt-v3.ktx2.glb', bytes: 4290096},
+  garden:       {file: 'mobile-tur10/GARDEN-opt-v3.ktx2.glb', bytes: 5837528},
+});
 export function applyTur10(manifest, {mobile = false} = {}) {
   if (!manifest?.parts || !manifest.batched) return [];
   const table = mobile ? TUR10_MODELS_MOBILE : TUR10_MODELS;
@@ -145,14 +151,14 @@ export const CONTEXT_V2 = Object.freeze({
   'context-ground':    {file: 'CEVRE-YOL-opt-v2.glb', bytes: 932092},
 });
 export const CONTEXT_V2_MOBILE = Object.freeze({
-  'context-buildings': {file: 'ktx512/KOMSULAR-opt-v2.ktx2.glb', bytes: 9732452},
+  'context-buildings': {file: 'mobile-tur10/KOMSULAR-opt-v2.ktx2.glb', bytes: 9525084},
   'context-ground':    {file: 'mobile/CEVRE-YOL-opt-v2.ktx2.glb', bytes: 864772},
 });
 // 28.09 zemin v3 (tools/batch-delivery/make-context-v3.mjs): aynı geometri,
 // çim ve asfaltta 3 m alan-ağırlıklı "arazi normali". Çimdeki koyu
 // kıymıklar gölge değil, dik ince şeritlerin yan bakan normaliydi.
 export const CONTEXT_GROUND_V3 = Object.freeze({file: 'ktx512/CEVRE-YOL-opt-v3.ktx2.glb', bytes: 1991564});
-export const CONTEXT_GROUND_V3_MOBILE = Object.freeze({file: 'ktx512/CEVRE-YOL-opt-v3.ktx2.glb', bytes: 1991564});
+export const CONTEXT_GROUND_V3_MOBILE = Object.freeze({file: 'mobile-tur10/CEVRE-YOL-opt-v3.ktx2.glb', bytes: 974784});
 const CONTEXT_V2_DROPPED = ['context-plants'];
 export function applyContextV2(manifest, {mobile = false, groundV3 = false} = {}) {
   if (!manifest?.parts || !manifest.batched) return [];
