@@ -1,0 +1,125 @@
+{
+ "kodlama": "x = (v^2) * scale, v = png/255 (doğrusal, sRGB DEĞİL)",
+ "atlaslar": {
+  "duvar": {
+   "bake_boyut": 4096,
+   "haritalar": {
+    "gok": {
+     "boyut": 2048,
+     "olcek": 0.243372,
+     "ortalama": 0.003181
+    },
+    "gunes_09": {
+     "boyut": 1024,
+     "olcek": 0.021796,
+     "ortalama": 0.000166
+    },
+    "gunes_13": {
+     "boyut": 1024,
+     "olcek": 0.004071,
+     "ortalama": 6.6e-05
+    },
+    "gunes_17": {
+     "boyut": 1024,
+     "olcek": 0.005935,
+     "ortalama": 8.7e-05
+    },
+    "gece": {
+     "boyut": 2048,
+     "olcek": 1.986915,
+     "ortalama": 0.040514
+    }
+   }
+  },
+  "zemin": {
+   "bake_boyut": 4096,
+   "haritalar": {
+    "gok": {
+     "boyut": 2048,
+     "olcek": 0.593845,
+     "ortalama": 0.015028
+    },
+    "gunes_09": {
+     "boyut": 1024,
+     "olcek": 0.056241,
+     "ortalama": 0.000645
+    },
+    "gunes_13": {
+     "boyut": 1024,
+     "olcek": 0.064637,
+     "ortalama": 0.000457
+    },
+    "gunes_17": {
+     "boyut": 1024,
+     "olcek": 0.060898,
+     "ortalama": 0.000397
+    },
+    "gece": {
+     "boyut": 2048,
+     "olcek": 2.413992,
+     "ortalama": 0.06807
+    }
+   }
+  },
+  "cephe": {
+   "bake_boyut": 2048,
+   "haritalar": {
+    "gok": {
+     "boyut": 1024,
+     "olcek": 0.922855,
+     "ortalama": 0.174957
+    },
+    "gunes_09": {
+     "boyut": 1024,
+     "olcek": 0.085133,
+     "ortalama": 0.003718
+    },
+    "gunes_13": {
+     "boyut": 1024,
+     "olcek": 0.07849,
+     "ortalama": 0.005034
+    },
+    "gunes_17": {
+     "boyut": 1024,
+     "olcek": 0.074812,
+     "ortalama": 0.003725
+    },
+    "gece": {
+     "boyut": 1024,
+     "olcek": 0.419704,
+     "ortalama": 0.002681
+    }
+   }
+  },
+  "bahce": {
+   "bake_boyut": 2048,
+   "haritalar": {
+    "gok": {
+     "boyut": 1024,
+     "olcek": 0.891443,
+     "ortalama": 0.324489
+    },
+    "gunes_09": {
+     "boyut": 1024,
+     "olcek": 0.071871,
+     "ortalama": 0.001806
+    },
+    "gunes_13": {
+     "boyut": 1024,
+     "olcek": 0.082294,
+     "ortalama": 0.002385
+    },
+    "gunes_17": {
+     "boyut": 1024,
+     "olcek": 0.072926,
+     "ortalama": 0.002336
+    },
+    "gece": {
+     "boyut": 1024,
+     "olcek": 0.043243,
+     "ortalama": 0.000284
+    }
+   }
+  }
+ }
+}

@@ -370,6 +370,119 @@ export function relightTur10(model) {
   }
   return relit;
 }
+// 01.10 garaj (ürün sahibi: "TEK RENK CEPHE RENGİ OLACAK"): kapı açıklığının çevresi dört ayrı
+// malzeme/atlastan geliyordu: sağ ayak ve üst bandın yarısı cephe sıvası (cephe atlası), bandın öbür
+// yarısı iç duvar (duvar atlası), kasa ve söveler beyaz WHT.001 (zemin atlası), üstteki 4 cm çakıl
+// şeridi. Atlasların ölçeği/tonu farklı olduğundan aynı sıva yan yana dört renkte görünüyordu. Kutudaki
+// garajın içine bakmayan bütün yüzler sağ ayağın malzemesine VE ışık haritasına bağlanır: her üçgen
+// en yakın kaynak üçgenine izdüşürülür (kenetli ağırlık), iki UV de oradan; böylece hepsi cephe ile
+// aynı dokuyu ve aynı pişmiş ışığı okur (canlı güneş/gölge değişmez).
+// Tavanda toplanmış garaj kapısı (beyaz panel) içeride, dışarıdan bakınca açıklığın tepesinde kahve
+// bant gibi görünüyordu (lightmap-dis onu dış yüz sanıp gök payıyla karartmıştı): kendi malzemesi
+// kalır, ışığı hemen üstündeki garaj tavanından (aynı zemin atlası) okunur.
+const TUR10_BORROW = [
+  // 01.10 merdiven (A, sağ üst işaret): K1_1 kolunun tavana değdiği uçta tavan plağında 10 x 20 cm cep
+  // (taban y 5,97, tavan altı 5,891). Tabanı tavan malzemesine çevrilmişti ama 8 cm içeride kaldığı için
+  // kolun ucunda basamak gibi bir çentik görünüyordu: tavan altı hizasında kapatılır, ışığı yanındaki tavandan.
+  {cap: {y: 5.891, min: [0.765, -2.131], max: [0.873, -1.923]},
+    source: {mat: /^ceiling\.001$/, atlas: 'zemin', min: [-1.5, 5.885, -3.2], max: [0.9, 5.895, -1.4], facing: [0, -1, 0]}},
+  {mats: /^(WHT\.001|Simple White Wall|Stucco painted wall|Stone gravel)$/, min: [4.25, 2.98, 1.04], max: [7.53, 6.02, 1.45], notFacing: [0, 0, -1],
+    source: {mat: /^Stucco painted wall$/, atlas: 'cephe', min: [7.0, 2.98, 1.39], max: [7.6, 6.0, 1.41], facing: [0, 0, 1]}, material: 'source'},
+  // garajın sol üstünde evin yan cephesi (x 4,32, y 5,97..6,37) üçgenleri tam oturmuyor (T-birleşim, yukarı
+  // doğru incelen kıl çatlak); çatlaktan 20 cm arkadaki iç duvar kabuğu (x 4,12, döşeme boşluğunda, kapkara
+  // pişmiş) ince çapraz kara çizgi olarak görünüyordu. O kabuk da cephe sıvası ve cephe ışığıyla okunur.
+  {mats: /^Simple White Wall$/, min: [4.10, 5.96, 0.50], max: [4.14, 6.38, 4.30],
+    source: {mat: /^Stucco painted wall$/, atlas: 'cephe', min: [4.31, 5.96, 1.0], max: [4.33, 6.38, 4.30], facing: [1, 0, 0]}, material: 'source'},
+  {mats: /^WHT\.001$/, min: [4.40, 5.40, -2.30], max: [7.26, 5.75, 0.66],
+    source: {mat: /^ceiling\.001$/, atlas: 'zemin', min: [4.0, 5.88, -6.0], max: [7.4, 5.90, 1.2], facing: [0, -1, 0]}, material: 'target'},
+];
+export function borrowTur10(model) {
+  model.updateMatrixWorld(true);
+  const inBox = (w, lo, hi) => w.every(v => v.x >= lo[0] && v.x <= hi[0] && v.y >= lo[1] && v.y <= hi[1] && v.z >= lo[2] && v.z <= hi[2]);
+  const meshes = [];
+  model.traverse(o => { if (o.isMesh && !Array.isArray(o.material) && o.geometry?.attributes.position && o.geometry.attributes.uv1 && o.userData?.lightmap) meshes.push(o); });
+  // retileTur10'un eklediği yüzler indekssiz (üçgen listesi): sıralı indeks verilir
+  for (const o of meshes) if (!o.geometry.index) o.geometry.setIndex([...Array(o.geometry.attributes.position.count).keys()]);
+  const world = (o, i) => new THREE.Vector3().fromBufferAttribute(o.geometry.attributes.position, i).applyMatrix4(o.matrixWorld);
+  const normal = w => new THREE.Vector3().subVectors(w[1], w[0]).cross(new THREE.Vector3().subVectors(w[2], w[0])).normalize();
+  let moved = 0;
+  for (const rule of TUR10_BORROW) {
+    // kaynak üçgenler: dünya köşeleri + iki UV
+    const src = [], used = new Set();
+    for (const o of meshes) {
+      if (!rule.source.mat.test(o.material.name ?? '') || o.userData.lightmap.atlas !== rule.source.atlas) continue;
+      const idx = o.geometry.index, uv = o.geometry.attributes.uv, uv1 = o.geometry.attributes.uv1;
+      for (let t = 0; t < idx.count; t += 3) {
+        const ids = [idx.getX(t), idx.getX(t + 1), idx.getX(t + 2)], w = ids.map(i => world(o, i));
+        if (!inBox(w, rule.source.min, rule.source.max) || normal(w).dot(new THREE.Vector3(...rule.source.facing)) < 0.9) continue;
+        src.push({o, tri: new THREE.Triangle(...w), uv: uv && ids.map(i => new THREE.Vector2().fromBufferAttribute(uv, i)), uv1: ids.map(i => new THREE.Vector2().fromBufferAttribute(uv1, i))});
+        used.add(o.uuid + ':' + t);
+      }
+    }
+    if (!src.length) continue;
+    const home = src[0].o, inv = new THREE.Matrix4().copy(home.matrixWorld).invert();
+    const p = new THREE.Vector3(), q = new THREE.Vector3(), bary = new THREE.Vector3();
+    const nearest = c => src.reduce((best, s) => { s.tri.closestPointToPoint(c, q); const d = q.distanceToSquared(c); return d < best.d ? {s, d} : best; }, {s: null, d: Infinity}).s;
+    const lookup = (s, v, key) => { s.tri.closestPointToPoint(v, q); s.tri.getBarycoord(q, bary); return new THREE.Vector2().addScaledVector(s[key][0], bary.x).addScaledVector(s[key][1], bary.y).addScaledVector(s[key][2], bary.z); };
+    if (rule.cap) {   // kapak: y = cap.y düzleminde aşağı bakan dikdörtgen, ışığı ve dokusu kaynaktan
+      const {y, min: [x0, z0], max: [x1, z1]} = rule.cap, c = [[x0, z0], [x1, z0], [x1, z1], [x0, z1]].map(([x, z]) => new THREE.Vector3(x, y, z));
+      const P = [], N = [], U = [], U1 = [], nl = new THREE.Vector3(0, -1, 0).applyMatrix3(new THREE.Matrix3().getNormalMatrix(home.matrixWorld).invert()).normalize();
+      for (const w of [[c[0], c[1], c[2]], [c[0], c[2], c[3]]]) {
+        const s = nearest(p.copy(w[0]).add(w[1]).add(w[2]).divideScalar(3));
+        for (const v of w) {
+          const l = v.clone().applyMatrix4(inv), uv = s.uv ? lookup(s, v, 'uv') : new THREE.Vector2(), uv1 = lookup(s, v, 'uv1');
+          P.push(l.x, l.y, l.z); N.push(nl.x, nl.y, nl.z); U.push(uv.x, uv.y); U1.push(uv1.x, uv1.y);
+        }
+      }
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(P, 3)); geometry.setAttribute('normal', new THREE.Float32BufferAttribute(N, 3));
+      geometry.setAttribute('uv', new THREE.Float32BufferAttribute(U, 2)); geometry.setAttribute('uv1', new THREE.Float32BufferAttribute(U1, 2));
+      const mesh = new THREE.Mesh(geometry, home.material);
+      mesh.name = home.name + '_kapak'; mesh.userData = JSON.parse(JSON.stringify(home.userData));
+      mesh.position.copy(home.position); mesh.quaternion.copy(home.quaternion); mesh.scale.copy(home.scale);
+      mesh.castShadow = home.castShadow; mesh.receiveShadow = home.receiveShadow;
+      home.parent.add(mesh); moved += 2;
+      continue;
+    }
+    const away = rule.notFacing && new THREE.Vector3(...rule.notFacing);
+    for (const o of meshes) {
+      if (!rule.mats.test(o.material.name ?? '')) continue;
+      if (rule.material === 'target' && o.userData.lightmap.atlas !== rule.source.atlas) continue; // atlas dışı UV olmaz
+      const g = o.geometry, idx = g.index, keep = [], take = [];
+      for (let t = 0; t < idx.count; t += 3) {
+        const ids = [idx.getX(t), idx.getX(t + 1), idx.getX(t + 2)], w = ids.map(i => world(o, i));
+        const ok = !used.has(o.uuid + ':' + t) && inBox(w, rule.min, rule.max) && !(away && normal(w).dot(away) > 0.5);
+        if (ok) take.push({ids, w}); else keep.push(...ids);
+      }
+      if (!take.length) continue;
+      const own = rule.material === 'target', frame = own ? new THREE.Matrix4().copy(o.matrixWorld).invert() : inv;
+      const nm = new THREE.Matrix3().getNormalMatrix(own ? o.matrixWorld : home.matrixWorld).invert();
+      const P = [], N = [], U = [], U1 = [];
+      for (const {ids, w} of take) {
+        const s = nearest(p.copy(w[0]).add(w[1]).add(w[2]).divideScalar(3)), n = normal(w).applyMatrix3(nm).normalize();
+        w.forEach((v, k) => {
+          const l = v.clone().applyMatrix4(frame); P.push(l.x, l.y, l.z); N.push(n.x, n.y, n.z);
+          const uv = own || !s.uv ? (g.attributes.uv ? new THREE.Vector2().fromBufferAttribute(g.attributes.uv, ids[k]) : new THREE.Vector2()) : lookup(s, v, 'uv');
+          const uv1 = lookup(s, v, 'uv1'); U.push(uv.x, uv.y); U1.push(uv1.x, uv1.y);
+        });
+      }
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(P, 3));
+      geometry.setAttribute('normal', new THREE.Float32BufferAttribute(N, 3));
+      geometry.setAttribute('uv', new THREE.Float32BufferAttribute(U, 2));
+      geometry.setAttribute('uv1', new THREE.Float32BufferAttribute(U1, 2));
+      const base = own ? o : home, mesh = new THREE.Mesh(geometry, base.material);
+      mesh.name = o.name + '_cephe_isigi';
+      mesh.userData = JSON.parse(JSON.stringify(base.userData));
+      mesh.position.copy(base.position); mesh.quaternion.copy(base.quaternion); mesh.scale.copy(base.scale);
+      mesh.castShadow = o.castShadow; mesh.receiveShadow = o.receiveShadow;
+      base.parent.add(mesh);
+      g.setIndex(keep);
+      moved += take.length;
+    }
+  }
+  return moved;
+}
 export function dropTur10Faces(model) {
   model.updateMatrixWorld(true);
   const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3(), n = new THREE.Vector3();

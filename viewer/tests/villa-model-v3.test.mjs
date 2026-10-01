@@ -173,3 +173,24 @@ test('antre: WC seramiğinin antre yüzü beyaz duvara çevrilir, WC içine baka
   assert.ok(added.geometry.attributes.uv1);
   assert.equal(p.count % 3, 0);
 });
+import {borrowTur10} from '../src/villa-model-v3.js';
+test('garaj: açıklığın çevresi sağ ayağın cephe sıvasına ve cephe ışığına bağlanır, garajın içine bakan yüz kalır', () => {
+  const model = new THREE.Group();
+  const mk = (pts, uv1, name, atlas) => { const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pts.flat(), 3));
+    g.setAttribute('uv', new THREE.Float32BufferAttribute(pts.map(p => [p[0], p[1]]).flat(), 2));
+    g.setAttribute('uv1', new THREE.Float32BufferAttribute(uv1.flat(), 2)); g.setIndex(pts.map((_, i) => i));
+    const m = new THREE.Mesh(g, new THREE.MeshStandardMaterial({name})); m.name = 'LM_' + atlas; m.userData.lightmap = {atlas, texcoord: 1}; return m; };
+  // kaynak: sağ ayağın ön yüzü (+z), cephe atlasında UV1 0,5..0,6
+  const post = mk([[7.1, 3.1, 1.40], [7.5, 3.1, 1.40], [7.5, 5.9, 1.40]], [[0.5, 0.5], [0.6, 0.5], [0.6, 0.6]], 'Stucco painted wall', 'cephe');
+  // hedef: sol sövenin dışa bakan yüzü (+z) ve garajın içine bakan yüzü (-z)
+  const frame = mk([[4.35, 3.1, 1.37], [4.55, 3.1, 1.37], [4.55, 5.5, 1.37], [4.35, 3.1, 1.17], [4.35, 5.5, 1.17], [4.55, 3.1, 1.17]],
+    [[0.1, 0.1], [0.2, 0.1], [0.2, 0.2], [0.1, 0.1], [0.1, 0.2], [0.2, 0.1]], 'WHT.001', 'zemin');
+  model.add(post, frame);
+  assert.equal(borrowTur10(model), 1);
+  assert.equal(frame.geometry.index.count, 3, 'içe bakan yüz yerinde kalır');
+  const added = model.children.find(o => o.name === 'LM_zemin_cephe_isigi');
+  assert.ok(added); assert.equal(added.material, post.material); assert.deepEqual(added.userData.lightmap, {atlas: 'cephe', texcoord: 1});
+  const u1 = added.geometry.attributes.uv1;
+  for (let i = 0; i < u1.count; i++) { assert.ok(u1.getX(i) >= 0.5 - 1e-6 && u1.getX(i) <= 0.6 + 1e-6); assert.ok(u1.getY(i) >= 0.5 - 1e-6 && u1.getY(i) <= 0.6 + 1e-6); }
+  assert.equal(post.geometry.index.count, 3, 'kaynak üçgen yerinde');
+});
