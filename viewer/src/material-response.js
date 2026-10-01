@@ -30,6 +30,9 @@ export function materialFamily(name='') {
   // Tur 10 kartonpiyeri pişmiş ışık almaz: çevre ışığının yeşilini alıyordu (fotoğrafta beyaz)
   if (/Beyaz_saten_alci/i.test(name)) return 'soffit';
   if (/^interior$/i.test(name)) return 'plaster';
+  // Tur 10 iç duvarları: 'other'da kalıyordu, bej-kahve albedo (.86,.81,.72) pişmiş ışıkla çarpınca
+  // fotoğraflardaki krem duvar koyu taupe/kahve çıkıyordu (01.10 denetim A1, 40 fotoğrafın ~35'i).
+  if (/^(Simple White Wall|EK_SimpleWhiteWall|EK_M2_Beyaz_merdiven_alti)$/.test(name)) return 'plaster';
   return 'other';
 }
 
@@ -79,9 +82,17 @@ export function prepareMaterialResponse(material, {context=false}={}) {
     // not, and the difference is here - the forced white, the vertex colours
     // off, and the small emissive lift that stands in for the bounce an
     // interior with no occlusion never gets.
-    material.color.setRGB(.94,.94,.94);
     material.vertexColors=false;
-    material.emissive?.setRGB(.22,.22,.22);material.emissiveIntensity=1;material.userData.emissiveLift=true;
+    if(/Simple ?White ?Wall|merdiven_alti/i.test(material.name)){
+      // pişmiş ışık alan Tur 10 duvarı: fotoğraflardaki sıcak krem badana; küçük sıcak öz-ışıma, ışık
+      // haritasında karanlık kalan köşeleri (çatı diz duvarı, hol) fotoğraftaki gibi açar
+      material.color.setRGB(.95,.91,.84);
+      material.emissive?.setRGB(.10,.09,.075);
+    } else {
+      material.color.setRGB(.94,.94,.94);
+      material.emissive?.setRGB(.22,.22,.22);
+    }
+    material.emissiveIntensity=1;material.userData.emissiveLift=true;
   } else if (family==='soffit') {
     material.normalMap=null;material.bumpMap=null;
     material.map=null;

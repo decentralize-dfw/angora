@@ -2034,7 +2034,7 @@ async function loadModel() {
     if(FEATURES.lightmaps&&FEATURES.villaModelV3&&(tur10||deliveryProfile==='desktop')&&manifest.parts){
       if(!tur10)for(const part of manifest.parts){const next=LIGHTMAP_MODELS[part.name];if(!next)continue;
         part.file='../../26092026/'+next.file;part.bytes=next.bytes;delete part.gpu_sha256;}
-      villaLightmaps=createVillaLightmaps({renderer,root:new URL('../../26092026/'+(tur10?'lightmaps-tur10-512/':'lightmaps/'),modelRoot),...(tur10?{spec:tur10Lightmaps}:{})});
+      villaLightmaps=createVillaLightmaps({renderer,root:new URL('../../26092026/'+(tur10?(deliveryProfile==='desktop'?'lightmaps-tur10/':'lightmaps-tur10-512/'):'lightmaps/'),modelRoot),...(tur10?{spec:tur10Lightmaps}:{})});
       if(villaLightmaps.active){lighting.setLightmaps(villaLightmaps);window.__angoraLightmaps=villaLightmaps;villaLightmaps.ready.then(ok=>{if(ok)invalidate();});}
       else villaLightmaps=null;
     }

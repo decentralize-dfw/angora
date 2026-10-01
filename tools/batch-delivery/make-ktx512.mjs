@@ -16,10 +16,10 @@ const ONLY=process.env.MODELS?process.env.MODELS.split(','):null;
 const report=process.env.LIGHTMAPS_ONLY||ONLY?JSON.parse(fs.readFileSync(path.join(out,'conversion.json'))):{models:{},textures:[],geometryUnchanged:true};
 if(ONLY)report.textures=report.textures.filter(t=>!ONLY.some(n=>t.label.startsWith(n+':')));
 if(process.env.LIGHTMAPS_ONLY||ONLY)report.textures=report.textures.filter(t=>!t.label.endsWith('.ktx2'));
-async function encode(data,srgb,label){
+async function encode(data,srgb,label,max=512){
  const png=path.join(temp,'in.png'),ktx=path.join(temp,'out.ktx2');
  const meta=await sharp(data).metadata();
- await sharp(data).resize({width:512,height:512,fit:'inside',withoutEnlargement:true}).png().toFile(png);
+ await sharp(data).resize({width:max,height:max,fit:'inside',withoutEnlargement:true}).png().toFile(png);
  execFileSync(tool,['--t2','--encode','uastc','--uastc_quality','2','--zcmp','18','--genmipmap','--assign_oetf',srgb?'srgb':'linear',ktx,png],{stdio:'pipe'});
  const b=fs.readFileSync(ktx);
  report.textures.push({label,width:b.readUInt32LE(20),height:b.readUInt32LE(24),sourceWidth:meta.width,sourceHeight:meta.height,bytes:b.length,srgb});
@@ -63,6 +63,7 @@ const lmSource=process.env.LIGHTMAP_SOURCE;
 if(!lmSource)throw Error('LIGHTMAP_SOURCE is required');
 const spec=JSON.parse(fs.readFileSync(path.join(lmSource,'lightmaps.json')));
 const lmOut=path.join(base,'lightmaps-tur10-512');fs.mkdirSync(lmOut,{recursive:true});
+const lmFull=path.join(base,'lightmaps-tur10');fs.mkdirSync(lmFull,{recursive:true});
 for(const [atlas,a] of Object.entries(spec.atlaslar))for(const [state,m]of Object.entries(a.haritalar)){
  const file=atlas+'_'+state+'.ktx2';
  // Resample irradiance rather than its sqrt encoding, preserving average light energy.
@@ -76,7 +77,11 @@ for(const [atlas,a] of Object.entries(spec.atlaslar))for(const [state,m]of Objec
  }
  const png=await sharp(pixels,{raw:{width:512,height:512,channels:info.channels}}).png().toBuffer();
  const b=await encode(png,false,file);fs.writeFileSync(path.join(lmOut,file),b);m.dosya=file;m.boyut=512;m.bytes=b.length;
- console.log(file,b.length);
+ // masaüstü: pişirmenin web boyutu (iç gök/gece 2048, güneş 1024) KÜÇÜLTMEDEN. 512'ye küçültmede dar
+ // yüzeyler (kapı/kemer iç yüzü, duvar ucu) 1-2 piksele düşüp komşu parçanın ışığını alıyordu: duvarda koyu iz.
+ const full=await sharp(path.join(lmSource,atlas+'_'+state+'.png')).removeAlpha().png().toBuffer();
+ const bf=await encode(full,false,'tam_'+file,4096);fs.writeFileSync(path.join(lmFull,file),bf);m.boyutTam=info.width;m.bytesTam=bf.length;
+ console.log(file,b.length,'tam',info.width,bf.length);
 }
 spec.kok='lightmaps-tur10-512/';spec.uretim='tools/batch-delivery/make-ktx512.mjs';
 fs.writeFileSync(path.join(root,'viewer/src/villa-lightmaps-tur10.json'),JSON.stringify(spec,null,2)+'\n');

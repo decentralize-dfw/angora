@@ -2,7 +2,7 @@
   "models": {
     "BUILDING-opt-v6": {
       "file": "ktx512/BUILDING-opt-v6.ktx2.glb",
-      "bytes": 12628560,
+      "bytes": 12639964,
       "textures": 59
     },
     "INTERIOR-opt-v3": {
@@ -780,7 +780,7 @@
       "height": 384,
       "sourceWidth": 1024,
       "sourceHeight": 768,
-      "bytes": 216477,
+      "bytes": 221687,
       "srgb": true
     },
     {
@@ -798,7 +798,7 @@
       "height": 384,
       "sourceWidth": 1024,
       "sourceHeight": 768,
-      "bytes": 197551,
+      "bytes": 199021,
       "srgb": false
     },
     {
@@ -906,7 +906,7 @@
       "height": 512,
       "sourceWidth": 1024,
       "sourceHeight": 1024,
-      "bytes": 285595,
+      "bytes": 285658,
       "srgb": false
     },
     {
@@ -924,7 +924,7 @@
       "height": 512,
       "sourceWidth": 1024,
       "sourceHeight": 1024,
-      "bytes": 281912,
+      "bytes": 285112,
       "srgb": true
     },
     {
@@ -942,7 +942,7 @@
       "height": 512,
       "sourceWidth": 1024,
       "sourceHeight": 1024,
-      "bytes": 241068,
+      "bytes": 238987,
       "srgb": false
     },
     {
@@ -1567,12 +1567,30 @@
       "srgb": false
     },
     {
+      "label": "tam_duvar_gok.ktx2",
+      "width": 2048,
+      "height": 2048,
+      "sourceWidth": 2048,
+      "sourceHeight": 2048,
+      "bytes": 1373759,
+      "srgb": false
+    },
+    {
       "label": "duvar_gunes_09.ktx2",
       "width": 512,
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
       "bytes": 137162,
+      "srgb": false
+    },
+    {
+      "label": "tam_duvar_gunes_09.ktx2",
+      "width": 1024,
+      "height": 1024,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "bytes": 409691,
       "srgb": false
     },
     {
@@ -1585,12 +1603,30 @@
       "srgb": false
     },
     {
+      "label": "tam_duvar_gunes_13.ktx2",
+      "width": 1024,
+      "height": 1024,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "bytes": 398606,
+      "srgb": false
+    },
+    {
       "label": "duvar_gunes_17.ktx2",
       "width": 512,
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
       "bytes": 134069,
+      "srgb": false
+    },
+    {
+      "label": "tam_duvar_gunes_17.ktx2",
+      "width": 1024,
+      "height": 1024,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "bytes": 395988,
       "srgb": false
     },
     {
@@ -1603,12 +1639,30 @@
       "srgb": false
     },
     {
+      "label": "tam_duvar_gece.ktx2",
+      "width": 2048,
+      "height": 2048,
+      "sourceWidth": 2048,
+      "sourceHeight": 2048,
+      "bytes": 1204966,
+      "srgb": false
+    },
+    {
       "label": "zemin_gok.ktx2",
       "width": 512,
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
       "bytes": 187085,
+      "srgb": false
+    },
+    {
+      "label": "tam_zemin_gok.ktx2",
+      "width": 2048,
+      "height": 2048,
+      "sourceWidth": 2048,
+      "sourceHeight": 2048,
+      "bytes": 1648442,
       "srgb": false
     },
     {
@@ -1621,12 +1675,30 @@
       "srgb": false
     },
     {
+      "label": "tam_zemin_gunes_09.ktx2",
+      "width": 1024,
+      "height": 1024,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "bytes": 458330,
+      "srgb": false
+    },
+    {
       "label": "zemin_gunes_13.ktx2",
       "width": 512,
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
       "bytes": 149932,
+      "srgb": false
+    },
+    {
+      "label": "tam_zemin_gunes_13.ktx2",
+      "width": 1024,
+      "height": 1024,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "bytes": 434671,
       "srgb": false
     },
     {
@@ -1639,12 +1711,30 @@
       "srgb": false
     },
     {
+      "label": "tam_zemin_gunes_17.ktx2",
+      "width": 1024,
+      "height": 1024,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "bytes": 439644,
+      "srgb": false
+    },
+    {
       "label": "zemin_gece.ktx2",
       "width": 512,
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
       "bytes": 170749,
+      "srgb": false
+    },
+    {
+      "label": "tam_zemin_gece.ktx2",
+      "width": 2048,
+      "height": 2048,
+      "sourceWidth": 2048,
+      "sourceHeight": 2048,
+      "bytes": 1486534,
       "srgb": false
     },
     {
@@ -1657,12 +1747,30 @@
       "srgb": false
     },
     {
+      "label": "tam_cephe_gok.ktx2",
+      "width": 1024,
+      "height": 1024,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "bytes": 640405,
+      "srgb": false
+    },
+    {
       "label": "cephe_gunes_09.ktx2",
       "width": 512,
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
       "bytes": 186544,
+      "srgb": false
+    },
+    {
+      "label": "tam_cephe_gunes_09.ktx2",
+      "width": 1024,
+      "height": 1024,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "bytes": 570309,
       "srgb": false
     },
     {
@@ -1675,12 +1783,30 @@
       "srgb": false
     },
     {
+      "label": "tam_cephe_gunes_13.ktx2",
+      "width": 1024,
+      "height": 1024,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "bytes": 592147,
+      "srgb": false
+    },
+    {
       "label": "cephe_gunes_17.ktx2",
       "width": 512,
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
       "bytes": 173997,
+      "srgb": false
+    },
+    {
+      "label": "tam_cephe_gunes_17.ktx2",
+      "width": 1024,
+      "height": 1024,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "bytes": 529003,
       "srgb": false
     },
     {
@@ -1693,12 +1819,30 @@
       "srgb": false
     },
     {
+      "label": "tam_cephe_gece.ktx2",
+      "width": 1024,
+      "height": 1024,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "bytes": 273219,
+      "srgb": false
+    },
+    {
       "label": "bahce_gok.ktx2",
       "width": 512,
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
       "bytes": 219586,
+      "srgb": false
+    },
+    {
+      "label": "tam_bahce_gok.ktx2",
+      "width": 1024,
+      "height": 1024,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "bytes": 709808,
       "srgb": false
     },
     {
@@ -1711,12 +1855,30 @@
       "srgb": false
     },
     {
+      "label": "tam_bahce_gunes_09.ktx2",
+      "width": 1024,
+      "height": 1024,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "bytes": 464800,
+      "srgb": false
+    },
+    {
       "label": "bahce_gunes_13.ktx2",
       "width": 512,
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
       "bytes": 159093,
+      "srgb": false
+    },
+    {
+      "label": "tam_bahce_gunes_13.ktx2",
+      "width": 1024,
+      "height": 1024,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "bytes": 484068,
       "srgb": false
     },
     {
@@ -1729,12 +1891,30 @@
       "srgb": false
     },
     {
+      "label": "tam_bahce_gunes_17.ktx2",
+      "width": 1024,
+      "height": 1024,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "bytes": 476665,
+      "srgb": false
+    },
+    {
       "label": "bahce_gece.ktx2",
       "width": 512,
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
       "bytes": 95106,
+      "srgb": false
+    },
+    {
+      "label": "tam_bahce_gece.ktx2",
+      "width": 1024,
+      "height": 1024,
+      "sourceWidth": 1024,
+      "sourceHeight": 1024,
+      "bytes": 282611,
       "srgb": false
     }
   ],

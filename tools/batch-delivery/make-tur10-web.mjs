@@ -264,8 +264,9 @@ function applyFloors(doc) {
   // 1. kat oturma alanı tavanı: kirişler arası bal rengi çam lambri (fotoğraf 12; RETILE taşır)
   restyle(wood.clone().setName('EK_cam_lambri'), pbr('cam-lambri'));
   if (mats.get('wood_floor')) restyle(mats.get('wood_floor'), parke);
-  const basement = restyle(mats.get('terra_floor'), pbr('bodrum-karo'));
-  const ground = restyle(mats.get('terra_floor').clone().setName('terra_floor_giris'), pbr('giris-karo'));
+  // -v2: derz belirginleştirildi (web dokusunda 1 px derz kayboluyordu, zemin düz renk görünüyordu; 01.10 denetim A3)
+  const basement = restyle(mats.get('terra_floor'), pbr('bodrum-karo-v2'));
+  const ground = restyle(mats.get('terra_floor').clone().setName('terra_floor_giris'), pbr('giris-karo-v2'));
   // UV0 ölçeği: malzemenin bütün ilkellerinde (paylaşılan erişimci kopyalanır)
   const scaleUV = (mat, s) => {
     for (const prim of root.listMeshes().flatMap(m => m.listPrimitives())) {
@@ -1107,9 +1108,12 @@ function trimBoxes(doc) {
 
 function fixDressingDoor(doc) {
   const MOVE = /^EK_M3_04_(kanat|dik_profil|yatay_profil|gobek|pirinc_topuz|topuz_mili|mentese)(\.\d+)?$/;
-  const th = -35 * Math.PI / 180, c = Math.cos(th), s = Math.sin(th);
+  // Kaynakta kanat doğu kasada (menteşe x 2,1729) ama giyinme odasına ~125° açık. Ürün sahibi (01.10, foto 16):
+  // kapı ebeveyn banyosuna İÇERİ ve SAĞA açılır -> menteşe doğu kasada kalır, kanat banyoya (-z) 90° döner.
+  // Kanadın kaynak yönü atan2(z,x) = 54,6° -> hedef -90°: R_y(+144,6°) menteşe etrafında.
+  const th = 144.6 * Math.PI / 180, c = Math.cos(th), s = Math.sin(th);
   const R = ([x, z]) => [c * x + s * z, -s * x + c * z];                 // R_y(th), xz
-  const [hx, hz] = [2.1729, -6.0277], [nx, nz] = [1.3655, -6.0277];
+  const [hx, hz] = [2.1729, -6.0277], [nx, nz] = [2.1729, -6.0277];
   const [rx, rz] = R([hx, hz]), t = [nx - rx, 0, nz - rz];
   const D = [c, 0, -s, 0, 0, 1, 0, 0, s, 0, c, 0, t[0], t[1], t[2], 1];  // sütun düzeninde
   const mul = (a, b) => {const o = new Array(16).fill(0); for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) for (let k = 0; k < 4; k++) o[j * 4 + i] += a[k * 4 + i] * b[j * 4 + k]; return o;};
@@ -1120,7 +1124,7 @@ function fixDressingDoor(doc) {
     node.setMatrix(mul(D, node.getMatrix())); moved++;
   }
   if (moved !== 68) throw Error(`kapı EK_M3_04: 68 kanat parçası bekleniyordu, ${moved} bulundu`);
-  console.log(`kapı EK_M3_04 (giyinme odası): kanat grubu ${moved} parça batı kasaya, 90° açık (aynadan uzak)`);
+  console.log(`kapı EK_M3_04 (giyinme -> ebeveyn banyosu): kanat grubu ${moved} parça doğu menteşede, banyoya içe 90° açık`);
 }
 
 async function load(sources, {stairRepair = false} = {}) {

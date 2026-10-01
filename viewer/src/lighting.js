@@ -536,9 +536,16 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
         if(q.batchedGeometry&&['architecture','interior'].includes(name))fixtureVertices.apply(material);
         // Tur 10 aynaları (EK_A08_Ayna, Silver mirror, ayna gibi yazılmış wood_honey kopyası) göğü
         // yansıtıyordu: holdeki gardırop kapakları mavi-yeşil görünüyordu (fotoğraf 41). Oda sondası.
-        // Aynı sebeple iç mekândaki bütün metaller (davlumbaz, fırın, bulaşık makinesi - paslanmaz
-        // çelik fotoğraf 21'de mavi görünüyordu; pirinç, siyah metal) oda sondasını yansıtır.
-        const mirror=material.metalness>=.5;
+        const mirror=material.metalness>=.99&&material.roughness<=.05;
+        // İç mekân metalleri (davlumbaz, fırın, buzdolabı, bulaşık makinesi, evye, batarya): tam metal
+        // oldukları için yalnız yansıtma ile görünüyorlardı - gök yansıyınca mavi, oda sondası karanlıkken
+        // SİYAH (01.10 denetim, foto 1/21/22). Fırçalanmış paslanmaz gibi yarı metal yapılır: açık renkli
+        // eşya kendi difüz rengiyle görünür; koyu (siyah metal, BLCK) olduğu gibi kalır.
+        if(['architecture','interior'].includes(name)&&!mirror&&material.metalness>=.5&&!material.userData.metalSoftened){
+          material.userData.metalSoftened=true;
+          const l=.2126*material.color.r+.7152*material.color.g+.0722*material.color.b;
+          if(l>.12){material.metalness=.35;material.roughness=Math.max(material.roughness,.35);if(!material.map)material.color.lerp(new THREE.Color(.72,.73,.74),.5);}
+        }
         if(['architecture','interior'].includes(name)&&(/-(metal|glass|wood)-/.test(material.name)||mirror)){
           reflectionMaterials.add(material);material.envMap=roomReflections?.get(reflectionFloor)??null;
         }
