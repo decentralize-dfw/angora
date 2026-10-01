@@ -203,7 +203,11 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
   #app .scale-picker,#app[data-delivery=native] .scale-picker,
   #app[data-scale] .scale-picker,#app[data-delivery=native][data-scale] .scale-picker{
     top:var(--m-top);bottom:auto;left:12px;transform:none;padding:3px}
-  #app .scale-picker button{min-height:28px;padding:0 9px;font-size:11px}
+  #app .scale-picker{height:34px;box-sizing:border-box;padding:2px;align-items:center}
+  #app .scale-picker button{min-height:28px;height:28px;padding:0 9px;font-size:11px}
+  /* üst satırdaki bütün düğmeler aynı hizada: hepsi 34 px, aynı üst kenar */
+  .topbar .top-actions{align-items:center}
+  .topbar .top-actions>button{height:34px;min-height:34px;box-sizing:border-box}
   #app[data-delivery=native] .view-description,.view-description{top:calc(var(--m-top) + 46px)}
   #app .side-tools,#app[data-delivery=native] .side-tools{top:calc(var(--m-top) + 44px);bottom:auto;right:12px;transform:none;padding:0;gap:0;background:none;border:0;box-shadow:none}
   #app .side-tools button{width:34px;height:34px;min-width:34px;min-height:34px;font-size:15px;border-radius:999px;background:var(--glass);border:1px solid var(--edge);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
