@@ -583,7 +583,7 @@ const TUR10_EXTRA_CURTAINS = [
 // (dikişsiz) tekrarlanır. Doku dönüşümü (KHR_texture_transform, v' = 1 - v) yüzünden v = 1 - satır.
 const CURTAIN_UV = {u: [0.09, 0.17], row: [0.27, 0.43], tiles: 3};
 function pleatedCurtain(axis, along, fixed, y0, y1, width) {
-  const cols = 28, a0 = along - width / 2, amp = 0.035, folds = 5, rows = CURTAIN_UV.tiles;
+  const cols = 32, a0 = along - width / 2, amp = 0.022, folds = 4, rows = CURTAIN_UV.tiles;
   const pos = [], uv = [], idx = [];
   for (let i = 0; i <= cols; i++) {
     const u = i / cols, s = a0 + u * width, off = amp * Math.sin(u * folds * 2 * Math.PI);
