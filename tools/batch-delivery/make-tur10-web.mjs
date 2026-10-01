@@ -737,7 +737,9 @@ function retileBoxes(doc) {
     for (const node of root.listNodes()) {
       const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
       for (const prim of mesh.listPrimitives()) {
-        if (!rule.mat.test(prim.getMaterial()?.getName() ?? '') || !prim.getIndices()) continue;
+        if (!rule.mat.test(prim.getMaterial()?.getName() ?? '')) continue;
+        // zemin işlemi üçgen listesi (indekssiz) üretebiliyor: sıralı indeks verilir
+        if (!prim.getIndices()) prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from({length: prim.getAttribute('POSITION').getCount()}, (_, k) => k)).setBuffer(buffer));
         const P = prim.getAttribute('POSITION').getArray(), I = prim.getIndices().getArray(), keep = [];
         const X = i => [0, 1, 2].map(k => w[k]*P[i*3] + w[4+k]*P[i*3+1] + w[8+k]*P[i*3+2] + w[12+k]);
         for (let t = 0; t < I.length; t += 3) {
@@ -750,7 +752,15 @@ function retileBoxes(doc) {
         if (keep.length !== I.length) prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(keep)).setBuffer(buffer));
       }
     }
-    if (!out.length) throw Error(`RETILE boş: ${rule.neden}`);
+    if (!out.length) {
+      // tanı: malzemenin dik üçgenleri nerede
+      const near = [];
+      for (const node of root.listNodes()) { const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
+        for (const prim of mesh.listPrimitives()) { if (!rule.mat.test(prim.getMaterial()?.getName() ?? '')) continue; const P = prim.getAttribute('POSITION').getArray();
+          for (let i = 0; i < P.length; i += 3) { const q = [0, 1, 2].map(k => w[k]*P[i] + w[4+k]*P[i+1] + w[8+k]*P[i+2] + w[12+k]); if (q.every((x, k) => x >= rule.min[k] - 0.3 && x <= rule.max[k] + 0.3)) near.push(node.getName() + ' ' + q.map(x => x.toFixed(2)).join(',') + (prim.getIndices() ? '' : ' indekssiz')); } } }
+      console.log('RETILE tanı', rule.neden, near.length, near.slice(0, 8));
+      throw Error(`RETILE boş: ${rule.neden}`);
+    }
     const p = new Float32Array(out.length * 9), nr = new Float32Array(out.length * 9), uv = new Float32Array(out.length * 6);
     out.forEach(({v, n}, i) => v.forEach((q, j) => {
       const o = i * 3 + j; p.set(q, o * 3); nr.set(n, o * 3);
@@ -1541,21 +1551,23 @@ const RECOLOR = [
   {mat: 'wood_honey', ad: 'EK_mutfak_kiraz', doku: 'mutfak-kiraz.jpg', min: [-5.7, 3.0, -0.2], max: [-2.2, 5.8, 3.3], neden: 'fotoğraf 21 mutfak dolapları'},
 ];
 // Denetim: yanlış malzemeli yüzeyler (kutudaki tüm üçgenler, aynı erişimcilerle) başka malzemeye taşınır.
-const SWAP = [
+// fonksiyon: BUILDING yüklemesi bu satırdan önce çalışıyor (const henüz tanımlı olmazdı)
+function swapRules() { return [
   // çatı katı pencere nişleri (C02, C04): diz duvarı ile pencere duvarı arasındaki 45 cm'lik pervaz PARKE
   // kaplıydı -> pencere altında kahverengi bant (foto 7, 8, 14). Gerçekte sıvalı beyaz.
   {mat: 'WOOD-FL', hedef: 'Simple White Wall', min: [-3.70, 10.55, -7.40], max: [-3.10, 10.70, 3.25], neden: 'çatı pencere nişi pervazı'},
-];
+]; }
 function swapBoxes(doc) {
   const root = doc.getRoot(), buffer = root.listBuffers()[0];
-  for (const rule of SWAP) {
+  for (const rule of swapRules()) {
     const target = root.listMaterials().find(m => m.getName() === rule.hedef);
     if (!target) throw Error('SWAP hedef yok: ' + rule.hedef);
     let moved = 0;
     for (const node of root.listNodes()) {
       const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
       for (const prim of [...mesh.listPrimitives()]) {
-        if (prim.getMaterial()?.getName() !== rule.mat || !prim.getIndices()) continue;
+        if (prim.getMaterial()?.getName() !== rule.mat) continue;
+        if (!prim.getIndices()) prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from({length: prim.getAttribute('POSITION').getCount()}, (_, k) => k)).setBuffer(buffer));
         const P = prim.getAttribute('POSITION').getArray(), I = prim.getIndices().getArray(), keep = [], out = [];
         const X = i => [0, 1, 2].map(k => w[k]*P[i*3] + w[4+k]*P[i*3+1] + w[8+k]*P[i*3+2] + w[12+k]);
         for (let t = 0; t < I.length; t += 3) {
@@ -1568,7 +1580,12 @@ function swapBoxes(doc) {
         moved += out.length / 3;
       }
     }
-    if (!moved) throw Error('SWAP boş: ' + rule.neden);
+    if (!moved) {
+      const ad = new Map();
+      for (const n of root.listNodes()) for (const p of n.getMesh()?.listPrimitives() ?? []) { const k = p.getMaterial()?.getName(); if (k && /WOOD|parke/i.test(k)) ad.set(k, (ad.get(k) ?? 0) + 1); }
+      console.log('SWAP tanı, mevcut ahşap malzemeler:', [...ad].join(', '));
+      throw Error('SWAP boş: ' + rule.neden);
+    }
     console.log(`denetim: ${rule.neden} - ${moved} üçgen ${rule.mat} -> ${rule.hedef}`);
   }
 }
