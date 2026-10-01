@@ -42,7 +42,11 @@ export const LIGHTMAP_GAINS = {sky: 0.62, sun: 12, night: 0.55, interior: 11, in
   // kaymıştı, tavan doğruydu -> duvar atlasına ayrı kazanç, sekme rengi %60 nötr.
   atlas: {duvar: 4, zemin: 2.6},
   // iç mekân beyaz dengesi: fotoğraflar sıcak ışıkta; pencereden giren gök ışığı parkeyi morarttı
-  interiorTint: [1.0, 0.9, 0.78]};
+  // 01.10 GPU karşılaştırması (40 foto, qa-foto-v3): pencereli odalar 0,9-1,1, penceresiz hol/antre/WC/garaj
+  // 0,4-0,6 parlaklıkta; fotoğraf r/b ~1,4, model ~1,15. Fotoğraflar lambalar YANARKEN çekilmiş: gündüz de
+  // iç atlaslara pişmiş armatür ışığı (gece haritası) eklenir (lampDay x, gece 1'e kadar yükselir) ve ton ısıtılır.
+  lampDay: 2.5,
+  interiorTint: [1.0, 0.86, 0.70]};
 const INTERIOR_ATLASES = new Set(['duvar', 'zemin']);
 
 export function sunPair(hour) {
@@ -126,7 +130,8 @@ export function createVillaLightmaps({renderer, root, spec: deliverySpec = spec}
       u.lmSunAScale.value.copy(state.sun).multiplyScalar(maps['gunes_' + pair.a].olcek * sun);
       u.lmSunBScale.value.copy(state.sun).multiplyScalar(maps['gunes_' + pair.b].olcek * sun);
       if (atlas.interior) {u.lmSunAScale.value.multiply(tint); u.lmSunBScale.value.multiply(tint);}
-      u.lmNightScale.value.setRGB(1, 1, 1).multiplyScalar(maps.gece.olcek * LIGHTMAP_GAINS.night * state.night);
+      const lamps = atlas.interior ? state.night + (1 - state.night) * LIGHTMAP_GAINS.lampDay : state.night;
+      u.lmNightScale.value.setRGB(1, 1, 1).multiplyScalar(maps.gece.olcek * LIGHTMAP_GAINS.night * lamps);
     }
   }
 
