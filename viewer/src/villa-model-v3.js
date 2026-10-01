@@ -389,14 +389,23 @@ const TUR10_BORROW = [
   {mats: /^(WHT\.001|Simple White Wall|Stucco painted wall|Stone gravel)$/, min: [4.25, 2.98, 1.04], max: [7.53, 6.02, 1.45], notFacing: [0, 0, -1],
     source: {mat: /^Stucco painted wall$/, atlas: 'cephe', min: [7.0, 2.98, 1.39], max: [7.6, 6.0, 1.41], facing: [0, 0, 1]}, material: 'source', uvScale: 2.35},
   // Garajın sol üstünde evin yan cephesinin garaj damı üstünde kalan 40 cm'lik şeridi (x 4,32, y 5,97..6,37, +x)
-  // sokaktan yatık açıyla ince koyu çapraz çizgi gibi görünüyordu (pişirmede dam ile döşeme arasında gölgede):
-  // o şerit de garajın sağ ayağının ışığıyla.
+  // sokaktan yatık açıyla ince koyu çapraz çizgi gibi görünüyordu: şeridin altında, cephe üçgeniyle arasında
+  // y 5,970..5,972'de kıl çatlak var; çatlaktan 20 cm arkadaki iç kabuk (x 4,118, duvar boşluğunda: pişmiş
+  // ışığı kapkara, canlı güneşte de gölgede) görünüyor (gölgeler kapatılınca çizgi kayboluyor). Şerit garajın
+  // sağ ayağının ışığıyla; arkadaki kabuk da öyle ve gölge almaz (yalnız çatlaktan görünür).
   {mats: /^Stucco painted wall$/, min: [4.30, 5.96, 0.50], max: [4.34, 6.38, 4.30], notFacing: [-1, 0, 0],
+    source: {mat: /^Stucco painted wall$/, atlas: 'cephe', min: [7.0, 2.98, 1.39], max: [7.6, 6.0, 1.41], facing: [0, 0, 1]}, material: 'source', uvScale: 2.35},
+  {mats: /^Simple White Wall$/, min: [4.10, 5.96, 0.50], max: [4.14, 6.38, 4.30], noShadow: true,
     source: {mat: /^Stucco painted wall$/, atlas: 'cephe', min: [7.0, 2.98, 1.39], max: [7.6, 6.0, 1.41], facing: [0, 0, 1]}, material: 'source', uvScale: 2.35},
   // 01.10 merdiven (A, sol üst işaret): K2 kolunun alt yüzü ile sahanlık altının birleştiği köşede 3 mm'lik
   // üç dilimli pah ve kenar şeritleri (kıl üçgenler). Atlasta yarım teksel genişliğinde, ışıkları komşu parça /
   // oluk ile karışmış (gök 0..24); merdivenden bakınca kenar boyunca kesik kesik koyu noktalar. Merdiven
   // boşluğundaki kıl üçgenler en yakın geniş yüzün (> 0,05 m²) kenardan 4 cm içerideki ışığını okur.
+  // K2 kolunun sahanlığa değdiği kenar (x 3,172..3,176, y 7,671..7,675): pah ve dudak kıl üçgenleri ile hemen
+  // arkasındaki dikey iç yüz (x 3,172, sahanlık gövdesinin içi, pişmiş ışığı kapkara; kenar boyunca kıl aralıktan
+  // görünüyor) aşağı bakan sahanlık altının (görünen yüz) ışığını okur. Genel kıl kuralından önce.
+  {mats: /^EK_M2_Beyaz_merdiven_alti$/, min: [3.165, 7.665, -3.13], max: [3.185, 7.89, -0.92], inset: 0.08,
+    source: {mat: /^EK_M2_Beyaz_merdiven_alti$/, atlas: 'duvar', min: [3.17, 7.665, -3.2], max: [4.25, 7.68, -0.85], facing: [0, -1, 0], minArea: 0.05}, material: 'target'},
   {sliver: true, mats: /^(EK_M2_Beyaz_merdiven_alti|Simple White Wall)$/, min: [0.5, 3.0, -3.5], max: [4.2, 9.6, 0.6], inset: 0.04,
     source: {mat: /^(EK_M2_Beyaz_merdiven_alti|Simple White Wall)$/, atlas: 'duvar', min: [0.4, 2.9, -3.6], max: [4.3, 9.7, 0.7], minArea: 0.05}, material: 'target'},
   {mats: /^WHT\.001$/, min: [4.40, 5.40, -2.30], max: [7.26, 5.75, 0.66],
@@ -508,7 +517,8 @@ export function borrowTur10(model) {
       mesh.name = o.name + (own ? '_isik' : '_cephe_isigi');
       mesh.userData = JSON.parse(JSON.stringify(base.userData));
       mesh.position.copy(base.position); mesh.quaternion.copy(base.quaternion); mesh.scale.copy(base.scale);
-      mesh.castShadow = o.castShadow; mesh.receiveShadow = o.receiveShadow;
+      mesh.castShadow = o.castShadow; mesh.receiveShadow = rule.noShadow ? false : o.receiveShadow;
+      if (rule.noShadow) mesh.userData.noShadowReceive = true;   // lighting.js sonradan ezmesin
       base.parent.add(mesh);
       g.setIndex(keep);
       moved += take.length;
@@ -566,6 +576,10 @@ const TUR10_STAIR_MOVES = [
   // yeni alt yüzünün altında (x 0,872..1,079, y 5,891..6,05) salonun üstündeki döşeme boşluğuna açılan üçgen delik
   // kalıyordu: duvarın iki kabuğu ile uç kapağı x 0,872'ye uzar (8 üçgen, köşe taşınır, ışık UV'si aynı).
   {mat: /^Simple White Wall$/, min: [1.065, 5.885, -3.135], max: [1.095, 6.300, -3.090], to: {x: 0.872}},
+  // 01.10 garaj: kapı açıklığının üstündeki bandın sol köşeleri z 1,18'de (sağı 1,40): bant eğik; sol ucunda
+  // lentonun garaja bakan iç yüzü (z 1,198, iç duvar ışığıyla) bandın önüne çıkıp sokaktan açık renkli bir
+  // dikdörtgen gibi görünüyordu. Sol köşeler cephe düzlemine (z 1,40) alınır.
+  {mat: /^(Simple White Wall|Stucco painted wall)$/, min: [4.27, 5.50, 1.15], max: [4.31, 6.00, 1.20], to: {z: 1.40}},
 ];
 const TUR10_BAD_RAILS = [
   [[1.722, 4.481, -2.184], [2.046, 6.413, -1.890]], // kollar arası 20 cm boşlukta dikine çubuk (1,98 m)
@@ -603,6 +617,7 @@ function fixTur10Stair(model) {
         if (!m) continue;
         if (m.to.x !== undefined) v.x = m.to.x;
         if (m.to.y !== undefined) v.y = m.to.y;
+        if (m.to.z !== undefined) v.z = m.to.z;
         v.applyMatrix4(inv); pos.setXYZ(i, v.x, v.y, v.z); k++;
       }
       if (k) { pos.needsUpdate = true; g.computeBoundingBox(); g.computeBoundingSphere(); count += k; }

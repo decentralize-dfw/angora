@@ -530,7 +530,8 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
       // üçgenli arazinin kendi üstüne düşürdüğü gölge (shadow terminator)
       // çimde anlamsız koyu kıymıklar olarak görünüyordu. Evler, ağaçlar ve
       // villa gölgesini zemine düşürmeye devam eder.
-      object.castShadow=!glass&&name!=='context-ground';object.receiveShadow=!glass;
+      // villa-model-v3 borrowTur10: yalnız kıl çatlaktan görünen duvar içi kabuk gölge almaz (noShadowReceive)
+      object.castShadow=!glass&&name!=='context-ground';object.receiveShadow=!glass&&!object.userData.noShadowReceive;
       for(const material of materials) {
         electricLight?.apply(material);
         if(q.batchedGeometry&&['architecture','interior'].includes(name))fixtureVertices.apply(material);

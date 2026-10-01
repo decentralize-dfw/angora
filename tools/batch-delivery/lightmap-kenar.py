@@ -26,6 +26,7 @@ dunya = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(dunya)
 MAPS = dunya.MAPS
 K = 16
 R = 0.10     # m
+R2 = 0.40    # m: ikinci tur
 ORTU = 0.13  # m
 KIL = 0.006  # m: üçgen yüksekliği bunun altındaysa (ve uzun kenarı > 15 cm) kıl üçgen
 GENIS = 0.05  # m²
@@ -52,6 +53,9 @@ def main(trisf, src, dst, *atlases):
             # ortalama: kenar/oluk teksellerinin komşudan taşan değeri tepe değeri yanıltmasın
             means[m] = np.bincount(tt, im[ys, xs].max(1), len(P)) / np.maximum(np.bincount(tt, None, len(P)), 1)
         kara = np.max(list(peaks.values()), axis=0) <= dunya.KARA
+        # neredeyse kara (gök ve gece ortalaması < 4/255; tek tük kenar tekseli tepe değeri yükseltiyor):
+        # merdiven sahanlığının içindeki dikey yüz (x 3,172) gibi kapalı boşluk yüzleri; kenar çatlağından görünür
+        kara |= (means['gok'] < 4 / 255) & (means['gece'] < 4 / 255)   # güneş haritaları 1024'te komşudan taşıyor
         # görünen yüzünün önü ÖRTÜLÜ üçgenler (lightmap-yon.py ışın testi: görünen yandaki ortalama çarpma
         # uzaklığı < ORTU m; ör. arka kabuk 3 cm önündeki kabuğu görür, 0,05..0,12) de çatlaktan görünür:
         # pişirmede tam kara değil ama 1..11/255 (önündeki duvar 25..55)
@@ -73,6 +77,9 @@ def main(trisf, src, dst, *atlases):
             # kaynak: kara OLMAYAN üçgenlerin bütün tekselleri (güneş haritasında gölgedeki 0 da kaynak: önündeki
             # duvar gölgedeyse arkası da gölgede kalmalı)
             hedef = kara[tt]; kaynak = ~hedef
+            # gök/gece haritasında kara teksel kaynak olmaz (görünen yüzde gök ışığı 0 olmaz; işaretlenmemiş ama
+            # kısmen kara iç yüzlerden, ör. sahanlığın x 3,172 iç yüzüne çakışık 516, karanlık taşınmasın)
+            if m in ('gok', 'gece'): kaynak &= im[ys, xs].max(1) > dunya.KARA
             if not hedef.any() or not kaynak.any(): continue
             tree = cKDTree(pos[kaynak]); dist, j = tree.query(pos[hedef], k=K, distance_upper_bound=R)
             # kıl üçgenler yalnız GENİŞ yüzlerden (> GENIS m²) ve 15 cm'ye kadar: hemen yanındaki öbür pah dilimleri /
@@ -83,6 +90,10 @@ def main(trisf, src, dst, *atlases):
                 remap = np.searchsorted(np.nonzero(kaynak)[0], np.nonzero(genis)[0])   # genis içindeki sıra -> kaynak sırası
                 j2 = np.where(np.isfinite(d2), remap[np.minimum(j2, len(remap) - 1)], len(np.nonzero(kaynak)[0]))
                 dist[kh] = d2; j[kh] = j2
+            # R içinde kaynak bulamayanlar (kapalı boşluğun içi, 20-30 cm derin) ikinci turda R2 ile
+            far = ~np.isfinite(dist).any(1)
+            if far.any():
+                d2, j2 = tree.query(pos[hedef][far], k=K, distance_upper_bound=R2); dist[far] = d2; j[far] = j2
             ok = np.isfinite(dist); has = ok.any(1)
             jj = np.where(ok, j, 0)
             # aynı yöne bakan (paralel kabuk) kaynak öncelikli: arka kabuk önündeki kabuğun rengini alsın,

@@ -12,6 +12,7 @@ import json, os, sys, shutil
 import numpy as np
 from PIL import Image
 from scipy.spatial import cKDTree
+from scipy import ndimage
 import importlib.util
 
 _here = os.path.dirname(os.path.abspath(__file__))
@@ -66,6 +67,14 @@ def main(trisf, src, dst):
                     part = tgt[s:s + 4000]
                     for i, nb in zip(part, tree.query_ball_point(pos[part], r['r'])):
                         out[ys[i], xs[i]] = lin[ys[nb], xs[nb]].mean(0)
+            # değişen tekseller çevresindeki boş oluk tekselleri en yakın dolu tekselden yeniden (çift doğrusal
+            # örnekleme parça kenarında eski oluk değerini okuyup yatık bakışta kesik açık çizgi veriyordu)
+            ch = np.zeros((W, W), bool)
+            ch[ys[ic], xs[ic]] = True
+            empty = ids == 0; ring = ndimage.binary_dilation(ch, iterations=3) & empty
+            if ring.any():
+                _, (iy, ix) = ndimage.distance_transform_edt(empty, return_indices=True)
+                ry, rx = np.nonzero(ring); out[ry, rx] = out[iy[ry, rx], ix[ry, rx]]
             Image.fromarray(np.clip(np.sqrt(out) * 255, 0, 255).round().astype(np.uint8)).save(path)
             if m == 'gok': say = int(ic.sum())
         rapor[r['ad']] = say
