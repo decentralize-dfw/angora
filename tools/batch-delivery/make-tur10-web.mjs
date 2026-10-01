@@ -1226,7 +1226,7 @@ async function load(sources, {stairRepair = false} = {}) {
       merged.dispose();
     }
   }
-  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc); trimBoxes(doc); retileBoxes(doc); addHandrails(doc, await io.read(src('INTERIOR-opt-v3'))); addGarageDoor(doc); restyleWardrobe(doc); addKitchenSlider(doc); addStairTrim(doc); addArches(doc); swapBoxes(doc); fixAntreDoor(doc); rotateLeaves(doc);}
+  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc); trimBoxes(doc); retileBoxes(doc); addHandrails(doc, await io.read(src('INTERIOR-opt-v3'))); /* addGarageDoor(doc): 01.10 kaldırıldı - modelde kapı zaten var (tepede) */ restyleWardrobe(doc); addKitchenSlider(doc); addStairTrim(doc); addArches(doc); swapBoxes(doc); fixAntreDoor(doc); rotateLeaves(doc);}
   for (const prim of root.listMeshes().flatMap(m => m.listPrimitives()))
     for (const semantic of DROP) if (prim.getAttribute(semantic)) prim.setAttribute(semantic, null);
   for (const node of root.listNodes()) {const kat = node.getExtras()?.kat; node.setExtras(kat ? {kat} : {});}

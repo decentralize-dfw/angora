@@ -190,6 +190,8 @@ export function dropTur10Faces(model) {
   model.updateMatrixWorld(true);
   const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3(), n = new THREE.Vector3();
   let dropped = 0;
+  // 01.10: modelde garaj kapısı zaten var (tepede toplanmış); derlemenin eklediği ikinci kapı ve rayları gizlenir.
+  model.traverse(o => { if (o.isMesh && /^EK_garaj_(kapisi|ray)/.test([].concat(o.material)[0]?.name ?? '')) { o.visible = false; dropped++; } });
   model.traverse(o => {
     if (!o.isMesh || Array.isArray(o.material) || !o.geometry?.index) return;
     const rules = TUR10_DROP.filter(r => r.mat.test(o.material?.name ?? ''));
