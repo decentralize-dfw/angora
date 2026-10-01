@@ -497,9 +497,17 @@ function frame(initial=false,keep=false) {
 // Telefon: ayar dişlisi ve açılan ayarlar kat menüsünün hemen üstünde durur;
 // menünün gerçek yüksekliği (katlar + eylem satırı, gizliyken 0) CSS'e verilir.
 {
-  const dock=$('.explore-dock'),app=$('#app');
-  const measure=()=>app.style.setProperty('--dock-h',`${dock?.offsetHeight??0}px`);
+  // Telefonda dişli kat menüsünün eylem satırına, "−"nin soluna girer (ürün sahibi
+  // çizimi); menü gizliyken (yakın çevre / bölge) kendi köşesine döner.
+  const dock=$('.explore-dock'),app=$('#app'),gear=$('#open-options'),home=$('.tool-dock'),row=$('.dock-actions');
+  const phone=matchMedia('(max-width:720px)');
+  const measure=()=>{
+    const h=dock?.offsetHeight??0,inDock=phone.matches&&h>0;
+    app.style.setProperty('--dock-h',`${h}px`);app.dataset.gearDocked=String(inDock);
+    if(gear&&row&&home){if(inDock&&gear.parentElement!==row)row.prepend(gear);else if(!inDock&&gear.parentElement!==home)home.append(gear);}
+  };
   if(dock&&typeof ResizeObserver!=='undefined')new ResizeObserver(measure).observe(dock);
+  phone.addEventListener?.('change',measure);
   measure();
 }
 const SHEETS={'options-panel':'open-options','info-panel':'open-info','floor-panel':'open-floor'};

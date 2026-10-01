@@ -208,6 +208,11 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
   #app .explore-dock,#app[data-delivery=native] .explore-dock{bottom:var(--m-bottom)}
   #app .tool-dock{top:auto;right:12px;bottom:calc(var(--m-bottom) + var(--dock-h,0px) + 8px)}
   #app .tool-button{width:38px;height:38px;min-width:38px;min-height:38px}
+  /* Dişli kat menüsünde: eylem satırının başında, −/+ ile aynı boyda; ayarlar menünün hemen üstüne açılır */
+  #app .dock-actions #open-options{width:36px;height:36px;min-width:36px;min-height:36px;flex:0 0 auto;box-shadow:none;border:0;background:transparent}
+  #app .dock-actions #open-options[aria-expanded=true]{background:var(--ink);color:#fff}
+  #app .dock-actions #open-options svg{width:18px;height:18px}
+  #app[data-gear-docked=true] .options-panel{bottom:calc(var(--m-bottom) + var(--dock-h,0px))}
 
   #app .model-scale{display:none!important}
   #app .site-credit,#app[data-scale] .site-credit{left:0;right:0;bottom:calc(env(safe-area-inset-bottom) + 3px);
@@ -216,7 +221,7 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
   #app .site-credit a{letter-spacing:.1em}
 
   #app .options-panel{position:absolute;top:auto;left:12px;right:12px;width:auto;max-width:none;
-    bottom:calc(var(--m-bottom) + var(--dock-h,0px) + 54px);max-height:none;overflow:visible;
+    bottom:calc(var(--m-bottom) + 46px);max-height:none;overflow:visible;
     padding:5px;border-radius:22px;display:grid;grid-template-columns:auto 1fr auto;gap:5px;align-items:center;
     background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:var(--shadow-soft)}
   #app .options-panel[hidden]{display:none}
