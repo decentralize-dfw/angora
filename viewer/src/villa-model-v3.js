@@ -184,7 +184,8 @@ export function applyContextV2(manifest, {mobile = false, groundV3 = false} = {}
 // görünüyordu. Yüz yalnız eşleşen üçgenler indeksten çıkarılarak kaldırılır; ışık
 // UV'si ve diğer yüzler değişmez (yeniden pişirme gerekmez).
 const TUR10_DROP = [
-  {mat: /^ceiling\.001$/, min: [-0.05, 8.9, -2.35], max: [4.25, 12.3, -1.70], normal: [-0.57, -0.82, 0]},
+  // (01.10 geri alındı: çatı holündeki eğik tavan şeridi kaldırılınca tavanda siyah yarık açıldı -
+  //  çizgi kesitte görünse de yüz gerçek tavanın parçası. Yalnız kesit taramasında gizlenmeli.)
 ];
 export function dropTur10Faces(model) {
   model.updateMatrixWorld(true);
