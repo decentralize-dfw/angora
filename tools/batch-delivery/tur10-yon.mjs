@@ -8,7 +8,9 @@
 const DATUMS = [0, 3.0996, 6.3714, 9.4705];
 const C = 0.3, STEP = 0.1, FAR = 3;
 
-export function orientForBake(doc, materials, rooms) {
+// force: [{mat: RegExp, min, max, want: [x,y,z]}] - kutudaki (ağırlık merkezi) ve normali want ekseninde olan
+// üçgen kesin olarak want yönüne çevrilir (oda/ışın testi yanıldığı yerler için, denetimle belirlenmiş).
+export function orientForBake(doc, materials, rooms, force = []) {
   const root = doc.getRoot(), buffer = root.listBuffers()[0];
   const roomPolys = [0, 1, 2, 3].map(k => rooms.filter(r => r.floor_index === k).map(r => r.boundary_xz));
   const inPoly = (x, z, P) => {let c = false; for (let i = 0, j = P.length - 1; i < P.length; j = i++) {const [a, b] = P[i], [e, f] = P[j]; if ((b > z) !== (f > z) && x < (e - a) * (z - b) / (f - b) + a) c = !c;} return c;};
@@ -70,7 +72,10 @@ export function orientForBake(doc, materials, rooms) {
       const n = cr.map(x => x / L), c = [0, 1, 2].map(k => (T[q + k] + T[q + 3 + k] + T[q + 6 + k]) / 3), area = L / 2;
       stats.alan += area;
       let flip = null;
-      if (Math.abs(n[1]) < 0.5) {
+      const mname = prim.getMaterial()?.getName() ?? '';
+      const rule = force.find(r => r.mat.test(mname) && c.every((x, k) => x >= r.min[k] && x <= r.max[k]) && Math.abs(n[0]*r.want[0] + n[1]*r.want[1] + n[2]*r.want[2]) > 0.9);
+      if (rule) {flip = n[0]*rule.want[0] + n[1]*rule.want[1] + n[2]*rule.want[2] < 0; stats.zorla = (stats.zorla ?? 0) + 1;}
+      else if (Math.abs(n[1]) < 0.5) {
         const k = roomFloor(c[1]), room = d => roomPolys[k].some(P => inPoly(c[0] + n[0] * d, c[2] + n[2] * d, P));
         const f = room(0.08), r = room(-0.08);
         if (f !== r) {flip = r; stats.oda++;}

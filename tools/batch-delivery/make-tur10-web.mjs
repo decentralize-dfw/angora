@@ -718,6 +718,12 @@ const TRIM = [
 const RETILE = [
   {mat: /^(Simple White Wall|EK_SimpleWhiteWall)$/, hedef: 'R31 | R33 ivory wall ceramic', uvm: 3.333,
     min: [2.78, 4.17, 0.5], max: [4.13, 5.95, 2.43], neden: 'misafir WC bordür üstü beyaz seramik (fotoğraf 39)'},
+  // bodrum mutfağı tezgah arkası: ZEMİN karosu (terra_floor, 45° çapraz) duvara kaplanmıştı -> 'bakır mozaik' gibi
+  // görünüyordu; fotoğraf 1'de bej kare seramik
+  {mat: /^terra_floor$/, hedef: 'R31 | R33 ivory wall ceramic', uvm: 3.333,
+    min: [-5.65, 0.85, -3.2], max: [-5.55, 1.7, -0.7], neden: 'bodrum mutfak tezgah arkası (batı duvarı, foto 1)'},
+  {mat: /^terra_floor$/, hedef: 'R31 | R33 ivory wall ceramic', uvm: 3.333,
+    min: [-5.0, 0.85, 0.18], max: [-3.4, 1.7, 0.27], neden: 'bodrum mutfak tezgah arkası (kuzey duvarı, foto 1)'},
   // yatay: tavan üçgenleri; tahtalar kirişlere (z boyunca) dik, x boyunca uzanır
   {mat: /^ceiling\.001$/, hedef: 'EK_cam_lambri', uvm: 1 / 2.4, yatay: true,
     min: [-5.96, 8.95, -4.26], max: [-1.05, 9.1, -0.05], neden: '1. kat oturma alanı + hol tavanı çam lambri (fotoğraf 12/33)'},
@@ -1127,6 +1133,73 @@ function fixDressingDoor(doc) {
   console.log(`kapı EK_M3_04 (giyinme -> ebeveyn banyosu): kanat grubu ${moved} parça doğu menteşede, banyoya içe 90° açık`);
 }
 
+// Foto 40: antre -> iç hol vitraylı kapı. Modelde çift kanat (2 x 0,6 m), ikisi de antreye (kameraya) doğru
+// 90° açık. Fotoğrafta tek kanat görünüyor, iç hole doğru açık. Sağ kanat kaldırılır; sol kanat menteşe
+// (x 1,295, z 1,77) etrafında 180° döner (iç hole açılır), kalınlığı kasaya girmesin diye +x 0,17 kayar.
+// Birleşik mesh içindeki kapı kanatları: kutudaki (tamamı içinde) üçgenler yeni ilkele kopyalanıp menteşe
+// (x, z) etrafında döndürülür, eskisi silinir. Kanatlar atlas malzemesi değil: ışık haritası UV'si değişmez.
+const LEAVES = [
+  // foto 3/5: bodrum salonu güney balkon kapısı (açıklık x -1,57..-0,37, dış yüz z -8,29): iki kanat dışarı 90° açıktı,
+  // fotoğrafta çift kanat KAPALI. Sol kanat menteşe x -1,465 -> +x'e, sağ kanat menteşe x -0,465 -> -x'e kapanır.
+  {min: [-1.52, -0.35, -8.76], max: [-1.41, 1.80, -8.265], hinge: [-1.465, -8.30], deg: -90, neden: 'bodrum balkon kapısı sol kanat'},
+  {min: [-0.52, -0.35, -8.76], max: [-0.41, 1.80, -8.265], hinge: [-0.465, -8.30], deg: 90, neden: 'bodrum balkon kapısı sağ kanat'},
+];
+function rotateLeaves(doc) {
+  const root = doc.getRoot(), buffer = root.listBuffers()[0], scene = root.listScenes()[0];
+  for (const rule of LEAVES) {
+    const th = rule.deg * Math.PI / 180, c = Math.cos(th), s = Math.sin(th), [hx, hz] = rule.hinge;
+    const rot = ([x, y, z]) => [hx + c * (x - hx) + s * (z - hz), y, hz - s * (x - hx) + c * (z - hz)];
+    const rotN = ([x, y, z]) => [c * x + s * z, y, -s * x + c * z];
+    let moved = 0;
+    for (const node of [...root.listNodes()]) {
+      const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
+      for (const prim of [...mesh.listPrimitives()]) {
+        if (!prim.getIndices()) continue;
+        const P = prim.getAttribute('POSITION').getArray(), N = prim.getAttribute('NORMAL')?.getArray(), UV = prim.getAttribute('TEXCOORD_0')?.getArray();
+        const I = prim.getIndices().getArray(), keep = [], out = [];
+        const X = i => [0, 1, 2].map(k => w[k]*P[i*3] + w[4+k]*P[i*3+1] + w[8+k]*P[i*3+2] + w[12+k]);
+        const XN = i => [0, 1, 2].map(k => w[k]*N[i*3] + w[4+k]*N[i*3+1] + w[8+k]*N[i*3+2]);
+        for (let t = 0; t < I.length; t += 3) {
+          const v = [X(I[t]), X(I[t + 1]), X(I[t + 2])];
+          (v.every(q => q.every((x, k) => x >= rule.min[k] && x <= rule.max[k])) ? out : keep).push(I[t], I[t + 1], I[t + 2]);
+        }
+        if (!out.length) continue;
+        prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(keep)).setBuffer(buffer));
+        const pos = [], nor = [], uv = [];
+        for (const i of out) {
+          pos.push(...rot(X(i)));
+          if (N) {const n = rotN(XN(i)), l = Math.hypot(...n) || 1; nor.push(...n.map(x => x / l));}
+          if (UV) uv.push(UV[i * 2], UV[i * 2 + 1]);
+        }
+        const np = doc.createPrimitive().setMaterial(prim.getMaterial())
+          .setAttribute('POSITION', doc.createAccessor().setType('VEC3').setArray(new Float32Array(pos)).setBuffer(buffer));
+        if (N) np.setAttribute('NORMAL', doc.createAccessor().setType('VEC3').setArray(new Float32Array(nor)).setBuffer(buffer));
+        if (UV) np.setAttribute('TEXCOORD_0', doc.createAccessor().setType('VEC2').setArray(new Float32Array(uv)).setBuffer(buffer));
+        scene.addChild(doc.createNode('kanat_' + rule.neden.replace(/\W+/g, '_')).setMesh(doc.createMesh('kanat').addPrimitive(np)));
+        moved += out.length / 3;
+      }
+    }
+    if (!moved) throw Error('kanat boş: ' + rule.neden);
+    console.log(`kanat: ${rule.neden} - ${moved} üçgen ${rule.deg}° (kapatıldı)`);
+  }
+}
+
+function fixAntreDoor(doc) {
+  const mul = (a, b) => {const o = new Array(16).fill(0); for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) for (let k = 0; k < 4; k++) o[j * 4 + i] += a[k * 4 + i] * b[j * 4 + k]; return o;};
+  const D = [-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 2 * 1.295 + 0.17, 0, 2 * 1.77, 1];
+  let removed = 0, turned = 0;
+  for (const node of [...doc.getRoot().listNodes()]) {
+    const name = node.getName();
+    if (/^EK_A08_Cift_sag_/.test(name)) {node.getMesh()?.dispose(); node.dispose(); removed++; continue;}
+    if (/^EK_A08_Cift_sol_/.test(name)) {
+      if (node.getParentNode()) throw Error(`antre kapısı: ${name} kökte değil`);
+      node.setMatrix(mul(D, node.getMatrix())); turned++;
+    }
+  }
+  if (removed !== 9 || turned !== 9) throw Error(`antre kapısı: 9+9 parça bekleniyordu, ${removed} silindi ${turned} döndü`);
+  console.log(`antre vitray kapı (foto 40): sağ kanat kaldırıldı, sol kanat iç hole açıldı`);
+}
+
 async function load(sources, {stairRepair = false} = {}) {
   const doc = await io.read(sources[0]);
   if (stairRepair) repairStair(doc);
@@ -1140,7 +1213,7 @@ async function load(sources, {stairRepair = false} = {}) {
       merged.dispose();
     }
   }
-  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc); trimBoxes(doc); retileBoxes(doc); addHandrails(doc, await io.read(path.join(SRC, 'INTERIOR-opt-v3.glb'))); addGarageDoor(doc); restyleWardrobe(doc); addKitchenSlider(doc); addStairTrim(doc); addArches(doc);}
+  if (stairRepair) {fixDressingDoor(doc); applyFloors(doc); buildKitchenette(doc); trimBoxes(doc); retileBoxes(doc); addHandrails(doc, await io.read(path.join(SRC, 'INTERIOR-opt-v3.glb'))); addGarageDoor(doc); restyleWardrobe(doc); addKitchenSlider(doc); addStairTrim(doc); addArches(doc); swapBoxes(doc); fixAntreDoor(doc); rotateLeaves(doc);}
   for (const prim of root.listMeshes().flatMap(m => m.listPrimitives()))
     for (const semantic of DROP) if (prim.getAttribute(semantic)) prim.setAttribute(semantic, null);
   for (const node of root.listNodes()) {const kat = node.getExtras()?.kat; node.setExtras(kat ? {kat} : {});}
@@ -1422,8 +1495,15 @@ async function addFurniture(doc) {
   const dup = dropCoveredDuplicates(doc, {EK_M2_Beyaz_merdiven_alti: /^(Simple White Wall|EK_SimpleWhiteWall|WOOD-FL|wood_floor|terra_floor|terra_floor_giris|stone_tile|WHT\.001|ceiling\.001)$/});
   console.log(`çift katman: ${dup.dropped} örtülen üçgen atıldı (${dup.area.toFixed(0)} m²)`);
   // Cycles yüzeyi normalinin baktığı yandan pişirir: içe bakan duvar/tavan kara çıkıyordu
+  // Denetim (foto 2, 18, 34, 42): merdiven kollarının yan yüzleri (EK_M2_Beyaz_merdiven_alti) kısmen içe bakıyordu;
+  // görünen yanları kara pişiyordu (bodrum salonundan görünen merdiven altı simsiyah). Kol gövdeleri:
+  // A z -3,127..-2,127, B z -1,927..-0,927; yan yüz gövdenin DIŞINA bakar.
+  const M = /^EK_M2_Beyaz_merdiven_alti$/, X = [0.5, 4.3], Y = [-0.3, 9.5];
+  const zSide = (z, s) => ({mat: M, min: [X[0], Y[0], z - 0.01], max: [X[1], Y[1], z + 0.01], want: [0, 0, s]});
   const yon = orientForBake(doc, new Set(Object.values(ATLASES).flatMap(s => s.malzemeler)),
-    JSON.parse(readFileSync(path.join(REPO, 'build/web/full/rooms.json'), 'utf8')).spaces);
+    JSON.parse(readFileSync(path.join(REPO, 'build/web/full/rooms.json'), 'utf8')).spaces,
+    [zSide(-3.127, -1), zSide(-2.127, 1), zSide(-1.927, -1), zSide(-0.927, 1)]);
+  console.log(`merdiven yan yüzleri zorla dışa: ${yon.zorla ?? 0} üçgen`);
   console.log(`pişirme yönü: ${yon.cevrilen} üçgen (${yon.cevrilen_alan.toFixed(0)} m² / ${yon.alan.toFixed(0)} m²) görünen yana çevrildi, şüpheli ${yon.supheli_alan.toFixed(1)} m²`);
   const spec = lightmapUV(doc);
   const after = box(doc);
@@ -1460,6 +1540,38 @@ const RECOLOR = [
   {mat: 'wood_honey', ad: 'EK_giyinme_tik', doku: 'giyinme-tik.jpg', min: [0.3, 6.3, -5.96], max: [3.1, 8.8, -3.35], neden: 'fotoğraf 16 giyinme dolapları'},
   {mat: 'wood_honey', ad: 'EK_mutfak_kiraz', doku: 'mutfak-kiraz.jpg', min: [-5.7, 3.0, -0.2], max: [-2.2, 5.8, 3.3], neden: 'fotoğraf 21 mutfak dolapları'},
 ];
+// Denetim: yanlış malzemeli yüzeyler (kutudaki tüm üçgenler, aynı erişimcilerle) başka malzemeye taşınır.
+const SWAP = [
+  // çatı katı pencere nişleri (C02, C04): diz duvarı ile pencere duvarı arasındaki 45 cm'lik pervaz PARKE
+  // kaplıydı -> pencere altında kahverengi bant (foto 7, 8, 14). Gerçekte sıvalı beyaz.
+  {mat: 'WOOD-FL', hedef: 'Simple White Wall', min: [-3.70, 10.55, -7.40], max: [-3.10, 10.70, 3.25], neden: 'çatı pencere nişi pervazı'},
+];
+function swapBoxes(doc) {
+  const root = doc.getRoot(), buffer = root.listBuffers()[0];
+  for (const rule of SWAP) {
+    const target = root.listMaterials().find(m => m.getName() === rule.hedef);
+    if (!target) throw Error('SWAP hedef yok: ' + rule.hedef);
+    let moved = 0;
+    for (const node of root.listNodes()) {
+      const mesh = node.getMesh(); if (!mesh) continue; const w = node.getWorldMatrix();
+      for (const prim of [...mesh.listPrimitives()]) {
+        if (prim.getMaterial()?.getName() !== rule.mat || !prim.getIndices()) continue;
+        const P = prim.getAttribute('POSITION').getArray(), I = prim.getIndices().getArray(), keep = [], out = [];
+        const X = i => [0, 1, 2].map(k => w[k]*P[i*3] + w[4+k]*P[i*3+1] + w[8+k]*P[i*3+2] + w[12+k]);
+        for (let t = 0; t < I.length; t += 3) {
+          const v = [X(I[t]), X(I[t + 1]), X(I[t + 2])];
+          (v.every(q => q.every((x, k) => x >= rule.min[k] && x <= rule.max[k])) ? out : keep).push(I[t], I[t + 1], I[t + 2]);
+        }
+        if (!out.length) continue;
+        prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(keep)).setBuffer(buffer));
+        mesh.addPrimitive(prim.clone().setMaterial(target).setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(out)).setBuffer(buffer)));
+        moved += out.length / 3;
+      }
+    }
+    if (!moved) throw Error('SWAP boş: ' + rule.neden);
+    console.log(`denetim: ${rule.neden} - ${moved} üçgen ${rule.mat} -> ${rule.hedef}`);
+  }
+}
 function restyleWardrobe(doc) {
   const mats = doc.getRoot().listMaterials().filter(m => m.getName() === 'EK_A08_Ceviz');
   if (!mats.length) throw Error('EK_A08_Ceviz yok');
