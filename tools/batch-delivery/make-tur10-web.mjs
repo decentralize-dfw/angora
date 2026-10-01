@@ -249,7 +249,7 @@ function applyFloors(doc) {
   }
   const texture = (file, name) => doc.createTexture(name).setImage(readFileSync(path.join(DOKU, file))).setMimeType(file.endsWith('.png') ? 'image/png' : 'image/jpeg');
   // normal + pürüzlülük: dokunun kendisinden (tur10-dokular/pbr.py), desenle birebir; metal 0
-  execFileSync(PYTHON, [path.join(DOKU, 'pbr.py')], {stdio: 'inherit'});
+  execFileSync(PYTHON, [path.join(DOKU, 'pbr.py')], {stdio: 'inherit', env: {...process.env, PYTHONIOENCODING: 'utf-8', PYTHONUTF8: '1'}});
   const pbr = base => ({color: texture(base + '.jpg', base), normal: texture(base + '_normal.png', base + '_normal'), mr: texture(base + '_mr.png', base + '_mr')});
   const mats = new Map(root.listMaterials().map(m => [m.getName(), m]));
   const restyle = (mat, tex) => {
@@ -1281,7 +1281,7 @@ function lightmapUV(doc) {
   if (missing.length) console.warn('lightmap: modelde olmayan malzemeler (atlandı):', missing.join(', '));
   writeFileSync(path.join(BAKE, 'giris.json'), JSON.stringify(input));
   writeFileSync(path.join(BAKE, 'giris.bin'), Buffer.concat(chunks));
-  execFileSync(PYTHON, [path.join(REPO, 'tools/blender/lightmap_uv_tur10.py'), path.join(BAKE, 'giris.json')], {stdio: 'inherit'});
+  execFileSync(PYTHON, [path.join(REPO, 'tools/blender/lightmap_uv_tur10.py'), path.join(BAKE, 'giris.json')], {stdio: 'inherit', env: {...process.env, PYTHONIOENCODING: 'utf-8', PYTHONUTF8: '1'}});
   const out = JSON.parse(readFileSync(path.join(BAKE, 'cikis.json'), 'utf8'));
   const blob = readFileSync(path.join(BAKE, 'cikis.bin'));
   const view = ([o, n], T) => new T(blob.buffer.slice(blob.byteOffset + o, blob.byteOffset + o + n * 4));
