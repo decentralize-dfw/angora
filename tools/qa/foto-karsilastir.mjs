@@ -17,7 +17,15 @@ if (!url || !outDir) throw Error('kullanım: node tools/qa/foto-karsilastir.mjs 
 fs.mkdirSync(outDir, {recursive: true});
 const list = (ids ? ids.split(',').map(Number) : PHOTO_POINTS.filter(p => !p.outdoor).map(p => p.id));
 const W = 960, H = 720;
-const b = await chromium.launch({headless: false, args: ['--ignore-gpu-blocklist', '--enable-gpu-rasterization']});
+// Playwright'ın kendi Chromium'u Windows'ta açılamayabiliyor (spawn UNKNOWN): önce sistemdeki Chrome,
+// sonra Edge (her Windows'ta var), en son paketli Chromium denenir. KANAL=chrome|msedge|paket ile zorlanır.
+const ARGS = ['--ignore-gpu-blocklist', '--enable-gpu-rasterization'];
+let b = null;
+for (const kanal of (process.env.KANAL ? [process.env.KANAL] : ['chrome', 'msedge', 'paket'])) {
+  try {b = await chromium.launch({headless: false, args: ARGS, ...(kanal === 'paket' ? {} : {channel: kanal})}); console.log('tarayıcı:', kanal); break;}
+  catch (e) {console.log('tarayıcı açılmadı:', kanal, '-', e.message.split('\n')[0]);}
+}
+if (!b) throw Error('hiçbir tarayıcı açılamadı');
 const p = await b.newPage({viewport: {width: W, height: H}});
 p.on('pageerror', e => console.log('[sayfa hatası]', e.message));
 await p.goto(url + (url.includes('?') ? '&' : '?') + 'stats=1', {waitUntil: 'load', timeout: 180000});
