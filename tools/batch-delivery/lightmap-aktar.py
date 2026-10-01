@@ -26,6 +26,13 @@ K = 6
 KURALLAR = [
     {'ad': 'antre-seramik', 'atlas': 'zemin', 'node': 'LM_zemin_017', 'min': [2.92, 3.2, 0.25], 'max': [2.95, 6.0, 1.6],
      'normal': [-1, 0, 0], 'kaynak': 'duvar', 'yaricap': 2.5},
+    # aynı sızıntının iki görünen yüzü daha (viewer TUR10_RETILE `away`): radyatör duvarının ucundaki pah
+    # (üst üçgen 683 seramik, alt üçgen beyaz) ve WC kapısının hol tarafındaki üstü. Kutular yalnız öndeki
+    # katmanı alır (3 cm arkadaki ikiz katman gizli; kaynak düzlemi 1 cm içinde aranıyor).
+    {'ad': 'antre-pah', 'atlas': 'zemin', 'node': 'LM_zemin_017', 'min': [2.64, 3.2, 1.50], 'max': [2.945, 6.0, 1.80],
+     'normal': [-0.7071, 0, -0.7071], 'kaynak': 'duvar', 'yaricap': 1.5},
+    {'ad': 'wc-kapi-ustu', 'atlas': 'zemin', 'node': 'LM_zemin_017', 'min': [2.68, 5.15, 1.94], 'max': [3.29, 5.95, 2.56],
+     'normal': [-0.7071, 0, 0.7071], 'kaynak': 'duvar', 'yaricap': 1.5},
 ]
 
 

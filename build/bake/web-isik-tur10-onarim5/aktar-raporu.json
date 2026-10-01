@@ -3,5 +3,15 @@
   "hedef_ucgen": 2,
   "kaynak_ucgen": 37,
   "teksel": 1862
+ },
+ "antre-pah": {
+  "hedef_ucgen": 2,
+  "kaynak_ucgen": 8,
+  "teksel": 482
+ },
+ "wc-kapi-ustu": {
+  "hedef_ucgen": 2,
+  "kaynak_ucgen": 5,
+  "teksel": 392
  }
 }

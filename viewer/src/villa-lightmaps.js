@@ -79,6 +79,18 @@ const LIGHTMAP_FRAGMENT = THREE.ShaderChunk.lights_fragment_maps
     'iblIrradiance += getIBLIrradiance( geometryNormal ) * ( 1.0 - lmSkyStrength );');
 // three sürümü parçayı değiştirirse pişmiş ışık sessizce kapanır, sahne eski ışıkla açılır
 const CHUNK_OK = LIGHTMAP_FRAGMENT.includes('lmBaked * PI') && LIGHTMAP_FRAGMENT.includes('( 1.0 - lmSkyStrength )');
+// Gölge normal ofseti yüzün GÖRÜNEN yanına (01.10, cephe kamaları): three ofseti köşe normalinden
+// verir, gölgelendirme ise çift yüzlü malzemede faceDirection ile görünen yana döner. Kaynakta içe
+// sarılmış cephe/çatı/duvar üçgenlerinde (pişmiş GLB: 131 sıva, 139 roof-7, 166 beyaz duvar dışarıdan
+// arkası görünür) gölge araması duvarın İÇİNE kayıyor, doğrudan güneş hiç düşmüyordu.
+// gl_FrontFacing köşe gölgelendiricisinde yok; düz üçgende n·(göz - p) üç köşede de aynı işarettir.
+const SHADOW_VERTEX_FACING = THREE.ShaderChunk.shadowmap_vertex.replace(
+  'vec3 shadowWorldNormal = inverseTransformDirection( transformedNormal, viewMatrix );',
+  `vec3 shadowWorldNormal = inverseTransformDirection( transformedNormal, viewMatrix );
+	#ifdef DOUBLE_SIDED
+	if ( dot( transformedNormal, isOrthographic ? vec3( 0.0, 0.0, 1.0 ) : - mvPosition.xyz ) < 0.0 ) shadowWorldNormal = - shadowWorldNormal;
+	#endif`);
+const SHADOW_FACING_OK = SHADOW_VERTEX_FACING !== THREE.ShaderChunk.shadowmap_vertex;
 
 export function createVillaLightmaps({renderer, root, spec: deliverySpec = spec}) {
   const loader = CHUNK_OK ? createTextureLoader(renderer, 2) : null;
@@ -188,6 +200,7 @@ export function createVillaLightmaps({renderer, root, spec: deliverySpec = spec}
         material.onBeforeCompile = (shader, r) => {
           previous.call(material, shader, r);
           Object.assign(shader.uniforms, shared, atlas.uniforms);
+          if (SHADOW_FACING_OK) shader.vertexShader = shader.vertexShader.replace('#include <shadowmap_vertex>', SHADOW_VERTEX_FACING);
           shader.fragmentShader = shader.fragmentShader
             .replace('#include <lightmap_pars_fragment>', `#include <lightmap_pars_fragment>
 uniform sampler2D lmSunA, lmSunB, lmNight;
@@ -197,7 +210,7 @@ uniform float lmSkyStrength, lmOn, lmSunMix, lmDesat, lmFloor;`)
             // armatürlerin ışığı gece haritasında: canlı spot/point bu yüzeye bir daha düşmesin
             .replaceAll('NUM_SPOT_LIGHTS', '0').replaceAll('NUM_POINT_LIGHTS', '0');
         };
-        material.customProgramCacheKey = () => previousKey + '|villa-lightmap';
+        material.customProgramCacheKey = () => previousKey + '|villa-lightmap|shadow-facing';
         material.needsUpdate = true;
         applied++;
       }

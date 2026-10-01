@@ -3,7 +3,7 @@ import {prepareBakedLighting} from './baked-lighting.js';
 import {restoreBatchSurface} from './batch-surface-response.js';
 import {prepareBatchedMaterial,stripFixtureLoops} from './batched-material.js';
 import {neutraliseTransmission} from './material-response.js';
-import {repairUntexturedWood,settleTur10Overlays,dropTur10Faces,retileTur10,rebuildTur10Curtains} from './villa-model-v3.js';
+import {repairUntexturedWood,settleTur10Overlays,dropTur10Faces,retileTur10,relightTur10,rebuildTur10Curtains} from './villa-model-v3.js';
 import {applyMaterialResponse} from './material-response-v2.js';
 import {chunkModelInPlace} from './context-plants-chunks.js';
 import {applyPlantVariation} from './plant-variation.js';
@@ -114,6 +114,8 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
       if(dropped)console.info(`Tur 10 kesit işareti: ${dropped} yüz kaldırıldı (${name})`);
       const retiled=retileTur10(model);
       if(retiled)console.info(`Tur 10 yanlış malzemeli yüz: ${retiled} üçgen düzeltildi (${name})`);
+      const relit=relightTur10(model);
+      if(relit)console.info(`Tur 10 içe bakan kara yüz: ${relit} üçgen görünen yana, ışık UV'si komşudan (${name})`);
       if(settled)console.info(`Tur 10 ekleri öne: ${settled} malzeme (${name})`);
       if(repaired)console.info(`Untextured wood given the model's own wood maps: ${repaired} (${name})`);
     }

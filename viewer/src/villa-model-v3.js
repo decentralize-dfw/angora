@@ -193,10 +193,16 @@ const TUR10_DROP = [
 // mesh'e taşınır. Işık UV'si (TEXCOORD_1) ve atlas aynı kalır; o yüzlerin ışık haritası
 // tools/batch-delivery/lightmap-aktar.py ile hedef yüzeyden aktarıldı. yMax: üstünde aynı düzlemde
 // hedef malzemenin kendi yüzü varsa üçgen o yükseklikte kırpılır (üst üste binip titreşmesin).
-//   antre (01.10, ekran görüntüsü 115): girişteki WC'nin seramiği duvarın antre yüzüne de basılmış
-//   (x 2,94, -x'e bakan 1,2 x 2,6 m panel): radyatörün sağında kahve kama.
+//   antre (01.10, ekran görüntüsü 115): girişteki WC'nin seramiği duvarın antre yüzüne de basılmış:
+//   make-tur10-web.mjs RETILE kutusu (x 2,78..4,13) WC duvarının DIŞ yüzlerini de seramiğe çevirdi. Görünen
+//   üç yüz: radyatörün arkası (x 2,938, z 0,32..1,51), yanındaki pah (x 2,655..2,939, z 1,509..1,793, normal
+//   (-0,71,0,-0,71): üst üçgeni seramik, alt üçgeni beyaz -> asıl "kama") ve WC kapısının hol tarafındaki
+//   üstü (x 2,69..3,29, y 5,2..5,89). `away`: WC'nin içindeki bir nokta (x, z); kutudaki dik üçgenlerden ona
+//   BAKMAYANLAR taşınır (WC'nin kendi seramiği ona bakar). yMax kullanılmaz: panelin üstündeki beyaz üçgen
+//   panelle yalnız eğik kenarı paylaşıyor (üst üste binmiyor); y 5,2'de kırpmak 0,4 m²'lik delik açıp
+//   arkadaki WC seramiğini (LM_zemin_005, x 3,098) gösteriyordu.
 const TUR10_RETILE = [
-  {mat: /^R31 \| R33 ivory wall ceramic$/, min: [2.92, 3.2, 0.25], max: [2.95, 6.0, 1.6], normal: [-1, 0, 0], to: /^Simple White Wall$/, yMax: 5.2},
+  {mat: /^R31 \| R33 ivory wall ceramic$/, min: [2.6, 3.0, 0.3], max: [4.2, 6.0, 2.6], away: [3.6, 1.5], to: /^Simple White Wall$/},
 ];
 export function retileTur10(model) {
   model.updateMatrixWorld(true);
@@ -211,13 +217,15 @@ export function retileTur10(model) {
     const target = [...materials].find(([name]) => rule.to.test(name ?? ''))?.[1];
     if (!target) continue;
     const g = o.geometry, pos = g.attributes.position, idx = g.index, names = Object.keys(g.attributes);
-    const want = new THREE.Vector3(...rule.normal), n = new THREE.Vector3(), keep = [], take = [];
+    const want = new THREE.Vector3(...(rule.normal ?? [0, 0, 0])), n = new THREE.Vector3(), keep = [], take = [];
     const world = i => new THREE.Vector3().fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld);
     for (let t = 0; t < idx.count; t += 3) {
       const ids = [idx.getX(t), idx.getX(t + 1), idx.getX(t + 2)], w = ids.map(world);
       n.subVectors(w[1], w[0]).cross(w[2].clone().sub(w[0])).normalize();
       const inside = w.every(v => v.x >= rule.min[0] && v.x <= rule.max[0] && v.y >= rule.min[1] && v.y <= rule.max[1] && v.z >= rule.min[2] && v.z <= rule.max[2]);
-      if (inside && Math.abs(n.dot(want)) > 0.98) take.push(ids); else keep.push(...ids);
+      const cx = (w[0].x + w[1].x + w[2].x) / 3, cz = (w[0].z + w[1].z + w[2].z) / 3;
+      const match = rule.away ? Math.abs(n.y) < 0.3 && n.x * (rule.away[0] - cx) + n.z * (rule.away[1] - cz) < 0 : Math.abs(n.dot(want)) > 0.98;
+      if (inside && match) take.push(ids); else keep.push(...ids);
     }
     if (!take.length) continue;
     // köşe: dünya konumu (kırpma için) + bütün öznitelikler (normalize/nicelenmiş olanlar açılarak)
@@ -250,6 +258,106 @@ export function retileTur10(model) {
     moved += take.length;
   }
   return moved;
+}
+// Salon/yemek (01.10 denetim): pişirmeden önce duvarın İÇİNE çevrilmiş görünen yüzler. tur10-yon.mjs
+// söveler için karar veremedi (söve oda poligonunun dışında; ışın testini pencere kasası ve içi boş duvar
+// gövdesi yanılttı). Cycles onları duvarın içinden pişirdi (5 haritanın hepsi <=13/255) ve normal duvarın
+// içine baktığı için canlı güneşin gölge araması da (normalBias) duvarın içine kayıyor. Pencere sövelerinin
+// çoğu köşegenle ikiye bölünmüş: Simple White Wall yarısı doğru, Stucco yarısı ters -> perdenin yanında kara
+// üçgen; sağ sövelerde iki yarı da ters. Kolon hizasındaki asansör nişinin doğu yüzü (x -1,212): 1,74 m²
+// kara üçgen. Ters üçgen kaynağından çıkarılır, görünen yana çevrilir (sarılma + normal) ve ışık UV'si aynı
+// söve/yüzün doğru pişmiş Simple White Wall üçgeninden aktarılır (yoksa açıklığın öbür sövesinden, ortaya
+// göre yansıtılarak); malzeme ve atlas vericinin (duvar). Asıl çözüm: make-tur10-web.mjs force + pişirme.
+const jambs = (axis, s0, s1, depth, height) => {
+  const box = s => axis === 'x' ? {min: [s - 0.012, height[0], depth[0]], max: [s + 0.012, height[1], depth[1]]}
+    : {min: [depth[0], height[0], s - 0.012], max: [depth[1], height[1], s + 0.012]};
+  const dir = sign => axis === 'x' ? [sign, 0, 0] : [0, 0, sign];
+  const mirror = {axis, at: (s0 + s1) / 2};
+  return [{...box(s0), want: dir(1), partner: {...box(s1), want: dir(-1), mirror}},
+          {...box(s1), want: dir(-1), partner: {...box(s0), want: dir(1), mirror}}];
+};
+const TUR10_RELIGHT = [
+  ...jambs('x', -4.242, -3.041, [-8.30, -8.04], [3.3, 5.0]),   // salon güney penceresi (perdenin yanı)
+  ...jambs('x', -1.586, -0.387, [-8.30, -8.04], [3.0, 5.0]),   // salon balkon kapısı
+  ...jambs('x', 1.088, 2.288, [-8.30, -8.04], [3.3, 5.0]),     // salon doğu penceresi
+  ...jambs('z', -2.927, -1.127, [-5.85, -5.59], [3.6, 5.3]),   // yemek alanı batı penceresi (Salon_fon perdeleri)
+  {min: [-1.222, 3.0, -1.72], max: [-1.205, 5.95, -0.19], want: [-1, 0, 0]},   // asansör nişi doğu yüzü
+];
+const RELIGHT_MATS = /^(Simple White Wall|Stucco painted wall)$/;
+export function relightTur10(model) {
+  model.updateMatrixWorld(true);
+  const lit = [];
+  model.traverse(o => { if (o.isMesh && !Array.isArray(o.material) && o.geometry?.index && o.userData?.lightmap && RELIGHT_MATS.test(o.material.name ?? '')) lit.push(o); });
+  if (!lit.some(o => /^LM_(duvar|cephe)_\d{3}$/.test(o.name))) return 0;   // yalnız Tur 10 kabuğu
+  const v = () => new THREE.Vector3();
+  const inBox = (p, r) => p.x >= r.min[0] && p.x <= r.max[0] && p.y >= r.min[1] && p.y <= r.max[1] && p.z >= r.min[2] && p.z <= r.max[2];
+  const all = lit.flatMap(o => {
+    const pos = o.geometry.attributes.position, idx = o.geometry.index, out = [];
+    for (let t = 0; t < idx.count; t += 3) {
+      const i = [idx.getX(t), idx.getX(t + 1), idx.getX(t + 2)], p = i.map(k => v().fromBufferAttribute(pos, k).applyMatrix4(o.matrixWorld));
+      out.push({o, t, i, p, n: v().subVectors(p[1], p[0]).cross(v().subVectors(p[2], p[0])).normalize()});
+    }
+    return out;
+  });
+  const facing = (tr, r, sign) => tr.p.every(p => inBox(p, r)) && tr.n.dot(v().fromArray(r.want)) * sign > 0.9;
+  const reflect = (p, mir) => mir ? p.clone().setComponent(mir.axis === 'x' ? 0 : 2, 2 * mir.at - p.getComponent(mir.axis === 'x' ? 0 : 2)) : p;
+  const groups = new Map(), drop = new Map();
+  const tri = new THREE.Triangle(), cp = v(), bc = v(), uvs = [new THREE.Vector2(), new THREE.Vector2(), new THREE.Vector2()];
+  let relit = 0;
+  for (const r of TUR10_RELIGHT) {
+    const bad = all.filter(tr => facing(tr, r, -1));
+    if (!bad.length) continue;
+    // verici: aynı kutuda doğru bakan duvar üçgenleri; yoksa ortağın (açıklığın öbür sövesi) yansıyanı
+    let donors = all.filter(tr => tr.o.material.name === 'Simple White Wall' && facing(tr, r, 1)), mir = null;
+    if (!donors.length && r.partner) { donors = all.filter(tr => tr.o.material.name === 'Simple White Wall' && facing(tr, r.partner, 1)); mir = r.partner.mirror; }
+    if (!donors.length) continue;
+    for (const tr of bad) {
+      const q = tr.p.map(p => reflect(p, mir));
+      const c = v().add(q[0]).add(q[1]).add(q[2]).divideScalar(3);
+      // tek verici üçgen (UV adaları karışmasın): ağırlık merkezine en yakın, eşitse büyük olan
+      let best = null, bestD = Infinity;
+      for (const d of donors) {
+        tri.set(...d.p); const dist = tri.closestPointToPoint(c, cp).distanceTo(c) - tri.getArea() * 1e-3;
+        if (dist < bestD) { bestD = dist; best = d; }
+      }
+      const uv1 = best.o.geometry.attributes.uv1;
+      best.i.forEach((k, j) => uvs[j].fromBufferAttribute(uv1, k));
+      tri.set(...best.p);
+      // köşegenle bölünmüş dörtgen: ortak iki köşe aynen, üçüncü köşe vericinin üçüncü köşesine (tam yansıma)
+      const same = q.map(p => best.p.findIndex(d => d.distanceTo(p) < 2e-3));
+      const free = [0, 1, 2].find(j => !same.includes(j));
+      const uvAt = (p, j) => {
+        if (same[j] >= 0) return uvs[same[j]].clone();
+        if (same.filter(s => s >= 0).length === 2) return uvs[free].clone();
+        tri.closestPointToPoint(p, cp); tri.getBarycoord(cp, bc);
+        return new THREE.Vector2().addScaledVector(uvs[0], bc.x).addScaledVector(uvs[1], bc.y).addScaledVector(uvs[2], bc.z);
+      };
+      const order = tr.n.dot(v().fromArray(r.want)) < 0 ? [0, 2, 1] : [0, 1, 2];   // sarılma görünen yana
+      const out = groups.get(best.o) ?? groups.set(best.o, {pos: [], nor: [], uv1: []}).get(best.o);
+      for (const j of order) { out.pos.push(...tr.p[j].toArray()); out.nor.push(...r.want); out.uv1.push(...uvAt(q[j], j).toArray()); }
+      (drop.get(tr.o) ?? drop.set(tr.o, new Set()).get(tr.o)).add(tr.t);
+      relit++;
+    }
+  }
+  const inv = new THREE.Matrix4().copy(model.matrixWorld).invert();
+  for (const [donor, d] of groups) {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(d.pos, 3));
+    g.setAttribute('normal', new THREE.Float32BufferAttribute(d.nor, 3));
+    g.setAttribute('uv', new THREE.Float32BufferAttribute(new Float32Array(d.pos.length / 3 * 2), 2));
+    g.setAttribute('uv1', new THREE.Float32BufferAttribute(d.uv1, 2));
+    g.applyMatrix4(inv);
+    const part = new THREE.Mesh(g, donor.material);   // aynı malzeme örneği ve atlas (duvar)
+    part.name = donor.name + '_ters_onarim'; part.userData = JSON.parse(JSON.stringify(donor.userData));
+    part.castShadow = donor.castShadow; part.receiveShadow = donor.receiveShadow;
+    model.add(part);
+  }
+  for (const [o, dead] of drop) {   // kaynaktan çıkar; kalan üçgenlerin indeks/UV'si aynen
+    const idx = o.geometry.index, keep = [];
+    for (let t = 0; t < idx.count; t += 3) if (!dead.has(t)) keep.push(idx.getX(t), idx.getX(t + 1), idx.getX(t + 2));
+    o.geometry.setIndex(keep);
+  }
+  return relit;
 }
 export function dropTur10Faces(model) {
   model.updateMatrixWorld(true);
@@ -296,6 +404,11 @@ const TUR10_STAIR_MOVES = [
   {mat: /^EK_M2_Beyaz_merdiven_alti$/, at: [0.872, 6.121], zs: [-0.927, -1.927], to: {y: 5.891}}, // K1_1 alt yüz üst ucu
   {mat: /^EK_M2_Beyaz_merdiven_alti$/, at: [0.872, 6.251], zs: [-2.127, -3.127], to: {y: 5.891}}, // K2_0 alt yüz başı
   {mat: /^ceiling\.001$/, min: [1.06, 5.885, -3.135], max: [1.09, 5.976, -2.12], to: {x: 0.872}},  // taşan tavan plakası
+  // Merdiven boşluğunun güney duvarı (çift kabuk z -3,097 / -3,127) tavan altı ile döşeme arasında (y 5,892..6,291)
+  // x 1,079'da bitiyordu; aradaki açığı plakanın z -3,127 ucu ile döşeme burnu örtüyordu. Plaka çekilince K2_0'ın
+  // yeni alt yüzünün altında (x 0,872..1,079, y 5,891..6,05) salonun üstündeki döşeme boşluğuna açılan üçgen delik
+  // kalıyordu: duvarın iki kabuğu ile uç kapağı x 0,872'ye uzar (8 üçgen, köşe taşınır, ışık UV'si aynı).
+  {mat: /^Simple White Wall$/, min: [1.065, 5.885, -3.135], max: [1.095, 6.300, -3.090], to: {x: 0.872}},
 ];
 const TUR10_BAD_RAILS = [
   [[1.722, 4.481, -2.184], [2.046, 6.413, -1.890]], // kollar arası 20 cm boşlukta dikine çubuk (1,98 m)
@@ -312,6 +425,7 @@ function fixTur10Stair(model) {
   const n = new THREE.Vector3(), e = new THREE.Vector3(), inv = new THREE.Matrix4();
   const near = (x, y) => Math.abs(x - y) <= 0.005;
   const inBox = (p, lo, hi) => p.x >= lo[0] && p.x <= hi[0] && p.y >= lo[1] && p.y <= hi[1] && p.z >= lo[2] && p.z <= hi[2];
+  const onPlane = (tri, k, v) => tri.every(p => Math.abs(p[k] - v) < 0.004);
   const rails = TUR10_BAD_RAILS.map(([p, q]) => {const s = new THREE.Vector3(...p), u = new THREE.Vector3(...q).sub(s), L = u.length(); return {s, u: u.divideScalar(L), L};});
   const onRail = tri => rails.some(({s, u, L}) => {
     const k = Math.abs(n.dot(u)); if (k > 0.03 && k < 0.995) return false; // kutu yüzü: eksene dik ya da paralel
@@ -347,8 +461,13 @@ function fixTur10Stair(model) {
       n.normalize(); const tri = [a, b, c];
       if (walnut && onRail(tri)) { count++; continue; }
       if (parquet && tri.every(p => inBox(p, [0.865, 5.965, -3.135], [1.175, 6.300, -2.120])) && Math.max(a.x, b.x, c.x) > 0.875) { count++; continue; }
-      if (parquet && ceiling && Math.abs(n.y) < 0.1 && tri.every(p => inBox(p, [0.215, 5.965, -0.931], [2.945, 6.300, 0.396])) && Math.min(a.y, b.y, c.y) < 5.975
-        && (Math.max(a.x, b.x, c.x) <= 0.871 || tri.every(p => Math.abs(p.z - 0.392) < 0.004))) { white.push(ia, ib, ic); count++; continue; }
+      // Tavan malzemesine geçenler: galeri kenarının üç düzlemi (x 0,219 / z 0,392 / z -0,927) üstteki 6,291..6,371
+      // şeridi dahil bütünüyle (yalnız alt 32 cm'i çevrilince salondan bakınca tavan çizgisinde ince koyu hat kalıyordu);
+      // döşeme kenarı x 0,869 (kollar arası boşluğun ucunda görünür) ve o uçta tavan altındaki 10 x 20 cm cebin tabanı.
+      if (parquet && ceiling && ((Math.abs(n.y) < 0.1 && tri.every(p => inBox(p, [0.215, 5.965, -2.131], [2.945, 6.375, 0.396]))
+          && (onPlane(tri, 'x', 0.219) || onPlane(tri, 'z', 0.392) || (onPlane(tri, 'z', -0.927) && Math.max(a.x, b.x, c.x) <= 0.871)
+            || (onPlane(tri, 'x', 0.869) && Math.max(a.y, b.y, c.y) <= 6.300)))
+        || (n.y < -0.99 && tri.every(p => inBox(p, [0.765, 5.965, -2.131], [0.873, 5.975, -1.923]))))) { white.push(ia, ib, ic); count++; continue; }
       keep.push(ia, ib, ic);
     }
     if (keep.length === idx.count) return;
@@ -444,16 +563,22 @@ const TUR10_EXTRA_CURTAINS = [
   {x: [0.82, 1.38], y: [0.06, 2.52], z: -7.99},
   {x: [2.02, 2.58], y: [0.06, 2.52], z: -7.99},
 ];
+// Kumaş dokusu ("Original damask curtain photograph") bir oda FOTOĞRAFI: perde fotoğrafın sol
+// üstünde (u 0,09..0,17, satır 0,27..0,43). Panel yalnız o bölgeyi örnekler; boyda 3 kez aynalanarak
+// (dikişsiz) tekrarlanır. Doku dönüşümü (KHR_texture_transform, v' = 1 - v) yüzünden v = 1 - satır.
+const CURTAIN_UV = {u: [0.09, 0.17], row: [0.27, 0.43], tiles: 3};
 function pleatedCurtain(axis, along, fixed, y0, y1, width) {
-  const cols = 28, a0 = along - width / 2, amp = 0.035, folds = 5;
+  const cols = 28, a0 = along - width / 2, amp = 0.035, folds = 5, rows = CURTAIN_UV.tiles;
   const pos = [], uv = [], idx = [];
   for (let i = 0; i <= cols; i++) {
     const u = i / cols, s = a0 + u * width, off = amp * Math.sin(u * folds * 2 * Math.PI);
-    for (const [y, v] of [[y0, 0], [y1, 1]]) {
+    for (let r = 0; r <= rows; r++) {
+      const y = y1 - (y1 - y0) * r / rows, t = r % 2;      // üstten alta; t aynalı 0,1,0,1
       if (axis === 'x') pos.push(s, y, fixed + off); else pos.push(fixed + off, y, s);
-      uv.push(u * 2, v * 3);
+      const row = CURTAIN_UV.row[0] + t * (CURTAIN_UV.row[1] - CURTAIN_UV.row[0]);
+      uv.push(CURTAIN_UV.u[0] + u * (CURTAIN_UV.u[1] - CURTAIN_UV.u[0]), 1 - row);
     }
-    if (i < cols) { const k = i * 2; idx.push(k, k + 2, k + 1, k + 1, k + 2, k + 3); }
+    if (i < cols) for (let r = 0; r < rows; r++) { const k = i * (rows + 1) + r, n = k + rows + 1; idx.push(k, n, k + 1, k + 1, n, n + 1); }
   }
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));

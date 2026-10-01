@@ -720,7 +720,11 @@ const TRIM = [
 // tavana kadar beyaz seramik). Kutudaki dik üçgenler hedef malzemeye taşınır, düzlemsel UV.
 const RETILE = [
   {mat: /^(Simple White Wall|EK_SimpleWhiteWall)$/, hedef: 'R31 | R33 ivory wall ceramic', uvm: 3.333,
-    min: [2.78, 4.17, 0.5], max: [4.13, 5.95, 2.43], neden: 'misafir WC bordür üstü beyaz seramik (fotoğraf 39)'},
+    min: [2.78, 4.17, 0.5], max: [4.13, 5.95, 2.43], neden: 'misafir WC bordür üstü beyaz seramik (fotoğraf 39)',
+    // yalnız WC'nin kendi yüzleri: kutu (x 2,78) WC duvarının DIŞ yüzlerini de alıyordu (radyatör arkası x 2,938, pah
+    // x 2,655..2,939, WC kapısının hol yüzü) -> antrede bej-kahve seramik kama (01.10 denetim). Ağırlık merkezi WC
+    // poligonunun (rooms.json f1-S4) içinde ya da kenarına 5 cm'den yakın olmalı; sarılma bu aşamada güvenilmez.
+    oda: [[4.09, 0.55], [4.09, 2.39], [3.36, 2.39], [2.83, 1.87], [3.1, 1.59], [3.1, 0.55]]},
   // bodrum mutfağı tezgah arkası: ZEMİN karosu (terra_floor, 45° çapraz) duvara kaplanmıştı -> 'bakır mozaik' gibi
   // görünüyordu; fotoğraf 1'de bej kare seramik
   {mat: /^terra_floor$/, hedef: 'R31 | R33 ivory wall ceramic', uvm: 3.333,
@@ -731,6 +735,17 @@ const RETILE = [
   {mat: /^ceiling\.001$/, hedef: 'EK_cam_lambri', uvm: 1 / 2.4, yatay: true,
     min: [-5.96, 8.95, -4.26], max: [-1.05, 9.1, -0.05], neden: '1. kat oturma alanı + hol tavanı çam lambri (fotoğraf 12/33)'},
 ];
+// (x, z) poligonun içinde ya da kenarına 5 cm'den yakın
+const odada = (x, z, P) => {
+  let inside = false, d = Infinity;
+  for (let i = 0, j = P.length - 1; i < P.length; j = i++) {
+    const [a, b] = P[i], [e, f] = P[j];
+    if ((b > z) !== (f > z) && x < (e - a) * (z - b) / (f - b) + a) inside = !inside;
+    const ex = e - a, ez = f - b, t = Math.max(0, Math.min(1, ((x - a) * ex + (z - b) * ez) / (ex * ex + ez * ez)));
+    d = Math.min(d, Math.hypot(a + t * ex - x, b + t * ez - z));
+  }
+  return inside || d < 0.05;
+};
 function retileBoxes(doc) {
   const root = doc.getRoot(), buffer = root.listBuffers()[0], scene = root.listScenes()[0];
   for (const rule of RETILE) {
@@ -749,7 +764,7 @@ function retileBoxes(doc) {
           const v = [X(I[t]), X(I[t + 1]), X(I[t + 2])], c = [0, 1, 2].map(k => (v[0][k] + v[1][k] + v[2][k]) / 3);
           const e1 = v[1].map((x, k) => x - v[0][k]), e2 = v[2].map((x, k) => x - v[0][k]);
           const n = [e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]], L = Math.hypot(...n);
-          if (L > 1e-10 && (rule.yatay ? Math.abs(n[1] / L) > 0.9 : Math.abs(n[1] / L) < 0.3) && c.every((x, k) => x >= rule.min[k] && x <= rule.max[k])) out.push({v, n: n.map(x => x / L)});
+          if (L > 1e-10 && (!rule.oda || odada(c[0], c[2], rule.oda)) && (rule.yatay ? Math.abs(n[1] / L) > 0.9 : Math.abs(n[1] / L) < 0.3) && c.every((x, k) => x >= rule.min[k] && x <= rule.max[k])) out.push({v, n: n.map(x => x / L)});
           else keep.push(I[t], I[t + 1], I[t + 2]);
         }
         if (keep.length !== I.length) prim.setIndices(doc.createAccessor().setType('SCALAR').setArray(Uint32Array.from(keep)).setBuffer(buffer));
@@ -1512,10 +1527,24 @@ async function addFurniture(doc) {
   // görünen yanları kara pişiyordu (bodrum salonundan görünen merdiven altı simsiyah). Kol gövdeleri:
   // A z -3,127..-2,127, B z -1,927..-0,927; yan yüz gövdenin DIŞINA bakar.
   const M = /^EK_M2_Beyaz_merdiven_alti$/, X = [0.5, 4.3], Y = [-0.3, 9.5];
+  // Denetim 01.10 (salon): pencere/kapı söveleri ve asansör nişinin doğu yüzü duvarın İÇİNE bakıyordu (söve oda
+  // poligonunun dışında; ışın testini kasa ve içi boş duvar gövdesi yanılttı) -> kara pişti, perde ve kolon yanında
+  // kara kama. Söve açıklığın ortasına bakar: sol söve +eksen, sağ söve -eksen.
+  const sove = (axis, s, d, y, sign) => ({mat: /^(Simple White Wall|Stucco painted wall|WHT\.001)$/,
+    min: axis === 'x' ? [s - 0.012, y[0], d[0]] : [d[0], y[0], s - 0.012], max: axis === 'x' ? [s + 0.012, y[1], d[1]] : [d[1], y[1], s + 0.012],
+    want: axis === 'x' ? [sign, 0, 0] : [0, 0, sign]});
+  const GUNEY = [-8.30, -8.04], BATI = [-5.85, -5.59];
+  const TERS_SOVE = [
+    sove('x', -4.242, GUNEY, [3.3, 5.0], 1), sove('x', -3.041, GUNEY, [3.3, 5.0], -1),    // salon güney penceresi
+    sove('x', -1.586, GUNEY, [3.0, 5.0], 1), sove('x', -0.387, GUNEY, [3.0, 5.0], -1),    // balkon kapısı
+    sove('x', 1.088, GUNEY, [3.3, 5.0], 1), sove('x', 2.288, GUNEY, [3.3, 5.0], -1),      // salon doğu penceresi
+    sove('z', -2.927, BATI, [3.6, 5.3], 1), sove('z', -1.127, BATI, [3.6, 5.3], -1),      // yemek alanı batı penceresi
+    {mat: /^Simple White Wall$/, min: [-1.222, 3.0, -1.72], max: [-1.205, 5.95, -0.19], want: [-1, 0, 0]},   // asansör nişi
+  ];
   const zSide = (z, s) => ({mat: M, min: [X[0], Y[0], z - 0.01], max: [X[1], Y[1], z + 0.01], want: [0, 0, s]});
   const yon = orientForBake(doc, new Set(Object.values(ATLASES).flatMap(s => s.malzemeler)),
     JSON.parse(readFileSync(path.join(REPO, 'build/web/full/rooms.json'), 'utf8')).spaces,
-    [zSide(-3.127, -1), zSide(-2.127, 1), zSide(-1.927, -1), zSide(-0.927, 1)]);
+    [zSide(-3.127, -1), zSide(-2.127, 1), zSide(-1.927, -1), zSide(-0.927, 1), ...TERS_SOVE]);
   console.log(`merdiven yan yüzleri zorla dışa: ${yon.zorla ?? 0} üçgen`);
   console.log(`pişirme yönü: ${yon.cevrilen} üçgen (${yon.cevrilen_alan.toFixed(0)} m² / ${yon.alan.toFixed(0)} m²) görünen yana çevrildi, şüpheli ${yon.supheli_alan.toFixed(1)} m²`);
   const spec = lightmapUV(doc);

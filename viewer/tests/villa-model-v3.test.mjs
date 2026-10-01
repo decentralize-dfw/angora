@@ -147,12 +147,12 @@ test('zemin v3: arazi normalli dosya, bayrak kapalıyken v2', () => {
 
 import * as THREE from 'three';
 import {retileTur10} from '../src/villa-model-v3.js';
-test('antre: WC seramiğinin antre yüzü beyaz duvara çevrilir, beyaz duvarın altında kırpılır, ışık UV ve atlas korunur', () => {
+test('antre: WC seramiğinin antre yüzü beyaz duvara çevrilir, WC içine bakan seramik kalır, ışık UV ve atlas korunur', () => {
   const model = new THREE.Group();
   const tri = (pts) => { const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pts.flat(), 3));
     g.setAttribute('uv1', new THREE.Float32BufferAttribute(pts.map((p, i) => [i * .1, p[1] * .01]).flat(), 2)); g.setIndex(pts.map((_, i) => i)); return g; };
-  // -x'e bakan panel üçgeni (y 3,4..5,8) + kutu dışında bir üçgen
-  const ceramic = new THREE.Mesh(tri([[2.938, 3.4, 0.4], [2.938, 3.4, 1.4], [2.938, 5.8, 1.4], [3.098, 4.3, 0.6], [3.098, 4.3, 1.5], [3.098, 5.7, 0.6]]),
+  // antreye (-x) bakan panel üçgeni + WC'nin içine (+x) bakan kendi seramiği
+  const ceramic = new THREE.Mesh(tri([[2.938, 3.4, 0.4], [2.938, 3.4, 1.4], [2.938, 5.8, 1.4], [3.098, 4.3, 0.6], [3.098, 5.7, 0.6], [3.098, 4.3, 1.5]]),
     new THREE.MeshStandardMaterial({name: 'R31 | R33 ivory wall ceramic'}));
   ceramic.userData.lightmap = {atlas: 'zemin', texcoord: 1};
   const white = new THREE.Mesh(tri([[0, 0, 0], [0, 1, 0], [0, 0, 1]]), new THREE.MeshStandardMaterial({name: 'Simple White Wall', color: 0xf0eee8}));
@@ -168,7 +168,8 @@ test('antre: WC seramiğinin antre yüzü beyaz duvara çevrilir, beyaz duvarın
   assert.ok(added); assert.equal(added.material.name, 'Simple White Wall'); assert.notEqual(added.material, white.material);
   assert.deepEqual(added.userData.lightmap, {atlas: 'zemin', texcoord: 1});
   const p = added.geometry.attributes.position;
-  for (let i = 0; i < p.count; i++) assert.ok(p.getY(i) <= 5.2 + 1e-6);
+  for (let i = 0; i < p.count; i++) assert.ok(Math.abs(p.getX(i) - 2.938) < 1e-6);
+  assert.equal(p.count, 3);
   assert.ok(added.geometry.attributes.uv1);
   assert.equal(p.count % 3, 0);
 });
