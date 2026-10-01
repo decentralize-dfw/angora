@@ -78,7 +78,9 @@ export function orientForBake(doc, materials, rooms, force = []) {
       else if (Math.abs(n[1]) < 0.5) {
         const k = roomFloor(c[1]), room = d => roomPolys[k].some(P => inPoly(c[0] + n[0] * d, c[2] + n[2] * d, P));
         const f = room(0.08), r = room(-0.08);
-        if (f !== r) {flip = r; stats.oda++;}
+        // dış cephe sıvası/çatı/çakıl ODAYA DEĞİL dışarıya bakar: oda poligonu duvarın dış yüzüne
+        // taştığı yerde (pencere söveleri) cephe üçgeni içe çevrilip kapkara pişiyordu (01.10).
+        if (f !== r) {flip = /^(Stucco painted wall|roof-7|Stone gravel)$/.test(mname) ? f : r; stats.oda++;}
       }
       if (flip === null) {
         const off = s => c.map((x, k) => x + n[k] * 1e-3 * s);

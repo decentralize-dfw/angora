@@ -41,6 +41,11 @@ export const LIGHTMAP_GAINS = {sky: 0.62, sun: 12, night: 0.55, interior: 11, in
   // 30.09 fotoğraf karşılaştırması (bodrum salonu, aynı kamera): duvar 5 kat karanlık ve kahveye
   // kaymıştı, tavan doğruydu -> duvar atlasına ayrı kazanç, sekme rengi %60 nötr.
   atlas: {duvar: 4, zemin: 2.6},
+  // Gök ışığının alt sınırı (kodlanmış dokunun karesi cinsinden). Tur 10 pişirmesinde dış cephe
+  // sıvasının bazı üçgenleri pişirmeden önce içe çevrilmişti (oda poligonu duvarın dışına taşıyordu)
+  // ve duvarın içinden, kapkara pişti: pencere köşelerinden inen siyah kamalar. Doğru pişirme
+  // gelene kadar cephe hiçbir yerde gök ışığının bu oranının altına düşmez.
+  floor: {cephe: 0.3},
   // iç mekân beyaz dengesi: fotoğraflar sıcak ışıkta; pencereden giren gök ışığı parkeyi morarttı
   // 01.10 GPU karşılaştırması (40 foto, qa-foto-v3): pencereli odalar 0,9-1,1, penceresiz hol/antre/WC/garaj
   // 0,4-0,6 parlaklıkta; fotoğraf r/b ~1,4, model ~1,15. Fotoğraflar lambalar YANARKEN çekilmiş: gündüz de
@@ -67,7 +72,7 @@ const LIGHTMAP_FRAGMENT = THREE.ShaderChunk.lights_fragment_maps
 		vec3 lmSky = lmSkyT * lmSkyT * lmSkyScale;
 		vec3 lmSun = mix( lmSunAT * lmSunAT * lmSunAScale, lmSunBT * lmSunBT * lmSunBScale, lmSunMix );
 		float lmSkyL = dot( lmSky, vec3( 0.2126, 0.7152, 0.0722 ) ), lmSunL = dot( lmSun, vec3( 0.2126, 0.7152, 0.0722 ) );
-		lmSky = mix( lmSky, vec3( lmSkyL ), lmDesat );
+		lmSky = max( mix( lmSky, vec3( lmSkyL ), lmDesat ), lmSkyScale * lmFloor );
 		vec3 lmBaked = mix( lmSun, vec3( lmSunL ), lmDesat ) + lmNightT * lmNightT * lmNightScale;
 		irradiance = mix( irradiance, lmSky * PI, lmSkyStrength ) + lmBaked * PI * lmOn;`)
   .replace('iblIrradiance += getIBLIrradiance( geometryNormal );',
@@ -92,6 +97,7 @@ export function createVillaLightmaps({renderer, root, spec: deliverySpec = spec}
       lmSkyScale: {value: new THREE.Color(0, 0, 0)}, lmSunAScale: {value: new THREE.Color(0, 0, 0)},
       lmSunBScale: {value: new THREE.Color(0, 0, 0)}, lmNightScale: {value: new THREE.Color(0, 0, 0)},
       lmDesat: {value: INTERIOR_ATLASES.has(name) ? LIGHTMAP_GAINS.interiorDesat : 0},
+      lmFloor: {value: LIGHTMAP_GAINS.floor[name] ?? 0},
     }, materials: new Set(), interior: INTERIOR_ATLASES.has(name)});
   }
   const state = {hour: 13, daylight: 1, sun: new THREE.Color(1, 1, 1), sunIntensity: 3, sky: new THREE.Color(1, 1, 1),
@@ -186,7 +192,7 @@ export function createVillaLightmaps({renderer, root, spec: deliverySpec = spec}
             .replace('#include <lightmap_pars_fragment>', `#include <lightmap_pars_fragment>
 uniform sampler2D lmSunA, lmSunB, lmNight;
 uniform vec3 lmSkyScale, lmSunAScale, lmSunBScale, lmNightScale;
-uniform float lmSkyStrength, lmOn, lmSunMix, lmDesat;`)
+uniform float lmSkyStrength, lmOn, lmSunMix, lmDesat, lmFloor;`)
             .replace('#include <lights_fragment_maps>', LIGHTMAP_FRAGMENT)
             // armatürlerin ışığı gece haritasında: canlı spot/point bu yüzeye bir daha düşmesin
             .replaceAll('NUM_SPOT_LIGHTS', '0').replaceAll('NUM_POINT_LIGHTS', '0');
