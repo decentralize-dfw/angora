@@ -27,6 +27,8 @@ MAPS = dunya.MAPS
 K = 16
 R = 0.10     # m
 ORTU = 0.13  # m
+KIL = 0.006  # m: üçgen yüksekliği bunun altındaysa (ve uzun kenarı > 15 cm) kıl üçgen
+GENIS = 0.05  # m²
 SONUK = (12 / 255, 24 / 255)   # örtülü VE sönük (gök, gece ortalaması): görünen duvar 25..55 / 50..60
 
 
@@ -57,7 +59,15 @@ def main(trisf, src, dst, *atlases):
         if os.path.exists(durum):
             d = np.load(durum)
             if d.shape[1] == len(P): kara |= (np.where(d[0] > 0, d[6], d[5]) < ORTU) & (means['gok'] < SONUK[0]) & (means['gece'] < SONUK[1])
-        rapor[atlas] = {'kara_ucgen': int(kara.sum())}
+        # Kıl üçgenler: köşe pahları (ör. merdiven alt yüzü ile sahanlık altı arasında 3 mm'lik 3 dilimli pah) atlasta
+        # yarım teksel genişliğinde şerit; örnekleme oluk/komşu parçayla karışıyor (gök 2..24), uzaktan bakınca
+        # kenar boyunca kesik kesik koyu/açık noktalar. Onlar da en yakın geniş yüzün tekselleriyle (iki yanın ortalaması).
+        e = np.stack([np.linalg.norm(P[:, (i + 1) % 3] - P[:, i], axis=1) for i in range(3)], 1)
+        alt = 2 * np.linalg.norm(np.cross(P[:, 1] - P[:, 0], P[:, 2] - P[:, 0]), axis=1) / 2 / np.maximum(e.max(1), 1e-9)
+        kil = (alt < KIL) & (e.max(1) > 0.15) & ~kara
+        alan = np.linalg.norm(np.cross(P[:, 1] - P[:, 0], P[:, 2] - P[:, 0]), axis=1) / 2
+        rapor[atlas] = {'kara_ucgen': int(kara.sum()), 'kil_ucgen': int(kil.sum())}
+        kara = kara | kil
         for m, im in imgs.items():
             W = im.shape[0]; ids, ys, xs, tt, pos = cache[W]
             # kaynak: kara OLMAYAN üçgenlerin bütün tekselleri (güneş haritasında gölgedeki 0 da kaynak: önündeki
@@ -65,11 +75,20 @@ def main(trisf, src, dst, *atlases):
             hedef = kara[tt]; kaynak = ~hedef
             if not hedef.any() or not kaynak.any(): continue
             tree = cKDTree(pos[kaynak]); dist, j = tree.query(pos[hedef], k=K, distance_upper_bound=R)
+            # kıl üçgenler yalnız GENİŞ yüzlerden (> GENIS m²) ve 15 cm'ye kadar: hemen yanındaki öbür pah dilimleri /
+            # köşedeki dar yüzler de kenar karanlığı taşıyor
+            genis = kaynak & (alan[tt] > GENIS); kh = kil[tt[hedef]]
+            if genis.any() and kh.any():
+                t2 = cKDTree(pos[genis]); d2, j2 = t2.query(pos[hedef][kh], k=K, distance_upper_bound=0.15)
+                remap = np.searchsorted(np.nonzero(kaynak)[0], np.nonzero(genis)[0])   # genis içindeki sıra -> kaynak sırası
+                j2 = np.where(np.isfinite(d2), remap[np.minimum(j2, len(remap) - 1)], len(np.nonzero(kaynak)[0]))
+                dist[kh] = d2; j[kh] = j2
             ok = np.isfinite(dist); has = ok.any(1)
             jj = np.where(ok, j, 0)
             # aynı yöne bakan (paralel kabuk) kaynak öncelikli: arka kabuk önündeki kabuğun rengini alsın,
             # köşedeki dik duvarın / merdivenin değil
             ks = np.nonzero(kaynak)[0]; same = (N[tt[hedef]][:, None, :] * N[tt[ks[jj]]]).sum(2) > 0.9
+            same |= kil[tt[hedef]][:, None]   # kıl üçgen: iki yanın ortalaması (paralel kabuk önceliği yok)
             w = np.where(ok, np.where(same, 1.0, 0.03) / (dist + 0.005) ** 2, 0)[has]; w /= w.sum(1, keepdims=True)
             lin = im ** 2; ky, kx = ys[kaynak], xs[kaynak]
             val = (lin[ky[jj[has]], kx[jj[has]]] * w[..., None]).sum(1)

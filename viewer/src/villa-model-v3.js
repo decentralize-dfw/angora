@@ -387,12 +387,18 @@ const TUR10_BORROW = [
   {cap: {y: 5.891, min: [0.765, -2.131], max: [0.873, -1.923]},
     source: {mat: /^ceiling\.001$/, atlas: 'zemin', min: [-1.5, 5.885, -3.2], max: [0.9, 5.895, -1.4], facing: [0, -1, 0]}},
   {mats: /^(WHT\.001|Simple White Wall|Stucco painted wall|Stone gravel)$/, min: [4.25, 2.98, 1.04], max: [7.53, 6.02, 1.45], notFacing: [0, 0, -1],
-    source: {mat: /^Stucco painted wall$/, atlas: 'cephe', min: [7.0, 2.98, 1.39], max: [7.6, 6.0, 1.41], facing: [0, 0, 1]}, material: 'source'},
-  // garajın sol üstünde evin yan cephesi (x 4,32, y 5,97..6,37) üçgenleri tam oturmuyor (T-birleşim, yukarı
-  // doğru incelen kıl çatlak); çatlaktan 20 cm arkadaki iç duvar kabuğu (x 4,12, döşeme boşluğunda, kapkara
-  // pişmiş) ince çapraz kara çizgi olarak görünüyordu. O kabuk da cephe sıvası ve cephe ışığıyla okunur.
-  {mats: /^Simple White Wall$/, min: [4.10, 5.96, 0.50], max: [4.14, 6.38, 4.30],
-    source: {mat: /^Stucco painted wall$/, atlas: 'cephe', min: [4.31, 5.96, 1.0], max: [4.33, 6.38, 4.30], facing: [1, 0, 0]}, material: 'source'},
+    source: {mat: /^Stucco painted wall$/, atlas: 'cephe', min: [7.0, 2.98, 1.39], max: [7.6, 6.0, 1.41], facing: [0, 0, 1]}, material: 'source', uvScale: 2.35},
+  // Garajın sol üstünde evin yan cephesinin garaj damı üstünde kalan 40 cm'lik şeridi (x 4,32, y 5,97..6,37, +x)
+  // sokaktan yatık açıyla ince koyu çapraz çizgi gibi görünüyordu (pişirmede dam ile döşeme arasında gölgede):
+  // o şerit de garajın sağ ayağının ışığıyla.
+  {mats: /^Stucco painted wall$/, min: [4.30, 5.96, 0.50], max: [4.34, 6.38, 4.30], notFacing: [-1, 0, 0],
+    source: {mat: /^Stucco painted wall$/, atlas: 'cephe', min: [7.0, 2.98, 1.39], max: [7.6, 6.0, 1.41], facing: [0, 0, 1]}, material: 'source', uvScale: 2.35},
+  // 01.10 merdiven (A, sol üst işaret): K2 kolunun alt yüzü ile sahanlık altının birleştiği köşede 3 mm'lik
+  // üç dilimli pah ve kenar şeritleri (kıl üçgenler). Atlasta yarım teksel genişliğinde, ışıkları komşu parça /
+  // oluk ile karışmış (gök 0..24); merdivenden bakınca kenar boyunca kesik kesik koyu noktalar. Merdiven
+  // boşluğundaki kıl üçgenler en yakın geniş yüzün (> 0,05 m²) kenardan 4 cm içerideki ışığını okur.
+  {sliver: true, mats: /^(EK_M2_Beyaz_merdiven_alti|Simple White Wall)$/, min: [0.5, 3.0, -3.5], max: [4.2, 9.6, 0.6], inset: 0.04,
+    source: {mat: /^(EK_M2_Beyaz_merdiven_alti|Simple White Wall)$/, atlas: 'duvar', min: [0.4, 2.9, -3.6], max: [4.3, 9.7, 0.7], minArea: 0.05}, material: 'target'},
   {mats: /^WHT\.001$/, min: [4.40, 5.40, -2.30], max: [7.26, 5.75, 0.66],
     source: {mat: /^ceiling\.001$/, atlas: 'zemin', min: [4.0, 5.88, -6.0], max: [7.4, 5.90, 1.2], facing: [0, -1, 0]}, material: 'target'},
 ];
@@ -414,7 +420,9 @@ export function borrowTur10(model) {
       const idx = o.geometry.index, uv = o.geometry.attributes.uv, uv1 = o.geometry.attributes.uv1;
       for (let t = 0; t < idx.count; t += 3) {
         const ids = [idx.getX(t), idx.getX(t + 1), idx.getX(t + 2)], w = ids.map(i => world(o, i));
-        if (!inBox(w, rule.source.min, rule.source.max) || normal(w).dot(new THREE.Vector3(...rule.source.facing)) < 0.9) continue;
+        if (!inBox(w, rule.source.min, rule.source.max)) continue;
+        if (rule.source.facing && normal(w).dot(new THREE.Vector3(...rule.source.facing)) < 0.9) continue;
+        if (rule.source.minArea && new THREE.Triangle(...w).getArea() < rule.source.minArea) continue;
         src.push({o, tri: new THREE.Triangle(...w), uv: uv && ids.map(i => new THREE.Vector2().fromBufferAttribute(uv, i)), uv1: ids.map(i => new THREE.Vector2().fromBufferAttribute(uv1, i))});
         used.add(o.uuid + ':' + t);
       }
@@ -424,13 +432,34 @@ export function borrowTur10(model) {
     const p = new THREE.Vector3(), q = new THREE.Vector3(), bary = new THREE.Vector3();
     const nearest = c => src.reduce((best, s) => { s.tri.closestPointToPoint(c, q); const d = q.distanceToSquared(c); return d < best.d ? {s, d} : best; }, {s: null, d: Infinity}).s;
     const lookup = (s, v, key) => { s.tri.closestPointToPoint(v, q); s.tri.getBarycoord(q, bary); return new THREE.Vector2().addScaledVector(s[key][0], bary.x).addScaledVector(s[key][1], bary.y).addScaledVector(s[key][2], bary.z); };
+    // kenardan içeri: en yakın noktadan kaynak üçgenin ağırlık merkezine doğru `inset` m (köşedeki kenar
+    // teksellerinin gölgesi/oluğu yerine yüzün kendi ışığı)
+    const inset = (s, v) => {
+      s.tri.closestPointToPoint(v, q); const c = s.tri.getMidpoint(new THREE.Vector3()), d = c.sub(q), L = d.length();
+      if (L > 1e-6) q.addScaledVector(d, Math.min(rule.inset, L * 0.9) / L);
+      s.tri.getBarycoord(q, bary);
+      return new THREE.Vector2().addScaledVector(s.uv1[0], bary.x).addScaledVector(s.uv1[1], bary.y).addScaledVector(s.uv1[2], bary.z);
+    };
+    // doku UV'si (sıva dokusu tekrarlı, ~2,35 UV/m): kaynağa paralel yüzde kaynağın düzlemsel eşlemesi kenetsiz
+    // sürdürülür (desen dikişsiz devam eder); dik yüzde (söve içi, alın) kendi baskın ekseninde aynı ölçekle kutu
+    // eşleme. En yakın noktaya kenetlemek dik yüzlerde dokuyu tek çizgiye çekip dikey çizgiler yapıyordu.
+    const texUV = (s, v, n) => {
+      const sn = s.tri.getNormal(new THREE.Vector3());
+      if (Math.abs(sn.dot(n)) > 0.7) {
+        const off = sn.dot(new THREE.Vector3().subVectors(v, s.tri.a));
+        s.tri.getBarycoord(q.copy(v).addScaledVector(sn, -off), bary);
+        return new THREE.Vector2().addScaledVector(s.uv[0], bary.x).addScaledVector(s.uv[1], bary.y).addScaledVector(s.uv[2], bary.z);
+      }
+      const k = rule.uvScale ?? 1, ax = Math.abs(n.x) >= Math.abs(n.y) && Math.abs(n.x) >= Math.abs(n.z) ? 'x' : Math.abs(n.y) >= Math.abs(n.z) ? 'y' : 'z';
+      return ax === 'x' ? new THREE.Vector2(v.z * k, v.y * k) : ax === 'y' ? new THREE.Vector2(v.x * k, v.z * k) : new THREE.Vector2(v.x * k, v.y * k);
+    };
     if (rule.cap) {   // kapak: y = cap.y düzleminde aşağı bakan dikdörtgen, ışığı ve dokusu kaynaktan
       const {y, min: [x0, z0], max: [x1, z1]} = rule.cap, c = [[x0, z0], [x1, z0], [x1, z1], [x0, z1]].map(([x, z]) => new THREE.Vector3(x, y, z));
       const P = [], N = [], U = [], U1 = [], nl = new THREE.Vector3(0, -1, 0).applyMatrix3(new THREE.Matrix3().getNormalMatrix(home.matrixWorld).invert()).normalize();
       for (const w of [[c[0], c[1], c[2]], [c[0], c[2], c[3]]]) {
         const s = nearest(p.copy(w[0]).add(w[1]).add(w[2]).divideScalar(3));
         for (const v of w) {
-          const l = v.clone().applyMatrix4(inv), uv = s.uv ? lookup(s, v, 'uv') : new THREE.Vector2(), uv1 = lookup(s, v, 'uv1');
+          const l = v.clone().applyMatrix4(inv), uv = s.uv ? texUV(s, v, new THREE.Vector3(0, -1, 0)) : new THREE.Vector2(), uv1 = lookup(s, v, 'uv1');
           P.push(l.x, l.y, l.z); N.push(nl.x, nl.y, nl.z); U.push(uv.x, uv.y); U1.push(uv1.x, uv1.y);
         }
       }
@@ -451,7 +480,11 @@ export function borrowTur10(model) {
       const g = o.geometry, idx = g.index, keep = [], take = [];
       for (let t = 0; t < idx.count; t += 3) {
         const ids = [idx.getX(t), idx.getX(t + 1), idx.getX(t + 2)], w = ids.map(i => world(o, i));
-        const ok = !used.has(o.uuid + ':' + t) && inBox(w, rule.min, rule.max) && !(away && normal(w).dot(away) > 0.5);
+        let ok = !used.has(o.uuid + ':' + t) && inBox(w, rule.min, rule.max) && !(away && normal(w).dot(away) > 0.5);
+        if (ok && rule.sliver) {   // yalnız kıl üçgen: yüksekliği < 6 mm, uzun kenarı > 15 cm
+          const L = Math.max(w[0].distanceTo(w[1]), w[1].distanceTo(w[2]), w[2].distanceTo(w[0]));
+          ok = L > 0.15 && 2 * new THREE.Triangle(...w).getArea() / L < 0.006;
+        }
         if (ok) take.push({ids, w}); else keep.push(...ids);
       }
       if (!take.length) continue;
@@ -459,11 +492,11 @@ export function borrowTur10(model) {
       const nm = new THREE.Matrix3().getNormalMatrix(own ? o.matrixWorld : home.matrixWorld).invert();
       const P = [], N = [], U = [], U1 = [];
       for (const {ids, w} of take) {
-        const s = nearest(p.copy(w[0]).add(w[1]).add(w[2]).divideScalar(3)), n = normal(w).applyMatrix3(nm).normalize();
+        const s = nearest(p.copy(w[0]).add(w[1]).add(w[2]).divideScalar(3)), nw = normal(w), n = nw.clone().applyMatrix3(nm).normalize();
         w.forEach((v, k) => {
           const l = v.clone().applyMatrix4(frame); P.push(l.x, l.y, l.z); N.push(n.x, n.y, n.z);
-          const uv = own || !s.uv ? (g.attributes.uv ? new THREE.Vector2().fromBufferAttribute(g.attributes.uv, ids[k]) : new THREE.Vector2()) : lookup(s, v, 'uv');
-          const uv1 = lookup(s, v, 'uv1'); U.push(uv.x, uv.y); U1.push(uv1.x, uv1.y);
+          const uv = own || !s.uv ? (g.attributes.uv ? new THREE.Vector2().fromBufferAttribute(g.attributes.uv, ids[k]) : new THREE.Vector2()) : texUV(s, v, nw);
+          const uv1 = rule.inset ? inset(s, v) : lookup(s, v, 'uv1'); U.push(uv.x, uv.y); U1.push(uv1.x, uv1.y);
         });
       }
       const geometry = new THREE.BufferGeometry();
@@ -472,7 +505,7 @@ export function borrowTur10(model) {
       geometry.setAttribute('uv', new THREE.Float32BufferAttribute(U, 2));
       geometry.setAttribute('uv1', new THREE.Float32BufferAttribute(U1, 2));
       const base = own ? o : home, mesh = new THREE.Mesh(geometry, base.material);
-      mesh.name = o.name + '_cephe_isigi';
+      mesh.name = o.name + (own ? '_isik' : '_cephe_isigi');
       mesh.userData = JSON.parse(JSON.stringify(base.userData));
       mesh.position.copy(base.position); mesh.quaternion.copy(base.quaternion); mesh.scale.copy(base.scale);
       mesh.castShadow = o.castShadow; mesh.receiveShadow = o.receiveShadow;

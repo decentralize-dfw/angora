@@ -26,6 +26,12 @@ KURALLAR = [
     # merdiven boşluğunun güney duvarı (z -3,097, +z'ye bakar), K1_0 kolunun temas çizgisi boyunca
     {'ad': 'merdiven-temas', 'tur': 'yumusat', 'atlas': 'duvar', 'normal': [0, 0, 1], 'duzlem': -3.097,
      'kutu': [[0.78, 3.0, -3.10], [3.40, 5.10, -3.09]], 'r': 0.10},
+    # aynı duvarın 1. kat döşeme hizası (y 5,89 tavan altı .. 6,37 döşeme üstü): pişirmede örnek noktaları
+    # duvara gömülü döşeme plağının içine düşmüş, merdiven boşluğunda kalan görünen duvarda yatay kara
+    # lekeler şeridi; merdivenden yatık bakınca kesik kesik çizgi (A, sol üst işaret). Şerit, üstündeki ve
+    # altındaki duvarla doldurulur.
+    {'ad': 'doseme-hizasi', 'tur': 'sil', 'atlas': 'duvar', 'normal': [0, 0, 1], 'duzlem': -3.097,
+     'kutu': [[0.75, 5.80, -3.10], [4.10, 6.48, -3.09]], 'yaricap': 0.5},
 ]
 
 
