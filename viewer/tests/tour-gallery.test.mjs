@@ -44,13 +44,16 @@ test('bir, iki veya üç kare - hepsi kaydırmasız sığar', () => {
     'kaydırma olmamalı');
 });
 
-test('kareler %80 - yanlarda ve üstte/altta %10 boşluk, köşeler yuvarlak', () => {
+test('kareler HER ZAMAN 4:3, sütunun ortasında, köşeler yuvarlak', () => {
+  // 01.10: "tek fotoğraf yayıldığı için... her birisi 4:3 formattan bozulmamalı.
+  // dikey 3 yatay 4" - tek kare sütunun tamamına yayılıp basık bir şerit oluyordu.
   const figure = css.match(/#app\[data-tour=true\] \.tour-gallery figure\{([\s\S]*?)\}/);
   assert.ok(figure, 'telefon kare kuralı yok');
-  assert.match(figure[1], /width:80%/, 'yanlarda %10+%10 = arada %20');
-  assert.match(figure[1], /height:80%/, 'üstte ve altta %10');
-  assert.match(figure[1], /margin:auto/, 'kare sütununun ortasında yüzmeli');
+  assert.match(figure[1], /width:min\(84%,calc\(/, 'genişlik sütun ve bant yüksekliğinden küçük olanı');
+  assert.match(figure[1], /height:auto/, 'yükseklik 4:3 görüntüden gelir');
+  assert.match(figure[1], /margin:0 auto/, 'kare sütununun ortasında');
   assert.match(figure[1], /border-radius:\d+px/, 'köşeler yuvarlak olmalı');
+  assert.match(css, /#app\[data-tour=true\] \.tour-gallery img\{[^}]*aspect-ratio:4\/3/, 'görüntü 4:3');
 });
 
 test('kareler yandan değil, marka çubuğunun altından AŞAĞI düşer', () => {
@@ -63,13 +66,12 @@ test('kareler yandan değil, marka çubuğunun altından AŞAĞI düşer', () =>
     'masaüstü yatay girişini korumalı');
 });
 
-test('marka çubuğu YERİNDE kalır, şerit onun altına iner', () => {
-  // "fakat MERGVS Angora 21 vs alt tarafa atılmasın, o üstte kalsın"
+test('şerit en üstten başlar, üstte boşluk kalmaz', () => {
+  // 01.10: telefonda marka satırı kalktı, turda üst düğmeler de çekiliyor -
+  // eski 52 px'lik pay boş bir bant bırakıyordu ("üst alanda çok boşluk").
   assert.ok(!/#app\[data-tour=true\][^{]*\.topbar\s*\{/.test(css),
-    'turda marka çubuğu yerinden oynatılmamalı');
-  assert.match(css, /#app\[data-tour=true\] \.tour-gallery\{[\s\S]*?top:calc\(max\(12px,env\(safe-area-inset-top\)\) \+ 52px\)/);
-  // Görünüm başlığı native telefonda top:112px - tam bandın içi. Turda
-  // çekilmezse şeridin altında kalırdı.
+    'turda üst çubuk yerinden oynatılmamalı');
+  assert.match(css, /#app\[data-tour=true\] \.tour-gallery\{[\s\S]*?top:max\(10px,env\(safe-area-inset-top\)\)/);
   assert.match(css, /#app\[data-tour=true\] \.view-description\{opacity:0/);
 });
 

@@ -288,16 +288,20 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
     display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:0;
     left:0;right:0;width:auto;max-width:none;transform:none;
     /* Marka çubuğu YERİNDE KALIR, şerit onun altına iner. */
-    top:calc(max(12px,env(safe-area-inset-top)) + 52px);
-    height:15dvh;overflow:visible;pointer-events:none}
+    /* Marka satırı telefonda artık yok (turda üst düğmeler de çekiliyor): şerit en üstten başlar. */
+    top:max(10px,env(safe-area-inset-top));
+    height:22dvh;overflow:visible;pointer-events:none;align-items:start}
   #app[data-tour=true] .tour-gallery[hidden]{display:none}
   /* %80 kare: yanlarda %10+%10 (aralarında %20), üstte ve altta %10.
      margin:auto olduğu için kare kendi sütununun tam ortasında yüzer. */
+  /* Kare HER ZAMAN 4:3 (yatay 4, dikey 3): tek fotoğrafta sütunun tamamına yayılıp
+     şerit gibi basıktı. Genişlik sütunun %84'ü ile bandın yüksekliğinin izin verdiği
+     4:3 genişlikten küçük olanı; yükseklik görüntünün kendi oranından gelir. */
   #app[data-tour=true] .tour-gallery figure{
-    width:80%;height:80%;margin:auto;display:flex;flex-direction:column;
+    width:min(84%,calc((19.8dvh - 20px) * 4 / 3));height:auto;margin:0 auto;display:flex;flex-direction:column;
     border-radius:12px}
   #app[data-tour=true] .tour-gallery img{
-    flex:1 1 auto;min-height:0;width:100%;height:auto;aspect-ratio:auto}
+    flex:0 0 auto;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
   #app[data-tour=true] .tour-gallery figcaption{
     flex:0 0 auto;align-items:center;gap:5px;padding:3px 7px 4px;
     font-size:9px;white-space:nowrap;overflow:hidden}

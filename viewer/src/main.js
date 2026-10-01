@@ -488,6 +488,10 @@ function frame(initial=false,keep=false) {
   const polar=planMode?.0001:selected==='region'?.58:floor?.56:.78;
   const insets=floor?floorFrameInsets():{verticalFraction:1,horizontalFraction:1};
   frameSpan=Math.max((size.z*Math.cos(polar)+size.y*Math.sin(polar))/insets.verticalFraction,size.x/aspect/insets.horizontalFraction)*(floor?1.08:1.14);
+  // Bölgede 3B sahne yalnız geçiş için geri çekilir; genişliğe göre sığdırınca dar
+  // telefon ekranında masaüstünün 2,2 katı uzaklaşıyordu (eski "5 kat" geçişi telefonda
+  // kalmıştı). Telefon da masaüstüyle aynı mesafeye çekilir: yalnız derinlik ölçüsü.
+  if(selected==='region')frameSpan=(size.z*Math.cos(polar)+size.y*Math.sin(polar))*1.14;
   const rigFov=rigFovFor(selected,{enabled:FEATURES.cameraRigsV2});
   // (bölge çerçevesi yukarıda: yakın çevrenin 2 katı - fitContextBounds artık kullanılmaz)
   if(keep){center.copy(controls.target);if(floor)center.y=[0,3.0996,6.3714,9.4705][Number(selected[1])];frameSpan=camera.position.distanceTo(controls.target)*2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2));}
@@ -922,8 +926,8 @@ async function selectView(id, initial = false) {
   // The Bölge scale is a north-up map layer; the clouds sweep while the 3D
   // frame pulls out beneath it, so the model leaves smoothly either way.
   if (id==='region') {
-    await ensureRegionMap();
-    regionMap.show(initial ? 0 : 180);
+    try{await ensureRegionMap();}catch(error){console.warn(error);message(t('loadFailed'),true);return;}
+    regionMap.show(initial ? 0 : 90);
   } else regionMap?.hide();
   panel('',false);
   if (!ready) return;
@@ -946,11 +950,11 @@ async function selectView(id, initial = false) {
   if (initial || matchMedia('(prefers-reduced-motion: reduce)').matches) {
     clip.constant = target; transition = null;
   } else {
-    transition = {from:clip.constant, to:target, start:performance.now(), span:950};
+    transition = {from:clip.constant, to:target, start:performance.now(), span:750};
     // The plane takes just under a second to travel; the sweep takes exactly
     // as long and runs the way the plane runs. Forced during the tour, which
     // is already playing a voice.
-    interfaceSound?.transition(950, target > clip.constant, guidedTour?.active);
+    interfaceSound?.transition(750, target > clip.constant, guidedTour?.active);
   }
   frame(initial);
   invalidateUIObstacles();
@@ -1468,8 +1472,19 @@ function applyNightHouse(){
 // loads on the first visit to the Bölge scale, not with the boot bundle.
 let regionMapFactory=null;
 async function ensureRegionMap(){
-  regionMapFactory??=(await import('./region-map.js')).createRegionMap;
+  // Telefon ağında parça indirmesi bir kez kopabiliyor: bir kez daha denenir.
+  if(!regionMapFactory){
+    try{regionMapFactory=(await import('./region-map.js')).createRegionMap;}
+    catch(error){console.warn('Region map chunk retry',error);regionMapFactory=(await import('./region-map.js')).createRegionMap;}
+  }
   return regionMap??=regionMapFactory($('#app'));
+}
+// Bölge katmanı (1,4 MB: sokaklar + 2 km bina izleri) ilk basışta indirilip
+// kuruluyordu - telefonda saniyeler. Model hazır olduktan sonra boşta önceden
+// indirilir ve gizli kurulur; Bölge'ye basınca yalnız görünür olur.
+function prefetchRegionMap(){
+  const idle=globalThis.requestIdleCallback?(fn=>requestIdleCallback(fn,{timeout:8000})):(fn=>setTimeout(fn,4000));
+  idle(()=>{ensureRegionMap().catch(error=>console.warn('Region map prefetch failed',error));});
 }
 function ensureSpotlight(){
   if(!spotlight&&scene){spotlight=createSpotlight($('#app'));scene.add(spotlight.group);}
@@ -1773,6 +1788,7 @@ async function loadNativeModel(manifest){
     // bekliyor, söz asla çözülmüyordu ("Kat hazırlanıyor… %100" + kaybolan
     // komşular, iki bayrak tek bug). Artık HER parça yerleşince.
     if(manifest.batched)nativeDelivery.partsDone.then(()=>{loader.dracoLoader?.dispose();loader.ktx2Loader?.dispose();});
+    (manifest.batched?nativeDelivery.partsDone:Promise.resolve()).then(prefetchRegionMap);
     host.dataset.deliveryStats=JSON.stringify({profile:manifest.profile??'legacy',decodeAndPrepareMs:Math.round(performance.now()-loadStarted),residentParts:nativeDelivery.loaded.size});
   step('scene');say('loadingScene');
   buildingBox=new THREE.Box3().setFromObject(groups.get('architecture'));

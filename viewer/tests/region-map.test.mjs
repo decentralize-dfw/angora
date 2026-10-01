@@ -118,7 +118,7 @@ test('leaving the map cancels a reveal that has not happened yet', () => {
   const main = readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
   assert.doesNotMatch(main, /setTimeout\(\s*\(\)\s*=>\s*regionMap\.show\(\)/,
     'main.js still queues the reveal itself, where hide() cannot reach it');
-  assert.match(main, /regionMap\.show\(initial \? 0 : 180\)/, 'the delay is no longer handed to the map');
+  assert.match(main, /regionMap\.show\(initial \? 0 : 90\)/, 'the delay is no longer handed to the map');
   assert.match(map, /show\(delay = 0\)/, 'show() takes no delay');
   const hide = map.match(/hide\(\) \{[\s\S]*?\n    \},/);
   assert.ok(hide, 'the map no longer hides');

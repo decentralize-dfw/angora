@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {smoothStep} from './section.js';
-const FLIGHT_DURATION=1250;
+const FLIGHT_DURATION=850; // 1250 -> 850: ürün sahibi "geçişler hızlansın"
 
 // One camera and one model for both plan and isometric views. Moving in
 // spherical coordinates avoids passing through the building during a flight.
