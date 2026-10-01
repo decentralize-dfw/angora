@@ -114,6 +114,12 @@ export function prepareMaterialResponse(material, {context=false}={}) {
     };
     material.customProgramCacheKey=()=>previousKey+'|neutral-ceiling-probe';
   } else if (family==='floor') {
+    // Parke fotoğraflarda sıcak kızıl-kahve (qa-foto-v3, 8 fotoğraf alt-orta bölge ortalaması
+    // R:G:B = 1 : .62 : .43); modelde mavimsi ışık haritasıyla çarpılınca grimsi-mor (1 : .84 : .83).
+    if (/wood_floor|^wood-?fl$/i.test(material.name.replace(/\.\d{3}$/,'')) && !material.userData.parkeTon) {
+      material.color.multiply(new THREE.Color().setRGB(1, .78, .58, THREE.SRGBColorSpace)); // oran sRGB'de ölçüldü
+      material.userData.parkeTon=true;
+    }
     material.normalScale?.multiplyScalar(.3);
     material.envMapIntensity=.75;
     // The hard .08 clamp existed because an early export's floors read as wet
