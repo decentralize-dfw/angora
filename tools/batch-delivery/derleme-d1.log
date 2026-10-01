@@ -1,0 +1,82 @@
+merdiven: kollar arası duvar ikinci kolun altına indirildi (162 üçgen kırpıldı)
+merdiven: F02 kutusu kamaya, F47 duvarı silindi
+kapı EK_M3_04 (giyinme -> ebeveyn banyosu): kanat grubu 68 parça doğu menteşede, banyoya içe 90° açık
+eşikler: 27 parça zemine gömüldü, 0 parçanın altında zemin yok (silindi)
+giris-karo: derz payı %0.1, pürüzlülük 0.48..0.90
+bodrum-karo: derz payı %1.0, pürüzlülük 0.31..0.85
+giris-karo-v2: derz payı %1.8, pürüzlülük 0.52..0.90
+bodrum-karo-v2: derz payı %1.9, pürüzlülük 0.40..0.85
+parke: derz payı %0.4, pürüzlülük 0.00..0.85
+cam-lambri: derz payı %0.3, pürüzlülük 0.54..0.78
+banyo-duvar: derz payı %2.0, pürüzlülük 0.24..0.88
+sıva: iç 396 m² beyaz iç duvara, dış 762 m² mavi-gri cephe
+salon: taş karo duvar dibi şeridi 20 üçgen ceviz süpürgeliğe
+cephe: 2 sıva malzemesi v4 mavi-gri dokuya (yalnız dış yüzler)
+merdiven: 10396 basamak/sahanlık üçgeni zemin parkesi malzemesine (WOOD-FL)
+banyo duvarları: 34 ters üçgen odaya çevrildi
+banyo duvarları: 167 üçgen yeni seramiğe (47.9 m²)
+kapı boşlukları: zeminle aynı düzlemdeki 1295 yatay duvar/kasa kapağı silindi
+zeminler: parke/karo dokuları değişti, ıslak hacimlerde kesilen parke üçgeni 920
+mini mutfak: 22 kutu, z -5.14..-3.81, ön yüz x 1.29; EK_M3C duvar/tavan bloğu silindi
+denetim: salon tavan kirişi - 8 üçgen
+denetim: 1. kat kirişli tavan kartonpiyeri - 446 üçgen
+denetim: giyinme kemeri ahşap kasası - 87 üçgen
+denetim: misafir WC bordür üstü beyaz seramik (fotoğraf 39) - 26 üçgen
+denetim: bodrum mutfak tezgah arkası (batı duvarı, foto 1) - 420 üçgen
+denetim: bodrum mutfak tezgah arkası (kuzey duvarı, foto 1) - 238 üçgen
+denetim: 1. kat oturma alanı + hol tavanı çam lambri (fotoğraf 12/33) - 192 üçgen
+küpeşte: 14 üst lama, 6 parçada zaten ahşap var, 11 ceviz parça (19.2 m)
+garaj kapısı: 2,83 x 2,42 m beyaz sectional + galvaniz raylar
+mutfak sürme kapısı: 0.76 x 2.06 m, açıklık 1.50 m
+merdiven yan şeridi: 52 basamak, 104 açık uç, 196 ceviz parça
+kemer: 1. kat oturma alanı -> merdiven holü (fotoğraf 12/35) - açıklık 1.39 m, üzengi 1.40 m, tepe 2.10 m
+kemer: ebeveyn yatak -> giyinme odası (fotoğraf 31) - açıklık 0.80 m, üzengi 1.70 m, tepe 2.10 m
+kemer: çatı holü -> banyo koridoru (fotoğraf 29) - açıklık 0.84 m, üzengi 2.00 m, tepe 2.20 m
+denetim: çatı pencere nişi pervazı - 60 üçgen WOOD-FL -> Simple White Wall
+antre vitray kapı (foto 40): sağ kanat kaldırıldı, sol kanat iç hole açıldı
+kanat: bodrum balkon kapısı sol kanat - 1111 üçgen -90° (kapatıldı)
+kanat: bodrum balkon kapısı sağ kanat - 987 üçgen 90° (kapatıldı)
+prune: Removed types... Node (2)
+prune: Removed types... Mesh (1481), Node (1479), Primitive (1650), Accessor (8136)
+prune: Detected single-color specularColorTexture texture. Pruning specularColorTexture not yet supported.
+prune: Detected single-color specularColorTexture texture. Pruning specularColorTexture not yet supported.
+prune: Removed types... TextureInfo (55), Material (11), Texture (16), Accessor (27)
+çift katman: 177713 örtülen üçgen atıldı (507 m²)
+merdiven yan yüzleri zorla dışa: 217 üçgen
+pişirme yönü: 9784 üçgen (917 m² / 5431 m²) görünen yana çevrildi, şüpheli 3.0 m²
+lightmap: modelde olmayan malzemeler (atlandı): EK_SimpleWhiteWall, EK_M2_Ceviz_basamak, EK_M3_Krem_karo_esik
+duvar: 3 parça, 2104 m², 1756 ada, %69 dolu, 60 px/m, deneme 3
+zemin: 21 parça, 2277 m², 9185 ada, %79 dolu, 53 px/m, deneme 4
+cephe: 4 parça, 1050 m², 657 ada, %72 dolu, 42 px/m, deneme 3
+BUILDING kutu -9.040..7.579 -0.500..14.420 -10.894..10.082 kayma 0.0e+0 m
+BUILDING: 272 bağsız erişimci atıldı
+BUILDING-opt-v6.glb 9.63 MB çizim 77 malzeme 67 UV1 28
+mobilya: eski 'X' 2750 üçgen silindi (eski gri yemek masası + sandalyeler (foto 02))
+mobilya: eski 'BLCK', 'brass (4)', 'ROUGHNSS1' 5008 üçgen silindi (eski yatak f2-106)
+mobilya: eski 'BLCK', 'brass (4)', 'ROUGHNSS1' 122 üçgen silindi (eski yatak f2-106 güney kenarı (komodin x < -4,3 kalır))
+mobilya: eski 'R31 | Hall ochre woven upholstery', 'wood_honey' 12509 üçgen silindi (eski hardal berjerler + sehpa)
+mobilya: eski 'ROUGHNSS1', 'R31 | R33 antique nook walnut' 4230 üçgen silindi (eski bodrum kanepesi (batı duvarı))
+mobilya: eski 'BLCK', 'ROUGHNSS1', 'wood_honey' 3412 üçgen silindi (eski çatı oturma grubu)
+mobilya: eski 'X', 'R31 | R33 antique nook walnut', 'wood_honey', 'cabinet_glass' 31807 üçgen silindi (eski salon oturma grubu (perdeler z < -7,91 kalır))
+mobilya: eski 'R31 | R33 antique nook walnut', 'ROUGHNSS1', 'wood_honey' 28468 üçgen silindi (eski yemek masası + 6 sandalye)
+mobilya: eski 'R31 | R33 antique nook walnut', 'ROUGHNSS1' 1721 üçgen silindi (giriş katı batı: eski ceviz sandalye (yerine sahibin koltuğu))
+mobilya: eski 'R31 | R33 antique nook walnut', 'ROUGHNSS1' 1727 üçgen silindi (giriş katı batı: eski ceviz sandalye (yerine sahibin koltuğu))
+mobilya: eski 'BLCK' 1112 üçgen silindi (çatı yatak odası (f3-C02): yerde duran 0,5 m siyah telli disk (ajanın EK_BLCK_cati parçası))
+mobilya: eski 'X', 'R31 | R33 antique nook walnut', 'wood_honey' 41 üçgen silindi (salon: eski kuzey berjerin sırtından kalan parça (z -7,91..-7,88; ilk kutu -7,905'te kalmıştı). Perdeler ROUGHNSS1, etkilenmez.)
+Missing optional extension, "FB_ngon_encoding".
+Missing optional extension, "FB_ngon_encoding".
+mobilya: bodrum_kose_koltuk (2 parça) 3.80 x 0.82 x 2.08 m @ (-3.93, -0.000, -6.12) 90°
+mobilya: salon_deri_takim (7 parça) 4.20 x 1.13 x 1.70 m @ (2.12, 2.800, -5.83) -90°
+mobilya: MOBILYA_sahip_meshes0009_kat0 8861 üçgen
+mobilya: MOBILYA_sahip_meshes0009_kat1 2688 üçgen
+mobilya: MOBILYA_sahip_meshes0001_kat1 13883 üçgen
+mobilya: MOBILYA_sahip_meshes0006_kat2 10904 üçgen
+mobilya: MOBILYA_sahip_meshes0004_kat3 11528 üçgen
+mobilya: MOBILYA_sahip_meshes0013_kat2 6870 üçgen
+renk: fotoğraf 12/33 kirişler (x -1,14e kadar) - 1757 üçgen EK_cam_kiris
+renk: fotoğraf 16 giyinme dolapları - 3500 üçgen EK_giyinme_tik
+renk: fotoğraf 21 mutfak dolapları - 7708 üçgen EK_mutfak_kiraz
+prune: Removed types... Accessor (427), Buffer (3)
+INTERIOR-opt-v3.glb 5.31 MB çizim 95 malzeme 46 UV1 0
+pişirme BUILDING-opt-v6-lm.glb 84.3 MB
+pişirme INTERIOR-opt-v3-sahne.glb 36.4 MB

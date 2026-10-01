@@ -8,7 +8,7 @@
    "px_per_m": 59.5,
    "doluluk": 0.689,
    "parca": 3,
-   "ada": 1747,
+   "ada": 1756,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_duvar_000": {
@@ -27,11 +27,11 @@
   },
   "zemin": {
    "boyut": 4096,
-   "alan_m2": 2273.3,
-   "px_per_m": 52.7,
-   "doluluk": 0.791,
+   "alan_m2": 2277.3,
+   "px_per_m": 52.6,
+   "doluluk": 0.79,
    "parca": 21,
-   "ada": 9192,
+   "ada": 9185,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_zemin_000": {
@@ -122,11 +122,11 @@
   },
   "cephe": {
    "boyut": 2048,
-   "alan_m2": 1049.5,
+   "alan_m2": 1049.7,
    "px_per_m": 42.1,
-   "doluluk": 0.716,
-   "parca": 3,
-   "ada": 620,
+   "doluluk": 0.725,
+   "parca": 4,
+   "ada": 657,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_cephe_000": {
@@ -140,6 +140,10 @@
     "LM_cephe_002": {
      "texcoord": 1,
      "malzeme": "Stucco painted wall"
+    },
+    "LM_cephe_003": {
+     "texcoord": 1,
+     "malzeme": "roof-7"
     }
    }
   },

@@ -1,0 +1,31 @@
+BUILDING-opt-v6 {
+  file: 'ktx512/BUILDING-opt-v6.ktx2.glb',
+  bytes: 12606448,
+  textures: 59
+}
+INTERIOR-opt-v3 {
+  file: 'ktx512/INTERIOR-opt-v3.ktx2.glb',
+  bytes: 10405884,
+  textures: 60
+}
+duvar_gok.ktx2 157139 tam 2048 1377629
+duvar_gunes_09.ktx2 130559 tam 1024 382064
+duvar_gunes_13.ktx2 135075 tam 1024 403052
+duvar_gunes_17.ktx2 134930 tam 1024 399225
+duvar_gece.ktx2 139862 tam 2048 1208639
+zemin_gok.ktx2 184238 tam 2048 1615974
+zemin_gunes_09.ktx2 153486 tam 1024 448019
+zemin_gunes_13.ktx2 145487 tam 1024 418962
+zemin_gunes_17.ktx2 150452 tam 1024 431755
+zemin_gece.ktx2 167196 tam 2048 1456789
+cephe_gok.ktx2 210065 tam 1024 655530
+cephe_gunes_09.ktx2 189309 tam 1024 582092
+cephe_gunes_13.ktx2 194474 tam 1024 603260
+cephe_gunes_17.ktx2 179090 tam 1024 546169
+cephe_gece.ktx2 99774 tam 1024 274607
+bahce_gok.ktx2 219634 tam 1024 709798
+bahce_gunes_09.ktx2 153925 tam 1024 465064
+bahce_gunes_13.ktx2 158893 tam 1024 484062
+bahce_gunes_17.ktx2 156197 tam 1024 476476
+bahce_gece.ktx2 94137 tam 1024 279965
+DONE 210 textures; geometry unchanged
