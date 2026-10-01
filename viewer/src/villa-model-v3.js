@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 // Ürün sahibinin kendi malzeme yazarlığını yaptığı yeni villa modelleri
 // (build/web/26092026/, 26 Eylül 2026 yüklemesi). Eskiler SİLİNMİYOR: bu
 // sadece manifest'teki üç parçanın dosya adını değiştiriyor, yani bayrak
@@ -175,4 +176,35 @@ export function applyContextV2(manifest, {mobile = false, groundV3 = false} = {}
   manifest.parts = manifest.parts.filter(part => !CONTEXT_V2_DROPPED.includes(part.name));
   if (manifest.parts.length !== before) changed.push(...CONTEXT_V2_DROPPED.map(name => '-' + name));
   return changed;
+}
+
+// Ürün sahibinin kesit işaretleri (01.10): modelde olup olmaması gereken yüzler.
+// Çatı holündeki dormer geçidini kapatan eğik tavan şeridi (ceiling.001, x 0..4,17,
+// z -2,33..-1,73, normal ≈ (-0,57,-0,82,0)) planda geçidin ortasında çizgi gibi
+// görünüyordu. Yüz yalnız eşleşen üçgenler indeksten çıkarılarak kaldırılır; ışık
+// UV'si ve diğer yüzler değişmez (yeniden pişirme gerekmez).
+const TUR10_DROP = [
+  {mat: /^ceiling\.001$/, min: [-0.05, 8.9, -2.35], max: [4.25, 12.3, -1.70], normal: [-0.57, -0.82, 0]},
+];
+export function dropTur10Faces(model) {
+  model.updateMatrixWorld(true);
+  const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3(), n = new THREE.Vector3();
+  let dropped = 0;
+  model.traverse(o => {
+    if (!o.isMesh || Array.isArray(o.material) || !o.geometry?.index) return;
+    const rules = TUR10_DROP.filter(r => r.mat.test(o.material?.name ?? ''));
+    if (!rules.length) return;
+    const pos = o.geometry.attributes.position, idx = o.geometry.index, keep = [];
+    for (let t = 0; t < idx.count; t += 3) {
+      const ia = idx.getX(t), ib = idx.getX(t + 1), ic = idx.getX(t + 2);
+      a.fromBufferAttribute(pos, ia).applyMatrix4(o.matrixWorld); b.fromBufferAttribute(pos, ib).applyMatrix4(o.matrixWorld); c.fromBufferAttribute(pos, ic).applyMatrix4(o.matrixWorld);
+      n.subVectors(b, a).cross(c.clone().sub(a)).normalize();
+      const hit = rules.some(r => [a, b, c].every(v => v.x >= r.min[0] && v.x <= r.max[0] && v.y >= r.min[1] && v.y <= r.max[1] && v.z >= r.min[2] && v.z <= r.max[2])
+        && Math.abs(Math.abs(n.dot(new THREE.Vector3(...r.normal))) - 1) < 0.02);
+      if (hit) { dropped++; continue; }
+      keep.push(ia, ib, ic);
+    }
+    if (keep.length !== idx.count) o.geometry.setIndex(keep);
+  });
+  return dropped;
 }
