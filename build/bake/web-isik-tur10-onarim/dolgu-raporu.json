@@ -1,0 +1,14 @@
+{
+ "duvar": {
+  "doldurulan_px": 1020395,
+  "cozunurluk": 2048
+ },
+ "zemin": {
+  "doldurulan_px": 622553,
+  "cozunurluk": 2048
+ },
+ "cephe": {
+  "doldurulan_px": 94711,
+  "cozunurluk": 1024
+ }
+}

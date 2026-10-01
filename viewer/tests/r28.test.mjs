@@ -30,7 +30,7 @@ test('Reference production baseline has AgX, restrained linear bloom and no idle
   assert.equal(referenceProfile.aoEnabled,true);
   const pass=new LinearBloomPass();pass.setSize(1170,2100);
   assert.equal(pass.bright.width,585);assert.equal(pass.blurA.width,292);assert.equal(pass.blurA.height,525);
-  assert.equal(pass.combine.uniforms.strength.value,.1);assert.equal(pass.extract.uniforms.threshold.value,.06);
+  assert.equal(pass.combine.uniforms.strength.value,.1);assert.equal(pass.extract.uniforms.threshold.value,1.6); // 01.10: beyaz söve hâlesi - yalnız gerçek parlaklık hâle verir
   const original=new THREE.WebGLRenderTarget(),input=new THREE.WebGLRenderTarget(),output=new THREE.WebGLRenderTarget();
   const draws=[],mock={current:original,getRenderTarget(){return this.current;},setRenderTarget(target){this.current=target;},render(){draws.push(this.current);}};
   pass.render(mock,output,input);assert.equal(draws.length,6);assert.equal(draws.at(-1),output);assert.equal(mock.current,original);

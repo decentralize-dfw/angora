@@ -211,3 +211,56 @@ export function dropTur10Faces(model) {
   });
   return dropped;
 }
+
+// Perdeler (01.10): model-d1'de pencere yanlarına eklenen "fon" kopyaları 30 cm genişliğinde,
+// 6 cm kalınlığında, ahşap malzemeli dikmelerdi - gezintide kahverengi çubuk gibi görünüyordu.
+// Her biri yerinde, modelin kendi damask perde kumaşıyla, 55 cm genişliğinde kıvrımlı bir
+// perde paneline çevrilir. Bodrum salonunun doğu penceresinde (x 1,1..2,3) perde yoktu: eklenir.
+const TUR10_EXTRA_CURTAINS = [
+  {x: [0.82, 1.38], y: [0.06, 2.52], z: -7.99},
+  {x: [2.02, 2.58], y: [0.06, 2.52], z: -7.99},
+];
+function pleatedCurtain(axis, along, fixed, y0, y1, width) {
+  const cols = 28, a0 = along - width / 2, amp = 0.035, folds = 5;
+  const pos = [], uv = [], idx = [];
+  for (let i = 0; i <= cols; i++) {
+    const u = i / cols, s = a0 + u * width, off = amp * Math.sin(u * folds * 2 * Math.PI);
+    for (const [y, v] of [[y0, 0], [y1, 1]]) {
+      if (axis === 'x') pos.push(s, y, fixed + off); else pos.push(fixed + off, y, s);
+      uv.push(u * 2, v * 3);
+    }
+    if (i < cols) { const k = i * 2; idx.push(k, k + 2, k + 1, k + 1, k + 2, k + 3); }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+  g.setIndex(idx); g.computeVertexNormals();
+  return g;
+}
+export function rebuildTur10Curtains(model) {
+  model.updateMatrixWorld(true);
+  let fabric = null; const stubs = [];
+  model.traverse(o => {
+    if (!o.isMesh) return;
+    const m = [].concat(o.material)[0];
+    if (!fabric && /damask curtain/i.test(m?.name ?? '')) fabric = m;
+    if (/^EK_D1_.*fon_\d/.test(o.name) || /^EK_D1_.*fon_\d/.test(o.parent?.name ?? '')) stubs.push(o);
+  });
+  if (!fabric || !stubs.length) return 0;
+  const mat = fabric.clone(); mat.side = THREE.DoubleSide; mat.name = 'EK_perde_kumas';
+  const box = new THREE.Box3(), size = new THREE.Vector3(), c = new THREE.Vector3();
+  const place = g => { const mesh = new THREE.Mesh(g, mat); mesh.name = 'EK_perde_panel'; mesh.castShadow = true; mesh.receiveShadow = true; model.add(mesh); return mesh; };
+  const inv = new THREE.Matrix4().copy(model.matrixWorld).invert();
+  let made = 0;
+  for (const o of stubs) {
+    box.setFromObject(o); box.getSize(size); box.getCenter(c);
+    const axis = size.x >= size.z ? 'x' : 'z';             // perde duvar boyunca uzanır
+    const g = pleatedCurtain(axis, axis === 'x' ? c.x : c.z, axis === 'x' ? c.z : c.x, box.min.y, box.max.y, 0.55);
+    g.applyMatrix4(inv); place(g); o.visible = false; made++;
+  }
+  for (const e of TUR10_EXTRA_CURTAINS) {
+    const g = pleatedCurtain('x', (e.x[0] + e.x[1]) / 2, e.z, e.y[0], e.y[1], e.x[1] - e.x[0]);
+    g.applyMatrix4(inv); place(g); made++;
+  }
+  return made;
+}

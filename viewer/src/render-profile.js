@@ -22,7 +22,7 @@ import {FEATURES} from './features.js';
 // for the phone/XR path. MSAA 4x under SMAA kills the sub-pixel crawl on
 // mullions and railings that SMAA alone leaves behind.
 export const referenceProfile=Object.freeze({name:'edetri-production-baseline-agx',
-  exposure:1.1,bloomStrength:.1,bloomThreshold:.06,bloomKnee:.036,bloomClamp:64,
+  exposure:1.1,bloomStrength:.1,bloomThreshold:1.6,bloomKnee:.5,bloomClamp:64, // 01.10: eşik .06 -> 1.6 (güneşteki her beyaz söve hâle veriyordu)
   aoEnabled:true,msaaSamples:4,refinement:false,pathTracing:false});
 
 // ADIM 2 (daylightV2): both reference projects the owner is happy with end

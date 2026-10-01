@@ -3,7 +3,7 @@ import {prepareBakedLighting} from './baked-lighting.js';
 import {restoreBatchSurface} from './batch-surface-response.js';
 import {prepareBatchedMaterial,stripFixtureLoops} from './batched-material.js';
 import {neutraliseTransmission} from './material-response.js';
-import {repairUntexturedWood,settleTur10Overlays,dropTur10Faces} from './villa-model-v3.js';
+import {repairUntexturedWood,settleTur10Overlays,dropTur10Faces,rebuildTur10Curtains} from './villa-model-v3.js';
 import {applyMaterialResponse} from './material-response-v2.js';
 import {chunkModelInPlace} from './context-plants-chunks.js';
 import {applyPlantVariation} from './plant-variation.js';
@@ -102,6 +102,10 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     if(features.villaGlassAlpha!==false){
       const converted=neutraliseTransmission(model);
       if(converted)console.info(`Transmission -> alpha glazing on ${converted} material(s) (${name})`);
+    }
+    if(manifest.batched&&name==='interior'){
+      const curtains=rebuildTur10Curtains(model);
+      if(curtains)console.info(`Tur 10 perdeler: ${curtains} kıvrımlı panel (${name})`);
     }
     if(!manifest.batched||name==='architecture'){
       const repaired=repairUntexturedWood(model);
