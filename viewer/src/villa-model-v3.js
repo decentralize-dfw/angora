@@ -401,11 +401,16 @@ const TUR10_BORROW = [
   // üç dilimli pah ve kenar şeritleri (kıl üçgenler). Atlasta yarım teksel genişliğinde, ışıkları komşu parça /
   // oluk ile karışmış (gök 0..24); merdivenden bakınca kenar boyunca kesik kesik koyu noktalar. Merdiven
   // boşluğundaki kıl üçgenler en yakın geniş yüzün (> 0,05 m²) kenardan 4 cm içerideki ışığını okur.
+  // Aynı kenarın altına 1,7 cm'lik kapak (y 7,6705, aşağı bakar, sahanlık altının ışığı): pah/dudak kıl üçgenleri
+  // yandan gelen canlı ışığı farklı normalle alıp kesik kesik nokta veriyordu; alttan bakınca kapak örtüyor.
+  {cap: {y: 7.6705, min: [3.160, -3.125], max: [3.177, -0.930]}, inset: 0.06,
+    source: {mat: /^EK_M2_Beyaz_merdiven_alti$/, atlas: 'duvar', min: [3.17, 7.665, -3.2], max: [4.25, 7.68, -0.85], facing: [0, -1, 0], minArea: 0.05}},
   // K2 kolunun sahanlığa değdiği kenar (x 3,172..3,176, y 7,671..7,675): pah ve dudak kıl üçgenleri ile hemen
-  // arkasındaki dikey iç yüz (x 3,172, sahanlık gövdesinin içi, pişmiş ışığı kapkara; kenar boyunca kıl aralıktan
-  // görünüyor) aşağı bakan sahanlık altının (görünen yüz) ışığını okur. Genel kıl kuralından önce.
-  {mats: /^EK_M2_Beyaz_merdiven_alti$/, min: [3.165, 7.665, -3.13], max: [3.185, 7.89, -0.92], inset: 0.08,
-    source: {mat: /^EK_M2_Beyaz_merdiven_alti$/, atlas: 'duvar', min: [3.17, 7.665, -3.2], max: [4.25, 7.68, -0.85], facing: [0, -1, 0], minArea: 0.05}, material: 'target'},
+  // arkasındaki dikey yüz (x 3,172, sahanlığın kollar arası alnı; pişmiş ışığı kapkara, kollar arasındaki
+  // boşluktan ve kenar boyunca kıl aralıktan görünüyor) K2_0 kolunun eğik alt yüzünün ışığını okur (kenardan
+  // 15 cm içeriden; sahanlık altı kenarda daha koyu, alın onunla koyu leke kalıyordu). Genel kıl kuralından önce.
+  {mats: /^EK_M2_Beyaz_merdiven_alti$/, min: [3.165, 7.665, -3.13], max: [3.185, 7.89, -0.92], inset: 0.15,
+    source: {mat: /^EK_M2_Beyaz_merdiven_alti$/, atlas: 'duvar', min: [0.6, 5.8, -3.2], max: [3.2, 7.7, -2.1], facing: [0.61, -0.79, 0], minArea: 0.5}, material: 'target'},
   {sliver: true, mats: /^(EK_M2_Beyaz_merdiven_alti|Simple White Wall)$/, min: [0.5, 3.0, -3.5], max: [4.2, 9.6, 0.6], inset: 0.04,
     source: {mat: /^(EK_M2_Beyaz_merdiven_alti|Simple White Wall)$/, atlas: 'duvar', min: [0.4, 2.9, -3.6], max: [4.3, 9.7, 0.7], minArea: 0.05}, material: 'target'},
   {mats: /^WHT\.001$/, min: [4.40, 5.40, -2.30], max: [7.26, 5.75, 0.66],
@@ -468,7 +473,7 @@ export function borrowTur10(model) {
       for (const w of [[c[0], c[1], c[2]], [c[0], c[2], c[3]]]) {
         const s = nearest(p.copy(w[0]).add(w[1]).add(w[2]).divideScalar(3));
         for (const v of w) {
-          const l = v.clone().applyMatrix4(inv), uv = s.uv ? texUV(s, v, new THREE.Vector3(0, -1, 0)) : new THREE.Vector2(), uv1 = lookup(s, v, 'uv1');
+          const l = v.clone().applyMatrix4(inv), uv = s.uv ? texUV(s, v, new THREE.Vector3(0, -1, 0)) : new THREE.Vector2(), uv1 = rule.inset ? inset(s, v) : lookup(s, v, 'uv1');
           P.push(l.x, l.y, l.z); N.push(nl.x, nl.y, nl.z); U.push(uv.x, uv.y); U1.push(uv1.x, uv1.y);
         }
       }
