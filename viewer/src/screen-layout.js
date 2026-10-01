@@ -100,7 +100,8 @@ export function layoutDimensionsAtMidpoint(items,{width,height,obstacles=[],gap=
   }
   for(const item of items.slice(0,fixedFrom)){
     if(!valid(item))continue;
-    for(const dy of [0,-(item.height+gap),item.height+gap]){
+    // Ad kaymaz: kayan ad odasının dışına, komşu odanın üstüne düşüyordu. Sığmazsa gizlenir.
+    for(const dy of [0]){
       const rect=rectAt(item,item.x,item.y+dy);
       if(!inside(rect)||obstacles.some(o=>rectanglesOverlap(rect,o,gap))||dims.some(o=>rectanglesOverlap(rect,o,gap))||names.some(o=>rectanglesOverlap(rect,o,gap)))continue;
       names.push(rect);placed.push({...item,y:item.y+dy,rect,anchorX:item.x,anchorY:item.y});break;

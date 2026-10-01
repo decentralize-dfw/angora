@@ -106,7 +106,10 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
 }
 
 /* Room names are annotations, not navigation controls. */
-.room-label{pointer-events:none;min-height:0;min-width:0;padding:2px;max-width:none}
+/* width:max-content: mutlak konumlu etiket genişliğini "left'ten sağ kenara kalan yer"
+   kadar alıyordu; ekranın sağındaki odalarda ad kesiliyor ("Ebeveyn yatak odas…"),
+   m² tabağın dışına taşıyordu. Artık her etiket kendi metni kadar geniş. */
+.room-label{pointer-events:none;min-height:0;min-width:0;padding:2px;max-width:none;width:max-content}
 .room-label strong{overflow:visible;text-overflow:clip}
 .dimension-label{font-size:10px;padding:2px 3px}
 #enter-walk{width:64px;height:48px;border-radius:16px;line-height:1.2}
@@ -175,6 +178,70 @@ summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;}
   .tool-dock {top:max(64px,calc(env(safe-area-inset-top) + 56px));bottom:auto;right:max(12px,env(safe-area-inset-right));}
   .tool-button {min-width:40px;min-height:40px;}
   .photo-pin {min-width:30px;min-height:30px;}
+}
+
+/* ==========================================================================
+   MOBİL KOMPAKT (01.10, ürün sahibi ekran görüntüsüyle):
+   1 "MERGVS | Angora 21" kalkar; üstte TEK satır: solda Bölge/Yakın çevre/Villa,
+     sağda tur/Kat/Mülk.
+   2 Ayar dişlisi kat menüsünün hemen üstünde, sağda.
+   5 Model ölçeği telefonda yok.
+   6 Künye zeminsiz, çok küçük, en altta.
+   ss2 Ayarlar dişlinin üstüne, kat menüsüyle aynı biçimde açılır: üstte dört
+     anahtar, altta dil / gün ışığı / saat. Başlık, uçlar, notlar yok.
+   --dock-h main.js'te kat menüsünün ölçülen yüksekliği (gizliyken 0).
+   ========================================================================== */
+@media(max-width:720px){
+  #app{--m-bottom:calc(env(safe-area-inset-bottom) + 18px);--m-top:max(10px,env(safe-area-inset-top))}
+  .topbar .identity{display:none}
+  .topbar{top:var(--m-top);left:12px;right:12px;justify-content:flex-end}
+  .topbar .top-actions{gap:5px}
+  .topbar .quiet-button{min-height:34px;padding:0 10px;font-size:11px}
+  .tour-launch{min-height:34px;padding:0 10px}
+  #app .scale-picker,#app[data-delivery=native] .scale-picker,
+  #app[data-scale] .scale-picker,#app[data-delivery=native][data-scale] .scale-picker{
+    top:var(--m-top);bottom:auto;left:12px;transform:none;padding:3px}
+  #app .scale-picker button{min-height:28px;padding:0 10px;font-size:11px}
+  #app[data-delivery=native] .view-description,.view-description{top:calc(var(--m-top) + 46px)}
+  #app[data-delivery=native] .side-tools{top:calc(var(--m-top) + 46px)}
+
+  #app .explore-dock,#app[data-delivery=native] .explore-dock{bottom:var(--m-bottom)}
+  #app .tool-dock{top:auto;right:12px;bottom:calc(var(--m-bottom) + var(--dock-h,0px) + 8px)}
+  #app .tool-button{width:38px;height:38px;min-width:38px;min-height:38px}
+
+  #app .model-scale{display:none!important}
+  #app .site-credit,#app[data-scale] .site-credit{left:0;right:0;bottom:calc(env(safe-area-inset-bottom) + 3px);
+    text-align:center;background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;
+    padding:0;font-size:7.5px;line-height:1.2;letter-spacing:.02em;color:#2c3833cc;text-shadow:0 0 4px #ffffffcc}
+  #app .site-credit a{letter-spacing:.1em}
+
+  #app .options-panel{position:absolute;top:auto;left:12px;right:12px;width:auto;max-width:none;
+    bottom:calc(var(--m-bottom) + var(--dock-h,0px) + 54px);max-height:none;overflow:visible;
+    padding:5px;border-radius:22px;display:grid;grid-template-columns:auto 1fr auto;gap:5px;align-items:center;
+    background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:var(--shadow-soft)}
+  #app .options-panel[hidden]{display:none}
+  #app .options-panel>*{margin:0}
+  #app .options-panel .panel-heading,#app .options-panel .range-endpoints,#app .options-panel .daylight-footer,
+  #app .options-panel .small-note,#app .options-panel .option-hidden,#app .options-panel .daylight-heading label{display:none}
+  #app .options-panel .scene-options.villa-only{grid-column:1 / 4;grid-row:1;display:flex;gap:4px}
+  #app .options-panel .scene-options.villa-only button{flex:1 1 0;min-width:0;min-height:32px;height:32px;padding:0 4px;
+    font-size:11px;border-radius:999px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #app .options-panel .language-row{grid-column:1;grid-row:2;display:flex}
+  #app .options-panel .language-row>span{display:none}
+  #app .options-panel .lang-flag{min-height:30px;padding:0 8px}
+  #app .options-panel #daylight-hour{grid-column:2;grid-row:2;height:28px;min-width:0;width:100%}
+  #app .options-panel .daylight-heading{grid-column:3;grid-row:2;display:flex;padding-right:8px}
+  #app .options-panel #daylight-time{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+  #app:is([data-scale=neighborhood],[data-scale=region]) .options-panel .language-row,
+  #app:is([data-scale=neighborhood],[data-scale=region]) .options-panel #daylight-hour,
+  #app:is([data-scale=neighborhood],[data-scale=region]) .options-panel .daylight-heading{grid-row:1}
+
+  /* 3-4: oda adları telefonda daha küçük tabakta */
+  .room-label i{padding:3px 7px 4px;border-radius:9px}
+}
+@media(max-width:370px){
+  #app .scale-picker button{padding:0 8px;font-size:10.5px}
+  .topbar .quiet-button,.tour-launch{padding:0 8px}
 }
 
 /* ==========================================================================

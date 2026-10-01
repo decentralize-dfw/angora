@@ -494,6 +494,14 @@ function frame(initial=false,keep=false) {
   flight.go({target:center,polar,span:frameSpan,zoom:keep?camera.zoom:1,azimuth:planMode||selected==='region'?0:initial?.804:undefined,fov:planMode?undefined:rigFov},initial===true);
   resize();
 }
+// Telefon: ayar dişlisi ve açılan ayarlar kat menüsünün hemen üstünde durur;
+// menünün gerçek yüksekliği (katlar + eylem satırı, gizliyken 0) CSS'e verilir.
+{
+  const dock=$('.explore-dock'),app=$('#app');
+  const measure=()=>app.style.setProperty('--dock-h',`${dock?.offsetHeight??0}px`);
+  if(dock&&typeof ResizeObserver!=='undefined')new ResizeObserver(measure).observe(dock);
+  measure();
+}
 const SHEETS={'options-panel':'open-options','info-panel':'open-info','floor-panel':'open-floor'};
 // The property sheet is the listing and never changes with the view; the
 // storey sheet is the open floor and exists only while one is open.

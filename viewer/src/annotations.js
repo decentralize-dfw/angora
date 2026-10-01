@@ -50,6 +50,16 @@ export function createAnnotations(data,host,onRoom) {
     }
     return span;
   };
+  const boxOf=room=>{
+    let x=null,z=null;
+    for(const id of room.dimensions??[]){
+      const dim=data.dimensions?.find(entry=>entry.id===id);if(!dim)continue;
+      const dx=Math.abs(dim.b[0]-dim.a[0]),dz=Math.abs(dim.b[2]-dim.a[2]);
+      if(dx>=dz&&(!x||dx>x[1]-x[0]))x=[Math.min(dim.a[0],dim.b[0]),Math.max(dim.a[0],dim.b[0])];
+      if(dz>dx&&(!z||dz>z[1]-z[0]))z=[Math.min(dim.a[2],dim.b[2]),Math.max(dim.a[2],dim.b[2])];
+    }
+    return x&&z?{x0:x[0],x1:x[1],z0:z[0],z1:z[1]}:null;
+  };
   const material=new THREE.LineBasicMaterial({color:0x315e5c,depthTest:false,depthWrite:false,toneMapped:false});
   const measuredMaterial=new THREE.LineDashedMaterial({color:0x6d8a82,dashSize:.16,gapSize:.12,
     depthTest:false,depthWrite:false,toneMapped:false});
@@ -67,9 +77,15 @@ export function createAnnotations(data,host,onRoom) {
     el.setAttribute('aria-label',`${room.name} ${area.textContent}`);
     overlay.append(el);
     const span=spanOf(room);
-    names.push({el,kind:'name',position:new THREE.Vector3(...room.position),floor:room.floor_index,
+    // Odanın gerçek dikdörtgeni ölçü çizgilerinin uçlarından: kayıttaki room.position
+    // odanın ortası DEĞİL (ebeveyn yatak odasında kuzey duvarına 0,9 m), o yüzden
+    // etiket onun etrafındaki sanal dikdörtgende "sığıp" duvarın üstüne taşıyordu.
+    // Etiket artık bu dikdörtgenin ortasında durur ve hep onun içine sığar.
+    const box=boxOf(room),center=box?[(box.x0+box.x1)/2,room.position[1],(box.z0+box.z1)/2]:room.position;
+    if(box){span.x=box.x1-box.x0;span.z=box.z1-box.z0;}
+    names.push({el,kind:'name',position:new THREE.Vector3(...center),floor:room.floor_index,
       span,corners:[[-1,-1],[1,-1],[1,1],[-1,1]].map(([sx,sz])=>
-        new THREE.Vector3(room.position[0]+sx*span.x/2,room.position[1],room.position[2]+sz*span.z/2))});
+        new THREE.Vector3(center[0]+sx*span.x/2,center[1],center[2]+sz*span.z/2))});
   }
   // Both axes, on every room that has them. Only 24 of the 53 spans are project
   // dimensions, so for a long time only those were drawn - and since the rooms
@@ -142,7 +158,7 @@ export function createAnnotations(data,host,onRoom) {
       if(entry.el.hidden)continue;
       const distance=Math.max(1,entry.position.distanceTo(camera.position));
       const ppm=camera.isPerspectiveCamera?h*camera.zoom/(2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*distance):h*camera.zoom/(camera.top-camera.bottom);
-      const p=project(entry,camera,w,h,labelFontSize(ppm));
+      const p=project(entry,camera,w,h,w<=720?9.5:labelFontSize(ppm));
       if(p)named.push({entry,p});
     }
     const measured=[];
