@@ -4,11 +4,11 @@
  "atlaslar": {
   "duvar": {
    "boyut": 4096,
-   "alan_m2": 2096.5,
-   "px_per_m": 59.6,
-   "doluluk": 0.687,
+   "alan_m2": 2104.3,
+   "px_per_m": 59.5,
+   "doluluk": 0.689,
    "parca": 3,
-   "ada": 1736,
+   "ada": 1747,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_duvar_000": {
@@ -27,11 +27,11 @@
   },
   "zemin": {
    "boyut": 4096,
-   "alan_m2": 2281.1,
-   "px_per_m": 52.6,
-   "doluluk": 0.793,
+   "alan_m2": 2273.3,
+   "px_per_m": 52.7,
+   "doluluk": 0.791,
    "parca": 21,
-   "ada": 9210,
+   "ada": 9192,
    "dosya": "tur10/BUILDING-opt-v6",
    "dugumler": {
     "LM_zemin_000": {
