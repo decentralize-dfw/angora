@@ -203,6 +203,10 @@ const TUR10_DROP = [
 //   arkadaki WC seramiğini (LM_zemin_005, x 3,098) gösteriyordu.
 const TUR10_RETILE = [
   {mat: /^R31 \| R33 ivory wall ceramic$/, min: [2.6, 3.0, 0.3], max: [4.2, 6.0, 2.6], away: [3.6, 1.5], to: /^Simple White Wall$/},
+  // 01.10 garaj (ürün sahibi: "garaj kısmı bozuk, cephe rengi?"): kapı açıklığının üstündeki bant dışarıya
+  // iç duvar boyasıyla (Simple White Wall, LM_duvar_002) bakıyordu; çevresi cephe sıvası. Garajın içine
+  // bakmayan (away: garaj içi) yüzü sıvaya çevrilir; ışığı lightmap-dis.py ile zaten dış ölçekte.
+  {mat: /^Simple White Wall$/, min: [4.2, 5.4, 1.1], max: [7.6, 6.05, 1.45], away: [5.8, -2.0], to: /^Stucco painted wall$/},
 ];
 export function retileTur10(model) {
   model.updateMatrixWorld(true);
@@ -281,7 +285,11 @@ const TUR10_RELIGHT = [
   ...jambs('x', -1.586, -0.387, [-8.30, -8.04], [3.0, 5.0]),   // salon balkon kapısı
   ...jambs('x', 1.088, 2.288, [-8.30, -8.04], [3.3, 5.0]),     // salon doğu penceresi
   ...jambs('z', -2.927, -1.127, [-5.85, -5.59], [3.6, 5.3]),   // yemek alanı batı penceresi (Salon_fon perdeleri)
-  {min: [-1.222, 3.0, -1.72], max: [-1.205, 5.95, -0.19], want: [-1, 0, 0]},   // asansör nişi doğu yüzü
+  // asansör nişi (x -2,652..-1,212, ağzı z -1,707): doğu yüzün alt-sol yarısı (7424 + 3 cm'lik şeritler) ters.
+  // Kendi yüzündeki doğru yarı (11961) yalnız bir köşe paylaşıyor ve kuyunun derinindeki karanlığı taşıyor;
+  // batı yüzü (9844..9853, x -2,652) aynı üçgenlemeyle doğru pişmiş -> ortaya (x -1,932) göre ayna verici.
+  {min: [-1.222, 3.0, -1.72], max: [-1.205, 5.95, -0.19], want: [-1, 0, 0],
+    partner: {min: [-2.662, 3.0, -1.72], max: [-2.642, 5.95, -0.19], want: [1, 0, 0], mirror: {axis: 'x', at: -1.93225}}},
 ];
 const RELIGHT_MATS = /^(Simple White Wall|Stucco painted wall)$/;
 export function relightTur10(model) {
@@ -307,19 +315,22 @@ export function relightTur10(model) {
   for (const r of TUR10_RELIGHT) {
     const bad = all.filter(tr => facing(tr, r, -1));
     if (!bad.length) continue;
-    // verici: aynı kutuda doğru bakan duvar üçgenleri; yoksa ortağın (açıklığın öbür sövesi) yansıyanı
-    let donors = all.filter(tr => tr.o.material.name === 'Simple White Wall' && facing(tr, r, 1)), mir = null;
-    if (!donors.length && r.partner) { donors = all.filter(tr => tr.o.material.name === 'Simple White Wall' && facing(tr, r.partner, 1)); mir = r.partner.mirror; }
+    // vericiler: aynı yüzün doğru bakan duvar üçgenleri + ortağın (açıklığın öbür yüzü) ortaya göre yansıyanları
+    const white = box => all.filter(tr => tr.o.material.name === 'Simple White Wall' && facing(tr, box, 1));
+    const donors = [...white(r).map(d => ({d, mir: null})), ...(r.partner ? white(r.partner).map(d => ({d, mir: r.partner.mirror})) : [])];
     if (!donors.length) continue;
     for (const tr of bad) {
-      const q = tr.p.map(p => reflect(p, mir));
-      const c = v().add(q[0]).add(q[1]).add(q[2]).divideScalar(3);
-      // tek verici üçgen (UV adaları karışmasın): ağırlık merkezine en yakın, eşitse büyük olan
-      let best = null, bestD = Infinity;
-      for (const d of donors) {
-        tri.set(...d.p); const dist = tri.closestPointToPoint(c, cp).distanceTo(c) - tri.getArea() * 1e-3;
-        if (dist < bestD) { bestD = dist; best = d; }
+      // tek verici üçgen (UV adaları karışmasın): en çok ortak köşeli (ayna üçgen 3, köşegen ortağı 2),
+      // eşitse ağırlık merkezine en yakın, o da eşitse büyük olan. Tek köşe paylaşan vericide uzak köşeler
+      // vericinin kenarına izdüşüyor ve UV üçgeni çizgiye çöküyordu (asansör nişi: ağızda kuyu karanlığı).
+      let best = null, mir = null, bestKey = -Infinity;
+      for (const {d, mir: m} of donors) {
+        const qq = tr.p.map(p => reflect(p, m)), cc = v().add(qq[0]).add(qq[1]).add(qq[2]).divideScalar(3);
+        const shared = qq.filter(p => d.p.some(e => e.distanceTo(p) < 2e-3)).length;
+        tri.set(...d.p); const key = shared * 100 - tri.closestPointToPoint(cc, cp).distanceTo(cc) + tri.getArea() * 1e-3;
+        if (key > bestKey) { bestKey = key; best = d; mir = m; }
       }
+      const q = tr.p.map(p => reflect(p, mir));
       const uv1 = best.o.geometry.attributes.uv1;
       best.i.forEach((k, j) => uvs[j].fromBufferAttribute(uv1, k));
       tri.set(...best.p);
@@ -511,6 +522,10 @@ const TUR10_DROP_PARTS = [
   // Merdiven duvarının salon ucu (x 0,788): iç kabuğa (x 0,818) oturan ikinci uç başlığı, 38 üçgen.
   {mat: /^EK_M1_Beyaz_saten_alci$/, kutu: [[0.705, 5.773, -3.471], [0.817, 5.890, -3.128]],
     bolge: [[0.60, 5.70, -3.60], [0.95, 5.95, -2.95]]},
+  // 01.10 ürün sahibi (merdiven görüntüsü): kalan dış uç başlığı da (36 üçgen) merdiven boşluğu yanında kesik
+  // profille bitiyor, duvar ucunun tepesinden "çıkan bir şekil" gibi görünüyor -> atılır, duvar ucu tavana düz çıkar.
+  {mat: /^EK_M1_Beyaz_saten_alci$/, kutu: [[0.675, 5.773, -3.471], [0.787, 5.890, -3.097]],
+    bolge: [[0.60, 5.70, -3.60], [0.95, 5.95, -2.95]]},
 ];
 function dropTur10Parts(model) {
   const v = new THREE.Vector3();
@@ -596,20 +611,26 @@ export function rebuildTur10Curtains(model) {
     if (/^EK_D1_.*fon_\d/.test(o.name) || /^EK_D1_.*fon_\d/.test(o.parent?.name ?? '')) stubs.push(o);
   });
   if (!fabric || !stubs.length) return 0;
-  const mat = fabric.clone(); mat.side = THREE.DoubleSide; mat.name = 'EK_perde_kumas';
+  // Kumaş rengi odanın fotoğrafından (01.10 ürün sahibi: damask yatak odası perdesi, aşağıdakiler değil):
+  // bodrum salonu angora_02/03/05 düz kehribar kadife, giriş yemek alanı angora_23 bordo kadife,
+  // 1. kat oturma alanı angora_33 koyu gri fon. Damask doku yalnız çatı yatak odasında (modelin kendi perdesi).
+  const fabricFor = color => { const m = new THREE.MeshStandardMaterial({name: 'EK_perde_velvet', roughness: 0.95, metalness: 0, side: THREE.DoubleSide});
+    m.color.setRGB(...color, THREE.SRGBColorSpace); return m; };
+  const PALETTE = {Bodrum: fabricFor([0.60, 0.34, 0.11]), Salon: fabricFor([0.33, 0.06, 0.08]), F33: fabricFor([0.24, 0.24, 0.25])};
+  const pick = name => PALETTE[Object.keys(PALETTE).find(k => name.includes('_' + k + '_')) ?? 'Bodrum'];
   const box = new THREE.Box3(), size = new THREE.Vector3(), c = new THREE.Vector3();
-  const place = g => { const mesh = new THREE.Mesh(g, mat); mesh.name = 'EK_perde_panel'; mesh.castShadow = true; mesh.receiveShadow = true; model.add(mesh); return mesh; };
+  const place = (g, mat) => { const mesh = new THREE.Mesh(g, mat); mesh.name = 'EK_perde_panel'; mesh.castShadow = true; mesh.receiveShadow = true; model.add(mesh); return mesh; };
   const inv = new THREE.Matrix4().copy(model.matrixWorld).invert();
   let made = 0;
   for (const o of stubs) {
     box.setFromObject(o); box.getSize(size); box.getCenter(c);
     const axis = size.x >= size.z ? 'x' : 'z';             // perde duvar boyunca uzanır
     const g = pleatedCurtain(axis, axis === 'x' ? c.x : c.z, axis === 'x' ? c.z : c.x, box.min.y, box.max.y, 0.55);
-    g.applyMatrix4(inv); place(g); o.visible = false; made++;
+    g.applyMatrix4(inv); place(g, pick(`${o.name} ${o.parent?.name ?? ''}`)); o.visible = false; made++;
   }
   for (const e of TUR10_EXTRA_CURTAINS) {
     const g = pleatedCurtain('x', (e.x[0] + e.x[1]) / 2, e.z, e.y[0], e.y[1], e.x[1] - e.x[0]);
-    g.applyMatrix4(inv); place(g); made++;
+    g.applyMatrix4(inv); place(g, PALETTE.Bodrum); made++;
   }
   return made;
 }
