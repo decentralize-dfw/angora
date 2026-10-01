@@ -1,0 +1,129 @@
+[
+ {
+  "foto": [
+   2,
+   3,
+   5
+  ],
+  "nesne": "EK_Cube_bodrum",
+  "yapilan": "Krem karo çerçevesi ve merkez karoları x=-1.70 m, z=-1.50 m kaydırıldı; yeni merkez (-2.00,0,-5.52), kanepe ile yemek masası arası."
+ },
+ {
+  "foto": [
+   2,
+   3,
+   5
+  ],
+  "nesne": "EK_terra_floor_bodrum",
+  "yapilan": "Taşınan krem desenin eski alanı mevcut terrakota malzemesiyle kapatıldı."
+ },
+ {
+  "foto": [
+   9,
+   10,
+   29
+  ],
+  "nesne": "EK_ceiling [imported].001_cati",
+  "yapilan": "Oturma/hol koridorunda duvar sınırları içinde sarkan çapraz üçgenler kaldırıldı; iki eğimli yüzey, düz mahya ve doğu uç kırması kuruldu. Diğer oda tavanları korunuyor."
+ },
+ {
+  "foto": [
+   9,
+   10,
+   29
+  ],
+  "nesne": "EK_roof.003_cati",
+  "yapilan": "Tavanın içinden geçen çatı alt yüzünün yalnız koridor içindeki 5 köşesi tavan üstüne alındı."
+ },
+ {
+  "foto": [
+   9,
+   10
+  ],
+  "nesne": "EK_D1_F10_tavan_kirisi",
+  "yapilan": "Fotoğrafta koridor tavanını enine kesen beyaz kiriş eklendi."
+ },
+ {
+  "foto": [
+   32
+  ],
+  "nesne": "EK_A09_F32_bordur_arka",
+  "yapilan": "Fotoğrafta olmayan alçak kalın ikinci bordür kaldırıldı; mevcut yüksek ince bordür korundu.",
+  "silindi": true
+ },
+ {
+  "foto": [
+   32
+  ],
+  "nesne": "EK_A09_F32_bordur_sol",
+  "yapilan": "Fotoğrafta olmayan alçak kalın ikinci bordür kaldırıldı; mevcut yüksek ince bordür korundu.",
+  "silindi": true
+ },
+ {
+  "foto": [
+   21
+  ],
+  "nesne": "EK_WOOD2_giris",
+  "yapilan": "Pencere önündeki jaluzi lamelleri üstte 10 cm yüksekliğe toplandı; yalnız bu yüzler mevcut kumaş atlasının açık bej hücresine alındı. Dolap ahşabı değişmedi."
+ },
+ {
+  "foto": [
+   13
+  ],
+  "nesne": "EK_D1_F13_damask_perde",
+  "yapilan": "Mevcut perde geometrisinin kopyası, fotoğraftaki pencereye yerleştirildi; mevcut malzeme kullanıldı."
+ },
+ {
+  "foto": [
+   33
+  ],
+  "nesne": "EK_D1_F33_fon_0",
+  "yapilan": "Mevcut perde geometrisinin kopyası, fotoğraftaki pencereye yerleştirildi; mevcut malzeme kullanıldı."
+ },
+ {
+  "foto": [
+   33
+  ],
+  "nesne": "EK_D1_F33_fon_1",
+  "yapilan": "Mevcut perde geometrisinin kopyası, fotoğraftaki pencereye yerleştirildi; mevcut malzeme kullanıldı."
+ },
+ {
+  "foto": [
+   2,
+   3,
+   5
+  ],
+  "nesne": "EK_D1_Bodrum_fon_0",
+  "yapilan": "Mevcut perde geometrisinin kopyası, fotoğraftaki pencereye yerleştirildi; mevcut malzeme kullanıldı."
+ },
+ {
+  "foto": [
+   23
+  ],
+  "nesne": "EK_D1_Salon_fon_0",
+  "yapilan": "Mevcut perde geometrisinin kopyası, fotoğraftaki pencereye yerleştirildi; mevcut malzeme kullanıldı."
+ },
+ {
+  "foto": [
+   2,
+   3,
+   5
+  ],
+  "nesne": "EK_D1_Bodrum_fon_1",
+  "yapilan": "Mevcut perde geometrisinin kopyası, fotoğraftaki pencereye yerleştirildi; mevcut malzeme kullanıldı."
+ },
+ {
+  "foto": [
+   23
+  ],
+  "nesne": "EK_D1_Salon_fon_1",
+  "yapilan": "Mevcut perde geometrisinin kopyası, fotoğraftaki pencereye yerleştirildi; mevcut malzeme kullanıldı."
+ },
+ {
+  "foto": [
+   21
+  ],
+  "nesne": "EK_ROUGHNESS63_giris",
+  "yapilan": "Yalnız mutfak tezgah arası: 654 kaba karo yüzü kaldırıldı; mevcut X/FOTO_07_X krem küçük mozaik malzemesi, yaklaşık 5 cm karo ölçeğinde uygulandı."
+ }
+]

@@ -1,0 +1,75 @@
+[
+ {
+  "dosya": "BUILDING-opt-v6-alt-d1.glb",
+  "bayt": 83565668,
+  "sha256": "5a66d47fc4ad64af2541de67e4cb4debaf6890aec91d23fce960f2443c60af81",
+  "degisen": [
+   "EK_Cube_bodrum",
+   "EK_terra_floor_bodrum"
+  ],
+  "eklenen": [],
+  "silinen": [],
+  "aynen_korunan_mesh": 682,
+  "malzemeler_ve_dokular_ayni": true,
+  "validator": {
+   "errors": 0,
+   "warnings": 0,
+   "codes": []
+  },
+  "orijinal_nesne_ve_malzeme_adlari_korundu": true,
+  "not": "Aynen korunan mesh sayısı Blender parça birleştirmesi kontrolünden; SHA256 tangent onarımı sonrasına aittir."
+ },
+ {
+  "dosya": "BUILDING-opt-v6-ust-d1.glb",
+  "bayt": 80803472,
+  "sha256": "58878fc1d00c576a2fd5133a917741f1f356a76129efb02c4e51ba97ca3e8c96",
+  "degisen": [
+   "EK_ceiling [imported].001_cati",
+   "EK_roof.003_cati"
+  ],
+  "eklenen": [
+   "EK_D1_F10_tavan_kirisi"
+  ],
+  "silinen": [
+   "EK_A09_F32_bordur_arka",
+   "EK_A09_F32_bordur_sol"
+  ],
+  "aynen_korunan_mesh": 956,
+  "malzemeler_ve_dokular_ayni": true,
+  "validator": {
+   "errors": 0,
+   "warnings": 0,
+   "codes": []
+  },
+  "orijinal_nesne_ve_malzeme_adlari_korundu": true,
+  "not": "Aynen korunan mesh sayısı Blender parça birleştirmesi kontrolünden; SHA256 tangent onarımı sonrasına aittir."
+ },
+ {
+  "dosya": "INTERIOR-opt-v3-d1.glb",
+  "bayt": 64524956,
+  "sha256": "ec41d59423ff04c9d47c7677de9c4c0e4e73f33f38a0228e76b7a51b04e8de11",
+  "degisen": [
+   "EK_ROUGHNESS63_giris",
+   "EK_WOOD2_giris"
+  ],
+  "eklenen": [
+   "EK_D1_Bodrum_fon_0",
+   "EK_D1_Bodrum_fon_1",
+   "EK_D1_F13_damask_perde",
+   "EK_D1_F33_fon_0",
+   "EK_D1_F33_fon_1",
+   "EK_D1_Salon_fon_0",
+   "EK_D1_Salon_fon_1"
+  ],
+  "silinen": [],
+  "aynen_korunan_mesh": 61,
+  "malzemeler_ve_dokular_ayni": true,
+  "validator": {
+   "errors": 0,
+   "warnings": 0,
+   "codes": []
+  },
+  "orijinal_nesne_ve_malzeme_adlari_korundu": true,
+  "not": "Aynen korunan mesh sayısı Blender parça birleştirmesi kontrolünden; SHA256 tangent onarımı sonrasına aittir."
+ }
+]
