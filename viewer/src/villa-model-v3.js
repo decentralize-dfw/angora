@@ -193,6 +193,8 @@ const TUR10_DROP = [
   // boşluğu (z -2,13..-1,93) dolduran sıva parçaları (yarığın içindeki ince duvarlar ve üst kolun alt çizgisinde
   // boşluğu örten eğik kapak) atılır; alt kol (bodrum -> sahanlık) TUR10_STAIR_MOVES ile üst kolun duvarına uzar.
   {mat: /^Simple White Wall$/, min: [0.87, 0.02, -2.17], max: [3.25, 2.95, -1.88]},
+  // alt kolun eski iç kenarındaki eğik ceviz süpürgelik (z -2,119..-2,107): kol uzayınca basamakların üstünde ince koyu çizgi
+  {mat: /^EK_M1_Sicak_ceviz_supurgelik$/, min: [0.5, 0.0, -2.125], max: [3.3, 1.8, -2.10]},
   // 02.10 çatı oturma alanı (ürün sahibi: "abuksubuk"): model-d1'in eklediği enine tavan kirişi (EK_D1_F10_tavan_kirisi,
   // derlemede tavan mesh'ine katıldı; 20 x 25 cm kutu, mahyanın altında). Özgün modelde yok.
   {mat: /^ceiling\.001$/, min: [-2.645, 11.825, -3.53], max: [-2.435, 12.085, -0.52]},
