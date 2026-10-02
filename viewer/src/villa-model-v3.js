@@ -432,6 +432,15 @@ const TUR10_BORROW = [
     source: {mat: /^EK_M2_Beyaz_merdiven_alti$/, atlas: 'duvar', min: [0.6, 5.8, -3.2], max: [3.2, 7.7, -2.1], facing: [0.61, -0.79, 0], minArea: 0.5}, material: 'target'},
   {sliver: true, mats: /^(EK_M2_Beyaz_merdiven_alti|Simple White Wall)$/, min: [0.5, 3.0, -3.5], max: [4.2, 9.6, 0.6], inset: 0.04,
     source: {mat: /^(EK_M2_Beyaz_merdiven_alti|Simple White Wall)$/, atlas: 'duvar', min: [0.4, 2.9, -3.6], max: [4.3, 9.7, 0.7], minArea: 0.05}, material: 'target'},
+  // 02.10 bodrum salonu kolonu (x -1,212..-0,951, z -3,758..-3,16; ürün sahibi: "kolon başı"): iç içe iki kabuk,
+  // pişirmede görünen yüzlerin üçgenleri arasında ışık sıçraması (yan yüzde üstte basamak gibi kırık, önde yatay
+  // çizgi). Görünen üç yüz (ön z -3,757, yanlar x -1,212 / -0,952) kendi ortasındaki tek noktanın ışığıyla.
+  {mats: /^Simple White Wall$/, min: [-1.215, 0.0, -3.760], max: [-0.948, 3.11, -3.754], constant: [-1.08, 1.5, -3.757],
+    source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [-1.215, 0.0, -3.760], max: [-0.948, 3.11, -3.754], facing: [0, 0, -1]}, material: 'target'},
+  {mats: /^Simple White Wall$/, min: [-1.215, 0.0, -3.760], max: [-1.209, 3.11, -3.15], constant: [-1.212, 1.5, -3.45],
+    source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [-1.215, 0.0, -3.760], max: [-1.209, 3.11, -3.15], facing: [-1, 0, 0]}, material: 'target'},
+  {mats: /^Simple White Wall$/, min: [-0.955, 0.0, -3.760], max: [-0.949, 3.11, -3.15], constant: [-0.952, 1.5, -3.45],
+    source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [-0.955, 0.0, -3.760], max: [-0.949, 3.11, -3.15], facing: [1, 0, 0]}, material: 'target'},
   // 02.10 bodrum salonu (ürün sahibi: "merdiven altı neden gri"): alt kolun altındaki üçgen bölgede salona bakan yüz
   // yok; arkadaki duvarın (z -3,102) kollar arası boşluğa bakan yüzünün arkası görünüyordu (pişmiş ışığı öbür
   // yanın, koyu gri). O üçgenler kolun salona bakan yan yüzünün (z -3,127) ışığını okur.
@@ -470,7 +479,7 @@ export function borrowTur10(model) {
         if (rule.source.facing && normal(w).dot(new THREE.Vector3(...rule.source.facing)) < 0.9) continue;
         if (rule.source.minArea && new THREE.Triangle(...w).getArea() < rule.source.minArea) continue;
         src.push({o, tri: new THREE.Triangle(...w), uv: uv && ids.map(i => new THREE.Vector2().fromBufferAttribute(uv, i)), uv1: ids.map(i => new THREE.Vector2().fromBufferAttribute(uv1, i))});
-        used.add(o.uuid + ':' + t);
+        if (!rule.constant) used.add(o.uuid + ':' + t);   // sabit ışıkta kaynak da hedef olabilir (tek ton)
       }
     }
     if (!src.length) continue;
@@ -732,6 +741,11 @@ const TUR10_STAIR_MOVES = [
   // 02.10 bodrum merdiveninin alt kolu (z -3,13..-2,13, bodrum 0 -> sahanlık 1,55): basamaklar, alt yüzü ve yan
   // yüzü üst kolun yan duvarına (z -1,927) kadar uzar; yüzler duvarın 12 mm içinde biter (titreşmesin).
   {mat: /^(WOOD-FL|EK_M2_Beyaz_merdiven_alti)$/, min: [0.55, -0.2, -2.136], max: [3.25, 1.56, -2.115], to: {z: -1.915}},
+  // 02.10 bodrum merdiven sahanlığının doğu uç duvarı (ürün sahibi: "göçük, düz duvar olmalı"): duvar iki kabuk
+  // (x 4,088 önde, x 4,118 3 cm arkada); bodrum katında öndeki kabuk yalnız z -1,93..-0,96'da ve 3,12'den yukarıda
+  // var, sahanlığın önünde arkadaki kabuk görünüyordu (z -1,93'te düşey, 3,1'de yatay basamak). Arkadaki kabuğun
+  // alt köşeleri (y <= 3,1) öndekinin 2,5 mm arkasına alınır: tek düz yüz.
+  {mat: /^Simple White Wall$/, min: [4.110, -0.45, -3.135], max: [4.125, 3.105, -0.92], to: {x: 4.0905}},
 ];
 const TUR10_BAD_RAILS = [
   [[1.722, 4.481, -2.184], [2.046, 6.413, -1.890]], // kollar arası 20 cm boşlukta dikine çubuk (1,98 m)

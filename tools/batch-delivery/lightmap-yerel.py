@@ -44,6 +44,15 @@ KURALLAR = [
     # sıçraması, tavanda düz bir kırım/katlanma gibi görünüyordu (ürün sahibi ekran görüntüsü). Oda tavanı yumuşatılır.
     {'ad': 'ebeveyn-tavan', 'tur': 'yumusat', 'atlas': 'zemin', 'normal': [0, -1, 0], 'duzlem': 8.991,
      'kutu': [[-2.75, 8.98, -8.10], [0.20, 9.00, -3.95]], 'r': 0.45},
+    # 02.10 1. kat kat holü tavanı (y 8,991): uzun ince yelpaze üçgenleri arasında gri dikiş çizgisi
+    {'ad': 'kathol-tavan', 'tur': 'yumusat', 'atlas': 'zemin', 'normal': [0, -1, 0], 'duzlem': 8.991,
+     'kutu': [[-1.40, 8.98, -4.00], [1.80, 9.00, 1.55]], 'r': 0.30},
+    # 02.10 bodrum merdiven sahanlığı (ürün sahibi: "göçük"): sahanlığın kuzey duvarında (z -0,957, -z'ye bakar)
+    # giriş döşemesi hizasında (y 2,62..3,31) yatay şerit; doğu uç duvarındaki (x 4,088) aynı hizadaki bant
+    {'ad': 'bodrum-sahanlik-bant', 'tur': 'sil', 'atlas': 'duvar', 'normal': [0, 0, -1], 'duzlem': -0.957,
+     'kutu': [[0.90, 2.45, -0.96], [4.10, 3.35, -0.95]], 'yaricap': 0.5},
+    {'ad': 'bodrum-uc-bant', 'tur': 'sil', 'atlas': 'duvar', 'normal': [-1, 0, 0], 'duzlem': 4.088,
+     'kutu': [[4.08, 3.05, -3.10], [4.10, 3.40, -0.95]], 'yaricap': 0.5},
     # aynı odanın batı ucundaki pilastr yüzü (x -5,032, +x'e bakar): düşey gri şeritler
     {'ad': 'cati-pilastr', 'tur': 'koyu', 'atlas': 'duvar', 'normal': [1, 0, 0], 'duzlem': -5.032,
      'kutu': [[-5.04, 9.47, -3.60], [-5.02, 11.20, -3.10]], 'r': 0.12, 'oran': 0.85},
