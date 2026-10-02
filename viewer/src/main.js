@@ -1666,6 +1666,15 @@ function exitWalk(reselect = true) {
 // light, the scene assembly, the shader compile and the first composed frame.
 // Nothing creeps and nothing is faked; when it reaches the end the model is
 // already on screen and the boot screen leaves immediately.
+// VR (WebXR) bağlaması: iki yükleme yolunda da (batched ve native) model hazır olunca. 02.10: native yolda hiç
+// çağrılmıyordu - VR düğmesi gözlükte görünmüyor, sonra görünüp hiç çalışmıyordu.
+function wireImmersive(meshGroups){
+  enableImmersiveWalk(renderer,scene,walk,meshGroups,()=>{
+    $('#welcome').hidden=true;
+    try{sessionStorage.setItem('angora-welcome','1');}catch{/* private mode */}
+    if(!walk.active)enterWalk();
+  },()=>{resize();invalidate();},shiftWalkFloor);
+}
 async function loadNativeModel(manifest){
   const loadStarted=performance.now();
   const PHASE={data:.06,model:.62,light:.10,scene:.10,view:.12};
@@ -1838,6 +1847,8 @@ async function loadNativeModel(manifest){
   if(FEATURES.programPrelink){await new Promise(requestAnimationFrame);linkPrograms();}
   phase('view',.75);
   ready=true;document.querySelectorAll('[data-needs-model],#toggle-furniture,#toggle-rooms,#toggle-measurements,#toggle-photos,#enter-walk').forEach(b=>b.disabled=false);
+  // ışınlanma ışını yalnız bina, iç mekân ve bahçeye (komşu/çevre grupları gözlükte yavaşlatmasın)
+  wireImmersive({values:()=>[...groups].filter(([name])=>name==='architecture'||name==='garden'||name.startsWith('interior')).map(([,group])=>group)});
   await selectView(selected,true);lighting.render(camera);
   phaseDone('view');step(null);status.hidden=true;
   host.dataset.deliveryStats=JSON.stringify({...JSON.parse(host.dataset.deliveryStats),readyMs:Math.round(performance.now()-loadStarted)});
@@ -2443,11 +2454,7 @@ async function loadModel() {
     // grows a third choice, and taking it puts the visitor inside the house on
     // their feet before the session opens. Declining it - or closing the card -
     // leaves the viewer exactly as it is on a screen.
-    enableImmersiveWalk(renderer,scene,walk,groups,()=>{
-      $('#welcome').hidden=true;
-      try{sessionStorage.setItem('angora-welcome','1');}catch{/* private mode */}
-      if(!walk.active)enterWalk();
-    },()=>{resize();invalidate();},shiftWalkFloor);
+    wireImmersive(groups);
     // Build each storey's cut geometry once, here, rather than on the frame
     // that first shows it: four heights, four slices, and the allocation and
     // the triangulation upload are behind us.
