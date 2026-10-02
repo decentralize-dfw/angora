@@ -147,6 +147,20 @@ def main(trisf, src, dst, ejs, cjs):
         qy, qx = sys_[j], sxs[j]
         for m in maps:
             out[m][ys, xs] = np.sqrt((imgs[m][qy, qx] ** 2 * w[..., None]).sum(1))
+        # koyu kalıntı: kaynakta d1 mahyasının kiriş gölgesi/köşe gölgesi (özgün mahyada koyu üçgen). Gök haritasında
+        # 40 cm içindeki aynı yönlü yeni teksellerin ortancasının 0,8 katından koyu teksel, koyu olmayan komşularının
+        # ortalamasını alır (bütün haritalarda).
+        lg = out[maps[0]][ys, xs].mean(1)   # bu çözünürlükteki ilk harita (gök ya da güneş) ölçüt
+        if True:
+            tr = cKDTree(pos); nb = tr.query_ball_point(pos, 0.4)
+            for i, lst in enumerate(nb):
+                lst = np.array(lst); lst = lst[n[tt[lst]] @ n[tt[i]] > 0.9]
+                if len(lst) < 8: continue
+                med = np.median(lg[lst])
+                if lg[i] < 0.8 * med:
+                    iyi = lst[lg[lst] >= 0.9 * med]
+                    if len(iyi):
+                        for m in maps: out[m][ys[i], xs[i]] = np.sqrt((out[m][ys[iyi], xs[iyi]] ** 2).mean(0))
         # 4. taşma payı
         ic = tid > 0
         pay = ndimage.binary_dilation(ic, iterations=max(2, PAY * W // REF // 2)) & ~ic
@@ -159,10 +173,10 @@ def main(trisf, src, dst, ejs, cjs):
                 '// ışık atlasındaki kendi adaları (köşe başına uv1, EKLE sırası). Elle düzenlemeyin.\n')
         f.write('export const UV1 = new Float32Array([' + ','.join(f'{v:.6f}' for v in UV1.ravel()) + ']);\n')
     print('yerleşim', UV1.reshape(-1, 2).min(0), UV1.reshape(-1, 2).max(0))
-    duvar_doldur(json.load(open(trisf))['duvar'], SP[kaynak], src, dst)
+    duvar_doldur(json.load(open(trisf))['duvar'], SP[kaynak], src, dst, P)
 
 
-def duvar_doldur(T, SPc, src, dst):
+def duvar_doldur(T, SPc, src, dst, Pnew=None):
     """Özgün tavan d1'inkinden yüksek: kuzey/güney diz duvarlarının (ve kutudaki öbür dik duvarların) d1 tavanının
     ÜSTÜNDE kalan kısmı pişirmede görünmüyordu, kara/koyu gri pişti; özgün tavan gelince açığa çıktı (yan yüzler koyu
     gri). Böyle tekseller aynı duvar düzleminde d1 tavanının en az 25 cm altındaki aydınlık tekselleriyle doldurulur.
@@ -174,7 +188,7 @@ def duvar_doldur(T, SPc, src, dst):
     duvar = np.nonzero(np.all((c > lo - [0, 1.0, 0]) & (c < hi), axis=1) & (np.abs(n[:, 1]) < 0.2) & (A > 1e-5))[0]
     # d1 tavanı: xz izdüşümünde nokta-üçgen, en alçak tavan
     cn = np.cross(SPc[:, 1] - SPc[:, 0], SPc[:, 2] - SPc[:, 0]); tav = SPc[cn[:, 1] < -1e-9]
-    def tavan_y(q):
+    def tavan_y(q, tav=tav):
         y = np.full(len(q), np.inf)
         for t in tav:
             a, b, cc = t[:, [0, 2]]; v0, v1, v2 = b - a, cc - a, q - a
@@ -197,8 +211,12 @@ def duvar_doldur(T, SPc, src, dst):
         ty = tavan_y((pos + tn * 0.06)[:, [0, 2]])
         g = imgs['gok']; gh = g.shape[0]
         isik = g[np.clip((ys + .5) * gh // W, 0, gh - 1).astype(int), np.clip((xs + .5) * gh // W, 0, gh - 1).astype(int)].max(1) >= dunya.KARA
-        gizli = np.isfinite(ty) & (pos[:, 1] > ty - 0.02)
-        kaynak = np.isfinite(ty) & (pos[:, 1] < ty - 0.25) & isik
+        # d1 tavanının üstü + özgün tavanın daha yüksek olduğu yerde eski köşe birleşiminin gölge bandı (22 cm; duvarda
+        # eski tavan çizgisi boyunca kesik kesik koyu çizgi kalıyordu)
+        ny = tavan_y((pos + tn * 0.06)[:, [0, 2]], Pnew) if Pnew is not None else np.full(len(pos), np.inf)
+        yuksek = np.isfinite(ny) & (ny > ty + 0.05)
+        gizli = np.isfinite(ty) & ((pos[:, 1] > ty - 0.02) | (yuksek & (pos[:, 1] > ty - 0.22)))
+        kaynak = np.isfinite(ty) & (pos[:, 1] < ty - 0.30) & isik
         degisen = np.zeros((W, W), bool)
         # düzlem düzlem (normal + düzlem uzaklığı)
         anah = np.round(np.c_[tn * 20, (tn * pos).sum(1, keepdims=True) * 50]).astype(int)
