@@ -147,20 +147,20 @@ def main(trisf, src, dst, ejs, cjs):
         qy, qx = sys_[j], sxs[j]
         for m in maps:
             out[m][ys, xs] = np.sqrt((imgs[m][qy, qx] ** 2 * w[..., None]).sum(1))
-        # koyu kalıntı: kaynakta d1 mahyasının kiriş gölgesi/köşe gölgesi (özgün mahyada koyu üçgen). Gök haritasında
-        # 40 cm içindeki aynı yönlü yeni teksellerin ortancasının 0,8 katından koyu teksel, koyu olmayan komşularının
-        # ortalamasını alır (bütün haritalarda).
-        lg = out[maps[0]][ys, xs].mean(1)   # bu çözünürlükteki ilk harita (gök ya da güneş) ölçüt
-        if True:
-            tr = cKDTree(pos); nb = tr.query_ball_point(pos, 0.4)
+        # aykırı teksel: kaynakta d1 mahyasının kiriş/lamba izi (özgün mahyada koyu üçgen). Her haritada 40 cm içindeki
+        # aynı yönlü yeni teksellerin ortancasının 0,7 katından koyu ya da 1,6 katından parlak teksel, ortancaya yakın
+        # komşularının ortalamasını alır (güneş lekesi gibi geniş geçişlere dokunmaz).
+        tr = cKDTree(pos); nb = tr.query_ball_point(pos, 0.4)
+        nb = [np.array(lst)[n[tt[np.array(lst)]] @ n[tt[i]] > 0.9] for i, lst in enumerate(nb)]
+        for m in maps:   # her harita kendi ölçütüyle (gece haritasında lamba gövdesinin koyu izi, gökte parlak leke)
+            lg = out[m][ys, xs].mean(1); yeni = out[m][ys, xs].copy()
             for i, lst in enumerate(nb):
-                lst = np.array(lst); lst = lst[n[tt[lst]] @ n[tt[i]] > 0.9]
                 if len(lst) < 8: continue
                 med = np.median(lg[lst])
-                if lg[i] < 0.8 * med:
-                    iyi = lst[lg[lst] >= 0.9 * med]
-                    if len(iyi):
-                        for m in maps: out[m][ys[i], xs[i]] = np.sqrt((out[m][ys[iyi], xs[iyi]] ** 2).mean(0))
+                if lg[i] < 0.7 * med or lg[i] > 1.6 * med:
+                    iyi = lst[(lg[lst] >= 0.9 * med) & (lg[lst] <= 1.15 * med)]
+                    if len(iyi): yeni[i] = np.sqrt((out[m][ys[iyi], xs[iyi]] ** 2).mean(0))
+            out[m][ys, xs] = yeni
         # 4. taşma payı
         ic = tid > 0
         pay = ndimage.binary_dilation(ic, iterations=max(2, PAY * W // REF // 2)) & ~ic

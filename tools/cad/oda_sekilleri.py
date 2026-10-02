@@ -20,6 +20,11 @@ from shapely.ops import voronoi_diagram, polylabel
 # çiziminin balkon ölçülerinin uçlarından (dxf-dimensions.js: 2,0 m ve 1,8 m).
 SABIT = {'f1-Z10': (-1.97, -10.08, 0.0, -8.28), 'f2-110': (-1.95, -10.07, -0.14, -8.34)}
 
+# Merdiven boşluğu (x 0,788..4,088, z -3,096..-0,957): rooms.json sınırında giriş antresi ve 1. kat holünün içinde.
+# Ad merdivenin üstüne düşüyordu (02.10 ürün sahibi: "antre alakasız yerde", "kat holü zeminin üzerinde değil");
+# bu odaların poligonundan çıkarılır, ad zeminde kalır.
+CIKAR = {'f1-Z02': [(0.788, -3.096, 4.088, -0.957)], 'f2-101': [(0.788, -3.096, 4.088, -0.957)]}
+
 
 def merkez(g):
     """Etiket noktası: duvara uzaklığı en büyüğün %85'inden az olmayan iç noktalar içinden oda ağırlık merkezine en
@@ -71,6 +76,12 @@ def main(src, dst, runtime=None):
             if dd: xs += [dd['a'][0], dd['b'][0]]; zs += [dd['a'][2], dd['b'][2]]
         if xs and max(xs) - min(xs) > 0.3 and max(zs) - min(zs) > 0.3: out[rid] = box(min(xs), min(zs), max(xs), max(zs))
         else: x, z = r['position'][0], r['position'][2]; out[rid] = box(x - 0.6, z - 0.6, x + 0.6, z + 0.6)
+    for rid, boxes in CIKAR.items():
+        if rid in out:
+            g = out[rid]
+            for b in boxes: g = g.difference(box(*b))
+            if g.geom_type != 'Polygon': g = max(g.geoms, key=lambda q: q.area)
+            out[rid] = g
     res = {}
     for rid, g in out.items():
         g = g.simplify(0.005)
