@@ -131,7 +131,12 @@ def main(trisf, src, dst, ejs, cjs):
         for g in range(len(gruplar)):
             ts = np.array(gruplar[g]); nn = n[ts].mean(0); nn /= np.linalg.norm(nn)
             sel = np.isin(tt, ts)
-            ok = sn[stt] @ nn > 0.7
+            # kaynak: kıl üçgenler hariç (duvar dibindeki d1 şeritleri temas gölgesinde koyu; özgün tavanın eğik yüzü
+            # aynı yöne bakan yalnız bu şeritleri bulup koyu gri çıkıyordu). Aynı yöne bakan (cos > 0,7) kaynak
+            # parçanın tekselleri için ortalama 35 cm'den uzaksa yönü yakın (cos > 0,2) kaynak.
+            genis = sa[stt] > 0.02
+            ok = genis & (sn[stt] @ nn > 0.7)
+            if ok.sum() < K or cKDTree(spos[ok]).query(pos[sel])[0].mean() > 0.35: ok = genis & (sn[stt] @ nn > 0.2)
             if ok.sum() < K: ok = np.ones(len(stt), bool)
             tree = cKDTree(spos[ok]); d, j = tree.query(pos[sel], k=K)
             w = 1 / (d + 0.03) ** 2; w /= w.sum(1, keepdims=True)
