@@ -197,6 +197,9 @@ const TUR10_DROP = [
   // katmanı (EK_cam_lambri, döşeme boşluğunun içinde); tavan üçgeninin duvar ötesine taşan köşesinde (x -1,34,
   // z -4,34) tavanla çakışıp duvar dibinde kahverengi kama gibi görünüyordu. Yukarıdan da görünmez (çatı döşemesi).
   {mat: /^EK_cam_lambri$/, min: [-6.1, 8.985, -4.4], max: [-0.9, 8.997, 0.0], normal: [0, 1, 0]},
+  // bodrum sahanlığının doğu uç duvarı: öndeki kabuğun bodrumdaki tek parçası (x 4,088, z -1,93..-0,958, y 0..3,1);
+  // arkadaki kabuk öne alınınca (TUR10_STAIR_MOVES) kenarları duvarda dikdörtgen çizgi bırakıyordu
+  {mat: /^Simple White Wall$/, min: [4.085, -0.1, -1.935], max: [4.091, 3.105, -0.95], normal: [1, 0, 0]},
   // alt kolun eski iç kenarındaki eğik ceviz süpürgelik (z -2,119..-2,107): kol uzayınca basamakların üstünde ince koyu çizgi
   {mat: /^EK_M1_Sicak_ceviz_supurgelik$/, min: [0.5, 0.0, -2.125], max: [3.3, 1.8, -2.10]},
   // 02.10 çatı oturma alanı (ürün sahibi: "abuksubuk"): model-d1'in eklediği enine tavan kirişi (EK_D1_F10_tavan_kirisi,
