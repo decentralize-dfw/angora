@@ -57,10 +57,11 @@ def texel_world(ids, UV, P, W):
     # onu bir köşeye atabiliyordu (ince/kıl üçgende 2 m ötedeki köşeye); kıl üçgen doldurulurken o köşenin ışığı
     # alınıp komşu geniş yüzün içinde kesik kesik koyu noktalar kalıyordu (çatı diz duvarı, 02.10). Bunlar UV'de
     # üçgenin en yakın kenar noktasına izdüşürülür.
-    # Yalnız ince üçgenlerde (dünyada yüksekliği < 2 cm): öbürlerinde kırpma zaten komşu kenarda kalıyor ve
-    # bütün atlası değiştirmemek için eski davranış korunur.
-    E = np.stack([np.linalg.norm(P[:, (i + 1) % 3] - P[:, i], axis=1) for i in range(3)], 1).max(1)
-    ince = (np.linalg.norm(np.cross(P[:, 1] - P[:, 0], P[:, 2] - P[:, 0]), axis=1) / np.maximum(E, 1e-9)) < 0.02
+    # Yalnız atlasta ince üçgenlerde (UV'de yüksekliği < 3 teksel: dünyada 4 cm'lik ama atlasta 1 teksellik kat holü
+    # tavan şeridi de); öbürlerinde kırpma zaten komşu kenarda kalıyor, bütün atlası değiştirmemek için eski davranış.
+    EU = np.stack([np.linalg.norm(UV[:, (i + 1) % 3] - UV[:, i], axis=1) for i in range(3)], 1).max(1)
+    cu = np.abs((UV[:, 1, 0] - UV[:, 0, 0]) * (UV[:, 2, 1] - UV[:, 0, 1]) - (UV[:, 1, 1] - UV[:, 0, 1]) * (UV[:, 2, 0] - UV[:, 0, 0]))
+    ince = cu / np.maximum(EU, 1e-12) * W < 3
     out = ((l1r < 0) | (l2r < 0) | (l1r + l2r > 1)) & ince[t]
     if out.any():
         k = np.nonzero(out)[0]; tk = t[k]; q = np.stack([u[k], v[k]], 1)

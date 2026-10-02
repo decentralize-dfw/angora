@@ -442,6 +442,11 @@ const TUR10_BORROW = [
   // kahverengi cam lambri katmanı, o atılınca ince koyu çizgi). Tavanın 0,5 mm altına, tavan ışığıyla kapak.
   {cap: {y: 8.9905, min: [-2.62, -4.345], max: [-0.95, -4.0]},
     source: {mat: /^ceiling\.001$/, atlas: 'zemin', min: [-2.8, 8.985, -8.1], max: [0.2, 8.997, -4.0], facing: [0, -1, 0], minArea: 0.5}},
+  // 02.10 çatı oturma alanı (ürün sahibi: sağ üst köşe işareti): güney diz duvarında 1 cm'lik kademe (x -2,573,
+  // z -3,548/-3,557, y 11,02..11,18); kademenin küçük yüzleri pişirmede kapkara, köşede kısa koyu çizgi. Yanındaki
+  // duvarın ışığıyla.
+  {mats: /^Simple White Wall$/, min: [-2.75, 10.95, -3.60], max: [-2.35, 11.25, -3.54], constant: [-2.9, 10.6, -3.547],
+    source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [-5.1, 9.3, -3.549], max: [-0.5, 12.3, -3.545], facing: [0, 0, 1], minArea: 0.3}, material: 'target'},
   // 02.10 bodrum salonu kolonu (x -1,212..-0,951, z -3,758..-3,16; ürün sahibi: "kolon başı"): iç içe iki kabuk,
   // pişirmede görünen yüzlerin üçgenleri arasında ışık sıçraması (yan yüzde üstte basamak gibi kırık, önde yatay
   // çizgi). Görünen üç yüz (ön z -3,757, yanlar x -1,212 / -0,952) kendi ortasındaki tek noktanın ışığıyla.

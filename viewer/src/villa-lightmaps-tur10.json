@@ -9,45 +9,45 @@
           "olcek": 0.243372,
           "ortalama": 0.003181,
           "dosya": "duvar_gok.ktx2",
-          "bytes": 249998,
+          "bytes": 249890,
           "boyutTam": 2048,
-          "bytesTam": 2492669
+          "bytesTam": 2484323
         },
         "gunes_09": {
           "boyut": 512,
           "olcek": 0.021796,
           "ortalama": 0.000166,
           "dosya": "duvar_gunes_09.ktx2",
-          "bytes": 229781,
+          "bytes": 229264,
           "boyutTam": 1024,
-          "bytesTam": 728011
+          "bytesTam": 726278
         },
         "gunes_13": {
           "boyut": 512,
           "olcek": 0.004071,
           "ortalama": 0.000066,
           "dosya": "duvar_gunes_13.ktx2",
-          "bytes": 242307,
+          "bytes": 241718,
           "boyutTam": 1024,
-          "bytesTam": 787326
+          "bytesTam": 785397
         },
         "gunes_17": {
           "boyut": 512,
           "olcek": 0.005935,
           "ortalama": 0.000087,
           "dosya": "duvar_gunes_17.ktx2",
-          "bytes": 240347,
+          "bytes": 239771,
           "boyutTam": 1024,
-          "bytesTam": 773681
+          "bytesTam": 772070
         },
         "gece": {
           "boyut": 512,
           "olcek": 1.986915,
           "ortalama": 0.040514,
           "dosya": "duvar_gece.ktx2",
-          "bytes": 238585,
+          "bytes": 238218,
           "boyutTam": 2048,
-          "bytesTam": 2399206
+          "bytesTam": 2389188
         }
       }
     },
@@ -59,45 +59,45 @@
           "olcek": 0.593845,
           "ortalama": 0.015028,
           "dosya": "zemin_gok.ktx2",
-          "bytes": 273759,
+          "bytes": 273538,
           "boyutTam": 2048,
-          "bytesTam": 2786065
+          "bytesTam": 2782456
         },
         "gunes_09": {
           "boyut": 512,
           "olcek": 0.056241,
           "ortalama": 0.000645,
           "dosya": "zemin_gunes_09.ktx2",
-          "bytes": 244909,
+          "bytes": 245014,
           "boyutTam": 1024,
-          "bytesTam": 775893
+          "bytesTam": 774302
         },
         "gunes_13": {
           "boyut": 512,
           "olcek": 0.064637,
           "ortalama": 0.000457,
           "dosya": "zemin_gunes_13.ktx2",
-          "bytes": 237342,
+          "bytes": 237147,
           "boyutTam": 1024,
-          "bytesTam": 735731
+          "bytesTam": 733841
         },
         "gunes_17": {
           "boyut": 512,
           "olcek": 0.060898,
           "ortalama": 0.000397,
           "dosya": "zemin_gunes_17.ktx2",
-          "bytes": 242329,
+          "bytes": 242155,
           "boyutTam": 1024,
-          "bytesTam": 758148
+          "bytesTam": 756479
         },
         "gece": {
           "boyut": 512,
           "olcek": 2.413992,
           "ortalama": 0.06807,
           "dosya": "zemin_gece.ktx2",
-          "bytes": 273105,
+          "bytes": 272991,
           "boyutTam": 2048,
-          "bytesTam": 2958156
+          "bytesTam": 2954921
         }
       }
     },
@@ -109,45 +109,45 @@
           "olcek": 0.922855,
           "ortalama": 0.174957,
           "dosya": "cephe_gok.ktx2",
-          "bytes": 253643,
+          "bytes": 253386,
           "boyutTam": 1024,
-          "bytesTam": 811914
+          "bytesTam": 811260
         },
         "gunes_09": {
           "boyut": 512,
           "olcek": 0.085133,
           "ortalama": 0.003718,
           "dosya": "cephe_gunes_09.ktx2",
-          "bytes": 234957,
+          "bytes": 234740,
           "boyutTam": 1024,
-          "bytesTam": 742934
+          "bytesTam": 742624
         },
         "gunes_13": {
           "boyut": 512,
           "olcek": 0.07849,
           "ortalama": 0.005034,
           "dosya": "cephe_gunes_13.ktx2",
-          "bytes": 243048,
+          "bytes": 242891,
           "boyutTam": 1024,
-          "bytesTam": 776539
+          "bytesTam": 776075
         },
         "gunes_17": {
           "boyut": 512,
           "olcek": 0.074812,
           "ortalama": 0.003725,
           "dosya": "cephe_gunes_17.ktx2",
-          "bytes": 226100,
+          "bytes": 225938,
           "boyutTam": 1024,
-          "bytesTam": 708407
+          "bytesTam": 707955
         },
         "gece": {
           "boyut": 512,
           "olcek": 0.419704,
           "ortalama": 0.002681,
           "dosya": "cephe_gece.ktx2",
-          "bytes": 134172,
+          "bytes": 134191,
           "boyutTam": 1024,
-          "bytesTam": 377906
+          "bytesTam": 377870
         }
       }
     },

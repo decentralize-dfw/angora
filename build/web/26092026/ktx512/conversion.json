@@ -1563,7 +1563,7 @@
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
-      "bytes": 249998,
+      "bytes": 249890,
       "srgb": false
     },
     {
@@ -1572,7 +1572,7 @@
       "height": 2048,
       "sourceWidth": 2048,
       "sourceHeight": 2048,
-      "bytes": 2492669,
+      "bytes": 2484323,
       "srgb": false
     },
     {
@@ -1581,7 +1581,7 @@
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
-      "bytes": 229781,
+      "bytes": 229264,
       "srgb": false
     },
     {
@@ -1590,7 +1590,7 @@
       "height": 1024,
       "sourceWidth": 1024,
       "sourceHeight": 1024,
-      "bytes": 728011,
+      "bytes": 726278,
       "srgb": false
     },
     {
@@ -1599,7 +1599,7 @@
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
-      "bytes": 242307,
+      "bytes": 241718,
       "srgb": false
     },
     {
@@ -1608,7 +1608,7 @@
       "height": 1024,
       "sourceWidth": 1024,
       "sourceHeight": 1024,
-      "bytes": 787326,
+      "bytes": 785397,
       "srgb": false
     },
     {
@@ -1617,7 +1617,7 @@
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
-      "bytes": 240347,
+      "bytes": 239771,
       "srgb": false
     },
     {
@@ -1626,7 +1626,7 @@
       "height": 1024,
       "sourceWidth": 1024,
       "sourceHeight": 1024,
-      "bytes": 773681,
+      "bytes": 772070,
       "srgb": false
     },
     {
@@ -1635,7 +1635,7 @@
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
-      "bytes": 238585,
+      "bytes": 238218,
       "srgb": false
     },
     {
@@ -1644,7 +1644,7 @@
       "height": 2048,
       "sourceWidth": 2048,
       "sourceHeight": 2048,
-      "bytes": 2399206,
+      "bytes": 2389188,
       "srgb": false
     },
     {
@@ -1653,7 +1653,7 @@
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
-      "bytes": 273759,
+      "bytes": 273538,
       "srgb": false
     },
     {
@@ -1662,7 +1662,7 @@
       "height": 2048,
       "sourceWidth": 2048,
       "sourceHeight": 2048,
-      "bytes": 2786065,
+      "bytes": 2782456,
       "srgb": false
     },
     {
@@ -1671,7 +1671,7 @@
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
-      "bytes": 244909,
+      "bytes": 245014,
       "srgb": false
     },
     {
@@ -1680,7 +1680,7 @@
       "height": 1024,
       "sourceWidth": 1024,
       "sourceHeight": 1024,
-      "bytes": 775893,
+      "bytes": 774302,
       "srgb": false
     },
     {
@@ -1689,7 +1689,7 @@
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
-      "bytes": 237342,
+      "bytes": 237147,
       "srgb": false
     },
     {
@@ -1698,7 +1698,7 @@
       "height": 1024,
       "sourceWidth": 1024,
       "sourceHeight": 1024,
-      "bytes": 735731,
+      "bytes": 733841,
       "srgb": false
     },
     {
@@ -1707,7 +1707,7 @@
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
-      "bytes": 242329,
+      "bytes": 242155,
       "srgb": false
     },
     {
@@ -1716,7 +1716,7 @@
       "height": 1024,
       "sourceWidth": 1024,
       "sourceHeight": 1024,
-      "bytes": 758148,
+      "bytes": 756479,
       "srgb": false
     },
     {
@@ -1725,7 +1725,7 @@
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
-      "bytes": 273105,
+      "bytes": 272991,
       "srgb": false
     },
     {
@@ -1734,7 +1734,7 @@
       "height": 2048,
       "sourceWidth": 2048,
       "sourceHeight": 2048,
-      "bytes": 2958156,
+      "bytes": 2954921,
       "srgb": false
     },
     {
@@ -1743,7 +1743,7 @@
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
-      "bytes": 253643,
+      "bytes": 253386,
       "srgb": false
     },
     {
@@ -1752,7 +1752,7 @@
       "height": 1024,
       "sourceWidth": 1024,
       "sourceHeight": 1024,
-      "bytes": 811914,
+      "bytes": 811260,
       "srgb": false
     },
     {
@@ -1761,7 +1761,7 @@
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
-      "bytes": 234957,
+      "bytes": 234740,
       "srgb": false
     },
     {
@@ -1770,7 +1770,7 @@
       "height": 1024,
       "sourceWidth": 1024,
       "sourceHeight": 1024,
-      "bytes": 742934,
+      "bytes": 742624,
       "srgb": false
     },
     {
@@ -1779,7 +1779,7 @@
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
-      "bytes": 243048,
+      "bytes": 242891,
       "srgb": false
     },
     {
@@ -1788,7 +1788,7 @@
       "height": 1024,
       "sourceWidth": 1024,
       "sourceHeight": 1024,
-      "bytes": 776539,
+      "bytes": 776075,
       "srgb": false
     },
     {
@@ -1797,7 +1797,7 @@
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
-      "bytes": 226100,
+      "bytes": 225938,
       "srgb": false
     },
     {
@@ -1806,7 +1806,7 @@
       "height": 1024,
       "sourceWidth": 1024,
       "sourceHeight": 1024,
-      "bytes": 708407,
+      "bytes": 707955,
       "srgb": false
     },
     {
@@ -1815,7 +1815,7 @@
       "height": 512,
       "sourceWidth": 512,
       "sourceHeight": 512,
-      "bytes": 134172,
+      "bytes": 134191,
       "srgb": false
     },
     {
@@ -1824,7 +1824,7 @@
       "height": 1024,
       "sourceWidth": 1024,
       "sourceHeight": 1024,
-      "bytes": 377906,
+      "bytes": 377870,
       "srgb": false
     },
     {
