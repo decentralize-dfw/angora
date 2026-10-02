@@ -470,7 +470,7 @@ const TUR10_BORROW = [
   // 02.10 bodrum salonu (ürün sahibi: "merdiven altı neden gri"): alt kolun altındaki üçgen bölgede salona bakan yüz
   // yok; arkadaki duvarın (z -3,102) kollar arası boşluğa bakan yüzünün arkası görünüyordu (pişmiş ışığı öbür
   // yanın, koyu gri). O üçgenler kolun salona bakan yan yüzünün (z -3,127) ışığını okur.
-  {mats: /^Simple White Wall$/, min: [0.55, -0.1, -3.11], max: [4.10, 1.6, -3.095], constant: [1.664, 0.40, -3.127],
+  {mats: /^Simple White Wall$/, min: [0.55, -0.1, -3.11], max: [4.20, 1.6, -3.095], constant: [1.664, 0.40, -3.127],
     source: {mat: /^EK_M2_Beyaz_merdiven_alti$/, atlas: 'duvar', min: [0.55, -0.2, -3.13], max: [3.25, 1.6, -3.12], facing: [0, 0, -1]}, material: 'target'},
   // 02.10 çatı merdiven boşluğu: d1'in eğik düzlemi atılıp özgün beşik geri gelince (regableTur10Attic) iki yandaki
   // diz duvarlarının (x 3,14) düzlemin üstünde kalmış uç parçaları göründü; pişirmede düzlemin arkasında kaldıkları
