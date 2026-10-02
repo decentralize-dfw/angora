@@ -244,20 +244,21 @@ h1 strong{font-weight:700}
 .annotation-overlay,.hotspot-overlay{position:absolute;inset:0;pointer-events:none;z-index:5;overflow:hidden}
 /* 02.10 ürün sahibi: oda adları her zaman okunur - fotoğraf işaretlerinin (z 6) üstünde; ad tıklamayı geçirir, altındaki işaret tıklanır */
 .annotation-overlay{z-index:7}
-.room-label{position:absolute;transform:translate(-50%,-50%) scale(var(--label-fit,1));padding:0;background:none;border:0;box-shadow:none;text-align:left;line-height:1.25;pointer-events:none;max-width:150px;min-width:44px;min-height:44px;color:#1c2622;display:grid;place-items:center}
+.room-label{position:absolute;transform:translate(-50%,-50%) scale(var(--label-fit,1));padding:0;background:none;border:0;box-shadow:none;text-align:left;line-height:1.25;pointer-events:none;max-width:150px;min-width:0;min-height:0;color:#1c2622;display:grid;place-items:center}
 /* A white glow over a walnut floor is not contrast, it is haze - the names
    and their m² were being read off the wood rather than off anything. The tag
    sits on a plate instead, and annotations.js scales that plate until it fits
    inside the room's own measured rectangle from whatever angle the model is
    turned to; a name that cannot keep its plate inside the room gives it up
    (data-plate=off) or leaves the drawing altogether. */
-.room-label i{padding:4px 9px 5px;background:rgba(255,255,255,.4);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);border:0;border-radius:11px;box-shadow:0 1px 3px #1b322514;max-width:100%;min-width:0;font-style:normal;text-align:center;text-shadow:none}
+/* 02.10 ürün sahibi: "background blur efektini düşür" */
+.room-label i{padding:2px 6px 3px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:none;backdrop-filter:none;border:0;border-radius:11px;box-shadow:0 1px 3px #1b322514;max-width:100%;min-width:0;font-style:normal;text-align:center;text-shadow:none}
 .room-label[data-plate=off] i{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none;text-shadow:0 1px 2px #fff,0 0 6px #ffffffd9,0 0 12px #ffffff8c}
 .room-label strong{display:block;font-weight:700;padding-right:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#16241e}
 .room-label em{display:block;font-style:normal}
 .room-label span{display:block;font-size:.82em;color:#43584f;margin-top:1px;font-variant-numeric:tabular-nums}
 .room-label small{display:none}
-.dimension-label{position:absolute;transform:translate(-50%,-50%);padding:3px 7px;border-radius:6px;white-space:nowrap;font-weight:600;letter-spacing:.02em;background:#182420ee;color:#fff;box-shadow:0 1px 5px #ffffff99}
+.dimension-label{position:absolute;transform:translate(-50%,-50%);padding:1px 4px;border-radius:4px;line-height:1.2;white-space:nowrap;font-weight:600;letter-spacing:.02em;background:#182420ee;color:#fff;box-shadow:0 1px 5px #ffffff99}
 .dimension-label.measured{background:rgba(255,255,255,.72);color:#31514a;border:1px solid #8ba79d;font-weight:600;box-shadow:0 1px 4px #ffffffcc;-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur)}
 .hotspot{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;background:transparent;color:#fff;min-height:44px;min-width:44px;filter:drop-shadow(0 1px 3px #0009)}
 .hotspot i{display:block;margin:auto;width:28px;height:16px;border:2px solid #fff;border-radius:50%;background:#ffffff44;box-shadow:0 0 0 5px #ffffff1a}
@@ -739,12 +740,16 @@ h1 strong{font-weight:700}
      its own dot, so a crowded storey reads as a drawing again. The dot keeps
      its place exactly; only the rays get shorter. */
   .photo-pin svg{transform:translate(-20px,-20px) rotate(var(--pin-angle,0deg)) scale(.82)}
-  .photo-backdrop{display:block}
-  .photo-dock{right:auto;left:0;width:100%;top:0;bottom:0;justify-items:center;align-content:center}
-  .photo-view{width:80vw;max-width:80vw;max-height:80dvh}
-  .photo-view img{max-height:calc(80dvh - 46px)}
-  .photo-view[data-state=loading] img{min-height:min(46dvh,340px)}
-  .photo-close{right:8px;top:8px;width:36px;height:36px}
+  /* 02.10 ürün sahibi: "tam ekran açılmasın; sol üst menü genişliğinde, 4:3, kompakt". Beyaz perde yok: pin basışla
+     açılınca ardından gelen tıklama perdeye düşüp pencereyi hemen kapatıyordu ("bazen tıklıyorum açılmıyor"). Konum ve
+     genişlik main.js layoutOverlays'ten (menünün altı). */
+  .photo-backdrop{display:none}
+  .photo-dock{right:auto;left:12px;width:min(78vw,300px);top:62px;bottom:auto;display:block}
+  .photo-view{width:100%;max-width:100%;max-height:none;border-radius:12px}
+  .photo-view img{aspect-ratio:4/3;width:100%;height:auto;max-height:none;object-fit:cover}
+  .photo-view[data-state=loading] img{min-height:0}
+  .photo-view figcaption{padding:5px 9px 6px;font-size:10.5px}
+  .photo-close{right:6px;top:6px;width:30px;height:30px;font-size:16px}
   .load-status{bottom:120px;font-size:12px}
   .property-stat strong{font-size:20px}
 }

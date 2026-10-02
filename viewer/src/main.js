@@ -598,9 +598,18 @@ function reframeForOverlays(){
 function layoutOverlays() {
   const dock=$('#photo-dock');if(!dock)return;
   if(matchMedia('(max-width:720px)').matches){
-    for(const key of ['top','bottom'])dock.style.removeProperty(key);
-    delete dock.dataset.side;return;
+    // 02.10 ürün sahibi: telefonda tam ekran değil; sol üst menünün (Bölge / Yakın çevre / Villa) hemen altında,
+    // onun genişliğinde, 4:3 kompakt pencere.
+    const frame=host.getBoundingClientRect(),picker=$('.scale-picker')?.getBoundingClientRect();
+    delete dock.dataset.side;dock.style.removeProperty('bottom');
+    if(picker&&picker.width){
+      dock.style.left=`${Math.round(picker.left-frame.left)}px`;
+      dock.style.top=`${Math.round(picker.bottom-frame.top+8)}px`;
+      dock.style.width=`${Math.round(picker.width)}px`;
+    }
+    return;
   }
+  for(const key of ['left','width'])dock.style.removeProperty(key);
   const frame=host.getBoundingClientRect();
   // Whatever is on a side eats into that side's band from the edge it hangs
   // off, so the frame is always centred in what nothing else has claimed.

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {collectUIObstacles,layoutDimensionsAtMidpoint} from './screen-layout.js';
+import {collectUIObstacles,layoutPlanLabels} from './screen-layout.js';
 import {ROOM_AREAS} from './room-areas.js';
 import DXF_DIMENSIONS from './dxf-dimensions.js';
 import ROOM_SHAPES from './room-shapes.js';
@@ -139,43 +139,40 @@ export function createAnnotations(data,host,onRoom) {
     const floor=/^f[0-3]$/.test(view)?Number(view[1]):-1;
     const w=host.clientWidth,h=host.clientHeight;
     camera.updateMatrixWorld();
-    const obstacles=collectUIObstacles(host),candidates=[];
+    const obstacles=collectUIObstacles(host);
     // Writes first, reads second: reading offsetWidth right after writing a
     // label's left/top/fontSize forces a synchronous layout PER LABEL, every
     // frame the floor is orbited - dozens of layouts a frame inside the
     // villa. Positioning every label and only then measuring them all costs
     // one layout for the whole set.
+    // 02.10 ürün sahibi: "boyutlarını küçült mobilde ve parametrik büyüklük olmasın": adlar ve ölçüler sabit, küçük
+    // piksel boyunda (yakınlaşmayla değişmez).
+    const small=w<=720,nameSize=small?9:11,dimSize=small?8:10;
     const named=[];
     for(const entry of names) {
       entry.el.hidden=!(entry.floor===floor&&showNames&&!transitioning&&!walking);
       if(entry.el.hidden)continue;
-      const distance=Math.max(1,entry.position.distanceTo(camera.position));
-      const ppm=camera.isPerspectiveCamera?h*camera.zoom/(2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*distance):h*camera.zoom/(camera.top-camera.bottom);
-      const p=project(entry,camera,w,h,w<=720?9.5:labelFontSize(ppm));
+      const p=project(entry,camera,w,h,nameSize);
       if(p)named.push({entry,p});
     }
     const measured=[];
     for(const entry of dimensions) {
       const visible=entry.floor===floor&&showDimensions&&!transitioning&&(!walking||entry.roomId===walkRoom);
       entry.line.visible=visible;entry.el.hidden=!visible;
-      if(visible){const p=project(entry,camera,w,h,10);if(p){
+      if(visible){const p=project(entry,camera,w,h,dimSize);if(p){
         const a=entry.a.clone().project(camera),b=entry.b.clone().project(camera);
         const seg=a.z>-1&&a.z<1&&b.z>-1&&b.z<1?[(a.x+1)*w/2,(1-a.y)*h/2,(b.x+1)*w/2,(1-b.y)*h/2]:null;
-        measured.push({entry,p,seg});}}
+        if(seg)measured.push({entry,p,seg});}}
     }
     for(const item of named){item.width=item.entry.el.offsetWidth;item.height=item.entry.el.offsetHeight;}
     for(const item of measured){item.width=item.entry.el.offsetWidth;item.height=item.entry.el.offsetHeight;}
-    for(const {entry,p,width,height} of named) {
-      // 02.10: ad hiç gizlenmez ve yerinden kaymaz; boyu odanın iç açıklığına (anchor'dan duvara en kısa uzaklık,
-      // metre) göre küçülür, en az %50. Açıklık metre cinsinden: kamera dönünce boy değişmez.
-      const distance=Math.max(1,entry.position.distanceTo(camera.position));
-      const ppm=camera.isPerspectiveCamera?h*camera.zoom/(2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*distance):h*camera.zoom/(camera.top-camera.bottom);
-      const fit=entry.clearance>0?Math.max(.5,Math.min(1,entry.clearance*ppm/(width/2))):1;
-      entry.el.style.setProperty('--label-fit',fit.toFixed(2));
-      candidates.push({...p,entry,width:width*fit,height:height*fit,name:true});
-    }
-    const nameCount=candidates.length;
-    for(const {entry,p,width,height,seg} of measured)candidates.push({...p,entry,width,height,seg});
+    const nameItems=named.map(({entry,p,width,height})=>{
+      entry.el.style.setProperty('--label-fit','1');
+      // odanın ekran poligonu: ad bunun içinde kalır
+      const room=entry.corners?.map(v=>{const c=v.clone().project(camera);return [(c.x+1)*w/2,(1-c.y)*h/2];});
+      return {...p,entry,width,height,room:room&&room.length>=3?room:null};
+    });
+    const dimItems=measured.map(({entry,p,width,height,seg})=>({...p,entry,width,height,seg}));
     const nextKey=dimensions.map(e=>e.line.visible?'1':'0').join('');
     if(nextKey!==dimensionKey){
       dimensionKey=nextKey;
@@ -187,11 +184,9 @@ export function createAnnotations(data,host,onRoom) {
         batch.visible=values.length>0;if(index&&values.length)batch.computeLineDistances();
       });
     }
-    // Names are placed first, then dimensions avoid the names, the controls
-    // AND the photograph marks - a measurement printed under a camera pin is
-    // two drawings on one spot, which is what the owner saw on the attic plan.
-    const placed=layoutDimensionsAtMidpoint(candidates,{width:w,height:h,obstacles,fixedFrom:nameCount,extraObstacles});
-    for(const item of candidates)item.entry.el.hidden=true;
+    const layout=layoutPlanLabels(nameItems,dimItems,{width:w,height:h,obstacles:obstacles.concat(extraObstacles)});
+    for(const item of nameItems)item.entry.el.hidden=true;
+    for(const item of dimItems)item.entry.el.hidden=true;
     leaders.replaceChildren();leaders.setAttribute('viewBox',`0 0 ${w} ${h}`);
     for(const entry of dimensions.filter(e=>e.line.visible)){
       const a=entry.a.clone().project(camera),b=entry.b.clone().project(camera);
@@ -206,12 +201,15 @@ export function createAnnotations(data,host,onRoom) {
         dot.classList.add('dimension-endpoint');leaders.append(dot);
       }
     }
-    // Ölçüler çizgi ortasında sabit, adlar en çok bir satır kayar - kaçan
-    // etiketin bağlantı çizgisine artık gerek yok.
-    for(const {entry,x,y} of placed){
+    // ölçü yazısı çizgisinin üstünde, çizgi yönünde; ad odasının içinde
+    for(const {entry,x,y,angle} of layout.dims){
       entry.el.hidden=false;entry.el.style.left=`${x}px`;entry.el.style.top=`${y}px`;
-      if(entry.kind==='name')entry.el.dataset.plate='on';
+      entry.el.style.transform=`translate(-50%,-50%) rotate(${angle.toFixed(1)}deg)`;
     }
+    for(const {entry,x,y} of layout.names){
+      entry.el.hidden=false;entry.el.style.left=`${x}px`;entry.el.style.top=`${y}px`;entry.el.dataset.plate='on';
+    }
+    const placed=layout.names.concat(layout.dims),candidates=nameItems.concat(dimItems);
     overlay.dataset.expected=String(candidates.length);overlay.dataset.placed=String(placed.length);
   },dispose(){overlay.remove();group.traverse(o=>o.geometry?.dispose());dimensions.forEach(e=>e.line.geometry.dispose());material.dispose();measuredMaterial.dispose();}};
 }

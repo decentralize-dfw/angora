@@ -121,3 +121,97 @@ export function layoutDimensionsAtMidpoint(items,{width,height,obstacles=[],gap=
   }
   return placed;
 }
+
+// 02.10 ürün sahibi (plan ölçüleri): "ölçü yazmayan şeyler var, oda ismi ölçünün üzerine gelmiş; dikey ve yatay tek
+// bir yön belirle, plan yönü olsun: dikey olanların üst kısmı sol, yatay olanların üst kısmı yukarı; hangi ölçü olduğunu
+// anlamak için barın üzerine yaz". Kural:
+//   1. Her ölçü yazısı GÖSTERİLİR, kendi çizgisinin üstünde, çizgi yönünde döndürülmüş (açı (-90, 90] aralığına
+//      indirilir; tam dikey -90: yazının üstü sola bakar). Başka bir ölçü yazısıyla çakışırsa kendi çizgisi üstünde
+//      sabit oranlarda kayar; yer yoksa yine ortada durur (gizlenmez).
+//   2. Oda adı odasının içinde, iç merkezine en yakın yerde durur: hiçbir ölçü yazısına, ölçü çizgisine, başka bir ada
+//      ve arayüze değmeyen en yakın aday seçilir. Hiçbiri yoksa en az çakışan (odanın içinde kalan) aday.
+export function dimensionAngle(seg) {
+  let a=Math.atan2(seg[3]-seg[1],seg[2]-seg[0])*180/Math.PI;
+  if(a>90)a-=180;else if(a<=-90)a+=180;
+  if(Math.abs(a-90)<1e-6)a=-90;
+  return a;
+}
+const orientedCorners=(x,y,w,h,deg)=>{
+  const r=deg*Math.PI/180,c=Math.cos(r),s=Math.sin(r),hw=w/2,hh=h/2;
+  return [[-hw,-hh],[hw,-hh],[hw,hh],[-hw,hh]].map(([u,v])=>[x+u*c-v*s,y+u*s+v*c]);
+};
+function polygonsOverlap(p,q,gap=0) {
+  for(const poly of [p,q])for(let i=0;i<poly.length;i++){
+    const [x1,y1]=poly[i],[x2,y2]=poly[(i+1)%poly.length];let nx=y2-y1,ny=x1-x2;const L=Math.hypot(nx,ny)||1;nx/=L;ny/=L;
+    let a0=Infinity,a1=-Infinity,b0=Infinity,b1=-Infinity;
+    for(const [x,y] of p){const d=x*nx+y*ny;a0=Math.min(a0,d);a1=Math.max(a1,d);}
+    for(const [x,y] of q){const d=x*nx+y*ny;b0=Math.min(b0,d);b1=Math.max(b1,d);}
+    if(a1+gap<b0||b1+gap<a0)return false;
+  }
+  return true;
+}
+function segmentHitsRect(seg,r,gap=0) {
+  const [x1,y1,x2,y2]=seg,l=r.left-gap,t=r.top-gap,ri=r.right+gap,b=r.bottom+gap;
+  let u0=0,u1=1;const dx=x2-x1,dy=y2-y1;
+  for(const [p,q] of [[-dx,x1-l],[dx,ri-x1],[-dy,y1-t],[dy,b-y1]]){
+    if(p===0){if(q<0)return false;continue;}
+    const u=q/p;if(p<0){if(u>u1)return false;if(u>u0)u0=u;}else{if(u<u0)return false;if(u<u1)u1=u;}
+  }
+  return true;
+}
+function insidePolygon(poly,x,y) {
+  let inside=false;
+  for(let i=0,j=poly.length-1;i<poly.length;j=i++){
+    const [xi,yi]=poly[i],[xj,yj]=poly[j];
+    if((yi>y)!==(yj>y)&&x<(xj-xi)*(y-yi)/(yj-yi)+xi)inside=!inside;
+  }
+  return inside;
+}
+export function layoutPlanLabels(names,dims,{width,height,obstacles=[],gap=2,padding=6}) {
+  const onScreen=(x,y)=>x>=0&&x<=width&&y>=0&&y<=height;
+  const placedDims=[],dimPolys=[];
+  const along=[.5,.38,.62,.28,.72,.2,.8];
+  for(const d of dims){
+    if(!d.seg||![d.width,d.height].every(Number.isFinite))continue;
+    const angle=dimensionAngle(d.seg);
+    let pick=null;
+    for(const t of along){
+      const x=d.seg[0]+(d.seg[2]-d.seg[0])*t,y=d.seg[1]+(d.seg[3]-d.seg[1])*t;
+      const poly=orientedCorners(x,y,d.width,d.height,angle);
+      if(!dimPolys.some(o=>polygonsOverlap(poly,o,gap))){pick={x,y,poly};break;}
+    }
+    if(!pick){const x=(d.seg[0]+d.seg[2])/2,y=(d.seg[1]+d.seg[3])/2;pick={x,y,poly:orientedCorners(x,y,d.width,d.height,angle)};}
+    if(!onScreen(pick.x,pick.y))continue;
+    dimPolys.push(pick.poly);placedDims.push({...d,x:pick.x,y:pick.y,angle,poly:pick.poly});
+  }
+  const segs=dims.filter(d=>d.seg).map(d=>d.seg);
+  const placedNames=[],nameRects=[];
+  for(const n of names){
+    if(![n.x,n.y,n.width,n.height].every(Number.isFinite)||!onScreen(n.x,n.y))continue;
+    const hw=n.width/2,hh=n.height/2;
+    const cands=[];
+    for(let r=0;r<=8;r++)for(let k=0;k<(r?8*r:1);k++){
+      const a=r?k/(8*r)*2*Math.PI:0;
+      cands.push([n.x+Math.cos(a)*r*Math.max(6,hw*.35),n.y+Math.sin(a)*r*Math.max(5,hh*.8)]);
+    }
+    let best=null,bestScore=Infinity;
+    cands.forEach(([x,y],i)=>{
+      const rect={left:x-hw,right:x+hw,top:y-hh,bottom:y+hh};
+      const corners=[[rect.left,rect.top],[rect.right,rect.top],[rect.right,rect.bottom],[rect.left,rect.bottom]];
+      const inRoom=!n.room||corners.every(([cx,cy])=>insidePolygon(n.room,cx,cy));
+      if(n.room&&!insidePolygon(n.room,x,y))return;
+      let bad=0;
+      if(!inRoom)bad+=4;
+      if(dimPolys.some(p=>polygonsOverlap(corners,p,gap)))bad+=3;
+      if(segs.some(s=>segmentHitsRect(s,rect,1)))bad+=2;
+      if(nameRects.some(o=>rectanglesOverlap(rect,o,gap)))bad+=3;
+      if(obstacles.some(o=>rectanglesOverlap(rect,o,gap)))bad+=1;
+      if(rect.left<padding||rect.right>width-padding||rect.top<padding||rect.bottom>height-padding)bad+=1;
+      const score=bad*1e6+i;
+      if(score<bestScore){bestScore=score;best={x,y,rect};}
+    });
+    if(!best)best={x:n.x,y:n.y,rect:{left:n.x-hw,right:n.x+hw,top:n.y-hh,bottom:n.y+hh}};
+    nameRects.push(best.rect);placedNames.push({...n,x:best.x,y:best.y,rect:best.rect});
+  }
+  return {names:placedNames,dims:placedDims};
+}

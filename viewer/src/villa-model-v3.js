@@ -205,6 +205,9 @@ const TUR10_DROP = [
   // 02.10 çatı oturma alanı (ürün sahibi: "abuksubuk"): model-d1'in eklediği enine tavan kirişi (EK_D1_F10_tavan_kirisi,
   // derlemede tavan mesh'ine katıldı; 20 x 25 cm kutu, mahyanın altında). Özgün modelde yok.
   {mat: /^ceiling\.001$/, min: [-2.645, 11.825, -3.53], max: [-2.435, 12.085, -0.52]},
+  // 02.10 ürün sahibi (1. kat holünden merdiven boşluğu: "bu orta alanda ışığın ne işi var, merdivenin ortasında"):
+  // giriş -> 1. kat merdiveninin ortasında, iki döşeme arasında (y 5,9..6,2) kalan aplik (opal cam + eskitme pirinç)
+  {mat: /^EK_A04_(Opal_cam|Eskitme_pirinc)$/, min: [1.95, 5.8, -1.2], max: [2.25, 6.25, -0.8]},
 ];
 // Mobilya parçasındaki (INTERIOR) kesit yüzleri: aynı biçim, yalnız interior'a uygulanır.
 const TUR10_DROP_INTERIOR = [
@@ -947,6 +950,10 @@ export function healTur10WoodUV(model) {
       const u = ids.map(i => new THREE.Vector2().fromBufferAttribute(uv, i));
       const ua = Math.abs((u[1].x - u[0].x) * (u[2].y - u[0].y) - (u[2].x - u[0].x) * (u[1].y - u[0].y)) / 2;
       if (ua < 1e-9) continue;
+      // yalnız kepenk boyunda üçgenler (düzlem içinde >= 0,35 m geniş, >= 1,2 m yüksek): kapı kanadı kayıtları/çerçeveleri
+      // de WOODY-DARK ve kepenkle aynı düzlemde; onlara dokunulursa çerçeve kepenge karışıp kayboluyordu
+      const hx = new THREE.Vector3(0, 1, 0).cross(nn).normalize(), hs = w.map(v => v.dot(hx)), ys = w.map(v => v.y);
+      if (Math.max(...hs) - Math.min(...hs) < 0.35 || Math.max(...ys) - Math.min(...ys) < 1.2) continue;
       tris.push({o, t, w, u, n: nn, dens: Math.sqrt(ua / A), big: A >= 0.1});
     }
   });
@@ -984,12 +991,12 @@ export function healTur10WoodUV(model) {
     }
     if (best) fix.set(a, best);
   }
-  // Eşleşen bütün üçgenler (iki yarı da) evin en çok kullanılan WOODY-DARK malzemesine (pencere kepenkleri) ve onun
-  // kepenklerdeki doku ölçeğiyle düzlemsel eşlemeye (yatayda 22,2, düşeyde 2,34 tekrar/m) alınır: hangi yarının hangi
-  // dokuda geldiğinden bağımsız, her kepenk pencere kepenkleri gibi tek tip.
+  // Kepengin hangi yarısının doğru olduğu: evde en çok kullanılan WOODY-DARK malzemesi (pencere kepenkleri, panjur
+  // deseni onda). O malzemedeki üçgenlere DOKUNULMAZ (02.10 ürün sahibi: "kepenkleri neden tek parça yaptın" - düz
+  // eşleme panjur desenini silmişti). Öbür malzemedeki yarı, aynı kepenkte örtüştüğü esas üçgenin malzemesini ve onun
+  // özgün doku eşlemesinin düzlemsel devamını alır: panjur deseni yarılar arasında kesintisiz sürer.
   const use = new Map();
   model.traverse(o => { if (o.isMesh && !Array.isArray(o.material) && o.material?.name === 'WOODY-DARK') use.set(o.material, (use.get(o.material) ?? 0) + (o.geometry.index ? o.geometry.index.count : o.geometry.attributes.position.count)); });
-  const main = [...use].sort((x, y) => y[1] - x[1])[0]?.[0];
   const all = new Set([...fix.keys(), ...fix.values()]);
   // aynı kepengin öbür katmanları: dönüştürülen bir üçgenle aynı düzlemde (3 cm) düzlem içi kutusunun %5'i örtüşen her
   // WOODY-DARK üçgeni de kümeye girer (eşleşmeyen katman üçgeni kepenkte ince kahve kama olarak kalıyordu)
@@ -1006,17 +1013,34 @@ export function healTur10WoodUV(model) {
       }
     }
   }
-  const flat = new Map(), moved = new Map();
+  const overlap = (a, b) => {
+    if (Math.abs(a.n.dot(b.n)) < 0.995 || Math.abs(b.n.dot(a.w[0]) - b.n.dot(b.w[0])) > 0.03) return 0;
+    const h = new THREE.Vector3(0, 1, 0).cross(a.n).normalize(), sa = span(a, h), sb = span(b, h), area = (sa[1] - sa[0]) * (sa[3] - sa[2]);
+    return area > 0 ? Math.max(0, Math.min(sa[1], sb[1]) - Math.max(sa[0], sb[0])) * Math.max(0, Math.min(sa[3], sb[3]) - Math.max(sa[2], sb[2])) / area : 0;
+  };
+  const flat = new Map(), moved = new Map(), plane = new THREE.Plane(), q = new THREE.Vector3(), bary = new THREE.Vector3();
+  let changed = 0;
   for (const tr of all) {
-    if (!flat.has(tr.o)) { const g = tr.o.geometry; flat.set(tr.o, g.index ? g.toNonIndexed() : g); }
-    const uv = flat.get(tr.o).attributes.uv, h = new THREE.Vector3(0, 1, 0).cross(tr.n).normalize();
-    tr.w.forEach((v, k) => uv.setXY(tr.t + k, v.dot(h) * 22.2, v.y * 2.34));
-    uv.needsUpdate = true;
-    if (main && tr.o.material !== main) {
-      const key = tr.o.uuid;
-      if (!moved.has(key)) moved.set(key, {o: tr.o, material: main, list: []});
-      moved.get(key).list.push(tr.t);
+    // esas: kümede, bu üçgenden daha çok kullanılan malzemedeki, en çok örtüşen üçgen (özgün UV'si tr.u)
+    let ref = null, best = 0.05;
+    for (const b of all) {
+      if (b === tr || !b.big || (use.get(b.o.material) ?? 0) <= (use.get(tr.o.material) ?? 0)) continue;
+      const o = overlap(tr, b);
+      if (o > best + 1e-6 || (ref && Math.abs(o - best) < 1e-6 && (use.get(b.o.material) ?? 0) > (use.get(ref.o.material) ?? 0))) { best = o; ref = b; }
     }
+    if (!ref) continue;   // kümenin esas malzemesindeki üçgen: dokunulmaz
+    const tri = new THREE.Triangle(...ref.w);
+    tri.getPlane(plane);
+    if (!flat.has(tr.o)) { const g = tr.o.geometry; flat.set(tr.o, g.index ? g.toNonIndexed() : g); }
+    const uv = flat.get(tr.o).attributes.uv;
+    tr.w.forEach((v, k) => {
+      tri.getBarycoord(plane.projectPoint(v, q), bary);
+      uv.setXY(tr.t + k, ref.u[0].x * bary.x + ref.u[1].x * bary.y + ref.u[2].x * bary.z, ref.u[0].y * bary.x + ref.u[1].y * bary.y + ref.u[2].y * bary.z);
+    });
+    uv.needsUpdate = true; changed++;
+    const key = tr.o.uuid + '>' + ref.o.material.uuid;
+    if (!moved.has(key)) moved.set(key, {o: tr.o, material: ref.o.material, list: []});
+    moved.get(key).list.push(tr.t);
   }
   for (const {o, material, list} of moved.values()) {
     const g = flat.get(o), geo = new THREE.BufferGeometry();
@@ -1035,7 +1059,7 @@ export function healTur10WoodUV(model) {
     o.parent.add(mesh);
   }
   for (const [o, g] of flat) if (g !== o.geometry) { o.geometry.dispose(); o.geometry = g; }
-  return all.size;
+  return changed;
 }
 // süpürgelikle aynı malzeme ve kesit (8,5 cm yükseklik, 3,4 cm kalınlık: çatıdaki komşu parça gibi). [kat, [x0, z0], [x1, z1], içeri normal [nx, nz], döşeme y]
 const TUR10_BASEBOARDS = [
