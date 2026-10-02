@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import TUR10_ATTIC_GABLE from './tur10-cati-tavan.js';
 import {EKLE as ATTIC_WEST_ADD, AT as ATTIC_WEST_DROP} from './tur10-cati-tavan-bati.js';
+import {UV1 as ATTIC_WEST_UV1} from './tur10-cati-tavan-bati-isik.js';
 // Ürün sahibinin kendi malzeme yazarlığını yaptığı yeni villa modelleri
 // (build/web/26092026/, 26 Eylül 2026 yüklemesi). Eskiler SİLİNMİYOR: bu
 // sadece manifest'teki üç parçanın dosya adını değiştiriyor, yani bayrak
@@ -833,9 +834,11 @@ export function regableTur10AtticWest(model) {
   if (!home) return 0;
   const inv = new THREE.Matrix4().copy(home.matrixWorld).invert(), nm = new THREE.Matrix3().getNormalMatrix(home.matrixWorld).invert();
   const q = new THREE.Vector3(), bary = new THREE.Vector3();
-  // Üçgenin üç köşesi TEK kaynak üçgenden örneklenir (köşe başına ayrı kaynak, köşeleri ışık haritasının farklı
-  // adalarına düşürüp üçgeni atlas boyunca geriyordu: krom gibi çizgili tavan). Doku (uv) kaynağın düzlemine
-  // izdüşümle afin uzatılır; ışık (uv1) aynı kaynak üçgenin içine kenardan 8 cm içeri kıstırılır, adadan çıkmaz.
+  // Doku (uv): üçgen başına TEK kaynak üçgenin (aynı yöne bakan, ağırlık merkezine en yakın) eşlemesi kaynağın
+  // düzlemine izdüşümle afin uzatılır. Işık (uv1): tools/batch-delivery/lightmap-cati-bati.py'nin zemin atlasında
+  // bu üçgenlere açtığı adalar (d1 tavanının pişmiş ışığı dünya konumundan aktarıldı). Eskiden köşe köşe d1
+  // üçgenlerinden ödünç alınıyordu: üçgen atlasın uzak adalarını karıştırıyor (krom gibi çizgili) ya da üçgen üçgen
+  // farklı ton veriyordu (kırık kırık yüzler).
   const pickSrc = (m, n) => {
     let best = null, bd = Infinity;
     for (const s of src) { if (s.n.dot(n) < 0.7) continue; s.tri.closestPointToPoint(m, q); const d = q.distanceToSquared(m); if (d < bd) { bd = d; best = s; } }
@@ -844,14 +847,7 @@ export function regableTur10AtticWest(model) {
   };
   const plane = new THREE.Plane();
   const mix = (arr, b) => new THREE.Vector2().addScaledVector(arr[0], b.x).addScaledVector(arr[1], b.y).addScaledVector(arr[2], b.z);
-  const sample = (best, p) => {
-    best.tri.getPlane(plane); plane.projectPoint(p, q); best.tri.getBarycoord(q, bary);
-    const uv = mix(best.uv, bary);
-    best.tri.closestPointToPoint(p, q);
-    const toMid = best.mid.clone().sub(q), L = toMid.length(); if (L > 1e-6) q.addScaledVector(toMid, Math.min(0.08, L * 0.9) / L);
-    best.tri.getBarycoord(q, bary);
-    return [uv, mix(best.uv1, bary)];
-  };
+  const sample = (best, p) => { best.tri.getPlane(plane); plane.projectPoint(p, q); best.tri.getBarycoord(q, bary); return mix(best.uv, bary); };
   const A = ATTIC_WEST_ADD, P = [], N = [], U = [], U1 = [];
   for (let t = 0; t < A.length; t += 9) {
     const v = [0, 1, 2].map(k => new THREE.Vector3(A[t + 3 * k], A[t + 3 * k + 1], A[t + 3 * k + 2]));
@@ -859,9 +855,10 @@ export function regableTur10AtticWest(model) {
     const nl = n.clone().applyMatrix3(nm).normalize();
     const best = pickSrc(v[0].clone().add(v[1]).add(v[2]).divideScalar(3), n);
     for (const p of v) {
-      const [uv, uv1] = sample(best, p), l = p.clone().applyMatrix4(inv);
-      P.push(l.x, l.y, l.z); N.push(nl.x, nl.y, nl.z); U.push(uv.x, uv.y); U1.push(uv1.x, uv1.y);
+      const uv = sample(best, p), l = p.clone().applyMatrix4(inv);
+      P.push(l.x, l.y, l.z); N.push(nl.x, nl.y, nl.z); U.push(uv.x, uv.y);
     }
+    for (let k = 0; k < 3; k++) U1.push(ATTIC_WEST_UV1[t / 9 * 6 + 2 * k], ATTIC_WEST_UV1[t / 9 * 6 + 2 * k + 1]);
   }
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute('position', new THREE.Float32BufferAttribute(P, 3)); geometry.setAttribute('normal', new THREE.Float32BufferAttribute(N, 3));
@@ -1097,25 +1094,33 @@ export function healTur10WoodUV(model) {
   const flat = new Map(), moved = new Map(), plane = new THREE.Plane(), q = new THREE.Vector3(), bary = new THREE.Vector3();
   let changed = 0;
   // 02.10 ürün sahibi ("kepenkleri neden tek parça yaptın"): kapı kepenklerinin düz paneli, pencere kepenklerinin
-  // tersine, panjur çıtalarının ÖNÜNDE (bahçe tarafında) duruyor ve çıtaları örtüyor; köşegen iki renk de bu örtünün iki
-  // yarısının ayrı malzemede olmasındandı. Arkasında (normal boyunca 8 cm içinde, düzlem içi kutusunda) panjur çıtası
-  // olan panel üçgeni atılır: kepenk pencere kepenkleri gibi panjurlu görünür. Çıtası olmayan panel eşlenir (aşağıda).
+  // tersine, panjur çıtalarının ÖNÜNDE (bahçe tarafında) duruyor ve çıtaları örtüyor. Panel atılınca (ilk deneme) çıtalar
+  // neredeyse yatay (açık panjur) olduğundan aralarından arkadaki cephe sıvası gri çıta gibi göründü. Panel, arkasında
+  // (normal boyunca 8 cm içinde, düzlem içi kutusunda) en az 60 çıta üçgeni varsa çıtaların arkasına (duvar yanına)
+  // kaydırılır: koyu ahşap zemin önünde çıtalar, pencere kepenkleri gibi panjurlu görünür. Panel kümede kalır;
+  // iki yarısının malzeme/eşleme birliği aşağıda.
   const louvered = tr => {
-    const h = new THREE.Vector3(0, 1, 0).cross(tr.n).normalize(), sa = span(tr, h), d0 = tr.n.dot(tr.w[0]);
-    let k = 0;
+    const h = new THREE.Vector3(0, 1, 0).cross(tr.n).normalize(), sa = span(tr, h), d0 = tr.n.dot(tr.w[0]), ds = [];
     for (const c of cents) {
-      if (Math.abs(tr.n.dot(c) - d0) > 0.08 || c.y < sa[0] || c.y > sa[1]) continue;
+      const d = tr.n.dot(c) - d0;
+      if (Math.abs(d) > 0.08 || c.y < sa[0] || c.y > sa[1]) continue;
       const hc = c.dot(h); if (hc < sa[2] || hc > sa[3]) continue;
-      if (++k >= 60) return true;
+      ds.push(d);
     }
-    return false;
+    if (ds.length < 60) return 0;
+    // duvar yanı: bina ortasına (x -1, z -2) doğru; panel çıtaların %95'inin duvar yanına, 1,2 cm öteye
+    const c = tr.w[0].clone().add(tr.w[1]).add(tr.w[2]).divideScalar(3);
+    const side = Math.sign(tr.n.x * (-1 - c.x) + tr.n.z * (-2 - c.z)) || 1;
+    const back = ds.map(d => d * side).sort((x, y) => x - y)[Math.floor(ds.length * 0.95)];
+    return side * Math.max(0, back + 0.012);
   };
-  const dropTris = [...all].filter(louvered);
-  for (const tr of dropTris) {
+  const shifts = [...all].filter(tr => !tr.o.userData.kepenkKaydi?.includes(tr.t)).map(tr => [tr, louvered(tr)]).filter(([, d]) => d);
+  for (const [tr, d] of shifts) {
+    (tr.o.userData.kepenkKaydi ??= []).push(tr.t);   // sonraki geçişte yeniden kaydırılmaz
     if (!flat.has(tr.o)) { const g = tr.o.geometry; flat.set(tr.o, g.index ? g.toNonIndexed() : g); }
-    const pos = flat.get(tr.o).attributes.position;
-    for (let k = 1; k < 3; k++) pos.setXYZ(tr.t + k, pos.getX(tr.t), pos.getY(tr.t), pos.getZ(tr.t));
-    pos.needsUpdate = true; all.delete(tr); changed++;
+    const pos = flat.get(tr.o).attributes.position, inv = new THREE.Matrix4().copy(tr.o.matrixWorld).invert();
+    tr.w.forEach((v, k) => { v.addScaledVector(tr.n, d); const l = v.clone().applyMatrix4(inv); pos.setXYZ(tr.t + k, l.x, l.y, l.z); });
+    pos.needsUpdate = true; changed++;
   }
   for (const tr of all) {
     // esas: kümede, bu üçgenden daha çok kullanılan malzemedeki, en çok örtüşen üçgen (özgün UV'si tr.u)
