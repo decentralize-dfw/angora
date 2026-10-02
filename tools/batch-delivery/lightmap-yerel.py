@@ -53,6 +53,10 @@ KURALLAR = [
      'kutu': [[0.90, 2.45, -0.96], [4.10, 3.35, -0.95]], 'yaricap': 0.5},
     {'ad': 'bodrum-uc-bant', 'tur': 'sil', 'atlas': 'duvar', 'normal': [-1, 0, 0], 'duzlem': 4.088,
      'kutu': [[4.08, 3.05, -3.10], [4.10, 3.40, -0.95]], 'yaricap': 0.5},
+    # 02.10 garaj tavanı (y 5,891): tavan lambasının gövdesi tavanı örttüğü için hemen üstünde koyu halka;
+    # tavanda toplanmış garaj kapısı ışığını tavandan okuduğu için kapının ortasında koyu leke olarak görünüyordu
+    {'ad': 'garaj-lamba-halkasi', 'tur': 'koyu', 'atlas': 'zemin', 'normal': [0, -1, 0], 'duzlem': 5.891,
+     'kutu': [[5.25, 5.88, -1.20], [6.20, 5.90, -0.20]], 'r': 0.30, 'oran': 0.85},
     # aynı odanın batı ucundaki pilastr yüzü (x -5,032, +x'e bakar): düşey gri şeritler
     {'ad': 'cati-pilastr', 'tur': 'koyu', 'atlas': 'duvar', 'normal': [1, 0, 0], 'duzlem': -5.032,
      'kutu': [[-5.04, 9.47, -3.60], [-5.02, 11.20, -3.10]], 'r': 0.12, 'oran': 0.85},
