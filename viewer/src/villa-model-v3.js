@@ -227,7 +227,8 @@ const TUR10_RETILE = [
   // 02.10 çatı katı (ürün sahibi: oturma alanındaki kapkara süpürgelik): çatıdaki süpürgelik parçaları WOODY-DARK
   // (neredeyse siyah); evin geri kalanında ceviz (EK_M1_Sicak_ceviz_supurgelik). Çatı döşemesi (9,47) üstündeki
   // 8,5 cm'lik şeritler bütün yüzleriyle cevize.
-  {mat: /^WOODY-DARK$/, min: [-5.1, 9.46, -3.85], max: [3.2, 9.56, -0.47], any: true, to: /^EK_M1_Sicak_ceviz_supurgelik$/},
+  // Evdeki ceviz süpürgelikler ışık haritasız; WOODY-DARK'ın (gölgede, kapkara pişmiş) ışık UV'si taşınmaz.
+  {mat: /^WOODY-DARK$/, min: [-5.1, 9.46, -3.85], max: [3.2, 9.56, -0.47], any: true, noLightmap: true, to: /^EK_M1_Sicak_ceviz_supurgelik$/},
 ];
 export function retileTur10(model) {
   model.updateMatrixWorld(true);
@@ -271,11 +272,12 @@ export function retileTur10(model) {
       for (let k = 1; k + 1 < poly.length; k++) for (const v of [poly[0], poly[k], poly[k + 1]]) v.a.forEach((x, j) => out[j].push(...x));
     }
     const geometry = new THREE.BufferGeometry();
-    names.forEach((k, j) => geometry.setAttribute(k, new THREE.Float32BufferAttribute(out[j], g.attributes[k].itemSize)));
+    names.forEach((k, j) => { if (!(rule.noLightmap && k === 'uv1')) geometry.setAttribute(k, new THREE.Float32BufferAttribute(out[j], g.attributes[k].itemSize)); });
     const material = target.clone();
     const mesh = new THREE.Mesh(geometry, material);
     mesh.name = o.name + '_yeni_yuz';
     mesh.userData = JSON.parse(JSON.stringify(o.userData));
+    if (rule.noLightmap) delete mesh.userData.lightmap;
     mesh.position.copy(o.position); mesh.quaternion.copy(o.quaternion); mesh.scale.copy(o.scale);
     mesh.castShadow = o.castShadow; mesh.receiveShadow = o.receiveShadow;
     o.parent.add(mesh);
@@ -447,7 +449,7 @@ const TUR10_BORROW = [
   // 02.10 bodrum salonu (ürün sahibi: "merdiven altı neden gri"): alt kolun altındaki üçgen bölgede salona bakan yüz
   // yok; arkadaki duvarın (z -3,102) kollar arası boşluğa bakan yüzünün arkası görünüyordu (pişmiş ışığı öbür
   // yanın, koyu gri). O üçgenler kolun salona bakan yan yüzünün (z -3,127) ışığını okur.
-  {mats: /^Simple White Wall$/, min: [0.55, -0.1, -3.11], max: [3.25, 1.6, -3.095], constant: [1.664, 0.40, -3.127],
+  {mats: /^Simple White Wall$/, min: [0.55, -0.1, -3.11], max: [4.10, 1.6, -3.095], constant: [1.664, 0.40, -3.127],
     source: {mat: /^EK_M2_Beyaz_merdiven_alti$/, atlas: 'duvar', min: [0.55, -0.2, -3.13], max: [3.25, 1.6, -3.12], facing: [0, 0, -1]}, material: 'target'},
   // 02.10 çatı merdiven boşluğu: d1'in eğik düzlemi atılıp özgün beşik geri gelince (regableTur10Attic) iki yandaki
   // diz duvarlarının (x 3,14) düzlemin üstünde kalmış uç parçaları göründü; pişirmede düzlemin arkasında kaldıkları
@@ -661,7 +663,8 @@ export function regableTur10Attic(model) {
   const inv = new THREE.Matrix4().copy(home.matrixWorld).invert(), nm = new THREE.Matrix3().getNormalMatrix(home.matrixWorld).invert();
   const q = new THREE.Vector3(), c = new THREE.Vector3(), bary = new THREE.Vector3(), n = new THREE.Vector3(), e = new THREE.Vector3();
   const sample = p => {
-    const x = Math.min(4.17, Math.max(0, p.x)), z = Math.min(-0.527, Math.max(-3.527, p.z)); q.set(x, plane(x), z);
+    // eski düzlemin kenar şeridi (diz duvarına / doğu duvarına değdiği yer) pişirmede koyu: 20-25 cm içeriden okunur
+    const x = Math.min(3.95, Math.max(0.2, p.x)), z = Math.min(-0.75, Math.max(-3.30, p.z)); q.set(x, plane(x), z);
     let best = null, bd = Infinity;
     for (const s of src) { s.tri.closestPointToPoint(q, c); const d = c.distanceToSquared(q); if (d < bd) { bd = d; best = s; } }
     best.tri.closestPointToPoint(q, c); best.tri.getBarycoord(c, bary);

@@ -49,9 +49,28 @@ def texel_world(ids, UV, P, W):
     d20 = (v2 * v0).sum(1); d21 = (v2 * v1).sum(1)
     den = d00 * d11 - d01 * d01; den[np.abs(den) < 1e-18] = 1e-18
     l1 = (d11 * d20 - d01 * d21) / den; l2 = (d00 * d21 - d01 * d20) / den
+    l1r, l2r = l1.copy(), l2.copy()
     l1 = np.clip(l1, 0, 1); l2 = np.clip(l2, 0, 1); s = l1 + l2; over = s > 1
     l1[over] /= s[over]; l2[over] /= s[over]; l0 = 1 - l1 - l2
     pos = l0[:, None] * P[t, 0] + l1[:, None] * P[t, 1] + l2[:, None] * P[t, 2]
+    # Teksel merkezi üçgenin dışında kalan (raster kenarı taşan) teksel: kırpılıp yeniden ölçeklenen barisentrik
+    # onu bir köşeye atabiliyordu (ince/kıl üçgende 2 m ötedeki köşeye); kıl üçgen doldurulurken o köşenin ışığı
+    # alınıp komşu geniş yüzün içinde kesik kesik koyu noktalar kalıyordu (çatı diz duvarı, 02.10). Bunlar UV'de
+    # üçgenin en yakın kenar noktasına izdüşürülür.
+    # Yalnız ince üçgenlerde (dünyada yüksekliği < 2 cm): öbürlerinde kırpma zaten komşu kenarda kalıyor ve
+    # bütün atlası değiştirmemek için eski davranış korunur.
+    E = np.stack([np.linalg.norm(P[:, (i + 1) % 3] - P[:, i], axis=1) for i in range(3)], 1).max(1)
+    ince = (np.linalg.norm(np.cross(P[:, 1] - P[:, 0], P[:, 2] - P[:, 0]), axis=1) / np.maximum(E, 1e-9)) < 0.02
+    out = ((l1r < 0) | (l2r < 0) | (l1r + l2r > 1)) & ince[t]
+    if out.any():
+        k = np.nonzero(out)[0]; tk = t[k]; q = np.stack([u[k], v[k]], 1)
+        best = np.full(len(k), np.inf); bp = pos[k].copy()
+        for i0, i1 in ((0, 1), (1, 2), (2, 0)):
+            A = UV[tk, i0]; B = UV[tk, i1]; dd = B - A
+            sp = np.clip(((q - A) * dd).sum(1) / np.maximum((dd * dd).sum(1), 1e-18), 0, 1)
+            dist = np.linalg.norm(A + dd * sp[:, None] - q, axis=1); w = dist < best
+            best[w] = dist[w]; bp[w] = (P[tk, i0] + (P[tk, i1] - P[tk, i0]) * sp[:, None])[w]
+        pos[k] = bp
     return ys, xs, t, pos
 
 
