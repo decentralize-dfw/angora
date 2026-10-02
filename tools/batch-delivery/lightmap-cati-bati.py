@@ -32,6 +32,7 @@ KUTU = ((-6.4, 10.2, -3.7), (0.3, 13.5, -0.4))   # regableTur10AtticWest ile ayn
 REF = 2048          # yerleşim bu çözünürlükte (gok/gece); güneş haritaları 1024
 PAY = 10            # parçalar arası ve doluya uzaklık (REF teksel; 512'de 2,5)
 K = 8
+KK = 24
 
 
 def oku(js):
@@ -132,22 +133,20 @@ def main(trisf, src, dst, ejs, cjs):
         sys_, sxs, stt, spos = sys_[ks], sxs[ks], stt[ks], spos[ks]
         tid = dunya.raster(UV1, W)
         ys, xs, tt, pos = dunya.texel_world(tid, UV1, P, W)
-        for g in range(len(gruplar)):
-            ts = np.array(gruplar[g]); nn = n[ts].mean(0); nn /= np.linalg.norm(nn)
-            sel = np.isin(tt, ts)
-            # kaynak: kıl üçgenler hariç (duvar dibindeki d1 şeritleri temas gölgesinde koyu; özgün tavanın eğik yüzü
-            # aynı yöne bakan yalnız bu şeritleri bulup koyu gri çıkıyordu). Aynı yöne bakan (cos > 0,7) kaynak
-            # parçanın tekselleri için ortalama 35 cm'den uzaksa yönü yakın (cos > 0,2) kaynak.
-            genis = sa[stt] > 0.02
-            ok = genis & (sn[stt] @ nn > 0.7)
-            if ok.sum() < K or cKDTree(spos[ok]).query(pos[sel])[0].mean() > 0.35: ok = genis & (sn[stt] @ nn > 0.2)
-            if ok.sum() < K: ok = np.ones(len(stt), bool)
-            tree = cKDTree(spos[ok]); d, j = tree.query(pos[sel], k=K)
-            w = 1 / (d + 0.03) ** 2; w /= w.sum(1, keepdims=True)
-            qy, qx = sys_[ok][j], sxs[ok][j]
-            for m in maps:
-                lin = (imgs[m][qy, qx] ** 2 * w[..., None]).sum(1)
-                out[m][ys[sel], xs[sel]] = np.sqrt(lin)
+        # Kaynak her teksel için ortak havuzdan: kıl üçgenler hariç (duvar dibindeki d1 şeritleri temas gölgesinde koyu),
+        # en yakın KK teksel, ağırlık = yön benzerliği^2 / uzaklık^2. Eskiden düzlem kümesi başına ayrı kaynak seçiliyordu:
+        # neredeyse eş düzlemli iki komşu küme farklı kaynak bulunca aralarında testere dişli ton dikişi kalıyordu.
+        genis = sa[stt] > 0.02
+        if genis.sum() >= KK: sys_, sxs, stt, spos = sys_[genis], sxs[genis], stt[genis], spos[genis]
+        d, j = cKDTree(spos).query(pos, k=KK)
+        cosw = np.clip(np.einsum('tkc,tc->tk', sn[stt[j]], n[tt]), 0, 1) ** 2
+        w = cosw / (d + 0.05) ** 2
+        zayif = w.sum(1) < 1e-6
+        w[zayif] = 1 / (d[zayif] + 0.05) ** 2
+        w /= w.sum(1, keepdims=True)
+        qy, qx = sys_[j], sxs[j]
+        for m in maps:
+            out[m][ys, xs] = np.sqrt((imgs[m][qy, qx] ** 2 * w[..., None]).sum(1))
         # 4. taşma payı
         ic = tid > 0
         pay = ndimage.binary_dilation(ic, iterations=max(2, PAY * W // REF // 2)) & ~ic
@@ -160,6 +159,66 @@ def main(trisf, src, dst, ejs, cjs):
                 '// ışık atlasındaki kendi adaları (köşe başına uv1, EKLE sırası). Elle düzenlemeyin.\n')
         f.write('export const UV1 = new Float32Array([' + ','.join(f'{v:.6f}' for v in UV1.ravel()) + ']);\n')
     print('yerleşim', UV1.reshape(-1, 2).min(0), UV1.reshape(-1, 2).max(0))
+    duvar_doldur(json.load(open(trisf))['duvar'], SP[kaynak], src, dst)
+
+
+def duvar_doldur(T, SPc, src, dst):
+    """Özgün tavan d1'inkinden yüksek: kuzey/güney diz duvarlarının (ve kutudaki öbür dik duvarların) d1 tavanının
+    ÜSTÜNDE kalan kısmı pişirmede görünmüyordu, kara/koyu gri pişti; özgün tavan gelince açığa çıktı (yan yüzler koyu
+    gri). Böyle tekseller aynı duvar düzleminde d1 tavanının en az 25 cm altındaki aydınlık tekselleriyle doldurulur.
+    SPc: d1 tavan üçgenleri (dünya)."""
+    P = np.array(T['p'], float).reshape(-1, 3, 3); UV = np.array(T['uv'], float).reshape(-1, 3, 2)
+    c = P.mean(1); n = np.cross(P[:, 1] - P[:, 0], P[:, 2] - P[:, 0]); A = np.linalg.norm(n, axis=1) / 2
+    n /= np.maximum(2 * A[:, None], 1e-12)
+    lo, hi = np.array(KUTU[0]), np.array(KUTU[1])
+    duvar = np.nonzero(np.all((c > lo - [0, 1.0, 0]) & (c < hi), axis=1) & (np.abs(n[:, 1]) < 0.2) & (A > 1e-5))[0]
+    # d1 tavanı: xz izdüşümünde nokta-üçgen, en alçak tavan
+    cn = np.cross(SPc[:, 1] - SPc[:, 0], SPc[:, 2] - SPc[:, 0]); tav = SPc[cn[:, 1] < -1e-9]
+    def tavan_y(q):
+        y = np.full(len(q), np.inf)
+        for t in tav:
+            a, b, cc = t[:, [0, 2]]; v0, v1, v2 = b - a, cc - a, q - a
+            den = v0[0] * v1[1] - v1[0] * v0[1]
+            if abs(den) < 1e-12: continue
+            l1 = (v2[:, 0] * v1[1] - v1[0] * v2[:, 1]) / den; l2 = (v0[0] * v2[:, 1] - v2[:, 0] * v0[1]) / den
+            ic = (l1 >= -1e-6) & (l2 >= -1e-6) & (l1 + l2 <= 1 + 1e-6)
+            yy = t[0, 1] + l1 * (t[1, 1] - t[0, 1]) + l2 * (t[2, 1] - t[0, 1])
+            y = np.where(ic, np.minimum(y, yy), y)
+        return y
+    imgs = {m: np.asarray(Image.open(os.path.join(src, f'duvar_{m}.png')).convert('RGB')).astype(float) / 255 for m in MAPS}
+    out = {m: np.asarray(Image.open(os.path.join(dst, f'duvar_{m}.png')).convert('RGB')).astype(float) / 255 for m in MAPS}
+    by_res = {}
+    for m, im in imgs.items(): by_res.setdefault(im.shape[0], []).append(m)
+    say = 0
+    for W, maps in sorted(by_res.items(), reverse=True):
+        ids = dunya.raster(UV[duvar], W)
+        ys, xs, tt, pos = dunya.texel_world(ids, UV[duvar], P[duvar], W)
+        tn = n[duvar][tt]
+        ty = tavan_y((pos + tn * 0.06)[:, [0, 2]])
+        g = imgs['gok']; gh = g.shape[0]
+        isik = g[np.clip((ys + .5) * gh // W, 0, gh - 1).astype(int), np.clip((xs + .5) * gh // W, 0, gh - 1).astype(int)].max(1) >= dunya.KARA
+        gizli = np.isfinite(ty) & (pos[:, 1] > ty - 0.02)
+        kaynak = np.isfinite(ty) & (pos[:, 1] < ty - 0.25) & isik
+        degisen = np.zeros((W, W), bool)
+        # düzlem düzlem (normal + düzlem uzaklığı)
+        anah = np.round(np.c_[tn * 20, (tn * pos).sum(1, keepdims=True) * 50]).astype(int)
+        for k in np.unique(anah[gizli], axis=0):
+            ayni = np.all(anah == k, axis=1)
+            g_i, k_i = np.nonzero(ayni & gizli)[0], np.nonzero(ayni & kaynak)[0]
+            if len(k_i) < K: continue
+            d, j = cKDTree(pos[k_i]).query(pos[g_i], k=min(16, len(k_i)))
+            w = 1 / (d + 0.05) ** 2; w /= w.sum(1, keepdims=True)
+            qy, qx = ys[k_i][j], xs[k_i][j]
+            for m in maps: out[m][ys[g_i], xs[g_i]] = np.sqrt((imgs[m][qy, qx] ** 2 * w[..., None]).sum(1))
+            degisen[ys[g_i], xs[g_i]] = True; say += len(g_i)
+        # değişen adaların taşma payı
+        tum = dunya.raster(UV, W) > 0
+        pay = ndimage.binary_dilation(degisen, iterations=3) & ~tum
+        _, (iy, ix) = ndimage.distance_transform_edt(~tum, return_indices=True)
+        for m in maps: out[m][pay] = out[m][iy[pay], ix[pay]]
+    for m in MAPS:
+        Image.fromarray(np.clip(out[m] * 255 + .5, 0, 255).astype(np.uint8)).save(os.path.join(dst, f'duvar_{m}.png'))
+    print(f'duvar: {len(duvar)} üçgen, {say} gizli teksel dolduruldu')
 
 
 if __name__ == '__main__':
