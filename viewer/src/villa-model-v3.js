@@ -449,8 +449,9 @@ const TUR10_BORROW = [
     source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [-5.1, 9.3, -3.549], max: [-0.5, 12.3, -3.545], facing: [0, 0, 1], minArea: 0.3}, material: 'target'},
   // 02.10 bodrum tavanı (y 2,62; ürün sahibi: asansör yanında tavan köşesinde koyu kama): tavan düzleminde YUKARI
   // bakan 8 üçgen (ters dönmüş); tek yüzlü malzemede aşağıdan görünmüyor, içinden döşeme boşluğunun karanlığı
-  // görünüyordu. Sarımı çevrilir (aşağı bakar) ve en yakın aşağı bakan tavan üçgeninin ışığını okur.
-  {mats: /^ceiling\.001$/, min: [-6.5, 2.615, -9.0], max: [4.2, 2.625, 3.0], notFacing: [0, -1, 0], flip: true,
+  // görünüyordu. Sarımı çevrilir (aşağı bakar); ışığı hol tavanının ortasından tek ton (en yakın kaynak asansör
+  // boşluğu tarafında koyu kalıyordu).
+  {mats: /^ceiling\.001$/, min: [-6.5, 2.615, -9.0], max: [4.2, 2.625, 3.0], notFacing: [0, -1, 0], flip: true, constant: [-0.6, 2.62, -2.3],
     source: {mat: /^ceiling\.001$/, atlas: 'zemin', min: [-6.5, 2.615, -9.0], max: [4.2, 2.625, 3.0], facing: [0, -1, 0], minArea: 0.2}, material: 'target'},
   // 02.10 bodrum sahanlığının doğu uç duvarı: öne alınan arka kabuğun (TUR10_STAIR_MOVES, x 4,0905) pişmiş ışığı
   // duvarın arkasından (gri dikdörtgen); hemen üstündeki görünen duvarın (x 4,088) ışığı alt kenarından aşağı sürdürülür
