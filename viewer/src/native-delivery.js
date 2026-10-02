@@ -3,7 +3,7 @@ import {prepareBakedLighting} from './baked-lighting.js';
 import {restoreBatchSurface} from './batch-surface-response.js';
 import {prepareBatchedMaterial,stripFixtureLoops} from './batched-material.js';
 import {neutraliseTransmission} from './material-response.js';
-import {repairUntexturedWood,settleTur10Overlays,dropTur10Faces,retileTur10,relightTur10,borrowTur10,addTur10Handrails,regableTur10Attic,addTur10GarageDoorDetail,addTur10Baseboards,addTur10FacadeInfill,healTur10WoodUV,dropTur10InteriorFaces,rebuildTur10Curtains} from './villa-model-v3.js';
+import {repairUntexturedWood,settleTur10Overlays,dropTur10Faces,retileTur10,relightTur10,borrowTur10,addTur10Handrails,regableTur10Attic,regableTur10AtticWest,addTur10GarageDoorDetail,addTur10Baseboards,addTur10FacadeInfill,healTur10WoodUV,dropTur10InteriorFaces,rebuildTur10Curtains} from './villa-model-v3.js';
 import {applyMaterialResponse} from './material-response-v2.js';
 import {chunkModelInPlace} from './context-plants-chunks.js';
 import {applyPlantVariation} from './plant-variation.js';
@@ -122,6 +122,8 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
       if(borrowed)console.info(`Tur 10 garaj cephesi tek renk: ${borrowed} üçgen cephe sıvası ışığına bağlandı (${name})`);
       const rails=addTur10Handrails(model);
       const gable=regableTur10Attic(model);
+      const gableWest=regableTur10AtticWest(model);
+      if(gableWest)console.info(`Tur 10 çatı oturma alanı tavanı özgün: ${gableWest} üçgen (${name})`);
       const door=addTur10GarageDoorDetail(model);
       const boards=addTur10Baseboards(model);
       const infill=addTur10FacadeInfill(model);

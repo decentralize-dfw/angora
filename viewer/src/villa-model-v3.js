@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import TUR10_ATTIC_GABLE from './tur10-cati-tavan.js';
+import {EKLE as ATTIC_WEST_ADD, AT as ATTIC_WEST_DROP} from './tur10-cati-tavan-bati.js';
 // Ürün sahibinin kendi malzeme yazarlığını yaptığı yeni villa modelleri
 // (build/web/26092026/, 26 Eylül 2026 yüklemesi). Eskiler SİLİNMİYOR: bu
 // sadece manifest'teki üç parçanın dosya adını değiştiriyor, yani bayrak
@@ -798,6 +799,73 @@ export function regableTur10Attic(model) {
   home.parent.add(mesh);
   return src.length + tris.length;
 }
+// 02.10 ürün sahibi (çatı oturma alanı tavanında 6 işaret: dikişler, büyük üçgen yüz, mahyada kahve çizgiler): model-d1
+// oturma alanı tavanını da değiştirmiş (mahya 20 cm aşağı, düz mahya şeridi, doğu uçtaki kırma çatı yerine dik yüzler).
+// Merdiven boşluğundaki gibi özgün tavan geri gelir (tur10-cati-tavan-bati.js, tools/cad/cati_tavan_bati.py): d1'in
+// üçgenleri atılır, özgünleri konur. Işık/doku UV'si çatı tavanının (ceiling.001, zemin atlası) aynı yöne bakan en yakın
+// noktasından, kenar karanlığına düşmemek için 8 cm içeriden okunur.
+export function regableTur10AtticWest(model) {
+  model.updateMatrixWorld(true);
+  const drop = [];
+  for (let i = 0; i < ATTIC_WEST_DROP.length; i += 3) drop.push(new THREE.Vector3(ATTIC_WEST_DROP[i], ATTIC_WEST_DROP[i + 1], ATTIC_WEST_DROP[i + 2]));
+  const src = [], w = [new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()], c = new THREE.Vector3();
+  let home = null, removed = 0;
+  model.traverse(o => {
+    if (!o.isMesh || Array.isArray(o.material) || o.material?.name !== 'ceiling.001' || !o.geometry?.index || !o.geometry.attributes.uv1) return;
+    if (o.userData?.lightmap?.atlas !== 'zemin') return;
+    const g = o.geometry, pos = g.attributes.position, idx = g.index, keep = []; let hit = 0;
+    for (let t = 0; t < idx.count; t += 3) {
+      const ids = [idx.getX(t), idx.getX(t + 1), idx.getX(t + 2)];
+      ids.forEach((i, k) => w[k].fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld));
+      c.copy(w[0]).add(w[1]).add(w[2]).divideScalar(3);
+      const attic = c.y > 10.2 && c.x > -6.4 && c.x < 0.3 && c.z > -3.7 && c.z < -0.4;
+      if (attic) {
+        const tri = new THREE.Triangle(...w.map(p => p.clone()));
+        if (tri.getArea() > 1e-4) src.push({tri, n: tri.getNormal(new THREE.Vector3()), mid: c.clone(),
+          uv: ids.map(i => new THREE.Vector2().fromBufferAttribute(g.attributes.uv ?? g.attributes.uv1, i)),
+          uv1: ids.map(i => new THREE.Vector2().fromBufferAttribute(g.attributes.uv1, i))});
+      }
+      if (attic && drop.some(d => d.distanceToSquared(c) < 0.006 * 0.006)) { hit++; continue; }
+      keep.push(...ids);
+    }
+    if (hit) { g.setIndex(keep); removed += hit; home ??= o; }
+  });
+  if (!home) return 0;
+  const inv = new THREE.Matrix4().copy(home.matrixWorld).invert(), nm = new THREE.Matrix3().getNormalMatrix(home.matrixWorld).invert();
+  const q = new THREE.Vector3(), bary = new THREE.Vector3();
+  const sample = (p, n) => {
+    let best = null, bd = Infinity;
+    for (const s of src) {
+      if (s.n.dot(n) < 0.7) continue;
+      s.tri.closestPointToPoint(p, q); const d = q.distanceToSquared(p); if (d < bd) { bd = d; best = s; }
+    }
+    if (!best) for (const s of src) { s.tri.closestPointToPoint(p, q); const d = q.distanceToSquared(p); if (d < bd) { bd = d; best = s; } }
+    best.tri.closestPointToPoint(p, q);
+    const toMid = best.mid.clone().sub(q), L = toMid.length(); if (L > 1e-6) q.addScaledVector(toMid, Math.min(0.08, L * 0.9) / L);
+    best.tri.getBarycoord(q, bary);
+    const mix = arr => new THREE.Vector2().addScaledVector(arr[0], bary.x).addScaledVector(arr[1], bary.y).addScaledVector(arr[2], bary.z);
+    return [mix(best.uv), mix(best.uv1)];
+  };
+  const A = ATTIC_WEST_ADD, P = [], N = [], U = [], U1 = [];
+  for (let t = 0; t < A.length; t += 9) {
+    const v = [0, 1, 2].map(k => new THREE.Vector3(A[t + 3 * k], A[t + 3 * k + 1], A[t + 3 * k + 2]));
+    const n = new THREE.Vector3().subVectors(v[1], v[0]).cross(new THREE.Vector3().subVectors(v[2], v[0])).normalize();
+    const nl = n.clone().applyMatrix3(nm).normalize();
+    for (const p of v) {
+      const [uv, uv1] = sample(p, n), l = p.clone().applyMatrix4(inv);
+      P.push(l.x, l.y, l.z); N.push(nl.x, nl.y, nl.z); U.push(uv.x, uv.y); U1.push(uv1.x, uv1.y);
+    }
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(P, 3)); geometry.setAttribute('normal', new THREE.Float32BufferAttribute(N, 3));
+  geometry.setAttribute('uv', new THREE.Float32BufferAttribute(U, 2)); geometry.setAttribute('uv1', new THREE.Float32BufferAttribute(U1, 2));
+  const mesh = new THREE.Mesh(geometry, home.material);
+  mesh.name = home.name + '_cati_ozgun_bati'; mesh.userData = JSON.parse(JSON.stringify(home.userData));
+  mesh.position.copy(home.position); mesh.quaternion.copy(home.quaternion); mesh.scale.copy(home.scale);
+  mesh.castShadow = home.castShadow; mesh.receiveShadow = home.receiveShadow;
+  home.parent.add(mesh);
+  return removed + A.length / 9;
+}
 // 02.10 garaj kapısı (ürün sahibinin fotoğrafı: "ızgara gibi düz beyaz değil"): kapı tavanda açık (toplanmış)
 // durur; görünen alt yüzü (y 5,469, x 4,431..7,226, z -2,195..0,624) düz beyaz levhaydı. Fotoğraftaki seksiyonel
 // kapının dokusu eklenir: 4 panel arasındaki yatay derzler (gölge + açık kenar), sağ/sol/orta galvaniz dikmeler
@@ -939,13 +1007,14 @@ export function addTur10FacadeInfill(model) {
 // kattan fazla farklıysa seyrek olan yoğun eşinin eşlemesini alır. Kepenk tek parça görünür.
 export function healTur10WoodUV(model) {
   model.updateMatrixWorld(true);
-  const tris = [];
+  const tris = [], cents = [];
   model.traverse(o => {
     if (!o.isMesh || Array.isArray(o.material) || o.material?.name !== 'WOODY-DARK' || !o.geometry.attributes.uv) return;
     const g = o.geometry, pos = g.attributes.position, uv = g.attributes.uv, n = g.index ? g.index.count : pos.count, at = k => g.index ? g.index.getX(k) : k;
     for (let t = 0; t < n; t += 3) {
       const ids = [at(t), at(t + 1), at(t + 2)], w = ids.map(i => new THREE.Vector3().fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld));
       const tri = new THREE.Triangle(...w), A = tri.getArea(), nn = tri.getNormal(new THREE.Vector3());
+      if (A < 0.02) cents.push(w[0].clone().add(w[1]).add(w[2]).divideScalar(3));
       if (A < 0.02 || Math.abs(nn.y) > 0.1) continue;   // küçük üçgenler yalnız küme büyütmede (aşağıda big)
       const u = ids.map(i => new THREE.Vector2().fromBufferAttribute(uv, i));
       const ua = Math.abs((u[1].x - u[0].x) * (u[2].y - u[0].y) - (u[2].x - u[0].x) * (u[1].y - u[0].y)) / 2;
@@ -1020,6 +1089,27 @@ export function healTur10WoodUV(model) {
   };
   const flat = new Map(), moved = new Map(), plane = new THREE.Plane(), q = new THREE.Vector3(), bary = new THREE.Vector3();
   let changed = 0;
+  // 02.10 ürün sahibi ("kepenkleri neden tek parça yaptın"): kapı kepenklerinin düz paneli, pencere kepenklerinin
+  // tersine, panjur çıtalarının ÖNÜNDE (bahçe tarafında) duruyor ve çıtaları örtüyor; köşegen iki renk de bu örtünün iki
+  // yarısının ayrı malzemede olmasındandı. Arkasında (normal boyunca 8 cm içinde, düzlem içi kutusunda) panjur çıtası
+  // olan panel üçgeni atılır: kepenk pencere kepenkleri gibi panjurlu görünür. Çıtası olmayan panel eşlenir (aşağıda).
+  const louvered = tr => {
+    const h = new THREE.Vector3(0, 1, 0).cross(tr.n).normalize(), sa = span(tr, h), d0 = tr.n.dot(tr.w[0]);
+    let k = 0;
+    for (const c of cents) {
+      if (Math.abs(tr.n.dot(c) - d0) > 0.08 || c.y < sa[0] || c.y > sa[1]) continue;
+      const hc = c.dot(h); if (hc < sa[2] || hc > sa[3]) continue;
+      if (++k >= 60) return true;
+    }
+    return false;
+  };
+  const dropTris = [...all].filter(louvered);
+  for (const tr of dropTris) {
+    if (!flat.has(tr.o)) { const g = tr.o.geometry; flat.set(tr.o, g.index ? g.toNonIndexed() : g); }
+    const pos = flat.get(tr.o).attributes.position;
+    for (let k = 1; k < 3; k++) pos.setXYZ(tr.t + k, pos.getX(tr.t), pos.getY(tr.t), pos.getZ(tr.t));
+    pos.needsUpdate = true; all.delete(tr); changed++;
+  }
   for (const tr of all) {
     // esas: kümede, bu üçgenden daha çok kullanılan malzemedeki, en çok örtüşen üçgen (özgün UV'si tr.u)
     let ref = null, best = 0.05;
