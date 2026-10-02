@@ -48,13 +48,15 @@ export const TOUR_PHOTO_MAX = 3;
 // 29.09: 6, 13, 15, 17, 18, 29, 34, 40, 42 Blender'da fotoğrafa tek tek oturtulan kameradan
 // (modelleme dalı teslim-tur10/kamera-duzeltme.json, tools/blender/08_kontrol_render.py ile
 // aynı dönüşüm: csv + dx/dy/dz, bakış yaw kadar döner). pitch derece (+ yukarı), hfov yatay açı.
+// 02.10 ürün sahibi (çatı planı, yeşil oklar: "KAMERALARIN YERLERİNİ DE DÜZELT"): 6 kat holünden mini mutfağa
+// (kuzeye) bakar; 14 alt yatak odasının kuzeybatı köşesinden yatağa (güneydoğu) bakar.
 export const PHOTO_POINTS = [
   {id:1,file:'angora_01.jpg',floor:0,outdoor:false,x:-1.584,floorY:0,y:1.55,z:-4.881,dx:-0.682,dz:0.731,tr:'Bodrum · Mutfak',en:'Basement · Kitchen'},
   {id:2,file:'angora_02.jpg',floor:0,outdoor:false,x:-3.698,floorY:0,y:1.55,z:-7.64,dx:0.937,dz:0.35,tr:'Bodrum · Salon',en:'Basement · Living room'},
   {id:3,file:'angora_03.jpg',floor:0,outdoor:false,x:-4.237,floorY:0,y:1.55,z:-4.253,dx:0.783,dz:-0.622,tr:'Bodrum · Salon',en:'Basement · Living room'},
   {id:4,file:'angora_04.jpg',floor:1,outdoor:false,x:-4.254,floorY:3.0996,y:4.65,z:-7.295,dx:0.641,dz:0.768,tr:'Giriş katı · Salon',en:'Ground floor · Living room'},
   {id:5,file:'angora_05.jpg',floor:0,outdoor:false,x:2.849,floorY:0,y:1.55,z:-4.525,dx:-0.927,dz:-0.374,tr:'Bodrum · Salon',en:'Basement · Living room'},
-  {id:6,file:'angora_06.jpg',floor:3,outdoor:false,x:0.3,floorY:9.4705,y:11.021,z:-4.7,dx:0.092,dz:-0.996,pitch:-2,hfov:80,tr:'Çatı katı · Mini mutfak',en:'Attic floor · Kitchenette'},
+  {id:6,file:'angora_06.jpg',floor:3,outdoor:false,x:0.25,floorY:9.4705,y:11.021,z:-3.45,dx:0,dz:-1,pitch:-2,hfov:80,tr:'Çatı katı · Mini mutfak',en:'Attic floor · Kitchenette'},
   {id:7,file:'angora_07.jpg',floor:3,outdoor:false,x:-0.182,floorY:9.4705,y:11.021,z:-4.615,dx:-0.756,dz:-0.655,tr:'Çatı katı · Yatak odası (C02)',en:'Attic floor · Bedroom (C02)'},
   {id:8,file:'angora_08.jpg',floor:3,outdoor:false,x:0.105,floorY:9.4705,y:11.021,z:-0.024,dx:-0.435,dz:0.901,tr:'Çatı katı · Yatak odası (C04)',en:'Attic floor · Bedroom (C04)'},
   {id:9,file:'angora_09.jpg',floor:3,outdoor:false,x:-4.899,floorY:9.4705,y:11.021,z:-2.015,dx:1.0,dz:0.0,tr:'Çatı katı · Oturma alanı',en:'Attic floor · Sitting area'},
@@ -62,7 +64,7 @@ export const PHOTO_POINTS = [
   {id:11,file:'angora_11.jpg',floor:2,outdoor:false,x:1.713,floorY:6.3714,y:7.921,z:0.671,dx:0.868,dz:0.497,tr:'1. kat · Ortak banyo',en:'First floor · Family bathroom'},
   {id:12,file:'angora_12.jpg',floor:2,outdoor:false,x:-5.765,floorY:6.3714,y:7.921,z:-3.006,dx:0.907,dz:0.421,tr:'1. kat · Oturma alanı',en:'First floor · Sitting area'},
   {id:13,file:'angora_13.jpg',floor:2,outdoor:false,x:-0.156,floorY:6.3714,y:7.751,z:1.803,dx:-0.508,dz:0.861,pitch:12,hfov:93,tr:'1. kat · Yatak odası (107)',en:'First floor · Bedroom (107)'},
-  {id:14,file:'angora_14.jpg',floor:3,outdoor:false,x:-2.66,floorY:9.4705,y:11.021,z:3.241,dx:0.847,dz:-0.532,tr:'Çatı katı · Yatak odası (C04)',en:'Attic floor · Bedroom (C04)'},
+  {id:14,file:'angora_14.jpg',floor:3,outdoor:false,x:-2.75,floorY:9.4705,y:11.021,z:0.6,dx:0.88,dz:0.475,tr:'Çatı katı · Yatak odası (C04)',en:'Attic floor · Bedroom (C04)'},
   {id:15,file:'angora_15.jpg',floor:3,outdoor:false,x:0.681,floorY:9.4705,y:11.021,z:-5.234,dx:-0.028,dz:-1,pitch:0,hfov:80,tr:'Çatı katı · Banyo',en:'Attic floor · Bathroom'},
   {id:16,file:'angora_16.jpg',floor:2,outdoor:false,x:0.404,floorY:6.3714,y:7.921,z:-5.754,dx:0.742,dz:0.671,tr:'1. kat · Giyinme odası',en:'First floor · Dressing room'},
   {id:17,file:'angora_17.jpg',floor:2,outdoor:false,x:0.884,floorY:6.3714,y:7.921,z:4.757,dx:-0.706,dz:-0.708,pitch:-10,hfov:105,tr:'1. kat · Yatak odası (107)',en:'First floor · Bedroom (107)'},

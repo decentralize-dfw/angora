@@ -89,35 +89,29 @@ export function layoutDimensionLabels(items,{width,height,obstacles=[],gap=3,pad
 export function layoutDimensionsAtMidpoint(items,{width,height,obstacles=[],gap=3,padding=8,fixedFrom=0,extraObstacles=[]}) {
   const rectAt=(item,x,y)=>({left:x-item.width/2,right:x+item.width/2,top:y-item.height/2,bottom:y+item.height/2});
   const inside=r=>r.left>=padding&&r.right<=width-padding&&r.top>=padding&&r.bottom<=height-padding;
+  const onScreen=r=>r.right>0&&r.left<width&&r.bottom>0&&r.top<height;
   const valid=item=>[item.x,item.y,item.width,item.height].every(Number.isFinite);
-  const placed=[],dims=[],names=[];
-  const ui=obstacles.concat(extraObstacles);
-  // Ölçü yazısı çizgisinin ortasında; başka bir ölçüye/arayüze değiyorsa KENDİ ÇİZGİSİ ÜSTÜNDE kayar
-  // (02.10 ürün sahibinin ölçü çiziminin hepsi görünsün diye, gizlemek son çare). Yer sırası sabit:
-  // kamera dönerken etiket atlamaz.
-  const along=[.5,.38,.62,.28,.72,.18,.82];
-  for(const item of items.slice(fixedFrom)){
-    if(!valid(item))continue;
-    const spots=item.seg?along.map(t=>[item.seg[0]+(item.seg[2]-item.seg[0])*t,item.seg[1]+(item.seg[3]-item.seg[1])*t]):[[item.x,item.y]];
-    for(const [x,y] of spots){
-      const rect=rectAt(item,x,y);
-      if(!inside(rect)||ui.some(o=>rectanglesOverlap(rect,o,gap))||dims.some(o=>rectanglesOverlap(rect,o,gap)))continue;
-      dims.push(rect);placed.push({...item,x,y,rect,anchorX:item.x,anchorY:item.y});break;
-    }
-  }
-  // Ad ölçüyle ve fotoğraf işaretiyle hiç çakışmaz: yerinde sığmıyorsa KENDİ ODASININ İÇİNDE (fits) yukarı/aşağı/yana kayar;
-  // odası dışına taşacaksa gizlenir (kayan ad komşu odanın üstüne düşmesin).
-  const shifts=[[0,0],[0,-1],[0,1],[0,-2],[0,2],[-1,0],[1,0],[-1,-1],[1,-1],[-1,1],[1,1],[0,-3],[0,3]];
+  // 02.10 ürün sahibi: "bunlar sabit olmalı ölçüler ve oda isimleri ... döndürdükçe dans ediyormuş gibi". Hiçbir
+  // etiket yerinden kaymaz: ad her zaman odasının iç merkezinde (hiç gizlenmez), ölçü her zaman çizgisinin
+  // ortasında. Ölçünün gösterilip gösterilmeyeceği ekran dikdörtgenleriyle değil DAİRELERLE (yarıçap = yazının
+  // yarı genişliği) karşılaştırılır: iki etiketin merkez uzaklığı kamera kendi ekseninde dönerken değişmez, karar
+  // da değişmez - yalnız yakınlaştırınca/uzaklaştırınca ölçü açılıp kapanır.
+  const circle=(x,y,w,h)=>({x,y,r:Math.max(w,h)/2});
+  const hits=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y)<a.r+b.r+gap;
+  const placed=[],taken=[];
+  const pins=extraObstacles.map(o=>circle((o.left+o.right)/2,(o.top+o.bottom)/2,o.right-o.left,o.bottom-o.top));
   for(const item of items.slice(0,fixedFrom)){
     if(!valid(item))continue;
-    for(const [sx,sy] of shifts){
-      const x=item.x+sx*item.width*.55,y=item.y+sy*item.height*.75;
-      if((sx||sy)&&item.fits&&!item.fits(x,y))continue;
-      if((sx||sy)&&!item.fits)continue;
-      const rect=rectAt(item,x,y);
-      if(!inside(rect)||ui.some(o=>rectanglesOverlap(rect,o,gap))||dims.some(o=>rectanglesOverlap(rect,o,gap))||names.some(o=>rectanglesOverlap(rect,o,gap)))continue;
-      names.push(rect);placed.push({...item,x,y,rect,anchorX:item.x,anchorY:item.y});break;
-    }
+    const rect=rectAt(item,item.x,item.y);if(!onScreen(rect))continue;
+    taken.push(circle(item.x,item.y,item.width,item.height));
+    placed.push({...item,rect,anchorX:item.x,anchorY:item.y});
+  }
+  for(const item of items.slice(fixedFrom)){
+    if(!valid(item))continue;
+    const rect=rectAt(item,item.x,item.y),c=circle(item.x,item.y,item.width,item.height);
+    // ekrana sabit arayüz panelleri dikdörtgen (dönmez), fotoğraf işaretleri ve öbür etiketler daire
+    if(!inside(rect)||obstacles.some(o=>rectanglesOverlap(rect,o,gap))||pins.some(o=>hits(c,o))||taken.some(o=>hits(c,o)))continue;
+    taken.push(c);placed.push({...item,rect,anchorX:item.x,anchorY:item.y});
   }
   return placed;
 }

@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import {collectUIObstacles,layoutDimensionsAtMidpoint} from './screen-layout.js';
 import {ROOM_AREAS} from './room-areas.js';
 import DXF_DIMENSIONS from './dxf-dimensions.js';
+import ROOM_SHAPES from './room-shapes.js';
 
 // Fixed screen size keeps annotations readable throughout camera movement.
 export function labelFontSize(pixelsPerMetre) {
@@ -82,11 +83,22 @@ export function createAnnotations(data,host,onRoom) {
     // odanın ortası DEĞİL (ebeveyn yatak odasında kuzey duvarına 0,9 m), o yüzden
     // etiket onun etrafındaki sanal dikdörtgende "sığıp" duvarın üstüne taşıyordu.
     // Etiket artık bu dikdörtgenin ortasında durur ve hep onun içine sığar.
-    const box=boxOf(room),center=box?[(box.x0+box.x1)/2,room.position[1],(box.z0+box.z1)/2]:room.position;
-    if(box){span.x=box.x1-box.x0;span.z=box.z1-box.z0;}
-    names.push({el,kind:'name',position:new THREE.Vector3(...center),floor:room.floor_index,
-      span,corners:[[-1,-1],[1,-1],[1,1],[-1,1]].map(([sx,sz])=>
-        new THREE.Vector3(center[0]+sx*span.x/2,center[1],center[2]+sz*span.z/2))});
+    // 02.10 ürün sahibi: "oda adı ne olursa olsun odanın sınırları içinde, orta alan civarında; kıyıda köşede olamaz;
+    // hepsi görünür". Oda poligonu ve etiket noktası room-shapes.js'ten (tools/cad/oda_sekilleri.py: kaplama sınırı,
+    // açık alanlar üyelere bölünmüş, nokta duvarlardan en uzak iç nokta). Poligonu olmayan oda eski kutuyla.
+    const shape=ROOM_SHAPES[room.id];
+    const box=boxOf(room);
+    let center=box?[(box.x0+box.x1)/2,room.position[1],(box.z0+box.z1)/2]:room.position,corners;
+    if(shape){
+      center=[shape.anchor[0],room.position[1],shape.anchor[1]];
+      corners=shape.poly.map(([x,z])=>new THREE.Vector3(x,room.position[1],z));
+      span.x=span.z=1;
+    } else {
+      if(box){span.x=box.x1-box.x0;span.z=box.z1-box.z0;}
+      corners=[[-1,-1],[1,-1],[1,1],[-1,1]].map(([sx,sz])=>new THREE.Vector3(center[0]+sx*span.x/2,center[1],center[2]+sz*span.z/2));
+    }
+    const clearance=shape?shape.clearance:(span.x>0&&span.z>0?Math.min(span.x,span.z)/2:0);
+    names.push({el,kind:'name',position:new THREE.Vector3(...center),floor:room.floor_index,span,corners,clearance});
   }
   // Both axes, on every room that has them. Only 24 of the 53 spans are project
   // dimensions, so for a long time only those were drawn - and since the rooms
@@ -115,29 +127,6 @@ export function createAnnotations(data,host,onRoom) {
     el.title=dim.basis==='dwg_verified'||dim.basis==='dwg_owner'?'Çizimde belirtilen ölçü':dim.boundary_kind==='floor_edge'?'Modelde döşeme sınırları arasındaki ölçü':'Model üzerinden ölçülen açıklık';
     overlay.append(el);dimensions.push({el,line,a,b,position:a.clone().add(b).multiplyScalar(.5),floor:dim.floor_index,roomId:dim.room_id,measured});
   }
-  // The largest uniform scale at which a w×h upright plate centred at (cx,cy)
-  // still fits inside a convex screen quad. Each edge gives one bound; the
-  // outward normal is the one pointing away from the quad's own centre, so the
-  // winding of the projection - which flips as the model is orbited - cannot
-  // invert the test. This is what keeps a room's name inside that room's
-  // floor from every angle instead of bleeding over the wall.
-  function fitInside(quad,cx,cy,w,h) {
-    let gx=0,gy=0;
-    for(const p of quad){gx+=p[0]/4;gy+=p[1]/4;}
-    let fit=Infinity;
-    for(let i=0;i<4;i++){
-      const a=quad[i],b=quad[(i+1)%4];
-      let nx=b[1]-a[1],ny=a[0]-b[0];
-      const length=Math.hypot(nx,ny);if(length<1e-6)continue;
-      nx/=length;ny/=length;
-      if(nx*(gx-a[0])+ny*(gy-a[1])>0){nx=-nx;ny=-ny;}
-      const room=nx*a[0]+ny*a[1]-(nx*cx+ny*cy);
-      const reach=Math.abs(nx)*w/2+Math.abs(ny)*h/2;
-      if(reach<1e-6)continue;
-      fit=Math.min(fit,room/reach);
-    }
-    return fit;
-  }
   function project(entry,camera,w,h,size) {
     point.copy(entry.position).project(camera);
     const visible=point.z>-1&&point.z<1;
@@ -146,7 +135,6 @@ export function createAnnotations(data,host,onRoom) {
     entry.el.style.left=`${x}px`;entry.el.style.top=`${y}px`;entry.el.style.fontSize=`${size}px`;
     return {x,y};
   }
-  const corner=new THREE.Vector3();
   return {group,data,update(view,showNames,showDimensions,transitioning,walking,camera,walkRoom,extraObstacles=[]) {
     const floor=/^f[0-3]$/.test(view)?Number(view[1]):-1;
     const w=host.clientWidth,h=host.clientHeight;
@@ -178,19 +166,13 @@ export function createAnnotations(data,host,onRoom) {
     for(const item of named){item.width=item.entry.el.offsetWidth;item.height=item.entry.el.offsetHeight;}
     for(const item of measured){item.width=item.entry.el.offsetWidth;item.height=item.entry.el.offsetHeight;}
     for(const {entry,p,width,height} of named) {
-      // The tag is a plate now, not glowing text, so it has to earn its area:
-      // it shrinks until it sits inside its own room and disappears when that
-      // room is too small on screen to carry a legible one.
-      let fit=1,quad=null;
-      if(entry.span.x>0&&entry.span.z>0){
-        quad=entry.corners.map(v=>{corner.copy(v).project(camera);
-          return [(corner.x+1)*w/2,(1-corner.y)*h/2];});
-        fit=Math.max(0,Math.min(1,fitInside(quad,p.x,p.y,width,height)));
-      }
-      if(fit<0.56){entry.el.hidden=true;continue;}
-      entry.el.style.setProperty('--label-fit',fit.toFixed(3));
-      const cw=width*fit,ch=height*fit;
-      candidates.push({...p,entry,width:cw,height:ch,fits:quad?(x,y)=>fitInside(quad,x,y,cw,ch)>=1:null});
+      // 02.10: ad hiç gizlenmez ve yerinden kaymaz; boyu odanın iç açıklığına (anchor'dan duvara en kısa uzaklık,
+      // metre) göre küçülür, en az %50. Açıklık metre cinsinden: kamera dönünce boy değişmez.
+      const distance=Math.max(1,entry.position.distanceTo(camera.position));
+      const ppm=camera.isPerspectiveCamera?h*camera.zoom/(2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*distance):h*camera.zoom/(camera.top-camera.bottom);
+      const fit=entry.clearance>0?Math.max(.5,Math.min(1,entry.clearance*ppm/(width/2))):1;
+      entry.el.style.setProperty('--label-fit',fit.toFixed(2));
+      candidates.push({...p,entry,width:width*fit,height:height*fit,name:true});
     }
     const nameCount=candidates.length;
     for(const {entry,p,width,height,seg} of measured)candidates.push({...p,entry,width,height,seg});
