@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 672" width="612" height="672" role="img" aria-labelledby="t-f1" data-floor="1">
+  <title id="t-f1">Ground floor plan · Angora 21</title>
+  <style>
+  .room{fill:var(--plan-room,#faf8f3);stroke:var(--plan-wall,#1a1c1d);stroke-width:4.5;stroke-linejoin:miter;transition:fill .35s ease}
+  .room.is-hover,.room:hover{fill:var(--plan-room-hover,#e3dccd)}
+  text{font-family:inherit;fill:currentColor;text-anchor:middle;pointer-events:none}
+  .lbl{font-size:10px;font-weight:600;letter-spacing:.02em}
+  .lbl.small{font-size:9px}
+  .area{font-size:9.5px;font-weight:400;opacity:.72}
+  .open{font-size:9.5px;font-style:italic;opacity:.7}
+  .scale line{stroke:currentColor;stroke-width:1.2}
+  .scale text{font-size:9px;text-anchor:start;opacity:.7}
+  .title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;text-anchor:start;opacity:.6}
+</style>
+  <text class="title" x="18" y="22">Ground floor</text>
+  <path class="room" fill-rule="evenodd" data-space="f1-S1" data-rooms="f1-Z06 f1-Z05 f1-Z02" data-name="Living room · Dining area · Entry hall" data-area="71.056" d="M80 110.2L403.5 110.2L403.5 297.7L311.6 297.7L311.6 308.2L443.6 308.2L443.6 393.7L397.5 393.7L397.5 492.4L386.1 503.7L287.3 503.7L242 458.8L242 364.9L240.8 364.9L240.8 363.7L239.9 363.7L239.9 364.9L240.2 364.9L240.2 379.2L162.8 379.2L162.8 423.7L80 423.7L80 402.9L78.8 402.9L78.8 401.7L56 401.7L56 300.1L80 300.1ZM231.6 281.7L231.6 308.2L242 308.2L242 281.7Z"><title>Living room · Dining area · Entry hall · 71.1 m²</title></path>
+  <path class="room" fill-rule="evenodd" data-space="f1-S2" data-rooms="f1-Z04" data-name="Kitchen" data-area="25.222" d="M321.6 631.7L202 631.7L202 591.7L80 591.7L80 555.7L56 555.7L56 454.1L80 454.1L80 450.1L90 450.1L90 430.4L240.2 429.6L240.2 443.7L231.6 443.7L231.6 457.6L283.7 510L321.6 510.4Z"><title>Kitchen · 25.2 m²</title></path>
+  <path class="room" fill-rule="evenodd" data-space="f1-S3" data-rooms="f1-Z01" data-name="Entrance" data-area="4.756" d="M431.6 534.1L431.6 570.1L443.6 570.1L443.6 591.7L332.1 591.7L332.1 510.1L387.7 510.1L411.3 534.1Z"><title>Entrance · 4.8 m²</title></path>
+  <path class="room" fill-rule="evenodd" data-space="f1-S4" data-rooms="f1-Z03" data-name="WC" data-area="1.859" d="M443.6 454.1L443.6 527.7L414.5 527.7L393.3 506.8L404 495.6L404 454.1Z"><title>WC · 1.9 m²</title></path>
+  <path class="room" fill-rule="evenodd" data-space="f1-S5" data-rooms="f1-Z07" data-name="Garage" data-area="20.169" d="M571.5 241.1L571.5 478.7L453.9 478.7L453.9 443.7L443.6 443.7L443.6 447.7L404 447.7L404 404.2L443.6 404.2L443.6 410.2L453.9 410.2L453.9 297.7L414 297.7L414 241.1Z"><title>Garage · 20.2 m²</title></path>
+  <path class="room" fill-rule="evenodd" data-space="f1-S6" data-rooms="f1-Z08" data-name="Utility room" data-area="5.244" d="M571.5 234.7L444 234.7L444 177.1L506 177.1L506 161.2L571.5 161.2Z"><title>Utility room · 5.2 m²</title></path>
+  <text class="lbl" x="264.1" y="179" data-room="f1-Z06"><tspan x="264.1" dy="0">Living</tspan><tspan x="264.1" dy="12">room</tspan></text>
+  <text class="lbl" x="160.1" y="335" data-room="f1-Z05"><tspan x="160.1" dy="0">Dining</tspan><tspan x="160.1" dy="12">area</tspan></text>
+  <text class="lbl" x="148.1" y="509.5" data-room="f1-Z04"><tspan x="148.1" dy="0">Kitchen</tspan></text><text class="area" x="148.1" y="521.5">25.2 m²</text>
+  <text class="lbl" x="300.1" y="439" data-room="f1-Z02"><tspan x="300.1" dy="0">Entry hall</tspan></text>
+  <text class="lbl small" x="366.1" y="554" data-room="f1-Z01"><tspan x="366.1" dy="0">Entrance</tspan></text>
+  <text class="lbl small" x="410.1" y="492" data-room="f1-Z03"><tspan x="410.1" dy="0">WC</tspan></text>
+  <text class="lbl" x="512.1" y="349.5" data-room="f1-Z07"><tspan x="512.1" dy="0">Garage</tspan></text><text class="area" x="512.1" y="361.5">20.2 m²</text>
+  <text class="lbl small" x="520.1" y="195" data-room="f1-Z08"><tspan x="520.1" dy="0">Utility</tspan><tspan x="520.1" dy="10">room</tspan></text>
+  <text class="open" x="412.1" y="43" data-room="f1-Z10"><tspan x="412.1" dy="0">Balcony</tspan></text>
+  <g class="scale"><line x1="18" y1="654" x2="98" y2="654"/><line x1="18" y1="650" x2="18" y2="658"/><line x1="98" y1="650" x2="98" y2="658"/><text x="104" y="657">2 m</text></g>
+</svg>

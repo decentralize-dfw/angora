@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 672" width="612" height="672" role="img" aria-labelledby="t-f0" data-floor="0">
+  <title id="t-f0">Basement plan · Angora 21</title>
+  <style>
+  .room{fill:var(--plan-room,#faf8f3);stroke:var(--plan-wall,#1a1c1d);stroke-width:4.5;stroke-linejoin:miter;transition:fill .35s ease}
+  .room.is-hover,.room:hover{fill:var(--plan-room-hover,#e3dccd)}
+  text{font-family:inherit;fill:currentColor;text-anchor:middle;pointer-events:none}
+  .lbl{font-size:10px;font-weight:600;letter-spacing:.02em}
+  .lbl.small{font-size:9px}
+  .area{font-size:9.5px;font-weight:400;opacity:.72}
+  .open{font-size:9.5px;font-style:italic;opacity:.7}
+  .scale line{stroke:currentColor;stroke-width:1.2}
+  .scale text{font-size:9px;text-anchor:start;opacity:.7}
+  .title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;text-anchor:start;opacity:.6}
+</style>
+  <text class="title" x="18" y="22">Basement</text>
+  <path class="room" fill-rule="evenodd" data-space="f0-S1" data-rooms="f0-B06 f0-B05 f0-B01 f0-B04" data-name="Garden living room · Kitchen · Hall · Room" data-area="56.407" d="M403.5 110.2L403.5 230.9L322.8 230.9L322.8 306.9L403.5 306.9L403.5 308.2L443.6 308.2L443.6 393.7L316 393.7L316 345.6L232.8 345.2L232.8 346.8L231.6 346.8L231.6 379.2L162.8 379.2L162.8 443.7L80 443.7L80 402.9L78.8 402.9L78.8 401.7L56 401.7L56 300.1L78.8 300.1L78.8 298.9L80 298.9L80 110.2ZM231.6 281.7L231.6 308.2L242 308.2L242 281.7Z"><title>Garden living room · Kitchen · Hall · Room · 56.4 m²</title></path>
+  <path class="room" fill-rule="evenodd" data-space="f0-S2" data-rooms="f0-B10" data-name="f0-B10" data-area="3.262" d="M326.8 234.9L403.5 234.9L403.5 302.9L326.8 302.9Z"><title>f0-B10 · 3.3 m²</title></path>
+  <path class="room" fill-rule="evenodd" data-space="f0-S3" data-rooms="f0-B02" data-name="Room" data-area="25.822" d="M571.5 478.7L454 478.7L454 297.7L414 297.7L414 177.1L506 177.1L506 161.2L571.5 161.2Z"><title>Room · 25.8 m²</title></path>
+  <text class="lbl" x="168.1" y="189" data-room="f0-B06"><tspan x="168.1" dy="0">Garden living</tspan><tspan x="168.1" dy="12">room</tspan></text>
+  <text class="lbl" x="160.1" y="383" data-room="f0-B05"><tspan x="160.1" dy="0">Kitchen</tspan></text>
+  <text class="lbl" x="262.1" y="333" data-room="f0-B01"><tspan x="262.1" dy="0">Hall</tspan></text>
+  <text class="lbl" x="342.1" y="195" data-room="f0-B04"><tspan x="342.1" dy="0">Room</tspan></text>
+  <text class="lbl" x="514.1" y="329.5" data-room="f0-B02"><tspan x="514.1" dy="0">Room</tspan></text><text class="area" x="514.1" y="341.5">25.8 m²</text>
+  <text class="open" x="274.3" y="372.2" data-room="f0-WC"><tspan x="274.3" dy="0">WC</tspan></text>
+  <g class="scale"><line x1="18" y1="654" x2="98" y2="654"/><line x1="18" y1="650" x2="18" y2="658"/><line x1="98" y1="650" x2="98" y2="658"/><text x="104" y="657">2 m</text></g>
+</svg>
