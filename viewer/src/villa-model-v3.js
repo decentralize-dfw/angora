@@ -754,6 +754,59 @@ export function regableTur10Attic(model) {
   home.parent.add(mesh);
   return src.length + tris.length;
 }
+// 02.10 garaj kapısı (ürün sahibinin fotoğrafı: "ızgara gibi düz beyaz değil"): kapı tavanda açık (toplanmış)
+// durur; görünen alt yüzü (y 5,469, x 4,431..7,226, z -2,195..0,624) düz beyaz levhaydı. Fotoğraftaki seksiyonel
+// kapının dokusu eklenir: 4 panel arasındaki yatay derzler (gölge + açık kenar), sağ/sol/orta galvaniz dikmeler
+// ve dikme-derz kesişimlerinde menteşe plakaları. Işık haritası yok (garaj içi canlı ışıkla).
+const TUR10_GARAGE_DOOR = {x0: 4.431, x1: 7.226, z0: -2.195, z1: 0.624, panels: 4};
+export function addTur10GarageDoorDetail(model) {
+  const door = [];
+  model.traverse(o => { if (o.isMesh && !Array.isArray(o.material) && o.material?.name === 'WHT.001' && /zemin_019/.test(o.name)) door.push(o); });
+  if (!door.length) return 0;
+  model.updateMatrixWorld(true);
+  const {x0, x1, z0, z1, panels} = TUR10_GARAGE_DOOR, parent = door[0].parent;
+  const inv = new THREE.Matrix4().copy(parent.matrixWorld).invert();
+  // kapının alt yüzü düz değil (arkada raya doğru kıvrılıyor): her nokta aşağıdan yukarı ışınla bulunur
+  const ray = new THREE.Raycaster(), up = new THREE.Vector3(0, 1, 0), from = new THREE.Vector3();
+  const surf = (x, z) => { from.set(x, 5.0, z); ray.set(from, up); ray.far = 1.0;
+    const hit = ray.intersectObjects(door, false).find(h => h.face && h.face.normal.clone().transformDirection(h.object.matrixWorld).y < -0.5);
+    return hit ? hit.point.y : null; };
+  const groups = {groove: [], lip: [], steel: [], plate: []};
+  const push = (g, ...v) => { for (const p of v) { const l = p.clone().applyMatrix4(inv); groups[g].push(l.x, l.y, l.z); } };
+  // a..b boyunca (x ya da z ekseninde) yüzeyi izleyen, d kadar aşağıda, genişliği w olan şerit (+ isteğe bağlı yan duvarlar)
+  const strip = (g, along, fixed, a, b, w, d, sides = 0) => {
+    const n = Math.max(1, Math.ceil((b - a) / 0.06)), pt = (t, o) => along === 'x' ? [a + (b - a) * t, fixed + o] : [fixed + o, a + (b - a) * t];
+    for (let i = 0; i < n; i++) {
+      const q = [[i / n, -w / 2], [(i + 1) / n, -w / 2], [(i + 1) / n, w / 2], [i / n, w / 2]].map(([t, o]) => {
+        const [x, z] = pt(t, o), y = surf(x, z); return y === null ? null : new THREE.Vector3(x, y - d, z); });
+      if (q.some(v => !v)) continue;
+      push(g, q[0], q[2], q[1], q[0], q[3], q[2]);   // aşağı bakan yüz
+      if (sides) for (const [e0, e1] of [[q[0], q[1]], [q[2], q[3]]]) {
+        const u0 = e0.clone().setY(e0.y + sides), u1 = e1.clone().setY(e1.y + sides);
+        push(g, e0, e1, u1, e0, u1, u0, e0, u1, e1, e0, u0, u1);   // iki yüzlü yan duvar
+      }
+    }
+  };
+  const h = (z1 - z0) / panels, xc = (x0 + x1) / 2, posts = [x0 + 0.055, xc, x1 - 0.055];
+  for (let k = 1; k < panels; k++) {
+    strip('groove', 'x', z0 + k * h, x0 + 0.01, x1 - 0.01, 0.012, 0.0015);
+    strip('lip', 'x', z0 + k * h + 0.011, x0 + 0.01, x1 - 0.01, 0.010, 0.0015);
+  }
+  for (const x of posts) strip('steel', 'z', x, z0 + 0.01, z1 - 0.01, 0.085, 0.020, 0.0185);
+  for (const x of posts) for (let k = 1; k < panels; k++) strip('plate', 'z', x, z0 + k * h - 0.07, z0 + k * h + 0.07, 0.07, 0.026, 0.006);
+  const mats = {groove: new THREE.MeshStandardMaterial({color: 0x9c9c97, roughness: 0.8, side: THREE.DoubleSide}),
+    lip: new THREE.MeshStandardMaterial({color: 0xf4f4f0, roughness: 0.55, side: THREE.DoubleSide}),
+    steel: new THREE.MeshStandardMaterial({color: 0xb4b8bb, roughness: 0.42, metalness: 0.65, side: THREE.DoubleSide}),
+    plate: new THREE.MeshStandardMaterial({color: 0xa3a7aa, roughness: 0.5, metalness: 0.6, side: THREE.DoubleSide})};
+  let added = 0;
+  for (const [k, P] of Object.entries(groups)) {
+    if (!P.length) continue;
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(P, 3)); g.computeVertexNormals();
+    const mesh = new THREE.Mesh(g, mats[k]); mesh.name = 'garaj_kapisi_' + k; mesh.castShadow = false; mesh.receiveShadow = true;
+    parent.add(mesh); added += P.length / 9;
+  }
+  return added;
+}
 export function dropTur10Faces(model) {
   model.updateMatrixWorld(true);
   const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3(), n = new THREE.Vector3();
