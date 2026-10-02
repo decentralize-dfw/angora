@@ -125,7 +125,11 @@ def main(trisf, src, dst, ejs, cjs):
     for W, maps in sorted(by_res.items(), reverse=True):
         sid = dunya.raster(SUV, W)
         sys_, sxs, stt, spos = dunya.texel_world(sid, SUV, SP, W)
-        ks = np.isin(stt, kaynak); sys_, sxs, stt, spos = sys_[ks], sxs[ks], stt[ks], spos[ks]
+        ks = np.isin(stt, kaynak)
+        # pişmede kara kalmış (duvara gömülü / görünmeyen) kaynak tekseller dışarıda: aktarılınca köşede koyu leke
+        g = imgs['gok']; gh = g.shape[0]
+        ks &= g[np.clip((sys_ + .5) * gh // W, 0, gh - 1).astype(int), np.clip((sxs + .5) * gh // W, 0, gh - 1).astype(int)].max(1) >= dunya.KARA
+        sys_, sxs, stt, spos = sys_[ks], sxs[ks], stt[ks], spos[ks]
         tid = dunya.raster(UV1, W)
         ys, xs, tt, pos = dunya.texel_world(tid, UV1, P, W)
         for g in range(len(gruplar)):
