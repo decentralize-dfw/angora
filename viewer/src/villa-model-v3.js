@@ -859,7 +859,9 @@ export function addTur10GarageDoorDetail(model) {
 //   facing: normalin işareti, light: [h, y] ışığın okunduğu nokta
 const TUR10_INFILL = [
   // yan yüzün ışığı kütle yüzünün penceresiz bir noktasından (alt şerit saçağın gölgesinde, uzatılan kısım koyu kalıyordu)
-  {axis: 'x', at: -5.833, h: [0.323, 3.322], y: [0.15, 2.72], facing: -1, light: [0.8, 3.4],
+  // tone: malzeme renginin doğrusal çarpanı; kütle yüzü yukarıdan aşağı koyulaşıyor, tek ışık noktasıyla dolgu birleşimde
+  // %10 açık kalıyordu (render ölçümü 112 / 102)
+  {axis: 'x', at: -5.833, h: [0.323, 3.322], y: [0.15, 2.72], facing: -1, light: [0.8, 3.4], tone: 0.8,
     source: {mat: /^Stucco painted wall$/, atlas: 'cephe', min: [-5.84, 2.69, 0.30], max: [-5.825, 4.25, 3.33]}},
   {axis: 'z', at: 0.323, h: [-5.833, -5.232], y: [0.15, 2.72], facing: -1, light: [-5.53, 2.9],
     source: {mat: /^Stucco painted wall$/, atlas: 'cephe', min: [-5.84, 2.69, 0.31], max: [-5.22, 3.6, 0.335]}},
@@ -917,7 +919,9 @@ export function addTur10FacadeInfill(model) {
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.Float32BufferAttribute(P, 3)); geometry.setAttribute('normal', new THREE.Float32BufferAttribute(N, 3));
     geometry.setAttribute('uv', new THREE.Float32BufferAttribute(U, 2)); geometry.setAttribute('uv1', new THREE.Float32BufferAttribute(U1, 2));
-    const mesh = new THREE.Mesh(geometry, home.material);
+    const material = rule.tone ? home.material.clone() : home.material;
+    if (rule.tone) material.color.multiplyScalar(rule.tone);
+    const mesh = new THREE.Mesh(geometry, material);
     mesh.name = home.name + '_cephe_ek'; mesh.userData = JSON.parse(JSON.stringify(home.userData));
     mesh.position.copy(home.position); mesh.quaternion.copy(home.quaternion); mesh.scale.copy(home.scale);
     mesh.castShadow = home.castShadow; mesh.receiveShadow = home.receiveShadow;
@@ -987,6 +991,21 @@ export function healTur10WoodUV(model) {
   model.traverse(o => { if (o.isMesh && !Array.isArray(o.material) && o.material?.name === 'WOODY-DARK') use.set(o.material, (use.get(o.material) ?? 0) + (o.geometry.index ? o.geometry.index.count : o.geometry.attributes.position.count)); });
   const main = [...use].sort((x, y) => y[1] - x[1])[0]?.[0];
   const all = new Set([...fix.keys(), ...fix.values()]);
+  // aynı kepengin öbür katmanları: dönüştürülen bir üçgenle aynı düzlemde (3 cm) düzlem içi kutusunun %5'i örtüşen her
+  // WOODY-DARK üçgeni de kümeye girer (eşleşmeyen katman üçgeni kepenkte ince kahve kama olarak kalıyordu)
+  for (let grew = true; grew;) {
+    grew = false;
+    for (const a of tris) {
+      if (all.has(a)) continue;
+      const h = new THREE.Vector3(0, 1, 0).cross(a.n).normalize(), sa = span(a, h), area = (sa[1] - sa[0]) * (sa[3] - sa[2]);
+      if (area <= 0) continue;
+      for (const b of all) {
+        if (Math.abs(a.n.dot(b.n)) < 0.995 || Math.abs(b.n.dot(a.w[0]) - b.n.dot(b.w[0])) > 0.03) continue;
+        const sb = span(b, h), o = Math.max(0, Math.min(sa[1], sb[1]) - Math.max(sa[0], sb[0])) * Math.max(0, Math.min(sa[3], sb[3]) - Math.max(sa[2], sb[2])) / area;
+        if (o >= 0.05) { all.add(a); grew = true; break; }
+      }
+    }
+  }
   const flat = new Map(), moved = new Map();
   for (const tr of all) {
     if (!flat.has(tr.o)) { const g = tr.o.geometry; flat.set(tr.o, g.index ? g.toNonIndexed() : g); }
