@@ -57,6 +57,11 @@ KURALLAR = [
     # tavanda toplanmış garaj kapısı ışığını tavandan okuduğu için kapının ortasında koyu leke olarak görünüyordu
     {'ad': 'garaj-lamba-halkasi', 'tur': 'koyu', 'atlas': 'zemin', 'normal': [0, -1, 0], 'duzlem': 5.891,
      'kutu': [[5.25, 5.88, -1.20], [6.20, 5.90, -0.20]], 'r': 0.30, 'oran': 0.85},
+    # 02.10 çatı oturma alanı tavanı (eğik, ürün sahibi: "eski kirişin gölgesi kalmış"): model-d1'in eklediği ve
+    # sitede kaldırılan enine kirişin (x -2,64..-2,44) pişmiş gölgesi tavanda koyu bant; iki yanındaki tavanla
+    # doldurulur. Kirişin kendi alt yüzü (yatay, ny -1) seçilmez.
+    {'ad': 'cati-kiris-golgesi', 'tur': 'sil', 'atlas': 'zemin', 'ny': [-0.95, -0.5],
+     'kutu': [[-3.05, 11.0, -3.6], [-2.33, 12.4, -0.45]], 'yaricap': 0.4},
     # aynı odanın batı ucundaki pilastr yüzü (x -5,032, +x'e bakar): düşey gri şeritler
     {'ad': 'cati-pilastr', 'tur': 'koyu', 'atlas': 'duvar', 'normal': [1, 0, 0], 'duzlem': -5.032,
      'kutu': [[-5.04, 9.47, -3.60], [-5.02, 11.20, -3.10]], 'r': 0.12, 'oran': 0.85},
@@ -71,8 +76,11 @@ def main(trisf, src, dst):
     for r in KURALLAR:
         P = np.array(T[r['atlas']]['p'], float).reshape(-1, 3, 3); UV = np.array(T[r['atlas']]['uv'], float).reshape(-1, 3, 2)
         n = np.cross(P[:, 1] - P[:, 0], P[:, 2] - P[:, 0]); n /= np.maximum(np.linalg.norm(n, axis=1, keepdims=True), 1e-12)
-        want = np.array(r['normal'], float); ax = int(np.argmax(np.abs(want)))
-        duz = (np.abs(n @ want) > 0.98) & (np.abs(P[:, :, ax] - r['duzlem']).max(1) < 0.004)
+        if 'ny' in r:   # eğik yüzeyler (çatı tavanı): normalin y bileşeni aralıkta olan bütün üçgenler
+            duz = (n[:, 1] >= r['ny'][0]) & (n[:, 1] <= r['ny'][1])
+        else:
+            want = np.array(r['normal'], float); ax = int(np.argmax(np.abs(want)))
+            duz = (np.abs(n @ want) > 0.98) & (np.abs(P[:, :, ax] - r['duzlem']).max(1) < 0.004)
         lo, hi = np.array(r['kutu'][0]), np.array(r['kutu'][1])
         say = 0
         for m in MAPS:

@@ -807,6 +807,47 @@ export function addTur10GarageDoorDetail(model) {
   }
   return added;
 }
+// 02.10 çatı oturma alanı (ürün sahibi: "süpürgelik tüm odayı dönmeli"): kuzey diz duvarında (z -0,507, TV duvarı)
+// x -2,413..-1,475 arasında süpürgelik yoktu (çevresi hesapla tarandı; öbür duvarlarda var). Evdeki ceviz
+// süpürgelikle aynı malzeme ve kesit (8,5 cm yükseklik, 1,2 cm kalınlık). [kat, [x0, z0], [x1, z1], içeri normal [nx, nz], döşeme y]
+const TUR10_BASEBOARDS = [
+  ['cati', [-2.423, -0.507], [-1.465, -0.507], [0, -1], 9.4705],
+];
+export function addTur10Baseboards(model) {
+  const homes = new Map();
+  model.traverse(o => { if (o.isMesh && !Array.isArray(o.material) && o.material?.name === 'EK_M1_Sicak_ceviz_supurgelik' && o.userData?.kat && !homes.has(o.userData.kat)) homes.set(o.userData.kat, o); });
+  model.updateMatrixWorld(true);
+  let added = 0;
+  for (const [kat, [ax, az], [bx, bz], [nx, nz], y] of TUR10_BASEBOARDS) {
+    const home = homes.get(kat); if (!home) continue;
+    const L = Math.hypot(bx - ax, bz - az), H = 0.085, T = 0.012;
+    const mesh = new THREE.Mesh(new THREE.BoxGeometry(L, H, T), home.material);
+    mesh.name = home.name + '_supurgelik_ek';
+    const world = new THREE.Matrix4().compose(new THREE.Vector3((ax + bx) / 2 + nx * T / 2, y + H / 2, (az + bz) / 2 + nz * T / 2),
+      new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), -Math.atan2(bz - az, bx - ax)), new THREE.Vector3(1, 1, 1));
+    mesh.applyMatrix4(new THREE.Matrix4().copy(home.parent.matrixWorld).invert().multiply(world));
+    mesh.userData = {...home.userData}; delete mesh.userData.lightmap;
+    mesh.castShadow = home.castShadow; mesh.receiveShadow = home.receiveShadow;
+    home.parent.add(mesh); added++;
+  }
+  return added;
+}
+// 02.10 çatı oturma alanı (ürün sahibi: "koltuğun üzerinde havada iki adet metal"): koltuğun (tripo) normal haritası
+// sırt dikişlerinde keskin; parlaklık yansımasıyla kumaşın üstünde iki beyaz metal parça gibi parlıyordu. Kumaş mat.
+const TUR10_MATTE_FABRIC = /^tripo_material_06f5f812-48e7-4e3b-8d92-672ff3ab96e0$/;
+export function matteTur10Fabric(model) {
+  const seen = new Set();
+  model.traverse(o => {
+    if (!o.isMesh) return;
+    for (const m of [].concat(o.material)) {
+      if (!m || seen.has(m) || !TUR10_MATTE_FABRIC.test(m.name ?? '')) continue;
+      seen.add(m); m.metalness = 0; m.metalnessMap = null; m.roughness = 1; m.roughnessMap = null;
+      if ('envMapIntensity' in m) m.envMapIntensity = 0.3;
+      m.needsUpdate = true;
+    }
+  });
+  return seen.size;
+}
 export function dropTur10Faces(model) {
   model.updateMatrixWorld(true);
   const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3(), n = new THREE.Vector3();
