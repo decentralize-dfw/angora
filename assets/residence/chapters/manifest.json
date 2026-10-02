@@ -1,0 +1,17 @@
+{
+  "frames": 96,
+  "width": 1440,
+  "height": 1440,
+  "fps": 15,
+  "chapterProgress": [
+    0.125,
+    0.375,
+    0.625,
+    0.875
+  ],
+  "source": "angora-finalization-review.blend",
+  "render": "Cycles / OptiX, transparent background, continuous camera and world-height cutaway",
+  "sourceModified": false,
+  "urlPattern": "frame-%04d.webp",
+  "decodedCacheLimit": 18
+}
