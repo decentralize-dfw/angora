@@ -6,8 +6,9 @@ def load(tp):
     mat=np.concatenate([np.full(c,i) for i,(_,_,c) in enumerate(meta)]); names=np.array([meta[m][1] for m in mat])
     c=P.mean(1); A=np.linalg.norm(np.cross(P[:,1]-P[:,0],P[:,2]-P[:,0]),axis=1)
     k=(c[:,0]>-5)&(c[:,0]<3.5)&(c[:,1]>-1)&(c[:,1]<4)&(c[:,2]>-12)&(c[:,2]<-4)&(A>1e-9)&(names!='glass')
-    return P[k]
-def shade(P, eye, look, W=900, H=640, fov=62):
+    return P[k], (names[k]=='WHT.001')
+def shade(PW, eye, look, W=900, H=640, fov=62):
+    P, white = PW
     rx=RayMeshIntersector(trimesh.Trimesh(vertices=P.reshape(-1,3),faces=np.arange(len(P)*3).reshape(-1,3),process=False))
     F=np.array(look,float); F/=np.linalg.norm(F); R=np.cross(F,[0,1,0]); R/=np.linalg.norm(R); U=np.cross(R,F)
     f=(H/2)/math.tan(math.radians(fov)/2)
@@ -19,7 +20,11 @@ def shade(P, eye, look, W=900, H=640, fov=62):
     img=np.full(len(d),235.0); hit=tri>=0
     nn=n[tri[hit]]; nn*=np.sign(-(nn*d[hit]).sum(1))[:,None]
     img[hit]=60+170*np.clip(nn@L,0,1)*0.75+170*0.25*np.abs((nn*d[hit]).sum(1))
-    return Image.fromarray(img.reshape(H,W).clip(0,255).astype(np.uint8)).convert('RGB')
+    g=img.reshape(H,W).clip(0,255)
+    rgb=np.stack([g*0.78,g*0.80,g*0.86],-1)   # gri-mavi model
+    wm=np.zeros(len(d),bool); wm[hit]=white[tri[hit]]; wm=wm.reshape(H,W)
+    rgb[wm]=np.stack([np.full(wm.sum(),255.0)]*3,-1)*np.clip(g[wm,None]/200+0.25,0.8,1.0)   # beyaz kasa/lento
+    return Image.fromarray(rgb.clip(0,255).astype(np.uint8))
 import os
 eye=json.loads(os.environ.get('EYE','[-1.75,1.45,-10.4]')); look=json.loads(os.environ.get('LOOK','[0.28,-0.08,1]'))
 a=shade(load(sys.argv[1]),eye,look); b=shade(load(sys.argv[2]),eye,look)

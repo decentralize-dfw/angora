@@ -1178,7 +1178,8 @@ const TUR10_GARDEN_DOOR = {
   // kapalı kanat -> açık konum: sol +90° (x' = z + 8,30 - 1,493, z' = -(x + 1,50) - 8,208), sağ -90°
   left: {x0: -1.50, z0: -8.30, x1: -1.493, z1: -8.208, s: 1}, right: {x0: -0.430, z0: -8.30, x1: -0.49, z1: -8.267, s: -1},
   split: -0.965,
-  lintel: {min: [-1.666, 1.84, -8.337], max: [-0.266, 1.90, -8.278]},
+  // lento: kasanın üstünden (1,825) dikmelerin görünen beyaz başı kadar (1,96), duvar girintisi boyunca derin
+  lintel: {min: [-1.666, 1.825, -8.337], max: [-0.266, 1.96, -8.157]},
 };
 export function fixTur10GardenDoor(model) {
   model.updateMatrixWorld(true);
@@ -1236,8 +1237,8 @@ export function fixTur10GardenDoor(model) {
   });
   for (const [o, g] of flat) { g.computeBoundingBox(); g.computeBoundingSphere(); if (g !== o.geometry) { o.geometry.dispose(); o.geometry = g; } }
   // lento: kasa dikmesinin malzemesi; ışık UV'si dikmenin üst ucundan sabit
-  // kasa dikmesi: dikmenin üst ucuna (x -0,3, y 1,9, z -8,3) en yakın köşesi olan WHT.001 parçası
-  const target = new THREE.Vector3(-0.3, 1.9, -8.3);
+  // kasa dikmesi: dikmenin ön yüzünün üst ucuna en yakın köşesi olan WHT.001 parçası
+  const target = new THREE.Vector3(-0.333, 1.866, -8.337);   // dikmenin ön yüzü, üst ucu (ışık haritasında aydınlık)
   let post = null, uv1 = null, bd = 0.05;
   for (const o of whites) {
     const pp = o.geometry.attributes.position, pu = o.geometry.attributes.uv1;
