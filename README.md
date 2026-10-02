@@ -8,9 +8,9 @@ Bu native kayıt henüz web GLB ve yürüyüş verilerine aktarılmadı. [Bahçe
 
 Kaynak: `ANGORA-.dwg` ve bu depodaki oda / drone fotoğrafları. Hedef, master plandaki **21 numaralı bina**; bu numara tapu ada/parsel numarası değildir.
 
-## İngilizce tanıtım sitesi (`en/`)
+## İngilizce tanıtım sitesi (`web.html`)
 
-[`en/index.html`](en/index.html), villayı editoryal bir akışla anlatan tek sayfalık
+[`web.html`](web.html), villayı editoryal bir akışla anlatan tek sayfalık
 İngilizce sunumdur: tam ekran açılış, ilan metninden alınan açıklamalar, kaydırmayla
 sürülen 3B model (önce bahçeden yaklaşır, sonra çatıyı kaldırıp evi kat kat keser),
 modelin kendi oda poligonlarından çizilen kat planları, 55 fotoğrafın 48'i, yatay
@@ -30,8 +30,8 @@ kesit, kat kotu + 1,60 m'dedir. Kaynaklar `site/` altındadır:
   `en/media/` altına üretir; `site/scripts/build-floor-plans.mjs` kat planı
   SVG'lerini `build/web/full/room-spaces.json` ve `rooms.json`'dan çizer.
 - Derleme: `cd site && npm ci && npm run build` → `en/site-assets/site.js` ve
-  `villa3d.js`. three.js bu depodan servis edilir, CDN yoktur. `en/index.html` ve
-  `en/site.css` elle yazılır ve derlemeden etkilenmez.
+  `villa3d.js`. three.js bu depodan servis edilir, CDN yoktur. Kökteki `web.html` ve
+  `en/site.css` elle yazılır ve derlemeden etkilenmez; yollar köke göredir.
 
 ## 3D inceleme arayüzü
 
