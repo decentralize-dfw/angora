@@ -682,9 +682,22 @@ export function regableTur10Attic(model) {
     return [mix(best.uv), mix(best.uv1)];
   };
   const A = TUR10_ATTIC_GABLE, P = [], N = [], U = [], U1 = [];
+  // Özgün tavanın köşelerdeki küçük kırık üçgenleri (diz duvarına değdiği yer) kendi eğik normalleriyle gölgelenince
+  // köşelerde gri sivri lekeler kalıyordu: alanı 0,3 m²'den küçük üçgenler en yakın büyük üçgenin normalini alır.
+  const tris = [];
   for (let t = 0; t < A.length; t += 9) {
-    for (let k = 0; k < 3; k++) w[k].set(A[t + 3 * k], A[t + 3 * k + 1], A[t + 3 * k + 2]);
-    n.subVectors(w[1], w[0]).cross(e.subVectors(w[2], w[0])).normalize().applyMatrix3(nm).normalize();
+    const v = [0, 1, 2].map(k => new THREE.Vector3(A[t + 3 * k], A[t + 3 * k + 1], A[t + 3 * k + 2]));
+    const nn = new THREE.Vector3().subVectors(v[1], v[0]).cross(new THREE.Vector3().subVectors(v[2], v[0]));
+    tris.push({v, area: nn.length() / 2, n: nn.normalize(), c: v[0].clone().add(v[1]).add(v[2]).divideScalar(3)});
+  }
+  const big = tris.filter(r => r.area >= 0.3);
+  for (const r of tris) {
+    if (r.area >= 0.3 || !big.length) continue;
+    r.n = big.reduce((b, x) => (x.c.distanceToSquared(r.c) < b.c.distanceToSquared(r.c) ? x : b)).n;
+  }
+  for (let i = 0; i < tris.length; i++) {
+    w[0].copy(tris[i].v[0]); w[1].copy(tris[i].v[1]); w[2].copy(tris[i].v[2]);
+    n.copy(tris[i].n).applyMatrix3(nm).normalize();
     for (const p of w) {
       const [uv, uv1] = sample(p), l = p.clone().applyMatrix4(inv);
       P.push(l.x, l.y, l.z); N.push(n.x, n.y, n.z); U.push(uv.x, uv.y); U1.push(uv1.x, uv1.y);
@@ -698,7 +711,7 @@ export function regableTur10Attic(model) {
   mesh.position.copy(home.position); mesh.quaternion.copy(home.quaternion); mesh.scale.copy(home.scale);
   mesh.castShadow = home.castShadow; mesh.receiveShadow = home.receiveShadow;
   home.parent.add(mesh);
-  return src.length + A.length / 9;
+  return src.length + tris.length;
 }
 export function dropTur10Faces(model) {
   model.updateMatrixWorld(true);
