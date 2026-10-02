@@ -143,6 +143,9 @@ export const WALK_RAMPS = [
 ];
 export const WALK_PASSAGES = [
   {name: 'antre-garaj', floor: 1, x0: 2.6, x1: 4.6, z0: -0.62, z1: 0.30, refX: 2.0, refZ: -0.16},
+  // 02.10 (ürün sahibi: "dışarıya çıkamıyorum"): garaj kapısı açık (tavanda toplanmış) ama yürüme verisinde
+  // kapı çizgisi (z 0,9..1,4) engel/boş kalmıştı. Açıklık garaj kotunda (3,10) açılır.
+  {name: 'garaj-kapisi', floor: 1, x0: 4.50, x1: 7.15, z0: 0.85, z1: 1.50, refX: 5.8, refZ: 0.5},
 ];
 // 3) Havuz: su yüzeyi (GARDEN-opt-v2 water: x -1,91..8,50, z -18,39..-13,53)
 //    yürünmez - bütün katmanlarda engel.

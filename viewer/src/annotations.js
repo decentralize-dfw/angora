@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {collectUIObstacles,layoutDimensionsAtMidpoint} from './screen-layout.js';
 import {ROOM_AREAS} from './room-areas.js';
+import DXF_DIMENSIONS from './dxf-dimensions.js';
 
 // Fixed screen size keeps annotations readable throughout camera movement.
 export function labelFontSize(pixelsPerMetre) {
@@ -95,7 +96,11 @@ export function createAnnotations(data,host,onRoom) {
   // a dashed witness line, a pale tag, and the '≈' the data already carries.
   // The tooltip says which it is; areaLabel() is untouched, so a measured span
   // still cannot stand in for an area.
-  for(const dim of data.dimensions) {
+  // 02.10 ürün sahibi: "BURDAKİ ÖLÇÜLER KOY. SADECE BUNLAR OLSUN." Planda yalnız onun ölçü çiziminin
+  // (tools/cad/dxf_dimensions.py -> dxf-dimensions.js) ölçüleri çizilir; rooms.json ölçüleri yalnız
+  // alan etiketi (areaLabel) için kalır. Ölçü çizimdeki gibi ölçü çizgisi üstünde, yazısı çizimin yazısı.
+  const drawn=DXF_DIMENSIONS.dimensions.map(dim=>({...dim,dimension_label_allowed:true,basis:'dwg_owner',room_id:null}));
+  for(const dim of drawn) {
     const measured=!dim.dimension_label_allowed;
     if(measured&&dim.basis!=='model_measured')continue;
     const a=new THREE.Vector3(...dim.a),b=new THREE.Vector3(...dim.b);
@@ -107,7 +112,7 @@ export function createAnnotations(data,host,onRoom) {
     line.renderOrder=105;line.userData.aoExcluded=true;
     const el=document.createElement('span');
     el.className=measured?'dimension-label measured':'dimension-label';el.textContent=spanLabel(dim.metres);
-    el.title=dim.basis==='dwg_verified'?'Çizimde belirtilen ölçü':dim.boundary_kind==='floor_edge'?'Modelde döşeme sınırları arasındaki ölçü':'Model üzerinden ölçülen açıklık';
+    el.title=dim.basis==='dwg_verified'||dim.basis==='dwg_owner'?'Çizimde belirtilen ölçü':dim.boundary_kind==='floor_edge'?'Modelde döşeme sınırları arasındaki ölçü':'Model üzerinden ölçülen açıklık';
     overlay.append(el);dimensions.push({el,line,a,b,position:a.clone().add(b).multiplyScalar(.5),floor:dim.floor_index,roomId:dim.room_id,measured});
   }
   // The largest uniform scale at which a w×h upright plate centred at (cx,cy)
@@ -165,7 +170,10 @@ export function createAnnotations(data,host,onRoom) {
     for(const entry of dimensions) {
       const visible=entry.floor===floor&&showDimensions&&!transitioning&&(!walking||entry.roomId===walkRoom);
       entry.line.visible=visible;entry.el.hidden=!visible;
-      if(visible){const p=project(entry,camera,w,h,10);if(p)measured.push({entry,p});}
+      if(visible){const p=project(entry,camera,w,h,10);if(p){
+        const a=entry.a.clone().project(camera),b=entry.b.clone().project(camera);
+        const seg=a.z>-1&&a.z<1&&b.z>-1&&b.z<1?[(a.x+1)*w/2,(1-a.y)*h/2,(b.x+1)*w/2,(1-b.y)*h/2]:null;
+        measured.push({entry,p,seg});}}
     }
     for(const item of named){item.width=item.entry.el.offsetWidth;item.height=item.entry.el.offsetHeight;}
     for(const item of measured){item.width=item.entry.el.offsetWidth;item.height=item.entry.el.offsetHeight;}
@@ -173,18 +181,19 @@ export function createAnnotations(data,host,onRoom) {
       // The tag is a plate now, not glowing text, so it has to earn its area:
       // it shrinks until it sits inside its own room and disappears when that
       // room is too small on screen to carry a legible one.
-      let fit=1;
+      let fit=1,quad=null;
       if(entry.span.x>0&&entry.span.z>0){
-        const quad=entry.corners.map(v=>{corner.copy(v).project(camera);
+        quad=entry.corners.map(v=>{corner.copy(v).project(camera);
           return [(corner.x+1)*w/2,(1-corner.y)*h/2];});
         fit=Math.max(0,Math.min(1,fitInside(quad,p.x,p.y,width,height)));
       }
       if(fit<0.56){entry.el.hidden=true;continue;}
       entry.el.style.setProperty('--label-fit',fit.toFixed(3));
-      candidates.push({...p,entry,width:width*fit,height:height*fit});
+      const cw=width*fit,ch=height*fit;
+      candidates.push({...p,entry,width:cw,height:ch,fits:quad?(x,y)=>fitInside(quad,x,y,cw,ch)>=1:null});
     }
     const nameCount=candidates.length;
-    for(const {entry,p,width,height} of measured)candidates.push({...p,entry,width,height});
+    for(const {entry,p,width,height,seg} of measured)candidates.push({...p,entry,width,height,seg});
     const nextKey=dimensions.map(e=>e.line.visible?'1':'0').join('');
     if(nextKey!==dimensionKey){
       dimensionKey=nextKey;

@@ -92,19 +92,31 @@ export function layoutDimensionsAtMidpoint(items,{width,height,obstacles=[],gap=
   const valid=item=>[item.x,item.y,item.width,item.height].every(Number.isFinite);
   const placed=[],dims=[],names=[];
   const ui=obstacles.concat(extraObstacles);
+  // Ölçü yazısı çizgisinin ortasında; başka bir ölçüye/arayüze değiyorsa KENDİ ÇİZGİSİ ÜSTÜNDE kayar
+  // (02.10 ürün sahibinin ölçü çiziminin hepsi görünsün diye, gizlemek son çare). Yer sırası sabit:
+  // kamera dönerken etiket atlamaz.
+  const along=[.5,.38,.62,.28,.72,.18,.82];
   for(const item of items.slice(fixedFrom)){
     if(!valid(item))continue;
-    const rect=rectAt(item,item.x,item.y);
-    if(!inside(rect)||ui.some(o=>rectanglesOverlap(rect,o,gap))||dims.some(o=>rectanglesOverlap(rect,o,gap)))continue;
-    dims.push(rect);placed.push({...item,rect,anchorX:item.x,anchorY:item.y});
+    const spots=item.seg?along.map(t=>[item.seg[0]+(item.seg[2]-item.seg[0])*t,item.seg[1]+(item.seg[3]-item.seg[1])*t]):[[item.x,item.y]];
+    for(const [x,y] of spots){
+      const rect=rectAt(item,x,y);
+      if(!inside(rect)||ui.some(o=>rectanglesOverlap(rect,o,gap))||dims.some(o=>rectanglesOverlap(rect,o,gap)))continue;
+      dims.push(rect);placed.push({...item,x,y,rect,anchorX:item.x,anchorY:item.y});break;
+    }
   }
+  // Ad ölçüyle ve fotoğraf işaretiyle hiç çakışmaz: yerinde sığmıyorsa KENDİ ODASININ İÇİNDE (fits) yukarı/aşağı/yana kayar;
+  // odası dışına taşacaksa gizlenir (kayan ad komşu odanın üstüne düşmesin).
+  const shifts=[[0,0],[0,-1],[0,1],[0,-2],[0,2],[-1,0],[1,0],[-1,-1],[1,-1],[-1,1],[1,1],[0,-3],[0,3]];
   for(const item of items.slice(0,fixedFrom)){
     if(!valid(item))continue;
-    // Ad kaymaz: kayan ad odasının dışına, komşu odanın üstüne düşüyordu. Sığmazsa gizlenir.
-    for(const dy of [0]){
-      const rect=rectAt(item,item.x,item.y+dy);
-      if(!inside(rect)||obstacles.some(o=>rectanglesOverlap(rect,o,gap))||dims.some(o=>rectanglesOverlap(rect,o,gap))||names.some(o=>rectanglesOverlap(rect,o,gap)))continue;
-      names.push(rect);placed.push({...item,y:item.y+dy,rect,anchorX:item.x,anchorY:item.y});break;
+    for(const [sx,sy] of shifts){
+      const x=item.x+sx*item.width*.55,y=item.y+sy*item.height*.75;
+      if((sx||sy)&&item.fits&&!item.fits(x,y))continue;
+      if((sx||sy)&&!item.fits)continue;
+      const rect=rectAt(item,x,y);
+      if(!inside(rect)||ui.some(o=>rectanglesOverlap(rect,o,gap))||dims.some(o=>rectanglesOverlap(rect,o,gap))||names.some(o=>rectanglesOverlap(rect,o,gap)))continue;
+      names.push(rect);placed.push({...item,x,y,rect,anchorX:item.x,anchorY:item.y});break;
     }
   }
   return placed;
