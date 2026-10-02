@@ -802,7 +802,9 @@ function setup() {
   // antialiasing: the chain that used to do it is not in that path. On desktop
   // the composer's SMAA owns it and canvas MSAA would be paying twice.
   try {
-    renderer = new THREE.WebGLRenderer({antialias:quality.value.antialiasing==='canvas-msaa', alpha:false, powerPreference:'high-performance'});
+    // Gözlük tarayıcısında bağlam MSAA'lı açılır: VR katmanı kenar yumuşatmayı bağlamdan alır, SMAA/FXAA (sonradan
+    // işleme) VR'da çalışmaz - gözlükte kenarlar tırtıklı ve titrek kalıyordu.
+    renderer = new THREE.WebGLRenderer({antialias:quality.value.antialiasing==='canvas-msaa'||XR_HEADSET, alpha:false, powerPreference:'high-performance'});
     // VR desteği varsa düğmeler yükleme beklenmeden görünür (model hazır olana kadar pasif).
     offerImmersive();
   } catch (error) {

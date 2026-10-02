@@ -86,3 +86,17 @@ test('XR walking keeps real time at a low frame rate (10 fps)', () => {
   const after = walk.camera.getWorldPosition(new THREE.Vector3());
   assert.ok(Math.hypot(after.x - before.x, after.z - before.z) > 1.0, 'about 1.5 m in 0.8 s');
 });
+
+test('XR eye height is calibrated to 1.70 m above the floor (seated visitor), walking still works', () => {
+  const walk = walkAtFirstStation();
+  const floor = walk.rig.position.y;
+  walk.camera.position.y = 1.2;                       // oturan ziyaretçi: local-floor kafa yüksekliği 1,2 m
+  for (let tick = 0; tick < 4; tick++) walk.update(tick * 50, session({}));
+  const head = walk.camera.getWorldPosition(new THREE.Vector3());
+  assert.ok(Math.abs(head.y - floor - 1.70) < 1e-6, `eye ${(head.y - floor).toFixed(3)} m`);
+  const before = head.clone();
+  for (let tick = 4; tick <= 20; tick++) walk.update(tick * 50, session({left: [0, 0, 0, -1]}));
+  const after = walk.camera.getWorldPosition(new THREE.Vector3());
+  assert.ok(Math.hypot(after.x - before.x, after.z - before.z) > 0.2, 'still walks after the lift');
+  assert.ok(Math.abs(after.y - floor - 1.70) < 0.35, 'eye stays about 1.70 m');
+});

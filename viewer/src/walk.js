@@ -24,6 +24,9 @@ export const WALK_LENS_FOV = 2 * Math.atan(12 / WALK_LENS_MM) * 180 / Math.PI;
 // Görüntünün göz yüksekliği çarpışma yüzeyinden bu kadar aşağıda: yalnız
 // rig kaydırılır, zemin/basamak hesabı (camera.position) değişmez.
 const EYE_DROP_M = .12, WALK_SPEED = 1.25 * 1.5, SPRINT = 2.5;
+// 02.10 ürün sahibi ("vr kamerası 1.20 mi 1.10 mu? 1.70 falan olması lazım"): gözlükte göz, oturan ziyaretçide de
+// zeminden 1,70 m. VR'a girişte kafanın yerel yüksekliği bir kez okunur, rig aradaki fark kadar kaldırılır (xrLift).
+const XR_EYE_HEIGHT_M = 1.70;
 
 export class InteriorWalk {
   constructor(data, canvas, invalidate) {
@@ -36,7 +39,7 @@ export class InteriorWalk {
     // 28° keyhole out of the same number.
     this.camera = new THREE.PerspectiveCamera(60,1,.045,450);
     this.camera.rotation.order = 'YXZ'; this.rig = new THREE.Group(); this.rig.add(this.camera);
-    this.active = false; this.xrActive = false; this.keys = new Set(); this.furniture = true;
+    this.active = false; this.xrActive = false; this.xrLift = 0; this.xrCalib = null; this.keys = new Set(); this.furniture = true;
     this.yaw = .85; this.pitch = -.04; this.pointer = null; this.lastTime = null;
     canvas.addEventListener('pointerdown',e=>{
       if (!this.active || this.inputSuspended || this.xrActive || this.pointer) return;
@@ -94,7 +97,7 @@ export class InteriorWalk {
     if(this.xrActive) {
       const head=this.camera.getWorldPosition(new THREE.Vector3());
       this.rig.position.x+=x-head.x;this.rig.position.z+=z-head.z;
-      this.rig.position.y=y-this.surface.data.eye_height_m;
+      this.rig.position.y=y-this.surface.data.eye_height_m+this.xrLift;
     } else {this.camera.position.set(x,y,z);this.pose();}
     this.invalidate();
   }
@@ -158,6 +161,11 @@ export class InteriorWalk {
     let side=(this.keys.has('KeyD')||this.keys.has('ArrowRight')?1:0)-(this.keys.has('KeyA')||this.keys.has('ArrowLeft')?1:0);
     let yaw=this.yaw;
     if(this.xrActive && xrSession) {
+      // göz yüksekliği kalibrasyonu: ilk pozlar gelince (3. kare; poz hiç gelmezse 30. kare) bir kez
+      if(this.xrCalib!=null&&++this.xrCalib>=3&&(Math.abs(this.camera.position.y)>1e-4||this.xrCalib>=30)) {
+        const lift=XR_EYE_HEIGHT_M-this.camera.position.y;
+        this.rig.position.y+=lift-this.xrLift;this.xrLift=lift;this.xrCalib=null;
+      }
       // 02.10 ürün sahibi ("kolları sağ sol ilerleme vs kullanabilmem lazım"): sol çubuk baktığın yöne göre
       // ileri/geri/yana; sağ çubuk ileri/geri de yürütür, sağa/sola 30° döndürür; A/X kat yukarı, B/Y kat aşağı.
       side=0;forward=0;
@@ -174,7 +182,7 @@ export class InteriorWalk {
     forward/=Math.max(1,length);side/=Math.max(1,length);
     const speed=WALK_SPEED*(this.sprint&&!this.xrActive?SPRINT:1)*dt,dx=(-Math.sin(yaw)*forward+Math.cos(yaw)*side)*speed,dz=(-Math.cos(yaw)*forward-Math.sin(yaw)*side)*speed;
     if(this.xrActive) {
-      const p=this.camera.getWorldPosition(new THREE.Vector3());p.y=this.rig.position.y+this.surface.data.eye_height_m;
+      const p=this.camera.getWorldPosition(new THREE.Vector3());p.y=this.rig.position.y-this.xrLift+this.surface.data.eye_height_m;
       const before=p.clone();this.surface.move(p,dx,dz,this.furniture);
       this.rig.position.add(p.sub(before));
     } else this.surface.move(this.camera.position,dx,dz,this.furniture);
@@ -203,20 +211,22 @@ export class InteriorWalk {
   }
   startXR() {
     const position=this.camera.getWorldPosition(new THREE.Vector3());
-    this.rig.position.set(position.x,position.y-this.surface.data.eye_height_m,position.z);
+    // rig zeminde (yürüme yüzeyinin kotu); göz yüksekliği update()'te kalibre edilir
+    const ground=this.surface.sample(position.x,position.z,position.y-this.surface.data.eye_height_m,this.furniture,.4);
+    this.rig.position.set(position.x,ground?ground.height:position.y-this.surface.data.eye_height_m,position.z);
     this.rig.rotation.y=this.yaw;this.camera.position.set(0,0,0);this.camera.rotation.set(0,0,0);
-    this.xrActive=true;this.keys.clear();
+    this.xrLift=0;this.xrCalib=0;this.xrActive=true;this.keys.clear();
   }
   endXR() {
     const position=this.camera.getWorldPosition(new THREE.Vector3()),direction=this.camera.getWorldDirection(new THREE.Vector3());
-    const floor=this.rig.position.y;this.rig.position.set(0,-EYE_DROP_M,0);this.rig.rotation.set(0,0,0);
+    const floor=this.rig.position.y-this.xrLift;this.xrLift=0;this.xrCalib=null;this.rig.position.set(0,-EYE_DROP_M,0);this.rig.rotation.set(0,0,0);
     this.camera.position.copy(position);this.camera.position.y=floor+this.surface.data.eye_height_m;
     this.xrActive=false;this.yaw=Math.atan2(-direction.x,-direction.z);this.pitch=Math.asin(THREE.MathUtils.clamp(direction.y,-1,1));this.pose();
   }
   teleportXR(point) {
     const sample=this.surface.sample(point.x,point.z,point.y,this.furniture,.18);if(!sample)return false;
     const head=this.camera.getWorldPosition(new THREE.Vector3());
-    this.rig.position.x+=point.x-head.x;this.rig.position.z+=point.z-head.z;this.rig.position.y=sample.height;return true;
+    this.rig.position.x+=point.x-head.x;this.rig.position.z+=point.z-head.z;this.rig.position.y=sample.height+this.xrLift;return true;
   }
 }
 
@@ -225,7 +235,7 @@ export class InteriorWalk {
 // etkinleşir. Oturum isteği tıklamanın İÇİNDE, hiçbir beklemeden önce yapılır:
 // Quest tarayıcısı geçici kullanıcı etkileşimi ister, araya giren bir await
 // isteği reddettirir. Gözlükte içeride gez adamı bırakılınca da aynı yol açılır.
-const XR_BUTTONS='#enter-vr,#enter-vr-walk,#welcome-vr',XR_FRAMEBUFFER_SCALE=.8;
+const XR_BUTTONS='#enter-vr,#enter-vr-walk,#welcome-vr',XR_FRAMEBUFFER_SCALE=1,XR_FOVEATION=.4;
 const immersive={supported:null,start:null};
 export function offerImmersive() {
   if(immersive.supported)return immersive.supported;
@@ -277,8 +287,8 @@ export async function enableImmersiveWalk(renderer, scene, walk, meshGroups, onS
   const open=()=>{
     if(renderer.xr.isPresenting){renderer.xr.getSession().end();return true;}
     let pending;
-    // Quest 3'ün önerilen göz çözünürlüğü ~2064x2208; iki göz + MSAA mobil GPU'ya ağır. %80 ölçek (oturumdan ÖNCE
-    // ayarlanmalı) ve kenarları seyrek çizen foveation, görüntüyü bozmadan kare süresini düşürür.
+    // Tam (önerilen) göz çözünürlüğü + yumuşak foveation. %80 ölçek ve en sert foveation (1) gözlükte görüntüyü
+    // çok bulanık yaptı (02.10 ürün sahibi: "çözünürlük çok düşmüş"); asıl takılma kat/ışık karmaşasıydı, düzeldi.
     try{renderer.xr.setFramebufferScaleFactor(XR_FRAMEBUFFER_SCALE);}catch{/* oturum açıkken değiştirilemez */}
     // İstek önce, senkron: kullanıcı etkileşimi bu çağrıda tüketilir.
     try{pending=navigator.xr.requestSession('immersive-vr',{optionalFeatures:['local-floor','bounded-floor']});}
@@ -288,7 +298,7 @@ export async function enableImmersiveWalk(renderer, scene, walk, meshGroups, onS
     // visor shows is the room they are standing in rather than the model
     // seen from outside.
     onStart();
-    pending.then(session=>renderer.xr.setSession(session)).then(()=>{try{renderer.xr.setFoveation(1);}catch{/* desteklenmiyor */}})
+    pending.then(session=>renderer.xr.setSession(session)).then(()=>{try{renderer.xr.setFoveation(XR_FOVEATION);}catch{/* desteklenmiyor */}})
       .catch(error=>{label('retryVR');console.warn('XR session could not start',error);});
     return true;
   };
