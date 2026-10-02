@@ -453,10 +453,10 @@ const TUR10_BORROW = [
   {mats: /^ceiling\.001$/, min: [-6.5, 2.615, -9.0], max: [4.2, 2.625, 3.0], notFacing: [0, -1, 0], flip: true,
     source: {mat: /^ceiling\.001$/, atlas: 'zemin', min: [-6.5, 2.615, -9.0], max: [4.2, 2.625, 3.0], facing: [0, -1, 0], minArea: 0.2}, material: 'target'},
   // 02.10 bodrum sahanlığının doğu uç duvarı: öne alınan arka kabuğun (TUR10_STAIR_MOVES, x 4,0905) pişmiş ışığı
-  // duvarın arkasından (gri dikdörtgen); hemen üstündeki görünen duvarın (x 4,088) alt kenarındaki tek tonu (köşe başına
-  // okuma çapraz gölge veriyordu).
-  {mats: /^Simple White Wall$/, min: [4.085, -0.45, -3.135], max: [4.095, 3.11, -0.92], notFacing: [1, 0, 0], constant: [4.088, 3.45, -2.0],
-    source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [4.080, 3.10, -3.135], max: [4.092, 5.90, -0.92], facing: [-1, 0, 0], minArea: 0.05}, material: 'target'},
+  // duvarın arkasından (gri dikdörtgen); hemen üstündeki görünen duvarın (x 4,088) ışığı alt kenarından aşağı sürdürülür
+  // (ışık z boyunca 17..33 değişiyor: tek ton dikiş, köşe başına okuma çapraz gölge veriyordu; küçük üçgenlere bölünür).
+  {mats: /^Simple White Wall$/, min: [4.085, -0.45, -3.135], max: [4.095, 3.11, -0.92], notFacing: [1, 0, 0], subdivide: 24,
+    source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [4.080, 3.30, -3.135], max: [4.092, 5.90, -0.92], facing: [-1, 0, 0], minArea: 0.05}, material: 'target'},
   // 02.10 bodrum salonu kolonu (x -1,212..-0,951, z -3,758..-3,16; ürün sahibi: "kolon başı"): iç içe iki kabuk,
   // pişirmede görünen yüzlerin üçgenleri arasında ışık sıçraması (yan yüzde üstte basamak gibi kırık, önde yatay
   // çizgi). Görünen üç yüz (ön z -3,757, yanlar x -1,212 / -0,952) kendi ortasındaki tek noktanın ışığıyla.
@@ -574,12 +574,29 @@ export function borrowTur10(model) {
       const own = rule.material === 'target', frame = own ? new THREE.Matrix4().copy(o.matrixWorld).invert() : inv;
       const nm = new THREE.Matrix3().getNormalMatrix(own ? o.matrixWorld : home.matrixWorld).invert();
       const P = [], N = [], U = [], U1 = [];
-      for (const {ids, w} of take) {
-        if (rule.flip) { [w[1], w[2]] = [w[2], w[1]]; [ids[1], ids[2]] = [ids[2], ids[1]]; }   // ters dönmüş yüz: sarım çevrilir
+      // subdivide: büyük hedef üçgen n x n küçük üçgene bölünür (her köşe kaynağı ayrı okur; tek ışık değeri
+      // üçgen boyunca doğrusal karışıp çapraz gölge vermesin). Doku UV'si köşelerden barisentrik.
+      if (rule.subdivide && g.attributes.uv) {
+        const n0 = rule.subdivide, tuv = g.attributes.uv, out = [];
+        for (const {ids, w} of take) {
+          const t = ids.map(i => new THREE.Vector2().fromBufferAttribute(tuv, i));
+          const at = (i, j) => { const a = 1 - (i + j) / n0, b = i / n0, c = j / n0;
+            return {p: new THREE.Vector3().addScaledVector(w[0], a).addScaledVector(w[1], b).addScaledVector(w[2], c),
+              t: new THREE.Vector2().addScaledVector(t[0], a).addScaledVector(t[1], b).addScaledVector(t[2], c)}; };
+          for (let i = 0; i < n0; i++) for (let j = 0; i + j < n0; j++) {
+            out.push([at(i, j), at(i + 1, j), at(i, j + 1)]);
+            if (i + j + 1 < n0) out.push([at(i + 1, j), at(i + 1, j + 1), at(i, j + 1)]);
+          }
+        }
+        take.length = 0;
+        for (const tri of out) take.push({ids: null, w: tri.map(x => x.p), tuv: tri.map(x => x.t)});
+      }
+      for (const {ids, w, tuv} of take) {
+        if (rule.flip) { [w[1], w[2]] = [w[2], w[1]]; if (ids) [ids[1], ids[2]] = [ids[2], ids[1]]; if (tuv) [tuv[1], tuv[2]] = [tuv[2], tuv[1]]; }   // ters dönmüş yüz: sarım çevrilir
         const s = nearest(p.copy(w[0]).add(w[1]).add(w[2]).divideScalar(3)), nw = normal(w), n = nw.clone().applyMatrix3(nm).normalize();
         w.forEach((v, k) => {
           const l = v.clone().applyMatrix4(frame); P.push(l.x, l.y, l.z); N.push(n.x, n.y, n.z);
-          const uv = own || !s.uv ? (g.attributes.uv ? new THREE.Vector2().fromBufferAttribute(g.attributes.uv, ids[k]) : new THREE.Vector2()) : texUV(s, v, nw);
+          const uv = tuv ? tuv[k] : own || !s.uv ? (g.attributes.uv ? new THREE.Vector2().fromBufferAttribute(g.attributes.uv, ids[k]) : new THREE.Vector2()) : texUV(s, v, nw);
           const uv1 = fixed ?? (rule.inset ? inset(s, v) : lookup(s, v, 'uv1')); U.push(uv.x, uv.y); U1.push(uv1.x, uv1.y);
         });
       }
