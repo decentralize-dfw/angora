@@ -437,6 +437,11 @@ const TUR10_BORROW = [
     source: {mat: /^EK_M2_Beyaz_merdiven_alti$/, atlas: 'duvar', min: [0.6, 5.8, -3.2], max: [3.2, 7.7, -2.1], facing: [0.61, -0.79, 0], minArea: 0.5}, material: 'target'},
   {sliver: true, mats: /^(EK_M2_Beyaz_merdiven_alti|Simple White Wall)$/, min: [0.5, 3.0, -3.5], max: [4.2, 9.6, 0.6], inset: 0.04,
     source: {mat: /^(EK_M2_Beyaz_merdiven_alti|Simple White Wall)$/, atlas: 'duvar', min: [0.4, 2.9, -3.6], max: [4.3, 9.7, 0.7], minArea: 0.05}, material: 'target'},
+  // 02.10 ebeveyn yatak odası: tavan üçgeni (x -2,587 z -4,007 -> x -1,339 z -4,34 -> x -0,981 z -4,007) duvara
+  // (z -4,007) kadar gelmiyor, arada üçgen delik; içinden döşeme boşluğundaki yukarı bakan yüzler görünüyordu (önce
+  // kahverengi cam lambri katmanı, o atılınca ince koyu çizgi). Tavanın 0,5 mm altına, tavan ışığıyla kapak.
+  {cap: {y: 8.9905, min: [-2.62, -4.345], max: [-0.95, -4.0]},
+    source: {mat: /^ceiling\.001$/, atlas: 'zemin', min: [-2.8, 8.985, -8.1], max: [0.2, 8.997, -4.0], facing: [0, -1, 0], minArea: 0.5}},
   // 02.10 bodrum salonu kolonu (x -1,212..-0,951, z -3,758..-3,16; ürün sahibi: "kolon başı"): iç içe iki kabuk,
   // pişirmede görünen yüzlerin üçgenleri arasında ışık sıçraması (yan yüzde üstte basamak gibi kırık, önde yatay
   // çizgi). Görünen üç yüz (ön z -3,757, yanlar x -1,212 / -0,952) kendi ortasındaki tek noktanın ışığıyla.
