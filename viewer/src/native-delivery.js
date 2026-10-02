@@ -197,8 +197,12 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
   // partsDone resolves only when EVERY manifest part is resident; main
   // disposes the decoders then, not before.
   let resolveParts;const partsDone=new Promise(resolve=>{resolveParts=resolve;});
+  // VR süresince gizli tutulan parçalar (main.js applyXRProfile): kat değişimi ya da geç gelen iç mekân görünürlüğü
+  // yeniden hesaplarken bunları açmasın (02.10: VR'da A/B sonrası 1,1 M üçgenlik komşular geri geliyordu).
+  let suppressed=new Set();
   const applyVisibility=view=>{
     for(const [name,model] of loaded){
+      if(suppressed.has(name)){model.visible=false;continue;}
       model.visible=name!=='interior'||/^f[0-3]$/.test(view);
       // Walking happens indoors: the neighbourhood's planting is 514k
       // triangles of trees seen, at most, through a window. First step of
@@ -208,6 +212,11 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
   };
   if(!manifest.batched){resolveContext();resolveParts();} // classic path defers nothing
   return {loaded,batched:Boolean(manifest.batched),contextReady:contextDone,partsDone,
+    // names: gizli tutulacak parçalar; boş liste kaldırır (görünürlüğü çağıran geri verir).
+    setSuppressed(names){
+      suppressed=new Set(names);
+      for(const name of suppressed){const model=loaded.get(name);if(model)model.visible=false;}
+    },
     setWalkMode(active,view){
       if(walking===active)return;
       walking=active;

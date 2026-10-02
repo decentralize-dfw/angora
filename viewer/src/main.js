@@ -896,13 +896,18 @@ function applyXRProfile(){
   lighting?.setPortalVisibility(false);
   for(const object of [...XR_HIDDEN_GROUPS.map(name=>groups.get(name)),streetLabels?.group,annotations?.group,caps?.group,soilCap?.group,nativeSoil])
     if(object?.visible){object.visible=false;xrSaved.hidden.push(object);}
-  if(walk){walk.camera.near=.1;walk.camera.far=150;walk.camera.updateProjectionMatrix();}
+  // kat değişimi/geç gelen iç mekân native görünürlüğü yeniden hesaplar: gizli parçalar orada da kapalı kalsın
+  nativeDelivery?.setSuppressed?.(XR_HIDDEN_GROUPS);
+  // uzak düzlem 300 m: arazinin köşeleri ~240 m (150 m araziyi kesiyordu); yakın/uzak oranı z kavgası için yeterli dar
+  if(walk){xrSaved.fov=walk.camera.fov;xrSaved.zoom=walk.camera.zoom;walk.camera.near=.1;walk.camera.far=300;walk.camera.updateProjectionMatrix();}
 }
 function restoreXRProfile(){
   if(!xrSaved)return;
   const saved=xrSaved;xrSaved=null;
+  nativeDelivery?.setSuppressed?.([]);
   for(const object of saved.hidden)object.visible=true;
-  if(walk&&saved.near!=null){walk.camera.near=saved.near;walk.camera.far=saved.far;walk.camera.updateProjectionMatrix();}
+  // three VR'da kameranın görüş açısını gözlüğünkiyle (~90°) değiştirir: yürüyüş lensi geri gelsin
+  if(walk&&saved.near!=null){walk.camera.near=saved.near;walk.camera.far=saved.far;walk.camera.fov=saved.fov;walk.camera.zoom=saved.zoom;walk.camera.updateProjectionMatrix();}
   renderer.shadowMap.enabled=saved.shadows;if(saved.shadows)renderer.shadowMap.needsUpdate=true;
   lighting?.setPortalVisibility(['floor','interior'].includes(quality?.view));
   if(saved.lights!==interiorLights){interiorLights=saved.lights;$('#toggle-lights')?.setAttribute('aria-pressed',interiorLights);lighting?.setLights(interiorLights);applyNightHouse();}
