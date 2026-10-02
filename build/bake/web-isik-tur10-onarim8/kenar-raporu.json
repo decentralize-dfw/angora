@@ -1,0 +1,29 @@
+{
+ "duvar": {
+  "kara_ucgen": 8221,
+  "kil_ucgen": 345,
+  "gok": 914972,
+  "gunes_09": 257214,
+  "gunes_13": 257214,
+  "gunes_17": 257214,
+  "gece": 892563
+ },
+ "zemin": {
+  "kara_ucgen": 16161,
+  "kil_ucgen": 2273,
+  "gok": 705760,
+  "gunes_09": 211770,
+  "gunes_13": 211770,
+  "gunes_17": 211770,
+  "gece": 715640
+ },
+ "cephe": {
+  "kara_ucgen": 1205,
+  "kil_ucgen": 138,
+  "gok": 67280,
+  "gunes_09": 69291,
+  "gunes_13": 69291,
+  "gunes_17": 69291,
+  "gece": 46157
+ }
+}
