@@ -424,6 +424,14 @@ const TUR10_BORROW = [
     source: {mat: /^EK_M2_Beyaz_merdiven_alti$/, atlas: 'duvar', min: [0.6, 5.8, -3.2], max: [3.2, 7.7, -2.1], facing: [0.61, -0.79, 0], minArea: 0.5}, material: 'target'},
   {sliver: true, mats: /^(EK_M2_Beyaz_merdiven_alti|Simple White Wall)$/, min: [0.5, 3.0, -3.5], max: [4.2, 9.6, 0.6], inset: 0.04,
     source: {mat: /^(EK_M2_Beyaz_merdiven_alti|Simple White Wall)$/, atlas: 'duvar', min: [0.4, 2.9, -3.6], max: [4.3, 9.7, 0.7], minArea: 0.05}, material: 'target'},
+  // 02.10 çatı merdiven boşluğu: d1'in eğik düzlemi atılıp özgün beşik geri gelince (regableTur10Attic) iki yandaki
+  // diz duvarlarının (x 3,14) düzlemin üstünde kalmış uç parçaları göründü; pişirmede düzlemin arkasında kaldıkları
+  // için koyu (köşelerde gri sivri lekeler): aynı duvarın hemen altındaki görünen kısmının ışığıyla.
+  // Uç yüzün tamamı (iki yanda ayrı) aynı yüzün düzlemin altında kalan geniş üçgeninin tek noktasını okur (tek ton).
+  {mats: /^Simple White Wall$/, min: [3.12, 9.38, -3.6], max: [3.16, 10.25, -3.0], notFacing: [1, 0, 0], constant: [3.14, 9.62, -3.42],
+    source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [3.12, 9.38, -3.6], max: [3.16, 9.87, -0.45], facing: [-1, 0, 0], minArea: 0.015}, material: 'target'},
+  {mats: /^Simple White Wall$/, min: [3.12, 9.38, -1.0], max: [3.16, 10.25, -0.45], notFacing: [1, 0, 0], constant: [3.14, 9.62, -0.75],
+    source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [3.12, 9.38, -3.6], max: [3.16, 9.87, -0.45], facing: [-1, 0, 0], minArea: 0.015}, material: 'target'},
   {mats: /^WHT\.001$/, min: [4.40, 5.40, -2.30], max: [7.26, 5.75, 0.66], constant: [5.8, 5.89, -1.0],
     source: {mat: /^ceiling\.001$/, atlas: 'zemin', min: [4.0, 5.88, -6.0], max: [7.4, 5.90, 1.2], facing: [0, -1, 0]}, material: 'target'},
 ];
