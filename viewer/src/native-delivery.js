@@ -125,7 +125,8 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
       const door=addTur10GarageDoorDetail(model);
       const boards=addTur10Baseboards(model);
       const infill=addTur10FacadeInfill(model);
-      const healed=healTur10WoodUV(model);
+      // üst üste binen kepenk katmanları: her tur bir katmanı daha eşler, yakınsayana kadar (2 tur yetiyor)
+      let healed=0;for(let i=0;i<4;i++){const n=healTur10WoodUV(model);healed+=n;if(!n)break;}
       if(healed)console.info(`Tur 10 kepenk dokusu: ${healed} üçgen eşine uyduruldu (${name})`);
       if(infill)console.info(`Tur 10 cephe merdivene indi: ${infill} yüzey (${name})`);
       if(boards)console.info(`Tur 10 eksik süpürgelik: ${boards} parça (${name})`);

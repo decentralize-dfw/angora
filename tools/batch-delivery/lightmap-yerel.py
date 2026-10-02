@@ -62,6 +62,12 @@ KURALLAR = [
     # doldurulur. Kirişin kendi alt yüzü (yatay, ny -1) seçilmez.
     {'ad': 'cati-kiris-golgesi', 'tur': 'sil', 'atlas': 'zemin', 'ny': [-0.95, -0.5],
      'kutu': [[-3.05, 11.0, -3.6], [-2.33, 12.4, -0.45]], 'yaricap': 0.4},
+    # kirişin iki ucunun diz duvarlarındaki izi (güney z -3,547 +z'ye, kuzey z -0,507 -z'ye bakar; tavan birleşimi
+    # altında açık gri çapraz çizgi / koyu leke)
+    {'ad': 'cati-kiris-ucu-guney', 'tur': 'sil', 'atlas': 'duvar', 'normal': [0, 0, 1], 'duzlem': -3.547,
+     'kutu': [[-2.95, 10.4, -3.56], [-2.20, 12.3, -3.54]], 'yaricap': 0.5},
+    {'ad': 'cati-kiris-ucu-kuzey', 'tur': 'sil', 'atlas': 'duvar', 'normal': [0, 0, -1], 'duzlem': -0.507,
+     'kutu': [[-2.95, 10.4, -0.52], [-2.20, 12.3, -0.50]], 'yaricap': 0.5},
     # aynı kirişin sırttaki yatay tavan şeridine (y 12,025, z -2,33..-1,73) düşen gölgesi: ss8'de tavan ortasında koyu bant
     {'ad': 'cati-kiris-sirt', 'tur': 'sil', 'atlas': 'zemin', 'normal': [0, -1, 0], 'duzlem': 12.025,
      'kutu': [[-3.05, 12.01, -2.34], [-2.33, 12.04, -1.71]], 'yaricap': 0.6},

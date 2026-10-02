@@ -850,23 +850,26 @@ export function addTur10GarageDoorDetail(model) {
 }
 // 02.10 çatı oturma alanı (ürün sahibi: "süpürgelik tüm odayı dönmeli"): kuzey diz duvarında (z -0,507, TV duvarı)
 // x -2,413..-1,475 arasında süpürgelik yoktu (çevresi hesapla tarandı; öbür duvarlarda var). Evdeki ceviz
-// 02.10 ürün sahibi (batı yan bahçe merdiveni: "burayı aşağı kadar indir, beyaz boşluk gözükmesin"): giriş katının
-// cephe bloğu (x -5,833) y 2,70'te bitiyor, altında bodrum duvarı 60 cm içeride (x -5,232); merdivenden bakınca
-// bloğun altında boşluk. Cephe düzlemi merdivene kadar indirilir: doku, bloğun alt şeridinin düzlemsel eşlemesinin
-// devamı; ışık bloğun alt şeridinin ortasındaki tek noktadan okunur.
+// 02.10 ürün sahibi (batı yan bahçe merdiveni: "burayı aşağı kadar indir, beyaz boşluk gözükmesin"; ardından "o çıkma
+// kütle aynen uzayacak, yeşil alan kalacak"): giriş katının çıkma kütlesi (x -5,833 yan yüzü z 0,323..3,322; ön yüzü
+// z 0,323, x -5,833..-5,232) y 2,70'te bitiyor, altı boş; merdivenden bakınca kütlenin altında gök görünüyordu. Kütlenin
+// iki yüzü aynı hizada aşağı uzatılır; önündeki bodrum girintisi (çimli alan) olduğu gibi kalır. Doku, kütlenin alt
+// şeridinin düzlemsel eşlemesinin devamı; ışık o şeridin ortasındaki tek noktadan.
+//   axis: düzlemin ekseni ('x' ya da 'z'), at: düzlemin değeri, h: düzlem içindeki yatay aralık (öbür eksen),
+//   facing: normalin işareti, light: [h, y] ışığın okunduğu nokta
 const TUR10_INFILL = [
-  // ışık tek noktadan (bloğun alt şeridinin ortası): sütun sütun okumak üçgen sınırlarında dikey çizgi veriyordu
-  {x: -5.833, z: [-0.527, 3.322], y: [0.15, 2.72], facing: -1, light: [1.9, 2.9],
-    source: {mat: /^Stucco painted wall$/, atlas: 'cephe', min: [-5.84, 2.69, 0.30], max: [-5.825, 3.11, 3.33]}},
-  // bloğun bu düzlemdeki alt şeridi z -0,527..0,322 arasında yok (bodrum girintisinin üstü): merdivenden ince beyaz
-  // çizgi olarak gök görünüyordu
-  {x: -5.833, z: [-0.527, 0.322], y: [2.69, 3.098], facing: -1, light: [1.9, 2.9],
-    source: {mat: /^Stucco painted wall$/, atlas: 'cephe', min: [-5.84, 2.69, 0.30], max: [-5.825, 3.11, 3.33]}},
+  // yan yüzün ışığı kütle yüzünün penceresiz bir noktasından (alt şerit saçağın gölgesinde, uzatılan kısım koyu kalıyordu)
+  {axis: 'x', at: -5.833, h: [0.323, 3.322], y: [0.15, 2.72], facing: -1, light: [0.8, 3.4],
+    source: {mat: /^Stucco painted wall$/, atlas: 'cephe', min: [-5.84, 2.69, 0.30], max: [-5.825, 4.25, 3.33]}},
+  {axis: 'z', at: 0.323, h: [-5.833, -5.232], y: [0.15, 2.72], facing: -1, light: [-5.53, 2.9],
+    source: {mat: /^Stucco painted wall$/, atlas: 'cephe', min: [-5.84, 2.69, 0.31], max: [-5.22, 3.6, 0.335]}},
 ];
 export function addTur10FacadeInfill(model) {
   model.updateMatrixWorld(true);
   let added = 0;
   for (const rule of TUR10_INFILL) {
+    const X = rule.axis === 'x', at3 = (h, y) => X ? new THREE.Vector3(rule.at, y, h) : new THREE.Vector3(h, y, rule.at);
+    const hOf = v => X ? v.z : v.x, want = X ? new THREE.Vector3(rule.facing, 0, 0) : new THREE.Vector3(0, 0, rule.facing);
     const src = [];
     let home = null;
     model.traverse(o => {
@@ -878,39 +881,38 @@ export function addTur10FacadeInfill(model) {
         const ids = [at(t), at(t + 1), at(t + 2)], w = ids.map(i => new THREE.Vector3().fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld));
         if (!w.every(v => v.x >= min[0] && v.x <= max[0] && v.y >= min[1] && v.y <= max[1] && v.z >= min[2] && v.z <= max[2])) continue;
         const tri = new THREE.Triangle(...w);
-        if (tri.getArea() < 1e-4 || tri.getNormal(new THREE.Vector3()).x * rule.facing < 0.9) continue;
+        if (tri.getArea() < 1e-4 || tri.getNormal(new THREE.Vector3()).dot(want) < 0.9) continue;
         src.push({tri, uv: ids.map(i => new THREE.Vector2().fromBufferAttribute(uv, i)), uv1: ids.map(i => new THREE.Vector2().fromBufferAttribute(uv1, i))});
         home ??= o;
       }
     });
     if (!src.length) continue;
-    // doku: kaynağın düzlemsel eşlemesi (en büyük kaynak üçgenin afin dönüşümü, (z, y) -> uv)
+    // doku: kaynağın düzlemsel eşlemesi (en büyük kaynak üçgenin afin dönüşümü, (h, y) -> uv)
     const big = src.reduce((a, b) => b.tri.getArea() > a.tri.getArea() ? b : a);
-    const {a: A, b: B, c: C} = big.tri, det = (B.z - A.z) * (C.y - A.y) - (C.z - A.z) * (B.y - A.y);
-    const texUV = (z, y) => {
-      const s = ((z - A.z) * (C.y - A.y) - (C.z - A.z) * (y - A.y)) / det, t = ((B.z - A.z) * (y - A.y) - (z - A.z) * (B.y - A.y)) / det;
+    const [A, B, C] = [big.tri.a, big.tri.b, big.tri.c].map(v => [hOf(v), v.y]);
+    const det = (B[0] - A[0]) * (C[1] - A[1]) - (C[0] - A[0]) * (B[1] - A[1]);
+    const texUV = (h, y) => {
+      const s = ((h - A[0]) * (C[1] - A[1]) - (C[0] - A[0]) * (y - A[1])) / det, t = ((B[0] - A[0]) * (y - A[1]) - (h - A[0]) * (B[1] - A[1])) / det;
       return big.uv[0].clone().multiplyScalar(1 - s - t).addScaledVector(big.uv[1], s).addScaledVector(big.uv[2], t);
     };
-    const q = new THREE.Vector3(), bary = new THREE.Vector3();
-    const lightUV = () => {
-      const v = new THREE.Vector3(rule.x, rule.light[1], rule.light[0]);
-      let best = null, bd = Infinity;
-      for (const s of src) { s.tri.closestPointToPoint(v, q); const d = q.distanceToSquared(v); if (d < bd) { bd = d; best = s; } }
-      best.tri.closestPointToPoint(v, q); best.tri.getBarycoord(q, bary);
-      return best.uv1[0].clone().multiplyScalar(bary.x).addScaledVector(best.uv1[1], bary.y).addScaledVector(best.uv1[2], bary.z);
-    };
-    const inv = new THREE.Matrix4().copy(home.matrixWorld).invert(), nl = new THREE.Vector3(rule.facing, 0, 0).transformDirection(inv);
-    const nz = Math.max(1, Math.ceil((rule.z[1] - rule.z[0]) / 0.25)), ny = Math.max(1, Math.ceil((rule.y[1] - rule.y[0]) / 0.5));
+    const q = new THREE.Vector3(), bary = new THREE.Vector3(), lp = at3(rule.light[0], rule.light[1]);
+    let best = null, bd = Infinity;
+    for (const s of src) { s.tri.closestPointToPoint(lp, q); const d = q.distanceToSquared(lp); if (d < bd) { bd = d; best = s; } }
+    best.tri.closestPointToPoint(lp, q); best.tri.getBarycoord(q, bary);
+    const fixed = best.uv1[0].clone().multiplyScalar(bary.x).addScaledVector(best.uv1[1], bary.y).addScaledVector(best.uv1[2], bary.z);
+    const inv = new THREE.Matrix4().copy(home.matrixWorld).invert(), nl = want.clone().transformDirection(inv);
+    const nh = Math.max(1, Math.ceil((rule.h[1] - rule.h[0]) / 0.25)), ny = Math.max(1, Math.ceil((rule.y[1] - rule.y[0]) / 0.5));
     const P = [], N = [], U = [], U1 = [];
-    const fixed = lightUV();
-    const push = (z, y) => { const l = new THREE.Vector3(rule.x, y, z).applyMatrix4(inv), t = texUV(z, y), m = fixed;
-      P.push(l.x, l.y, l.z); N.push(nl.x, nl.y, nl.z); U.push(t.x, t.y); U1.push(m.x, m.y); };
-    for (let i = 0; i < nz; i++) for (let j = 0; j < ny; j++) {
-      const z0 = rule.z[0] + (rule.z[1] - rule.z[0]) * i / nz, z1 = rule.z[0] + (rule.z[1] - rule.z[0]) * (i + 1) / nz;
+    const push = (h, y) => { const l = at3(h, y).applyMatrix4(inv), t = texUV(h, y);
+      P.push(l.x, l.y, l.z); N.push(nl.x, nl.y, nl.z); U.push(t.x, t.y); U1.push(fixed.x, fixed.y); };
+    for (let i = 0; i < nh; i++) for (let j = 0; j < ny; j++) {
+      const h0 = rule.h[0] + (rule.h[1] - rule.h[0]) * i / nh, h1 = rule.h[0] + (rule.h[1] - rule.h[0]) * (i + 1) / nh;
       const y0 = rule.y[0] + (rule.y[1] - rule.y[0]) * j / ny, y1 = rule.y[0] + (rule.y[1] - rule.y[0]) * (j + 1) / ny;
-      // -x'e bakan yüz: (z0,y0) (z0,y1) (z1,y0) sarımı; +x için ters
-      const quad = rule.facing < 0 ? [[z0, y0], [z1, y0], [z0, y1], [z1, y0], [z1, y1], [z0, y1]] : [[z0, y0], [z0, y1], [z1, y0], [z1, y0], [z0, y1], [z1, y1]];
-      for (const [z, y] of quad) push(z, y);
+      let tri1 = [[h0, y0], [h1, y0], [h0, y1]], tri2 = [[h1, y0], [h1, y1], [h0, y1]];
+      // sarım istenen normale göre: üçgenin dünya normali want ile ters düşerse çevrilir
+      const p = tri1.map(([h, y]) => at3(h, y)), n = new THREE.Vector3().subVectors(p[1], p[0]).cross(new THREE.Vector3().subVectors(p[2], p[0]));
+      if (n.dot(want) < 0) { tri1 = [tri1[0], tri1[2], tri1[1]]; tri2 = [tri2[0], tri2[2], tri2[1]]; }
+      for (const [h, y] of [...tri1, ...tri2]) push(h, y);
     }
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.Float32BufferAttribute(P, 3)); geometry.setAttribute('normal', new THREE.Float32BufferAttribute(N, 3));
@@ -960,21 +962,41 @@ export function healTur10WoodUV(model) {
     else continue;
     if (!fix.has(lo)) fix.set(lo, hi);
   }
-  const bary = new THREE.Vector3(), q = new THREE.Vector3(), flat = new Map(), moved = new Map();
-  for (const [lo, hi] of fix) {
-    if (!flat.has(lo.o)) { const g = lo.o.geometry; flat.set(lo.o, g.index ? g.toNonIndexed() : g); }
-    const g = flat.get(lo.o), uv = g.attributes.uv, tri = new THREE.Triangle(...hi.w);
-    lo.w.forEach((v, k) => {
-      tri.getBarycoord(tri.getPlane(new THREE.Plane()).projectPoint(v, q), bary);
-      uv.setXY(lo.t + k, hi.u[0].x * bary.x + hi.u[1].x * bary.y + hi.u[2].x * bary.z, hi.u[0].y * bary.x + hi.u[1].y * bary.y + hi.u[2].y * bary.z);
-    });
+  // Farklı malzemeli yarılar her zaman kenar paylaşmıyor (giriş balkon kapısı kepengi üç ince katmanda üst üste
+  // binen üçgenler): aynı düzlemde (3 cm) düzlem içi kutusunun en az %30'u büyük parçanın bir üçgeniyle örtüşen
+  // küçük parça üçgeni de o üçgene uydurulur.
+  const size = x => x.o.geometry.index ? x.o.geometry.index.count : x.o.geometry.attributes.position.count;
+  const span = (tr, h) => { const ys = tr.w.map(v => v.y), hs = tr.w.map(v => v.dot(h)); return [Math.min(...ys), Math.max(...ys), Math.min(...hs), Math.max(...hs)]; };
+  for (const a of tris) {
+    if (fix.has(a)) continue;
+    const h = new THREE.Vector3(0, 1, 0).cross(a.n).normalize(), sa = span(a, h), area = (sa[1] - sa[0]) * (sa[3] - sa[2]);
+    if (area <= 0) continue;
+    let best = null, bestO = 0.3;
+    for (const b of tris) {
+      if (b.o.material === a.o.material || size(b) <= size(a) || Math.abs(a.n.dot(b.n)) < 0.995) continue;
+      if (Math.abs(b.n.dot(a.w[0]) - b.n.dot(b.w[0])) > 0.03) continue;
+      const sb = span(b, h), o = Math.max(0, Math.min(sa[1], sb[1]) - Math.max(sa[0], sb[0])) * Math.max(0, Math.min(sa[3], sb[3]) - Math.max(sa[2], sb[2])) / area;
+      if (o > bestO) { bestO = o; best = b; }
+    }
+    if (best) fix.set(a, best);
+  }
+  // Eşleşen bütün üçgenler (iki yarı da) evin en çok kullanılan WOODY-DARK malzemesine (pencere kepenkleri) ve onun
+  // kepenklerdeki doku ölçeğiyle düzlemsel eşlemeye (yatayda 22,2, düşeyde 2,34 tekrar/m) alınır: hangi yarının hangi
+  // dokuda geldiğinden bağımsız, her kepenk pencere kepenkleri gibi tek tip.
+  const use = new Map();
+  model.traverse(o => { if (o.isMesh && !Array.isArray(o.material) && o.material?.name === 'WOODY-DARK') use.set(o.material, (use.get(o.material) ?? 0) + (o.geometry.index ? o.geometry.index.count : o.geometry.attributes.position.count)); });
+  const main = [...use].sort((x, y) => y[1] - x[1])[0]?.[0];
+  const all = new Set([...fix.keys(), ...fix.values()]);
+  const flat = new Map(), moved = new Map();
+  for (const tr of all) {
+    if (!flat.has(tr.o)) { const g = tr.o.geometry; flat.set(tr.o, g.index ? g.toNonIndexed() : g); }
+    const uv = flat.get(tr.o).attributes.uv, h = new THREE.Vector3(0, 1, 0).cross(tr.n).normalize();
+    tr.w.forEach((v, k) => uv.setXY(tr.t + k, v.dot(h) * 22.2, v.y * 2.34));
     uv.needsUpdate = true;
-    // eşi başka bir WOODY-DARK malzemesinde (aynı ad, başka ahşap dokusu: kara / açık kahve): üçgen eşinin malzemesiyle
-    // ayrı bir parçaya taşınır, eski yerinde sıfır alana indirilir
-    if (hi.o.material !== lo.o.material) {
-      const k = lo.o.uuid + '>' + hi.o.material.uuid;
-      if (!moved.has(k)) moved.set(k, {o: lo.o, material: hi.o.material, list: []});
-      moved.get(k).list.push(lo.t);
+    if (main && tr.o.material !== main) {
+      const key = tr.o.uuid;
+      if (!moved.has(key)) moved.set(key, {o: tr.o, material: main, list: []});
+      moved.get(key).list.push(tr.t);
     }
   }
   for (const {o, material, list} of moved.values()) {
@@ -994,11 +1016,12 @@ export function healTur10WoodUV(model) {
     o.parent.add(mesh);
   }
   for (const [o, g] of flat) if (g !== o.geometry) { o.geometry.dispose(); o.geometry = g; }
-  return fix.size;
+  return all.size;
 }
-// süpürgelikle aynı malzeme ve kesit (8,5 cm yükseklik, 1,2 cm kalınlık). [kat, [x0, z0], [x1, z1], içeri normal [nx, nz], döşeme y]
+// süpürgelikle aynı malzeme ve kesit (8,5 cm yükseklik, 3,4 cm kalınlık: çatıdaki komşu parça gibi). [kat, [x0, z0], [x1, z1], içeri normal [nx, nz], döşeme y]
 const TUR10_BASEBOARDS = [
-  ['cati', [-2.423, -0.507], [-1.465, -0.507], [0, -1], 9.4705],
+  // 02.10: komşu ceviz parça x -1,329'da başlıyor ve duvardan 3,4 cm önde; ek parça ona kadar, aynı kalınlıkta
+  ['cati', [-2.423, -0.507], [-1.329, -0.507], [0, -1], 9.4705],
 ];
 export function addTur10Baseboards(model) {
   const homes = new Map();
@@ -1007,7 +1030,7 @@ export function addTur10Baseboards(model) {
   let added = 0;
   for (const [kat, [ax, az], [bx, bz], [nx, nz], y] of TUR10_BASEBOARDS) {
     const home = homes.get(kat); if (!home) continue;
-    const L = Math.hypot(bx - ax, bz - az), H = 0.085, T = 0.012;
+    const L = Math.hypot(bx - ax, bz - az), H = 0.085, T = 0.034;
     const mesh = new THREE.Mesh(new THREE.BoxGeometry(L, H, T), home.material.clone());
     mesh.name = home.name + '_supurgelik_ek';
     const world = new THREE.Matrix4().compose(new THREE.Vector3((ax + bx) / 2 + nx * T / 2, y + H / 2, (az + bz) / 2 + nz * T / 2),
@@ -1080,6 +1103,10 @@ const TUR10_STAIR_MOVES = [
   // cephenin dış yüzünü (z 4,223) 23 cm aşıp dış döşemenin üstüne taşıyordu. Dış uç köşeleri cephe yüzüne alınır.
   // UV ve ışık UV'si aynı oranda kırpılır (from: içteki karşı köşenin z'si): dıştaki güneş lekesi kapı altına sıkışmasın.
   {mat: /^terra_floor_giris$/, min: [1.90, 3.05, 4.30], max: [2.89, 3.06, 4.46], to: {z: 4.223}, from: 3.793},
+  // 02.10 çatı oturma alanı: kaldırılan d1 kirişinin iki diz duvarındaki 1 cm'lik yuvası (16 x 10 cm); yan yüzleri
+  // tavan birleşiminin altında açık renkli çizgi gibi görünüyordu. Yuvanın dibi duvar yüzüne alınır, yanları sıfırlanır.
+  {mat: /^Simple White Wall$/, min: [-2.58, 11.07, -3.560], max: [-2.40, 11.19, -3.5515], to: {z: -3.548}},
+  {mat: /^Simple White Wall$/, min: [-2.58, 11.07, -0.5005], max: [-2.42, 11.19, -0.495], to: {z: -0.5065}},
   // 02.10 bodrum merdiveninin alt kolu (z -3,13..-2,13, bodrum 0 -> sahanlık 1,55): basamaklar, alt yüzü ve yan
   // yüzü üst kolun yan duvarına (z -1,927) kadar uzar; yüzler duvarın 12 mm içinde biter (titreşmesin).
   {mat: /^(WOOD-FL|EK_M2_Beyaz_merdiven_alti)$/, min: [0.55, -0.2, -2.136], max: [3.25, 1.56, -2.115], to: {z: -1.915}},

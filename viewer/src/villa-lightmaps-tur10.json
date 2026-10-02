@@ -9,45 +9,45 @@
           "olcek": 0.243372,
           "ortalama": 0.003181,
           "dosya": "duvar_gok.ktx2",
-          "bytes": 249890,
+          "bytes": 249895,
           "boyutTam": 2048,
-          "bytesTam": 2484323
+          "bytesTam": 2484253
         },
         "gunes_09": {
           "boyut": 512,
           "olcek": 0.021796,
           "ortalama": 0.000166,
           "dosya": "duvar_gunes_09.ktx2",
-          "bytes": 229264,
+          "bytes": 229293,
           "boyutTam": 1024,
-          "bytesTam": 726278
+          "bytesTam": 726215
         },
         "gunes_13": {
           "boyut": 512,
           "olcek": 0.004071,
           "ortalama": 0.000066,
           "dosya": "duvar_gunes_13.ktx2",
-          "bytes": 241718,
+          "bytes": 241712,
           "boyutTam": 1024,
-          "bytesTam": 785397
+          "bytesTam": 785337
         },
         "gunes_17": {
           "boyut": 512,
           "olcek": 0.005935,
           "ortalama": 0.000087,
           "dosya": "duvar_gunes_17.ktx2",
-          "bytes": 239771,
+          "bytes": 239769,
           "boyutTam": 1024,
-          "bytesTam": 772070
+          "bytesTam": 771964
         },
         "gece": {
           "boyut": 512,
           "olcek": 1.986915,
           "ortalama": 0.040514,
           "dosya": "duvar_gece.ktx2",
-          "bytes": 238218,
+          "bytes": 238243,
           "boyutTam": 2048,
-          "bytesTam": 2389188
+          "bytesTam": 2389088
         }
       }
     },
