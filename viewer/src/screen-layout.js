@@ -198,13 +198,17 @@ export function layoutPlanLabels(names,dims,{width,height,obstacles=[],gap=2,pad
     cands.forEach(([x,y],i)=>{
       const rect={left:x-hw,right:x+hw,top:y-hh,bottom:y+hh};
       const corners=[[rect.left,rect.top],[rect.right,rect.top],[rect.right,rect.bottom],[rect.left,rect.bottom]];
-      const inRoom=!n.room||corners.every(([cx,cy])=>insidePolygon(n.room,cx,cy));
-      if(n.room&&!insidePolygon(n.room,x,y))return;
+      // Ad odasının içinde durur; ama okunmaz hale gelmektense (telefonda WC gibi küçük odada ölçü yazısının altında
+      // kalıyordu) odanın hemen dışına taşar: ölçü/ad yazısıyla çakışma, odadan taşmaktan pahalı. Başka bir odanın
+      // içine taşmak da ayrıca cezalı.
+      const centerIn=!n.room||insidePolygon(n.room,x,y);
+      const inRoom=centerIn&&(!n.room||corners.every(([cx,cy])=>insidePolygon(n.room,cx,cy)));
       let bad=0;
-      if(!inRoom)bad+=4;
-      if(dimPolys.some(p=>polygonsOverlap(corners,p,gap)))bad+=3;
+      if(!centerIn)bad+=4;else if(!inRoom)bad+=2;
+      if(!centerIn&&names.some(o=>o!==n&&o.room&&insidePolygon(o.room,x,y)))bad+=3;
+      if(dimPolys.some(p=>polygonsOverlap(corners,p,gap)))bad+=10;
       if(segs.some(s=>segmentHitsRect(s,rect,1)))bad+=2;
-      if(nameRects.some(o=>rectanglesOverlap(rect,o,gap)))bad+=3;
+      if(nameRects.some(o=>rectanglesOverlap(rect,o,gap)))bad+=10;
       if(obstacles.some(o=>rectanglesOverlap(rect,o,gap)))bad+=1;
       if(rect.left<padding||rect.right>width-padding||rect.top<padding||rect.bottom>height-padding)bad+=1;
       const score=bad*1e6+i;

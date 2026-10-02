@@ -27,3 +27,14 @@ test('oda adı ölçü yazısına ve çizgisine değmez, odasının içinde kal�
   assert.ok(n.rect.left>=100&&n.rect.right<=400&&n.rect.top>=100&&n.rect.bottom<=400);
   assert.ok(n.rect.bottom<249||n.rect.top>251);
 });
+
+test('çok küçük odada ad ölçü yazısının altında kalmaz, gerekirse odanın hemen dışına taşar', () => {
+  // telefonda WC: oda 30x40 px, içinden geçen dikey ölçünün yazısı odayı kaplıyor
+  const room=[[300,300],[330,300],[330,340],[300,340]];
+  const dims=[{seg:[315,300,315,340],width:40,height:14}];
+  const {names,dims:out}=layoutPlanLabels([{x:315,y:320,width:44,height:22,room}],dims,{width:800,height:600});
+  const r=names[0].rect,p=out[0].poly;
+  const xs=p.map(q=>q[0]),ys=p.map(q=>q[1]);
+  const overlap=r.left<Math.max(...xs)&&r.right>Math.min(...xs)&&r.top<Math.max(...ys)&&r.bottom>Math.min(...ys);
+  assert.ok(!overlap);
+});
