@@ -169,22 +169,9 @@ function insidePolygon(poly,x,y) {
 }
 export function layoutPlanLabels(names,dims,{width,height,obstacles=[],gap=2,padding=6}) {
   const onScreen=(x,y)=>x>=0&&x<=width&&y>=0&&y<=height;
-  const placedDims=[],dimPolys=[];
-  const along=[.5,.38,.62,.28,.72,.2,.8];
-  for(const d of dims){
-    if(!d.seg||![d.width,d.height].every(Number.isFinite))continue;
-    const angle=dimensionAngle(d.seg);
-    let pick=null;
-    for(const t of along){
-      const x=d.seg[0]+(d.seg[2]-d.seg[0])*t,y=d.seg[1]+(d.seg[3]-d.seg[1])*t;
-      const poly=orientedCorners(x,y,d.width,d.height,angle);
-      if(!dimPolys.some(o=>polygonsOverlap(poly,o,gap))){pick={x,y,poly};break;}
-    }
-    if(!pick){const x=(d.seg[0]+d.seg[2])/2,y=(d.seg[1]+d.seg[3])/2;pick={x,y,poly:orientedCorners(x,y,d.width,d.height,angle)};}
-    if(!onScreen(pick.x,pick.y))continue;
-    dimPolys.push(pick.poly);placedDims.push({...d,x:pick.x,y:pick.y,angle,poly:pick.poly});
-  }
   const segs=dims.filter(d=>d.seg).map(d=>d.seg);
+  // 1) Oda adları önce: ad HER ZAMAN kendi odasının içinde (02.10 ürün sahibi: telefonda WC adı odadan taşıp binanın
+  // dışına düşmüştü). Ölçü çizgisinin üstünden kaçınır, başka adla çakışmaz.
   const placedNames=[],nameRects=[];
   for(const n of names){
     if(![n.x,n.y,n.width,n.height].every(Number.isFinite)||!onScreen(n.x,n.y))continue;
@@ -196,19 +183,13 @@ export function layoutPlanLabels(names,dims,{width,height,obstacles=[],gap=2,pad
     }
     let best=null,bestScore=Infinity;
     cands.forEach(([x,y],i)=>{
+      if(n.room&&!insidePolygon(n.room,x,y))return;
       const rect={left:x-hw,right:x+hw,top:y-hh,bottom:y+hh};
       const corners=[[rect.left,rect.top],[rect.right,rect.top],[rect.right,rect.bottom],[rect.left,rect.bottom]];
-      // Ad odasının içinde durur; ama okunmaz hale gelmektense (telefonda WC gibi küçük odada ölçü yazısının altında
-      // kalıyordu) odanın hemen dışına taşar: ölçü/ad yazısıyla çakışma, odadan taşmaktan pahalı. Başka bir odanın
-      // içine taşmak da ayrıca cezalı.
-      const centerIn=!n.room||insidePolygon(n.room,x,y);
-      const inRoom=centerIn&&(!n.room||corners.every(([cx,cy])=>insidePolygon(n.room,cx,cy)));
       let bad=0;
-      if(!centerIn)bad+=4;else if(!inRoom)bad+=2;
-      if(!centerIn&&names.some(o=>o!==n&&o.room&&insidePolygon(o.room,x,y)))bad+=3;
-      if(dimPolys.some(p=>polygonsOverlap(corners,p,gap)))bad+=10;
-      if(segs.some(s=>segmentHitsRect(s,rect,1)))bad+=2;
+      if(n.room&&!corners.every(([cx,cy])=>insidePolygon(n.room,cx,cy)))bad+=4;
       if(nameRects.some(o=>rectanglesOverlap(rect,o,gap)))bad+=10;
+      if(segs.some(s=>segmentHitsRect(s,rect,1)))bad+=2;
       if(obstacles.some(o=>rectanglesOverlap(rect,o,gap)))bad+=1;
       if(rect.left<padding||rect.right>width-padding||rect.top<padding||rect.bottom>height-padding)bad+=1;
       const score=bad*1e6+i;
@@ -216,6 +197,28 @@ export function layoutPlanLabels(names,dims,{width,height,obstacles=[],gap=2,pad
     });
     if(!best)best={x:n.x,y:n.y,rect:{left:n.x-hw,right:n.x+hw,top:n.y-hh,bottom:n.y+hh}};
     nameRects.push(best.rect);placedNames.push({...n,x:best.x,y:best.y,rect:best.rect});
+  }
+  const nameCorners=nameRects.map(r=>[[r.left,r.top],[r.right,r.top],[r.right,r.bottom],[r.left,r.bottom]]);
+  // 2) Ölçüler: yazı kendi çizgisinin üstünde, adlara ve öbür ölçülere binmeden kayar; çizgi üstünde yer yoksa (küçük
+  // oda) teknik çizimdeki gibi çizginin uzantısında, ucun hemen dışında yazılır.
+  const placedDims=[],dimPolys=[];
+  const along=[.5,.38,.62,.28,.72,.2,.8];
+  for(const d of dims){
+    if(!d.seg||![d.width,d.height].every(Number.isFinite))continue;
+    const angle=dimensionAngle(d.seg);
+    const L=Math.hypot(d.seg[2]-d.seg[0],d.seg[3]-d.seg[1])||1,out=(d.width/2+4)/L;
+    const ts=along.concat([-out,1+out,-out*2-.05,1+out*2+.05]);
+    const at=t=>{const x=d.seg[0]+(d.seg[2]-d.seg[0])*t,y=d.seg[1]+(d.seg[3]-d.seg[1])*t;return {x,y,poly:orientedCorners(x,y,d.width,d.height,angle)};};
+    let pick=null;
+    for(const t of ts){
+      const c=at(t);
+      if(!onScreen(c.x,c.y))continue;
+      if(!dimPolys.some(o=>polygonsOverlap(c.poly,o,gap))&&!nameCorners.some(o=>polygonsOverlap(c.poly,o,gap))){pick=c;break;}
+    }
+    if(!pick)for(const t of ts){const c=at(t);if(onScreen(c.x,c.y)&&!nameCorners.some(o=>polygonsOverlap(c.poly,o,gap))){pick=c;break;}}
+    if(!pick)pick=at(.5);
+    if(!onScreen(pick.x,pick.y))continue;
+    dimPolys.push(pick.poly);placedDims.push({...d,x:pick.x,y:pick.y,angle,poly:pick.poly});
   }
   return {names:placedNames,dims:placedDims};
 }

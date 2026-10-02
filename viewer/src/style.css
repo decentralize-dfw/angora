@@ -252,7 +252,7 @@ h1 strong{font-weight:700}
    turned to; a name that cannot keep its plate inside the room gives it up
    (data-plate=off) or leaves the drawing altogether. */
 /* 02.10 ürün sahibi: "background blur efektini düşür" */
-.room-label i{padding:2px 6px 3px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:none;backdrop-filter:none;border:0;border-radius:11px;box-shadow:0 1px 3px #1b322514;max-width:100%;min-width:0;font-style:normal;text-align:center;text-shadow:none}
+.room-label i{padding:2px 6px 3px;background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(1.5px);backdrop-filter:blur(1.5px);border:0;border-radius:11px;box-shadow:0 1px 3px #1b322514;max-width:100%;min-width:0;font-style:normal;text-align:center;text-shadow:none}
 .room-label[data-plate=off] i{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none;text-shadow:0 1px 2px #fff,0 0 6px #ffffffd9,0 0 12px #ffffff8c}
 .room-label strong{display:block;font-weight:700;padding-right:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#16241e}
 .room-label em{display:block;font-style:normal}
