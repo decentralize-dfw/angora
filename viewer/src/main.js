@@ -321,7 +321,10 @@ function renderFrame(time) {
     const activeCamera=walk?.active?walk.camera:camera;
     if(!walk?.active)fitDepthRange(camera,controls.target,contextBox);
     if(walk?.active){
-      const sample=walk.surface.sample(walk.camera.position.x,walk.camera.position.z,walk.camera.position.y-walk.surface.data.eye_height_m,walk.furniture,.3);
+      // VR'da kamera konumu rig'e göre YEREL (kafa izleme); kat/oda/ışık seçimi kafanın dünya konumundan. Yerel
+      // konumla her karede yanlış kat seçilip ışık takımı değişiyor, shader'lar yeniden derleniyordu (02.10 Quest).
+      const head=walk.xrActive?walk.camera.getWorldPosition(xrHead):walk.camera.position;
+      const sample=walk.surface.sample(head.x,head.z,head.y-walk.surface.data.eye_height_m,walk.furniture,.3);
       if(sample&&walk.floor!==sample.floor){
         walk.floor=sample.floor;selected='f'+sample.floor;lift?.setWalkFloor(sample.floor);refreshLiftControl();
         $('#section-label').textContent=titles[selected]+' · '+t('walkSub');
@@ -333,7 +336,7 @@ function renderFrame(time) {
       // flicker it. The room menu stays a go-to control, but it follows the
       // feet too, so "where am I" and "where can I go" read from one place.
       if(locator){
-        const here=locator.locate(walk.camera.position.x,walk.camera.position.z,walk.floor);
+        const here=locator.locate(head.x,head.z,walk.floor);
         const key=here?(here.outdoor?'out'+(walk.floor>=2?'t':'g'):here.stairs?'stairs':here.station?.room_id??''):locationKey;
         if(key!==locationPendingKey){locationPendingKey=key;locationPendingSince=time;}
         else if(key!==locationKey&&time-locationPendingSince>380){
@@ -343,14 +346,17 @@ function renderFrame(time) {
           else if(here.station)applyWalkLocation(roomName(here.station.name),here.station);
         }
       }
-      lighting.interior(walk.floor,walk.camera.position.toArray(),time);
+      lighting.interior(walk.floor,head.toArray(),time);
     }
     const lightChanging=lighting.update(time);
     const massingChanging=massing?.update(time);
     const liftChanging=lift?.update(time);
-    photoPins?.update(selected,photosVisible,Boolean(transition||flight?.active),walk?.active,activeCamera);
-    annotations?.update(selected,roomNamesVisible,measurementsVisible,Boolean(transition||flight?.active),walk?.active,activeCamera,walk?.room,photoPins?.obstacles()??[]);
-    hotspots?.update(activeCamera,walk?.active&&!walk.xrActive&&!walk.route);
+    // VR'da ekran üstü (DOM) etiket/iğne işi yok: gözlükte görünmezler, her karede boşuna yerleşim hesabıydı.
+    if(!walk?.xrActive){
+      photoPins?.update(selected,photosVisible,Boolean(transition||flight?.active),walk?.active,activeCamera);
+      annotations?.update(selected,roomNamesVisible,measurementsVisible,Boolean(transition||flight?.active),walk?.active,activeCamera,walk?.room,photoPins?.obstacles()??[]);
+      hotspots?.update(activeCamera,walk?.active&&!walk.xrActive&&!walk.route);
+    }
     // The tour's shade eases in and out rather than cutting, and once it is
     // down it is re-laid every frame: the hole has to follow the room while
     // the camera flies to it.
@@ -867,8 +873,39 @@ function setup() {
     const portrait=camera.aspect<1;resize();
     if(ready&&!walk?.active&&(selected.startsWith('f')||portrait!==(camera.aspect<1)))frame(true);
   });
-  renderer.xr.addEventListener('sessionstart', () => renderer.setAnimationLoop(renderFrame));
-  renderer.xr.addEventListener('sessionend', () => {renderer.setAnimationLoop(null);resize();invalidate();});
+  renderer.xr.addEventListener('sessionstart', () => {applyXRProfile();renderer.setAnimationLoop(renderFrame);});
+  renderer.xr.addEventListener('sessionend', () => {renderer.setAnimationLoop(null);restoreXRProfile();resize();invalidate();});
+}
+// 02.10 Quest 3 (ürün sahibi: "deli gibi lag", "yüzeyler birbirine giriyor", "tek sabit gün ışığı kullanalım
+// vr içinde"): gözlükteyken sahne iki göze ayrı çizilir; masaüstü ağırlığı orada kaldırılmaz. VR süresince tek sabit
+// gün ışığı (13:00, pişmiş ışık haritaları), iç mekân lambaları/gölgeler/pencere ışıkları kapalı, içeriden
+// görünmeyen ağır gruplar gizli, derinlik aralığı dar (z kavgası). Oturum bitince hepsi önceki hâline döner.
+const xrHead=new THREE.Vector3();
+const XR_HOUR='13',XR_HIDDEN_GROUPS=['context-buildings','context-plants','villa-context-white'];
+let xrSaved=null;
+function applyXRProfile(){
+  if(xrSaved)return;
+  const hourInput=$('#daylight-hour');
+  xrSaved={hour:hourInput?.value??null,lights:interiorLights,shadows:renderer.shadowMap.enabled,hidden:[],
+    near:walk?.camera.near,far:walk?.camera.far};
+  if(hourInput&&hourInput.value!==XR_HOUR){hourInput.value=XR_HOUR;hourInput.oninput?.();}
+  if(interiorLights){interiorLights=false;$('#toggle-lights')?.setAttribute('aria-pressed',false);lighting?.setLights(false);applyNightHouse();}
+  renderer.shadowMap.enabled=false;
+  lighting?.setPortalVisibility(false);
+  for(const object of [...XR_HIDDEN_GROUPS.map(name=>groups.get(name)),streetLabels?.group,annotations?.group,caps?.group,soilCap?.group,nativeSoil])
+    if(object?.visible){object.visible=false;xrSaved.hidden.push(object);}
+  if(walk){walk.camera.near=.1;walk.camera.far=150;walk.camera.updateProjectionMatrix();}
+}
+function restoreXRProfile(){
+  if(!xrSaved)return;
+  const saved=xrSaved;xrSaved=null;
+  for(const object of saved.hidden)object.visible=true;
+  if(walk&&saved.near!=null){walk.camera.near=saved.near;walk.camera.far=saved.far;walk.camera.updateProjectionMatrix();}
+  renderer.shadowMap.enabled=saved.shadows;if(saved.shadows)renderer.shadowMap.needsUpdate=true;
+  lighting?.setPortalVisibility(['floor','interior'].includes(quality?.view));
+  if(saved.lights!==interiorLights){interiorLights=saved.lights;$('#toggle-lights')?.setAttribute('aria-pressed',interiorLights);lighting?.setLights(interiorLights);applyNightHouse();}
+  const hourInput=$('#daylight-hour');
+  if(hourInput&&saved.hour!=null&&hourInput.value!==saved.hour){hourInput.value=saved.hour;hourInput.oninput?.();}
 }
 // Kat başına tek sefer shader derlemesi - aşağıda selectView kullanıyor.
 const compiledFloors=new Set();

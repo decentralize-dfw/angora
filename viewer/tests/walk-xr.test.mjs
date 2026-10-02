@@ -77,3 +77,12 @@ test('XR right stick forward also walks', () => {
   const after = walk.camera.getWorldPosition(new THREE.Vector3());
   assert.ok(Math.hypot(after.x - before.x, after.z - before.z) > 0.2);
 });
+
+test('XR walking keeps real time at a low frame rate (10 fps)', () => {
+  const walk = walkAtFirstStation();
+  const before = walk.camera.getWorldPosition(new THREE.Vector3());
+  // 100 ms frames: the old 50 ms cap halved the distance ("hareket edemiyorum")
+  for (let tick = 0; tick <= 8; tick++) walk.update(tick * 100, session({left: [0, 0, 0, -1]}));
+  const after = walk.camera.getWorldPosition(new THREE.Vector3());
+  assert.ok(Math.hypot(after.x - before.x, after.z - before.z) > 1.0, 'about 1.5 m in 0.8 s');
+});

@@ -134,7 +134,9 @@ export class InteriorWalk {
     this.route={points:path,index:0,room,onArrive};this.keys.clear();this.invalidate();return true;
   }
   update(time, xrSession) {
-    const dt=this.lastTime===null?0:Math.min(.05,(time-this.lastTime)/1000);this.lastTime=time;
+    // VR'da kare hızı düşse de yürüyüş gerçek zamanlı: adım üst sınırı .05 s idi, 10 fps'de ziyaretçi yarı hızda
+    // sürünüyordu ("hareket edemiyorum"). surface.move adımı zaten hücre boyunda böler, duvardan geçirmez.
+    const dt=this.lastTime===null?0:Math.min(this.xrActive?.12:.05,(time-this.lastTime)/1000);this.lastTime=time;
     if(!this.active||this.inputSuspended||this.visibilityPaused)return false;
     if(this.route&&!this.xrActive) {
       if(this.keys.size){this.route=null;}
@@ -223,7 +225,7 @@ export class InteriorWalk {
 // etkinleşir. Oturum isteği tıklamanın İÇİNDE, hiçbir beklemeden önce yapılır:
 // Quest tarayıcısı geçici kullanıcı etkileşimi ister, araya giren bir await
 // isteği reddettirir. Gözlükte içeride gez adamı bırakılınca da aynı yol açılır.
-const XR_BUTTONS='#enter-vr,#enter-vr-walk,#welcome-vr';
+const XR_BUTTONS='#enter-vr,#enter-vr-walk,#welcome-vr',XR_FRAMEBUFFER_SCALE=.8;
 const immersive={supported:null,start:null};
 export function offerImmersive() {
   if(immersive.supported)return immersive.supported;
@@ -275,6 +277,9 @@ export async function enableImmersiveWalk(renderer, scene, walk, meshGroups, onS
   const open=()=>{
     if(renderer.xr.isPresenting){renderer.xr.getSession().end();return true;}
     let pending;
+    // Quest 3'ün önerilen göz çözünürlüğü ~2064x2208; iki göz + MSAA mobil GPU'ya ağır. %80 ölçek (oturumdan ÖNCE
+    // ayarlanmalı) ve kenarları seyrek çizen foveation, görüntüyü bozmadan kare süresini düşürür.
+    try{renderer.xr.setFramebufferScaleFactor(XR_FRAMEBUFFER_SCALE);}catch{/* oturum açıkken değiştirilemez */}
     // İstek önce, senkron: kullanıcı etkileşimi bu çağrıda tüketilir.
     try{pending=navigator.xr.requestSession('immersive-vr',{optionalFeatures:['local-floor','bounded-floor']});}
     catch(error){label('retryVR');console.warn('XR session could not start',error);return false;}
@@ -283,7 +288,7 @@ export async function enableImmersiveWalk(renderer, scene, walk, meshGroups, onS
     // visor shows is the room they are standing in rather than the model
     // seen from outside.
     onStart();
-    pending.then(session=>renderer.xr.setSession(session))
+    pending.then(session=>renderer.xr.setSession(session)).then(()=>{try{renderer.xr.setFoveation(1);}catch{/* desteklenmiyor */}})
       .catch(error=>{label('retryVR');console.warn('XR session could not start',error);});
     return true;
   };
