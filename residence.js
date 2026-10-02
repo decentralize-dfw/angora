@@ -51,10 +51,12 @@
       const element = $(selector);
       return center >= element.offsetTop && center < element.offsetTop + element.offsetHeight;
     });
+    const life=$('.angora-life');
+    const darkLife=life && center>=life.offsetTop && center<life.offsetTop+life.offsetHeight;
     // The circular wipe at the end of the opening has a cream background.
     const hero = $('.hero-story');
     const heroCream = scrollY > (hero.offsetHeight - innerHeight) * .86 && scrollY < hero.offsetHeight;
-    const useDark = dark && !heroCream && menu.hidden;
+    const useDark = (dark || darkLife) && !heroCream && menu.hidden;
     $('.header').classList.toggle('on-dark', useDark);
     $('.scroll-index').classList.toggle('on-dark', useDark);
     const progress = scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight);
@@ -186,6 +188,7 @@
     $('#chapter-kicker').textContent = chapter.kicker; $('#chapter-title').textContent = chapter.title;
     $('#chapter-copy').textContent = chapter.copy; $('#chapter-features').replaceChildren(...chapter.features.map(text => {const li = document.createElement('li'); li.textContent = text; return li;}));
     $('#chapter-tour').dataset.tour = chapter.view;
+    if($('#chapter-plan'))$('#chapter-plan').dataset.atlasLink=index;
     $('#chapter-model-level').textContent = chapter.level;
     canvas.setAttribute('aria-label', `Architectural render: ${chapter.level}`);
     $('#chapter-panel').setAttribute('aria-labelledby',`chapter-tab-${index}`);
@@ -233,21 +236,29 @@
     });
   });
   $$('[data-chapter-link]').forEach(button => button.addEventListener('click', () => goChapter(Number(button.dataset.chapterLink))));
+  $$('[data-atlas-link]').forEach(button => button.addEventListener('click',()=>{window.dispatchEvent(new CustomEvent('angora:floor',{detail:Number(button.dataset.atlasLink)}));scrollTo($('#atlas'),{offset:-60});}));
   setChapter(0, true);
 
-  const gallery = [
-    ['24','The villa, pool & garden from above'],['27','A private pool in a private garden'],['04','The main living & dining room'],['21','The entrance-level kitchen'],['19','The principal bedroom'],['16','A separate dressing room'],['12','The first-floor family sitting area'],['09','The attic living space'],['53','Covered terrace & outdoor dining'],['51','The pool from the terrace'],
-  ];
+  const allGallery=[...window.ANGORA_ATLAS.photos].sort((a,b)=>(a.outdoor?0:a.floor+1)-(b.outdoor?0:b.floor+1)||a.id-b.id);
+  let gallery=allGallery;
   const track = $('.gallery-track');
-  gallery.forEach(([id,caption], index) => {
+  let galleryIndex = 0;
+  function renderGallery(filter='all'){
+  gallery=allGallery.filter(point=>filter==='all'||(filter==='outdoor'?point.outdoor:!point.outdoor&&point.floor===Number(filter)));
+  track.replaceChildren();track.scrollLeft=0;galleryIndex=0;
+  gallery.forEach((point, index) => {
+    const id=String(point.id).padStart(2,'0'),caption=point.en.replace('Basement ·','Garden level ·').replace('Ground floor ·','Entrance level ·').replace('Attic floor ·','Attic level ·');
     const figure = document.createElement('figure'); figure.className = 'gallery-item';
     const button = document.createElement('button'); button.dataset.photo = id; button.dataset.caption = caption; button.setAttribute('aria-label', `Enlarge photograph: ${caption}`);
-    const img = document.createElement('img'); img.src = `./assets/residence/photo-${id}.jpg`; img.alt = caption; img.loading = 'lazy'; img.width = 1600; img.height = 1200;
+    const img = document.createElement('img'); img.src = point.url; img.alt = caption; img.loading = 'lazy'; img.width = 1600; img.height = 1200;
     const expand = document.createElement('span'); expand.textContent = '↗'; expand.setAttribute('aria-hidden','true'); button.append(img,expand);
     const figcaption = document.createElement('figcaption'); const label = document.createElement('span'); label.textContent = caption;
-    const number = document.createElement('span'); number.textContent = String(index + 1).padStart(2,'0'); figcaption.append(label,number); figure.append(button,figcaption); track.append(figure);
+    const number = document.createElement('span'); number.textContent = `Photo ${id}`; figcaption.append(label,number); figure.append(button,figcaption); track.append(figure);
   });
-  let galleryIndex = 0;
+  $('#gallery-counter').textContent=`01 / ${gallery.length}`;$('#gallery-prev').disabled=true;$('#gallery-next').disabled=gallery.length<2;
+  }
+  renderGallery();
+  $$('[data-gallery-filter]').forEach(button=>button.addEventListener('click',()=>{renderGallery(button.dataset.galleryFilter);$$('[data-gallery-filter]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));}));
   function galleryGo(delta) {
     const next = Math.max(0, Math.min(gallery.length - 1, galleryIndex + delta));
     track.scrollTo({left:track.children[next].offsetLeft - track.children[0].offsetLeft, behavior:reduced ? 'instant' : 'smooth'});
@@ -273,7 +284,7 @@
   });
   document.addEventListener('click', event => {
     const photo = event.target.closest('[data-photo]');
-    if (photo) {$('#lightbox-image').src = `./assets/residence/photo-${photo.dataset.photo}.jpg`; $('#lightbox-image').alt = photo.dataset.caption || ''; $('#lightbox-caption').textContent = photo.dataset.caption || ''; openDialog(imageDialog);}
+    if (photo) {$('#lightbox-image').src = window.ANGORA_ATLAS.photos.find(point=>point.id===Number(photo.dataset.photo))?.url || `./assets/residence/photo-${photo.dataset.photo}.jpg`; $('#lightbox-image').alt = photo.dataset.caption || ''; $('#lightbox-caption').textContent = photo.dataset.caption || ''; openDialog(imageDialog);}
     const tour = event.target.closest('[data-tour]');
     if (tour) {const url = `./index.html?lang=en&view=${encodeURIComponent(tour.dataset.tour)}`; window.open(url,'_blank','noopener');}
   });
@@ -284,12 +295,21 @@
       const mobile = context.conditions.mobile;
       const scrub = (trigger, extra = {}) => ({trigger, start:'top top', end:'bottom bottom', scrub:.75, invalidateOnRefresh:true, ...extra});
       const hero = gsap.timeline({scrollTrigger:scrub('.hero-story')});
-      hero.to('.hero-photo', {scale:1.3, xPercent:-3, yPercent:-4, duration:1, ease:'none'}, 0)
+      hero.to('.hero-photo', {clipPath:mobile?'inset(9% 5% 12% 5%)':'inset(10% 8% 12% 8%)',duration:.3,ease:'power2.inOut'},.15)
+        .to('.hero-photo img',{scale:1.12,duration:1,ease:'none'},0)
+        .to('.hero-photo',{clipPath:'inset(0% 0% 0% 0%)',duration:.26,ease:'power2.inOut'},.53)
         .to('.hero-title', {yPercent:-70, opacity:0, duration:.28, ease:'power1.in'}, .04)
         .to('.hero-sides,.hero-bottom', {opacity:0, duration:.2}, .08)
         .fromTo('.hero-arrival', {y:55, opacity:0}, {y:0, opacity:1, duration:.18}, .3)
         .to('.hero-arrival', {y:-50, opacity:0, duration:.18}, .62)
         .to('.hero-curtain', {clipPath:'circle(150% at 50% 110%)', duration:.28, ease:'power2.inOut'}, .72);
+      gsap.timeline({scrollTrigger:scrub('.arrival-story')})
+        .to('.arrival-frame',{clipPath:mobile?'inset(31% 7% 24% 7%)':'inset(15% 40% 16% 8%)',duration:.4,ease:'power2.inOut'},0)
+        .fromTo('.arrival-frame img',{scale:1.08},{scale:1,duration:.6,ease:'none'},0)
+        .to('.arrival-caption',{opacity:1,y:-12,duration:.2},.32)
+        .fromTo('.arrival-detail',{y:100,rotation:8},{y:0,rotation:-3,opacity:1,duration:.3},.4)
+        .to('.arrival-caption,.arrival-detail,.arrival-type',{opacity:0,duration:.15},.78)
+        .to('.arrival-frame',{clipPath:'inset(0% 0% 0% 0%)',duration:.25,ease:'power2.inOut'},.75);
       gsap.timeline({scrollTrigger:scrub('.image-flight')})
         .fromTo('.fly-a', {xPercent:-45, yPercent:65, rotation:-12}, {xPercent:mobile ? 65 : 73, yPercent:10, rotation:-4, duration:.65, ease:'none'}, 0)
         .fromTo('.fly-b', {xPercent:50, yPercent:65, rotation:12}, {xPercent:mobile ? -73 : -90, yPercent:-20, rotation:3, duration:.65, ease:'none'}, .04)
@@ -299,6 +319,8 @@
         .to('.fly-b,.fly-c,.flight-caption', {opacity:0, duration:.2}, .77);
       const garden = gsap.timeline({scrollTrigger:scrub('.garden-story', {onUpdate:self => setGarden(Math.min(2, Math.floor(self.progress * 3)))})});
       gardenTrigger = garden.scrollTrigger;
+      garden.to('.garden-images',{clipPath:mobile?'inset(4% 5% 4% 5%)':'inset(6% 5% 6% 5%)',duration:.2,ease:'power2.inOut'},.02)
+        .to('.garden-images',{clipPath:'inset(0% 0% 0% 0%)',duration:.15,ease:'power2.inOut'},.85);
       garden.fromTo('.garden-0', {scale:1.15, xPercent:1}, {scale:1, xPercent:0, duration:.42, ease:'none'}, 0)
         .to('.garden-0', {opacity:0, duration:.07}, .31)
         .to('.garden-1', {opacity:1, duration:.07}, .31)
@@ -312,6 +334,12 @@
         .fromTo('.ritual-c', {yPercent:140, rotation:-10}, {yPercent:-115, rotation:0, duration:1, ease:'none'}, 0)
         .to('.ritual-scene h2', {yPercent:-12, duration:1, ease:'none'}, 0);
       chapterTrigger = ScrollTrigger.create({...scrub('.chapters'), onUpdate:self => {setChapter(Math.min(3, Math.floor(self.progress * 4))); seekFilm(self.progress);}});
+      gsap.timeline({scrollTrigger:scrub('.life-opening')})
+        .to('.life-landscape',{clipPath:mobile?'inset(10% 5% 10% 5%)':'inset(10% 8% 10% 8%)',duration:.25,ease:'power2.inOut'},.12)
+        .to('.life-opening-copy',{y:-70,opacity:0,duration:.2},.28)
+        .to('.life-landscape',{clipPath:mobile?'inset(23% 12% 20% 12%)':'inset(12% 24% 12% 24%)',duration:.28,ease:'power2.inOut'},.4)
+        .fromTo('.life-landscape img',{scale:1.12},{scale:1,duration:1,ease:'none'},0)
+        .to('.life-landscape',{clipPath:'inset(0% 0% 0% 0%)',duration:.3,ease:'power2.inOut'},.7);
       $$('.reveal').forEach(element => gsap.from(element, {y:45, opacity:0, duration:1.15, ease:'power2.out', scrollTrigger:{trigger:element, start:'top 92%', once:true}}));
       $$('.detail-photo').forEach(element => gsap.fromTo(element, {y:60, rotation:3}, {y:-35, rotation:-3, ease:'none', scrollTrigger:{trigger:element.closest('.editorial'), start:'top bottom', end:'bottom top', scrub:1}}));
       gsap.fromTo('.location-image img', {scale:1.14}, {scale:1, ease:'none', scrollTrigger:{trigger:'.location', start:'top bottom', end:'bottom top', scrub:1}});
