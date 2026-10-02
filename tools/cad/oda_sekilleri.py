@@ -23,7 +23,9 @@ SABIT = {'f1-Z10': (-1.97, -10.08, 0.0, -8.28), 'f2-110': (-1.95, -10.07, -0.14,
 # Merdiven boşluğu (x 0,788..4,088, z -3,096..-0,957): rooms.json sınırında giriş antresi ve 1. kat holünün içinde.
 # Ad merdivenin üstüne düşüyordu (02.10 ürün sahibi: "antre alakasız yerde", "kat holü zeminin üzerinde değil");
 # bu odaların poligonundan çıkarılır, ad zeminde kalır.
-CIKAR = {'f1-Z02': [(0.788, -3.096, 4.088, -0.957)], 'f2-101': [(0.788, -3.096, 4.088, -0.957)]}
+# 1. katta boşluk ara sahanlığın üstüne de açık (planda koyu kahve kare, x 0,15..2,97, z -0,96..0,45; asılı aplik
+# de buradaydı): kat holünden o da çıkarılır.
+CIKAR = {'f1-Z02': [(0.788, -3.096, 4.088, -0.957)], 'f2-101': [(0.788, -3.096, 4.088, -0.957), (0.15, -0.96, 2.97, 0.45)]}
 
 
 def merkez(g):
