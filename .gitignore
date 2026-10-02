@@ -39,3 +39,6 @@ build/bake/tur10/cikis.*
 # geçici inceleme betikleri (Claude oturumu / alt ajanlar)
 tools/batch-delivery/_*_tmp.mjs
 tools/batch-delivery/_ag_*.mjs
+
+# Intermediate architectural film renders (published WebP/MP4 live in assets).
+build/chapter-film/

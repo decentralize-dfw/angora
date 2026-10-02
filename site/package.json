@@ -1,0 +1,19 @@
+{
+  "name": "angora-21-site",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "English presentation site for Angora 21, built into ../en/",
+  "scripts": {
+    "media": "bash scripts/build-media.sh",
+    "plans": "node scripts/build-floor-plans.mjs",
+    "build": "vite build",
+    "dev": "vite build --watch"
+  },
+  "dependencies": {
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "vite": "7.1.3"
+  }
+}

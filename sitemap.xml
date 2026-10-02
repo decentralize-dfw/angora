@@ -17,6 +17,20 @@
     </image:image>
   </url>
   <url>
+    <loc>https://angora.mergvs.com/web.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://angora.mergvs.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://angora.mergvs.com/web.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://angora.mergvs.com/"/>
+    <image:image>
+      <image:loc>https://angora.mergvs.com/en/media/hero-1600.webp</image:loc>
+      <image:title>Angora 21 · Detached villa for sale in Angora Evleri, Ankara</image:title>
+      <image:caption>The rear facade seen across the pool and the garden · Hatırlı Sokak, Çankaya</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://angora.mergvs.com/kat-planlari.html</loc>
     <lastmod>2026-09-27</lastmod>
     <changefreq>monthly</changefreq>

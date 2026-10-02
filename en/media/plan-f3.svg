@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 672" width="612" height="672" role="img" aria-labelledby="t-f3" data-floor="3">
+  <title id="t-f3">Attic floor plan · Angora 21</title>
+  <style>
+  .room{fill:var(--plan-room,#faf8f3);stroke:var(--plan-wall,#1a1c1d);stroke-width:4.5;stroke-linejoin:miter;transition:fill .35s ease}
+  .room.is-hover,.room:hover{fill:var(--plan-room-hover,#e3dccd)}
+  text{font-family:inherit;fill:currentColor;text-anchor:middle;pointer-events:none}
+  .lbl{font-size:10px;font-weight:600;letter-spacing:.02em}
+  .lbl.small{font-size:9px}
+  .area{font-size:9.5px;font-weight:400;opacity:.72}
+  .open{font-size:9.5px;font-style:italic;opacity:.7}
+  .scale line{stroke:currentColor;stroke-width:1.2}
+  .scale text{font-size:9px;text-anchor:start;opacity:.7}
+  .title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;text-anchor:start;opacity:.6}
+</style>
+  <text class="title" x="18" y="22">Attic floor</text>
+  <path class="room" fill-rule="evenodd" data-space="f3-S1" data-rooms="f3-C01 f3-C05" data-name="Landing · Sitting area" data-area="26.481" d="M355.8 226.1L355.8 279.7L313.9 279.7L313.9 290.2L357.2 290.2L357.2 411.7L80 411.7L80 401.7L40 401.7L40 300.1L80 300.1L80 290.2L280.3 290.2L280.3 279.7L276.3 279.7L276.3 226.1Z"><title>Landing · Sitting area · 26.5 m²</title></path>
+  <path class="room" fill-rule="evenodd" data-space="f3-S2" data-rooms="f3-C02" data-name="Bedroom" data-area="11.315" d="M269.9 110.2L269.9 279.7L186.3 279.7L186.3 258.3L163.3 258.3L163.3 245.6L165.7 243.6L166.1 242L152.4 242L152.4 147.2L165.7 147.2L162.5 144.4L163.3 144L163.3 131.9L186.3 131.9L186.3 110.2Z"><title>Bedroom · 11.3 m²</title></path>
+  <path class="room" fill-rule="evenodd" data-space="f3-S3" data-rooms="f3-C03" data-name="Bathroom" data-area="5.448" d="M276.3 110.2L355.8 110.2L355.8 219.7L276.3 219.7Z"><title>Bathroom · 5.4 m²</title></path>
+  <path class="room" fill-rule="evenodd" data-space="f3-S4" data-rooms="f3-C04" data-name="Bedroom" data-area="20.427" d="M355.8 591.7L186.3 591.7L186.3 570.1L163.3 570.1L163.3 555.6L166.1 552.4L152.4 552.4L152.4 457.2L166.5 457.2L163.3 453.6L163.3 443.8L186.3 443.8L186.3 422.2L355.8 422.2Z"><title>Bedroom · 20.4 m²</title></path>
+  <text class="lbl" x="254.1" y="343" data-room="f3-C01"><tspan x="254.1" dy="0">Landing</tspan></text>
+  <text class="lbl" x="124.1" y="337" data-room="f3-C05"><tspan x="124.1" dy="0">Sitting</tspan><tspan x="124.1" dy="12">area</tspan></text>
+  <text class="lbl" x="222.1" y="237.5" data-room="f3-C02"><tspan x="222.1" dy="0">Bedroom</tspan></text><text class="area" x="222.1" y="249.5">11.3 m²</text>
+  <text class="lbl small" x="308.1" y="142" data-room="f3-C03"><tspan x="308.1" dy="0">Bathroom</tspan></text>
+  <text class="lbl" x="256.1" y="465.5" data-room="f3-C04"><tspan x="256.1" dy="0">Bedroom</tspan></text><text class="area" x="256.1" y="477.5">20.4 m²</text>
+  <g class="scale"><line x1="18" y1="654" x2="98" y2="654"/><line x1="18" y1="650" x2="18" y2="658"/><line x1="98" y1="650" x2="98" y2="658"/><text x="104" y="657">2 m</text></g>
+</svg>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f3f0e7">
+  <title>Angora 21 — A private world, within the city</title>
+  <meta name="description" content="A detached residence in Angora Evleri, Ankara. Discover its 900 m² garden, private pool, five bedrooms and four levels through real photography and a cinematic architectural film.">
+  <meta property="og:title" content="Angora 21 — A private world, within the city">
+  <meta property="og:image" content="./assets/residence/photo-27.jpg">
+  <link rel="icon" href="./favicon.svg">
+  <link rel="preload" as="image" href="./assets/residence/photo-27.jpg">
+  <link rel="stylesheet" href="./residence.css">
+  <script src="./assets/vendor/gsap.min.js" defer></script>
+  <script src="./assets/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="./assets/vendor/lenis.min.js" defer></script>
+  <script src="./residence.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#residence">Skip to content</a>
+  <header class="header">
+    <a class="brand" href="#home" aria-label="Angora 21 home"><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="37"/><path d="M23 54 40 23l17 31M30 42h20M40 23v35M20 61h40"/></svg><span>ANGORA<br>TWENTY ONE</span></a>
+    <nav aria-label="Main navigation"><a href="#residence">The residence</a><a href="#floors">Four chapters</a><a href="#contact">Arrange a viewing ↗</a></nav>
+    <button class="menu-toggle" aria-controls="menu" aria-expanded="false">Menu <span><i></i><i></i></span></button>
+  </header>
+  <aside class="scroll-index" aria-hidden="true"><span id="scroll-number">00</span><i><b></b></i><span class="index-word">Scroll to discover ↓</span></aside>
+  <div class="menu" id="menu" hidden><nav aria-label="Menu"><a href="#residence"><small>01</small>The residence</a><a href="#garden"><small>02</small>Garden & pool</a><a href="#spaces"><small>03</small>Inside the home</a><a href="#floors"><small>04</small>Four chapters</a><a href="#location"><small>05</small>The neighbourhood</a><a href="#contact"><small>06</small>Your next chapter</a></nav><p>Angora Evleri · Mutlukent · Ankara</p></div>
+  <main>
+    <section class="hero-story" id="home" aria-label="Angora 21 introduction">
+      <div class="hero scene">
+        <div class="hero-photo"><img src="./assets/residence/photo-27.jpg" alt="The real Angora villa and private swimming pool beneath a blue Ankara sky" fetchpriority="high" width="1600" height="1200"></div><div class="hero-shade"></div>
+        <div class="hero-title"><p class="eyebrow">A private residence · Angora Evleri, Ankara</p><h1><span>ANGORA</span><span>TWENTY ONE</span></h1><p class="script">A place of your own.</p></div>
+        <div class="hero-sides"><span>Within the city.</span><span>A world apart.</span></div>
+        <div class="hero-bottom"><span>Hatırlı Sokak · Mutlukent</span><a href="#residence">Discover the residence ↓</a><button data-tour="building">Explore in 3D ↗</button></div>
+        <div class="hero-arrival"><span class="eyebrow">Your own garden. Your own pool.</span><p>Life, at your<br><em>own pace.</em></p></div>
+        <div class="hero-curtain"><span class="eyebrow">A home with room for every part of life</span><h2>A private<br><em>world.</em></h2></div>
+      </div>
+    </section>
+
+    <section class="residence section-pad" id="residence">
+      <div class="section-top"><span class="eyebrow">01 / The residence</span><span class="eyebrow">An established address. A personal way to live.</span></div>
+      <div class="residence-copy"><h2 class="display reveal">The space to live.<br>The freedom to<br><em>make it yours.</em></h2><div class="copy reveal"><p>On Hatırlı Sokak, in Ankara’s Angora Evleri, this detached villa brings together a private garden, a swimming pool and four distinct levels of living.</p><p>The slope of the site gives the home two different arrivals: a street-level entrance for everyday life, and a lower level that opens directly onto the terrace, garden and water.</p><p>Five bedrooms. Four living spaces. Three kitchens. Enough independence for different generations, with plenty of room to come together.</p></div></div>
+      <div class="facts reveal"><div><strong>500<span>m²</span></strong><small>Gross interior area</small></div><div><strong>400<span>m²</span></strong><small>Net living area</small></div><div><strong>900<span>m²</span></strong><small>Private garden</small></div><div><strong>5 + 4</strong><small>Bedrooms + living spaces</small></div></div>
+      <p class="source-note">Areas and room counts are as described in the property listing.</p>
+    </section>
+
+    <section class="image-flight" aria-label="Discover the character of the residence">
+      <div class="flight-scene scene"><div class="flight-type"><span>A HOME.</span><span>A GARDEN.</span><span><em>A whole life.</em></span></div>
+        <figure class="flying-photo fly-a"><img src="./assets/residence/photo-24.jpg" loading="lazy" alt="Aerial photograph of the villa, garden and pool"><figcaption>A private setting</figcaption></figure>
+        <figure class="flying-photo fly-b"><img src="./assets/residence/photo-04.jpg" loading="lazy" alt="The real villa's living and dining room"><figcaption>Space to come together</figcaption></figure>
+        <figure class="flying-photo fly-c"><img src="./assets/residence/photo-19.jpg" loading="lazy" alt="The principal bedroom"><figcaption>Room to retreat</figcaption></figure>
+        <p class="flight-caption">A house that holds the everyday.<br>And leaves room for something more.</p>
+      </div>
+    </section>
+
+    <section class="garden-story" id="garden">
+      <div class="garden-scene scene"><div class="garden-images"><img class="garden-image garden-0" src="./assets/residence/photo-51.jpg" loading="lazy" alt="Private swimming pool viewed from the covered terrace"><img class="garden-image garden-1" src="./assets/residence/photo-53.jpg" loading="lazy" alt="Shaded terrace with timber outdoor dining furniture"><img class="garden-image garden-2" src="./assets/residence/photo-36.jpg" loading="lazy" alt="Mature garden beside the villa"></div><div class="garden-shade"></div>
+        <div class="garden-heading"><span class="eyebrow">02 / Life outside</span><h2>More sky.<br><em>More time.</em></h2></div>
+        <nav class="garden-tabs" aria-label="Outdoor spaces"><button class="active" data-garden="0">The pool</button><button data-garden="1">The terrace</button><button data-garden="2">The garden</button></nav>
+        <div class="garden-copy" aria-live="polite"><span id="garden-number">01 / Your own water</span><h3 id="garden-title">A pool, all to yourself.</h3><p id="garden-copy">The private pool sits at the same level as the lower living floor. Open the doors, cross the terrace and the day moves outside.</p></div><span class="garden-foot">900 m² garden · Private pool · Covered terrace</span>
+      </div>
+    </section>
+
+    <section class="spaces section-pad" id="spaces">
+      <div class="section-top"><span class="eyebrow">03 / Inside the home</span><span class="eyebrow">Warmth. Character. Room to breathe.</span></div>
+      <div class="spaces-intro"><h2 class="display reveal">Come together.<br><em>Feel at home.</em></h2><p class="copy reveal">This is a home with its own character: timber floors, generous windows, wrought-iron stair rails and rooms that connect through a central hall. The social spaces and private rooms have their own place in the house.</p></div>
+      <article class="editorial editorial-living"><div class="editorial-image reveal"><button data-photo="04" data-caption="The main living and dining room" aria-label="Enlarge living room photograph"><img src="./assets/residence/photo-04.jpg" loading="lazy" alt="Main living and dining room, photographed in the existing villa"><span>View photograph ↗</span></button></div><div class="editorial-copy reveal"><span class="eyebrow">The entrance level</span><h3>A room for<br><em>everyone.</em></h3><p>The main living and dining room extends across approximately 53 m². Large windows bring in daylight, while the balcony looks towards the pool and garden below.</p><p>At street level, the entrance hall connects this social floor to the kitchen, staircase, lift and garage.</p><button class="text-link" data-chapter-link="1">Explore the entrance level ↗</button></div><figure class="detail-photo"><img src="./assets/residence/photo-23.jpg" loading="lazy" alt="Timber flooring and dining area detail"><figcaption>Daylight, timber & everyday life</figcaption></figure></article>
+      <article class="editorial editorial-suite"><div class="editorial-copy reveal"><span class="eyebrow">The first floor</span><h3>A little more<br><em>privacy.</em></h3><p>The principal suite brings together a bedroom, a separate dressing room and an en-suite bathroom. A balcony adds a quiet connection to the outdoors.</p><p>Two further bedrooms, a family bathroom and a sitting area share this level, keeping the family’s private rooms together.</p><button class="text-link" data-chapter-link="2">Discover the bedroom floor ↗</button></div><div class="editorial-image reveal"><button data-photo="19" data-caption="The principal bedroom" aria-label="Enlarge principal bedroom photograph"><img src="./assets/residence/photo-19.jpg" loading="lazy" alt="The real principal bedroom with timber flooring"><span>View photograph ↗</span></button></div><figure class="detail-photo"><img src="./assets/residence/photo-16.jpg" loading="lazy" alt="Separate dressing room in the principal suite"><figcaption>A suite with a dressing room of its own</figcaption></figure></article>
+    </section>
+
+    <section class="ritual-story" aria-label="Kitchens and independent living spaces"><div class="ritual-scene scene"><h2>For the<br><em>everyday rituals.</em></h2><figure class="ritual-photo ritual-a"><img src="./assets/residence/photo-21.jpg" loading="lazy" alt="The main enclosed kitchen with timber cabinets"></figure><figure class="ritual-photo ritual-b"><img src="./assets/residence/photo-01.jpg" loading="lazy" alt="Lower level kitchen with its own cooking space"></figure><figure class="ritual-photo ritual-c"><img src="./assets/residence/photo-09.jpg" loading="lazy" alt="Attic sitting area and its pitched roof"></figure><div class="ritual-copy"><span class="eyebrow">Three kitchens. Four living spaces.</span><p>The entrance-level kitchen has room for breakfast. The garden floor has its own kitchen for days by the pool. Upstairs, an attic kitchenette gives guests or grown children a little more independence.</p></div></div></section>
+
+    <section class="chapters" id="floors">
+      <div class="chapter-scene scene"><div class="chapter-top"><span class="eyebrow">04 / A home in four chapters</span><span class="eyebrow">Scroll through the levels</span></div>
+        <div class="chapter-layout"><div class="chapter-narrative"><h2>One home.<br><em>Four chapters.</em></h2><div class="chapter-tabs" role="tablist" aria-label="Villa levels"><button id="chapter-tab-0" role="tab" aria-controls="chapter-panel" aria-selected="true" data-chapter="0"><span>−01</span>Garden level</button><button id="chapter-tab-1" role="tab" aria-controls="chapter-panel" aria-selected="false" data-chapter="1"><span>00</span>Entrance level</button><button id="chapter-tab-2" role="tab" aria-controls="chapter-panel" aria-selected="false" data-chapter="2"><span>01</span>First floor</button><button id="chapter-tab-3" role="tab" aria-controls="chapter-panel" aria-selected="false" data-chapter="3"><span>02</span>Attic level</button></div><div class="chapter-copy" id="chapter-panel" role="tabpanel" aria-labelledby="chapter-tab-0"><span class="eyebrow" id="chapter-kicker">−01 / The garden floor</span><h3 id="chapter-title">Open the day outside.</h3><p id="chapter-copy">A living room of approximately 54 m², a separate kitchen and direct access to the garden and pool. An annexe with its own entrance adds space for guests, work or a separate daily routine.</p><ul id="chapter-features"><li>Living room & kitchen</li><li>Garden & pool access</li><li>Guest WC & separate annexe</li></ul><button id="chapter-tour" class="text-link" data-tour="f0">Walk through this level ↗</button></div></div>
+        <div class="chapter-model"><div class="chapter-loading"><span class="loading-orbit"></span><p>Opening the home,<br>one level at a time.</p><button id="chapter-retry" hidden>Try loading again ↗</button></div><img class="chapter-poster" src="./assets/residence/chapters/poster.webp" alt="" aria-hidden="true" loading="lazy"><canvas id="chapter-canvas" role="img" aria-label="Architectural render film, scroll to move through the villa's four levels"></canvas><div class="chapter-model-caption"><span id="chapter-model-level">Garden level</span><span>Scroll to unfold the home</span></div><div class="chapter-progress"><i></i></div><figure class="chapter-photo"><button id="chapter-photo-button" data-photo="03" data-caption="Garden-level living room" aria-label="Enlarge this level's photograph"><img id="chapter-photo" src="./assets/residence/photo-03.jpg" loading="lazy" alt="Garden-level living room"><span>Inside this level ↗</span></button></figure></div></div>
+      </div>
+    </section>
+
+    <section class="comfort section-pad" id="details"><div class="section-top"><span class="eyebrow">The details that make a home</span><span class="eyebrow">Space, access & practical comfort</span></div><h2 class="display reveal">A home that<br><em>works for life.</em></h2><div class="comfort-grid"><article class="reveal"><span>01</span><h3>A lift & a staircase</h3><p>A lift serves the garden, entrance and first floors. The attic is reached by the staircase, whose iron balustrades and timber handrails carry the character of the home between levels.</p></article><article class="reveal"><span>02</span><h3>Space for arriving</h3><p>An internally connected garage and open parking provide room for three vehicles in total. The covered entrance creates a sheltered transition from the street into the home.</p></article><article class="reveal"><span>03</span><h3>Independent possibilities</h3><p>The annexe has its own entrance. Together with a kitchen on the lower floor and a kitchenette in the attic, the layout accommodates guests, family members or working from home.</p></article><article class="reveal"><span>04</span><h3>Everyday essentials</h3><p>Gas combi heating, a 6-tonne water tank, three bathrooms, two guest WCs and two balconies complement the living spaces and garden.</p></article></div><div class="comfort-photo"><img src="./assets/residence/photo-34.jpg" loading="lazy" alt="Villa staircase with iron balustrades and timber handrail"><span>Connected by more than a staircase.</span></div></section>
+
+    <section class="location section-pad" id="location"><div class="section-top"><span class="eyebrow">05 / The neighbourhood</span><span class="eyebrow">Angora Evleri · Ankara</span></div><div class="location-layout"><div class="location-image"><img src="./assets/residence/photo-24.jpg" loading="lazy" alt="Real aerial view of the villa among Angora Evleri's gardens and detached houses"></div><div class="location-copy"><span class="eyebrow">Mutlukent, Çankaya</span><h2>A quieter<br>side of<br><em>the city.</em></h2><p>Angora Evleri is an established villa neighbourhood in Ankara’s Mutlukent district. Detached homes, mature gardens and residential streets give the setting its own scale and rhythm.</p><p>The villa sits on Hatırlı Sokak, with the Eskişehir road and Bilkent connections placing it within reach of the wider city.</p><address>Hatırlı Sokak No. 10<br>Angora Evleri · Mutlukent<br>Çankaya, Ankara · Türkiye</address><button class="text-link" data-tour="neighborhood">Explore the neighbourhood in 3D ↗</button></div></div></section>
+
+    <section class="gallery section-pad" id="gallery"><div class="section-top"><span class="eyebrow">The residence, as it is</span><div class="gallery-controls"><button id="gallery-prev" aria-label="Previous photograph">←</button><span id="gallery-counter" aria-live="polite">01 / 10</span><button id="gallery-next" aria-label="Next photograph">→</button></div></div><h2 class="display reveal">Take a closer <em>look.</em></h2><p class="gallery-intro">Real rooms. Real light. The existing villa, photographed inside and out.</p><div class="gallery-track" tabindex="0" aria-label="Photograph gallery, arrow keys to browse"></div></section>
+
+    <section class="contact" id="contact"><div class="contact-image"><img src="./assets/residence/photo-25.jpg" loading="lazy" alt="The villa and private pool from the garden"></div><div class="contact-content"><span class="eyebrow">06 / Your next chapter</span><h2>Some places<br>are better<br><em>in person.</em></h2><p>Explore the home here, then discover its scale, light and setting for yourself. Contact the listing agent to arrange a private viewing.</p><a class="contact-link" href="https://remax.com.tr/tr/portfoy/P56131836" target="_blank" rel="noopener">Arrange a viewing <span>↗</span></a><button data-tour="f1" class="text-link">Take the interactive tour ↗</button></div></section>
+  </main>
+  <footer><a class="footer-brand" href="#home">ANGORA 21</a><p>A private world, within the city.<br>Angora Evleri · Ankara</p><a href="#home">Back to top ↑</a><small>© <span id="year">2026</span> Angora 21 · All photography shows the existing property. Approximate areas and facilities follow the supplied listing; the digital model is an exploration of the layout.</small></footer>
+  <dialog id="image-dialog" class="image-dialog" data-lenis-prevent><button class="dialog-close" aria-label="Close photograph">Close ×</button><img id="lightbox-image" alt=""><p id="lightbox-caption"></p></dialog>
+</body>
+</html>
