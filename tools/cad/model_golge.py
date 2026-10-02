@@ -20,7 +20,8 @@ def shade(P, eye, look, W=900, H=640, fov=62):
     nn=n[tri[hit]]; nn*=np.sign(-(nn*d[hit]).sum(1))[:,None]
     img[hit]=60+170*np.clip(nn@L,0,1)*0.75+170*0.25*np.abs((nn*d[hit]).sum(1))
     return Image.fromarray(img.reshape(H,W).clip(0,255).astype(np.uint8)).convert('RGB')
-eye=[-1.75,1.45,-10.4]; look=[0.28,-0.08,1]
+import os
+eye=json.loads(os.environ.get('EYE','[-1.75,1.45,-10.4]')); look=json.loads(os.environ.get('LOOK','[0.28,-0.08,1]'))
 a=shade(load(sys.argv[1]),eye,look); b=shade(load(sys.argv[2]),eye,look)
 f=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',28)
 o=Image.new('RGB',(a.width*2+16,a.height+50),'white'); d=ImageDraw.Draw(o)

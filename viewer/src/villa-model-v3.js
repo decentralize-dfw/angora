@@ -1164,14 +1164,20 @@ export function healTur10WoodUV(model) {
   return changed;
 }
 // 02.10 ürün sahibi (bodrum salonu bahçe kapısı: "üst kiriş beyaz nerde, niye iki kapı var, bir tane açık kapı
-// olacak kanatları olur"): açıklıkta (x -1,63..-0,33, z -8,34) iki takım kanat var: duvar düzleminde KAPALI duran iki
-// kahve kanat (kayıtları ve camlarıyla) ve bahçeye 90° AÇIK duran iki kanat. Kapalılar atılır; seçim bağlı parça
-// (ortak köşe) bütün olarak: parçanın kutusu kapalı kanat kutusunun içindeyse. Açık kanatların menteşe ucu da bu
-// kutuya değdiği için tek tek üçgen ölçütü kullanılmaz. Beyaz kasanın iki dikmesi var, üst parçası yok (girişteki
-// kapılarda var): dikmelerle aynı kesitte (6 cm) lento eklenir.
+// olacak kanatları olur"; sonra "kapının dış çerçevesi nerde, sağdakinin"): açıklıkta (x -1,63..-0,33, z -8,34) iki takım
+// kanat var. Duvar düzleminde KAPALI duran ikisi tam (çerçeve, cam, kayıt) ama menteşesiz/kolsuz; bahçeye 90° AÇIK
+// duranlar menteşe ve kolları taşıyor ama eksik (sağdakinin camı yok). Açık kanat gövdeleri atılır; kapalı tam kanatlar
+// menteşe eksenleri (x -1,526 / -0,447, z -8,21) çevresinde 90° döndürülüp tam o yere oturtulur; menteşe ve kollar
+// (pirinç) yerinde kalır. Seçim bağlı parça (ortak köşe) bütün olarak. Beyaz kasanın iki dikmesi var, üst parçası yok
+// (girişteki kapılarda var): dikmelerle aynı kesitte (6 cm) lento eklenir.
 const TUR10_GARDEN_DOOR = {
   region: {min: [-1.75, -0.4, -8.85], max: [-0.2, 1.95, -8.05]},
   closed: {min: [-1.53, -0.32, -8.36], max: [-0.40, 1.77, -8.245]},
+  // açık kanat gövdeleri: kanat bölgesinde, bahçeye taşan (z < -8,45) parçalar
+  open: [{min: [-1.56, -0.32, -8.80], max: [-1.37, 1.77, -8.19]}, {min: [-0.61, -0.32, -8.80], max: [-0.42, 1.77, -8.19]}],
+  // kapalı kanat -> açık konum: sol +90° (x' = z + 8,30 - 1,493, z' = -(x + 1,50) - 8,208), sağ -90°
+  left: {x0: -1.50, z0: -8.30, x1: -1.493, z1: -8.208, s: 1}, right: {x0: -0.430, z0: -8.30, x1: -0.49, z1: -8.267, s: -1},
+  split: -0.965,
   lintel: {min: [-1.666, 1.84, -8.337], max: [-0.266, 1.90, -8.278]},
 };
 export function fixTur10GardenDoor(model) {
@@ -1200,15 +1206,35 @@ export function fixTur10GardenDoor(model) {
   const box = new Map();
   tris.forEach((tr, i) => { const r = find(i); if (!box.has(r)) box.set(r, new THREE.Box3()); tr.w.forEach(p => box.get(r).expandByPoint(p)); });
   const inner = new THREE.Box3(new THREE.Vector3(...closed.min), new THREE.Vector3(...closed.max));
+  const opens = TUR10_GARDEN_DOOR.open.map(o => new THREE.Box3(new THREE.Vector3(...o.min), new THREE.Vector3(...o.max)));
   const flat = new Map(); let dropped = 0;
+  const geo = o => { if (!flat.has(o)) { const g = o.geometry; flat.set(o, g.index ? g.toNonIndexed() : g); } return flat.get(o); };
+  const q = new THREE.Vector3(), nrm = new THREE.Vector3();
   tris.forEach((tr, i) => {
-    if (!inner.containsBox(box.get(find(i)))) return;
-    if (!flat.has(tr.o)) { const g = tr.o.geometry; flat.set(tr.o, g.index ? g.toNonIndexed() : g); }
-    const pos = flat.get(tr.o).attributes.position;
-    for (let k = 1; k < 3; k++) pos.setXYZ(tr.t + k, pos.getX(tr.t), pos.getY(tr.t), pos.getZ(tr.t));
-    pos.needsUpdate = true; dropped++;
+    const bb = box.get(find(i));
+    if (inner.containsBox(bb)) {
+      // kapalı tam kanat: menteşesi çevresinde açık konuma
+      const cx = (bb.min.x + bb.max.x) / 2, r = cx < TUR10_GARDEN_DOOR.split ? TUR10_GARDEN_DOOR.left : TUR10_GARDEN_DOOR.right;
+      const g = geo(tr.o), pos = g.attributes.position, nor = g.attributes.normal, inv = new THREE.Matrix4().copy(tr.o.matrixWorld).invert();
+      const nm = new THREE.Matrix3().getNormalMatrix(tr.o.matrixWorld), nmi = nm.clone().invert();
+      for (let k = 0; k < 3; k++) {
+        q.fromBufferAttribute(pos, tr.t + k).applyMatrix4(tr.o.matrixWorld);
+        const x = r.s * (q.z - r.z0) + r.x1, z = -r.s * (q.x - r.x0) + r.z1;
+        q.set(x, q.y, z).applyMatrix4(inv); pos.setXYZ(tr.t + k, q.x, q.y, q.z);
+        if (nor) {
+          nrm.fromBufferAttribute(nor, tr.t + k).applyMatrix3(nm).normalize();
+          nrm.set(r.s * nrm.z, nrm.y, -r.s * nrm.x).applyMatrix3(nmi).normalize(); nor.setXYZ(tr.t + k, nrm.x, nrm.y, nrm.z);
+        }
+      }
+      pos.needsUpdate = true; if (nor) nor.needsUpdate = true; dropped++;
+    } else if (bb.min.z < -8.45 && opens.some(o => o.containsBox(bb))) {
+      // eksik açık kanat gövdesi: atılır
+      const pos = geo(tr.o).attributes.position;
+      for (let k = 1; k < 3; k++) pos.setXYZ(tr.t + k, pos.getX(tr.t), pos.getY(tr.t), pos.getZ(tr.t));
+      pos.needsUpdate = true; dropped++;
+    }
   });
-  for (const [o, g] of flat) if (g !== o.geometry) { o.geometry.dispose(); o.geometry = g; }
+  for (const [o, g] of flat) { g.computeBoundingBox(); g.computeBoundingSphere(); if (g !== o.geometry) { o.geometry.dispose(); o.geometry = g; } }
   // lento: kasa dikmesinin malzemesi; ışık UV'si dikmenin üst ucundan sabit
   // kasa dikmesi: dikmenin üst ucuna (x -0,3, y 1,9, z -8,3) en yakın köşesi olan WHT.001 parçası
   const target = new THREE.Vector3(-0.3, 1.9, -8.3);
