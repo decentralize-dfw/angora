@@ -55,11 +55,25 @@ test('XR right stick snap-turns exactly once per push', () => {
   assert.ok(Math.abs(walk.rig.rotation.y - yawOnce) > 0.4, 'released then pushed = second turn');
 });
 
-test('XR storey request fires on a vertical push, once', () => {
+test('XR storey request: A/X up, B/Y down, once per press (right stick Y walks now)', () => {
   const walk = walkAtFirstStation();
   const requests = [];
   walk.onFloorRequest = d => requests.push(d);
-  walk.update(0, session({right: [0, 0, 0, -1]}));
-  walk.update(100, session({right: [0, 0, 0, -1]}));
-  assert.deepEqual(requests, [1], 'up once while held');
+  const pad = (axes, pressed) => ({inputSources: [{handedness: 'right', gamepad: {axes, buttons: [0, 1, 2, 3, 4, 5].map(i => ({pressed: pressed.includes(i)}))}}]});
+  walk.update(0, pad([0, 0, 0, -1], []));                 // stick up: walks, no storey change
+  assert.deepEqual(requests, [], 'stick no longer changes storey');
+  walk.update(100, pad([0, 0, 0, 0], [4]));
+  walk.update(200, pad([0, 0, 0, 0], [4]));                // held
+  assert.deepEqual(requests, [1], 'A once while held = up');
+  walk.update(300, pad([0, 0, 0, 0], []));
+  walk.update(400, pad([0, 0, 0, 0], [5]));
+  assert.deepEqual(requests, [1, -1], 'B = down');
+});
+
+test('XR right stick forward also walks', () => {
+  const walk = walkAtFirstStation();
+  const before = walk.camera.getWorldPosition(new THREE.Vector3());
+  for (let tick = 0; tick <= 16; tick++) walk.update(tick * 50, session({right: [0, 0, 0, -1]}));
+  const after = walk.camera.getWorldPosition(new THREE.Vector3());
+  assert.ok(Math.hypot(after.x - before.x, after.z - before.z) > 0.2);
 });

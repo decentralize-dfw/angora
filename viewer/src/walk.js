@@ -16,7 +16,7 @@ export const WALK_HORIZONTAL_FOV_DEG = 95;
 // the delivery says so in its own limitations - so without this a visitor in a
 // headset could never leave the floor they arrived on, and the balconies and
 // the upper rooms would be shown to them and kept from them at once.
-const SNAP_TURN_DEG = 30, STICK_PRESS = .72, STICK_RELEASE = .35;
+const SNAP_TURN_DEG = 30, STICK_PRESS = .72, STICK_RELEASE = .35, STICK_DEAD = .18;
 // Ürün sahibi (27.09): lens 14 mm SABİT (24 mm film yüksekliğine göre dikey
 // açı), göz biraz alçak, yürüyüş 1,5 kat hızlı, Shift ile 2,5 kat.
 export const WALK_LENS_MM = 14;
@@ -156,9 +156,16 @@ export class InteriorWalk {
     let side=(this.keys.has('KeyD')||this.keys.has('ArrowRight')?1:0)-(this.keys.has('KeyA')||this.keys.has('ArrowLeft')?1:0);
     let yaw=this.yaw;
     if(this.xrActive && xrSession) {
-      const input=[...xrSession.inputSources].find(i=>i.handedness==='left' && i.gamepad);
-      if(input) {const axes=input.gamepad.axes,offset=axes.length>=4?2:0;side=axes[offset]??0;forward=-(axes[offset+1]??0);if(Math.abs(side)<.18)side=0;if(Math.abs(forward)<.18)forward=0;}
-      this.rightStick(xrSession);
+      // 02.10 ürün sahibi ("kolları sağ sol ilerleme vs kullanabilmem lazım"): sol çubuk baktığın yöne göre
+      // ileri/geri/yana; sağ çubuk ileri/geri de yürütür, sağa/sola 30° döndürür; A/X kat yukarı, B/Y kat aşağı.
+      side=0;forward=0;
+      for(const input of xrSession.inputSources) {
+        const gamepad=input.gamepad;if(!gamepad)continue;
+        const axes=gamepad.axes,offset=axes.length>=4?2:0,x=axes[offset]??0,y=axes[offset+1]??0;
+        if(input.handedness==='left'){if(Math.abs(x)>=STICK_DEAD)side+=x;if(Math.abs(y)>=STICK_DEAD)forward-=y;}
+        else if(input.handedness==='right'&&Math.abs(y)>=STICK_DEAD&&Math.abs(y)>Math.abs(x))forward-=y;
+      }
+      this.xrControls(xrSession);
       const direction=this.camera.getWorldDirection(new THREE.Vector3());yaw=Math.atan2(-direction.x,-direction.z);
     }
     const length=Math.hypot(forward,side);if(!length)return false;
@@ -172,21 +179,25 @@ export class InteriorWalk {
     return true;
   }
   // One push, one answer. The stick has to come back past the release
-  // threshold before it will turn or change storey again, so a held stick
-  // spins nobody and a diagonal push does one thing rather than two.
-  rightStick(xrSession) {
-    const input=[...xrSession.inputSources].find(i=>i.handedness==='right' && i.gamepad);
-    this.stick ??= {turn:false,storey:false};
-    if(!input) {this.stick.turn=false;this.stick.storey=false;return;}
-    const axes=input.gamepad.axes,offset=axes.length>=4?2:0;
-    const x=axes[offset]??0,y=axes[offset+1]??0;
-    if(Math.abs(x)>=Math.abs(y)) {
-      if(Math.abs(x)>STICK_PRESS&&!this.stick.turn){this.stick.turn=true;this.snapTurnXR(Math.sign(x));}
-    } else if(Math.abs(y)>STICK_PRESS&&!this.stick.storey){
-      this.stick.storey=true;this.onFloorRequest?.(y<0?1:-1);
+  // threshold before it will turn again, so a held stick spins nobody. Storey
+  // changes moved from the right stick's up/down (now walking, the way a
+  // visitor expects a stick to work) to the face buttons: A/X up, B/Y down,
+  // one storey per press.
+  xrControls(xrSession) {
+    this.stick ??= {turn:false,buttons:new Map()};
+    let turnX=0;
+    for(const input of xrSession.inputSources) {
+      const gamepad=input.gamepad;if(!gamepad)continue;
+      if(input.handedness==='right'){const axes=gamepad.axes,offset=axes.length>=4?2:0,x=axes[offset]??0,y=axes[offset+1]??0;if(Math.abs(x)>Math.abs(y))turnX=x;}
+      // xr-standard: 4 = A/X, 5 = B/Y
+      for(const [index,delta] of [[4,1],[5,-1]]) {
+        const key=input.handedness+index,pressed=!!gamepad.buttons?.[index]?.pressed;
+        if(pressed&&!this.stick.buttons.get(key))this.onFloorRequest?.(delta);
+        this.stick.buttons.set(key,pressed);
+      }
     }
-    if(Math.abs(x)<STICK_RELEASE)this.stick.turn=false;
-    if(Math.abs(y)<STICK_RELEASE)this.stick.storey=false;
+    if(Math.abs(turnX)>STICK_PRESS&&!this.stick.turn){this.stick.turn=true;this.snapTurnXR(Math.sign(turnX));}
+    if(Math.abs(turnX)<STICK_RELEASE)this.stick.turn=false;
   }
   startXR() {
     const position=this.camera.getWorldPosition(new THREE.Vector3());
@@ -207,23 +218,35 @@ export class InteriorWalk {
   }
 }
 
-// Two doors into one session: the footer button for a visitor still looking at
-// the model, and the one in the tour's own top row for a visitor already
-// inside it. Neither is drawn at all unless WebXR answers for this device, so
-// nothing about the page changes on a machine that has no headset.
+// Standart WebXR girişi (three.js VRButton düzeni). Düğmeler cihaz immersive-vr
+// desteğini bildirdiği anda görünür (yükleme sürerken pasif), model hazır olunca
+// etkinleşir. Oturum isteği tıklamanın İÇİNDE, hiçbir beklemeden önce yapılır:
+// Quest tarayıcısı geçici kullanıcı etkileşimi ister, araya giren bir await
+// isteği reddettirir. Gözlükte içeride gez adamı bırakılınca da aynı yol açılır.
+const XR_BUTTONS='#enter-vr,#enter-vr-walk,#welcome-vr';
+const immersive={supported:null,start:null};
+export function offerImmersive() {
+  if(immersive.supported)return immersive.supported;
+  immersive.supported=(async()=>{
+    if(!navigator.xr||!window.isSecureContext)return false;
+    let ok=false;try{ok=await navigator.xr.isSessionSupported('immersive-vr');}catch{return false;}
+    if(ok)for(const button of document.querySelectorAll(XR_BUTTONS)){button.hidden=false;if(!immersive.start)button.disabled=true;}
+    return ok;
+  })();
+  return immersive.supported;
+}
+// Gözlükte (2D sayfada) bir jestin içinden çağrılır: oturum hazırsa true.
+export function startImmersive() {return immersive.start?immersive.start():false;}
 export async function enableImmersiveWalk(renderer, scene, walk, meshGroups, onStart, onEnd, onFloor) {
   // Two of these say what the session is doing and change their label with
   // it; the welcome card's says what it offers and is gone the moment it is
   // taken, so it keeps its own word.
   const buttons=[...document.querySelectorAll('#enter-vr,#enter-vr-walk')];
   const offers=[...document.querySelectorAll('#welcome-vr')];
-  if(!buttons.length || !navigator.xr || !window.isSecureContext)return;
-  let supported=false;try{supported=await navigator.xr.isSessionSupported('immersive-vr');}catch{return;}
-  if(!supported)return;
+  if(!(await offerImmersive()))return;
   walk.onFloorRequest=onFloor;
   const label=key=>{for(const button of buttons){button.textContent=t(key);button.dataset.i18n=key;button.setAttribute('aria-label',t(key));}};
   renderer.xr.enabled=true;renderer.xr.setReferenceSpaceType('local-floor');
-  for(const button of [...buttons,...offers])button.hidden=false;
   const ray=new THREE.Raycaster(),rotation=new THREE.Matrix4();
   for(let index=0;index<2;index++) {
     const controller=renderer.xr.getController(index);walk.rig.add(controller);
@@ -241,19 +264,31 @@ export async function enableImmersiveWalk(renderer, scene, walk, meshGroups, onS
       if(normal.y>.7)walk.teleportXR(hit.point);
     });
   }
-  const open=async()=>{
-    try {
-      if(renderer.xr.isPresenting){await renderer.xr.getSession().end();return;}
-      // Walking first, then the headset: the visitor is put inside the house
-      // and on their feet before the session opens, so the first thing the
-      // visor shows is the room they are standing in rather than the model
-      // seen from outside.
-      onStart();
-      const session=await navigator.xr.requestSession('immersive-vr',{optionalFeatures:['local-floor','bounded-floor']});
-      await renderer.xr.setSession(session);
-    } catch(error) {label('retryVR');console.warn('XR session could not start',error);}
+  // Kumandalar gözlükte görünsün (standart profil modelleri; yüklenemezse ışın çizgileri yeter).
+  import('three/examples/jsm/webxr/XRControllerModelFactory.js').then(({XRControllerModelFactory})=>{
+    const factory=new XRControllerModelFactory();
+    for(let index=0;index<2;index++){
+      const grip=renderer.xr.getControllerGrip(index);grip.userData.aoExcluded=true;
+      grip.add(factory.createControllerModel(grip));walk.rig.add(grip);
+    }
+  }).catch(error=>console.warn('XR controller models unavailable',error));
+  const open=()=>{
+    if(renderer.xr.isPresenting){renderer.xr.getSession().end();return true;}
+    let pending;
+    // İstek önce, senkron: kullanıcı etkileşimi bu çağrıda tüketilir.
+    try{pending=navigator.xr.requestSession('immersive-vr',{optionalFeatures:['local-floor','bounded-floor']});}
+    catch(error){label('retryVR');console.warn('XR session could not start',error);return false;}
+    // Walking first, then the headset: the visitor is put inside the house
+    // and on their feet before the session opens, so the first thing the
+    // visor shows is the room they are standing in rather than the model
+    // seen from outside.
+    onStart();
+    pending.then(session=>renderer.xr.setSession(session))
+      .catch(error=>{label('retryVR');console.warn('XR session could not start',error);});
+    return true;
   };
-  for(const button of [...buttons,...offers])button.onclick=open;
+  immersive.start=open;
+  for(const button of [...buttons,...offers]){button.onclick=open;button.hidden=false;button.disabled=false;}
   renderer.xr.addEventListener('sessionstart',()=>{walk.startXR();label('exitVR');});
   renderer.xr.addEventListener('sessionend',()=>{walk.endXR();label('enterVR');onEnd();});
 }

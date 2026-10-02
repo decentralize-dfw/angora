@@ -43,6 +43,13 @@ export function detectTier({
 
 // Browser wrapper: gathers the real signals. The only two places the whole
 // codebase may consult pointer-coarseness or URL for QUALITY are here.
+// 02.10 ürün sahibi ("VR'dan açtım ... desktop hali de kullanabileyim"): gözlük tarayıcıları (Meta Quest
+// Browser, Pico, Wolvic) 2D sayfada kumandayı fare gibi kullanır ama bazıları kendini dokunmatik bildirir; telefon
+// sürümüne düşmesin, masaüstü sürüm açılsın. Kalite/teslim kararları dokunmatikliği yalnız bundan okur.
+export const XR_HEADSET = typeof navigator !== 'undefined' && /OculusBrowser|Quest|PicoBrowser|Pico Neo|Wolvic|VR Safari/i.test(navigator.userAgent || '');
+export function coarsePointer() {
+  return !XR_HEADSET && typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches;
+}
 export function detectTierFromEnvironment({search = '', probe = null} = {}) {
   const forced = new URLSearchParams(search).get('quality');
   let stored = null;
@@ -50,7 +57,7 @@ export function detectTierFromEnvironment({search = '', probe = null} = {}) {
   return detectTier({
     forced,
     stored: stored === 'auto' ? null : stored,
-    coarse: typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches,
+    coarse: coarsePointer(),
     deviceMemory: typeof navigator !== 'undefined' ? navigator.deviceMemory : undefined,
     hardwareConcurrency: typeof navigator !== 'undefined' ? navigator.hardwareConcurrency : undefined,
     maxSamples: probe?.maxSamples ?? 4,

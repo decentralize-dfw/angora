@@ -17,7 +17,7 @@ import {createTextureLoader} from './texture-loader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { createLighting, probeMassingFrom } from './lighting.js';
 import { createAnnotations } from './annotations.js';
-import { InteriorWalk, enableImmersiveWalk } from './walk.js';
+import { InteriorWalk, enableImmersiveWalk, offerImmersive, startImmersive } from './walk.js';
 import {CameraFlight} from './camera-flight.js';
 import {frameInsets} from './frame-insets.js';
 import {clockLabel,solarPosition} from './daylight.js';
@@ -56,7 +56,7 @@ import {createDeviceQA} from './device-qa.js';
 import {readShareState,shareSearch} from './share-state.js';
 import {referenceProfile} from './render-profile.js';
 import {FEATURES} from './features.js';
-import {createQualityProfile,detectTierFromEnvironment} from './quality-profile.js';
+import {createQualityProfile,detectTierFromEnvironment,coarsePointer,XR_HEADSET} from './quality-profile.js';
 import { sectionHeight, smoothStep, createWallCaps, createSoilCap, createNativeSoilSection, SOIL_CUT_HEIGHT } from './section.js';
 import { createWalkLocator } from './walk-locator.js';
 import {patchWalkSurface} from './walk-surface.js';
@@ -69,7 +69,7 @@ const publicRoot = new URL(import.meta.env.BASE_URL, document.baseURI);
 const pages = import.meta.env.MODE === 'pages';
 const requestedProfile=new URLSearchParams(location.search).get('profile');
 const requestedFeatures=new URLSearchParams(location.search).get('features');
-const deliveryProfile=['desktop','mobile'].includes(requestedProfile)?requestedProfile:matchMedia('(pointer: coarse)').matches?'mobile':'desktop';
+const deliveryProfile=['desktop','mobile'].includes(requestedProfile)?requestedProfile:coarsePointer()?'mobile':'desktop';
 // Tur 10: masaüstü tam set, telefon 256 px KTX2 kopyası (villaModelV3Mobile ile aynı şart)
 const tur10Active=!!(FEATURES.tur10&&FEATURES.villaModelV3&&(deliveryProfile==='desktop'||FEATURES.villaModelV3Mobile));
 const modelRoot = new URL(import.meta.env.VITE_MODEL_ROOT || (pages ? 'build/web/batched/' : 'models/batched/')+deliveryProfile+'/', publicRoot);
@@ -98,7 +98,7 @@ const LITE = (() => {
   const forced = new URLSearchParams(location.search).get('model');
   if (forced === 'lite') return true;
   if (forced === 'full') return false;
-  return (matchMedia('(pointer: coarse)').matches && Math.min(screen.width, screen.height) <= 820)
+  return (coarsePointer() && Math.min(screen.width, screen.height) <= 820)
     || (navigator.deviceMemory !== undefined && navigator.deviceMemory <= 4);
 })();
 let regionMap = null;   // built on first Bölge visit; a map layer, not a scene
@@ -473,7 +473,7 @@ function frame(initial=false,keep=false) {
   const center=box.getCenter(new THREE.Vector3());center.y=floor?[0,3.0996,6.3714,9.4705][Number(selected[1])]:2;
   let size=box.getSize(new THREE.Vector3());
   if(selected==='building'){
-    const compact=matchMedia('(pointer: coarse)').matches||aspect<0.9;
+    const compact=coarsePointer()||aspect<0.9;
     if(compact&&gardenBox){
       const plot=buildingBox.clone().union(gardenBox);
       size.set(2*Math.max(center.x-plot.min.x,plot.max.x-center.x),size.y,
@@ -797,6 +797,8 @@ function setup() {
   // the composer's SMAA owns it and canvas MSAA would be paying twice.
   try {
     renderer = new THREE.WebGLRenderer({antialias:quality.value.antialiasing==='canvas-msaa', alpha:false, powerPreference:'high-performance'});
+    // VR desteği varsa düğmeler yükleme beklenmeden görünür (model hazır olana kadar pasif).
+    offerImmersive();
   } catch (error) {
     // No 3D is not no product: the boot screen keeps the verified facts,
     // the listing route and an honest explanation on screen.
@@ -854,7 +856,7 @@ function setup() {
   // forced profile, which re-ties a z-fight at the eaves junction (measured:
   // 26 px on the mobile C07 gate frame). Loading must not move pixels.
   const draco = new DRACOLoader(); draco.setDecoderPath(decoderRoot.href);
-  const budget=assetLoadBudget({compact:matchMedia('(pointer: coarse)').matches,cores:navigator.hardwareConcurrency});
+  const budget=assetLoadBudget({compact:coarsePointer(),cores:navigator.hardwareConcurrency});
   draco.setWorkerLimit(budget.draco);
   loader = new GLTFLoader(); loader.setDRACOLoader(draco);
   loader.setKTX2Loader(createTextureLoader(renderer,budget.textures));
@@ -1597,7 +1599,8 @@ function bindPegman(){
       if(first&&first.point.y>[0,3.0996,6.3714,9.4705][Number(selected[1])]+.6&&first.point.y<clip.constant)at=null;
     }
     ghost?.remove();ghost=null;
-    if(at)enterWalk(null,at);
+    // Gözlükte (Quest vb.) adam bırakılınca içeride doğulur ve aynı jestte VR oturumu açılır.
+    if(at){enterWalk(null,at);if(XR_HEADSET&&walk?.active)startImmersive();}
   };
   button.addEventListener('pointerdown',event=>{
     if(event.button!==0)return;
@@ -1607,7 +1610,7 @@ function bindPegman(){
     addEventListener('pointermove',move);addEventListener('pointerup',end);addEventListener('pointercancel',end);
   });
   // Klavye: Enter/Space katın ortasında başlatır.
-  button.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();enterWalk();}});
+  button.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();enterWalk();if(XR_HEADSET&&walk?.active)startImmersive();}});
 }
 // at: [x,z] - içeride gez adamının bırakıldığı nokta (dünya koordinatı);
 // verilmezse eskisi gibi katın ortası.
@@ -2627,7 +2630,7 @@ function bindInterface() {
     if (!photosVisible) photoViewer?.hide();
     invalidate();
   };
-  $('#enter-walk').onclick=()=>enterWalk();$('#exit-walk').onclick=()=>exitWalk();
+  $('#enter-walk').onclick=()=>{enterWalk();if(XR_HEADSET&&walk?.active)startImmersive();};$('#exit-walk').onclick=()=>exitWalk();
   bindPegman();
   $('#walk-room').onchange=event=>travelRoom(event.target.value);
   $('#toggle-plan').onclick=()=>{planMode=!planMode;$('#toggle-plan').setAttribute('aria-pressed',planMode);$('#toggle-plan').textContent=planMode?'3D':'Plan';mode(planMode);quality?.applyView(selected,{plan:planMode});frame(false);};

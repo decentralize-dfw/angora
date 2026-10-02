@@ -42,5 +42,5 @@ test('The viewer selects the mobile manifest by device and honours overrides', (
   const source = readFileSync(new URL('../src/main.js', import.meta.url), 'utf8');
   assert.match(source, /manifest-mobile\.json/);
   assert.match(source, /model.*full|forcedModel/s);
-  assert.match(source, /pointer: coarse/);
+  assert.match(source, /pointer: coarse|coarsePointer\(\)/);   // dokunmatik kararı quality-profile.js coarsePointer() (gözlük hariç)
 });
