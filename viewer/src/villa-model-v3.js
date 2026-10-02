@@ -402,8 +402,10 @@ export function relightTur10(model) {
 // aynı dokuyu ve aynı pişmiş ışığı okur (canlı güneş/gölge değişmez).
 // Tavanda toplanmış garaj kapısı (beyaz panel) içeride, dışarıdan bakınca açıklığın tepesinde kahve
 // bant gibi görünüyordu (lightmap-dis onu dış yüz sanıp gök payıyla karartmıştı): kendi malzemesi
-// kalır, ışığı garaj tavanının ortasındaki tek noktadan (aynı zemin atlası) okunur: üçgen üçgen eşleme
-// içeriden bakınca panelde çapraz şeritler bırakıyordu (02.10 "garaj kapısı bozulmuş").
+// kalır, ışığı hemen üstündeki garaj tavanından (aynı zemin atlası) okunur. Büyük üçgenlerle üçgen üçgen eşleme
+// içeriden bakınca panelde çapraz şeritler bırakıyordu (02.10 "garaj kapısı bozulmuş"); tek nokta ise lambanın
+// altına düşünce kapı ışık saçıyor gibiydi, ortadan alınınca çamur rengi: panel küçük üçgenlere bölünür, her
+// köşe üstündeki tavanın ışığını okur (tavanla aynı geçiş).
 const TUR10_BORROW = [
   // 01.10 merdiven (A, sağ üst işaret): K1_1 kolunun tavana değdiği uçta tavan plağında 10 x 20 cm cep
   // (taban y 5,97, tavan altı 5,891). Tabanı tavan malzemesine çevrilmişti ama 8 cm içeride kaldığı için
@@ -487,7 +489,7 @@ const TUR10_BORROW = [
     source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [3.12, 9.38, -3.6], max: [3.16, 9.87, -0.45], facing: [-1, 0, 0], minArea: 0.015}, material: 'target'},
   {mats: /^Simple White Wall$/, min: [3.12, 9.38, -1.0], max: [3.16, 10.25, -0.45], notFacing: [1, 0, 0], constant: [3.14, 9.62, -0.75], noShadow: true,
     source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [3.12, 9.38, -3.6], max: [3.16, 9.87, -0.45], facing: [-1, 0, 0], minArea: 0.015}, material: 'target'},
-  {mats: /^WHT\.001$/, min: [4.40, 5.40, -2.30], max: [7.26, 5.75, 0.66], constant: [5.8, 5.89, -3.5],
+  {mats: /^WHT\.001$/, min: [4.40, 5.40, -2.30], max: [7.26, 5.75, 0.66], subdivide: 12,
     source: {mat: /^ceiling\.001$/, atlas: 'zemin', min: [4.0, 5.88, -6.0], max: [7.4, 5.90, 1.2], facing: [0, -1, 0]}, material: 'target'},
 ];
 export function borrowTur10(model) {
