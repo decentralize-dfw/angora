@@ -5,6 +5,9 @@
           tavana düşen koyu lekesi)
   yumusat: kutudaki tekseller dünya uzayında r yarıçaplı ortalama ile yumuşatılır (aynı düzlem).
           (merdivenin duvara değdiği basamaklı temas gölgesi: duvar yatık açıdan görülünce noktalı şerit)
+  koyu:   kutudaki tekseller içinden yalnız çevresinin (r yarıçap, aynı düzlem) ortancasının `oran` katından
+          koyu olanlar, çevredeki koyu olmayan tekselların ortalamasıyla değiştirilir; genel ışık değişimi kalır.
+          (çatı diz duvarındaki parça kenarı boyunca kesik kesik koyu noktalar)
 
     python lightmap-yerel.py <lmtris.json (node'lu)> <kaynak_dir> <hedef_dir>
 """
@@ -33,6 +36,17 @@ KURALLAR = [
     # altındaki duvarla doldurulur.
     {'ad': 'doseme-hizasi', 'tur': 'sil', 'atlas': 'duvar', 'normal': [0, 0, 1], 'duzlem': -3.097,
      'kutu': [[0.75, 5.80, -3.10], [4.10, 6.48, -3.09]], 'yaricap': 0.5},
+    # 02.10 çatı oturma alanı (ürün sahibi ekran görüntüsü, "duvarda noktalar"): kuzey diz duvarı (z -0,507, -z'ye
+    # bakar) üçgen kenarı (x -2,50 y 9,47 -> x -1,99 y 11,48) boyunca 5-8 cm arayla koyu noktalar
+    {'ad': 'cati-diz-noktalar', 'tur': 'koyu', 'atlas': 'duvar', 'normal': [0, 0, -1], 'duzlem': -0.507,
+     'kutu': [[-2.65, 9.47, -0.51], [-1.90, 11.60, -0.50]], 'r': 0.12, 'oran': 0.85},
+    # 02.10 1. kat ebeveyn yatak odası tavanı (y 8,991, aşağı bakar): x -0,95 boyunca iki parça arasında ışık
+    # sıçraması, tavanda düz bir kırım/katlanma gibi görünüyordu (ürün sahibi ekran görüntüsü). Oda tavanı yumuşatılır.
+    {'ad': 'ebeveyn-tavan', 'tur': 'yumusat', 'atlas': 'zemin', 'normal': [0, -1, 0], 'duzlem': 8.991,
+     'kutu': [[-2.75, 8.98, -8.10], [0.20, 9.00, -3.95]], 'r': 0.45},
+    # aynı odanın batı ucundaki pilastr yüzü (x -5,032, +x'e bakar): düşey gri şeritler
+    {'ad': 'cati-pilastr', 'tur': 'koyu', 'atlas': 'duvar', 'normal': [1, 0, 0], 'duzlem': -5.032,
+     'kutu': [[-5.04, 9.47, -3.60], [-5.02, 11.20, -3.10]], 'r': 0.12, 'oran': 0.85},
 ]
 
 
@@ -61,6 +75,15 @@ def main(trisf, src, dst):
                 tree = cKDTree(pos[kay]); d, j = tree.query(pos[ic], k=8)
                 w = 1 / (d + 0.02) ** 2; w /= w.sum(1, keepdims=True)
                 out[ys[ic], xs[ic]] = (lin[ys[kay][j], xs[kay][j]] * w[..., None]).sum(1)
+            elif r['tur'] == 'koyu':
+                tree = cKDTree(pos); tgt = np.nonzero(ic)[0]; L = lin[ys, xs].max(1)
+                for s in range(0, len(tgt), 4000):
+                    part = tgt[s:s + 4000]
+                    for i, nb in zip(part, tree.query_ball_point(pos[part], r['r'])):
+                        nb = np.asarray(nb); med = np.median(L[nb])
+                        if L[i] >= r['oran'] ** 2 * med: continue   # lin = karesi: oran da karesiyle
+                        iyi = nb[L[nb] >= r['oran'] ** 2 * med]
+                        if len(iyi): out[ys[i], xs[i]] = lin[ys[iyi], xs[iyi]].mean(0)
             else:
                 tree = cKDTree(pos); tgt = np.nonzero(ic)[0]
                 for s in range(0, len(tgt), 4000):

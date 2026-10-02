@@ -193,6 +193,10 @@ const TUR10_DROP = [
   // boşluğu (z -2,13..-1,93) dolduran sıva parçaları (yarığın içindeki ince duvarlar ve üst kolun alt çizgisinde
   // boşluğu örten eğik kapak) atılır; alt kol (bodrum -> sahanlık) TUR10_STAIR_MOVES ile üst kolun duvarına uzar.
   {mat: /^Simple White Wall$/, min: [0.87, 0.02, -2.17], max: [3.25, 2.95, -1.88]},
+  // 02.10 ebeveyn yatak odası (ürün sahibi: tavan): tavan altıyla (y 8,991) aynı düzlemde YUKARI bakan cam lambri
+  // katmanı (EK_cam_lambri, döşeme boşluğunun içinde); tavan üçgeninin duvar ötesine taşan köşesinde (x -1,34,
+  // z -4,34) tavanla çakışıp duvar dibinde kahverengi kama gibi görünüyordu. Yukarıdan da görünmez (çatı döşemesi).
+  {mat: /^EK_cam_lambri$/, min: [-6.1, 8.985, -4.4], max: [-0.9, 8.997, 0.0], normal: [0, 1, 0]},
   // alt kolun eski iç kenarındaki eğik ceviz süpürgelik (z -2,119..-2,107): kol uzayınca basamakların üstünde ince koyu çizgi
   {mat: /^EK_M1_Sicak_ceviz_supurgelik$/, min: [0.5, 0.0, -2.125], max: [3.3, 1.8, -2.10]},
   // 02.10 çatı oturma alanı (ürün sahibi: "abuksubuk"): model-d1'in eklediği enine tavan kirişi (EK_D1_F10_tavan_kirisi,
@@ -217,6 +221,10 @@ const TUR10_RETILE = [
   // iç duvar boyasıyla (Simple White Wall, LM_duvar_002) bakıyordu; çevresi cephe sıvası. Garajın içine
   // bakmayan (away: garaj içi) yüzü sıvaya çevrilir; ışığı lightmap-dis.py ile zaten dış ölçekte.
   {mat: /^Simple White Wall$/, min: [4.2, 5.4, 1.1], max: [7.6, 6.05, 1.45], away: [5.8, -2.0], to: /^Stucco painted wall$/},
+  // 02.10 çatı katı (ürün sahibi: oturma alanındaki kapkara süpürgelik): çatıdaki süpürgelik parçaları WOODY-DARK
+  // (neredeyse siyah); evin geri kalanında ceviz (EK_M1_Sicak_ceviz_supurgelik). Çatı döşemesi (9,47) üstündeki
+  // 8,5 cm'lik şeritler bütün yüzleriyle cevize.
+  {mat: /^WOODY-DARK$/, min: [-5.1, 9.46, -3.85], max: [3.2, 9.56, -0.47], any: true, to: /^EK_M1_Sicak_ceviz_supurgelik$/},
 ];
 export function retileTur10(model) {
   model.updateMatrixWorld(true);
@@ -238,7 +246,7 @@ export function retileTur10(model) {
       n.subVectors(w[1], w[0]).cross(w[2].clone().sub(w[0])).normalize();
       const inside = w.every(v => v.x >= rule.min[0] && v.x <= rule.max[0] && v.y >= rule.min[1] && v.y <= rule.max[1] && v.z >= rule.min[2] && v.z <= rule.max[2]);
       const cx = (w[0].x + w[1].x + w[2].x) / 3, cz = (w[0].z + w[1].z + w[2].z) / 3;
-      const match = rule.away ? Math.abs(n.y) < 0.3 && n.x * (rule.away[0] - cx) + n.z * (rule.away[1] - cz) < 0 : Math.abs(n.dot(want)) > 0.98;
+      const match = rule.any ? true : rule.away ? Math.abs(n.y) < 0.3 && n.x * (rule.away[0] - cx) + n.z * (rule.away[1] - cz) < 0 : Math.abs(n.dot(want)) > 0.98;
       if (inside && match) take.push(ids); else keep.push(...ids);
     }
     if (!take.length) continue;
