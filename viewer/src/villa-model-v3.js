@@ -477,6 +477,12 @@ const TUR10_BORROW = [
   // için koyu (köşelerde gri sivri lekeler): aynı duvarın hemen altındaki görünen kısmının ışığıyla.
   // Uç yüzün tamamı (iki yanda ayrı) aynı yüzün düzlemin altında kalan geniş üçgeninin tek noktasını okur (tek ton);
   // canlı gölge almaz (beşiğin kırık köşe üçgenleri üstüne sivri gölge düşürüyordu).
+  // Aynı uçta merdiven boşluğuna değil arkaya (+x) bakan kıl üçgenler öndeki yüzün boşluğunu dolduruyor (atılınca
+  // dış cephe görünüyor); çift yüzlü malzemede gri sivri leke veriyorlardı: sarımları çevrilip aynı tek tonu alırlar.
+  {mats: /^Simple White Wall$/, min: [3.12, 9.80, -3.6], max: [3.16, 10.30, -3.0], notFacing: [-1, 0, 0], flip: true, constant: [3.14, 9.62, -3.42], noShadow: true,
+    source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [3.12, 9.38, -3.6], max: [3.16, 9.87, -0.45], facing: [-1, 0, 0], minArea: 0.015}, material: 'target'},
+  {mats: /^Simple White Wall$/, min: [3.12, 9.80, -1.0], max: [3.16, 10.30, -0.45], notFacing: [-1, 0, 0], flip: true, constant: [3.14, 9.62, -0.75], noShadow: true,
+    source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [3.12, 9.38, -3.6], max: [3.16, 9.87, -0.45], facing: [-1, 0, 0], minArea: 0.015}, material: 'target'},
   {mats: /^Simple White Wall$/, min: [3.12, 9.38, -3.6], max: [3.16, 10.25, -3.0], notFacing: [1, 0, 0], constant: [3.14, 9.62, -3.42], noShadow: true,
     source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [3.12, 9.38, -3.6], max: [3.16, 9.87, -0.45], facing: [-1, 0, 0], minArea: 0.015}, material: 'target'},
   {mats: /^Simple White Wall$/, min: [3.12, 9.38, -1.0], max: [3.16, 10.25, -0.45], notFacing: [1, 0, 0], constant: [3.14, 9.62, -0.75], noShadow: true,
@@ -759,7 +765,8 @@ export function dropTur10Faces(model) {
       a.fromBufferAttribute(pos, ia).applyMatrix4(o.matrixWorld); b.fromBufferAttribute(pos, ib).applyMatrix4(o.matrixWorld); c.fromBufferAttribute(pos, ic).applyMatrix4(o.matrixWorld);
       n.subVectors(b, a).cross(c.clone().sub(a)).normalize();
       const hit = rules.some(r => [a, b, c].every(v => v.x >= r.min[0] && v.x <= r.max[0] && v.y >= r.min[1] && v.y <= r.max[1] && v.z >= r.min[2] && v.z <= r.max[2])
-        && (!r.normal || Math.abs(Math.abs(n.dot(new THREE.Vector3(...r.normal))) - 1) < 0.02));
+        && (!r.normal || Math.abs(Math.abs(n.dot(new THREE.Vector3(...r.normal))) - 1) < 0.02)
+        && (!r.facing || n.dot(new THREE.Vector3(...r.facing)) > 0.98));
       if (hit) { dropped++; continue; }
       keep.push(ia, ib, ic);
     }
