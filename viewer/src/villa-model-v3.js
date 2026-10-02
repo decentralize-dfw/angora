@@ -586,8 +586,11 @@ export function borrowTur10(model) {
       // subdivide: büyük hedef üçgen n x n küçük üçgene bölünür (her köşe kaynağı ayrı okur; tek ışık değeri
       // üçgen boyunca doğrusal karışıp çapraz gölge vermesin). Doku UV'si köşelerden barisentrik.
       if (rule.subdivide && g.attributes.uv) {
-        const n0 = rule.subdivide, tuv = g.attributes.uv, out = [];
+        const tuv = g.attributes.uv, out = [];
         for (const {ids, w} of take) {
+          // bölme sayısı üçgenin boyuna göre (kenar başına ~25 cm; küçük üçgen bölünmez, üçgen sayısı şişmesin)
+          const L = Math.max(w[0].distanceTo(w[1]), w[1].distanceTo(w[2]), w[2].distanceTo(w[0]));
+          const n0 = Math.max(1, Math.min(rule.subdivide, Math.ceil(L / 0.25)));
           const t = ids.map(i => new THREE.Vector2().fromBufferAttribute(tuv, i));
           const at = (i, j) => { const a = 1 - (i + j) / n0, b = i / n0, c = j / n0;
             return {p: new THREE.Vector3().addScaledVector(w[0], a).addScaledVector(w[1], b).addScaledVector(w[2], c),
