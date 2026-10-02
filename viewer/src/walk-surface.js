@@ -146,6 +146,9 @@ export const WALK_PASSAGES = [
   // 02.10 (ürün sahibi: "dışarıya çıkamıyorum"): garaj kapısı açık (tavanda toplanmış) ama yürüme verisinde
   // kapı çizgisi (z 0,9..1,4) engel/boş kalmıştı. Açıklık garaj kotunda (3,10) açılır.
   {name: 'garaj-kapisi', floor: 1, x0: 4.50, x1: 7.15, z0: 0.85, z1: 1.50, refX: 5.8, refZ: 0.5},
+  // 02.10 (ürün sahibi: "collider'dan geçilmiyor"): bodrum salonu bahçe kapısı AÇIK kapı (kapalı kanatlar
+  // fixTur10GardenDoor ile kalktı; iki kanat bahçeye 90° açık, aralarında 0,9 m). Açıklık salon kotunda açılır.
+  {name: 'bodrum-bahce-kapisi', floor: 0, x0: -1.40, x1: -0.58, z0: -8.75, z1: -7.85, refX: -1.0, refZ: -7.5},
 ];
 // 3) Havuz: su yüzeyi (GARDEN-opt-v2 water: x -1,91..8,50, z -18,39..-13,53)
 //    yürünmez - bütün katmanlarda engel.

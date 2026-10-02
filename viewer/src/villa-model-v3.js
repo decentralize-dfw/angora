@@ -1163,6 +1163,75 @@ export function healTur10WoodUV(model) {
   for (const [o, g] of flat) if (g !== o.geometry) { o.geometry.dispose(); o.geometry = g; }
   return changed;
 }
+// 02.10 ürün sahibi (bodrum salonu bahçe kapısı: "üst kiriş beyaz nerde, niye iki kapı var, bir tane açık kapı
+// olacak kanatları olur"): açıklıkta (x -1,63..-0,33, z -8,34) iki takım kanat var: duvar düzleminde KAPALI duran iki
+// kahve kanat (kayıtları ve camlarıyla) ve bahçeye 90° AÇIK duran iki kanat. Kapalılar atılır; seçim bağlı parça
+// (ortak köşe) bütün olarak: parçanın kutusu kapalı kanat kutusunun içindeyse. Açık kanatların menteşe ucu da bu
+// kutuya değdiği için tek tek üçgen ölçütü kullanılmaz. Beyaz kasanın iki dikmesi var, üst parçası yok (girişteki
+// kapılarda var): dikmelerle aynı kesitte (6 cm) lento eklenir.
+const TUR10_GARDEN_DOOR = {
+  region: {min: [-1.75, -0.4, -8.85], max: [-0.2, 1.95, -8.05]},
+  closed: {min: [-1.53, -0.32, -8.36], max: [-0.40, 1.77, -8.245]},
+  lintel: {min: [-1.666, 1.84, -8.337], max: [-0.266, 1.90, -8.278]},
+};
+export function fixTur10GardenDoor(model) {
+  model.updateMatrixWorld(true);
+  const {region, closed, lintel} = TUR10_GARDEN_DOOR, rmin = new THREE.Vector3(...region.min), rmax = new THREE.Vector3(...region.max);
+  const tris = [], v = new THREE.Vector3(), whites = [];
+  model.traverse(o => {
+    if (!o.isMesh || Array.isArray(o.material)) return;
+    const name = o.material?.name;
+    if (name === 'WHT.001') whites.push(o);
+    if (name !== 'WOODY-DARK' && name !== 'glass') return;
+    const g = o.geometry, pos = g.attributes.position, n = g.index ? g.index.count : pos.count, at = k => g.index ? g.index.getX(k) : k;
+    for (let t = 0; t < n; t += 3) {
+      const w = [0, 1, 2].map(k => v.fromBufferAttribute(pos, at(t + k)).applyMatrix4(o.matrixWorld).clone());
+      const c = w[0].clone().add(w[1]).add(w[2]).divideScalar(3);
+      if (c.x < rmin.x || c.x > rmax.x || c.y < rmin.y || c.y > rmax.y || c.z < rmin.z || c.z > rmax.z) continue;
+      tris.push({o, t, w});
+    }
+  });
+  if (!tris.length) return 0;
+  // bağlı parçalar (1 mm'lik köşe anahtarı)
+  const key = p => `${Math.round(p.x * 1000)},${Math.round(p.y * 1000)},${Math.round(p.z * 1000)}`;
+  const parent = tris.map((_, i) => i), find = i => { while (parent[i] !== i) i = parent[i] = parent[parent[i]]; return i; };
+  const owner = new Map();
+  tris.forEach((tr, i) => tr.w.forEach(p => { const k = key(p); if (owner.has(k)) parent[find(i)] = find(owner.get(k)); else owner.set(k, i); }));
+  const box = new Map();
+  tris.forEach((tr, i) => { const r = find(i); if (!box.has(r)) box.set(r, new THREE.Box3()); tr.w.forEach(p => box.get(r).expandByPoint(p)); });
+  const inner = new THREE.Box3(new THREE.Vector3(...closed.min), new THREE.Vector3(...closed.max));
+  const flat = new Map(); let dropped = 0;
+  tris.forEach((tr, i) => {
+    if (!inner.containsBox(box.get(find(i)))) return;
+    if (!flat.has(tr.o)) { const g = tr.o.geometry; flat.set(tr.o, g.index ? g.toNonIndexed() : g); }
+    const pos = flat.get(tr.o).attributes.position;
+    for (let k = 1; k < 3; k++) pos.setXYZ(tr.t + k, pos.getX(tr.t), pos.getY(tr.t), pos.getZ(tr.t));
+    pos.needsUpdate = true; dropped++;
+  });
+  for (const [o, g] of flat) if (g !== o.geometry) { o.geometry.dispose(); o.geometry = g; }
+  // lento: kasa dikmesinin malzemesi; ışık UV'si dikmenin üst ucundan sabit
+  // kasa dikmesi: dikmenin üst ucuna (x -0,3, y 1,9, z -8,3) en yakın köşesi olan WHT.001 parçası
+  const target = new THREE.Vector3(-0.3, 1.9, -8.3);
+  let post = null, uv1 = null, bd = 0.05;
+  for (const o of whites) {
+    const pp = o.geometry.attributes.position, pu = o.geometry.attributes.uv1;
+    for (let i = 0; i < pp.count; i++) {
+      const d = v.fromBufferAttribute(pp, i).applyMatrix4(o.matrixWorld).distanceToSquared(target);
+      if (d < bd) { bd = d; post = o; uv1 = pu ? [pu.getX(i), pu.getY(i)] : null; }
+    }
+  }
+  if (post) {
+    const bx = new THREE.Box3(new THREE.Vector3(...lintel.min), new THREE.Vector3(...lintel.max)), size = bx.getSize(new THREE.Vector3()), mid = bx.getCenter(new THREE.Vector3());
+    const geo = new THREE.BoxGeometry(size.x, size.y, size.z);
+    if (uv1) { const a = new Float32Array(geo.attributes.position.count * 2); for (let i = 0; i < a.length; i += 2) { a[i] = uv1[0]; a[i + 1] = uv1[1]; } geo.setAttribute('uv1', new THREE.BufferAttribute(a, 2)); }
+    const mesh = new THREE.Mesh(geo, post.material); mesh.name = post.name + '_lento';
+    mesh.userData = JSON.parse(JSON.stringify(post.userData));
+    mesh.applyMatrix4(new THREE.Matrix4().copy(post.parent.matrixWorld).invert().multiply(new THREE.Matrix4().makeTranslation(mid.x, mid.y, mid.z)));
+    mesh.castShadow = post.castShadow; mesh.receiveShadow = post.receiveShadow;
+    post.parent.add(mesh); dropped += 12;
+  }
+  return dropped;
+}
 // süpürgelikle aynı malzeme ve kesit (8,5 cm yükseklik, 3,4 cm kalınlık: çatıdaki komşu parça gibi). [kat, [x0, z0], [x1, z1], içeri normal [nx, nz], döşeme y]
 const TUR10_BASEBOARDS = [
   // 02.10: komşu ceviz parça x -1,329'da başlıyor ve duvardan 3,4 cm önde; ek parça ona kadar, aynı kalınlıkta

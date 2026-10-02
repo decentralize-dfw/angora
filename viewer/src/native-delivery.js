@@ -3,7 +3,7 @@ import {prepareBakedLighting} from './baked-lighting.js';
 import {restoreBatchSurface} from './batch-surface-response.js';
 import {prepareBatchedMaterial,stripFixtureLoops} from './batched-material.js';
 import {neutraliseTransmission} from './material-response.js';
-import {repairUntexturedWood,settleTur10Overlays,dropTur10Faces,retileTur10,relightTur10,borrowTur10,addTur10Handrails,regableTur10Attic,regableTur10AtticWest,addTur10GarageDoorDetail,addTur10Baseboards,addTur10FacadeInfill,healTur10WoodUV,dropTur10InteriorFaces,rebuildTur10Curtains} from './villa-model-v3.js';
+import {repairUntexturedWood,settleTur10Overlays,dropTur10Faces,retileTur10,relightTur10,borrowTur10,addTur10Handrails,regableTur10Attic,regableTur10AtticWest,addTur10GarageDoorDetail,addTur10Baseboards,addTur10FacadeInfill,healTur10WoodUV,fixTur10GardenDoor,dropTur10InteriorFaces,rebuildTur10Curtains} from './villa-model-v3.js';
 import {applyMaterialResponse} from './material-response-v2.js';
 import {chunkModelInPlace} from './context-plants-chunks.js';
 import {applyPlantVariation} from './plant-variation.js';
@@ -130,6 +130,8 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
       // üst üste binen kepenk katmanları: her tur bir katmanı daha eşler, yakınsayana kadar (2 tur yetiyor)
       let healed=0;for(let i=0;i<4;i++){const n=healTur10WoodUV(model);healed+=n;if(!n)break;}
       if(healed)console.info(`Tur 10 kepenk dokusu: ${healed} üçgen eşine uyduruldu (${name})`);
+      const gardenDoor=fixTur10GardenDoor(model);
+      if(gardenDoor)console.info(`Tur 10 bodrum bahçe kapısı: kapalı kanatlar atıldı, lento eklendi (${gardenDoor}) (${name})`);
       if(infill)console.info(`Tur 10 cephe merdivene indi: ${infill} yüzey (${name})`);
       if(boards)console.info(`Tur 10 eksik süpürgelik: ${boards} parça (${name})`);
       if(door)console.info(`Tur 10 garaj kapısı dokusu: ${door} parça (${name})`);
