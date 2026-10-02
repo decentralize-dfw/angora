@@ -943,16 +943,16 @@ export function healTur10WoodUV(model) {
     for (let t = 0; t < n; t += 3) {
       const ids = [at(t), at(t + 1), at(t + 2)], w = ids.map(i => new THREE.Vector3().fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld));
       const tri = new THREE.Triangle(...w), A = tri.getArea(), nn = tri.getNormal(new THREE.Vector3());
-      if (A < 0.1 || Math.abs(nn.y) > 0.1) continue;
+      if (A < 0.02 || Math.abs(nn.y) > 0.1) continue;   // küçük üçgenler yalnız küme büyütmede (aşağıda big)
       const u = ids.map(i => new THREE.Vector2().fromBufferAttribute(uv, i));
       const ua = Math.abs((u[1].x - u[0].x) * (u[2].y - u[0].y) - (u[2].x - u[0].x) * (u[1].y - u[0].y)) / 2;
       if (ua < 1e-9) continue;
-      tris.push({o, t, w, u, n: nn, dens: Math.sqrt(ua / A)});
+      tris.push({o, t, w, u, n: nn, dens: Math.sqrt(ua / A), big: A >= 0.1});
     }
   });
   // 1 cm ızgara: kepengin iki katmanında köşeler 1 mm kaymış
   const key = v => `${Math.round(v.x * 100)},${Math.round(v.y * 100)},${Math.round(v.z * 100)}`, edges = new Map();
-  tris.forEach((tr, i) => { for (let k = 0; k < 3; k++) { const a = key(tr.w[k]), b = key(tr.w[(k + 1) % 3]), e = a < b ? a + '|' + b : b + '|' + a; if (!edges.has(e)) edges.set(e, []); edges.get(e).push(i); } });
+  tris.forEach((tr, i) => { if (!tr.big) return; for (let k = 0; k < 3; k++) { const a = key(tr.w[k]), b = key(tr.w[(k + 1) % 3]), e = a < b ? a + '|' + b : b + '|' + a; if (!edges.has(e)) edges.set(e, []); edges.get(e).push(i); } });
   const fix = new Map();   // seyrek üçgen -> yoğun eşi
   for (const list of edges.values()) for (const i of list) for (const j of list) {
     if (i >= j) continue;
@@ -972,12 +972,12 @@ export function healTur10WoodUV(model) {
   const size = x => x.o.geometry.index ? x.o.geometry.index.count : x.o.geometry.attributes.position.count;
   const span = (tr, h) => { const ys = tr.w.map(v => v.y), hs = tr.w.map(v => v.dot(h)); return [Math.min(...ys), Math.max(...ys), Math.min(...hs), Math.max(...hs)]; };
   for (const a of tris) {
-    if (fix.has(a)) continue;
+    if (fix.has(a) || !a.big) continue;
     const h = new THREE.Vector3(0, 1, 0).cross(a.n).normalize(), sa = span(a, h), area = (sa[1] - sa[0]) * (sa[3] - sa[2]);
     if (area <= 0) continue;
     let best = null, bestO = 0.3;
     for (const b of tris) {
-      if (b.o.material === a.o.material || size(b) <= size(a) || Math.abs(a.n.dot(b.n)) < 0.995) continue;
+      if (!b.big || b.o.material === a.o.material || size(b) <= size(a) || Math.abs(a.n.dot(b.n)) < 0.995) continue;
       if (Math.abs(b.n.dot(a.w[0]) - b.n.dot(b.w[0])) > 0.03) continue;
       const sb = span(b, h), o = Math.max(0, Math.min(sa[1], sb[1]) - Math.max(sa[0], sb[0])) * Math.max(0, Math.min(sa[3], sb[3]) - Math.max(sa[2], sb[2])) / area;
       if (o > bestO) { bestO = o; best = b; }

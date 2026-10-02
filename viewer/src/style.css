@@ -242,7 +242,9 @@ h1 strong{font-weight:700}
 
 /* ------------------------------------------------------ scene overlays */
 .annotation-overlay,.hotspot-overlay{position:absolute;inset:0;pointer-events:none;z-index:5;overflow:hidden}
-.room-label{position:absolute;transform:translate(-50%,-50%) scale(var(--label-fit,1));padding:0;background:none;border:0;box-shadow:none;text-align:left;line-height:1.25;pointer-events:auto;max-width:150px;min-width:44px;min-height:44px;color:#1c2622;display:grid;place-items:center}
+/* 02.10 ürün sahibi: oda adları her zaman okunur - fotoğraf işaretlerinin (z 6) üstünde; ad tıklamayı geçirir, altındaki işaret tıklanır */
+.annotation-overlay{z-index:7}
+.room-label{position:absolute;transform:translate(-50%,-50%) scale(var(--label-fit,1));padding:0;background:none;border:0;box-shadow:none;text-align:left;line-height:1.25;pointer-events:none;max-width:150px;min-width:44px;min-height:44px;color:#1c2622;display:grid;place-items:center}
 /* A white glow over a walnut floor is not contrast, it is haze - the names
    and their m² were being read off the wood rather than off anything. The tag
    sits on a plate instead, and annotations.js scales that plate until it fits
