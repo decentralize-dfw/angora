@@ -452,6 +452,10 @@ const TUR10_BORROW = [
   // aşağı bakan tavan üçgeninin ışığını okur.
   {mats: /^ceiling\.001$/, min: [-6.5, 2.615, -9.0], max: [4.2, 2.625, 3.0], notFacing: [0, -1, 0],
     source: {mat: /^ceiling\.001$/, atlas: 'zemin', min: [-6.5, 2.615, -9.0], max: [4.2, 2.625, 3.0], facing: [0, -1, 0], minArea: 0.2}, material: 'target'},
+  // 02.10 bodrum sahanlığının doğu uç duvarı: öne alınan arka kabuğun (TUR10_STAIR_MOVES, x 4,0905) pişmiş ışığı
+  // duvarın arkasından (gri dikdörtgen); hemen üstündeki görünen duvarın (x 4,088, y 3,1..5,9) ışığı sürdürülür.
+  {mats: /^Simple White Wall$/, min: [4.085, -0.45, -3.135], max: [4.095, 3.11, -0.92], notFacing: [1, 0, 0],
+    source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [4.080, 3.10, -3.135], max: [4.092, 5.90, -0.92], facing: [-1, 0, 0], minArea: 0.05}, material: 'target'},
   // 02.10 bodrum salonu kolonu (x -1,212..-0,951, z -3,758..-3,16; ürün sahibi: "kolon başı"): iç içe iki kabuk,
   // pişirmede görünen yüzlerin üçgenleri arasında ışık sıçraması (yan yüzde üstte basamak gibi kırık, önde yatay
   // çizgi). Görünen üç yüz (ön z -3,757, yanlar x -1,212 / -0,952) kendi ortasındaki tek noktanın ışığıyla.
