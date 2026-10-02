@@ -833,26 +833,33 @@ export function regableTur10AtticWest(model) {
   if (!home) return 0;
   const inv = new THREE.Matrix4().copy(home.matrixWorld).invert(), nm = new THREE.Matrix3().getNormalMatrix(home.matrixWorld).invert();
   const q = new THREE.Vector3(), bary = new THREE.Vector3();
-  const sample = (p, n) => {
+  // Üçgenin üç köşesi TEK kaynak üçgenden örneklenir (köşe başına ayrı kaynak, köşeleri ışık haritasının farklı
+  // adalarına düşürüp üçgeni atlas boyunca geriyordu: krom gibi çizgili tavan). Doku (uv) kaynağın düzlemine
+  // izdüşümle afin uzatılır; ışık (uv1) aynı kaynak üçgenin içine kenardan 8 cm içeri kıstırılır, adadan çıkmaz.
+  const pickSrc = (m, n) => {
     let best = null, bd = Infinity;
-    for (const s of src) {
-      if (s.n.dot(n) < 0.7) continue;
-      s.tri.closestPointToPoint(p, q); const d = q.distanceToSquared(p); if (d < bd) { bd = d; best = s; }
-    }
-    if (!best) for (const s of src) { s.tri.closestPointToPoint(p, q); const d = q.distanceToSquared(p); if (d < bd) { bd = d; best = s; } }
+    for (const s of src) { if (s.n.dot(n) < 0.7) continue; s.tri.closestPointToPoint(m, q); const d = q.distanceToSquared(m); if (d < bd) { bd = d; best = s; } }
+    if (!best) for (const s of src) { s.tri.closestPointToPoint(m, q); const d = q.distanceToSquared(m); if (d < bd) { bd = d; best = s; } }
+    return best;
+  };
+  const plane = new THREE.Plane();
+  const mix = (arr, b) => new THREE.Vector2().addScaledVector(arr[0], b.x).addScaledVector(arr[1], b.y).addScaledVector(arr[2], b.z);
+  const sample = (best, p) => {
+    best.tri.getPlane(plane); plane.projectPoint(p, q); best.tri.getBarycoord(q, bary);
+    const uv = mix(best.uv, bary);
     best.tri.closestPointToPoint(p, q);
     const toMid = best.mid.clone().sub(q), L = toMid.length(); if (L > 1e-6) q.addScaledVector(toMid, Math.min(0.08, L * 0.9) / L);
     best.tri.getBarycoord(q, bary);
-    const mix = arr => new THREE.Vector2().addScaledVector(arr[0], bary.x).addScaledVector(arr[1], bary.y).addScaledVector(arr[2], bary.z);
-    return [mix(best.uv), mix(best.uv1)];
+    return [uv, mix(best.uv1, bary)];
   };
   const A = ATTIC_WEST_ADD, P = [], N = [], U = [], U1 = [];
   for (let t = 0; t < A.length; t += 9) {
     const v = [0, 1, 2].map(k => new THREE.Vector3(A[t + 3 * k], A[t + 3 * k + 1], A[t + 3 * k + 2]));
     const n = new THREE.Vector3().subVectors(v[1], v[0]).cross(new THREE.Vector3().subVectors(v[2], v[0])).normalize();
     const nl = n.clone().applyMatrix3(nm).normalize();
+    const best = pickSrc(v[0].clone().add(v[1]).add(v[2]).divideScalar(3), n);
     for (const p of v) {
-      const [uv, uv1] = sample(p, n), l = p.clone().applyMatrix4(inv);
+      const [uv, uv1] = sample(best, p), l = p.clone().applyMatrix4(inv);
       P.push(l.x, l.y, l.z); N.push(nl.x, nl.y, nl.z); U.push(uv.x, uv.y); U1.push(uv1.x, uv1.y);
     }
   }

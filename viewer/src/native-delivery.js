@@ -122,7 +122,7 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
       if(borrowed)console.info(`Tur 10 garaj cephesi tek renk: ${borrowed} üçgen cephe sıvası ışığına bağlandı (${name})`);
       const rails=addTur10Handrails(model);
       const gable=regableTur10Attic(model);
-      const gableWest=0; // regableTur10AtticWest(model) - 02.10 render'da doku/ışık UV'si bozuk çıktı, düzeltilene kadar kapalı
+      const gableWest=regableTur10AtticWest(model);
       if(gableWest)console.info(`Tur 10 çatı oturma alanı tavanı özgün: ${gableWest} üçgen (${name})`);
       const door=addTur10GarageDoorDetail(model);
       const boards=addTur10Baseboards(model);
