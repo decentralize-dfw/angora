@@ -106,12 +106,18 @@ export function layoutDimensionsAtMidpoint(items,{width,height,obstacles=[],gap=
     taken.push(circle(item.x,item.y,item.width,item.height));
     placed.push({...item,rect,anchorX:item.x,anchorY:item.y});
   }
+  // Ortası doluysa ölçü KENDİ ÇİZGİSİ üstünde sabit oranlarda yer arar (0,5 -> 0,35/0,65 -> 0,22/0,78). Oranlar çizginin
+  // dünya uçlarından: plan görünümünde kamera dönünce uzaklıklar, dolayısıyla seçilen yer de değişmez.
+  const along=[.5,.35,.65,.22,.78];
   for(const item of items.slice(fixedFrom)){
     if(!valid(item))continue;
-    const rect=rectAt(item,item.x,item.y),c=circle(item.x,item.y,item.width,item.height);
-    // ekrana sabit arayüz panelleri dikdörtgen (dönmez), fotoğraf işaretleri ve öbür etiketler daire
-    if(!inside(rect)||obstacles.some(o=>rectanglesOverlap(rect,o,gap))||pins.some(o=>hits(c,o))||taken.some(o=>hits(c,o)))continue;
-    taken.push(c);placed.push({...item,rect,anchorX:item.x,anchorY:item.y});
+    const spots=item.seg?along.map(t=>[item.seg[0]+(item.seg[2]-item.seg[0])*t,item.seg[1]+(item.seg[3]-item.seg[1])*t]):[[item.x,item.y]];
+    for(const [x,y] of spots){
+      const rect=rectAt(item,x,y),c=circle(x,y,item.width,item.height);
+      // ekrana sabit arayüz panelleri dikdörtgen (dönmez), fotoğraf işaretleri ve öbür etiketler daire
+      if(!inside(rect)||obstacles.some(o=>rectanglesOverlap(rect,o,gap))||pins.some(o=>hits(c,o))||taken.some(o=>hits(c,o)))continue;
+      taken.push(c);placed.push({...item,x,y,rect,anchorX:item.x,anchorY:item.y});break;
+    }
   }
   return placed;
 }

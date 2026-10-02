@@ -65,6 +65,10 @@ KURALLAR = [
     # aynı kirişin sırttaki yatay tavan şeridine (y 12,025, z -2,33..-1,73) düşen gölgesi: ss8'de tavan ortasında koyu bant
     {'ad': 'cati-kiris-sirt', 'tur': 'sil', 'atlas': 'zemin', 'normal': [0, -1, 0], 'duzlem': 12.025,
      'kutu': [[-3.05, 12.01, -2.34], [-2.33, 12.04, -1.71]], 'yaricap': 0.6},
+    # 02.10 ana giriş kapısı: cepheden 23 cm taşan eşik (sitede cephe yüzüne alındı) altındaki cephe şeridine
+    # (z 4,223, +z'ye bakar, y 2,70..3,10) koyu gölge pişmişti
+    {'ad': 'giris-esik-golgesi', 'tur': 'sil', 'atlas': 'cephe', 'normal': [0, 0, 1], 'duzlem': 4.223,
+     'kutu': [[1.85, 2.69, 4.21], [2.95, 3.11, 4.24]], 'yaricap': 0.6},
     # aynı odanın batı ucundaki pilastr yüzü (x -5,032, +x'e bakar): düşey gri şeritler
     {'ad': 'cati-pilastr', 'tur': 'koyu', 'atlas': 'duvar', 'normal': [1, 0, 0], 'duzlem': -5.032,
      'kutu': [[-5.04, 9.47, -3.60], [-5.02, 11.20, -3.10]], 'r': 0.12, 'oran': 0.85},

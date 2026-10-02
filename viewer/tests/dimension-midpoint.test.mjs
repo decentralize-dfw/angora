@@ -11,10 +11,10 @@ const dim=(x,y)=>({x,y,width:44,height:16,entry:{kind:'dimension'}});
 // ZORUNDADIR": ad önce yerleşir ve hiç gizlenmez; ölçü kendi çizgisi üstünde kayar, yer yoksa ölçü gizlenir.
 // 02.10 ürün sahibi: "ODA İSİMLERİ ... HEPSİNDE GÖZÜKMEK ZORUNDADIR" ve "bunlar sabit olmalı ölçüler ve oda isimleri
 // ... döndürdükçe dans ediyormuş gibi": ad yerinde ve hep görünür, ölçü çizgi ortasında; yer yoksa ölçü gizlenir.
-test('ad ve ölçü yerinden kaymaz; adla çakışan ölçü gizlenir', () => {
-  const items=[name(200,200),{...dim(200,205),seg:[100,205,300,205]},dim(400,300)];
+test('ad yerinden kaymaz; adla çakışan ölçü kendi çizgisinde sabit orana kayar, yer yoksa gizlenir', () => {
+  const items=[name(200,200),{...dim(200,205),seg:[0,205,400,205]},dim(400,300),dim(205,195)];
   const placed=layoutDimensionsAtMidpoint(items,{width:800,height:600,fixedFrom:1});
-  assert.deepEqual(placed.map(p=>[p.entry.kind,p.x,p.y]),[['name',200,200],['dimension',400,300]]);
+  assert.deepEqual(placed.map(p=>[p.entry.kind,Math.round(p.x),p.y]),[['name',200,200],['dimension',88,205],['dimension',400,300]]);
 });
 
 test('ölçü gösterme kararı kamera dönüşüyle değişmez', () => {

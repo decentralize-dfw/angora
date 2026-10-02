@@ -6,7 +6,10 @@ erişilmezlik kutbu (duvarlardan en uzak iç nokta, shapely polylabel): ad odan�
 / köşeye düşmez. Space'i olmayan odalar (balkonlar, bodrum WC) için rooms.json ölçülerinin kutusu ya da konumun
 çevresinde 1,2 m'lik kare.
 
-    python tools/cad/oda_sekilleri.py viewer/public/models/full/rooms.json viewer/src/room-shapes.js
+    python tools/cad/oda_sekilleri.py viewer/public/models/full/rooms.json viewer/src/room-shapes.js build/web/native-current/native-rooms.json
+
+Üçüncü dosya (sitenin yüklediği oda listesi) verilirse yalnız oradaki odalar bölünür: bodrumda rooms.json'daki B04
+sitede Salon'a katılmış; ayrı oda sayılınca Salon'un hücresi yarıya iniyor, ad salonun kıyısına düşüyordu.
 """
 import json, sys
 from shapely.geometry import Polygon, Point, box, MultiPoint
@@ -18,8 +21,29 @@ from shapely.ops import voronoi_diagram, polylabel
 SABIT = {'f1-Z10': (-1.97, -10.08, 0.0, -8.28), 'f2-110': (-1.95, -10.07, -0.14, -8.34)}
 
 
-def main(src, dst):
+def merkez(g):
+    """Etiket noktası: duvara uzaklığı en büyüğün %85'inden az olmayan iç noktalar içinden oda ağırlık merkezine en
+    yakını. Yalın polylabel uzun odada (bodrum salonu 8 x 4 m) uzun eksen boyunca herhangi bir noktayı seçip adı
+    kıyıya yakın bırakabiliyordu."""
+    import numpy as np
+    import shapely
+    best = polylabel(g, tolerance=0.01); top = g.exterior.distance(best)
+    x0, z0, x1, z1 = g.bounds
+    xs, zs = np.meshgrid(np.arange(x0, x1, 0.05), np.arange(z0, z1, 0.05))
+    xs, zs = xs.ravel(), zs.ravel(); ins = shapely.contains_xy(g, xs, zs)
+    xs, zs = xs[ins], zs[ins]
+    if not len(xs): return best
+    d = np.array([g.exterior.distance(Point(x, z)) for x, z in zip(xs, zs)])
+    k = d >= 0.85 * top
+    c = g.centroid; j = np.argmin((xs[k] - c.x) ** 2 + (zs[k] - c.y) ** 2)
+    return Point(xs[k][j], zs[k][j])
+
+
+def main(src, dst, runtime=None):
     d = json.load(open(src)); rooms = {r['id']: r for r in d['rooms']}; dims = {x['id']: x for x in d['dimensions']}
+    if runtime:
+        rt = json.load(open(runtime)); rooms = {r['id']: r for r in rt['rooms']}
+        dims.update({x['id']: x for x in rt.get('dimensions', [])})
     out = {}
     for s in d['spaces']:
         poly = Polygon(s['boundary_xz'], [h for h in s.get('holes_xz', [])]).buffer(0)
@@ -37,7 +61,8 @@ def main(src, dst):
                 if g.geom_type != 'Polygon': g = max(getattr(g, 'geoms', [g]), key=lambda q: q.area)
                 cells[m] = g
         for m, g in cells.items(): out[m] = g
-    for rid, b in SABIT.items(): out[rid] = box(*b)
+    for rid, b in SABIT.items():
+        if rid in rooms: out[rid] = box(*b)
     for rid, r in rooms.items():
         if rid in out: continue
         xs, zs = [], []
@@ -49,7 +74,7 @@ def main(src, dst):
     res = {}
     for rid, g in out.items():
         g = g.simplify(0.005)
-        a = polylabel(g, tolerance=0.01)
+        a = merkez(g)
         res[rid] = {'poly': [[round(x, 3), round(z, 3)] for x, z in list(g.exterior.coords)[:-1]], 'anchor': [round(a.x, 3), round(a.y, 3)],
                     'clearance': round(g.exterior.distance(a), 3)}
     with open(dst, 'w') as f:

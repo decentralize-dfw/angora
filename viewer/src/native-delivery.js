@@ -3,7 +3,7 @@ import {prepareBakedLighting} from './baked-lighting.js';
 import {restoreBatchSurface} from './batch-surface-response.js';
 import {prepareBatchedMaterial,stripFixtureLoops} from './batched-material.js';
 import {neutraliseTransmission} from './material-response.js';
-import {repairUntexturedWood,settleTur10Overlays,dropTur10Faces,retileTur10,relightTur10,borrowTur10,addTur10Handrails,regableTur10Attic,addTur10GarageDoorDetail,addTur10Baseboards,addTur10FacadeInfill,matteTur10Fabric,rebuildTur10Curtains} from './villa-model-v3.js';
+import {repairUntexturedWood,settleTur10Overlays,dropTur10Faces,retileTur10,relightTur10,borrowTur10,addTur10Handrails,regableTur10Attic,addTur10GarageDoorDetail,addTur10Baseboards,addTur10FacadeInfill,healTur10WoodUV,dropTur10InteriorFaces,rebuildTur10Curtains} from './villa-model-v3.js';
 import {applyMaterialResponse} from './material-response-v2.js';
 import {chunkModelInPlace} from './context-plants-chunks.js';
 import {applyPlantVariation} from './plant-variation.js';
@@ -105,8 +105,8 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
     }
     if(manifest.batched&&name==='interior'){
       const curtains=rebuildTur10Curtains(model);
-      const matte=matteTur10Fabric(model);
-      if(matte)console.info(`Tur 10 koltuk kumaşı mat: ${matte} malzeme (${name})`);
+      const brackets=dropTur10InteriorFaces(model);
+      if(brackets)console.info(`Tur 10 mobilya kesit yüzü: ${brackets} kaldırıldı (${name})`);
       if(curtains)console.info(`Tur 10 perdeler: ${curtains} kıvrımlı panel (${name})`);
     }
     if(!manifest.batched||name==='architecture'){
@@ -125,6 +125,8 @@ export function createNativeDelivery({manifest,root,scene,groups,load,prepare,re
       const door=addTur10GarageDoorDetail(model);
       const boards=addTur10Baseboards(model);
       const infill=addTur10FacadeInfill(model);
+      const healed=healTur10WoodUV(model);
+      if(healed)console.info(`Tur 10 kepenk dokusu: ${healed} üçgen eşine uyduruldu (${name})`);
       if(infill)console.info(`Tur 10 cephe merdivene indi: ${infill} yüzey (${name})`);
       if(boards)console.info(`Tur 10 eksik süpürgelik: ${boards} parça (${name})`);
       if(door)console.info(`Tur 10 garaj kapısı dokusu: ${door} parça (${name})`);
