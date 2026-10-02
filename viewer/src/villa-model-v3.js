@@ -448,13 +448,13 @@ const TUR10_BORROW = [
   {mats: /^Simple White Wall$/, min: [-2.75, 10.95, -3.60], max: [-2.35, 11.25, -3.54], constant: [-2.9, 10.6, -3.547],
     source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [-5.1, 9.3, -3.549], max: [-0.5, 12.3, -3.545], facing: [0, 0, 1], minArea: 0.3}, material: 'target'},
   // 02.10 bodrum tavanı (y 2,62; ürün sahibi: asansör yanında tavan köşesinde koyu kama): tavan düzleminde YUKARI
-  // bakan 8 üçgen (ters dönmüş); aşağıdan arka yüzü görünüyor, pişmiş ışığı döşeme boşluğunun karanlığı. En yakın
-  // aşağı bakan tavan üçgeninin ışığını okur.
-  {mats: /^ceiling\.001$/, min: [-6.5, 2.615, -9.0], max: [4.2, 2.625, 3.0], notFacing: [0, -1, 0],
+  // bakan 8 üçgen (ters dönmüş); tek yüzlü malzemede aşağıdan görünmüyor, içinden döşeme boşluğunun karanlığı
+  // görünüyordu. Sarımı çevrilir (aşağı bakar) ve en yakın aşağı bakan tavan üçgeninin ışığını okur.
+  {mats: /^ceiling\.001$/, min: [-6.5, 2.615, -9.0], max: [4.2, 2.625, 3.0], notFacing: [0, -1, 0], flip: true,
     source: {mat: /^ceiling\.001$/, atlas: 'zemin', min: [-6.5, 2.615, -9.0], max: [4.2, 2.625, 3.0], facing: [0, -1, 0], minArea: 0.2}, material: 'target'},
   // 02.10 bodrum sahanlığının doğu uç duvarı: öne alınan arka kabuğun (TUR10_STAIR_MOVES, x 4,0905) pişmiş ışığı
   // duvarın arkasından (gri dikdörtgen); hemen üstündeki görünen duvarın (x 4,088) alt kenarındaki tek tonu (köşe başına
-  okuma çapraz gölge veriyordu).
+  // okuma çapraz gölge veriyordu).
   {mats: /^Simple White Wall$/, min: [4.085, -0.45, -3.135], max: [4.095, 3.11, -0.92], notFacing: [1, 0, 0], constant: [4.088, 3.45, -2.0],
     source: {mat: /^Simple White Wall$/, atlas: 'duvar', min: [4.080, 3.10, -3.135], max: [4.092, 5.90, -0.92], facing: [-1, 0, 0], minArea: 0.05}, material: 'target'},
   // 02.10 bodrum salonu kolonu (x -1,212..-0,951, z -3,758..-3,16; ürün sahibi: "kolon başı"): iç içe iki kabuk,
@@ -574,6 +574,7 @@ export function borrowTur10(model) {
       const nm = new THREE.Matrix3().getNormalMatrix(own ? o.matrixWorld : home.matrixWorld).invert();
       const P = [], N = [], U = [], U1 = [];
       for (const {ids, w} of take) {
+        if (rule.flip) { [w[1], w[2]] = [w[2], w[1]]; [ids[1], ids[2]] = [ids[2], ids[1]]; }   // ters dönmüş yüz: sarım çevrilir
         const s = nearest(p.copy(w[0]).add(w[1]).add(w[2]).divideScalar(3)), nw = normal(w), n = nw.clone().applyMatrix3(nm).normalize();
         w.forEach((v, k) => {
           const l = v.clone().applyMatrix4(frame); P.push(l.x, l.y, l.z); N.push(n.x, n.y, n.z);
