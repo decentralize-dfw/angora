@@ -3,6 +3,7 @@ import {collectUIObstacles,layoutPlanLabels} from './screen-layout.js';
 import {ROOM_AREAS} from './room-areas.js';
 import DXF_DIMENSIONS from './dxf-dimensions.js';
 import ROOM_SHAPES from './room-shapes.js';
+import {t,roomName} from './i18n.js';
 
 // Fixed screen size keeps annotations readable throughout camera movement.
 export function labelFontSize(pixelsPerMetre) {
@@ -70,13 +71,14 @@ export function createAnnotations(data,host,onRoom) {
     line.renderOrder=105;line.userData.aoExcluded=true;group.add(line);return line;
   });
   let dimensionKey='';
+  const nameEls=[];
   for(const room of data.rooms) {
     const el=document.createElement('div');el.className='room-label';
-    const name=document.createElement('strong');name.textContent=room.name;
+    const name=document.createElement('strong');name.textContent=roomName(room.name);nameEls.push({name,el,room});
     const area=document.createElement('span');area.textContent=areaLabel(room,data);
     const card=document.createElement('i'),meta=document.createElement('em');
     meta.append(area);card.append(name,meta);el.append(card);
-    el.setAttribute('aria-label',`${room.name} ${area.textContent}`);
+    el.setAttribute('aria-label',`${roomName(room.name)} ${area.textContent}`);
     overlay.append(el);
     const span=spanOf(room);
     // Odanın gerçek dikdörtgeni ölçü çizgilerinin uçlarından: kayıttaki room.position
@@ -124,7 +126,7 @@ export function createAnnotations(data,host,onRoom) {
     line.renderOrder=105;line.userData.aoExcluded=true;
     const el=document.createElement('span');
     el.className=measured?'dimension-label measured':'dimension-label';el.textContent=spanLabel(dim.metres);
-    el.title=dim.basis==='dwg_verified'||dim.basis==='dwg_owner'?'Çizimde belirtilen ölçü':dim.boundary_kind==='floor_edge'?'Modelde döşeme sınırları arasındaki ölçü':'Model üzerinden ölçülen açıklık';
+    el.dataset.titleKey=dim.basis==='dwg_verified'||dim.basis==='dwg_owner'?'dimDrawn':dim.boundary_kind==='floor_edge'?'dimFloor':'dimModel';el.title=t(el.dataset.titleKey);
     overlay.append(el);dimensions.push({el,line,a,b,position:a.clone().add(b).multiplyScalar(.5),floor:dim.floor_index,roomId:dim.room_id,measured});
   }
   function project(entry,camera,w,h,size) {
@@ -135,7 +137,12 @@ export function createAnnotations(data,host,onRoom) {
     entry.el.style.left=`${x}px`;entry.el.style.top=`${y}px`;entry.el.style.fontSize=`${size}px`;
     return {x,y};
   }
-  return {group,data,update(view,showNames,showDimensions,transitioning,walking,camera,walkRoom,extraObstacles=[]) {
+  // dil değişince oda adları ve ölçü ipuçları yeniden
+  const refreshLabels=()=>{
+    for(const {name,el,room} of nameEls){name.textContent=roomName(room.name);el.setAttribute('aria-label',`${roomName(room.name)} ${areaLabel(room,data)}`);}
+    for(const d of dimensions)if(d.el.dataset.titleKey)d.el.title=t(d.el.dataset.titleKey);
+  };
+  return {group,data,refreshLabels,update(view,showNames,showDimensions,transitioning,walking,camera,walkRoom,extraObstacles=[]) {
     const floor=/^f[0-3]$/.test(view)?Number(view[1]):-1;
     const w=host.clientWidth,h=host.clientHeight;
     camera.updateMatrixWorld();

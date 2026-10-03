@@ -290,12 +290,12 @@
     }
   ]
 }</script>
-  <script type="module" crossorigin src="./web-assets/index-BCF659KM.js"></script>
-  <link rel="stylesheet" crossorigin href="./web-assets/index-DZU_7b8y.css">
+  <script type="module" crossorigin src="./web-assets/index-ijijwXHs.js"></script>
+  <link rel="stylesheet" crossorigin href="./web-assets/index-BJf3D-Vy.css">
 </head>
 <body>
 <main id="app" data-scale="neighborhood" data-booting="true">
-  <div id="viewport" aria-label="Angora villasının etkileşimli 3D modeli"></div>
+  <div id="viewport" aria-label="Angora villasının etkileşimli 3D modeli" data-i18n-label="a11yViewport"></div>
   <div id="cloud-transition" aria-hidden="true"></div>
   <!-- 03.10 ses seçenekleri (deneme): bestelenmiş piyano, üç senaryo, sol ortada. -->
   <div class="sound-presets" role="group" aria-label="Ses seçeneği" data-i18n-label="soundPreset">
@@ -320,7 +320,7 @@
       <button id="open-info" class="quiet-button" aria-expanded="false" aria-controls="info-panel" data-i18n-label="info" data-i18n-title="infoTitle" aria-label="Mülk bilgisi"><span class="label-long" data-i18n="info">Mülk bilgisi</span><span class="label-short" data-i18n="infoShort">Mülk</span></button>
     </div>
   </header>
-  <nav class="scale-picker" aria-label="Görünüm ölçeği">
+  <nav class="scale-picker" aria-label="Görünüm ölçeği" data-i18n-label="a11yScale">
     <button data-view="region" aria-pressed="false" data-i18n="scaleRegion">Bölge</button>
     <button data-view="neighborhood" aria-pressed="false" data-i18n="scaleStreet">Yakın çevre</button>
     <button data-view="building" aria-pressed="true" data-i18n="scaleVilla">Villa</button>
@@ -330,14 +330,14 @@
        scale alone. Walking in and recentring stay wired and scripted; they are
        simply not drawn over the model any more. -->
   <div class="side-tools">
-    <button id="enter-walk" class="tool-retired" title="Bu katta içeride gez" disabled>İçeride gez</button>
-    <button id="toggle-auto-rotate" aria-label="Yavaş otomatik dönüş" aria-pressed="false" title="Yavaş otomatik dönüş">↻</button>
-    <button id="reset-view" class="tool-retired" aria-label="Görünümü ortala" title="Ortala">⌖</button>
+    <button id="enter-walk" class="tool-retired" title="Bu katta içeride gez" disabled data-i18n-title="a11yWalkHere" data-i18n="explore">İçeride gez</button>
+    <button id="toggle-auto-rotate" aria-label="Yavaş otomatik dönüş" aria-pressed="false" title="Yavaş otomatik dönüş" data-i18n-label="a11yAutoRotate" data-i18n-title="a11yAutoRotate">↻</button>
+    <button id="reset-view" class="tool-retired" aria-label="Görünümü ortala" title="Ortala" data-i18n-label="a11yRecenter">⌖</button>
   </div>
   <div class="tool-dock">
     <button id="open-options" class="tool-button" aria-expanded="false" aria-controls="options-panel" data-i18n-label="options" data-i18n-title="optionsTitle" aria-label="Görünüm" title="Mobilya, ölçüler ve ışık"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.05"/><path d="M19.05 14.6a1.55 1.55 0 0 0 .31 1.72l.06.05a1.88 1.88 0 1 1-2.66 2.66l-.05-.06a1.55 1.55 0 0 0-1.72-.31 1.55 1.55 0 0 0-.94 1.42v.16a1.88 1.88 0 1 1-3.76 0v-.09a1.55 1.55 0 0 0-1.01-1.42 1.55 1.55 0 0 0-1.72.31l-.05.06a1.88 1.88 0 1 1-2.66-2.66l.06-.05a1.55 1.55 0 0 0 .31-1.72 1.55 1.55 0 0 0-1.42-.94h-.16a1.88 1.88 0 1 1 0-3.76h.09a1.55 1.55 0 0 0 1.42-1.01 1.55 1.55 0 0 0-.31-1.72l-.06-.05a1.88 1.88 0 1 1 2.66-2.66l.05.06a1.55 1.55 0 0 0 1.72.31h.07a1.55 1.55 0 0 0 .94-1.42v-.16a1.88 1.88 0 1 1 3.76 0v.09a1.55 1.55 0 0 0 .94 1.42 1.55 1.55 0 0 0 1.72-.31l.05-.06a1.88 1.88 0 1 1 2.66 2.66l-.06.05a1.55 1.55 0 0 0-.31 1.72v.07a1.55 1.55 0 0 0 1.42.94h.16a1.88 1.88 0 1 1 0 3.76h-.09a1.55 1.55 0 0 0-1.42.94z"/></svg></button>
   </div>
-  <section id="options-panel" class="panel options-panel" aria-label="Görünüm ayarları" hidden>
+  <section id="options-panel" class="panel options-panel" aria-label="Görünüm ayarları" hidden data-i18n-label="a11yOptions">
     <div class="panel-heading"><h2 data-i18n="optionsHeading">Görünüm</h2><button data-close-panel="options-panel" data-i18n-label="closeOptions" aria-label="Ayarları kapat">×</button></div>
     <div class="option-row language-row">
       <span data-i18n="language">Dil</span>
@@ -355,26 +355,26 @@
     </div>
     <div class="daylight-heading"><label for="daylight-hour" data-i18n="daylight">Gün ışığı</label><output id="daylight-time" for="daylight-hour">12:30</output></div>
     <label class="lighting-choice option-hidden" for="lighting-style"><span data-i18n="light">Işık</span> <select id="lighting-style"><option value="soft" data-i18n="lightSoft">Yumuşak gün ışığı</option><option value="sun" data-i18n="lightSun">Doğrudan güneş</option></select></label>
-    <input id="daylight-hour" type="range" min="6" max="21" step="0.0833333333" value="12.5" aria-label="Gün ışığı saati" />
+    <input id="daylight-hour" type="range" min="6" max="21" step="0.0833333333" value="12.5" aria-label="Gün ışığı saati" data-i18n-label="a11yHour" />
     <div class="range-endpoints"><span>06:00</span><span>21:00</span></div>
-    <div class="daylight-footer"><select id="daylight-season" class="option-hidden" aria-label="Gün ışığı tarihi"><option value="172">21 Haziran</option><option value="80">21 Mart</option><option value="355">21 Aralık</option></select><button id="toggle-lights" aria-pressed="true" data-i18n="interiorLights">İç ışıklar</button></div>
+    <div class="daylight-footer"><select id="daylight-season" class="option-hidden" aria-label="Gün ışığı tarihi" data-i18n-label="a11ySeason"><option value="172" data-i18n="june21">21 Haziran</option><option value="80" data-i18n="march21">21 Mart</option><option value="355" data-i18n="dec21">21 Aralık</option></select><button id="toggle-lights" aria-pressed="true" data-i18n="interiorLights">İç ışıklar</button></div>
     <p class="small-note option-hidden" id="solar-note" data-i18n="solarNote">Yerel saat · Görsel gün ışığı çalışması; sertifikalı analiz değildir</p>
     <p class="small-note option-hidden" id="cut-light-note" data-i18n="cutLightNote" hidden>Kesit görünümündeki aydınlık gösterim amaçlıdır; kapalı hacim ışığı 360° turda görülür.</p>
     <div class="scene-options option-hidden"><button id="toggle-sound" aria-pressed="false" data-i18n="soundOff">Arayüz sesi kapalı</button></div>
     <details class="device-qa option-hidden">
-      <summary>Cihaz ve görüntü kontrolü</summary>
-      <p>15 saniye boyunca sahneyi hareket ettir. Ölçüm ve görüntüler yalnızca cihazına indirilir; otomatik gönderilmez.</p>
-      <label for="qa-device">Cihaz modeli / sistem sürümü (isteğe bağlı)</label>
-      <input id="qa-device" type="text" maxlength="100" placeholder="Örn. iPhone modeli, iOS sürümü" autocomplete="off" />
-      <div class="qa-actions"><button id="qa-start" data-needs-model disabled>15 sn ölç</button><button id="qa-save" disabled>Raporu indir</button><button id="qa-screenshot" data-needs-model disabled>Sahneyi indir</button></div>
+      <summary data-i18n="qaSummary">Cihaz ve görüntü kontrolü</summary>
+      <p data-i18n="qaLead">15 saniye boyunca sahneyi hareket ettir. Ölçüm ve görüntüler yalnızca cihazına indirilir; otomatik gönderilmez.</p>
+      <label for="qa-device" data-i18n="qaDevice">Cihaz modeli / sistem sürümü (isteğe bağlı)</label>
+      <input id="qa-device" type="text" maxlength="100" placeholder="Örn. iPhone modeli, iOS sürümü" data-i18n-placeholder="qaDevicePh" autocomplete="off" />
+      <div class="qa-actions"><button id="qa-start" data-needs-model disabled data-i18n="qaStart">15 sn ölç</button><button id="qa-save" disabled data-i18n="qaSave">Raporu indir</button><button id="qa-screenshot" data-needs-model disabled data-i18n="qaScene">Sahneyi indir</button></div>
       <p id="qa-result" role="status">Henüz ölçüm yok. Ölçüm, gerçek cihaz veya görsel kalite onayı değildir.</p>
     </details>
   </section>
-  <section id="floor-panel" class="panel floor-panel" aria-label="Kat bilgileri" hidden>
+  <section id="floor-panel" class="panel floor-panel" aria-label="Kat bilgileri" hidden data-i18n-label="a11yFloorPanel">
     <div class="panel-heading"><h2 id="floor-panel-title">Kat bilgisi</h2><button data-close-panel="floor-panel" data-i18n-label="closeFloor" aria-label="Kat bilgilerini kapat">×</button></div>
     <div id="floor-info"></div>
   </section>
-  <section id="info-panel" class="panel info-panel" aria-label="Villa bilgileri" hidden>
+  <section id="info-panel" class="panel info-panel" aria-label="Villa bilgileri" hidden data-i18n-label="a11yInfoPanel">
     <div class="panel-heading"><h2>Angora 21</h2><button data-close-panel="info-panel" data-i18n-label="closeInfo" aria-label="Bilgileri kapat">×</button></div>
     <a class="listing-link listing-link-top" href="https://remax.com.tr/tr/portfoy/P56131836" target="_blank" rel="noopener noreferrer" data-i18n="listing">Satış ilanını aç ↗</a>
     <!-- TARANABİLİR İLAN METNİ. Bu blok kaynak HTML'de durur, yani arama
@@ -424,14 +424,14 @@
          otoritesini alır. Tarayıcı JS çalıştırmasa da bu bağlantılar
          kaynak HTML'de durur. Sayfalar tools/seo/build-seo-pages.mjs ile
          ilan verisinden üretilir. -->
-    <nav class="listing-more" aria-label="Villa hakkında daha fazlası">
-      <a href="/kat-planlari.html">Kat planları: dört kat, oda oda →</a>
-      <a href="/galeri.html">Fotoğraf galerisi: 56 fotoğraf →</a>
-      <a href="/angora-evleri-rehberi.html">Angora Evleri rehberi: konum ve çevre →</a>
-      <a href="/sikca-sorulan-sorular.html">Sıkça sorulan sorular →</a>
+    <nav class="listing-more" aria-label="Villa hakkında daha fazlası" data-i18n-label="a11yMore">
+      <a href="/kat-planlari.html" data-i18n="moreFloors" data-href-en="/en/floor-plans.html">Kat planları: dört kat, oda oda →</a>
+      <a href="/galeri.html" data-i18n="moreGallery" data-href-en="/en/photo-gallery.html">Fotoğraf galerisi: 56 fotoğraf →</a>
+      <a href="/angora-evleri-rehberi.html" data-i18n="moreGuide" data-href-en="/en/angora-evleri-guide.html">Angora Evleri rehberi: konum ve çevre →</a>
+      <a href="/sikca-sorulan-sorular.html" data-i18n="moreFaq" data-href-en="/en/faq.html">Sıkça sorulan sorular →</a>
     </nav>
   </section>
-  <section id="region-panel" class="region-panel" aria-label="Bölge haritası" hidden>
+  <section id="region-panel" class="region-panel" aria-label="Bölge haritası" hidden data-i18n-label="a11yRegionPanel">
     <details id="region-summary"><summary>Angora Evleri <span aria-hidden="true">⌃</span></summary><div id="region-description"></div></details>
     <div class="region-radius" role="group" data-i18n-label="radiusLabel" aria-label="Harita yarıçapı">
       <button data-radius="500" aria-pressed="false">500 m</button>
@@ -440,44 +440,44 @@
     </div>
     <span id="context-count" class="region-meta" data-i18n="sitePlan">Vaziyet planı</span>
   </section>
-  <div id="model-scale" class="model-scale" aria-label="Model ölçeği" hidden><i></i><span></span></div>
+  <div id="model-scale" class="model-scale" aria-label="Model ölçeği" hidden data-i18n-label="a11yModelScale"><i></i><span></span></div>
   <!-- Whose the house and whose the drawing, said once, in the corner. -->
   <p class="site-credit"><span data-i18n="creditRole">Proje geliştiricisi ve sahibi</span>: <a href="https://mergvs.com" target="_blank" rel="noopener noreferrer">MERGVS</a></p>
   <footer class="explore-dock">
-    <nav class="floor-row" aria-label="Kat seçimi">
+    <nav class="floor-row" aria-label="Kat seçimi" data-i18n-label="a11yFloorRow">
       <button data-view="f0" aria-pressed="false" data-i18n="f0Short">Bodrum</button>
       <button data-view="f1" aria-pressed="false" data-i18n="f1Short">Giriş</button>
       <button data-view="f2" aria-pressed="false" data-i18n="f2Short">1. kat</button>
       <button data-view="f3" aria-pressed="false" data-i18n="f3Short">Çatı</button>
     </nav>
     <div class="dock-actions">
-      <div class="camera-tools" aria-label="Kamera araçları">
-        <button id="rotate-mode" aria-pressed="true" aria-label="Sürükleyerek döndür" title="Döndür">↻</button>
-        <button id="pan-mode" aria-pressed="false" aria-label="Sürükleyerek kaydır" title="Kaydır">✥</button>
-        <button id="zoom-out" aria-label="Uzaklaştır">−</button><button id="zoom-in" aria-label="Yakınlaştır">+</button>
+      <div class="camera-tools" aria-label="Kamera araçları" data-i18n-label="a11yCamera">
+        <button id="rotate-mode" aria-pressed="true" aria-label="Sürükleyerek döndür" title="Döndür" data-i18n-label="a11yRotateMode" data-i18n-title="rotate">↻</button>
+        <button id="pan-mode" aria-pressed="false" aria-label="Sürükleyerek kaydır" title="Kaydır" data-i18n-label="a11yPanMode" data-i18n-title="pan">✥</button>
+        <button id="zoom-out" aria-label="Uzaklaştır" data-i18n-label="zoomOut">−</button><button id="zoom-in" aria-label="Yakınlaştır" data-i18n-label="zoomIn">+</button>
       </div>
       <!-- İçeride gez (masaüstü): Google Street View'daki gibi adamı sürükle,
            katın üstünde bırak - bıraktığın noktada içeride doğarsın. -->
-      <button id="walk-pegman" class="walk-pegman" type="button" aria-label="İçeride gez: adamı sürükleyip katın üstüne bırakın" title="Sürükle ve katın üstüne bırak - içeride gez"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5.2" r="2.9"/><path d="M8.6 9.4h6.8c.9 0 1.6.7 1.6 1.6v4.6c0 .5-.4.9-.9.9h-.9l-.6 5.1c-.1.5-.5.9-1 .9h-2.2c-.5 0-.9-.4-1-.9l-.6-5.1h-.9c-.5 0-.9-.4-.9-.9V11c0-.9.7-1.6 1.6-1.6z"/></svg></button>
+      <button id="walk-pegman" class="walk-pegman" type="button" aria-label="İçeride gez: adamı sürükleyip katın üstüne bırakın" title="Sürükle ve katın üstüne bırak - içeride gez" data-i18n-label="a11yPegman" data-i18n-title="pegmanTitle"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5.2" r="2.9"/><path d="M8.6 9.4h6.8c.9 0 1.6.7 1.6 1.6v4.6c0 .5-.4.9-.9.9h-.9l-.6 5.1c-.1.5-.5.9-1 .9h-2.2c-.5 0-.9-.4-1-.9l-.6-5.1h-.9c-.5 0-.9-.4-.9-.9V11c0-.9.7-1.6 1.6-1.6z"/></svg></button>
       <button id="toggle-plan" class="walk-launch" aria-pressed="false" disabled>Plan</button>
       <button id="enter-vr" class="walk-launch" data-i18n="enterVR" hidden>VR’a gir</button>
     </div>
   </footer>
-  <section id="walk-tools" class="walk-tools" aria-label="Oda turu" hidden>
+  <section id="walk-tools" class="walk-tools" aria-label="Oda turu" hidden data-i18n-label="roomTour">
     <!-- The way into the headset from inside the tour. The same control sits
          beside Plan in the footer for somebody still looking at the model;
          both drive one session, and both are drawn only where WebXR answers. -->
     <div class="walk-top">
       <button id="enter-vr-walk" class="walk-close walk-vr" data-i18n="enterVR" aria-label="VR’a gir" hidden>VR’a gir</button>
-      <button id="exit-walk" class="walk-close" data-i18n="exitWalk" aria-label="Turdan çık ve kat görünümüne dön">Kata dön</button>
+      <button id="exit-walk" class="walk-close" data-i18n="exitWalk" data-i18n-label="a11yExitWalk" aria-label="Turdan çık ve kat görünümüne dön">Kata dön</button>
     </div>
-    <label class="walk-lens" for="walk-lens"><span class="walk-lens-label" data-i18n="lens">Görüş açısı</span><input id="walk-lens" type="range" min="30" max="95" step="1" aria-label="Tur lensi görüş açısı" /><output id="walk-lens-value" for="walk-lens"></output></label>
-    <div class="walk-room-panel"><label for="walk-room" id="walk-room-label" data-i18n="goRoom">Gezilecek oda</label><select id="walk-room" aria-label="Gezilecek oda"></select><span id="walk-room-area"></span></div>
-    <div class="walk-pad" aria-label="Yürüme yönü">
-      <button data-walk-direction="KeyW" class="walk-forward" aria-label="İleri yürü">↑</button>
-      <button data-walk-direction="KeyA" class="walk-left" aria-label="Sola yürü">←</button>
-      <button data-walk-direction="KeyD" class="walk-right" aria-label="Sağa yürü">→</button>
-      <button data-walk-direction="KeyS" class="walk-back" aria-label="Geri yürü">↓</button>
+    <label class="walk-lens" for="walk-lens"><span class="walk-lens-label" data-i18n="lens">Görüş açısı</span><input id="walk-lens" type="range" min="30" max="95" step="1" aria-label="Tur lensi görüş açısı" data-i18n-label="a11yLens" /><output id="walk-lens-value" for="walk-lens"></output></label>
+    <div class="walk-room-panel"><label for="walk-room" id="walk-room-label" data-i18n="goRoom">Gezilecek oda</label><select id="walk-room" aria-label="Gezilecek oda" data-i18n-label="goRoom"></select><span id="walk-room-area"></span></div>
+    <div class="walk-pad" aria-label="Yürüme yönü" data-i18n-label="a11yWalkPad">
+      <button data-walk-direction="KeyW" class="walk-forward" aria-label="İleri yürü" data-i18n-label="walkForward">↑</button>
+      <button data-walk-direction="KeyA" class="walk-left" aria-label="Sola yürü" data-i18n-label="walkLeft">←</button>
+      <button data-walk-direction="KeyD" class="walk-right" aria-label="Sağa yürü" data-i18n-label="walkRight">→</button>
+      <button data-walk-direction="KeyS" class="walk-back" aria-label="Geri yürü" data-i18n-label="walkBack">↓</button>
     </div>
   </section>
   <!-- One frame at a time. On a phone the backdrop behind it is the 60 % white
@@ -485,7 +485,7 @@
        and the model stays visible and usable beside it. -->
   <div id="photo-backdrop" class="photo-backdrop" hidden></div>
   <div id="photo-dock" class="photo-dock" hidden>
-    <figure id="photo-view" class="photo-view" aria-label="Seçilen fotoğraf">
+    <figure id="photo-view" class="photo-view" aria-label="Seçilen fotoğraf" data-i18n-label="a11yPhoto">
       <button id="photo-close" class="photo-close" data-i18n-label="closePhoto" aria-label="Fotoğrafı kapat">×</button>
       <img id="photo-image" alt="" decoding="async" />
       <figcaption id="photo-caption"></figcaption>
@@ -517,7 +517,7 @@
   <!-- The narrated tour. The voiceover is the timeline, so this is a
        transport rather than a stepper: the subtitle carries the sentence
        being spoken, and the track can be scrubbed. -->
-  <div id="tour-bar" class="tour-hud" role="group" aria-label="Rehberli tur" hidden>
+  <div id="tour-bar" class="tour-hud" role="group" aria-label="Rehberli tur" hidden data-i18n-label="a11yTour">
     <!-- Not a live region: it repeats, word for word, audio that is already
            playing, so announcing it would read every sentence twice over the
            narration. It is the text alternative for someone who cannot hear
@@ -544,7 +544,7 @@
       <img class="boot-crest" src="./web-assets/mergvs-crest-white-BZKAlbJG.png" alt="MERGVS" width="269" height="300" decoding="async">
       <div class="boot-name"><span class="boot-title">Angora <strong>21</strong></span><span class="boot-place" data-i18n="bootPlace">Ankara, Türkiye</span></div>
     </div>
-    <div class="load-status" id="load-status" role="status" aria-live="polite"><svg class="boot-rings" viewBox="0 0 64 64" aria-hidden="true"><g class="r1"><circle cx="32" cy="32" r="28"/></g><g class="r2"><circle cx="32" cy="32" r="21.5"/></g><g class="r3"><circle cx="32" cy="32" r="15"/></g></svg><span class="load-copy"><span class="load-line"><span id="load-message">Model yükleniyor…</span><span id="load-percent" aria-hidden="true"></span></span><span class="load-bar" id="load-bar" aria-hidden="true" hidden><i></i></span><span class="load-steps" id="load-steps" aria-hidden="true"><span data-step="model" data-i18n="stepModel">Model</span><span data-step="light" data-i18n="stepLight">Işık</span><span data-step="scene" data-i18n="stepScene">Sahne</span><span data-step="view" data-i18n="stepView">Görünüm</span></span></span><button id="retry" hidden data-i18n="retry">Tekrar dene</button></div>
+    <div class="load-status" id="load-status" role="status" aria-live="polite"><svg class="boot-rings" viewBox="0 0 64 64" aria-hidden="true"><circle class="track" cx="32" cy="32" r="29"/><circle class="fill" data-ring="model" cx="32" cy="32" r="29" pathLength="100"/><circle class="track" cx="32" cy="32" r="23"/><circle class="fill" data-ring="light" cx="32" cy="32" r="23" pathLength="100"/><circle class="track" cx="32" cy="32" r="17"/><circle class="fill" data-ring="scene" cx="32" cy="32" r="17" pathLength="100"/><circle class="track" cx="32" cy="32" r="11"/><circle class="fill" data-ring="view" cx="32" cy="32" r="11" pathLength="100"/></svg><span class="load-copy"><span class="load-line"><span id="load-message">Model yükleniyor…</span><span id="load-percent" aria-hidden="true"></span></span><span class="load-bar" id="load-bar" aria-hidden="true" hidden><i></i></span><span class="load-steps" id="load-steps" aria-hidden="true"><span data-step="model" data-i18n="stepModel">Model</span><span data-step="light" data-i18n="stepLight">Işık</span><span data-step="scene" data-i18n="stepScene">Sahne</span><span data-step="view" data-i18n="stepView">Görünüm</span></span></span><button id="retry" hidden data-i18n="retry">Tekrar dene</button></div>
     <div class="boot-tips" id="boot-tips" aria-live="polite"><p id="boot-tip"></p></div>
     <!-- Chosen while the model loads, which is the one moment every visitor
          spends looking at this corner of the screen. The same .lang-flag

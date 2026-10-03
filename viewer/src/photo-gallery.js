@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {PHOTO_POINTS, FLOOR_DATUMS, photoCaption} from './photo-points.js';
-import {currentLang} from './i18n.js';
+import {currentLang, t} from './i18n.js';
 
 // R47 | The owner's photographs, put back where they were taken.
 //
@@ -62,7 +62,7 @@ function mark(document) {
 export function createPhotoPins(host, root, {onOpen}) {
   const overlay = document.createElement('div');
   overlay.className = 'photo-overlay';
-  overlay.setAttribute('aria-label', 'Fotoğraf çekim noktaları');
+  overlay.setAttribute('aria-label', t('photoPoints'));
   const leaders = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   leaders.classList.add('photo-leaders');
   overlay.append(leaders);

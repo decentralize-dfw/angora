@@ -535,7 +535,7 @@ h1 strong{font-weight:700}
 #boot .boot-bg{position:absolute;inset:-40px;z-index:-1;background:url('./boot/boot-bg.webp') center/cover no-repeat;filter:blur(14px) saturate(1.05);transform:scale(1.06)}
 #boot .boot-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,18,15,.42),rgba(14,18,15,.30) 45%,rgba(14,18,15,.55))}
 #boot .boot-hero{display:grid;justify-items:center;gap:20px;text-align:center}
-#boot .boot-crest{height:clamp(120px,24vh,210px);width:auto;filter:drop-shadow(0 6px 22px rgba(0,0,0,.28))}
+#boot .boot-crest{height:clamp(84px,15vh,132px);width:auto;filter:drop-shadow(0 6px 22px rgba(0,0,0,.28))}
 #boot .boot-name{display:grid;gap:6px;justify-items:center}
 #boot .boot-title{font-size:clamp(28px,4.2vw,44px);font-weight:500;letter-spacing:.06em;color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.25)}
 #boot .boot-place{font-size:12px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.78)}
@@ -550,18 +550,16 @@ h1 strong{font-weight:700}
 #boot .load-steps span[data-state=done]{color:rgba(255,255,255,.62)}
 #boot .load-steps span[data-state=active]{color:#fff}
 #boot .load-status button{background:#fff;color:var(--ink)}
-/* üçlü çember: üç yay, farklı hız ve yönlerde */
-.boot-rings{width:58px;height:58px;overflow:visible}
-.boot-rings circle{fill:none;stroke:#fff;stroke-linecap:round}
-.boot-rings .r1 circle{stroke-width:2.2;stroke-dasharray:118 58;opacity:.9}
-.boot-rings .r2 circle{stroke-width:2;stroke-dasharray:70 65;opacity:.7}
-.boot-rings .r3 circle{stroke-width:1.8;stroke-dasharray:44 50;opacity:.5}
-.boot-rings g{transform-origin:32px 32px;transform-box:view-box}
-.boot-rings .r1{animation:spin 1.6s linear infinite}
-.boot-rings .r2{animation:spin 2.4s linear infinite reverse}
-.boot-rings .r3{animation:spin 3.4s linear infinite}
+/* dörtlü çember: her biri bir yükleme adımı (dıştan içe: model, ışık, sahne,
+   görünüm). Sahte dönme yok - her çember kendi adımının GERÇEK ilerlemesiyle
+   saat yönünde dolar, bitince tam halka olarak kalır. */
+.boot-rings{width:64px;height:64px;overflow:visible;transform:rotate(-90deg)}
+.boot-rings circle{fill:none;stroke-width:2.4}
+.boot-rings .track{stroke:rgba(255,255,255,.16)}
+.boot-rings .fill{stroke:#fff;stroke-linecap:round;stroke-dasharray:100 100;stroke-dashoffset:100;transition:stroke-dashoffset .35s ease,opacity .3s ease;opacity:.95}
+.boot-rings .fill[data-state=idle]{opacity:0}
+.boot-rings .fill[data-state=done]{opacity:.75}
 .error .boot-rings{display:none}
-@media(prefers-reduced-motion:reduce){.boot-rings g{animation-duration:6s}}
 /* dönen bilgi kartı */
 #boot .boot-tips{position:absolute;left:50%;bottom:104px;transform:translateX(-50%);width:min(620px,calc(100% - 32px));
   padding:16px 24px;border-radius:14px;background:rgba(18,22,19,.38);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
@@ -571,7 +569,7 @@ h1 strong{font-weight:700}
 #boot .load-language .lang-switch{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.2)}
 #boot .load-language .lang-flag b{color:#fff}
 #boot .load-language .lang-flag[aria-pressed=true]{background:rgba(255,255,255,.28)}
-@media(max-width:720px){#boot{gap:22px;align-content:start;padding-top:12vh}#boot .boot-crest{height:clamp(110px,19vh,170px)}#boot .boot-tips{bottom:96px;padding:12px 16px}#boot .boot-tips p{font-size:12.5px}#boot .boot-place{font-size:10.5px}}
+@media(max-width:720px){#boot{gap:22px;align-content:start;padding-top:12vh}#boot .boot-crest{height:clamp(78px,13vh,112px)}#boot .boot-tips{bottom:96px;padding:12px 16px}#boot .boot-tips p{font-size:12.5px}#boot .boot-place{font-size:10.5px}}
 #boot .boot-brand{display:flex;align-items:center;gap:14px}
 #boot .brand{font-size:14px;letter-spacing:.34em}
 #boot .brand-divider{height:18px}

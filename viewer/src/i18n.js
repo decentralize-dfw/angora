@@ -24,7 +24,7 @@ const STRINGS = {
     furniture: 'Mobilya', roomNames: 'Oda adları', measurements: 'Ölçüler',
     photos: 'Fotoğraflar', closePhoto: 'Fotoğrafı kapat',
     daylight: 'Gün ışığı', light: 'Işık', lightSoft: 'Yumuşak gün ışığı', lightSun: 'Doğrudan güneş',
-    language: 'Dil', interiorLights: 'İç ışıklar', soundOff: 'Arayüz sesi kapalı', soundOn: 'Arayüz sesi açık', sound: 'Ses', bootPlace: 'Ankara, Türkiye', soundPreset: 'Ses', soundRooms: 'Odalar', soundDaylight: 'Gün ışığı', soundMotif: 'Anlatı',
+    language: 'Dil', interiorLights: 'İç ışıklar', soundOff: 'Arayüz sesi kapalı', soundOn: 'Arayüz sesi açık', sound: 'Ses', a11yViewport: 'Angora villasının etkileşimli 3D modeli', a11yScale: 'Görünüm ölçeği', a11yWalkHere: 'Bu katta içeride gez', a11yAutoRotate: 'Yavaş otomatik dönüş', a11yRecenter: 'Görünümü ortala', a11yOptions: 'Görünüm ayarları', a11yHour: 'Gün ışığı saati', a11ySeason: 'Gün ışığı tarihi', a11yFloorPanel: 'Kat bilgileri', a11yInfoPanel: 'Villa bilgileri', a11yRegionPanel: 'Bölge haritası', a11yModelScale: 'Model ölçeği', a11yFloorRow: 'Kat seçimi', a11yCamera: 'Kamera araçları', a11yRotateMode: 'Sürükleyerek döndür', rotate: 'Döndür', a11yPanMode: 'Sürükleyerek kaydır', pan: 'Kaydır', zoomOut: 'Uzaklaştır', zoomIn: 'Yakınlaştır', a11yPegman: 'İçeride gez: adamı sürükleyip katın üstüne bırakın', pegmanTitle: 'Sürükle ve katın üstüne bırak - içeride gez', a11yExitWalk: 'Turdan çık ve kat görünümüne dön', a11yLens: 'Tur lensi görüş açısı', a11yWalkPad: 'Yürüme yönü', walkForward: 'İleri yürü', walkLeft: 'Sola yürü', walkRight: 'Sağa yürü', walkBack: 'Geri yürü', a11yPhoto: 'Seçilen fotoğraf', a11yTour: 'Rehberli tur', a11yMore: 'Villa hakkında daha fazlası', june21: '21 Haziran', march21: '21 Mart', dec21: '21 Aralık', qaSummary: 'Cihaz ve görüntü kontrolü', qaLead: '15 saniye boyunca sahneyi hareket ettir. Ölçüm ve görüntüler yalnızca cihazına indirilir; otomatik gönderilmez.', qaDevice: 'Cihaz modeli / sistem sürümü (isteğe bağlı)', qaDevicePh: 'Örn. iPhone modeli, iOS sürümü', qaStart: '15 sn ölç', qaSave: 'Raporu indir', qaScene: 'Sahneyi indir', qaNone: 'Henüz ölçüm yok. Ölçüm, gerçek cihaz veya görsel kalite onayı değildir.', moreFloors: 'Kat planları: dört kat, oda oda →', moreGallery: 'Fotoğraf galerisi: 56 fotoğraf →', moreGuide: 'Angora Evleri rehberi: konum ve çevre →', moreFaq: 'Sıkça sorulan sorular →', canvasLabel: '3D model; döndürmek için sürükleyin', photoPoints: 'Fotoğraf çekim noktaları', zoomVilla: 'Villa 21’e yaklaş', sitePlanBuilding: 'Vaziyet planı · Yapı', dimDrawn: 'Çizimde belirtilen ölçü', dimFloor: 'Modelde döşeme sınırları arasındaki ölçü', dimModel: 'Model üzerinden ölçülen açıklık', viewLoadFailed: 'Görünüm yüklenemedi: ', buildingsCount: ' yapı', bootPlace: 'Ankara, Türkiye', soundPreset: 'Ses', soundRooms: 'Odalar', soundDaylight: 'Gün ışığı', soundMotif: 'Anlatı',
     solarNote: 'Yerel saat · Görsel gün ışığı çalışması; sertifikalı analiz değildir',
     cutLightNote: 'Kesit görünümündeki aydınlık gösterim amaçlıdır; kapalı hacim ışığı 360° turda görülür.',
     explore: 'İçeride gez', exitWalk: 'Kata dön',
@@ -88,7 +88,7 @@ const STRINGS = {
     furniture: 'Furniture', roomNames: 'Room names', measurements: 'Dimensions',
     photos: 'Photographs', closePhoto: 'Close photograph',
     daylight: 'Daylight', light: 'Light', lightSoft: 'Soft daylight', lightSun: 'Direct sun',
-    language: 'Language', interiorLights: 'Interior lights', soundOff: 'Interface sound off', soundOn: 'Interface sound on', sound: 'Sound', bootPlace: 'Ankara, Turkey', soundPreset: 'Sound', soundRooms: 'Rooms', soundDaylight: 'Daylight', soundMotif: 'Motif',
+    language: 'Language', interiorLights: 'Interior lights', soundOff: 'Interface sound off', soundOn: 'Interface sound on', sound: 'Sound', a11yViewport: 'Interactive 3D model of the Angora villa', a11yScale: 'View scale', a11yWalkHere: 'Walk inside on this floor', a11yAutoRotate: 'Slow auto-rotate', a11yRecenter: 'Recenter the view', a11yOptions: 'View settings', a11yHour: 'Daylight hour', a11ySeason: 'Daylight date', a11yFloorPanel: 'Floor details', a11yInfoPanel: 'Villa details', a11yRegionPanel: 'Area map', a11yModelScale: 'Model scale', a11yFloorRow: 'Floor selection', a11yCamera: 'Camera tools', a11yRotateMode: 'Drag to rotate', rotate: 'Rotate', a11yPanMode: 'Drag to pan', pan: 'Pan', zoomOut: 'Zoom out', zoomIn: 'Zoom in', a11yPegman: 'Walk inside: drag the figure onto the floor', pegmanTitle: 'Drag onto the floor to walk inside', a11yExitWalk: 'Leave the walk and return to the floor view', a11yLens: 'Walk lens field of view', a11yWalkPad: 'Walking direction', walkForward: 'Walk forward', walkLeft: 'Walk left', walkRight: 'Walk right', walkBack: 'Walk back', a11yPhoto: 'Selected photograph', a11yTour: 'Guided tour', a11yMore: 'More about the villa', june21: '21 June', march21: '21 March', dec21: '21 December', qaSummary: 'Device and display check', qaLead: 'Move the scene for 15 seconds. Measurements and images are only downloaded to your device; nothing is sent.', qaDevice: 'Device model / OS version (optional)', qaDevicePh: 'e.g. iPhone model, iOS version', qaStart: 'Measure 15 s', qaSave: 'Download report', qaScene: 'Download scene', qaNone: 'No measurement yet. A measurement is not a device or visual-quality approval.', moreFloors: 'Floor plans: four floors, room by room →', moreGallery: 'Photo gallery: 56 photographs →', moreGuide: 'Angora Evleri guide: location and surroundings →', moreFaq: 'Frequently asked questions →', canvasLabel: '3D model; drag to rotate', photoPoints: 'Photograph locations', zoomVilla: 'Zoom to Villa 21', sitePlanBuilding: 'Site plan · Building', dimDrawn: 'Dimension from the drawing', dimFloor: 'Measured between floor edges in the model', dimModel: 'Span measured on the model', viewLoadFailed: 'The view could not be loaded: ', buildingsCount: ' buildings', bootPlace: 'Ankara, Turkey', soundPreset: 'Sound', soundRooms: 'Rooms', soundDaylight: 'Daylight', soundMotif: 'Motif',
     solarNote: 'Local time · Illustrative daylight study; not a certified analysis',
     cutLightNote: 'Light in cutaway views is illustrative; enclosed-room light is shown in the 360° tour.',
     explore: 'Explore inside', exitWalk: 'Back to floor',
@@ -138,7 +138,7 @@ const STRINGS = {
 // Drawing room names, translated as terms - never invented, only rendered
 // in the viewer's language. Anything unmatched stays in Turkish.
 const ROOM_TERMS = [
-  [/^salon$/i, 'Living room'], [/^mutfak$/i, 'Kitchen'], [/^yemek alanı$/i, 'Dining area'],
+  [/^oda$/i, 'Room'], [/^salon$/i, 'Living room'], [/^mutfak$/i, 'Kitchen'], [/^yemek alanı$/i, 'Dining area'],
   [/^oturma alanı$/i, 'Sitting area'], [/^antre$/i, 'Entry hall'], [/^giriş$/i, 'Entrance'],
   [/^kat holü$/i, 'Landing'], [/^hol$/i, 'Hall'], [/^koridor$/i, 'Corridor'],
   [/^yatak odası$/i, 'Bedroom'], [/^ebeveyn yatak odası$/i, 'Primary bedroom'],
@@ -173,6 +173,12 @@ export function applyStatic(root = typeof document === 'undefined' ? null : docu
   for (const el of root.querySelectorAll('[data-i18n]')) el.textContent = t(el.dataset.i18n);
   for (const el of root.querySelectorAll('[data-i18n-label]')) el.setAttribute('aria-label', t(el.dataset.i18nLabel));
   for (const el of root.querySelectorAll('[data-i18n-title]')) el.title = t(el.dataset.i18nTitle);
+  for (const el of root.querySelectorAll('[data-i18n-placeholder]')) el.placeholder = t(el.dataset.i18nPlaceholder);
+  // İngilizce sayfası olan bağlantılar dile göre yönlenir
+  for (const el of root.querySelectorAll('[data-href-en]')) {
+    el.dataset.hrefTr ??= el.getAttribute('href');
+    el.setAttribute('href', lang === 'en' ? el.dataset.hrefEn : el.dataset.hrefTr);
+  }
   document.documentElement.lang = lang;
 }
 export function setLang(next, onChange) {

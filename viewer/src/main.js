@@ -64,6 +64,7 @@ import { createWalkLocator } from './walk-locator.js';
 import {patchWalkSurface} from './walk-surface.js';
 import { t, roomName, applyStatic, setLang, currentLang } from './i18n.js';
 import {startBootTips} from './boot-tips.js';
+import {listing as listingCopy} from './listing.js';
 // 03.10 açılış: 5 sn'de bir dönen bilgiler (arayüz, ev, bölge); dil değişince anında çevrilir.
 const bootTips=startBootTips(document.querySelector('#boot-tip'));
 const FRAME_STATS=/[?&](stats=1|camera=)/.test(location.search); // QA-only per-frame evidence
@@ -179,12 +180,27 @@ function progress(share) {
   const whole = Math.max(0, Math.min(100, Math.round(share * 100)));
   bar.hidden = false; bar.firstElementChild.style.width = `${whole}%`;
   percent.textContent = currentLang()==='en'?`${whole}%`:`%${whole}`;
+  lastShare=whole/100;paintRings();
 }
 // What the bar cannot say: WHICH wait is being served. A percentage alone,
 // on a twenty-megabyte scene, reads as one long undifferentiated stall; the
 // named steps turn it into a sequence with an end in sight. Each lights as it
 // starts and stays lit, and step(null) marks them all done.
 const LOAD_STEPS=['model','light','scene','view'];
+// 04.10 açılış çemberleri: dört adım, dört çember. Her çember kendi adımının
+// payını GERÇEK genel ilerlemeden alır: adım başladığı andaki pay ile adımın
+// ağırlığı (yaklaşık bütçe) arasında dolar; adım biterse tam halka olur.
+const STEP_WEIGHT={model:.68,light:.10,scene:.10,view:.12};
+let activeStep=null,stepStartShare=0,lastShare=0;
+function paintRings(){
+  for(const ring of document.querySelectorAll('.boot-rings .fill')){
+    const at=LOAD_STEPS.indexOf(ring.dataset.ring),index=activeStep===null?LOAD_STEPS.length:LOAD_STEPS.indexOf(activeStep);
+    let fill=0,state='idle';
+    if(activeStep===null&&ring.dataset.done==='1'||at<index){fill=1;state='done';}
+    else if(at===index){fill=Math.max(.02,Math.min(.97,(lastShare-stepStartShare)/STEP_WEIGHT[activeStep]));state='active';}
+    ring.dataset.state=state;ring.style.strokeDashoffset=String(100-fill*100);
+  }
+}
 function step(name) {
   const list=$('#load-steps'); if(!list) return;
   const index=LOAD_STEPS.indexOf(name);
@@ -192,6 +208,8 @@ function step(name) {
     const at=LOAD_STEPS.indexOf(el.dataset.step);
     el.dataset.state=name===null?'done':at<index?'done':at===index?'active':'idle';
   }
+  for(const ring of document.querySelectorAll('.boot-rings .fill'))if(name===null||LOAD_STEPS.indexOf(ring.dataset.ring)<index)ring.dataset.done='1';
+  activeStep=name;stepStartShare=lastShare;paintRings();
 }
 // Dragging the daylight slider fires continuously, and Safari rate-limits
 // history writes, so the address is rewritten once the controls settle.
@@ -838,7 +856,7 @@ function setup() {
   renderer.localClippingEnabled = true;
   renderer.info.autoReset=false;
   host.append(renderer.domElement);
-  renderer.domElement.setAttribute('aria-label', '3D model; döndürmek için sürükleyin');
+  renderer.domElement.setAttribute('aria-label', t('canvasLabel'));
   controls = new OrbitControls(camera, renderer.domElement);
   configureCameraControls(controls, THREE);
   flight=new CameraFlight(camera,controls,resize,invalidate);
@@ -973,7 +991,7 @@ async function selectView(id, initial = false) {
         await waitForGPU(renderer);
       }
       setFurnitureVisible(furnitureVisible);status.hidden=true;
-    }catch(error){message('Görünüm yüklenemedi: '+error.message,true);return;}
+    }catch(error){message(t('viewLoadFailed')+error.message,true);return;}
     finally{nativeSwitching=false;}
   }
   pendingRoomJump.cancel();
@@ -1138,12 +1156,28 @@ function markLanguage(){
 // One language switch, every surface: static DOM, state-carrying labels,
 // the room menu, the plan's room tags, the map, the property sheet, the
 // photograph captions.
+// .listing-floors kaynak HTML'de Türkçe durur (arama motoru için); İngilizcede
+// aynı yer listing.js'in İngilizce kat metinleriyle doldurulur, Türkçeye
+// dönünce özgün HTML geri konur.
+let listingFloorsTr=null;
+function localizeListingFloors(){
+  const box=document.querySelector('.listing-floors');if(!box)return;
+  listingFloorsTr??=box.innerHTML;
+  if(currentLang()!=='en'){if(box.innerHTML!==listingFloorsTr)box.innerHTML=listingFloorsTr;return;}
+  const L=listingCopy('en');box.replaceChildren();
+  const add=(title,text)=>{const h=document.createElement('h3');h.textContent=title;const p=document.createElement('p');p.textContent=text;box.append(h,p);};
+  for(const f of L.floors??[])add(f.title,f.body.join(' '));
+  if(L.region)add(`Location: ${L.region.set}`,L.region.body[0]);
+}
 function refreshChrome(){
   rememberState(); // adresteki görünüm kelimesi dile göre (TR/EN)
   applyStatic();
   markLanguage();
   if(messageKey&&!status.hidden)$('#load-message').textContent=t(messageKey);
   bootTips.refresh();
+  annotations?.refreshLabels?.();siteContext?.refreshLabels?.();localizeListingFloors();
+  renderer?.domElement.setAttribute('aria-label',t('canvasLabel'));
+  {const c=$('#context-count');if(c?.dataset.count)c.textContent=`${c.dataset.count}${t('buildingsCount')}`;}
   photoPins?.refreshLabels();photoViewer?.refresh();
   // There is a recording per language, so the switch is not only a caption
   // change: mid-tour the other voice picks up the sentence being spoken.
@@ -1892,7 +1926,7 @@ async function loadNativeModel(manifest){
   lighting.setShadowBounds(buildingBox,gardenBox,contextBox); // İŞ 1: mahalle gölgesi bu kutuyu sarar
   if(manifest.site_context){
     const data=await gzJson(manifest.site_context);siteContext=createSiteContext(data,host,()=>selectView('building'));
-    $('#context-count').textContent=`${data.buildings.length} yapı`;
+    $('#context-count').dataset.count=data.buildings.length;$('#context-count').textContent=`${data.buildings.length}${t('buildingsCount')}`;
   }
   phase('scene',.4);
   fullHeight=buildingBox.max.y+2;
@@ -2757,7 +2791,7 @@ function bindInterface() {
   $('#daylight-hour').addEventListener('change',()=>{lighting?.requestShadowUpdate();invalidate();});
   $('#toggle-lights').onclick=()=>{interiorLights=!interiorLights;$('#toggle-lights').setAttribute('aria-pressed',interiorLights);lighting?.setLights(interiorLights);applyNightHouse();invalidate();};
   $('#lighting-style').onchange=e=>{lighting?.setStyle(e.target.value);rememberState();invalidate();};
-  applyStatic();
+  applyStatic();localizeListingFloors();
   document.querySelectorAll('.lang-flag').forEach(button=>{
     button.onclick=()=>setLang(button.dataset.lang,refreshChrome);
   });

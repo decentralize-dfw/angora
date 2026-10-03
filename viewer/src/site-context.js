@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {collectUIObstacles,layoutAnchoredLabels} from './screen-layout.js';
+import {t} from './i18n.js';
 
 export function createSiteContext(data,host,onVilla){
   const overlay=document.createElement('div');overlay.className='site-overlay';host.append(overlay);
@@ -7,13 +8,15 @@ export function createSiteContext(data,host,onVilla){
     const el=document.createElement(b.number===21?'button':'span');
     el.className=b.number===21?'site-label site-label-villa':'site-label';
     el.textContent=b.number===21?'Villa 21':String(b.number);
-    if(b.number===21){el.type='button';el.setAttribute('aria-label','Villa 21’e yaklaş');el.onclick=onVilla;}
-    else el.title=`Vaziyet planı · Yapı ${b.number}`;
-    overlay.append(el);return {el,p:new THREE.Vector3(...b.position)};
+    if(b.number===21){el.type='button';el.onclick=onVilla;}
+    overlay.append(el);return {el,number:b.number,p:new THREE.Vector3(...b.position)};
   });
+  // dil değişince yeniden: Villa 21'e yaklaş / Zoom to Villa 21, Vaziyet planı · Yapı N / Site plan · Building N
+  const applyLabels=()=>{for(const item of points){if(item.number===21)item.el.setAttribute('aria-label',t('zoomVilla'));else item.el.title=`${t('sitePlanBuilding')} ${item.number}`;}};
+  applyLabels();
   const scale=document.querySelector('#model-scale'),bar=scale.querySelector('i'),label=scale.querySelector('span');
   const point=new THREE.Vector3(),a=new THREE.Vector3(),b=new THREE.Vector3(),right=new THREE.Vector3();
-  return {update(view,camera,target,transitioning,walking,numbering){
+  return {refreshLabels:applyLabels,update(view,camera,target,transitioning,walking,numbering){
     // The narrated tour numbers things of its own - the camera marks that
     // match its photo cards - and two numbered circles in one picture is the
     // confusion the cards were numbered to end. While the tour owns the

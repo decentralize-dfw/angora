@@ -73,6 +73,10 @@ const km = (m) => (m < 950 ? `${m} m` : `${(m / 1000).toFixed(1).replace('.', ',
 export const atlasMeta = () => `${places.total} ${t('amenities')} · Atlas ${places.atlas_generated_at}` +
   (streets.roads.length ? ' · Plan © OpenStreetMap, Microsoft (Overture)' : ' (OSM)');
 
+// Çevrede listelerinde genel adlar (marka/dükkân adları olduğu gibi kalır).
+const LIST_EN = {Eczane: 'Pharmacy', 'Balıkçı': 'Fishmonger', Kasap: 'Butcher', Kafe: 'Café', restoran: 'restaurant'};
+const listEn = (text) => text.split(' · ').map((w) => LIST_EN[w] ?? w).join(' · ');
+
 export function createRegionMap(host) {
   const el = document.createElement('div');
   el.className = 'region-map';
@@ -244,7 +248,7 @@ export function createRegionMap(host) {
   const en = currentLang() === 'en';
   for (const p of local.places) {
     const c = chip("rm-chip-poi rm-chip-local", `${en && p.en ? p.en : p.name}` +
-      (p.list ? `<small>${p.list}</small>` : ''), p.x, p.y);
+      (p.list ? `<small>${en ? listEn(p.list) : p.list}</small>` : ''), p.x, p.y);
     c.dataset.distance = Math.hypot(p.x, p.y); c.dataset.g = String(p.g); c.dataset.rank = p.rank ?? 2;
   }
   for (const g of local.gates) {
@@ -295,7 +299,7 @@ export function createRegionMap(host) {
   // stand in their place.
   const info = document.createElement('aside');
   info.className = 'rm-info';
-  info.setAttribute('aria-label', 'Angora Evleri hakkında');
+  info.setAttribute('aria-label', currentLang() === 'en' ? 'About Angora Evleri' : 'Angora Evleri hakkında');
   const area = listing(currentLang()).region;
   info.innerHTML =
     `<h3>Angora Evleri</h3><p class="rm-info-set">${area.set}</p>` +
@@ -306,7 +310,7 @@ export function createRegionMap(host) {
   const filters = document.createElement('div');
   filters.className = 'rm-filters';
   filters.setAttribute('role', 'group');
-  filters.setAttribute('aria-label', 'Donatı filtreleri');
+  filters.setAttribute('aria-label', currentLang() === 'en' ? 'Amenity filters' : 'Donatı filtreleri');
   const off = new Set(places.groups.map((_, i) => i));
   for (const g of off) el.classList.add(`rm-off-${g}`);
   let activeGroup = null;
