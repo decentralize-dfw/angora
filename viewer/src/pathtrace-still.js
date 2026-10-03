@@ -16,6 +16,7 @@ import {GenerateMeshBVHWorker} from 'three-mesh-bvh/src/workers/GenerateMeshBVHW
 // Sahne (BVH) görünür nesneler değişince bir kez, iş parçacığında kurulur.
 
 const MAX_SAMPLES = 1500;
+const SAMPLE_CLAMP = 3.0;
 
 class TraceScene extends THREE.Scene {
   constructor() { super(); this.roots = []; this.lights = []; }
@@ -38,6 +39,16 @@ export function createPathTraceStill({renderer, getRoots, getLights, getSky}) {
   tracer.rasterizeScene = false;
   tracer.dynamicLowRes = false;
   tracer.renderToCanvas = true;
+  // Örnek başına parlaklık sınırı: içeride tek ışık küçük pencerelerden giren parlak gök; seken bir ışın
+  // pencereye isabet edince tek piksel binlerce kat parlıyor ve yüzlerce örnekte bile sönmüyordu
+  // (ateş böceği). Sınır enerjinin çok küçük bir kısmını keser, gürültüyü yok eder. NaN/Inf de sıfırlanır.
+  const ptMaterial = tracer._pathTracer.material;
+  ptMaterial.fragmentShader = ptMaterial.fragmentShader.replace('gl_FragColor.a *= opacity;', `
+					if ( any( isnan( gl_FragColor.rgb ) ) || any( isinf( gl_FragColor.rgb ) ) ) gl_FragColor.rgb = vec3( 0.0 );
+					float ptLum = dot( gl_FragColor.rgb, vec3( 0.2126, 0.7152, 0.0722 ) );
+					if ( ptLum > ${SAMPLE_CLAMP.toFixed(2)} ) gl_FragColor.rgb *= ${SAMPLE_CLAMP.toFixed(2)} / ptLum;
+					gl_FragColor.a *= opacity;`);
+  ptMaterial.needsUpdate = true;
 
   const traceScene = new TraceScene();
   const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({
