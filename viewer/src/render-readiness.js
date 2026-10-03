@@ -11,7 +11,10 @@ export function waitForGPU(renderer,{schedule=requestAnimationFrame,now=()=>perf
   function check(){
    const status=gl.clientWaitSync(fence,0,0);
    if(status===gl.ALREADY_SIGNALED||status===gl.CONDITION_SATISFIED){gl.deleteSync(fence);resolve();return;}
-   if(status===gl.WAIT_FAILED||gl.isContextLost()||now()-started>timeoutMs){gl.deleteSync(fence);reject(new Error('GPU preparation interrupted'));return;}
+   if(status===gl.WAIT_FAILED||gl.isContextLost()){gl.deleteSync(fence);reject(new Error('GPU preparation interrupted'));return;}
+   // Yavaş GPU (tümleşik kart, ilk açılışta yüzlerce doku) çiti zamanında bitiremeyebilir: bu bir hata değil.
+   // Eskiden burada reddediliyordu ve kat geçişi kamera/ışık kurulmadan "yüklenemedi" ile kesiliyordu.
+   if(now()-started>timeoutMs){gl.deleteSync(fence);console.warn('GPU hazırlığı uzun sürdü, beklemeden devam');resolve();return;}
    schedule(check);
   }
   schedule(check);

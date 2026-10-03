@@ -11,9 +11,12 @@ test('GPU upload readiness stays pending until the warm-up draw completes',async
  g.step(0);await Promise.resolve();assert.equal(done,false);assert.equal(g.queue.length,1);
  g.step(3);await result;assert.equal(done,true);assert.deepEqual(g.disposed,[7]);assert.equal(g.queue.length,0);
 });
-test('Interrupted and timed-out preparation release their fence',async()=>{
- for(const [status,time] of [[4,0],[0,101]]){
-  const g=gpu(),result=waitForGPU(g.renderer,g.options);g.step(status,time);
-  await assert.rejects(result,/interrupted/);assert.deepEqual(g.disposed,[7]);
- }
+test('Interrupted preparation rejects and releases its fence',async()=>{
+ const g=gpu(),result=waitForGPU(g.renderer,g.options);g.step(4,0);
+ await assert.rejects(result,/interrupted/);assert.deepEqual(g.disposed,[7]);
+});
+test('Slow GPU preparation times out without failing the view switch',async()=>{
+ const g=gpu(),warn=console.warn;console.warn=()=>{};
+ try{const result=waitForGPU(g.renderer,g.options);g.step(0,101);await result;assert.deepEqual(g.disposed,[7]);}
+ finally{console.warn=warn;}
 });
