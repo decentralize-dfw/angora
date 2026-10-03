@@ -92,6 +92,9 @@ export function nextPhrase(preset, chord, state, mem, rand = Math.random) {
     const spread = .2 + rand() * .14;
     for (let k = 0; k < n; k++) notes.push({midi: t[Math.min(t.length - 1, start + k)], at: k * spread, vel: vel() * (1 - k * .1), pan: -.25 + k * .17});
     if (rand() < .5) notes.push({midi: chord.bass, at: 0, vel: vel() * .8, pan: -.1});
+    // akorun üstünde bir-iki nota şarkı söyler
+    if (rand() < .55) { const top = t[Math.min(t.length - 1, start + n)] ?? t[t.length - 1]; notes.push({midi: top, at: n * spread + .5, vel: vel() * .85, pan: .25});
+      if (rand() < .5) notes.push({midi: t[Math.max(0, t.indexOf(top) - 1)], at: n * spread + 1.05, vel: vel() * .75, pan: .3}); }
     mem.last = notes[notes.length - 1].midi;
     return {wait: (5.2 + rand() * 4.2) * slow, notes};
   }
@@ -113,116 +116,122 @@ export function nextPhrase(preset, chord, state, mem, rand = Math.random) {
     // aradaki cevap: motifin son notası karşı kanalda, daha kısık
     const echo = mem.last ?? t[0];
     notes.push({midi: echo, at: 0, vel: vel() * .55, pan: .4});
+    if (rand() < .5) notes.push({midi: near(), at: .55 + rand() * .2, vel: vel() * .5, pan: .45});
     return {wait: (4 + rand() * 3) * slow, notes};
   }
-  // oda: tek nota (çoğu zaman), bazen iki adım, nadiren ikili
+  // oda: tek nota, iki adım, küçük bir cümle (3-4 nota, adım adım) ya da ikili.
+  // 04.10 "yüzde 20 daha melodik": tek nota payı %58 -> %40, küçük cümleler eklendi.
   const r = rand(), a = near();
-  if (r < .58) notes.push({midi: a, at: 0, vel: vel(), pan: (rand() - .5) * .5});
-  else if (r < .86) { const b = near(); notes.push({midi: a, at: 0, vel: vel(), pan: -.15}, {midi: b, at: .55 + rand() * .3, vel: vel() * .82, pan: .2}); }
+  if (r < .4) notes.push({midi: a, at: 0, vel: vel(), pan: (rand() - .5) * .5});
+  else if (r < .72) { const b = near(); notes.push({midi: a, at: 0, vel: vel(), pan: -.15}, {midi: b, at: .5 + rand() * .25, vel: vel() * .82, pan: .2}); }
+  else if (r < .92) {
+    // adım adım küçük cümle: akor tonlarında yukarı ya da aşağı yürür, son nota uzar
+    const dir = rand() < .5 ? 1 : -1, n = 3 + (rand() < .4 ? 1 : 0);
+    let i = t.indexOf(a), at = 0;
+    for (let k = 0; k < n; k++) {
+      notes.push({midi: t[Math.max(0, Math.min(t.length - 1, i))], at, vel: vel() * (1 - k * .08), pan: -.2 + k * .14});
+      i += dir; if (i < 0 || i >= t.length) {i -= 2 * dir;}
+      at += .42 + rand() * .16 + (k === n - 2 ? .22 : 0);
+    }
+  }
   else { const b = t[Math.min(t.length - 1, t.indexOf(a) + 2)] ?? a; notes.push({midi: a, at: 0, vel: vel() * .9, pan: -.1}, {midi: b, at: .015, vel: vel() * .7, pan: .12}); }
   mem.beat = (mem.beat ?? 0) + 1;
   if (mem.beat % 3 === 0) notes.push({midi: chord.bass, at: -.4, vel: vel() * .75, pan: 0});
   mem.last = notes[notes.length - 1].midi;
-  return {wait: (3.4 + rand() * 3.4) * slow, notes};
+  return {wait: (3.2 + rand() * 3.2) * slow, notes};
 }
 
 // --- ses motoru ---
-// 03.10 ikinci tur (ürün sahibi: "çok techno, alarm gibi"): sabit dalga + üç
-// aralıklı osilatör sentez gibi vızıldıyordu, tık sesleri de akorun en tepesinden
-// bir oktav yukarıda çınlıyordu. Şimdi:
-//   - piyano TOPLAMALI: her harmonik kendi sinüsü, hafif inharmonik (gerçek tel),
-//     üst harmonikler çok daha hızlı söner - vuruştan sonra yalnız yumuşak bir
-//     temel kalır. Keçe: 14 ms yumuşak vuruş, koyu filtre.
-//   - arkada YANKILI AKORLAR: sahnenin akoru, yavaş açılan/kapanan yumuşak
-//     sinüs katmanı; sahne değişince sesler yeni akora KAYAR (yeniden vurulmaz),
-//     her 14-20 sn'de nefes alır - sabit bir uğultu değil.
-//   - tıklar sessiz; geçiş tek yumuşak nota + akor kayması.
+// 04.10 üçüncü tur (ürün sahibi): "arkada dijital makinemsi ses var" - sinüs
+// ped katmanı (aralıklı iki osilatörün vuruşması + nefes LFO'su) kaldırıldı.
+// Arkadaki yankılı akorlar artık AYNI piyanodan: 15-22 sn'de bir, çok kısık,
+// çoğu yankı olan yavaş bir akor. "Cızırtı olmasın": her harmonik kendi
+// sönümünün -80 dB'sine inmeden durdurulmaz (kesilen sinüs tık yapıyordu),
+// ana zincir: 35 Hz yüksek geçiren -> 7,5 kHz yumuşak alçak geçiren -> hafif
+// kompresör -> -3 dBFS sınırlayıcı.
 export function createSoundEngine(ctx, {output = ctx.destination} = {}) {
   const master = ctx.createGain(); master.gain.value = 0;
-  const warmth = ctx.createBiquadFilter(); warmth.type = 'lowpass'; warmth.frequency.value = 3800; warmth.Q.value = .3;
+  const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 35; hp.Q.value = .5;
+  const warmth = ctx.createBiquadFilter(); warmth.type = 'lowpass'; warmth.frequency.value = 7500; warmth.Q.value = .25;
   const comp = ctx.createDynamicsCompressor();
-  comp.threshold.value = -26; comp.ratio.value = 2.5; comp.knee.value = 16; comp.attack.value = .03; comp.release.value = .5;
-  master.connect(warmth); warmth.connect(comp); comp.connect(output);
+  comp.threshold.value = -24; comp.ratio.value = 2.2; comp.knee.value = 18; comp.attack.value = .03; comp.release.value = .6;
+  const limit = ctx.createDynamicsCompressor();
+  limit.threshold.value = -4; limit.ratio.value = 20; limit.knee.value = 1; limit.attack.value = .002; limit.release.value = .25;
+  master.connect(hp); hp.connect(warmth); warmth.connect(comp); comp.connect(limit); limit.connect(output);
   // salon yankısı: sönen gürültü, kuyruk zamanla kararır (sıcak oda)
-  const secs = 4.2, len = Math.floor(ctx.sampleRate * secs), ir = ctx.createBuffer(2, len, ctx.sampleRate);
+  const secs = 4.6, len = Math.floor(ctx.sampleRate * secs), ir = ctx.createBuffer(2, len, ctx.sampleRate);
   for (let ch = 0; ch < 2; ch++) {
     const d = ir.getChannelData(ch); let lp = 0;
     for (let i = 0; i < len; i++) {
-      const p = i / len, k = .4 - .34 * p;
+      const p = i / len, k = .36 - .31 * p;
       lp += k * ((Math.random() * 2 - 1) - lp);
       d[i] = lp * Math.pow(1 - p, 2.3) * (i < ctx.sampleRate * .02 ? i / (ctx.sampleRate * .02) : 1);
     }
   }
   const verb = ctx.createConvolver(); verb.buffer = ir;
-  const wet = ctx.createGain(); wet.gain.value = .62;
-  const dry = ctx.createGain(); dry.gain.value = .62;
+  const wet = ctx.createGain(); wet.gain.value = .6;
+  verb.connect(wet); wet.connect(master);
   const delay = ctx.createDelay(1.5); delay.delayTime.value = .62;
-  const fb = ctx.createGain(); fb.gain.value = .32;
+  const fb = ctx.createGain(); fb.gain.value = .3;
   const dlp = ctx.createBiquadFilter(); dlp.type = 'lowpass'; dlp.frequency.value = 1300;
-  const send = ctx.createGain(); send.gain.value = .2;
+  delay.connect(dlp); dlp.connect(fb); fb.connect(delay); dlp.connect(verb); dlp.connect(master);
+  // ön plan piyanosu: kuru + yankı + eko
   const bus = ctx.createGain();
-  bus.connect(dry); dry.connect(master);
-  bus.connect(verb); verb.connect(wet); wet.connect(master);
-  bus.connect(send); send.connect(delay); delay.connect(dlp); dlp.connect(fb); fb.connect(delay); dlp.connect(verb); dlp.connect(master);
+  const dry = ctx.createGain(); dry.gain.value = .62; bus.connect(dry); dry.connect(master);
+  bus.connect(verb);
+  const send = ctx.createGain(); send.gain.value = .2; bus.connect(send); send.connect(delay);
+  // arka plan akorları: neredeyse tamamen yankı
+  const hall = ctx.createGain();
+  const hallDry = ctx.createGain(); hallDry.gain.value = .22; hall.connect(hallDry); hallDry.connect(master);
+  const hallVerb = ctx.createGain(); hallVerb.gain.value = 1.5; hall.connect(hallVerb); hallVerb.connect(verb);
+  const hallSend = ctx.createGain(); hallSend.gain.value = .35; hall.connect(hallSend); hallSend.connect(delay);
 
   const PARTIALS = [[1, 1], [2, .34], [3, .13], [4, .06], [5, .028], [6, .014]];
-  function piano(midi, t0, vel, pan = 0, len = null) {
+  function piano(midi, t0, vel, pan = 0, len = null, toHall = false) {
     const f = NOTE(midi);
     const dur = len ?? Math.max(2.8, Math.min(9, 4 + (70 - midi) * .11));
     const out = ctx.createStereoPanner ? ctx.createStereoPanner() : ctx.createGain();
     if (out.pan) out.pan.value = Math.max(-1, Math.min(1, pan));
     const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.Q.value = .2;
-    lp.frequency.value = Math.min(2600, 500 + f * 2.4);
-    lp.connect(out); out.connect(bus);
+    lp.frequency.value = Math.min(2600, (toHall ? 380 : 500) + f * (toHall ? 1.6 : 2.4));
+    lp.connect(out); out.connect(toHall ? hall : bus);
     const nodes = [];
+    let last = t0;
     PARTIALS.forEach(([k, a], idx) => {
       const fk = f * k * Math.sqrt(1 + .00032 * k * k);
       if (fk > 5000) return;
       const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = fk;
       if (idx === 0) o.detune.value = .7;
       const g = ctx.createGain(), peak = vel * a, tau = dur / (3.4 + (k - 1) * 2.2);
+      const attack = toHall ? .09 : .014;
       g.gain.setValueAtTime(0, t0);
-      g.gain.linearRampToValueAtTime(peak, t0 + .014);
-      g.gain.setTargetAtTime(0, t0 + .014, tau);
+      g.gain.linearRampToValueAtTime(peak, t0 + attack);
+      g.gain.setTargetAtTime(0, t0 + attack, tau);
       o.connect(g); g.connect(lp);
-      o.start(t0); o.stop(t0 + dur + .4);
+      const stop = t0 + attack + tau * 9.5;           // -82 dB: kesilince tık yok
+      o.start(t0); o.stop(stop);
+      if (stop > last) last = stop;
       nodes.push(o, g);
     });
-    nodes[0].onended = () => {for (const n of nodes) n.disconnect(); lp.disconnect(); out.disconnect();};
+    const tail = ctx.createConstantSource ? ctx.createConstantSource() : null;
+    if (tail) {tail.offset.value = 0; tail.connect(lp); tail.start(t0); tail.stop(last + .05);
+      tail.onended = () => {for (const n of nodes) n.disconnect(); tail.disconnect(); lp.disconnect(); out.disconnect();};}
   }
-
-  // Yankılı akor katmanı: 4 ses, yavaş nefes, kayarak akor değiştirir.
-  const padBus = ctx.createGain(); padBus.gain.value = 0;
-  const padLp = ctx.createBiquadFilter(); padLp.type = 'lowpass'; padLp.frequency.value = 820; padLp.Q.value = .3;
-  padBus.connect(padLp); padLp.connect(bus);
-  const breath = ctx.createOscillator(), breathAmt = ctx.createGain();
-  breath.frequency.value = 1 / 17; breathAmt.gain.value = 0;
-  breath.connect(breathAmt); breathAmt.connect(padBus.gain); breath.start();
-  const padVoices = [];
-  for (let i = 0; i < 4; i++) {
-    const g = ctx.createGain(); g.gain.value = [.5, .34, .28, .18][i];
-    const pan = ctx.createStereoPanner ? ctx.createStereoPanner() : ctx.createGain();
-    if (pan.pan) pan.pan.value = [-.35, .3, -.1, .4][i];
-    const oscs = [-3, 3].map(c => {const o = ctx.createOscillator(); o.type = 'sine'; o.detune.value = c; o.connect(g); o.start(); return o;});
-    g.connect(pan); pan.connect(padBus);
-    padVoices.push(oscs);
-  }
-  let padLevel = 0;
-  function pad(midis, glideSecs = 3.5, now = ctx.currentTime) {
-    padVoices.forEach((oscs, i) => {
-      const m = midis[i % midis.length];
-      for (const o of oscs) {
-        if (!o._set) {o.frequency.setValueAtTime(NOTE(m), now); o._set = true;}
-        else o.frequency.setTargetAtTime(NOTE(m), now, glideSecs / 3);
-      }
-    });
-  }
-  function padTo(levelTo, secs = 4, now = ctx.currentTime) {
-    padLevel = levelTo;
-    padBus.gain.cancelScheduledValues(now);
-    padBus.gain.setValueAtTime(padBus.gain.value, now);
-    padBus.gain.linearRampToValueAtTime(levelTo, now + secs);
-    breathAmt.gain.setTargetAtTime(levelTo * .55, now, secs / 2);   // nefes: sabit uğultu değil
+  // Örnek sesler (woosh, tık, kuşlar): tepe/ortalama ölçülüp hedefe çekilir.
+  function sample(buffer, t0, {gain = 1, rate = 1, pan = 0, lowpass = 0, highpass = 0, toHall = 0} = {}) {
+    const src = ctx.createBufferSource(); src.buffer = buffer; src.playbackRate.value = rate;
+    let node = src;
+    const chain = [];
+    if (highpass) {const h = ctx.createBiquadFilter(); h.type = 'highpass'; h.frequency.value = highpass; node.connect(h); node = h; chain.push(h);}
+    if (lowpass) {const l = ctx.createBiquadFilter(); l.type = 'lowpass'; l.frequency.value = lowpass; l.Q.value = .3; node.connect(l); node = l; chain.push(l);}
+    const g = ctx.createGain(); g.gain.value = gain; node.connect(g); chain.push(g);
+    const out = ctx.createStereoPanner ? ctx.createStereoPanner() : ctx.createGain();
+    if (out.pan) out.pan.value = pan;
+    g.connect(out); out.connect(master); chain.push(out);
+    if (toHall) {const w = ctx.createGain(); w.gain.value = toHall; g.connect(w); w.connect(verb); chain.push(w);}
+    src.start(t0);
+    src.onended = () => {src.disconnect(); for (const n of chain) n.disconnect();};
+    return src;
   }
   function level(to, secs = 1.6) {
     const now = ctx.currentTime, N = 24, curve = new Float32Array(N), from = master.gain.value;
@@ -230,28 +239,31 @@ export function createSoundEngine(ctx, {output = ctx.destination} = {}) {
     try {master.gain.cancelScheduledValues(now); master.gain.setValueCurveAtTime(curve, now, secs);}
     catch {master.gain.linearRampToValueAtTime(to, now + secs);}
   }
-  return {piano, pad, padTo, level, master, bus, get padLevel() {return padLevel;}};
+  return {piano, sample, level, master};
 }
 
-// Akor katmanının notaları: bas bir oktav yukarıda + akorun alt üç tonu, orta-alçak kayıtta.
+// Arkadaki akorun notaları: bas bir oktav yukarıda + akorun alt üç tonu, orta-alçak kayıtta.
 export function padChord(chord) {
   const fold = m => {while (m > 64) m -= 12; while (m < 45) m += 12; return m;};
   return [fold(chord.bass + 12), ...chord.tones.slice(0, 3).map(fold)];
 }
-const PAD_LEVEL = .011, PAD_TOUR = .007;
 const MASTER = .9, TOUR_MASTER = .62;
 
-// Yakın çevrede kuşlar (ürün sahibi: "kuş sesleri iyiydi"): bahar öğleden
-// sonrası kaydı, seviyesi ölçülüp kısık bir hedefe çekilir, kendiyle çapraz
-// geçerek döner. Yalnız dışarıda ve gündüz.
-const BIRDS_FILE = 'AMBHome-Peaceful_spring_afte-Elevenlabs.mp3', BIRDS_DB = -43;
+// Örnek sesler audio/11lbs'ten: kat geçişi woosh'u, arayüz tıkı, yakın çevrede kuşlar.
+const FILES = {
+  woosh: 'WHSH-slow_woosh._Gentle_w-Elevenlabs.mp3',
+  click: 'UIClick-Create_a_clean,_mini-Elevenlabs.mp3',
+  birds: 'AMBHome-Peaceful_spring_afte-Elevenlabs.mp3',
+};
+// hedefler: tek atımlıklar tepeye, kuşlar ortalamaya göre (dBFS)
+const TARGET = {woosh: -22, click: -33, birds: -46};
 function birdsWanted(state) {
   const outside = state.tourView ? state.tourView === 'neighborhood' : state.walking ? state.outdoor : state.view === 'neighborhood';
   return outside && (state.daylight ?? 1) > .2;
 }
 
 export function createSoundscape({buttons = [], root = document, storage, audioRoot = null, Context = globalThis.AudioContext ?? globalThis.webkitAudioContext} = {}) {
-  let enabled = true, ctx = null, engine = null, unlocked = false, timer = null, nextAt = 0;
+  let enabled = true, ctx = null, engine = null, unlocked = false, timer = null, nextAt = 0, chordAt = 0, lastClick = -Infinity, hiddenTimer = null;
   if (storage === undefined) try {storage = globalThis.localStorage;} catch {}
   try {enabled = storage?.getItem('angora.sound') !== 'off';} catch {}
   let preset = DEFAULT_PRESET;
@@ -260,38 +272,49 @@ export function createSoundscape({buttons = [], root = document, storage, audioR
   const mem = {};
   const chord = () => chordFor(state, preset);
   const running = () => enabled && ctx && ctx.state === 'running' && !root.hidden;
+  const target = () => enabled ? (state.tourView ? TOUR_MASTER : MASTER) : 0;
 
-  // kuşlar
-  let birdsBuffer = null, birdsLoading = null, birds = null;
-  function loadBirds() {
-    if (birdsBuffer || birdsLoading || !audioRoot) return birdsLoading;
-    birdsLoading = fetch(new URL(encodeURIComponent(BIRDS_FILE), audioRoot)).then(r => r.ok ? r.arrayBuffer() : null)
+  // örnekler: bir kez indirilir, ölçülür
+  const buffers = {}, loading = {};
+  function load(key) {
+    if (buffers[key] || !audioRoot || !ctx) return Promise.resolve(buffers[key] ?? null);
+    return loading[key] ??= fetch(new URL(encodeURIComponent(FILES[key]), audioRoot)).then(r => r.ok ? r.arrayBuffer() : null)
       .then(data => data && new Promise((res, rej) => ctx.decodeAudioData(data, res, rej)))
       .then(buffer => {
         if (!buffer) return null;
-        let sum = 0, n = 0; const d = buffer.getChannelData(0);
-        for (let i = 0; i < d.length; i += 4) if (Math.abs(d[i]) > 1e-5) {sum += d[i] * d[i]; n++;}
-        buffer._gain = Math.min(60, 10 ** ((BIRDS_DB - 20 * Math.log10(Math.sqrt(sum / Math.max(1, n)) || 1e-6)) / 20));
-        return (birdsBuffer = buffer);
+        const d = buffer.getChannelData(0); let sum = 0, n = 0, peak = 0;
+        for (let i = 0; i < d.length; i += 2) {const v = Math.abs(d[i]); if (v > peak) peak = v; if (v > 1e-5) {sum += v * v; n++;}}
+        const lvl = key === 'birds' ? 20 * Math.log10(Math.sqrt(sum / Math.max(1, n)) || 1e-6) : 20 * Math.log10(peak || 1e-6);
+        buffer._gain = Math.min(30, 10 ** ((TARGET[key] - lvl) / 20));
+        return (buffers[key] = buffer);
       }).catch(() => null);
-    return birdsLoading;
   }
+  function shot(key, opts = {}) {
+    if (!running()) return;
+    load(key).then(b => {if (b && running()) engine.sample(b, ctx.currentTime + (opts.delay ?? .01), {...opts, gain: b._gain * (opts.gain ?? 1)});});
+  }
+
+  // kuşlar: kendiyle çapraz geçerek döner; tıslamayı kesmek için 400 Hz - 6,5 kHz bandı
+  let birds = null;
   function birdsOn() {
     if (birds || !running()) return;
-    const g = ctx.createGain(); g.gain.value = 0; g.connect(engine.master);
-    birds = {g, alive: true, timer: null};
+    const g = ctx.createGain(); g.gain.value = 0;
+    const h = ctx.createBiquadFilter(); h.type = 'highpass'; h.frequency.value = 400;
+    const l = ctx.createBiquadFilter(); l.type = 'lowpass'; l.frequency.value = 6500; l.Q.value = .3;
+    h.connect(l); l.connect(g); g.connect(engine.master);
+    birds = {g, h, alive: true, timer: null};
     const me = birds;
-    Promise.resolve(loadBirds()).then(buffer => {
+    load('birds').then(buffer => {
       if (!buffer || !me.alive) return;
-      const target = buffer._gain, FADE = 2.5;
-      g.gain.setTargetAtTime(target, ctx.currentTime, 1.2);
+      g.gain.setTargetAtTime(buffer._gain, ctx.currentTime, 1.4);
+      const FADE = 2.5;
       const spawn = (at, offset) => {
         if (!me.alive) return;
         const src = ctx.createBufferSource(), fg = ctx.createGain(); src.buffer = buffer;
         const length = buffer.duration - offset, edge = Math.min(FADE, length / 3);
         fg.gain.setValueAtTime(offset ? 1 : 0, at); if (!offset) fg.gain.linearRampToValueAtTime(1, at + edge);
         fg.gain.setValueAtTime(1, at + length - edge); fg.gain.linearRampToValueAtTime(0, at + length);
-        src.connect(fg); fg.connect(g); src.start(at, offset); src.stop(at + length + .05);
+        src.connect(fg); fg.connect(h); src.start(at, offset); src.stop(at + length + .05);
         src.onended = () => {src.disconnect(); fg.disconnect();};
         const next = at + length - edge;
         me.timer = setTimeout(() => spawn(Math.max(ctx.currentTime + .05, next), 0), Math.max(0, (next - ctx.currentTime - 1) * 1000));
@@ -303,13 +326,15 @@ export function createSoundscape({buttons = [], root = document, storage, audioR
     if (!birds) return;
     const b = birds; birds = null; b.alive = false; clearTimeout(b.timer);
     if (ctx) b.g.gain.setTargetAtTime(0, ctx.currentTime, .9);
-    setTimeout(() => b.g.disconnect(), 4000);
+    setTimeout(() => {b.g.disconnect(); b.h.disconnect();}, 5000);
   }
-  function syncAmbience(glide = 3.5) {
+  function syncAmbience() {
     if (!engine || !unlocked) return;
-    engine.pad(padChord(chord()), glide);
-    if (enabled) engine.padTo(state.tourView ? PAD_TOUR : PAD_LEVEL, 4);
     if (enabled && birdsWanted(state)) birdsOn(); else birdsOff();
+  }
+  // arka plan akoru: aynı piyano, yavaş tellenir, neredeyse hep yankı
+  function ambientChord(at, vel = .016) {
+    padChord(chord()).forEach((m, k) => engine.piano(m, at + k * (.11 + Math.random() * .05), vel * (k ? .8 : 1), -.3 + k * .2, 9, true));
   }
 
   function schedule() {
@@ -320,6 +345,10 @@ export function createSoundscape({buttons = [], root = document, storage, audioR
       for (const n of phrase.notes) engine.piano(n.midi, Math.max(ctx.currentTime + .02, at + n.at), n.vel, n.pan, n.len);
       nextAt = at + phrase.wait;
     }
+    if (chordAt < ctx.currentTime + .4) {
+      ambientChord(Math.max(chordAt, ctx.currentTime + .05), state.tourView ? .011 : .016);
+      chordAt = Math.max(chordAt, ctx.currentTime) + 15 + Math.random() * 7;
+    }
   }
   async function unlock() {
     if (!enabled || !Context) return;
@@ -328,9 +357,11 @@ export function createSoundscape({buttons = [], root = document, storage, audioR
     if (ctx.state !== 'running') return;
     if (!unlocked) {
       unlocked = true;
-      engine.level(state.tourView ? TOUR_MASTER : MASTER, 3);
-      nextAt = ctx.currentTime + 2.5;               // önce akor katmanı açılır, sonra ilk nota
-      syncAmbience(0);
+      engine.level(target(), 3);
+      chordAt = ctx.currentTime + .4;               // önce yankılı bir akor, sonra melodi
+      nextAt = ctx.currentTime + 3;
+      for (const k of ['woosh', 'click']) load(k);
+      syncAmbience();
     }
     clearInterval(timer); timer = setInterval(schedule, 120);
   }
@@ -344,43 +375,72 @@ export function createSoundscape({buttons = [], root = document, storage, audioR
     button.addEventListener('click', () => {
       enabled = !enabled; update();
       try {storage?.setItem('angora.sound', enabled ? 'on' : 'off');} catch {}
-      if (engine) engine.level(enabled ? (state.tourView ? TOUR_MASTER : MASTER) : 0, .6);
+      if (engine) engine.level(target(), .8);
       if (enabled) void unlock().then(() => syncAmbience()); else {clearInterval(timer); timer = null; birdsOff();}
     });
   }
-  root.addEventListener('visibilitychange', () => {
-    if (!ctx) return;
-    try {void (root.hidden ? ctx.suspend() : enabled && unlocked ? ctx.resume() : null)?.catch?.(() => {});} catch {}
+  root.addEventListener('click', event => {
+    const control = event.target.closest?.('button,select,[role=button],summary');
+    if (!control || buttons.includes(control) || control.disabled) return;
+    api.play();
   });
-
-  // Geçiş: akor katmanı yeni akora kayar, üstünde tek yumuşak nota.
-  function arrive(ms = 950, rising = true) {
-    if (!running()) return;
-    syncAmbience(Math.max(1.5, ms / 300));
-    const c = chord(), m = rising ? c.tones[Math.floor(c.tones.length / 2)] : c.tones[0];
-    engine.piano(m, ctx.currentTime + .25, .028, rising ? .15 : -.15);
-    nextAt = Math.max(nextAt, ctx.currentTime + 3.2);
-  }
+  // Sekme değişince / küçültülünce yumuşak çıkış, dönünce yumuşak giriş (şak diye değil).
+  const onVisibility = () => {
+    if (!ctx || !engine || !unlocked) return;
+    clearTimeout(hiddenTimer);
+    if (root.hidden || root.visibilityState === 'hidden') {
+      engine.level(0, .7);
+      hiddenTimer = setTimeout(() => {try {void ctx.suspend().catch(() => {});} catch {}}, 800);
+    } else if (enabled) {
+      Promise.resolve(ctx.state === 'suspended' ? ctx.resume() : null).catch(() => {})
+        .then(() => {engine.level(target(), 1.8); nextAt = Math.max(nextAt, ctx.currentTime + 1.5);});
+    }
+  };
+  root.addEventListener('visibilitychange', onVisibility);
+  globalThis.addEventListener?.('pagehide', () => {if (engine && unlocked) engine.level(0, .3);});
 
   const api = {
     get enabled() {return enabled;},
     get preset() {return preset;},
     set(next) {
-      const before = sceneKey(state), wasTour = Boolean(state.tourView), wasBirds = birdsWanted(state), oldChord = JSON.stringify(chord());
+      const before = sceneKey(state), wasTour = Boolean(state.tourView), wasBirds = birdsWanted(state);
       state = {...state, ...next};
-      if (engine && unlocked && wasTour !== Boolean(state.tourView)) engine.level(enabled ? (state.tourView ? TOUR_MASTER : MASTER) : 0, 2);
+      if (engine && unlocked && wasTour !== Boolean(state.tourView)) engine.level(target(), 2);
       if (sceneKey(state) !== before) mem.last = undefined;
-      if (JSON.stringify(chord()) !== oldChord || wasBirds !== birdsWanted(state) || wasTour !== Boolean(state.tourView)) syncAmbience();
+      if (wasBirds !== birdsWanted(state)) syncAmbience();
     },
     setPreset(name) {
       if (!SOUND_PRESETS[name]) return;
       preset = name; for (const k of Object.keys(mem)) delete mem[k];
       try {storage?.setItem('angora.sound-preset', name);} catch {}
-      void unlock().then(() => arrive(950, true));
+      void unlock().then(() => {if (running()) {ambientChord(ctx.currentTime + .05); nextAt = Math.max(nextAt, ctx.currentTime + 2.5);}});
     },
-    transition(ms = 950, rising = true) {arrive(ms, rising);},
-    // Arayüz tıkları sessiz (ürün sahibi: "alarm gibi"); fotoğraf açılınca tek yumuşak orta nota.
-    play() {},
+    // Kat geçişi: woosh (yukarı biraz parlak, aşağı biraz koyu) + yeni katın tek notası.
+    transition(ms = 950, rising = true) {
+      if (!running()) return;
+      shot('woosh', {rate: (rising ? 1.03 : .92) * Math.max(.9, Math.min(1.08, 950 / Math.max(500, ms))), lowpass: rising ? 6000 : 3800, toHall: .15});
+      const c = chord(), m = rising ? c.tones[Math.floor(c.tones.length / 2)] : c.tones[0];
+      engine.piano(m, ctx.currentTime + .45, .026, rising ? .15 : -.15);
+      nextAt = Math.max(nextAt, ctx.currentTime + 3.2);
+    },
+    // Ölçek geçişi (Bölge / Yakın çevre / Villa, bulut perdesiyle): uzun, yavaş,
+    // havadar bir rüzgâr - woosh yavaşlatılıp koyulaştırılır ve yankıya gömülür;
+    // bulut açılırken yeni sahnenin akoru yankıdan doğar.
+    scale(into = 'neighborhood') {
+      if (!running()) return;
+      const outward = into === 'region';
+      shot('woosh', {rate: outward ? .68 : .78, lowpass: 2600, highpass: 120, toHall: .7, gain: .85});
+      shot('woosh', {rate: outward ? .6 : .7, lowpass: 1800, highpass: 160, toHall: .9, gain: .45, pan: .35, delay: .18});
+      ambientChord(ctx.currentTime + .55, .02);
+      chordAt = ctx.currentTime + 12 + Math.random() * 6;
+      nextAt = Math.max(nextAt, ctx.currentTime + 3.6);
+    },
+    // Arayüz tıkı: kısa, temiz, kısık örnek; hızlı ardışık basışlarda tekrar etmez.
+    play() {
+      if (!running()) return;
+      const now = performance.now(); if (now - lastClick < 80) return; lastClick = now;
+      shot('click', {lowpass: 7000});
+    },
     open() {
       if (!running()) return;
       const c = chord(); engine.piano(c.tones[1], ctx.currentTime + .02, .02, .1, 3);

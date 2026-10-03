@@ -1024,7 +1024,10 @@ async function selectView(id, initial = false) {
     // The plane takes just under a second to travel; the sweep takes exactly
     // as long and runs the way the plane runs. Forced during the tour, which
     // is already playing a voice.
-    interfaceSound?.transition(750, target > clip.constant, guidedTour?.active);
+    // 04.10: Bölge / Yakın çevre / Villa arası (bulut perdesi) ayrı, uzun ve
+    // havadar bir geçiş sesi; kat arası kendi woosh'u.
+    if(previous!==id&&[id,previous].some(v=>v==='region'||v==='neighborhood'))interfaceSound?.scale(id);
+    else interfaceSound?.transition(750, target > clip.constant, guidedTour?.active);
   }
   frame(initial);
   invalidateUIObstacles();
