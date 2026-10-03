@@ -149,7 +149,7 @@ let nativeDelivery=null,nativeSwitching=false,nativeAtlas=null,nativeSoil=null,p
 let selected = 'neighborhood', ready = false, loading = false;
 let furnitureVisible = true, roomNamesVisible = true, measurementsVisible = false, annotations, walk;
 let photosVisible = false, photoPins = null, photoViewer = null;let photoPoints=null;
-let frameSpan = 40, framePending = false, fullHeight = 30, transition = null;
+let frameSpan = 40, framePending = false, fullHeight = 30, transition = null, presentationExporting = false;
 let deviceQA,assetRevision=null,pendingCapture=null,contextLost=false,massing=null,lift=null,interfaceSound=null;
 // Live location during the tour: the interface names where the feet ARE,
 // with a short dwell so a doorway crossing cannot flicker the title.
@@ -231,6 +231,7 @@ function setFurnitureVisible(visible) {
   invalidate();
 }
 function invalidate() {
+  if (presentationExporting) return;
   if (framePending || !renderer || contextLost || renderer.xr.isPresenting) return;
   framePending = true;
   requestAnimationFrame(time => {if (!renderer.xr.isPresenting) renderFrame(time); else framePending = false;});
@@ -381,9 +382,10 @@ function renderFrame(time) {
     // harita açıkken her geçersizlemede. Harita örtünce 3B kare çizilmez.
     const regionCovered=selected==='region'&&regionMap?.covering;
     if(!regionCovered){
+      if(presentationRecording){if(nativeSoil&&!planMode)nativeSoil.visible=false;if(soilCap&&!planMode)soilCap.group.visible=false;for(const [name,group] of groups)if(name.startsWith("context-")||name==="villa-context-white")group.visible=false;}
       lighting.render(activeCamera);
       {const sl=lighting?.sunLight?.();if(sl&&neighbourLines)neighbourLines.setLight(sl.direction,sl.daylight);}
-      neighbourLines?.render(scene,activeCamera);
+      if(!presentationRecording)neighbourLines?.render(scene,activeCamera);
     }
       if(FRAME_STATS)host.dataset.frameStats=JSON.stringify({view:selected,drawCalls:renderer.info.render.calls,triangles:renderer.info.render.triangles,allRenderPasses:true,transition:Boolean(transition||flight?.active),sectionCaps:{visible:Boolean(caps?.group.visible),height:caps?.group.children[0]?.position.y,triangles:(caps?.group.children[0]?.geometry.index?.count??0)/3}});
     if(measuredTransition){
@@ -456,7 +458,7 @@ function resize() {
   invalidateUIObstacles();
   if (!renderer) return;
   const w = host.clientWidth, h = Math.max(1, host.clientHeight), aspect = w / h;
-  const ratio=renderPixelRatio(w,h,devicePixelRatio,quality?.value??false);
+  const ratio=presentationRecording?2:renderPixelRatio(w,h,devicePixelRatio,quality?.value??false);
   if(renderer.getPixelRatio()!==ratio){renderer.setPixelRatio(ratio);lighting?.pixelRatio(ratio);}
   camera.aspect=aspect;
   if(camera.isOrthographicCamera){camera.left=-camera.top*aspect;camera.right=camera.top*aspect;}
@@ -1914,7 +1916,31 @@ async function loadNativeModel(manifest){
   // ışınlanma ışını yalnız bina, iç mekân ve bahçeye (komşu/çevre grupları gözlükte yavaşlatmasın)
   wireImmersive({values:()=>[...groups].filter(([name])=>name==='architecture'||name==='garden'||name.startsWith('interior')).map(([,group])=>group)});
   await selectView(selected,true);lighting.render(camera);
-  mountPresentationRecorder({enabled:presentationRecording,selectView,renderer,capture:callback=>{pendingCapture=callback;invalidate();},setPlan:on=>{planMode=on;quality?.applyView(selected,{plan:on});frame(true);},project:(floor,data)=>({floor,width:renderer.domElement.width,height:renderer.domElement.height,photos:data.photos.filter(p=>!p.outdoor&&p.floor===floor).map(p=>{const v=new THREE.Vector3(p.x,[0,3.0996,6.3714,9.4705][floor]+.03,p.z).project(camera);return {id:p.id,x:(v.x+1)/2,y:(1-v.y)/2};}),dimensions:data.dimensions.filter(d=>d.floor_index===floor).map(d=>({...d,screen:[d.a,d.b].map(p=>{const v=new THREE.Vector3(p[0],[0,3.0996,6.3714,9.4705][floor]+.03,p[2]).project(camera);return [(v.x+1)/2,(1-v.y)/2];})}))})});
+  mountPresentationRecorder({enabled:presentationRecording,selectView,renderer,
+    capture:callback=>{pendingCapture=callback;invalidate();},
+    setPlan:on=>{planMode=on;quality?.applyView(selected,{plan:on});frame(true);},
+    beginExport:()=>{presentationExporting=true;clearTimeout(idleRefineTimer);},
+    endExport:()=>{presentationExporting=false;invalidate();},
+    createMove:async floor=>{
+      await selectView(`f${floor}`,false);
+      const cameraMove=flight.active,cut=transition;
+      flight.active=null;transition=null;
+      return async progress=>{
+        if(cameraMove){flight.active={...cameraMove,elapsed:0,last:cameraMove.start};flight.limitFrameStep=false;flight.update(cameraMove.start+850*progress);flight.active=null;flight.limitFrameStep=true;}
+        if(cut)clip.constant=THREE.MathUtils.lerp(cut.from,cut.to,smoothStep(progress));
+        renderFrame(performance.now());
+        return new Promise(resolve=>renderer.domElement.toBlob(resolve,'image/jpeg',.97));
+      };
+    },
+    project:(floor,data)=>{
+      const project=p=>{const v=new THREE.Vector3(p[0],[0,3.0996,6.3714,9.4705][floor]+.03,p[1]).project(camera);return [(v.x+1)/2,(1-v.y)/2];};
+      const slice=nativeAtlas.slices[floor];
+      return {floor,width:renderer.domElement.width,height:renderer.domElement.height,
+        contour:Array.from({length:slice.p.length/2},(_,i)=>project([slice.p[i*2],slice.p[i*2+1]])),
+        photos:data.photos.filter(p=>!p.outdoor&&p.floor===floor).map(p=>{const [x,y]=project([p.x,p.z]);return {id:p.id,x,y,direction:project([p.x+p.dx*1.4,p.z+p.dz*1.4])};}),
+        rooms:data.rooms.filter(r=>r.floor===floor).map(r=>({...r,screen:r.poly.map(project),label:project(r.anchor)})),
+        dimensions:data.dimensions.filter(d=>d.floor_index===floor).map(d=>({...d,screen:[d.a,d.b].map(p=>project([p[0],p[2]]))}))};
+    }});
   phaseDone('view');step(null);status.hidden=true;
   host.dataset.deliveryStats=JSON.stringify({...JSON.parse(host.dataset.deliveryStats),readyMs:Math.round(performance.now()-loadStarted)});
   // The frame behind it is already drawn, so the screen leaves at once and

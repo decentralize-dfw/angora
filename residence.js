@@ -4,7 +4,7 @@
   const $$ = selector => [...document.querySelectorAll(selector)];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const hasMotion = !!(window.gsap && window.ScrollTrigger);
-  let lenis = null, chapterTrigger = null, gardenTrigger = null;
+  let lenis = null, gardenTrigger = null;
   if (hasMotion) gsap.registerPlugin(ScrollTrigger);
   if (!reduced && hasMotion && window.Lenis) {
     lenis = new Lenis({duration:1.15, smoothWheel:true, syncTouch:false,
@@ -17,6 +17,7 @@
     if (lenis) lenis.scrollTo(target, {duration:1.35, ...options});
     else window.scrollTo({top:typeof target === 'number' ? target : target.getBoundingClientRect().top + scrollY + (options.offset || 0), behavior:reduced ? 'instant' : 'smooth'});
   }
+  window.AngoraScroll={stop:()=>lenis?.stop(),start:()=>lenis?.start(),to:(top,immediate=false)=>scrollTo(top,{immediate,force:true})};
   window.addEventListener('angora:scroll', event => scrollTo(event.detail.top,{immediate:!!event.detail.immediate}));
   const menu = $('#menu'), menuToggle = $('.menu-toggle');
   let returnFocus = null;
@@ -43,7 +44,7 @@
     const target = document.getElementById(link.hash.slice(1));
     if (!target) return;
     event.preventDefault(); closeMenu();
-    scrollTo(target, {offset:target.id === 'home' || target.id === 'floors' || target.id === 'garden' ? 0 : -75});
+    scrollTo(target, {offset:['home','floors','atlas','garden'].includes(target.id) ? 0 : -75});
     history.replaceState(null, '', link.hash);
   }));
   function updateHeader() {
@@ -54,10 +55,7 @@
     });
     const life=$('.angora-life');
     const darkLife=life && center>=life.offsetTop && center<life.offsetTop+life.offsetHeight;
-    // The circular wipe at the end of the opening has a cream background.
-    const hero = $('.hero-story');
-    const heroCream = scrollY > (hero.offsetHeight - innerHeight) * .9 && scrollY < hero.offsetHeight;
-    const useDark = (dark || darkLife) && !heroCream && menu.hidden;
+    const useDark = (dark || darkLife) && menu.hidden;
     $('.header').classList.toggle('on-dark', useDark);
     $('.scroll-index').classList.toggle('on-dark', useDark);
     const progress = scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight);
@@ -125,8 +123,8 @@
     }
   }
   function goChapter(index) {
-    if (chapterTrigger) scrollTo(chapterTrigger.start + (chapterTrigger.end - chapterTrigger.start) * (index / 3));
-    else {setChapter(index); scrollTo($('#floors'));}
+    if(Math.abs($('#floors').getBoundingClientRect().top)>5)scrollTo($('#floors'),{immediate:true});
+    if(window.AngoraIso)window.AngoraIso.go(index);else setChapter(index);
   }
   $$('[data-chapter]').forEach(button => {
     button.addEventListener('click', () => goChapter(Number(button.dataset.chapter)));
@@ -186,9 +184,6 @@
         .set('.garden-2', {opacity:1}, .64)
         .fromTo('.garden-2', {clipPath:'polygon(100% 0%,100% 0%,125% 100%,100% 100%)'}, {clipPath:'polygon(0% 0%,100% 0%,100% 100%,0% 100%)',duration:.14,ease:'power2.inOut'}, .64)
         .fromTo('.garden-2', {scale:1.15}, {scale:1, duration:.34, ease:'none'}, .66);
-      chapterTrigger = ScrollTrigger.create({...scrub('.chapters'), onUpdate:self => {
-        window.dispatchEvent(new CustomEvent('angora:chapter-progress',{detail:self.progress}));
-      }});
       // Keep the neighbourhood legible until a complete scene handoff is chosen.
       // The motion study documents the coupled footer and architectural masks.
       gsap.timeline({scrollTrigger:scrub('.life-opening')})

@@ -1,113 +1,73 @@
 # Angora 21 — English residence presentation
 
-Entry point: `web-gpt.html`. Run `node tools/serve-residence.mjs` and open
-`http://localhost:4180/web-gpt.html`. The existing interactive tour and the
-ERA / Likova library in `casestudy.html` remain separate entry points.
+Entry: `web-gpt.html`. Preview: `node tools/serve-residence.mjs` on port 4180.
 
-## Material and visual direction
+## Motion
 
-Ice blue, forest green, warm brown and ivory connect the supplied villa views
-with an early-autumn editorial direction. Headings use locally hosted Cormorant
-Garamond; interface and body text use locally hosted Manrope. Their OFL licences
-are in `assets/residence/fonts/`.
+A physical wheel gesture starts one whole camera film. Playback is independent
+of wheel delta and stops at the destination until the next gesture. Three gestures
+play approach, orbit and garden return in order, each in 1.65 seconds. The fourth
+moves into the residence. The opening darkening movie remains behind a black veil.
 
-The seven new views from Downloads live in `assets/residence/new/`, with original
-filenames in `sources.json`. Exterior imagery is assigned to street arrival,
-garden elevation, pool, terrace and neighbourhood respectively. The old exterior
-photo set is excluded from the page and its dynamic gallery. Interior photographs
-retain their original floor and photographed subject. Raw archive IDs stay inside
-the data; displayed camera points start at 1 on each floor.
+`residence-steps.js` owns the scene input. Momentum events are grouped using a
+220 ms quiet interval. Events received during playback are consumed without
+queuing another movie. PageUp/PageDown and touch swipes use the same scene
+transitions. Navigation links, photograph dialogs and floor tabs remain available.
 
-## Recorded camera sequence
+Both the isometric section and the graphic plan change one floor per gesture.
+An isometric move lasts 1.4 seconds; a graphic-plan transformation lasts 0.9 seconds.
+Backward gestures use separately encoded reverse movies. The browser plays
+preloaded H.264 movies directly; no WebP sequence seeks or scroll catch-up loop
+runs during these scenes. Exterior/editorial and gallery motion remains tied to
+scroll, with each horizontal strip finishing before the page moves vertically.
 
-The supplied opening darkening film plays behind a black opening veil. Three
-supplied camera clips then follow continuous endpoints: pool approach, elevation
-orbit, and the reversed garden return. Each clip now occupies five viewport
-scroll distances. Its first camera movement uses 0–32% of that distance, then
-holds at its midpoint from 32–48%; movement resumes from 48–80%, followed by a
-destination hold. Each hold has information appropriate to that view.
+## Model capture and graphic plans
 
-`residence-camera.js` smooths the displayed camera progress independently of
-wheel impulses. Forward and backward scroll use the same frame mapping.
-`residence-film-runtime.js` fetches four frames concurrently, keeps 28 decoded
-frames on desktop / 16 on mobile, and preserves the full source composition.
+The recorder in `viewer/src/presentation-recorder.js` exports the actual Tur 10
+model at 2560 × 1440. It renders 43 deterministic samples for each native camera
+flight and section-plane movement. GPU speed cannot drop frames. Six H.264 films
+(forward/reverse), four isometric stills and four orthographic stills are published.
+The presentation capture excludes surrounding buildings and the exposed soil
+section hatch so the garden level has an intelligible architectural silhouette.
 
-## Actual isometric floors and transforming plans
+Reproduce with the local capture receiver on 4181, the viewer on 4173, and the
+viewer URL carrying `presentation-record=1`. Press Record presentation, then run
+`python tools/prepare-native-films.py` (FFmpeg and Shapely). Raw samples live under
+ignored `build/presentation-capture`; the published movies and WebP stills live
+under `assets/residence/chapters`.
 
-The homepage plays recordings, without a live model. Both four-floor sequences
-were captured from the actual Three.js viewer and its Tur 10 model, including
-native floor clipping, camera flights and orthographic furnished plans. There is
-no studio plinth or replacement floor diagram.
+The graphic plan uses measured room polygons and wall-section boundaries from
+the repository. Indexed section triangles are united before their boundaries are
+drawn, so triangulation diagonals never appear as walls. A low-opacity 1440p
+furnished native model plan sits below the graphic lines. All registered camera
+positions, view cones and directions are visible on every floor. Numbers restart
+at 1 for each floor; clicking a point displays its associated room photograph.
+Camera-number labels separate while leaders retain their real positions. Room
+labels avoid the camera numbers and use margin callouts where space is tight.
+DXF dimensions and supplied room areas retain their original registration.
 
-Capture workflow:
+## Photography and visual direction
 
-1. Start `node tools/capture-residence.mjs` on localhost:4181.
-2. Start the viewer dev server on localhost:4173. Its local proxy carries the
-   capture endpoints.
-3. Open `/?lang=en&view=f0&presentation-record=1` and press Record presentation.
-4. Run `python tools/prepare-native-films.py` with FFmpeg installed.
+Ice blue, forest green, walnut brown and ivory are paired with locally hosted
+Cormorant Garamond and Manrope. The OFL licences are bundled with the fonts.
 
-The capture flag only changes recording framing and adds the local export
-button. The regular interactive viewer keeps its normal controls and framing.
-The export includes two WebM recordings, four isometric stills, four plan stills,
-and `poses.json`: exact photo and DXF positions projected by the plan camera.
-The preparation tool writes independently decoded WebP frames, fallback stills,
-MP4s and `native-manifest.json`.
+The presentation uses the seven newly supplied Downloads views under
+`assets/residence/new`, with source names in `sources.json`. The old exterior drone
+set is excluded. The street arrival, garden sequence, location and closing interior
+have distinct photograph assignments. A separate family-room strip replaces the
+repeated exterior strip. The collection contains 45 distinct views: five new
+exteriors and every registered interior photograph. Revised repository photographs
+from `photogallery-v2` preserve their source camera coordinates and room associations.
 
-Within each floor interval, the scene rests while its description is readable,
-then travels to the next floor using the recorded native transition. The
-isometric chapter copy follows displayed camera state. The plan crop interpolates
-between the same recorded viewpoints; registered points reappear on the settled
-plan. Floor selection moves to that floor's scroll position.
+Life in Angora includes two seasonal interpretations of official community
+photographs. Provenance, source URLs and edit instructions remain under
+`assets/residence/life/provenance.json`; the page discloses their adaptation.
 
-Plan labels separate where several camera points occupy one small room; leader
-lines preserve their registered locations. Selecting a point shows the matching
-original photograph, direction and subject-room area when the owner's schedule
-provides it. The optional dimensions come from the supplied DXF. Areas are
-approximate; unspecified values are not invented.
+## Validation
 
-## Selected motion recipes
-
-The reference library is used selectively, according to each section's material:
-
-| Section | Selected study | Application |
-| --- | --- | --- |
-| Opening camera | Likova 21, 14–15 | Separate movement / reading phases, camera-linked copy, chapter progress |
-| Film framing | ERA 12, Likova 18 | Full-screen image contracts during a pause and expands for the next movement |
-| Exterior / kitchens | ERA 13, Likova 36 | Image window opens, then the pinned strip traverses its measured width |
-| Four chapters | Likova 14, 16 | Actual cut-plane and camera recording with matching floor narrative |
-| Plan atlas | Likova 25, 27 | Plan-to-plan recording and paired disappearance / reappearance of camera markers |
-| Editorial statements | Likova 9 | Word-window reveals on selected large statements |
-| Neighbourhood photographs | ERA 24 | Restrained internal photo movement and paired editorial framing |
-| Collection | Likova 45 | Width-derived horizontal travel; vertical page flow resumes after the last photograph |
-| Closing | Likova 11 | Quiet footer underlap |
-
-Horizontal exterior, kitchen and collection sections stay within one viewport.
-Their masks open before horizontal travel; they release the page after the strip
-finishes. Gallery filters rebuild the corresponding measured travel distance.
-Reduced motion uses stationary media, direct floor selection and native
-horizontal overflow.
-
-## Life in Angora
-
-The two community photographs originate from the official residents' association:
-[Angora Evleri](https://www.angorakoop18.com/). They received photographic clarity,
-lighting and restrained early-autumn edits through the built-in ImageGen tool.
-They are captioned as autumn interpretations. Exact source URLs, full prompts
-and saved filenames are recorded in `assets/residence/life/provenance.json`;
-both original source JPEGs are retained alongside the edited WebP assets.
-
-Community greenery and recreation use these matching photographs. Bilkent
-Symphony Orchestra and CerModern appear as a separate cultural note with their
-own official links; the community images are not labelled as cultural venues.
-Source information was checked on 3 October 2026. Programmes link to current
-[BSO](https://bso.bilkent.edu.tr/en/) and
-[CerModern](https://www.cermodern.org/ziyaret) pages.
-
-## Verification
-
-`node --test --test-isolation=none tests/residence-films.test.mjs tests/residence-atlas.test.mjs`
-checks camera pauses and reversibility, all published film frames, four recorded
-floor/plan assets, projected points, original photo registration, DXF dimensions
-and room-area provenance. Browser verification covers floor selection, matched
-photo enlargement, dimensions, pinned horizontal travel and viewport fit.
+Run `node --test --test-isolation=none tests/residence-films.test.mjs
+ tests/residence-atlas.test.mjs` on this Windows host. Checks cover gesture bursts,
+three-gesture completion, momentum, movie resolution, floor registration, model
+boundaries, camera directions, source dimensions and room areas. Browser QA covers
+actual mouse gestures, the resting scenes, reverse navigation, camera selection,
+horizontal galleries and phone-sized frames.
