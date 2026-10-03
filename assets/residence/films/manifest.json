@@ -37,7 +37,7 @@
   ],
   "choreography": {
     "trigger": "one gesture per complete film",
-    "transitionSeconds": 1.65,
+    "transitionSeconds": 0.55,
     "readingStops": "After each complete clip; paused until a new gesture",
     "mouseDeltaChangesPlayback": false
   }

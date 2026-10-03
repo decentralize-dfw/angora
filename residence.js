@@ -17,10 +17,14 @@
     if (lenis) lenis.scrollTo(target, {duration:1.35, ...options});
     else window.scrollTo({top:typeof target === 'number' ? target : target.getBoundingClientRect().top + scrollY + (options.offset || 0), behavior:reduced ? 'instant' : 'smooth'});
   }
+  let navigationTween=null;
   window.AngoraScroll={stop:()=>lenis?.stop(),start:()=>lenis?.start(),to:(top,immediate=false)=>scrollTo(top,{immediate,force:true}),
-    travel:(top,duration=1.15)=>new Promise(resolve=>{
-      if(lenis)lenis.scrollTo(top,{duration,force:true,lock:true,onComplete:resolve});
-      else {window.scrollTo({top,behavior:'instant'});resolve();}
+    cancelTravel:()=>navigationTween?.kill(),
+    travel:(top,duration=.85)=>new Promise(resolve=>{
+      navigationTween?.kill();top=Math.max(0,Math.min(top,document.documentElement.scrollHeight-innerHeight));
+      if(reduced||!hasMotion||Math.abs(top-scrollY)<1){scrollTo(top,{immediate:true,force:true});resolve();return;}
+      const position={top:scrollY},done=()=>{navigationTween=null;resolve();};
+      navigationTween=gsap.to(position,{top,duration,ease:'power2.inOut',onUpdate:()=>scrollTo(position.top,{immediate:true,force:true}),onComplete:done,onInterrupt:done});
     })};
   window.addEventListener('angora:scroll', event => scrollTo(event.detail.top,{immediate:!!event.detail.immediate}));
   const menu = $('#menu'), menuToggle = $('.menu-toggle');
@@ -44,16 +48,19 @@
       if (!event.shiftKey && index === focusable.length - 1) {event.preventDefault(); menuToggle.focus();}
     }
   });
-  $$('a[href^="#"]').forEach(link => link.addEventListener('click', event => {
+  let navigationId=0;
+  $$('a[href^="#"]').forEach(link => link.addEventListener('click', async event => {
     const target = document.getElementById(link.hash.slice(1));
     if (!target) return;
-    event.preventDefault(); closeMenu();
-    scrollTo(target, {offset:['home','floors','atlas','garden'].includes(target.id) ? 0 : -75});
+    event.preventDefault(); closeMenu();const id=++navigationId;
+    await window.AngoraSteps?.whenIdle();if(id!==navigationId)return;
+    const offset=['home','floors','atlas','garden','life'].includes(target.id)?0:-75;
+    await window.AngoraScroll.travel(target.getBoundingClientRect().top+scrollY+offset,1);
     history.replaceState(null, '', link.hash);
   }));
   function updateHeader() {
     const center = scrollY + 60;
-    const dark = ['.hero-story','.garden-story','.kitchen-story','.gallery','.contact'].some(selector => {
+    const dark = ['.hero-story','.garden-story','.kitchen-story','.gallery','.contact','footer'].some(selector => {
       const element = $(selector);
       return center >= element.offsetTop && center < element.offsetTop + element.offsetHeight;
     });
@@ -109,16 +116,16 @@
     const chapter = chapters[index];
     $('#chapter-kicker').textContent = chapter.kicker; $('#chapter-title').textContent = chapter.title;
     $('#chapter-copy').textContent = chapter.copy; $('#chapter-features').replaceChildren(...chapter.features.map(text => {const li = document.createElement('li'); li.textContent = text; return li;}));
-    $('#chapter-tour').dataset.tour = chapter.view;
+    if($('#chapter-tour'))$('#chapter-tour').dataset.tour = chapter.view;
     if($('#chapter-plan'))$('#chapter-plan').dataset.atlasLink=index;
     $('#chapter-model-level').textContent = chapter.level;
 
     $('#chapter-panel').setAttribute('aria-labelledby',`chapter-tab-${index}`);
     $$('[data-chapter]').forEach(button => {const selected = Number(button.dataset.chapter) === index; button.setAttribute('aria-selected',String(selected)); button.tabIndex = selected ? 0 : -1;});
 
-    $('#chapter-photo-button').dataset.photo = chapter.photo; $('#chapter-photo-button').dataset.caption = chapter.caption;
+    if($('#chapter-photo-button')){$('#chapter-photo-button').dataset.photo = chapter.photo; $('#chapter-photo-button').dataset.caption = chapter.caption;}
     $('.chapter-progress i').style.width = `${(index + 1) * 25}%`;
-    $('#chapter-map-link').dataset.atlasLink=index;
+    if($('#chapter-map-link'))$('#chapter-map-link').dataset.atlasLink=index;
     $('.chapter-scene').dataset.floor=index;
     window.dispatchEvent(new CustomEvent('angora:chapter',{detail:index}));
     if (hasMotion && !reduced) {

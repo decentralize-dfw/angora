@@ -110,12 +110,12 @@
     if(matchMedia('(prefers-reduced-motion: reduce)').matches){selectFloor(index);return;}
     const nextImage=new Image();nextImage.src=`./assets/residence/chapters/plan-${index}.webp`;await nextImage.decode().catch(()=>{});
     const previous=layer.cloneNode(true);previous.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));previous.classList.add('plan-previous-layer');previous.setAttribute('aria-hidden','true');previous.inert=true;map.append(previous);
-    await new Promise(resolve=>gsap.to('.atlas-view',{opacity:0,duration:.14,onComplete:resolve}));
+    await new Promise(resolve=>gsap.to('.atlas-view',{opacity:0,duration:.05,onComplete:resolve}));
     gsap.set(layer,{opacity:0});selectFloor(index);await image.decode().catch(()=>{});
     await new Promise(resolve=>gsap.timeline({onComplete:resolve})
-      .to(layer,{opacity:1,duration:.7,ease:'power1.inOut'},0)
-      .to(previous,{opacity:0,duration:.7,ease:'power1.inOut'},0)
-      .to('.atlas-view',{opacity:1,duration:.5,ease:'power1.out'},.16));
+      .to(layer,{opacity:1,duration:.24,ease:'power1.inOut'},0)
+      .to(previous,{opacity:0,duration:.24,ease:'power1.inOut'},0)
+      .to('.atlas-view',{opacity:1,duration:.18,ease:'power1.out'},.05));
     previous.remove();gsap.set(layer,{clearProps:'opacity'});layout();
   }
   window.AngoraPlan={selectFloor,layout,transition,get floor(){return floor;}};

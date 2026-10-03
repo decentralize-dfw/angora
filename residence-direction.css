@@ -102,3 +102,37 @@ footer{display:block;padding:0;overflow:hidden;background:var(--forest)}
 .footer-scene>.eyebrow{margin-bottom:20px}.footer-brand{font-size:clamp(72px,16vw,245px);line-height:.84;letter-spacing:-.045em}
 .footer-meta{display:grid;grid-template-columns:1fr auto;gap:28px;padding:35px 6vw 25px}.footer-meta p{font-size:12px}.footer-meta>a{font-size:12px}.footer-meta small{grid-column:1/-1;padding-top:20px;border-top:1px solid #efede62c;max-width:100%}
 @media(max-width:800px){.life-editorial-note{padding:24px}.life-editorial-note>p{font-size:38px}.footer-scene{height:70svh;min-height:410px;padding:35px 7vw}.footer-brand{font-size:17vw}.footer-meta{padding:28px 7vw 22px;gap:24px}.footer-meta p{grid-row:auto;grid-column:auto}.footer-meta small{font-size:9px}}
+
+/* A decoded bitmap keeps the same frame available when a paused video is offscreen. */
+.film-hold-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;opacity:1!important;pointer-events:none}
+.film-hold-frame[hidden]{display:none!important}
+.chapter-model.chapter-native,.chapter-native-stage,.chapter-native-stage img,.chapter-native-stage .film-hold-frame{background:#fff}
+.chapter-native-stage{bottom:0}.chapter-native-stage .film-hold-frame{object-fit:contain}
+.chapter-model-caption{background:none!important;box-shadow:none!important;bottom:16px!important}
+.chapter-model-caption span:last-child{display:none}.chapter-progress{bottom:6px}
+.life-opening{height:150svh}.life-scene{background:var(--forest);isolation:isolate}
+.life-landscape{inset:16% 5vw 16% 42%;background:#eef1ec;overflow:hidden;border:1px solid #efede623}
+.life-landscape img{object-fit:contain;object-position:center;transform:none!important}
+.life-landscape:after{display:none}.life-opening-copy{left:6vw;top:20%;max-width:31%;text-shadow:none}
+.life-opening h2{font-size:clamp(48px,5.2vw,86px);line-height:1.03;margin:24px 0}
+.life-opening-copy p{font-size:14px;max-width:32ch;line-height:1.85}.life-image-caption{left:42%;bottom:11%;color:#c1cfc5;font-size:10px}
+.contact{padding-bottom:clamp(100px,10vw,200px)}
+.contact h2{font-size:clamp(56px,6.2vw,98px)}.contact-content>p{max-width:48ch;line-height:1.8}
+.contact .listing-price{margin-top:34px;display:flex;flex-direction:column;gap:8px}
+.listing-price>span{font:500 11px/1.6 var(--sans);letter-spacing:.13em;text-transform:uppercase;opacity:.8}
+.listing-price>strong{font:400 clamp(43px,4.2vw,68px)/1.1 var(--serif);letter-spacing:-.025em}
+.listing-facts{display:flex;flex-wrap:wrap;gap:10px 22px;margin:24px 0;font-size:11px;opacity:.85}
+.listing-source{font-size:11px;letter-spacing:.04em;border-bottom:1px solid #efede657;padding:12px 0}
+.footer-scene{margin:0}.footer-actions{display:grid;grid-template-columns:1fr 1fr;gap:0 5vw;padding:50px 6vw 20px}
+.footer-actions>.eyebrow{grid-column:1/-1;margin-bottom:20px;color:var(--ice)}
+.footer-actions>a{display:flex;align-items:center;justify-content:space-between;font:400 clamp(22px,2.8vw,42px)/1.3 var(--serif);padding:22px 0;border-bottom:1px solid #efede62c}
+.footer-actions>a>span{font:400 20px var(--sans);margin-left:20px;transition:transform .3s}.footer-actions>a:hover>span{transform:translate(3px,-3px)}
+.footer-meta .brand-credit{grid-column:1/-1;font-size:9px;letter-spacing:.07em;opacity:.6;padding:7px 0 5px}
+@media(max-width:800px){
+ .chapter-native-stage{bottom:0}.chapter-model-caption{bottom:15px!important}
+ .life-opening{height:140svh}.life-scene{min-height:0}.life-opening-copy{left:7vw;top:14%;max-width:86%}
+ .life-opening h2{font-size:11vw;margin:17px 0}.life-opening h2 br{display:none}.life-opening h2 em{display:block}
+ .life-opening-copy p{font-size:12px;max-width:40ch}.life-landscape{inset:51% 7vw 11%}.life-image-caption{left:7vw;bottom:6%;font-size:8px}
+ .contact{padding-bottom:70px}.contact h2{font-size:15vw}.contact .listing-price{margin-top:28px}.listing-price>strong{font-size:46px}
+ .footer-actions{grid-template-columns:1fr;padding:35px 7vw 15px}.footer-actions>a{font-size:30px;padding:20px 0}
+}
