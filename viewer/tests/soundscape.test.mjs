@@ -1,21 +1,28 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync, existsSync} from 'node:fs';
-import {sceneMix, measure, SOUND_FILES, TOUR_MUSIC, createSoundscape} from '../src/soundscape.js';
+import {sceneMix, measure, SOUND_FILES, SOUND_PRESETS, createSoundscape} from '../src/soundscape.js';
 
 test('every sound the soundscape names is in audio/11lbs', () => {
   for (const file of Object.values(SOUND_FILES))
     assert.ok(existsSync(new URL(`../../audio/11lbs/${file}`, import.meta.url)), file);
 });
 
-test('each tour chapter has its own music, quieter than the site bed', () => {
-  const chapters = ['region', 'neighborhood', 'f0', 'f1', 'f2', 'f3'];
-  assert.equal(new Set(chapters.map(v => TOUR_MUSIC[v])).size, chapters.length - 0);
-  for (const v of chapters) assert.ok(sceneMix({tourView: v}).music.db < sceneMix({view: v}).music.db, v);
+test('each preset keeps one calm track everywhere, quiet, and quieter under the tour voice', () => {
+  assert.ok(Object.keys(SOUND_PRESETS).length >= 3 && Object.keys(SOUND_PRESETS).length <= 4);
+  for (const [name, p] of Object.entries(SOUND_PRESETS)) {
+    assert.ok(!['synth', 'strings', 'elegant', 'intro', 'sting'].includes(p.music), `${name} uses a dramatic track`);
+    const keys = new Set(['region', 'neighborhood', 'f0', 'f1', 'f2', 'f3'].flatMap(v => [sceneMix({view: v, preset: name}), sceneMix({tourView: v, preset: name})]).map(m => m.music?.key ?? null));
+    assert.equal(keys.size, 1, `${name} switches tracks between views`);
+    if (p.music) {
+      assert.ok(sceneMix({view: 'f1', preset: name}).music.db <= -40, `${name} music too loud`);
+      assert.ok(sceneMix({tourView: 'f1', preset: name}).music.db < sceneMix({view: 'f1', preset: name}).music.db);
+    }
+  }
 });
 
-test('the walk plays the place, not music, outdoors; no birds at night', () => {
-  const out = sceneMix({walking: true, outdoor: true, daylight: 1});
+test('the nature preset plays the place, not music; no birds at night or indoors', () => {
+  const out = sceneMix({walking: true, outdoor: true, daylight: 1, preset: 'doga'});
   assert.equal(out.music, null); assert.equal(out.birds.key, 'spring');
   assert.equal(sceneMix({walking: true, outdoor: true, daylight: 0}).birds, null);
   assert.equal(sceneMix({walking: true, outdoor: false}).birds, null);

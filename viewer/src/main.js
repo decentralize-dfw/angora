@@ -2816,6 +2816,14 @@ if(qaQuery.get('debug')==='quality'){
 // one speaker switch beside the language pill silences all of it.
 interfaceSound=createSoundscape({buttons:[...document.querySelectorAll('[data-sound-toggle]'),$('#toggle-sound')].filter(Boolean),audioRoot:new URL('11lbs/',audioRoot)});
 interfaceSound.set({view:selected});
+{
+  const presets=[...document.querySelectorAll('[data-sound-preset]')];
+  const mark=()=>{for(const b of presets)b.setAttribute('aria-pressed',String(b.dataset.soundPreset===interfaceSound.preset));
+    const box=$('.sound-presets');if(box)box.dataset.muted=String(!interfaceSound.enabled);};
+  for(const b of presets)b.addEventListener('click',()=>{interfaceSound.setPreset(b.dataset.soundPreset);mark();});
+  document.querySelectorAll('[data-sound-toggle]').forEach(b=>b.addEventListener('click',mark));
+  mark();
+}
 try {
   setup();
   loadModel();

@@ -30,37 +30,44 @@ export const SOUND_FILES = Object.freeze({
 });
 
 // Loudness targets. Beds are RMS over their audible part; one-shots are by
-// peak, since a short hit with a long tail has no meaningful RMS. Music sits
-// well under speech level and drops further under the tour's voice.
-const BED_DB = {music: -33, tourMusic: -39, ambience: -37, birds: -41};
-const SHOT_DB = {woosh: -17, click: -24, open: -22, sting: -19, alert: -21, intro: -20};
+// peak, since a short hit with a long tail has no meaningful RMS.
+const SHOT_DB = {woosh: -26, click: -30, open: -28, sting: -26, alert: -28, intro: -30};
 const FADE = 2.5;
 
-// Each chapter of the tour has its own colour: the region map's wide synth,
-// the neighbourhood's premium strings, a calm spa air for the staff floor,
-// warm cinematic for the living floor, the minimal piano for the bedrooms,
-// strings for the attic, and the neighbourhood theme again as it closes.
-export const TOUR_MUSIC = Object.freeze({region: 'synth', neighborhood: 'elegant', f0: 'spa', f1: 'warm', f2: 'piano', f3: 'strings'});
+// 03.10 ürün sahibi: "müzik çok baskın, uyumlu değil, dramatik olmasın" -
+// dört sakin seçenek, sol ortadan denenir. Her seçenek TEK bir müzik
+// parçasını her yerde kullanır (görünüm değişince başka tonda bir parçaya
+// geçmek uyumsuzluğun kaynağıydı); synth, yaylılar, "premium sinematik" ve
+// açılış imzaları hiçbirinde yok. Seviyeler eskisinden ~8-10 dB aşağıda.
+export const SOUND_PRESETS = Object.freeze({
+  sakin:  {tr: 'Sakin',  en: 'Calm',   music: 'spa',   musicDb: -43, tourDb: -48, ambience: 'estate', ambDb: -47, birdsDb: -45,
+           transition: {key: 'woosh', db: -30, rate: .82}},
+  piyano: {tr: 'Piyano', en: 'Piano',  music: 'piano', musicDb: -41, tourDb: -47, ambience: null,     ambDb: -99, birdsDb: -46,
+           transition: {key: 'woosh', db: -29, rate: .9}},
+  sicak:  {tr: 'Sıcak',  en: 'Warm',   music: 'warm',  musicDb: -42, tourDb: -48, ambience: 'estate', ambDb: -49, birdsDb: -46,
+           transition: {key: 'open', db: -33, rate: .92}},
+  doga:   {tr: 'Doğa',   en: 'Nature', music: null,    musicDb: -99, tourDb: -99, ambience: 'estate', ambDb: -43, birdsDb: -41,
+           transition: {key: 'woosh', db: -32, rate: .78}},
+});
+export const DEFAULT_PRESET = 'sakin';
+// Tour chapters keep the preset's one track, under the voice.
+export const TOUR_MUSIC = Object.freeze(Object.fromEntries(Object.entries(SOUND_PRESETS).map(([k, p]) => [k, p.music])));
 
-// What plays where, outside the tour. Music only where the viewer is looking
-// AT the house (orbit, plan); on the walk the place itself is the sound.
-export function sceneMix({view = 'region', walking = false, outdoor = false, daylight = 1, tourView = null} = {}) {
+// What plays where. Inside the house the music drops a little further and
+// the birds go; outside (neighbourhood, garden walk) the birds follow the
+// daylight and are gone at night.
+export function sceneMix({view = 'region', walking = false, outdoor = false, daylight = 1, tourView = null, preset = DEFAULT_PRESET} = {}) {
+  const p = SOUND_PRESETS[preset] ?? SOUND_PRESETS[DEFAULT_PRESET];
   const night = Math.max(0, Math.min(1, daylight));
-  if (tourView) {
-    const music = TOUR_MUSIC[tourView] ?? 'elegant';
-    const outside = tourView === 'neighborhood';
-    return {music: {key: music, db: BED_DB.tourMusic}, ambience: null,
-      birds: outside && night > .2 ? {key: 'spring', db: BED_DB.birds - 4 + 10 * Math.log10(night)} : null};
-  }
-  if (walking) {
-    return outdoor
-      ? {music: null, ambience: {key: 'estate', db: BED_DB.ambience - 3}, birds: night > .2 ? {key: 'spring', db: BED_DB.birds + 10 * Math.log10(night)} : null}
-      : {music: {key: 'piano', db: BED_DB.music - 6}, ambience: {key: 'estate', db: BED_DB.ambience - 5}, birds: null};
-  }
-  if (view === 'region') return {music: {key: 'synth', db: BED_DB.music}, ambience: null, birds: null};
-  if (view === 'neighborhood') return {music: {key: 'elegant', db: BED_DB.music - 2}, ambience: {key: 'estate', db: BED_DB.ambience},
-    birds: night > .2 ? {key: 'spring', db: BED_DB.birds + 10 * Math.log10(night)} : null};
-  return {music: {key: 'warm', db: BED_DB.music}, ambience: null, birds: null};
+  const outside = tourView ? tourView === 'neighborhood' : walking ? outdoor : view === 'neighborhood';
+  const indoors = walking && !outdoor;
+  const birds = outside && night > .2 ? {key: 'spring', db: p.birdsDb + 10 * Math.log10(night) - (tourView ? 4 : 0)} : null;
+  const musicDb = tourView ? p.tourDb : indoors ? p.musicDb - 3 : p.musicDb;
+  return {
+    music: p.music ? {key: p.music, db: musicDb} : null,
+    ambience: p.ambience && !tourView ? {key: p.ambience, db: p.ambDb - (indoors ? 3 : 0)} : null,
+    birds,
+  };
 }
 
 // Level of a decoded buffer in dBFS: RMS over the samples above the noise
@@ -84,7 +91,9 @@ export function createSoundscape({buttons = [], root = document, audioRoot, stor
   try {enabled = storage?.getItem('angora.sound') !== 'off';} catch {}
   const buffers = new Map(), loading = new Map(), levels = new Map();
   const beds = {music: null, ambience: null, birds: null};
-  let state = {}, mix = sceneMix();
+  let preset = DEFAULT_PRESET;
+  try {preset = SOUND_PRESETS[storage?.getItem('angora.sound-preset')] ? storage.getItem('angora.sound-preset') : DEFAULT_PRESET;} catch {}
+  let state = {preset}, mix = sceneMix(state);
 
   const ready = () => enabled && context && context.state === 'running' && !root.hidden;
   function ensure() {
@@ -244,11 +253,22 @@ export function createSoundscape({buttons = [], root = document, audioRoot, stor
     },
     // A cut or a camera move: the woosh, pitched with the direction so a rise
     // and a fall are told apart without being announced.
-    transition(ms = 950, rising = true) {shot('woosh', {rate: (rising ? 1.04 : .93) * Math.max(.85, Math.min(1.1, 950 / Math.max(500, ms)))});},
+    transition(ms = 950, rising = true) {
+      const t = SOUND_PRESETS[preset].transition;
+      shot(t.key, {db: t.db, rate: t.rate * (rising ? 1.03 : .95) * Math.max(.9, Math.min(1.05, 950 / Math.max(500, ms)))});
+    },
+    get preset() {return preset;},
+    setPreset(name) {
+      if (!SOUND_PRESETS[name]) return;
+      preset = name;
+      try {storage?.setItem('angora.sound-preset', name);} catch {}
+      this.set({preset: name});
+      void unlock().then(() => this.transition(950, true));
+    },
     play() {shot('click');},
     open() {shot('open');},
-    sting() {shot('sting');},
+    sting() {},   // 03.10: imza sesleri kaldırıldı ("dramatik olmasın")
     alert() {shot('alert');},
-    intro() {shot('intro');},
+    intro() {},
   };
 }
