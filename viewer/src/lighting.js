@@ -520,6 +520,9 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
     releaseMaterial(material){preparedMaterials.delete(material);reflectionMaterials.delete(material);},
     prepareMesh(object,{clipped,context,name}) {
       object.userData.sectionClipped=clipped;
+      // V-RAY D2: komşu dosyası pişmiş AO'yu COLOR_0'da taşır; malzeme onu okusun.
+      if(name==='context-buildings'&&object.geometry?.attributes?.color)
+        for(const m of Array.isArray(object.material)?object.material:[object.material])if(m&&!m.vertexColors){m.vertexColors=true;m.needsUpdate=true;}
       const materials=Array.isArray(object.material)?object.material:[object.material];
         // İŞ E.2: the old test was dead twice over - angoraAuthoredPBR is
         // stamped true on every batched material, and the batched NAME is

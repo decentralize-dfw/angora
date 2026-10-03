@@ -164,9 +164,13 @@ export const CONTEXT_V2_MOBILE = Object.freeze({
 export const CONTEXT_GROUND_V3 = Object.freeze({file: 'ktx512/CEVRE-YOL-opt-v3.ktx2.glb', bytes: 1991564});
 export const CONTEXT_GROUND_V3_MOBILE = Object.freeze({file: 'mobile-tur10/CEVRE-YOL-opt-v3.ktx2.glb', bytes: 974784});
 const CONTEXT_V2_DROPPED = ['context-plants'];
-export function applyContextV2(manifest, {mobile = false, groundV3 = false} = {}) {
+// V-RAY D2 (04.10): komşular pişmiş köşe AO'lu (COLOR_0) sürüm - tools/batch-delivery/bake-neighbour-ao.mjs.
+// Telefon dosyası farklı (seyreltilmiş) geometri taşır: AO yalnız masaüstünde.
+export const CONTEXT_AO = Object.freeze({file: 'ktx512/KOMSULAR-opt-v2-ao.ktx2.glb', bytes: 14834712});
+export function applyContextV2(manifest, {mobile = false, groundV3 = false, neighbourAo = false} = {}) {
   if (!manifest?.parts || !manifest.batched) return [];
   const table = {...(mobile ? CONTEXT_V2_MOBILE : CONTEXT_V2)};
+  if (neighbourAo && !mobile) table['context-buildings'] = CONTEXT_AO;
   if (groundV3) table['context-ground'] = mobile ? CONTEXT_GROUND_V3_MOBILE : CONTEXT_GROUND_V3;
   const changed = [];
   for (const part of manifest.parts) {
