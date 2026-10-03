@@ -2,62 +2,56 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,access} from 'node:fs/promises';
 import vm from 'node:vm';
-const scope={window:{}};
-vm.runInNewContext(await readFile(new URL('../residence-film-runtime.js',import.meta.url),'utf8'),scope);
-const {position,stagedPosition,floorPosition}=scope.window.AngoraFilmRuntime;
-const manifest=JSON.parse(await readFile(new URL('../assets/residence/films/manifest.json',import.meta.url)));
-test('three supplied films retain their order with longer movement and reading intervals',()=>{
- assert.equal(manifest.clips.length,3);assert.equal(manifest.scrollScreensPerClip,5);
- assert.deepEqual(manifest.clips.map(c=>c.id),['approach','orbit','garden-return']);
- assert.equal(manifest.clips[2].reversed,true);
- const pixels=6*900;
- for(let i=0;i<3;i++){
-  const start=position(i*1800/pixels,manifest.clips),mid=position((i*1800+900)/pixels,manifest.clips);
-  assert.equal(start.index,i);assert.equal(start.frame,0);assert.equal(mid.index,i);assert.equal(mid.frame,60);
- }
- assert.equal(position(1,manifest.clips).frame,120);
-});
-test('each camera pauses at its midpoint and destination, then reverses through the same scenes',()=>{
- for(let i=0;i<3;i++){
-  for(const local of [.32,.36,.44,.479]){const s=stagedPosition((i+local)/3,manifest.clips);assert.equal(s.frame,60);assert.equal(s.hold,true);}
-  for(const local of [.81,.9,.98]){const s=stagedPosition((i+local)/3,manifest.clips);assert.equal(s.frame,120);assert.equal(s.hold,true);}
-  const forward=[0,.15,.4,.6,.85].map(p=>stagedPosition((i+p)/3,manifest.clips).frame);
-  const backward=[.85,.6,.4,.15,0].map(p=>stagedPosition((i+p)/3,manifest.clips).frame);
-  assert.deepEqual(forward,backward.reverse());
- }
-});
+const film=JSON.parse(await readFile(new URL('../assets/residence/films/manifest.json',import.meta.url)));
 const native=JSON.parse(await readFile(new URL('../assets/residence/chapters/native-manifest.json',import.meta.url)));
-test('native floors hold on each floor and interpolate the actual recording in either direction',()=>{
- for(const key of ['isometric','plans']){
-  const track=native[key];
-  for(let i=0;i<3;i++){
-   const reading=[.01,.2,.44].map(p=>floorPosition((i+p)/3,track));
-   assert.ok(reading.every(s=>s.floor===i&&!s.moving&&s.frame===Math.round(track.stops[i]*24)));
-   const a=floorPosition((i+.5)/3,track),b=floorPosition((i+.85)/3,track);
-   assert.equal(a.moving,true);assert.ok(b.frame>a.frame);
-  }
-  assert.equal(floorPosition(1,track).floor,3);assert.equal(floorPosition(1,track).frame,Math.round(track.stops[3]*24));
+const poses=JSON.parse(await readFile(new URL('../assets/residence/chapters/poses.json',import.meta.url)));
+const source=await readFile(new URL('../residence-steps.js',import.meta.url),'utf8');
+function setup(){
+ const handlers={};let time=0,release;const moves=[];
+ const element={dataset:{},offsetHeight:900,getBoundingClientRect:()=>({top:0,bottom:900})};
+ const scope={window:{addEventListener:(name,fn)=>handlers[name]=fn,AngoraScroll:{stop(){},start(){},to(){}}},document:{querySelector:()=>null,body:{classList:{contains:()=>false}}},innerHeight:900,scrollY:0,performance:{now:()=>time},console};
+ vm.runInNewContext(source,scope);
+ const scene=scope.window.AngoraSteps.register(element,3,(from,to)=>{moves.push([from,to]);return new Promise(r=>release=r);});
+ const wheel=at=>{time=at;handlers.wheel({deltaY:120,deltaX:0,preventDefault(){},stopImmediatePropagation(){}});};
+ return {scene,moves,wheel,finish:async()=>{release();await new Promise(setImmediate);},Gate:scope.window.AngoraSteps.GestureGate};
+}
+test('one wheel burst starts exactly one film, and never queues another while playing',async()=>{
+ const s=setup();s.wheel(0);s.wheel(30);s.wheel(90);s.wheel(900);
+ assert.deepEqual(s.moves,[[0,1]]);assert.equal(s.scene.index,0);
+ await s.finish();assert.equal(s.scene.index,1);
+ s.wheel(980);assert.deepEqual(s.moves,[[0,1]]);
+ s.wheel(1400);assert.deepEqual(s.moves,[[0,1],[1,2]]);
+});
+test('three separate mouse gestures complete exactly three transitions and hold at each destination',async()=>{
+ const s=setup();for(let i=0;i<3;i++){s.wheel(i*2000);await s.finish();assert.equal(s.scene.index,i+1);}
+ assert.deepEqual(s.moves,[[0,1],[1,2],[2,3]]);
+ s.wheel(7000);assert.equal(s.moves.length,3);
+});
+test('trackpad momentum cannot replay a film immediately after the previous one ends',()=>{
+ const {Gate}=setup(),gate=new Gate();assert.equal(gate.accept(0),true);
+ assert.equal(gate.accept(800),false);gate.finish();assert.equal(gate.accept(900),false);
+ assert.equal(gate.accept(1400),true);
+});
+test('the supplied camera films retain their order, with one complete movie per gesture',async()=>{
+ assert.deepEqual(film.clips.map(c=>c.id),['approach','orbit','garden-return']);
+ assert.equal(film.clips[2].reversed,true);assert.equal(film.choreography.transitionSeconds,1.65);
+ assert.equal(film.choreography.mouseDeltaChangesPlayback,false);
+ for(const clip of film.clips)for(const name of ['source','transition','reverse'])await access(new URL(`../assets/residence/films/${clip.id}/${name}.mp4`,import.meta.url));
+});
+test('all six native floor movies contain actual 2560 by 1440 H.264 samples',async()=>{
+ assert.equal(native.width,2560);assert.equal(native.height,1440);assert.equal(native.fps,30);
+ for(let level=1;level<4;level++)for(const suffix of ['','-reverse']){
+  const file=await readFile(new URL(`../assets/residence/chapters/level-${level}${suffix}.mp4`,import.meta.url));
+  const sample=file.indexOf(Buffer.from('avc1'),128);assert.ok(sample>128);
+  assert.equal(file.readUInt16BE(sample+28),2560);assert.equal(file.readUInt16BE(sample+30),1440);
  }
 });
-test('both native sequences contain every independently decoded frame and four matched plans',async()=>{
- for(const key of ['isometric','plans'])for(let i=0;i<native[key].frames;i++)await access(new URL(`../assets/residence/chapters/${native[key].id}/frame-${String(i).padStart(4,'0')}.webp`,import.meta.url));
- const poses=JSON.parse(await readFile(new URL('../assets/residence/chapters/poses.json',import.meta.url)));
+test('every floor has its actual room polygons, section boundaries, camera points and view directions',async()=>{
  assert.equal(poses.floors.length,4);
- for(let floor=0;floor<4;floor++){
-  await access(new URL(`../assets/residence/chapters/iso-${floor}.webp`,import.meta.url));await access(new URL(`../assets/residence/chapters/plan-${floor}.webp`,import.meta.url));
-  assert.ok(poses.floors[floor].photos.length>=7);
-  for(const p of poses.floors[floor].photos)assert.ok(p.x>=0&&p.x<=1&&p.y>=0&&p.y<=1);
+ for(let level=0;level<4;level++){
+  const f=poses.floors[level];assert.ok(f.photos.length>=7);assert.ok(f.rooms.length>=5);assert.ok(f.contours.length>0);
+  for(const p of f.photos){assert.ok(p.x>=0&&p.x<=1&&p.y>=0&&p.y<=1);assert.equal(p.direction.length,2);}
+  for(const r of f.rooms){assert.equal(r.screen.length,r.poly.length);assert.equal(r.label.length,2);}
+  for(const kind of ['iso','plan'])await access(new URL(`../assets/residence/chapters/${kind}-${level}.webp`,import.meta.url));
  }
-});
-test('backward scroll seeks the earlier film and retains both end boundaries',()=>{
- const values=[1,.82,.66,.5,.32,.15,0,-1,2].map(p=>position(p,manifest.clips));
- assert.deepEqual(values.map(s=>s.index),[2,2,1,1,0,0,0,0,2]);
- assert.equal(values[6].frame,0);assert.equal(values[7].frame,0);assert.equal(values[8].frame,120);
-});
-test('all published camera frames and original video files exist',async()=>{
- for(const clip of manifest.clips){
-  await access(new URL(`../assets/residence/films/${clip.id}/source.mp4`,import.meta.url));
-  for(let i=0;i<clip.frames;i++)await access(new URL(`../assets/residence/films/${clip.id}/frame-${String(i).padStart(4,'0')}.webp`,import.meta.url));
- }
- await access(new URL('../assets/residence/films/opening/source.mp4',import.meta.url));
 });

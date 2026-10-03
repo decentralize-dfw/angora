@@ -2,7 +2,6 @@
   "width": 1280,
   "height": 720,
   "fps": 24,
-  "scrollScreensPerClip": 5,
   "opening": {
     "id": "opening",
     "seconds": 5.056,
@@ -37,26 +36,9 @@
     }
   ],
   "choreography": {
-    "movingIntervals": [
-      [
-        0,
-        0.32
-      ],
-      [
-        0.48,
-        0.8
-      ]
-    ],
-    "readingStops": [
-      [
-        0.32,
-        0.48
-      ],
-      [
-        0.8,
-        1
-      ]
-    ],
-    "maximumCameraFramesPerSecond": 24
+    "trigger": "one gesture per complete film",
+    "transitionSeconds": 1.65,
+    "readingStops": "After each complete clip; paused until a new gesture",
+    "mouseDeltaChangesPlayback": false
   }
 }

@@ -27,3 +27,50 @@ body{font-size:16px;line-height:1.65}p{font-size:clamp(15px,1.22vw,18px);line-he
 .gallery-window{flex:1;min-height:0;overflow:hidden}.gallery-track{height:100%;flex:none}
 @media(prefers-reduced-motion:reduce){.gallery-window{height:55svh;min-height:55svh;overflow:visible}.gallery-track{height:100%;overflow-x:auto;transform:none!important}}
 .chapter-model-caption{height:auto;min-height:0;align-items:center}
+
+/* A complete film per gesture, with a stationary destination between gestures. */
+.cinematic-story,.chapters,.atlas-story{height:100svh!important;min-height:0!important}
+.cinema-canvas,#cinema-canvas,#chapter-native-canvas,#atlas-native-canvas{display:none!important}
+.cinema-film,.native-floor-film{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;pointer-events:none}
+.cinema-film.playing,.native-floor-film.playing{opacity:1}
+.cinema-film{z-index:2}.cinema-poster{opacity:0!important}.cinema-opening{z-index:1}
+.cinema-caption{background:transparent!important;padding:0;bottom:17%;max-width:490px;text-shadow:0 2px 24px #061b16}
+.cinema-caption h2{font-size:clamp(42px,5.6vw,82px)}.cinema-caption p{font-size:15px;line-height:1.65;max-width:39ch}
+.hero-shade{z-index:3!important;pointer-events:none;background:linear-gradient(180deg,#102b3240,transparent 35%,#0820199c)!important}
+.chapter-model.chapter-native,.chapter-native-stage img{background:#e7ebea}
+.native-floor-film{object-fit:contain;z-index:2}.chapter-native-stage{bottom:50px}
+.chapter-model-caption{z-index:3;color:#223e35;text-shadow:none;top:auto!important;bottom:13px!important;left:20px;right:20px}
+.chapter-photo-open{z-index:4;bottom:62px;background:#efede6ed}.native-plan-link{z-index:4;bottom:64px;color:#223e35}
+.chapter-progress{z-index:4;bottom:4px}
+#atlas-native-plan{opacity:.22!important;filter:saturate(.65);transition:none;z-index:0}
+#atlas-svg{z-index:2;overflow:visible}#atlas-pins{z-index:3}
+.atlas-map{background:#f0eee6!important;isolation:isolate}
+.graphic-room{fill:#f0eee6;fill-opacity:.16;stroke:#496157;stroke-width:1;vector-effect:non-scaling-stroke}
+.graphic-contour{fill:none;stroke:#213e35;stroke-width:2.3;vector-effect:non-scaling-stroke}
+.graphic-room-label{font:500 2px var(--sans);fill:#253e35;paint-order:stroke;stroke:#f0eee6;stroke-opacity:.88;stroke-width:.55px;stroke-linejoin:round;pointer-events:none}
+.plan-view-cone{fill:#688c8070;stroke:none!important}.plan-view-direction{stroke:#486e5c!important;stroke-width:1.2!important;vector-effect:non-scaling-stroke}
+.plan-view-cone.selected{fill:#95664775}.plan-view-direction.selected{stroke:#865631!important;stroke-width:2!important}
+.plan-pin-leader{stroke:#426553;stroke-width:1;vector-effect:non-scaling-stroke;opacity:.65}.plan-pin-anchor{fill:#294f3e}
+.atlas-pin{width:27px;height:27px;font:600 10px var(--sans);background:#f7f5ed;border:1px solid #406350;color:#244535;box-shadow:0 2px 6px #223e3524}
+.atlas-pin.active{background:#80573f;color:#fff}.plan-previous-svg{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}.plan-previous-image{position:absolute;opacity:.22;filter:saturate(.65);z-index:1;pointer-events:none}
+.atlas-plan-title span:last-child{font-size:10px;letter-spacing:0}.atlas-plan-foot{padding:10px 18px!important;font-size:9px!important}
+@media(max-width:800px){
+ .cinema-caption{bottom:24%;max-width:86%;left:7vw}.cinema-caption h2{font-size:43px}.cinema-caption p{font-size:12px;max-width:29ch}.cinema-status{bottom:15px}
+ .native-floor-film{object-fit:contain}.chapter-native-stage{bottom:38px}.chapter-model-caption{bottom:8px!important;font-size:8px!important}.chapter-photo-open,.native-plan-link{bottom:43px;font-size:9px!important}
+ .graphic-room-label{font-size:2.1px}.atlas-pin{width:23px;height:23px;font-size:9px}.atlas-plan-title span:last-child{font-size:8px}.atlas-plan-foot{font-size:8px!important;padding:7px 12px!important}
+}
+
+.life-colour-field{background:radial-gradient(ellipse at 85% 72%,#836445,transparent 55%),linear-gradient(145deg,#183e32,#304f3f 60%,#756346)}
+
+.graphic-wall-boundary{fill:none;stroke:#213e35;stroke-width:1.5;vector-effect:non-scaling-stroke}.graphic-contour{stroke-width:1.5}
+
+@media(min-width:801px){.atlas-heading{grid-template-columns:55% 40%;gap:5%}.atlas-heading h2{font-size:52px;white-space:nowrap}.atlas-heading h2 br{display:none}.atlas-heading p{font-size:13px;line-height:1.6}.atlas-scene{padding-top:88px}.atlas-plan-title{padding-top:8px;padding-bottom:8px}.atlas-note{font-size:8px}}
+
+.room-label-leader{fill:none;stroke:#476c5a;stroke-width:.7;opacity:.7;vector-effect:non-scaling-stroke}
+
+@media(max-width:800px){
+ .atlas-scene{padding:80px 5vw 12px}.atlas-heading h2{font-size:32px}.atlas-heading p{display:none}.atlas-heading{margin-bottom:8px}
+ .atlas-toolbar{margin-bottom:8px}.atlas-layout{gap:10px}.atlas-drawing{flex:1;height:auto;min-height:0}.atlas-map{min-height:210px}.atlas-view{flex:0 0 110px;height:110px;min-height:0}.atlas-photo-copy h3{font-size:20px}.atlas-note{font-size:7px;line-height:1.45;margin-top:7px}
+}
+
+.cinematic-story,.chapters,.atlas-story{overflow-anchor:none}

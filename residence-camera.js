@@ -2,62 +2,37 @@
   'use strict';
   const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,motion=!!(window.gsap&&window.ScrollTrigger);
-  const {stagedPosition,FramePlayer,clamp}=window.AngoraFilmRuntime;
-  const media=$('.cinema-media'),canvas=$('#cinema-canvas'),opening=$('.cinema-opening');
-  let manifest,player,trigger,target=0,displayed=0,current=-1,previousTime=0,active=false;
-  const stops=[
-    ['A living floor that opens directly onto the garden. A covered terrace connects the home to the water.','A private pool, framed by the villa and its own mature garden. 900 m² of garden space, as described in the listing.'],
-    ['A detached home with four different levels: garden, entrance, bedrooms and attic.','500 m² gross interior area. Five bedrooms and four living spaces, with room for different generations.'],
-    ['The garden-facing elevation connects balconies, terrace and lower living floor.','Your own pool. Your own lawn. An outdoor living space, sheltered by the home.']
+  const media=$('.cinema-media'),opening=$('.cinema-opening');
+  const descriptions=[
+    'The garden-facing living floor opens to a covered terrace and the private pool.',
+    'Four levels, five bedrooms and four living spaces. A detached home with room for different generations.',
+    'Balconies, terrace and a private pool connect the home to its own 900 m² garden.'
   ];
   opening.muted=true;if(!reduced)opening.play().catch(()=>{});
-  if(motion&&!reduced)gsap.to('.cinema-veil',{opacity:0,duration:2.2,delay:.25,ease:'power2.inOut',onComplete:()=>$('.cinema-veil').hidden=true});
+  if(motion&&!reduced)gsap.to('.cinema-veil',{opacity:0,duration:1.1,delay:.15,ease:'power2.inOut',onComplete:()=>$('.cinema-veil').hidden=true});
   else $('.cinema-veil').hidden=true;
-  function draw(p){
-    if(!player)return;
-    const state=stagedPosition(p,manifest.clips),clip=manifest.clips[state.index];
-    player.seek(clip,state.frame,target<displayed?-1:1);
-    media.classList.toggle('is-scrolling',p>.0005||reduced);
-    if(p>.0005){opening.pause();opening.style.opacity=String(1-clamp(p/.018));}else opening.style.opacity='1';
-    if(state.index!==current){current=state.index;$('#cinema-title').textContent=clip.title;$('#cinema-count').textContent=`0${current+1} / 03`;}
-    $('#cinema-caption').textContent=state.hold?stops[current][state.stop==='midpoint'?0:1]:clip.caption;
-    $('.hero').dataset.cameraHold=state.hold;$('.hero').dataset.filmChapter=current;$('.hero').dataset.filmProgress=p.toFixed(4);
-    $$('[data-film-chapter]').forEach((button,i)=>{button.setAttribute('aria-current',String(i===current));button.querySelector('i').style.transform=`scaleX(${i<current?1:i===current?state.local:0})`;});
-  }
-  function tick(time){
-    const dt=Math.min(.05,(time-(previousTime||time))/1000);previousTime=time;
-    if(active&&Math.abs(target-displayed)>.00005){
-      // Ordinary scrolling is limited to the source film's camera speed.
-      const delta=target-displayed,max=Math.abs(delta)>.20?.45:.045;
-      displayed+=Math.sign(delta)*Math.min(Math.abs(delta),max*dt,Math.max(.00005,Math.abs(delta)*dt*4));draw(displayed);
-    }
-    requestAnimationFrame(tick);
-  }
-  fetch('./assets/residence/films/manifest.json').then(r=>r.json()).then(data=>{
-    manifest=data;player=new FramePlayer(canvas,data.clips,()=>{media.classList.add('is-ready');$('#cinema-status').textContent='';});draw(0);
-    if(motion&&!reduced){
-      trigger=ScrollTrigger.create({id:'angora-camera-films',trigger:'.cinematic-story',start:'top top',end:'bottom bottom',onUpdate:self=>{target=self.progress;active=true;},onLeave:()=>{displayed=target=1;draw(1);active=false;},onEnterBack:self=>{displayed=target=self.progress;active=true;},invalidateOnRefresh:true});
-      requestAnimationFrame(tick);
-      gsap.timeline({scrollTrigger:{trigger:'.cinematic-story',start:'top top',end:'bottom bottom',scrub:1,invalidateOnRefresh:true}})
-        .to('.hero-title',{autoAlpha:0,yPercent:-20,duration:.045},0)
-        .to('.hero-sides,.hero-bottom',{autoAlpha:0,duration:.04},0)
-        .to('.cinema-caption,.cinema-track',{autoAlpha:1,duration:.035},.03)
-        .to(media,{left:'5%',right:'5%',top:'7%',bottom:'7%',duration:.045,ease:'power2.inOut'},.10)
-        .to(media,{left:'0%',right:'0%',top:'0%',bottom:'0%',duration:.045,ease:'power2.inOut'},.17)
-        .to(media,{left:'5%',right:'5%',top:'7%',bottom:'7%',duration:.045,ease:'power2.inOut'},.44)
-        .to(media,{left:'0%',right:'0%',top:'0%',bottom:'0%',duration:.045,ease:'power2.inOut'},.51)
-        .to('.cinema-caption,.cinema-track',{autoAlpha:0,duration:.08},.88)
-        .to('.hero',{backgroundColor:'#efede6',duration:.12},.88)
-        .to(media,{left:()=>innerWidth<801?'7%':'43%',right:()=>innerWidth<801?'7%':'6%',top:()=>innerWidth<801?'54%':'15%',bottom:()=>innerWidth<801?'8%':'15%',duration:.12,ease:'power2.inOut'},.88)
-        .fromTo('.cinema-destination',{autoAlpha:0,y:25},{autoAlpha:1,y:0,duration:.08},.92);
-      target=trigger.progress;displayed=target;draw(displayed);
-      $$('[data-film-chapter]').forEach(button=>button.addEventListener('click',()=>{
-        const p=(Number(button.dataset.filmChapter)+.40)/3;
-        window.dispatchEvent(new CustomEvent('angora:scroll',{detail:{top:trigger.start+(trigger.end-trigger.start)*p}}));
-      }));
-    }else{opening.pause();media.classList.add('is-scrolling');}
-    if(motion)ScrollTrigger.refresh();
-  }).catch(()=>{$('.cinema-veil').hidden=true;$('#cinema-status').textContent='Continue to discover the residence.';});
+  fetch('./assets/residence/films/manifest.json').then(r=>r.json()).then(manifest=>{
+    const films=manifest.clips.map(clip=>window.AngoraVideo.create(`./assets/residence/films/${clip.id}/transition.mp4`,media,'cinema-film'));
+    const backwards=manifest.clips.map(clip=>window.AngoraVideo.create(`./assets/residence/films/${clip.id}/reverse.mp4`,media,'cinema-film'));
+    const scene=window.AngoraSteps.register($('.cinematic-story'),3,async(from,to)=>{
+      if(from===to)return;
+      const forward=to>from,index=forward?to-1:from-1,film=(forward?films:backwards)[index],clip=manifest.clips[index];
+      opening.pause();opening.style.opacity='0';
+      gsap.to('.hero-title,.hero-sides,.hero-bottom',{autoAlpha:0,duration:.22});
+      gsap.to('.cinema-caption',{autoAlpha:0,y:12,duration:.18});gsap.to('.cinema-track',{autoAlpha:1,duration:.2});
+      $('.hero').dataset.cameraHold='false';$('.hero').dataset.filmChapter=index;
+      gsap.fromTo(media,{left:'4%',right:'4%',top:'5%',bottom:'5%'},{left:'0%',right:'0%',top:'0%',bottom:'0%',duration:1.2,ease:'power2.inOut'});
+      await window.AngoraVideo.play(film,films.concat(backwards),1.65,reduced,progress=>{
+        $$('[data-film-chapter]').forEach((b,i)=>{b.setAttribute('aria-current',String(i===index));b.querySelector('i').style.transform=`scaleX(${i<index?1:i===index?progress:0})`;});
+      });
+      const destination=Math.max(0,to-1);$('#cinema-title').textContent=manifest.clips[destination].title;$('#cinema-count').textContent=`0${destination+1} / 03`;$('#cinema-caption').textContent=descriptions[destination];
+      $('.hero').dataset.cameraHold='true';$('.hero').dataset.filmProgress=String(to/3);
+      gsap.to('.cinema-caption',{autoAlpha:1,y:0,duration:.38,ease:'power2.out'});
+      $('#cinema-status').textContent=to===3?'Scroll to discover the residence':'Scroll once for the next scene';
+    });
+    $$('[data-film-chapter]').forEach(button=>button.addEventListener('click',()=>scene.go(Number(button.dataset.filmChapter)+1)));
+    $('#cinema-status').textContent='Scroll once to begin';
+  }).catch(error=>{console.error(error);$('.cinema-veil').hidden=true;});
   if(!motion||reduced)return;
   // Word windows belong to editorial statements, rather than every interface label.
   $$('.residence .display,.editorial h3,.life-lede h3').forEach(heading=>{

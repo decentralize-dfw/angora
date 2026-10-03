@@ -11,7 +11,7 @@
   const data=window.ANGORA_ATLAS;
   // Only newly supplied exterior material enters this presentation.
   const exteriors=[['front','The street elevation'],['pool-garden','The private garden & pool'],['garden-facade','The garden-facing elevation'],['pool-terrace','The covered terrace & water'],['neighbourhood','Angora Evleri, in context']].map(([name,en],i)=>({id:100+i,url:`./assets/residence/new/${name}.webp`,en,outdoor:true}));
-  const curated=[3,4,19,9,21,1,6,16,23,32,34,43].map(id=>data.photos.find(p=>p.id===id)).filter(Boolean);
+  const curated=data.photos.filter(p=>!p.outdoor);
   const exteriorSafe=[...exteriors,...curated.filter(p=>!p.outdoor)];
   const track=$('.gallery-track');let gallery=[],galleryTrigger,index=0;
   function fitGallery(){
@@ -66,27 +66,29 @@
     });
   }
   fetch('./assets/residence/chapters/native-manifest.json').then(r=>r.json()).then(manifest=>{
-    const iso={...manifest.isometric,root:'./assets/residence/chapters',revision:manifest.revision},plan={...manifest.plans,root:'./assets/residence/chapters',revision:manifest.revision};
-    const isoPlayer=new FramePlayer($('#chapter-native-canvas'),[iso],()=>$('.chapter-native-stage').classList.add('ready'));
-    isoPlayer.crop={x:.20,y:.02,width:.74,height:.96};isoPlayer.background='#dce5e2';
-    const planPlayer=new FramePlayer($('#atlas-native-canvas'),[plan]);planPlayer.background='#dce5e2';
-    const isoProxy={p:0},planProxy={p:0};let isoP=0,planP=0,planTrigger;
-    function showIso(p){const state=floorPosition(p,iso);isoPlayer.seek(iso,state.frame,p<isoP?-1:1);isoP=p;$('.chapter-scene').dataset.nativeMoving=state.moving;window.dispatchEvent(new CustomEvent('angora:chapter-display',{detail:state.floor}));}
-    function showPlan(p){
-      const state=floorPosition(p,plan);window.AngoraPlan.selectFloor(state.floor);
-      const a=manifest.crops[state.from],b=manifest.crops[state.to];planPlayer.crop=Object.fromEntries(['x','y','width','height'].map(k=>[k,a[k]+(b[k]-a[k])*state.blend]));
-      planPlayer.seek(plan,state.frame,p<planP?-1:1);planP=p;$('.atlas-map').classList.toggle('moving',state.moving);$('.atlas-scene').dataset.nativeMoving=state.moving;
+    const stage=$('.chapter-native-stage'),still=$('#chapter-native-still');
+    const forward=[1,2,3].map(i=>window.AngoraVideo.create(`./assets/residence/chapters/level-${i}.mp4`,stage,'native-floor-film'));
+    const reverse=[1,2,3].map(i=>window.AngoraVideo.create(`./assets/residence/chapters/level-${i}-reverse.mp4`,stage,'native-floor-film'));
+    async function change(from,to){
+      if(from===to)return;
+      const step=Math.sign(to-from);
+      for(let current=from;current!==to;current+=step){
+        const next=current+step,video=(step>0?forward:reverse)[Math.max(current,next)-1];
+        $('.chapter-scene').dataset.nativeMoving='true';
+        await window.AngoraVideo.play(video,[...forward,...reverse],1.4,reduced);
+        still.src=`./assets/residence/chapters/iso-${next}.webp`;
+        await still.decode().catch(()=>{});video.classList.remove('playing');
+        window.dispatchEvent(new CustomEvent('angora:chapter-display',{detail:next}));
+      }
+      $('.chapter-scene').dataset.nativeMoving='false';
     }
-    const currentChapter=motion?ScrollTrigger.getAll().find(t=>t.trigger===$('#floors'))?.progress||0:Number($('.chapter-scene').dataset.floor)/3;
-    isoProxy.p=currentChapter;showIso(currentChapter);showPlan(0);
-    window.addEventListener('angora:chapter-progress',e=>{if(motion)gsap.to(isoProxy,{p:e.detail,duration:.75,ease:'power1.out',overwrite:true,onUpdate:()=>showIso(isoProxy.p)});else showIso(e.detail);});
-    window.addEventListener('angora:chapter',e=>{if(!motion)showIso(Number(e.detail)/3);});
-    if(motion){
-      planTrigger=ScrollTrigger.create({id:'angora-native-plan-flow',trigger:'.atlas-story',start:'top top',end:'bottom bottom',onUpdate:self=>gsap.to(planProxy,{p:self.progress,duration:.75,ease:'power1.out',overwrite:true,onUpdate:()=>showPlan(planProxy.p)}),invalidateOnRefresh:true});
-      planProxy.p=planTrigger.progress;showPlan(planProxy.p);
-      window.AngoraPlan.navigate=i=>window.dispatchEvent(new CustomEvent('angora:scroll',{detail:{top:planTrigger.start+(planTrigger.end-planTrigger.start)*i/3}}));
-    }else window.AngoraPlan.navigate=i=>{showPlan(i/3);};
+    window.AngoraIso=window.AngoraSteps.register($('#floors'),3,change);
+    const planScene=window.AngoraSteps.register($('#atlas'),3,(from,to)=>window.AngoraPlan.transition(to));
+    window.AngoraPlan.navigate=i=>{
+      if(Math.abs($('#atlas').getBoundingClientRect().top)>5)window.AngoraScroll.to($('#atlas').getBoundingClientRect().top+scrollY,true);
+      planScene.go(Number(i));
+    };
     if(motion)refreshMotion();
-  }).catch(error=>{console.error('Native floor sequence unavailable',error);});
+  }).catch(error=>console.error('Native floor films',error));
   document.fonts?.ready.then(()=>{if(motion)refreshMotion();});
 })();
