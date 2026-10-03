@@ -114,22 +114,29 @@ export function createRegionMap(host) {
     // Modelin çizdiği yerde OSM'in kopyası çizilmez: model evine düşen OSM
     // binası ve modelin asfaltına oturan OSM yol parçası atlanır.
     const hiddenBuildings = new Set(site.osm.hideBuildings), replacedRoads = new Set(site.osm.replacedRoads);
-    for (const g of streets.green) shape('polygon', 'rm-green', { points: flatPoints(g) });
-    streets.buildings.forEach((b, i) => { if (!hiddenBuildings.has(i)) shape('polygon', 'rm-bldg', { points: flatPoints(b) }); });
+    // 03.10 BÖLGE TAKILMASI: plan katmanı eskiden her bina/yol/yeşil için ayrı
+    // bir SVG düğümüydü - ~13 500 düğüm, ~110 bin köşe. Bölge'ye basınca
+    // tarayıcı bunların hepsine birden stil + yerleşim + boyama yapıyordu
+    // (ana iş parçacığı kilitlenir), sonra her animasyon karesinde hepsini
+    // yeniden boyuyordu. Aynı sınıftaki şekiller artık TEK <path>'in alt
+    // yolları: çizim aynı, düğüm sayısı ~10. Binalar örtüşmez; OSM ve
+    // Overture ayrı yolda kalır, ikisi üst üste binse bile delik açılmaz.
+    const subpath = (pts) => 'M' + flatPoints(pts) + 'Z';
+    const openPath = (pts) => 'M' + flatPoints(pts);
+    shape('path', 'rm-green', { d: streets.green.map(subpath).join('') });
+    shape('path', 'rm-bldg', { d: streets.buildings.filter((_, i) => !hiddenBuildings.has(i)).map(subpath).join('') });
     const hiddenMl = new Set(site.osm.hideMl ?? []);
-    mlBuildings.buildings.forEach((b, i) => { if (!hiddenMl.has(i)) shape('polygon', 'rm-bldg', { points: flatPoints(b) }); });
+    shape('path', 'rm-bldg', { d: mlBuildings.buildings.filter((_, i) => !hiddenMl.has(i)).map(subpath).join('') });
     // sitenin gerçek asfaltı (bordür dahil), yol çizgilerinin altında
     shape('path', 'rm-site-road', { d: site.roads.map(r => 'M' + poly(r) + 'Z').join(' '), 'fill-rule': 'evenodd' });
     for (const cls of [3, 2, 1, 0]) {
-      streets.roads.forEach(([c, , pts], i) => {
-        if (c !== cls || replacedRoads.has(i)) return;
-        shape('polyline', `rm-road rm-road-${c}`, { points: flatPoints(pts) });
-      });
-      for (const [c, pts] of site.osm.keptRuns) if (c === cls) shape('polyline', `rm-road rm-road-${c}`, { points: flatPoints(pts) });
+      const runs = streets.roads.filter(([c], i) => c === cls && !replacedRoads.has(i)).map(([, , pts]) => openPath(pts));
+      for (const [c, pts] of site.osm.keptRuns) if (c === cls) runs.push(openPath(pts));
+      if (runs.length) shape('path', `rm-road rm-road-${cls}`, { d: runs.join('') });
     }
     // Ana arterler (ürün sahibi kırmızıyla çizdi): bir ton koyu, adıyla
-    for (const [c, name, pts] of streets.roads)
-      if (local.majorRoads.includes(name)) shape('polyline', 'rm-road rm-road-major', { points: flatPoints(pts) });
+    const major = streets.roads.filter(([, name]) => local.majorRoads.includes(name)).map(([, , pts]) => openPath(pts));
+    if (major.length) shape('path', 'rm-road rm-road-major', { d: major.join('') });
     // the settlement's own OSM polygon: Angora Evleri, outlined
     if (streets.boundary) shape('polygon', 'rm-bound', { points: flatPoints(streets.boundary.ring) });
   } else {
@@ -198,7 +205,11 @@ export function createRegionMap(host) {
   // Villa, kendi gerçek yerinde (harita merkezi adres noktası; villa ondan
   // ~38 m doğu-güneyde).
   const villaAt = site.villa.reduce((a, [x, y]) => [a[0] + x / site.villa.length, a[1] + y / site.villa.length], [0, 0]);
-  const pulse = shape('circle', 'rm-pulse', { cx: villaAt[0], cy: villaAt[1], r: 26 });
+  // Villa nabzı HTML katmanında: SVG içindeki sonsuz CSS animasyonu, harita
+  // açık kaldığı sürece HER KAREDE bütün planı yeniden boyatıyordu. Ayrı bir
+  // HTML öğesinin transform/opacity animasyonu bileşiciden (GPU) yürür.
+  const pulse = document.createElement('i');
+  pulse.className = 'rm-pulse';
   shape('polygon', 'rm-villa', { points: poly(site.villa) });
   const hiddenCurated = new Set(local.hideCurated);
   for (const [i, p] of places.curated.entries()) {
@@ -269,6 +280,7 @@ export function createRegionMap(host) {
       (d > 2000 ? ` <em style="transform:rotate(${bearingDeg.toFixed(0)}deg)">→</em>` : ''), m.x, m.y, d > 2000);
     c.dataset.distance = d; c.dataset.g = '-1'; c.dataset.mention = id;
   }
+  labels.prepend(pulse);
   const compass = document.createElement('span');
   compass.className = 'rm-compass';
   compass.innerHTML = '<i>↑</i>K';
@@ -530,7 +542,10 @@ export function createRegionMap(host) {
     // ondan türetilir - her yarıçapta, her ekranda aynı okunaklılık.
     const fsU = (phone ? 10.5 : 11.5) / s;
     for (const m of dotMarks) m.setAttribute('r', (phone ? 3.2 : 3.8) / s);
-    pulse.setAttribute('r', 14 / s);
+    {
+      const [px, py] = turn(villaAt[0], villaAt[1]);
+      pulse.style.left = `${(cx + px * s).toFixed(1)}px`; pulse.style.top = `${(cy + py * s).toFixed(1)}px`;
+    }
     // Kalabalık olmasın: yakından uzağa en çok bu kadar başlık.
     const maxTitles = phone ? 6 : 12;
     const kept = [];
@@ -563,10 +578,20 @@ export function createRegionMap(host) {
     if (!el.hidden) return;
     el.hidden = false;
     el.setAttribute('aria-hidden', 'false');
+    // İlk yerleşim animasyonsuz: dünya grubunun 950 ms'lik transform geçişi
+    // açılışta bütün planı ~57 kare boyunca yeniden boyatıyordu.
+    el.classList.add('rm-instant');
     layout();
+    void el.offsetWidth;
+    el.classList.remove('rm-instant');
     addEventListener('resize', onResize);
     requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('rm-active')));
+    // Harita opak zeminiyle ekranı tamamen örttüğünde 3B sahnenin çizilmesi
+    // gereksiz: main.js bu bayrağa bakıp alttaki kareyi çizmez.
+    clearTimeout(coverTimer);
+    coverTimer = setTimeout(() => { covering = !el.hidden && el.classList.contains('rm-active'); }, 420);
   };
+  let covering = false, coverTimer = 0;
   return {
     element: el,
     get radius() { return radius; },
@@ -604,8 +629,10 @@ export function createRegionMap(host) {
       if (delay > 0) {pendingShow = setTimeout(() => {pendingShow = null; reveal();}, delay); return;}
       reveal();
     },
+    get covering() { return covering; },
     hide() {
       clearTimeout(pendingShow); pendingShow = null;
+      clearTimeout(coverTimer); covering = false;
       if (el.hidden) return;
       el.classList.remove('rm-active');
       el.setAttribute('aria-hidden', 'true');

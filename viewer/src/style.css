@@ -390,8 +390,16 @@ h1 strong{font-weight:700}
 .rm-dot-tag{transition:opacity 400ms ease}
 .rm-off-0 .rm-g0,.rm-off-1 .rm-g1,.rm-off-2 .rm-g2,
 .rm-off-3 .rm-g3,.rm-off-4 .rm-g4,.rm-off-5 .rm-g5{opacity:0;pointer-events:none}
-.rm-pulse{fill:none;stroke:rgba(22,29,26,.35);stroke-width:1px;vector-effect:non-scaling-stroke;transform-box:fill-box;transform-origin:center;animation:rm-pulse 2.6s ease-out infinite}
+/* 03.10: nabız HTML öğesi (SVG içinde her kare tüm planı boyatıyordu); yalnız transform+opacity = GPU'da. */
+.rm-pulse{position:absolute;left:0;top:0;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;border:1px solid rgba(22,29,26,.35);pointer-events:none;will-change:transform,opacity;animation:rm-pulse 2.6s ease-out infinite}
 @keyframes rm-pulse{0%{transform:scale(1);opacity:.7}70%{transform:scale(3.2);opacity:0}100%{transform:scale(3.2);opacity:0}}
+/* 03.10: açılışta dünya grubu ve etiketler animasyonsuz yerleşir. */
+.region-map.rm-instant .rm-svg>g,.region-map.rm-instant .rm-chip{transition:none!important}
+/* 03.10: harita üstündeki ~35 etiketin her biri arka planı bulanıklaştırıyordu
+   (backdrop-filter) - her hareket eden etiket her karede altındaki planı yeniden
+   bulanıklaştırır. Düz, hafif opak zemin aynı okunurluğu bedavaya verir. */
+.region-map .rm-chip{-webkit-backdrop-filter:none;backdrop-filter:none}
+.region-map .rm-chip-poi:not(.rm-chip-mention):not(.rm-chip-gate):not(.rm-chip-local){background:rgba(255,255,255,.88)}
 .rm-labels{position:absolute;inset:0}
 .rm-chip{position:absolute;left:0;top:0;white-space:nowrap;transition:transform 950ms cubic-bezier(.22,.8,.2,1),opacity 500ms ease;border-radius:999px;padding:4px 11px;font-size:11px;color:var(--ink);background:rgba(255,255,255,.55);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);box-shadow:0 2px 10px #1b322514}
 .rm-chip i{font-style:normal;color:var(--muted)}
