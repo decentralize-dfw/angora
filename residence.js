@@ -8,7 +8,7 @@
   if (hasMotion) gsap.registerPlugin(ScrollTrigger);
   if (!reduced && hasMotion && window.Lenis) {
     lenis = new Lenis({duration:1.15, smoothWheel:true, syncTouch:false,
-      prevent:node => !!node.closest('dialog,.gallery-track')});
+      prevent:node => !!node.closest('dialog')});
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(time => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
@@ -17,7 +17,7 @@
     if (lenis) lenis.scrollTo(target, {duration:1.35, ...options});
     else window.scrollTo({top:typeof target === 'number' ? target : target.getBoundingClientRect().top + scrollY + (options.offset || 0), behavior:reduced ? 'instant' : 'smooth'});
   }
-  window.addEventListener('angora:scroll', event => scrollTo(event.detail.top));
+  window.addEventListener('angora:scroll', event => scrollTo(event.detail.top,{immediate:!!event.detail.immediate}));
   const menu = $('#menu'), menuToggle = $('.menu-toggle');
   let returnFocus = null;
   function closeMenu() {
@@ -48,7 +48,7 @@
   }));
   function updateHeader() {
     const center = scrollY + 60;
-    const dark = ['.hero-story','.garden-story','.contact'].some(selector => {
+    const dark = ['.hero-story','.garden-story','.kitchen-story','.gallery','.contact'].some(selector => {
       const element = $(selector);
       return center >= element.offsetTop && center < element.offsetTop + element.offsetHeight;
     });
@@ -94,10 +94,10 @@
   setGarden(0, true);
 
   const chapters = [
-    {view:'f0', level:'Garden level', kicker:'−01 / The garden floor', title:'Open the day outside.', copy:'A living room of approximately 54 m², a separate kitchen and direct access to the garden and pool. An annexe with its own entrance adds space for guests, work or a separate daily routine.', features:['Living room & kitchen','Garden & pool access','Guest WC & separate annexe'], photo:'03', caption:'Garden-level living room'},
-    {view:'f1', level:'Entrance level', kicker:'00 / The entrance floor', title:'The heart of the home.', copy:'Arrive from the street into the main social floor. A living and dining room of approximately 53 m² connects to a generous enclosed kitchen, utility space and an internally accessible garage.', features:['Main living & dining room','Kitchen, utility space & guest WC','Street entrance, garage & balcony'], photo:'04', caption:'Entrance-level living and dining room'},
-    {view:'f2', level:'First floor', kicker:'01 / The bedroom floor', title:'A place for privacy.', copy:'The principal suite has its own dressing room and en-suite bathroom. Two more bedrooms, a family bathroom and a sitting area bring the private rooms together on one level.', features:['Principal suite & dressing room','Two further bedrooms & family bathroom','Sitting area, balcony & lift access'], photo:'19', caption:'First-floor principal bedroom'},
-    {view:'f3', level:'Attic level', kicker:'02 / The attic floor', title:'Room for another rhythm.', copy:'Under the pitched roof, a sitting room, two bedrooms, a kitchenette and a bathroom create an additional living arrangement. A place for guests, grown children or a quieter working day, reached by the staircase.', features:['Sitting room & two bedrooms','Kitchenette & bathroom','Stair access; lift stops below'], photo:'09', caption:'Attic-level sitting room'},
+    {view:'f0', level:'Garden level', kicker:'1 / The garden floor', title:'Open the day outside.', copy:'A living room of approximately 54 m², a separate kitchen and direct access to the garden and pool. An annexe with its own entrance adds space for guests, work or a separate daily routine.', features:['Living room & kitchen','Garden & pool access','Guest WC & separate annexe'], photo:'03', caption:'Garden-level living room'},
+    {view:'f1', level:'Entrance level', kicker:'2 / The entrance floor', title:'The heart of the home.', copy:'Arrive from the street into the main social floor. A living and dining room of approximately 53 m² connects to a generous enclosed kitchen, utility space and an internally accessible garage.', features:['Main living & dining room','Kitchen, utility space & guest WC','Street entrance, garage & balcony'], photo:'04', caption:'Entrance-level living and dining room'},
+    {view:'f2', level:'First floor', kicker:'3 / The bedroom floor', title:'A place for privacy.', copy:'The principal suite has its own dressing room and en-suite bathroom. Two more bedrooms, a family bathroom and a sitting area bring the private rooms together on one level.', features:['Principal suite & dressing room','Two further bedrooms & family bathroom','Sitting area, balcony & lift access'], photo:'19', caption:'First-floor principal bedroom'},
+    {view:'f3', level:'Attic level', kicker:'4 / The attic floor', title:'Room for another rhythm.', copy:'Under the pitched roof, a sitting room, two bedrooms, a kitchenette and a bathroom create an additional living arrangement. A place for guests, grown children or a quieter working day, reached by the staircase.', features:['Sitting room & two bedrooms','Kitchenette & bathroom','Stair access; lift stops below'], photo:'09', caption:'Attic-level sitting room'},
   ];
   let chapterIndex = 0;
   function setChapter(index, force = false) {
@@ -125,7 +125,7 @@
     }
   }
   function goChapter(index) {
-    if (chapterTrigger) scrollTo(chapterTrigger.start + (chapterTrigger.end - chapterTrigger.start) * ((index + .3) / 4));
+    if (chapterTrigger) scrollTo(chapterTrigger.start + (chapterTrigger.end - chapterTrigger.start) * (index / 3));
     else {setChapter(index); scrollTo($('#floors'));}
   }
   $$('[data-chapter]').forEach(button => {
@@ -141,44 +141,13 @@
     });
   });
   $$('[data-chapter-link]').forEach(button => button.addEventListener('click', () => goChapter(Number(button.dataset.chapterLink))));
-  $$('[data-atlas-link]').forEach(button => button.addEventListener('click',()=>{window.dispatchEvent(new CustomEvent('angora:floor',{detail:Number(button.dataset.atlasLink)}));scrollTo($('#atlas'),{offset:-60});}));
+  $$('[data-atlas-link]').forEach(button => button.addEventListener('click',()=>{
+    const floor=Number(button.dataset.atlasLink);
+    if(window.AngoraPlan?.navigate)window.AngoraPlan.navigate(floor);
+    else {window.dispatchEvent(new CustomEvent('angora:floor',{detail:floor}));scrollTo($('#atlas'),{offset:-60});}
+  }));
+  window.addEventListener('angora:chapter-display',event=>setChapter(event.detail));
   setChapter(0, true);
-
-  const allGallery=[...window.ANGORA_ATLAS.photos].sort((a,b)=>(a.outdoor?0:a.floor+1)-(b.outdoor?0:b.floor+1)||a.id-b.id);
-  let gallery=allGallery;
-  const track = $('.gallery-track');
-  let galleryIndex = 0;
-  function renderGallery(filter='all'){
-  gallery=allGallery.filter(point=>filter==='all'||(filter==='outdoor'?point.outdoor:!point.outdoor&&point.floor===Number(filter)));
-  track.replaceChildren();track.scrollLeft=0;galleryIndex=0;
-  gallery.forEach((point, index) => {
-    const id=String(point.id).padStart(2,'0'),caption=point.en.replace('Basement ·','Garden level ·').replace('Ground floor ·','Entrance level ·').replace('Attic floor ·','Attic level ·');
-    const figure = document.createElement('figure'); figure.className = 'gallery-item';
-    const button = document.createElement('button'); button.dataset.photo = id; button.dataset.caption = caption; button.setAttribute('aria-label', `Enlarge photograph: ${caption}`);
-    const img = document.createElement('img'); img.src = point.url; img.alt = caption; img.loading = 'lazy'; img.width = 1600; img.height = 1200;
-    const expand = document.createElement('span'); expand.textContent = '↗'; expand.setAttribute('aria-hidden','true'); button.append(img,expand);
-    const figcaption = document.createElement('figcaption'); const label = document.createElement('span'); label.textContent = caption;
-    const number = document.createElement('span'); number.textContent = `Photo ${id}`; figcaption.append(label,number); figure.append(button,figcaption); track.append(figure);
-  });
-  $('#gallery-counter').textContent=`01 / ${gallery.length}`;$('#gallery-prev').disabled=true;$('#gallery-next').disabled=gallery.length<2;
-  }
-  renderGallery();
-  $$('[data-gallery-filter]').forEach(button=>button.addEventListener('click',()=>{renderGallery(button.dataset.galleryFilter);$$('[data-gallery-filter]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));}));
-  function galleryGo(delta) {
-    const next = Math.max(0, Math.min(gallery.length - 1, galleryIndex + delta));
-    track.scrollTo({left:track.children[next].offsetLeft - track.children[0].offsetLeft, behavior:reduced ? 'instant' : 'smooth'});
-  }
-  $('#gallery-prev').addEventListener('click', () => galleryGo(-1)); $('#gallery-next').addEventListener('click', () => galleryGo(1));
-  $('#gallery-prev').disabled = true;
-  track.addEventListener('scroll', () => {
-    const first = track.children[0].offsetLeft;
-    let best = Infinity;
-    [...track.children].forEach((figure,index) => {const distance = Math.abs(figure.offsetLeft - first - track.scrollLeft); if (distance < best) {best = distance; galleryIndex = index;}});
-    if (track.scrollLeft >= track.scrollWidth - track.clientWidth - 5) galleryIndex = gallery.length - 1;
-    $('#gallery-counter').textContent = `${String(galleryIndex + 1).padStart(2,'0')} / ${gallery.length}`;
-    $('#gallery-prev').disabled = galleryIndex === 0; $('#gallery-next').disabled = galleryIndex === gallery.length - 1;
-  }, {passive:true});
-  track.addEventListener('keydown', event => {if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {event.preventDefault(); galleryGo(event.key === 'ArrowRight' ? 1 : -1);}});
 
   const imageDialog = $('#image-dialog');
   function openDialog(dialog) {returnFocus = document.activeElement; dialog.showModal(); document.body.classList.add('locked'); lenis?.stop();}
@@ -189,7 +158,7 @@
   });
   document.addEventListener('click', event => {
     const photo = event.target.closest('[data-photo]');
-    if (photo) {$('#lightbox-image').src = window.ANGORA_ATLAS.photos.find(point=>point.id===Number(photo.dataset.photo))?.url || `./assets/residence/photo-${photo.dataset.photo}.jpg`; $('#lightbox-image').alt = photo.dataset.caption || ''; $('#lightbox-caption').textContent = photo.dataset.caption || ''; openDialog(imageDialog);}
+    if (photo) {$('#lightbox-image').src = photo.dataset.photoUrl || window.ANGORA_ATLAS.photos.find(point=>point.id===Number(photo.dataset.photo))?.url || `./assets/residence/photo-${photo.dataset.photo}.jpg`; $('#lightbox-image').alt = photo.dataset.caption || ''; $('#lightbox-caption').textContent = photo.dataset.caption || ''; openDialog(imageDialog);}
     const tour = event.target.closest('[data-tour]');
     if (tour) {const url = `./index.html?lang=en&view=${encodeURIComponent(tour.dataset.tour)}`; window.open(url,'_blank','noopener');}
   });
@@ -206,13 +175,6 @@
         .fromTo('.arrival-detail',{y:100,rotation:8},{y:0,rotation:-3,opacity:1,duration:.3},.4)
         .to('.arrival-caption,.arrival-detail,.arrival-type',{opacity:0,duration:.15},.78)
         .to('.arrival-frame',{clipPath:'inset(0% 0% 0% 0%)',duration:.25,ease:'power2.inOut'},.75);
-      gsap.timeline({scrollTrigger:scrub('.image-flight')})
-        .fromTo('.fly-a', {xPercent:-45, yPercent:65, rotation:-12}, {xPercent:mobile ? 65 : 73, yPercent:10, rotation:-4, duration:.65, ease:'none'}, 0)
-        .fromTo('.fly-b', {xPercent:50, yPercent:65, rotation:12}, {xPercent:mobile ? -73 : -90, yPercent:-20, rotation:3, duration:.65, ease:'none'}, .04)
-        .fromTo('.fly-c', {yPercent:90, rotation:-8}, {yPercent:-165, xPercent:25, rotation:-3, duration:.7, ease:'none'}, .1)
-        .to('.flight-type', {yPercent:-12, duration:1, ease:'none'}, 0)
-        .to('.fly-a', {xPercent:mobile ? 40 : 50, yPercent:-110, rotation:0, duration:.35, ease:'power2.inOut'}, .65)
-        .to('.flying-photo,.flight-caption,.flight-type', {opacity:0, duration:.2}, .8);
       const garden = gsap.timeline({scrollTrigger:scrub('.garden-story', {onUpdate:self => setGarden(Math.min(2, Math.floor(self.progress * 3)))})});
       gardenTrigger = garden.scrollTrigger;
       garden.to('.garden-images',{clipPath:mobile?'inset(4% 5% 4% 5%)':'inset(6% 5% 6% 5%)',duration:.2,ease:'power2.inOut'},.02)
@@ -224,12 +186,9 @@
         .set('.garden-2', {opacity:1}, .64)
         .fromTo('.garden-2', {clipPath:'polygon(100% 0%,100% 0%,125% 100%,100% 100%)'}, {clipPath:'polygon(0% 0%,100% 0%,100% 100%,0% 100%)',duration:.14,ease:'power2.inOut'}, .64)
         .fromTo('.garden-2', {scale:1.15}, {scale:1, duration:.34, ease:'none'}, .66);
-      gsap.timeline({scrollTrigger:scrub('.ritual-story')})
-        .fromTo('.ritual-a', {yPercent:100, xPercent:-35, rotation:-12}, {yPercent:-50, xPercent:55, rotation:-3, duration:1, ease:'none'}, 0)
-        .fromTo('.ritual-b', {yPercent:110, xPercent:30, rotation:14}, {yPercent:-90, xPercent:-50, rotation:4, duration:1, ease:'none'}, 0)
-        .fromTo('.ritual-c', {yPercent:140, rotation:-10}, {yPercent:-115, rotation:0, duration:1, ease:'none'}, 0)
-        .to('.ritual-scene h2', {yPercent:-12, duration:1, ease:'none'}, 0);
-      chapterTrigger = ScrollTrigger.create({...scrub('.chapters'), onUpdate:self => {setChapter(Math.min(3, Math.floor(self.progress * 4)));}});
+      chapterTrigger = ScrollTrigger.create({...scrub('.chapters'), onUpdate:self => {
+        window.dispatchEvent(new CustomEvent('angora:chapter-progress',{detail:self.progress}));
+      }});
       // Keep the neighbourhood legible until a complete scene handoff is chosen.
       // The motion study documents the coupled footer and architectural masks.
       gsap.timeline({scrollTrigger:scrub('.life-opening')})

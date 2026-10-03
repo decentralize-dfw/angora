@@ -1,3 +1,5 @@
+const presentationRecording=new URLSearchParams(location.search).get('presentation-record')==='1';
+import {mountPresentationRecorder} from './presentation-recorder.js';
 import {loadRoomReflections,createLazyRoomReflections} from './room-reflections.js';
 import {createElectricLighting} from './electric-light.js';
 import './style.css';
@@ -445,6 +447,7 @@ if(typeof window!=='undefined')window.__angoraCinemaRefine=async(samples=24)=>{
   return count;
 };
 function floorFrameInsets(){
+  if(presentationRecording)return {verticalFraction:.96,horizontalFraction:.96,offsetY:0};
   const rect=host.getBoundingClientRect(),dock=$('.explore-dock').getBoundingClientRect();
   const topBottom=rect.width<700?Math.max($('.topbar').getBoundingClientRect().bottom,$('.scale-picker').getBoundingClientRect().bottom)-rect.top:0;
   return frameInsets(rect.width,rect.height,{dockTop:dock.top-rect.top,topBottom});
@@ -507,6 +510,7 @@ function frame(initial=false,keep=false) {
   // telefon ekranında masaüstünün 2,2 katı uzaklaşıyordu (eski "5 kat" geçişi telefonda
   // kalmıştı). Telefon da masaüstüyle aynı mesafeye çekilir: yalnız derinlik ölçüsü.
   if(selected==='region')frameSpan=(size.z*Math.cos(polar)+size.y*Math.sin(polar))*1.14;
+  if(presentationRecording&&floor&&!planMode)frameSpan*=1.33;
   const rigFov=rigFovFor(selected,{enabled:FEATURES.cameraRigsV2});
   // (bölge çerçevesi yukarıda: yakın çevrenin 2 katı - fitContextBounds artık kullanılmaz)
   if(keep){center.copy(controls.target);if(floor)center.y=[0,3.0996,6.3714,9.4705][Number(selected[1])];frameSpan=camera.position.distanceTo(controls.target)*2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2));}
@@ -583,6 +587,7 @@ const PHOTO_BAND=300;
 // it and back again when it closes. Bounded, so a narrow window cannot push
 // the plan off its other edge.
 function photoOffsetX(width){
+  if(presentationRecording)return 0;
   const dock=$('#photo-dock');
   if(!dock||dock.hidden||matchMedia('(max-width:720px)').matches)return 0;
   const frame=host.getBoundingClientRect();
@@ -1909,6 +1914,7 @@ async function loadNativeModel(manifest){
   // ışınlanma ışını yalnız bina, iç mekân ve bahçeye (komşu/çevre grupları gözlükte yavaşlatmasın)
   wireImmersive({values:()=>[...groups].filter(([name])=>name==='architecture'||name==='garden'||name.startsWith('interior')).map(([,group])=>group)});
   await selectView(selected,true);lighting.render(camera);
+  mountPresentationRecorder({enabled:presentationRecording,selectView,renderer,capture:callback=>{pendingCapture=callback;invalidate();},setPlan:on=>{planMode=on;quality?.applyView(selected,{plan:on});frame(true);},project:(floor,data)=>({floor,width:renderer.domElement.width,height:renderer.domElement.height,photos:data.photos.filter(p=>!p.outdoor&&p.floor===floor).map(p=>{const v=new THREE.Vector3(p.x,[0,3.0996,6.3714,9.4705][floor]+.03,p.z).project(camera);return {id:p.id,x:(v.x+1)/2,y:(1-v.y)/2};}),dimensions:data.dimensions.filter(d=>d.floor_index===floor).map(d=>({...d,screen:[d.a,d.b].map(p=>{const v=new THREE.Vector3(p[0],[0,3.0996,6.3714,9.4705][floor]+.03,p[2]).project(camera);return [(v.x+1)/2,(1-v.y)/2];})}))})});
   phaseDone('view');step(null);status.hidden=true;
   host.dataset.deliveryStats=JSON.stringify({...JSON.parse(host.dataset.deliveryStats),readyMs:Math.round(performance.now()-loadStarted)});
   // The frame behind it is already drawn, so the screen leaves at once and

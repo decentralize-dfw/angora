@@ -1,105 +1,113 @@
-# Angora 21 — English editorial residence page
+# Angora 21 — English residence presentation
 
-Entry point: `web-gpt.html`. The existing root tour and `web.html` remain separate.
+Entry point: `web-gpt.html`. Run `node tools/serve-residence.mjs` and open
+`http://localhost:4180/web-gpt.html`. The existing interactive tour and the
+ERA / Likova library in `casestudy.html` remain separate entry points.
 
-Run `node tools/serve-residence.mjs` and open `http://localhost:4180/web-gpt.html`.
-The page is static and can be served directly from the repository root.
+## Material and visual direction
 
-## Photography and motion
+Ice blue, forest green, warm brown and ivory connect the supplied villa views
+with an early-autumn editorial direction. Headings use locally hosted Cormorant
+Garamond; interface and body text use locally hosted Manrope. Their OFL licences
+are in `assets/residence/fonts/`.
 
-`assets/residence/photo-*.jpg` are the supplied photographs of the existing villa.
-GSAP ScrollTrigger and Lenis are served from `assets/vendor/`. Typography uses
-Bodoni Moda and DM Sans from Google Fonts, with local system fallbacks.
-The recorded opening, consecutive camera films, framed compositions, flying
-photographs, outdoor scene wipes and four chapter sequence follow one scroll
-coordinate. Reduced motion uses static media and direct chapter selection.
-English descriptions cover the floor layout, kitchens, suite,
-garden, pool, lift, annexe, parking and neighbourhood.
+The seven new views from Downloads live in `assets/residence/new/`, with original
+filenames in `sources.json`. Exterior imagery is assigned to street arrival,
+garden elevation, pool, terrace and neighbourhood respectively. The old exterior
+photo set is excluded from the page and its dynamic gallery. Interior photographs
+retain their original floor and photographed subject. Raw archive IDs stay inside
+the data; displayed camera points start at 1 on each floor.
 
-## Supplied camera films — 3 October 2026
+## Recorded camera sequence
 
-The homepage loads no live 3D scene or iframe. `açılış kararma.mp4` plays once,
-muted and inline, behind an opening dark veil. It moves from daylight into
-evening. Scrolling takes over a separate canvas and advances all three supplied
-1280 × 720 camera clips at their original 24 fps:
+The supplied opening darkening film plays behind a black opening veil. Three
+supplied camera clips then follow continuous endpoints: pool approach, elevation
+orbit, and the reversed garden return. Each clip now occupies five viewport
+scroll distances. Its first camera movement uses 0–32% of that distance, then
+holds at its midpoint from 32–48%; movement resumes from 48–80%, followed by a
+destination hold. Each hold has information appropriate to that view.
 
-- `07_14_28`: approach from the pool to the frontal elevation.
-- `07_13_20`: frontal elevation to the elevated three-quarter view.
-- `07_19_59`, reversed: elevated three-quarter view back to the garden.
+`residence-camera.js` smooths the displayed camera progress independently of
+wheel impulses. Forward and backward scroll use the same frame mapping.
+`residence-film-runtime.js` fetches four frames concurrently, keeps 28 decoded
+frames on desktop / 16 on mobile, and preserves the full source composition.
 
-The order follows camera endpoints rather than download time. Each clip has 121
-WebP frames, prepared at quality 82 without resizing. Two viewport heights of
-scroll finish each clip; the complete three-clip sequence occupies six viewport
-heights plus its sticky screen. “Two scrolls” means two viewport distances,
-independent of a mouse's wheel event size. Forward and backward navigation use
-the same mapping, with no frame seeking dependent on an MP4 keyframe interval.
+## Actual isometric floors and transforming plans
 
-`assets/residence/films/manifest.json` records source names, order and reversal.
-Original MP4s remain beside the derived frames. `residence-film-runtime.js`
-decodes at most four frames concurrently and keeps 28 decoded frames on desktop
-or 16 on mobile. Its queue follows the latest scroll destination. The complete
-landscape composition fits the frame, with a dim ambient field filling a
-different screen aspect ratio. The pool and building are not cropped by a
-shrinking mask. No new image or film is generated.
+The homepage plays recordings, without a live model. Both four-floor sequences
+were captured from the actual Three.js viewer and its Tur 10 model, including
+native floor clipping, camera flights and orthographic furnished plans. There is
+no studio plinth or replacement floor diagram.
 
-`residence-cinema.js` and `residence-cinema.css` adapt the audited library:
-ERA frame contraction/expansion, diagonal image reveal, foreground photograph
-movement and coupled CTA/footer scale; Likova masked type, camera-linked state
-and per-chapter progress. The camera clips remain consecutive while the frame
-contracts, returns to full screen and becomes a photograph beside the intro.
+Capture workflow:
+
+1. Start `node tools/capture-residence.mjs` on localhost:4181.
+2. Start the viewer dev server on localhost:4173. Its local proxy carries the
+   capture endpoints.
+3. Open `/?lang=en&view=f0&presentation-record=1` and press Record presentation.
+4. Run `python tools/prepare-native-films.py` with FFmpeg installed.
+
+The capture flag only changes recording framing and adds the local export
+button. The regular interactive viewer keeps its normal controls and framing.
+The export includes two WebM recordings, four isometric stills, four plan stills,
+and `poses.json`: exact photo and DXF positions projected by the plan camera.
+The preparation tool writes independently decoded WebP frames, fallback stills,
+MP4s and `native-manifest.json`.
+
+Within each floor interval, the scene rests while its description is readable,
+then travels to the next floor using the recorded native transition. The
+isometric chapter copy follows displayed camera state. The plan crop interpolates
+between the same recorded viewpoints; registered points reappear on the settled
+plan. Floor selection moves to that floor's scroll position.
+
+Plan labels separate where several camera points occupy one small room; leader
+lines preserve their registered locations. Selecting a point shows the matching
+original photograph, direction and subject-room area when the owner's schedule
+provides it. The optional dimensions come from the supplied DXF. Areas are
+approximate; unspecified values are not invented.
+
+## Selected motion recipes
+
+The reference library is used selectively, according to each section's material:
+
+| Section | Selected study | Application |
+| --- | --- | --- |
+| Opening camera | Likova 21, 14–15 | Separate movement / reading phases, camera-linked copy, chapter progress |
+| Film framing | ERA 12, Likova 18 | Full-screen image contracts during a pause and expands for the next movement |
+| Exterior / kitchens | ERA 13, Likova 36 | Image window opens, then the pinned strip traverses its measured width |
+| Four chapters | Likova 14, 16 | Actual cut-plane and camera recording with matching floor narrative |
+| Plan atlas | Likova 25, 27 | Plan-to-plan recording and paired disappearance / reappearance of camera markers |
+| Editorial statements | Likova 9 | Word-window reveals on selected large statements |
+| Neighbourhood photographs | ERA 24 | Restrained internal photo movement and paired editorial framing |
+| Collection | Likova 45 | Width-derived horizontal travel; vertical page flow resumes after the last photograph |
+| Closing | Likova 11 | Quiet footer underlap |
+
+Horizontal exterior, kitchen and collection sections stay within one viewport.
+Their masks open before horizontal travel; they release the page after the strip
+finishes. Gallery filters rebuild the corresponding measured travel distance.
+Reduced motion uses stationary media, direct floor selection and native
+horizontal overflow.
+
+## Life in Angora
+
+The two community photographs originate from the official residents' association:
+[Angora Evleri](https://www.angorakoop18.com/). They received photographic clarity,
+lighting and restrained early-autumn edits through the built-in ImageGen tool.
+They are captioned as autumn interpretations. Exact source URLs, full prompts
+and saved filenames are recorded in `assets/residence/life/provenance.json`;
+both original source JPEGs are retained alongside the edited WebP assets.
+
+Community greenery and recreation use these matching photographs. Bilkent
+Symphony Orchestra and CerModern appear as a separate cultural note with their
+own official links; the community images are not labelled as cultural venues.
+Source information was checked on 3 October 2026. Programmes link to current
+[BSO](https://bso.bilkent.edu.tr/en/) and
+[CerModern](https://www.cermodern.org/ziyaret) pages.
 
 ## Verification
 
-`node tests/residence-films.test.mjs` checks the six-screen mapping, backwards
-navigation, both boundaries, clip order and every frame/original video file.
-`node tests/residence-atlas.test.mjs` checks the photograph/plan provenance.
-Browser checks cover the three clips, the final framed composition, all four
-floors, camera point lightbox, atlas navigation and a 390 px mobile viewport.
-
-## Autumn interface and photograph atlas — 3 October 2026
-
-`residence-autumn.css` supplies the editorial layout; `residence-palette.css`
-combines the villa's ice blue with dark garden green, warm brown and ivory.
-The film canvas contracts from full screen to an inset frame and expands again.
-A street-arrival sequence uses original photographs 38 and 37; the neighbourhood
-sequence also moves between full screen and framed compositions. No generated
-seasonal image is used. The kitchen collage uses the three actual kitchens:
-photographs 21, 01 and 06.
-
-The new atlas combines registered room polygons, camera positions and directions,
-the supplied DXF dimensions and the owner's room-area schedule. Camera position
-and photographed subject are separate: for example, photograph 16 looks into
-the dressing room from the adjacent bedroom, and its displayed area belongs to
-the dressing room. All four floors offer numbered camera points, thumbnails,
-photograph enlargement and a room schedule. The dimension toggle shows the
-selected subject room's registered measurement lines and the available areas.
-Unspecified areas remain blank rather than being derived from a rectangle.
-
-The four chapter panel now shows original room photographs with a registered
-mini plan and real clickable photo points. It no longer loads the earlier studio
-cutaway film or its white plinth. The matching room is highlighted; only an area
-present in the supplied schedule is shown. All floor descriptions and separate
-interactive-tour links remain available.
-
-All 55 original photographs are available, organised by exterior and floor.
-Original image 20 stays excluded as the duplicate of 04; numbering is preserved.
-`node tools/build-residence-atlas.mjs <original-photogallery-directory>` rebuilds
-`assets/residence/atlas-data.js` from the authoritative repository data.
-`node tests/residence-atlas.test.mjs` checks the original files, camera
-registration, floor/subject mapping, exact dimensions and room-area provenance.
-
-“Life in Angora” is an English editorial guide with source links on each story:
-
-- [Angora Evleri residents' association](https://www.angorakoop18.com/): shared
-  green, sports, social and children's play areas; its account of everyday life.
-- [Beysukent Çankaya Evi](https://www.cankaya.bel.tr/cankaya-evleri/beysukent-cankaya-evi):
-  the community house in Cumhuriyet Park, Angora Caddesi, and its listed courses.
-- [Bilkent Symphony Orchestra](https://bso.bilkent.edu.tr/en/): season concerts
-  at Bilkent Concert Hall.
-- [CerModern visitor information](https://www.cermodern.org/index.php/ziyaret):
-  exhibitions, café and library in Sıhhiye.
-
-Sources checked 3 October 2026. The guide links to current programmes instead
-of freezing event dates, travel times or membership claims into the page. Its
-property photograph is identified as the actual residence; it is not presented
-as an image of a shared amenity or a cultural venue.
+`node --test --test-isolation=none tests/residence-films.test.mjs tests/residence-atlas.test.mjs`
+checks camera pauses and reversibility, all published film frames, four recorded
+floor/plan assets, projected points, original photo registration, DXF dimensions
+and room-area provenance. Browser verification covers floor selection, matched
+photo enlargement, dimensions, pinned horizontal travel and viewport fit.

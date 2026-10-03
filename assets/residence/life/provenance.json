@@ -1,0 +1,24 @@
+[
+  {
+    "name": "green",
+    "sourcePage": "https://www.angorakoop18.com/",
+    "sourceImage": "https://www.angorakoop18.com/userfiles/icerikler/d31657233ccd6741eadf967fac9f83f1.jpg",
+    "sourceFile": "green-source.jpg",
+    "editedFile": "green-autumn.webp",
+    "tool": "Built-in image_gen.imagegen",
+    "prompt": "Edit target: the supplied real Angora Evleri neighbourhood green-space photograph. Produce a high-resolution photographic restoration for a premium editorial website, horizontal 3:2. Preserve the exact arrangement and architecture of every visible white apartment/villa block, roof, pathway and tree; preserve the viewpoint. Restore compression and clarity without plastic CGI surfaces. Change the season gently to an Ankara early-autumn afternoon: restrained ochre on deciduous leaves, evergreen trees remain deep forest green, warm amber grazing sunlight, blue-grey quiet sky. Natural believable optics and soft contrast, brown/forest-green/ice-blue palette. No added buildings, amenities, people, monuments, text, logos, fantasy hills, artificial pools or luxury redesign. This is an edited photograph of a real place, never a newly invented real-estate render.",
+    "disclosure": "Autumn interpretation; season, lighting and clarity edited with AI. Architecture and existing amenities are constrained by the original photograph.",
+    "checked": "2026-10-03"
+  },
+  {
+    "name": "social",
+    "sourcePage": "https://www.angorakoop18.com/",
+    "sourceImage": "https://www.angorakoop18.com/userfiles/icerikler/0088f68f9e771f24b774dce80886fc25.jpg",
+    "sourceFile": "social-source.jpg",
+    "editedFile": "social-autumn.webp",
+    "tool": "Built-in image_gen.imagegen",
+    "prompt": "Edit target: official real photograph of Angora Evleri shared recreation space, blue/red court, hedges and clubhouse. Restore photographic clarity at high resolution, horizontal landscape composition. Preserve the exact court markings, blue and muted terracotta-red surfacing, fence, trees, hedges, clubhouse roofs and playground positions. Change only weather/season/lighting to a quiet early-autumn Ankara late afternoon, warm restrained amber sun, evergreen forest greens, small subtle golden deciduous accents, blue-grey sky. Editorial architectural photography, authentic materials, no CGI gloss. Do not replace or redesign the buildings/court, do not add people, luxury amenities, water or scenery. No writing or logo. The result must be an honest seasonal adaptation of this same existing place.",
+    "disclosure": "Autumn interpretation; season, lighting and clarity edited with AI. Architecture and existing amenities are constrained by the original photograph.",
+    "checked": "2026-10-03"
+  }
+]
