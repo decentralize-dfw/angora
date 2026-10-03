@@ -18,9 +18,10 @@
     window.AngoraScroll?.stop();window.AngoraScroll?.to(scene.element.getBoundingClientRect().top+scrollY,true);
     const next=scene.index+direction;
     if(next<0||next>scene.steps){
-      window.AngoraScroll?.start();
-      window.AngoraScroll?.to(scene.element.getBoundingClientRect().top+scrollY+(direction>0?scene.element.offsetHeight+2:-innerHeight*.75),true);
-      scene.gate.finish();return;
+      scene.element.dataset.departing='true';
+      const top=scene.element.getBoundingClientRect().top+scrollY+(direction>0?scene.element.offsetHeight+2:-innerHeight*.75);
+      Promise.resolve(scene.exit?.(direction)).then(()=>window.AngoraScroll?.travel?.(top,1.15)??window.AngoraScroll?.to(top,false))
+        .catch(error=>console.error('Scene handoff',error)).finally(()=>{scene.element.dataset.departing='false';scene.gate.finish();window.AngoraScroll?.start();});return;
     }
     scene.element.dataset.transitioning='true';
     Promise.resolve(scene.transition(scene.index,next)).then(()=>{scene.index=next;scene.element.dataset.step=next;})
@@ -31,8 +32,8 @@
   window.addEventListener('touchstart',e=>{touchY=e.touches[0]?.clientY||0;},{passive:true});
   window.addEventListener('touchmove',e=>{if(!active(Math.sign(touchY-e.touches[0].clientY)))return;e.preventDefault();},{passive:false});
   window.addEventListener('touchend',e=>{const delta=touchY-(e.changedTouches[0]?.clientY||touchY);if(Math.abs(delta)>35)move(e,Math.sign(delta));},{passive:false});
-  window.AngoraSteps={GestureGate,register(element,steps,transition){
-    const scene={element,steps,transition,index:0,gate:new GestureGate()};element.dataset.step=0;scenes.push(scene);
+  window.AngoraSteps={GestureGate,register(element,steps,transition,exit){
+    const scene={element,steps,transition,exit,index:0,gate:new GestureGate()};element.dataset.step=0;scenes.push(scene);
     scene.go=async index=>{if(scene.gate.busy)return;scene.gate.busy=true;window.AngoraScroll?.stop();const next=Math.max(0,Math.min(steps,index));try{await transition(scene.index,next);scene.index=next;element.dataset.step=next;}finally{scene.gate.finish();window.AngoraScroll?.start();}};
     return scene;
   }};

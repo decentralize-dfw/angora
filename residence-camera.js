@@ -17,23 +17,34 @@
     const scene=window.AngoraSteps.register($('.cinematic-story'),3,async(from,to)=>{
       if(from===to)return;
       const forward=to>from,index=forward?to-1:from-1,film=(forward?films:backwards)[index],clip=manifest.clips[index];
-      opening.pause();opening.style.opacity='0';
       gsap.to('.hero-title,.hero-sides,.hero-bottom',{autoAlpha:0,duration:.22});
       gsap.to('.cinema-caption',{autoAlpha:0,y:12,duration:.18});gsap.to('.cinema-track',{autoAlpha:1,duration:.2});
       $('.hero').dataset.cameraHold='false';$('.hero').dataset.filmChapter=index;
-      gsap.fromTo(media,{left:'4%',right:'4%',top:'5%',bottom:'5%'},{left:'0%',right:'0%',top:'0%',bottom:'0%',duration:1.2,ease:'power2.inOut'});
+      gsap.to(media,{scale:1,duration:.45,ease:'power2.inOut'});
       await window.AngoraVideo.play(film,films.concat(backwards),1.65,reduced,progress=>{
         $$('[data-film-chapter]').forEach((b,i)=>{b.setAttribute('aria-current',String(i===index));b.querySelector('i').style.transform=`scaleX(${i<index?1:i===index?progress:0})`;});
-      });
+      },()=>{opening.pause();opening.style.opacity='0';});
       const destination=Math.max(0,to-1);$('#cinema-title').textContent=manifest.clips[destination].title;$('#cinema-count').textContent=`0${destination+1} / 03`;$('#cinema-caption').textContent=descriptions[destination];
       $('.hero').dataset.cameraHold='true';$('.hero').dataset.filmProgress=String(to/3);
       gsap.to('.cinema-caption',{autoAlpha:1,y:0,duration:.38,ease:'power2.out'});
       $('#cinema-status').textContent=to===3?'Scroll to discover the residence':'Scroll once for the next scene';
+    },async direction=>{
+      if(direction<0||reduced)return;
+      await new Promise(resolve=>gsap.timeline({onComplete:resolve})
+        .to('.cinema-caption,.cinema-track,.cinema-status',{autoAlpha:0,y:-18,duration:.28},0)
+        .to('.hero',{backgroundColor:'#efede6',duration:.65},0)
+        .to(media,{scale:.88,duration:.65,ease:'power3.inOut'},0));
     });
     $$('[data-film-chapter]').forEach(button=>button.addEventListener('click',()=>scene.go(Number(button.dataset.filmChapter)+1)));
     $('#cinema-status').textContent='Scroll once to begin';
   }).catch(error=>{console.error(error);$('.cinema-veil').hidden=true;});
   if(!motion||reduced)return;
+  // Restore the framed hold when the visitor comes back from the next page.
+  ScrollTrigger.create({trigger:'#home',start:'top top',end:'bottom top',onEnterBack:()=>{
+    gsap.to(media,{scale:1,duration:.6,ease:'power2.inOut'});
+    gsap.to('.hero',{backgroundColor:'#223e35',duration:.6});
+    if($('.hero').dataset.cameraHold==='true')gsap.to('.cinema-caption,.cinema-track,.cinema-status',{autoAlpha:1,y:0,duration:.4});
+  }});
   // Word windows belong to editorial statements, rather than every interface label.
   $$('.residence .display,.editorial h3,.life-lede h3').forEach(heading=>{
     const walker=document.createTreeWalker(heading,NodeFilter.SHOW_TEXT),nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
