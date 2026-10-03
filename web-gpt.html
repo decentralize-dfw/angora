@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f3f0e7">
   <title>Angora 21 — A private world, within the city</title>
-  <meta name="description" content="A detached residence in Angora Evleri, Ankara. Discover its 900 m² garden, private pool, five bedrooms and four levels through real photography and a cinematic architectural film.">
+  <meta name="description" content="A detached residence in Angora Evleri, Ankara. Discover its private garden, pool and four levels through a continuous camera journey, original photography and interactive floor plans.">
   <meta property="og:title" content="Angora 21 — A private world, within the city">
   <meta property="og:image" content="./assets/residence/photo-27.jpg">
   <link rel="icon" href="./favicon.svg">
@@ -13,12 +13,15 @@
   <link rel="stylesheet" href="./residence.css">
   <link rel="stylesheet" href="./residence-autumn.css">
   <link rel="stylesheet" href="./residence-palette.css">
+  <link rel="stylesheet" href="./residence-cinema.css">
   <script src="./assets/residence/atlas-data.js" defer></script>
   <script src="./assets/vendor/gsap.min.js" defer></script>
   <script src="./assets/vendor/ScrollTrigger.min.js" defer></script>
   <script src="./assets/vendor/lenis.min.js" defer></script>
   <script src="./residence.js" defer></script>
   <script src="./residence-atlas.js" defer></script>
+  <script src="./residence-film-runtime.js" defer></script>
+  <script src="./residence-cinema.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#residence">Skip to content</a>
@@ -30,14 +33,17 @@
   <aside class="scroll-index" aria-hidden="true"><span id="scroll-number">00</span><i><b></b></i><span class="index-word">Scroll to discover ↓</span></aside>
   <div class="menu" id="menu" hidden><nav aria-label="Menu"><a href="#residence"><small>01</small>The residence</a><a href="#garden"><small>02</small>Garden & pool</a><a href="#spaces"><small>03</small>Inside the home</a><a href="#floors"><small>04</small>Four chapters</a><a href="#location"><small>05</small>The neighbourhood</a><a href="#contact"><small>06</small>Your next chapter</a><a href="#atlas"><small>07</small>Plans & photographs</a><a href="#life"><small>08</small>Life in Angora</a><a href="#gallery"><small>09</small>All 55 photographs</a></nav><p>Angora Evleri · Mutlukent · Ankara</p></div>
   <main>
-    <section class="hero-story" id="home" aria-label="Angora 21 introduction">
+    <section class="hero-story cinematic-story" id="home" aria-label="Angora 21 introduction">
       <div class="hero scene">
-        <div class="hero-photo"><img src="./assets/residence/photo-27.jpg" alt="The real Angora villa and private swimming pool beneath a blue Ankara sky" fetchpriority="high" width="1600" height="1200"></div><div class="hero-shade"></div>
+        <div class="hero-photo cinema-media"><video class="cinema-opening" src="./assets/residence/films/opening/source.mp4" poster="./assets/residence/films/opening/poster.webp" autoplay muted playsinline preload="auto" aria-label="The supplied film of Angora moving from daylight into evening"></video><img class="cinema-poster" src="./assets/residence/films/approach/poster.webp" alt="The villa and its private pool, from the supplied camera film" fetchpriority="high" width="1280" height="720"><canvas id="cinema-canvas" aria-label="Three consecutive camera films controlled by scrolling" role="img"></canvas><div class="hero-shade"></div></div>
         <div class="hero-title"><p class="eyebrow">A private residence · Angora Evleri, Ankara</p><h1><span>ANGORA</span><span>TWENTY ONE</span></h1><p class="script">A place of your own.</p></div>
         <div class="hero-sides"><span>Within the city.</span><span>A world apart.</span></div>
         <div class="hero-bottom"><span>Hatırlı Sokak · Mutlukent</span><a href="#residence">Discover the residence ↓</a><button data-tour="building">Explore in 3D ↗</button></div>
-        <div class="hero-arrival"><span class="eyebrow">Your own garden. Your own pool.</span><p>Life, at your<br><em>own pace.</em></p></div>
-        <div class="hero-curtain"><span class="eyebrow">A home with room for every part of life</span><h2>A private<br><em>world.</em></h2></div>
+        <div class="cinema-caption"><span class="eyebrow" id="cinema-count">01 / 03</span><h2 id="cinema-title">A quieter arrival.</h2><p id="cinema-caption">The garden-facing elevation</p></div>
+        <nav class="cinema-track" aria-label="Camera film chapters"><button data-film-chapter="0" aria-current="true"><span>01</span><b>Arrival</b><i></i></button><button data-film-chapter="1" aria-current="false"><span>02</span><b>Perspective</b><i></i></button><button data-film-chapter="2" aria-current="false"><span>03</span><b>Garden</b><i></i></button></nav>
+        <div class="cinema-destination"><span class="eyebrow">Your own garden. Your own pool.</span><h2>A private<br><em>world.</em></h2><p>Four levels of living.<br>A garden of your own.<br>A quieter rhythm, within the city.</p><a href="#residence" class="text-link">Step inside ↗</a></div>
+        <div class="cinema-veil" aria-hidden="true"><span>ANGORA TWENTY ONE</span></div>
+        <span class="cinema-status" id="cinema-status" role="status"></span>
       </div>
     </section>
 
@@ -86,7 +92,7 @@
     <section class="chapters" id="floors">
       <div class="chapter-scene scene"><div class="chapter-top"><span class="eyebrow">04 / A home in four chapters</span><span class="eyebrow">Scroll through the levels</span></div>
         <div class="chapter-layout"><div class="chapter-narrative"><h2>One home.<br><em>Four chapters.</em></h2><div class="chapter-tabs" role="tablist" aria-label="Villa levels"><button id="chapter-tab-0" role="tab" aria-controls="chapter-panel" aria-selected="true" data-chapter="0"><span>−01</span>Garden level</button><button id="chapter-tab-1" role="tab" aria-controls="chapter-panel" aria-selected="false" data-chapter="1"><span>00</span>Entrance level</button><button id="chapter-tab-2" role="tab" aria-controls="chapter-panel" aria-selected="false" data-chapter="2"><span>01</span>First floor</button><button id="chapter-tab-3" role="tab" aria-controls="chapter-panel" aria-selected="false" data-chapter="3"><span>02</span>Attic level</button></div><div class="chapter-copy" id="chapter-panel" role="tabpanel" aria-labelledby="chapter-tab-0"><span class="eyebrow" id="chapter-kicker">−01 / The garden floor</span><h3 id="chapter-title">Open the day outside.</h3><p id="chapter-copy">A living room of approximately 54 m², a separate kitchen and direct access to the garden and pool. An annexe with its own entrance adds space for guests, work or a separate daily routine.</p><ul id="chapter-features"><li>Living room & kitchen</li><li>Garden & pool access</li><li>Guest WC & separate annexe</li></ul><button id="chapter-tour" class="text-link" data-tour="f0">Walk through this level ↗</button><button id="chapter-plan" class="text-link chapter-plan-link" data-atlas-link="0">Plan & photographs ↗</button></div></div>
-        <div class="chapter-model"><div class="chapter-loading"><span class="loading-orbit"></span><p>Opening the home,<br>one level at a time.</p><button id="chapter-retry" hidden>Try loading again ↗</button></div><img class="chapter-poster" src="./assets/residence/chapters/poster.webp" alt="" aria-hidden="true" loading="lazy"><canvas id="chapter-canvas" role="img" aria-label="Architectural render film, scroll to move through the villa's four levels"></canvas><div class="chapter-model-caption"><span id="chapter-model-level">Garden level</span><span>Scroll to unfold the home</span></div><div class="chapter-progress"><i></i></div><figure class="chapter-photo"><button id="chapter-photo-button" data-photo="03" data-caption="Garden-level living room" aria-label="Enlarge this level's photograph"><img id="chapter-photo" src="./assets/residence/photo-03.jpg" loading="lazy" alt="Garden-level living room"><span>Inside this level ↗</span></button></figure></div></div>
+        <div class="chapter-model chapter-photography"><div class="chapter-image-stack"><img class="chapter-image" data-floor-image="0" src="./assets/residence/photo-03.jpg" alt="Garden-level living room" loading="lazy"><img class="chapter-image" data-floor-image="1" src="./assets/residence/photo-04.jpg" alt="Entrance-level living and dining room" loading="lazy"><img class="chapter-image" data-floor-image="2" src="./assets/residence/photo-19.jpg" alt="First-floor principal bedroom" loading="lazy"><img class="chapter-image" data-floor-image="3" src="./assets/residence/photo-09.jpg" alt="Attic-level sitting room" loading="lazy"></div><div class="chapter-model-caption"><span id="chapter-model-level">Garden level</span><span>Original photography · The existing home</span></div><button id="chapter-photo-button" class="chapter-photo-open" data-photo="03" data-caption="Garden-level living room">View this room ↗</button><div class="chapter-plan-card"><span class="eyebrow">Where you are</span><svg id="chapter-plan-preview" viewBox="-8 -11 18 20" aria-label="Floor plan with the photographed room highlighted"></svg><p id="chapter-plan-room">Living room · 54.26 m²</p><button class="text-link" data-atlas-link="0" id="chapter-map-link">All camera points ↗</button></div><div class="chapter-progress"><i></i></div></div></div>
       </div>
     </section>
 

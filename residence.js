@@ -17,6 +17,7 @@
     if (lenis) lenis.scrollTo(target, {duration:1.35, ...options});
     else window.scrollTo({top:typeof target === 'number' ? target : target.getBoundingClientRect().top + scrollY + (options.offset || 0), behavior:reduced ? 'instant' : 'smooth'});
   }
+  window.addEventListener('angora:scroll', event => scrollTo(event.detail.top));
   const menu = $('#menu'), menuToggle = $('.menu-toggle');
   let returnFocus = null;
   function closeMenu() {
@@ -55,7 +56,7 @@
     const darkLife=life && center>=life.offsetTop && center<life.offsetTop+life.offsetHeight;
     // The circular wipe at the end of the opening has a cream background.
     const hero = $('.hero-story');
-    const heroCream = scrollY > (hero.offsetHeight - innerHeight) * .86 && scrollY < hero.offsetHeight;
+    const heroCream = scrollY > (hero.offsetHeight - innerHeight) * .9 && scrollY < hero.offsetHeight;
     const useDark = (dark || darkLife) && !heroCream && menu.hidden;
     $('.header').classList.toggle('on-dark', useDark);
     $('.scroll-index').classList.toggle('on-dark', useDark);
@@ -98,88 +99,7 @@
     {view:'f2', level:'First floor', kicker:'01 / The bedroom floor', title:'A place for privacy.', copy:'The principal suite has its own dressing room and en-suite bathroom. Two more bedrooms, a family bathroom and a sitting area bring the private rooms together on one level.', features:['Principal suite & dressing room','Two further bedrooms & family bathroom','Sitting area, balcony & lift access'], photo:'19', caption:'First-floor principal bedroom'},
     {view:'f3', level:'Attic level', kicker:'02 / The attic floor', title:'Room for another rhythm.', copy:'Under the pitched roof, a sitting room, two bedrooms, a kitchenette and a bathroom create an additional living arrangement. A place for guests, grown children or a quieter working day, reached by the staircase.', features:['Sitting room & two bedrooms','Kitchenette & bathroom','Stair access; lift stops below'], photo:'09', caption:'Attic-level sitting room'},
   ];
-  let chapterIndex = 0, chapterStarted = false, filmReady = false;
-  const canvas = $('#chapter-canvas'), filmContext = canvas.getContext('2d', {alpha:true});
-  let filmCount = 96, filmProgress = 0, filmPosition = 0, filmTarget = 0, filmActive = 0;
-  const filmCache = new Map(), filmPending = new Set();
-  let filmQueue = [], filmLoads = 0, filmFailures = 0;
-  function drawFilm(index) {
-    const bitmap = filmCache.get(index);
-    if (!bitmap) return;
-    filmActive = index;
-    const scale = Math.min(canvas.width / bitmap.width, canvas.height / bitmap.height);
-    const width = bitmap.width * scale, height = bitmap.height * scale;
-    const next = index === filmTarget ? filmCache.get(index+1) : null;
-    const blend = next ? filmPosition-filmTarget : 0;
-    filmContext.clearRect(0,0,canvas.width,canvas.height);
-    filmContext.globalAlpha=1-blend;
-    filmContext.drawImage(bitmap,(canvas.width-width)/2,(canvas.height-height)/2,width,height);
-    if (next && blend>0) {
-      // Weighted additive compositing blends premultiplied alpha correctly,
-      // keeping the transparent studio film opaque where both frames overlap.
-      filmContext.globalCompositeOperation='lighter'; filmContext.globalAlpha=blend;
-      filmContext.drawImage(next,(canvas.width-width)/2,(canvas.height-height)/2,width,height);
-    }
-    filmContext.globalAlpha=1; filmContext.globalCompositeOperation='source-over';
-    canvas.dataset.frame = (index+blend).toFixed(2);
-    $('.chapter-model').classList.add('loaded'); $('.chapter-model').classList.remove('film-error');
-  }
-  function resizeFilm() {
-    const box = canvas.getBoundingClientRect(), ratio = Math.min(2, devicePixelRatio || 1);
-    canvas.width = Math.max(1,Math.round(box.width * ratio));
-    canvas.height = Math.max(1,Math.round(box.height * ratio)); drawFilm(filmActive);
-  }
-  new ResizeObserver(resizeFilm).observe(canvas);
-  function trimFilmCache() {
-    if (filmCache.size <= 18) return;
-    const old = [...filmCache.keys()].sort((a,b) => Math.abs(b-filmTarget)-Math.abs(a-filmTarget));
-    while (filmCache.size > 18) {
-      const index = old.shift();
-      if (index === filmActive || index === filmTarget) continue;
-      filmCache.get(index)?.close?.(); filmCache.delete(index);
-    }
-  }
-  async function loadFilmFrame(index) {
-    const url = `./assets/residence/chapters/frame-${String(index).padStart(4,'0')}.webp`;
-    let response = await fetch(url, {cache:'force-cache'});
-    // A failed preview request can itself be cached. Retry failures against
-    // the server rather than reusing an old 404 after a film is published.
-    if (!response.ok) response = await fetch(url, {cache:'reload'});
-    if (!response.ok) throw new Error('Frame unavailable');
-    const blob = await response.blob();
-    if ('createImageBitmap' in window) {
-      const edge = Math.min(1440,Math.ceil(Math.max(canvas.width,canvas.height)) || 1440);
-      return createImageBitmap(blob,{resizeWidth:edge,resizeHeight:edge,resizeQuality:'high'});
-    }
-    return new Promise((resolve,reject) => {const img = new Image(), url = URL.createObjectURL(blob); img.onload=() => {URL.revokeObjectURL(url); resolve(img);}; img.onerror=() => {URL.revokeObjectURL(url); reject(new Error('Frame decode failed'));}; img.src=url;});
-  }
-  function pumpFilmQueue() {
-    while (filmLoads < 3 && filmQueue.length) {
-      const index = filmQueue.shift();
-      if (filmCache.has(index) || filmPending.has(index)) continue;
-      filmLoads++; filmPending.add(index);
-      loadFilmFrame(index).then(bitmap => {
-        filmCache.set(index,bitmap); filmFailures=0;
-        if (index === filmTarget || index === filmTarget+1) drawFilm(filmTarget);
-        else if (!$('.chapter-model').classList.contains('loaded')) drawFilm(index);
-        trimFilmCache();
-      }).catch(error => {console.warn(`Chapter frame ${index}: ${error.message}`); if (++filmFailures >= 3) {$('#chapter-retry').hidden=false; $('.chapter-model').classList.add('film-error'); $('.chapter-loading p').textContent='The architectural film could not load.';}})
-        .finally(() => {filmLoads--; filmPending.delete(index); pumpFilmQueue();});
-    }
-  }
-  function seekFilm(progress) {
-    filmProgress = Math.max(0,Math.min(1,progress));
-    filmPosition = filmProgress * (filmCount-1); filmTarget = Math.floor(filmPosition);
-    if (!chapterStarted || !filmReady) return;
-    if (filmCache.has(filmTarget)) drawFilm(filmTarget);
-    // Keep a small decode window rather than holding an entire high-resolution
-    // film in memory. New scroll destinations replace stale queued requests.
-    filmQueue = [filmTarget];
-    for (let distance=1; distance<=5; distance++) {
-      for (const index of [filmTarget+distance,filmTarget-distance]) if (index>=0 && index<filmCount) filmQueue.push(index);
-    }
-    pumpFilmQueue();
-  }
+  let chapterIndex = 0;
   function setChapter(index, force = false) {
     index = Math.max(0, Math.min(3, index));
     if (index === chapterIndex && !force) return;
@@ -190,36 +110,21 @@
     $('#chapter-tour').dataset.tour = chapter.view;
     if($('#chapter-plan'))$('#chapter-plan').dataset.atlasLink=index;
     $('#chapter-model-level').textContent = chapter.level;
-    canvas.setAttribute('aria-label', `Architectural render: ${chapter.level}`);
+
     $('#chapter-panel').setAttribute('aria-labelledby',`chapter-tab-${index}`);
     $$('[data-chapter]').forEach(button => {const selected = Number(button.dataset.chapter) === index; button.setAttribute('aria-selected',String(selected)); button.tabIndex = selected ? 0 : -1;});
-    $('#chapter-photo').src = `./assets/residence/photo-${chapter.photo}.jpg`; $('#chapter-photo').alt = chapter.caption;
+
     $('#chapter-photo-button').dataset.photo = chapter.photo; $('#chapter-photo-button').dataset.caption = chapter.caption;
     $('.chapter-progress i').style.width = `${(index + 1) * 25}%`;
-    if (!chapterTrigger) seekFilm((index+.3)/4);
+    $('#chapter-map-link').dataset.atlasLink=index;
+    $('.chapter-scene').dataset.floor=index;
+    window.dispatchEvent(new CustomEvent('angora:chapter',{detail:index}));
     if (hasMotion && !reduced) {
       gsap.fromTo('.chapter-copy', {y:12, opacity:.5}, {y:0, opacity:1, duration:.5, overwrite:true});
-      gsap.fromTo('.chapter-photo', {y:22, rotation:-3, opacity:.4}, {y:0, rotation:3, opacity:1, duration:.75, ease:'power2.out', overwrite:true});
+
     }
   }
-  async function startChapter() {
-    if (chapterStarted) return;
-    chapterStarted = true;
-    $('#chapter-retry').hidden = true;
-    try {
-      const response = await fetch('./assets/residence/chapters/manifest.json');
-      if (!response.ok) throw new Error('Film unavailable');
-      const manifest = await response.json(); filmCount=manifest.frames; filmReady=true;
-      seekFilm(filmProgress);
-    } catch {chapterStarted=false; filmReady=false; $('#chapter-retry').hidden=false; $('.chapter-loading p').textContent='The architectural film could not load.';}
-  }
-  $('#chapter-retry').addEventListener('click', () => {chapterStarted=false; filmFailures=0; startChapter();});
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(entries => {if (entries.some(entry => entry.isIntersecting)) {startChapter(); observer.disconnect();}}, {rootMargin:'900px'});
-    observer.observe($('#floors'));
-  } else startChapter();
   function goChapter(index) {
-    startChapter();
     if (chapterTrigger) scrollTo(chapterTrigger.start + (chapterTrigger.end - chapterTrigger.start) * ((index + .3) / 4));
     else {setChapter(index); scrollTo($('#floors'));}
   }
@@ -294,15 +199,6 @@
     mm.add({desktop:'(min-width:801px)', mobile:'(max-width:800px)'}, context => {
       const mobile = context.conditions.mobile;
       const scrub = (trigger, extra = {}) => ({trigger, start:'top top', end:'bottom bottom', scrub:.75, invalidateOnRefresh:true, ...extra});
-      const hero = gsap.timeline({scrollTrigger:scrub('.hero-story')});
-      hero.to('.hero-photo', {clipPath:mobile?'inset(9% 5% 12% 5%)':'inset(10% 8% 12% 8%)',duration:.3,ease:'power2.inOut'},.15)
-        .to('.hero-photo img',{scale:1.12,duration:1,ease:'none'},0)
-        .to('.hero-photo',{clipPath:'inset(0% 0% 0% 0%)',duration:.26,ease:'power2.inOut'},.53)
-        .to('.hero-title', {yPercent:-70, opacity:0, duration:.28, ease:'power1.in'}, .04)
-        .to('.hero-sides,.hero-bottom', {opacity:0, duration:.2}, .08)
-        .fromTo('.hero-arrival', {y:55, opacity:0}, {y:0, opacity:1, duration:.18}, .3)
-        .to('.hero-arrival', {y:-50, opacity:0, duration:.18}, .62)
-        .to('.hero-curtain', {clipPath:'circle(150% at 50% 110%)', duration:.28, ease:'power2.inOut'}, .72);
       gsap.timeline({scrollTrigger:scrub('.arrival-story')})
         .to('.arrival-frame',{clipPath:mobile?'inset(31% 7% 24% 7%)':'inset(15% 40% 16% 8%)',duration:.4,ease:'power2.inOut'},0)
         .fromTo('.arrival-frame img',{scale:1.08},{scale:1,duration:.6,ease:'none'},0)
@@ -315,25 +211,25 @@
         .fromTo('.fly-b', {xPercent:50, yPercent:65, rotation:12}, {xPercent:mobile ? -73 : -90, yPercent:-20, rotation:3, duration:.65, ease:'none'}, .04)
         .fromTo('.fly-c', {yPercent:90, rotation:-8}, {yPercent:-165, xPercent:25, rotation:-3, duration:.7, ease:'none'}, .1)
         .to('.flight-type', {yPercent:-12, duration:1, ease:'none'}, 0)
-        .to('.fly-a', {xPercent:mobile ? 99 : 125, yPercent:26, scale:mobile ? 2.2 : 2.4, rotation:0, duration:.35, ease:'power2.inOut'}, .65)
-        .to('.fly-b,.fly-c,.flight-caption', {opacity:0, duration:.2}, .77);
+        .to('.fly-a', {xPercent:mobile ? 40 : 50, yPercent:-110, rotation:0, duration:.35, ease:'power2.inOut'}, .65)
+        .to('.flying-photo,.flight-caption,.flight-type', {opacity:0, duration:.2}, .8);
       const garden = gsap.timeline({scrollTrigger:scrub('.garden-story', {onUpdate:self => setGarden(Math.min(2, Math.floor(self.progress * 3)))})});
       gardenTrigger = garden.scrollTrigger;
       garden.to('.garden-images',{clipPath:mobile?'inset(4% 5% 4% 5%)':'inset(6% 5% 6% 5%)',duration:.2,ease:'power2.inOut'},.02)
         .to('.garden-images',{clipPath:'inset(0% 0% 0% 0%)',duration:.15,ease:'power2.inOut'},.85);
       garden.fromTo('.garden-0', {scale:1.15, xPercent:1}, {scale:1, xPercent:0, duration:.42, ease:'none'}, 0)
-        .to('.garden-0', {opacity:0, duration:.07}, .31)
-        .to('.garden-1', {opacity:1, duration:.07}, .31)
+        .set('.garden-1', {opacity:1}, .30)
+        .fromTo('.garden-1', {clipPath:'polygon(100% 0%,100% 0%,125% 100%,100% 100%)'}, {clipPath:'polygon(0% 0%,100% 0%,100% 100%,0% 100%)',duration:.14,ease:'power2.inOut'}, .30)
         .fromTo('.garden-1', {scale:1.13, xPercent:-2}, {scale:1, xPercent:0, duration:.39, ease:'none'}, .32)
-        .to('.garden-1', {opacity:0, duration:.07}, .65)
-        .to('.garden-2', {opacity:1, duration:.07}, .65)
+        .set('.garden-2', {opacity:1}, .64)
+        .fromTo('.garden-2', {clipPath:'polygon(100% 0%,100% 0%,125% 100%,100% 100%)'}, {clipPath:'polygon(0% 0%,100% 0%,100% 100%,0% 100%)',duration:.14,ease:'power2.inOut'}, .64)
         .fromTo('.garden-2', {scale:1.15}, {scale:1, duration:.34, ease:'none'}, .66);
       gsap.timeline({scrollTrigger:scrub('.ritual-story')})
         .fromTo('.ritual-a', {yPercent:100, xPercent:-35, rotation:-12}, {yPercent:-50, xPercent:55, rotation:-3, duration:1, ease:'none'}, 0)
         .fromTo('.ritual-b', {yPercent:110, xPercent:30, rotation:14}, {yPercent:-90, xPercent:-50, rotation:4, duration:1, ease:'none'}, 0)
         .fromTo('.ritual-c', {yPercent:140, rotation:-10}, {yPercent:-115, rotation:0, duration:1, ease:'none'}, 0)
         .to('.ritual-scene h2', {yPercent:-12, duration:1, ease:'none'}, 0);
-      chapterTrigger = ScrollTrigger.create({...scrub('.chapters'), onUpdate:self => {setChapter(Math.min(3, Math.floor(self.progress * 4))); seekFilm(self.progress);}});
+      chapterTrigger = ScrollTrigger.create({...scrub('.chapters'), onUpdate:self => {setChapter(Math.min(3, Math.floor(self.progress * 4)));}});
       // Keep the neighbourhood legible until a complete scene handoff is chosen.
       // The motion study documents the coupled footer and architectural masks.
       gsap.timeline({scrollTrigger:scrub('.life-opening')})
