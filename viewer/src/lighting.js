@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {applyBoxProjection,setBoxProbe} from './box-probe.js';
 import {CompactOutput} from './compact-output.js';
 import {createFixtureVertices} from './fixture-vertices.js';
 import { Sky } from 'three/addons/objects/Sky.js';
@@ -201,8 +202,10 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
     for(const m of boundEnvMaterials)m.envMapIntensity=(m.userData.envBaseIntensity??1)*envDayScale;
     for(const m of emissiveLiftMaterials)m.emissiveIntensity=envDayScale;
   }
+  let reflectionBoxes=null;
   function updateReflections(){
     const map=roomReflections?.get(reflectionFloor)??null;
+    setBoxProbe(map&&reflectionBoxes?reflectionBoxes[reflectionFloor]:null);
     for(const material of reflectionMaterials){
       if(Boolean(material.envMap)!==Boolean(map))material.needsUpdate=true;
       material.envMap=map;
@@ -351,6 +354,8 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
   }
   return {
     setRoomReflections(value){roomReflections=value;updateReflections();},
+    // V-RAY B1: kat başına sonda kutusu (box-probe.js)
+    setReflectionBoxes(boxes){reflectionBoxes=boxes;updateReflections();},
     setLightmaps(value){lightmaps=value;lightmaps?.setSkyStrength(lightmapSkyStrength());setTime();},
     setElectricLight(value){electricLight=value;electricLight?.setEnabled(lightsEnabled);},
     setGroundLight(value){groundLight=value;groundLight?.setSun(direction,dynamicShadowActive());},
@@ -551,7 +556,7 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
           if(l>.12){material.metalness=.35;material.roughness=Math.max(material.roughness,.35);if(!material.map)material.color.lerp(new THREE.Color(.72,.73,.74),.5);}
         }
         if(['architecture','interior'].includes(name)&&(/-(metal|glass|wood)-/.test(material.name)||mirror)){
-          reflectionMaterials.add(material);material.envMap=roomReflections?.get(reflectionFloor)??null;
+          reflectionMaterials.add(material);material.envMap=roomReflections?.get(reflectionFloor)??null;if(FEATURES.boxProbes)applyBoxProjection(material);
         }
         // Pişmiş zemin gölgesi eski teslimatın ağaçlarını/arsasını taşıyor;
         // ürün sahibinin yeni zemininde (batch verisi yok) olmayan ağaçların

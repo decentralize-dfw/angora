@@ -425,9 +425,11 @@ function renderFrame(time) {
     // shadows and settled AO. Any new frame request cancels instantly.
     else scheduleIdleRefine();
 }
-let idleRefine=null,idleRefineTimer=null,idleRefining=false;
+let idleRefine=null,idleRefineTimer=null,idleRefining=false,cinemaBroken=false;
+// V-RAY C1: birikim kararırsa (öz-denetim) bu oturumda kapanır, normal kare geri gelir.
+const armRefine=refine=>{refine.onBroken??=info=>{console.warn('cinemaStill kendini kapattı',info);cinemaBroken=true;idleRefining=false;invalidate();};return refine;};
 function scheduleIdleRefine(){
-  if(!FEATURES.cinemaStill||!ready)return;
+  if(!FEATURES.cinemaStill||!ready||cinemaBroken)return;
   clearTimeout(idleRefineTimer);
   idleRefineTimer=setTimeout(async()=>{
     if(framePending||idleRefining||walk?.active||contextLost)return;
@@ -437,7 +439,7 @@ function scheduleIdleRefine(){
     // kapalıyken FAZ 6 davranışı - yalnız desktop-high.
     const cinemaTier=q?.tier==='desktop-high'||(FEATURES.cinemaDof&&q?.tier==='desktop-balanced');
     if(!cinemaTier||!q.postProcessing)return;
-    idleRefine??=(await import('./idle-refine.js')).createIdleRefine({renderer});
+    idleRefine??=armRefine((await import('./idle-refine.js')).createIdleRefine({renderer}));
     if(framePending||walk?.active)return;
     // FAZ 7 İŞ 7: odak = orbit hedefi (kadraj öznesi); apertür 0.12 m.
     idleRefine.setDof(FEATURES.cinemaDof&&controls?
@@ -460,7 +462,7 @@ function scheduleIdleRefine(){
 // the 400 ms idle timer on a software rasteriser.
 if(typeof window!=='undefined')window.__angoraCinemaRefine=async(samples=24)=>{
   if(!FEATURES.cinemaStill||!lighting||!camera)return 0;
-  idleRefine??=(await import('./idle-refine.js')).createIdleRefine({renderer});
+  idleRefine??=armRefine((await import('./idle-refine.js')).createIdleRefine({renderer}));
   idleRefine.setDof(FEATURES.cinemaDof&&controls?
     {focus:camera.position.distanceTo(controls.target),aperture:.12}:null);
   idleRefining=false;                       // park the idle loop
@@ -1924,6 +1926,17 @@ async function loadNativeModel(manifest){
   lighting.setShadowBounds(buildingBox,gardenBox);
   for(const model of groups.values())contextBox.union(new THREE.Box3().setFromObject(model));
   lighting.setShadowBounds(buildingBox,gardenBox,contextBox); // İŞ 1: mahalle gölgesi bu kutuyu sarar
+  // V-RAY B1: kat sondalarının kutuları - binanın XZ izi, katın döşemesinden bir kat yüksekliği;
+  // sonda noktası manifest'teki çekim noktası.
+  if(FEATURES.boxProbes&&manifest.room_probes?.length){
+    const BASE=[0,3.0996,6.3714,9.4705],boxes={};
+    for(const d of manifest.room_probes){
+      const base=BASE[d.floor]??0;
+      boxes[d.floor]={min:new THREE.Vector3(buildingBox.min.x-.1,base-.4,buildingBox.min.z-.1),
+        max:new THREE.Vector3(buildingBox.max.x+.1,base+3.05,buildingBox.max.z+.1),probe:new THREE.Vector3(...d.position)};
+    }
+    lighting.setReflectionBoxes(boxes);
+  }
   if(manifest.site_context){
     const data=await gzJson(manifest.site_context);siteContext=createSiteContext(data,host,()=>selectView('building'));
     $('#context-count').dataset.count=data.buildings.length;$('#context-count').textContent=`${data.buildings.length}${t('buildingsCount')}`;
