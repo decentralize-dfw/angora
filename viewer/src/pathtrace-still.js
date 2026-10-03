@@ -34,7 +34,7 @@ export function createPathTraceStill({renderer, getRoots, getLights, getSky}) {
   tracer.filterGlossyFactor = 0.5;        // parlak zeminde ateş böceği gürültüsünü bastırır
   tracer.tiles.set(2, 2);                 // tek karede tüm ekran değil: arayüz akıcı kalır
   tracer.renderDelay = 0;
-  tracer.minSamples = 6;
+  tracer.minSamples = 12;                // pozlama eşlemesi bu örnekte yapılır, görüntü ondan sonra belirir
   tracer.fadeDuration = 900;
   tracer.rasterizeScene = false;
   tracer.dynamicLowRes = false;
@@ -61,6 +61,30 @@ export function createPathTraceStill({renderer, getRoots, getLights, getSky}) {
   const quadScene = new THREE.Scene(); quadScene.add(quad);
   const quadCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
   let base = null, sceneKey = '', building = null, broken = false;
+  // Pozlama eşleme: izlenen kare fiziksel olarak doğru ama iç mekân pencereye göre ~3 durak karanlık
+  // (raster bunu elle x11 kazançla yapıyor). Fotoğrafçı gibi: izlenen karenin medyan parlaklığı normal
+  // karenin medyanına eşlenir. Medyan: parlak pencereler ortalamayı bozmasın.
+  let rasterMedian = 0, gain = 1, gainReady = false;
+  const median = values => { values.sort((a, b) => a - b); return values[Math.floor(values.length / 2)] ?? 0; };
+  function readRasterMedian() {
+    const gl = renderer.getContext(), w = gl.drawingBufferWidth, h = gl.drawingBufferHeight;
+    const px = new Uint8Array(w * h * 4); gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, px);
+    const lin = v => { v /= 255; return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+    const out = [];
+    for (let i = 0; i < px.length; i += 4 * 17) out.push(0.2126 * lin(px[i]) + 0.7152 * lin(px[i + 1]) + 0.0722 * lin(px[i + 2]));
+    return median(out);
+  }
+  function computeGain() {
+    const target = tracer.target, w = target.width, h = target.height;
+    const px = new Float32Array(w * h * 4); renderer.readRenderTargetPixels(target, 0, 0, w, h, px);
+    const out = [];
+    for (let i = 0; i < px.length; i += 4 * 17) out.push(0.2126 * px[i] + 0.7152 * px[i + 1] + 0.0722 * px[i + 2]);
+    // raster medyanı ton eğrisinden geçmiş; orta tonlarda eğri ~0,8 eğimli: aynı bölgeye eşlemek için
+    const traced = median(out) * renderer.toneMappingExposure * 0.8;
+    gain = traced > 1e-5 ? THREE.MathUtils.clamp(rasterMedian / traced, 1, 16) : 1;
+    gainReady = true;
+    console.info(`Işın izleme pozlaması x${gain.toFixed(2)}`);
+  }
 
   // görünür nesne kümesi: yalnız o değişince BVH yeniden kurulur
   function keyOf(roots) {
@@ -129,7 +153,9 @@ export function createPathTraceStill({renderer, getRoots, getLights, getSky}) {
       try {
         await prepare(camera);
         drawBase();
+        rasterMedian = readRasterMedian();
         captureBase();
+        gainReady = false; gain = 1;
         tracer.reset();
         return true;
       } catch (error) {
@@ -146,7 +172,10 @@ export function createPathTraceStill({renderer, getRoots, getLights, getSky}) {
         renderer.setRenderTarget(null);
         renderer.autoClear = false;
         renderer.render(quadScene, quadCamera);
-        tracer.renderSample();
+        if (!gainReady && tracer.samples >= tracer.minSamples - 1) computeGain();
+        const exposure = renderer.toneMappingExposure;
+        renderer.toneMappingExposure = exposure * gain;
+        try { tracer.renderSample(); } finally { renderer.toneMappingExposure = exposure; }
         renderer.autoClear = autoClear;
         return tracer.samples < MAX_SAMPLES;
       } catch (error) {
