@@ -2820,7 +2820,7 @@ if(qaQuery.get('debug')==='quality'){
 // 03.10: bestelenmiş piyano sesi (soundscape.js); ElevenLabs sürümü
 // soundscape-elevenlabs.js'te duruyor. On by default, starts on the first press,
 // one speaker switch beside the language pill silences all of it.
-interfaceSound=createSoundscape({buttons:[...document.querySelectorAll('[data-sound-toggle]'),$('#toggle-sound')].filter(Boolean)});
+interfaceSound=createSoundscape({buttons:[...document.querySelectorAll('[data-sound-toggle]'),$('#toggle-sound')].filter(Boolean),audioRoot:new URL('11lbs/',audioRoot)});
 interfaceSound.set({view:selected});
 {
   const presets=[...document.querySelectorAll('[data-sound-preset]')];
