@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import {WebGLPathTracer} from 'three-gpu-pathtracer';
+import {WebGLPathTracer, DenoiseMaterial} from 'three-gpu-pathtracer';
+import {FullScreenQuad} from 'three/addons/postprocessing/Pass.js';
 import {GenerateMeshBVHWorker} from 'three-mesh-bvh/src/workers/GenerateMeshBVHWorker.js';
 
 // V-RAY E (03.10): boşta ışın izleme. Kamera durunca içerideki kare gerçek
@@ -50,6 +51,21 @@ export function createPathTraceStill({renderer, getRoots, getLights, getSky}) {
 					gl_FragColor.a *= opacity;`);
   ptMaterial.needsUpdate = true;
 
+  // Gürültü giderme (smart denoise, kenar koruyan): az örnekte kumlanmayı alır, örnek arttıkça
+  // etkisi azalır. Eşik HDR değerinde: pozlama kazancıyla ölçeklenir, yoksa her şeyi bulandırırdı.
+  const denoise = new DenoiseMaterial({transparent: true});
+  const denoiseQuad = new FullScreenQuad(denoise);
+  tracer.renderToCanvasCallback = (target, r, q) => {
+    const strength = Math.max(0.15, Math.min(1, 48 / Math.max(1, tracer.samples)));
+    denoise.map = target.texture;
+    denoise.opacity = q.material.opacity;
+    denoise.blending = q.material.blending;
+    denoise.uniforms.sigma.value = 2.5 + 2.5 * strength;
+    denoise.uniforms.threshold.value = 0.08 * strength / Math.max(1e-4, gain * r.toneMappingExposure);
+    const autoClear = r.autoClear; r.autoClear = false;
+    denoiseQuad.render(r);
+    r.autoClear = autoClear;
+  };
   const traceScene = new TraceScene();
   const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({
     uniforms: {map: {value: null}},
@@ -184,6 +200,6 @@ export function createPathTraceStill({renderer, getRoots, getLights, getSky}) {
         return false;
       }
     },
-    dispose() { tracer.dispose(); base?.dispose(); quad.geometry.dispose(); quad.material.dispose(); },
+    dispose() { denoiseQuad.dispose(); denoise.dispose(); tracer.dispose(); base?.dispose(); quad.geometry.dispose(); quad.material.dispose(); },
   };
 }
