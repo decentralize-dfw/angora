@@ -21,7 +21,10 @@ import draco3d from 'draco3dgltf';
 import * as THREE from 'three';
 import {MeshBVH} from 'three-mesh-bvh';
 
-const RAYS = 24, MAX_DIST = 3.0, FLOOR = .38;
+const RAYS = 24, MAX_DIST = 1.5, FLOOR = .55;
+// Kiremit çatı üst üste binen parçalardan oluşur: her köşe komşu kiremitlerce örtülür ve çatı
+// topluca kararır (ilk pişirmede ortalama 0,48). Çatı AO almaz ama engel olarak kalır (saçak gölgesi).
+const NO_RECEIVE = /roof|tiles/i;
 
 if (!isMainThread) {
   const {positions, index, origins, normals, start, end} = workerData;
@@ -50,7 +53,8 @@ if (!isMainThread) {
     for (const [x, y, z] of dirs) {
       d.set(0, 0, 0).addScaledVector(t, x).addScaledVector(b, y).addScaledVector(n, z).normalize();
       ray.direction.copy(d);
-      const hit = bvh.raycastFirst(ray, THREE.DoubleSide, 0, MAX_DIST);
+      // yalnız ön yüz: kalın duvarın/katının içine giren ışın arka yüze çarpar ve sayılmaz
+      const hit = bvh.raycastFirst(ray, THREE.FrontSide, 0, MAX_DIST);
       if (hit) occ += 1 - hit.distance / MAX_DIST * .6;   // yakın çarpma daha karanlık
     }
     out[i - start] = 1 - occ / RAYS;
@@ -70,7 +74,7 @@ if (!isMainThread) {
   for (const node of doc.getRoot().listNodes()) {
     const mesh = node.getMesh(); if (!mesh) continue;
     const m = new THREE.Matrix4().fromArray(node.getWorldMatrix());
-    for (const prim of mesh.listPrimitives()) prims.push({prim, m, glass: /glaz|glass|cam/i.test(prim.getMaterial()?.getName() ?? '')});
+    for (const prim of mesh.listPrimitives()) {const name = prim.getMaterial()?.getName() ?? ''; prims.push({prim, m, glass: /glaz|glass|cam/i.test(name), skip: NO_RECEIVE.test(name)});}
   }
   let aoPerPrim;
   if (fromAt >= 0) {
@@ -87,14 +91,15 @@ if (!isMainThread) {
     const occPos = [], occIdx = []; let base = 0;
     const origins = [], normals = [], ranges = [];
     const v = new THREE.Vector3(), nm = new THREE.Matrix3();
-    for (const {prim, m, glass} of prims) {
+    for (const {prim, m, glass, skip} of prims) {
       const pos = prim.getAttribute('POSITION'), nor = prim.getAttribute('NORMAL'), idx = prim.getIndices();
       nm.getNormalMatrix(m);
       const count = pos.getCount(), first = origins.length / 3;
       for (let i = 0; i < count; i++) {
         v.fromArray(pos.getElement(i, [])).applyMatrix4(m); origins.push(v.x, v.y, v.z);
         if (!glass) occPos.push(v.x, v.y, v.z);
-        v.fromArray(nor ? nor.getElement(i, []) : [0, 1, 0]).applyMatrix3(nm); normals.push(v.x, v.y, v.z);
+        if (skip || glass) v.set(0, 0, 0); else v.fromArray(nor ? nor.getElement(i, []) : [0, 1, 0]).applyMatrix3(nm);   // sıfır normal = hesaplanmaz, 1
+        normals.push(v.x, v.y, v.z);
       }
       ranges.push({first, count, glass});
       if (!glass) { const a = idx.getArray(); for (let i = 0; i < a.length; i++) occIdx.push(a[i] + base); base += count; }
