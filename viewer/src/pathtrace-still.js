@@ -58,6 +58,21 @@ export function createPathTraceStill({renderer, getRoots, getLights, getSky}) {
     return key;
   }
 
+  // Gündüz izlemesinde ışıyan malzemeler (avize ampulleri, parlaklık hilesi emissiveLift) kapanır: küçük
+  // ve çok parlak yüzeyler rastgele ışınlara isabet ettikçe tek pikselleri patlatıyor (ateş böceği) ve
+  // örnek sayısıyla yakınsamıyordu. Işığı güneş + gök verir; malzeme değerleri izleyiciye kopyalanınca geri alınır.
+  function updateMaterialsDaylight() {
+    const touched = [];
+    for (const r of traceScene.roots) r.traverseVisible(o => {
+      if (!o.isMesh) return;
+      for (const m of [].concat(o.material)) if (m?.emissiveIntensity > 0 && m.emissive && (m.emissive.r + m.emissive.g + m.emissive.b) > 0) {
+        touched.push([m, m.emissiveIntensity]); m.emissiveIntensity = 0;
+      }
+    });
+    try { tracer.updateMaterials(); } finally { for (const [m, v] of touched) m.emissiveIntensity = v; }
+    return touched.length;
+  }
+
   async function prepare(camera) {
     const roots = getRoots();
     const key = keyOf(roots);
@@ -71,7 +86,7 @@ export function createPathTraceStill({renderer, getRoots, getLights, getSky}) {
       const t0 = performance.now();
       building = tracer.setSceneAsync(traceScene, camera);
       await building; building = null;
-      console.info(`Işın izleme sahnesi ${((performance.now() - t0) / 1000).toFixed(1)} sn`);
+      console.info(`Işın izleme sahnesi ${((performance.now() - t0) / 1000).toFixed(1)} sn, ${updateMaterialsDaylight()} ışıyan malzeme kapalı`);
     } else {
       tracer.setCamera(camera);
       tracer.updateLights();
