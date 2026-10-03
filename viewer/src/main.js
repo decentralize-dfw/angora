@@ -463,7 +463,8 @@ if(typeof window!=='undefined')window.__angoraPathTrace=async(samples=64,fresh=t
   clearTimeout(traceTimer);tracing=false;
   const tracer=await ensurePathTrace();
   if(fresh&&!await tracer.start(traceCamera(),drawBaseFrame))return -1;
-  let count=0;while(count<samples&&tracer.step())count=tracer.samples;
+  // gl.finish: yazılım GPU'sunda komutlar birikip ekran görüntüsünü zaman aşımına düşürüyordu
+  const gl=renderer.getContext();let count=tracer.samples;while(count<samples&&tracer.step()){gl.finish();count=tracer.samples;}
   return tracer.samples;
 };
 let idleRefine=null,idleRefineTimer=null,idleRefining=false,cinemaBroken=false;
