@@ -1,0 +1,3566 @@
+{
+  "source": "https://likova.space/",
+  "audited": "2026-10-03",
+  "note": "Observed public DOM configuration. Includes non-motion plugin bindings for completeness; it is not the original application code.",
+  "sections": [
+    {
+      "class": "intro section ui-dark ui-background"
+    },
+    {
+      "class": "idea section section--top ui-dark "
+    },
+    {
+      "class": "information section ui-dark ui-background"
+    },
+    {
+      "class": "location section ui-dark ui-background"
+    },
+    {
+      "class": "accessibility section ui-light ui-background"
+    },
+    {
+      "class": "environment section ui-dark ui-background"
+    },
+    {
+      "class": "general-plan section ui-light ui-background-alternative"
+    },
+    {
+      "class": "architecture section ui-dark ui-background"
+    },
+    {
+      "class": "lobby section ui-dark ui-background"
+    },
+    {
+      "class": "offices section ui-dark ui-background"
+    },
+    {
+      "class": "section section--top-2 ui-light ui-background"
+    },
+    {
+      "class": "engineering section section--top ui-dark ui-background"
+    },
+    {
+      "class": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "class": "team section section--top ui-light ui-background"
+    }
+  ],
+  "bindings": [
+    {
+      "attrs": {
+        "data-nosnippet": "",
+        "data-plugin": "preloader"
+      },
+      "class": "\n        preloader\n        \n        js-preloader        is-hidden    ",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-nosnippet": "",
+        "data-plugin": "preloaderLanding"
+      },
+      "class": "preloader preloader--landing preloader--state-4 is-hidden",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-barba": "container",
+        "data-barba-namespace": "page",
+        "data-plugin": "\n                        utmSave\n\n                                "
+      },
+      "class": "page-content-wrapper ui-light-background",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-plugin": "themed stickyHeader ",
+        "data-sticky-header-scroll-offset": "screen"
+      },
+      "class": "header is-hidden--print header--sticky header--landing ui-dark",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "logo",
+        "data-plugin": "parallax"
+      },
+      "class": "btn header__logo btn--link",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-favourite-manager-endpoint": "/api/favourites/properties.json",
+        "data-plugin": "favouriteCounter"
+      },
+      "class": "btn btn--link btn--text-small js-header-favourite",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-parallax-100-100": "{ \"transform\": \"translateY(-25svh)\" }",
+        "data-parallax-200-100": "{ \"transform\": \"translateY(0svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "intro__sticky sticky sticky--full-height sticky--under-next",
+      "section": "intro section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"transform\": \"translateY(-101%)\" }",
+        "data-parallax-0-0": "{ \"transform\": \"translateY(0%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "intro__head ui-light px-layout",
+      "section": "intro section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--50-0": "{ \"opacity\": 0, \"transform\": \"translateY(-5svh)\" }",
+        "data-parallax-0-0": "{ \"opacity\": 1, \"transform\": \"translateY(0svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax"
+      },
+      "class": "intro__text px-layout is-hidden--sm-down",
+      "section": "intro section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "introContent introContentMobile",
+        "data-plugin": "parallax"
+      },
+      "class": "intro__content px-layout",
+      "section": "intro section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"transform\": \"translateY(0svh)\", \"opacity\": 1 }",
+        "data-parallax--200-0": "{ \"transform\": \"translateY(-10svh)\", \"opacity\": 1 }",
+        "data-parallax--50-0": "{ \"transform\": \"translateY(5svh)\", \"opacity\": 0 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "intro__content-text leading-trim",
+      "section": "intro section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"transform\": \"translateY(0svh)\" }",
+        "data-parallax--200-0": "{ \"transform\": \"translateY(-10svh)\" }",
+        "data-parallax-0-0": "{ \"transform\": \"translateY(10svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "intro__class pt-1.5 pt-1:md",
+      "section": "intro section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "introBuilding introBuildingMobile",
+        "data-plugin": "parallax"
+      },
+      "class": "intro__building",
+      "section": "intro section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{\"opacity\":\"1\"}",
+        "data-parallax-0-0": "{\"opacity\":\"0\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": " parallax"
+      },
+      "class": " intro__building-picture background",
+      "section": "intro section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "reveal",
+        "data-reveal-enable-mq": "null",
+        "data-scroll-section": "",
+        "data-scroll-section-id": "section1"
+      },
+      "class": "idea section section--top ui-dark ",
+      "section": "idea section section--top ui-dark "
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "ideaCube ideaCubeMobile",
+        "data-plugin": "appear  parallax"
+      },
+      "class": "is-hidden--no-js img-full",
+      "section": "idea section section--top ui-dark "
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js img-full parallax-image-move",
+      "section": "idea section section--top ui-dark "
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "imageMove",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "idea section section--top ui-dark "
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js img-full parallax-image-move",
+      "section": "idea section section--top ui-dark "
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "imageMove",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "idea section section--top ui-dark "
+    },
+    {
+      "attrs": {
+        "data-plugin": "reveal",
+        "data-reveal-enable-mq": "null",
+        "data-scroll-section": "",
+        "data-scroll-section-id": "section2"
+      },
+      "class": "information section ui-dark ui-background",
+      "section": "information section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-count": "3",
+        "data-parallax-pattern": "information",
+        "data-plugin": "parallax"
+      },
+      "class": "information__sticky sticky sticky--full-height sticky--under-previous sticky--under-next",
+      "section": "information section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-0": "{\"--progress\": \"0\"}",
+        "data-parallax-100-100": "{\"--progress\": \"1\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".sticky",
+        "data-plugin": "parallax webglDark"
+      },
+      "class": "information__webgl background",
+      "section": "information section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-animations": "{\n\t\t\t\t\t\"changeShow\": {\"name\": \"text\", \"delay\": 0.25},\n\t\t\t\t\t\"changeHide\": {\"name\": \"fadeOut\", \"duration\": \"normal\"}\n\t\t\t\t}",
+        "data-content-animation-plugins": "controller events",
+        "data-plugin": "contentAnimation",
+        "data-reveal-group": ""
+      },
+      "class": "information__carousel js-information-content-animation-controller is-hidden--md-up",
+      "section": "information section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"transform\": \"scaleX(0)\" }",
+        "data-parallax--400-0": "{ \"transform\": \"scaleX(1)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "information__bar-progress",
+      "section": "information section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"transform\": \"scaleX(0)\" }",
+        "data-parallax--200-0": "{ \"transform\": \"scaleX(1)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "information__bar-progress",
+      "section": "information section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--200-0": "{ \"transform\": \"scaleX(0)\" }",
+        "data-parallax--300-0": "{ \"transform\": \"scaleX(1)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "information__bar-progress",
+      "section": "information section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--300-0": "{ \"transform\": \"scaleX(0)\" }",
+        "data-parallax--400-0": "{ \"transform\": \"scaleX(1)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "information__bar-progress",
+      "section": "information section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-animations": "{\n\t\t\t\t\t\t\t\t\"changeShow\": {\"name\": \"text\", \"delay\": 0.25},\n\t\t\t\t\t\t\t\t\"changeHide\": {\"name\": \"fadeOut\", \"duration\": \"normal\"}\n\t\t\t\t\t\t\t}",
+        "data-content-animation-plugins": "controller events",
+        "data-plugin": "contentAnimation"
+      },
+      "class": "js-information-content-animation-controller",
+      "section": "information section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-animations": "{\n\t\t\t\t\t\t\t\t\"changeShow\": {\"name\": \"text\", \"delay\": 0.25},\n\t\t\t\t\t\t\t\t\"changeHide\": {\"name\": \"fadeOut\", \"duration\": \"normal\"}\n\t\t\t\t\t\t\t}",
+        "data-content-animation-plugins": "controller events",
+        "data-plugin": "contentAnimation"
+      },
+      "class": "js-information-content-animation-controller",
+      "section": "information section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"clip-path\": \"polygon(0 100svh, 50% 100svh, 50% 100svh, 100% 100svh, 100% 100%, 0% 100%)\" }",
+        "data-parallax-0-0": "{ \"clip-path\": \"polygon(0 133svh, 50% 133svh, 50% 100svh, 100% 100svh, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax reveal",
+        "data-scroll-section": "",
+        "data-scroll-section-id": "section3",
+        "data-scroll-snap-point": "[\n        { \"viewport\": 100, \"element\": 0 },\n        { \"viewport\": 200, \"element\": 0 },\n        { \"viewport\": 350, \"element\": 0 }\n                ,{ \"viewport\": 450, \"element\": 0 }\n                ,{ \"viewport\": 550, \"element\": 0 }\n                ,{ \"viewport\": 650, \"element\": 0 }\n            ]"
+      },
+      "class": "location section ui-dark ui-background",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-count": "3",
+        "data-parallax-pattern": "location",
+        "data-plugin": "parallax"
+      },
+      "class": "location__sticky sticky sticky--full-height sticky--under-previous sticky--under-next",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "carouselSync",
+        "data-scroll": "",
+        "data-scroll-sticky": ""
+      },
+      "class": "sticky__layer sticky__layer--sticky",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--250-0": "{\"transform\":\"translateY(-15svh)\"}",
+        "data-parallax--350-0": "{\"transform\":\"translateY(-25svh)\"}",
+        "data-parallax-0-0": "{\"transform\":\"translateY(10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "appear  parallax"
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--250-0": "{ \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--350-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "location__image  background background--cover is-hidden--sm-down",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--250-0": "{ \"transform\": \"translateY(10svh)\" }",
+        "data-parallax--450-0": "{ \"transform\": \"translateY(-10svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--350-0": "{ \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--450-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "location__image  background background--cover is-hidden--sm-down",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--350-0": "{ \"transform\": \"translateY(10svh)\" }",
+        "data-parallax--550-0": "{ \"transform\": \"translateY(-10svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--450-0": "{ \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--550-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "location__image location__image--intro background background--cover is-hidden--sm-down",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--450-0": "{ \"transform\": \"translateY(10svh)\" }",
+        "data-parallax--750-0": "{ \"transform\": \"translateY(-20svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-carousel-effects": "fade",
+        "data-carousel-enable-mq": "sm-down",
+        "data-carousel-slides-per-view": "1",
+        "data-parallax--300-0": "{ \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--350-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--500-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-enter": "true, this.$container.removeClass('is-decorative')",
+        "data-parallax-leave": "true, this.$container.addClass('is-decorative')",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax carousel"
+      },
+      "class": "location__carousel-images carousel carousel--fade carousel--not-ready ui-background is-decorative is-hidden--md-up js-carousel-sync",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full parallax-image-move",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--300-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--500-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/4.location/slider-1@xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full parallax-image-move",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--300-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--500-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/4.location/slider-2@xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full parallax-image-move",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--300-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--500-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/4.location/slider-3@xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--200-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "location__background",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "locationBackground locationBackgroundMobile",
+        "data-plugin": "parallax"
+      },
+      "class": "location__background-color ui-background",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"opacity\": 1, \"clip-path\": \"polygon(0 calc(100% - (var(--slider-height) - var(--intro-height)) * 0), 100% calc(100% - (var(--slider-height) - var(--intro-height)) * 0), 100% 100%, 0% 100%)\" }",
+        "data-parallax--200-0": "{ \"opacity\": 1, \"clip-path\": \"polygon(0 calc(0% - (var(--slider-height) - var(--intro-height)) * 1), 100% calc(0% - (var(--slider-height) - var(--intro-height)) * 1), 100% 100%, 0% 100%)\" }",
+        "data-parallax--250-0": "{ \"opacity\": 0, \"clip-path\": \"polygon(0 calc(0% - (var(--slider-height) - var(--intro-height)) * 1), 100% calc(0% - (var(--slider-height) - var(--intro-height)) * 1), 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax",
+        "data-reveal-group": ""
+      },
+      "class": "location__intro",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-carousel-effects": "fade",
+        "data-carousel-enable-mq": "sm-down",
+        "data-carousel-slides-per-view": "1",
+        "data-parallax--260-0": "{ \"opacity\": 0 }",
+        "data-parallax--310-0": "{ \"opacity\": 1 }",
+        "data-parallax--500-0": "{ \"opacity\": 1 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-enter": "true, this.$container.addClass('is-interactive')",
+        "data-parallax-leave": "true, this.$container.removeClass('is-interactive')",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax carousel"
+      },
+      "class": "location__carousel carousel carousel--fade carousel--not-ready is-hidden--md-up js-carousel-sync",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "locationCardMobile locationCardDesktop locationBackgroundMobile",
+        "data-plugin": "parallax"
+      },
+      "class": "card card--location-mobile ui-dark ui-background",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "locationCardMobile locationCardDesktop locationBackgroundMobile",
+        "data-plugin": "parallax"
+      },
+      "class": "card card--location-mobile ui-dark ui-background",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "locationCardMobile locationCardDesktop locationBackgroundMobile",
+        "data-plugin": "parallax"
+      },
+      "class": "card card--location-mobile ui-dark ui-background",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--300-0": "{ \"opacity\": 0 }",
+        "data-parallax--350-0": "{ \"opacity\": 1 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "location__slider px-layout pb-layout is-hidden--sm-down",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-animations": "{\n\t\t\t\"changeShow\": {\"name\": \"text\", \"delay\": 0.25},\n\t\t\t\"changeHide\": {\"name\": \"fadeOut\", \"duration\": \"normal\"}\n\t\t}",
+        "data-content-animation-counter-selector": ":root .js-location-content-animation-counter",
+        "data-content-animation-index": "0",
+        "data-content-animation-plugins": "controller events counter",
+        "data-plugin": "contentAnimation"
+      },
+      "class": "location__slider-head pt-layout pl-layout js-location-content-animation-controller",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-item": "0",
+        "data-content-animation-top": "true",
+        "data-content-animation-visible": "true",
+        "data-parallax--300-0": "{ \"progress\": 0 }",
+        "data-parallax--350-0": "{ \"progress\": 1 }",
+        "data-parallax--450-0": "{ \"progress\": 1 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-enter": "true, this.$container.transition('text')",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-animations": "{\n\t\t\t\"changeShow\": {\"name\": \"fadeIn\", \"delay\": 0.25},\n\t\t\t\"changeHide\": {\"name\": \"fadeOut\", \"duration\": \"normal\"}\n\t\t}",
+        "data-content-animation-plugins": "controller events",
+        "data-plugin": "contentAnimation"
+      },
+      "class": "location__slider-icon pt-layout js-location-content-animation-controller",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-animations": "{\n\t\t\t\"changeShow\": {\"name\": \"text\", \"delay\": 0.25},\n\t\t\t\"changeHide\": {\"name\": \"fadeOut\", \"duration\": \"normal\"}\n\t\t}",
+        "data-content-animation-fixed-height": "true",
+        "data-content-animation-plugins": "controller events height",
+        "data-plugin": "contentAnimation"
+      },
+      "class": "js-location-content-animation-controller",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-item": "0",
+        "data-content-animation-top": "true",
+        "data-content-animation-visible": "true",
+        "data-parallax--300-0": "{ \"progress\": 0 }",
+        "data-parallax--350-0": "{ \"progress\": 1 }",
+        "data-parallax--450-0": "{ \"progress\": 1 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-enter": "true, this.$container.transition('text')",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--345-0": "{ \"transform\": \"scaleX(0)\" }",
+        "data-parallax--445-0": "{ \"transform\": \"scaleX(1)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "location__bar-progress",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--445-0": "{ \"transform\": \"scaleX(0)\" }",
+        "data-parallax--545-0": "{ \"transform\": \"scaleX(1)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "location__bar-progress",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--545-0": "{ \"transform\": \"scaleX(0)\" }",
+        "data-parallax--645-0": "{ \"transform\": \"scaleX(1)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "location__bar-progress",
+      "section": "location section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"clip-path\": \"polygon(0 100svh, calc(var(--spacing-layout) + var(--grid-col-custom) * 6 + var(--grid-gutter) * 6) 100svh, calc(var(--spacing-layout) + var(--grid-col-custom) * 6 + var(--grid-gutter) * 6) 100svh, 100% 100svh, 100% 100%, 0% 100%)\" }",
+        "data-parallax-0-0": "{ \"clip-path\": \"polygon(0 133svh, calc(var(--spacing-layout) + var(--grid-col-custom) * 6 + var(--grid-gutter) * 6) 133svh, calc(var(--spacing-layout) + var(--grid-col-custom) * 6 + var(--grid-gutter) * 6) 100svh, 100% 100svh, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax reveal",
+        "data-scroll-section": "",
+        "data-scroll-section-id": "section4",
+        "data-scroll-snap-point": "[\n        { \"viewport\": 100, \"element\": 0 },\n        { \"viewport\": 200, \"element\": 0 },\n\t\t{ \"viewport\": 350, \"element\": 0 }\n\t\t\t\t,{ \"viewport\": 450, \"element\": 0 }\n\t\t\t\t,{ \"viewport\": 550, \"element\": 0 }\n\t\t\t\t,{ \"viewport\": 650, \"element\": 0 }\n\t\t    ]"
+      },
+      "class": "accessibility section ui-light ui-background",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-count": "3",
+        "data-parallax-pattern": "accessibilityMap",
+        "data-plugin": "parallax"
+      },
+      "class": "accessibility__sticky sticky sticky--full-height sticky--under-previous sticky--under-next",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "videoAutoPlay ",
+        "data-video-auto-play-inview": "true"
+      },
+      "class": "background background--cover is-hidden--sm-down is-invisible--no-js",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "videoAutoPlay ",
+        "data-video-auto-play-inview": "true"
+      },
+      "class": "background background--cover is-hidden--md-up is-invisible--no-js",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-animations": "{\n\t\t\t\t\t\"changeShow\": {\"name\": \"fadeIn\", \"delay\": 0.6}\n\t\t\t\t}",
+        "data-content-animation-plugins": "controller events",
+        "data-parallax--250-0": "{ \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--350-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax contentAnimation"
+      },
+      "class": "background background--cover ui-dark ui-background js-accessibility-content-animation-controller is-hidden--sm-down",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Izvarino park"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Fitness center"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Restaurant"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Vnukovo airport"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Borovskii park"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Healthcare center"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Horse-riding club"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Fitness center"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Hotel"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Izvarino park"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Fitness center"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Restaurant"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Vnukovo airport"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Borovskii park"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Healthcare center"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Horse-riding club"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Fitness center"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Hotel"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Fitness center"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Fitness center"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Fitness center"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-text": "Fitness center"
+      },
+      "class": "accessibility__pin btn-container",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "accessibilityBackground accessibilityBackgroundMobile",
+        "data-plugin": "parallax"
+      },
+      "class": "accessibility__background",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--250-0": "{ \"clip-path\": \"polygon(0% calc((var(--hero-height) - var(--map-content-height)) * 0), calc(var(--hero-head-width) * 1 + var(--map-content-head-width) * 0) calc((var(--hero-height) - var(--map-content-height)) * 0), calc(var(--hero-head-width) * 1 + var(--map-content-head-width) * 0) calc(var(--hero-head-height) * 1 + var(--map-content-head-height) * 0 + (var(--hero-height) - var(--map-content-height)) * 0), calc(var(--hero-width) * 1 + var(--map-content-width) * 0) calc(var(--hero-head-height) * 1 + var(--map-content-head-height) * 0 + (var(--hero-height) - var(--map-content-height)) * 0), calc(var(--hero-width) * 1 + var(--map-content-width) * 0) 100%, 0% 100%)\" }",
+        "data-parallax--300-0": "{ \"clip-path\": \"polygon(0% calc((var(--hero-height) - var(--map-content-height)) * 1), calc(var(--hero-head-width) * 0 + var(--map-content-head-width) * 1) calc((var(--hero-height) - var(--map-content-height)) * 1), calc(var(--hero-head-width) * 0 + var(--map-content-head-width) * 1) calc(var(--hero-head-height) * 0 + var(--map-content-head-height) * 1 + (var(--hero-height) - var(--map-content-height)) * 1), calc(var(--hero-width) * 0 + var(--map-content-width) * 1) calc(var(--hero-head-height) * 0 + var(--map-content-head-height) * 1 + (var(--hero-height) - var(--map-content-height)) * 1), calc(var(--hero-width) * 0 + var(--map-content-width) * 1) 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "accessibility__background-color ui-background",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\", \"opacity\": 1 }",
+        "data-parallax--200-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\", \"opacity\": 1 }",
+        "data-parallax--250-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\", \"opacity\": 0 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-enter": "true, this.$container.removeClass('is-decorative')",
+        "data-parallax-leave": "true, this.$container.addClass('is-decorative')",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax",
+        "data-reveal-group": ""
+      },
+      "class": "accessibility__hero-content is-decorative",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-carousel-effects": "fade",
+        "data-carousel-enable-mq": "sm-down",
+        "data-carousel-slides-per-view": "1",
+        "data-parallax--300-0": "{ \"opacity\": 0 }",
+        "data-parallax--350-0": "{ \"opacity\": 1 }",
+        "data-parallax--500-0": "{ \"opacity\": 1 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-enter": "true, this.$container.addClass('is-interactive')",
+        "data-parallax-leave": "true, this.$container.removeClass('is-interactive')",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax carousel"
+      },
+      "class": "accessibility__carousel carousel carousel--fade carousel--not-ready ui-dark ui-background is-hidden--md-up",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top-start",
+        "data-tooltip-text": "Izvarino park"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top-start",
+        "data-tooltip-text": "Fitness center"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top",
+        "data-tooltip-text": "Restaurant"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top",
+        "data-tooltip-text": "Vnukovo airport"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top",
+        "data-tooltip-text": "Healthcare center"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top-start",
+        "data-tooltip-text": "Horse-riding club"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top-start",
+        "data-tooltip-text": "Fitness center"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top",
+        "data-tooltip-text": "Hotel"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top-start",
+        "data-tooltip-text": "Izvarino park"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top-start",
+        "data-tooltip-text": "Fitness center"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top",
+        "data-tooltip-text": "Restaurant"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top",
+        "data-tooltip-text": "Vnukovo airport"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top",
+        "data-tooltip-text": "Healthcare center"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top-start",
+        "data-tooltip-text": "Horse-riding club"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top-start",
+        "data-tooltip-text": "Fitness center"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top",
+        "data-tooltip-text": "Hotel"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top",
+        "data-tooltip-text": "Fitness center"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top-start",
+        "data-tooltip-text": "Fitness center"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top-start",
+        "data-tooltip-text": "Fitness center"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "tooltip",
+        "data-tooltip-class-name": "tooltip--pin ui-light",
+        "data-tooltip-parent-selector": ".accessibility__carousel",
+        "data-tooltip-placement": "top",
+        "data-tooltip-text": "Fitness center"
+      },
+      "class": "accessibility__pin",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-animations": "{\n\t\t\"changeShow\": {\"name\": \"text\", \"delay\": 0.25},\n\t\t\"changeHide\": {\"name\": \"fadeOut\", \"duration\": \"normal\"}\n\t}",
+        "data-content-animation-index": "0",
+        "data-content-animation-plugins": "controller events counter",
+        "data-parallax--300-0": "{ \"opacity\": 0 }",
+        "data-parallax--350-0": "{ \"opacity\": 1 }",
+        "data-parallax-100-100": "{ \"opacity\": 0 }",
+        "data-parallax-200-100": "{ \"opacity\": 1 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax contentAnimation"
+      },
+      "class": "accessibility__map-content px-layout py-layout ui-light js-accessibility-content-animation-controller is-hidden--sm-down",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-item": "0",
+        "data-content-animation-top": "true",
+        "data-content-animation-visible": "true",
+        "data-parallax--300-0": "{ \"progress\": 0 }",
+        "data-parallax--350-0": "{ \"progress\": 1 }",
+        "data-parallax--450-0": "{ \"progress\": 1 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-enter": "true, this.$container.transition('text')",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "accessibility__map-item ",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--345-0": "{ \"transform\": \"scaleX(0)\" }",
+        "data-parallax--445-0": "{ \"transform\": \"scaleX(1)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "accessibility__bar-progress",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--445-0": "{ \"transform\": \"scaleX(0)\" }",
+        "data-parallax--545-0": "{ \"transform\": \"scaleX(1)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "accessibility__bar-progress",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--545-0": "{ \"transform\": \"scaleX(0)\" }",
+        "data-parallax--645-0": "{ \"transform\": \"scaleX(1)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "accessibility__bar-progress",
+      "section": "accessibility section ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"clip-path\": \"polygon(0 100svh, 50% 100svh, 50% 100svh, 100% 100svh, 100% 100%, 0% 100%)\" }",
+        "data-parallax-0-0": "{ \"clip-path\": \"polygon(0 133svh, 50% 133svh, 50% 100svh, 100% 100svh, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax",
+        "data-scroll-section": "",
+        "data-scroll-section-id": "section5",
+        "data-scroll-snap-point": "[\n        { \"viewport\": 100, \"element\": 0 },\n        { \"viewport\": 200, \"element\": 0 }\n                ,{ \"viewport\": 300, \"element\": 0 }\n                ,{ \"viewport\": 400, \"element\": 0 }\n                ,{ \"viewport\": 500, \"element\": 0 }\n            ]"
+      },
+      "class": "environment section ui-dark ui-background",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-count": "3",
+        "data-parallax-pattern": "environment",
+        "data-plugin": "parallax"
+      },
+      "class": "environment__sticky sticky sticky--full-height sticky--under-previous sticky--under-next",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"transform\": \"translateY(0svh)\" }",
+        "data-parallax--300-0": "{ \"transform\": \"translateY(-20svh)\" }",
+        "data-parallax-0-0": "{ \"transform\": \"translateY(10svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--200-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "environment__background  background background--cover is-hidden--sm-down",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"transform\": \"translateY(10svh)\" }",
+        "data-parallax--300-0": "{ \"transform\": \"translateY(-10svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--200-0": "{ \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--300-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "environment__background environment__background--intro background background--cover is-hidden--sm-down",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--200-0": "{ \"transform\": \"translateY(10svh)\" }",
+        "data-parallax--500-0": "{ \"transform\": \"translateY(-20svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-carousel-effects": "fade",
+        "data-carousel-enable-mq": "sm-down",
+        "data-carousel-slides-per-view": "1",
+        "data-plugin": "carousel"
+      },
+      "class": "environment__carousel carousel carousel--fade carousel--not-ready is-hidden--md-up",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full parallax-image-move",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--350-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-0-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/6.environment/background-1@xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-100-100": "{ \"transform\": \"translateY(-20svh)\" }",
+        "data-parallax-200-100": "{ \"transform\": \"translateY(0svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "environment__carousel-image",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full parallax-image-move",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--350-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-0-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/6.environment/background-2@xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-100-100": "{ \"transform\": \"translateY(-20svh)\" }",
+        "data-parallax-200-100": "{ \"transform\": \"translateY(0svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "environment__carousel-image",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full parallax-image-move",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--350-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-0-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/6.environment/background-3@xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-100-100": "{ \"transform\": \"translateY(-20svh)\" }",
+        "data-parallax-200-100": "{ \"transform\": \"translateY(0svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "environment__carousel-image",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"opacity\": 1, \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--400-0": "{ \"opacity\": 1, \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--450-0": "{ \"opacity\": 0, \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-0-0": "{ \"opacity\": 1, \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "col col--xs-12 col--md-6",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"clip-path\": \"polygon(0% 0%, 100% 0%, 100% calc(100% - var(--content-bottom-height)), 100% calc(100% - var(--content-bottom-height)), 100% 100%, 50% 100%, 50% calc(100% - var(--content-bottom-height)), 0% calc(100% - var(--content-bottom-height)))\" }",
+        "data-parallax--150-0": "{ \"clip-path\": \"polygon(0% 0%, 100% 0%, 100% calc(100% - var(--content-bottom-height)), 100% calc(100% - var(--content-bottom-height)), 100% 100%, 0% 100%, 0% calc(100% - var(--content-bottom-height)), 0% calc(100% - var(--content-bottom-height)))\" }",
+        "data-parallax--200-0": "{ \"clip-path\": \"polygon(0% 0%, 100% 0%, 100% calc(100% - var(--content-bottom-height)), 50% calc(100% - var(--content-bottom-height)), 50% 100%, 0% 100%, 0% calc(100% - var(--content-bottom-height)), 0% calc(100% - var(--content-bottom-height)))\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "environment__content ui-background",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--195-0": "{ \"transform\": \"scaleX(1)\" }",
+        "data-parallax--95-0": "{ \"transform\": \"scaleX(0)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "environment__bar-progress",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--195-0": "{ \"transform\": \"scaleX(0)\" }",
+        "data-parallax--295-0": "{ \"transform\": \"scaleX(1)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "environment__bar-progress",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--295-0": "{ \"transform\": \"scaleX(0)\" }",
+        "data-parallax--395-0": "{ \"transform\": \"scaleX(1)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "environment__bar-progress",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"opacity\": 1 }",
+        "data-parallax--400-0": "{ \"opacity\": 1 }",
+        "data-parallax--450-0": "{ \"opacity\": 0 }",
+        "data-parallax-0-0": "{ \"opacity\": 0 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "col col--xs-12 col--md-4 offset--md-2",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-animations": "{\n\t\t\t\t\"changeShow\": {\"name\": \"text\", \"delay\": 0.25},\n\t\t\t\t\"changeHide\": {\"name\": \"fadeOut\", \"duration\": \"normal\"}\n\t\t\t}",
+        "data-content-animation-counter-selector": ":root .js-environment-content-animation-counter",
+        "data-content-animation-index": "0",
+        "data-content-animation-plugins": "controller events counter",
+        "data-plugin": "contentAnimation"
+      },
+      "class": "js-environment-content-animation-controller",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--200-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 0%, 0% 0%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--200-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--300-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 0%, 0% 0%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--200-0": "{ \"transform\": \"translateY(0svh)\", \"opacity\": 1, \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--300-0": "{ \"transform\": \"translateY(0svh)\", \"opacity\": 1, \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--400-0": "{ \"transform\": \"translateY(0svh)\", \"opacity\": 1, \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--500-0": "{ \"transform\": \"translateY(-7svh)\", \"opacity\": 1, \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "environment section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "reveal",
+        "data-reveal-enable-mq": "null",
+        "data-scroll-section": "",
+        "data-scroll-section-id": "section6",
+        "data-scroll-snap-point": "[\n        { \"viewport\": -42.3, \"element\": 0 },\n        { \"viewport\": 1, \"element\": 0 }\n    ]"
+      },
+      "class": "general-plan section ui-light ui-background-alternative",
+      "section": "general-plan section ui-light ui-background-alternative"
+    },
+    {
+      "attrs": {
+        "data-parallax-100-100": "{ \"transform\": \"translateY(-33svh)\" }",
+        "data-parallax-233-100": "{ \"transform\": \"translateY(0svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "general-plan__sticky sticky sticky--full-height sticky--under-previous",
+      "section": "general-plan section ui-light ui-background-alternative"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "general-plan section ui-light ui-background-alternative"
+    },
+    {
+      "attrs": {
+        "data-plugin": "videoAutoPlay ",
+        "data-video-auto-play-inview": "true"
+      },
+      "class": "background background--cover is-hidden--sm-down is-invisible--no-js",
+      "section": "general-plan section ui-light ui-background-alternative"
+    },
+    {
+      "attrs": {
+        "data-plugin": "videoAutoPlay ",
+        "data-video-auto-play-inview": "true"
+      },
+      "class": "background background--cover is-hidden--md-up is-invisible--no-js",
+      "section": "general-plan section ui-light ui-background-alternative"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"clip-path\": \"polygon(0 100svh, 50% 100svh, 50% 100svh, 100% 100svh, 100% 100%, 0% 100%)\" }",
+        "data-parallax-0-0": "{ \"clip-path\": \"polygon(0 133svh, 50% 133svh, 50% 100svh, 100% 100svh, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-plugin": "parallax reveal",
+        "data-scroll-section": "",
+        "data-scroll-section-id": "section7",
+        "data-scroll-snap-point": "[\n        { \"viewport\": 100, \"element\": 0 },\n        { \"viewport\": 200, \"element\": 0 },\n        { \"viewport\": 300, \"element\": 0 },\n        { \"viewport\": 450, \"element\": 0 },\n        { \"viewport\": 550, \"element\": 0 },\n        { \"viewport\": 650, \"element\": 0 }\n    ]"
+      },
+      "class": "architecture section ui-dark ui-background",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js img-full",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "architectureIntroImage",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--350-0": "{ \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--450-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover is-hidden--sm-down",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-animations": "{\n\t\t\t\t\t\t\"changeShow\": {\"name\": \"imageClipIn\"}\n\t\t\t\t\t}",
+        "data-content-animation-controller-selector": ":root .js-architecture-content-animation-controller",
+        "data-content-animation-plugins": "controller events",
+        "data-parallax--350-0": "{ \"transform\": \"translateY(10svh)\" }",
+        "data-parallax--550-0": "{ \"transform\": \"translateY(-10svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax contentAnimation"
+      },
+      "class": "background background--cover content-animation--ready",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--450-0": "{ \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--550-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "architecture__architect-image",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--450-0": "{ \"transform\": \"translateY(10svh)\" }",
+        "data-parallax--550-0": "{ \"transform\": \"translateY(0svh)\" }",
+        "data-parallax--650-0": "{ \"transform\": \"translateY(-10svh)\" }",
+        "data-parallax--750-0": "{ \"transform\": \"translateY(-20svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "architectureBackground architectureBackgroundMobile",
+        "data-plugin": "parallax"
+      },
+      "class": "architecture__background",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--350-0": "{ \"clip-path\": \"polygon(0 calc((var(--intro-height) - var(--slider-height)) * 0), calc(var(--intro-head-width) * 1 + var(--slider-head-width) * 0) calc((var(--intro-height) - var(--slider-height)) * 0), calc(var(--intro-head-width) * 1 + var(--slider-head-width) * 0) calc((var(--intro-height) - var(--slider-height)) * 0 + var(--intro-head-height) * 1 + var(--slider-head-height) * 0), calc(var(--intro-width) * 1 + var(--slider-width) * 0) calc((var(--intro-height) - var(--slider-height)) * 0 + var(--intro-head-height) * 1 + var(--slider-head-height) * 0), calc(var(--intro-width) * 1 + var(--slider-width) * 0) 100%, 0 100%)\" }",
+        "data-parallax--400-0": "{ \"clip-path\": \"polygon(0 calc((var(--intro-height) - var(--slider-height)) * 1), calc(var(--intro-head-width) * 0 + var(--slider-head-width) * 1) calc((var(--intro-height) - var(--slider-height)) * 1), calc(var(--intro-head-width) * 0 + var(--slider-head-width) * 1) calc((var(--intro-height) - var(--slider-height)) * 1 + var(--intro-head-height) * 0 + var(--slider-head-height) * 1), calc(var(--intro-width) * 0 + var(--slider-width) * 1) calc((var(--intro-height) - var(--slider-height)) * 1 + var(--intro-head-height) * 0 + var(--slider-head-height) * 1), calc(var(--intro-width) * 0 + var(--slider-width) * 1) 100%, 0 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "architecture__background-color ui-background",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "architectureIntro architectureIntroMobile",
+        "data-plugin": "parallax",
+        "data-reveal-group": ""
+      },
+      "class": "architecture__intro-content",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-carousel-effects": "fade",
+        "data-carousel-enable-mq": "sm-down",
+        "data-carousel-slides-per-view": "1",
+        "data-parallax--400-0": "{ \"clip-path\": \"polygon(0 0, 100% 0, 100% 100%, 0 100%)\", \"opacity\": 0 }",
+        "data-parallax--450-0": "{ \"clip-path\": \"polygon(0 0, 100% 0, 100% 100%, 0 100%)\", \"opacity\": 1 }",
+        "data-parallax--483-0": "{ \"clip-path\": \"polygon(0 0, 100% 0, 100% 100%, 0 100%)\", \"opacity\": 1 }",
+        "data-parallax--583-0": "{ \"clip-path\": \"polygon(0 0, 100% 0, 100% 0%, 0 0%)\", \"opacity\": 1 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-enter": "true, this.$container.addClass('is-interactive')",
+        "data-parallax-leave": "true, this.$container.removeClass('is-interactive')",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax carousel"
+      },
+      "class": "architecture__carousel carousel carousel--fade carousel--not-ready ui-background is-hidden--md-up",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full parallax-image-move",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--400-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--583-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/8.architecture/slider-1-xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full parallax-image-move",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--400-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--583-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/8.architecture/slider-2-xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full parallax-image-move",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--400-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--583-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/8.architecture/slider-3-xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full parallax-image-move",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--400-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--583-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/8.architecture/slider-4-xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full parallax-image-move",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--400-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--583-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/8.architecture/slider-5-xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-animations": "{\n\t\t\"changeShow\": {\"name\": \"text\", \"delay\": 0.25},\n\t\t\"changeHide\": {\"name\": \"fadeOut\", \"duration\": \"normal\"}\n\t}",
+        "data-content-animation-fixed-height": "true",
+        "data-content-animation-plugins": "controller events counter height",
+        "data-parallax--350-0": "{ \"clip-path\": \"polygon(0% -30%, 120% -30%, 120% 100%, 0% 100%)\", \"opacity\": 0 }",
+        "data-parallax--400-0": "{ \"clip-path\": \"polygon(0% -30%, 120% -30%, 120% 100%, 0% 100%)\", \"opacity\": 1 }",
+        "data-parallax--450-0": "{ \"clip-path\": \"polygon(0% -30%, 120% -30%, 120% 100%, 0% 100%)\", \"opacity\": 1 }",
+        "data-parallax--550-0": "{ \"clip-path\": \"polygon(0% -30%, 120% -30%, 120% -30%, 0% -30%)\", \"opacity\": 1 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax contentAnimation"
+      },
+      "class": "architecture__slider ui-background js-architecture-content-animation-controller is-hidden--sm-down",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--400-0": "{ \"opacity\": 0 }",
+        "data-parallax--450-0": "{ \"opacity\": 1 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "architecture__slider-content px-layout py-layout",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--550-0": "{ \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--650-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "architecture__architect ui-light",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js img-full",
+      "section": "architecture section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"clip-path\": \"polygon(0 100svh, 50% 100svh, 50% 100svh, 100% 100svh, 100% 100%, 0% 100%)\" }",
+        "data-parallax-0-0": "{ \"clip-path\": \"polygon(0 133svh, 50% 133svh, 50% 100svh, 100% 100svh, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-plugin": "parallax reveal",
+        "data-scroll-section": "",
+        "data-scroll-section-id": "section8",
+        "data-scroll-snap-point": "[\n        { \"viewport\": 100, \"element\": 0 },\n        { \"viewport\": 200, \"element\": 0, \"scrollable\": true }\n    ]"
+      },
+      "class": "lobby section ui-dark ui-background",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--200-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax--300-0": "{\"transform\":\"translateY(-20svh)\"}",
+        "data-parallax-0-0": "{\"transform\":\"translateY(10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "appear  parallax"
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"clip-path\": \"polygon(0 calc(var(--head-height) * 1 + (var(--intro-height) - var(--head-height)) * 1 + var(--intro-height) * 0), calc(100% - var(--head-width)) calc(var(--head-height) * 1 + (var(--intro-height) - var(--head-height)) * 1 + var(--intro-height) * 0), calc(100% - var(--head-width)) calc(var(--intro-height) * 1 + var(--intro-height) * 0), 100% calc(var(--intro-height) * 1 + var(--intro-height) * 0), 100% 100%, 0% 100%)\", \"transform\": \"translateY(-100svh)\" }",
+        "data-parallax--200-0": "{ \"clip-path\": \"polygon(0 calc(var(--head-height) * 1 + (var(--intro-height) - var(--head-height)) * 0 + var(--intro-height) * 0), calc(100% - var(--head-width)) calc(var(--head-height) * 1 + (var(--intro-height) - var(--head-height)) * 0 + var(--intro-height) * 0), calc(100% - var(--head-width)) calc(var(--intro-height) * 0 + var(--intro-height) * 0), 100% calc(var(--intro-height) * 0 + var(--intro-height) * 0), 100% 100%, 0% 100%)\", \"transform\": \"translateY(0svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "lobby__content-inner ui-light ui-background",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{ \"transform\": \"translateY(-15svh)\" }",
+        "data-parallax-100-0": "{ \"transform\": \"translateY(15svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{\"transform\":\"translateY(-5svh)\"}",
+        "data-parallax-100-0": "{\"transform\":\"translateY(5svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "appear  parallax"
+      },
+      "class": "is-hidden--no-js img-full",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{ \"transform\": \"translateY(-50svh)\" }",
+        "data-parallax-100-0": "{ \"transform\": \"translateY(50svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{\"transform\":\"translateY(-12svh)\"}",
+        "data-parallax-100-0": "{\"transform\":\"translateY(12svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "appear  parallax"
+      },
+      "class": "is-hidden--no-js img-full",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{ \"transform\": \"translateY(-100svh)\" }",
+        "data-parallax-100-0": "{ \"transform\": \"translateY(100svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{\"transform\":\"translateY(-20svh)\"}",
+        "data-parallax-100-0": "{\"transform\":\"translateY(20svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "appear  parallax"
+      },
+      "class": "is-hidden--no-js img-full",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{ \"transform\": \"translateY(-40svh)\" }",
+        "data-parallax-100-0": "{ \"transform\": \"translateY(40svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-100-0": "{\"transform\":\"translateY(10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "appear  parallax"
+      },
+      "class": "is-hidden--no-js img-full",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{ \"transform\": \"translateY(-80svh)\" }",
+        "data-parallax-100-0": "{ \"transform\": \"translateY(80svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{\"transform\":\"translateY(-20svh)\"}",
+        "data-parallax-100-0": "{\"transform\":\"translateY(20svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "appear  parallax"
+      },
+      "class": "is-hidden--no-js img-full",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{ \"transform\": \"translateY(-100svh)\" }",
+        "data-parallax-100-0": "{ \"transform\": \"translateY(100svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{\"transform\":\"translateY(-25svh)\"}",
+        "data-parallax-100-0": "{\"transform\":\"translateY(25svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "appear  parallax"
+      },
+      "class": "is-hidden--no-js img-full",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{ \"transform\": \"translateY(-60svh)\" }",
+        "data-parallax-100-0": "{ \"transform\": \"translateY(60svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{\"transform\":\"translateY(-15svh)\"}",
+        "data-parallax-100-0": "{\"transform\":\"translateY(15svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "appear  parallax"
+      },
+      "class": "is-hidden--no-js img-full",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{ \"transform\": \"translateY(-125svh)\" }",
+        "data-parallax-100-0": "{ \"transform\": \"translateY(125svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{\"transform\":\"translateY(-25svh)\"}",
+        "data-parallax-100-0": "{\"transform\":\"translateY(25svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "appear  parallax"
+      },
+      "class": "is-hidden--no-js img-full",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js img-full parallax-image-move",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "imageMove",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "lobbySlider mobileScrollable"
+      },
+      "class": "lobby__slider mt-6 mt-5:md",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js img-full parallax-image-move",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "imageMove",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js img-full parallax-image-move",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "imageMove",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js img-full parallax-image-move",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "imageMove",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "lobby section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "reveal",
+        "data-reveal-enable-mq": "null",
+        "data-scroll-section": "",
+        "data-scroll-section-id": "section9",
+        "data-scroll-snap-point": "[\n        { \"viewport\": 100, \"element\": 0 },\n        { \"viewport\": 200, \"element\": 0 },\n        { \"viewport\": 350, \"element\": 0, \"scrollable\": true }\n    ]"
+      },
+      "class": "offices section ui-dark ui-background",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--200-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax--350-0": "{\"transform\":\"translateY(-25svh)\"}",
+        "data-parallax-0-0": "{\"transform\":\"translateY(10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "appear  parallax"
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--250-0": "{ \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--350-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "offices__slider-image background background--cover is-hidden--sm-down",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-animations": "{\n\t\t\t\t\t\t\"changeShow\": {\"name\": \"imageClipIn\"}\n\t\t\t\t\t}",
+        "data-content-animation-controller-selector": ":root .js-architecture-content-animation-controller",
+        "data-content-animation-plugins": "controller events",
+        "data-parallax--250-0": "{ \"transform\": \"translateY(10svh)\" }",
+        "data-parallax--483-0": "{ \"transform\": \"translateY(-13svh)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax contentAnimation"
+      },
+      "class": "background background--cover content-animation--ready",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--200-0": "{ \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "offices__background",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--250-0": "{ \"clip-path\": \"polygon(0 calc((var(--intro-height) - var(--slider-height)) * 0), calc(var(--intro-head-width) * 1 + (100% - var(--slider-head-width)) * 0) calc((var(--intro-height) - var(--slider-height)) * 0), calc(var(--intro-head-width) * 1 + (100% - var(--slider-head-width)) * 0) calc((var(--intro-height) - var(--slider-height)) * 0 + var(--intro-head-height) * 1 + var(--slider-head-height) * 0), calc(var(--intro-width) * 1 + var(--slider-width) * 0) calc((var(--intro-height) - var(--slider-height)) * 0 + var(--intro-head-height) * 1 + var(--slider-head-height) * 0), calc(var(--intro-width) * 1 + var(--slider-width) * 0) 100%, 0 100%)\" }",
+        "data-parallax--300-0": "{ \"clip-path\": \"polygon(0 calc((var(--intro-height) - var(--slider-height)) * 1), calc(var(--intro-head-width) * 0 + (100% - var(--slider-head-width)) * 1) calc((var(--intro-height) - var(--slider-height)) * 1), calc(var(--intro-head-width) * 0 + (100% - var(--slider-head-width)) * 1) calc((var(--intro-height) - var(--slider-height)) * 1 + var(--intro-head-height) * 0 + var(--slider-head-height) * 1), calc(var(--intro-width) * 0 + var(--slider-width) * 1) calc((var(--intro-height) - var(--slider-height)) * 1 + var(--intro-head-height) * 0 + var(--slider-head-height) * 1), calc(var(--intro-width) * 0 + var(--slider-width) * 1) 100%, 0 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "offices__background-color ui-background",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{ \"opacity\": 1, \"clip-path\": \"polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--200-0": "{ \"opacity\": 1, \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax--250-0": "{ \"opacity\": 0, \"clip-path\": \"polygon(0 0%, 100% 0%, 100% 100%, 0% 100%)\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax",
+        "data-reveal-group": ""
+      },
+      "class": "offices__intro-content",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-carousel-effects": "fade",
+        "data-carousel-enable-mq": "sm-down",
+        "data-carousel-slides-per-view": "1",
+        "data-parallax--300-0": "{ \"opacity\": 0 }",
+        "data-parallax--350-0": "{ \"opacity\": 1 }",
+        "data-parallax--483-0": "{ \"opacity\": 1 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-enter": "true, this.$container.addClass('is-interactive')",
+        "data-parallax-leave": "true, this.$container.removeClass('is-interactive')",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax carousel"
+      },
+      "class": "offices__carousel carousel carousel--fade carousel--not-ready ui-background is-hidden--md-up",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full parallax-image-move",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--300-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--483-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/10.offices/slider-1-xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full parallax-image-move",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--300-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--483-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/10.offices/slider-2-xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full parallax-image-move",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--300-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--483-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/10.offices/slider-3-xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full parallax-image-move",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--300-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--483-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/10.offices/slider-4-xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full parallax-image-move",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--300-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--483-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "sm-down",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/10.offices/slider-5-xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-animations": "{\n\t\t\"changeShow\": {\"name\": \"fadeIn\", \"delay\": 0.6},\n\t\t\"changeHide\": {\"name\": \"fadeOut\"}\n\t}",
+        "data-content-animation-fixed-height": "true",
+        "data-content-animation-plugins": "controller events counter height",
+        "data-parallax--250-0": "{ \"opacity\": 0 }",
+        "data-parallax--300-0": "{ \"opacity\": 1 }",
+        "data-parallax--400-0": "{ \"opacity\": 1 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-enter": "true, this.$container.addClass('is-interactive')",
+        "data-parallax-leave": "true, this.$container.removeClass('is-interactive')",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax contentAnimation"
+      },
+      "class": "offices__slider ui-background js-architecture-content-animation-controller is-hidden--sm-down",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--300-0": "{ \"opacity\": 0 }",
+        "data-parallax--350-0": "{ \"opacity\": 1 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "offices__slider-content px-layout py-layout",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--300-0": "{ \"opacity\": 0 }",
+        "data-parallax--350-0": "{ \"opacity\": 1 }",
+        "data-parallax--400-0": "{ \"opacity\": 1 }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-enter": "true, this.$container.addClass('is-interactive')",
+        "data-parallax-leave": "true, this.$container.removeClass('is-interactive')",
+        "data-parallax-measure-selector": ".section",
+        "data-plugin": "parallax"
+      },
+      "class": "offices__button ui-light",
+      "section": "offices section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "reveal",
+        "data-reveal-enable-mq": "null",
+        "data-scroll-section": "",
+        "data-scroll-section-id": "section10"
+      },
+      "class": "section section--top-2 ui-light ui-background",
+      "section": "section section--top-2 ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "reveal",
+        "data-scroll-section": "",
+        "data-scroll-section-id": "section11"
+      },
+      "class": "engineering section section--top ui-dark ui-background",
+      "section": "engineering section section--top ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--200-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax--300-0": "{\"transform\":\"translateY(-20svh)\"}",
+        "data-parallax-0-0": "{\"transform\":\"translateY(10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "appear  parallax"
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "engineering section section--top ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-0": "{ \"transform\": \"translateY(5svh)\" }",
+        "data-parallax-100-0": "{ \"transform\": \"translateY(-5svh)\" }",
+        "data-parallax-enable-mq": "md-up",
+        "data-plugin": "parallax"
+      },
+      "class": "engineering__image text-lead",
+      "section": "engineering section section--top ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{\"transform\":\"translateY(-5svh)\"}",
+        "data-parallax-100-0": "{\"transform\":\"translateY(5svh)\"}",
+        "data-parallax-enable-mq": "sm-down",
+        "data-plugin": "appear  parallax"
+      },
+      "class": "img-full svg-fix is-hidden--no-js",
+      "section": "engineering section section--top ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-animations": "{\n\t\t\t\t\t\t\t\"changeShow\": {\"name\": \"fadeIn\"}\n\t\t\t\t\t\t}",
+        "data-content-animation-enable-mq": "md-up",
+        "data-content-animation-link-event": "hover",
+        "data-content-animation-plugins": "controller events",
+        "data-plugin": "contentAnimation"
+      },
+      "class": "row row--pad mt-6",
+      "section": "engineering section section--top ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "reveal",
+        "data-reveal-enable-mq": "null",
+        "data-scroll-section": "",
+        "data-scroll-section-id": "section12",
+        "data-scroll-snap-point": "[\n        { \"viewport\": 100, \"element\": 0 },\n        { \"viewport\": 200, \"element\": 0 }\n    ]"
+      },
+      "class": "infrastructure section ui-dark ui-background",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax--100-0": "{\"transform\":\"translateY(0svh)\"}",
+        "data-parallax--200-0": "{\"transform\":\"translateY(-10svh)\"}",
+        "data-parallax--350-0": "{\"transform\":\"translateY(-20svh)\"}",
+        "data-parallax-0-0": "{\"transform\":\"translateY(10svh)\"}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-mobile-smooth": "true",
+        "data-plugin": "appear  parallax"
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-index": "0",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-pattern": "infrastructureImageShow",
+        "data-plugin": "parallax"
+      },
+      "class": "infrastructure__image background background--cover  is-hidden--sm-down",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-clamp": "true",
+        "data-parallax-count": "6",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-index": "0",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-pattern": "infrastructureImageParallax",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover px-layout ",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-index": "1",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-pattern": "infrastructureImageShow",
+        "data-plugin": "parallax"
+      },
+      "class": "infrastructure__image background background--cover pt-1 is-hidden--sm-down",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-clamp": "true",
+        "data-parallax-count": "6",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-index": "1",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-pattern": "infrastructureImageParallax",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover px-layout pt-1",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-index": "2",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-pattern": "infrastructureImageShow",
+        "data-plugin": "parallax"
+      },
+      "class": "infrastructure__image background background--cover pt-1 is-hidden--sm-down",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-clamp": "true",
+        "data-parallax-count": "6",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-index": "2",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-pattern": "infrastructureImageParallax",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover px-layout pt-1",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-index": "3",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-pattern": "infrastructureImageShow",
+        "data-plugin": "parallax"
+      },
+      "class": "infrastructure__image background background--cover pt-1 is-hidden--sm-down",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-clamp": "true",
+        "data-parallax-count": "6",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-index": "3",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-pattern": "infrastructureImageParallax",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover px-layout pt-1",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-index": "4",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-pattern": "infrastructureImageShow",
+        "data-plugin": "parallax"
+      },
+      "class": "infrastructure__image background background--cover pt-1 is-hidden--sm-down",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-clamp": "true",
+        "data-parallax-count": "6",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-index": "4",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-pattern": "infrastructureImageParallax",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover px-layout pt-1",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-index": "5",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-pattern": "infrastructureImageShow",
+        "data-plugin": "parallax"
+      },
+      "class": "infrastructure__image background background--cover pt-1 is-hidden--sm-down",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-clamp": "true",
+        "data-parallax-count": "6",
+        "data-parallax-enable-mq": "md-up",
+        "data-parallax-index": "5",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-pattern": "infrastructureImageParallax",
+        "data-plugin": "parallax"
+      },
+      "class": "background background--cover px-layout pt-1",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js background background--cover",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": ".section",
+        "data-parallax-pattern": "infrastructureIntro infrastructureIntroMobile",
+        "data-plugin": "parallax",
+        "data-reveal-group": ""
+      },
+      "class": "infrastructure__intro is-hidden--sm-down",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-carousel-effects": "fade",
+        "data-carousel-enable-mq": "sm-down",
+        "data-carousel-slides-per-view": "1",
+        "data-plugin": "carousel"
+      },
+      "class": "infrastructure__carousel pt-3 ui-background carousel carousel--fade carousel--not-ready is-hidden--md-up",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js infrastructure__carousel-image img-full parallax-image-move",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "imageMove",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/13.infrastructure/content-1-xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js infrastructure__carousel-image img-full parallax-image-move",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "imageMove",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/13.infrastructure/content-2-xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js infrastructure__carousel-image img-full parallax-image-move",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "imageMove",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/13.infrastructure/content-3-xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js infrastructure__carousel-image img-full parallax-image-move",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "imageMove",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/13.infrastructure/content-4-xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js infrastructure__carousel-image img-full parallax-image-move",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "imageMove",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/13.infrastructure/content-5-xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js infrastructure__carousel-image img-full parallax-image-move",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "imageMove",
+        "data-plugin": "parallax",
+        "data-src": "/assets/images/media/landing/13.infrastructure/content-6-xs.webp?v=1782384571"
+      },
+      "class": "",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "stickyBottom",
+        "data-scroll": "",
+        "data-scroll-offset": "-101, 101",
+        "data-scroll-sticky": ""
+      },
+      "class": "sticky__layer sticky__layer--sticky",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-content-animation-animations": "{\n\t\t\"changeShow\": {\"name\": \"imageClipIn\"}\n\t}",
+        "data-content-animation-enable-mq": "md-up",
+        "data-content-animation-plugins": "controller events counter",
+        "data-parallax-100-100": "{ \"transform\": \"translateY(0svh)\" }",
+        "data-parallax-120-100": "{ \"transform\": \"translateY(-10svh)\", \"easing\": \"easeSectionInverse\" }",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-enable-not-smooth-scroll": "false",
+        "data-plugin": "contentAnimation mobileScrollable parallax"
+      },
+      "class": "infrastructure__slider",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js img-full parallax-image-move",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "infrastructureSliderImage",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js img-full parallax-image-move",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "infrastructureSliderImage",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js img-full parallax-image-move",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-mobile-smooth": "true",
+        "data-parallax-pattern": "infrastructureSliderImage",
+        "data-plugin": "parallax"
+      },
+      "class": "",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-parallax-0-100": "{\"opacity\": 1}",
+        "data-parallax-100-100": "{\"opacity\": 0}",
+        "data-parallax-clamp": "true",
+        "data-parallax-enable-mq": "null",
+        "data-parallax-measure-selector": "section",
+        "data-plugin": "parallax"
+      },
+      "class": "infrastructure__content-shadow ui-background",
+      "section": "infrastructure section ui-dark ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "team mobileScrollable"
+      },
+      "class": "mt-2 mt-3:md",
+      "section": "team section section--top ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js img-full",
+      "section": "team section section--top ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js img-full",
+      "section": "team section section--top ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-hidden--no-js img-full",
+      "section": "team section section--top ui-light ui-background"
+    },
+    {
+      "attrs": {
+        "data-nosnippet": "",
+        "data-plugin": "modal"
+      },
+      "class": "modal modal--side modal--side--left ui-light is-hidden",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "logo",
+        "data-plugin": "parallax"
+      },
+      "class": "btn header__logo btn--link",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-plugin": "favouriteCounter"
+      },
+      "class": "btn btn--link btn--text-small",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-plugin": "favouriteCounter"
+      },
+      "class": "btn btn--link btn--text-small",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-nosnippet": "",
+        "data-plugin": "modal"
+      },
+      "class": "modal modal--side modal--side--left ui-light is-hidden",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-plugin": "ajaxForm "
+      },
+      "class": "callback-modal",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-plugin": "utmData"
+      },
+      "class": "",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-plugin": "pagePathname"
+      },
+      "class": "",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-plugin": "inputState  "
+      },
+      "class": "form-control form-control--input form-control--float form-control--big",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-plugin": "inputState inputMask "
+      },
+      "class": "form-control form-control--input form-control--float form-control--big",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-nosnippet": "",
+        "data-plugin": "modal"
+      },
+      "class": "modal selector-modal ui-light is-hidden",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "logo",
+        "data-plugin": "parallax"
+      },
+      "class": "btn header__logo btn--link",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-plugin": "favouriteCounter"
+      },
+      "class": "btn btn--link btn--text-small",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js selector-modal__item-image",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-modal-auto-close": "false",
+        "data-modal-html-scroll-class-name": "with-modal with-plan-modal",
+        "data-modal-one-per-page": "false",
+        "data-nosnippet": "",
+        "data-plugin": "modal"
+      },
+      "class": "modal modal--full ui-light js-plan-map-modal modal-genplan is-hidden",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-plugin": "webglWhite",
+        "data-webgl-mobile": "true"
+      },
+      "class": "background general-plan__webgl",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-modal-auto-close": "false",
+        "data-modal-html-scroll-class-name": "with-modal with-plan-modal-inner",
+        "data-modal-one-per-page": "false",
+        "data-modal-sync-close-sync-class": ".js-plan-map-modal",
+        "data-nosnippet": "",
+        "data-plugin": "modal modalSyncClose"
+      },
+      "class": "modal plan-modal modal--full ui-dark is-hidden",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "planModal",
+        "data-plugin": "parallax"
+      },
+      "class": "plan-modal__content",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-modal-auto-close": "false",
+        "data-modal-html-scroll-class-name": "with-modal with-plan-modal-inner",
+        "data-modal-one-per-page": "false",
+        "data-modal-sync-close-sync-class": ".js-plan-map-modal",
+        "data-nosnippet": "",
+        "data-plugin": "modal modalSyncClose"
+      },
+      "class": "modal plan-modal modal--full ui-dark is-hidden",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "planModal",
+        "data-plugin": "parallax"
+      },
+      "class": "plan-modal__content",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-modal-auto-close": "false",
+        "data-modal-html-scroll-class-name": "with-modal with-plan-modal-inner",
+        "data-modal-one-per-page": "false",
+        "data-modal-sync-close-sync-class": ".js-plan-map-modal",
+        "data-nosnippet": "",
+        "data-plugin": "modal modalSyncClose"
+      },
+      "class": "modal plan-modal modal--full ui-dark is-hidden",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "planModal",
+        "data-plugin": "parallax"
+      },
+      "class": "plan-modal__content",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-modal-auto-close": "false",
+        "data-modal-html-scroll-class-name": "with-modal with-plan-modal-inner",
+        "data-modal-one-per-page": "false",
+        "data-modal-sync-close-sync-class": ".js-plan-map-modal",
+        "data-nosnippet": "",
+        "data-plugin": "modal modalSyncClose"
+      },
+      "class": "modal plan-modal modal--full ui-dark is-hidden",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "planModal",
+        "data-plugin": "parallax"
+      },
+      "class": "plan-modal__content",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-modal-auto-close": "false",
+        "data-modal-html-scroll-class-name": "with-modal with-plan-modal-inner",
+        "data-modal-one-per-page": "false",
+        "data-modal-sync-close-sync-class": ".js-plan-map-modal",
+        "data-nosnippet": "",
+        "data-plugin": "modal modalSyncClose"
+      },
+      "class": "modal plan-modal modal--full ui-dark is-hidden",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "planModal",
+        "data-plugin": "parallax"
+      },
+      "class": "plan-modal__content",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-modal-auto-close": "false",
+        "data-modal-html-scroll-class-name": "with-modal with-plan-modal-inner",
+        "data-modal-one-per-page": "false",
+        "data-modal-sync-close-sync-class": ".js-plan-map-modal",
+        "data-nosnippet": "",
+        "data-plugin": "modal modalSyncClose"
+      },
+      "class": "modal plan-modal modal--full ui-dark is-hidden",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "planModal",
+        "data-plugin": "parallax"
+      },
+      "class": "plan-modal__content",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-modal-auto-close": "false",
+        "data-modal-html-scroll-class-name": "with-modal with-plan-modal-inner",
+        "data-modal-one-per-page": "false",
+        "data-modal-sync-close-sync-class": ".js-plan-map-modal",
+        "data-nosnippet": "",
+        "data-plugin": "modal modalSyncClose"
+      },
+      "class": "modal plan-modal modal--full ui-dark is-hidden",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-parallax-pattern": "planModal",
+        "data-plugin": "parallax"
+      },
+      "class": "plan-modal__content",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-nosnippet": "",
+        "data-plugin": "modal architect",
+        "data-target": "#architecture-architect"
+      },
+      "class": "modal architect-modal ui-light is-hidden",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-plugin": "appear "
+      },
+      "class": "is-invisible--js is-hidden--no-js img-full",
+      "section": "global"
+    },
+    {
+      "attrs": {
+        "data-plugin": "cookieConsent"
+      },
+      "class": "cookie-consent cookie-consent--simple ui-light",
+      "section": "global"
+    }
+  ]
+}

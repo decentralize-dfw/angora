@@ -1,0 +1,9 @@
+/* Angora: the existing ice-blue facade, evergreen garden and timber warmth. */
+:root{--paper:#efede6;--ink:#5c4133;--muted:#6b786e;--sage:#b7cdd7;--wine:#223e35;--copper:#5c4133;--line:#5c413326;--ice:#b7cdd7;--forest:#223e35}
+.hero,.garden-story{background:var(--forest)}
+.hero-curtain,.image-flight,.chapters,.chapter-loading{background:var(--ice)}
+.arrival-story,.ritual-story,.atlas,.comfort,.location,.gallery{background:var(--paper)}
+.angora-life{background:var(--forest);color:var(--paper)}
+.contact{background:#5c4133;color:var(--paper)}
+.atlas-drawing{background:#f7f6ef}.plan-room{fill:#dbe5e4;stroke:#5c4133}.plan-room.is-selected{fill:#aac2c9;stroke:#223e35}.plan-room-area{fill:#5c4133}.atlas-pin{border-color:#5c4133;background:#efede6e8}.atlas-pin.active,.atlas-pin:hover{background:#223e35;border-color:#223e35}.atlas-pin.active:after{border-color:#223e354d}.plan-view-cone{fill:#223e3528}.plan-view-direction{stroke:#223e35}.atlas-tabs button{color:#748680}.atlas-tabs button[aria-selected=true]{color:#223e35;border-color:#5c4133}.measure-toggle[aria-pressed=true]{color:#5c4133}
+.life-editorial .section-top,.life-story-number{color:#b7cdd7}.life-lede>p,.life-stories p,.life-city-note p{color:#dce6df}.life-sources{color:#aebfb4}.life-stories article,.life-city-note{border-color:#b7cdd74d}

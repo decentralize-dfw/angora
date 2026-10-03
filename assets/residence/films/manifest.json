@@ -1,0 +1,12 @@
+{
+  "width": 1280,
+  "height": 720,
+  "fps": 24,
+  "scrollScreensPerClip": 2,
+  "opening": {"id": "opening", "seconds": 5.056, "playback": "once", "source": "açılış kararma.mp4", "reversed": false},
+  "clips": [
+    {"id": "approach", "frames": 121, "title": "A quieter arrival.", "caption": "The garden-facing elevation", "source": "ElevenLabs_video_seedance-2-0_iki sahne arası_2026-10-03T07_14_28.mp4", "reversed": false},
+    {"id": "orbit", "frames": 121, "title": "A world of your own.", "caption": "The villa, terrace & private pool", "source": "ElevenLabs_video_seedance-2-0_iki sahne arası_2026-10-03T07_13_20.mp4", "reversed": false},
+    {"id": "garden-return", "frames": 121, "title": "Life opens outside.", "caption": "A return to the garden", "source": "ElevenLabs_video_seedance-2-0_iki sahne arası_2026-10-03T07_19_59.mp4", "reversed": true}
+  ]
+}

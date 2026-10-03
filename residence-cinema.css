@@ -1,0 +1,66 @@
+/* Recorded camera + ERA / Likova choreography, adapted to Angora's own material. */
+.cinematic-story{height:700svh;background:var(--paper)}
+.cinematic-story .hero{height:100svh;min-height:0;background:var(--forest);isolation:isolate}
+.cinema-media{inset:0;background:var(--forest);overflow:hidden;will-change:clip-path;clip-path:polygon(0% 0%,100% 0%,100% 100%,0% 100%)}
+.arrival-frame,.garden-images{clip-path:inset(0% 0% 0% 0%)}
+.cinema-media video,.cinema-media canvas,.cinema-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cinema-opening{z-index:3}.cinema-poster{z-index:1;opacity:0}
+#cinema-canvas{z-index:2;opacity:0}.cinema-media.is-scrolling #cinema-canvas,.cinema-media.is-scrolling .cinema-poster{opacity:1}
+.cinema-media.is-ready .cinema-poster{visibility:hidden}
+.cinematic-story .hero-shade{z-index:4;pointer-events:none;background:linear-gradient(180deg,#13282142,transparent 34%,#112b255e)}
+.cinematic-story .hero-title{inset:22% 0 auto;z-index:5;padding:0 7vw;text-align:center}
+.cinematic-story .hero-title h1{font-size:clamp(75px,10.4vw,170px);line-height:.9;letter-spacing:-.055em}
+.cinematic-story .hero-title .eyebrow{font-size:9px}.cinematic-story .hero-title .script{font-size:clamp(28px,3.3vw,56px);margin-top:22px}
+.cinematic-story .hero-sides{top:auto;bottom:16%;z-index:5}
+.cinematic-story .hero-bottom{z-index:5;bottom:37px}
+.cinema-caption{position:absolute;left:7vw;bottom:15%;z-index:5;opacity:0;visibility:hidden;max-width:55%;pointer-events:none}
+.cinema-caption .eyebrow{color:#d4e1dc;font-size:9px}.cinema-caption h2{font-size:clamp(34px,4.5vw,72px);line-height:1.1;letter-spacing:-.04em;margin:12px 0}.cinema-caption p{font-size:10px;letter-spacing:.09em;text-transform:uppercase}
+.cinema-track{position:absolute;z-index:5;left:7vw;bottom:38px;width:43%;display:flex;gap:20px;opacity:0;visibility:hidden}
+.cinema-track button{position:relative;flex:1;color:#efede69c;text-align:left;padding:0 0 12px;font-size:9px;border-bottom:1px solid #efede644;display:flex;gap:10px;align-items:center}
+.cinema-track b{font-weight:400;letter-spacing:.1em;text-transform:uppercase}.cinema-track i{position:absolute;height:1px;bottom:-1px;left:0;width:100%;transform:scaleX(0);transform-origin:left;background:var(--paper)}
+.cinema-track button[aria-current=true]{color:var(--paper)}
+.cinema-destination{position:absolute;left:7vw;top:24%;width:30%;color:var(--ink);z-index:6;opacity:0;visibility:hidden;pointer-events:none}
+.cinema-destination h2{font-size:clamp(64px,7.7vw,130px);line-height:1;letter-spacing:-.05em;margin:25px 0}.cinema-destination p{font-size:13px;line-height:1.85;max-width:270px}.cinema-destination a{margin-top:14px;pointer-events:auto}
+.cinema-veil{position:absolute;inset:0;background:#101d18;z-index:10;display:grid;place-items:center;pointer-events:none;color:var(--paper)}
+.cinema-veil span{font-size:10px;letter-spacing:.35em;opacity:.55}
+.cinema-status{position:absolute;right:4vw;bottom:40px;z-index:6;font-size:9px;color:var(--paper)}
+.chapter-photography{background:var(--forest);overflow:visible}
+.chapter-photography:before{display:none}
+.chapter-image-stack{position:absolute;inset:0;overflow:hidden;background:var(--forest)}
+.chapter-image{position:absolute;inset:0;opacity:0;will-change:transform,clip-path;object-position:center center}
+.chapter-image:first-child{opacity:1}
+.chapter-model-caption{color:var(--paper);text-shadow:0 2px 16px #0009;background:linear-gradient(#142b2542,transparent);inset:0 0 auto;padding:20px;min-height:90px;align-items:flex-start}
+.chapter-photo-open{position:absolute;left:25px;bottom:25px;z-index:5;color:var(--paper);border-bottom:1px solid #fff8;padding:10px 0;font-size:9px;text-transform:uppercase;letter-spacing:.1em;text-shadow:0 2px 10px #000}
+.chapter-plan-card{position:absolute;right:20px;bottom:20px;width:180px;z-index:6;background:var(--paper);padding:16px;color:var(--forest);box-shadow:0 10px 35px #142b2522}
+.chapter-plan-card>.eyebrow{font-size:7px}.chapter-plan-card svg{width:100%;height:130px;display:block;margin:7px 0}
+.chapter-plan-card p{font-size:8px;line-height:1.5}.chapter-plan-card .text-link{font-size:7px;padding:8px 0 4px;letter-spacing:.07em;margin-top:5px}
+.chapter-mini-room{fill:#dbe5e4;stroke:var(--ink);stroke-width:.09}.chapter-mini-room.selected{fill:#9fbec9;stroke:var(--forest);stroke-width:.13}
+.chapter-mini-camera{cursor:pointer}.chapter-mini-camera circle{fill:var(--paper);stroke:var(--forest);stroke-width:.1}.chapter-mini-camera text{font: .42px var(--sans);fill:var(--forest);text-anchor:middle;dominant-baseline:central}.chapter-mini-camera.selected circle{fill:var(--forest)}.chapter-mini-camera.selected text{fill:var(--paper)}
+.chapter-mini-camera:focus-visible{outline:none}.chapter-mini-camera:focus-visible circle{stroke-width:.3}
+.chapter-progress{z-index:7}.chapter-progress i{transition:none;background:var(--ice)}
+.chapter-scene{min-height:0;height:100svh}.chapters{height:700svh;background:var(--paper)}
+.chapter-narrative{padding-right:30px}.chapter-layout{grid-template-columns:35% 65%}
+.word-window{display:inline-block;overflow:hidden;vertical-align:bottom;line-height:1.13}.word-window>span{display:inline-block;will-change:transform}
+.editorial-image{overflow:hidden}.editorial-image img{will-change:transform}
+.text-link{position:relative;transition:color .3s}.text-link:after{content:'';position:absolute;bottom:-1px;left:0;width:100%;height:1px;transform:scaleX(0);transform-origin:left;background:var(--forest);transition:transform .65s cubic-bezier(.7,0,.3,1)}.text-link:hover:after{transform:scaleX(1)}
+.header a{transition:opacity .4s}.header a:hover{opacity:.65}
+.contact{position:relative;overflow:hidden}.contact-image{will-change:clip-path,transform}.contact-content{position:relative;z-index:2}
+footer{position:relative;transform-origin:center bottom;background:var(--paper)}
+@media(min-width:801px) and (max-height:760px){.chapter-scene{padding-top:92px;padding-bottom:25px}.chapter-plan-card{width:150px;padding:12px}.chapter-plan-card svg{height:103px}.chapter-narrative h2{font-size:42px}.chapter-copy>p{line-height:1.65}}
+@media(max-width:800px){
+ .cinema-media video,.cinema-poster{object-fit:contain;background:var(--forest)}
+ .cinematic-story .hero-title{top:20%;padding:0 6vw}.cinematic-story .hero-title h1{font-size:14.5vw}.cinematic-story .hero-title .script{font-size:8vw;margin-top:14px}.cinematic-story .hero-title .eyebrow{font-size:7px;max-width:230px;margin:0 auto 18px}
+ .cinematic-story .hero-sides{bottom:27%;font-size:7px}.cinematic-story .hero-bottom{bottom:27px;font-size:7px;gap:13px}.cinematic-story .hero-bottom a,.cinematic-story .hero-bottom button{font-size:7px}
+ .cinema-caption{bottom:22%;max-width:86%;left:7vw}.cinema-caption h2{font-size:10vw}.cinema-caption p{font-size:8px;letter-spacing:.06em}.cinema-caption .eyebrow{font-size:8px}
+ .cinema-track{width:86%;bottom:40px;gap:13px}.cinema-track button{font-size:8px;gap:7px}.cinema-track b{font-size:7px}
+ .cinema-destination{top:15%;left:7vw;width:86%}.cinema-destination h2{font-size:16vw;line-height:.98;margin:14px 0}.cinema-destination p{font-size:11px;line-height:1.6}.cinema-destination .eyebrow{font-size:7px}.cinema-destination .text-link{font-size:8px;margin:5px 0}
+ .cinema-veil span{font-size:8px;letter-spacing:.2em}.cinema-status{bottom:13px;font-size:7px}
+ .chapter-scene{padding:85px 6vw 20px;min-height:0}.chapter-layout{display:flex;flex-direction:column;height:calc(100% - 27px)}
+ .chapter-narrative{padding:0}.chapter-narrative h2{font-size:9vw;display:flex;gap:10px;line-height:1.1}.chapter-narrative h2 br{display:none}.chapter-narrative h2 em{white-space:nowrap}
+ .chapter-tabs{margin:16px 0 12px}.chapter-tabs button{font-size:8px}.chapter-tabs button>span{font-size:22px}
+ .chapter-copy .eyebrow{font-size:7px}.chapter-copy h3{font-size:23px;margin:8px 0}.chapter-copy>p{font-size:10px;line-height:1.65}.chapter-copy .text-link{font-size:7px;padding:8px 0}
+ .chapter-photography{min-height:0;flex:1;margin-top:18px}.chapter-model-caption{padding:13px;font-size:7px;min-height:55px}.chapter-model-caption span:last-child{font-size:6px;max-width:105px;line-height:1.5;text-align:right}
+ .chapter-plan-card{right:12px;bottom:12px;width:115px;padding:10px}.chapter-plan-card svg{height:80px;margin:4px 0}.chapter-plan-card p{font-size:6px}.chapter-plan-card>.eyebrow{font-size:6px}.chapter-plan-card .text-link{font-size:6px}.chapter-photo-open{left:12px;bottom:15px;font-size:7px;padding:5px 0;max-width:42%}
+}
+@media(max-width:800px) and (max-height:700px){.chapter-scene{padding-top:78px}.chapter-narrative h2{font-size:7.5vw}.chapter-copy h3{font-size:20px}.chapter-copy>p{font-size:9px}.chapter-tabs{margin:10px 0}.chapter-plan-card{width:95px;padding:7px}.chapter-plan-card svg{height:55px}.chapter-photography{margin-top:10px}}
+@media(prefers-reduced-motion:reduce){.cinematic-story{height:100svh}.cinema-veil{display:none}.cinema-track,.cinema-destination,.cinema-caption{display:none}.cinema-poster{opacity:1}.cinema-opening{display:none}.chapters{height:auto}.chapter-scene{height:auto;min-height:900px}.chapter-layout{min-height:720px}.word-window>span{transform:none!important}.cinema-media{clip-path:none!important}}
