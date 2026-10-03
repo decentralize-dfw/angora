@@ -1,0 +1,64 @@
+{
+  "version": 2,
+  "quantum": 0.005,
+  "target": [
+    -0.7,
+    4.7,
+    -0.4
+  ],
+  "radius": 54,
+  "groups": [
+    {
+      "name": "villa",
+      "start": 0,
+      "count": 174538,
+      "depthStart": 0,
+      "depthCount": 220791,
+      "source": "build/web/26092026/BUILDING-opt-v6.glb",
+      "primitives": 77
+    },
+    {
+      "name": "garden",
+      "start": 174538,
+      "count": 54862,
+      "depthStart": 220791,
+      "depthCount": 13119,
+      "source": "build/web/26092026/GARDEN-opt-v3.glb",
+      "primitives": 12
+    },
+    {
+      "name": "neighbours",
+      "start": 229400,
+      "count": 351336,
+      "depthStart": 233910,
+      "depthCount": 661605,
+      "source": "build/web/26092026/KOMSULAR-opt-v2.glb",
+      "primitives": 9
+    },
+    {
+      "name": "landscape",
+      "start": 580736,
+      "count": 18786,
+      "depthStart": 895515,
+      "depthCount": 0,
+      "source": "build/web/26092026/CEVRE-YOL-opt-v3.glb",
+      "primitives": 3
+    },
+    {
+      "name": "trees",
+      "start": 599522,
+      "count": 48716,
+      "depthStart": 895515,
+      "depthCount": 0,
+      "source": "build/web/batched/desktop/context-plants.glb",
+      "primitives": 1
+    }
+  ],
+  "vertices": 648238,
+  "bytes": 1886251,
+  "depthVertices": 184176,
+  "depthIndices": 895515,
+  "depthIndexOffset": 1105064,
+  "depthBytes": 1794170,
+  "source": "Delivered Tur 10 villa, garden, neighbours, roads and context planting. Only architectural edge lines are visible; colourless depth data suppresses hidden edges. No surface colours or textures."
+}
