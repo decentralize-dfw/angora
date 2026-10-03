@@ -2811,10 +2811,10 @@ if(qaQuery.get('debug')==='quality'){
     ].join('\n');
   },500);
 }
-// 03.10: the ElevenLabs soundscape replaces the synthesized click/swell (the
-// old module stays for reference). On by default, starts on the first press,
+// 03.10: bestelenmiş piyano sesi (soundscape.js); ElevenLabs sürümü
+// soundscape-elevenlabs.js'te duruyor. On by default, starts on the first press,
 // one speaker switch beside the language pill silences all of it.
-interfaceSound=createSoundscape({buttons:[...document.querySelectorAll('[data-sound-toggle]'),$('#toggle-sound')].filter(Boolean),audioRoot:new URL('11lbs/',audioRoot)});
+interfaceSound=createSoundscape({buttons:[...document.querySelectorAll('[data-sound-toggle]'),$('#toggle-sound')].filter(Boolean)});
 interfaceSound.set({view:selected});
 {
   const presets=[...document.querySelectorAll('[data-sound-preset]')];
