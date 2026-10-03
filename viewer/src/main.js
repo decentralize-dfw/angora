@@ -458,13 +458,15 @@ function scheduleIdleTrace(){
   },700);
 }
 // QA: aynı yol, eşzamanlı - yazılım rasterleştiricide ekran görüntüsü için
-if(typeof window!=='undefined')window.__angoraPathTrace=async(samples=64,fresh=true)=>{
+if(typeof window!=='undefined')window.__angoraPathTrace=async(samples=64,fresh=true,capture=false)=>{
   if(!FEATURES.pathTraceStill)return 0;
   clearTimeout(traceTimer);tracing=false;
   const tracer=await ensurePathTrace();
   if(fresh&&!await tracer.start(traceCamera(),drawBaseFrame))return -1;
   // gl.finish: yazılım GPU'sunda komutlar birikip ekran görüntüsünü zaman aşımına düşürüyordu
   const gl=renderer.getContext();let count=tracer.samples;while(count<samples&&tracer.step()){gl.finish();count=tracer.samples;}
+  // capture: tuval aynı görevde okunur (preserveDrawingBuffer yok; ekran görüntüsü yeni kare bekliyordu)
+  if(capture){tracer.step();gl.finish();return {samples:tracer.samples,png:renderer.domElement.toDataURL('image/png')};}
   return tracer.samples;
 };
 let idleRefine=null,idleRefineTimer=null,idleRefining=false,cinemaBroken=false;
