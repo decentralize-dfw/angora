@@ -27,3 +27,14 @@ test('every floor has selectable interior photographs inside the shared map exte
  const {x,z,width,height}=data.extent;
  for(let floor=0;floor<4;floor++){const points=data.photos.filter(p=>p.floor===floor&&!p.outdoor);assert.ok(points.length>=7);for(const p of points){assert.ok(p.x>x&&p.x<x+width);assert.ok(p.z>z&&p.z<z+height);}}
 });
+
+test('the revised photograph collection swaps files by their exact original names',async()=>{
+ const revised={window:{ANGORA_ATLAS:structuredClone(data)}};
+ vm.runInNewContext(await readFile(new URL('../residence-photographs.js',import.meta.url),'utf8'),revised);
+ for(const point of revised.window.ANGORA_ATLAS.photos){
+  assert.equal(point.url,`./photogallery-v2/${point.file}`);
+  await access(new URL(`../${point.url.replace(/^\.\//,'')}`,import.meta.url));
+  const original=data.photos.find(p=>p.id===point.id);
+  for(const key of ['floor','x','z','dx','dz','roomId'])assert.equal(point[key],original[key]);
+ }
+});

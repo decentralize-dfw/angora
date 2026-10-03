@@ -2,7 +2,7 @@
   'use strict';
   const data=window.ANGORA_ATLAS,$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
   const levels=['Garden level','Entrance level','First floor','Attic level'],defaults=[3,4,19,9];
-  const svg=$('#atlas-svg'),pins=$('#atlas-pins'),strip=$('#atlas-photo-strip'),map=$('.atlas-map'),image=$('#atlas-native-plan');
+  const svg=$('#atlas-svg'),pins=$('#atlas-pins'),strip=$('#atlas-photo-strip'),map=$('.atlas-map'),image=$('#atlas-native-plan'),layer=$('.atlas-floor-layer');
   const ns='http://www.w3.org/2000/svg';let floor=0,selected,measure=false,poses,manifest,geometry;
   function node(name,attrs={},text){const e=document.createElementNS(ns,name);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(text!==undefined)e.textContent=text;return e;}
   const photos=()=>data.photos.filter(p=>p.floor===floor&&!p.outdoor);
@@ -50,17 +50,24 @@
     });
     callouts.forEach((item,i)=>{
       const x=89,y=25+i*13;item.title.setAttribute('transform',`translate(${x} ${y}) scale(${h/w} 1)`);
-      svg.append(node('polyline',{points:`${item.label.join(',')} ${x-9},${y} ${x-2},${y}`,class:'room-label-leader'}));
     });
     points.forEach(({p,registered,x,y,lx,ly})=>{
       const button=document.createElement('button'),labelX=lx/w*100,labelY=ly/h*100;
-      if(Math.hypot(labelX-x,labelY-y)>1.5)svg.append(node('line',{x1:x,y1:y,x2:labelX,y2:labelY,class:'plan-pin-leader'}),node('circle',{cx:x,cy:y,r:.45,class:'plan-pin-anchor'}));
       button.className=`atlas-pin${p.id===selected?.id?' active':''}`;button.dataset.atlasPhoto=p.id;
       button.style.left=`${labelX}%`;button.style.top=`${labelY}%`;button.textContent=number(p);button.setAttribute('aria-label',`Camera point ${number(p)}: ${caption(p)}`);button.setAttribute('aria-pressed',String(p.id===selected?.id));pins.append(button);
       if(registered.direction){
         const end=geometry(registered.direction),vx=(end[0]-x)*w/100,vy=(end[1]-y)*h/100,len=Math.hypot(vx,vy)||1;
-        const sideX=-vy/len*9/w*100,sideY=vx/len*9/h*100;
-        svg.append(node('polygon',{points:`${x},${y} ${end[0]+sideX},${end[1]+sideY} ${end[0]-sideX},${end[1]-sideY}`,class:`plan-view-cone${p.id===selected?.id?' selected':''}`}),node('line',{x1:x,y1:y,x2:end[0],y2:end[1],class:`plan-view-direction${p.id===selected?.id?' selected':''}`}));
+        const angle=Math.atan2(vy,vx),half=(p.hfov||70)*Math.PI/360,radius=Math.max(25,Math.min(52,len*1.4));
+        const at=a=>[x+Math.cos(a)*radius/w*100,y+Math.sin(a)*radius/h*100],a=at(angle-half),b=at(angle+half),tip=at(angle);
+        const on=p.id===selected?.id?' selected':'';
+        const group=node('g',{'data-camera':number(p),class:`plan-camera${on}`});
+        group.append(node('path',{d:`M ${x} ${y} L ${a.join(' ')} A ${radius/w*100} ${radius/h*100} 0 0 1 ${b.join(' ')} Z`,class:`plan-view-cone${on}`}),node('line',{x1:x,y1:y,x2:tip[0],y2:tip[1],class:`plan-view-direction${on}`}));
+        const wing=a=>[x+Math.cos(a)*radius*.82/w*100,y+Math.sin(a)*radius*.82/h*100],left=wing(angle-.15),right=wing(angle+.15);
+        group.append(node('path',{d:`M ${left.join(' ')} L ${tip.join(' ')} L ${right.join(' ')}`,class:`plan-camera-arrow${on}`}),node('ellipse',{cx:x,cy:y,rx:3/w*100,ry:3/h*100,class:`plan-pin-anchor${on}`}));
+        svg.append(group);
+        // Only the short label connection is orthogonal. Camera directions are
+        // deliberate arrows, never schematic lines that divide the room.
+        if(Math.hypot(lx-x*w/100,ly-y*h/100)>17)svg.append(node('polyline',{points:`${x},${y} ${x},${labelY} ${labelX},${labelY}`,class:'plan-pin-leader'}));
       }
 
     });
@@ -101,25 +108,15 @@
   async function transition(index){
     index=Math.max(0,Math.min(3,Number(index)));if(index===floor)return;
     if(matchMedia('(prefers-reduced-motion: reduce)').matches){selectFloor(index);return;}
-    const previousSvg=svg.cloneNode(true),previousImage=image.cloneNode(true);
-    previousSvg.removeAttribute('id');previousImage.removeAttribute('id');previousSvg.classList.add('plan-previous-svg');previousImage.classList.add('plan-previous-image');
-    map.append(previousImage,previousSvg);pins.style.opacity='.4';
-    selectFloor(index);await image.decode().catch(()=>{});
-    const contour=svg.querySelector('.graphic-contour'),oldContour=previousSvg.querySelector('.graphic-contour');
-    // Both contours are measured model geometry. Resampling only equalises vertex count.
-    const resample=element=>{
-      const raw=element.getAttribute('points').split(' ').map(p=>p.split(',').map(Number)),lengths=raw.map((p,i)=>Math.hypot(p[0]-raw[(i+1)%raw.length][0],p[1]-raw[(i+1)%raw.length][1])),total=lengths.reduce((a,b)=>a+b,0);
-      return Array.from({length:64},(_,i)=>{let d=i*total/64,j=0;while(j<lengths.length-1&&d>lengths[j])d-=lengths[j++];const a=raw[j],b=raw[(j+1)%raw.length],t=d/(lengths[j]||1);return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];});
-    };
-    const from=oldContour&&resample(oldContour),to=contour&&resample(contour),progress={p:0};
-    if(oldContour)oldContour.style.opacity='0';
-    await new Promise(resolve=>{
-      gsap.fromTo([image,svg],{opacity:0},{opacity:1,duration:.85,ease:'power2.inOut'});
-      gsap.to([previousImage,previousSvg],{opacity:0,duration:.85,ease:'power2.inOut'});
-      gsap.to(pins,{opacity:1,duration:.5,delay:.25});
-      gsap.to(progress,{p:1,duration:.9,ease:'power2.inOut',onUpdate:()=>{if(from&&to)contour.setAttribute('points',from.map((a,i)=>`${a[0]+(to[i][0]-a[0])*progress.p},${a[1]+(to[i][1]-a[1])*progress.p}`).join(' '));},onComplete:resolve});
-    });
-    previousImage.remove();previousSvg.remove();layout();
+    const nextImage=new Image();nextImage.src=`./assets/residence/chapters/plan-${index}.webp`;await nextImage.decode().catch(()=>{});
+    const previous=layer.cloneNode(true);previous.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));previous.classList.add('plan-previous-layer');previous.setAttribute('aria-hidden','true');previous.inert=true;map.append(previous);
+    await new Promise(resolve=>gsap.to('.atlas-view',{opacity:0,duration:.14,onComplete:resolve}));
+    gsap.set(layer,{opacity:0});selectFloor(index);await image.decode().catch(()=>{});
+    await new Promise(resolve=>gsap.timeline({onComplete:resolve})
+      .to(layer,{opacity:1,duration:.7,ease:'power1.inOut'},0)
+      .to(previous,{opacity:0,duration:.7,ease:'power1.inOut'},0)
+      .to('.atlas-view',{opacity:1,duration:.5,ease:'power1.out'},.16));
+    previous.remove();gsap.set(layer,{clearProps:'opacity'});layout();
   }
   window.AngoraPlan={selectFloor,layout,transition,get floor(){return floor;}};
   new ResizeObserver(layout).observe(map);image.addEventListener('load',layout);

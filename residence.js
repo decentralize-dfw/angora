@@ -17,7 +17,11 @@
     if (lenis) lenis.scrollTo(target, {duration:1.35, ...options});
     else window.scrollTo({top:typeof target === 'number' ? target : target.getBoundingClientRect().top + scrollY + (options.offset || 0), behavior:reduced ? 'instant' : 'smooth'});
   }
-  window.AngoraScroll={stop:()=>lenis?.stop(),start:()=>lenis?.start(),to:(top,immediate=false)=>scrollTo(top,{immediate,force:true})};
+  window.AngoraScroll={stop:()=>lenis?.stop(),start:()=>lenis?.start(),to:(top,immediate=false)=>scrollTo(top,{immediate,force:true}),
+    travel:(top,duration=1.15)=>new Promise(resolve=>{
+      if(lenis)lenis.scrollTo(top,{duration,force:true,lock:true,onComplete:resolve});
+      else {window.scrollTo({top,behavior:'instant'});resolve();}
+    })};
   window.addEventListener('angora:scroll', event => scrollTo(event.detail.top,{immediate:!!event.detail.immediate}));
   const menu = $('#menu'), menuToggle = $('.menu-toggle');
   let returnFocus = null;
@@ -167,12 +171,11 @@
       const mobile = context.conditions.mobile;
       const scrub = (trigger, extra = {}) => ({trigger, start:'top top', end:'bottom bottom', scrub:.75, invalidateOnRefresh:true, ...extra});
       gsap.timeline({scrollTrigger:scrub('.arrival-story')})
-        .to('.arrival-frame',{clipPath:mobile?'inset(31% 7% 24% 7%)':'inset(15% 40% 16% 8%)',duration:.4,ease:'power2.inOut'},0)
-        .fromTo('.arrival-frame img',{scale:1.08},{scale:1,duration:.6,ease:'none'},0)
+        .to('.arrival-frame',{left:'7%',top:mobile?'29%':'31%',width:mobile?'86%':'53%',height:()=>innerWidth*(mobile?.86:.53)*941/1672,duration:.4,ease:'power2.inOut'},0)
         .to('.arrival-caption',{opacity:1,y:-12,duration:.2},.32)
         .fromTo('.arrival-detail',{y:100,rotation:8},{y:0,rotation:-3,opacity:1,duration:.3},.4)
         .to('.arrival-caption,.arrival-detail,.arrival-type',{opacity:0,duration:.15},.78)
-        .to('.arrival-frame',{clipPath:'inset(0% 0% 0% 0%)',duration:.25,ease:'power2.inOut'},.75);
+        .to('.arrival-frame',{left:'0%',top:'0%',width:'100%',height:'100%',duration:.25,ease:'power2.inOut'},.75);
       const garden = gsap.timeline({scrollTrigger:scrub('.garden-story', {onUpdate:self => setGarden(Math.min(2, Math.floor(self.progress * 3)))})});
       gardenTrigger = garden.scrollTrigger;
       garden.to('.garden-images',{clipPath:mobile?'inset(4% 5% 4% 5%)':'inset(6% 5% 6% 5%)',duration:.2,ease:'power2.inOut'},.02)
@@ -193,7 +196,7 @@
       $$('.detail-photo').forEach(element => gsap.fromTo(element, {y:60, rotation:3}, {y:-35, rotation:-3, ease:'none', scrollTrigger:{trigger:element.closest('.editorial'), start:'top bottom', end:'bottom top', scrub:1}}));
       gsap.fromTo('.location-image img', {scale:1.14}, {scale:1, ease:'none', scrollTrigger:{trigger:'.location', start:'top bottom', end:'bottom top', scrub:1}});
       gsap.fromTo('.contact-image img', {scale:1.14, yPercent:-4}, {scale:1.02, yPercent:0, ease:'none', scrollTrigger:{trigger:'.contact', start:'top bottom', end:'bottom bottom', scrub:1}});
-      return () => {chapterTrigger = null; gardenTrigger = null;};
+      return () => {gardenTrigger = null;};
     });
     document.fonts?.ready.then(() => ScrollTrigger.refresh());
     window.addEventListener('load', () => ScrollTrigger.refresh(), {once:true});

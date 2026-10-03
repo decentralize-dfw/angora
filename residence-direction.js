@@ -10,9 +10,12 @@
   }
   const data=window.ANGORA_ATLAS;
   // Only newly supplied exterior material enters this presentation.
-  const exteriors=[['front','The street elevation'],['pool-garden','The private garden & pool'],['garden-facade','The garden-facing elevation'],['pool-terrace','The covered terrace & water'],['neighbourhood','Angora Evleri, in context']].map(([name,en],i)=>({id:100+i,url:`./assets/residence/new/${name}.webp`,en,outdoor:true}));
-  const curated=data.photos.filter(p=>!p.outdoor);
-  const exteriorSafe=[...exteriors,...curated.filter(p=>!p.outdoor)];
+  const exteriors=[['angora_28.jpeg','The street elevation'],['angora_24.jpg','The private garden & pool'],['angora_26.jpg','The garden-facing elevation'],['angora_27.jpg','The covered terrace & water']].map(([file,en],i)=>({id:100+i,url:`./photogallery-v2/${file}`,en,outdoor:true}));
+  // The gallery is an edit; the complete photograph collection lives on the plans.
+  const selections={0:[2,5,1],1:[4,21,23],2:[17,12,32],3:[7,9,15]};
+  const curated=Object.fromEntries(Object.entries(selections).map(([floor,ids])=>[floor,ids.map(id=>data.photos.find(p=>p.id===id))]));
+  const exteriorEdit=[exteriors[1],exteriors[0],exteriors[3]];
+  const exteriorSafe=[exteriors[1],data.photos.find(p=>p.id===5),data.photos.find(p=>p.id===4),data.photos.find(p=>p.id===21),data.photos.find(p=>p.id===17),data.photos.find(p=>p.id===12),data.photos.find(p=>p.id===7),exteriors[3]];
   const track=$('.gallery-track');let gallery=[],galleryTrigger,index=0;
   function fitGallery(){
     const width=Math.max(220,Math.min(innerWidth*.83,(track.clientHeight-38)*16/9));
@@ -34,7 +37,7 @@
     else track.scrollTo({left:track.children[next].offsetLeft-track.children[0].offsetLeft,behavior:'smooth'});
   }
   function renderGallery(filter='all',reset=false){
-    gallery=filter==='all'?exteriorSafe:filter==='outdoor'?exteriors:data.photos.filter(p=>!p.outdoor&&p.floor===Number(filter));
+    gallery=filter==='all'?exteriorSafe:filter==='outdoor'?exteriorEdit:curated[filter];
     galleryTrigger?.kill(true);galleryTrigger=null;track.replaceChildren();window.gsap?.set(track,{x:0});track.scrollLeft=0;index=0;
     gallery.forEach((p,i)=>{
       const figure=document.createElement('figure'),button=document.createElement('button'),image=document.createElement('img'),expand=document.createElement('span'),label=document.createElement('figcaption');figure.className='gallery-item';
@@ -77,7 +80,9 @@
         $('.chapter-scene').dataset.nativeMoving='true';
         await window.AngoraVideo.play(video,[...forward,...reverse],1.4,reduced);
         still.src=`./assets/residence/chapters/iso-${next}.webp`;
-        await still.decode().catch(()=>{});video.classList.remove('playing');
+        await still.decode().catch(()=>{});
+        // Hold the exact final movie frame. A separately rendered still must not
+        // change the camera, exposure or colour at the end of the movement.
         window.dispatchEvent(new CustomEvent('angora:chapter-display',{detail:next}));
       }
       $('.chapter-scene').dataset.nativeMoving='false';
@@ -91,4 +96,9 @@
     if(motion)refreshMotion();
   }).catch(error=>console.error('Native floor films',error));
   document.fonts?.ready.then(()=>{if(motion)refreshMotion();});
+  if(motion){
+    // The model settles back while the plan arrives, with no forced page jump.
+    gsap.to('.chapter-model',{scale:.94,y:-24,ease:'none',scrollTrigger:{trigger:'#atlas',start:'top bottom',end:'top top',scrub:true}});
+    gsap.fromTo('.atlas-scene',{opacity:0,y:45},{opacity:1,y:0,ease:'power1.out',scrollTrigger:{trigger:'#atlas',start:'top 90%',end:'top 12%',scrub:true}});
+  }
 })();
