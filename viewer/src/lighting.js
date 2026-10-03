@@ -558,7 +558,13 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
           const l=.2126*material.color.r+.7152*material.color.g+.0722*material.color.b;
           if(l>.12){material.metalness=.35;material.roughness=Math.max(material.roughness,.35);if(!material.map)material.color.lerp(new THREE.Color(.72,.73,.74),.5);}
         }
-        if(['architecture','interior'].includes(name)&&(/-(metal|glass|wood)-/.test(material.name)||mirror)){
+        // 03.10: Tur 10 malzemeleri toplu ad (-metal-/-glass-/-wood-) taşımıyor: iç mekândaki 160 malzemenin
+        // 151'i oda sondası yerine DIŞ göğü yansıtıyor ve difüz dolguyu ondan alıyordu (mobilya odadan
+        // kopuk, dolap camında gök). İç mekân parçasının tamamı + mimaride pişmiş ışığı olmayan iç
+        // donatı (kapı, pirinç, cam, süpürgelik) odanın sondasına bağlanır; cephe/çatı dış gökte kalır.
+        const roomLit=FEATURES.roomProbeAll&&!material.userData.angoraBatch&&(name==='interior'
+          ||name==='architecture'&&!object.userData?.lightmap&&!/roof|cati|çatı|clay|kiremit|tile|cephe|facade|sıva|siva|plaster|chimney|baca|gutter|oluk/i.test(material.name));
+        if(['architecture','interior'].includes(name)&&(/-(metal|glass|wood)-/.test(material.name)||mirror||roomLit)){
           reflectionMaterials.add(material);material.envMap=roomReflections?.get(reflectionFloor)??null;if(FEATURES.boxProbes)applyBoxProjection(material);
         }
         // Pişmiş zemin gölgesi eski teslimatın ağaçlarını/arsasını taşıyor;

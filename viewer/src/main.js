@@ -2226,7 +2226,7 @@ async function loadModel() {
     // Tur 10 kendi pişmiş ışıklarını kullanır; ayrı EKLER yüklenmez.
     const tur10=tur10Active;
     if(tur10){
-      const swapped=applyTur10(manifest,{mobile:deliveryProfile==='mobile'});
+      const swapped=applyTur10(manifest,{mobile:deliveryProfile==='mobile',textures1k:FEATURES.textures1k});
       if(swapped.length)console.info('Tur 10 modeller: '+swapped.join(', '));
     }
     // Pişmiş ışık (masaüstü): kabuk ve bahçe lightmap UV'li v5/v3 dosyalarına

@@ -93,9 +93,16 @@ export const TUR10_MODELS_MOBILE = Object.freeze({
   interior:     {file: 'mobile-tur10/INTERIOR-opt-v3.ktx2.glb', bytes: 4290096},
   garden:       {file: 'mobile-tur10/GARDEN-opt-v3.ktx2.glb', bytes: 5837528},
 });
-export function applyTur10(manifest, {mobile = false} = {}) {
+// 03.10 masaüstü 1K: renk dokuları kaynak çözünürlüğünde (1024; normal/pürüzlülük 512) - make-ktx1k.mjs.
+// 512'de parke, fayans, kumaş ve sıva bulanıktı. Aynı geometri ve UV; bayrak: textures1k.
+export const TUR10_MODELS_1K = Object.freeze({
+  architecture: {file: 'ktx1k/BUILDING-opt-v6.ktx2.glb', bytes: 20785012},
+  interior:     {file: 'ktx1k/INTERIOR-opt-v3.ktx2.glb', bytes: 21271140},
+  garden:       {file: 'ktx1k/GARDEN-opt-v3.ktx2.glb', bytes: 13968576},
+});
+export function applyTur10(manifest, {mobile = false, textures1k = false} = {}) {
   if (!manifest?.parts || !manifest.batched) return [];
-  const table = mobile ? TUR10_MODELS_MOBILE : TUR10_MODELS;
+  const table = mobile ? TUR10_MODELS_MOBILE : textures1k ? TUR10_MODELS_1K : TUR10_MODELS;
   const swapped = [];
   for (const part of manifest.parts) {
     const next = table[part.name];
