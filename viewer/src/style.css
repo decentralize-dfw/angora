@@ -97,6 +97,16 @@ h1 strong{font-weight:700}
 .lang-flag b{font-size:11.5px;font-weight:650;letter-spacing:.08em;color:var(--ink)}
 .lang-flag:hover{opacity:.85;filter:none}
 .lang-flag[aria-pressed=true]{opacity:1;filter:none;color:var(--ink);background:rgba(255,255,255,.72);box-shadow:inset 0 0 0 1px var(--edge)}
+/* 03.10 ses anahtarı: dil kapsülünün sonunda küçük hoparlör; açıkken dalga, kapalıyken çarpı. */
+.sound-toggle{min-height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center;
+  background:transparent;border:0;box-shadow:none;padding:0 9px;margin-left:2px;opacity:.75;transition:opacity .18s ease}
+.sound-toggle:hover{opacity:1}
+.sound-toggle svg{width:16px;height:16px;fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sound-toggle svg path:first-child{fill:var(--ink);stroke:none}
+.sound-toggle .sound-mute{display:none}
+.sound-toggle[aria-pressed=false] .sound-wave{display:none}
+.sound-toggle[aria-pressed=false] .sound-mute{display:inline}
+.sound-toggle[aria-pressed=false]{opacity:.4}
 
 /* --------------------------------------------------------- scale picker */
 .scale-picker{display:flex;top:max(18px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);gap:3px;padding:4px;border-radius:999px}

@@ -136,7 +136,7 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
   // conversion itself when it draws to the canvas, so the image keeps its
   // exposure and its colour; it loses the crevice shading and the glare.
   const compactOutput=q.compactOutput?new CompactOutput():null;
-  let composer=null,beauty=null,ao=null,bloomPass=null,gradePass=null,ssrPass=null,ssrPoolRect=null;
+  let composer=null,beauty=null,ao=null,bloomPass=null,gradePass=null,ssrPass=null,ssrPoolRect=null,autoExposure=null;
   // Task 4.2: the composer and everything behind it (GTAO, SMAA, bloom,
   // grade, dither) load through a dynamic seam. A phone's quality row never
   // asks for postProcessing, so a phone never downloads a byte of it; on
@@ -146,8 +146,8 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
   let postfxSize=null,postfxRatio=null;
   const postfxReady=q.postProcessing
     ?import('./postfx-chain.js').then(({buildPostfxChain})=>{
-      const chain=buildPostfxChain({renderer,scene,camera,clip,quality:q,postfxV2:FEATURES.postfxV2});
-      ({composer,beauty,ao}=chain);bloomPass=chain.bloom;gradePass=chain.grade;
+      const chain=buildPostfxChain({renderer,scene,camera,clip,quality:q,postfxV2:FEATURES.postfxV2,daylight:()=>currentDaylight});
+      ({composer,beauty,ao}=chain);bloomPass=chain.bloom;gradePass=chain.grade;autoExposure=chain.autoExposure??null;
       // İŞ 1: the pool may have registered its rect before the chain landed
       ssrPass=chain.ssr??null;if(ssrPass&&ssrPoolRect)ssrPass.setPoolRect(ssrPoolRect);
       if(postfxRatio)composer.setPixelRatio(postfxRatio);
@@ -508,6 +508,9 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
         sunPosition:sun.position.toArray().map(v=>Math.round(v*10)/10),target:sun.target.position.toArray().map(v=>Math.round(v*10)/10)},
       textures:[groundLight?.texture,floorLight?.texture,...(electricLight?.textures??[]),environment?.texture].filter(Boolean)};},
     setStyle(style){soft=style!=='sun';setTime();},
+    // V-RAY C3: true while the eye-adaptation is still easing toward its target.
+    exposureAdapting(){return Boolean(autoExposure?.adapting);},
+    autoExposure(){return autoExposure;},
     postfxReady,
     releaseMaterial(material){preparedMaterials.delete(material);reflectionMaterials.delete(material);},
     prepareMesh(object,{clipped,context,name}) {

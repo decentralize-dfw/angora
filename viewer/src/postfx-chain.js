@@ -9,14 +9,15 @@ import {LinearBloomPass} from './linear-bloom.js';
 import {GradeShader, GRADE} from './grade-pass.js';
 // display-dither: İŞ 3.4 ile grade'e katlandı; shader referans olarak duruyor.
 import {configurePostprocessing} from './postprocessing.js';
-import {referenceProfile} from './render-profile.js';
+import {referenceProfile, neutralCurve} from './render-profile.js';
+import {createAutoExposure} from './auto-exposure.js';
 import {FEATURES} from './features.js';
 
 // Task 4.2: the whole desktop composer - passes, their shaders, GTAO's
 // tables - lives behind this dynamic seam. A phone's quality row never asks
 // for it, so a phone never downloads it; desktop pays it after boot, off
 // the critical path. The build stays exactly the chain 1.1b shipped.
-export function buildPostfxChain({renderer, scene, camera, clip, quality, postfxV2}) {
+export function buildPostfxChain({renderer, scene, camera, clip, quality, postfxV2, daylight = () => 1}) {
   const target = new THREE.WebGLRenderTarget(1, 1, {type: THREE.HalfFloatType, samples: referenceProfile.msaaSamples});
   const composer = new EffectComposer(renderer, target);
   const beauty = new RenderPass(scene, camera);
@@ -55,6 +56,12 @@ export function buildPostfxChain({renderer, scene, camera, clip, quality, postfx
     grade.material.uniforms.uSat.value = 0.88;   // ürün sahibi: 0.94 hâlâ fazla doygun
     grade.material.uniforms.uContrast.value = 0.96; // ve fazla kontrastlı
     grade.material.uniforms.uVig.value.y = 0.08;
+    // V-RAY C2: PBR Neutral has no saturation push of its own to take back,
+    // and no shoulder squeeze to soften - only a light trim stays.
+    if (neutralCurve()) {
+      grade.material.uniforms.uSat.value = 0.94;
+      grade.material.uniforms.uContrast.value = 1;
+    }
   } else if (FEATURES.warmGradeV1) {
     // Ürün sahibi ilk turda "renkler çok depresif" dedi: kontrast 0.92 ile
     // düşürülmüş, doygunluk taban değerinde ve sis rengi emiyordu. Sis
@@ -67,6 +74,16 @@ export function buildPostfxChain({renderer, scene, camera, clip, quality, postfx
     grade.material.uniforms.uVig.value.y = 0.03;
   }
   const ssr = quality.ssr ? new SsrPass(ao, camera) : null;
+  // V-RAY C3: the grade pass's input is the finished HDR frame - meter it
+  // there and hand the shader its adaptation multiplier.
+  const autoExposure = FEATURES.autoExposure ? createAutoExposure(renderer, {daylight}) : null;
+  if (autoExposure) {
+    const renderGrade = grade.render.bind(grade);
+    grade.render = (r, writeBuffer, readBuffer, deltaTime, maskActive) => {
+      grade.material.uniforms.uAuto.value = autoExposure.update(readBuffer.texture);
+      renderGrade(r, writeBuffer, readBuffer, deltaTime, maskActive);
+    };
+  }
   configurePostprocessing(composer, {beauty, ao, ssr, smaa, bloom, output: grade});
-  return {composer, beauty, ao, ssr, bloom, grade};
+  return {composer, beauty, ao, ssr, bloom, grade, autoExposure};
 }

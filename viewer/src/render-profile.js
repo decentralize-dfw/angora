@@ -1,4 +1,4 @@
-import {ACESFilmicToneMapping,AgXToneMapping,SRGBColorSpace,PCFSoftShadowMap} from 'three';
+import {ACESFilmicToneMapping,AgXToneMapping,NeutralToneMapping,SRGBColorSpace,PCFSoftShadowMap} from 'three';
 import {FEATURES} from './features.js';
 
 // Started from EDETRI's production baseline, and departs from it where the
@@ -32,10 +32,18 @@ export const referenceProfile=Object.freeze({name:'edetri-production-baseline-ag
 // is not simply darker: the sun carries more, the fill carries less.
 export const DAYLIGHT_EXPOSURE=0.8;
 export const daylightCurve=()=>Boolean(FEATURES.daylightV2);
-export const baseExposure=()=>daylightCurve()?DAYLIGHT_EXPOSURE:referenceProfile.exposure;
+// V-RAY C2 (neutralTone): Khronos PBR Neutral is linear up to ~0.76 and only
+// then rolls off - no hue skew, no saturation push, so materials keep their
+// catalogue colour. 1.1 puts mid-grey (0.18) where ACES at 0.8 puts it
+// (0.158 out), so the swap changes the curve, not the brightness.
+export const NEUTRAL_EXPOSURE=1.1;
+export const neutralCurve=()=>Boolean(FEATURES.neutralTone);
+export const baseExposure=()=>neutralCurve()?NEUTRAL_EXPOSURE:daylightCurve()?DAYLIGHT_EXPOSURE:referenceProfile.exposure;
+// Grade-shader curve id: 0 AgX, 1 ACES, 2 PBR Neutral.
+export const curveId=()=>neutralCurve()?2:daylightCurve()?1:0;
 
 export function applyRenderProfile(renderer) {
-  renderer.toneMapping=daylightCurve()?ACESFilmicToneMapping:AgXToneMapping;
+  renderer.toneMapping=neutralCurve()?NeutralToneMapping:daylightCurve()?ACESFilmicToneMapping:AgXToneMapping;
   renderer.toneMappingExposure=baseExposure();
   renderer.outputColorSpace=SRGBColorSpace;
   renderer.transmissionResolutionScale=1;

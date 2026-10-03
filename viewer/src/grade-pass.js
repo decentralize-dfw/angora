@@ -20,7 +20,7 @@
 // paths, which bypass this chain.
 import {Vector3} from 'three';
 import {FINITE_RGB} from './linear-bloom.js';
-import {baseExposure,daylightCurve} from './render-profile.js';
+import {baseExposure,curveId} from './render-profile.js';
 
 // Restrained, and inside the range the reference's own lighting rigs use
 // (saturation 0.94-1.06, gain 0.90-1.05, lift up to 0.014), except saturation,
@@ -41,9 +41,12 @@ export const GradeShader = {
   uniforms: {
     tDiffuse: {value: null},
     uExposure: {value: baseExposure()},
-    // ADIM 2: 1 = ACES (daylightV2), 0 = AgX. A uniform, not a define, so the
-    // same program serves both and a flag flip never recompiles.
-    uCurve: {value: daylightCurve() ? 1 : 0},
+    // ADIM 2: 1 = ACES (daylightV2), 0 = AgX, 2 = PBR Neutral (V-RAY C2).
+    // A uniform, not a define, so one program serves all and a flag flip
+    // never recompiles.
+    uCurve: {value: curveId()},
+    // V-RAY C3: eye adaptation multiplier (auto-exposure.js). 1 = off.
+    uAuto: {value: 1},
     uLift: {value: new Vector3(...GRADE.lift)},
     uGain: {value: new Vector3(...GRADE.gain)},
     uSat: {value: GRADE.saturation},
@@ -65,7 +68,7 @@ export const GradeShader = {
   fragmentShader: `
     varying vec2 vUv;
     uniform sampler2D tDiffuse;
-    uniform float uExposure,uSat,uGrain,uContrast,uBloomStrength,uBloomClamp,uCurve;
+    uniform float uExposure,uSat,uGrain,uContrast,uBloomStrength,uBloomClamp,uCurve,uAuto;
     uniform vec3 uLift,uGain,uVig,uWarm;
     uniform sampler2D uGlare;
     ${FINITE_RGB}
@@ -130,6 +133,21 @@ export const GradeShader = {
       color=outM*gradeAcesFit(inM*color);
       return clamp(color,0.0,1.0);
     }
+    // Khronos PBR Neutral (three r180's NeutralToneMapping), exposure applied above.
+    vec3 gradeNeutral(vec3 color){
+      const float StartCompression=0.8-0.04;
+      const float Desaturation=0.15;
+      float x=min(color.r,min(color.g,color.b));
+      float offset=x<0.08?x-6.25*x*x:0.04;
+      color-=offset;
+      float peak=max(color.r,max(color.g,color.b));
+      if(peak<StartCompression)return color;
+      float d=1.0-StartCompression;
+      float newPeak=1.0-d*d/(peak+d-StartCompression);
+      color*=newPeak/peak;
+      float g=1.0-1.0/(Desaturation*(peak-newPeak)+1.0);
+      return mix(color,vec3(newPeak),g);
+    }
     vec3 linearToSRGB(vec3 c){
       return mix(c*12.92,1.055*pow(max(c,vec3(0.0)),vec3(0.41666))-0.055,step(vec3(0.0031308),c));
     }
@@ -137,7 +155,7 @@ export const GradeShader = {
     void main(){
       vec3 c=texture2D(tDiffuse,vUv).rgb;
       if(uBloomStrength>0.0)c=finiteRgb(c,uBloomClamp)+finiteRgb(texture2D(uGlare,vUv).rgb,uBloomClamp)*uBloomStrength;
-      c*=uExposure;
+      c*=uExposure*uAuto;
       c=uLift+c*(uGain-uLift);
       float lum=dot(c,vec3(0.2126,0.7152,0.0722));
       c=mix(vec3(lum),c,uSat);
@@ -150,7 +168,7 @@ export const GradeShader = {
       c+=n*uGrain;
       float dv=distance(vUv,vec2(0.5,uVig.z));
       c*=1.0-smoothstep(uVig.x,0.92,dv)*uVig.y;
-      c=uCurve>0.5?gradeAces(max(c,vec3(0.0))):agxToneMap(max(c,vec3(0.0)));
+      c=uCurve>1.5?clamp(gradeNeutral(max(c,vec3(0.0))),0.0,1.0):uCurve>0.5?gradeAces(max(c,vec3(0.0))):agxToneMap(max(c,vec3(0.0)));
       vec3 srgb=linearToSRGB(c);
       // display-dither buraya katlandı: yalnız ÇIKARIR, eğrinin üst sınırı
       // dokunulmaz (display-dither.js'in ölçülmüş gerekçesi aynen).

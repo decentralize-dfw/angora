@@ -51,7 +51,7 @@ import {mergeEqualMaterials,abstractVehicle,splitContextSoil,splitContextBuildin
 const PLANTING=/spruce|needle|foliage|hedge|leaves|leaf|shrub|tree|branch|trunk|planting/i;
 import {createLift,SHAFT} from './lift.js';
 import {handleEscape} from './interface-actions.js';
-import {createInterfaceSound} from './interface-sound.js';
+import {createSoundscape} from './soundscape.js';
 import {createDeviceQA} from './device-qa.js';
 import {readShareState,shareSearch} from './share-state.js';
 import {referenceProfile} from './render-profile.js';
@@ -341,6 +341,7 @@ function renderFrame(time) {
         if(key!==locationPendingKey){locationPendingKey=key;locationPendingSince=time;}
         else if(key!==locationKey&&time-locationPendingSince>380){
           locationKey=key;
+          interfaceSound?.set({outdoor:Boolean(here.outdoor)});
           if(here.outdoor)applyWalkLocation(t(walk.floor>=2?'terrace':'garden'),null);
           else if(here.stairs)applyWalkLocation(t('stairs'),null);
           else if(here.station)applyWalkLocation(roomName(here.station.name),here.station);
@@ -371,6 +372,7 @@ function renderFrame(time) {
     // on ?stats/?camera so a visitor's orbit pays no string build or DOM write.
     if(FRAME_STATS)host.dataset.runtime=JSON.stringify({view:selected,plan:planMode,projection:activeCamera.type,cameraPosition:activeCamera.position.toArray(),target:controls.target.toArray(),sectionHeight:clip.constant,loaded:nativeDelivery?[...nativeDelivery.loaded.keys()]:[...groups.keys()],zoom:activeCamera.zoom,autoRotate:controls.autoRotate,zoomEnabled:controls.enableZoom,rotate:controls.mouseButtons.LEFT===THREE.MOUSE.ROTATE,transition:Boolean(transition),textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,rooms:Boolean(groups.get('interior')?.visible),lamps:lighting?.snapshot?.().interior?.map(f=>Math.round(f.rendered_intensity_cd))??[],glazing:lighting?.snapshot?.().glazing??0});
     renderer.info.reset();
+    {const ae=lighting.autoExposure?.();if(ae)ae.active=Boolean(walk?.active&&!walk.xrActive&&!planMode);}
     lighting.render(activeCamera);
     {const sl=lighting?.sunLight?.();if(sl&&neighbourLines)neighbourLines.setLight(sl.direction,sl.daylight);}
     neighbourLines?.render(scene,activeCamera);
@@ -385,7 +387,7 @@ function renderFrame(time) {
     }
     deviceQA?.sample(time,{draw_calls:renderer.info.render.calls,triangles:renderer.info.render.triangles,
       drawing_buffer:`${renderer.domElement.width}×${renderer.domElement.height}`,view:walk?.active?`${selected}:walk`:selected});
-    if(controls.autoRotate||changing||transition||flying||zooming||lightChanging||massingChanging||liftChanging||deviceQA?.active)invalidate();
+    if(controls.autoRotate||changing||transition||flying||zooming||lightChanging||massingChanging||liftChanging||deviceQA?.active||lighting?.exposureAdapting?.())invalidate();
     // FAZ 5: a still camera on desktop-high earns the cinema treatment -
     // 400 ms of quiet, then up to 24 jittered samples accumulate soft
     // shadows and settled AO. Any new frame request cancels instantly.
@@ -828,7 +830,7 @@ function setup() {
   lighting = createLighting(renderer, scene, camera, clip,{quality,dolphinUrl:new URL(pages?'assets/textures/pool-dolphin.webp':'textures/pool-dolphin.webp',publicRoot).href});
   // Task 4.2: the desktop postfx chain arrives through a dynamic import;
   // a capture must not screenshot the canvas-path frames it bridges with.
-  window.__angoraPostfxReady=lighting.postfxReady?.then?.(chain=>{if(chain)invalidate();return Boolean(chain);});
+  window.__angoraPostfxReady=lighting.postfxReady?.then?.(chain=>{if(chain?.autoExposure)chain.autoExposure.onChange=invalidate;if(chain)invalidate();return Boolean(chain);});
   // bindInterface() ran before this, so the controls may already carry values
   // from a shared link. Push them in before the first frame is drawn.
   lighting.setStyle($('#lighting-style').value);
@@ -963,6 +965,7 @@ async function selectView(id, initial = false) {
   }
   if (walk?.active) exitWalk(false);
   const previous = selected; selected = id;
+  interfaceSound?.set({view:id});
   quality?.applyView(id,{plan:planMode,walking:walk?.active});
   // The pin that opened a frame is about to leave the screen, so the frame
   // goes with it rather than hanging over another storey.
@@ -1302,6 +1305,7 @@ function refreshTourLabels(){
   play.setAttribute('aria-label',play.dataset.state==='paused'?play.dataset.playLabel:play.dataset.pauseLabel);
 }
 async function applyTourStep(step){
+  interfaceSound?.set({tourView:step.view});
   if(walk?.active)exitWalk(false);
   photoViewer?.hide();
   $('#tour-listing').hidden=!step.link;
@@ -1562,10 +1566,12 @@ async function startTour(){
   planMode=false;$('#toggle-plan').setAttribute('aria-pressed',false);$('#toggle-plan').textContent='Plan';mode(false);
   $('#tour-bar').hidden=false;$('#app').dataset.tour='true';
   invalidateUIObstacles();
+  interfaceSound?.intro();
   guidedTour.start();
 }
 function endTour(openInfo){
   guidedTour?.stop();
+  interfaceSound?.set({tourView:null});
   $('#tour-bar').hidden=true;$('#app').dataset.tour='false';
   $('#tour-listing').hidden=true;
   clearTourReveal();setTourPhotos([]);setTourWindows(false);setTourSweep(null);
@@ -1676,6 +1682,7 @@ function enterWalk(roomId, at=null) {
   ensureRoomProbe(station.floor_index);
   controls.enabled=false;clip.constant=fullHeight;earthClip.constant=fullHeight;transition=null;lighting.frame('building');massing?.set('building');
   lighting.setWalkInterior(true);
+  interfaceSound?.set({walking:true});interfaceSound?.transition(1100,false);
   // after the section plane is raised, or canRun() reads the previous cut
   lift?.setWalkActive(true);lift?.setWalkFloor(station.floor_index);refreshLiftControl();
   regionMap?.hide();
@@ -1694,6 +1701,7 @@ function exitWalk(reselect = true) {
   quality?.applyView(selected,{walking:false,plan:planMode});
   nativeDelivery?.setWalkMode(false,selected);
   lighting.setWalkInterior(false);
+  interfaceSound?.set({walking:false});
   lighting.interior(null,null);
   lift?.setWalkActive(false);lift?.cancel();refreshLiftControl();
   $('.camera-tools').hidden=false;$('#walk-tools').hidden=true;$('#enter-walk').hidden=false;
@@ -2664,7 +2672,7 @@ function bindInterface() {
     idle(async()=>{
       const [gallery,points]=await Promise.all([import('./photo-gallery.js'),import('./photo-points.js')]);
       photoPoints=points;
-      photoPins = gallery.createPhotoPins(host, photoRoot, {onOpen: id => {photoViewer.show(id); invalidate();}});
+      photoPins = gallery.createPhotoPins(host, photoRoot, {onOpen: id => {interfaceSound?.open(); photoViewer.show(id); invalidate();}});
       photoViewer = gallery.createPhotoViewer({
         dock: $('#photo-dock'), figure: $('#photo-view'), image: $('#photo-image'), caption: $('#photo-caption'),
         close: $('#photo-close'), backdrop: $('#photo-backdrop'), pins: photoPins,
@@ -2696,7 +2704,7 @@ function bindInterface() {
   $('#open-info').onclick=()=>panel('info-panel',$('#info-panel').hidden);
   $('#open-floor').onclick=()=>panel('floor-panel',$('#floor-panel').hidden);
   document.querySelectorAll('[data-close-panel]').forEach(button=>button.onclick=()=>panel('',false));
-  $('#daylight-hour').oninput=()=>{const hour=Number($('#daylight-hour').value);$('#daylight-time').textContent=clockLabel(hour);$('#daylight-hour').setAttribute('aria-valuetext',clockLabel(hour));lighting?.setTime(hour,Number($('#daylight-season').value));applyNightHouse();rememberState();invalidate();};
+  $('#daylight-hour').oninput=()=>{const hour=Number($('#daylight-hour').value);setTimeout(()=>{const sl=lighting?.sunLight?.();if(sl)interfaceSound?.set({daylight:Math.round(sl.daylight*10)/10});});$('#daylight-time').textContent=clockLabel(hour);$('#daylight-hour').setAttribute('aria-valuetext',clockLabel(hour));lighting?.setTime(hour,Number($('#daylight-season').value));applyNightHouse();rememberState();invalidate();};
   $('#daylight-season').onchange=()=>{$('#daylight-hour').oninput();lighting?.requestShadowUpdate();invalidate();};
   // Task 1.2-c: the shadow map re-renders when the hand SETTLES on an hour
   // (change fires on release/keyup), never per drag tick.
@@ -2710,7 +2718,7 @@ function bindInterface() {
   markLanguage();
   const dismissWelcome=()=>{$('#welcome').hidden=true;try{sessionStorage.setItem('angora-welcome','1');}catch{/* private mode */}};
   $('#welcome-close').onclick=dismissWelcome;
-  $('#welcome-explore').onclick=()=>{dismissWelcome();if(ready)selectView('f1');};
+  $('#welcome-explore').onclick=()=>{dismissWelcome();interfaceSound?.sting();if(ready)selectView('f1');};
   $('#welcome-tour').onclick=()=>{dismissWelcome();startTour();};
   $('#start-tour').onclick=()=>{dismissWelcome();startTour();};
   $('#tour-exit').onclick=()=>endTour(false);
@@ -2796,7 +2804,11 @@ if(qaQuery.get('debug')==='quality'){
     ].join('\n');
   },500);
 }
-interfaceSound=createInterfaceSound({button:$('#toggle-sound')});
+// 03.10: the ElevenLabs soundscape replaces the synthesized click/swell (the
+// old module stays for reference). On by default, starts on the first press,
+// one speaker switch beside the language pill silences all of it.
+interfaceSound=createSoundscape({buttons:[...document.querySelectorAll('[data-sound-toggle]'),$('#toggle-sound')].filter(Boolean),audioRoot:new URL('11lbs/',audioRoot)});
+interfaceSound.set({view:selected});
 try {
   setup();
   loadModel();
