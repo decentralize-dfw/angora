@@ -50,7 +50,7 @@ for (const point of photos) {
     const name = `${base}-${width}.webp`;
     wanted.add(name);
     const file = fileURLToPath(new URL(name, OUT));
-    if (existsSync(file)) {produced += statSync(file).size; skipped++; continue;}
+    if (existsSync(file) && !process.env.FORCE) {produced += statSync(file).size; skipped++; continue;}
     await sharp(input).resize({width, withoutEnlargement: true})
       .webp({quality: 82, effort: 5}).toFile(file);
     produced += statSync(file).size; made++;
