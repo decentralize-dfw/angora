@@ -334,12 +334,11 @@
         .fromTo('.ritual-c', {yPercent:140, rotation:-10}, {yPercent:-115, rotation:0, duration:1, ease:'none'}, 0)
         .to('.ritual-scene h2', {yPercent:-12, duration:1, ease:'none'}, 0);
       chapterTrigger = ScrollTrigger.create({...scrub('.chapters'), onUpdate:self => {setChapter(Math.min(3, Math.floor(self.progress * 4))); seekFilm(self.progress);}});
+      // Keep the neighbourhood legible until a complete scene handoff is chosen.
+      // The motion study documents the coupled footer and architectural masks.
       gsap.timeline({scrollTrigger:scrub('.life-opening')})
-        .to('.life-landscape',{clipPath:mobile?'inset(10% 5% 10% 5%)':'inset(10% 8% 10% 8%)',duration:.25,ease:'power2.inOut'},.12)
-        .to('.life-opening-copy',{y:-70,opacity:0,duration:.2},.28)
-        .to('.life-landscape',{clipPath:mobile?'inset(23% 12% 20% 12%)':'inset(12% 24% 12% 24%)',duration:.28,ease:'power2.inOut'},.4)
-        .fromTo('.life-landscape img',{scale:1.12},{scale:1,duration:1,ease:'none'},0)
-        .to('.life-landscape',{clipPath:'inset(0% 0% 0% 0%)',duration:.3,ease:'power2.inOut'},.7);
+        .fromTo('.life-landscape img',{scale:1.08},{scale:1,duration:1,ease:'none'},0)
+        .to('.life-opening-copy',{y:-40,opacity:0,duration:.3},.55);
       $$('.reveal').forEach(element => gsap.from(element, {y:45, opacity:0, duration:1.15, ease:'power2.out', scrollTrigger:{trigger:element, start:'top 92%', once:true}}));
       $$('.detail-photo').forEach(element => gsap.fromTo(element, {y:60, rotation:3}, {y:-35, rotation:-3, ease:'none', scrollTrigger:{trigger:element.closest('.editorial'), start:'top bottom', end:'bottom top', scrub:1}}));
       gsap.fromTo('.location-image img', {scale:1.14}, {scale:1, ease:'none', scrollTrigger:{trigger:'.location', start:'top bottom', end:'bottom top', scrub:1}});
