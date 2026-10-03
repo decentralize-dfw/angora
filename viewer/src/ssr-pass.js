@@ -73,6 +73,8 @@ export const SsrShader = {
       vec3 viewNormal = normalize(texture2D(tNormal, vUv).xyz * 2.0 - 1.0);
       vec3 worldNormal = mat3(uCameraWorld) * viewNormal;
       if (worldNormal.y < NORMAL_GATE) return;                // floors only
+      float gloss = texture2D(tNormal, vUv).a;                // V-RAY B2: parlaklık maskesi
+      if (gloss < 0.05) return;                               // mat yüzey: yansıma yok
       vec3 worldPos = (uCameraWorld * vec4(viewPos, 1.0)).xyz;
       if (worldPos.x > uPoolRect.x && worldPos.z > uPoolRect.y &&
           worldPos.x < uPoolRect.z && worldPos.z < uPoolRect.w) return;  // pool water owns itself
@@ -108,7 +110,7 @@ export const SsrShader = {
       float edge = smoothstep(0.0, 0.08, min(min(hitUv.x, 1.0 - hitUv.x), min(hitUv.y, 1.0 - hitUv.y)));
       float travel = 1.0 - clamp(distance(hit, viewPos) / MAX_DISTANCE, 0.0, 1.0);
       float fresnel = pow(1.0 - clamp(dot(-viewDir, viewNormal), 0.0, 1.0), 5.0);
-      float weight = uStrength * edge * travel * (0.18 + 0.82 * fresnel);
+      float weight = uStrength * edge * travel * (0.18 + 0.82 * fresnel) * gloss;
       vec3 reflection = texture2D(tDiffuse, hitUv).rgb;
       gl_FragColor = vec4(mix(source.rgb, reflection, clamp(weight, 0.0, 0.85)), source.a);
     }`,

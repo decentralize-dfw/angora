@@ -57,7 +57,7 @@ export const DEFAULT_FEATURES = Object.freeze({
   // düşük kontrast, açılış saati 13:30. ?features=warmGradeV1:1 ile A/B.
   warmGradeV1: true,           // AÇIK - ürün sahibi pusu defalarca bildirdi ve aydınlık sürümü tercih etti: sis yakın çevreden kalkar, gök 0.85, kararma terimleri düşer, grade gölgeleri kaldırıp orta tonları ısıtır, açılış 13:30. Eski hal: ?features=warmGradeV1:0
   gradeAnyGridV1: true,        // MALZEME İŞ 2 - grid şartı kalktı: hücre-bazlı gerçek dokular (çim/asfalt dünya-uzayı, komşu çatıları villa kiremidiyle aynı ölçek, cephe kum albedosu). Kapatmak: ?features=gradeAnyGridV1:0
-  screenSpaceReflection: false, // KAPALI (27.09): ürün sahibi kıyasladı - kapalıyken dış cephe daha az karanlık; SSR mat sıvaya da karanlık yansıma basıyordu. Açmak: ?features=screenSpaceReflection:1
+  screenSpaceReflection: true, // V-RAY B2 (04.10): AÇIK - yalnız parlak zeminlerde (normal geçişinin alfa kanalı = parlaklık maskesi: parke, seramik, mozaik; mat sıva 0). 27.09'daki kapatma sebebi (mat sıvaya koyu yansıma) maskeyle giderildi. Yalnız masaüstü post zinciri. Kapatmak: ?features=screenSpaceReflection:0
   softShadowsV2: true,         // AÇIK (ölçüldü: prog -1, draw/tri/tex +0, konsol 0). PCSS 17+25=42 gölge örneği/piksel (statik sayım; eski PCF 9)
   windowPortalLight: false, // KAPALI (27.09): 17 pencere alan ışığı villa katına girişte yeni modelin HER malzemesine 17 LTC döngüsü ekliyordu -> kat açılırken dev shader derlemesi (villaya tıklayınca kilit). Açmak: ?features=windowPortalLight:1
   proceduralDetailHigh: true,  // AÇIK (ölçüldü: prog -1, geri kalan +0, konsol 0; ALU statik 210 skaler op - masaüstünde tavan yok, ölç-ve-yaz)

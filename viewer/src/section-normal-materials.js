@@ -7,15 +7,26 @@ export function createSectionNormalMaterials(template){
   // source material; the memo is re-validated against the live plane list, so
   // a material whose clipping set changes still finds its correct variant.
   const memo=new WeakMap(),originals=[];
-  const matches=(v,planes,intersection)=>v.intersection===intersection&&v.planes.length===planes.length&&v.planes.every((p,i)=>p===planes[i]);
+  // V-RAY B2: normal hedefinin alfa kanalı = malzemenin parlaklığı (0 mat, 1 cilalı).
+  // SSR yalnız bu maskenin olduğu yerde yansıtır - mat sıvaya koyu yansıma basmaz.
+  // Parlaklık roughness'tan: 0,45 ve üstü 0, 0,12 ve altı 1; dört kademeye yuvarlanır.
+  // Zemin malzemelerinin pürüzlülüğü dokudan gelir (faktör 1 okunur); onlar adlarından tanınır.
+  const FLOOR_GLOSS=[[/wood_floor|WOOD-FL|parke|parquet/i,.5],[/tile|seramik|ceramic|porcelain|mosaic|mermer|marble/i,.66],[/terra_floor/i,.33]];
+  const glossOf=m=>{
+    if(Number.isFinite(m.userData?.ssrGloss))return m.userData.ssrGloss;
+    const named=FLOOR_GLOSS.find(([rx])=>rx.test(m.name??''));
+    let g=named?named[1]:(m.roughnessMap?0:Math.max(0,Math.min(1,(.45-(m.roughness??1))/(.45-.12))));
+    g=Math.round(g*3)/3;if(m.userData)m.userData.ssrGloss=g;return g;};
+  const matches=(v,planes,intersection,gloss)=>v.intersection===intersection&&v.gloss===gloss&&v.planes.length===planes.length&&v.planes.every((p,i)=>p===planes[i]);
   function materialFor(source){
-    const planes=source.clippingPlanes??[],intersection=Boolean(source.clipIntersection);
+    const planes=source.clippingPlanes??[],intersection=Boolean(source.clipIntersection),gloss=glossOf(source);
     const known=memo.get(source);
-    if(known&&matches(known,planes,intersection))return known.material;
-    let row=variants.find(v=>matches(v,planes,intersection));
+    if(known&&matches(known,planes,intersection,gloss))return known.material;
+    let row=variants.find(v=>matches(v,planes,intersection,gloss));
     if(!row){
       const material=template.clone();material.clippingPlanes=planes.map(p=>p.clone());material.clipIntersection=intersection;
-      row={planes:[...planes],intersection,material};variants.push(row);
+      material.opacity=gloss;material.transparent=false;   // alfa = parlaklık maskesi (karıştırma yok)
+      row={planes:[...planes],intersection,gloss,material};variants.push(row);
     }
     memo.set(source,row);
     return row.material;
