@@ -281,7 +281,7 @@ function updateMobileCull(){
 function renderFrame(time) {
     const cpuStart=performance.now(),measuredTransition=transition;
     framePending = false;
-    idleRefining=false;clearTimeout(idleRefineTimer);
+    idleRefining=false;clearTimeout(idleRefineTimer);tracing=false;clearTimeout(traceTimer);
     if(contextLost)return;
     updateMobileCull();
     if (transition) {
@@ -423,8 +423,49 @@ function renderFrame(time) {
     // FAZ 5: a still camera on desktop-high earns the cinema treatment -
     // 400 ms of quiet, then up to 24 jittered samples accumulate soft
     // shadows and settled AO. Any new frame request cancels instantly.
-    else scheduleIdleRefine();
+    else {scheduleIdleRefine();scheduleIdleTrace();}
 }
+// V-RAY E: boşta ışın izleme (pathtrace-still.js). Masaüstü, kamera binanın içindeyken.
+const traceCamera=()=>walk?.active?walk.camera:camera;
+let pathTrace=null,traceTimer=null,tracing=false,traceBox=null;
+const traceAllowed=()=>FEATURES.pathTraceStill&&ready&&!contextLost&&quality?.value?.tier?.startsWith('desktop')&&!presentationRecording;
+function cameraInsideBuilding(){
+  const arch=groups.get('architecture');if(!arch)return false;
+  traceBox??=new THREE.Box3().setFromObject(arch);
+  return traceBox.containsPoint(traceCamera().position);
+}
+async function ensurePathTrace(){
+  pathTrace??=(await import('./pathtrace-still.js')).createPathTraceStill({renderer,
+    getRoots:()=>['architecture','interior','garden','context-ground'].map(n=>groups.get(n)).filter(g=>g?.visible),
+    getLights:()=>lighting.traceLights(),getSky:()=>lighting.traceSky()});
+  return pathTrace;
+}
+function drawBaseFrame(){lighting.render(traceCamera());}
+function scheduleIdleTrace(){
+  clearTimeout(traceTimer);tracing=false;
+  if(!traceAllowed())return;
+  traceTimer=setTimeout(async()=>{
+    if(framePending||!cameraInsideBuilding())return;
+    const tracer=await ensurePathTrace();
+    if(framePending||tracer.broken)return;
+    tracing=true;
+    if(!await tracer.start(traceCamera(),drawBaseFrame)||framePending||!tracing){tracing=false;return;}
+    const step=()=>{
+      if(!tracing||framePending){tracing=false;return;}
+      if(tracer.step())requestAnimationFrame(step);else tracing=false;
+    };
+    requestAnimationFrame(step);
+  },700);
+}
+// QA: aynı yol, eşzamanlı - yazılım rasterleştiricide ekran görüntüsü için
+if(typeof window!=='undefined')window.__angoraPathTrace=async(samples=64,fresh=true)=>{
+  if(!FEATURES.pathTraceStill)return 0;
+  clearTimeout(traceTimer);tracing=false;
+  const tracer=await ensurePathTrace();
+  if(fresh&&!await tracer.start(traceCamera(),drawBaseFrame))return -1;
+  let count=0;while(count<samples&&tracer.step())count=tracer.samples;
+  return tracer.samples;
+};
 let idleRefine=null,idleRefineTimer=null,idleRefining=false,cinemaBroken=false;
 // V-RAY C1: birikim kararırsa (öz-denetim) bu oturumda kapanır, normal kare geri gelir.
 const armRefine=refine=>{refine.onBroken??=info=>{console.warn('cinemaStill kendini kapattı',info);cinemaBroken=true;idleRefining=false;invalidate();};return refine;};

@@ -353,6 +353,9 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
     return solar;
   }
   return {
+    // V-RAY E: ışın izleyiciye verilen ışıklar ve gök (pathtrace-still.js)
+    traceLights(){return [sun,...interior.filter(l=>l.visible&&l.intensity>0)];},
+    traceSky(){return {texture:scene.background,intensity:scene.backgroundIntensity??1};},
     setRoomReflections(value){roomReflections=value;updateReflections();},
     // V-RAY B1: kat başına sonda kutusu (box-probe.js)
     setReflectionBoxes(boxes){reflectionBoxes=boxes;updateReflections();},
