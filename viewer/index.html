@@ -295,13 +295,6 @@
 <main id="app" data-scale="neighborhood" data-booting="true">
   <div id="viewport" aria-label="Angora villasının etkileşimli 3D modeli" data-i18n-label="a11yViewport"></div>
   <div id="cloud-transition" aria-hidden="true"></div>
-  <!-- 03.10 ses seçenekleri (deneme): bestelenmiş piyano, üç senaryo, sol ortada. -->
-  <div class="sound-presets" role="group" aria-label="Ses seçeneği" data-i18n-label="soundPreset">
-    <span class="sound-presets-title" data-i18n="soundPreset">Ses</span>
-    <button type="button" data-sound-preset="oda" aria-pressed="true"><b>1</b><span data-i18n="soundRooms">Odalar</span></button>
-    <button type="button" data-sound-preset="isik" aria-pressed="false"><b>2</b><span data-i18n="soundDaylight">Gün ışığı</span></button>
-    <button type="button" data-sound-preset="motif" aria-pressed="false"><b>3</b><span data-i18n="soundMotif">Anlatı</span></button>
-  </div>
   <header class="topbar">
     <div class="identity"><a class="brand" href="https://mergvs.com" target="_blank" rel="noopener noreferrer">MERGVS</a><span class="brand-divider"></span><h1>Angora <strong>21</strong><span class="sr-only"> — Angora Evleri’nde satılık müstakil villa: 900 m² bahçe, özel havuz, asansör, 5+4 oda, 4 kat. Hatırlı Sokak, Mutlukent, Çankaya, Ankara.</span></h1></div>
     <!-- Masaüstü: dil seçici markanın yanında (ayar kapsülünden taşındı). -->
@@ -418,16 +411,6 @@
       <h3>Konum: Çayyolu · Mutlukent · Çankaya, Ankara</h3>
       <p>Angora Evleri, Çankaya’nın Çayyolu bölgesinde, Mutlukent Mahallesi sınırları içinde yer alan alçak yoğunluklu bir villa yerleşimidir. Hacettepe Beytepe kampüsünün yeşili yerleşkenin hemen komşusudur; Eskişehir Yolu ve Bilkent bağlantısı sayesinde şehrin önemli merkezlerine ulaşım dakikalarla ölçülür.</p>
     </div>
-    <!-- İÇ BAĞLANTI: içerik sayfaları buradan bulunur ve ana sayfanın
-         otoritesini alır. Tarayıcı JS çalıştırmasa da bu bağlantılar
-         kaynak HTML'de durur. Sayfalar tools/seo/build-seo-pages.mjs ile
-         ilan verisinden üretilir. -->
-    <nav class="listing-more" aria-label="Villa hakkında daha fazlası" data-i18n-label="a11yMore">
-      <a href="/kat-planlari.html" data-i18n="moreFloors" data-href-en="/en/floor-plans.html">Kat planları: dört kat, oda oda →</a>
-      <a href="/galeri.html" data-i18n="moreGallery" data-href-en="/en/photo-gallery.html">Fotoğraf galerisi: 56 fotoğraf →</a>
-      <a href="/angora-evleri-rehberi.html" data-i18n="moreGuide" data-href-en="/en/angora-evleri-guide.html">Angora Evleri rehberi: konum ve çevre →</a>
-      <a href="/sikca-sorulan-sorular.html" data-i18n="moreFaq" data-href-en="/en/faq.html">Sıkça sorulan sorular →</a>
-    </nav>
   </section>
   <section id="region-panel" class="region-panel" aria-label="Bölge haritası" hidden data-i18n-label="a11yRegionPanel">
     <details id="region-summary"><summary>Angora Evleri <span aria-hidden="true">⌃</span></summary><div id="region-description"></div></details>

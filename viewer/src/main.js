@@ -59,7 +59,7 @@ import {readShareState,shareSearch} from './share-state.js';
 import {referenceProfile} from './render-profile.js';
 import {FEATURES} from './features.js';
 import {createQualityProfile,detectTierFromEnvironment,coarsePointer,XR_HEADSET} from './quality-profile.js';
-import { sectionHeight, smoothStep, createWallCaps, createSoilCap, createNativeSoilSection, SOIL_CUT_HEIGHT } from './section.js';
+import { sectionHeight, smoothStep, createWallCaps, createSoilCap, createNativeSoilSection, SOIL_CUT_HEIGHT, setSectionLight } from './section.js';
 import { createWalkLocator } from './walk-locator.js';
 import {patchWalkSurface} from './walk-surface.js';
 import { t, roomName, applyStatic, setLang, currentLang } from './i18n.js';
@@ -2778,13 +2778,13 @@ function bindInterface() {
   // A press takes the camera; merely moving the mouse does not. The idle
   // street orbit still yields to a move, but the tour's own turn would
   // otherwise stop the moment the visitor's hand crossed the window.
-  window.addEventListener('pointermove',()=>{if(!guidedTour?.active)setAutoRotate(false);});
+  // 04.10: otomatik dönüş fare yalnız GEZİNİRKEN durmaz; tıklayıp sürükleyince (pointerdown) durur.
   host.addEventListener('pointerdown',()=>setAutoRotate(false));
   $('#open-options').onclick=()=>panel('options-panel',$('#options-panel').hidden);
   $('#open-info').onclick=()=>panel('info-panel',$('#info-panel').hidden);
   $('#open-floor').onclick=()=>panel('floor-panel',$('#floor-panel').hidden);
   document.querySelectorAll('[data-close-panel]').forEach(button=>button.onclick=()=>panel('',false));
-  $('#daylight-hour').oninput=()=>{const hour=Number($('#daylight-hour').value);setTimeout(()=>{const sl=lighting?.sunLight?.();if(sl)interfaceSound?.set({daylight:Math.round(sl.daylight*10)/10});});$('#daylight-time').textContent=clockLabel(hour);$('#daylight-hour').setAttribute('aria-valuetext',clockLabel(hour));lighting?.setTime(hour,Number($('#daylight-season').value));applyNightHouse();rememberState();invalidate();};
+  $('#daylight-hour').oninput=()=>{const hour=Number($('#daylight-hour').value);setTimeout(()=>{const sl=lighting?.sunLight?.();if(sl){interfaceSound?.set({daylight:Math.round(sl.daylight*10)/10});setSectionLight(.1+.9*sl.daylight*sl.daylight);invalidate();}});$('#daylight-time').textContent=clockLabel(hour);$('#daylight-hour').setAttribute('aria-valuetext',clockLabel(hour));lighting?.setTime(hour,Number($('#daylight-season').value));applyNightHouse();rememberState();invalidate();};
   $('#daylight-season').onchange=()=>{$('#daylight-hour').oninput();lighting?.requestShadowUpdate();invalidate();};
   // Task 1.2-c: the shadow map re-renders when the hand SETTLES on an hour
   // (change fires on release/keyup), never per drag tick.

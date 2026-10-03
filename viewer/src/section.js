@@ -79,8 +79,18 @@ export function flatCapGeometry(positions, indices) {
   return geometry;
 }
 
+// 04.10 ürün sahibi: "bodrum kesiti gece ışığına duyarlı olsun, kararınca bu
+// kadar patlamasın". Tarama ışıksız (unlit) bir yüzey olduğu için gece de gündüz
+// beyazında kalıyordu; artık gün ışığı düzeyiyle birlikte kararır.
+const HATCH_MATERIALS = new Set();
+let hatchLight = 1;
+export function setSectionLight(level) {
+  hatchLight = Math.max(0, Math.min(1, level));
+  for (const material of HATCH_MATERIALS) material.uniforms.uLight.value = hatchLight;
+}
 export function createHatchMaterial({pitch, duty, ground, ink, strength=0.62}) {
-  return new THREE.ShaderMaterial({side:THREE.DoubleSide,
+  const material = new THREE.ShaderMaterial({side:THREE.DoubleSide,
+    uniforms: {uLight: {value: hatchLight}},
     vertexShader: `varying vec3 worldPosition;
       void main() {
         vec4 world = modelMatrix * vec4(position, 1.0);
@@ -88,6 +98,7 @@ export function createHatchMaterial({pitch, duty, ground, ink, strength=0.62}) {
         gl_Position = projectionMatrix * viewMatrix * world;
       }`,
     fragmentShader: `varying vec3 worldPosition;
+      uniform float uLight;
       // how much of one period is inked, and the ruling's antiderivative
       const float INK = ${(2 * duty).toFixed(5)};
       float ruled(float x) { return floor(x) * INK + min(fract(x), INK); }
@@ -95,11 +106,13 @@ export function createHatchMaterial({pitch, duty, ground, ink, strength=0.62}) {
         float v = (worldPosition.x + worldPosition.y + worldPosition.z) / ${pitch.toFixed(4)};
         float w = max(fwidth(v), 1e-5);
         float hatch = clamp((ruled(v + 0.5 * w) - ruled(v - 0.5 * w)) / w, 0.0, 1.0);
-        gl_FragColor = vec4(mix(vec3(${ground.map(v=>v.toFixed(3)).join(', ')}), vec3(${ink.map(v=>v.toFixed(3)).join(', ')}), hatch * ${strength.toFixed(2)}), 1.0);
+        gl_FragColor = vec4(mix(vec3(${ground.map(v=>v.toFixed(3)).join(', ')}), vec3(${ink.map(v=>v.toFixed(3)).join(', ')}), hatch * ${strength.toFixed(2)}) * uLight, 1.0);
         #include <tonemapping_fragment>
         #include <colorspace_fragment>
       }`
   });
+  HATCH_MATERIALS.add(material);
+  return material;
 }
 
 // These contours come from opposite source wall faces. They are independent of

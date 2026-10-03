@@ -53,8 +53,8 @@ test('sound is on by default, one switch silences it, denied storage and no audi
   assert.equal(dead.disabled, true);
 });
 
-test('the speaker switch and the three-option picker are on the page', () => {
+test('the speaker switch is on the page; the trial preset picker is gone', () => {
   const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
   assert.equal((html.match(/data-sound-toggle/g) ?? []).length, 2);
-  for (const k of Object.keys(SOUND_PRESETS)) assert.match(html, new RegExp(`data-sound-preset="${k}"`));
+  assert.doesNotMatch(html, /data-sound-preset=/);
 });

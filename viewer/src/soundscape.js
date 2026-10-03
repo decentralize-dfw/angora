@@ -85,7 +85,7 @@ export function nextPhrase(preset, chord, state, mem, rand = Math.random) {
     i = Math.max(0, Math.min(t.length - 1, i + [-2, -1, -1, 1, 1, 2][Math.floor(rand() * 6)]));
     return t[i];
   };
-  const vel = () => (.036 + rand() * .016) * (tour ? .7 : 1) * (inside ? .88 : 1);
+  const vel = () => (.031 + rand() * .013) * (tour ? .7 : 1) * (inside ? .88 : 1);
   if (preset === 'isik') {
     // yavaş kırık akor: 3-4 nota, alttan üste, aralarında nefes
     const n = 3 + (rand() < .35 ? 1 : 0), start = Math.floor(rand() * Math.max(1, t.length - n + 1));
@@ -152,7 +152,7 @@ export function nextPhrase(preset, chord, state, mem, rand = Math.random) {
 export function createSoundEngine(ctx, {output = ctx.destination} = {}) {
   const master = ctx.createGain(); master.gain.value = 0;
   const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 35; hp.Q.value = .5;
-  const warmth = ctx.createBiquadFilter(); warmth.type = 'lowpass'; warmth.frequency.value = 7500; warmth.Q.value = .25;
+  const warmth = ctx.createBiquadFilter(); warmth.type = 'lowpass'; warmth.frequency.value = 5200; warmth.Q.value = .25;
   const comp = ctx.createDynamicsCompressor();
   comp.threshold.value = -24; comp.ratio.value = 2.2; comp.knee.value = 18; comp.attack.value = .03; comp.release.value = .6;
   const limit = ctx.createDynamicsCompressor();
@@ -169,7 +169,7 @@ export function createSoundEngine(ctx, {output = ctx.destination} = {}) {
     }
   }
   const verb = ctx.createConvolver(); verb.buffer = ir;
-  const wet = ctx.createGain(); wet.gain.value = .6;
+  const wet = ctx.createGain(); wet.gain.value = .85;   // 04.10: daha yankılı
   verb.connect(wet); wet.connect(master);
   const delay = ctx.createDelay(1.5); delay.delayTime.value = .62;
   const fb = ctx.createGain(); fb.gain.value = .3;
@@ -177,9 +177,9 @@ export function createSoundEngine(ctx, {output = ctx.destination} = {}) {
   delay.connect(dlp); dlp.connect(fb); fb.connect(delay); dlp.connect(verb); dlp.connect(master);
   // ön plan piyanosu: kuru + yankı + eko
   const bus = ctx.createGain();
-  const dry = ctx.createGain(); dry.gain.value = .62; bus.connect(dry); dry.connect(master);
+  const dry = ctx.createGain(); dry.gain.value = .45; bus.connect(dry); dry.connect(master);
   bus.connect(verb);
-  const send = ctx.createGain(); send.gain.value = .2; bus.connect(send); send.connect(delay);
+  const send = ctx.createGain(); send.gain.value = .26; bus.connect(send); send.connect(delay);
   // arka plan akorları: neredeyse tamamen yankı
   const hall = ctx.createGain();
   const hallDry = ctx.createGain(); hallDry.gain.value = .22; hall.connect(hallDry); hallDry.connect(master);
@@ -193,7 +193,7 @@ export function createSoundEngine(ctx, {output = ctx.destination} = {}) {
     const out = ctx.createStereoPanner ? ctx.createStereoPanner() : ctx.createGain();
     if (out.pan) out.pan.value = Math.max(-1, Math.min(1, pan));
     const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.Q.value = .2;
-    lp.frequency.value = Math.min(2600, (toHall ? 380 : 500) + f * (toHall ? 1.6 : 2.4));
+    lp.frequency.value = Math.min(2100, (toHall ? 340 : 420) + f * (toHall ? 1.4 : 1.9));   // 04.10: daha yumuşak
     lp.connect(out); out.connect(toHall ? hall : bus);
     const nodes = [];
     let last = t0;
@@ -203,7 +203,7 @@ export function createSoundEngine(ctx, {output = ctx.destination} = {}) {
       const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = fk;
       if (idx === 0) o.detune.value = .7;
       const g = ctx.createGain(), peak = vel * a, tau = dur / (3.4 + (k - 1) * 2.2);
-      const attack = toHall ? .09 : .014;
+      const attack = toHall ? .1 : .022;
       g.gain.setValueAtTime(0, t0);
       g.gain.linearRampToValueAtTime(peak, t0 + attack);
       g.gain.setTargetAtTime(0, t0 + attack, tau);
