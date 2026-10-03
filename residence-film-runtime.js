@@ -6,6 +6,19 @@
     const local = p === 1 ? 1 : p * clips.length - index;
     return {index, local, frame: Math.round(local * (clips[index].frames - 1))};
   }
+  function stagedPosition(progress,clips){
+    const state=position(progress,clips),p=Number(state.local.toFixed(9));
+    const moving=p<.32||p>=.48&&p<.80;
+    const camera=p<.32?p/.32*.5:p<.48?.5:p<.80?.5+(p-.48)/.32*.5:1;
+    return {...state,frame:Math.round(camera*(clips[state.index].frames-1)),camera,hold:!moving,stop:p<.48?'midpoint':'destination'};
+  }
+  function floorPosition(progress,track,fps=24){
+    const travel=clamp(progress)*3,from=Math.min(3,Math.floor(travel)),local=from===3?1:travel-from,to=Math.min(3,from+1);
+    const blend=from===3?0:clamp((local-.45)/.43),moving=from<3&&local>.45&&local<.88;
+    const floor=blend>=.5?to:from;
+    const time=from===3?track.stops[3]:blend===0?track.stops[from]:blend===1?track.stops[to]:track.moves[from][0]+blend*1.35;
+    return {floor,from,to,local,blend,moving,time,frame:Math.min(track.frames-1,Math.round(time*fps))};
+  }
   class FramePlayer {
     constructor(canvas, clips, onFrame) {
       this.canvas = canvas; this.context = canvas.getContext('2d', {alpha:false});
@@ -23,8 +36,8 @@
     }
     draw(item) {
       const {width:w,height:h} = this.canvas, image = item.image, ctx = this.context;
-      ctx.fillStyle = '#152b25'; ctx.fillRect(0,0,w,h);
-      const needsAmbient = Math.abs(w/h-image.width/image.height) > .08;
+      ctx.fillStyle = this.background||'#152b25'; ctx.fillRect(0,0,w,h);
+      const needsAmbient = !this.crop&&Math.abs(w/h-image.width/image.height) > .08;
       if (needsAmbient) {
         // A quiet ambient field retains the whole landscape composition on a phone.
         const cover = Math.max(w/image.width,h/image.height);
@@ -32,13 +45,16 @@
         ctx.drawImage(image,(w-image.width*cover)/2,(h-image.height*cover)/2,image.width*cover,image.height*cover);
         ctx.restore();
       }
-      const scale = Math.min(w/image.width,h/image.height);
-      ctx.drawImage(image,(w-image.width*scale)/2,(h-image.height*scale)/2,image.width*scale,image.height*scale);
+      const crop=this.crop||{x:0,y:0,width:1,height:1};
+      const sw=image.width*crop.width,sh=image.height*crop.height,scale=Math.min(w/sw,h/sh);
+      ctx.drawImage(image,image.width*crop.x,image.height*crop.y,sw,sh,(w-sw*scale)/2,(h-sh*scale)/2,sw*scale,sh*scale);
       this.last = item; this.canvas.dataset.clip = item.clip.id; this.canvas.dataset.frame = item.frame;
+      delete this.canvas.dataset.loadError;
       this.onFrame?.(item);
     }
     seek(clip, frame, direction=1) {
       frame = Math.max(0,Math.min(clip.frames-1,Math.round(frame)));
+      this.canvas.dataset.requestedFrame=frame;
       const key = this.key(clip,frame); this.target = {clip,frame,key};
       const exact = this.cache.get(key);
       if (exact) this.draw(exact);
@@ -72,7 +88,7 @@
       }
     }
     async decode(task) {
-      const url=`./assets/residence/films/${task.clip.id}/frame-${String(task.frame).padStart(4,'0')}.webp`;
+      const url=`${task.clip.root||'./assets/residence/films'}/${task.clip.id}/frame-${String(task.frame).padStart(4,'0')}.webp${task.clip.revision?`?v=${encodeURIComponent(task.clip.revision)}`:''}`;
       const response=await fetch(url,{cache:'force-cache'});
       if(!response.ok)throw new Error('Film frame unavailable');
       const blob=await response.blob();
@@ -97,5 +113,5 @@
       }
     }
   }
-  window.AngoraFilmRuntime={position,FramePlayer,clamp};
+  window.AngoraFilmRuntime={position,stagedPosition,floorPosition,FramePlayer,clamp};
 })();
