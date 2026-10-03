@@ -290,8 +290,8 @@
     }
   ]
 }</script>
-  <script type="module" crossorigin src="./web-assets/index-D95K19Sb.js"></script>
-  <link rel="stylesheet" crossorigin href="./web-assets/index-BamOR8Y7.css">
+  <script type="module" crossorigin src="./web-assets/index-BCF659KM.js"></script>
+  <link rel="stylesheet" crossorigin href="./web-assets/index-DZU_7b8y.css">
 </head>
 <body>
 <main id="app" data-scale="neighborhood" data-booting="true">
@@ -538,8 +538,14 @@
   <p class="gesture-help" id="gesture-help" data-i18n="orbitHelp">Sürükle: döndür · İki parmak: kaydır / yakınlaştır</p>
   <div id="qa-status" class="device-qa-status" role="status" hidden></div>
   <div id="boot" class="boot" role="presentation">
-    <div class="boot-brand"><span class="brand">MERGVS</span><span class="brand-divider"></span><span class="boot-title">Angora <strong>21</strong></span></div>
-    <div class="load-status" id="load-status" role="status" aria-live="polite"><span class="spinner" aria-hidden="true"></span><span class="load-copy"><span class="load-line"><span id="load-message">Model yükleniyor…</span><span id="load-percent" aria-hidden="true"></span></span><span class="load-bar" id="load-bar" aria-hidden="true" hidden><i></i></span><span class="load-steps" id="load-steps" aria-hidden="true"><span data-step="model" data-i18n="stepModel">Model</span><span data-step="light" data-i18n="stepLight">Işık</span><span data-step="scene" data-i18n="stepScene">Sahne</span><span data-step="view" data-i18n="stepView">Görünüm</span></span></span><button id="retry" hidden data-i18n="retry">Tekrar dene</button></div>
+    <!-- 03.10 açılış ekranı: bulanık site fotoğrafı, MERGVS arması, üçlü çember, 5 sn'de bir dönen bilgiler. -->
+    <div class="boot-bg" aria-hidden="true"></div>
+    <div class="boot-hero">
+      <img class="boot-crest" src="./web-assets/mergvs-crest-white-BZKAlbJG.png" alt="MERGVS" width="269" height="300" decoding="async">
+      <div class="boot-name"><span class="boot-title">Angora <strong>21</strong></span><span class="boot-place" data-i18n="bootPlace">Ankara, Türkiye</span></div>
+    </div>
+    <div class="load-status" id="load-status" role="status" aria-live="polite"><svg class="boot-rings" viewBox="0 0 64 64" aria-hidden="true"><g class="r1"><circle cx="32" cy="32" r="28"/></g><g class="r2"><circle cx="32" cy="32" r="21.5"/></g><g class="r3"><circle cx="32" cy="32" r="15"/></g></svg><span class="load-copy"><span class="load-line"><span id="load-message">Model yükleniyor…</span><span id="load-percent" aria-hidden="true"></span></span><span class="load-bar" id="load-bar" aria-hidden="true" hidden><i></i></span><span class="load-steps" id="load-steps" aria-hidden="true"><span data-step="model" data-i18n="stepModel">Model</span><span data-step="light" data-i18n="stepLight">Işık</span><span data-step="scene" data-i18n="stepScene">Sahne</span><span data-step="view" data-i18n="stepView">Görünüm</span></span></span><button id="retry" hidden data-i18n="retry">Tekrar dene</button></div>
+    <div class="boot-tips" id="boot-tips" aria-live="polite"><p id="boot-tip"></p></div>
     <!-- Chosen while the model loads, which is the one moment every visitor
          spends looking at this corner of the screen. The same .lang-flag
          buttons as the settings panel, so one handler drives both. -->

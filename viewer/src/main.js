@@ -63,6 +63,9 @@ import { sectionHeight, smoothStep, createWallCaps, createSoilCap, createNativeS
 import { createWalkLocator } from './walk-locator.js';
 import {patchWalkSurface} from './walk-surface.js';
 import { t, roomName, applyStatic, setLang, currentLang } from './i18n.js';
+import {startBootTips} from './boot-tips.js';
+// 03.10 açılış: 5 sn'de bir dönen bilgiler (arayüz, ev, bölge); dil değişince anında çevrilir.
+const bootTips=startBootTips(document.querySelector('#boot-tip'));
 const FRAME_STATS=/[?&](stats=1|camera=)/.test(location.search); // QA-only per-frame evidence
 
 const $ = s => document.querySelector(s);
@@ -175,7 +178,7 @@ function progress(share) {
   if (share === null) { bar.hidden = true; percent.textContent = ''; return; }
   const whole = Math.max(0, Math.min(100, Math.round(share * 100)));
   bar.hidden = false; bar.firstElementChild.style.width = `${whole}%`;
-  percent.textContent = `%${whole}`;
+  percent.textContent = currentLang()==='en'?`${whole}%`:`%${whole}`;
 }
 // What the bar cannot say: WHICH wait is being served. A percentage alone,
 // on a twenty-megabyte scene, reads as one long undifferentiated stall; the
@@ -1140,6 +1143,7 @@ function refreshChrome(){
   applyStatic();
   markLanguage();
   if(messageKey&&!status.hidden)$('#load-message').textContent=t(messageKey);
+  bootTips.refresh();
   photoPins?.refreshLabels();photoViewer?.refresh();
   // There is a recording per language, so the switch is not only a caption
   // change: mid-tour the other voice picks up the sentence being spoken.
@@ -1950,7 +1954,7 @@ async function loadNativeModel(manifest){
   // fades rather than sitting on a full bar waiting to be dismissed.
   $('#app').append(status);
   const boot=$('#boot');
-  if(boot){boot.classList.add('boot-done');setTimeout(()=>boot.remove(),460);}
+  if(boot){boot.classList.add('boot-done');bootTips.stop();setTimeout(()=>boot.remove(),460);}
   delete $('#app').dataset.booting;
   // Task 1.3: the repository's own tileable detail maps (1.2 MB of real
   // texture the delivery stopped shipping) revive off the critical path.
@@ -2607,7 +2611,7 @@ async function loadModel() {
     const boot=$('#boot');
     if(boot){
       $('#app').append($('#load-status'));
-      boot.classList.add('boot-done');
+      boot.classList.add('boot-done');bootTips.stop();
       setTimeout(()=>boot.remove(),460);
     }
     delete $('#app').dataset.booting;
