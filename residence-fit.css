@@ -1,0 +1,88 @@
+/* The last page shares the footer's background; only actual model edges are drawn. */
+html,body{max-width:100%;overflow-x:clip}.pin-spacer,.scene{max-width:100%}
+.footer-orbit{height:100svh;min-height:0;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:3vw;padding:100px 6vw 55px;background:var(--forest);color:var(--paper);align-items:center}
+.wireframe-stage{position:relative;min-width:0;min-height:0;width:100%;height:100%;isolation:isolate}
+.wireframe-stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y!important;cursor:grab;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent),linear-gradient(0deg,transparent,#000 10%,#000 90%,transparent);mask-composite:intersect;-webkit-mask-composite:source-in}
+.wireframe-stage canvas:active{cursor:grabbing}.wireframe-stage canvas:focus-visible{outline:1px solid #ffffff60;outline-offset:-10px}
+.wireframe-status{position:absolute;bottom:4%;left:0;right:0;text-align:center;font:400 10px/1.6 var(--sans);letter-spacing:.09em;color:#efede696;pointer-events:none}
+.wireframe-stage[data-load-error] .wireframe-status{pointer-events:auto}
+.footer-orbit .footer-actions{display:flex;flex-direction:column;gap:0;padding:0;min-width:0}
+.footer-orbit .footer-actions>.eyebrow{margin-bottom:28px}.footer-orbit .footer-actions>a{font-size:clamp(22px,2.4vw,40px);padding:clamp(16px,3svh,30px) 0;line-height:1.35}
+.footer-orbit-intro{font:400 clamp(34px,4.5vw,66px)/1.05 var(--serif);letter-spacing:-.03em;margin:0 0 30px}
+
+/* All camera states share a single contain rule, including the decoded hold. */
+.cinema-media :is(video,canvas,img),.chapter-native-stage :is(video,canvas,img){object-fit:contain;object-position:50% 50%;width:100%;height:100%;max-width:none;max-height:none}
+.chapter-native-stage{inset:0}.chapter-native-stage img,.chapter-native-stage video,.chapter-native-stage .film-hold-frame{background:#fff}
+.chapter-model-caption{bottom:12px!important;font-size:9px;pointer-events:none}
+
+/* Remaining space is measured by layout, never a fixed subtraction from vh. */
+:root{--scene-top:clamp(68px,11svh,100px);--scene-bottom:clamp(14px,3svh,32px)}
+.chapter-scene,.atlas-scene,.horizontal-scene,.gallery-scene{height:100svh!important;min-height:0;max-height:100svh;box-sizing:border-box;padding:var(--scene-top) 6vw var(--scene-bottom);display:flex;flex-direction:column}
+.chapter-top{flex:none;margin:0 0 clamp(10px,2svh,20px)}
+.chapter-layout{flex:1;height:auto;min-height:0;display:grid;grid-template-columns:minmax(0,.35fr) minmax(0,.65fr);gap:3%;align-items:stretch}
+.chapter-narrative{align-self:center;min-width:0}.chapter-narrative h2{font-size:clamp(30px,min(4.4vw,6.8svh),68px)}
+.chapter-model.chapter-native{width:100%;height:100%;min-height:0;margin:0;align-self:stretch}
+.atlas-scene>.section-top,.gallery-scene>.section-top{flex:none;margin-bottom:clamp(9px,2svh,20px)}
+.atlas-heading{margin-bottom:clamp(8px,1.8svh,18px)}.atlas-toolbar{margin-bottom:clamp(8px,1.8svh,15px)}
+.atlas-layout{flex:1;min-height:0;height:auto}.atlas-map{min-height:0}.atlas-drawing,.atlas-view{min-height:0}
+.horizontal-heading{flex:none;margin-bottom:clamp(12px,3svh,32px)}
+.horizontal-window{flex:1;min-height:0;display:flex;align-items:center}.horizontal-track{height:100%;max-height:100%;align-items:center}
+.horizontal-track figure,.kitchen-story figure{height:100%;display:flex;flex-direction:column;justify-content:center;min-height:0;flex-basis:min(62vw,calc(56svh * 16 / 9))}
+.horizontal-track img{flex:1;min-height:0;height:0;max-height:100%;width:100%;object-fit:contain;aspect-ratio:auto}.horizontal-track figcaption{flex:none;padding-top:12px;min-height:30px}
+.gallery-scene>h2{font-size:clamp(30px,min(5vw,7svh),78px)}
+.gallery-intro{margin-bottom:clamp(10px,2svh,19px)}.gallery-filters{margin-bottom:clamp(10px,2svh,22px)}
+.gallery-window{flex:1;min-height:0}.gallery-track,.gallery-item{height:100%;min-height:0}.gallery-item button{height:0;min-height:0;flex:1}
+.menu{height:100svh;min-height:0;overflow-y:auto;padding-top:var(--scene-top);padding-bottom:25px}
+.menu nav{gap:clamp(12px,2.4svh,25px)}.menu a{font-size:clamp(24px,min(4.8vw,5.8svh),60px)}
+
+@media(max-width:800px){
+  .footer-orbit{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto;gap:12px;padding:78px 7vw 25px}
+  .wireframe-status{font-size:9px;bottom:0}.footer-orbit-intro{font-size:clamp(29px,8vw,44px);margin-bottom:15px}
+  .footer-orbit .footer-actions>.eyebrow{font-size:9px;margin-bottom:12px}.footer-orbit .footer-actions>a{font-size:clamp(20px,5.5vw,27px);padding:clamp(10px,1.7svh,18px) 0}
+  .wireframe-stage canvas{touch-action:pan-y!important}
+  .chapter-layout{display:flex;gap:clamp(8px,1.8svh,17px)}
+  .chapter-narrative{flex:0 0 clamp(200px,38svh,290px);align-self:stretch;padding:0}
+  .chapter-narrative h2{display:block;font-size:clamp(25px,min(7.7vw,5.5svh),37px);line-height:1.06;margin:0 0 clamp(9px,1.8svh,15px)}
+  .chapter-narrative h2 em{white-space:normal}.chapter-narrative h2 br{display:none}
+  .chapter-tabs{margin:0 0 10px;gap:6px}.chapter-tabs button{font-size:clamp(8px,2.3vw,10px);padding:8px 0;min-width:0}.chapter-tabs button span{font-size:9px;width:auto;margin-right:4px}
+  .chapter-copy .eyebrow{font-size:8px}.chapter-copy h3{font-size:clamp(21px,min(6vw,4svh),27px);margin:5px 0 8px}
+  .chapter-copy p{font-size:clamp(10px,min(3.1vw,1.85svh),13px);line-height:1.65;margin:0}
+  .chapter-model.chapter-native{flex:1;height:auto;min-height:0}.chapter-model-caption{font-size:8px;bottom:8px!important;padding:4px 7px}
+  .atlas-heading h2{font-size:clamp(27px,min(8vw,5svh),38px)}
+  .atlas-toolbar{gap:8px}.atlas-tabs{min-width:0;gap:3px}.atlas-tabs button{flex:1 1 0;min-width:0;white-space:normal;font-size:clamp(8px,2.3vw,10px);line-height:1.4;text-align:left;padding:7px 2px}
+  .measure-toggle{flex:0 0 60px;width:60px;max-width:60px;white-space:normal;font-size:9px;line-height:1.4;text-align:right;padding:7px 0}
+  .atlas-layout{display:grid;grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) minmax(0,.32fr);gap:10px}
+  .atlas-drawing,.atlas-view{height:100%;min-height:0;flex:none}.atlas-map{min-height:0}
+  .atlas-photo-copy h3{font-size:clamp(16px,4.8vw,21px)}.atlas-photo-copy p{font-size:10px}.atlas-photo-copy .eyebrow{font-size:8px;line-height:1.4}
+  .atlas-note{font-size:8px;line-height:1.4;margin:8px 0 0}.atlas-photo-strip{height:27px}.atlas-photo-strip button{height:27px}
+  .horizontal-heading h2{font-size:clamp(30px,min(9vw,6svh),46px)}.horizontal-heading p{font-size:clamp(11px,1.9svh,13px);line-height:1.6}
+  .horizontal-track figure,.kitchen-story figure{flex-basis:86vw}.horizontal-track figcaption{font-size:10px;line-height:1.4}
+  .gallery-scene>h2{font-size:clamp(30px,min(10vw,6svh),44px)}.gallery-intro{font-size:clamp(11px,1.9svh,13px);line-height:1.6}
+  .gallery-filters{gap:8px 12px}.gallery-filters button{font-size:9px;line-height:1.3}.gallery-item figcaption{font-size:10px;white-space:normal}
+  .cinematic-story .hero-title{top:14%}.cinematic-story .hero-title h1{font-size:14.5vw}.cinematic-story .hero-title .script{font-size:7vw}
+  .cinema-caption{left:7vw;bottom:14%;max-width:86vw}.cinema-caption h2{font-size:clamp(28px,min(9vw,5.5svh),43px)}.cinema-caption p{font-size:clamp(11px,1.8svh,13px);line-height:1.6;max-width:40ch}
+  .cinema-track{left:7vw;width:86vw;bottom:6%}.cinema-track button{font-size:9px}.cinema-status{bottom:12px;font-size:8px}
+  .cinematic-story .hero-sides{bottom:22%}.cinematic-story .hero-bottom{bottom:4%;font-size:9px}.cinematic-story .hero-bottom a,.cinematic-story .hero-bottom button{font-size:9px}
+  .life-photo-story img{aspect-ratio:1.2}.life-photo-story h4{font-size:clamp(24px,7vw,32px)}
+  .life-stories{grid-template-columns:1fr;gap:45px}.life-photo-story:nth-child(2){margin-top:0}
+  .menu a{font-size:clamp(23px,min(7.8vw,4.8svh),38px)}.menu p{margin-top:24px;font-size:10px}
+}
+@media(max-height:540px) and (min-aspect-ratio:1/1){
+  .footer-orbit{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);grid-template-rows:1fr;padding:68px 6vw 20px;gap:3vw}
+  .footer-orbit-intro{font-size:30px;margin-bottom:10px}.footer-orbit .footer-actions>.eyebrow{margin-bottom:8px;font-size:8px}.footer-orbit .footer-actions>a{font-size:20px;padding:9px 0}
+  .chapter-layout{display:grid;grid-template-columns:minmax(0,.42fr) minmax(0,.58fr);gap:3%}
+  .chapter-narrative{flex:none;height:auto}.chapter-narrative h2{font-size:28px;margin-bottom:10px;display:block}
+  .chapter-tabs{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;margin-bottom:10px}.chapter-tabs button{font-size:9px;padding:6px 0}
+  .chapter-copy h3{font-size:22px;margin:5px 0}.chapter-copy p{font-size:10px;line-height:1.55}.chapter-copy .eyebrow{font-size:8px}
+  .atlas-heading{display:none}.atlas-scene .section-top{margin-bottom:9px}.atlas-toolbar{margin-bottom:8px}
+  .atlas-layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);grid-template-rows:1fr;gap:3%}
+  .atlas-view{display:flex;flex-direction:column;gap:7px}.atlas-photo-open{flex:1;min-height:0}.atlas-photo-copy h3{font-size:18px;margin:4px 0}.atlas-photo-copy p{display:none}.atlas-note{font-size:7px;line-height:1.3}
+  .horizontal-heading{display:grid;grid-template-columns:1fr 1fr;gap:6px 4vw;margin-bottom:10px}.horizontal-heading h2{font-size:30px}.horizontal-heading p{font-size:10px;line-height:1.5}.horizontal-heading .eyebrow{font-size:8px;margin-bottom:4px}
+  .horizontal-track figure,.kitchen-story figure{flex-basis:min(65vw,calc(60svh * 16 / 9))}
+  .gallery-scene>h2{font-size:30px;margin-bottom:7px}.gallery-intro{font-size:10px;margin-bottom:8px}.gallery-filters{margin-bottom:9px}.gallery-filters button{font-size:9px}
+  .gallery-scene .section-top{margin-bottom:8px}.gallery-item figcaption{height:26px;min-height:26px;font-size:9px}
+  .cinematic-story .hero-title{top:21%}.cinematic-story .hero-title h1{font-size:min(10vw,21svh)}.cinematic-story .hero-title .script{font-size:5.5svh;margin-top:8px}
+  .cinematic-story .hero-sides{display:none}.cinema-caption{bottom:19%;max-width:45vw}.cinema-caption h2{font-size:clamp(24px,8svh,36px)}.cinema-caption p{font-size:11px}
+  .cinema-track{width:50vw;bottom:30px}.cinema-status{bottom:13px}.cinematic-story .hero-bottom{bottom:24px}
+  .menu nav{display:grid;grid-template-columns:1fr 1fr;gap:14px 5vw}.menu a{font-size:22px}.menu small{font-size:9px;margin-right:12px}
+}

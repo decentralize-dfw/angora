@@ -8,6 +8,11 @@
     if(!video.videoWidth||!video.videoHeight)return false;
     try{
       const canvas=video.holdFrame||holdFrame(video.parentElement);
+      const presentation=getComputedStyle(video);
+      // Playback and its decoded hold always use the same camera fit. A canvas
+      // must not inherit a different cover rule at a mobile breakpoint.
+      canvas.style.objectFit=presentation.objectFit;
+      canvas.style.objectPosition=presentation.objectPosition;
       canvas.width=video.videoWidth;canvas.height=video.videoHeight;
       canvas.getContext('2d').drawImage(video,0,0,canvas.width,canvas.height);canvas.hidden=false;
       siblings.forEach(v=>{v.pause();v.classList.remove('playing');});return true;
