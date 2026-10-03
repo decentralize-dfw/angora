@@ -110,6 +110,7 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
   // looks at is the same sky the study is lit by. Cheap: six 256 px faces of a
   // shader with no geometry behind it.
   const skyScene=new THREE.Scene();skyScene.add(sky);
+  const traceSkyScene=new THREE.Scene();let traceSkyTarget=null,traceSkyMesh=null,traceSkyCamera=null;
   const skyTarget=new THREE.WebGLCubeRenderTarget(256,{type:THREE.HalfFloatType});
   const skyCamera=new THREE.CubeCamera(1,20000,skyTarget);
   scene.background=skyTarget.texture;
@@ -355,7 +356,21 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
   return {
     // V-RAY E: ışın izleyiciye verilen ışıklar ve gök (pathtrace-still.js)
     traceLights(){return [sun,...interior.filter(l=>l.visible&&l.intensity>0)];},
-    traceSky(){return {texture:scene.background,intensity:scene.backgroundIntensity??1};},
+    traceSky(){
+      const intensity=scene.backgroundIntensity??1;
+      if(scene.background!==skyTarget.texture)return {texture:scene.background,intensity};
+      // Gök shader'ı güneş diskini 19000x parlaklıkta çiziyor; ışın izleyici doğrudan güneşi yönlü ışıktan
+      // da alıyor: disk kalırsa güneş iki kez sayılır (parlak lekeler, ateş böceği gürültüsü). Disksiz küp.
+      if(!traceSkyTarget){
+        traceSkyMesh=new Sky();traceSkyMesh.scale.setScalar(10000);
+        traceSkyMesh.material.fragmentShader=traceSkyMesh.material.fragmentShader.replace(/float sundisk = [^;]+;/,'float sundisk = 0.0;');
+        traceSkyTarget=new THREE.WebGLCubeRenderTarget(128,{type:THREE.HalfFloatType});
+        traceSkyCamera=new THREE.CubeCamera(1,20000,traceSkyTarget);traceSkyScene.add(traceSkyMesh);
+      }
+      for(const k of Object.keys(sky.material.uniforms))traceSkyMesh.material.uniforms[k].value=sky.material.uniforms[k].value;
+      traceSkyCamera.update(renderer,traceSkyScene);
+      return {texture:traceSkyTarget.texture,intensity};
+    },
     setRoomReflections(value){roomReflections=value;updateReflections();},
     // V-RAY B1: kat başına sonda kutusu (box-probe.js)
     setReflectionBoxes(boxes){reflectionBoxes=boxes;updateReflections();},

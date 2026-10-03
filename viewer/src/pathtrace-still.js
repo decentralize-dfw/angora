@@ -75,6 +75,8 @@ export function createPathTraceStill({renderer, getRoots, getLights, getSky}) {
     } else {
       tracer.setCamera(camera);
       tracer.updateLights();
+      // gök küpü aynı nesne kalır ama içeriği güneşle değişir: kütüphane yalnız nesne değişince yeniler
+      tracer._previousEnvironment = null; tracer._previousBackground = null;
       tracer.updateEnvironment();
     }
   }
