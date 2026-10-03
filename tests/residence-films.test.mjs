@@ -12,29 +12,41 @@ function setup(){
  const scope={window:{addEventListener:(name,fn)=>handlers[name]=fn,AngoraScroll:{stop(){},start(){},to(){}}},document:{querySelector:()=>null,body:{classList:{contains:()=>false}}},innerHeight:900,scrollY:0,performance:{now:()=>time},console};
  vm.runInNewContext(source,scope);
  const scene=scope.window.AngoraSteps.register(element,3,(from,to)=>{moves.push([from,to]);return new Promise(r=>release=r);});
- const wheel=at=>{time=at;handlers.wheel({deltaY:120,deltaX:0,preventDefault(){},stopImmediatePropagation(){}});};
+ const wheel=async(at,direction=1)=>{time=at;handlers.wheel({deltaY:120*direction,deltaX:0,preventDefault(){},stopImmediatePropagation(){}});await Promise.resolve();};
  return {scene,moves,wheel,finish:async()=>{release();await new Promise(setImmediate);},Gate:scope.window.AngoraSteps.GestureGate};
 }
 test('one wheel burst starts exactly one film, and never queues another while playing',async()=>{
- const s=setup();s.wheel(0);s.wheel(30);s.wheel(90);s.wheel(900);
+ const s=setup();await s.wheel(0);await s.wheel(30);await s.wheel(90);await s.wheel(900);
  assert.deepEqual(s.moves,[[0,1]]);assert.equal(s.scene.index,0);
  await s.finish();assert.equal(s.scene.index,1);
- s.wheel(980);assert.deepEqual(s.moves,[[0,1]]);
- s.wheel(1400);assert.deepEqual(s.moves,[[0,1],[1,2]]);
+ await s.wheel(980);assert.deepEqual(s.moves,[[0,1]]);
+ await s.wheel(1400);assert.deepEqual(s.moves,[[0,1],[1,2]]);
 });
 test('three separate mouse gestures complete exactly three transitions and hold at each destination',async()=>{
- const s=setup();for(let i=0;i<3;i++){s.wheel(i*2000);await s.finish();assert.equal(s.scene.index,i+1);}
+ const s=setup();for(let i=0;i<3;i++){await s.wheel(i*2000);await s.finish();assert.equal(s.scene.index,i+1);}
  assert.deepEqual(s.moves,[[0,1],[1,2],[2,3]]);
- s.wheel(7000);assert.equal(s.moves.length,3);
+ await s.wheel(7000);assert.equal(s.moves.length,3);
 });
 test('trackpad momentum cannot replay a film immediately after the previous one ends',()=>{
  const {Gate}=setup(),gate=new Gate();assert.equal(gate.accept(0),true);
  assert.equal(gate.accept(800),false);gate.finish();assert.equal(gate.accept(900),false);
  assert.equal(gate.accept(1400),true);
 });
+
+test('repeated forward and reverse gestures remain usable, including an immediate direction change',async()=>{
+ const s=setup();let now=0;
+ for(let pass=0;pass<3;pass++){
+  for(const direction of [1,1,1,-1,-1,-1]){
+   await s.wheel(now,direction);await s.finish();assert.equal(s.scene.gate.busy,false);now+=700;
+  }
+  assert.equal(s.scene.index,0);
+ }
+ const gate=new s.Gate();assert.equal(gate.accept(0,1),true);gate.accept(500,1);gate.finish();
+ assert.equal(gate.accept(510,-1),true);
+});
 test('the supplied camera films retain their order, with one complete movie per gesture',async()=>{
  assert.deepEqual(film.clips.map(c=>c.id),['approach','orbit','garden-return']);
- assert.equal(film.clips[2].reversed,true);assert.equal(film.choreography.transitionSeconds,1.65);
+ assert.equal(film.clips[2].reversed,true);assert.equal(film.choreography.transitionSeconds,.55);
  assert.equal(film.choreography.mouseDeltaChangesPlayback,false);
  for(const clip of film.clips)for(const name of ['source','transition','reverse'])await access(new URL(`../assets/residence/films/${clip.id}/${name}.mp4`,import.meta.url));
 });

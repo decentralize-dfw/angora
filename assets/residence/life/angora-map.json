@@ -1,0 +1,186 @@
+{
+  "source": "The viewer region-map datasets and projection",
+  "northUp": true,
+  "radiusMetres": 2000,
+  "allGroups": [
+    "Education",
+    "Health",
+    "Food & drink",
+    "Shopping",
+    "Parks & sport",
+    "Services"
+  ],
+  "markerCounts": [
+    89,
+    29,
+    58,
+    72,
+    32,
+    91
+  ],
+  "siteGates": false,
+  "labels": [
+    {
+      "name": "ANGORA 21",
+      "box": [
+        1223.2466666666667,
+        758.9787037037037,
+        297.96875,
+        64
+      ]
+    },
+    {
+      "name": "Beysupark Mall",
+      "box": [
+        848.735,
+        489.68499999999995,
+        268.0,
+        52
+      ]
+    },
+    {
+      "name": "Beytepe 1923",
+      "box": [
+        1000.6,
+        1131.9,
+        247.0,
+        52
+      ]
+    },
+    {
+      "name": "Masha Kuaför",
+      "box": [
+        886.4649999999999,
+        762.72,
+        249.0,
+        52
+      ]
+    },
+    {
+      "name": "Angora Veterinary Clinic",
+      "box": [
+        1158.52,
+        834.925,
+        394.96875,
+        52
+      ]
+    },
+    {
+      "name": "Yigitistan Art Studio",
+      "box": [
+        810.731875,
+        843.36,
+        327.953125,
+        52
+      ]
+    },
+    {
+      "name": "GMO Simitçi",
+      "box": [
+        1171.89,
+        663.705,
+        228.0,
+        52
+      ]
+    },
+    {
+      "name": "Basketball court",
+      "box": [
+        862.7,
+        679.7,
+        277.0,
+        52
+      ]
+    },
+    {
+      "name": "Deniz Park",
+      "box": [
+        1159.395,
+        362.985,
+        205.0,
+        52
+      ]
+    },
+    {
+      "name": "Okyanus Park",
+      "box": [
+        1141.65,
+        451.08,
+        250.0,
+        52
+      ]
+    },
+    {
+      "name": "Migros",
+      "box": [
+        693.84,
+        437.08,
+        145.0,
+        52
+      ]
+    },
+    {
+      "name": "Merve Park",
+      "box": [
+        883.35,
+        560.35,
+        213.0,
+        52
+      ]
+    },
+    {
+      "name": "Eşarj EV charging",
+      "box": [
+        496.28499999999997,
+        513.135,
+        305.0,
+        52
+      ]
+    },
+    {
+      "name": "Afitap Meyhane Beytepe",
+      "box": [
+        963.01,
+        991.3399999999999,
+        399.0,
+        52
+      ]
+    },
+    {
+      "name": "Park",
+      "box": [
+        1090.165,
+        1057.105,
+        114.0,
+        52
+      ]
+    },
+    {
+      "name": "Çağdaş Market",
+      "box": [
+        667.6,
+        956.2,
+        267.0,
+        52
+      ]
+    },
+    {
+      "name": "Spor Bilimleri Fakültesi",
+      "box": [
+        1576.0,
+        682.15,
+        375.0,
+        52
+      ]
+    },
+    {
+      "name": "A101",
+      "box": [
+        1602.25,
+        840.7,
+        123.0,
+        52
+      ]
+    }
+  ]
+}

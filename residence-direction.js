@@ -78,9 +78,8 @@
       for(let current=from;current!==to;current+=step){
         const next=current+step,video=(step>0?forward:reverse)[Math.max(current,next)-1];
         $('.chapter-scene').dataset.nativeMoving='true';
-        await window.AngoraVideo.play(video,[...forward,...reverse],1.4,reduced);
+        await window.AngoraVideo.play(video,[...forward,...reverse],1.4/3,reduced);
         still.src=`./assets/residence/chapters/iso-${next}.webp`;
-        await still.decode().catch(()=>{});
         // Hold the exact final movie frame. A separately rendered still must not
         // change the camera, exposure or colour at the end of the movement.
         window.dispatchEvent(new CustomEvent('angora:chapter-display',{detail:next}));
@@ -90,8 +89,8 @@
     window.AngoraIso=window.AngoraSteps.register($('#floors'),3,change);
     const planScene=window.AngoraSteps.register($('#atlas'),3,(from,to)=>window.AngoraPlan.transition(to));
     window.AngoraPlan.navigate=i=>{
-      if(Math.abs($('#atlas').getBoundingClientRect().top)>5)window.AngoraScroll.to($('#atlas').getBoundingClientRect().top+scrollY,true);
-      planScene.go(Number(i));
+      if(Math.abs($('#atlas').getBoundingClientRect().top)>5){window.AngoraSteps.whenIdle().then(()=>window.AngoraScroll.travel($('#atlas').getBoundingClientRect().top+scrollY,.85)).then(()=>planScene.go(Number(i)));}
+      else planScene.go(Number(i));
     };
     if(motion)refreshMotion();
   }).catch(error=>console.error('Native floor films',error));
