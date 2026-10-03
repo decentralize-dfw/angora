@@ -26,3 +26,4 @@ body{font-size:16px;line-height:1.65}p{font-size:clamp(15px,1.22vw,18px);line-he
 @media(max-width:800px){.horizontal-track figure,.kitchen-story figure{flex-basis:85vw}.horizontal-track img{height:auto;aspect-ratio:16/9}.gallery-item,.gallery-item:nth-child(even){flex-basis:var(--gallery-photo-width,83vw)}}
 .gallery-window{flex:1;min-height:0;overflow:hidden}.gallery-track{height:100%;flex:none}
 @media(prefers-reduced-motion:reduce){.gallery-window{height:55svh;min-height:55svh;overflow:visible}.gallery-track{height:100%;overflow-x:auto;transform:none!important}}
+.chapter-model-caption{height:auto;min-height:0;align-items:center}
