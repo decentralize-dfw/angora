@@ -596,7 +596,8 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
           // görünüyordu. Oda sondası artık tüm iç mekân malzemelerinde (roomProbeAll): metal olarak kalır, odayı yansıtır.
           const warmMetal=FEATURES.roomProbeAll&&material.color.r>material.color.b*2.2&&material.color.r>.15;
           // modeldeki pirinç rengi (0,33 0,19 0,06) gerçek pirinç yansıtıcılığının (~0,91 0,70 0,36) çok altında: koyu bronz
-          if(warmMetal){material.metalness=1;material.roughness=THREE.MathUtils.clamp(material.roughness,.22,.4);if(!material.map)material.color.setRGB(.91,.70,.36);}
+          // oda sondası pişmiş ışıklı duvarlardan karanlık: tam metal yalnız onu yansıtır ve koyu bronz kalır - yansıma şiddeti artar
+          if(warmMetal){material.metalness=1;material.roughness=THREE.MathUtils.clamp(material.roughness,.22,.4);if(!material.map)material.color.setRGB(.91,.70,.36);material.envMapIntensity=3;}
           else if(l>.12){material.metalness=.35;material.roughness=Math.max(material.roughness,.35);if(!material.map)material.color.lerp(new THREE.Color(.72,.73,.74),.5);}
         }
         // 03.10: Tur 10 malzemeleri toplu ad (-metal-/-glass-/-wood-) taşımıyor: iç mekândaki 160 malzemenin
