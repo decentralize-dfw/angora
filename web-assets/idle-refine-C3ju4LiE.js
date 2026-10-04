@@ -1,4 +1,4 @@
-import{W as P,H as B,w as D,u as M,X as R,a as T,V as j}from"./index-Cj9iiNMV.js";const C={uniforms:{tDiffuse:{value:null},weight:{value:1}},vertexShader:"varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}",fragmentShader:`varying vec2 vUv;uniform sampler2D tDiffuse;uniform float weight;
+import{W as P,H as B,w as D,u as M,X as R,a as T,V as j}from"./index-BQkBBpv0.js";const C={uniforms:{tDiffuse:{value:null},weight:{value:1}},vertexShader:"varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}",fragmentShader:`varying vec2 vUv;uniform sampler2D tDiffuse;uniform float weight;
     void main(){gl_FragColor=vec4(texture2D(tDiffuse,vUv).rgb,weight);}`,transparent:!0,depthTest:!1,depthWrite:!1,blending:R},d=(r,f)=>{let s=1,l=0,o=r;for(;o>0;)s/=f,l+=s*(o%f),o=Math.floor(o/f);return l},F={uniforms:{tPrev:{value:null},tSrc:{value:null},weight:{value:1}},vertexShader:"varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}",fragmentShader:`varying vec2 vUv;uniform sampler2D tPrev,tSrc;uniform float weight;
     void main(){
       vec4 src=texture2D(tSrc,vUv);

@@ -396,7 +396,9 @@ function renderFrame(time) {
     // on ?stats/?camera so a visitor's orbit pays no string build or DOM write.
     if(FRAME_STATS)host.dataset.runtime=JSON.stringify({view:selected,plan:planMode,projection:activeCamera.type,cameraPosition:activeCamera.position.toArray(),target:controls.target.toArray(),sectionHeight:clip.constant,loaded:nativeDelivery?[...nativeDelivery.loaded.keys()]:[...groups.keys()],zoom:activeCamera.zoom,autoRotate:controls.autoRotate,zoomEnabled:controls.enableZoom,rotate:controls.mouseButtons.LEFT===THREE.MOUSE.ROTATE,transition:Boolean(transition),textures:renderer.info.memory.textures,geometries:renderer.info.memory.geometries,rooms:Boolean(groups.get('interior')?.visible),lamps:lighting?.snapshot?.().interior?.map(f=>Math.round(f.rendered_intensity_cd))??[],glazing:lighting?.snapshot?.().glazing??0});
     renderer.info.reset();
-    {const ae=lighting.autoExposure?.();if(ae)ae.active=Boolean(walk?.active&&!walk.xrActive&&!planMode);}
+    // 04.10: oda kameraları da (kamera binanın içinde) göz uyumu alır - fotoğrafçı her odada pozlamayı ayrı açar;
+    // ilan fotoğraflarına göre karanlık odalar (1. kat oturma, mutfak) 2-3 kat koyu, aydınlıklar biraz fazlaydı.
+    {const ae=lighting.autoExposure?.();if(ae)ae.active=Boolean(walk?.active?!walk.xrActive&&!planMode:FEATURES.interiorExposure&&!planMode&&!transition&&cameraInsideBuilding());}
     // 03.10 BÖLGE TAKILMASI: Bölge'de harita opak zeminiyle ekranı örter, ama
     // altında yakın çevrenin TAMAMI (komşular 8 MB, bitkiler, 4096 gölge,
     // GTAO, bloom) çizilmeye devam ediyordu - hem geçiş uçuşu boyunca hem
