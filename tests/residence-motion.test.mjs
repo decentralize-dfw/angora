@@ -26,13 +26,21 @@ test('plan framing includes the registered cameras and house rooms, excluding un
 });
 const source=await readFile(new URL('../residence-steps.js',import.meta.url),'utf8');
 function sceneHarness(){
-  const events={};let time=0,finish;const moves=[];
+  const events={};let time=0,finish;const moves=[],scrollCalls=[];
   const element={dataset:{},offsetHeight:900,getBoundingClientRect:()=>({top:0,bottom:900})};
-  const scope={window:{addEventListener:(n,fn)=>events[n]=fn,AngoraScroll:{start(){},to(){},cancelTravel(){}}},document:{querySelector:()=>null,body:{classList:{contains:()=>false}}},innerHeight:900,scrollY:0,performance:{now:()=>time},console};
+  const scope={window:{addEventListener:(n,fn)=>events[n]=fn,AngoraScroll:{start(){},to(){},cancelTravel(){},hold(top){scrollCalls.push(['hold',top]);},release(){scrollCalls.push(['release']);}}},document:{querySelector:()=>null,body:{classList:{contains:()=>false}}},innerHeight:900,scrollY:0,performance:{now:()=>time},console};
   vm.runInNewContext(source,scope);
   const scene=scope.window.AngoraSteps.register(element,3,(a,b)=>{moves.push([a,b]);return new Promise(r=>finish=r);});
-  return {scene,moves,async wheel(direction,at){time=at;events.wheel({deltaY:120*direction,deltaX:0,preventDefault(){},stopImmediatePropagation(){}});await Promise.resolve();},async finish(){finish();await new Promise(setImmediate);}};
+  return {scene,moves,scrollCalls,async wheel(direction,at){time=at;events.wheel({deltaY:120*direction,deltaX:0,preventDefault(){},stopImmediatePropagation(){}});await Promise.resolve();},async finish(){finish();await new Promise(setImmediate);}};
 }
+
+test('the document is held before any film work and released only after its final frame',async()=>{
+  const s=sceneHarness();await s.wheel(1,0);
+  assert.deepEqual(s.scrollCalls,[['hold',0]]);
+  await s.wheel(1,30);assert.deepEqual(s.scrollCalls,[['hold',0]]);
+  await s.finish();assert.deepEqual(s.scrollCalls,[['hold',0],['release']]);
+  await s.wheel(-1,1000);assert.deepEqual(s.scrollCalls.at(-1),['hold',0]);await s.finish();
+});
 test('three wheel gestures complete three films and reverse through every destination without a permanent lock',async()=>{
   const s=sceneHarness();let now=0;
   for(const direction of [1,1,1,-1,-1,-1]){await s.wheel(direction,now);await s.finish();now+=1000;}

@@ -15,12 +15,19 @@
   }
   function scrollTo(target, options = {}) {
     if (lenis) lenis.scrollTo(target, {duration:1.35, ...options});
-    else window.scrollTo({top:typeof target === 'number' ? target : target.getBoundingClientRect().top + scrollY + (options.offset || 0), behavior:reduced ? 'instant' : 'smooth'});
+    else window.scrollTo({top:typeof target === 'number' ? target : target.getBoundingClientRect().top + scrollY + (options.offset || 0), behavior:options.immediate||reduced ? 'instant' : 'smooth'});
   }
-  let navigationTween=null;
+  let navigationTween=null,heldTop=null;
+  function releaseScroll(){
+    if(heldTop!==null){scrollTo(heldTop,{immediate:true,force:true});heldTop=null;}
+    if(!document.body.classList.contains('locked')&&!document.querySelector('dialog[open]'))lenis?.start();
+  }
   window.AngoraScroll={stop:()=>lenis?.stop(),start:()=>lenis?.start(),to:(top,immediate=false)=>scrollTo(top,{immediate,force:true}),
+    hold:top=>{navigationTween?.kill();heldTop=top;scrollTo(top,{immediate:true,force:true});lenis?.stop();},
+    release:releaseScroll,
     cancelTravel:()=>navigationTween?.kill(),
     travel:(top,duration=.85)=>new Promise(resolve=>{
+      releaseScroll();
       navigationTween?.kill();top=Math.max(0,Math.min(top,document.documentElement.scrollHeight-innerHeight));
       if(reduced||!hasMotion||Math.abs(top-scrollY)<1){scrollTo(top,{immediate:true,force:true});resolve();return;}
       const position={top:scrollY},done=()=>{navigationTween=null;resolve();};
@@ -28,12 +35,28 @@
     })};
   window.addEventListener('angora:scroll', event => scrollTo(event.detail.top,{immediate:!!event.detail.immediate}));
   const menu = $('#menu'), menuToggle = $('.menu-toggle');
+  const header=$('.header');let headerTimer,previousScroll=scrollY,previousTime=performance.now();
+  function hideHeader(){
+    if(!menu.hidden||(header.contains(document.activeElement)&&document.activeElement.matches(':focus-visible')))return;
+    header.classList.remove('is-visible');
+  }
+  function revealHeader(){
+    header.classList.add('is-visible');clearTimeout(headerTimer);
+    headerTimer=setTimeout(hideHeader,1100);
+  }
+  // Wheel intent also reveals navigation while a film deliberately holds y=0.
+  window.AngoraNavigation={gesture:(delta,mode=0)=>{
+    const pixels=Math.abs(delta)*(mode===1?16:mode===2?innerHeight:1);
+    if(pixels>=70)revealHeader();
+  }};
+  header.addEventListener('focusin',revealHeader);
+  header.addEventListener('focusout',()=>{clearTimeout(headerTimer);headerTimer=setTimeout(hideHeader,600);});
   let returnFocus = null, menuClosing = null;
   function closeMenu() {
     if(menuClosing)return menuClosing;
     if(menu.hidden)return Promise.resolve();
     menuToggle.setAttribute('aria-expanded','false');
-    const finish=()=>{menu.hidden=true;document.body.classList.remove('locked');lenis?.start();updateHeader();};
+    const finish=()=>{menu.hidden=true;document.body.classList.remove('locked');lenis?.start();updateHeader();revealHeader();};
     if(reduced||!hasMotion){finish();return Promise.resolve();}
     menuClosing=new Promise(resolve=>gsap.to(menu,{opacity:0,y:-12,duration:.22,overwrite:true,onComplete:()=>{finish();gsap.set(menu,{clearProps:'opacity,transform'});menuClosing=null;resolve();}}));
     return menuClosing;
@@ -41,6 +64,7 @@
   menuToggle.addEventListener('click', () => {
     if (!menu.hidden) return closeMenu();
     menu.hidden = false; menuToggle.setAttribute('aria-expanded','true');
+    revealHeader();
     document.body.classList.add('locked'); lenis?.stop();
     $('.header').classList.remove('on-dark'); menu.querySelector('a').focus({preventScroll:true});
     if(!reduced&&hasMotion){gsap.fromTo(menu,{opacity:0,y:12},{opacity:1,y:0,duration:.4,ease:'power3.out',overwrite:true});gsap.fromTo(menu.querySelectorAll('a'),{opacity:0,y:12},{opacity:1,y:0,duration:.45,stagger:.025,ease:'power3.out',overwrite:true});}
@@ -56,9 +80,8 @@
   });
   let navigationId=0;
   async function navigate(target,before=()=>{}) {
-    if(document.querySelector('.atlas-scene.is-focused'))window.AngoraPlan?.closeFocus();
     const id=++navigationId;await closeMenu();await window.AngoraSteps?.whenIdle();if(id!==navigationId)return;
-    const commit=async()=>{await before();if(target.id==='home')await window.AngoraCinema?.reset();if(target.id==='floors')window.AngoraIso?.resetView();if(target.id==='atlas')window.AngoraPlan?.resetView();const top=target.getBoundingClientRect().top+scrollY;scrollTo(top,{immediate:true,force:true});window.ScrollTrigger?.update();updateHeader();};
+    const commit=async()=>{await before();if(target.id==='home')await window.AngoraCinema?.reset();if(target.id==='floors')window.AngoraIso?.resetView();if(target.id==='atlas')window.AngoraPlan?.resetView();const top=target.getBoundingClientRect().top+scrollY;scrollTo(top,{immediate:true,force:true});target.tabIndex=-1;target.focus({preventScroll:true});window.ScrollTrigger?.update();updateHeader();};
     if(reduced||Math.abs(target.getBoundingClientRect().top)<innerHeight*.8){await commit();return;}
     // Capture both complete scenes; distant navigation never flies through the story.
     if(document.startViewTransition){await document.startViewTransition(commit).finished;}
@@ -90,6 +113,8 @@
   }
   let scrollQueued = false;
   window.addEventListener('scroll', () => {
+    const now=performance.now(),elapsed=Math.max(16,now-previousTime),speed=Math.abs(scrollY-previousScroll)/elapsed;
+    if(speed>1.15)revealHeader();previousScroll=scrollY;previousTime=now;
     if (scrollQueued) return;
     scrollQueued = true; requestAnimationFrame(() => {updateHeader(); scrollQueued = false;});
   }, {passive:true});
@@ -187,7 +212,7 @@
     dialog.querySelector('.dialog-close').addEventListener('click', closePhoto);
     dialog.addEventListener('cancel',event=>{event.preventDefault();closePhoto();});
     dialog.addEventListener('click', event => {if (event.target === dialog) {const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) closePhoto();}});
-    dialog.addEventListener('close', () => {if(!document.querySelector('.atlas-scene.is-focused')){document.body.classList.remove('locked');lenis?.start();}returnFocus?.focus({preventScroll:true});});
+    dialog.addEventListener('close', () => {document.body.classList.remove('locked');lenis?.start();returnFocus?.focus({preventScroll:true});});
   });
   document.addEventListener('click', event => {
     const photo = event.target.closest('[data-photo]');
@@ -218,7 +243,7 @@
         .fromTo('.life-landscape',{y:20},{y:0,duration:1,ease:'none'},0);
       $$('.reveal').forEach(element => {if(element.matches('h2,h3,.editorial-image'))return;gsap.from(element, {y:22, opacity:0, duration:.65, ease:'power3.out', scrollTrigger:{trigger:element, start:'top 91%', once:true}});});
       $$('.detail-photo').forEach(element => gsap.fromTo(element, {y:35}, {y:-18, ease:'none', scrollTrigger:{trigger:element.closest('.editorial'), start:'top bottom', end:'bottom top', scrub:.25}}));
-      gsap.fromTo('.location-image img', {scale:1.045}, {scale:1, ease:'none', scrollTrigger:{trigger:'.location', start:'top bottom', end:'bottom top', scrub:.25}});
+      gsap.fromTo('.location-image img', {scale:1.12,yPercent:-5}, {scale:1.2,yPercent:5, ease:'none', scrollTrigger:{trigger:'.location-image', start:'top bottom', end:'bottom top', scrub:.25}});
       gsap.fromTo('.contact-image img', {scale:1.04}, {scale:1, ease:'none', scrollTrigger:{trigger:'.contact', start:'top bottom', end:'bottom bottom', scrub:.25}});
       return () => {gardenTrigger = null;};
     });

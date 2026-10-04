@@ -1,5 +1,7 @@
 # Angora 21 — iyileştirme sonrası ara değerlendirme
 
+> **4 Ekim 2026, 10:57 Europe/Paris — değerlendirme düzeltmesi:** Aşağıdaki 8–9 bandındaki öz değerlendirmeler geri çekilmiştir. Kontroller film oynarken sayfa konumunu yeterince örneklememiş, menü taşmasını ve görsel/kurgu kusurlarını olduğundan hafif değerlendirmiştir. Bu dosya tarihsel kayıt olarak korunuyor; bir kalite kabulü veya güncel başarı puanı değildir. Sonraki düzeltmeler ve ölçümler [düzeltme kaydında](web-gpt-corrections-2026-10-04.md) yer alır.
+
 - Kayıt: 4 Ekim 2026, 03:11 Europe/Paris (UTC+02:00).
 - Önceki kayıt: [01:19 ara notlama](web-gpt-interim-review-2026-10-04.md), önce ve ayrı commit olarak main'e pushlandı: `2263c25b`.
 - Sayfa: `web-gpt.html`. Tasarım niyeti 10/10; bu turdaki aktif kalemlerin öz değerlendirmesi en az 8/10.

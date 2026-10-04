@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const data=window.ANGORA_ATLAS,$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-  const {roomBounds,resamplePolygon}=window.AngoraMotionMath;
+  const {roomBounds}=window.AngoraMotionMath;
   const levels=['Garden level','Entrance level','First floor','Attic level'],defaults=[3,4,19,9];
   const svg=$('#atlas-svg'),pins=$('#atlas-pins'),strip=$('#atlas-photo-strip'),map=$('.atlas-map'),image=$('#atlas-native-plan'),layer=$('.atlas-floor-layer');
   const ns='http://www.w3.org/2000/svg';let floor=0,selected,measure=false,poses,manifest,geometry,photoRequest=0;
@@ -26,7 +26,7 @@
   function inside(p,poly){let yes=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])yes=!yes;}return yes;}
   const roomName=name=>{
     name=name.replace(/Bedroom (?:C)?\d+/,'Bedroom').replace('Guest WC','WC').replace('Hall & stairs','Hall');
-    if((innerHeight<=540||innerWidth<innerHeight&&innerHeight<=680)&&!$('.atlas-scene').classList.contains('is-focused'))name=name.replace(/(?:Primary|Principal) bedroom/i,'Suite').replace('Bedroom','Bed').replace('Living room','Living').replace('Sitting area','Lounge').replace('Dressing room','Dress').replace(/(?:Family )?bathroom/i,'Bath').replace('Landing & kitchenette','Kitchen');
+    if(innerHeight<=540||innerWidth<innerHeight&&innerHeight<=680)name=name.replace(/(?:Primary|Principal) bedroom/i,'Suite').replace('Bedroom','Bed').replace('Living room','Living').replace('Sitting area','Lounge').replace('Dressing room','Dress').replace(/(?:Family )?bathroom/i,'Bath').replace('Landing & kitchenette','Kitchen');
     return name;
   };
   function drawOverlays(){
@@ -128,47 +128,32 @@
     showPhoto(defaults[floor],false);layout();
   }
   document.addEventListener('click',e=>{
-    const point=e.target.closest('[data-atlas-photo]');if(point)showPhoto(point.dataset.atlasPhoto).then(()=>{if(innerWidth<innerHeight&&innerHeight<=680&&$('.atlas-scene').classList.contains('is-focused'))$('#atlas-open').click();});
+    const point=e.target.closest('[data-atlas-photo]');if(point)showPhoto(point.dataset.atlasPhoto);
     const tab=e.target.closest('[data-atlas-floor]');if(tab){if(window.AngoraPlan?.navigate)window.AngoraPlan.navigate(Number(tab.dataset.atlasFloor));else selectFloor(tab.dataset.atlasFloor);}
     const room=e.target.closest('[data-atlas-room]');if(room){const p=photos().find(p=>p.roomId===room.dataset.atlasRoom);if(p)showPhoto(p.id);}
   });
   $$('[data-atlas-floor]').forEach(b=>b.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const i=e.key==='Home'?0:e.key==='End'?3:(floor+(e.key==='ArrowRight'?1:3))%4;window.AngoraPlan?.navigate?window.AngoraPlan.navigate(i):selectFloor(i);$('#atlas-tab-'+i).focus({preventScroll:true});}));
   $('#atlas-measure').onclick=()=>{measure=!measure;$('#atlas-measure').setAttribute('aria-pressed',String(measure));$('#atlas-measure').innerHTML=(measure?'Hide':'Show')+' dimensions <span>'+(measure?'−':'＋')+'</span>';drawOverlays();if(measure&&!matchMedia('(prefers-reduced-motion: reduce)').matches)gsap.from('.plan-dimension',{opacity:0,duration:.25,ease:'power1.out'});};
-  const focusButton=$('#atlas-focus'),scene=$('.atlas-scene');
-  function focusPlan(on){
-    scene.classList.toggle('is-focused',on);focusButton.setAttribute('aria-expanded',String(on));focusButton.textContent=on?'Close plan ×':'Expand plan ↗';
-    if(on){scene.setAttribute('role','dialog');scene.setAttribute('aria-modal','true');scene.setAttribute('aria-label','Floor plan detail');}
-    else{scene.removeAttribute('role');scene.removeAttribute('aria-modal');scene.removeAttribute('aria-label');}
-    document.body.classList.toggle('locked',on);on?window.AngoraScroll?.stop():window.AngoraScroll?.start();layout();
-  }
-  focusButton.onclick=()=>focusPlan(!scene.classList.contains('is-focused'));
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&scene.classList.contains('is-focused')&&!document.querySelector('dialog[open]')){focusPlan(false);focusButton.focus({preventScroll:true});}});
-  document.addEventListener('keydown',e=>{
-    if(e.key!=='Tab'||!scene.classList.contains('is-focused')||document.querySelector('dialog[open]'))return;
-    const controls=[...scene.querySelectorAll('button,a[href],[tabindex]')].filter(b=>b.tabIndex>=0&&b.getClientRects().length),first=controls[0],last=controls.at(-1);
-    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus({preventScroll:true});}
-    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus({preventScroll:true});}
-  });
-  $('.menu-toggle').addEventListener('click',()=>{if(scene.classList.contains('is-focused'))focusPlan(false);},{capture:true});
   window.addEventListener('angora:floor',e=>{if(window.AngoraPlan?.navigate)window.AngoraPlan.navigate(Number(e.detail));else selectFloor(e.detail);});
   async function transition(index){
     index=Math.max(0,Math.min(3,Number(index)));if(index===floor)return;
     if(!poses||!manifest||matchMedia('(prefers-reduced-motion: reduce)').matches){selectFloor(index);return;}
-    const next=new Image();next.src='./assets/residence/chapters/plan-'+index+'.webp';await next.decode().catch(()=>{});
-    const oldOutline=resamplePolygon(poses.floors[floor].contour.map(geometry));
-    const view=projection(index),newOutline=resamplePolygon(poses.floors[index].contour.map(view.at));
-    const previous=layer.cloneNode(true);previous.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));previous.querySelectorAll('.graphic-contour,.plan-camera').forEach(e=>e.remove());previous.classList.add('plan-previous-layer');previous.setAttribute('aria-hidden','true');previous.inert=true;map.append(previous);
-    const morphSvg=node('svg',{viewBox:'0 0 '+map.clientWidth+' '+map.clientHeight,class:'plan-morph-layer','aria-hidden':'true'}),outline=node('polygon',{class:'plan-morph-contour'});morphSvg.append(outline);map.append(morphSvg);
-    gsap.set(layer,{opacity:0});selectFloor(index);await image.decode().catch(()=>{});svg.querySelector('.graphic-contour')?.setAttribute('opacity','0');
-    const state={p:0};
+    const next=new Image(),photo=new Image();next.src='./assets/residence/chapters/plan-'+index+'.webp';photo.src=data.photos.find(p=>p.id===defaults[index]).url;
+    await Promise.all([next.decode().catch(()=>{}),photo.decode().catch(()=>{})]);
+    const panel=$('#atlas-panel'),direction=Math.sign(index-floor),width=panel.clientWidth+Math.max(16,innerWidth*.03);
+    // Move the complete registered drawing and its photograph together. No
+    // contour interpolation: each floor remains an honest architectural plan.
+    const previous=panel.cloneNode(true);previous.removeAttribute('id');previous.removeAttribute('role');previous.removeAttribute('aria-labelledby');
+    previous.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));previous.querySelectorAll('canvas').forEach(e=>e.remove());
+    previous.classList.add('atlas-slide-previous');previous.setAttribute('aria-hidden','true');previous.inert=true;
+    const live=[...panel.children];selectFloor(index);await image.decode().catch(()=>{});panel.append(previous);
+    gsap.set(live,{x:direction*width});
     await new Promise(resolve=>gsap.timeline({onComplete:resolve})
-      .to(state,{p:1,duration:.48,ease:'power2.inOut',onUpdate:()=>outline.setAttribute('points',oldOutline.map((a,i)=>[a[0]+(newOutline[i][0]-a[0])*state.p,a[1]+(newOutline[i][1]-a[1])*state.p].join(',')).join(' '))},0)
-      .to(previous,{opacity:0,duration:.38,ease:'power1.inOut'},0)
-      .to(layer,{opacity:1,duration:.38,ease:'power1.inOut'},.08)
-      .fromTo('.atlas-view',{opacity:.45},{opacity:1,duration:.38,ease:'power1.out'},.08));
-    previous.remove();morphSvg.remove();gsap.set(layer,{clearProps:'opacity'});layout();
+      .to(previous,{x:-direction*width,duration:.95,ease:'power2.inOut'},0)
+      .to(live,{x:0,duration:.95,ease:'power2.inOut'},0));
+    previous.remove();gsap.set(live,{clearProps:'transform'});layout();
   }
-  window.AngoraPlan={selectFloor,layout,transition,closeFocus:()=>focusPlan(false),get floor(){return floor;}};
+  window.AngoraPlan={selectFloor,layout,transition,get floor(){return floor;}};
   new ResizeObserver(layout).observe(map);image.addEventListener('load',layout);
   Promise.all([fetch('./assets/residence/chapters/poses.json').then(r=>r.json()),fetch('./assets/residence/chapters/native-manifest.json').then(r=>r.json())]).then(([p,m])=>{poses=p;manifest=m;layout();});
   selectFloor(0,true);

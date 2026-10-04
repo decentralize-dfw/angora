@@ -1,16 +1,14 @@
-"""Static editorial export of the viewer's registered region map; all six POI layers."""
+"""Static export of the registered viewer map, with an external HTML legend."""
 from pathlib import Path
-import html
 import json
 import math
-from PIL import ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 def read(name):
     return json.loads((ROOT / 'viewer/src' / f'{name}.json').read_text(encoding='utf-8'))
 streets, site, places, local, ml = map(read, ['region-streets', 'region-site', 'region-places', 'region-local', 'region-buildings-ml'])
 W, H, SCALE, CX, CY = 2400, 1600, .35, 1200, 820
-parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">', '<title>Angora Evleri and its surroundings</title>', '<desc>North-up map from the villa viewer. Education, health, food, shopping, parks and services are all visible. Site gates and application controls are excluded.</desc>', '<rect width="100%" height="100%" fill="#eef1ec"/>']
+parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">', '<title>Angora Evleri and its surroundings</title>', '<desc>North-up map from the villa viewer. The villa and dashed neighbourhood boundary are identified. All six amenity layers are shown as coloured dots without place names. The legend sits below the image.</desc>', '<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#223e35" stroke-width="1.2"/></marker></defs><rect width="100%" height="100%" fill="#eef1ec"/>']
 def points(raw):
     return list(zip(raw[::2], raw[1::2])) if raw and isinstance(raw[0], (float, int)) else raw
 def path(raw, closed=True):
@@ -30,7 +28,7 @@ for cls, weight, alpha in [(3, .9, .12), (2, 1.5, .21), (1, 2.3, .27), (0, 3.2, 
     lines += [path(p, False) for c, p in site['osm']['keptRuns'] if c == cls]
     shape(''.join(lines), f'fill="none" stroke="#243e31" stroke-opacity="{alpha}" stroke-width="{weight}" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"')
 if streets.get('boundary'):
-    shape(path(streets['boundary']['ring']), 'fill="#294f3b" fill-opacity=".04" stroke="#446455" stroke-width="1.6" stroke-dasharray="6 5" vector-effect="non-scaling-stroke"')
+    shape(path(streets['boundary']['ring']), 'fill="#294f3b" fill-opacity=".04" stroke="#446455" stroke-width="2" stroke-dasharray="6 5" vector-effect="non-scaling-stroke"')
 shape(''.join(path(p) for p in site['houses']), 'fill="#384d40" fill-opacity=".23"')
 shape(path(site['plot']), 'fill="#476350" fill-opacity=".2"')
 shape(path(site['villa']), 'fill="#223e35"')
@@ -40,12 +38,10 @@ for r in [500, 1000, 2000]:
     parts.append(f'<circle cx="0" cy="0" r="{r}" fill="none" stroke="#455b4e" stroke-opacity=".2" stroke-width="1" stroke-dasharray="2 7" vector-effect="non-scaling-stroke"/>')
 parts.append('</g>')
 project = lambda x, y: (CX + x*SCALE, CY + y*SCALE)
-occupied = [(50, 35, 550, 90), (50, H-95, W-100, 70)]
-markers = []
-counts = [0]*6
-def mark(x, y, g, radius=4):
+markers, counts = [], [0]*6
+def mark(x, y, g, radius=8):
     px, py = project(x, y)
-    if not 35 < px < W-35 or not 125 < py < H-130:
+    if not 8 < px < W-8 or not 8 < py < H-8:
         return
     if any(m[2] == g and math.hypot(px-m[0], py-m[1]) < 4 for m in markers):
         return
@@ -54,55 +50,26 @@ def mark(x, y, g, radius=4):
 for x, y, g, name in places['dots']:
     mark(x, y, g)
 for p in places['curated'] + local['places']:
-    mark(p['x'], p['y'], p['g'], 5)
-labels = []
-def label(name, x, y, color='#223e35', primary=False):
-    px, py = project(x, y)
-    font = 44 if primary else 32
-    face=ImageFont.truetype('arial.ttf', font)
-    width, height = max(70, face.getlength(name)+48), font+20
-    # Label boxes occupy screen pixels. Try short placements around the exact
-    # point, and omit a title if none is free; every category's dots remain.
-    offsets = [(12, -height-5), (12, 6), (-width-12, -height-5), (-width-12, 6)]
-    for dx, dy in offsets:
-        box = (px+dx, py+dy, width, height)
-        bx, by, bw, bh = box
-        if bx < 45 or by < 130 or bx+bw > W-45 or by+bh > H-130:
-            continue
-        if any(bx < tx+tw+8 and bx+bw+8 > tx and by < ty+th+8 and by+bh+8 > ty for tx, ty, tw, th in occupied):
-            continue
-        occupied.append(box); labels.append({'name': name, 'box': box})
-        background, text = ('#223e35', '#eef1ec') if primary else ('#f8f9f4', '#2c4336')
-        parts.append(f'<rect x="{bx:.2f}" y="{by:.2f}" width="{bw:.2f}" height="{bh:.2f}" rx="{bh/2}" fill="{background}" stroke="#d3dbd1"/>')
-        parts.append(f'<circle cx="{bx+15:.2f}" cy="{by+bh/2:.2f}" r="3.5" fill="{color}"/>')
-        parts.append(f'<text x="{bx+26:.2f}" y="{by+bh/2+font*.34:.2f}" font-family="Arial,sans-serif" font-size="{font}" fill="{text}">{html.escape(name)}</text>')
-        return
+    mark(p['x'], p['y'], p['g'], 10)
 villa_x = sum(p[0] for p in site['villa'])/len(site['villa'])
 villa_y = sum(p[1] for p in site['villa'])/len(site['villa'])
-label('ANGORA 21', villa_x, villa_y, primary=True)
-candidates = sorted(local['places'], key=lambda p: p.get('rank', 2)) + places['curated']
-seen = set()
-for p in candidates:
-    name = p.get('en', p['name'])
-    if name in seen or math.hypot(p['x'], p['y']) > 2100:
-        continue
-    seen.add(name); label(name, p['x'], p['y'], places['groups'][p['g']])
-# Every category's markers remain. Titles use the viewer's curated and local
-# selection, so the drawing is legible as one static neighbourhood view.
-parts.append('<text x="60" y="68" font-family="Arial,sans-serif" font-size="19" letter-spacing="4" fill="#496454">ANGORA EVLERI · ANKARA</text><text x="60" y="108" font-family="Arial,sans-serif" font-size="16" fill="#79877e">The neighbourhood, in context.</text>')
+vx, vy = project(villa_x, villa_y)
+parts.append(f'<circle cx="{vx:.2f}" cy="{vy:.2f}" r="27" fill="none" stroke="#223e35" stroke-width="2"/><circle cx="{vx:.2f}" cy="{vy:.2f}" r="9" fill="#223e35" stroke="#eef1ec" stroke-width="3"/>')
+parts.append(f'<path d="M{vx+25:.2f},{vy-10:.2f} L{vx+90:.2f},{vy-65:.2f} H{vx+350:.2f}" fill="none" stroke="#223e35" stroke-width="2"/><text x="{vx+98:.2f}" y="{vy-82:.2f}" font-family="Arial,sans-serif" font-size="36" letter-spacing="3" fill="#223e35" paint-order="stroke" stroke="#eef1ec" stroke-width="9">ANGORA 21</text>')
+labels = [{'name': 'ANGORA 21', 'anchor': [vx, vy]}]
+if streets.get('boundary'):
+    bx, by = max((project(x, y) for x, y in points(streets['boundary']['ring'])), key=lambda p: p[0])
+    parts.append(f'<path d="M{bx+260:.2f},{by-130:.2f} H{bx+160:.2f} L{bx+5:.2f},{by:.2f}" fill="none" stroke="#223e35" stroke-width="2" marker-end="url(#arrow)"/><text x="{bx+270:.2f}" y="{by-120:.2f}" font-family="Arial,sans-serif" font-size="32" fill="#223e35" paint-order="stroke" stroke="#eef1ec" stroke-width="9">Angora Evleri</text>')
+    labels.append({'name': 'Angora Evleri', 'anchor': [bx, by]})
 names = ['Education', 'Health', 'Food & drink', 'Shopping', 'Parks & sport', 'Services']
-for g, name in enumerate(names):
-    x = 60 + g*295
-    parts.append(f'<circle cx="{x}" cy="{H-73}" r="5" fill="{places["groups"][g]}"/><text x="{x+15}" y="{H-67}" font-family="Arial,sans-serif" font-size="17" fill="#496454">{html.escape(name)}</text>')
 parts.append(f'<text x="{W-80}" y="75" text-anchor="middle" font-family="Arial,sans-serif" font-size="27" fill="#496454">↑</text><text x="{W-80}" y="105" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#496454">N</text>')
 parts.append(f'<text x="{W-60}" y="{H-30}" text-anchor="end" font-family="Arial,sans-serif" font-size="13" fill="#7e8b81">Map data © OpenStreetMap contributors · Microsoft / Overture · Angora model</text></svg>')
-for i, a in enumerate(labels):
-    ax, ay, aw, ah = a['box']
-    for b in labels[i+1:]:
-        bx, by, bw, bh = b['box']
-        assert not (ax < bx+bw and ax+aw > bx and ay < by+bh and ay+ah > by), (a['name'], b['name'])
 assert all(counts), counts
 target = ROOT / 'assets/residence/life'
 (target/'angora-map.svg').write_text(''.join(parts), encoding='utf-8')
-(target/'angora-map.json').write_text(json.dumps({'source': 'The viewer region-map datasets and projection', 'northUp': True, 'radiusMetres': 2000, 'allGroups': names, 'markerCounts': counts, 'siteGates': False, 'labels': labels}, ensure_ascii=False, indent=2), encoding='utf-8')
-print(f'Exported {len(markers)} map points, six visible categories, {len(labels)} non-overlapping labels.')
+# Keep the flat image on phones, but make its two orientation callouts readable.
+# The same projection, true POI positions and doubled dots are retained.
+mobile = ''.join(parts).replace('font-size="36"', 'font-size="84"').replace('font-size="32"', 'font-size="72"').replace('stroke-width="9"', 'stroke-width="15"')
+(target/'angora-map-mobile.svg').write_text(mobile, encoding='utf-8')
+(target/'angora-map.json').write_text(json.dumps({'source': 'The viewer region-map datasets and projection', 'northUp': True, 'radiusMetres': 2000, 'allGroups': names, 'groupColors': places['groups'], 'markerCounts': counts, 'markerRadius': [8, 10], 'legend': 'HTML below the image', 'siteGates': False, 'labels': labels}, ensure_ascii=False, indent=2), encoding='utf-8')
+print(f'Exported {len(markers)} map points, six categories, villa marker and boundary arrow.')

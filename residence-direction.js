@@ -77,9 +77,12 @@
       if(section.classList.contains('family-story'))tl.to(scene,{backgroundColor:'#223e35',color:'#efede6',duration:.12,ease:'none'},.88);
       else tl.to(scene,{backgroundColor:'#fff',color:'#223e35',duration:.12,ease:'none'},.88);
     });
-    $$('.life-photo-story figure').forEach(figure=>{
-      gsap.fromTo(figure,{clipPath:'inset(5% 0 5% 0)'},{clipPath:'inset(0% 0 0% 0)',ease:'none',scrollTrigger:{trigger:figure,start:'top 85%',end:'top 35%',scrub:.25}});
-      gsap.fromTo(figure.querySelector('img'),{scale:1.035,yPercent:-1},{scale:1,yPercent:1,ease:'none',scrollTrigger:{trigger:figure,start:'top bottom',end:'bottom top',scrub:.25}});
+    $$('.life-photo-story').forEach((story,index)=>{
+      const figure=story.querySelector('figure'),side=index%2?1:-1;
+      const entrance=gsap.timeline({scrollTrigger:{trigger:story,start:'top 88%',end:'top 36%',scrub:.35}});
+      entrance.fromTo(figure,{x:()=>side*innerWidth*.14,opacity:.15},{x:0,opacity:1,duration:1,ease:'power2.out'},0)
+        .fromTo(figure.querySelector('img'),{scale:1.12},{scale:1.015,duration:1,ease:'power2.out'},0)
+        .fromTo(story.querySelectorAll('.life-story-number,h4,p,.text-link'),{x:side*24,opacity:0},{x:0,opacity:1,duration:.5,stagger:.035,ease:'power2.out'},.35);
     });
     // Release the photograph into the same forest ground that holds the lines.
     gsap.to('.footer-scene>img',{opacity:0,ease:'none',scrollTrigger:{trigger:'.footer-orbit',start:'top 80%',end:'top 15%',scrub:.25}});
