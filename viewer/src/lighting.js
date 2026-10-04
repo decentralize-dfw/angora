@@ -14,6 +14,11 @@ import {applyGlassCellPolish} from './glass-cells.js';
 import {applyRenderProfile,baseExposure,referenceProfile} from './render-profile.js';
 import {InteriorLightController} from './interior-lighting.js';
 import {FEATURES} from './features.js';
+// iç mekân rengi (fotoğraf ölçümü, qa-vray-foto): beyaz dengesi, doygunluk ve kontrast çarpanları
+export const DARK_WOOD_TEXTURES=new Set(['f6c1dca0447b61','bf580b2880797e']);
+export const WOOD_TONE=new THREE.Color(4.1,2.9,1.8);   // 52,32,25 -> ~105,58,36 sRGB
+let woodToned=0;
+export const INTERIOR_GRADE={wb:[1.07,1.0,0.85],sat:1.32,contrast:0.88};
 import {installPcss,pcssInstalled,PCSS_REFERENCE_SPAN} from './pcss.js';
 
 // The environment a surface reflects has to have a GROUND. A sky-only probe -
@@ -203,7 +208,14 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
     for(const m of boundEnvMaterials)m.envMapIntensity=(m.userData.envBaseIntensity??1)*envDayScale;
     for(const m of emissiveLiftMaterials)m.emissiveIntensity=envDayScale;
   }
-  let reflectionBoxes=null;
+  let reflectionBoxes=null,interiorBox=null,gradeInside=false,gradeBase=null;
+  function applyInteriorGrade(inside){
+    const u=gradePass.material.uniforms;
+    gradeBase??={sat:u.uSat.value,contrast:u.uContrast.value};
+    u.uWB.value.set(...(inside?INTERIOR_GRADE.wb:[1,1,1]));
+    u.uSat.value=gradeBase.sat*(inside?INTERIOR_GRADE.sat:1);
+    u.uContrast.value=gradeBase.contrast*(inside?INTERIOR_GRADE.contrast:1);
+  }
   function updateReflections(){
     const map=roomReflections?.get(reflectionFloor)??null;
     setBoxProbe(map&&reflectionBoxes?reflectionBoxes[reflectionFloor]:null);
@@ -571,6 +583,12 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
         // oldukları için yalnız yansıtma ile görünüyorlardı - gök yansıyınca mavi, oda sondası karanlıkken
         // SİYAH (01.10 denetim, foto 1/21/22). Fırçalanmış paslanmaz gibi yarı metal yapılır: açık renkli
         // eşya kendi difüz rengiyle görünür; koyu (siyah metal, BLCK) olduğu gibi kalır.
+        // 04.10 ahşap tonu (ilan fotoğrafı ölçümü): modelde "bal rengi"/"sıcak ceviz" adlı malzemelerin çoğu ortak
+        // koyu ceviz dokusunu taşıyor (ortalama sRGB 52,32,25 ve 39,24,20) - kapı, süpürgelik, dolap, büfe espresso
+        // görünüyordu; fotoğraflarda bal-kiraz (97-133, 53-68, 31-40). Doku deseni kalır, rengi doğrusal çarpanla.
+        if(FEATURES.woodTone&&['architecture','interior'].includes(name)&&DARK_WOOD_TEXTURES.has(material.map?.name)&&!material.userData.woodToned){
+          material.userData.woodToned=true;material.color.multiply(WOOD_TONE);woodToned++;
+        }
         if(['architecture','interior'].includes(name)&&!mirror&&material.metalness>=.5&&!material.userData.metalSoftened){
           material.userData.metalSoftened=true;
           const l=.2126*material.color.r+.7152*material.color.g+.0722*material.color.b;
@@ -720,7 +738,16 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
       try{renderer.setRenderTarget(target);renderer.render(scene,currentCamera);}
       finally{renderer.setRenderTarget(previous);target.dispose();}
     },
+    // 04.10 iç mekân rengi: kamera binanın içindeyken (oda kameraları, yürüme) 5 ilan fotoğrafına göre
+    // ölçülen sapma kapatılır. Render fotoğraflara göre beşte beş: daha soğuk (r/b 1,34-1,63 / 1,84-2,49),
+    // daha soluk (doygunluk 0,24-0,35 / 0,38-0,47), daha sert (1,3-1,9 EV fazla kontrast). Dış görünüm aynı kalır.
+    setInteriorBox(box){interiorBox=box;},
+    woodTonedCount(){return woodToned;},
     render(currentCamera){
+      if(gradePass&&interiorBox&&FEATURES.interiorGrade){
+        const inside=interiorBox.containsPoint(currentCamera.position);
+        if(inside!==gradeInside)applyInteriorGrade(gradeInside=inside);
+      }
       if(compactOutput&&!renderer.xr.isPresenting){compactOutput.render(renderer,scene,currentCamera);return;}
       if(!composer||renderer.xr.isPresenting){renderer.render(scene,currentCamera);return;}
       beauty.camera=currentCamera;ao.setCamera(currentCamera);ssrPass?.setCamera(currentCamera);composer.render();

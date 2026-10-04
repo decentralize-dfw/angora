@@ -57,6 +57,8 @@ export const GradeShader = {
     // davetkar - orta gri (0.18) pivotlu.
     uWarm: {value: new Vector3(1, 1, 1)},
     uContrast: {value: 1},
+    // 04.10 iç mekân beyaz dengesi (lighting.js interiorGrade): 1 = dokunulmaz
+    uWB: {value: new Vector3(1, 1, 1)},
     // MALZEME İŞ 3.4: parlama (bloom piramidinin çeyrek hedefi) ve dither
     // artık burada toplanır - bloom.combine + dither geçişleri kalktı.
     uGlare: {value: null},
@@ -69,7 +71,7 @@ export const GradeShader = {
     varying vec2 vUv;
     uniform sampler2D tDiffuse;
     uniform float uExposure,uSat,uGrain,uContrast,uBloomStrength,uBloomClamp,uCurve,uAuto;
-    uniform vec3 uLift,uGain,uVig,uWarm;
+    uniform vec3 uLift,uGain,uVig,uWarm,uWB;
     uniform sampler2D uGlare;
     ${FINITE_RGB}
 
@@ -155,7 +157,7 @@ export const GradeShader = {
     void main(){
       vec3 c=texture2D(tDiffuse,vUv).rgb;
       if(uBloomStrength>0.0)c=finiteRgb(c,uBloomClamp)+finiteRgb(texture2D(uGlare,vUv).rgb,uBloomClamp)*uBloomStrength;
-      c*=uExposure*uAuto;
+      c*=uExposure*uAuto*uWB;
       c=uLift+c*(uGain-uLift);
       float lum=dot(c,vec3(0.2126,0.7152,0.0722));
       c=mix(vec3(lum),c,uSat);

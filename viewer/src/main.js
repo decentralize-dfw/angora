@@ -1970,6 +1970,7 @@ async function loadNativeModel(manifest){
   lighting.setShadowBounds(buildingBox,gardenBox);
   for(const model of groups.values())contextBox.union(new THREE.Box3().setFromObject(model));
   lighting.setShadowBounds(buildingBox,gardenBox,contextBox); // İŞ 1: mahalle gölgesi bu kutuyu sarar
+  lighting.setInteriorBox?.(buildingBox); // 04.10 iç mekân rengi: kamera bu kutunun içindeyken
   // V-RAY B1: kat sondalarının kutuları - binanın XZ izi, katın döşemesinden bir kat yüksekliği;
   // sonda noktası manifest'teki çekim noktası.
   if(FEATURES.boxProbes&&manifest.room_probes?.length){
