@@ -59,7 +59,7 @@ test('fonts are subset WOFF2 under 30 KB each', () => {
 });
 
 test('scroll is never hijacked: no preventDefault on wheel or touch', () => {
-  for (const m of js.matchAll(/addEventListener\('(wheel|touchstart|touchmove|touchend)'[^;]*;/g)) assert.match(m[0], /passive:\s*true/, m[0]);
+  for (const m of js.matchAll(/addEventListener\('(wheel|touchstart|touchmove|touchend)'[^\n]*/g)) { assert.match(m[0], /passive:\s*true/, m[0]); assert.ok(!m[0].includes('preventDefault'), m[0]); }
   assert.ok(!/\.stop\(\)/.test(js.replace(/lenis\?\.stop\(\)/g, '')), 'no scroll stop outside menu and dialog');
   assert.ok(/directional: false/.test(js), 'snap points are not directional');
 });
