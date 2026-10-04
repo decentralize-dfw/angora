@@ -18,7 +18,9 @@ import {FEATURES} from './features.js';
 // doku adı -> doğrusal renk çarpanı. Koyu ceviz (52,32,25 / 39,24,20) -> bal-kiraz (~105,58,36);
 // kapı kanatları (Simple wood, 66,34,24): fotoğrafta açık bal rengi (153,96,74) - kırmızıya itmeden açılır.
 const WOOD_CHERRY=new THREE.Color(4.1,2.9,1.8),WOOD_DOOR=new THREE.Color(3.6,3.6,3.3);
-export const DARK_WOOD_TEXTURES=new Map([['f6c1dca0447b61',WOOD_CHERRY],['bf580b2880797e',WOOD_CHERRY],['931cdd3a3e45f6',WOOD_DOOR]]);
+// yemek masası (ornate dining table, 63,35,20): fotoğraflarda orta kahve (~130,80,50) - tonu değişmeden açılır
+export const DARK_WOOD_TEXTURES=new Map([['f6c1dca0447b61',WOOD_CHERRY],['bf580b2880797e',WOOD_CHERRY],['931cdd3a3e45f6',WOOD_DOOR],
+  ['ornate+dining+table+3d+model_basecolor',new THREE.Color(3.5,3.5,3.3)]]);
 let woodToned=0;
 export const INTERIOR_GRADE={wb:[1.07,1.0,0.85],sat:1.32,contrast:0.88};
 import {installPcss,pcssInstalled,PCSS_REFERENCE_SPAN} from './pcss.js';
