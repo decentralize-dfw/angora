@@ -35,17 +35,20 @@ Mobilde bunların üstüne bir dördüncüsü var: mobil, küçültülmüş masa
 - **Ortak dil:** başlıklar karakter bazlı rotateY 1,2 s stagger .05; paragraflar satır maskesi `yPercent 110 → 0`; sabit süre ailesi 0,8 / 1,2 s; bölgeye göre tema değiştiren, hiç kaybolmayan header; kenarda yüzde çubuğu.
 - **Mobil:** tek kırılım 992 px; tooltip → alt sheet; clip maskeleri, mıknatıs buton ve snap sadece masaüstü.
 
-### Likova (VIDE INFRA, özel motor + three.js)
+### Likova (VIDE INFRA, özel motor + three.js) — canlı ölçüm, 1440×900 ve iPhone 13
 
-- **Beş durumlu yükleyici** bina kütlesinden; yükleyici bloğu hero'ya şekil aktarır.
-- **Katmanlı cephe:** gökyüzü, bina ve ışık katmanları ayrı hızda; metin binadan önce çekilir.
-- **Satır maskesi:** `word-wrap` Y 110%, 1,2 s, `cubic-bezier(.7,0,.3,1)`; bütün sitede tek reveal.
-- **Önceki sahnenin altında bekleme:** `sticky--under-next`; yeni bölüm yukarı taşınmaz, maske açıldıkça arkadan görünür.
-- **Gerçek kamera yolu:** GLB içindeki CatmullRom eğrisi scroll ilerlemesine bağlı, FOV 20; ışık ve üç bilgi kartı aynı ilerlemeyle değişir.
-- **Okuma durakları:** `data-scroll-snap-point` ile 100/200/350/450/550/650 viewport birimine snap. Kilit yok, snap var.
-- **Fotoğraf devri:** crossfade yerine yeni kare alttan açılır (`clip top 100% → 0%`); ön fotoğraf çıkarken arkadaki açılır.
-- **Panel dönüşümü:** geniş yazı alanı daralarak sağ/sol karta döner, açılan alanı fotoğraf doldurur.
-- **Mobil ayrı:** `@md` görsel varyantları, paralaks ±5 svh'ye iner, scroll sahneleri `mobile-carousel`'a dönüşür, kat planı tam ekran mobil panel.
+- **Yapı:** 16 bölüm, sayfa 51 524 px (≈ 57 ekran). Her ana bölüm bir `sticky` sarmalayıcı; iç katman `position: sticky; top: 0` ile sabitlenir, sonraki bölüm `−100svh` marjinle öncekinin üstüne kayar (`sticky--under-previous/next`). Bölüm geçerken `<html>` üzerinde `ui-dark / ui-light` sınıfı değişir. Bölüm sınırı hiçbir zaman sert kesim değil: ya sonraki katman öncekinin üstünü `clip-path` ile kapatır, ya tema değişir.
+- **Scroll motoru:** locomotive türevi smooth scroll (lerp 0,1, dokunmada ×2), 22 `data-scroll-section`, 14 snap noktası. Kilit yok; snap var. Mobilde native scroll, sticky katmanlar korunur.
+- **Yükleyici:** beş durumlu blok, 1 s `cubic-bezier(.7,0,.3,1)`; çıkışta blok hero'daki beyaz panele, logo hero konumuna morph olur.
+- **Hero:** header logosu 4,4–6× büyütülmüş hâlde hero'da durur (512×77 px), ilk %85 vh'de 50 px header'daki yerine "yanaşır"; bina görseli translateY 66 → 50 → 10 → 0 → −33 %, metin binadan önce söner. Hepsi scrub.
+- **Header:** sabit 50 px (mobil 40), şeffaf, `mix-blend-mode: difference`; aşağı kaydırmada gizlenir, yukarı kaydırmada geri gelir. Menü sol modal ≈ 828 px, 9 madde 20/24 px, sayfa rgba(7,11,32,.6) perde.
+- **Hareket dili:** tek easing `cubic-bezier(.7,0,.3,1)` (CSS'te 102 kullanım); süreler 0,5 s (renk/opacity/transform) ve 1 s (clip-path, header); stagger 0,05 s adım. Reveal yalnız masaüstünde (IntersectionObserver eşik .5, kelime clip maskesi); mobilde içerik anında görünür, paralaks 93 elemanda azaltılmış.
+- **Scrub kalıpları:** `data-parallax-<konum>-<çapa>` ile 172 eleman; `imageMove` (her fotoğraf kendi çerçevesinde img−çerçeve farkı kadar kayar), `imageScale 1.1`, `stickyLayerClip` (sonraki bölüm öncekini clip-path ile kapatır), 3D harita `--progress` 0 → 1 CSS değişkeni, Location/Accessibility'de alttan clip-path wipe.
+- **Medya:** 96 `<img>` hepsi `<picture>` + WebP, `@xs…@xxl` kırılım varyantları, SVG yer tutucu ile CLS ≈ 0,007; video 4,2 MB masaüstü + ayrı dikey varyant mobil; GLB 2,57 MB; fontlar 2 WOFF2 = 197 KB.
+- **Aktarım:** masaüstü 158 istek / 21,2 MB çözülmüş (görsel 11,1 MB, video 5,4 MB, GLB 2,6 MB, JS 1,5 MB, CSS 0,5 MB); mobil 113 istek / 13,2 MB (görsel 3,0 MB). LCP (TTFB çıkarılınca) masaüstü ≈ 0,7 s, mobil ≈ 0,6 s.
+- **Tipografi:** TT Norms Pro 400/450, tamamı büyük harf; gövde 14/18 px (+0,56 px), `.text-small` 11 px, lead 20 px, h2 85 px (−0,85 px), h1 143 px; mobil 11 / 9 / 17 / 27 / 86 px; `text-box: trim-both cap alphabetic`; 980–1200 px arası akışkan `--scale-px`.
+- **Boşluk:** gutter 20 px (xxxl 30), bölüm üst boşluğu 200 px (mobil 80–120), header 50/40.
+- **Zayıf yanları (bize ders):** hamburger 40×5 px (6 px dokunma yüksekliği), "Contact us" 63×6 px, mobilde 9 px yazı ×80; mobilde kullanılmayan GLB indiriliyor; konsolda "Parallax easing 'linear' not found" ×7.
 
 ### Ortak ilkeler
 
@@ -55,7 +58,7 @@ Mobilde bunların üstüne bir dördüncüsü var: mobil, küçültülmüş masa
 | Okuma durağı | snap (masaüstü) | snap noktaları | kilit + 220 ms "gate" |
 | Bölüm sınırı | kavis örtüşme, maske | altta bekleme, clip | sert kesim, zemin rengi değişimi |
 | Tek ilerleme → çok katman | footer, dalış | kamera + ışık + bilgi | her bölüm ayrı tetikleyici |
-| Header | kalıcı, tema değiştirir | kalıcı | gizli, hızlı kaydırmada 1,1 s görünür |
+| Header | kalıcı, tema değiştirir | kalıcı 50 px, aşağı kaydırmada gizlenir, yukarıda döner | gizli, hızlı kaydırmada 1,1 s görünür |
 | Reveal dili | 2 aile, sabit süreler | 1 aile | 4–5 farklı (y-fade, clip, word-window, opacity, slide) |
 | Mobil | ayrı davranış | ayrı görsel ve carousel | aynı DOM, küçültülmüş |
 | Medya | gerçek fotoğraf, el çekimi alpha video, Webflow CDN varyantları | gerçek GLB, `@md` görseller | AI üretimi filmler, tek boy JPEG |
@@ -281,5 +284,7 @@ Her madde: ne / neden / nasıl / efor (S ≤ 1 gün, M 2–4 gün, L ≥ 1 hafta
 ## 8. Ekran görüntüsü dizini
 
 Masaüstü (1440×900): `d01` açılış dinlenme hâli, header yok · `d02` 01 Arrival karesi · `d03` 03 Garden (AI klip, gerçek evden farklı) · `d04` Residence başlık animasyon ortası · `d05` Arrival çerçeve · `d06` yatak odası şeridi · `d07` bahçe · `d08` dört kat · `d09` plan atlası · `d10` Life haritası (alt yarı boş) · `d11` galeri · `d12` contact · `d13` footer tel kafes · `d14` menü · `d15` plan ölçüleri.
+
+Likova (karşılaştırma): `l01` masaüstü açılış (logo panel + bina) · `l02` mobil açılış (aynı kompozisyon dikeyde) · `l03` masaüstü menü.
 
 Mobil (390×664): `m01` açılış · `m02` Arrival bandı · `m03` Residence · `m04` Arrival tam ekran · `m05` yatak odası şeridi (kesik alt yazılar) · `m06` bahçe · `m07` dört kat · `m08` plan atlası (sekme kırılması, pin çakışması) · `m09` header başlığı örtüyor · `m10` galeri · `m11` footer · `m12` menü · `m13` plan ölçüleri.
