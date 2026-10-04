@@ -352,6 +352,7 @@ img[data-parallax]{will-change:transform;transform:scale(1.14)}
 .wireframe-stage canvas:active{cursor:grabbing}
 .wireframe-status{position:absolute;bottom:0;left:0;right:0;text-align:center;min-height:44px;display:flex;align-items:flex-end;justify-content:center;font:500 11px/1.6 var(--sans);letter-spacing:.08em;color:rgba(239,237,230,.7);pointer-events:none}
 .wireframe-stage[data-load-error] .wireframe-status{pointer-events:auto;text-decoration:underline}
+@media (hover:none){.wireframe-stage canvas{pointer-events:none}.wireframe-stage[data-ready="true"]:not([data-load-error]) .wireframe-status{display:none}}
 .wireframe-stage[data-ready="true"]:not([data-load-error]) .wireframe-status{animation:hint-fade 1s var(--ease-mask) 3s forwards}
 @keyframes hint-fade{to{opacity:0}}
 .footer-actions{display:flex;flex-direction:column}
