@@ -89,6 +89,8 @@ export function createAutoExposure(renderer, {tau = .6, every = 4, daylight = ()
     // are composed pictures the owner approved as they are; a white plan
     // metered "too bright" would turn grey. Off = ease back to 1.
     active: false,
+    // yürüme: yarım düzeltme, en çok +0,5 EV. Oda kameraları (main.js interiorExposure) fotoğrafçı gibi daha çok açar.
+    up: .5, strength: .5,
     onChange: null,
     reset() {targetEv = currentEv = 0; state.value = 1; state.adapting = false;},
     // Called by the grade pass with its HDR input, once per composed frame.
@@ -107,7 +109,7 @@ export function createAutoExposure(renderer, {tau = .6, every = 4, daylight = ()
           pending = false;
           if (!state.active) return;
           const {ev, bright} = meterStats(pixels);
-          const next = correctionEv(ev, {bright, daylight: daylight()});
+          const next = correctionEv(ev, {bright, daylight: daylight(), up: state.up, strength: state.strength});
           if (Math.abs(next - targetEv) > .02) {targetEv = next; if (Math.abs(targetEv - currentEv) > .02) state.onChange?.();}
         }, () => {pending = false; failed = true; state.reset();});
       }
