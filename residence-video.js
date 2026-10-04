@@ -19,8 +19,9 @@
     }catch{return false;}
   }
   function create(src,parent,className){
-    const video=document.createElement('video');video.src=src;video.className=className;video.muted=true;video.playsInline=true;video.preload='auto';video.setAttribute('aria-hidden','true');video.holdFrame=holdFrame(parent);parent.append(video);video.load();return video;
+    const video=document.createElement('video');video.src=src;video.className=className;video.muted=true;video.playsInline=true;video.preload='metadata';video.setAttribute('aria-hidden','true');video.holdFrame=holdFrame(parent);parent.append(video);video.load();return video;
   }
+  function prime(video){if(video.preload==='auto')return;video.preload='auto';video.load();}
   function waitFor(video,event,action){
     return new Promise((resolve,reject)=>{
       const cleanup=()=>{clearTimeout(timer);video.removeEventListener(event,done);video.removeEventListener('error',fail);};
@@ -50,5 +51,11 @@
       },fail);
     });
   }
-  window.AngoraVideo={create,play,freeze};
+  async function still(video,siblings=[]){
+    if(video.readyState<2){prime(video);if(video.readyState<2)await waitFor(video,'loadeddata');}
+    video.pause();const target=Math.max(0,video.duration-.035);
+    if(Math.abs(video.currentTime-target)>.01)await waitFor(video,'seeked',()=>video.currentTime=target);
+    return freeze(video,siblings);
+  }
+  window.AngoraVideo={create,play,freeze,still,prime};
 })();

@@ -20,7 +20,7 @@ const io=new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({
 await Promise.all([MeshoptDecoder.ready,MeshoptSimplifier.ready]);
 await mkdir(output,{recursive:true});
 const sources=[
-  {name:'villa',file:'build/web/26092026/BUILDING-opt-v6.glb',angle:28},
+  {name:'villa',file:'build/web/26092026/BUILDING-opt-v6.glb',angle:35},
   {name:'garden',file:'build/web/26092026/GARDEN-opt-v3.glb',angle:38},
   {name:'neighbours',file:'build/web/26092026/KOMSULAR-opt-v2.glb',angle:40},
   {name:'landscape',file:'build/web/26092026/CEVRE-YOL-opt-v3.glb',angle:48},
@@ -30,7 +30,7 @@ const quantum=.005, radius=54, target=[-.7,4.7,-.4];
 const groups=[],values=[],depthValues=[],matrix=new THREE.Matrix4();
 for(const source of sources){
   const document=await io.read(path.join(root,source.file));
-  const seen=new Set(),start=values.length/3,depthStart=depthValues.length/3;
+  const seen=new Set(),plantCells=new Map(),start=values.length/3,depthStart=depthValues.length/3;
   let primitives=0;
   for(const node of document.getRoot().listNodes()){
     const mesh=node.getMesh();if(!mesh)continue;
@@ -46,7 +46,7 @@ for(const source of sources){
       const organic=/tree|plant|leaf/i.test(material)||source.name==='trees';
       if(organic&&index){
         const indices=Uint32Array.from(geometry.index.array),positions=geometry.getAttribute('position').array;
-        const targetCount=Math.floor(indices.length*.12/3)*3;
+        const targetCount=Math.floor(indices.length*.06/3)*3;
         const [simplified]=MeshoptSimplifier.simplify(indices,positions,3,targetCount,.004);
         geometry.setIndex(new THREE.BufferAttribute(simplified,1));
       }
@@ -59,12 +59,19 @@ for(const source of sources){
         const near=Math.min(Math.hypot(a[0]-target[0],a[2]-target[2]),Math.hypot(b[0]-target[0],b[2]-target[2]));
         if(near>radius)continue;
         // Sub-centimetre seams cannot contribute at this camera scale.
-        const minimum=organic?.18:/clay/i.test(material)?.35:/metal|gobek|zincir|desen|donanim/i.test(material)?.22:.055;
+        const minimum=organic?.16:/clay/i.test(material)?1.1:/metal|gobek|zincir|desen|donanim/i.test(material)?.35:.09;
         if(Math.hypot(a[0]-b[0],a[1]-b[1],a[2]-b[2])<minimum)continue;
         const qa=a.map((v,k)=>Math.round((v-target[k])/quantum)),qb=b.map((v,k)=>Math.round((v-target[k])/quantum));
         if([...qa,...qb].some(v=>Math.abs(v)>32767))throw Error('Position exceeded line quantization bounds');
         const ka=qa.join(','),kb=qb.join(','),key=ka<kb?ka+'|'+kb:kb+'|'+ka;
-        if(seen.has(key))continue;seen.add(key);values.push(...qa,...qb);
+        if(seen.has(key))continue;seen.add(key);
+        if(organic){
+          // Keep the canopy's distribution without stacking hundreds of leaf
+          // triangles into a bright knot at the presentation's camera scale.
+          const cell=a.map((v,k)=>Math.floor(((v+b[k])/2-target[k])/.45)).join(',');
+          const length=Math.hypot(a[0]-b[0],a[1]-b[1],a[2]-b[2]),previous=plantCells.get(cell);
+          if(!previous||length>previous.length)plantCells.set(cell,{length,points:[...qa,...qb]});
+        }else values.push(...qa,...qb);
       }
       let depthIndices=geometry.index?.array;
       const positions=geometry.getAttribute('position').array;
@@ -83,6 +90,7 @@ for(const source of sources){
       primitives++;edges.dispose();geometry.dispose();
     }
   }
+  for(const edge of plantCells.values())values.push(...edge.points);
   const count=values.length/3-start;
   groups.push({name:source.name,start,count,depthStart,depthCount:depthValues.length/3-depthStart,source:source.file,primitives});
   console.log(`${source.name}: ${count/2} line segments`);
