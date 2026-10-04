@@ -649,8 +649,9 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
         // camgöbeği mat metal. Su: cilalı dielektrik, yarı saydam (fayans ve yunus görünür), fotoğraftaki mavi (46,161,214).
         // Çim dokusu sarı-zeytin (92,86,40), fotoğrafta yeşil kanal baskın (~100,115,32).
         if(FEATURES.gardenTone&&name==='garden'&&!material.userData.gardenToned){
-          if(/^water$/i.test(material.name)){material.userData.gardenToned=true;material.metalness=0;material.roughness=.04;material.color.setRGB(.03,.30,.62);
-            material.transparent=true;material.opacity=.62;material.depthWrite=false;material.envMapIntensity=1.2;}
+          // berrak su: renk fayanstan gelir (yunus mozaiği %62 opak suyun altında kayboluyordu)
+          if(/^water$/i.test(material.name)){material.userData.gardenToned=true;material.metalness=0;material.roughness=.04;material.color.setRGB(.10,.45,.70);
+            material.transparent=true;material.opacity=.35;material.depthWrite=false;material.envMapIntensity=1.2;}
           else if(/^pool_tile/i.test(material.name)){material.userData.gardenToned=true;material.metalness=0;material.roughness=.35;material.color.setRGB(.04,.30,.66);}
           else if(/grass|meadow|çim|cim/i.test(material.name)){material.userData.gardenToned=true;material.color.multiply(new THREE.Color(1.1,1.6,.75));}
         }
