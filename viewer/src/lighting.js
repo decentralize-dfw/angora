@@ -15,8 +15,10 @@ import {applyRenderProfile,baseExposure,referenceProfile} from './render-profile
 import {InteriorLightController} from './interior-lighting.js';
 import {FEATURES} from './features.js';
 // iç mekân rengi (fotoğraf ölçümü, qa-vray-foto): beyaz dengesi, doygunluk ve kontrast çarpanları
-export const DARK_WOOD_TEXTURES=new Set(['f6c1dca0447b61','bf580b2880797e','931cdd3a3e45f6']);   // son: kapı kanatları (Simple wood, 66,34,24)
-export const WOOD_TONE=new THREE.Color(4.1,2.9,1.8);   // 52,32,25 -> ~105,58,36 sRGB
+// doku adı -> doğrusal renk çarpanı. Koyu ceviz (52,32,25 / 39,24,20) -> bal-kiraz (~105,58,36);
+// kapı kanatları (Simple wood, 66,34,24): fotoğrafta açık bal rengi (153,96,74) - kırmızıya itmeden açılır.
+const WOOD_CHERRY=new THREE.Color(4.1,2.9,1.8),WOOD_DOOR=new THREE.Color(3.6,3.6,3.3);
+export const DARK_WOOD_TEXTURES=new Map([['f6c1dca0447b61',WOOD_CHERRY],['bf580b2880797e',WOOD_CHERRY],['931cdd3a3e45f6',WOOD_DOOR]]);
 let woodToned=0;
 export const INTERIOR_GRADE={wb:[1.07,1.0,0.85],sat:1.32,contrast:0.88};
 import {installPcss,pcssInstalled,PCSS_REFERENCE_SPAN} from './pcss.js';
@@ -587,7 +589,7 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
         // koyu ceviz dokusunu taşıyor (ortalama sRGB 52,32,25 ve 39,24,20) - kapı, süpürgelik, dolap, büfe espresso
         // görünüyordu; fotoğraflarda bal-kiraz (97-133, 53-68, 31-40). Doku deseni kalır, rengi doğrusal çarpanla.
         if(FEATURES.woodTone&&['architecture','interior'].includes(name)&&DARK_WOOD_TEXTURES.has(material.map?.name)&&!material.userData.woodToned){
-          material.userData.woodToned=true;material.color.multiply(WOOD_TONE);woodToned++;
+          material.userData.woodToned=true;material.color.multiply(DARK_WOOD_TEXTURES.get(material.map.name));woodToned++;
         }
         if(['architecture','interior'].includes(name)&&!mirror&&material.metalness>=.5&&!material.userData.metalSoftened){
           material.userData.metalSoftened=true;
