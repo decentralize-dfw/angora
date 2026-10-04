@@ -650,9 +650,9 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
         // Çim dokusu sarı-zeytin (92,86,40), fotoğrafta yeşil kanal baskın (~100,115,32).
         if(FEATURES.gardenTone&&name==='garden'&&!material.userData.gardenToned){
           // berrak su: renk fayanstan gelir (yunus mozaiği %62 opak suyun altında kayboluyordu)
-          if(/^water$/i.test(material.name)){material.userData.gardenToned=true;material.metalness=0;material.roughness=.04;material.color.setRGB(.10,.45,.70);
-            material.transparent=true;material.opacity=.35;material.depthWrite=false;material.envMapIntensity=1.2;}
-          else if(/^pool_tile/i.test(material.name)){material.userData.gardenToned=true;material.metalness=0;material.roughness=.35;material.color.setRGB(.04,.30,.66);}
+          if(/^water$/i.test(material.name)){material.userData.gardenToned=true;material.metalness=0;material.roughness=.04;material.color.setRGB(.02,.38,.78);
+            material.transparent=true;material.opacity=.30;material.depthWrite=false;material.envMapIntensity=1.2;}
+          else if(/^pool_tile/i.test(material.name)){material.userData.gardenToned=true;material.metalness=0;material.roughness=.35;material.color.setRGB(.005,.26,.78);}   // fotoğraf: (2,178,239)
           else if(/grass|meadow|çim|cim/i.test(material.name)){material.userData.gardenToned=true;material.color.multiply(new THREE.Color(1.1,1.6,.75));}
         }
         if(name==='garden'&&/^pool_tile/i.test(material.name)&&dolphinUrl)applyPoolDolphin(material,dolphinUrl);
