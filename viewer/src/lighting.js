@@ -643,6 +643,15 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
           }
         }
         // Havuz tabanındaki yunus mozaiği (ürün sahibinin bahçe modeli).
+        // 04.10 bahçe (ilan fotoğrafları 24-26): Tur 10 bahçesinde su ve havuz fayansı metalik=1, pürüzlülük=1 - soluk
+        // camgöbeği mat metal. Su: cilalı dielektrik, yarı saydam (fayans ve yunus görünür), fotoğraftaki mavi (46,161,214).
+        // Çim dokusu sarı-zeytin (92,86,40), fotoğrafta yeşil kanal baskın (~100,115,32).
+        if(FEATURES.gardenTone&&name==='garden'&&!material.userData.gardenToned){
+          if(/^water$/i.test(material.name)){material.userData.gardenToned=true;material.metalness=0;material.roughness=.04;material.color.setRGB(.03,.30,.62);
+            material.transparent=true;material.opacity=.62;material.depthWrite=false;material.envMapIntensity=1.2;}
+          else if(/^pool_tile/i.test(material.name)){material.userData.gardenToned=true;material.metalness=0;material.roughness=.35;material.color.setRGB(.04,.30,.66);}
+          else if(/grass|meadow|çim|cim/i.test(material.name)){material.userData.gardenToned=true;material.color.multiply(new THREE.Color(1.1,1.6,.75));}
+        }
         if(name==='garden'&&/^pool_tile/i.test(material.name)&&dolphinUrl)applyPoolDolphin(material,dolphinUrl);
         if(['architecture','interior'].includes(name)&&material.userData.angoraBatch?.materials.some(n=>/wood.floor|WOOD-FL|terra_floor|stone_tile|bath_tile|granite floor/i.test(n)))floorLight?.apply(material);
         prepareMaterialResponse(material,{context});preparedMaterials.add(material);
