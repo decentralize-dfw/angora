@@ -10,6 +10,8 @@
   if (motion) gsap.registerPlugin(ScrollTrigger);
   document.documentElement.classList.add(motion ? 'has-motion' : 'no-motion');
   const EASE = 'expo.out';
+  const S = window.ANGORA_STRINGS || {};
+  let gardenTrigger = null, galleryTrigger = null;
   const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 
   /* Photographs: one helper for every responsive variant. */
@@ -75,8 +77,12 @@
   $$('a[href^="#"]').forEach(link => link.addEventListener('click', async e => {
     const id = link.hash.slice(1), target = document.getElementById(id); if (!target) return;
     e.preventDefault(); await closeMenu();
+    history.replaceState(null, '', link.hash);
     if (id === 'floors' && window.AngoraFloors) return window.AngoraFloors.go(0);
-    go(target, { offset: anchorOffset(id) }); history.replaceState(null, '', link.hash);
+    if (id === 'home') return go(0);
+    if (id === 'garden' && gardenTrigger) return go(gardenTrigger.start);
+    if (id === 'gallery' && galleryTrigger) return go(galleryTrigger.start);
+    go(target, { offset: anchorOffset(id) });
   }));
   $('#year').textContent = new Date().getFullYear();
   document.addEventListener('click', e => { const tour = e.target.closest('[data-tour]'); if (tour) window.open(`./index.html?lang=en&view=${encodeURIComponent(tour.dataset.tour)}`, '_blank', 'noopener'); });
@@ -179,9 +185,10 @@
       $('.hero-shade').style.opacity = String(1 - e); hero.dataset.theme = e > .5 ? 'light' : 'dark';
       $('.hero-track').style.opacity = String(p > .004 ? 1 - e : 0); $('.hero-captions').style.opacity = String(1 - clamp(s.ending * 2));
     };
-    const trigger = ScrollTrigger.create({ trigger: hero, start: 'top top', end: 'bottom bottom', scrub: .35, onUpdate: self => apply(self.progress), snap: { snapTo: [0, .3, .6, .9], duration: { min: .25, max: .8 }, delay: .06, ease: 'power2.inOut' } });
+    const trigger = ScrollTrigger.create({ trigger: hero, start: 'top top', end: () => `bottom-=${innerHeight} bottom`, scrub: .35, onUpdate: self => apply(self.progress), snap: { snapTo: [0, .3, .6, .9], directional: false, duration: { min: .25, max: .8 }, delay: .08, ease: 'power2.inOut' } });
     window.AngoraHero = { reset: () => go(0, { immediate: true }) };
-    trackButtons.forEach(b => b.addEventListener('click', () => { const p = Number(b.dataset.heroStop) * SEG - .02; go(trigger.start + (trigger.end - trigger.start) * p); }));
+    trackButtons.forEach(b => b.addEventListener('click', () => { const p = Number(b.dataset.heroStop) * SEG; go(trigger.start + (trigger.end - trigger.start) * p); }));
+    window.AngoraHeroTrigger = trigger;
     apply(0);
   } else { heroPin.classList.remove('is-scrolling'); captions[2].classList.add('is-on'); }
 
@@ -208,12 +215,12 @@
   });
 
   /* Garden: each photograph opens from below, copy changes at the stops. */
-  const gardens = [
+  const gardens = S.gardens || [
     ['01 / Your own water', 'A pool, all to yourself.', 'The private pool sits at the same level as the lower living floor. Open the doors, cross the terrace and the day moves outside.'],
     ['02 / A place in the shade', 'Stay a little longer.', 'A covered terrace makes room for unhurried lunches, quiet mornings and long evenings. It connects the garden-level rooms with the pool and outdoor dining area.'],
     ['03 / Room to breathe', 'A garden with its own rhythm.', 'Approximately 900 m² of private garden surrounds the residence. Mature planting, lawn and paths create different places to sit, play and spend time outdoors.']
   ];
-  const gardenPhotos = $$('.garden-photo'), gardenTabs = $$('[data-garden]'); let gardenIndex = -1, gardenTrigger = null;
+  const gardenPhotos = $$('.garden-photo'), gardenTabs = $$('[data-garden]'); let gardenIndex = -1;
   function setGarden(i) {
     if (i === gardenIndex) return; gardenIndex = i; const [n, t, c] = gardens[i];
     const swap = () => { $('#garden-number').textContent = n; $('#garden-title').textContent = t; $('#garden-text').textContent = c; };
@@ -223,7 +230,7 @@
   }
   if (motion) {
     const windows = [[.3, .5], [.65, .85]];
-    gardenTrigger = ScrollTrigger.create({ trigger: '.garden', start: 'top top', end: 'bottom bottom', scrub: .3, onUpdate: self => {
+    gardenTrigger = ScrollTrigger.create({ trigger: '.garden', start: 'top top', end: () => `bottom-=${innerHeight} bottom`, scrub: .3, onUpdate: self => {
       const p = self.progress;
       gardenPhotos.forEach((photo, k) => { if (k === 0) { photo.style.transform = `scale(${1.06 - .06 * clamp(p / .3)})`; return; } const [a, b] = windows[k - 1], r = gsap.parseEase('power2.inOut')(clamp((p - a) / (b - a))); photo.style.clipPath = `inset(${((1 - r) * 100).toFixed(2)}% 0 0 0)`; photo.style.transform = `scale(${1.08 - .08 * r})`; });
       setGarden(p < .42 ? 0 : p < .77 ? 1 : 2);
@@ -232,7 +239,7 @@
   } else { setGarden(0); gardenTabs.forEach(b => b.addEventListener('click', () => setGarden(Number(b.dataset.garden)))); }
 
   /* Four chapters: the isometric cut is scrubbed through three recorded moves. */
-  const chapters = [
+  const chapters = S.chapters || [
     { level: 'Garden level', kicker: '1 / The garden floor', title: 'Open the day outside.', copy: 'A living room of approximately 54 m², a separate kitchen and direct access to the garden and pool. An annexe with its own entrance adds space for guests, work or a separate daily routine.', features: ['Living room & kitchen', 'Garden & pool access', 'Guest WC & separate annexe'] },
     { level: 'Entrance level', kicker: '2 / The entrance floor', title: 'The heart of the home.', copy: 'Arrive from the street into the main social floor. A living and dining room of approximately 53 m² connects to a generous enclosed kitchen, utility space and an internally accessible garage.', features: ['Main living & dining room', 'Kitchen, utility space & guest WC', 'Street entrance, garage & balcony'] },
     { level: 'First floor', kicker: '3 / The bedroom floor', title: 'A place for privacy.', copy: 'The principal suite has its own dressing room and en-suite bathroom. Two more bedrooms, a family bathroom and a sitting area bring the private rooms together on one level.', features: ['Principal suite & dressing room', 'Two further bedrooms & family bathroom', 'Sitting area, balcony & lift access'] },
@@ -252,14 +259,14 @@
   if (motion) {
     const stage = $('.floors-stage'), player = new Frames($('.floors-canvas'), { fit: 'contain', background: '#ffffff' });
     ScrollTrigger.create({ trigger: floorsSection, start: 'top 160%', once: true, onEnter: () => FLOOR_CLIPS.reduce((p, c) => p.then(() => player.load(c)), Promise.resolve()) });
-    floorsTrigger = ScrollTrigger.create({ trigger: floorsSection, start: 'top top', end: 'bottom bottom', scrub: .35, snap: { snapTo: [0, 1 / 3, 2 / 3, 1], duration: { min: .25, max: .7 }, delay: .06, ease: 'power2.inOut' }, onUpdate: self => {
+    floorsTrigger = ScrollTrigger.create({ trigger: floorsSection, start: 'top top', end: () => `bottom-=${innerHeight} bottom`, scrub: .35, snap: { snapTo: [0, 1 / 3, 2 / 3, 1], directional: false, duration: { min: .25, max: .7 }, delay: .08, ease: 'power2.inOut' }, onUpdate: self => {
       const t = self.progress * 3, seg = Math.min(2, Math.floor(t)), local = t - seg, move = clamp((local - .2) / .6);
       const live = self.progress > .002 && self.progress < .998;
       stage.classList.toggle('is-live', live);
       if (live) player.show(FLOOR_CLIPS[seg], move * 21); else floorStill.src = `./assets/web2/chapters/iso-${self.progress < .5 ? 0 : 3}-1440.webp`;
       setFloor(local < .5 ? seg : seg + 1);
     } });
-    const goFloor = i => { const p = i / 3 + (i < 3 ? .002 : 0); go(floorsTrigger.start + (floorsTrigger.end - floorsTrigger.start) * p); };
+    const goFloor = i => go(floorsTrigger.start + (floorsTrigger.end - floorsTrigger.start) * (i / 3));
     window.AngoraFloors = { go: goFloor };
     floorTabs.forEach(b => { b.addEventListener('click', () => goFloor(Number(b.dataset.floor))); b.addEventListener('keydown', e => { const i = Number(b.dataset.floor); const next = e.key === 'ArrowRight' ? (i + 1) % 4 : e.key === 'ArrowLeft' ? (i + 3) % 4 : e.key === 'Home' ? 0 : e.key === 'End' ? 3 : null; if (next === null) return; e.preventDefault(); goFloor(next); $(`#floor-tab-${next}`).focus({ preventScroll: true }); }); });
     $$('[data-floor-link]').forEach(b => b.addEventListener('click', () => goFloor(Number(b.dataset.floorLink))));
@@ -268,21 +275,21 @@
   $('#floor-plan-link').addEventListener('click', e => { e.preventDefault(); window.dispatchEvent(new CustomEvent('angora:floor', { detail: Number($('#floor-plan-link').dataset.atlasFloor || 0) })); go($('#atlas'), { offset: -headerH() + 8 }); });
 
   /* Gallery: a horizontal scrub on pointer devices, a native carousel on touch. */
-  const atlas = window.ANGORA_ATLAS, caption = p => p.en.replace('Basement ·', 'Garden level ·').replace('Ground floor ·', 'Entrance level ·').replace('Attic floor ·', 'Attic level ·');
-  const exteriors = [['angora_28.jpeg', 'The street elevation'], ['angora_24.jpg', 'The private garden & pool'], ['angora_26.jpg', 'The garden-facing elevation'], ['angora_27.jpg', 'The covered terrace & water']].map(([file, en]) => ({ file, en }));
+  const atlas = window.ANGORA_ATLAS, caption = p => S.lang === 'tr' ? (p.tr || p.en).replace('Bodrum ·', 'Bahçe katı ·') : p.en.replace('Basement ·', 'Garden level ·').replace('Ground floor ·', 'Entrance level ·').replace('Attic level ·', 'Attic level ·').replace('Attic floor ·', 'Attic level ·');
+  const exteriors = (S.exteriors || [['angora_28.jpeg', 'The street elevation'], ['angora_24.jpg', 'The private garden & pool'], ['angora_26.jpg', 'The garden-facing elevation'], ['angora_27.jpg', 'The covered terrace & water']]).map(([file, en]) => ({ file, en, tr: en }));
   const byId = id => atlas.photos.find(p => p.id === id);
   const sets = { all: [5, 22, 40, 31, 33, 32, 7, 10].map(byId), outdoor: [exteriors[1], exteriors[0], exteriors[3], exteriors[2]], 0: [2, 5, 1].map(byId), 1: [4, 21, 23].map(byId), 2: [17, 12, 32].map(byId), 3: [7, 9, 15].map(byId) };
-  const track = $('.gallery-track'), counter = $('#gallery-counter'), bar = $('.gallery-progress i'); let items = [], galleryTrigger = null, index = 0;
+  const track = $('.gallery-track'), counter = $('#gallery-counter'), bar = $('.gallery-progress i'); let items = [], index = 0;
   const desktopGallery = () => motion && !isMobile();
   function updateCounter() { counter.textContent = `${String(index + 1).padStart(2, '0')} / ${items.length}`; $('#gallery-prev').disabled = index === 0; $('#gallery-next').disabled = index >= items.length - 1; }
   function fitGallery() { const h = track.clientHeight - 52; if (h > 50) track.style.setProperty('--gallery-w', `${Math.min(innerWidth * .62, h * 1.6)}px`); }
   function renderGallery(key = 'all') {
     items = sets[key]; galleryTrigger?.kill(true); galleryTrigger = null; track.replaceChildren(); window.gsap?.set(track, { clearProps: 'transform' }); track.scrollLeft = 0; index = 0;
-    items.forEach((p, i) => { const fig = document.createElement('figure'), btn = document.createElement('button'), img = document.createElement('img'), span = document.createElement('span'), cap = document.createElement('figcaption'); fig.className = 'gallery-item'; btn.type = 'button'; btn.dataset.photo = p.file; btn.dataset.caption = caption(p); btn.setAttribute('aria-label', `Enlarge ${caption(p)}`); img.src = window.AngoraPhoto.src(p.file, 1200); img.srcset = window.AngoraPhoto.srcset(p.file); img.sizes = '(max-width: 800px) 86vw, 62vw'; img.alt = caption(p); img.loading = i < 2 ? 'eager' : 'lazy'; img.decoding = 'async'; img.width = 1600; img.height = 1000; span.textContent = '↗'; btn.append(img, span); cap.textContent = `${String(i + 1).padStart(2, '0')} / ${caption(p)}`; fig.append(btn, cap); track.append(fig); });
+    items.forEach((p, i) => { const fig = document.createElement('figure'), btn = document.createElement('button'), img = document.createElement('img'), span = document.createElement('span'), cap = document.createElement('figcaption'); fig.className = 'gallery-item'; btn.type = 'button'; btn.dataset.photo = p.file; btn.dataset.caption = caption(p); btn.setAttribute('aria-label', `${S.enlarge || 'Enlarge'} ${caption(p)}`); img.src = window.AngoraPhoto.src(p.file, 1200); img.srcset = window.AngoraPhoto.srcset(p.file); img.sizes = '(max-width: 800px) 86vw, 62vw'; img.alt = caption(p); img.loading = i < 2 ? 'eager' : 'lazy'; img.decoding = 'async'; img.width = 1600; img.height = 1000; span.textContent = '↗'; btn.append(img, span); cap.textContent = `${String(i + 1).padStart(2, '0')} / ${caption(p)}`; fig.append(btn, cap); track.append(fig); });
     if (desktopGallery()) {
       fitGallery();
       const distance = () => Math.max(0, track.scrollWidth - track.clientWidth);
-      galleryTrigger = gsap.to(track, { x: () => -distance(), ease: 'none', scrollTrigger: { trigger: '.gallery', pin: '.gallery-pin', start: 'top top', end: () => `+=${distance() + innerHeight * .15}`, scrub: .3, invalidateOnRefresh: true, onUpdate: self => { bar.style.transform = `scaleX(${self.progress})`; const figs = [...track.children]; const x = -Number(gsap.getProperty(track, 'x')); index = figs.reduce((best, f, i) => Math.abs(f.offsetLeft - x) < Math.abs(figs[best].offsetLeft - x) ? i : best, 0); updateCounter(); } } }).scrollTrigger;
+      galleryTrigger = gsap.to(track, { x: () => -distance(), ease: 'none', scrollTrigger: { trigger: '.gallery', pin: '.gallery-pin', start: 'top top', end: () => `+=${distance() + innerHeight * .15}`, scrub: .3, invalidateOnRefresh: true, onUpdate: self => { bar.style.transform = `scaleX(${self.progress})`; const figs = [...track.children]; const x = self.progress * distance(); index = figs.reduce((best, f, i) => Math.abs(f.offsetLeft - x) < Math.abs(figs[best].offsetLeft - x) ? i : best, 0); updateCounter(); } } }).scrollTrigger;
       ScrollTrigger.refresh();
     }
     updateCounter();
@@ -303,7 +310,7 @@
   $('#enquiry').addEventListener('submit', e => {
     e.preventDefault(); const f = new FormData(e.target); const name = (f.get('name') || '').toString().trim(), contact = (f.get('contact') || '').toString().trim(), when = (f.get('when') || '').toString().trim();
     if (!name || !contact) { e.target.querySelector(name ? '[name=contact]' : '[name=name]').focus(); return; }
-    const text = `Hello, I would like to arrange a viewing of Angora 21 (Hatırlı Sokak, Angora Evleri).\nName: ${name}\nContact: ${contact}${when ? `\nPreferred time: ${when}` : ''}`;
+    const text = S.lang === 'tr' ? `Merhaba, Angora 21 (Hatırlı Sokak, Angora Evleri) için bir görüntüleme randevusu almak istiyorum.\nAd: ${name}\nİletişim: ${contact}${when ? `\nTercih edilen zaman: ${when}` : ''}` : `Hello, I would like to arrange a viewing of Angora 21 (Hatırlı Sokak, Angora Evleri).\nName: ${name}\nContact: ${contact}${when ? `\nPreferred time: ${when}` : ''}`;
     window.open(`https://wa.me/905333048359?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
   });
 

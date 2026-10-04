@@ -33,6 +33,30 @@ kesit, kat kotu + 1,60 m'dedir. Kaynaklar `site/` altındadır:
   `villa3d.js`. three.js bu depodan servis edilir, CDN yoktur. Kökteki `web.html` ve
   `en/site.css` elle yazılır ve derlemeden etkilenmez; yollar köke göredir.
 
+## Kaydırmayla ilerleyen sunum sayfası (`web2.html`, `web2-tr.html`)
+
+`web2.html` (İngilizce) ve `web2-tr.html` (Türkçe) villanın yeni sunum sayfalarıdır;
+`web-gpt.html`'in ERA Residence / Likova karşılaştırmasından sonra sıfırdan kurulmuş
+hâli. Tasarım kararları ve ölçümler [docs/web-gpt-upgrade-plan-2026-10-04.md](docs/web-gpt-upgrade-plan-2026-10-04.md)
+dosyasındadır.
+
+- Kaydırma hiçbir zaman kilitlenmez. Açılış kamera yolculuğu, bahçe ve dört kat
+  sahneleri `ScrollTrigger` scrub + yönsüz snap ile sürülür; mobilde dokunma
+  native scroll'da kalır.
+- Tek stil dosyası `web2.css` (token'lar, `!important` yok), tek davranış dosyası
+  `web2.js`; plan atlası `web2-plans.js`. Türkçe sayfa aynı dosyaları
+  `window.ANGORA_STRINGS` sözlüğüyle kullanır ve `tools/web2-build-tr.py` ile
+  `web2.html`'den üretilir (İngilizce metin değişince betik yeniden çalıştırılır;
+  eşleşmeyen dizge varsa durur).
+- Varlıklar `assets/web2/` altında: fotoğraflar 480/800/1200/1600 px WebP,
+  WOFF2 alt küme fontlar, açılış filmi kare dizileri (klip başına 41 kare,
+  masaüstü 1152 px / mobil 640 px), kat kesit kareleri (22 kare), harita WebP.
+  Üretim komutları `scratchpad` dışında tekrar edilebilir: `ffmpeg` (`libwebp`,
+  `libx264`), `pyftsubset`.
+- Bütçe testleri: `node --test tests/web2.test.mjs` (varlıkların varlığı, 2 MB
+  üst sınırı, kare sayıları, duyarlı görsel nitelikleri, yazı boyutu tabanı,
+  kaydırma ele geçirme yasağı).
+
 ## 3D inceleme arayüzü
 
 [Angora 21 — çevre, bina ve kat görünümü](https://xrweb.studio/angora/)

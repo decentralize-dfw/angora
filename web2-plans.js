@@ -1,16 +1,16 @@
 /* web2 plans: residence-plans.js with responsive photographs and direct floor transitions. */
 (() => {
   'use strict';
-  const data=window.ANGORA_ATLAS,$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+  const data=window.ANGORA_ATLAS,$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];const S=window.ANGORA_STRINGS||{};
   const {roomBounds}=window.AngoraMotionMath;
-  const levels=['Garden level','Entrance level','First floor','Attic level'],defaults=[3,4,19,9];
+  const levels=S.levels||['Garden level','Entrance level','First floor','Attic level'],defaults=[3,4,19,9];
   const svg=$('#atlas-svg'),pins=$('#atlas-pins'),strip=$('#atlas-photo-strip'),map=$('.atlas-map'),image=$('#atlas-native-plan'),layer=$('.atlas-floor-layer');
   const ns='http://www.w3.org/2000/svg';let floor=0,selected,measure=false,poses,manifest,geometry,photoRequest=0;
   const compact=()=>innerWidth<=800;
   function node(name,attrs={},text){const e=document.createElementNS(ns,name);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(text!==undefined)e.textContent=text;return e;}
   const photos=()=>data.photos.filter(p=>p.floor===floor&&!p.outdoor);
   const number=p=>photos().findIndex(item=>item.id===p.id)+1;
-  const caption=p=>p.en.replace('Basement ·','Garden level ·').replace('Ground floor ·','Entrance level ·').replace('Attic floor ·','Attic level ·');
+  const caption=p=>S.lang==='tr'?(p.tr||p.en).replace('Bodrum ·','Bahçe katı ·'):p.en.replace('Basement ·','Garden level ·').replace('Ground floor ·','Entrance level ·').replace('Attic floor ·','Attic level ·');
   function projection(index){
     const box=roomBounds(poses.floors[index])||manifest.crops[index],w=map.clientWidth,h=map.clientHeight;
     const marginX=Math.max(18,w*.10),marginY=Math.max(16,h*.09),iw=manifest.width,ih=manifest.height;
@@ -26,7 +26,7 @@
   }
   function inside(p,poly){let yes=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])yes=!yes;}return yes;}
   const roomName=name=>{
-    name=name.replace(/Bedroom (?:C)?\d+/,'Bedroom').replace('Guest WC','WC').replace('Hall & stairs','Hall');
+    name=name.replace(/Bedroom (?:C)?\d+/,'Bedroom').replace('Guest WC','WC').replace('Hall & stairs','Hall');if(S.rooms)name=S.rooms[name]||name;
     if(innerHeight<=540||innerWidth<innerHeight&&innerHeight<=680)name=name.replace(/(?:Primary|Principal) bedroom/i,'Suite').replace('Bedroom','Bed').replace('Living room','Living').replace('Sitting area','Lounge').replace('Dressing room','Dress').replace(/(?:Family )?bathroom/i,'Bath').replace('Landing & kitchenette','Kitchen');
     return name;
   };
@@ -82,7 +82,7 @@
     });
     points.forEach(({p,registered,x,y,lx,ly})=>{
       const button=document.createElement('button'),on=p.id===selected?.id;
-      button.className='atlas-pin'+(on?' active':'');button.dataset.atlasPhoto=p.id;button.style.left=lx+'px';button.style.top=ly+'px';button.textContent=number(p);button.setAttribute('aria-label','Camera point '+number(p)+': '+caption(p));button.setAttribute('aria-pressed',String(on));pins.append(button);
+      button.className='atlas-pin'+(on?' active':'');button.dataset.atlasPhoto=p.id;button.style.left=lx+'px';button.style.top=ly+'px';button.textContent=number(p);button.setAttribute('aria-label',(S.cameraPoint||'Camera point ')+number(p)+': '+caption(p));button.setAttribute('aria-pressed',String(on));pins.append(button);
       if(!registered.direction)return;
       const end=geometry(registered.direction),angle=Math.atan2(end[1]-y,end[0]-x),half=(p.hfov||70)*Math.PI/360,radius=compact()?35:44;
       const at=a=>[x+Math.cos(a)*radius,y+Math.sin(a)*radius],a=at(angle-half),b=at(angle+half),tip=at(angle),cls=on?' selected':'';
@@ -106,8 +106,8 @@
   }
   function commitPhoto(p){
     selected=p;const title=caption(p);const room=data.rooms.find(r=>r.id===p.roomId);
-    $('#atlas-image').src=window.AngoraPhoto.src(p.file,1200);$('#atlas-image').srcset=window.AngoraPhoto.srcset(p.file);$('#atlas-image').sizes='(max-width: 800px) 100vw, 40vw';$('#atlas-image').alt=title;$('#atlas-photo-number').textContent='Camera '+number(p)+' · '+levels[floor];$('#atlas-photo-title').textContent=title.includes(' · ')?title.split(' · ').slice(1).join(' · '):title;
-    $('#atlas-photo-description').textContent=(room?.name?.replace(/Bedroom (?:C)?\d+/,'Bedroom')||levels[floor])+(room?.area?' · '+room.area.toFixed(2)+' m²':'');
+    $('#atlas-image').src=window.AngoraPhoto.src(p.file,1200);$('#atlas-image').srcset=window.AngoraPhoto.srcset(p.file);$('#atlas-image').sizes='(max-width: 800px) 100vw, 40vw';$('#atlas-image').alt=title;$('#atlas-photo-number').textContent=(S.camera||'Camera ')+number(p)+' · '+levels[floor];$('#atlas-photo-title').textContent=title.includes(' · ')?title.split(' · ').slice(1).join(' · '):title;
+    $('#atlas-photo-description').textContent=(room?.name?(S.rooms?.[room.name.replace(/Bedroom (?:C)?\d+/,'Bedroom')]||room.name.replace(/Bedroom (?:C)?\d+/,'Bedroom')):levels[floor])+(room?.area?' · '+room.area.toFixed(2)+' m²':'');
     $('#atlas-open').dataset.photo=p.file;$('#atlas-open').dataset.caption=title;
     strip.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.atlasPhoto)===p.id)));drawOverlays();
   }
@@ -122,10 +122,10 @@
   function selectFloor(index,force=false){
     index=Math.max(0,Math.min(3,Number(index)));if(index===floor&&selected&&!force)return;floor=index;photoRequest++;selected=null;
     $('#atlas-level').textContent=levels[floor];$('#atlas-schedule-heading').textContent=levels[floor];$('#atlas-panel').setAttribute('aria-labelledby','atlas-tab-'+floor);map.dataset.floor=floor;
-    image.src='./assets/web2/chapters/plan-'+floor+(compact()?'-900':'-1600')+'.webp';image.alt='Actual furnished model plan: '+levels[floor];
+    image.src='./assets/web2/chapters/plan-'+floor+(compact()?'-900':'-1600')+'.webp';image.alt=(S.planAlt||'Furnished model plan: ')+levels[floor];
     $$('[data-atlas-floor]').forEach(b=>{const on=Number(b.dataset.atlasFloor)===floor;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;});
-    strip.replaceChildren();photos().forEach(p=>{const b=document.createElement('button'),img=document.createElement('img'),label=document.createElement('span');b.dataset.atlasPhoto=p.id;b.setAttribute('aria-label','Camera point '+number(p)+': '+caption(p));img.src=window.AngoraPhoto.src(p.file,480);img.alt=caption(p);img.loading='lazy';img.decoding='async';label.textContent=number(p);b.append(img,label);strip.append(b);});
-    const list=$('#atlas-room-list');list.replaceChildren();data.rooms.filter(r=>r.floor===floor).forEach(r=>{const b=document.createElement('button');b.textContent=r.name+(r.area?' · '+r.area.toFixed(2)+' m²':'');b.dataset.atlasRoom=r.id;list.append(b);});
+    strip.replaceChildren();photos().forEach(p=>{const b=document.createElement('button'),img=document.createElement('img'),label=document.createElement('span');b.dataset.atlasPhoto=p.id;b.setAttribute('aria-label',(S.cameraPoint||'Camera point ')+number(p)+': '+caption(p));img.src=window.AngoraPhoto.src(p.file,480);img.alt=caption(p);img.loading='lazy';img.decoding='async';label.textContent=number(p);b.append(img,label);strip.append(b);});
+    const list=$('#atlas-room-list');list.replaceChildren();data.rooms.filter(r=>r.floor===floor).forEach(r=>{const b=document.createElement('button');b.textContent=(S.rooms?.[r.name.replace(/Bedroom (?:C)?\d+/,'Bedroom')]||r.name)+(r.area?' · '+r.area.toFixed(2)+' m²':'');b.dataset.atlasRoom=r.id;list.append(b);});
     showPhoto(defaults[floor],false);layout();
   }
   document.addEventListener('click',e=>{
@@ -134,7 +134,7 @@
     const room=e.target.closest('[data-atlas-room]');if(room){const p=photos().find(p=>p.roomId===room.dataset.atlasRoom);if(p)showPhoto(p.id);}
   });
   $$('[data-atlas-floor]').forEach(b=>b.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const i=e.key==='Home'?0:e.key==='End'?3:(floor+(e.key==='ArrowRight'?1:3))%4;transition(i);$('#atlas-tab-'+i).focus({preventScroll:true});}));
-  $('#atlas-measure').onclick=()=>{measure=!measure;$('#atlas-measure').setAttribute('aria-pressed',String(measure));$('#atlas-measure').innerHTML='Dimensions <span aria-hidden="true">'+(measure?'−':'＋')+'</span>';drawOverlays();if(measure&&!matchMedia('(prefers-reduced-motion: reduce)').matches)gsap.from('.plan-dimension',{opacity:0,duration:.25,ease:'power1.out'});};
+  $('#atlas-measure').onclick=()=>{measure=!measure;$('#atlas-measure').setAttribute('aria-pressed',String(measure));$('#atlas-measure').innerHTML=(S.dimensions||'Dimensions')+' <span aria-hidden="true">'+(measure?'−':'＋')+'</span>';drawOverlays();if(measure&&!matchMedia('(prefers-reduced-motion: reduce)').matches)gsap.from('.plan-dimension',{opacity:0,duration:.25,ease:'power1.out'});};
   window.addEventListener('angora:floor',e=>{transition(Number(e.detail));});
   async function transition(index){
     index=Math.max(0,Math.min(3,Number(index)));if(index===floor)return;
