@@ -15,7 +15,7 @@ import {applyRenderProfile,baseExposure,referenceProfile} from './render-profile
 import {InteriorLightController} from './interior-lighting.js';
 import {FEATURES} from './features.js';
 // iç mekân rengi (fotoğraf ölçümü, qa-vray-foto): beyaz dengesi, doygunluk ve kontrast çarpanları
-export const DARK_WOOD_TEXTURES=new Set(['f6c1dca0447b61','bf580b2880797e']);
+export const DARK_WOOD_TEXTURES=new Set(['f6c1dca0447b61','bf580b2880797e','931cdd3a3e45f6']);   // son: kapı kanatları (Simple wood, 66,34,24)
 export const WOOD_TONE=new THREE.Color(4.1,2.9,1.8);   // 52,32,25 -> ~105,58,36 sRGB
 let woodToned=0;
 export const INTERIOR_GRADE={wb:[1.07,1.0,0.85],sat:1.32,contrast:0.88};
