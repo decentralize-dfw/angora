@@ -49,7 +49,7 @@ async function start(){
     controls.autoRotate=!reduced;controls.autoRotateSpeed=.22;
     controls.mouseButtons={LEFT:0,MIDDLE:null,RIGHT:null};controls.touches={ONE:0,TWO:null};
     controls.addEventListener('start',()=>{controls.autoRotate=false;});
-    const opacity={villa:.8,garden:.4,neighbours:.3,landscape:.23,trees:.28};
+    const opacity={villa:.85,garden:.3,neighbours:.18,landscape:.16,trees:.14};
     const depthMaterial=new MeshBasicMaterial({colorWrite:false,depthWrite:true,side:DoubleSide,polygonOffset:true,polygonOffsetFactor:1,polygonOffsetUnits:4});
     const depthPositions=new Float32Array(depthPacked.length);
     for(let i=0;i<depthPositions.length;i++)depthPositions[i]=depthPacked[i]*manifest.quantum;

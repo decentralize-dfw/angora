@@ -7,7 +7,7 @@
   let lenis = null, gardenTrigger = null;
   if (hasMotion) gsap.registerPlugin(ScrollTrigger);
   if (!reduced && hasMotion && window.Lenis) {
-    lenis = new Lenis({duration:1.15, smoothWheel:true, syncTouch:false,
+    lenis = new Lenis({duration:.8, smoothWheel:true, syncTouch:false,
       prevent:node => !!node.closest('dialog')});
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(time => lenis.raf(time * 1000));
@@ -28,16 +28,22 @@
     })};
   window.addEventListener('angora:scroll', event => scrollTo(event.detail.top,{immediate:!!event.detail.immediate}));
   const menu = $('#menu'), menuToggle = $('.menu-toggle');
-  let returnFocus = null;
+  let returnFocus = null, menuClosing = null;
   function closeMenu() {
-    menu.hidden = true; menuToggle.setAttribute('aria-expanded','false');
-    document.body.classList.remove('locked'); lenis?.start(); updateHeader();
+    if(menuClosing)return menuClosing;
+    if(menu.hidden)return Promise.resolve();
+    menuToggle.setAttribute('aria-expanded','false');
+    const finish=()=>{menu.hidden=true;document.body.classList.remove('locked');lenis?.start();updateHeader();};
+    if(reduced||!hasMotion){finish();return Promise.resolve();}
+    menuClosing=new Promise(resolve=>gsap.to(menu,{opacity:0,y:-12,duration:.22,overwrite:true,onComplete:()=>{finish();gsap.set(menu,{clearProps:'opacity,transform'});menuClosing=null;resolve();}}));
+    return menuClosing;
   }
   menuToggle.addEventListener('click', () => {
     if (!menu.hidden) return closeMenu();
     menu.hidden = false; menuToggle.setAttribute('aria-expanded','true');
     document.body.classList.add('locked'); lenis?.stop();
-    $('.header').classList.remove('on-dark'); menu.querySelector('a').focus();
+    $('.header').classList.remove('on-dark'); menu.querySelector('a').focus({preventScroll:true});
+    if(!reduced&&hasMotion){gsap.fromTo(menu,{opacity:0,y:12},{opacity:1,y:0,duration:.4,ease:'power3.out',overwrite:true});gsap.fromTo(menu.querySelectorAll('a'),{opacity:0,y:12},{opacity:1,y:0,duration:.45,stagger:.025,ease:'power3.out',overwrite:true});}
   });
   document.addEventListener('keydown', event => {
     if (!menu.hidden && event.key === 'Escape') {closeMenu(); menuToggle.focus();}
@@ -49,13 +55,20 @@
     }
   });
   let navigationId=0;
+  async function navigate(target,before=()=>{}) {
+    if(document.querySelector('.atlas-scene.is-focused'))window.AngoraPlan?.closeFocus();
+    const id=++navigationId;await closeMenu();await window.AngoraSteps?.whenIdle();if(id!==navigationId)return;
+    const commit=async()=>{await before();if(target.id==='home')await window.AngoraCinema?.reset();if(target.id==='floors')window.AngoraIso?.resetView();if(target.id==='atlas')window.AngoraPlan?.resetView();const top=target.getBoundingClientRect().top+scrollY;scrollTo(top,{immediate:true,force:true});window.ScrollTrigger?.update();updateHeader();};
+    if(reduced||Math.abs(target.getBoundingClientRect().top)<innerHeight*.8){await commit();return;}
+    // Capture both complete scenes; distant navigation never flies through the story.
+    if(document.startViewTransition){await document.startViewTransition(commit).finished;}
+    else{let veil=$('.navigation-veil');if(!veil){veil=document.createElement('div');veil.className='navigation-veil';document.body.append(veil);}await new Promise(r=>gsap.to(veil,{opacity:1,duration:.2,onComplete:r}));await commit();await new Promise(r=>gsap.to(veil,{opacity:0,duration:.3,onComplete:r}));}
+  }
+  window.AngoraScroll.navigate=navigate;
   $$('a[href^="#"]').forEach(link => link.addEventListener('click', async event => {
     const target = document.getElementById(link.hash.slice(1));
     if (!target) return;
-    event.preventDefault(); closeMenu();const id=++navigationId;
-    await window.AngoraSteps?.whenIdle();if(id!==navigationId)return;
-    const offset=['home','floors','atlas','garden','life'].includes(target.id)?0:-75;
-    await window.AngoraScroll.travel(target.getBoundingClientRect().top+scrollY+offset,1);
+    event.preventDefault();await navigate(target);
     history.replaceState(null, '', link.hash);
   }));
   function updateHeader() {
@@ -69,9 +82,11 @@
     const useDark = (dark || darkLife) && menu.hidden;
     $('.header').classList.toggle('on-dark', useDark);
     $('.scroll-index').classList.toggle('on-dark', useDark);
-    const progress = scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight);
-    $('#scroll-number').textContent = String(Math.round(progress * 100)).padStart(2,'0');
-    $('.scroll-index b').style.height = `${progress * 100}%`;
+    const chapters=['home','residence','garden','spaces','floors','atlas','location','life','gallery','contact'];
+    let chapter=0;chapters.forEach((id,i)=>{const e=document.getElementById(id);if(e&&e.getBoundingClientRect().top<=innerHeight*.45)chapter=i;});
+    $('#scroll-number').textContent=String(chapter).padStart(2,'0');
+    $('.index-word').textContent=chapter?'Chapter '+String(chapter).padStart(2,'0'):'Scroll to discover ↓';
+    $('.scroll-index b').style.height=`${chapter/(chapters.length-1)*100}%`;
   }
   let scrollQueued = false;
   window.addEventListener('scroll', () => {
@@ -85,15 +100,18 @@
     ['02 / A place in the shade', 'Stay a little longer.', 'A covered terrace makes room for unhurried lunches, quiet mornings and long evenings. It connects the garden-level rooms with the pool and outdoor dining area.'],
     ['03 / Room to breathe', 'A garden with its own rhythm.', 'Approximately 900 m² of private garden surrounds the residence. Mature planting, lawn and paths create different places to sit, play and spend time outdoors.'],
   ];
-  let gardenIndex = 0;
+  let gardenIndex = 0, gardenCopyTween;
   function setGarden(index, direct = false) {
     if (index === gardenIndex && !direct) return;
     gardenIndex = index;
     const content = gardens[index];
-    $('#garden-number').textContent = content[0]; $('#garden-title').textContent = content[1]; $('#garden-copy').textContent = content[2];
+    const updateCopy=()=>{$('#garden-number').textContent = content[0]; $('#garden-title').textContent = content[1]; $('#garden-copy').textContent = content[2];};
     $$('[data-garden]').forEach(button => {button.classList.toggle('active', Number(button.dataset.garden) === index); button.setAttribute('aria-pressed', String(Number(button.dataset.garden) === index));});
-    if (direct) $$('.garden-image').forEach((image,i) => {image.style.opacity = i === index ? '1' : '0';});
-    if (hasMotion && !reduced) gsap.fromTo('.garden-copy', {y:14, opacity:.4}, {y:0, opacity:1, duration:.6, overwrite:true});
+    if (direct||reduced||!hasMotion){updateCopy();$$('.garden-image').forEach((image,i) => {image.style.opacity = i === index ? '1' : '0';});}
+    else{
+      gardenCopyTween?.kill();gardenCopyTween=gsap.timeline().to('.garden-copy',{opacity:0,duration:.12}).call(updateCopy).to('.garden-copy',{opacity:1,duration:.26,ease:'power2.out'},.26);
+      $$('.garden-image').forEach((image,i)=>gsap.to(image,{opacity:i===index?1:0,duration:.5,ease:'power2.inOut',overwrite:true}));
+    }
   }
   $$('[data-garden]').forEach(button => button.addEventListener('click', () => {
     const index = Number(button.dataset.garden);
@@ -128,14 +146,10 @@
     if($('#chapter-map-link'))$('#chapter-map-link').dataset.atlasLink=index;
     $('.chapter-scene').dataset.floor=index;
     window.dispatchEvent(new CustomEvent('angora:chapter',{detail:index}));
-    if (hasMotion && !reduced) {
-      gsap.fromTo('.chapter-copy', {y:12, opacity:.5}, {y:0, opacity:1, duration:.5, overwrite:true});
-
-    }
   }
-  function goChapter(index) {
-    if(Math.abs($('#floors').getBoundingClientRect().top)>5)scrollTo($('#floors'),{immediate:true});
-    if(window.AngoraIso)window.AngoraIso.go(index);else setChapter(index);
+  async function goChapter(index) {
+    if(Math.abs($('#floors').getBoundingClientRect().top)>5)await navigate($('#floors'));
+    if(window.AngoraIso)await window.AngoraIso.go(index);else setChapter(index);
   }
   $$('[data-chapter]').forEach(button => {
     button.addEventListener('click', () => goChapter(Number(button.dataset.chapter)));
@@ -159,11 +173,21 @@
   setChapter(0, true);
 
   const imageDialog = $('#image-dialog');
-  function openDialog(dialog) {returnFocus = document.activeElement; dialog.showModal(); document.body.classList.add('locked'); lenis?.stop();}
+  let closingPhoto=false;
+  function closePhoto(){
+    if(closingPhoto||!imageDialog.open)return;
+    if(reduced||!hasMotion){imageDialog.close();return;}
+    closingPhoto=true;gsap.to(imageDialog,{opacity:0,y:8,duration:.18,ease:'power2.in',onComplete:()=>{imageDialog.close();gsap.set(imageDialog,{clearProps:'opacity,transform'});closingPhoto=false;}});
+  }
+  function openDialog(dialog) {
+    returnFocus = document.activeElement;dialog.showModal();document.body.classList.add('locked');lenis?.stop();
+    if(!reduced&&hasMotion)gsap.fromTo(dialog,{opacity:0,y:12,scale:.98},{opacity:1,y:0,scale:1,duration:.35,ease:'power3.out',overwrite:true});
+  }
   [imageDialog].forEach(dialog => {
-    dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
-    dialog.addEventListener('click', event => {if (event.target === dialog) {const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();}});
-    dialog.addEventListener('close', () => {document.body.classList.remove('locked'); lenis?.start(); returnFocus?.focus({preventScroll:true});});
+    dialog.querySelector('.dialog-close').addEventListener('click', closePhoto);
+    dialog.addEventListener('cancel',event=>{event.preventDefault();closePhoto();});
+    dialog.addEventListener('click', event => {if (event.target === dialog) {const rect = dialog.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) closePhoto();}});
+    dialog.addEventListener('close', () => {if(!document.querySelector('.atlas-scene.is-focused')){document.body.classList.remove('locked');lenis?.start();}returnFocus?.focus({preventScroll:true});});
   });
   document.addEventListener('click', event => {
     const photo = event.target.closest('[data-photo]');
@@ -176,33 +200,26 @@
     const mm = gsap.matchMedia();
     mm.add({desktop:'(min-width:801px)', mobile:'(max-width:800px)'}, context => {
       const mobile = context.conditions.mobile;
-      const scrub = (trigger, extra = {}) => ({trigger, start:'top top', end:'bottom bottom', scrub:.75, invalidateOnRefresh:true, ...extra});
+      const scrub = (trigger, extra = {}) => ({trigger, start:'top top', end:'bottom bottom', scrub:.25, invalidateOnRefresh:true, ...extra});
       gsap.timeline({scrollTrigger:scrub('.arrival-story')})
-        .to('.arrival-frame',{left:'7%',top:mobile?'29%':'31%',width:mobile?'86%':'53%',height:()=>innerWidth*(mobile?.86:.53)*941/1672,duration:.4,ease:'power2.inOut'},0)
-        .to('.arrival-caption',{opacity:1,y:-12,duration:.2},.32)
-        .fromTo('.arrival-detail',{y:100,rotation:8},{y:0,rotation:-3,opacity:1,duration:.3},.4)
-        .to('.arrival-caption,.arrival-detail,.arrival-type',{opacity:0,duration:.15},.78)
-        .to('.arrival-frame',{left:'0%',top:'0%',width:'100%',height:'100%',duration:.25,ease:'power2.inOut'},.75);
-      const garden = gsap.timeline({scrollTrigger:scrub('.garden-story', {onUpdate:self => setGarden(Math.min(2, Math.floor(self.progress * 3)))})});
+        .to('.arrival-frame',{left:'7%',top:mobile?'31%':'30%',width:mobile?'86%':'53%',height:()=>Math.min(innerHeight*.43,innerWidth*(mobile?.86:.53)*941/1672),duration:.45,ease:'power2.inOut'},0)
+        .to('.arrival-type',{opacity:0,duration:.2},.05)
+        .to('.arrival-caption',{opacity:1,y:0,duration:.22},.28);
+      const garden = gsap.timeline({scrollTrigger:scrub('.garden-story', {onUpdate:self => setGarden(self.progress<.42?0:self.progress<.76?1:2)})});
       gardenTrigger = garden.scrollTrigger;
       garden.to('.garden-images',{clipPath:mobile?'inset(4% 5% 4% 5%)':'inset(6% 5% 6% 5%)',duration:.2,ease:'power2.inOut'},.02)
         .to('.garden-images',{clipPath:'inset(0% 0% 0% 0%)',duration:.15,ease:'power2.inOut'},.85);
-      garden.fromTo('.garden-0', {scale:1.15, xPercent:1}, {scale:1, xPercent:0, duration:.42, ease:'none'}, 0)
-        .set('.garden-1', {opacity:1}, .30)
-        .fromTo('.garden-1', {clipPath:'polygon(100% 0%,100% 0%,125% 100%,100% 100%)'}, {clipPath:'polygon(0% 0%,100% 0%,100% 100%,0% 100%)',duration:.14,ease:'power2.inOut'}, .30)
-        .fromTo('.garden-1', {scale:1.13, xPercent:-2}, {scale:1, xPercent:0, duration:.39, ease:'none'}, .32)
-        .set('.garden-2', {opacity:1}, .64)
-        .fromTo('.garden-2', {clipPath:'polygon(100% 0%,100% 0%,125% 100%,100% 100%)'}, {clipPath:'polygon(0% 0%,100% 0%,100% 100%,0% 100%)',duration:.14,ease:'power2.inOut'}, .64)
-        .fromTo('.garden-2', {scale:1.15}, {scale:1, duration:.34, ease:'none'}, .66);
+      garden.fromTo('.garden-0', {scale:1.035}, {scale:1, duration:.44, ease:'none'}, 0)
+        .fromTo('.garden-1', {scale:1.03}, {scale:1, duration:.39, ease:'none'}, .32)
+        .fromTo('.garden-2', {scale:1.03}, {scale:1, duration:.34, ease:'none'}, .66);
       // Keep the neighbourhood legible until a complete scene handoff is chosen.
       // The motion study documents the coupled footer and architectural masks.
       gsap.timeline({scrollTrigger:scrub('.life-opening')})
-        .fromTo('.life-landscape img',{scale:1.08},{scale:1,duration:1,ease:'none'},0)
-        .to('.life-opening-copy',{y:-40,opacity:0,duration:.3},.55);
-      $$('.reveal').forEach(element => gsap.from(element, {y:45, opacity:0, duration:1.15, ease:'power2.out', scrollTrigger:{trigger:element, start:'top 92%', once:true}}));
-      $$('.detail-photo').forEach(element => gsap.fromTo(element, {y:60, rotation:3}, {y:-35, rotation:-3, ease:'none', scrollTrigger:{trigger:element.closest('.editorial'), start:'top bottom', end:'bottom top', scrub:1}}));
-      gsap.fromTo('.location-image img', {scale:1.14}, {scale:1, ease:'none', scrollTrigger:{trigger:'.location', start:'top bottom', end:'bottom top', scrub:1}});
-      gsap.fromTo('.contact-image img', {scale:1.14, yPercent:-4}, {scale:1.02, yPercent:0, ease:'none', scrollTrigger:{trigger:'.contact', start:'top bottom', end:'bottom bottom', scrub:1}});
+        .fromTo('.life-landscape',{y:20},{y:0,duration:1,ease:'none'},0);
+      $$('.reveal').forEach(element => {if(element.matches('h2,h3,.editorial-image'))return;gsap.from(element, {y:22, opacity:0, duration:.65, ease:'power3.out', scrollTrigger:{trigger:element, start:'top 91%', once:true}});});
+      $$('.detail-photo').forEach(element => gsap.fromTo(element, {y:35}, {y:-18, ease:'none', scrollTrigger:{trigger:element.closest('.editorial'), start:'top bottom', end:'bottom top', scrub:.25}}));
+      gsap.fromTo('.location-image img', {scale:1.045}, {scale:1, ease:'none', scrollTrigger:{trigger:'.location', start:'top bottom', end:'bottom top', scrub:.25}});
+      gsap.fromTo('.contact-image img', {scale:1.04}, {scale:1, ease:'none', scrollTrigger:{trigger:'.contact', start:'top bottom', end:'bottom bottom', scrub:.25}});
       return () => {gardenTrigger = null;};
     });
     document.fonts?.ready.then(() => ScrollTrigger.refresh());
