@@ -593,6 +593,10 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
         if(FEATURES.woodTone&&(name==='interior'||name==='architecture'&&/^EK_/.test(material.name))&&DARK_WOOD_TEXTURES.has(material.map?.name)&&!material.userData.woodToned){
           material.userData.woodToned=true;material.color.multiply(DARK_WOOD_TEXTURES.get(material.map.name));woodToned++;
         }
+        // 04.10 dış panjurlar (WOODY-DARK, kırmızımsı ceviz 95,63,46): ilan fotoğraflarında (25, 28) antrasit boyalı
+        if(FEATURES.shutterTone&&name==='architecture'&&material.map?.name==='88c8b2c82fc9c0'&&!material.userData.shutterToned){
+          material.userData.shutterToned=true;material.color.multiply(new THREE.Color(.45,.95,1.7));
+        }
         if(['architecture','interior'].includes(name)&&!mirror&&material.metalness>=.5&&!material.userData.metalSoftened){
           material.userData.metalSoftened=true;
           const l=.2126*material.color.r+.7152*material.color.g+.0722*material.color.b;
