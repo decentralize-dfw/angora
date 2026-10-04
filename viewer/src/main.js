@@ -399,8 +399,8 @@ function renderFrame(time) {
     // 04.10: oda kameraları da (kamera binanın içinde) göz uyumu alır - fotoğrafçı her odada pozlamayı ayrı açar;
     // ilan fotoğraflarına göre karanlık odalar (1. kat oturma, mutfak) 2-3 kat koyu, aydınlıklar biraz fazlaydı.
     {const ae=lighting.autoExposure?.();if(ae){ae.active=Boolean(walk?.active?!walk.xrActive&&!planMode:FEATURES.interiorExposure&&!planMode&&!transition&&cameraInsideBuilding());
-      // ilan fotoğrafları: karanlık odalar +0,8 ile +1,1 EV açılmış; yürüme kendi yumuşak sınırında kalır
-      ae.up=walk?.active?.5:1.2;ae.strength=walk?.active?.5:.8;}}
+      // ilan fotoğrafları: karanlık odalar +0,8 ile +1,1 EV açılmış (photoView da yürüme kamerasıdır): bayrakla iki mod da geniş aralık
+      ae.up=FEATURES.interiorExposure?1.2:.5;ae.strength=FEATURES.interiorExposure?.8:.5;}}
     // 03.10 BÖLGE TAKILMASI: Bölge'de harita opak zeminiyle ekranı örter, ama
     // altında yakın çevrenin TAMAMI (komşular 8 MB, bitkiler, 4096 gölge,
     // GTAO, bloom) çizilmeye devam ediyordu - hem geçiş uçuşu boyunca hem
