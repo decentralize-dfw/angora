@@ -607,7 +607,13 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
         // kopuk, dolap camında gök). İç mekân parçasının tamamı + mimaride pişmiş ışığı olmayan iç
         // donatı (kapı, pirinç, cam, süpürgelik) odanın sondasına bağlanır; cephe/çatı dış gökte kalır.
         const roomLit=FEATURES.roomProbeAll&&!material.userData.angoraBatch&&(name==='interior'
-          ||name==='architecture'&&!object.userData?.lightmap&&!/roof|cati|çatı|clay|kiremit|tile|cephe|facade|sıva|siva|plaster|chimney|baca|gutter|oluk/i.test(material.name));
+          ||name==='architecture'&&!object.userData?.lightmap&&!/roof|cati|çatı|clay|kiremit|tile|cephe|facade|sıva|siva|plaster|chimney|baca|gutter|oluk/i.test(material.name)
+          // 04.10 cilalı parke: iç atlaslardaki (duvar/zemin) pişmiş malzemeler de - parke dış göğü yansıtıyordu
+          ||FEATURES.parquetGloss&&name==='architecture'&&['duvar','zemin'].includes(object.userData?.lightmap?.atlas));
+        // cilalı parke (ilan fotoğrafları: pencere ışığını net yansıtır): pürüzlülük dokudan x0,5
+        if(FEATURES.parquetGloss&&['architecture','interior'].includes(name)&&/wood_floor|WOOD-FL/i.test(material.name)&&!material.userData.parquetGloss){
+          material.userData.parquetGloss=true;material.roughness=Math.min(material.roughness,.5);
+        }
         if(['architecture','interior'].includes(name)&&(/-(metal|glass|wood)-/.test(material.name)||mirror||roomLit)){
           reflectionMaterials.add(material);material.envMap=roomReflections?.get(reflectionFloor)??null;if(FEATURES.boxProbes)applyBoxProjection(material);
         }
