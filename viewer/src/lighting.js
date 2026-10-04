@@ -128,7 +128,7 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
   // hem "güzel gün" der. Beyaza patlarsa ilk geri adım 0.75.
   scene.backgroundIntensity=FEATURES.warmGradeV1?.85:.55;
   // Yürürken arka plan: hafif bulutlu, daha gökyüzü gibi bir küp (walk-sky.js)
-  const walkSky=FEATURES.walkSkyV1?createWalkSky(renderer):null;
+  const walkSky=FEATURES.walkSkyV1?createWalkSky(renderer,{blue:FEATURES.skyBlue}):null;
   // No haze by default. Distance fog was tried here for depth and it read as
   // a grey cast over the whole settlement rather than as air. Task 1.5 tries
   // again with what that attempt lacked: the HORIZON'S own colour (tracked by

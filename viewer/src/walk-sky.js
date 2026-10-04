@@ -10,10 +10,11 @@ import * as THREE from 'three';
 // plan zaten bir küp dokusu. Değerler doğrusal HDR; eğri (ACES 0.8) ve
 // grade sonra uygulanır.
 const SKY = {
-  uniforms: {sunDir: {value: new THREE.Vector3(0, 1, 0)}, daylight: {value: 1}},
+  // 04.10 skyBlue: ilan fotoğraflarında gök ufukta da doygun mavi (75-138, 160-189, 238-249); eski ufuk neredeyse beyazdı
+  uniforms: {sunDir: {value: new THREE.Vector3(0, 1, 0)}, daylight: {value: 1}, zenithCol: {value: new THREE.Vector3(0.17, 0.40, 1.30)}, horizonCol: {value: new THREE.Vector3(0.98, 1.16, 1.42)}},
   vertexShader: `varying vec3 vDir; void main(){ vDir = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
   fragmentShader: `
-    uniform vec3 sunDir; uniform float daylight; varying vec3 vDir;
+    uniform vec3 sunDir, zenithCol, horizonCol; uniform float daylight; varying vec3 vDir;
     float hash(vec2 p){ p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
     float noise(vec2 p){ vec2 i = floor(p), f = fract(p); vec2 u = f * f * (3.0 - 2.0 * f);
       return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x), mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x), u.y); }
@@ -22,7 +23,7 @@ const SKY = {
     void main(){
       vec3 d = normalize(vDir);
       float h = max(d.y, 0.0);
-      vec3 zenith = vec3(0.17, 0.40, 1.30), horizon = vec3(0.98, 1.16, 1.42);
+      vec3 zenith = zenithCol, horizon = horizonCol;
       vec3 col = mix(horizon, zenith, pow(h, 0.5));
       if (d.y < 0.0) col = mix(horizon, vec3(0.62, 0.64, 0.66), clamp(-d.y * 5.0, 0.0, 1.0));
       vec3 s = normalize(sunDir);
@@ -46,9 +47,10 @@ const SKY = {
     }`,
 };
 
-export function createWalkSky(renderer) {
+export function createWalkSky(renderer, {blue = false} = {}) {
   const material = new THREE.ShaderMaterial({...SKY, uniforms: THREE.UniformsUtils.clone(SKY.uniforms),
     side: THREE.BackSide, depthWrite: false});
+  if (blue) {material.uniforms.zenithCol.value.set(0.08, 0.30, 1.25); material.uniforms.horizonCol.value.set(0.42, 0.78, 1.45);}
   const scene = new THREE.Scene();
   scene.add(new THREE.Mesh(new THREE.SphereGeometry(100, 48, 24), material));
   const target = new THREE.WebGLCubeRenderTarget(512, {type: THREE.HalfFloatType});
