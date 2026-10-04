@@ -156,6 +156,7 @@
   }
   window.AngoraPlan={selectFloor,layout,transition,get floor(){return floor;}};
   new ResizeObserver(layout).observe(map);image.addEventListener('load',layout);
-  Promise.all([fetch('./assets/residence/chapters/poses.json').then(r=>r.json()),fetch('./assets/residence/chapters/native-manifest.json').then(r=>r.json())]).then(([p,m])=>{poses=p;manifest=m;layout();});
+  const loadPoses=()=>Promise.all([fetch('./assets/residence/chapters/poses.json').then(r=>r.json()),fetch('./assets/residence/chapters/native-manifest.json').then(r=>r.json())]).then(([p,m])=>{poses=p;manifest=m;layout();});
+  const near=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){near.disconnect();loadPoses();}},{rootMargin:'120% 0px'});near.observe(document.querySelector('#atlas'));
   selectFloor(0,true);
 })();

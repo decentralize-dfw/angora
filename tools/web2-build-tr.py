@@ -179,6 +179,7 @@ T = [
  ('<p data-reveal="fade">A detached villa on Hatırlı Sokak with approximately 500 m² gross interior space, 400 m² net living space and a 900 m² private garden. Five bedrooms, four living spaces, three kitchens, a private pool, a lift, an independently accessed annexe and parking for three cars.</p>',
   '<p data-reveal="fade">Hatırlı Sokak’ta yaklaşık 500 m² brüt kapalı alan, 400 m² net yaşam alanı ve 900 m² özel bahçesi olan müstakil bir villa. Beş yatak odası, dört yaşam alanı, üç mutfak, özel havuz, asansör, bağımsız girişli ek bina ve üç araçlık otopark.</p>'),
  ('<span class="eyebrow">Asking price</span>', '<span class="eyebrow">İstenen fiyat</span>'),
+ ('<small>Listing checked 4 October 2026 · RE/MAX Türkiye</small>', '<small>İlan 4 Ekim 2026’da kontrol edildi · RE/MAX Türkiye</small>'),
  ('<li>Detached villa</li><li>Four floors</li><li>Vacant · Available now</li>', '<li>Müstakil villa</li><li>Dört kat</li><li>Boş · Hemen teslim</li>'),
  ('<label><span>Your name</span>', '<label><span>Adınız</span>'), ('<label><span>Phone or e-mail</span>', '<label><span>Telefon veya e-posta</span>'),
  ('<label class="wide"><span>When would you like to visit?</span><input name="when" type="text" placeholder="A day and time that suits you"></label>', '<label class="wide"><span>Ne zaman ziyaret etmek istersiniz?</span><input name="when" type="text" placeholder="Size uygun bir gün ve saat"></label>'),

@@ -100,7 +100,7 @@
   dialog.addEventListener('cancel', e => { e.preventDefault(); closePhoto(); });
   dialog.addEventListener('click', e => { if (e.target === dialog) closePhoto(); });
   dialog.addEventListener('close', () => { document.body.classList.remove('locked'); lenis?.start(); returnFocus?.focus?.({ preventScroll: true }); });
-  let swipeY = null; dialog.addEventListener('touchstart', e => swipeY = e.touches[0].clientY, { passive: true }); dialog.addEventListener('touchend', e => { if (swipeY !== null && Math.abs(e.changedTouches[0].clientY - swipeY) > 80) closePhoto(); swipeY = null; });
+  let swipeY = null; dialog.addEventListener('touchstart', e => swipeY = e.touches[0].clientY, { passive: true }); dialog.addEventListener('touchend', e => { if (swipeY !== null && Math.abs(e.changedTouches[0].clientY - swipeY) > 80) closePhoto(); swipeY = null; }, { passive: true });
   document.addEventListener('click', e => {
     const el = e.target.closest('[data-photo]'); if (!el) return;
     const id = el.dataset.photo, atlas = window.ANGORA_ATLAS;
@@ -117,9 +117,10 @@
     }
     resize() { const b = this.canvas.getBoundingClientRect(), r = Math.min(isMobile() ? 2 : 1.5, devicePixelRatio || 1); this.canvas.width = Math.max(1, Math.round(b.width * r)); this.canvas.height = Math.max(1, Math.round(b.height * r)); if (this.last) this.paint(this.last); }
     url(clip, i) { return `${clip.root}/f-${String(i + 1).padStart(3, '0')}.webp`; }
-    load(clip, order = 'forward') {
-      if (clip.loading) return clip.loading;
-      const seq = [...Array(clip.frames).keys()]; if (order === 'reverse') seq.reverse();
+    load(clip, limit = Infinity) {
+      if (clip.loading && (clip.loadedLimit === Infinity || limit <= clip.loadedLimit)) return clip.loading;
+      clip.loadedLimit = limit; clip.loading = null;
+      const seq = [...Array(Math.min(clip.frames, limit)).keys()];
       let active = 0, cursor = 0; const self = this;
       clip.loading = new Promise(resolve => {
         const pump = () => {
@@ -156,7 +157,7 @@
   /* Hero: three recorded camera moves, scrubbed, with reading stops between them. */
   const hero = $('.hero'), heroPin = $('.hero-pin'), heroMedia = $('.hero-media'), opening = $('.hero-opening');
   opening.muted = true; const tryPlay = () => opening.play().catch(() => { });
-  if (!reduced) { opening.addEventListener('canplay', tryPlay, { once: true }); tryPlay(); opening.addEventListener('ended', () => opening.classList.add('is-done')); }
+  if (!reduced) { opening.src = isMobile() ? opening.dataset.srcMobile : opening.dataset.srcDesktop; opening.preload = 'auto'; opening.addEventListener('canplay', tryPlay, { once: true }); opening.load(); tryPlay(); opening.addEventListener('ended', () => opening.classList.add('is-done')); }
   const CLIPS = ['approach', 'orbit', 'garden-return'].map(id => ({ id, frames: 41, root: `./assets/web2/films/${id}/${isMobile() ? 'm' : 'd'}` }));
   const heroCanvas = $('.hero-canvas'), captions = $$('.hero-caption'), trackButtons = $$('.hero-track button');
   const HOLD = .12, SEG = .3, END = .9;
@@ -167,8 +168,10 @@
   }
   if (motion) {
     const player = new Frames(heroCanvas, { fit: 'cover' });
-    const whenReady = () => player.load(CLIPS[0]);
+    const whenReady = () => player.load(CLIPS[0], 12);
     if (document.readyState === 'complete') whenReady(); else addEventListener('load', whenReady, { once: true });
+    const loadAll = () => { player.load(CLIPS[0]); removeEventListener('wheel', loadAll); removeEventListener('touchstart', loadAll); removeEventListener('keydown', loadAll); };
+    addEventListener('wheel', loadAll, { passive: true }); addEventListener('touchstart', loadAll, { passive: true }); addEventListener('keydown', loadAll);
     let shown = -1;
     const apply = p => {
       const s = heroState(p);
@@ -190,7 +193,7 @@
     trackButtons.forEach(b => b.addEventListener('click', () => { const p = Number(b.dataset.heroStop) * SEG; go(trigger.start + (trigger.end - trigger.start) * p); }));
     window.AngoraHeroTrigger = trigger;
     apply(0);
-  } else { heroPin.classList.remove('is-scrolling'); captions[2].classList.add('is-on'); }
+  } else { heroPin.classList.remove('is-scrolling'); }
 
   /* Reveals: one family. Lines rise through a mask, blocks fade, frames open. */
   function splitLines(el) {

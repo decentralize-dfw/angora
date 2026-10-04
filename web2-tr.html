@@ -11,6 +11,8 @@
   <link rel="icon" href="./favicon.svg">
   <link rel="alternate" hreflang="en" href="./web2.html">
   <link rel="alternate" hreflang="tr" href="./web2-tr.html">
+  <link rel="alternate" hreflang="en" href="./web2.html">
+  <link rel="alternate" hreflang="tr" href="./web2-tr.html">
   <link rel="preload" as="font" type="font/woff2" href="./assets/web2/fonts/cormorant-garamond-3.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="./assets/web2/fonts/manrope-1.woff2" crossorigin>
   <link rel="preload" as="image" href="./assets/web2/films/opening-end-1280.webp" media="(min-width: 801px)">
@@ -34,6 +36,7 @@
   <header class="header" data-theme="dark">
     <a class="brand" href="#home" aria-label="Angora 21 ana sayfa"><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="37"/><path d="M23 54 40 23l17 31M30 42h20M40 23v35M20 61h40"/></svg><span>Angora<br>Twenty One</span></a>
     <nav class="header-nav" aria-label="Ana gezinme"><a href="#residence">Villa</a><a href="#floors">Dört kat</a><a href="#atlas">Planlar &amp; fotoğraflar</a><a href="#life">Angora’da yaşam</a><a class="header-cta" href="#contact">Randevu alın</a></nav>
+    <a class="lang-switch" href="./web2-tr.html" lang="tr" hreflang="tr" aria-label="Türkçe">TR</a>
     <a class="lang-switch" href="./web2.html" lang="en" hreflang="en" aria-label="English">EN</a>
     <button class="menu-toggle" aria-controls="menu" aria-expanded="false"><span class="menu-word">Menü</span><span class="menu-lines" aria-hidden="true"><i></i><i></i></span></button>
   </header>
@@ -50,7 +53,7 @@
     <section class="hero" id="home" data-theme="dark" aria-label="Angora 21 açılış">
       <div class="hero-pin">
         <div class="hero-media">
-          <video class="hero-opening" poster="./assets/web2/films/opening-end-1280.webp" muted playsinline preload="auto" aria-label="Villa akşam ışığında"><source src="./assets/web2/films/opening-720.mp4" media="(max-width: 800px)" type="video/mp4"><source src="./assets/web2/films/opening-1280.mp4" type="video/mp4"></video>
+          <video class="hero-opening" poster="./assets/web2/films/opening-end-1280.webp" muted playsinline preload="none" data-src-desktop="./assets/web2/films/opening-1280.mp4" data-src-mobile="./assets/web2/films/opening-720.mp4" aria-label="Villa akşam ışığında"></video>
           <img class="hero-still" src="./assets/web2/films/opening-end-1280.webp" srcset="./assets/web2/films/opening-end-720.webp 720w, ./assets/web2/films/opening-end-1280.webp 1280w" sizes="100vw" width="1280" height="720" alt="Villa ve çevresi akşam ışığında" fetchpriority="high" decoding="async">
           <canvas class="hero-canvas" aria-hidden="true"></canvas>
           <div class="hero-shade" aria-hidden="true"></div>
@@ -261,7 +264,7 @@
         <span class="eyebrow">09 / Fırsat</span>
         <h2 data-reveal="lines">Sizin diyeceğiniz<br><em>bir yer.</em></h2>
         <p data-reveal="fade">Hatırlı Sokak’ta yaklaşık 500 m² brüt kapalı alan, 400 m² net yaşam alanı ve 900 m² özel bahçesi olan müstakil bir villa. Beş yatak odası, dört yaşam alanı, üç mutfak, özel havuz, asansör, bağımsız girişli ek bina ve üç araçlık otopark.</p>
-        <p class="price"><span class="eyebrow">İstenen fiyat</span><strong>₺99,000,000</strong></p>
+        <p class="price"><span class="eyebrow">İstenen fiyat</span><strong>₺99,000,000</strong><small>İlan 4 Ekim 2026’da kontrol edildi · RE/MAX Türkiye</small></p>
         <ul class="listing-facts"><li>Müstakil villa</li><li>Dört kat</li><li>Boş · Hemen teslim</li></ul>
         <form class="enquiry" id="enquiry" novalidate>
           <label><span>Adınız</span><input name="name" type="text" autocomplete="name" required></label>
