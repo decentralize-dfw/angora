@@ -588,7 +588,9 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
         // 04.10 ahşap tonu (ilan fotoğrafı ölçümü): modelde "bal rengi"/"sıcak ceviz" adlı malzemelerin çoğu ortak
         // koyu ceviz dokusunu taşıyor (ortalama sRGB 52,32,25 ve 39,24,20) - kapı, süpürgelik, dolap, büfe espresso
         // görünüyordu; fotoğraflarda bal-kiraz (97-133, 53-68, 31-40). Doku deseni kalır, rengi doğrusal çarpanla.
-        if(FEATURES.woodTone&&['architecture','interior'].includes(name)&&DARK_WOOD_TEXTURES.has(material.map?.name)&&!material.userData.woodToned){
+        // mimaride yalnız iç donatı (EK_ kapı, süpürgelik, kapı göbeği): WOODY-DARK / Simple wood pencere doğraması ve dış
+        // panjurlar da - fotoğraflarda antrasit, kiraza çekilince cephede kırmızı-kahve oluyordu (dış fotoğraf 25/28)
+        if(FEATURES.woodTone&&(name==='interior'||name==='architecture'&&/^EK_/.test(material.name))&&DARK_WOOD_TEXTURES.has(material.map?.name)&&!material.userData.woodToned){
           material.userData.woodToned=true;material.color.multiply(DARK_WOOD_TEXTURES.get(material.map.name));woodToned++;
         }
         if(['architecture','interior'].includes(name)&&!mirror&&material.metalness>=.5&&!material.userData.metalSoftened){
