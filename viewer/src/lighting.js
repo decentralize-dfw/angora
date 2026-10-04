@@ -592,7 +592,11 @@ export function createLighting(renderer, scene, camera, clip,{quality,dolphinUrl
         if(['architecture','interior'].includes(name)&&!mirror&&material.metalness>=.5&&!material.userData.metalSoftened){
           material.userData.metalSoftened=true;
           const l=.2126*material.color.r+.7152*material.color.g+.0722*material.color.b;
-          if(l>.12){material.metalness=.35;material.roughness=Math.max(material.roughness,.35);if(!material.map)material.color.lerp(new THREE.Color(.72,.73,.74),.5);}
+          // 04.10: pirinç/altın/bakır (sıcak, doygun metal) griye çekilmez - avizeler fotoğraflarda pirinç, burada gri
+          // görünüyordu. Oda sondası artık tüm iç mekân malzemelerinde (roomProbeAll): metal olarak kalır, odayı yansıtır.
+          const warmMetal=FEATURES.roomProbeAll&&material.color.r>material.color.b*2.2&&material.color.r>.15;
+          if(warmMetal){material.roughness=Math.max(material.roughness,.28);}
+          else if(l>.12){material.metalness=.35;material.roughness=Math.max(material.roughness,.35);if(!material.map)material.color.lerp(new THREE.Color(.72,.73,.74),.5);}
         }
         // 03.10: Tur 10 malzemeleri toplu ad (-metal-/-glass-/-wood-) taşımıyor: iç mekândaki 160 malzemenin
         // 151'i oda sondası yerine DIŞ göğü yansıtıyor ve difüz dolguyu ondan alıyordu (mobilya odadan
