@@ -14,6 +14,8 @@ Kayıt: 4 Ekim 2026, 10:57 Europe/Paris (UTC+02:00). Sayfa: `web-gpt.html`.
 - İki Angora topluluk fotoğrafı karşılıklı yönlerden girer. Fotoğraf ölçeği ve yazı girişi aynı hareket dizisinde düzenlenir.
 - Fırsat bölümünde `photogallery-v2/angora_25.jpg` kullanılır: villa, teras ve havuz tam fotoğraf oranında gösterilir; iç mekân fotoğrafı ve kesen portre kadrajı kaldırıldı.
 - Menü boşluk ve yazı boyutları ekran yüksekliğiyle ölçeklenir. Kısa ekranda içeriği yukarı kesen merkezleme kaldırıldı. Uzun galeri bağlantısı kısaltıldı.
+- 320 px açılışta iki alt bağlantı ayrı sütunlarda tutulur; sloganla çakışan satır düşmesi giderildi.
+- Ekran boyutu değiştikten sonra menü hedefi, fontlar ve sabitlenen bölümlerin yerleşimi güncellendikten sonra ölçülür. 320 × 568'den masaüstüne dönüşte Life in Angora hedefi ekran tepesinden 0,54 px uzaklıkta doğrulandı.
 
 ## Doğrulama
 

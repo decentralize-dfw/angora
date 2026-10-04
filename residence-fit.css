@@ -314,6 +314,8 @@ main>section[tabindex="-1"]:focus{outline:none}
  .contact-image{height:auto;max-height:none;aspect-ratio:1672/941}
 }
 @media(max-height:680px) and (max-aspect-ratio:1/1){
+ .cinematic-story .hero-bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+ .cinematic-story .hero-bottom a,.cinematic-story .hero-bottom button{min-width:0;font-size:9px;letter-spacing:.03em;line-height:1.5;text-align:left}
  .atlas-scene{padding-top:36px!important}.atlas-toolbar{padding-top:12px;gap:10px}.atlas-tabs button{font-size:9px}
  .life-opening-copy{top:8%}.life-opening h2{font-size:28px;line-height:1.06}.life-landscape{top:47%}
  .life-map-legend{padding-top:12px;font-size:8px;gap:5px 10px}

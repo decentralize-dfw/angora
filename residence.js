@@ -81,7 +81,16 @@
   let navigationId=0;
   async function navigate(target,before=()=>{}) {
     const id=++navigationId;await closeMenu();await window.AngoraSteps?.whenIdle();if(id!==navigationId)return;
-    const commit=async()=>{await before();if(target.id==='home')await window.AngoraCinema?.reset();if(target.id==='floors')window.AngoraIso?.resetView();if(target.id==='atlas')window.AngoraPlan?.resetView();const top=target.getBoundingClientRect().top+scrollY;scrollTo(top,{immediate:true,force:true});target.tabIndex=-1;target.focus({preventScroll:true});window.ScrollTrigger?.update();updateHeader();};
+    const commit=async()=>{
+      await before();if(target.id==='home')await window.AngoraCinema?.reset();if(target.id==='floors')window.AngoraIso?.resetView();if(target.id==='atlas')window.AngoraPlan?.resetView();
+      // A viewport / font change can resize upstream pinned galleries. Measure
+      // after those observers settle, before capturing the incoming scene.
+      await document.fonts?.ready;
+      await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+      window.ScrollTrigger?.refresh();
+      const top=target.getBoundingClientRect().top+scrollY;scrollTo(top,{immediate:true,force:true});
+      target.tabIndex=-1;target.focus({preventScroll:true});window.ScrollTrigger?.update();updateHeader();
+    };
     if(reduced||Math.abs(target.getBoundingClientRect().top)<innerHeight*.8){await commit();return;}
     // Capture both complete scenes; distant navigation never flies through the story.
     if(document.startViewTransition){await document.startViewTransition(commit).finished;}
