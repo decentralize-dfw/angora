@@ -1,4 +1,5 @@
 // All intervals below refer to the owner's ORIGINAL recording clock, in seconds.
+import { ACTIVE_FLOWS } from './casestudy2-active-data.js';
 // Source video timing is retained. Scene ranges are editorial cuts, not animation durations.
 export const LAYERS={image:{label:'Görsel / kamera',color:'#7993aa'},mask:{label:'Maske / zemin',color:'#a07759'},text:{label:'Yazı / içerik',color:'#8b9468'},ui:{label:'Arayüz',color:'#928197'}};
 const track=(type,note,range=[0,1],box=null)=>({type,note,range,box});
@@ -117,6 +118,7 @@ const deviceNotes={
 };
 const flow=(project,device,offset,duration,scenes,coverage,gaps)=>({id:`${project}-${device}`,project,device,offset,duration,fps:60,width:device==='desktop'?1920:426,height:device==='desktop'?1050:636,video:`./assets/casestudy2/${project}/${device}.mp4`,source:project==='era'?'2026-10-05 13-16-27.mp4':'2026-10-05 13-20-35.mp4',viewport:device==='desktop'?'Desktop · 1920 × 1050':'Mobil emülasyon · 459 × 686',deviceNote:deviceNotes[project],coverage,gaps,scenes:scenes.map((s,i)=>({...s,id:i+1,start:+(s.sourceStart-offset).toFixed(3),end:+(s.sourceEnd-offset).toFixed(3),duration:+(s.sourceEnd-s.sourceStart).toFixed(3)}))});
 export const FLOWS={
+ ...ACTIVE_FLOWS,
  'era-desktop':flow('era','desktop',3,148,eraDesktop,'Ana sayfanın açılışı, pinler, bütün ana scroll akışı, footer ve ters scroll; ardından apartments listesi, daire detayı ve lightbox kaydedilmiş. Browser çubukları ve OBS başlangıcı kadraj dışında bırakıldı.','Gündüz/gece seçimi, Book a call formu ve accordion açılışı bu kayıtta gösterilmedi; bunlar için uydurma klip eklenmedi.'),
  'era-mobile':flow('era','mobile',160,78,eraMobile,'Ana sayfa hero’dan footer’a, neden ve amenity slaytları, iç galeri ve ters scroll kaydedilmiş. Chrome responsive mode 459 × 686; gerçek telefon cihaz kaydı değildir.','Bu bölüm hero açıkken başlar; mobil preloader, menü açılışı, pin sheet ve sayfalar arası gezinme gösterilmemiş.'),
  'likova-desktop':flow('likova','desktop',113.5,151.3,likovaDesktop,'Açılış, menü, model kamera akışı, location/harita, lifestyle, master plan, mimari, lobi, offices, teknoloji, altyapı ve ekip bölümü kaydedilmiş.','Desktop footer, seçilebilir 3D master plan arayüzü ve ofis seçim paneli bu kayıtta açılmamış. Kayıt ekip sahnesinde kesildi.'),

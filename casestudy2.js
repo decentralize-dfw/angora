@@ -1,8 +1,9 @@
 import { FLOWS, LAYERS, clampTime, sceneAt, counterpart } from './casestudy2-data.js';
+import { renderReview } from './casestudy2-review.js';
 
 const $ = id => document.getElementById(id);
 const video = $('recording');
-const projectNames = { era: 'ERA Residence', likova: 'Likova' };
+const projectNames = { era: 'ERA Residence', likova: 'Likova', active: '03 · Angora web2 / Aktif inceleme' };
 const state = { flow: FLOWS['era-desktop'], scene: null, pendingTime: 0, loading: true, error: false, layers: new Set(Object.keys(LAYERS)), query: '' };
 const clock = (time, decimals = false) => {
  const centiseconds = Math.round(Math.max(0, time || 0) * 100), seconds = Math.floor(centiseconds / 100);
@@ -35,6 +36,7 @@ function renderCatalog() {
   button.setAttribute('aria-current', String(s.id === scene.id));
   button.append(el('span', String(s.id).padStart(2, '0'), 'index'));
   const title = el('span'); title.append(el('b', s.title), el('small', `${s.family} · ${clock(s.duration, true)} · kaynak ${clock(s.sourceStart)}`));
+  if (s.review) title.append(el('small', `${s.review.verdict} · ${s.review.score.toFixed(1)} / 10`, 'catalog-verdict'));
   button.append(title); button.addEventListener('click', () => selectScene(flow, s)); fragment.append(button);
  });
  if (!filtered.length) fragment.append(el('p', 'Bu kayıtta eşleşen sahne yok.', 'empty-search'));
@@ -111,6 +113,7 @@ function renderDetails() {
   figure.append(imageFrame, caption); button.append(figure); button.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'instant' }); seek(time); }); return button;
  });
  $('contact-sheet').replaceChildren(...stills);
+ renderReview(flow, scene, seek);
 }
 function updateSceneUI() {
  const { flow, scene } = state;
@@ -121,7 +124,7 @@ function updateSceneUI() {
  $('scrub').step = String(1000 / (scene.duration * flow.fps));
  for (const button of document.querySelectorAll('[data-project]')) button.setAttribute('aria-pressed', String(button.dataset.project === flow.project));
  for (const button of document.querySelectorAll('[data-device]')) button.setAttribute('aria-pressed', String(button.dataset.device === flow.device));
- $('live-reference').href = flow.project === 'era' ? 'https://www.era-residence.com/' : 'https://likova.space/';
+ $('live-reference').href = {era:'https://www.era-residence.com/',likova:'https://likova.space/',active:'./web2.html'}[flow.project];
  history.replaceState(null, '', `#${flow.id}-${scene.id}`);
  renderCatalog(); renderTracks(); renderAnnotations(); renderDetails(); fitFrame();
 }
@@ -205,6 +208,7 @@ for (const button of document.querySelectorAll('[data-device]')) button.addEvent
  state.query = ''; $('scene-search').value = ''; selectScene(flow, scene);
 });
 $('scene-search').addEventListener('input', () => { state.query = $('scene-search').value; renderCatalog(); });
+$('details-link').addEventListener('click', event => { event.preventDefault(); $('breakdown').scrollIntoView({ block: 'start', behavior: 'instant' }); });
 function closeCatalog() { $('catalog').classList.remove('is-open'); $('open-catalog').setAttribute('aria-expanded', 'false'); }
 $('open-catalog').addEventListener('click', () => { $('catalog').classList.add('is-open'); $('open-catalog').setAttribute('aria-expanded', 'true'); $('close-catalog').focus(); });
 $('close-catalog').addEventListener('click', () => { closeCatalog(); $('open-catalog').focus(); });
@@ -218,7 +222,7 @@ document.addEventListener('keydown', event => {
  if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); seek(video.currentTime + (event.key === 'ArrowLeft' ? -1 : 1) * (event.shiftKey ? 1 : 1 / state.flow.fps)); }
 });
 function fromHash() {
- const match = location.hash.match(/^#(era|likova)-(desktop|mobile)-(\d+)$/);
+ const match = location.hash.match(/^#(era|likova|active)-(desktop|mobile)-(\d+)$/);
  if (!match) return null;
  const flow = FLOWS[`${match[1]}-${match[2]}`], scene = flow.scenes[+match[3] - 1]; return scene ? { flow, scene } : null;
 }

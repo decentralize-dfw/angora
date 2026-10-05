@@ -1,0 +1,36 @@
+{
+  "id": "active-desktop",
+  "site": "active",
+  "device": "desktop",
+  "start": 4.0,
+  "end": 110.0,
+  "crop": [
+    0,
+    152,
+    2540,
+    1388
+  ],
+  "sourceFile": "2026-10-05 15-29-15.mp4",
+  "sourceResolution": [
+    2560,
+    1600
+  ],
+  "sourceFPS": 60,
+  "sourceOffset": 4.0,
+  "processed": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "width": 1920,
+        "height": 1050,
+        "r_frame_rate": "60/1"
+      }
+    ],
+    "format": {
+      "duration": "106.000000",
+      "size": "45009542"
+    }
+  },
+  "processing": "Viewport crop; desktop resized to 1920 px; H.264; no audio; original frame timing. Mobile is Chrome responsive emulation at 459 × 686 CSS px, not a physical phone recording."
+}

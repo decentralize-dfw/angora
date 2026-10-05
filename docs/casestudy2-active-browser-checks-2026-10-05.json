@@ -1,0 +1,2333 @@
+{
+  "recordedOn": "2026-10-05",
+  "desktop": [
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-1",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 0,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-2",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 4.6,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-3",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 6.1,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-4",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 7.7,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-5",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 9.65,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-6",
+      "overflow": false,
+      "ready": 4,
+      "refs": 1,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 10.65,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-7",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 12.7,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-8",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 14.85,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-9",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 16.7,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-10",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 18.05,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-11",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 19.9,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-12",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 22.35,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-13",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 23.5,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-14",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 24.6,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-15",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 26.2,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-16",
+      "overflow": false,
+      "ready": 4,
+      "refs": 1,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 28.7,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-17",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 32.4,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-18",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 34.65,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-19",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 36.15,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-20",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 38.15,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-21",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 40.45,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-22",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 41.35,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-23",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 42.35,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-24",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 44.05,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-25",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 46.25,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-26",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 48.25,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-27",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 50.25,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-28",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 51.55,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-29",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 52.35,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-30",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 52.95,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-31",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 53.55,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-32",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 54.45,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-33",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 55.6,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-34",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 57.2,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-35",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 58.1,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-36",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 58.8,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-37",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 59.6,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-38",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 60.6,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-39",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 61.55,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-40",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 62.5,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-41",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 63.7,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-42",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 64.599999,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-43",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 66.4,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-44",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 68.65,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-45",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 71.1,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-46",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 74.55,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-47",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 76.15,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-48",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 78.1,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-49",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 79.25,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-50",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 81.45,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-51",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 82.35,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-52",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 83.35,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-53",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 84.5,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-54",
+      "overflow": false,
+      "ready": 4,
+      "refs": 1,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 86.75,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-55",
+      "overflow": false,
+      "ready": 4,
+      "refs": 1,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 88.35,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-56",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 89.1,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-57",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 90.05,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-58",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 90.65,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-59",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 91.65,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-60",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 93.4,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-61",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 97.3,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-62",
+      "overflow": false,
+      "ready": 4,
+      "refs": 1,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 98.6,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-63",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 102.55,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-64",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 103.75,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-desktop-65",
+      "overflow": false,
+      "ready": 4,
+      "refs": 2,
+      "review": true,
+      "screenBottom": 720,
+      "stageHeight": 336.20001220703125,
+      "time": 104.6,
+      "viewport": [
+        1280,
+        720
+      ],
+      "y": 0
+    }
+  ],
+  "mobile": [
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-29",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-2",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-3",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-4",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-5",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-6",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-7",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-8",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-9",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-10",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-11",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-12",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-13",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-14",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-15",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-16",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-17",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-18",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-19",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-20",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-21",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-22",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-23",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-24",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-25",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-26",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-27",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-28",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-29",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-30",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-31",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-32",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-33",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-34",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-35",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-36",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-37",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-38",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-39",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-40",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-41",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-42",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-43",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    },
+    {
+      "frameFits": true,
+      "hash": "#active-mobile-44",
+      "overflow": false,
+      "ready": 4,
+      "screenBottom": 568,
+      "stageHeight": 232.3249969482422,
+      "viewport": [
+        320,
+        568
+      ],
+      "y": 0
+    }
+  ],
+  "references": [
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 29.6,
+      "title": "ERA Residence / Desktop / 05 · Havuza kamera yaklaşması",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 46.2,
+      "title": "ERA Residence / Desktop / 10 · Düşey scroll, yatay konum akışı",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 52.6,
+      "title": "ERA Residence / Desktop / 11 · Rota çizgisi ve bulut eşiği",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 55.2,
+      "title": "ERA Residence / Desktop / 12 · Bulutlardan geniş aerial’a",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 59.2,
+      "title": "ERA Residence / Desktop / 13 · Konut tipi: görsel ve ölçü",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 65.4,
+      "title": "ERA Residence / Desktop / 14 · Amenity: yönlü görsel değişimi",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 79.2,
+      "title": "ERA Residence / Desktop / 15 · İkinci kavis: iç mekâna giriş",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 81.7,
+      "title": "ERA Residence / Desktop / 16 · Zıt kolonlar ve ön plan bitkisi",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 85.5,
+      "title": "ERA Residence / Desktop / 17 · İç galeri → mimari eşik",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 94.7,
+      "title": "ERA Residence / Desktop / 20 · Fotoğraf geri çekilir, bilgi açılır",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 101.8,
+      "title": "ERA Residence / Desktop / 21 · Teras ve büyük kapanış başlığı",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 105.2,
+      "title": "ERA Residence / Desktop / 22 · Footer: daralan görüntü, büyüyen içerik",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 109.8,
+      "title": "ERA Residence / Desktop / 23 · Aynı geçişin geri okunması",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 117.5,
+      "title": "ERA Residence / Desktop / 25 · Plan kartı → daire detayı",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 121.1,
+      "title": "ERA Residence / Desktop / 26 · Fotoğraf sütunu ve sabit bilgiler",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 127.4,
+      "title": "ERA Residence / Desktop / 27 · Lightbox açılır, yana geçer, kapanır",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 3.9,
+      "title": "Likova / Desktop / 02 · Basamaklı yüzey hero’yu açar",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 23.7,
+      "title": "Likova / Desktop / 06 · İki mimari detay yan yana",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 27.9,
+      "title": "Likova / Desktop / 07 · Model etrafında açı ve sayısal bilgi",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 33.9,
+      "title": "Likova / Desktop / 08 · Modelden ulaşım kolajına",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 39.8,
+      "title": "Likova / Desktop / 09 · Tam video ve ileri–geri katmanlar",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 52.3,
+      "title": "Likova / Desktop / 10 · Video → harita ve sayaç kartı",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 70,
+      "title": "Likova / Desktop / 12 · Yaşam kolajı: kart içindeki sporcu",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 79,
+      "title": "Likova / Desktop / 13 · Yaşamdan master plan’a",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 87.9,
+      "title": "Likova / Desktop / 14 · Cephe, koyu kart ve açılan görüntü",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 95.5,
+      "title": "Likova / Desktop / 15 · Mimar kartı → lobi",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 107.1,
+      "title": "Likova / Desktop / 17 · Lobi görseli, sayılar ve galeri",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 116.5,
+      "title": "Likova / Desktop / 18 · İnsan videosu → çalışma alanı",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 124.2,
+      "title": "Likova / Desktop / 19 · Servis kartları → teknoloji",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 1050,
+      "ready": 4,
+      "time": 130.5,
+      "title": "Likova / Desktop / 20 · Altyapı: çok görüntülü basamaklı akış",
+      "width": 1921
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 0,
+      "title": "ERA Residence / Mobil / 01 · Mobil hero ve yaklaşma",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 25.4,
+      "title": "ERA Residence / Mobil / 08 · Mobil rota ve yatay kadraj",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 29,
+      "title": "ERA Residence / Mobil / 09 · Aerial → konutlar",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 31,
+      "title": "ERA Residence / Mobil / 10 · Konut tipi ve ölçüler",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 37,
+      "title": "ERA Residence / Mobil / 11 · Amenity: aynı seçim, dikey kadraj",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 45.6,
+      "title": "ERA Residence / Mobil / 12 · İç mekânın kavisli girişi",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 47.5,
+      "title": "ERA Residence / Mobil / 13 · İç mekân: kolonlar tek akışa dönüşür",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 54.9,
+      "title": "ERA Residence / Mobil / 15 · İç galerinin mobil kontrolü",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 63.5,
+      "title": "ERA Residence / Mobil / 17 · Mimari → proje bilgisi",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 65.3,
+      "title": "ERA Residence / Mobil / 18 · Teras ve mobil kapanış",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 67.2,
+      "title": "ERA Residence / Mobil / 19 · Mobil footer: ince pencereye dönüşme",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 74.7,
+      "title": "ERA Residence / Mobil / 20 · Footer → teras geri dönüşü",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 4.5,
+      "title": "Likova / Mobil / 02 · Mobil basamaklı hero",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 25.4,
+      "title": "Likova / Mobil / 06 · Metin ve cephe detayı",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 29.4,
+      "title": "Likova / Mobil / 07 · Mobil model ve büyük sayılar",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 37.8,
+      "title": "Likova / Mobil / 08 · Model → location → insan",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 44.2,
+      "title": "Likova / Mobil / 09 · Araç içi video ve beyaz metin",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 48.8,
+      "title": "Likova / Mobil / 10 · Harita ve süre kartı",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 51.6,
+      "title": "Likova / Mobil / 11 · 8 → 5 → 18 ulaşım kartı",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 55.8,
+      "title": "Likova / Mobil / 12 · Mobil yaşam: koşu ve kayak",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 62.2,
+      "title": "Likova / Mobil / 13 · Bütün bina ve 3D çağrısı",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 65.7,
+      "title": "Likova / Mobil / 14 · Mimari fotoğraf ve koyu kart",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 68.4,
+      "title": "Likova / Mobil / 15 · Mimarın beyaz kartı",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 77.8,
+      "title": "Likova / Mobil / 17 · Lobi bilgisi ve mobil galeri",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 85.8,
+      "title": "Likova / Mobil / 18 · Ofis videosu ve hizmet kartları",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 91.7,
+      "title": "Likova / Mobil / 19 · Teknoloji ve enerji kartı",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 95.7,
+      "title": "Likova / Mobil / 20 · Aerial → market → ekip",
+      "width": 426
+    },
+    {
+      "error": null,
+      "hash": "#active-desktop-24",
+      "height": 636,
+      "ready": 4,
+      "time": 104,
+      "title": "Likova / Mobil / 22 · Mobil footer ve kapanış",
+      "width": 426
+    }
+  ],
+  "additionalViewports": [
+    {
+      "header": {
+        "bottom": 59.20000076293945,
+        "height": 59.20000076293945,
+        "left": 175.4250030517578,
+        "right": 363.2000122070313,
+        "top": 0,
+        "width": 187.77500915527344,
+        "x": 175.4250030517578,
+        "y": 0
+      },
+      "overflow": false,
+      "screen": {
+        "bottom": 844,
+        "height": 784,
+        "left": 0,
+        "right": 375.2000122070313,
+        "top": 60,
+        "width": 375.2000122070313,
+        "x": 0,
+        "y": 60
+      },
+      "stage": {
+        "bottom": 658.2000122070312,
+        "height": 516.2000122070312,
+        "left": 14,
+        "right": 361.2000122070313,
+        "top": 142,
+        "width": 347.20001220703125,
+        "x": 14,
+        "y": 142
+      },
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    {
+      "header": {
+        "bottom": 45.20000076293945,
+        "height": 45.20000076293945,
+        "left": 149,
+        "right": 431.7250061035156,
+        "top": 0,
+        "width": 282.7250061035156,
+        "x": 149,
+        "y": 0
+      },
+      "overflow": false,
+      "screen": {
+        "bottom": 390.3999938964844,
+        "height": 344.3999938964844,
+        "left": 236,
+        "right": 828.7999877929688,
+        "top": 46,
+        "width": 592.7999877929688,
+        "x": 236,
+        "y": 46
+      },
+      "stage": {
+        "bottom": 261.7999954223633,
+        "height": 161.1999969482422,
+        "left": 254,
+        "right": 810.7999877929688,
+        "top": 100.5999984741211,
+        "width": 556.7999877929688,
+        "x": 254,
+        "y": 100.5999984741211
+      },
+      "viewport": [
+        844,
+        390
+      ]
+    }
+  ],
+  "clipBoundaryChecks": {
+    "scene": "active-desktop-24",
+    "angora": {
+      "end": 46.233333,
+      "paused": true,
+      "frameBack": 46.216666
+    },
+    "reference": {
+      "flow": "likova-desktop",
+      "scene": 13,
+      "end": 87.883333,
+      "paused": true,
+      "frameBack": 87.866666
+    }
+  },
+  "notes": "Read-only browser DOM observations after actual UI selection. Native mobile device behavior is not measured.",
+  "focusChecks": [
+    {
+      "active": "active-desktop",
+      "id": 5,
+      "index": 1,
+      "key": "likova-desktop:video-story",
+      "start": 39.8,
+      "end": 42,
+      "boundary": "Öneri için odak: 02:33.30–02:35.50 · 2.20 sn. İlk beyaz bilgi yüzeyinin girişi ve aynı film üzerinde geri çıkışı. Tam sahne: 02:33.30–02:45.80; bağlantıdan açılabilir. Kaynak hızı korunur, bekleme bölümü bu karşılaştırmaya alınmaz.",
+      "error": null,
+      "hash": "#active-desktop-5",
+      "paused": true,
+      "ready": 4,
+      "time": 40.803419
+    },
+    {
+      "active": "active-desktop",
+      "id": 11,
+      "index": 1,
+      "key": "likova-desktop:architecture",
+      "start": 87.9,
+      "end": 90.5,
+      "boundary": "Öneri için odak: 03:21.40–03:24.00 · 2.60 sn. Modelden cepheye devir ve koyu açıklama yüzeyinin ilk girişi. Tam sahne: 03:21.40–03:29.00; bağlantıdan açılabilir. Kaynak hızı korunur, bekleme bölümü bu karşılaştırmaya alınmaz.",
+      "error": null,
+      "hash": "#active-desktop-11",
+      "paused": true,
+      "ready": 4,
+      "time": 88.898217
+    },
+    {
+      "active": "active-desktop",
+      "id": 15,
+      "index": 1,
+      "key": "likova-desktop:lobby",
+      "start": 111.25,
+      "end": 115.85,
+      "boundary": "Öneri için odak: 03:44.75–03:49.35 · 4.60 sn. Sayı/bilgi alanından lobi galerisine devir ve iki sonraki fotoğraf. Tam sahne: 03:40.60–03:50.00; bağlantıdan açılabilir. Kaynak hızı korunur, bekleme bölümü bu karşılaştırmaya alınmaz.",
+      "error": null,
+      "hash": "#active-desktop-15",
+      "paused": true,
+      "ready": 4,
+      "time": 112.254803
+    },
+    {
+      "active": "active-desktop",
+      "id": 17,
+      "index": 0,
+      "key": "likova-desktop:offices",
+      "start": 119,
+      "end": 121.4,
+      "boundary": "Öneri için odak: 03:52.50–03:54.90 · 2.40 sn. Koyu ofis kartının ardından çalışma alanı görüntüsünün devralması. Tam sahne: 03:50.00–03:57.70; bağlantıdan açılabilir. Kaynak hızı korunur, bekleme bölümü bu karşılaştırmaya alınmaz.",
+      "error": null,
+      "hash": "#active-desktop-17",
+      "paused": true,
+      "ready": 4,
+      "time": 120.005158
+    },
+    {
+      "active": "active-desktop",
+      "id": 20,
+      "index": 0,
+      "key": "likova-desktop:master-plan",
+      "start": 84,
+      "end": 87.4,
+      "boundary": "Öneri için odak: 03:17.50–03:20.90 · 3.40 sn. Son ileri geçiş: beyaz teknik yüzeyin gelişi ve bütün modelin okunması. Tam sahne: 03:12.50–03:21.40; bağlantıdan açılabilir. Kaynak hızı korunur, bekleme bölümü bu karşılaştırmaya alınmaz.",
+      "error": null,
+      "hash": "#active-desktop-20",
+      "paused": true,
+      "ready": 4,
+      "time": 85.00413
+    },
+    {
+      "active": "active-mobile",
+      "id": 21,
+      "index": 0,
+      "key": "likova-mobile:offices",
+      "start": 86.3,
+      "end": 89.6,
+      "boundary": "Öneri için odak: 01:29.30–01:32.60 · 3.30 sn. Mobil ofis bilgi yüzeyi ve sonraki mekân fotoğrafının gelişi. Tam sahne: 01:28.80–01:34.70; bağlantıdan açılabilir. Kaynak hızı korunur, bekleme bölümü bu karşılaştırmaya alınmaz.",
+      "error": null,
+      "hash": "#active-mobile-21",
+      "paused": true,
+      "ready": 2,
+      "time": 87.30155
+    }
+  ],
+  "focusBoundary": {
+    "end": {
+      "paused": true,
+      "ready": 4,
+      "time": 89.583333
+    },
+    "frameBack": {
+      "paused": true,
+      "time": 89.566666
+    },
+    "expectedEnd": 89.58333333333333
+  }
+}

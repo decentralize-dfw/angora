@@ -2,15 +2,15 @@
 <html lang="tr">
 <head>
  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
- <title>Recorded Motion — ERA & Likova</title>
- <meta name="description" content="ERA ve Likova'nın gerçek masaüstü ve mobil ekran kayıtlarından zaman kodlu geçiş incelemeleri.">
+ <title>Recorded Motion — ERA, Likova & Angora inceleme</title>
+ <meta name="description" content="ERA ve Likova geçiş kütüphanesi; Angora web2'nin gerçek desktop ve mobil kaydından zaman kodlu aktif inceleme ve gerekçeli referans karşılaştırmaları.">
  <link rel="icon" href="./favicon.svg"><link rel="stylesheet" href="./casestudy2.css">
  <script type="module" src="./casestudy2.js"></script>
 </head>
 <body>
  <header class="studio-header">
   <a class="brand" href="./casestudy2.html"><span class="brand-mark">a.</span><span>ANGORA<br><b>RECORDED MOTION</b></span></a>
-  <nav class="project-nav" aria-label="Referans proje"><button data-project="era" aria-pressed="true">01 <b>ERA Residence</b></button><button data-project="likova" aria-pressed="false">02 <b>Likova</b></button></nav>
+  <nav class="project-nav" aria-label="İnceleme projesi"><button data-project="era" aria-pressed="true">01 <b>ERA Residence</b></button><button data-project="likova" aria-pressed="false">02 <b>Likova</b></button><button data-project="active" aria-pressed="false">03 <b>Aktif inceleme</b></button></nav>
   <span class="header-note">SOURCE FOOTAGE / 05.10.2026</span><a class="source-link" id="live-reference" href="https://www.era-residence.com/" target="_blank" rel="noopener">Canlı referans ↗</a>
  </header>
  <aside class="catalog" id="catalog" aria-label="Kayıttaki sahneler">
@@ -36,10 +36,18 @@
   </section>
   <section class="breakdown" id="breakdown" aria-labelledby="breakdown-title">
    <div class="detail-intro"><span class="eyebrow">A CLOSER READING</span><h2 id="breakdown-title">Hareketin içinden.</h2><p id="scene-summary"></p><div id="scene-tags" class="tags"></div></div>
+   <section id="active-review" class="active-review" aria-labelledby="review-heading" hidden>
+    <div class="review-heading"><div><span class="eyebrow">03 / ANGORA WEB2 · 05.10.2026 / 15:29 KAYDI</span><h3 id="review-heading">Mevcut sahne → tasarım kararı</h3></div><span id="review-verdict" class="verdict"></span></div>
+    <p class="review-scope">Notlar bu kaydın görsel sonucuna dair editoryal değerlendirmedir; jüri sonucu veya performans ölçümü değildir. Üç ölçüt eşit ağırlıktadır: devamlılık, kadraj, okuma. Kayıttaki beklemeler animasyon süresi sayılmaz. Mobil, Chrome emülasyonudur.</p>
+    <div id="review-scores" class="review-scores"></div><div class="review-columns"><article><span class="eyebrow">KAYITTA GÖRÜLEN</span><p id="review-observation"></p><div id="review-evidence"></div></article><article><span class="eyebrow">ÖNERİLEN KARAR</span><p id="review-action"></p><p id="review-avoid" class="review-avoid"></p></article></div>
+    <span class="eyebrow">BU SAHNE İÇİN SEÇİLEN GERÇEK REFERANSLAR</span><div id="recommendations" class="recommendations"></div>
+    <div class="comparison" id="comparison"><div class="comparison-header"><div><span class="eyebrow">GERÇEK KAYITLARI KARŞILAŞTIR / BAĞIMSIZ OYNATIM</span><h4 id="reference-title"></h4><p id="reference-reason"></p></div><a id="reference-open" target="_blank" rel="noopener">Tam breakdown ↗</a></div><div class="comparison-pair"><figure><figcaption>ANGORA / MEVCUT SAHNE <span id="current-clip-title"></span></figcaption><div class="reference-frame"><video id="current-clip-video" preload="metadata" playsinline muted></video><span id="current-clip-status" role="status"></span></div><div class="clip-transport"><button id="current-play" aria-label="Angora klibini oynat">Oynat ▷</button><input id="current-scrub" aria-label="Angora klibi zaman çizgisi" type="range" min="0" max="1000" value="0"><output id="current-clock"></output></div><div class="reference-controls"><button id="current-restart">Başa dön ▷</button><button id="current-frame-back" aria-label="Angora klibi bir kare geri">−1f</button><button id="current-frame-forward" aria-label="Angora klibi bir kare ileri">+1f</button></div></figure><figure><figcaption>SEÇİLEN KÜTÜPHANE REFERANSI</figcaption><div class="reference-frame"><video id="reference-video" preload="metadata" playsinline muted></video><span id="reference-status" role="status"></span></div><div class="clip-transport"><button id="reference-play" aria-label="Referans klibini oynat">Oynat ▷</button><input id="reference-scrub" aria-label="Referans klibi zaman çizgisi" type="range" min="0" max="1000" value="0"><output id="reference-clock"></output></div><div class="reference-controls"><button id="reference-restart">Başa dön ▷</button><button id="reference-frame-back" aria-label="Referans klibi bir kare geri">−1f</button><button id="reference-frame-forward" aria-label="Referans klibi bir kare ileri">+1f</button><label>Hız <select id="reference-speed"><option value=".25">0.25×</option><option value=".5">0.5×</option><option value="1" selected>1×</option></select></label></div></figure></div><p id="reference-boundary" class="review-scope"></p></div>
+    <details class="library-browser"><summary>92 sahnelik kütüphanenin tamamını aç / seçki gerekçeleri</summary><p class="review-scope">Her iki sitenin desktop ve mobil kayıtları erişilebilir. Öneri olmayan bir sahneyi izlemek, onu Angora’ya uygulama önerisi değildir. Açılış kimliği, cookie, sayfa değişimi, lightbox ve ekip kartı gibi bağlamlar bu kayıtta gösterilmeyen etkileşimlerin yerine kullanılmadı.</p><label>Kütüphanede ara <input id="reference-search" type="search" placeholder="Kavis, model, harita, galeri…"></label><div id="reference-library" class="reference-library"></div></details>
+   </section>
    <div class="contact-sheet" id="contact-sheet" aria-label="Sahnenin üç gerçek karesi"></div>
    <div class="detail-grid"><article><span class="eyebrow">01 / ZAMAN VE SIRA</span><div id="phase-list"></div></article><article><span class="eyebrow">02 / KATMANLARIN İLİŞKİSİ</span><div id="layer-notes"></div></article><article><span class="eyebrow">03 / DESKTOP ↔ MOBİL</span><p id="device-note"></p><button id="counterpart">Diğer kayıttaki karşılığını aç ↗</button><span class="eyebrow lesson-title">ANGORA İÇİN TASARIM DERSİ</span><p id="scene-lesson"></p></article></div>
    <div class="recording-notes"><div><span class="eyebrow">KAYIT VE KAPSAM</span><p id="coverage-note"></p><p id="missing-note"></p><p>Renkli katmanlar kaydın üzerine eklenen analiz işaretleridir. Görsel, maske, yazı ve arayüzün gözlenen ilişkisini açıklar; orijinal görüntüyü değiştirmez. Zamanlar kayıt içindeki duraklamaları da içerir.</p></div><div class="source-actions"><a id="recording-download" download>Bu görüntü akışını indir ↙</a><a id="provenance-link" target="_blank" rel="noopener">Kadraj ve kaynak bilgisi ↗</a><a id="export-notes" href="./assets/casestudy2/inventory.json" download="recorded-motion-2026-10-05.json">Zaman kodlu envanteri indir ↙</a></div></div>
-   <footer><span>ANGORA / MOTION STUDIES 02</span><p>Özgün tasarım ve görüntüler ERA Residence / The First The Last ve Likova / VIDE INFRA’ya aittir. Kullanıcının sağladığı 5 Ekim 2026 tarihli ekran kayıtları incelenmiştir.</p><a href="./web-gpt.html">Angora sunumu ↗</a></footer>
+   <footer><span>ANGORA / MOTION STUDIES 02 + 03</span><p>Özgün referans tasarımları ERA Residence / The First The Last ve Likova / VIDE INFRA’ya aittir. Kullanıcının sağladığı 5 Ekim 2026 ekran kayıtları incelenmiştir. 03, web2’nin 15:29 kaydını değerlendirir; öneriler henüz web2’ye uygulanmamıştır.</p><a href="./web2.html">Angora sunumu ↗</a></footer>
   </section>
  </main>
 </body>
