@@ -211,13 +211,13 @@ img[data-parallax]{will-change:transform;transform:scale(1.14)}
 .atlas-tabs button[aria-selected="true"]{color:var(--forest);border-color:var(--brown)}
 .measure-toggle{flex:none;min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0 10px;border:1px solid var(--line);font:500 11px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
 .measure-toggle[aria-pressed="true"]{background:var(--forest);color:var(--paper);border-color:var(--forest)}
-.atlas-layout{flex:1;min-height:0;display:grid;grid-template-rows:minmax(0,1fr) 118px;gap:10px;position:relative;overflow:hidden;isolation:isolate}
+.atlas-layout{flex:1;min-height:0;display:grid;grid-template-rows:minmax(0,1fr) 150px;gap:8px;position:relative;overflow:hidden;isolation:isolate}
 .atlas-drawing{min-height:0;height:100%;background:#f0eee6;border:1px solid var(--line);display:flex;flex-direction:column}
 .atlas-plan-title{display:flex;justify-content:space-between;gap:12px;padding:8px 12px;font:500 11px/1.4 var(--sans);letter-spacing:.08em;text-transform:uppercase;flex-shrink:0}
 .atlas-plan-title span:last-child{color:var(--muted)}
 .atlas-map{position:relative;flex:1;min-height:0;width:100%;overflow:hidden;background:#f0eee6}
 .atlas-floor-layer{position:absolute;inset:0}
-.atlas-floor-layer>img{position:absolute;opacity:.24;filter:saturate(.6);max-width:none}
+.atlas-floor-layer>img{position:absolute;opacity:.92;max-width:none}
 .atlas-floor-layer>svg{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;overflow:visible}
 .atlas-floor-layer>div{position:absolute;inset:0;z-index:3}
 .plan-previous-layer{z-index:5;pointer-events:none}
@@ -237,17 +237,23 @@ img[data-parallax]{will-change:transform;transform:scale(1.14)}
 .plan-dimension text{font:500 11px var(--sans);fill:#223e35;stroke:#f0eee6;stroke-width:4px;paint-order:stroke}.plan-dimension line{stroke:#537562;stroke-width:.8}
 .atlas-pin{position:absolute;width:40px;height:40px;transform:translate(-50%,-50%);border:1px solid #476351;border-radius:50%;background:rgba(247,246,240,.95);color:#244535;font:600 11px var(--sans);display:grid;place-items:center;z-index:2;transition:background .2s,color .2s}
 .atlas-pin:hover,.atlas-pin.active{background:var(--brown);border-color:var(--brown);color:#fff;z-index:3}
-.atlas-view{min-width:0;min-height:0;display:grid;grid-template-columns:42% minmax(0,1fr);grid-template-rows:minmax(0,1fr) 36px;column-gap:10px;row-gap:6px}
-.atlas-photo-open{position:relative;display:block;width:100%;height:100%;min-height:0;overflow:hidden;background:#dce5df;grid-row:1/3;grid-column:1}
+.atlas-view{min-width:0;min-height:0;display:grid;grid-template-columns:42% minmax(0,1fr);grid-template-rows:28px minmax(0,1fr) 36px;column-gap:10px;row-gap:6px}
+.atlas-schedule{grid-column:1/3;grid-row:1;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;align-items:center}
+.atlas-schedule::-webkit-scrollbar{display:none}
+.atlas-schedule button{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border:1px solid var(--line);font:500 11px/1 var(--sans);color:var(--forest);white-space:nowrap}
+.atlas-schedule button span:last-child{color:var(--muted)}
+.atlas-schedule button.active{background:var(--forest);border-color:var(--forest);color:var(--paper)}
+.atlas-schedule button.active span:last-child{color:rgba(239,237,230,.75)}
+.atlas-photo-open{position:relative;display:block;width:100%;height:100%;min-height:0;overflow:hidden;background:#dce5df;grid-row:2/4;grid-column:1}
 .atlas-photo-open img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-mask)}
 .atlas-photo-open:hover img{transform:scale(1.03)}
 .atlas-photo-previous{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
 .atlas-photo-open>span{position:absolute;left:16px;bottom:14px;color:#fff;font:500 11px/1.4 var(--sans);letter-spacing:.08em;text-transform:uppercase;text-shadow:0 1px 10px #000}
-.atlas-photo-copy{grid-column:2;grid-row:1;align-self:center;min-width:0}
+.atlas-photo-copy{grid-column:2;grid-row:2;align-self:center;min-width:0}
 .atlas-photo-copy .eyebrow{color:var(--muted);font-size:11px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .atlas-photo-copy h3{font-size:19px;line-height:1.1;margin:4px 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .atlas-photo-copy p{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.atlas-photo-strip{grid-column:2;grid-row:2;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;height:36px}
+.atlas-photo-strip{grid-column:2;grid-row:3;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;height:36px}
 .atlas-photo-strip::-webkit-scrollbar{display:none}
 .atlas-photo-strip>button{position:relative;flex:0 0 36px;height:36px;padding:0;overflow:hidden;border:1px solid #476351;background:transparent;display:grid;place-items:center;transition:background .3s,color .3s}
 .atlas-photo-strip>button img{display:none;width:100%;height:100%;object-fit:cover}
@@ -324,23 +330,26 @@ img[data-parallax]{will-change:transform;transform:scale(1.14)}
 .gallery-progress{height:1px;background:var(--line-light);margin:16px var(--gutter) 0}
 .gallery-progress i{display:block;height:100%;background:var(--ice);transform:scaleX(0);transform-origin:left}
 
-/* Contact: a complete exterior with the offer on top of it. */
-.contact{position:relative;background:var(--forest);color:var(--paper);isolation:isolate}
-.contact-media{position:relative;overflow:hidden;aspect-ratio:16/10}
+/* Contact: one viewport, the offer laid over a complete exterior. */
+.contact{position:relative;min-height:100svh;display:grid;align-items:end;background:var(--forest);color:var(--paper);isolation:isolate}
+.contact-media{position:absolute;inset:0;overflow:hidden}
 .contact-media img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-.contact-card{position:relative;background:var(--paper);color:var(--forest);padding:36px var(--gutter) 44px}
-.contact-card h2{font-size:clamp(40px,5vw,80px);margin:14px 0 18px}
-.contact-card>p{font-size:15px;line-height:1.7;max-width:50ch}
-.price{display:flex;flex-direction:column;gap:6px;margin:24px 0 14px}
-.price small{font:400 12px/1.5 var(--sans);color:var(--muted)}
-.price strong{font:400 clamp(40px,4.4vw,64px)/1 var(--serif);letter-spacing:-.02em}
-.listing-facts{display:flex;flex-wrap:wrap;gap:6px 20px;font:500 12px/1.6 var(--sans);color:var(--muted);margin-bottom:24px}
-.enquiry{display:grid;gap:14px;border-top:1px solid var(--line);padding-top:22px}
-.enquiry label{display:grid;gap:6px;font:500 11px/1.4 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.enquiry input{font:400 16px/1.4 var(--sans);color:var(--forest);background:var(--white);border:1px solid var(--line);padding:12px 14px;min-height:48px;border-radius:0}
+.contact-media:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,30,25,.35),rgba(12,30,25,.1))}
+.contact-card{position:relative;min-width:0;background:var(--paper);color:var(--forest);margin:calc(var(--header-h) + 14px) var(--gutter) 18px;padding:20px 20px 18px}
+.contact-card h2{font-size:clamp(26px,7vw,38px);margin:6px 0 8px}
+.contact-copy>p{font-size:13px;line-height:1.55;max-width:50ch}
+.price{display:flex;flex-direction:column;gap:4px;margin:12px 0 8px}
+.price small{font:400 11px/1.4 var(--sans);color:var(--muted)}
+.price strong{font:400 clamp(30px,8vw,44px)/1 var(--serif);letter-spacing:-.02em}
+.listing-facts{display:flex;flex-wrap:wrap;gap:4px 16px;font:500 11px/1.5 var(--sans);color:var(--muted);margin-bottom:12px}
+.enquiry{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;border-top:1px solid var(--line);padding-top:12px}
+.enquiry label{display:grid;gap:4px;min-width:0;font:500 11px/1.4 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.enquiry label.wide{display:none;grid-column:1/3}
+.enquiry input{width:100%;min-width:0;font:400 16px/1.4 var(--sans);color:var(--forest);background:var(--white);border:1px solid var(--line);padding:9px 12px;min-height:44px;border-radius:0}
 .enquiry input:focus{border-color:var(--forest)}
-.enquiry .button{justify-self:start}
-.listing-source{display:inline-flex;align-items:center;min-height:44px;margin-top:14px;font:500 12px/1.6 var(--sans);letter-spacing:.04em;border-bottom:1px solid var(--line)}
+.enquiry .button{grid-column:1/3;justify-self:start}
+.enquiry .text-link{grid-column:1/3;min-height:32px}
+.listing-source{display:inline-flex;align-items:center;min-height:32px;margin-top:6px;font:500 11px/1.5 var(--sans);letter-spacing:.04em;border-bottom:1px solid var(--line)}
 
 /* Footer */
 .footer{background:var(--forest);color:var(--paper)}
@@ -441,13 +450,17 @@ html.no-motion *,html.no-motion *:before,html.no-motion *:after{transition-durat
   .measure-toggle{padding:0 14px}
   .atlas-layout{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:3vw;align-items:stretch}
   .atlas-plan-foot{display:flex}
-  .atlas-view{display:grid;grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto 52px;row-gap:12px;height:100%}
+  .atlas-view{display:grid;grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto auto 52px;row-gap:12px;height:100%}
   .atlas-photo-open{grid-row:1;grid-column:1}
   .atlas-photo-copy{grid-column:1;grid-row:2;align-self:start}
+  .atlas-schedule{grid-column:1;grid-row:3;display:grid;grid-template-columns:1fr 1fr;gap:0 24px;overflow:visible;align-items:start}
+  .atlas-schedule button{display:flex;justify-content:space-between;gap:12px;height:auto;min-height:26px;padding:4px 0;border:0;border-bottom:1px solid var(--line);font-size:12px;white-space:normal;text-align:left}
+  .atlas-schedule button.active{background:transparent;color:var(--brown);border-color:var(--brown)}
+  .atlas-schedule button.active span:last-child{color:var(--brown)}
   .atlas-photo-copy .eyebrow{font-size:11px;white-space:normal}
   .atlas-photo-copy h3{font-size:clamp(22px,2.2vw,32px);white-space:normal;margin:6px 0 2px}
   .atlas-photo-copy p{font-size:12px;white-space:normal}
-  .atlas-photo-strip{grid-column:1;grid-row:3;height:52px;gap:8px}
+  .atlas-photo-strip{grid-column:1;grid-row:4;height:52px;gap:8px}
   .atlas-photo-strip>button{flex:0 0 72px;height:52px;border-color:transparent;opacity:.65;display:block}
   .atlas-photo-strip>button img{display:block}
   .atlas-photo-strip>button[aria-pressed="true"]{opacity:1;background:transparent;border-color:var(--brown)}
@@ -471,10 +484,20 @@ html.no-motion *,html.no-motion *:before,html.no-motion *:after{transition-durat
   .gallery-item{flex:0 0 var(--gallery-w,58vw);height:100%}
   .gallery-item button{flex:1;min-height:0}
   .gallery-item img{height:100%;aspect-ratio:auto}
-  .contact{min-height:100svh;display:grid;align-items:center}
-  .contact-media{position:absolute;inset:0;aspect-ratio:auto}
-  .contact-media:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,30,25,.55),rgba(12,30,25,.05) 70%)}
-  .contact-card{margin:calc(var(--header-h) + 40px) var(--gutter);max-width:600px;padding:44px 48px}
+  .contact{align-items:center}
+  .contact-media:after{background:linear-gradient(90deg,rgba(12,30,25,.5),rgba(12,30,25,.08) 70%)}
+  .contact-card{margin:calc(var(--header-h) + 24px) auto 24px;width:min(1040px,calc(100% - 2 * var(--gutter)));padding:36px 44px;display:grid;grid-template-columns:1.1fr .9fr;gap:24px 48px;align-items:start}
+  .contact-card h2{font-size:clamp(34px,3.6vw,56px);margin:10px 0 12px}
+  .contact-copy>p{font-size:14px;line-height:1.6;max-width:48ch}
+  .price{margin:18px 0 10px;gap:6px}
+  .price strong{font-size:clamp(36px,3.4vw,52px)}
+  .listing-facts{font-size:12px;margin-bottom:0}
+  .contact-form{display:flex;flex-direction:column}
+  .enquiry{border-top:0;padding-top:0;gap:12px}
+  .enquiry label.wide{display:grid}
+  .enquiry .button{grid-column:1;align-self:center}
+  .enquiry .text-link{grid-column:2;justify-self:end}
+  .listing-source{margin-top:18px;font-size:12px}
   .footer-orbit{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:4vw;align-items:center;padding-bottom:48px}
   .wireframe-stage{height:100%;max-height:none;min-height:60svh;mask-image:none}
   .wireframe-stage canvas{mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent),linear-gradient(0deg,transparent,#000 10%,#000 90%,transparent);mask-composite:intersect;-webkit-mask-composite:source-in}

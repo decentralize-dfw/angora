@@ -12,12 +12,34 @@
   const photos=()=>data.photos.filter(p=>p.floor===floor&&!p.outdoor);
   const number=p=>photos().findIndex(item=>item.id===p.id)+1;
   const caption=p=>S.lang==='tr'?(p.tr||p.en).replace('Bodrum ·','Bahçe katı ·'):p.en.replace('Basement ·','Garden level ·').replace('Ground floor ·','Entrance level ·').replace('Attic floor ·','Attic level ·');
+  // Every level is drawn at one scale: the floor that needs the most room sets metres per screen pixel, so the plans never change size between levels.
+  let metreScale=null;
+  function metresPerPixel(index){
+    const pose=poses.floors[index],iw=manifest.width,ih=manifest.height,ratios=[];
+    (pose.dimensions||[]).forEach(d=>{if(!d.screen||!d.metres)return;const px=Math.hypot((d.screen[1][0]-d.screen[0][0])*iw,(d.screen[1][1]-d.screen[0][1])*ih);if(px>4)ratios.push((d.measured_m||d.metres)/px);});
+    (pose.rooms||[]).forEach(r=>{if(!r.poly||!r.screen)return;for(let i=0;i<Math.min(r.poly.length,r.screen.length);i++){const j=(i+1)%r.poly.length,m=Math.hypot(r.poly[j][0]-r.poly[i][0],r.poly[j][1]-r.poly[i][1]),px=Math.hypot((r.screen[j][0]-r.screen[i][0])*iw,(r.screen[j][1]-r.screen[i][1])*ih);if(m>.5&&px>4)ratios.push(m/px);}});
+    ratios.sort((a,b)=>a-b);return ratios.length?ratios[ratios.length>>1]:1;
+  }
+  const bounds=index=>roomBounds(poses.floors[index])||manifest.crops[index];
   function projection(index){
-    const box=roomBounds(poses.floors[index])||manifest.crops[index],w=map.clientWidth,h=map.clientHeight;
-    const marginX=Math.max(18,w*.10),marginY=Math.max(16,h*.09),iw=manifest.width,ih=manifest.height;
-    const scale=Math.min((w-marginX*2)/(iw*box.width),(h-marginY*2)/(ih*box.height));
+    const w=map.clientWidth,h=map.clientHeight,iw=manifest.width,ih=manifest.height,marginX=Math.max(18,w*.08),marginY=Math.max(16,h*.07);
+    if(!metreScale)metreScale=[0,1,2,3].map(metresPerPixel);
+    const fit=[0,1,2,3].reduce((best,i)=>{const b=bounds(i);return Math.min(best,(w-marginX*2)/(iw*b.width*metreScale[i]),(h-marginY*2)/(ih*b.height*metreScale[i]));},Infinity);
+    const box=bounds(index),scale=fit*metreScale[index];
     const dx=(w-iw*box.width*scale)/2,dy=(h-ih*box.height*scale)/2;
     return {scale,iw,ih,left:dx-iw*box.x*scale,top:dy-ih*box.y*scale,at:p=>[dx+(p[0]-box.x)*iw*scale,dy+(p[1]-box.y)*ih*scale]};
+  }
+  const polygonArea=poly=>{let a=0;for(let i=0;i<poly.length;i++){const j=(i+1)%poly.length;a+=poly[i][0]*poly[j][1]-poly[j][0]*poly[i][1];}return Math.abs(a)/2;};
+  const scheduleName=name=>{name=name.replace(/Bedroom (?:C)?\d+/,'Bedroom');return S.rooms?.[name]||name;};
+  // The room schedule: listed areas where the listing gives them, the model's measured area (marked approximate) where it does not.
+  function renderSchedule(){
+    const list=$('#atlas-room-list');if(!list)return;list.replaceChildren();
+    data.rooms.filter(r=>r.floor===floor).forEach(r=>{
+      const b=document.createElement('button'),n=document.createElement('span'),a=document.createElement('span');b.type='button';b.dataset.atlasRoom=r.id;
+      const modelled=poses?.floors[floor]?.rooms?.find(x=>x.id===r.id)?.poly,approx=!r.area&&modelled?polygonArea(modelled):0;
+      n.textContent=scheduleName(r.name);a.textContent=r.area?r.area.toFixed(1)+' m²':approx>=2?'≈ '+Math.round(approx)+' m²':'';
+      b.classList.toggle('active',selected?.roomId===r.id);b.append(n,a);list.append(b);
+    });
   }
   function layout(){
     if(!poses||!manifest||!map.clientWidth||!map.clientHeight)return;
@@ -110,7 +132,7 @@
     $('#atlas-image').src=window.AngoraPhoto.src(p.file,1200);$('#atlas-image').srcset=window.AngoraPhoto.srcset(p.file);$('#atlas-image').sizes='(max-width: 800px) 100vw, 40vw';$('#atlas-image').alt=title;$('#atlas-photo-number').textContent=(S.camera||'Camera ')+number(p)+' · '+levels[floor];$('#atlas-photo-title').textContent=title.includes(' · ')?title.split(' · ').slice(1).join(' · '):title;
     $('#atlas-photo-description').textContent=(room?.name?(S.rooms?.[room.name.replace(/Bedroom (?:C)?\d+/,'Bedroom')]||room.name.replace(/Bedroom (?:C)?\d+/,'Bedroom')):levels[floor])+(room?.area?' · '+room.area.toFixed(2)+' m²':'');
     $('#atlas-open').dataset.photo=p.file;$('#atlas-open').dataset.caption=title;
-    strip.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.atlasPhoto)===p.id)));drawOverlays();
+    strip.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.atlasPhoto)===p.id)));$$('#atlas-room-list [data-atlas-room]').forEach(b=>b.classList.toggle('active',b.dataset.atlasRoom===p.roomId));drawOverlays();
   }
   async function showPhoto(id,animate=true){
     const p=photos().find(p=>p.id===Number(id));if(!p||p.id===selected?.id)return;
@@ -126,14 +148,15 @@
     image.src='./assets/web2/chapters/plan-'+floor+(compact()?'-900':'-1600')+'.webp';image.alt=(S.planAlt||'Furnished model plan: ')+levels[floor];
     $$('[data-atlas-floor]').forEach(b=>{const on=Number(b.dataset.atlasFloor)===floor;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;});
     strip.replaceChildren();photos().forEach(p=>{const b=document.createElement('button'),img=document.createElement('img'),label=document.createElement('span');b.dataset.atlasPhoto=p.id;b.setAttribute('aria-label',(S.cameraPoint||'Camera point ')+number(p)+': '+caption(p));img.src=window.AngoraPhoto.src(p.file,480);img.alt=caption(p);img.loading='lazy';img.decoding='async';label.textContent=number(p);b.append(img,label);strip.append(b);});
-    showPhoto(defaults[floor],false);layout();
+    renderSchedule();showPhoto(defaults[floor],false);layout();
   }
+  const go=i=>{if(window.AngoraPlan&&window.AngoraPlan.navigate)return window.AngoraPlan.navigate(i);transition(i);document.querySelector('#atlas')?.scrollIntoView({block:'start'});};
   document.addEventListener('click',e=>{
     const point=e.target.closest('[data-atlas-photo]');if(point)showPhoto(point.dataset.atlasPhoto);
-    const tab=e.target.closest('[data-atlas-floor]');if(tab){transition(Number(tab.dataset.atlasFloor));}
+    const tab=e.target.closest('[data-atlas-floor]');if(tab){e.preventDefault();go(Number(tab.dataset.atlasFloor));}
     const room=e.target.closest('[data-atlas-room]');if(room){const p=photos().find(p=>p.roomId===room.dataset.atlasRoom);if(p)showPhoto(p.id);}
   });
-  $$('[data-atlas-floor]').forEach(b=>b.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const i=e.key==='Home'?0:e.key==='End'?3:(floor+(e.key==='ArrowRight'?1:3))%4;transition(i);$('#atlas-tab-'+i).focus({preventScroll:true});}));
+  $$('[data-atlas-floor]').forEach(b=>b.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const i=e.key==='Home'?0:e.key==='End'?3:(floor+(e.key==='ArrowRight'?1:3))%4;go(i);$('#atlas-tab-'+i).focus({preventScroll:true});}));
   $('#atlas-measure').onclick=()=>{measure=!measure;$('#atlas-measure').setAttribute('aria-pressed',String(measure));$('#atlas-measure').innerHTML='<span class="measure-word">'+(S.dimensions||'Dimensions')+'</span> <span aria-hidden="true">'+(measure?'−':'＋')+'</span>';drawOverlays();if(measure&&!matchMedia('(prefers-reduced-motion: reduce)').matches)gsap.from('.plan-dimension',{opacity:0,duration:.25,ease:'power1.out'});};
   window.addEventListener('angora:floor',e=>{transition(Number(e.detail));});
   async function transition(index){
@@ -156,7 +179,7 @@
   }
   window.AngoraPlan={selectFloor,layout,transition,get floor(){return floor;}};
   new ResizeObserver(layout).observe(map);image.addEventListener('load',layout);
-  const loadPoses=()=>Promise.all([fetch('./assets/residence/chapters/poses.json').then(r=>r.json()),fetch('./assets/residence/chapters/native-manifest.json').then(r=>r.json())]).then(([p,m])=>{poses=p;manifest=m;layout();});
+  const loadPoses=()=>Promise.all([fetch('./assets/residence/chapters/poses.json').then(r=>r.json()),fetch('./assets/residence/chapters/native-manifest.json').then(r=>r.json())]).then(([p,m])=>{poses=p;manifest=m;metreScale=null;layout();renderSchedule();});
   const near=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){near.disconnect();loadPoses();}},{rootMargin:'120% 0px'});near.observe(document.querySelector('#atlas'));
   selectFloor(0,true);
 })();

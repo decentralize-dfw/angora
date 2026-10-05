@@ -122,6 +122,7 @@ T = [
  ('alt="Garden-level living room"', 'alt="Bahçe katı salonu"'),
  ('<span class="eyebrow" id="atlas-photo-number">Camera 3 · Garden level</span><h3 id="atlas-photo-title">Living room</h3><p id="atlas-photo-description">Garden level</p>', '<span class="eyebrow" id="atlas-photo-number">Kamera 3 · Bahçe katı</span><h3 id="atlas-photo-title">Salon</h3><p id="atlas-photo-description">Bahçe katı</p>'),
  ('aria-label="Photographs on this floor"', 'aria-label="Bu kattaki fotoğraflar"'),
+ ('aria-label="Rooms and areas"', 'aria-label="Odalar ve alanlar"'),
  ('<span class="eyebrow">The details that make a home</span><span class="eyebrow">Space, access &amp; practical comfort</span>', '<span class="eyebrow">Bir evi ev yapan ayrıntılar</span><span class="eyebrow">Alan, erişim &amp; konfor</span>'),
  ('A home that<br><em>works for life.</em>', 'Gündelik hayata<br><em>uyan bir ev.</em>'),
  ('<span>01</span><h3>A lift &amp; a staircase</h3><p>A lift serves the garden, entrance and first floors. The attic is reached by the staircase, whose iron balustrades and timber handrails carry the character of the home between levels.</p>',

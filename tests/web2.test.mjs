@@ -63,6 +63,9 @@ test('four stepped scenes: one gesture, one complete transition', () => {
   assert.match(js, /register\(floorsSection, 3,/); assert.match(js, /register\(\$\('\.atlas'\), 3,/);
   assert.ok(!/scrub:\s*[\d.]+[^\n]*(hero|floors|garden)/.test(js), 'no scrubbed hero, garden or floors');
   for (const sel of ['.hero{', '.garden{', '.floors{', '.atlas{']) assert.match(css, new RegExp(sel.replace(/[.{]/g, '\\$&') + '[^}]*height:100svh'), sel + ' is one viewport tall');
+  assert.match(css, /\.contact\{[^}]*min-height:100svh/, 'the offer fits one viewport');
+  assert.match(js, /incomingScene\(/, 'scene tops stop the page before it crosses them');
+  assert.match(html, /id="atlas-room-list"/, 'the room schedule is back in the atlas');
 });
 
 test('header is always rendered and themed per section', () => {

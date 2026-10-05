@@ -55,6 +55,13 @@ dosyasındadır.
   masaüstü 1152 px / mobil 640 px), kat kesit kareleri (22 kare), harita WebP.
   Üretim komutları `scratchpad` dışında tekrar edilebilir: `ffmpeg` (`libwebp`,
   `libx264`), `pyftsubset`.
+- Sahne tepesi bir duvardır: tekerlek, klavye ya da parmak sayfayı bir sahnenin
+  tepesinden geçirecekse sayfa tam orada, ilk karede durur; aşma ve geri
+  toplanma olmaz (`incomingScene` + kaydırma emniyeti, `web2.js`). Plan atlası
+  bahçe katından başlar, her kaydırmada bir kat yana kayar; dört plan aynı metre
+  ölçeğinde çizilir ve siyah arka planları kağıt rengine çevrilmiştir
+  (`assets/web2/chapters/plan-*.webp`); oda listesi alanlarıyla fotoğrafın
+  altındadır. İletişim bölümü her ekranda tek yüksekliğe sığar.
 - Bütçe testleri: `node --test tests/web2.test.mjs` (varlıkların varlığı, 2 MB
   üst sınırı, kare sayıları, duyarlı görsel nitelikleri, yazı boyutu tabanı,
   kaydırma ele geçirme yasağı).

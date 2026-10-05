@@ -124,10 +124,16 @@
 
   /* Scenes: a 100svh section whose gestures are steps. One gesture, one whole transition, no resting in between. */
   class Gate { constructor(quiet = 200) { this.quiet = quiet; this.last = -Infinity; this.busy = false; this.direction = 0; } accept(now, direction) { const fresh = now - this.last > this.quiet || direction !== this.direction; this.last = now; if (this.busy || !fresh) return false; this.busy = true; this.direction = direction; return true; } finish() { this.busy = false; } }
-  const scenes = []; let busy = null, pending = Promise.resolve(), touchY = 0, touchConsumed = false, touchFree = false;
+  const scenes = []; let busy = null, navLock = false, pending = Promise.resolve(), touchY = 0, touchConsumed = false, touchFree = false, lastY = scrollY;
   const blocked = () => !!document.querySelector('dialog[open]') || document.body.classList.contains('locked');
   const sceneTop = scene => scene.el.getBoundingClientRect().top + scrollY;
   function activeScene(direction = 1) { if (blocked()) return null; const band = direction < 0 ? .45 : .22; return scenes.find(s => { const r = s.el.getBoundingClientRect(); return r.top <= 24 && r.top > -innerHeight * band && r.bottom > innerHeight * .55; }) || null; }
+  // A scene's top edge is a wall. Whatever would carry the page across it (a wheel flurry, smooth-scroll momentum, a fling) stops there, on the first frame.
+  function incomingScene(from, to) {
+    if (blocked() || !Math.sign(to - from)) return null;
+    const lo = Math.min(from, to) - 1, hi = Math.max(from, to) + 1;
+    return scenes.map(s => ({ s, top: sceneTop(s) })).filter(({ top }) => top > lo && top < hi && Math.abs(top - from) > 2).sort((a, b) => Math.abs(a.top - from) - Math.abs(b.top - from))[0]?.s || null;
+  }
   function hold(scene) { scrollTo(sceneTop(scene), true); lenis?.stop(); }
   function release() { if (!blocked()) lenis?.start(); }
   function run(scene, work) {
@@ -135,46 +141,70 @@
     pending = Promise.resolve().then(work).catch(e => console.error('Scene transition', e)).finally(() => { scene.el.dataset.transitioning = 'false'; scene.gate.finish(); busy = null; release(); updateHeader(); });
     return pending;
   }
-  function move(event, direction, displacement = 0) {
+  function arrive(scene, direction) {
+    scene.gate.last = performance.now();
+    return run(scene, async () => {
+      lenis?.stop(); await scene.enter?.(direction);
+      const distance = Math.abs(sceneTop(scene) - scrollY);
+      if (distance > 1) await travel(sceneTop(scene), Math.min(.55, .22 + distance / innerHeight * .4));
+      hold(scene);
+    });
+  }
+  function move(event, direction, goal = null) {
     if (blocked()) return;
-    if (busy) { event.preventDefault(); event.stopImmediatePropagation(); busy.gate.last = performance.now(); return; }
-    travelTween?.kill();
+    if (busy || navLock) { event.preventDefault(); event.stopImmediatePropagation(); if (busy) busy.gate.last = performance.now(); return; }
     const scene = activeScene(direction);
     if (!scene) {
-      const reach = Math.max(Math.abs(displacement || event.deltaY || 0) * 1.15, 48);
-      const incoming = scenes.map(s => ({ s, r: s.el.getBoundingClientRect() })).filter(({ r }) => direction > 0 ? r.top > 24 && r.top <= reach : r.top < -innerHeight * .22 && -r.top <= reach).sort((a, b) => Math.abs(a.r.top) - Math.abs(b.r.top))[0];
+      const from = scrollY, to = goal ?? from + direction * Math.max(innerHeight * .5, 48);
+      const incoming = incomingScene(from, to);
       if (!incoming) return;
-      event.preventDefault(); event.stopImmediatePropagation();
-      if (!incoming.s.gate.accept(performance.now(), direction)) return;
-      run(incoming.s, async () => { await incoming.s.enter?.(direction); await travel(sceneTop(incoming.s), .4); hold(incoming.s); });
+      event.preventDefault(); event.stopImmediatePropagation(); travelTween?.kill();
+      if (!incoming.gate.accept(performance.now(), direction)) return;
+      arrive(incoming, Math.sign(sceneTop(incoming) - from) || direction);
       return;
     }
-    event.preventDefault(); event.stopImmediatePropagation();
+    event.preventDefault(); event.stopImmediatePropagation(); travelTween?.kill();
     if (!scene.gate.accept(performance.now(), direction)) return;
     // A scene that is not yet aligned uses this gesture to settle on its first frame.
-    if (Math.abs(scene.el.getBoundingClientRect().top) > 8) { run(scene, async () => { await travel(sceneTop(scene), .4); hold(scene); }); return; }
+    if (Math.abs(scene.el.getBoundingClientRect().top) > 8) { run(scene, async () => { lenis?.stop(); await travel(sceneTop(scene), .4); hold(scene); }); return; }
     const next = scene.index + direction;
     if (next < 0 || next > scene.steps) {
       const top = sceneTop(scene) + (direction > 0 ? scene.el.offsetHeight : -innerHeight * .75);
-      run(scene, async () => { const handled = await scene.exit?.(direction, top); if (!handled) await travel(top, .65); });
+      run(scene, async () => { lenis?.stop(); const handled = await scene.exit?.(direction, top); if (!handled) await travel(top, .65); });
       return;
     }
     run(scene, async () => { hold(scene); await scene.transition(scene.index, next); scene.index = next; scene.el.dataset.step = next; });
   }
   if (motion) {
-    addEventListener('wheel', e => { if (e.ctrlKey || Math.abs(e.deltaY) < 1 || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; move(e, Math.sign(e.deltaY)); }, { capture: true, passive: false });
-    addEventListener('keydown', e => { if (e.target.closest('input,textarea,select,button,a') || e.altKey || e.ctrlKey || e.metaKey) return; if (['PageDown', 'PageUp', ' ', 'ArrowDown', 'ArrowUp'].includes(e.key) && (activeScene(e.key === 'PageUp' || e.key === 'ArrowUp' ? -1 : 1) || busy)) move(e, e.key === 'PageUp' || e.key === 'ArrowUp' || e.shiftKey ? -1 : 1); }, { capture: true });
-    const freeTouch = target => !!target.closest?.('.atlas-photo-strip, .strip-track, .gallery-track, dialog, .menu');
+    addEventListener('wheel', e => {
+      if (e.ctrlKey || Math.abs(e.deltaY) < 1 || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      const unit = e.deltaMode === 1 ? 40 : e.deltaMode === 2 ? innerHeight : 1, base = lenis ? lenis.targetScroll : scrollY;
+      move(e, Math.sign(e.deltaY), clamp(base + e.deltaY * unit, 0, maxScroll()));
+    }, { capture: true, passive: false });
+    addEventListener('keydown', e => {
+      if (e.target.closest('input,textarea,select,button,a') || e.altKey || e.ctrlKey || e.metaKey) return;
+      if (!['PageDown', 'PageUp', ' ', 'ArrowDown', 'ArrowUp'].includes(e.key)) return;
+      const direction = e.key === 'PageUp' || e.key === 'ArrowUp' || (e.key === ' ' && e.shiftKey) ? -1 : 1, step = e.key.startsWith('Arrow') ? 40 : innerHeight * .87;
+      move(e, direction, clamp(scrollY + direction * step, 0, maxScroll()));
+    }, { capture: true });
+    // Safety net for every other way the page can move (a scrollbar drag, a fling): a crossed scene top is still a wall.
+    addEventListener('scroll', () => {
+      const y = scrollY, from = lastY; lastY = y;
+      if (busy || navLock || blocked() || Math.abs(y - from) < 1 || Math.abs(y - from) > innerHeight * 1.2) return;
+      const crossed = incomingScene(from, y); if (!crossed) return;
+      if (Math.abs(sceneTop(crossed) - y) < 1 && activeScene(Math.sign(y - from))) return;
+      arrive(crossed, Math.sign(y - from));
+    }, { passive: true });
+    const freeTouch = target => !!target.closest?.('.atlas-photo-strip, .atlas-schedule, .strip-track, .gallery-track, dialog, .menu');
     addEventListener('touchstart', e => { touchY = e.touches[0]?.clientY || 0; touchConsumed = false; touchFree = freeTouch(e.target); }, { passive: true });
     addEventListener('touchmove', e => {
       if (blocked() || touchFree) return;
       const delta = touchY - (e.touches[0]?.clientY || touchY);
-      if (busy || activeScene(Math.sign(delta) || 1) || touchConsumed) { e.preventDefault(); return; }
+      if (busy || navLock || activeScene(Math.sign(delta) || 1) || touchConsumed) { e.preventDefault(); return; }
       if (Math.abs(delta) < 35) return;
-      const approaching = scenes.some(s => { const r = s.el.getBoundingClientRect(); return delta > 0 ? r.top > 24 && r.top <= Math.abs(delta) * 1.15 : r.top < -innerHeight * .22 && -r.top <= Math.abs(delta) * 1.15; });
-      if (approaching) { touchConsumed = true; move(e, Math.sign(delta), Math.abs(delta)); }
+      if (incomingScene(scrollY, scrollY + delta * 1.6)) { touchConsumed = true; move(e, Math.sign(delta), scrollY + delta * 1.6); }
     }, { passive: false });
-    addEventListener('touchend', e => { if (touchFree) return; const delta = touchY - (e.changedTouches[0]?.clientY || touchY); if (!touchConsumed && Math.abs(delta) > 35) move(e, Math.sign(delta), Math.abs(delta)); }, { passive: false });
+    addEventListener('touchend', e => { if (touchFree) return; const delta = touchY - (e.changedTouches[0]?.clientY || touchY); if (!touchConsumed && Math.abs(delta) > 35) move(e, Math.sign(delta), scrollY + delta * 1.6); }, { passive: false });
   }
   function register(el, steps, transition, { enter, exit } = {}) {
     const scene = { el, steps, transition, enter, exit, index: 0, gate: new Gate() }; el.dataset.step = 0; scenes.push(scene);
@@ -347,9 +377,7 @@
     return new Promise(r => gsap.timeline({ onComplete: r }).to('.floors-text', { autoAlpha: 0, y: 6, duration: .16, overwrite: true }).call(swap).to('.floors-text', { autoAlpha: 1, y: 0, duration: .45, ease: EASE }));
   }
   const FLOOR_CLIPS = [1, 2, 3].map(i => ({ id: `level-${i}`, frames: 22, root: `./assets/web2/chapters/level-${i}/${isMobile() ? 'm' : 'd'}` }));
-  let floorsScene = null, atlasScene = null, planDescending = false;
-  const atlasFloor = step => planDescending ? 3 - step : step;
-  const atlasStep = floor => planDescending ? 3 - floor : floor;
+  let floorsScene = null, atlasScene = null;
   if (motion) {
     const player = new Frames($('.floors-canvas'), { fit: 'contain', background: '#ffffff' });
     ScrollTrigger.create({ trigger: floorsSection, start: 'top 170%', once: true, onEnter: () => FLOOR_CLIPS.reduce((p, c) => p.then(() => player.load(c)), Promise.resolve()) });
@@ -369,7 +397,7 @@
       enter: direction => { if (direction > 0) { floorsScene.reset(0); holdFloor(0); } },
       exit: async (direction, top) => {
         if (direction < 0 || !atlasScene) return false;
-        planDescending = true; atlasScene.reset(atlasStep(floorsScene.index)); window.AngoraPlan.selectFloor(floorsScene.index);
+        atlasScene.reset(0); window.AngoraPlan.selectFloor(0);
         await travel(top, .65); hold(atlasScene); return true;
       }
     });
@@ -378,18 +406,18 @@
     holdFloor(0);
   } else { setFloor(0, false); }
 
-  /* 04 Plans: one gesture slides one floor sideways. Entered from the model, it continues the same stack downwards. */
+  /* 04 Plans: one gesture slides one floor sideways, garden level first, the same order as the model. */
   if (motion && window.AngoraPlan) {
-    atlasScene = register($('.atlas'), 3, (from, to) => window.AngoraPlan.transition(atlasFloor(to)), {
-      enter: direction => { if (direction < 0) { planDescending = true; atlasScene.reset(3); window.AngoraPlan.selectFloor(0); } else if (!planDescending) { atlasScene.reset(0); window.AngoraPlan.selectFloor(0); } },
+    atlasScene = register($('.atlas'), 3, (from, to) => window.AngoraPlan.transition(to), {
+      enter: direction => { const floor = direction < 0 ? 3 : 0; atlasScene.reset(floor); window.AngoraPlan.selectFloor(floor); },
       exit: async (direction, top) => {
         if (direction > 0 || !floorsScene) return false;
-        const floor = window.AngoraPlan.floor; floorsScene.reset(floor); floorsScene.holdFloor(floor);
+        floorsScene.reset(3); floorsScene.holdFloor(3);
         await travel(sceneTop(floorsScene), .65); hold(floorsScene); return true;
       }
     });
-    atlasScene.restore = () => { planDescending = false; atlasScene.reset(0); window.AngoraPlan.selectFloor(0); };
-    window.AngoraPlan.navigate = floor => { const go = () => atlasScene.go(atlasStep(Number(floor))); if (Math.abs($('.atlas').getBoundingClientRect().top) > 5) navigate($('.atlas')).then(go); else go(); };
+    atlasScene.restore = () => { atlasScene.reset(0); window.AngoraPlan.selectFloor(0); };
+    window.AngoraPlan.navigate = floor => { const go = () => atlasScene.go(Number(floor)); if (Math.abs($('.atlas').getBoundingClientRect().top) > 5) navigate($('.atlas')).then(go); else go(); };
   }
   async function goFloor(i) {
     if (!floorsScene) { setFloor(i, false); travel(sceneTop({ el: floorsSection }), .8); return; }
@@ -398,18 +426,19 @@
   }
   floorTabs.forEach(b => { b.addEventListener('click', () => goFloor(Number(b.dataset.floor))); b.addEventListener('keydown', e => { const i = Number(b.dataset.floor); const next = e.key === 'ArrowRight' ? (i + 1) % 4 : e.key === 'ArrowLeft' ? (i + 3) % 4 : e.key === 'Home' ? 0 : e.key === 'End' ? 3 : null; if (next === null) return; e.preventDefault(); goFloor(next); $(`#floor-tab-${next}`).focus({ preventScroll: true }); }); });
   $$('[data-floor-link]').forEach(b => b.addEventListener('click', () => goFloor(Number(b.dataset.floorLink))));
-  $('#floor-plan-link').addEventListener('click', e => { e.preventDefault(); const floor = Number($('#floor-plan-link').dataset.atlasFloor || 0); if (window.AngoraPlan?.navigate) window.AngoraPlan.navigate(floor); else { window.dispatchEvent(new CustomEvent('angora:floor', { detail: floor })); travel(sceneTop({ el: $('.atlas') }), .8); } });
 
   /* Navigation: distant links travel, scenes arrive at their first frame. */
   const sceneFor = el => scenes.find(s => s.el === el);
   async function navigate(target) {
-    await closeMenu(); await whenIdle();
-    const scene = sceneFor(target);
-    if (scene) { scene.restore?.(); await travel(sceneTop(scene), .9); hold(scene); release(); }
-    else await travel(target.getBoundingClientRect().top + scrollY - headerH() + 8, .9);
-    updateHeader();
+    await closeMenu(); await whenIdle(); navLock = true;
+    try {
+      const scene = sceneFor(target); lenis?.stop();
+      if (scene) { scene.restore?.(); await travel(sceneTop(scene), .9); hold(scene); }
+      else await travel(target.getBoundingClientRect().top + scrollY - headerH() + 8, .9);
+    } finally { navLock = false; lastY = scrollY; release(); updateHeader(); }
   }
   $$('a[href^="#"]').forEach(link => link.addEventListener('click', async e => {
+    if (link.hasAttribute('data-atlas-floor')) return;
     const id = link.hash.slice(1), target = document.getElementById(id); if (!target) return;
     e.preventDefault(); history.replaceState(null, '', link.hash); await navigate(target);
   }));
