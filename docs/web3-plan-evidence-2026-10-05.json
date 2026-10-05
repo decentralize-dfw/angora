@@ -1,0 +1,441 @@
+{
+  "baseCommit": "7077771a8a048b48d2a00f61c19089f564d708f4",
+  "scope": "Filesystem/Git metadata inspection. No live interaction, visual approval, physical phone or runtime performance pass.",
+  "floors": [
+    {
+      "floor": 0,
+      "cameras": 9,
+      "rooms": 5,
+      "contourPoints": 1408,
+      "roomCameraBounds": [
+        0.41569006457136387,
+        0.6269183257003336,
+        0.21167409435450107,
+        0.2690052309176151
+      ],
+      "contourBounds": [
+        0.4112489817723681,
+        0.5106726190373425,
+        0.22091594824131655,
+        0.3928892495754013
+      ]
+    },
+    {
+      "floor": 1,
+      "cameras": 10,
+      "rooms": 8,
+      "contourPoints": 2016,
+      "roomCameraBounds": [
+        0.32370983404554976,
+        0.20085464792069774,
+        0.3563347308146516,
+        0.6408569138743313
+      ],
+      "contourBounds": [
+        0.31331701421579194,
+        0.08505016187315029,
+        0.3733659715684161,
+        0.8298993813356503
+      ]
+    },
+    {
+      "floor": 2,
+      "cameras": 13,
+      "rooms": 10,
+      "contourPoints": 2507,
+      "roomCameraBounds": [
+        0.3625395803120536,
+        0.10132340545994545,
+        0.2786966402401977,
+        0.8122805505653302
+      ],
+      "contourBounds": [
+        0.3521651047843807,
+        0.08502083365558749,
+        0.29566979043123864,
+        0.8299580380640317
+      ]
+    },
+    {
+      "floor": 3,
+      "cameras": 8,
+      "rooms": 5,
+      "contourPoints": 3383,
+      "roomCameraBounds": [
+        0.34011310422378993,
+        0.174606271412797,
+        0.2415888699627292,
+        0.6520360691470042
+      ],
+      "contourBounds": [
+        0.33131902563571414,
+        0.088054833530825,
+        0.3373619487285717,
+        0.823890007976441
+      ]
+    }
+  ],
+  "imagesSampled": [
+    {
+      "path": "assets/web2/films/approach/d/f-001.webp",
+      "width": 1152,
+      "height": 648,
+      "bytes": 103654
+    },
+    {
+      "path": "assets/web2/films/approach/d/f-041.webp",
+      "width": 1152,
+      "height": 648,
+      "bytes": 114898
+    },
+    {
+      "path": "assets/web2/films/approach/m/f-001.webp",
+      "width": 640,
+      "height": 360,
+      "bytes": 38814
+    },
+    {
+      "path": "assets/web2/films/approach/m/f-041.webp",
+      "width": 640,
+      "height": 360,
+      "bytes": 46918
+    },
+    {
+      "path": "assets/web2/films/orbit/d/f-001.webp",
+      "width": 1152,
+      "height": 648,
+      "bytes": 128600
+    },
+    {
+      "path": "assets/web2/films/orbit/d/f-041.webp",
+      "width": 1152,
+      "height": 648,
+      "bytes": 137420
+    },
+    {
+      "path": "assets/web2/films/orbit/m/f-001.webp",
+      "width": 640,
+      "height": 360,
+      "bytes": 49298
+    },
+    {
+      "path": "assets/web2/films/orbit/m/f-041.webp",
+      "width": 640,
+      "height": 360,
+      "bytes": 54632
+    },
+    {
+      "path": "assets/web2/films/garden-return/d/f-001.webp",
+      "width": 1152,
+      "height": 648,
+      "bytes": 136210
+    },
+    {
+      "path": "assets/web2/films/garden-return/d/f-041.webp",
+      "width": 1152,
+      "height": 648,
+      "bytes": 101028
+    },
+    {
+      "path": "assets/web2/films/garden-return/m/f-001.webp",
+      "width": 640,
+      "height": 360,
+      "bytes": 54426
+    },
+    {
+      "path": "assets/web2/films/garden-return/m/f-041.webp",
+      "width": 640,
+      "height": 360,
+      "bytes": 38906
+    },
+    {
+      "path": "assets/web2/chapters/level-1/d/f-001.webp",
+      "width": 1440,
+      "height": 810,
+      "bytes": 68248
+    },
+    {
+      "path": "assets/web2/chapters/level-1/d/f-022.webp",
+      "width": 1440,
+      "height": 810,
+      "bytes": 75460
+    },
+    {
+      "path": "assets/web2/chapters/level-1/m/f-001.webp",
+      "width": 800,
+      "height": 450,
+      "bytes": 27434
+    },
+    {
+      "path": "assets/web2/chapters/level-1/m/f-022.webp",
+      "width": 800,
+      "height": 450,
+      "bytes": 27684
+    },
+    {
+      "path": "assets/web2/chapters/level-2/d/f-001.webp",
+      "width": 1440,
+      "height": 810,
+      "bytes": 76126
+    },
+    {
+      "path": "assets/web2/chapters/level-2/d/f-022.webp",
+      "width": 1440,
+      "height": 810,
+      "bytes": 73624
+    },
+    {
+      "path": "assets/web2/chapters/level-2/m/f-001.webp",
+      "width": 800,
+      "height": 450,
+      "bytes": 28218
+    },
+    {
+      "path": "assets/web2/chapters/level-2/m/f-022.webp",
+      "width": 800,
+      "height": 450,
+      "bytes": 28006
+    },
+    {
+      "path": "assets/web2/chapters/level-3/d/f-001.webp",
+      "width": 1440,
+      "height": 810,
+      "bytes": 72424
+    },
+    {
+      "path": "assets/web2/chapters/level-3/d/f-022.webp",
+      "width": 1440,
+      "height": 810,
+      "bytes": 70734
+    },
+    {
+      "path": "assets/web2/chapters/level-3/m/f-001.webp",
+      "width": 800,
+      "height": 450,
+      "bytes": 27594
+    },
+    {
+      "path": "assets/web2/chapters/level-3/m/f-022.webp",
+      "width": 800,
+      "height": 450,
+      "bytes": 27510
+    },
+    {
+      "path": "assets/web2/chapters/iso-0-1440.webp",
+      "width": 1440,
+      "height": 810,
+      "bytes": 71106
+    },
+    {
+      "path": "assets/web2/chapters/iso-1-1440.webp",
+      "width": 1440,
+      "height": 810,
+      "bytes": 82580
+    },
+    {
+      "path": "assets/web2/chapters/iso-2-1440.webp",
+      "width": 1440,
+      "height": 810,
+      "bytes": 80788
+    },
+    {
+      "path": "assets/web2/chapters/iso-3-1440.webp",
+      "width": 1440,
+      "height": 810,
+      "bytes": 76638
+    }
+  ],
+  "videos": [
+    {
+      "path": "assets/residence/films/opening/source.mp4",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "24/1",
+          "nb_frames": "121"
+        }
+      ],
+      "format": {
+        "duration": "5.056000",
+        "size": "4005539"
+      }
+    },
+    {
+      "path": "assets/residence/films/approach/source.mp4",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "24/1",
+          "nb_frames": "121"
+        }
+      ],
+      "format": {
+        "duration": "5.056000",
+        "size": "8163039"
+      }
+    },
+    {
+      "path": "assets/residence/films/orbit/source.mp4",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "24/1",
+          "nb_frames": "121"
+        }
+      ],
+      "format": {
+        "duration": "5.056000",
+        "size": "8475306"
+      }
+    },
+    {
+      "path": "assets/residence/films/garden-return/source.mp4",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "24/1",
+          "nb_frames": "121"
+        }
+      ],
+      "format": {
+        "duration": "5.056000",
+        "size": "8339094"
+      }
+    },
+    {
+      "path": "assets/residence/chapters/level-1.mp4",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 2560,
+          "height": 1440,
+          "r_frame_rate": "30/1",
+          "nb_frames": "43",
+          "side_data_list": [
+            {}
+          ]
+        }
+      ],
+      "format": {
+        "duration": "1.433333",
+        "size": "9765362"
+      }
+    },
+    {
+      "path": "assets/residence/chapters/level-2.mp4",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 2560,
+          "height": 1440,
+          "r_frame_rate": "30/1",
+          "nb_frames": "43",
+          "side_data_list": [
+            {}
+          ]
+        }
+      ],
+      "format": {
+        "duration": "1.433333",
+        "size": "8533085"
+      }
+    },
+    {
+      "path": "assets/residence/chapters/level-3.mp4",
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 2560,
+          "height": 1440,
+          "r_frame_rate": "30/1",
+          "nb_frames": "43",
+          "side_data_list": [
+            {}
+          ]
+        }
+      ],
+      "format": {
+        "duration": "1.433333",
+        "size": "7876088"
+      }
+    }
+  ],
+  "frameRateImplication": {
+    "note": "V1 confused 3x source speed with 3x existing playback speed. These are different durations, not approvals.",
+    "heroFramesInWeb2": 41,
+    "heroSourceSeconds": 5.056,
+    "v1SourceBasedHeroSeconds": 1.6853,
+    "v1AvailableDistinctFramesPerSecond": 24.33,
+    "currentHeroSeconds": 0.7,
+    "threeTimesCurrentHeroSeconds": 0.2333,
+    "isoFramesInWeb2": 22,
+    "isoSourceSeconds": 1.4333333333333333,
+    "v1SourceBasedIsoSeconds": 0.4778,
+    "currentIsoSeconds": 0.55,
+    "threeTimesCurrentIsoSeconds": 0.1833
+  },
+  "decodedLowerBound": {
+    "note": "Width × height × 4 × frames; excludes browser/GPU overhead and compressed blobs.",
+    "desktopHeroClipBytes": 122425344,
+    "mobileHeroClipBytes": 37785600
+  },
+  "wireframe": {
+    "visibleLineSegments": 224975,
+    "radius": 54,
+    "invisibleMeshIndices": 895515,
+    "target": [
+      -0.7,
+      4.7,
+      -0.4
+    ]
+  },
+  "map": {
+    "viewBox": [
+      0.0,
+      0.0,
+      2400.0,
+      1600.0
+    ],
+    "points": 387,
+    "groups": [
+      "Education",
+      "Health",
+      "Food & drink",
+      "Shopping",
+      "Parks & sport",
+      "Services"
+    ],
+    "sourceRadius": [
+      8,
+      10
+    ],
+    "dotDiameterAt320CssPx": [
+      2.133,
+      2.667
+    ]
+  },
+  "planHeightIllustration": {
+    "note": "Proposed example, not measured UI: 568px viewport minus 48px header reservation.",
+    "available": 520,
+    "planAt48Percent": 249.6,
+    "photoAt30Percent": 156,
+    "minimumSingleRowControls": 132,
+    "total": 537.6,
+    "overflow": 17.6
+  }
+}

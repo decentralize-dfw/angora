@@ -1,8 +1,10 @@
 # web3 — ERA yönünde kurgu ve uygulama planı
 
-Tarih/saat: 5 Ekim 2026 20:12:05 · Europe/Paris (UTC+02:00). Durum: **yalnız plan; web3.html henüz uygulanmadı.** Sayfanın içeriği İngilizce, bu çalışma belgesi Türkçe olacak. web4 için Likova yönü ayrı tutulacak.
+İlk sürüm: 5 Ekim 2026 20:12:05 · Europe/Paris (UTC+02:00). **V2 / uygulama sözleşmesi denetimi: 5 Ekim 2026.** Durum: **yalnız plan; web3.html henüz uygulanmadı.** Sayfanın içeriği İngilizce, bu çalışma belgesi Türkçe olacak. web4 için Likova yönü ayrı tutulacak.
 
 Bu planın iki kaynağı, kullanıcının 15:29 web2 ekran kaydı ve casestudy2'deki gerçek ERA desktop/mobil kayıtlarıdır. Canlı web2'deki ek deneme, aynı günün farklı bir gözlemidir; eski kaydın input yolunu geriye dönük kanıtlamaz. Yeni kurguya henüz 9 verilmedi. 9, uygulama sonrasında sağlanması gereken hedeftir.
+
+V2 ayrıca mevcut kodu, kamera/contour verisini, medya manifestlerini ve dosya metadata'sını denetler. V1'in kurgu yönü kullanılabilir; **V1 doğrudan uygulamaya hazır değildi.** Aşağıdaki kararlar çelişen eski cümlelerin yerini alır. Ayrıntılı açıklar ve kalan kanıt ihtiyacı: [uygulama incelemesi](web3-plan-review-2026-10-05.md). Kaynak sayıları, gelecekteki performans veya fiziksel telefon onayı değildir.
 
 ## 1. Önce büyük hata: 28. kesit ne anlatıyor?
 
@@ -16,7 +18,7 @@ Kullanıcının belirttiği işlem **“plan fotoğrafına bas → isometriğe a
 - **Kayıt:** yanlış model/kat durumuna dönüş görünür; her kesitte hangi tıklama veya scroll'un bunu tetiklediği seçilemez.
 - **Canlı deneme:** Attic fotoğraf seçiminde ve Garden'ın ilk kamera seçiminde yaklaşık 311 px sayfa konumu değişimi görüldü. Attic büyütmede de konum değişti. Bu denemelerde aynı isometriğe atma yeniden üretilemedi. Browser'ın görünür hedefe getirme/focus hareketi de konum değişimine katkı yapabilir; click, focus ve scroll kaynakları ayrıca izlenecek.
 
-**Doğru işlem:** Attic plan → Attic kamera 1 → büyük Attic fotoğrafı → kapat → aynı Attic plan, aynı kamera, aynı sayfa konumu. “View isometric” açıkça seçilmeden modele geçiş yok.
+**Doğru yerel işlem:** Attic plan → Attic kamera 1 → büyük Attic fotoğrafı → kapat → aynı Attic plan, aynı kamera, aynı sayfa konumu. Kamera/fotoğraf işlemi model bölümünü açamaz. Açık model linki, hikâyenin tanımlı geri eşiği veya browser history başka olay türleridir; bunlar aynı katı koruyarak modele dönebilir. Bu ayrım D28'i meşrulaştırmaz.
 
 ### Teslim barajları
 
@@ -52,14 +54,15 @@ Bu tablo yeni rastgele sayılar üretmez. Kaynak incelemesindeki **kadraj ve oku
 
 **Planın kendisi ana bilgi; numaralar onun üzerine çıkamaz.** Pinlerin koordinatları kullanıcının fotoğraf-konum çizimine ve poses.json'a bağlı kalır. Noktaları repulsion ile yerinden taşıyıp oda konumunu belirsizleştirmek yerine, yakın seçimlerin kontrolü ayrıca çözülür.
 
-- Görünen pasif numara: başlangıç 14–16 CSS px çap; aktif numara 18–20 px. Bunlar prototip ölçüleridir, final onay değildir.
-- Her gerçek kamera ankrajı ince nokta olarak kalır. Pasif koni düşük opasiteli, aktif koni belirgin ve kısa yön oku ile görünür. Kamera bulunduğu yerden bakar; koni taşınmış numaranın merkezinden çıkmaz.
+- Ayrık pasif numara: başlangıç 14–16 CSS px çap; aktif numara 18–20 px. Yakın ankrajlarda numaraları üst üste bindirmek yerine gerçek noktalar ve ortak seçim göstergesi kullanılır. Bütün kameralar alt seçicide kendi 1…N numarasıyla bulunur. Bunlar prototip ölçüleridir, final onay değildir.
+- Her gerçek kamera ankrajı ince nokta olarak kalır. **Yalnız aktif kamera dolu bakış konisi taşır**; pasif kameraların yönü kısa, ince yön iziyle gösterilir. 13 yarı saydam koniyi üst üste yığmak yok. Kamera bulunduğu yerden bakar; koni taşınmış numaranın merkezinden çıkmaz. Koninin çizim uzunluğu sunum ölçüsüdür; kaynakta lens açısı yoksa fiziksel FOV diye sunulmaz.
 - Konturlar gerçek mimari sınırları izler. Oda merkezlerini birleştiren diyagonal üçgenler, oda bölme çizgileri ve çizilerek oluşan duvar efekti yok.
 - Oda adları 12–14 px; kat adı 14–16 px; fotoğraf başlığı 18–22 px. Adı sığdırmak için 7 px yazıya düşülmez. Kısaltma gerekiyorsa tam ad fotoğraf/schedule alanında görünür.
 - Bütün numaralar kat içinde 1…N: Garden 9, Entrance 10, First 13, Attic 8 kamera. Ham dosya/id numarası kullanıcıya gösterilmez.
 - Küçük görsel pinlerin üzerine çakışan 44 px görünmez hedefler yığılmayacak. Yakın noktalar tap'te aynı katın alt kamera seçicisinde açık seçeneklere ayrılır. Seçicide her hedef en az 44 × 44 px; pinler planda aynı gerçek yerinde kalır. Yanlış kameranın “yakın olduğu için” seçilmesi kabul edilmez.
-- Default dar ekran: üstte en az kullanılabilir yüksekliğin %48'i plan, ortada %27–32 fotoğraf, kalan alanda kat/oda bilgisi ve kamera seçicisi. 320 × 568 gibi kısa ekranlarda açıklamalar sahne altına geçebilir; plan/fotoğraf küçültülerek okunamaz hâle getirilemez.
-- Kat tabları 2 × 2 veya kısa adlarla tek satır; tek bir kata tıklama bir tek hedefe gider. Fotoğraf ve plan aynı kat birimiyle kayar.
+- Default dar ekranın bütçesi **önce kontrollerin ölçülen yüksekliğinden** çıkarılır. `H = küçük viewport − safe-area − üst kontrol rezervi`; `R = H − tab − kamera seçici − caption − boşluklar`. Başlangıçta R'nin yaklaşık 2/3'ü plan, 1/3'ü fotoğraf; prototip alt sınırları 240 px plan ve 120 px fotoğraftır. Bu sınırlar okunabilirlik denemesiyle değişebilir; yüzde tek başına geçme ölçütü değildir.
+- Örnek: 568 px yüksekliğinde, 48 px üst rezervle H=520; tek satır tab 44 + seçici 44 + caption 28 + boşluklar 16 =132; R=388, yaklaşık 259/129 px. İki satır tab ek 44 px ister ve bu alt sınırları aşındırır. Gerçek font, safe-area ve toolbar ölçümü olmadan “sığıyor” denmez. R<360 olduğunda sabit sahne yerine aynı durumla native düşey düzen; landscape'te uygun iki kolon. Kritik bilgi kesilmez, yazı küçültülmez.
+- Kat tabları dar ekranda kısa, erişilebilir tam adı olan tek satırdır. Yatay taşma yalnız tab satırında yönetilir; sayfaya taşmaz. Tek bir kata tıklama bir tek hedefe gider. Fotoğraf ve plan aynı kat birimiyle kayar. Kamera seçicisindeki yatay swipe, düşey kat geçişini tetiklemez.
 - “Expand plan” geri eklenmez. Ölçüler ayrı bir görünüm tercihi; aynı kat ve fotoğrafı değiştirmez.
 
 ## 3. Genel creative direction
@@ -69,6 +72,8 @@ Bu tablo yeni rastgele sayılar üretmez. Kaynak incelemesindeki **kadraj ve oku
 ERA'dan alınacak ana dil: mimari pencere, öncekinin üzerinde haber verilen yeni yüzey, farklı hızlarda ilerleyen fotoğraf–caption çiftleri, ortak odak etrafında büyüme/küçülme ve aynı hareketin doğru ters okunması. Geçiş, gelen içeriğin neden geldiğini anlatacak.
 
 Renkler: kırık beyaz `#efede6`, koyu yeşil `#223e35`, cephenin buz mavisi `#b7cdd7`, sonbahar kahverengisi `#5c4133`. Bunlar mevcut marka paletidir. Model zemini saf beyaz olacak; stage, video/canvas kenarı ve üst/alt iç paylar aynı beyazı kullanacak. Buz mavisi model çevresinde ayrı bant oluşturmayacak.
+
+Gövde/teknik metin için başlangıç çiftleri forest→paper/ice ve paper→forest/brown; her gerçek opacity/arka plan birleşimi ölçülür. Küçük metin kontrastı en az 4.5:1; gerekli kontrol ve plan çizgisi en az 3:1 hedefler. Forest üzerine brown veya düşük opasiteli ice ince yazı varsayılan değildir. Palet uyumu, ölçülen kontrastın yerine geçmez.
 
 Tipografi: Cormorant Garamond 500 yalnız büyük editoryal başlıklarda; Manrope 400/500 gövde, plan, caption ve kontrollerde. İnce serif küçük teknik yazıda kullanılmayacak. Genel başlangıç hedefleri:
 
@@ -89,14 +94,26 @@ Bu uygulamanın en önemli değişimi animasyon eklemek değil, **bölüm hareke
 Önerilen durum:
 
 ```text
-section / localStep / activeFloor
-cameraByFloor[4] / planMode / galleryFilter / galleryPhoto
+committed: section / technicalCursor / cameraByFloor[4] / planMode
+           galleryFilter / galleryPhoto / semanticAnchor
+presentation: committedStateId / readyMediaId / frozenLayout
+pending: requestId / targetState / phase = preparing | playing | committing
 overlay = none | menu | photo
-returnContext = section, floor, camera, photo, scrollAnchor, focusedControl
-transaction = idle | preparing | playing | committing | cancelled
+overlayOrigin = immutable state + photoCollection + anchor + focusedControl
+historyEntry = navigationId / section / technicalCursor / localSelections
 ```
 
-`activeFloor` kat kimliği için tek kaynak. Iso ve plan ayrı başlangıç katlarını kendi kendine resetlemez. Her katın son seçili kamerası hafızada kalır. Sayfa refresh'inde derin bağlantı yoksa Garden başlangıcı kullanılabilir; normal geri ziyarette Garden'a resetlenmez.
+`technicalCursor` tanımlı teknik rotanın tek kimliğidir; `activeFloor` ve iso/plan modu bu imleçten türetilir. Ayrı bağımsız `localStep`/kat/index tutulmaz. Normal teknik rota:
+
+```text
+iso Garden → Entrance → First → Attic
+                                ↓ aynı kat
+plan Attic → First → Entrance → Garden → konfor
+```
+
+Her katın son seçili kamerası hafızada kalır. İlk teknik ziyaret Garden iso; direkt Plans bağlantısının ilk ziyareti Attic plan; sonraki ziyaret saklı kat. Yeni sayfa URL'si geçerli bölüm/kat/kamera içeriyorsa o durum açılır. Geçersiz değerler aynı bölümün tanımlı ilk durumuna alınır; başka bölüme sessiz sıçrama yok.
+
+Ekrandaki fotoğraf, koni, oda başlığı ve kontrolün **committed** durumu aynı kimliği taşır. Pending hedef yüklenirken eski tamamlanmış durum görünür. Hedef bütünü hazır olunca birlikte commit edilir; hazırlıkta yeni başlık/eski fotoğraf karışmaz. Her async callback requestId ve mevcut overlay/route sahipliğini kontrol eder. Öncelik: açık navigation/overlay > açık kat seçimi > yerel kamera seçimi > aynı gesture'ın momentum olayları. Yeni açık kontrol isteği eskisini geçersiz kılar; devam eden wheel serisinin artıkları yeni istek değildir.
 
 | Eylem | Değişebilecek durum | Korunacak durum | Beklenen sonuç |
 |---|---|---|---|
@@ -104,16 +121,16 @@ transaction = idle | preparing | playing | committing | cancelled
 | Oda adı | Aynı odanın ilk veya son seçili kamerası | bölüm, kat, scrollAnchor | Odaya ait fotoğraf; fotoğraf yoksa açıklama, başka kat değil. |
 | Fotoğraf büyüt | overlay + returnContext | bölüm, kat, kamera, sayfa Y | Aynı fotoğraf modalda contain görünür. |
 | Modal kapat / Escape | overlay | tüm returnContext | Aynı fotoğrafa ve butona preventScroll focus ile dönülür. |
-| Kat sekmesi | activeFloor + o katın saklı/default kamerası | bölüm ve sahne ankrajı | Plan+fotoğraf tek yatay geçiş; model bölümü açılmaz. |
+| Kat sekmesi | technicalCursor + o katın saklı/default kamerası | plan/iso modu ve sahne ankrajı | Plan+fotoğraf tek yatay geçiş; fotoğraf işlemi değildir. Tab seçiminden sonraki scroll rotada bu kattan devam eder. |
 | Ölçüler | planMode | bölüm, kat, kamera, fotoğraf, Y | Seçili odanın okunur ölçüleri; pin seçimi çalışır. |
 | See this floor's plan | section=plans | activeFloor, cameraByFloor | Aynı kat planı; Garden'a zorlanmaz. |
-| View isometric | section=chapters | activeFloor | Aynı kat model; yalnız bu açık işlem modeli açar. |
-| Plan içi dikey scroll/swipe | localStep → bir komşu kat | fotoğraf seçim hafızası | Tek tam kat geçişi; son katta sonraki bölüme kontrollü çıkış. |
+| View isometric | technicalCursor'ın aynı kat iso karşılığı | kat ve kamera hafızası | Açık mode navigation; fotoğraf/kamera olayı bu işlemi çağıramaz. |
+| Plan içi dikey scroll/swipe | technicalCursor → rotadaki bir komşu | fotoğraf seçim hafızası | Aşağı: Attic→First→Entrance→Garden→konfor; yukarı tam tersi ve Attic plan→Attic iso. |
 | Kamera şeridi yatay swipe | şeridin kendi offset'i | sayfa Y, kat, localStep | Kameraları gezdirir; kat veya bölüm değiştirmez. |
 | Model orbit | yalnız azimuth | sayfa Y, ev merkezi | Pan ve dolly/zoom yok; wheel sayfa scroll'una kalır. |
 | Menü aç/kapat | overlay | alt sahne durumu | Menü kapanınca aynı sayfa ve kat; timeline yeniden başlamaz. |
 | Uzak menü linki | section + hedef anchor | son kat/kamera seçimleri | Hedef sahne tamamlanmış doğru duruma kurulur. |
-| Browser back / forward | kaydedilmiş URL durumu | ilgili selection hafızası | Model/plan/modal anlamı doğru geri yüklenir. |
+| Browser back / forward | sahipliği kaydedilmiş historyEntry | ilgili selection hafızası | Yeni history kaydı üretmeden restore; önce pending iptal. Modal kaydıysa önce modal kapanır. |
 | Resize / address bar / font yüklenmesi | layout ölçüleri | tüm anlam durumu | Cover↔contain değişmez; kat/fotoğraf reseti yok. |
 | Medya hatası / yavaş yükleme | hareket yerine final still | hedef kat/bölüm | Scroll serbest kalır; sonsuz preparing/busy yok. |
 
@@ -126,19 +143,27 @@ stateDiagram-v2
     Plan --> Photo: Büyüt
     Photo --> Plan: Kapat / Escape, aynı bağlam
     Plan --> Plan: Kat sekmesi, saklı kamera
-    Plan --> Iso: Açık View isometric
+    Plan --> Iso: Açık link / tanımlı geri eşik / history
     Iso --> Plan: See this floor's plan
 ```
 
 ### Scroll sahipliği
 
-- Video ve kat sahneleri: bir wheel/swipe kümesi = bir tamamlanan geçiş. Mouse delta'sı filmi yavaşlatmaz/hızlandırmaz; duruşlar final karelerdedir.
-- İşlem başlarken **ilk input'tan önce** sahne ankrajı sabitlenir. Film oynarken küçük sayfa kayması, ardından yeniden hizalama yok.
-- Button, link, input, modal, kamera şeridi ve orbit pointer drag'i genel bölüm sürücüsüne olay göndermez. Click'ten türeyen focus scroll'u kat veya scene giriş olayı sayılamaz.
-- Momentum kümesi yeni katları art arda tüketmez. Busy sırasında sınırsız kuyruk yok; en fazla bir açık yeni istek. Ters yön yeni işlem olarak tanınır, kilit kuyruğunda kaybolmaz.
-- Geri scroll önce aynı katlar üzerinden ters ilerler; manuel seçilmiş kamera hafızası korunur. Fotoğraf kontrolünün yaptığı işlem, geri scroll hareketi olarak yorumlanmaz.
-- Native sayfa scroll'u, swipe galerileri ve sabit sahneler farklı sahiplik bölgeleridir. Bütün document scroll değişimini “sahne duvarı aşıldı” sayan safety-net kaldırılacak.
-- Menü/modal/sayfa linki pending hareketi kontrollü iptal edebilir. İptalde eski transaction'ın geç biten callback'i yeni sahneyi değiştiremez.
+- Video/kat sahnesinde **bir kabul edilen gesture kümesi = bir tamamlanan geçiş**. Wheel event bir mouse çentiğiyle aynı şey değildir. px/line/page delta normalize edilir; trackpad momentum kümelenir; `ctrlKey` zoom ve yatay baskın input sahne geçişine alınmaz. Süre mouse delta'sından türemez. Gesture eşiği/quiet aralığı hardware prototipinde ayarlanır; tek evrensel çentik detektörü varsayılmaz.
+- Sahne sahibi yalnız kendi aktif, zaten tam hizalı sticky alanında engelleyebilir. Wheel listener burada açık `passive:false`; yalnız cancelable event'te preventDefault. İlk event native kaydırılıp ardından scrollTo ile düzeltilmez. Native yaklaşma→sabit sahne ve son duruş→native çıkış ayrı eşiklerdir: girişte bir ekstra “yerine oturtma scroll'u” ve çıkışta görünür Y sıçraması kabul edilmez. Bu mekanizma üç ana prototipten biridir; cümle yazmak çalıştığını kanıtlamaz.
+- Touch sahipliği gesture başlamadan CSS `touch-action` ile tanımlanır; ortasında değiştirilmez. Teknik step sahnesi tek parmak düşey gesture'ı yönetebilir, pinch zoom açık kalır; kamera strip yatay gesture, wireframe yatay orbit, modal kendi kontrolleri için ayrı bölgedir. Normal içerik native düşey scroll'dur. `pointercancel`, ikinci parmak, tab değişimi ve gesture sahne dışına çıkış pending input'u temizler. İzin verilen native pan'i JavaScript'in sonradan devralacağı varsayılmaz.
+- Kamera strip'te yön ayrımı yapılana kadar kat sürücüsü istek üretmez. Modelde yatay drag orbit, düşey drag native sayfa; `touch-action:none` bütün viewer'a otomatik kopyalanmaz. Kısa/zoomlanmış ekran veya input kurulumu başarısızsa native düzen + kat tabları kullanılır. Genel document/body üzerinde kalıcı touch kilidi yok.
+- Button/link/input/select/textarea/contenteditable, menu/modal içi scroll ve orbit drag'i genel sürücüye olay göndermez. Space/ok/PageUp/PageDown input yazarken çalınmaz. Tab ve focus hareketi sahne geçişi değildir. Focus geri dönüşü `preventScroll` ile yapılır; gerçek klavye odağı görünür kalır.
+- Busy sırasında momentum kuyruklanmaz. Açık yeni tab/navigation anında eski isteği geçersiz kılabilir. Yeni ve belirgin ters gesture için bir hedef tutulabilir; mevcut video yarısında ters kare sıçraması yapmadan güvenli duruşa varır, sonra tek ters adım. Geri scroll kilitte kaybolmaz; iki hareketin kaç kez commit olduğu olay kaydında görünür.
+- Wheel dışındaki scrollbar drag, Home/End, browser restore ve programmatic jump bir piksel eşiğinden tahmin edilmez. Bunlar hareketleri oynatmadan hedefin tamamlanmış durumuna restore edilir. Yerel camera/photo işlemlerinin Y toleransı normal durumda en fazla 1 CSS px; resize/zoom sonrası aynı semantik anchor aranır, eski ham Y zorlanmaz.
+- Sabit sahneden çıkış girişinin ters geometrisini kullanır. Hero'da üç gesture üç kamera klibini bitirir; üçüncü klibin final bilgisi durur. **Bir sonraki gesture T06 çıkışıdır**; üçüncü input aynı anda hem kamera hem bölüm çıkışı değildir.
+- Scroll lock tek sahibi olan idempotent controller'dır. Photo/menu birbirinin kilidini açamaz. Overlay sırasında rota, timeline ve galeri filter donuktur; focus trap ve kapatınca focus iadesi uygulanır. Escape tek overlay'ı kapatır. Açık menüden navigation eski pending ve overlay origin'i kontrollü bırakır.
+
+### URL, geri dönüş ve kesilen işlem
+
+Açık bölüm/mode navigation history'ye bir kayıt ekler; sürekli wheel/floor ilerlemesi mevcut kaydı replace eder, onlarca Back durağı yaratmaz. Modal açılışı uygulamanın sahiplik işaretiyle tek kayıt ekleyebilir; Close yalnız kendine ait kaydı geri alır. Deep link ile açılmış modal kapatılırken kullanıcı başka siteye gönderilmez. `popstate` yeni push yapmaz. Geri/ileri, reload, BFCache ve sayfa görünürlüğü kaybında restore/iptal ayrı test edilir. URL'de bölüm/kat/kamera/fotoğraf kimliği doğrulanır; JS kapalıyken normal anchor ve fotoğraf bağlantıları yine işe yarar.
+
+Modal origin'i açılış anında sabitlenir. Geç gelen image load veya floor callback'i origin'i yeniden yazamaz. Büyük fotoğraf yüklenmezse eski fotoğraf kalır, okunur hata ve Close vardır. Kapanış tekrar çağrılabilir; ikinci çağrı yeni navigation/lock yan etkisi üretmez. Geçiş ortasında modal açılırsa önce görünür committed kaynağa bağlanır, pending floor iptal edilir; yarım yeni katın eski fotoğrafı açılmaz.
 
 ## 5. Hareket aileleri ve zamanlar
 
@@ -146,14 +171,26 @@ Başlangıç süreleri tasarım önerisidir; uygulanmış ölçüm değildir. T�
 
 | Aile | Görevi | Başlangıç zamanlaması | Final / ters yön |
 |---|---|---|---|
-| A — kamera filmi | Gerçek ev çevresinde hedefli yolculuk | Kaynak yaklaşık 5.04 sn ise 3× ≈ 1.68 sn; mevcut onaylanan kamera ritmiyle kıyasla. 0.55 sn'ye zorlamak ≈9× olur, aynı karar değildir. | Tam final kare sabit; ters rota hazır kaynak varsa aynı anchor. |
+| A — kamera filmi | Evin çevresinde hedefli yolculuk; kaynak türü ayrıca açıklanır | web2 runtime 0.70 sn; mevcut oynatımın 3× hedefi ≈0.233 sn. Kaynağın 3×'ı ≈1.685 sn farklı, daha yavaş bir karardır; bunun kullanıcı tarafından onaylandığı varsayılmaz. Ritmin çözümü aşağıdaki prototip barajında. | Tam final kare sabit; ters rota önceden encode edilir; backward seek kullanılmaz. |
 | B — mimari yüzey devri | Yeni bölüm rengini/biçimini öncekinin üstünde tanıtma | 0.85–1.1 sn, orta bölümde yumuşak hız | Yeni zemin %100 devralmadan eskiyi kaldırma; geri aynı geometri. |
 | C — fotoğraf/caption kolonları | Farklı mekânları bir editoryal akışta anlatma | Native ilerleme + düşük genlikli 24–48 px paralaks; içerik reveal 0.65–0.8 sn | Caption kendi fotoğrafıyla aynı blok; yeniden girişte gereksiz reveal yok. |
-| D — teknik kat rayı | Model veya planın tek kat değişimi | Plan 0.9–1.0 sn. Iso için 3× mevcut 1.433 sn kaynak ≈0.48 sn; gereken kare kaliteyi sağlamazsa aynı rota final oynatma hızında yeniden kaydedilir. | Son kat geometrisi + metin bir kez commit; durakta opacity 1. |
+| D — teknik kat rayı | Model veya planın tek kat değişimi | Plan yatay kayma 0.9–1.0 sn. Iso web2 runtime 0.55 sn; mevcut oynatımın 3× hedefi ≈0.183 sn. Native kaydın 3×'ı ≈0.478 sn farklıdır. Hızlı rota final süre/fps'te yeniden kaydedilerek denenir. | Son kat geometrisi + metin bir kez commit; durakta opacity 1. |
 | E — yerel fotoğraf/overlay | Seçim ve büyütme | Fotoğraf 0.25–0.35 sn; büyütme 0.45–0.6 sn | Eski fotoğraf yenisi decode olmadan kaybolmaz; Y aynı. |
 | F — footer karşı hareket | Fotoğrafın boşalttığı alana çizgisel ev ve eylemleri yerleştirme | 0.9–1.1 sn, ortak ilerleme | Görsel ve footer birlikte; ters dönüşte kart/fotoğraf durumu tam. |
 
 Maske ve sahne büyütmede `power2.inOut`/benzer sakin hız ailesi; metinde `power2.out`. Expo.out yalnız gerçekten hızlı yerel tepki gerektiren küçük kontrol için değerlendirilecek. Her sahneye uzun inertial easing eklenmeyecek.
+
+### Hız, kare ve yükleme barajı
+
+**V1'in 1.68/0.48 sn hesabı 3× mevcut oynatım değildir.** Kaynak master 5.056 sn/121 kare/24 fps; iso master 1.433 sn/43 kare/30 fps. web2 türevleri hero 41, iso 22 karedir. Mevcut runtime ve kaynak manifestindeki `transitionSeconds` de farklıdır. web3'te süre tek build manifestinden gelir; clip duration, stage süresi ve metin commit zamanı ayrı sabitlerden çatışmaz.
+
+Kullanıcının mevcut geçişi 3× hızlandırma talebi ilk prototipte 0.233/0.183 sn olarak **görülür ve ölçülür**. 60 Hz'de bunlar yaklaşık 14/11 görüntü yenilemesidir; yüksek MB veya 120 karelik dosya bu kısa aralığa daha çok görünür zaman eklemez. Eski durak hemen silinmez: tek gesture filmi bitirir, final bilgi sonraki gesture'a kadar kalır. Uygulanmadan bu sürelerin premium/9 olduğu söylenmez. 1.685 sn'ye sessiz geri dönüş de yapılmaz. Hız ve hareket okunurluğu birlikte sağlanamazsa engel ve alternatif süre gerçek karşılaştırma ile gösterilir; “onaylandı” yazılmaz.
+
+Ana aday oynatıcı, **scroll scrub yerine zamanla oynayan muted/playsinline video**: ileri ve ters rotalar ayrı, hedef süreye retime edilmiş dosyalardır. Negatif playbackRate veya her wheel'de currentTime seek kullanılmaz. Video playback'in bu kadar kısa klipte ilk-frame gecikmesi fiziksel telefonda ölçülmeden seçim kesinleşmez. Kullanım anında play promise ve ilk sunulmuş frame beklenir; poster sadece ondan sonra bırakılır. Bitişte aynı encode'dan alınmış final poster hazırken video kaldırılır. Poster/video boyut, renk profili, crop ve hedef ev odağı eşleşir. `play()` ret veya hazır-olmama yolu kilit bırakmaz. [MDN: play](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play).
+
+Video prototipi ilk-frame/bitiş devamlılığını sağlamazsa ikinci aday **sınırlı boyutta, ölçülen bellek bütçeli bitmap cache**; bütün kliplerin tüm kareleri sürekli decode edilmez. Aynı kaynak için video+bitmap birlikte resident bırakılmaz. Mevcut 1152×648×41×4 ham alt sınır yaklaşık 116.8 MiB; mobil 640×360×41×4 yaklaşık 36.0 MiB'dır. Bunlar gerçek peak ölçümü değildir, tarayıcı/GPU/diğer resimler hariçtir. Görülen sahne + bir sonraki hazırlık, iptal edilen decoder'ın kapanması ve kullanılmayan kaynağın release edilmesi test edilir.
+
+Medya beklenirken anchor kilitlenip 2.6 sn hiçbir tepki verilmez. Eski tamamlanmış frame görünür, ilerleme durumu erişilebilir şekilde bildirilir; kısa hazırlık süresi aşılırsa hedef poster veya native devam kullanılır. Süreler prototipte belirlenir. T01'in bilinçli siyah örtüsü tek açılış katmanıdır; kamera/katlar arasına loader siyahı girmez. Night→day veya farklı perspektifte iki bina üst üste dissolve edilmez. Kaynaklar arasında ortak kadraj yoksa geçişin yüzey devri açıkça tasarlanır; olmayan sürekli kamerayı varmış gibi sunmayız.
 
 ## 6. Baştan sona kurgu: 49 tanımlı işlem
 
@@ -196,15 +233,15 @@ T numaraları **49 farklı zorunlu efekt** demek değildir. Bölüm eşikleri, t
 | T21 | Garden → Entrance iso | Kesit düzlemi gerçek kat yüksekliğine ilerler, kamera ve ölçek sabit; Garden arsa kırpığı kaldırılır. | Aynı rota, dar ekrana göre aynı model extent'i sığdırılır. | Fotoğraf kontrolü değil, kat scroll/tab işlemi. Metin finalde tek commit; durakta hiçbir fade yok. |
 | T22 | Entrance → First iso | Bir önceki katın cephe/merdiven ekseni korunur; yatak odası katı gerçek geometriyle görünür. | Daha az çevre alanı, aynı bütün bina sınırı. | First başlığı final geometriyle birlikte gelir; eski paragraf yarı saydam kalmaz. |
 | T23 | First → Attic iso | Çatı altının kendi ölçeği ve kullanımı; son katın tam duruşu okunur. | Başlık 2 satıra sığar; model alttan kesilmez. | Plan girişinin ilk frame'i Attic bilgi durağını erken tüketmez. |
-| T24 | Iso ↔ plan bağı | **Aynı kat korunur.** Attic bittiğinde önce Attic'in üstten grafiği; model kapanırken plan oda konturu aynı ev odağını taşır. ERA E20 küçülme/bilgi bağı yalnız ilke olarak alınır. | Kısa üstten görünüm veya fade ile aynı kat kimliği; farklı planların diyagonal morph'u yok. | Birebir ERA kat→plan efekti mevcut değildir. Uydurulmuş referans iddiası yok. Plan noktasına click bu hareketi başlatamaz. |
-| T25 | Garden → Entrance plan | Komple plan+fotoğraf+caption bir kart birimi gibi yana kayar; ortak metre ölçeği. | Plan/fotoğraf birlikte yatay gider; ekran ankrajı sabit. | Manuel seçimde o katın son kamerası geri gelir; yoksa default. Konturlar animasyonla yeniden çizilmez. |
-| T26 | Entrance → First plan | First'ın yoğun kamera yerleşimi önceden tasarlanır; 13 büyük beyaz disk yok. | Numaralar küçük, gerçek nokta+aktif koni ve ayrı 44 px kamera seçici. | Oda adları, aktif ok ve duvarlar aynı anda okunur. Bu test geçmeden First 9 alamaz. |
-| T27 | First → Attic plan | Attic'in daha seyrek yapısı ve sitting-area fotoğrafı; pencere oranı öncekiyle aynı. | Aynı düzen; kısa teknik metin fotoğrafı küçültmez. | Son kat üzerinden devam ile alt bölüm; önceki kata scroll ile geri. İso'ya gizli reset yok. |
-| T28 | Kamera / oda seçimi | Pin, bakış konisi, oda, fotoğraf ve numara tek seçime bağlı. Aynı fotoğrafı seçmek no-op. | Yoğun noktada açık kamera seçicisi; hover şartı yok. | Bölüm, kat, URL bağlamı ve scrollAnchor değişmez. 40 kameranın her biri gerçek kendi fotoğrafını açar. |
+| T24 | Iso ↔ plan bağı | **Aynı kat korunur.** Normal akış Attic iso→Attic üstten grafik. Kamera/projeksiyon gerçekten eşleşmiyorsa çizgi morph'u yapılmaz; aynı kat adı korunarak kontrollü fade/yüzey devri. ERA E20 yalnız bilgi/ölçek ilkesi. | Önce aynı kat kimliği, sonra hazır plan+fotoğraf; farklı planların diyagonal morph'u yok. | Birebir ERA kat→plan efekti mevcut değildir. Plan noktasına click bu hareketi başlatamaz. Açık same-floor mode linki normal rota dışındaki katlarda da çalışır. |
+| T25 | Garden ↔ Entrance plan | Normal aşağı yön Entrance→Garden. Komple plan+fotoğraf+caption bir birim gibi yana kayar; ortak metre ölçeği. | Birim birlikte yatay gider; ekran ankrajı sabit. | Manuel seçimde o katın son kamerası geri gelir; yoksa default. Garden plan durağından sonraki gesture T31; kontur çizilme efekti yok. |
+| T26 | Entrance ↔ First plan | Normal aşağı yön First→Entrance. First'ın yoğun kamera yerleşimi önceden tasarlanır; 13 büyük beyaz disk yok. | Küçük gerçek nokta/yön izi, yalnız aktif koni ve ayrı 44 px kamera seçici. | Oda adları, aktif ok ve duvarlar okunur. İki yön aynı kat/fotoğraf commit sözleşmesini kullanır. |
+| T27 | First ↔ Attic plan | Normal aşağı yön Attic→First. Attic sitting-area ve First bedroom fotoğrafları kendi katında; pencere alanı öncekiyle aynı. | Aynı düzen; kısa teknik metin fotoğrafı küçültmez. | Attic planında yukarı gesture aynı Attic iso'ya gider; diğer katlarda bir komşu plan. Fotoğraf seçimi bu geri eşiği tetikleyemez. |
+| T28 | Kamera / oda seçimi | Pin, bakış konisi, oda, fotoğraf ve numara tek seçime bağlı. Aynı fotoğrafı seçmek no-op. | Yoğun noktada açık kamera seçicisi; hover şartı yok. | Bölüm/kat/mode ve scrollAnchor değişmez; URL camera seçimi replace edilebilir, navigation/push değildir. 40 kameranın her biri gerçek kendi fotoğrafını açar. |
 | T29 | Plan fotoğrafını büyütme | ERA E27 ayrı fotoğraf modu: kaynaktan ortak odakla büyük contain görünüm. Plan arka durumda kalır. | Ekrana sığan fotoğraf + 44 px Close; yatay/dikey kaynak için aynı contain. | Dekode hazır olmadan eskiyi silme yok; kat sahnesi input almaz. |
 | T30 | Plan fotoğrafını kapatma | Aynı pin/fotoğraf/kat/scrollAnchor'a geri dönüş; ERA E27 bağlam iadesi. | Escape, Close, tanımlı aşağı swipe; ana sayfa scroll'u tetiklenmez. | Modal origin'i sabit; browser focus aynı kontrole preventScroll ile döner. |
 
-Önemli sıra düzeltmesi: kronolojik iso gezintisi Garden→Entrance→First→Attic'te biterse plan **Attic** olarak açılır. Kullanıcı aşağı devam ederse Attic plan anlatısının ardından teknik ayrıntıya geçer; diğer katları tablarla veya yukarı kaydırarak gezebilir. “Modelde dört katı gösterdim, plana girince Garden'a gizlice sıfırladım” kullanılmayacak. Planda da Garden'dan başlayan dört kat gezintisi istenirse bu, kullanıcıya açık **Explore all floor plans** seçimiyle ayrıca başlatılabilir; varsayılan sahne devri değildir.
+**Kesin normal sıra:** Garden→Entrance→First→Attic iso; aynı kat devri; Attic→First→Entrance→Garden plan; Garden duruşundan sonraki gesture pratik konfor. Böylece normal aşağı tur dört planı da gösterir, plan başlangıcında gizli Garden reseti gerekmez. “Inside, from top to garden” alt cümlesi plan yönünü açıklar. Yukarı tam ters rotadır. Tab doğrudan başka kata giderse teknik imleç o kattır; sonraki scroll o komşudan devam eder, atlanan katlar arkadan oynatılmaz. Kullanıcı isteyerek atlayabilir; varsayılan kurgu üç planı kendiliğinden saklamaz. T25–27 çift yönlü kimliklerdir; kayıttaki eski aşağı sıra kaynak ekinde değiştirilmez.
 
 ### Teknik bilgi, Angora ve seçilmiş fotoğraflar
 
@@ -213,25 +250,25 @@ T numaraları **49 farklı zorunlu efekt** demek değildir. Bölüm eşikleri, t
 | T31 | Plan → pratik konfor | Son planın alt kenarı merdiven resmiyle yeni bilgiye bağlanır; farklı oda resmi araya atılmaz. | Önce kısa açıklama, sonra merdiven; dört uzun paragraf resimden önce birikmez. | Teknik görünüm kapanır, yeni paper yüzeyi tutarlı gelir. |
 | T32 | Konfor → merdiven | Iron/timber stair resmi ile dört katın günlük bağı açıklanır. | Tam merdiven gövdesi; fotoğrafı uzun sığ şeride kesme yok. | Caption kendi resmine bağlı; oda gezisi veya kat seçimi sıfırlanmaz. |
 | T33 | Merdiven → mahalle | Yeni owner neighbourhood fotoğrafı solda, A quieter side of the city sağda; ERA E16 hafif aşağı paralaks + 1→1.04 iç büyüme. | Resim önce, metin sonra; aynı focal point. | Eski drone görseli geri kullanılmaz; villa ve çevre ilişkisi görünür. |
-| T34 | Mahalle → flat harita | Harita tüm genişliği kullanır, yan boş bant yok. Ev işareti, Angora dashed sınırı ve kısa oku; isim etiketleri yerine altı kategorinin noktaları. | Villa hem sağ hem alt kenardan güvenli içeride kalır; yüksekliği artırılmış crop. | Noktalar kaynaktan, görünür büyüklük ~2× mevcut; harita içindeki yazı listeleri kaldırılır. Legend tam resmin altında. |
+| T34 | Mahalle → flat harita | Harita kendi alanının tüm genişliğinde, yan bant yok. Ev işareti, Angora dashed sınırı ve kısa ok; altı kategorinin noktaları. | Ayrı portrait projeksiyon/export; villa, sınır ve ok içeride. Landscape görseli yazıları büyütüp tekrar küçültmek yok. | Aynı viewport'ta mevcut görünen nokta çapı→2× karşılaştırılır; salt kaynak pikseli ölçüt değildir. POI isimleri yok; gerçek konumlar değişmez. Legend/attribution haritanın altında okunur HTML. 387 noktanın 320 px'te tek tek ayrık kalacağı iddia edilmez. |
 | T35 | Harita → ilk Angora Journal resmi | ERA E16: ilk yeşil mahalle resmi soldan + çok hafif scale; yaşam başlığı ayrı okunur. | Tek kolonda kısa alttan reveal; desktop iki kolonu sıkıştırma yok. | İlk resim + kendi gerçek kaynak/caption; harita yaşam resmi sanılmaz. |
 | T36 | İlk resim → ikinci Angora resmi | Spor/recreation resmi karşı hizada sağdan gelir; günlük yaşamın ikinci konusu. | İkinci resim yeterli genişlikte ayrıca yerleşir. | İki farklı konu sahte tek görüntüymüş gibi birleşmez. İkinci fotoğraf kesin bulunur ve yüklenir. |
 | T37 | Angora → Ankara kültürü | 2–3 kısa editoryal bilgi, resmi kültür linkleri; tipografi molası. | Okunur paragraf ve linkler; küçük kaynak dipnotuna mahkûm değil. | Etkinlik/fiyat/saat gibi değişken bilgi uygulamada resmi kaynaktan kontrol edilir; yeni uzak görsel gerekmiyorsa kullanılmaz. |
 | T38 | Kültür → ev fotoğraf seçkisi | İlk iki fotoğraf önce kenarda; Take a closer look ve filtre/sayaç sabit kalır. | İlk görsel + sonraki kenar; kontrol satırı en az 44 px. | İlk fotoğraf tam yerleşmeden yatay ray başlamaz. |
-| T39 | Seçki yatay rayı | Kullanıcının istediği gibi düşey scroll fotoğrafları yatay ilerletir; gerçek ray genişliğine bağlı pin. ERA E10 hareket ilkesi, E26 fotoğraf/bilgi bağı. | Native swipe/arrow; ana sayfaya aşağı scroll her zaman açık. | Fotoğraf kimliği, numarası ve floor caption'ı aynı anda güncellenir. Son resim tamam → aşağı devam. |
-| T40 | Galeri filtresi | Seçili filtre aynı galeri sahnesinde koleksiyonu değiştirir; current photo dahilse korunur. | Filtre satırı kayabilir ama sayfa kaymaz; etkin seçim net. | Dahil değilse yeni grubun ilk resmi açıkça seçilir; modal veya iso açılmaz. |
+| T39 | Seçki yatay rayı | Düşey scroll fotoğrafları yatay ilerletir; gerçek ray genişliğine bağlı pin. ERA E10 hareket ilkesi, E26 fotoğraf/bilgi bağı. | Native swipe/arrow; ana sayfaya aşağı scroll her zaman açık. | Fotoğraf ID, caption, index ve ray ilerlemesi tek duruma bağlı. Son resim tam okunur→native çıkış; ok ile seçim de scroll anchor'ı aynı resme bağlar. |
+| T40 | Galeri filtresi | Aynı sahnede koleksiyon değişir; current photo dahilse korunur. Ray uzunluğu değişirse aktif fotoğrafın semantik ankrajı yeniden hesaplanır. | Yalnız filtre satırı kayabilir; etkin seçim net. 0/1 sonuçta boş ray/pin kurulmaz. | Dahil değilse yeni grubun ilk resmi açıkça seçilir. Yeni DOM/font ölçümü sonrası tek geometry refresh, gereken layout delta'sı kadar telafi; filter olayı hikâye navigation'ı sayılmaz. Modal açıkken filter donuktur. |
 | T41 | Galeri lightbox / sonraki fotoğraf / geri | ERA E27: aynı fotoğraf büyük açılır, prev/next yalnız filtreli sıra içinde, kapatınca aynı ray indeksine döner. | Contain fotoğraf, erişilebilir controls; geri ve close ayrı. | Fotoğraf sırası dosya id'si değil koleksiyondur; dialog açıkken filtre/kat motoru çalışmaz. |
 
 ### Fırsat, wireframe ve gezinme
 
 | ID | İşlem | Desktop kurgu | Mobil karşılığı | Katman sırası / kabul |
 |---|---|---|---|---|
-| T42 | Galeri → fırsat/viewing | ERA E21: gerçek garden-facing cephe bütünü solda, fiyat/özet sağda; form, cephenin ortasını kapatan büyük kart değildir. | Önce tam mimari fotoğraf, sonra özet/fiyat/form; aynı bölümde açıklamalar aşağı uzayabilir. | Güncel listing kaynak bağlantısı; tarihi fiyat güncelmiş gibi kullanılmaz. Tam ev okumadan form baskınlaşmaz. |
+| T42 | Galeri → fırsat/viewing | ERA E21: gerçek garden-facing cephe bütünü solda, fiyat/özet sağda; form cephenin ortasını kapatmaz. | Fotoğraf sonra özet/fiyat/form; klavye açıldığında form native scroll ile görülebilir. | Listing fiyatı para birimi/kontrol tarihiyle. “Arrange a viewing” görüşme talebi; WhatsApp taslağıysa düğme bunu söyler, rezervasyon onayı taklidi yok. “Purchase enquiry” ödeme değildir. |
 | T43 | Fırsat → çizgisel ev/eylemler | ERA E22/E23: çıkan fotoğraf dengeli küçülürken aynı kahverengi zeminde çizgisel ev ve sağ eylemler büyür. | Model üstte, eylemler altta; boş büyük son ara mesafe yok. | Görsel+pencere ortak odak; sert contact/footer kesimi ve geri yönde anlık galeri atlaması yok. |
-| T44 | Wireframe orbit | Sol tam ev, çevre evler/bitkiler yalnız ince beyaz çizgi; sağda viewing / 3D / listing eylemleri. | Modelin yatay drag'i yalnız orbit; düşey scroll sayfaya. | Pan/zoom yok, model merkezi sabit; viewer sınırının %10'luk kenar alanında opasite gradient'i. |
+| T44 | Wireframe orbit | Sol yakın ölçek ev ve çevre yalnız ince beyaz çizgi; sağda viewing / 3D / listing/purchase enquiry. | Yatay drag orbit, düşey scroll native sayfa; tab ve touch testli. | Runtime scene yalnız LineSegments: görünmez depth Mesh dahil Mesh yok. Pan/zoom/autoRotate yok; sabit ev hedefi. %10 kenar gradient'i çizgileri azaltır, CTA'yı değil. Context kaybında aynı ölçekli line poster. |
 | T45 | Wireframe → credits | Alt kısa meta ve MERGVS · Luxembourg sakin reveal; son bölümde gereksiz ikinci tam ekran yok. | Küçük ama okunur credit; kaynak metin uzunluğuyla sayfayı yığmaz. | İncelenen teknik açıklamalar ayrı detail linkinde; ana CTA'lar açık kalır. |
 | T46 | Uzak bölüm linki / geri dönüş | Hedef sahnenin tamamlanmış durumuna kontrollü yolculuk; navigasyon click'i scroll filmi başlatmaz. | Aynı kimlik; kat/kamera saklanır, breakpoint değişiminde reload yok. | Hedef yeni ziyaretse tanımlı ilk durum; geri ziyarette saklı durum. P0 foto→iso burada önlenir. |
-| T47 | Header / menü | Kullanıcı tercihine göre dinlenmede gizli, hızlı yukarı/aşağı scroll'da kısa süre görünür; keyboard focus ve açık menüde kalır. | Tek marka+Menu, geniş nav sıkıştırılmaz. Menü 100svh içinde kendi scroll'una sahip. | Linkleri görünebilir/kullanılabilir; menü kapatınca mevcut sahne korunur. |
+| T47 | Header / menü | Dinlenmede gizli, hızlı yukarı/aşağı kullanıcı input'unda kısa süre görünür; pinned video sırasında da gerçek input izlenir. Focus/açık menüde kalır. | Marka+Menu; drawer tek viewport'ta kendi scroll'u ve ulaşılır son CTA. | Gizliyken görünmez tab hedefi olmaz: focus-within gösterir. Hız/hide sürelerinde hysteresis; programmatic scroll header'ı zıplatmaz. Nav sığmazsa font küçültmek yerine kompakt düzen. |
 | T48 | Resize / orientation / azaltılmış hareket | Anlam durumu korunur, aynı fit yeniden hesaplanır. Reduced-motion için poster+doğrudan seçim. | Adres çubuğu değişiminde frame ve layout resetlenmez. | Geçiş sırasında ya commit edilmiş duruşta güvenli relayout ya sabit frame extent'i; cover→contain sıçraması yok. |
 | T49 | Hatalı/yavaş medya / kesilen işlem | Son hazır kare görünür kalır; hedef still decode olunca commit, sorun varsa native scroll'a güvenli çıkış. | Aynı davranış, yakın next asset dışında tüm filmler yüklenmez. | preparing timeout sonunda kilit kaldırılır; retry menü/kat durumunu silmez. |
 
@@ -241,17 +278,21 @@ T numaraları **49 farklı zorunlu efekt** demek değildir. Bölüm eşikleri, t
 
 | Konu | Malzeme kaynağı | Kullanım kararı |
 |---|---|---|
-| Açılış/üç kamera | Kullanıcının son üç kamera videosu; films/manifest.json'daki kaynak adları | Sıra Arrival→Perspective→Garden. Yeni hayalî model fotoğrafı üretilmez. |
+| Açılış/üç kamera | Kullanıcının dosyaları; films/manifest.json üç kaynak için ElevenLabs/seedance adlarını gösterir | Sıra Arrival→Perspective→Garden. Tool türevi motion ile gerçek çekim ayrı sourceKind; dosya adı kamera/cephe doğruluğunu kanıtlamaz. Yeni görsel üretimi yok. |
 | Yeni dış fotoğraflar | Owner'ın yeni Downloads seti / mevcut `new-front`, `new-garden-facade`, `new-neighbourhood`, `new-pool-garden`, `new-pool-terrace` türevleri | Cadde, mahalle, cephe, havuz ve teras ayrı roller. Dosya adı tek başına doğruluk kanıtı değil; kaynak görsel/focal point tek tek görülür. |
 | İç mekân fotoğrafları | `photogallery-v2`, aynı basename'li gerçek dosyalar | Eski sürümlerle swap; responsive türevler bu kaynaklardan oluşturulur. Fotoğrafı model renderı ile ikame etme yok. |
 | Planlar | `poses.json`, `atlas-data.js`, `native-manifest.json`, DXF kayıtları | Yüksek kaliteli düşük opasiteli model planının üzerine gerçek contour/kapı/oda/kamera yönü. Grafik çizgiler model eşleşmesine bağlı. |
 | Iso | Gerçek Tur 10/viewer kayıtları veya deterministik recorder | İlk/son still ile klip aynı kamera/extent/arka plan; JPEG fotoğraf ile ucuz model transition karıştırılmaz. |
-| Angora iki resmi | Mevcut onaylı `life-green-autumn`, `life-social-autumn` kaynakları | Biri komşuluk/yeşil, diğeri ortak spor/recreation. Yeni AI görsel üretimi bu plana dahil değil. |
+| Angora iki resmi | Mevcut `life-green-autumn`, `life-social-autumn` kaynakları | Biri komşuluk/yeşil, diğeri ortak spor/recreation. İsim/sitede bulunma kullanıcı onayı değildir; gerçek konu, sourceKind ve crop incelemesi gerekir. Yeni AI görsel üretimi yok. |
 | Urban harita | Uygulamanın flat map export'u | Altı layer açık; site kapısı/isim kalabalığı kaldırılır. Ev ve sınır açık. |
 | Son fırsat resmi | Gerçek garden-facing tam cephe/pool resmi | Yatak odası veya yanlış balkon crop'u seçilmez. Hem ev hem viewing bağlamı anlaşılır. |
 | Wireframe | Mevcut çizgisel villa/context geometrisi | Sadece çizgi; mesh yüzeyi/doku yok. Aynı kahverengi zemin, bütün model extent'i. |
 
-Editoryal akışta her fotoğrafın tek ana görevi tanımlanır. Aynı fotoğrafın plandaki kanıtı ve galeri büyütmesi meşru tekrar olabilir; salon/arrival/life/footer'da sebepsiz tekrar kullanılmaz. Her kullanım için `file, role, floor, room, cameraId, focalPoint, sourceKind` kaydı tutulur.
+Editoryal akışta her fotoğrafın tek ana görevi tanımlanır. Aynı fotoğrafın plandaki kanıtı ve galeri büyütmesi meşru tekrar olabilir; salon/arrival/life/footer'da sebepsiz tekrar kullanılmaz. **40 kamera plan üzerinden eksiksiz erişilebilir; ana galeri 6–8 anlamlı seçkidir.** Her iç fotoğrafı tekrar kataloglamak yok. Bir filtre 0/1 fotoğrafla da doğru çalışır.
+
+Uygulama öncesi malzeme manifesti: `assetId, file, sourceFile, hash, sourceKind, role, floor, room, cameraId, focalPoint, orientation, colorProfile, width, height, variants, fallback, captureRevision`. Aynı basename'li `photogallery-v2` değişimi image hash ve gerçekten aynı mekân/kamera yönüyle kontrol edilir; ad eşleşmesi yeterli değildir. EXIF orientation responsive türevlere normalize edilir. Değiştirilmiş görsel gerçek çekim diye otomatik etiketlenmez. Yardımcı dosya adı veya ham cameraId ziyaretçiye gösterilmez.
+
+Plan kayıtları için `poses` UV uzayı, native video, poster ve DXF koordinat dönüşümü birlikte versiyonlanır. Mevcut poses dosyasında model revision yok; native manifestte revision var. Aynı dosya klasöründe olmaları kayıtların eşleştiğini kanıtlamaz. Her katta en az üç ayırt edilebilir mimari noktanın resim/contour/pin eşleşmesi, kaynağın gerçek fotoğraf yönü ve varsa metre ölçeği doğrulanır. Bağlantı kurulamayan kamera/oda için tahminî etiket yerine açık veri eksiği kaydı tutulur; teslimde 40 eşleştirmenin tamamı tamamlanmalıdır.
 
 Kaynak atlasında 40 indoor kamera var. Default id'ler Garden 3, Entrance 4, First 19, Attic 9; bunlar kullanıcıya Camera 3/4/… olarak aynı ham id ile gösterilmeyecek. Görünür numara kat içindeki sıralamadan gelir. Model ölçüsü ve listing alanı aynı kesinlik düzeyinde sunulmayacak: yaklaşık CAD alanına ≈, supplied listing ölçüsüne kaynak notu.
 
@@ -261,12 +302,22 @@ Mevcut checkout sparse: `assets/web2` Git'te takipli, bu çalışma dizininde a�
 
 Temel denklem: `scale = min(availableWidth / contentWidth, availableHeight / contentHeight)`. Canvas, video, poster ve overlay aynı extent/focal point ve aynı fit hesabını kullanır. Duruşta fit, filmde cover gibi iki ayrı politika yok. Fotoğrafta cover kullanılacaksa crop konuya göre tek seferde tanımlanır ve sahne boyunca değişmez.
 
+`contentWidth/Height` dosyanın beyaz canvas'ı değil, **anlamlı geometri sınırıdır**. Mevcut `roomBounds` yalnız oda+kameradan hesaplar; dış contour'ları katmaz. Garden için normalize yükseklik oda/kamera 0.269 iken contour sınırı 0.393; bu farklılık bir kadraj riskidir, canlı kırpılmanın tek nedeninin kanıtı değildir. Yeni grafik plan bounds'u gereken dış duvar/kapı/teras sınırını kapsar. Dört kat ortak metre ölçeği ve hizalı koordinat sistemi kullanır; resim altlığı ve SVG aynı dönüşüm matrisini alır. Pinler ayrı contain/crop ile kaydırılmaz.
+
+Iso klibinde başlangıç/final bounds yerine **rota boyunca geometri union'u** ile tek viewport ölçeği seçilir. 2560×1440 master'a CSS büyütmesi eklemek yeni detay üretmez. Kayda gömülü beyaz platform/crop hatası source render/export'ta çözülür; videoyu rastgele crop ile gizleyip model kesilmez. T06 için görünmesi gereken ev zaten kaynakta kesikse başka onaylı kaynak gerekir. Pencere ve içerik dönüşümleri tek hesapta birleştirilir; hem parent hem video üzerinde bağımsız scale ile iki kat küçülme yapılmaz.
+
 - Film/model/plan temel viewport sahnesi `100svh`; adres çubuğu ve güvenli alan hesaba katılır. Geçiş sırasında viewport yüksekliği değişirse anchor sabit tutulur; anlamsal durum korunur.
 - Desktop plan: yaklaşık %56 plan / %44 fotoğraf+bilgi; stage yüksekliğine göre kontroller önceden ayrılır. Schedule uzunsa kendi okunur alanında veya alt açıklamada, ana plan üstünde değil.
 - Kısa mobil landscape: plan/fotoğraf iki kolon olabilir; başlık kısalır, paragraf aşağı alınır. 11 px altına inerek “fit” başarısı ilan edilmez.
 - Fotoğrafların gerçek en/boy oranı ve doğal crop'u belli olur; geçişten sonra alan boyu değişip CLS yaratmaz.
 - Header'ın görünen hâli hiçbir plan başlığını örtmez. Drawer içeriği uzun olsa da son CTA kendi scroll alanında erişilebilir.
 - Artırılmış yazı boyutu ve 200% zoom'da açıklamalar aşağı büyüyebilir. “Tek ekran” talebi, zorunlu bilginin kesilmesine gerekçe olmaz.
+- Klavye/visual viewport değişimi form ve modal için ayrı hesaplanır; keyboard açılması floor ilerlemesi veya breakpoint reload değildir. Form input'u görünür kalır. Fullscreen/orientation değişiminde pending rota güvenli committed duruşa alınır, yeni geometri sonra kurulur.
+- Font fallback ve son font için ölçü rezervi vardır. Font yüklenince veya görsel decode olunca her ResizeObserver callback'inde pin refresh döngüsü kurulmaz; tek planlanmış layout ölçümü, bir gerektiği kadar güncelleme. Semantik fotoğraf/kat ankrajı değişmez.
+
+Flat map: desktop ve portrait aynı coğrafi projeksiyon ilkesiyle ayrı viewBox/crop kullanır; en/boy esnetilmez. Ev, Angora sınırı ve işaret oku öncelikli sınır içine alınır. Altı grup açık kalır; site kapıları ve POI isimleri kaldırılır. Mevcut 2400 px kaynakta 8/10 px yarıçap, 320 px genişlikte yaklaşık **2.13/2.67 px çap** demektir. “2×” gerçek CSS çapında karşılaştırılır; legend noktaları da ekrandakiyle eşleşir. Yakın gerçek koordinatlar yerinden itilmez; yoğunluk/sınıf ayrımı özel map prototipinde görülür. Villa işareti ile POI veya dashed ok çakışmaz; attribution görsele gömülü 13 px yazının küçülmesine bırakılmaz.
+
+Wireframe: mevcut veri yaklaşık **224,975 segment**; invisible depth mesh 895,515 index kullanıyor. web3 runtime scene yalnız çizgi geometri/materyali taşır; depthOnly Mesh silinir. Bu karar arka kenarların görünmesine neden olabilir: yüzey olmadan aynı hidden-edge temizliğini vaat etmiyoruz. İnce çizgi export'u/dekoratif edge sadeleştirmesi ve context opacity ayrı görsel prototipte seçilir; çevre ev/bitki kategorileri keyfî kaldırılmaz. Yakın ev fit'i ile radius=54 tam çevre fit'i iki ayrı hedeftir: ev merkezde büyük, yakın çevre onun etrafında okunur; bütün 54 yarıçapı sığdırıp evi noktaya dönüştürmek yok. Her azimuth'ta villa bounds ve %10 gradient içindeki okunurluk görülür. AutoRotate default kapalı; yalnız görünürken gerekli render, idle'da durma, DPR sınırı, WebGL context lost/recovery ve line poster fallback testi. Gradient pointer event'i yakalamaz; beyaz çizgi kalınlığı CSS/cihaz ölçeğinde karşılaştırılır.
 
 Kontrol oranları: 320×568, 360×740, 390×844, 430×932, 768×1024, 844×390, 1280×720, 1440×900, 1920×1080, 2560×1440. Her biri cold giriş, hızlı ileri, hızlı geri, modal dönüşü ve resize sırasında kontrol edilir. Fiziksel iOS Safari / Android Chrome görülmediyse ayrıca “doğrulanmadı” yazılır.
 
@@ -282,11 +333,21 @@ web3-state.js             section/floor/camera/overlay/returnContext için tek d
 web3-input.js             wheel/touch/key/yerel kontrol sahipliği ve transaction
 web3-media.js             hazır kare, decode, fallback ve kaynak limitleri
 web3-plans.js             grafik plan, gerçek koni, kamera/schedule işlemleri
+web3-history.js           URL doğrulama, restore ve navigation sahipliği
+web3-overlays.js          immutable origin, focus ve tek lock sahibi
 web3.js                   orchestration; yerel işlemi global navigate'e bağlamaz
 tests/web3-state.test.mjs  bağlam koruma ve transaction yarışları
+build/web3-media.json      tek timing, source/revision/variant manifesti
+tools/web3-event-log       yalnız QA: input→intent→transaction→commit/focus/Y
 ```
 
 Mevcut offline GSAP/vendor ve gerçek varlıklar korunabilir. web2'nin global capture/restore kodu değiştirilmeden web3'e kopyalanmayacak. Tek bir büyük dosyada click→navigate→scroll→arrive döngüsü tekrar kurulmayacak.
+
+**Global scroll native kalır.** Lenis/benzeri mouse input'unu geciktiren bütün-sayfa smoothing, discrete kamera/kat sürücüsünün önüne konmaz. GSAP içerik transform/reveal; gallery pin/progress hesaplayıcı tek native scroll kaynağını gözler. İki ayrı scroll owner veya scrollTo animasyonuyla gate yarışması yok. Header/overlay, transform/filter verilmiş bütün-sayfa wrapper'ının içine konmaz; sticky scene'in ölçüm parent'ı hareket ettirilmez. Pencere maskesi/görsel katmanları kendi stage'inde izole edilir; body overflow lock yalnız sahipliği tanımlı overlay'da, normal sahne çıkışında bırakılır.
+
+Wireframe keyboard kontrolleri odaklandığında sol/sağ orbit; düşey oklar normal sayfaya kalır. Kat tabları ve kamera seçicisi seçili/erişilebilir adını bildirir; numara tek başına oda açıklamasının yerini almaz. Reduced-motion/video hata yolu aynı bilgiyi ve bütün kat seçimlerini taşır, kritik veriyi animasyona saklamaz.
+
+Baseline HTML görünür içerik, normal bölüm anchor'ları, kat seçimi/fotoğraf bağlantıları ve eylemleri taşır. Motion ancak motor hazırken eklenir; vendor/import/WebGL çalışmadığında sayfa opacity:0 veya locked kalmaz. QA olay kaydı her işlemde `eventSource, inputOwner, requestId, before/after state, scrollY, focus, URL, readyMediaId` tutar. D28'in yeniden üretilemeyen click/focus/scroll yolunu bu kayıt ayrıştırır; varsayılan kök neden diye global handler rastgele silinmez. Log üretimde kişisel form içeriğini kaydetmez.
 
 ### Kodda ele alınacak somut noktalar
 
@@ -304,14 +365,16 @@ Mevcut offline GSAP/vendor ve gerçek varlıklar korunabilir. web2'nin global ca
 
 Sıra:
 
-1. **Davranış omurgası:** 40 kamera, kat ve modal işlemleri; photo→iso P0 ve scroll lock. Görsel ciladan önce.
-2. **Teknik bölüm prototipi:** Garden/First gibi en geniş ve en yoğun iki kat; desktop+320 px. Bu tasarım çözülmeden dört katın tamamına kopyalama yok.
-3. **Medya eşleştirme:** model still/klip fit, ilk–son kare, hızlı input ve fallback. Native geometri kaliteli yeniden kayıt gerektiriyorsa önce bu malzeme tamamlanır.
-4. **Açılış ve T06 eşik:** üç kamera + küçülen ev; final ev crop'u ve maskesi birlikte doğrulanır.
+1. **Davranış prototipi / baraj A:** olay iziyle 40 kamera ve modal; hızlı tab+click, history, native/stage giriş çıkışı ve P0. Yanlış kat/bölüm veya sonsuz lock varsa dur.
+2. **Mobil bilgi prototipi / baraj B:** Garden/First gibi en geniş ve yoğun iki kat; desktop+320×568 ve büyük metin. Gerçek kontrol alanı/aktif koni/oda okunurluğu çözülmeden dört kata kopyalama yok.
+3. **Oynatıcı prototipi / baraj C:** üç kamera, T06 ve üç iso ilk/son kare; 3× mevcut hız, final durak, ters input, cold hata ve fiziksel telefon. Video/bitmap adayından kanıtlı seçim; source eksikse yeniden kayıt. Bu baraj geçmeden 49 işlemde görsel cila yok.
+4. **Teknik sıra ve T06:** üç model adımı, aynı Attic devri, dört plan ve çıkış; küçülen ev/pencere ortak fit. Varsayılan tur ve manual-tab turu ayrı doğrulanır.
 5. **Fotoğraf anlatısı:** odalar, bahçe, salon, mutfak; her biri kendi caption ve focal point'ine sahip.
 6. **Yer ve kapanış:** map, iki Angora resmi, galeri, fırsat, wireframe/CTA.
 7. **Tam tur:** ileri/geri, direkt link, modal, resize, slow/cold media ve azaltılmış hareket.
 8. **Yeni notlama:** işlev barajları geçtiğinde sahne sahne görsel puan. Her <9 için açık kalan kusur ve tekrar test. Puanı 9'a yuvarlama yok.
+
+Harita/wireframe için ek görsel ve performans denemesi kendi bölümüne girmeden tamamlanır. Üç ana barajın biri kalırsa sorunlu ortak motor diğer bölümlere çoğaltılmaz. “Dokümanda çözüm tarif edildi” uygulama testinin geçtiği anlamına gelmez.
 
 ## 10. Kabul testleri
 
@@ -329,18 +392,42 @@ Sıra:
 | F10 | Galeri son/ilk fotoğraf, filter, modal prev/next | Filter kapsamı, ray index'i, fotoğraf, caption ve returnContext tutarlı. |
 | F11 | Geçiş sırasında orientation/viewport/font relayout | Cover↔contain değişmez; ev/arsa/plan/fotoğraf aynı bağlamda sığar. |
 | F12 | 404/timeout/slow media, decode failure, navigation interruption | Son hazır frame görünür; busy temizlenir; native çıkış mümkün; yanlış kadraja commit yok. |
+| F13 | Normal ileri/geri teknik tur + her kattan manual tab/mode linki | Garden→Attic iso, Attic→Garden dört plan; reverse aynı sıra. Tab sonrası komşu doğru; hiçbir yerel fotoğraf olayı modu değiştirmez. |
+| F14 | D28/D34 input yolunu gerçek tıklama ve ayrı focus/programmatic scroll ile izleme | Olay izi gerçek tetikleyiciyi gösterir; local photo işleminde mode/section değişimi 0, normal sabit layout'ta Y farkı ≤1 CSS px. Tekrar üretilemediyse kök neden hâlâ doğrulanmadı. |
+| F15 | Fiziksel wheel/trackpad: px/line/page, momentum, Ctrl-wheel, scrollbar, Home/End | Zoom engellenmez; gesture başına tek commit. Scrollbar/native jump tamamlanmış hedefi kurar; filmler rastgele tetiklenmez. Emülasyon fiziksel donanım onayı değildir. |
+| F16 | Touch: yatay/düşey ayrımı, pointercancel, iki parmak, sahne dışı bırakma | Kat, kamera rayı, orbit ve sayfa sahibi karışmaz; pinch açık; cancel sonrası yeni gesture çalışır. Aynı gesture ortasında touch-action değiştirilmez. |
+| F17 | Klavye, input yazma, 200% zoom, büyük OS metni, form keyboard | Space/ok tuşu input'tan çalınmaz; focus görünür. Drawer/Close/son CTA erişilir; form görüş alanında, floor reseti yok. |
+| F18 | Deep link, geçersiz kat/id, reload, Back/Forward, modal history, BFCache | Doğru anlam state'i; popstate yeni push üretmez. Close ziyaretçiyi başka siteye atmaz; URL ve görünür kat eşleşir. |
+| F19 | Hızlı floor→photo→modal→nav; gecikmiş decode; close iki kez | En son yetkili açık intent kazanır; eski callback origin/state/lock değiştiremez. Menu ve modal birbirinin body kilidini açmaz. |
+| F20 | Galeri filter 0/1/N, current dahil/hariç, modal prev/next, resize | Koleksiyon kapsamı ve semantik fotoğraf anchor'ı aynı; empty pin yok, refresh döngüsü yok. Modal filter'ı dondurur. |
+| F21 | JS/vendor import başarısız, WebGL/decompression yok | Temel içerik/normal anchor/fotoğraf/CTA erişilir; body locked veya bütün sayfa gizli kalmaz. |
+| F22 | play promise reddi, stall, tab background/return, reduced-motion, veri tasarrufu | Siyah loader yok; hazır poster ve güvenli devam. Background dönüşü filmi sıfırlayıp bölümü tüketmez; azaltılmış hareket anlamı korur. |
+| F23 | İki tam ileri/geri tur, poster/video/bitmap cache ve cleanup ölçümü | Aynı anda gereksiz çift oynatıcı yok; terk edilen bitmap/observer/listener/GPU kaynakları bırakılır. Peak/kalıcı bellek, dropped frame ve input gecikmesi cihazla kaydedilir; bütçe aday seçimi sırasında belirlenir. |
+| F24 | Wireframe bütün açılar; Mesh inspection; gesture; context lost/recovery | Scene'de hiçbir Mesh yok, kategori/ev fit'i doğru. Düşey sayfa çıkışı ve fallback işler; idle render durur; pan/zoom yok. |
+| F25 | Viewing/listing/3D/purchase enquiry linkleri ve form doğrulama | Gerçek hedef URL; fiyat kaynak tarihi; WhatsApp yalnız taslak, otomatik mesaj gönderimi/rezervasyon yok. Popup engelinde aynı kullanıcı işlemiyle erişilir alternatif link. |
 | D01 | Mobil First plan | 13 kamera ankrajı ve seçili koni görülebilir; oda isimleri/duvarlar örtülmez; fotoğraf anlamlı büyüklükte. |
 | D02 | T06 0/25/50/75/100% ve geri | Ev bütün ve ortak odakta; alt başlık/paragraf sırayla, yarım satır yok. |
 | D03 | Her iso 0/25/50/75/100% | Sınırlar, zemin rengi, contain scale aynı; son frame zoom-extents atlaması yok. |
 | D04 | Her fotoğraf eşik/durak | Resim konuya uygun; caption bağlı; crop mekânın esas bilgisini kesmez. |
 | D05 | Harita ve iki Angora resmi | Ev ve sınır açık; altı layer ayrı; ikinci görsel yüklenir; kontrollü giriş, metinle örtüşme yok. |
 | D06 | Viewing ve wireframe | Tam cephe okunur; fiyat/özet ayrı; ince çizgiler ve %10 kenar gradient; pan/zoom yok. |
+| D07 | Palet, font fallback/final ve metin hiyerarşisi | Gerçek arka plan/opacity kontrastı ölçülür; satır/descender kesilmez; 320 px ve 200% zoom'da okunur. |
+| D08 | Header/drawer her oran ve pinned input | Dinlenmede gizli, hızlı gerçek input'ta görünür; görünmez focus hedefi yok. Marka/menu/son link ekrandan taşmaz. |
+| D09 | Her kat image/SVG/pin kayıt kontrolü | Üç mimari landmark + bütün 40 fotoğraf yönü; altlık/duvar/pin aynı transform. Yanlış crop veya revision eşleşmesi açık hata. |
+| D10 | Her video/poster gerçek playback kaydı + 0/25/50/75/100% ve reverse | Açılış örtüsü dışında siyah ara frame yok; ilk/son fit/renk aynı. Yalnız beş still kontrolü glitch yokluğunu kanıtlamaz; tam oynatım izlenir. |
+| D11 | Harita desktop/portrait gerçek CSS ölçeği | Ev/sınır/ok, altı grup, nokta çapı karşılaştırması, legend ve attribution okunur; isim yığını/yan bant yok. |
 
 Sonuç dosyası her test için viewport, source/commit, işlem sırası, beklenen/gerçek durum, kanıt görseli ve geçti/kaldı/doğrulanmadı içerir. Tüm transition aşamaları görülmeden “Awwwards 9” veya “kusursuz” yazılmaz.
+
+Kanıt sırası: state testleri → gerçek browser işlemi/olay izi → desktop playback kaydı → mobil emülasyon → fiziksel iOS Safari/Android Chrome. Mouse ve trackpad ayrıca kaydedilir. İlk üç katman fiziksel cihazı yerine getirmez. Her sonuç hangi input ve cihazı kapsadığını söyler. Değişen ortak motor tüm ilgili T yollarında tekrar kontrol edilir; yalnız renk/caption değişiminde ilgisiz bütün sistemi tekrar test etme gerekmez.
+
+Puanlama uygulama bittikten sonra kesitin devamlılık, hareket, kadraj, okuma boyutlarına ayrı gerekçeyle yapılır; işlev P0/P1 barajı ayrı kalır. “Hedef 9” elde edilmiş skor değildir. V2, V1'deki kaynak kesit notlarını değiştirmez ve web2'ye yeni tasarım/işlev onayı vermez.
 
 ## 11. Kaynak notlarından web3'e izlenebilirlik
 
 Bir sonraki ek, 109 kaynak kesitin tamamını plan maddelerine bağlar; tekrar ziyaretleri gizlemez. Ardından 17 “Koru” kesitinin **tam olarak hangi görsel yönü** korunabileceği ve işlev onayının bulunmadığı gösterilir. Son tablo ERA'nın 49 kayıtlı sahnesini kullan/uyarla/kapsam dışı kararına bağlar.
+
+Kaynak tablolardaki not/eylem cümleleri önceki incelemenin arşividir; V2 uygulama talimatı veya yeniden test onayı değildir. Yeni uygulama sözleşmesinde 1–10. bölümler esas alınır. Eski kayıt sırası ve skorları yeni kurguya uydurmak için değiştirilmez.
 
 <!-- TRACEABILITY_START -->
 ### 11a. Mevcut 109 kesit → somut web3 maddesi
@@ -559,4 +646,6 @@ Toplam: **109 Angora kesiti, 17 dar kapsamlı görsel “Koru” kararı, 49 ERA
 
 ## 12. Bu aşamanın çıktısı
 
-Detaylı kurgu, etkileşim sözleşmesi, mevcut tasarım puanları, referans seçkisi, varlık rolleri, uygulama sırası ve kabul testleri. **web3.html bu aşamada yapılmadı.** Sonraki web3 uygulamasının sırası: önce P0 ve mobil plan, sonra geçişlerin görsel çözümü. web4 Likova simülasyonu ayrı çalışma olacak.
+Detaylı kurgu, etkileşim sözleşmesi, mevcut tasarım puanları, referans seçkisi, varlık rolleri, uygulama sırası ve kabul testleri. V2, teknik rota, input/history sahipliği, hızın başlangıç referansı, medya/bellek, gerçek mobil bütçe, plan kaydı ve yalnız-çizgi viewer açıklarını netleştirir. **Bunlar plan düzeltmesidir; runtime hatası düzeltildi veya prototip geçti iddiası değildir. web3.html bu aşamada yapılmadı.**
+
+Önce üç ana prototip ve kendi map/wireframe denemeleri; sonra ortak motorun bütün sahnelere uygulanması. 0.233/0.183 sn hedefinin yüksek kaliteyle birlikte işe yarayıp yaramadığı, fiziksel touch/video davranışı, 320 px yoğun plan okunurluğu ve çizgi viewer'ın yüzeysiz görünümü hâlâ kanıt gerektirir. [V2 açık/karar raporu](web3-plan-review-2026-10-05.md) bu kalan işleri ayrı listeler. web4 Likova simülasyonu ayrı çalışma olacak.
