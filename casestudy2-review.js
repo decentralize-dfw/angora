@@ -1,4 +1,5 @@
 import { FLOWS } from './casestudy2-data.js';
+import { GRADING_METHOD } from './casestudy2-grades.js';
 
 const $ = id => document.getElementById(id);
 const make = (tag, text, className) => { const node = document.createElement(tag); if (text != null) node.textContent = text; if (className) node.className = className; return node; };
@@ -104,14 +105,17 @@ export function renderReview(flow, scene, seek) {
  $('review-verdict').textContent = `${review.verdict} · ${review.score.toFixed(1)} / 10`;
  $('review-verdict').dataset.verdict = review.verdict;
  $('review-scores').replaceChildren(...review.scores.map((score,i) => {
-  const block = make('div'); block.append(make('span',['Devamlılık','Kadraj','Okuma'][i]),make('b',`${score} / 10`)); return block;
+  const block = make('div'),top=make('div',null,'criterion-heading');
+  top.append(make('span',GRADING_METHOD.criteria[i]),make('b',score===null?'N/A':`${score} / 10`));
+  block.append(top,make('p',review.reasons[i])); return block;
  }));
  $('review-observation').textContent = review.observation;
  $('review-action').textContent = review.action;
+ $('review-repeat').textContent=review.repeatOf?`Tekrar ziyaret: ${flow.scenes.find(s=>s.key===review.repeatOf)?.title}. Bu kesit ayrıca izlendi; aynı sonuçlar aynı puanı alabilir.`:review.kind;
  $('review-avoid').textContent = `Sınır: ${review.avoid}`;
- $('review-evidence').replaceChildren(...scene.phases.map(([fraction,title,note]) => {
-  const button = make('button',`${stamp(scene.sourceStart + scene.duration * fraction)} · ${title}`);
-  button.title = note; button.addEventListener('click', () => { window.scrollTo({top:0,behavior:'instant'}); seek(scene.start + scene.duration * fraction); }); return button;
+ $('review-evidence').replaceChildren(...review.evidence.map(({sourceTime,note}) => {
+  const button = make('button',`${stamp(sourceTime)} · ${note}`);
+  button.title = 'Orijinal kayıttaki bu kareye git'; button.addEventListener('click', () => { window.scrollTo({top:0,behavior:'instant'}); seek(sourceTime-flow.offset); }); return button;
  }));
  $('recommendations').replaceChildren(...review.references.map((ref,i) => {
   const {flow:rf,scene:rs} = match(ref), card = make('article'), button = make('button', 'Gerçek klibi karşılaştır ▷');

@@ -1,3 +1,5 @@
+> **Geri çekilen ilk notlama:** Aşağıdaki puanlar ortak geçiş tariflerinden üretilmişti; bağımsız kesit notları olarak geçerli değildir. Bu dosya tarihli geçmiş kayıt olarak korunur. Güncel değerlendirme: [ikinci ara notlama](casestudy2-regrading-2026-10-05.md).
+
 # 03 / Aktif inceleme — Angora web2
 
 Rapor: 2026-10-05 17:01:37 Europe/Paris (UTC+02:00).

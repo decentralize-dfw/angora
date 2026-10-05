@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { FLOWS, LAYERS, clampTime, sceneAt, counterpart } from '../casestudy2-data.js';
+import { SCENE_GRADES } from '../casestudy2-grades.js';
 const root=new URL('../',import.meta.url);
 test('active review recommendations resolve to actual, device-matched library scenes',()=>{
  const refs=new Set();
@@ -9,8 +10,8 @@ test('active review recommendations resolve to actual, device-matched library sc
   for(const scene of flow.scenes){
    const r=scene.review;assert.ok(r&&r.observation&&r.action&&r.avoid);
    assert.ok(['Koru','İncelt','Yeniden ele al'].includes(r.verdict));
-   assert.equal(r.scores.length,3);assert.ok(r.scores.every(n=>Number.isFinite(n)&&n>=0&&n<=10));
-   assert.equal(r.score,+(r.scores.reduce((a,b)=>a+b,0)/3).toFixed(1));
+   assert.equal(r.scores.length,4);assert.ok(r.scores.every(n=>n===null||(Number.isFinite(n)&&n>=0&&n<=10&&n*2===Math.floor(n*2))));
+   assert.equal(r.score,Math.min(...r.scores.filter(n=>n!==null)));
    assert.ok(r.references.length>=1&&r.references.length<=2);
    for(const ref of r.references){
     const target=FLOWS[ref.flow];assert.ok(target,ref.flow);assert.notEqual(target.project,'active');
@@ -28,6 +29,37 @@ test('active review recommendations resolve to actual, device-matched library sc
  }
  assert.ok(refs.size>=35,'a broad, restrained selection across the four library flows');
  assert.equal(Object.values(FLOWS).filter(f=>f.project!=='active').reduce((n,f)=>n+f.scenes.length,0),92);
+});
+
+test('every cut has its own explicit reasons, source evidence and future acceptance target',()=>{
+ for(const flow of Object.values(FLOWS).filter(f=>f.project==='active')){
+  assert.deepEqual(Object.keys(SCENE_GRADES[flow.id]).sort(),flow.scenes.map(s=>s.key).sort());
+  const observations=new Set();
+  for(const scene of flow.scenes){
+   const r=scene.review;
+   assert.equal(r.method,'2 / individual source review');
+   assert.equal(r.reasons.length,4);assert.ok(r.reasons.every(t=>t.length>30));
+   assert.ok(!observations.has(r.observation));observations.add(r.observation);
+   assert.ok(r.acceptance.length>50);assert.equal(r.action,r.acceptance);
+   assert.ok(r.evidence.length>=2);
+   for(const e of r.evidence){
+    assert.ok(e.sourceTime>=scene.sourceStart&&e.sourceTime<scene.sourceEnd,`${flow.id}/${scene.key}: ${e.sourceTime}`);
+    assert.ok(Math.abs(e.sourceTime*60-Math.round(e.sourceTime*60))<.0001,'actual source-frame grid');
+    assert.ok(e.note.length>12);
+   }
+   if(r.repeatOf)assert.ok(flow.scenes.some(s=>s.key===r.repeatOf));
+  }
+ }
+ const source=readFileSync(new URL('casestudy2-active-data.js',root),'utf8');
+ assert.doesNotMatch(source,/scores:\s*\[/,'shared recipes must not assign numeric grades');
+ assert.equal(FLOWS['active-mobile'].scenes.find(s=>s.key==='camera-point').review.scores[1],null);
+});
+
+test('gallery cuts include the actual opening and closing movement',()=>{
+ const scenes=FLOWS['active-desktop'].scenes;
+ const open=scenes.find(s=>s.key==='gallery-lightbox-open'),close=scenes.find(s=>s.key==='gallery-lightbox-close');
+ assert.equal(open.sourceStart,90.2);assert.equal(close.sourceStart,92.1);
+ assert.equal(scenes.find(s=>s.key==='gallery-1-2').sourceStart,84.55);
 });
 test('mobile review uses the recorded mobile exit instead of the desktop framing description',()=>{
  const exit=FLOWS['active-mobile'].scenes.find(s=>s.key==='hero-exit');
