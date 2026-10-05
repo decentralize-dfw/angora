@@ -40,9 +40,11 @@ kesit, kat kotu + 1,60 m'dedir. Kaynaklar `site/` altındadır:
 hâli. Tasarım kararları ve ölçümler [docs/web-gpt-upgrade-plan-2026-10-04.md](docs/web-gpt-upgrade-plan-2026-10-04.md)
 dosyasındadır.
 
-- Kaydırma hiçbir zaman kilitlenmez. Açılış kamera yolculuğu, bahçe ve dört kat
-  sahneleri `ScrollTrigger` scrub + yönsüz snap ile sürülür; mobilde dokunma
-  native scroll'da kalır.
+- Bir kaydırma = bir tam geçiş. Açılış kamera filmleri, bahçe fotoğrafları, kat
+  kesiti ve kat planları 100svh'lik sahnelerdir; her wheel/dokunma hareketi bir
+  geçişi baştan sona oynatır (açılış 0,7 s, kat kesiti 0,55 s, plan 0,95 s) ve
+  sayfa yalnız bitmiş karelerde durur. Geçiş sırasında sayfa tutulur, bitince
+  bırakılır; sahneler arasında kaydırma serbesttir (masaüstünde Lenis).
 - Tek stil dosyası `web2.css` (token'lar, `!important` yok), tek davranış dosyası
   `web2.js`; plan atlası `web2-plans.js`. Türkçe sayfa aynı dosyaları
   `window.ANGORA_STRINGS` sözlüğüyle kullanır ve `tools/web2-build-tr.py` ile

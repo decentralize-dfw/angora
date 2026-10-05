@@ -58,10 +58,11 @@ test('fonts are subset WOFF2 under 30 KB each', () => {
   for (const f of fonts) assert.ok(fs.statSync(path.join(dir, f)).size < 30 * 1024, f);
 });
 
-test('scroll is never hijacked: no preventDefault on wheel or touch', () => {
-  for (const m of js.matchAll(/addEventListener\('(wheel|touchstart|touchmove|touchend)'[^\n]*/g)) { assert.match(m[0], /passive:\s*true/, m[0]); assert.ok(!m[0].includes('preventDefault'), m[0]); }
-  assert.ok(!/\.stop\(\)/.test(js.replace(/lenis\?\.stop\(\)/g, '')), 'no scroll stop outside menu and dialog');
-  assert.ok(/directional: false/.test(js), 'snap points are not directional');
+test('four stepped scenes: one gesture, one complete transition', () => {
+  assert.match(js, /register\(hero, 3,/); assert.match(js, /register\(\$\('\.garden'\), 2,/);
+  assert.match(js, /register\(floorsSection, 3,/); assert.match(js, /register\(\$\('\.atlas'\), 3,/);
+  assert.ok(!/scrub:\s*[\d.]+[^\n]*(hero|floors|garden)/.test(js), 'no scrubbed hero, garden or floors');
+  for (const sel of ['.hero{', '.garden{', '.floors{', '.atlas{']) assert.match(css, new RegExp(sel.replace(/[.{]/g, '\\$&') + '[^}]*height:100svh'), sel + ' is one viewport tall');
 });
 
 test('header is always rendered and themed per section', () => {

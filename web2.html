@@ -24,8 +24,8 @@
   <script src="./assets/vendor/gsap.min.js" defer></script>
   <script src="./assets/vendor/ScrollTrigger.min.js" defer></script>
   <script src="./assets/vendor/lenis.min.js" defer></script>
-  <script src="./web2.js" defer></script>
   <script src="./web2-plans.js" defer></script>
+  <script src="./web2.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#residence">Skip to content</a>
@@ -70,7 +70,7 @@
     </section>
 
     <!-- 02 The residence -->
-    <section class="residence section overlaps" id="residence" data-theme="light">
+    <section class="residence section" id="residence" data-theme="light">
       <div class="section-top"><span class="eyebrow">01 / The residence</span><span class="eyebrow">An established address. A personal way to live.</span></div>
       <div class="residence-grid">
         <h2 class="display" data-reveal="lines">The space to live.<br>The freedom to<br><em>make it yours.</em></h2>
@@ -123,7 +123,7 @@
     </section>
 
     <!-- 06 Inside the home -->
-    <section class="spaces section overlaps" id="spaces" data-theme="light">
+    <section class="spaces section" id="spaces" data-theme="light">
       <div class="section-top"><span class="eyebrow">03 / Inside the home</span><span class="eyebrow">Warmth. Character. Room to breathe.</span></div>
       <div class="spaces-intro"><h2 class="display" data-reveal="lines">Come together.<br><em>Feel at home.</em></h2><p class="copy" data-reveal="fade">This is a home with its own character: timber floors, generous windows, wrought-iron stair rails and rooms that connect through a central hall. The social spaces and private rooms have their own place in the house.</p></div>
       <article class="editorial">
@@ -160,7 +160,7 @@
         <div class="floors-layout">
           <div class="floors-copy">
             <h2>One home.<br><em>Four chapters.</em></h2>
-            <div class="floors-tabs" role="tablist" aria-label="Villa levels"><button type="button" role="tab" id="floor-tab-0" aria-selected="true" data-floor="0"><span>1</span>Garden level</button><button type="button" role="tab" id="floor-tab-1" aria-selected="false" data-floor="1"><span>2</span>Entrance level</button><button type="button" role="tab" id="floor-tab-2" aria-selected="false" data-floor="2"><span>3</span>First floor</button><button type="button" role="tab" id="floor-tab-3" aria-selected="false" data-floor="3"><span>4</span>Attic level</button></div>
+            <div class="floors-tabs" role="tablist" aria-label="Villa levels"><button type="button" role="tab" id="floor-tab-0" aria-selected="true" data-floor="0"><span>1</span>Garden level</button><button type="button" role="tab" id="floor-tab-1" aria-selected="false" data-floor="1"><span>2</span>Entrance level</button><button type="button" role="tab" id="floor-tab-2" aria-selected="false" data-floor="2"><span>3</span>First</button><button type="button" role="tab" id="floor-tab-3" aria-selected="false" data-floor="3"><span>4</span>Attic level</button></div>
             <div class="floors-text" role="tabpanel" aria-live="polite"><span class="eyebrow" id="floor-kicker">1 / The garden floor</span><h3 id="floor-title">Open the day outside.</h3><p id="floor-copy">A living room of approximately 54 m², a separate kitchen and direct access to the garden and pool. An annexe with its own entrance adds space for guests, work or a separate daily routine.</p><ul id="floor-features"><li>Living room &amp; kitchen</li><li>Garden &amp; pool access</li><li>Guest WC &amp; separate annexe</li></ul><a class="text-link" id="floor-plan-link" href="#atlas">See this floor’s plan ↗</a></div>
           </div>
           <div class="floors-stage">
@@ -174,12 +174,12 @@
     </section>
 
     <!-- 09 Plans & photographs -->
-    <section class="atlas section overlaps" id="atlas" data-theme="light" aria-labelledby="atlas-heading">
+    <section class="atlas" id="atlas" data-theme="light" aria-labelledby="atlas-heading">
       <div class="section-top"><span class="eyebrow">05 / The house, revealed</span><span class="eyebrow">Plans · Photographs · Dimensions</span></div>
       <div class="atlas-heading"><h2 class="display" id="atlas-heading" data-reveal="lines">Inside <em>every level.</em></h2><p data-reveal="fade">Follow a photograph back to the space it depicts. Choose a level, then a camera point, to see the room from that exact position.</p></div>
       <div class="atlas-toolbar">
-        <div class="atlas-tabs" role="tablist" aria-label="Floor plans"><button type="button" role="tab" id="atlas-tab-0" aria-controls="atlas-panel" aria-selected="true" data-atlas-floor="0"><span>1</span>Garden</button><button type="button" role="tab" id="atlas-tab-1" aria-controls="atlas-panel" aria-selected="false" data-atlas-floor="1"><span>2</span>Entrance</button><button type="button" role="tab" id="atlas-tab-2" aria-controls="atlas-panel" aria-selected="false" data-atlas-floor="2"><span>3</span>First floor</button><button type="button" role="tab" id="atlas-tab-3" aria-controls="atlas-panel" aria-selected="false" data-atlas-floor="3"><span>4</span>Attic</button></div>
-        <button type="button" id="atlas-measure" aria-pressed="false" class="measure-toggle">Dimensions <span aria-hidden="true">＋</span></button>
+        <div class="atlas-tabs" role="tablist" aria-label="Floor plans"><button type="button" role="tab" id="atlas-tab-0" aria-controls="atlas-panel" aria-selected="true" data-atlas-floor="0"><span>1</span>Garden</button><button type="button" role="tab" id="atlas-tab-1" aria-controls="atlas-panel" aria-selected="false" data-atlas-floor="1"><span>2</span>Entrance</button><button type="button" role="tab" id="atlas-tab-2" aria-controls="atlas-panel" aria-selected="false" data-atlas-floor="2"><span>3</span>First</button><button type="button" role="tab" id="atlas-tab-3" aria-controls="atlas-panel" aria-selected="false" data-atlas-floor="3"><span>4</span>Attic</button></div>
+        <button type="button" id="atlas-measure" aria-pressed="false" class="measure-toggle" aria-label="Dimensions"><span class="measure-word">Dimensions</span> <span aria-hidden="true">＋</span></button>
       </div>
       <div class="atlas-layout" id="atlas-panel" role="tabpanel" aria-labelledby="atlas-tab-0">
         <div class="atlas-drawing">
@@ -193,8 +193,6 @@
           <div class="atlas-photo-strip" id="atlas-photo-strip" aria-label="Photographs on this floor"></div>
         </div>
       </div>
-      <div class="atlas-room-schedule"><div><span class="eyebrow">A sense of scale</span><h3 id="atlas-schedule-heading">The garden floor</h3></div><div id="atlas-room-list"></div></div>
-      <p class="note">Camera positions follow the supplied photo-location drawing. Dimensions follow the supplied DXF; room areas follow the owner’s schedule where available. Areas are approximate, and are not a survey of net usable space.</p>
     </section>
 
     <!-- 10 Details -->
@@ -207,7 +205,7 @@
         <article data-reveal="fade"><span>03</span><h3>Independent possibilities</h3><p>The annexe has its own entrance. Together with a kitchen on the lower floor and a kitchenette in the attic, the layout accommodates guests, family members or working from home.</p></article>
         <article data-reveal="fade"><span>04</span><h3>Everyday essentials</h3><p>Gas combi heating, a 6-tonne water tank, three bathrooms, two guest WCs and two balconies complement the living spaces and garden.</p></article>
       </div>
-      <figure class="comfort-photo" data-reveal="frame"><img class="comfort-img" src="./assets/web2/photos/angora_34-1200.webp" srcset="./assets/web2/photos/angora_34-480.webp 480w, ./assets/web2/photos/angora_34-800.webp 800w, ./assets/web2/photos/angora_34-1200.webp 1200w, ./assets/web2/photos/angora_34-1600.webp 1600w" sizes="100vw" width="1600" height="900" alt="Villa staircase with iron balustrades and timber handrail" loading="lazy" decoding="async" data-parallax><figcaption>Connected by more than a staircase.</figcaption></figure>
+      <figure class="comfort-photo" data-reveal="frame"><img class="comfort-img" src="./assets/web2/photos/angora_34-1200.webp" srcset="./assets/web2/photos/angora_34-480.webp 480w, ./assets/web2/photos/angora_34-800.webp 800w, ./assets/web2/photos/angora_34-1200.webp 1200w, ./assets/web2/photos/angora_34-1600.webp 1600w" sizes="100vw" width="1600" height="900" alt="Villa staircase with iron balustrades and timber handrail" loading="lazy" decoding="async" data-parallax><figcaption>Four floors, joined by iron and timber.</figcaption></figure>
     </section>
 
     <!-- 11 Neighbourhood -->
@@ -288,7 +286,7 @@
     <div class="footer-meta">
       <p>A private world, within the city.<br>Angora Evleri · Ankara</p>
       <a href="#home">Back to top ↑</a>
-      <small>© <span id="year">2026</span> Angora 21 · Villa imagery supplied by the owner. Community images are seasonal editorial adaptations of official photographs. Approximate areas and facilities follow the supplied listing; the digital model is an exploration of the layout. The opening camera films are illustrative.</small>
+      <small>© <span id="year">2026</span> Angora 21 · Villa imagery supplied by the owner. Community images are seasonal editorial adaptations of official photographs. Approximate areas and facilities follow the supplied listing; the digital model is an exploration of the layout. The opening camera films are illustrative. Camera positions follow the supplied photo-location drawing; dimensions follow the supplied DXF and room areas the owner’s schedule, all approximate.</small>
       <span class="brand-credit">Developed by MERGVS · Luxembourg</span>
     </div>
   </footer>

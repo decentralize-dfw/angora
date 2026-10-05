@@ -2,6 +2,8 @@
 
 Tarih: 4 Ekim 2026 · Sayfa: `web-gpt.html` · Referanslar: era-residence.com, likova.space · Ekran görüntüleri: `docs/web-gpt-audit-2026-10-04/`
 
+> **Karar (5 Ekim 2026):** Madde 1 ve 9'daki "scrub + snap" önerisi mal sahibi tarafından reddedildi; `web2.html` "bir kaydırma = bir tam geçiş, duraklar yalnız bitmiş kareler" modeliyle kuruldu. Bu dosyanın geri kalanı ölçüm kaydı olarak korunuyor.
+
 ## 1. Özet
 
 Sayfanın malzemesi (gerçek drone fotoğrafları, kat kesit filmleri, kayıtlı kamera noktaları, plan atlası, tel kafes model) referanslardan daha zengin. "Dandik" hissinin kaynağı malzeme değil, üç yapısal karar:

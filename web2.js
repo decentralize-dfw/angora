@@ -1,7 +1,8 @@
-/* Angora 21 — web2. Scroll-driven scenes, one motion language, no scroll locks. */
+/* Angora 21 — web2. One gesture plays one complete transition; the page rests only on finished frames. */
 (() => {
   'use strict';
   const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const S = window.ANGORA_STRINGS || {};
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const mobileQuery = matchMedia('(max-width: 800px)');
   const isMobile = () => mobileQuery.matches;
@@ -10,9 +11,8 @@
   if (motion) gsap.registerPlugin(ScrollTrigger);
   document.documentElement.classList.add(motion ? 'has-motion' : 'no-motion');
   const EASE = 'expo.out';
-  const S = window.ANGORA_STRINGS || {};
-  let gardenTrigger = null, galleryTrigger = null;
   const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+  const wait = ms => new Promise(r => setTimeout(r, ms));
 
   /* Photographs: one helper for every responsive variant. */
   const photoName = file => String(file).replace(/\.[a-z]+$/i, '');
@@ -21,33 +21,168 @@
     srcset: file => [480, 800, 1200, 1600].map(w => `./assets/web2/photos/${photoName(file)}-${w}.webp ${w}w`).join(', ')
   };
 
-  /* Scrolling: smooth on pointer devices, native on touch, never stopped mid-page. */
+  /* Scrolling: smooth on pointer devices, native on touch. Scenes hold it only while a transition plays. */
   let lenis = null;
   if (motion && window.Lenis && !touch) {
-    lenis = new Lenis({ duration: .95, smoothWheel: true, syncTouch: false, prevent: node => !!node.closest('dialog, .menu') });
+    lenis = new Lenis({ duration: .9, smoothWheel: true, syncTouch: false, prevent: node => !!node.closest('dialog, .menu') });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(t => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);
   }
   const headerH = () => $('.header').offsetHeight;
-  function go(target, { offset = 0, immediate = false } = {}) {
-    const top = typeof target === 'number' ? target : target.getBoundingClientRect().top + scrollY + offset;
-    if (lenis) lenis.scrollTo(top, { duration: immediate ? 0 : 1.3, immediate, easing: t => 1 - Math.pow(1 - t, 4) });
+  const maxScroll = () => document.documentElement.scrollHeight - innerHeight;
+  function scrollTo(top, immediate = false) {
+    top = clamp(top, 0, maxScroll());
+    if (lenis) lenis.scrollTo(top, { immediate, force: true, duration: immediate ? 0 : 1.1 });
     else window.scrollTo({ top, behavior: immediate || reduced ? 'instant' : 'smooth' });
   }
-  window.AngoraGo = go;
+  let travelTween = null;
+  function travel(top, duration = .65) {
+    return new Promise(resolve => {
+      top = clamp(top, 0, maxScroll());
+      if (!motion || Math.abs(top - scrollY) < 1) { scrollTo(top, true); resolve(); return; }
+      travelTween?.kill();
+      const pos = { y: scrollY }, done = () => { travelTween = null; resolve(); };
+      travelTween = gsap.to(pos, { y: top, duration, ease: 'power2.inOut', onUpdate: () => scrollTo(pos.y, true), onComplete: done, onInterrupt: done });
+    });
+  }
 
   /* Header theme follows the section under it. */
   const header = $('.header'), themed = $$('[data-theme]').filter(el => el !== header);
   function updateHeader() {
     const y = headerH() * .6; let theme = 'dark';
-    for (const el of themed) { const r = el.getBoundingClientRect(); if (r.top <= y && r.bottom > y) { theme = el.dataset.theme; } }
+    for (const el of themed) { const r = el.getBoundingClientRect(); if (r.top <= y && r.bottom > y) theme = el.dataset.theme; }
     if (!$('#menu').hidden) theme = 'light';
     header.dataset.theme = theme;
   }
   let headerQueued = false;
   addEventListener('scroll', () => { if (headerQueued) return; headerQueued = true; requestAnimationFrame(() => { updateHeader(); headerQueued = false; }); }, { passive: true });
   addEventListener('resize', updateHeader);
+
+  /* Frame player: compressed frames stay in memory, a clip is decoded right before it plays. */
+  class Frames {
+    constructor(canvas, { fit = 'cover', background = '#1a3129' } = {}) {
+      this.canvas = canvas; this.ctx = canvas.getContext('2d', { alpha: false }); this.fit = fit; this.background = background;
+      this.blobs = new Map(); this.bitmaps = new Map(); this.decoding = new Map(); this.last = null;
+      new ResizeObserver(() => this.resize()).observe(canvas); this.resize();
+    }
+    resize() { const b = this.canvas.getBoundingClientRect(), r = Math.min(isMobile() ? 2 : 1.5, devicePixelRatio || 1); this.canvas.width = Math.max(1, Math.round(b.width * r)); this.canvas.height = Math.max(1, Math.round(b.height * r)); if (this.last) this.paint(this.last); }
+    key(clip, i) { return `${clip.id}:${i}`; }
+    url(clip, i) { return `${clip.root}/f-${String(i + 1).padStart(3, '0')}.webp`; }
+    load(clip) {
+      if (clip.loading) return clip.loading;
+      let active = 0, cursor = 0; const self = this;
+      clip.loading = new Promise(resolve => {
+        const pump = () => {
+          while (active < 4 && cursor < clip.frames) {
+            const i = cursor++, key = self.key(clip, i); if (self.blobs.has(key)) continue; active++;
+            fetch(self.url(clip, i), { cache: 'force-cache' }).then(r => r.ok ? r.blob() : Promise.reject()).then(b => self.blobs.set(key, b)).catch(() => { }).finally(() => { active--; cursor < clip.frames ? pump() : active === 0 && resolve(); });
+          }
+          if (cursor >= clip.frames && active === 0) resolve();
+        }; pump();
+      });
+      return clip.loading;
+    }
+    bitmap(clip, i) {
+      const key = this.key(clip, i); if (this.bitmaps.has(key)) return Promise.resolve(this.bitmaps.get(key));
+      if (this.decoding.has(key)) return this.decoding.get(key);
+      const blob = this.blobs.get(key); if (!blob) return Promise.resolve(null);
+      const p = createImageBitmap(blob).then(b => { this.bitmaps.set(key, b); return b; }).catch(() => null).finally(() => this.decoding.delete(key));
+      this.decoding.set(key, p); return p;
+    }
+    async ready(clip, ms = 2600) {
+      const t0 = Date.now();
+      await Promise.race([this.load(clip), wait(ms)]);
+      const left = Math.max(250, ms - (Date.now() - t0));
+      await Promise.race([Promise.all([...Array(clip.frames).keys()].map(i => this.bitmap(clip, i))), wait(left)]);
+    }
+    release(clip, keep) { for (const [key, bmp] of this.bitmaps) { if (key.startsWith(clip.id + ':') && key !== this.key(clip, keep)) { bmp.close?.(); this.bitmaps.delete(key); } } }
+    paint(item) {
+      const { width: w, height: h } = this.canvas, img = item.bitmap, ctx = this.ctx; ctx.fillStyle = this.background; ctx.fillRect(0, 0, w, h);
+      const s = this.fit === 'cover' ? Math.max(w / img.width, h / img.height) : Math.min(w / img.width, h / img.height);
+      ctx.drawImage(img, (w - img.width * s) / 2, (h - img.height * s) / 2, img.width * s, img.height * s); this.last = item;
+    }
+    show(clip, i) {
+      i = clamp(Math.round(i), 0, clip.frames - 1);
+      let bmp = this.bitmaps.get(this.key(clip, i));
+      if (!bmp) { let best = Infinity; for (const [key, b] of this.bitmaps) { if (!key.startsWith(clip.id + ':')) continue; const d = Math.abs(Number(key.split(':')[1]) - i); if (d < best) { best = d; bmp = b; } } }
+      if (bmp) this.paint({ clip, i, bitmap: bmp });
+    }
+    async still(clip, i) { await this.load(clip); await this.bitmap(clip, i); this.show(clip, i); }
+    play(clip, direction = 1, seconds = .7, onProgress) {
+      return new Promise(resolve => {
+        const start = performance.now();
+        const tick = () => {
+          const t = clamp((performance.now() - start) / (seconds * 1000));
+          this.show(clip, (direction > 0 ? t : 1 - t) * (clip.frames - 1)); onProgress?.(t);
+          if (t < 1) requestAnimationFrame(tick); else resolve();
+        };
+        requestAnimationFrame(tick);
+      });
+    }
+  }
+
+  /* Scenes: a 100svh section whose gestures are steps. One gesture, one whole transition, no resting in between. */
+  class Gate { constructor(quiet = 200) { this.quiet = quiet; this.last = -Infinity; this.busy = false; this.direction = 0; } accept(now, direction) { const fresh = now - this.last > this.quiet || direction !== this.direction; this.last = now; if (this.busy || !fresh) return false; this.busy = true; this.direction = direction; return true; } finish() { this.busy = false; } }
+  const scenes = []; let busy = null, pending = Promise.resolve(), touchY = 0, touchConsumed = false, touchFree = false;
+  const blocked = () => !!document.querySelector('dialog[open]') || document.body.classList.contains('locked');
+  const sceneTop = scene => scene.el.getBoundingClientRect().top + scrollY;
+  function activeScene(direction = 1) { if (blocked()) return null; const band = direction < 0 ? .45 : .22; return scenes.find(s => { const r = s.el.getBoundingClientRect(); return r.top <= 24 && r.top > -innerHeight * band && r.bottom > innerHeight * .55; }) || null; }
+  function hold(scene) { scrollTo(sceneTop(scene), true); lenis?.stop(); }
+  function release() { if (!blocked()) lenis?.start(); }
+  function run(scene, work) {
+    busy = scene; scene.el.dataset.transitioning = 'true';
+    pending = Promise.resolve().then(work).catch(e => console.error('Scene transition', e)).finally(() => { scene.el.dataset.transitioning = 'false'; scene.gate.finish(); busy = null; release(); updateHeader(); });
+    return pending;
+  }
+  function move(event, direction, displacement = 0) {
+    if (blocked()) return;
+    if (busy) { event.preventDefault(); event.stopImmediatePropagation(); busy.gate.last = performance.now(); return; }
+    travelTween?.kill();
+    const scene = activeScene(direction);
+    if (!scene) {
+      const reach = Math.max(Math.abs(displacement || event.deltaY || 0) * 1.15, 48);
+      const incoming = scenes.map(s => ({ s, r: s.el.getBoundingClientRect() })).filter(({ r }) => direction > 0 ? r.top > 24 && r.top <= reach : r.top < -innerHeight * .22 && -r.top <= reach).sort((a, b) => Math.abs(a.r.top) - Math.abs(b.r.top))[0];
+      if (!incoming) return;
+      event.preventDefault(); event.stopImmediatePropagation();
+      if (!incoming.s.gate.accept(performance.now(), direction)) return;
+      run(incoming.s, async () => { await incoming.s.enter?.(direction); await travel(sceneTop(incoming.s), .4); hold(incoming.s); });
+      return;
+    }
+    event.preventDefault(); event.stopImmediatePropagation();
+    if (!scene.gate.accept(performance.now(), direction)) return;
+    // A scene that is not yet aligned uses this gesture to settle on its first frame.
+    if (Math.abs(scene.el.getBoundingClientRect().top) > 8) { run(scene, async () => { await travel(sceneTop(scene), .4); hold(scene); }); return; }
+    const next = scene.index + direction;
+    if (next < 0 || next > scene.steps) {
+      const top = sceneTop(scene) + (direction > 0 ? scene.el.offsetHeight : -innerHeight * .75);
+      run(scene, async () => { const handled = await scene.exit?.(direction, top); if (!handled) await travel(top, .65); });
+      return;
+    }
+    run(scene, async () => { hold(scene); await scene.transition(scene.index, next); scene.index = next; scene.el.dataset.step = next; });
+  }
+  if (motion) {
+    addEventListener('wheel', e => { if (e.ctrlKey || Math.abs(e.deltaY) < 1 || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; move(e, Math.sign(e.deltaY)); }, { capture: true, passive: false });
+    addEventListener('keydown', e => { if (e.target.closest('input,textarea,select,button,a') || e.altKey || e.ctrlKey || e.metaKey) return; if (['PageDown', 'PageUp', ' ', 'ArrowDown', 'ArrowUp'].includes(e.key) && (activeScene(e.key === 'PageUp' || e.key === 'ArrowUp' ? -1 : 1) || busy)) move(e, e.key === 'PageUp' || e.key === 'ArrowUp' || e.shiftKey ? -1 : 1); }, { capture: true });
+    const freeTouch = target => !!target.closest?.('.atlas-photo-strip, .strip-track, .gallery-track, dialog, .menu');
+    addEventListener('touchstart', e => { touchY = e.touches[0]?.clientY || 0; touchConsumed = false; touchFree = freeTouch(e.target); }, { passive: true });
+    addEventListener('touchmove', e => {
+      if (blocked() || touchFree) return;
+      const delta = touchY - (e.touches[0]?.clientY || touchY);
+      if (busy || activeScene(Math.sign(delta) || 1) || touchConsumed) { e.preventDefault(); return; }
+      if (Math.abs(delta) < 35) return;
+      const approaching = scenes.some(s => { const r = s.el.getBoundingClientRect(); return delta > 0 ? r.top > 24 && r.top <= Math.abs(delta) * 1.15 : r.top < -innerHeight * .22 && -r.top <= Math.abs(delta) * 1.15; });
+      if (approaching) { touchConsumed = true; move(e, Math.sign(delta), Math.abs(delta)); }
+    }, { passive: false });
+    addEventListener('touchend', e => { if (touchFree) return; const delta = touchY - (e.changedTouches[0]?.clientY || touchY); if (!touchConsumed && Math.abs(delta) > 35) move(e, Math.sign(delta), Math.abs(delta)); }, { passive: false });
+  }
+  function register(el, steps, transition, { enter, exit } = {}) {
+    const scene = { el, steps, transition, enter, exit, index: 0, gate: new Gate() }; el.dataset.step = 0; scenes.push(scene);
+    scene.go = async target => { target = clamp(target, 0, steps); while (busy) await pending; if (target === scene.index) return; scene.gate.busy = true; return run(scene, async () => { hold(scene); await transition(scene.index, target); scene.index = target; el.dataset.step = target; }); };
+    scene.reset = index => { scene.index = clamp(index, 0, steps); el.dataset.step = scene.index; scene.gate.finish(); scene.gate.last = -Infinity; };
+    return scene;
+  }
+  const whenIdle = () => pending;
 
   /* Menu */
   const menu = $('#menu'), toggle = $('.menu-toggle');
@@ -61,7 +196,7 @@
   function closeMenu() {
     if (menu.hidden) return Promise.resolve();
     toggle.setAttribute('aria-expanded', 'false'); header.classList.remove('menu-open');
-    const finish = () => { menu.hidden = true; document.body.classList.remove('locked'); lenis?.start(); updateHeader(); };
+    const finish = () => { menu.hidden = true; document.body.classList.remove('locked'); if (!busy) lenis?.start(); updateHeader(); };
     if (!motion) { finish(); return Promise.resolve(); }
     return new Promise(r => gsap.to(menu, { opacity: 0, duration: .22, overwrite: true, onComplete: () => { finish(); gsap.set(menu, { clearProps: 'opacity' }); r(); } }));
   }
@@ -72,21 +207,6 @@
     if (e.key === 'Tab') { const items = [toggle, ...menu.querySelectorAll('a')], i = items.indexOf(document.activeElement); if (e.shiftKey && i <= 0) { e.preventDefault(); items.at(-1).focus(); } else if (!e.shiftKey && i === items.length - 1) { e.preventDefault(); toggle.focus(); } }
   });
 
-  /* Anchor navigation */
-  const anchorOffset = id => (['home', 'garden', 'floors', 'gallery', 'contact'].includes(id) ? 0 : -headerH() + 8);
-  $$('a[href^="#"]').forEach(link => link.addEventListener('click', async e => {
-    const id = link.hash.slice(1), target = document.getElementById(id); if (!target) return;
-    e.preventDefault(); await closeMenu();
-    history.replaceState(null, '', link.hash);
-    if (id === 'floors' && window.AngoraFloors) return window.AngoraFloors.go(0);
-    if (id === 'home') return go(0);
-    if (id === 'garden' && gardenTrigger) return go(gardenTrigger.start);
-    if (id === 'gallery' && galleryTrigger) return go(galleryTrigger.start);
-    go(target, { offset: anchorOffset(id) });
-  }));
-  $('#year').textContent = new Date().getFullYear();
-  document.addEventListener('click', e => { const tour = e.target.closest('[data-tour]'); if (tour) window.open(`./index.html?lang=en&view=${encodeURIComponent(tour.dataset.tour)}`, '_blank', 'noopener'); });
-
   /* Lightbox */
   const dialog = $('#image-dialog');
   function openPhoto(file, caption) {
@@ -95,11 +215,11 @@
     dialog.showModal(); document.body.classList.add('locked'); lenis?.stop();
     if (motion) gsap.fromTo(dialog, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .35, ease: 'power3.out', overwrite: true });
   }
-  function closePhoto() { if (!dialog.open) return; const done = () => { dialog.close(); gsap?.set?.(dialog, { clearProps: 'all' }); }; motion ? gsap.to(dialog, { opacity: 0, y: 8, duration: .18, onComplete: done }) : done(); }
+  function closePhoto() { if (!dialog.open) return; const done = () => { dialog.close(); window.gsap?.set(dialog, { clearProps: 'all' }); }; motion ? gsap.to(dialog, { opacity: 0, y: 8, duration: .18, onComplete: done }) : done(); }
   dialog.querySelector('.dialog-close').addEventListener('click', closePhoto);
   dialog.addEventListener('cancel', e => { e.preventDefault(); closePhoto(); });
   dialog.addEventListener('click', e => { if (e.target === dialog) closePhoto(); });
-  dialog.addEventListener('close', () => { document.body.classList.remove('locked'); lenis?.start(); returnFocus?.focus?.({ preventScroll: true }); });
+  dialog.addEventListener('close', () => { document.body.classList.remove('locked'); if (!busy) lenis?.start(); returnFocus?.focus?.({ preventScroll: true }); });
   let swipeY = null; dialog.addEventListener('touchstart', e => swipeY = e.touches[0].clientY, { passive: true }); dialog.addEventListener('touchend', e => { if (swipeY !== null && Math.abs(e.changedTouches[0].clientY - swipeY) > 80) closePhoto(); swipeY = null; }, { passive: true });
   document.addEventListener('click', e => {
     const el = e.target.closest('[data-photo]'); if (!el) return;
@@ -107,93 +227,55 @@
     const file = /^\d+$/.test(id) ? atlas?.photos.find(p => p.id === Number(id))?.file : id;
     if (file) openPhoto(file, el.dataset.caption);
   });
+  document.addEventListener('click', e => { const tour = e.target.closest('[data-tour]'); if (tour) window.open(`./index.html?lang=en&view=${encodeURIComponent(tour.dataset.tour)}`, '_blank', 'noopener'); });
+  $('#year').textContent = new Date().getFullYear();
 
-  /* Frame player: compressed blobs stay, decoded bitmaps are a small window. */
-  class Frames {
-    constructor(canvas, { fit = 'cover', background = '#1a3129' } = {}) {
-      this.canvas = canvas; this.ctx = canvas.getContext('2d', { alpha: false }); this.fit = fit; this.background = background;
-      this.blobs = new Map(); this.bitmaps = new Map(); this.limit = isMobile() ? 14 : 26; this.last = null; this.target = null; this.decoding = new Set();
-      new ResizeObserver(() => this.resize()).observe(canvas); this.resize();
-    }
-    resize() { const b = this.canvas.getBoundingClientRect(), r = Math.min(isMobile() ? 2 : 1.5, devicePixelRatio || 1); this.canvas.width = Math.max(1, Math.round(b.width * r)); this.canvas.height = Math.max(1, Math.round(b.height * r)); if (this.last) this.paint(this.last); }
-    url(clip, i) { return `${clip.root}/f-${String(i + 1).padStart(3, '0')}.webp`; }
-    load(clip, limit = Infinity) {
-      if (clip.loading && (clip.loadedLimit === Infinity || limit <= clip.loadedLimit)) return clip.loading;
-      clip.loadedLimit = limit; clip.loading = null;
-      const seq = [...Array(Math.min(clip.frames, limit)).keys()];
-      let active = 0, cursor = 0; const self = this;
-      clip.loading = new Promise(resolve => {
-        const pump = () => {
-          while (active < 4 && cursor < seq.length) {
-            const i = seq[cursor++], key = `${clip.id}:${i}`; if (self.blobs.has(key)) continue; active++;
-            fetch(self.url(clip, i), { cache: 'force-cache' }).then(r => r.ok ? r.blob() : Promise.reject()).then(b => { self.blobs.set(key, b); if (self.target?.key === key) self.show(clip, i); }).catch(() => { }).finally(() => { active--; cursor < seq.length ? pump() : active === 0 && resolve(); });
-          }
-          if (cursor >= seq.length && active === 0) resolve();
-        }; pump();
-      });
-      return clip.loading;
-    }
-    async bitmap(clip, i) {
-      const key = `${clip.id}:${i}`; if (this.bitmaps.has(key)) return this.bitmaps.get(key);
-      const blob = this.blobs.get(key); if (!blob || this.decoding.has(key)) return null; this.decoding.add(key);
-      try { const bmp = await createImageBitmap(blob); this.bitmaps.set(key, bmp); this.trim(); return bmp; } catch { return null; } finally { this.decoding.delete(key); }
-    }
-    trim() { if (this.bitmaps.size <= this.limit) return; const t = this.target; const far = [...this.bitmaps.keys()].sort((a, b) => this.distance(b, t) - this.distance(a, t)); for (const k of far) { if (this.bitmaps.size <= this.limit) break; if (k === t?.key) continue; this.bitmaps.get(k).close?.(); this.bitmaps.delete(k); } }
-    distance(key, t) { if (!t) return 0; const [id, i] = key.split(':'); return id === t.clip.id ? Math.abs(Number(i) - t.i) : 1000; }
-    paint(item) {
-      const { width: w, height: h } = this.canvas, img = item.bitmap, ctx = this.ctx; ctx.fillStyle = this.background; ctx.fillRect(0, 0, w, h);
-      const s = this.fit === 'cover' ? Math.max(w / img.width, h / img.height) : Math.min(w / img.width, h / img.height);
-      ctx.drawImage(img, (w - img.width * s) / 2, (h - img.height * s) / 2, img.width * s, img.height * s); this.last = item;
-    }
-    async show(clip, i) {
-      i = clamp(Math.round(i), 0, clip.frames - 1); const key = `${clip.id}:${i}`; this.target = { clip, i, key };
-      let bmp = this.bitmaps.get(key) || await this.bitmap(clip, i);
-      if (!bmp) { const near = [...this.bitmaps.keys()].filter(k => k.startsWith(clip.id + ':')).sort((a, b) => Math.abs(Number(a.split(':')[1]) - i) - Math.abs(Number(b.split(':')[1]) - i))[0]; if (near) bmp = this.bitmaps.get(near); }
-      if (this.target.key !== key) return; if (bmp) this.paint({ clip, i, bitmap: bmp });
-      for (const d of [1, -1, 2, -2, 3, -3]) { const j = i + d; if (j >= 0 && j < clip.frames && this.blobs.has(`${clip.id}:${j}`) && !this.bitmaps.has(`${clip.id}:${j}`)) this.bitmap(clip, j); }
-    }
-  }
-
-  /* Hero: three recorded camera moves, scrubbed, with reading stops between them. */
+  /* 01 Hero: three recorded camera moves. One gesture plays one of them, forwards or back. */
   const hero = $('.hero'), heroPin = $('.hero-pin'), heroMedia = $('.hero-media'), opening = $('.hero-opening');
-  opening.muted = true; const tryPlay = () => opening.play().catch(() => { });
-  if (!reduced) { opening.src = isMobile() ? opening.dataset.srcMobile : opening.dataset.srcDesktop; opening.preload = 'auto'; opening.addEventListener('canplay', tryPlay, { once: true }); opening.load(); tryPlay(); opening.addEventListener('ended', () => opening.classList.add('is-done')); }
   const CLIPS = ['approach', 'orbit', 'garden-return'].map(id => ({ id, frames: 41, root: `./assets/web2/films/${id}/${isMobile() ? 'm' : 'd'}` }));
-  const heroCanvas = $('.hero-canvas'), captions = $$('.hero-caption'), trackButtons = $$('.hero-track button');
-  const HOLD = .12, SEG = .3, END = .9;
-  function heroState(p) {
-    if (p >= END) return { clip: 2, frame: 40, local: 1, index: 2, ending: (p - END) / (1 - END) };
-    const t = p / SEG, index = Math.min(2, Math.floor(t)), local = t - index, move = clamp((local - HOLD) / (1 - 2 * HOLD));
-    return { clip: index, frame: move * 40, local, index, ending: 0 };
+  const captions = $$('.hero-caption'), trackButtons = $$('.hero-track button');
+  opening.muted = true;
+  if (!reduced) { opening.src = isMobile() ? opening.dataset.srcMobile : opening.dataset.srcDesktop; opening.preload = 'auto'; opening.playbackRate = 2; opening.load(); opening.play().catch(() => { }); opening.addEventListener('canplay', () => opening.play().catch(() => { }), { once: true }); opening.addEventListener('ended', () => opening.classList.add('is-done')); }
+  let heroScene = null;
+  function heroUI(step) {
+    captions.forEach((c, i) => c.classList.toggle('is-on', i === step - 1));
+    trackButtons.forEach((b, i) => { b.setAttribute('aria-current', String(i === step - 1)); b.querySelector('i').style.transform = `scaleX(${i < step ? 1 : 0})`; });
+    heroPin.classList.toggle('is-scrolling', step > 0);
+    $('#cinema-status')?.remove();
   }
   if (motion) {
-    const player = new Frames(heroCanvas, { fit: 'cover' });
-    const whenReady = () => player.load(CLIPS[0], 12);
-    if (document.readyState === 'complete') whenReady(); else addEventListener('load', whenReady, { once: true });
-    const loadAll = () => { player.load(CLIPS[0]); removeEventListener('wheel', loadAll); removeEventListener('touchstart', loadAll); removeEventListener('keydown', loadAll); };
-    addEventListener('wheel', loadAll, { passive: true }); addEventListener('touchstart', loadAll, { passive: true }); addEventListener('keydown', loadAll);
-    let shown = -1;
-    const apply = p => {
-      const s = heroState(p);
-      heroPin.classList.toggle('is-scrolling', p > .004);
-      player.show(CLIPS[s.clip], s.frame);
-      if (s.clip >= 1) player.load(CLIPS[1]); if (s.clip >= 1 && s.local > .5 || s.clip === 2) player.load(CLIPS[2]);
-      const stop = s.ending > 0 ? 2 : (s.local >= .86 ? s.index : (s.local <= HOLD && s.index > 0 ? s.index - 1 : -1));
-      if (stop !== shown) { captions.forEach((c, i) => c.classList.toggle('is-on', i === stop)); shown = stop; }
-      trackButtons.forEach((b, i) => { b.setAttribute('aria-current', String(i === s.index)); b.querySelector('i').style.transform = `scaleX(${i < s.index ? 1 : i === s.index ? s.local : 0})`; });
-      gsap.set('.hero-title', { autoAlpha: 1 - clamp(p / .05), y: -clamp(p / .05) * 24 });
-      const e = gsap.parseEase('power2.inOut')(s.ending), inset = isMobile() ? 6 : 8;
-      heroMedia.style.clipPath = `inset(${(e * inset * 1.4).toFixed(2)}% ${(e * inset).toFixed(2)}% ${(e * inset * 1.4).toFixed(2)}% ${(e * inset).toFixed(2)}%)`;
-      heroPin.style.backgroundColor = e > 0 ? gsap.utils.interpolate('#223e35', '#efede6', e) : '';
-      $('.hero-shade').style.opacity = String(1 - e); hero.dataset.theme = e > .5 ? 'light' : 'dark';
-      $('.hero-track').style.opacity = String(p > .004 ? 1 - e : 0); $('.hero-captions').style.opacity = String(1 - clamp(s.ending * 2));
-    };
-    const trigger = ScrollTrigger.create({ trigger: hero, start: 'top top', end: () => `bottom-=${innerHeight} bottom`, scrub: .35, onUpdate: self => apply(self.progress), snap: { snapTo: [0, .3, .6, .9], directional: false, duration: { min: .25, max: .8 }, delay: .08, ease: 'power2.inOut' } });
-    window.AngoraHero = { reset: () => go(0, { immediate: true }) };
-    trackButtons.forEach(b => b.addEventListener('click', () => { const p = Number(b.dataset.heroStop) * SEG; go(trigger.start + (trigger.end - trigger.start) * p); }));
-    window.AngoraHeroTrigger = trigger;
-    apply(0);
-  } else { heroPin.classList.remove('is-scrolling'); }
+    const player = new Frames($('.hero-canvas'), { fit: 'cover' });
+    const preload = () => player.load(CLIPS[0]).then(() => player.ready(CLIPS[0])).then(() => player.load(CLIPS[1])).then(() => player.load(CLIPS[2]));
+    if (document.readyState === 'complete') preload(); else addEventListener('load', preload, { once: true });
+    const HERO_SECONDS = .7;
+    heroScene = register(hero, 3, async (from, to) => {
+      const step = Math.sign(to - from);
+      for (let current = from; current !== to; current += step) {
+        const next = current + step, clip = CLIPS[step > 0 ? current : next];
+        await player.ready(clip);
+        gsap.to('.hero-title', { autoAlpha: 0, y: -16, duration: .25, overwrite: true });
+        gsap.to('.hero-caption.is-on', { autoAlpha: 0, y: 8, duration: .18, overwrite: true, onComplete: () => captions.forEach(c => c.classList.remove('is-on')) });
+        heroPin.classList.add('is-scrolling'); opening.pause();
+        await player.play(clip, step, HERO_SECONDS, t => { const b = trackButtons[step > 0 ? current : next]; if (b) b.querySelector('i').style.transform = `scaleX(${step > 0 ? t : 1 - t})`; });
+        player.release(clip, step > 0 ? clip.frames - 1 : 0);
+        if (next === 0) { heroPin.classList.remove('is-scrolling'); gsap.set('.hero-caption', { clearProps: 'all' }); gsap.to('.hero-title', { autoAlpha: 1, y: 0, duration: .5, ease: EASE, overwrite: true }); }
+        else { gsap.set('.hero-caption', { clearProps: 'all' }); captions.forEach((c, i) => c.classList.toggle('is-on', i === next - 1)); }
+        trackButtons.forEach((b, i) => { b.setAttribute('aria-current', String(i === next - 1)); b.querySelector('i').style.transform = `scaleX(${i < next ? 1 : 0})`; });
+      }
+      // Decode the neighbouring clips now, so the next gesture starts on its first frame.
+      if (CLIPS[to]) player.ready(CLIPS[to]); if (to > 0) player.ready(CLIPS[to - 1]);
+    }, {
+      enter: direction => { if (direction < 0) { gsap.to(heroMedia, { clipPath: 'inset(0% 0% 0% 0%)', duration: .4, ease: 'power2.out' }); gsap.to(heroPin, { backgroundColor: '#223e35', duration: .4 }); $('.hero-shade').style.opacity = '1'; } },
+      exit: async (direction, top) => {
+        if (direction < 0) return false;
+        const inset = isMobile() ? '6% 6% 6% 6%' : '7% 8% 7% 8%';
+        await Promise.all([travel(top, .7), new Promise(r => gsap.timeline({ onComplete: r }).to('.hero-caption.is-on, .hero-track', { autoAlpha: 0, y: -8, duration: .25 }, 0).to(heroMedia, { clipPath: `inset(${inset})`, duration: .7, ease: 'power2.inOut' }, 0).to(heroPin, { backgroundColor: '#efede6', duration: .7 }, 0).to('.hero-shade', { opacity: 0, duration: .5 }, 0))]);
+        gsap.set('.hero-caption, .hero-track', { clearProps: 'all' }); return true;
+      }
+    });
+    heroScene.restore = () => { gsap.set(heroMedia, { clipPath: 'inset(0% 0% 0% 0%)' }); gsap.set(heroPin, { clearProps: 'backgroundColor' }); $('.hero-shade').style.opacity = '1'; heroScene.reset(0); heroUI(0); gsap.set('.hero-title', { autoAlpha: 1, y: 0 }); opening.currentTime = 0; opening.classList.remove('is-done'); opening.play().catch(() => { }); };
+    trackButtons.forEach(b => b.addEventListener('click', () => heroScene.go(Number(b.dataset.heroStop))));
+  } else { heroUI(0); }
 
   /* Reveals: one family. Lines rise through a mask, blocks fade, frames open. */
   function splitLines(el) {
@@ -217,72 +299,128 @@
     track.addEventListener('keydown', e => { if (['ArrowLeft', 'ArrowRight'].includes(e.key)) { e.preventDefault(); track.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * track.clientWidth * .86, behavior: 'smooth' }); } });
   });
 
-  /* Garden: each photograph opens from below, copy changes at the stops. */
+  /* 02 Garden: three photographs. Each gesture opens the next one from below. */
   const gardens = S.gardens || [
     ['01 / Your own water', 'A pool, all to yourself.', 'The private pool sits at the same level as the lower living floor. Open the doors, cross the terrace and the day moves outside.'],
     ['02 / A place in the shade', 'Stay a little longer.', 'A covered terrace makes room for unhurried lunches, quiet mornings and long evenings. It connects the garden-level rooms with the pool and outdoor dining area.'],
     ['03 / Room to breathe', 'A garden with its own rhythm.', 'Approximately 900 m² of private garden surrounds the residence. Mature planting, lawn and paths create different places to sit, play and spend time outdoors.']
   ];
-  const gardenPhotos = $$('.garden-photo'), gardenTabs = $$('[data-garden]'); let gardenIndex = -1;
-  function setGarden(i) {
-    if (i === gardenIndex) return; gardenIndex = i; const [n, t, c] = gardens[i];
-    const swap = () => { $('#garden-number').textContent = n; $('#garden-title').textContent = t; $('#garden-text').textContent = c; };
+  const gardenPhotos = $$('.garden-photo'), gardenTabs = $$('[data-garden]');
+  function gardenCopy(i, animate) {
+    const [n, t, c] = gardens[i]; const swap = () => { $('#garden-number').textContent = n; $('#garden-title').textContent = t; $('#garden-text').textContent = c; };
     gardenTabs.forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.garden) === i)));
-    if (!motion) { swap(); gardenPhotos.forEach((p, k) => p.style.clipPath = k <= i ? 'inset(0)' : 'inset(100% 0 0 0)'); return; }
-    gsap.timeline().to('.garden-copy', { autoAlpha: 0, y: 8, duration: .2, overwrite: true }).call(swap).to('.garden-copy', { autoAlpha: 1, y: 0, duration: .5, ease: EASE });
+    if (!motion || !animate) { swap(); return Promise.resolve(); }
+    return new Promise(r => gsap.timeline({ onComplete: r }).to('.garden-copy', { autoAlpha: 0, y: 8, duration: .2, overwrite: true }).call(swap).to('.garden-copy', { autoAlpha: 1, y: 0, duration: .5, ease: EASE }));
   }
+  let gardenScene = null;
   if (motion) {
-    const windows = [[.3, .5], [.65, .85]];
-    gardenTrigger = ScrollTrigger.create({ trigger: '.garden', start: 'top top', end: () => `bottom-=${innerHeight} bottom`, scrub: .3, onUpdate: self => {
-      const p = self.progress;
-      gardenPhotos.forEach((photo, k) => { if (k === 0) { photo.style.transform = `scale(${1.06 - .06 * clamp(p / .3)})`; return; } const [a, b] = windows[k - 1], r = gsap.parseEase('power2.inOut')(clamp((p - a) / (b - a))); photo.style.clipPath = `inset(${((1 - r) * 100).toFixed(2)}% 0 0 0)`; photo.style.transform = `scale(${1.08 - .08 * r})`; });
-      setGarden(p < .42 ? 0 : p < .77 ? 1 : 2);
-    } });
-    gardenTabs.forEach(b => b.addEventListener('click', () => { const p = [.1, .56, .92][Number(b.dataset.garden)]; go(gardenTrigger.start + (gardenTrigger.end - gardenTrigger.start) * p); }));
-  } else { setGarden(0); gardenTabs.forEach(b => b.addEventListener('click', () => setGarden(Number(b.dataset.garden)))); }
+    gardenScene = register($('.garden'), 2, async (from, to) => {
+      const step = Math.sign(to - from);
+      for (let current = from; current !== to; current += step) {
+        const next = current + step, photo = gardenPhotos[step > 0 ? next : current];
+        const copy = gardenCopy(next, true);
+        await new Promise(r => gsap.timeline({ onComplete: r })
+          .fromTo(photo, { clipPath: step > 0 ? 'inset(100% 0 0 0)' : 'inset(0% 0 0 0)', scale: step > 0 ? 1.08 : 1 }, { clipPath: step > 0 ? 'inset(0% 0 0 0)' : 'inset(100% 0 0 0)', scale: step > 0 ? 1 : 1.08, duration: 1, ease: 'power3.inOut' }, 0)
+          .fromTo(gardenPhotos[step > 0 ? current : next], { scale: step > 0 ? 1 : 1.04 }, { scale: step > 0 ? 1.04 : 1, duration: 1, ease: 'power2.inOut' }, 0));
+        await copy;
+      }
+    });
+    gardenScene.restore = () => { gardenScene.reset(0); gardenPhotos.forEach((p, k) => gsap.set(p, { clipPath: k === 0 ? 'inset(0% 0 0 0)' : 'inset(100% 0 0 0)', scale: 1 })); gardenCopy(0, false); };
+    gardenTabs.forEach(b => b.addEventListener('click', () => gardenScene.go(Number(b.dataset.garden))));
+  } else { gardenCopy(0, false); gardenTabs.forEach(b => b.addEventListener('click', () => { const i = Number(b.dataset.garden); gardenPhotos.forEach((p, k) => p.style.clipPath = k <= i ? 'inset(0)' : 'inset(100% 0 0 0)'); gardenCopy(i, false); })); }
 
-  /* Four chapters: the isometric cut is scrubbed through three recorded moves. */
+  /* 03 Four chapters: the isometric cut. One gesture, one floor. */
   const chapters = S.chapters || [
     { level: 'Garden level', kicker: '1 / The garden floor', title: 'Open the day outside.', copy: 'A living room of approximately 54 m², a separate kitchen and direct access to the garden and pool. An annexe with its own entrance adds space for guests, work or a separate daily routine.', features: ['Living room & kitchen', 'Garden & pool access', 'Guest WC & separate annexe'] },
     { level: 'Entrance level', kicker: '2 / The entrance floor', title: 'The heart of the home.', copy: 'Arrive from the street into the main social floor. A living and dining room of approximately 53 m² connects to a generous enclosed kitchen, utility space and an internally accessible garage.', features: ['Main living & dining room', 'Kitchen, utility space & guest WC', 'Street entrance, garage & balcony'] },
     { level: 'First floor', kicker: '3 / The bedroom floor', title: 'A place for privacy.', copy: 'The principal suite has its own dressing room and en-suite bathroom. Two more bedrooms, a family bathroom and a sitting area bring the private rooms together on one level.', features: ['Principal suite & dressing room', 'Two further bedrooms & family bathroom', 'Sitting area, balcony & lift access'] },
     { level: 'Attic level', kicker: '4 / The attic floor', title: 'Room for another rhythm.', copy: 'Under the pitched roof, a sitting room, two bedrooms, a kitchenette and a bathroom create an additional living arrangement. A place for guests, grown children or a quieter working day, reached by the staircase.', features: ['Sitting room & two bedrooms', 'Kitchenette & bathroom', 'Stair access; lift stops below'] }
   ];
-  const floorsSection = $('.floors'), floorTabs = $$('[data-floor]'), floorStill = $('.floors-still'); let floorIndex = -1;
+  const floorsSection = $('.floors'), floorTabs = $$('[data-floor]'), floorStill = $('.floors-still'), floorStage = $('.floors-stage'); let floorIndex = -1;
   function setFloor(i, animate = true) {
-    if (i === floorIndex) return; floorIndex = i; const c = chapters[i];
+    if (i === floorIndex) return Promise.resolve(); floorIndex = i; const c = chapters[i];
     const swap = () => { $('#floor-kicker').textContent = c.kicker; $('#floor-title').textContent = c.title; $('#floor-copy').textContent = c.copy; $('#floor-features').replaceChildren(...c.features.map(t => { const li = document.createElement('li'); li.textContent = t; return li; })); $('#floor-level').textContent = c.level; };
     floorTabs.forEach(b => { const on = Number(b.dataset.floor) === i; b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1; });
     $('.floors-progress i').style.width = `${(i + 1) * 25}%`; $('#floor-plan-link').dataset.atlasFloor = i;
     floorStill.src = `./assets/web2/chapters/iso-${i}-1440.webp`; floorStill.srcset = `./assets/web2/chapters/iso-${i}-800.webp 800w, ./assets/web2/chapters/iso-${i}-1440.webp 1440w`;
-    if (motion && animate) gsap.timeline().to('.floors-text', { autoAlpha: 0, y: 6, duration: .18, overwrite: true }).call(swap).to('.floors-text', { autoAlpha: 1, y: 0, duration: .5, ease: EASE }); else swap();
+    if (!motion || !animate) { swap(); return Promise.resolve(); }
+    return new Promise(r => gsap.timeline({ onComplete: r }).to('.floors-text', { autoAlpha: 0, y: 6, duration: .16, overwrite: true }).call(swap).to('.floors-text', { autoAlpha: 1, y: 0, duration: .45, ease: EASE }));
   }
   const FLOOR_CLIPS = [1, 2, 3].map(i => ({ id: `level-${i}`, frames: 22, root: `./assets/web2/chapters/level-${i}/${isMobile() ? 'm' : 'd'}` }));
-  let floorsTrigger = null;
+  let floorsScene = null, atlasScene = null, planDescending = false;
+  const atlasFloor = step => planDescending ? 3 - step : step;
+  const atlasStep = floor => planDescending ? 3 - floor : floor;
   if (motion) {
-    const stage = $('.floors-stage'), player = new Frames($('.floors-canvas'), { fit: 'contain', background: '#ffffff' });
-    ScrollTrigger.create({ trigger: floorsSection, start: 'top 160%', once: true, onEnter: () => FLOOR_CLIPS.reduce((p, c) => p.then(() => player.load(c)), Promise.resolve()) });
-    floorsTrigger = ScrollTrigger.create({ trigger: floorsSection, start: 'top top', end: () => `bottom-=${innerHeight} bottom`, scrub: .35, snap: { snapTo: [0, 1 / 3, 2 / 3, 1], directional: false, duration: { min: .25, max: .7 }, delay: .08, ease: 'power2.inOut' }, onUpdate: self => {
-      const t = self.progress * 3, seg = Math.min(2, Math.floor(t)), local = t - seg, move = clamp((local - .2) / .6);
-      const live = self.progress > .002 && self.progress < .998;
-      stage.classList.toggle('is-live', live);
-      if (live) player.show(FLOOR_CLIPS[seg], move * 21); else floorStill.src = `./assets/web2/chapters/iso-${self.progress < .5 ? 0 : 3}-1440.webp`;
-      setFloor(local < .5 ? seg : seg + 1);
-    } });
-    const goFloor = i => go(floorsTrigger.start + (floorsTrigger.end - floorsTrigger.start) * (i / 3));
-    window.AngoraFloors = { go: goFloor };
-    floorTabs.forEach(b => { b.addEventListener('click', () => goFloor(Number(b.dataset.floor))); b.addEventListener('keydown', e => { const i = Number(b.dataset.floor); const next = e.key === 'ArrowRight' ? (i + 1) % 4 : e.key === 'ArrowLeft' ? (i + 3) % 4 : e.key === 'Home' ? 0 : e.key === 'End' ? 3 : null; if (next === null) return; e.preventDefault(); goFloor(next); $(`#floor-tab-${next}`).focus({ preventScroll: true }); }); });
-    $$('[data-floor-link]').forEach(b => b.addEventListener('click', () => goFloor(Number(b.dataset.floorLink))));
-  } else { floorTabs.forEach(b => b.addEventListener('click', () => setFloor(Number(b.dataset.floor), false))); $$('[data-floor-link]').forEach(b => b.addEventListener('click', () => { setFloor(Number(b.dataset.floorLink), false); go(floorsSection); })); }
-  setFloor(0, false);
-  $('#floor-plan-link').addEventListener('click', e => { e.preventDefault(); window.dispatchEvent(new CustomEvent('angora:floor', { detail: Number($('#floor-plan-link').dataset.atlasFloor || 0) })); go($('#atlas'), { offset: -headerH() + 8 }); });
+    const player = new Frames($('.floors-canvas'), { fit: 'contain', background: '#ffffff' });
+    ScrollTrigger.create({ trigger: floorsSection, start: 'top 170%', once: true, onEnter: () => FLOOR_CLIPS.reduce((p, c) => p.then(() => player.load(c)), Promise.resolve()) });
+    const holdFloor = i => { floorStage.classList.remove('is-live'); setFloor(i, false); };
+    floorsScene = register(floorsSection, 3, async (from, to) => {
+      const step = Math.sign(to - from);
+      for (let current = from; current !== to; current += step) {
+        const next = current + step, clip = FLOOR_CLIPS[Math.max(current, next) - 1];
+        await player.ready(clip); floorStage.classList.add('is-live');
+        let swapped = false;
+        await player.play(clip, step, .55, t => { if (t >= .5 && !swapped) { swapped = true; setFloor(next, true); } });
+        player.release(clip, step > 0 ? clip.frames - 1 : 0);
+        floorStill.src = `./assets/web2/chapters/iso-${next}-1440.webp`;
+      }
+      if (FLOOR_CLIPS[to]) player.ready(FLOOR_CLIPS[to]); if (FLOOR_CLIPS[to - 1]) player.ready(FLOOR_CLIPS[to - 1]);
+    }, {
+      enter: direction => { if (direction > 0) { floorsScene.reset(0); holdFloor(0); } },
+      exit: async (direction, top) => {
+        if (direction < 0 || !atlasScene) return false;
+        planDescending = true; atlasScene.reset(atlasStep(floorsScene.index)); window.AngoraPlan.selectFloor(floorsScene.index);
+        await travel(top, .65); hold(atlasScene); return true;
+      }
+    });
+    floorsScene.holdFloor = holdFloor;
+    floorsScene.restore = () => { floorsScene.reset(0); holdFloor(0); };
+    holdFloor(0);
+  } else { setFloor(0, false); }
 
-  /* Gallery: a horizontal scrub on pointer devices, a native carousel on touch. */
-  const atlas = window.ANGORA_ATLAS, caption = p => S.lang === 'tr' ? (p.tr || p.en).replace('Bodrum ·', 'Bahçe katı ·') : p.en.replace('Basement ·', 'Garden level ·').replace('Ground floor ·', 'Entrance level ·').replace('Attic level ·', 'Attic level ·').replace('Attic floor ·', 'Attic level ·');
+  /* 04 Plans: one gesture slides one floor sideways. Entered from the model, it continues the same stack downwards. */
+  if (motion && window.AngoraPlan) {
+    atlasScene = register($('.atlas'), 3, (from, to) => window.AngoraPlan.transition(atlasFloor(to)), {
+      enter: direction => { if (direction < 0) { planDescending = true; atlasScene.reset(3); window.AngoraPlan.selectFloor(0); } else if (!planDescending) { atlasScene.reset(0); window.AngoraPlan.selectFloor(0); } },
+      exit: async (direction, top) => {
+        if (direction > 0 || !floorsScene) return false;
+        const floor = window.AngoraPlan.floor; floorsScene.reset(floor); floorsScene.holdFloor(floor);
+        await travel(sceneTop(floorsScene), .65); hold(floorsScene); return true;
+      }
+    });
+    atlasScene.restore = () => { planDescending = false; atlasScene.reset(0); window.AngoraPlan.selectFloor(0); };
+    window.AngoraPlan.navigate = floor => { const go = () => atlasScene.go(atlasStep(Number(floor))); if (Math.abs($('.atlas').getBoundingClientRect().top) > 5) navigate($('.atlas')).then(go); else go(); };
+  }
+  async function goFloor(i) {
+    if (!floorsScene) { setFloor(i, false); travel(sceneTop({ el: floorsSection }), .8); return; }
+    if (Math.abs(floorsSection.getBoundingClientRect().top) > 5) await navigate(floorsSection);
+    await floorsScene.go(i);
+  }
+  floorTabs.forEach(b => { b.addEventListener('click', () => goFloor(Number(b.dataset.floor))); b.addEventListener('keydown', e => { const i = Number(b.dataset.floor); const next = e.key === 'ArrowRight' ? (i + 1) % 4 : e.key === 'ArrowLeft' ? (i + 3) % 4 : e.key === 'Home' ? 0 : e.key === 'End' ? 3 : null; if (next === null) return; e.preventDefault(); goFloor(next); $(`#floor-tab-${next}`).focus({ preventScroll: true }); }); });
+  $$('[data-floor-link]').forEach(b => b.addEventListener('click', () => goFloor(Number(b.dataset.floorLink))));
+  $('#floor-plan-link').addEventListener('click', e => { e.preventDefault(); const floor = Number($('#floor-plan-link').dataset.atlasFloor || 0); if (window.AngoraPlan?.navigate) window.AngoraPlan.navigate(floor); else { window.dispatchEvent(new CustomEvent('angora:floor', { detail: floor })); travel(sceneTop({ el: $('.atlas') }), .8); } });
+
+  /* Navigation: distant links travel, scenes arrive at their first frame. */
+  const sceneFor = el => scenes.find(s => s.el === el);
+  async function navigate(target) {
+    await closeMenu(); await whenIdle();
+    const scene = sceneFor(target);
+    if (scene) { scene.restore?.(); await travel(sceneTop(scene), .9); hold(scene); release(); }
+    else await travel(target.getBoundingClientRect().top + scrollY - headerH() + 8, .9);
+    updateHeader();
+  }
+  $$('a[href^="#"]').forEach(link => link.addEventListener('click', async e => {
+    const id = link.hash.slice(1), target = document.getElementById(id); if (!target) return;
+    e.preventDefault(); history.replaceState(null, '', link.hash); await navigate(target);
+  }));
+  window.AngoraGo = target => navigate(typeof target === 'string' ? document.getElementById(target) : target);
+
+  /* 05 Gallery: a horizontal scrub on pointer devices, a native carousel on touch. */
+  const atlas = window.ANGORA_ATLAS, caption = p => S.lang === 'tr' ? (p.tr || p.en).replace('Bodrum ·', 'Bahçe katı ·') : p.en.replace('Basement ·', 'Garden level ·').replace('Ground floor ·', 'Entrance level ·').replace('Attic floor ·', 'Attic level ·');
   const exteriors = (S.exteriors || [['angora_28.jpeg', 'The street elevation'], ['angora_24.jpg', 'The private garden & pool'], ['angora_26.jpg', 'The garden-facing elevation'], ['angora_27.jpg', 'The covered terrace & water']]).map(([file, en]) => ({ file, en, tr: en }));
   const byId = id => atlas.photos.find(p => p.id === id);
   const sets = { all: [5, 22, 40, 31, 33, 32, 7, 10].map(byId), outdoor: [exteriors[1], exteriors[0], exteriors[3], exteriors[2]], 0: [2, 5, 1].map(byId), 1: [4, 21, 23].map(byId), 2: [17, 12, 32].map(byId), 3: [7, 9, 15].map(byId) };
-  const track = $('.gallery-track'), counter = $('#gallery-counter'), bar = $('.gallery-progress i'); let items = [], index = 0;
+  const track = $('.gallery-track'), counter = $('#gallery-counter'), bar = $('.gallery-progress i'); let items = [], galleryTrigger = null, index = 0;
   const desktopGallery = () => motion && !isMobile();
   function updateCounter() { counter.textContent = `${String(index + 1).padStart(2, '0')} / ${items.length}`; $('#gallery-prev').disabled = index === 0; $('#gallery-next').disabled = index >= items.length - 1; }
   function fitGallery() { const h = track.clientHeight - 52; if (h > 50) track.style.setProperty('--gallery-w', `${Math.min(innerWidth * .62, h * 1.6)}px`); }
@@ -300,12 +438,12 @@
   track.addEventListener('scroll', () => { if (desktopGallery()) return; const figs = [...track.children], x = track.scrollLeft; index = figs.reduce((best, f, i) => Math.abs(f.offsetLeft - track.offsetLeft - x) < Math.abs(figs[best].offsetLeft - track.offsetLeft - x) ? i : best, 0); const max = track.scrollWidth - track.clientWidth; bar.style.transform = `scaleX(${max > 0 ? clamp(x / max) : 1})`; updateCounter(); }, { passive: true });
   function galleryGo(delta) {
     const next = clamp(index + delta, 0, items.length - 1), fig = track.children[next]; if (!fig) return;
-    if (galleryTrigger) { const distance = Math.max(1, track.scrollWidth - track.clientWidth), offset = clamp(fig.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft), 0, distance); go(galleryTrigger.start + (galleryTrigger.end - galleryTrigger.start) * (offset / distance)); }
+    if (galleryTrigger) { const distance = Math.max(1, track.scrollWidth - track.clientWidth), offset = clamp(fig.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft), 0, distance); scrollTo(galleryTrigger.start + (galleryTrigger.end - galleryTrigger.start) * (offset / distance)); }
     else track.scrollTo({ left: fig.offsetLeft - track.offsetLeft, behavior: reduced ? 'instant' : 'smooth' });
   }
   $('#gallery-prev').addEventListener('click', () => galleryGo(-1)); $('#gallery-next').addEventListener('click', () => galleryGo(1));
   track.addEventListener('keydown', e => { if (['ArrowLeft', 'ArrowRight'].includes(e.key)) { e.preventDefault(); galleryGo(e.key === 'ArrowRight' ? 1 : -1); } });
-  $$('[data-gallery-filter]').forEach(b => b.addEventListener('click', () => { if (b.getAttribute('aria-pressed') === 'true') return; $$('[data-gallery-filter]').forEach(o => o.setAttribute('aria-pressed', String(o === b))); const run = () => { renderGallery(b.dataset.galleryFilter); if (galleryTrigger) go(galleryTrigger.start, { immediate: true }); }; if (motion) gsap.to('.gallery-window', { opacity: 0, duration: .15, onComplete: () => { run(); gsap.to('.gallery-window', { opacity: 1, duration: .4 }); } }); else run(); }));
+  $$('[data-gallery-filter]').forEach(b => b.addEventListener('click', () => { if (b.getAttribute('aria-pressed') === 'true') return; $$('[data-gallery-filter]').forEach(o => o.setAttribute('aria-pressed', String(o === b))); const run = () => { renderGallery(b.dataset.galleryFilter); if (galleryTrigger) scrollTo(galleryTrigger.start, true); }; if (motion) gsap.to('.gallery-window', { opacity: 0, duration: .15, onComplete: () => { run(); gsap.to('.gallery-window', { opacity: 1, duration: .4 }); } }); else run(); }));
   renderGallery();
   if (motion) new ResizeObserver(() => { if (desktopGallery()) { fitGallery(); ScrollTrigger.refresh(); } }).observe($('.gallery-window'));
 
