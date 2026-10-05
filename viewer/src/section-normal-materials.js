@@ -12,7 +12,8 @@ export function createSectionNormalMaterials(template){
   // SSR yalnız bu maskenin olduğu yerde yansıtır - mat sıvaya koyu yansıma basmaz.
   // Parlaklık roughness'tan: 0,45 ve üstü 0, 0,12 ve altı 1; dört kademeye yuvarlanır.
   // Zemin malzemelerinin pürüzlülüğü dokudan gelir (faktör 1 okunur); onlar adlarından tanınır.
-  const FLOOR_GLOSS=[[/wood_floor|WOOD-FL|parke|parquet/i,FEATURES.parquetGloss?.83:.5],[/tile|seramik|ceramic|porcelain|mosaic|mermer|marble/i,.66],[/terra_floor/i,.33]];
+  // 05.10 ürün sahibi: ahşap zemin parlamasın - parkeye ekran-uzayı yansıması yok (seramik/fayans kalır)
+  const FLOOR_GLOSS=[[/wood_floor|WOOD-FL|parke|parquet/i,FEATURES.parquetGloss?.83:0],[/tile|seramik|ceramic|porcelain|mosaic|mermer|marble/i,.66],[/terra_floor/i,.33]];
   const glossOf=m=>{
     if(Number.isFinite(m.userData?.ssrGloss))return m.userData.ssrGloss;
     const named=FLOOR_GLOSS.find(([rx])=>rx.test(m.name??''));
