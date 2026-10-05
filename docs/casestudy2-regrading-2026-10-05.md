@@ -1,6 +1,6 @@
 # Angora web2 — bağımsız ara notlama, ikinci inceleme
 
-Tarih/saat: **2026-10-05 19:25:09 Europe/Paris (UTC+02:00)**.
+Tarih/saat: **2026-10-05 20:08:41 Europe/Paris (UTC+02:00)**.
 
 Durum: **Notlama tamamlandı. web3 ve web4 uygulanmadı.** Kaynak, kullanıcının Videos klasöründeki **2026-10-05 15-29-15.mp4** kaydıdır. Kayıtta web2 açılmıştır; bugünkü canlı sürümün veya fiziksel telefon performansının sertifikası değildir.
 
@@ -20,6 +20,8 @@ Eski hesap üç boyutun ortalamasıydı. Yeni hesap dört boyutun en düşüğü
 - Yarım puanlar iki çıpa arasındaki ayrımdır; ölçülmüş FPS veya milisaniye hassasiyeti değildir.
 - Kaydedilmeyen etkileşim **N/A**. Mobil kamera 3 kesitinde seçim zaten aktiftir; tıklama animasyonuna not verilmedi.
 - 9 kabul koşulları gelecekteki uygulamanın hedefidir; kazanılmış not değildir.
+- Bu dört sayı **görsel kurgu** puanıdır. İşlev onayı değildir; **Koru**, kontrolün doğru işlem yaptığını veya scroll/modal testlerinin geçtiğini söylemez.
+- P0 işlev hatası ayrı **teslim engeli** olarak tutulur; görsel puanla ortalaması alınmaz. Kayıtta gösterilmeyen kontroller doğrulanmadı durumundadır.
 
 | Çıpa | Anlam |
 |---:|---|
@@ -62,10 +64,16 @@ Bu özet notları hesaplar; notlar ayrı yazılmış gözlemlerden gelir. Mevcut
 | Desktop | 65 | 4.5 | 8.0 | 6 | 49 | 10 | 0 |
 | Mobil emülasyon | 44 | 5.0 | 8.0 | 7 | 30 | 7 | 0 |
 
+## İşlev değerlendirmesine ek düzeltme
+
+D28 (55.55–56.35) için 4.5, görsel devamlılık puanıdır. Kullanıcının bildirdiği **plan fotoğrafına basınca isometriğe atma**, sıradan easing kusuru değil, **P0 / teslim engeli**. D34'teki kat kaybı da ayrı P0'dır. Kayıt yanlış model/kat dönüşünü gösterir; tetikleyen input her kesitte görünmez. Canlı ek denemede aynı isometriğe atma yeniden üretilemedi; kamera seçiminde sayfa konumu değişti. Bunlar birbirinin yerine kanıt sayılmaz.
+
+Diğer 107 kesitin işlev durumu **doğrulanmadı**. Görsel Koru/İncelt kararı hiçbirini işlevsel olarak geçirmiş değildir. [Detaylı web3 planı](web3-era-plan-2026-10-05.md), 109 kesiti, mevcut tasarım notlarını, 49 ERA referansını ve bağlam koruma testlerini ayrı gösterir. [Canlı ek deneme kaydı](web3-behavior-checks-2026-10-05.json) sınırlarıyla birlikte korunur.
+
 ## Uygulama sırası
 
-1. Film çıkışı: evin tamamını ortak odakta tutan pencere+görüntü küçülmesi ve sıralı bilgi.
-2. Model↔plan: aynı kat kimliği; geri dönüşte doğru kat ve fotoğraf.
+1. P0 fotoğraf→isometri hatası, kat kimliği ve scroll kilidi: aynı kat/kamera/scroll konumunun korunması.
+2. Film çıkışı: evin tamamını ortak odakta tutan pencere+görüntü küçülmesi ve sıralı bilgi.
 3. Mobil plan: küçük pasif pin, aktif bakış konisi, okunur oda adı ve fotoğraf alanı.
 4. Bahçe: başlık ve fotoğrafın aynı mekânı aynı anda göstermesi.
 5. Viewing ve map: cepheyi kapatmayan bilgi; ev/boundary işaretlerinin dar ekran içinde kalması.
@@ -79,7 +87,7 @@ Bu özet notları hesaplar; notlar ayrı yazılmış gözlemlerden gelir. Mevcut
 
 ## Doğrulama
 
-- 17 veri testi: 201 sahnenin aralıkları, ofsetleri, medya/still dosyaları, cihaz eşleşmesi, 109 açık not girdisi, kaynak kare zamanları, tekrar bağları ve export/player eşitliği.
+- 18 veri testi: 201 sahnenin aralıkları, ofsetleri, medya/still dosyaları, cihaz eşleşmesi, 109 açık not girdisi, kaynak kare zamanları, tekrar bağları, export/player eşitliği ve P0/işlev onayının görsel puandan ayrı tutulması. Bunlar web2 kontrollerinin geçtiği anlamına gelmez.
 - Önceki tur tarayıcı kontrolleri eski JSON'da korunur; yeni notların gerekçesi yerine geçmez.
 - Bu tur [tarayıcı kontrol kaydı](casestudy2-regrading-browser-checks-2026-10-05.json): 2026-10-05 19:24:47 Europe/Paris.
 - 65 desktop kesit 1280 × 720 görünümde seçildi: dört ölçüt, iki kaynak bağlantısı ve kabul koşulu bulundu; kadraj sığdı, yatay taşma ve seçim sonrası scrollY kayması yoktu.
@@ -765,7 +773,7 @@ Referans seçkisi:
 
 Kaynak kareleri: **00:55.55** — Attic plan ve fotoğrafı; **00:56.05** — Garden iso yeniden görünür.
 
-**9 kabul koşulu:** Geri dönüş aynı katın iso’suna ve aynı ölçeğe yapılmalı; plan seçimi geri gelindiğinde korunmalı.
+**9 kabul koşulu:** Önce P0 giderilmeli: fotoğraf seçme/büyütme/kapama aynı Attic planında, aynı kamera ve sayfa konumunda kalır. Yalnız açık View isometric eylemi aynı Attic modelini açabilir; başka model/kat dönüşü teslim engelidir.
 
 Referans seçkisi:
 
@@ -895,7 +903,7 @@ Referans seçkisi:
 
 Kaynak kareleri: **01:01.20** — Entrance planı ve değişen fotoğraf; **01:01.77** — Garden modeline dönülmüş.
 
-**9 kabul koşulu:** Entrance planından Entrance iso’ya dön; seçili kamera ve kat geri gelişte saklanmalı.
+**9 kabul koşulu:** Fotoğraf eylemi Entrance planı, kamera ve sayfa konumunda kalır. Açık View isometric eylemi ise Entrance modelini açar. Bu iki yol ayrı test edilmeden P0 kapanmaz; Garden reseti kabul edilmez.
 
 Tekrar ziyaret: Plan → Garden iso / ilk geri ziyaret. Bu kesit ayrıca incelendi; aynı görünen kusur aynı notu alabilir.
 

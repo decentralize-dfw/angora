@@ -31,6 +31,8 @@ Eski hesap üç boyutun ortalamasıydı. Yeni hesap dört boyutun en düşüğü
 - Yarım puanlar iki çıpa arasındaki ayrımdır; ölçülmüş FPS veya milisaniye hassasiyeti değildir.
 - Kaydedilmeyen etkileşim **N/A**. Mobil kamera 3 kesitinde seçim zaten aktiftir; tıklama animasyonuna not verilmedi.
 - 9 kabul koşulları gelecekteki uygulamanın hedefidir; kazanılmış not değildir.
+- Bu dört sayı **görsel kurgu** puanıdır. İşlev onayı değildir; **Koru**, kontrolün doğru işlem yaptığını veya scroll/modal testlerinin geçtiğini söylemez.
+- P0 işlev hatası ayrı **teslim engeli** olarak tutulur; görsel puanla ortalaması alınmaz. Kayıtta gösterilmeyen kontroller doğrulanmadı durumundadır.
 
 | Çıpa | Anlam |
 |---:|---|
@@ -68,10 +70,16 @@ Bu özet notları hesaplar; notlar ayrı yazılmış gözlemlerden gelir. Mevcut
 `;
 for(const f of flows){const a=f.scenes.map(s=>s.review.score);md+=`| ${f.device==='desktop'?'Desktop':'Mobil emülasyon'} | ${a.length} | ${number(Math.min(...a))} | ${number(Math.max(...a))} | ${a.filter(n=>n<6).length} | ${a.filter(n=>n>=6&&n<8).length} | ${a.filter(n=>n>=8).length} | ${a.filter(n=>n>=9).length} |\n`;}
 md+=`
+## İşlev değerlendirmesine ek düzeltme
+
+D28 (55.55–56.35) için 4.5, görsel devamlılık puanıdır. Kullanıcının bildirdiği **plan fotoğrafına basınca isometriğe atma**, sıradan easing kusuru değil, **P0 / teslim engeli**. D34'teki kat kaybı da ayrı P0'dır. Kayıt yanlış model/kat dönüşünü gösterir; tetikleyen input her kesitte görünmez. Canlı ek denemede aynı isometriğe atma yeniden üretilemedi; kamera seçiminde sayfa konumu değişti. Bunlar birbirinin yerine kanıt sayılmaz.
+
+Diğer 107 kesitin işlev durumu **doğrulanmadı**. Görsel Koru/İncelt kararı hiçbirini işlevsel olarak geçirmiş değildir. [Detaylı web3 planı](web3-era-plan-2026-10-05.md), 109 kesiti, mevcut tasarım notlarını, 49 ERA referansını ve bağlam koruma testlerini ayrı gösterir. [Canlı ek deneme kaydı](web3-behavior-checks-2026-10-05.json) sınırlarıyla birlikte korunur.
+
 ## Uygulama sırası
 
-1. Film çıkışı: evin tamamını ortak odakta tutan pencere+görüntü küçülmesi ve sıralı bilgi.
-2. Model↔plan: aynı kat kimliği; geri dönüşte doğru kat ve fotoğraf.
+1. P0 fotoğraf→isometri hatası, kat kimliği ve scroll kilidi: aynı kat/kamera/scroll konumunun korunması.
+2. Film çıkışı: evin tamamını ortak odakta tutan pencere+görüntü küçülmesi ve sıralı bilgi.
 3. Mobil plan: küçük pasif pin, aktif bakış konisi, okunur oda adı ve fotoğraf alanı.
 4. Bahçe: başlık ve fotoğrafın aynı mekânı aynı anda göstermesi.
 5. Viewing ve map: cepheyi kapatmayan bilgi; ev/boundary işaretlerinin dar ekran içinde kalması.
@@ -85,7 +93,7 @@ md+=`
 
 ## Doğrulama
 
-- 17 veri testi: 201 sahnenin aralıkları, ofsetleri, medya/still dosyaları, cihaz eşleşmesi, 109 açık not girdisi, kaynak kare zamanları, tekrar bağları ve export/player eşitliği.
+- 18 veri testi: 201 sahnenin aralıkları, ofsetleri, medya/still dosyaları, cihaz eşleşmesi, 109 açık not girdisi, kaynak kare zamanları, tekrar bağları, export/player eşitliği ve P0/işlev onayının görsel puandan ayrı tutulması. Bunlar web2 kontrollerinin geçtiği anlamına gelmez.
 - Önceki tur tarayıcı kontrolleri eski JSON'da korunur; yeni notların gerekçesi yerine geçmez.
 `;
 if(qa){md+=`- Bu tur [tarayıcı kontrol kaydı](casestudy2-regrading-browser-checks-2026-10-05.json): ${qa.checkedAt}.\n`;for(const note of qa.summary)md+=`- ${note}\n`;}else md+='- Bu tur tarayıcı doğrulaması henüz rapora kaydedilmedi.\n';

@@ -1,6 +1,6 @@
 // The baseline is the owner's 15:29 recording, not an unrecorded live revision.
 // Each repeated visit has its own cut. Ratings are visual editorial judgements.
-import { SCENE_GRADES, GRADING_METHOD } from './casestudy2-grades.js';
+import { SCENE_GRADES, GRADING_METHOD, FUNCTIONAL_ISSUES } from './casestudy2-grades.js';
 const R=(site,key,reason)=>({site,key,reason});
 // Source-clock intervals checked against half-second frames. Full library cuts stay intact.
 const referenceFocus={
@@ -116,6 +116,7 @@ function cut(key,start,end,title,family,summary,recipe,device,overrides={}){
  review.score=Math.min(...grade.scores.filter(n=>n!==null));
  review.verdict=review.score<6?'Yeniden ele al':review.score<8?'İncelt':'Koru';
  review.method=GRADING_METHOD.version;
+ review.functional=FUNCTIONAL_ISSUES[`active-${device}:${key}`]||{status:'unverified',severity:null,title:'İşlev onayı verilmedi',reason:'Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.',acceptance:'İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak.'};
  review.observation=grade.reasons.join(' ');
  review.action=grade.acceptance;
  const duration=+(end-start).toFixed(3);

@@ -96,14 +96,16 @@ export function renderReview(flow, scene, seek) {
  reference.pause(); currentVideo.pause(); active = flow;
  const review = scene.review;
  $('active-review').hidden = !review;
- $('details-link').textContent = review ? `Karar: ${review.verdict} · ${review.score.toFixed(1)}/10 ↓` : 'Sahnenin breakdown’ı ↓';
+ $('details-link').textContent = review ? `${review.functional.status==='blocked'?'P0 / teslim engeli · ':'Görsel karar: '}${review.verdict} · ${review.score.toFixed(1)}/10 ↓` : 'Sahnenin breakdown’ı ↓';
  if (!review) { reference.removeAttribute('src'); reference.load(); currentVideo.removeAttribute('src'); currentVideo.load(); selected = null; current = null; return; }
  current={flow,scene};$('current-clip-title').textContent=scene.title;
  $('current-clip-status').textContent='Angora klibi hazırlanıyor…';
  currentVideo.poster=`./assets/casestudy2/active/stills/${flow.device}-${scene.id}-0.jpg`;
  currentVideo.src=flow.video;currentVideo.load();
- $('review-verdict').textContent = `${review.verdict} · ${review.score.toFixed(1)} / 10`;
+ $('review-verdict').textContent = `Görsel kurgu: ${review.verdict} · ${review.score.toFixed(1)} / 10`;
  $('review-verdict').dataset.verdict = review.verdict;
+ $('review-function').dataset.status=review.functional.status;
+ $('review-function').replaceChildren(make('strong',`${review.functional.severity?review.functional.severity+' / TESLİM ENGELİ · ':''}${review.functional.title}`),make('p',review.functional.reason),make('p',`İşlev kabul koşulu: ${review.functional.acceptance}`));
  $('review-scores').replaceChildren(...review.scores.map((score,i) => {
   const block = make('div'),top=make('div',null,'criterion-heading');
   top.append(make('span',GRADING_METHOD.criteria[i]),make('b',score===null?'N/A':`${score} / 10`));

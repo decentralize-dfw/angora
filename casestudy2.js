@@ -36,7 +36,7 @@ function renderCatalog() {
   button.setAttribute('aria-current', String(s.id === scene.id));
   button.append(el('span', String(s.id).padStart(2, '0'), 'index'));
   const title = el('span'); title.append(el('b', s.title), el('small', `${s.family} · ${clock(s.duration, true)} · kaynak ${clock(s.sourceStart)}`));
-  if (s.review) title.append(el('small', `${s.review.verdict} · ${s.review.score.toFixed(1)} / 10`, 'catalog-verdict'));
+  if (s.review) title.append(el('small', `${s.review.functional.status==='blocked'?'P0 / teslim engeli · ':'Görsel: '}${s.review.verdict} · ${s.review.score.toFixed(1)} / 10`, 'catalog-verdict'));
   button.append(title); button.addEventListener('click', () => selectScene(flow, s)); fragment.append(button);
  });
  if (!filtered.length) fragment.append(el('p', 'Bu kayıtta eşleşen sahne yok.', 'empty-search'));

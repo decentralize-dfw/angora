@@ -1,0 +1,208 @@
+{
+  "checkedAt": "2026-10-05T18:06:55.962Z",
+  "url": "https://angora.mergvs.com/web2",
+  "source": "Live browser check separate from the owner recording",
+  "environment": "Desktop in-app browser; automated locator click can scroll a target into view",
+  "observed": {
+    "cameraSelections": [
+      {
+        "id": "1",
+        "before": {
+          "plan": "Garden level",
+          "y": 9167.2001953125
+        },
+        "after": {
+          "atlasTop": -311.8000183105469,
+          "dialog": false,
+          "hash": "#atlas",
+          "photo": "Garden level · Kitchen",
+          "plan": "Garden level",
+          "y": 9478.400390625
+        }
+      },
+      {
+        "id": "2",
+        "before": {
+          "plan": "Garden level",
+          "y": 9478.400390625
+        },
+        "after": {
+          "atlasTop": -311.8000183105469,
+          "dialog": false,
+          "hash": "#atlas",
+          "photo": "Garden level · Living room",
+          "plan": "Garden level",
+          "y": 9478.400390625
+        }
+      },
+      {
+        "id": "3",
+        "before": {
+          "plan": "Garden level",
+          "y": 9478.400390625
+        },
+        "after": {
+          "atlasTop": -311.8000183105469,
+          "dialog": false,
+          "hash": "#atlas",
+          "photo": "Garden level · Living room",
+          "plan": "Garden level",
+          "y": 9478.400390625
+        }
+      },
+      {
+        "id": "5",
+        "before": {
+          "plan": "Garden level",
+          "y": 9478.400390625
+        },
+        "after": {
+          "atlasTop": -311.8000183105469,
+          "dialog": false,
+          "hash": "#atlas",
+          "photo": "Garden level · Living room",
+          "plan": "Garden level",
+          "y": 9478.400390625
+        }
+      },
+      {
+        "id": "45",
+        "before": {
+          "plan": "Garden level",
+          "y": 9478.400390625
+        },
+        "after": {
+          "atlasTop": -311.8000183105469,
+          "dialog": false,
+          "hash": "#atlas",
+          "photo": "Garden level · Guest WC",
+          "plan": "Garden level",
+          "y": 9478.400390625
+        }
+      },
+      {
+        "id": "46",
+        "before": {
+          "plan": "Garden level",
+          "y": 9478.400390625
+        },
+        "after": {
+          "atlasTop": -311.8000183105469,
+          "dialog": false,
+          "hash": "#atlas",
+          "photo": "Garden level · Guest WC",
+          "plan": "Garden level",
+          "y": 9478.400390625
+        }
+      },
+      {
+        "id": "47",
+        "before": {
+          "plan": "Garden level",
+          "y": 9478.400390625
+        },
+        "after": {
+          "atlasTop": -311.8000183105469,
+          "dialog": false,
+          "hash": "#atlas",
+          "photo": "Garden level · Hall · Stairs",
+          "plan": "Garden level",
+          "y": 9478.400390625
+        }
+      },
+      {
+        "id": "48",
+        "before": {
+          "plan": "Garden level",
+          "y": 9478.400390625
+        },
+        "after": {
+          "atlasTop": -311.8000183105469,
+          "dialog": false,
+          "hash": "#atlas",
+          "photo": "Garden level · Hall · Lift",
+          "plan": "Garden level",
+          "y": 9478.400390625
+        }
+      },
+      {
+        "id": "49",
+        "before": {
+          "plan": "Garden level",
+          "y": 9478.400390625
+        },
+        "after": {
+          "atlasTop": -311.8000183105469,
+          "dialog": false,
+          "hash": "#atlas",
+          "photo": "Lift car",
+          "plan": "Garden level",
+          "y": 9478.400390625
+        }
+      }
+    ],
+    "floorSelections": [],
+    "initial": {
+      "before": {
+        "atlasTop": -0.6000000238418579,
+        "hash": "#atlas",
+        "photo": "Attic level · Sitting area",
+        "plan": "Attic level",
+        "y": 9167.2001953125
+      },
+      "after": {
+        "atlasTop": -311.8000183105469,
+        "hash": "#atlas",
+        "model": "Garden level",
+        "modelTop": -1031.800048828125,
+        "photo": "Attic level · Kitchenette",
+        "plan": "Attic level",
+        "y": 9478.400390625
+      }
+    },
+    "notes": []
+  },
+  "additionalObservations": [
+    "Attic photo enlargement kept the Attic Kitchenette photo; the modal opened and later closed. Opening moved page Y to 9144.8, atlas top to 21.8.",
+    "All nine Garden thumbnails selected their expected photo. First selection moved page Y by about 311 px; later selections stayed at the new Y.",
+    "The reported plan photo to isometric navigation was not reproduced in these selections. The offscreen model heading still being Garden does not prove a section navigation.",
+    "A Garden tab click during modal closing had no effect; repeating after a fresh observation worked. A stale moving-target automation error is not classified as a product bug."
+  ],
+  "limits": [
+    "No physical phone test.",
+    "The other 31 camera selections were not exhaustively tested live.",
+    "Source-recording grades are unchanged.",
+    "This check does not establish the exact root cause of the reported P0."
+  ],
+  "reviewUiChecks": {
+    "P0": {
+      "scene": "active-desktop-28",
+      "visualScore": 4.5,
+      "status": "blocked",
+      "severity": "P0",
+      "catalogAndDetailMatch": true,
+      "action": "Photo action stays in same plan; only explicit View isometric navigates"
+    },
+    "mobilePlan": {
+      "scene": "active-mobile-32",
+      "scores": [
+        8,
+        8,
+        5.5,
+        5
+      ],
+      "visibleReasons": "Large pins cover corridors/rooms; room labels overlap"
+    },
+    "narrowReview": {
+      "viewport": [
+        320,
+        568
+      ],
+      "pageWidth": 305,
+      "reviewWidth": 268.8,
+      "overflowWithinReview": [],
+      "catalogClosedForReading": true
+    },
+    "scope": "Checks concern casestudy2 presentation, not completed web3 implementation"
+  }
+}

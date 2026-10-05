@@ -69,7 +69,14 @@
             "kind": "Geçiş",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -192,7 +199,14 @@
             "kind": "Geçiş",
             "score": 6,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -315,7 +329,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -438,7 +459,14 @@
             "kind": "Geçiş",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -566,7 +594,14 @@
             "kind": "Geçiş",
             "score": 5,
             "verdict": "Yeniden ele al",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -684,7 +719,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -797,7 +839,14 @@
             "kind": "Geçiş",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -910,7 +959,14 @@
             "kind": "Geçiş",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -1023,7 +1079,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -1136,7 +1199,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -1254,7 +1324,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -1377,7 +1454,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -1500,7 +1584,14 @@
             "kind": "Geçiş",
             "score": 7,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -1623,7 +1714,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -1751,7 +1849,14 @@
             "kind": "Geçiş",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -1859,7 +1964,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -1977,7 +2089,14 @@
             "kind": "Geçiş",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -2095,7 +2214,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -2213,7 +2339,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -2336,7 +2469,14 @@
             "kind": "Geçiş",
             "score": 6,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -2459,7 +2599,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -2582,7 +2729,14 @@
             "kind": "Geçiş",
             "score": 7,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -2705,7 +2859,14 @@
             "kind": "Geçiş",
             "score": 7,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -2833,7 +2994,14 @@
             "kind": "Geçiş",
             "score": 5,
             "verdict": "Yeniden ele al",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -2956,7 +3124,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -3079,7 +3254,14 @@
             "kind": "Geçiş",
             "score": 6,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -3202,7 +3384,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -3281,10 +3470,10 @@
           "title": "Plan → Garden iso / ilk geri ziyaret",
           "family": "Ters akış",
           "summary": "Attic planından model bölümünün Garden level durumuna dönülür.",
-          "lesson": "Geri dönüş aynı katın iso’suna ve aynı ölçeğe yapılmalı; plan seçimi geri gelindiğinde korunmalı.",
+          "lesson": "Önce P0 giderilmeli: fotoğraf seçme/büyütme/kapama aynı Attic planında, aynı kamera ve sayfa konumunda kalır. Yalnız açık View isometric eylemi aynı Attic modelini açabilir; başka model/kat dönüşü teslim engelidir.",
           "review": {
             "observation": "Attic planından Garden iso’ya geri dönülür; aynı kat kimliği korunmaz. Çok kısa düşey dönüşte plan fotoğrafı ve model parçaları aynı anda görünür. Model yeniden büyük Garden kadrajını alır; önceki plan odağı kaybolur. Sitting-area bilgisi ile yeni Garden açıklaması arasında anlam bağı yok.",
-            "action": "Geri dönüş aynı katın iso’suna ve aynı ölçeğe yapılmalı; plan seçimi geri gelindiğinde korunmalı.",
+            "action": "Önce P0 giderilmeli: fotoğraf seçme/büyütme/kapama aynı Attic planında, aynı kamera ve sayfa konumunda kalır. Yalnız açık View isometric eylemi aynı Attic modelini açabilir; başka model/kat dönüşü teslim engelidir.",
             "avoid": "Kayıt hangi input yolunun tetiklediğini her seferinde göstermiyor. Bunu kanıtlanmış wheel kilidi diye değil, görülen durum sıçraması olarak değerlendir.",
             "references": [
               {
@@ -3325,12 +3514,19 @@
                 "note": "Garden iso yeniden görünür"
               }
             ],
-            "acceptance": "Geri dönüş aynı katın iso’suna ve aynı ölçeğe yapılmalı; plan seçimi geri gelindiğinde korunmalı.",
+            "acceptance": "Önce P0 giderilmeli: fotoğraf seçme/büyütme/kapama aynı Attic planında, aynı kamera ve sayfa konumunda kalır. Yalnız açık View isometric eylemi aynı Attic modelini açabilir; başka model/kat dönüşü teslim engelidir.",
             "repeatOf": null,
             "kind": "Geçiş",
             "score": 4.5,
             "verdict": "Yeniden ele al",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "blocked",
+              "severity": "P0",
+              "title": "Fotoğraf işlemi plan bağlamını terk ediyor",
+              "reason": "Kullanıcı, plan fotoğrafına basınca isometriğe atıldığını bildirdi. Bu kesitte Attic planı → Garden model sıçraması görünür. Kayıt tıklama yolunu tek başına kanıtlamaz; kullanıcı bildirimiyle birlikte bloklayıcı işlev hatasıdır. Canlı denemede aynı isometriğe atma tekrar üretilemedi, fakat fotoğraf seçimi ve büyütmede sayfa konumu değişti.",
+              "acceptance": "Plan fotoğrafını seçme/büyütme/kapama, aynı plan bölümünde aynı kat ve kamera noktasını korumalı. Açık View isometric işlemi dışındaki fotoğraf eylemleri modele geçemez. Bu test geçmeden teslim edilemez."
+            }
           },
           "phases": [
             [
@@ -3453,7 +3649,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -3576,7 +3779,14 @@
             "kind": "Geçiş",
             "score": 7,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -3699,7 +3909,14 @@
             "kind": "Geçiş",
             "score": 7,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -3827,7 +4044,14 @@
             "kind": "Geçiş",
             "score": 5,
             "verdict": "Yeniden ele al",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -3950,7 +4174,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -4029,10 +4260,10 @@
           "title": "Plan → Garden iso / ikinci geri ziyaret",
           "family": "Ters akış",
           "summary": "Entrance planından isometrik Garden level durumuna yeniden dönülür.",
-          "lesson": "Entrance planından Entrance iso’ya dön; seçili kamera ve kat geri gelişte saklanmalı.",
+          "lesson": "Fotoğraf eylemi Entrance planı, kamera ve sayfa konumunda kalır. Açık View isometric eylemi ise Entrance modelini açar. Bu iki yol ayrı test edilmeden P0 kapanmaz; Garden reseti kabul edilmez.",
           "review": {
             "observation": "Entrance planından Garden iso’ya dönülür; seçilen kat bir geriye düşer. Düşey geri devir çok kısa; iki teknik bölüm yarım halde aynı anda görünür. Garden modelinin ilk büyük kadrajı tekrar gelir. Storage/salon bilgisi çıkarken Garden açıklaması bağ kurmadan belirir.",
-            "action": "Entrance planından Entrance iso’ya dön; seçili kamera ve kat geri gelişte saklanmalı.",
+            "action": "Fotoğraf eylemi Entrance planı, kamera ve sayfa konumunda kalır. Açık View isometric eylemi ise Entrance modelini açar. Bu iki yol ayrı test edilmeden P0 kapanmaz; Garden reseti kabul edilmez.",
             "avoid": "Kayıt hangi input yolunun tetiklediğini her seferinde göstermiyor. Bunu kanıtlanmış wheel kilidi diye değil, görülen durum sıçraması olarak değerlendir.",
             "references": [
               {
@@ -4073,12 +4304,19 @@
                 "note": "Garden modeline dönülmüş"
               }
             ],
-            "acceptance": "Entrance planından Entrance iso’ya dön; seçili kamera ve kat geri gelişte saklanmalı.",
+            "acceptance": "Fotoğraf eylemi Entrance planı, kamera ve sayfa konumunda kalır. Açık View isometric eylemi ise Entrance modelini açar. Bu iki yol ayrı test edilmeden P0 kapanmaz; Garden reseti kabul edilmez.",
             "repeatOf": "return-iso-1",
             "kind": "Geçiş",
             "score": 5,
             "verdict": "Yeniden ele al",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "blocked",
+              "severity": "P0",
+              "title": "Geri dönüşte seçili kat kayboluyor",
+              "reason": "Kayıtta Entrance planı → Garden model dönüşü var. İlk bildirilen fotoğraf işlemi hatasıyla ilişkisi araştırılacak; bu kesitteki input türü ayrıca doğrulanmış değildir. Seçili katın yanlış geri yüklenmesi işlev açısından teslim engelidir.",
+              "acceptance": "Açık model dönüşü Entrance durumunu korumalı; fotoğraf seçimi ise hiçbir model dönüşü yapmamalı. İki yol ayrı test edilecek."
+            }
           },
           "phases": [
             [
@@ -4201,7 +4439,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -4324,7 +4569,14 @@
             "kind": "Geçiş",
             "score": 7,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -4447,7 +4699,14 @@
             "kind": "Geçiş",
             "score": 7,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -4575,7 +4834,14 @@
             "kind": "Geçiş",
             "score": 5,
             "verdict": "Yeniden ele al",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -4698,7 +4964,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -4821,7 +5094,14 @@
             "kind": "Geçiş",
             "score": 6,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -4944,7 +5224,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -5067,7 +5354,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -5180,7 +5474,14 @@
             "kind": "Geçiş",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -5293,7 +5594,14 @@
             "kind": "Geçiş",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -5406,7 +5714,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -5529,7 +5844,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -5647,7 +5969,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -5765,7 +6094,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -5888,7 +6224,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -6011,7 +6354,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -6134,7 +6484,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -6257,7 +6614,14 @@
             "kind": "Geçiş",
             "score": 7,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -6380,7 +6744,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -6493,7 +6864,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -6606,7 +6984,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -6729,7 +7114,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -6852,7 +7244,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -6975,7 +7374,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -7093,7 +7499,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -7216,7 +7629,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -7344,7 +7764,14 @@
             "kind": "Geçiş",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -7462,7 +7889,14 @@
             "kind": "Geçiş",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -7590,7 +8024,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -7708,7 +8149,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -7826,7 +8274,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -7957,7 +8412,14 @@
             "kind": "Geçiş",
             "score": 7,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -8080,7 +8542,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -8203,7 +8672,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -8326,7 +8802,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -8449,7 +8932,14 @@
             "kind": "Geçiş",
             "score": 5,
             "verdict": "Yeniden ele al",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -8567,7 +9057,14 @@
             "kind": "Geçiş",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -8680,7 +9177,14 @@
             "kind": "Geçiş",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -8793,7 +9297,14 @@
             "kind": "Geçiş",
             "score": 7,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -8906,7 +9417,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -9029,7 +9547,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -9152,7 +9677,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -9275,7 +9807,14 @@
             "kind": "Geçiş",
             "score": 7,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -9398,7 +9937,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -9521,7 +10067,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -9644,7 +10197,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -9767,7 +10327,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -9890,7 +10457,14 @@
             "kind": "Geçiş",
             "score": 7,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -10013,7 +10587,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -10136,7 +10717,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -10244,7 +10832,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -10362,7 +10957,14 @@
             "kind": "Geçiş",
             "score": 7,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -10480,7 +11082,14 @@
             "kind": "Geçiş",
             "score": 7,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -10603,7 +11212,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -10721,7 +11337,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -10839,7 +11462,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -10962,7 +11592,14 @@
             "kind": "Geçiş",
             "score": 6.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -11085,7 +11722,14 @@
             "kind": "Geçiş",
             "score": 7,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -11208,7 +11852,14 @@
             "kind": "Geçiş",
             "score": 7,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -11331,7 +11982,14 @@
             "kind": "Geçiş",
             "score": 5,
             "verdict": "Yeniden ele al",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -11454,7 +12112,14 @@
             "kind": "Durum okuma / seçim kaydedilmedi",
             "score": 5.5,
             "verdict": "Yeniden ele al",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -11577,7 +12242,14 @@
             "kind": "Geçiş",
             "score": 5.5,
             "verdict": "Yeniden ele al",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -11700,7 +12372,14 @@
             "kind": "Geçiş",
             "score": 5,
             "verdict": "Yeniden ele al",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -11823,7 +12502,14 @@
             "kind": "Geçiş",
             "score": 5.5,
             "verdict": "Yeniden ele al",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -11946,7 +12632,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -12059,7 +12752,14 @@
             "kind": "Geçiş",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -12172,7 +12872,14 @@
             "kind": "Geçiş",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -12285,7 +12992,14 @@
             "kind": "Geçiş",
             "score": 6,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -12408,7 +13122,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -12526,7 +13247,14 @@
             "kind": "Geçiş",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -12644,7 +13372,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -12762,7 +13497,14 @@
             "kind": "Geçiş",
             "score": 7.5,
             "verdict": "İncelt",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -12880,7 +13622,14 @@
             "kind": "Geçiş",
             "score": 5.5,
             "verdict": "Yeniden ele al",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -13003,7 +13752,14 @@
             "kind": "Geçiş",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [
@@ -13126,7 +13882,14 @@
             "kind": "Kapanış okuma / orbit kaydedilmedi",
             "score": 8,
             "verdict": "Koru",
-            "method": "2 / individual source review"
+            "method": "2 / individual source review",
+            "functional": {
+              "status": "unverified",
+              "severity": null,
+              "title": "İşlev onayı verilmedi",
+              "reason": "Bu sayı görsel kurgu değerlendirmesidir. Koru, tasarım yönünün korunabileceğini söyler; kontrol, geri dönüş, input veya scroll kilidi testinin geçtiğini söylemez.",
+              "acceptance": "İlgili kontrol, ileri/geri ziyaret, modal dönüşü ve dar ekran davranışı gerçek arayüzde ayrıca sınanacak."
+            }
           },
           "phases": [
             [

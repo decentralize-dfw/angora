@@ -61,6 +61,16 @@ test('gallery cuts include the actual opening and closing movement',()=>{
  assert.equal(open.sourceStart,90.2);assert.equal(close.sourceStart,92.1);
  assert.equal(scenes.find(s=>s.key==='gallery-1-2').sourceStart,84.55);
 });
+
+test('visual ratings cannot approve an untested function or hide a blocking state loss',()=>{
+ const first=FLOWS['active-desktop'].scenes.find(s=>s.key==='return-iso-1').review;
+ assert.equal(first.score,4.5,'retain the source judgement; severity is a separate decision');
+ assert.equal(first.functional.status,'blocked');assert.equal(first.functional.severity,'P0');
+ for(const flow of Object.values(FLOWS).filter(f=>f.project==='active'))for(const scene of flow.scenes){
+  assert.ok(['blocked','unverified'].includes(scene.review.functional.status));
+  if(scene.review.verdict==='Koru')assert.equal(scene.review.functional.status,'unverified');
+ }
+});
 test('mobile review uses the recorded mobile exit instead of the desktop framing description',()=>{
  const exit=FLOWS['active-mobile'].scenes.find(s=>s.key==='hero-exit');
  assert.match(exit.review.references.find(r=>r.flow==='era-mobile').reason,/Mobil mimari/);
