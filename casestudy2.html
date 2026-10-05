@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="tr">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Recorded Motion — ERA & Likova</title>
+ <meta name="description" content="ERA ve Likova'nın gerçek masaüstü ve mobil ekran kayıtlarından zaman kodlu geçiş incelemeleri.">
+ <link rel="icon" href="./favicon.svg"><link rel="stylesheet" href="./casestudy2.css">
+ <script type="module" src="./casestudy2.js"></script>
+</head>
+<body>
+ <header class="studio-header">
+  <a class="brand" href="./casestudy2.html"><span class="brand-mark">a.</span><span>ANGORA<br><b>RECORDED MOTION</b></span></a>
+  <nav class="project-nav" aria-label="Referans proje"><button data-project="era" aria-pressed="true">01 <b>ERA Residence</b></button><button data-project="likova" aria-pressed="false">02 <b>Likova</b></button></nav>
+  <span class="header-note">SOURCE FOOTAGE / 05.10.2026</span><a class="source-link" id="live-reference" href="https://www.era-residence.com/" target="_blank" rel="noopener">Canlı referans ↗</a>
+ </header>
+ <aside class="catalog" id="catalog" aria-label="Kayıttaki sahneler">
+  <div class="catalog-heading"><span class="eyebrow">THE RECORDING INDEX</span><button id="close-catalog" aria-label="Sahne listesini kapat">×</button></div>
+  <div class="device-switch" role="group" aria-label="Kayıt görünümü"><button data-device="desktop" aria-pressed="true">Desktop</button><button data-device="mobile" aria-pressed="false">Mobil</button></div>
+  <label class="search"><span class="sr-only">Sahne ara</span><input id="scene-search" type="search" placeholder="Maske, birleşme, paralaks…"></label>
+  <div class="catalog-meta"><span id="scene-count"></span><span id="take-duration"></span></div>
+  <nav id="scene-list" class="scene-list" aria-label="Numaralı sahneler"></nav>
+  <div class="catalog-footer"><span class="record-dot"></span> Gerçek kayıt · 60 fps <a href="./casestudy.html">Önceki demolar ↗</a></div>
+ </aside>
+ <main id="workspace">
+  <section class="screen" aria-labelledby="scene-title">
+   <div class="scene-heading"><div><span class="eyebrow" id="scene-location"></span><h1><span id="scene-number"></span><span id="scene-title"></span></h1></div><div class="heading-actions"><button id="open-catalog" aria-controls="catalog" aria-expanded="false">Sahneler ☰</button><button id="previous-scene" aria-label="Önceki sahne">←</button><button id="next-scene" aria-label="Sonraki sahne">→</button></div></div>
+   <div class="stage" id="stage">
+    <div class="stage-caption"><span id="take-label"></span><span>ORIGINAL CAPTURE</span></div>
+    <div class="media-frame" id="media-frame"><video id="recording" preload="metadata" playsinline muted></video><svg id="annotations" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"></svg></div>
+    <div id="stage-status" class="stage-status" role="status">Kayıt hazırlanıyor…</div>
+    <button id="fullscreen" aria-label="Kaydı tam ekran aç">⤢</button>
+   </div>
+   <div class="transport"><button id="play" class="play" aria-label="Kaydı oynat">Oynat ▷</button><button id="frame-back" aria-label="Bir kare geri">−1f</button><button id="frame-forward" aria-label="Bir kare ileri">+1f</button><label class="scrubber"><span class="sr-only">Sahne zaman çizgisi</span><input id="scrub" type="range" min="0" max="1000" step="1" value="0"></label><output id="clip-time">00:00.00</output><label class="speed"><span class="sr-only">Oynatma hızı</span><select id="speed"><option value=".25">0.25×</option><option value=".5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div>
+   <div class="track-panel"><div class="track-heading"><span>ANALİZ KATMANLARI</span><label><input id="show-annotations" type="checkbox"> Görüntüde işaretle</label><label><input id="loop" type="checkbox" checked> Döngü</label><label><input id="continuous" type="checkbox"> Tüm akış</label></div><div id="layer-tracks" class="layer-tracks"></div></div>
+   <div class="screen-foot"><span id="source-time"></span><a href="#breakdown" id="details-link">Sahnenin breakdown’ı ↓</a></div>
+  </section>
+  <section class="breakdown" id="breakdown" aria-labelledby="breakdown-title">
+   <div class="detail-intro"><span class="eyebrow">A CLOSER READING</span><h2 id="breakdown-title">Hareketin içinden.</h2><p id="scene-summary"></p><div id="scene-tags" class="tags"></div></div>
+   <div class="contact-sheet" id="contact-sheet" aria-label="Sahnenin üç gerçek karesi"></div>
+   <div class="detail-grid"><article><span class="eyebrow">01 / ZAMAN VE SIRA</span><div id="phase-list"></div></article><article><span class="eyebrow">02 / KATMANLARIN İLİŞKİSİ</span><div id="layer-notes"></div></article><article><span class="eyebrow">03 / DESKTOP ↔ MOBİL</span><p id="device-note"></p><button id="counterpart">Diğer kayıttaki karşılığını aç ↗</button><span class="eyebrow lesson-title">ANGORA İÇİN TASARIM DERSİ</span><p id="scene-lesson"></p></article></div>
+   <div class="recording-notes"><div><span class="eyebrow">KAYIT VE KAPSAM</span><p id="coverage-note"></p><p id="missing-note"></p><p>Renkli katmanlar kaydın üzerine eklenen analiz işaretleridir. Görsel, maske, yazı ve arayüzün gözlenen ilişkisini açıklar; orijinal görüntüyü değiştirmez. Zamanlar kayıt içindeki duraklamaları da içerir.</p></div><div class="source-actions"><a id="recording-download" download>Bu görüntü akışını indir ↙</a><a id="provenance-link" target="_blank" rel="noopener">Kadraj ve kaynak bilgisi ↗</a><a id="export-notes" href="./assets/casestudy2/inventory.json" download="recorded-motion-2026-10-05.json">Zaman kodlu envanteri indir ↙</a></div></div>
+   <footer><span>ANGORA / MOTION STUDIES 02</span><p>Özgün tasarım ve görüntüler ERA Residence / The First The Last ve Likova / VIDE INFRA’ya aittir. Kullanıcının sağladığı 5 Ekim 2026 tarihli ekran kayıtları incelenmiştir.</p><a href="./web-gpt.html">Angora sunumu ↗</a></footer>
+  </section>
+ </main>
+</body>
+</html>

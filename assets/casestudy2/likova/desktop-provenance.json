@@ -1,0 +1,36 @@
+{
+  "id": "likova-desktop",
+  "site": "likova",
+  "device": "desktop",
+  "start": 113.5,
+  "end": 264.8,
+  "crop": [
+    0,
+    152,
+    2540,
+    1388
+  ],
+  "sourceFile": "2026-10-05 13-20-35.mp4",
+  "sourceResolution": [
+    2560,
+    1600
+  ],
+  "sourceFPS": 60,
+  "sourceOffset": 113.5,
+  "processed": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "width": 1920,
+        "height": 1050,
+        "r_frame_rate": "60/1"
+      }
+    ],
+    "format": {
+      "duration": "151.300000",
+      "size": "46733430"
+    }
+  },
+  "processing": "Viewport crop; desktop resized to 1920 px; H.264; no audio; original frame timing. Mobile is Chrome responsive emulation at 459 × 686 CSS px, not a physical phone recording."
+}

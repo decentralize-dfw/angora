@@ -1,0 +1,6034 @@
+{
+  "recordedOn": "2026-10-05",
+  "description": "Editorial cuts and observed layers from owner-supplied screen recordings. Timing includes user pauses; layers are analysis overlays, not isolated original DOM layers.",
+  "flows": {
+    "era-desktop": {
+      "id": "era-desktop",
+      "project": "era",
+      "device": "desktop",
+      "offset": 3,
+      "duration": 148,
+      "fps": 60,
+      "width": 1920,
+      "height": 1050,
+      "video": "./assets/casestudy2/era/desktop.mp4",
+      "source": "2026-10-05 13-16-27.mp4",
+      "viewport": "Desktop · 1920 × 1050",
+      "deviceNote": "Desktop’ta konsept ve konum yatay bir rayda ilerler; mobilde başlık, fotoğraf ve açıklama düşey sıraya dönüşür. Mimari iki-pencere birleşmesi desktop kaydında vardır; mobilde doğrudan mimari fotoğraf girişi görülür. Footer kadrajı iki ekranda farklıdır.",
+      "coverage": "Ana sayfanın açılışı, pinler, bütün ana scroll akışı, footer ve ters scroll; ardından apartments listesi, daire detayı ve lightbox kaydedilmiş. Browser çubukları ve OBS başlangıcı kadraj dışında bırakıldı.",
+      "gaps": "Gündüz/gece seçimi, Book a call formu ve accordion açılışı bu kayıtta gösterilmedi; bunlar için uydurma klip eklenmedi.",
+      "scenes": [
+        {
+          "key": "identity",
+          "sourceStart": 3,
+          "sourceEnd": 10.4,
+          "title": "Kimlik ve yükleme izi",
+          "family": "Açılış",
+          "summary": "Bordo zemin üzerinde marka, kıyı isimleri ve ince yükleme izi birlikte okunur. Sonraki görüntü henüz açılmaz.",
+          "layers": [
+            {
+              "type": "mask",
+              "note": "Bordo örtü bütün kadrajı kaplar.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                0,
+                100,
+                100
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Marka merkezde; kıyı isimleri iki yana dağıtılır.",
+              "range": [
+                0.1,
+                1
+              ],
+              "box": [
+                22,
+                30,
+                56,
+                40
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "İnce yükleme izi merkezin altındadır.",
+              "range": [
+                0.25,
+                1
+              ],
+              "box": [
+                48,
+                63,
+                4,
+                25
+              ]
+            }
+          ],
+          "lesson": "Açılışın ilk görevi kimlik ve bekleme ritmi kurmak; henüz kamera yolculuğu başlamamalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Bordo örtü bütün kadrajı kaplar."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Marka merkezde; kıyı isimleri iki yana dağıtılır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "İnce yükleme izi merkezin altındadır."
+            ]
+          ],
+          "id": 1,
+          "start": 0,
+          "end": 7.4,
+          "duration": 7.4
+        },
+        {
+          "key": "arch-intro",
+          "sourceStart": 10.4,
+          "sourceEnd": 13.4,
+          "title": "Kemer açılır, sahne genişler",
+          "family": "Maske",
+          "summary": "Mimari görüntü önce dar bir kemerin içinde görünür. Açıklık genişlerken bordo örtü gider ve hero bütün ekranı devralır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Aynı mimari kadraj açıklığın arkasında kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                0,
+                100,
+                100
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Kemerin yükselmesi ve genişlemesi birlikte çalışır.",
+              "range": [
+                0,
+                0.9
+              ],
+              "box": [
+                31,
+                8,
+                38,
+                92
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Hero kimliği örtünün ardından görünür.",
+              "range": [
+                0.4,
+                1
+              ],
+              "box": [
+                34,
+                0,
+                33,
+                50
+              ]
+            }
+          ],
+          "lesson": "Daralmayı veya büyümeyi resme tek başına uygulama; örtü, açıklık ve arka kadrajı aynı girişin parçaları olarak düşün.",
+          "phases": [
+            [
+              0,
+              "Dar açıklık",
+              "Binanın küçük bir bölümü kemerin içinden görünür."
+            ],
+            [
+              0.38,
+              "Genişleyen eşik",
+              "Kemer büyür; bordo yüzeyin kapladığı alan azalır."
+            ],
+            [
+              0.93,
+              "Tam ekran",
+              "Örtü gider, kaynak görüntü ve kimlik hero ölçeğine oturur."
+            ]
+          ],
+          "id": 2,
+          "start": 7.4,
+          "end": 10.4,
+          "duration": 3
+        },
+        {
+          "key": "cookie",
+          "sourceStart": 13.4,
+          "sourceEnd": 24.2,
+          "title": "Hero ve cookie kartı",
+          "family": "Arayüz",
+          "summary": "Hero açıkken sağ alt köşedeki cookie kartı ayrı bir ön katman olarak durur. Kayıtta kullanıcı kartı kapatır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Hero fotoğrafı kadrajı doldurur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Büyük serif marka ve script yer adı görselin üzerine yerleşir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                30,
+                0,
+                39,
+                50
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Cookie kartı sağ altta; kapanınca arka görüntü kesilmez.",
+              "range": [
+                0,
+                0.92
+              ],
+              "box": [
+                77,
+                55,
+                21,
+                42
+              ]
+            }
+          ],
+          "lesson": "Küçük yardımcı katmanlar ana görselin girişini yeniden başlatmamalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Hero fotoğrafı kadrajı doldurur."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Büyük serif marka ve script yer adı görselin üzerine yerleşir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Cookie kartı sağ altta; kapanınca arka görüntü kesilmez."
+            ]
+          ],
+          "id": 3,
+          "start": 10.4,
+          "end": 21.2,
+          "duration": 10.8
+        },
+        {
+          "key": "pins",
+          "sourceStart": 24.2,
+          "sourceEnd": 32.6,
+          "title": "Pin → imleçte bilgi kartı",
+          "family": "Etkileşim",
+          "summary": "Üç farklı mimari nokta dolaşılır. Küçük pin vurgusu ve beyaz bilgi kartı, aynı arka görüntü üzerinde değişir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Havuz ve bina aynı kadrajda kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "Pin halkaları ve imleç konumu etkileşim odağıdır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                30,
+                43,
+                60,
+                48
+              ]
+            },
+            {
+              "type": "text",
+              "note": "CRAFTED TO ENDURE, LIGHT & FLOW ve YOUR PRIVATE SANCTUARY kartları farklı noktalarda açılır.",
+              "range": [
+                0.08,
+                0.98
+              ],
+              "box": [
+                21,
+                38,
+                76,
+                62
+              ]
+            }
+          ],
+          "lesson": "Her kamera noktası için ayrı görsel bağlam ve doğru bilgi gerekir; bütün noktaları tek sabit karta bağlama.",
+          "phases": [
+            [
+              0,
+              "Birinci nokta",
+              "Mimari noktaya gelinir, bilgi kartı görünür."
+            ],
+            [
+              0.42,
+              "Kart yer değiştirir",
+              "İkinci noktanın başlığı ve konumu birlikte değişir."
+            ],
+            [
+              0.85,
+              "Yeni odağı okuma",
+              "Havuz yanındaki üçüncü nokta kendi açıklamasını getirir."
+            ]
+          ],
+          "id": 4,
+          "start": 21.2,
+          "end": 29.6,
+          "duration": 8.4
+        },
+        {
+          "key": "hero-dive",
+          "sourceStart": 32.6,
+          "sourceEnd": 36,
+          "title": "Havuza kamera yaklaşması",
+          "family": "Kamera",
+          "summary": "Kaydırma hero başlığını kadraj dışına taşırken görüntü havuz yönünde yaklaşır. Alt taraftaki masa ve su daha belirgin hale gelir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Yaklaşmanın hedefi görüntünün alt merkezidir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                10,
+                35,
+                85,
+                65
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Hero yazısı görüntüden farklı hızla yukarı çıkar.",
+              "range": [
+                0,
+                0.7
+              ],
+              "box": [
+                25,
+                0,
+                50,
+                30
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Sabit monogram ve sağ navigasyon tema içinde kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Kamera hareketi bir hedefe yaklaşmalı. Görselin mimari odağını sabit tutan ölçek merkezi seç.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Yaklaşmanın hedefi görüntünün alt merkezidir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Hero yazısı görüntüden farklı hızla yukarı çıkar."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Sabit monogram ve sağ navigasyon tema içinde kalır."
+            ]
+          ],
+          "id": 5,
+          "start": 29.6,
+          "end": 33,
+          "duration": 3.4
+        },
+        {
+          "key": "arch-cover",
+          "sourceStart": 36,
+          "sourceEnd": 38.5,
+          "title": "Büyük kavis sahneyi devralır",
+          "family": "Maske",
+          "summary": "Buz mavisi bölümün geniş kavisli tepesi havuz görüntüsünün üstüne yükselir. Kavis üzerindeki yazı ve yeni bölüm aynı hareketten doğar.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Yakınlaşmış hero görüntüsü örtünün arkasında kalır.",
+              "range": [
+                0,
+                0.6
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Buz mavisi kavis aşağıdan büyüyerek kadrajı kaplar.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                18,
+                100,
+                82
+              ]
+            },
+            {
+              "type": "text",
+              "note": "THREE REASONS TO CHOOSE ERA yazısı kavis boyunca taşınır.",
+              "range": [
+                0.08,
+                0.8
+              ],
+              "box": [
+                15,
+                12,
+                70,
+                34
+              ]
+            }
+          ],
+          "lesson": "Bir sonraki bölümün biçimini önceki görüntünün üstünde görünür kıl; görüntüyü bir anda başka renge kesme.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Yakınlaşmış hero görüntüsü örtünün arkasında kalır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Buz mavisi kavis aşağıdan büyüyerek kadrajı kaplar."
+            ],
+            [
+              0.94,
+              "Varış",
+              "THREE REASONS TO CHOOSE ERA yazısı kavis boyunca taşınır."
+            ]
+          ],
+          "id": 6,
+          "start": 33,
+          "end": 35.5,
+          "duration": 2.5
+        },
+        {
+          "key": "reasons",
+          "sourceStart": 38.5,
+          "sourceEnd": 42.2,
+          "title": "Üç neden: başlık, görsel, sayaç",
+          "family": "Tipografi",
+          "summary": "REAL-LIFE LOCATION başlığı, küçük orta görsel ve açıklama buz mavisi sahnede açılır. Desktop kaydında bu slaydın girişini görüyoruz.",
+          "layers": [
+            {
+              "type": "text",
+              "note": "Başlık ve paragraf aynı anda tam görünür olmaz.",
+              "range": [
+                0,
+                0.75
+              ],
+              "box": [
+                15,
+                0,
+                70,
+                92
+              ]
+            },
+            {
+              "type": "image",
+              "note": "Küçük görsel merkezde ayrı bir pencere olarak açılır.",
+              "range": [
+                0.12,
+                1
+              ],
+              "box": [
+                40,
+                32,
+                20,
+                38
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Görselin altında sayaç ve kontrol çizgisi bulunur.",
+              "range": [
+                0.3,
+                1
+              ],
+              "box": [
+                37,
+                66,
+                26,
+                9
+              ]
+            }
+          ],
+          "lesson": "Görsel küçükse çevresindeki boşluk, yazının ölçeği ve sayaç bir bütün olmalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Başlık ve paragraf aynı anda tam görünür olmaz."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Küçük görsel merkezde ayrı bir pencere olarak açılır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Görselin altında sayaç ve kontrol çizgisi bulunur."
+            ]
+          ],
+          "id": 7,
+          "start": 35.5,
+          "end": 39.2,
+          "duration": 3.7
+        },
+        {
+          "key": "alpha-quote",
+          "sourceStart": 42.2,
+          "sourceEnd": 45.8,
+          "title": "Mimari siluet → konsept",
+          "family": "Paralaks",
+          "summary": "Bina ve havuz görüntüsünün silueti buz mavisi zeminden taşar. Görüntü yukarı giderken kırık beyaz konsept zemini ve çiçekler görünür.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Mimari görünüm zeminle birlikte hareket etmeyen ayrı bir görsel katmandır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                0,
+                100,
+                100
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Buz mavisi ve kırık beyaz sahneler üst üste gelir.",
+              "range": [
+                0.25,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Mimari alıntı binanın üzerine yerleşir.",
+              "range": [
+                0,
+                0.65
+              ],
+              "box": [
+                57,
+                0,
+                37,
+                34
+              ]
+            }
+          ],
+          "lesson": "Keskin dikdörtgen sınır yerine siluet kullanılması, ancak doğru alpha materyalle anlamlıdır.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Mimari görünüm zeminle birlikte hareket etmeyen ayrı bir görsel katmandır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Buz mavisi ve kırık beyaz sahneler üst üste gelir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Mimari alıntı binanın üzerine yerleşir."
+            ]
+          ],
+          "id": 8,
+          "start": 39.2,
+          "end": 42.8,
+          "duration": 3.6
+        },
+        {
+          "key": "concept",
+          "sourceStart": 45.8,
+          "sourceEnd": 49.2,
+          "title": "Konsept ve ön plan çiçekleri",
+          "family": "Kompozisyon",
+          "summary": "Konsept metni ortada okunurken üst sol ve alt sağ çiçekler görüntüye derinlik verir. Sonunda yatay konum sahnesi sağdan görünmeye başlar.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Çiçekler iki ayrı ön plan konumunda hareket eder.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                0,
+                100,
+                100
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Ana konsept cümlesi merkezde; küçük açıklama altında.",
+              "range": [
+                0,
+                0.8
+              ],
+              "box": [
+                20,
+                25,
+                60,
+                57
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Bir sonraki sahne sağ kenardan kadraja girer.",
+              "range": [
+                0.7,
+                1
+              ],
+              "box": [
+                80,
+                0,
+                20,
+                100
+              ]
+            }
+          ],
+          "lesson": "Dekor, metnin alanını işgal etmeden bölüm değişiminin yönünü hissettirmeli.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Çiçekler iki ayrı ön plan konumunda hareket eder."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Ana konsept cümlesi merkezde; küçük açıklama altında."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Bir sonraki sahne sağ kenardan kadraja girer."
+            ]
+          ],
+          "id": 9,
+          "start": 42.8,
+          "end": 46.2,
+          "duration": 3.4
+        },
+        {
+          "key": "horizontal",
+          "sourceStart": 49.2,
+          "sourceEnd": 55.6,
+          "title": "Düşey scroll, yatay konum akışı",
+          "family": "Yatay",
+          "summary": "NEW GOLDEN MILE başlığı ve teras görseli sola taşınır. Aynı ray üzerinde sahil başlığı ve rota şeması sağdan gelir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Teras fotoğrafı rayın parçası olarak sola gider.",
+              "range": [
+                0,
+                0.65
+              ],
+              "box": [
+                23,
+                0,
+                39,
+                100
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Üç satırlı başlık görsele göre farklı yatay konumlarda okunur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                4,
+                45,
+                87
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Kırık beyaz zemin süreklidir; sert bölüm kesmesi yoktur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Yatay sahneler için gerçek genişliği ve sonraki hedefi planla; birkaç bağımsız kartı yana itmek aynı kurgu değildir.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Teras fotoğrafı rayın parçası olarak sola gider."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Üç satırlı başlık görsele göre farklı yatay konumlarda okunur."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Kırık beyaz zemin süreklidir; sert bölüm kesmesi yoktur."
+            ]
+          ],
+          "id": 10,
+          "start": 46.2,
+          "end": 52.6,
+          "duration": 6.4
+        },
+        {
+          "key": "route",
+          "sourceStart": 55.6,
+          "sourceEnd": 58.2,
+          "title": "Rota çizgisi ve bulut eşiği",
+          "family": "Katman",
+          "summary": "Sahil cümlesi ve kıvrımlı rota çizgisi yatay rayın sonunda yerleşir. Alttaki bulut katmanı yeni geniş konum görüntüsünü haber verir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Bulutlar alttan görünerek aerial sahneye bağlanır.",
+              "range": [
+                0.3,
+                1
+              ],
+              "box": [
+                0,
+                65,
+                100,
+                35
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Rota üzerindeki yer adları çizgiye bağlı kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                12,
+                30,
+                77,
+                29
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Rota, boş kırık beyaz alan içinde bir çizgiyle okunur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Rota grafiği kendi açıklamasını taşımalı; dekoratif bir eğri kadar bırakılmamalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Bulutlar alttan görünerek aerial sahneye bağlanır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Rota üzerindeki yer adları çizgiye bağlı kalır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Rota, boş kırık beyaz alan içinde bir çizgiyle okunur."
+            ]
+          ],
+          "id": 11,
+          "start": 52.6,
+          "end": 55.2,
+          "duration": 2.6
+        },
+        {
+          "key": "aerial",
+          "sourceStart": 58.2,
+          "sourceEnd": 62.2,
+          "title": "Bulutlardan geniş aerial’a",
+          "family": "Paralaks",
+          "summary": "Geniş çevre görüntüsü ve dağ silueti bulutların altında açılır. Kamera kadrajı geniş konumu okuturken konut tipleri alttan yaklaşır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Aerial görüntü ana arka plandır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                0,
+                100,
+                100
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Bulutlar aerial üstünde yarı saydam bir geçiş oluşturur.",
+              "range": [
+                0,
+                0.65
+              ],
+              "box": [
+                0,
+                0,
+                100,
+                40
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Yeni bölüm yazısı aerial’ın altından görünür.",
+              "range": [
+                0.75,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Sahne içindeki atmosfer ile esas mekân görüntüsünü farklı hareket katmanlarında tut.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Aerial görüntü ana arka plandır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Bulutlar aerial üstünde yarı saydam bir geçiş oluşturur."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Yeni bölüm yazısı aerial’ın altından görünür."
+            ]
+          ],
+          "id": 12,
+          "start": 55.2,
+          "end": 59.2,
+          "duration": 4
+        },
+        {
+          "key": "residence-type",
+          "sourceStart": 62.2,
+          "sourceEnd": 68.4,
+          "title": "Konut tipi: görsel ve ölçü",
+          "family": "Tipografi",
+          "summary": "Ground floor + basement görseli, başlık ve alan bilgisi birlikte yerleşir. Ardından genel konut açıklaması aşağıda belirir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Küçük dikey konut görseli merkezde kalır.",
+              "range": [
+                0,
+                0.58
+              ],
+              "box": [
+                42,
+                8,
+                18,
+                54
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Konut başlığı ve ölçüler görseli açıklayan aynı gruptadır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                28,
+                8,
+                50,
+                90
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Slayt okları, CTA ve sayaç küçük alt sıradadır.",
+              "range": [
+                0.05,
+                0.55
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Görseli kat adı ve ölçüyle eşleştir; hiçbirini bağımsız animasyon süsü yapma.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Küçük dikey konut görseli merkezde kalır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Konut başlığı ve ölçüler görseli açıklayan aynı gruptadır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Slayt okları, CTA ve sayaç küçük alt sıradadır."
+            ]
+          ],
+          "id": 13,
+          "start": 59.2,
+          "end": 65.4,
+          "duration": 6.2
+        },
+        {
+          "key": "amenity-tabs",
+          "sourceStart": 68.4,
+          "sourceEnd": 82.2,
+          "title": "Amenity: yönlü görsel değişimi",
+          "family": "Etkileşim",
+          "summary": "Gated community, swimming pool, parking ve spa görüntüleri sırayla değişir. Seçili liste satırı ve alttaki açıklama görüntüyle birlikte güncellenir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Görseller eğimli bir kenardan birbiri üzerine geçer.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                0,
+                100,
+                100
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Geçiş sınırı yeni görseli açarken eskisini örter.",
+              "range": [
+                0.12,
+                0.95
+              ],
+              "box": [
+                0,
+                0,
+                100,
+                100
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Her seçimin kendi başlığı ve açıklaması vardır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                62,
+                75,
+                36
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Sağdaki liste yeni seçimi işaretler.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                69,
+                17,
+                25,
+                29
+              ]
+            }
+          ],
+          "lesson": "Görsel, seçili satır ve açıklamayı aynı durumdan yönet; önceki katın yazısını yeni görsel üzerinde bırakma.",
+          "phases": [
+            [
+              0,
+              "Gated community",
+              "Bütün sahne ve sağdaki seçili satır okunur."
+            ],
+            [
+              0.34,
+              "Pool → parking",
+              "Görsel maskesi ve yeni açıklama aynı yönlü geçişte değişir."
+            ],
+            [
+              0.88,
+              "Spa",
+              "Sıcak iç mekân görseli son seçim olarak yerleşir."
+            ]
+          ],
+          "id": 14,
+          "start": 65.4,
+          "end": 79.2,
+          "duration": 13.8
+        },
+        {
+          "key": "interior-arch",
+          "sourceStart": 82.2,
+          "sourceEnd": 84.7,
+          "title": "İkinci kavis: iç mekâna giriş",
+          "family": "Maske",
+          "summary": "Kırık beyaz geniş kavis spa fotoğrafının üstüne yükselir. THE SPACE TO ve script Live in yazısı kavisli zemine yerleşir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Spa fotoğrafı önceki sahne olarak arkada kalır.",
+              "range": [
+                0,
+                0.7
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Kırık beyaz kavis bütün kadrajı devralır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                15,
+                100,
+                85
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Serif ve script başlık farklı ritimde açılır.",
+              "range": [
+                0.15,
+                1
+              ],
+              "box": [
+                30,
+                24,
+                40,
+                66
+              ]
+            }
+          ],
+          "lesson": "Tekrarlanan maske, yeni sahnenin tipografisini ve rengini taşıdığı için yeni bir anlatı eşiği olur.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Spa fotoğrafı önceki sahne olarak arkada kalır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Kırık beyaz kavis bütün kadrajı devralır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Serif ve script başlık farklı ritimde açılır."
+            ]
+          ],
+          "id": 15,
+          "start": 79.2,
+          "end": 81.7,
+          "duration": 2.5
+        },
+        {
+          "key": "interior-columns",
+          "sourceStart": 84.7,
+          "sourceEnd": 88.5,
+          "title": "Zıt kolonlar ve ön plan bitkisi",
+          "family": "Paralaks",
+          "summary": "Sol tarafta bordo kart ve çiçekli görsel, sağ tarafta teras ve açıklama farklı düşey hizalarda ilerler.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Sol ve sağ fotoğraflar zıt hizada taşınır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                0,
+                100,
+                100
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Bordo kart sadece sol kompozisyonun zemini olur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                28,
+                40,
+                72
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Sağ açıklama kendi fotoğrafının altında kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                45,
+                45,
+                52,
+                39
+              ]
+            }
+          ],
+          "lesson": "Fotoğraf ve caption aynı blokta kalsın; iki kolonun hız farkı okumayı bölmemeli.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Sol ve sağ fotoğraflar zıt hizada taşınır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Bordo kart sadece sol kompozisyonun zemini olur."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Sağ açıklama kendi fotoğrafının altında kalır."
+            ]
+          ],
+          "id": 16,
+          "start": 81.7,
+          "end": 85.5,
+          "duration": 3.8
+        },
+        {
+          "key": "interior-gallery",
+          "sourceStart": 88.5,
+          "sourceEnd": 90.4,
+          "title": "İç galeri → mimari eşik",
+          "family": "Galeri",
+          "summary": "Yatak odası görseli ve küçük slayt kontrolleri yukarı ilerler. Altta iki farklı yükseklikteki mimari pencere görünmeye başlar.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Galeri fotoğrafı üstte; yeni mimari pencereler altta.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "Galeri okları ve sayaç resim altında kalır.",
+              "range": [
+                0,
+                0.65
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Yeni sahnenin iki pencere açıklığı boş zeminde belirir.",
+              "range": [
+                0.3,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Bir sonraki hareketin ilk durumunu önceki sahnenin çıkışında göster.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Galeri fotoğrafı üstte; yeni mimari pencereler altta."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Galeri okları ve sayaç resim altında kalır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Yeni sahnenin iki pencere açıklığı boş zeminde belirir."
+            ]
+          ],
+          "id": 17,
+          "start": 85.5,
+          "end": 87.4,
+          "duration": 1.9
+        },
+        {
+          "key": "architecture-merge",
+          "sourceStart": 90.4,
+          "sourceEnd": 94.2,
+          "title": "İki pencere hizalanır ve birleşir",
+          "family": "Birleşme",
+          "summary": "Başta farklı seviyelerde olan iki mimari açıklık ortak banda gelir, orta sınır erir ve birleşik kadraj büyümeye başlar.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "İki açıklıkta aynı mimari sahnenin devamı görülür.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                18,
+                13,
+                64,
+                75
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Hizalanma → orta boşluğun kapanması → genişleme ayrı aşamalardır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                18,
+                13,
+                64,
+                75
+              ]
+            },
+            {
+              "type": "image",
+              "note": "Ön plandaki çiçekler birleşmenin iki yanında kalır.",
+              "range": [
+                0,
+                0.9
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Birleşme üç adım ister: hizala, sınırı kaldır, yeni sahneye yaklaş. İki fotoğrafı aynı anda büyütmek yeterli değildir.",
+          "phases": [
+            [
+              0,
+              "Farklı seviyeler",
+              "Sol açıklık daha aşağıda, sağ açıklık daha yukarıdadır."
+            ],
+            [
+              0.45,
+              "Ortak bant",
+              "Üst ve alt kenarlar aynı görüş çizgisine gelir."
+            ],
+            [
+              0.82,
+              "Bir açıklık",
+              "Orta sınır kaybolur; bütün kompozisyon büyümeye başlar."
+            ]
+          ],
+          "id": 18,
+          "start": 87.4,
+          "end": 91.2,
+          "duration": 3.8
+        },
+        {
+          "key": "architecture-dive",
+          "sourceStart": 94.2,
+          "sourceEnd": 97.7,
+          "title": "Birleşik kadrajın içine dalış",
+          "family": "Kamera",
+          "summary": "Mimari pencere ekranı devralır; ARCHITECTURE yazısı üstten gelir. Kamera düşey hareketini sürdürürken alıntı ve CTA açılır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Mimari fotoğraf tam ekrana büyür ve aşağıdaki cepheyi gösterir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Ön açıklığın kenarları kadraj dışına çıkar.",
+              "range": [
+                0,
+                0.5
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Büyük başlık ardından daha küçük mimari açıklama görünür.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                7,
+                0,
+                86,
+                85
+              ]
+            }
+          ],
+          "lesson": "Giriş hareketi tamamlandıktan sonra sahne içindeki kamera akışı devam edebilir; iki hareketi farklı eşikler olarak yönet.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Mimari fotoğraf tam ekrana büyür ve aşağıdaki cepheyi gösterir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Ön açıklığın kenarları kadraj dışına çıkar."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Büyük başlık ardından daha küçük mimari açıklama görünür."
+            ]
+          ],
+          "id": 19,
+          "start": 91.2,
+          "end": 94.7,
+          "duration": 3.5
+        },
+        {
+          "key": "architecture-exit",
+          "sourceStart": 97.7,
+          "sourceEnd": 104.8,
+          "title": "Fotoğraf geri çekilir, bilgi açılır",
+          "family": "Kadraj",
+          "summary": "Mimari fotoğrafın altında beyaz bilgi sahnesi görünür. Developer, sales, license ve yıl başlıkları bir sonraki düzleme yerleşir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Mimari görsel üstte kalan bir bant halinde uzaklaşır.",
+              "range": [
+                0,
+                0.8
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Kırık beyaz zemin alttan sahneyi devralır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Küçük giriş etiketi ardından bilgi başlıkları açılır.",
+              "range": [
+                0.2,
+                1
+              ],
+              "box": [
+                24,
+                43,
+                54,
+                53
+              ]
+            }
+          ],
+          "lesson": "Küçülen görüntünün açtığı alan yeni bilgiyle dolmalı. Boş bir kutu küçülmesi olarak bırakma.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Mimari görsel üstte kalan bir bant halinde uzaklaşır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Kırık beyaz zemin alttan sahneyi devralır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Küçük giriş etiketi ardından bilgi başlıkları açılır."
+            ]
+          ],
+          "id": 20,
+          "start": 94.7,
+          "end": 101.8,
+          "duration": 7.1
+        },
+        {
+          "key": "closing-cta",
+          "sourceStart": 104.8,
+          "sourceEnd": 108.2,
+          "title": "Teras ve büyük kapanış başlığı",
+          "family": "Paralaks",
+          "summary": "Geniş teras fotoğrafı alttan gelir; PERFECT SEA VIEWS ve script vurgu sahnenin üzerine açılır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Teras resmi yeni tam ekran sahnedir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Büyük başlık önce, küçük CTA daha sonra okunur.",
+              "range": [
+                0.18,
+                1
+              ],
+              "box": [
+                17,
+                2,
+                65,
+                64
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Dairesel apartman CTA’sı görüntü üstündedir.",
+              "range": [
+                0.55,
+                1
+              ],
+              "box": [
+                40,
+                52,
+                22,
+                37
+              ]
+            }
+          ],
+          "lesson": "Son bölümde fotoğrafın konusu ile satın alma/viewing çağrısı birbiriyle uyumlu olmalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Teras resmi yeni tam ekran sahnedir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Büyük başlık önce, küçük CTA daha sonra okunur."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Dairesel apartman CTA’sı görüntü üstündedir."
+            ]
+          ],
+          "id": 21,
+          "start": 101.8,
+          "end": 105.2,
+          "duration": 3.4
+        },
+        {
+          "key": "footer",
+          "sourceStart": 108.2,
+          "sourceEnd": 112.8,
+          "title": "Footer: daralan görüntü, büyüyen içerik",
+          "family": "Maske",
+          "summary": "Teras görüntüsünün görünür alanı daralırken bordo footer ve telefon bilgisi belirir. Görüntü tek başına boş bir kutu haline gelmez.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Teras resmi orta üstte kalan pencereye dönüşür.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                24,
+                0,
+                52,
+                51
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Bordo footer, daralan resmin etrafında görünür olur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Monogram, telefon ve alt bilgiler yeni zeminde açılır.",
+              "range": [
+                0.2,
+                1
+              ],
+              "box": [
+                23,
+                44,
+                54,
+                54
+              ]
+            }
+          ],
+          "lesson": "Footer önce kendi hiyerarşisiyle kurulmalı; resim onun içindeki bilinçli boşluğa yerleşmeli.",
+          "phases": [
+            [
+              0,
+              "Tam teras",
+              "Önceki fotoğraf kadrajın çoğunu kaplar."
+            ],
+            [
+              0.42,
+              "Çerçeve açılır",
+              "Görünür alan daralırken bordo zemin büyür."
+            ],
+            [
+              0.88,
+              "Footer okunur",
+              "Telefon ve iletişim bilgileri yeni sahnenin ana içeriğine dönüşür."
+            ]
+          ],
+          "id": 22,
+          "start": 105.2,
+          "end": 109.8,
+          "duration": 4.6
+        },
+        {
+          "key": "footer-reverse",
+          "sourceStart": 112.8,
+          "sourceEnd": 116.1,
+          "title": "Aynı geçişin geri okunması",
+          "family": "Ters akış",
+          "summary": "Kullanıcı yukarı kaydırır. Footer içeriği geri çıkar ve teras görüntüsü yeniden kadrajı doldurur.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Aynı resim tekrar büyür.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Bordo alan daralarak geriye çekilir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Footer bilgisi çıkar, büyük CTA başlığı geri gelir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Ters scroll yeni bir efekt değildir; aynı düzenin doğru geri oynatılmasıdır.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Aynı resim tekrar büyür."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Bordo alan daralarak geriye çekilir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Footer bilgisi çıkar, büyük CTA başlığı geri gelir."
+            ]
+          ],
+          "id": 23,
+          "start": 109.8,
+          "end": 113.1,
+          "duration": 3.3
+        },
+        {
+          "key": "page-change",
+          "sourceStart": 116.1,
+          "sourceEnd": 120.5,
+          "title": "Ana sayfa → apartments",
+          "family": "Sayfa geçişi",
+          "summary": "CTA seçildikten sonra mevcut teras sahnesi gider; kırık beyaz apartman listesi, büyük başlık ve plan kartları açılır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Eski teras görünümü yeni sayfaya taşınmaz.",
+              "range": [
+                0,
+                0.3
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Sayfa örtüsü ve beyaz boşluk geçişe ara durum verir.",
+              "range": [
+                0.18,
+                0.65
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "APARTMENTS, 25 ve plan kartları yeni hiyerarşiyi kurar.",
+              "range": [
+                0.4,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Başka sayfaya geçerken eski sahne durumunu temizle ve yeni sayfanın ilk kadrajını tamamıyla kur.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Eski teras görünümü yeni sayfaya taşınmaz."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Sayfa örtüsü ve beyaz boşluk geçişe ara durum verir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "APARTMENTS, 25 ve plan kartları yeni hiyerarşiyi kurar."
+            ]
+          ],
+          "id": 24,
+          "start": 113.1,
+          "end": 117.5,
+          "duration": 4.4
+        },
+        {
+          "key": "plan-detail",
+          "sourceStart": 120.5,
+          "sourceEnd": 124.1,
+          "title": "Plan kartı → daire detayı",
+          "family": "Plan",
+          "summary": "Liste planı seçilir; NO.011 detayındaki büyük plan ve yanındaki oda/alan bilgisi yeni bir düzen kurar.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Plan çizimi hem kartta hem detay kadrajında okunur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                15,
+                15,
+                55,
+                72
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Daire kimliği ve ölçü bilgisi sağdaki sabit sütundadır.",
+              "range": [
+                0.25,
+                1
+              ],
+              "box": [
+                67,
+                13,
+                28,
+                76
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Listeye dön ve inquiry kontrolleri planın altında yer alır.",
+              "range": [
+                0.45,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Plan görseli gerçek bilgi merkezidir; oda adları, alan ve seçimin sonucu aynı yerde anlaşılmalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Plan çizimi hem kartta hem detay kadrajında okunur."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Daire kimliği ve ölçü bilgisi sağdaki sabit sütundadır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Listeye dön ve inquiry kontrolleri planın altında yer alır."
+            ]
+          ],
+          "id": 25,
+          "start": 117.5,
+          "end": 121.1,
+          "duration": 3.6
+        },
+        {
+          "key": "detail-gallery",
+          "sourceStart": 124.1,
+          "sourceEnd": 130.4,
+          "title": "Fotoğraf sütunu ve sabit bilgiler",
+          "family": "Galeri",
+          "summary": "Banyo ve yaşam alanı fotoğrafları sol sütunda akarken NO.011 ve metrekare bilgisi sağda görünür kalır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Birbirini izleyen fotoğraflar sol geniş sütunda ilerler.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                6,
+                0,
+                66,
+                100
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Oda ve alan bilgisi sağ sütunda sabit bağlam sağlar.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                72,
+                0,
+                28,
+                96
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Büyütme noktaları fotoğrafın üstünde yer alır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Fotoğraf değişirken hangi mülkü veya katı gördüğümüz kaybolmamalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Birbirini izleyen fotoğraflar sol geniş sütunda ilerler."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Oda ve alan bilgisi sağ sütunda sabit bağlam sağlar."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Büyütme noktaları fotoğrafın üstünde yer alır."
+            ]
+          ],
+          "id": 26,
+          "start": 121.1,
+          "end": 127.4,
+          "duration": 6.3
+        },
+        {
+          "key": "lightbox",
+          "sourceStart": 130.4,
+          "sourceEnd": 135.3,
+          "title": "Lightbox açılır, yana geçer, kapanır",
+          "family": "Etkileşim",
+          "summary": "Bir fotoğraf büyütülür. Kırık beyaz tam ekran katmanda görseller sağa/sola değişir, kapanınca detay sütununa geri dönülür.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Büyütülen fotoğraf ayrı tam ekran okumaya geçer.",
+              "range": [
+                0.12,
+                0.9
+              ],
+              "box": [
+                27,
+                8,
+                46,
+                86
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Açık renk overlay detay sayfasını örter.",
+              "range": [
+                0,
+                0.92
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "Kapatma ve ileri/geri düğmeleri büyük fotoğraftan ayrıdır.",
+              "range": [
+                0.15,
+                0.95
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Büyütme ayrı bir mod olmalı; kapanınca önceki scroll ve seçili fotoğraf bağlamına dön.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Büyütülen fotoğraf ayrı tam ekran okumaya geçer."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Açık renk overlay detay sayfasını örter."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Kapatma ve ileri/geri düğmeleri büyük fotoğraftan ayrıdır."
+            ]
+          ],
+          "id": 27,
+          "start": 127.4,
+          "end": 132.3,
+          "duration": 4.9
+        },
+        {
+          "key": "similar",
+          "sourceStart": 135.3,
+          "sourceEnd": 143.8,
+          "title": "Benzer seçenekler ve tekrar kavis",
+          "family": "Kurgu",
+          "summary": "Detay galerisi biter, geniş hero benzeri görünüm gelir; ardından SIMILAR OPTIONS kavisinin altında yeni plan kartları açılır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Konut fotoğrafı kartlara geçiş için ara sahne olur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Büyük beyaz kavis plan listesini taşır.",
+              "range": [
+                0.22,
+                0.78
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "SIMILAR OPTIONS ardından planların açıklamaları görünür.",
+              "range": [
+                0.25,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Tekrarlanan geometri, ana sayfadan detay sayfasına aynı anlatı dilini taşıyabilir.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Konut fotoğrafı kartlara geçiş için ara sahne olur."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Büyük beyaz kavis plan listesini taşır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "SIMILAR OPTIONS ardından planların açıklamaları görünür."
+            ]
+          ],
+          "id": 28,
+          "start": 132.3,
+          "end": 140.8,
+          "duration": 8.5
+        },
+        {
+          "key": "return-list",
+          "sourceStart": 143.8,
+          "sourceEnd": 151,
+          "title": "Listeye dönüş ve yeniden giriş",
+          "family": "Sayfa geçişi",
+          "summary": "Teras sahnesinden apartments listesine dönülür. Beyaz ara durumun ardından başlık ve plan kartları yeniden açılır.",
+          "layers": [
+            {
+              "type": "mask",
+              "note": "Kırık beyaz ara yüzey sayfayı değiştirir.",
+              "range": [
+                0,
+                0.55
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "APARTMENTS başlığı ve 25 sayısı tekrar yerleşir.",
+              "range": [
+                0.3,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "image",
+              "note": "Plan kartları yeni sayfanın başlangıç durumunu tamamlar.",
+              "range": [
+                0.5,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Sayfaya yeniden giriş, kaldığı yerde yarım çalışan eski bir timeline ile başlamamalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Kırık beyaz ara yüzey sayfayı değiştirir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "APARTMENTS başlığı ve 25 sayısı tekrar yerleşir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Plan kartları yeni sayfanın başlangıç durumunu tamamlar."
+            ]
+          ],
+          "id": 29,
+          "start": 140.8,
+          "end": 148,
+          "duration": 7.2
+        }
+      ]
+    },
+    "era-mobile": {
+      "id": "era-mobile",
+      "project": "era",
+      "device": "mobile",
+      "offset": 160,
+      "duration": 78,
+      "fps": 60,
+      "width": 426,
+      "height": 636,
+      "video": "./assets/casestudy2/era/mobile.mp4",
+      "source": "2026-10-05 13-16-27.mp4",
+      "viewport": "Mobil emülasyon · 459 × 686",
+      "deviceNote": "Desktop’ta konsept ve konum yatay bir rayda ilerler; mobilde başlık, fotoğraf ve açıklama düşey sıraya dönüşür. Mimari iki-pencere birleşmesi desktop kaydında vardır; mobilde doğrudan mimari fotoğraf girişi görülür. Footer kadrajı iki ekranda farklıdır.",
+      "coverage": "Ana sayfa hero’dan footer’a, neden ve amenity slaytları, iç galeri ve ters scroll kaydedilmiş. Chrome responsive mode 459 × 686; gerçek telefon cihaz kaydı değildir.",
+      "gaps": "Bu bölüm hero açıkken başlar; mobil preloader, menü açılışı, pin sheet ve sayfalar arası gezinme gösterilmemiş.",
+      "scenes": [
+        {
+          "key": "hero-dive",
+          "sourceStart": 160,
+          "sourceEnd": 164,
+          "title": "Mobil hero ve yaklaşma",
+          "family": "Kamera",
+          "summary": "Dikey kadrajda büyük kimlik, havuz ve mobil CTA birlikte görünür. Kayıt doğrudan açık hero durumuyla başlar; mobil yükleme animasyonu bu bölümde yoktur.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Mimari fotoğraf dikey ekrana göre yeniden kadrajlanmıştır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Marka ve script yer adı dikey hiyerarşide üst üste gelir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                11,
+                22,
+                80,
+                50
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Mobil CTA havuz üstünde; Menü sağ üsttedir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Mobil versiyon masaüstünü küçültmek değildir; metin ve mimari odağı dikey kadraj için yeniden yerleştir.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Mimari fotoğraf dikey ekrana göre yeniden kadrajlanmıştır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Marka ve script yer adı dikey hiyerarşide üst üste gelir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Mobil CTA havuz üstünde; Menü sağ üsttedir."
+            ]
+          ],
+          "id": 1,
+          "start": 0,
+          "end": 4,
+          "duration": 4
+        },
+        {
+          "key": "arch-cover",
+          "sourceStart": 164,
+          "sourceEnd": 167,
+          "title": "Mobil kavis ekranı kaplar",
+          "family": "Maske",
+          "summary": "Buz mavisi kavis alttan yükselip hero’yu örter. Kavis yazısı dar ekranın genişliğine oturur, sonraki başlık açılır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Hero aynı kadrajda arkada kalır.",
+              "range": [
+                0,
+                0.6
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Kavis dar ekranda bütün genişliğe yayılır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Kavis yazısı çıkar; REAL-LIFE LOCATION başlığı gelir.",
+              "range": [
+                0.1,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Maske oranını ekran genişliğiyle birlikte çöz; başlık alanını bırakacak tepe yüksekliği seç.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Hero aynı kadrajda arkada kalır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Kavis dar ekranda bütün genişliğe yayılır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Kavis yazısı çıkar; REAL-LIFE LOCATION başlığı gelir."
+            ]
+          ],
+          "id": 2,
+          "start": 4,
+          "end": 7,
+          "duration": 3
+        },
+        {
+          "key": "reasons",
+          "sourceStart": 167,
+          "sourceEnd": 170,
+          "title": "Üç neden: mobil yerleşim",
+          "family": "Tipografi",
+          "summary": "Başlık, büyükçe yatay görsel ve paragraf dikey sırada okunur. Mimari siluet sayfanın altında görünür kalır.",
+          "layers": [
+            {
+              "type": "text",
+              "note": "Başlık fotoğrafın üzerinde, açıklama altında yerleşir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                5,
+                0,
+                90,
+                79
+              ]
+            },
+            {
+              "type": "image",
+              "note": "Neden görseli mobil genişliğini kullanır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                5,
+                26,
+                90,
+                32
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Slayt kontrolü fotoğrafın altında kısa bir satırdır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Mobilde küçük desktop görselini küçültmeye devam etme; açıklamanın okunmasına göre fotoğrafı büyüt.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Başlık fotoğrafın üzerinde, açıklama altında yerleşir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Neden görseli mobil genişliğini kullanır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Slayt kontrolü fotoğrafın altında kısa bir satırdır."
+            ]
+          ],
+          "id": 3,
+          "start": 7,
+          "end": 10,
+          "duration": 3
+        },
+        {
+          "key": "reasons-carousel",
+          "sourceStart": 170,
+          "sourceEnd": 177,
+          "title": "Nedenler: üç gerçek slayt",
+          "family": "Galeri",
+          "summary": "Teras, mimari ve bahçe görselleri ile açıklamaları değiştirilir. Sayaç 2, 3 ve 1 durumlarını gösterir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Yeni görsel bir önceki fotoğrafın yerini alır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                0,
+                100,
+                37
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Eğimli sınır fotoğraflar arasındaki geçişi taşır.",
+              "range": [
+                0.15,
+                0.95
+              ],
+              "box": [
+                0,
+                0,
+                100,
+                37
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Her slaytta açıklama da değişir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                4,
+                34,
+                92,
+                29
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Oklar ve sayaç kullanıcıya geçiş yönünü verir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                7,
+                23,
+                86,
+                11
+              ]
+            }
+          ],
+          "lesson": "Görselin değişimini yeni açıklama ve sayaçla tamamla; eski metni resim değişirken bekletme.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Yeni görsel bir önceki fotoğrafın yerini alır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Eğimli sınır fotoğraflar arasındaki geçişi taşır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Her slaytta açıklama da değişir."
+            ]
+          ],
+          "id": 4,
+          "start": 10,
+          "end": 17,
+          "duration": 7
+        },
+        {
+          "key": "alpha-quote",
+          "sourceStart": 177,
+          "sourceEnd": 178.7,
+          "title": "Mimari siluet ve çiçek eşiği",
+          "family": "Paralaks",
+          "summary": "Bina silueti üstten uzaklaşır; pembe ön plan çiçeği ve kırık beyaz konsept zemini alttan girer.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Mimari kesit ve çiçek ayrı hız katmanlarıdır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Mavi zeminden beyaz zemine geçiş siluet sınırında gerçekleşir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Konsept cümlesi alttan görünmeye başlar.",
+              "range": [
+                0.55,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Fotoğrafın kenarı yeni bölümün başlangıcı olabilir; maske dikişini sahnenin anlamıyla eşleştir.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Mimari kesit ve çiçek ayrı hız katmanlarıdır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Mavi zeminden beyaz zemine geçiş siluet sınırında gerçekleşir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Konsept cümlesi alttan görünmeye başlar."
+            ]
+          ],
+          "id": 5,
+          "start": 17,
+          "end": 18.7,
+          "duration": 1.7
+        },
+        {
+          "key": "concept",
+          "sourceStart": 178.7,
+          "sourceEnd": 180.4,
+          "title": "Konsept tek kolonda açılır",
+          "family": "Tipografi",
+          "summary": "Konsept cümlesi ve küçük paragraf dikey yerleşir; çiçek solda ve üstte okuma alanını çerçeveler.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Çiçek metnin önünde ayrı dekor katmanıdır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Uzun konsept başlığı mobil satırlara yeniden kırılır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                6,
+                6,
+                88,
+                80
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Kırık beyaz zemin konseptten konuma devam eder.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Uzun cümlede doğal mobil satır kırılımlarını koru; desktop karakter konumlarını telefona kopyalama.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Çiçek metnin önünde ayrı dekor katmanıdır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Uzun konsept başlığı mobil satırlara yeniden kırılır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Kırık beyaz zemin konseptten konuma devam eder."
+            ]
+          ],
+          "id": 6,
+          "start": 18.7,
+          "end": 20.4,
+          "duration": 1.7
+        },
+        {
+          "key": "horizontal",
+          "sourceStart": 180.4,
+          "sourceEnd": 185.4,
+          "title": "Konum hikâyesi düşey okunur",
+          "family": "Mobil uyarlama",
+          "summary": "NEW GOLDEN MILE, teras, açıklama, dairesel CTA ve sahil cümlesi art arda aşağı iner. Desktop’taki bütün yatay ray küçültülmez.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Teras resmi metinler arasında tam genişlikte okunur.",
+              "range": [
+                0,
+                0.6
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Desktop yatay sahnenin yazıları burada düşey sıraya geçer.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "Dairesel CTA geniş metin aralığında ayrı durur.",
+              "range": [
+                0.35,
+                0.75
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Mobil karşılığı bir ölçek değişimi değil, sahne sırasının yeniden düzenlenmesidir.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Teras resmi metinler arasında tam genişlikte okunur."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Desktop yatay sahnenin yazıları burada düşey sıraya geçer."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Dairesel CTA geniş metin aralığında ayrı durur."
+            ]
+          ],
+          "id": 7,
+          "start": 20.4,
+          "end": 25.4,
+          "duration": 5
+        },
+        {
+          "key": "route",
+          "sourceStart": 185.4,
+          "sourceEnd": 189,
+          "title": "Mobil rota ve yatay kadraj",
+          "family": "Katman",
+          "summary": "Sahil başlığı, kıvrımlı rota ve bulut eşiği görünür. Rota üzerindeki yer adları yatay kadraj hareketiyle değişir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Bulutlu aerial altta yeni zemin olarak görünür.",
+              "range": [
+                0.2,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Rota adları aynı çizgi üzerinde bağlı kalır.",
+              "range": [
+                0,
+                0.9
+              ],
+              "box": [
+                0,
+                22,
+                100,
+                40
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Dar kadraj rota çizgisinin tamamını bir seferde göstermez.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Mobilde uzun grafiğin nasıl okunacağını ayrıca tanımla; kadraj içi sürükleme ile ana sayfa scroll’unu ayır.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Bulutlu aerial altta yeni zemin olarak görünür."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Rota adları aynı çizgi üzerinde bağlı kalır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Dar kadraj rota çizgisinin tamamını bir seferde göstermez."
+            ]
+          ],
+          "id": 8,
+          "start": 25.4,
+          "end": 29,
+          "duration": 3.6
+        },
+        {
+          "key": "aerial",
+          "sourceStart": 189,
+          "sourceEnd": 191,
+          "title": "Aerial → konutlar",
+          "family": "Paralaks",
+          "summary": "Bulutlu geniş çevre resmi kadrajı doldurur. Mavi konut bölümü aşağıdan gelirken aerial üstte kalarak çıkar.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Çevre görüntüsü farklı mobil kadrajda görünür.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Konutların mavi zemini alttan üstüne gelir.",
+              "range": [
+                0.4,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "DRAG TO SEE MORE işareti aerial üzerinde kalır.",
+              "range": [
+                0,
+                0.7
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Dikey resimde önemli bina/çevre ilişkisi korunmalı; yatay görüntüyü anlamsız bir dar crop’a dönüştürme.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Çevre görüntüsü farklı mobil kadrajda görünür."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Konutların mavi zemini alttan üstüne gelir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "DRAG TO SEE MORE işareti aerial üzerinde kalır."
+            ]
+          ],
+          "id": 9,
+          "start": 29,
+          "end": 31,
+          "duration": 2
+        },
+        {
+          "key": "residence-type",
+          "sourceStart": 191,
+          "sourceEnd": 197,
+          "title": "Konut tipi ve ölçüler",
+          "family": "Plan bilgisi",
+          "summary": "Fotoğraf, Ground floor + basement başlığı, oda sayısı ve alan bilgisi tek kolonda görünür; sonra genel konut metni gelir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Konut görseli önce büyük bir dikey pencere olarak okunur.",
+              "range": [
+                0,
+                0.6
+              ],
+              "box": [
+                9,
+                9,
+                82,
+                61
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Başlık, metrekare ve açıklama aynı dikey akışı izler.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "CTA ve slayt kontrolü alan bilgisine yakın kalır.",
+              "range": [
+                0.35,
+                0.65
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Kat bilgisi küçük etikete sıkışmamalı. Önce görseli, ardından ölçü ve gündelik kullanımını okut.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Konut görseli önce büyük bir dikey pencere olarak okunur."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Başlık, metrekare ve açıklama aynı dikey akışı izler."
+            ],
+            [
+              0.94,
+              "Varış",
+              "CTA ve slayt kontrolü alan bilgisine yakın kalır."
+            ]
+          ],
+          "id": 10,
+          "start": 31,
+          "end": 37,
+          "duration": 6
+        },
+        {
+          "key": "amenity-tabs",
+          "sourceStart": 197,
+          "sourceEnd": 205.6,
+          "title": "Amenity: aynı seçim, dikey kadraj",
+          "family": "Etkileşim",
+          "summary": "Gated community, swimming pool, parking ve spa seçilir. Dikey görüntüde başlık listesi üstte, açıklama altta kalır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Görseller aynı mobil çerçevede değişir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Eğik wipe yeni fotoğrafı açar.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Açıklama her seçimin kendi içeriğine geçer.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                3,
+                71,
+                94,
+                26
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Seçili liste satırı üstte kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                20,
+                16,
+                74,
+                27
+              ]
+            }
+          ],
+          "lesson": "Dar ekranda seçenekler görseli gereksiz örtmemeli; seçili satırla açıklama arasındaki bağ korunmalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Görseller aynı mobil çerçevede değişir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Eğik wipe yeni fotoğrafı açar."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Açıklama her seçimin kendi içeriğine geçer."
+            ]
+          ],
+          "id": 11,
+          "start": 37,
+          "end": 45.6,
+          "duration": 8.6
+        },
+        {
+          "key": "interior-arch",
+          "sourceStart": 205.6,
+          "sourceEnd": 207.5,
+          "title": "İç mekânın kavisli girişi",
+          "family": "Maske",
+          "summary": "Beyaz kavis spa fotoğrafının üzerine yükselir. Büyük serif başlık ve script vurgu yeni bölümün kimliğini getirir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Spa arkada çıkar.",
+              "range": [
+                0,
+                0.6
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Büyük beyaz kavis sahneyi kaplar.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "THE SPACE TO ve Live in başlığı dikey sırada açılır.",
+              "range": [
+                0.15,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Aynı geçiş ailesinin mobil oranlarını ayrıca kur; maskeyi kesen video zoom/fitleme olmamalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Spa arkada çıkar."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Büyük beyaz kavis sahneyi kaplar."
+            ],
+            [
+              0.94,
+              "Varış",
+              "THE SPACE TO ve Live in başlığı dikey sırada açılır."
+            ]
+          ],
+          "id": 12,
+          "start": 45.6,
+          "end": 47.5,
+          "duration": 1.9
+        },
+        {
+          "key": "interior-columns",
+          "sourceStart": 207.5,
+          "sourceEnd": 212.7,
+          "title": "İç mekân: kolonlar tek akışa dönüşür",
+          "family": "Mobil uyarlama",
+          "summary": "Bordo kart, bahçe resmi, teras resmi, açıklamalar ve yatak odası galeri görseli aşağıda art arda görünür.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Desktop iki kolonunun görselleri tek dikey hikâyeye dönüşür.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Bordo resim kartı beyaz zemin üzerinde ayrı yüzeydir.",
+              "range": [
+                0,
+                0.4
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Caption ve açıklamalar kendi fotoğrafından ayrılmaz.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Desktop zıt kolonlarını telefonda yan yana sıkıştırma; hikâyeyi doğru görsel sırasıyla yeniden anlat.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Desktop iki kolonunun görselleri tek dikey hikâyeye dönüşür."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Bordo resim kartı beyaz zemin üzerinde ayrı yüzeydir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Caption ve açıklamalar kendi fotoğrafından ayrılmaz."
+            ]
+          ],
+          "id": 13,
+          "start": 47.5,
+          "end": 52.7,
+          "duration": 5.2
+        },
+        {
+          "key": "architecture-mobile",
+          "sourceStart": 212.7,
+          "sourceEnd": 214.9,
+          "title": "Mimari: doğrudan bölüm girişi",
+          "family": "Mobil uyarlama",
+          "summary": "Mobilde desktop’taki iki pencere birleşmesi yerine geniş mavi gökyüzü ve ARCHITECTURE başlıklı doğrudan fotoğraf girişi görülür.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Mimari cephe tek fotoğraf olarak sahneye gelir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Önceki galeri ile yeni görüntü düşey komşudur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "ARCHITECTURE başlığı büyük gökyüzü alanında açılır.",
+              "range": [
+                0.15,
+                1
+              ],
+              "box": [
+                2,
+                10,
+                96,
+                19
+              ]
+            }
+          ],
+          "lesson": "Mobilde olmayan bir desktop birleşmesini varmış gibi yeniden üretme; gerçek karşılık doğrudan görsel girişidir.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Mimari cephe tek fotoğraf olarak sahneye gelir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Önceki galeri ile yeni görüntü düşey komşudur."
+            ],
+            [
+              0.94,
+              "Varış",
+              "ARCHITECTURE başlığı büyük gökyüzü alanında açılır."
+            ]
+          ],
+          "id": 14,
+          "start": 52.7,
+          "end": 54.9,
+          "duration": 2.2
+        },
+        {
+          "key": "interior-gallery",
+          "sourceStart": 214.9,
+          "sourceEnd": 220.5,
+          "title": "İç galerinin mobil kontrolü",
+          "family": "Galeri",
+          "summary": "Kullanıcı geri kaydırır, yatak odası, yaşam alanı ve bitkili avlu fotoğraflarını aynı galeri penceresinde değiştirir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Üç farklı mekân fotoğrafı seçilir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                13,
+                100,
+                66
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Yeni fotoğrafın giriş sınırı aynı galeri alanında kalır.",
+              "range": [
+                0.2,
+                0.95
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "Ok ve sayaç fotoğraf altında görünür.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                5,
+                77,
+                90,
+                13
+              ]
+            }
+          ],
+          "lesson": "Galeri seçimi ana sayfanın akışından bağımsız kalmalı; galeriyle scroll birbirini kilitlememeli.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Üç farklı mekân fotoğrafı seçilir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Yeni fotoğrafın giriş sınırı aynı galeri alanında kalır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Ok ve sayaç fotoğraf altında görünür."
+            ]
+          ],
+          "id": 15,
+          "start": 54.9,
+          "end": 60.5,
+          "duration": 5.6
+        },
+        {
+          "key": "architecture-dive",
+          "sourceStart": 220.5,
+          "sourceEnd": 223.5,
+          "title": "Mimari cephe ve alıntı",
+          "family": "Paralaks",
+          "summary": "Cephe kadrajı aşağı iner; büyük başlık çıkar ve mimari alıntı/ekip bilgisi görüntü üzerinde görünür hale gelir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Fotoğraf cepheyi aşağı yönlü gösterir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Başlık yerine mimari alıntı ve ekip kredisi görünür.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                3,
+                67,
+                94,
+                30
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Üstteki mobil menü kendi renk karşılığını korur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Fotoğraf içi hareketi metnin okunacağı açık alanla birlikte tasarla.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Fotoğraf cepheyi aşağı yönlü gösterir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Başlık yerine mimari alıntı ve ekip kredisi görünür."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Üstteki mobil menü kendi renk karşılığını korur."
+            ]
+          ],
+          "id": 16,
+          "start": 60.5,
+          "end": 63.5,
+          "duration": 3
+        },
+        {
+          "key": "architecture-exit",
+          "sourceStart": 223.5,
+          "sourceEnd": 225.3,
+          "title": "Mimari → proje bilgisi",
+          "family": "Kadraj",
+          "summary": "Mimari fotoğraf üstten ayrılır; beyaz zeminde developer, sales, license ve yıl başlıkları görünür.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Fotoğraf üstte kalan bant olarak çıkar.",
+              "range": [
+                0,
+                0.5
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz bilgi zemini ön sahneye geçer.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Dört bilgi satırı dikey sırada açılır.",
+              "range": [
+                0.2,
+                1
+              ],
+              "box": [
+                4,
+                22,
+                87,
+                75
+              ]
+            }
+          ],
+          "lesson": "Bilginin satır aralarını mobilde koru; sahne değişimi bütün metni tek anda kadraja yığmamalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Fotoğraf üstte kalan bant olarak çıkar."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Beyaz bilgi zemini ön sahneye geçer."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Dört bilgi satırı dikey sırada açılır."
+            ]
+          ],
+          "id": 17,
+          "start": 63.5,
+          "end": 65.3,
+          "duration": 1.8
+        },
+        {
+          "key": "closing-cta",
+          "sourceStart": 225.3,
+          "sourceEnd": 227.2,
+          "title": "Teras ve mobil kapanış",
+          "family": "Paralaks",
+          "summary": "Teras fotoğrafı, büyük kapanış başlığı ve mobil CTA aynı dikey görüntüde görünür.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Dikey teras kadrajı ana zemin olur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "PERFECT SEA VIEWS ve script alt satır fotoğrafın üzerine açılır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                0,
+                100,
+                65
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "VIEW AVAILABLE APARTMENTS bağlantısı orta alanda yerleşir.",
+              "range": [
+                0.3,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "CTA için fotoğrafın en önemli mekânını kesmeyen bir yazı alanı ayır.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Dikey teras kadrajı ana zemin olur."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "PERFECT SEA VIEWS ve script alt satır fotoğrafın üzerine açılır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "VIEW AVAILABLE APARTMENTS bağlantısı orta alanda yerleşir."
+            ]
+          ],
+          "id": 18,
+          "start": 65.3,
+          "end": 67.2,
+          "duration": 1.9
+        },
+        {
+          "key": "footer",
+          "sourceStart": 227.2,
+          "sourceEnd": 234.7,
+          "title": "Mobil footer: ince pencereye dönüşme",
+          "family": "Maske",
+          "summary": "Teras görüntüsü dar bir üst pencereye çekilir. Bordo zemin, telefon ve alt bilgiler onun etrafında açılır; kullanıcı ileri–geri hareketi de gösterir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Teras görünür alanı mobilde çok daha dar bir pencereye dönüşür.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                31,
+                0,
+                38,
+                28
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Bordo alan görüntü etrafında büyür.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Telefon ve adres yeni sahnenin ana içeriğidir.",
+              "range": [
+                0.2,
+                1
+              ],
+              "box": [
+                0,
+                38,
+                100,
+                61
+              ]
+            }
+          ],
+          "lesson": "Footer kadrajı desktop’tan farklı oran ister; resimle yeni içeriği aynı ilerlemeyle bağla.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Teras görünür alanı mobilde çok daha dar bir pencereye dönüşür."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Bordo alan görüntü etrafında büyür."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Telefon ve adres yeni sahnenin ana içeriğidir."
+            ]
+          ],
+          "id": 19,
+          "start": 67.2,
+          "end": 74.7,
+          "duration": 7.5
+        },
+        {
+          "key": "footer-reverse",
+          "sourceStart": 234.7,
+          "sourceEnd": 238,
+          "title": "Footer → teras geri dönüşü",
+          "family": "Ters akış",
+          "summary": "Telefon ve bordo zemin geri çekilir; teras fotoğrafı yeniden büyür, PERFECT SEA VIEWS başlığı geri gelir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Aynı görüntü yeni tam ekran görünümüne geri açılır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Bordo örtü kadrajdan çıkar.",
+              "range": [
+                0,
+                0.8
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Büyük kapanış başlığı yeniden okunur.",
+              "range": [
+                0.2,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "İleri yön kadar geri yönün varış kadrajı da tam olmalı; yeni bir fit veya zoom atlaması yapılmamalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Aynı görüntü yeni tam ekran görünümüne geri açılır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Bordo örtü kadrajdan çıkar."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Büyük kapanış başlığı yeniden okunur."
+            ]
+          ],
+          "id": 20,
+          "start": 74.7,
+          "end": 78,
+          "duration": 3.3
+        }
+      ]
+    },
+    "likova-desktop": {
+      "id": "likova-desktop",
+      "project": "likova",
+      "device": "desktop",
+      "offset": 113.5,
+      "duration": 151.3,
+      "fps": 60,
+      "width": 1920,
+      "height": 1050,
+      "video": "./assets/casestudy2/likova/desktop.mp4",
+      "source": "2026-10-05 13-20-35.mp4",
+      "viewport": "Desktop · 1920 × 1050",
+      "deviceNote": "Desktop’ta çoklu görüntüler ve bilgi kartları yan yana kompozisyon kurar; mobilde aynı sahneler ayrı düşey yüzeylere dönüşür. Menü desktop’ta yan panel, mobilde tam yüzeydir. Büyük sayılar ve ekip grid’i yeniden sıralanır.",
+      "coverage": "Açılış, menü, model kamera akışı, location/harita, lifestyle, master plan, mimari, lobi, offices, teknoloji, altyapı ve ekip bölümü kaydedilmiş.",
+      "gaps": "Desktop footer, seçilebilir 3D master plan arayüzü ve ofis seçim paneli bu kayıtta açılmamış. Kayıt ekip sahnesinde kesildi.",
+      "scenes": [
+        {
+          "key": "identity",
+          "sourceStart": 113.5,
+          "sourceEnd": 117.4,
+          "title": "Model, logo kartı ve yükleme",
+          "family": "Açılış",
+          "summary": "Koyu zemin üzerindeki binanın çevresinde beyaz LIKOVA kartı görünür. Yüzde ilerler, model gider ve logo kartı sonraki zemine bağlanır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Üç boyutlu bina kimliğin arkasında dönük bir açıyla durur.",
+              "range": [
+                0,
+                0.8
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz basamaklı kart ayrı bir ön katmandır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                32,
+                28,
+                36,
+                43
+              ]
+            },
+            {
+              "type": "text",
+              "note": "LIKOVA ve yüzde kartın içinde kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Yükleme görseli, açılacak binanın kimliğiyle bağlantılı olabilir; ilerleme ve model aynı hiyerarşide okunmalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Üç boyutlu bina kimliğin arkasında dönük bir açıyla durur."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Beyaz basamaklı kart ayrı bir ön katmandır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "LIKOVA ve yüzde kartın içinde kalır."
+            ]
+          ],
+          "id": 1,
+          "start": 0,
+          "end": 3.9,
+          "duration": 3.9
+        },
+        {
+          "key": "hero",
+          "sourceStart": 117.4,
+          "sourceEnd": 121.1,
+          "title": "Basamaklı yüzey hero’yu açar",
+          "family": "Maske",
+          "summary": "Beyaz logo yüzeyi üstte kalırken bina görüntüsü alttan görünür. Kartın kademeli kenarı görüntünün giriş biçimini belirler.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Ana bina render’ı alttan kadraja açılır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz basamaklı yüzey kadrajın üstünde geriye çekilir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Logo ve küçük hero cümlesi yeni kadrajda açılır.",
+              "range": [
+                0.25,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Maske kenarı markanın görsel diline ait olmalı; rastgele bir geometrik wipe kullanma.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Ana bina render’ı alttan kadraja açılır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Beyaz basamaklı yüzey kadrajın üstünde geriye çekilir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Logo ve küçük hero cümlesi yeni kadrajda açılır."
+            ]
+          ],
+          "id": 2,
+          "start": 3.9,
+          "end": 7.6,
+          "duration": 3.7
+        },
+        {
+          "key": "menu",
+          "sourceStart": 121.1,
+          "sourceEnd": 125,
+          "title": "Sol menü paneli",
+          "family": "Etkileşim",
+          "summary": "Beyaz menü soldan açılır, sağdaki hero kararır. Bölüm listesi, bina çizimi ve CTA’lar menü içinde görünür; kapanınca hero’ya dönülür.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Ana hero sağda konumunu korur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Solda beyaz panel, sağda kararan overlay aynı anda açılır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                0,
+                46,
+                100
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Bölüm listesi ve plan çizimi menü paneli içindedir.",
+              "range": [
+                0.15,
+                0.9
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "Kapatma ve CTA’lar menüye ait ayrı kontrollerdir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Menü açılırken arka sahnenin konumu korunmalı; kapanınca aynı kadraja dön.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Ana hero sağda konumunu korur."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Solda beyaz panel, sağda kararan overlay aynı anda açılır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Bölüm listesi ve plan çizimi menü paneli içindedir."
+            ]
+          ],
+          "id": 3,
+          "start": 7.6,
+          "end": 11.5,
+          "duration": 3.9
+        },
+        {
+          "key": "hero-scroll",
+          "sourceStart": 125,
+          "sourceEnd": 131.2,
+          "title": "Hero’da aşağı yaklaşma",
+          "family": "Kamera",
+          "summary": "Başlangıç binası genişlerken beyaz üst yüzey yukarı gider. A sınıfı işareti ve küçük açıklama ayrı hızla okunur.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Bina cephe ve sokak seviyesine yaklaşır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Üst beyaz yüzey geri çekilir.",
+              "range": [
+                0,
+                0.65
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "A ve açıklama fotoğrafın üstünde bağımsız kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Kamera yönü, binanın gündelik erişim alanına götürmeli; ölçek sadece büyüklük etkisi için kullanılmamalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Bina cephe ve sokak seviyesine yaklaşır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Üst beyaz yüzey geri çekilir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "A ve açıklama fotoğrafın üstünde bağımsız kalır."
+            ]
+          ],
+          "id": 4,
+          "start": 11.5,
+          "end": 17.7,
+          "duration": 6.2
+        },
+        {
+          "key": "concept",
+          "sourceStart": 131.2,
+          "sourceEnd": 137.2,
+          "title": "Koyu kavram paneli ve model",
+          "family": "Katman",
+          "summary": "Koyu basamaklı panel binanın üstüne gelir; büyük açıklama cümlesi ve küçük dönen model yeni kompozisyona yerleşir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Bina görüntüsü panel arkasında görünmeye devam eder.",
+              "range": [
+                0,
+                0.5
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Koyu basamaklı yüzey yeni metin sahnesini taşır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Büyük açıklama satır satır okunur; model onun altına yerleşir.",
+              "range": [
+                0.2,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Yeni metin sahnesi giriş fotoğrafının anlamını devam ettirmeli.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Bina görüntüsü panel arkasında görünmeye devam eder."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Koyu basamaklı yüzey yeni metin sahnesini taşır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Büyük açıklama satır satır okunur; model onun altına yerleşir."
+            ]
+          ],
+          "id": 5,
+          "start": 17.7,
+          "end": 23.7,
+          "duration": 6
+        },
+        {
+          "key": "paired-images",
+          "sourceStart": 137.2,
+          "sourceEnd": 141.4,
+          "title": "İki mimari detay yan yana",
+          "family": "Paralaks",
+          "summary": "Cepheye yakın iki görüntü yan yana yerleşir. Üst metin tek bölgede, iki görüntü kendi kadrajlarında ilerler.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Sol ve sağ mimari detay iki ayrı pencere oluşturur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                32,
+                100,
+                68
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Küçük açıklama üstte ortak bağlamı taşır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                40,
+                0,
+                50,
+                27
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Koyu zemin iki görüntüyü birleştiren boşluğu kurar.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "İki yakın kadrajı aynı mimari fikri göstermek için seç; alakasız iki resmi sadece yana koyma.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Sol ve sağ mimari detay iki ayrı pencere oluşturur."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Küçük açıklama üstte ortak bağlamı taşır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Koyu zemin iki görüntüyü birleştiren boşluğu kurar."
+            ]
+          ],
+          "id": 6,
+          "start": 23.7,
+          "end": 27.9,
+          "duration": 4.2
+        },
+        {
+          "key": "model",
+          "sourceStart": 141.4,
+          "sourceEnd": 147.4,
+          "title": "Model etrafında açı ve sayısal bilgi",
+          "family": "Kamera",
+          "summary": "Koyu modelin etrafındaki görüş açısı değişir. 6–7–8, 53 300 ve 2026 bilgileri farklı kamera durumlarıyla eşleşir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Modelin görüş açısı ve ölçeği kaydırma boyunca değişir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Büyük sayı, açıklaması ve model konumu birbirine bağlıdır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                56,
+                100,
+                40
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Sabit üst navigasyon model sahnesinde de görünür kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Sayısal bilgi kamera durumuyla birlikte okunmalı; modelin her dönüşüne anlamsız bir sayı ekleme.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Modelin görüş açısı ve ölçeği kaydırma boyunca değişir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Büyük sayı, açıklaması ve model konumu birbirine bağlıdır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Sabit üst navigasyon model sahnesinde de görünür kalır."
+            ]
+          ],
+          "id": 7,
+          "start": 27.9,
+          "end": 33.9,
+          "duration": 6
+        },
+        {
+          "key": "location-collage",
+          "sourceStart": 147.4,
+          "sourceEnd": 153.3,
+          "title": "Modelden ulaşım kolajına",
+          "family": "Katman",
+          "summary": "Bina modelinden gerçek bina kadrajına geçilir; location paneli, iş insanı görüntüsü ve ulaşım sahneleri kademeli yüzeylerle sırayla açılır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Bina, iş insanı ve yol sahnesi farklı görüntü katmanlarıdır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Basamaklı kenarlar gelen görüntüyü ve bilgi panelini bağlar.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Location, havaalanı ve konut bağlamları koyu panellerde okunur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Katmanlı kolajın her görüntüsü anlatıdaki bir bilgiye karşılık gelmeli.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Bina, iş insanı ve yol sahnesi farklı görüntü katmanlarıdır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Basamaklı kenarlar gelen görüntüyü ve bilgi panelini bağlar."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Location, havaalanı ve konut bağlamları koyu panellerde okunur."
+            ]
+          ],
+          "id": 8,
+          "start": 33.9,
+          "end": 39.8,
+          "duration": 5.9
+        },
+        {
+          "key": "video-story",
+          "sourceStart": 153.3,
+          "sourceEnd": 165.8,
+          "title": "Tam video ve ileri–geri katmanlar",
+          "family": "Video",
+          "summary": "Araç içi film kadrajı doldurur. Beyaz metin yüzeyi alttan gelir; kullanıcı geri hareketinde vinç ve koyu paneli yeniden gösterir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Araç içi görüntü kendi zamanında oynar; kayıt içinde scroll da değişir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz basamaklı metin yüzeyi alttan videonun üstüne gelir.",
+              "range": [
+                0.2,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Ulaşım cümlesi yeni beyaz yüzeyde açılır.",
+              "range": [
+                0.25,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Kaynak videonun kendi oynama zamanı ile scroll’un maske hareketini ayrı sistemler olarak incele; her video scroll-scrub değildir.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Araç içi görüntü kendi zamanında oynar; kayıt içinde scroll da değişir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Beyaz basamaklı metin yüzeyi alttan videonun üstüne gelir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Ulaşım cümlesi yeni beyaz yüzeyde açılır."
+            ]
+          ],
+          "id": 9,
+          "start": 39.8,
+          "end": 52.3,
+          "duration": 12.5
+        },
+        {
+          "key": "map-entry",
+          "sourceStart": 165.8,
+          "sourceEnd": 173,
+          "title": "Video → harita ve sayaç kartı",
+          "family": "Maske",
+          "summary": "Beyaz bilgi paneli videosunun önünden geçer; arkada koyu harita belirir. Harita, nokta sistemi ve 8 dakika kartı yeni sahneyi kurar.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Koyu harita yeni tam ekran zemin olur.",
+              "range": [
+                0.3,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz basamaklı kart eski videodan yeni haritaya geçişi taşır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "8 ve ulaşım açıklaması kartta görünür.",
+              "range": [
+                0.45,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "Harita noktaları ayrı etkileşim hedefleridir.",
+              "range": [
+                0.5,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Haritaya giriş, önceki ulaşım anlatısının devamı olarak kurulmalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Koyu harita yeni tam ekran zemin olur."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Beyaz basamaklı kart eski videodan yeni haritaya geçişi taşır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "8 ve ulaşım açıklaması kartta görünür."
+            ]
+          ],
+          "id": 10,
+          "start": 52.3,
+          "end": 59.5,
+          "duration": 7.2
+        },
+        {
+          "key": "map-tabs",
+          "sourceStart": 173,
+          "sourceEnd": 183.5,
+          "title": "Harita pinleri ve 8 → 18 kartı",
+          "family": "Etkileşim",
+          "summary": "Haritada nokta hover’ı ve ulaşım süresi kartının değişimi görülür. Harita zemini dururken kart ve vurgu değişir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Harita temel kadrajını korur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Süre ve hedef bilgisi birlikte değişir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                57,
+                31,
+                42
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Pin ve kısa tooltip karttan bağımsız bir odaktır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Pinler ile filtre kartını aynı seçime bağla; hangi ulaşım hedefinin anlatıldığını açık tut.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Harita temel kadrajını korur."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Süre ve hedef bilgisi birlikte değişir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Pin ve kısa tooltip karttan bağımsız bir odaktır."
+            ]
+          ],
+          "id": 11,
+          "start": 59.5,
+          "end": 70,
+          "duration": 10.5
+        },
+        {
+          "key": "lifestyle",
+          "sourceStart": 183.5,
+          "sourceEnd": 192.5,
+          "title": "Yaşam kolajı: kart içindeki sporcu",
+          "family": "Katman",
+          "summary": "Geniş koşucu görüntüsü ve öndeki koyu kart birbirine göre hareket eder. Kayakçı görüntüsü yeni bir seçim olarak kart içinde değişir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Arka geniş spor görüntüsü ve ön kart farklı kadrajlardır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Koyu basamaklı kart görseli kendi içinde keser.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                23,
+                48,
+                70
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Sağ açıklama kolajın ortak bağlamını korur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Bütün fotoğrafı aynı yönde kaydırmak yerine ön plan ve arka planın farklı görevleri olmalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Arka geniş spor görüntüsü ve ön kart farklı kadrajlardır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Koyu basamaklı kart görseli kendi içinde keser."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Sağ açıklama kolajın ortak bağlamını korur."
+            ]
+          ],
+          "id": 12,
+          "start": 70,
+          "end": 79,
+          "duration": 9
+        },
+        {
+          "key": "master-plan",
+          "sourceStart": 192.5,
+          "sourceEnd": 201.4,
+          "title": "Yaşamdan master plan’a",
+          "family": "Kadraj",
+          "summary": "Beyaz model sahnesi yaşam kolajının üstüne gelir. Bütün bina ve merkezdeki 3D CTA okunur; ardından mimari cephe sahnesi yaklaşır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Bütün model beyaz zemin üzerinde ölçeğine oturur.",
+              "range": [
+                0.2,
+                1
+              ],
+              "box": [
+                15,
+                20,
+                70,
+                66
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz sahne alttan koyu yaşam bölümünü örter.",
+              "range": [
+                0,
+                0.65
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "3D CTA modelin ortasına yerleşir.",
+              "range": [
+                0.25,
+                1
+              ],
+              "box": [
+                43,
+                37,
+                17,
+                33
+              ]
+            }
+          ],
+          "lesson": "Modelin bütünlüğünü önce göster. Sonraki CTA veya kat anlatısı tam modelin konumunu kaybetmemeli.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Bütün model beyaz zemin üzerinde ölçeğine oturur."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Beyaz sahne alttan koyu yaşam bölümünü örter."
+            ],
+            [
+              0.94,
+              "Varış",
+              "3D CTA modelin ortasına yerleşir."
+            ]
+          ],
+          "id": 13,
+          "start": 79,
+          "end": 87.9,
+          "duration": 8.9
+        },
+        {
+          "key": "architecture",
+          "sourceStart": 201.4,
+          "sourceEnd": 209,
+          "title": "Cephe, koyu kart ve açılan görüntü",
+          "family": "Maske",
+          "summary": "Cephe fotoğrafı büyür; koyu ARCHITECTURE kartı geçer ve daha geniş bina kadrajı açılır. Aynı basamak dili iki yüzeyde de kullanılır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Cephe fotoğrafı kendi kadrajında yakınlaşır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Koyu kart görüntü alanını örtüp yeniden açar.",
+              "range": [
+                0.18,
+                0.85
+              ],
+              "box": [
+                0,
+                41,
+                87,
+                53
+              ]
+            },
+            {
+              "type": "text",
+              "note": "ARCHITECTURE ve küçük bilgiler kartın içinde açılır.",
+              "range": [
+                0.2,
+                0.85
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Metin panelinin girişini fotoğrafın esas çizgileriyle çakıştır; binanın kimliğini tamamen örten süreyi kontrol et.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Cephe fotoğrafı kendi kadrajında yakınlaşır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Koyu kart görüntü alanını örtüp yeniden açar."
+            ],
+            [
+              0.94,
+              "Varış",
+              "ARCHITECTURE ve küçük bilgiler kartın içinde açılır."
+            ]
+          ],
+          "id": 14,
+          "start": 87.9,
+          "end": 95.5,
+          "duration": 7.6
+        },
+        {
+          "key": "architect-quote",
+          "sourceStart": 209,
+          "sourceEnd": 214.3,
+          "title": "Mimar kartı → lobi",
+          "family": "Katman",
+          "summary": "Mimarın beyaz bilgi kartı, dış cephe ve lobi görüntüsü arasında durur. Lobi fotoğrafı büyüyerek sonraki beyaz bölüme bağlanır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Dış cepheden sıcak lobi fotoğrafına geçilir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz basamaklı bilgi kartı ön katman olur.",
+              "range": [
+                0,
+                0.8
+              ],
+              "box": [
+                0,
+                23,
+                35,
+                70
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Mimar kimliği ve lobi başlığı yeni kadrajlarda açılır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Bilgi kartı iki farklı mekân görüntüsü arasındaki ilişkiyi açıklamalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Dış cepheden sıcak lobi fotoğrafına geçilir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Beyaz basamaklı bilgi kartı ön katman olur."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Mimar kimliği ve lobi başlığı yeni kadrajlarda açılır."
+            ]
+          ],
+          "id": 15,
+          "start": 95.5,
+          "end": 100.8,
+          "duration": 5.3
+        },
+        {
+          "key": "materials",
+          "sourceStart": 214.3,
+          "sourceEnd": 220.6,
+          "title": "Malzeme parçaları: ayrışmış kompozisyon",
+          "family": "Malzeme",
+          "summary": "Beyaz zeminde taş, panel, çubuk ve küreler ayrı bir kompozisyon oluşturur; açıklama ve sonraki lobi fotoğrafı onun çevresinde görünür.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Malzeme parçaları birbirinden ayrılmış halde okunur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                17,
+                25,
+                68,
+                66
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz zemin boşluğu malzeme hiyerarşisini kurar.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Malzeme ve lobi açıklaması parçalardan ayrı alandadır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Ölçü, malzeme ve strüktürü fiziksel anlamlarıyla göster; dekor parçalarıyla mimari bilgiyi karıştırma.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Malzeme parçaları birbirinden ayrılmış halde okunur."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Beyaz zemin boşluğu malzeme hiyerarşisini kurar."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Malzeme ve lobi açıklaması parçalardan ayrı alandadır."
+            ]
+          ],
+          "id": 16,
+          "start": 100.8,
+          "end": 107.1,
+          "duration": 6.3
+        },
+        {
+          "key": "lobby",
+          "sourceStart": 220.6,
+          "sourceEnd": 230,
+          "title": "Lobi görseli, sayılar ve galeri",
+          "family": "Galeri",
+          "summary": "Lobi görseli üstten yerleşir; 4, 12, 16 bilgileri ve altındaki resepsiyon galerisi görünür. Fotoğraf şeridi yana açılır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Lobi fotoğrafı ve resepsiyon galerisi ayrı pencerelerdir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Dört giriş, tavan yüksekliği ve asansör bilgisi beyaz alanda okunur.",
+              "range": [
+                0.15,
+                0.65
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "Galeri sayacı ve okları fotoğraf altındadır.",
+              "range": [
+                0.4,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Büyük mekân fotoğrafını sayısal bilgiyle birlikte okut; galeriye geçişte aynı mekânın ölçeği korunmalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Lobi fotoğrafı ve resepsiyon galerisi ayrı pencerelerdir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Dört giriş, tavan yüksekliği ve asansör bilgisi beyaz alanda okunur."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Galeri sayacı ve okları fotoğraf altındadır."
+            ]
+          ],
+          "id": 17,
+          "start": 107.1,
+          "end": 116.5,
+          "duration": 9.4
+        },
+        {
+          "key": "offices",
+          "sourceStart": 230,
+          "sourceEnd": 237.7,
+          "title": "İnsan videosu → çalışma alanı",
+          "family": "Video",
+          "summary": "İnsan videosunun üzerine koyu offices kartı gelir. Sonra çalışma alanı fotoğrafı ve küçük kontrol kartı aynı katman dilini devam ettirir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "İnsan filmi ve çalışma alanı fotoğrafı art arda görünür.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Koyu basamaklı kart öne gelip yeni sahneyi taşır.",
+              "range": [
+                0,
+                0.75
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Offices ve çalışma alanı açıklaması kartın içinde kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "Küçük galeri/CTA kontrolleri fotoğrafın üstünde yerleşir.",
+              "range": [
+                0.4,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "İnsan görüntüsünün mekân fotoğrafına geçişi, orada yaşanan eylemi açıklamalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "İnsan filmi ve çalışma alanı fotoğrafı art arda görünür."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Koyu basamaklı kart öne gelip yeni sahneyi taşır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Offices ve çalışma alanı açıklaması kartın içinde kalır."
+            ]
+          ],
+          "id": 18,
+          "start": 116.5,
+          "end": 124.2,
+          "duration": 7.7
+        },
+        {
+          "key": "technology",
+          "sourceStart": 237.7,
+          "sourceEnd": 244,
+          "title": "Servis kartları → teknoloji",
+          "family": "Katman",
+          "summary": "İki hizmet kartı, tesisat görüntüsü ve çizgisel teknik görsel sırayla açılır. Koyu zemin ortak bağlayıcı olarak kalır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Tesisat fotoğrafından teknik çizime geçilir.",
+              "range": [
+                0.3,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Basamaklı kartlar içeriği koyu zemin üzerinde böler.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Technology ve teknik açıklama ayrı okumalar olarak görünür.",
+              "range": [
+                0.25,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Teknik bilgiler için sakin bir görsel dil seç; her altyapı özelliğine aynı büyük kamera dalışını verme.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Tesisat fotoğrafından teknik çizime geçilir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Basamaklı kartlar içeriği koyu zemin üzerinde böler."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Technology ve teknik açıklama ayrı okumalar olarak görünür."
+            ]
+          ],
+          "id": 19,
+          "start": 124.2,
+          "end": 130.5,
+          "duration": 6.3
+        },
+        {
+          "key": "infrastructure",
+          "sourceStart": 244,
+          "sourceEnd": 260.8,
+          "title": "Altyapı: çok görüntülü basamaklı akış",
+          "family": "Katman",
+          "summary": "Aerial, market, restoran, kafe, sağlık, spor ve ortak alan görüntüleri art arda girer. Koyu etiket kartları ve ikonlar değişirken zemin sürekliliği korunur.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Her görüntü yeni bir gündelik kullanım başlığına karşılık gelir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Basamaklı kesimler bir görüntüden diğerine aynı yönü korur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Retail, restaurant, café, medical, fitness ve communal etiketi bağlamı taşır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "Kart ikonları kendi başlıklarıyla birlikte değişir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Sıralı fotoğrafların her biri farklı bilgi taşımalı. Aynı resmi çok kez göstererek uzunluk üretme.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Her görüntü yeni bir gündelik kullanım başlığına karşılık gelir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Basamaklı kesimler bir görüntüden diğerine aynı yönü korur."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Retail, restaurant, café, medical, fitness ve communal etiketi bağlamı taşır."
+            ]
+          ],
+          "id": 20,
+          "start": 130.5,
+          "end": 147.3,
+          "duration": 16.8
+        },
+        {
+          "key": "team",
+          "sourceStart": 260.8,
+          "sourceEnd": 264.8,
+          "title": "Ortak alan → ekip kartları",
+          "family": "Kadraj",
+          "summary": "Son ortak alan galerisinden beyaz OUR TEAM sahnesine geçilir. Üç koyu kart ve ajans isimleri yan yana yerleşir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Ortak alan fotoğrafı üstten çıkar.",
+              "range": [
+                0,
+                0.45
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz bölüm ve üç koyu kart aynı grid dilini taşır.",
+              "range": [
+                0.2,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "OUR TEAM ve ekip isimleri kart hiyerarşisini tamamlar.",
+              "range": [
+                0.25,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Kapanışta büyük fotoğraf akışını sakin bir bilgi grid’ine bağla. Bu desktop kaydı footer’a ulaşmadan biter.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Ortak alan fotoğrafı üstten çıkar."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Beyaz bölüm ve üç koyu kart aynı grid dilini taşır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "OUR TEAM ve ekip isimleri kart hiyerarşisini tamamlar."
+            ]
+          ],
+          "id": 21,
+          "start": 147.3,
+          "end": 151.3,
+          "duration": 4
+        }
+      ]
+    },
+    "likova-mobile": {
+      "id": "likova-mobile",
+      "project": "likova",
+      "device": "mobile",
+      "offset": 3,
+      "duration": 107,
+      "fps": 60,
+      "width": 426,
+      "height": 636,
+      "video": "./assets/casestudy2/likova/mobile.mp4",
+      "source": "2026-10-05 13-20-35.mp4",
+      "viewport": "Mobil emülasyon · 459 × 686",
+      "deviceNote": "Desktop’ta çoklu görüntüler ve bilgi kartları yan yana kompozisyon kurar; mobilde aynı sahneler ayrı düşey yüzeylere dönüşür. Menü desktop’ta yan panel, mobilde tam yüzeydir. Büyük sayılar ve ekip grid’i yeniden sıralanır.",
+      "coverage": "Mobil açılış, menü, model, ulaşım, harita, lifestyle, master plan, mimari, lobi, offices, teknoloji, altyapının bir bölümü, ekip ve footer kaydedilmiş. Chrome responsive emülasyonudur.",
+      "gaps": "3D master plan butonu ve ofis seçim arayüzü açılmamış; altyapının bazı alt fotoğrafları hızlı scroll sırasında atlanmış.",
+      "scenes": [
+        {
+          "key": "identity",
+          "sourceStart": 3,
+          "sourceEnd": 7.5,
+          "title": "Mobil yükleme: model ve beyaz kart",
+          "family": "Açılış",
+          "summary": "Dikey koyu ekranda küçük bina modeli ve basamaklı beyaz logo kartı görünür. Yüzde tamamlanınca model gider ve hero açılır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Model dar kadrajda bütün olarak görünür.",
+              "range": [
+                0,
+                0.75
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz logo kartı modelin önündedir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                25,
+                33,
+                50,
+                25
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Logo ve yüzde kart içinde kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Yükleme ekranındaki model küçük olsa da tamamı görünmeli; beyaz kart yüzdesinin konumu sabit kalmalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Model dar kadrajda bütün olarak görünür."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Beyaz logo kartı modelin önündedir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Logo ve yüzde kart içinde kalır."
+            ]
+          ],
+          "id": 1,
+          "start": 0,
+          "end": 4.5,
+          "duration": 4.5
+        },
+        {
+          "key": "hero",
+          "sourceStart": 7.5,
+          "sourceEnd": 13,
+          "title": "Mobil basamaklı hero",
+          "family": "Maske",
+          "summary": "Beyaz logo yüzeyi yukarı çıkar; altındaki bina görüntüsü ve A sınıfı işareti dikey sırada okunur.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Bina fotoğrafı dikey görüntüye göre yeniden kadrajlanır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz üst yüzey kademeli kenarıyla açılır.",
+              "range": [
+                0,
+                0.8
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Logo, küçük açıklama ve A işareti ayrı düşey alanlarda kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Mobil kadrajın üstteki metin payını başlangıçta çöz; sonradan fit yapan bir görüntü büyümesi ekleme.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Bina fotoğrafı dikey görüntüye göre yeniden kadrajlanır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Beyaz üst yüzey kademeli kenarıyla açılır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Logo, küçük açıklama ve A işareti ayrı düşey alanlarda kalır."
+            ]
+          ],
+          "id": 2,
+          "start": 4.5,
+          "end": 10,
+          "duration": 5.5
+        },
+        {
+          "key": "concept-preview",
+          "sourceStart": 13,
+          "sourceEnd": 17,
+          "title": "Koyu konsept panelinin ilk görünümü",
+          "family": "Katman",
+          "summary": "Bina görüntüsü altta kalırken koyu basamaklı konsept kartı üzerine gelir. Büyük açıklama ve model burada yeni bir metin sahnesi oluşturur.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Bina fotoğrafı kart arkasında devam eder.",
+              "range": [
+                0,
+                0.7
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Koyu kart alttan görüntüyü örter.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Büyük açıklama tek kolonda açılır.",
+              "range": [
+                0.2,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Bilgi sahnesini mobilde ayrıca sırala; desktop’ın yatay boşluklarını olduğu gibi küçültme.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Bina fotoğrafı kart arkasında devam eder."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Koyu kart alttan görüntüyü örter."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Büyük açıklama tek kolonda açılır."
+            ]
+          ],
+          "id": 3,
+          "start": 10,
+          "end": 14,
+          "duration": 4
+        },
+        {
+          "key": "hero-return",
+          "sourceStart": 17,
+          "sourceEnd": 22.6,
+          "title": "Hero’ya geri scroll",
+          "family": "Ters akış",
+          "summary": "Kullanıcı yukarı kaydırır; koyu konsept paneli çıkar, bina ve beyaz logo yüzeyi geri gelir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Bina kadrajı önceki duruma geri döner.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Koyu kart çekilir, beyaz üst yüzey geri görünür.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "A sınıfı işareti yeniden okunur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Geri kaydırmada scene reset yerine aynı kayıtlı duruma doğru dönüş gerekir.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Bina kadrajı önceki duruma geri döner."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Koyu kart çekilir, beyaz üst yüzey geri görünür."
+            ],
+            [
+              0.94,
+              "Varış",
+              "A sınıfı işareti yeniden okunur."
+            ]
+          ],
+          "id": 4,
+          "start": 14,
+          "end": 19.6,
+          "duration": 5.6
+        },
+        {
+          "key": "menu",
+          "sourceStart": 22.6,
+          "sourceEnd": 28.4,
+          "title": "Mobil menü tam yüzey açılır",
+          "family": "Etkileşim",
+          "summary": "Beyaz menü tam genişlikte açılır. Bölüm listesi, çizgisel bina ve iki alt CTA dikey hiyerarşide görünür; kapanınca hero’ya dönülür.",
+          "layers": [
+            {
+              "type": "mask",
+              "note": "Desktop yan paneli burada tam ekran beyaz yüzeydir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Bölüm isimleri tek kolon; plan çizimi alt sıradadır.",
+              "range": [
+                0.15,
+                0.9
+              ],
+              "box": [
+                3,
+                28,
+                94,
+                64
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "X, bölüm linkleri ve iki CTA ayrı dokunma alanlarıdır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Mobil menü içerik hiyerarşisini ve kapatmayı korumalı; desktop yan panelini küçültmek yetmez.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Desktop yan paneli burada tam ekran beyaz yüzeydir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Bölüm isimleri tek kolon; plan çizimi alt sıradadır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "X, bölüm linkleri ve iki CTA ayrı dokunma alanlarıdır."
+            ]
+          ],
+          "id": 5,
+          "start": 19.6,
+          "end": 25.4,
+          "duration": 5.8
+        },
+        {
+          "key": "paired-images",
+          "sourceStart": 28.4,
+          "sourceEnd": 32.4,
+          "title": "Metin ve cephe detayı",
+          "family": "Paralaks",
+          "summary": "Koyu açıklama metni ve yakın cephe fotoğrafı art arda okunur. Desktop’ın yan yana cephe görüntülerine karşılık tek kolon kullanılır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Cephe yakın planı metnin altında görünür.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Açıklama küçük ama tek genişlikte okunur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                4,
+                11,
+                92,
+                35
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Koyu zemin açıklama ile fotoğrafı birleştirir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Mobilde ayrıntı fotoğrafının yeterli yüksekliğini koru; masaüstü ikili görüntüyü minyatürleştirme.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Cephe yakın planı metnin altında görünür."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Açıklama küçük ama tek genişlikte okunur."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Koyu zemin açıklama ile fotoğrafı birleştirir."
+            ]
+          ],
+          "id": 6,
+          "start": 25.4,
+          "end": 29.4,
+          "duration": 4
+        },
+        {
+          "key": "model",
+          "sourceStart": 32.4,
+          "sourceEnd": 40.8,
+          "title": "Mobil model ve büyük sayılar",
+          "family": "Kamera",
+          "summary": "Modelin farklı açıları boyunca 6–7–8, 53 300 ve 2026 bilgileri değişir. Sayılar alt bölgede görünür.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Model mobil kadrajda görüş açısını değiştirir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Büyük sayı ve açıklaması aynı kamera durumuna bağlıdır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                2,
+                68,
+                96,
+                30
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Üst navigasyon model sahnesinde ince bir banttır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Modelin kadrajda bütünlüğünü ve bilgi yazılarının çakışmadığını her açı için kontrol et.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Model mobil kadrajda görüş açısını değiştirir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Büyük sayı ve açıklaması aynı kamera durumuna bağlıdır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Üst navigasyon model sahnesinde ince bir banttır."
+            ]
+          ],
+          "id": 7,
+          "start": 29.4,
+          "end": 37.8,
+          "duration": 8.4
+        },
+        {
+          "key": "location-collage",
+          "sourceStart": 40.8,
+          "sourceEnd": 47.2,
+          "title": "Model → location → insan",
+          "family": "Katman",
+          "summary": "Modelden renkli bina görünümüne, koyu location paneline ve iş insanı görüntüsüne geçilir. Katmanlar dikey sırada açılır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Bina ve insan görüntüleri yeni başlıklarla eşleşir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Basamaklı paneller fotoğrafın önüne gelir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Ulaşım açıklaması panel altında okunur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Dikey kolajda fotoğraf ve açıklama eşleşmesi korunmalı; tek scroll’da çok sayıda bilgi üst üste binmemeli.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Bina ve insan görüntüleri yeni başlıklarla eşleşir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Basamaklı paneller fotoğrafın önüne gelir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Ulaşım açıklaması panel altında okunur."
+            ]
+          ],
+          "id": 8,
+          "start": 37.8,
+          "end": 44.2,
+          "duration": 6.4
+        },
+        {
+          "key": "video-story",
+          "sourceStart": 47.2,
+          "sourceEnd": 51.8,
+          "title": "Araç içi video ve beyaz metin",
+          "family": "Video",
+          "summary": "Araç içi film mobil ekranı doldurur. Beyaz basamaklı açıklama sahnesi alttan gelerek videoyu örter.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Araç içi film kendi hareketini sürdürür.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz panel videonun üstüne alttan gelir.",
+              "range": [
+                0.45,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Ulaşım cümlesi beyaz alanda açılır.",
+              "range": [
+                0.6,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Film oynatımı ve sayfanın hareketi farklı katmanlardır; filmi scroll hızıyla yapay biçimde hızlandırma.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Araç içi film kendi hareketini sürdürür."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Beyaz panel videonun üstüne alttan gelir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Ulaşım cümlesi beyaz alanda açılır."
+            ]
+          ],
+          "id": 9,
+          "start": 44.2,
+          "end": 48.8,
+          "duration": 4.6
+        },
+        {
+          "key": "map-entry",
+          "sourceStart": 51.8,
+          "sourceEnd": 54.6,
+          "title": "Harita ve süre kartı",
+          "family": "Maske",
+          "summary": "Koyu harita üstte, büyük 8 dakika kartı altta görünür. Fotoğraf akışı yerini okunabilir harita bilgisinin dikey düzenine bırakır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Harita kendi yüksekliğini kullanır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                0,
+                100,
+                47
+              ]
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz süre kartı alt katman olarak açılır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                37,
+                100,
+                46
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Sayı ve hedef açıklaması beyaz kart içindedir.",
+              "range": [
+                0.2,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Mobil harita ile bilgi kartını çakıştırma; ikisine de okunur ayrı alan bırak.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Harita kendi yüksekliğini kullanır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Beyaz süre kartı alt katman olarak açılır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Sayı ve hedef açıklaması beyaz kart içindedir."
+            ]
+          ],
+          "id": 10,
+          "start": 48.8,
+          "end": 51.6,
+          "duration": 2.8
+        },
+        {
+          "key": "map-tabs",
+          "sourceStart": 54.6,
+          "sourceEnd": 58.8,
+          "title": "8 → 5 → 18 ulaşım kartı",
+          "family": "Etkileşim",
+          "summary": "Ulaşım seçimi değiştikçe süre ve hedef açıklaması birlikte değişir. Harita yeni seçimin arka bağlamı olarak kalır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Harita kadrajı aynı yüzeyde kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Süre ve hedef adı aynı seçimle değişir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                2,
+                30,
+                96,
+                59
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Alt kontrol çizgisi yeni kart seçimini izler.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Rakamı başlıktan bağımsız değiştirme; harita, açıklama ve seçili işaret aynı bilgi durumunu taşımalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Harita kadrajı aynı yüzeyde kalır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Süre ve hedef adı aynı seçimle değişir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Alt kontrol çizgisi yeni kart seçimini izler."
+            ]
+          ],
+          "id": 11,
+          "start": 51.6,
+          "end": 55.8,
+          "duration": 4.2
+        },
+        {
+          "key": "lifestyle",
+          "sourceStart": 58.8,
+          "sourceEnd": 65.2,
+          "title": "Mobil yaşam: koşu ve kayak",
+          "family": "Galeri",
+          "summary": "Koyu açıklama ve sporcu fotoğrafı dikey sırada görünür. Kayakçı seçimi resimle birlikte açıklamayı değiştirir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Koşucu ve kayakçı aynı resim penceresini kullanır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                0,
+                45,
+                100,
+                55
+              ]
+            },
+            {
+              "type": "text",
+              "note": "Her spor görüntüsünün kendi açıklaması üstte kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": [
+                3,
+                4,
+                94,
+                39
+              ]
+            },
+            {
+              "type": "ui",
+              "note": "Sayaç ve oklar açıklamayla fotoğraf arasındadır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Görsel değişimi bir yeni yaşam bilgisini anlatmalı; sadece ikinci fotoğraf var diye slayt ekleme.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Koşucu ve kayakçı aynı resim penceresini kullanır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Her spor görüntüsünün kendi açıklaması üstte kalır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Sayaç ve oklar açıklamayla fotoğraf arasındadır."
+            ]
+          ],
+          "id": 12,
+          "start": 55.8,
+          "end": 62.2,
+          "duration": 6.4
+        },
+        {
+          "key": "master-plan",
+          "sourceStart": 65.2,
+          "sourceEnd": 68.7,
+          "title": "Bütün bina ve 3D çağrısı",
+          "family": "Kadraj",
+          "summary": "Beyaz master plan sahnesinde bütün bina modeli ve ortadaki koyu 3D CTA görünür. Sonraki cephe fotoğrafı alttan gelir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Bütün model dar dikey ekranda gösterilir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz zemin önceki koyu bölümü devralır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "3D CTA modelin önündedir; kayıtta açılmaz.",
+              "range": [
+                0.1,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Modelin tamamını önce okut. Açılmayan 3D arayüzü bu kayıtla incelenmiş sayma.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Bütün model dar dikey ekranda gösterilir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Beyaz zemin önceki koyu bölümü devralır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "3D CTA modelin önündedir; kayıtta açılmaz."
+            ]
+          ],
+          "id": 13,
+          "start": 62.2,
+          "end": 65.7,
+          "duration": 3.5
+        },
+        {
+          "key": "architecture",
+          "sourceStart": 68.7,
+          "sourceEnd": 71.4,
+          "title": "Mimari fotoğraf ve koyu kart",
+          "family": "Maske",
+          "summary": "Cephe fotoğrafı gelirken koyu kademeli kart önüne açılır. Alt metin ve yeni mimari görüntü bir sonraki bölüme geçer.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Cephe fotoğrafı üst katmanda görünür.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Koyu kart fotoğrafın altını kademeli örter.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Mimari açıklama yeni kart içinde görünür.",
+              "range": [
+                0.15,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Bina fotoğrafının tanınan çizgilerini maske hareketi boyunca koru.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Cephe fotoğrafı üst katmanda görünür."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Koyu kart fotoğrafın altını kademeli örter."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Mimari açıklama yeni kart içinde görünür."
+            ]
+          ],
+          "id": 14,
+          "start": 65.7,
+          "end": 68.4,
+          "duration": 2.7
+        },
+        {
+          "key": "architect-quote",
+          "sourceStart": 71.4,
+          "sourceEnd": 73.2,
+          "title": "Mimarın beyaz kartı",
+          "family": "Katman",
+          "summary": "Mimar bilgisi beyaz kartta okunur, lobi fotoğrafı altta görünmeye başlar.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Dış cepheden lobi görüntüsüne geçilir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz bilgi kartı iki görseli birbirine bağlar.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Mimar adı kartın üst kısmında kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Bilgi yüzeyini görsel geçişinde bir boşluk değil, anlatım köprüsü olarak kullan.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Dış cepheden lobi görüntüsüne geçilir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Beyaz bilgi kartı iki görseli birbirine bağlar."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Mimar adı kartın üst kısmında kalır."
+            ]
+          ],
+          "id": 15,
+          "start": 68.4,
+          "end": 70.2,
+          "duration": 1.8
+        },
+        {
+          "key": "materials",
+          "sourceStart": 73.2,
+          "sourceEnd": 80.8,
+          "title": "Malzemeler ve geri–ileri okuma",
+          "family": "Malzeme",
+          "summary": "Beyaz malzeme kompozisyonu görünür; kullanıcı lobiye iner ve geri dönerek aynı parçaları tekrar gösterir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Panel, küre ve malzeme parçaları bütün kompozisyonda kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Malzeme açıklaması mobilde kompozisyonun üstü ve altındadır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz zemin sonraki fotoğraf için sürekli alan oluşturur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Teknik görsel ileri ve geri okunduğunda da bütün kalmalı; oran değiştiren ek fit animasyonu kullanılmamalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Panel, küre ve malzeme parçaları bütün kompozisyonda kalır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Malzeme açıklaması mobilde kompozisyonun üstü ve altındadır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Beyaz zemin sonraki fotoğraf için sürekli alan oluşturur."
+            ]
+          ],
+          "id": 16,
+          "start": 70.2,
+          "end": 77.8,
+          "duration": 7.6
+        },
+        {
+          "key": "lobby",
+          "sourceStart": 80.8,
+          "sourceEnd": 88.8,
+          "title": "Lobi bilgisi ve mobil galeri",
+          "family": "Galeri",
+          "summary": "Lobi resmi, açıklama, 4–12–16 bilgileri ve resepsiyon galerisi dikey sırada okunur. Galeri fotoğrafı seçimi ayrıca gösterilir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Lobi ve resepsiyon fotoğrafları ayrı içerik pencereleri oluşturur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Sayılar bir satıra sıkıştırılmaz; mobilde ayrı satırlarda yerleşir.",
+              "range": [
+                0.2,
+                0.7
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "Galeri kontrolleri fotoğraf altında kalır.",
+              "range": [
+                0.5,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Mobil sayısal bilgi grid’ini yeniden düzenle; tek satırda aşırı küçük tipografiyle okunurluğu kaybetme.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Lobi ve resepsiyon fotoğrafları ayrı içerik pencereleri oluşturur."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Sayılar bir satıra sıkıştırılmaz; mobilde ayrı satırlarda yerleşir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Galeri kontrolleri fotoğraf altında kalır."
+            ]
+          ],
+          "id": 17,
+          "start": 77.8,
+          "end": 85.8,
+          "duration": 8
+        },
+        {
+          "key": "offices",
+          "sourceStart": 88.8,
+          "sourceEnd": 94.7,
+          "title": "Ofis videosu ve hizmet kartları",
+          "family": "Video",
+          "summary": "İnsan filmi, offices kartı ve çalışma alanı resmi art arda gelir. Hizmet kartları beyaz ayırıcılarla sıralanır.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "İnsan hareketi ve mekân görüntüsü farklı yüzeylerdir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Koyu basamaklı kartlar dar ekranda tek sıra olur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Ofis ve hizmet bilgileri her kartın içinde kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Fotoğraftaki eylemden mekân bilgisine geçiş anlaşılır bir sırayla kurulmalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "İnsan hareketi ve mekân görüntüsü farklı yüzeylerdir."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Koyu basamaklı kartlar dar ekranda tek sıra olur."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Ofis ve hizmet bilgileri her kartın içinde kalır."
+            ]
+          ],
+          "id": 18,
+          "start": 85.8,
+          "end": 91.7,
+          "duration": 5.9
+        },
+        {
+          "key": "technology",
+          "sourceStart": 94.7,
+          "sourceEnd": 98.7,
+          "title": "Teknoloji ve enerji kartı",
+          "family": "Katman",
+          "summary": "Tesisat görseli, technology yazısı ve enerji kartı koyu bölümde açılır. Görüntü ve bilgiler dikey olarak ilerler.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Teknik fotoğraf üstte kendi kadrajında kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Technology ve açıklama görselin altında okunur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Beyaz enerji kartı koyu zeminden ayrılır.",
+              "range": [
+                0.5,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Teknik bölümlerin kontrastı, günlük yaşam fotoğraflarından farklı ama aynı sistem içinde olmalı.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Teknik fotoğraf üstte kendi kadrajında kalır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Technology ve açıklama görselin altında okunur."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Beyaz enerji kartı koyu zeminden ayrılır."
+            ]
+          ],
+          "id": 19,
+          "start": 91.7,
+          "end": 95.7,
+          "duration": 4
+        },
+        {
+          "key": "infrastructure",
+          "sourceStart": 98.7,
+          "sourceEnd": 102.3,
+          "title": "Aerial → market → ekip",
+          "family": "Katman",
+          "summary": "Geniş aerial görüntüden market fotoğrafına geçilir; sonrasında beyaz ekip bölümü gelir. Desktop’ın daha uzun altyapı dizisinin burada bir kısmı kaydedilmiştir.",
+          "layers": [
+            {
+              "type": "image",
+              "note": "Aerial ve market görüntüsü farklı gündelik bağlamlar taşır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "mask",
+              "note": "Koyu etiket kartı ve beyaz ekip yüzeyi sırayla öne gelir.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Retail ve ekip başlıkları kendi sahnelerinde okunur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Kayıtta görülmeyen restoran, kafe veya sağlık geçişlerini mobilde varmış gibi bu klibe ekleme.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Aerial ve market görüntüsü farklı gündelik bağlamlar taşır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Koyu etiket kartı ve beyaz ekip yüzeyi sırayla öne gelir."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Retail ve ekip başlıkları kendi sahnelerinde okunur."
+            ]
+          ],
+          "id": 20,
+          "start": 95.7,
+          "end": 99.3,
+          "duration": 3.6
+        },
+        {
+          "key": "team",
+          "sourceStart": 102.3,
+          "sourceEnd": 107,
+          "title": "Ekip kartları tek kolonda",
+          "family": "Kadraj",
+          "summary": "Desktop’ın üç yan yana kartı mobilde tek akışa dönüşür. Marka isimleri büyük koyu kartlarda sırayla okunur.",
+          "layers": [
+            {
+              "type": "mask",
+              "note": "Koyu kartlar beyaz zemin üzerinde dikey sıralanır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "OUR TEAM ve ekip kimlikleri her kart içinde kalır.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "Kart başlıkları ve detay işaretleri ayrı küçük kontroldür.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Bir desktop grid’ini mobilde yeniden sırala; kartların anlamlı büyüklüğünü koru.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Koyu kartlar beyaz zemin üzerinde dikey sıralanır."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "OUR TEAM ve ekip kimlikleri her kart içinde kalır."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Kart başlıkları ve detay işaretleri ayrı küçük kontroldür."
+            ]
+          ],
+          "id": 21,
+          "start": 99.3,
+          "end": 104,
+          "duration": 4.7
+        },
+        {
+          "key": "footer",
+          "sourceStart": 107,
+          "sourceEnd": 110,
+          "title": "Mobil footer ve kapanış",
+          "family": "Kadraj",
+          "summary": "Ekip kartı çıkar; LIKOVA, açılış saatleri, contact düğmesi ve alt bilgiler koyu footer içinde görünür.",
+          "layers": [
+            {
+              "type": "mask",
+              "note": "Koyu footer ve beyaz basamaklı üst sınır ortak kompozisyondur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "text",
+              "note": "Marka, saat ve hukuki alt bilgi ayrı hiyerarşilerde okunur.",
+              "range": [
+                0,
+                1
+              ],
+              "box": null
+            },
+            {
+              "type": "ui",
+              "note": "Contact düğmesi yeni sahnenin ana kontrolüdür.",
+              "range": [
+                0.25,
+                1
+              ],
+              "box": null
+            }
+          ],
+          "lesson": "Kapanışta linkleri ve ikincil bilgiyi açık sırala; büyük fotoğraf akışının ardından daha sakin bir okuma kur.",
+          "phases": [
+            [
+              0,
+              "Başlangıç",
+              "Koyu footer ve beyaz basamaklı üst sınır ortak kompozisyondur."
+            ],
+            [
+              0.5,
+              "Hareket",
+              "Marka, saat ve hukuki alt bilgi ayrı hiyerarşilerde okunur."
+            ],
+            [
+              0.94,
+              "Varış",
+              "Contact düğmesi yeni sahnenin ana kontrolüdür."
+            ]
+          ],
+          "id": 22,
+          "start": 104,
+          "end": 107,
+          "duration": 3
+        }
+      ]
+    }
+  }
+}
