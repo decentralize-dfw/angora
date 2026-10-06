@@ -1,6 +1,6 @@
 # web3 — ERA yönünde kurgu ve uygulama planı
 
-İlk sürüm: 5 Ekim 2026 20:12:05 · Europe/Paris (UTC+02:00). **V2 / uygulama sözleşmesi denetimi: 5 Ekim 2026.** Durum: **yalnız plan; web3.html henüz uygulanmadı.** Sayfanın içeriği İngilizce, bu çalışma belgesi Türkçe olacak. web4 için Likova yönü ayrı tutulacak.
+İlk sürüm: 5 Ekim 2026 20:12:05 · Europe/Paris (UTC+02:00). **V2 / uygulama sözleşmesi denetimi: 5 Ekim 2026.** Uygulama: **web3.html, 6 Ekim 2026** — [teslim ve doğrulama kaydı](web3-implementation-2026-10-06.md). Sayfanın içeriği İngilizce, bu çalışma belgesi Türkçe. web4 için Likova yönü ayrı tutuldu. Önceki incelemenin notları değiştirilmedi.
 
 Bu planın iki kaynağı, kullanıcının 15:29 web2 ekran kaydı ve casestudy2'deki gerçek ERA desktop/mobil kayıtlarıdır. Canlı web2'deki ek deneme, aynı günün farklı bir gözlemidir; eski kaydın input yolunu geriye dönük kanıtlamaz. Yeni kurguya henüz 9 verilmedi. 9, uygulama sonrasında sağlanması gereken hedeftir.
 
