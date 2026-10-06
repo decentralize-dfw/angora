@@ -1,0 +1,2126 @@
+{
+  "capturedAt": "2026-10-06T11:42:43.866Z",
+  "revision": "20261006-refinement-2",
+  "method": "Chromium browser, native wheel and pointer. Responsive viewport emulation; not a physical iOS/Android device.",
+  "checks": {
+    "openingHeld": {
+      "hero": 0,
+      "opening": "held",
+      "still": "http://localhost:4183/assets/web3/films/opening-last.webp",
+      "y": 0
+    },
+    "firstScroll": {
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 0,
+          "hero": 0
+        },
+        "elapsed": 2030.5,
+        "endY": 0,
+        "finish": 128330.30000000076,
+        "id": 2,
+        "source": "wheel",
+        "start": 126299.80000000076,
+        "y": 0
+      },
+      "hero": 1,
+      "y": 0
+    },
+    "bridgeBefore": {
+      "bar": {
+        "bottom": 620.1749877929688,
+        "height": 46,
+        "left": 75.9000015258789,
+        "right": 1188.900001525879,
+        "top": 574.1749877929688,
+        "width": 1113,
+        "x": 75.9000015258789,
+        "y": 574.1749877929688
+      },
+      "content": {
+        "bottom": 562.1750183105469,
+        "height": 356.51251220703125,
+        "left": 75.9000015258789,
+        "right": 1188.900001525879,
+        "top": 205.6625061035156,
+        "width": 1113,
+        "x": 75.9000015258789,
+        "y": 205.6625061035156
+      },
+      "pending": {
+        "id": 3,
+        "phase": "preparing",
+        "source": "mode",
+        "target": {
+          "cursor": 7,
+          "section": "technical"
+        }
+      },
+      "y": 8940
+    },
+    "bridgeAfter": {
+      "bar": {
+        "bottom": 620.1749877929688,
+        "height": 46,
+        "left": 75.9000015258789,
+        "right": 1188.900001525879,
+        "top": 574.1749877929688,
+        "width": 1113,
+        "x": 75.9000015258789,
+        "y": 574.1749877929688
+      },
+      "content": {
+        "bottom": 562.1750183105469,
+        "height": 356.51251220703125,
+        "left": 75.9000015258789,
+        "right": 1188.900001525879,
+        "top": 205.6625061035156,
+        "width": 1113,
+        "x": 75.9000015258789,
+        "y": 205.6625061035156
+      },
+      "dim": {
+        "bottom": 605.6749877929688,
+        "height": 17,
+        "left": 1098.3125,
+        "right": 1115.3125,
+        "top": 588.6749877929688,
+        "width": 17,
+        "x": 1098.3125,
+        "y": 588.6749877929688
+      },
+      "photo": "<img src=\"assets/web3/photos/angora_03-800.webp\" width=\"1920\" height=\"1080\" alt=\"Living room, Garden level\" decoding=\"async\">",
+      "y": 8940
+    },
+    "dimensionStable": {
+      "content": {
+        "bottom": 562.1750183105469,
+        "height": 356.51251220703125,
+        "left": 75.9000015258789,
+        "right": 1188.900001525879,
+        "top": 205.6625061035156,
+        "width": 1113,
+        "x": 75.9000015258789,
+        "y": 205.6625061035156
+      },
+      "dimensions": "block",
+      "opacity": "1",
+      "photo": "<img src=\"assets/web3/photos/angora_03-800.webp\" width=\"1920\" height=\"1080\" alt=\"Living room, Garden level\" decoding=\"async\">",
+      "y": 8940
+    },
+    "turkishFixed": {
+      "footer": "ANGORA 21\nGeliştiren MERGVS · Luxembourg\n\nFotoğraflar mülk sahibi tarafından çekilmiş ve üzerlerinde küçük rötuşlar yapılmıştır. Rötuşlu görseller ve renderlar sunum amaçlıdır; mülkün her ayrıntısını yüzde yüz aynı biçimde yansıtmayabilir.\n\n3D model, Angora Evleri tarafından sağlanan çizimlerden üretilmiştir. Modeldeki bina geometrisi ve ölçüler, sağlanan çizimlerle birebir aynıdır.",
+      "header": "ANGORA 21\nTürkçe\n/\nEnglish\nİlan\n↗\nEvi 3D keşfet\n↗\nMERGVS\n↗",
+      "lang": "tr",
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 7,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 3,
+        "section": "technical",
+        "technical": {
+          "cursor": 7,
+          "floor": 0,
+          "mode": "plan"
+        }
+      },
+      "title": "Bahçe katı.",
+      "y": 8907.2001953125
+    },
+    "desktopRoute": [
+      {
+        "cursor": 1,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 0,
+            "hero": 0
+          },
+          "elapsed": 1171.89999999851,
+          "endY": 8940,
+          "finish": 1436.39999999851,
+          "id": 3,
+          "source": "wheel",
+          "start": 264.5,
+          "y": 8940
+        },
+        "mode": "iso",
+        "y": 8940
+      },
+      {
+        "cursor": 2,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 1,
+            "hero": 0
+          },
+          "elapsed": 1173.699999999255,
+          "endY": 8940,
+          "finish": 2653.699999999255,
+          "id": 4,
+          "source": "wheel",
+          "start": 1480,
+          "y": 8940
+        },
+        "mode": "iso",
+        "y": 8940
+      },
+      {
+        "cursor": 3,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 2,
+            "hero": 0
+          },
+          "elapsed": 1170.5,
+          "endY": 8940,
+          "finish": 3894.300000000745,
+          "id": 5,
+          "source": "wheel",
+          "start": 2723.800000000745,
+          "y": 8940
+        },
+        "mode": "iso",
+        "y": 8940
+      },
+      {
+        "cursor": 4,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 3,
+            "hero": 0
+          },
+          "elapsed": 1214.5999999977648,
+          "endY": 8940,
+          "finish": 5186.39999999851,
+          "id": 6,
+          "source": "wheel",
+          "start": 3971.800000000745,
+          "y": 8940
+        },
+        "mode": "plan",
+        "y": 8940
+      },
+      {
+        "cursor": 5,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 4,
+            "hero": 0
+          },
+          "elapsed": 1368,
+          "endY": 8940,
+          "finish": 6592.800000000745,
+          "id": 7,
+          "source": "wheel",
+          "start": 5224.800000000745,
+          "y": 8940
+        },
+        "mode": "plan",
+        "y": 8940
+      },
+      {
+        "cursor": 6,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 5,
+            "hero": 0
+          },
+          "elapsed": 1371.7999999970198,
+          "endY": 8940,
+          "finish": 8002.89999999851,
+          "id": 8,
+          "source": "wheel",
+          "start": 6631.10000000149,
+          "y": 8940
+        },
+        "mode": "plan",
+        "y": 8940
+      },
+      {
+        "cursor": 7,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 6,
+            "hero": 0
+          },
+          "elapsed": 1368.199999999255,
+          "endY": 8940,
+          "finish": 9496.699999999257,
+          "id": 9,
+          "source": "wheel",
+          "start": 8128.5,
+          "y": 8940
+        },
+        "mode": "plan",
+        "y": 8940
+      }
+    ],
+    "desktopExit": {
+      "cursor": 7,
+      "y": 9069.599609375
+    },
+    "desktopBack": [
+      {
+        "cursor": 6,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 7,
+            "hero": 0
+          },
+          "elapsed": 1366.199999999255,
+          "endY": 8939.2001953125,
+          "finish": 30338.89999999851,
+          "id": 10,
+          "source": "wheel",
+          "start": 28972.699999999255,
+          "y": 8939.2001953125
+        },
+        "y": 8939.2001953125
+      },
+      {
+        "cursor": 5,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 6,
+            "hero": 0
+          },
+          "elapsed": 1363.5,
+          "endY": 8939.2001953125,
+          "finish": 31825,
+          "id": 11,
+          "source": "wheel",
+          "start": 30461.5,
+          "y": 8939.2001953125
+        },
+        "y": 8939.2001953125
+      },
+      {
+        "cursor": 4,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 5,
+            "hero": 0
+          },
+          "elapsed": 1370.60000000149,
+          "endY": 8939.2001953125,
+          "finish": 33328.300000000745,
+          "id": 12,
+          "source": "wheel",
+          "start": 31957.699999999255,
+          "y": 8939.2001953125
+        },
+        "y": 8939.2001953125
+      },
+      {
+        "cursor": 3,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 4,
+            "hero": 0
+          },
+          "elapsed": 1242.60000000149,
+          "endY": 8939.2001953125,
+          "finish": 34690.5,
+          "id": 13,
+          "source": "wheel",
+          "start": 33447.89999999851,
+          "y": 8939.2001953125
+        },
+        "y": 8939.2001953125
+      },
+      {
+        "cursor": 2,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 3,
+            "hero": 0
+          },
+          "elapsed": 1171.2999999970198,
+          "endY": 8939.2001953125,
+          "finish": 35992.89999999851,
+          "id": 14,
+          "source": "wheel",
+          "start": 34821.60000000149,
+          "y": 8939.2001953125
+        },
+        "y": 8939.2001953125
+      },
+      {
+        "cursor": 1,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 2,
+            "hero": 0
+          },
+          "elapsed": 1176.800000000745,
+          "endY": 8939.2001953125,
+          "finish": 37240.300000000745,
+          "id": 15,
+          "source": "wheel",
+          "start": 36063.5,
+          "y": 8939.2001953125
+        },
+        "y": 8939.2001953125
+      },
+      {
+        "cursor": 0,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 1,
+            "hero": 0
+          },
+          "elapsed": 1170.5,
+          "endY": 8939.2001953125,
+          "finish": 38479.800000000745,
+          "id": 16,
+          "source": "wheel",
+          "start": 37309.300000000745,
+          "y": 8939.2001953125
+        },
+        "y": 8939.2001953125
+      }
+    ],
+    "mobileRoute": [
+      {
+        "cursor": 1,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 0,
+            "hero": 0
+          },
+          "elapsed": 1174.7000000029802,
+          "endY": 8860.7998046875,
+          "finish": 1424.7000000029802,
+          "id": 3,
+          "source": "wheel",
+          "start": 250,
+          "y": 8860.7998046875
+        },
+        "mode": "iso",
+        "y": 8860.7998046875
+      },
+      {
+        "cursor": 2,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 1,
+            "hero": 0
+          },
+          "elapsed": 1174.10000000149,
+          "endY": 8860.7998046875,
+          "finish": 2636.70000000298,
+          "id": 4,
+          "source": "wheel",
+          "start": 1462.60000000149,
+          "y": 8860.7998046875
+        },
+        "mode": "iso",
+        "y": 8860.7998046875
+      },
+      {
+        "cursor": 3,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 2,
+            "hero": 0
+          },
+          "elapsed": 1175.199999999255,
+          "endY": 8860.7998046875,
+          "finish": 3884.10000000149,
+          "id": 5,
+          "source": "wheel",
+          "start": 2708.900000002235,
+          "y": 8860.7998046875
+        },
+        "mode": "iso",
+        "y": 8860.7998046875
+      },
+      {
+        "cursor": 4,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 3,
+            "hero": 0
+          },
+          "elapsed": 1213.10000000149,
+          "endY": 8860.7998046875,
+          "finish": 5167.400000002235,
+          "id": 6,
+          "source": "wheel",
+          "start": 3954.300000000745,
+          "y": 8860.7998046875
+        },
+        "mode": "plan",
+        "y": 8860.7998046875
+      },
+      {
+        "cursor": 5,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 4,
+            "hero": 0
+          },
+          "elapsed": 1369.5,
+          "endY": 8860.7998046875,
+          "finish": 6583,
+          "id": 7,
+          "source": "wheel",
+          "start": 5213.5,
+          "y": 8860.7998046875
+        },
+        "mode": "plan",
+        "y": 8860.7998046875
+      },
+      {
+        "cursor": 6,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 5,
+            "hero": 0
+          },
+          "elapsed": 1360.10000000149,
+          "endY": 8860.7998046875,
+          "finish": 8068.70000000298,
+          "id": 8,
+          "source": "wheel",
+          "start": 6708.60000000149,
+          "y": 8860.7998046875
+        },
+        "mode": "plan",
+        "y": 8860.7998046875
+      },
+      {
+        "cursor": 7,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 6,
+            "hero": 0
+          },
+          "elapsed": 1362.699999999255,
+          "endY": 8860.7998046875,
+          "finish": 9548.5,
+          "id": 9,
+          "source": "wheel",
+          "start": 8185.800000000745,
+          "y": 8860.7998046875
+        },
+        "mode": "plan",
+        "y": 8860.7998046875
+      }
+    ],
+    "mobileExit": {
+      "cursor": 7,
+      "y": 9012.7998046875
+    },
+    "mobileBack": [
+      {
+        "cursor": 6,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 7,
+            "hero": 0
+          },
+          "elapsed": 1398.5,
+          "endY": 8860,
+          "finish": 77253.5,
+          "id": 10,
+          "source": "wheel",
+          "start": 75855,
+          "y": 8860
+        },
+        "y": 8860
+      },
+      {
+        "cursor": 5,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 6,
+            "hero": 0
+          },
+          "elapsed": 1364.4000000022352,
+          "endY": 8860,
+          "finish": 78704.70000000298,
+          "id": 11,
+          "source": "wheel",
+          "start": 77340.30000000075,
+          "y": 8860
+        },
+        "y": 8860
+      },
+      {
+        "cursor": 4,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 5,
+            "hero": 0
+          },
+          "elapsed": 1367.699999999255,
+          "endY": 8860,
+          "finish": 80204.5,
+          "id": 12,
+          "source": "wheel",
+          "start": 78836.80000000075,
+          "y": 8860
+        },
+        "y": 8860
+      },
+      {
+        "cursor": 3,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 4,
+            "hero": 0
+          },
+          "elapsed": 1241.0999999977648,
+          "endY": 8860,
+          "finish": 81552.80000000075,
+          "id": 13,
+          "source": "wheel",
+          "start": 80311.70000000298,
+          "y": 8860
+        },
+        "y": 8860
+      },
+      {
+        "cursor": 2,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 3,
+            "hero": 0
+          },
+          "elapsed": 1177.2000000029802,
+          "endY": 8860,
+          "finish": 82863.20000000298,
+          "id": 14,
+          "source": "wheel",
+          "start": 81686,
+          "y": 8860
+        },
+        "y": 8860
+      },
+      {
+        "cursor": 1,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 2,
+            "hero": 0
+          },
+          "elapsed": 1175,
+          "endY": 8860,
+          "finish": 84097.70000000298,
+          "id": 15,
+          "source": "wheel",
+          "start": 82922.70000000298,
+          "y": 8860
+        },
+        "y": 8860
+      },
+      {
+        "cursor": 0,
+        "errors": [],
+        "gesture": {
+          "before": {
+            "cursor": 1,
+            "hero": 0
+          },
+          "elapsed": 1172.699999999255,
+          "endY": 8860,
+          "finish": 85346.30000000075,
+          "id": 16,
+          "source": "wheel",
+          "start": 84173.60000000149,
+          "y": 8860
+        },
+        "y": 8860
+      }
+    ],
+    "finalHeaderSizes": [
+      {
+        "bar": {
+          "bottom": 529.3999938964844,
+          "height": 44,
+          "left": 15,
+          "right": 305,
+          "top": 485.3999938964844,
+          "width": 290,
+          "x": 15,
+          "y": 485.3999938964844
+        },
+        "header": [
+          {
+            "bottom": 38,
+            "font": "18px",
+            "right": 108,
+            "text": "ANGORA 21",
+            "x": 18
+          },
+          {
+            "bottom": 36,
+            "font": "8px",
+            "right": 147.48750114440918,
+            "text": "Türkçe",
+            "x": 120
+          },
+          {
+            "bottom": 36,
+            "font": "8px",
+            "right": 188.4125099182129,
+            "text": "English",
+            "x": 158.58750915527344
+          },
+          {
+            "bottom": 70,
+            "font": "8px",
+            "right": 224.9750099182129,
+            "text": "İlan ↗",
+            "x": 199.52500915527344
+          },
+          {
+            "bottom": 70,
+            "font": "8px",
+            "right": 302.00000762939453,
+            "text": "Evi 3D keşfet ↗",
+            "x": 238.9750061035156
+          },
+          {
+            "bottom": 35,
+            "font": "8px",
+            "right": 302,
+            "text": "MERGVS ↗",
+            "x": 257.375
+          }
+        ],
+        "overflow": 0,
+        "photo": {
+          "bottom": 480.3874969482422,
+          "height": 94.9250030517578,
+          "left": 15,
+          "right": 188,
+          "top": 385.4624938964844,
+          "width": 173,
+          "x": 15,
+          "y": 385.4624938964844
+        },
+        "stage": {
+          "bottom": 568,
+          "height": 568,
+          "left": 0,
+          "right": 320,
+          "top": 0,
+          "width": 320,
+          "x": 0,
+          "y": 0
+        },
+        "viewport": [
+          320,
+          568
+        ]
+      },
+      {
+        "bar": {
+          "bottom": 1666.25,
+          "height": 44,
+          "left": 15,
+          "right": 375.3999938964844,
+          "top": 1622.25,
+          "width": 360.3999938964844,
+          "x": 15,
+          "y": 1622.25
+        },
+        "header": [
+          {
+            "bottom": 38,
+            "font": "18px",
+            "right": 108,
+            "text": "ANGORA 21",
+            "x": 18
+          },
+          {
+            "bottom": 36,
+            "font": "8px",
+            "right": 147.48750114440918,
+            "text": "Türkçe",
+            "x": 120
+          },
+          {
+            "bottom": 36,
+            "font": "8px",
+            "right": 188.4125099182129,
+            "text": "English",
+            "x": 158.58750915527344
+          },
+          {
+            "bottom": 70,
+            "font": "8px",
+            "right": 295.3750190734863,
+            "text": "İlan ↗",
+            "x": 269.9250183105469
+          },
+          {
+            "bottom": 70,
+            "font": "8px",
+            "right": 372.4000015258789,
+            "text": "Evi 3D keşfet ↗",
+            "x": 309.375
+          },
+          {
+            "bottom": 35,
+            "font": "8px",
+            "right": 372.3999938964844,
+            "text": "MERGVS ↗",
+            "x": 327.7749938964844
+          }
+        ],
+        "overflow": 0,
+        "photo": {
+          "bottom": 1616.2374725341797,
+          "height": 176.7624969482422,
+          "left": 15,
+          "right": 239.7624969482422,
+          "top": 1439.4749755859375,
+          "width": 224.7624969482422,
+          "x": 15,
+          "y": 1439.4749755859375
+        },
+        "stage": {
+          "bottom": 1732.3500366210938,
+          "height": 844,
+          "left": 0,
+          "right": 390.3999938964844,
+          "top": 888.3500366210938,
+          "width": 390.3999938964844,
+          "x": 0,
+          "y": 888.3500366210938
+        },
+        "viewport": [
+          390,
+          844
+        ]
+      },
+      {
+        "bar": {
+          "bottom": 1821.9124755859375,
+          "height": 44,
+          "left": 15,
+          "right": 415.3999938964844,
+          "top": 1777.9124755859375,
+          "width": 400.3999938964844,
+          "x": 15,
+          "y": 1777.9124755859375
+        },
+        "header": [
+          {
+            "bottom": 38,
+            "font": "18px",
+            "right": 108,
+            "text": "ANGORA 21",
+            "x": 18
+          },
+          {
+            "bottom": 36,
+            "font": "8px",
+            "right": 147.48750114440918,
+            "text": "Türkçe",
+            "x": 120
+          },
+          {
+            "bottom": 36,
+            "font": "8px",
+            "right": 188.4125099182129,
+            "text": "English",
+            "x": 158.58750915527344
+          },
+          {
+            "bottom": 70,
+            "font": "8px",
+            "right": 335.3750190734863,
+            "text": "İlan ↗",
+            "x": 309.9250183105469
+          },
+          {
+            "bottom": 70,
+            "font": "8px",
+            "right": 412.4000015258789,
+            "text": "Evi 3D keşfet ↗",
+            "x": 349.375
+          },
+          {
+            "bottom": 35,
+            "font": "8px",
+            "right": 412.3999938964844,
+            "text": "MERGVS ↗",
+            "x": 367.7749938964844
+          }
+        ],
+        "overflow": 0,
+        "photo": {
+          "bottom": 1771.9125061035156,
+          "height": 206.1000061035156,
+          "left": 15,
+          "right": 265.5749969482422,
+          "top": 1565.8125,
+          "width": 250.5749969482422,
+          "x": 15,
+          "y": 1565.8125
+        },
+        "stage": {
+          "bottom": 1888.0125122070312,
+          "height": 932,
+          "left": 0,
+          "right": 430.3999938964844,
+          "top": 956.0125122070312,
+          "width": 430.3999938964844,
+          "x": 0,
+          "y": 956.0125122070312
+        },
+        "viewport": [
+          430,
+          932
+        ]
+      },
+      {
+        "bar": {
+          "bottom": 728.6000366210938,
+          "height": 46,
+          "left": 45.17499923706055,
+          "right": 707.6250114440918,
+          "top": 682.6000366210938,
+          "width": 662.4500122070312,
+          "x": 45.17499923706055,
+          "y": 682.6000366210938
+        },
+        "header": [
+          {
+            "bottom": 37.60000038146973,
+            "font": "20px",
+            "right": 131.2625026702881,
+            "text": "ANGORA 21",
+            "x": 30.11250114440918
+          },
+          {
+            "bottom": 47.60000014305115,
+            "font": "8px",
+            "right": 491.66251945495605,
+            "text": "Türkçe",
+            "x": 464.1750183105469
+          },
+          {
+            "bottom": 47.60000014305115,
+            "font": "8px",
+            "right": 538.5875129699707,
+            "text": "English",
+            "x": 508.7625122070313
+          },
+          {
+            "bottom": 47.60000014305115,
+            "font": "8px",
+            "right": 581.037525177002,
+            "text": "İlan ↗",
+            "x": 553.5875244140625
+          },
+          {
+            "bottom": 47.60000014305115,
+            "font": "8px",
+            "right": 661.0625381469727,
+            "text": "Evi 3D keşfet ↗",
+            "x": 596.0375366210938
+          },
+          {
+            "bottom": 47.60000014305115,
+            "font": "8px",
+            "right": 722.6875,
+            "text": "MERGVS ↗",
+            "x": 676.0625
+          }
+        ],
+        "overflow": -15,
+        "photo": {
+          "bottom": 536.7874984741211,
+          "height": 470,
+          "left": 442.3125,
+          "right": 707.6125183105469,
+          "top": 66.7874984741211,
+          "width": 265.3000183105469,
+          "x": 442.3125,
+          "y": 66.7874984741211
+        },
+        "stage": {
+          "bottom": 828.3000030517578,
+          "height": 1024,
+          "left": 0,
+          "right": 752.7999877929688,
+          "top": -195.6999969482422,
+          "width": 752.7999877929688,
+          "x": 0,
+          "y": -195.6999969482422
+        },
+        "viewport": [
+          768,
+          1024
+        ]
+      },
+      {
+        "bar": {
+          "bottom": 1027.2000122070312,
+          "height": 46,
+          "left": 75.9000015258789,
+          "right": 1188.900001525879,
+          "top": 981.2000122070312,
+          "width": 1113,
+          "x": 75.9000015258789,
+          "y": 981.2000122070312
+        },
+        "header": [
+          {
+            "bottom": 37.60000038146973,
+            "font": "22px",
+            "right": 160.30000686645508,
+            "text": "ANGORA 21",
+            "x": 50.60000228881836
+          },
+          {
+            "bottom": 47.60000014305115,
+            "font": "8px",
+            "right": 952.2750377655028,
+            "text": "Türkçe",
+            "x": 924.7875366210938
+          },
+          {
+            "bottom": 47.60000014305115,
+            "font": "8px",
+            "right": 999.2000007629396,
+            "text": "English",
+            "x": 969.375
+          },
+          {
+            "bottom": 47.60000014305115,
+            "font": "8px",
+            "right": 1051.9500007629397,
+            "text": "İlan ↗",
+            "x": 1024.5
+          },
+          {
+            "bottom": 47.60000014305115,
+            "font": "8px",
+            "right": 1142.275001525879,
+            "text": "Evi 3D keşfet ↗",
+            "x": 1077.25
+          },
+          {
+            "bottom": 47.60000014305115,
+            "font": "8px",
+            "right": 1214.2000732421875,
+            "text": "MERGVS ↗",
+            "x": 1167.5750732421875
+          }
+        ],
+        "overflow": -15,
+        "photo": {
+          "bottom": 894.2000122070312,
+          "height": 278.51251220703125,
+          "left": 753.6375122070312,
+          "right": 1188.9000244140625,
+          "top": 615.6875,
+          "width": 435.2625122070313,
+          "x": 753.6375122070312,
+          "y": 615.6875
+        },
+        "stage": {
+          "bottom": 1126.8999938964844,
+          "height": 720,
+          "left": 0,
+          "right": 1264.800048828125,
+          "top": 406.8999938964844,
+          "width": 1264.800048828125,
+          "x": 0,
+          "y": 406.8999938964844
+        },
+        "viewport": [
+          1280,
+          720
+        ]
+      }
+    ],
+    "compactPlan": {
+      "links": [
+        {
+          "right": 108,
+          "text": "ANGORA 21",
+          "x": 18
+        },
+        {
+          "right": 181.4375038146973,
+          "text": "Listing ↗",
+          "x": 142.9250030517578
+        },
+        {
+          "right": 302,
+          "text": "Explore the house in 3D ↗",
+          "x": 195.4375
+        },
+        {
+          "right": 302,
+          "text": "MERGVS ↗",
+          "x": 257.375
+        }
+      ],
+      "qa": {
+        "active": "BODY",
+        "errors": [],
+        "events": [
+          {
+            "after": {
+              "cameraByFloor": [
+                3,
+                4,
+                19,
+                9
+              ],
+              "cursor": 0,
+              "filter": "All",
+              "galleryPhoto": "angora_02",
+              "hero": 0,
+              "heroExit": false,
+              "overlay": null,
+              "pending": null,
+              "requestId": 0,
+              "section": "residence",
+              "technical": {
+                "cursor": 0,
+                "floor": 0,
+                "mode": "iso"
+              }
+            },
+            "at": 76.89999999850988,
+            "before": {
+              "cameraByFloor": [
+                3,
+                4,
+                19,
+                9
+              ],
+              "cursor": 0,
+              "filter": "All",
+              "galleryPhoto": null,
+              "hero": 0,
+              "heroExit": false,
+              "overlay": null,
+              "pending": null,
+              "requestId": 0,
+              "section": "residence",
+              "technical": {
+                "cursor": 0,
+                "floor": 0,
+                "mode": "iso"
+              }
+            },
+            "type": "gallery-filter"
+          },
+          {
+            "after": {
+              "cameraByFloor": [
+                3,
+                4,
+                19,
+                9
+              ],
+              "cursor": 0,
+              "filter": "All",
+              "galleryPhoto": "angora_02",
+              "hero": 0,
+              "heroExit": false,
+              "overlay": null,
+              "pending": null,
+              "requestId": 0,
+              "section": "residence",
+              "technical": {
+                "cursor": 0,
+                "floor": 0,
+                "mode": "iso"
+              }
+            },
+            "at": 78.69999999925494,
+            "before": {
+              "cameraByFloor": [
+                3,
+                4,
+                19,
+                9
+              ],
+              "cursor": 0,
+              "filter": "All",
+              "galleryPhoto": "angora_02",
+              "hero": 0,
+              "heroExit": false,
+              "overlay": null,
+              "pending": null,
+              "requestId": 0,
+              "section": "residence",
+              "technical": {
+                "cursor": 0,
+                "floor": 0,
+                "mode": "iso"
+              }
+            },
+            "type": "gallery-position"
+          },
+          {
+            "after": {
+              "cameraByFloor": [
+                3,
+                4,
+                19,
+                9
+              ],
+              "cursor": 0,
+              "filter": "All",
+              "galleryPhoto": "angora_02",
+              "hero": 0,
+              "heroExit": false,
+              "overlay": null,
+              "pending": null,
+              "requestId": 1,
+              "section": "residence",
+              "technical": {
+                "cursor": 0,
+                "floor": 0,
+                "mode": "iso"
+              }
+            },
+            "at": 81,
+            "before": {
+              "cameraByFloor": [
+                3,
+                4,
+                19,
+                9
+              ],
+              "cursor": 0,
+              "filter": "All",
+              "galleryPhoto": "angora_02",
+              "hero": 0,
+              "heroExit": false,
+              "overlay": null,
+              "pending": null,
+              "requestId": 0,
+              "section": "residence",
+              "technical": {
+                "cursor": 0,
+                "floor": 0,
+                "mode": "iso"
+              }
+            },
+            "type": "cancel"
+          },
+          {
+            "after": {
+              "cameraByFloor": [
+                3,
+                4,
+                19,
+                9
+              ],
+              "cursor": 0,
+              "filter": "All",
+              "galleryPhoto": "angora_02",
+              "hero": 0,
+              "heroExit": false,
+              "overlay": null,
+              "pending": null,
+              "requestId": 2,
+              "section": "residence",
+              "technical": {
+                "cursor": 0,
+                "floor": 0,
+                "mode": "iso"
+              }
+            },
+            "at": 83.39999999850988,
+            "before": {
+              "cameraByFloor": [
+                3,
+                4,
+                19,
+                9
+              ],
+              "cursor": 0,
+              "filter": "All",
+              "galleryPhoto": "angora_02",
+              "hero": 0,
+              "heroExit": false,
+              "overlay": null,
+              "pending": null,
+              "requestId": 1,
+              "section": "residence",
+              "technical": {
+                "cursor": 0,
+                "floor": 0,
+                "mode": "iso"
+              }
+            },
+            "type": "cancel"
+          },
+          {
+            "after": {
+              "cameraByFloor": [
+                3,
+                4,
+                19,
+                9
+              ],
+              "cursor": 7,
+              "filter": "All",
+              "galleryPhoto": "angora_02",
+              "hero": 0,
+              "heroExit": false,
+              "overlay": null,
+              "pending": null,
+              "requestId": 2,
+              "section": "technical",
+              "technical": {
+                "cursor": 7,
+                "floor": 0,
+                "mode": "plan"
+              }
+            },
+            "at": 83.69999999925494,
+            "before": {
+              "cameraByFloor": [
+                3,
+                4,
+                19,
+                9
+              ],
+              "cursor": 0,
+              "filter": "All",
+              "galleryPhoto": "angora_02",
+              "hero": 0,
+              "heroExit": false,
+              "overlay": null,
+              "pending": null,
+              "requestId": 2,
+              "section": "residence",
+              "technical": {
+                "cursor": 0,
+                "floor": 0,
+                "mode": "iso"
+              }
+            },
+            "type": "restore"
+          },
+          {
+            "after": {
+              "cameraByFloor": [
+                3,
+                4,
+                19,
+                9
+              ],
+              "cursor": 7,
+              "filter": "All",
+              "galleryPhoto": "angora_02",
+              "hero": 0,
+              "heroExit": false,
+              "overlay": null,
+              "pending": null,
+              "requestId": 2,
+              "section": "technical",
+              "technical": {
+                "cursor": 7,
+                "floor": 0,
+                "mode": "plan"
+              }
+            },
+            "at": 145.5,
+            "before": {
+              "cameraByFloor": [
+                3,
+                4,
+                19,
+                9
+              ],
+              "cursor": 7,
+              "filter": "All",
+              "galleryPhoto": "angora_02",
+              "hero": 0,
+              "heroExit": false,
+              "overlay": null,
+              "pending": null,
+              "requestId": 2,
+              "section": "technical",
+              "technical": {
+                "cursor": 7,
+                "floor": 0,
+                "mode": "plan"
+              }
+            },
+            "type": "section"
+          }
+        ],
+        "gestures": [],
+        "height": 568,
+        "state": {
+          "cameraByFloor": [
+            3,
+            4,
+            19,
+            9
+          ],
+          "cursor": 7,
+          "filter": "All",
+          "galleryPhoto": "angora_02",
+          "hero": 0,
+          "heroExit": false,
+          "overlay": null,
+          "pending": null,
+          "requestId": 2,
+          "section": "technical",
+          "technical": {
+            "cursor": 7,
+            "floor": 0,
+            "mode": "plan"
+          }
+        },
+        "width": 320,
+        "y": 8088.7998046875
+      },
+      "stage": {
+        "bottom": 568,
+        "height": 568,
+        "left": 0,
+        "right": 320,
+        "top": 0,
+        "width": 320,
+        "x": 0,
+        "y": 0
+      },
+      "y": 8088.7998046875
+    },
+    "mobileOpeningPlaying": {
+      "opening": "playing",
+      "qa": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 0,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 1,
+        "section": "hero",
+        "technical": {
+          "cursor": 0,
+          "floor": 0,
+          "mode": "iso"
+        }
+      },
+      "video": [
+        {
+          "paused": true,
+          "ready": 1,
+          "src": "http://localhost:4183/assets/residence/films/opening/source.mp4",
+          "time": 0
+        }
+      ],
+      "y": 0
+    },
+    "mobileOpeningHeld": {
+      "opening": "held",
+      "qa": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 0,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 1,
+        "section": "hero",
+        "technical": {
+          "cursor": 0,
+          "floor": 0,
+          "mode": "iso"
+        }
+      },
+      "src": "http://localhost:4183/assets/web3/films/opening-last.webp",
+      "y": 0
+    },
+    "mobileFirstScroll": {
+      "errors": [],
+      "gestures": [
+        {
+          "before": {
+            "cursor": 0,
+            "hero": 0
+          },
+          "elapsed": 2022.300000000745,
+          "endY": 0,
+          "finish": 19158.800000000745,
+          "id": 2,
+          "source": "wheel",
+          "start": 17136.5,
+          "y": 0
+        }
+      ],
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 0,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 1,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 2,
+        "section": "hero",
+        "technical": {
+          "cursor": 0,
+          "floor": 0,
+          "mode": "iso"
+        }
+      },
+      "y": 0
+    },
+    "interruptBefore": {
+      "paused": false,
+      "time": 0.15784,
+      "y": 0
+    },
+    "interruptDuring": {
+      "black": "rgba(0, 0, 0, 0)",
+      "still": "data:image/webp;base64,UklGRsCYBQBXRUJQVlA4WAoAAAA",
+      "y": 0
+    },
+    "interruptAfter": {
+      "errors": [],
+      "gestures": [
+        {
+          "before": {
+            "cursor": 0,
+            "hero": 0
+          },
+          "elapsed": 2044.39999999851,
+          "endY": 0,
+          "finish": 2717.199999999255,
+          "id": 2,
+          "source": "wheel",
+          "start": 672.8000000007451,
+          "y": 0
+        }
+      ],
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 0,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 1,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 2,
+        "section": "hero",
+        "technical": {
+          "cursor": 0,
+          "floor": 0,
+          "mode": "iso"
+        }
+      },
+      "y": 0
+    },
+    "gardenFade": [
+      {
+        "bottom": 547.1124954223633,
+        "opacity": "0.923618",
+        "shade": "0.9236182655754414",
+        "y": 3583.199951171875
+      },
+      {
+        "bottom": 446.3125,
+        "opacity": "0.669739",
+        "shade": "0.6697390138948484",
+        "y": 3684
+      },
+      {
+        "bottom": 345.5124816894531,
+        "opacity": "0.351731",
+        "shade": "0.35173073388621223",
+        "y": 3784.800048828125
+      },
+      {
+        "bottom": 244.7124938964844,
+        "opacity": "0.0894953",
+        "shade": "0.08949527514659078",
+        "y": 3885.60009765625
+      },
+      {
+        "bottom": 143.91250610351562,
+        "opacity": "0",
+        "shade": "0",
+        "y": 3986.39990234375
+      },
+      {
+        "bottom": 43.11248779296875,
+        "opacity": "0",
+        "shade": "0",
+        "y": 4087.199951171875
+      },
+      {
+        "bottom": -57.6875,
+        "opacity": "0",
+        "shade": "0",
+        "y": 4188
+      }
+    ],
+    "interior": {
+      "fit": "cover",
+      "rect": {
+        "bottom": 558.4000091552734,
+        "height": 470.6000061035156,
+        "left": 835.9375,
+        "right": 1188.8875122070312,
+        "top": 87.80000305175781,
+        "width": 352.95001220703125,
+        "x": 835.9375,
+        "y": 87.80000305175781
+      },
+      "src": "http://localhost:4183/assets/web3/photos/angora_47-800.webp"
+    },
+    "mapDesktop": {
+      "rect": {
+        "bottom": 745.5236892700195,
+        "height": 843.2000122070312,
+        "left": 0,
+        "right": 1264.800048828125,
+        "top": -97.67632293701172,
+        "width": 1264.800048828125,
+        "x": 0,
+        "y": -97.67632293701172
+      },
+      "src": "http://localhost:4183/assets/web3/map-desktop.svg"
+    },
+    "mapMobile": {
+      "errors": [],
+      "rect": {
+        "bottom": 644.8500289916992,
+        "height": 563.9000244140625,
+        "left": 0,
+        "right": 390.3999938964844,
+        "top": 80.95000457763672,
+        "width": 390.3999938964844,
+        "x": 0,
+        "y": 80.95000457763672
+      },
+      "src": "http://localhost:4183/assets/web3/map-mobile.svg"
+    },
+    "wireFinalBefore": {
+      "dataset": {
+        "hiddenLines": "depth-rejected",
+        "segments": "224975",
+        "yaw": "-0.8000"
+      },
+      "errors": [],
+      "rect": {
+        "bottom": 655.3250045776367,
+        "height": 570,
+        "left": 75.9000015258789,
+        "right": 610.3249893188477,
+        "top": 85.32500457763672,
+        "width": 534.4249877929688,
+        "x": 75.9000015258789,
+        "y": 85.32500457763672
+      },
+      "y": 17938.400390625,
+      "yaw": "-0.8000"
+    },
+    "wireOrbit": {
+      "errors": [],
+      "rect": {
+        "bottom": 655.3250045776367,
+        "height": 570,
+        "left": 75.9000015258789,
+        "right": 610.3249893188477,
+        "top": 85.32500457763672,
+        "width": 534.4249877929688,
+        "x": 75.9000015258789,
+        "y": 85.32500457763672
+      },
+      "y": 17938.400390625,
+      "yaw": "0.0400"
+    },
+    "wireMobile": {
+      "errors": [],
+      "overflow": 0,
+      "rect": {
+        "bottom": 807.0375061035156,
+        "height": 281.9750061035156,
+        "left": 24,
+        "right": 366.3999938964844,
+        "top": 525.0625,
+        "width": 342.3999938964844,
+        "x": 24,
+        "y": 525.0625
+      },
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    "mobileDimensionBefore": {
+      "content": {
+        "bottom": 728.2499847412109,
+        "height": 536.2999877929688,
+        "left": 15,
+        "right": 375.3999938964844,
+        "top": 191.9499969482422,
+        "width": 360.3999938964844,
+        "x": 15,
+        "y": 191.9499969482422
+      },
+      "photo": "<img src=\"assets/web3/photos/angora_04-800.webp\" width=\"1920\" height=\"1080\" alt=\"Living room, Entrance level\" decoding=\"async\">",
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 6,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 2,
+        "section": "technical",
+        "technical": {
+          "cursor": 6,
+          "floor": 1,
+          "mode": "plan"
+        }
+      },
+      "toggle": {
+        "bottom": 763.75,
+        "height": 15,
+        "left": 286.8125,
+        "right": 301.8125,
+        "top": 748.75,
+        "width": 15,
+        "x": 286.8125,
+        "y": 748.75
+      },
+      "y": 8860
+    },
+    "mobileDimensionAfter": {
+      "content": {
+        "bottom": 728.2499847412109,
+        "height": 536.2999877929688,
+        "left": 15,
+        "right": 375.3999938964844,
+        "top": 191.9499969482422,
+        "width": 360.3999938964844,
+        "x": 15,
+        "y": 191.9499969482422
+      },
+      "dimensions": "block",
+      "photo": "<img src=\"assets/web3/photos/angora_04-800.webp\" width=\"1920\" height=\"1080\" alt=\"Living room, Entrance level\" decoding=\"async\">",
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 6,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 2,
+        "section": "technical",
+        "technical": {
+          "cursor": 6,
+          "floor": 1,
+          "mode": "plan"
+        }
+      },
+      "y": 8860
+    },
+    "mobilePointerOpen": {
+      "close": {
+        "bottom": 58,
+        "height": 44,
+        "left": 303.3999938964844,
+        "right": 375.3999938964844,
+        "top": 14,
+        "width": 72,
+        "x": 303.3999938964844,
+        "y": 14
+      },
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 6,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": {
+          "camera": 4,
+          "collection": [
+            {
+              "key": "angora_04",
+              "title": "Entrance · Living room · Photograph 1"
+            },
+            {
+              "key": "angora_21",
+              "title": "Entrance · Kitchen · Photograph 2"
+            },
+            {
+              "key": "angora_22",
+              "title": "Entrance · Kitchen · Photograph 3"
+            },
+            {
+              "key": "angora_23",
+              "title": "Entrance · Dining area · Photograph 4"
+            },
+            {
+              "key": "angora_39",
+              "title": "Entrance · Guest WC · Photograph 5"
+            },
+            {
+              "key": "angora_40",
+              "title": "Entrance · Entry hall · Photograph 6"
+            },
+            {
+              "key": "angora_41",
+              "title": "Entrance · Entrance · Photograph 7"
+            },
+            {
+              "key": "angora_42",
+              "title": "Entrance · Entry hall · Photograph 8"
+            },
+            {
+              "key": "angora_43",
+              "title": "Entrance · Garage · Photograph 9"
+            },
+            {
+              "key": "angora_44",
+              "title": "Entrance · Utility · Photograph 10"
+            }
+          ],
+          "cursor": 6,
+          "floor": 1,
+          "index": 0,
+          "key": "angora_04",
+          "section": "technical",
+          "source": "plan",
+          "type": "photo",
+          "y": 8860
+        },
+        "pending": null,
+        "requestId": 3,
+        "section": "technical",
+        "technical": {
+          "cursor": 6,
+          "floor": 1,
+          "mode": "plan"
+        }
+      },
+      "y": 8860
+    },
+    "mobilePointerClose": {
+      "errors": [],
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 6,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 5,
+        "section": "technical",
+        "technical": {
+          "cursor": 6,
+          "floor": 1,
+          "mode": "plan"
+        }
+      },
+      "y": 8860
+    },
+    "shortBridgeBefore": {
+      "stage": {
+        "bottom": 568,
+        "height": 568,
+        "left": 0,
+        "right": 320,
+        "top": 0,
+        "width": 320,
+        "x": 0,
+        "y": 0
+      },
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 3,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 2,
+        "section": "technical",
+        "technical": {
+          "cursor": 3,
+          "floor": 3,
+          "mode": "iso"
+        }
+      },
+      "y": 8088.7998046875
+    },
+    "shortBridgeAfter": {
+      "errors": [],
+      "gestures": [
+        {
+          "before": {
+            "cursor": 3,
+            "hero": 0
+          },
+          "elapsed": 1216.89999999851,
+          "endY": 8088.7998046875,
+          "finish": 1473.10000000149,
+          "id": 3,
+          "source": "wheel",
+          "start": 256.20000000298023,
+          "y": 8088.7998046875
+        }
+      ],
+      "stage": {
+        "bottom": 568,
+        "height": 568,
+        "left": 0,
+        "right": 320,
+        "top": 0,
+        "width": 320,
+        "x": 0,
+        "y": 0
+      },
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 4,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 3,
+        "section": "technical",
+        "technical": {
+          "cursor": 4,
+          "floor": 3,
+          "mode": "plan"
+        }
+      },
+      "y": 8088.7998046875
+    },
+    "shortTerminal": {
+      "errors": [],
+      "gestures": [
+        {
+          "before": {
+            "cursor": 3,
+            "hero": 0
+          },
+          "elapsed": 1216.89999999851,
+          "endY": 8088.7998046875,
+          "finish": 1473.10000000149,
+          "id": 3,
+          "source": "wheel",
+          "start": 256.20000000298023,
+          "y": 8088.7998046875
+        },
+        {
+          "before": {
+            "cursor": 4,
+            "hero": 0
+          },
+          "elapsed": 1369.699999999255,
+          "endY": 8088.7998046875,
+          "finish": 19439.300000000745,
+          "id": 4,
+          "source": "wheel",
+          "start": 18069.60000000149,
+          "y": 8088.7998046875
+        },
+        {
+          "before": {
+            "cursor": 5,
+            "hero": 0
+          },
+          "elapsed": 1364.800000000745,
+          "endY": 8088.7998046875,
+          "finish": 20833.400000002235,
+          "id": 5,
+          "source": "wheel",
+          "start": 19468.60000000149,
+          "y": 8088.7998046875
+        },
+        {
+          "before": {
+            "cursor": 6,
+            "hero": 0
+          },
+          "elapsed": 1363.89999999851,
+          "endY": 8088.7998046875,
+          "finish": 22320.300000000745,
+          "id": 6,
+          "source": "wheel",
+          "start": 20956.400000002235,
+          "y": 8088.7998046875
+        }
+      ],
+      "stage": {
+        "bottom": 568,
+        "height": 568,
+        "left": 0,
+        "right": 320,
+        "top": 0,
+        "width": 320,
+        "x": 0,
+        "y": 0
+      },
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 7,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 6,
+        "section": "technical",
+        "technical": {
+          "cursor": 7,
+          "floor": 0,
+          "mode": "plan"
+        }
+      },
+      "y": 8088.7998046875
+    },
+    "shortExit": {
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 7,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 6,
+        "section": "technical",
+        "technical": {
+          "cursor": 7,
+          "floor": 0,
+          "mode": "plan"
+        }
+      },
+      "y": 8185.60009765625
+    }
+  }
+}

@@ -1,5 +1,5 @@
-import {FLOORS} from './web3-state.js?v=20261006-pacing-1';
-import {decodedImage} from './web3-media.js?v=20261006-pacing-1';
+import {FLOORS} from './web3-state.js?v=20261006-refinement-2';
+import {decodedImage} from './web3-media.js?v=20261006-refinement-2';
 const NS='http://www.w3.org/2000/svg';
 const el=(tag,attrs)=>{const n=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));return n;};
 const friendly=name=>name.replace(/Bedroom 106|Bedroom C02/g,'Bedroom II').replace(/Bedroom 107|Bedroom C04/g,'Bedroom III').replace('Basement','Garden');
@@ -18,12 +18,14 @@ export function makePlan(manifest,floor,camera,dimensions=false){
   for(const room of data.rooms){
     if(!room.label)continue;
     const label=el('text',{x:room.label[0]*2560,y:room.label[1]*1440,class:'room-label','text-anchor':'middle','data-room':room.id});
-    label.textContent=friendly(room.name).replace('Landing & kitchenette','Landing').replace('Hall & stairs','Hall');svg.append(label);
+    label.textContent=friendly(room.name).replace('Landing & kitchenette','Landing').replace('Hall & stairs','Hall');label.dataset.fullName=label.textContent;svg.append(label);
   }
-  if(dimensions)for(const d of data.dimensions){
-    const [a,b]=d.screen;svg.append(el('path',{d:`M${a[0]*2560},${a[1]*1440}L${b[0]*2560},${b[1]*1440}`,class:'dimension'}));
-    const t=el('text',{x:(a[0]+b[0])*1280,y:(a[1]+b[1])*720-5,class:'dimension-label'});t.textContent=d.metres+' m';svg.append(t);
+  const dimensionGroup=el('g',{class:'plan-dimensions'});
+  for(const d of data.dimensions){
+    const [a,b]=d.screen;dimensionGroup.append(el('path',{d:`M${a[0]*2560},${a[1]*1440}L${b[0]*2560},${b[1]*1440}`,class:'dimension'}));
+    const t=el('text',{x:(a[0]+b[0])*1280,y:(a[1]+b[1])*720-5,class:'dimension-label'});t.textContent=d.metres+' m';dimensionGroup.append(t);
   }
+  svg.append(dimensionGroup);unit.classList.toggle('dimensions-visible',dimensions);
   const active=data.photos.find(p=>p.id===camera)||data.photos[0];
   for(const p of data.photos){
     const px=p.x*2560,py=p.y*1440,dx=p.direction[0]*2560-px,dy=p.direction[1]*1440-py,len=Math.hypot(dx,dy)||1,ux=dx/len,uy=dy/len;
@@ -39,7 +41,7 @@ export function makePlan(manifest,floor,camera,dimensions=false){
   box.append(svg);unit.append(box);
   const figure=document.createElement('figure');figure.className='plan-photo';
   const button=document.createElement('button');button.className='photo-open';button.dataset.openCamera='';button.setAttribute('aria-label',`Enlarge ${photoName(manifest,floor,active)} photograph ${active.number}`);
-  const img=new Image();img.src=photoURL(manifest,active.key);img.alt=`${photoName(manifest,floor,active)}, ${FLOORS[floor]} level`;img.decoding='async';button.append(img);
+  const img=new Image();img.src=photoURL(manifest,active.key);img.width=manifest.photos[active.key].width;img.height=manifest.photos[active.key].height;img.alt=`${photoName(manifest,floor,active)}, ${FLOORS[floor]} level`;img.decoding='async';button.append(img);
   const badge=document.createElement('span');badge.textContent='View photograph ↗';badge.className='photo-badge';button.append(badge);figure.append(button);
   const caption=document.createElement('figcaption');caption.innerHTML=`<span>${FLOORS[floor]} · Photograph ${active.number}</span><strong>${photoName(manifest,floor,active)}</strong>`;
   const room=data.rooms.find(r=>r.id===active.room);if(room?.area){const area=document.createElement('small');area.textContent=`${room.area.toFixed(2)} m² · supplied room schedule`;caption.append(area);}

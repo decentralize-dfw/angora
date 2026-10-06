@@ -16,7 +16,10 @@ export function mountScenes(){
   for(const node of targets){if(reduced.matches)continue;Object.assign(node.style,initial(node));node.dataset.motionState='waiting';observer.observe(node);}
   const parallax=[document.querySelector('.neighbourhood-image'),document.querySelector('.editorial-image')].filter(Boolean);
   let queued=false;
-  function paint(){queued=false;if(reduced.matches)return;for(const frame of parallax){const r=frame.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)continue;const progress=Math.max(0,Math.min(1,(innerHeight-r.top)/(innerHeight+r.height)));frame.querySelector('img').style.transform=`translateY(${(progress-.5)*32}px) scale(${1.015+progress*.035})`;}}
+  function paint(){queued=false;if(reduced.matches)return;for(const frame of parallax){const r=frame.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)continue;const progress=Math.max(0,Math.min(1,(innerHeight-r.top)/(innerHeight+r.height)));frame.querySelector('img').style.transform=`translateY(${(progress-.5)*32}px) scale(${1.015+progress*.035})`;}
+    const bottom=pool.getBoundingClientRect().bottom,t=Math.max(0,Math.min(1,(bottom-innerHeight*.22)/(innerHeight*.65)));
+    pool.style.setProperty('--garden-shade',String(t*t*(3-2*t)));
+  }
   function schedule(){if(!queued){queued=true;requestAnimationFrame(paint);}}
   const pool=document.querySelector('.garden-takeover');
   const poolObserver=new IntersectionObserver(entries=>{if(!entries[0].isIntersecting||reduced.matches)return;poolObserver.disconnect();pool.animate([{borderTopLeftRadius:'50% 7%',borderTopRightRadius:'50% 7%'},{borderTopLeftRadius:'0% 0%',borderTopRightRadius:'0% 0%'}],{duration:1800,easing:'cubic-bezier(.22,.65,.25,1)',fill:'forwards'});},{rootMargin:'0px 0px -20% 0px',threshold:.1});poolObserver.observe(pool);

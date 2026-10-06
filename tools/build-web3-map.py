@@ -33,14 +33,17 @@ for variant,W,H,SCALE in [('desktop',1800,1200,.265),('mobile',900,1300,.18)]:
         px,py=project(a['x'],a['y']);g=a['g']
         if 15<px<W-15 and 15<py<H-15 and not any(z[2]==g and math.hypot(px-z[0],py-z[1])<3 for z in marks):marks.append((px,py,g))
     for x,y,g in marks:
-        count[g]+=1;p.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{10 if variant=="mobile" else 12}" fill="{places["groups"][g]}" stroke="#eef1ec" stroke-width="2"/>')
+        count[g]+=1;p.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{5 if variant=="mobile" else 6}" fill="{places["groups"][g]}" fill-opacity=".7"/>')
     vx,vy=project(sum(a[0] for a in site['villa'])/len(site['villa']),sum(a[1] for a in site['villa'])/len(site['villa']))
     p.append(f'<circle cx="{vx}" cy="{vy}" r="22" fill="none" stroke="#223e35" stroke-width="3"/><circle cx="{vx}" cy="{vy}" r="7" fill="#223e35"/>')
-    bx,by=max((project(x,y) for x,y in points(streets['boundary']['ring'])),key=lambda a:a[0])
-    # Callouts have separate, measured rows. No amenity labels or site gates.
-    size=30 if variant=='mobile' else 27
+    # One short callout in the open area north-east of the site.
+    boundary=[project(x,y) for x,y in points(streets['boundary']['ring'])]
+    target=(W*.52,H*.36 if variant=='desktop' else H*.44)
+    bx,by=min(boundary,key=lambda a:math.hypot(a[0]-target[0],a[1]-target[1]))
+    lx,ly=(W*.54,H*.23) if variant=='desktop' else (W*.60,H*.31)
+    size=24 if variant=='mobile' else 25
     p.append(f'<path d="M{vx},{vy}L{vx-40},{vy+65}H{vx-240}" fill="none" stroke="#223e35" stroke-width="2"/><text x="{vx-240}" y="{vy+100}" font-size="{size}" font-family="Arial" fill="#223e35" paint-order="stroke" stroke="#eef1ec" stroke-width="8">ANGORA 21</text>')
-    p.append(f'<path d="M{bx-10},{by-125}H{bx-170}L{bx-4},{by-4}" fill="none" stroke="#223e35" stroke-width="2" marker-end="url(#a)"/><text x="{bx-280}" y="{by-143}" font-size="{size}" font-family="Arial" fill="#223e35" paint-order="stroke" stroke="#eef1ec" stroke-width="8">Angora Evleri</text>')
+    p.append(f'<text x="{lx}" y="{ly}" font-size="{size}" font-family="Arial" fill="#223e35">Angora Evleri</text><path d="M{lx+50},{ly+14}L{bx},{by}" fill="none" stroke="#223e35" stroke-width="1.5" marker-end="url(#a)"/>')
     p.append(f'<text x="{W-55}" y="65" font-family="Arial" font-size="30" fill="#223e35">↑ N</text></svg>')
     (ROOT/f'assets/web3/map-{variant}.svg').write_text(''.join(p),encoding='utf-8');counts[variant]=count
 (ROOT/'assets/web3/map-data.json').write_text(json.dumps({'counts':counts,'colors':places['groups'],'layers':['Education','Health','Food & drink','Shopping','Parks & sport','Services'],'projection':'north up; viewer local coordinate system','names':False,'gates':False}))

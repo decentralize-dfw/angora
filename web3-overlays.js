@@ -1,5 +1,6 @@
-import {decodedImage} from './web3-media.js?v=20261006-pacing-1';
-import {photoURL} from './web3-plans.js?v=20261006-pacing-1';
+import {t} from './web3-i18n.js?v=20261006-refinement-2';
+import {decodedImage} from './web3-media.js?v=20261006-refinement-2';
+import {photoURL} from './web3-plans.js?v=20261006-refinement-2';
 export function installOverlays({state,manifest,history,onNavigate}){
   let opener=null,current=null,afterClose=null,imageToken=0;
   const dialogs=[...document.querySelectorAll('dialog')];
@@ -43,10 +44,10 @@ export function installOverlays({state,manifest,history,onNavigate}){
   document.querySelector('#photo-prev').addEventListener('click',()=>showPhoto(state.snapshot().overlay.index-1));
   document.querySelector('#photo-next').addEventListener('click',()=>showPhoto(state.snapshot().overlay.index+1));
   document.querySelector('#photo-dialog').addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();showPhoto(state.snapshot().overlay.index+(e.key==='ArrowLeft'?-1:1));}});
-  document.querySelector('#menu-toggle').addEventListener('click',()=>show({type:'menu',y:scrollY,section:state.snapshot().section}));
+  document.querySelector('#menu-toggle')?.addEventListener('click',()=>show({type:'menu',y:scrollY,section:state.snapshot().section}));
   function enquiry(purchase){
     document.querySelector('#enquiry-title').innerHTML=purchase?'Discuss a <em>purchase.</em>':'Arrange a <em>viewing.</em>';
-    document.querySelector('[name="message"]').value=purchase?'I would like to discuss purchasing Angora Twenty One.':'I would like to arrange a viewing of Angora Twenty One.';
+    document.querySelector('[name="message"]').value=t(purchase?'I would like to discuss purchasing Angora Twenty One.':'I would like to arrange a viewing of Angora Twenty One.');
     show({type:'enquiry',purchase,y:scrollY,section:state.snapshot().section});
   }
   document.querySelector('#enquiry-open').addEventListener('click',()=>enquiry(false));document.querySelector('#purchase-open').addEventListener('click',()=>enquiry(true));

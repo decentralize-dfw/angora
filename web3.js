@@ -1,18 +1,20 @@
-import {createState,FLOORS,ROUTE,cursorFor} from './web3-state.js?v=20261006-pacing-1';
-import {FilmSurface,decodedImage} from './web3-media.js?v=20261006-pacing-1';
-import {preparePlan,photoURL,photoName} from './web3-plans.js?v=20261006-pacing-1';
-import {installInput} from './web3-input.js?v=20261006-pacing-1';
-import {installHistory,parseRoute} from './web3-history.js?v=20261006-pacing-1';
-import {installOverlays} from './web3-overlays.js?v=20261006-pacing-1';
-import {mountScenes,installGalleryRail,TRANSITIONS} from './web3-scenes.js?v=20261006-pacing-1';
+import {createState,FLOORS,ROUTE,cursorFor} from './web3-state.js?v=20261006-refinement-2';
+import {FilmSurface,decodedImage} from './web3-media.js?v=20261006-refinement-2';
+import {preparePlan,photoURL,photoName} from './web3-plans.js?v=20261006-refinement-2';
+import {installInput} from './web3-input.js?v=20261006-refinement-2';
+import {installHistory,parseRoute} from './web3-history.js?v=20261006-refinement-2';
+import {installOverlays} from './web3-overlays.js?v=20261006-refinement-2';
+import {mountScenes,installGalleryRail,TRANSITIONS} from './web3-scenes.js?v=20261006-refinement-2';
+import {installLanguage} from './web3-i18n.js?v=20261006-refinement-2';
 const $=selector=>document.querySelector(selector);
+const OPENING_LAST='assets/web3/films/opening-last.webp';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const descriptions=['Living spaces open towards the pool and garden.','The street arrival, principal kitchen and shared living spaces.','Bedrooms, the principal suite and a private sitting room.','Rooms beneath the roof, with a sitting area and kitchenette.'];
 const heroCopy=[['00 / Arrival','A quieter perspective on the city.'],['01 / Arrival','A quieter arrival.'],['02 / Perspective','A world of your own.'],['03 / Garden','Life opens outside.']];
 const gestures=[], errors=[];
 const failedScenes=new Set();
 const qaNode=document.createElement('script');qaNode.type='application/json';qaNode.id='web3-qa';document.body.append(qaNode);
-function publishQA(){if(state){const s=state.snapshot();if(s.pending)$('#technical').setAttribute('aria-busy','true');else $('#technical').removeAttribute('aria-busy');qaNode.textContent=JSON.stringify({state:s,events:state.log.slice(-20),gestures:gestures.slice(-25),errors,width:innerWidth,height:innerHeight,y:scrollY,active:document.activeElement?.id||document.activeElement?.tagName});}}
+function publishQA(){if(state){const s=state.snapshot();if(s.pending)$('#technical').setAttribute('aria-busy','true');else $('#technical').removeAttribute('aria-busy');document.querySelectorAll('#camera-bar button,#dimensions').forEach(n=>n.disabled=!!s.pending);qaNode.textContent=JSON.stringify({state:s,events:state.log.slice(-20),gestures:gestures.slice(-25),errors,width:innerWidth,height:innerHeight,y:scrollY,active:document.activeElement?.id||document.activeElement?.tagName});}}
 let manifest,state,history,overlays,input,scenes,heroPlayer,isoPlayer,rail,dimensions=false,initializing=true;
 let openingAbort=null,transitionAnimations=[],reversePending=null,navigationActive=false,navigationId=0,lastDirection=1,planWarm=null;
 function prepareNext(s){if(!heroPlayer||!isoPlayer)return;const size=innerWidth<681?'m':'d';
@@ -40,22 +42,21 @@ function fitPlan(){
     if(!active){const cx=+circle.getAttribute('cx');const near=groups.filter(other=>other!==g&&Math.hypot(cx-+other.querySelector('circle').getAttribute('cx'),cy-+other.querySelector('circle').getAttribute('cy'))*scale<21);if(near.length){circle.setAttribute('r',2.5/scale);g.querySelector('text').style.display='none';g.dataset.cluster=[g.dataset.camera,...near.map(p=>p.dataset.camera)].join(',');}}
   });
 }
-function renderMeta(){
-  const s=state.snapshot(),{floor,mode}=s.technical;
+function renderMeta(s=state.snapshot(),{surfaces=true}={}){
+  const {floor,mode}=s.technical;
   $('#technical-eyebrow').textContent=mode==='iso'?'04 / One home, four chapters':'05 / Inside every level';
   $('#technical-title').textContent=`The ${FLOORS[floor].toLowerCase()} level.`;
   $('#mode-toggle').textContent=mode==='iso'?'See this floor’s plan ↗':'View this floor in 3D ↗';
   $('#floor-description').textContent=descriptions[floor];$('#floor-position').textContent=`${FLOORS[floor]} / ${floor+1} of 4`;
   $('#chapters').classList.toggle('plan-active',mode==='plan');
   $('#chapters').dataset.cursor=s.cursor;
-  $('#chapters').dataset.cursor=s.cursor;
-  $('.iso-surface').hidden=mode!=='iso';$('#plan-surface').hidden=mode!=='plan';$('#camera-bar').hidden=mode!=='plan';
-  $('.iso-surface .film-still').alt=`${FLOORS[floor]} level isometric overview`;
+  if(surfaces){$('.iso-surface').hidden=mode!=='iso';$('#plan-surface').hidden=mode!=='plan';}
+  $('#camera-bar').hidden=mode!=='plan';
   $('.iso-surface .film-still').alt=`${FLOORS[floor]} level isometric overview`;
   document.querySelectorAll('.floor-tabs [data-floor]').forEach(b=>{const selected=+b.dataset.floor===floor;b.setAttribute('aria-selected',selected);b.tabIndex=selected?0:-1;});
   const choices=$('.camera-choices');
   if(choices.dataset.cameraFloor!==String(floor)){choices.replaceChildren();choices.dataset.cameraFloor=floor;
-    manifest.floors[floor].photos.forEach(p=>{const b=document.createElement('button');b.type='button';b.dataset.camera=p.id;b.textContent=p.number;b.setAttribute('aria-label',`Photograph ${p.number}, ${photoName(manifest,floor,p)}`);choices.append(b);});}
+    manifest.floors[floor].photos.forEach(p=>{const b=document.createElement('button');b.type='button';b.disabled=!!state.snapshot().pending;b.dataset.camera=p.id;b.textContent=p.number;b.setAttribute('aria-label',`Photograph ${p.number}, ${photoName(manifest,floor,p)}`);choices.append(b);});}
   choices.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.camera===s.cameraByFloor[floor]));
   const selectedCamera=choices.querySelector('[aria-pressed="true"]');if(selectedCamera)choices.scrollLeft=Math.max(0,selectedCamera.offsetLeft-choices.offsetLeft-choices.clientWidth/2+selectedCamera.offsetWidth/2);
   choices.dataset.scrollLeft=Math.round(choices.scrollLeft);
@@ -70,7 +71,7 @@ function renderMeta(){
 async function paintCommitted(){
   const s=state.snapshot(),{floor,mode}=s.technical;
   renderMeta();
-  const heroURL=s.hero?manifest.films[['approach','orbit','garden-return'][s.hero-1]+'-'+(innerWidth<681?'m':'d')].last:'assets/residence/films/opening/poster.webp';
+  const heroURL=s.hero?manifest.films[['approach','orbit','garden-return'][s.hero-1]+'-'+(innerWidth<681?'m':'d')].last:OPENING_LAST;
   const heroStill=$('.hero-film .film-still');if(!heroStill.src.endsWith(heroURL))decodedImage(heroURL,600).then(image=>{if(state.snapshot().requestId===s.requestId)heroStill.src=image.src;}).catch(()=>{});
   $('.hero-film').style.transform=s.heroExit?'scale(.76)':'';$('.hero-stage').style.background=s.heroExit?'#efede6':'#223e35';$('.hero-stage').style.color=s.heroExit?'#223e35':'#efede6';
   if(mode==='iso'){$('.iso-surface .film-still').src=manifest.floors[floor].iso;$('.iso-surface .film-still').alt=`${FLOORS[floor]} level isometric overview`;}else{const unit=await preparePlan(manifest,floor,s.cameraByFloor[floor],dimensions);const now=state.snapshot();if(now.cursor!==s.cursor||now.requestId!==s.requestId||now.cameraByFloor[floor]!==s.cameraByFloor[floor])return;$('#plan-surface').replaceChildren(unit);fitPlan();}
@@ -88,8 +89,8 @@ async function transition(target,source='explicit',direction=1){
       if(state.current(id)){surface.style.transform=`scale(${scale})`;stage.style.background=color;stage.style.color=target.heroExit?'#223e35':'#efede6';}
     }else if(target.hero!=null){
       const destination=target.hero;
-      if(Math.abs(destination-before.hero)===1){const index=direction>0?destination-1:before.hero-1,key=['approach','orbit','garden-return'][index]+(direction<0?'-back':'')+'-'+(innerWidth<681?'m':'d');if(!await heroPlayer.play(key,id,{fadeMs:before.hero===0&&destination===1?2000:destination===0?2000:0,finalStill:destination===0?'assets/residence/films/opening/poster.webp':null}))throw Error('Film endpoint unavailable');}
-      else {const key=destination?['approach','orbit','garden-return'][destination-1]+'-'+(innerWidth<681?'m':'d'):null;await heroPlayer.show(key?manifest.films[key].last:'assets/residence/films/opening/poster.webp',id);}
+      if(Math.abs(destination-before.hero)===1){const index=direction>0?destination-1:before.hero-1,key=['approach','orbit','garden-return'][index]+(direction<0?'-back':'')+'-'+(innerWidth<681?'m':'d');if(!await heroPlayer.play(key,id,{fadeMs:before.hero===0&&destination===1?2000:destination===0?2000:0,finalStill:destination===0?OPENING_LAST:null}))throw Error('Film endpoint unavailable');}
+      else {const key=destination?['approach','orbit','garden-return'][destination-1]+'-'+(innerWidth<681?'m':'d'):null;await heroPlayer.show(key?manifest.films[key].last:OPENING_LAST,id);}
     }else if(target.cursor!=null){
       const next=ROUTE[target.cursor],old=before.technical;
       if(next.mode==='iso'&&old.mode==='iso'){
@@ -99,6 +100,8 @@ async function transition(target,source='explicit',direction=1){
         const unit=await preparePlan(manifest,next.floor,before.cameraByFloor[next.floor],dimensions);
         if(!state.current(id))return false;
         const surface=$('#plan-surface'),outgoing=surface.firstElementChild;
+        // Reserve the complete reading layout before either surface appears.
+        renderMeta({...before,cursor:target.cursor,technical:next},{surfaces:false});
         if(old.mode==='plan'&&outgoing){outgoing.classList.add('unit-outgoing');outgoing.setAttribute('inert','');surface.append(unit);fitPlan();state.phase(id,'playing');await Promise.all([animate(outgoing,[{transform:'translateX(0)',opacity:1},{transform:`translateX(${-direction*102}%)`,opacity:0}],1350),animate(unit,[{transform:`translateX(${direction*102}%)`,opacity:0},{transform:'translateX(0)',opacity:1}],1350)]);if(state.current(id))outgoing.remove();}
         else {surface.replaceChildren(unit);surface.hidden=false;fitPlan();await Promise.all([animate(surface,[{opacity:0},{opacity:1}],1200),animate($('.iso-surface'),[{opacity:1},{opacity:0}],1200)]);}
       }else {await isoPlayer.show(manifest.floors[next.floor].iso,id);$('.iso-surface').hidden=false;await animate($('.iso-surface'),[{opacity:0},{opacity:1}],1200);}
@@ -142,20 +145,29 @@ function renderGallery(filter='All'){
   const selected=items.find(p=>p.key===current)||items[0];state.local('gallery-filter',{filter,galleryPhoto:selected?.key||null});rail?.refresh(selected?.key);
   const target=track.querySelector(`[data-key="${selected?.key}"]`);if(target&&innerWidth<1000)$('.gallery-window').scrollLeft=target.offsetLeft-track.offsetLeft;
 }
-function initializeHeader(){let timer,lastY=scrollY,lastTime=performance.now();const header=$('#header');
-  const reveal=strength=>{if(document.activeElement?.closest('#header')&&!overlays?.isOpen)document.activeElement.blur();if(strength<65)return;header.classList.add('is-visible');clearTimeout(timer);timer=setTimeout(()=>{if(!header.matches(':focus-within')&&!overlays?.isOpen)header.classList.remove('is-visible');},1300);};
-  addEventListener('scroll',()=>{const now=performance.now(),distance=Math.abs(scrollY-lastY),dt=now-lastTime;if(dt>0&&distance/dt>.75)reveal(100);lastY=scrollY;lastTime=now;},{passive:true});
-  return reveal;
+function initializeHeader(){
+  $('#header').classList.add('is-visible');
+  return ()=>{};
 }
 function opening(){
-  // Night is an intentional reading state. Only a user gesture may leave it.
-  $('.hero-film').dataset.opening='awaiting-scroll';
+  const s=state.snapshot(),surface=$('.hero-film');
+  if(s.section!=='hero'||s.hero!==0||scrollY>2)return;
+  const id=s.requestId;surface.dataset.opening='playing';
+  // Play the day-to-night opening once, without advancing the scroll chapter.
+  const current=token=>state.snapshot().requestId===token&&state.snapshot().hero===0&&!state.snapshot().overlay;
+  const player=new FilmSurface(surface,manifest,{current,phase:()=>{}});
+  openingAbort=()=>player.cancel(true);
+  player.play('opening',id).then(ready=>{
+    if(current(id)){surface.dataset.opening=ready?'held':'fallback';openingAbort=null;}
+  }).catch(error=>{errors.push(String(error));publishQA();});
 }
 async function initialize(){
+  installLanguage();
   const initialHash=location.hash;
-  manifest=await fetch('assets/web3/manifest.json?v=20261006-pacing-1').then(r=>{if(!r.ok)throw Error('Manifest unavailable');return r.json();});
-  for(const film of Object.values(manifest.films))for(const field of ['url','first','last'])film[field]+='?v=20261006-pacing-1';
-  for(const floor of manifest.floors)floor.iso+='?v=20261006-pacing-1';
+  manifest=await fetch('assets/web3/manifest.json?v=20261006-refinement-2').then(r=>{if(!r.ok)throw Error('Manifest unavailable');return r.json();});
+  for(const film of Object.values(manifest.films))for(const field of ['url','first','last'])film[field]+='?v=20261006-refinement-2';
+  for(const floor of manifest.floors)floor.iso+='?v=20261006-refinement-2';
+  manifest.films.opening={url:'assets/residence/films/opening/source.mp4',last:OPENING_LAST,seconds:5.056};
   state=createState(manifest.floors);state.subscribe((snapshot,type)=>{publishQA();if(type==='section')prepareNext(snapshot);if(type==='open'){abortPresentation();paintCommitted().catch(()=>{});}});heroPlayer=new FilmSurface($('.hero-film'),manifest,state);isoPlayer=new FilmSurface($('.iso-surface'),manifest,state);
   history=installHistory(state,async(saved,y,hash,isCurrent)=>{
     const nav=++navigationId;navigationActive=true;state.cancel();abortPresentation();let after=null;
@@ -171,7 +183,7 @@ async function initialize(){
   $('.camera-choices').addEventListener('click',e=>{const b=e.target.closest('[data-camera]');if(b)camera(+b.dataset.camera);});
   $('.camera-choices').addEventListener('scroll',e=>e.currentTarget.dataset.scrollLeft=Math.round(e.currentTarget.scrollLeft),{passive:true});
   $('#plan-surface').addEventListener('click',e=>{if(e.target.closest('[data-open-camera]'))openPlanPhoto();else{const room=e.target.closest('[data-room]');if(room){const s=state.snapshot(),photos=manifest.floors[s.technical.floor].photos.filter(p=>p.room===room.dataset.room),photo=photos.find(p=>p.id===s.cameraByFloor[s.technical.floor])||photos[0];if(photo)camera(photo.id,false,'room');else status('No registered photograph of this room is available.');return;}const pin=e.target.closest('.camera-pin');if(pin){if(pin.dataset.cluster){const ids=pin.dataset.cluster.split(',').map(Number),floor=state.snapshot().technical.floor;const numbers=manifest.floors[floor].photos.filter(p=>ids.includes(p.id)).map(p=>p.number);status('Nearby viewpoints: '+numbers.join(', ')+'. Choose a number below.');}else camera(+pin.dataset.camera);}}});
-  $('#dimensions').addEventListener('change',async e=>{dimensions=e.target.checked;const s=state.snapshot();await camera(s.cameraByFloor[s.technical.floor],true);});
+  $('#dimensions').addEventListener('change',e=>{dimensions=e.target.checked;$('#plan-surface .plan-unit')?.classList.toggle('dimensions-visible',dimensions);});
   document.querySelectorAll('[data-hero]').forEach(b=>b.addEventListener('click',()=>transition({hero:+b.dataset.hero,section:'hero'},'tab',+b.dataset.hero>=state.snapshot().hero?1:-1)));
   document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a||a.closest('dialog'))return;e.preventDefault();navigate(a.hash);});
   document.querySelectorAll('img[data-photo]').forEach(img=>{const p=manifest.photos[img.dataset.photo];if(!p)return;img.width=p.width;img.height=p.height;if(img.closest(".room-row,.kitchen-row"))img.style.aspectRatio=`${p.width} / ${p.height}`;img.src=photoURL(manifest,img.dataset.photo,1600);img.srcset=p.variants.map(v=>`${v.url} ${v.width}w`).join(',');img.sizes=img.closest('.room-row,.kitchen-row')?'(max-width:680px) 85vw, 30vw':img.closest('.opportunity-image,.garden-takeover')?'100vw':'(max-width:680px) 100vw, 55vw';});
@@ -191,7 +203,7 @@ async function initialize(){
     if(initializing||navigationActive||state.snapshot().overlay||state.snapshot().pending)return;
     const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(visible){state.local('section',{section:visible.target.id});history.write();}
   },{rootMargin:'-25% 0px -45% 0px',threshold:[0,.2,.5]});document.querySelectorAll('main>section[id],.gallery-story>section[id]').forEach(s=>observer.observe(s));
-  let wireLoaded=false;new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&!wireLoaded){wireLoaded=true;import('./web3-wireframe.js?v=20261006-pacing-1').then(m=>m.mountWireframe($('#wire-viewer'))).catch(error=>{errors.push(String(error));publishQA();});}},{rootMargin:'400px'}).observe($('#wire-viewer'));
+  let wireLoaded=false;new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&!wireLoaded){wireLoaded=true;import('./web3-wireframe.js?v=20261006-refinement-2').then(m=>m.mountWireframe($('#wire-viewer'))).catch(error=>{errors.push(String(error));publishQA();});}},{rootMargin:'400px'}).observe($('#wire-viewer'));
   renderMeta();document.body.classList.add('is-enhanced');$('#hero').classList.add('is-enhanced');$('#technical').classList.add('is-enhanced');
   if(initialHash)await navigate(initialHash,false);else {state.local('initial',{section:'hero'});history.write();}
   initializing=false;prepareNext(state.snapshot());opening();publishQA();

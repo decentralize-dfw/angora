@@ -6,7 +6,10 @@ export async function decodedImage(url,timeout=4000) {
 }
 export class FilmSurface {
   constructor(node,manifest,state){this.node=node;this.manifest=manifest;this.state=state;this.still=node.querySelector('.film-still');this.video=null;this.abort=null;this.warmItem=null;}
-  cancel(){this.abort?.();this.abort=null;if(this.video){this.video.pause();this.video.remove();this.video.removeAttribute('src');this.video.load();}this.video=null;this.still.style.opacity='1';}
+  cancel(preserveFrame=false){
+    if(preserveFrame&&this.video?.readyState>=2&&this.video.videoWidth){try{const frame=document.createElement('canvas');frame.width=this.video.videoWidth;frame.height=this.video.videoHeight;frame.getContext('2d').drawImage(this.video,0,0);this.still.src=frame.toDataURL('image/webp',.9);}catch{}}
+    this.abort?.();this.abort=null;if(this.video){this.video.pause();this.video.remove();this.video.removeAttribute('src');this.video.load();}this.video=null;this.still.style.opacity='1';
+  }
   dropWarm(){if(this.warmItem){const item=this.warmItem;this.warmItem=null;item.video.removeAttribute('src');item.video.load();}}
   warm(key){
     if(this.warmItem?.key===key)return;this.dropWarm();const film=this.manifest.films[key];if(!film||reduced())return;
