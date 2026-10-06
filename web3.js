@@ -1,11 +1,11 @@
-import {createState,FLOORS,ROUTE,cursorFor} from './web3-state.js?v=20261006-refinement-3';
-import {FilmSurface,decodedImage} from './web3-media.js?v=20261006-refinement-3';
-import {preparePlan,photoURL,photoName} from './web3-plans.js?v=20261006-refinement-3';
-import {installInput} from './web3-input.js?v=20261006-refinement-3';
-import {installHistory,parseRoute} from './web3-history.js?v=20261006-refinement-3';
-import {installOverlays} from './web3-overlays.js?v=20261006-refinement-3';
-import {mountScenes,installGalleryRail,TRANSITIONS} from './web3-scenes.js?v=20261006-refinement-3';
-import {installLanguage} from './web3-i18n.js?v=20261006-refinement-3';
+import {createState,FLOORS,ROUTE,cursorFor} from './web3-state.js?v=20261006-scroll-4';
+import {FilmSurface,decodedImage} from './web3-media.js?v=20261006-scroll-4';
+import {preparePlan,photoURL,photoName} from './web3-plans.js?v=20261006-scroll-4';
+import {installInput} from './web3-input.js?v=20261006-scroll-4';
+import {installHistory,parseRoute} from './web3-history.js?v=20261006-scroll-4';
+import {installOverlays} from './web3-overlays.js?v=20261006-scroll-4';
+import {mountScenes,installGalleryRail,TRANSITIONS} from './web3-scenes.js?v=20261006-scroll-4';
+import {installLanguage} from './web3-i18n.js?v=20261006-scroll-4';
 const $=selector=>document.querySelector(selector);
 const OPENING_LAST='assets/web3/films/opening-last.webp';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
@@ -16,6 +16,7 @@ const failedScenes=new Set();
 const qaNode=document.createElement('script');qaNode.type='application/json';qaNode.id='web3-qa';document.body.append(qaNode);
 function publishQA(){if(state){const s=state.snapshot();if(s.pending)$('#technical').setAttribute('aria-busy','true');else $('#technical').removeAttribute('aria-busy');document.querySelectorAll('#camera-bar button,#dimensions').forEach(n=>n.disabled=!!s.pending);qaNode.textContent=JSON.stringify({state:s,events:state.log.slice(-20),gestures:gestures.slice(-25),errors,width:innerWidth,height:innerHeight,y:scrollY,active:document.activeElement?.id||document.activeElement?.tagName});}}
 let manifest,state,history,overlays,input,scenes,heroPlayer,isoPlayer,rail,dimensions=false,initializing=true;
+let paintHeader=()=>{};
 let openingAbort=null,transitionAnimations=[],reversePending=null,navigationActive=false,navigationId=0,lastDirection=1,planWarm=null;
 function prepareNext(s){if(!heroPlayer||!isoPlayer)return;const size=innerWidth<681?'m':'d';
   const nextFloor=s.section==='technical'?(s.technical.mode==='iso'?3:ROUTE[s.cursor+lastDirection]?.floor):null;
@@ -64,6 +65,8 @@ function renderMeta(s=state.snapshot(),{surfaces=true}={}){
   document.querySelectorAll('[data-hero]').forEach(b=>b.setAttribute('aria-current',+b.dataset.hero===s.hero));
   $('#hero-count').textContent=heroCopy[s.hero][0];$('#hero-caption').textContent=heroCopy[s.hero][1];
   $('.hero-stage').dataset.exit=String(s.heroExit);
+  $('.hero-stage').dataset.shadeExit=String(s.heroExit);
+  paintHeader();
   $('#hero').classList.toggle('is-terminal',s.heroExit);$('#technical').classList.toggle('is-terminal',s.cursor===7);
   $('#hero').querySelector('.hero-wordmark').style.opacity=s.hero?'.0':'1';
   prepareNext(s);
@@ -86,7 +89,8 @@ async function transition(target,source='explicit',direction=1){
   try{
     if(target.heroExit!=null){
       const surface=$('.hero-film'),stage=$('.hero-stage'),scale=target.heroExit?.76:1;
-      const color=target.heroExit?'#efede6':'#223e35';await Promise.all([animate(surface,[{transform:surface.style.transform||'scale(1)'},{transform:`scale(${scale})`}],1300),animate(stage,[{background:getComputedStyle(stage).backgroundColor},{background:color}],1300)]);
+      stage.dataset.shadeExit=String(target.heroExit);
+      const color=target.heroExit?'#efede6':'#223e35',ink=target.heroExit?'#223e35':'#efede6';await Promise.all([animate(surface,[{transform:surface.style.transform||'scale(1)'},{transform:`scale(${scale})`}],1300),animate(stage,[{background:getComputedStyle(stage).backgroundColor,color:getComputedStyle(stage).color},{background:color,color:ink}],1300)]);
       if(state.current(id)){surface.style.transform=`scale(${scale})`;stage.style.background=color;stage.style.color=target.heroExit?'#223e35':'#efede6';}
     }else if(target.hero!=null){
       const destination=target.hero;
@@ -147,8 +151,16 @@ function renderGallery(filter='All'){
   const target=track.querySelector(`[data-key="${selected?.key}"]`);if(target&&innerWidth<1000)$('.gallery-window').scrollLeft=target.offsetLeft-track.offsetLeft;
 }
 function initializeHeader(){
-  $('#header').classList.add('is-visible');
-  return ()=>{};
+  const header=$('#header'),surfaces=[...document.querySelectorAll('main>section,.gallery-story')];
+  let queued=false;
+  function paint(){queued=false;const probe=header.getBoundingClientRect().height*.5;
+    const surface=surfaces.find(node=>{const r=node.getBoundingClientRect();return r.top<=probe&&r.bottom>probe;});
+    const s=state.snapshot(),dark=surface?.matches('.kitchens,.angora,.opportunity,.viewing')||(surface?.id==='hero'&&s.hero===0&&!s.heroExit);
+    header.dataset.ink=dark?'light':'dark';
+  }
+  const schedule=()=>{if(!queued){queued=true;requestAnimationFrame(paint);}};
+  header.classList.add('is-visible');addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule);paintHeader=paint;paint();
+  return schedule;
 }
 function opening(){
   const s=state.snapshot(),surface=$('.hero-film');
@@ -165,9 +177,9 @@ function opening(){
 async function initialize(){
   installLanguage();
   const initialHash=location.hash;
-  manifest=await fetch('assets/web3/manifest.json?v=20261006-refinement-3').then(r=>{if(!r.ok)throw Error('Manifest unavailable');return r.json();});
-  for(const film of Object.values(manifest.films))for(const field of ['url','first','last'])film[field]+='?v=20261006-refinement-3';
-  for(const floor of manifest.floors)floor.iso+='?v=20261006-refinement-3';
+  manifest=await fetch('assets/web3/manifest.json?v=20261006-scroll-4').then(r=>{if(!r.ok)throw Error('Manifest unavailable');return r.json();});
+  for(const film of Object.values(manifest.films))for(const field of ['url','first','last'])film[field]+='?v=20261006-scroll-4';
+  for(const floor of manifest.floors)floor.iso+='?v=20261006-scroll-4';
   manifest.films.opening={url:'assets/residence/films/opening/source.mp4',last:OPENING_LAST,seconds:5.056};
   state=createState(manifest.floors);state.subscribe((snapshot,type)=>{publishQA();if(type==='section')prepareNext(snapshot);if(type==='open'){abortPresentation();paintCommitted().catch(()=>{});}});heroPlayer=new FilmSurface($('.hero-film'),manifest,state);isoPlayer=new FilmSurface($('.iso-surface'),manifest,state);
   history=installHistory(state,async(saved,y,hash,isCurrent)=>{
@@ -204,7 +216,7 @@ async function initialize(){
     if(initializing||navigationActive||state.snapshot().overlay||state.snapshot().pending)return;
     const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(visible){state.local('section',{section:visible.target.id});history.write();}
   },{rootMargin:'-25% 0px -45% 0px',threshold:[0,.2,.5]});document.querySelectorAll('main>section[id],.gallery-story>section[id]').forEach(s=>observer.observe(s));
-  let wireLoaded=false;new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&!wireLoaded){wireLoaded=true;import('./web3-wireframe.js?v=20261006-refinement-3').then(m=>m.mountWireframe($('#wire-viewer'))).catch(error=>{errors.push(String(error));publishQA();});}},{rootMargin:'400px'}).observe($('#wire-viewer'));
+  let wireLoaded=false;new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&!wireLoaded){wireLoaded=true;import('./web3-wireframe.js?v=20261006-scroll-4').then(m=>m.mountWireframe($('#wire-viewer'))).catch(error=>{errors.push(String(error));publishQA();});}},{rootMargin:'400px'}).observe($('#wire-viewer'));
   renderMeta();document.body.classList.add('is-enhanced');$('#hero').classList.add('is-enhanced');$('#technical').classList.add('is-enhanced');
   if(initialHash)await navigate(initialHash,false);else {state.local('initial',{section:'hero'});history.write();}
   initializing=false;prepareNext(state.snapshot());opening();publishQA();

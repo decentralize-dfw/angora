@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createState,ROUTE,cursorFor,wheelPixels,editable} from '../web3-state.js';
 import {parseRoute} from '../web3-history.js';
-import {crossesReadingBoundary} from '../web3-input.js';
+import {crossesReadingBoundary,isReadingExit,installInput} from '../web3-input.js';
 import {TRANSITIONS} from '../web3-scenes.js';
 const manifest=JSON.parse(fs.readFileSync(new URL('../assets/web3/manifest.json',import.meta.url)));
 const newState=()=>createState(manifest.floors);
@@ -27,4 +27,27 @@ test('The closing viewer renders only lines in colour and rejects hidden edges',
 test('All photograph metadata and plan geometry have finite registered coordinates',()=>{for(const f of manifest.floors){assert.ok(f.contours.length);for(const p of f.contours.flat())assert.ok(p.every(Number.isFinite));for(const p of f.photos){assert.ok(Number.isFinite(p.x)&&Number.isFinite(p.y));assert.ok(p.direction.every(Number.isFinite));assert.ok(manifest.photos[p.key]);}}});
 
 test('Boundary capture stops at the reading view on entry in either direction',()=>{assert.equal(crossesReadingBoundary(50,851,800,100),true);assert.equal(crossesReadingBoundary(-100,701,800,-130),true);assert.equal(crossesReadingBoundary(-100,701,800,100),false);assert.equal(crossesReadingBoundary(120,921,800,50),false);});
+test('Hero cannot release downward scrolling until its retreat finishes',()=>{const s=newState();s.restore({section:'hero',hero:3});assert.equal(isReadingExit(s.snapshot(),'hero',1),false);const token=s.begin({heroExit:true});assert.equal(isReadingExit(s.snapshot(),'hero',1),false);s.commit(token);assert.equal(isReadingExit(s.snapshot(),'hero',1),true);assert.equal(isReadingExit(s.snapshot(),'hero',-1),false);});
+test('Continuous wheel input exits the completed last plan without a pause, in both directions',t=>{
+  const keys=['document','matchMedia','addEventListener','getComputedStyle','innerHeight','performance','scrollTo'];
+  const originals=new Map(keys.map(key=>[key,Object.getOwnPropertyDescriptor(globalThis,key)]));
+  t.after(()=>{for(const [key,descriptor] of originals)descriptor?Object.defineProperty(globalThis,key,descriptor):delete globalThis[key];});
+  let now=0,y=0;const handlers={},stage={getBoundingClientRect:()=>({height:800})};
+  const node=offset=>({getBoundingClientRect:()=>({top:offset-y,bottom:offset-y+801}),querySelector:()=>stage,addEventListener:()=>{}});
+  const globals={document:{body:{classList:{contains:()=>true}}},matchMedia:()=>({matches:false}),addEventListener:(name,fn)=>handlers[name]=fn,getComputedStyle:()=>({position:'sticky'}),innerHeight:800,performance:{now:()=>now},scrollTo:({top})=>y=top};
+  for(const [key,value] of Object.entries(globals))Object.defineProperty(globalThis,key,{value,configurable:true,writable:true});
+  for(const [cursor,dir,end] of [[6,1,7],[1,-1,0]]){
+    now=0;y=0;const s=newState();s.restore({section:'technical',cursor});
+    installInput({state:s,hero:node(-4000),technical:node(0),activity:()=>{},step:()=>{if(!s.snapshot().pending)s.begin({cursor:end});return true;}});
+    let released=0;
+    for(let i=0;i<100;i++){
+      now=i*30;if(now>=1350&&s.snapshot().pending)s.commit(s.snapshot().pending.id);
+      const event={deltaY:12*dir,deltaX:0,deltaMode:0,target:{closest:()=>null},prevented:false,preventDefault(){this.prevented=true;}};
+      handlers.wheel(event);
+      if(now<1350)assert.equal(event.prevented,true,'the active transition stays pinned');
+      else {assert.equal(event.prevented,false,'the first post-commit wheel event must leave');y+=event.deltaY;released++;}
+    }
+    assert.equal(released,55);assert.equal(y,660*dir);assert.equal(s.snapshot().cursor,end);
+  }
+});
 test('Web2 hidden-line geometry is complete and all indices are valid',async()=>{const {gunzipSync}=await import('node:zlib');const m=JSON.parse(fs.readFileSync('assets/residence/wireframe/manifest.json'));const raw=gunzipSync(fs.readFileSync('assets/residence/wireframe/hidden-edges.bin.gz'));assert.equal(raw.readUInt32LE(0),m.depthVertices);assert.equal(raw.readUInt32LE(4),m.depthIndices);assert.equal(raw.length,m.depthIndexOffset+m.depthIndices*4);for(let i=m.depthIndexOffset;i<raw.length;i+=4)assert.ok(raw.readUInt32LE(i)<m.depthVertices);const edges=gunzipSync(fs.readFileSync('assets/residence/wireframe/near-context.bin.gz'));assert.equal(edges.length,m.vertices*6);});

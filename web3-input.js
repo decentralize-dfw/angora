@@ -1,6 +1,12 @@
-import {wheelPixels,editable} from './web3-state.js?v=20261006-refinement-3';
+import {wheelPixels,editable,ROUTE} from './web3-state.js?v=20261006-scroll-4';
 export function crossesReadingBoundary(top,bottom,height,dy){
   return dy>0?top>1&&top-dy<=1:bottom<height-1&&bottom-dy>=height-1;
+}
+export function isReadingExit(s,owner,dir){
+  if(s.pending||s.overlay)return false;
+  if(owner==='technical')return dir>0?s.cursor===ROUTE.length-1:s.cursor===0;
+  if(owner==='hero')return dir>0?s.hero===3&&s.heroExit:s.hero===0&&!s.heroExit;
+  return false;
 }
 export function installInput({state,hero,technical,step,activity}) {
   let last=0, direction=0, touch=null,consumed=false;
@@ -31,6 +37,9 @@ export function installInput({state,hero,technical,step,activity}) {
     const time=performance.now(), dir=Math.sign(dy), fresh=time-last>180||dir!==direction;
     const name=owner();if(!name){if(arrive(dy)){e.preventDefault();last=time;direction=dir;consumed=true;}return;}
     last=time;direction=dir;
+    // A completed endpoint releases this very wheel event, including the tail
+    // of the gesture that played the final chapter. No quiet-period lock here.
+    if(isReadingExit(state.snapshot(),name,dir)){consumed=false;return;}
     if(!fresh){if(consumed||state.snapshot().pending)e.preventDefault();return;}
     consumed=accept(name,dir,'wheel');if(consumed)e.preventDefault();
   },{passive:false});

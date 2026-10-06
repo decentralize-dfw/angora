@@ -1,0 +1,346 @@
+{
+  "capturedAt": "2026-10-06T14:07:37.147Z",
+  "revision": "20261006-scroll-4",
+  "method": "Native wheel and pointer in Chromium; responsive viewport emulation.",
+  "before": [
+    {
+      "at": 1791294723379,
+      "y": 8939.2001953125,
+      "cursor": 6,
+      "pending": true
+    },
+    {
+      "at": 1791294723644,
+      "y": 8939.2001953125,
+      "cursor": 6,
+      "pending": true
+    },
+    {
+      "at": 1791294723906,
+      "y": 8939.2001953125,
+      "cursor": 6,
+      "pending": true
+    },
+    {
+      "at": 1791294724211,
+      "y": 8939.2001953125,
+      "cursor": 6,
+      "pending": true
+    },
+    {
+      "at": 1791294724498,
+      "y": 8939.2001953125,
+      "cursor": 6,
+      "pending": true
+    },
+    {
+      "at": 1791294724764,
+      "y": 8939.2001953125,
+      "cursor": 7,
+      "pending": false
+    },
+    {
+      "at": 1791294725023,
+      "y": 8939.2001953125,
+      "cursor": 7,
+      "pending": false
+    },
+    {
+      "at": 1791294725285,
+      "y": 8939.2001953125,
+      "cursor": 7,
+      "pending": false
+    },
+    {
+      "at": 1791294725532,
+      "y": 8939.2001953125,
+      "cursor": 7,
+      "pending": false
+    },
+    {
+      "at": 1791294725818,
+      "y": 8939.2001953125,
+      "cursor": 7,
+      "pending": false
+    },
+    {
+      "at": 1791294726066,
+      "y": 8939.2001953125,
+      "cursor": 7,
+      "pending": false
+    }
+  ],
+  "after": [
+    {
+      "at": 1791294942034,
+      "y": 8939.2001953125,
+      "cursor": 6,
+      "pending": true
+    },
+    {
+      "at": 1791294942310,
+      "y": 8939.2001953125,
+      "cursor": 6,
+      "pending": true
+    },
+    {
+      "at": 1791294942558,
+      "y": 8939.2001953125,
+      "cursor": 6,
+      "pending": true
+    },
+    {
+      "at": 1791294942806,
+      "y": 8939.2001953125,
+      "cursor": 6,
+      "pending": true
+    },
+    {
+      "at": 1791294943055,
+      "y": 8939.2001953125,
+      "cursor": 6,
+      "pending": true
+    },
+    {
+      "at": 1791294943303,
+      "y": 8939.2001953125,
+      "cursor": 6,
+      "pending": true
+    },
+    {
+      "at": 1791294943582,
+      "y": 9050.400390625,
+      "cursor": 7,
+      "pending": false
+    },
+    {
+      "at": 1791294943849,
+      "y": 9208.7998046875,
+      "cursor": 7,
+      "pending": false
+    },
+    {
+      "at": 1791294944133,
+      "y": 9367.2001953125,
+      "cursor": 7,
+      "pending": false
+    },
+    {
+      "at": 1791294944383,
+      "y": 9525.599609375,
+      "cursor": 7,
+      "pending": false
+    },
+    {
+      "at": 1791294944649,
+      "y": 9684,
+      "cursor": 7,
+      "pending": false
+    }
+  ],
+  "reverse": [
+    {
+      "at": 1791295159197,
+      "y": 9517.599609375,
+      "cursor": 1,
+      "pending": true
+    },
+    {
+      "at": 1791295159524,
+      "y": 9517.599609375,
+      "cursor": 1,
+      "pending": true
+    },
+    {
+      "at": 1791295159812,
+      "y": 9517.599609375,
+      "cursor": 1,
+      "pending": true
+    },
+    {
+      "at": 1791295160104,
+      "y": 9517.599609375,
+      "cursor": 1,
+      "pending": true
+    },
+    {
+      "at": 1791295160422,
+      "y": 9517.599609375,
+      "cursor": 0,
+      "pending": false
+    },
+    {
+      "at": 1791295160729,
+      "y": 9359.2001953125,
+      "cursor": 0,
+      "pending": false
+    },
+    {
+      "at": 1791295161043,
+      "y": 9216.7998046875,
+      "cursor": 0,
+      "pending": false
+    },
+    {
+      "at": 1791295161360,
+      "y": 9042.400390625,
+      "cursor": 0,
+      "pending": false
+    },
+    {
+      "at": 1791295161676,
+      "y": 8900,
+      "cursor": 0,
+      "pending": false
+    },
+    {
+      "at": 1791295161988,
+      "y": 8725.599609375,
+      "cursor": 0,
+      "pending": false
+    },
+    {
+      "at": 1791295162307,
+      "y": 8567.2001953125,
+      "cursor": 0,
+      "pending": false
+    }
+  ],
+  "mobile": [
+    {
+      "at": 1791295228627,
+      "y": 8905.599609375,
+      "cursor": 6,
+      "pending": true
+    },
+    {
+      "at": 1791295229108,
+      "y": 8905.599609375,
+      "cursor": 6,
+      "pending": true
+    },
+    {
+      "at": 1791295229569,
+      "y": 8905.599609375,
+      "cursor": 6,
+      "pending": true
+    },
+    {
+      "at": 1791295230052,
+      "y": 8942.400390625,
+      "cursor": 7,
+      "pending": false
+    },
+    {
+      "at": 1791295230548,
+      "y": 9221.599609375,
+      "cursor": 7,
+      "pending": false
+    },
+    {
+      "at": 1791295231023,
+      "y": 9500,
+      "cursor": 7,
+      "pending": false
+    },
+    {
+      "at": 1791295231516,
+      "y": 9778.400390625,
+      "cursor": 7,
+      "pending": false
+    },
+    {
+      "at": 1791295231990,
+      "y": 10056.7998046875,
+      "cursor": 7,
+      "pending": false
+    }
+  ],
+  "gradient": {
+    "before": {
+      "exit": "false",
+      "fit": "cover",
+      "opacity": "1",
+      "shade": "false",
+      "stage": {
+        "bottom": 720,
+        "height": 720,
+        "left": 0,
+        "right": 1424.800048828125,
+        "top": 0,
+        "width": 1424.800048828125,
+        "x": 0,
+        "y": 0
+      },
+      "y": 0
+    },
+    "during": {
+      "exit": "false",
+      "opacity": "0.388321",
+      "shade": "true",
+      "y": 0
+    },
+    "after": {
+      "exit": "true",
+      "opacity": "0",
+      "shade": "true",
+      "stage": {
+        "bottom": 720,
+        "height": 720,
+        "left": 0,
+        "right": 1424.800048828125,
+        "top": 0,
+        "width": 1424.800048828125,
+        "x": 0,
+        "y": 0
+      },
+      "y": 0
+    },
+    "reverseDuring": {
+      "opacity": "0.664028",
+      "shade": "false",
+      "y": 0
+    },
+    "reverseAfter": {
+      "errors": [],
+      "header": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "border": "0px"
+      },
+      "opacity": "1",
+      "shade": "false",
+      "y": 0
+    }
+  },
+  "header": {
+    "errors": [],
+    "fit": "cover",
+    "header": {
+      "bg": "rgba(0, 0, 0, 0)",
+      "border": "0px",
+      "color": "rgb(49, 75, 66)",
+      "ink": "dark"
+    },
+    "image": {
+      "bottom": 720,
+      "height": 720,
+      "left": 0,
+      "right": 1424.800048828125,
+      "top": 0,
+      "width": 1424.800048828125,
+      "x": 0,
+      "y": 0
+    },
+    "revision": "20261006-scroll-4",
+    "stage": {
+      "bottom": 720,
+      "height": 720,
+      "left": 0,
+      "right": 1424.800048828125,
+      "top": 0,
+      "width": 1424.800048828125,
+      "x": 0,
+      "y": 0
+    }
+  }
+}
