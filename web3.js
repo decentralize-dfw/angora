@@ -159,7 +159,7 @@ async function initialize(){
   state=createState(manifest.floors);state.subscribe((snapshot,type)=>{publishQA();if(type==='section')prepareNext(snapshot);if(type==='open'){abortPresentation();paintCommitted().catch(()=>{});}});heroPlayer=new FilmSurface($('.hero-film'),manifest,state);isoPlayer=new FilmSurface($('.iso-surface'),manifest,state);
   history=installHistory(state,async(saved,y,hash,isCurrent)=>{
     const nav=++navigationId;navigationActive=true;state.cancel();abortPresentation();let after=null;
-    if(saved){const origin=saved.overlay;state.restore({...saved,overlay:null});await paintCommitted();if(!isCurrent())return;if(y!=null)scrollTo({top:y,behavior:'instant'});if(overlays.isOpen)after=overlays.finishClose();if(origin)overlays.show(origin,false);}
+    if(saved){const origin=saved.overlay;state.restore({...saved,overlay:null});if(saved.filter!==document.querySelector('[data-filter][aria-pressed="true"]')?.dataset.filter)renderGallery(saved.filter);await paintCommitted();if(!isCurrent())return;if(y!=null)scrollTo({top:y,behavior:'instant'});if(overlays.isOpen)after=overlays.finishClose();if(origin)overlays.show(origin,false);}
     else {if(overlays.isOpen)after=overlays.finishClose();await navigate(hash,false);}
     if(!isCurrent())return;if(nav===navigationId)navigationActive=false;return after;
   });
@@ -191,7 +191,7 @@ async function initialize(){
     if(initializing||navigationActive||state.snapshot().overlay||state.snapshot().pending)return;
     const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(visible){state.local('section',{section:visible.target.id});history.write();}
   },{rootMargin:'-25% 0px -45% 0px',threshold:[0,.2,.5]});document.querySelectorAll('main>section[id]').forEach(s=>observer.observe(s));
-  let wireLoaded=false;new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&!wireLoaded){wireLoaded=true;import('./web3-wireframe.js').then(m=>m.mountWireframe($('#wire-viewer'))).catch(error=>errors.push(String(error)));}},{rootMargin:'400px'}).observe($('#wire-viewer'));
+  let wireLoaded=false;new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&!wireLoaded){wireLoaded=true;import('./web3-wireframe.js').then(m=>m.mountWireframe($('#wire-viewer'))).catch(error=>{errors.push(String(error));publishQA();});}},{rootMargin:'400px'}).observe($('#wire-viewer'));
   renderMeta();document.body.classList.add('is-enhanced');$('#hero').classList.add('is-enhanced');$('#technical').classList.add('is-enhanced');
   if(initialHash)await navigate(initialHash,false);else {state.local('initial',{section:'hero'});history.write();}
   initializing=false;prepareNext(state.snapshot());opening();publishQA();

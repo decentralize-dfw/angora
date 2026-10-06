@@ -26,7 +26,7 @@ export function installGalleryRail(windowNode,track,{onPhoto=()=>{}}={}){
     const overflow=track.scrollWidth-windowNode.clientWidth,target=selectedKey?track.querySelector(`[data-key="${selectedKey}"]`):null,targetX=target?target.offsetLeft-track.offsetLeft:current;
     if(media.matches&&!reduced.matches&&overflow>100&&globalThis.ScrollTrigger){
       section.classList.add('has-rail');
-      tween=gsap.to(windowNode,{scrollLeft:overflow,ease:'none',scrollTrigger:{trigger:section,start:'top top',end:()=>'+='+overflow,pin:true,anticipatePin:0,scrub:.25,invalidateOnRefresh:true}});
+      tween=gsap.fromTo(windowNode,{scrollLeft:0},{scrollLeft:overflow,ease:'none',scrollTrigger:{trigger:section,start:'top top',end:()=>'+='+overflow,pin:true,anticipatePin:0,scrub:.25,invalidateOnRefresh:true}});
       windowNode.scrollLeft=Math.min(overflow,targetX);
     }else section.classList.remove('has-rail');
     if(wasPinned){scrollTo({top:tween?tween.scrollTrigger.start+Math.min(overflow,targetX):section.offsetTop,behavior:'instant'});}else if(Math.abs(scrollY-y)>1)scrollTo({top:y,behavior:'instant'});
