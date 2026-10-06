@@ -1,0 +1,148 @@
+{
+  "testedAt": "2026-10-06T09:05:05.954Z",
+  "viewportChecks": [
+    {
+      "errors": [],
+      "headerWidth": 430.3999938964844,
+      "height": 932,
+      "overflow": 0,
+      "plan": {
+        "bottom": 815.8999938964844,
+        "height": 636.2999877929688,
+        "left": 15,
+        "right": 415.3999938964844,
+        "top": 179.60000610351562,
+        "width": 400.3999938964844,
+        "x": 15,
+        "y": 179.60000610351562
+      },
+      "stageHeight": 932,
+      "stagePosition": "sticky",
+      "width": 430
+    },
+    {
+      "errors": [],
+      "headerWidth": 752.7999877929688,
+      "height": 1024,
+      "overflow": -15,
+      "plan": {
+        "bottom": 866.2999877929688,
+        "height": 659.6124877929688,
+        "left": 45.17499923706055,
+        "right": 707.6250114440918,
+        "top": 206.6875,
+        "width": 662.4500122070312,
+        "x": 45.17499923706055,
+        "y": 206.6875
+      },
+      "stageHeight": 1024,
+      "stagePosition": "sticky",
+      "width": 768
+    },
+    {
+      "errors": [],
+      "headerWidth": 1008.7999877929688,
+      "height": 768,
+      "overflow": -15,
+      "plan": {
+        "bottom": 610.3000183105469,
+        "height": 405.6750183105469,
+        "left": 60.53750228881836,
+        "right": 948.262538909912,
+        "top": 204.625,
+        "width": 887.7250366210938,
+        "x": 60.53750228881836,
+        "y": 204.625
+      },
+      "stageHeight": 768,
+      "stagePosition": "sticky",
+      "width": 1024
+    },
+    {
+      "errors": [],
+      "headerWidth": 1424.800048828125,
+      "height": 900,
+      "overflow": -15,
+      "plan": {
+        "bottom": 742.3000183105469,
+        "height": 515.5750122070312,
+        "left": 85.5,
+        "right": 1339.300048828125,
+        "top": 226.7250061035156,
+        "width": 1253.800048828125,
+        "x": 85.5,
+        "y": 226.7250061035156
+      },
+      "stageHeight": 900,
+      "stagePosition": "sticky",
+      "width": 1440
+    },
+    {
+      "errors": [],
+      "headerWidth": 828.7999877929688,
+      "height": 390,
+      "overflow": -15,
+      "plan": {
+        "bottom": 584.9125061035156,
+        "height": 400,
+        "left": 49.73749923706055,
+        "right": 779.0625114440918,
+        "top": 184.9125061035156,
+        "width": 729.3250122070312,
+        "x": 49.73749923706055,
+        "y": 184.9125061035156
+      },
+      "stageHeight": 716.4625244140625,
+      "stagePosition": "relative",
+      "width": 844
+    }
+  ],
+  "reserveBefore": {
+    "galleryY": 14463.75048828125,
+    "mapHeight": 563.9000244140625,
+    "y": 10030.400390625
+  },
+  "reserveAfter": {
+    "galleryY": 14463.749755859377,
+    "mapHeight": 563.9000244140625,
+    "y": 10536.7998046875
+  },
+  "kitchenChecks": [
+    {
+      "left": 357.6000061035156,
+      "states": [
+        {
+          "name": "Principal kitchen on the entrance level",
+          "state": "entering"
+        },
+        {
+          "name": "The garden-level kitchen",
+          "state": "entering"
+        },
+        {
+          "name": "Kitchenette on the attic landing",
+          "state": "entering"
+        }
+      ],
+      "y": 7945.60009765625
+    },
+    {
+      "left": 584.7999877929688,
+      "states": [
+        {
+          "name": "Principal kitchen on the entrance level",
+          "state": "entering"
+        },
+        {
+          "name": "The garden-level kitchen",
+          "state": "entering"
+        },
+        {
+          "name": "Kitchenette on the attic landing",
+          "state": "entering"
+        }
+      ],
+      "y": 7945.60009765625
+    }
+  ]
+}

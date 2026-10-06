@@ -14,26 +14,31 @@ export class FilmSurface {
     const end=decodedImage(film.last,600).catch(()=>null),item={key,video,end,failed:false};this.warmItem=item;video.addEventListener('error',()=>item.failed=true,{once:true});video.load();
   }
   async show(url,id){const image=await decodedImage(url);if(!this.state.current(id))return false;this.still.src=image.src;return true;}
-  async play(key,id){
+  async play(key,id,{fadeMs=0,finalStill=null}={}){
     this.cancel();const film=this.manifest.films[key];
     if(!film)throw Error(`Missing film ${key}`);
     const prepared=this.warmItem?.key===key?this.warmItem:null;if(prepared)this.warmItem=null;
-    const end=await (prepared?.end||decodedImage(film.last,600).catch(()=>null));
+    const end=await (finalStill?decodedImage(finalStill,3000).catch(()=>null):(prepared?.end||decodedImage(film.last,3000).catch(()=>null)));
     if(!this.state.current(id))return false;
     if(reduced()||prepared?.failed){if(end)this.still.src=end.src;prepared?.video.removeAttribute('src');return !!end;}
     const video=prepared?.video||document.createElement('video');video.className='film-video';video.muted=true;video.playsInline=true;video.preload='auto';video.setAttribute('aria-hidden','true');if(!prepared)video.src=film.url;
     this.video=video;this.node.append(video);
     return new Promise(resolve=>{
-      let finished=false,presented=false;
+      let finished=false,overlay=null,fade=null,timer;
+      const dispose=()=>{video.pause();video.remove();video.removeAttribute('src');video.load();if(this.video===video)this.video=null;};
       const finish=()=>{
         if(finished)return;finished=true;clearTimeout(timer);
         if(this.state.current(id)&&end){this.still.src=end.src;this.still.style.opacity='1';}
-        video.pause();video.remove();video.removeAttribute('src');video.load();if(this.video===video)this.video=null;this.abort=null;resolve(this.state.current(id)&&!!end);
+        dispose();
+        const complete=()=>{overlay?.remove();if(this.abort===abort)this.abort=null;resolve(this.state.current(id)&&!!end);};
+        if(fade)fade.finished.then(complete,complete);else complete();
       };
-      this.abort=finish;
-      const reveal=()=>{if(!this.state.current(id)){finish();return;}presented=true;clearTimeout(timer);timer=setTimeout(finish,film.seconds*1000+450);video.classList.add('presented');this.still.style.opacity='0';this.state.phase(id,'playing');};
+      const abort=()=>{finished=true;clearTimeout(timer);fade?.cancel();overlay?.remove();dispose();resolve(false);};this.abort=abort;
+      const reveal=()=>{if(!this.state.current(id)){abort();return;}clearTimeout(timer);timer=setTimeout(finish,film.seconds*1000+750);
+        if(fadeMs){overlay=this.still.cloneNode();overlay.className='film-crossfade';overlay.removeAttribute('alt');overlay.setAttribute('aria-hidden','true');this.node.append(overlay);fade=overlay.animate([{opacity:1},{opacity:0}],{duration:fadeMs,easing:'cubic-bezier(.33,0,.3,1)',fill:'forwards'});}
+        video.classList.add('presented');this.still.style.opacity='0';this.state.phase(id,'playing');};
       video.addEventListener('ended',finish,{once:true});video.addEventListener('error',finish,{once:true});
-      let timer=setTimeout(finish,450);
+      timer=setTimeout(finish,4000);
       const start=async()=>{
         if(!this.state.current(id)){finish();return;}
         if(video.requestVideoFrameCallback)video.requestVideoFrameCallback(reveal);

@@ -39,9 +39,12 @@ def movie(key, source, seconds, width, reverse=False):
     source_frames=int(probe['streams'][0]['nb_frames']);count=round(seconds*60)
     # Select a uniform set INCLUDING BOTH endpoints. A simple setpts+fps loses
     # the source's final frames when the target clip is only 11/14 frames long.
-    indices=[round(i*(source_frames-1)/(count-1)) for i in range(count)]
+    selected=min(source_frames,count)
+    indices=[round(i*(source_frames-1)/(selected-1)) for i in range(selected)]
     selection='+'.join(f'eq(n\\,{i})' for i in indices)
-    filters=('reverse,' if reverse else '')+f'select={selection},setpts=N/(60*TB),scale={width}:-2:flags=lanczos'
+    # Distribute every available source frame across the new duration. Upsampling
+    # duplicates source frames; it never loses the last frame or changes framing.
+    filters=('reverse,' if reverse else '')+f'select={selection},setpts=N*{count-1}/({selected-1}*60*TB),fps=60:round=near,tpad=stop_mode=clone:stop_duration=0.1,scale={width}:-2:flags=lanczos'
     url=dest/f'{key}.mp4'
     ff('-i',source,'-vf',filters,'-r','60','-frames:v',count,'-an','-c:v','libx264','-preset','fast','-crf','17','-pix_fmt','yuv420p','-movflags','+faststart',url)
     ff('-i',url,'-frames:v','1','-c:v','libwebp','-lossless','1','-compression_level','3',dest/f'{key}-first.webp')
@@ -51,12 +54,12 @@ def movie(key, source, seconds, width, reverse=False):
 for name in ['approach','orbit','garden-return']:
     for size,width in [('d',1280),('m',854)]:
         reversed_source=name=='garden-return'
-        movie(name+'-'+size, ROOT/f'assets/residence/films/{name}/source.mp4', .7/3, width,reversed_source)
-        movie(name+'-back-'+size, ROOT/f'assets/residence/films/{name}/source.mp4', .7/3, width,not reversed_source)
+        movie(name+'-'+size, ROOT/f'assets/residence/films/{name}/source.mp4', 1.5, width,reversed_source)
+        movie(name+'-back-'+size, ROOT/f'assets/residence/films/{name}/source.mp4', 1.5, width,not reversed_source)
 for level in [1,2,3]:
     for size,width in [('d',1920),('m',1280)]:
-        movie(f'level-{level}-{size}', ROOT/f'assets/residence/chapters/finished/level-{level}.mp4', .55/3, width)
-        movie(f'level-{level}-back-{size}', ROOT/f'assets/residence/chapters/finished/level-{level}.mp4', .55/3, width, True)
+        movie(f'level-{level}-{size}', ROOT/f'assets/residence/chapters/finished/level-{level}.mp4', 70/60, width)
+        movie(f'level-{level}-back-{size}', ROOT/f'assets/residence/chapters/finished/level-{level}.mp4', 70/60, width, True)
 manifest['floors']=[]
 for i,floor in enumerate(poses['floors']):
     target=OUT/'plans';target.mkdir(exist_ok=True)

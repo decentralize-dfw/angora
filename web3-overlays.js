@@ -1,5 +1,5 @@
-import {decodedImage} from './web3-media.js';
-import {photoURL} from './web3-plans.js';
+import {decodedImage} from './web3-media.js?v=20261006-pacing-1';
+import {photoURL} from './web3-plans.js?v=20261006-pacing-1';
 export function installOverlays({state,manifest,history,onNavigate}){
   let opener=null,current=null,afterClose=null,imageToken=0;
   const dialogs=[...document.querySelectorAll('dialog')];
@@ -16,6 +16,9 @@ export function installOverlays({state,manifest,history,onNavigate}){
   }
   function show(origin,push=true){
     if(current)finishClose();opener=document.activeElement;
+    // The parent history entry must record the actual opening position, even
+    // when a horizontal rail has moved since its last selected-card update.
+    if(push)history.write();
     if(!state.open(origin))return;
     current=origin.type==='photo'?document.querySelector('#photo-dialog'):origin.type==='menu'?document.querySelector('#menu-dialog'):document.querySelector('#enquiry-dialog');
     current.showModal();current.querySelector('[data-close]').focus({preventScroll:true});

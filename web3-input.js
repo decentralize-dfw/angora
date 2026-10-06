@@ -1,4 +1,7 @@
-import {wheelPixels,editable} from './web3-state.js';
+import {wheelPixels,editable} from './web3-state.js?v=20261006-pacing-1';
+export function crossesReadingBoundary(top,bottom,height,dy){
+  return dy>0?top>1&&top-dy<=1:bottom<height-1&&bottom-dy>=height-1;
+}
 export function installInput({state,hero,technical,step,activity}) {
   let last=0, direction=0, touch=null,consumed=false;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
@@ -14,21 +17,27 @@ export function installInput({state,hero,technical,step,activity}) {
   }
   const isControl=e=>!!e.target.closest('button,a,input,select,textarea,[data-local-scroll],dialog');
   function accept(name,dir,source){if(!name||reduced.matches)return false;return step(name,dir,source);}
+  function arrive(dy){
+    if(reduced.matches||state.snapshot().overlay)return false;
+    for(const node of [hero,technical]){const r=node.getBoundingClientRect(),stage=node.querySelector('.pinned'),h=stage.getBoundingClientRect().height;
+      if(h>innerHeight+2||getComputedStyle(stage).position!=='sticky')continue;
+      if(crossesReadingBoundary(r.top,r.bottom,h,dy)){scrollTo({top:scrollY+r.top,behavior:'instant'});return true;}
+    }return false;
+  }
   addEventListener('wheel',e=>{
     if(e.ctrlKey||e.metaKey||Math.abs(e.deltaX)>Math.abs(e.deltaY)||e.target.closest('dialog,input,textarea,select,[contenteditable="true"]'))return;
     const dy=wheelPixels(e);if(Math.abs(dy)<1)return;
     activity(Math.abs(dy));
-    const name=owner();if(!name)return;
     const time=performance.now(), dir=Math.sign(dy), fresh=time-last>180||dir!==direction;
+    const name=owner();if(!name){if(arrive(dy)){e.preventDefault();last=time;direction=dir;consumed=true;}return;}
     last=time;direction=dir;
     if(!fresh){if(consumed||state.snapshot().pending)e.preventDefault();return;}
     consumed=accept(name,dir,'wheel');if(consumed)e.preventDefault();
   },{passive:false});
-  function canStep(name,dir){const s=state.snapshot();return name==='hero'?(dir>0?s.hero<3:s.hero>0):(dir>0?s.cursor<7:s.cursor>0);}
   addEventListener('keydown',e=>{
     if(e.ctrlKey||e.metaKey||e.altKey||editable(e.target)||isControl(e))return;
     const dir=['ArrowDown','PageDown',' '].includes(e.key)?1:['ArrowUp','PageUp'].includes(e.key)?-1:0;
-    if(dir&&accept(owner(),e.shiftKey?-dir:dir,'keyboard')){e.preventDefault();activity(100);}
+    if(dir&&(accept(owner(),e.shiftKey?-dir:dir,'keyboard')||arrive((e.shiftKey?-dir:dir)*innerHeight*.75))){e.preventDefault();activity(100);}
   });
   for(const node of [hero,technical]){
     node.addEventListener('touchstart',e=>{

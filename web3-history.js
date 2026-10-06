@@ -1,4 +1,4 @@
-import {cursorFor} from './web3-state.js';
+import {cursorFor} from './web3-state.js?v=20261006-pacing-1';
 export function parseRoute(hash,manifest){
   const [section,query='']=hash.replace(/^#/,'').split('?'),p=new URLSearchParams(query);
   const floor=Math.max(0,Math.min(3,Number(p.get('floor'))||0));
