@@ -1,4 +1,4 @@
-import {wheelPixels,editable,ROUTE} from './web3-state.js?v=20261006-scroll-4';
+import {wheelPixels,editable,ROUTE} from './web3-state.js?v=20261006-pin-5';
 export function crossesReadingBoundary(top,bottom,height,dy){
   return dy>0?top>1&&top-dy<=1:bottom<height-1&&bottom-dy>=height-1;
 }
@@ -8,6 +8,12 @@ export function isReadingExit(s,owner,dir){
   if(owner==='hero')return dir>0?s.hero===3&&s.heroExit:s.hero===0&&!s.heroExit;
   return false;
 }
+// Retain the part of the sticky runway already travelled. Shortening a section
+// to one viewport while its top is above the screen would pull the stage up.
+export function terminalReadingInset(top,bottom,stageHeight){
+  return top<=1&&bottom>=stageHeight-1?Math.max(0,-top):0;
+}
+export function readingEntryDelta(top,bottom,height,dir){return dir<0?bottom-height:top;}
 export function installInput({state,hero,technical,step,activity}) {
   let last=0, direction=0, touch=null,consumed=false;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
@@ -27,11 +33,11 @@ export function installInput({state,hero,technical,step,activity}) {
     if(reduced.matches||state.snapshot().overlay)return false;
     for(const node of [hero,technical]){const r=node.getBoundingClientRect(),stage=node.querySelector('.pinned'),h=stage.getBoundingClientRect().height;
       if(h>innerHeight+2||getComputedStyle(stage).position!=='sticky')continue;
-      if(crossesReadingBoundary(r.top,r.bottom,h,dy)){scrollTo({top:scrollY+r.top,behavior:'instant'});return true;}
+      if(crossesReadingBoundary(r.top,r.bottom,h,dy)){scrollTo({top:scrollY+readingEntryDelta(r.top,r.bottom,h,dy),behavior:'instant'});return true;}
     }return false;
   }
   addEventListener('wheel',e=>{
-    if(e.ctrlKey||e.metaKey||Math.abs(e.deltaX)>Math.abs(e.deltaY)||e.target.closest('dialog,input,textarea,select,[contenteditable="true"]'))return;
+    if(e.ctrlKey||e.metaKey||Math.abs(e.deltaX)>Math.abs(e.deltaY)||e.target.closest('dialog,input:not([type="checkbox"]):not([type="radio"]),textarea,select,[contenteditable="true"]'))return;
     const dy=wheelPixels(e);if(Math.abs(dy)<1)return;
     activity(Math.abs(dy));
     const time=performance.now(), dir=Math.sign(dy), fresh=time-last>180||dir!==direction;

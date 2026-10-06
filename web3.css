@@ -47,7 +47,7 @@ html{scrollbar-gutter:stable}
 .photo-open:hover,.gallery-card button:hover{opacity:1}
 
 /* Every pinned stage ends at its actual reading boundary. */
-.is-enhanced .film-section.is-terminal,.is-enhanced .technical.is-terminal{height:calc(100svh + 1px)}
+.is-enhanced .film-section.is-terminal,.is-enhanced .technical.is-terminal{height:calc(100svh + 1px + var(--reading-inset,0px))}
 .gallery-story{position:relative;background:var(--paper);isolation:isolate}
 .gallery{background:var(--paper);position:relative}
 .gallery-story.is-rail>.gallery{position:sticky;top:0;z-index:1}
@@ -105,7 +105,7 @@ html{scrollbar-gutter:stable}
    after the isometric-to-plan bridge. The remaining space is shared by ratio. */
 @media(max-width:680px) and (prefers-reduced-motion:no-preference){
  .technical,.technical:has(.plan-active){height:160svh}
- .is-enhanced .technical.is-terminal:has(.plan-active){height:calc(100svh + 1px)}
+ .is-enhanced .technical.is-terminal:has(.plan-active){height:calc(100svh + 1px + var(--reading-inset,0px))}
  .technical .technical-stage,.technical .technical-stage.plan-active{position:sticky!important;top:0;height:100svh!important;min-height:0;overflow:clip!important}
  .technical .technical-content,.technical .technical-stage.plan-active .technical-content{height:auto;min-height:0!important;flex:1}
  .plan-unit{grid-template-rows:minmax(0,2fr) minmax(0,1fr)}
@@ -120,7 +120,7 @@ html{scrollbar-gutter:stable}
 }
 @media(max-height:520px) and (prefers-reduced-motion:no-preference){
  .technical,.technical:has(.plan-active){height:160svh!important}
- .is-enhanced .technical.is-terminal,.is-enhanced .technical.is-terminal:has(.plan-active){height:calc(100svh + 1px)!important}
+ .is-enhanced .technical.is-terminal,.is-enhanced .technical.is-terminal:has(.plan-active){height:calc(100svh + 1px + var(--reading-inset,0px))!important}
  .technical .technical-stage,.technical .technical-stage.plan-active{position:sticky!important;top:0;height:100svh!important;min-height:0;overflow:clip!important;padding-top:calc(var(--header-height) + 10px + env(safe-area-inset-top));padding-bottom:8px;gap:5px}
  .technical .technical-content,.technical .technical-stage.plan-active .technical-content{height:auto;min-height:0!important;flex:1}
  .technical-heading{min-height:32px;flex:none;align-items:center}.technical-heading h2{font-size:24px}.technical-heading .eyebrow{font-size:9px;margin-bottom:2px}
@@ -129,3 +129,6 @@ html{scrollbar-gutter:stable}
  .photo-open{height:calc(100% - 58px)}
 }
 @media(max-height:520px) and (max-width:680px){.photo-open{height:100%}.plan-photo figcaption{min-height:0}}
+
+/* Incoming plan nodes must not become scroll anchors during their transition. */
+.technical[aria-busy=true]{overflow-anchor:none}

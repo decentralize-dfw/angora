@@ -1,6 +1,6 @@
-import {t} from './web3-i18n.js?v=20261006-scroll-4';
-import {decodedImage} from './web3-media.js?v=20261006-scroll-4';
-import {photoURL} from './web3-plans.js?v=20261006-scroll-4';
+import {t} from './web3-i18n.js?v=20261006-pin-5';
+import {decodedImage} from './web3-media.js?v=20261006-pin-5';
+import {photoURL} from './web3-plans.js?v=20261006-pin-5';
 export function installOverlays({state,manifest,history,onNavigate}){
   let opener=null,current=null,afterClose=null,imageToken=0;
   const dialogs=[...document.querySelectorAll('dialog')];

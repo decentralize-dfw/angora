@@ -1,0 +1,417 @@
+{
+  "revision": "20261006-pin-5",
+  "capturedAt": "2026-10-06T14:36:06.033Z",
+  "clientTime": "6 Oct 2026, 16:36",
+  "method": "Native wheel and keyboard actions in Chromium; mobile sizes are viewport emulations.",
+  "reproducedBefore": [
+    {
+      "y": 9025.599609375,
+      "cursor": 6,
+      "pending": true,
+      "request": 3,
+      "stageY": -85.7249984741211,
+      "height": 721,
+      "events": [
+        "restore",
+        "section",
+        "begin"
+      ]
+    },
+    {
+      "y": 9045.599609375,
+      "cursor": 6,
+      "pending": false,
+      "request": 4,
+      "stageY": 0,
+      "height": 1152,
+      "events": [
+        "begin",
+        "cancel",
+        "section"
+      ]
+    },
+    {
+      "y": 9045.599609375,
+      "cursor": 6,
+      "pending": false,
+      "request": 4,
+      "stageY": 0,
+      "height": 1152,
+      "events": [
+        "begin",
+        "cancel",
+        "section"
+      ]
+    },
+    {
+      "y": 9045.599609375,
+      "cursor": 6,
+      "pending": false,
+      "request": 4,
+      "stageY": 0,
+      "height": 1152,
+      "events": [
+        "begin",
+        "cancel",
+        "section"
+      ]
+    },
+    {
+      "y": 9045.599609375,
+      "cursor": 6,
+      "pending": false,
+      "request": 4,
+      "stageY": 0,
+      "height": 1152,
+      "events": [
+        "begin",
+        "cancel",
+        "section"
+      ]
+    },
+    {
+      "y": 9045.599609375,
+      "cursor": 6,
+      "pending": false,
+      "request": 4,
+      "stageY": 0,
+      "height": 1152,
+      "events": [
+        "begin",
+        "cancel",
+        "section"
+      ]
+    },
+    {
+      "y": 9045.599609375,
+      "cursor": 6,
+      "pending": false,
+      "request": 4,
+      "stageY": 0,
+      "height": 1152,
+      "events": [
+        "begin",
+        "cancel",
+        "section"
+      ]
+    },
+    {
+      "y": 9045.599609375,
+      "cursor": 6,
+      "pending": false,
+      "request": 4,
+      "stageY": 0,
+      "height": 1152,
+      "events": [
+        "begin",
+        "cancel",
+        "section"
+      ]
+    },
+    {
+      "y": 9045.599609375,
+      "cursor": 6,
+      "pending": false,
+      "request": 4,
+      "stageY": 0,
+      "height": 1152,
+      "events": [
+        "begin",
+        "cancel",
+        "section"
+      ]
+    },
+    {
+      "y": 9045.599609375,
+      "cursor": 6,
+      "pending": false,
+      "request": 4,
+      "stageY": 0,
+      "height": 1152,
+      "events": [
+        "begin",
+        "cancel",
+        "section"
+      ]
+    }
+  ],
+  "controlWheelAfter": [
+    {
+      "cancels": 2,
+      "cursor": 6,
+      "height": 1152,
+      "pending": true,
+      "request": 3,
+      "stageY": 0,
+      "y": 8939.2001953125
+    },
+    {
+      "cancels": 2,
+      "cursor": 6,
+      "height": 1152,
+      "pending": true,
+      "request": 3,
+      "stageY": 0,
+      "y": 8939.2001953125
+    },
+    {
+      "cancels": 2,
+      "cursor": 6,
+      "height": 1152,
+      "pending": true,
+      "request": 3,
+      "stageY": 0,
+      "y": 8939.2001953125
+    },
+    {
+      "cancels": 2,
+      "cursor": 6,
+      "height": 1152,
+      "pending": true,
+      "request": 3,
+      "stageY": 0,
+      "y": 8939.2001953125
+    },
+    {
+      "cancels": 2,
+      "cursor": 6,
+      "height": 1152,
+      "pending": true,
+      "request": 3,
+      "stageY": 0,
+      "y": 8939.2001953125
+    },
+    {
+      "cancels": 2,
+      "cursor": 6,
+      "height": 1152,
+      "pending": true,
+      "request": 3,
+      "stageY": 0,
+      "y": 8939.2001953125
+    },
+    {
+      "cancels": 2,
+      "cursor": 6,
+      "height": 1152,
+      "pending": true,
+      "request": 3,
+      "stageY": 0,
+      "y": 8939.2001953125
+    },
+    {
+      "cancels": 2,
+      "cursor": 7,
+      "height": 721.3250122070312,
+      "pending": false,
+      "request": 3,
+      "stageY": -139.8000030517578,
+      "y": 9080
+    },
+    {
+      "cancels": 2,
+      "cursor": 7,
+      "height": 721.3250122070312,
+      "pending": false,
+      "request": 3,
+      "stageY": -301.3999938964844,
+      "y": 9241.599609375
+    },
+    {
+      "cancels": 2,
+      "cursor": 7,
+      "height": 721.3250122070312,
+      "pending": false,
+      "request": 3,
+      "stageY": -463,
+      "y": 9403.2001953125
+    },
+    {
+      "cancels": 2,
+      "cursor": 7,
+      "height": 721.3250122070312,
+      "pending": false,
+      "request": 3,
+      "stageY": -623.7999877929688,
+      "y": 9564
+    },
+    {
+      "cancels": 2,
+      "cursor": 7,
+      "height": 721.3250122070312,
+      "pending": false,
+      "request": 3,
+      "stageY": -785.4000244140625,
+      "y": 9725.599609375
+    }
+  ],
+  "offset": {
+    "before": {
+      "stageY": 0,
+      "wrapper": {
+        "bottom": 1151.6749999821186,
+        "height": 1152,
+        "left": 0,
+        "right": 1264.800048828125,
+        "top": -0.32500001788139343,
+        "width": 1264.800048828125,
+        "x": 0,
+        "y": -0.32500001788139343
+      },
+      "y": 8939.2001953125
+    },
+    "during": {
+      "height": 1152,
+      "stageY": 0,
+      "y": 8979.2001953125
+    },
+    "after": {
+      "cursor": 7,
+      "errors": [],
+      "events": [
+        "gallery-filter",
+        "gallery-position",
+        "cancel",
+        "cancel",
+        "restore",
+        "section",
+        "begin",
+        "commit",
+        "section"
+      ],
+      "height": 761.3250122070312,
+      "request": 3,
+      "stageY": 0,
+      "y": 8979.2001953125
+    }
+  },
+  "exitAndReturn": {
+    "held": {
+      "cursor": 7,
+      "inset": "40.32500076293945px",
+      "stageY": 0,
+      "y": 8979.2001953125
+    },
+    "outside": {
+      "comfortY": 505,
+      "stageY": -215,
+      "y": 9195.2001953125
+    },
+    "returned": {
+      "cursor": 7,
+      "errors": [],
+      "stageY": 0,
+      "y": 8980
+    }
+  },
+  "narrow": [
+    {
+      "size": [
+        390,
+        844
+      ],
+      "before": {
+        "height": 1350.4000244140625,
+        "stageY": 0,
+        "wrapperY": -39.650001525878906,
+        "y": 8900
+      },
+      "during": {
+        "height": 1350.4000244140625,
+        "stageY": 0,
+        "y": 8900
+      },
+      "after": {
+        "cursor": 7,
+        "errors": [],
+        "events": [
+          "gallery-filter",
+          "gallery-position",
+          "cancel",
+          "cancel",
+          "restore",
+          "section",
+          "begin",
+          "commit",
+          "section"
+        ],
+        "height": 884.6500244140625,
+        "inset": "39.650001525878906px",
+        "stageY": 0,
+        "y": 8900
+      }
+    },
+    {
+      "size": [
+        320,
+        568
+      ],
+      "before": {
+        "height": 908.7999877929688,
+        "stageY": 0,
+        "wrapperY": -37.087501525878906,
+        "y": 8125.60009765625
+      },
+      "during": {
+        "height": 908.7999877929688,
+        "stageY": 0,
+        "y": 8128.7998046875
+      },
+      "after": {
+        "cursor": 7,
+        "errors": [],
+        "events": [
+          "gallery-filter",
+          "gallery-position",
+          "cancel",
+          "cancel",
+          "restore",
+          "section",
+          "begin",
+          "commit",
+          "section"
+        ],
+        "height": 609.2875366210938,
+        "inset": "40.28750228881836px",
+        "stageY": 0,
+        "y": 8128.7998046875
+      }
+    },
+    {
+      "size": [
+        844,
+        390
+      ],
+      "before": {
+        "height": 624.6375122070312,
+        "stageY": 0,
+        "wrapperY": -32.04999923706055,
+        "y": 6880.7998046875
+      },
+      "during": {
+        "height": 624.6375122070312,
+        "stageY": 0,
+        "y": 6888.7998046875
+      },
+      "after": {
+        "cursor": 7,
+        "errors": [],
+        "events": [
+          "gallery-filter",
+          "gallery-position",
+          "cancel",
+          "cancel",
+          "restore",
+          "section",
+          "begin",
+          "commit",
+          "section"
+        ],
+        "height": 431.4500122070313,
+        "inset": "40.04999923706055px",
+        "stageY": 0,
+        "y": 6888.7998046875
+      }
+    }
+  ]
+}

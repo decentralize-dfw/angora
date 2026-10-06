@@ -1,11 +1,11 @@
-import {createState,FLOORS,ROUTE,cursorFor} from './web3-state.js?v=20261006-scroll-4';
-import {FilmSurface,decodedImage} from './web3-media.js?v=20261006-scroll-4';
-import {preparePlan,photoURL,photoName} from './web3-plans.js?v=20261006-scroll-4';
-import {installInput} from './web3-input.js?v=20261006-scroll-4';
-import {installHistory,parseRoute} from './web3-history.js?v=20261006-scroll-4';
-import {installOverlays} from './web3-overlays.js?v=20261006-scroll-4';
-import {mountScenes,installGalleryRail,TRANSITIONS} from './web3-scenes.js?v=20261006-scroll-4';
-import {installLanguage} from './web3-i18n.js?v=20261006-scroll-4';
+import {createState,FLOORS,ROUTE,cursorFor} from './web3-state.js?v=20261006-pin-5';
+import {FilmSurface,decodedImage} from './web3-media.js?v=20261006-pin-5';
+import {preparePlan,photoURL,photoName} from './web3-plans.js?v=20261006-pin-5';
+import {installInput,terminalReadingInset} from './web3-input.js?v=20261006-pin-5';
+import {installHistory,parseRoute} from './web3-history.js?v=20261006-pin-5';
+import {installOverlays} from './web3-overlays.js?v=20261006-pin-5';
+import {mountScenes,installGalleryRail,TRANSITIONS} from './web3-scenes.js?v=20261006-pin-5';
+import {installLanguage} from './web3-i18n.js?v=20261006-pin-5';
 const $=selector=>document.querySelector(selector);
 const OPENING_LAST='assets/web3/films/opening-last.webp';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
@@ -44,7 +44,15 @@ function fitPlan(){
     if(!active){const cx=+circle.getAttribute('cx');const near=groups.filter(other=>other!==g&&Math.hypot(cx-+other.querySelector('circle').getAttribute('cx'),cy-+other.querySelector('circle').getAttribute('cy'))*scale<21);if(near.length){circle.setAttribute('r',2.5/scale);g.querySelector('text').style.display='none';g.dataset.cluster=[g.dataset.camera,...near.map(p=>p.dataset.camera)].join(',');}}
   });
 }
-function renderMeta(s=state.snapshot(),{surfaces=true}={}){
+function setTerminal(node,enabled){
+  if(enabled&&!node.classList.contains('is-terminal')){
+    const r=node.getBoundingClientRect(),stage=node.querySelector('.pinned'),h=stage.getBoundingClientRect().height;
+    node.style.setProperty('--reading-inset',terminalReadingInset(r.top,r.bottom,h)+'px');
+  }
+  node.classList.toggle('is-terminal',enabled);
+  if(!enabled)node.style.removeProperty('--reading-inset');
+}
+function renderMeta(s=state.snapshot(),{surfaces=true,geometry=true}={}){
   const {floor,mode}=s.technical;
   $('#technical-eyebrow').textContent=mode==='iso'?'04 / One home, four chapters':'05 / Inside every level';
   $('#technical-title').textContent=`The ${FLOORS[floor].toLowerCase()} level.`;
@@ -67,7 +75,7 @@ function renderMeta(s=state.snapshot(),{surfaces=true}={}){
   $('.hero-stage').dataset.exit=String(s.heroExit);
   $('.hero-stage').dataset.shadeExit=String(s.heroExit);
   paintHeader();
-  $('#hero').classList.toggle('is-terminal',s.heroExit);$('#technical').classList.toggle('is-terminal',s.cursor===7);
+  if(geometry){setTerminal($('#hero'),s.heroExit);setTerminal($('#technical'),s.cursor===7);}
   $('#hero').querySelector('.hero-wordmark').style.opacity=s.hero?'.0':'1';
   prepareNext(s);
   requestAnimationFrame(fitPlan);
@@ -106,7 +114,7 @@ async function transition(target,source='explicit',direction=1){
         if(!state.current(id))return false;
         const surface=$('#plan-surface'),outgoing=surface.firstElementChild;
         // Reserve the complete reading layout before either surface appears.
-        renderMeta({...before,cursor:target.cursor,technical:next},{surfaces:false});
+        renderMeta({...before,cursor:target.cursor,technical:next},{surfaces:false,geometry:false});
         if(old.mode==='plan'&&outgoing){outgoing.classList.add('unit-outgoing');outgoing.setAttribute('inert','');surface.append(unit);fitPlan();state.phase(id,'playing');await Promise.all([animate(outgoing,[{transform:'translateX(0)',opacity:1},{transform:`translateX(${-direction*102}%)`,opacity:0}],1350),animate(unit,[{transform:`translateX(${direction*102}%)`,opacity:0},{transform:'translateX(0)',opacity:1}],1350)]);if(state.current(id))outgoing.remove();}
         else {surface.replaceChildren(unit);surface.hidden=false;fitPlan();await Promise.all([animate(surface,[{opacity:0},{opacity:1}],1200),animate($('.iso-surface'),[{opacity:1},{opacity:0}],1200)]);}
       }else {await isoPlayer.show(manifest.floors[next.floor].iso,id);$('.iso-surface').hidden=false;await animate($('.iso-surface'),[{opacity:0},{opacity:1}],1200);}
@@ -177,9 +185,9 @@ function opening(){
 async function initialize(){
   installLanguage();
   const initialHash=location.hash;
-  manifest=await fetch('assets/web3/manifest.json?v=20261006-scroll-4').then(r=>{if(!r.ok)throw Error('Manifest unavailable');return r.json();});
-  for(const film of Object.values(manifest.films))for(const field of ['url','first','last'])film[field]+='?v=20261006-scroll-4';
-  for(const floor of manifest.floors)floor.iso+='?v=20261006-scroll-4';
+  manifest=await fetch('assets/web3/manifest.json?v=20261006-pin-5').then(r=>{if(!r.ok)throw Error('Manifest unavailable');return r.json();});
+  for(const film of Object.values(manifest.films))for(const field of ['url','first','last'])film[field]+='?v=20261006-pin-5';
+  for(const floor of manifest.floors)floor.iso+='?v=20261006-pin-5';
   manifest.films.opening={url:'assets/residence/films/opening/source.mp4',last:OPENING_LAST,seconds:5.056};
   state=createState(manifest.floors);state.subscribe((snapshot,type)=>{publishQA();if(type==='section')prepareNext(snapshot);if(type==='open'){abortPresentation();paintCommitted().catch(()=>{});}});heroPlayer=new FilmSurface($('.hero-film'),manifest,state);isoPlayer=new FilmSurface($('.iso-surface'),manifest,state);
   history=installHistory(state,async(saved,y,hash,isCurrent)=>{
@@ -216,7 +224,7 @@ async function initialize(){
     if(initializing||navigationActive||state.snapshot().overlay||state.snapshot().pending)return;
     const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(visible){state.local('section',{section:visible.target.id});history.write();}
   },{rootMargin:'-25% 0px -45% 0px',threshold:[0,.2,.5]});document.querySelectorAll('main>section[id],.gallery-story>section[id]').forEach(s=>observer.observe(s));
-  let wireLoaded=false;new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&!wireLoaded){wireLoaded=true;import('./web3-wireframe.js?v=20261006-scroll-4').then(m=>m.mountWireframe($('#wire-viewer'))).catch(error=>{errors.push(String(error));publishQA();});}},{rootMargin:'400px'}).observe($('#wire-viewer'));
+  let wireLoaded=false;new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&!wireLoaded){wireLoaded=true;import('./web3-wireframe.js?v=20261006-pin-5').then(m=>m.mountWireframe($('#wire-viewer'))).catch(error=>{errors.push(String(error));publishQA();});}},{rootMargin:'400px'}).observe($('#wire-viewer'));
   renderMeta();document.body.classList.add('is-enhanced');$('#hero').classList.add('is-enhanced');$('#technical').classList.add('is-enhanced');
   if(initialHash)await navigate(initialHash,false);else {state.local('initial',{section:'hero'});history.write();}
   initializing=false;prepareNext(state.snapshot());opening();publishQA();

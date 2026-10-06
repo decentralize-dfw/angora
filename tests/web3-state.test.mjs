@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createState,ROUTE,cursorFor,wheelPixels,editable} from '../web3-state.js';
 import {parseRoute} from '../web3-history.js';
-import {crossesReadingBoundary,isReadingExit,installInput} from '../web3-input.js';
+import {crossesReadingBoundary,isReadingExit,installInput,terminalReadingInset,readingEntryDelta} from '../web3-input.js';
 import {TRANSITIONS} from '../web3-scenes.js';
 const manifest=JSON.parse(fs.readFileSync(new URL('../assets/web3/manifest.json',import.meta.url)));
 const newState=()=>createState(manifest.floors);
@@ -27,6 +27,21 @@ test('The closing viewer renders only lines in colour and rejects hidden edges',
 test('All photograph metadata and plan geometry have finite registered coordinates',()=>{for(const f of manifest.floors){assert.ok(f.contours.length);for(const p of f.contours.flat())assert.ok(p.every(Number.isFinite));for(const p of f.photos){assert.ok(Number.isFinite(p.x)&&Number.isFinite(p.y));assert.ok(p.direction.every(Number.isFinite));assert.ok(manifest.photos[p.key]);}}});
 
 test('Boundary capture stops at the reading view on entry in either direction',()=>{assert.equal(crossesReadingBoundary(50,851,800,100),true);assert.equal(crossesReadingBoundary(-100,701,800,-130),true);assert.equal(crossesReadingBoundary(-100,701,800,100),false);assert.equal(crossesReadingBoundary(120,921,800,50),false);});
+test('Terminal geometry preserves the reading viewport from any sticky offset',()=>{
+  for(const height of [390.4,568,720,844,1084])for(const offset of [0,.325,86,200,height*.59]){
+    const top=-offset,bottom=height*1.6-offset;
+    const inset=terminalReadingInset(top,bottom,height),newBottom=top+height+1+inset;
+    assert.ok(Math.abs(newBottom-(height+1))<1e-8);
+    assert.equal(Math.min(0,newBottom-height),0,'the sticky stage cannot jump above the viewport');
+  }
+  assert.equal(terminalReadingInset(500,1652,720),0,'offscreen entry starts without a travelled runway');
+  assert.equal(terminalReadingInset(-900,-179,720),0,'a departed section is not a pinned viewport');
+});
+test('Upward re-entry lands at the visible end of the sticky runway',()=>{
+  assert.equal(readingEntryDelta(50,1202,720,1),50);
+  assert.equal(readingEntryDelta(-110,651,720,-1),-69);
+  assert.equal(651-readingEntryDelta(-110,651,720,-1),720);
+});
 test('Hero cannot release downward scrolling until its retreat finishes',()=>{const s=newState();s.restore({section:'hero',hero:3});assert.equal(isReadingExit(s.snapshot(),'hero',1),false);const token=s.begin({heroExit:true});assert.equal(isReadingExit(s.snapshot(),'hero',1),false);s.commit(token);assert.equal(isReadingExit(s.snapshot(),'hero',1),true);assert.equal(isReadingExit(s.snapshot(),'hero',-1),false);});
 test('Continuous wheel input exits the completed last plan without a pause, in both directions',t=>{
   const keys=['document','matchMedia','addEventListener','getComputedStyle','innerHeight','performance','scrollTo'];
