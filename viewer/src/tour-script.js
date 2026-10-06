@@ -82,7 +82,7 @@ export const TOUR_CUES = [
   {at: 50.6, atEn: 50.3,
    tr: 'Mimarisinde İskandinav esintileri taşıyan kiremit çatılı evler, olgun ağaçlar ve sakin sokaklar, Angora’ya kendine özgü bir karakter kazandırıyor.',
    en: 'Red-tiled houses with a touch of Scandinavian architecture, mature trees and quiet streets give Angora a character all its own.'},
-  {at: 61.1, atEn: 59.3,
+  {at: 61.1, atEn: 59.3, mentions: ['gates'],
    tr: 'Site, dört ayrı güvenlik girişiyle korunuyor.',
    en: 'The community is protected by four separate security gates,'},
   {at: 64.0, atEn: 62.9,

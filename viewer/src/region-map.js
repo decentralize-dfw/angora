@@ -362,6 +362,8 @@ export function createRegionMap(host) {
     siteChip.el.setAttribute('role', 'button'); siteChip.el.tabIndex = 0;
     const toggle = () => { clickOn = !clickOn; siteOn(); };
     siteChip.el.addEventListener('click', toggle);
+    siteChip.el.addEventListener('pointerenter', e => { if (e.pointerType !== 'touch') { hoverOn = true; siteOn(); } });
+    siteChip.el.addEventListener('pointerleave', () => { if (hoverOn) { hoverOn = false; siteOn(); } });
     siteChip.el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
   }
   // Adı yazmayan noktalar: üzerine gelince ad belirir
@@ -404,10 +406,8 @@ export function createRegionMap(host) {
       tip.textContent = near.h.name; tip.hidden = false;
       tip.style.transform = `translate(-50%, -100%) translate(${near.sx.toFixed(1)}px, ${(near.sy - 8).toFixed(1)}px)`;
     } else tip.hidden = true;
-    if (!screenRing.length) return;
-    const d = ringDistance(px, py);
-    const next = d < 10 || (hoverOn && (d < 36 || insideRing(px, py)));
-    if (next !== hoverOn) { hoverOn = next; siteOn(); }
+    // 06.10 ürün sahibi: sınır çizgisinin üstünde DEĞİL - yalnız "Angora Evleri" yazısının üstüne gelince,
+    // yazıya basınca, soldaki panel açılınca ya da rehber andığında bulanıklaşır (aşağıda siteChip olayları).
   });
   el.addEventListener('pointerleave', () => { tip.hidden = true; if (hoverOn) { hoverOn = false; siteOn(); } });
   let radius = 1000;
@@ -621,6 +621,8 @@ export function createRegionMap(host) {
     setMentions(ids = []) {
       // 'angora-evleri': sitenin kendisi - halka değil, sınır vurgusu
       tourOn = ids.includes('angora-evleri'); siteOn();
+      // 06.10: site kapıları her zaman değil, yalnız rehber andığında (tour-script 'gates')
+      el.classList.toggle('rm-gates-on', ids.includes('gates'));
       const next = new Set(ids.filter(id => id in MENTIONS));
       if (next.size === mentionState.size && [...next].every(id => mentionState.has(id))) return;
       mentionState.clear(); for (const id of next) mentionState.add(id);

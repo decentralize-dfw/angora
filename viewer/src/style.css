@@ -935,6 +935,8 @@ body.pegman-dragging,body.pegman-dragging *{cursor:grabbing !important}
    üstünde sade bir çip. Ana arterler bir ton koyu ve adıyla. */
 .rm-local-dot{stroke:#fff;stroke-width:1.4px;vector-effect:non-scaling-stroke}
 .rm-gate-dot{fill:var(--ink);stroke:#fff;stroke-width:1.6px;vector-effect:non-scaling-stroke}
+/* 06.10: kapılar yalnız rehber andığında */
+.region-map:not(.rm-gates-on) .rm-gate-dot,.region-map:not(.rm-gates-on) .rm-chip-gate{visibility:hidden!important}
 .rm-chip-local{display:inline-flex;flex-direction:column;align-items:center;gap:1px;padding:3px 9px;font-size:10.5px;line-height:1.25;
   background:rgba(255,255,255,.82);box-shadow:0 1px 6px rgba(27,50,37,.10)}
 .rm-chip-local i{position:absolute;left:-2px;top:50%;width:0;height:0}
