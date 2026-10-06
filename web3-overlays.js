@@ -1,6 +1,6 @@
-import {t} from './web3-i18n.js?v=20261006-refinement-2';
-import {decodedImage} from './web3-media.js?v=20261006-refinement-2';
-import {photoURL} from './web3-plans.js?v=20261006-refinement-2';
+import {t} from './web3-i18n.js?v=20261006-refinement-3';
+import {decodedImage} from './web3-media.js?v=20261006-refinement-3';
+import {photoURL} from './web3-plans.js?v=20261006-refinement-3';
 export function installOverlays({state,manifest,history,onNavigate}){
   let opener=null,current=null,afterClose=null,imageToken=0;
   const dialogs=[...document.querySelectorAll('dialog')];

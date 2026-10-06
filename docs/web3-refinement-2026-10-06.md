@@ -1,6 +1,6 @@
 # Web3 refinement — 6 October 2026, 13:43 CEST
 
-Revision: `20261006-refinement-2`. This record documents observed checks, not design scores.
+Revision: `20261006-refinement-3`. This record documents observed checks, not design scores.
 
 - Restored the existing 5.056-second owner-provided day-to-night opening film. It plays once and holds its actual final night frame; the next chapter requires user input. The first scroll uses a two-second crossfade. An early scroll captures the decoded frame before stopping the opening, avoiding a poster reset.
 - Replaced the visible navigation with a permanent small ANGORA 21 wordmark, Turkish/English controls, listing, 3D residence and MERGVS links. Language changes preserve the current floor and camera.
@@ -16,6 +16,7 @@ Revision: `20261006-refinement-2`. This record documents observed checks, not de
 - Local dependency scan: **348 references, none missing**. New media is one 197,134-byte WebP; the film and viewer buffers were already tracked. No new video/model upload.
 - Native wheel checks at 1280×720 and 390×844: all seven forward and reverse technical steps completed with unchanged page position during each gesture. A further downward gesture exits the last plan.
 - Additional 320×568 check: stage stayed exactly 568 pixels tall through the isometric-to-plan bridge and all subsequent plan steps. The final plan releases downward scrolling.
+- Landscape 844×390 follow-up: removed the old 650-pixel stage minimum, fitted the plan/photo/controls into the viewport and scaled map labels and pins for the shorter drawing. Photograph title remains inside its caption; a native wheel changes floor without page movement.
 - Header bounds checked at 320×568, 390×844, 430×932, 768×1024 and 1280×720; no horizontal overflow. These are browser viewport emulations, not physical-device tests.
 - Opening held chapter 0 at page position 0; first scroll took about 2.02–2.04 seconds with position unchanged. Early interruption preserved a decoded video frame.
 - Pointer checks: dimensions preserve photo DOM and page position; mobile lightbox closes to the same plan, floor, camera and page position.

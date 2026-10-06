@@ -113,3 +113,14 @@ html{scrollbar-gutter:stable}
  .plan-photo figcaption strong{font-size:14px}.plan-photo figcaption span{font-size:10px}
  .plan-photo figcaption small{display:none}
 }
+@media(max-height:520px) and (prefers-reduced-motion:no-preference){
+ .technical,.technical:has(.plan-active){height:160svh!important}
+ .is-enhanced .technical.is-terminal,.is-enhanced .technical.is-terminal:has(.plan-active){height:calc(100svh + 1px)!important}
+ .technical .technical-stage,.technical .technical-stage.plan-active{position:sticky!important;top:0;height:100svh!important;min-height:0;overflow:clip!important;padding-top:calc(var(--header-height) + 10px + env(safe-area-inset-top));padding-bottom:8px;gap:5px}
+ .technical .technical-content,.technical .technical-stage.plan-active .technical-content{height:auto;min-height:0!important;flex:1}
+ .technical-heading{min-height:32px;flex:none;align-items:center}.technical-heading h2{font-size:24px}.technical-heading .eyebrow{font-size:9px;margin-bottom:2px}
+ .floor-caption{flex-basis:22px}.floor-caption p,.technical-hint{display:none}
+ .plan-photo figcaption{min-height:52px;flex-basis:52px;padding-top:6px}.plan-photo figcaption strong{font-size:14px}.plan-photo figcaption span{font-size:10px}.plan-photo figcaption small{display:none}
+ .photo-open{height:calc(100% - 58px)}
+}
+@media(max-height:520px) and (max-width:680px){.photo-open{height:100%}.plan-photo figcaption{min-height:0}}

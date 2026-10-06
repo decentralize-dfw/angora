@@ -1,6 +1,6 @@
 {
   "capturedAt": "2026-10-06T11:42:43.866Z",
-  "revision": "20261006-refinement-2",
+  "revision": "20261006-refinement-3",
   "method": "Chromium browser, native wheel and pointer. Responsive viewport emulation; not a physical iOS/Android device.",
   "checks": {
     "openingHeld": {
@@ -2121,6 +2121,94 @@
         }
       },
       "y": 8185.60009765625
+    },
+    "landscape": {
+      "bar": {
+        "bottom": 346.20001220703125,
+        "height": 46,
+        "left": 49.73749923706055,
+        "right": 779.0625114440918,
+        "top": 300.20001220703125,
+        "width": 729.3250122070312,
+        "x": 49.73749923706055,
+        "y": 300.20001220703125
+      },
+      "caption": {
+        "bottom": 292.1999969482422,
+        "height": 52,
+        "left": 486.9624938964844,
+        "right": 779.0499877929688,
+        "top": 240.1999969482422,
+        "width": 292.0874938964844,
+        "x": 486.9624938964844,
+        "y": 240.1999969482422
+      },
+      "captionTitle": {
+        "bottom": 283.4000129699707,
+        "height": 18.200000762939453,
+        "left": 486.9624938964844,
+        "right": 779.0499877929688,
+        "top": 265.20001220703125,
+        "width": 292.0874938964844,
+        "x": 486.9624938964844,
+        "y": 265.20001220703125
+      },
+      "errors": [],
+      "stage": {
+        "bottom": 390.3999938964844,
+        "height": 390.3999938964844,
+        "left": 0,
+        "right": 828.7999877929688,
+        "top": 0,
+        "width": 828.7999877929688,
+        "x": 0,
+        "y": 0
+      },
+      "viewport": [
+        844,
+        390
+      ]
+    },
+    "landscapeScroll": {
+      "errors": [],
+      "gestures": [
+        {
+          "before": {
+            "cursor": 6,
+            "hero": 0
+          },
+          "elapsed": 1361.39999999851,
+          "endY": 6848.7998046875,
+          "finish": 1728.5,
+          "id": 3,
+          "source": "wheel",
+          "start": 367.1000000014901,
+          "y": 6848.7998046875
+        }
+      ],
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 7,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 3,
+        "section": "technical",
+        "technical": {
+          "cursor": 7,
+          "floor": 0,
+          "mode": "plan"
+        }
+      },
+      "y": 6848.7998046875
     }
   }
 }

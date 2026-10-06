@@ -1,4 +1,4 @@
-import {wheelPixels,editable} from './web3-state.js?v=20261006-refinement-2';
+import {wheelPixels,editable} from './web3-state.js?v=20261006-refinement-3';
 export function crossesReadingBoundary(top,bottom,height,dy){
   return dy>0?top>1&&top-dy<=1:bottom<height-1&&bottom-dy>=height-1;
 }
