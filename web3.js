@@ -1,11 +1,11 @@
-import {createState,FLOORS,ROUTE,cursorFor} from './web3-state.js?v=20261006-pin-5';
-import {FilmSurface,decodedImage} from './web3-media.js?v=20261006-pin-5';
-import {preparePlan,photoURL,photoName} from './web3-plans.js?v=20261006-pin-5';
-import {installInput,terminalReadingInset} from './web3-input.js?v=20261006-pin-5';
-import {installHistory,parseRoute} from './web3-history.js?v=20261006-pin-5';
-import {installOverlays} from './web3-overlays.js?v=20261006-pin-5';
-import {mountScenes,installGalleryRail,TRANSITIONS} from './web3-scenes.js?v=20261006-pin-5';
-import {installLanguage} from './web3-i18n.js?v=20261006-pin-5';
+import {createState,FLOORS,ROUTE,cursorFor} from './web3-state.js?v=20261006-tr-6';
+import {FilmSurface,decodedImage} from './web3-media.js?v=20261006-tr-6';
+import {preparePlan,photoURL,photoName} from './web3-plans.js?v=20261006-tr-6';
+import {installInput,terminalReadingInset} from './web3-input.js?v=20261006-tr-6';
+import {installHistory,parseRoute} from './web3-history.js?v=20261006-tr-6';
+import {installOverlays} from './web3-overlays.js?v=20261006-tr-6';
+import {mountScenes,installGalleryRail,TRANSITIONS} from './web3-scenes.js?v=20261006-tr-6';
+import {installLanguage} from './web3-i18n.js?v=20261006-tr-6';
 const $=selector=>document.querySelector(selector);
 const OPENING_LAST='assets/web3/films/opening-last.webp';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
@@ -185,9 +185,9 @@ function opening(){
 async function initialize(){
   installLanguage();
   const initialHash=location.hash;
-  manifest=await fetch('assets/web3/manifest.json?v=20261006-pin-5').then(r=>{if(!r.ok)throw Error('Manifest unavailable');return r.json();});
-  for(const film of Object.values(manifest.films))for(const field of ['url','first','last'])film[field]+='?v=20261006-pin-5';
-  for(const floor of manifest.floors)floor.iso+='?v=20261006-pin-5';
+  manifest=await fetch('assets/web3/manifest.json?v=20261006-tr-6').then(r=>{if(!r.ok)throw Error('Manifest unavailable');return r.json();});
+  for(const film of Object.values(manifest.films))for(const field of ['url','first','last'])film[field]+='?v=20261006-tr-6';
+  for(const floor of manifest.floors)floor.iso+='?v=20261006-tr-6';
   manifest.films.opening={url:'assets/residence/films/opening/source.mp4',last:OPENING_LAST,seconds:5.056};
   state=createState(manifest.floors);state.subscribe((snapshot,type)=>{publishQA();if(type==='section')prepareNext(snapshot);if(type==='open'){abortPresentation();paintCommitted().catch(()=>{});}});heroPlayer=new FilmSurface($('.hero-film'),manifest,state);isoPlayer=new FilmSurface($('.iso-surface'),manifest,state);
   history=installHistory(state,async(saved,y,hash,isCurrent)=>{
@@ -224,7 +224,7 @@ async function initialize(){
     if(initializing||navigationActive||state.snapshot().overlay||state.snapshot().pending)return;
     const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(visible){state.local('section',{section:visible.target.id});history.write();}
   },{rootMargin:'-25% 0px -45% 0px',threshold:[0,.2,.5]});document.querySelectorAll('main>section[id],.gallery-story>section[id]').forEach(s=>observer.observe(s));
-  let wireLoaded=false;new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&!wireLoaded){wireLoaded=true;import('./web3-wireframe.js?v=20261006-pin-5').then(m=>m.mountWireframe($('#wire-viewer'))).catch(error=>{errors.push(String(error));publishQA();});}},{rootMargin:'400px'}).observe($('#wire-viewer'));
+  let wireLoaded=false;new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&!wireLoaded){wireLoaded=true;import('./web3-wireframe.js?v=20261006-tr-6').then(m=>m.mountWireframe($('#wire-viewer'))).catch(error=>{errors.push(String(error));publishQA();});}},{rootMargin:'400px'}).observe($('#wire-viewer'));
   renderMeta();document.body.classList.add('is-enhanced');$('#hero').classList.add('is-enhanced');$('#technical').classList.add('is-enhanced');
   if(initialHash)await navigate(initialHash,false);else {state.local('initial',{section:'hero'});history.write();}
   initializing=false;prepareNext(state.snapshot());opening();publishQA();

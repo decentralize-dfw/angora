@@ -1,0 +1,179 @@
+{
+  "capturedAt": "2026-10-06T15:50:47.754Z",
+  "revision": "20261006-tr-6",
+  "staticStringsReviewed": 299,
+  "registeredPhotoCaptionsReviewed": 40,
+  "authoredWholeHeadings": 17,
+  "roundtrip": {
+    "samePhoto": true,
+    "sameCamera": true,
+    "cursors": [
+      5,
+      5,
+      5
+    ],
+    "stagePositions": [
+      0,
+      0,
+      0
+    ],
+    "restoredEnglishHeadings": true,
+    "caption": "Birinci kat · Fotoğraf 7Ebeveyn yatak odası22,07 m² · projeye göre",
+    "position": "Birinci kat · 3/4",
+    "photoOpacity": "1",
+    "errors": []
+  },
+  "shortViewport": {
+    "size": [
+      320,
+      568
+    ],
+    "hero": {
+      "cue": {
+        "bottom": 528.25,
+        "height": 151.10000610351562,
+        "left": 279.5,
+        "right": 296,
+        "top": 377.1499938964844,
+        "width": 16.5,
+        "x": 279.5,
+        "y": 377.1499938964844
+      },
+      "header": {
+        "bottom": 72,
+        "height": 72,
+        "left": 0,
+        "right": 320,
+        "top": 0,
+        "width": 320,
+        "x": 0,
+        "y": 0
+      },
+      "overflow": 0,
+      "reading": {
+        "bottom": 528.2500152587891,
+        "height": 140.8000030517578,
+        "left": 24,
+        "right": 296,
+        "top": 387.4500122070313,
+        "width": 272,
+        "x": 24,
+        "y": 387.4500122070313
+      },
+      "viewport": [
+        320,
+        568
+      ],
+      "wordmark": {
+        "bottom": 157.20000076293945,
+        "height": 123.125,
+        "left": 24,
+        "right": 296,
+        "top": 34.07500076293945,
+        "width": 272,
+        "x": 24,
+        "y": 34.07500076293945
+      }
+    },
+    "plan": {
+      "caption": {
+        "bottom": 462.1875076293946,
+        "height": 54.400001525878906,
+        "left": 200,
+        "right": 305,
+        "top": 407.7875061035156,
+        "width": 105,
+        "x": 200,
+        "y": 407.7875061035156
+      },
+      "errors": [],
+      "overflow": 0,
+      "stage": {
+        "bottom": 568,
+        "height": 568,
+        "left": 0,
+        "right": 320,
+        "top": 0,
+        "width": 320,
+        "x": 0,
+        "y": 0
+      },
+      "text": "Birinci kat · Fotoğraf 7Ebeveyn yatak odası22,07 m² · projeye göre",
+      "title": {
+        "bottom": 462.1875076293946,
+        "height": 36.400001525878906,
+        "left": 200,
+        "right": 305,
+        "top": 425.7875061035156,
+        "width": 105,
+        "x": 200,
+        "y": 425.7875061035156
+      }
+    },
+    "labels": {
+      "eyebrow": "05 / Planlar ve fotoğraflar",
+      "mode": "3D model ↗",
+      "modeRect": {
+        "bottom": 129.8375015258789,
+        "height": 44,
+        "left": 237.65000915527344,
+        "right": 305.00000762939453,
+        "top": 85.8375015258789,
+        "width": 67.3499984741211,
+        "x": 237.65000915527344,
+        "y": 85.8375015258789
+      },
+      "overflow": 0,
+      "roomLabels": [
+        "Ana oda",
+        "Giyinme",
+        "Banyo",
+        "Oturma alanı",
+        "Kat holü",
+        "Oda 2",
+        "Oda 3",
+        "Banyo",
+        "Ebeveyn balkonu",
+        "Balkon"
+      ],
+      "stageY": 0
+    },
+    "price": {
+      "headline": "Yeni hayatınızayer açın.",
+      "overflow": 0,
+      "price": "₺99.000.000",
+      "priceRect": {
+        "bottom": 811.5500259399414,
+        "height": 64.4000015258789,
+        "left": 24,
+        "right": 296,
+        "top": 747.1500244140625,
+        "width": 272,
+        "x": 24,
+        "y": 747.1500244140625
+      },
+      "viewport": [
+        320,
+        568
+      ]
+    },
+    "viewingForm": {
+      "title": "Ziyaretinizi planlayalım.",
+      "message": "Merhaba, Angora 21’i görmek için bir ziyaret randevusu almak istiyorum.",
+      "rect": {
+        "bottom": 556,
+        "height": 544,
+        "left": 12,
+        "right": 308,
+        "top": 12,
+        "width": 296,
+        "x": 12,
+        "y": 12
+      }
+    },
+    "purchaseForm": {
+      "message": "Merhaba, Angora 21’in satın alma koşulları hakkında bilgi almak istiyorum.",
+      "title": "Satın alma detaylarını konuşalım."
+    }
+  }
+}

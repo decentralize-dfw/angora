@@ -1,5 +1,5 @@
-import {FLOORS} from './web3-state.js?v=20261006-pin-5';
-import {decodedImage} from './web3-media.js?v=20261006-pin-5';
+import {FLOORS} from './web3-state.js?v=20261006-tr-6';
+import {decodedImage} from './web3-media.js?v=20261006-tr-6';
 const NS='http://www.w3.org/2000/svg';
 const el=(tag,attrs)=>{const n=document.createElementNS(NS,tag);Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));return n;};
 const friendly=name=>name.replace(/Bedroom 106|Bedroom C02/g,'Bedroom II').replace(/Bedroom 107|Bedroom C04/g,'Bedroom III').replace('Basement','Garden');
