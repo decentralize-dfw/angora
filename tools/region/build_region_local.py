@@ -91,6 +91,8 @@ def snap(x, y):
 
 gates = [dict(zip(('x', 'y'), snap(x, y))) for x, y in GATES]
 hide_dots = [i for i, t in enumerate(places['dots']) if len(t) > 3 and t[3] and COMMERCIAL.search(t[3])]
+# 06.10 ürün sahibi: OSM'in iki 'Beytepe Ormanı' noktası Hacettepe Ormanı'nın üstünde - ormanlar region-map.js'te elle
+hide_dots += [i for i, t in enumerate(places['dots']) if len(t) > 3 and t[3] and re.search(r'Ormanı', t[3])]
 hide_curated = [i for i, c in enumerate(places['curated']) if COMMERCIAL.search(c['name'])]
 out = {'generated_for': 'Bölge haritası - çevrede katmanı (28.09.2026)',
        'source': 'ürün sahibinin Google Haritalar işaretlemeleri, OSM sokak kesişimleriyle ölçülerek haritaya oturtuldu; basketbol/tenis OSM poligonları',

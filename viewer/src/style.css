@@ -107,6 +107,8 @@ h1 strong{font-weight:700}
 .sound-toggle[aria-pressed=false] .sound-wave{display:none}
 .sound-toggle[aria-pressed=false] .sound-mute{display:inline}
 .sound-toggle[aria-pressed=false]{opacity:.4}
+/* 06.10 genel button[aria-pressed=true] koyu dolgusu: ses açıkken koyu simge koyu yuvarlakta kayboluyordu */
+.sound-toggle[aria-pressed=true]{background:transparent;color:var(--ink)}
 
 /* --------------------------------------------------------- scale picker */
 .scale-picker{display:flex;top:max(18px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);gap:3px;padding:4px;border-radius:999px}
@@ -408,6 +410,7 @@ h1 strong{font-weight:700}
 .rm-chip-villa{background:var(--ink);color:#fff;border-color:#fff;font-size:12px;padding:6px 14px;letter-spacing:.02em}
 .rm-chip-ring{background:transparent;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:var(--muted);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:2px 6px}
 .rm-chip-area{background:transparent;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:rgba(22,29,26,.42);font-size:10px;letter-spacing:.26em;text-transform:uppercase;font-weight:600}
+.rm-chip-forest{color:rgba(46,92,52,.62)}
 .rm-dim{fill:#070d0c;fill-opacity:.7;pointer-events:none}
 .rm-compass{position:absolute;right:22px;top:84px;display:grid;place-items:center;width:44px;height:44px;border-radius:999px;background:var(--glass);-webkit-backdrop-filter:var(--blur);backdrop-filter:var(--blur);border:1px solid var(--edge);font-size:11px;font-weight:700;color:var(--ink);line-height:1}
 .rm-compass i{font-style:normal;font-size:13px;margin-bottom:-2px;

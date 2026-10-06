@@ -97,10 +97,10 @@ export const TOUR_CUES = [
 
   // ------------------------------------------------------- the surroundings
   {at: 78.1, atEn: 76.9, view: 'region', radius: 2000, rotate: false, spin: true, group: null,
-   mentions: ['beysukent', 'beytepe-forest'],
-   tr: 'Site, Beysukent ve Beytepe ormanlarına komşu.',
-   en: 'The community borders the Beysukent and Beytepe forests,'},
-  {at: 81.4, atEn: 80.7, mentions: ['beysukent', 'beytepe-forest'],
+   mentions: ['hacettepe-forest', 'beytepe-forest'],
+   tr: 'Site, Hacettepe ve Beytepe ormanlarına komşu.',
+   en: 'The community borders the Hacettepe and Beytepe forests,'},
+  {at: 81.4, atEn: 80.7, mentions: ['hacettepe-forest', 'beytepe-forest'],
    tr: 'Yani doğanın hemen yanı başında bir yaşam.',
    en: 'which means life right next to nature.'},
   {at: 84.7, atEn: 83.9, mentions: ['beytepe', 'beysukent'],

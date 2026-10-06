@@ -30,9 +30,15 @@ import local from './region-local.json';
 import { t, currentLang } from './i18n.js';
 import { listing } from './listing.js';
 
+// 06.10 ürün sahibinin haritası: Beysukent sitenin İÇİ değil, kuzeyi (OSM'deki Beysukent Koleji -1034,-1497,
+// Beysukent Emlak -283,-1681 ile aynı bölge). "Beysukent Ormanı" yok; iki orman Hacettepe Ormanı (kuzeydoğu)
+// ve Beytepe Ormanı (Beytepe'nin doğusu). Harita katmanında da hep görünürler.
 const AREAS = [
   { name: 'Angora Evleri', x: 40, y: -195 },
-  { name: 'Beysukent', x: -640, y: -430 },
+  { name: 'Beysukent', x: -450, y: -1800 },
+  { name: 'Çayyolu', x: -1900, y: -1900 },
+  { name: 'Hacettepe Ormanı', en: 'Hacettepe Forest', x: 1040, y: -1590, forest: true },
+  { name: 'Beytepe Ormanı', en: 'Beytepe Forest', x: 715, y: 780, forest: true },
 ];
 // Sesli rehberin andığı yerler (tour-script.js 'mentions'). Konumlar harita
 // verisinin kendisinden: orman, kampüs ve semt noktaları region-places.json
@@ -40,13 +46,15 @@ const AREAS = [
 // okuyla durur. Anıldıkları cümle boyunca haritada yanarlar.
 const MENTIONS = {
   cankaya:         {tr: 'Çankaya', en: 'Çankaya', x: 15000, y: -1500},
-  cayyolu:         {tr: 'Çayyolu', en: 'Çayyolu', x: -1400, y: -1500},
-  beysukent:       {tr: 'Beysukent', en: 'Beysukent', x: -640, y: -430},
-  'beytepe-forest':{tr: 'Beytepe Ormanı', en: 'Beytepe Forest', x: 542, y: -841},
+  cayyolu:         {tr: 'Çayyolu', en: 'Çayyolu', x: -1900, y: -1900},
+  beysukent:       {tr: 'Beysukent', en: 'Beysukent', x: -450, y: -1800},
+  'hacettepe-forest':{tr: 'Hacettepe Ormanı', en: 'Hacettepe Forest', x: 1040, y: -1590},
+  'beytepe-forest':{tr: 'Beytepe Ormanı', en: 'Beytepe Forest', x: 715, y: 780},
   beytepe:         {tr: 'Beytepe', en: 'Beytepe', x: -600, y: 1050},
   hacettepe:       {tr: 'Hacettepe Üniversitesi', en: 'Hacettepe University', x: 1423, y: 199},
-  bilkent:         {tr: 'Bilkent Üniversitesi', en: 'Bilkent University', x: 2521, y: 280},
-  odtu:            {tr: 'ODTÜ', en: 'METU', x: 6000, y: -1200},
+  // 06.10 ürün sahibi: Bilkent doğudaki kampüs alanında, ODTÜ kuzeydoğuda (harita dışı, yön okuyla)
+  bilkent:         {tr: 'Bilkent Üniversitesi', en: 'Bilkent University', x: 3650, y: 470},
+  odtu:            {tr: 'ODTÜ', en: 'METU', x: 5300, y: -2400},
 };
 // one label per amenity group, in places.groups order (see the extractor)
 const GROUP_KEYS = ['groupEdu', 'groupHealth', 'groupFood', 'groupShop', 'groupSport', 'groupService'];
@@ -236,7 +244,8 @@ export function createRegionMap(host) {
   };
   chip('rm-chip-villa', '<strong>Villa 21</strong>', villaAt[0] + 4, villaAt[1] - 16);
   for (const r of [500, 1000, 2000]) chip('rm-chip-ring', r < 1000 ? '500 m' : `${r / 1000} km`, 0, -r);
-  for (const a of AREAS) chip('rm-chip-area' + (a.name === 'Angora Evleri' ? ' rm-chip-site' : ''), a.name, a.x, a.y);
+  for (const a of AREAS) chip('rm-chip-area' + (a.name === 'Angora Evleri' ? ' rm-chip-site' : '') + (a.forest ? ' rm-chip-forest' : ''),
+    currentLang() === 'en' && a.en ? a.en : a.name, a.x, a.y);
   for (const [i, p] of places.curated.entries()) {
     if (local.hideCurated.includes(i)) continue;
     const bearing = Math.atan2(p.y, p.x) * 180 / Math.PI;
