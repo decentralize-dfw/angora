@@ -1,0 +1,14 @@
+{
+  "testedAt": "2026-10-06T09:25:28.303Z",
+  "filterCheck": {
+    "count": 2,
+    "errors": [],
+    "filter": "Outside",
+    "left": 0,
+    "top": -0.13750000298023224,
+    "wrapperTop": -0.13750000298023224,
+    "y": 14336
+  },
+  "before": 14336,
+  "after": 14336
+}
