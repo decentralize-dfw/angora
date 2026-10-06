@@ -1,0 +1,10 @@
+import { FLOWS } from '../casestudy2-data.js';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+const output = fileURLToPath(new URL('../build/casestudy2-analysis/', import.meta.url));
+mkdirSync(output, { recursive: true });
+writeFileSync(output + 'manifest.json', JSON.stringify(FLOWS, null, 2));
+const inventory = fileURLToPath(new URL('../assets/casestudy2/', import.meta.url));
+mkdirSync(inventory, { recursive: true });
+writeFileSync(inventory + 'inventory.json', JSON.stringify({recordedOn:'2026-10-05',description:'Editorial cuts and observed layers from owner-supplied screen recordings. Timing includes user pauses; layers are analysis overlays, not isolated original DOM layers.',flows:FLOWS},null,2));
+console.log(Object.values(FLOWS).map(f => `${f.id}: ${f.scenes.length} scenes / ${f.duration}s`).join('\n'));

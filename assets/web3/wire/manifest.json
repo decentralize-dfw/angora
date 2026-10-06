@@ -1,0 +1,44 @@
+{
+  "version": 3,
+  "quantum": 0.005,
+  "target": [
+    -0.7,
+    4.7,
+    -0.4
+  ],
+  "groups": [
+    {
+      "name": "villa",
+      "start": 0,
+      "count": 51522
+    },
+    {
+      "name": "garden",
+      "start": 51522,
+      "count": 11324
+    },
+    {
+      "name": "neighbours",
+      "start": 62846,
+      "count": 167018
+    },
+    {
+      "name": "landscape",
+      "start": 229864,
+      "count": 9344
+    },
+    {
+      "name": "trees",
+      "start": 239208,
+      "count": 14110
+    }
+  ],
+  "vertices": 253318,
+  "visibilityAngles": 32,
+  "maskOffset": 1519916,
+  "fit": {
+    "radius": 13.385682649756792,
+    "height": 9.72
+  },
+  "source": "Native architectural edges; exterior visibility baked offline. Runtime has no surfaces, mesh, depth buffer or textures."
+}

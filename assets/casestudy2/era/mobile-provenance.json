@@ -1,0 +1,36 @@
+{
+  "id": "era-mobile",
+  "site": "era",
+  "device": "mobile",
+  "start": 160.0,
+  "end": 238.0,
+  "crop": [
+    594,
+    254,
+    426,
+    636
+  ],
+  "sourceFile": "2026-10-05 13-16-27.mp4",
+  "sourceResolution": [
+    2560,
+    1600
+  ],
+  "sourceFPS": 60,
+  "sourceOffset": 160.0,
+  "processed": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "width": 426,
+        "height": 636,
+        "r_frame_rate": "60/1"
+      }
+    ],
+    "format": {
+      "duration": "78.000000",
+      "size": "7410247"
+    }
+  },
+  "processing": "Viewport crop; desktop resized to 1920 px; H.264; no audio; original frame timing. Mobile is Chrome responsive emulation at 459 × 686 CSS px, not a physical phone recording."
+}

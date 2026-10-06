@@ -1,0 +1,1 @@
+{"counts": {"desktop": [91, 33, 59, 76, 34, 94], "mobile": [79, 32, 55, 73, 32, 84]}, "colors": ["#8298b4", "#c08e9a", "#c8a976", "#b7a06c", "#8fae8b", "#a2a8a2"], "layers": ["Education", "Health", "Food & drink", "Shopping", "Parks & sport", "Services"], "projection": "north up; viewer local coordinate system", "names": false, "gates": false}

@@ -1,0 +1,1174 @@
+{
+  "desktop": [
+    {
+      "acceptance": 96,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-1",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 88,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-2",
+      "overflow": false,
+      "score": "İncelt · 6.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 77,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-3",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 85,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-4",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 93,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-5",
+      "overflow": false,
+      "score": "Yeniden ele al · 5.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 92,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-6",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 101,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-7",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 81,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-8",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 88,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-9",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 100,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-10",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 102,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-11",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 105,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-12",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 76,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-13",
+      "overflow": false,
+      "score": "İncelt · 7.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 101,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-14",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 97,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-15",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 91,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-16",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 85,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-17",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 73,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-18",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 92,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-19",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 101,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-20",
+      "overflow": false,
+      "score": "İncelt · 6.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 103,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-21",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 103,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-22",
+      "overflow": false,
+      "score": "İncelt · 7.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 90,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-23",
+      "overflow": false,
+      "score": "İncelt · 7.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 101,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-24",
+      "overflow": false,
+      "score": "Yeniden ele al · 5.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 115,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-25",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 125,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-26",
+      "overflow": false,
+      "score": "İncelt · 6.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 98,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-27",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 97,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-28",
+      "overflow": false,
+      "score": "Yeniden ele al · 4.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 100,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-29",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 111,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-30",
+      "overflow": false,
+      "score": "İncelt · 7.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 98,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-31",
+      "overflow": false,
+      "score": "İncelt · 7.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 92,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-32",
+      "overflow": false,
+      "score": "Yeniden ele al · 5.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 112,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-33",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 85,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-34",
+      "overflow": false,
+      "score": "Yeniden ele al · 5.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 102,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-35",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 92,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-36",
+      "overflow": false,
+      "score": "İncelt · 7.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 90,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-37",
+      "overflow": false,
+      "score": "İncelt · 7.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 113,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-38",
+      "overflow": false,
+      "score": "Yeniden ele al · 5.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 90,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-39",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 91,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-40",
+      "overflow": false,
+      "score": "İncelt · 6.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 104,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-41",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 111,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-42",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 121,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-43",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 93,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-44",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 115,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-45",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 108,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-46",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 92,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-47",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 96,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-48",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 89,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-49",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 90,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-50",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 98,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-51",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 122,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-52",
+      "overflow": false,
+      "score": "İncelt · 7.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 105,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-53",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 91,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-54",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 86,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-55",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 96,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-56",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 95,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-57",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 96,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-58",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 114,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-59",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 104,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-60",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 112,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-61",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 103,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-62",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 96,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-63",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 107,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-64",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 94,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-desktop-65",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    }
+  ],
+  "mobile": [
+    {
+      "acceptance": 82,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-1",
+      "overflow": false,
+      "score": "İncelt · 7.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 103,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-2",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 92,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-3",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 92,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-4",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 107,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-5",
+      "overflow": false,
+      "score": "Yeniden ele al · 5.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 94,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-6",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 104,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-7",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 115,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-8",
+      "overflow": false,
+      "score": "İncelt · 7.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 89,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-9",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 84,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-10",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 83,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-11",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 106,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-12",
+      "overflow": false,
+      "score": "İncelt · 7.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 104,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-13",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 99,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-14",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 103,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-15",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 101,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-16",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 114,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-17",
+      "overflow": false,
+      "score": "İncelt · 7.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 98,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-18",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 101,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-19",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 98,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-20",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 102,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-21",
+      "overflow": false,
+      "score": "İncelt · 7.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 88,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-22",
+      "overflow": false,
+      "score": "İncelt · 7.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 101,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-23",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 82,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-24",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 103,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-25",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 101,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-26",
+      "overflow": false,
+      "score": "İncelt · 6.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 88,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-27",
+      "overflow": false,
+      "score": "İncelt · 7.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 83,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-28",
+      "overflow": false,
+      "score": "İncelt · 7.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 103,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-29",
+      "overflow": false,
+      "score": "Yeniden ele al · 5.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 120,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-30",
+      "overflow": false,
+      "score": "Yeniden ele al · 5.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 102,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-31",
+      "overflow": false,
+      "score": "Yeniden ele al · 5.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 102,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-32",
+      "overflow": false,
+      "score": "Yeniden ele al · 5.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 105,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-33",
+      "overflow": false,
+      "score": "Yeniden ele al · 5.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 115,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-34",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 109,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-35",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 91,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-36",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 130,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-37",
+      "overflow": false,
+      "score": "İncelt · 6.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 108,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-38",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 116,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-39",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 103,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-40",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 109,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-41",
+      "overflow": false,
+      "score": "İncelt · 7.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 123,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-42",
+      "overflow": false,
+      "score": "Yeniden ele al · 5.5 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 96,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-43",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    },
+    {
+      "acceptance": 112,
+      "criteria": 4,
+      "evidence": 2,
+      "frameFits": true,
+      "hash": "#active-mobile-44",
+      "overflow": false,
+      "score": "Koru · 8.0 / 10",
+      "scrollY": 0
+    }
+  ],
+  "responsive": [
+    {
+      "cardWidths": [
+        269,
+        269,
+        269,
+        269
+      ],
+      "h": 568,
+      "hash": "#active-mobile-30",
+      "headings": [
+        "Devamlılık8 / 10",
+        "HareketN/A",
+        "Kadraj6 / 10",
+        "Okuma5.5 / 10"
+      ],
+      "overflow": false,
+      "w": 320
+    },
+    {
+      "cardWidths": [
+        339,
+        339,
+        339,
+        339
+      ],
+      "h": 844,
+      "hash": "#active-mobile-30",
+      "headings": [
+        "Devamlılık8 / 10",
+        "HareketN/A",
+        "Kadraj6 / 10",
+        "Okuma5.5 / 10"
+      ],
+      "overflow": false,
+      "w": 390
+    },
+    {
+      "frameFits": true,
+      "h": 390,
+      "hash": "#active-mobile-30",
+      "overflow": false,
+      "scrollY": 0,
+      "w": 844
+    }
+  ],
+  "playback": [
+    {
+      "hash": "#active-desktop-54",
+      "paused": true,
+      "rate": 0.5,
+      "time": 88.083333
+    },
+    {
+      "hash": "#active-mobile-5",
+      "paused": true,
+      "rate": 0.5,
+      "time": 11.983333
+    }
+  ],
+  "evidence": [
+    {
+      "hash": "#active-desktop-54",
+      "paused": true,
+      "scrollY": 0,
+      "time": 86.333333
+    }
+  ],
+  "logs": [],
+  "checkedAt": "2026-10-05 19:24:47 Europe/Paris",
+  "summary": [
+    "65 desktop kesit 1280 × 720 görünümde seçildi: dört ölçüt, iki kaynak bağlantısı ve kabul koşulu bulundu; kadraj sığdı, yatay taşma ve seçim sonrası scrollY kayması yoktu.",
+    "44 mobil kesit 320 × 568 görünümde seçildi; aynı veri ve kadraj kontrolleri geçti.",
+    "320 × 568 ve 390 × 844 not kartları tek kolon; 844 × 390 kayıt kadrajı sığdı. Kaydedilmeyen mobil kamera seçimi Hareket N/A olarak göründü.",
+    "Desktop Arrival ve film çıkışı 0.5× oynatıldı; son yerel karelerde durdu. Lightbox açılışı 0.5× oynatılarak 88.083333 yerel saniyede duruş doğrulandı.",
+    "Lightbox kaynak kanıtı 90.333333 kaynak saniyesinden 86.333333 yerel saniyeye gitti; hash korundu, ekran yukarı döndü.",
+    "Mobil film çıkışı 0.5× oynatıldı; klip sonundaki duruş aşağıdaki gözlemde kayıtlı. Bu kontrol fiziksel mouse/touch veya web2 performans testi değildir."
+  ]
+}

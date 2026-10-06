@@ -1,0 +1,1119 @@
+{
+  "testedAt": "2026-10-06T09:01:21.316Z",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "mobileHero": [
+    {
+      "errors": [],
+      "exit": false,
+      "gesture": {
+        "before": {
+          "cursor": 0,
+          "hero": 1
+        },
+        "elapsed": 1522.5,
+        "endY": 0,
+        "finish": 43576.700000000186,
+        "id": 3,
+        "source": "wheel",
+        "start": 42054.200000000186,
+        "y": 0
+      },
+      "hero": 2,
+      "y": 0
+    },
+    {
+      "errors": [],
+      "exit": false,
+      "gesture": {
+        "before": {
+          "cursor": 0,
+          "hero": 2
+        },
+        "elapsed": 1504,
+        "endY": 0,
+        "finish": 45149.90000000037,
+        "id": 4,
+        "source": "wheel",
+        "start": 43645.90000000037,
+        "y": 0
+      },
+      "hero": 3,
+      "y": 0
+    },
+    {
+      "errors": [],
+      "exit": true,
+      "gesture": {
+        "before": {
+          "cursor": 0,
+          "hero": 3
+        },
+        "elapsed": 1306.5999999996277,
+        "endY": 0,
+        "finish": 46536.800000000745,
+        "id": 5,
+        "source": "wheel",
+        "start": 45230.20000000112,
+        "y": 0
+      },
+      "hero": 3,
+      "y": 0
+    },
+    {
+      "errors": [],
+      "exit": false,
+      "gesture": {
+        "before": {
+          "cursor": 0,
+          "hero": 3
+        },
+        "elapsed": 1302.39999999851,
+        "endY": 0,
+        "finish": 48446.59999999963,
+        "id": 6,
+        "source": "wheel",
+        "start": 47144.20000000112,
+        "y": 0
+      },
+      "hero": 3,
+      "y": 0
+    },
+    {
+      "errors": [],
+      "exit": false,
+      "gesture": {
+        "before": {
+          "cursor": 0,
+          "hero": 3
+        },
+        "elapsed": 1503,
+        "endY": 0,
+        "finish": 50018.800000000745,
+        "id": 7,
+        "source": "wheel",
+        "start": 48515.800000000745,
+        "y": 0
+      },
+      "hero": 2,
+      "y": 0
+    },
+    {
+      "errors": [],
+      "exit": false,
+      "gesture": {
+        "before": {
+          "cursor": 0,
+          "hero": 2
+        },
+        "elapsed": 1507.199999999255,
+        "endY": 0,
+        "finish": 51617.59999999963,
+        "id": 8,
+        "source": "wheel",
+        "start": 50110.40000000037,
+        "y": 0
+      },
+      "hero": 1,
+      "y": 0
+    },
+    {
+      "errors": [],
+      "exit": false,
+      "gesture": {
+        "before": {
+          "cursor": 0,
+          "hero": 1
+        },
+        "elapsed": 2036.5999999996277,
+        "endY": 0,
+        "finish": 53747,
+        "id": 9,
+        "source": "wheel",
+        "start": 51710.40000000037,
+        "y": 0
+      },
+      "hero": 0,
+      "y": 0
+    }
+  ],
+  "mobileHeroExit": {
+    "residenceTop": 676.2000122070312,
+    "y": 168.8000030517578
+  },
+  "mobileFloors": [
+    {
+      "cursor": 1,
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 0,
+          "hero": 0
+        },
+        "elapsed": 1174.0999999996277,
+        "endY": 8680.7998046875,
+        "finish": 1470.199999999255,
+        "id": 3,
+        "source": "wheel",
+        "start": 296.09999999962747,
+        "y": 8680.7998046875
+      },
+      "plan": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "y": 8680.7998046875
+    },
+    {
+      "cursor": 2,
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 1,
+          "hero": 0
+        },
+        "elapsed": 1172.2999999988824,
+        "endY": 8680.7998046875,
+        "finish": 2740.5999999996275,
+        "id": 4,
+        "source": "wheel",
+        "start": 1568.300000000745,
+        "y": 8680.7998046875
+      },
+      "plan": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "y": 8680.7998046875
+    },
+    {
+      "cursor": 3,
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 2,
+          "hero": 0
+        },
+        "elapsed": 1177.199999999255,
+        "endY": 8680.7998046875,
+        "finish": 4005.099999999627,
+        "id": 5,
+        "source": "wheel",
+        "start": 2827.9000000003725,
+        "y": 8680.7998046875
+      },
+      "plan": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "y": 8680.7998046875
+    },
+    {
+      "cursor": 4,
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 3,
+          "hero": 0
+        },
+        "elapsed": 1224,
+        "endY": 8680.7998046875,
+        "finish": 5312.5,
+        "id": 6,
+        "source": "wheel",
+        "start": 4088.5,
+        "y": 8680.7998046875
+      },
+      "plan": {
+        "bottom": 727.8999938964844,
+        "height": 548.2999877929688,
+        "left": 15,
+        "right": 375.3999938964844,
+        "top": 179.60000610351562,
+        "width": 360.3999938964844,
+        "x": 15,
+        "y": 179.60000610351562
+      },
+      "y": 8680.7998046875
+    },
+    {
+      "cursor": 5,
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 4,
+          "hero": 0
+        },
+        "elapsed": 1364.10000000149,
+        "endY": 8680.7998046875,
+        "finish": 6740.300000000745,
+        "id": 7,
+        "source": "wheel",
+        "start": 5376.199999999255,
+        "y": 8680.7998046875
+      },
+      "plan": {
+        "bottom": 727.8999938964844,
+        "height": 548.2999877929688,
+        "left": 15,
+        "right": 375.3999938964844,
+        "top": 179.60000610351562,
+        "width": 360.3999938964844,
+        "x": 15,
+        "y": 179.60000610351562
+      },
+      "y": 8680.7998046875
+    },
+    {
+      "cursor": 6,
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 5,
+          "hero": 0
+        },
+        "elapsed": 1361.800000000745,
+        "endY": 8680.7998046875,
+        "finish": 8234.300000000745,
+        "id": 8,
+        "source": "wheel",
+        "start": 6872.5,
+        "y": 8680.7998046875
+      },
+      "plan": {
+        "bottom": 727.8999938964844,
+        "height": 548.2999877929688,
+        "left": 15,
+        "right": 375.3999938964844,
+        "top": 179.60000610351562,
+        "width": 360.3999938964844,
+        "x": 15,
+        "y": 179.60000610351562
+      },
+      "y": 8680.7998046875
+    },
+    {
+      "cursor": 7,
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 6,
+          "hero": 0
+        },
+        "elapsed": 1373.800000000745,
+        "endY": 8680.7998046875,
+        "finish": 9748.300000000743,
+        "id": 9,
+        "source": "wheel",
+        "start": 8374.5,
+        "y": 8680.7998046875
+      },
+      "plan": {
+        "bottom": 727.7249908447266,
+        "height": 548.2999877929688,
+        "left": 15,
+        "right": 375.3999938964844,
+        "top": 179.4250030517578,
+        "width": 360.3999938964844,
+        "x": 15,
+        "y": 179.4250030517578
+      },
+      "y": 8680.7998046875
+    },
+    {
+      "cursor": 6,
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 7,
+          "hero": 0
+        },
+        "elapsed": 1365.5,
+        "endY": 8680,
+        "finish": 11799.900000000373,
+        "id": 10,
+        "source": "wheel",
+        "start": 10434.400000000373,
+        "y": 8680
+      },
+      "y": 8680
+    },
+    {
+      "cursor": 5,
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 6,
+          "hero": 0
+        },
+        "elapsed": 1361.0999999996277,
+        "endY": 8680,
+        "finish": 13295.5,
+        "id": 11,
+        "source": "wheel",
+        "start": 11934.5,
+        "y": 8680
+      },
+      "y": 8680
+    },
+    {
+      "cursor": 4,
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 5,
+          "hero": 0
+        },
+        "elapsed": 1364.699999999255,
+        "endY": 8680,
+        "finish": 14792.699999999257,
+        "id": 12,
+        "source": "wheel",
+        "start": 13428,
+        "y": 8680
+      },
+      "y": 8680
+    },
+    {
+      "cursor": 3,
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 4,
+          "hero": 0
+        },
+        "elapsed": 1234.0999999996277,
+        "endY": 8680,
+        "finish": 16159.900000000373,
+        "id": 13,
+        "source": "wheel",
+        "start": 14925.800000000743,
+        "y": 8680
+      },
+      "y": 8680
+    },
+    {
+      "cursor": 2,
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 3,
+          "hero": 0
+        },
+        "elapsed": 1170.699999999255,
+        "endY": 8680,
+        "finish": 17376.599999999627,
+        "id": 14,
+        "source": "wheel",
+        "start": 16205.900000000373,
+        "y": 8680
+      },
+      "y": 8680
+    },
+    {
+      "cursor": 1,
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 2,
+          "hero": 0
+        },
+        "elapsed": 1176,
+        "endY": 8680,
+        "finish": 18637.400000000373,
+        "id": 15,
+        "source": "wheel",
+        "start": 17461.400000000373,
+        "y": 8680
+      },
+      "y": 8680
+    },
+    {
+      "cursor": 0,
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 1,
+          "hero": 0
+        },
+        "elapsed": 1170,
+        "endY": 8680,
+        "finish": 19893.699999999255,
+        "id": 16,
+        "source": "wheel",
+        "start": 18723.699999999255,
+        "y": 8680
+      },
+      "y": 8680
+    }
+  ],
+  "mobilePlanExit": {
+    "comfortTop": 675.0250244140625,
+    "technicalTop": -169.97500610351562,
+    "y": 8849.599609375
+  },
+  "mobileWalk": [
+    {
+      "overflow": 0,
+      "technicalTop": 7096.8876953125,
+      "visible": [
+        {
+          "label": "A garden view carried from the arrival film",
+          "state": "entering"
+        },
+        {
+          "label": "Room to live.Space to belong.",
+          "state": "entering"
+        },
+        {
+          "label": "facts reveal",
+          "state": "waiting"
+        }
+      ],
+      "y": 1350.4000244140625
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 6548.08740234375,
+      "visible": [
+        {
+          "label": "A garden view carried from the arrival film",
+          "state": "entering"
+        },
+        {
+          "label": "facts reveal",
+          "state": "entering"
+        },
+        {
+          "label": "Enter from the street.Live towardsthe garden.",
+          "state": "waiting"
+        },
+        {
+          "label": "Street-facing entrance, steps and garage of Angora Twenty One",
+          "state": "entering"
+        }
+      ],
+      "y": 1899.199951171875
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 5999.28759765625,
+      "visible": [
+        {
+          "label": "Enter from the street.Live towardsthe garden.",
+          "state": "entering"
+        },
+        {
+          "label": "Street-facing entrance, steps and garage of Angora Twenty One",
+          "state": "entering"
+        },
+        {
+          "label": "Every room,its own rhythm.",
+          "state": "waiting"
+        }
+      ],
+      "y": 2448
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 5451.28759765625,
+      "visible": [
+        {
+          "label": "Enter from the street.Live towardsthe garden.",
+          "state": "entering"
+        },
+        {
+          "label": "Every room,its own rhythm.",
+          "state": "entering"
+        },
+        {
+          "label": "Bedroom on the first level",
+          "state": "entering"
+        },
+        {
+          "label": "Bedroom II on the first level",
+          "state": "waiting"
+        },
+        {
+          "label": "Bedroom beneath the roof on the attic level",
+          "state": "waiting"
+        }
+      ],
+      "y": 2996
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 5451.28759765625,
+      "visible": [
+        {
+          "label": "Enter from the street.Live towardsthe garden.",
+          "state": "entering"
+        },
+        {
+          "label": "Every room,its own rhythm.",
+          "state": "entering"
+        },
+        {
+          "label": "Bedroom on the first level",
+          "state": "entering"
+        },
+        {
+          "label": "Bedroom II on the first level",
+          "state": "waiting"
+        },
+        {
+          "label": "Bedroom beneath the roof on the attic level",
+          "state": "waiting"
+        }
+      ],
+      "y": 2996
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 5451.28759765625,
+      "visible": [
+        {
+          "label": "Enter from the street.Live towardsthe garden.",
+          "state": "entering"
+        },
+        {
+          "label": "Every room,its own rhythm.",
+          "state": "entering"
+        },
+        {
+          "label": "Bedroom on the first level",
+          "state": "entering"
+        },
+        {
+          "label": "Bedroom II on the first level",
+          "state": "waiting"
+        },
+        {
+          "label": "Bedroom beneath the roof on the attic level",
+          "state": "waiting"
+        }
+      ],
+      "y": 2996
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 5451.28759765625,
+      "visible": [
+        {
+          "label": "Enter from the street.Live towardsthe garden.",
+          "state": "entering"
+        },
+        {
+          "label": "Every room,its own rhythm.",
+          "state": "entering"
+        },
+        {
+          "label": "Bedroom on the first level",
+          "state": "entering"
+        },
+        {
+          "label": "Bedroom II on the first level",
+          "state": "waiting"
+        },
+        {
+          "label": "Bedroom beneath the roof on the attic level",
+          "state": "waiting"
+        }
+      ],
+      "y": 2996
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 5451.28759765625,
+      "visible": [
+        {
+          "label": "Enter from the street.Live towardsthe garden.",
+          "state": "complete"
+        },
+        {
+          "label": "Every room,its own rhythm.",
+          "state": "entering"
+        },
+        {
+          "label": "Bedroom on the first level",
+          "state": "entering"
+        },
+        {
+          "label": "Bedroom II on the first level",
+          "state": "waiting"
+        },
+        {
+          "label": "Bedroom beneath the roof on the attic level",
+          "state": "waiting"
+        }
+      ],
+      "y": 2996
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 5451.28759765625,
+      "visible": [
+        {
+          "label": "Enter from the street.Live towardsthe garden.",
+          "state": "complete"
+        },
+        {
+          "label": "Every room,its own rhythm.",
+          "state": "complete"
+        },
+        {
+          "label": "Bedroom on the first level",
+          "state": "entering"
+        },
+        {
+          "label": "Bedroom II on the first level",
+          "state": "waiting"
+        },
+        {
+          "label": "Bedroom beneath the roof on the attic level",
+          "state": "waiting"
+        }
+      ],
+      "y": 2996
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 5451.28759765625,
+      "visible": [
+        {
+          "label": "Enter from the street.Live towardsthe garden.",
+          "state": "complete"
+        },
+        {
+          "label": "Every room,its own rhythm.",
+          "state": "complete"
+        },
+        {
+          "label": "Bedroom on the first level",
+          "state": "complete"
+        },
+        {
+          "label": "Bedroom II on the first level",
+          "state": "waiting"
+        },
+        {
+          "label": "Bedroom beneath the roof on the attic level",
+          "state": "waiting"
+        }
+      ],
+      "y": 2996
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 5451.28759765625,
+      "visible": [
+        {
+          "label": "Enter from the street.Live towardsthe garden.",
+          "state": "complete"
+        },
+        {
+          "label": "Every room,its own rhythm.",
+          "state": "complete"
+        },
+        {
+          "label": "Bedroom on the first level",
+          "state": "complete"
+        },
+        {
+          "label": "Bedroom II on the first level",
+          "state": "waiting"
+        },
+        {
+          "label": "Bedroom beneath the roof on the attic level",
+          "state": "waiting"
+        }
+      ],
+      "y": 2996
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 4902.48779296875,
+      "visible": [
+        {
+          "label": "Bedroom on the first level",
+          "state": "complete"
+        },
+        {
+          "label": "Bedroom II on the first level",
+          "state": "waiting"
+        },
+        {
+          "label": "Bedroom beneath the roof on the attic level",
+          "state": "waiting"
+        }
+      ],
+      "y": 3544.800048828125
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 4353.6875,
+      "visible": [
+        {
+          "label": "Poolside terrace and garden at Angora Twenty One",
+          "state": "entering"
+        }
+      ],
+      "y": 4093.60009765625
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 3804.887451171875,
+      "visible": [
+        {
+          "label": "Poolside terrace and garden at Angora Twenty One",
+          "state": "entering"
+        },
+        {
+          "label": "Morning light.Unhurried evenings.",
+          "state": "entering"
+        },
+        {
+          "label": "The planted garden path at the residence",
+          "state": "entering"
+        }
+      ],
+      "y": 4642.39990234375
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 3256.887451171875,
+      "visible": [
+        {
+          "label": "The planted garden path at the residence",
+          "state": "entering"
+        },
+        {
+          "label": "Life gathers here.And finds its quiet.",
+          "state": "entering"
+        },
+        {
+          "label": "Living and dining space on the entrance level",
+          "state": "waiting"
+        }
+      ],
+      "y": 5190.39990234375
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 2708.087646484375,
+      "visible": [
+        {
+          "label": "Life gathers here.And finds its quiet.",
+          "state": "entering"
+        },
+        {
+          "label": "Living and dining space on the entrance level",
+          "state": "entering"
+        },
+        {
+          "label": "The dining setting in the entrance-level living space",
+          "state": "waiting"
+        }
+      ],
+      "y": 5739.2001953125
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 2328.275146484375,
+      "visible": [
+        {
+          "label": "Living and dining space on the entrance level",
+          "state": "entering"
+        },
+        {
+          "label": "The dining setting in the entrance-level living space",
+          "state": "entering"
+        },
+        {
+          "label": "A quieterkind of luxury.",
+          "state": "waiting"
+        }
+      ],
+      "y": 6288
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 1779.4749755859375,
+      "visible": [
+        {
+          "label": "The dining setting in the entrance-level living space",
+          "state": "entering"
+        },
+        {
+          "label": "A quieterkind of luxury.",
+          "state": "entering"
+        },
+        {
+          "label": "Principal bedroom on the first level",
+          "state": "entering"
+        },
+        {
+          "label": "Dressing space adjoining the principal bedroom",
+          "state": "waiting"
+        }
+      ],
+      "y": 6836.7998046875
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 1231.4749755859375,
+      "visible": [
+        {
+          "label": "Principal bedroom on the first level",
+          "state": "entering"
+        },
+        {
+          "label": "Dressing space adjoining the principal bedroom",
+          "state": "entering"
+        },
+        {
+          "label": "One home.More than one way to live.",
+          "state": "entering"
+        }
+      ],
+      "y": 7384.7998046875
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 682.6749877929688,
+      "visible": [
+        {
+          "label": "One home.More than one way to live.",
+          "state": "entering"
+        },
+        {
+          "label": "Principal kitchen on the entrance level",
+          "state": "entering"
+        },
+        {
+          "label": "The garden-level kitchen",
+          "state": "waiting"
+        },
+        {
+          "label": "Kitchenette on the attic landing",
+          "state": "waiting"
+        }
+      ],
+      "y": 7933.60009765625
+    },
+    {
+      "overflow": 0,
+      "technicalTop": 0.2750000059604645,
+      "visible": [],
+      "y": 8616
+    }
+  ],
+  "mobileLife": [
+    {
+      "angoraBottom": 3869.450073242187,
+      "galleryTop": 3869.449951171875,
+      "overflow": 0,
+      "parallax": "",
+      "visible": [
+        {
+          "label": "Central staircase connecting the four levels",
+          "state": "entering"
+        },
+        {
+          "label": "Four levels.One connected home.",
+          "state": "entering"
+        }
+      ],
+      "y": 10030.400390625
+    },
+    {
+      "angoraBottom": 3926.949951171875,
+      "galleryTop": 3926.949951171875,
+      "overflow": 0,
+      "parallax": "",
+      "visible": [
+        {
+          "label": "Central staircase connecting the four levels",
+          "state": "entering"
+        },
+        {
+          "label": "A quieterside of the city.",
+          "state": "entering"
+        }
+      ],
+      "y": 10536.7998046875
+    },
+    {
+      "angoraBottom": 3420.5499877929688,
+      "galleryTop": 3420.550048828125,
+      "overflow": 0,
+      "parallax": "translateY(-4.18884px) scale(1.02792)",
+      "visible": [
+        {
+          "label": "A quieterside of the city.",
+          "state": "entering"
+        },
+        {
+          "label": "The terracotta rooftops and established greenery of Angora Evleri",
+          "state": "entering"
+        }
+      ],
+      "y": 11043.2001953125
+    },
+    {
+      "angoraBottom": 2914.1499633789062,
+      "galleryTop": 2914.150146484375,
+      "overflow": 0,
+      "parallax": "translateY(10.4129px) scale(1.04389)",
+      "visible": [
+        {
+          "label": "The terracotta rooftops and established greenery of Angora Evleri",
+          "state": "entering"
+        },
+        {
+          "label": "A place. A season.A way of life.",
+          "state": "entering"
+        },
+        {
+          "label": "North-up neighbourhood map with Angora Twenty One marked, Angora Evleri’s dashed boundary and six colour-coded amenity layers",
+          "state": "waiting"
+        }
+      ],
+      "y": 11549.599609375
+    },
+    {
+      "angoraBottom": 2407.749954223633,
+      "galleryTop": 2407.75,
+      "overflow": 0,
+      "parallax": "translateY(10.4129px) scale(1.04389)",
+      "visible": [
+        {
+          "label": "A place. A season.A way of life.",
+          "state": "entering"
+        },
+        {
+          "label": "North-up neighbourhood map with Angora Twenty One marked, Angora Evleri’s dashed boundary and six colour-coded amenity layers",
+          "state": "entering"
+        }
+      ],
+      "y": 12056
+    },
+    {
+      "angoraBottom": 1901.3499145507812,
+      "galleryTop": 1901.3499755859375,
+      "overflow": 0,
+      "parallax": "translateY(10.4129px) scale(1.04389)",
+      "visible": [
+        {
+          "label": "North-up neighbourhood map with Angora Twenty One marked, Angora Evleri’s dashed boundary and six colour-coded amenity layers",
+          "state": "entering"
+        },
+        {
+          "label": "Seasonal interpretation of Angora’s green residential setting",
+          "state": "entering"
+        }
+      ],
+      "y": 12562.400390625
+    },
+    {
+      "angoraBottom": 1394.949951171875,
+      "galleryTop": 1394.9500732421875,
+      "overflow": 0,
+      "parallax": "translateY(10.4129px) scale(1.04389)",
+      "visible": [
+        {
+          "label": "Seasonal interpretation of Angora’s green residential setting",
+          "state": "entering"
+        },
+        {
+          "label": "Seasonal interpretation of community life in Angora",
+          "state": "entering"
+        }
+      ],
+      "y": 13068.7998046875
+    },
+    {
+      "angoraBottom": 888.5499267578125,
+      "galleryTop": 888.5499877929688,
+      "overflow": 0,
+      "parallax": "translateY(10.4129px) scale(1.04389)",
+      "visible": [
+        {
+          "label": "Seasonal interpretation of community life in Angora",
+          "state": "entering"
+        },
+        {
+          "label": "An evening in Ankara.",
+          "state": "entering"
+        }
+      ],
+      "y": 13575.2001953125
+    },
+    {
+      "angoraBottom": 382.14990234375,
+      "galleryTop": 382.1499938964844,
+      "overflow": 0,
+      "parallax": "translateY(10.4129px) scale(1.04389)",
+      "visible": [
+        {
+          "label": "An evening in Ankara.",
+          "state": "entering"
+        }
+      ],
+      "y": 14081.599609375
+    }
+  ],
+  "roomSwipe": {
+    "left": 340.79998779296875,
+    "motions": [
+      {
+        "left": -337.71368408203125,
+        "state": "entering"
+      },
+      {
+        "left": 24.13007926940918,
+        "state": "entering"
+      },
+      {
+        "left": 259.55743408203125,
+        "state": "entering"
+      }
+    ],
+    "y": 3074.39990234375
+  },
+  "roomExit": {
+    "left": 323.20001220703125,
+    "y": 3496.800048828125
+  },
+  "planPhoto": {
+    "originY": 8680,
+    "afterCamera": 8680,
+    "afterOpen": 8680,
+    "afterClose": 8680
+  },
+  "mobileGallery": {
+    "left": 328.79998779296875,
+    "sticky": false,
+    "y": 14464
+  }
+}

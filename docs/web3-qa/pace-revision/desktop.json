@@ -1,0 +1,961 @@
+{
+  "testedAt": "2026-10-06T08:53:02.281Z",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "floorsForward": [
+    {
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 0,
+          "hero": 0
+        },
+        "elapsed": 1170.7000000001865,
+        "endY": 8745.599609375,
+        "finish": 1525.3999999994412,
+        "id": 3,
+        "source": "wheel",
+        "start": 354.69999999925494,
+        "y": 8745.599609375
+      },
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 1,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 3,
+        "section": "technical",
+        "technical": {
+          "cursor": 1,
+          "floor": 1,
+          "mode": "iso"
+        }
+      },
+      "top": -0.2874999940395355,
+      "y": 8745.599609375
+    },
+    {
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 1,
+          "hero": 0
+        },
+        "elapsed": 1174.2999999998135,
+        "endY": 8745.599609375,
+        "finish": 2770.7999999998137,
+        "id": 4,
+        "source": "wheel",
+        "start": 1596.5,
+        "y": 8745.599609375
+      },
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 2,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 4,
+        "section": "technical",
+        "technical": {
+          "cursor": 2,
+          "floor": 2,
+          "mode": "iso"
+        }
+      },
+      "top": -0.2874999940395355,
+      "y": 8745.599609375
+    },
+    {
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 2,
+          "hero": 0
+        },
+        "elapsed": 1169.7999999998135,
+        "endY": 8745.599609375,
+        "finish": 4015.2999999998137,
+        "id": 5,
+        "source": "wheel",
+        "start": 2845.5,
+        "y": 8745.599609375
+      },
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 3,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 5,
+        "section": "technical",
+        "technical": {
+          "cursor": 3,
+          "floor": 3,
+          "mode": "iso"
+        }
+      },
+      "top": -0.2874999940395355,
+      "y": 8745.599609375
+    },
+    {
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 3,
+          "hero": 0
+        },
+        "elapsed": 1220.7999999998135,
+        "endY": 8745.599609375,
+        "finish": 5314.399999999441,
+        "id": 6,
+        "source": "wheel",
+        "start": 4093.599999999627,
+        "y": 8745.599609375
+      },
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 4,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 6,
+        "section": "technical",
+        "technical": {
+          "cursor": 4,
+          "floor": 3,
+          "mode": "plan"
+        }
+      },
+      "top": -0.2874999940395355,
+      "y": 8745.599609375
+    },
+    {
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 4,
+          "hero": 0
+        },
+        "elapsed": 1365.6000000005588,
+        "endY": 8745.599609375,
+        "finish": 6719.299999999814,
+        "id": 7,
+        "source": "wheel",
+        "start": 5353.699999999255,
+        "y": 8745.599609375
+      },
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 5,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 7,
+        "section": "technical",
+        "technical": {
+          "cursor": 5,
+          "floor": 2,
+          "mode": "plan"
+        }
+      },
+      "top": -0.2874999940395355,
+      "y": 8745.599609375
+    },
+    {
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 5,
+          "hero": 0
+        },
+        "elapsed": 1365,
+        "endY": 8745.599609375,
+        "finish": 8204.099999999627,
+        "id": 8,
+        "source": "wheel",
+        "start": 6839.0999999996275,
+        "y": 8745.599609375
+      },
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 6,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 8,
+        "section": "technical",
+        "technical": {
+          "cursor": 6,
+          "floor": 1,
+          "mode": "plan"
+        }
+      },
+      "top": -0.2874999940395355,
+      "y": 8745.599609375
+    },
+    {
+      "errors": [],
+      "gesture": {
+        "before": {
+          "cursor": 6,
+          "hero": 0
+        },
+        "elapsed": 1364.5999999996277,
+        "endY": 8745.599609375,
+        "finish": 9700.599999999627,
+        "id": 9,
+        "source": "wheel",
+        "start": 8336,
+        "y": 8745.599609375
+      },
+      "state": {
+        "cameraByFloor": [
+          3,
+          4,
+          19,
+          9
+        ],
+        "cursor": 7,
+        "filter": "All",
+        "galleryPhoto": "angora_02",
+        "hero": 0,
+        "heroExit": false,
+        "overlay": null,
+        "pending": null,
+        "requestId": 9,
+        "section": "technical",
+        "technical": {
+          "cursor": 7,
+          "floor": 0,
+          "mode": "plan"
+        }
+      },
+      "top": -0.2874999940395355,
+      "y": 8745.599609375
+    }
+  ],
+  "floorsBack": [
+    {
+      "cursor": 6,
+      "y": 8745.599609375,
+      "gesture": {
+        "before": {
+          "cursor": 7,
+          "hero": 0
+        },
+        "elapsed": 1358.5999999996277,
+        "endY": 8745.599609375,
+        "finish": 23964.39999999944,
+        "id": 10,
+        "source": "wheel",
+        "start": 22605.799999999817,
+        "y": 8745.599609375
+      },
+      "errors": []
+    },
+    {
+      "cursor": 5,
+      "y": 8745.599609375,
+      "gesture": {
+        "before": {
+          "cursor": 6,
+          "hero": 0
+        },
+        "elapsed": 1359.1000000005588,
+        "endY": 8745.599609375,
+        "finish": 25455.799999999817,
+        "id": 11,
+        "source": "wheel",
+        "start": 24096.699999999255,
+        "y": 8745.599609375
+      },
+      "errors": []
+    },
+    {
+      "cursor": 4,
+      "y": 8745.599609375,
+      "gesture": {
+        "before": {
+          "cursor": 5,
+          "hero": 0
+        },
+        "elapsed": 1358.2999999998135,
+        "endY": 8745.599609375,
+        "finish": 26958.299999999817,
+        "id": 12,
+        "source": "wheel",
+        "start": 25600,
+        "y": 8745.599609375
+      },
+      "errors": []
+    },
+    {
+      "cursor": 3,
+      "y": 8745.599609375,
+      "gesture": {
+        "before": {
+          "cursor": 4,
+          "hero": 0
+        },
+        "elapsed": 1239.5,
+        "endY": 8745.599609375,
+        "finish": 28336.199999999255,
+        "id": 13,
+        "source": "wheel",
+        "start": 27096.699999999255,
+        "y": 8745.599609375
+      },
+      "errors": []
+    },
+    {
+      "cursor": 2,
+      "y": 8745.599609375,
+      "gesture": {
+        "before": {
+          "cursor": 3,
+          "hero": 0
+        },
+        "elapsed": 1169.7999999998135,
+        "endY": 8745.599609375,
+        "finish": 29641.699999999255,
+        "id": 14,
+        "source": "wheel",
+        "start": 28471.89999999944,
+        "y": 8745.599609375
+      },
+      "errors": []
+    },
+    {
+      "cursor": 1,
+      "y": 8745.599609375,
+      "gesture": {
+        "before": {
+          "cursor": 2,
+          "hero": 0
+        },
+        "elapsed": 1170.800000000745,
+        "endY": 8745.599609375,
+        "finish": 30909,
+        "id": 15,
+        "source": "wheel",
+        "start": 29738.199999999255,
+        "y": 8745.599609375
+      },
+      "errors": []
+    },
+    {
+      "cursor": 0,
+      "y": 8745.599609375,
+      "gesture": {
+        "before": {
+          "cursor": 1,
+          "hero": 0
+        },
+        "elapsed": 1170.9000000003723,
+        "endY": 8745.599609375,
+        "finish": 32170.5,
+        "id": 16,
+        "source": "wheel",
+        "start": 30999.599999999627,
+        "y": 8745.599609375
+      },
+      "errors": []
+    }
+  ],
+  "exitResult": {
+    "bottom": 576.7124938964844,
+    "comfortTop": 576.7125244140625,
+    "top": -144.28750610351562,
+    "y": 8889.599609375
+  },
+  "reentry": {
+    "state": {
+      "cameraByFloor": [
+        3,
+        4,
+        19,
+        9
+      ],
+      "cursor": 7,
+      "filter": "All",
+      "galleryPhoto": "angora_02",
+      "hero": 0,
+      "heroExit": false,
+      "overlay": null,
+      "pending": null,
+      "requestId": 9,
+      "section": "technical",
+      "technical": {
+        "cursor": 7,
+        "floor": 0,
+        "mode": "plan"
+      }
+    },
+    "top": -0.2874999940395355,
+    "y": 8745.599609375
+  },
+  "walkthrough": [
+    {
+      "errors": [],
+      "technicalTop": 7577.75,
+      "visible": [
+        {
+          "label": "A garden view carried from the arrival film",
+          "opacity": "0.377174",
+          "state": "entering"
+        },
+        {
+          "label": "Room to live.Space to belong.",
+          "opacity": "0.474644",
+          "state": "entering"
+        },
+        {
+          "label": "facts reveal",
+          "opacity": "0",
+          "state": "waiting"
+        }
+      ],
+      "y": 648
+    },
+    {
+      "errors": [],
+      "technicalTop": 7164.2001953125,
+      "visible": [
+        {
+          "label": "A garden view carried from the arrival film",
+          "opacity": "0.718335",
+          "state": "entering"
+        },
+        {
+          "label": "Room to live.Space to belong.",
+          "opacity": "0.813722",
+          "state": "entering"
+        },
+        {
+          "label": "facts reveal",
+          "opacity": "0.439982",
+          "state": "entering"
+        },
+        {
+          "label": "Enter from the street.Live towardsthe garden.",
+          "opacity": "0.439982",
+          "state": "entering"
+        },
+        {
+          "label": "Street-facing entrance, steps and garage of Angora Twenty One",
+          "opacity": "0.347521",
+          "state": "entering"
+        }
+      ],
+      "y": 1152
+    },
+    {
+      "errors": [],
+      "technicalTop": 6660.2001953125,
+      "visible": [
+        {
+          "label": "Enter from the street.Live towardsthe garden.",
+          "opacity": "0.796422",
+          "state": "entering"
+        },
+        {
+          "label": "Street-facing entrance, steps and garage of Angora Twenty One",
+          "opacity": "0.698207",
+          "state": "entering"
+        },
+        {
+          "label": "Every room,its own rhythm.",
+          "opacity": "0",
+          "state": "waiting"
+        }
+      ],
+      "y": 1656
+    },
+    {
+      "errors": [],
+      "technicalTop": 6156.2001953125,
+      "visible": [
+        {
+          "label": "Every room,its own rhythm.",
+          "opacity": "0.416383",
+          "state": "entering"
+        },
+        {
+          "label": "Bedroom on the first level",
+          "opacity": "0.327701",
+          "state": "entering"
+        },
+        {
+          "label": "Bedroom II on the first level",
+          "opacity": "0.327701",
+          "state": "entering"
+        },
+        {
+          "label": "Bedroom beneath the roof on the attic level",
+          "opacity": "0.327701",
+          "state": "entering"
+        }
+      ],
+      "y": 2160
+    },
+    {
+      "errors": [],
+      "technicalTop": 5652.2001953125,
+      "visible": [
+        {
+          "label": "Bedroom on the first level",
+          "opacity": "0.682183",
+          "state": "entering"
+        },
+        {
+          "label": "Bedroom II on the first level",
+          "opacity": "0.682183",
+          "state": "entering"
+        },
+        {
+          "label": "Bedroom beneath the roof on the attic level",
+          "opacity": "0.682183",
+          "state": "entering"
+        }
+      ],
+      "y": 2664
+    },
+    {
+      "errors": [],
+      "technicalTop": 5148.2001953125,
+      "visible": [
+        {
+          "label": "Poolside terrace and garden at Angora Twenty One",
+          "opacity": "0",
+          "state": "waiting"
+        }
+      ],
+      "y": 3168
+    },
+    {
+      "errors": [],
+      "technicalTop": 4644.2001953125,
+      "visible": [
+        {
+          "label": "Poolside terrace and garden at Angora Twenty One",
+          "opacity": "0.377091",
+          "state": "entering"
+        },
+        {
+          "label": "Morning light.Unhurried evenings.",
+          "opacity": "0.474548",
+          "state": "entering"
+        }
+      ],
+      "y": 3672
+    },
+    {
+      "errors": [],
+      "technicalTop": 4140.2001953125,
+      "visible": [
+        {
+          "label": "Poolside terrace and garden at Angora Twenty One",
+          "opacity": "0.723139",
+          "state": "entering"
+        },
+        {
+          "label": "Morning light.Unhurried evenings.",
+          "opacity": "0.81781",
+          "state": "entering"
+        },
+        {
+          "label": "The planted garden path at the residence",
+          "opacity": "0.347522",
+          "state": "entering"
+        }
+      ],
+      "y": 4176
+    },
+    {
+      "errors": [],
+      "technicalTop": 3636.199951171875,
+      "visible": [
+        {
+          "label": "The planted garden path at the residence",
+          "opacity": "0.698379",
+          "state": "entering"
+        },
+        {
+          "label": "Life gathers here.And finds its quiet.",
+          "opacity": "0",
+          "state": "waiting"
+        }
+      ],
+      "y": 4680
+    },
+    {
+      "errors": [],
+      "technicalTop": 3132.199951171875,
+      "visible": [
+        {
+          "label": "Life gathers here.And finds its quiet.",
+          "opacity": "0.428079",
+          "state": "entering"
+        },
+        {
+          "label": "Living and dining space on the entrance level",
+          "opacity": "0.337489",
+          "state": "entering"
+        },
+        {
+          "label": "The dining setting in the entrance-level living space",
+          "opacity": "0.337489",
+          "state": "entering"
+        }
+      ],
+      "y": 5184
+    },
+    {
+      "errors": [],
+      "technicalTop": 2628.199951171875,
+      "visible": [
+        {
+          "label": "Living and dining space on the entrance level",
+          "opacity": "0.682038",
+          "state": "entering"
+        },
+        {
+          "label": "The dining setting in the entrance-level living space",
+          "opacity": "0.682038",
+          "state": "entering"
+        }
+      ],
+      "y": 5688
+    },
+    {
+      "errors": [],
+      "technicalTop": 2317.875,
+      "visible": [
+        {
+          "label": "The dining setting in the entrance-level living space",
+          "opacity": "0.853879",
+          "state": "entering"
+        },
+        {
+          "label": "A quieterkind of luxury.",
+          "opacity": "0.440023",
+          "state": "entering"
+        },
+        {
+          "label": "Principal bedroom on the first level",
+          "opacity": "0.347555",
+          "state": "entering"
+        },
+        {
+          "label": "Dressing space adjoining the principal bedroom",
+          "opacity": "0",
+          "state": "waiting"
+        }
+      ],
+      "y": 6192
+    },
+    {
+      "errors": [],
+      "technicalTop": 1813.875,
+      "visible": [
+        {
+          "label": "A quieterkind of luxury.",
+          "opacity": "0.791845",
+          "state": "entering"
+        },
+        {
+          "label": "Principal bedroom on the first level",
+          "opacity": "0.692937",
+          "state": "entering"
+        },
+        {
+          "label": "Dressing space adjoining the principal bedroom",
+          "opacity": "0.367077",
+          "state": "entering"
+        }
+      ],
+      "y": 6696
+    }
+  ],
+  "angoraBoundary": [
+    {
+      "angoraBottom": 2705.8251464366913,
+      "galleryTop": 2705.824951171875,
+      "imageLeft": 0,
+      "progress": "0",
+      "visibleMotions": [
+        {
+          "state": "entering",
+          "top": 130.40721130371094
+        },
+        {
+          "state": "entering",
+          "top": 384.1072387695313
+        },
+        {
+          "state": "waiting",
+          "top": 1463.612548828125
+        },
+        {
+          "state": "waiting",
+          "top": 1613.612548828125
+        },
+        {
+          "state": "waiting",
+          "top": 2254.862548828125
+        }
+      ],
+      "wrapperTop": 2705.824951171875,
+      "y": 11240.7998046875
+    },
+    {
+      "angoraBottom": 2237.825134277344,
+      "galleryTop": 2237.824951171875,
+      "imageLeft": 0,
+      "progress": "0",
+      "visibleMotions": [
+        {
+          "state": "entering",
+          "top": -351.2006530761719
+        },
+        {
+          "state": "entering",
+          "top": -97.5006866455078
+        },
+        {
+          "state": "waiting",
+          "top": 995.6124877929688
+        },
+        {
+          "state": "waiting",
+          "top": 1145.612548828125
+        },
+        {
+          "state": "waiting",
+          "top": 1786.862548828125
+        }
+      ],
+      "wrapperTop": 2237.824951171875,
+      "y": 11708.7998046875
+    },
+    {
+      "angoraBottom": 1769.8251342773438,
+      "galleryTop": 1769.8250732421875,
+      "imageLeft": 0,
+      "progress": "0",
+      "visibleMotions": [
+        {
+          "state": "entering",
+          "top": -824.5065307617188
+        },
+        {
+          "state": "entering",
+          "top": -570.8065795898438
+        },
+        {
+          "state": "waiting",
+          "top": 527.6124877929688
+        },
+        {
+          "state": "waiting",
+          "top": 677.6124877929688
+        },
+        {
+          "state": "waiting",
+          "top": 1318.862548828125
+        }
+      ],
+      "wrapperTop": 1769.8250732421875,
+      "y": 12176.7998046875
+    },
+    {
+      "angoraBottom": 1301.8250732421875,
+      "galleryTop": 1301.8250732421875,
+      "imageLeft": 0,
+      "progress": "0",
+      "visibleMotions": [
+        {
+          "state": "entering",
+          "top": -1294.7606201171875
+        },
+        {
+          "state": "entering",
+          "top": -1041.060546875
+        },
+        {
+          "state": "entering",
+          "top": 49.452125549316406
+        },
+        {
+          "state": "entering",
+          "top": 199.45213317871097
+        },
+        {
+          "state": "waiting",
+          "top": 850.8624877929688
+        }
+      ],
+      "wrapperTop": 1301.8250732421875,
+      "y": 12644.7998046875
+    },
+    {
+      "angoraBottom": 833.8250732421875,
+      "galleryTop": 833.8250122070312,
+      "imageLeft": 0,
+      "progress": "0",
+      "visibleMotions": [
+        {
+          "state": "entering",
+          "top": -1763.6904296875
+        },
+        {
+          "state": "entering",
+          "top": -1509.990478515625
+        },
+        {
+          "state": "entering",
+          "top": -429.674560546875
+        },
+        {
+          "state": "entering",
+          "top": -279.674560546875
+        },
+        {
+          "state": "entering",
+          "top": 368.0376892089844
+        }
+      ],
+      "wrapperTop": 833.8250122070312,
+      "y": 13112.7998046875
+    },
+    {
+      "angoraBottom": 365.8251953125,
+      "galleryTop": 365.8250122070313,
+      "imageLeft": 0,
+      "progress": "0",
+      "visibleMotions": [
+        {
+          "state": "complete",
+          "top": -2231.887451171875
+        },
+        {
+          "state": "complete",
+          "top": -1978.1875
+        },
+        {
+          "state": "entering",
+          "top": -903.1961059570312
+        },
+        {
+          "state": "entering",
+          "top": -753.196044921875
+        },
+        {
+          "state": "entering",
+          "top": -110.32695770263672
+        }
+      ],
+      "wrapperTop": 365.8250122070313,
+      "y": 13580.7998046875
+    }
+  ],
+  "railCheck": [
+    {
+      "angoraBottom": -138.1748046875,
+      "galleryTop": 0,
+      "left": 138.39999389648438,
+      "progress": "138",
+      "selected": "angora_02",
+      "wrapperTop": -138.1750030517578,
+      "y": 14084.7998046875
+    },
+    {
+      "angoraBottom": -642.1748046875,
+      "galleryTop": 0,
+      "left": 642.4000244140625,
+      "progress": "642",
+      "selected": "angora_15",
+      "wrapperTop": -642.1749877929688,
+      "y": 14588.7998046875
+    },
+    {
+      "angoraBottom": -1146.1748046875,
+      "galleryTop": 0,
+      "left": 1146.4000244140625,
+      "progress": "1146",
+      "selected": "angora_17",
+      "wrapperTop": -1146.175048828125,
+      "y": 15092.7998046875
+    },
+    {
+      "angoraBottom": -1650.175048828125,
+      "galleryTop": 0,
+      "left": 1650.4000244140625,
+      "progress": "1650",
+      "selected": "angora_22",
+      "wrapperTop": -1650.175048828125,
+      "y": 15596.7998046875
+    },
+    {
+      "angoraBottom": -2154.175048828125,
+      "galleryTop": -106.1750030517578,
+      "left": 2048,
+      "progress": "2048",
+      "selected": "angora_07",
+      "wrapperTop": -2154.175048828125,
+      "y": 16100.7998046875
+    }
+  ]
+}
